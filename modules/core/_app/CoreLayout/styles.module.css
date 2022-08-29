@@ -1,0 +1,41 @@
+.container {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    
+    position:relative;
+
+}
+
+.topbar_container {
+    height: 56px;
+    width: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 100040;
+}
+
+.sidebar_container {
+    height: calc(100vh - 56px);
+    width: 80px;
+
+    position: fixed;
+    top: 56px;
+    left: 0;
+
+    z-index: 100020;
+}
+
+.content_container {
+    height: auto;
+    width: 100%;
+
+    position: relative;
+    padding-top: 56px;
+    padding-left: 80px;
+
+    z-index: 100000;
+}

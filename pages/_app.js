@@ -1,7 +1,4 @@
-import '../styles/globals.css'
+import '@/modules/core/_app/normalize.css';
+import '@/modules/core/_app/global.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-
-export default MyApp
+export { default } from '@/modules/core/_app';
