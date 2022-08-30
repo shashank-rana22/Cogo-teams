@@ -1,8 +1,10 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 function Topbar() {
 	return (
-		<div>Topbar</div>
+		<div className={styles.container}>Topbar</div>
 	);
 }
 

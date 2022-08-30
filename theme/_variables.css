@@ -1,0 +1,21 @@
+:root, html[data-theme="light"] {
+    
+    /* BRAND COLORS */
+    --brand-primary: #303B67;
+
+    /* TYPOGRAPHY */
+    --body-font-family: 'Roboto', 'Sans Serif';
+
+    /* LAYOUT */
+    --layout-topbar-background: #303B67;
+    --layout-topbar-height: 56px;
+
+    --layout-sidebar-background: linear-gradient(178.63deg, #414379 -26.81%, #0D2942 133.51%);
+    --layout-sidebar-width: 80px;
+}
+
+html[data-theme="dark"] {
+
+    /* OVERRIDE */
+    --brand-primary: #303B67;
+}

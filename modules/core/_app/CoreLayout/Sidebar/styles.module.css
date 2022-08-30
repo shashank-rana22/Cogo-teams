@@ -1,0 +1,11 @@
+.container {
+    background: var(--layout-sidebar-background);
+    
+    position: fixed;
+    height: calc(100vh - var(--layout-topbar-height));
+    width: var(--layout-sidebar-width);
+    top: var(--layout-topbar-height);
+    left: 0;
+
+    z-index: 10100;
+}

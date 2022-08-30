@@ -7,12 +7,8 @@ import Topbar from './Topbar';
 function CoreLayout({ children }) {
 	return (
 		<div className={styles.container}>
-			<nav className={styles.topbar_container}>
-				<Topbar />
-			</nav>
-			<aside className={styles.sidebar_container}>
-				<Sidebar />
-			</aside>
+			<Topbar />
+			<Sidebar />
 			<div className={styles.content_container}>
 				{children}
 			</div>
