@@ -3,8 +3,7 @@ export default function Home() {
 		<div>
 			<p style={{ margin: 0 }}>
 				Getting
-				{' '}
-				<a href="#">Started</a>
+				Started
 			</p>
 		</div>
 	);
