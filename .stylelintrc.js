@@ -1,5 +1,5 @@
 module.exports = {
-    extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
+    extends: ['stylelint-config-standard-scss', 'stylelint-config-recess-order'],
     rules: {
         indentation: 'tab',
         'selector-class-pattern': [
@@ -8,5 +8,13 @@ module.exports = {
 				message: 'Expected id selector to be kebab-case',
 			},
         ],
+        'at-rule-empty-line-before': [
+			'always',
+			{
+				except: ['first-nested', 'after-same-name'],
+				ignore: ['after-comment'],
+				ignoreAtRules: ['else'],
+			},
+		],
     },
 }

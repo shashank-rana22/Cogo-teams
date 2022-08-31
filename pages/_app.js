@@ -1,4 +1,4 @@
-import '@/theme/main.css';
-import '@/modules/core/_app/global.css';
+import '@/theme/main.scss';
+import '@/modules/core/_app/global.scss';
 
 export { default } from '@/modules/core/_app';
