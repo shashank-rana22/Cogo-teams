@@ -15,16 +15,16 @@
     "lint:css": "stylelint **/*.css"
   },
   "dependencies": {
-    "next": "12.2.5",
+    "next": "12.3.1",
     "normalize.css": "^8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@cogoport/eslint-config": "^1.0.6",
-    "@cogoport/stylelint-config": "^1.0.0",
-    "eslint": "^8.22.0",
-    "sass": "^1.54.7",
-    "stylelint": "^14.11.0"
+    "@cogoport/eslint-config": "^1.0.17",
+    "@cogoport/stylelint-config": "^1.0.2",
+    "eslint": "^8.24.0",
+    "sass": "^1.55.0",
+    "stylelint": "^14.13.0"
   }
 }
