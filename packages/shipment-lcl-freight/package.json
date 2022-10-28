@@ -10,14 +10,15 @@
     "lint:css": "stylelint \"**/*.css\""
   },
   "dependencies": {
-    "@cogoport/components": "^1.0.25",
-    "@cogoport/icons-react": "^1.0.25",
+    "@cogoport/admin-commons": "workspace:*",
+    "@cogoport/components": "^1.0.43",
+    "@cogoport/icons-react": "^1.0.33",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@cogoport/eslint-config": "^1.0.17",
+    "@cogoport/eslint-config": "^1.0.18",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.4.0",
     "eslint": "^8.25.0",

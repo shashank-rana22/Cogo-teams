@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 
+const commonNextConfig = require('@cogoport/admin-commons/configs/next.config');
+
 module.exports = {
-	reactStrictMode : true,
-	swcMinify       : true,
-	basePath        : '/shipment/fcl-locals',
+	...commonNextConfig,
+	basePath: '/shipment/fcl-locals',
 };
