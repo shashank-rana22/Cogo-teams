@@ -5,8 +5,5 @@
   "repository": "git@github.com:Cogoport/cogo-admin.git",
   "author": "Rudraprasad Das <brayn003@gmail.com>",
   "license": "MIT",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ]
+  "private": true
 }
