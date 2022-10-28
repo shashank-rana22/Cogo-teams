@@ -5,7 +5,7 @@ importers:
   .:
     specifiers: {}
 
-  packages/fcl-custom-freight:
+  packages/rates-fcl-customs:
     specifiers:
       '@cogoport/components': ^1.0.25
       '@cogoport/eslint-config': ^1.0.17
@@ -30,7 +30,7 @@ importers:
       eslint: 8.26.0
       stylelint: 14.14.0
 
-  packages/fcl-freight:
+  packages/rates-fcl-freight:
     specifiers:
       '@cogoport/components': ^1.0.25
       '@cogoport/eslint-config': ^1.0.17
@@ -55,7 +55,7 @@ importers:
       eslint: 8.26.0
       stylelint: 14.14.0
 
-  packages/fcl-local-freight:
+  packages/rates-lcl-customs:
     specifiers:
       '@cogoport/components': ^1.0.25
       '@cogoport/eslint-config': ^1.0.17
@@ -80,7 +80,7 @@ importers:
       eslint: 8.26.0
       stylelint: 14.14.0
 
-  packages/lcl-custom-freight:
+  packages/rates-lcl-freight:
     specifiers:
       '@cogoport/components': ^1.0.25
       '@cogoport/eslint-config': ^1.0.17
@@ -105,7 +105,7 @@ importers:
       eslint: 8.26.0
       stylelint: 14.14.0
 
-  packages/lcl-freight:
+  packages/shipment-fcl-customs:
     specifiers:
       '@cogoport/components': ^1.0.25
       '@cogoport/eslint-config': ^1.0.17
@@ -130,7 +130,82 @@ importers:
       eslint: 8.26.0
       stylelint: 14.14.0
 
-  packages/rate-management-fcl:
+  packages/shipment-fcl-freight:
+    specifiers:
+      '@cogoport/components': ^1.0.25
+      '@cogoport/eslint-config': ^1.0.17
+      '@cogoport/icons-react': ^1.0.25
+      '@cogoport/stylelint-config': ^1.0.3
+      '@svgr/webpack': ^6.4.0
+      eslint: ^8.25.0
+      next: 12.3.1
+      react: 18.2.0
+      react-dom: 18.2.0
+      stylelint: ^14.13.0
+    dependencies:
+      '@cogoport/components': 1.0.43_nx7q2mhj3v6o44j77eekqagclq
+      '@cogoport/icons-react': 1.0.33_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@cogoport/eslint-config': 1.0.18_eslint@8.26.0
+      '@cogoport/stylelint-config': 1.0.3_stylelint@14.14.0
+      '@svgr/webpack': 6.5.1
+      eslint: 8.26.0
+      stylelint: 14.14.0
+
+  packages/shipment-fcl-locals:
+    specifiers:
+      '@cogoport/components': ^1.0.25
+      '@cogoport/eslint-config': ^1.0.17
+      '@cogoport/icons-react': ^1.0.25
+      '@cogoport/stylelint-config': ^1.0.3
+      '@svgr/webpack': ^6.4.0
+      eslint: ^8.25.0
+      next: 12.3.1
+      react: 18.2.0
+      react-dom: 18.2.0
+      stylelint: ^14.13.0
+    dependencies:
+      '@cogoport/components': 1.0.43_nx7q2mhj3v6o44j77eekqagclq
+      '@cogoport/icons-react': 1.0.33_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@cogoport/eslint-config': 1.0.18_eslint@8.26.0
+      '@cogoport/stylelint-config': 1.0.3_stylelint@14.14.0
+      '@svgr/webpack': 6.5.1
+      eslint: 8.26.0
+      stylelint: 14.14.0
+
+  packages/shipment-lcl-customs:
+    specifiers:
+      '@cogoport/components': ^1.0.25
+      '@cogoport/eslint-config': ^1.0.17
+      '@cogoport/icons-react': ^1.0.25
+      '@cogoport/stylelint-config': ^1.0.3
+      '@svgr/webpack': ^6.4.0
+      eslint: ^8.25.0
+      next: 12.3.1
+      react: 18.2.0
+      react-dom: 18.2.0
+      stylelint: ^14.13.0
+    dependencies:
+      '@cogoport/components': 1.0.43_nx7q2mhj3v6o44j77eekqagclq
+      '@cogoport/icons-react': 1.0.33_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@cogoport/eslint-config': 1.0.18_eslint@8.26.0
+      '@cogoport/stylelint-config': 1.0.3_stylelint@14.14.0
+      '@svgr/webpack': 6.5.1
+      eslint: 8.26.0
+      stylelint: 14.14.0
+
+  packages/shipment-lcl-freight:
     specifiers:
       '@cogoport/components': ^1.0.25
       '@cogoport/eslint-config': ^1.0.17
