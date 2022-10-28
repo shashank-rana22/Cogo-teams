@@ -3,5 +3,5 @@
 module.exports = {
 	reactStrictMode : true,
 	swcMinify       : true,
-	basePath        : '/shipment/lcl-freight',
+	basePath        : '/rates/fcl-customs',
 };
