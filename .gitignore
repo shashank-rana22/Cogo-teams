@@ -1,36 +1,149 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+############################
+# envs
+############################
 
-# testing
-/coverage
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+tests_output
+.vs
 
-# next.js
-/.next/
-/out/
+############################
+# npm/yarn
+############################
 
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# local env files
-.env*.local
+############################
+# OS X
+############################
 
-# vercel
-.vercel
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+._*
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+############################
+# Linux
+############################
+
+*~
+
+############################
+# Windows
+############################
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+############################
+# Packages
+############################
+
+*.7z
+*.csv
+*.dat
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.seed
+*.so
+*.swo
+*.swp
+*.swn
+*.swm
+*.out
+*.pid
+
+############################
+# Logs and databases
+############################
+
+.
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+############################
+# Misc.
+############################
+
+*#
+ssl
+.idea
+nbproject
+public/uploads/*
+!public/uploads/.gitkeep
+
+############################
+# Node.js
+############################
+
+lib-cov
+lcov.info
+pids
+results
+node_modules
+out
+.node_history
+.onboarding
+.cms
+.webflow
+.countries.json
+packages/cms/content/dashboard-urls.json
+
+
+############################
+# Tests
+############################
+
+testApp
+coverage
+build
+
+############################
+# vscode
+############################
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+############################
+# history
+############################
+**/.history
+
+
+############################
+# builds
+############################
+dist/
+.next/
+out/
