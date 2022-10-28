@@ -3,8 +3,8 @@
 module.exports = {
 	reactStrictMode : true,
 	swcMinify       : true,
-	basePath        : '/rate-management/lcl',
-	assetPrefix     : '/rate-management/lcl',
+	basePath        : '/rates/fcl-customs',
+	assetPrefix     : '/rates/fcl-customs',
 	webpack(config) {
 		const newConfig = { ...config };
 		newConfig.module.rules.push({
