@@ -8,8 +8,6 @@ function ListRates() {
 		push(`${process.env.URL_RATES_FCL_FREIGHT}/rates/customs/locations`);
 	};
 
-	console.log('ssss', process.env.URL_RATES_FCL_CUSTOMS);
-
 	return (
 		<FluidContainer>
 			<p>
