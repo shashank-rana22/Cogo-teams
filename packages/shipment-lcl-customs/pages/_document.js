@@ -1,1 +1,1 @@
-export { default } from '@/ui/page-components/_document';
+export { default } from '@cogoport/admin-commons/components/_document';

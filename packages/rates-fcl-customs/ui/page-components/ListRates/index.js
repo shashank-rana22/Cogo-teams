@@ -5,11 +5,17 @@ import React from 'react';
 function ListRates() {
 	const { push } = useRouter();
 	const handleClick = () => {
-		push('/[id]', '/2134');
+		push(`${process.env.URL_RATES_FCL_FREIGHT}/rates/customs/locations`);
 	};
+
+	console.log('ssss', process.env.URL_RATES_FCL_CUSTOMS);
+
 	return (
 		<FluidContainer>
-			<p>Customs fcl list rate page</p>
+			<p>
+				Customs fcl list rate page $
+				{process.env.URL_RATES_FCL_CUSTOMS}
+			</p>
 			<button onClick={handleClick}>get custom rate button</button>
 		</FluidContainer>
 	);

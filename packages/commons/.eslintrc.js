@@ -1,4 +1,4 @@
 module.exports = {
-	extends        : ['@cogoport/eslint-config/base'],
+	extends        : ['@cogoport/eslint-config/next'],
 	ignorePatterns : ['!.stylelintrc.js'],
 };

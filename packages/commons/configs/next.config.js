@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 
-const commonNextConfig = {
+const appEnvConfig = require('../helpers/load-app-env');
+
+// eslint-disable-next-line import/order
+const withTM = require('next-transpile-modules')(['@cogoport/admin-commons']);
+
+const commonNextConfig = withTM({
+	env: {
+		...appEnvConfig.parsed,
+	},
 	reactStrictMode : true,
 	swcMinify       : true,
 	webpack         : (config) => {
@@ -11,6 +19,6 @@ const commonNextConfig = {
 		});
 		return config;
 	},
-};
+});
 
 module.exports = commonNextConfig;
