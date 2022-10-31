@@ -5,11 +5,11 @@ import React from 'react';
 function ListRates() {
 	const { push } = useRouter();
 	const handleClickFreight = () => {
-		push(`${process.env.URL_RATES_FCL_FREIGHT}/rates/freight/locations`);
+		push(`${process.env.URL_RATES_FCL_FREIGHT}/rates/fcl-freight/locations`);
 	};
 
 	const handleClickCustoms = () => {
-		push(`${process.env.URL_RATES_FCL_CUSTOMS}/rates/customs/locations`);
+		push(`${process.env.URL_RATES_FCL_CUSTOMS}/rates/fcl-customs/locations`);
 	};
 
 	return (
