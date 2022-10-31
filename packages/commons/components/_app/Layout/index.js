@@ -1,9 +1,8 @@
 import { AdminLayout } from '@cogoport/components';
 import React from 'react';
 
-import { nav } from '../../../constants/nav';
-
 import LogoSvg from './logo.svg';
+import { nav } from './nav';
 
 function Layout({ children }) {
 	return (
