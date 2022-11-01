@@ -1,5 +1,5 @@
 {
-  "name": "@cogoport/admin-shipment-common",
+  "name": "@cogoport/admin-shipment-commons",
   "version": "0.1.0",
   "private": true,
   "scripts": {

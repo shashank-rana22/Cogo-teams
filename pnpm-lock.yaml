@@ -132,6 +132,33 @@ importers:
       eslint: 8.26.0
       stylelint: 14.14.0
 
+  packages/shipment-common:
+    specifiers:
+      '@cogoport/admin-commons': workspace:*
+      '@cogoport/components': ^1.0.43
+      '@cogoport/eslint-config': ^1.0.18
+      '@cogoport/icons-react': ^1.0.33
+      '@cogoport/stylelint-config': ^1.0.3
+      '@svgr/webpack': ^6.4.0
+      eslint: ^8.25.0
+      next: 12.3.1
+      react: 18.2.0
+      react-dom: 18.2.0
+      stylelint: ^14.13.0
+    dependencies:
+      '@cogoport/admin-commons': link:../commons
+      '@cogoport/components': 1.0.43_nx7q2mhj3v6o44j77eekqagclq
+      '@cogoport/icons-react': 1.0.33_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@cogoport/eslint-config': 1.0.18_eslint@8.26.0
+      '@cogoport/stylelint-config': 1.0.3_stylelint@14.14.0
+      '@svgr/webpack': 6.5.1
+      eslint: 8.26.0
+      stylelint: 14.14.0
+
   packages/shipment-fcl-customs:
     specifiers:
       '@cogoport/admin-commons': workspace:*
