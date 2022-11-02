@@ -9,11 +9,10 @@ export const partnerIdSlice = createSlice({
 	initialState,
 	reducers : {
 		addPartnerId: (state, action) => {
-			state.partnerId = action.payload;
+			const newpartnerId = action.payload;
+			return { partnerId: newpartnerId };
 		},
-		removePartnerId: (state) => {
-			state.partnerId = '';
-		},
+		removePartnerId: () => ({ partnerId: '' }),
 	},
 });
 
