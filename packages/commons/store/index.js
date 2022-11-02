@@ -1,10 +1,11 @@
-import {configureStore} from "@reduxjs/toolkit"
-import partnerIdReducer from "./partnerId"
+import { configureStore } from '@reduxjs/toolkit';
 
-const store=configureStore({
-    reducer:{
-        partnerIdStore:partnerIdReducer
-    }
-})
+import partnerIdReducer from './partnerId';
 
-export default store
+const store = configureStore({
+	reducer: {
+		partnerIdStore: partnerIdReducer,
+	},
+});
+
+export default store;

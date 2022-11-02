@@ -1,20 +1,25 @@
-import React from "react";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import {useRouter} from "next/router"
+function ShipmentDetails() {
+	const partnerId = useSelector((state) => state.partnerIdStore.partnerId);
 
-import { useSelector } from "react-redux";
+	const { query } = useRouter();
 
-
-const ShipmentDetails=()=>{
-
-    const partnerId=useSelector(state=>state.partnerIdStore.partnerId)
-
-    const {query}=useRouter()
-
-    return <div>
-        <div>Shipment Detail id = {query.id} </div>
-   <div> Current partnerId = {partnerId}</div>
-    </div>
+	return (
+		<div>
+			<div>
+				Shipment Detail id =
+				{query.id}
+			</div>
+			<div>
+				{' '}
+				Current partnerId =
+				{partnerId}
+			</div>
+		</div>
+	);
 }
 
-export default ShipmentDetails
+export default ShipmentDetails;
