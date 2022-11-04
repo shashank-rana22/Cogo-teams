@@ -9,6 +9,7 @@ function ShipmentDetails() {
 
 	return (
 		<div>
+
 			<div>
 				Shipment Detail id =
 				{query.id}
@@ -18,6 +19,7 @@ function ShipmentDetails() {
 				Current partnerId =
 				{partnerId}
 			</div>
+
 		</div>
 	);
 }
