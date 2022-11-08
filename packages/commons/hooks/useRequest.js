@@ -1,7 +1,7 @@
 import { makeUseAxios } from 'axios-hooks';
 
-import requestBack from '../helpers/axios-back';
-import requestBf from '../helpers/axios-bf';
+import request from '../helpers/request';
+import requestV2 from '../helpers/requestV2';
 
 const commonConfig = {
 	cache          : false,
@@ -10,12 +10,12 @@ const commonConfig = {
 	},
 };
 
-export const useRequestBack = makeUseAxios({
-	axios: requestBack,
+export const useRequest = makeUseAxios({
+	axios: request,
 	...commonConfig,
 });
 
-export const useRequestBf = makeUseAxios({
-	axios: requestBf,
+export const useRequestV2 = makeUseAxios({
+	axios: requestV2,
 	...commonConfig,
 });
