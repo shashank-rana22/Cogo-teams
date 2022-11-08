@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 
+const loadEnvConfig = require('../helpers/load-env');
 const appEnvConfig = require('../helpers/load-app-env');
 
 // eslint-disable-next-line import/order
@@ -8,6 +9,7 @@ const withTM = require('next-transpile-modules')(['@cogoport/admin-commons']);
 const commonNextConfig = withTM({
 	env: {
 		...appEnvConfig.parsed,
+		...loadEnvConfig.parsed,
 	},
 	reactStrictMode : true,
 	swcMinify       : true,

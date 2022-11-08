@@ -6,6 +6,8 @@
         "@cogoport/components": "^1.0.43",
         "@cogoport/icons-react": "^1.0.33",
         "@reduxjs/toolkit": "^1.8.6",
+        "axios": "^1.1.3",
+        "axios-hooks": "^4.0.0",
         "dotenv": "^16.0.3",
         "dotenv-expand": "^9.0.0",
         "react": "18.2.0",
