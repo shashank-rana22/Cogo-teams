@@ -1,9 +1,9 @@
 {
-  "name": "@cogoport/admin-shipment-fcl-customs",
+  "name": "@cogoport/admin-login",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4031",
+    "dev": "next dev -p 4011",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -14,6 +14,7 @@
     "@cogoport/components": "^1.0.43",
     "@cogoport/icons-react": "^1.0.33",
     "next": "12.3.1",
+    "qs": "^6.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.4"

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	partnerId: 'testing-543-5342-4323',
+	partnerId: 'trestinf',
 };
 
 export const partnerIdSlice = createSlice({
