@@ -23,8 +23,4 @@ request.interceptors.request.use((oldConfig) => {
 	return newConfig;
 });
 
-const requestV2 = Axios.create();
-
-const requestPublic = Axios.create({ baseURL: process.env.REST_BASE_API_URL });
-
-export { request, requestV2, requestPublic };
+export { request };

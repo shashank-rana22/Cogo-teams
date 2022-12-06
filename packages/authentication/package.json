@@ -1,0 +1,19 @@
+{
+  "name": "@cogoport/authentication",
+  "version": "0.1.0",
+  "description": "Custom Request hooks for different Services",
+  "license": "MIT",
+  "private": true,
+  "main": "./index.js",
+  "types": "./index.js",
+  "dependencies": {
+    "@cogoport/commons": "workspace:*",
+    "@cogoport/components": "^1.0.65",
+    "@cogoport/icons-react": "^1.0.45",
+    "next": "13.0.6",
+    "qs": "^6.11.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.5"
+  }
+}
