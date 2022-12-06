@@ -1,6 +1,6 @@
-import { useRequest } from '@cogoport/commons/hooks/useRequest';
 import { addUserLoginData, addUserProfileData } from '@cogoport/commons/store/user';
 import { FluidContainer } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 

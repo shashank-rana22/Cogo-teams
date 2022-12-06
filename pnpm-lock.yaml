@@ -25,6 +25,7 @@ importers:
       '@cogoport/components': ^1.0.65
       '@cogoport/home': workspace:*
       '@cogoport/icons-react': ^1.0.45
+      '@cogoport/request': workspace:*
       '@cogoport/utils': ^1.2.0
       next: 13.0.6
       next-transpile-modules: ^10.0.0
@@ -37,6 +38,7 @@ importers:
       '@cogoport/components': 1.0.65_7osmb5wvroedhdevbael4oybrm
       '@cogoport/home': link:../../packages/home
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/request': link:../../packages/request
       '@cogoport/utils': 1.2.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
@@ -50,6 +52,7 @@ importers:
       '@cogoport/commons': workspace:*
       '@cogoport/components': ^1.0.65
       '@cogoport/icons-react': ^1.0.45
+      '@cogoport/request': workspace:*
       next: 13.0.6
       qs: ^6.11.0
       react: 18.2.0
@@ -59,6 +62,7 @@ importers:
       '@cogoport/commons': link:../commons
       '@cogoport/components': 1.0.65_7osmb5wvroedhdevbael4oybrm
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/request': link:../request
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       qs: 6.11.0
       react: 18.2.0
@@ -71,13 +75,8 @@ importers:
       '@cogoport/icons-react': ^1.0.45
       '@cogoport/utils': ^1.2.0
       '@reduxjs/toolkit': ^1.9.1
-      axios: ^1.2.1
-      axios-hooks: ^4.0.0
-      dotenv: ^16.0.3
-      dotenv-expand: ^9.0.0
       next: 13.0.6
       next-transpile-modules: ^10.0.0
-      qs: ^6.11.0
       react: 18.2.0
       react-dom: 18.2.0
       react-redux: ^8.0.5
@@ -86,12 +85,7 @@ importers:
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
       '@cogoport/utils': 1.2.0
       '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
-      axios: 1.2.1
-      axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
-      dotenv: 16.0.3
-      dotenv-expand: 9.0.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
-      qs: 6.11.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_biqbaboplfbrettd7655fr4n2y
@@ -109,6 +103,22 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_biqbaboplfbrettd7655fr4n2y
+
+  packages/request:
+    specifiers:
+      '@cogoport/utils': ^1.2.0
+      axios: ^1.2.1
+      axios-hooks: ^4.0.0
+      dotenv: ^16.0.3
+      dotenv-expand: ^9.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/utils': 1.2.0
+      axios: 1.2.1
+      axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
+      dotenv: 16.0.3
+      dotenv-expand: 9.0.0
+      react: 18.2.0
 
 packages:
 

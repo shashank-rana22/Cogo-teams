@@ -8,6 +8,7 @@
   "types": "./index.js",
   "dependencies": {
     "@cogoport/commons": "workspace:*",
+    "@cogoport/request": "workspace:*",
     "@cogoport/components": "^1.0.65",
     "@cogoport/icons-react": "^1.0.45",
     "next": "13.0.6",

@@ -9,7 +9,9 @@ const commonConfig = {
 	},
 };
 
-export const useRequest = makeUseAxios({
+const useRequest = makeUseAxios({
 	axios: request,
 	...commonConfig,
 });
+
+export default useRequest;
