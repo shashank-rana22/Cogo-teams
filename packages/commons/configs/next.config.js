@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
-const loadEnvConfig = require('../helpers/load-env');
 const appEnvConfig = require('../helpers/load-app-env');
+const loadEnvConfig = require('../helpers/load-env');
 
 // eslint-disable-next-line import/order
 const withTM = require('next-transpile-modules')(['@cogoport/admin-commons']);
