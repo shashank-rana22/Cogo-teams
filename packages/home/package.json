@@ -1,0 +1,15 @@
+{
+  "name": "@cogoport/home",
+  "version": "0.1.0",
+  "description": "Custom Request hooks for different Services",
+  "license": "MIT",
+  "private": true,
+  "main": "./page-components/index.js",
+  "types": "./page-components/index.js",
+  "dependencies": {
+    "next": "13.0.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.5"
+  }
+}
