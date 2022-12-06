@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
-const commonNextConfig = require('@cogoport/commons/configs/next.config');
+// eslint-disable-next-line import/no-unresolved
+const loadEnvConfig = require('@cogoport/commons/helpers/load-env');
 const withTM = require('next-transpile-modules')([
 	'@cogoport/commons',
 	'@cogoport/authentication',
@@ -7,5 +8,17 @@ const withTM = require('next-transpile-modules')([
 ]);
 
 module.exports = withTM({
-	...commonNextConfig,
+	env: {
+		...loadEnvConfig.parsed,
+	},
+	reactStrictMode : true,
+	swcMinify       : true,
+	webpack         : (config) => {
+		const newConfig = { ...config };
+		newConfig.module.rules.push({
+			test : /\.svg$/i,
+			use  : [{ loader: '@svgr/webpack' }],
+		});
+		return config;
+	},
 }, []);

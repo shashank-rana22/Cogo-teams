@@ -1,4 +1,4 @@
-import { useRequestPublic, useRequest } from '@cogoport/commons/hooks/useRequest';
+import { useRequest } from '@cogoport/commons/hooks/useRequest';
 import { addUserLoginData, addUserProfileData } from '@cogoport/commons/store/user';
 import { FluidContainer } from '@cogoport/components';
 import { useState } from 'react';
@@ -15,7 +15,7 @@ function Login() {
 
 	const [showPassword, setShowPassword] = useState(false);
 
-	const [login, trigger] = useRequestPublic(
+	const [login, trigger] = useRequest(
 		{
 			url    : '/login_user',
 			method : 'POST',

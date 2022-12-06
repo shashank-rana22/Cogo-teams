@@ -10,7 +10,7 @@ const customSerializer = (params) => {
 	return paramsStringify;
 };
 
-const request = Axios.create({ baseURL: process.env.REST_BASE_API_URL });
+const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 request.interceptors.request.use((oldConfig) => {
 	const token = getCookie('token');
