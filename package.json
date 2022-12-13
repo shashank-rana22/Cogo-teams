@@ -1,7 +1,7 @@
 {
   "name": "cogo-admin",
   "version": "0.0.1",
-  "description": "monorepo for cogo admmin",
+  "description": "Turbo for Cogo admin",
   "repository": "git@github.com:Cogoport/cogo-admin.git",
   "author": "Rudraprasad Das <brayn003@gmail.com>",
   "license": "MIT",

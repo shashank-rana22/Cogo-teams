@@ -23,7 +23,6 @@ const createPages = async () => {
 
 		if (fs.existsSync(pagesPath)) {
 			console.log(`Creating Pages from ${packageFolder}`);
-
 			fs.cpSync(pagesPath, appPath, { recursive: true });
 		}
 	});
