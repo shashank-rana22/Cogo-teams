@@ -1,9 +1,20 @@
 # cogo-admin
-
+A `TurboRepo` for the optimized build system.
 
 ## Installation
+Clone the project from  `Github` using `git clone git@github.com:Cogoport/cogo-admin.git`
 Use `pnpm install` to install all dependencies
+## Structure
+`cogo-control` is a nextjs project
+- Use `pnpm dev` to run the project
+ 
+`common` directory contains the code like `helper, utils, store and hooks` which may be used in other projects.
+ 
+`packages` directory contains the individual services as package.
 
+# Getting Started with new package
+create a directory `<package-name>` and navigate to the project using `cd packages/<package-name>`
+-Use `pnpm init` to create a `package.json`
 ##
 - Use `cd packages/<package-name>` & `pnpm dev` to run individual projects
 - Use `pnpm --recursive run dev` for running multiple packages. [Learn More](https://pnpm.io/cli/recursive)
