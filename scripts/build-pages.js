@@ -9,7 +9,7 @@ const getDirectories = (source) => fs.readdirSync(source, { withFileTypes: true 
 
 const createPages = async () => {
 	const cwd = process.cwd();
-	const appPath = `${cwd}/admin/pages`;
+	const appPath = `${cwd}/cogo-control/pages`;
 	const packageRootPath = `${cwd}/packages`;
 
 	if (!fs.existsSync(appPath)) {

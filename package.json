@@ -1,7 +1,7 @@
 {
   "name": "cogo-admin",
   "version": "0.0.1",
-  "description": "Turbo for Cogo admin",
+  "description": "Turbo repo for Cogo admin",
   "repository": "git@github.com:Cogoport/cogo-admin.git",
   "author": "Rudraprasad Das <brayn003@gmail.com>",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "start": "turbo run start",
-    "eslint": "eslint \"**/*.{js,jsx}\" --fix",
+    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
     "stylelint": "stylelint \"**/*.css\" --fix",
     "clean": "turbo run clean"
   },
