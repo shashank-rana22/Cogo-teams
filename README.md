@@ -27,7 +27,8 @@ Create a directory `<package-name>` and navigate to the project using `cd packag
 - Use this package in `cogo-control` by adding this package in `cogo-control`'s  `package.json` .
  ```sh
 cogo-admin/cogo-control/package.json                                                 
- { ...
+ { 
+  ...
  "<package-name>": "workspace:version"
   ...
  }
