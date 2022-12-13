@@ -7,8 +7,9 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "*",
+    "packages/*",
+    "common/*"
   ],
   "scripts": {
     "build": "turbo run build",
@@ -24,7 +25,8 @@
     "@svgr/webpack": "^6.5.1",
     "eslint": "^8.29.0",
     "stylelint": "^14.16.0",
-    "turbo": "^1.6.3"
+    "turbo": "^1.6.3",
+    "fs-extra": "^11.1.0"
   },
   "packageManager": "pnpm@7.15.0"
 }
