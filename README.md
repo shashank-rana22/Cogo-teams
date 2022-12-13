@@ -29,8 +29,9 @@ Create a directory `<package-name>` and navigate to the project using `cd packag
 cogo-admin/cogo-control/package.json                                                 
  { ...
  "<package-name>": "workspace:version"
+  ...
  }
- ...
+
 ```
 
 ## With Typescript
