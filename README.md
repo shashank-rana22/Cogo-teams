@@ -14,7 +14,7 @@ A `TurboRepo` for the optimized build system.
 
 `common` - Directory contains the code like `store, useRequest, form etc...`
 
-`packages` directory contains the individual services as package.
+`packages` Directory contains the individual services as package.
 
   
 
@@ -30,6 +30,7 @@ cogo-admin/cogo-control/package.json
  { ...
  "<package-name>": "workspace:version"
  }
+ ...
 ```
 
 ## With Typescript
