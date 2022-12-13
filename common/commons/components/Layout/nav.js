@@ -4,6 +4,6 @@ export const nav = [
 	{
 		icon : <IcMBookingDesk />,
 		name : 'Home',
-		href : '/',
+		href : '/home',
 	},
 ];

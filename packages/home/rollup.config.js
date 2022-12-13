@@ -3,8 +3,6 @@ import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import del from 'rollup-plugin-delete';
-// import summary from 'rollup-plugin-summary';
-import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
 export default ({ watch }) => defineConfig({
@@ -33,20 +31,11 @@ export default ({ watch }) => defineConfig({
 		...(watch ? [] : [del({ targets: 'dist/*' })]),
 		nodeResolve(),
 		commonJs(),
-		// svgr(),
-		// postcss({ modules: true }),
 		typescript({
 			useTsconfigDeclarationDir : true,
 			tsconfig                  : 'tsconfig.json',
 			tsconfigOverride          : { compilerOptions: { declaration: true, declarationDir: 'dist/types' } },
 		}),
-		terser(),
-
-		// summary({
-		// 	showMinifiedSize : true,
-		// 	// showGzippedSize  : true,
-		// 	showBrotliSize   : true,
-		// }),
 		json(),
 	],
 });

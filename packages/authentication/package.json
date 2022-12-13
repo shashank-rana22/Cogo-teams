@@ -7,10 +7,10 @@
   "main": "./index.js",
   "types": "./index.js",
   "dependencies": {
-    "@cogoport/commons": "workspace:*",
-    "@cogoport/request": "workspace:*",
-    "@cogoport/components": "^1.0.65",
+    "@cogoport/commons": "workspace:0.1.0",
+    "@cogoport/components": "^1.0.78",
     "@cogoport/icons-react": "^1.0.45",
+    "@cogoport/request": "workspace:0.1.0",
     "next": "13.0.6",
     "qs": "^6.11.0",
     "react": "18.2.0",
