@@ -1,18 +1,41 @@
 # cogo-admin
 
+A `TurboRepo` for the optimized build system.
 
 ## Installation
-Use `pnpm install` to install all dependencies
 
-##
-- Use `cd packages/<package-name>` & `pnpm dev` to run individual projects
-- Use `pnpm --recursive run dev` for running multiple packages. [Learn More](https://pnpm.io/cli/recursive)
+- Clone the project from `Github` using `git clone git@github.com:Cogoport/cogo-admin.git`
 
-## Port series for admin modules
-Admin modules are spread accross `40xx` port series. Following sub-series are assigned to module groups -
-- Rate Management: `4021 to 4029` series, `4020` is reserved for rate-commons
-- Shipment: `4031 to 4039` series, `4030` is reserved for shipment-commons
-- Business Finance: `4041 to 4049` series, `4040` is reserved for bf-commons
-- Platform Tools: `4091 to 4099` series, `4090` is reserved for platform-tool-commons
+- Use `pnpm install` to install all dependencies.
 
+## Structure
 
+`cogo-control`-  Is a single `NextJS` project to control whole admin.
+
+`common` - Directory contains the code like `store, useRequest, form etc...`
+
+`packages` Directory contains the individual services as package.
+
+  
+
+## Getting Started with new package
+
+Create a directory `<package-name>` and navigate to the project using `cd packages/<package-name>`.
+
+- Use `pnpm init` to create a `package.json`.
+
+- Use this package in `cogo-control` by adding this package in `cogo-control`'s  `package.json` .
+ ```sh
+cogo-admin/cogo-control/package.json                                                 
+ { 
+  ...
+ "<package-name>": "workspace:version"
+  ...
+ }
+
+```
+
+## With Typescript
+- To support `Typescript` we need to add a `tsconfig.json` file.
+-  We are using  `Rollup` for build.
+- Add a file `rollup.config.js`and install the dependencies .
