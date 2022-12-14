@@ -1,1 +1,1 @@
-export { default } from '@cogoport/business-finance/page-components/product-code-mappings';
+export { default } from '@cogoport/product-code-mappings/page-components/product-code-mappings';
