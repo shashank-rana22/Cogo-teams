@@ -1,0 +1,77 @@
+.$(NAMESPACE)_badge_container {
+	justify-content: center;
+	font-weight: 400;
+	line-height: 150%;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+	transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+	will-change: color, background-color, border-color;
+
+	&.$(NAMESPACE)_dot_lg {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+	}
+
+	&.$(PRESET)_size_default {
+		max-width: 100px;
+		max-height: 17px;
+		font-size: 10px;
+	}
+	&.$(PRESET)_size_md {
+		min-width: 33px;
+		min-height: 17px;
+		padding: 1px 4px;
+	}
+	&.$(PRESET)_size_lg {
+		min-width: 46px;
+		min-height: 27px;
+		padding: 1px 6px;
+	}
+
+	&.$(PRESET)_themeType_primary {
+		color: #fff;
+		background-color: var(--color-accent);
+		border: none;
+	}
+	&.$(PRESET)_themeType_secondary {
+		color: #fff;
+		background-color: var(--color-secondary);
+		border: none;
+	}
+	&.$(PRESET)_themeType_success {
+		color: #fff;
+		background-color: var(--color-green);
+		border: none;
+	}
+	&.$(PRESET)_themeType_cancellation {
+		color: #fff;
+		background-color: #cb6464;
+		border: none;
+	}
+
+	&.$(PRESET)_themeType_pending {
+		color: #fff;
+		background-color: var(--color-yellow-1);
+		border: none;
+	}
+	&.$(PRESET)_themeType_differentiate {
+		color: #fff;
+		background-color: var(--color-yellow);
+		border: none;
+	}
+	&.$(PRESET)_themeType_inactive {
+		color: #fff;
+		background-color: var(--color-gray-3);
+		border: none;
+	}
+
+	&:disabled,
+	&[disabled],
+	&.$(NAMESPACE)_disabled {
+		color: #fff;
+		background-color: #bdbdbd;
+		border: none;
+	}
+}

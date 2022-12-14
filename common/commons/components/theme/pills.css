@@ -1,0 +1,160 @@
+.$(NAMESPACE)_pill_container {
+	font-weight: 400;
+	border-style: solid;
+	border-width: 0;
+	border-radius: 4px;
+
+	/* &:hover {
+		box-shadow: 0 4px 8px rgb(44 62 80 / 25%);
+	} */
+
+	svg.pill_icon_prefix {
+		margin-right: 10px;
+	}
+
+	svg.pill_icon_suffix {
+		margin-left: 10px;
+	}
+
+	&:disabled,
+	&[disabled] {
+		box-shadow: none;
+	}
+
+	&.$(PRESET)_size_md {
+		padding: 6px 16px;
+		font-size: 12px;
+		line-height: 18px;
+
+		svg.pill_icon {
+			width: 12px;
+			height: 12px;
+		}
+	}
+
+	&.$(PRESET)_size_lg {
+		padding: 6px 16px;
+		font-size: 16px;
+		line-height: 24px;
+
+		svg.pill_icon {
+			width: 16px;
+			height: 16px;
+		}
+	}
+
+	&.$(PRESET)_themeType_primary {
+		color: var(--color-primary);
+		background: var(--color-purple-2);
+		border-color: none;
+
+		/* &:hover {
+			box-shadow: 0 4px 8px rgb(44 62 80 / 25%);
+		} */
+
+		/* &:active {
+			color: var(--color-gray-5);
+			background-color: #cbd2da;
+			border-color: #435b73;
+		} */
+
+		&:disabled,
+		&[disabled] {
+			background: #dfe1ef;
+		}
+
+		/* &.pill_selected {
+			background-color: #ded7fc;
+			border-color: #5936f0;
+
+			&:disabled,
+			&[disabled] {
+				color: #a8acce;
+				background-color: #dfe1ef;
+			}
+		} */
+	}
+	&.$(PRESET)_themeType_secondary {
+		color: var(--color-primary);
+		background: var(--color-secondary-5);
+
+		/* border-color: #a8acce; */
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+	&.$(PRESET)_themeType_grey {
+		color: var(--color-primary);
+		background: var(--color-gray-4);
+		border-color: none;
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+	&.$(PRESET)_themeType_orange {
+		color: var(--color-primary);
+		background: var(--color-orange-4);
+
+		/* border-color: #a8acce; */
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+	&.$(PRESET)_themeType_purple {
+		color: var(--color-primary);
+		background: var(--color-secondary-4);
+
+		/* border-color: #a8acce; */
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+	&.$(PRESET)_themeType_green {
+		color: var(--color-primary);
+		background: var(--color-green-4);
+
+		/* border-color: #a8acce; */
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+	&.$(PRESET)_themeType_red {
+		color: var(--color-primary);
+		background: var(--color-red-4);
+
+		/* border-color: #a8acce; */
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+	&.$(PRESET)_themeType_yellow {
+		color: var(--color-primary);
+		background: var(--color-yellow-4);
+
+		/* border-color: #a8acce; */
+
+		&:disabled,
+		&[disabled] {
+			color: #dfe1ef;
+			border-color: #dfe1ef;
+		}
+	}
+}

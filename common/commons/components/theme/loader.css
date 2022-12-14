@@ -1,0 +1,29 @@
+.$(NAMESPACE)_loader {
+	box-sizing: border-box;
+	display: inline-block;
+	width: 24px;        /* the size */
+	aspect-ratio: 1;
+	padding: 2px;       /* the border thickness */
+	margin: 8px;
+	border-radius: 50%;
+	mask: var(--m);
+	animation: load 1s linear infinite;
+	mask-composite: source-out;
+	mask-composite: subtract;
+
+	--m:
+		conic-gradient(#0000, #000),
+		linear-gradient(#000 0 0) content-box;
+
+	&.$(PRESET)_themeType_primary {
+		background: var(--color-primary);
+	}
+
+	&.$(PRESET)_themeType_secondary {
+		background: var(--color-gray-4);
+	}
+
+	@keyframes load {
+		to { transform: rotate(1turn); }
+	}
+}
