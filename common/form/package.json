@@ -1,7 +1,7 @@
 {
     "name": "@cogoport/form",
     "version": "0.1.0",
-    "description": "Custom Request form for different Services",
+    "description": "Custom useForm and Controlled Elements for different Services",
     "license": "MIT",
     "private": true,
     "main": "./index.js",
