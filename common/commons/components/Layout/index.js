@@ -3,6 +3,7 @@ import React from 'react';
 
 import LogoSvg from './logo.svg';
 import { nav } from './nav';
+import styles from './styles.module.css';
 
 function Layout({ children }) {
 	return (
@@ -14,7 +15,7 @@ function Layout({ children }) {
 			}}
 			navbar={{ nav }}
 		>
-			<div style={{ margin: 20 }}>{children}</div>
+			<div className={styles.overall_container}>{children}</div>
 		</AdminLayout>
 	);
 }

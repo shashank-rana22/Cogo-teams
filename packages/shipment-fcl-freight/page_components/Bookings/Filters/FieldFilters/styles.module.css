@@ -1,0 +1,17 @@
+
+.container button:global(.ui_button_container){
+    background-color: transparent;
+    color: black;
+    border-color: #cbcff5;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 8px;
+    width: 100px;
+    height: 28px;
+
+}
+.container button:global(.ui_button_container:hover){
+    background-color: transparent;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-color: #cbcff5;
+}
