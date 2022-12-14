@@ -27,6 +27,7 @@ importers:
       '@cogoport/components': ^1.0.78
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.45
+      '@cogoport/muneem': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
@@ -41,6 +42,7 @@ importers:
       '@cogoport/components': 1.0.78_7osmb5wvroedhdevbael4oybrm
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/muneem': link:../packages/muneem
       '@cogoport/request': link:../common/request
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/utils': 1.2.0
@@ -140,6 +142,43 @@ importers:
       rollup: 3.7.4
       rollup-plugin-delete: 2.0.0
       rollup-plugin-typescript2: 0.34.1_fhibmf72xnv5tve6nwed265eae
+
+  packages/muneem:
+    specifiers:
+      '@cogoport/commons': workspace:0.1.0
+      '@cogoport/components': ^1.0.78
+      '@cogoport/icons-react': ^1.0.45
+      '@cogoport/request': workspace:0.1.0
+      '@rollup/plugin-commonjs': ^23.0.4
+      '@rollup/plugin-json': ^5.0.2
+      '@rollup/plugin-node-resolve': ^15.0.1
+      '@types/react': ^18.0.26
+      next: 13.0.6
+      react: 18.2.0
+      react-dom: 18.2.0
+      react-redux: ^8.0.5
+      rollup: ^3.7.0
+      rollup-plugin-delete: ^2.0.0
+      rollup-plugin-typescript2: ^0.34.1
+      typescript: ^4.9.4
+    dependencies:
+      '@cogoport/commons': link:../../common/commons
+      '@cogoport/components': 1.0.78_dqz6xczmpwbah6wdonto3bfkp4
+      '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/request': link:../../common/request
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
+    devDependencies:
+      '@rollup/plugin-commonjs': 23.0.4_rollup@3.7.4
+      '@rollup/plugin-json': 5.0.2_rollup@3.7.4
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
+      '@types/react': 18.0.26
+      rollup: 3.7.4
+      rollup-plugin-delete: 2.0.0
+      rollup-plugin-typescript2: 0.34.1_fhibmf72xnv5tve6nwed265eae
+      typescript: 4.9.4
 
   packages/shipment-fcl-freight:
     specifiers:
@@ -1463,6 +1502,31 @@ packages:
       - sass
     dev: false
 
+  /@cogoport/components/1.0.78_dqz6xczmpwbah6wdonto3bfkp4:
+    resolution: {integrity: sha512-FsIyDToBq4RzwF9S/PeViQgAJeNUknJ9v1J/pUk0U4S0uiiy8iudxylGSBupLmPxohSrbr6LBQ3h6pAAGP4loQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@floating-ui/react-dom-interactions': 0.10.3_ib3m5ricvtkl2cll7qpr2f6lvq
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y
+      react-dom: 18.2.0_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+    optionalDependencies:
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - babel-plugin-macros
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
   /@cogoport/eslint-config/1.0.18_eslint@8.29.0:
     resolution: {integrity: sha512-xG/0mT5NLQB8QDF5G5SQV2zDZI1vPUJwYjFi2FBlENMn/ky/fIxk1aVglnRO3yPdZ3w57xMJSOhvUu0Bv4odiA==}
     peerDependencies:
@@ -1564,6 +1628,20 @@ packages:
     dependencies:
       '@floating-ui/react-dom': 1.0.1_biqbaboplfbrettd7655fr4n2y
       aria-hidden: 1.2.2_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
+  /@floating-ui/react-dom-interactions/0.10.3_ib3m5ricvtkl2cll7qpr2f6lvq:
+    resolution: {integrity: sha512-UEHqdnzyoiWNU5az/tAljr9iXFzN18DcvpMqW+/cXz4FEhDEB1ogLtWldOWCujLerPBnSRocADALafelOReMpw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/react-dom': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      aria-hidden: 1.2.2_kzbn2opkn2327fwg5yzwzya5o4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     transitivePeerDependencies:
@@ -2437,6 +2515,21 @@ packages:
   /argparse/2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
     dev: true
+
+  /aria-hidden/1.2.2_kzbn2opkn2327fwg5yzwzya5o4:
+    resolution: {integrity: sha512-6y/ogyDTk/7YAe91T3E2PR1ALVKyM2QbTio5HwM+N1Q6CMlCKhvClyIjkckBswa0f2xJhjsfzIGa1yVSe1UMVA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@types/react': ^16.9.0 || ^17.0.0 || ^18.0.0
+      react: ^16.9.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 18.0.26
+      react: 18.2.0
+      tslib: 2.4.1
+    dev: false
 
   /aria-hidden/1.2.2_react@18.2.0:
     resolution: {integrity: sha512-6y/ogyDTk/7YAe91T3E2PR1ALVKyM2QbTio5HwM+N1Q6CMlCKhvClyIjkckBswa0f2xJhjsfzIGa1yVSe1UMVA==}
