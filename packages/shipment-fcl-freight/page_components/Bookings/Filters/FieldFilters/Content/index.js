@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/form';
-import SelectController from '@cogoport/form/Controlled/SelectController';
+import { useForm, SelectController } from '@cogoport/form';
 import { startCase } from '@cogoport/utils';
 
 import BookingSources from '../../../commons/configs/BookingSources';
