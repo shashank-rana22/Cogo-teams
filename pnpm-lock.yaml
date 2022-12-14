@@ -1571,20 +1571,39 @@ packages:
       - sass
     dev: false
 
-<<<<<<< HEAD
-  /@cogoport/components/1.0.82_7osmb5wvroedhdevbael4oybrm:
-    resolution: {integrity: sha512-Z6QjkxUQBXybK2X10A1IZOtPGzrAZJzjuzFsmZqklViVGXo26cer+nckal087p8p3IqM+tEDFcGuaOktct/jXQ==}
-=======
   /@cogoport/components/1.0.78_dqz6xczmpwbah6wdonto3bfkp4:
     resolution: {integrity: sha512-FsIyDToBq4RzwF9S/PeViQgAJeNUknJ9v1J/pUk0U4S0uiiy8iudxylGSBupLmPxohSrbr6LBQ3h6pAAGP4loQ==}
->>>>>>> main
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
-<<<<<<< HEAD
+      '@floating-ui/react-dom-interactions': 0.10.3_ib3m5ricvtkl2cll7qpr2f6lvq
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y
+      react-dom: 18.2.0_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+    optionalDependencies:
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - babel-plugin-macros
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.82_7osmb5wvroedhdevbael4oybrm:
+    resolution: {integrity: sha512-Z6QjkxUQBXybK2X10A1IZOtPGzrAZJzjuzFsmZqklViVGXo26cer+nckal087p8p3IqM+tEDFcGuaOktct/jXQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
       '@floating-ui/react-dom-interactions': 0.10.3_biqbaboplfbrettd7655fr4n2y
       downshift: 6.1.12_react@18.2.0
       react: 18.2.0
@@ -1611,9 +1630,6 @@ packages:
     dependencies:
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
       '@floating-ui/react-dom-interactions': 0.10.3_biqbaboplfbrettd7655fr4n2y
-=======
-      '@floating-ui/react-dom-interactions': 0.10.3_ib3m5ricvtkl2cll7qpr2f6lvq
->>>>>>> main
       downshift: 6.1.12_react@18.2.0
       react: 18.2.0
       react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y

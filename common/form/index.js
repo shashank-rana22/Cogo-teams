@@ -4,6 +4,6 @@ import DatePickerController from './Controlled/DatePickerController';
 import PillsController from './Controlled/PillsController';
 import SelectController from './Controlled/SelectController';
 
-export default {
+export {
 	useForm, DatePickerController, PillsController, SelectController,
 };
