@@ -1,8 +1,7 @@
 import { Button } from '@cogoport/components';
-import { useForm } from 'react-hook-form';
-
-import DatePickerController from '../../../commons/ControlledElements/DatePickerController';
-import PillsController from '../../../commons/ControlledElements/PillsController';
+import { useForm } from '@cogoport/form';
+import DatePickerController from '@cogoport/form/Controlled/DatePickerController';
+import PillsController from '@cogoport/form/Controlled/PillsController';
 
 import DateRangeOptions from './DateRangeOptions';
 import DateTypeOptions from './DateTypeOptions';
@@ -17,6 +16,7 @@ function Content() {
 	});
 
 	const { watch } = methods;
+
 	const dateTypeValue = watch('date_type');
 	const dateRangeValue = watch('date_range');
 

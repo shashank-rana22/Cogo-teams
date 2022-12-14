@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/form';
+import SelectController from '@cogoport/form/Controlled/SelectController';
 import { startCase } from '@cogoport/utils';
-import { useForm } from 'react-hook-form';
 
 import BookingSources from '../../../commons/configs/BookingSources';
 import States from '../../../commons/configs/States';
-import SelectController from '../../../commons/ControlledElements/SelectController';
 
 import styles from './styles.module.css';
 

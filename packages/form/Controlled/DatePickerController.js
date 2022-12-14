@@ -4,6 +4,7 @@ import { Controller } from 'react-hook-form';
 function DatePickerController(props) {
 	const { methods, name, label = '' } = props;
 	const { control } = methods;
+	console.log(methods, 'd');
 
 	return (
 		<Controller

@@ -1,8 +1,6 @@
 import { Pills } from '@cogoport/components';
 import { Controller } from 'react-hook-form';
 
-// import styles from './PillsController.module.css';
-
 function PillsController(props) {
 	const {
 		methods, name = '', label = '', list,

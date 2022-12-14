@@ -25,6 +25,7 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/commons': workspace:0.1.0
       '@cogoport/components': ^1.0.78
+      '@cogoport/form': workspace:0.1.0
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.45
       '@cogoport/request': workspace:0.1.0
@@ -39,6 +40,7 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/commons': link:../common/commons
       '@cogoport/components': 1.0.78_7osmb5wvroedhdevbael4oybrm
+      '@cogoport/form': link:../packages/form
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../common/request
@@ -112,6 +114,28 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_biqbaboplfbrettd7655fr4n2y
 
+  packages/form:
+    specifiers:
+      '@cogoport/commons': workspace:0.1.0
+      '@cogoport/components': ^1.0.83
+      '@cogoport/icons-react': ^1.0.45
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/utils': ^1.2.0
+      next: 13.0.6
+      react: 18.2.0
+      react-dom: 18.2.0
+      react-hook-form: ^7.40.0
+    dependencies:
+      '@cogoport/commons': link:../../common/commons
+      '@cogoport/components': 1.0.83_7osmb5wvroedhdevbael4oybrm
+      '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/request': link:../../common/request
+      '@cogoport/utils': 1.2.0
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.40.0_react@18.2.0
+
   packages/home:
     specifiers:
       '@rollup/plugin-commonjs': ^23.0.4
@@ -144,7 +168,8 @@ importers:
   packages/shipment-fcl-freight:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.78
+      '@cogoport/components': ^1.0.83
+      '@cogoport/form': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.45
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
@@ -154,7 +179,8 @@ importers:
       react-hook-form: ^7.40.0
     dependencies:
       '@cogoport/commons': link:../../common/commons
-      '@cogoport/components': 1.0.78_7osmb5wvroedhdevbael4oybrm
+      '@cogoport/components': 1.0.83_7osmb5wvroedhdevbael4oybrm
+      '@cogoport/form': link:../form
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.0
@@ -1469,6 +1495,31 @@ packages:
 
   /@cogoport/components/1.0.82_7osmb5wvroedhdevbael4oybrm:
     resolution: {integrity: sha512-Z6QjkxUQBXybK2X10A1IZOtPGzrAZJzjuzFsmZqklViVGXo26cer+nckal087p8p3IqM+tEDFcGuaOktct/jXQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@floating-ui/react-dom-interactions': 0.10.3_biqbaboplfbrettd7655fr4n2y
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y
+      react-dom: 18.2.0_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+    optionalDependencies:
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - babel-plugin-macros
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.83_7osmb5wvroedhdevbael4oybrm:
+    resolution: {integrity: sha512-jSXkOWsMldsXWayDehX48PactvgPkj8+VKUG74y0KF+uKVESjg6K1K1Fpp4z+LDYxbwJXFK+2K5utSnXBlCNBg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
