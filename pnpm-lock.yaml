@@ -28,6 +28,7 @@ importers:
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.45
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
       next: 13.0.6
       next-transpile-modules: ^10.0.0
@@ -41,6 +42,7 @@ importers:
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../common/request
+      '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/utils': 1.2.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
@@ -138,6 +140,24 @@ importers:
       rollup: 3.7.4
       rollup-plugin-delete: 2.0.0
       rollup-plugin-typescript2: 0.34.1_fhibmf72xnv5tve6nwed265eae
+
+  packages/shipment-fcl-freight:
+    specifiers:
+      '@cogoport/commons': workspace:0.1.0
+      '@cogoport/components': ^1.0.78
+      '@cogoport/icons-react': ^1.0.45
+      '@cogoport/request': workspace:0.1.0
+      next: 13.0.6
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/commons': link:../../common/commons
+      '@cogoport/components': 1.0.78_7osmb5wvroedhdevbael4oybrm
+      '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/request': link:../../common/request
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
 
 packages:
 
