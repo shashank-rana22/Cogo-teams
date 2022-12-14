@@ -25,6 +25,6 @@ export const nav = [
 	{
 		icon : <IcMBookingDesk />,
 		name : 'Product Code Mappings',
-		href : '/business-finance/product-code-mappings',
+		href : '/product-code-mappings',
 	},
 ];
