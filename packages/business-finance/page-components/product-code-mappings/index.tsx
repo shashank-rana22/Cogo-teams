@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Home() {
+function ProductCodeMappings() {
 	return (
 		<div>
 			<h1>Product Code Mappings</h1>
@@ -8,4 +8,4 @@ function Home() {
 	);
 }
 
-export default Home;
+export default ProductCodeMappings;

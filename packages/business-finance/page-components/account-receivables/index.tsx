@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Home() {
+function AccountRecievables() {
 	return (
 		<div>
 			<h1>Account Recievables</h1>
@@ -8,4 +8,4 @@ function Home() {
 	);
 }
 
-export default Home;
+export default AccountRecievables;

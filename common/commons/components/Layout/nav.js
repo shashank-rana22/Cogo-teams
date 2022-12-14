@@ -8,23 +8,23 @@ export const nav = [
 	},
 	{
 		icon      : <IcMBookingDesk />,
-		name      : 'Muneem',
+		name      : 'Business Finance',
 		issubnavs : true,
 		options   : [
 			{
 				icon : <IcMBookingDesk />,
 				name : 'AP',
-				href : '/muneem/account-payables',
+				href : '/business-finance/account-payables',
 			},
 			{
 				icon : <IcMBookingDesk />,
 				name : 'AR',
-				href : '/muneem/account-receivables',
+				href : '/business-finance/account-receivables',
 			}],
 	},
 	{
 		icon : <IcMBookingDesk />,
 		name : 'Product Code Mappings',
-		href : '/muneem/product-code-mappings',
+		href : '/business-finance/product-code-mappings',
 	},
 ];

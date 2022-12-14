@@ -1,7 +1,7 @@
 {
-  "name": "@cogoport/muneem",
+  "name": "@cogoport/business-finance",
   "version": "0.1.0",
-  "description": "Muneem Package for Business Finance",
+  "description": "Package for Business Finance",
   "license": "MIT",
   "private": true,
   "main": "dist/cjs/index.js",

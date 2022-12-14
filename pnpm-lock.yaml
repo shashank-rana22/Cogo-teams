@@ -27,7 +27,7 @@ importers:
       '@cogoport/components': ^1.0.78
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.45
-      '@cogoport/muneem': workspace:0.1.0
+      '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
@@ -42,7 +42,7 @@ importers:
       '@cogoport/components': 1.0.78_7osmb5wvroedhdevbael4oybrm
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.45_biqbaboplfbrettd7655fr4n2y
-      '@cogoport/muneem': link:../packages/muneem
+      '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/request': link:../common/request
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/utils': 1.2.0
@@ -143,7 +143,7 @@ importers:
       rollup-plugin-delete: 2.0.0
       rollup-plugin-typescript2: 0.34.1_fhibmf72xnv5tve6nwed265eae
 
-  packages/muneem:
+  packages/business-finance:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
       '@cogoport/components': ^1.0.78

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProductCodeMappings() {
+function AccountPayables() {
 	return (
 		<div>
 			<h1>Account Payables</h1>
@@ -8,4 +8,4 @@ function ProductCodeMappings() {
 	);
 }
 
-export default ProductCodeMappings;
+export default AccountPayables;
