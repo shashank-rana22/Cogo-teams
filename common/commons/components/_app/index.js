@@ -1,4 +1,4 @@
-import '@cogoport/components/dist/themes/supernova.css';
+import '../theme/index.css';
 import { Provider } from 'react-redux';
 
 import store from '../../store';

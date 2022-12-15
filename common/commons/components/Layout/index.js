@@ -1,9 +1,8 @@
-import { AdminLayout } from '@cogoport/components';
 import React from 'react';
 
+import AdminLayout from './AdminLayout';
 import LogoSvg from './logo.svg';
 import { nav } from './nav';
-import styles from './styles.module.css';
 
 function Layout({ children }) {
 	return (
@@ -15,7 +14,7 @@ function Layout({ children }) {
 			}}
 			navbar={{ nav }}
 		>
-			<div className={styles.overall_container}>{children}</div>
+			<div style={{ margin: '0 100px' }}>{children}</div>
 		</AdminLayout>
 	);
 }

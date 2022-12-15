@@ -1,0 +1,25 @@
+.container {
+	--layout-topbar: 52px;
+	--layout-navbar-collapsed: 80px;
+	--layout-navbar: 280px;
+
+	min-height: 100vh;
+	padding-top: var(--layout-topbar);
+
+	@media (max-height: 600px) {
+		min-height: 600px;
+	}
+
+	&.has_navbar {
+		padding-left: var(--layout-navbar-collapsed);
+
+		@media (max-width: 576px) {
+			padding-left: 0;
+		}
+	}
+}
+
+.children_container {
+	width: 100%;
+	background-color: #eceff8;
+}

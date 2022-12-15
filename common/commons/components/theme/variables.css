@@ -1,0 +1,58 @@
+:root {
+	/* BRAND COLORS */
+	--color-primary: #393f70;
+	--color-primary-1: #5b608a;
+	--color-primary-2: #7c81a3;
+	--color-accent: #5936f0;
+	--color-secondary: #7a5ef3;
+	--color-secondary-1: #9b86f6;
+	--color-secondary-2: #bdaff9;
+	--color-secondary-3: #ded7fc;
+	--color-secondary-4: #f6f5fe;
+	--color-secondary-5: #eceff8;
+	--color-green: #67c676;
+	--color-green-1: #96e2a2;
+	--color-green-2: #b4f3be;
+	--color-green-3: #cdf7d4;
+	--color-green-4: #ecffef;
+	--color-yellow: #e0ba4a;
+	--color-yellow-1: #f9da7f;
+	--color-yellow-2: #ffe9ab;
+	--color-yellow-3: #fcedbf;
+	--color-yellow-4: #fff7df;
+	--color-red: #cb6464;
+	--color-red-1: #ef9b9b;
+	--color-red-2: #f3b4b4;
+	--color-red-3: #f7cdcd;
+	--color-red-4: #ffe3e3;
+	--color-purple: #9ab7fe;
+	--color-purple-1: #cddbff;
+	--color-purple-2: #f2f6ff;
+	--color-purple-3: #66acf7;
+	--color-purple-4: #b3d5fb;
+	--color-purple-5: #d9eafd;
+	--color-orange: #da9a3b;
+	--color-orange-1: #f9da7f;
+	--color-orange-2: #fbd69f;
+	--color-orange-3: #fce4bf;
+	--color-orange-4: #fef1df;
+	--color-gray: #333;
+	--color-gray-1: #4f4f4f;
+	--color-gray-2: #828282;
+	--color-gray-3: #bdbdbd;
+	--color-gray-4: #e0e0e0;
+	--color-gray-5: #fff;
+
+	/* TYPOGRAPHY */
+	--font-family: "Roboto", "sans-serif";
+	--font-color-heading: var(--color-primary);
+	--font-color: var(--color-primary);
+	--font-color-link: var(--color-accent);
+	--font-color-silent: var(--color-gray-3);
+	--font-size-xl: 16px;
+	--font-size-lg: 14px;
+	--font-size-md: 12px;
+	--font-size-sm: 10px;
+	--font-size-xs: 8px;
+	--line-height: 1.5;
+}

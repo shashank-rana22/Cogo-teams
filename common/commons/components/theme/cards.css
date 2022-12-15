@@ -1,0 +1,19 @@
+.$(NAMESPACE)_card {
+	&:hover {
+		background-color: var(--color-secondary-4);
+	}
+
+	&:active {
+		background-color: var(--color-secondary-2);
+	}
+}
+
+.$(NAMESPACE)_disabled {
+	&:hover {
+		background-color: transparent;
+	}
+
+	&:active {
+		background-color: transparent;
+	}
+}
