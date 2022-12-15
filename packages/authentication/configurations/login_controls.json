@@ -1,0 +1,18 @@
+[
+	{
+		"name": "email",
+		"type": "input",
+		"placeholder": "Enter Email",
+		"rules": {
+			"required": "Email is required."
+		}
+	},
+	{
+		"name": "password",
+		"placeholder": "Enter Password",
+		"type": "password",
+		"rules": {
+			"required": "Password is required."
+		}
+	}
+]

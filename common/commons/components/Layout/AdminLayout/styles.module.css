@@ -3,10 +3,9 @@
 	--layout-navbar-collapsed: 80px;
 	--layout-navbar: 280px;
 
-	background: #F9F5EC;
-
 	min-height: 100vh;
 	padding-top: var(--layout-topbar);
+	background: #f9f5ec;
 
 	@media (max-height: 600px) {
 		min-height: 600px;

@@ -1,20 +1,20 @@
 import '../theme/index.css';
-import { Provider } from 'react-redux';
+import { Provider as StoreProvider } from '@cogoport/store';
 import useSWR, { SWRConfig } from 'swr';
 
-import store from '../../store';
+import handleAuthentication from '../../utils/auth/handleAuthentication';
+import withStore from '../../utils/store';
 import Layout from '../Layout';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, store }) {
 	return (
-		<SWRConfig value={{ provider: () => new Map() }}>
-			<Provider store={store}>
-
-				<Layout layout={pageProps.layout || 'authenticated'}>
-					<Component {...pageProps} />
-				</Layout>
-			</Provider>
-		</SWRConfig>
+	// <SWRConfig value={{ provider: () => new Map() }}>
+		<StoreProvider store={store}>
+			<Layout layout={pageProps.layout || 'authenticated'}>
+				<Component {...pageProps} />
+			</Layout>
+		</StoreProvider>
+	// </SWRConfig>
 	);
 }
 
@@ -34,7 +34,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 
 	const unPrefixedPath = `/${asPath.split('/').slice(2).join('/')}`;
 
-	// const { asPrefix, query: qError } = await handleAuthentication(ctxParams);
+	const response = await handleAuthentication(ctxParams);
 
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
@@ -47,4 +47,4 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 	};
 };
 
-export default MyApp;
+export default withStore(MyApp);

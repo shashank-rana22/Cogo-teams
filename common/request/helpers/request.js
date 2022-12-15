@@ -13,11 +13,10 @@ const customSerializer = (params) => {
 const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 request.interceptors.request.use((oldConfig) => {
-	const token = getCookie('token');
-	const auth_scope = getCookie('auth_scope');
+	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 	const newConfig = oldConfig;
 	newConfig.paramsSerializer = customSerializer;
-	newConfig.headers = { authorizationscope: auth_scope };
+	newConfig.headers = { authorizationscope: 'partner' };
 	newConfig.headers.authorization = `Bearer: ${token}`;
 
 	return newConfig;

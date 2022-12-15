@@ -1,118 +1,91 @@
-import { addUserLoginData, addUserProfileData } from '@cogoport/commons/store/user';
-import { FluidContainer } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FluidContainer, Button } from '@cogoport/components';
+import { useForm, InputController } from '@cogoport/components/src/forms';
+import React from 'react';
+
+import LogoCogoport from '../../assets/cogo-logo-black.svg';
+import IconMicrosoft from '../../assets/microsoft.svg';
+import getControls from '../../configurations/login_controls.json';
 
 import styles from './styles.module.css';
+import useFormLoginwithMS from './useFormLoginwithMS';
+import useLoginAuthenticate from './useLoginAuthenticate';
+
+const getDefaultValues = (controls) => {
+	const values = {};
+	const newControls = controls.map((control) => {
+		const { value, ...rest } = control;
+		values[control.name] = value || '';
+		return rest;
+	});
+	return { controls: newControls, values };
+};
 
 function Login() {
-	const dispatch = useDispatch();
-	const [values, setValues] = useState({
-		email    : '',
-		password : '',
+	const { onSubmit = () => {} } = useLoginAuthenticate();
+	const { controls, values } = getDefaultValues(getControls);
+	const { onLogin = () => {} } = useFormLoginwithMS();
+	const {
+		register, handleSubmit, formState: { errors }, control,
+	} = useForm({ defaultValues: values });
+
+	const fields = {};
+
+	controls.forEach((controlItem) => {
+		const registerValues = register(controlItem.name, { ...(controlItem.rules || {}) });
+		const field = { ...controlItem, ...registerValues };
+		fields[controlItem.name] = field;
 	});
 
-	const [showPassword, setShowPassword] = useState(false);
-
-	const [login, trigger] = useRequest(
-		{
-			url    : '/login_user',
-			method : 'POST',
-		},
-	);
-
-	const [profile, profileTrigger] = useRequest({ url: '/get_user_session' });
-
-	const handleLogin = async (e) => {
-		e.preventDefault();
-		let testPassed = true;
-		const emailReg = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
-		if (!values.email) {
-			testPassed = false;
-			// eslint-disable-next-line
-			window.alert('Please Enter Email');
-		}
-		if (!emailReg.test(values.email)) {
-			testPassed = false;
-			// eslint-disable-next-line
-			window.alert('Enter correct email');
-		}
-		if (values.password.length < 8) {
-			testPassed = false;
-			// eslint-disable-next-line
-			window.alert('Enter correct Password');
-		}
-		if (testPassed) {
-			try {
-				const loginRes = await trigger(
-					{
-						data: {
-							...values,
-							auth_scope : 'partner',
-							platform   : 'admin',
-						},
-					},
-				);
-
-				if (login?.response?.status === 200) {
-					dispatch(addUserLoginData(loginRes.data));
-					const profileRes = await profileTrigger();
-
-					if (profile?.response?.status === 200) {
-						dispatch(addUserProfileData(profileRes.data));
-						// eslint-disable-next-line
-						window.location.replace('http://localhost:4032/shipment/fcl-freight/6543');
-					}
-				}
-			} catch (err) {
-				console.log('err', err);
-			}
-		}
-	};
+	// console.log('error', errors);
 
 	return (
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
 				<div>
-					<div className={styles.heading}> cogoport</div>
+					<LogoCogoport width={240} height={100} />
 					<div className={styles.sub_heading}>ADMIN</div>
 				</div>
-
-				<div className={styles.input_container}>
-					<div className={styles.input_label}>Please provide your email and password to login</div>
-					<input
-						type="email"
-						placeholder="Enter Email"
-						name="email"
-						value={values.email}
-						onChange={(e) => {
-							setValues({
-								...values,
-								email: e.target.value,
-							});
-						}}
-					/>
-					<div className={styles.password_container}>
-						<input
-							type={showPassword ? 'text' : 'password'}
-							placeholder="Enter Password"
-							name="password"
-							value={values.password}
-							onChange={(e) => {
-								setValues({
-									...values,
-									password: e.target.value,
-								});
-							}}
+				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
+					<div className={styles.input_container}>
+						<div className={styles.input_label}>Please provide your email and password to login</div>
+						<InputController
+							className={styles.form}
+							{...fields.email}
+							control={control}
 						/>
-						<button onClick={() => { setShowPassword(!showPassword); }}>
-							{showPassword ? 'HIDE' : 'SHOW'}
-						</button>
-					</div>
+						{errors.email && <div>{errors.email.message}</div>}
+						<br />
+						<div className={styles.password_container}>
+							<InputController
+								{...fields.password}
+								className={styles.password}
+								control={control}
+							/>
+						</div>
+						{errors.password && <div>{errors.password.message}</div>}
+						<Button className={styles.submit_button} type="submit">LOGIN</Button>
 
-					<button className={styles.submit_button} onClick={handleLogin}>LOGIN</button>
-				</div>
+						<div className={styles.forgot}>
+							Forgot your password?
+							{' '}
+							<a href="/forgot-password">Click here</a>
+						</div>
+						<div className={styles.or} style={{ margin: '16px 0' }}>
+							<hr className={styles.line} style={{ width: '40%' }} />
+							OR
+							<hr className={styles.line} style={{ width: '40%' }} />
+						</div>
+
+						<Button
+							className={styles.submit_button1}
+							onClick={() => onLogin()}
+						>
+							<IconMicrosoft />
+							<p className={styles.micro}>CONTINUE WITH MICROSOFT</p>
+						</Button>
+
+					</div>
+				</form>
 			</div>
 		</FluidContainer>
 	);
