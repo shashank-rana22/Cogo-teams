@@ -1,4 +1,10 @@
+import ListCard from './ListCard';
+
 function Body() {
-	return <div>Coming Soon</div>;
+	return (
+		<div>
+			<ListCard />
+		</div>
+	);
 }
 export default Body;
