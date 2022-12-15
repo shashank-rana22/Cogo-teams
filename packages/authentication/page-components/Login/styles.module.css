@@ -4,7 +4,6 @@
 	justify-content: center;
 	height: 100vh;
 	background-color: #f6f5fe;
-	
 }
 
 .box_container {
@@ -13,33 +12,30 @@
 	align-items: center;
 	width: 425px;
 	height: 570px;
-	padding:  32px; 
+	padding: 32px;
+	background-color: white;
 	border: 1px solid white;
-    border-radius: 8px;
-    background-color: white;
+	border-radius: 8px;
 }
 
-
 .heading {
-	font-family: sans-serif;
+	padding-top: 48px;
 	font-size: 56px;
 	font-weight: 900;
 	color: black;
 	letter-spacing: 4px;
-	padding-top: 48px;
-    
 }
 
 .sub_heading {
-	text-align: center;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 28px;
-	text-transform: uppercase;
-	color: #000000;
-	margin-bottom: 15px;
+	margin: 0;
 	margin-top: -12px;
+	margin-bottom: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 28px;
+	color: #000;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .input_container {
@@ -49,87 +45,86 @@
 }
 
 .input_label {
-	color: #000;
-    font-family: Roboto;
-    text-align: center;
-    line-height: 1.4;
-    font-weight: 400;
-    margin: 10px;
 	padding-bottom: 3px;
+	margin: 10px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #000;
+	text-align: center;
 }
 
 .password {
-
-	border-radius:  5px ;
+	border-radius: 5px;
 }
 
 .password_container {
-
-	border-radius: 5px;
 	display: flex;
+	border-radius: 5px;
 }
-.show{
+
+.show {
 	min-width: none;
 	height: 30px !important;
 }
+
 .submit_button {
 	height: 35px;
+	margin-top: 10px;
+	font-size: 12px;
 	font-weight: 600;
 	color: white;
 	background-color: black;
 	border-radius: 5px;
-	font-size: 12px;
-	margin-top: 10px;
 }
-.form{
 
-    background: transparent;
-    height: 100%;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: width 2s;
-	padding: 0px 16px;
-	border-radius: 5px;
+.form {
+	width: 100%;
+	height: 100%;
+	padding: 0 16px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background: transparent;
 	border: 1px lightgray solid;
+	border-radius: 5px;
+	transition: width 2s;
 }
-.forgot{
-	margin: 10px;
-	color: #000;
-    font-family: Roboto;
-    text-align: center;
-    line-height: 1.4;
-    font-weight: 400;
-	
 
+.forgot {
+	margin: 10px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #000;
+	text-align: center;
 }
-.or{
+
+.or {
 	display: flex;
 	flex-direction: row;
 	text-align: center;
 }
-.line{
+
+.line {
 	box-sizing: content-box;
-    height: 0;
-    overflow: visible;
+	height: 0;
+	overflow: visible;
 }
+
 .submit_button1 {
+	position: relative;
 	display: flex;
 	align-items: center;
-	-webkit-justify-content:center;
-	position: relative;
+	justify-content: center;
 	width: 100%;
 	height: 35px;
+	font-size: 12px;
 	font-weight: 600;
 	color: white;
 	background-color: black;
 	border-radius: 5px;
-	font-size: 12px;
-   
-	
 }
-.micro{
-	margin-top: 7px;
+
+.micro {
 	padding-left: 5px;
+	margin-top: 7px;
 }

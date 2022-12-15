@@ -1,6 +1,7 @@
 import { getCookie } from 'cookies-next';
 
 import redirect from '../redirect';
+
 import getUserData from './getUserData';
 
 const UNAUTHENTICATED_PATHS = [

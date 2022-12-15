@@ -1,6 +1,7 @@
 import { FluidContainer, Button } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/components/src/forms';
 import React from 'react';
+
 import LogoCogoport from '../../assets/cogo-logo-black.svg';
 import IconMicrosoft from '../../assets/microsoft.svg';
 import getControls from '../../configurations/login_controls.json';
