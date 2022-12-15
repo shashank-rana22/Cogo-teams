@@ -18,6 +18,8 @@
     "@cogoport/product-code-mappings": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
+    
+    
     "@cogoport/utils": "^1.2.0",
     "next": "13.0.6",
     "react": "18.2.0",

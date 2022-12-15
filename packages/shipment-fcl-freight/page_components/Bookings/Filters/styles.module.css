@@ -1,0 +1,33 @@
+.filter_container{
+    width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin: 30px 0px 10px 0px;
+}
+
+
+.search_container{
+    width: 300px;
+    margin: 0px 8px; 
+}
+
+.search_container div:global(.ui_input_container){
+    display: flex;
+    border-radius: 5px;
+    height: 28px;
+}
+
+.search_container span{
+    display: flex;
+    align-items: center;
+}
+
+.search_container div:global(.ui_input_container:hover){
+    border-color: #cbcff5;
+    box-shadow: 0 0 0 1px #cbcff5;
+}
+
+.search_container div:global(.ui_input_container:focus-within){
+    border-color: #cbcff5;
+    box-shadow: 0 0 0 1px #cbcff5;
+}
