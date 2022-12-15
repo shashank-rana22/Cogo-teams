@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { useForm, SelectController } from '@cogoport/form';
+import { useForm, SelectController } from '@cogoport/components/src/forms';
 import { startCase } from '@cogoport/utils';
 
 import BookingSources from '../../../commons/configs/BookingSources';
@@ -8,7 +8,7 @@ import States from '../../../commons/configs/States';
 import styles from './styles.module.css';
 
 function Content() {
-	const methods = useForm({});
+	const { control } = useForm({});
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_wrapper}>
@@ -17,33 +17,36 @@ function Content() {
 			</div>
 
 			<form className={styles.form_wrapper}>
+				<label>Customer/Channel Partner</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="importer_exporter_id"
 					options={[]}
-					label="Customer/Channel Partner"
 					placeholder="Select Customer/Channel Partner"
 				/>
+
+				<label>KAM</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="stakeholder_id"
 					placeholder="Select KAM"
 					options={[]}
-					label="KAM"
 				/>
+
+				<label>Raised Alarm?</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="fault_alarms_raised"
-					label="Raised Alarm?"
 					placeholder="Select status"
 					options={[{
 						label : 'YES',
 						value : 'active',
 					}]}
 				/>
+
+				<label>Source</label>
 				<SelectController
-					methods={methods}
-					label="Source"
+					control={control}
 					name="source"
 					placeholder="Select Source"
 					options={BookingSources.map((source) => ({
@@ -51,36 +54,44 @@ function Content() {
 						value : source,
 					}))}
 				/>
+
+				<label>Origin Port</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="origin_port_id"
-					label="Origin Port"
 					options={[]}
 					placeholder="Select Origin"
 				/>
+
+				<label>Destination Port</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="destination_port_id"
-					label="Destination Port"
 					options={[]}
 					placeholder="Select Destination"
 				/>
+
+				<label>Container Size</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="container_size"
 					label="Container Size"
 					options={[]}
 					placeholder="Select Container Size"
 				/>
+
+				<label>Container Type</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="container_type"
 					label="Container Type"
 					options={[]}
 					placeholder="Select Container Type"
 				/>
+
+				<label>Trade Type</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="trade_type"
 					label="Trade Type"
 					options={[
@@ -95,8 +106,10 @@ function Content() {
 					]}
 					placeholder="Select Trade Type"
 				/>
+
+				<label>State</label>
 				<SelectController
-					methods={methods}
+					control={control}
 					name="state"
 					label="State"
 					options={States}

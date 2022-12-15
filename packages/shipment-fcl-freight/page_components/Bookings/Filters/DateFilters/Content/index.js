@@ -1,19 +1,17 @@
 import { Button } from '@cogoport/components';
-import { useForm, DatePickerController, PillsController } from '@cogoport/form';
+import { useForm, DatepickerController, PillsController } from '@cogoport/components/src/forms';
 
 import DateRangeOptions from './DateRangeOptions';
 import DateTypeOptions from './DateTypeOptions';
 import styles from './styles.module.css';
 
 function Content() {
-	const methods = useForm({
+	const { control, watch } = useForm({
 		defaultValues: {
 			bn_upload_range: 'last_3_days',
 		},
 		shouldUnregister: true,
 	});
-
-	const { watch } = methods;
 
 	const dateTypeValue = watch('date_type');
 	const dateRangeValue = watch('date_range');
@@ -25,34 +23,38 @@ function Content() {
 				<Button className="apply_button">Apply</Button>
 			</div>
 			<form className={styles.form_wrapper}>
+				<label>	Date Type</label>
 				<PillsController
-					label="Date Type"
 					name="date_type"
-					methods={methods}
+					control={control}
 					list={DateTypeOptions}
 				/>
 				{dateTypeValue?.[0] === 'bn_uploaded' ? (
-					<PillsController
-						methods={methods}
-						name="bn_upload_range"
-						label="Date Range"
-						list={[{ label: 'Last 3 Days', value: 'last_3_days' }]}
-					/>
+					<>
+						<label>Date Range</label>
+						<PillsController
+							control={control}
+							name="bn_upload_range"
+							list={[{ label: 'Last 3 Days', value: 'last_3_days' }]}
+						/>
+					</>
 				) : null}
 				{dateTypeValue?.[0] !== 'bn_uploaded' && dateTypeValue?.length
 					? (
-						<PillsController
-							name="date_range"
-							label="Date Range"
-							list={DateRangeOptions}
-							methods={methods}
-						/>
+						<>
+							<label>Date Range</label>
+							<PillsController
+								name="date_range"
+								list={DateRangeOptions}
+								control={control}
+							/>
+						</>
 					) : null}
 				{
 					dateRangeValue?.[0] === 'custom'
 						? (
-							<DatePickerController
-								methods={methods}
+							<DatepickerController
+								control={control}
 								name="custom_date"
 							/>
 						) : null

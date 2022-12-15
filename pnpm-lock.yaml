@@ -36,12 +36,8 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/commons': workspace:0.1.0
-<<<<<<< HEAD
-      '@cogoport/components': ^1.0.84
-      '@cogoport/form': workspace:0.1.0
-=======
       '@cogoport/components': ^1.0.87
->>>>>>> main
+      '@cogoport/form': workspace:0.1.0
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/product-code-mappings': workspace:0.1.0
@@ -57,12 +53,8 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/commons': link:../common/commons
-<<<<<<< HEAD
-      '@cogoport/components': 1.0.84_3bco6rqi4v2rqnojtx4r4tffkm
-      '@cogoport/form': link:../common/form
-=======
       '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
->>>>>>> main
+      '@cogoport/form': link:../common/form
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/product-code-mappings': link:../packages/product-code-mappings
@@ -265,34 +257,22 @@ importers:
   packages/shipment-fcl-freight:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
-<<<<<<< HEAD
-      '@cogoport/components': ^1.0.84
-      '@cogoport/form': workspace:0.1.0
-=======
       '@cogoport/components': ^1.0.87
->>>>>>> main
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
       next: 13.0.6
       react: 18.2.0
       react-dom: 18.2.0
-      react-hook-form: ^7.40.0
     dependencies:
       '@cogoport/commons': link:../../common/commons
-<<<<<<< HEAD
-      '@cogoport/components': 1.0.84_3bco6rqi4v2rqnojtx4r4tffkm
-      '@cogoport/form': link:../../common/form
-=======
       '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
->>>>>>> main
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.40.0_react@18.2.0
 
 packages:
 
@@ -1573,7 +1553,6 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-<<<<<<< HEAD
   /@cogoport/components/1.0.83_3bco6rqi4v2rqnojtx4r4tffkm:
     resolution: {integrity: sha512-jSXkOWsMldsXWayDehX48PactvgPkj8+VKUG74y0KF+uKVESjg6K1K1Fpp4z+LDYxbwJXFK+2K5utSnXBlCNBg==}
     peerDependencies:
@@ -1599,12 +1578,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.84_3bco6rqi4v2rqnojtx4r4tffkm:
-    resolution: {integrity: sha512-k0VnPR1Q6KAmQ784KBA6RkUfb2GfHwfubLwFGjeY/TyuKEM/rwWDLyO5CpJAtKI4WjwUM0lqAoITgGHNCoJkRw==}
-=======
   /@cogoport/components/1.0.87_3bco6rqi4v2rqnojtx4r4tffkm:
     resolution: {integrity: sha512-XR8otsb/lelxMwJAor3kuwW3dqdytGN/64vLgE+C7YYLvxPDrr+ctiguUrzMNrPV7o/7X5/0J5zio4b4U6MnMg==}
->>>>>>> main
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
