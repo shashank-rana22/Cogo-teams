@@ -1,36 +1,34 @@
-
-
-.button_wrapper{
-    display: flex;
-    justify-content: flex-end;
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.button_wrapper button:global(.ui_button_container){
-    height: 28px;
+.button_wrapper button:global(.ui_button_container) {
+	height: 28px;
 }
 
-.button_wrapper button:global(.clear_filter_button ){
-    background-color: transparent;
-    color: black;
-    border: none;
-    font-size: 12px;
-    font-weight: 600;
-    margin-right:4px
-}
-.button_wrapper button:global(.clear_filter_button:hover ){
-    background-color: transparent;
+.button_wrapper button:global(.clear_filter_button) {
+	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: black;
+	background-color: transparent;
+	border: none;
 }
 
-.button_wrapper button:global(.apply_button){
-    font-size: 13px;
-    font-weight: 700;
+.button_wrapper button:global(.clear_filter_button:hover) {
+	background-color: transparent;
 }
 
-.form_wrapper button:global(.ui_pill_container){
-    padding: 2px 8px;
+.button_wrapper button:global(.apply_button) {
+	font-size: 13px;
+	font-weight: 700;
 }
 
-.form_wrapper button:global(.pill_selected){
-    background-color: rgb(222,215,252);
+.form_wrapper button:global(.ui_pill_container) {
+	padding: 2px 8px;
 }
 
+.form_wrapper button:global(.pill_selected) {
+	background-color: rgb(222 215 252);
+}
