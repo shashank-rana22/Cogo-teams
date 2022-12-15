@@ -25,6 +25,7 @@ function Topbar({
 					<IcMOverflowLine />
 				</button>
 			)}
+
 			{logo && (
 				<div
 					tabIndex={0}
@@ -35,6 +36,7 @@ function Topbar({
 					{logo}
 				</div>
 			)}
+
 			<div className={styles.actions_container}>
 				{github && (
 					<a rel="noreferrer" target="_blank" href="https://github.com/Cogoport/packages-icons">

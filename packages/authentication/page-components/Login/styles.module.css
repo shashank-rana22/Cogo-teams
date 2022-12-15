@@ -2,8 +2,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
-	background-color: #303b67;
 }
 
 .box_container {

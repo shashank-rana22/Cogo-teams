@@ -1,7 +1,9 @@
 .container {
-	--layout-topbar: 52px;
+	--layout-topbar: 64px;
 	--layout-navbar-collapsed: 80px;
 	--layout-navbar: 280px;
+
+	background: #F9F5EC;
 
 	min-height: 100vh;
 	padding-top: var(--layout-topbar);
@@ -21,5 +23,4 @@
 
 .children_container {
 	width: 100%;
-	background-color: #eceff8;
 }
