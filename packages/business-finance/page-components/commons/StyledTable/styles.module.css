@@ -1,0 +1,20 @@
+.table{
+    :global{
+	background-color: transparent;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+	border-radius: 10px;
+	padding-top: 10px;
+	margin-top: 10px;
+		.ui_table_head_cell {
+			border-right: none !important;
+			background-color: #393f70 !important;
+			color: white;
+		}
+		.ui_table_body_cell {
+			background-color: #ffffff !important;
+			background: #ffffff !important;
+			border-right: none !important;
+		}
+}
+}

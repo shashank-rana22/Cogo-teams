@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GenericObject, FunctionObjects, FieldType } from './Interfaces/index';
+import { GenericObject, FunctionObjects, FieldType } from '../Interfaces/index';
 
 const startCase=(arg:string):string=>{
 	return arg.replace(/_/g," ")

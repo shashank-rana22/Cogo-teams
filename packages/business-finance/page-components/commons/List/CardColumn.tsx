@@ -1,8 +1,9 @@
 import React from 'react';
 
 import getValue from './getValue';
-import { FieldType, FunctionObjects, ConfigType } from './Interfaces/index';
+import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 import styles from './styles.module.css';
+import { Placeholder } from '@cogoport/components';
 
 export interface Props {
 	fields: FieldType[];
@@ -11,6 +12,7 @@ export interface Props {
 	functions?: FunctionObjects;
 	config: ConfigType;
 	isMobile?: boolean;
+	loading?: boolean;
 }
 
 function CardColumn({
@@ -20,6 +22,7 @@ function CardColumn({
 	functions={},
 	config,
 	isMobile,
+	loading,
 }:Props) {
 	const { clickable } = config;
 	return (
@@ -44,14 +47,16 @@ function CardColumn({
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
 							)}
+							{loading?<Placeholder/>:
 							<div className={styles.flex}>
 								{getValue(
 									singleitem,
 									field,
 									functions,
-									'sample styling for the table',
+									'-',
 								)}
 							</div>
+							}
 						</div>
 					);
 				})}

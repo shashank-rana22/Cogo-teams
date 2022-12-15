@@ -1,4 +1,4 @@
-import { FunctionObjects,FieldType } from "./Interfaces";
+import { FunctionObjects,FieldType } from "../Interfaces";
 import React from "react";
 
 const commonFunctions = ({ functions }:{functions?:FunctionObjects}) => {

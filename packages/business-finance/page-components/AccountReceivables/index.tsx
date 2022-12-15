@@ -4,6 +4,7 @@ import { PAYRUN_PAID_CONFIG } from '../account-payables/configurations/PAID_TABL
 import List from '../commons/List/index';
 import SegmentedControl from "../commons/SegmentedControl";
 import { IcMAccountSettings } from '@cogoport/icons-react';
+import StyledTable from '../commons/StyledTable';
 
 function AccountRecievables() {
 	const [sort, setSort] = useState({});
@@ -19,6 +20,44 @@ function AccountRecievables() {
 			icon:<IcMAccountSettings/>,
 		},
 	];
+	const columns = [
+        { Header: 'First Name', accessor: 'firstName'},
+        { Header: 'Last Name', accessor: 'lastName' },
+        { Header: 'Age', accessor: (row: Record<string, any>) => row.age },
+        { Header: 'Visits', accessor: 'visits' },
+        { Header: 'Status', accessor: 'status' },
+        { Header: 'Progress', accessor: 'progresss' },
+        { Header: 'Gender', accessor: 'gender' },
+    ];
+    const data = [
+        {
+            firstName : 'tanner',
+            lastName  : 'linsley',
+            age       : 24,
+            visits    : 100,
+            status    : 'In Relationship',
+            progress  : 50,
+            gender:"male",
+        },
+        {
+            firstName : 'tandy',
+            lastName  : 'miller',
+            age       : 40,
+            visits    : 40,
+            status    : 'Single',
+            progress  : 80,
+            gender:"male",
+        },
+        {
+            firstName : 'joe',
+            lastName  : 'dirte',
+            age       : 45,
+            visits    : 20,
+            status    : 'Complicated',
+            progress  : 10,
+            gender:"male",
+        },
+    ];
 	const [currentTab, setCurrentTab] = useState('');
 	return (
 		<div>
@@ -29,6 +68,7 @@ function AccountRecievables() {
 						activeTab={currentTab}
 						setActiveTab={setCurrentTab}
 					/>
+			<StyledTable columns={columns} data={data}/>
 		</div>
 	);
 }
