@@ -9,10 +9,10 @@ importers:
       '@svgr/webpack': ^6.5.1
       eslint: ^8.29.0
       fs-extra: ^11.1.0
-      postcss: ^8.4.16
+      postcss: ^8.4.20
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^5.0.6
-      postcss-preset-env: ^7.8.2
+      postcss-preset-env: ^7.8.3
       stylelint: ^14.16.0
       turbo: ^1.6.3
     devDependencies:
@@ -33,7 +33,7 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.84
+      '@cogoport/components': ^1.0.87
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/product-code-mappings': workspace:0.1.0
@@ -49,7 +49,7 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/commons': link:../common/commons
-      '@cogoport/components': 1.0.84_3bco6rqi4v2rqnojtx4r4tffkm
+      '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/product-code-mappings': link:../packages/product-code-mappings
@@ -65,7 +65,7 @@ importers:
 
   common/commons:
     specifiers:
-      '@cogoport/components': ^1.0.84
+      '@cogoport/components': ^1.0.87
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/utils': ^1.2.0
       '@reduxjs/toolkit': ^1.9.1
@@ -75,7 +75,7 @@ importers:
       react-dom: 18.2.0
       react-redux: ^8.0.5
     dependencies:
-      '@cogoport/components': 1.0.84_3bco6rqi4v2rqnojtx4r4tffkm
+      '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/utils': 1.2.0
       '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
@@ -105,7 +105,7 @@ importers:
   packages/authentication:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.84
+      '@cogoport/components': ^1.0.87
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/request': workspace:0.1.0
       next: 13.0.6
@@ -115,7 +115,7 @@ importers:
       react-redux: ^8.0.5
     dependencies:
       '@cogoport/commons': link:../../common/commons
-      '@cogoport/components': 1.0.84_3bco6rqi4v2rqnojtx4r4tffkm
+      '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
@@ -127,10 +127,10 @@ importers:
   packages/business-finance:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.84
+      '@cogoport/components': ^1.0.87
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/request': workspace:0.1.0
-      '@rollup/plugin-commonjs': ^23.0.4
+      '@rollup/plugin-commonjs': ^23.0.5
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@types/react': ^18.0.26
@@ -144,7 +144,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@cogoport/commons': link:../../common/commons
-      '@cogoport/components': 1.0.84_hfkkryq5dq7m3xacwzsxok5c2y
+      '@cogoport/components': 1.0.87_hfkkryq5dq7m3xacwzsxok5c2y
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
@@ -152,7 +152,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
     devDependencies:
-      '@rollup/plugin-commonjs': 23.0.4_rollup@3.7.4
+      '@rollup/plugin-commonjs': 23.0.5_rollup@3.7.4
       '@rollup/plugin-json': 5.0.2_rollup@3.7.4
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
       '@types/react': 18.0.26
@@ -163,7 +163,7 @@ importers:
 
   packages/home:
     specifiers:
-      '@rollup/plugin-commonjs': ^23.0.4
+      '@rollup/plugin-commonjs': ^23.0.5
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@types/react': ^18.0.26
@@ -182,7 +182,7 @@ importers:
       react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
       typescript: 4.9.4
     devDependencies:
-      '@rollup/plugin-commonjs': 23.0.4_rollup@3.7.4
+      '@rollup/plugin-commonjs': 23.0.5_rollup@3.7.4
       '@rollup/plugin-json': 5.0.2_rollup@3.7.4
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
       '@types/react': 18.0.26
@@ -193,10 +193,10 @@ importers:
   packages/product-code-mappings:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.84
+      '@cogoport/components': ^1.0.87
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/request': workspace:0.1.0
-      '@rollup/plugin-commonjs': ^23.0.4
+      '@rollup/plugin-commonjs': ^23.0.5
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@types/react': ^18.0.26
@@ -210,7 +210,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@cogoport/commons': link:../../common/commons
-      '@cogoport/components': 1.0.84_hfkkryq5dq7m3xacwzsxok5c2y
+      '@cogoport/components': 1.0.87_hfkkryq5dq7m3xacwzsxok5c2y
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
@@ -218,7 +218,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
     devDependencies:
-      '@rollup/plugin-commonjs': 23.0.4_rollup@3.7.4
+      '@rollup/plugin-commonjs': 23.0.5_rollup@3.7.4
       '@rollup/plugin-json': 5.0.2_rollup@3.7.4
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
       '@types/react': 18.0.26
@@ -230,7 +230,7 @@ importers:
   packages/shipment-fcl-freight:
     specifiers:
       '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.84
+      '@cogoport/components': ^1.0.87
       '@cogoport/icons-react': ^1.0.46
       '@cogoport/request': workspace:0.1.0
       next: 13.0.6
@@ -238,7 +238,7 @@ importers:
       react-dom: 18.2.0
     dependencies:
       '@cogoport/commons': link:../../common/commons
-      '@cogoport/components': 1.0.84_3bco6rqi4v2rqnojtx4r4tffkm
+      '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
@@ -1524,8 +1524,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cogoport/components/1.0.84_3bco6rqi4v2rqnojtx4r4tffkm:
-    resolution: {integrity: sha512-k0VnPR1Q6KAmQ784KBA6RkUfb2GfHwfubLwFGjeY/TyuKEM/rwWDLyO5CpJAtKI4WjwUM0lqAoITgGHNCoJkRw==}
+  /@cogoport/components/1.0.87_3bco6rqi4v2rqnojtx4r4tffkm:
+    resolution: {integrity: sha512-XR8otsb/lelxMwJAor3kuwW3dqdytGN/64vLgE+C7YYLvxPDrr+ctiguUrzMNrPV7o/7X5/0J5zio4b4U6MnMg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1550,8 +1550,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.84_hfkkryq5dq7m3xacwzsxok5c2y:
-    resolution: {integrity: sha512-k0VnPR1Q6KAmQ784KBA6RkUfb2GfHwfubLwFGjeY/TyuKEM/rwWDLyO5CpJAtKI4WjwUM0lqAoITgGHNCoJkRw==}
+  /@cogoport/components/1.0.87_hfkkryq5dq7m3xacwzsxok5c2y:
+    resolution: {integrity: sha512-XR8otsb/lelxMwJAor3kuwW3dqdytGN/64vLgE+C7YYLvxPDrr+ctiguUrzMNrPV7o/7X5/0J5zio4b4U6MnMg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1852,8 +1852,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@humanwhocodes/config-array/0.11.7:
-    resolution: {integrity: sha512-kBbPWzN8oVMLb0hOUYXhmxggL/1cJE6ydvjDIGi9EnAGUyA7cLVKQg+d/Dsm+KZwx2czGHrCmMVLiyg8s5JPKw==}
+  /@humanwhocodes/config-array/0.11.8:
+    resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
@@ -2193,8 +2193,8 @@ packages:
       reselect: 4.1.7
     dev: false
 
-  /@rollup/plugin-commonjs/23.0.4_rollup@3.7.4:
-    resolution: {integrity: sha512-bOPJeTZg56D2MCm+TT4psP8e8Jmf1Jsi7pFUMl8BN5kOADNzofNHe47+84WVCt7D095xPghC235/YKuNDEhczg==}
+  /@rollup/plugin-commonjs/23.0.5_rollup@3.7.4:
+    resolution: {integrity: sha512-IwI51j5kCmLMYsErEvZAID/pg7Z1qgyVJ+QIPDDIg1AOPbIGbdTCjuHDWIBCtoF1dvMkXfQv7B2eTadjnLRbmA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0
@@ -2826,8 +2826,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /axe-core/4.6.0:
-    resolution: {integrity: sha512-L3ZNbXPTxMrl0+qTXAzn9FBRvk5XdO56K8CvcCKtlxv44Aw2w2NCclGuvCWxHPw1Riiq3ncP/sxFYj2nUqdoTw==}
+  /axe-core/4.6.1:
+    resolution: {integrity: sha512-lCZN5XRuOnpG4bpMq8v0khrWtUOn+i8lZSb6wHZH56ZfbIEv6XwJV84AAueh9/zi7qPVJ/E4yz6fmsiyOmXR4w==}
     engines: {node: '>=4'}
     dev: true
 
@@ -3585,7 +3585,7 @@ packages:
       aria-query: 4.2.2
       array-includes: 3.1.6
       ast-types-flow: 0.0.7
-      axe-core: 4.6.0
+      axe-core: 4.6.1
       axobject-query: 2.2.0
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
@@ -3672,7 +3672,7 @@ packages:
     hasBin: true
     dependencies:
       '@eslint/eslintrc': 1.3.3
-      '@humanwhocodes/config-array': 0.11.7
+      '@humanwhocodes/config-array': 0.11.8
       '@humanwhocodes/module-importer': 1.0.1
       '@nodelib/fs.walk': 1.2.8
       ajv: 6.12.6
