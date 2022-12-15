@@ -14,7 +14,7 @@ function Layout({ children }) {
 			}}
 			navbar={{ nav }}
 		>
-			<div style={{ margin: '0 100px' }}>{children}</div>
+			<div style={{ margin: '0 20px' }}>{children}</div>
 		</AdminLayout>
 	);
 }
