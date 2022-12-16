@@ -49,21 +49,21 @@ function Login() {
 					<div className={styles.input_container}>
 						<div className={styles.input_label}>Please provide your email and password to login</div>
 						<InputController
-							className={styles.form}
 							{...fields.email}
 							control={control}
 						/>
+
 						{errors.email && <div>{errors.email.message}</div>}
 						<br />
+
 						<div className={styles.password_container}>
 							<InputController
 								{...fields.password}
-								className={styles.password}
 								control={control}
 							/>
 						</div>
 						{errors.password && <div>{errors.password.message}</div>}
-						<Button className={styles.submit_button} type="submit">LOGIN</Button>
+						<Button type="submit">LOGIN</Button>
 
 						<div className={styles.forgot}>
 							Forgot your password?
