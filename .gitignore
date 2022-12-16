@@ -147,3 +147,9 @@ build
 dist/
 .next/
 out/
+
+/cogo-control/pages/*
+/cogo-control/pages/*/*
+!/cogo-control/pages/_app.js
+!/cogo-control/pages/_document.js
+!/cogo-control/pages/index.js
