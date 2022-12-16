@@ -1,1 +1,1 @@
-export { default } from '@cogoport/home/page-components/Home.tsx';
+export { default } from '@cogoport/home/page-components/Home';

@@ -2,7 +2,6 @@
   "name": "@cogoport/product-code-mappings",
   "version": "0.1.0",
   "description": "Package for Product Code Mappings",
-  "license": "MIT",
   "private": true,
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",

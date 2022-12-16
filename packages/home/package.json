@@ -2,7 +2,6 @@
   "name": "@cogoport/home",
   "version": "0.1.0",
   "description": "Home component to test Typescript",
-  "license": "MIT",
   "private": true,
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -15,7 +14,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "@cogoport/components": "^1.0.87"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.5",
@@ -24,6 +24,7 @@
     "@types/react": "^18.0.26",
     "rollup": "^3.7.4",
     "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-typescript2": "^0.34.1"
+    "rollup-plugin-typescript2": "^0.34.1",
+    "next-transpile-modules": "^10.0.0"
   }
 }

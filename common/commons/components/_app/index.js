@@ -1,7 +1,7 @@
+import '@cogoport/components/src/themes/supernova/index.css';
 import { Provider as StoreProvider } from '@cogoport/store';
 import Head from 'next/head';
-import '../theme/index.css';
-import useSWR, { SWRConfig } from 'swr';
+import { SWRConfig } from 'swr';
 
 import handleAuthentication from '../../utils/auth/handleAuthentication';
 import withStore from '../../utils/store';
@@ -28,11 +28,8 @@ function MyApp({ Component, pageProps, store }) {
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
-	const {
-		store, req, pathname, asPath, query = {},
-	} = ctx;
+	const { req, pathname, asPath } = ctx;
 	const isServer = typeof req !== 'undefined';
-
 	const pathPrefix = '/[partner_id]';
 
 	const ctxParams = {

@@ -7,10 +7,14 @@ import { nav } from './nav';
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
 
+	if (hideLayout) {
+		return <div>{children}</div>;
+	}
+
 	return (
 		<AdminLayout
-			showTopbar={!hideLayout}
-			showNavbar={!hideLayout}
+			showTopbar
+			showNavbar
 			topbar={{
 				logo: <LogoSvg
 					height={32}
@@ -19,7 +23,7 @@ function Layout({ children, layout }) {
 			}}
 			navbar={{ nav }}
 		>
-			<div style={{ margin: 0, padding: 20 }}>{children}</div>
+			<div style={{ margin: 0, marginLeft: 80, padding: '24px 20px' }}>{children}</div>
 		</AdminLayout>
 	);
 }

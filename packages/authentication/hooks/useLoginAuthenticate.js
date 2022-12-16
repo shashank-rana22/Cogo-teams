@@ -1,8 +1,9 @@
 import { CogoToast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import useSWR from 'swr';
 
-import getApiErrorString from '../../utils/getApiError';
-import setCookieAndRedirect from '../../utils/setCookieAndRedirect';
+import getApiErrorString from '../utils/getApiError';
+import setCookieAndRedirect from '../utils/setCookieAndRedirect';
 
 const useLoginAuthenticate = () => {
 	const [{ loading, error }, trigger] = useRequest({
