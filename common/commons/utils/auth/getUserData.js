@@ -29,7 +29,6 @@ const getUserData = async ({ store, isServer, req }) => {
 					team_member_ids,
 					permissions_navigations,
 				};
-				console.log('datadatadatadatadata', user_data);
 				await store.dispatch(setProfileStoreState(user_data));
 			}
 		} catch (e) {
