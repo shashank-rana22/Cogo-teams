@@ -9,7 +9,7 @@ export const nav = [
 	{
 		icon      : <IcMBookingDesk />,
 		name      : 'Business Finance',
-		issubnavs : true,
+		isSubNavs : true,
 		options   : [
 			{
 				icon : <IcMBookingDesk />,
