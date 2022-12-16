@@ -1,6 +1,7 @@
 import '@cogoport/components/src/themes/supernova/index.css';
 import { Provider as StoreProvider } from '@cogoport/store';
-import useSWR, { SWRConfig } from 'swr';
+import Head from 'next/head';
+import { SWRConfig } from 'swr';
 
 import handleAuthentication from '../../utils/auth/handleAuthentication';
 import withStore from '../../utils/store';
@@ -8,8 +9,16 @@ import Layout from '../Layout';
 
 function MyApp({ Component, pageProps, store }) {
 	return (
-		<SWRConfig value={{ provider: () => new Map() }}>
+		<SWRConfig value={{
+			provider : () => new Map(),
+			suspense : true,
+			fallback : { 'https://api.github.com/repos/vercel/swr': null },
+		}}
+		>
 			<StoreProvider store={store}>
+				<Head>
+					<title>Admin | Cogoport</title>
+				</Head>
 				<Layout layout={pageProps.layout || 'authenticated'}>
 					<Component {...pageProps} />
 				</Layout>
