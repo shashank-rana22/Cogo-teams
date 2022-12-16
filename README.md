@@ -39,3 +39,18 @@ cogo-admin/cogo-control/package.json
 - To support `Typescript` we need to add a `tsconfig.json` file.
 -  We are using  `Rollup` for build.
 - Add a file `rollup.config.js`and install the dependencies .
+
+## Form
+import {useForm,PillsController,SelectController,SelectController} from "@cogoport/form"
+
+- for using a controlled element send the methods (from useForm) into controlled element and name, label, other options.
+- label is optional
+
+## Eg:  
+const methods=useForm()
+const {watch}=methods
+-- (you can see other properties at https://react-hook-form.com/api/useform which can be extracted and send into useForm )
+
+<form>
+ <SelectController methods={methods} name="test" label="label test" options={[]} />
+</form>
