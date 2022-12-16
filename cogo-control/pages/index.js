@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import useSWR from 'swr';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -13,26 +13,28 @@ export default function Check() {
 	if (!data) return 'Loading...';
 
 	return (
-		<div>
-			<h1>{data.name}</h1>
-			<p>{data.description}</p>
-			<strong>
-				👁
+		<Suspense fallback={<div>Loading...</div>}>
+			<div>
+				<h1>{data.name}</h1>
+				<p>{data.description}</p>
+				<strong>
+					👁
+					{' '}
+					{data.subscribers_count}
+				</strong>
 				{' '}
-				{data.subscribers_count}
-			</strong>
-			{' '}
-			<strong>
-				✨
+				<strong>
+					✨
+					{' '}
+					{data.stargazers_count}
+				</strong>
 				{' '}
-				{data.stargazers_count}
-			</strong>
-			{' '}
-			<strong>
-				🍴
-				{' '}
-				{data.forks_count}
-			</strong>
-		</div>
+				<strong>
+					🍴
+					{' '}
+					{data.forks_count}
+				</strong>
+			</div>
+		</Suspense>
 	);
 }
