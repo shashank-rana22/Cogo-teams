@@ -1,3 +1,4 @@
+import { getCookieFromCtx } from '@cogoport/request/helpers/getCookieFromCtx';
 import { getCookie } from 'cookies-next';
 
 import redirect from '../redirect';
@@ -24,7 +25,6 @@ const handleAuthentication = async ({
 	res,
 	req,
 	pathname,
-	query,
 }) => {
 	const asPrefix = '';
 
@@ -47,6 +47,11 @@ const handleAuthentication = async ({
 		redirect({ isServer, res, path: '/' });
 		return { asPrefix };
 	}
+	// if (asPath === '/' && user_data?.partner && user_data?.partner?.id) {
+	// 	asPrefix = `/${user_data?.partner?.id}`;
+	// 	redirect({ isServer, res, path: asPrefix });
+	// 	return { asPrefix };
+	// }
 
 	const userData = await getUserData({
 		store,

@@ -1,6 +1,5 @@
+import '@cogoport/components/src/themes/supernova/index.css';
 import { Provider as StoreProvider } from '@cogoport/store';
-import Head from 'next/head';
-import '../theme/index.css';
 import useSWR, { SWRConfig } from 'swr';
 
 import handleAuthentication from '../../utils/auth/handleAuthentication';
@@ -9,16 +8,8 @@ import Layout from '../Layout';
 
 function MyApp({ Component, pageProps, store }) {
 	return (
-		<SWRConfig value={{
-			provider : () => new Map(),
-			suspense : true,
-			fallback : { 'https://api.github.com/repos/vercel/swr': null },
-		}}
-		>
+		<SWRConfig value={{ provider: () => new Map() }}>
 			<StoreProvider store={store}>
-				<Head>
-					<title>Admin | Cogoport</title>
-				</Head>
 				<Layout layout={pageProps.layout || 'authenticated'}>
 					<Component {...pageProps} />
 				</Layout>
@@ -28,11 +19,8 @@ function MyApp({ Component, pageProps, store }) {
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
-	const {
-		store, req, pathname, asPath, query = {},
-	} = ctx;
+	const { req, pathname, asPath } = ctx;
 	const isServer = typeof req !== 'undefined';
-
 	const pathPrefix = '/[partner_id]';
 
 	const ctxParams = {

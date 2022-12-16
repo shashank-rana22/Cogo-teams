@@ -9,28 +9,34 @@ const getUserData = async ({ store, isServer, req }) => {
 
 	const setData = async () => {
 		try {
-			const data = await getUserSession({ req });
-
-			console.log('datadatadatadatadata', data);
+			const { data } = await getUserSession({ req });
 
 			if (!data.hasError && !isEmpty(data) && !isEmpty(data.data)) {
-				const { user, partner } = data.data;
-				const partners = data.data.partners || [];
-
+				const {
+					user,
+					partner,
+					partners,
+					session_type,
+					team_member_ids,
+					permissions_navigations,
+				} = (data || {}).data || {};
+				user_data = (data || {}).data || {};
 				user_data = {
 					...user,
+					partner,
 					partners: partner ? [partner] : partners,
+					session_type,
+					team_member_ids,
+					permissions_navigations,
 				};
-
-				if (user_data.id) {
-					await store.dispatch(setProfileStoreState(user_data));
-				}
+				console.log('datadatadatadatadata', user_data);
+				await store.dispatch(setProfileStoreState(user_data));
 			}
 		} catch (e) {
-			console.log(e);
+			console.log('in catch');
 		}
 	};
-
+	// console.log('storeee', store);
 	if (isServer) {
 		await setData();
 	} else {
