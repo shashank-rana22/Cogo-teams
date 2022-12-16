@@ -2,12 +2,12 @@ import React from 'react';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
-import { ConfigType, TypeObj } from './Interfaces/index';
+import { ConfigType, NestedObj } from './Interfaces/index';
 
 export interface Props {
 	config: ConfigType;
-	sort?: TypeObj;
-	setSort?: any;
+	sort?: NestedObj;
+	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>
 	itemData?: any[];
 }
 

@@ -7,7 +7,6 @@ export const PAYRUN_PAID_CONFIG = {
 			key   : 'billNumber',
 			func  : 'renderClickableTooltip',
 			span  : 1.3,
-			link  : 'billPdfUrl',
 		},
 		{
 			label : 'Job Type',

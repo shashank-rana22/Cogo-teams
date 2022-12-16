@@ -1,6 +1,5 @@
 {
     "include": [
-      "next-env.d.ts",
       "page-components/**/*",
       "rollup.config.js",
       ".eslintrc.js"

@@ -1,21 +1,21 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import React from 'react';
 
-import { TypeObj } from './Interfaces/index';
+import { NestedObj, FieldType } from './Interfaces/index';
 import styles from './styles.module.css';
 
 export interface Props {
-	fields: any[];
-	sort?: TypeObj;
-	setSort?: Function;
+	fields: FieldType[];
+	sort?: NestedObj;
+	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
 	headerStyles?: React.CSSProperties;
 }
 
 function Header({
 	fields, sort, setSort = () => [], headerStyles,
 }:Props) {
-	const handleOnChange = (item: { sorting: { name: any; }; }) => {
-		const fieldType = item.sorting.name;
+	const handleOnChange = (item: FieldType) => {
+		const fieldType = item.sorting!.name;
 		setSort(() => ({
 			[fieldType]: sort?.[fieldType] === 'asc' ? 'desc' : 'asc',
 		}));

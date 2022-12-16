@@ -1,15 +1,16 @@
 import React from 'react';
 
 import getValue from './getValue';
+import { FieldType, NestedObj, ConfigType } from './Interfaces/index';
 import styles from './styles.module.css';
 
 export interface Props {
-	fields: any[];
+	fields: FieldType[];
 	itemStyles?: React.CSSProperties;
 	singleitem?: any;
-	functions?: any;
-	config?:any;
-	isMobile?:any;
+	functions?: NestedObj;
+	config: ConfigType;
+	isMobile?: boolean;
 }
 
 function CardColumn({
@@ -36,9 +37,9 @@ function CardColumn({
 								isMobile ? styles.isMobile : ''
 							}`}
 							style={{
-								'--span': field.span || 1,
+								'--span': (field.span || 1),
 								...itemStyle,
-							}}
+							} as React.CSSProperties}
 						>
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>

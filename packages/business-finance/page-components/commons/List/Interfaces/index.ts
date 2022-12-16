@@ -3,13 +3,24 @@ export interface ConfigType {
 	headerStyles?: React.CSSProperties;
 	itemStyles?: React.CSSProperties;
 	bodyStyles?: React.CSSProperties;
-	fields:any[];
-}
-
-export interface TypeObj {
-	[key:string]:string;
+	clickable?:boolean;
+	fields:FieldType[];
 }
 
 export interface NestedObj {
 	[key:string]:string;
+}
+
+export interface SortingType {
+	name:string;
+}
+
+export interface FieldType {
+	key? : string;
+	label? : string;
+	sorting? : SortingType;
+	span : number;
+	className? : string;
+	styles?: NestedObj;
+	func? : string;
 }
