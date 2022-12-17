@@ -1,1 +1,1 @@
-export { default } from '@cogoport/business-finance/page-components/account-receivables';
+export { default } from 'packages/business-finance/page-components/AccountReceivables';

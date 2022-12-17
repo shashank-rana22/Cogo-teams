@@ -1,6 +1,5 @@
 import { CogoToast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import useSWR from 'swr';
 
 import getApiErrorString from '../utils/getApiError';
 import setCookieAndRedirect from '../utils/setCookieAndRedirect';
@@ -9,7 +8,7 @@ const useLoginAuthenticate = () => {
 	const [{ loading, error }, trigger] = useRequest({
 		url    : '/login_user',
 		method : 'post',
-	}, { manual: true });
+	}, { manual: false });
 
 	const onSubmit = async (values, e) => {
 		e.preventDefault();

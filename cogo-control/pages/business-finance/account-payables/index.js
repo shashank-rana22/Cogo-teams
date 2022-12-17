@@ -1,1 +1,1 @@
-export { default } from '@cogoport/business-finance/page-components/account-payables';
+export { default } from 'packages/business-finance/page-components/AccountPayables';

@@ -39,7 +39,6 @@ importers:
       '@cogoport/components': ^1.0.87
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.46
-      '@cogoport/product-code-mappings': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -56,7 +55,6 @@ importers:
       '@cogoport/components': 1.0.87_3bco6rqi4v2rqnojtx4r4tffkm
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
-      '@cogoport/product-code-mappings': link:../packages/product-code-mappings
       '@cogoport/request': link:../common/request
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/store': link:../common/store
@@ -219,43 +217,6 @@ importers:
       rollup: 3.7.4
       rollup-plugin-delete: 2.0.0
       rollup-plugin-typescript2: 0.34.1_fhibmf72xnv5tve6nwed265eae
-
-  packages/product-code-mappings:
-    specifiers:
-      '@cogoport/commons': workspace:0.1.0
-      '@cogoport/components': ^1.0.87
-      '@cogoport/icons-react': ^1.0.46
-      '@cogoport/request': workspace:0.1.0
-      '@rollup/plugin-commonjs': ^23.0.5
-      '@rollup/plugin-json': ^5.0.2
-      '@rollup/plugin-node-resolve': ^15.0.1
-      '@types/react': ^18.0.26
-      next: 13.0.6
-      react: 18.2.0
-      react-dom: 18.2.0
-      react-redux: ^8.0.5
-      rollup: ^3.7.4
-      rollup-plugin-delete: ^2.0.0
-      rollup-plugin-typescript2: ^0.34.1
-      typescript: ^4.9.4
-    dependencies:
-      '@cogoport/commons': link:../../common/commons
-      '@cogoport/components': 1.0.87_hfkkryq5dq7m3xacwzsxok5c2y
-      '@cogoport/icons-react': 1.0.46_biqbaboplfbrettd7655fr4n2y
-      '@cogoport/request': link:../../common/request
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
-    devDependencies:
-      '@rollup/plugin-commonjs': 23.0.5_rollup@3.7.4
-      '@rollup/plugin-json': 5.0.2_rollup@3.7.4
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
-      '@types/react': 18.0.26
-      rollup: 3.7.4
-      rollup-plugin-delete: 2.0.0
-      rollup-plugin-typescript2: 0.34.1_fhibmf72xnv5tve6nwed265eae
-      typescript: 4.9.4
 
   packages/shipment-fcl-freight:
     specifiers:

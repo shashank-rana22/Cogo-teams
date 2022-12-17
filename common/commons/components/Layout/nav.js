@@ -9,7 +9,7 @@ export const nav = [
 	{
 		icon      : <IcMBookingDesk />,
 		name      : 'Business Finance',
-		issubnavs : true,
+		isSubNavs : true,
 		options   : [
 			{
 				icon : <IcMBookingDesk />,
@@ -20,11 +20,11 @@ export const nav = [
 				icon : <IcMBookingDesk />,
 				name : 'AR',
 				href : '/business-finance/account-receivables',
+			},
+			{
+				icon : <IcMBookingDesk />,
+				name : 'Product Code Mappings',
+				href : '/business-finance/product-code-mappings',
 			}],
-	},
-	{
-		icon : <IcMBookingDesk />,
-		name : 'Product Code Mappings',
-		href : '/product-code-mappings',
 	},
 ];

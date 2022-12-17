@@ -10,7 +10,7 @@ function Items({ item, resetSubnavs }) {
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 	const router = useRouter();
 	const handleClickOnItem = (itemdata) => {
-		if (!itemdata.issubnavs) {
+		if (!itemdata.isSubNavs) {
 			router.push(item.href);
 		} else {
 			setShowSubNav(!showSubNav);
@@ -23,7 +23,7 @@ function Items({ item, resetSubnavs }) {
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-			{item.issubnavs && (
+			{item.isSubNavs && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
@@ -37,7 +37,7 @@ function Items({ item, resetSubnavs }) {
 	return (
 		<>
 			<li key={item.name} className={styles.list_item}>
-				{!item.issubnavs ? (
+				{!item.isSubNavs ? (
 					<Link href={item.href ?? ''} passHref>
 						{singleNav}
 					</Link>
