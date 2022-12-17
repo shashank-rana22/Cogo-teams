@@ -1,4 +1,3 @@
-import { getCookieFromCtx } from '@cogoport/request/helpers/getCookieFromCtx';
 import { getCookie } from 'cookies-next';
 
 import redirect from '../redirect';
