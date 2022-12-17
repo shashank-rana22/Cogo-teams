@@ -1,4 +1,4 @@
-import { CogoToast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import getApiErrorString from '../utils/getApiError';
@@ -28,7 +28,7 @@ const useLoginAuthenticate = () => {
 			}
 		} catch (err) {
 			console.log(err);
-			CogoToast.error(getApiErrorString(error?.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

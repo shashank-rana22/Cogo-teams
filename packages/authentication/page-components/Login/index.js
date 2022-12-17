@@ -1,5 +1,5 @@
 import { FluidContainer, Button } from '@cogoport/components';
-import { useForm, InputController } from '@cogoport/components/src/forms';
+import { useForm, InputController } from '@cogoport/forms';
 import { IcCMicrosoft } from '@cogoport/icons-react';
 import React from 'react';
 
