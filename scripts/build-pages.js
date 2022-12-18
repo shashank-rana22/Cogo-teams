@@ -1,8 +1,5 @@
 const fs = require('fs-extra');
 
-// TODO: We will be moving pages in their respective packages
-//  so to move those pages to cogo-control/pages
-
 const getDirectories = (source) => fs.readdirSync(source, { withFileTypes: true })
 	.filter((dirent) => dirent.isDirectory())
 	.map((dirent) => dirent.name);

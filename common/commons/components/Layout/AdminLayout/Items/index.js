@@ -6,16 +6,19 @@ import React, { useEffect, useState } from 'react';
 import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
-	const [showSubNav, setShowSubNav] = useState(false);
-	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 	const router = useRouter();
+	const [showSubNav, setShowSubNav] = useState(false);
+
+	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
+
 	const handleClickOnItem = (itemdata) => {
 		if (!itemdata.isSubNavs) {
-			router.push(item.href);
+			router.push(itemdata.href);
 		} else {
 			setShowSubNav(!showSubNav);
 		}
 	};
+
 	const singleNav = (
 		<div
 			className={styles.list_item_inner}
@@ -38,25 +41,22 @@ function Items({ item, resetSubnavs }) {
 		<>
 			<li key={item.name} className={styles.list_item}>
 				{!item.isSubNavs ? (
-					<Link href={item.href ?? ''} passHref>
+					<Link href={item.href ?? ''}>
 						{singleNav}
 					</Link>
 				) : singleNav }
 			</li>
-			{ showSubNav && item?.options?.map((it) => (
-				<li key={it.name} className={styles.list_sub_item}>
-					<Link href={it.href} passHref>
-						<div
-							className={styles.list_item_inner}
-							role="button"
-							tabIndex={0}
-							onClick={() => handleClickOnItem(it)}
-						>
-							{it.icon}
-							<span>
-								{it.name}
-							</span>
-						</div>
+			{showSubNav && item?.options?.map((singleOption) => (
+				<li key={singleOption.name} className={styles.list_sub_item}>
+					<Link
+						onClick={() => handleClickOnItem(singleOption)}
+						className={styles.list_item_inner}
+						href={singleOption.href ?? ''}
+					>
+						{singleOption.icon}
+						<span>
+							{singleOption.name}
+						</span>
 					</Link>
 				</li>
 			))}
