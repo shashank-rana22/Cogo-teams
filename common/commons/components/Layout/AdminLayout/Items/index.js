@@ -7,6 +7,8 @@ import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const router = useRouter();
+	const { asPath } = router;
+
 	const [showSubNav, setShowSubNav] = useState(false);
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
@@ -19,9 +21,11 @@ function Items({ item, resetSubnavs }) {
 		}
 	};
 
+	const isHref = [asPath].includes(item.href);
+
 	const singleNav = (
 		<div
-			className={styles.list_item_inner}
+			className={isHref ? styles.active_item : styles.list_item_inner}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
@@ -46,20 +50,23 @@ function Items({ item, resetSubnavs }) {
 					</Link>
 				) : singleNav }
 			</li>
-			{showSubNav && item?.options?.map((singleOption) => (
-				<li key={singleOption.name} className={styles.list_sub_item}>
-					<Link
-						onClick={() => handleClickOnItem(singleOption)}
-						className={styles.list_item_inner}
-						href={singleOption.href ?? ''}
-					>
-						{singleOption.icon}
-						<span>
-							{singleOption.name}
-						</span>
-					</Link>
-				</li>
-			))}
+			{showSubNav && item?.options?.map((singleOption) => {
+				const isHrefMatch = [asPath].includes(singleOption.href);
+				return (
+					<li key={singleOption.name} className={styles.list_sub_item}>
+						<Link
+							onClick={() => handleClickOnItem(singleOption)}
+							className={isHrefMatch ? styles.active_item : styles.list_item_inner}
+							href={singleOption.href ?? ''}
+						>
+							{singleOption.icon}
+							<span>
+								{singleOption.name}
+							</span>
+						</Link>
+					</li>
+				);
+			})}
 		</>
 	);
 }
