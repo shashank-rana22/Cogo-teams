@@ -4,6 +4,7 @@ export interface ConfigType {
 	itemStyles?: React.CSSProperties;
 	bodyStyles?: React.CSSProperties;
 	clickable?:boolean;
+	showHeaderCheckbox?:boolean;
 	fields:FieldType[];
 }
 

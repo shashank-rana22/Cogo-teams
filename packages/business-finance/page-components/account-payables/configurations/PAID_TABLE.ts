@@ -1,7 +1,8 @@
 export const PAYRUN_PAID_CONFIG = {
-	showHeader   : true,
-	headerStyles : { marginBottom: '16px', borderRadius: '8px' },
-	fields       : [
+	showHeader         : true,
+	showHeaderCheckbox : true,
+	headerStyles       : { marginBottom: '16px', borderRadius: '8px' },
+	fields             : [
 		{
 			label : 'Invoice Number',
 			key   : 'billNumber',

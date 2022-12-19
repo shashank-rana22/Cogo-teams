@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
@@ -9,14 +9,15 @@ export interface Props {
 	sort?: NestedObj;
 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>
 	itemData?: any[];
+	renderHeaderCheckbox?:()=>(ReactNode | '');
 }
 
 function List({
-	config, sort, setSort, itemData,
+	config, sort, setSort, itemData, renderHeaderCheckbox,
 }:Props) {
 	const isMobile = false;
 	const {
-		showHeader = true, fields, headerStyles, itemStyles, bodyStyles,
+		showHeader = true, fields, headerStyles, itemStyles, bodyStyles, showHeaderCheckbox,
 	} = config;
 	return (
 		<section>
@@ -26,6 +27,8 @@ function List({
 					sort={sort}
 					setSort={setSort}
 					headerStyles={headerStyles}
+					showHeaderCheckbox={showHeaderCheckbox}
+					renderHeaderCheckbox={renderHeaderCheckbox}
 				/>
 			)}
 			<div style={bodyStyles}>

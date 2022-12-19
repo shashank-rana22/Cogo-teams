@@ -11,7 +11,7 @@ function Items({ item, resetSubnavs }) {
 	const router = useRouter();
 	const handleClickOnItem = (itemdata) => {
 		if (!itemdata.issubnavs) {
-			router.push(item.href);
+			router.push(itemdata.href);
 		} else {
 			setShowSubNav(!showSubNav);
 		}
