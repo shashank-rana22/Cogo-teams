@@ -1,14 +1,14 @@
 import React from 'react';
 
 import getValue from './getValue';
-import { FieldType, NestedObj, ConfigType } from './Interfaces/index';
+import { FieldType, FunctionObjects, ConfigType } from './Interfaces/index';
 import styles from './styles.module.css';
 
 export interface Props {
 	fields: FieldType[];
 	itemStyles?: React.CSSProperties;
 	singleitem?: any;
-	functions?: NestedObj;
+	functions?: FunctionObjects;
 	config: ConfigType;
 	isMobile?: boolean;
 }
@@ -17,7 +17,7 @@ function CardColumn({
 	fields,
 	itemStyles,
 	singleitem,
-	functions,
+	functions={},
 	config,
 	isMobile,
 }:Props) {

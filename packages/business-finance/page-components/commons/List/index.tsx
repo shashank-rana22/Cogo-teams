@@ -2,7 +2,8 @@ import React, { ReactNode } from 'react';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
-import { ConfigType, NestedObj } from './Interfaces/index';
+import { ConfigType, NestedObj,FunctionObjects } from './Interfaces/index';
+import commonFunctions from "../..//commons/List/commonFunctions";
 
 export interface Props {
 	config: ConfigType;
@@ -10,10 +11,11 @@ export interface Props {
 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>
 	itemData?: any[];
 	renderHeaderCheckbox?:()=>(ReactNode | '');
+	functions?:FunctionObjects;
 }
 
 function List({
-	config, sort, setSort, itemData, renderHeaderCheckbox,
+	config, sort, setSort, itemData, renderHeaderCheckbox,functions={},
 }:Props) {
 	const isMobile = false;
 	const {
@@ -38,7 +40,7 @@ function List({
 						itemStyles={itemStyles}
 						singleitem={singleitem}
 						config={config}
-						functions={{}}
+						functions={commonFunctions(functions)}
 						isMobile={isMobile}
 					/>
 				))}

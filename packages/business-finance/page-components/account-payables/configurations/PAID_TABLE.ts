@@ -6,7 +6,7 @@ export const PAYRUN_PAID_CONFIG = {
 		{
 			label : 'Invoice Number',
 			key   : 'billNumber',
-			func  : 'renderClickableTooltip',
+			func  : 'renderTag',
 			span  : 1.3,
 		},
 		{

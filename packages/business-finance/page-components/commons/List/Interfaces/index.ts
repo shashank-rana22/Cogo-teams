@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export interface ConfigType {
 	showHeader?:boolean;
@@ -28,7 +28,7 @@ export interface FieldType {
 	key : string;
 	topKey?: GenericObject;
 	bottomKey?: GenericObject;
-	label? : string | React.FC;
+	label? : string | ReactNode;
 	sorting? : SortingType;
 	span : number;
 	className? : string;
