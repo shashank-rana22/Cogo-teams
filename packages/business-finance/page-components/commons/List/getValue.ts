@@ -1,36 +1,31 @@
 import getByKey from 'lodash/get';
 import lodashIsEmpty from 'lodash/isEmpty';
 import startCase from 'lodash/startCase';
+import React from 'react';
+
+import { GenericObject, FunctionObjects, FieldType } from './Interfaces/index';
 
 const ACTIONS = {
 	startCase,
 };
 
-const isEmpty = (input: any) => {
+type TypeObject = string | number | Date | GenericObject | React.FC ;
+
+type EmptyState = string | number | Date | React.FC;
+
+const isEmpty = (input: TypeObject) => {
 	if (input instanceof Date) {
 		return false;
 	}
 	return lodashIsEmpty(input);
 };
 
-const iterateSubKeys = (itemField:any, value:any) => {
-	let val = value;
-	if ((itemField.subKeys || []).length) {
-		itemField.subKeys.forEach((subKey:any) => {
-			val = (val || {})[subKey];
-		});
-	}
-	return val;
-};
-
-const getValue = (itemData:any, itemField:any, functions:any, emptyState:any) => {
+const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, emptyState:EmptyState) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';
 	}
 
 	let val = getByKey(itemData, itemField.key);
-
-	val = iterateSubKeys(itemField, val);
 
 	if (itemField.func) {
 		if (functions[itemField.func]) {

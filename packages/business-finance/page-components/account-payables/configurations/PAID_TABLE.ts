@@ -58,6 +58,7 @@ export const PAYRUN_PAID_CONFIG = {
 			func  : 'renderStatus',
 		},
 		{
+			key  : '',
 			func : 'renderDropDownData',
 			span : 0.5,
 		},
