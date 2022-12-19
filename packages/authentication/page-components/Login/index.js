@@ -9,8 +9,8 @@ import useLoginAuthenticate from '../../hooks/useLoginAuthenticate';
 import styles from './styles.module.css';
 
 function Login() {
-	const { onSubmit = () => {} } = useLoginAuthenticate();
-	const { onLogin = () => {} } = useFormLoginwithMS();
+	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
+	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
 
 	return (
@@ -25,7 +25,9 @@ function Login() {
 
 				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>
-						<div className={styles.input_label}>Please provide your email and password to login</div>
+						<div className={styles.input_label}>
+							Please provide your email and password to login
+						</div>
 						<InputController
 							control={control}
 							name="email"
@@ -44,7 +46,13 @@ function Login() {
 							/>
 						</div>
 						{errors.password && <div>{errors.password.message}</div>}
-						<Button className={styles.submit_button} type="submit">LOGIN</Button>
+						<Button
+							loading={loading}
+							className={styles.submit_button}
+							type="submit"
+						>
+							LOGIN
+						</Button>
 
 						<div className={styles.forgot}>
 							<span>Forgot your password? </span>
@@ -56,7 +64,11 @@ function Login() {
 							<hr className={styles.line} style={{ width: '40%' }} />
 						</div>
 
-						<Button onClick={onLogin}>
+						<Button
+							loading={socialLoginLoading}
+							themeType="secondary"
+							onClick={onLogin}
+						>
 							<IcCMicrosoft />
 							<p className={styles.micro}>CONTINUE WITH MICROSOFT</p>
 						</Button>

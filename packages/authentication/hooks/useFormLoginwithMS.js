@@ -4,10 +4,7 @@ import { useState } from 'react';
 const useFormLoginwithMS = () => {
 	const [responseUrl, setResponseUrl] = useState({});
 
-	const [
-		{ data: putData, loading: putLoading, error: putError },
-		trigger,
-	] = useRequest(
+	const [{ loading: socialLoginLoading }, trigger] = useRequest(
 		{
 			url    : '/get_user_social_login_link',
 			method : 'get',
@@ -48,6 +45,7 @@ const useFormLoginwithMS = () => {
 	return {
 		onLogin,
 		responseUrl,
+		socialLoginLoading,
 	};
 };
 

@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@cogoport/eslint-config': ^1.0.18
       '@cogoport/stylelint-config': ^1.0.3
+      '@reduxjs/toolkit': ^1.9.1
       '@svgr/webpack': ^6.5.1
       eslint: ^8.30.0
       fs-extra: ^11.1.0
@@ -13,10 +14,15 @@ importers:
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^5.0.6
       postcss-preset-env: ^7.8.3
+      react-redux: ^8.0.5
+      redux-devtools-extension: ^2.13.9
       stylelint: ^14.16.0
       swr: ^2.0.0
       turbo: ^1.6.3
     dependencies:
+      '@reduxjs/toolkit': 1.9.1_react-redux@8.0.5
+      react-redux: 8.0.5
+      redux-devtools-extension: 2.13.9
       swr: 2.0.0
     devDependencies:
       '@cogoport/eslint-config': 1.0.18_eslint@8.30.0
@@ -81,9 +87,6 @@ importers:
       qs: ^6.11.0
       react: 18.2.0
       react-dom: 18.2.0
-      react-redux: ^8.0.5
-      redux: ^4.2.0
-      redux-thunk: ^2.4.2
     dependencies:
       '@cogoport/components': 1.0.96_d6vset3ctjiu5fxc4rylzjmlyy
       '@cogoport/icons-react': 1.0.47_biqbaboplfbrettd7655fr4n2y
@@ -96,9 +99,6 @@ importers:
       qs: 6.11.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.5_e42enmjmqb4imi3q3iaq2rrebm
-      redux: 4.2.0
-      redux-thunk: 2.4.2_redux@4.2.0
 
   common/forms:
     specifiers:
@@ -165,17 +165,13 @@ importers:
 
   common/store:
     specifiers:
+      next: 13.0.6
       react: 18.2.0
       react-dom: 18.2.0
-      react-redux: ^8.0.5
-      redux: ^4.2.0
-      redux-thunk: ^2.4.2
     dependencies:
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.5_e42enmjmqb4imi3q3iaq2rrebm
-      redux: 4.2.0
-      redux-thunk: 2.4.2_redux@4.2.0
 
   packages/authentication:
     specifiers:
@@ -257,7 +253,6 @@ importers:
       next-transpile-modules: ^10.0.0
       react: 18.2.0
       react-dom: 18.2.0
-      react-redux: ^8.0.5
       rollup: ^3.7.5
       rollup-plugin-delete: ^2.0.0
       rollup-plugin-typescript2: ^0.34.1
@@ -269,7 +264,6 @@ importers:
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
       typescript: 4.9.4
     devDependencies:
       '@rollup/plugin-commonjs': 23.0.5_rollup@3.7.5
@@ -2233,6 +2227,24 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.14.0
     dev: true
+
+  /@reduxjs/toolkit/1.9.1_react-redux@8.0.5:
+    resolution: {integrity: sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==}
+    peerDependencies:
+      react: ^16.9.0 || ^17.0.0 || ^18
+      react-redux: ^7.2.1 || ^8.0.2
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
+    dependencies:
+      immer: 9.0.16
+      react-redux: 8.0.5
+      redux: 4.2.0
+      redux-thunk: 2.4.2_redux@4.2.0
+      reselect: 4.1.7
+    dev: false
 
   /@rollup/plugin-commonjs/23.0.5_rollup@3.7.5:
     resolution: {integrity: sha512-IwI51j5kCmLMYsErEvZAID/pg7Z1qgyVJ+QIPDDIg1AOPbIGbdTCjuHDWIBCtoF1dvMkXfQv7B2eTadjnLRbmA==}
@@ -4257,6 +4269,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/9.0.16:
+    resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -5621,6 +5637,35 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-redux/8.0.5:
+    resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
+    peerDependencies:
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.20.6
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
+      react-is: 18.2.0
+      use-sync-external-store: 1.2.0
+    dev: false
+
   /react-redux/8.0.5_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
     peerDependencies:
@@ -5649,38 +5694,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
-
-  /react-redux/8.0.5_e42enmjmqb4imi3q3iaq2rrebm:
-    resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
-    peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-      react-native: '>=0.59'
-      redux: ^4
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-      redux:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.20.6
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/use-sync-external-store': 0.0.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-is: 18.2.0
-      redux: 4.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
@@ -5757,6 +5770,13 @@ packages:
       indent-string: 4.0.0
       strip-indent: 3.0.0
     dev: true
+
+  /redux-devtools-extension/2.13.9:
+    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
+    deprecated: Package moved to @redux-devtools/extension.
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+    dev: false
 
   /redux-thunk/2.4.2_redux@4.2.0:
     resolution: {integrity: sha512-+P3TjtnP0k/FEjcBL5FZpoovtvrTNT/UXd4/sluaSyrURlSlhLSzEdfsTBW7WsKB6yPvgd7q/iZPICFjW4o57Q==}
@@ -5837,6 +5857,10 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /reselect/4.1.7:
+    resolution: {integrity: sha512-Zu1xbUt3/OPwsXL46hvOOoQrap2azE7ZQbokq61BQfiXvhewsKDwhMeZjTX9sX0nvw1t/U5Audyn1I9P/m9z0A==}
+    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}

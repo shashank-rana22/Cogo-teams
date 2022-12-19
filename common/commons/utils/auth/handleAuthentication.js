@@ -46,13 +46,8 @@ const handleAuthentication = async ({
 		redirect({ isServer, res, path: '/' });
 		return { asPrefix };
 	}
-	// if (asPath === '/' && user_data?.partner && user_data?.partner?.id) {
-	// 	asPrefix = `/${user_data?.partner?.id}`;
-	// 	redirect({ isServer, res, path: asPrefix });
-	// 	return { asPrefix };
-	// }
 
-	const userData = await getUserData({
+	await getUserData({
 		store,
 		isServer,
 		req,
