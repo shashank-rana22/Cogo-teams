@@ -16,7 +16,8 @@
     "react-redux": "^8.0.5",
     "typescript": "^4.9.4",
     "@cogoport/components": "^1.0.96",
-    "@cogoport/icons-react": "^1.0.47"
+    "@cogoport/icons-react": "^1.0.47",
+    "@cogoport/forms": "workspace:0.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.5",
