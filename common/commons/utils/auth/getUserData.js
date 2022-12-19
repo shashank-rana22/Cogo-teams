@@ -40,7 +40,7 @@ const getUserData = async ({ store, isServer, req }) => {
 	} else {
 		user_data = store.getState().profile;
 	}
-	
+
 	return user_data;
 };
 

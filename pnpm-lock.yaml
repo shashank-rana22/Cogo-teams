@@ -6,7 +6,6 @@ importers:
     specifiers:
       '@cogoport/eslint-config': ^1.0.18
       '@cogoport/stylelint-config': ^1.0.3
-      '@reduxjs/toolkit': ^1.9.1
       '@svgr/webpack': ^6.5.1
       eslint: ^8.30.0
       fs-extra: ^11.1.0
@@ -15,14 +14,11 @@ importers:
       postcss-nested: ^5.0.6
       postcss-preset-env: ^7.8.3
       react-redux: ^8.0.5
-      redux-devtools-extension: ^2.13.9
       stylelint: ^14.16.0
       swr: ^2.0.0
       turbo: ^1.6.3
     dependencies:
-      '@reduxjs/toolkit': 1.9.1_react-redux@8.0.5
       react-redux: 8.0.5
-      redux-devtools-extension: 2.13.9
       swr: 2.0.0
     devDependencies:
       '@cogoport/eslint-config': 1.0.18_eslint@8.30.0
@@ -165,10 +161,14 @@ importers:
 
   common/store:
     specifiers:
+      '@redux-devtools/extension': ^3.2.3
+      '@reduxjs/toolkit': ^1.9.1
       next: 13.0.6
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
+      '@redux-devtools/extension': 3.2.3
+      '@reduxjs/toolkit': 1.9.1_react@18.2.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -2228,7 +2228,16 @@ packages:
       fastq: 1.14.0
     dev: true
 
-  /@reduxjs/toolkit/1.9.1_react-redux@8.0.5:
+  /@redux-devtools/extension/3.2.3:
+    resolution: {integrity: sha512-y90IIqdQF6kIkP4KfBCfiFrnu9KMrEPUmcnb5A3v12tjfwRJUXecX8vCEbFqqJLjOomvVmis0Aal7QdFjk6CRQ==}
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+    dependencies:
+      '@babel/runtime': 7.20.6
+      immutable: 4.1.0
+    dev: false
+
+  /@reduxjs/toolkit/1.9.1_react@18.2.0:
     resolution: {integrity: sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
@@ -2240,7 +2249,7 @@ packages:
         optional: true
     dependencies:
       immer: 9.0.16
-      react-redux: 8.0.5
+      react: 18.2.0
       redux: 4.2.0
       redux-thunk: 2.4.2_redux@4.2.0
       reselect: 4.1.7
@@ -4273,6 +4282,10 @@ packages:
     resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
     dev: false
 
+  /immutable/4.1.0:
+    resolution: {integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -5770,13 +5783,6 @@ packages:
       indent-string: 4.0.0
       strip-indent: 3.0.0
     dev: true
-
-  /redux-devtools-extension/2.13.9:
-    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
-    deprecated: Package moved to @redux-devtools/extension.
-    peerDependencies:
-      redux: ^3.1.0 || ^4.0.0
-    dev: false
 
   /redux-thunk/2.4.2_redux@4.2.0:
     resolution: {integrity: sha512-+P3TjtnP0k/FEjcBL5FZpoovtvrTNT/UXd4/sluaSyrURlSlhLSzEdfsTBW7WsKB6yPvgd7q/iZPICFjW4o57Q==}
