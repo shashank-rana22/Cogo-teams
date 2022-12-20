@@ -76,6 +76,7 @@ importers:
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
       cookies-next: ^2.1.1
+      dotenv-expand: ^9.0.0
       next: 13.0.6
       nprogress: ^0.2.0
       react: 18.2.0
@@ -87,6 +88,7 @@ importers:
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.0
       cookies-next: 2.1.1
+      dotenv-expand: 9.0.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       nprogress: 0.2.0
       react: 18.2.0
@@ -194,8 +196,10 @@ importers:
   packages/business-finance:
     specifiers:
       '@cogoport/components': ^1.0.96
+      '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.47
-      '@cogoport/request': workspace:0.1.0
+      '@cogoport/request': workspace:*
+      '@cogoport/store': workspace:*
       '@rollup/plugin-commonjs': ^23.0.5
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
@@ -210,8 +214,10 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@cogoport/components': 1.0.96_2inp7jbr7nu6axomrcabhthvfq
+      '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.47_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
