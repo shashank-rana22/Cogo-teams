@@ -1,15 +1,14 @@
 import '@cogoport/components/dist/themes/supernova.css';
-import store from '@cogoport/store';
+import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
+import store, { Provider } from '@cogoport/store';
 import Head from 'next/head';
 import Router from 'next/router';
 import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
 import { useEffect } from 'react';
-import { Provider } from 'react-redux';
 import { SWRConfig } from 'swr';
 
-import handleAuthentication from '../../utils/auth/handleAuthentication';
 import Layout from '../Layout';
 
 function MyApp({ Component, pageProps }) {

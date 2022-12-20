@@ -1,9 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 import { getCookie } from 'cookies-next';
 
-import redirect from '../redirect';
-
 import getUserData from './getUserData';
+import redirect from './redirect';
 
 const UNAUTHENTICATED_PATHS = [
 	'/login',
