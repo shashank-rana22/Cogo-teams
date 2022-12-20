@@ -2,26 +2,25 @@ import '@cogoport/components/dist/themes/supernova.css';
 import store from '@cogoport/store';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useState, useEffect } from 'react';
+import pageProgessBar from 'nprogress';
+import './global.css';
+import 'nprogress/nprogress.css';
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { SWRConfig } from 'swr';
 
 import handleAuthentication from '../../utils/auth/handleAuthentication';
 import Layout from '../Layout';
-import Loader from '../Loader';
 
 function MyApp({ Component, pageProps }) {
-	const [loading, setLoading] = useState(false);
-
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
-			setLoading(true);
+			pageProgessBar.start();
+			pageProgessBar.set(0.4);
 		});
+
 		Router.events.on('routeChangeComplete', () => {
-			setLoading(false);
-		});
-		Router.events.on('routeChangeError', () => {
-			setLoading(false);
+			pageProgessBar.done();
 		});
 	}, [Router]);
 
@@ -37,7 +36,7 @@ function MyApp({ Component, pageProps }) {
 					<title>Admin | Cogoport</title>
 				</Head>
 				<Layout layout={pageProps.layout || 'authenticated'}>
-					{loading ? <Loader /> : <Component {...pageProps} />}
+					<Component {...pageProps} />
 				</Layout>
 			</Provider>
 		</SWRConfig>
@@ -56,9 +55,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		pathPrefix,
 	};
 
-	const unPrefixedPath = `/${asPath.split('/').slice(2).join('/')}`;
-
-	const response = await handleAuthentication(ctxParams);
+	await handleAuthentication(ctxParams);
 
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
