@@ -1,9 +1,95 @@
+import React, { useState } from 'react';
+// import useListBookingPreference from '../../../hooks/revenueDeskHooks/useListBookingPreference';
+import Body from './Body';
+import BookingPreference from './BookingPreference';
+import {IcMArrowRotateDown, IcMArrowRotateUp} from '@cogoport/icons-react'
+import Footer from './Footer';
 import Header from './Header';
+import Services from './Services';
+import styles from './styles.module.css';
 
-const Card = () => {
-	<div>
-		<button>
-			<Header />
-		</button>
-	</div>;
-};
+function Card({
+	data = {},
+	handleCardClick = () => {},
+	activeTab = '',
+	shipment_type,
+	clickedCard,
+}) {
+	const services = (data[`${shipment_type}_services`] || []).map((item) => ({
+		...item,
+		service_type: `${shipment_type}_service`,
+	}));
+	const initialService = services[0];
+	const [selectedService, setSelectedService] = useState(initialService);
+
+	// const {
+	// 	bookingData,
+	// 	bookingLoading = false,
+	// 	setView,
+	// 	view,
+	// } = useListBookingPreference({ data, selectedService });
+
+	const activeService =		activeTab === 'completed' ? selectedService?.id : clickedCard?.service?.id;
+
+	return (
+		<div className={styles.container}>
+			<div
+				className={styles.cardContainer}
+				onClick={
+					services.length === 1
+						? () => handleCardClick({ shipment: data, service: services[0] })
+						: null
+				}
+			>
+				<Header data={data} activeTab={activeTab} />
+				<p className={styles.line} />
+
+				<Body data={data} />
+				<p className={(`${styles.line} ${styles.greyLine}`)} />
+
+				<Footer data={data} />
+				{services.length > 1 ? (
+					<>
+						<p className={styles.line} />
+						<Services
+							services={services}
+							onClick={(service) => {
+								if (activeTab === 'completed') {
+									setSelectedService(service);
+								} else {
+									handleCardClick({ shipment: data, service });
+									setView(true);
+								}
+							}}
+							activeService={activeService}
+						/>
+					</>
+				) : null}
+			</div>
+			{activeTab === 'completed' ? (
+				<>
+					{view ? (
+						<BookingPreference
+							loading={bookingLoading}
+							bookingData={bookingData?.list}
+						/>
+					) : null}
+
+					<div className={styles.subInfo} onClick={() => setView(!view)}>
+						{view ? (
+							<div className={styles.iconWrapper}>
+							<IcMArrowRotateUp height={20} width={20} />
+							</div>
+						) : (
+							<div className={styles.iconWrapper}>
+							<IcMArrowRotateDown height={20} width={20} />
+							</div>
+						)}
+					</div>
+				</>
+			) : null}
+		</div>
+	);
+}
+
+export default Card;

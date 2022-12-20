@@ -1,0 +1,77 @@
+.container{
+    display: flex;
+	align-items: center;
+	gap: 5px;
+	width: 50%;
+	padding: 0px 20px 0px 20px;
+}
+.flexRowOrigin{
+    display: flex;
+	margin-bottom: 6px;
+	flex-direction: column;
+	width: 30%;
+}
+.flexRowDest{
+    display: flex;
+	margin-bottom: 6px;
+	flex-direction: column;
+	width: 40%;
+}
+
+.value{
+    font-size: 12px;
+	font-weight: 700;
+	color: #333333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 65%;
+}
+.iconWrapper{
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+	margin: 0 12px;
+}
+.portCode{
+    display: flex;
+	align-items: center;
+	line-height: 16px;
+}
+.code{
+    margin: 0;
+	font-weight: 400;
+	font-size: 10px;
+	color: #828282;
+	margin-right: 4px;
+}
+.country{
+    margin: 0;
+	font-weight: 400;
+	font-size: 10px;
+	color: #828282;
+}
+.serviceName{
+    margin: 0;
+	font-weight: 400;
+	font-size: 12px;
+	color: #5936f0;
+	margin-top: 4px;
+}
+.iconAndService{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 20px;
+	flex-direction: column;
+
+}
+.icd{
+    font-size: 10px;
+	font-weight: 400;
+	color: #828282;
+}
+.icon{
+	flex-direction: column;
+}

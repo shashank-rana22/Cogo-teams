@@ -1,0 +1,11 @@
+.cargoContainer{
+    display: flex;
+	flex-wrap: wrap;
+}
+
+.multiService{
+    display: flex;
+	flex-wrap: wrap;
+	white-space: nowrap;
+	height: fit-content;
+}

@@ -1,0 +1,115 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 16px 28px;	
+}
+.import {
+	margin: 0;
+	background: #fef6df;
+	border-radius: 4px;
+	padding: 4px 20px;
+	font-weight: 400;
+	font-size: 10px;
+	color: #393f70;
+	display: flex;
+	align-items: center;
+	background: #b3d5fb;
+}
+
+.titleContainer{
+    display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.column {
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 60%;
+}
+
+.timerContainer{
+    display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.timerInfo{
+    font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #cb6464;
+	margin: 0;
+}
+
+.heading{
+    margin: 0;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+	color: #393f70;
+	margin-right: 36px;
+}
+
+.tradeType{
+    margin: 0;
+	background: #fef6df;
+	border-radius: 4px;
+	padding: 4px 20px;
+	font-weight: 400;
+	font-size: 10px;
+	color: #393f70;
+	display: flex;
+	align-items: center;
+
+	
+}
+.bookingSource {
+    margin-left: 10px;
+}
+.svgWrapper{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 8px;
+}
+
+.shipmentId{
+    margin: 0;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #393f70;
+	width: 37%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+.flashButtonContainer{
+	cursor: pointer;
+}
+.cogoAssured{
+	background: #e6fbe9;
+	border-radius: 4px 0px 4px 0px;
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+	width: fit-content;
+	margin-right: 12px;
+	margin-left: 10px;
+}
+
+.iconWrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 6px;
+}
+.text{
+	font-weight: 500;
+	font-size: 10px;
+	color: #333333;
+}

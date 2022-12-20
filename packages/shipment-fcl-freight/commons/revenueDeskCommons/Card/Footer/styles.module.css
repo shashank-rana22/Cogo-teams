@@ -1,0 +1,31 @@
+.container{
+    width: 100%;
+	padding: 20px 48px;
+}
+
+.subContainer{
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.key{
+    margin: 0;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	margin-right: 8px;
+	color: #828282;
+}
+.value{
+    margin: 0;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 12px;
+	color: #333;
+}
+.row{
+    display: flex;
+	align-items: center;
+}
