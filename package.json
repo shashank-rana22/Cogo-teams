@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Turbo repo for Cogo admin",
   "repository": "git@github.com:Cogoport/cogo-admin.git",
-  "author": "Rudraprasad Das <brayn003@gmail.com>",
+  "author": "Prashant Paddune <padadunep@gmail.com>",
   "license": "MIT",
   "private": true,
   "workspaces": [
@@ -21,7 +21,6 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
-    "react-redux": "^8.0.5",
     "swr": "^2.0.0"
   },
   "devDependencies": {

@@ -14,9 +14,7 @@ function Items({ item, resetSubnavs }) {
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
 	const handleClickOnItem = (itemdata) => {
-		if (!itemdata.isSubNavs) {
-			router.push(itemdata.href);
-		} else {
+		if (itemdata.isSubNavs) {
 			setShowSubNav(!showSubNav);
 		}
 	};

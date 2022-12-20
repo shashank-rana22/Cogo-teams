@@ -1,5 +1,5 @@
+import { useSelector } from '@cogoport/store';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 function Home() {
 	const profileData = useSelector(({ profile }: any) => profile);

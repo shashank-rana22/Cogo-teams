@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cogoport/authentication": "workspace:0.1.0",
+    "@cogoport/authentication": "workspace:*",
     "@cogoport/business-finance": "workspace:0.1.0",
-    "@cogoport/commons": "workspace:0.1.0",
+    "@cogoport/core": "workspace:*",
     "@cogoport/components": "^1.0.96",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/home": "workspace:0.1.0",
