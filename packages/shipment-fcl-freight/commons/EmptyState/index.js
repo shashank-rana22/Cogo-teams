@@ -1,5 +1,5 @@
 import React from 'react';
-import {ICNonFunded} from './ic-empty-non-funded.svg';
+import {IcMAverage} from '@cogoport/icons-react';
 import styles from './styles.module.css'
 
 const EmptyState = ({
@@ -21,7 +21,7 @@ const EmptyState = ({
 				<div
 					className={styles.emptyStateIcon}
 				>
-					<ICNonFunded width={120} height={120} />
+					<IcMAverage width={120} height={120} />
 				</div>
            	) : null}
 		</div>
