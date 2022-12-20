@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring */
-import getByKey from '@cogo/utils/getByKey';
+import {getByKey} from '@cogoport/utils';
 
 const routeInfo = {
 

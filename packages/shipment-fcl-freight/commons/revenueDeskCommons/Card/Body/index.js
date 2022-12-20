@@ -1,8 +1,8 @@
 import React from 'react';
 import CargoDetails from './../../../CargoDetails';
-import PortDetails from '../../../PortDetails';
 import ShipmentDetails from '../ShipmentDetails'
-import styles from './styles.module.css'
+import styles from './styles.module.css';
+import PortDetails from '../PortDetails';
 
 const Body = ({ data = {} }) => {
 	return (

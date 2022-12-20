@@ -1,5 +1,5 @@
 import React from 'react';
-import { startCase, format  } from '@cogoport/front/utils';
+import { startCase, format  } from '@cogoport/utils';
 import { IcCCogoassured, IcMTimer } from '@cogoport/icons-react';
 import getHoursElasped from '../../../../utils/revenueDeskUtils/getHoursElapsed';
 import styles from './styles.module.css';

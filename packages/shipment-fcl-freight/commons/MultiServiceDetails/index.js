@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Popover, Button } from '@cogoport/components';
 import ContainerInfo from '../CargoDetails/CargoDetailsPills';
-import styles from './styles.modules.css';
+import styles from './styles.module.css';
 
 const MultiServiceDetails = ({
 	children,
