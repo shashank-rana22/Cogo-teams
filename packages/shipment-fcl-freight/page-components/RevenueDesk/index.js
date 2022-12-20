@@ -1,4 +1,10 @@
+import RevenueList from './RevenueList';
+
 function RevenueDesk() {
-	return <div>Revenue Desk </div>;
+	return (
+		<div>
+			<RevenueList />
+		</div>
+	);
 }
 export default RevenueDesk;
