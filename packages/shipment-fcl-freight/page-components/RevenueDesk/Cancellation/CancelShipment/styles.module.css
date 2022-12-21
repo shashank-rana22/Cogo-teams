@@ -1,0 +1,12 @@
+.buttonText{
+    font-size: 12px;
+	color: #828282;
+	text-align: center;
+	padding: 4px;
+	cursor: pointer;
+	background-color: black;
+}
+
+.buttonText :hover{
+    color: #356efd;
+}

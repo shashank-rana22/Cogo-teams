@@ -16,7 +16,7 @@ function RevenueList({
 	controls = [],
 	shipment_type,
 }) {
-	const [activeTab, setActiveTab] = useState('pending');
+	
 	return (
 		<div>
 			<Tabs

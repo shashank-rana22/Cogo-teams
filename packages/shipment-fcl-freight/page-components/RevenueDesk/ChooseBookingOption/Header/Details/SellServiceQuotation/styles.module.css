@@ -1,0 +1,24 @@
+.container{
+    width: 50%;
+	background: #f9f9f9;
+	border: 2px solid #000000;
+	padding-right: 4px;
+}
+.heading{
+    text-align: center;
+	font-weight: 800;
+	font-size: 18px;
+	color: #2c3e50;
+	padding: 10px 0px 0px 4px;
+}
+.subHeading{
+    color: #2c3e50;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.serviceContent{
+    display: flex;
+	justify-content: space-between;
+	padding: 12px 10px 2px 10px;
+}

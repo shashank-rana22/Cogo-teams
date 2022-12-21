@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ListJson from '../../hooks/revenueDeskHooks/useGetList.json';
-
-// import BookingOption from './BookingOption';
+import useListShipments from '../../hooks/revenueDeskHooks/useGetList'
+import ShipmentDetails from './ShipmentDetails';
+import BookingOption from './BookingOption';
 import RevenueList from './RevenueList';
 import styles from './styles.module.css';
 
@@ -42,14 +43,14 @@ function RevenueDesk() {
 						setShowBookingOption={setClickedCard}
 					/>
 
-					{/* <BookingOption
+					<BookingOption
 						activeTab={activeTab}
 						currentShipmentData={clickedCard.shipment}
 						service={clickedCard.service}
 						setShowBookingOption={setClickedCard}
 						showBookingOption= {clickedCard}
 						refetch={refetch}
-					/> */}
+					/>
 
 				</div>
 			) : null}

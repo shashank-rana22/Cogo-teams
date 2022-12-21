@@ -1,3 +1,5 @@
+import { format} from '@cogoport/utils';
+
 const infoOptions=(data)=>{
     return [
 		{

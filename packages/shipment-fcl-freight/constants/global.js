@@ -1,0 +1,26 @@
+const gloabal = { FLASH_BOOKING_CHARGE_CODES: [
+    'OTC',
+    'BAS',
+    'AGC',
+    'STC',
+    'IHC',
+    'CFS',
+    'DOC',
+    'DAF',
+    'ICDS',
+    'DSC',
+    'PDPDC',
+    'SLC',
+    'RENC',
+    'DS',
+    'DDS',
+    'ICDDS',
+    'T1',
+    'IHE',
+    'IHI',
+    'CCD',
+    'CCO',
+    'RTC',
+]
+};
+export default global;

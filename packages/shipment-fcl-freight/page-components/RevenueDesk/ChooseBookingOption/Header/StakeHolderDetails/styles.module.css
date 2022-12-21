@@ -1,0 +1,33 @@
+
+
+.stakeHolderCon{
+    height: fit-content;
+	width: 100%;
+	background: #f7f7fc;
+	padding: 18px 14px 0px;
+	display: flex;
+	margin-top: 16px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+.StakeHolderDiv{
+    display: flex;
+	align-items: center;
+	width: 22%;
+	margin: 0 16px 14px;
+}
+.stakeHolderKey{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #828282;
+    white-space: nowrap;
+}
+.stakeHolderValue{
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		margin-left: 5px;
+		color: #333333;
+}
