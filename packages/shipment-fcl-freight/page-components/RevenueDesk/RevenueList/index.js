@@ -5,7 +5,17 @@ import CompletedJobs from './CompletedJobs';
 import PendingJobs from './PendingJobs';
 import styles from './styles.module.css';
 
-function RevenueList() {
+function RevenueList({
+	listData = {},
+	page = 1,
+	setClickedCard = () => {},
+	clickedCard,
+	setActiveTab = () => {},
+	activeTab = 'pending',
+	heading,
+	controls = [],
+	shipment_type,
+}) {
 	const [activeTab, setActiveTab] = useState('pending');
 	return (
 		<div>
@@ -15,11 +25,18 @@ function RevenueList() {
 				suffix={<div className={styles.pagination_container}>Pagination</div>}
 			>
 				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
-					<PendingJobs />
+					<PendingJobs
+						data={listData}
+						page={page}
+						activeTab={activeTab}
+						setClickedCard={setClickedCard}
+						clickedCard={clickedCard}
+						shipment_type={shipment_type}
+					/>
 				</TabPanel>
 
 				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
-					<CompletedJobs />
+					{/* <CompletedJobs /> */}
 				</TabPanel>
 			</Tabs>
 		</div>

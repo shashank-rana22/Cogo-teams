@@ -1,0 +1,4885 @@
+
+   {
+    "list":[
+       {
+          "id":"dce36192-65af-4121-aa5a-4554a12e5636",
+          "serial_id":126813,
+          "importer_exporter_id":"e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"quotation",
+          "source_id":"21282a8e-ac11-4163-aae6-d6390ae5bb40",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-12-09T12:11:57.529Z",
+          "cancellation_reason":null,
+          "agent_id":"0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "company_name":"VOLTAS LIMITED",
+             "mobile_number":"9664169380",
+             "company_branch":"VOLTAS LIMITED",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":"123142",
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":true,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"prepaid",
+          "confirmed_by_importer_exporter_at":"2022-12-09T15:06:24.818Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"08c9fa64-4586-4f6c-b751-316a8feb18dd",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"f6868b0a-d6c7-45e4-adab-6bbcab6c4d31",
+                "shipment_id":"dce36192-65af-4121-aa5a-4554a12e5636",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"dasdas",
+                "shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+                "service_provider_id":"14d4e769-559b-48cb-8979-f92f6f9364bc",
+                "inco_term":"cif",
+                "containers_count":1,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":null,
+                "selected_schedule_arrival":null,
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":4,
+                "schedule_departure":"2022-12-14T09:35:00.000Z",
+                "schedule_arrival":"2022-12-23T07:46:00.000Z",
+                "si_cutoff":"2022-12-12T07:46:00.000Z",
+                "gate_in_cutoff":"2022-12-12T07:46:00.000Z",
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-12-10",
+                "bn_expiry":"2022-12-12T07:46:00.000Z",
+                "booking_reference_number":"123142",
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"fasd",
+                "preferred_shipping_line_id":"4958e128-80e0-4a15-888a-59de6a305f0e",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"3565be37-d232-4c4f-b876-8f7b7892069e",
+                "shipment_id":"dce36192-65af-4121-aa5a-4554a12e5636",
+                "port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "main_port_id":null,
+                "trade_type":"export",
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+                "containers_count":1,
+                "free_days_detention":0,
+                "free_days_demurrage":0,
+                "free_days_plugin":0,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"b8f55994-e845-4bb8-9ba3-f12c382dbd60",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/b264ff62bfd0e6f45fbc40afb8b10108/images.png",
+                "data":null,
+                "created_at":"2022-12-09T12:11:58.779Z",
+                "updated_at":"2022-12-09T12:11:58.864Z",
+                "source":null
+             },
+             {
+                "id":"ab7b6df0-f100-42ff-9938-20da663b15ce",
+                "document_type":"booking_note",
+                "state":"document_uploaded",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/62554282a4ddb4de9af3a00cac7e7eaa/Installation%20Documentation.pdf",
+                "data":{
+                   "document_number":" "
+                },
+                "created_at":"2022-12-12T07:48:22.553Z",
+                "updated_at":"2022-12-12T07:48:22.553Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-12-09T15:06:26.992Z",
+          "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"20",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"dasdas",
+          "shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+          "service_provider_id":"14d4e769-559b-48cb-8979-f92f6f9364bc",
+          "inco_term":"cif",
+          "containers_count":1,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":null,
+          "selected_schedule_arrival":null,
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":4,
+          "schedule_departure":"2022-12-14T09:35:00.000Z",
+          "schedule_arrival":"2022-12-23T07:46:00.000Z",
+          "si_cutoff":"2022-12-12T07:46:00.000Z",
+          "gate_in_cutoff":"2022-12-12T07:46:00.000Z",
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-12-10",
+          "bn_expiry":"2022-12-12T07:46:00.000Z",
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"fasd",
+          "preferred_shipping_line_id":"4958e128-80e0-4a15-888a-59de6a305f0e",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+             "name":"Jebel Ali",
+             "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+             "pincode_id":null,
+             "port_code":"AEJEA",
+             "postal_code":null,
+             "country":{
+                "id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "name":"United Arab Emirates",
+                "display_name":"United Arab Emirates, Meg",
+                "type":"country",
+                "status":"active",
+                "continent_id":"4a4c0a00-1cc6-4662-822b-b2655c783ee8",
+                "trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"23.42408",
+                "longitude":"53.847818",
+                "loc":"POINT (53.847818 23.42408)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"AED",
+                "country_code":"AE",
+                "mobile_country_code":"+971",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_64.png",
+                "created_at":"2019-11-22T04:58:58.052Z",
+                "updated_at":"2019-11-22T04:58:58.052Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+             "business_name":"VOLTAS LIMITED",
+             "trade_name":"VOLTAS LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":29612,
+             "sage_company_id":"301",
+             "registration_number":"AAACV2809D",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"08c9fa64-4586-4f6c-b751-316a8feb18dd",
+             "branch_name":"VOLTAS LIMITED",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"VOL296121642614767"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"b5573cc4-8599-4957-a6f7-766a317290da",
+             "business_name":"Any Shipping Line"
+          },
+          "booking_agent":{
+             "id":"713b1f5e-0baf-4818-a448-6ac8db623602",
+             "name":"Digpal Singh",
+             "email":"digpal.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8178630346"
+          },
+          "agent":{
+             "id":"0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+             "name":"Bhaskar Priyadarshi",
+             "email":"bhaskar.priyadarshi@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7208093322"
+          },
+          "importer_exporter_poc":{
+             "id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9664169380"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"14d4e769-559b-48cb-8979-f92f6f9364bc",
+             "business_name":"MAPLE MARITIME PRIVATE LIMITED",
+             "trade_name":"MAPLE MARITIME PRIVATE LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":73871,
+             "sage_company_id":"301",
+             "registration_number":"AAFCA1793A",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"export",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9664169380"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"4958e128-80e0-4a15-888a-59de6a305f0e",
+             "business_name":"POSEIDON SHIPPING AGENCY PVT LTD"
+          },
+          "service_ops1":{
+             "id":"5b242fb0-da31-4b75-812c-69166e50a3c8",
+             "name":"Shivam Sah",
+             "email":"shivam.sah@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8477801760"
+          },
+          "service_ops2":{
+             "id":"57f1cc6e-0b4e-43ee-bba5-d4933758cb5d",
+             "name":"Arjun Mishra",
+             "email":"arjun.mishra@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9622386229"
+          },
+          "service_ops3":{
+             "id":"6ee6cbc3-b51e-43d1-a0c0-ed8e1f4a3015",
+             "name":"Rohit Sharma",
+             "email":"rohit.s@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7982556644"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":4,
+          "unread_messages_count":0,
+          "freight_total":180.25,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.9,
+          "transit_days":null
+       },
+       {
+          "id":"a5e012fe-fc19-44f5-bed9-06c1e5c6e5f8",
+          "serial_id":126806,
+          "importer_exporter_id":"e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"quotation",
+          "source_id":"4dc496e2-deed-4737-9ea5-430ddb321eec",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-12-08T14:47:30.397Z",
+          "cancellation_reason":null,
+          "agent_id":"0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "company_name":"VOLTAS LIMITED",
+             "mobile_number":"9664169380",
+             "company_branch":"VOLTAS LIMITED",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"prepaid",
+          "confirmed_by_importer_exporter_at":"2022-12-08T14:48:56.274Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"08c9fa64-4586-4f6c-b751-316a8feb18dd",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"1595230f-624e-47b0-865d-0c9e82bd6db1",
+                "shipment_id":"a5e012fe-fc19-44f5-bed9-06c1e5c6e5f8",
+                "origin_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"general",
+                "shipping_line_id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+                "service_provider_id":"f836618e-7dba-4d95-95cb-aacb7c87f8b8",
+                "inco_term":"fob",
+                "containers_count":1,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":null,
+                "selected_schedule_arrival":null,
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":14,
+                "schedule_departure":"2022-12-08T14:48:00.000Z",
+                "schedule_arrival":null,
+                "si_cutoff":null,
+                "gate_in_cutoff":null,
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-12-08",
+                "bn_expiry":null,
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"ewqfqewrf qwewf",
+                "preferred_shipping_line_id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"af74b2e6-fed7-4cd6-80ba-32e2e8d0498f",
+                "shipment_id":"a5e012fe-fc19-44f5-bed9-06c1e5c6e5f8",
+                "port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "main_port_id":null,
+                "trade_type":"import",
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+                "containers_count":1,
+                "free_days_detention":0,
+                "free_days_demurrage":0,
+                "free_days_plugin":0,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"e0dd014f-ab6a-4ef0-868e-54ba16e62056",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/dcbec308bd6669967dfad0ff34a82601/Screenshot%202022-12-01%20at%203.06.20%20PM.png",
+                "data":null,
+                "created_at":"2022-12-08T14:47:33.855Z",
+                "updated_at":"2022-12-08T14:47:34.056Z",
+                "source":null
+             },
+             {
+                "id":"d7c35223-e485-42a5-ab70-80538748d8e4",
+                "document_type":"packing_list",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/d58f280f0ce42cae0683f79fc48a7e0e/Screenshot%202022-12-01%20at%203.06.20%20PM.png",
+                "data":{
+                   "url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/d58f280f0ce42cae0683f79fc48a7e0e/Screenshot%202022-12-01%20at%203.06.20%20PM.png",
+                   "description":""
+                },
+                "created_at":"2022-12-09T10:27:42.800Z",
+                "updated_at":"2022-12-09T10:27:42.879Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-12-08T14:48:58.094Z",
+          "origin_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+          "destination_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"20",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"general",
+          "shipping_line_id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+          "service_provider_id":"f836618e-7dba-4d95-95cb-aacb7c87f8b8",
+          "inco_term":"fob",
+          "containers_count":1,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":null,
+          "selected_schedule_arrival":null,
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":14,
+          "schedule_departure":"2022-12-08T14:48:00.000Z",
+          "schedule_arrival":null,
+          "si_cutoff":null,
+          "gate_in_cutoff":null,
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-12-08",
+          "bn_expiry":null,
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"ewqfqewrf qwewf",
+          "preferred_shipping_line_id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+             "name":"Jebel Ali",
+             "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+             "pincode_id":null,
+             "port_code":"AEJEA",
+             "postal_code":null,
+             "country":{
+                "id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "name":"United Arab Emirates",
+                "display_name":"United Arab Emirates, Meg",
+                "type":"country",
+                "status":"active",
+                "continent_id":"4a4c0a00-1cc6-4662-822b-b2655c783ee8",
+                "trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"23.42408",
+                "longitude":"53.847818",
+                "loc":"POINT (53.847818 23.42408)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"AED",
+                "country_code":"AE",
+                "mobile_country_code":"+971",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_64.png",
+                "created_at":"2019-11-22T04:58:58.052Z",
+                "updated_at":"2019-11-22T04:58:58.052Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+             "business_name":"VOLTAS LIMITED",
+             "trade_name":"VOLTAS LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":29612,
+             "sage_company_id":"301",
+             "registration_number":"AAACV2809D",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"08c9fa64-4586-4f6c-b751-316a8feb18dd",
+             "branch_name":"VOLTAS LIMITED",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"VOL296121642614767"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+             "business_name":"Capeline Shipping India Private Limited"
+          },
+          "booking_agent":{
+             "id":"713b1f5e-0baf-4818-a448-6ac8db623602",
+             "name":"Digpal Singh",
+             "email":"digpal.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8178630346"
+          },
+          "agent":{
+             "id":"0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+             "name":"Bhaskar Priyadarshi",
+             "email":"bhaskar.priyadarshi@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7208093322"
+          },
+          "importer_exporter_poc":{
+             "id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9664169380"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"f836618e-7dba-4d95-95cb-aacb7c87f8b8",
+             "business_name":"PACE SPEDITION DMCC",
+             "trade_name":"PACE SPEDITION DMCC",
+             "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+             "serial_id":54384,
+             "sage_company_id":"101",
+             "registration_number":"100059428100003",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"import",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9664169380"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"faf76aeb-e90f-4181-84ed-50d56ad0c9c8",
+             "business_name":"Capeline Shipping India Private Limited"
+          },
+          "service_ops1":{
+             "id":"5b242fb0-da31-4b75-812c-69166e50a3c8",
+             "name":"Shivam Sah",
+             "email":"shivam.sah@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8477801760"
+          },
+          "service_ops2":{
+             "id":"3fab68ce-b8d2-4c41-9d85-4ffe922ca3ff",
+             "name":"Pankaj Rai",
+             "email":"pankaj.rai@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9565342821"
+          },
+          "service_ops3":{
+             "id":"2516ccd1-d311-4045-8b40-b38d713ae5f8",
+             "name":"Ajit Kumar",
+             "email":"accounts.domestic@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9971674033"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":3,
+          "unread_messages_count":0,
+          "freight_total":51.5,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.9,
+          "transit_days":null
+       },
+       {
+          "id":"d6242ddb-1e62-43d7-9571-456b3255d795",
+          "serial_id":126786,
+          "importer_exporter_id":"72425157-0781-4732-8fdf-73275d97cedb",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"quotation",
+          "source_id":"20e8c79e-2867-47d7-8adb-565ec4ba6de0",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"1b55c112-81e2-46a9-9eae-53cc10399d82",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-12-07T07:54:11.857Z",
+          "cancellation_reason":null,
+          "agent_id":"1f719de3-13aa-4ee4-9e1b-e3389fd2bf64",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Ramesh",
+             "email":"logistics@chinasteel.com",
+             "company_name":"CHINA STEEL CORPORATION INDIA PRIVATE LIMITED",
+             "mobile_number":"9898225826",
+             "company_branch":"CHINA STEEL CORPORATION INDIA PRIVATE LIMITED",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":true,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"collect",
+          "confirmed_by_importer_exporter_at":"2022-12-07T09:47:48.362Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"b3246e4e-2572-4d0b-9161-ca148a43fd02",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"1533f864-bc8f-4df3-b2f0-c7b6292a77fd",
+                "shipment_id":"d6242ddb-1e62-43d7-9571-456b3255d795",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"aaa",
+                "shipping_line_id":"ac2635e1-ed00-418e-bceb-fd62f47228ed",
+                "service_provider_id":"dc02a6e4-cbf6-4ba2-ae63-3009d2e2e474",
+                "inco_term":"cif",
+                "containers_count":1,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":null,
+                "selected_schedule_arrival":null,
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":14,
+                "schedule_departure":"2022-12-14T04:16:00.000Z",
+                "schedule_arrival":"2022-12-20T07:50:00.000Z",
+                "si_cutoff":"2022-12-13T07:50:00.000Z",
+                "gate_in_cutoff":"2022-12-13T07:50:00.000Z",
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-12-07",
+                "bn_expiry":"2022-12-13T07:50:00.000Z",
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"aaaa",
+                "preferred_shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"4dfe7e6e-f5f0-4cc9-95b6-64e33b13524e",
+                "shipment_id":"d6242ddb-1e62-43d7-9571-456b3255d795",
+                "port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "main_port_id":null,
+                "trade_type":"export",
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"ac2635e1-ed00-418e-bceb-fd62f47228ed",
+                "containers_count":1,
+                "free_days_detention":0,
+                "free_days_demurrage":0,
+                "free_days_plugin":0,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"0602d324-273f-4544-9852-974989f6c53b",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/dd4b50deed8ae089d995d2c9cde00011/documents_60eed33822a8cf49f5001a11_Attendance_Policy_2022.pdf",
+                "data":null,
+                "created_at":"2022-12-07T07:54:13.751Z",
+                "updated_at":"2022-12-07T07:54:13.823Z",
+                "source":null
+             },
+             {
+                "id":"8ca8dc93-6ab2-4c28-8a46-f8467a3301d8",
+                "document_type":"booking_note",
+                "state":"document_uploaded",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/260f05644519ee17d955490497f5abd4/Installation%20Documentation.pdf",
+                "data":{
+                   "document_number":" "
+                },
+                "created_at":"2022-12-12T07:51:26.771Z",
+                "updated_at":"2022-12-12T07:51:26.771Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-12-07T09:47:50.506Z",
+          "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"20",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"aaa",
+          "shipping_line_id":"ac2635e1-ed00-418e-bceb-fd62f47228ed",
+          "service_provider_id":"dc02a6e4-cbf6-4ba2-ae63-3009d2e2e474",
+          "inco_term":"cif",
+          "containers_count":1,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":null,
+          "selected_schedule_arrival":null,
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":14,
+          "schedule_departure":"2022-12-14T04:16:00.000Z",
+          "schedule_arrival":"2022-12-20T07:50:00.000Z",
+          "si_cutoff":"2022-12-13T07:50:00.000Z",
+          "gate_in_cutoff":"2022-12-13T07:50:00.000Z",
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-12-07",
+          "bn_expiry":"2022-12-13T07:50:00.000Z",
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"aaaa",
+          "preferred_shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"1b55c112-81e2-46a9-9eae-53cc10399d82",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+             "name":"Jebel Ali",
+             "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+             "pincode_id":null,
+             "port_code":"AEJEA",
+             "postal_code":null,
+             "country":{
+                "id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "name":"United Arab Emirates",
+                "display_name":"United Arab Emirates, Meg",
+                "type":"country",
+                "status":"active",
+                "continent_id":"4a4c0a00-1cc6-4662-822b-b2655c783ee8",
+                "trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"23.42408",
+                "longitude":"53.847818",
+                "loc":"POINT (53.847818 23.42408)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"AED",
+                "country_code":"AE",
+                "mobile_country_code":"+971",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_64.png",
+                "created_at":"2019-11-22T04:58:58.052Z",
+                "updated_at":"2019-11-22T04:58:58.052Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"72425157-0781-4732-8fdf-73275d97cedb",
+             "business_name":"CHINA STEEL CORPORATION INDIA PRIVATE LIMITED",
+             "trade_name":"CHINA STEEL CORPORATION INDIA PRIVATE LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":125,
+             "sage_company_id":"301",
+             "registration_number":"AAECC5781F",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"b3246e4e-2572-4d0b-9161-ca148a43fd02",
+             "branch_name":"CHINA STEEL CORPORATION INDIA PRIVATE LIMITED",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"CHI1251642614670"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"ac2635e1-ed00-418e-bceb-fd62f47228ed",
+             "business_name":"AIYER SHIPPING AGENCY PVT LTD"
+          },
+          "booking_agent":{
+             "id":"9aa01942-a64f-4a31-ad98-85d8b682e523",
+             "name":"Shiva Jee",
+             "email":"shiva.jee@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8657868719"
+          },
+          "agent":{
+             "id":"1f719de3-13aa-4ee4-9e1b-e3389fd2bf64",
+             "name":"Madhumeeta Kumari",
+             "email":"madhumeeta.kumari@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8976783568"
+          },
+          "importer_exporter_poc":{
+             "id":"1b55c112-81e2-46a9-9eae-53cc10399d82",
+             "name":"Ramesh",
+             "email":"logistics@chinasteel.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9898225826"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"dc02a6e4-cbf6-4ba2-ae63-3009d2e2e474",
+             "business_name":"RAJ KUMAR",
+             "trade_name":"GORSI.ENTERPRISES",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":73900,
+             "sage_company_id":"301",
+             "registration_number":"CKSPK4238E",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"export",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"1b55c112-81e2-46a9-9eae-53cc10399d82",
+             "name":"Ramesh",
+             "email":"logistics@chinasteel.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9898225826"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+             "business_name":"PORTTRADE SHIPPING"
+          },
+          "service_ops1":{
+             "id":"5b242fb0-da31-4b75-812c-69166e50a3c8",
+             "name":"Shivam Sah",
+             "email":"shivam.sah@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8477801760"
+          },
+          "service_ops2":{
+             "id":"57f1cc6e-0b4e-43ee-bba5-d4933758cb5d",
+             "name":"Arjun Mishra",
+             "email":"arjun.mishra@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9622386229"
+          },
+          "service_ops3":{
+             "id":"383bfbda-67b5-44d5-9604-8592efb3c7ee",
+             "name":"Abhishek Kumar",
+             "email":"account.domestics@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8010284714"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":4,
+          "unread_messages_count":0,
+          "freight_total":203.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.9,
+          "transit_days":null
+       },
+       {
+          "id":"059137ce-5d01-468d-856e-46a03356dbc8",
+          "serial_id":126769,
+          "importer_exporter_id":"e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"spot_booking",
+          "source_id":"7aade7e2-e2de-4a83-aa07-aaf2dd98c610",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-12-05T10:27:25.643Z",
+          "cancellation_reason":null,
+          "agent_id":"0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "company_name":"VOLTAS LIMITED",
+             "mobile_number":"9664169380",
+             "company_branch":"VOLTAS LIMITED",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"prepaid",
+          "confirmed_by_importer_exporter_at":"2022-12-05T13:41:14.169Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"08c9fa64-4586-4f6c-b751-316a8feb18dd",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"c2f10377-6937-40c2-8c02-5007031cb1df",
+                "shipment_id":"059137ce-5d01-468d-856e-46a03356dbc8",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"asdsad",
+                "shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+                "service_provider_id":"594c660c-a32a-42d9-b088-2cc88b9b9a4c",
+                "inco_term":"cif",
+                "containers_count":1,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":null,
+                "selected_schedule_arrival":null,
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":14,
+                "schedule_departure":"2022-12-08T13:40:00.000Z",
+                "schedule_arrival":null,
+                "si_cutoff":null,
+                "gate_in_cutoff":null,
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-12-05",
+                "bn_expiry":null,
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"dasdas",
+                "preferred_shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"025d7dd9-58ba-4a11-9828-d37e901b7245",
+                "shipment_id":"059137ce-5d01-468d-856e-46a03356dbc8",
+                "port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "main_port_id":null,
+                "trade_type":"export",
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+                "containers_count":1,
+                "free_days_detention":0,
+                "free_days_demurrage":0,
+                "free_days_plugin":0,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"7aa6d3df-7362-401b-a0e4-904f82da69b5",
+                "document_type":"packing_list",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/56ece231d151dbab2d4ee72577284946/download.png",
+                "data":{
+                   "url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/56ece231d151dbab2d4ee72577284946/download.png",
+                   "description":""
+                },
+                "created_at":"2022-12-06T10:40:37.268Z",
+                "updated_at":"2022-12-06T10:40:37.456Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-12-05T13:41:16.932Z",
+          "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"20",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"asdsad",
+          "shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+          "service_provider_id":"594c660c-a32a-42d9-b088-2cc88b9b9a4c",
+          "inco_term":"cif",
+          "containers_count":1,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":null,
+          "selected_schedule_arrival":null,
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":14,
+          "schedule_departure":"2022-12-08T13:40:00.000Z",
+          "schedule_arrival":null,
+          "si_cutoff":null,
+          "gate_in_cutoff":null,
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-12-05",
+          "bn_expiry":null,
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"dasdas",
+          "preferred_shipping_line_id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+             "name":"Jebel Ali",
+             "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+             "pincode_id":null,
+             "port_code":"AEJEA",
+             "postal_code":null,
+             "country":{
+                "id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "name":"United Arab Emirates",
+                "display_name":"United Arab Emirates, Meg",
+                "type":"country",
+                "status":"active",
+                "continent_id":"4a4c0a00-1cc6-4662-822b-b2655c783ee8",
+                "trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"23.42408",
+                "longitude":"53.847818",
+                "loc":"POINT (53.847818 23.42408)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"AED",
+                "country_code":"AE",
+                "mobile_country_code":"+971",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_64.png",
+                "created_at":"2019-11-22T04:58:58.052Z",
+                "updated_at":"2019-11-22T04:58:58.052Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+             "business_name":"VOLTAS LIMITED",
+             "trade_name":"VOLTAS LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":29612,
+             "sage_company_id":"301",
+             "registration_number":"AAACV2809D",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"08c9fa64-4586-4f6c-b751-316a8feb18dd",
+             "branch_name":"VOLTAS LIMITED",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"VOL296121642614767"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+             "business_name":"PORTTRADE SHIPPING"
+          },
+          "booking_agent":{
+             "id":"713b1f5e-0baf-4818-a448-6ac8db623602",
+             "name":"Digpal Singh",
+             "email":"digpal.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8178630346"
+          },
+          "agent":{
+             "id":"0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+             "name":"Bhaskar Priyadarshi",
+             "email":"bhaskar.priyadarshi@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7208093322"
+          },
+          "importer_exporter_poc":{
+             "id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9664169380"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"594c660c-a32a-42d9-b088-2cc88b9b9a4c",
+             "business_name":"PORTTRADE SHIPPING AGENCIES PVT LTD",
+             "trade_name":"PORTTRADE SHIPPING AGENCIES PVT LTD",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":62289,
+             "sage_company_id":"301",
+             "registration_number":"AAECP8560D",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"export",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"12aa63d6-a13c-42cd-bbee-645e47b8055f",
+             "name":"Rohan More",
+             "email":"rohanmore@voltas.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9664169380"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"34326a79-1a2e-47e6-a65d-24a9668cb9ca",
+             "business_name":"PORTTRADE SHIPPING"
+          },
+          "service_ops1":{
+             "id":"5b242fb0-da31-4b75-812c-69166e50a3c8",
+             "name":"Shivam Sah",
+             "email":"shivam.sah@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8477801760"
+          },
+          "service_ops2":{
+             "id":"57f1cc6e-0b4e-43ee-bba5-d4933758cb5d",
+             "name":"Arjun Mishra",
+             "email":"arjun.mishra@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9622386229"
+          },
+          "service_ops3":{
+             "id":"2516ccd1-d311-4045-8b40-b38d713ae5f8",
+             "name":"Ajit Kumar",
+             "email":"accounts.domestic@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9971674033"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":2,
+          "unread_messages_count":0,
+          "freight_total":103.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.9,
+          "transit_days":null
+       },
+       {
+          "id":"91191ad7-6d93-4253-8b4a-598dfd643d18",
+          "serial_id":126717,
+          "importer_exporter_id":"9f4f5a35-778d-4f05-8910-6ef0ad08b0bf",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"spot_line_booking",
+          "source_id":"98276f39-413e-427b-b837-9ae7fef78a1a",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"fa461966-5290-4d8b-a99a-9cfd4bd42a62",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-11-29T09:57:17.229Z",
+          "cancellation_reason":null,
+          "agent_id":"2c145235-fd6a-46ee-ac4c-cf0a14a40200",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Pavan",
+             "email":"totalimpex.in@gmail.com",
+             "company_name":"DEEPMALA MANISH SHARMA",
+             "mobile_number":"9004955955",
+             "company_branch":"DEEPMALA MANISH SHARMA",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"prepaid",
+          "confirmed_by_importer_exporter_at":"2022-11-29T10:17:20.695Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"01c86ea4-497c-4549-9fc1-37c4fa72de70",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"108b96d4-c1ef-4f68-b7c6-509fbad11a7e",
+                "shipment_id":"91191ad7-6d93-4253-8b4a-598dfd643d18",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_port_id":"ce76691a-7c61-4ad2-992a-d2799d05fd50",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"",
+                "shipping_line_id":"c3649537-0c4b-4614-b313-98540cffcf40",
+                "service_provider_id":"9f9daa7e-8575-411a-86e9-5f8e2fced580",
+                "inco_term":"cfr",
+                "containers_count":1,
+                "cargo_weight_per_container":28.0,
+                "selected_schedule_departure":"2022-12-15T18:30:00.000Z",
+                "selected_schedule_arrival":"2023-01-16T18:30:00.000Z",
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":7,
+                "schedule_departure":"2022-12-15T18:30:00.000Z",
+                "schedule_arrival":"2023-01-16T18:30:00.000Z",
+                "si_cutoff":"2022-12-12T18:30:00.000Z",
+                "gate_in_cutoff":"2022-12-03T20:30:00.000Z",
+                "si_filed_at":null,
+                "cargo_readiness_date":null,
+                "bn_expiry":"2022-12-12T18:30:00.000Z",
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":null,
+                "preferred_shipping_line_id":null,
+                "number_of_stops":2,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"44018001-1bab-40ed-ae3b-05dfd2071a04",
+                "shipment_id":"91191ad7-6d93-4253-8b4a-598dfd643d18",
+                "port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "main_port_id":null,
+                "trade_type":"export",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"c3649537-0c4b-4614-b313-98540cffcf40",
+                "containers_count":1,
+                "free_days_detention":null,
+                "free_days_demurrage":null,
+                "free_days_plugin":null,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"2acd3530-2583-4985-b4b6-14cd9b1352e8",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-production.sgp1.digitaloceanspaces.com/fd1054ea180f4eba95c1a3a7f16ee44c/Nhava%20-%20Dakar%2040%20HC%2016%20Dec.pdf",
+                "data":null,
+                "created_at":"2022-11-29T09:57:18.933Z",
+                "updated_at":"2022-11-29T09:57:19.033Z",
+                "source":null
+             },
+             {
+                "id":"87f1d6a3-2226-4b83-99fe-a6c0db9fc172",
+                "document_type":"booking_note",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-production.sgp1.digitaloceanspaces.com/dc9716d7911dafb8a3d15dd4a5d44303/DB_aabggjhbbedh0x04FF.pdf",
+                "data":{
+                   "yard_details":"6cbf0991-132b-4770-a740-3ec6ecc303ed",
+                   "document_number":"223447118",
+                   "container_quantity":1,
+                   "contract_reference_number":""
+                },
+                "created_at":"2022-11-29T09:57:21.210Z",
+                "updated_at":"2022-11-29T10:17:20.479Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-11-29T10:17:24.140Z",
+          "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "destination_port_id":"ce76691a-7c61-4ad2-992a-d2799d05fd50",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"40HC",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"",
+          "shipping_line_id":"c3649537-0c4b-4614-b313-98540cffcf40",
+          "service_provider_id":"9f9daa7e-8575-411a-86e9-5f8e2fced580",
+          "inco_term":"cfr",
+          "containers_count":1,
+          "cargo_weight_per_container":28.0,
+          "selected_schedule_departure":"2022-12-15T18:30:00.000Z",
+          "selected_schedule_arrival":"2023-01-16T18:30:00.000Z",
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":7,
+          "schedule_departure":"2022-12-15T18:30:00.000Z",
+          "schedule_arrival":"2023-01-16T18:30:00.000Z",
+          "si_cutoff":"2022-12-12T18:30:00.000Z",
+          "gate_in_cutoff":"2022-12-03T20:30:00.000Z",
+          "si_filed_at":null,
+          "cargo_readiness_date":null,
+          "bn_expiry":"2022-12-12T18:30:00.000Z",
+          "rate_reference_number":null,
+          "cargo_stuffing_location":null,
+          "preferred_shipping_line_id":null,
+          "number_of_stops":2,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"fa461966-5290-4d8b-a99a-9cfd4bd42a62",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"ce76691a-7c61-4ad2-992a-d2799d05fd50",
+             "name":"Dakar",
+             "display_name":"Dakar (SNDKR), Senegal, Africa",
+             "pincode_id":null,
+             "port_code":"SNDKR",
+             "postal_code":null,
+             "country":{
+                "id":"f5e623ba-ab71-46d5-94ae-a4751747d252",
+                "name":"Senegal",
+                "display_name":"Senegal, Africa",
+                "type":"country",
+                "status":"active",
+                "continent_id":"0168d0ca-8666-423b-9900-9e362ae8e4a0",
+                "trade_id":"0b1e8fcd-702f-4fb0-a2bd-408133bb013c",
+                "country_id":"f5e623ba-ab71-46d5-94ae-a4751747d252",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"14.4974",
+                "longitude":"-14.452362",
+                "loc":"POINT (-14.452362 14.4974)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"XOF",
+                "country_code":"SN",
+                "mobile_country_code":"+221",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/Senegal_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/Senegal_64.png",
+                "created_at":"2019-11-22T04:58:57.378Z",
+                "updated_at":"2019-11-22T04:58:57.378Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"9f4f5a35-778d-4f05-8910-6ef0ad08b0bf",
+             "business_name":"DEEPMALA MANISH SHARMA",
+             "trade_name":"TOTAL IMPEX",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":12794,
+             "sage_company_id":"301",
+             "registration_number":"COCPS5409B",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"01c86ea4-497c-4549-9fc1-37c4fa72de70",
+             "branch_name":"DEEPMALA MANISH SHARMA",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"DEE127941642614711"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"c3649537-0c4b-4614-b313-98540cffcf40",
+             "business_name":"MAERSK LINE INDIA PVT LTD"
+          },
+          "booking_agent":{
+             "id":"2c145235-fd6a-46ee-ac4c-cf0a14a40200",
+             "name":"Abhijeet Singh",
+             "email":"abhijeet.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8976783573"
+          },
+          "agent":{
+             "id":"2c145235-fd6a-46ee-ac4c-cf0a14a40200",
+             "name":"Abhijeet Singh",
+             "email":"abhijeet.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8976783573"
+          },
+          "importer_exporter_poc":{
+             "id":"fa461966-5290-4d8b-a99a-9cfd4bd42a62",
+             "name":"Pavan",
+             "email":"totalimpex.in@gmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9004955955"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"9f9daa7e-8575-411a-86e9-5f8e2fced580",
+             "business_name":"MAERSK LINE A/S",
+             "trade_name":"Maersk Line A/S",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":67216,
+             "sage_company_id":"301",
+             "registration_number":"AAJCM4693D",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"export",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"fa461966-5290-4d8b-a99a-9cfd4bd42a62",
+             "name":"Pavan",
+             "email":"totalimpex.in@gmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9004955955"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":null,
+          "service_ops1":{
+             "id":"b77f26e9-2134-44eb-89d9-0ba7396d8b42",
+             "name":"Shubhodeep Mukherji",
+             "email":"shubodeep.mukherji@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8853735663"
+          },
+          "service_ops2":{
+             "id":"4c08723c-5ede-46a7-aa42-038dab48f43d",
+             "name":"Shashank Singh",
+             "email":"shashank.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8953290600"
+          },
+          "service_ops3":{
+             "id":"2516ccd1-d311-4045-8b40-b38d713ae5f8",
+             "name":"Ajit Kumar",
+             "email":"accounts.domestic@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9971674033"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":3,
+          "unread_messages_count":0,
+          "freight_total":3365.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.92,
+          "transit_days":32
+       },
+       {
+          "id":"9faf174c-3285-4db2-82f6-372f35704c9a",
+          "serial_id":126711,
+          "importer_exporter_id":"85737b18-efc0-43af-adbe-11e1edfc0ba8",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"direct",
+          "source_id":"bbc21852-b588-4be0-8c07-df16cb23df58",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"b224804f-4e23-43c4-906c-6c480c3043d0",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-11-29T09:10:19.314Z",
+          "cancellation_reason":null,
+          "agent_id":"5e2ba382-0fa1-42cf-9497-b957b3ba5f7c",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"MAHAVIR",
+             "email":"import@margusshipping.in",
+             "company_name":"MARGUS SHIPPING PRIVATE LIMITED",
+             "mobile_number":"9167321274",
+             "company_branch":"MARGUS SHIPPING PRIVATE LIMITED",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":"1234",
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":true,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"customize",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"collect",
+          "confirmed_by_importer_exporter_at":"2022-11-29T09:11:21.466Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"cb9f1c39-ad65-44f3-8d48-6a81cd7a9961",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"20dafafc-40bf-47ff-955d-809bf202a99f",
+                "shipment_id":"9faf174c-3285-4db2-82f6-372f35704c9a",
+                "origin_port_id":"79b677ac-e075-47a4-8f99-bfa2cda5e55b",
+                "destination_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"MACHINERY PARTS",
+                "shipping_line_id":"c3649537-0c4b-4614-b313-98540cffcf40",
+                "service_provider_id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+                "inco_term":"fob",
+                "containers_count":1,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":"2022-12-03T00:00:00.000Z",
+                "selected_schedule_arrival":"2022-12-26T00:00:00.000Z",
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":14,
+                "schedule_departure":"2022-12-15T03:40:00.000Z",
+                "schedule_arrival":"2022-12-25T18:30:00.000Z",
+                "si_cutoff":"2022-12-09T07:09:00.000Z",
+                "gate_in_cutoff":"2022-12-11T07:09:00.000Z",
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-11-29",
+                "bn_expiry":"2022-12-12T07:09:00.000Z",
+                "booking_reference_number":"1234",
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"CHINA",
+                "preferred_shipping_line_id":"a2a447b4-0ce5-4d3c-afa9-2f81b313aecd",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"708917f0-ffdf-4c12-b6bb-783ec5d7097e",
+                "shipment_id":"9faf174c-3285-4db2-82f6-372f35704c9a",
+                "port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "main_port_id":null,
+                "trade_type":"import",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"c3649537-0c4b-4614-b313-98540cffcf40",
+                "containers_count":1,
+                "free_days_detention":14,
+                "free_days_demurrage":0,
+                "free_days_plugin":10,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"c128b9ad-1b75-4c43-9494-cb0c6eed7bbc",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-production.sgp1.digitaloceanspaces.com/7d35686778c9b1006455969acd55b6e5/MARGUS.jpg",
+                "data":null,
+                "created_at":"2022-11-29T09:10:21.108Z",
+                "updated_at":"2022-11-29T09:10:21.220Z",
+                "source":null
+             },
+             {
+                "id":"5c8a9760-e5d4-417b-80cb-77af65c3b3d4",
+                "document_type":"booking_note",
+                "state":"document_uploaded",
+                "document_url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/b9d557b303c720394b4c28cfff5da9ce/LWScreenShot%202022-11-15%20at%204.50.04%20PM.png",
+                "data":{
+                   "document_number":"123"
+                },
+                "created_at":"2022-12-08T07:10:56.226Z",
+                "updated_at":"2022-12-08T07:10:56.226Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-11-29T09:11:24.544Z",
+          "origin_port_id":"79b677ac-e075-47a4-8f99-bfa2cda5e55b",
+          "destination_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"40HC",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"MACHINERY PARTS",
+          "shipping_line_id":"c3649537-0c4b-4614-b313-98540cffcf40",
+          "service_provider_id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+          "inco_term":"fob",
+          "containers_count":1,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":"2022-12-03T00:00:00.000Z",
+          "selected_schedule_arrival":"2022-12-26T00:00:00.000Z",
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":14,
+          "schedule_departure":"2022-12-15T03:40:00.000Z",
+          "schedule_arrival":"2022-12-25T18:30:00.000Z",
+          "si_cutoff":"2022-12-09T07:09:00.000Z",
+          "gate_in_cutoff":"2022-12-11T07:09:00.000Z",
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-11-29",
+          "bn_expiry":"2022-12-12T07:09:00.000Z",
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"CHINA",
+          "preferred_shipping_line_id":"a2a447b4-0ce5-4d3c-afa9-2f81b313aecd",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"b224804f-4e23-43c4-906c-6c480c3043d0",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"79b677ac-e075-47a4-8f99-bfa2cda5e55b",
+             "name":"Qingdao",
+             "display_name":"Qingdao (CNQIN), Qingdao, China",
+             "pincode_id":null,
+             "port_code":"CNQIN",
+             "postal_code":null,
+             "country":{
+                "id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+                "name":"China",
+                "display_name":"China, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"85b01d82-8a3f-4e7f-ace9-58b10f9466ad",
+                "country_id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"35.86166",
+                "longitude":"104.195397",
+                "loc":"POINT (104.195397 35.86166)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"CNY",
+                "country_code":"CN",
+                "mobile_country_code":"+86",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_64.png",
+                "created_at":"2019-11-22T04:59:02.394Z",
+                "updated_at":"2019-11-22T04:59:02.394Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"85737b18-efc0-43af-adbe-11e1edfc0ba8",
+             "business_name":"MARGUS SHIPPING PRIVATE LIMITED",
+             "trade_name":"MARGUS SHIPPING PRIVATE LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":67990,
+             "sage_company_id":"301",
+             "registration_number":"AAOCM9080D",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"cb9f1c39-ad65-44f3-8d48-6a81cd7a9961",
+             "branch_name":"MARGUS SHIPPING PRIVATE LIMITED",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"MAR679901657799513"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"c3649537-0c4b-4614-b313-98540cffcf40",
+             "business_name":"MAERSK LINE INDIA PVT LTD"
+          },
+          "booking_agent":{
+             "id":"9f82cf0e-3328-4d6f-8779-03f257361ef6",
+             "name":"Ashok Kumar",
+             "email":"ashok.kumar@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9779337007"
+          },
+          "agent":{
+             "id":"5e2ba382-0fa1-42cf-9497-b957b3ba5f7c",
+             "name":"Naresh Jindal",
+             "email":"naresh.jindal@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9876941461"
+          },
+          "importer_exporter_poc":{
+             "id":"b224804f-4e23-43c4-906c-6c480c3043d0",
+             "name":"MAHAVIR",
+             "email":"import@margusshipping.in",
+             "mobile_country_code":"+91",
+             "mobile_number":"9167321274"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+             "business_name":"CogoXpress",
+             "trade_name":"CogoXpress",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":55244,
+             "sage_company_id":"101",
+             "registration_number":"AAGCC4470G",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"import",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"b224804f-4e23-43c4-906c-6c480c3043d0",
+             "name":"MAHAVIR",
+             "email":"import@margusshipping.in",
+             "mobile_country_code":"+91",
+             "mobile_number":"9167321274"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"a2a447b4-0ce5-4d3c-afa9-2f81b313aecd",
+             "business_name":"MSC AGENCY INDIA PVT LTD"
+          },
+          "service_ops1":{
+             "id":"f1ddc373-dbe4-4fdb-95ee-f5172f39b3ed",
+             "name":"Udit Agrahari",
+             "email":"udit.agrahari@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7905588502"
+          },
+          "service_ops2":{
+             "id":"2ef0b78c-1490-4253-ab46-d714cb8942ed",
+             "name":"Manoj Joshi",
+             "email":"manoj.joshi@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8755285147"
+          },
+          "service_ops3":{
+             "id":"383bfbda-67b5-44d5-9604-8592efb3c7ee",
+             "name":"Abhishek Kumar",
+             "email":"account.domestics@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8010284714"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":4,
+          "unread_messages_count":0,
+          "freight_total":900.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.92,
+          "transit_days":23
+       },
+       {
+          "id":"91370054-d36a-416f-9139-667bcf1fa37a",
+          "serial_id":126703,
+          "importer_exporter_id":"3b3af9d4-905c-413f-99ff-fd993bc84cf6",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"quotation",
+          "source_id":"2c7663ef-1284-472f-8911-01cb8b819d4c",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"c47e4be6-c001-40c5-ae5f-5046ce88cdeb",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-11-29T07:44:54.493Z",
+          "cancellation_reason":null,
+          "agent_id":"e946581d-2101-421a-909e-f8ea349786f6",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Mohsin S. Dhorajiwala",
+             "email":"unifytext@hotmail.com",
+             "company_name":"UNIFY TEXTURISERS PRIVATE LIMITED",
+             "mobile_number":"9820034112",
+             "company_branch":"UNIFY TEXTURISERS PVT. LTD.",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"collect",
+          "confirmed_by_importer_exporter_at":"2022-11-29T07:45:49.165Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"ace9a99a-8ac3-4aa7-b6b1-17d1d242ea68",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"a333ff1f-3ce2-4e1c-923c-7887f6afba63",
+                "shipment_id":"91370054-d36a-416f-9139-667bcf1fa37a",
+                "origin_port_id":"33470eb3-0a63-4427-bf7e-b68d043364dc",
+                "destination_port_id":"b960a0fb-f1d7-47aa-9622-fbad37aa88a2",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"polyster ",
+                "shipping_line_id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+                "service_provider_id":"53ef481f-24cf-4db1-97f0-2e78670d9b15",
+                "inco_term":"fob",
+                "containers_count":5,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":null,
+                "selected_schedule_arrival":null,
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":14,
+                "schedule_departure":"2022-12-03T07:45:00.000Z",
+                "schedule_arrival":null,
+                "si_cutoff":null,
+                "gate_in_cutoff":null,
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-11-29",
+                "bn_expiry":null,
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"factory ",
+                "preferred_shipping_line_id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"ce1adcc6-1626-4d9c-bb38-5b598c968140",
+                "shipment_id":"91370054-d36a-416f-9139-667bcf1fa37a",
+                "port_id":"b960a0fb-f1d7-47aa-9622-fbad37aa88a2",
+                "main_port_id":null,
+                "trade_type":"import",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+                "containers_count":5,
+                "free_days_detention":0,
+                "free_days_demurrage":0,
+                "free_days_plugin":0,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"c85963e9-802b-49e6-8252-a67f05c05424",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-production.sgp1.digitaloceanspaces.com/bd974d074e3027baa98e00579a658c72/WhatsApp%20Image%202022-11-29%20at%201.14.22%20PM.jpeg",
+                "data":null,
+                "created_at":"2022-11-29T07:44:56.338Z",
+                "updated_at":"2022-11-29T07:44:56.446Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-11-29T07:45:52.261Z",
+          "origin_port_id":"33470eb3-0a63-4427-bf7e-b68d043364dc",
+          "destination_port_id":"b960a0fb-f1d7-47aa-9622-fbad37aa88a2",
+          "origin_main_port_id":null,
+          "destination_main_port_id":null,
+          "container_size":"40HC",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"polyster ",
+          "shipping_line_id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+          "service_provider_id":"53ef481f-24cf-4db1-97f0-2e78670d9b15",
+          "inco_term":"fob",
+          "containers_count":5,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":null,
+          "selected_schedule_arrival":null,
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":14,
+          "schedule_departure":"2022-12-03T07:45:00.000Z",
+          "schedule_arrival":null,
+          "si_cutoff":null,
+          "gate_in_cutoff":null,
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-11-29",
+          "bn_expiry":null,
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"factory ",
+          "preferred_shipping_line_id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"c47e4be6-c001-40c5-ae5f-5046ce88cdeb",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"33470eb3-0a63-4427-bf7e-b68d043364dc",
+             "name":"Shanghai",
+             "display_name":"Shanghai (CNSGH), Shanghai, China",
+             "pincode_id":null,
+             "port_code":"CNSGH",
+             "postal_code":null,
+             "country":{
+                "id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+                "name":"China",
+                "display_name":"China, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"85b01d82-8a3f-4e7f-ace9-58b10f9466ad",
+                "country_id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"35.86166",
+                "longitude":"104.195397",
+                "loc":"POINT (104.195397 35.86166)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"CNY",
+                "country_code":"CN",
+                "mobile_country_code":"+86",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_64.png",
+                "created_at":"2019-11-22T04:59:02.394Z",
+                "updated_at":"2019-11-22T04:59:02.394Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"b960a0fb-f1d7-47aa-9622-fbad37aa88a2",
+             "name":"Hazira",
+             "display_name":"Hazira (INHZA), Surat, India",
+             "pincode_id":"4f5f046e-7949-4c6f-a524-184a3ba45669",
+             "port_code":"INHZA",
+             "postal_code":"394270",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"3b3af9d4-905c-413f-99ff-fd993bc84cf6",
+             "business_name":"UNIFY TEXTURISERS PRIVATE LIMITED",
+             "trade_name":"UNIFY TEXTURISERS PVT. LTD.",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":64440,
+             "sage_company_id":"301",
+             "registration_number":"AAACU8565F",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"ace9a99a-8ac3-4aa7-b6b1-17d1d242ea68",
+             "branch_name":"UNIFY TEXTURISERS PVT. LTD.",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"UNI644401652855223"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+             "business_name":"COSCO (INDIA) SHIPPING PVT LTD"
+          },
+          "booking_agent":{
+             "id":"e05c16bf-ad33-43af-8394-61b5346f4587",
+             "name":"Shivendra Singh",
+             "email":"shivendra.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9911932616"
+          },
+          "agent":{
+             "id":"e946581d-2101-421a-909e-f8ea349786f6",
+             "name":"Sayali Kamerkar",
+             "email":"sayali.kamerkar@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7588970899"
+          },
+          "importer_exporter_poc":{
+             "id":"c47e4be6-c001-40c5-ae5f-5046ce88cdeb",
+             "name":"Mohsin S. Dhorajiwala",
+             "email":"unifytext@hotmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9820034112"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"53ef481f-24cf-4db1-97f0-2e78670d9b15",
+             "business_name":"Wheel-done (Shenzhen) Logistics Co.,Ltd.",
+             "trade_name":"Wheel-done (Shenzhen) Logistics Co.,Ltd.",
+             "country_id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+             "serial_id":70842,
+             "sage_company_id":"301",
+             "registration_number":"91440300MA5GU6GTXM",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"import",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"c47e4be6-c001-40c5-ae5f-5046ce88cdeb",
+             "name":"Mohsin S. Dhorajiwala",
+             "email":"unifytext@hotmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9820034112"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"3c5d996c-4d4e-4a2b-bce7-1024b46f7300",
+             "business_name":"COSCO (INDIA) SHIPPING PVT LTD"
+          },
+          "service_ops1":{
+             "id":"92f8d92c-92fb-43e9-8da1-1d697c24f049",
+             "name":"Ayush Sharma",
+             "email":"ayush.sharma@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9523757703"
+          },
+          "service_ops2":{
+             "id":"2ef0b78c-1490-4253-ab46-d714cb8942ed",
+             "name":"Manoj Joshi",
+             "email":"manoj.joshi@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8755285147"
+          },
+          "service_ops3":{
+             "id":"6ee6cbc3-b51e-43d1-a0c0-ed8e1f4a3015",
+             "name":"Rohit Sharma",
+             "email":"rohit.s@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7982556644"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":3,
+          "unread_messages_count":0,
+          "freight_total":725.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.92,
+          "transit_days":null
+       },
+       {
+          "id":"173c4765-f2fe-448b-80fa-2d49b0d1e219",
+          "serial_id":126702,
+          "importer_exporter_id":"93bd6c1f-a7ca-41b9-b49a-cc3a67792e4c",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"direct",
+          "source_id":"deec9a15-9f40-4556-bd9b-4d5bfb9b3a52",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"507ae6cf-0cf4-4e8e-911d-c52a2a11db8e",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-11-29T07:43:18.762Z",
+          "cancellation_reason":null,
+          "agent_id":"7b1368ba-31ab-48cc-a129-91cc529cbf62",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"RAS POLYPACK PRIVATE LIMITED",
+             "email":"kppolypack@gmail.com",
+             "company_name":"RAS POLYPACK PRIVATE LIMITED",
+             "mobile_number":"7089312819",
+             "company_branch":"RAS POLYPACK PRIVATE LIMITED",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"customize",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"prepaid",
+          "confirmed_by_importer_exporter_at":"2022-11-29T07:44:25.786Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"e5c3e360-cd10-497d-a51b-a350ba8d8e1d",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"c0ad0204-dc66-4e34-a4ab-ca123cb1af2e",
+                "shipment_id":"173c4765-f2fe-448b-80fa-2d49b0d1e219",
+                "origin_port_id":"4772b80f-ac4b-45a5-b97e-4cd9c5516c76",
+                "destination_port_id":"06523bfc-a302-4780-8671-7ed29dab9779",
+                "origin_main_port_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+                "destination_main_port_id":null,
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"Pickup Loc.: ICD Panki, Kanpur\nHandover Loc.: ICD Panki, Kanpur\nPol.: Mundra\nCommodity.: PP Woven sacks / FIBC\nGross Weight.: 28000 Kgs (+/-, 5 % )\n",
+                "shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+                "service_provider_id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+                "inco_term":"cif",
+                "containers_count":1,
+                "cargo_weight_per_container":28.0,
+                "selected_schedule_departure":"2022-12-07T07:39:00.000Z",
+                "selected_schedule_arrival":"2022-12-21T07:39:00.000Z",
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":7,
+                "schedule_departure":"2022-12-10T07:43:00.000Z",
+                "schedule_arrival":"2022-12-21T07:39:00.000Z",
+                "si_cutoff":null,
+                "gate_in_cutoff":null,
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-11-30",
+                "bn_expiry":null,
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"Panki",
+                "preferred_shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"b5d7273c-0e14-46ea-9368-0ceacf16d08d",
+                "shipment_id":"173c4765-f2fe-448b-80fa-2d49b0d1e219",
+                "port_id":"4772b80f-ac4b-45a5-b97e-4cd9c5516c76",
+                "main_port_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+                "trade_type":"export",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+                "containers_count":1,
+                "free_days_detention":10,
+                "free_days_demurrage":7,
+                "free_days_plugin":4,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"a1227cd4-d9fa-45ea-92c2-5f9934af7625",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-production.sgp1.digitaloceanspaces.com/7fe3156bd0895647e2b61272b53e2395/Panki%20to%20london%20Gateway.pdf",
+                "data":null,
+                "created_at":"2022-11-29T07:43:20.169Z",
+                "updated_at":"2022-11-29T07:43:20.280Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-11-29T07:44:28.977Z",
+          "origin_port_id":"4772b80f-ac4b-45a5-b97e-4cd9c5516c76",
+          "destination_port_id":"06523bfc-a302-4780-8671-7ed29dab9779",
+          "origin_main_port_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+          "destination_main_port_id":null,
+          "container_size":"40HC",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"Pickup Loc.: ICD Panki, Kanpur\nHandover Loc.: ICD Panki, Kanpur\nPol.: Mundra\nCommodity.: PP Woven sacks / FIBC\nGross Weight.: 28000 Kgs (+/-, 5 % )\n",
+          "shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+          "service_provider_id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+          "inco_term":"cif",
+          "containers_count":1,
+          "cargo_weight_per_container":28.0,
+          "selected_schedule_departure":"2022-12-07T07:39:00.000Z",
+          "selected_schedule_arrival":"2022-12-21T07:39:00.000Z",
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":7,
+          "schedule_departure":"2022-12-10T07:43:00.000Z",
+          "schedule_arrival":"2022-12-21T07:39:00.000Z",
+          "si_cutoff":null,
+          "gate_in_cutoff":null,
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-11-30",
+          "bn_expiry":null,
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"Panki",
+          "preferred_shipping_line_id":"b5573cc4-8599-4957-a6f7-766a317290da",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"507ae6cf-0cf4-4e8e-911d-c52a2a11db8e",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"4772b80f-ac4b-45a5-b97e-4cd9c5516c76",
+             "name":"ICD Panki (JRY)",
+             "display_name":"ICD Panki (JRY) (INKNU), Kanpur, India",
+             "pincode_id":"ae3700fe-6aef-4f3e-8fa4-a658ebcab3a6",
+             "port_code":"INKNU",
+             "postal_code":"208020",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"06523bfc-a302-4780-8671-7ed29dab9779",
+             "name":"London gateway port",
+             "display_name":"London gateway port (GBLGP), London, United Kingdom",
+             "pincode_id":null,
+             "port_code":"GBLGP",
+             "postal_code":null,
+             "country":{
+                "id":"222d4b9d-56a8-4580-b761-a71c653263fb",
+                "name":"United Kingdom",
+                "display_name":"United Kingdom, Europe",
+                "type":"country",
+                "status":"active",
+                "continent_id":"72abc4ba-6368-4501-9a86-8065f5c191f8",
+                "trade_id":"b9e1e31f-bead-4414-b06b-2b9d616d0163",
+                "country_id":"222d4b9d-56a8-4580-b761-a71c653263fb",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"55.37805",
+                "longitude":"-3.435973",
+                "loc":"POINT (-3.435973 55.37805)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"GBP",
+                "country_code":"GB",
+                "mobile_country_code":"+44",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Kingdom_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Kingdom_64.png",
+                "created_at":"2019-11-22T04:58:57.563Z",
+                "updated_at":"2019-11-22T04:58:57.563Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":{
+             "id":"c4301086-92a8-463d-af00-9c1222ff223f",
+             "name":"Mundra",
+             "display_name":"Mundra (INMUN), Bhuj, India",
+             "pincode_id":"02c311db-3a08-41ae-909f-720feeb59762",
+             "port_code":"INMUN",
+             "postal_code":"370421",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"93bd6c1f-a7ca-41b9-b49a-cc3a67792e4c",
+             "business_name":"RAS POLYPACK PRIVATE LIMITED",
+             "trade_name":"RAS POLYPACK PRIVATE LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":64416,
+             "sage_company_id":"301",
+             "registration_number":"AAJCR0456K",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"e5c3e360-cd10-497d-a51b-a350ba8d8e1d",
+             "branch_name":"RAS POLYPACK PRIVATE LIMITED",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"RAS644161652793324"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"b5573cc4-8599-4957-a6f7-766a317290da",
+             "business_name":"Any Shipping Line"
+          },
+          "booking_agent":{
+             "id":"7b1368ba-31ab-48cc-a129-91cc529cbf62",
+             "name":"Vinit Patel",
+             "email":"vinit.patel@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7698945722"
+          },
+          "agent":{
+             "id":"7b1368ba-31ab-48cc-a129-91cc529cbf62",
+             "name":"Vinit Patel",
+             "email":"vinit.patel@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7698945722"
+          },
+          "importer_exporter_poc":{
+             "id":"507ae6cf-0cf4-4e8e-911d-c52a2a11db8e",
+             "name":"RAS POLYPACK PRIVATE LIMITED",
+             "email":"kppolypack@gmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7089312819"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+             "business_name":"CogoXpress",
+             "trade_name":"CogoXpress",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":55244,
+             "sage_company_id":"101",
+             "registration_number":"AAGCC4470G",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"export",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"507ae6cf-0cf4-4e8e-911d-c52a2a11db8e",
+             "name":"RAS POLYPACK PRIVATE LIMITED",
+             "email":"kppolypack@gmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7089312819"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"b5573cc4-8599-4957-a6f7-766a317290da",
+             "business_name":"Any Shipping Line"
+          },
+          "service_ops1":{
+             "id":"519b0163-7ac6-495f-820b-8684e5fc3c85",
+             "name":"Thuyavan T",
+             "email":"thuyavan.t@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9445731136"
+          },
+          "service_ops2":{
+             "id":"4c08723c-5ede-46a7-aa42-038dab48f43d",
+             "name":"Shashank Singh",
+             "email":"shashank.singh@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8953290600"
+          },
+          "service_ops3":{
+             "id":"2516ccd1-d311-4045-8b40-b38d713ae5f8",
+             "name":"Ajit Kumar",
+             "email":"accounts.domestic@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9971674033"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":3,
+          "unread_messages_count":0,
+          "freight_total":1650.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.92,
+          "transit_days":14
+       },
+       {
+          "id":"e23c91d0-cead-4d98-9579-29e4ec6c6a64",
+          "serial_id":126701,
+          "importer_exporter_id":"9dc2eb1c-18d2-4c0d-8561-0fea65fe2395",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "haulage_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"direct",
+          "source_id":"fce8ae87-5887-44cb-86da-df41efa75b2c",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"3eb82006-92d4-4ea9-98d0-cebbde4674a6",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-11-29T07:41:16.602Z",
+          "cancellation_reason":null,
+          "agent_id":"1b640e4c-035f-4fa9-a32b-579eb82b1f29",
+          "partner_id":"6fd98605-9d5d-479d-9fac-cf905d292b88",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Karan goel",
+             "email":"goelk19@gmail.com",
+             "company_name":"PARVEEN KUMAR GOYAL",
+             "mobile_number":"8837875745",
+             "company_branch":"PARVEEN KUMAR GOYAL",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":null,
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"customize",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"collect",
+          "confirmed_by_importer_exporter_at":"2022-11-29T07:42:21.488Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"8ca07e40-97e1-4b07-93f4-a02e83120472",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"67584434-6887-492a-9d34-fdbcea5e17c6",
+                "shipment_id":"e23c91d0-cead-4d98-9579-29e4ec6c6a64",
+                "origin_port_id":"6eb66c1b-9348-4fb9-a9e7-37c5d153272e",
+                "destination_port_id":"03188c94-1a5e-4819-b3d9-b7d7a3fce678",
+                "origin_main_port_id":null,
+                "destination_main_port_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"MACHINERY PARTS",
+                "shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+                "service_provider_id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+                "inco_term":"fob",
+                "containers_count":1,
+                "cargo_weight_per_container":17.0,
+                "selected_schedule_departure":"2022-12-05T07:35:00.000Z",
+                "selected_schedule_arrival":"2022-12-27T07:35:00.000Z",
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":14,
+                "schedule_departure":"2022-12-05T07:41:00.000Z",
+                "schedule_arrival":"2022-12-27T07:35:00.000Z",
+                "si_cutoff":null,
+                "gate_in_cutoff":null,
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-11-29",
+                "bn_expiry":null,
+                "booking_reference_number":null,
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"CHINA",
+                "preferred_shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             {
+                "id":"f74de529-aa81-417c-8494-40cb4913868c",
+                "shipment_id":"e23c91d0-cead-4d98-9579-29e4ec6c6a64",
+                "origin_location_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+                "destination_location_id":"03188c94-1a5e-4819-b3d9-b7d7a3fce678",
+                "container_type":"standard",
+                "container_size":"40HC",
+                "commodity":null,
+                "containers_count":1,
+                "cargo_weight_per_container":17.0,
+                "haulage_type":"merchant",
+                "shipping_line_id":null,
+                "transport_modes":[
+                   
+                ],
+                "main_service_id":null
+             }
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"5939c4e5-20f9-45fc-8d0f-18c62b8af77e",
+                "shipment_id":"e23c91d0-cead-4d98-9579-29e4ec6c6a64",
+                "port_id":"03188c94-1a5e-4819-b3d9-b7d7a3fce678",
+                "main_port_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+                "trade_type":"import",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+                "containers_count":1,
+                "free_days_detention":14,
+                "free_days_demurrage":7,
+                "free_days_plugin":10,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             {
+                "id":"c79993e7-c637-42f8-8ae9-8910a7f3846a",
+                "document_type":"booking_proof",
+                "state":"document_accepted",
+                "document_url":"https://cogoport-production.sgp1.digitaloceanspaces.com/02c8995057b6f0e5980d704da9b75dc8/ab1fba23-2118-4740-ba2b-59ba215039c0.jpg",
+                "data":null,
+                "created_at":"2022-11-29T07:41:18.549Z",
+                "updated_at":"2022-11-29T07:41:18.666Z",
+                "source":null
+             }
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-11-29T07:42:26.136Z",
+          "origin_port_id":"6eb66c1b-9348-4fb9-a9e7-37c5d153272e",
+          "destination_port_id":"03188c94-1a5e-4819-b3d9-b7d7a3fce678",
+          "origin_main_port_id":null,
+          "destination_main_port_id":"c4301086-92a8-463d-af00-9c1222ff223f",
+          "container_size":"40HC",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"MACHINERY PARTS",
+          "shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+          "service_provider_id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+          "inco_term":"fob",
+          "containers_count":1,
+          "cargo_weight_per_container":17.0,
+          "selected_schedule_departure":"2022-12-05T07:35:00.000Z",
+          "selected_schedule_arrival":"2022-12-27T07:35:00.000Z",
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":14,
+          "schedule_departure":"2022-12-05T07:41:00.000Z",
+          "schedule_arrival":"2022-12-27T07:35:00.000Z",
+          "si_cutoff":null,
+          "gate_in_cutoff":null,
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-11-29",
+          "bn_expiry":null,
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"CHINA",
+          "preferred_shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"3eb82006-92d4-4ea9-98d0-cebbde4674a6",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"6eb66c1b-9348-4fb9-a9e7-37c5d153272e",
+             "name":"Shenzhen",
+             "display_name":"Shenzhen (CNSNZ), Shenzhen, China",
+             "pincode_id":null,
+             "port_code":"CNSNZ",
+             "postal_code":null,
+             "country":{
+                "id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+                "name":"China",
+                "display_name":"China, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"85b01d82-8a3f-4e7f-ace9-58b10f9466ad",
+                "country_id":"1b94734e-7d51-4e94-9dd2-ef96aee64a8f",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"35.86166",
+                "longitude":"104.195397",
+                "loc":"POINT (104.195397 35.86166)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"CNY",
+                "country_code":"CN",
+                "mobile_country_code":"+86",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/China_64.png",
+                "created_at":"2019-11-22T04:59:02.394Z",
+                "updated_at":"2019-11-22T04:59:02.394Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"03188c94-1a5e-4819-b3d9-b7d7a3fce678",
+             "name":"ICD Sahnewal (GRFL)",
+             "display_name":"ICD Sahnewal (GRFL) (INSGF), Ludhiana, India",
+             "pincode_id":"0b07e0f2-a8ed-4326-a8e6-e11b3b4fdf5e",
+             "port_code":"INSGF",
+             "postal_code":"141010",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":null,
+          "destination_main_port":{
+             "id":"c4301086-92a8-463d-af00-9c1222ff223f",
+             "name":"Mundra",
+             "display_name":"Mundra (INMUN), Bhuj, India",
+             "pincode_id":"02c311db-3a08-41ae-909f-720feeb59762",
+             "port_code":"INMUN",
+             "postal_code":"370421",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"9dc2eb1c-18d2-4c0d-8561-0fea65fe2395",
+             "business_name":"PARVEEN KUMAR GOYAL",
+             "trade_name":"M/S KARAN STEELS",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":49558,
+             "sage_company_id":"301",
+             "registration_number":"AGVPG8183H",
+             "tags":[
+                
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"8ca07e40-97e1-4b07-93f4-a02e83120472",
+             "branch_name":"PARVEEN KUMAR GOYAL",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"PAR495581642614709"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+             "business_name":"OOCL(ORIENT OVERSEAS CONTAINER LINES)"
+          },
+          "booking_agent":{
+             "id":"9f82cf0e-3328-4d6f-8779-03f257361ef6",
+             "name":"Ashok Kumar",
+             "email":"ashok.kumar@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9779337007"
+          },
+          "agent":{
+             "id":"1b640e4c-035f-4fa9-a32b-579eb82b1f29",
+             "name":"Vishkarma Mehra",
+             "email":"vishkarma.mehra@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9646889746"
+          },
+          "importer_exporter_poc":{
+             "id":"3eb82006-92d4-4ea9-98d0-cebbde4674a6",
+             "name":"Karan goel",
+             "email":"goelk19@gmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8837875745"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"536abfe7-eab8-4a43-a4c3-6ff318ce01b5",
+             "business_name":"CogoXpress",
+             "trade_name":"CogoXpress",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":55244,
+             "sage_company_id":"101",
+             "registration_number":"AAGCC4470G",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"import",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"3eb82006-92d4-4ea9-98d0-cebbde4674a6",
+             "name":"Karan goel",
+             "email":"goelk19@gmail.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8837875745"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+             "business_name":"OOCL(ORIENT OVERSEAS CONTAINER LINES)"
+          },
+          "service_ops1":{
+             "id":"f1ddc373-dbe4-4fdb-95ee-f5172f39b3ed",
+             "name":"Udit Agrahari",
+             "email":"udit.agrahari@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7905588502"
+          },
+          "service_ops2":{
+             "id":"2ef0b78c-1490-4253-ab46-d714cb8942ed",
+             "name":"Manoj Joshi",
+             "email":"manoj.joshi@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8755285147"
+          },
+          "service_ops3":{
+             "id":"2516ccd1-d311-4045-8b40-b38d713ae5f8",
+             "name":"Ajit Kumar",
+             "email":"accounts.domestic@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9971674033"
+          },
+          "entity_manager":null,
+          "pending_tasks_count":3,
+          "unread_messages_count":0,
+          "freight_total":775.0,
+          "freight_currency":"USD",
+          "discount_amount":0,
+          "discount_amount_currency":"INR",
+          "exchange_rate":84.92,
+          "transit_days":22
+       },
+       {
+          "id":"cce0f908-1760-456d-9ebe-e641d41321f1",
+          "serial_id":126698,
+          "importer_exporter_id":"8e152765-9161-4521-896b-56dd27bc5a35",
+          "shipment_type":"fcl_freight",
+          "services":[
+             "fcl_freight_service",
+             "fcl_freight_local_service"
+          ],
+          "source":"spot_booking",
+          "source_id":"ab49472a-1504-4ea1-8851-d19a234ede34",
+          "state":"confirmed_by_importer_exporter",
+          "importer_exporter_poc_id":"497dca40-2662-4b84-9188-d78f7214e8a6",
+          "importer_exporter_reference_id":null,
+          "created_at":"2022-11-29T07:27:14.478Z",
+          "cancellation_reason":null,
+          "agent_id":"497dca40-2662-4b84-9188-d78f7214e8a6",
+          "partner_id":"01143f46-a429-4f04-905e-e227b4a77435",
+          "cancellation_subreason":null,
+          "cancellation_reason_comment":null,
+          "booking_agent_id":null,
+          "consignee_details":null,
+          "shipper_details":null,
+          "notify_party_details":null,
+          "booking_party_details":{
+             "name":"Inder Pal Singh",
+             "email":"cordn@jdfreightsolutions.com",
+             "company_name":"JD FREIGHT SOLUTIONS",
+             "mobile_number":"7300751968",
+             "company_branch":"JD FREIGHT SOLUTIONS",
+             "mobile_country_code":"+91"
+          },
+          "consignee_trade_contact_id":null,
+          "shipper_trade_contact_id":null,
+          "notify_party_trade_contact_id":null,
+          "booking_party_trade_contact_id":null,
+          "booking_reference_number":"2710614770",
+          "cargo_value":null,
+          "cargo_value_currency":null,
+          "shipper_contact_status":"confirmed",
+          "shipment_parties_sage_company_id_mappings":[
+             
+          ],
+          "is_all_services_allocated":null,
+          "supply_agent_id":null,
+          "terms_and_conditions":[
+             
+          ],
+          "quotation_type":"default",
+          "sage_trigger_hash":null,
+          "importer_exporter_poc_data":null,
+          "exporter_details":null,
+          "importer_details":null,
+          "origin_agent_details":null,
+          "destination_agent_details":null,
+          "exporter_trade_contact_id":null,
+          "importer_trade_contact_id":null,
+          "origin_agent_trade_contact_id":null,
+          "destination_agent_trade_contact_id":null,
+          "notify_parties_details":[
+             
+          ],
+          "customer_service_agent_id":null,
+          "operations_agent_id":null,
+          "booking_params":null,
+          "booking_params_approval_status":null,
+          "margin_approval_manager_id":null,
+          "margin_approval_requested_by_id":null,
+          "margin_approval_status":null,
+          "margin_approval_request_remarks":[
+             
+          ],
+          "margin_approval_managers":[
+             
+          ],
+          "margin_approval_manager_assigned_at":null,
+          "margin_approval_remarks":[
+             
+          ],
+          "is_applicable_for_approval_confirmation":false,
+          "payment_term":"prepaid",
+          "confirmed_by_importer_exporter_at":"2022-11-29T08:44:36.215Z",
+          "booking_placed_with_service_provider_at":null,
+          "importer_exporter_branch_id":"486c53cd-f952-4aaa-a2f1-aa99195cf122",
+          "invoice_combination":null,
+          "shipper_contact_status_remarks":[
+             
+          ],
+          "is_job_closed":false,
+          "invoice_trigger_date":null,
+          "po_number":null,
+          "alarm_description":[
+             
+          ],
+          "tags":[
+             
+          ],
+          "cogo_assured_value_props":[
+             
+          ],
+          "pinned_by_id":null,
+          "preferred_departure_date":null,
+          "shipment_process_id":"f31651f4-c4fa-4e71-aac4-deca1d544752",
+          "parent_shipment_id":null,
+          "is_flashed":true,
+          "is_cancellation_requested":null,
+          "cancellation_detail":null,
+          "payment_subterm":null,
+          "fcl_freight_services":[
+             {
+                "id":"3559b30c-78ba-4c01-824d-54c619b8da54",
+                "shipment_id":"cce0f908-1760-456d-9ebe-e641d41321f1",
+                "origin_port_id":"aa48fa47-b3f6-4473-a01d-8f058583e80d",
+                "destination_port_id":"636c38fe-b280-4173-95c0-eeb022a8a0ef",
+                "origin_main_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_main_port_id":null,
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "commodity_description":"Handicraft",
+                "shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+                "service_provider_id":"f52d259c-2a24-4d69-aae2-d57c65958012",
+                "inco_term":"cif",
+                "containers_count":1,
+                "cargo_weight_per_container":18.0,
+                "selected_schedule_departure":null,
+                "selected_schedule_arrival":null,
+                "bls_count":1,
+                "bl_type":"sob",
+                "free_days_detention_destination":7,
+                "schedule_departure":"2022-12-08T08:44:00.000Z",
+                "schedule_arrival":null,
+                "si_cutoff":null,
+                "gate_in_cutoff":null,
+                "si_filed_at":null,
+                "cargo_readiness_date":"2022-11-29",
+                "bn_expiry":null,
+                "booking_reference_number":"2710614770",
+                "main_service_id":null,
+                "rate_reference_number":null,
+                "cargo_stuffing_location":"Factory",
+                "preferred_shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+                "number_of_stops":0,
+                "service_state":"awaiting_service_provider_confirmation",
+                "is_cogo_assured":false
+             }
+          ],
+          "lcl_freight_services":[
+             
+          ],
+          "air_freight_services":[
+             
+          ],
+          "domestic_air_freight_services":[
+             
+          ],
+          "ftl_freight_services":[
+             
+          ],
+          "ltl_freight_services":[
+             
+          ],
+          "haulage_freight_services":[
+             
+          ],
+          "fcl_customs_services":[
+             
+          ],
+          "fcl_cfs_services":[
+             
+          ],
+          "lcl_customs_services":[
+             
+          ],
+          "air_customs_services":[
+             
+          ],
+          "domestic_air_freight_terminal_services":[
+             
+          ],
+          "fcl_freight_local_services":[
+             {
+                "id":"937bef63-5efd-48e1-9eb1-6465c16ed7f7",
+                "shipment_id":"cce0f908-1760-456d-9ebe-e641d41321f1",
+                "port_id":"aa48fa47-b3f6-4473-a01d-8f058583e80d",
+                "main_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "trade_type":"export",
+                "container_size":"40HC",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+                "containers_count":1,
+                "free_days_detention":0,
+                "free_days_demurrage":0,
+                "free_days_plugin":0,
+                "main_service_id":null
+             }
+          ],
+          "lcl_freight_local_services":[
+             
+          ],
+          "air_freight_local_services":[
+             
+          ],
+          "documents":[
+             
+          ],
+          "bl_details":[
+             
+          ],
+          "last_updated_at":"2022-11-29T08:44:39.447Z",
+          "origin_port_id":"aa48fa47-b3f6-4473-a01d-8f058583e80d",
+          "destination_port_id":"636c38fe-b280-4173-95c0-eeb022a8a0ef",
+          "origin_main_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+          "destination_main_port_id":null,
+          "container_size":"40HC",
+          "container_type":"standard",
+          "commodity":"general",
+          "commodity_description":"Handicraft",
+          "shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+          "service_provider_id":"f52d259c-2a24-4d69-aae2-d57c65958012",
+          "inco_term":"cif",
+          "containers_count":1,
+          "cargo_weight_per_container":18.0,
+          "selected_schedule_departure":null,
+          "selected_schedule_arrival":null,
+          "bls_count":1,
+          "bl_type":"sob",
+          "free_days_detention_destination":7,
+          "schedule_departure":"2022-12-08T08:44:00.000Z",
+          "schedule_arrival":null,
+          "si_cutoff":null,
+          "gate_in_cutoff":null,
+          "si_filed_at":null,
+          "cargo_readiness_date":"2022-11-29",
+          "bn_expiry":null,
+          "rate_reference_number":null,
+          "cargo_stuffing_location":"Factory",
+          "preferred_shipping_line_id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+          "number_of_stops":0,
+          "service_state":"awaiting_service_provider_confirmation",
+          "is_cogo_assured":false,
+          "user_id":"497dca40-2662-4b84-9188-d78f7214e8a6",
+          "origin_pickup":null,
+          "origin_port":{
+             "id":"aa48fa47-b3f6-4473-a01d-8f058583e80d",
+             "name":"Moradabad (ICD|CFS|SEZ)",
+             "display_name":"Moradabad (ICD|CFS|SEZ) (INMOR), Moradabad, India",
+             "pincode_id":"565fe668-4742-4064-9a82-a43917ec796f",
+             "port_code":"INMOR",
+             "postal_code":"244001",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_port":{
+             "id":"636c38fe-b280-4173-95c0-eeb022a8a0ef",
+             "name":"Norfolk , Virginia",
+             "display_name":"Norfolk , Virginia (USORF), Norfolk, United States of America",
+             "pincode_id":null,
+             "port_code":"USORF",
+             "postal_code":null,
+             "country":{
+                "id":"fe92b7c7-9481-4a3b-8d79-df9a7bf94a4e",
+                "name":"United States of America",
+                "display_name":"United States of America, usa",
+                "type":"country",
+                "status":"active",
+                "continent_id":"4de32623-213a-4023-89d0-337390fd8fc3",
+                "trade_id":"99540d3c-db52-41c3-82e5-8135734b3770",
+                "country_id":"fe92b7c7-9481-4a3b-8d79-df9a7bf94a4e",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"37.09024",
+                "longitude":"-95.712891",
+                "loc":"POINT (-95.712891 37.09024)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":null,
+                "currency_code":"USD",
+                "country_code":"US",
+                "mobile_country_code":"+1",
+                "flag_icon_url":null,
+                "flag_image_url":null,
+                "created_at":"2019-11-22T04:58:58.143Z",
+                "updated_at":"2019-11-22T04:58:58.143Z",
+                "local_languages":null,
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "port":null,
+          "origin_main_port":{
+             "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+             "name":"Jawaharlal Nehru (Nhava Sheva)",
+             "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+             "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+             "port_code":"INNSA",
+             "postal_code":"400707",
+             "country":{
+                "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "name":"India",
+                "display_name":"India, Asia",
+                "type":"country",
+                "status":"active",
+                "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                "region_id":null,
+                "city_id":null,
+                "cluster_id":null,
+                "seaport_id":null,
+                "airport_id":null,
+                "pincode_id":null,
+                "latitude":"20.59368",
+                "longitude":"78.96288",
+                "loc":"POINT (78.96288 20.59368)",
+                "postal_code":null,
+                "is_icd":false,
+                "port_code":null,
+                "inttra_code":null,
+                "cfs_code":null,
+                "cfs_agency_name":null,
+                "address":"",
+                "currency_code":"INR",
+                "country_code":"IN",
+                "mobile_country_code":"+91",
+                "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                "created_at":"2019-11-22T04:58:57.515Z",
+                "updated_at":"2021-05-31T10:11:17.090Z",
+                "local_languages":[
+                   
+                ],
+                "zone_id":null,
+                "site_code":null
+             },
+             "flag_icon_url":null
+          },
+          "destination_main_port":null,
+          "destination_drop":null,
+          "origin_city":null,
+          "console_point":null,
+          "console_point_city":null,
+          "destination_city":null,
+          "deconsole_point":null,
+          "deconsole_point_city":null,
+          "origin_airport":null,
+          "destination_airport":null,
+          "airport":null,
+          "pickup":null,
+          "drop":null,
+          "importer_exporter":{
+             "id":"8e152765-9161-4521-896b-56dd27bc5a35",
+             "business_name":"JD FREIGHT SOLUTIONS",
+             "trade_name":"M/s JD FREIGHT SOLUTIONS",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":63585,
+             "sage_company_id":"301",
+             "registration_number":"AALFJ1291M",
+             "tags":[
+                "partner"
+             ]
+          },
+          "importer_exporter_branch":{
+             "id":"486c53cd-f952-4aaa-a2f1-aa99195cf122",
+             "branch_name":"JD FREIGHT SOLUTIONS",
+             "tax_number":"XXXXXXXXXXXXXXX",
+             "branch_code":"JDF635851650965683"
+          },
+          "origin_location":null,
+          "destination_location":null,
+          "location":null,
+          "shipping_line":{
+             "id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+             "business_name":"OOCL(ORIENT OVERSEAS CONTAINER LINES)"
+          },
+          "booking_agent":{
+             "id":"80a2775d-b401-4f12-8ed7-24f5994a3e85",
+             "name":"Kartik Wadhwa",
+             "email":"kartik.wadhwa@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8439326291"
+          },
+          "agent":{
+             "id":"497dca40-2662-4b84-9188-d78f7214e8a6",
+             "name":"Inder Pal Singh",
+             "email":"cordn@jdfreightsolutions.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7300751968"
+          },
+          "importer_exporter_poc":{
+             "id":"497dca40-2662-4b84-9188-d78f7214e8a6",
+             "name":"Inder Pal Singh",
+             "email":"cordn@jdfreightsolutions.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7300751968"
+          },
+          "margin_approval_requested_by":null,
+          "service_provider":{
+             "id":"f52d259c-2a24-4d69-aae2-d57c65958012",
+             "business_name":"MATRIX FREIGHT SYSTEMS PRIVATE LIMITED",
+             "trade_name":"MATRIX FREIGHT SYSTEMS PRIVATE LIMITED",
+             "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+             "serial_id":54751,
+             "sage_company_id":"101",
+             "registration_number":"AAGCM3218D",
+             "tags":[
+                "partner"
+             ]
+          },
+          "trade_type":"export",
+          "airline":null,
+          "consignee_name":null,
+          "supply_agent":null,
+          "user":{
+             "id":"497dca40-2662-4b84-9188-d78f7214e8a6",
+             "name":"Inder Pal Singh",
+             "email":"cordn@jdfreightsolutions.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"7300751968"
+          },
+          "booking_placed_with_supplier_at":null,
+          "preferred_shipping_line":{
+             "id":"9ee49704-f5a7-4f17-9e25-c5c3b5ec3d1d",
+             "business_name":"OOCL(ORIENT OVERSEAS CONTAINER LINES)"
+          },
+          "service_ops1":{
+             "id":"b77f26e9-2134-44eb-89d9-0ba7396d8b42",
+             "name":"Shubhodeep Mukherji",
+             "email":"shubodeep.mukherji@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8853735663"
+          },
+          "service_ops2":{
+             "id":"57f1cc6e-0b4e-43ee-bba5-d4933758cb5d",
+             "name":"Arjun Mishra",
+             "email":"arjun.mishra@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9622386229"
+          },
+          "service_ops3":{
+             "id":"2516ccd1-d311-4045-8b40-b38d713ae5f8",
+             "name":"Ajit Kumar",
+             "email":"accounts.domestic@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"9971674033"
+          },
+          "entity_manager":{
+             "id":"80a2775d-b401-4f12-8ed7-24f5994a3e85",
+             "name":"Kartik Wadhwa",
+             "email":"kartik.wadhwa@cogoport.com",
+             "mobile_country_code":"+91",
+             "mobile_number":"8439326291"
+          },
+          "pending_tasks_count":3,
+          "unread_messages_count":0,
+          "freight_total":4795.5545,
+          "freight_currency":"USD",
+          "discount_amount":572.0,
+          "discount_amount_currency":"USD",
+          "exchange_rate":84.92,
+          "transit_days":null
+       }
+    ],
+    "page":1,
+    "total":4,
+    "total_count":33,
+    "page_limit":10
+ }

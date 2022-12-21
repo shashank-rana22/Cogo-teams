@@ -8,3 +8,55 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.ui_tabs {
+	position: static !important;
+}
+.ui_tabs_list {
+	position: static !important;
+	margin-bottom: 0px;
+}
+.ui_tabs_list_container {
+	width: 260px;
+	height: 40px;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 18px;
+	position: static !important;
+}
+
+.headingContainer {
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .heading{
+	font-weight: 500;
+	font-size: 25px;
+	color: #333333;
+	
+ }
+
+ .row {
+    display: flex;
+	justify-content: flex-end;
+	margin-bottom: -36px;
+ }
+
+ .listWrapper {
+	margin-top: 10px;
+ }
+ .input{
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+	padding-bottom: 14px;
+
+ }
+
+ .loaderContainer{
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 8px;
+ }
