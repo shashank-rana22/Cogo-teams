@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import useListBookingPreference from '../../../hooks/revenueDeskHooks/useListBookingPreference';
+import useListBookingPreference from '../../../hooks/revenueDeskHooks/useListBookingPreference';
 import Body from './Body';
 import BookingPreference from './BookingPreference';
 import {IcMArrowRotateDown, IcMArrowRotateUp} from '@cogoport/icons-react'
@@ -22,14 +22,14 @@ function Card({
 	const initialService = services[0];
 	const [selectedService, setSelectedService] = useState(initialService);
 
-	// const {
-	// 	bookingData,
-	// 	bookingLoading = false,
-	// 	setView,
-	// 	view,
-	// } = useListBookingPreference({ data, selectedService });
+	const {
+		bookingData,
+		bookingLoading = false,
+		setView,
+		view,
+	} = useListBookingPreference({ data, selectedService });
 
-	const activeService =		activeTab === 'completed' ? selectedService?.id : clickedCard?.service?.id;
+	const activeService = activeTab === 'completed' ? selectedService?.id : clickedCard?.service?.id;
 
 	return (
 		<div className={styles.container}>

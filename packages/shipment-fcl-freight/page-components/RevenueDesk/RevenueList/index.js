@@ -16,12 +16,13 @@ function RevenueList({
 	controls = [],
 	shipment_type,
 }) {
+	console.log(activeTab,'activeTab');
 	
 	return (
 		<div>
 			<Tabs
 				activeTab={activeTab}
-				onChange={setActiveTab}
+				onChange={(tab) => setActiveTab(tab)}
 				suffix={<div className={styles.pagination_container}>Pagination</div>}
 			>
 				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
@@ -36,7 +37,14 @@ function RevenueList({
 				</TabPanel>
 
 				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
-					{/* <CompletedJobs /> */}
+					<CompletedJobs
+								data={listData}
+								page={page}
+								activeTab={activeTab}
+								setClickedCard={setClickedCard}
+								clickedCard={clickedCard}
+								shipment_type={shipment_type}
+							/>
 				</TabPanel>
 			</Tabs>
 		</div>

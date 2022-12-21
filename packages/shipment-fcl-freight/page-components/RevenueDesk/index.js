@@ -10,25 +10,28 @@ function RevenueDesk() {
 	const [activeTab, setActiveTab] = useState('pending');
 	const [clickedCard, setClickedCard] = useState(null);
 
-	// const {
-	// 	loading,
-	// 	filters,
-	// 	page,
-	// 	hookSetters,
-	// 	list: { total, data },
-	// 	refetch,
-	// } = useListShipments({ status: activeTab });
+	const {
+		loading,
+		filters,
+		page,
+		hookSetters,
+		list: { total, data },
+		refetch,
+	} = useListShipments({ status: activeTab });
 
-	const { list: listData, total_count: count } = ListJson;
-	console.log(listData, 'data');
+	// const { list: listData, total_count: count } = ListJson;
+	// console.log(listData, 'data');
+	
+
 	return (
 		<div className={styles.container}>
 			{!clickedCard ? (
 				<div>
 					<RevenueList
-						total={count}
-						listData={listData}
+						total={total}
+						listData={data}
 						activeTab={activeTab}
+						setActiveTab={setActiveTab}
 						setClickedCard={setClickedCard}
 						clickedCard={clickedCard}
 						shipment_type="fcl_freight"
