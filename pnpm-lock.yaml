@@ -75,6 +75,8 @@ importers:
       '@cogoport/utils': ^1.2.0
       axios: ^1.2.1
       cookies-next: ^2.1.1
+      dotenv: ^16.0.3
+      dotenv-expand: ^9.0.0
       next: 13.0.6
       qs: ^6.11.0
       react: 18.2.0
@@ -88,6 +90,8 @@ importers:
       '@cogoport/utils': 1.2.0
       axios: 1.2.1
       cookies-next: 2.1.1
+      dotenv: 16.0.3
+      dotenv-expand: 9.0.0
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       qs: 6.11.0
       react: 18.2.0

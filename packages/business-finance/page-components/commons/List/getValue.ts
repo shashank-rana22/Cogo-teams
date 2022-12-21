@@ -1,9 +1,10 @@
-import getByKey from 'lodash/get';
-import lodashIsEmpty from 'lodash/isEmpty';
-import startCase from 'lodash/startCase';
 import React from 'react';
 
 import { GenericObject, FunctionObjects, FieldType } from './Interfaces/index';
+
+const startCase=(arg:string):string=>{
+	return arg.replace(/_/g," ")
+}
 
 const ACTIONS = {
 	startCase,
@@ -17,7 +18,7 @@ const isEmpty = (input: TypeObject) => {
 	if (input instanceof Date) {
 		return false;
 	}
-	return lodashIsEmpty(input);
+	return Object.keys(input).length === 0||(input as string).length==0;
 };
 
 const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, emptyState:EmptyState) => {
@@ -25,7 +26,7 @@ const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, 
 		return emptyState || '';
 	}
 
-	let val = getByKey(itemData, itemField.key);
+	let val = itemData[itemField.key];
 
 	if (itemField.func) {
 		if (functions[itemField.func]) {
