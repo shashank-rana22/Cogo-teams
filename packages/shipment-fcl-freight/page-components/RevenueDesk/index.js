@@ -49,7 +49,7 @@ function RevenueDesk() {
 						service={clickedCard.service}
 						setShowBookingOption={setClickedCard}
 						showBookingOption= {clickedCard}
-						refetch={refetch}
+						// refetch={refetch}
 					/>
 
 				</div>
