@@ -33,14 +33,12 @@ const useListShipments = (allParams) => {
 							// 	'in_progress',
 							// 	'confirmed_by_importer_exporter',
 							// ],
-							// shipment_type: [
-							// 	'fcl_freight',
-							// 	'lcl_freight',
-							// 	'air_freight',
-							// 	? shipment_type
-							// 	: undefined,
-							// [service]:
-							// {
+							shipment_type: [
+								'fcl_freight',
+							].includes(shipment_type)
+								? shipment_type
+								: undefined,
+							// [service]: {
 							// 	state: [
 							// 		'awaiting_service_provider_confirmation',
 							// 		'confirmed_by_service_provider',

@@ -23,12 +23,10 @@ const useListBookingPreference = ({ data, selectedService }) => {
 			};
 
 			const res = await trigger({ params });
-            console.log(res,'ress');
 			if (!res.hasError) {
 				setBookingLoading(false);
 			}
 		} catch (error) {
-			Toast.error(error?.data);
 			setBookingLoading(false);
 		}
 		setBookingLoading(false);

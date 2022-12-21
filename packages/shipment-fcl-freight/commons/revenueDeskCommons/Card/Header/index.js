@@ -7,7 +7,6 @@ import incoTermMapping from '../../../../constants/incoTermMapping';
 
 
 const Header = ({ data = {}, activeTab = '' }) => {
-
 	const incoTerms = incoTermMapping;
 
 	const getHeading = ({ state = '' }) => {

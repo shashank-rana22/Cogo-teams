@@ -1,5 +1,6 @@
 import Card from "../../../../commons/revenueDeskCommons/Card";
 import styles from './styles.module.css';
+import {Pagination}  from '@cogoport/components'
 
 function PendingJobs({
 	data = [],
@@ -7,6 +8,7 @@ function PendingJobs({
 	hookSetters = () => {},
 	page = 1,
 	filters = {},
+	setShowBookingOption = () => {},
 	activeTab = '',
 	setClickedCard = () => {},
 	clickedCard,
@@ -18,7 +20,26 @@ function PendingJobs({
 
 	return (
 		<div className={styles.container}>
-			{/* {handlepagination()} */}
+			<div>
+					{total > 10 ? (
+					<div className={styles.paginationWrapper}>
+						<Pagination
+							type="compact"
+							totalItems={total}
+							PageSize={10}
+							currentPage={page}
+							handlePageChange={(val) =>
+								hookSetters.setFilters({
+									...filters,
+									page: val,
+								})
+							}
+						/>
+					</div>
+				) : null}
+			</div>
+
+
 			<div className={styles.cardContainer}>
 				{(data || []).map((item) => (
 					<Card
@@ -30,8 +51,26 @@ function PendingJobs({
 					/>
 				))}
 			</div>
+			
+			<div>
+					{total > 10 ? (
+					<div className={styles.paginationWrapper}>
+						<Pagination
+							type="number"
+							totalItems={total}
+							PageSize={10}
+							currentPage={page}
+							handlePageChange={(val) =>
+								hookSetters.setFilters({
+									...filters,
+									page: val,
+								})
+							}
+						/>
+					</div>
+				) : null}
+			</div>
 
-			{/* {handlepagination()} */}
 		</div>
 	);
 }

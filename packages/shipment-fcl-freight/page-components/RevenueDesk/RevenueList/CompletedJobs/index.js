@@ -1,6 +1,7 @@
 import Card from '../../../../commons/revenueDeskCommons/Card';
 
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
+import {Pagination} from '@cogoport/components'
 
 function CompletedJobs({
 	data = [],
@@ -18,8 +19,28 @@ function CompletedJobs({
 	};
 
 	return (
+	
 		<div >
-			{/* {handlepagination()} */}
+			
+			<div>
+					{total > 10 ? (
+					<div className={styles.paginationWrapper}>
+						<Pagination
+							type="compact"
+							totalItems={total}
+							PageSize={10}
+							currentPage={page}
+							handlePageChange={(val) =>
+								hookSetters.setFilters({
+									...filters,
+									page: val,
+								})
+							}
+						/>
+					</div>
+				) : null}
+			</div>
+
 			<div >
 				{(data || []).map((item) => (
 					<Card
@@ -32,7 +53,24 @@ function CompletedJobs({
 				))}
 			</div>
 
-			{/* {handlepagination()} */}
+			<div>
+					{total > 10 ? (
+					<div className={styles.paginationWrapper}>
+						<Pagination
+							type="compact"
+							totalItems={total}
+							PageSize={10}
+							currentPage={page}
+							handlePageChange={(val) =>
+								hookSetters.setFilters({
+									...filters,
+									page: val,
+								})
+							}
+						/>
+					</div>
+				) : null}
+			</div>
 		</div>
 	);
 }

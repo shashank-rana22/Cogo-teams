@@ -5,8 +5,9 @@
 }
 .tagWrapper{
     margin-right: 16px;
+	background-color: #d9eafd;
 }
 .tagWrapper:hover{
 	cursor: pointer;
-	background-color: #d9eafd;
+
 }

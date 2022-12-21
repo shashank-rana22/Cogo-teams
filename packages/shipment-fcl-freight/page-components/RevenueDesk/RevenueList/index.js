@@ -6,8 +6,14 @@ import PendingJobs from './PendingJobs';
 import styles from './styles.module.css';
 
 function RevenueList({
-	listData = {},
+	hookSetters = () => {},
+	loading = false,
+	listData = [],
+	setShowBookingOption = () => {},
+	total,
 	page = 1,
+	filters = {},
+	refetch = () => {},
 	setClickedCard = () => {},
 	clickedCard,
 	setActiveTab = () => {},
@@ -16,18 +22,48 @@ function RevenueList({
 	controls = [],
 	shipment_type,
 }) {
-	console.log(activeTab,'activeTab');
 	
 	return (
 		<div>
+			<div className={styles.heading}>
+				FCL Revenue Desk
+			</div>
+			<div className={styles.row}>
+
+				<div className={styles.input}>
+					<Input
+						value={serialId}
+						onChange={(e) => handleChangeSerial(e.target.value)}
+						placeholder="Search by SID"
+					/>
+				</div>
+
+				{/* <Popover
+						render={renderBody()}
+						className="primary_md"
+						placement="bottom"
+					>
+					<FclFilters onClick={() => setShowFilters(!showFilters)}>
+							<FilterIcon />
+					</FclFilters>
+					</Popover> */}
+
+			</div>
+
+
+
 			<Tabs
 				activeTab={activeTab}
 				onChange={(tab) => setActiveTab(tab)}
-				suffix={<div className={styles.pagination_container}>Pagination</div>}
 			>
 				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
 					<PendingJobs
+						setShowBookingOption={setShowBookingOption}
+						total={total}
 						data={listData}
+						hookSetters={hookSetters}
+						filters={filters}
+						refetch={refetch}
 						page={page}
 						activeTab={activeTab}
 						setClickedCard={setClickedCard}
@@ -38,7 +74,12 @@ function RevenueList({
 
 				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
 					<CompletedJobs
+								setShowBookingOption={setShowBookingOption}
+								total={total}
 								data={listData}
+								hookSetters={hookSetters}
+								filters={filters}
+								refetch={refetch}
 								page={page}
 								activeTab={activeTab}
 								setClickedCard={setClickedCard}
@@ -47,6 +88,11 @@ function RevenueList({
 							/>
 				</TabPanel>
 			</Tabs>
+
+			<div>
+
+			</div>
+
 		</div>
 	);
 }

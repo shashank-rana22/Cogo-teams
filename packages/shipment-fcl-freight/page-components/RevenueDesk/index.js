@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function RevenueDesk() {
 	const [activeTab, setActiveTab] = useState('pending');
 	const [clickedCard, setClickedCard] = useState(null);
+	const [showBookingOption, setShowBookingOption] = useState(false);
 
 	const {
 		loading,
@@ -20,7 +21,6 @@ function RevenueDesk() {
 	} = useListShipments({ status: activeTab });
 
 	// const { list: listData, total_count: count } = ListJson;
-	// console.log(listData, 'data');
 	
 
 	return (
@@ -28,8 +28,14 @@ function RevenueDesk() {
 			{!clickedCard ? (
 				<div>
 					<RevenueList
+						hookSetters={hookSetters}
+						loading={loading}
 						total={total}
+						page={1}
+						filters={filters}
+						refetch={refetch}
 						listData={data}
+						setShowBookingOption={setShowBookingOption}
 						activeTab={activeTab}
 						setActiveTab={setActiveTab}
 						setClickedCard={setClickedCard}

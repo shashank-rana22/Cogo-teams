@@ -1,0 +1,574 @@
+{
+    "list":[
+       {
+          "ids":[
+             "80060f9a-f7e9-49a1-a6ee-aa0ff6c81a09"
+          ],
+          "type":"single",
+          "priority":1,
+          "source":"bn_salvage",
+          "data":[
+             {
+                "id":"80060f9a-f7e9-49a1-a6ee-aa0ff6c81a09",
+                "shipment_id":0,
+                "document_type":"booking_note",
+                "operator_id":"168d1c83-36b6-44a9-964b-e7c2184e597e",
+                "service_provider_id":"9aca30ee-6081-4ef2-ab7c-59b168626285",
+                "origin_location_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_location_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "containers_count":1,
+                "container_type":"standard",
+                "container_size":"20",
+                "commodity":"general",
+                "status":"active",
+                "source":"shipment_cancellation",
+                "url":"https://cogoport-production.sgp1.digitaloceanspaces.com/39c5a79b82b38526d049ffe00adc6837/CSXB22NSAJEA041001%20cogo.pdf",
+                "document_number":"CSXB22NSAJEA041001",
+                "charges":{
+                   "line_items":[
+                      {
+                         "code":"BAS",
+                         "name":"Basic Freight",
+                         "unit":"per_container",
+                         "price":121.8875,
+                         "currency":"USD"
+                      }
+                   ]
+                },
+                "yard_detail_id":null,
+                "booking_party":null,
+                "expiry":"2022-11-11T06:19:00.000Z",
+                "vgm_cutoff":"2022-11-11T06:19:00.000Z",
+                "si_cutoff":"2022-11-11T06:19:00.000Z",
+                "document_cutoff":"2022-11-11T06:19:00.000Z",
+                "gate_in_cutoff":"2022-11-11T06:19:00.000Z",
+                "tr_cutoff":"2022-11-11T06:19:00.000Z",
+                "si_filed_at":"2022-11-10T07:16:41.500Z",
+                "schedule_departure":"2022-11-13T00:54:00.000Z",
+                "schedule_arrival":"2022-11-16T00:45:00.000Z",
+                "remarks":[
+                   
+                ],
+                "created_at":"2022-11-10T07:16:41.711Z",
+                "updated_at":"2022-11-10T07:16:41.711Z",
+                "operator":{
+                   "id":"168d1c83-36b6-44a9-964b-e7c2184e597e",
+                   "business_name":"Cordelia Container Shipping Line"
+                },
+                "service_provider":{
+                   "id":"9aca30ee-6081-4ef2-ab7c-59b168626285",
+                   "business_name":"CORDELIA CONTAINER SHIPPING LINE PRIVATE LIMITED",
+                   "trade_name":"CORDELIA CONTAINER SHIPPING LINE PRIVATE LIMITED",
+                   "serial_id":55082
+                },
+                "origin_location":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+                   "port_code":"INNSA",
+                   "postal_code":"400707",
+                   "country":{
+                      "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                      "name":"India",
+                      "display_name":"India, Asia",
+                      "type":"country",
+                      "status":"active",
+                      "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                      "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                      "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                      "region_id":null,
+                      "city_id":null,
+                      "cluster_id":null,
+                      "seaport_id":null,
+                      "airport_id":null,
+                      "pincode_id":null,
+                      "latitude":"20.59368",
+                      "longitude":"78.96288",
+                      "loc":"POINT (78.96288 20.59368)",
+                      "postal_code":null,
+                      "is_icd":false,
+                      "port_code":null,
+                      "inttra_code":null,
+                      "cfs_code":null,
+                      "cfs_agency_name":null,
+                      "address":"",
+                      "currency_code":"INR",
+                      "country_code":"IN",
+                      "mobile_country_code":"+91",
+                      "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                      "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                      "created_at":"2019-11-22T04:58:57.515Z",
+                      "updated_at":"2021-05-31T10:11:17.090Z",
+                      "local_languages":[
+                         
+                      ],
+                      "zone_id":null,
+                      "site_code":null
+                   }
+                },
+                "destination_location":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "pincode_id":null,
+                   "port_code":"AEJEA",
+                   "postal_code":null,
+                   "country":{
+                      "id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                      "name":"United Arab Emirates",
+                      "display_name":"United Arab Emirates, Meg",
+                      "type":"country",
+                      "status":"active",
+                      "continent_id":"4a4c0a00-1cc6-4662-822b-b2655c783ee8",
+                      "trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                      "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                      "region_id":null,
+                      "city_id":null,
+                      "cluster_id":null,
+                      "seaport_id":null,
+                      "airport_id":null,
+                      "pincode_id":null,
+                      "latitude":"23.42408",
+                      "longitude":"53.847818",
+                      "loc":"POINT (53.847818 23.42408)",
+                      "postal_code":null,
+                      "is_icd":false,
+                      "port_code":null,
+                      "inttra_code":null,
+                      "cfs_code":null,
+                      "cfs_agency_name":null,
+                      "address":null,
+                      "currency_code":"AED",
+                      "country_code":"AE",
+                      "mobile_country_code":"+971",
+                      "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_24.png",
+                      "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_64.png",
+                      "created_at":"2019-11-22T04:58:58.052Z",
+                      "updated_at":"2019-11-22T04:58:58.052Z",
+                      "local_languages":null,
+                      "zone_id":null,
+                      "site_code":null
+                   }
+                },
+                "yard_detail":null
+             }
+          ]
+       },
+       {
+          "ids":[
+             "51efdfa4-ba5f-4c07-b2df-a494c2ec81a6"
+          ],
+          "type":"single",
+          "priority":2,
+          "source":"bn_salvage",
+          "data":[
+             {
+                "id":"51efdfa4-ba5f-4c07-b2df-a494c2ec81a6",
+                "shipment_id":12464,
+                "document_type":"booking_note",
+                "operator_id":"25c0df76-5e1a-4f14-9c85-e7f794d8e8b9",
+                "service_provider_id":"70d0f9ca-f26c-4a9f-b368-0befe0abf451",
+                "origin_location_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "destination_location_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "containers_count":1,
+                "container_type":"standard",
+                "container_size":"20",
+                "commodity":"general",
+                "status":"active",
+                "source":"shipment_cancellation",
+                "url":"https://cogoport-testing.sgp1.digitaloceanspaces.com/2d3d05c19d9394266446265dc3113131/Installation%20Documentation.pdf",
+                "document_number":"2323",
+                "charges":{
+                   "line_items":[
+                      {
+                         "code":"SBILL",
+                         "name":"Cancellation Fee",
+                         "unit":"per_shipment",
+                         "price":50.0,
+                         "currency":"USD"
+                      }
+                   ]
+                },
+                "yard_detail_id":null,
+                "booking_party":null,
+                "expiry":"2022-12-12T07:01:00.000Z",
+                "vgm_cutoff":"2022-12-12T07:01:00.000Z",
+                "si_cutoff":"2022-12-12T07:01:00.000Z",
+                "document_cutoff":"2022-12-12T07:01:00.000Z",
+                "gate_in_cutoff":"2022-12-12T07:01:00.000Z",
+                "tr_cutoff":"2022-12-12T07:01:00.000Z",
+                "si_filed_at":"2022-12-13T19:18:49.932Z",
+                "schedule_departure":"2022-12-14T01:30:00.000Z",
+                "schedule_arrival":"2022-12-22T07:01:00.000Z",
+                "remarks":[
+                   
+                ],
+                "created_at":"2022-12-13T19:18:50.227Z",
+                "updated_at":"2022-12-13T19:18:50.227Z",
+                "operator":{
+                   "id":"25c0df76-5e1a-4f14-9c85-e7f794d8e8b9",
+                   "business_name":"ANL SINGAPORE PTE LIMITED"
+                },
+                "service_provider":{
+                   "id":"70d0f9ca-f26c-4a9f-b368-0befe0abf451",
+                   "business_name":"360 DEGREE SERVICES",
+                   "trade_name":"360 DEGREE SERVICES",
+                   "serial_id":73930
+                },
+                "origin_location":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "pincode_id":"74a228a7-6fcb-4ebd-bd4e-dbd776359f3b",
+                   "port_code":"INNSA",
+                   "postal_code":"400707",
+                   "country":{
+                      "id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                      "name":"India",
+                      "display_name":"India, Asia",
+                      "type":"country",
+                      "status":"active",
+                      "continent_id":"a5fad8d7-ea33-4dab-82d6-e7097fbffee1",
+                      "trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                      "country_id":"541d1232-58ce-4d64-83d6-556a42209eb7",
+                      "region_id":null,
+                      "city_id":null,
+                      "cluster_id":null,
+                      "seaport_id":null,
+                      "airport_id":null,
+                      "pincode_id":null,
+                      "latitude":"20.59368",
+                      "longitude":"78.96288",
+                      "loc":"POINT (78.96288 20.59368)",
+                      "postal_code":null,
+                      "is_icd":false,
+                      "port_code":null,
+                      "inttra_code":null,
+                      "cfs_code":null,
+                      "cfs_agency_name":null,
+                      "address":"",
+                      "currency_code":"INR",
+                      "country_code":"IN",
+                      "mobile_country_code":"+91",
+                      "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_24.png",
+                      "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/India_64.png",
+                      "created_at":"2019-11-22T04:58:57.515Z",
+                      "updated_at":"2021-05-31T10:11:17.090Z",
+                      "local_languages":[
+                         
+                      ],
+                      "zone_id":null,
+                      "site_code":null
+                   }
+                },
+                "destination_location":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "pincode_id":null,
+                   "port_code":"AEJEA",
+                   "postal_code":null,
+                   "country":{
+                      "id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                      "name":"United Arab Emirates",
+                      "display_name":"United Arab Emirates, Meg",
+                      "type":"country",
+                      "status":"active",
+                      "continent_id":"4a4c0a00-1cc6-4662-822b-b2655c783ee8",
+                      "trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                      "country_id":"345f3aa9-ae78-40cf-b70a-fc5c3af2af99",
+                      "region_id":null,
+                      "city_id":null,
+                      "cluster_id":null,
+                      "seaport_id":null,
+                      "airport_id":null,
+                      "pincode_id":null,
+                      "latitude":"23.42408",
+                      "longitude":"53.847818",
+                      "loc":"POINT (53.847818 23.42408)",
+                      "postal_code":null,
+                      "is_icd":false,
+                      "port_code":null,
+                      "inttra_code":null,
+                      "cfs_code":null,
+                      "cfs_agency_name":null,
+                      "address":null,
+                      "currency_code":"AED",
+                      "country_code":"AE",
+                      "mobile_country_code":"+971",
+                      "flag_icon_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_24.png",
+                      "flag_image_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/United%20Arab%20Emirates_64.png",
+                      "created_at":"2019-11-22T04:58:58.052Z",
+                      "updated_at":"2019-11-22T04:58:58.052Z",
+                      "local_languages":null,
+                      "zone_id":null,
+                      "site_code":null
+                   }
+                },
+                "yard_detail":null
+             }
+          ]
+       },
+       {
+          "id":"91955b8a-7ea6-47dd-a549-504f74b5ccf7",
+          "rate_id":"53c72c12-0d33-4348-b93c-181805570f5f",
+          "priority":1,
+          "preference_id":"f1582100-f695-4341-bbcf-0482330e0916",
+          "selected_priority":null,
+          "data":[
+             {
+                "id":"53c72c12-0d33-4348-b93c-181805570f5f",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"4958e128-80e0-4a15-888a-59de6a305f0e",
+                "service_provider_id":"91955b8a-7ea6-47dd-a549-504f74b5ccf7",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-15",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-11-25",
+                      "validity_end":"2022-12-15",
+                      "price":175.0,
+                      "platform_price":175.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":true
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"4958e128-80e0-4a15-888a-59de6a305f0e",
+                   "business_name":"POSEIDON SHIPPING AGENCY PVT LTD",
+                   "short_name":"Poseidon Shipping Agency",
+                   "logo_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/2119c665a9355f3b00bee3cbb822c2a4/partner4%20%281%29.png"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"91955b8a-7ea6-47dd-a549-504f74b5ccf7",
+                   "business_name":"POSEIDON SHIPPING AGENCY PRIVATE LIMITED",
+                   "short_name":"POSEIDON SHIPPING AGENCY PRIVATE LIMITED"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             }
+          ],
+          "source":"system_rate"
+       }
+    ],
+    "page":1,
+    "total":1,
+    "total_count":1,
+    "page_limit":10
+ }

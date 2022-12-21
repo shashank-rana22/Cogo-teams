@@ -7,12 +7,14 @@ import styles from "./styles.module.css"
 
 
 const PortDetails = ({ data = {} }) => {
+
 	if (isEmpty(data)) {
 		return null;
 	}
 
 	const { origin, destination } = getLocations('shipment_type', data) || {};
-
+	console.log(origin, 'origin');
+	console.log(destination,'destination');
 	const { destination_main_port, origin_main_port } = data;
 
 	const handleLocationDetails = (location, isSingle, icdInfo) => {

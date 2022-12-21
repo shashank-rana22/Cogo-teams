@@ -1,8 +1,8 @@
 import getDetails from './getDetails';
-import {startCase, format } from '@cogoport/utils'
+import {startCase, format, isEmpty } from '@cogoport/utils'
 
 
-const getFormattedSupplierData =  (bookingItem , index) => {
+const getFormattedSupplierData =  (bookingItem , index, source) => {
     
     const {
         shipping_line,

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './styles.module.css'
-import { format} from '@cogoport/utils';
 import infoOptions from './infoOptions';
 
 const Footer = ({ data = {} }) => {

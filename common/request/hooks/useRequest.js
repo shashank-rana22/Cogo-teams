@@ -12,9 +12,6 @@ const commonConfig = {
 const useRequest = makeUseAxios({
 	axios: request,
 	...commonConfig,
-	authorizationparameters:
-	'coe-fcl_revenue_desk:across_all'
-
 });
 
 export default useRequest;
