@@ -233,7 +233,6 @@ importers:
       '@rollup/plugin-commonjs': ^23.0.7
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
-      '@types/lodash': ^4.14.191
       '@types/react': ^18.0.26
       react: 18.2.0
       rollup: ^3.8.1
@@ -446,7 +445,6 @@ packages:
       '@babel/helper-compilation-targets': 7.20.7_@babel+core@7.20.7
       '@babel/helper-plugin-utils': 7.20.2
       debug: 4.3.4
-      lodash.debounce: 4.0.8
       resolve: 1.22.1
       semver: 6.3.0
     transitivePeerDependencies:
@@ -4884,10 +4882,6 @@ packages:
   /lodash.truncate/4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
     dev: true
-
-  /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: false
 
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
