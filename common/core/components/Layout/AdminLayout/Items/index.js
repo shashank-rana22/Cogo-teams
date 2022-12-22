@@ -1,6 +1,5 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Link, useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
@@ -43,7 +42,7 @@ function Items({ item, resetSubnavs }) {
 		<>
 			<li key={item.name} className={styles.list_item}>
 				{!item.isSubNavs ? (
-					<Link href={item.href ?? ''}>
+					<Link href={item.href ?? ''} as={`${item.href}`}>
 						{singleNav}
 					</Link>
 				) : singleNav }
@@ -56,6 +55,7 @@ function Items({ item, resetSubnavs }) {
 							onClick={() => handleClickOnItem(singleOption)}
 							className={isHrefMatch ? styles.active_item : styles.list_item_inner}
 							href={singleOption.href ?? ''}
+							as={`${singleOption.href}`}
 						>
 							{singleOption.icon}
 							<span>

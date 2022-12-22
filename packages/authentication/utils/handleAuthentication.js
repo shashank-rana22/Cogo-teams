@@ -49,18 +49,20 @@ const handleAuthentication = async ({
 		req,
 	});
 
-	if (isEmpty(partner)) {
-		redirect({ isServer, res, path: '/login' });
-		return { asPrefix };
+	if (isServer) {
+		if (isEmpty(partner)) {
+			redirect({ isServer, res, path: '/login' });
+			return { asPrefix };
+		}
+
+		if (asPath === '/' && partner && partner.id) {
+			asPrefix = `/${partner.id}/home`;
+			redirect({ isServer, res, path: asPrefix });
+			return { asPrefix };
+		}
 	}
 
-	if (asPath === '/' && partner && partner.id) {
-		asPrefix = `/${partner.id}/home`;
-		redirect({ isServer, res, path: asPrefix });
-		return { asPrefix };
-	}
-
-	return { asPrefix };
+	return { asPrefix: `/${partner.id}` };
 };
 
 export default handleAuthentication;
