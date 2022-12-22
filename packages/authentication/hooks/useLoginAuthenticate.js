@@ -22,7 +22,6 @@ const useLoginAuthenticate = () => {
 				},
 			});
 
-
 			if (!response.hasError) {
 				const { token } = (response || {}).data || {};
 				setCookieAndRedirect(token, {});
