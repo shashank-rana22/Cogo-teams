@@ -6,7 +6,7 @@ import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const router = useRouter();
-	const { asPath } = router;
+	const { pathname } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
@@ -18,7 +18,7 @@ function Items({ item, resetSubnavs }) {
 		}
 	};
 
-	const isHref = [asPath].includes(item.href);
+	const isHref = pathname.includes(item.href);
 
 	const singleNav = (
 		<div
@@ -48,7 +48,7 @@ function Items({ item, resetSubnavs }) {
 				) : singleNav }
 			</li>
 			{showSubNav && item?.options?.map((singleOption) => {
-				const isHrefMatch = [asPath].includes(singleOption.href);
+				const isHrefMatch = pathname.includes(singleOption.href);
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<Link
