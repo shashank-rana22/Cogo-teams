@@ -1,4 +1,4 @@
-import { Router } from 'next/router';
+import { Router } from '@cogoport/next';
 
 const redirect = ({
 	isServer, res, path, hardRedirect,
@@ -9,6 +9,7 @@ const redirect = ({
 		});
 		res.end();
 	} else if (hardRedirect) {
+		// eslint-disable-next-line no-undef
 		window.location.href = path;
 	} else {
 		Router.push(path);

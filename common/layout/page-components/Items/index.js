@@ -1,6 +1,5 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Link, useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
@@ -14,7 +13,7 @@ function Items({ item, resetSubnavs }) {
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
 	const handleClickOnItem = (itemdata) => {
-		if (itemdata.isSubNavs) {
+		if (itemdata.options?.length > 0) {
 			setShowSubNav(!showSubNav);
 		}
 	};
@@ -28,22 +27,22 @@ function Items({ item, resetSubnavs }) {
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-			{item.isSubNavs && (
+			{item.options?.length > 0 && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
 			)}
 			{item.icon}
 			<span>
-				{item.name}
+				{item.title}
 			</span>
 		</div>
 	);
 	return (
 		<>
-			<li key={item.name} className={styles.list_item}>
-				{!item.isSubNavs ? (
-					<Link href={item.href ?? ''}>
+			<li key={item.title} className={styles.list_item}>
+				{!item.options ? (
+					<Link href={item.href ?? ''} as={`${item.as}`}>
 						{singleNav}
 					</Link>
 				) : singleNav }
@@ -51,15 +50,16 @@ function Items({ item, resetSubnavs }) {
 			{showSubNav && item?.options?.map((singleOption) => {
 				const isHrefMatch = [asPath].includes(singleOption.href);
 				return (
-					<li key={singleOption.name} className={styles.list_sub_item}>
+					<li key={singleOption.title} className={styles.list_sub_item}>
 						<Link
 							onClick={() => handleClickOnItem(singleOption)}
 							className={isHrefMatch ? styles.active_item : styles.list_item_inner}
 							href={singleOption.href ?? ''}
+							as={`${singleOption.as}`}
 						>
 							{singleOption.icon}
 							<span>
-								{singleOption.name}
+								{singleOption.title}
 							</span>
 						</Link>
 					</li>

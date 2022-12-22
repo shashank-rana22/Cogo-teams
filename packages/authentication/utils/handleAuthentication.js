@@ -42,11 +42,6 @@ const handleAuthentication = async ({
 		return { asPrefix };
 	}
 
-	if (UNAUTHENTICATED_PATHS.includes(asPath)) {
-		redirect({ isServer, res, path: '/' });
-		return { asPrefix };
-	}
-
 	const { partner = {} } = await getUserData({
 		store,
 		isServer,
@@ -54,27 +49,20 @@ const handleAuthentication = async ({
 		req,
 	});
 
-	if (isEmpty(partner)) {
-		redirect({ isServer, res, path: '/login' });
-		return { asPrefix };
+	if (isServer) {
+		if (isEmpty(partner)) {
+			redirect({ isServer, res, path: '/login' });
+			return { asPrefix };
+		}
+
+		if (asPath === '/' && partner && partner.id) {
+			asPrefix = `/${partner.id}/home`;
+			redirect({ isServer, res, path: asPrefix });
+			return { asPrefix };
+		}
 	}
 
-	if (pathname.includes('_error')) {
-		const asPathArr = asPath.split('/');
-		const reqPath = asPathArr.filter((item, i) => i < 2).join('/');
-		return {
-			asPrefix : reqPath,
-			query    : asPathArr.length >= 2 ? { partner_id: asPathArr[1] } : {},
-		};
-	}
-
-	if (asPath === '/' && partner && partner.id) {
-		asPrefix = `/${partner.id}/home`;
-		redirect({ isServer, res, path: asPrefix });
-		return { asPrefix };
-	}
-
-	return { asPrefix };
+	return { asPrefix: `/${partner.id}` };
 };
 
 export default handleAuthentication;

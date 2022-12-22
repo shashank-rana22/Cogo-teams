@@ -1,0 +1,13 @@
+{
+	"name": "@cogoport/layout",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@cogoport/components": "^1.0.115",
+		"@cogoport/icons-react": "^1.0.48",
+		"@cogoport/next": "workspace:0.1.0",
+		"next": "13.0.6",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
+	}
+}
