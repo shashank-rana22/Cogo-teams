@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const loadEnvConfig = require('@cogoport/commons/helpers/load-env');
+const loadEnvConfig = require('@cogoport/core/helpers/load-env');
 // eslint-disable-next-line
 const fs = require('fs-extra');
 

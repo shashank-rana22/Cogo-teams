@@ -3,14 +3,16 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 
 function SelectController(props: any) {
-	const { name, control, ...rest } = props;
+	const {
+		name, control, rules, ...rest
+	} = props;
 
 	return (
 		<Controller
 			key={rest.id}
 			control={control}
 			name={name}
-			rules={rest.rules}
+			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<Select
 					{...rest}

@@ -1,13 +1,28 @@
-import '@cogoport/components/src/themes/supernova/index.css';
-import { Provider as StoreProvider } from '@cogoport/store';
+import '@cogoport/components/dist/themes/supernova.css';
+import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
+import store, { Provider } from '@cogoport/store';
 import Head from 'next/head';
+import Router from 'next/router';
+import pageProgessBar from 'nprogress';
+import './global.css';
+import 'nprogress/nprogress.css';
+import { useEffect } from 'react';
 import { SWRConfig } from 'swr';
 
-import handleAuthentication from '../../utils/auth/handleAuthentication';
-import withStore from '../../utils/store';
 import Layout from '../Layout';
 
-function MyApp({ Component, pageProps, store }) {
+function MyApp({ Component, pageProps }) {
+	useEffect(() => {
+		Router.events.on('routeChangeStart', () => {
+			pageProgessBar.start();
+			pageProgessBar.set(0.4);
+		});
+
+		Router.events.on('routeChangeComplete', () => {
+			pageProgessBar.done();
+		});
+	}, [Router]);
+
 	return (
 		<SWRConfig value={{
 			provider : () => new Map(),
@@ -15,14 +30,14 @@ function MyApp({ Component, pageProps, store }) {
 			fallback : { 'https://api.github.com/repos/vercel/swr': null },
 		}}
 		>
-			<StoreProvider store={store}>
+			<Provider store={store}>
 				<Head>
 					<title>Admin | Cogoport</title>
 				</Head>
 				<Layout layout={pageProps.layout || 'authenticated'}>
 					<Component {...pageProps} />
 				</Layout>
-			</StoreProvider>
+			</Provider>
 		</SWRConfig>
 	);
 }
@@ -34,13 +49,12 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 
 	const ctxParams = {
 		...ctx,
+		store,
 		isServer,
 		pathPrefix,
 	};
 
-	const unPrefixedPath = `/${asPath.split('/').slice(2).join('/')}`;
-
-	const response = await handleAuthentication(ctxParams);
+	await handleAuthentication(ctxParams);
 
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
@@ -53,4 +67,4 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 	};
 };
 
-export default withStore(MyApp);
+export default MyApp;
