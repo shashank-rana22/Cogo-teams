@@ -18,11 +18,7 @@ const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_UR
 
 request.interceptors.request.use((oldConfig) => {
 	const token = getCookieFromCtx(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
-
-	const authorizationparameters = getAuthorizationParams(
-		store,
-		oldConfig.url,
-	);
+	const authorizationparameters = getAuthorizationParams(store, oldConfig.url);
 
 	return {
 		...oldConfig,
@@ -32,7 +28,6 @@ request.interceptors.request.use((oldConfig) => {
 			authorization      : `Bearer: ${token}`,
 			authorizationparameters,
 		},
-
 	};
 });
 

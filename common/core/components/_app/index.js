@@ -8,7 +8,7 @@ import 'nprogress/nprogress.css';
 import { useEffect } from 'react';
 import { SWRConfig } from 'swr';
 
-import Layout from '../Layout';
+import Layout from './layout';
 
 function MyApp({
 	Component, pageProps, pathPrefix, asPrefix, query,
@@ -33,9 +33,9 @@ function MyApp({
 		>
 			<Provider store={store}>
 				<RoutesProvider config={{ pathPrefix, asPrefix, query }}>
+					<title>Admin | Cogoport</title>
 					<Layout layout={pageProps.layout || 'authenticated'}>
 						<Component {...pageProps} />
-						<title>Admin | Cogoport</title>
 					</Layout>
 				</RoutesProvider>
 			</Provider>

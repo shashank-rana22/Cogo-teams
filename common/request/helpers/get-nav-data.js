@@ -1,7 +1,6 @@
-import navigationMappingsPartner from './navigation-mappings';
+import { navigationMappings } from '@cogoport/layout';
 
 const getNavData = (navigation) => {
-	const navigationMappings = navigationMappingsPartner;
 	const navs = navigation.split('-');
 	const isSubNavs = navs.length > 1;
 	const mainNav = navigationMappings?.[navs[0]];

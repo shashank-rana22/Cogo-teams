@@ -1,8 +1,5 @@
+import { AdminLayout, navigationMappings } from '@cogoport/layout';
 import React from 'react';
-
-import AdminLayout from './AdminLayout';
-import LogoSvg from './logo.svg';
-import { nav } from './nav';
 
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
@@ -16,12 +13,14 @@ function Layout({ children, layout }) {
 			showTopbar
 			showNavbar
 			topbar={{
-				logo: <LogoSvg
-					height={32}
-					width={132}
+				logo: <img
+					alt="cogoport-logo"
+					height="32px"
+					width="132px"
+					src="https://cdn.cogoport.io/cms-prod/vault/original/logo-cogoport-1.svg"
 				/>,
 			}}
-			navbar={{ nav }}
+			navbar={navigationMappings}
 		>
 			<div style={{ margin: 0, padding: '24px 20px' }}>{children}</div>
 		</AdminLayout>

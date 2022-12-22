@@ -25,10 +25,13 @@ function Navbar({
 			<div className={styles.bg_nav} />
 			<div className={styles.inner_container}>
 				<ul className={styles.list_container}>
-					{nav.map((item) => (
-						<Items key={item.name} item={item} resetSubnavs={resetSubnavs} />
-
-					))}
+					{Object.keys(nav).map((item) => {
+						const getItemByKey = nav[item];
+						console.log(getItemByKey);
+						return (
+							<Items key={getItemByKey.title} item={getItemByKey} resetSubnavs={resetSubnavs} />
+						);
+					})}
 				</ul>
 			</div>
 		</nav>

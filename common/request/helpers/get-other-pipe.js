@@ -1,5 +1,6 @@
+import { routeConfig } from '@cogoport/layout';
+
 import getNavData from './get-nav-data';
-import routeConfig from './route-config';
 
 const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 	try {
