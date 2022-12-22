@@ -48,6 +48,8 @@
 }
 
 .source{
+	font-size: 10px;
+	font-weight: 700;
 	margin : 10px 10px auto 10px;
     margin-left: auto;
 	padding: 4px;
