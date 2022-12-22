@@ -155,6 +155,7 @@ importers:
 
   common/request:
     specifiers:
+      '@cogoport/store': workspace:*
       '@cogoport/utils': ^1.2.0
       axios: ^1.2.1
       axios-hooks: ^4.0.0
@@ -163,6 +164,7 @@ importers:
       qs: ^6.11.0
       react: 18.2.0
     dependencies:
+      '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.0
       axios: 1.2.1
       axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0

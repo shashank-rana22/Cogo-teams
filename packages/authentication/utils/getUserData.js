@@ -1,3 +1,4 @@
+import getAuthParam from '@cogoport/request/helpers/get-auth-params';
 import { setUserProfile } from '@cogoport/store/slices/profileSlice';
 import { isEmpty } from '@cogoport/utils';
 
@@ -26,16 +27,16 @@ const getUserData = async ({
 				user_data = {
 					...user,
 					partner,
-					partners : partner ? [partner] : partners,
+					partners                : partner ? [partner] : partners,
 					session_type,
 					team_member_ids,
 					permissions_navigations,
-					asPrefix : partner?.id,
-					// authorizationparameters : getAuthParam(
-					// 	permissions_navigations,
-					// 	routeConfig,
-					// 	pathname,
-					// ),
+					asPrefix                : partner?.id,
+					pathname,
+					authorizationparameters : getAuthParam(
+						permissions_navigations,
+						pathname,
+					),
 				};
 			}
 			await store.dispatch(setUserProfile(user_data));

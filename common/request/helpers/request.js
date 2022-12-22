@@ -1,7 +1,9 @@
+import store from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
 
+import getAuthorizationParams from './get-final-authpipe';
 import { getCookieFromCtx } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
@@ -16,12 +18,22 @@ const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_UR
 
 request.interceptors.request.use((oldConfig) => {
 	const token = getCookieFromCtx(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
-	const newConfig = oldConfig;
-	newConfig.paramsSerializer = customSerializer;
-	newConfig.headers = { authorizationscope: 'partner' };
-	newConfig.headers.authorization = `Bearer: ${token}`;
 
-	return newConfig;
+	const authorizationparameters = getAuthorizationParams(
+		store,
+		oldConfig.url,
+	);
+
+	return {
+		...oldConfig,
+		paramsSerializer : { serialize: customSerializer },
+		headers          : {
+			authorizationscope : 'partner',
+			authorization      : `Bearer: ${token}`,
+			authorizationparameters,
+		},
+
+	};
 });
 
 export { request };
