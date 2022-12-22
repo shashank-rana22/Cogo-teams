@@ -1,11 +1,9 @@
+import businessConfig from './config/business-finance';
+import homeConfig from './config/home';
+
 const routeConfig = {
-	'/[partner_id]/home': {
-		navigation : 'home',
-		isMainNav  : true,
-	},
-	'/[partner_id]/business-finance/account-payables': {
-		navigation: 'business_finance-account_payables',
-	},
+	...homeConfig,
+	...businessConfig,
 };
 
 export default routeConfig;
