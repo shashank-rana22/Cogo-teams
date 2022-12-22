@@ -1,8 +1,7 @@
-// import { useRouter } from 'next/router';
 import cl from '@cogoport/components/src/utils/classname-processor';
 import React, { useState } from 'react';
 
-import Navbar from './Navbar/index';
+import Navbar from './Navbar';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 
@@ -31,7 +30,6 @@ function AdminLayout({
 					className={topbar.className}
 					style={topbar.style}
 					logo={topbar.logo}
-					socials={topbar.socials}
 					onClickMobileNav={() => setShowMobileNavbar((s) => !s)}
 					showMobileNav={showNavbar}
 				/>
@@ -40,12 +38,11 @@ function AdminLayout({
 				<Navbar
 					className={navbar.className}
 					style={navbar.style}
-					nav={navbar.nav}
+					nav={navbar}
 					mobileShow={showMobileNavbar}
 				/>
 			) : null}
 		</div>
-
 	);
 }
 

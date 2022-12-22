@@ -1,5 +1,6 @@
+import { routeConfig } from '@cogoport/layout';
+
 import getOtherApiPipe from './get-other-pipe';
-import routeConfig from './route-config';
 
 const getAuthorizationParams = (store, url) => {
 	if (typeof window !== 'undefined') {

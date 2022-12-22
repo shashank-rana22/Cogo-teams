@@ -13,6 +13,7 @@
     "@cogoport/business-finance": "workspace:0.1.0",
     "@cogoport/core": "workspace:*",
     "@cogoport/next": "workspace:0.1.0",
+    "@cogoport/layout": "workspace:0.1.0",
     "@cogoport/components": "^1.0.96",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/home": "workspace:0.1.0",
