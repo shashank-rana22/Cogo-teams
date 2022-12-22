@@ -6,7 +6,7 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 	try {
 		const profile =	typeof getStoreState === 'function' ? getStoreState()?.profile : {};
 
-		const pathname = profile.data?.pathname;
+		const pathname = profile?.pathname;
 		const fallback_navigation = routeConfig?.[pathname]?.navigation || '';
 		const authParams = authorizationparameters?.split(':');
 		const navigation = authParams?.[0] || fallback_navigation;

@@ -1,5 +1,5 @@
 import getAuthParam from '@cogoport/request/helpers/get-auth-params';
-import { setUserProfile } from '@cogoport/store/slices/profileSlice';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 
 import getUserSession from './getUserSession';
@@ -23,7 +23,6 @@ const getUserData = async ({
 					permissions_navigations,
 				} = (data || {}).data || {};
 
-				user_data = (data || {}).data || {};
 				user_data = {
 					...user,
 					partner,
@@ -39,7 +38,9 @@ const getUserData = async ({
 					),
 				};
 			}
-			await store.dispatch(setUserProfile(user_data));
+			if (user_data.id) {
+				await store.dispatch(setProfileState(user_data));
+			}
 		} catch (e) {
 			console.log(e.error);
 		}

@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import useRequest from '@cogoport/request/hooks/useRequest';
 
 import getApiErrorString from '../utils/getApiError';
 import setCookieAndRedirect from '../utils/setCookieAndRedirect';
@@ -22,11 +22,13 @@ const useLoginAuthenticate = () => {
 				},
 			});
 
+
 			if (!response.hasError) {
 				const { token } = (response || {}).data || {};
 				setCookieAndRedirect(token, {});
 			}
 		} catch (err) {
+			console.log('err', err);
 			Toast.error(getApiErrorString(error?.response?.data) || 'Failed to login, please try again...');
 		}
 	};

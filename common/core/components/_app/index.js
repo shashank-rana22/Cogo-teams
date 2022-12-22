@@ -2,6 +2,7 @@ import '@cogoport/components/dist/themes/dawn.css';
 import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
 import { Router, RoutesProvider } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
+import { setGeneralState } from '@cogoport/store/reducers/general';
 import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
@@ -9,6 +10,13 @@ import { useEffect } from 'react';
 import { SWRConfig } from 'swr';
 
 import Layout from './layout';
+
+const isServer = typeof window === 'undefined';
+
+if (!isServer) {
+	// eslint-disable-next-line no-underscore-dangle
+	window.__COGO_APP_STORE__ = store;
+}
 
 function MyApp({
 	Component, pageProps, pathPrefix, asPrefix, query,
@@ -47,17 +55,34 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 	const {
 		req, pathname, asPath, query,
 	} = ctx;
-	const isServer = typeof req !== 'undefined';
 	const pathPrefix = '/[partner_id]';
 
 	const ctxParams = {
 		...ctx,
 		store,
+		req,
 		isServer,
 		pathPrefix,
 	};
 
-	const { asPrefix } = await handleAuthentication(ctxParams);
+	const unPrefixedPath = `/${asPath.split('/').slice(2).join('/')}`;
+
+	const { asPrefix, query: qError } = await handleAuthentication(ctxParams);
+
+	console.log(query)
+
+	const generalData = {
+		pathname,
+		asPath,
+		unPrefixedPath,
+		pathPrefix,
+		asPrefix,
+		scope : 'partner',
+		query : { ...query, ...(qError || {}) },
+		isServer,
+	};
+
+	await store.dispatch(setGeneralState(generalData));
 
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
