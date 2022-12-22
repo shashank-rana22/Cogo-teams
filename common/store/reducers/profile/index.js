@@ -6,6 +6,7 @@ export const counterSlice = createSlice({
 	reducers     : {
 		setProfileState: (state, data) => {
 			state = { ...(state || {}), ...(data?.payload || {}) };
+			return state;
 		},
 	},
 });

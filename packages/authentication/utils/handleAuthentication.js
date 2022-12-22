@@ -1,5 +1,4 @@
-import { setProfileState } from '@cogoport/store/reducers/profile';
-import { isEmpty, getByKey as getValue } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { deleteCookie, getCookie } from 'cookies-next';
 
 import getUserData from './getUserData';
@@ -13,21 +12,15 @@ const UNAUTHENTICATED_PATHS = [
 	'/verify-email/[id]',
 	'/accept-invite/[id]',
 	'/verify-auto-sign-up-email/[id]',
+
 ];
 
 const DEFAULT_PATHS = {
 	NOT_VERIFIED_KYC : '/submit-kyc',
 	AUTHENTICATED    : '/dashboard',
 	UNAUTHENTICATED  : '/login',
-};
 
-const NOT_KYC_VERIFIED_ALLOWED_PATHS_NOT_IN_NAVIGATION = [
-	'/demo',
-	'/faqs',
-	'/menu',
-	'/profile',
-	'/submit-kyc',
-];
+};
 
 const AUTH_TOKEN_NAME = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
 
@@ -38,19 +31,10 @@ const handleAuthentication = async ({
 	res,
 	req,
 	pathname,
-	query,
 }) => {
-	const asPrefix = '';
+	let asPrefix = '';
 
-	// if ((asPath || '').includes('_next') || (asPath || '').includes('sw.js')) {
-	// 	return { asPrefix };
-	// }
-	//
-	// if (['/'].includes(asPath) || ['/'].includes(pathname)) {
-	// 	return { asPrefix };
-	// }
-
-	const isUnauthenticatedPath =		UNAUTHENTICATED_PATHS.includes(asPath)
+	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(asPath)
 		|| UNAUTHENTICATED_PATHS.includes(pathname);
 
 	const token = getCookie(AUTH_TOKEN_NAME, isServer ? { req } : null);
@@ -94,55 +78,25 @@ const handleAuthentication = async ({
 		return { asPrefix };
 	}
 
-	const { partner_id: channelPartnerId } = query;
+	const { permissions_navigations } = userData;
 
-	const { partners: channelPartners = [], permissions_navigations } = userData;
+	const partner_id = userData.partner.id;
 
-	const channelPartner =		channelPartners.find((channelPartnerItem) => channelPartnerItem.id === channelPartnerId)
-		|| channelPartners[0]
-		|| {};
+	asPrefix = `/${partner_id || ''}`;
+	const navigations = Object.keys(permissions_navigations || {});
+	if (partner_id && [`/${partner_id}`, '/'].includes(asPath) && navigations.length > 0) {
+		redirect({
+			isServer,
+			res,
+			path: `${asPrefix}/home`,
+		});
 
-	if (isEmpty(channelPartner)) {
-		if (asPath.includes('/get-started')) {
-			return { asPrefix };
-		}
-
-		redirect({ isServer, res, path: '/get-started' });
-		return { asPrefix };
+		return { asPrefix, query: { partner_id } };
 	}
 
-	const account_types = ['importer_exporter'];
+	const defaultRoute = `${asPrefix}/`;
 
-	await store.dispatch(
-		setProfileState({
-			partner: {
-				...{},
-				account_types,
-			},
-			permissions_navigations : {},
-			authorizationparameters : null,
-		}),
-	);
-
-	// asPrefix = `/${activeChannelPartner.id}`;
-
-	const activeChannelPartner = {};
-
-	const { verifications } = activeChannelPartner;
-	const kycStatus = getValue(verifications, '[0].kyc_status');
-	const isKycVerified = kycStatus === 'verified';
-
-	const defaultRoute = `${asPrefix}${DEFAULT_PATHS.AUTHENTICATED || '/'}`;
-
-	if (
-		pathname.includes('/[partner_id]/get-started')
-		|| asPath.includes(DEFAULT_PATHS.NOT_VERIFIED_KYC)
-	) {
-		redirect({ isServer, res, path: defaultRoute });
-		return { asPrefix };
-	}
-
-	if (!asPath.startsWith(asPrefix) || pathname.includes('_error')) {
+	if (!asPath.startsWith(asPrefix)) {
 		redirect({ isServer, res, path: defaultRoute });
 	}
 
