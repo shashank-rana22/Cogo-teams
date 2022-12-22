@@ -25,13 +25,9 @@ function Navbar({
 			<div className={styles.bg_nav} />
 			<div className={styles.inner_container}>
 				<ul className={styles.list_container}>
-					{Object.keys(nav).map((item) => {
-						const getItemByKey = nav[item];
-						console.log(getItemByKey);
-						return (
-							<Items key={getItemByKey.title} item={getItemByKey} resetSubnavs={resetSubnavs} />
-						);
-					})}
+					{Object.keys(nav).map((item) => (
+						<Items key={item} item={nav[item]} resetSubnavs={resetSubnavs} />
+					))}
 				</ul>
 			</div>
 		</nav>
