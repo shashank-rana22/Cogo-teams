@@ -6,7 +6,7 @@ import getUserSession from './getUserSession';
 const getUserData = async ({
 	store, isServer, pathname, req,
 }) => {
-	let user_data = null;
+	let user_data = {};
 
 	const setData = async () => {
 		try {
@@ -38,10 +38,9 @@ const getUserData = async ({
 					// ),
 				};
 			}
-			// console.log('user_data', user_data);
 			await store.dispatch(setUserProfile(user_data));
 		} catch (e) {
-			console.log('in catch');
+			console.log(e.error);
 		}
 	};
 	if (isServer) {
