@@ -1,0 +1,32 @@
+.container{
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #ffffff;
+	border-radius: 10px;
+	padding: 30px 60px;
+}
+@media (max-width: 768px) {
+    .emptyStateIcon {      
+    display: none;
+    }
+
+    .heading{
+        font-size: 16px;
+    }
+    .content{
+        font-size: 12px;
+    }
+}
+.heading{
+    font-weight: 500;
+	font-size: 24px;
+}
+.content{
+    font-size: 16px;
+}
+.emptyStateIcon{
+    margin-right: 100px;
+    width: 100px;
+    height: 120px;
+}
