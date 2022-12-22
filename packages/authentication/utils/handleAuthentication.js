@@ -12,7 +12,6 @@ const UNAUTHENTICATED_PATHS = [
 	'/verify-email/[id]',
 	'/accept-invite/[id]',
 	'/verify-auto-sign-up-email/[id]',
-
 ];
 
 const DEFAULT_PATHS = {
@@ -52,6 +51,7 @@ const handleAuthentication = async ({
 	const userData = await getUserData({
 		store,
 		isServer,
+		pathname,
 		req,
 	});
 
