@@ -1,6 +1,6 @@
 import cl from '@cogoport/components/src/utils/classname-processor';
 import { IcMOverflowLine } from '@cogoport/icons-react';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import GitLogo from './github.svg';

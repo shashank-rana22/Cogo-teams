@@ -40,6 +40,7 @@ importers:
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.47
+      '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -57,6 +58,7 @@ importers:
       '@cogoport/forms': link:../common/forms
       '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.47_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../common/next
       '@cogoport/request': link:../common/request
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/store': link:../common/store
@@ -73,6 +75,7 @@ importers:
       '@cogoport/authentication': workspace:*
       '@cogoport/components': ^1.0.96
       '@cogoport/icons-react': ^1.0.47
+      '@cogoport/next': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
       cookies-next: ^2.1.1
@@ -85,6 +88,7 @@ importers:
       '@cogoport/authentication': link:../../packages/authentication
       '@cogoport/components': 1.0.96_d6vset3ctjiu5fxc4rylzjmlyy
       '@cogoport/icons-react': 1.0.47_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../next
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.0
       cookies-next: 2.1.1
@@ -139,8 +143,19 @@ importers:
       rollup-plugin-delete: 2.0.0
       rollup-plugin-typescript2: 0.34.1_oj4jlwi3mkekxo3vucumcwebnq
 
+  common/next:
+    specifiers:
+      next: 13.0.6
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+
   common/request:
     specifiers:
+      '@cogoport/store': workspace:*
       '@cogoport/utils': ^1.2.0
       axios: ^1.2.1
       axios-hooks: ^4.0.0
@@ -149,6 +164,7 @@ importers:
       qs: ^6.11.0
       react: 18.2.0
     dependencies:
+      '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.0
       axios: 1.2.1
       axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
@@ -176,9 +192,11 @@ importers:
       '@cogoport/components': ^1.0.96
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.47
+      '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.0
+      cookies-next: ^2.1.1
       next: 13.0.6
       react: 18.2.0
       react-dom: 18.2.0
@@ -186,9 +204,11 @@ importers:
       '@cogoport/components': 1.0.96_d6vset3ctjiu5fxc4rylzjmlyy
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.47_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.0
+      cookies-next: 2.1.1
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

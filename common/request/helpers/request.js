@@ -1,7 +1,9 @@
+import store from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
 
+import getAuthorizationParams from './get-final-authpipe';
 import { getCookieFromCtx } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
@@ -21,7 +23,7 @@ request.interceptors.request.use((oldConfig) => {
 	newConfig.headers = { authorizationscope: 'partner', authorizationparameters: 'coe-booking_note_desk:across_all' };
 	newConfig.headers.authorization = `Bearer: 85872a6f-0264-4a62-bf9c-6d5c55024b47`;
 
-	return newConfig;
-});
+	}
+);
 
 export { request };

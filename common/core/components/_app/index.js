@@ -1,8 +1,7 @@
 import '@cogoport/components/dist/themes/supernova.css';
 import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
+import { Router, RoutesProvider } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
-import Head from 'next/head';
-import Router from 'next/router';
 import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
@@ -11,7 +10,9 @@ import { SWRConfig } from 'swr';
 
 import Layout from '../Layout';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({
+	Component, pageProps, pathPrefix, asPrefix, query,
+}) {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
 			pageProgessBar.start();
@@ -21,7 +22,7 @@ function MyApp({ Component, pageProps }) {
 		Router.events.on('routeChangeComplete', () => {
 			pageProgessBar.done();
 		});
-	}, [Router]);
+	}, []);
 
 	return (
 		<SWRConfig value={{
@@ -31,19 +32,21 @@ function MyApp({ Component, pageProps }) {
 		}}
 		>
 			<Provider store={store}>
-				<Head>
-					<title>Admin | Cogoport</title>
-				</Head>
-				<Layout layout={pageProps.layout || 'authenticated'}>
-					<Component {...pageProps} />
-				</Layout>
+				<RoutesProvider config={{ pathPrefix, asPrefix, query }}>
+					<Layout layout={pageProps.layout || 'authenticated'}>
+						<Component {...pageProps} />
+						<title>Admin | Cogoport</title>
+					</Layout>
+				</RoutesProvider>
 			</Provider>
 		</SWRConfig>
 	);
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
-	const { req, pathname, asPath } = ctx;
+	const {
+		req, pathname, asPath, query,
+	} = ctx;
 	const isServer = typeof req !== 'undefined';
 	const pathPrefix = '/[partner_id]';
 
@@ -54,7 +57,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		pathPrefix,
 	};
 
-	await handleAuthentication(ctxParams);
+	const { asPrefix } = await handleAuthentication(ctxParams);
 
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
@@ -63,7 +66,10 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 	return {
 		pageProps: { ...(initialProps || {}) },
 		pathname,
+		pathPrefix,
+		asPrefix,
 		asPath,
+		query,
 	};
 };
 
