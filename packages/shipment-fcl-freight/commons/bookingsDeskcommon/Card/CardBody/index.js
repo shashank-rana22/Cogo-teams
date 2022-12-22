@@ -14,7 +14,7 @@ const CardBody = ({ data = {} }) => {
 		search_type: data?.shipment_type || {},
 	});
 
-	const { serviceIcon } = getServiceInfo(data?.shipment_type);
+	const { serviceIcon, serviceText } = getServiceInfo(data?.shipment_type);
 
 	const service = `${data?.shipment_type}_services`;
 
@@ -42,8 +42,10 @@ const CardBody = ({ data = {} }) => {
 			<div className={styles.verticalLine}/>
 
 			<div className={styles.locationDetails}>
+				<div className={styles.serviceIcon}>
 				<div className={styles.shipmentType}>{serviceIcon}</div>
-
+				<div className={styles.serviceIconText}> {serviceText}</div>
+				</div>
 				<div className={styles.location}>
 					{/* <ToolTip
 						theme="light"
@@ -70,7 +72,7 @@ const CardBody = ({ data = {} }) => {
 						ETD:{' '}
 						{format(
 							data?.schedule_departure || data?.selected_schedule_departure,
-							'dd/mm/yyyy',
+							'dd MMM yyyy',
 						)}
 					</div>
 				</div>
@@ -105,7 +107,7 @@ const CardBody = ({ data = {} }) => {
 						ETA:{' '}
 						{format(
 							data?.schedule_arrival || data?.selected_schedule_arrival,
-							'dd/mm/yyyy',
+							'dd MMM yyyy',
 						)}
 					</div>
 				</div>

@@ -5,7 +5,6 @@ import ShipmentFilters from './Filters';
 import Card from '../../commons/bookingsDeskcommon/Card'
 import useListShipments from '../../hooks/bookingDeskHooks/useGetList.js';
 import { getTabs } from '../../utils/bookingDeskUtils/tabs_mapping';
-import ListData from '../../hooks/bookingDeskHooks/useGetList.json';
 import styles from './styles.module.css';
 
 const BookingDesk = () => {

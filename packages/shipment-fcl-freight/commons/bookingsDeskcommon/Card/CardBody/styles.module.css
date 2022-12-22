@@ -51,9 +51,10 @@
 }
 
 .shipmentType{
-    display: flex;
-	width: 100px;
-	justify-content: center;
+	float:left; 
+	width: 100%;
+	margin-bottom: 0px;
+	height: max-content;
 }
 .containerDetails{
     padding: 4px 12px;
@@ -104,4 +105,21 @@
 	flex-wrap: wrap;
 	white-space: nowrap;
 	overflow-x: auto;
+}
+.serviceIcon{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-left:auto;
+        margin-right:auto;
+        height:auto; 
+        width:auto;
+		align-items: center;
+}
+.serviceIconText{
+	
+	margin-top: -10px;
+	font-size: 10px;
+	text-align: center;
+	font-weight: 600;
 }
