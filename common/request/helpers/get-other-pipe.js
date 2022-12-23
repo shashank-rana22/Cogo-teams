@@ -14,6 +14,7 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 		const globalDefaultView = authParams?.[2];
 
 		const navigationData = getNavData(navigation);
+
 		const { main_apis } = navigationData || {};
 		const actualApi = url?.split('/')?.[1] || url?.split('/')?.[0];
 		const userNavigationPermissions = profile?.permissions_navigations?.[navigation];

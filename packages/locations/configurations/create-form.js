@@ -103,10 +103,21 @@ const createFormControls = [
 		rules       : { required: 'Required' },
 	},
 	{
-		name           : 'country_id',
-		label          : 'Country',
-		type           : 'select',
-		options        : [],
+		name    : 'country_id',
+		label   : 'Country',
+		type    : 'select',
+		options : [
+			{
+				value : '182d828e-765c-462e-8dda-26fac133e459',
+				label : 'Fiji, Australia',
+			}, {
+				value : '2dc13ba6-5018-4aa4-bc0c-f4853c05190b',
+				label : 'Uzbekistan, Med',
+			}, {
+				value : '08f7f774-eccd-4058-ac08-577b5f18c804',
+				label : 'Anguilla, North America',
+			},
+		],
 		placeholder    : 'Select country',
 		optionsListKey : 'locations',
 		condition      : {
@@ -127,30 +138,63 @@ const createFormControls = [
 		rules  : { required: 'Required , country' },
 	},
 	{
-		name           : 'zone_id',
-		label          : 'Zone',
-		type           : 'select',
-		options        : [],
-		placeholder    : 'Select region',
+		name    : 'zone_id',
+		label   : 'Zone',
+		type    : 'select',
+		options : [
+			{
+				value : '1ae7237e-77f5-43c0-807f-2124836c7369',
+				label : 'North India',
+			}, {
+				value : '466fd023-448a-4c01-b80d-7ccc11578eeb',
+				label : 'South India',
+			}, {
+				value : '20a47220-b4b4-472b-84d7-46c8c8d47d2a',
+				label : 'West India',
+			},
+		],
+		placeholder    : 'Select Zone',
 		optionsListKey : 'locations',
 		isClearable    : true,
 		params         : { filters: { type: ['zone'] } },
 	},
 	{
-		name           : 'region_id',
-		label          : 'Region',
-		type           : 'select',
-		options        : [],
+		name    : 'region_id',
+		label   : 'Region',
+		type    : 'select',
+		options : [
+			{
+				value : '2abeb582-270e-4f8b-b0eb-a83364446369',
+				label : 'Massachusetts',
+			}, {
+				value : 'd085f5f6-caf6-414d-b261-f060e32ebfb4',
+				label : 'Kansas',
+			}, {
+				value : 'a415e6de-e5c8-41e4-9106-0cc99c97591c',
+				label : 'Nebraska',
+			},
+		],
 		placeholder    : 'Select region',
 		optionsListKey : 'locations',
 		isClearable    : true,
 		params         : { filters: { type: ['region'] } },
 	},
 	{
-		name           : 'city_id',
-		label          : 'City',
-		type           : 'select',
-		options        : [],
+		name    : 'city_id',
+		label   : 'City',
+		type    : 'select',
+		options : [
+			{
+				value : '000548d6-ca6c-4595-8ea6-c70d316cf522',
+				label : 'Cambron-Casteau',
+			}, {
+				value : '0019b4d7-a3f5-4478-be3e-8a3cb01781aa',
+				label : 'East Langton',
+			}, {
+				value : '001a6e7a-1014-4999-9f46-2f39f545cf6c',
+				label : 'Gas Hills',
+			},
+		],
 		placeholder    : 'Select city',
 		optionsListKey : 'locations',
 		isClearable    : true,
@@ -170,10 +214,24 @@ const createFormControls = [
 		params : { filters: { type: ['city'] } },
 	},
 	{
-		name           : 'cluster_id',
-		label          : 'Cluster',
-		type           : 'select',
-		options        : [],
+		name    : 'cluster_id',
+		label   : 'Cluster',
+		type    : 'select',
+		options : [
+			{
+				value : '961354f5-715b-4dd1-a3a7-6583439de2bf',
+				label : 'Orissa',
+			},
+			{
+				value : 'a886a12f-1305-4adf-b8e2-c168196e51cb',
+				label : 'Princess Dock',
+
+			}, {
+				value : 'c551c09e-7b9e-4d31-8b49-db0345b250d4',
+				label : 'Assam',
+
+			},
+		],
 		placeholder    : 'Select cluster',
 		optionsListKey : 'locations',
 		isClearable    : true,
@@ -183,10 +241,21 @@ const createFormControls = [
 		params: { filters: { type: ['cluster'] } },
 	},
 	{
-		name           : 'pincode_id',
-		label          : 'Pincode',
-		type           : 'select',
-		options        : [],
+		name    : 'pincode_id',
+		label   : 'Pincode',
+		type    : 'select',
+		options : [
+			{
+				value : '00030e6f-c3de-43a5-9cd8-aa731db65517',
+				label : 'G411EL-Govan',
+			}, {
+				value : '000340a7-f99f-47b4-8281-98c5a4e38afa',
+				label : 'AB555JB-Speyside Glenlivet',
+			}, {
+				value : '0004bac0-161d-4827-8daa-6a4aa1caef99',
+				label : '12144-Defreestville',
+			},
+		],
 		placeholder    : 'Select pincode',
 		optionsListKey : 'locations',
 		isClearable    : true,
@@ -204,10 +273,23 @@ const createFormControls = [
 		params : { filters: { type: ['pincode'] } },
 	},
 	{
-		name           : 'cfs_code',
-		label          : 'CFS',
-		type           : 'select',
-		options        : [],
+		name    : 'cfs_code',
+		label   : 'CFS',
+		type    : 'select',
+		options : [
+			{
+				value : '11514984-2deb-4959-bd7b-53bb756d67d7',
+				label : 'SEATECH',
+
+			}, {
+				value : '24fb4ec7-eac9-4e99-b861-0af8427bd7d1',
+				label : 'SEABIRD',
+
+			}, {
+				value : '347b9dce-d9e1-4185-9945-b45709f19661',
+				label : 'KRISHNAPATNAM',
+			},
+		],
 		placeholder    : 'Select cfs',
 		optionsListKey : 'locations',
 		condition      : { type: ['cfs'] },

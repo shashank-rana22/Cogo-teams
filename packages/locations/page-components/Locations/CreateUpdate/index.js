@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import {
 	InputController, useForm, SelectController,
 } from '@cogoport/forms';
+import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import fields from '../../../configurations/create-form';
@@ -19,6 +20,11 @@ function CreateUpdateForm({ item:propItem }) {
 		handleSubmit, getValues, control, formState: { errors },
 		watch,
 	} = useForm();
+
+	const [{ loading, error }, trigger] = useRequest({
+		url    : '/create_location',
+		method : 'post',
+	}, { manual: true });
 
 	const [message, setMessage] = useState({ type: null, message: null });
 
@@ -64,10 +70,10 @@ function CreateUpdateForm({ item:propItem }) {
 			}
 			: { ...formattedValues, ...prefilledValues };
 
-		const res = await createUpdateApi(
-			{ endpoint: '/create_location', method: 'post' },
-			{ ...payload },
-		);
+		const res = await trigger({ data: { ...payload } });
+
+		console.log('res', res);
+
 		if (res.hasError) {
 			setMessage({ type: 'error', message: res.messages });
 		} else {
@@ -80,8 +86,6 @@ function CreateUpdateForm({ item:propItem }) {
 
 	const watchType = watch('type');
 
-	console.log('watchType', watchType);
-
 	return (
 		<form style={{ height: 500 }} onSubmit={handleSubmit(onCreate)}>
 			<h2>Create Location</h2>
@@ -90,7 +94,6 @@ function CreateUpdateForm({ item:propItem }) {
 					const { condition = {}, ...rest } = field;
 					const Element = getElementController(rest.type);
 					if (!Element) return null;
-
 					if (!('condition' in field) || condition?.type?.includes(watchType)) {
 						return (
 							<div className={styles.list}>
@@ -105,20 +108,7 @@ function CreateUpdateForm({ item:propItem }) {
 							</div>
 						);
 					}
-
-					// if (!condition?.type) {
-					// 	return (
-					// 		<div className={styles.list}>
-					// 			<h4>{field?.label}</h4>
-					// 			<Element
-					// 				control={control}
-					// 				id={`rnp_role_list_create_role_form_${field?.name}_input`}
-					// 				{...rest}
-					// 			/>
-					// 			<div className={styles.error}>{errors?.[field?.name]?.message}</div>
-					// 		</div>
-					// 	);
-					// }
+					return null;
 				})}
 			</div>
 			<Button className={styles.button} type="submit">Submit</Button>

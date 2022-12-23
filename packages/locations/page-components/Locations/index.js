@@ -82,7 +82,6 @@ function Locations() {
 					formatParams={formatParams}
 				/>
 			</div>
-
 			{renderCard()}
 		</div>
 	);
