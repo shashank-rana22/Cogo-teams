@@ -8,11 +8,11 @@ function Home() {
 	const { control, handleSubmit } = useForm();
 
 	const selectOptions = useGetAsyncOptions({
-		endpoint       : '/list_locations',
-		params         : { filters: { q: 'test' } },
-		valueKey       : 'id',
-		labelKey       : 'name',
-		defaultOptions : true,
+		endpoint    : '/list_locations',
+		params      : { filters: { q: 'test' } },
+		valueKey    : 'id',
+		labelKey    : 'name',
+		initialCall : true,
 	});
 
 	return (
