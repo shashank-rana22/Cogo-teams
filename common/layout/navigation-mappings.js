@@ -23,7 +23,7 @@ const navigationMappings = {
 				href      : '/business-finance/account-payables',
 				as        : '/business-finance/account-payables',
 				icon      : <IcMBookingDesk />,
-				main_apis : ['get_purchase_payable_bill_company_list'],
+				main_apis : ['get_purchase_payable_bill_list'],
 			},
 			{
 				key       : 'business_finance-account_receivables',

@@ -1,6 +1,6 @@
 import { makeUseAxios } from 'axios-hooks';
 
-import { request } from '../helpers/request';
+import { requestBf } from '../helpers/request-bf';
 
 const commonConfig = {
 	cache          : false,
@@ -10,9 +10,9 @@ const commonConfig = {
 	},
 };
 
-const useRequest = makeUseAxios({
-	axios: request,
+const useRequestBf = makeUseAxios({
+	axios: requestBf,
 	...commonConfig,
 });
 
-export default useRequest;
+export default useRequestBf;
