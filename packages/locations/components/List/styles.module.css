@@ -1,11 +1,12 @@
-.container{
-    /* width: 80%; */
-    /* margin: 0; */
-    @media(max-width:767px){
-        margin: 0px;
-    }
-}
-.main{
+.container {
+	/* width: 80%; */
 
+	/* margin: 0; */
+	@media (max-width: 767px) {
+		margin: 0;
+	}
+}
+
+.main {
 	position: relative;
 }
