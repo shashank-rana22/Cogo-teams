@@ -1,14 +1,21 @@
 {
     "include": [
-      "**/*",
+      "**/*.ts",
+      "**/*.tsx",
       "rollup.config.js",
       ".eslintrc.js"
     ],
-    "exclude": ["dist"],
+    "exclude": [
+      "dist",
+      "**/*.js",
+      "**/*.jsx"
+    ],
     "compilerOptions": {
         "target": "ES2020",
         "typeRoots": ["node_modules/@types"],
         "jsx": "react",
+        "allowJs": true,
+        "checkJs": false,
         "module": "ES2020",
         "moduleResolution": "Node16",
         "allowSyntheticDefaultImports": true,
@@ -19,5 +26,7 @@
         /* Type Checking */
         "strict": true,
         "noImplicitAny": true
-      }
+      },
+
+
   }

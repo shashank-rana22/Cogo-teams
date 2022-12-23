@@ -30,7 +30,6 @@
 	white-space: nowrap;
 }
 
-
 .row {
 	display: flex;
 
@@ -44,7 +43,6 @@
 	/* justify-content: left; */
 	justify-content: space-around;
 	padding: 11px 15px;
-
 
 	/* display: grid;
 	grid-template-columns: auto auto auto auto;

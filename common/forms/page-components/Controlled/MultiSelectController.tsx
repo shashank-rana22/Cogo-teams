@@ -1,8 +1,8 @@
-import { SelectOld } from '@cogoport/components';
+import { MultiSelect } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function SelectController(props: any) {
+function MultiSelectController(props: any) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -14,7 +14,7 @@ function SelectController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<SelectOld
+				<MultiSelect
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
@@ -26,4 +26,4 @@ function SelectController(props: any) {
 		/>
 	);
 }
-export default SelectController;
+export default MultiSelectController;
