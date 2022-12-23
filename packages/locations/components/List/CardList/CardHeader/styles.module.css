@@ -1,0 +1,32 @@
+ .cardtitle{
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 14px;
+	/* identical to box height */
+
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.04em;
+
+	/* Gray 3 */
+
+	color: #828282;
+	&.icon {
+		width: 100%;
+		justify-content: center;
+
+		}	
+	}
+	.grid{
+		display: flex;
+        justify-content: space-around;
+		margin: 10px;
+		font-weight: 500;
+		/* grid-template-columns: auto auto auto auto; */
+	
+	 }
+	  .column {
+		display: flex;
+		text-align: left;
+	  }

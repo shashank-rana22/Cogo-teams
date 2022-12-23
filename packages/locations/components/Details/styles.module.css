@@ -1,0 +1,10 @@
+.active_content {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description {
+    width: 50%;
+}

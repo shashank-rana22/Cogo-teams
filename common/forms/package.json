@@ -9,17 +9,14 @@
         "build": "pnpm rollup -c rollup.config.js --bundleConfigAsCjs && cp package.json ./dist"
     },
     "dependencies": {
-        "@cogoport/components": "^1.0.117",
+        "@cogoport/components": "^1.0.124",
         "@cogoport/icons-react": "^1.0.48",
         "downshift": "^7.0.5",
-        "glamor": "^2.20.40",
-        "match-sorter": "^6.3.1",
         "next": "13.0.6",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-hook-form": "^7.41.0",
         "react-redux": "^8.0.5",
-        "starwars-names": "^1.6.0",
         "typescript": "^4.9.4"
     },
     "devDependencies": {
@@ -28,7 +25,7 @@
         "@rollup/plugin-node-resolve": "^15.0.1",
         "@types/react": "^18.0.26",
         "next-transpile-modules": "^10.0.0",
-        "rollup": "^3.8.0",
+        "rollup": "^3.8.1",
         "rollup-plugin-delete": "^2.0.0",
         "rollup-plugin-typescript2": "^0.34.1"
     }

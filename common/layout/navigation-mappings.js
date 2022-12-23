@@ -43,6 +43,23 @@ const navigationMappings = {
 			},
 		],
 	},
+	locations: {
+		key       : 'locations',
+		title     : 'Locations',
+		icon      : <IcMBookingDesk />,
+		href      : '/locations',
+		as        : '/locations',
+		main_apis : ['list_locations'],
+		options   : [
+			{
+				key   : 'locations',
+				title : 'Locations View',
+				href  : '/locations',
+				as    : '/locations',
+			},
+		],
+		module_type: 'crm',
+	},
 };
 
 export default navigationMappings;

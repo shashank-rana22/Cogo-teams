@@ -20,7 +20,6 @@ function InputController(props: any) {
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
-					data-test-value={value}
 				/>
 			)}
 		/>

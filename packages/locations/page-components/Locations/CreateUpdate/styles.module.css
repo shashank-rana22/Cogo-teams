@@ -1,0 +1,26 @@
+.error {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}
+
+.form {
+	width: 100%;
+	padding: 10px;
+	overflow: scroll;
+	background-color: bisque;
+	border-radius: 5px;
+}
+
+.form::-webkit-scrollbar {
+	display: none;
+}
+
+.button {
+	margin: 20px 0;
+}
+
+.list {
+	margin: 5px;
+}

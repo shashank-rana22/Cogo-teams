@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { SelectOld } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
@@ -14,7 +14,7 @@ function SelectController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Select
+				<SelectOld
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
