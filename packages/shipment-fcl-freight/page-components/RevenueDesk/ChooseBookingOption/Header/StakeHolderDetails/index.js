@@ -1,13 +1,13 @@
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
-// import useListInternalStakeholders from '../../../../../hooks/revenueDeskHooks/useListInternalStakeholders';
-// import StakeholderDetails from '../../../../../hooks/revenueDeskHooks/useListInternalStakeholders.json';
+import useListInternalStakeholders from '../../../../../hooks/revenueDeskHooks/useListInternalStakeholder';
+import StakeholderDetails from '../../../../../hooks/revenueDeskHooks/useListInternalStakeholder.json';
 import styles from './styles.module.css';
 
 function StakeHolderDetails({ data }) {
-	const internalStakeHoldersList = StakeholderDetails;
+	// const internalStakeHoldersList = StakeholderDetails;
 
-	useListInternalStakeholders({
+	const { internalStakeHoldersList } = useListInternalStakeholders({
 		shipment_id: data?.id,
 	});
 

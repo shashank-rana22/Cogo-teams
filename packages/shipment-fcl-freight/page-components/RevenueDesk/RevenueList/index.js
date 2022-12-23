@@ -1,6 +1,6 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Input } from '@cogoport/components';
 import React, { useState } from 'react';
-
+import {IcMSearchlight} from '@cogoport/icons-react';
 import CompletedJobs from './CompletedJobs';
 import PendingJobs from './PendingJobs';
 import styles from './styles.module.css';
@@ -22,19 +22,30 @@ function RevenueList({
 	controls = [],
 	shipment_type,
 }) {
+
+	const [showFilters, setShowFilters] = useState(false);
+	const [serialId, setSerialId] = useState('');
+
+	const handleChangeSerial = (value) => {
+		hookSetters.setFilters({ q: value });
+		setSerialId(value);
+	};
 	
 	return (
 		<div>
 			<div className={styles.heading}>
-				FCL Revenue Desk
+				FCL Revenue Desk    
 			</div>
 			<div className={styles.row}>
 
 				<div className={styles.input}>
 					<Input
+						name="q"
 						value={serialId}
-						onChange={(e) => handleChangeSerial(e.target.value)}
+						onChange={(e) => handleChangeSerial(e)}
 						placeholder="Search by SID"
+						style={{ width: '300px' }}
+						inputIcon={<IcMSearchlight style={{ marginTop: '5px' }} />}
 					/>
 				</div>
 

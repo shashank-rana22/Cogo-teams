@@ -1,18 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CancellationModal from '../../../../commons/CancellationModal';
 // import useUpdateCancelShipment from '../../../../Fcl/hooks/useUpdateCancelShipment';
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import styles from './styles.module.css'
 
 const CancelShipment = ({
-	showCancel = false,
-	setShowCancel = () => {},
+	
 	setShow = () => {},
 	id,
 	refetch = () => {},
 	setShowBookingOption = () => {},
 }) => {
 
+	const [showCancel, setShowCancel] = useState(false);
 	// const {
 	// 	loading,
 	// 	fields,
@@ -28,11 +28,10 @@ const CancelShipment = ({
 	// 	refetch,
 	// 	setShowBookingOption,
 	// });
-	
 
-	const handleClose = () => {
+
+	const onClose = () => {
 		setShowCancel(false);
-		setShow(false);
 	};
 
 	return (
@@ -40,34 +39,46 @@ const CancelShipment = ({
 			<div className={styles.buttonText}
 				onClick={() => {
 					setShowCancel(true);
-					setShow(false);
 				}}
 			>
 				Cancel Shipment
 			</div>
 
-			{/* {showCancel ? (
+			{showCancel ? (
 				<Modal
-					className="primary xl"
+					size="md"
 					show={showCancel}
-					onClose={handleClose}
-					styles={{ dialog: { width: 700 } }}
+					onClose={onClose}
+					placement="center"
 				>
+				<Modal.Header  title = "Cancel Shipment"/>
+				<Modal.Body>
 					<CancellationModal
-						formValues={formValues}
-						handleSubmit={handleSubmit}
-						onSubmit={onSubmit}
-						loading={loading}
-						fields={fields}
-						modifiedControls={controls}
-						onErrors={onError}
-						errors={errors}
-						showRequest={false}
-						handleClose={handleClose}
-						id={id}
+						// formValues={formValues}
+						// fields={fields}
+						// modifiedControls={controls}
+						// errors={errors}
 					/>
+				</Modal.Body>
+				<Modal.Footer> 
+					<div className={styles.buttonDiv}>
+						<Button
+							onClick={onClose}
+							// disabled={loading || disabledButton}
+							style={{ marginRight: '8px' }}
+						>
+							Cancel
+						</Button>
+						<Button
+							// disabled={loading || disabledButton}
+							// onClick={handleSubmit(onSubmit, onErrors)}
+						>
+							{false ? 'Confirm Cancellation' : 'Confirming...'}
+						</Button>
+					</div>
+				</Modal.Footer>
 				</Modal>
-			) : null} */}
+			) : null} 
 		</div>
 	);
 };

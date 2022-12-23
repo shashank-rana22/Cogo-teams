@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal } from '@cogoport/components';
 import ChooseBookingOption from '../ChooseBookingOption';
 import FlashRates from '../ChooseBookingOption/FlashRates';
-// import getFlashRates from '../ChooseBookingOptions/Hooks/getFlashRates';
-// import getRates from '../ChooseBookingOptions/Hooks/getRates.json';
-// import existingDocuments from '../ChooseBookingOptions/Hooks/getShipmentEligibleDocument.json';
-// import useListBookingOptions from '../ChooseBookingOptions/Hooks/useListBookingOptions';
+import getRates from '../../../hooks/revenueDeskHooks/getRates.json';
+import existingDocuments from '../../../hooks/revenueDeskHooks/getShipmentEligibleDocument.json';
+import useListBookingOptions from '../../../hooks/revenueDeskHooks/useListBookingOptions';
 import CreateDataFromChoosen from '../../../utils/revenueDeskUtils/createDataFromChoosen';
 import ExistingRates from './RatesPreferences';
+import ConfirmPrefrences from './ConfirmPreferences';
 import styles from './styles.module.css';
 
 
@@ -149,21 +149,24 @@ function BookingOption(params) {
 				</>
 			) : null}
 
-			{show ? (
-				<Modal
-					show={show}
-					size="lg"
-					theme="supernova"
-					onClose={() => setShow(false)}
-					showCloseIcon
-				>
-					<ConfirmPrefrences
-						setShow={() => setShow(false)}
-					// handleSave={upateTrigger}
-						loading={loading}
-					/>
-				</Modal>
-		 ) : null}
+			
+			<Modal
+				size="md"
+				show={show}
+				onClose={()=>setShow(false)}
+				placement="center"
+			>
+			<Modal.Body>
+				<ConfirmPrefrences
+							setShow={() => setShow(false)}
+						// handleSave={upateTrigger}
+							loading={loading}
+				/>
+			</Modal.Body>
+			</Modal>
+					
+			
+		
 		</ChooseBookingOption>
 	);
 }

@@ -4,7 +4,7 @@ import {Pagination}  from '@cogoport/components'
 
 function PendingJobs({
 	data = [],
-	total = '',
+	total,
 	hookSetters = () => {},
 	page = 1,
 	filters = {},
@@ -17,6 +17,12 @@ function PendingJobs({
 	const handleCardClick = (data_item) => {
 		setClickedCard(data_item);
 	};
+	const handlePageChange=()=>{
+		hookSetters.setFilters({
+			...filters,
+			page: val,
+		})
+	}
 
 	return (
 		<div className={styles.container}>
@@ -28,12 +34,7 @@ function PendingJobs({
 							totalItems={total}
 							PageSize={10}
 							currentPage={page}
-							handlePageChange={(val) =>
-								hookSetters.setFilters({
-									...filters,
-									page: val,
-								})
-							}
+							handlePageChange={handlePageChange}
 						/>
 					</div>
 				) : null}

@@ -1,12 +1,20 @@
 .buttonText{
     font-size: 12px;
+	font-weight: 700;
 	color: #828282;
 	text-align: center;
-	padding: 4px;
 	cursor: pointer;
-	background-color: black;
+	width: 100px;
 }
 
-.buttonText :hover{
-    color: #356efd;
+.buttonDiv{
+	display: flex;
+	align-items: center;
+	margin: 22px;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		width: 140px;
+	}
 }

@@ -1,0 +1,2214 @@
+{ "SystemRates" : {
+    "loading" : true,
+    "systemRatesData" : 
+       {
+          "list":[
+             {
+                "id":"e6d67611-23c0-4987-a24e-24b701c7ec24",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"4e22cb67-e3cb-439f-9d56-a7058dce1e95",
+                "service_provider_id":"13a229ec-dd96-4dca-8c4a-88a74a4341fa",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-11-30",
+                      "validity_end":"2022-12-31",
+                      "price":175.0,
+                      "platform_price":175.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"4e22cb67-e3cb-439f-9d56-a7058dce1e95",
+                   "business_name":"Freight Connection",
+                   "short_name":"Freight Connection",
+                   "logo_url":null
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"13a229ec-dd96-4dca-8c4a-88a74a4341fa",
+                   "business_name":"FREIGHT CONNECTION INDIA PRIVATE LIMITED",
+                   "short_name":"FREIGHT CONNECTION INDIA PRIVATE LIMITED"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             },
+             {
+                "id":"51129351-aeae-478a-871d-956baf73667b",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"7e078eda-514b-46c1-aa32-b02e2eca02e1",
+                "service_provider_id":"a06785b3-fbf6-4650-b85f-dfe4cc343c72",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-12-02",
+                      "validity_end":"2022-12-31",
+                      "price":150.0,
+                      "platform_price":150.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"7e078eda-514b-46c1-aa32-b02e2eca02e1",
+                   "business_name":"WinWin Maritime Private Limited",
+                   "short_name":"Winwin Maritime",
+                   "logo_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/da4608ac31ca6efb7d90c88508701002/winwin_2.png"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"a06785b3-fbf6-4650-b85f-dfe4cc343c72",
+                   "business_name":"WINWIN MARITIME LIMITED",
+                   "short_name":"WINWIN MARITIME LIMITED"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             },
+             {
+                "id":"9b2a84cb-6127-464c-a6ff-725fdafc7c39",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"8b0f6780-1b22-4f80-b96c-bedb18711ac3",
+                "service_provider_id":"0dc9b361-3fb2-4b98-b74c-310f72850850",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-12-01",
+                      "validity_end":"2022-12-31",
+                      "price":300.0,
+                      "platform_price":300.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"8b0f6780-1b22-4f80-b96c-bedb18711ac3",
+                   "business_name":"ECONSHIP MARINE PVT LTD",
+                   "short_name":"Econship Marine",
+                   "logo_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/a2bc15f94967f2fb823ba27dca67187f/ECON.svg"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"0dc9b361-3fb2-4b98-b74c-310f72850850",
+                   "business_name":"ECONSHIP TECH PRIVATE LIMITED",
+                   "short_name":"ECONSHIP TECH PRIVATE LIMITED"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             },
+             {
+                "id":"236ec5f1-c041-46f0-8db4-569af154d897",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"91ac3a61-5e28-43f6-84e7-f4ed38267e4e",
+                "service_provider_id":"ee989756-9aa2-4c30-b94e-711d6085b8c7",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-12-01",
+                      "validity_end":"2022-12-31",
+                      "price":200.0,
+                      "platform_price":200.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"91ac3a61-5e28-43f6-84e7-f4ed38267e4e",
+                   "business_name":"EMIRATES SHIPPING AGENCIES(I) P LTD",
+                   "short_name":"Emirates",
+                   "logo_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/f47f980aaad6fdab568b265d3ac09be7/Emirates%20Shipping.svg"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"ee989756-9aa2-4c30-b94e-711d6085b8c7",
+                   "business_name":"EMIRATES SHIPPING AGENCIES(INDIA) PRIVATE LIMITED",
+                   "short_name":"Emirates Shipping Agencies (India) Pvt Ltd"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             },
+             {
+                "id":"922fccf2-096c-4e6c-a4df-3afa04ca8441",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"9c47055c-5ad4-435d-a088-05ed8562f2f0",
+                "service_provider_id":"25f8f25c-7573-4dd6-a2f8-8dd9c0f1bafd",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-12-01",
+                      "validity_end":"2022-12-31",
+                      "price":100.0,
+                      "platform_price":100.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":27,
+                   "slabs":[
+                      
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"9c47055c-5ad4-435d-a088-05ed8562f2f0",
+                   "business_name":"LANCER CONTAINER LINES LTD",
+                   "short_name":"Lancer",
+                   "logo_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/5f75a6104119d296a0a0186271b87ad9/Lancer%20Container%20Lines.svg"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"25f8f25c-7573-4dd6-a2f8-8dd9c0f1bafd",
+                   "business_name":"LANCER CONTAINER LINES LIMITED",
+                   "short_name":"LANCER CONTAINER LINES LIMITED"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":" weight limit slabs is not present,",
+                   "is_rate_available":true,
+                   "is_visible":false
+                }
+             },
+             {
+                "id":"72ae2dd0-8a35-4f16-a0ab-339a4d825fd6",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"bcb655cd-0a5d-406e-99ed-623e8b7c7f80",
+                "service_provider_id":"014e44af-74f9-4365-bf47-a02718124d06",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-11-30",
+                      "validity_end":"2022-12-31",
+                      "price":150.0,
+                      "platform_price":150.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":true,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"bcb655cd-0a5d-406e-99ed-623e8b7c7f80",
+                   "business_name":"SEA HORSE SHIP AGENCIES PVT LTD .",
+                   "short_name":"Sea Horse Shipping",
+                   "logo_url":null
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"014e44af-74f9-4365-bf47-a02718124d06",
+                   "business_name":"SEAHORSE SHIP AGENCIES PRIVATE LTD",
+                   "short_name":"Seahorse Ship Agencies Pvt Ltd."
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             },
+             {
+                "id":"bfb54b58-e070-40d6-a095-dbbe1b4087b9",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"e9f62801-c874-4a20-93c0-8bed5b176c39",
+                "service_provider_id":"72abe9e0-c5d1-4b5f-956f-d5dc335b309a",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-12-09",
+                      "validity_end":"2022-12-31",
+                      "price":85.0,
+                      "platform_price":85.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":null,
+                "origin_local_line_items_error_messages":null,
+                "is_destination_local_line_items_error_messages_present":true,
+                "destination_local_line_items_error_messages":{
+                   "DO":[
+                      "is not present"
+                   ],
+                   "THC":[
+                      "is not present"
+                   ]
+                },
+                "is_origin_local_line_items_info_messages_present":null,
+                "origin_local_line_items_info_messages":null,
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":false,
+                "is_origin_detention_missing":true,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":true,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"e9f62801-c874-4a20-93c0-8bed5b176c39",
+                   "business_name":"Navio Shipping Private Limited",
+                   "short_name":"Navio Shipping",
+                   "logo_url":"https://prod-cogoport.s3.ap-south-1.amazonaws.com/661f3425f9519d9f8112731de41ad763/Navio%20Shipping.svg"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"72abe9e0-c5d1-4b5f-956f-d5dc335b309a",
+                   "business_name":"NAVIO SHIPPING PRIVATE LIMITED",
+                   "short_name":"NAVIO SHIPPING PVT LTD"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":" weight limit slabs is not present,",
+                   "is_rate_available":true,
+                   "is_visible":false
+                }
+             },
+             {
+                "id":"59475a77-7dad-44f0-a03a-9f44b29ff4d4",
+                "origin_port_id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                "origin_trade_id":"d1e7b3ca-7518-4706-a644-e99d3aa2e0a9",
+                "destination_port_id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                "destination_trade_id":"0cd3ac76-ee4e-4178-9511-8cf93caf045b",
+                "origin_main_port_id":null,
+                "destination_main_port_id":null,
+                "container_size":"20",
+                "container_type":"standard",
+                "commodity":"general",
+                "shipping_line_id":"f4c62b6c-2a90-445f-9a10-00d4dde99716",
+                "service_provider_id":"7c779ade-d49f-4273-9359-7665ff500c14",
+                "importer_exporter_id":null,
+                "containers_count":null,
+                "importer_exporters_count":null,
+                "priority_score":null,
+                "last_rate_available_date":"2022-12-31",
+                "is_best_price":true,
+                "validities":[
+                   {
+                      "validity_start":"2022-12-09",
+                      "validity_end":"2022-12-31",
+                      "price":157.0,
+                      "platform_price":157.0,
+                      "currency":"USD",
+                      "is_rate_about_to_expire":false,
+                      "is_best_price":true,
+                      "schedule_type":"transhipment",
+                      "is_rate_expired":false
+                   }
+                ],
+                "weight_limit":{
+                   "free_limit":28,
+                   "slabs":[
+                      {
+                         "lower_limit":28.1,
+                         "upper_limit":30.0,
+                         "price":0.0,
+                         "currency":"USD"
+                      }
+                   ],
+                   "remarks":[
+                      
+                   ]
+                },
+                "is_origin_local_line_items_error_messages_present":false,
+                "origin_local_line_items_error_messages":{
+                   
+                },
+                "is_destination_local_line_items_error_messages_present":false,
+                "destination_local_line_items_error_messages":{
+                   
+                },
+                "is_origin_local_line_items_info_messages_present":true,
+                "origin_local_line_items_info_messages":{
+                   "BF":[
+                      "can be added for more conversion"
+                   ],
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "DC":[
+                      "can be added for more conversion"
+                   ],
+                   "FS":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "PU":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "AMD":[
+                      "can be added for more conversion"
+                   ],
+                   "ASC":[
+                      "can be added for more conversion"
+                   ],
+                   "ASO":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRO":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "CVD":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DDF":[
+                      "can be added for more conversion"
+                   ],
+                   "DET":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDT":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "ERC":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "GPS":[
+                      "can be added for more conversion"
+                   ],
+                   "GRR":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "IFE":[
+                      "is required for serving in United States of America"
+                   ],
+                   "INS":[
+                      "can be added for more conversion"
+                   ],
+                   "LCC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LDC":[
+                      "can be added for more conversion"
+                   ],
+                   "LSF":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "NSC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "OCS":[
+                      "can be added for more conversion"
+                   ],
+                   "ODF":[
+                      "can be added for more conversion"
+                   ],
+                   "OLC":[
+                      "can be added for more conversion"
+                   ],
+                   "PHD":[
+                      "can be added for more conversion"
+                   ],
+                   "PLS":[
+                      "can be added for more conversion"
+                   ],
+                   "PRC":[
+                      "can be added for more conversion"
+                   ],
+                   "RBC":[
+                      "can be added for more conversion"
+                   ],
+                   "RSC":[
+                      "can be added for more conversion"
+                   ],
+                   "SBC":[
+                      "can be added for more conversion"
+                   ],
+                   "SBL":[
+                      "can be added for more conversion"
+                   ],
+                   "SCT":[
+                      "can be added for more conversion"
+                   ],
+                   "SHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SSR":[
+                      "can be added for more conversion"
+                   ],
+                   "STO":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "VGM":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "BLRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CCSO":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CMSF":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "FDCF":[
+                      "can be added for more conversion"
+                   ],
+                   "ICTN":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "LBLC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "ROVC":[
+                      "can be added for more conversion"
+                   ],
+                   "SHTC":[
+                      "can be added for more conversion"
+                   ],
+                   "SIAM":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "VESS":[
+                      "can be added for more conversion"
+                   ],
+                   "EUVGM":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "EXPSTR":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_destination_local_line_items_info_messages_present":true,
+                "destination_local_line_items_info_messages":{
+                   "CC":[
+                      "can be added for more conversion"
+                   ],
+                   "HF":[
+                      "can be added for more conversion"
+                   ],
+                   "MF":[
+                      "can be added for more conversion"
+                   ],
+                   "RC":[
+                      "can be added for more conversion"
+                   ],
+                   "VC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFC":[
+                      "can be added for more conversion"
+                   ],
+                   "CMC":[
+                      "can be added for more conversion"
+                   ],
+                   "COD":[
+                      "can be added for more conversion"
+                   ],
+                   "CRF":[
+                      "can be added for more conversion"
+                   ],
+                   "CSD":[
+                      "can be added for more conversion"
+                   ],
+                   "CTC":[
+                      "can be added for more conversion"
+                   ],
+                   "DAC":[
+                      "can be added for more conversion"
+                   ],
+                   "DEA":[
+                      "can be added for more conversion"
+                   ],
+                   "ECD":[
+                      "can be added for more conversion"
+                   ],
+                   "EDC":[
+                      "can be added for more conversion"
+                   ],
+                   "EIR":[
+                      "can be added for more conversion"
+                   ],
+                   "FBS":[
+                      "can be added for more conversion"
+                   ],
+                   "FEC":[
+                      "can be added for more conversion"
+                   ],
+                   "HBL":[
+                      "can be added for more conversion"
+                   ],
+                   "ICC":[
+                      "can be added for more conversion"
+                   ],
+                   "IHF":[
+                      "can be added for more conversion"
+                   ],
+                   "IMC":[
+                      "can be added for more conversion"
+                   ],
+                   "LCH":[
+                      "can be added for more conversion"
+                   ],
+                   "LTR":[
+                      "can be added for more conversion"
+                   ],
+                   "NOC":[
+                      "can be added for more conversion"
+                   ],
+                   "OCG":[
+                      "can be added for more conversion"
+                   ],
+                   "PHC":[
+                      "can be added for more conversion"
+                   ],
+                   "SUR":[
+                      "can be added for more conversion"
+                   ],
+                   "TCS":[
+                      "can be added for more conversion"
+                   ],
+                   "VCF":[
+                      "can be added for more conversion"
+                   ],
+                   "WEH":[
+                      "can be added for more conversion"
+                   ],
+                   "AHFR":[
+                      "can be added for more conversion"
+                   ],
+                   "BAMN":[
+                      "can be added for more conversion"
+                   ],
+                   "CIFE":[
+                      "can be added for more conversion"
+                   ],
+                   "CRLO":[
+                      "can be added for more conversion"
+                   ],
+                   "ECSF":[
+                      "can be added for more conversion"
+                   ],
+                   "EDOF":[
+                      "can be added for more conversion"
+                   ],
+                   "IDOR":[
+                      "can be added for more conversion"
+                   ],
+                   "ITTC":[
+                      "can be added for more conversion"
+                   ],
+                   "REPO":[
+                      "can be added for more conversion"
+                   ],
+                   "SPCC":[
+                      "can be added for more conversion"
+                   ],
+                   "CFSCLO":[
+                      "can be added for more conversion"
+                   ],
+                   "BL SURRENDER":[
+                      "can be added for more conversion"
+                   ]
+                },
+                "is_origin_detention_slabs_missing":true,
+                "is_origin_demurrage_slabs_missing":true,
+                "is_origin_plugin_slabs_missing":true,
+                "is_destination_detention_slabs_missing":true,
+                "is_destination_demurrage_slabs_missing":true,
+                "is_destination_plugin_slabs_missing":true,
+                "is_weight_limit_missing":false,
+                "is_origin_local_missing":false,
+                "is_destination_local_missing":false,
+                "is_origin_detention_missing":false,
+                "is_destination_detention_missing":false,
+                "is_origin_plugin_missing":null,
+                "is_destination_plugin_missing":null,
+                "is_destination_demurrage_missing":false,
+                "is_rate_not_available":false,
+                "sourced_by_id":null,
+                "procured_by_id":null,
+                "shipping_line":{
+                   "id":"f4c62b6c-2a90-445f-9a10-00d4dde99716",
+                   "business_name":"Aegon Shipping LLC",
+                   "short_name":"Aegon Shipping",
+                   "logo_url":"https://carrier-images-cogoport.s3.ap-south-1.amazonaws.com/aegon-shipping-llc.png"
+                },
+                "origin_port":{
+                   "id":"eb187b38-51b2-4a5e-9f3c-978033ca1ddf",
+                   "name":"Jawaharlal Nehru (Nhava Sheva)",
+                   "display_name":"Jawaharlal Nehru (Nhava Sheva) (INNSA), Mumbai, India",
+                   "port_code":"INNSA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "origin_main_port":null,
+                "destination_port":{
+                   "id":"23630ba9-b478-4000-ba75-05606d72d19f",
+                   "name":"Jebel Ali",
+                   "display_name":"Jebel Ali (AEJEA), Dubai, United Arab Emirates",
+                   "port_code":"AEJEA",
+                   "type":"seaport",
+                   "is_icd":false
+                },
+                "destination_main_port":null,
+                "service_provider":{
+                   "id":"7c779ade-d49f-4273-9359-7665ff500c14",
+                   "business_name":"Aegon Shipping India Private Limited",
+                   "short_name":"Aegon Shipping India Private Limited"
+                },
+                "importer_exporter":null,
+                "procured_by":null,
+                "sourced_by":null,
+                "rate_visibility":{
+                   "reason":"",
+                   "is_rate_available":true,
+                   "is_visible":true
+                }
+             }
+          ]
+       }
+  
+ },
+  "CurrentRates" :{ "loading" : true , "currentRatesData" : {} },
+  "PreviousRates": { "loading" : true , "currentRatesData" : {} }
+ }
+ 
+ 
+  

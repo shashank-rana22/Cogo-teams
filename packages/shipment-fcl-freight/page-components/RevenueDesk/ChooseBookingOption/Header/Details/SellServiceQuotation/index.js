@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 // import { getFormattedPrice } from '@cogo/i18n';
 import EmptyState from '../../../../../../commons/EmptyState';
 // import getShipmentQuotation from '../../../hooks/getShipmentQuotation';
-// import QuotationData from '../../../Hooks/getShipmentQuotation.json'
+import QuotationData from '../../../../../../hooks/revenueDeskHooks/QuotationData.json';
 import styles from './styles.module.css'
 
 const SellServcieQuotation = ({ shipmentData = {} }) => {

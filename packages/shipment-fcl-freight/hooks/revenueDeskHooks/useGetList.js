@@ -27,30 +27,27 @@ const useListShipments = (allParams) => {
 			filters:
 					allParams.status === 'completed'
 						? {
-							state: 'completed',
-							// state: [
-							// 	'completed',
-							// 	'in_progress',
-							// 	'confirmed_by_importer_exporter',
-							// ],
+							state: [
+								'completed',
+								'in_progress',
+								'confirmed_by_importer_exporter',
+							],
 							shipment_type: [
 								'fcl_freight',
 							].includes(shipment_type)
 								? shipment_type
 								: undefined,
-							// [service]: {
-							// 	state: [
-							// 		'awaiting_service_provider_confirmation',
-							// 		'confirmed_by_service_provider',
-							// 	],
-							// },
-							// booking_confirmation_preferences_set: true,
+							[service]: {
+								state: [
+									'awaiting_service_provider_confirmation',
+									'confirmed_by_service_provider',
+								],
+							},
+							booking_confirmation_preferences_set: true,
 							...restFilters,
 						  }
 						: {
-							state         : 'in_progress',
-							shipment_type : 'fcl_freight',
-							// state: ['confirmed_by_importer_exporter', 'in_progress'],
+							state: ['confirmed_by_importer_exporter', 'in_progress'],
 							shipment_type : ([
 								'fcl_freight',
 								'lcl_freight',
@@ -58,9 +55,9 @@ const useListShipments = (allParams) => {
 							].includes(shipment_type))
 								? shipment_type
 								: undefined,
-							// [service]: {
-							// 	state: 'awaiting_service_provider_confirmation',
-							// },
+							[service]: {
+								state: 'awaiting_service_provider_confirmation',
+							},
 							booking_confirmation_preferences_not_set: true,
 							...restFilters,
 						  },
