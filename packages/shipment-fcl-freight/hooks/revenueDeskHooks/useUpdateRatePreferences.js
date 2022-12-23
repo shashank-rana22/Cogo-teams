@@ -63,7 +63,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 
 
 
-	const [{data:internalStakeHoldersList, loading: loading, error : error },trigger] = useRequest(apitoCall,{manual:true})
+	const [{data:internalStakeHoldersList, loading: loading, error : error },trigger] = useRequest({url: apitoCall, method: 'post'},{manual:true})
 
 	const upateTrigger = async () => {
 		const hasData =

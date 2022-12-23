@@ -38,7 +38,7 @@ const useListBookingOptions = ({
 		choosen: data?.list?.length,
 		service,
 	});
-
+	console.log(CurrentRates, 'rates');
 	const PreviousRates = getFlashRates({
 		api: 'previous',
 		currentShipmentData,

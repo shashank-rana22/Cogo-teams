@@ -24,37 +24,37 @@ function BookingOption(params) {
 		service,
 	} = params;
 
-	// const {
-	// 	bnSalvage,
-	// 	statsLoading,
-	// 	existingDataLoading,
-	// 	existingData,
-	// 	data,
-	// 	flashParams,
-	// 	flash,
-	// 	flashDirectLoading,
-	// 	loading,
-	// 	handleFlashDirect = () => {},
-	// 	upateTrigger = () => {},
-	// } = useListBookingOptions({
-	// 	currentShipmentData,
-	// 	setShow,
-	// 	existingRatePrefrences,
-	// 	setShowBookingOption,
-	// 	supplierPayload,
-	// 	refetch,
-	// 	service,
-	// });
+	const {
+		bnSalvage,
+		statsLoading,
+		existingDataLoading,
+		existingData,
+		data,
+		flashParams,
+		flash,
+		flashDirectLoading,
+		loading,
+		handleFlashDirect = () => {},
+		upateTrigger = () => {},
+	} = useListBookingOptions({
+		currentShipmentData,
+		setShow,
+		existingRatePrefrences,
+		setShowBookingOption,
+		supplierPayload,
+		refetch,
+		service,
+	});
 
-	const bnSalvage = [];
-	const statsLoading = false;
-	const existingDataLoading = false;
-	const existingData = existingDocuments;
-	const data = [];
-	const flashParams = getRates;
-	const flash = [];
-	const flashDirectLoading = false;
-	const loading = false;
+	// const bnSalvage = [];
+	// const statsLoading = false;
+	// const existingDataLoading = false;
+	// const existingData = existingDocuments;
+	// const data = [];
+	// const flashParams = getRates;
+	// const flash = [];
+	// const flashDirectLoading = false;
+	// const loading = false;
 
 	const { choosen_bookings_docs, choosen_flash_params } = CreateDataFromChoosen(
 		{ data: data?.list, shipment_id: currentShipmentData?.id },
@@ -159,7 +159,7 @@ function BookingOption(params) {
 			<Modal.Body>
 				<ConfirmPrefrences
 							setShow={() => setShow(false)}
-						// handleSave={upateTrigger}
+							handleSave={upateTrigger}
 							loading={loading}
 				/>
 			</Modal.Body>

@@ -6,7 +6,6 @@ const getExistingRates = ({
 	currentShipmentData,
 	choosen,
 	shipment_type,
-	// service,
 }) => {
 
 	const [{data:data, loading: loading, error = error },trigger]=useRequest('/get_shipment_elligible_booking_document',{manual:true})

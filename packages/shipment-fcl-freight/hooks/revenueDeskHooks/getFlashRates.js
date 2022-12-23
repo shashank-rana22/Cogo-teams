@@ -14,10 +14,11 @@ const getFlashRates = ({
 	const [{data:data, loading: loading, error : error },trigger] = useRequest('/list_shipment_flash_booking_rates',{manual:true})
 	const date = new Date();
 	date.setDate(date.getDate() - 4);
-	console.log(data,'naveen');
+	
 	const service_type = `${shipment_type}_service`;
 
 	const { options } = getPreviousFalshPayload(currentShipmentData);
+	
 	const PreviousFlashFilters = {
 		service_data: options,
 		is_reverted: true,
@@ -36,8 +37,8 @@ const getFlashRates = ({
 	const filtersToCall =
 		api === 'current' ? CurrentFlashFilters : PreviousFlashFilters;
 
-	const getList = async () => {
-		await trigger({
+	const getList =  () => {
+		const response = trigger({
 			params: {
 				filters: filtersToCall,
 
