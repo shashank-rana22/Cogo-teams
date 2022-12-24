@@ -2,13 +2,8 @@ import React from 'react';
 import { Tooltip } from '@cogoport/components';
 import { IcMFship } from '@cogoport/icons-react';
 import styles from './styles.module.css'
-import { isEmpty } from 'lodash';
 
 const Details = ({ data = {} }) => {
-	if (isEmpty(data)) {
-		return null;
-	}
-
 	const { origin, destination } = getLocations('shipment_type', data) || {};
 
 	const { destination_main_port, origin_main_port } = data;
