@@ -1,4 +1,4 @@
 const ViewInvoices =()=>{
-    return(<div>brkhjb</div>)
+    return(<div>view invoices</div>)
 }
 export default ViewInvoices
