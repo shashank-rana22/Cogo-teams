@@ -3,6 +3,7 @@ import React from 'react';
 import getValue from './getValue';
 import { FieldType, FunctionObjects, ConfigType } from './Interfaces/index';
 import styles from './styles.module.css';
+import itemFunctions from './renderFunctions';
 
 export interface Props {
 	fields: FieldType[];
@@ -22,6 +23,9 @@ function CardColumn({
 	isMobile,
 }:Props) {
 	const { clickable } = config;
+	console.log(singleitem,'singleitem');
+	const { newFunctions } = itemFunctions({ functions });
+	
 	return (
 		<section style={itemStyles}>
 			<div
@@ -48,7 +52,7 @@ function CardColumn({
 								{getValue(
 									singleitem,
 									field,
-									functions,
+									newFunctions,
 									'sample styling for the table',
 								)}
 							</div>
