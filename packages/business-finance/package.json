@@ -15,9 +15,7 @@
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
-    "next": "13.0.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "18.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.7",

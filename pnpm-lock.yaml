@@ -114,28 +114,20 @@ importers:
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@types/react': ^18.0.26
-      downshift: ^7.0.5
-      next: 13.0.6
       next-transpile-modules: ^10.0.0
       react: 18.2.0
-      react-dom: 18.2.0
-      react-hook-form: ^7.41.0
-      react-redux: ^8.0.5
+      react-hook-form: ^7.41.1
       rollup: ^3.8.1
       rollup-plugin-delete: ^2.0.0
       rollup-plugin-typescript2: ^0.34.1
       typescript: ^4.9.4
     dependencies:
-      '@cogoport/components': 1.0.131_j6lhi3hgh37lo4qhb7qouvcgr4
-      '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/components': 1.0.131_3qu7awhap2yzgpyb5yp3xthzzm
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.2
-      downshift: 7.0.5_react@18.2.0
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.41.0_react@18.2.0
-      react-redux: 8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
+      react-hook-form: 7.41.1_react@18.2.0
       typescript: 4.9.4
     devDependencies:
       '@rollup/plugin-commonjs': 23.0.7_rollup@3.8.1
@@ -219,21 +211,17 @@ importers:
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       cookies-next: ^2.1.1
-      next: 13.0.6
       react: 18.2.0
-      react-dom: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.131_27ghnklenyaalfqdgsm7fqt7de
+      '@cogoport/components': 1.0.131_xt4ifl6qxlrythdsvwl2iwyvb4
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
       cookies-next: 2.1.1
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
 
   packages/business-finance:
     specifiers:
@@ -246,22 +234,18 @@ importers:
       '@rollup/plugin-json': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@types/react': ^18.0.26
-      next: 13.0.6
       react: 18.2.0
-      react-dom: 18.2.0
       rollup: ^3.8.1
       rollup-plugin-delete: ^2.0.0
       rollup-plugin-typescript2: ^0.34.1
       typescript: ^4.9.4
     dependencies:
-      '@cogoport/components': 1.0.131_j6lhi3hgh37lo4qhb7qouvcgr4
+      '@cogoport/components': 1.0.131_3qu7awhap2yzgpyb5yp3xthzzm
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@rollup/plugin-commonjs': 23.0.7_rollup@3.8.1
       '@rollup/plugin-json': 5.0.2_rollup@3.8.1
@@ -318,7 +302,6 @@ importers:
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.2
-      next: 13.0.6
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.131_react@18.2.0
@@ -326,7 +309,6 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
-      next: 13.0.6_react@18.2.0
       react: 18.2.0
 
   packages/shipment-fcl-freight:
@@ -335,17 +317,13 @@ importers:
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
-      next: 13.0.6
       react: 18.2.0
-      react-dom: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.131_27ghnklenyaalfqdgsm7fqt7de
-      '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/components': 1.0.131_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.2
-      next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
 
 packages:
 
@@ -376,7 +354,7 @@ packages:
       '@babel/code-frame': 7.18.6
       '@babel/generator': 7.20.7
       '@babel/helper-compilation-targets': 7.20.7_@babel+core@7.20.7
-      '@babel/helper-module-transforms': 7.20.7
+      '@babel/helper-module-transforms': 7.20.11
       '@babel/helpers': 7.20.7
       '@babel/parser': 7.20.7
       '@babel/template': 7.20.7
@@ -514,8 +492,8 @@ packages:
     dependencies:
       '@babel/types': 7.20.7
 
-  /@babel/helper-module-transforms/7.20.7:
-    resolution: {integrity: sha512-FNdu7r67fqMUSVuQpFQGE6BPdhJIhitoxhGzDbAXNcA07uoVG37fOiMk3OSV8rEICuyG6t8LGkd9EE64qIEoIA==}
+  /@babel/helper-module-transforms/7.20.11:
+    resolution: {integrity: sha512-uRy78kN4psmji1s2QtbtcCSaj/LILFDp0f/ymhpQH5QY3nljUZCaNWz9X1dEj/8MBdBEFECs7yRhKn8i7NjZgg==}
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-environment-visitor': 7.18.9
@@ -1051,8 +1029,8 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
     dev: true
 
-  /@babel/plugin-transform-block-scoping/7.20.9_@babel+core@7.20.7:
-    resolution: {integrity: sha512-hwZN0kr16UkIF/kR9F9x8gd1kTkQl1vyAF2lkUmlTuCtTKOGLE5blQctuxEeKXwz0dkArQ9RYL8+HLb/75KGMA==}
+  /@babel/plugin-transform-block-scoping/7.20.11_@babel+core@7.20.7:
+    resolution: {integrity: sha512-tA4N427a7fjf1P0/2I4ScsHGc5jcHPbb30xMbaTke2gxDuWpUfXDuX1FEymJwKk4tuGUvGcejAR6HdZVqmmPyw==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -1176,42 +1154,42 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
     dev: true
 
-  /@babel/plugin-transform-modules-amd/7.20.7_@babel+core@7.20.7:
-    resolution: {integrity: sha512-+1IVLD+dHOzRZWNFFSoyPZz4ffsVmOP+OhhjeahLKpU97v/52LcCb9RabRl5eHM1/HAuH5Dl0q9Pyzrq1v2otQ==}
+  /@babel/plugin-transform-modules-amd/7.20.11_@babel+core@7.20.7:
+    resolution: {integrity: sha512-NuzCt5IIYOW0O30UvqktzHYR2ud5bOWbY0yaxWZ6G+aFzOMJvrs5YHNikrbdaT15+KNO31nPOy5Fim3ku6Zb5g==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.20.7
-      '@babel/helper-module-transforms': 7.20.7
+      '@babel/helper-module-transforms': 7.20.11
       '@babel/helper-plugin-utils': 7.20.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@babel/plugin-transform-modules-commonjs/7.20.7_@babel+core@7.20.7:
-    resolution: {integrity: sha512-76jqqFiFdCD+RJwEdtBHUG2/rEKQAmpejPbAKyQECEE3/y4U5CMPc9IXvipS990vgQhzq+ZRw6WJ+q4xJ/P24w==}
+  /@babel/plugin-transform-modules-commonjs/7.20.11_@babel+core@7.20.7:
+    resolution: {integrity: sha512-S8e1f7WQ7cimJQ51JkAaDrEtohVEitXjgCGAS2N8S31Y42E+kWwfSz83LYz57QdBm7q9diARVqanIaH2oVgQnw==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.20.7
-      '@babel/helper-module-transforms': 7.20.7
+      '@babel/helper-module-transforms': 7.20.11
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/helper-simple-access': 7.20.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@babel/plugin-transform-modules-systemjs/7.19.6_@babel+core@7.20.7:
-    resolution: {integrity: sha512-fqGLBepcc3kErfR9R3DnVpURmckXP7gj7bAlrTQyBxrigFqszZCkFkcoxzCp2v32XmwXLvbw+8Yq9/b+QqksjQ==}
+  /@babel/plugin-transform-modules-systemjs/7.20.11_@babel+core@7.20.7:
+    resolution: {integrity: sha512-vVu5g9BPQKSFEmvt2TA4Da5N+QVS66EX21d8uoOihC+OCpUoGvzVsXeqFdtAEfVa5BILAeFt+U7yVmLbQnAJmw==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.20.7
       '@babel/helper-hoist-variables': 7.18.6
-      '@babel/helper-module-transforms': 7.20.7
+      '@babel/helper-module-transforms': 7.20.11
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/helper-validator-identifier': 7.19.1
     transitivePeerDependencies:
@@ -1225,7 +1203,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.20.7
-      '@babel/helper-module-transforms': 7.20.7
+      '@babel/helper-module-transforms': 7.20.11
       '@babel/helper-plugin-utils': 7.20.2
     transitivePeerDependencies:
       - supports-color
@@ -1493,7 +1471,7 @@ packages:
       '@babel/plugin-transform-arrow-functions': 7.20.7_@babel+core@7.20.7
       '@babel/plugin-transform-async-to-generator': 7.20.7_@babel+core@7.20.7
       '@babel/plugin-transform-block-scoped-functions': 7.18.6_@babel+core@7.20.7
-      '@babel/plugin-transform-block-scoping': 7.20.9_@babel+core@7.20.7
+      '@babel/plugin-transform-block-scoping': 7.20.11_@babel+core@7.20.7
       '@babel/plugin-transform-classes': 7.20.7_@babel+core@7.20.7
       '@babel/plugin-transform-computed-properties': 7.20.7_@babel+core@7.20.7
       '@babel/plugin-transform-destructuring': 7.20.7_@babel+core@7.20.7
@@ -1504,9 +1482,9 @@ packages:
       '@babel/plugin-transform-function-name': 7.18.9_@babel+core@7.20.7
       '@babel/plugin-transform-literals': 7.18.9_@babel+core@7.20.7
       '@babel/plugin-transform-member-expression-literals': 7.18.6_@babel+core@7.20.7
-      '@babel/plugin-transform-modules-amd': 7.20.7_@babel+core@7.20.7
-      '@babel/plugin-transform-modules-commonjs': 7.20.7_@babel+core@7.20.7
-      '@babel/plugin-transform-modules-systemjs': 7.19.6_@babel+core@7.20.7
+      '@babel/plugin-transform-modules-amd': 7.20.11_@babel+core@7.20.7
+      '@babel/plugin-transform-modules-commonjs': 7.20.11_@babel+core@7.20.7
+      '@babel/plugin-transform-modules-systemjs': 7.20.11_@babel+core@7.20.7
       '@babel/plugin-transform-modules-umd': 7.18.6_@babel+core@7.20.7
       '@babel/plugin-transform-named-capturing-groups-regex': 7.20.5_@babel+core@7.20.7
       '@babel/plugin-transform-new-target': 7.18.6_@babel+core@7.20.7
@@ -1649,11 +1627,43 @@ packages:
       react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
       react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.41.0_react@18.2.0
+      react-hook-form: 7.41.1_react@18.2.0
       react-select: 4.3.1_biqbaboplfbrettd7655fr4n2y
       react-table: 7.8.0_react@18.2.0
     optionalDependencies:
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - babel-plugin-macros
+      - debug
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.131_3qu7awhap2yzgpyb5yp3xthzzm:
+    resolution: {integrity: sha512-SUtP6iqBLfKa2d02TwdlIi9/R9lier1Qn1reZJK5gzP6zGDcvFpGPBmRZmckuG1bp5D8ikvXu/zugEkxmMh01w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@floating-ui/react-dom-interactions': 0.10.3_kzbn2opkn2327fwg5yzwzya5o4
+      '@types/react-select': 5.0.1_kzbn2opkn2327fwg5yzwzya5o4
+      axios: 1.2.1
+      axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
+      date-fns: 2.29.3
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-date-picker: 9.1.0_react@18.2.0
+      react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
+      react-hook-form: 7.41.1_react@18.2.0
+      react-select: 4.3.1_kzbn2opkn2327fwg5yzwzya5o4
+      react-table: 7.8.0_react@18.2.0
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
@@ -1682,7 +1692,7 @@ packages:
       react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
       react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.41.0_react@18.2.0
+      react-hook-form: 7.41.1_react@18.2.0
       react-select: 4.3.1_ib3m5ricvtkl2cll7qpr2f6lvq
       react-table: 7.8.0_react@18.2.0
     optionalDependencies:
@@ -1713,7 +1723,39 @@ packages:
       react: 18.2.0
       react-date-picker: 9.1.0_react@18.2.0
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
-      react-hook-form: 7.41.0_react@18.2.0
+      react-hook-form: 7.41.1_react@18.2.0
+      react-select: 4.3.1_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - babel-plugin-macros
+      - debug
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.131_xt4ifl6qxlrythdsvwl2iwyvb4:
+    resolution: {integrity: sha512-SUtP6iqBLfKa2d02TwdlIi9/R9lier1Qn1reZJK5gzP6zGDcvFpGPBmRZmckuG1bp5D8ikvXu/zugEkxmMh01w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@floating-ui/react-dom-interactions': 0.10.3_react@18.2.0
+      '@types/react-select': 5.0.1_react@18.2.0
+      axios: 1.2.1
+      axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
+      date-fns: 2.29.3
+      downshift: 6.1.12_react@18.2.0
+      react: 18.2.0
+      react-date-picker: 9.1.0_react@18.2.0
+      react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
+      react-hook-form: 7.41.1_react@18.2.0
       react-select: 4.3.1_react@18.2.0
       react-table: 7.8.0_react@18.2.0
     optionalDependencies:
@@ -1763,6 +1805,16 @@ packages:
       '@cogoport/icons': 1.0.48
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@cogoport/icons-react/1.0.48_react@18.2.0:
+    resolution: {integrity: sha512-Rrc6PCpMOmDHA3jqbpMpdVpAF2x9yTcGCyNEc/4FdZEbRi9upDC1gDEHk9QseXJqe/Evc+hv+SpTZD7BIoXolg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.48
+      react: 18.2.0
     dev: false
 
   /@cogoport/icons/1.0.48:
@@ -2107,6 +2159,19 @@ packages:
       aria-hidden: 1.2.2_kzbn2opkn2327fwg5yzwzya5o4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
+  /@floating-ui/react-dom-interactions/0.10.3_kzbn2opkn2327fwg5yzwzya5o4:
+    resolution: {integrity: sha512-UEHqdnzyoiWNU5az/tAljr9iXFzN18DcvpMqW+/cXz4FEhDEB1ogLtWldOWCujLerPBnSRocADALafelOReMpw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/react-dom': 1.0.1_react@18.2.0
+      aria-hidden: 1.2.2_kzbn2opkn2327fwg5yzwzya5o4
+      react: 18.2.0
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -2808,6 +2873,18 @@ packages:
     deprecated: This is a stub types definition. react-select provides its own type definitions, so you do not need this installed.
     dependencies:
       react-select: 4.3.1_ib3m5ricvtkl2cll7qpr2f6lvq
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - react
+      - react-dom
+    dev: false
+
+  /@types/react-select/5.0.1_kzbn2opkn2327fwg5yzwzya5o4:
+    resolution: {integrity: sha512-h5Im0AP0dr4AVeHtrcvQrLV+gmPa7SA0AGdxl2jOhtwiE6KgXBFSogWw8az32/nusE6AQHlCOHQWjP1S/+oMWA==}
+    deprecated: This is a stub types definition. react-select provides its own type definitions, so you do not need this installed.
+    dependencies:
+      react-select: 4.3.1_kzbn2opkn2327fwg5yzwzya5o4
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
@@ -3697,19 +3774,6 @@ packages:
 
   /downshift/6.1.12_react@18.2.0:
     resolution: {integrity: sha512-7XB/iaSJVS4T8wGFT3WRXmSF1UlBHAA40DshZtkrIscIN+VC+Lh363skLxFTvJwtNgHxAMDGEHT4xsyQFWL+UA==}
-    peerDependencies:
-      react: '>=16.12.0'
-    dependencies:
-      '@babel/runtime': 7.20.7
-      compute-scroll-into-view: 1.0.20
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-is: 17.0.2
-      tslib: 2.4.1
-    dev: false
-
-  /downshift/7.0.5_react@18.2.0:
-    resolution: {integrity: sha512-q52vBjtRkt4PLD0xQDUf3lM+uaUOpc5m0L8YfE9oPtn4RJLu5YITB/G4mr9OyPYwWIBe/h9g3RX6mggMVaBIDw==}
     peerDependencies:
       react: '>=16.12.0'
     dependencies:
@@ -5123,49 +5187,6 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next/13.0.6_react@18.2.0:
-    resolution: {integrity: sha512-COvigvms2LRt1rrzfBQcMQ2GZd86Mvk1z+LOLY5pniFtL4VrTmhZ9salrbKfSiXbhsD01TrDdD68ec3ABDyscA==}
-    engines: {node: '>=14.6.0'}
-    hasBin: true
-    peerDependencies:
-      fibers: '>= 3.1.0'
-      node-sass: ^6.0.0 || ^7.0.0
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      fibers:
-        optional: true
-      node-sass:
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      '@next/env': 13.0.6
-      '@swc/helpers': 0.4.14
-      caniuse-lite: 1.0.30001441
-      postcss: 8.4.14
-      react: 18.2.0
-      styled-jsx: 5.1.0_react@18.2.0
-    optionalDependencies:
-      '@next/swc-android-arm-eabi': 13.0.6
-      '@next/swc-android-arm64': 13.0.6
-      '@next/swc-darwin-arm64': 13.0.6
-      '@next/swc-darwin-x64': 13.0.6
-      '@next/swc-freebsd-x64': 13.0.6
-      '@next/swc-linux-arm-gnueabihf': 13.0.6
-      '@next/swc-linux-arm64-gnu': 13.0.6
-      '@next/swc-linux-arm64-musl': 13.0.6
-      '@next/swc-linux-x64-gnu': 13.0.6
-      '@next/swc-linux-x64-musl': 13.0.6
-      '@next/swc-win32-arm64-msvc': 13.0.6
-      '@next/swc-win32-ia32-msvc': 13.0.6
-      '@next/swc-win32-x64-msvc': 13.0.6
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-    dev: false
-
   /node-releases/2.0.8:
     resolution: {integrity: sha512-dFSmB8fFHEH/s81Xi+Y/15DQY6VHW81nXRj86EMSL3lmuTmK1e+aT4wrFCkTbm+gSwkw4KpX+rT/pMM2c1mF+A==}
     dev: true
@@ -5927,8 +5948,8 @@ packages:
       tiny-warning: 1.0.3
     dev: false
 
-  /react-hook-form/7.41.0_react@18.2.0:
-    resolution: {integrity: sha512-u1cHOXujr+AsNBoeCtcCuRwPh87mXAgKtXqd3qTCBgNFYzVZLXjYgLcynORpAgqhe24r5scucR8+6gfWaXBtHQ==}
+  /react-hook-form/7.41.1_react@18.2.0:
+    resolution: {integrity: sha512-IHUozfwuqE+P201KIJwotMd+UCKqzIprseR8UUjz1jRupkZeubg0xyeMLIaT192zHv7vBBu9bibpNV5cIB4E9g==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
@@ -5996,38 +6017,6 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /react-redux/8.0.5_ib3m5ricvtkl2cll7qpr2f6lvq:
-    resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
-    peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-      react-native: '>=0.59'
-      redux: ^4
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-      redux:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.0.26
-      '@types/use-sync-external-store': 0.0.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-is: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
-
   /react-select/4.3.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-HBBd0dYwkF5aZk1zP81Wx5UsLIIT2lSvAY2JiJo199LjoLHoivjn9//KsmvQMEFGNhe58xyuOITjfxKCcGc62Q==}
     peerDependencies:
@@ -6063,6 +6052,25 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-input-autosize: 3.0.0_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+    dev: false
+
+  /react-select/4.3.1_kzbn2opkn2327fwg5yzwzya5o4:
+    resolution: {integrity: sha512-HBBd0dYwkF5aZk1zP81Wx5UsLIIT2lSvAY2JiJo199LjoLHoivjn9//KsmvQMEFGNhe58xyuOITjfxKCcGc62Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@emotion/cache': 11.10.5
+      '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
+      memoize-one: 5.2.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-input-autosize: 3.0.0_react@18.2.0
+      react-transition-group: 4.4.5_react@18.2.0
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
