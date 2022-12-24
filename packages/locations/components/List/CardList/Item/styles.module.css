@@ -1,0 +1,91 @@
+.titleblack {
+	min-width: 90px;
+	padding-left: 60px;
+	overflow: hidden;
+	color: #000;
+	text-align: left;
+
+	/* display:flex; */
+	text-overflow: ellipsis;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+}
+
+.value {
+	padding-left: 150px;
+	margin-left: 15px;
+	overflow: hidden;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	color: #000;
+
+	/* identical to box height, or 143% */
+
+	text-align: center;
+
+	/* Black */
+	text-overflow: ellipsis;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+}
+
+.row {
+	display: flex;
+
+	/* flex-flow: row wrap; */
+
+	/* flex-grow: 0; */
+
+	/* flex-shrink: 0; */
+	align-items: left;
+
+	/* justify-content: left; */
+	justify-content: space-around;
+	padding: 11px 15px;
+
+	/* display: grid;
+	grid-template-columns: auto auto auto auto;
+
+	 flex-wrap: wrap; */
+	margin: 10px 0 8px;
+	text-align: left;
+
+	/* /* display: grid; */
+
+	/* grid-template-columns: auto auto auto auto; */
+
+	/* background   : isActive ? '#f2f2f2' : '#ffffff';  */
+
+	/* border : 1px solid #e0e0e0;
+		border-radius : 4px;
+		padding      : 11px 15px 11px 15px;
+		margin       : 0px 0px 8px 0px;
+	transition: 0.3s; */
+
+	cursor: pointer;
+	background: rgb(255 255 255);
+	border: 1px solid rgb(224 224 224);
+	border-radius: 4px;
+	outline: none;
+
+	&.active {
+		background: #f2f2f2;
+	}
+
+	&:hover {
+		background: #f9f9f9;
+	}
+
+	&:focus-visible {
+		outline: auto blue;
+	}
+}
+
+.column {
+	/* text-align: center;
+	display    : flex;
+	 align-items: center;
+	padding    : 0px 6px, */
+	width: 200px;
+}

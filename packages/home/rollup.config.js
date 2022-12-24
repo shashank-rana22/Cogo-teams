@@ -7,7 +7,7 @@ import typescript from 'rollup-plugin-typescript2';
 
 export default ({ watch }) => defineConfig({
 	input: {
-		index: 'page-components/index.ts',
+		index: 'index.tsx',
 	},
 	output: [
 		{

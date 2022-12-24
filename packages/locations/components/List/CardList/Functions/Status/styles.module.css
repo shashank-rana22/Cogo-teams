@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 2px 6px;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 16px;
+	color: #000;
+	letter-spacing: 0.02em;
+	border-radius: 4px;
+
+	&.inactive {
+		background: #f7cdcd;
+	}
+
+	&.rejected {
+		background: #f7cdcd;
+	}
+
+	&.active {
+		background: #cdf7d4;
+	}
+
+	&.accepted {
+		background: #cdf7d4;
+	}
+}

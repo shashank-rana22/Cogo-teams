@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const loadEnvConfig = require('@cogoport/commons/helpers/load-env');
+const loadEnvConfig = require('@cogoport/core/helpers/load-env');
 // eslint-disable-next-line
 const fs = require('fs-extra');
 
@@ -16,6 +16,7 @@ const loadCogoModules = () => {
 const modulesToTranspile = loadCogoModules();
 
 const withTM = require('next-transpile-modules')(modulesToTranspile);
+var mode = process.env.NODE_ENV || 'development';
 
 module.exports = withTM({
 	env             : { ...loadEnvConfig.parsed },
@@ -25,7 +26,7 @@ module.exports = withTM({
 		const newConfig = { ...config };
 		newConfig.module.rules.push({
 			test : /\.svg$/i,
-			use  : [{ loader: '@svgr/webpack' }],
+			use  : [{ loader: '@svgr/webpack' }]
 		});
 		return config;
 	},

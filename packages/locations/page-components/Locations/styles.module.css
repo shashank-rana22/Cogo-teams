@@ -1,0 +1,25 @@
+.main {
+	display: flex;
+}
+
+.page {
+	width: 100%;
+	padding: 25px;
+}
+
+.page_form_open {
+	width: 900px;
+	padding: 25px;
+}
+
+.container {
+	width: 100%;
+	padding: 10px;
+	overflow: scroll;
+	background-color: bisque;
+	border-radius: 5px;
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}

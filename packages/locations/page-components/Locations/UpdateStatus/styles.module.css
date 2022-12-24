@@ -1,0 +1,24 @@
+.error {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}
+
+/* .form{
+    width: 100%;
+
+} */
+
+/* .list{
+	width: 60%;
+
+} */
+.content {
+	height: 550px;
+	overflow: scroll;
+}
+
+.button {
+	margin: 10px;
+}

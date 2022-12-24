@@ -1,3 +1,7 @@
+import { configureStore } from '@reduxjs/toolkit';
+
+import reducers from './reducers';
+
 export {
 	Provider,
 	connect,
@@ -7,4 +11,6 @@ export {
 	useStore,
 } from 'react-redux';
 
-export { default as createWithStore } from './store';
+export default configureStore({
+	reducer: reducers,
+});

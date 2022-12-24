@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 
-// TODO: We will be moving pages in their respective packages
-//  so to move those pages to cogo-control/pages
+const excludePackages = ['authentication'];
 
 const getDirectories = (source) => fs.readdirSync(source, { withFileTypes: true })
 	.filter((dirent) => dirent.isDirectory())
@@ -9,7 +8,8 @@ const getDirectories = (source) => fs.readdirSync(source, { withFileTypes: true 
 
 const createPages = async () => {
 	const cwd = process.cwd();
-	const appPath = `${cwd}/cogo-control/pages`;
+	const appPath = `${cwd}/cogo-control/pages/[partner_id]`;
+	const rootPath = `${cwd}/cogo-control/pages/`;
 	const packageRootPath = `${cwd}/packages`;
 
 	if (!fs.existsSync(appPath)) {
@@ -21,9 +21,12 @@ const createPages = async () => {
 	allFolders.forEach((packageFolder) => {
 		const pagesPath = `${packageRootPath}/${packageFolder}/pages`;
 
-		if (fs.existsSync(pagesPath)) {
-			console.log(`Creating Pages from ${packageFolder}`);
-			fs.cpSync(pagesPath, appPath, { recursive: true });
+		if (fs.existsSync(pagesPath) && excludePackages.includes(packageFolder)) {
+			fs.copySync(pagesPath, rootPath, { recursive: true });
+		} else if (fs.existsSync(pagesPath)) {
+			fs.copySync(pagesPath, appPath, { recursive: true });
+		} else {
+			console.log(`${pagesPath} does not exists`);
 		}
 	});
 };
