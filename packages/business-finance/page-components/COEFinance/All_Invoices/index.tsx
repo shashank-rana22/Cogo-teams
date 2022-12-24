@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Button } from "@cogoport/components";
+import PurchaseInvoice from "./PurchaseInvoiceView";
 import { useRouter } from "@cogoport/next";
 import TabSelect from "../../commons/TabSelect/index";
 import ShipmentIdView from "./ShipmentIdView/index";
@@ -49,6 +50,7 @@ const AllInvoices = () => {
                 </div>
             </div>
             {!isPurchase && <ShipmentIdView />}
+            {isPurchase && <PurchaseInvoice />}
         </div>
     );
 };
