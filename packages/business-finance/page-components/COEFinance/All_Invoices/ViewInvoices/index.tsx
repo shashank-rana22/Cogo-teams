@@ -22,17 +22,14 @@ const ViewInvoices =()=>{
 
         <SupplierDetails 
            data={fullResponse}
-		   loading={loading}
 		   paymentsData={paymentsData}
 		   accPaymentLoading={accPaymentLoading}
            />
 
-        <InvoiceDetails/>
+        <InvoiceDetails data={fullResponse}/>
 
         <ShipmentDetails 
         	data={fullResponse}
-            // loading={loading}
-            // invoiceData={data}
             />
   
 

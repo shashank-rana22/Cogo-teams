@@ -2,7 +2,7 @@ import React  from "react";
 import { Tags } from "@cogoport/components";
 import {IcCFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
-const SupplierDetails =({data,loading,paymentsData,accPaymentLoading})=>{
+const SupplierDetails =({data,paymentsData,accPaymentLoading})=>{
     console.log(data,"data");
 
     console.log(paymentsData,"paymentsData");
@@ -30,8 +30,8 @@ const SupplierDetails =({data,loading,paymentsData,accPaymentLoading})=>{
                 <div className={styles.verticalSmallHr}/>
 
                 <div className={styles.accountDetails}>
-                    <div className={styles.accounts}>Amount Payables : <div>{ledgerCurrency} {payables}</div></div>  
-                    <div className={styles.accounts}>Amount Receivables : <div>{ledgerCurrency} {receivables}</div></div>  
+                    <div className={styles.accounts}>Amount Payables : <div style={{fontWeight:'600'}}>{ledgerCurrency} {payables}</div></div>  
+                    <div className={styles.accounts}>Amount Receivables : <div style={{fontWeight:'600'}}>{ledgerCurrency} {receivables}</div></div>  
                 </div>
 
                 <div className={styles.verticalSmallHr}/>

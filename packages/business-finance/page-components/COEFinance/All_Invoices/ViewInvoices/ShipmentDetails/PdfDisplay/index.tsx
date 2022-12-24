@@ -1,8 +1,13 @@
 import React from "react";
-const PdfDisplay = () =>{
+const PdfDisplay = ({data}:any) =>{
     return(
         <div>
-            djnjkn
+            <object
+				data={data?.bill?.billDocumentUrl}
+				type="application/pdf"
+				height="850px"
+				width="100%"
+						/>
         </div>
     )
 }
