@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+}
+.subContainerClick {
+  padding: 12px 16px;
+  background: #fffaeb;
+  color: #ed3726;
+  box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.subContainer {
+  padding: 12px 16px;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
