@@ -18,6 +18,14 @@ const navigationMappings = {
 		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
 			{
+				key   : 'business_finance-coe_finance',
+				title : 'COE Finance',
+				href  : '/business-finance/coe-finance',
+				as    : '/business-finance/coe-finance',
+				icon  : <IcMBookingDesk />,
+				// main_apis : ['get_purchase_payable_bill_list'],
+			},
+			{
 				key       : 'business_finance-account_payables',
 				title     : 'Account Payables',
 				href      : '/business-finance/account-payables',
