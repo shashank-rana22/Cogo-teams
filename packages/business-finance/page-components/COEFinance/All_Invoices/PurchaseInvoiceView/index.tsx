@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useRouter} from '@cogoport/next';
 import {Button} from '@cogoport/components'
 import List from '../../../commons/List/index';
@@ -10,18 +10,22 @@ import RenderStatus from './RenderStatus/index';
 import RenderRemarks  from './RenderRemarks';
 
 function PurchaseInvoice() {
-const {data,loading,config}=useGetPurchaseViewList();
+const router = useRouter();
 
-const {listApi} = useGetBill({ billId: data?.billId, orgId: data?.organizationId });
-
-console.log(listApi,"listApi");
+const {data,config} = useGetPurchaseViewList();
+console.log(data,"data");
+console.log(router.query,"query");
 
    
-const {push, query} = useRouter();
+const handleChange =(itemData:any)=>{
+  router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&&billNumber=${itemData?.billNumber}&&orgId=${itemData?.organizationId}`);
+
+}
+
 
 const functions={
-  renderViewMore : ()=>(
-    <Button size="sm" themeType="secondary" onClick={() => push(`/business-finance/coe-finance/${query.active_tab}/view-invoices`)}>View Invoices</Button>
+  renderViewMore : (itemData:any)=>(
+    <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoices</Button>
   ),
   renderFieldPair: (itemData:any, field:any) => (
     <FiledPair item={itemData} field={field} />

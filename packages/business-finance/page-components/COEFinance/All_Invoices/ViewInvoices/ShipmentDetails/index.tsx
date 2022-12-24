@@ -7,7 +7,7 @@ import Documents from "./Documents/index";
 import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
 
-const ShipmentDetails = ()=>{
+const ShipmentDetails = ({data})=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
 
@@ -54,7 +54,7 @@ const ShipmentDetails = ()=>{
                 <PdfDisplay/>
             </div>
             <div className={styles.shipmentDetailsCard}>
-                <ShipmentDetailsCard/>
+                <ShipmentDetailsCard data={data}/>
             </div>
         </div>
         

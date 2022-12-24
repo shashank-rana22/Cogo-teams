@@ -1,13 +1,12 @@
 import { Button } from "@cogoport/components";
 import React, { useState } from "react";
 import styles from './styles.module.css'
-const ShipmentDetailsCard = () =>{
+const ShipmentDetailsCard = ({data}) =>{
     const [showValue, setShowValue ] = useState(false)
     const DetailsCard = [
         {id :1, name:'billing-party', label:'Billing Party'},
         {id :2, name:'invoice-details', label:'Invoice Details'},
         {id :3, name:'billing-details', label:'Bank Details - Collection Party'}
-
     ]
 
     return(
