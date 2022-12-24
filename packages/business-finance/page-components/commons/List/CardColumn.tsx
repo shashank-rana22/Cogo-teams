@@ -23,7 +23,7 @@ function CardColumn({
 	isMobile,
 }:Props) {
 	const { clickable } = config;
-	console.log(singleitem,'singleitem');
+
 	const { newFunctions } = itemFunctions({ functions });
 	
 	return (
