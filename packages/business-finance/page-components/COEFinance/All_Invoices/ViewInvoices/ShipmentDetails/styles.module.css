@@ -40,6 +40,17 @@
 
 .hr {
   border: 1px solid #333333;
-  margin: 32px 0px;
+  margin: 16px 0px;
   width: 100%;
+}
+
+.shipmentDetailsFooter {
+  display: flex;
+}
+
+.pdfDisplay {
+  width: 60%;
+}
+.shipmentDetailsCard {
+  width: 40%;
 }

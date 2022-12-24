@@ -4,6 +4,8 @@ import { Tags } from "@cogoport/components";
 import {IcMArrowRotateDown,IcMArrowRotateUp,IcADocumentTemplates} from '@cogoport/icons-react'
 import Details from "./Details/index";
 import Documents from "./Documents/index";
+import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
+import PdfDisplay from "./PdfDisplay/index";
 
 const ShipmentDetails = ()=>{
     const[showDetails,setShowDetails] = useState(false)
@@ -33,8 +35,6 @@ const ShipmentDetails = ()=>{
             <div>{showDetails && <Details/>}</div>
         </div>
 
-            
-
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>
             <div className={styles.cardUpper}>
                 <div className={styles.subContainer}>
@@ -49,7 +49,15 @@ const ShipmentDetails = ()=>{
             {showDocuments && <div className={styles.hr}/>}
             <div> { showDocuments && <Documents/> } </div>               
         </div>
-
+        <div className={styles.shipmentDetailsFooter}>
+            <div className={styles.pdfDisplay}>
+                <PdfDisplay/>
+            </div>
+            <div className={styles.shipmentDetailsCard}>
+                <ShipmentDetailsCard/>
+            </div>
+        </div>
+        
     </div>
     )
 }
