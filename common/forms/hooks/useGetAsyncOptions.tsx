@@ -12,15 +12,14 @@ function useGetAsyncOptions({
 	const [q, setQ] = useState('');
 
 	const [{ data, loading }] = useRequest({
-		method : 'GET',
 		url    : endpoint,
+		method : 'GET',
 		params : merge(params, { filters: { q } }),
 	}, { manual: !(initialCall || q) });
 
 	const options = data?.list || [];
 
-	const onSearch = (inputValue: any) => {
-		console.log({ inputValue });
+	const onSearch = (inputValue: string) => {
 		setQ(inputValue);
 	};
 
