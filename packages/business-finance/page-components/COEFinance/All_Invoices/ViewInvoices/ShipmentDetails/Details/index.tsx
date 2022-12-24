@@ -1,6 +1,8 @@
 import React from 'react';
 import { Tooltip } from '@cogoport/components';
 import { IcMFship } from '@cogoport/icons-react';
+import getLocations from '../../../../../commons/locations-shipment';
+import getServiceInfo from '../../../../../commons/getServiceInfo';
 import styles from './styles.module.css'
 
 const Details = ({ data = {} }) => {
@@ -77,11 +79,11 @@ const Details = ({ data = {} }) => {
 	};
 
 	return (
-		<Container className={className}>
+		<div className={className}>
 			<div className={styles.iconAndService}>{serviceIcon}</div>
 
 			{renderLocation()}
-		</Container>
+		</div>
 	);
 };
 
