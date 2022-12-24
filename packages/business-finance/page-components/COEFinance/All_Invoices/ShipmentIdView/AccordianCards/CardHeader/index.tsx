@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import TabSelect from "../../../../../commons/TabSelect/index";
 import styles from "./styles.module.css";
+// import TabSelect from "../../commons/TabSelect/index";
 
 const CardHeader = () => {
+    const [amount, setAmount] = useState("expense");
+
+    const options = [
+        { name: "Expense", value: "expense" },
+        { name: "Income", value: "income" },
+    ];
     return (
         <div className={styles.container}>
             <div className={styles.amount}>
-                <div>segmented control</div>
+                <div className={styles.toggle}>
+                    <TabSelect
+                        options={options}
+                        value={amount}
+                        setValue={setAmount}
+                    />
+                </div>
                 <div className={styles.discount}>
                     <div className={styles.labelText}>
                         Discount Applied (KAM) -
