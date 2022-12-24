@@ -9,7 +9,6 @@ const AllInvoices =()=>{
 
 return(
     <div className={styles.container}>
-
                 <div  onClick={()=>setIsPurchase(true)}>
                     <div className={isPurchase ? styles.subContainerClick :styles.subContainer }> PURCHASE INVOICE VIEW </div> 
                     <Button size="md" themeType="secondary" onClick={() => router.push('/business-finance/coe-finance/view-invoices')}>View Invoices</Button>

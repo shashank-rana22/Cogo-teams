@@ -1,4 +1,10 @@
+import React from "react"
+import Header from "./Header/index"
 const ViewInvoices =()=>{
-    return(<div>view invoices</div>)
+    return(
+    <div>
+        <Header/>
+    </div>
+    )
 }
 export default ViewInvoices
