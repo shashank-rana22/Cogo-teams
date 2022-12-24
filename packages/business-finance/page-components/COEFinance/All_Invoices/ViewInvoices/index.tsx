@@ -4,6 +4,7 @@ import {useRouter} from '@cogoport/next';
 import SupplierDetails from "./SupplierDetails/index"
 import ShipmentDetails from "./ShipmentDetails/index"
 import useGetBill from "../../hook/useGetBill"
+import InvoiceDetails from "./InvoiceDetails/index"
 const ViewInvoices =()=>{
     const {push, query} = useRouter();
     
@@ -26,11 +27,15 @@ const ViewInvoices =()=>{
 		   accPaymentLoading={accPaymentLoading}
            />
 
+        <InvoiceDetails/>
+
         <ShipmentDetails 
         	data={fullResponse}
             // loading={loading}
             // invoiceData={data}
             />
+  
+
     </div>
     )
 }

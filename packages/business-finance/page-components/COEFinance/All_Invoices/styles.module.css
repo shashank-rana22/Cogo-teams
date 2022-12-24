@@ -1,30 +1,46 @@
 .container {
   display: flex;
-  margin-bottom: 4px
+  height: 59px;
+  margin-bottom: -20px;
 }
 .subContainerClick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px 16px;
   background: #fffaeb;
   color: #ed3726;
   box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
   border-radius: 4px;
-  margin-right: 8px;
+  margin-right: 16px;
   cursor: pointer;
   font-weight: 600;
-  &:hover{
-  box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.4);
+  height: 42px;
+  width: 92%;
+    &:hover{
+  box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.3);
+  height: 46px;
+  width: 95%;
+  transition: height 0.1s ease-in-out,  width 0.1s ease-in-out ;
   }
 }
-
 .subContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px 16px;
   background: #ffffff;
   box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
   border-radius: 4px;
-  margin-right: 8px;
+  margin-right: 16px;
   cursor: pointer;
   font-weight: 600;
+  height: 42px;
+  width: 92%;
   &:hover{
-    box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.4);
-    }
+  box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.3);
+  height: 46px;
+  width: 95%;
+  transition: height 0.1s ease-in-out,  width 0.1s ease-in-out ;
+  }
 }
