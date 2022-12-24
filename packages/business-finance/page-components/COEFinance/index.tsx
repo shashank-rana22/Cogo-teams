@@ -1,9 +1,20 @@
-import React,{useState} from "react"
-import {TabPanel,Tabs} from '@cogoport/components'
+import React,{useState, useEffect} from "react";
+import {TabPanel,Tabs} from '@cogoport/components';
 import styles from './styles.module.css';
+import {useRouter} from '@cogoport/next';
 import AllInvoices from "./All_Invoices/index";
 const CoeFinance=()=>{
-    const [activeTab, setActiveTab] = useState('dashboard');
+    const { push, query } = useRouter();
+
+    const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
+     
+    useEffect(()=>{
+        push(
+			'/business-finance/coe-finance/[active_tab]',
+			`/business-finance/coe-finance/${activeTab}`,
+		);
+    },[activeTab])
+
     return(
     <div>
         <div>
@@ -12,7 +23,7 @@ const CoeFinance=()=>{
     <Tabs activeTab={activeTab} onChange={setActiveTab}>
      
         <TabPanel className={styles.tab_panel_dashboard} name="dashboard" title="Dashboard" >
-             <div>dashboard</div>
+            dashboard
         </TabPanel>
 
 
