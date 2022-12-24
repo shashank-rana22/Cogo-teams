@@ -59,10 +59,12 @@ export const PURCHASE_VIEW_CONFIG = {
 			label : 'Remarks ',
             key   : 'remarks',
 			span  : 1.2,
+			func  : 'renderRemarks'
 		},
 		{
-			key  : '',
-			span : 0.5,
+			key  : 'viewMore',
+			span : 1.2,
+			func : 'renderViewMore'
 		},
 	],
 };

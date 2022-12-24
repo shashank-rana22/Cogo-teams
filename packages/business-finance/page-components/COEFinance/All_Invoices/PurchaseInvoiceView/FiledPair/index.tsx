@@ -4,7 +4,6 @@ import styled from './styles.module.css'
 
 
 const FieldPair = ({ item = {}, field = {} }) => {
-    
 	const { topKey = '', lowerKey = '' } = field;
 	
     const handleBillType = (item:any) => {
