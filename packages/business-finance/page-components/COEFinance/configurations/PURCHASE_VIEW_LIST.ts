@@ -63,7 +63,7 @@ export const PURCHASE_VIEW_CONFIG = {
 		},
 		{
 			key  : 'viewMore',
-			span : 1.2,
+			span : 1.4,
 			func : 'renderViewMore'
 		},
 	],
