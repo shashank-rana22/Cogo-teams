@@ -228,6 +228,7 @@ importers:
       '@cogoport/components': ^1.0.131
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.48
+      '@cogoport/next': workspace:^0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@rollup/plugin-commonjs': ^23.0.7
@@ -243,6 +244,7 @@ importers:
       '@cogoport/components': 1.0.131_3qu7awhap2yzgpyb5yp3xthzzm
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       react: 18.2.0
