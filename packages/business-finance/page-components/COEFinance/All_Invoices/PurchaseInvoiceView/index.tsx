@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {useRouter} from '@cogoport/next';
 import {Button} from '@cogoport/components'
 import List from '../../../commons/List/index';
 import useGetBill from '../../hook/useGetBill';
@@ -8,13 +9,7 @@ import FiledPair from './FiledPair/index'
 import RenderStatus from './RenderStatus/index';
 import RenderRemarks  from './RenderRemarks';
 
-
-
-
-
-
 function PurchaseInvoice() {
-
 const {data,loading,config}=useGetPurchaseViewList();
 
 const {listApi} = useGetBill({ billId: data?.billId, orgId: data?.organizationId });
@@ -22,17 +17,19 @@ const {listApi} = useGetBill({ billId: data?.billId, orgId: data?.organizationId
 console.log(listApi,"listApi");
 
    
+const {push, query} = useRouter();
+
 const functions={
   renderViewMore : ()=>(
-    <Button size="sm" themeType='secondary'>View more</Button>
+    <Button size="sm" themeType="secondary" onClick={() => push(`/business-finance/coe-finance/${query.active_tab}/view-invoices`)}>View Invoices</Button>
   ),
-  renderFieldPair: (itemData, field) => (
+  renderFieldPair: (itemData:any, field:any) => (
     <FiledPair item={itemData} field={field} />
   ),
   renderStatus: (itemData:any,field:any) => (
      <RenderStatus item={itemData} field={field} />
    ),
-   renderRemarks: (itemData,field)=>(
+   renderRemarks: (itemData:any,field:any)=>(
      <RenderRemarks itemData={itemData} field={field}/>
    )
 };
