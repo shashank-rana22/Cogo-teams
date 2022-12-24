@@ -1,6 +1,15 @@
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
-import { useState } from 'react';
+
+import useDebounceQuery from './useDebounceQuery';
+
+interface IUseGetAsyncOptions {
+	endpoint?: string;
+	initialCall?: boolean;
+	valueKey?: string;
+	labelKey?: string;
+	params?: any;
+}
 
 function useGetAsyncOptions({
 	endpoint = '',
@@ -8,19 +17,19 @@ function useGetAsyncOptions({
 	valueKey = '',
 	labelKey = '',
 	params = {},
-}: any) {
-	const [q, setQ] = useState('');
+}: IUseGetAsyncOptions) {
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const [{ data, loading }] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-		params : merge(params, { filters: { q } }),
-	}, { manual: !(initialCall || q) });
+		params : merge(params, { filters: { query } }),
+	}, { manual: !(initialCall || query) });
 
 	const options = data?.list || [];
 
 	const onSearch = (inputValue: string) => {
-		setQ(inputValue);
+		debounceQuery(inputValue);
 	};
 
 	return {

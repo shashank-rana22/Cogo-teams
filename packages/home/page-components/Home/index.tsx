@@ -10,7 +10,7 @@ function Home() {
 
 	const selectOptions = useGetAsyncOptions({
 		...asyncFieldsLocations(),
-		initialCall : false,
+		initialCall : true,
 		labelKey    : 'display_name',
 	});
 
