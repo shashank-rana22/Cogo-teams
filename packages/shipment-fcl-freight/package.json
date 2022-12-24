@@ -1,8 +1,7 @@
 {
   "name": "@cogoport/shipment-fcl-freight",
   "version": "0.1.0",
-  "description": "Custom Request hooks for different Services",
-  "license": "MIT",
+  "description": "Shipment FCL freight package for Cogoport",
   "private": true,
   "main": "./index.js",
   "types": "./index.js",

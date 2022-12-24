@@ -1,6 +1,6 @@
 {
 	"name": "@cogoport/locations",
-	"description": "Location module for partner",
+	"description": "Location module for cogoport",
 	"version": "0.1.0",
 	"main": "index.js",
 	"sideEffects": false,

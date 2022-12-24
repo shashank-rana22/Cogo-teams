@@ -3,7 +3,7 @@ import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 function useGetAsyncOptions({
-	endpoint,
+	endpoint = '',
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
