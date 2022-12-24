@@ -62,7 +62,6 @@ export const PURCHASE_VIEW_CONFIG = {
 		},
 		{
 			key  : '',
-			// func : 'renderDropDownData',
 			span : 0.5,
 		},
 	],
