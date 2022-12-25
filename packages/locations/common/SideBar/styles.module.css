@@ -3,9 +3,9 @@
 	top: 0;
 	right: 0;
 	z-index: 1;
-	overflow-y: scroll;
 	height: 100%;
 	padding-top: 60px;
+	overflow-y: scroll;
 	word-break: break-all;
 	background-color: #fff;
 	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
