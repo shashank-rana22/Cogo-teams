@@ -13,16 +13,16 @@ function Home() {
 		initialCall: false,
 	});
 
-	const onChange = (data: any) => {
+	const onSubmit = (data:any) => {
 		console.log(data);
 	};
 
 	return (
-		<div>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<h1>Home</h1>
 			<SelectController name="name" control={control} placeholder="Select" {...selectOptions} />
 			<MultiSelectController name="name2" control={control} placeholder="Select" {...selectOptions} />
-		</div>
+		</form>
 	);
 }
 
