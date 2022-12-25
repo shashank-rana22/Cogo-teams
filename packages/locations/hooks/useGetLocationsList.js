@@ -41,7 +41,7 @@ const useGetLocationsList = () => {
 					fullResponse : res.data,
 				}));
 			})
-			.catch((e) => {
+			.catch(() => {
 				setList(() => ({
 					data         : [],
 					total        : 0,

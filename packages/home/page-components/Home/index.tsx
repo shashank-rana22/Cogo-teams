@@ -10,14 +10,16 @@ function Home() {
 
 	const selectOptions = useGetAsyncOptions({
 		...asyncFieldsLocations(),
-		initialCall : false,
-		labelKey    : 'display_name',
+		initialCall: false,
 	});
+
+	const onChange = (data: any) => {
+		console.log(data);
+	};
 
 	return (
 		<div>
 			<h1>Home</h1>
-
 			<SelectController name="name" control={control} placeholder="Select" {...selectOptions} />
 			<MultiSelectController name="name2" control={control} placeholder="Select" {...selectOptions} />
 		</div>

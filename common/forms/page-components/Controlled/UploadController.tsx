@@ -1,6 +1,7 @@
-import { Upload } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
+
+import FileUploader from '../Business/FileUploader';
 
 function UploadController(props: any) {
 	const {
@@ -14,7 +15,7 @@ function UploadController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Upload
+				<FileUploader
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
