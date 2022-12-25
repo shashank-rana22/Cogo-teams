@@ -42,7 +42,6 @@ const useGetLocationsList = () => {
 				}));
 			})
 			.catch((e) => {
-				console.log(e);
 				setList(() => ({
 					data         : [],
 					total        : 0,

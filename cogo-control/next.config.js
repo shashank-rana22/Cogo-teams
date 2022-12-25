@@ -16,7 +16,8 @@ const loadCogoModules = () => {
 const modulesToTranspile = loadCogoModules();
 
 const withTM = require('next-transpile-modules')(modulesToTranspile);
-var mode = process.env.NODE_ENV || 'development';
+
+const mode = process.env.NODE_ENV || 'development';
 
 module.exports = withTM({
 	env             : { ...loadEnvConfig.parsed },
@@ -26,7 +27,7 @@ module.exports = withTM({
 		const newConfig = { ...config };
 		newConfig.module.rules.push({
 			test : /\.svg$/i,
-			use  : [{ loader: '@svgr/webpack' }]
+			use  : [{ loader: '@svgr/webpack' }],
 		});
 		return config;
 	},

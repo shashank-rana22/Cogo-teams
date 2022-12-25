@@ -1,5 +1,4 @@
 import { TabPanel, Tabs, Pagination } from '@cogoport/components';
-import { useState } from 'react';
 
 import getFieldsByTab from '../../constants/config';
 import TABS_MAPPING from '../../constants/tabs';
@@ -9,7 +8,7 @@ import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
 
-function PageView({ onClickCard = () => {} }) {
+function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setSideBar = () => {} }) {
 	const {
 		list,
 		filters,
@@ -23,6 +22,8 @@ function PageView({ onClickCard = () => {} }) {
 
 	const onTabChange = (val) => {
 		hookSetters.setFilters({ ...filters, type: val, page: 1 });
+		setSelectedLocation({});
+		setSideBar('');
 	};
 
 	const handlePageChange = (pageNumber) => {
@@ -48,13 +49,16 @@ function PageView({ onClickCard = () => {} }) {
 				))}
 			</section>
 
-			<Pagination
-				type="compact"
-				currentPage={page}
-				totalItems={list.total}
-				pageSize={page_limit}
-				handlePageChange={handlePageChange}
-			/>
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={list.total}
+					pageSize={page_limit}
+					handlePageChange={handlePageChange}
+				/>
+			</div>
+
 		</div>
 	);
 }

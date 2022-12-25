@@ -1,1 +1,1 @@
-export {default} from '@cogoport/locations/page-components';
+export { default } from '@cogoport/locations/page-components';

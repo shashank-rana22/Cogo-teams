@@ -28,7 +28,7 @@ function Locations() {
 			<PageView
 				onClickCard={onClickCard}
 				setSideBar={setSideBar}
-				selectedLocation={selectedLocation}
+				setSelectedLocation={setSelectedLocation}
 			/>
 			<SideBarComponent
 				setSideBar={setSideBar}
