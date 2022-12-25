@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
-import { InputController, PillsController, SelectController } from '@cogoport/forms';
-import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
+import getElementController from '../../../constants/getController';
 import useCreateUpdate from '../../../hooks/useCreateUpdate';
+import FieldArray from '../../FieldArray';
 
 import styles from './styles.module.css';
 
@@ -17,34 +17,23 @@ function CreateUpdateForm() {
 		fields,
 	} = useCreateUpdate();
 
-	const getElementController = (type = 'text') => {
-		switch (type) {
-			case 'text':
-				return InputController;
-
-			case 'select':
-				return SelectController;
-
-			case 'file':
-				return UploadController;
-
-			case 'pills':
-				return PillsController;
-
-			default:
-				return null;
-		}
-	};
-
 	const watchType = watch('type');
+
+	console.log('watchType', errors);
 
 	return (
 		<form onSubmit={handleSubmit(onCreate)}>
 			<div className={styles.content}>
 				{fields.map((field) => {
 					const { condition = {}, ...rest } = field;
+
+					if (rest.type === 'fieldArray') {
+						return (
+							<FieldArray {...rest} control={control} />
+						);
+					}
+
 					const Element = getElementController(rest.type);
-					if (!Element) return null;
 					if (!('condition' in field) || condition?.type?.includes(watchType?.value)) {
 						return (
 							<div className={styles.list}>

@@ -13,9 +13,12 @@
 }
 
 .content {
-	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	margin: 10px 20px;
 }
 
 .list {
+	flex: 1;
 	margin: 10px 0;
 }

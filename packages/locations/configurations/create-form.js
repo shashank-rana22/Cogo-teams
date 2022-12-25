@@ -276,17 +276,10 @@ const fields = [
 	{
 		name        : 'aliases_attributes',
 		label       : 'Aliases attributes',
-		type        : 'childformat',
+		type        : 'fieldArray',
 		showButtons : true,
 		buttonText  : 'Add Aliases',
-		childFormat : [
-			{
-				name     : 'id',
-				label    : 'ID',
-				disabled : true,
-				show     : false,
-				type     : 'text',
-			},
+		controls    : [
 			{
 				name  : 'name',
 				label : 'Name',
