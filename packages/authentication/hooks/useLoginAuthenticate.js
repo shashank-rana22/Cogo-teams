@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
 
-import getApiErrorString from '../utils/getApiError';
 import setCookieAndRedirect from '../utils/setCookieAndRedirect';
 
 const useLoginAuthenticate = () => {

@@ -33,6 +33,7 @@ importers:
 
   cogo-control:
     specifiers:
+      '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.133
@@ -53,6 +54,7 @@ importers:
       react-dom: 18.2.0
       react-redux: ^8.0.5
     dependencies:
+      '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.133_27ghnklenyaalfqdgsm7fqt7de
@@ -208,6 +210,7 @@ importers:
       '@cogoport/components': ^1.0.133
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.48
+      '@cogoport/layout': workspace:*
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -217,6 +220,7 @@ importers:
       '@cogoport/components': 1.0.133_xt4ifl6qxlrythdsvwl2iwyvb4
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/layout': link:../../common/layout
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store

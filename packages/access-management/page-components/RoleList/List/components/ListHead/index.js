@@ -1,22 +1,21 @@
 import React from 'react';
-import { Container, Row, Col, Title } from './styles';
 
-const ListHead = ({ columns = [] }) => (
-	<Container>
-		<Row>
-			{columns?.map((column) => (
-				<Col
-					xs={12}
-					sm={6}
-					md={column.span}
-					lg={column.span}
-					key={column?.key || column?.label}
+import styles from './styles.module.css';
+
+function ListHead({ columns = [] }) {
+	return (
+		<section className={styles.container}>
+			{columns.map((column) => (
+				<div
+					className={styles.header}
+					key={column.key || column.label}
+					style={{ flex: column.flex }}
 				>
-					<Title>{column?.label}</Title>
-				</Col>
+					<span>{column?.label}</span>
+				</div>
 			))}
-		</Row>
-	</Container>
-);
+		</section>
+	);
+}
 
 export default ListHead;

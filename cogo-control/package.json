@@ -14,6 +14,7 @@
     "@cogoport/components": "^1.0.133",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
+    "@cogoport/access-management": "workspace:0.1.0",
     "@cogoport/home": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/layout": "workspace:0.1.0",

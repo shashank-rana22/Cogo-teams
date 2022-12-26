@@ -1,9 +1,6 @@
 const functionSubFunctionMapping = {
 	sales: [
-		{
-			label: 'Customer Success',
-			value: 'customer_success',
-		},
+		{ label: 'Customer Success', value: 'customer_success' },
 		{ label: 'Field Sales', value: 'field_sales' },
 		{ label: 'Strategic Sales', value: 'strategic_sales' },
 		{ label: 'CP Sales', value: 'cp_sales' },

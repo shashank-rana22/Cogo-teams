@@ -1,115 +1,92 @@
-import { Skeleton } from '@cogoport/front/components/admin';
+import { Button, Tags, Placeholder } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
-import getValue from '@cogo/smart-components/utils/getValue';
-import { Tag } from '@cogoport/front/components';
-import startCase from '@cogo/utils/startCase';
-import {
-	Container,
-	Row,
-	Col,
-	Label,
-	RoleDescriptionColContainer,
-	HierarchyColContainer,
-	RoleTypeColContainer,
-	PartnerColContainer,
-	FunctionColContainer,
-	UserCountColContainer,
-	UsersColContainer,
-	ButtonContainer,
-	EditButton,
-} from './styles';
-import PencilSvg from './Pencil.svg';
 
-const ListBody = ({
+import getValue from '../../../../../utils/getValue';
+
+import PencilSvg from './Pencil.svg';
+import styles from './styles.module.css';
+
+function ListBody({
 	columns = [],
 	loading = false,
 	data = [],
 	redirect = () => {},
-}) => {
+}) {
 	const newFunctions = useMemo(
 		() => ({
 			renderRoleDescription: (itemData) => (
-				<RoleDescriptionColContainer>
+				<section>
 					<div className="title">{itemData?.name}</div>
 					<div className="sub-title">{itemData?.remarks}</div>
-				</RoleDescriptionColContainer>
+				</section>
 			),
 			renderRoleType: (itemData) => (
-				<RoleTypeColContainer
+				<section
 					roleType={(itemData?.role_type || '').toLowerCase()}
 				>
-					<Tag>{itemData?.role_type}</Tag>
-				</RoleTypeColContainer>
+					<Tags>{itemData?.role_type}</Tags>
+				</section>
 			),
 			renderPartner: (itemData) => (
-				<PartnerColContainer>
+				<section>
 					{itemData?.partner?.business_name}
-				</PartnerColContainer>
+				</section>
 			),
 			renderUserCount: (itemData) => (
-				<UserCountColContainer>{itemData?.user_count}</UserCountColContainer>
+				<section>{itemData?.user_count}</section>
 			),
 			renderHierarchyLevel: (itemData) => (
-				<HierarchyColContainer>
+				<section>
 					{startCase(itemData?.hierarchy_level)}
-				</HierarchyColContainer>
+				</section>
 			),
 			renderFunction: (itemData) => (
-				<FunctionColContainer>
-					{(itemData?.role_functions || []).map((item) => {
-						return <Tag>{item}</Tag>;
-					})}
-				</FunctionColContainer>
+				<section>
+					{(itemData?.role_functions || []).map((item) => <Tags>{item}</Tags>)}
+				</section>
 			),
 			renderSubFunction: (itemData) => (
-				<FunctionColContainer>
-					{(itemData?.role_sub_functions || []).map((item) => {
-						return <Tag>{item}</Tag>;
-					})}
-				</FunctionColContainer>
+				<section>
+					{(itemData?.role_sub_functions || []).map((item) => <Tags>{item}</Tags>)}
+				</section>
 			),
 			renderUsers: () => (
-				<UsersColContainer>
-					<span className="user-count">0</span> people have been assigned this
+				<section>
+					<span className="user-count">0</span>
+					{' '}
+					people have been assigned this
 					role
-				</UsersColContainer>
+				</section>
 			),
 			renderEditButton: (itemData) => (
-				<ButtonContainer>
-					<EditButton onClick={() => redirect(itemData?.id)}>
+				<section>
+					<Button onClick={() => redirect(itemData?.id)}>
 						<PencilSvg />
 						Edit
-					</EditButton>
-				</ButtonContainer>
+					</Button>
+				</section>
 			),
 		}),
 		[],
 	);
-
 	return (
-		<Container id="rnp_role_list_list_body_container">
-			{(loading ? Array(5).fill({}) : data)?.map((item) => (
-				<Row className="row">
-					{columns?.map((column) => (
-						<Col
-							xs={12}
-							sm={6}
-							md={column.span}
-							lg={column.span}
-							key={column?.key || column?.label}
-						>
-							<Label>{column?.label}</Label>
-							{loading ? (
-								<Skeleton width="100%" height="20px" />
-							) : (
-								getValue(item, column, false, newFunctions)
-							)}
-						</Col>
-					))}
-				</Row>
+		<section className={styles.container} id="rnp_role_list_list_body_container">
+			{columns?.map((column) => (
+				<div
+					className={styles.item}
+					key={column.key || column.label}
+					style={{ flex: column.flex }}
+				>
+					{loading ? (
+						<Placeholder width="100%" height="20px" />
+					) : (
+						getValue(data, column, newFunctions)
+					)}
+				</div>
 			))}
-		</Container>
+		</section>
 	);
-};
+}
 
 export default ListBody;
