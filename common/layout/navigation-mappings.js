@@ -1,4 +1,12 @@
-import { IcMBookingDesk } from '@cogoport/icons-react';
+import {
+	IcMBookingDesk,
+	IcMLocation,
+	IcMSettings,
+	IcMBusinessFinance,
+	IcMFinanceCrm,
+	IcMFinanceDashboard,
+	IcMProductCodeMapping,
+} from '@cogoport/icons-react';
 
 const navigationMappings = {
 	home: {
@@ -14,7 +22,7 @@ const navigationMappings = {
 		title     : 'Business Finance',
 		href      : '/business-finance',
 		as        : '/business-finance',
-		icon      : <IcMBookingDesk />,
+		icon      : <IcMBusinessFinance />,
 		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
 			{
@@ -22,7 +30,7 @@ const navigationMappings = {
 				title     : 'Account Payables',
 				href      : '/business-finance/account-payables',
 				as        : '/business-finance/account-payables',
-				icon      : <IcMBookingDesk />,
+				icon      : <IcMFinanceCrm />,
 				main_apis : ['get_purchase_payable_bill_list'],
 			},
 			{
@@ -30,7 +38,7 @@ const navigationMappings = {
 				title     : 'Account Receivables',
 				href      : '/business-finance/account-receivables',
 				as        : '/business-finance/account-receivables',
-				icon      : <IcMBookingDesk />,
+				icon      : <IcMFinanceDashboard />,
 				main_apis : ['get_sales_dashboard_collection_trend'],
 			},
 			{
@@ -38,7 +46,7 @@ const navigationMappings = {
 				title     : 'Product Code Mappings',
 				href      : '/business-finance/product-code-mappings',
 				as        : '/business-finance/product-code-mappings',
-				icon      : <IcMBookingDesk />,
+				icon      : <IcMProductCodeMapping />,
 				main_apis : ['get_common_item'],
 			},
 		],
@@ -46,13 +54,14 @@ const navigationMappings = {
 	locations: {
 		key       : 'locations',
 		title     : 'Locations',
-		icon      : <IcMBookingDesk />,
+		icon      : <IcMLocation />,
 		href      : '/locations',
 		as        : '/locations',
 		main_apis : ['list_locations'],
 		options   : [
 			{
 				key   : 'locations',
+				icon  : <IcMLocation />,
 				title : 'Locations View',
 				href  : '/locations',
 				as    : '/locations',
@@ -63,6 +72,7 @@ const navigationMappings = {
 	roles_permissions: {
 		key         : 'roles_permissions',
 		title       : 'Roles and Permissions',
+		icon        : <IcMSettings />,
 		href        : '/list-roles',
 		as          : '/list-roles',
 		type        : 'link',

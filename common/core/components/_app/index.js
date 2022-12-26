@@ -84,22 +84,6 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		isServer,
 	};
 
-	console.log('pathname inside server', pathname);
-	// if (
-	// 	routeConfig?.[pathname]?.isMainNav
-	// 	|| !profile?.authorizationparameters
-	// ) {
-	// 	await store.dispatch(
-	// 		setProfileState({
-	// 			authorizationparameters: getAuthParam(
-	// 				profile?.permissions_navigations,
-	// 				pathname,
-	// 			),
-	// 		}),
-	//
-	// 	);
-	// }
-
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
 		: {};
