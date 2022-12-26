@@ -10,7 +10,7 @@
     "build": "pnpm rollup -c rollup.config.js --bundleConfigAsCjs && cp package.json ./dist"
   },
   "dependencies": {
-    "@cogoport/components": "^1.0.118",
+    "@cogoport/components": "^1.0.131",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/request": "workspace:0.1.0",
@@ -26,7 +26,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/react": "^18.0.26",
     "next-transpile-modules": "^10.0.0",
-    "rollup": "^3.8.0",
+    "rollup": "^3.8.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-typescript2": "^0.34.1"
   }

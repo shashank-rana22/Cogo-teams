@@ -1,8 +1,9 @@
-import { Input } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function InputController(props: any) {
+import FileUploader from '../Business/FileUploader';
+
+function UploadController(props: any) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -14,7 +15,7 @@ function InputController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Input
+				<FileUploader
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
@@ -26,4 +27,4 @@ function InputController(props: any) {
 		/>
 	);
 }
-export default InputController;
+export default UploadController;

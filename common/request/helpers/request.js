@@ -4,7 +4,7 @@ import Axios from 'axios';
 import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
-import { getCookieFromCtx } from './getCookieFromCtx';
+import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -17,7 +17,7 @@ const customSerializer = (params) => {
 const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 request.interceptors.request.use((oldConfig) => {
-	const token = getCookieFromCtx(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
+	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, oldConfig.url);
 
 	return {

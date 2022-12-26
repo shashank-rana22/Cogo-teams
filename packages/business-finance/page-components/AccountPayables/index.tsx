@@ -1,9 +1,20 @@
-import { useSelector } from '@cogoport/store';
-import React from 'react';
+import { useRequestBf } from '@cogoport/request';
+import React, { useEffect } from 'react';
 
 function AccountPayables() {
-	const reps = useSelector((state) => state.profile);
-	console.log('reps inside payables', reps);
+	const [{ data, loading, error }, trigger] = useRequestBf(
+		{
+			url     : '/purchase/payable-bill/list',
+			method  : 'get',
+			authKey : 'get_purchase_payable_bill_list',
+		},
+		{ autoCancel: false },
+	);
+
+	useEffect(() => {
+		trigger();
+	}, []);
+
 	return (
 		<div>
 			<h1>Account Payables</h1>

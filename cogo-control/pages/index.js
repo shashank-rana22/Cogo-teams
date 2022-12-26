@@ -1,9 +1,11 @@
+// import { useSelector } from '@cogoport/store';
 import React from 'react';
 import useSWR from 'swr';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Check() {
+	// const profileName = useSelector(({ profile }) => profile);
 	const { data, error } = useSWR(
 		'https://api.github.com/repos/vercel/swr',
 		fetcher,
@@ -11,6 +13,8 @@ export default function Check() {
 
 	if (error) return 'An error has occurred.';
 	if (!data) return 'Loading...';
+
+	// console.log(profileName, 'ff');
 
 	return (
 		<div>
