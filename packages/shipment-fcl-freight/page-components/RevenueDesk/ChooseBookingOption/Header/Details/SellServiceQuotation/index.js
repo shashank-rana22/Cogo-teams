@@ -3,13 +3,14 @@ import React from 'react';
 import { startCase } from '@cogoport/utils';
 // import { getFormattedPrice } from '@cogo/i18n';
 import EmptyState from '../../../../../../commons/EmptyState';
-// import getShipmentQuotation from '../../../hooks/getShipmentQuotation';
-import QuotationData from '../../../../../../hooks/revenueDeskHooks/QuotationData.json';
+import getShipmentQuotation from '../../../../../../hooks/revenueDeskHooks/getShipmentQuotation';
+// import QuotationData from '../../../../../../hooks/revenueDeskHooks/QuotationData.json';
 import styles from './styles.module.css'
 
 const SellServcieQuotation = ({ shipmentData = {} }) => {
-	
-    const  {service_charges} = QuotationData;
+
+	const {service_charges, loading} = getShipmentQuotation(shipmentData?.id);
+
 	const EmptyContent = {
 		heading: 'No Results Found!',
 		description: 'Something Went Wrong! Please try agin later.',
@@ -18,12 +19,12 @@ const SellServcieQuotation = ({ shipmentData = {} }) => {
 	return (
 		<>
 			<div className={styles.container}>
-				{/* {loading ? <Skeleton height="20px" width="90%" margin="16px" /> : null}
+				{/* {loading ? <Skeleton height="20px" width="90%" margin="16px" /> : null} */}
 				{!service_charges?.length && !loading ? (
 					<EmptyState showContent={EmptyContent} />
-				) : null} */}
+				) : null} 
 
-				{service_charges?.length ? (
+				 {service_charges?.length ? (
 					<>
 						<div className={styles.heading}>Full Sell Quotation</div>
 						<div className={styles.serviceContent}>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ListJson from '../../hooks/revenueDeskHooks/useGetList.json';
 import useListShipments from '../../hooks/revenueDeskHooks/useGetList'
 import ShipmentDetails from './ShipmentDetails';
 import BookingOption from './BookingOption';
@@ -19,8 +18,6 @@ function RevenueDesk() {
 		list: { total, data },
 		refetch,
 	} = useListShipments({ status: activeTab });
-
-	// const { list: listData, total_count: count } = ListJson;
 	
 
 	return (
@@ -28,12 +25,12 @@ function RevenueDesk() {
 			{!clickedCard ? (
 				<div>
 					<RevenueList
-						// hookSetters={hookSetters}
-						// loading={loading}
+						hookSetters={hookSetters}
+						loading={loading}
 						total={total}
-						page={1}
-						// filters={filters}
-						// refetch={refetch}
+						page={page}
+						filters={filters}
+						refetch={refetch}
 						listData={data}
 						setShowBookingOption={setShowBookingOption}
 						activeTab={activeTab}
@@ -58,7 +55,7 @@ function RevenueDesk() {
 						service={clickedCard.service}
 						setShowBookingOption={setClickedCard}
 						showBookingOption= {clickedCard}
-						// refetch={refetch}
+						refetch={refetch}
 					/>
 
 				</div>

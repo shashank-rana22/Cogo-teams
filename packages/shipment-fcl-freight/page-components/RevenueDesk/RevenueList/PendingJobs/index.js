@@ -17,10 +17,11 @@ function PendingJobs({
 	const handleCardClick = (data_item) => {
 		setClickedCard(data_item);
 	};
-	const handlePageChange=()=>{
+
+	const handlePageChange=(pageNumber)=>{
 		hookSetters.setFilters({
 			...filters,
-			page: val,
+			page: pageNumber,
 		})
 	}
 
@@ -30,7 +31,7 @@ function PendingJobs({
 					{total > 10 ? (
 					<div className={styles.paginationWrapper}>
 						<Pagination
-							type="compact"
+							type="table"
 							totalItems={total}
 							PageSize={10}
 							currentPage={page}
@@ -57,16 +58,11 @@ function PendingJobs({
 					{total > 10 ? (
 					<div className={styles.paginationWrapper}>
 						<Pagination
-							type="number"
+							type="table"
 							totalItems={total}
 							PageSize={10}
 							currentPage={page}
-							handlePageChange={(val) =>
-								hookSetters.setFilters({
-									...filters,
-									page: val,
-								})
-							}
+							handlePageChange={handlePageChange}
 						/>
 					</div>
 				) : null}

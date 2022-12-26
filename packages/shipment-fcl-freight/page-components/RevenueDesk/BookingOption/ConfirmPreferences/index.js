@@ -5,7 +5,6 @@ const ConfirmPrefrences = ({
 	setShow = () => {},
 	handleSave = () => {},
 	loading,
-	// setShowBookingOption = () => {},
 }) => {
 	const handleClick = () => {
 		handleSave();

@@ -74,7 +74,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 					data: final_payload,
 				});
 				if (!res.hasError) {
-					CogoToast.success(successMessage);
+					Toast.success(successMessage);
 					setShowBookingOption(false);
 					setShow(false);
 					refetch();

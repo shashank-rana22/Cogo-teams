@@ -7,7 +7,9 @@ const useListShipments = (allParams) => {
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(true);
 
-	const [filters, setFilters] = useState({ page: 1, highlight: undefined, ...params });
+	const [filters, setFilters] = useState({ page: 1,
+											 highlight: undefined,
+											 ...params });
 	const [list, setList] = useState({
 		data         : [],
 		total        : 0,
@@ -15,7 +17,7 @@ const useListShipments = (allParams) => {
 		fullResponse : {},
 		reverted     : 0,
 	});
-
+	
 	const { page, highlight = false, ...restFilters } = filters;
 
 	const [{ data:listShipmentData }, trigger] = useRequest('/list_shipments', { manual: true });

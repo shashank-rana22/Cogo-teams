@@ -8,7 +8,7 @@ const useCreateFlashBookingRate = ({
 }) => {
 	
 
-	 const [{data:FlashRateData, loading: loading, error = error },trigger]=useRequest('/create_shipment_flash_booking_rate',{manual:true})
+	 const [{data:FlashRateData, loading: loading, error = error },trigger]=useRequest({url:'/create_shipment_flash_booking_rate', method: 'post'} ,{manual:true})
 
 	const handleFlashDirect = async () => {
 		try {

@@ -9,20 +9,20 @@ import styles from './styles.module.css';
 
 const BuyServiceQuotation = ({ shipmentData = {} }) => {
 	
-    const { service_charges , loading} = getShipmentQuotation(shipmentData);
+	const {service_charges, loading} = getShipmentQuotation(shipmentData?.id);
 
-	// const EmptyContent = {
-	// 	heading: 'No Results Found!',
-	// 	description: 'Something Went Wrong! Please try agin later.',
-	// };
+	const EmptyContent = {
+		heading: 'No Results Found!',
+		description: 'Something Went Wrong! Please try agin later.',
+	};
 
 	return (
 		<>
 			<div className={styles.container}>
-				{/* {loading ? <Skeleton height="20px" width="90%" margin="16px" /> : null}
+				{/* {loading ? <Skeleton height="20px" width="90%" margin="16px" /> : null} */}
 				{!service_charges?.length && !loading ? (
 					<EmptyState showContent={EmptyContent} />
-				) : null} */}
+				) : null}
                 
 				{ service_charges?.length ? (
 					<>

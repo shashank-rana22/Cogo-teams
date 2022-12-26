@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal } from '@cogoport/components';
 import ChooseBookingOption from '../ChooseBookingOption';
 import FlashRates from '../ChooseBookingOption/FlashRates';
-import getRates from '../../../hooks/revenueDeskHooks/getRates.json';
-import existingDocuments from '../../../hooks/revenueDeskHooks/getShipmentEligibleDocument.json';
 import useListBookingOptions from '../../../hooks/revenueDeskHooks/useListBookingOptions';
 import CreateDataFromChoosen from '../../../utils/revenueDeskUtils/createDataFromChoosen';
 import ExistingRates from './RatesPreferences';
@@ -45,16 +43,6 @@ function BookingOption(params) {
 		refetch,
 		service,
 	});
-
-	// const bnSalvage = [];
-	// const statsLoading = false;
-	// const existingDataLoading = false;
-	// const existingData = existingDocuments;
-	// const data = [];
-	// const flashParams = getRates;
-	// const flash = [];
-	// const flashDirectLoading = false;
-	// const loading = false;
 
 	const { choosen_bookings_docs, choosen_flash_params } = CreateDataFromChoosen(
 		{ data: data?.list, shipment_id: currentShipmentData?.id },

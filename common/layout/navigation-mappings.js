@@ -52,7 +52,7 @@ const navigationMappings = {
 		main_apis : ['list_shipments'],
 		options   : [
 			{
-				key       : 'revenue-desk_fcl-freight',
+				key       : 'coe-fcl_revenue_desk',
 				title     : 'FCL Revenue Desk',
 				href      : '/revenue-desk/fcl-freight',
 				as        : '/revenue-desk/fcl-freight',

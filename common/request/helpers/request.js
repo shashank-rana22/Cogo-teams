@@ -2,7 +2,6 @@ import store from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
-
 import getAuthorizationParams from './get-final-authpipe';
 import { getCookie } from './getCookieFromCtx';
 
@@ -17,6 +16,7 @@ const customSerializer = (params) => {
 const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 request.interceptors.request.use((oldConfig) => {
+
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, oldConfig.url);
 
@@ -25,8 +25,8 @@ request.interceptors.request.use((oldConfig) => {
 		paramsSerializer : { serialize: customSerializer },
 		headers          : {
 			authorizationscope : 'partner',
-			authorization      : `Bearer: c5b512fb-18b4-4a19-9440-7a4391e3efd5`,
-			authorizationparameters : ' coe-fcl_revenue_desk:across_all',
+			authorization      : `Bearer: ${token}`,
+			authorizationparameters : authorizationparameters,
 		},
 	};
 });

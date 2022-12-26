@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import useListBookingPreference from '../../../hooks/revenueDeskHooks/useListBookingPreference';
-import bookingPreference from '../../../hooks/revenueDeskHooks/useListBookingPreference.json'
 import Body from './Body';
 import BookingPreference from './BookingPreference';
 import {IcMArrowRotateDown, IcMArrowRotateUp} from '@cogoport/icons-react'

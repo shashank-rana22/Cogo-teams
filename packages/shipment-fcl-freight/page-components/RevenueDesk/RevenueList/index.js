@@ -18,7 +18,6 @@ function RevenueList({
 	clickedCard,
 	setActiveTab = () => {},
 	activeTab = 'pending',
-	heading,
 	controls = [],
 	shipment_type,
 }) {
@@ -26,7 +25,10 @@ function RevenueList({
 	const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
 
+
+
 	const handleChangeSerial = (value) => {
+		console.log(value);
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
 	};
