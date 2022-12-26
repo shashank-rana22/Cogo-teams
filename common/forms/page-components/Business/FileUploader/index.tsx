@@ -1,5 +1,6 @@
 import { Upload, Toast } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
+import {useRequest} from '@cogoport/request'
 
 import useInterval from '../../../hooks/useInterval';
 
@@ -18,17 +19,17 @@ function FileUploader(props: any) {
 		...rest
 	} = props;
 
-	const [showUploadedFileName, setShowUploadedFileName] = useState(true);
+	// const [showUploadedFileName, setShowUploadedFileName] = useState(true);
 	const [percentComplete, setPercentComplete] = useState(0);
-	const [isOnline, setIsOnline] = useState(true);
+	// const [isOnline, setIsOnline] = useState(true);
 	const [fileName, setFileName] = useState(null);
 
 	let newValue = value;
 
-	if (onlyURLOnChange && multiple) {
+	if ( multiple) {
 		newValue = (value || []).map((item: any, i: number): any => ({
 			url  : item,
-			name : `${docName} ${i + 1}`,
+			name : `${docName}`,
 			uid  : item,
 		}));
 	}
@@ -45,21 +46,21 @@ function FileUploader(props: any) {
 		}
 	}, 120);
 
-	useEffect(() => {
-		window.addEventListener('online', () => setIsOnline(true));
-		window.addEventListener('offline', () => setIsOnline(false));
-		return () => {
-			window.removeEventListener('online', () => {});
-			window.removeEventListener('offline', () => {});
-		};
-	}, []);
+	// useEffect(() => {
+	// 	window.addEventListener('online', () => setIsOnline(true));
+	// 	window.addEventListener('offline', () => setIsOnline(false));
+	// 	return () => {
+	// 		window.removeEventListener('online', () => {});
+	// 		window.removeEventListener('offline', () => {});
+	// 	};
+	// }, []);
 
 	useEffect(() => {
 		let newValue1 = value;
 		if (onlyURLOnChange && multiple) {
 			newValue1 = (value || []).map((item: any, i: number) => ({
 				url  : item,
-				name : `${docName} ${i + 1}`,
+				name : `${docName}${i + 1}`,
 				uid  : item,
 			}));
 		}
@@ -77,88 +78,6 @@ function FileUploader(props: any) {
 		setUploadedFileList(filesToSet);
 	}, [value]);
 
-	const uploadDocument = (file: any, documentData: any) => new Promise((resolve, reject) => {
-		const xhr = new XMLHttpRequest();
-		const { url, headers } = JSON.parse(documentData);
-		if (url) {
-			xhr.open('PUT', url);
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState === 4) {
-					if (xhr.status === 200) {
-						resolve(documentData);
-					} else {
-						setShowUploadedFileName(false);
-						reject(Toast.error('There as an issue uploading the document'));
-					}
-				}
-			};
-			Object.keys(headers).forEach((header) => xhr.setRequestHeader(header, headers[header]));
-			xhr.send(file);
-		} else {
-			setShowUploadedFileName(false);
-			Toast.error('Error in Uploading File, Try again!');
-		}
-	});
-
-	const getRequest = (url: string, params: any) => new Promise((resolve, reject) => {
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', `${url}?file_name=${params.file_name}`, true);
-		xhr.onreadystatechange = () => {
-			if (xhr.readyState === 4) {
-				if (xhr.status === 200) {
-					resolve(xhr.responseText);
-				} else {
-					setShowUploadedFileName(false);
-					reject(Toast.error('There as an issue uploading the document.'));
-				}
-			}
-		};
-		xhr.send();
-	});
-
-	const getSignature = async (params: any) => {
-		try {
-			const response: any = await getRequest(UPLOD_URL, params);
-			if (response.success) return response.data;
-			return response;
-		} catch (error) {
-			setShowUploadedFileName(false);
-			return error;
-		}
-	};
-
-	const handleFilesChange = (files: any) => {
-		const urls = files.map((item: any) => item.url);
-		if (onlyURLOnChange) {
-			onChange(urls, files);
-		} else {
-			onChange(files);
-		}
-	};
-	const setImageUrls = (url: any, file: any) => {
-		const files = [
-			...uploadedFileList,
-			{
-				success            : true,
-				name               : file.name,
-				uid                : file.uid,
-				type               : file.type,
-				size               : file.size,
-				lastModified       : file.lastModified,
-				lastModifiedDate   : file.lastModifiedDate,
-				webkitRelativePath : file.webkitRelativePath,
-				url,
-			},
-		];
-		setUploadedFileList([...files]);
-		if (multiple) handleFilesChange(files);
-		else if (onlyURLOnChange) {
-			onChange(url, { success: true, name: file.name, url });
-		} else {
-			onChange({ success: true, name: file.name, url });
-		}
-	};
-
 	// const handleRemove = (file) => {
 	// 	const restFiles = uploadedFileList.filter((item) => file.uid !== item.uid);
 	// 	setUploadedFileList(restFiles);
@@ -167,46 +86,40 @@ function FileUploader(props: any) {
 	// 	setPercentComplete(0);
 	// };
 
-	const handleUpload = (name: string, file: any) => {
-		if (file) {
-			getSignature({ file_name: name })
-				.then((response: any) => uploadDocument(file, response))
-				.then((res: any) => {
-					const resObj = JSON.parse(res);
-					if ((resObj || {}).url) {
-						setImageUrls(resObj.url.split('?')[0], file);
-						setPercentComplete(100);
-					} else {
-						setShowUploadedFileName(false);
-						setPercentComplete(0);
-						if (!isOnline) {
-							Toast.error('File Upload failed, Please Check Your Internet connection');
-						} else Toast.error('File Upload failed, Try again');
-					}
-				})
-				.catch(() => {
-					setShowUploadedFileName(false);
-					setPercentComplete(0);
-					return Toast.error('File upload failed, Try Again');
-				});
+
+	const [{ loading: addLoading }, trigger] = useRequest({
+		method : 'GET',
+		url    : '/get_media_upload_url',
+	}, { manual: true });
+
+
+	// const handleChange = (info: any) => {
+	// 	if (maxSize && info?.size > Number(maxSize)) {
+	// 		const sizeInMb = (maxSize / 1048576).toFixed(2);
+	// 		return Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
+	// 	}
+	// 	if (!isOnline) {
+	// 		return Toast.error('File Upload failed, Please Check Your Internet connection');
+	// 	}
+	// 	setPercentComplete(1);
+	// 	setFileName(info);
+	// 	return null;
+	// };
+	const handleChange = async(values: any) => {
+	console.log("valueeees",values)
+		try {
+			const {data = {}} = await trigger({ data:  values  });
+			console.log("responseee",data)
+			if(data){
+				const { url } = data;
+			}
+			setFileName(values)
+
+		} catch (err:any) {
+			return Toast.error('File Upload failed.......');
 		}
 	};
-
-	const handleChange = (info: any) => {
-		if (maxSize && info?.size > Number(maxSize)) {
-			const sizeInMb = (maxSize / 1048576).toFixed(2);
-			return Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
-		}
-		if (!isOnline) {
-			return Toast.error('File Upload failed, Please Check Your Internet connection');
-		}
-		setPercentComplete(1);
-		setFileName(info);
-		handleUpload(info?.name, info);
-		return null;
-	};
-
-	return <Upload {...rest} multiple={multiple} value={fileName} onChange={handleChange} />;
+	return <Upload {...rest}  value={fileName} multiple={multiple} onChange={handleChange}/>;
 }
 
 export default FileUploader;
