@@ -25,8 +25,8 @@ request.interceptors.request.use((oldConfig) => {
 		paramsSerializer : { serialize: customSerializer },
 		headers          : {
 			authorizationscope : 'partner',
-			authorization      : `Bearer: f4631b25-31f7-4653-9beb-c9e7b5bb5c96`,
-			authorizationparameters : authorizationparameters,
+			authorization      : `Bearer: c5b512fb-18b4-4a19-9440-7a4391e3efd5`,
+			authorizationparameters : ' coe-fcl_revenue_desk:across_all',
 		},
 	};
 });
