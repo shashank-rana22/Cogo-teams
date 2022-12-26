@@ -6,8 +6,11 @@ import Details from "./Details/index";
 import Documents from "./Documents/index";
 import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
-import POC from './../POC'
+import POC from './../POC';
+
 const ShipmentDetails = ({data})=>{
+    console.log('data-',data);
+    
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
 
@@ -22,9 +25,10 @@ const ShipmentDetails = ({data})=>{
                 <div className={styles.subContainer}>
                     Details 
                     <div className={styles.tagsContainer}>
-                        <Tags themeType="blue" size="md">Non - Asset</Tags>
-                        <Tags themeType="blue" size="md">MSME</Tags>
+                        <Tags themeType="blue" size="md">Sell without buy</Tags>
+                        <Tags themeType="blue" size="md">Export</Tags>
                     </div>
+                    <div>Wallet Usage - USD 50</div>
                 </div>
 
                <div className={styles.caret} onClick={()=>{setShowDetails(!showDetails)}}>
@@ -32,7 +36,7 @@ const ShipmentDetails = ({data})=>{
                </div>      
             </div>
             {showDetails && <div className={styles.hr}/>}
-            <div>{showDetails && <Details/>}</div>
+            <div>{showDetails && <Details data={data}/>}</div>
         </div>
 
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>
