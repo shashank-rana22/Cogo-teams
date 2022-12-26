@@ -9,7 +9,16 @@
 .label {
   padding: 24px 16px 0px 32px;
   width: 100%;
-  font-weight: 600;
+  font-weight: 700;
+}
+.labelApproved {
+  display: flex;
+  gap: 8px;
+  padding: 24px 16px 0px 32px;
+  width: 100%;
+  font-weight: 700;
+  color: #6cc077;
+  align-items: center;
 }
 .hr {
   border: 1px solid #ed3726;
@@ -27,4 +36,8 @@
   align-items: center;
   padding: 24px 16px 0px 32px;
   gap: 8px;
+}
+
+.billingPartyContainer {
+  padding: 24px 16px 16px 32px;
 }

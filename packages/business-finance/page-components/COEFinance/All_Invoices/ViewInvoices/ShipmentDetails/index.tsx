@@ -6,8 +6,8 @@ import Details from "./Details/index";
 import Documents from "./Documents/index";
 import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
-
-const ShipmentDetails = ()=>{
+import POC from './../POC'
+const ShipmentDetails = ({data})=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
 
@@ -49,12 +49,14 @@ const ShipmentDetails = ()=>{
             {showDocuments && <div className={styles.hr}/>}
             <div> { showDocuments && <Documents/> } </div>               
         </div>
+        {/* <POC/> */}
+
         <div className={styles.shipmentDetailsFooter}>
             <div className={styles.pdfDisplay}>
-                <PdfDisplay/>
+                <PdfDisplay data={data}/>
             </div>
             <div className={styles.shipmentDetailsCard}>
-                <ShipmentDetailsCard/>
+                <ShipmentDetailsCard data={data}/>
             </div>
         </div>
         
