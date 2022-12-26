@@ -1,13 +1,16 @@
 import React from "react";
+import useShipmentIdView from "../../hook/useShipmentIdView";
 import AccordianCards from "./AccordianCards/index";
 
 const ShipmentIdView = () => {
+    const { data } = useShipmentIdView();
+    console.log(data, "data");
+
     return (
         <div>
-            <h1>shipment view</h1>
             <div>
-                {[1, 2, 3, 4, 5].map(() => {
-                    return <AccordianCards />;
+                {data?.list?.map((item: any) => {
+                    return <AccordianCards itemData={item} />;
                 })}
             </div>
         </div>

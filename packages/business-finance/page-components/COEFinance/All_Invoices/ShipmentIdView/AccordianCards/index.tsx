@@ -5,19 +5,21 @@ import { useState } from "react";
 import CardHeader from "./CardHeader/index";
 import CardItem from "./CardItem/index";
 import useShipmentIdView from "../../../hook/useShipmentIdView";
-const AccordianCards = () => {
+import { startCase } from "@cogoport/utils";
+// import { startCase } from "lodash";
+
+type listData = {
+    itemData: any;
+};
+const AccordianCards = ({ itemData }: listData) => {
     const [isAccordionActive, setIsAccordionActive] = useState(false);
     const handleClick = () => {
         setIsAccordionActive(!isAccordionActive);
         // listApi();
     };
 
-    const { data } = useShipmentIdView();
-    console.log(data, "data");
-
     return (
         <div>
-            {/* <h1>Cards</h1> */}
             <div
                 className={styles.container}
                 style={{
@@ -29,21 +31,27 @@ const AccordianCards = () => {
                     <div className={styles.sid}>
                         <div className={styles.sidContainer}>
                             <div className={styles.sidLabelText}>SID - </div>
-                            <div className={styles.sidValueText}>112680</div>
+                            <div className={styles.sidValueText}>
+                                {itemData.serial_id}
+                            </div>
                         </div>
                         <div className={styles.pendingText}>
                             Pending Approval - 3
                         </div>
                     </div>
 
-                    <div className={styles.freight}>Fcl_freight</div>
+                    <div className={styles.freight}>
+                        {startCase(itemData.shipment_type)}
+                        {/* {itemData.shipment_type} */}
+                    </div>
                     <div className={styles.vr} />
                     <div className={styles.expenseAmount}>
                         <div className={styles.expense}>
                             <div className={styles.expenseLabelText}>
-                                Expense (3)
+                                Expense ({itemData.expense_count || 0} )
                             </div>
                             <div className={styles.expenseValueText}>
+                                {itemData.expense_total_currency}
                                 INR 20,340,403.12
                             </div>
                         </div>
