@@ -1,23 +1,27 @@
+import { Input } from '@cogoport/components';
 import React from 'react';
-import Input from '@cogoport/front/components/Input';
-import SearchSvg from '../../assets/search.svg';
-import { Container } from './styles';
 
-const SearchInput = ({
+import SearchSvg from '../../assets/search.svg';
+
+import styles from './styles.module.css';
+
+function SearchInput({
 	value = '',
 	onChange = () => {},
 	placeholder = '',
 	size = 'lg',
-}) => (
-	<Container>
-		<Input
-			suffix={<SearchSvg />}
-			value={value}
-			onChange={(event) => onChange(event.target.value)}
-			size={size}
-			placeholder={placeholder}
-		/>
-	</Container>
-);
+}) {
+	return (
+		<section className={styles.container}>
+			<Input
+				suffix={<SearchSvg />}
+				value={value}
+				onChange={(value) => onChange(value)}
+				size={size}
+				placeholder={placeholder}
+			/>
+		</section>
+	);
+}
 
 export default SearchInput;

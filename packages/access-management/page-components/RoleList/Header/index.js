@@ -1,22 +1,23 @@
+import { Button, Pills } from '@cogoport/components';
 import React from 'react';
-import { Pills } from '@cogoport/front/components';
 
 import Heading from '../../../common/Heading';
-import { Container, CreateRoleButton, RoleGroups } from './styles';
 
-const Header = ({
+import styles from './styles.module.css';
+
+function Header({
 	onChangeShowCreateRoleModal = () => {},
 	stakeHolderType,
 	setStakeHolderType,
-}) => {
+}) {
 	return (
-		<Container id="rnp_role_list_header_container">
+		<section className={styles.container} id="rnp_role_list_header_container">
 			<Heading
 				title="Roles and Permission"
 				subTitle="Manage and create new roles and their permissions"
 			/>
 
-			<RoleGroups>
+			<div className={styles.role_group}>
 				<Pills
 					onChange={(val) => {
 						// onChangeFilters({ ...getFilter(val) });
@@ -30,15 +31,15 @@ const Header = ({
 						{ label: 'Customer', value: 'customer' },
 					]}
 				/>
-				<CreateRoleButton
+				<Button
 					id="rnp_role_list_create_new_role_button"
 					onClick={() => onChangeShowCreateRoleModal(true)}
 				>
-					+ &nbsp; create new role
-				</CreateRoleButton>
-			</RoleGroups>
-		</Container>
+					+ &nbsp; Create new role
+				</Button>
+			</div>
+		</section>
 	);
-};
+}
 
 export default Header;

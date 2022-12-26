@@ -1,17 +1,15 @@
 import React from 'react';
-import Header from './Header';
-import Filters from './Filters';
-import List from './List';
-import Pagination from './Pagination';
-import {
-	Container,
-	FiltersAndListContainer,
-	ListAndPaginationContainer,
-} from './styles';
-import useRoleList from '../../hooks/useRoleList';
-import CreateRoleModal from './CreateRoleModal';
 
-const RoleList = () => {
+import useRoleList from '../../hooks/useRoleList';
+
+// import CreateRoleModal from './CreateRoleModal';
+import Filters from './Filters';
+import Header from './Header';
+import List from './List';
+// import Pagination from './Pagination';
+import styles from './styles.module.css';
+
+function RoleList() {
 	const {
 		showCreateRoleModal = false,
 		onChangeShowCreateRoleModal = () => {},
@@ -25,7 +23,7 @@ const RoleList = () => {
 	} = useRoleList();
 
 	return (
-		<Container id="rnp_role_list_container">
+		<section className={styles.container} id="rnp_role_list_container">
 			<Header
 				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
 				onChangeFilters={onChangeFilters}
@@ -33,30 +31,30 @@ const RoleList = () => {
 				setStakeHolderType={setStakeHolderType}
 			/>
 
-			<FiltersAndListContainer id="rnp_role_list_filters_and_list_container">
+			<section id="rnp_role_list_filters_and_list_container">
 				<Filters
 					filters={filters}
 					onChangeFilters={onChangeFilters}
 					stakeHolderType={stakeHolderType}
 				/>
 
-				<ListAndPaginationContainer id="rnp_role_list_list_and_pagination_container">
+				<section className={styles.list_container} id="rnp_role_list_list_and_pagination_container">
 					<List listAuthRolesApi={listAuthRolesApi} redirect={redirect} />
 
-					<Pagination
-						listAuthRolesApi={listAuthRolesApi}
-						onChangeParams={onChangeParams}
-					/>
-				</ListAndPaginationContainer>
-			</FiltersAndListContainer>
+					{/* <Pagination */}
+					{/* 	listAuthRolesApi={listAuthRolesApi} */}
+					{/* 	onChangeParams={onChangeParams} */}
+					{/* /> */}
+				</section>
+			</section>
 
-			<CreateRoleModal
-				showCreateRoleModal={showCreateRoleModal}
-				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
-				redirect={redirect}
-			/>
-		</Container>
+			{/* <CreateRoleModal */}
+			{/* 	showCreateRoleModal={showCreateRoleModal} */}
+			{/* 	onChangeShowCreateRoleModal={onChangeShowCreateRoleModal} */}
+			{/* 	redirect={redirect} */}
+			{/* /> */}
+		</section>
 	);
-};
+}
 
 export default RoleList;

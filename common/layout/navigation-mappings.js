@@ -60,6 +60,15 @@ const navigationMappings = {
 		],
 		module_type: 'crm',
 	},
+	roles_permissions: {
+		key         : 'roles_permissions',
+		title       : 'Roles and Permissions',
+		href        : '/list-roles',
+		as          : '/list-roles',
+		type        : 'link',
+		main_apis   : ['list_auth_roles'],
+		module_type : 'crm',
+	},
 };
 
 export default navigationMappings;
