@@ -13,6 +13,7 @@ const CancelShipment = ({
 }) => {
 
 	const [showCancel, setShowCancel] = useState(false);
+	const loading = false;
 	// const {
 	// 	loading,
 	// 	fields,
@@ -73,7 +74,7 @@ const CancelShipment = ({
 							// disabled={loading || disabledButton}
 							// onClick={handleSubmit(onSubmit, onErrors)}
 						>
-							{false ? 'Confirm Cancellation' : 'Confirming...'}
+							{!loading ? 'Confirm Cancellation' : 'Confirming...'}
 						</Button>
 					</div>
 				</Modal.Footer>

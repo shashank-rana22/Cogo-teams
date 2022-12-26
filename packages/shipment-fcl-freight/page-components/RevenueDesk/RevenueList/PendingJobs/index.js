@@ -19,10 +19,7 @@ function PendingJobs({
 	};
 
 	const handlePageChange=(pageNumber)=>{
-		hookSetters.setFilters({
-			...filters,
-			page: pageNumber,
-		})
+		hookSetters.setFilters({ ...filters, page: pageNumber})
 	}
 
 	return (
@@ -33,7 +30,7 @@ function PendingJobs({
 						<Pagination
 							type="table"
 							totalItems={total}
-							PageSize={10}
+							pageSize={10}
 							currentPage={page}
 							handlePageChange={handlePageChange}
 						/>
@@ -59,9 +56,9 @@ function PendingJobs({
 					<div className={styles.paginationWrapper}>
 						<Pagination
 							type="table"
-							totalItems={total}
-							PageSize={10}
 							currentPage={page}
+							totalItems={total}
+							pageSize={10}						
 							handlePageChange={handlePageChange}
 						/>
 					</div>

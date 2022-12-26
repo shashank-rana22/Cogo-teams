@@ -26,9 +26,9 @@ function CompletedJobs({
 					{total > 10 ? (
 					<div className={styles.paginationWrapper}>
 						<Pagination
-							type="compact"
+							type="table"
 							totalItems={total}
-							PageSize={10}
+							pageSize={10}
 							currentPage={page}
 							handlePageChange={(val) =>
 								hookSetters.setFilters({
@@ -57,9 +57,9 @@ function CompletedJobs({
 					{total > 10 ? (
 					<div className={styles.paginationWrapper}>
 						<Pagination
-							type="compact"
+							type="table"
 							totalItems={total}
-							PageSize={10}
+							pageSize={10}
 							currentPage={page}
 							handlePageChange={(val) =>
 								hookSetters.setFilters({
