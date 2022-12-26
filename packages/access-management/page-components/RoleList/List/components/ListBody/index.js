@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 
 import getValue from '../../../../../utils/getValue';
 
-import PencilSvg from './Pencil.svg';
 import styles from './styles.module.css';
 
 function ListBody({
@@ -61,8 +60,7 @@ function ListBody({
 			),
 			renderEditButton: (itemData) => (
 				<section>
-					<Button onClick={() => redirect(itemData?.id)}>
-						<PencilSvg />
+					<Button themeType="secondary" onClick={() => redirect(itemData?.id)}>
 						Edit
 					</Button>
 				</section>

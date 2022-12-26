@@ -5,9 +5,9 @@ import getNavData from './get-nav-data';
 const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 	try {
 		const profile =	typeof getStoreState === 'function' ? getStoreState()?.profile : {};
+		const general =	typeof getStoreState === 'function' ? getStoreState()?.general : {};
 
-		const pathname = profile?.pathname;
-		const fallback_navigation = routeConfig?.[pathname]?.navigation || '';
+		const fallback_navigation = routeConfig?.[general?.pathname]?.navigation || '';
 		const authParams = authorizationparameters?.split(':');
 		const navigation = authParams?.[0] || fallback_navigation;
 		const globalDefaultScope = authParams?.[1];

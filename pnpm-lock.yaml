@@ -83,6 +83,7 @@ importers:
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/layout': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       cookies-next: ^2.1.1
@@ -97,6 +98,7 @@ importers:
       '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
       '@cogoport/layout': link:../layout
       '@cogoport/next': link:../next
+      '@cogoport/request': link:../request
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.2
       cookies-next: 2.1.1

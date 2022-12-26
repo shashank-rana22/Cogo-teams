@@ -19,9 +19,7 @@ if (!isServer) {
 }
 
 function MyApp({
-	Component, pageProps, pathPrefix, asPrefix, query,
-	profile,
-	generalData,
+	Component, pageProps, pathPrefix, asPrefix, query, profile, generalData,
 }) {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
@@ -33,7 +31,6 @@ function MyApp({
 			pageProgessBar.done();
 		});
 	}, []);
-
 	store.dispatch(setProfileState(profile));
 	store.dispatch(setGeneralState(generalData));
 
@@ -86,6 +83,22 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		query : { ...query, ...(qError || {}) },
 		isServer,
 	};
+
+	console.log('pathname inside server', pathname);
+	// if (
+	// 	routeConfig?.[pathname]?.isMainNav
+	// 	|| !profile?.authorizationparameters
+	// ) {
+	// 	await store.dispatch(
+	// 		setProfileState({
+	// 			authorizationparameters: getAuthParam(
+	// 				profile?.permissions_navigations,
+	// 				pathname,
+	// 			),
+	// 		}),
+	//
+	// 	);
+	// }
 
 	const initialProps = Component.getInitialProps
 		? await Component.getInitialProps(ctxParams)
