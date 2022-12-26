@@ -51,8 +51,6 @@ const useRoleList = () => {
 		role_stats_required       : true,
 	});
 
-	console.log('params', filters);
-
 	const { apiMethod, apiUri } = API.LIST_AUTH_ROLES;
 
 	const [{ data, loading, error }, trigger] = useRequest({

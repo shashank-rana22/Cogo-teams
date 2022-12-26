@@ -14,7 +14,8 @@ function SearchInput({
 	return (
 		<section className={styles.container}>
 			<Input
-				suffix={<SearchSvg />}
+				inputIcon={<SearchSvg />}
+				suffixInline
 				value={value}
 				onChange={(value) => onChange(value)}
 				size={size}

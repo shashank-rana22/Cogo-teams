@@ -15,12 +15,12 @@ function Filters({
 
 	return (
 		<section className={styles.container} id="rnp_role_list_filters_container">
-			{/* <SearchInput */}
-			{/* 	value={filters?.q || ''} */}
-			{/* 	onChange={(value) => onChangeFilters({ q: value || undefined })} */}
-			{/* 	size="lg" */}
-			{/* 	placeholder="Search Role" */}
-			{/* /> */}
+			<SearchInput
+				value={filters?.q || ''}
+				onChange={(value) => onChangeFilters({ q: value || undefined })}
+				size="md"
+				placeholder="Search Role"
+			/>
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
 					if (
@@ -34,7 +34,7 @@ function Filters({
 					}
 					return (
 						<Select
-							style={{ width: '10%' }}
+							className={styles.select}
 							{...control}
 							value={filters?.[control?.name] || ''}
 							onChange={({ value }) => onChangeFilters({ [control?.name]: value || undefined })}
