@@ -6,7 +6,7 @@
   
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
   }
 
   .card {
@@ -17,7 +17,6 @@
     border-radius: 8px;
     padding: 8px 16px;
     margin: 12px 0px;
-    cursor: pointer;
   }
 
   .verticalSmallHr {
