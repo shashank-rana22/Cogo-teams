@@ -37,7 +37,7 @@ function Filters({
 							style={{ width: '10%' }}
 							{...control}
 							value={filters?.[control?.name] || ''}
-							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
+							onChange={({ value }) => onChangeFilters({ [control?.name]: value || undefined })}
 						/>
 					);
 				})}

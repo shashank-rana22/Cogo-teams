@@ -3,7 +3,7 @@ import navigationMappings from '@cogoport/layout/navigation-mappings';
 const getAllNavigations = () => {
 	const allNavs = [];
 	Object.values(navigationMappings || {}).forEach((navigation) => {
-		if (navigation.options) {
+		if (navigation?.options?.length > 0) {
 			navigation.options.forEach((navOpt) => {
 				allNavs.push({ label: navOpt?.title, value: navOpt?.key });
 			});
@@ -46,7 +46,7 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 
 const get_all_sub_functions = (role_functions) => {
 	const role_sub_functions = [];
-	if (role_functions.length > 0) {
+	if (role_functions?.length > 0) {
 		role_functions.forEach((item) => {
 			FUNCTION_SUB_FUNCTION_MAPPING[item].forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
