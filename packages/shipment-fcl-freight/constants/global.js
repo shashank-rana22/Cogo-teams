@@ -1,4 +1,4 @@
-const gloabal = { FLASH_BOOKING_CHARGE_CODES: [
+const global = { FLASH_BOOKING_CHARGE_CODES: [
     'OTC',
     'BAS',
     'AGC',

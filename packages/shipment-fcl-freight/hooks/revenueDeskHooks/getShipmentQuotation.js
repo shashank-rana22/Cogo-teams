@@ -5,27 +5,26 @@ import { useEffect } from 'react';
 const getShipmentQuotation = ({shipmentData = {}}) => {
 	
 
-    const[{ data:listQuotationData }, trigger] = useRequest({url :'/get_shipment_quotation', params: {shipment_id: shipmentData.id}, manual: true});
+    const[{ data:listQuotationData }, trigger] = useRequest('/get_shipment_quotation', {manual: true});
 
-	const getQuotation = async() => {
-		try {
-			await trigger({});
-		} catch (err) {
-        console.log(err);
+
+	const getQuotation=async (shipment_id)=>{
+		try{
+			await trigger({
+			params:{
+				shipment_id
+			}
+			})
+		}catch(err){
+			console.log(err)
 		}
-	};
+	}
 
-	useEffect(() => {
-		getQuotation();
-	}, []);
-	
 
 	//const service_charges = getSellServiceCharges?.data?.service_charges || [];
 
 	return {
-
-		//service_charges,
-		//loading: getSellServiceCharges?.loading,
+		getQuotation
 	};
 };
 
