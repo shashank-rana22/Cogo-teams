@@ -24,18 +24,22 @@ const ShipmentDetailsCard = ({data}:any) =>{
             return(
             <div className={styles.container} >
                 <div className={styles.headerContainer}>
-                   <div className={showValue ? styles.labelApproved : styles.label}>{label}
-                   <div style={{justifyContent:'center',display:'flex'}} >{showValue && <IcCFtick height="17px" width="17px" />}</div>
-                   </div>
+                    <div className={showValue ? styles.labelApproved : styles.label}>
+                            {label}
+                        <div style={{justifyContent:'center',display:'flex'}} >
+                            {showValue && <IcCFtick height="17px" width="17px" />}
+                        </div>
+                    </div>
+
                    {
                     showValue ? 
                     <div className={styles.buttonContainer} onClick={(item:any)=>{setShowValue(!showValue)}}>
                         <Button size='sm' themeType="secondary">Undo</Button>
                     </div> :         
-                <div className={styles.buttonContainer}>
-                    <Button size='sm'  themeType="secondary" onClick={(item:any)=>{setShowValue(!showValue)}}>Approve</Button>
-                    <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}}>Reject</Button>
-                 </div>
+                    <div className={styles.buttonContainer}>
+                        <Button size='sm'  themeType="secondary" onClick={(item:any)=>{setShowValue(!showValue)}}>Approve</Button>
+                        <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}}>Reject</Button>
+                    </div>
                    } 
            
                 </div>
