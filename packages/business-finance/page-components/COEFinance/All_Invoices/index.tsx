@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import PurchaseInvoice from "./PurchaseInvoiceView";
 import styles from "./styles.module.css";
 import { Button } from "@cogoport/components";
-import PurchaseInvoice from "./PurchaseInvoiceView";
 import { useRouter } from "@cogoport/next";
 import TabSelect from "../../commons/TabSelect/index";
 import ShipmentIdView from "./ShipmentIdView/index";
 const AllInvoices = () => {
-    const router = useRouter();
+    const { push, query } = useRouter();
     const [isPurchase, setIsPurchase] = useState(true);
 
     return (
@@ -23,19 +23,6 @@ const AllInvoices = () => {
                         {" "}
                         PURCHASE INVOICE VIEW{" "}
                     </div>
-                    {isPurchase && (
-                        <Button
-                            size="md"
-                            themeType="secondary"
-                            onClick={() =>
-                                router.push(
-                                    "/business-finance/coe-finance/view-invoices"
-                                )
-                            }
-                        >
-                            View Invoices
-                        </Button>
-                    )}
                 </div>
                 <div onClick={() => setIsPurchase(false)}>
                     <div
@@ -49,8 +36,8 @@ const AllInvoices = () => {
                     </div>
                 </div>
             </div>
-            {!isPurchase && <ShipmentIdView />}
             {isPurchase && <PurchaseInvoice />}
+            {!isPurchase && <ShipmentIdView />}
         </div>
     );
 };

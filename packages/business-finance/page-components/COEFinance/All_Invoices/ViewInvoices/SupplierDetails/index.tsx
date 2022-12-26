@@ -2,7 +2,14 @@ import React  from "react";
 import { Tags } from "@cogoport/components";
 import {IcCFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
-const SupplierDetails =()=>{
+const SupplierDetails =({data,paymentsData,accPaymentLoading})=>{
+    console.log(data,"data");
+
+    console.log(paymentsData,"paymentsData");
+    
+    const {sellerDetail} = data || {}
+    const {payables,receivables,ledgerCurrency} = paymentsData || {}
+    
     return(
         <div className={styles.container}> 
 
@@ -12,7 +19,7 @@ const SupplierDetails =()=>{
 
             <div className={styles.card}>
                 <div className={styles.orgNameAndVerified}>
-                    <div>Name - Evergreen Private Limited</div>
+                    <div>Name - <span style={{fontWeight:'600'}}>{sellerDetail?.organizationName}</span></div>
                     <div className={styles.tagsContainer}>
                         <Tags themeType="blue" size="md">Non - Asset</Tags>
                         <Tags themeType="blue" size="md">MSME</Tags>
@@ -23,8 +30,8 @@ const SupplierDetails =()=>{
                 <div className={styles.verticalSmallHr}/>
 
                 <div className={styles.accountDetails}>
-                    <div className={styles.accounts}>Amount Payables : <div>INR 20,02,302</div></div>  
-                    <div className={styles.accounts}>Amount Receivables : <div>INR 20,02,302</div></div>  
+                    <div className={styles.accounts}>Amount Payables : <div style={{fontWeight:'600'}}>{ledgerCurrency} {payables}</div></div>  
+                    <div className={styles.accounts}>Amount Receivables : <div style={{fontWeight:'600'}}>{ledgerCurrency} {receivables}</div></div>  
                 </div>
 
                 <div className={styles.verticalSmallHr}/>

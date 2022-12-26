@@ -4,8 +4,10 @@ import { Tags } from "@cogoport/components";
 import {IcMArrowRotateDown,IcMArrowRotateUp,IcADocumentTemplates} from '@cogoport/icons-react'
 import Details from "./Details/index";
 import Documents from "./Documents/index";
-
-const ShipmentDetails = ()=>{
+import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
+import PdfDisplay from "./PdfDisplay/index";
+import POC from './../POC'
+const ShipmentDetails = ({data})=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
 
@@ -33,8 +35,6 @@ const ShipmentDetails = ()=>{
             <div>{showDetails && <Details/>}</div>
         </div>
 
-            
-
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>
             <div className={styles.cardUpper}>
                 <div className={styles.subContainer}>
@@ -49,7 +49,17 @@ const ShipmentDetails = ()=>{
             {showDocuments && <div className={styles.hr}/>}
             <div> { showDocuments && <Documents/> } </div>               
         </div>
+        {/* <POC/> */}
 
+        <div className={styles.shipmentDetailsFooter}>
+            <div className={styles.pdfDisplay}>
+                <PdfDisplay data={data}/>
+            </div>
+            <div className={styles.shipmentDetailsCard}>
+                <ShipmentDetailsCard data={data}/>
+            </div>
+        </div>
+        
     </div>
     )
 }
