@@ -29,7 +29,8 @@ const useListBookingOptions = ({
 		shipment_type,
 		service,
 	});
-	
+	console.log(data, 'dataa');
+	console.log(existingData, 'dataa');
 	const CurrentRates = getFlashRates({
 		api: 'current',
 		currentShipmentData,

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const getShipmentQuotation = ({shipmentData = {}}) => {
 	
 
-    const[{ data:listQuotationData }, trigger] = useRequest({url :'/get_shipment_quotation', params: {shipment_id: shipmentData.id}}, {manual: true});
+    const[{ data:listQuotationData }, trigger] = useRequest({url :'/get_shipment_quotation', params: {shipment_id: shipmentData.id}, manual: true});
 
 	const getQuotation = async() => {
 		try {
@@ -18,6 +18,7 @@ const getShipmentQuotation = ({shipmentData = {}}) => {
 	useEffect(() => {
 		getQuotation();
 	}, []);
+	
 
 	//const service_charges = getSellServiceCharges?.data?.service_charges || [];
 

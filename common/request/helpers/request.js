@@ -26,7 +26,7 @@ request.interceptors.request.use((oldConfig) => {
 		headers          : {
 			authorizationscope : 'partner',
 			authorization      : `Bearer: f4631b25-31f7-4653-9beb-c9e7b5bb5c96`,
-			authorizationparameters : 'coe-fcl_revenue_desk:allowed',
+			authorizationparameters : authorizationparameters,
 		},
 	};
 });

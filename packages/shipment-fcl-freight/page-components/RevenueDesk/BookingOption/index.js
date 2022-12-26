@@ -99,7 +99,6 @@ function BookingOption(params) {
 								type="existing_inventory"
 								prefrences={existingRatePrefrences}
 								setPrefrences={setExistingRatePrefrences}
-								setShowBookingOption={setShowBookingOption}
 								expanded={dataCount > 0}
 							/>
 						</div>
