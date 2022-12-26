@@ -121,22 +121,19 @@ const fields = [
 				'warehouse',
 			],
 		},
-		params : { filters: { type: ['country'] } },
-		rules  : { required: 'Country is required' },
+		rules: { required: 'Country is required' },
 	},
 	{
 		name        : 'zone_id',
 		label       : 'Zone',
 		type        : 'select',
 		placeholder : 'Select Zone',
-		params      : { filters: { type: ['zone'] } },
 	},
 	{
 		name        : 'region_id',
 		label       : 'Region',
 		type        : 'select',
 		placeholder : 'Select region',
-		params      : { filters: { type: ['region'] } },
 	},
 	{
 		name        : 'city_id',
@@ -155,8 +152,7 @@ const fields = [
 				'railway_terminal',
 			],
 		},
-		rules  : { message: 'City is Required' },
-		params : { filters: { type: ['city'] } },
+		rules: { message: 'City is Required' },
 	},
 	{
 		name        : 'cluster_id',
@@ -166,7 +162,6 @@ const fields = [
 		condition   : {
 			type: ['seaport', 'airport', 'pincode', 'cfs', 'cluster', 'yard'],
 		},
-		params: { filters: { type: ['cluster'] } },
 	},
 	{
 		name        : 'pincode_id',
@@ -183,8 +178,7 @@ const fields = [
 				'warehouse',
 			],
 		},
-		rules  : { required: 'Pincode is Required' },
-		params : { filters: { type: ['pincode'] } },
+		rules: { required: 'Pincode is Required' },
 	},
 	{
 		name        : 'cfs_code',
@@ -192,7 +186,6 @@ const fields = [
 		type        : 'select',
 		placeholder : 'Select cfs',
 		condition   : { type: ['cfs'] },
-		params      : { filters: { type: ['cfs'] } },
 	},
 	{
 		name        : 'port_code',
@@ -316,12 +309,44 @@ const fields = [
 	},
 ];
 
-const getControls = ({ locationOptions }) => fields.map((control) => {
-	const { params } = control;
+const getControls = ({
+	countryOptions = {},
+	zoneOptions = {},
+	regionOptions = {},
+	cityOptions = {},
+	clusterOptions = {},
+	pincodeOptions = {},
+	cfsOptions = {},
+}) => fields.map((control) => {
+	const { name } = control;
 	let newControl = { ...control };
 
-	if (params) {
-		newControl = { ...locationOptions, ...control };
+	if (name === 'country_id') {
+		newControl = { ...newControl, ...countryOptions };
+	}
+
+	if (name === 'zone_id') {
+		newControl = { ...newControl, ...zoneOptions };
+	}
+
+	if (name === 'region_id') {
+		newControl = { ...newControl, ...regionOptions };
+	}
+
+	if (name === 'city_id') {
+		newControl = { ...newControl, ...cityOptions };
+	}
+
+	if (name === 'cluster_id') {
+		newControl = { ...newControl, ...clusterOptions };
+	}
+
+	if (name === 'pincode_id') {
+		newControl = { ...newControl, ...pincodeOptions };
+	}
+
+	if (name === 'cfs_code') {
+		newControl = { ...newControl, ...cfsOptions };
 	}
 
 	return { ...newControl };
