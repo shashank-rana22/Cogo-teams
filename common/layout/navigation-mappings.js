@@ -23,7 +23,7 @@ const navigationMappings = {
 				href      : '/business-finance/account-payables',
 				as        : '/business-finance/account-payables',
 				icon      : <IcMBookingDesk />,
-				main_apis : ['get_purchase_payable_bill_company_list'],
+				main_apis : ['get_purchase_payable_bill_list'],
 			},
 			{
 				key       : 'business_finance-account_receivables',
@@ -42,6 +42,32 @@ const navigationMappings = {
 				main_apis : ['get_common_item'],
 			},
 		],
+	},
+	locations: {
+		key       : 'locations',
+		title     : 'Locations',
+		icon      : <IcMBookingDesk />,
+		href      : '/locations',
+		as        : '/locations',
+		main_apis : ['list_locations'],
+		options   : [
+			{
+				key   : 'locations',
+				title : 'Locations View',
+				href  : '/locations',
+				as    : '/locations',
+			},
+		],
+		module_type: 'crm',
+	},
+	roles_permissions: {
+		key         : 'roles_permissions',
+		title       : 'Roles and Permissions',
+		href        : '/list-roles',
+		as          : '/list-roles',
+		type        : 'link',
+		main_apis   : ['list_auth_roles'],
+		module_type : 'crm',
 	},
 };
 

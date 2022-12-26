@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import profileReducer from './slices/profileSlice';
+import reducers from './reducers';
 
 export {
 	Provider,
@@ -12,6 +12,5 @@ export {
 } from 'react-redux';
 
 export default configureStore({
-	reducer  : { profile: profileReducer },
-	devTools : true,
+	reducer: reducers,
 });

@@ -6,7 +6,7 @@ const getAuthorizationParams = (store, url) => {
 	if (typeof window !== 'undefined') {
 		const getStoreState = store?.getState;
 		const profile =	typeof getStoreState === 'function' ? getStoreState()?.profile : {};
-		const { authorizationparameters, pathname } = profile.data;
+		const { authorizationparameters, pathname } = profile;
 		const fallback_navigation = routeConfig?.[pathname]?.navigation || '';
 
 		if (authorizationparameters || fallback_navigation) {

@@ -1,5 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
-import { getCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 
 import getUserData from './getUserData';
 import redirect from './redirect';
@@ -8,11 +8,17 @@ const UNAUTHENTICATED_PATHS = [
 	'/login',
 	'/signup',
 	'/forgot-password',
+	'/reset-password/[id]',
+	'/verify-email/[id]',
+	'/accept-invite/[id]',
+	'/verify-auto-sign-up-email/[id]',
 ];
 
 const DEFAULT_PATHS = {
-	AUTHENTICATED   : '/dashboard',
-	UNAUTHENTICATED : '/login',
+	NOT_VERIFIED_KYC : '/submit-kyc',
+	AUTHENTICATED    : '/dashboard',
+	UNAUTHENTICATED  : '/login',
+
 };
 
 const AUTH_TOKEN_NAME = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
@@ -42,27 +48,59 @@ const handleAuthentication = async ({
 		return { asPrefix };
 	}
 
-	const { partner = {} } = await getUserData({
+	const userData = await getUserData({
 		store,
 		isServer,
 		pathname,
 		req,
 	});
 
-	if (isServer) {
-		if (isEmpty(partner)) {
-			redirect({ isServer, res, path: '/login' });
+	if (isEmpty(userData)) {
+		if (!isServer) {
+			try {
+				deleteCookie(AUTH_TOKEN_NAME, { req, res });
+			} catch (e) {
+				console.log(e);
+			}
+		}
+
+		if (isUnauthenticatedPath) {
 			return { asPrefix };
 		}
 
-		if (asPath === '/' && partner && partner.id) {
-			asPrefix = `/${partner.id}/home`;
-			redirect({ isServer, res, path: asPrefix });
-			return { asPrefix };
-		}
+		const path = `${DEFAULT_PATHS.UNAUTHENTICATED}?redirectPath=${asPath}`;
+
+		redirect({ isServer, res, path });
+		return { asPrefix };
 	}
 
-	return { asPrefix: `/${partner.id}` };
+	if (asPath.startsWith('/get-started')) {
+		return { asPrefix };
+	}
+
+	const { permissions_navigations } = userData;
+
+	const partner_id = userData.partner.id;
+
+	asPrefix = `/${partner_id || ''}`;
+	const navigations = Object.keys(permissions_navigations || {});
+	if (partner_id && [`/${partner_id}`, '/'].includes(asPath) && navigations.length > 0) {
+		redirect({
+			isServer,
+			res,
+			path: `${asPrefix}/home`,
+		});
+
+		return { asPrefix, query: { partner_id } };
+	}
+
+	const defaultRoute = `${asPrefix}/`;
+
+	if (!asPath.startsWith(asPrefix)) {
+		redirect({ isServer, res, path: defaultRoute });
+	}
+
+	return { asPrefix };
 };
 
 export default handleAuthentication;
