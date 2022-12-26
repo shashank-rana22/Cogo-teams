@@ -2,7 +2,7 @@ import { setCookie } from '@cogoport/utils';
 
 const setCookieAndRedirect = (token, ctx) => {
 	const { res, isServer } = ctx || {};
-	setCookie('cogo-partner-token', token, 2000, ctx);
+	setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token, 2000, ctx);
 
 	if (isServer) {
 		res.redirect('/');
