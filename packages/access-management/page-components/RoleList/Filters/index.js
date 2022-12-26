@@ -34,10 +34,10 @@ function Filters({
 					}
 					return (
 						<Select
-							className={styles.select}
 							{...control}
+							className={styles.select}
 							value={filters?.[control?.name] || ''}
-							onChange={({ value }) => onChangeFilters({ [control?.name]: value || undefined })}
+							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
 						/>
 					);
 				})}

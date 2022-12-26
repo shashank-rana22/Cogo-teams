@@ -47,14 +47,14 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 const get_all_sub_functions = (role_functions) => {
 	const role_sub_functions = [];
 	if (role_functions?.length > 0) {
-		role_functions.forEach((item) => {
+		role_functions?.forEach((item) => {
 			FUNCTION_SUB_FUNCTION_MAPPING[item].forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
 			});
 		});
 	} else {
 		Object.values(FUNCTION_SUB_FUNCTION_MAPPING).forEach((sub_functions) => {
-			sub_functions.forEach((sub_function) => {
+			sub_functions?.forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
 			});
 		});

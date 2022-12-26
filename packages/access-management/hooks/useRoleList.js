@@ -66,13 +66,14 @@ const useRoleList = () => {
 		setShowCreateRoleModal(!!value);
 	}, []);
 
-	const onChangeFilters = useCallback((values = {}) => {
+	const onChangeFilters = (values) => {
+		console.log('values', values);
 		setFilters((previousState) => ({
 			...getFilter(null),
 			...previousState,
 			...values,
 		}));
-	}, []);
+	};
 
 	const onChangeParams = useCallback((values = {}) => {
 		setParams((previousState) => ({
