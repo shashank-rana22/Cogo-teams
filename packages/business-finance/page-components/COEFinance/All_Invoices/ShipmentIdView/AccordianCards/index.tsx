@@ -4,12 +4,17 @@ import styles from "./styles.module.css";
 import { useState } from "react";
 import CardHeader from "./CardHeader/index";
 import CardItem from "./CardItem/index";
+import useShipmentIdView from "../../../hook/useShipmentIdView";
 const AccordianCards = () => {
     const [isAccordionActive, setIsAccordionActive] = useState(false);
     const handleClick = () => {
         setIsAccordionActive(!isAccordionActive);
         // listApi();
     };
+
+    const { data } = useShipmentIdView();
+    console.log(data, "data");
+
     return (
         <div>
             {/* <h1>Cards</h1> */}

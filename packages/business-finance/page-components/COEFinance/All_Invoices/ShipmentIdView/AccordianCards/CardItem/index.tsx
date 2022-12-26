@@ -1,9 +1,11 @@
 import React from "react";
+import List from "../../../../../commons/List/index";
+import { ShipmentIdViewConfig } from "../../../../configurations/shipmentIdView";
 
 const CardItem = () => {
     return (
         <div>
-            <h1>List</h1>
+            <List config={ShipmentIdViewConfig}></List>
         </div>
     );
 };
