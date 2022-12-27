@@ -1,6 +1,6 @@
 import { Upload, Toast } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
-import {useRequest} from '@cogoport/request'
+import {useRequest,usePublicRequest} from '@cogoport/request'
 
 import useInterval from '../../../hooks/useInterval';
 
@@ -87,9 +87,12 @@ function FileUploader(props: any) {
 	// };
 
 
-	const [{ loading: addLoading }, trigger] = useRequest({
+	const [{ loading: addLoading }, triggerAdd] = useRequest({
 		method : 'GET',
 		url    : '/get_media_upload_url',
+	}, { manual: true });
+	const [{ loading: uploadLoading }, triggerUpload] = usePublicRequest({
+		method: 'PUT',
 	}, { manual: true });
 
 
@@ -108,10 +111,23 @@ function FileUploader(props: any) {
 	const handleChange = async(values: any) => {
 	console.log("valueeees",values)
 		try {
-			const {data = {}} = await trigger({ data:  values  });
+			const {data} = await triggerAdd({ 
+				params:  { file_name: new Date().getTime() }  
+			});
 			console.log("responseee",data)
-			if(data){
-				const { url } = data;
+			
+			const { url, headers } = data;
+			console.log("url",url)
+			try {
+				await triggerUpload({
+					url     : url,
+					data    : values,
+					headers : {
+						'Content-Type': values.type,
+					},
+				});
+			} catch(err) {
+				console.log({err})
 			}
 			setFileName(values)
 

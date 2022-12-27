@@ -1,17 +1,17 @@
 import { makeUseAxios } from 'axios-hooks';
 
-import { request } from '../helpers/request';
+import publicRequest from '../helpers/public-request';
 
 const commonConfig = {
 	cache          : false,
 	defaultOptions : {
 		ssr    : false,
-	},
+    },
 };
 
-const useRequest = makeUseAxios({
-	axios: request,
+const usePublicRequest = makeUseAxios({
+	axios: publicRequest,
 	...commonConfig,
 });
 
-export default useRequest;
+export default usePublicRequest;
