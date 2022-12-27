@@ -22,7 +22,7 @@ function List({
 	const {
 		showHeader = true, fields, headerStyles, itemStyles, bodyStyles, showHeaderCheckbox,
 	} = config;
-	const {list}=itemData;
+	const list=itemData?.list;
 	return (
 		<section>
 			{showHeader && !isMobile && (
