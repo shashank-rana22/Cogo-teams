@@ -26,7 +26,7 @@ const ViewInvoices =()=>{
 		   accPaymentLoading={accPaymentLoading}
            />
 
-        <InvoiceDetails data={fullResponse}/>
+        <InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch}/>
 
         <ShipmentDetails 
         	data={fullResponse}

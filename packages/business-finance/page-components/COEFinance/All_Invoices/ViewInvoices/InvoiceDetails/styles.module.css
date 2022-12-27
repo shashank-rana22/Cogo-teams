@@ -42,3 +42,8 @@
     color: red;
     font-weight: 600;
   }
+
+  .flexdiv{
+    display: flex;
+    align-items: center;
+  }

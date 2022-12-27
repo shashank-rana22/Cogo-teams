@@ -9,7 +9,8 @@ import PdfDisplay from "./PdfDisplay/index";
 import POC from './../POC';
 
 const ShipmentDetails = ({data})=>{
-    console.log('data-',data);
+    
+    const jobNumber=data?.job?.jobNumber || '';
     
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
@@ -36,7 +37,7 @@ const ShipmentDetails = ({data})=>{
                </div>      
             </div>
             {showDetails && <div className={styles.hr}/>}
-            <div>{showDetails && <Details data={data}/>}</div>
+            <div>{showDetails && <Details jobNumber={jobNumber}/>}</div>
         </div>
 
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>

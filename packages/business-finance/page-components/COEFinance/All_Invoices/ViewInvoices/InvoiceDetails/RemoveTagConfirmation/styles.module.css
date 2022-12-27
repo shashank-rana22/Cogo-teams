@@ -1,0 +1,20 @@
+.StyleSvg{
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+}
+
+.Txt{
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+}
+
+.BtnWrap{
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+}
+.primary {
+	margin-left: 10px;
+}
