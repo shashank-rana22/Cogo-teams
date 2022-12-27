@@ -127,7 +127,7 @@ const CardBody = ({ data = {} }) => {
 						</MultiServiceDetails>
 					</div>
 				) : (
-					<CargoDetails detail={data || {}} />
+					<CargoDetailsPills detail={data || {}} />
 				)}
 			</div>
 		</div>
