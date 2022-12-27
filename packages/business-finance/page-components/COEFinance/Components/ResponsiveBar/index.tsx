@@ -12,7 +12,7 @@ const MyResponsiveBar = ({ data }) =>{
         data={data}
         keys={["invoices"]}
         indexBy="day"
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
         padding={0.3}
         enableGridY={false}
         valueScale={{ type: 'linear' }}
@@ -62,8 +62,8 @@ const MyResponsiveBar = ({ data }) =>{
                 anchor: 'bottom-right',
                 direction: 'column',
                 justify: false,
-                translateX: 120,
-                translateY: 0,
+                translateX: 40,
+                translateY: -280,
                 itemsSpacing: 2,
                 itemWidth: 100,
                 itemHeight: 20,

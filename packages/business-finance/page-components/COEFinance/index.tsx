@@ -7,8 +7,20 @@ import MyResponsiveLine from "./Components/Stream";
 import MyResponsiveLines from "./Components/linecharts";
 import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
+import SegmentedControl from "../commons/SegmentedControl";
 const CoeFinance=()=>{
     const [activeTab, setActiveTab] = useState('dashboard');
+    const [currentTab, setCurrentTab] = useState('');
+    const OPTIONS = [
+		{
+			label: 'Open Jobs',
+			value: 'per_package',
+		},
+		{
+			label: 'Closed Jobs',
+			value: 'total_gross',
+		},
+	];
     return(
     <div>
         <div>
@@ -17,18 +29,42 @@ const CoeFinance=()=>{
     <Tabs activeTab={activeTab} onChange={setActiveTab}>
      
         <TabPanel className={styles.tab_panel_dashboard} name="dashboard" title="Dashboard" >
-        <div style={{width: 680,height:360}}>
-                <MyResponsiveBar data={data}/>
-        </div>
-        <div style={{ height: 360 ,width: 680}}>
+        <div className={styles.spacebetween}>
+        <div style={{minWidth: "60%",height:368, background:"#ffffff", borderRadius: "8px", margin:"16px"}}>
         <MyResponsiveLine data={lineData}/>
         </div>
-        <div style={{ height: 360 ,width: 680}}>
+        <div style={{ height: 368 ,minWidth: "35%", background:"#ffffff",borderRadius: "8px", margin:"16px"}}>
+        <MyResponsiveBar data={data}/>
+        </div>
+        </div>
+        <div className={styles.spacebetween}>
+        <div style={{background:"#ffffff",minWidth: "50%",height: 323, borderRadius: "8px", margin:"16px", padding:"16px"}}>
+        <div className={styles.flex}>
+            <div className={styles.heading}>
+            Job Related Statistics
+            </div>
+            <SegmentedControl options={OPTIONS} activeTab={currentTab} setActiveTab={setCurrentTab} color={"#ED3726"} background={"#FFFAEB"}/>
+        </div>
+        <div className={styles.totalstats}>
+        <div>
+            <div className={styles.stat}>25</div>
+            <div className={styles.month}>Current Month - March</div>
+        </div>
+        <div>
+            <div className={styles.stat}>25</div>
+            <div className={styles.month}>February</div>
+        </div>
+        <div>
+            <div className={styles.stat}>25</div>
+            <div className={styles.month}>January</div>
+        </div>
+        </div>
+        </div>
+        <div style={{ height: 323 ,minWidth: "45%" , background:"#ffffff",borderRadius: "8px", margin:"16px"}}>
         <MyResponsiveLines data={{}}/>
         </div>
+        </div>
         </TabPanel>
-
-
         <TabPanel name="all_invoices" title="All Invoices">
             <AllInvoices/>
         </TabPanel>

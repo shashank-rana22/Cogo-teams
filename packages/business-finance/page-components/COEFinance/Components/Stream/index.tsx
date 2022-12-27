@@ -10,7 +10,7 @@ const MyResponsiveLine = ({ data }) =>{
     return(
         <ResponsiveLine
             data={data}
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+            margin={{ top: 50, right: 45, bottom: 50, left: 60 }}
             xScale={{ type: 'point' }}
             enableGridX={false}
             colors={["#F9DA7F"]}
@@ -58,8 +58,8 @@ const MyResponsiveLine = ({ data }) =>{
                     anchor: 'bottom-right',
                     direction: 'column',
                     justify: false,
-                    translateX: 100,
-                    translateY: 0,
+                    translateX: 60,
+                    translateY: -280,
                     itemsSpacing: 0,
                     itemDirection: 'left-to-right',
                     itemWidth: 80,

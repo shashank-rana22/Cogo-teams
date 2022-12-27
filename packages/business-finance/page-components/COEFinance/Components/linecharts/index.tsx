@@ -53,7 +53,7 @@ import React from 'react'
             pointBorderWidth={1}
             useMesh={true}
             enableSlices={false}
-            margin={{ top: 10, right: 20, bottom: 60, left: 80 }}
+            margin={{ top: 40, right: 50, bottom: 60, left: 60 }}
             animate={true}
           />
       )

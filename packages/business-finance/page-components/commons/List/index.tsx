@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
-
+import { Pagination } from '@cogoport/components';
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import { ConfigType, NestedObj,FunctionObjects,ListDataProps } from '../Interfaces/index';
 import commonFunctions from "../..//commons/List/commonFunctions";
+import styles from "./styles.module.css";
 
 export interface Props {
 	config: ConfigType;
@@ -13,10 +14,13 @@ export interface Props {
 	renderHeaderCheckbox?:()=>(ReactNode | '');
 	functions?:FunctionObjects;
 	loading?:boolean;
+	page?:number;
+	handlePageChange?:Function;
+	pageSize?:number;
 }
 
 function List({
-	config, sort, setSort, itemData, renderHeaderCheckbox,functions={},loading=false,
+	config, sort, setSort, itemData, renderHeaderCheckbox,functions={},loading=false,page=1,handlePageChange,pageSize=10
 }:Props) {
 	const isMobile = false;
 	const {
@@ -47,6 +51,15 @@ function List({
 						isMobile={isMobile}
 					/>
 				))}
+			</div>
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={itemData?.totalRecords}
+					pageSize={pageSize}
+					handlePageChange={handlePageChange}
+				/>
 			</div>
 		</section>
 	);

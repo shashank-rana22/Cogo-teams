@@ -1,10 +1,9 @@
 import React from 'react';
+import {
+	getByKey, format, isEmpty, startCase,
+} from '@cogoport/utils';
 
 import { GenericObject, FunctionObjects, FieldType } from '../Interfaces/index';
-
-const startCase=(arg:string):string=>{
-	return arg.replace(/_/g," ")
-}
 
 const ACTIONS = {
 	startCase,
@@ -14,19 +13,12 @@ type TypeObject = string | number | Date | GenericObject | React.FC ;
 
 type EmptyState = string | number | Date | React.FC;
 
-const isEmpty = (input: TypeObject) => {
-	if (input instanceof Date) {
-		return false;
-	}
-	return Object.keys(input).length === 0||(input as string).length==0;
-};
-
 const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, emptyState:EmptyState) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';
 	}
 
-	let val =itemField.key && itemData[itemField.key];
+	let val = getByKey(itemData, itemField.key);
 
 	if (itemField.func) {
 		if (functions[itemField.func]) {

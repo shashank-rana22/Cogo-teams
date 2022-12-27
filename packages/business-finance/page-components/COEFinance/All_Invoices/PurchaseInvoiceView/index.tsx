@@ -12,7 +12,7 @@ import FormatedDate from './FormatedDate/index';
 
 function PurchaseInvoice() {
 
-  const {data,loading,config}=useGetPurchaseViewList();
+  const {data,loading,config,handlePageChange,page}=useGetPurchaseViewList();
 
     const functions = {
         renderRemark:(itemData:any,field:any)=>(
@@ -35,7 +35,7 @@ function PurchaseInvoice() {
 
   return (
     <div>
-        <List config={config}  itemData={data} functions={functions} loading={loading}/>
+        <List config={config}  itemData={data} functions={functions} loading={loading} page={page} handlePageChange={handlePageChange}/>
     </div>
   )
 }
