@@ -24,7 +24,7 @@ function Header({
 						setStakeHolderType(val);
 					}}
 					value={stakeHolderType}
-					options={[
+					list={[
 						{ label: 'All Roles', value: 'all' },
 						{ label: 'Cogoport', value: 'cogoport' },
 						{ label: 'Channel Partner', value: 'channel_partner' },
