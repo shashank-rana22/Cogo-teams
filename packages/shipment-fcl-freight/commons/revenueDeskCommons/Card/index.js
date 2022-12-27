@@ -70,7 +70,7 @@ function Card({
 				<>
 					{view ? (
 						<BookingPreference
-							// loading={bookingLoading}
+							loading={bookingLoading}
 							bookingData={bookingData?.list}
 						/>
 					) : null}

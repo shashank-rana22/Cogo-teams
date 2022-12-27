@@ -24,7 +24,6 @@ function RevenueList({
 	const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
 	const handleChangeSerial = (value) => {
-		console.log(value);
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
 	};
@@ -60,7 +59,10 @@ function RevenueList({
 
 			<Tabs
 				activeTab={activeTab}
-				onChange={(tab) => setActiveTab(tab)}
+				onChange={(tab) => {setActiveTab(tab)
+									hookSetters.setFilters(page=1);
+				}
+			}
 			>
 				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
 					<PendingJobs

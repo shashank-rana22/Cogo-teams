@@ -21,7 +21,7 @@ const EmptyState = ({
 				<div
 					className={styles.emptyStateIcon}
 				>
-					<IcMAverage width={120} height={120} />
+					<IcMAverage width={90} height={90} />
 				</div>
            	) : null}
 		</div>

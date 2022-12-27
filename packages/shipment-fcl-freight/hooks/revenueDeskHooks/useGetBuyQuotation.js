@@ -16,7 +16,6 @@ const useGetBuyQuotation = (shipmentData) => {
 
     useRequest('/get_shipment_services_quotation', {manual: true});
 
-    console.log(shipmentData,'id');
     const getQuotation= async () => { 
 
             try{ 
