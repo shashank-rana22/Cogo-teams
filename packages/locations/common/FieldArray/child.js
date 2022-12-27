@@ -1,9 +1,9 @@
+import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
 import getElementController from '../../constants/getController';
 
 import styles from './styles.module.css';
-import TrashIcon from './trash.svg';
 
 function Child({
 	controls,
@@ -34,7 +34,7 @@ function Child({
 			})}
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
-				<TrashIcon
+				<IcMDelete
 					className={`form-fieldArray-${name}-remove`}
 					onClick={() => remove(index, 1)}
 					style={{ width: '2em', height: '2em' }}

@@ -1,7 +1,6 @@
 import { Input } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
-
-import SearchSvg from '../../assets/search.svg';
 
 import styles from './styles.module.css';
 
@@ -14,7 +13,7 @@ function SearchInput({
 	return (
 		<section className={styles.container}>
 			<Input
-				inputIcon={<SearchSvg />}
+				inputIcon={<IcMSearchlight />}
 				suffixInline
 				value={value}
 				onChange={(value) => onChange(value)}

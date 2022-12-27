@@ -1,4 +1,6 @@
-import { Select } from '@cogoport/components';
+import { Select, MultiSelect } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { asyncFieldsLocations, asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
 import React from 'react';
 
 import SearchInput from '../../../common/SearchInput';
@@ -11,7 +13,22 @@ function Filters({
 	onChangeFilters = () => {},
 	stakeHolderType = '',
 }) {
-	const modifiedControls = controls(filters?.role_functions || []);
+	const partnerOptions = useGetAsyncOptions({
+		...asyncFieldsPartner(),
+	});
+
+	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);
+
+	const getElements = (type) => {
+		switch (type) {
+			case 'select':
+				return Select;
+			case 'multiSelect':
+				return MultiSelect;
+			default:
+				return null;
+		}
+	};
 
 	return (
 		<section className={styles.container} id="rnp_role_list_filters_container">
@@ -23,21 +40,19 @@ function Filters({
 			/>
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
-					if (
-						control.name === 'stakeholder_id'
-						&& ['cogoport', 'customer'].includes(stakeHolderType)
-					) {
+					const Element = getElements(control.type);
+					if (control.name === 'stakeholder_id' && ['cogoport', 'customer'].includes(stakeHolderType)) {
 						return null;
 					}
 					if (control.name === 'navigation' && stakeHolderType === 'customer') {
 						return null;
 					}
 					return (
-						<Select
-							className={styles.select}
+						<Element
 							{...control}
+							className={styles.select}
 							value={filters?.[control?.name] || ''}
-							onChange={({ value }) => onChangeFilters({ [control?.name]: value || undefined })}
+							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
 						/>
 					);
 				})}

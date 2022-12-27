@@ -1,10 +1,10 @@
 import { Button, Tags, Placeholder } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import getValue from '../../../../../utils/getValue';
 
-import PencilSvg from './Pencil.svg';
 import styles from './styles.module.css';
 
 function ListBody({
@@ -16,39 +16,63 @@ function ListBody({
 	const newFunctions = useMemo(
 		() => ({
 			renderRoleDescription: (itemData) => (
-				<section>
-					<div className="title">{itemData?.name}</div>
-					<div className="sub-title">{itemData?.remarks}</div>
+				<section className={styles.role_description_container}>
+					<div className={styles.title}>{itemData?.name}</div>
+					<div className={styles.subtitle}>{itemData?.remarks}</div>
 				</section>
 			),
-			renderRoleType: (itemData) => (
-				<section
-					roleType={(itemData?.role_type || '').toLowerCase()}
-				>
-					<Tags>{itemData?.role_type}</Tags>
-				</section>
-			),
+			renderRoleType: (itemData) => {
+				const roleType = (itemData?.role_type || '').toLowerCase() === 'default';
+
+				return (
+					<section
+						className={styles.role_type_container}
+						style={{
+							backgroundColor : roleType ? '#6fa5ab' : '#888fd1',
+							color           : roleType ? '#fff' : '#fff',
+						}}
+					>
+						<Tags>{itemData?.role_type}</Tags>
+					</section>
+				);
+			},
 			renderPartner: (itemData) => (
-				<section>
+				<section className={styles.partner_container}>
 					{itemData?.partner?.business_name}
 				</section>
 			),
 			renderUserCount: (itemData) => (
-				<section>{itemData?.user_count}</section>
+				<section className={styles.partner_container}>
+					{itemData?.user_count}
+				</section>
 			),
 			renderHierarchyLevel: (itemData) => (
-				<section>
+				<section className={styles.partner_container}>
 					{startCase(itemData?.hierarchy_level)}
 				</section>
 			),
 			renderFunction: (itemData) => (
-				<section>
-					{(itemData?.role_functions || []).map((item) => <Tags>{item}</Tags>)}
+				<section className={styles.function_head}>
+					{(itemData?.role_functions || []).map((item) => (
+						<Tags
+							style={{ margin: 5 }}
+							themeType="orange"
+						>
+							{item}
+						</Tags>
+					))}
 				</section>
 			),
 			renderSubFunction: (itemData) => (
-				<section>
-					{(itemData?.role_sub_functions || []).map((item) => <Tags>{item}</Tags>)}
+				<section className={styles.function_head}>
+					{(itemData?.role_sub_functions || []).map((item) => (
+						<Tags
+							style={{ margin: 5 }}
+							themeType="blue"
+						>
+							{item}
+						</Tags>
+					))}
 				</section>
 			),
 			renderUsers: () => (
@@ -61,8 +85,8 @@ function ListBody({
 			),
 			renderEditButton: (itemData) => (
 				<section>
-					<Button onClick={() => redirect(itemData?.id)}>
-						<PencilSvg />
+					<Button themeType="secondary" onClick={() => redirect(itemData?.id)}>
+						<IcMEdit style={{ marginRight: 5 }} />
 						Edit
 					</Button>
 				</section>

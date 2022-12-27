@@ -47,14 +47,14 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 const get_all_sub_functions = (role_functions) => {
 	const role_sub_functions = [];
 	if (role_functions?.length > 0) {
-		role_functions.forEach((item) => {
+		role_functions?.forEach((item) => {
 			FUNCTION_SUB_FUNCTION_MAPPING[item].forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
 			});
 		});
 	} else {
 		Object.values(FUNCTION_SUB_FUNCTION_MAPPING).forEach((sub_functions) => {
-			sub_functions.forEach((sub_function) => {
+			sub_functions?.forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
 			});
 		});
@@ -62,23 +62,22 @@ const get_all_sub_functions = (role_functions) => {
 	return role_sub_functions;
 };
 
-export const controls = (role_functions) => [
+export const controls = (role_functions, partnerOptions) => [
 	{
-		name           : 'stakeholder_id',
-		placeholder    : 'Select partner',
-		size           : 'lg',
-		scope          : 'partner',
-		defaultOptions : true,
-		caret          : true,
-		isClearable    : true,
-		optionsListKey : 'partners',
-		params         : { filters: { status: 'active' } },
+		...partnerOptions,
+		name        : 'stakeholder_id',
+		placeholder : 'Select partner',
+		size        : 'lg',
+		type        : 'select',
+		isClearable : true,
+		params      : { filters: { status: 'active' } },
 	},
 	{
 		name           : 'navigation',
 		placeholder    : 'Select module',
 		size           : 'lg',
 		scope          : 'partner',
+		type           : 'select',
 		defaultOptions : true,
 		caret          : true,
 		isClearable    : true,
@@ -89,7 +88,7 @@ export const controls = (role_functions) => [
 		placeholder    : 'Select Function',
 		size           : 'lg',
 		scope          : 'partner',
-		multiple       : true,
+		type           : 'multiSelect',
 		defaultOptions : true,
 		caret          : true,
 		isClearable    : true,
@@ -118,7 +117,7 @@ export const controls = (role_functions) => [
 		placeholder    : 'Select Sub-function',
 		size           : 'lg',
 		scope          : 'partner',
-		multiple       : true,
+		type           : 'multiSelect',
 		defaultOptions : true,
 		options        : get_all_sub_functions(role_functions),
 		caret          : true,
@@ -130,6 +129,7 @@ export const controls = (role_functions) => [
 		placeholder    : 'Select Level',
 		size           : 'lg',
 		scope          : 'partner',
+		type           : 'select',
 		defaultOptions : true,
 		caret          : true,
 		isClearable    : true,

@@ -19,12 +19,10 @@ function Header({
 
 			<div className={styles.role_group}>
 				<Pills
-					onChange={(val) => {
-						// onChangeFilters({ ...getFilter(val) });
-						setStakeHolderType(val);
-					}}
+					className={styles.pills}
+					onChange={(val) => setStakeHolderType(val[0])}
 					value={stakeHolderType}
-					options={[
+					list={[
 						{ label: 'All Roles', value: 'all' },
 						{ label: 'Cogoport', value: 'cogoport' },
 						{ label: 'Channel Partner', value: 'channel_partner' },
