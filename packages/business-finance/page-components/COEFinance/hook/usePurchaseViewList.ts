@@ -16,7 +16,7 @@ const  useGetPurchaseViewList=()=> {
 				},
 			authKey : 'get_purchase_bills_list',
 		},
-		{ autoCancel: false },
+		{ manual: false },
 	);
 
 	useEffect(()=>{
