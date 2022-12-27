@@ -1,6 +1,5 @@
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
-import { useCallback } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
@@ -31,24 +30,23 @@ function useGetAsyncOptions({
 	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-	}, { manual: true });
+	}, { manual: true, autoCancel: false });
 
-	const onSearch = (inputValue: string) => {
+	const onSearch = (inputValue: string | undefined) => {
 		debounceQuery(inputValue);
 	};
 
-	const onHydrateValue = useCallback(async (value: any) => {
+	const onHydrateValue = async (value: string[] | string) => {
 		const res = await triggerSingle({
 			params: merge(params, { filters: { [valueKey]: value } }),
 		});
-		//
-		console.log('options', { res });
-		//
-		return { [valueKey]: 'value', [labelKey]: 'Awesome' };
-	}, []);
+
+		if (Array.isArray(value)) return res?.data?.list || [];
+		return res?.data?.list?.[0] || {};
+	};
 
 	return {
-		loading,
+		loading: loading || loadingSingle,
 		onSearch,
 		options,
 		labelKey,
