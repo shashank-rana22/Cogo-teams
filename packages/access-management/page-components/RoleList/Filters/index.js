@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Select, MultiSelect } from '@cogoport/components';
 import React from 'react';
 
 import SearchInput from '../../../common/SearchInput';
@@ -13,6 +13,17 @@ function Filters({
 }) {
 	const modifiedControls = controls(filters?.role_functions || []);
 
+	const getElements = (type) => {
+		switch (type) {
+			case 'select':
+				return Select;
+			case 'multiSelect':
+				return MultiSelect;
+			default:
+				return null;
+		}
+	};
+
 	return (
 		<section className={styles.container} id="rnp_role_list_filters_container">
 			<SearchInput
@@ -23,6 +34,7 @@ function Filters({
 			/>
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
+					const Element = getElements(control.type);
 					if (
 						control.name === 'stakeholder_id'
 						&& ['cogoport', 'customer'].includes(stakeHolderType)
@@ -33,7 +45,7 @@ function Filters({
 						return null;
 					}
 					return (
-						<Select
+						<Element
 							{...control}
 							className={styles.select}
 							value={filters?.[control?.name] || ''}
