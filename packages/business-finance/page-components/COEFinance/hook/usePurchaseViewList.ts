@@ -12,12 +12,8 @@ const  useGetPurchaseViewList=()=> {
 			method  : 'get',
 			authKey : 'get_purchase_bills_list',
 		},
-		{ autoCancel: false },
+		{ autoCancel: true },
 	);
-
-	useEffect(() => {
-		trigger();
-	}, []);
 
 const config=PURCHASE_VIEW_CONFIG;
     

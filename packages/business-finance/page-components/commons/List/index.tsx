@@ -2,14 +2,14 @@ import React, { ReactNode } from 'react';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
-import { ConfigType, NestedObj,FunctionObjects } from '../Interfaces/index';
+import { ConfigType, NestedObj,FunctionObjects,ListDataProps } from '../Interfaces/index';
 import commonFunctions from "../..//commons/List/commonFunctions";
 
 export interface Props {
 	config: ConfigType;
 	sort?: NestedObj;
 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>
-	itemData?: any[];
+	itemData: ListDataProps;
 	renderHeaderCheckbox?:()=>(ReactNode | '');
 	functions?:FunctionObjects;
 	loading?:boolean;
@@ -22,26 +22,7 @@ function List({
 	const {
 		showHeader = true, fields, headerStyles, itemStyles, bodyStyles, showHeaderCheckbox,
 	} = config;
-	// const handleRender = () => {
-	// 	if (loading) {
-	// 		return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
-	// 			return <LoadingState fields={fields} isLast={item === 10} />;
-	// 		});
-	// 	}
-	// 	if (!list?.length) {
-	// 		return <EmptyState showContent={showContent} />;
-	// 	}
-
-	// 	return (list || []).map((item, i) => (
-	// 		<CardItem
-	// 			item={item}
-	// 			loading={loading}
-	// 			fields={fields}
-	// 			isLast={data?.list?.length === i + 1}
-	// 			service={service}
-	// 		/>
-	// 	));
-	// };
+	const {list}=itemData;
 	return (
 		<section>
 			{showHeader && !isMobile && (
@@ -55,7 +36,7 @@ function List({
 				/>
 			)}
 			<div style={bodyStyles}>
-				{(itemData || [1, 2, 3, 4, 5]).map((singleitem) => (
+				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
 					<CardColumn
 						fields={fields}
 						itemStyles={itemStyles}

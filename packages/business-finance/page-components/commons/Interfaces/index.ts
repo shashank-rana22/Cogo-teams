@@ -25,7 +25,7 @@ export interface SortingType {
 }
 
 export interface FieldType {
-	key : string;
+	key? : string;
 	topKey?: GenericObject;
 	bottomKey?: GenericObject;
 	label? : string | ReactNode;
@@ -47,4 +47,11 @@ export interface TableProps {
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
+}
+
+export interface ListDataProps{
+	list: object[];
+	pageIndex: number;
+	totalPage: number;
+	totalRecords: number;
 }

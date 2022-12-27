@@ -26,7 +26,7 @@ const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, 
 		return emptyState || '';
 	}
 
-	let val = itemData[itemField.key];
+	let val =itemField.key && itemData[itemField.key];
 
 	if (itemField.func) {
 		if (functions[itemField.func]) {

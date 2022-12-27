@@ -35,7 +35,7 @@ function PurchaseInvoice() {
 
   return (
     <div>
-        <List config={config}  itemData={data?.list} functions={functions} />
+        <List config={config}  itemData={data} functions={functions} loading={loading}/>
     </div>
   )
 }

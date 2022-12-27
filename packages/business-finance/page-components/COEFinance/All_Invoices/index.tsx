@@ -7,7 +7,6 @@ const AllInvoices =()=>{
 return(
     <div>
     <div className={styles.container}>
-
                 <div  onClick={()=>setIsPurchase(true)}>
                     <div className={isPurchase ? styles.subContainerClick :styles.subContainer }> PURCHASE INVOICE VIEW </div> 
                 </div>

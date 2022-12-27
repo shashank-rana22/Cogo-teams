@@ -23,7 +23,6 @@ export const PURCHASE_VIEW_CONFIG = {
 			topKey: {
 				key: 'jobNumber',
 				type: 'href',
-                redirectKey: 'shipmentId',
 			},
 			lowerKey: {
 				key: 'serviceType',
