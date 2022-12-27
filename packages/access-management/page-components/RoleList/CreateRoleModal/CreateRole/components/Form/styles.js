@@ -35,7 +35,7 @@ export const FormLabel = styled.div`
 `;
 
 export const InputGroup = styled.div`
-	flex: 1;
+	flex;
 
 	display: flex;
 	flex-direction: column;

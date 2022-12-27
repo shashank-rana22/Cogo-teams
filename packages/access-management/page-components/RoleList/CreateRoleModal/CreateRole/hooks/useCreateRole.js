@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useFormCogo } from '@cogoport/front/hooks';
-import { useSelector } from '@cogo/store';
 import { useRequest } from '@cogo/commons/hooks';
+import { useSelector } from '@cogo/store';
 import { toast } from '@cogoport/front/components';
-import { controls } from '../utils/controls';
+import { useFormCogo } from '@cogoport/front/hooks';
+import { useState } from 'react';
+
 import functionSubFunctionMapping from '../../../../../configurations/function-sub-function-mapping';
+import { controls } from '../utils/controls';
 
 const useCreateRole = ({
 	onChangeShowCreateRoleModal = () => {},
@@ -33,8 +34,8 @@ const useCreateRole = ({
 		try {
 			const payload = {
 				...values,
-				role_sub_functions: values?.role_sub_functions || [],
-				stakeholder_type: 'partner',
+				role_sub_functions : values?.role_sub_functions || [],
+				stakeholder_type   : 'partner',
 			};
 
 			const response = await createRoleApi.trigger({ data: payload });

@@ -1,29 +1,43 @@
+import { Select, MultiSelect } from '@cogoport/components';
 import React from 'react';
-import Select from '@cogo/business-modules/form/components/Business/Select';
-import { Container, SelectContainer } from './styles';
-import { controls } from './utils/controls';
+
 import SearchInput from '../../../common/SearchInput';
 
-const Filters = ({
+import styles from './styles.module.css';
+import { controls } from './utils/controls';
+
+function Filters({
 	filters = {},
 	onChangeFilters = () => {},
 	stakeHolderType = '',
-}) => {
+}) {
 	const modifiedControls = controls(filters?.role_functions || []);
 
+	const getElements = (type) => {
+		switch (type) {
+			case 'select':
+				return Select;
+			case 'multiSelect':
+				return MultiSelect;
+			default:
+				return null;
+		}
+	};
+
 	return (
-		<Container id="rnp_role_list_filters_container">
+		<section className={styles.container} id="rnp_role_list_filters_container">
 			<SearchInput
 				value={filters?.q || ''}
 				onChange={(value) => onChangeFilters({ q: value || undefined })}
-				size="lg"
+				size="md"
 				placeholder="Search Role"
 			/>
-			<SelectContainer id="rnp_role_list_filters_select_container">
+			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
+					const Element = getElements(control.type);
 					if (
-						control.name === 'stakeholder_id' &&
-						['cogoport', 'customer'].includes(stakeHolderType)
+						control.name === 'stakeholder_id'
+						&& ['cogoport', 'customer'].includes(stakeHolderType)
 					) {
 						return null;
 					}
@@ -31,18 +45,17 @@ const Filters = ({
 						return null;
 					}
 					return (
-						<Select
+						<Element
 							{...control}
+							className={styles.select}
 							value={filters?.[control?.name] || ''}
-							onChange={(value) =>
-								onChangeFilters({ [control?.name]: value || undefined })
-							}
+							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
 						/>
 					);
 				})}
-			</SelectContainer>
-		</Container>
+			</div>
+		</section>
 	);
-};
+}
 
 export default Filters;

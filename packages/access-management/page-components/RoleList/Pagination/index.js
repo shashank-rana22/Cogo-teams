@@ -1,4 +1,6 @@
 import React from 'react';
+
+import CaretRightBlackSvg from './caret-right-black.svg';
 import {
 	Container,
 	Content,
@@ -6,9 +8,8 @@ import {
 	CaretLeftContainer,
 	CaretRightContainer,
 } from './styles';
-import CaretRightBlackSvg from './caret-right-black.svg';
 
-const Pagination = ({ listAuthRolesApi = {}, onChangeParams = () => {} }) => {
+function Pagination({ listAuthRolesApi = {}, onChangeParams = () => {} }) {
 	const { loading = false, data = {} } = listAuthRolesApi;
 	const {
 		list: roleListData = [],
@@ -42,9 +43,7 @@ const Pagination = ({ listAuthRolesApi = {}, onChangeParams = () => {} }) => {
 
 				<CaretRightContainer
 					id="rnp_role_list_pagination_right_arrow_container"
-					onClick={() =>
-						onChangeParams({ page: page < totalPage ? page + 1 : totalPage })
-					}
+					onClick={() => onChangeParams({ page: page < totalPage ? page + 1 : totalPage })}
 					disabled={loading || !(page < totalPage || totalPage === 0)}
 				>
 					<CaretRightBlackSvg id="rnp_role_list_pagination_right_arrow" />
@@ -52,6 +51,6 @@ const Pagination = ({ listAuthRolesApi = {}, onChangeParams = () => {} }) => {
 			</Arrows>
 		</Container>
 	);
-};
+}
 
 export default Pagination;
