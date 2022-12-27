@@ -22,9 +22,6 @@ function CardColumn({
 	isMobile,
 }:Props) {
 	const { clickable } = config;
-	console.log(singleitem,'singleitem');
-	const { newFunctions } = itemFunctions({ functions });
-	
 	return (
 		<section style={itemStyles}>
 			<div
@@ -51,7 +48,7 @@ function CardColumn({
 								{getValue(
 									singleitem,
 									field,
-									newFunctions,
+									functions,
 									'sample styling for the table',
 								)}
 							</div>

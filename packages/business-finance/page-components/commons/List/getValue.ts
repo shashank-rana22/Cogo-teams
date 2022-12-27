@@ -21,7 +21,7 @@ const isEmpty = (input: TypeObject) => {
 	return Object.keys(input).length === 0||(input as string).length==0;
 };
 
-const getValue = (itemData:any, itemField:FieldType, newFunctions:FunctionObjects, emptyState:EmptyState) => {
+const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, emptyState:EmptyState) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';
 	}
@@ -29,8 +29,8 @@ const getValue = (itemData:any, itemField:FieldType, newFunctions:FunctionObject
 	let val = itemData[itemField.key];
 
 	if (itemField.func) {
-		if (newFunctions[itemField.func]) {
-			val = newFunctions[itemField.func](itemData, itemField);
+		if (functions[itemField.func]) {
+			val = functions[itemField.func](itemData, itemField);
 		} else if (ACTIONS[itemField.func as keyof typeof ACTIONS]) {
 			val = ACTIONS[itemField.func as keyof typeof ACTIONS](val);
 		}
