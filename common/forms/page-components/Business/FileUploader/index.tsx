@@ -19,9 +19,7 @@ function FileUploader(props: any) {
 		...rest
 	} = props;
 
-	// const [showUploadedFileName, setShowUploadedFileName] = useState(true);
 	const [percentComplete, setPercentComplete] = useState(0);
-	// const [isOnline, setIsOnline] = useState(true);
 	const [fileName, setFileName] = useState(null);
 
 	useInterval(() => {
@@ -29,18 +27,6 @@ function FileUploader(props: any) {
 			setPercentComplete(percentComplete + 3);
 		}
 	}, 120);
-
-
-
-
-	// const handleRemove = (file) => {
-	// 	const restFiles = uploadedFileList.filter((item) => file.uid !== item.uid);
-	// 	setUploadedFileList(restFiles);
-	// 	if (multiple) handleFilesChange(restFiles);
-	// 	else onChange(null);
-	// 	setPercentComplete(0);
-	// };
-
 
 	const [{ loading: addLoading }, triggerAdd] = useRequest({
 		method : 'GET',
@@ -52,13 +38,39 @@ function FileUploader(props: any) {
     let i=0;
 	const handleChange = async(values: any) => {
 	console.log("valueeees",values)
+	 if(typeof values === 'object'){
+		try {
+			const {data} = await triggerAdd({ 
+				params:  { file_name: new Date().getTime()}
+			});
+			console.log("responseee",data)
+			const { url, headers } = data;
+			console.log("url",url)
+			try {
+				await triggerUpload({
+					url     : url,
+					data    : values,
+					headers : {
+						'Content-Type': values.type,
+					},
+				});
+				
+			} catch(err) {
+				console.log({err})
+			}
+			console.log("values[i]", values.name)
+			setFileName(values)
+		} catch (err:any) {
+			return Toast.error('File Upload failed.......');
+		}
+	}
+     if(Array.isArray(values)){
 	while(i<values.length){
 		try {
 			const {data} = await triggerAdd({ 
 				params:  { file_name: new Date().getTime()}  
 			});
 			console.log("responseee",data)
-			
 			const { url, headers } = data;
 			console.log("url",url)
 			try {
@@ -69,23 +81,25 @@ function FileUploader(props: any) {
 						'Content-Type': values[i].type,
 					},
 				});
-				i++
+				
 			} catch(err) {
 				console.log({err})
 			}
+			console.log("values[i]", values[i].name)
 			setFileName(values)
-
+			i++
 		} catch (err:any) {
 			return Toast.error('File Upload failed.......');
 		}
 	}
+}
 	};
 	
 	return (
 		<>
 			<Upload {...rest}  value={fileName} multiple={multiple} onChange={handleChange}/>
-			{percentComplete > 0 && percentComplete<100 &&
-			<progress value={percentComplete} max="100">3%</progress>}
+			{/* {percentComplete > 0 && percentComplete<100 &&
+			<progress value={percentComplete} max="100">3%</progress>} */}
 		</>
 	)
 	
