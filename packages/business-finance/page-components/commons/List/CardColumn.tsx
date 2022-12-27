@@ -3,7 +3,6 @@ import React from 'react';
 import getValue from './getValue';
 import { FieldType, FunctionObjects, ConfigType } from './Interfaces/index';
 import styles from './styles.module.css';
-import itemFunctions from './renderFunctions';
 
 export interface Props {
 	fields: FieldType[];
