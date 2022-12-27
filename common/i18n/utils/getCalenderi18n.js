@@ -1,6 +1,6 @@
 import { hi, en, en_uk } from '../configurations';
 
-const getCalendori18n = (lg, country) => {
+const getCalenderi18n = (lg, country) => {
 	const months = {
 		hi_IN: hi.months,
 		en_IN: en.months,
@@ -38,4 +38,4 @@ const getCalendori18n = (lg, country) => {
 	};
 };
 
-export default getCalendori18n;
+export default getCalenderi18n;
