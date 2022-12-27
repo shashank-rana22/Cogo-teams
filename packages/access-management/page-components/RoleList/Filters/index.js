@@ -51,7 +51,7 @@ function Filters({
 						<Element
 							{...control}
 							className={styles.select}
-							value={filters?.[control?.name] || ''}
+							value={filters?.[control?.name] || '8e818403-1b10-44db-a49b-91eb7fac3971'}
 							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
 						/>
 					);
