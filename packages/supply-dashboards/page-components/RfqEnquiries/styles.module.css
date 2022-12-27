@@ -1,0 +1,20 @@
+.heading {
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 23px;
+	color: #221f20;
+}
+
+.line {
+	max-width: 100px;
+	background-color: #ed3726;
+	border: 2px solid #ed3726;
+}
+
+.stats {
+	max-width: 1300px;
+	min-height: 200.89px;
+	background: #fff;
+	border-radius: 4px;
+}

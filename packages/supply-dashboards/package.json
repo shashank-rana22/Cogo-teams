@@ -1,0 +1,17 @@
+{
+  "name": "@cogoport/supply-dashboards",
+  "version": "0.1.0",
+  "description": "Shipment FCL freight package for Cogoport",
+  "private": true,
+  "main": "./index.js",
+  "types": "./index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.137",
+    "@cogoport/icons-react": "^1.0.48",
+    "@cogoport/next": "workspace:0.1.0",
+    "@cogoport/request": "workspace:0.1.0",
+    "@cogoport/utils": "^1.2.2",
+    "@cogoport/store": "workspace:0.1.0",
+    "react": "18.2.0"
+  }
+}

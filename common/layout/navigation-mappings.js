@@ -79,6 +79,15 @@ const navigationMappings = {
 		main_apis   : ['list_auth_roles'],
 		module_type : 'crm',
 	},
+	supply_dashboards: {
+		key         : 'supply_dashboards',
+		title       : 'Supply Dashboards',
+		icon        : <IcMBookingDesk />,
+		href        : '/supply/dashboards',
+		as          : '/supply/dashboards',
+		type        : 'link',
+		module_type : 'dashboards',
+	},
 };
 
 export default navigationMappings;
