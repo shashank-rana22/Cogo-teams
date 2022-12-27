@@ -14,14 +14,10 @@ const useCreateRole = ({
 
 	const formProps = useForm();
 
-	const type = formProps?.watch('role_functions') || [];
-
-	const subRoleFunctionOptions = [];
-	type?.forEach((subType) => {
-		subRoleFunctionOptions.push(...(functionSubFunctionMapping[subType] || []));
-	});
-
-	const proccessedControls = controls(subRoleFunctionOptions || []);
+	// const subRoleFunctionOptions = [];
+	// type?.forEach((subType) => {
+	// 	subRoleFunctionOptions.push(...(functionSubFunctionMapping[subType] || []));
+	// });
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/create_auth_role',
@@ -60,7 +56,7 @@ const useCreateRole = ({
 	};
 
 	return {
-		proccessedControls,
+		controls,
 		formProps,
 		errors,
 		onSubmit,

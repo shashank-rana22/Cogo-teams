@@ -14,7 +14,6 @@ function CreateRoleModal({
 	if (!showCreateRoleModal) return null;
 
 	return (
-
 		<Modal size="lg" show={showCreateRoleModal} onClose={onChangeShowCreateRoleModal} placement="center">
 			<Modal.Header title={(
 				<div className={styles.heading_container} id="rnp_role_list_create_role_heading_container">

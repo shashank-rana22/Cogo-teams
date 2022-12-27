@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
-import { InputController, SelectController } from '@cogoport/forms';
+import { InputController, SelectController, MultiselectController } from '@cogoport/forms';
 import React from 'react';
+
+import functionSubFunctionMapping from '../../../../../../configurations/function-sub-function-mapping';
 
 import styles from './styles.module.css';
 
@@ -11,6 +13,9 @@ const getElementController = (type = 'text') => {
 
 		case 'select':
 			return SelectController;
+
+		case 'multiSelect':
+			return MultiselectController;
 
 		default:
 			return null;
@@ -24,7 +29,16 @@ function Form({
 	onSubmit = () => {},
 	onErrors = () => {},
 }) {
-	const { handleSubmit, control } = formProps;
+	const { handleSubmit, control, watch } = formProps;
+	const type = watch('role_functions') || [];
+
+	console.log('type', type);
+
+	const subRoleFunctionOptions = [];
+
+	type?.forEach((subType) => {
+		subRoleFunctionOptions.push(...(functionSubFunctionMapping[subType] || []));
+	});
 
 	return (
 		<form
@@ -32,23 +46,28 @@ function Form({
 			id="rnp_role_list_create_role_form"
 			onSubmit={handleSubmit(onSubmit, onErrors)}
 		>
-			{controls?.map((controlItem) => {
-				const Element = getElementController(controlItem.type);
+			{controls.map((controlItem) => {
+				const el = { ...controlItem };
+				const Element = getElementController(el.type);
+
+				if (el.name === 'role_sub_functions') {
+					el.options = subRoleFunctionOptions;
+				}
 
 				if (!Element) return null;
 
 				return (
-					<div style={{ flex: controlItem.flex }}>
+					<div style={{ flex: el.flex }}>
 						<div className={styles.form_group}>
-							<span>{controlItem?.label}</span>
+							<span>{el.label}</span>
 							<div className={styles.input_group}>
 								<Element
-									{...controlItem}
+									{...el}
 									control={control}
-									id={`rnp_role_list_create_role_form_${controlItem?.name}_input`}
+									id={`rnp_role_list_create_role_form_${el.name}_input`}
 								/>
 								<div className={styles.error_message}>
-									{errors?.[controlItem?.name]?.message}
+									{errors?.[el.name]?.message}
 								</div>
 							</div>
 						</div>

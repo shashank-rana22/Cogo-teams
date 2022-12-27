@@ -10,13 +10,13 @@ function CreateRole({
 	redirect = () => {},
 }) {
 	const {
-		proccessedControls, formProps, errors, onSubmit, onErrors, createRoleApi,
+		controls, formProps, errors, onSubmit, onErrors, createRoleApi,
 	} =	useCreateRole({ onChangeShowCreateRoleModal, redirect });
 
 	return (
 		<section className={styles.section} id="rnp_role_list_create_role_container">
 			<Form
-				controls={proccessedControls}
+				controls={controls}
 				formProps={formProps}
 				errors={errors}
 				onSubmit={onSubmit}
