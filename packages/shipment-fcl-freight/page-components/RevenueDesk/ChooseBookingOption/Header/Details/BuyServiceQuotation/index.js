@@ -3,13 +3,13 @@ import React from 'react';
 import { startCase } from '@cogoport/utils';
 // import { getFormattedPrice } from '@cogo/i18n';
 import EmptyState from '../../../../../../commons/EmptyState';
-import getShipmentQuotation from '../../../../../../hooks/revenueDeskHooks/getShipmentQuotation';
-import QuotationData from '../../../../../../hooks/revenueDeskHooks/QuotationData.json';
+import useGetBuyQuotation from '../../../../../../hooks/revenueDeskHooks/useGetBuyQuotation';
 import styles from './styles.module.css';
+
 
 const BuyServiceQuotation = ({ shipmentData = {} }) => {
 	
-	const {service_charges, loading} = getShipmentQuotation(shipmentData?.id);
+	const {service_charges, loading} = useGetBuyQuotation(shipmentData);
 
 	const EmptyContent = {
 		heading: 'No Results Found!',

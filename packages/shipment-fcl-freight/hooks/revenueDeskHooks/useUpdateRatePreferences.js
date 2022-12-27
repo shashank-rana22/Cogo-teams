@@ -80,7 +80,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 					refetch();
 				} else {
 					setShow(false);
-					Toast.error('Something went wrong');
+					Toast.error('Something went wrong', <Partial>{postion= "top-center"}</Partial>);
 				}
 			} catch (error) {
 				console.log(error);
