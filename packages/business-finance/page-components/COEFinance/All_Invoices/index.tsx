@@ -1,9 +1,11 @@
 import React,{useState} from "react"
+import PurchaseInvoice from './PurchaseInvoiceView';
 import styles from './styles.module.css'
 const AllInvoices =()=>{
     const [isPurchase,setIsPurchase]=useState(true);
 
 return(
+    <div>
     <div className={styles.container}>
 
                 <div  onClick={()=>setIsPurchase(true)}>
@@ -13,6 +15,9 @@ return(
                     <div className={!isPurchase ? styles.subContainerClick :styles.subContainer } >SHIPMENT ID VIEW</div>
                 </div>
 
+
+    </div>
+           {isPurchase && <PurchaseInvoice/>}
     </div>
 )
       
