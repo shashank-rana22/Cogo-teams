@@ -59,7 +59,7 @@ const ShipmentFilters = ({
 					options={serviceOptions}
 					value={currentShipment}
 					onChange={handleShipmentChange}
-                    style={{ width: '80px'}}
+                    className={styles.selectClass}
 				/>
 				</div>
                 <div className={styles.searchBox}>
@@ -69,7 +69,8 @@ const ShipmentFilters = ({
 					placeholder="Search by SID, BL, Container No, Booking Number"
 					value={value}
 					onChange={(e) => setValue(e)}
-					inputIcon={<IcMSearchlight style={{ marginTop: '5px' }} />}
+					inputIcon={<IcMSearchlight width={20} height={20}/>}
+					className={styles.inputClass}
 				/>
                 </div>
 				<div>

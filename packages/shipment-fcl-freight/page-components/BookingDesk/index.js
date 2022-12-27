@@ -21,9 +21,6 @@ const BookingDesk = () => {
 		list: { total, data },
 	} = useListShipments();
     console.log(activeTab, 'activeTab');
-
-	// const {list:data, total_count:total} = ListData;
-	
 	return (
 		<div className={styles.container}>
 			<div className={styles.headingWrapper}>
@@ -53,7 +50,7 @@ const BookingDesk = () => {
 						type={'compact'}
 						totalItems={total}
 						currentPage={page}
-						PageSize={10}
+						pageSize={10}
 						handlePageChange={(val) =>{
 							hookSetters.setFilters({
 								...filters,
@@ -86,7 +83,7 @@ const BookingDesk = () => {
 						type={'number'}
 						totalItems={total}
 						currentPage={1}
-						PageSize={10}
+						pageSize={10}
 						handlePageChange={(number) =>{
 							hookSetters.setFilters({
 								...filters,
