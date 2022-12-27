@@ -1,6 +1,6 @@
 import Card from "../../../../commons/revenueDeskCommons/Card";
 import styles from './styles.module.css';
-import {Pagination}  from '@cogoport/components'
+import {Pagination,Loader}  from '@cogoport/components'
 
 function PendingJobs({
 	data = [],
@@ -22,6 +22,7 @@ function PendingJobs({
 		hookSetters.setFilters({ ...filters, page: pageNumber})
 	}
 
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -37,7 +38,7 @@ function PendingJobs({
 					</div>
 				) : null}
 			</div>
-
+			{data.length?
 
 			<div className={styles.cardContainer}>
 				{(data || []).map((item) => (
@@ -49,7 +50,11 @@ function PendingJobs({
 						shipment_type={shipment_type}
 					/>
 				))}
-			</div>
+			</div> :
+				<div className={styles.loaderContainer}>
+					<Loader/>
+				</div>
+			}
 			
 			<div>
 					{total > 10 ? (
