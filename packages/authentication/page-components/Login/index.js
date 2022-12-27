@@ -12,7 +12,6 @@ function Login() {
 	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
-
 	return (
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>

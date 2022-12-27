@@ -5,7 +5,7 @@ import bfRequest from '../helpers/bf-request';
 const commonConfig = {
 	cache          : false,
 	defaultOptions : {
-		ssr    : false,
+		ssr: false,
 	},
 };
 

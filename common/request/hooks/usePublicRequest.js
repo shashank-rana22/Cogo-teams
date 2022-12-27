@@ -5,8 +5,8 @@ import publicRequest from '../helpers/public-request';
 const commonConfig = {
 	cache          : false,
 	defaultOptions : {
-		ssr    : false,
-    },
+		ssr: false,
+	},
 };
 
 const usePublicRequest = makeUseAxios({

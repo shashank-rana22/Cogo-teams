@@ -1,5 +1,5 @@
 import { Upload, Toast } from '@cogoport/components';
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import {useRequest,usePublicRequest} from '@cogoport/request'
 
 import useInterval from '../../../hooks/useInterval';
@@ -24,59 +24,14 @@ function FileUploader(props: any) {
 	// const [isOnline, setIsOnline] = useState(true);
 	const [fileName, setFileName] = useState(null);
 
-	let newValue = value;
-
-	if ( multiple) {
-		newValue = (value || []).map((item: any, i: number): any => ({
-			url  : item,
-			name : `${docName}`,
-			uid  : item,
-		}));
-	}
-
-	const [uploadedFileList, setUploadedFileList] = useState(
-		filesList || Array.isArray(newValue)
-			? newValue
-			: ((value || {}).url && [value]) || [],
-	);
-
 	useInterval(() => {
 		if (percentComplete > 0 && percentComplete < 95) {
 			setPercentComplete(percentComplete + 3);
 		}
 	}, 120);
 
-	// useEffect(() => {
-	// 	window.addEventListener('online', () => setIsOnline(true));
-	// 	window.addEventListener('offline', () => setIsOnline(false));
-	// 	return () => {
-	// 		window.removeEventListener('online', () => {});
-	// 		window.removeEventListener('offline', () => {});
-	// 	};
-	// }, []);
 
-	useEffect(() => {
-		let newValue1 = value;
-		if (onlyURLOnChange && multiple) {
-			newValue1 = (value || []).map((item: any, i: number) => ({
-				url  : item,
-				name : `${docName}${i + 1}`,
-				uid  : item,
-			}));
-		}
-		let filesToSet = [];
 
-		if (filesList || Array.isArray(newValue)) {
-			filesToSet = newValue1;
-		} else if (value?.url) {
-			filesToSet = [value];
-		} else if (value) {
-			const newDocNames = (value || '').split('/');
-			const newDocName = newDocNames[newDocNames.length - 1];
-			filesToSet = [{ url: value, uid: value, name: newDocName || 'img' }];
-		}
-		setUploadedFileList(filesToSet);
-	}, [value]);
 
 	// const handleRemove = (file) => {
 	// 	const restFiles = uploadedFileList.filter((item) => file.uid !== item.uid);
@@ -94,25 +49,13 @@ function FileUploader(props: any) {
 	const [{ loading: uploadLoading }, triggerUpload] = usePublicRequest({
 		method: 'PUT',
 	}, { manual: true });
-
-
-	// const handleChange = (info: any) => {
-	// 	if (maxSize && info?.size > Number(maxSize)) {
-	// 		const sizeInMb = (maxSize / 1048576).toFixed(2);
-	// 		return Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
-	// 	}
-	// 	if (!isOnline) {
-	// 		return Toast.error('File Upload failed, Please Check Your Internet connection');
-	// 	}
-	// 	setPercentComplete(1);
-	// 	setFileName(info);
-	// 	return null;
-	// };
+    let i=0;
 	const handleChange = async(values: any) => {
 	console.log("valueeees",values)
+	while(i<values.length){
 		try {
 			const {data} = await triggerAdd({ 
-				params:  { file_name: new Date().getTime() }  
+				params:  { file_name: new Date().getTime()}  
 			});
 			console.log("responseee",data)
 			
@@ -121,11 +64,12 @@ function FileUploader(props: any) {
 			try {
 				await triggerUpload({
 					url     : url,
-					data    : values,
+					data    : values[i],
 					headers : {
-						'Content-Type': values.type,
+						'Content-Type': values[i].type,
 					},
 				});
+				i++
 			} catch(err) {
 				console.log({err})
 			}
@@ -134,8 +78,18 @@ function FileUploader(props: any) {
 		} catch (err:any) {
 			return Toast.error('File Upload failed.......');
 		}
+	}
 	};
-	return <Upload {...rest}  value={fileName} multiple={multiple} onChange={handleChange}/>;
+	
+	return (
+		<>
+			<Upload {...rest}  value={fileName} multiple={multiple} onChange={handleChange}/>
+			{percentComplete > 0 && percentComplete<100 &&
+			<progress value={percentComplete} max="100">3%</progress>}
+		</>
+	)
+	
+	
 }
 
 export default FileUploader;

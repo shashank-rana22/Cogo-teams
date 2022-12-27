@@ -23,7 +23,7 @@ bfRequest.interceptors.request.use((oldConfig) => {
 
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, authKey);
-	
+
 	return {
 		...axiosConfig,
 		paramsSerializer : { serialize: decodedCustomSerializer },
