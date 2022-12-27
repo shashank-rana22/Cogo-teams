@@ -17,8 +17,6 @@ const modulesToTranspile = loadCogoModules();
 
 const withTM = require('next-transpile-modules')(modulesToTranspile);
 
-const mode = process.env.NODE_ENV || 'development';
-
 module.exports = withTM({
 	env             : { ...loadEnvConfig.parsed },
 	reactStrictMode : true,

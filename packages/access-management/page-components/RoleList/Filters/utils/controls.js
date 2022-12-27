@@ -62,18 +62,15 @@ const get_all_sub_functions = (role_functions) => {
 	return role_sub_functions;
 };
 
-export const controls = (role_functions) => [
+export const controls = (role_functions, partnerOptions) => [
 	{
-		name           : 'stakeholder_id',
-		placeholder    : 'Select partner',
-		size           : 'lg',
-		scope          : 'partner',
-		type           : 'select',
-		defaultOptions : true,
-		caret          : true,
-		isClearable    : true,
-		optionsListKey : 'partners',
-		params         : { filters: { status: 'active' } },
+		...partnerOptions,
+		name        : 'stakeholder_id',
+		placeholder : 'Select partner',
+		size        : 'lg',
+		type        : 'select',
+		isClearable : true,
+		params      : { filters: { status: 'active' } },
 	},
 	{
 		name           : 'navigation',

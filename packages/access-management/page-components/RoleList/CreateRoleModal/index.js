@@ -1,5 +1,5 @@
 import { useSelector } from '@cogo/store';
-import { Modal } from '@cogoport/front/components';
+import { Modal } from '@cogoport/components';
 import React from 'react';
 
 import CreateRole from './CreateRole';
