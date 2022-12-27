@@ -50,7 +50,6 @@ const getOtherApiPipe = (url, authorizationparameters, getStoreState) => {
 		}
 		return { pipe: null, isMain: true };
 	} catch (err) {
-		console.log(err);
 		return { pipe: null, isMain: true };
 	}
 };
