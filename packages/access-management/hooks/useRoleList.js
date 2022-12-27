@@ -56,7 +56,7 @@ const useRoleList = () => {
 	const [{ data, loading, error }, trigger] = useRequest({
 		method : apiMethod,
 		url    : apiUri,
-	}, { manual: true, autoCancel: false });
+	}, { autoCancel: false });
 
 	useEffect(() => onChangeParams({ page: 1 }), [filters]);
 
@@ -67,7 +67,6 @@ const useRoleList = () => {
 	}, []);
 
 	const onChangeFilters = (values) => {
-		console.log('values', values);
 		setFilters((previousState) => ({
 			...getFilter(null),
 			...previousState,

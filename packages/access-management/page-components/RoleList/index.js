@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import useRoleList from '../../hooks/useRoleList';
@@ -6,7 +7,6 @@ import useRoleList from '../../hooks/useRoleList';
 import Filters from './Filters';
 import Header from './Header';
 import List from './List';
-// import Pagination from './Pagination';
 import styles from './styles.module.css';
 
 function RoleList() {
@@ -21,6 +21,8 @@ function RoleList() {
 		stakeHolderType,
 		setStakeHolderType,
 	} = useRoleList();
+
+	const { page = 0, page_limit: pageLimit = 0, total: totalPage = 0 } = listAuthRolesApi.data || {};
 
 	return (
 		<section className={styles.container} id="rnp_role_list_container">
@@ -41,10 +43,15 @@ function RoleList() {
 				<section className={styles.list_container} id="rnp_role_list_list_and_pagination_container">
 					<List listAuthRolesApi={listAuthRolesApi} redirect={redirect} />
 
-					{/* <Pagination */}
-					{/* 	listAuthRolesApi={listAuthRolesApi} */}
-					{/* 	onChangeParams={onChangeParams} */}
-					{/* /> */}
+					<div className={styles.pagination_container} id="rnp_role">
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={totalPage}
+							pageSize={pageLimit}
+							handlePageChange={(val) => onChangeParams({ page: val })}
+						/>
+					</div>
 				</section>
 			</section>
 
