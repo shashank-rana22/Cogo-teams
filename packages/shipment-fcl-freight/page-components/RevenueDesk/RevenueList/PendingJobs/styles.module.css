@@ -4,3 +4,8 @@
 	justify-content: flex-end;
     margin-bottom: 10px;
 }
+
+.loaderContainer{
+	display: flex;
+	justify-content: center;
+}

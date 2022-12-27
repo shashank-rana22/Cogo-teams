@@ -29,7 +29,6 @@ function Card({
 		view,
 	} = useListBookingPreference({ data, selectedService });
 
-
 	const activeService = activeTab === 'completed' ? selectedService?.id : clickedCard?.service?.id;
 
 	return (

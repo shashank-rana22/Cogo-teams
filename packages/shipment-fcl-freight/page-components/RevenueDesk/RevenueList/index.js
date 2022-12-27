@@ -21,18 +21,13 @@ function RevenueList({
 	controls = [],
 	shipment_type,
 }) {
-
 	const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
-
-
-
 	const handleChangeSerial = (value) => {
 		console.log(value);
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
 	};
-	
 	return (
 		<div>
 			<div className={styles.heading}>
@@ -62,8 +57,6 @@ function RevenueList({
 					</Popover> */}
 
 			</div>
-
-
 
 			<Tabs
 				activeTab={activeTab}

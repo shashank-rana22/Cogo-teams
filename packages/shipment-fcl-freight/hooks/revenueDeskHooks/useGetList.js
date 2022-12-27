@@ -1,123 +1,111 @@
-import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { Toast } from "@cogoport/components";
+import { useRequest } from "@cogoport/request";
+import { useEffect, useState } from "react";
 
-const useListShipments = (allParams) => {
-	const { shipment_type = 'fcl_freight', ...params } = allParams || {};
+const useListShipments = ({ status = "" }) => {
+  const shipment_type = "fcl_freight";
 
-	const [errors, setErrors] = useState({});
-	const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-	const [filters, setFilters] = useState({ page: 1,
-											 highlight: undefined,
-											 ...params });
-	const [list, setList] = useState({
-		data         : [],
-		total        : 0,
-		total_page   : 0,
-		fullResponse : {},
-		reverted     : 0,
-	});
-	
-	const { page, highlight = false, ...restFilters } = filters;
+  const [filters, setFilters] = useState({
+    page: 1,
+    highlight: undefined,
+  });
 
-	const [{ data:listShipmentData }, trigger] = useRequest('/list_shipments', { manual: true });
+  const [list, setList] = useState({
+    data: [],
+    total: 0,
+    total_page: 0,
+    fullResponse: {},
+    reverted: 0,
+  });
 
-	const service = `${shipment_type}_service`;
+  const { page, highlight = false, ...restFilters } = filters;
 
-	const listAPi = (restFilters, currentPage) => trigger({
-		params: {
-			filters:
-					allParams.status === 'completed'
-						? {
-							state: [
-								'completed',
-								'in_progress',
-								'confirmed_by_importer_exporter',
-							],
-							shipment_type: [
-								'fcl_freight',
-							].includes(shipment_type)
-								? shipment_type
-								: undefined,
-							[service]: {
-								state: [
-									'awaiting_service_provider_confirmation',
-									'confirmed_by_service_provider',
-								],
-							},
-							booking_confirmation_preferences_set: true,
-							...restFilters,
-						  }
-						: {
-							state: ['confirmed_by_importer_exporter', 'in_progress'],
-							shipment_type : ([
-								'fcl_freight',
-								'lcl_freight',
-								'air_freight',
-							].includes(shipment_type))
-								? shipment_type
-								: undefined,
-							[service]: {
-								state: 'awaiting_service_provider_confirmation',
-							},
-							booking_confirmation_preferences_not_set: true,
-							...restFilters,
-						  },
-			main_service_quotation_required : true,
-			revenue_desk_data_required      : true,
-			page_limit                      : 10,
-			page                            : currentPage,
-		},
-	});
+  const [, trigger] = useRequest("/list_shipments", {
+    manual: true,
+  });
 
-	const refetch = () => {
-		setLoading(true);
+  const completedStatus = {
+    state: ["completed", "in_progress", "confirmed_by_importer_exporter"],
+    ["fcl_freight_service"]: {
+      state: [
+        "awaiting_service_provider_confirmation",
+        "confirmed_by_service_provider",
+      ],
+    },
+    shipment_type,
+    booking_confirmation_preferences_set: true,
+  };
 
-		listAPi(restFilters, page)
-			.then((res) => {
-				const { data = { list: [], total: 0 } } = res;
-				setList(() => ({
-					data         : data?.list || [],
-					total        : data?.total_count,
-					total_page   : data?.total,
-					fullResponse : res.data,
-					reverted     : data?.stats?.reverted,
-				}));
-				setLoading(false);
-			})
-			.catch((e) => {
-				console.log(e);
-				setList(() => ({
-					data         : [],
-					total        : 0,
-					total_page   : 0,
-					fullResponse : {},
-					reverted     : 0,
-				}));
-				setLoading(false);
-			});
-	};
+  const pendingStatus = {
+    state: ["confirmed_by_importer_exporter", "in_progress"],
+    shipment_type,
+    ['fcl_freight_service']: {
+      state: "awaiting_service_provider_confirmation",
+    },
+    booking_confirmation_preferences_not_set: true,
+  };
 
-	useEffect(() => {
-		setLoading(true);
-		refetch();
-	}, [filters, JSON.stringify(params)]);
+  const refetch = async () => {
+    setLoading(true);
+    try {
+      const res = await trigger({
+        params: {
+          filters:
+            status === "completed"
+              ? { ...completedStatus, ...restFilters }
+              : { ...pendingStatus, ...restFilters },
+          main_service_quotation_required: true,
+          revenue_desk_data_required: true,
+          page_limit: 10,
+          page,
+        },
+      });
+      console.log({res})
+      if (res?.status===200) {
+        setLoading(false);
+		    const { data = { list: [], total: 0 } } = res;
+          setList(() => ({
+            data: data?.list || [],
+            total: data?.total_count,
+            total_page: data?.total,
+            fullResponse: res.data,
+            reverted: data?.stats?.reverted,
+          }));
+      }
+    } catch (err) {
+      setLoading(false);
+	  setList(() => ({
+		          data: [],
+		          total: 0,
+		          total_page: 0,
+		          fullResponse: {},
+		          reverted: 0,
+		        }));
+      console.log({ err });
+    }
+  };
 
-	const hookSetters = {
-		setLoading,
-		setFilters,
-		setErrors,
-		setList,
-	};
+  useEffect(() => {
+    setLoading(true);
+    refetch();
+  }, [filters, status]);
 
-	return {
-		loading,
-		page,
-		filters,
-		list,
-		hookSetters,
-		refetch,
-	};
+  const hookSetters = {
+    setLoading,
+    setFilters,
+    setList,
+  };
+
+  return {
+    loading,
+    page,
+    filters,
+    list,
+    hookSetters,
+    refetch,
+  };
 };
 
 export default useListShipments;
