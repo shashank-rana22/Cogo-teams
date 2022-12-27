@@ -1,7 +1,7 @@
 import React from 'react';
 import CargoDetailsPills from '../../../CargoDetailsPills';;
 import MultiServiceDetails from '../../../MultiServiceDetails';
-import { ToolTip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import {format} from '@cogoport/utils';
 import getPortConfigs from '../../../../utils/bookingDeskUtils/getPortConfigs';
 import {getServiceInfo} from '../../../../utils/bookingDeskUtils/getServiceInfo';
@@ -21,22 +21,24 @@ const CardBody = ({ data = {} }) => {
 
 	return (
 		<div className = {styles.container}>
+
+
 			<div className={styles.importerExporterDetails}>
 				<p>Shipment ID #{data?.serial_id || data?.shipment_serial_id}</p>
 
-				{/* <ToolTip
+				<Tooltip
 					theme="light"
+					placement="bottom"
 					content={
 						<span style={{ fontSize: 10 }}>
 							{data?.service_provider?.business_name || ''}
 						</span>
 					}
-					placement="right"
-				> */}
+				>
 					<div className={styles.serviceProvider}>
 						{data?.service_provider?.business_name || ''}
 					</div>
-				{/* </ToolTip> */}
+				</Tooltip>
 			</div>
 
 			<div className={styles.verticalLine}/>
@@ -47,7 +49,7 @@ const CardBody = ({ data = {} }) => {
 				<div className={styles.serviceIconText}> {serviceText}</div>
 				</div>
 				<div className={styles.location}>
-					{/* <ToolTip
+					<Tooltip
 						theme="light"
 						content={
 							<div style={{ fontSize: '10px' }}>
@@ -55,19 +57,19 @@ const CardBody = ({ data = {} }) => {
 							</div>
 						}
 						placement="top"
-					> */}
+					>
 						<div className={styles.country}>
 							({origin?.port_code}) {origin?.country}
 						</div>
-					{/* </ToolTip> */}
+					</Tooltip>
 
-					{/* <ToolTip
+					<Tooltip
 						theme="light"
 						placement="bottom"
 						content={<div style={{ fontSize: '10px' }}>{origin?.name}</div>}
-					> */}
+					>
 						<div className={styles.port}>{origin?.name}</div>
-					{/* </ToolTip> */}
+					</Tooltip>
 					<div className={(`${styles.shortName} ${styles.etaEtd}`)}>
 						ETD:{' '}
 						{format(
@@ -80,7 +82,7 @@ const CardBody = ({ data = {} }) => {
 				<IcMPortArrow style={{ margin: '0 auto' }} />
 
 				<div className={styles.location}>
-					{/* <ToolTip
+					<Tooltip
 						theme="light"
 						content={
 							<div style={{ fontSize: '10px' }}>
@@ -88,21 +90,21 @@ const CardBody = ({ data = {} }) => {
 							</div>
 						}
 						placement="top"
-					> */}
+					>
 						<div className={styles.country}>
 							({destination?.port_code}) {destination?.country}
 						</div>
-					{/* </ToolTip> */}
-{/* 
-					<ToolTip
+					</Tooltip>
+
+					<Tooltip
 						theme="light"
 						placement="bottom"
 						content={
 							<div style={{ fontSize: '10px' }}>{destination?.name}</div>
 						}
-					> */}
+					>
 						<div className={styles.port}>{destination?.name}</div>
-					{/* </ToolTip> */}
+					</Tooltip>
 					<div className={(`${styles.shortName} ${styles.etaEtd}`)}>
 						ETA:{' '}
 						{format(
