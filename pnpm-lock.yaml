@@ -40,6 +40,7 @@ importers:
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/home': workspace:0.1.0
+      '@cogoport/i18n': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/layout': workspace:0.1.0
       '@cogoport/locations': workspace:0.1.0
@@ -61,6 +62,7 @@ importers:
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
       '@cogoport/home': link:../packages/home
+      '@cogoport/i18n': link:../common/i18n
       '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
       '@cogoport/layout': link:../common/layout
       '@cogoport/locations': link:../packages/locations
@@ -145,15 +147,21 @@ importers:
 
   common/i18n:
     specifiers:
+      '@cogoport/store': workspace:^0.1.0
       i18n: ^0.15.1
+      i18next: ^22.4.6
       next: 13.0.6
       react: 18.2.0
       react-dom: 18.2.0
+      react-i18next: ^12.1.1
     dependencies:
+      '@cogoport/store': link:../store
       i18n: 0.15.1
+      i18next: 22.4.6
       next: 13.0.6_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-i18next: 12.1.1_6vygckh2jgtx4nucc3no6lnm3y
 
   common/layout:
     specifiers:
@@ -298,6 +306,7 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.136
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/i18n': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -316,6 +325,7 @@ importers:
     dependencies:
       '@cogoport/components': 1.0.136_j6lhi3hgh37lo4qhb7qouvcgr4
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/i18n': link:../../common/i18n
       '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -4626,6 +4636,12 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
+  /html-parse-stringify/3.0.1:
+    resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
   /html-tags/3.2.0:
     resolution: {integrity: sha512-vy7ClnArOZwCnqZgvv+ddgHgJiAFXe3Ge9ML5/mBctVJoUoYPCdxVucOywjDARn6CVoh3dRSFdPHy2sX80L0Wg==}
     engines: {node: '>=8'}
@@ -4643,6 +4659,12 @@ packages:
       mustache: 4.2.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /i18next/22.4.6:
+    resolution: {integrity: sha512-9Tm1ezxWyzV+306CIDMBbYBitC1jedQyYuuLtIv7oxjp2ohh8eyxP9xytIf+2bbQfhH784IQKPSYp+Zq9+YSbw==}
+    dependencies:
+      '@babel/runtime': 7.20.7
     dev: false
 
   /ignore/5.2.4:
@@ -6066,6 +6088,26 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-i18next/12.1.1_6vygckh2jgtx4nucc3no6lnm3y:
+    resolution: {integrity: sha512-mFdieOI0LDy84q3JuZU6Aou1DoWW2fhapcTGeBS8+vWSJuViuoCLQAMYSb0QoHhXS8B0WKUOPpx4cffAP7r/aA==}
+    peerDependencies:
+      i18next: '>= 19.0.0'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.20.7
+      html-parse-stringify: 3.0.1
+      i18next: 22.4.6
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /react-input-autosize/3.0.0_react@18.2.0:
     resolution: {integrity: sha512-nL9uS7jEs/zu8sqwFE5MAPx6pPkNAriACQ2rGLlqmKr2sPGtN7TXTyDdQt4lbNXVx7Uzadb40x8qotIuru6Rhg==}
     peerDependencies:
@@ -7034,6 +7076,11 @@ packages:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /void-elements/3.1.0:
+    resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

@@ -1,0 +1,13 @@
+{
+	"GB": [
+		{ "key": "ICD", "value": "Dryport" },
+		{ "key": "NEFT/RTGS/IMPS/Swift", "value": "Wire/Bank Transfers" },
+		{ "key": "Pincode", "value": "zipcode" }
+	],
+	"NL": [
+		{ "key": "ICD", "value": "Dryport" },
+		{ "key": "NEFT/RTGS/IMPS/Swift", "value": "Wire/Bank Transfers" },
+		{ "key": "Pincode", "value": "zipcode" }
+	],
+	"IN": []
+}

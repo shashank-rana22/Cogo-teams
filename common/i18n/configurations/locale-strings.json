@@ -1,0 +1,17 @@
+{
+	"IN": {
+		"numLocale": "en-IN"
+	},
+	"GB": {
+		"numLocale": "en-GB"
+	},
+	"CN": {
+		"numLocale": "zh-CN"
+	},
+	"US": {
+		"numLocale": "en-US"
+	},
+	"NL": {
+		"numLocale": "nl-NL"
+	}
+}
