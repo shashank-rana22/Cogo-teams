@@ -1,11 +1,11 @@
-export const controls = [
+export const controls = (subRoleFunctionOptions) => [
 	{
 		name        : 'name',
 		label       : 'Role Name',
 		type        : 'text',
 		placeholder : 'Enter Role Name',
 		rules       : { required: 'Role Name is required' },
-		span        : 6,
+		flex        : 2,
 		size        : 'lg',
 	},
 	{
@@ -15,7 +15,7 @@ export const controls = [
 		type        : 'text',
 		placeholder : 'Enter Role Short Name',
 		rules       : { required: 'Role Short Name is required' },
-		span        : 6,
+		flex        : 2,
 		size        : 'lg',
 	},
 	{
@@ -28,7 +28,7 @@ export const controls = [
 		isClearable    : true,
 		placeholder    : 'Choose Partner',
 		rules          : { required: 'Partner is required' },
-		span           : 6,
+		flex           : 2,
 		params         : { page_limit: 10 },
 		size           : 'lg',
 	},
@@ -59,19 +59,19 @@ export const controls = [
 		isClearable : true,
 		placeholder : 'Choose role functions',
 		rules       : { required: 'Function is required' },
-		span        : 6,
+		flex        : 1,
 		size        : 'lg',
 	},
 	{
 		name        : 'role_sub_functions',
 		label       : 'Role Sub Functions',
-		options     : [],
+		options     : subRoleFunctionOptions,
 		type        : 'select',
 		multiple    : true,
 		caret       : true,
 		isClearable : true,
 		placeholder : 'Choose role sub functions',
-		span        : 6,
+		flex        : 1,
 		size        : 'lg',
 	},
 	{
@@ -112,7 +112,7 @@ export const controls = [
 		isClearable : true,
 		rules       : { required: 'Hierarchy Level is required' },
 		placeholder : 'Choose Hierarchy Level',
-		span        : 6,
+		flex        : 1,
 		size        : 'lg',
 	},
 	{
@@ -121,7 +121,7 @@ export const controls = [
 		type        : 'text',
 		placeholder : 'Enter role description',
 		rules       : { required: 'Description is required' },
-		span        : 12,
+		flex        : 1,
 		size        : 'lg',
 	},
 ];
