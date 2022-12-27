@@ -1,15 +1,18 @@
 import React from 'react';
-import Heading from '../../../../common/Heading';
-import { Container, HeadingContainer } from './styles';
-import useCreateRole from './hooks/useCreateRole';
-import Form from './components/Form';
 
-const CreateRole = ({
+import Heading from '../../../../common/Heading';
+
+import Form from './components/Form';
+import useCreateRole from './hooks/useCreateRole';
+import { Container, HeadingContainer } from './styles';
+
+function CreateRole({
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
-}) => {
-	const { controls, formProps, errors, onSubmit, onErrors, createRoleApi } =
-		useCreateRole({ onChangeShowCreateRoleModal, redirect });
+}) {
+	const {
+		controls, formProps, errors, onSubmit, onErrors, createRoleApi,
+	} =		useCreateRole({ onChangeShowCreateRoleModal, redirect });
 
 	return (
 		<Container id="rnp_role_list_create_role_container">
@@ -31,6 +34,6 @@ const CreateRole = ({
 			/>
 		</Container>
 	);
-};
+}
 
 export default CreateRole;

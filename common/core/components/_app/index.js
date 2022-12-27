@@ -19,9 +19,7 @@ if (!isServer) {
 }
 
 function MyApp({
-	Component, pageProps, pathPrefix, asPrefix, query,
-	profile,
-	generalData,
+	Component, pageProps, pathPrefix, asPrefix, query, profile, generalData,
 }) {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
@@ -33,7 +31,6 @@ function MyApp({
 			pageProgessBar.done();
 		});
 	}, []);
-
 	store.dispatch(setProfileState(profile));
 	store.dispatch(setGeneralState(generalData));
 

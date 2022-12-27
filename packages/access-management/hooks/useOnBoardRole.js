@@ -1,12 +1,12 @@
-import { useEffect, useState, useCallback } from 'react';
-import { useSelector } from '@cogo/store';
-import { useRouter } from '@cogo/next';
-import { useRequest } from '@cogo/commons/hooks';
-import getNavData from '@cogo/business-modules/helpers/get-nav-data';
-
-import navigationMappingsPartner from '@cogo/project-partner/page-components/layout/configurations/navigation-mappings';
-import importerExporterNavs from '@cogo/app-layout/configurations/nav-items.shipper';
 import sellerNavs from '@cogo/app-layout/configurations/nav-items.seller';
+import importerExporterNavs from '@cogo/app-layout/configurations/nav-items.shipper';
+import getNavData from '@cogo/business-modules/helpers/get-nav-data';
+import { useRequest } from '@cogo/commons/hooks';
+import { useRouter } from '@cogo/next';
+import navigationMappingsPartner from '@cogo/project-partner/page-components/layout/configurations/navigation-mappings';
+import { useSelector } from '@cogo/store';
+import { useEffect, useState, useCallback } from 'react';
+
 import getNavigationOptions from '../utils/get-navigation-options';
 
 /**
@@ -19,8 +19,8 @@ const useOnBoardRole = () => {
 	const [showImportRole, setShowImportRole] = useState(false);
 	const [importedPermissions, setImportedPermissions] = useState(null);
 	const { role_id, scope } = useSelector(({ general }) => ({
-		role_id: general?.query?.role_id,
-		scope: general?.scope,
+		role_id : general?.query?.role_id,
+		scope   : general?.scope,
 	}));
 	const router = useRouter();
 
@@ -101,8 +101,8 @@ const useOnBoardRole = () => {
 	}, [role_id]);
 
 	return {
-		roleData: { ...roleData, importedPermissions, isImported },
-		authRoleId: role_id,
+		roleData   : { ...roleData, importedPermissions, isImported },
+		authRoleId : role_id,
 		loading,
 		initialLoading,
 		getRole,

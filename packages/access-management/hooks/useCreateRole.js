@@ -1,40 +1,37 @@
-import { useRequest } from '@cogo/commons/hooks';
-import { useSelector } from '@cogo/store';
-import { useState } from 'react';
-import showErrorsInToast from '@cogo/utils/showErrorsInToast';
-import toast from '@cogoport/front/components/toast';
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRequest } from '@cogoport/request';
 
-export const formatNavigations = (navigationPermissions) =>
-	Object.keys(navigationPermissions)
-		.map((navigation) => {
-			const item = navigationPermissions[navigation];
-			if (item) {
-				return {
-					navigation,
-					permissions: Object.keys(item).map((api) => {
-						const apiItem = item[api];
-						const scopes = [];
-						const scopeValues = apiItem[api];
-						scopeValues.forEach((scope) => {
-							const key = `${api}-${scope}`;
-							if (key !== api) {
-								scopes.push({
-									type: scope,
-									through_criteria: apiItem[key] || [],
-								});
-							}
-						});
-						return {
-							resource_name: api,
-							scopes,
-							is_inactive: apiItem?.is_inactive,
-						};
-					}),
-				};
-			}
-			return null;
-		})
-		.filter((item) => !!item);
+export const formatNavigations = (navigationPermissions) => Object.keys(navigationPermissions)
+	.map((navigation) => {
+		const item = navigationPermissions[navigation];
+		if (item) {
+			return {
+				navigation,
+				permissions: Object.keys(item).map((api) => {
+					const apiItem = item[api];
+					const scopes = [];
+					const scopeValues = apiItem[api];
+					scopeValues.forEach((scope) => {
+						const key = `${api}-${scope}`;
+						if (key !== api) {
+							scopes.push({
+								type             : scope,
+								through_criteria : apiItem[key] || [],
+							});
+						}
+					});
+					return {
+						resource_name : api,
+						scopes,
+						is_inactive   : apiItem?.is_inactive,
+					};
+				}),
+			};
+		}
+		return null;
+	})
+	.filter((item) => !!item);
 
 const getChangedPayload = (previousData, formattedPermissions) => {
 	const newPayload = [];
@@ -66,8 +63,8 @@ const getChangedPayload = (previousData, formattedPermissions) => {
 							(prevScope) => prevScope?.type === scope?.type,
 						);
 						if (
-							prevTypes?.length === 0 ||
-							previous_scopes?.length !== permission_scopes?.length
+							prevTypes?.length === 0
+							|| previous_scopes?.length !== permission_scopes?.length
 						) {
 							isScopeTypeChanged = true;
 						}
@@ -75,11 +72,10 @@ const getChangedPayload = (previousData, formattedPermissions) => {
 							const difference = scope?.through_criteria?.filter(
 								(x) => !prevTypes[0]?.through_criteria?.includes(x),
 							);
-							isThroughCriteriaChanged =
-								isThroughCriteriaChanged ||
-								difference?.length > 0 ||
-								scope?.through_criteria?.length !==
-									prevTypes[0]?.through_criteria?.length;
+							isThroughCriteriaChanged =								isThroughCriteriaChanged
+								|| difference?.length > 0
+								|| scope?.through_criteria?.length
+									!== prevTypes[0]?.through_criteria?.length;
 						}
 					});
 				}
@@ -98,11 +94,10 @@ const getChangedPayload = (previousData, formattedPermissions) => {
 const BATCH_SIZE = 80;
 
 const useCreateRole = () => {
-	const scope = useSelector(({ general }) => general?.scope);
-	const [loading, setLoading] = useState(false);
-	const { trigger } = useRequest('post', false, scope, {
-		autoCancel: false,
-	})('/onboard_auth_role');
+	const [{ loading }, trigger] = useRequest({
+		url    : '/onboard_auth_role',
+		method : 'POST',
+	}, { manual: true, autoCancel: false });
 
 	const createRole = async (
 		auth_role_id,
@@ -149,40 +144,34 @@ const useCreateRole = () => {
 					);
 					currentBatch += 1;
 				}
-				setLoading(true);
 				try {
 					await Promise.all(allPromises);
-					toast.success('Role Updated successfully');
+					Toast.success('Role Updated successfully');
 					if (refetch) {
 						refetch();
 					}
-					setLoading(false);
 				} catch (err) {
-					showErrorsInToast(err?.data);
-					setLoading(false);
+					Toast.error(getApiErrorString(err?.data));
 				}
 			} else {
 				payload = {
 					...payload,
 					navigation_permission_pairs: permissionPayload,
 				};
-				setLoading(true);
 				try {
 					const res = await trigger({ data: payload });
 					if (!res.hasError) {
-						toast.success('Role Updated successfully');
+						Toast.success('Role Updated successfully');
 						if (refetch) {
 							refetch();
 						}
-						setLoading(false);
 					}
 				} catch (err) {
-					showErrorsInToast(err.data);
-					setLoading(false);
+					Toast.error(getApiErrorString(err.data));
 				}
 			}
 		} else {
-			toast.error('No change in permissions.');
+			Toast.error('No change in permissions.');
 		}
 	};
 	return { createRole, loading };

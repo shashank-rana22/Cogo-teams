@@ -1,6 +1,7 @@
-import React from 'react';
 import InputController from '@cogo/business-modules/form/components/Controlled/InputController';
 import SelectController from '@cogo/business-modules/form/components/Controlled/SelectController';
+import React from 'react';
+
 import {
 	FormContainer,
 	Row,
@@ -27,7 +28,7 @@ const getElementController = (type = 'text') => {
 	}
 };
 
-const Form = ({
+function Form({
 	controls = () => [],
 	formProps = {},
 	errors = {},
@@ -35,7 +36,7 @@ const Form = ({
 	onErrors = () => {},
 	onChangeShowCreateRoleModal = () => {},
 	createRoleApi = {},
-}) => {
+}) {
 	const { handleSubmit, fields } = formProps;
 
 	return (
@@ -87,6 +88,6 @@ const Form = ({
 			</Row>
 		</FormContainer>
 	);
-};
+}
 
 export default Form;

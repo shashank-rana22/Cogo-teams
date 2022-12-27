@@ -1,0 +1,10 @@
+.title {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	font-size: 18px;
+
+	@media (min-width: 768px) {
+		font-size: 1.5rem;
+	}
+}

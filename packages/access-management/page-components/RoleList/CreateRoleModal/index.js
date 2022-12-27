@@ -1,13 +1,14 @@
-import React from 'react';
-import { Modal } from '@cogoport/front/components';
 import { useSelector } from '@cogo/store';
+import { Modal } from '@cogoport/components';
+import React from 'react';
+
 import CreateRole from './CreateRole';
 
-const CreateRoleModal = ({
+function CreateRoleModal({
 	showCreateRoleModal = false,
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
-}) => {
+}) {
 	const { isMobile } = useSelector(({ general }) => general?.isMobile);
 	if (!showCreateRoleModal) return null;
 
@@ -27,6 +28,6 @@ const CreateRoleModal = ({
 			/>
 		</Modal>
 	);
-};
+}
 
 export default CreateRoleModal;

@@ -1,17 +1,15 @@
+import { Pagination } from '@cogoport/components';
 import React from 'react';
-import Header from './Header';
-import Filters from './Filters';
-import List from './List';
-import Pagination from './Pagination';
-import {
-	Container,
-	FiltersAndListContainer,
-	ListAndPaginationContainer,
-} from './styles';
-import useRoleList from '../../hooks/useRoleList';
-import CreateRoleModal from './CreateRoleModal';
 
-const RoleList = () => {
+import useRoleList from '../../hooks/useRoleList';
+
+// import CreateRoleModal from './CreateRoleModal';
+import Filters from './Filters';
+import Header from './Header';
+import List from './List';
+import styles from './styles.module.css';
+
+function RoleList() {
 	const {
 		showCreateRoleModal = false,
 		onChangeShowCreateRoleModal = () => {},
@@ -24,8 +22,10 @@ const RoleList = () => {
 		setStakeHolderType,
 	} = useRoleList();
 
+	const { page = 0, page_limit: pageLimit = 0, total: totalPage = 0 } = listAuthRolesApi.data || {};
+
 	return (
-		<Container id="rnp_role_list_container">
+		<section className={styles.container} id="rnp_role_list_container">
 			<Header
 				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
 				onChangeFilters={onChangeFilters}
@@ -33,30 +33,35 @@ const RoleList = () => {
 				setStakeHolderType={setStakeHolderType}
 			/>
 
-			<FiltersAndListContainer id="rnp_role_list_filters_and_list_container">
+			<section id="rnp_role_list_filters_and_list_container">
 				<Filters
 					filters={filters}
 					onChangeFilters={onChangeFilters}
 					stakeHolderType={stakeHolderType}
 				/>
 
-				<ListAndPaginationContainer id="rnp_role_list_list_and_pagination_container">
+				<section className={styles.list_container} id="rnp_role_list_list_and_pagination_container">
 					<List listAuthRolesApi={listAuthRolesApi} redirect={redirect} />
 
-					<Pagination
-						listAuthRolesApi={listAuthRolesApi}
-						onChangeParams={onChangeParams}
-					/>
-				</ListAndPaginationContainer>
-			</FiltersAndListContainer>
+					<div className={styles.pagination_container} id="rnp_role">
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={totalPage}
+							pageSize={pageLimit}
+							handlePageChange={(val) => onChangeParams({ page: val })}
+						/>
+					</div>
+				</section>
+			</section>
 
-			<CreateRoleModal
-				showCreateRoleModal={showCreateRoleModal}
-				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
-				redirect={redirect}
-			/>
-		</Container>
+			{/* <CreateRoleModal */}
+			{/* 	showCreateRoleModal={showCreateRoleModal} */}
+			{/* 	onChangeShowCreateRoleModal={onChangeShowCreateRoleModal} */}
+			{/* 	redirect={redirect} */}
+			{/* /> */}
+		</section>
 	);
-};
+}
 
 export default RoleList;

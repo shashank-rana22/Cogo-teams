@@ -1,16 +1,16 @@
-import navigationMappings from '@cogo/project-partner/page-components/layout/configurations/navigation-mappings';
+import navigationMappings from '@cogoport/layout/navigation-mappings';
 
 const getAllNavigations = () => {
 	const allNavs = [];
 	Object.values(navigationMappings || {}).forEach((navigation) => {
-		if (navigation.isSubNavs) {
+		if (navigation?.options?.length > 0) {
 			navigation.options.forEach((navOpt) => {
 				allNavs.push({ label: navOpt?.title, value: navOpt?.key });
 			});
 		} else {
 			allNavs.push({
-				label: navigation?.title,
-				value: navigation?.key,
+				label : navigation?.title,
+				value : navigation?.key,
 			});
 		}
 	});
@@ -46,15 +46,15 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 
 const get_all_sub_functions = (role_functions) => {
 	const role_sub_functions = [];
-	if (role_functions.length > 0) {
-		role_functions.forEach((item) => {
+	if (role_functions?.length > 0) {
+		role_functions?.forEach((item) => {
 			FUNCTION_SUB_FUNCTION_MAPPING[item].forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
 			});
 		});
 	} else {
 		Object.values(FUNCTION_SUB_FUNCTION_MAPPING).forEach((sub_functions) => {
-			sub_functions.forEach((sub_function) => {
+			sub_functions?.forEach((sub_function) => {
 				role_sub_functions.push(sub_function);
 			});
 		});
@@ -62,105 +62,105 @@ const get_all_sub_functions = (role_functions) => {
 	return role_sub_functions;
 };
 
-export const controls = (role_functions) => [
+export const controls = (role_functions, partnerOptions) => [
 	{
-		name: 'stakeholder_id',
-		placeholder: 'Select partner',
-		size: 'lg',
-		scope: 'partner',
-		defaultOptions: true,
-		caret: true,
-		isClearable: true,
-		optionsListKey: 'partners',
-		params: { filters: { status: 'active' } },
+		...partnerOptions,
+		name        : 'stakeholder_id',
+		placeholder : 'Select partner',
+		size        : 'lg',
+		type        : 'select',
+		isClearable : true,
+		params      : { filters: { status: 'active' } },
 	},
 	{
-		name: 'navigation',
-		placeholder: 'Select module',
-		size: 'lg',
-		scope: 'partner',
-		defaultOptions: true,
-		caret: true,
-		isClearable: true,
-		options: getAllNavigations(),
+		name           : 'navigation',
+		placeholder    : 'Select module',
+		size           : 'lg',
+		scope          : 'partner',
+		type           : 'select',
+		defaultOptions : true,
+		caret          : true,
+		isClearable    : true,
+		options        : getAllNavigations(),
 	},
 	{
-		name: 'role_functions',
-		placeholder: 'Select Function',
-		size: 'lg',
-		scope: 'partner',
-		multiple: true,
-		defaultOptions: true,
-		caret: true,
-		isClearable: true,
-		options: [
+		name           : 'role_functions',
+		placeholder    : 'Select Function',
+		size           : 'lg',
+		scope          : 'partner',
+		type           : 'multiSelect',
+		defaultOptions : true,
+		caret          : true,
+		isClearable    : true,
+		options        : [
 			{
-				label: 'Sales',
-				value: 'sales',
+				label : 'Sales',
+				value : 'sales',
 			},
 			{
-				label: 'Supply',
-				value: 'supply',
+				label : 'Supply',
+				value : 'supply',
 			},
 			{
-				label: 'Operations',
-				value: 'operations',
+				label : 'Operations',
+				value : 'operations',
 			},
 			{
-				label: 'Finance',
-				value: 'finance',
+				label : 'Finance',
+				value : 'finance',
 			},
 		],
 		params: { filters: { status: 'active' } },
 	},
 	{
-		name: 'role_sub_functions',
-		placeholder: 'Select Sub-function',
-		size: 'lg',
-		scope: 'partner',
-		multiple: true,
-		defaultOptions: true,
-		options: get_all_sub_functions(role_functions),
-		caret: true,
-		isClearable: true,
-		params: { filters: { status: 'active' } },
+		name           : 'role_sub_functions',
+		placeholder    : 'Select Sub-function',
+		size           : 'lg',
+		scope          : 'partner',
+		type           : 'multiSelect',
+		defaultOptions : true,
+		options        : get_all_sub_functions(role_functions),
+		caret          : true,
+		isClearable    : true,
+		params         : { filters: { status: 'active' } },
 	},
 	{
-		name: 'hierarchy_level',
-		placeholder: 'Select Level',
-		size: 'lg',
-		scope: 'partner',
-		defaultOptions: true,
-		caret: true,
-		isClearable: true,
-		options: [
+		name           : 'hierarchy_level',
+		placeholder    : 'Select Level',
+		size           : 'lg',
+		scope          : 'partner',
+		type           : 'select',
+		defaultOptions : true,
+		caret          : true,
+		isClearable    : true,
+		options        : [
 			{
-				label: 'Owner',
-				value: 'owner',
+				label : 'Owner',
+				value : 'owner',
 			},
 			{
-				label: 'Manager',
-				value: 'manager',
+				label : 'Manager',
+				value : 'manager',
 			},
 			{
-				label: 'Function Head',
-				value: 'function_head',
+				label : 'Function Head',
+				value : 'function_head',
 			},
 			{
-				label: 'Head',
-				value: 'head',
+				label : 'Head',
+				value : 'head',
 			},
 			{
-				label: 'Zone Head',
-				value: 'zone_head',
+				label : 'Zone Head',
+				value : 'zone_head',
 			},
 			{
-				label: 'Region Head',
-				value: 'region_head',
+				label : 'Region Head',
+				value : 'region_head',
 			},
 			{
-				label: 'Cluster Head',
-				value: 'cluster_head',
+				label : 'Cluster Head',
+				value : 'cluster_head',
 			},
 		],
 		params: { filters: { status: 'active' } },

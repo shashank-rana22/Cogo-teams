@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, Title, SubTitle } from './styles';
 
-const Heading = ({ title = '', subTitle = '' }) => (
-	<Container className="heading-container">
-		<Title className="title">{title}</Title>
-		<SubTitle className="sub-title">{subTitle}</SubTitle>
-	</Container>
-);
+import styles from './styles.module.css';
+
+function Heading({ title = '', subTitle = '' }) {
+	return (
+		<div className="heading-container">
+			<h1 className={styles.title}>{title}</h1>
+			<span className="sub-title">{subTitle}</span>
+		</div>
+	);
+}
 
 export default Heading;
