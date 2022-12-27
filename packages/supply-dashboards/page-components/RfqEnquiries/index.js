@@ -1,4 +1,5 @@
 import Filters from './Filters.';
+import List from './List';
 import styles from './styles.module.css';
 
 function RfqEnquiries() {
@@ -8,6 +9,7 @@ function RfqEnquiries() {
 			<div className={styles.line} />
 			<div className={styles.body}>
 				<div><Filters /></div>
+				<div><List /></div>
 			</div>
 		</>
 	);

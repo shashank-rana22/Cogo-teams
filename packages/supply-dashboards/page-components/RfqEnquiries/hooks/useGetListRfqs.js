@@ -1,4 +1,4 @@
-import useRequest from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
@@ -6,11 +6,10 @@ import useGetFiniteList from './useGetFiniteList';
 const useGetListRfqs = () => {
 	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 
-	const { trigger, loading: apiLoading } = useRequest(
-		'get',
-		false,
-		scope,
-	)('/list_rfqs');
+	const [{ loading: apiLoading }, trigger] = useRequest({
+		method : 'get',
+		url    : '/list_rfqs',
+	}, { manual: false });
 
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;

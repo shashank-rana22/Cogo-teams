@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
-import MissingRateStats from './FilterStats';
+import FilterStats from './FilterStats';
 
 function Filters({
 	filters,
@@ -19,7 +19,7 @@ function Filters({
 					setFilters({ ...filters, searchParameter: e.target.value });
 				}}
 			/>
-			<MissingRateStats />
+			<FilterStats />
 		</>
 	);
 }
