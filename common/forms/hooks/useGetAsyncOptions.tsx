@@ -37,12 +37,25 @@ function useGetAsyncOptions({
 	};
 
 	const onHydrateValue = async (value: string[] | string) => {
+		if (Array.isArray(value)) {
+			// const res = await triggerSingle({
+			// 	params: merge(params, { filters: { [valueKey]: value } }),
+			// });
+			// return res?.data?.list || [];
+
+			// const checkArrayExistInArray = value.map((item) => console.log(item, options));
+			// console.log('checkOptionsExistArrAS', checkArrayExistInArray);
+			return [];
+		}
+		const checkOptionsExist = options.filter((item: any) => item[valueKey] === value);
+
+		if (checkOptionsExist.length > 0) return checkOptionsExist?.[0];
+
 		const res = await triggerSingle({
 			params: merge(params, { filters: { [valueKey]: value } }),
 		});
-
-		if (Array.isArray(value)) return res?.data?.list || [];
-		return res?.data?.list?.[0] || {};
+		
+		return res?.data?.list?.[0] || null;
 	};
 
 	return {
