@@ -24,9 +24,10 @@ request.interceptors.request.use((oldConfig) => {
 		...oldConfig,
 		paramsSerializer : { serialize: customSerializer },
 		headers          : {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
-			authorizationparameters,
+			authorizationscope      : 'partner',
+			authorization           : `Bearer: ${token}`,
+			// authorizationparameters,
+			authorizationparameters : 'coe-finance:across_all',
 		},
 	};
 });
