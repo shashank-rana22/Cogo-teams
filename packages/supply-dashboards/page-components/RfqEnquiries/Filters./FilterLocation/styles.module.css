@@ -1,3 +1,24 @@
+.filter {
+	padding-left: 16px;
+}
+
 .tradetype {
 	display: flex;
+}
+
+.heading {
+	margin-bottom: 4px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.subheading {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.select {
+	padding: 2px 16px 2px 2px;
 }

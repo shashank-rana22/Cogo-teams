@@ -9,10 +9,16 @@ function FilterLocation({ filters }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
+	const { service } = filters;
+	const filterOption = service === 'fcl_freight' ? 'seaport' : 'airport';
+	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: [filterOption] } },
+	}));
+	const heading = service === 'air_freight' ? 'Airport' : 'Port';
 	const handleChange = () => {};
 	return (
-		<div>
-			<div>Trade Type </div>
+		<div className={styles.filter}>
+			<div className={styles.heading}>Trade Type </div>
 			<div className={styles.tradetype}>
 				<Radio
 					className="primary lg"
@@ -28,19 +34,51 @@ function FilterLocation({ filters }) {
 				/>
 
 			</div>
-			<div>Port Pair </div>
-			<div>
-				<div>Origin Port</div>
-				<Select />
-				<div>Destination Port</div>
-				<Select />
+			<div className={styles.heading}>
+				{heading}
+				{' '}
+				Pair
 			</div>
-			<div>Country Pair </div>
-			<div>
+			<div className={styles.subheading}>
+				<div>
+					Origin
+					{' '}
+					{heading}
+				</div>
+				<Select
+					className={styles.select}
+					{...locationOptions}
+					isClearable
+					placeholder="Select Origin Location"
+				/>
+				<div>
+					Destination
+					{' '}
+					{heading}
+				</div>
+				<Select
+					className={styles.select}
+					{...locationOptions}
+					isClearable
+					placeholder="Select Destination Location"
+				/>
+			</div>
+			<div className={styles.heading}>Country Pair </div>
+			<div className={styles.subheading}>
 				<div>Origin Country</div>
-				<Select optionsListKey="locations" />
+				<Select
+					className={styles.select}
+					{...countryOptions}
+					isClearable
+					placeholder="Select Origin Country"
+				/>
 				<div>Destination Country</div>
-				<Select />
+				<Select
+					className={styles.select}
+					{...countryOptions}
+					isClearable
+					placeholder="Select Destination Country"
+				/>
 			</div>
 		</div>
 	);
