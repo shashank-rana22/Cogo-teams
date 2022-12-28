@@ -1,0 +1,32 @@
+.progress_container{
+	display: flex;
+	align-items: flex-end;
+	background: #F6F5FE;
+	padding: 8px;
+    width: fit-content
+}
+
+.file_name{
+	margin-left: 10px;
+	margin-bottom: 6px;
+    font-size: 12px;
+}
+
+  .progressBar {
+    background-color: #fefefe;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+    margin-bottom: 4px;
+    height: 5px;
+    width: 340px;
+    max-width: 100%;
+}
+
+.progress {
+    background: #ad5389;
+    background: #5936F0;
+    border-radius: 3px;
+    height: 5px;
+    transition: width 0.5s ease-in;
+}

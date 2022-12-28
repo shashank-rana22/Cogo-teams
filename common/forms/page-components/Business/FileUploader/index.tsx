@@ -1,10 +1,10 @@
+/* eslint-disable no-await-in-loop */
 import { Upload, Toast } from '@cogoport/components';
-import React, { useState} from 'react';
-import {useRequest,usePublicRequest} from '@cogoport/request'
+import { IcMDocument } from '@cogoport/icons-react';
+import { useRequest, usePublicRequest } from '@cogoport/request';
+import React, { useState } from 'react';
 
-import useInterval from '../../../hooks/useInterval';
-
-const UPLOD_URL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/get_media_upload_url`;
+import styles from './styles.module.css';
 
 function FileUploader(props: any) {
 	const {
@@ -19,14 +19,8 @@ function FileUploader(props: any) {
 		...rest
 	} = props;
 
-	const [percentComplete, setPercentComplete] = useState(0);
+	const [percent, setPercent] = useState(0);
 	const [fileName, setFileName] = useState(null);
-
-	useInterval(() => {
-		if (percentComplete > 0 && percentComplete < 95) {
-			setPercentComplete(percentComplete + 3);
-		}
-	}, 120);
 
 	const [{ loading: addLoading }, triggerAdd] = useRequest({
 		method : 'GET',
@@ -35,75 +29,62 @@ function FileUploader(props: any) {
 	const [{ loading: uploadLoading }, triggerUpload] = usePublicRequest({
 		method: 'PUT',
 	}, { manual: true });
-    let i=0;
-	const handleChange = async(values: any) => {
-	console.log("valueeees",values)
-	 if(typeof values === 'object'){
-		try {
-			const {data} = await triggerAdd({ 
-				params:  { file_name: new Date().getTime()}
-			});
-			console.log("responseee",data)
-			const { url, headers } = data;
-			console.log("url",url)
-			try {
-				await triggerUpload({
-					url     : url,
-					data    : values,
-					headers : {
-						'Content-Type': values.type,
-					},
-				});
-				
-			} catch(err) {
-				console.log({err})
-			}
-			console.log("values[i]", values.name)
-			setFileName(values)
-		} catch (err:any) {
-			return Toast.error('File Upload failed.......');
-		}
-	}
-     if(Array.isArray(values)){
-	while(i<values.length){
-		try {
-			const {data} = await triggerAdd({ 
-				params:  { file_name: new Date().getTime()}  
-			});
-			console.log("responseee",data)
-			const { url, headers } = data;
-			console.log("url",url)
-			try {
-				await triggerUpload({
-					url     : url,
-					data    : values[i],
-					headers : {
-						'Content-Type': values[i].type,
-					},
-				});
-				
-			} catch(err) {
-				console.log({err})
-			}
-			console.log("values[i]", values[i].name)
-			setFileName(values)
-			i++
-		} catch (err:any) {
-			return Toast.error('File Upload failed.......');
-		}
-	}
-}
+
+	const onUploadProgress = (progressEvent: any) => {
+		const { loaded, total } = progressEvent;
+		const completedValue = Math.floor((loaded * 100) / total);
+
+		setPercent(completedValue);
 	};
-	
+	let i = 0;
+	const handleChange = async (values: any) => {
+		while (i < values.length) {
+			try {
+				const { data } = await triggerAdd({
+					params: { file_name: new Date().getTime() },
+				});
+				const { url, headers } = data;
+				try {
+					await triggerUpload({
+						url,
+						data    : values[i],
+						headers : {
+							'Content-Type': values[i].type,
+						},
+						onUploadProgress,
+					});
+				} catch (err) {
+					console.log({ err });
+				}
+				setFileName(values);
+				i++;
+			} catch (err:any) {
+				return Toast.error('File Upload failed.......');
+			}
+		}
+	};
+
 	return (
 		<>
-			<Upload {...rest}  value={fileName} multiple={multiple} onChange={handleChange}/>
-			{/* {percentComplete > 0 && percentComplete<100 &&
-			<progress value={percentComplete} max="100">3%</progress>} */}
+			<Upload {...rest} value={fileName} multiple={multiple} onChange={handleChange} />
+			{(percent > 0 && percent < 100) && (
+				<div className={styles.progress_container}>
+					<IcMDocument
+						style={{ height: '30', width: '30', color: '#2C3E50' }}
+					/>
+					<div>
+						<div className={styles.file_name}>{`File downloading (${percent}%)...`}</div>
+						<div className={styles.progressBar}>
+							<div
+								className={styles.progress}
+								style={{ width: `${percent}%` }}
+							/>
+						</div>
+					</div>
+				</div>
+			)}
 		</>
-	)
-	
-	
+	);
 }
 
 export default FileUploader;
