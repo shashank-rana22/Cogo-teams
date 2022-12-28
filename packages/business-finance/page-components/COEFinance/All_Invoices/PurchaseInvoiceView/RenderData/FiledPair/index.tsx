@@ -14,7 +14,7 @@ const FieldPair = ({ itemData = {}, field = {} }:props) => {
 	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = itemData || {};
 	
     const handleBillType = (item:any) => {
-        let invoiceType;
+        let invoiceType;		
 		if (billType=== "BILL") {
 			if (isProforma) {
 				invoiceType = 'Proforma Invoice';

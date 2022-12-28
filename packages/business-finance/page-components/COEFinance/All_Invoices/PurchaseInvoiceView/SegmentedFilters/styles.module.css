@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+.segment {
+  display: flex;
+}
+.filterData {
+  margin-top: 20px;
+  margin-right: 10px;
+}
+.filterDataUrgent {
+  margin-top: 20px;
+}
+
+.search {
+  margin-top: 24px;
+  width: 24%;
+  ::placeholder {
+    font-size: 11px;
+    color: #cacaca;
+  }
+}
