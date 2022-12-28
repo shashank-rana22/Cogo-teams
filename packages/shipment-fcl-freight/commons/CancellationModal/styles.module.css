@@ -1,57 +1,52 @@
-.form{
-    padding: 22px;
-	overflow: auto;
+.form {
 	height: 70vh;
+	padding: 22px;
+	overflow: auto;
 }
 
-.buttonDiv{
+.button_div {
 	display: flex;
 	align-items: center;
-	margin: 22px;
 	justify-content: flex-end;
-
-	.core-ui-button-root {
-		text-transform: capitalize;
-		width: 140px;
-	}
+	margin: 22px;
 }
 
-.content{
+.content {
 	font-size: 16px;
 	line-height: 24px;
-	color: #000000;
-};
+	color: #000;
+}
 
-.heading{
+.heading {
+	margin: 0 0 16px;
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 1.5;
-	margin: 0 0 16px;
-};
+}
 
-.title{
-	font-weight: 500;
-	font-size: 18px;
-	text-transform: uppercase;
-	color: #393f70;
+.title {
 	margin-bottom: 16px;
-};
-
-.label{
+	font-size: 18px;
 	font-weight: 500;
+	color: #393f70;
+	text-transform: uppercase;
+}
+
+.label {
 	font-size: 14px;
+	font-weight: 500;
 	color: #4f4f4f;
-};
+}
 
-.radioContainer{
+.radio_container {
 	display: flex;
-};
+}
 
-.line{
-	border-bottom: 1px solid #bdaff9;
+.line {
 	width: 100%;
-};
+	border-bottom: 1px solid #bdaff9;
+}
 
-.container{
-    margin: -16px;
+.container {
+	margin: -16px;
 }

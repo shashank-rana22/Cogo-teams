@@ -1,34 +1,36 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
+const useGetShipmentQuotation = (shipment_id) => {
+	const [{ data:listQuotationData, loading }, trigger] = useRequest(
+		'/get_shipment_quotation',
+		{ manual: true },
+	);
 
-const getShipmentQuotation = (shipment_id) => {
-	
-    const[{ data:listQuotationData, loading: loading }, trigger] = useRequest('/get_shipment_quotation', {manual: true});
-	
-	const getQuotation= async () => { 
-	
-		try{ 
+	const getQuotation = async () => {
+		try {
 			const res = await trigger({
-			params:{
-				shipment_id : shipment_id
-			}
-			})
-
-		}catch(err){ 
-			console.log(err)
+				params: {
+					shipment_id,
+				},
+			});
+			return res;
+		} catch (err) {
+			console.log(err);
 		}
-		return res;
-	}
+		return {};
+	};
 
-	useEffect(()=> { 
-		getQuotation()
-	}, [shipment_id])
+	useEffect(() => {
+		getQuotation();
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [shipment_id]);
 
 	return {
-		service_charges: listQuotationData?.service_charges, 
-		loading
+		service_charges: listQuotationData?.service_charges,
+		loading,
 	};
 };
 
-export default getShipmentQuotation;
+export default useGetShipmentQuotation;

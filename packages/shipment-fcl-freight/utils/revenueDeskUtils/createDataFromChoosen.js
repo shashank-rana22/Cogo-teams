@@ -12,14 +12,14 @@ const CreateDataFromChoosen = ({ data = [], shipment_id }) => {
 			single_booking_notes.push({ ...element?.data?.[0] });
 		}
 		if (
-			element?.source === 'bn_salvage' &&
-			['splitable', 'mergeable'].includes(element?.type)
+			element?.source === 'bn_salvage'
+			&& ['splitable', 'mergeable'].includes(element?.type)
 		) {
 			const key = `["${first?.operator_id}","${first?.service_provider_id}"]`;
 			if (element?.type === 'mergeable') {
-				mergeable_booking_notes[key] = [...element?.data];
+				mergeable_booking_notes[key] = [...(element?.data || {})];
 			} else {
-				splitable_booking_notes[key] = [...element?.data];
+				splitable_booking_notes[key] = [...(element?.data || {})];
 			}
 		}
 
@@ -45,17 +45,17 @@ const CreateDataFromChoosen = ({ data = [], shipment_id }) => {
 		},
 		choosen_flash_params: {
 			CurrentRates: {
-				flashRatesData: { list: currentFlashBookingRates },
-				loading: false,
+				flashRatesData : { list: currentFlashBookingRates },
+				loading        : false,
 			},
 			PreviousRates: {
-				flashRatesData: { list: previousFalshBookingRates },
-				loading: false,
+				flashRatesData : { list: previousFalshBookingRates },
+				loading        : false,
 			},
 
 			SystemRates: {
-				systemRatesData: { list: flashBookigRates },
-				loading: false,
+				systemRatesData : { list: flashBookigRates },
+				loading         : false,
 			},
 		},
 	};

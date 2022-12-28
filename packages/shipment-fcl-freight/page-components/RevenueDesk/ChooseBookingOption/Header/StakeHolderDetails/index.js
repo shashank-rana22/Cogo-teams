@@ -1,6 +1,8 @@
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
+
 import useListInternalStakeholders from '../../../../../hooks/revenueDeskHooks/useListInternalStakeholder';
+
 import styles from './styles.module.css';
 
 function StakeHolderDetails({ data }) {

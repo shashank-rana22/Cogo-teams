@@ -1,8 +1,10 @@
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
 import useListBookingPreference from '../../../hooks/revenueDeskHooks/useListBookingPreference';
+
 import Body from './Body';
 import BookingPreference from './BookingPreference';
-import {IcMArrowRotateDown, IcMArrowRotateUp} from '@cogoport/icons-react'
 import Footer from './Footer';
 import Header from './Header';
 import Services from './Services';
@@ -21,7 +23,7 @@ function Card({
 	}));
 	const initialService = services[0];
 	const [selectedService, setSelectedService] = useState(initialService);
-	
+
 	const {
 		bookingData,
 		bookingLoading = false,
@@ -75,17 +77,18 @@ function Card({
 						/>
 					) : null}
 
-					<div className={styles.subInfo} onClick={(service) => {
-															setView(!view);
-															setSelectedService(service)}}
+					<div className={styles.subInfo} 
+							onClick={(service) => {
+									setView(!view);
+									setSelectedService(service)}}
 															 >
 						{view ? (
 							<div className={styles.iconWrapper}>
-							<IcMArrowRotateUp height={20} width={20} />
+								<IcMArrowRotateUp height={20} width={20} />
 							</div>
 						) : (
 							<div className={styles.iconWrapper}>
-							<IcMArrowRotateDown height={20} width={20} />
+								<IcMArrowRotateDown height={20} width={20} />
 							</div>
 						)}
 					</div>

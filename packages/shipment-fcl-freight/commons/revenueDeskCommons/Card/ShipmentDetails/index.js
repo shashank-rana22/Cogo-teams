@@ -1,10 +1,11 @@
 import React from 'react';
-// import getFormattedPriceCurrency from '../Utils/getFormattedPrice';
-import styles from './styles.module.css'
 
-const ShipmentDetails = ({ data = {} }) => {
-	let unit = 'Cont.';
-	
+// import getFormattedPriceCurrency from '../Utils/getFormattedPrice';
+import styles from './styles.module.css';
+
+function ShipmentDetails({ data = {} }) {
+	const unit = 'Cont.';
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.box}>
@@ -17,10 +18,13 @@ const ShipmentDetails = ({ data = {} }) => {
 				</div>
 			</div>
 			<div className={styles.box}>
-				{`MBL's`} - {data?.bls_count}
+				{'MBL\'s'}
+				{' '}
+				-
+				{data?.bls_count}
 			</div>
 		</div>
 	);
-};
+}
 
 export default ShipmentDetails;

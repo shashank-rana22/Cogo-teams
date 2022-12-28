@@ -1,6 +1,8 @@
-import Card from "../../../../commons/revenueDeskCommons/Card";
+import { Pagination, Loader } from '@cogoport/components';
+
+import Card from '../../../../commons/revenueDeskCommons/Card';
+
 import styles from './styles.module.css';
-import {Pagination,Loader}  from '@cogoport/components'
 
 function PendingJobs({
 	data = [],
@@ -18,15 +20,14 @@ function PendingJobs({
 		setClickedCard(data_item);
 	};
 
-	const handlePageChange=(pageNumber)=>{
-		hookSetters.setFilters({ ...filters, page: pageNumber})
-	}
-
+	const handlePageChange = (pageNumber) => {
+		hookSetters.setFilters({ ...filters, page: pageNumber });
+	};
 
 	return (
 		<div className={styles.container}>
 			<div>
-					{total > 10 ? (
+				{total > 10 ? (
 					<div className={styles.paginationWrapper}>
 						<Pagination
 							type="table"
@@ -38,32 +39,35 @@ function PendingJobs({
 					</div>
 				) : null}
 			</div>
-			{data.length?
+			{data.length
 
-			<div className={styles.cardContainer}>
-				{(data || []).map((item) => (
-					<Card
-						data={item}
-						handleCardClick={handleCardClick}
-						activeTab={activeTab}
-						clickedCard={clickedCard}
-						shipment_type={shipment_type}
-					/>
-				))}
-			</div> :
-				<div className={styles.loaderContainer}>
-					<Loader/>
-				</div>
-			}
-			
+				? (
+					<div className={styles.cardContainer}>
+						{(data || []).map((item) => (
+							<Card
+								data={item}
+								handleCardClick={handleCardClick}
+								activeTab={activeTab}
+								clickedCard={clickedCard}
+								shipment_type={shipment_type}
+							/>
+						))}
+					</div>
+				)
+				: (
+					<div className={styles.loaderContainer}>
+						<Loader />
+					</div>
+				)}
+
 			<div>
-					{total > 10 ? (
+				{total > 10 ? (
 					<div className={styles.paginationWrapper}>
 						<Pagination
 							type="table"
 							currentPage={page}
 							totalItems={total}
-							pageSize={10}						
+							pageSize={10}
 							handlePageChange={handlePageChange}
 						/>
 					</div>

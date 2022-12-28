@@ -1,15 +1,16 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 	align-items: center;
 	width: 100%;
-	padding: 12px 0px;
+	padding: 12px 0;
 }
 
-.line{
-    border-right: 1px solid #e0e0e0;
+.line {
 	height: 50px;
-	margin: 0px 20px;
+	margin: 0 20px;
+	border-right: 1px solid #e0e0e0;
 }
-.cargoContainer{
+
+.cargoContainer {
 	width: 25%;
 }

@@ -1,7 +1,8 @@
-import React from 'react';
 import { startCase } from '@cogoport/utils';
+import React from 'react';
+
 import RateCard from './RateCard';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 const ratesTypes = {
 	existing_inventory: [
@@ -10,13 +11,13 @@ const ratesTypes = {
 		['Split Booking Note', 'splitable_booking_notes'],
 	],
 };
-const ExistingRates = ({
+function ExistingRates({
 	type,
 	data,
 	prefrences,
 	setPrefrences = () => {},
 	expanded,
-}) => {
+}) {
 	const getHeading = () => {
 		let heading = '';
 		type.split('_').forEach((element) => {
@@ -27,7 +28,7 @@ const ExistingRates = ({
 
 	return (
 		<div>
-			<div className = {styles.heading}>{getHeading()}</div>
+			<div className={styles.heading}>{getHeading()}</div>
 
 			{(ratesTypes[type] || []).map((sub_type) => (
 				<RateCard
@@ -41,6 +42,6 @@ const ExistingRates = ({
 			))}
 		</div>
 	);
-};
+}
 
 export default ExistingRates;

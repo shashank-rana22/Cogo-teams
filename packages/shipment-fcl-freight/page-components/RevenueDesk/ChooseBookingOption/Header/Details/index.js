@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { format } from '@cogoport/utils';
-// import getFormattedPriceCurrency from '@cogo/bookings/utils/getFormattedPrice';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import SellServiceQuotation from './SellServiceQuotation';
-import BuyServiceQuotation from './BuyServiceQuotation';
-import styles from './styles.module.css'
+import { format } from '@cogoport/utils';
+import React, { useState } from 'react';
+// import getFormattedPriceCurrency from '@cogo/bookings/utils/getFormattedPrice';
 
-const Details = ({ data }) => {
-	const departure_date =
-		data?.schedule_departure || data?.selected_schedule_departure;
-	const cargoStuffingLocation =
-		data?.fcl_freight_services?.[0]?.cargo_stuffing_location;
+import BuyServiceQuotation from './BuyServiceQuotation';
+import SellServiceQuotation from './SellServiceQuotation';
+import styles from './styles.module.css';
+
+function Details({ data }) {
+	const departure_date =		data?.schedule_departure || data?.selected_schedule_departure;
+	const cargoStuffingLocation =		data?.fcl_freight_services?.[0]?.cargo_stuffing_location;
 	const shippingLine = data?.shipping_line?.business_name;
 	const preferredShippingLine = data?.preferred_shipping_line?.business_name;
 
@@ -47,7 +46,8 @@ const Details = ({ data }) => {
 					) : null}
 					<div className={styles.pricetext}>
 						<div className={styles.priceText}>
-							Sell Price -{' '}
+							Sell Price -
+							{' '}
 							{`(
 								${data?.freight_total},
 								${data?.freight_currency},
@@ -64,7 +64,8 @@ const Details = ({ data }) => {
 					) : null}
 					{shippingLine ? (
 						<div className={styles.detailKey}>
-							Shipping Line :<div className={styles.detailsText}>{shippingLine}</div>
+							Shipping Line :
+							<div className={styles.detailsText}>{shippingLine}</div>
 						</div>
 					) : null}
 				</div>
@@ -93,13 +94,16 @@ const Details = ({ data }) => {
 			</div>
 
 			{!showQuotation ? (
-				<div className={styles.serviceQuotation}
+				<div
+					className={styles.serviceQuotation}
 					onClick={() => {
 						setShowQuotation(!showQuotation);
 					}}
 				>
 					<div className={styles.text}>
-						View Quotation <IcMArrowRotateDown />
+						View Quotation
+						{' '}
+						<IcMArrowRotateDown />
 					</div>
 				</div>
 			) : null}
@@ -111,18 +115,21 @@ const Details = ({ data }) => {
 						<BuyServiceQuotation shipmentData={data} />
 					</div>
 
-					<div className={styles.serviceQuotation}
+					<div
+						className={styles.serviceQuotation}
 						onClick={() => {
 							setShowQuotation(!showQuotation);
 						}}
 					>
 						<div className={styles.text}>
-							Hide Quotation <IcMArrowRotateUp />
+							Hide Quotation
+							{' '}
+							<IcMArrowRotateUp />
 						</div>
 					</div>
 				</div>
 			) : null}
 		</>
 	);
-};
+}
 export default Details;

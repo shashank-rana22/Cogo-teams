@@ -1,9 +1,10 @@
-import useCreateFlashBookingRate from './useUpdateFlashStatus.js';
-import getChoosenPrefrences from '../../utils/revenueDeskUtils/getChoosePreference.js';
-import getPrefrencesUpdatedStats from './getPreferencesUpdatedStats';
+import getChoosenPrefrences from '../../utils/revenueDeskUtils/getChoosePreference';
+
 import getExistingRates from './getExistingRates';
 import getFlashRates from './getFlashRates';
+import getPrefrencesUpdatedStats from './getPreferencesUpdatedStats';
 import getSystemRates from './getSystemRates';
+import useCreateFlashBookingRate from './useUpdateFlashStatus';
 import useUpdateRatesPrefrences from './useUpdateRatePreferences';
 
 const useListBookingOptions = ({
@@ -20,38 +21,38 @@ const useListBookingOptions = ({
 		shipment_id: currentShipmentData?.id,
 		service,
 	});
-	
+
 	const { existingData, existingDataLoading } = getExistingRates({
 		currentShipmentData,
-		api: '',
+		api     : '',
 		statsLoading,
-		choosen: data?.list?.length,
+		choosen : data?.list?.length,
 		shipment_type,
 		service,
 	});
 
 	const CurrentRates = getFlashRates({
-		api: 'current',
+		api     : 'current',
 		currentShipmentData,
 		statsLoading,
 		shipment_type,
-		choosen: data?.list?.length,
+		choosen : data?.list?.length,
 		service,
 	});
 	const PreviousRates = getFlashRates({
-		api: 'previous',
+		api     : 'previous',
 		currentShipmentData,
 		statsLoading,
 		shipment_type,
-		choosen: data?.list?.length,
+		choosen : data?.list?.length,
 		service,
 	});
-	 
+
 	const SystemRates = getSystemRates({
-		shipment_data: currentShipmentData,
+		shipment_data : currentShipmentData,
 		statsLoading,
 		shipment_type,
-		choosen: data?.list?.length,
+		choosen       : data?.list?.length,
 		service,
 	});
 
@@ -71,8 +72,8 @@ const useListBookingOptions = ({
 		setShow,
 		existingRatePrefrences,
 		setShowBookingOption,
-		flashRatesPrefrences: supplierPayload,
-		shipment_id: currentShipmentData?.id,
+		flashRatesPrefrences : supplierPayload,
+		shipment_id          : currentShipmentData?.id,
 		refetch,
 		service,
 	});

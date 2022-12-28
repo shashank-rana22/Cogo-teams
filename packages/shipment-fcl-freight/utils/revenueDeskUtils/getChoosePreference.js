@@ -7,7 +7,7 @@ const getChoosenPrefrences = ({ data = [] }) => {
 		}
 	});
 	const flashRatesPrefrences = new Array(
-		data?.length - allBnSalvage > 1 ? data?.length - allBnSalvage - 1 : 0,
+		(data || []).length - allBnSalvage > 1 ? (data || []).length - allBnSalvage - 1 : 0,
 	);
 
 	(data || []).forEach((element) => {
@@ -32,11 +32,11 @@ const getChoosenPrefrences = ({ data = [] }) => {
 			}
 			if (element?.source === 'system_rate') {
 				row.id = element?.rate_id;
-				flashRatesPrefrences[element?.priority - 1] = row;
+				flashRatesPrefrences[(element?.priority || 0) - 1] = row;
 			}
 			if (element?.source === 'flash_booking') {
 				row.id = element?.rate_id;
-				flashRatesPrefrences[element?.priority - 1] = row;
+				flashRatesPrefrences[(element?.priority || 0) - 1] = row;
 			}
 		}
 	});

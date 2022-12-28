@@ -1,4 +1,4 @@
-import { format} from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
 const getRows = ({ key, details }) => {
 	let response = null;
@@ -25,12 +25,12 @@ const getRows = ({ key, details }) => {
 				});
 				response = rows;
 			} else if (
-				key === 'splitable_booking_notes' ||
-				key === 'mergeable_booking_notes'
+				key === 'splitable_booking_notes'
+				|| key === 'mergeable_booking_notes'
 			) {
 				const keyArrMapping = {
-					splitable_booking_notes: [],
-					mergeable_booking_notes: [],
+					splitable_booking_notes : [],
+					mergeable_booking_notes : [],
 				};
 
 				(Object.keys(data) || []).forEach((datakey) => {
@@ -39,8 +39,7 @@ const getRows = ({ key, details }) => {
 
 					let containers = '';
 					let total_buy_price = 0;
-					const currency =
-						data[datakey][0].charges.line_items[0].currency || 'INR';
+					const currency =						data[datakey][0].charges.line_items[0].currency || 'INR';
 					(data[datakey] || []).forEach((child, index) => {
 						if (data[datakey].length - 1 === index) {
 							containers += `${child.containers_count} Ft X ${child.container_size} Ft`;
@@ -73,10 +72,10 @@ const getRows = ({ key, details }) => {
 					});
 
 					keyArrMapping[key].push({
-						id: stringID,
-						allid: ids,
+						id    : stringID,
+						allid : ids,
 						childrens,
-						total: childrens.length,
+						total : childrens.length,
 					});
 				});
 				response = keyArrMapping[key];

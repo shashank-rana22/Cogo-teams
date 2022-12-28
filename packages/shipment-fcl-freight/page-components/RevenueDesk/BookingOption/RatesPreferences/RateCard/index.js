@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import getRows from '../../../../../utils/revenueDeskUtils/getRows';
-import controls from './controls';
-import Priority from '../../PriorityNumber';
-import styles from './styles.module.css'
 
-const RateCard = (allprops) => {
+import getRows from '../../../../../utils/revenueDeskUtils/getRows';
+import Priority from '../../PriorityNumber';
+
+import controls from './controls';
+import styles from './styles.module.css';
+
+function RateCard(allprops) {
 	const {
 		objectkey: key,
 		details,
@@ -35,7 +37,7 @@ const RateCard = (allprops) => {
 		if (istype === 'other') {
 			const foundRow = (rowKeyMapping[key] || []).find((obj) => obj.id === id);
 			if (foundRow) {
-				ids = [...foundRow?.allid];
+				ids = [...(foundRow?.allid || {})];
 			}
 		} else {
 			ids = [id];
@@ -52,9 +54,7 @@ const RateCard = (allprops) => {
 
 	const renderSingle = key === 'single_booking_notes';
 	// const isExpandable = currentData?.length > min;
-	const showData = (val) => {
-		return val || '';
-	};
+	const showData = (val) => val || '';
 
 	const handlePreference = (row_id, istype) => {
 		const allIds = getAllIds(row_id, istype);
@@ -76,18 +76,18 @@ const RateCard = (allprops) => {
 			} else {
 				const newList = prefrences;
 				prefrences.push({
-					id: row_id,
-					type: istype,
-					allid: allIds,
+					id    : row_id,
+					type  : istype,
+					allid : allIds,
 				});
 				setPrefrences([...newList]);
 			}
 		} else {
 			const newList = prefrences;
 			prefrences.push({
-				id: row_id,
-				type: istype,
-				allid: allIds,
+				id    : row_id,
+				type  : istype,
+				allid : allIds,
 			});
 			setPrefrences([...newList]);
 		}
@@ -96,7 +96,8 @@ const RateCard = (allprops) => {
 	const { column_names } = controls.existing_rates;
 
 	const SingleRender = (currentDataRows || []).map((elememt) => (
-		<tr	className={styles.tr}
+		<tr
+			className={styles.tr}
 			style={{ cursor: 'pointer' }}
 			id={elememt?.id}
 			onClick={() => handlePreference(elememt?.id, key)}
@@ -112,18 +113,18 @@ const RateCard = (allprops) => {
 	));
 
 	const otherRenders = (currentDataRows || []).map((elememt) => (
-		<tr	
+		<tr
 			className={styles.tr}
 			style={{ cursor: 'pointer' }}
 			id={elememt?.id}
 			onClick={() => handlePreference(elememt?.id, key)}
 		>
-			<td className = {styles.td}>
+			<td className={styles.td}>
 				<Priority data={prefrences} id={elememt?.id} showPriority={false} />
 			</td>
 
 			{elememt?.childrens?.[0].map((childval) => (
-				<td className = {styles.td}>{showData(childval)}</td>
+				<td className={styles.td}>{showData(childval)}</td>
 			))}
 		</tr>
 	));
@@ -134,26 +135,31 @@ const RateCard = (allprops) => {
 				<div className={styles.ratesContainer}>
 					<div className={styles.description}>{type}</div>
 
-					<table className= {styles.table}>
-						<tr className = {styles.tr}>
+					<table className={styles.table}>
+						<tr className={styles.tr}>
 							<th className={styles.th}>{'   '}</th>
 							{column_names.map((label) => (
-								<th className = {styles.th}>{label}</th>
+								<th className={styles.th}>{label}</th>
 							))}
 						</tr>
 
 						{renderSingle ? SingleRender : otherRenders}
 					</table>
 
-					<div className = {styles.addMore} onClick={() => setShowAll(!showAll)}>
+					<div
+						className={styles.addMore}
+						onClick={() => setShowAll(!showAll)}
+					>
 						{currentData?.length > min && !expanded ? (
-							<>{showAll && currentData?.length ? 'See Less' : 'See More'}</>
+							<div>
+								{showAll && currentData?.length ? 'See Less' : 'See More'}
+							</div>
 						) : null}
 					</div>
 				</div>
 			) : null}
 		</div>
 	);
-};
+}
 
 export default RateCard;
