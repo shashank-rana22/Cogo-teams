@@ -15,7 +15,7 @@ function Body({ data = {} }) {
 			<ShipmentDetails data={data} />
 			<div className={styles.line} />
 
-			<div className={styles.cargoContainer}>
+			<div className={styles.cargo_container}>
 				<CargoDetails data={data} />
 			</div>
 		</div>

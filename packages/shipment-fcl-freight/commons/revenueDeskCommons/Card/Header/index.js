@@ -24,13 +24,13 @@ function Header({ data = {}, activeTab = '' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.column}>
-				<div className={styles.titleContainer}>
+				<div className={styles.title_container}>
 
 					<p className={styles.heading}>{getHeading({ state: data?.state })}</p>
 
 					{ ((data?.trade_type || incoTerms[data?.inco_term]) === 'export')
 						? (
-							<p className={styles.tradeType}>
+							<p className={styles.trade_type}>
 								{startCase(data?.trade_type)
 						|| startCase(incoTerms[data?.inco_term])}
 							</p>
@@ -41,15 +41,15 @@ function Header({ data = {}, activeTab = '' }) {
 					|| startCase(incoTerms[data?.inco_term])}
 							</p>
 						)}
-					<p className={`${styles.tradeType} ${styles.bookingSource}`}>
+					<p className={`${styles.trade_type} ${styles.booking_source}`}>
 						{data?.source === 'direct'
 							? 'Sell Without Buy'
 							: startCase(data.source || '')}
 					</p>
 
 					{data?.is_cogo_assured ? (
-						<div className={styles.cogoAssured}>
-							<div className={styles.iconWrapper}>
+						<div className={styles.cogo_assured}>
+							<div className={styles.icon_wrapper}>
 								<IcCCogoassured />
 							</div>
 							<div className={styles.text}>Cogoport Assured</div>
@@ -57,14 +57,14 @@ function Header({ data = {}, activeTab = '' }) {
 					) : null}
 				</div>
 
-				<div className={styles.timerContainer}>
+				<div className={styles.timer_container}>
 					{activeTab === 'pending' ? (
-						<div className={styles.svgWrapper}>
+						<div className={styles.svg_wrapper}>
 							<IcMTimer />
 						</div>
 					) : null}
 
-					<p className={styles.timerInfo}>
+					<p className={styles.timer_info}>
 						{activeTab === 'pending'
 							? `Booking Confirmed on ${format(
 								data.confirmed_by_importer_exporter_at,
@@ -77,7 +77,7 @@ function Header({ data = {}, activeTab = '' }) {
 				</div>
 			</div>
 
-			<p className={styles.shipmentId}>
+			<p className={styles.shipment_id}>
 				Shipment ID
 				{' '}
 				<span style={{ marginLeft: '8px' }}>

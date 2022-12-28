@@ -6,14 +6,14 @@
 	padding: 0 20px;
 }
 
-.flexRowOrigin {
+.flex_row_origin {
 	display: flex;
 	flex-direction: column;
 	width: 30%;
 	margin-bottom: 6px;
 }
 
-.flexRowDest {
+.flex_row_dest {
 	display: flex;
 	flex-direction: column;
 	width: 40%;
@@ -30,7 +30,7 @@
 	white-space: nowrap;
 }
 
-.iconWrapper {
+.icon_wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -38,7 +38,7 @@
 	margin: 0 12px;
 }
 
-.portCode {
+.port_code {
 	display: flex;
 	align-items: center;
 	line-height: 16px;
@@ -59,15 +59,8 @@
 	color: #828282;
 }
 
-.serviceName {
-	margin: 0;
-	margin-top: 4px;
-	font-size: 12px;
-	font-weight: 400;
-	color: #5936f0;
-}
 
-.iconAndService {
+.icon_and_service {
 	display: flex;
 	flex-direction: column;
 	align-items: center;

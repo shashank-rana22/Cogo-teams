@@ -18,7 +18,7 @@
 	border-radius: 4px;
 }
 
-.titleContainer {
+.title_container {
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -32,13 +32,13 @@
 	width: 60%;
 }
 
-.timerContainer {
+.timer_container {
 	display: flex;
 	align-items: center;
 	width: 100%;
 }
 
-.timerInfo {
+.timer_info {
 	margin: 0;
 	font-size: 14px;
 	font-weight: 400;
@@ -55,7 +55,7 @@
 	color: #393f70;
 }
 
-.tradeType {
+.trade_type {
 	display: flex;
 	align-items: center;
 	padding: 4px 20px;
@@ -67,18 +67,18 @@
 	border-radius: 4px;
 }
 
-.bookingSource {
+.booking_source {
 	margin-left: 10px;
 }
 
-.svgWrapper {
+.svg_wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-right: 8px;
 }
 
-.shipmentId {
+.shipmen_id {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -90,11 +90,11 @@
 	color: #393f70;
 }
 
-.flashButtonContainer {
+.flash_button_container {
 	cursor: pointer;
 }
 
-.cogoAssured {
+.cogo_assured {
 	display: flex;
 	align-items: center;
 	width: fit-content;
@@ -105,7 +105,7 @@
 	border-radius: 4px 0;
 }
 
-.iconWrapper {
+.icon_wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;

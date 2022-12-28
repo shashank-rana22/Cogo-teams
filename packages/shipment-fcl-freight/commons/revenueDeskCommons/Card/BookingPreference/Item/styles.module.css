@@ -14,7 +14,7 @@
 	color: #828282;
 }
 
-.containerRowKeyValue {
+.container_row_key_value {
 	width: 15%;
 }
 
@@ -42,20 +42,20 @@
 	color: #333;
 }
 
-.flexCol {
+.flex_col {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 }
 
-.flexRow {
+.flex_row {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 }
 
-.isLast {
+.is_last {
 	padding-bottom: 0;
 	margin-bottom: 0;
 	border: none;

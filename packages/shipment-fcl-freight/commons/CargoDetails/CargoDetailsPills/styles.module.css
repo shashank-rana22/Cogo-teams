@@ -9,13 +9,13 @@
 	border-radius: 4px;
 }
 
-.certificateContainer {
+.certificate_container {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.certificateContainer a {
+.certificate_container a {
 	display: flex;
 	align-items: center;
 	font-size: 14px;
@@ -23,6 +23,6 @@
 	color: #a8acce;
 }
 
-.certificateContainer a svg {
+.certificate_container a svg {
 	margin-left: 4px;
 }

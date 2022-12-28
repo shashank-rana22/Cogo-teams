@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 768px) {
-	.emptyStateIcon {
+	.empty_state_icon {
 		display: none;
 	}
 
@@ -30,7 +30,7 @@
 	font-size: 16px;
 }
 
-.emptyStateIcon {
+.empty_state_icon {
 	width: 100px;
 	height: 120px;
 	margin-right: 100px;

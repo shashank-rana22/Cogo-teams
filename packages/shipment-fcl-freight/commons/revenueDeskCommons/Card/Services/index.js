@@ -1,4 +1,4 @@
-import { Tags } from '@cogoport/components';
+import { Tags, Button } from '@cogoport/components';
 import { startCase, upperCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -19,8 +19,8 @@ function Services({ services, onClick, activeService }) {
 					const newShipmentType = service.service_type.split('_service')[0];
 					const tradeType =						service.trade_type === 'export' ? 'Origin' : 'Destination';
 					return (
-						<div
-							className={styles.tagWrapper}
+						<Button
+							className={styles.tag_wrapper}
 							onClick={() => onClick(service)}
 						>
 							<Tags
@@ -36,7 +36,7 @@ function Services({ services, onClick, activeService }) {
 								{' '}
 								Preferences
 							</Tags>
-						</div>
+						</Button>
 					);
 				})}
 		</div>

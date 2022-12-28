@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function BookingPreference({ loading = false, bookingData = [] }) {
 	if (loading) {
 		return (
-			<div className={styles.loaderContainer}>
+			<div className={styles.loader_container}>
 				<Loader />
 			</div>
 		);

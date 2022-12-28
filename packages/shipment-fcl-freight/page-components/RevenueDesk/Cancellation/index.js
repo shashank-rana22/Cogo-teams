@@ -15,6 +15,7 @@ function Cancellation({
 	const { id } = data;
 	const [showCancel, setShowCancel] = useState(false);
 	const ref = useRef(null);
+	const [show, setShow] = useState(false);
 
 	const onClose = () => {
 		setShowCancel(false);
@@ -37,25 +38,35 @@ function Cancellation({
 		onClose();
 	};
 
+	const showOptions = () => {
+		setShow(!show);
+	};
+
+	const renderBody = () => (
+		<div>
+			<Button
+				onClick={() => { setShowCancel(true); }}
+				className={styles.button_text}
+			>
+				Cancel Shipment
+			</Button>
+		</div>
+	);
+
 	return (
 		<div>
 			<Popover
-				placement="bottom"
-				render={(
-					<div>
-						<Button
-							onClick={() => { setShowCancel(true); }}
-							className={styles.button_text}
-						>
-							Cancel Shipment
-						</Button>
-					</div>
-				)}
+				placement="top"
+				visible={show && !showCancel}
+				show={show}
+				onClickOutside={() => setShow(false)}
+				render={renderBody}
 			>
-				<div>
+				<Button onClick={showOptions}>
 					<IcMOverflowDot />
-				</div>
+				</Button>
 			</Popover>
+
 			{showCancel ? (
 				<Modal
 					size="md"
@@ -71,20 +82,19 @@ function Cancellation({
 							errors={errors}
 							onSubmit={onSubmit}
 							onError={onError}
-
 						/>
 					</Modal.Body>
 					<Modal.Footer>
 						<div className={styles.button_div}>
 							<Button
 								onClick={onClose}
-								disabled={loading}
+								// disabled={loading}
 								style={{ marginRight: '8px' }}
 							>
 								Cancel
 							</Button>
 							<Button onClick={handleCancelSubmit}>
-								{ !loading ? 'Confirm Cancellation' : 'Confirming...' }
+								{ true ? 'Confirm Cancellation' : 'Confirming...' }
 							</Button>
 						</div>
 					</Modal.Footer>

@@ -8,7 +8,7 @@ function Footer({ data = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.subContainer}>
+			<div className={styles.sub_container}>
 				{infoArray.map((item) => (item.value ? (
 					<div className={styles.row}>
 						<p className={styles.key}>

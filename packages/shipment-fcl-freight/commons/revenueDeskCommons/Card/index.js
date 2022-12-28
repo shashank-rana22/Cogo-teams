@@ -37,7 +37,7 @@ function Card({
 	return (
 		<div className={styles.container}>
 			<div
-				className={styles.cardContainer}
+				className={styles.card_Container}
 				onClick={
 					services.length === 1
 						? () => handleCardClick({ shipment: data, service: services[0] })
@@ -48,7 +48,7 @@ function Card({
 				<p className={styles.line} />
 
 				<Body data={data} />
-				<p className={(`${styles.line} ${styles.greyLine}`)} />
+				<p className={(`${styles.line} ${styles.grey_line}`)} />
 
 				<Footer data={data} />
 				{services.length > 1 ? (
@@ -83,15 +83,15 @@ function Card({
 							setView(!view);
 							setSelectedService(service);
 						}}
-						className={styles.subInfo}
+						className={styles.sub_info}
 					>
 
 						{view ? (
-							<div className={styles.iconWrapper}>
+							<div className={styles.icon_wrapper}>
 								<IcMArrowRotateUp height={20} width={20} />
 							</div>
 						) : (
-							<div className={styles.iconWrapper}>
+							<div className={styles.icon_wrapper}>
 								<IcMArrowRotateDown height={20} width={20} />
 							</div>
 						)}

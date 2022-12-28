@@ -11,3 +11,5 @@ const incoTermMapping = {
 	fca : 'import',
 	fas : 'import',
 };
+
+export default incoTermMapping;

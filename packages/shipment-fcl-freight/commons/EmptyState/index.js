@@ -20,7 +20,7 @@ function EmptyState({
 
 			{!isMobile ? (
 				<div
-					className={styles.emptyStateIcon}
+					className={styles.empty_state_icon}
 				>
 					<IcMAverage width={90} height={90} />
 				</div>

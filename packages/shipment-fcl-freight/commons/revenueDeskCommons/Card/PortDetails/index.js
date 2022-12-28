@@ -25,7 +25,7 @@ function PortDetails({ data = {} }) {
 		}
 		return (
 			<>
-				<div className={styles.portCode}>
+				<div className={styles.port_code}>
 					{show ? (
 						<p className={styles.code}>
 							(
@@ -61,7 +61,7 @@ function PortDetails({ data = {} }) {
 		if (!destination) {
 			const isSingle = true;
 			return (
-				<div className={styles.flexRowOrigin}>
+				<div className={styles.flex_row_origin}>
 					{handleLocationDetails(origin, isSingle)}
 				</div>
 			);
@@ -69,15 +69,15 @@ function PortDetails({ data = {} }) {
 
 		return (
 			<>
-				<div className={styles.flexRowOrigin}>
+				<div className={styles.flex_row_origin}>
 					{handleLocationDetails(origin, false, origin_main_port)}
 				</div>
 
-				<div className={styles.iconWrapper}>
+				<div className={styles.icon_wrapper}>
 					<IcMPortArrow width={20} height={20} />
 				</div>
 
-				<div className={styles.flexRowDest}>
+				<div className={styles.flex_row_dest}>
 					{handleLocationDetails(destination, false, destination_main_port)}
 				</div>
 			</>
@@ -86,7 +86,7 @@ function PortDetails({ data = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.iconAndService}>
+			<div className={styles.icon_and_service}>
 				<IcAOceanFcl height={30} width={30} />
 			</div>
 

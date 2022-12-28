@@ -15,7 +15,7 @@ function Item({ bookingItem = {}, idx, isLast = false }) {
 		>
 			<div className={styles.serial}>{idx + 1}</div>
 
-			<div className={styles.flexCol}>
+			<div className={styles.flex_col}>
 				{data?.map((item, index) => {
 					const { is_rate_expired, is_reverted_rate, columns } = getFormattedSupplierData(
 						bookingItem,
@@ -24,15 +24,15 @@ function Item({ bookingItem = {}, idx, isLast = false }) {
 					);
 
 					return (
-						<div className={styles.flexRow}>
-							<div className={cl`${styles.flexWrapper}${is_reverted_rate ? cl.ns('reverted') : ' '}`}>
+						<div className={styles.flex_row}>
+							<div className={cl`${styles.flex_wrapper}${is_reverted_rate ? cl.ns('reverted') : ' '}`}>
 								Supplier Booking(
 								{is_reverted_rate ? 'Flash Revert' : source || ''}
 								)
 							</div>
 
 							{columns.map((col) => (!isEmpty(col.value) ? (
-								<div className={styles.containerRowKeyValue}>
+								<div className={styles.container_row_key_value}>
 									<div className={styles.heading}>{col.label}</div>
 
 									<div className={cl`${styles.text}${is_reverted_rate ? cl.ns('reverted') : ' '}`}>

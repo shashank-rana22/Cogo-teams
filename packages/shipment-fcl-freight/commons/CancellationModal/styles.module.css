@@ -38,10 +38,6 @@
 	color: #4f4f4f;
 }
 
-.radio_container {
-	display: flex;
-}
-
 .line {
 	width: 100%;
 	border-bottom: 1px solid #bdaff9;
