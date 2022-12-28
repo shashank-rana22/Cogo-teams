@@ -15,9 +15,6 @@
 
 .loaderContainer {
 	display: flex;
-<<<<<<< HEAD
 	justify-content: center;
-=======
 	flex-direction: column;
->>>>>>> 32f7886 (eslint)
 }
