@@ -18,7 +18,7 @@ function SellServcieQuotation({ shipmentData = {} }) {
 
 	return (
 		<div className={styles.container}>
-			{loading ? <Loader height="20px" width="90%" /> : null}
+			{loading ? <Loader height="20px" width="20px" /> : null}
 			{ !loading && !service_charges?.length ? (
 				<EmptyState showContent={EmptyContent} />
 			) : null}

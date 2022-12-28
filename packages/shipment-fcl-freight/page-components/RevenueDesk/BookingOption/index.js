@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Loader, Modal } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 import useListBookingOptions from '../../../hooks/revenueDeskHooks/useListBookingOptions';
@@ -84,14 +84,18 @@ function BookingOption(params) {
 				<>
 					{hasExistingRates() || dataCount > 0 ? (
 						<div className={styles.existing_rates_container} style={customStyle}>
-							<ExistingRates
-								data={dataCount ? choosen_bookings_docs : existingData}
-								type="existing_inventory"
-								prefrences={existingRatePrefrences}
-								setPrefrences={setExistingRatePrefrences}
-								setShowBookingOption={setShowBookingOption}
-								expanded={dataCount > 0}
-							/>
+							{ existingDataLoading ? (
+								<Loader width="20px" height="20px" />
+							) : (
+								<ExistingRates
+									data={dataCount ? choosen_bookings_docs : existingData}
+									type="existing_inventory"
+									prefrences={existingRatePrefrences}
+									setPrefrences={setExistingRatePrefrences}
+									setShowBookingOption={setShowBookingOption}
+									expanded={dataCount > 0}
+								/>
+							)}
 						</div>
 					) : null}
 

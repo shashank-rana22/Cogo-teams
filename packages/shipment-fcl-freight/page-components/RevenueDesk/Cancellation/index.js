@@ -44,27 +44,27 @@ function Cancellation({
 
 	const renderBody = () => (
 		<div>
-			<Button
+			<button
 				onClick={() => { setShowCancel(true); }}
 				className={styles.button_text}
 			>
 				Cancel Shipment
-			</Button>
+			</button>
 		</div>
 	);
 
 	return (
 		<div>
 			<Popover
-				placement="top"
+				placement="left"
 				visible={show && !showCancel}
 				show={show}
 				onClickOutside={() => setShow(false)}
 				render={renderBody}
 			>
-				<Button onClick={showOptions}>
+				<button onClick={showOptions} className={styles.popover_content}>
 					<IcMOverflowDot />
-				</Button>
+				</button>
 			</Popover>
 
 			{showCancel ? (
@@ -94,7 +94,7 @@ function Cancellation({
 								Cancel
 							</Button>
 							<Button onClick={handleCancelSubmit}>
-								{ true ? 'Confirm Cancellation' : 'Confirming...' }
+								{ !loading ? 'Confirm Cancellation' : 'Confirming...' }
 							</Button>
 						</div>
 					</Modal.Footer>

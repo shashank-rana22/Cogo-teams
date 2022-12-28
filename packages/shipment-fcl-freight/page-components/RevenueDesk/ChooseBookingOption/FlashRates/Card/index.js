@@ -108,18 +108,20 @@ function FlashRateCard(allprops) {
 					</tr>
 				))}
 			</table>
+			<div className={styles.add_more_container}>
+				<button
+					className={styles.add_more}
+					onClick={() => setShowAll(!showAll)}
+				>
+					{currentData?.length > min && !expanded ? (
+						<span>
+							{showAll && currentData?.length
+								? 'See Less' : 'See More'}
 
-			<div
-				className={styles.add_more}
-				onClick={() => setShowAll(!showAll)}
-			>
-				{currentData?.length > min && !expanded ? (
-					<div>
-						{showAll && currentData?.length
-							? 'See Less' : 'See More'}
+						</span>
 
-					</div>
-				) : null}
+					) : null}
+				</button>
 			</div>
 		</div>
 	) : null;

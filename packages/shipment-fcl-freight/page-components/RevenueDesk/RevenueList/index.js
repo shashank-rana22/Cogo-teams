@@ -25,14 +25,12 @@ function RevenueList({
 	activeTab = 'pending',
 	shipment_type,
 }) {
-	// const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
 	const handleChangeSerial = (value) => {
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
 	};
 
-	// eslint-disable-next-line consistent-return
 	const handleRender = () => {
 		if (loading) {
 			return (

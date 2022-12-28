@@ -13,4 +13,11 @@
 	text-align: center;
 	cursor: pointer;
 	background-color: white;
+	border: none;
+}
+
+.popover_content{
+	background-color: white;
+	border: none;
+
 }

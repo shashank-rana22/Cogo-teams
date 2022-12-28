@@ -34,6 +34,7 @@
 	color: #356efd;
 	text-decoration-line: underline;
 	cursor: pointer;
+	border:none;
 }
 
 .table {
@@ -56,4 +57,9 @@
 
 .tr {
 	border: 0.97px solid #e0e0e0;
+}
+
+.add_more_container{
+	display: flex;
+	justify-content: flex-end;
 }
