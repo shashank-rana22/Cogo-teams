@@ -16,9 +16,9 @@ function CreateUpdateForm() {
 		onCreate,
 		fields,
 	} = useCreateUpdate();
-	console.log(fields,'controll');
+
 	const watchType = watch('type');
-	
+
 	return (
 		<form onSubmit={handleSubmit(onCreate)}>
 			<div className={styles.content}>
