@@ -72,12 +72,13 @@
 	color: #5936f0;
 }
 
-.serviceQuotation {
+.serviceQuotation {;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	background: #dcdcdc;
+	background: #dcdcdc !important;
 }
 
 .text {

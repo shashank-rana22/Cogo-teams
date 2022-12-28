@@ -1,12 +1,11 @@
+import { Loader } from '@cogoport/components';
+import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-// import { Skeleton } from '@cogoport/front/components/admin';
-// import { getFormattedPrice } from '@cogo/i18n';
 import EmptyState from '../../../../../../commons/EmptyState';
 import getShipmentQuotation from '../../../../../../hooks/revenueDeskHooks/getShipmentQuotation';
 
-// import QuotationData from '../../../../../../hooks/revenueDeskHooks/QuotationData.json';
 import styles from './styles.module.css';
 
 function SellServcieQuotation({ shipmentData = {} }) {
@@ -19,8 +18,8 @@ function SellServcieQuotation({ shipmentData = {} }) {
 
 	return (
 		<div className={styles.container}>
-			{/* {loading ? <Skeleton height="20px" width="90%" margin="16px" /> : null} */}
-			{!service_charges?.length && !loading ? (
+			{loading ? <Loader height="20px" width="90%" /> : null}
+			{ !loading && !service_charges?.length ? (
 				<EmptyState showContent={EmptyContent} />
 			) : null}
 
@@ -40,10 +39,11 @@ function SellServcieQuotation({ shipmentData = {} }) {
 										{startCase(serviceObj?.service_type)}
 									</div>
 									<div>
-										{`(
-												${serviceObj?.total_price_discounted},
-												${serviceObj?.currency} || 'INR',
-											)`}
+										{ getFormattedPrice(
+											'en-IN',
+											serviceObj?.total_price_discounted,
+											serviceObj?.currency,
+										)}
 									</div>
 								</div>
 							);

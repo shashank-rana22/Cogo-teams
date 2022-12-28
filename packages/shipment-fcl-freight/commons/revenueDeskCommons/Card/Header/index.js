@@ -28,7 +28,7 @@ function Header({ data = {}, activeTab = '' }) {
 
 					<p className={styles.heading}>{getHeading({ state: data?.state })}</p>
 
-					{ ((data?.trade_type || incoTerms[data?.inco_term]) == 'export')
+					{ ((data?.trade_type || incoTerms[data?.inco_term]) === 'export')
 						? (
 							<p className={styles.tradeType}>
 								{startCase(data?.trade_type)

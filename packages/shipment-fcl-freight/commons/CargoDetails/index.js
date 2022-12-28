@@ -16,7 +16,7 @@ function CargoDetails({ data }) {
 			<div className={styles.multi_service}>
 				<CargoDetailPills detail={data || {}} />
 
-				<ServiceDetails mainServices={data?.fcl_freight_services}>
+				<ServiceDetails mainServices={(data?.fcl_freight_services || {})}>
 					+
 
 					{(data?.fcl_freight_services?.length || 0) - 1}

@@ -3,7 +3,6 @@ import React from 'react';
 
 import getHoursElasped from '../../../../utils/revenueDeskUtils/getHoursElapsed';
 
-// import Chat from '../../../../commons/Layout/Chat';
 import Details from './Details';
 import StakeHolderDetails from './StakeHolderDetails';
 import styles from './styles.module.css';
@@ -14,12 +13,13 @@ function Header({
 }) {
 	return (
 		<div>
+
 			<div className={styles.headerCon}>
 				<div className={styles.headerLeft}>
 					<div className={styles.headerText}>
 						{stats?.length
-							? <IcMFtaskCompleted height={20} width={20} />
-							: <IcMFtaskUnableToDo height={20} width={20} />}
+							? <IcMFtaskUnableToDo height={20} width={20} />
+							: <IcMFtaskCompleted height={20} width={20} />}
 
 						<div style={{ marginLeft: '5px' }}>
 							{stats?.length
@@ -30,9 +30,9 @@ function Header({
 				</div>
 
 				{/* <HeaderRight>
-					<Chat />
-					<SopRevenueDesk data={data} />
-				</HeaderRight> */}
+						<Chat />
+						<SopRevenueDesk data={data} />
+					</HeaderRight> */}
 			</div>
 
 			<div className={styles.timerContainer}>
@@ -54,7 +54,7 @@ function Header({
 
 			<StakeHolderDetails data={data} />
 
-			{!statsLoading && stats?.length > 0 ? null : (
+			{(!statsLoading && stats?.length > 0) ? null : (
 				<div className={styles.bookingOptionsText} style={{ opacity: expanded ? 0.5 : null }}>
 					Booking Options Available (Select and Priortise Preferences)
 				</div>

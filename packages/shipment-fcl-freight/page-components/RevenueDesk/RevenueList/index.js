@@ -1,14 +1,18 @@
-import { Tabs, TabPanel, Input } from '@cogoport/components';
+import {
+	Tabs, TabPanel, Input, Loader,
+} from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import EmptyState from '../../../commons/EmptyState';
 
 import CompletedJobs from './CompletedJobs';
 import PendingJobs from './PendingJobs';
 import styles from './styles.module.css';
 
 function RevenueList({
-	hookSetters = () => {},
 	loading = false,
+	hookSetters = () => {},
 	listData = [],
 	setShowBookingOption = () => {},
 	total,
@@ -19,15 +23,75 @@ function RevenueList({
 	clickedCard,
 	setActiveTab = () => {},
 	activeTab = 'pending',
-	controls = [],
 	shipment_type,
 }) {
-	const [showFilters, setShowFilters] = useState(false);
+	// const [showFilters, setShowFilters] = useState(false);
 	const [serialId, setSerialId] = useState('');
 	const handleChangeSerial = (value) => {
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
 	};
+
+	// eslint-disable-next-line consistent-return
+	const handleRender = () => {
+		if (loading) {
+			return (
+				<div className={styles.loaderContainer}>
+					<Loader />
+				</div>
+			);
+		}
+
+		if (loading && listData?.length === 0) {
+			return <EmptyState />;
+		}
+
+		return (
+			<Tabs
+				activeTab={activeTab}
+				onChange={(tab) => {
+					setActiveTab(tab);
+					// eslint-disable-next-line no-param-reassign
+					hookSetters.setFilters(page = 1);
+				}}
+			>
+				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
+					<PendingJobs
+						setShowBookingOption={setShowBookingOption}
+						total={total}
+						data={listData}
+						hookSetters={hookSetters}
+						filters={filters}
+						refetch={refetch}
+						page={page}
+						activeTab={activeTab}
+						setClickedCard={setClickedCard}
+						clickedCard={clickedCard}
+						shipment_type={shipment_type}
+						loading={loading}
+					/>
+				</TabPanel>
+
+				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
+					<CompletedJobs
+						setShowBookingOption={setShowBookingOption}
+						total={total}
+						data={listData}
+						hookSetters={hookSetters}
+						filters={filters}
+						refetch={refetch}
+						page={page}
+						activeTab={activeTab}
+						setClickedCard={setClickedCard}
+						clickedCard={clickedCard}
+						shipment_type={shipment_type}
+						loading={loading}
+					/>
+				</TabPanel>
+			</Tabs>
+		);
+	};
+
 	return (
 		<div>
 			<div className={styles.heading}>
@@ -45,59 +109,8 @@ function RevenueList({
 						inputIcon={<IcMSearchlight style={{ marginTop: '5px' }} />}
 					/>
 				</div>
-
-				{/* <Popover
-						render={renderBody()}
-						className="primary_md"
-						placement="bottom"
-					>
-					<FclFilters onClick={() => setShowFilters(!showFilters)}>
-							<FilterIcon />
-					</FclFilters>
-					</Popover> */}
-
 			</div>
-
-			<Tabs
-				activeTab={activeTab}
-				onChange={(tab) => {setActiveTab(tab)
-									hookSetters.setFilters(page=1);
-				}
-			}
-			>
-				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
-					<PendingJobs
-						setShowBookingOption={setShowBookingOption}
-						total={total}
-						data={listData}
-						hookSetters={hookSetters}
-						filters={filters}
-						refetch={refetch}
-						page={page}
-						activeTab={activeTab}
-						setClickedCard={setClickedCard}
-						clickedCard={clickedCard}
-						shipment_type={shipment_type}
-					/>
-				</TabPanel>
-
-				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
-					<CompletedJobs
-						setShowBookingOption={setShowBookingOption}
-						total={total}
-						data={listData}
-						hookSetters={hookSetters}
-						filters={filters}
-						refetch={refetch}
-						page={page}
-						activeTab={activeTab}
-						setClickedCard={setClickedCard}
-						clickedCard={clickedCard}
-						shipment_type={shipment_type}
-					/>
-				</TabPanel>
-			</Tabs>
-
+			{handleRender()}
 			<div />
 
 		</div>

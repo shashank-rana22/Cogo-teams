@@ -6,7 +6,7 @@ const useCreateFlashBookingRate = ({
 	setShowBookingOption = () => {},
 	refetch = () => {},
 }) => {
-	const [{ data:FlashRateData, loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url:
 		'/create_shipment_flash_booking_rate',
 		method: 'post',

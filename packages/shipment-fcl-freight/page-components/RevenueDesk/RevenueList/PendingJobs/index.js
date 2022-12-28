@@ -17,6 +17,7 @@ function PendingJobs({
 	shipment_type,
 }) {
 	const handleCardClick = (data_item) => {
+		setShowBookingOption(true);
 		setClickedCard(data_item);
 	};
 

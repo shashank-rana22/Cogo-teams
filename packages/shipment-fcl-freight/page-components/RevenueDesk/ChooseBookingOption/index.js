@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -16,14 +17,17 @@ function ChooseBookingOption({
 	return (
 		<div className={styles.container}>
 			<div className={styles.headerContainer}>
-				<div
+				<Button
 					className={styles.backContainer}
 					onClick={() => setShowBookingOption(false)}
 				>
+
 					<IcMArrowBack width={20} height={20} />
 					{' '}
 					Back to Bookings
-				</div>
+
+				</Button>
+
 				<Header
 					data={currentShipmentData}
 					activeTab={activeTab}

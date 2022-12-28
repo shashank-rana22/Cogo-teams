@@ -1,8 +1,8 @@
+import { Loader } from '@cogoport/components';
+import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-// import { Skeleton } from '@cogoport/front/components/admin';
-// import { getFormattedPrice } from '@cogo/i18n';
 import EmptyState from '../../../../../../commons/EmptyState';
 import useGetBuyQuotation from '../../../../../../hooks/revenueDeskHooks/useGetBuyQuotation';
 
@@ -18,7 +18,7 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 
 	return (
 		<div className={styles.container}>
-			{/* {loading ? <Skeleton height="20px" width="90%" margin="16px" /> : null} */}
+			{loading ? <Loader height="20px" width="90%" /> : null}
 			{!service_charges?.length && !loading ? (
 				<EmptyState showContent={EmptyContent} />
 			) : null}
@@ -38,10 +38,11 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 										{startCase(serviceObj?.service_type)}
 									</div>
 									<div>
-										{`(
-												${serviceObj?.total_price},
-												${serviceObj?.currency} || 'INR',
-											)`}
+										{ getFormattedPrice(
+											'en-IN',
+											serviceObj?.total_price,
+											serviceObj?.currency,
+										)}
 									</div>
 								</div>
 							);

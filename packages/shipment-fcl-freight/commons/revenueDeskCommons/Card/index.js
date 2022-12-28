@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -77,11 +78,14 @@ function Card({
 						/>
 					) : null}
 
-					<div className={styles.subInfo} 
-							onClick={(service) => {
-									setView(!view);
-									setSelectedService(service)}}
-															 >
+					<Button
+						onClick={(service) => {
+							setView(!view);
+							setSelectedService(service);
+						}}
+						className={styles.subInfo}
+					>
+
 						{view ? (
 							<div className={styles.iconWrapper}>
 								<IcMArrowRotateUp height={20} width={20} />
@@ -91,7 +95,7 @@ function Card({
 								<IcMArrowRotateDown height={20} width={20} />
 							</div>
 						)}
-					</div>
+					</Button>
 				</>
 			) : null}
 		</div>

@@ -1,7 +1,8 @@
+import { Button } from '@cogoport/components';
+import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
-// import getFormattedPriceCurrency from '@cogo/bookings/utils/getFormattedPrice';
 
 import BuyServiceQuotation from './BuyServiceQuotation';
 import SellServiceQuotation from './SellServiceQuotation';
@@ -48,10 +49,7 @@ function Details({ data }) {
 						<div className={styles.priceText}>
 							Sell Price -
 							{' '}
-							{`(
-								${data?.freight_total},
-								${data?.freight_currency},
-							)`}
+							{getFormattedPrice('en-IN', data?.freight_total, data?.freight_currency)}
 						</div>
 					</div>
 				</div>
@@ -87,14 +85,12 @@ function Details({ data }) {
 			<div className={styles.balanceKey}>
 				Discount Applied (KAM) -
 				<div className={styles.detailsBal}>
-					  {`( ${data?.discount_amount},
-						${data?.discount_amount_currency},
-                    )`}
+					{getFormattedPrice('en-IN', data?.discount_amount, data?.discount_amount_currency)}
 				</div>
 			</div>
 
 			{!showQuotation ? (
-				<div
+				<Button
 					className={styles.serviceQuotation}
 					onClick={() => {
 						setShowQuotation(!showQuotation);
@@ -105,7 +101,7 @@ function Details({ data }) {
 						{' '}
 						<IcMArrowRotateDown />
 					</div>
-				</div>
+				</Button>
 			) : null}
 
 			{showQuotation ? (
@@ -115,7 +111,7 @@ function Details({ data }) {
 						<BuyServiceQuotation shipmentData={data} />
 					</div>
 
-					<div
+					<Button
 						className={styles.serviceQuotation}
 						onClick={() => {
 							setShowQuotation(!showQuotation);
@@ -126,7 +122,7 @@ function Details({ data }) {
 							{' '}
 							<IcMArrowRotateUp />
 						</div>
-					</div>
+					</Button>
 				</div>
 			) : null}
 		</>

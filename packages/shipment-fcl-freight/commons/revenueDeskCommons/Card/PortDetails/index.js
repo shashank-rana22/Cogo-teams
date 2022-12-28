@@ -22,8 +22,6 @@ function PortDetails({ data = {} }) {
 			show = false;
 		} else if (!location?.port_code && !location?.postal_code) {
 			show = false;
-		} else if (data?.shipment_type === 'trailer_freight') {
-			show = false;
 		}
 		return (
 			<>

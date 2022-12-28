@@ -1,9 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-
 const useGetBuyQuotation = (shipmentData) => {
-	
 	const allServices = [];
 	const all_services = shipmentData?.services || [];
 	all_services.forEach((service) => {
@@ -12,33 +11,33 @@ const useGetBuyQuotation = (shipmentData) => {
 
 	const allServiceIds = allServices.map((service) => service.id);
 
-    const[{ data:listQuotationData, loading: loading }, trigger] =  
+	const [{ data:listQuotationData, loading }, trigger] = useRequest(
+		'/get_shipment_services_quotation',
+		{ manual: true },
+	);
 
-    useRequest('/get_shipment_services_quotation', {manual: true});
+	const getQuotation = async () => {
+		try {
+			await trigger({
+				params: {
+					shipment_id : shipmentData?.id,
+					service_ids : allServiceIds,
+				},
+			});
+		} catch (err) {
+			Toast.error(err);
+		}
+	};
 
-    const getQuotation= async () => { 
-
-            try{ 
-                const res = await trigger({
-                params:{
-                    shipment_id : shipmentData?.id,
-                    service_ids : allServiceIds
-                }
-                })
-            }catch(err){ 
-                console.log(err)
-            }
-            return res;
-        }
-
-        useEffect(()=> { 
-            getQuotation()
-        }, [shipmentData?.id])
-
+	useEffect(() => {
+		getQuotation();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [shipmentData?.id]);
 
 	return {
-		service_charges : listQuotationData?.service_charges,
-		loading
+		service_charges: listQuotationData?.service_charges,
+		loading,
+
 	};
 };
 export default useGetBuyQuotation;

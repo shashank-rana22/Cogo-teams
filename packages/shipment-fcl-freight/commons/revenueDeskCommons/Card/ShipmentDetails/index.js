@@ -1,6 +1,6 @@
+import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
 import React from 'react';
 
-// import getFormattedPriceCurrency from '../Utils/getFormattedPrice';
 import styles from './styles.module.css';
 
 function ShipmentDetails({ data = {} }) {
@@ -10,11 +10,12 @@ function ShipmentDetails({ data = {} }) {
 		<div className={styles.container}>
 			<div className={styles.box}>
 				<div className={styles.priceText}>
-					{
-						`${data?.freight_total},
-						${data?.freight_currency},`
-					}
-					<div className={styles.sub}>{unit}</div>
+					{getFormattedPrice('en-IN', data?.freight_total, data?.freight_currency)}
+
+					<div className={styles.sub}>
+						/
+						{unit}
+					</div>
 				</div>
 			</div>
 			<div className={styles.box}>

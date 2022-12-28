@@ -23,7 +23,7 @@ function RevenueDesk() {
 
 	return (
 		<div className={styles.container}>
-			{!clickedCard ? (
+			{!showBookingOption ? (
 				<div>
 					<RevenueList
 						hookSetters={hookSetters}
@@ -42,19 +42,20 @@ function RevenueDesk() {
 					/>
 				</div>
 			) : null}
-			{clickedCard ? (
+			{showBookingOption ? (
 				<div>
 					<ShipmentDetails
 						data={clickedCard.shipment}
 						service={clickedCard.service}
-						setShowBookingOption={setClickedCard}
+						refetch={refetch}
+						setShowBookingOption={setShowBookingOption}
 					/>
 
 					<BookingOption
 						activeTab={activeTab}
 						currentShipmentData={clickedCard.shipment}
 						service={clickedCard.service}
-						setShowBookingOption={setClickedCard}
+						setShowBookingOption={setShowBookingOption}
 						showBookingOption={clickedCard}
 						refetch={refetch}
 					/>

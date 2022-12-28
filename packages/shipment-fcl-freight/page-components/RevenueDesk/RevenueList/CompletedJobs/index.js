@@ -12,11 +12,13 @@ function CompletedJobs({
 	filters = {},
 	activeTab = '',
 	setClickedCard = () => {},
+	setShowBookingOption = () => {},
 	clickedCard,
 	shipment_type,
 }) {
 	const handleCardClick = (data_item) => {
 		setClickedCard(data_item);
+		setShowBookingOption(true);
 	};
 
 	return (

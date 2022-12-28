@@ -6,8 +6,6 @@ import useListInternalStakeholders from '../../../../../hooks/revenueDeskHooks/u
 import styles from './styles.module.css';
 
 function StakeHolderDetails({ data }) {
-	// const internalStakeHoldersList = StakeholderDetails;
-
 	const { internalStakeHoldersList } = useListInternalStakeholders({
 		shipment_id: data?.id,
 	});

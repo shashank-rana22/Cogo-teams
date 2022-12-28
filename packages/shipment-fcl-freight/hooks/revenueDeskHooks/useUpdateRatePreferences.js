@@ -60,7 +60,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 		service_type              : service?.service_type || undefined,
 	};
 
-	const [{ data:internalStakeHoldersList, loading }, trigger] = useRequest(
+	const [{ loading }, trigger] = useRequest(
 		{ url: apitoCall, method: 'post' },
 		{ manual: true },
 	);
@@ -79,7 +79,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 					refetch();
 				} else {
 					setShow(false);
-					Toast.error('Something went wrong', <Partial>{postion= "top-center"}</Partial>);
+					Toast.error('Something went wrong');
 				}
 			} catch (error) {
 				Toast.error(error);

@@ -2,16 +2,18 @@ import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import CancellationModal from '../../../../commons/CancellationModal';
+// import useUpdateCancelShipment from '../../../../hooks/revenueDeskHooks/useUpdateCancelShipment';
 
 // import useUpdateCancelShipment from '../../../../Fcl/hooks/useUpdateCancelShipment';
 import styles from './styles.module.css';
 
+// eslint-disable-next-line no-empty-pattern
 function CancelShipment({
 
-	setShow = () => {},
-	id,
-	refetch = () => {},
-	setShowBookingOption = () => {},
+	// setShow = () => {},
+	// id,
+	// refetch = () => {},
+	// setShowBookingOption = () => {},
 }) {
 	const [showCancel, setShowCancel] = useState(false);
 	const loading = false;
@@ -37,13 +39,13 @@ function CancelShipment({
 
 	return (
 		<div>
-			<div
-				className={styles.buttonText}
-				onClick={() => {
-					setShowCancel(true);
-				}}
-			>
-				Cancel Shipment
+			<div>
+				<Button
+					onClick={() => { setShowCancel(true); }}
+					className={styles.buttonText}
+				>
+					Cancel Shipment
+				</Button>
 			</div>
 
 			{showCancel ? (

@@ -65,15 +65,16 @@
 }
 
 .backContainer {
-	display: flex;
+	display: flex ;
 	align-items: center;
-	width: fit-content;
+	width: fit-content !important;
 	height: 20px;
 	padding: 2px;
 	padding-bottom: 10px;
 	margin-top: 8px;
 	margin-left: -5px;
-	color: blue;
+	color: blue !important;
+	background-color: white !important;
 	text-decoration: underline;
 	cursor: pointer;
 }

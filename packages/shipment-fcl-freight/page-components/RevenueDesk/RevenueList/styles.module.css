@@ -52,7 +52,5 @@
 
 .loaderContainer {
 	display: flex;
-	flex-direction: column;
-	padding: 20px 8px;
-	background: #fff;
+	justify-content: center;
 }
