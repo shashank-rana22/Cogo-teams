@@ -3,7 +3,7 @@ export const columns = [
 		label    : 'Role Description',
 		key      : 'name',
 		func     : 'renderRoleDescription',
-		flex     : 2.5,
+		flex     : 2,
 		topKey   : { key: 'name' },
 		lowerKey : { key: 'remarks' },
 		tooltip  : true,
@@ -24,13 +24,13 @@ export const columns = [
 		label : 'Users',
 		key   : 'user_count',
 		func  : 'renderUserCount',
-		flex  : 0.5,
+		flex  : 1,
 	},
 	{
 		label : 'Level',
 		key   : 'hierarchy_level',
 		func  : 'renderHierarchyLevel',
-		flex  : 1.5,
+		flex  : 1,
 	},
 	{
 		label : 'Functions',
@@ -44,16 +44,10 @@ export const columns = [
 		func  : 'renderSubFunction',
 		flex  : 1.5,
 	},
-	// {
-	// 	label : 'Users',
-	// 	key   : '',
-	// 	func  : 'renderUsers',
-	// 	flex  : 3,
-	// },
 	{
 		label : '',
 		key   : '',
 		func  : 'renderEditButton',
-		flex  : 1,
+		flex  : 1.5,
 	},
 ];

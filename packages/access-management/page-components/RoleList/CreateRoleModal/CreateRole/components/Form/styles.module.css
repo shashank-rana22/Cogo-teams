@@ -1,0 +1,25 @@
+.form_container {
+	margin-top: 1rem;
+}
+
+.form_group {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+.input_group {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.error_message {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}
