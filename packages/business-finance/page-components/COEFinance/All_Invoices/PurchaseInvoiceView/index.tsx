@@ -13,12 +13,9 @@ function PurchaseInvoice() {
 const router = useRouter();
 
 const {data,config} = useGetPurchaseViewList();
-console.log(data,"data");
-console.log(router.query,"query");
-
    
 const handleChange =(itemData:any)=>{
-  router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&&billNumber=${itemData?.billNumber}&&orgId=${itemData?.organizationId}`);
+  router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}`);
 
 }
 

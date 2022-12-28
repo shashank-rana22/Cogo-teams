@@ -19,7 +19,7 @@ const  useGetPurchaseViewList=()=> {
 		trigger();
 	}, []);
 
-const config=PURCHASE_VIEW_CONFIG;
+const config = PURCHASE_VIEW_CONFIG;
     
 
 	return {
