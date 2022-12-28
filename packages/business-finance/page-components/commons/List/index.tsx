@@ -52,7 +52,7 @@ function List({
 					/>
 				))}
 			</div>
-			<div className={styles.pagination_container}>
+			{itemData?.totalRecords&&<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
 					currentPage={page}
@@ -60,7 +60,7 @@ function List({
 					pageSize={pageSize}
 					handlePageChange={handlePageChange}
 				/>
-			</div>
+			</div>}
 		</section>
 	);
 }
