@@ -3,9 +3,6 @@ import { Tags } from "@cogoport/components";
 import {IcCFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 const SupplierDetails =({data,paymentsData,accPaymentLoading})=>{
-    console.log(data,"data");
-
-    console.log(paymentsData,"paymentsData");
     
     const {sellerDetail} = data || {}
     const {payables,receivables,ledgerCurrency} = paymentsData || {}

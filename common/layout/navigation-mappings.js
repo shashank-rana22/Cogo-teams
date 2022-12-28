@@ -18,7 +18,7 @@ const navigationMappings = {
 		main_apis : ['get_purchase_payment_upload_list'],
 		options   : [
 			{
-				key   : 'business_finance-coe_finance',
+				key   : 'coe_finance',
 				title : 'COE Finance',
 				href  : '/business-finance/coe-finance/[active_tab]',
 				as    : '/business-finance/coe-finance/dashboard',

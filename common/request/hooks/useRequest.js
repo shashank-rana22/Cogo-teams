@@ -5,8 +5,8 @@ import { request } from '../helpers/request';
 const commonConfig = {
 	cache          : false,
 	defaultOptions : {
-		ssr        : false,
-		autoCancel : true,
+		ssr    : false,
+		manual : true,
 	},
 };
 

@@ -15,8 +15,7 @@ import Layout from './layout';
 const isServer = typeof window === 'undefined';
 
 if (!isServer) {
-	// eslint-disable-next-line no-underscore-dangle
-	window.__COGO_PARTNER_STORE__ = store;
+	window[process.env.NEXT_PUBLIC_ADMIN_STORE] = store;
 }
 
 function MyApp({

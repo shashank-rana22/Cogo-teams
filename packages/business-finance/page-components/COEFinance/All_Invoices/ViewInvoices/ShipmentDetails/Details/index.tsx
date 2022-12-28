@@ -4,11 +4,19 @@ import { IcMFship } from '@cogoport/icons-react';
 import getLocations from '../../../../../commons/locations-shipment';
 import getServiceInfo from '../../../../../commons/getServiceInfo';
 import styles from './styles.module.css'
+import useListShipment from '../../../../hook/useListShipment';
 
-const Details = ({ data = {} }) => {
+const Details = ({jobNumber}) => {
+
+	const {loading,data} =useListShipment(jobNumber); 
+	
+	
+	
+	
+
 	const { origin, destination } = getLocations('shipment_type', data) || {};
 
-	const { destination_main_port, origin_main_port } = data;
+	const { destination_main_port, origin_main_port } = data || {};
 
 	const { serviceIcon } = getServiceInfo(data?.shipment_type);
 

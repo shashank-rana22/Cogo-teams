@@ -11,6 +11,7 @@ export const counterSlice = createSlice({
 	reducers: {
 		setGeneralState: (state, data) => {
 			state = { ...(state || {}), ...(data?.payload || {}) };
+			return state;
 		},
 	},
 });

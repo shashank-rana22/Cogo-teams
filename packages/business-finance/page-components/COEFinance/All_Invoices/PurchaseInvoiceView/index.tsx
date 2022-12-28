@@ -22,7 +22,7 @@ const handleChange =(itemData:any)=>{
 
 const functions={
   renderViewMore : (itemData:any)=>(
-    <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoices</Button>
+    <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
   ),
   renderFieldPair: (itemData:any, field:any) => (
     <FiledPair item={itemData} field={field} />
