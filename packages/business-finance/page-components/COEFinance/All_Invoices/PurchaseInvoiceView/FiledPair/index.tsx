@@ -3,7 +3,7 @@ import {Tooltip} from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import {Tags} from '@cogoport/components';
 import styled from './styles.module.css'
-import {FieldType,ListDataProps} from '../../../../../commons/Interfaces/index'
+import {FieldType,ListDataProps} from '../../../../commons/Interfaces/index'
 
 interface props{
       itemData: ListDataProps,
