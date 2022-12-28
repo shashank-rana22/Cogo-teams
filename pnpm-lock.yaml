@@ -343,12 +343,15 @@ importers:
 
   packages/shipment-fcl-freight:
     specifiers:
+
+      '@cogoport/forms': workspace:^0.1.0
       '@cogoport/components': ^1.0.150
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
+      '@cogoport/forms': link:../../common/forms
       '@cogoport/components': 1.0.150_xt4ifl6qxlrythdsvwl2iwyvb4
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../../common/request

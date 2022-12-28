@@ -14,8 +14,5 @@
 	justify-content: flex-end;
 	margin: 22px;
 
-	.core-ui-button-root {
-		width: 140px;
-		text-transform: capitalize;
-	}
+
 }

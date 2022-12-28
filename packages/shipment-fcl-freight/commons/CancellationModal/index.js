@@ -1,33 +1,39 @@
-import { Button } from '@cogoport/components';
-import React from 'react';
+import { useForm, SelectController, InputController } from '@cogoport/forms';
+import React, { useImperativeHandle, forwardRef } from 'react';
 
-// import Layout from '../../Layout';
-import getShowElements from '../../utils/revenueDeskUtils/getShowElements';
-
+import CancellationOptions from './get-cancellation-options';
 import styles from './styles.module.css';
 
-function CancellationModal({
-	formValues = {},
-	fields = {},
-	modifiedControls = [],
-	errors = {},
-}) {
-	const showElements = getShowElements(formValues);
+function CancellationModal(props, ref) {
+	const { control, handleSubmit } = useForm();
+
+	const onSubmit = (val) => {
+		console.log({ val });
+	};
+
+	useImperativeHandle(ref, () => ({
+		handleSubmit: handleSubmit(onSubmit),
+	}));
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.form}>
-				{/* <Layout
-					fields={fields}
-					controls={modifiedControls}
-					errors={errors}
-					themeType="admin"
-					showElements={showElements}
-				/> */}
-			</div>
+			<form className={styles.form}>
+
+				<label>Please select Cancellation Reason</label>
+				<SelectController
+					control={control}
+					name="cancellation_reason"
+					options={CancellationOptions}
+
+				/>
+
+				<label>Remarks</label>
+				<InputController name="cancellation_subreason" placeholder="Type here..." control={control} />
+
+			</form>
 			<div className={styles.line} />
 		</div>
 	);
 }
 
-export default CancellationModal;
+export default forwardRef(CancellationModal);
