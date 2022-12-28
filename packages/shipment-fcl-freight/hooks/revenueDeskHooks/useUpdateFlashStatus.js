@@ -27,7 +27,7 @@ const useCreateFlashBookingRate = ({
 				refetch();
 			}
 		} catch (err) {
-			Toast(err);
+			Toast.error('Something went wrong');
 		}
 	};
 

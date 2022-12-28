@@ -30,7 +30,7 @@ const useListBookingPreference = ({ data, selectedService }) => {
 			}
 		} catch (error) {
 			setBookingLoading(false);
-			Toast.error(error);
+			Toast.error('Something went wrong!');
 		}
 		setBookingLoading(false);
 	};

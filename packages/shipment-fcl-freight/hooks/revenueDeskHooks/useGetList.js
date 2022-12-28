@@ -85,7 +85,7 @@ const useListShipments = ({ status = '' }) => {
 				reverted     : 0,
 			}));
 
-			Toast.error(err);
+			Toast.error('Something went wrong!');
 		}
 	};
 

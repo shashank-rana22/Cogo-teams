@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -16,7 +17,7 @@ const useGetShipmentQuotation = (shipment_id) => {
 			});
 			return res;
 		} catch (err) {
-			console.log(err);
+			Toast.error('Something went wrong!');
 		}
 		return {};
 	};

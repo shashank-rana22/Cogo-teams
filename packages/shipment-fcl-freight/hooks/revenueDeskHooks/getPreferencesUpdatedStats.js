@@ -20,7 +20,7 @@ const useGetPrefrencesUpdatedStats = ({ shipment_id, service }) => {
 
 			await trigger({ params });
 		} catch (err) {
-			Toast.error(err);
+			Toast.error('Something went wrong!');
 		}
 	};
 

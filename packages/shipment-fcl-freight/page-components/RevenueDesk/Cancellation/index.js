@@ -31,11 +31,11 @@ function Cancellation({
 		setShowCancel,
 		refetch,
 		setShowBookingOption,
+		onClose,
 	});
 
 	const handleCancelSubmit = () => {
 		ref?.current?.handleSubmit();
-		onClose();
 	};
 
 	const showOptions = () => {
@@ -94,7 +94,7 @@ function Cancellation({
 								Cancel
 							</Button>
 							<Button onClick={handleCancelSubmit}>
-								{ true ? 'Confirm Cancellation' : 'Confirming...' }
+								{ !loading ? 'Confirm Cancellation' : 'Confirming...' }
 							</Button>
 						</div>
 					</Modal.Footer>
