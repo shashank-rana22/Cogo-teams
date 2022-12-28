@@ -1,4 +1,4 @@
-export const ShipmentIdViewConfig = {
+export const expenseConfig = {
     showHeader: true,
     headerStyles: {
         // marginBottom: "16px",
@@ -16,50 +16,50 @@ export const ShipmentIdViewConfig = {
 
     fields: [
         {
-            key: "bankAccounts",
+            key: "billNumber",
             label: "Invoice No.",
             span: 2,
             // func: 'rendernameDownloadButton',
         },
         {
             label: "Supplier Name",
-            key: "currency",
+            key: "organizationName",
             // func: 'renderstatusDownloadButton',
             span: 1,
         },
         {
             label: "Invoice Amount",
-            key: "allocatedFunds",
-            func: "renderAmountWithDetails",
+            key: "grandTotal",
+            // func: "renderAmountWithDetails",
             span: 2,
         },
         {
             label: "Service Ops 2",
             key: "createdBy",
-            func: "renderAllAmountDetailsOnTooltip",
+            // func: "renderAllAmountDetailsOnTooltip",
             span: 1.7,
         },
         {
             label: "Invoice Date",
-            key: "utilizedAmount",
+            key: "billDate",
             func: "renderAmount",
             span: 1.5,
         },
         {
             label: "Payment Due Date",
-            key: "balanceAmount",
+            key: "dueDate",
             func: "renderAmount",
             span: 1.3,
         },
         {
             label: "Status",
-            key: "request",
+            key: "status",
             span: 1.2,
             func: "renderTooltipOnNewRequest",
         },
         {
             label: "Remarks",
-            key: "button",
+            key: "remarks",
             func: "renderButton",
             span: 1.3,
         },

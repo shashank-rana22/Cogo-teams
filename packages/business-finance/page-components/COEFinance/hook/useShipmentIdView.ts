@@ -1,28 +1,123 @@
-import { useRequestBf } from "@cogoport/request";
+import { useRequest, useRequestBf } from "@cogoport/request";
 import React, { useEffect } from "react";
-// import { PURCHASE_VIEW_CONFIG } from '../configurations/PURCHASE_VIEW_LIST';
-// import { ShipmentIdViewConfig } from '../configurations/shipmentIdView';
 
-const useShipmentIdView = () => {
-    const [{ data, loading, error }, trigger] = useRequestBf(
-        {
-            url: "/list_shipments",
-            method: "get",
-            authKey: "get_purchase_bills_list",
-        },
-        { autoCancel: false }
+import { useSelector } from "@cogoport/store";
+import useGetFiniteList from "./useGetFiniteList";
+
+type dataType = {
+    currentPage: number;
+    restFilters: any;
+};
+interface Profile {
+    authorizationparameters?: string;
+}
+
+interface UseSelectorProps {
+    profile?: Profile;
+}
+
+const useShipmentIdView = (allParams: any) => {
+    const { ...params } = allParams || {};
+    const { authorizationparameters } = useSelector(
+        ({ profile }: UseSelectorProps) => ({
+            authorizationparameters: profile?.authorizationparameters,
+        })
     );
 
+    const [{ data: shipmentData, loading: apiLoading, error }, trigger] =
+        useRequest(
+            {
+                url: "list_shipments",
+                method: "get",
+            },
+            { autoCancel: false }
+        );
+
+    const [{ loading: statsLoading, data: statsData }, statsTrigger] =
+        useRequestBf(
+            {
+                url: "/purchase/bills/stats",
+                method: "get",
+                authkey: "get_purchase_bills_stats",
+            },
+            { autoCancel: false }
+        );
+
+    const listAPi = (restFilters: dataType, currentPage: dataType) => {
+        const allFilters = {
+            ...(restFilters || {}),
+            ...allParams,
+            state: [
+                "confirmed_by_importer_exporter",
+                "in_progress",
+                "completed",
+                "cancelled",
+            ],
+        };
+
+        const finalFiletrs: any = {};
+        Object.keys(allFilters).forEach((filter) => {
+            if (allFilters[filter]) {
+                finalFiletrs[filter] = allFilters[filter];
+            }
+        });
+        return trigger({
+            params: {
+                filters: finalFiletrs,
+                summary_data_required: true,
+                manifest_data_required: true,
+                revenue_desk_data_required: true,
+                page_limit: 10,
+                page: currentPage,
+            },
+        });
+    };
+
+    const handleStats = async () => {
+        try {
+            await statsTrigger();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
-        trigger();
+        handleStats();
     }, []);
 
-    // const config=PURCHASE_VIEW_CONFIG;
+    const {
+        loading,
+        page,
+        filters,
+        list: { data, total, total_page, fullResponse },
+        hookSetters,
+        refetch,
+    } = useGetFiniteList(listAPi, {
+        ...(params || {}),
+        authorizationparameters,
+    });
+
+    const handleRefetch = () => {
+        handleStats();
+        refetch();
+    };
 
     return {
-        data,
-        loading,
-        // config,
+        loading: loading || apiLoading,
+        page,
+        filters,
+        list: {
+            data,
+            total,
+            total_page,
+            fullResponse,
+        },
+        hookSetters,
+        refetchList: refetch,
+        refetch: handleRefetch,
+        statsData,
+        statsLoading,
+        apiLoading,
     };
 };
 

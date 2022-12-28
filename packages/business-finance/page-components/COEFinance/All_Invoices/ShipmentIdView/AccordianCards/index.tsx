@@ -1,4 +1,4 @@
-import { Button, Tags } from "@cogoport/components";
+import { Button } from "@cogoport/components";
 import React from "react";
 import styles from "./styles.module.css";
 import { useState } from "react";
@@ -6,13 +6,21 @@ import CardHeader from "./CardHeader/index";
 import CardItem from "./CardItem/index";
 import useShipmentIdView from "../../../hook/useShipmentIdView";
 import { startCase } from "@cogoport/utils";
-// import { startCase } from "lodash";
 
-type listData = {
+interface listData {
     itemData: any;
-};
-const AccordianCards = ({ itemData }: listData) => {
+    currentOpenSID: string;
+    setCurrentOpenSID: Function;
+    refetch: any;
+}
+const AccordianCards = ({
+    itemData,
+    currentOpenSID,
+    setCurrentOpenSID,
+    refetch,
+}: listData) => {
     const [isAccordionActive, setIsAccordionActive] = useState(false);
+    const [amountTab, setAmountTab] = useState("expense");
     const handleClick = () => {
         setIsAccordionActive(!isAccordionActive);
         // listApi();
@@ -36,47 +44,49 @@ const AccordianCards = ({ itemData }: listData) => {
                             </div>
                         </div>
                         <div className={styles.pendingText}>
-                            Pending Approval - 3
+                            Pending Approval - {itemData.pending_approvals}
                         </div>
                     </div>
 
                     <div className={styles.freight}>
                         {startCase(itemData.shipment_type)}
-                        {/* {itemData.shipment_type} */}
                     </div>
                     <div className={styles.vr} />
                     <div className={styles.expenseAmount}>
                         <div className={styles.expense}>
                             <div className={styles.expenseLabelText}>
-                                Expense ({itemData.expense_count || 0} )
+                                Expense ({itemData.expense_count || 0})
                             </div>
                             <div className={styles.expenseValueText}>
-                                {itemData.expense_total_currency}
-                                INR 20,340,403.12
+                                {itemData.expense_total_currency}{" "}
+                                {itemData.expense_total_price}
                             </div>
                         </div>
                         <div className={styles.urgent}>
                             <div className={styles.urgentLabelText}>
-                                Urgent (0)
+                                Urgent ({itemData.urgency_expense_count})
                             </div>
-                            <div className={styles.urgentValueText}>INR 0</div>
+                            <div className={styles.urgentValueText}>
+                                INR {itemData.urgency_total_price}
+                            </div>
                         </div>
                     </div>
                     <div className={styles.expenseAmount}>
                         <div className={styles.expense}>
                             <div className={styles.expenseLabelText}>
-                                Income (2)
+                                Income ({itemData.income_count})
                             </div>
                             <div className={styles.expenseValueText}>
-                                INR 21,50,403.12
+                                {itemData.income_total_currency}{" "}
+                                {itemData.income_total_price}
                             </div>
                         </div>
                         <div className={styles.expense}>
                             <div className={styles.expenseLabelText}>
-                                Credit Note (0)
+                                Credit Note ({itemData.credit_expense_count})
                             </div>
                             <div className={styles.expenseValueText}>
-                                INR 20
+                                INR {itemData.credit_total_price}
                             </div>
                         </div>
                     </div>
@@ -88,7 +98,7 @@ const AccordianCards = ({ itemData }: listData) => {
                             </div>
 
                             <div className={styles.profitibilityValue}>
-                                6.90 %
+                                {itemData.quotation_profit}%
                             </div>
                         </div>
 
@@ -98,12 +108,12 @@ const AccordianCards = ({ itemData }: listData) => {
                             </div>
 
                             <div className={styles.profitibilityValue}>
-                                4.40 %
+                                {itemData.tentative_profit} %
                             </div>
                         </div>
                     </div>
                     <div>
-                        {!isAccordionActive ? (
+                        {/* {!isAccordionActive ? (
                             <Button
                                 themeType="secondary"
                                 onClick={() => handleClick()}
@@ -112,6 +122,28 @@ const AccordianCards = ({ itemData }: listData) => {
                             </Button>
                         ) : (
                             <Button>Cost View</Button>
+                        )} */}
+
+                        {currentOpenSID !== itemData?.id ? (
+                            <Button
+                                onClick={() => {
+                                    setCurrentOpenSID(itemData?.id);
+                                    setIsAccordionActive(!isAccordionActive);
+                                }}
+                                themeType="secondary"
+                            >
+                                View More
+                            </Button>
+                        ) : (
+                            <Button
+                                themeType="secondary"
+                                onClick={() => {
+                                    setCurrentOpenSID(itemData?.id);
+                                    // setOpenModal(true);
+                                }}
+                            >
+                                Cost View
+                            </Button>
                         )}
                     </div>
                     <div className={styles.ribben}>
@@ -120,10 +152,25 @@ const AccordianCards = ({ itemData }: listData) => {
                 </div>
                 <div className={styles.hr} />
                 <div className={styles.header}>
-                    <CardHeader />
+                    <CardHeader
+                        itemData={itemData}
+                        amountTab={amountTab}
+                        setAmountTab={setAmountTab}
+                    />
                 </div>
+
                 <div className={styles.cardList}>
-                    <CardItem />
+                    {currentOpenSID === itemData?.id ? (
+                        <CardItem
+                            cardData={itemData}
+                            currentOpenSID={currentOpenSID}
+                            setCurrentOpenSID={setCurrentOpenSID}
+                            refetch={refetch}
+                            amountTab={amountTab}
+                            setAmountTab={setAmountTab}
+                        />
+                    ) : null}
+                    {/* <CardItem /> */}
                 </div>
                 <div className={styles.footer}>
                     <div
