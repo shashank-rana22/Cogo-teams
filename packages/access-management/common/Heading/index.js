@@ -6,7 +6,7 @@ function Heading({ title = '', subTitle = '' }) {
 	return (
 		<div className="heading-container">
 			<h1 className={styles.title}>{title}</h1>
-			<span className="sub-title">{subTitle}</span>
+			<span className={styles.subtitle}>{subTitle}</span>
 		</div>
 	);
 }
