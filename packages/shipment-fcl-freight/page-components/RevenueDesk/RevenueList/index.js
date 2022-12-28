@@ -106,7 +106,7 @@ function RevenueList({
 						onChange={(e) => handleChangeSerial(e)}
 						placeholder="Search by SID"
 						style={{ width: '300px' }}
-						inputIcon={<IcMSearchlight style={{ marginTop: '5px' }} />}
+						inputIcon={<IcMSearchlight />}
 					/>
 				</div>
 			</div>

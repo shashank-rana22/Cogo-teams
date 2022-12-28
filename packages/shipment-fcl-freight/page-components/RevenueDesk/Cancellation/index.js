@@ -3,8 +3,8 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState, useRef } from 'react';
 
 import CancellationModal from '../../../commons/CancellationModal';
+import useUpdateCancelShipment from '../../../hooks/revenueDeskHooks/useUpdateCancelShipment';
 
-import CancelShipment from './CancelShipment';
 import styles from './styles.module.css';
 
 function Cancellation({
@@ -16,23 +16,41 @@ function Cancellation({
 	const [showCancel, setShowCancel] = useState(false);
 	const ref = useRef(null);
 
-	const renderBody = () => (
-		<CancelShipment
-			setShowCancel={setShowCancel}
-		/>
-
-	);
 	const onClose = () => {
 		setShowCancel(false);
 	};
+
+	const {
+		loading,
+		errors,
+		onError,
+		onSubmit,
+	} = useUpdateCancelShipment({
+		id,
+		setShowCancel,
+		refetch,
+		setShowBookingOption,
+	});
+
 	const handleCancelSubmit = () => {
 		ref?.current?.handleSubmit();
+		onClose();
 	};
+
 	return (
 		<div>
 			<Popover
 				placement="bottom"
-				render={renderBody}
+				render={(
+					<div>
+						<Button
+							onClick={() => { setShowCancel(true); }}
+							className={styles.button_text}
+						>
+							Cancel Shipment
+						</Button>
+					</div>
+				)}
 			>
 				<div>
 					<IcMOverflowDot />
@@ -47,19 +65,26 @@ function Cancellation({
 				>
 					<Modal.Header title="Cancel Shipment" />
 					<Modal.Body>
-						<CancellationModal ref={ref} />
+						<CancellationModal
+							ref={ref}
+							loading={loading}
+							errors={errors}
+							onSubmit={onSubmit}
+							onError={onError}
+
+						/>
 					</Modal.Body>
 					<Modal.Footer>
 						<div className={styles.button_div}>
 							<Button
 								onClick={onClose}
-							// disabled={loading || disabledButton}
+								disabled={loading}
 								style={{ marginRight: '8px' }}
 							>
 								Cancel
 							</Button>
 							<Button onClick={handleCancelSubmit}>
-								Confirm Cancellation
+								{ !loading ? 'Confirm Cancellation' : 'Confirming...' }
 							</Button>
 						</div>
 					</Modal.Footer>

@@ -4,15 +4,15 @@ import React, { useImperativeHandle, forwardRef } from 'react';
 import CancellationOptions from './get-cancellation-options';
 import styles from './styles.module.css';
 
-function CancellationModal(props, ref) {
+function CancellationModal({
+	onSubmit = () => {},
+	onError = () => {},
+	ref,
+}) {
 	const { control, handleSubmit } = useForm();
 
-	const onSubmit = (val) => {
-		console.log({ val });
-	};
-
 	useImperativeHandle(ref, () => ({
-		handleSubmit: handleSubmit(onSubmit),
+		handleSubmit: handleSubmit({ onSubmit, onError }),
 	}));
 
 	return (
