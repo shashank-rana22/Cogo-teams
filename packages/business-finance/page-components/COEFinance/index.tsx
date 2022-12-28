@@ -10,11 +10,8 @@ import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
 import SegmentedControl from "../commons/SegmentedControl";
 const CoeFinance=()=>{
-    const { push, query } = useRouter();
-
-    const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
-     
     const [currentTab, setCurrentTab] = useState('');
+    const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
     useEffect(()=>{
         push(
@@ -33,6 +30,16 @@ const CoeFinance=()=>{
 			value: 'total_gross',
 		},
 	];
+    const { push, query } = useRouter();
+
+    
+     
+    useEffect(()=>{
+        push(
+			'/business-finance/coe-finance/[active_tab]',
+			`/business-finance/coe-finance/${activeTab}`,
+		);
+    },[activeTab])
 
     return(
     <div>
@@ -77,6 +84,7 @@ const CoeFinance=()=>{
         <MyResponsiveLines data={{}}/>
         </div>
         </div>
+            dashboard
         </TabPanel>
         <TabPanel name="all_invoices" title="All Invoices">
             <AllInvoices/>

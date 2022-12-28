@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tooltip} from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import {Tags} from '@cogoport/components';
 import styled from './styles.module.css'
 import {FieldType,ListDataProps} from '../../../../../commons/Interfaces/index'
 
@@ -10,8 +11,9 @@ interface props{
 }
 
 const FieldPair = ({ itemData = {}, field = {} }:props) => {
-	const { topKey = '', bottomKey = '' } = field;
+	const { topKey = '', bottomKey = '', lowerKey = '' } = field;
 	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = itemData || {};
+
 	
     const handleBillType = (item:any) => {
         let invoiceType;
