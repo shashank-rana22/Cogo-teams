@@ -1,6 +1,7 @@
-import React,{useState} from "react"
-import {TabPanel,Tabs} from '@cogoport/components'
+import React,{useState, useEffect} from "react";
+import {TabPanel,Tabs} from '@cogoport/components';
 import styles from './styles.module.css';
+import {useRouter} from '@cogoport/next';
 import AllInvoices from "./All_Invoices/index";
 import MyResponsiveBar from "./Components/ResponsiveBar";
 import MyResponsiveLine from "./Components/Stream";
@@ -9,7 +10,6 @@ import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
 import SegmentedControl from "../commons/SegmentedControl";
 const CoeFinance=()=>{
-    const [activeTab, setActiveTab] = useState('dashboard');
     const [currentTab, setCurrentTab] = useState('');
     const OPTIONS = [
 		{
@@ -21,6 +21,17 @@ const CoeFinance=()=>{
 			value: 'total_gross',
 		},
 	];
+    const { push, query } = useRouter();
+
+    const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
+     
+    useEffect(()=>{
+        push(
+			'/business-finance/coe-finance/[active_tab]',
+			`/business-finance/coe-finance/${activeTab}`,
+		);
+    },[activeTab])
+
     return(
     <div>
         <div>
@@ -64,6 +75,7 @@ const CoeFinance=()=>{
         <MyResponsiveLines data={{}}/>
         </div>
         </div>
+            dashboard
         </TabPanel>
         <TabPanel name="all_invoices" title="All Invoices">
             <AllInvoices/>

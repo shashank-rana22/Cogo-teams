@@ -11,6 +11,13 @@ const businessConfig = {
 		navigation : 'product_code_mapping',
 		isMainNav  : true,
 	},
+	'/[partner_id]/business-finance/coe-finance/[active_tab]': {
+		navigation: 'coe_finance',
+	},
+	'/[partner_id]/business-finance/coe-finance/[active_tab]/view-invoices': {
+		navigation: 'coe_finance',
+	},
+
 };
 
 export default businessConfig;

@@ -23,7 +23,7 @@ const  useGetPurchaseViewList=()=> {
 		refetch()
 	},[page])
 
-const config=PURCHASE_VIEW_CONFIG;
+const config = PURCHASE_VIEW_CONFIG;
     
 
 	return {

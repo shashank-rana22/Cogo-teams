@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.subContainer {
+  display: flex;
+}
+.hr {
+  border: 1px solid #333333;
+  margin: 32px 0px;
+  width: 100%;
+}
