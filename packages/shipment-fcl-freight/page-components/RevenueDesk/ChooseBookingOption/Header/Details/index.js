@@ -18,17 +18,17 @@ function Details({ data }) {
 
 	return (
 		<>
-			<div className={styles.detailsCon}>
-				<div className={styles.detailLeft}>
-					<div className={styles.detailKey}>
+			<div className={styles.details_container}>
+				<div className={styles.detail_left}>
+					<div className={styles.detail_key}>
 						Cargo Ready Date :
-						<div className={styles.detailsText}>
+						<div className={styles.details_text}>
 							{format(data?.cargo_readiness_date, 'dd MMM yyyy')}
 						</div>
 					</div>
-					<div className={styles.detailKey}>
+					<div className={styles.detail_key}>
 						Expected Departure Date :
-						<div className={styles.detailsText}>
+						<div className={styles.details_text}>
 							{format(departure_date, 'dd MMM yyyy')}
 						</div>
 					</div>
@@ -38,60 +38,60 @@ function Details({ data }) {
 						} Free days detention)`}
 					</div>
 				</div>
-				<div className={styles.detailLeft}>
+				<div className={styles.detail_left}>
 					{cargoStuffingLocation ? (
-						<div className={styles.detailKey}>
+						<div className={styles.detail_key}>
 							Stuffing Location :
-							<div className={styles.detailsText}>{cargoStuffingLocation}</div>
+							<div className={styles.details_text}>{cargoStuffingLocation}</div>
 						</div>
 					) : null}
-					<div className={styles.pricetext}>
-						<div className={styles.priceText}>
+					<div className={styles.price_text_container}>
+						<div className={styles.price_text}>
 							Sell Price -
 							{' '}
 							{getFormattedPrice('en-IN', data?.freight_total, data?.freight_currency)}
 						</div>
 					</div>
 				</div>
-				<div className={styles.detailRight}>
+				<div className={styles.detail_right}>
 					{preferredShippingLine ? (
-						<div className={styles.detailKey}>
+						<div className={styles.detail_key}>
 							Preferred Shipping Line :
-							<div className={styles.detailsText}>{preferredShippingLine}</div>
+							<div className={styles.details_text}>{preferredShippingLine}</div>
 						</div>
 					) : null}
 					{shippingLine ? (
-						<div className={styles.detailKey}>
+						<div className={styles.detail_key}>
 							Shipping Line :
-							<div className={styles.detailsText}>{shippingLine}</div>
+							<div className={styles.details_text}>{shippingLine}</div>
 						</div>
 					) : null}
 				</div>
-				<div className={styles.detailRight}>
+				<div className={styles.detail_right}>
 					{data?.exchange_rate ? (
-						<div className={styles.detailKey}>
+						<div className={styles.detail_key}>
 							Exchange Rate :
-							<div className={styles.detailsText}>{data?.exchange_rate}</div>
+							<div className={styles.details_text}>{data?.exchange_rate}</div>
 						</div>
 					) : null}
 					{data?.transit_days ? (
-						<div className={styles.detailKey}>
+						<div className={styles.detail_key}>
 							Transit Days :
-							<div className={styles.detailsText}>{data?.transit_days}</div>
+							<div className={styles.details_text}>{data?.transit_days}</div>
 						</div>
 					) : null}
 				</div>
 			</div>
-			<div className={styles.balanceKey}>
+			<div className={styles.balance_key}>
 				Discount Applied (KAM) -
-				<div className={styles.detailsBal}>
+				<div className={styles.details_balance}>
 					{getFormattedPrice('en-IN', data?.discount_amount, data?.discount_amount_currency)}
 				</div>
 			</div>
 
 			{!showQuotation ? (
 				<Button
-					className={styles.serviceQuotation}
+					className={styles.service_quotation}
 					onClick={() => {
 						setShowQuotation(!showQuotation);
 					}}
@@ -106,13 +106,13 @@ function Details({ data }) {
 
 			{showQuotation ? (
 				<div>
-					<div className={styles.quotationDetails}>
+					<div className={styles.quotation_details}>
 						<SellServiceQuotation shipmentData={data} />
 						<BuyServiceQuotation shipmentData={data} />
 					</div>
 
 					<Button
-						className={styles.serviceQuotation}
+						className={styles.service_quotation}
 						onClick={() => {
 							setShowQuotation(!showQuotation);
 						}}

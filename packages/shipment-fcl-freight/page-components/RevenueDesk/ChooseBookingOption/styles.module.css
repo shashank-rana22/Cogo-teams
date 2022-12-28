@@ -5,66 +5,11 @@
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
 
-.bookingOptionsContainer {
-	padding: 20px;
-	background: #fff;
-	border: 1px solid #bdaff9;
-	border-radius: 4px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
-}
-
-.buttonsContainer {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 24px;
-}
-
-.buttonsContainer .core_ui_button_root {
-	text-transform: capitalize;
-}
-
-.existingRatesContainer {
-	padding: 16px;
-	background: #fff;
-	border: 1px solid #bdaff9;
-	border-radius: 4px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
-}
-
-.flashRatesContainer {
-	padding: 20px;
-	margin-top: 16px;
-	background: #fff;
-	border: 1px solid #bdaff9;
-	border-radius: 4px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
-}
-
-.headerContainer {
+.header_container {
 	padding: 10px;
 }
 
-.flashContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	width: 100%;
-}
-
-.flashContainer .core_ui_button_root {
-	text-transform: capitalize;
-}
-
-.flashText {
-	margin: 0;
-	margin-bottom: 8px;
-	font-size: 12px;
-	font-weight: 500;
-	line-height: 16px;
-	color: #393f70;
-}
-
-.backContainer {
+.back_container {
 	display: flex;
 	align-items: center;
 	width: fit-content !important;

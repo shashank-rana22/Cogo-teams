@@ -25,7 +25,7 @@ function CompletedJobs({
 		<div>
 			<div>
 				{total > 10 ? (
-					<div className={styles.paginationWrapper}>
+					<div className={styles.pagination_wrapper}>
 						<Pagination
 							type="table"
 							totalItems={total}
@@ -54,7 +54,7 @@ function CompletedJobs({
 
 			<div>
 				{total > 10 ? (
-					<div className={styles.paginationWrapper}>
+					<div className={styles.pagination_wrapper}>
 						<Pagination
 							type="table"
 							totalItems={total}

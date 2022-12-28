@@ -1,18 +1,18 @@
-.headCon {
+.header_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 10px;
 }
 
-.headerLeft {
+.header_left {
 	display: flex;
 	justify-content: flex-start;
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
 
-.headerText {
+.header_text {
 	display: flex;
 	align-items: center;
 	font-size: 16px;
@@ -21,16 +21,7 @@
 	color: #393f70;
 }
 
-.timerText {
-	margin-left: 13px;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 16px;
-	color: #cb6464;
-	text-align: center;
-}
-
-.bookingOptionsText {
+.booking_options_text {
 	margin: 16px 0 10px;
 	font-size: 18px;
 	font-weight: 600;
@@ -38,20 +29,14 @@
 	color: #393f70;
 }
 
-.headerRight {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-}
-
-.timerContainer {
+.timer_container {
 	display: flex;
 	align-items: center;
 	width: 100%;
 	margin-bottom: 10px;
 }
 
-.timerInfo {
+.timer_info {
 	margin: 0;
 	font-size: 14px;
 	font-weight: 400;
@@ -59,7 +44,7 @@
 	color: #cb6464;
 }
 
-.flashedInformation {
+.flashed_information {
 	display: flex;
 	justify-content: space-between;
 	padding: 12px;
@@ -75,11 +60,7 @@
 	color: #393f70;
 }
 
-.smallFont {
-	font-size: 12px;
-}
-
-.loadingState {
+.loading_state {
 	width: 2px;
 	height: 2px;
 	padding: 10px;

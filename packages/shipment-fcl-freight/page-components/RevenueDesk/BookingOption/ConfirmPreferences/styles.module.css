@@ -22,7 +22,7 @@
 	text-align: center;
 }
 
-.buttonsContainer {
+.buttons_container {
 	display: flex;
 	justify-content: center;
 	width: 100%;
@@ -31,7 +31,7 @@
 	background: #fff;
 }
 
-.primaryButton button {
+.primary_button button {
 	height: 44px;
 	padding: 14px 42px;
 	margin: "20px";
@@ -43,7 +43,7 @@
 	border-radius: 4px;
 }
 
-.secondaryButton button {
+.secondary_button button {
 	height: 44px;
 	padding: 14px 42px;
 	margin: "20px";

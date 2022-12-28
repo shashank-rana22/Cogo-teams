@@ -83,7 +83,7 @@ function BookingOption(params) {
 			{!statsLoading ? (
 				<>
 					{hasExistingRates() || dataCount > 0 ? (
-						<div className={styles.existingRatesContainer} style={customStyle}>
+						<div className={styles.existing_rates_container} style={customStyle}>
 							<ExistingRates
 								data={dataCount ? choosen_bookings_docs : existingData}
 								type="existing_inventory"
@@ -95,7 +95,7 @@ function BookingOption(params) {
 						</div>
 					) : null}
 
-					<div className={styles.flashRatesContainer} style={customStyle}>
+					<div className={styles.flash_rates_container} style={customStyle}>
 						<FlashRates
 							expanded={dataCount > 0}
 							flashParams={dataCount ? choosen_flash_params : flashParams}
@@ -107,8 +107,8 @@ function BookingOption(params) {
 						/>
 
 						{!dataCount && !currentShipmentData?.is_flashed ? (
-							<div className={styles.flashContainer}>
-								<p className={styles.flashText}>Trigger Flash to more Supplier</p>
+							<div className={styles.flash_container}>
+								<p className={styles.flash_text}>Trigger Flash to more Supplier</p>
 
 								<Button
 									className="primary sm"
@@ -122,7 +122,7 @@ function BookingOption(params) {
 					</div>
 
 					{!dataCount ? (
-						<div className={styles.buttonsContainer}>
+						<div className={styles.buttons_container}>
 							<Button
 								className="secondary md"
 								style={{ marginRight: '12px' }}

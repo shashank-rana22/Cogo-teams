@@ -19,16 +19,16 @@ function StakeHolderDetails({ data }) {
 	}
 
 	return (
-		<div className={styles.stakeHolderCon}>
+		<div className={styles.stake_holder_container}>
 			{(mainServiceStakeholders || []).map((item) => (item?.stakeholder_type !== 'service_ops2' ? (
-				<div className={styles.StakeHolderDiv}>
-					<div className={(styles.stakeHolderKey)}>
+				<div className={styles.stake_holder_details}>
+					<div className={(styles.stake_holder_key)}>
 						{startCase(item?.stakeholder_type)}
 						{' '}
 						:
 					</div>
 
-					<div className={styles.stakeHolderValue}>
+					<div className={styles.stake_holder_value}>
 						{startCase(item?.user?.name)}
 					</div>
 				</div>

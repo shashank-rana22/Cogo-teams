@@ -20,13 +20,13 @@ function ConfirmPrefrences({
 				edit them later.
 			</div>
 
-			<div className={styles.buttonsContainer}>
-				<div className={styles.secondaryButton}>
+			<div className={styles.buttons_container}>
+				<div className={styles.secondary_button}>
 					{' '}
 					<Button onClick={() => setShow(false)}>Back</Button>
 					{' '}
 				</div>
-				<div className={styles.primaryButton}>
+				<div className={styles.primary_button}>
 					<Button onClick={handleClick} disabled={loading}>
 						{loading ? 'Saving' : 'SAVE'}
 					</Button>

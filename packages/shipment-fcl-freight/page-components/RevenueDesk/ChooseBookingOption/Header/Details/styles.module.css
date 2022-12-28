@@ -1,4 +1,4 @@
-.detailsCon {
+.details_container {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: start;
@@ -7,7 +7,7 @@
 	background: #f9f9f9;
 }
 
-.detailLeft {
+.detail_left {
 	margin-right: 47px;
 }
 
@@ -19,11 +19,11 @@
 	color: #828282;
 }
 
-.detailRight {
+.detail_right {
 	margin-left: 47px;
 }
 
-.pricetext {
+.price_text_container {
 	width: fit-content;
 	height: 18px;
 	padding: 2px 10px;
@@ -31,7 +31,16 @@
 	border-radius: 5px;
 }
 
-.detailKey {
+.price_text {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 14px;
+	color: #5936f0;
+}
+
+.detail_key {
 	display: flex;
 	align-items: center;
 	margin-bottom: 16px;
@@ -41,14 +50,14 @@
 	color: #4f4f4f;
 }
 
-.detailsText {
+.details_text {
 	margin-left: 4px;
 	font-size: 14px;
 	font-weight: 400;
 	color: #393f70;
 }
 
-.balanceKey {
+.balance_key {
 	display: flex;
 	align-items: start;
 	padding: 0 10px 15px;
@@ -58,21 +67,12 @@
 	background: #f9f9f9;
 }
 
-.detailsBal {
+.details_balance {
 	font-size: 14px;
 	color: #5936f0;
 }
 
-.priceText {
-	display: flex;
-	align-items: center;
-	font-size: 12px;
-	font-weight: 500;
-	line-height: 14px;
-	color: #5936f0;
-}
-
-.serviceQuotation {
+.service_quotation {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -88,6 +88,6 @@
 	color: #313131;
 }
 
-.quotationDetails {
+.quotation_details {
 	display: flex;
 }

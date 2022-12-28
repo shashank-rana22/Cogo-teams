@@ -26,15 +26,15 @@ function SellServcieQuotation({ shipmentData = {} }) {
 			{service_charges?.length ? (
 				<>
 					<div className={styles.heading}>Full Sell Quotation</div>
-					<div className={styles.serviceContent}>
-						<div className={styles.subHeading}>Services</div>
-						<div className={styles.subHeading}>Services Charge</div>
+					<div className={styles.service_content}>
+						<div className={styles.sub_heading}>Services</div>
+						<div className={styles.sub_heading}>Services Charge</div>
 					</div>
 
 					{(service_charges || []).map((serviceObj) => {
 						if (serviceObj?.service_type) {
 							return (
-								<div className={styles.serviceContent}>
+								<div className={styles.service_content}>
 									<div>
 										{startCase(serviceObj?.service_type)}
 									</div>

@@ -36,7 +36,7 @@ function RevenueList({
 	const handleRender = () => {
 		if (loading) {
 			return (
-				<div className={styles.loaderContainer}>
+				<div className={styles.loader_container}>
 					<Loader />
 				</div>
 			);
