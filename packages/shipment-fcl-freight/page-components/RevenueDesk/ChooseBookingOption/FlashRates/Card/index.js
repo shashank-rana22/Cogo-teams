@@ -13,7 +13,6 @@ function FlashRateCard(allprops) {
 		prefrences,
 		setPrefrences = () => {},
 		expanded,
-		loading,
 		unit = 'Container',
 	} = allprops || {};
 	const [showAll, setShowAll] = useState(expanded);
@@ -48,16 +47,6 @@ function FlashRateCard(allprops) {
 	const showData = (val) => val || '';
 
 	const { column_names } = controls.flash_rates;
-
-	// if (loading) {
-	// 	return (
-	// 		<Loader>
-	// 			<CustomSkeleton />
-	// 			<CustomSkeleton />
-	// 			<CustomSkeleton />
-	// 		</Loader>
-	// 	);
-	// }
 
 	return currentDataRows?.length ? (
 		<div className={styles.container}>
@@ -121,7 +110,7 @@ function FlashRateCard(allprops) {
 			</table>
 
 			<div
-				className={styles.addMore}
+				className={styles.add_more}
 				onClick={() => setShowAll(!showAll)}
 			>
 				{currentData?.length > min && !expanded ? (

@@ -25,20 +25,7 @@
 	text-align: left;
 }
 
-.radioContainer {
-	cursor: pointer;
-}
-
-.labelsRow {
-	display: flex;
-	justify-content: space-between;
-	padding: 12px;
-	font-weight: 500;
-	color: #333;
-	text-align: left;
-}
-
-.addMore {
+.add_more {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 4px;
@@ -68,5 +55,5 @@
 }
 
 .tr {
-	border: 0.969973px solid #e0e0e0;
+	border: 0.97px solid #e0e0e0;
 }

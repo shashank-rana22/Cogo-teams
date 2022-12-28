@@ -29,7 +29,7 @@ function PendingJobs({
 		<div className={styles.container}>
 			<div>
 				{total > 10 ? (
-					<div className={styles.paginationWrapper}>
+					<div className={styles.pagination_wrapper}>
 						<Pagination
 							type="table"
 							totalItems={total}
@@ -56,14 +56,14 @@ function PendingJobs({
 					</div>
 				)
 				: (
-					<div className={styles.loaderContainer}>
+					<div className={styles.loader_container}>
 						<Loader />
 					</div>
 				)}
 
 			<div>
 				{total > 10 ? (
-					<div className={styles.paginationWrapper}>
+					<div className={styles.pagination_wrapper}>
 						<Pagination
 							type="table"
 							currentPage={page}

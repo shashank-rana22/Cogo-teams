@@ -14,9 +14,9 @@ function Header({
 	return (
 		<div>
 
-			<div className={styles.headerCon}>
-				<div className={styles.headerLeft}>
-					<div className={styles.headerText}>
+			<div className={styles.header_container}>
+				<div className={styles.header_left}>
+					<div className={styles.header_text}>
 						{stats?.length
 							? <IcMFtaskUnableToDo height={20} width={20} />
 							: <IcMFtaskCompleted height={20} width={20} />}
@@ -35,14 +35,14 @@ function Header({
 					</HeaderRight> */}
 			</div>
 
-			<div className={styles.timerContainer}>
+			<div className={styles.timer_container}>
 				{activeTab === 'pending' ? (
 					<div>
 						<IcMTimer />
 					</div>
 				) : null}
 
-				<p className={styles.timerInfo}>
+				<p className={styles.timer_info}>
 					{activeTab === 'pending'
 						? `(Due ${getHoursElasped(
 							data?.confirmed_by_importer_exporter_at,
@@ -55,17 +55,17 @@ function Header({
 			<StakeHolderDetails data={data} />
 
 			{(!statsLoading && stats?.length > 0) ? null : (
-				<div className={styles.bookingOptionsText} style={{ opacity: expanded ? 0.5 : null }}>
+				<div className={styles.booking_options_text} style={{ opacity: expanded ? 0.5 : null }}>
 					Booking Options Available (Select and Priortise Preferences)
 				</div>
 			)}
 
 			{data?.is_flashed && !(stats?.length > 0) && !statsLoading ? (
-				<div className={styles.flashedInformation}>
+				<div className={styles.flashed_information}>
 					<div className={styles.text}>Revert from Ongoing Flash Rates</div>
 
 					<div>
-						<div className={styles.loadingState} />
+						<div className={styles.loading_state} />
 					</div>
 
 					<div className={styles.text} style={{ fontSize: '12px' }}>

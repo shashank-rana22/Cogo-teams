@@ -27,7 +27,7 @@ function ShipmentDetails({
 
 			<div className={styles.line} />
 
-			<div className={styles.cargoDetailsContainer}>
+			<div className={styles.cargo_details_container}>
 				<CargoDetails data={data} />
 			</div>
 

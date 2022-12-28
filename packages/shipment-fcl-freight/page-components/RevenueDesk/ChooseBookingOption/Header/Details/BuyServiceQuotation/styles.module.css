@@ -13,13 +13,13 @@
 	text-align: center;
 }
 
-.subHeading {
+.sub_heading {
 	font-size: 16px;
 	font-weight: 700;
 	color: #2c3e50;
 }
 
-.serviceContent {
+.service_content {
 	display: flex;
 	justify-content: space-between;
 	padding: 12px 10px;

@@ -28,13 +28,14 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+	max-height: 20px !important;
 	padding: 4px 0;
 	font-size: 10px;
 	color: #5936f0 !important;
 	cursor: pointer;
-	max-height: 20px !important;
 	background: #cbcff5 !important;
 }
-.iconWrapper{
+
+.iconWrapper {
 	margin-right: 6px;
 }

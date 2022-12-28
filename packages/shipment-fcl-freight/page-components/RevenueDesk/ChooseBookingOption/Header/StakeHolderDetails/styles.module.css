@@ -1,4 +1,4 @@
-.stakeHolderCon {
+.stake_holder_container {
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
@@ -9,14 +9,14 @@
 	background: #f7f7fc;
 }
 
-.StakeHolderDiv {
+.stake_holder_details {
 	display: flex;
 	align-items: center;
 	width: 22%;
 	margin: 0 16px 14px;
 }
 
-.stakeHolderKey {
+.stake_holder_key {
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 16px;
@@ -24,7 +24,7 @@
 	white-space: nowrap;
 }
 
-.stakeHolderValue {
+.stake_holder_value {
 	margin-left: 5px;
 	font-size: 14px;
 	font-weight: 400;

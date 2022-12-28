@@ -132,7 +132,7 @@ function RateCard(allprops) {
 	return (
 		<div className={styles.container}>
 			{currentDataRows?.length ? (
-				<div className={styles.ratesContainer}>
+				<div className={styles.rates_container}>
 					<div className={styles.description}>{type}</div>
 
 					<table className={styles.table}>

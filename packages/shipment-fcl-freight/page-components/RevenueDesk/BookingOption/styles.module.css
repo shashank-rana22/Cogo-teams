@@ -1,32 +1,15 @@
-.container {
-	padding: 0 20px 20px;
-	background: #fff;
-	border-radius: 4px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
-}
-
-.bookingOptionsContainer {
-	padding: 20px;
-	background: #fff;
-	border: 1px solid #bdaff9;
-	border-radius: 4px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
-}
-
-.buttonsContainer {
+.buttons_container {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 24px;
 }
 
-.buttonsContainer button {
+.buttons_container button {
 	color: white;
-
-	/* text-transform: capitalize; */
 	background-color: #393f70;
 }
 
-.existingRatesContainer {
+.existing_rates_container {
 	padding: 16px;
 	background: #fff;
 	border: 1px solid #bdaff9;
@@ -34,7 +17,7 @@
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
 
-.flashRatesContainer {
+.flash_rates_container {
 	padding: 20px;
 	margin-top: 16px;
 	background: #fff;
@@ -43,17 +26,13 @@
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
 
-.headerContainer {
-	padding: 10px;
-}
-
-.flashContainer {
+.flash_container {
 	display: flex;
 	justify-content: flex-end;
 	width: 98%;
 }
 
-.flashContainer button {
+.flash_container button {
 	padding: 4px 12px;
 	font-size: 12px;
 	color: white;
@@ -61,23 +40,11 @@
 	background-color: #393f70;
 }
 
-.flashText {
+.flash_text {
 	margin: 8px 10px;
 	margin-bottom: 8px;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
 	color: #393f70;
-}
-
-.backContainer {
-	display: flex;
-	align-items: center;
-	width: fit-content;
-	height: 20px;
-	padding: 2px;
-	margin-top: 8px;
-	color: blue;
-	text-decoration: underline;
-	cursor: pointer;
 }

@@ -16,9 +16,9 @@ function ChooseBookingOption({
 	const dataCount = data?.list?.length;
 	return (
 		<div className={styles.container}>
-			<div className={styles.headerContainer}>
+			<div className={styles.header_container}>
 				<Button
-					className={styles.backContainer}
+					className={styles.back_container}
 					onClick={() => setShowBookingOption(false)}
 				>
 

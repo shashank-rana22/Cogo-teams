@@ -3,7 +3,7 @@
 	background: white;
 }
 
-.ratesContainer {
+.rates_container {
 	padding: 20px;
 	background: #f7f7fc;
 	border-radius: 4px;
@@ -29,22 +29,7 @@
 	padding: 12px;
 }
 
-.radioContainer {
-	cursor: pointer;
-}
-
-.labelsRow {
-	display: flex;
-	justify-content: space-between;
-	padding: 20px;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 16px;
-	color: #333;
-	text-align: center;
-}
-
-.addMore {
+.add_more {
 	display: flex;
 	justify-content: flex-end;
 	font-size: 12px;
@@ -72,5 +57,5 @@
 }
 
 .tr {
-	border: 0.969973px solid #e0e0e0;
+	border: 0.97px solid #e0e0e0;
 }
