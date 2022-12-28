@@ -5,8 +5,6 @@ import List from '../../../commons/List/index';
 import useGetBill from '../../hook/useGetBill';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 import TagsData from './tags'
-import FiledPair from './FiledPair/index'
-import RenderStatus from './RenderStatus/index';
 import RenderRemarks  from './RenderRemarks';
 import ShowRemarkData from './RenderData/ShowRemark/index'
 import RenderStatus from './RenderData/RenderStatus/index'

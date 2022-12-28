@@ -26,6 +26,8 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
     console.log(popover,"popover");
     console.log(radio,"radio");
     console.log(popoverOpen,"popoverOpen");
+    console.log(lineItems,"lineItems");
+    
     
     
     const functions = {
@@ -48,7 +50,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
 
     return(
         <div className={styles.container}>
-                <List config={LINE_ITEMS} itemData={lineItems} functions={functions} />
+                <List config={LINE_ITEMS} itemData={{list:lineItems}} functions={functions} />
 
             <div className={styles.footer}>
                 <Button size='md'  onClick={()=>{setShowLineItem(false)}}> Go Back </Button>

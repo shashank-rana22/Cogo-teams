@@ -11,7 +11,7 @@ export const LINE_ITEMS = {
         {
 			label: 'Product',
             key:'name',
-			span: 2,
+			span: 3,
 		},
 		{
 			label : 'Cur.',
