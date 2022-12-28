@@ -49,10 +49,10 @@ function Filters({
 					}
 					return (
 						<Element
-							{...control}
 							className={styles.select}
-							value={filters?.[control?.name] || ''}
+							value={filters?.[control?.name]}
 							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
+							{...control}
 						/>
 					);
 				})}
