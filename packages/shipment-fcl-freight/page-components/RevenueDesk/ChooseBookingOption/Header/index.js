@@ -1,6 +1,8 @@
+import { IcMFtaskCompleted, IcMFtaskUnableToDo, IcMTimer } from '@cogoport/icons-react';
 import React from 'react';
+
 import getHoursElasped from '../../../../utils/revenueDeskUtils/getHoursElapsed';
-import {IcMFtaskCompleted, IcMFtaskUnableToDo, IcMTimer} from '@cogoport/icons-react';
+
 // import Chat from '../../../../commons/Layout/Chat';
 import Details from './Details';
 import StakeHolderDetails from './StakeHolderDetails';
@@ -15,7 +17,9 @@ function Header({
 			<div className={styles.headerCon}>
 				<div className={styles.headerLeft}>
 					<div className={styles.headerText}>
-						{stats?.length ? <IcMFtaskCompleted height={20} width={20}/> : <IcMFtaskUnableToDo  height={20} width={20}/>}
+						{stats?.length
+							? <IcMFtaskCompleted height={20} width={20} />
+							: <IcMFtaskUnableToDo height={20} width={20} />}
 
 						<div style={{ marginLeft: '5px' }}>
 							{stats?.length
@@ -42,7 +46,7 @@ function Header({
 					{activeTab === 'pending'
 						? `(Due ${getHoursElasped(
 							data?.confirmed_by_importer_exporter_at,
-						  )})`
+						)})`
 						: ''}
 				</p>
 			</div>

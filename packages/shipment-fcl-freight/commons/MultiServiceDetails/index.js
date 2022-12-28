@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
 import { Popover, Button } from '@cogoport/components';
+import React, { useState } from 'react';
+
 import ContainerInfo from '../CargoDetails/CargoDetailsPills';
+
 import styles from './styles.module.css';
 
-const MultiServiceDetails = ({
+function MultiServiceDetails({
 	children,
 	mainServices,
 	renderBody: renderBodyProp = null,
 	showSingle = false,
 	placement = null,
 	withButton = true,
-}) => {
+}) {
 	const [show, setShow] = useState(false);
 
 	if (mainServices?.length <= 1 && !showSingle) {

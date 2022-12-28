@@ -1,34 +1,36 @@
-import { useEffect } from 'react';
 import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
-const getExistingRates = ({
+const useGetExistingRates = ({
 	api,
 	currentShipmentData,
 	choosen,
-	shipment_type,
 }) => {
-
-	const [{data:data, loading: loading, error = error },trigger]=useRequest('/get_shipment_elligible_booking_document',{manual:true})
+	const [{ data, loading }, trigger] = useRequest(
+		'/get_shipment_elligible_booking_document',
+		{ manual: true },
+	);
 
 	const getList = async () => {
 		await trigger({
 			params: {
-				shipment_id: currentShipmentData?.id,
-				page_limit: 100,
+				shipment_id : currentShipmentData?.id,
+				page_limit  : 100,
 			},
 		});
 	};
 
 	useEffect(() => {
-		if (choosen === 0 && shipment_type === 'fcl_freight') {
+		if (choosen === 0) {
 			getList();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [api, choosen]);
 
 	return {
-		existingDataLoading: loading,
-		existingData: data,
+		existingDataLoading : loading,
+		existingData        : data,
 	};
 };
 
-export default getExistingRates;
+export default useGetExistingRates;

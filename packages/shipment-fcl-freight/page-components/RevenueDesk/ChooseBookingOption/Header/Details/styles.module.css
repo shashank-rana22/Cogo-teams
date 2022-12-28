@@ -1,88 +1,92 @@
-.detailsCon{
-    display: flex;
-	align-items: start;
-	background: #f9f9f9;
-	height: fit-content;
-	padding: 15px 10px 15px 10px;
+.detailsCon {
+	display: flex;
 	flex-wrap: wrap;
+	align-items: start;
+	height: fit-content;
+	padding: 15px 10px;
+	background: #f9f9f9;
 }
 
-.detailLeft{
-    margin-right: 47px;
+.detailLeft {
+	margin-right: 47px;
 }
 
-.lead{
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 127.19%;
-    margin-top: -10px;
-    color: #828282;
-}
-.detailRight{
-    margin-left: 47px;
-}
-.pricetext{
-    height: 18px;
-    width: fit-content;
-    padding: 2px 10px 2px 10px;
-    background: #f2f2f2;
-    border-radius: 5px;
+.lead {
+	margin-top: -10px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 127.19%;
+	color: #828282;
 }
 
-.detailKey{
-    display: flex;
+.detailRight {
+	margin-left: 47px;
+}
+
+.pricetext {
+	width: fit-content;
+	height: 18px;
+	padding: 2px 10px;
+	background: #f2f2f2;
+	border-radius: 5px;
+}
+
+.detailKey {
+	display: flex;
 	align-items: center;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
 	margin-bottom: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
 	color: #4f4f4f;
 }
 
-.detailsText{
-    font-weight: 400;
-    font-size: 14px;
-    margin-left: 4px;
-    color: #393f70;
+.detailsText {
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #393f70;
 }
 
-.balanceKey{
-    padding: 0px 10px 15px 10px;
-	font-weight: 500;
-	font-size: 14px;
+.balanceKey {
 	display: flex;
 	align-items: start;
+	padding: 0 10px 15px;
+	font-size: 14px;
+	font-weight: 500;
 	color: #5936f0;
 	background: #f9f9f9;
 }
 
-.detailsBal{
-    font-size: 14px;
-    color: #5936f0;
-}
-.priceText{
-    font-weight: 500;
-	font-size: 12px;
-	line-height: 14px;
-	display: flex;
-	align-items: center;
+.detailsBal {
+	font-size: 14px;
 	color: #5936f0;
 }
 
-.serviceQuotation{
-    display: flex;
-	justify-content: center;
+.priceText {
+	display: flex;
 	align-items: center;
-	background: #dcdcdc;
-	cursor: pointer;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 14px;
+	color: #5936f0;
 }
 
-.text{
-    display: flex;
+.serviceQuotation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	background: #dcdcdc;
+}
+
+.text {
+	display: flex;
 	align-items: center;
 	font-size: 14px;
 	color: #313131;
 }
-.quotationDetails{
-    display: flex;
+
+.quotationDetails {
+	display: flex;
 }

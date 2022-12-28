@@ -1,6 +1,7 @@
 import { Tabs, TabPanel, Input } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
-import {IcMSearchlight} from '@cogoport/icons-react';
+
 import CompletedJobs from './CompletedJobs';
 import PendingJobs from './PendingJobs';
 import styles from './styles.module.css';
@@ -30,7 +31,7 @@ function RevenueList({
 	return (
 		<div>
 			<div className={styles.heading}>
-				FCL Revenue Desk    
+				FCL Revenue Desk
 			</div>
 			<div className={styles.row}>
 
@@ -82,24 +83,22 @@ function RevenueList({
 
 				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
 					<CompletedJobs
-								setShowBookingOption={setShowBookingOption}
-								total={total}
-								data={listData}
-								hookSetters={hookSetters}
-								filters={filters}
-								refetch={refetch}
-								page={page}
-								activeTab={activeTab}
-								setClickedCard={setClickedCard}
-								clickedCard={clickedCard}
-								shipment_type={shipment_type}
-							/>
+						setShowBookingOption={setShowBookingOption}
+						total={total}
+						data={listData}
+						hookSetters={hookSetters}
+						filters={filters}
+						refetch={refetch}
+						page={page}
+						activeTab={activeTab}
+						setClickedCard={setClickedCard}
+						clickedCard={clickedCard}
+						shipment_type={shipment_type}
+					/>
 				</TabPanel>
 			</Tabs>
 
-			<div>
-
-			</div>
+			<div />
 
 		</div>
 	);

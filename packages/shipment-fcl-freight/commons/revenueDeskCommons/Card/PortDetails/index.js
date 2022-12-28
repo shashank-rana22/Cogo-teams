@@ -1,13 +1,13 @@
-import React from 'react';
 import { Tooltip } from '@cogoport/components';
-import {IcAOceanFcl, IcMPortArrow} from '@cogoport/icons-react';
+import { IcAOceanFcl, IcMPortArrow } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import React from 'react';
+
 import getLocations from '../../../../utils/revenueDeskUtils/getLocations';
-import {isEmpty} from "@cogoport/utils"
-import styles from "./styles.module.css"
 
+import styles from './styles.module.css';
 
-const PortDetails = ({ data = {} }) => {
-
+function PortDetails({ data = {} }) {
 	if (isEmpty(data)) {
 		return null;
 	}
@@ -26,10 +26,14 @@ const PortDetails = ({ data = {} }) => {
 			show = false;
 		}
 		return (
-			<>	
+			<>
 				<div className={styles.portCode}>
 					{show ? (
-						<p className={styles.code}>({location?.port_code || location?.postal_code})</p>
+						<p className={styles.code}>
+							(
+							{location?.port_code || location?.postal_code}
+							)
+						</p>
 					) : null}
 
 					<p className={styles.country}>{location?.country?.name}</p>
@@ -47,14 +51,14 @@ const PortDetails = ({ data = {} }) => {
 					>
 						<>
 							<div className={styles.value}>{location?.name}</div>
-							{icdInfo?.name && <div className = {styles.icd}>{icdInfo?.name}</div>}
+							{icdInfo?.name && <div className={styles.icd}>{icdInfo?.name}</div>}
 						</>
 					</Tooltip>
 				)}
 			</>
 		);
 	};
-	const className = destination ? 'port-details' : 'port';
+	// const className = destination ? 'port-details' : 'port';
 	const renderLocation = () => {
 		if (!destination) {
 			const isSingle = true;
@@ -62,7 +66,7 @@ const PortDetails = ({ data = {} }) => {
 				<div className={styles.flexRowOrigin}>
 					{handleLocationDetails(origin, isSingle)}
 				</div>
-            )
+			);
 		}
 
 		return (
@@ -72,7 +76,7 @@ const PortDetails = ({ data = {} }) => {
 				</div>
 
 				<div className={styles.iconWrapper}>
-					<IcMPortArrow width={20} height={20}/>
+					<IcMPortArrow width={20} height={20} />
 				</div>
 
 				<div className={styles.flexRowDest}>
@@ -85,12 +89,12 @@ const PortDetails = ({ data = {} }) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.iconAndService}>
-				<IcAOceanFcl height={30} width={30}/>
+				<IcAOceanFcl height={30} width={30} />
 			</div>
 
 			{renderLocation()}
 		</div>
 	);
-};
+}
 
 export default PortDetails;

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import useListShipments from '../../hooks/revenueDeskHooks/useGetList'
-import ShipmentDetails from './ShipmentDetails';
+
+import useListShipments from '../../hooks/revenueDeskHooks/useGetList';
+
 import BookingOption from './BookingOption';
 import RevenueList from './RevenueList';
+import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
 
 function RevenueDesk() {
@@ -18,7 +20,6 @@ function RevenueDesk() {
 		list: { total, data },
 		refetch,
 	} = useListShipments({ status: activeTab });
-	
 
 	return (
 		<div className={styles.container}>
@@ -54,7 +55,7 @@ function RevenueDesk() {
 						currentShipmentData={clickedCard.shipment}
 						service={clickedCard.service}
 						setShowBookingOption={setClickedCard}
-						showBookingOption= {clickedCard}
+						showBookingOption={clickedCard}
 						refetch={refetch}
 					/>
 

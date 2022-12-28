@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
@@ -30,13 +31,13 @@ const labels = [
  * @param {Object}      					props
  * @param {Array of Object} 				[props.detail=[{}]] - Specifies details of cargo
  */
-const CargoDetailsPills = ({ detail }) => {
+function CargoDetailsPills({ detail }) {
 	return (
 		<>
 			{labels.map((label) => {
 				if (detail?.[label] && renderValue(label, detail)) {
 					return (
-					   <div className={styles.box} key={label}>
+						<div className={styles.box} key={label}>
 							{renderValue(label, detail)}
 						</div>
 					);
@@ -46,5 +47,5 @@ const CargoDetailsPills = ({ detail }) => {
 			})}
 		</>
 	);
-};
+}
 export default CargoDetailsPills;

@@ -1,90 +1,93 @@
-.headCon{
-    display: flex;
-	justify-content: space-between;
+.headCon {
+	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	margin-bottom: 10px;
 }
 
 .headerLeft {
-	
-		display: flex;
-		justify-content: flex-start;
-		padding-bottom: 15px;
-		padding-top: 15px;
+	display: flex;
+	justify-content: flex-start;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
-.headerText{
-    display: flex;
+.headerText {
+	display: flex;
 	align-items: center;
-	font-weight: 500;
 	font-size: 16px;
+	font-weight: 500;
 	line-height: 19px;
 	color: #393f70;
 }
 
-.timerText{
-    font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	text-align: center;
+.timerText {
 	margin-left: 13px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
 	color: #cb6464;
+	text-align: center;
 }
-.bookingOptionsText{
-    font-weight: 600;
+
+.bookingOptionsText {
+	margin: 16px 0 10px;
 	font-size: 18px;
+	font-weight: 600;
 	line-height: 21px;
-	margin: 16px 0px 10px 0px;
 	color: #393f70;
 }
 
-.headerRight{
-    display: flex;
-	justify-content: flex-end;
+.headerRight {
+	display: flex;
 	align-items: center;
+	justify-content: flex-end;
 }
 
-.timerContainer{
-	
-    margin-bottom: 10px;
+.timerContainer {
 	display: flex;
 	align-items: center;
 	width: 100%;
-}
-.timerInfo{
-    font-weight: 400;
-	font-size: 14px;
-	line-height: 16px;
-	color: #cb6464;
-	margin: 0;
-}
-.flashedInformation{
-    padding: 12px;
-	display: flex;
-	justify-content: space-between;
-	background: #f7f7fc;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
 	margin-bottom: 10px;
 }
 
-.text{
-    color: #393f70;
-	font-weight: 500;
-	font-size: 18px;
-}
-.smallFont{
-    font-size: 12px;
+.timerInfo {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #cb6464;
 }
 
-.loadingState{
-    width: 2px;
+.flashedInformation {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px;
+	margin-bottom: 10px;
+	background: #f7f7fc;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+}
+
+.text {
+	font-size: 18px;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.smallFont {
+	font-size: 12px;
+}
+
+.loadingState {
+	width: 2px;
 	height: 2px;
-	border-radius: 100%;
 	padding: 10px;
-	background: conic-gradient(
-		from 180deg at 50% 50%,
-		#5936f0 0deg,
-		rgba(196, 196, 196, 0) 360deg
-	);
+	background:
+		conic-gradient(
+			from 180deg at 50% 50%,
+			#5936f0 0deg,
+			rgb(196 196 196 / 0%) 360deg
+		);
+	border-radius: 100%;
 }

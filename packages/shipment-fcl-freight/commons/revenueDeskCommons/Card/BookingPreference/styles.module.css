@@ -1,18 +1,23 @@
-.container{
-    margin: 12px;
+.container {
 	max-height: 30vh;
+	padding: 20px 16px;
+	margin: 12px;
 	overflow-y: auto;
 	border: 1px solid #e0e0e0;
-	padding: 20px 16px;
 	border-radius: 4px;
 }
 
 @media (max-width: 780px) {
-    .ui_table_root {
-        overflow: auto !important;
-    }
+	.ui_table_root {
+		overflow: auto !important;
+	}
 }
-.loaderContainer{
+
+.loaderContainer {
 	display: flex;
+<<<<<<< HEAD
 	justify-content: center;
+=======
+	flex-direction: column;
+>>>>>>> 32f7886 (eslint)
 }

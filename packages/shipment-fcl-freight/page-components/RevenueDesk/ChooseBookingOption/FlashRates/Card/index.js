@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import Priority from '../../../../RevenueDesk/BookingOption/PriorityNumber';
-import controls from './flashRatesControls';
-import styles from './styles.module.css'
 
-const FlashRateCard = (allprops) => {
+import Priority from '../../../BookingOption/PriorityNumber';
+
+import controls from './flashRatesControls';
+import styles from './styles.module.css';
+
+function FlashRateCard(allprops) {
 	const {
 		type,
 		data,
@@ -37,15 +39,13 @@ const FlashRateCard = (allprops) => {
 		} else {
 			const newList = prefrences;
 			newList.push({
-				id: row_id,
-				key: prefrence_key,
+				id  : row_id,
+				key : prefrence_key,
 			});
 			setPrefrences([...newList]);
 		}
 	};
-	const showData = (val) => {
-		return val || '';
-	};
+	const showData = (val) => val || '';
 
 	const { column_names } = controls.flash_rates;
 
@@ -60,7 +60,7 @@ const FlashRateCard = (allprops) => {
 	// }
 
 	return currentDataRows?.length ? (
-		<div className= {styles.container}>
+		<div className={styles.container}>
 			<div className={styles.description}>{type}</div>
 
 			<table className={styles.table}>
@@ -70,7 +70,10 @@ const FlashRateCard = (allprops) => {
 						if (label === 'Buy Rate') {
 							return (
 								<th className={styles.th}>
-									{label} / {unit}
+									{label}
+									{' '}
+									/
+									{unit}
 								</th>
 							);
 						}
@@ -80,7 +83,7 @@ const FlashRateCard = (allprops) => {
 
 				{(currentDataRows || []).map((elememt) => (
 					<tr
-                        className={styles.tr}
+						className={styles.tr}
 						id={elememt?.id}
 						style={{ cursor: 'pointer' }}
 						onClick={() => handlePrefrence(elememt?.id)}
@@ -117,13 +120,20 @@ const FlashRateCard = (allprops) => {
 				))}
 			</table>
 
-			<div className = {styles.addMore} onClick={() => setShowAll(!showAll)}>
+			<div
+				className={styles.addMore}
+				onClick={() => setShowAll(!showAll)}
+			>
 				{currentData?.length > min && !expanded ? (
-					<>{showAll && currentData?.length ? 'See Less' : 'See More'}</>
+					<div>
+						{showAll && currentData?.length
+							? 'See Less' : 'See More'}
+
+					</div>
 				) : null}
 			</div>
 		</div>
 	) : null;
-};
+}
 
 export default FlashRateCard;

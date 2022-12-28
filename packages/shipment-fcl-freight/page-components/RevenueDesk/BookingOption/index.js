@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import { Button, Modal } from '@cogoport/components';
-import ChooseBookingOption from '../ChooseBookingOption';
-import FlashRates from '../ChooseBookingOption/FlashRates';
+import React, { useState, useEffect } from 'react';
+
 import useListBookingOptions from '../../../hooks/revenueDeskHooks/useListBookingOptions';
 import CreateDataFromChoosen from '../../../utils/revenueDeskUtils/createDataFromChoosen';
-import ExistingRates from './RatesPreferences';
-import ConfirmPrefrences from './ConfirmPreferences';
-import styles from './styles.module.css';
+import ChooseBookingOption from '../ChooseBookingOption';
+import FlashRates from '../ChooseBookingOption/FlashRates';
 
+import ConfirmPrefrences from './ConfirmPreferences';
+import ExistingRates from './RatesPreferences';
+import styles from './styles.module.css';
 
 function BookingOption(params) {
 	const [existingRatePrefrences, setExistingRatePrefrences] = useState([]);
@@ -49,6 +50,7 @@ function BookingOption(params) {
 	);
 	useEffect(() => {
 		setExistingRatePrefrences([...bnSalvage]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [statsLoading]);
 
 	const hasExistingRates = () => {
@@ -136,24 +138,21 @@ function BookingOption(params) {
 				</>
 			) : null}
 
-			
 			<Modal
 				size="md"
 				show={show}
-				onClose={()=>setShow(false)}
+				onClose={() => setShow(false)}
 				placement="center"
 			>
-			<Modal.Body>
-				<ConfirmPrefrences
-							setShow={() => setShow(false)}
-							handleSave={upateTrigger}
-							loading={loading}
-				/>
-			</Modal.Body>
+				<Modal.Body>
+					<ConfirmPrefrences
+						setShow={() => setShow(false)}
+						handleSave={upateTrigger}
+						loading={loading}
+					/>
+				</Modal.Body>
 			</Modal>
-					
-			
-		
+
 		</ChooseBookingOption>
 	);
 }

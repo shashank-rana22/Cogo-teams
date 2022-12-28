@@ -1,16 +1,16 @@
-import React from 'react';
-import Item from './Item';
-import EmptyState from '../../../EmptyState';
 import { Loader } from '@cogoport/components';
+import React from 'react';
+
+import EmptyState from '../../../EmptyState';
+
+import Item from './Item';
 import styles from './styles.module.css';
 
-
-const BookingPreference = ({ loading = false, bookingData = [] }) => {
-	
+function BookingPreference({ loading = false, bookingData = [] }) {
 	if (loading) {
 		return (
 			<div className={styles.loaderContainer}>
-				<Loader/>
+				<Loader />
 			</div>
 		);
 	}
@@ -20,16 +20,16 @@ const BookingPreference = ({ loading = false, bookingData = [] }) => {
 	}
 
 	return (
-		<div className = {styles.container}>
+		<div className={styles.container}>
 			{bookingData?.map((booking_item, idx) => (
 				<Item
 					bookingItem={booking_item}
 					idx={idx}
-					isLast={bookingData?.length - 1 === idx}
+					isLast={(bookingData?.length || 0) - 1 === idx}
 				/>
 			))}
 		</div>
 	);
-};
+}
 
 export default BookingPreference;

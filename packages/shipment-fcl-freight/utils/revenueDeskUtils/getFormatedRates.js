@@ -1,4 +1,4 @@
-import global from "../../constants/global";
+import global from '../../constants/global';
 
 const getFormatedRates = (type, data) => {
 	const rows = [];
@@ -25,15 +25,15 @@ const getFormatedRates = (type, data) => {
 
 	if (type === 'present' || type === 'current') {
 		(data || []).forEach((element) => {
-			const { rate, currency, is_rate_expired, schedule_type } =
-				getRateAndCurrency(element?.line_items);
+			const {
+				rate, currency, is_rate_expired, schedule_type,
+			} =				getRateAndCurrency(element?.line_items);
 			const row = {};
 			const rowData = {};
 
 			row.id = element?.id;
-			rowData.shipping_line =
-				element?.reverted_shipping_line?.business_name ||
-				element?.shipping_line?.business_name;
+			rowData.shipping_line =	element?.reverted_shipping_line?.business_name
+				|| element?.shipping_line?.business_name;
 			rowData.service_provider = element?.service_provider?.business_name;
 			rowData.buy_price = rate;
 			rowData.currency = currency;

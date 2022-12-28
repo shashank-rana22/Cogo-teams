@@ -1,13 +1,14 @@
-.container{
-    padding: 12px 16px;
+.container {
 	display: flex;
 	align-items: center;
+	padding: 12px 16px;
 }
-.tagWrapper{
-    margin-right: 16px;
+
+.tagWrapper {
+	margin-right: 16px;
 	background-color: #d9eafd;
 }
-.tagWrapper:hover{
-	cursor: pointer;
 
+.tagWrapper:hover {
+	cursor: pointer;
 }

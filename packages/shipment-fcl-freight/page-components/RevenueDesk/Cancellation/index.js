@@ -1,6 +1,6 @@
-import { Popover, Button } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import CancelShipment from './CancelShipment';
 
@@ -9,23 +9,21 @@ function Cancellation({
 	refetch = () => {},
 	setShowBookingOption = () => {},
 }) {
-	
 	const { id } = data;
-	
 
-	const renderBody = () =>(
+	const renderBody = () => (
 		<CancelShipment
 			id={id}
 			refetch={refetch}
 			setShowBookingOption={setShowBookingOption}
 		/>
 
-	)
+	);
 	return (
 		<div>
 			<Popover
-			placement='bottom'
-			render = {renderBody}
+				placement="bottom"
+				render={renderBody}
 			>
 				<div>
 					<IcMOverflowDot />

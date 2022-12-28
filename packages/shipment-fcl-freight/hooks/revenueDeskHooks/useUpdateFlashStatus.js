@@ -1,20 +1,22 @@
-import {useRequest} from "@cogoport/request"
-import { Toast } from '@cogoport/components'
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 
 const useCreateFlashBookingRate = ({
 	data,
 	setShowBookingOption = () => {},
 	refetch = () => {},
 }) => {
-	
-
-	 const [{data:FlashRateData, loading: loading, error = error },trigger]=useRequest({url:'/create_shipment_flash_booking_rate', method: 'post'} ,{manual:true})
+	const [{ data:FlashRateData, loading }, trigger] = useRequest({
+		url:
+		'/create_shipment_flash_booking_rate',
+		method: 'post',
+	}, { manual: true });
 
 	const handleFlashDirect = async () => {
 		try {
 			const params = {
-				shipment_id: data?.id,
-				service_type: 'fcl_freight_service',
+				shipment_id  : data?.id,
+				service_type : 'fcl_freight_service',
 			};
 
 			const res = await trigger({ data: params });

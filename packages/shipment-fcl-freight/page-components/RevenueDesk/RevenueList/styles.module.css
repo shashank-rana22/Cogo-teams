@@ -1,57 +1,58 @@
-.tab_label{
-    width: 15%;
-    font-weight: 700;
-    font-size: 16px;
+.tab_label {
+	width: 15%;
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .ui_tabs {
 	position: static !important;
 }
+
 .ui_tabs_list {
 	position: static !important;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
+
 .ui_tabs_list_container {
+	position: static !important;
+	justify-content: center;
 	width: 260px;
 	height: 40px;
-	justify-content: center;
-	font-weight: 600;
 	font-size: 18px;
-	position: static !important;
+	font-weight: 600;
 }
 
 .headingContainer {
-    display: flex;
-    justify-content: space-between;
- }
+	display: flex;
+	justify-content: space-between;
+}
 
- .heading{
-	font-weight: 500;
+.heading {
 	font-size: 25px;
-	color: #333333;
-	
- }
+	font-weight: 500;
+	color: #333;
+}
 
- .row {
-    display: flex;
+.row {
+	display: flex;
 	justify-content: flex-end;
 	margin-bottom: -36px;
- }
+}
 
- .listWrapper {
+.listWrapper {
 	margin-top: 10px;
- }
- .input{
-    display: flex;
-    justify-content: flex-end;
-    width: 300px;
+}
+
+.input {
+	display: flex;
+	justify-content: flex-end;
+	width: 300px;
 	padding-bottom: 14px;
+}
 
- }
-
- .loaderContainer{
-	background: #fff;
+.loaderContainer {
 	display: flex;
 	flex-direction: column;
 	padding: 20px 8px;
- }
+	background: #fff;
+}

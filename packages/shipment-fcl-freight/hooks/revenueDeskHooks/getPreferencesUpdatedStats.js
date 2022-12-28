@@ -1,32 +1,34 @@
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
-import {useRequest} from "@cogoport/request"
-import {Toast}from '@cogoport/components';
 
-const getPrefrencesUpdatedStats = ({ shipment_id, service }) => {
-
-
-	const [{data:data, loading: loading, error = error },trigger]= useRequest('/list_shipment_booking_confirmation_preferences',{manual:true})
+const useGetPrefrencesUpdatedStats = ({ shipment_id, service }) => {
+	const [{ data, loading }, trigger] = useRequest(
+		'/list_shipment_booking_confirmation_preferences',
+		{ manual: true },
+	);
 
 	const handleApi = async () => {
 		try {
 			const params = {
 				filters: {
 					shipment_id,
-					service_type: service?.service_type || undefined,
-					service_id: service?.id || undefined,
+					service_type : service?.service_type || undefined,
+					service_id   : service?.id || undefined,
 				},
 			};
 
 			await trigger({ params });
-		} catch (error) {
-			Toast.error(error);
+		} catch (err) {
+			Toast.error(err);
 		}
 	};
 
 	useEffect(() => {
 		if (shipment_id) {
 			handleApi(shipment_id);
-		} 
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
@@ -35,4 +37,4 @@ const getPrefrencesUpdatedStats = ({ shipment_id, service }) => {
 	};
 };
 
-export default getPrefrencesUpdatedStats;
+export default useGetPrefrencesUpdatedStats;

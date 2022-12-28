@@ -1,9 +1,9 @@
-.sd{
-    border-bottom: 1px solid #e0e0e0;
-	padding: 6px 0px;
+.sd {
 	display: flex;
+	padding: 6px 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.last-child{
-    border-bottom: none;
+.last-child {
+	border-bottom: none;
 }

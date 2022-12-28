@@ -1,60 +1,66 @@
-.container{
+.container {
 	display: flex;
 	width: 100%;
-	margin-bottom: 12px;
 	padding-bottom: 12px;
+	margin-bottom: 12px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.serial{
-	font-weight: 600;
-	font-size: 12px;
-	color: #828282;
-	margin-right: 20px;
+.serial {
 	margin-top: 2px;
+	margin-right: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #828282;
 }
 
-.containerRowKeyValue{
+.containerRowKeyValue {
 	width: 15%;
 }
-.text{
+
+.text {
 	font-size: 10px;
-	color: #333333;
-}
-.wrapper{
-	background: #e0e0e0;
-	border-radius: 4px;
-	padding: 4px 12px;
-	font-size: 10px;
-	color: #333333;
-	max-width: 15%;
-	width: fit-content;
-	height: fit-content;
-	white-space: nowrap;
+	color: #333;
 }
 
-.heading{
-	font-weight: 500;
-	font-size: 12px;
-	color: #333333;
-	margin-bottom: 4px;
+.wrapper {
+	width: fit-content;
+	max-width: 15%;
+	height: fit-content;
+	padding: 4px 12px;
+	font-size: 10px;
+	color: #333;
+	white-space: nowrap;
+	background: #e0e0e0;
+	border-radius: 4px;
 }
-.flexCol{
+
+.heading {
+	margin-bottom: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
+}
+
+.flexCol {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 }
-.flexRow{
+
+.flexRow {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 }
-.isLast{
-		border: none;
-		margin-bottom: 0px;
-		padding-bottom: 0px;
+
+.isLast {
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border: none;
 }
-.reverted{
+
+.reverted {
 	color: #5936f0;
 }

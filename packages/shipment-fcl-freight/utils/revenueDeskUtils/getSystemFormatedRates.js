@@ -29,8 +29,9 @@ const getSystemFormatedRates = (data) => {
 
 	const rows = [];
 	(data || []).forEach((element) => {
-		const { minimumRate, currency, is_rate_expired, schedule_type } =
-			getMinRate(element?.line_items || element?.validities);
+		const {
+			minimumRate, currency, is_rate_expired, schedule_type,
+		} =			getMinRate(element?.line_items || element?.validities);
 		const row = {};
 		const rowData = {};
 		row.id = element?.id;

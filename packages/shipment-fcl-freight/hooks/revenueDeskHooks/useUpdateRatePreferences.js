@@ -1,8 +1,7 @@
-import { useRequest } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 
 const useUpdateRatesPrefrences = (payloads) => {
-
 	const apitoCall = '/create_shipment_booking_confirmation_preference';
 	const successMessage = 'Updated';
 	const {
@@ -56,18 +55,18 @@ const useUpdateRatesPrefrences = (payloads) => {
 	const final_payload = {
 		shipment_id,
 		service_providers,
-		booking_confirmation_docs: bookingConformationDocs,
-		service_id: service?.id || undefined,
-		service_type: service?.service_type || undefined,
+		booking_confirmation_docs : bookingConformationDocs,
+		service_id                : service?.id || undefined,
+		service_type              : service?.service_type || undefined,
 	};
 
-
-
-	const [{data:internalStakeHoldersList, loading: loading, error : error },trigger] = useRequest({url: apitoCall, method: 'post'},{manual:true})
+	const [{ data:internalStakeHoldersList, loading }, trigger] = useRequest(
+		{ url: apitoCall, method: 'post' },
+		{ manual: true },
+	);
 
 	const upateTrigger = async () => {
-		const hasData =
-			service_providers?.length || bookingConformationDocs?.length;
+		const hasData =			service_providers?.length || bookingConformationDocs?.length;
 		if (hasData) {
 			try {
 				const res = await trigger({
@@ -83,7 +82,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 					Toast.error('Something went wrong', <Partial>{postion= "top-center"}</Partial>);
 				}
 			} catch (error) {
-				console.log(error);
+				Toast.error(error);
 				setShow(false);
 			}
 		} else {
