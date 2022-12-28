@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react';
-import { Pagination } from '@cogoport/components';
+import React, { ReactNode,useState } from 'react';
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import { ConfigType, NestedObj,FunctionObjects,ListDataProps } from '../Interfaces/index';
+import {Pagination} from '@cogoport/components';
 import commonFunctions from "../..//commons/List/commonFunctions";
-import styles from "./styles.module.css";
+import styled from './styles.module.css';
 
 export interface Props {
 	config: ConfigType;
@@ -23,10 +23,14 @@ function List({
 	config, sort, setSort, itemData, renderHeaderCheckbox,functions={},loading=false,page=1,handlePageChange,pageSize=10
 }:Props) {
 	const isMobile = false;
+	
 	const {
 		showHeader = true, fields, headerStyles, itemStyles, bodyStyles, showHeaderCheckbox,
 	} = config;
 	const list=itemData?.list;
+	
+	console.log(itemData,'itemData');
+	
 	return (
 		<section>
 			{showHeader && !isMobile && (
@@ -52,15 +56,17 @@ function List({
 					/>
 				))}
 			</div>
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={itemData?.totalRecords}
-					pageSize={pageSize}
-					handlePageChange={handlePageChange}
-				/>
-			</div>
+			
+			<div className={styled.paginations} >
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={itemData?.totalRecords}
+						pageSize={pageSize}
+						handlePageChange={handlePageChange}
+					/>
+				</div>
+			
 		</section>
 	);
 }

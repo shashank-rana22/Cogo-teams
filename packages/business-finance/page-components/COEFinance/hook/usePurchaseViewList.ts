@@ -7,6 +7,7 @@ import { PURCHASE_VIEW_CONFIG } from '../configurations/PURCHASE_VIEW_LIST';
 
 const  useGetPurchaseViewList=()=> {
 	const [page,setPage]=useState<number>(1)
+	
     const [{ data, loading, error }, refetch] = useRequestBf(
 		{
 			url     : '/purchase/bills/list',

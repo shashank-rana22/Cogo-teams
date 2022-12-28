@@ -2,11 +2,16 @@ import React from 'react';
 import {Tooltip} from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import styled from './styles.module.css'
+import {FieldType,ListDataProps} from '../../../../../commons/Interfaces/index'
 
+interface props{
+      itemData: ListDataProps,
+	  field: FieldType,	
+}
 
-const FieldPair = ({ item = {}, field = {} }) => {
-	const { topKey = '', lowerKey = '' } = field;
-	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = item || {};
+const FieldPair = ({ itemData = {}, field = {} }:props) => {
+	const { topKey = '', bottomKey = '' } = field;
+	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = itemData || {};
 	
     const handleBillType = (item:any) => {
         let invoiceType;
@@ -46,8 +51,8 @@ const FieldPair = ({ item = {}, field = {} }) => {
 					</div>
 				)}
 
-				{lowerKey && (
-				<div className={styled.lowerKeys}>{handleBillType(item)}</div>
+				{bottomKey && (
+				<div className={styled.lowerKeys}>{handleBillType(itemData)}</div>
 				)}
 				</div>
 		)}
@@ -58,7 +63,7 @@ const FieldPair = ({ item = {}, field = {} }) => {
 						{jobNumber}
 					</text>
 				)}
-				{lowerKey && (
+				{bottomKey && (
 				<div className={styled.serviceType}>{startCase(serviceType)}</div>
 				)}
 			</div>

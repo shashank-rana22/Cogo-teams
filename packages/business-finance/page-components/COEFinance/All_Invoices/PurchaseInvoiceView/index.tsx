@@ -1,11 +1,11 @@
 import React from 'react'
 import List from '../../../commons/List/index';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
-import ShowRemarkData from './ShowRemark/index'
-import RenderStatus from './RenderStatus/index'
-import FieldPair from './FiledPair/index';
-import RenderCustomer from './RenderCustomer/index'
-import FormatedDate from './FormatedDate/index';
+import ShowRemarkData from './RenderData/ShowRemark/index'
+import RenderStatus from './RenderData/RenderStatus/index'
+import FieldPair from './RenderData/FiledPair/index';
+import RenderCustomer from './RenderData/RenderCustomer/index'
+import FormatedDate from './RenderData/FormatedDate/index';
 
 
 
@@ -22,7 +22,7 @@ function PurchaseInvoice() {
           <RenderStatus item={itemData} field={field} />
       ),
       renderFieldPair: (itemData:any, field:any) => (
-        <FieldPair item={itemData} field={field} />
+        <FieldPair itemData={itemData} field={field} />
       ),
       renderCustomer: (itemData:any, field:any) => (
         <RenderCustomer item={itemData} field={field} />
@@ -35,7 +35,13 @@ function PurchaseInvoice() {
 
   return (
     <div>
-        <List config={config}  itemData={data} functions={functions} loading={loading} page={page} handlePageChange={handlePageChange}/>
+        <List 
+        config={config}  
+        itemData={data} 
+        functions={functions} 
+        loading={loading} 
+        page={page} 
+        handlePageChange={handlePageChange}/>
     </div>
   )
 }
