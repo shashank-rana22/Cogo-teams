@@ -21,6 +21,7 @@ function FileUploader(props: any) {
 
 	const [percent, setPercent] = useState(0);
 	const [fileName, setFileName] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	const [{ loading: addLoading }, triggerAdd] = useRequest({
 		method : 'GET',
@@ -29,15 +30,15 @@ function FileUploader(props: any) {
 	const [{ loading: uploadLoading }, triggerUpload] = usePublicRequest({
 		method: 'PUT',
 	}, { manual: true });
-
-	const onUploadProgress = (progressEvent: any) => {
-		const { loaded, total } = progressEvent;
-		const completedValue = Math.floor((loaded * 100) / total);
-
-		setPercent(completedValue);
+	const complete = () => {
+		setPercent(100);
 	};
+
 	let i = 0;
+	const done = 10;
 	const handleChange = async (values: any) => {
+		setPercent(done);
+		const promises = [];
 		while (i < values.length) {
 			try {
 				const { data } = await triggerAdd({
@@ -45,14 +46,14 @@ function FileUploader(props: any) {
 				});
 				const { url, headers } = data;
 				try {
-					await triggerUpload({
+					promises.push(await triggerUpload({
 						url,
 						data    : values[i],
 						headers : {
 							'Content-Type': values[i].type,
 						},
-						onUploadProgress,
-					});
+					}));
+					setPercent(done + (50 * i));
 				} catch (err) {
 					console.log({ err });
 				}
@@ -62,11 +63,17 @@ function FileUploader(props: any) {
 				return Toast.error('File Upload failed.......');
 			}
 		}
+		Promise.all(promises).then((promise) => {
+			promise.forEach((item) => {
+				setPercent(100);
+				setLoading(false);
+			});
+		});
 	};
 
 	return (
 		<>
-			<Upload {...rest} value={fileName} multiple={multiple} onChange={handleChange} />
+			<Upload {...rest} value={fileName} multiple={multiple} onChange={handleChange} loading={loading} />
 			{(percent > 0 && percent < 100) && (
 				<div className={styles.progress_container}>
 					<IcMDocument
