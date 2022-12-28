@@ -1,19 +1,10 @@
-import InputController from '@cogo/business-modules/form/components/Controlled/InputController';
-import SelectController from '@cogo/business-modules/form/components/Controlled/SelectController';
+import { Button } from '@cogoport/components';
+import { InputController, SelectController, MultiselectController } from '@cogoport/forms';
 import React from 'react';
 
-import {
-	FormContainer,
-	Row,
-	Col,
-	FormGroup,
-	FormLabel,
-	InputGroup,
-	ErrorMessage,
-	ButtonContainerCol,
-	BackButton,
-	AddButton,
-} from './styles';
+import functionSubFunctionMapping from '../../../../../../configurations/function-sub-function-mapping';
+
+import styles from './styles.module.css';
 
 const getElementController = (type = 'text') => {
 	switch (type) {
@@ -22,6 +13,9 @@ const getElementController = (type = 'text') => {
 
 		case 'select':
 			return SelectController;
+
+		case 'multiSelect':
+			return MultiselectController;
 
 		default:
 			return null;
@@ -34,59 +28,54 @@ function Form({
 	errors = {},
 	onSubmit = () => {},
 	onErrors = () => {},
-	onChangeShowCreateRoleModal = () => {},
-	createRoleApi = {},
 }) {
-	const { handleSubmit, fields } = formProps;
+	const { handleSubmit, control, watch } = formProps;
+	const type = watch('role_functions') || [];
+
+	console.log('type', type);
+
+	const subRoleFunctionOptions = [];
+
+	type?.forEach((subType) => {
+		subRoleFunctionOptions.push(...(functionSubFunctionMapping[subType] || []));
+	});
 
 	return (
-		<FormContainer
+		<form
+			className={styles.form_container}
 			id="rnp_role_list_create_role_form"
 			onSubmit={handleSubmit(onSubmit, onErrors)}
 		>
-			<Row>
-				{controls?.map((control) => {
-					const Element = getElementController(control.type);
+			{controls.map((controlItem) => {
+				const el = { ...controlItem };
+				const Element = getElementController(el.type);
 
-					if (!Element) return null;
+				if (el.name === 'role_sub_functions') {
+					el.options = subRoleFunctionOptions;
+				}
 
-					return (
-						<Col xs="12" sm="12" md={control.span}>
-							<FormGroup>
-								<FormLabel>{control?.label}</FormLabel>
-								<InputGroup>
-									<Element
-										id={`rnp_role_list_create_role_form_${controls?.name}_input`}
-										{...fields?.[control?.name]}
-									/>
-									<ErrorMessage>
-										{errors?.[control?.name]?.message}
-									</ErrorMessage>
-								</InputGroup>
-							</FormGroup>
-						</Col>
-					);
-				})}
+				if (!Element) return null;
 
-				<ButtonContainerCol xs="12">
-					<BackButton
-						id="rnp_role_list_create_role_form_back_button"
-						type="button"
-						onClick={() => onChangeShowCreateRoleModal(false)}
-					>
-						Back
-					</BackButton>
+				return (
+					<div style={{ flex: el.flex }}>
+						<div className={styles.form_group}>
+							<span>{el.label}</span>
+							<div className={styles.input_group}>
+								<Element
+									{...el}
+									control={control}
+									id={`rnp_role_list_create_role_form_${el.name}_input`}
+								/>
+								<div className={styles.error_message}>
+									{errors?.[el.name]?.message}
+								</div>
+							</div>
+						</div>
+					</div>
+				);
+			})}
 
-					<AddButton
-						id="rnp_role_list_create_role_form_submit_button"
-						type="submit"
-						disabled={createRoleApi?.loading}
-					>
-						Add
-					</AddButton>
-				</ButtonContainerCol>
-			</Row>
-		</FormContainer>
+		</form>
 	);
 }
 

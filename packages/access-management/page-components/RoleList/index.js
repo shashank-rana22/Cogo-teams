@@ -3,7 +3,7 @@ import React from 'react';
 
 import useRoleList from '../../hooks/useRoleList';
 
-// import CreateRoleModal from './CreateRoleModal';
+import CreateRoleModal from './CreateRoleModal';
 import Filters from './Filters';
 import Header from './Header';
 import List from './List';
@@ -55,11 +55,11 @@ function RoleList() {
 				</section>
 			</section>
 
-			{/* <CreateRoleModal */}
-			{/* 	showCreateRoleModal={showCreateRoleModal} */}
-			{/* 	onChangeShowCreateRoleModal={onChangeShowCreateRoleModal} */}
-			{/* 	redirect={redirect} */}
-			{/* /> */}
+			<CreateRoleModal
+				showCreateRoleModal={showCreateRoleModal}
+				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
+				redirect={redirect}
+			/>
 		</section>
 	);
 }
