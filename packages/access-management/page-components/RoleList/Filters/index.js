@@ -1,6 +1,6 @@
 import { Select, MultiSelect } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsLocations, asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
+import { asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
 import React from 'react';
 
 import SearchInput from '../../../common/SearchInput';
