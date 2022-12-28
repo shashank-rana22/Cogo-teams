@@ -31,11 +31,11 @@ function Cancellation({
 		setShowCancel,
 		refetch,
 		setShowBookingOption,
+		onClose,
 	});
 
 	const handleCancelSubmit = () => {
 		ref?.current?.handleSubmit();
-		onClose();
 	};
 
 	const showOptions = () => {

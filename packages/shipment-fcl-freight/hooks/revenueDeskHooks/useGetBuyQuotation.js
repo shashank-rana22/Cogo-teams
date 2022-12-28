@@ -25,7 +25,7 @@ const useGetBuyQuotation = (shipmentData) => {
 				},
 			});
 		} catch (err) {
-			Toast.error(err);
+			Toast.error('Something went wrong!');
 		}
 	};
 

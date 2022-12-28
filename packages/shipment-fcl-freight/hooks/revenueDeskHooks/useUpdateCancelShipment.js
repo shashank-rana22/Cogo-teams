@@ -9,6 +9,7 @@ const useUpdateCancelShipment = ({
 	setShowCancel = () => {},
 	refetch = () => {},
 	setShowBookingOption = () => {},
+	onClose = () => {},
 }) => {
 	const [errors, setErrors] = useState({});
 
@@ -32,11 +33,10 @@ const useUpdateCancelShipment = ({
 				setShowCancel(false);
 				setShowBookingOption(false);
 				refetch();
-			} else {
-				Toast.error('Something went wrong, we are working on it!');
+				onClose();
 			}
 		} catch (err) {
-			Toast.error(err);
+			Toast.error('Something went wrong');
 		}
 	};
 

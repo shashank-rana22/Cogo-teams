@@ -7,12 +7,11 @@ import styles from './styles.module.css';
 function CancellationModal({
 	onSubmit = () => {},
 	onError = () => {},
-	ref,
-}) {
+}, ref) {
 	const { control, handleSubmit } = useForm();
 
 	useImperativeHandle(ref, () => ({
-		handleSubmit: handleSubmit({ onSubmit, onError }),
+		handleSubmit: handleSubmit(onSubmit, onError),
 	}));
 
 	return (

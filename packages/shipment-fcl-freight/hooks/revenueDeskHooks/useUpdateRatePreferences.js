@@ -66,7 +66,7 @@ const useUpdateRatesPrefrences = (payloads) => {
 	);
 
 	const upateTrigger = async () => {
-		const hasData =			service_providers?.length || bookingConformationDocs?.length;
+		const hasData =	service_providers?.length || bookingConformationDocs?.length;
 		if (hasData) {
 			try {
 				const res = await trigger({
@@ -77,9 +77,6 @@ const useUpdateRatesPrefrences = (payloads) => {
 					setShowBookingOption(false);
 					setShow(false);
 					refetch();
-				} else {
-					setShow(false);
-					Toast.error('Something went wrong');
 				}
 			} catch (error) {
 				Toast.error(error);
