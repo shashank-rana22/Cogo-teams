@@ -9,6 +9,7 @@ const useGetListRfqs = () => {
 	const [{ loading: apiLoading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_rfqs',
+		scope,
 	}, { manual: false });
 
 	const listAPi = (restFilters, currentPage) => {

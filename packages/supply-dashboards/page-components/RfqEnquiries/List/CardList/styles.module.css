@@ -1,0 +1,11 @@
+.cardlist {
+	width: 100%;
+	padding-left: 1px;
+	margin: 10px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 4px;
+}

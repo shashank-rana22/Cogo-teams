@@ -9,7 +9,7 @@ const columns = [
 				{item?.serial_id}
 			</div>
 		),
-		span: 2,
+		flex: 1,
 	},
 	{
 		label  : 'Customer Name',
@@ -19,7 +19,7 @@ const columns = [
 				{item?.user?.name}
 			</div>
 		),
-		span: 2,
+		flex: 3,
 	},
 	{
 		label  : 'No Of Port Pairs',
@@ -29,7 +29,7 @@ const columns = [
 				{item?.total_port_pair}
 			</div>
 		),
-		span: 2,
+		flex: 3,
 	},
 	{
 		label  : 'Last Updated',
@@ -42,12 +42,12 @@ const columns = [
 				</div>
 			);
 		},
-		span: 2,
+		flex: 2,
 	},
 	{
 		label  : '',
 		key    : 'edit',
-		span   : 2,
+		flex   : 3,
 		render : (item) => (
 			<div>{item.total_port_pair}</div>
 		),

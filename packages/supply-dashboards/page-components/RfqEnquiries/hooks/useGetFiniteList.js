@@ -9,7 +9,7 @@ const useGetFiniteList = (hook) => {
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [initialPath] = useState(pathname);
-	const [filters, setFilters] = useState({ page: 1, highlight: undefined });
+	const [filters, setFilters] = useState({ page: 1 });
 	const [list, setList] = useState({
 		data         : [],
 		total        : 0,
@@ -18,7 +18,7 @@ const useGetFiniteList = (hook) => {
 		reverted     : 0,
 	});
 
-	const { page, highlight = false, ...restFilters } = filters;
+	const { page, ...restFilters } = filters;
 
 	const refetch = () => {
 		setLoading(true);
@@ -64,12 +64,11 @@ const useGetFiniteList = (hook) => {
 	return {
 		loading,
 		page,
-		filters: restFilters,
+		filters,
 		list,
 		errors,
 		hookSetters,
 		refetch,
-		highlight,
 	};
 };
 

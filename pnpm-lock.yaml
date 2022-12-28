@@ -360,6 +360,7 @@ importers:
   packages/supply-dashboards:
     specifiers:
       '@cogoport/components': ^1.0.137
+      '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
@@ -367,7 +368,8 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.137_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.138_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request

@@ -1,0 +1,18 @@
+.service {
+	display: flex;
+	width: 100%;
+}
+
+.tag {
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	border-radius: 4px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}

@@ -1,0 +1,16 @@
+.heading {
+	padding-left: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.filter {
+	padding: 2px;
+}
+
+.line {
+	height: 0;
+	margin-bottom: 4px;
+	border: 1px solid #ffeddd;
+}

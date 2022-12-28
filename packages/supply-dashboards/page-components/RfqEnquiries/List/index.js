@@ -1,17 +1,17 @@
-import useGetListRfqs from '../hooks/useGetListRfqs';
-
 import CardList from './CardList';
 import fields from './fields';
 
-function List() {
-	const {
-		loading,
-		page,
-		filters,
-		list,
-		hookSetters,
-		refetch,
-	} = useGetListRfqs();
-	return (<CardList fields={fields} data={list?.data || []} loading={loading} />);
+function List({
+	list, loading, filters, hookSetters,
+}) {
+	return (
+		<CardList
+			fields={fields}
+			list={list || []}
+			loading={loading}
+			filters={filters}
+			hookSetters={hookSetters}
+		/>
+	);
 }
 export default List;

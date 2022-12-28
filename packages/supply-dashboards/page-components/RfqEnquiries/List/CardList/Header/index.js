@@ -2,17 +2,17 @@ import styles from './styles.module.css';
 
 function Header({ columns = [] }) {
 	return (
-		<header className={styles.container}>
-			{columns.map(({ label = '', flex = 4, key }) => (
+		<div className={styles.container}>
+			{columns.map(({ label = '', flex = 2, key }) => (
 				<div
 					className={styles.header}
 					key={label || key}
-					style={{ size: flex }}
+					style={{ flex }}
 				>
 					{label}
 				</div>
 			))}
-		</header>
+		</div>
 	);
 }
 
