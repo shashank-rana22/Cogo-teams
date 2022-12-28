@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TabPanel, Tabs } from "@cogoport/components";
 import styles from "./styles.module.css";
 import { useRouter } from "@cogoport/next";
+import { IcMAccountSettings } from '@cogoport/icons-react';
 import AllInvoices from "./All_Invoices/index";
 import MyResponsiveBar from "./Components/ResponsiveBar";
 import MyResponsiveLine from "./Components/Stream";
@@ -9,6 +10,7 @@ import MyResponsiveLines from "./Components/linecharts";
 import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
 import SegmentedControl from "../commons/SegmentedControl";
+
 const CoeFinance=()=>{
     const [currentTab, setCurrentTab] = useState('');
     const OPTIONS = [

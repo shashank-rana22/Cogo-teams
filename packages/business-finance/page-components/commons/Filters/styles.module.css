@@ -1,0 +1,19 @@
+.label {
+  margin: 10px 0px 10px 0px;
+  font-weight: 500;
+  color: #393f70;
+}
+
+.col {
+	display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 0 0 var(--width);
+  margin: 5px;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

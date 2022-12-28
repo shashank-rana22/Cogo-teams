@@ -1,0 +1,14 @@
+.urlContainer {
+  color: #3471ae;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.textDiv {
+  color: #3471ae;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.flex{
+  display: flex;
+}

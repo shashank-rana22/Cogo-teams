@@ -5,9 +5,12 @@ import List from '../commons/List/index';
 import SegmentedControl from "../commons/SegmentedControl";
 import { IcMAccountSettings } from '@cogoport/icons-react';
 import StyledTable from '../commons/StyledTable';
+import Filter from '../commons/Filters';
+import {INVOICE_FILTERS} from './FILTERS_CONTROLS';
 
 function AccountRecievables() {
 	const [sort, setSort] = useState({});
+    const [filters,setFilters]=useState({});
 	const OPTIONS = [
 		{
 			label: 'Per Package',
@@ -69,6 +72,7 @@ function AccountRecievables() {
 						setActiveTab={setCurrentTab}
 					/>
 			<StyledTable columns={columns} data={data}/>
+            <Filter controls={INVOICE_FILTERS} filters={filters} setFilters={setFilters}/>
 		</div>
 	);
 }
