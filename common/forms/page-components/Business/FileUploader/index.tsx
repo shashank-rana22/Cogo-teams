@@ -30,9 +30,6 @@ function FileUploader(props: any) {
 	const [{ loading: uploadLoading }, triggerUpload] = usePublicRequest({
 		method: 'PUT',
 	}, { manual: true });
-	const complete = () => {
-		setPercent(100);
-	};
 
 	let i = 0;
 	const done = 10;
@@ -57,6 +54,7 @@ function FileUploader(props: any) {
 				} catch (err) {
 					console.log({ err });
 				}
+				onChange(values);
 				setFileName(values);
 				i++;
 			} catch (err:any) {
