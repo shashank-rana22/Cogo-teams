@@ -75,7 +75,10 @@ function Card({
 						/>
 					) : null}
 
-					<div className={styles.subInfo} onClick={() => setView(!view)}>
+					<div className={styles.subInfo} onClick={(service) => {
+															setView(!view);
+															setSelectedService(service)}}
+															 >
 						{view ? (
 							<div className={styles.iconWrapper}>
 							<IcMArrowRotateUp height={20} width={20} />

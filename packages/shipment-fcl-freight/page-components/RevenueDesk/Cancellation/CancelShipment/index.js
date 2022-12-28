@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import CancellationModal from '../../../../commons/CancellationModal';
-// import useUpdateCancelShipment from '../../../../Fcl/hooks/useUpdateCancelShipment';
+import useUpdateCancelShipment from '../../../../hooks/revenueDeskHooks/useUpdateCancelShipment'
 import { Button, Modal } from '@cogoport/components';
 import styles from './styles.module.css'
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useRequest } from '@cogo/commons/hooks';
-// import { useFormCogo } from '@cogoport/front/hooks';
-// import { toast } from '@cogoport/front/components/admin';
-// import { getApiErrorString } from '@cogoport/front/utils';
-import controls from '../../Shared/utils/cancellation-controls';
+import { useRequest } from '@cogoport/request';
+// import {useForm} from '@cogoport/forms';
+import { Toast } from '@cogoport/components';
+// import { getApiErrorString } from '@cogoport/utils';
+import controls from '../../utils/revenueDeskUtils/getCancellationControls';
 
 const useUpdateCancelShipment = ({
 	id,
@@ -14,10 +14,12 @@ const useUpdateCancelShipment = ({
 
 	const [errors, setErrors] = useState({});
 
-	const cancelShipment = useRequest('/update_shipment', {manual:true});
+	const [{loading}, trigger] = useRequest({url : '/update_shipment',
+										method : 'post', }, {manual:true});
 
-	const { fields, watch, handleSubmit } = useFormCogo(controls);
-	// const formValues = watch();
+	const { watch, handleSubmit, getValues,
+		 control } = useForm();
+	const formValues = watch();
 
 	const onError = (err) => {
 		setErrors(err);
@@ -27,24 +29,24 @@ const useUpdateCancelShipment = ({
 		const submit_data = { id,  state: 'cancelled' };
 
 		try {
-			const res = await cancelShipment.trigger({ data: submit_data });
+			const res = await trigger({ data: submit_data });
 
 			if (!res.hasError) {
-				toast.success('Shipment Cancelled');
+				Toast.success('Shipment Cancelled');
 				setShowCancel(false);
 				setShowBookingOption(false);
 				refetch();
 			} else {
-				toast.error('Something went wrong, we are working on it!');
+				Toast.error('Something went wrong, we are working on it!');
 			}
 		} catch (err) {
-			toast.error(getApiErrorString(err?.data));
+			Toast.error(err);
 		}
 	};
 
 	return {
 		onSubmit,
-		loading: cancelShipment.loading,
+		loading,
 		handleSubmit,
 		fields,
 		onError,

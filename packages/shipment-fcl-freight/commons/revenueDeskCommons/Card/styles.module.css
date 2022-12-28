@@ -35,4 +35,8 @@
 	align-items: center;
 	padding: 4px 0px;
 	cursor: pointer;
+	max-height: 20px;
+}
+.iconWrapper{
+	margin-right: 6px;
 }
