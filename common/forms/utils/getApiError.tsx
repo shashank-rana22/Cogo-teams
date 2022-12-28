@@ -1,4 +1,4 @@
-const getApiErrorString = (messages) => Object.keys(messages || {})
+const getApiErrorString = (messages: any) => Object.keys(messages || {})
 	.map((_) => `${_} ${messages[_]}`)
 	.join(', ');
 

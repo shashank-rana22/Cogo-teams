@@ -14,9 +14,9 @@
 .popoverRejected {
   width: 125px;
   color: red;
-  position: absolute;
+  /* position: absolute;
   left: 88%;
-  top: 110%;
+  top: 80%; */
   padding: 8px 12px;
   font-size: 14px;
   background: #fff;

@@ -12,14 +12,15 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
     const [popover, setPopover] = useState(false)
 
     const renderBody = () => {
+        if(popover){
+            setRadio(false)
+            return <IcCRedCircle width="17px" height="17px" />
+        }
         if(radio){
             setPopover(false)
-              return <IcCFtick width="17px" height="17px" /> 
+            return <IcCFtick width="17px" height="17px" /> 
         }
-        if(popover){
-              setRadio(false)
-              return <IcCRedCircle width="17px" height="17px" />
-        }
+
         return  <div className={styles.circle} />
     };
     console.log(popover,"popover");

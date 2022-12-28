@@ -14,8 +14,6 @@ export default function Check() {
 	if (error) return 'An error has occurred.';
 	if (!data) return 'Loading...';
 
-	// console.log(profileName, 'ff');
-
 	return (
 		<div>
 			<h1>{data.name}</h1>

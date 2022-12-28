@@ -1,23 +1,28 @@
 
 
 import { useRequestBf } from '@cogoport/request';
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { PURCHASE_VIEW_CONFIG } from '../configurations/PURCHASE_VIEW_LIST';
 
 
 const  useGetPurchaseViewList=()=> {
-    const [{ data, loading, error }, trigger] = useRequestBf(
+	const [page,setPage]=useState<number>(1)
+	
+    const [{ data, loading, error }, refetch] = useRequestBf(
 		{
 			url     : '/purchase/bills/list',
 			method  : 'get',
+			params : {
+				pageIndex : page
+				},
 			authKey : 'get_purchase_bills_list',
 		},
-		{ autoCancel: false },
+		{ manual: false },
 	);
 
-	useEffect(() => {
-		trigger();
-	}, []);
+	useEffect(()=>{
+		refetch()
+	},[page])
 
 const config = PURCHASE_VIEW_CONFIG;
     
@@ -26,6 +31,8 @@ const config = PURCHASE_VIEW_CONFIG;
         data,
         loading,
         config,
+		handlePageChange:setPage,
+		page
     };
 }
 

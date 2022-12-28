@@ -8,36 +8,57 @@ import TagsData from './tags'
 import FiledPair from './FiledPair/index'
 import RenderStatus from './RenderStatus/index';
 import RenderRemarks  from './RenderRemarks';
+import ShowRemarkData from './RenderData/ShowRemark/index'
+import RenderStatus from './RenderData/RenderStatus/index'
+import FieldPair from './RenderData/FiledPair/index';
+import RenderCustomer from './RenderData/RenderCustomer/index'
+import FormatedDate from './RenderData/FormatedDate/index';
+
+
+
 
 function PurchaseInvoice() {
 const router = useRouter();
 
-const {data,config} = useGetPurchaseViewList();
    
 const handleChange =(itemData:any)=>{
   router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}`);
 
 }
 
+  const {data,loading,config,handlePageChange,page}=useGetPurchaseViewList();
 
-const functions={
-  renderViewMore : (itemData:any)=>(
-    <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
-  ),
-  renderFieldPair: (itemData:any, field:any) => (
-    <FiledPair item={itemData} field={field} />
-  ),
-  renderStatus: (itemData:any,field:any) => (
-     <RenderStatus item={itemData} field={field} />
-   ),
-   renderRemarks: (itemData:any,field:any)=>(
-     <RenderRemarks itemData={itemData} field={field}/>
-   )
-};
-    
+    const functions = {
+      renderViewMore : (itemData:any)=>(
+        <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
+      ),
+        renderRemark:(itemData:any,field:any)=>(
+          <ShowRemarkData itemData={itemData} field={field}/>
+        ),
+        renderStatus: (itemData:any,field:any) => (
+          <RenderStatus item={itemData} field={field} />
+      ),
+      renderFieldPair: (itemData:any, field:any) => (
+        <FieldPair itemData={itemData} field={field} />
+      ),
+      renderCustomer: (itemData:any, field:any) => (
+        <RenderCustomer item={itemData} field={field} />
+      ),
+      rendeFormate: (itemData:any, field:any) => (
+        <FormatedDate item={itemData} field={field} />
+      ),
+    };
+
+
   return (
     <div>
-        <List config={config}  itemData={data?.list} functions={functions} /> 
+        <List 
+        config={config}  
+        itemData={data} 
+        functions={functions} 
+        loading={loading} 
+        page={page} 
+        handlePageChange={handlePageChange}/>
     </div>
   )
 }

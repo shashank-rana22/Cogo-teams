@@ -8,7 +8,7 @@ interface IUseGetAsyncOptions {
 	initialCall?: boolean;
 	valueKey?: string;
 	labelKey?: string;
-	params?: any;
+	params?: Object;
 }
 
 function useGetAsyncOptions({
@@ -23,21 +23,35 @@ function useGetAsyncOptions({
 	const [{ data, loading }] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-		params : merge(params, { filters: { query } }),
+		params : merge(params, { filters: { q: query } }),
 	}, { manual: !(initialCall || query) });
-
 	const options = data?.list || [];
 
-	const onSearch = (inputValue: string) => {
+	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
+		url    : endpoint,
+		method : 'GET',
+	}, { manual: true, autoCancel: false });
+
+	const onSearch = (inputValue: string | undefined) => {
 		debounceQuery(inputValue);
 	};
 
+	const onHydrateValue = async (value: string[] | string) => {
+		const res = await triggerSingle({
+			params: merge(params, { filters: { [valueKey]: value } }),
+		});
+
+		if (Array.isArray(value)) return res?.data?.list || [];
+		return res?.data?.list?.[0] || {};
+	};
+
 	return {
-		loading,
+		loading: loading || loadingSingle,
 		onSearch,
 		options,
 		labelKey,
 		valueKey,
+		onHydrateValue,
 	};
 }
 

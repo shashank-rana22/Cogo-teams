@@ -9,11 +9,11 @@
         "build": "pnpm rollup -c rollup.config.js --bundleConfigAsCjs && cp package.json ./dist"
     },
     "dependencies": {
-        "@cogoport/components": "^1.0.131",
+        "@cogoport/components": "^1.0.150",
         "@cogoport/icons-react": "^1.0.48",
         "@cogoport/request": "workspace:0.1.0",
         "@cogoport/utils": "^1.2.2",
-        "@types/node": "^18.11.17",
+        "@types/node": "^18.11.18",
         "react": "18.2.0",
         "react-hook-form": "^7.41.1",
         "typescript": "^4.9.4"
