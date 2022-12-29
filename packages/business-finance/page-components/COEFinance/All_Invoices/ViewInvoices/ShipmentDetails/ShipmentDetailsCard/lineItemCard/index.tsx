@@ -24,29 +24,23 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
         return  <div className={styles.circle} />
     };
 
-    const renderRejectBody = () => (
-          <div className={styles.popoverRejected} onClick={()=>{setPopover(!popover)}}>Reject Line Item </div> 
-    );
-    
-
-    const handleClick = (key = '') => {
+    const handleApproveClick = (key = '') => {
 		setRadio((previousActions) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
-		if (key === '4') getTimeLineDetailsApi();
 	};
     
     const functions = {
         renderIcon: (item)=>(       
-            <div className={styles.circleBig} onClick={()=>{handleClick(item)}} >
-            {renderBody()}
+            <div className={styles.circleBig} onClick={()=>{handleApproveClick(item?.id)}} >
+            {radio[item?.id] ? <IcCFtick width="17px" height="17px" /> :  <div className={styles.circle} />}
             </div>
         ),
         
         renderReject: () => (
             <div style={{cursor:"pointer"}}>
-                <Popover  placement="top_left" render={renderRejectBody}>
+                <Popover  placement="top" render={<div className={styles.popoverRejected} onClick={()=>{setPopover(!popover)}}>Reject Line Item </div> }>
                       <IcMOverflowDot width="20px" height="20px"/>
                 </Popover>
             </div>
