@@ -1,0 +1,101 @@
+.Container{
+	background: #ffffff;
+	border-radius: 4px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.Wrapper{
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: 100%;
+	min-height: 55px;
+	margin: 0px 44px 24px 44px;
+
+	&.last {
+		width: auto;
+	}
+}
+
+.BorderedCircle{
+	height: 14px;
+	width: 14px;
+	border: 2px solid #5936f0;
+	border-radius: 50%;
+	&.pending {
+		border-color: #e0e0e0;
+	}
+}
+
+.SubMiles{
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	left: 17%;
+	width: 70%;
+}
+
+.FilledCircle{
+	background: #5936f0;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	&.pending {
+		background: #e0e0e0;
+	}
+}
+
+.Line{
+	width: 100%;
+	height: 2px;
+	background: #5936f0;
+	&.pending {
+		background: #e0e0e0;
+	}
+}
+
+.MileStoneDescription{
+	position: absolute;
+	top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	left: -10%;
+	min-width: 100px;
+
+	&.last {
+		left: auto;
+		right: -45px;
+	}
+}
+
+.Desc{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin: 0px;
+
+	color: #5936f0;
+	&.pending {
+		color: #e0e0e0;
+	}
+}
+
+.EditFlow{
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.EditText{
+	color: #828282;
+	font-size: 12px;
+	padding: 0px 20px;
+	cursor: pointer;
+}

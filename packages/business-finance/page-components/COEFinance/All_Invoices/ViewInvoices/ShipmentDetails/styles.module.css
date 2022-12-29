@@ -15,13 +15,13 @@
   border-radius: 8px;
   padding: 8px 16px;
   margin: 12px 0px;
-  cursor: pointer;
 }
 .cardUpper {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  cursor: pointer;
 }
 
 .tagsContainer {
@@ -54,4 +54,7 @@
 }
 .shipmentDetailsCard {
   width: 40%;
+}
+.details{
+  width: 100%;
 }

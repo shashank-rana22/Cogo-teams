@@ -1,98 +1,47 @@
 import React from 'react';
-import { Tooltip } from '@cogoport/components';
-import { IcMFship } from '@cogoport/icons-react';
-import getLocations from '../../../../../commons/locations-shipment';
-import getServiceInfo from '../../../../../commons/getServiceInfo';
-import styles from './styles.module.css'
-import useListShipment from '../../../../hook/useListShipment';
+import {useRouter} from '@cogoport/next';
+import {IcMFship, IcMPortArrow} from '@cogoport/icons-react';
+import {Tags} from '@cogoport/components';
+import styles from './styles.module.css';
+import TimeLine from '../TimeLine/index';
 
-const Details = ({jobNumber}) => {
+const Details = ({orgId}) => {
+	const Router=useRouter();
+return(
+<div>	
+ <div className={styles.container}>
+	<div className={styles.subDiv}>
+		<div className={styles.bold}>Legend Store Private...</div>
+		<div>PO Number 13313102 </div>
+	</div>
 
-	const {loading,data} =useListShipment(jobNumber); 
-	
-	
-	
-	
+	<div className={styles.flex}>
+		<div className={styles.icon}><IcMFship/></div>
+         <div>
+			 <div>Europe</div>
+			 <div className={styles.bold}>Paris > Copenhagen</div>
+		 </div>
+		 <div className={styles.arrow}><IcMPortArrow/></div>
+		 <div>
+			 <div>Europe</div>
+			 <div className={styles.bold}>Paris > Copenhagen</div>
+		 </div>
+	</div>
 
-	const { origin, destination } = getLocations('shipment_type', data) || {};
+	<div className={styles.tags}>
+		<Tags themeType="grey">General Cargo</Tags>
+		<Tags  themeType="grey">Textiles. HS: 5911</Tags>
+	</div>
+	<a className={styles.flexDiv} onClick={()=>Router.push(`/shipments/${orgId}`)}>
+		Go to SID ->
+	</a>
+</div>
 
-	const { destination_main_port, origin_main_port } = data || {};
-
-	const { serviceIcon } = getServiceInfo(data?.shipment_type);
-
-	const handleLocationDetails = (location, isSingle) => {
-		let show = true;
-		if (location?.port_code === null || location?.postal_code === null) {
-			show = false;
-		} else if (!location?.port_code && !location?.postal_code) {
-			show = false;
-		} else if (data?.shipment_type === 'trailer_freight') {
-			show = false;
-		}
-		return (
-			<>
-				<div className={styles.portCode}>
-					{show ? (
-						<div className={styles.code}>({location?.port_code || location?.postal_code})</div>
-					) : null}
-
-					<div className={styles.country}>{location?.country?.name}</div>
-				</div>
-
-				{isSingle ? (
-					<div className={styles.value}>{location?.name}</div>
-				) : (
-					<Tooltip
-						placement="bottom"
-						theme="light"
-						content={
-							<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
-						}
-					>
-						<div>
-							<div className={styles.value}>{location?.name}</div>
-							{icdInfo?.name && <div className={styles.icd}>{icdInfo?.name}</div>}
-						</div>
-					</Tooltip>
-				)}
-			</>
-		);
-	};
-	const className = destination ? 'port-details' : 'port';
-	const renderLocation = () => {
-		if (!destination) {
-			const isSingle = true;
-			return (
-				<div className={styles.flexRowOrigin}>
-					{handleLocationDetails(origin, isSingle)}
-				</div>
-			);
-		}
-
-		return (
-			<>
-				<div className={styles.flexRowOrigin}>
-					{handleLocationDetails(origin, origin_main_port)}
-				</div>
-
-				<div className={styles.iconWrapper}>
-					<IcMFship />
-				</div>
-
-				<div className={styles.flexRowDest}>
-					{handleLocationDetails(destination, false, destination_main_port)}
-				</div>
-			</>
-		);
-	};
-
-	return (
-		<div className={className}>
-			<div className={styles.iconAndService}>{serviceIcon}</div>
-
-			{renderLocation()}
-		</div>
-	);
+<div className={styles.timelineContainer}>
+     <TimeLine/>
+</div>
+</div>
+)
 };
 
 export default Details;
