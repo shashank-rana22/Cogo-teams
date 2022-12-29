@@ -38,7 +38,7 @@ const formatApis = (apis, permissions) => {
 const getNavigationOptions = (permissions, navObj) => {
 	if (permissions) {
 		const item = navObj;
-		const { key } = item;
+		const { key = '' } = item;
 		const hashedAPis = {};
 		item.possible_apis?.forEach((apiObj) => {
 			const feature = apiObj?.feature || key;
