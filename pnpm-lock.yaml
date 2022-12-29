@@ -254,7 +254,7 @@ importers:
   packages/business-finance:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.133
+      '@cogoport/components': ^1.0.165
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/next': workspace:^0.1.0
@@ -272,7 +272,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.157_3qu7awhap2yzgpyb5yp3xthzzm
+      '@cogoport/components': 1.0.165_3qu7awhap2yzgpyb5yp3xthzzm
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -1769,6 +1769,36 @@ packages:
     dependencies:
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@floating-ui/react-dom-interactions': 0.10.3_react@18.2.0
+      axios: 1.2.1
+      axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
+      date-fns: 2.29.3
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-picker: 9.1.0_react@18.2.0
+      react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
+      react-hook-form: 7.41.2_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - babel-plugin-macros
+      - debug
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.165_3qu7awhap2yzgpyb5yp3xthzzm:
+    resolution: {integrity: sha512-golcAjAe6E0gGCG3T+udKDP18J45/31aEo1yoUWg1WVD5/GbwbF2ABXJJtzUUBfO0tl+bv0yqGSDPQIHRRMo/Q==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@floating-ui/react-dom-interactions': 0.10.3_kzbn2opkn2327fwg5yzwzya5o4
       axios: 1.2.1
       axios-hooks: 4.0.0_axios@1.2.1+react@18.2.0
       date-fns: 2.29.3
