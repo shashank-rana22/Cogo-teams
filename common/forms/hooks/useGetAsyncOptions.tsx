@@ -30,19 +30,35 @@ function useGetAsyncOptions({
 	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const onSearch = (inputValue: string | undefined) => {
 		debounceQuery(inputValue);
 	};
 
 	const onHydrateValue = async (value: string[] | string) => {
+		if (Array.isArray(value)) {
+			const getOptions = value.map((val) => options.filter((item) => item[valueKey] === val)[0]).filter(Boolean);
+
+			if (getOptions.length > 0) { return getOptions; }
+
+			if (value.length > 0) {
+				const res = await triggerSingle({
+					params: merge(params, { filters: { [valueKey]: value } }),
+				});
+				return res?.data?.list || [];
+			}
+			return [];
+		}
+
+		const checkOptionsExist = options.filter((item: any) => item[valueKey] === value);
+
+		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
+
 		const res = await triggerSingle({
 			params: merge(params, { filters: { [valueKey]: value } }),
 		});
-
-		if (Array.isArray(value)) return res?.data?.list || [];
-		return res?.data?.list?.[0] || {};
+		return res?.data?.list?.[0] || null;
 	};
 
 	return {
