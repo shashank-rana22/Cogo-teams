@@ -37,7 +37,7 @@ const FieldPair = ({ itemData , field}:props) => {
 			invoiceType="Expense"
 		}
 		else if(billType=== "CREDIT NOTE"){
-			invoiceType="Credit Note"
+			invoiceType="Credit Notes"
 		}
 		return invoiceType;
 	};
