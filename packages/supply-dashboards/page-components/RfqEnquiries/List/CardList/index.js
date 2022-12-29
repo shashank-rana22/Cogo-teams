@@ -21,16 +21,17 @@ function CardList({
 				</div>
 
 			)}
-			<div className={styles.pagination}>
-				<Pagination
-					type="table"
-					currentPage={filters.page}
-					totalItems={list?.total}
-					pageSize={10}
-					handlePageChange={(val) => { hookSetters.setFilters({ ...filters, page: val }); }}
-				/>
-			</div>
-
+			{!loading && (list?.data || []).length === 10 && (
+				<div className={styles.pagination}>
+					<Pagination
+						type="table"
+						currentPage={filters.page}
+						totalItems={list?.total}
+						pageSize={10}
+						handlePageChange={(val) => { hookSetters.setFilters({ ...filters, page: val }); }}
+					/>
+				</div>
+			) }
 		</div>
 
 	);
