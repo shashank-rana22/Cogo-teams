@@ -28,7 +28,7 @@ function RevenueList({
 }) {
 	const [serialId, setSerialId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
-	console.log(showFilters, 'naveen');
+
 	const handleChangeSerial = (value) => {
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
@@ -52,7 +52,7 @@ function RevenueList({
 			);
 		}
 
-		if (loading && listData?.length === 0) {
+		if (!loading && listData?.length === 0) {
 			return <EmptyState />;
 		}
 
@@ -109,6 +109,16 @@ function RevenueList({
 			</div>
 			<div className={styles.row}>
 
+				<div className={styles.input}>
+					<Input
+						name="q"
+						value={serialId}
+						onChange={(e) => handleChangeSerial(e)}
+						placeholder="Search by SID"
+						style={{ width: '200px' }}
+						prefix={<IcMSearchlight widht="20px" height="20px" />}
+					/>
+				</div>
 				<div className={styles.fcl_filters}>
 					<Popover
 						render={renderBody}
@@ -120,17 +130,6 @@ function RevenueList({
 							<IcMFilter width="20px" height="28px" />
 						</button>
 					</Popover>
-				</div>
-
-				<div className={styles.input}>
-					<Input
-						name="q"
-						value={serialId}
-						onChange={(e) => handleChangeSerial(e)}
-						placeholder="Search by SID"
-						style={{ width: '300px' }}
-						inputIcon={<IcMSearchlight />}
-					/>
 				</div>
 
 			</div>
