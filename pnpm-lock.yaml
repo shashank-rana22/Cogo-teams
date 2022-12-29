@@ -271,7 +271,8 @@ importers:
       rollup-plugin-typescript2: ^0.34.1
       typescript: ^4.9.4
     dependencies:
-      '@cogoport/components': 1.0.138_3qu7awhap2yzgpyb5yp3xthzzm
+      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/components': 1.0.157_3qu7awhap2yzgpyb5yp3xthzzm
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -1642,8 +1643,33 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cogoport/components/1.0.138_27ghnklenyaalfqdgsm7fqt7de:
-    resolution: {integrity: sha512-J93oLeYPQ+h812crOcAnYIqydv85iIj51393LoDzOZ4gfuH7+o5iR+FUmOJi1wqaek7niURCSPl0vxBFgobbPQ==}
+  /@cogoport/charts/1.0.1_react@18.2.0:
+    resolution: {integrity: sha512-YQ6y+fADwyiMd5FkMTd2eruP5Q5bNVjd3pfI8Zzff21TJeLt3W5bDiFHgTxhzl8jPMsIzKPXf20wSKJAWpaq+Q==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      '@nivo/bar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/bullet': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/bump': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/calendar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
+      '@nivo/funnel': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/geo': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/line': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/marimekko': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/pie': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/scatterplot': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/stream': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/sunburst': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/tooltip': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@cogoport/components/1.0.157_27ghnklenyaalfqdgsm7fqt7de:
+    resolution: {integrity: sha512-4TM42EnyRs61uSwGQnPaNRHI2AMe1HbmBJT9ztXbKn0jkV53Y07QWnBpu9WfK3/8+EEIfYbdZnUPApyAL4nw2Q==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0

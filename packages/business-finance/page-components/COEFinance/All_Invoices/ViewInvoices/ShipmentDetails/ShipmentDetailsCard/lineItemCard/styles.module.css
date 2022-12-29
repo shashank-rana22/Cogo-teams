@@ -12,16 +12,11 @@
   display: flex;
 }
 .popoverRejected {
-  width: 125px;
+  width: 140px;
   color: red;
-  /* position: absolute;
-  left: 88%;
-  top: 80%; */
-  padding: 8px 12px;
   font-size: 14px;
   background: #fff;
-  border-radius: 4px;
-  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+  cursor: pointer;
 }
 .circle {
   border: 1px solid #ed3726;
