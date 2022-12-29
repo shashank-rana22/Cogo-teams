@@ -1,7 +1,7 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { ReactNode } from 'react';
 
-import { NestedObj, FieldType } from './Interfaces/index';
+import { NestedObj, FieldType } from '../Interfaces/index';
 import styles from './styles.module.css';
 
 export interface Props {

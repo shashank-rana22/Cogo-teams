@@ -43,15 +43,19 @@ const useGetBill = (allParams = {}) => {
 	);
 
 
-	const listApi = (restFilters:any) => {
-		
+	const listApi = async(restFilters:any) => {
+		try {
+			return  await trigger({
+				params: {
+					jobNumber: params?.billNumber,
+					...restFilters,
+				},
+			});
+		}  catch (err) {
+			console.log(err);
+		}
 
-		return trigger({
-			params: {
-				jobNumber: params?.billNumber,
-				...restFilters,
-			},
-		});
+
 	};
 
 	const handleAccPayments = async () => {

@@ -60,7 +60,7 @@ const handleAuthentication = async ({
 			try {
 				deleteCookie(AUTH_TOKEN_NAME, { req, res });
 			} catch (e) {
-				console.log(e);
+				// console.log(e);
 			}
 		}
 

@@ -1,10 +1,9 @@
 import React from 'react';
+import {
+	getByKey, format, isEmpty, startCase,
+} from '@cogoport/utils';
 
-import { GenericObject, FunctionObjects, FieldType } from './Interfaces/index';
-
-const startCase=(arg:string):string=>{
-	return arg.replace(/_/g," ")
-}
+import { GenericObject, FunctionObjects, FieldType } from '../Interfaces/index';
 
 const ACTIONS = {
 	startCase,
@@ -14,23 +13,16 @@ type TypeObject = string | number | Date | GenericObject | React.FC ;
 
 type EmptyState = string | number | Date | React.FC;
 
-const isEmpty = (input: TypeObject) => {
-	if (input instanceof Date) {
-		return false;
-	}
-	return Object.keys(input).length === 0||(input as string).length==0;
-};
-
-const getValue = (itemData:any, itemField:FieldType, newFunctions:FunctionObjects, emptyState:EmptyState) => {
+const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, emptyState:EmptyState) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';
 	}
 
-	let val = itemData[itemField.key];
+	let val = getByKey(itemData, itemField.key);
 
 	if (itemField.func) {
-		if (newFunctions[itemField.func]) {
-			val = newFunctions[itemField.func](itemData, itemField);
+		if (functions[itemField.func]) {
+			val = functions[itemField.func](itemData, itemField);
 		} else if (ACTIONS[itemField.func as keyof typeof ACTIONS]) {
 			val = ACTIONS[itemField.func as keyof typeof ACTIONS](val);
 		}
