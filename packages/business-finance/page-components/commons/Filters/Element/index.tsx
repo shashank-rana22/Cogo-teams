@@ -12,9 +12,12 @@ interface ElementProps{
 	url?:string;
 	href?:string;
 	key?:string;
+	name:string;
 	onChange?: (val: any) => void;
 	options?:Options[];
-	[key:string]:string|undefined|((val: any) => void)|Options[];
+	setFilters:(p:object) => void;
+	filters:object;
+	[key:string]:string|undefined|((val: any) => void)|Options[]|object;
 }
 
 const Element = ({
@@ -23,11 +26,23 @@ const Element = ({
 	className,
 	url,
 	href = '#',
+	name,
+	filters,
 	...rest
 }:ElementProps) => {
 
+	console.log(value,"value")
+
 
 const [show, setShow] = useState<boolean>(false);
+const {setFilters}=rest;
+const tagClick=(val:Options)=>{
+	setFilters((prev:object) => ({
+		...prev,
+		[name]    : val.value,
+		pageIndex : 1,
+	}))
+}
 
 	const getElement = () => {
 		switch (type) {
@@ -35,8 +50,8 @@ const [show, setShow] = useState<boolean>(false);
 				return (
 					<div className={styles.flex}>
 					{rest?.options?.map((val)=>(
-					<div style={{margin:'5px'}}>
-							<Tags themeType="yellow" size="md" className={className}>{val.label}</Tags>
+					<div style={{margin:'5px'}} onClick={()=>tagClick(val)}>
+							<Tags themeType="yellow" size="md" className={val.value===filters[name as keyof typeof filters]?styles.active:className} >{val.label}</Tags>
 					</div>))}
 					</div>
 				);

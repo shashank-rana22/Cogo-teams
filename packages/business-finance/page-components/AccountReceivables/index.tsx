@@ -62,6 +62,7 @@ function AccountRecievables() {
         },
     ];
 	const [currentTab, setCurrentTab] = useState('');
+    console.log(filters,"filters")
 	return (
 		<div>
 			<h1>Account Recievables</h1>
@@ -72,7 +73,7 @@ function AccountRecievables() {
 						setActiveTab={setCurrentTab}
 					/>
 			<StyledTable columns={columns} data={data}/>
-            <Filter controls={INVOICE_FILTERS} filters={filters} setFilters={setFilters}/>
+            <Filter controls={INVOICE_FILTERS} filters={filters} setFilters={setFilters} clearFilters={()=>{setFilters({})}} showClearBtn={true}/>
 		</div>
 	);
 }

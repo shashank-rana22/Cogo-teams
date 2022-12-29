@@ -40,6 +40,7 @@ export const INVOICE_FILTERS:ControlProps[] =[
 	},
 
 	{
+		name:'billType',
 		theme: 'admin',
 		placeholder: 'Invoice View',
 		type: 'select',

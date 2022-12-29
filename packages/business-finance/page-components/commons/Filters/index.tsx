@@ -6,9 +6,8 @@ import styles from './styles.module.css';
 
 interface FilterProps {
 	controls?: ControlProps[],
-	filters?: object,
-	setFilters?: (p:object) => void,
-	style?: React.CSSProperties,
+	filters: object,
+	setFilters: (p:object) => void,
 	showClearBtn?:boolean,
 	clearFilters?:Function,
 	types?:string,
@@ -18,7 +17,6 @@ function Filter({
 	controls = [],
 	filters,
 	setFilters = () => {},
-	style = {},
 	showClearBtn = false,
 	clearFilters,
 }:FilterProps) {
@@ -29,7 +27,7 @@ function Filter({
 				const customiseControl = {
 					id       : `filter-${name}`,
 					value    : filters![name as keyof typeof filters] || '',
-					onChange : (val:any) => {
+					onChange : (val:string) => {
 						let value:string;					
 						if (type === 'input') value = val;
 						else if (type === 'datepicker') value = val;
@@ -42,6 +40,8 @@ function Filter({
 					},
 					name,
 					type,
+					setFilters,
+					filters,
 					...rest,
 				};
 				return (
@@ -56,7 +56,7 @@ function Filter({
 				<Button
 					id="clear-filters-btn"
 					className="primary sm btn-create-payrun"
-					disabled={Object.keys(filters||{}).length < 4}
+					disabled={Object.keys(filters||{}).length < 2}
 					onClick={clearFilters}
 				>
 					Clear Filters
