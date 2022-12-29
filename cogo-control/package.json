@@ -11,7 +11,7 @@
   "dependencies": {
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
-    "@cogoport/components": "^1.0.161",
+    "@cogoport/components": "^1.0.166",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/home": "workspace:0.1.0",

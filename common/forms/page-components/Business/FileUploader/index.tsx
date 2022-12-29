@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { Upload, Toast } from '@cogoport/components';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
-import { useRequest, publicRequest, request } from '@cogoport/request';
+import { publicRequest, request } from '@cogoport/request';
 import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -35,12 +35,12 @@ function FileUploader(props: any) {
 	let i = 0;
 	const done = 10;
 	const uploadFile = async (file:any) => {
-		console.log('file', file);
+		console.log('fileffvr', file);
 		const { data } = await request({
 			method : 'GET',
 			url    : '/get_media_upload_url',
 			params : {
-				file_name: new Date().getTime(),
+				file_name: file.name,
 			},
 		});
 		const { url, headers } = data;
@@ -53,7 +53,12 @@ function FileUploader(props: any) {
 				'Content-Type': file.type,
 			},
 		});
-		return url.split('?')[0];
+		const finalUrl = url.split('?')[0];
+		console.log('lastFile', file);
+		return {
+			fileName: file.name,
+			finalUrl,
+		};
 	};
 
 	const handleChange = async (values: any) => {
@@ -67,10 +72,10 @@ function FileUploader(props: any) {
 				Toast.error('File Upload failed.......');
 			}
 			i += 1;
+			setPercent(done + (20 * i));
 		}
 		setFileName(values);
 		const allUrls = await Promise.all(promises);
-		console.log('urlssss', { allUrls });
 		setUrlStore((previousState) => [...previousState, allUrls]);
 		setPercent(100);
 		setLoading(false);
@@ -106,6 +111,7 @@ function FileUploader(props: any) {
 	// } catch (err:any) {
 	// 	Toast.error('File Upload failed.......');
 	// }
+	console.log('urlStor', urlStore);
 
 	return (
 		<>
@@ -117,6 +123,7 @@ function FileUploader(props: any) {
 				loading={loading}
 				multipleUploadDesc="upload your files here"
 				uploadIcon={<IcMUpload height={40} width={40} />}
+				fileLink={urlStore}
 			/>
 			{(percent > 0 && percent < 100) && (
 				<div className={styles.progress_container}>
