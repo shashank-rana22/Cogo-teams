@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import { Upload, Toast } from '@cogoport/components';
-import { IcMDocument } from '@cogoport/icons-react';
+import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { useRequest, usePublicRequest } from '@cogoport/request';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -22,6 +22,16 @@ function FileUploader(props: any) {
 	const [percent, setPercent] = useState(0);
 	const [fileName, setFileName] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [urlStore, setUrlStore] = useState([]);
+	const previousValue = useRef(null);
+
+	useEffect(() => {
+		if (multiple) {
+			onChange(urlStore);
+		} else {
+			onChange(urlStore[0]);
+		}
+	}, [urlStore]);
 
 	const [{ loading: addLoading }, triggerAdd] = useRequest({
 		method : 'GET',
@@ -54,15 +64,17 @@ function FileUploader(props: any) {
 				} catch (err) {
 					console.log({ err });
 				}
-				onChange(values);
 				setFileName(values);
+				setUrlStore((previousState) => [...previousState, url]);
 				i++;
 			} catch (err:any) {
 				return Toast.error('File Upload failed.......');
 			}
 		}
+		console.log('cververvterb', urlStore);
 		Promise.all(promises).then((promise) => {
 			promise.forEach((item) => {
+				console.log('verbgerthtrege', item);
 				setPercent(100);
 				setLoading(false);
 			});
@@ -71,14 +83,22 @@ function FileUploader(props: any) {
 
 	return (
 		<>
-			<Upload {...rest} value={fileName} multiple={multiple} onChange={handleChange} loading={loading} />
+			<Upload
+				{...rest}
+				value={fileName}
+				multiple={multiple}
+				onChange={handleChange}
+				loading={loading}
+				multipleUploadDesc="upload your files here"
+				uploadIcon={<IcMUpload height={40} width={40} />}
+			/>
 			{(percent > 0 && percent < 100) && (
 				<div className={styles.progress_container}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>
 					<div>
-						<div className={styles.file_name}>{`File downloading (${percent}%)...`}</div>
+						<div className={styles.file_name}>{`File uploading (${percent}%)...`}</div>
 						<div className={styles.progressBar}>
 							<div
 								className={styles.progress}
