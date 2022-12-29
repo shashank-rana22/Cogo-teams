@@ -1,4 +1,6 @@
 import { Select, MultiSelect } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { asyncFieldsPartner } from '@cogoport/forms/utils/getAsyncFields';
 import React from 'react';
 
 import SearchInput from '../../../common/SearchInput';
@@ -11,7 +13,11 @@ function Filters({
 	onChangeFilters = () => {},
 	stakeHolderType = '',
 }) {
-	const modifiedControls = controls(filters?.role_functions || []);
+	const partnerOptions = useGetAsyncOptions({
+		...asyncFieldsPartner(),
+	});
+
+	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);
 
 	const getElements = (type) => {
 		switch (type) {
@@ -35,10 +41,7 @@ function Filters({
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
 					const Element = getElements(control.type);
-					if (
-						control.name === 'stakeholder_id'
-						&& ['cogoport', 'customer'].includes(stakeHolderType)
-					) {
+					if (control.name === 'stakeholder_id' && ['cogoport', 'customer'].includes(stakeHolderType)) {
 						return null;
 					}
 					if (control.name === 'navigation' && stakeHolderType === 'customer') {
@@ -46,10 +49,10 @@ function Filters({
 					}
 					return (
 						<Element
-							{...control}
 							className={styles.select}
-							value={filters?.[control?.name] || ''}
+							value={filters?.[control?.name]}
 							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
+							{...control}
 						/>
 					);
 				})}

@@ -36,24 +36,18 @@ export const columns = [
 		label : 'Functions',
 		key   : 'role_functions',
 		func  : 'renderFunction',
-		flex  : 1,
+		flex  : 1.5,
 	},
 	{
 		label : 'Sub Functions',
 		key   : 'role_sub_functions',
 		func  : 'renderSubFunction',
-		flex  : 1,
+		flex  : 1.5,
 	},
-	// {
-	// 	label : 'Users',
-	// 	key   : '',
-	// 	func  : 'renderUsers',
-	// 	flex  : 3,
-	// },
 	{
 		label : '',
 		key   : '',
 		func  : 'renderEditButton',
-		flex  : 1,
+		flex  : 1.5,
 	},
 ];
