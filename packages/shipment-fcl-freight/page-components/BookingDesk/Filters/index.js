@@ -68,7 +68,7 @@ function ShipmentFilters({
 					placeholder="Search by SID, BL, Container No, Booking Number"
 					value={value}
 					onChange={(e) => setValue(e)}
-					inputIcon={<IcMSearchlight width={20} height={20} />}
+					prefix={<IcMSearchlight width={20} height={20} />}
 					className={styles.input_class}
 				/>
 			</div>

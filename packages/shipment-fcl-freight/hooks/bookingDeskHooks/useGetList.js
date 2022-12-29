@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -15,32 +16,29 @@ const useListShipments = () => {
 
 	const { page, ...restFilters } = filters;
 
-	const [{ data }, trigger] = useRequest('/list_shipments', { manual: true });
+	const [, trigger] = useRequest('/list_shipments', { manual: true });
 
-	const shipment_state = [
-		'shipment_received',
-		'confirmed_by_importer_exporter',
-		'in_progress',
-	];
-
-	const listAPi = (restFilters, currentPage) => {
-		const shipment_type = restFilters || {};
-
-		const listfilters = {
-			shipment_type,
-			state: shipment_state,
-			...restFilters,
-		};
-
-		return trigger({ params: { listfilters, ...{ page: currentPage } } });
-	};
-
-	const refetch = () => {
+	const refetch = async () => {
 		setLoading(true);
+		const { shipment_type, state } = restFilters || {};
+		try {
+			const res = await trigger({
+				params: {
+					filters: {
+						shipment_type,
+						state,
+						...restFilters,
+					},
+					page,
+					page_limit: 10,
+				},
+			});
 
-		listAPi(restFilters, page)
-			.then((res) => {
+			if (res?.status === 200) {
+				setLoading(false);
+
 				const { data = { list: [], total: 0 } } = res;
+
 				setList(() => ({
 					data         : data?.list || [],
 					total        : data?.total_count,
@@ -48,19 +46,20 @@ const useListShipments = () => {
 					fullResponse : res.data,
 					reverted     : data?.stats?.reverted,
 				}));
-				setLoading(false);
-			})
-			.catch((e) => {
-				console.log(e);
-				setList(() => ({
-					data         : [],
-					total        : 0,
-					total_page   : 0,
-					fullResponse : {},
-					reverted     : 0,
-				}));
-				setLoading(false);
-			});
+			}
+		} catch (err) {
+			setLoading(false);
+
+			setList(() => ({
+				data         : [],
+				total        : 0,
+				total_page   : 0,
+				fullResponse : {},
+				reverted     : 0,
+			}));
+
+			Toast.error('Something went wrong!');
+		}
 	};
 
 	useEffect(() => {

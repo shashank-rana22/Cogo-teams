@@ -25,6 +25,28 @@ function BookingDesk() {
 		list: { total, data },
 	} = useListShipments();
 
+	const handleRender = () => {
+		if (loading) {
+			return (
+				<div className={styles.loader_container}>
+					<Loader />
+				</div>
+			);
+		}
+		if (!loading && data?.length === 0) {
+			return (
+				<EmptyState />
+			);
+		}
+		return (
+			<div className={styles.cards_container}>
+				{(data || []).map((details) => (
+					<Card data={details} />
+				))}
+			</div>
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_wrapper}>
@@ -64,23 +86,7 @@ function BookingDesk() {
 					/>
 				</div>
 			) : null}
-
-			{loading ? (
-				<div className={styles.loader_container}>
-					<Loader />
-				</div>
-			) : null}
-
-			{!loading && data?.length === 0 ? <EmptyState /> : null}
-
-			{!loading && data?.length > 0 ? (
-				<div className={styles.cards_container}>
-					{(data || []).map((details) => (
-						<Card data={details} />
-					))}
-				</div>
-			) : null}
-
+			{handleRender()}
 			{total > 10 ? (
 				<div className={styles.pagination_wrapper}>
 					<Pagination
