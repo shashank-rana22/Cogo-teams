@@ -33,9 +33,15 @@
 }
 
 .label {
-	font-size: 14px;
-	font-weight: 500;
-	color: #4f4f4f;
+	font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: rgb(57, 63, 112);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .line {

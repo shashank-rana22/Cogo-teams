@@ -27,3 +27,22 @@
 	display: flex;
 	justify-content: center;
 }
+
+.fcl_filters{
+	display: flex;
+	justify-content: center;
+	background: #f9f5ec;
+	border: none;
+	width: 50px;
+	padding: 5px 0px;
+	cursor: pointer;
+	margin-right: 15px;
+	height: fit-content;
+}
+.filter_button{
+	border: none;
+	width: 100%;
+}
+.filter_popover{
+	z-index: 1 !important;
+}

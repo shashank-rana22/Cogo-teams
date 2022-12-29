@@ -1,0 +1,78 @@
+.form_container{
+    margin-left: -8px;
+    margin-right: -8px;
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: normal;
+    justify-content: flex-end;
+}
+.form_item{
+    box-sizing: border-box;
+    min-height: 1px;
+    position: relative;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100%;
+    flex: 0 0 100%;
+    flex-direction: column;
+    max-width: 100%;
+    margin-left: 0%;
+    right: auto;
+    left: auto;
+}
+.label{
+    margin-top: 20px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: rgb(57, 63, 112);
+    justify-content: space-between;
+    align-items: center;
+
+}
+.button_container{
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0px;
+}
+.button_primary {
+    margin-right: 10px;
+    text-transform: capitalize;
+    width: 60px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(57, 63, 112);
+    border-color: rgb(57, 63, 112);
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 4px;
+    height: auto;
+    font-weight: 500;
+    line-height: 16px;
+}
+.button_secondary{
+    width: 60px;
+    font-size: 12px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    background-color: rgb(57, 63, 112);
+    color: rgb(255, 255, 255);
+    border-color: rgb(57, 63, 112);
+    outline: none;
+    white-space: nowrap;
+    border-radius: 4px;
+    height: auto;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.04em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

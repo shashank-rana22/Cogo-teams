@@ -1,12 +1,13 @@
 import {
-	Tabs, TabPanel, Input, Loader,
+	Tabs, TabPanel, Input, Loader, Popover,
 } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
 
 import CompletedJobs from './CompletedJobs';
+import Filters from './Filters';
 import PendingJobs from './PendingJobs';
 import styles from './styles.module.css';
 
@@ -26,10 +27,21 @@ function RevenueList({
 	shipment_type,
 }) {
 	const [serialId, setSerialId] = useState('');
+	const [showFilters, setShowFilters] = useState(false);
+	console.log(showFilters, 'naveen');
 	const handleChangeSerial = (value) => {
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
 	};
+
+	const renderBody = () => (
+		<Filters
+			hookSetters={hookSetters}
+			setShowFilters={setShowFilters}
+			activeTab={activeTab}
+		/>
+
+	);
 
 	const handleRender = () => {
 		if (loading) {
@@ -97,6 +109,19 @@ function RevenueList({
 			</div>
 			<div className={styles.row}>
 
+				<div className={styles.fcl_filters}>
+					<Popover
+						render={renderBody}
+						placement="bottom"
+						show={showFilters}
+						className={styles.filter_popover}
+					>
+						<button onClick={() => setShowFilters(!showFilters)} className={styles.filter_button}>
+							<IcMFilter width="20px" height="28px" />
+						</button>
+					</Popover>
+				</div>
+
 				<div className={styles.input}>
 					<Input
 						name="q"
@@ -107,7 +132,10 @@ function RevenueList({
 						inputIcon={<IcMSearchlight />}
 					/>
 				</div>
+
 			</div>
+			<div />
+
 			{handleRender()}
 			<div />
 

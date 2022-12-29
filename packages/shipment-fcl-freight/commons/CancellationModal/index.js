@@ -18,7 +18,7 @@ function CancellationModal({
 		<div className={styles.container}>
 			<form className={styles.form}>
 
-				<label>Please select Cancellation Reason</label>
+				<label className={styles.label}>Please select Cancellation Reason</label>
 				<SelectController
 					control={control}
 					name="cancellation_reason"
@@ -26,7 +26,7 @@ function CancellationModal({
 
 				/>
 
-				<label>Remarks</label>
+				<label className={styles.label}> Remarks</label>
 				<InputController name="cancellation_subreason" placeholder="Type here..." control={control} />
 
 			</form>
