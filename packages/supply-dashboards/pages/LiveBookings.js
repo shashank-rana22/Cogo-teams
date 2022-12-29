@@ -15,7 +15,7 @@ function LiveBookingsView() {
 	};
 	return (
 		<div>
-			<Tabs activeTab={activeTab} onChange={handleTabChange}>
+			<Tabs activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
 				<TabsPanel name="live_bookings" title="Live Bookings"><LiveBookings /></TabsPanel>
 				<TabsPanel name="rfq_enquiries" title="RFQ Enquiries">
 					--

@@ -1,11 +1,11 @@
 import { Radio, Select } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
+import { merge, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function FilterLocation({ filters }) {
+function FilterLocation({ filters, hookSetters }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
@@ -14,8 +14,10 @@ function FilterLocation({ filters }) {
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: [filterOption] } },
 	}));
-	const heading = service === 'air_freight' ? 'Airport' : 'Port';
-	const handleChange = () => {};
+	const heading = service === 'air_freight' ? 'airport' : 'port';
+	const handleChange = (value) => {
+		hookSetters?.setFilters({ ...filters, trade_type: value });
+	};
 	return (
 		<div className={styles.filter}>
 			<div className={styles.heading}>Trade Type </div>
@@ -23,19 +25,19 @@ function FilterLocation({ filters }) {
 				<Radio
 					className="primary lg"
 					label="Import "
-					checked
-					onChange={handleChange}
+					checked={filters.trade_type === 'import'}
+					onChange={() => handleChange('import')}
 				/>
 				<Radio
 					className="primary lg"
 					label="Export "
-					checked
-					onChange={handleChange}
+					checked={filters.trade_type === 'export'}
+					onChange={() => handleChange('export')}
 				/>
 
 			</div>
 			<div className={styles.heading}>
-				{heading}
+				{startCase(heading)}
 				{' '}
 				Pair
 			</div>
@@ -43,24 +45,32 @@ function FilterLocation({ filters }) {
 				<div>
 					Origin
 					{' '}
-					{heading}
+					{startCase(heading)}
 				</div>
 				<Select
 					className={styles.select}
 					{...locationOptions}
 					isClearable
 					placeholder="Select Origin Location"
+					value={filters[`origin_${heading}_id`]}
+					onChange={(value) => { hookSetters.setFilters({ ...filters, [`origin_${heading}_id`]: value }); }}
 				/>
 				<div>
 					Destination
 					{' '}
-					{heading}
+					{startCase(heading)}
 				</div>
 				<Select
 					className={styles.select}
 					{...locationOptions}
 					isClearable
 					placeholder="Select Destination Location"
+					value={filters[`destination_${heading}_id`]}
+					onChange={(value) => {
+						hookSetters.setFilters(
+							{ ...filters, [`destination_${heading}_id`]: value },
+						);
+					}}
 				/>
 			</div>
 			<div className={styles.heading}>Country Pair </div>
@@ -71,6 +81,8 @@ function FilterLocation({ filters }) {
 					{...countryOptions}
 					isClearable
 					placeholder="Select Origin Country"
+					value={filters?.origin_country_id}
+					onChange={(value) => { hookSetters.setFilters({ ...filters, origin_country_id: value }); }}
 				/>
 				<div>Destination Country</div>
 				<Select
@@ -78,6 +90,8 @@ function FilterLocation({ filters }) {
 					{...countryOptions}
 					isClearable
 					placeholder="Select Destination Country"
+					value={filters?.destination_country_id}
+					onChange={(value) => { hookSetters.setFilters({ ...filters, destination_country_id: value }); }}
 				/>
 			</div>
 		</div>

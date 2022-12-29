@@ -11,6 +11,9 @@ const useGetListRfqs = () => {
 		url    : '/list_rfqs',
 		scope,
 	}, { manual: false });
+	const { user_profile } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
 
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;
@@ -20,11 +23,14 @@ const useGetListRfqs = () => {
 		return trigger({
 			params: {
 				filters: {
-					negotiation_status: 'awaiting_responses',
+					negotiation_status    : 'awaiting_responses',
 					...(filters || {}),
+					service_type          : undefined,
+					relevent_supply_agent : user_profile?.id,
 				},
 				created_by_user_details_required : true,
 				page                             : currentPage,
+				service_type                     : filters.service_type || 'fcl_freight',
 			},
 		});
 	};

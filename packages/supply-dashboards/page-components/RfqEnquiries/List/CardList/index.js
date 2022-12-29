@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 
 import Header from './Header';
 import List from './List';
@@ -11,6 +12,15 @@ function CardList({
 		<div className={styles.cardlist}>
 			<Header columns={fields} />
 			{list?.data.map((item) => (<List fields={fields} item={item} loading={loading} setRfq={setRfq} />))}
+			{!loading && !(list?.data || []).length && (
+				<div className={styles.empty_state}>
+					<IcMSearchlight
+						style={{ width: '300px', height: '200px' }}
+					/>
+					Sorry, We Could Not Find What You Were Looking For
+				</div>
+
+			)}
 			<div className={styles.pagination}>
 				<Pagination
 					type="table"

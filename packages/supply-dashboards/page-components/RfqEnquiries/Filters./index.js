@@ -9,7 +9,6 @@ function Filters({
 	filters,
 	hookSetters,
 }) {
-	console.log(filters, 'values');
 	return (
 		<div className={styles.filter}>
 			<div className={styles.heading}>Filters</div>
@@ -29,7 +28,7 @@ function Filters({
 				</div>
 
 				<FilterStats filters={filters} hookSetters={hookSetters} />
-				<FilterLocation filters={filters} />
+				<FilterLocation filters={filters} hookSetters={hookSetters} />
 
 			</div>
 

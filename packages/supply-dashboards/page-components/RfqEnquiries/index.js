@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Enquiries from './Enquiries';
 import Filters from './Filters.';
 import useGetListRfqs from './hooks/useGetListRfqs';
 import List from './List';
@@ -41,7 +42,9 @@ function RfqEnquiries() {
 						</div>
 					</div>
 				</div>
-			) : null}
+			) : (
+				<Enquiries rfq={rfq} setRfq={setRfq} />
+			)}
 		</>
 	);
 }

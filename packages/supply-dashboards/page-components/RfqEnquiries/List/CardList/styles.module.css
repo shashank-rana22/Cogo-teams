@@ -9,3 +9,12 @@
 	justify-content: flex-end;
 	margin-top: 4px;
 }
+
+.empty_state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 150px;
+	font-size: 23px;
+	font-weight: 500;
+}

@@ -1,0 +1,38 @@
+.heading {
+	display: flex;
+	align-items: center;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 23px;
+	color: #221f20;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.subheading {
+	padding: 12px;
+	margin-top: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	background: #fff;
+}
+
+.cardlist {
+	margin-top: 16px;
+	background: #fff;
+}
+
+.enquiries {
+	display: flex;
+}
+
+.form {
+	background: #fff;
+}
+
+.enquirypage {
+	max-height: 749px;
+}

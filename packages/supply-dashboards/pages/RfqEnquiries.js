@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 
 import RfqEnquiries from '../page-components/RfqEnquiries';
 
-function LiveBookingsView() {
+function RfqEnquiriesView() {
 	const { push } = useRouter();
 
 	const activeTab = 'rfq_enquiries';
@@ -15,7 +15,7 @@ function LiveBookingsView() {
 	};
 	return (
 		<div>
-			<Tabs activeTab={activeTab} onChange={handleTabChange}>
+			<Tabs activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
 				<TabsPanel name="live_bookings" title="Live Bookings">--</TabsPanel>
 				<TabsPanel name="rfq_enquiries" title="RFQ Enquiries">
 					<RfqEnquiries />
@@ -24,4 +24,4 @@ function LiveBookingsView() {
 		</div>
 	);
 }
-export default LiveBookingsView;
+export default RfqEnquiriesView;

@@ -11,7 +11,7 @@ import useGetPartnerUserServices from '../../hooks/useGetPartnerUserServices';
 import styles from './styles.module.css';
 
 function FilterStats({ filters, hookSetters }) {
-	const { service_type } = filters;
+	const { service_type = 'fcl_freight' } = filters;
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
@@ -25,13 +25,37 @@ function FilterStats({ filters, hookSetters }) {
 	const handleOnClick = (value) => {
 		hookSetters.setFilters((prev) => ({ ...prev, service_type: value }));
 	};
+
+	const handleOnChangeCheckbox = (value, checkbox) => {
+		if (checkbox === 'under_negotiation') {
+			let { under_negotiation_rank } = filters;
+			if (!under_negotiation_rank) { under_negotiation_rank = []; }
+			if ((under_negotiation_rank || []).includes(value)) {
+				under_negotiation_rank = under_negotiation_rank.filter((item) => item !== value);
+			} else {
+				under_negotiation_rank.push(value);
+			}
+			hookSetters.setFilters({ ...filters, under_negotiation_rank });
+		} else {
+			let { expires_in } = filters;
+			if (expires_in === value) {
+				expires_in = undefined;
+			} else {
+				expires_in = value;
+			} hookSetters.setFilters({ ...filters, expires_in });
+		}
+	};
+	const onTabChange = (tab) => {
+		hookSetters.setFilters({ ...filters, status: tab });
+	};
+
 	return (
 		<div className={styles.filter}>
 			<div className={styles.heading}>RFQ Status</div>
 			<div>
-				<Tabs>
-					<TabsPanel name="running" title="Running" />
-					<TabsPanel name="archive" title="Archive" />
+				<Tabs activeTab={filters.type} onChange={onTabChange}>
+					<TabsPanel name="processing" title="Running" />
+					<TabsPanel name="draft" title="Archive" />
 				</Tabs>
 			</div>
 			<div className={styles.radio}>
@@ -47,13 +71,13 @@ function FilterStats({ filters, hookSetters }) {
 					className={styles.checkbox}
 					label="Under Negotiation 1"
 					checked={(filters.under_negotiation_rank || []).includes('1')}
-					disabled={filters.is_negotiation_not_reverted}
+					onChange={() => handleOnChangeCheckbox('1', 'under_negotiation')}
 				/>
 				<Checkbox
 					className={styles.checkbox}
 					label="Under Negotiation 2"
 					checked={(filters.under_negotiation_rank || []).includes('2')}
-					disabled={filters.is_negotiation_not_reverted}
+					onChange={() => handleOnChangeCheckbox('2', 'under_negotiation')}
 				/>
 			</div>
 			<div className={styles.radio}>
@@ -69,17 +93,12 @@ function FilterStats({ filters, hookSetters }) {
 				<Checkbox
 					className={styles.checkbox}
 					label="Expiring in 20 days"
-					disabled={!filters.is_negotiation_not_reverted}
+					onChange={() => handleOnChangeCheckbox('20', 'expires_in')}
 				/>
 				<Checkbox
 					className={styles.checkbox}
 					label="Expiring in 8 days"
-					disabled={!filters.is_negotiation_not_reverted}
-				/>
-				<Checkbox
-					className={styles.checkbox}
-					label="Critical"
-					disabled={!filters.is_negotiation_not_reverted}
+					onChange={() => handleOnChangeCheckbox('8', 'expires_in')}
 				/>
 			</div>
 			<div className={styles.heading}>Select Service</div>
