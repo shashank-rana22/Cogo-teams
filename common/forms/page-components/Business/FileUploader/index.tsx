@@ -32,10 +32,8 @@ function FileUploader(props: any) {
 		}
 	}, [urlStore]);
 
-	// const [{ loading: uploadLoading }, triggerUpload] = usePublicRequest({
-	// 	method: 'PUT',
-	// }, { manual: true });
 	let i = 0;
+	const done = 10;
 	const uploadFile = async (file:any) => {
 		console.log('file', file);
 		const { data } = await request({
@@ -58,11 +56,11 @@ function FileUploader(props: any) {
 		return url.split('?')[0];
 	};
 
-	const done = 10;
 	const handleChange = async (values: any) => {
 		setPercent(done);
 		const promises = [];
 		while (i < values.length) {
+			setPercent(done + (20 * i));
 			try {
 				promises.push(uploadFile(values[i]));
 			} catch (err) {
@@ -70,9 +68,12 @@ function FileUploader(props: any) {
 			}
 			i += 1;
 		}
+		setFileName(values);
 		const allUrls = await Promise.all(promises);
 		console.log('urlssss', { allUrls });
+		setUrlStore((previousState) => [...previousState, allUrls]);
 		setPercent(100);
+		setLoading(false);
 	};
 	// try {
 	// 	const { data } = await request({
