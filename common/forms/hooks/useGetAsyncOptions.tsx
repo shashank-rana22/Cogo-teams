@@ -30,7 +30,7 @@ function useGetAsyncOptions({
 	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const onSearch = (inputValue: string | undefined) => {
 		debounceQuery(inputValue);
@@ -38,23 +38,26 @@ function useGetAsyncOptions({
 
 	const onHydrateValue = async (value: string[] | string) => {
 		if (Array.isArray(value)) {
-			// const res = await triggerSingle({
-			// 	params: merge(params, { filters: { [valueKey]: value } }),
-			// });
-			// return res?.data?.list || [];
+			const getOptions = value.map((val) => options.filter((item) => item[valueKey] === val)[0]).filter(Boolean);
 
-			// const checkArrayExistInArray = value.map((item) => console.log(item, options));
-			// console.log('checkOptionsExistArrAS', checkArrayExistInArray);
+			if (getOptions.length > 0) { return getOptions; }
+
+			if (value.length > 0) {
+				const res = await triggerSingle({
+					params: merge(params, { filters: { [valueKey]: value } }),
+				});
+				return res?.data?.list || [];
+			}
 			return [];
 		}
+
 		const checkOptionsExist = options.filter((item: any) => item[valueKey] === value);
 
-		if (checkOptionsExist.length > 0) return checkOptionsExist?.[0];
+		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
 
 		const res = await triggerSingle({
 			params: merge(params, { filters: { [valueKey]: value } }),
 		});
-		
 		return res?.data?.list?.[0] || null;
 	};
 
