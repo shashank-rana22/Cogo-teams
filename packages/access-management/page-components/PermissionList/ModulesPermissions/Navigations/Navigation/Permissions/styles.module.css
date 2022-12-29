@@ -1,0 +1,38 @@
+.description {
+	margin: 0;
+	margin-bottom: 8px;
+	margin-left: 16px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.group_container {
+	padding: 16px 12px;
+	margin-bottom: 12px;
+	background: #f9f9f9;
+	border-radius: 8px;
+}
+
+.role_logic_group {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.accordion[aria-expanded="false"] {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.5s;
+}
+
+.accordion[aria-expanded="true"] {
+	max-height: 1000px;
+	overflow: hidden;
+	transition: max-height 0.5s;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	width: 45%;
+}
