@@ -1,10 +1,12 @@
 import React from 'react';
+import { GenericObject } from '../../../../../commons/Interfaces/index';
 import styled from './styles.module.css';
 
+interface props{
+	item:GenericObject
+}
 
-
-function RenderStatus ({ item={}, field={} })  {
-    
+function RenderStatus ({ item}:props)  {
 	return (
 		<div>
        		 {(item?.status==='FINANCE_ACCEPTED') &&

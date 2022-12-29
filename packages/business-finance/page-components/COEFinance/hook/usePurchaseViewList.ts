@@ -8,9 +8,9 @@ import useDebounceQuery from '../../commons/utils/debounce'
 
 const  useGetPurchaseViewList=()=> {
 	const [page,setPage]=useState<number>(1)
-	const [currentTab, setCurrentTab] = useState('all');
+	const [currentTab, setCurrentTab] = useState<string>('all');
 	const {debounceQuery, query }=useDebounceQuery();
-	const [searchValue, setSearchValue] = useState();
+	const [searchValue, setSearchValue] = useState<number|string>('');
 	
 	
     const [{ data, loading, error }, refetch] = useRequestBf(
@@ -19,6 +19,7 @@ const  useGetPurchaseViewList=()=> {
 			method  : 'get',
 			params : {
 				pageIndex : page,
+				pageSize:	10,
 						q : query||undefined,
 				},
 			authKey : 'get_purchase_bills_list',

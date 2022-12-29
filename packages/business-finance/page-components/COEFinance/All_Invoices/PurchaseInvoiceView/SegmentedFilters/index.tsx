@@ -5,16 +5,22 @@ import {FILTERS_DATA,FILTERS_DAY_DATA,FILTERS_URGENT_DATA} from '../../../consta
 import {Input} from "@cogoport/components";
 import { IcMSearchdark } from '@cogoport/icons-react';
 
+interface segmentFilterProps{
+    setSearchValue: React.Dispatch<React.SetStateAction<string | number>>
+    searchValue: string | number
+    currentTab: string
+    setCurrentTab: React.Dispatch<React.SetStateAction<string>>
+}
 
+function SegmentedFilters({setCurrentTab,currentTab,setSearchValue,searchValue}:segmentFilterProps) {  
 
-function SegmentedFilters({setCurrentTab,currentTab,setSearchValue,searchValue}) {  
 
 
   return (
       <div className={styled.main}>
             <div className={styled.segment}>
                 <div className={styled.filterData}>
-                    <SegmentedControl
+                 <SegmentedControl
                     options={FILTERS_DATA}
                     activeTab={currentTab}
                     setActiveTab={setCurrentTab}
@@ -46,7 +52,7 @@ function SegmentedFilters({setCurrentTab,currentTab,setSearchValue,searchValue})
                     name="q"
                     size="sm"
                     value={searchValue}
-				    onChange={(e) => setSearchValue(e)}
+				    onChange={(e:any) => setSearchValue(e)}
                     placeholder="Search by Invoice No./Shipment ID"
                     buttonIcon={<IcMSearchdark />}
                 />

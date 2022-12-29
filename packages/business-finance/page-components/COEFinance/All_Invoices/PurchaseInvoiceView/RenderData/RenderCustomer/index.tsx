@@ -1,10 +1,17 @@
 import React from 'react';
 import {Tooltip} from '@cogoport/components';
-// import Text from '@cogoport/front/components/Text';
-import styled from './styles.module.css'
+import { GenericObject } from '../../../../../commons/Interfaces/index';
 
-const renderCustomer = ({ item={}, field={} }) => {
-    const {	organizationName = '',billNumber=''} = item || {};
+interface props{
+	itemData:GenericObject
+	field: {
+		key :string
+	},	
+}
+
+
+const renderCustomer = ({ itemData, field}:props) => {
+    const {	organizationName = ''} = itemData || {};
  
 	return (
         <>

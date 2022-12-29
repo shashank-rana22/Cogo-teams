@@ -1,12 +1,22 @@
 import React from 'react'
 import { format } from '@cogoport/utils';
 import styled from './styles.module.css'
+import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice'
+import {formatDate} from '../../../../../commons/utils/formatDate'
+import { GenericObject } from '../../../../../commons/Interfaces/index';
 
-function FormatedDate({item={}, field={}}) {
 
-   const getCreatedDate =  format(item?.createdDate, 'dd/MM/yyyy');
-   const getBillDate =  format(item?.billDate, 'dd/MM/yyyy');
-   const getDueDate =  format(item?.dueDate, 'dd/MM/yyyy');
+interface props{
+    item:GenericObject
+    field:{
+        key:string
+    }
+}
+function FormatedDate({item, field}:props) {
+
+   const getCreatedDate =  formatDate(item?.createdDate, 'dd MMM yy | hh:mm a');
+   const getBillDate =  format(item?.billDate, 'dd/MMM/yyyy');
+   const getDueDate =  format(item?.dueDate, 'dd/MMM/yyyy');
     
 
   return (
@@ -22,8 +32,7 @@ function FormatedDate({item={}, field={}}) {
         }
         {field?.key==='grandTotal' &&
         <div>
-            <text className={styled.billCurrency}>{item?.billCurrency}</text>
-             <text>{item?.grandTotal}</text>
+             <text>{getFormattedPrice(item?.grandTotal,item?.billCurrency)}</text>
         </div>
         }
        
