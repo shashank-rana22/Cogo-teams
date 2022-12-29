@@ -245,7 +245,7 @@ const routeInfo = {
 
 const getLocationInfo = (
 	service_key,
-	data,
+	data=[],
 	keys = { origin: null, destination: null },
 ) => {
 	if (keys?.destination || keys?.origin) {

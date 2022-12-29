@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRequestBf } from '@cogoport/request';
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 
 const useUpdateTag = ({
 	onClose = () => {},
@@ -11,7 +11,7 @@ const useUpdateTag = ({
 }) => {
 	const [loading, setLoading] = useState(false);
 
-	const [{ data}, trigger] = useRequestBf(
+	const [{ data }, trigger] = useRequestBf(
 		{
 			url     : `/purchase/bills/${billId}/urgency-tag`,
 			method  : 'put',
@@ -31,7 +31,7 @@ const useUpdateTag = ({
 
 	const handleSubmit = async () => {
 		if (tagValue === 'urgent' && !remarks.length) {
-			toast.error('Please add why its urgent!!');
+			Toast.error('Please add why its urgent!!');
 		} else {
 			setLoading(true);
 			try {
@@ -52,16 +52,17 @@ const useUpdateTag = ({
 					});
 
 					if (!finalRes?.error) {
-						toast.success('Tag successfully Updated');
+						Toast.success('Tag successfully Updated');
 						setLoading(false);
 						onClose();
 					} else {
-						toast.error('Something went wrong!');
+						Toast.error('Something went wrong!');
 						setLoading(false);
 					}
 				}
 			} catch (err) {
 				setLoading(false);
+				Toast.error(err.message);
 			}
 			setLoading(false);
 		}

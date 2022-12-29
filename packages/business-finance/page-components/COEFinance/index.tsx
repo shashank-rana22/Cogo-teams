@@ -9,6 +9,7 @@ import MyResponsiveLines from "./Components/linecharts";
 import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
 import SegmentedControl from "../commons/SegmentedControl";
+
 const CoeFinance=()=>{
     const { push, query } = useRouter();
     const [currentTab, setCurrentTab] = useState('');
@@ -31,7 +32,6 @@ const CoeFinance=()=>{
 			value: 'total_gross',
 		},
 	];
-
 
     
      

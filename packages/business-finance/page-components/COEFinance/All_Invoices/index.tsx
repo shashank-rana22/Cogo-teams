@@ -1,10 +1,8 @@
 import React,{useState} from "react"
-import PurchaseInvoice from './PurchaseInvoiceView';
+import PurchaseInvoice from './PurchaseInvoiceView/index';
 import styles from './styles.module.css'
-import { useRouter } from '@cogoport/next';
 import ShipmentIdView from "./ShipmentIdView/index";
 const AllInvoices =()=>{
-    const {push,query} = useRouter();
     const [isPurchase,setIsPurchase]=useState(true);
 
 return(

@@ -33,9 +33,9 @@ const InvoiceDetails =({data={},getBillRefetch})=>{
 	};
 
     const renderEditTag = (
-		<div>
+		<div className={styles.flexdiv}>
 			<div className={styles.cardField}>
-				<p>Tag - {displayTag}</p>
+				<div>{displayTag}</div>
 
 				{!isEmpty(data?.billAdditionalObject?.urgencyRemarks) &&
 				data?.billAdditionalObject?.urgencyTag === 'urgent' ? (
@@ -50,12 +50,12 @@ const InvoiceDetails =({data={},getBillRefetch})=>{
 				) : null}
 			</div >
 
-			<div>
-				<Button className="secondary sl" onClick={() => setRemoveTag(true)}>
+			<div className={styles.buttonContainer}>
+				<Button themeType="secondary" size="xs" onClick={() => setRemoveTag(true)}>
 					Remove Tag
 				</Button>
 
-				<Button className="secondary sl" onClick={() => setShowAddTag(true)}>
+				<Button themeType="secondary"  size="xs" onClick={() => setShowAddTag(true)}>
 					Edit Tag
 				</Button>
 			</div>

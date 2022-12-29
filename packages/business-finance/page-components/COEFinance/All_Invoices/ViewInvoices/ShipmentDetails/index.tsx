@@ -8,7 +8,7 @@ import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
 import POC from './../POC';
 
-const ShipmentDetails = ({data})=>{
+const ShipmentDetails = ({data,orgId})=>{
     
     const jobNumber=data?.job?.jobNumber || '';
     
@@ -21,8 +21,8 @@ const ShipmentDetails = ({data})=>{
 
             <div className={styles.smallHr} />
 
-        <div className={styles.card} onClick={()=>{setShowDetails(!showDetails)}}>
-            <div className={styles.cardUpper}>
+        <div className={styles.card}>
+            <div className={styles.cardUpper} onClick={()=>{setShowDetails(!showDetails)}}>
                 <div className={styles.subContainer}>
                     Details 
                     <div className={styles.tagsContainer}>
@@ -37,7 +37,7 @@ const ShipmentDetails = ({data})=>{
                </div>      
             </div>
             {showDetails && <div className={styles.hr}/>}
-            <div>{showDetails && <Details jobNumber={jobNumber}/>}</div>
+            <div className={styles.details}>{showDetails && <Details  jobNumber={jobNumber} orgId={orgId}/>}</div>
         </div>
 
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>
