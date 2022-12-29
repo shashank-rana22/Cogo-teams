@@ -51,6 +51,24 @@ const navigationMappings = {
 			},
 		],
 	},
+	coe: {
+		key       : 'coe',
+		title     : 'Center of Excellence',
+		href      : '/coe',
+		as        : '/coe',
+		icon      : <IcMBookingDesk />,
+		main_apis : ['list_shipments'],
+		options   : [
+			{
+				key       : 'coe-fcl_booking_note_desk',
+				title     : 'Booking Desk',
+				href      : '/booking-desk/fcl-freight',
+				as        : '/booking-desk/fcl-freight',
+				icon      : <IcMBookingDesk />,
+				main_apis : ['list_shipments'],
+			},
+		],
+	},
 	locations: {
 		key       : 'locations',
 		title     : 'Locations',

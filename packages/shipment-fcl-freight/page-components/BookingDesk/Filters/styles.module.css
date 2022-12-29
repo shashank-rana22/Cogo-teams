@@ -4,7 +4,7 @@
 	align-items: center;
 }
 
-.searchBox{
+.search_box{
 
     font-size: 8px;
 	box-sizing: border-box;
@@ -15,26 +15,22 @@
 	width: 500px;
 }
 
-.searchBox input:focus{
+.search_box input:focus{
     outline: none;
 }
 
-.selectContainer {
+.select_container {
 	padding-right: 100px;
 	width: 150px 
 }
-.selectClass{
+.select_class{
 	min-width: 130px !important; 
-}
-
-.iconContainer{
-    margin-right: 8px;
 }
 
 .label{
     text-align: center;
 	margin-right: 8px;
 }
-.inputClass{
+.input_class{
 	height: 44px !important;
 }

@@ -1,14 +1,15 @@
+import { IcMAverage } from '@cogoport/icons-react';
 import React from 'react';
-import {IcMAverage} from '@cogoport/icons-react';
-import styles from './styles.module.css'
 
-const EmptyState = ({
+import styles from './styles.module.css';
+
+function EmptyState({
 	isMobile = false,
 	showContent = {
-		heading: 'No Results Found!',
-		description: 'Looks like you do not have any records for this section',
+		heading     : 'No Results Found!',
+		description : 'Looks like you do not have any records for this section',
 	},
-}) => {
+}) {
 	return (
 		<div className={styles.container}>
 			<div>
@@ -19,13 +20,13 @@ const EmptyState = ({
 
 			{!isMobile ? (
 				<div
-					className={styles.emptyStateIcon}
+					className={styles.empty_state_icon}
 				>
 					<IcMAverage width={120} height={120} />
 				</div>
-           	) : null}
+			) : null}
 		</div>
 	);
-};
+}
 
 export default EmptyState;

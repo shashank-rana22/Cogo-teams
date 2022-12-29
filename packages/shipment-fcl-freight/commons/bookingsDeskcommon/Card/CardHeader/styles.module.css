@@ -8,7 +8,7 @@
 	color: #333333;
 }
 
-.tradeType{
+.trade_type{
     margin: 10px;
 	background: #fef6df;
 	border-radius: 4px;
@@ -30,7 +30,7 @@
 		border-radius: 4px;
 		margin-left: 10px;
 }
-.cogoAssured{
+.cogo_assured{
     background: #e6fbe9;
 	border-radius: 4px 0px 4px 0px;
 	display: flex;
@@ -40,7 +40,7 @@
 	margin-right: 12px;
 }
 
-.iconWrapper{
+.icon_wrapper{
     display: flex;
 	align-items: center;
 	justify-content: center;

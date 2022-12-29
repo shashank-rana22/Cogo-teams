@@ -1,13 +1,17 @@
+import {
+	Tabs, TabPanel, Pagination, Loader,
+} from '@cogoport/components';
 import React, { useState } from 'react';
-import { Tabs, TabPanel, Pagination, Loader } from '@cogoport/components';
+
+import Card from '../../commons/bookingsDeskcommon/Card';
 import EmptyState from '../../commons/EmptyState';
-import ShipmentFilters from './Filters';
-import Card from '../../commons/bookingsDeskcommon/Card'
-import useListShipments from '../../hooks/bookingDeskHooks/useGetList.js';
+import useListShipments from '../../hooks/bookingDeskHooks/useGetList';
 import { getTabs } from '../../utils/bookingDeskUtils/tabs_mapping';
+
+import ShipmentFilters from './Filters';
 import styles from './styles.module.css';
 
-const BookingDesk = () => {
+function BookingDesk() {
 	const [activeTab, setActiveTab] = useState('place_booking');
 	const [currentShipment, setCurrentShipment] = useState('fcl_freight');
 
@@ -20,10 +24,10 @@ const BookingDesk = () => {
 		hookSetters,
 		list: { total, data },
 	} = useListShipments();
-    console.log(activeTab, 'activeTab');
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.headingWrapper}>
+			<div className={styles.heading_wrapper}>
 				<div className={styles.heading}>Bookings Desk</div>
 				<ShipmentFilters
 					hookSetters={hookSetters}
@@ -34,7 +38,7 @@ const BookingDesk = () => {
 					visibleTabs={visibleTabs}
 				/>
 			</div>
-			 <Tabs
+			<Tabs
 				activeTab={activeTab}
 				onChange={setActiveTab}
 				className="horizontal four"
@@ -42,35 +46,35 @@ const BookingDesk = () => {
 				{(visibleTabs || []).map((tab) => (
 					<TabPanel {...tab} className="horizontal four" />
 				))}
-			</Tabs> 
+			</Tabs>
 
 			{total > 10 ? (
-				<div className = {styles.paginationWrapper}>
+				<div className={styles.pagination_wrapper}>
 					<Pagination
-						type={'compact'}
+						type="compact"
 						totalItems={total}
 						currentPage={page}
 						pageSize={10}
-						handlePageChange={(val) =>{
+						handlePageChange={(val) => {
 							hookSetters.setFilters({
 								...filters,
 								page: val,
-							})
+							});
 						}}
 					/>
 				</div>
-			) : null} 
-
-			{loading ? (
-				<div className={styles.loaderContainer}>
-					<Loader></Loader>
-		         </div>
 			) : null}
 
-			{!loading && data?.length === 0 ? <EmptyState /> : null} 
+			{loading ? (
+				<div className={styles.loader_container}>
+					<Loader />
+				</div>
+			) : null}
+
+			{!loading && data?.length === 0 ? <EmptyState /> : null}
 
 			{!loading && data?.length > 0 ? (
-				<div className={styles.cardsContainer}>
+				<div className={styles.cards_container}>
 					{(data || []).map((details) => (
 						<Card data={details} />
 					))}
@@ -78,22 +82,22 @@ const BookingDesk = () => {
 			) : null}
 
 			{total > 10 ? (
-				<div className = {styles.paginationWrapper}>
+				<div className={styles.pagination_wrapper}>
 					<Pagination
-						type={'number'}
+						type="number"
 						totalItems={total}
 						currentPage={1}
 						pageSize={10}
-						handlePageChange={(number) =>{
+						handlePageChange={(number) => {
 							hookSetters.setFilters({
 								...filters,
 								page: number,
-							})
+							});
 						}}
 					/>
 				</div>
-			) : null} 
+			) : null}
 		</div>
 	);
-};
+}
 export default BookingDesk;

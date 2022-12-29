@@ -1,15 +1,17 @@
+/* eslint-disable no-nested-ternary */
+import { IcCCogoassured } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import {IcCCogoassured} from '@cogoport/icons-react';
-import styles from './styles.module.css'
 
-const CardHeader = ({ data = {} }) => {
+import styles from './styles.module.css';
+
+function CardHeader({ data = {} }) {
 	const tradeType = data?.trade_type;
 
 	return (
 		<div className={styles.container}>
 			{data?.is_cogo_assured && (
-				<div className={styles.cogoAssured}>
-					<div className={styles.iconWrapper}>
+				<div className={styles.cogo_assured}>
+					<div className={styles.icon_wrapper}>
 						<IcCCogoassured />
 					</div>
 
@@ -18,23 +20,25 @@ const CardHeader = ({ data = {} }) => {
 			)}
 
 			{tradeType ? (
-				tradeType == "export" ?
-				<p className = {(`${styles.tradeType} ${styles.yellow}`)}>
-					{startCase(tradeType)}
-				</p>
-				:	
-				<p className = {(`${styles.tradeType} ${styles.blue}`)}>
-				{startCase(tradeType)}
-				</p>
+				tradeType === 'export' ? (
+					<p className={(`${styles.trade_type} ${styles.yellow}`)}>
+						{startCase(tradeType)}
+					</p>
+				)
+					:				(
+						<p className={(`${styles.trade_type} ${styles.blue}`)}>
+							{startCase(tradeType)}
+						</p>
+					)
 
 			) : null}
 
 			{(data.importer_exporter.tags || []).includes('partner') ? (
-				<p className = {(`${styles.tradeType} ${styles.customer}`)}>Channel Partner</p>
+				<p className={(`${styles.trade_type} ${styles.customer}`)}>Channel Partner</p>
 			) : null}
 
 			{data?.source ? (
-				<p className = {styles.source}>
+				<p className={styles.source}>
 					{data.source === 'direct'
 						? 'Sell Without Buy'
 						: startCase(data.source)}
@@ -42,6 +46,6 @@ const CardHeader = ({ data = {} }) => {
 			) : null}
 		</div>
 	);
-};
+}
 
 export default CardHeader;

@@ -15,7 +15,7 @@ export const renderValue = (label, detail) => {
 
 	const chargableWeight = isLTL
 		? detail?.chargable_weight || detail?.weight
-		: Math.max(detail?.volume * 166.67, detail?.weight);
+		: Math.max((detail?.volume || 1) * 166.67, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -24,7 +24,7 @@ export const renderValue = (label, detail) => {
 	const inputValue = valueForInput
 		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(
 			valueForInput?.packing_type,
-		  )}`
+		)}`
 		: '';
 
 	const lr_number = detail?.lr_number;
@@ -44,7 +44,7 @@ export const renderValue = (label, detail) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${
 										item?.width
-									  }cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
+									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
 								return <div>{values}</div>;
 							})}
@@ -53,7 +53,7 @@ export const renderValue = (label, detail) => {
 				>
 					<div className="cargo-details-info">
 						{`Package: ${inputValue} + ${
-							packages?.length - 1
+							(packages?.length || 1) - 1
 						} more`}
 
 					</div>
@@ -83,7 +83,7 @@ export const renderValue = (label, detail) => {
 	);
 
 	const formatCertificate = (certificates) => (
-		<div className={styles.certificateContainer}>
+		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
 				<a href={item} target="_blank" rel="noreferrer">
 					Click to view certificate

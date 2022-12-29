@@ -1,33 +1,33 @@
 export const getTabs = (activeTab) => {
 	const tabs = [
 		{
-			name: 'place_booking',
-			title: 'Place Booking',
+			name  : 'place_booking',
+			title : 'Place Booking',
 		},
 		{
-			name: 'upload_bn',
-			title: 'Upload BN',
+			name  : 'upload_bn',
+			title : 'Upload BN',
 		},
 		{
-			name: 'completed',
-			title: 'Completed',
+			name  : 'completed',
+			title : 'Completed',
 		},
 		{
-			name: 'cancelled',
-			title: 'Cancelled',
+			name  : 'cancelled',
+			title : 'Cancelled',
 		},
 	];
 	const additionalTab = {
 		fcl_freight: [
 			{
-				name: 'container_pick_up',
-				title: 'Container Pick Up',
+				name  : 'container_pick_up',
+				title : 'Container Pick Up',
 			},
 		],
 		air_freight: [
 			{
-				name: 'bn_uploaded',
-				title: 'BN Uploaded',
+				name  : 'bn_uploaded',
+				title : 'BN Uploaded',
 			},
 		],
 	};
@@ -46,8 +46,8 @@ export const tab_filter_mapping = (activeTab) => {
 
 	const shipment_state = {
 		in_progress,
-		completed: [...in_progress, 'completed'],
-		cancelled: ['cancelled'],
+		completed : [...in_progress, 'completed'],
+		cancelled : ['cancelled'],
 	};
 
 	const filters = {
