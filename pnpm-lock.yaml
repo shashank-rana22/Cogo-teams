@@ -37,6 +37,7 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.159
+      '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/home': workspace:0.1.0
@@ -58,6 +59,7 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.159_27ghnklenyaalfqdgsm7fqt7de
+      '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
       '@cogoport/home': link:../packages/home
@@ -283,6 +285,24 @@ importers:
       rollup-plugin-delete: 2.0.0
       rollup-plugin-typescript2: 0.34.1_fjmngzu5qr6xzjooxkpjm6imha
       typescript: 4.9.4
+
+  packages/contracts:
+    specifiers:
+      '@cogoport/components': ^1.0.159
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.159_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      react: 18.2.0
 
   packages/home:
     specifiers:

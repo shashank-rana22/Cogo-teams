@@ -6,6 +6,7 @@ import {
 	IcMFinanceCrm,
 	IcMFinanceDashboard,
 	IcMProductCodeMapping,
+	IcMContractRates,
 } from '@cogoport/icons-react';
 
 const navigationMappings = {
@@ -68,6 +69,15 @@ const navigationMappings = {
 			},
 		],
 		module_type: 'crm',
+	},
+	contracts: {
+		key         : 'contracts',
+		title       : 'Contracts',
+		icon        : <IcMContractRates />,
+		href        : '/contracts',
+		as          : '/contracts',
+		main_apis   : ['list_contracts'],
+		module_type : 'crm',
 	},
 	roles_permissions: {
 		key         : 'roles_permissions',

@@ -19,6 +19,7 @@
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/layout": "workspace:0.1.0",
     "@cogoport/locations": "workspace:0.1.0",
+    "@cogoport/contracts": "workspace:0.1.0",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
