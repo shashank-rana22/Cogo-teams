@@ -33,7 +33,11 @@ const handleAuthentication = async ({
 }) => {
 	let asPrefix = '';
 
-	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(asPath)
+	const actualAsPath = asPath.split('?')[0];
+
+	console.log(asPath, actualAsPath, 'ff');
+
+	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(actualAsPath)
 		|| UNAUTHENTICATED_PATHS.includes(pathname);
 
 	const token = getCookie(AUTH_TOKEN_NAME, isServer ? { req } : null);
