@@ -1,8 +1,8 @@
-import { Pills } from '@cogoport/components';
+import { Datepicker } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function PillsController(props: any) {
+function DatepickerController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -14,7 +14,7 @@ function PillsController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Pills
+				<Datepicker
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
@@ -26,4 +26,4 @@ function PillsController(props: any) {
 		/>
 	);
 }
-export default PillsController;
+export default DatepickerController;

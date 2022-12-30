@@ -1,4 +1,4 @@
-const getFormattedPrice = (locale = 'en-IN', price: any, currency: any, options = {}) => (currency
+const getFormattedPrice = (locale = 'en-IN', price, currency, options = {}) => (currency
 	? Number(price || 0).toLocaleString(locale, {
 		style           : 'currency',
 		currency,

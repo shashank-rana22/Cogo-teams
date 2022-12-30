@@ -2,7 +2,7 @@ import { Select } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function SelectController(props: any) {
+function SelectController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;

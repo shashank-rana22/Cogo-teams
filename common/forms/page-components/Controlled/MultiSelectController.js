@@ -1,9 +1,8 @@
+import { MultiSelect } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-import FileUploader from '../Business/FileUploader';
-
-function UploadController(props: any) {
+function MultiSelectController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -15,7 +14,7 @@ function UploadController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<FileUploader
+				<MultiSelect
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
@@ -27,4 +26,4 @@ function UploadController(props: any) {
 		/>
 	);
 }
-export default UploadController;
+export default MultiSelectController;
