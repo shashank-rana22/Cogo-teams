@@ -20,7 +20,8 @@ export interface Props {
 }
 
 function List({
-	config, sort, setSort, itemData, renderHeaderCheckbox,functions={},loading=false,page=1,handlePageChange,pageSize=10
+	config, sort, setSort, itemData, 
+	renderHeaderCheckbox,functions={},loading=false,page=1,handlePageChange,pageSize=10
 }:Props) {
 	const isMobile = false;
 	
@@ -28,8 +29,6 @@ function List({
 		showHeader = true, fields, headerStyles, itemStyles, bodyStyles, showHeaderCheckbox,
 	} = config;
 	const list=itemData?.list;
-	
-	console.log(itemData,'itemData');
 	
 	return (
 		<section>

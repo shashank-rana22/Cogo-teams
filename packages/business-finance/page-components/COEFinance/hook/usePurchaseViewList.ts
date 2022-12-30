@@ -3,28 +3,38 @@
 import { useRequestBf } from '@cogoport/request';
 import React, { useState,useEffect } from 'react';
 import { PURCHASE_VIEW_CONFIG } from '../configurations/PURCHASE_VIEW_LIST';
+import useDebounceQuery from '../../commons/utils/debounce'
 
 
 const  useGetPurchaseViewList=()=> {
 	const [page,setPage]=useState<number>(1)
+	const [currentTab, setCurrentTab] = useState<string>('all');
+	const {debounceQuery, query }=useDebounceQuery();
+	const [searchValue, setSearchValue] = useState<number|string>('');
+	
 	
     const [{ data, loading, error }, refetch] = useRequestBf(
 		{
 			url     : '/purchase/bills/list',
 			method  : 'get',
 			params : {
-				pageIndex : page
+				pageIndex : page,
+				pageSize:	10,
+						q : query||undefined,
 				},
 			authKey : 'get_purchase_bills_list',
 		},
 		{ manual: false },
 	);
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [searchValue]);
 
 	useEffect(()=>{
 		refetch()
-	},[page])
-
-const config = PURCHASE_VIEW_CONFIG;
+	},[page,query,currentTab])
+	
+const config=PURCHASE_VIEW_CONFIG;
     
 
 	return {
@@ -32,7 +42,11 @@ const config = PURCHASE_VIEW_CONFIG;
         loading,
         config,
 		handlePageChange:setPage,
-		page
+		currentTab,
+		setCurrentTab,
+		page,
+		setSearchValue,	
+		searchValue,
     };
 }
 

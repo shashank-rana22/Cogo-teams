@@ -3,26 +3,42 @@ import {Tooltip} from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import {Tags} from '@cogoport/components';
 import styled from './styles.module.css'
-import {FieldType,ListDataProps} from '../../../../commons/Interfaces/index'
+import {FieldType,GenericObject,ListDataProps} from '../../../../../commons/Interfaces/index'
 
 interface props{
-      itemData: ListDataProps,
-	  field: FieldType,	
+	itemData:GenericObject
+	  field: {
+		  topKey:object,
+		  bottomKey:object,
+		  label :string
+	  },	
 }
 
-const FieldPair = ({ itemData = {}, field = {} }:props) => {
-	const { topKey = '', bottomKey = '', lowerKey = '' } = field;
-	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = itemData || {};
+const FieldPair = ({ itemData , field}:props) => {
 
 	
-    const handleBillType = (item:any) => {
-        let invoiceType;
+	const { topKey = {}, bottomKey = {} } = field;
+	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = itemData;
+
+	
+	
+    const handleBillType = (item:object) => {
+        let invoiceType;		
 		if (billType=== "BILL") {
 			if (isProforma) {
 				invoiceType = 'Proforma Invoice';
 			} else {
 				invoiceType = 'Purchase Invoice';
 			}
+		}
+		else if(billType=== "REIMBURSEMENT"){
+			invoiceType='Reimbursement'
+		}
+		else if(billType=== "EXPENSE"){
+			invoiceType="Expense"
+		}
+		else if(billType=== "CREDIT NOTE"){
+			invoiceType="Credit Notes"
 		}
 		return invoiceType;
 	};
