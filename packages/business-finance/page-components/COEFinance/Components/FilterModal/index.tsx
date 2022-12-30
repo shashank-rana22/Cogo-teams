@@ -24,7 +24,9 @@ return (
 			)}
 			/>
 			<Modal.Body>
+				<div className={styles.container_filter}>
 				<Filter controls={FILTERS} filters={filters} setFilters={setFilters} />
+				</div>
 				<div className={styles.buttons}>
 					<div className={styles.clear}>
 					<Button onClick={()=>{

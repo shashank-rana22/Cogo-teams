@@ -51,7 +51,7 @@ export const FILTERS =[
                 color:"#ED3726", 
                 background: "#FFFAEB",
                 className: 'primaryfilter primary md',
-                span:7,
+                span:7.5,
                 options: [
                     {
                         label: 'Invoice Date',
