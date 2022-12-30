@@ -60,6 +60,8 @@ function FileUploader(props: any) {
 			finalUrl,
 		};
 	};
+	const b = ['a', 'b', 'c'];
+	console.log('bbbbbb', b);
 
 	const handleChange = async (values: any) => {
 		setPercent(done);
@@ -111,7 +113,7 @@ function FileUploader(props: any) {
 	// } catch (err:any) {
 	// 	Toast.error('File Upload failed.......');
 	// }
-	console.log('urlStor', urlStore);
+	console.log('urlStoreee', urlStore);
 
 	return (
 		<>
@@ -123,7 +125,7 @@ function FileUploader(props: any) {
 				loading={loading}
 				multipleUploadDesc="upload your files here"
 				uploadIcon={<IcMUpload height={40} width={40} />}
-				fileLink={urlStore}
+				fileData={urlStore[0]}
 			/>
 			{(percent > 0 && percent < 100) && (
 				<div className={styles.progress_container}>
