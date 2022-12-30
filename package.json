@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "deploy":"pnpm deploy",
     "dev": "node scripts/build-pages && turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",

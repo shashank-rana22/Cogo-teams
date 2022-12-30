@@ -1,11 +1,12 @@
-import React,{useState, useEffect} from "react";
-import {TabPanel,Tabs} from '@cogoport/components';
-import styles from './styles.module.css';
-import {useRouter} from '@cogoport/next';
+import React, { useState, useEffect } from "react";
+import { TabPanel, Tabs } from "@cogoport/components";
+import styles from "./styles.module.css";
+import { useRouter } from "@cogoport/next";
+import { IcMAccountSettings } from '@cogoport/icons-react';
 import AllInvoices from "./All_Invoices/index";
 import MyResponsiveBar from "./Components/ResponsiveBar";
 import MyResponsiveLine from "./Components/Stream";
-import MyResponsiveLines from "./Components/linecharts";
+import MyResponsiveLines from "./Components/linecharts/index";
 import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
 import SegmentedControl from "../commons/SegmentedControl";
@@ -33,18 +34,11 @@ const CoeFinance=()=>{
 		},
 	];
 
-    
-     
-    useEffect(()=>{
-        push(
-			'/business-finance/coe-finance/[active_tab]',
-			`/business-finance/coe-finance/${activeTab}`,
-		);
-    },[activeTab])
 
-    return(
+    return (
     <div>
         <div>
+
 			<h1>COE Finance</h1>
 		</div>
     <Tabs activeTab={activeTab} onChange={setActiveTab}>
@@ -95,8 +89,9 @@ const CoeFinance=()=>{
             <div>Rejected</div>
         </TabPanel>
     </Tabs>
-    </div>
+</div>
     )
 
 }
 export default CoeFinance
+

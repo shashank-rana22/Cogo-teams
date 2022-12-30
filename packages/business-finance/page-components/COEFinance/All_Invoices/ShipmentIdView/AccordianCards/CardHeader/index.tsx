@@ -3,9 +3,13 @@ import TabSelect from "../../../../../commons/TabSelect/index";
 import styles from "./styles.module.css";
 // import TabSelect from "../../commons/TabSelect/index";
 
-const CardHeader = () => {
-    const [amount, setAmount] = useState("expense");
+interface propsType {
+    itemData: any;
+    amountTab: string;
+    setAmountTab: Function;
+}
 
+const CardHeader = ({ amountTab, setAmountTab, itemData }: propsType) => {
     const options = [
         { name: "Expense", value: "expense" },
         { name: "Income", value: "income" },
@@ -16,8 +20,8 @@ const CardHeader = () => {
                 <div className={styles.toggle}>
                     <TabSelect
                         options={options}
-                        value={amount}
-                        setValue={setAmount}
+                        value={amountTab}
+                        setValue={setAmountTab}
                     />
                 </div>
                 <div className={styles.discount}>
