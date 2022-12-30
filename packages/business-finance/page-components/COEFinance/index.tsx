@@ -79,7 +79,6 @@ const CoeFinance=()=>{
         <MyResponsiveLines data={{}}/>
         </div>
         </div>
-            dashboard
         </TabPanel>
         <TabPanel name="all_invoices" title="All Invoices">
             <AllInvoices/>

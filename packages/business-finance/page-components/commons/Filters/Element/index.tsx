@@ -4,6 +4,7 @@ import freightMapping  from '../../Constants/freight-mappings';
 import CostView from '../../costView/index';
 import styles from './styles.module.css'
 import { Options } from '../../Interfaces';
+import SegmentedControl from '../../SegmentedControl';
 
 interface ElementProps{
 	type?:string;
@@ -51,11 +52,10 @@ const tagClick=(val:Options)=>{
 					<div className={styles.flex}>
 					{rest?.options?.map((val)=>(
 					<div style={{margin:'5px'}} onClick={()=>tagClick(val)}>
-							<Tags themeType="yellow" size="md" className={val.value===filters[name as keyof typeof filters]?styles.active:className} >{val.label}</Tags>
+							<Tags themeType="yellow" size="md" className={val.value===filters[name as keyof typeof filters]?styles.active:styles.normal} >{val.label}</Tags>
 					</div>))}
 					</div>
 				);
-
 			case 'href':
 				return (
 					<div>
@@ -97,7 +97,9 @@ const tagClick=(val:Options)=>{
 				);
 			case 'select':
 				return (
+					<div className={styles.select_container}>
 					<Select value={value} className={className} {...rest}/>
+					</div>
 				);
 			case 'input':
 				return <Input value={value} className={className} {...rest} />;
@@ -111,6 +113,14 @@ const tagClick=(val:Options)=>{
 						{freightMapping[value as keyof typeof freightMapping]?.name.replace('_', '') || '-'}
 					</div>
 				);
+			case 'segmented':
+				return(
+					<SegmentedControl options={rest?.options as {label:string ,value:string, icon?: JSX.Element ,badge?:number}[] } 
+					activeTab={value||''} 
+					setActiveTab={(val:string)=>{setFilters((p:object)=>({...p,[name]    : val}))}}
+					{...rest}
+					/>
+				)
 
 			default:
 				return (

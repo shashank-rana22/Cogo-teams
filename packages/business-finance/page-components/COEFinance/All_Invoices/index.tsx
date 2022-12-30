@@ -2,12 +2,16 @@ import React,{useState} from "react"
 import PurchaseInvoice from './PurchaseInvoiceView/index';
 import styles from './styles.module.css'
 import ShipmentIdView from "./ShipmentIdView/index";
+import FilterModal from "../Components/FilterModal";
+import useGetPurchaseViewList from "../hook/usePurchaseViewList";
 const AllInvoices = () => {
     const [isPurchase, setIsPurchase] = useState(true);
+    const [filters, setFilters]=useState({})
 
     return (
         <div>
             <div className={styles.container}>
+                <div className={styles.flex}>
                 <div onClick={() => setIsPurchase(true)}>
                     <div
                         className={
@@ -31,8 +35,10 @@ const AllInvoices = () => {
                         SHIPMENT ID VIEW
                     </div>
                 </div>
+                </div>
+                <FilterModal setFilters={setFilters} filters={filters}/>
             </div>
-            {isPurchase && <PurchaseInvoice />}
+            {isPurchase && <PurchaseInvoice filters={filters} />}
             {!isPurchase && <ShipmentIdView />}
         </div>
     );

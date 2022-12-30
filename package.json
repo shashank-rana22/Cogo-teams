@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "deploy":"pnpm deploy",
+    "deploy": "pnpm deploy",
     "dev": "node scripts/build-pages && turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
@@ -34,7 +34,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^5.0.6",
     "postcss-preset-env": "^7.8.3",
-    "stylelint": "^14.16.0",
+    "stylelint": "^14.16.1",
     "turbo": "^1.6.3"
   },
   "packageManager": "pnpm@7.15.0"

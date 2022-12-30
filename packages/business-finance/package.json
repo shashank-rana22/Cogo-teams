@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
+<<<<<<< Updated upstream
     "@cogoport/components": "^1.0.165",
+=======
+    "@cogoport/components": "^1.0.174",
+>>>>>>> Stashed changes
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/next": "workspace:^0.1.0",

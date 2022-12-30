@@ -73,7 +73,8 @@ function AccountRecievables() {
 						setActiveTab={setCurrentTab}
 					/>
 			<StyledTable columns={columns} data={data}/>
-            <Filter controls={INVOICE_FILTERS} filters={filters} setFilters={setFilters} clearFilters={()=>{setFilters({})}} showClearBtn={true}/>
+            <Filter controls={INVOICE_FILTERS} filters={filters}
+            setFilters={setFilters} clearFilters={()=>{setFilters({})}}/>
 		</div>
 	);
 }

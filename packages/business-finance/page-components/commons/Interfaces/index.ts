@@ -66,5 +66,6 @@ export interface ControlProps {
 	name?: string;
 	type?: string;
 	options?: Options[];
-	[key:string]: string|number|undefined|boolean|Options[];
+	groupBy?:ControlProps[];
+	[key:string]: string|number|undefined|boolean|Options[]|object[];
 }

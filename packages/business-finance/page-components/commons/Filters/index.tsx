@@ -20,37 +20,54 @@ function Filter({
 	showClearBtn = false,
 	clearFilters,
 }:FilterProps) {
+
+	const getElement=(singlecontrol:ControlProps) => {
+		const { span=0, name = '', type = '',groupby, ...rest }  = singlecontrol || {};
+		const customiseControl = {
+			id       : `filter-${name}`,
+			value    : filters![name as keyof typeof filters] || '',
+			onChange : (val:string) => {
+				let value:string;					
+				if (type === 'input') value = val;
+				else if (type === 'datepicker') value = val;
+				else value = val;
+				setFilters((prev:object) => ({
+					...prev,
+					[name]    : value,
+					pageIndex : 1,
+				}));
+			},
+			name,
+			type,
+			setFilters,
+			filters,
+			...rest,
+		};
+		return (
+			<div className={styles.col} style={{
+				'--width': `${(singlecontrol.span || 1)*(100/12)}%`,
+			} as React.CSSProperties}>
+				<Element key={name} {...customiseControl} />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.flex}>
-			{(controls || []).map((control) => {
-				const { span=0, name = '', type = '', ...rest }  = control || {};
-				const customiseControl = {
-					id       : `filter-${name}`,
-					value    : filters![name as keyof typeof filters] || '',
-					onChange : (val:string) => {
-						let value:string;					
-						if (type === 'input') value = val;
-						else if (type === 'datepicker') value = val;
-						else value = val;
-						setFilters((prev:object) => ({
-							...prev,
-							[name]    : value,
-							pageIndex : 1,
-						}));
-					},
-					name,
-					type,
-					setFilters,
-					filters,
-					...rest,
-				};
-				return (
-					<div className={styles.col} style={{
-						'--width': `${(control.span || 1)*(100/12)}%`,
-					} as React.CSSProperties}>
-						<Element key={name} {...customiseControl} />
-					</div>
-				);
+			{(controls || []).map((control)=>{
+				const {groupBy,span,name, showGroupName=true}=control;
+				if(groupBy){
+					return (
+						<>
+						{showGroupName&&<div className={styles.groupHead}>{name}</div>}
+						<div className={styles.col} style={{width:`${(span || 12)*(100/12)}%`}}>
+							{(groupBy).map((each)=>(getElement(each)))}
+						</div>
+						</>
+						)
+				}else{
+					return(<>{getElement(control)}</>)
+				}
 			})}
 			{showClearBtn && (
 				<Button

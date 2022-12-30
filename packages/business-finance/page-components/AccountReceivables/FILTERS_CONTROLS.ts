@@ -1,42 +1,46 @@
 import { ControlProps } from "../commons/Interfaces";
 
-export const INVOICE_FILTERS:ControlProps[] =[
+export const INVOICE_FILTERS:any[] =[
 	{
-		name: 'zone',
-		type: 'select',
-		placeholder: 'Geography',
-		className: 'primary md',
-		hideSelectedOptions: false,
-		multiple: true,
-		isMulti: true,
-		span: 2.5,
-		isClearable: true,
-		options: [
-			{ label: 'North', value: 'north' },
-			{ label: 'East', value: 'east' },
-			{ label: 'South', value: 'south' },
-			{ label: 'West', value: 'west' },
-		],
-	},
-
-	{
-		name: 'category',
-		type: 'select',
-		className: 'primary md',
-		isClearable: true,
-		placeholder: 'Category',
-		span: 2.5,
-		multiple: true,
-		options: [
-					{ value: 'sl', label: 'Shipping Line' },
-					{ value: 'air', label: 'Airline' },
-					{ value: 'nvocc', label: 'NVOCC' },
-					{ value: 'iata', label: 'IATA' },
-					{ value: 'cstm', label: 'Customs' },
-					{ value: 'tsp', label: 'Transporter' },
-					{ value: 'ffw', label: 'Freight Forwarder' },
-					{ value: 'oth', label: 'Other' },
-		],
+		name:'InvoiceDates',
+		span:12,
+		groupBy: [{
+			name: 'zone',
+			type: 'select',
+			placeholder: 'Geography',
+			className: 'primary md',
+			hideSelectedOptions: false,
+			multiple: true,
+			isMulti: true,
+			span: 4.5,
+			isClearable: true,
+			options: [
+				{ label: 'North', value: 'north' },
+				{ label: 'East', value: 'east' },
+				{ label: 'South', value: 'south' },
+				{ label: 'West', value: 'west' },
+			],
+		},
+	
+		{
+			name: 'category',
+			type: 'select',
+			className: 'primary md',
+			isClearable: true,
+			placeholder: 'Category',
+			span: 2.5,
+			multiple: true,
+			options: [
+						{ value: 'sl', label: 'Shipping Line' },
+						{ value: 'air', label: 'Airline' },
+						{ value: 'nvocc', label: 'NVOCC' },
+						{ value: 'iata', label: 'IATA' },
+						{ value: 'cstm', label: 'Customs' },
+						{ value: 'tsp', label: 'Transporter' },
+						{ value: 'ffw', label: 'Freight Forwarder' },
+						{ value: 'oth', label: 'Other' },
+			],
+		}],
 	},
 
 	{
@@ -45,7 +49,7 @@ export const INVOICE_FILTERS:ControlProps[] =[
 		placeholder: 'Invoice View',
 		type: 'select',
 		className: 'primary md',
-		span: 2.5,
+		span: 4,
 		options: [
 			{ label: 'All', value: 'all' },
 			{ label: 'Migrated', value: 'migrated' },

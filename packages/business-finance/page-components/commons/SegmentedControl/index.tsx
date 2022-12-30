@@ -20,17 +20,6 @@ function SegmentedControl(props:Props) {
 
 	const options = !optionsProp ? [] : optionsProp;
 
-	const [isMounted, setIsMounted] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (isMounted) {
-			return;
-		}
-
-		setActiveTab(activeTab || (options[0] || {}).value || '');
-		setIsMounted(true);
-	}, [isMounted]);
-
 	return (
 		<div className={styles.segmented_control}>
 			<div className={styles.segmented_container}>
