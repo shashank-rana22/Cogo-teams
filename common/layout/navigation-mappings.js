@@ -63,7 +63,7 @@ const navigationMappings = {
 		title     : 'Center of Excellence',
 		href      : '/coe',
 		as        : '/coe',
-		icon      : <IcMBookingDesk />,
+		icon      : IcMBookingDesk,
 		main_apis : ['list_shipments'],
 		options   : [
 			{
@@ -71,7 +71,7 @@ const navigationMappings = {
 				title     : 'FCL Revenue Desk',
 				href      : '/revenue-desk/fcl-freight',
 				as        : '/revenue-desk/fcl-freight',
-				icon      : <IcMBookingDesk />,
+				icon      : IcMBookingDesk,
 				main_apis : ['list_shipments'],
 			},
 		],
