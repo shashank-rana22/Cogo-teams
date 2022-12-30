@@ -2,6 +2,7 @@ import store from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
+
 import getAuthorizationParams from './get-final-authpipe';
 import { getCookie } from './getCookieFromCtx';
 
