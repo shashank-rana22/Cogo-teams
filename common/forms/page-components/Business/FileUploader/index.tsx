@@ -4,6 +4,8 @@ import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import React, { useState, useEffect } from 'react';
 
+import useInterval from '../../../hooks/useInterval';
+
 import styles from './styles.module.css';
 
 function FileUploader(props: any) {
@@ -62,19 +64,23 @@ function FileUploader(props: any) {
 	};
 	const b = ['a', 'b', 'c'];
 	console.log('bbbbbb', b);
+	useInterval(() => {
+		if (percent > 0 && percent < 95) {
+			setPercent(percent + 3);
+		}
+	}, 120);
 
 	const handleChange = async (values: any) => {
-		setPercent(done);
+		setPercent(10);
 		const promises = [];
 		while (i < values.length) {
-			setPercent(done + (20 * i));
 			try {
 				promises.push(uploadFile(values[i]));
 			} catch (err) {
+				setPercent(0);
 				Toast.error('File Upload failed.......');
 			}
 			i += 1;
-			setPercent(done + (20 * i));
 		}
 		setFileName(values);
 		const allUrls = await Promise.all(promises);
