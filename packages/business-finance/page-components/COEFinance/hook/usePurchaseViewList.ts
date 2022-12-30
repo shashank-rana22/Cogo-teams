@@ -3,11 +3,8 @@
 import { useRequestBf } from '@cogoport/request';
 import React, { useState,useEffect } from 'react';
 import { PURCHASE_VIEW_CONFIG } from '../configurations/PURCHASE_VIEW_LIST';
-<<<<<<< Updated upstream
 import useDebounceQuery from '../../commons/utils/debounce'
-=======
 import { GenericObject } from '../../commons/Interfaces';
->>>>>>> Stashed changes
 
 
 interface Props{
@@ -27,12 +24,7 @@ const  useGetPurchaseViewList=({filters}:Props)=> {
 			method  : 'get',
 			params : {
 				pageIndex : page,
-<<<<<<< Updated upstream
-				pageSize:	10,
-						q : query||undefined,
-=======
 				...filters,
->>>>>>> Stashed changes
 				},
 			authKey : 'get_purchase_bills_list',
 		},

@@ -3,7 +3,6 @@ import {useRouter} from '@cogoport/next';
 import {Button} from '@cogoport/components'
 import List from '../../../commons/List/index';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
-<<<<<<< Updated upstream
 import RenderRemarks  from './RenderData/RenderRemarks/index';
 import RenderStatus from './RenderData/RenderStatus/index'
 import FieldPair from './RenderData/FiledPair/index';
@@ -15,15 +14,6 @@ import {fieldProps,fieldItemProps} from './interfaces/index'
 
 
 
-=======
-import ShowRemarkData from './ShowRemark/index'
-import RenderCustomer from './RenderCustomer/index'
-import FormatedDate from './FormatedDate/index';
-import FiledPair from './FiledPair/index'
-import RenderStatus from './RenderStatus/index';
-import RenderRemarks  from './RenderRemarks';
-import { GenericObject } from '../../../commons/Interfaces';
->>>>>>> Stashed changes
 
 interface Props{
   filters:GenericObject;
@@ -32,7 +22,6 @@ interface Props{
 function PurchaseInvoice({filters}:Props) {
 const router = useRouter();
 
-<<<<<<< Updated upstream
   const {data,
       loading,
       config,
@@ -42,10 +31,7 @@ const router = useRouter();
 		  searchValue,
       currentTab,
      setCurrentTab,
-    }=useGetPurchaseViewList();
-=======
-  const {data,loading,config,handlePageChange,page}=useGetPurchaseViewList({filters});
->>>>>>> Stashed changes
+    }=useGetPurchaseViewList({filters});
 
   const handleChange =(itemData:any)=>{
     router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}`);
