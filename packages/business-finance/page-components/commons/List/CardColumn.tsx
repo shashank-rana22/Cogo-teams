@@ -1,5 +1,4 @@
 import React from 'react';
-
 import getValue from './getValue';
 import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 import styles from './styles.module.css';

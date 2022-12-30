@@ -1,0 +1,54 @@
+import React from 'react';
+import { Button } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
+import useUpdateTag from '../../../../hook/useUpdateTag';
+import styles from './styles.module.css';
+
+const RemoveTagConfirmation = ({
+	setRemoveTag = () => {},
+	getBillRefetch = () => {},
+	billId = '',
+	collectionPartyId = '',
+}) => {
+	const onClose = () => {
+		setRemoveTag(false);
+		getBillRefetch();
+	};
+
+	const { loading, handleSubmit } = useUpdateTag({
+		onClose,
+		billId,
+		collectionPartyId,
+	});
+
+	return (
+		<div>
+			<div className={styles.StyleSvg}>
+				<IcMDelete/>
+			</div>
+
+			<div className={styles.Txt}>Are you sure you want to remove this Tag?</div>
+
+			<div className={styles.BtnWrap}>
+				<Button
+					themeType="secondary md"
+					onClick={() => setRemoveTag(false)}
+					disabled={loading}
+				>
+					No
+				</Button>
+
+				<Button
+					themeType="primary md"
+					className={styles.primary}
+					disabled={loading}
+					onClick={() => handleSubmit()}
+				>
+					Yes
+				</Button>
+			</div>
+		</div>
+	);
+};
+
+export default RemoveTagConfirmation;

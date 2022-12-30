@@ -4,7 +4,7 @@ import Header from './CardHeader';
 import { ConfigType, NestedObj,FunctionObjects,ListDataProps } from '../Interfaces/index';
 import {Pagination} from '@cogoport/components';
 import commonFunctions from "../..//commons/List/commonFunctions";
-import styled from './styles.module.css';
+import styles from './styles.module.css';
 
 export interface Props {
 	config: ConfigType;
@@ -55,17 +55,15 @@ function List({
 					/>
 				))}
 			</div>
-			
-			<div className={styled.paginations} >
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={itemData?.totalRecords}
-						pageSize={pageSize}
-						handlePageChange={handlePageChange}
-					/>
-				</div>
-			
+			{itemData?.totalRecords&&<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={itemData?.totalRecords}
+					pageSize={pageSize}
+					handlePageChange={handlePageChange}
+				/>
+			</div>}
 		</section>
 	);
 }

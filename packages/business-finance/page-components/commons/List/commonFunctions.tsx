@@ -8,6 +8,7 @@ const commonFunctions = ( functions :{functions?:FunctionObjects}) => {
 		...(functions || {}),
 		
 };
+
 return newFunctions;
 }
 

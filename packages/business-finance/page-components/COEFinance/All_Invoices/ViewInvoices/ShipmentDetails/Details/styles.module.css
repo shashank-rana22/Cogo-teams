@@ -1,0 +1,55 @@
+.container{
+  display: flex;
+  border: 1px solid #B0B0B0;
+  border-radius: 4px;
+  padding:12px;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-evenly;
+  border-right: 2px solid red;
+}
+
+.subDiv{
+  width: 16%;
+  border-right: 2px solid red;
+}
+.tags{
+  margin-left: 20px;
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+  align-self: center;
+}
+
+.icon{
+   color: #5936F0;
+   font-size: 24px;
+}
+
+.arrow{
+  font-size: 24px;
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.flexDiv{
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  color: red;
+  cursor: pointer;
+}
+
+.timelineContainer{
+  display: flex;
+  border: 1px solid #B0B0B0;
+  border-radius: 4px;
+  padding:12px;
+  margin-top:20px;
+}
