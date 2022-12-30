@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import { Upload } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
 import SelectController from '@cogoport/forms/page-components/Controlled/SelectController';
@@ -31,7 +32,7 @@ const onChange=(val)=>{
 			<SelectController name="name" control={control} placeholder="Select" {...selectOptions} />
 			<MultiSelectController name="name2" control={control} placeholder="Select" {...selectOptions} />
 		</form>
-		<FileUploader value={value} multiple={true} onChange={onChange} />
+		<Upload value={value} multiple={true}  onChange={onChange} loading={false} />
 		</>
 	);
 }
