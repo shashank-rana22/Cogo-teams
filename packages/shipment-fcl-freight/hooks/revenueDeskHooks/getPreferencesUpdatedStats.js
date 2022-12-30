@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const useGetPrefrencesUpdatedStats = ({ shipment_id, service }) => {
+	const firstRender = useRef(true);
 	const [{ data, loading }, trigger] = useRequest(
 		'/list_shipment_booking_confirmation_preferences',
 		{ manual: true },
@@ -25,6 +26,10 @@ const useGetPrefrencesUpdatedStats = ({ shipment_id, service }) => {
 	};
 
 	useEffect(() => {
+		if (firstRender.current) {
+			firstRender.current = false;
+			return;
+		}
 		if (shipment_id) {
 			handleApi(shipment_id);
 		}

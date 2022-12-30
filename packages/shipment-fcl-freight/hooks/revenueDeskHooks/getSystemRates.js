@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -34,13 +35,17 @@ const useGetSystemRates = ({
 	});
 
 	const getList = async () => {
-		await trigger({
-			params: {
-				filters                  : availableFilters,
-				page_limit               : 100,
-				pagination_data_required : false,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					filters                  : availableFilters,
+					page_limit               : 100,
+					pagination_data_required : false,
+				},
+			});
+		} catch (err) {
+			Toast.error('Something Went Wrong');
+		}
 	};
 
 	useEffect(() => {

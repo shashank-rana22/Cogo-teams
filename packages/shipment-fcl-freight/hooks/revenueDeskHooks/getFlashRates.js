@@ -18,7 +18,6 @@ const useGetFlashRates = ({
 
 	const date = new Date();
 	date.setDate(date.getDate() - 4);
-
 	const service_type = `${shipment_type}_service`;
 
 	const { options } = getPreviousFalshPayload(currentShipmentData);
@@ -28,7 +27,7 @@ const useGetFlashRates = ({
 		is_reverted             : true,
 		service_type,
 		service_id              : service?.id || undefined,
-		created_at_greater_than : date,
+		created_at_greater_than : date.toDateString(),
 		not_current_shipment    : currentShipmentData?.id,
 	};
 

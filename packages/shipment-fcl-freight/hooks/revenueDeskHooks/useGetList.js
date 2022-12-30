@@ -1,11 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const useListShipments = ({ status = '' }) => {
 	const shipment_type = 'fcl_freight';
 
 	const [loading, setLoading] = useState(true);
+	const firstRender = useRef(true);
 
 	const [filters, setFilters] = useState({
 		page      : 1,
@@ -22,10 +23,7 @@ const useListShipments = ({ status = '' }) => {
 
 	const { page, ...restFilters } = filters;
 
-	const [, trigger] = useRequest('/list_shipments', {
-		manual: true,
-	});
-
+	const [, trigger] = useRequest('/list_shipments', false);
 	const completedStatus = {
 		state               : ['completed', 'in_progress', 'confirmed_by_importer_exporter'],
 		fcl_freight_service : {
@@ -84,15 +82,18 @@ const useListShipments = ({ status = '' }) => {
 				fullResponse : {},
 				reverted     : 0,
 			}));
-
 			Toast.error('Something went wrong!');
 		}
 	};
 
 	useEffect(() => {
+		if (firstRender.current) {
+			firstRender.current = false;
+			return;
+		}
 		setLoading(true);
 		refetch();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, status]);
 
 	const hookSetters = {
