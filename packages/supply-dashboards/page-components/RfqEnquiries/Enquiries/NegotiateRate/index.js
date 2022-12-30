@@ -1,0 +1,262 @@
+import { useForm } from '@cogoport/forms';
+
+import Layout from '../../Layout';
+
+const fields = [
+	{
+		name           : 'service_provider_id',
+		placeholder    : 'Service Provider',
+		type           : 'select',
+		className      : 'primary lg',
+		optionsListKey : 'verified-service-providers',
+		defaultOptions : true,
+		isClearable    : true,
+		span           : 4,
+		showForScope   : ['partner'],
+		showIfMissing  : true,
+		rules          : { required: 'This is required' },
+	},
+	{
+		name           : 'sourced_by_id',
+		placeholder    : 'Rate Provided by user',
+		type           : 'select',
+		className      : 'primary lg',
+		optionsListKey : 'organization-users',
+		isClearable    : true,
+		span           : 4,
+		showForScope   : ['partner'],
+		valueKey       : 'user_id',
+		showIfMissing  : true,
+		rules          : { required: 'This is required' },
+	},
+	{
+		name           : 'shipping_line_id',
+		type           : 'select',
+		span           : 4,
+		className      : 'primary lg',
+		optionsListKey : 'shipping-lines',
+		placeholder    : 'Shipping Line',
+		showOptional   : false,
+	},
+	{
+		name        : 'origin_main_port_id',
+		type        : 'select',
+		span        : 4,
+		className   : 'primary lg',
+		placeholder : 'Origin Main port',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'destination_main_port_id',
+		type        : 'select',
+		span        : 4,
+		className   : 'primary lg',
+		placeholder : 'Destination main port',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name      : 'container_type',
+		type      : 'select',
+		span      : 4,
+		className : 'primary lg',
+
+		placeholder    : 'Container Type',
+		rules          : { required: 'This is required' },
+		optionsListKey : 'container-types',
+	},
+	{
+		name : 'container_size',
+		type : 'select',
+		span : 4,
+
+		className      : 'primary lg',
+		placeholder    : 'Container Size',
+		optionsListKey : 'container-sizes',
+		rules          : { required: 'This is required' },
+	},
+	{
+		name          : 'commodity',
+		type          : 'select',
+		span          : 4,
+		placeholder   : 'Commodity',
+		className     : 'primary lg',
+		commodityType : 'freight',
+		rules         : { required: 'This is required' },
+		style         : {
+			menu: {
+				width: '264px',
+			},
+		},
+	},
+	{
+		name        : 'payment_term',
+		type        : 'select',
+		placeholder : 'Payment Term',
+		value       : 'prepaid',
+		span        : 1,
+		className   : 'primary lg',
+		options     : [
+			{ label: 'Collect', value: 'collect' },
+			{
+				label : 'Prepaid',
+				value : 'prepaid',
+			},
+		],
+	},
+
+	{
+		name               : 'weight_slabs',
+		type               : 'fieldArray',
+		showButtons        : false,
+		buttonText         : 'Add Weight Slabs',
+		noDeleteButtonTill : 0,
+
+		controls: [
+			{
+				name         : 'lower_limit',
+				type         : 'number',
+				disabled     : true,
+				span         : 4,
+				showOptional : false,
+				placeholder  : 'Lower Limit (in MT)',
+				className    : 'primary lg',
+				rules        : { required: 'This is required' },
+			},
+			{
+				name         : 'upper_limit',
+				type         : 'number',
+				span         : 4,
+				showOptional : false,
+				className    : 'primary lg',
+				placeholder  : 'Upper Limit (in MT)',
+				rules        : { required: 'This is required' },
+			},
+			{
+				name           : 'currency',
+				type           : 'select',
+				optionsListKey : 'currencies',
+				span           : 1.5,
+				showOptional   : false,
+				className      : 'primary lg',
+				placeholder    : 'Curr...',
+				rules          : { required: 'This is required' },
+			},
+			{
+				name         : 'price',
+				type         : 'number',
+				span         : 1.5,
+				showOptional : false,
+				className    : 'primary lg',
+				placeholder  : 'Price',
+				rules        : { required: 'This is required' },
+			},
+		],
+	},
+	{
+		type               : 'fieldArray',
+		showButtons        : true,
+		name               : 'line_items',
+		buttonText         : 'Add Line Items',
+		noDeleteButtonTill : 1,
+		value              : [
+			{
+				code     : 'BAS',
+				unit     : 'per_container',
+				currency : 'USD',
+				price    : null,
+			},
+		],
+		controls: [
+			{
+				name        : 'code',
+				type        : 'select',
+				span        : 4,
+				valueKey    : 'code',
+				placeholder : 'Charge Name',
+				className   : 'primary lg',
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'unit',
+				span        : 4,
+				type        : 'select',
+				className   : 'primary lg',
+				placeholder : 'Unit',
+				rules       : { required: 'This is required' },
+			},
+			{
+				name           : 'currency',
+				span           : 1.5,
+				type           : 'select',
+				placeholder    : 'Curr...',
+				className      : 'primary lg',
+				optionsListKey : 'currencies',
+				showOptional   : false,
+				rules          : { required: 'This is required' },
+			},
+			{
+				name         : 'price',
+				span         : 1.5,
+				type         : 'number',
+				showOptional : false,
+				className    : 'primary lg',
+				placeholder  : 'Amount',
+				rules        : { required: 'This is required' },
+			},
+		],
+	},
+	{
+		name               : 'container_slabs',
+		type               : 'fieldArray',
+		showButtons        : true,
+		buttonText         : 'Add Container Count Wise BAS Slabs',
+		noDeleteButtonTill : 0,
+		controls           : [
+			{
+				name         : 'lower_limit',
+				type         : 'number',
+				placeholder  : 'Lower Limit',
+				span         : 3,
+				showOptional : false,
+				className    : 'primary lg',
+				rules        : { required: 'This is required', min: 1 },
+			},
+			{
+				name         : 'upper_limit',
+				type         : 'number',
+				span         : 3,
+				placeholder  : 'Upper Limit',
+				showOptional : false,
+				className    : 'primary lg',
+				rules        : { required: 'This is required', min: 1 },
+			},
+			{
+				name           : 'currency',
+				placeholder    : 'Currency',
+				type           : 'select',
+				optionsListKey : 'currencies',
+				span           : 3,
+				showOptional   : false,
+				className      : 'primary lg',
+				rules          : { required: 'This is required' },
+			},
+			{
+				name         : 'price',
+				placeholder  : 'Enter Price',
+				type         : 'number',
+				span         : 2,
+				showOptional : false,
+				className    : 'primary lg',
+				rules        : { required: 'This is required' },
+			},
+		],
+	},
+];
+
+function NegotiateRate() {
+	const { control } = useForm();
+	return (
+		<Layout fields={fields} control={control} />
+	);
+}
+export default NegotiateRate;

@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@cogoport/eslint-config': ^1.0.18
       '@cogoport/stylelint-config': ^1.0.3
+      '@fontsource/poppins': ^4.5.10
       '@svgr/webpack': ^6.5.1
       eslint: ^8.30.0
       fs-extra: ^11.1.0
@@ -17,6 +18,7 @@ importers:
       swr: ^2.0.0
       turbo: ^1.6.3
     dependencies:
+      '@fontsource/poppins': 4.5.10
       swr: 2.0.0
     devDependencies:
       '@cogoport/eslint-config': 1.0.18_eslint@8.30.0
@@ -333,7 +335,7 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.159_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.174_xt4ifl6qxlrythdsvwl2iwyvb4
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -2034,6 +2036,10 @@ packages:
     dependencies:
       '@floating-ui/dom': 1.1.0
       react: 18.2.0
+    dev: false
+
+  /@fontsource/poppins/4.5.10:
+    resolution: {integrity: sha512-oYZVHsnlwV3VWM1SE/m6SUxVh0QLk5+2wB+lBiXcI7N/0KVQWmV9YykaPqfJHBLvmdya+MAOnv+BQHeLU1vOOw==}
     dev: false
 
   /@humanwhocodes/config-array/0.11.8:

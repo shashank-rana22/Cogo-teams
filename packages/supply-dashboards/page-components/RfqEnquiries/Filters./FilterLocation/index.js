@@ -9,7 +9,7 @@ function FilterLocation({ filters, hookSetters }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
-	const { service } = filters;
+	const { service_type:service } = filters;
 	const filterOption = service === 'fcl_freight' ? 'seaport' : 'airport';
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: [filterOption] } },

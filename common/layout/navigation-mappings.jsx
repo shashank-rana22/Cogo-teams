@@ -92,7 +92,7 @@ const navigationMappings = {
 	supply_dashboards: {
 		key         : 'supply_dashboards',
 		title       : 'Supply Dashboards',
-		icon        : <IcMBookingDesk />,
+		icon        : IcMBookingDesk,
 		href        : '/supply/dashboards',
 		as          : '/supply/dashboards',
 		type        : 'link',

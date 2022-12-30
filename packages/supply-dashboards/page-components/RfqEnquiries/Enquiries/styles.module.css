@@ -31,6 +31,9 @@
 }
 
 .form {
+	flex: 1;
+	margin-top: 16px;
+	margin-left: 6px;
 	background: #fff;
 }
 

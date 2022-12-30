@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import useGetRfqSearches from '../hooks/useGetRfqSearches';
 
 import CardList from './CardList';
+import NegotiateRate from './NegotiateRate';
 import styles from './styles.module.css';
 
 function Enquiries({ rfq, setRfq }) {
@@ -48,7 +49,9 @@ function Enquiries({ rfq, setRfq }) {
 					/>
 
 				</div>
-				<div className={styles.form} />
+				<div className={styles.form}>
+					<NegotiateRate />
+				</div>
 			</div>
 		</div>
 	);
