@@ -35,9 +35,7 @@ function FileUploader(props: any) {
 	}, [urlStore]);
 
 	let i = 0;
-	const done = 10;
 	const uploadFile = async (file:any) => {
-		console.log('fileffvr', file);
 		const { data } = await request({
 			method : 'GET',
 			url    : '/get_media_upload_url',
@@ -56,14 +54,11 @@ function FileUploader(props: any) {
 			},
 		});
 		const finalUrl = url.split('?')[0];
-		console.log('lastFile', file);
 		return {
 			fileName: file.name,
 			finalUrl,
 		};
 	};
-	const b = ['a', 'b', 'c'];
-	console.log('bbbbbb', b);
 	useInterval(() => {
 		if (percent > 0 && percent < 95) {
 			setPercent(percent + 3);
@@ -88,37 +83,7 @@ function FileUploader(props: any) {
 		setPercent(100);
 		setLoading(false);
 	};
-	// try {
-	// 	const { data } = await request({
-	// 		method : 'GET',
-	// 		url    : '/get_media_upload_url',
-	// 		params : {
-	// 			file_name: new Date().getTime(),
-	// 		},
-	// 	});
-	// 	const { url } = data;
-	// 	try {
-	// 		promises.push(
-	// 			publicRequest({
-	// 				url,
-	// 				data    : values[i],
-	// 				method  : 'PUT',
-	// 				headers : {
-	// 					'Content-Type': values[i].type,
-	// 				},
-	// 			})
-	// 				.then(() => url.split('?')[0]),
-	// 		);
-	// 		setPercent(done + (50 * i));
-	// 	} catch (err) {
-	// 		console.log({ err });
-	// 	}
-	// 	setFileName(values);
-	// 	// setUrlStore((previousState) => [...previousState, url]);
-	// 	i += 1;
-	// } catch (err:any) {
-	// 	Toast.error('File Upload failed.......');
-	// }
+
 	console.log('urlStoreee', urlStore);
 
 	return (
