@@ -114,7 +114,6 @@ importers:
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
-      '@types/node': ^18.11.18
       next-transpile-modules: ^10.0.0
       react: 18.2.0
       react-hook-form: ^7.41.2
@@ -123,7 +122,6 @@ importers:
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.2
-      '@types/node': 18.11.18
       react: 18.2.0
       react-hook-form: 7.41.2_react@18.2.0
     devDependencies:
@@ -2774,6 +2772,7 @@ packages:
 
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
+    dev: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
