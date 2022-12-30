@@ -79,7 +79,7 @@ function Card({
 					) : null}
 
 					<Button
-						themeType="link"
+						themeType="linkUI"
 						onClick={(service) => {
 							setView(!view);
 							setSelectedService(service);

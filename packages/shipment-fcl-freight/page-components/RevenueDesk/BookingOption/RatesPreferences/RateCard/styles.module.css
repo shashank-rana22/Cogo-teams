@@ -5,7 +5,7 @@
 
 .rates_container {
 	padding: 20px;
-	background: #f7f7fc;
+	background: #fff5ae;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
@@ -16,7 +16,7 @@
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 21px;
-	color: #393f70;
+	color: #ee3124;
 }
 
 .line {
@@ -32,11 +32,13 @@
 .add_more {
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 4px;
 	font-size: 12px;
 	font-weight: 500;
 	color: #356efd;
 	text-decoration-line: underline;
 	cursor: pointer;
+	border: none;
 }
 
 .table {
@@ -58,4 +60,9 @@
 
 .tr {
 	border: 0.97px solid #e0e0e0;
+}
+
+.add_more_container {
+	display: flex;
+	justify-content: flex-end;
 }

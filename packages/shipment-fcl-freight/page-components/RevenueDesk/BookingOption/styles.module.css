@@ -11,7 +11,7 @@
 .existing_rates_container {
 	padding: 16px;
 	background: #fff;
-	border: 1px solid #bdaff9;
+	border: 1px solid #ee3124;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
@@ -20,7 +20,7 @@
 	padding: 20px;
 	margin-top: 16px;
 	background: #fff;
-	border: 1px solid #bdaff9;
+	border: 1px solid #ee3124;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }

@@ -128,7 +128,7 @@ function BookingOption(params) {
 					{!dataCount ? (
 						<div className={styles.buttons_container}>
 							<Button
-								themeType="accent"
+								themeType="primary"
 								style={{ marginRight: '12px' }}
 								onClick={() => setShowBookingOption(false)}
 							>

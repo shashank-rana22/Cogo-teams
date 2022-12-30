@@ -11,7 +11,7 @@ function Priority({ data = {}, id, showPriority }) {
 	const show = priority !== null && priority !== -1;
 
 	return (
-		<div className={styles.container} style={{ background: show ? '#5936F0' : null }}>
+		<div className={styles.container} style={{ background: show ? '#ee3124' : null }}>
 			{show && showPriority ? <div className={styles.text}>{priority + 1}</div> : null}
 		</div>
 	);

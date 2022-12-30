@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import getRows from '../../../../../utils/revenueDeskUtils/getRows';
@@ -124,7 +123,7 @@ function RateCard(allprops) {
 				<Priority data={prefrences} id={elememt.id} showPriority={false} />
 			</td>
 
-			{elememt.childrens[0].map((childval) => (
+			{elememt.childrens?.[0].map((childval) => (
 				<td className={styles.td}>{showData(childval)}</td>
 			))}
 		</tr>
@@ -147,16 +146,21 @@ function RateCard(allprops) {
 						{renderSingle ? SingleRender : otherRenders}
 					</table>
 
-					<Button
-						className={styles.addMore}
-						onClick={() => setShowAll(!showAll)}
-					>
-						{currentData.length > min && !expanded ? (
-							<div>
-								{showAll && currentData.length ? 'See Less' : 'See More'}
-							</div>
-						) : null}
-					</Button>
+					<div className={styles.add_more_container}>
+						<button
+							className={styles.add_more}
+							onClick={() => setShowAll(!showAll)}
+						>
+							{currentData?.length > min && !expanded ? (
+								<span>
+									{showAll && currentData?.length
+										? 'See Less' : 'See More'}
+
+								</span>
+
+							) : null}
+						</button>
+					</div>
 				</div>
 			) : null}
 		</div>

@@ -1,5 +1,5 @@
 import {
-	Tabs, TabPanel, Input, Loader, Popover,
+	Tabs, TabPanel, Input, Loader, Popover, Button,
 } from '@cogoport/components';
 import { IcMSearchlight, IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -42,64 +42,6 @@ function RevenueList({
 		/>
 
 	);
-	const handleRender = () => {
-		if (loading) {
-			return (
-				<div className={styles.loader_container}>
-					<Loader />
-				</div>
-			);
-		}
-
-		if (!loading && listData.length === 0) {
-			return <EmptyState />;
-		}
-
-		return (
-			<Tabs
-				activeTab={activeTab}
-				onChange={(tab) => {
-					setActiveTab(tab);
-					// eslint-disable-next-line no-param-reassign
-					hookSetters.setFilters(page = 1);
-				}}
-			>
-				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
-					<PendingJobs
-						setShowBookingOption={setShowBookingOption}
-						total={total}
-						data={listData}
-						hookSetters={hookSetters}
-						filters={filters}
-						refetch={refetch}
-						page={page}
-						activeTab={activeTab}
-						setClickedCard={setClickedCard}
-						clickedCard={clickedCard}
-						shipment_type={shipment_type}
-						loading={loading}
-					/>
-				</TabPanel>
-
-				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
-					<CompletedJobs
-						setShowBookingOption={setShowBookingOption}
-						total={total}
-						data={listData}
-						hookSetters={hookSetters}
-						filters={filters}
-						refetch={refetch}
-						page={page}
-						activeTab={activeTab}
-						setClickedCard={setClickedCard}
-						clickedCard={clickedCard}
-						shipment_type={shipment_type}
-						loading={loading}
-					/>
-				</TabPanel>
-			</Tabs>
-		);
-	};
 
 	return (
 		<div>
@@ -114,7 +56,7 @@ function RevenueList({
 						value={serialId}
 						onChange={(e) => handleChangeSerial(e)}
 						placeholder="Search by SID"
-						style={{ width: '200px' }}
+						style={{ width: '300px' }}
 						prefix={<IcMSearchlight widht="20px" height="20px" />}
 					/>
 				</div>
@@ -124,16 +66,86 @@ function RevenueList({
 						placement="bottom"
 						className={styles.filter_popover}
 					>
-						<button onClick={() => setShowFilters(!showFilters)} className={styles.filter_button}>
+						<Button
+							themeType="accent"
+							onClick={() => setShowFilters(!showFilters)}
+							className={styles.filter_button}
+						>
 							<IcMFilter width="20px" height="28px" />
-						</button>
+						</Button>
 					</Popover>
 				</div>
 
 			</div>
 			<div />
 
-			{handleRender()}
+			<Tabs
+				activeTab={activeTab}
+				onChange={(tab) => {
+					setActiveTab(tab);
+					// eslint-disable-next-line no-param-reassign
+					hookSetters.setFilters(page = 1);
+				}}
+			>
+				<TabPanel name="pending" title={<div className={styles.tab_label}>Pending Jobs</div>}>
+					{
+						loading && (
+							<div className={styles.loader_container}>
+								<Loader />
+							</div>
+						)
+					}
+					{!loading && listData.length === 0 && <EmptyState />}
+
+					{ !loading && listData.length > 0
+						&& (
+							<PendingJobs
+								setShowBookingOption={setShowBookingOption}
+								total={total}
+								data={listData}
+								hookSetters={hookSetters}
+								filters={filters}
+								refetch={refetch}
+								page={page}
+								activeTab={activeTab}
+								setClickedCard={setClickedCard}
+								clickedCard={clickedCard}
+								shipment_type={shipment_type}
+								loading={loading}
+							/>
+						) }
+
+				</TabPanel>
+
+				<TabPanel name="completed" title={<div className={styles.tab_label}>Completed Jobs</div>}>
+					{
+						loading && (
+							<div className={styles.loader_container}>
+								<Loader />
+							</div>
+						)
+					}
+					{!loading && listData.length === 0 && <EmptyState />}
+					{!loading && listData.length > 0
+						? (
+							<CompletedJobs
+								setShowBookingOption={setShowBookingOption}
+								total={total}
+								data={listData}
+								hookSetters={hookSetters}
+								filters={filters}
+								refetch={refetch}
+								page={page}
+								activeTab={activeTab}
+								setClickedCard={setClickedCard}
+								clickedCard={clickedCard}
+								shipment_type={shipment_type}
+								loading={loading}
+							/>
+						)
+						: null}
+				</TabPanel>
+			</Tabs>
 			<div />
 
 		</div>

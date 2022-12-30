@@ -6,6 +6,7 @@
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
+	cursor: pointer;
 }
 
 .card_container {
@@ -20,7 +21,7 @@
 	width: 100%;
 	height: 1px;
 	margin: 0;
-	background: #bdaff9;
+	background: #ee3124;
 }
 
 .sub_info {
@@ -32,9 +33,10 @@
 	padding: 4px 0;
 	font-size: 10px;
 	cursor: pointer;
-	background: #cbcff5 !important;
+	background:#fffce8 !important;
 }
 
 .icon_wrapper {
 	margin-right: 6px;
+	color: #ee3124;
 }

@@ -48,11 +48,11 @@
 	margin-right: 10px;
 	font-weight: 500;
 	line-height: 16px;
-	color: rgb(57 63 112);
+	
 	text-transform: capitalize;
 	cursor: pointer;
 	background-color: rgb(255 255 255);
-	border-color: rgb(57 63 112);
+
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
@@ -74,8 +74,7 @@
 	color: rgb(255 255 255);
 	letter-spacing: 0.04em;
 	white-space: nowrap;
-	background-color: rgb(57 63 112);
-	border-color: rgb(57 63 112);
+
 	border-radius: 4px;
 	outline: none;
 }

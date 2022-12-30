@@ -23,7 +23,13 @@ function ConfirmPrefrences({
 			<div className={styles.buttons_container}>
 				<div className={styles.secondary_button}>
 					{' '}
-					<Button onClick={() => setShow(false)}>Back</Button>
+					<Button
+						themeType="secondary"
+						onClick={() => setShow(false)}
+					>
+						Back
+
+					</Button>
 					{' '}
 				</div>
 				<div className={styles.primary_button}>

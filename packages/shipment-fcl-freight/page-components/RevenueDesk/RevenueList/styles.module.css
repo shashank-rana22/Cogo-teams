@@ -19,8 +19,9 @@
 .input {
 	display: flex;
 	justify-content: flex-end;
-	width: 200px;
+	width: 400px;
 	padding-bottom: 14px;
+	margin-right: 50px;
 }
 
 .loader_container {
@@ -43,6 +44,7 @@
 .filter_button {
 	width: 100%;
 	border: none;
+	cursor: pointer;
 }
 
 .filter_popover {

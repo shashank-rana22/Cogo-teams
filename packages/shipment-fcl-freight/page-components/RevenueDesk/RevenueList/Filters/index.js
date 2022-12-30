@@ -114,7 +114,7 @@ function FclRevenueFilters({
 				</Button>
 
 				<Button
-					themeType="ternary"
+					themeType="primary"
 					onClick={() => handleApply()}
 					className={styles.button_secondary}
 				>

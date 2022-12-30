@@ -1,7 +1,7 @@
 .container {
 	padding: 20px;
 	margin-bottom: 16px;
-	background: #f7f7fc;
+	background: #fff5ae;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 }
@@ -11,7 +11,7 @@
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 21px;
-	color: #393f70;
+	color: #ee3124;
 }
 
 .line {
