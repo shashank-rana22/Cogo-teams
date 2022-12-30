@@ -12,7 +12,7 @@
     "common/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "node scripts/build-pages && turbo run build",
     "dev": "node scripts/build-pages && turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",

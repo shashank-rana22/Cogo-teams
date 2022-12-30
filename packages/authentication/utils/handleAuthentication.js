@@ -35,8 +35,6 @@ const handleAuthentication = async ({
 
 	const actualAsPath = asPath.split('?')[0];
 
-	console.log(asPath, actualAsPath, 'ff');
-
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(actualAsPath)
 		|| UNAUTHENTICATED_PATHS.includes(pathname);
 
