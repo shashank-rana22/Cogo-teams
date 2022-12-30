@@ -89,6 +89,15 @@ const navigationMappings = {
 		possible_apis : [...partner.roles_permissions],
 		module_type   : 'crm',
 	},
+	supply_dashboards: {
+		key         : 'supply_dashboards',
+		title       : 'Supply Dashboards',
+		icon        : <IcMBookingDesk />,
+		href        : '/supply/dashboards',
+		as          : '/supply/dashboards',
+		type        : 'link',
+		module_type : 'dashboards',
+	},
 };
 
 export default navigationMappings;
