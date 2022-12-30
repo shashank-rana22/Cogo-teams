@@ -34,7 +34,7 @@ function RevenueList({
 		setSerialId(value);
 	};
 
-	const renderBody = () => (
+	const renderBody = (
 		<Filters
 			hookSetters={hookSetters}
 			setShowFilters={setShowFilters}
@@ -42,7 +42,6 @@ function RevenueList({
 		/>
 
 	);
-
 	const handleRender = () => {
 		if (loading) {
 			return (
@@ -52,7 +51,7 @@ function RevenueList({
 			);
 		}
 
-		if (!loading && listData?.length === 0) {
+		if (!loading && listData.length === 0) {
 			return <EmptyState />;
 		}
 
@@ -123,7 +122,6 @@ function RevenueList({
 					<Popover
 						render={renderBody}
 						placement="bottom"
-						show={showFilters}
 						className={styles.filter_popover}
 					>
 						<button onClick={() => setShowFilters(!showFilters)} className={styles.filter_button}>

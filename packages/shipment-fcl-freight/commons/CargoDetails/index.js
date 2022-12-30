@@ -10,16 +10,17 @@ function CargoDetails({ data }) {
 
 	if (
 		shipment_type === 'fcl_freight'
-		&& data?.fcl_freight_services.length > 1
+		&& data.fcl_freight_services.length > 1
 	) {
 		return (
 			<div className={styles.multi_service}>
 				<CargoDetailPills detail={data || {}} />
 
-				<ServiceDetails mainServices={(data?.fcl_freight_services || {})}>
+				<ServiceDetails mainServices={data.fcl_freight_services}>
 					+
 
-					{(data?.fcl_freight_services?.length || 0) - 1}
+					{(data.fcl_freight_services.length || 0) - 1}
+					{' '}
 
 					Details
 				</ServiceDetails>

@@ -33,15 +33,15 @@
 }
 
 .label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 32px;
+	margin-bottom: 16px;
+	font-size: 14px;
 	font-weight: bold;
-    font-size: 14px;
-    line-height: 16px;
-    margin-top: 32px;
-    margin-bottom: 16px;
-    color: rgb(57, 63, 112);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	line-height: 16px;
+	color: rgb(57 63 112);
 }
 
 .line {

@@ -73,8 +73,8 @@ const navigationMappings = {
 				as        : '/revenue-desk/fcl-freight',
 				icon      : <IcMBookingDesk />,
 				main_apis : ['list_shipments'],
-			}
-		]
+			},
+		],
 	},
 
 	locations: {

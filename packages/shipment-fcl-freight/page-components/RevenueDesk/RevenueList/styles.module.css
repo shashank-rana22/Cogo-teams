@@ -28,21 +28,25 @@
 	justify-content: center;
 }
 
-.fcl_filters{
+.fcl_filters {
 	display: flex;
 	justify-content: center;
+	width: 50px;
+	height: fit-content;
+	padding: 5px 0;
+	margin-right: 15px;
+	cursor: pointer;
 	background: #f9f5ec;
 	border: none;
-	width: 50px;
-	padding: 5px 0px;
-	cursor: pointer;
-	margin-right: 15px;
-	height: fit-content;
 }
-.filter_button{
-	border: none;
+
+.filter_button {
 	width: 100%;
+	border: none;
 }
-.filter_popover{
+
+.filter_popover {
 	z-index: 1 !important;
+	background-color: black !important;
 }
+

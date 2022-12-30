@@ -21,7 +21,7 @@ function BookingPreference({ loading = false, bookingData = [] }) {
 
 	return (
 		<div className={styles.container}>
-			{bookingData?.map((booking_item, idx) => (
+			{bookingData.map((booking_item, idx) => (
 				<Item
 					bookingItem={booking_item}
 					idx={idx}

@@ -42,7 +42,7 @@ function Cancellation({
 		setShow(!show);
 	};
 
-	const renderBody = () => (
+	const renderBody = (
 		<div>
 			<button
 				onClick={() => { setShowCancel(true); }}

@@ -7,10 +7,8 @@ import styles from './styles.module.css';
 
 function MultiServiceDetails({
 	children,
-	mainServices,
-	renderBody: renderBodyProp = null,
+	mainServices = {},
 	showSingle = false,
-	placement = null,
 	withButton = true,
 }) {
 	const [show, setShow] = useState(false);
@@ -18,11 +16,10 @@ function MultiServiceDetails({
 	if (mainServices?.length <= 1 && !showSingle) {
 		return null;
 	}
-
 	const renderBody = () => (
 
-		mainServices?.map((item) => (
-			<div className={styles.sd}>
+		mainServices.map((item) => (
+			<div className={styles.container_info}>
 				<ContainerInfo detail={item} className="details" />
 			</div>
 		))
@@ -33,11 +30,8 @@ function MultiServiceDetails({
 		<Popover
 			theme="light"
 			show={show}
-			placement={placement || 'bottom'}
-			interactive
-			onOuterClick={() => setShow(false)}
-			trigger="mouseenter"
-			content={renderBodyProp ? renderBodyProp() : renderBody()}
+			placement="bottom"
+			render={renderBody()}
 		>
 			{withButton ? (
 				<Button

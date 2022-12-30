@@ -16,7 +16,7 @@ function Item({ bookingItem = {}, idx, isLast = false }) {
 			<div className={styles.serial}>{idx + 1}</div>
 
 			<div className={styles.flex_col}>
-				{data?.map((item, index) => {
+				{data.map((item, index) => {
 					const { is_rate_expired, is_reverted_rate, columns } = getFormattedSupplierData(
 						bookingItem,
 						index,

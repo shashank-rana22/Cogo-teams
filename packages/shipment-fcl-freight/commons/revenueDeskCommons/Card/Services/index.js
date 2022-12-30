@@ -20,6 +20,7 @@ function Services({ services, onClick, activeService }) {
 					const tradeType =						service.trade_type === 'export' ? 'Origin' : 'Destination';
 					return (
 						<Button
+							themeType="secondary"
 							className={styles.tag_wrapper}
 							onClick={() => onClick(service)}
 						>

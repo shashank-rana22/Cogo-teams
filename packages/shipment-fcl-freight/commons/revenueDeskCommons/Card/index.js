@@ -16,7 +16,7 @@ function Card({
 	handleCardClick = () => {},
 	activeTab = '',
 	shipment_type,
-	clickedCard,
+	clickedCard = {},
 }) {
 	const services = (data[`${shipment_type}_services`] || []).map((item) => ({
 		...item,
@@ -26,13 +26,13 @@ function Card({
 	const [selectedService, setSelectedService] = useState(initialService);
 
 	const {
-		bookingData,
+		bookingData = {},
 		bookingLoading = false,
 		setView,
 		view,
 	} = useListBookingPreference({ data, selectedService });
 
-	const activeService = activeTab === 'completed' ? selectedService?.id : clickedCard?.service?.id;
+	const activeService = activeTab === 'completed' ? selectedService.id : clickedCard?.service?.id;
 
 	return (
 		<div className={styles.container}>
@@ -74,7 +74,7 @@ function Card({
 					{view ? (
 						<BookingPreference
 							loading={bookingLoading}
-							bookingData={bookingData?.list}
+							bookingData={bookingData.list}
 						/>
 					) : null}
 

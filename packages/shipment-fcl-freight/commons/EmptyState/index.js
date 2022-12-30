@@ -4,7 +4,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function EmptyState({
-	isMobile = false,
 	showContent = {
 		heading     : 'No Results Found!',
 		description : 'Looks like you do not have any records for this section',
@@ -18,13 +17,11 @@ function EmptyState({
 				<div className={styles.content}>{showContent.description}</div>
 			</div>
 
-			{!isMobile ? (
-				<div
-					className={styles.empty_state_icon}
-				>
-					<IcMAverage width={90} height={90} />
-				</div>
-			) : null}
+			<div
+				className={styles.empty_state_icon}
+			>
+				<IcMAverage width={90} height={90} />
+			</div>
 		</div>
 	);
 }

@@ -76,7 +76,7 @@ function FclRevenueFilters({
 					value={tradeValue}
 					control={control}
 					name="trade_type"
-					options={controls[0]?.options}
+					options={controls[0].options}
 					placeholder="Trade Type"
 					onChange={(val) => setTradeValue(val)}
 				/>

@@ -35,7 +35,7 @@ function CargoDetailsPills({ detail }) {
 	return (
 		<>
 			{labels.map((label) => {
-				if (detail?.[label] && renderValue(label, detail)) {
+				if (detail[label] && renderValue(label, detail)) {
 					return (
 						<div className={styles.box} key={label}>
 							{renderValue(label, detail)}

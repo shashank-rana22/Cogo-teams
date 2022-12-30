@@ -1,6 +1,6 @@
 import { format } from '@cogoport/utils';
 
-const infoOptions = (data) => [
+const infoOptions = (data = {}) => [
 	{
 		key   : 'Cargo Readiness Date',
 		value : format(data.cargo_readiness_date, 'dd MMM yyyy'),
