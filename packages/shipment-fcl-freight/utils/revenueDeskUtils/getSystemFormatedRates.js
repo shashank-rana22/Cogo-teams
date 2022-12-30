@@ -31,12 +31,12 @@ const getSystemFormatedRates = (data = []) => {
 	(data || []).forEach((element) => {
 		const {
 			minimumRate, currency, is_rate_expired, schedule_type,
-		} =			getMinRate(element?.line_items || element?.validities);
+		} =			getMinRate(element.line_items || element.validities);
 		const row = {};
 		const rowData = {};
-		row.id = element?.id;
-		rowData.shipping_line = element?.shipping_line?.business_name;
-		rowData.service_provider = element?.service_provider?.business_name;
+		row.id = element.id;
+		rowData.shipping_line = element.shipping_line.business_name;
+		rowData.service_provider = element.service_provider.business_name;
 		rowData.buy_price = minimumRate;
 		rowData.currency = currency;
 		rowData.is_rate_expired = is_rate_expired;
@@ -45,7 +45,7 @@ const getSystemFormatedRates = (data = []) => {
 		rowData.fullfillment_ratio = '_ _ _';
 		rowData.reliability_ratio = '_ _ _';
 		row.rowData = rowData;
-		rowData.via_route = element?.destination_main_port?.name;
+		rowData.via_route = element.destination_main_port?.name;
 		rows.push(row);
 	});
 	return { rows };

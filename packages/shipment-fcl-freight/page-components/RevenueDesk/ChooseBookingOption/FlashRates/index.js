@@ -11,48 +11,48 @@ function FlashRates({
 	setPayload = () => {},
 	flashParams,
 	expanded,
-	flashChosen,
+	flashChosen = [],
 	statsLoading,
 	unit,
 }) {
 	const [prefrences, setPrefrences] = useState([]);
 
-	const { CurrentRates, PreviousRates, SystemRates } = flashParams;
+	const { CurrentRates = {}, PreviousRates = {}, SystemRates = {} } = flashParams;
 
-	const currentFalshRates = CurrentRates?.flashRatesData?.list;
-	const previousFalshRates = PreviousRates?.flashRatesData?.list;
+	const currentFalshRates = CurrentRates.flashRatesData?.list;
+	const previousFalshRates = PreviousRates.flashRatesData?.list;
 
 	const currentFormatedrates = getFormatedRates('current', currentFalshRates);
 	const previousFormatedrates = getFormatedRates('present', previousFalshRates);
 	const systemFormatedRates = getSystemFormatedRates(
-		SystemRates?.systemRatesData?.list,
+		SystemRates.systemRatesData?.list,
 	);
 
 	const rateCardObj = [
 		{
 			prefrence_key : 'system',
 			type          : 'System Rates',
-			data          : systemFormatedRates?.rows,
-			loading       : SystemRates?.loading,
+			data          : systemFormatedRates.rows,
+			loading       : SystemRates.loading,
 		},
 		{
 			prefrence_key : 'previous',
 			type          : 'Rates from Previous Flash Alert',
-			data          : previousFormatedrates?.rows,
-			loading       : PreviousRates?.loading,
+			data          : previousFormatedrates.rows,
+			loading       : PreviousRates.loading,
 		},
 		{
 			prefrence_key : 'current',
 			type          : 'Rates from Current Flash Alerts',
-			data          : currentFormatedrates?.rows,
-			loading       : CurrentRates?.loading,
+			data          : currentFormatedrates.rows,
+			loading       : CurrentRates.loading,
 		},
 	];
 
 	const { service_providers = [] } = getSupplierPrefrencePayload({
 		currentRates  : currentFalshRates,
 		previousRates : previousFalshRates,
-		systemRates   : SystemRates?.systemRatesData?.list,
+		systemRates   : SystemRates.systemRatesData?.list,
 		prefrences,
 	});
 
@@ -62,7 +62,7 @@ function FlashRates({
 	}, [JSON.stringify(prefrences)]);
 
 	useEffect(() => {
-		if (flashChosen?.length) {
+		if (flashChosen.length) {
 			setPrefrences([...flashChosen]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,12 +75,12 @@ function FlashRates({
 			{rateCardObj?.map((item) => (
 				<FlashRateCard
 					expanded={expanded}
-					prefrence_key={item?.prefrence_key}
-					type={item?.type}
-					data={item?.data}
+					prefrence_key={item.prefrence_key}
+					type={item.type}
+					data={item.data}
 					prefrences={prefrences}
 					setPrefrences={setPrefrences}
-					loading={item?.loading}
+					loading={item.loading}
 					unit={unit}
 				/>
 			))}
