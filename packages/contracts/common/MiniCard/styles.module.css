@@ -1,0 +1,24 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    gap:12px
+}
+.margin{
+    display: flex;
+    gap:12px;
+}
+.heading{
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #7B7F8E;
+    max-width: 150px;
+}
+
+.percent{
+    font-weight: 700;
+    font-size: 14.7124px;
+    line-height: 17px;
+    color: #ED3726;
+}
