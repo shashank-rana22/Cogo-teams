@@ -5,6 +5,7 @@ import CostView from '../../costView/index';
 import styles from './styles.module.css'
 import { Options } from '../../Interfaces';
 import SegmentedControl from '../../SegmentedControl';
+import {IcMSearchlight} from '@cogoport/icons-react';
 
 interface ElementProps{
 	type?:string;
@@ -102,7 +103,12 @@ const tagClick=(val:Options)=>{
 					</div>
 				);
 			case 'input':
-				return <Input value={value} className={className} {...rest} />;
+				return <Input value={value} className={className} prefix={(
+					<IcMSearchlight
+						height={15}
+						width={15}
+					/>
+				)} {...rest} />;
 			case 'datepicker':
 				return (
 					<Datepicker name="date"  value={value} {...rest} />
