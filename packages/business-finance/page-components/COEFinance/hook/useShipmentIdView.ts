@@ -16,7 +16,7 @@ interface UseSelectorProps {
     profile?: Profile;
 }
 
-const useShipmentIdView = (allParams: any) => {
+const useShipmentIdView = (allParams?: any) => {
     const { ...params } = allParams || {};
     const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({

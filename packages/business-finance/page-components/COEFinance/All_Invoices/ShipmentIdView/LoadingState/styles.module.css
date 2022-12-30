@@ -17,16 +17,11 @@
     justify-content: center;
 }
 .details {
-    height: 56px;
-    align-items: center;
-    border-right: 2px solid #f68b21;
-    align-items: flex-start;
-    flex-direction: column;
+    flex: 1;
 }
 
 .percent {
     width: 100%;
-    border-left: 2px solid #f68b21;
     color: #67c676;
     font-size: 12px;
     font-weight: 500;
@@ -35,6 +30,7 @@
     height: 56px;
     display: flex;
     flex-direction: column;
+    gap: 3px;
     justify-content: center;
 }
 

@@ -2,13 +2,31 @@ import { Button } from "@cogoport/components";
 import React from "react";
 import styles from "./styles.module.css";
 import { useState } from "react";
-import CardHeader from "./CardHeader/index";
 import CardItem from "./CardItem/index";
-import useShipmentIdView from "../../../hook/useShipmentIdView";
 import { startCase } from "@cogoport/utils";
+import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
 
+interface ItemDataProps {
+    expense_total_price: number;
+    serial_id: string;
+    pending_approvals: number;
+    shipment_type: string;
+    expense_count: number;
+    expense_total_currency: string;
+    urgency_expense_count: number;
+    urgency_total_price: number;
+    urgency_total_currency: string;
+    income_count: number;
+    credit_expense_count: number;
+    credit_total_price: number;
+    quotation_profit: string;
+    tentative_profit: string;
+    income_total_price: number;
+    income_total_currency: string;
+    id: string;
+}
 interface listData {
-    itemData: any;
+    itemData: ItemDataProps;
     currentOpenSID: string;
     setCurrentOpenSID: Function;
     refetch: any;
@@ -19,22 +37,14 @@ const AccordianCards = ({
     setCurrentOpenSID,
     refetch,
 }: listData) => {
-    const [isAccordionActive, setIsAccordionActive] = useState(false);
     const [amountTab, setAmountTab] = useState("expense");
     const handleClick = () => {
-        setIsAccordionActive(!isAccordionActive);
-        // listApi();
+        setCurrentOpenSID("");
     };
 
     return (
         <div>
-            <div
-                className={styles.container}
-                style={{
-                    transition: "max-height 0.2s ease-in-out",
-                    maxHeight: isAccordionActive ? "100%" : "80px",
-                }}
-            >
+            <div className={styles.container}>
                 <div className={styles.subContainer}>
                     <div className={styles.sid}>
                         <div className={styles.sidContainer}>
@@ -58,8 +68,10 @@ const AccordianCards = ({
                                 Expense ({itemData.expense_count || 0})
                             </div>
                             <div className={styles.expenseValueText}>
-                                {itemData.expense_total_currency}{" "}
-                                {itemData.expense_total_price}
+                                {getFormattedPrice(
+                                    itemData.expense_total_price,
+                                    itemData.expense_total_currency
+                                )}
                             </div>
                         </div>
                         <div className={styles.urgent}>
@@ -67,7 +79,10 @@ const AccordianCards = ({
                                 Urgent ({itemData.urgency_expense_count})
                             </div>
                             <div className={styles.urgentValueText}>
-                                INR {itemData.urgency_total_price}
+                                {getFormattedPrice(
+                                    itemData.urgency_total_price,
+                                    itemData.urgency_total_currency || "INR"
+                                )}
                             </div>
                         </div>
                     </div>
@@ -77,8 +92,10 @@ const AccordianCards = ({
                                 Income ({itemData.income_count})
                             </div>
                             <div className={styles.expenseValueText}>
-                                {itemData.income_total_currency}{" "}
-                                {itemData.income_total_price}
+                                {getFormattedPrice(
+                                    itemData.income_total_price,
+                                    itemData.income_total_currency || "INR"
+                                )}
                             </div>
                         </div>
                         <div className={styles.expense}>
@@ -86,7 +103,10 @@ const AccordianCards = ({
                                 Credit Note ({itemData.credit_expense_count})
                             </div>
                             <div className={styles.expenseValueText}>
-                                INR {itemData.credit_total_price}
+                                {getFormattedPrice(
+                                    itemData.credit_total_price,
+                                    "INR"
+                                )}
                             </div>
                         </div>
                     </div>
@@ -113,22 +133,10 @@ const AccordianCards = ({
                         </div>
                     </div>
                     <div>
-                        {/* {!isAccordionActive ? (
-                            <Button
-                                themeType="secondary"
-                                onClick={() => handleClick()}
-                            >
-                                View More
-                            </Button>
-                        ) : (
-                            <Button>Cost View</Button>
-                        )} */}
-
                         {currentOpenSID !== itemData?.id ? (
                             <Button
                                 onClick={() => {
                                     setCurrentOpenSID(itemData?.id);
-                                    setIsAccordionActive(!isAccordionActive);
                                 }}
                                 themeType="secondary"
                             >
@@ -139,7 +147,6 @@ const AccordianCards = ({
                                 themeType="secondary"
                                 onClick={() => {
                                     setCurrentOpenSID(itemData?.id);
-                                    // setOpenModal(true);
                                 }}
                             >
                                 Cost View
@@ -150,16 +157,8 @@ const AccordianCards = ({
                         <div className={styles.ribbon}>Closed</div>
                     </div>
                 </div>
-                <div className={styles.hr} />
-                <div className={styles.header}>
-                    <CardHeader
-                        itemData={itemData}
-                        amountTab={amountTab}
-                        setAmountTab={setAmountTab}
-                    />
-                </div>
 
-                <div className={styles.cardList}>
+                <div>
                     {currentOpenSID === itemData?.id ? (
                         <CardItem
                             cardData={itemData}
@@ -170,15 +169,6 @@ const AccordianCards = ({
                             setAmountTab={setAmountTab}
                         />
                     ) : null}
-                    {/* <CardItem /> */}
-                </div>
-                <div className={styles.footer}>
-                    <div
-                        className={styles.footerText}
-                        onClick={() => handleClick()}
-                    >
-                        View Less
-                    </div>
                 </div>
             </div>
         </div>
