@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { InputController, SelectController, MultiselectController } from '@cogoport/forms';
 import React from 'react';
 

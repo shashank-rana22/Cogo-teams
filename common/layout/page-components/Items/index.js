@@ -20,6 +20,8 @@ function Items({ item, resetSubnavs }) {
 
 	const isHref = pathname.includes(item.href);
 
+	const Element = item.icon || null;
+
 	const singleNav = (
 		<div
 			className={isHref ? styles.active_item : styles.list_item_inner}
@@ -32,7 +34,7 @@ function Items({ item, resetSubnavs }) {
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
 			)}
-			{item.icon}
+			<Element />
 			<span>
 				{item.title}
 			</span>
@@ -49,6 +51,8 @@ function Items({ item, resetSubnavs }) {
 			</li>
 			{showSubNav && item?.options?.map((singleOption) => {
 				const isHrefMatch = pathname.includes(singleOption.href);
+
+				const Element = singleOption.icon || null;
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<Link
@@ -57,7 +61,7 @@ function Items({ item, resetSubnavs }) {
 							href={singleOption.href ?? ''}
 							as={`${singleOption.as}`}
 						>
-							{singleOption.icon}
+							<Element />
 							<span>
 								{singleOption.title}
 							</span>

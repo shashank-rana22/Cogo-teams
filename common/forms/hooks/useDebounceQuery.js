@@ -4,11 +4,11 @@ import { useCallback, useState } from 'react';
 const useDebounceQuery = () => {
 	const [query, setQuery] = useState('');
 
-	const request = debounce((value: any) => {
+	const request = debounce((value) => {
 		setQuery(value);
 	}, 600);
 
-	const debounceQuery = useCallback((value: any) => request(value), [request]);
+	const debounceQuery = useCallback((value) => request(value), [request]);
 
 	return { debounceQuery, query };
 };

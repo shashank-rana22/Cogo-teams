@@ -3,21 +3,13 @@ import { merge } from '@cogoport/utils';
 
 import useDebounceQuery from './useDebounceQuery';
 
-interface IUseGetAsyncOptions {
-	endpoint?: string;
-	initialCall?: boolean;
-	valueKey?: string;
-	labelKey?: string;
-	params?: Object;
-}
-
 function useGetAsyncOptions({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
 	params = {},
-}: IUseGetAsyncOptions) {
+}) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [{ data, loading }] = useRequest({
@@ -32,13 +24,14 @@ function useGetAsyncOptions({
 		method : 'GET',
 	}, { manual: true });
 
-	const onSearch = (inputValue: string | undefined) => {
+	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);
 	};
 
-	const onHydrateValue = async (value: string[] | string) => {
+	const onHydrateValue = async (value) => {
 		if (Array.isArray(value)) {
-			const getOptions = value.map((val) => options.filter((item) => item[valueKey] === val)[0]).filter(Boolean);
+			const getOptions = value.map((val) => options
+				.filter((item) => item[valueKey] === val)[0]).filter(Boolean);
 
 			if (getOptions.length > 0) { return getOptions; }
 
@@ -51,7 +44,7 @@ function useGetAsyncOptions({
 			return [];
 		}
 
-		const checkOptionsExist = options.filter((item: any) => item[valueKey] === value);
+		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
 
 		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
 

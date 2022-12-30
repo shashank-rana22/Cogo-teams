@@ -3,20 +3,15 @@
       "page-components/**/*",
       "**/*.ts",
       "**/*.tsx",
+      "**/*.js",
       "rollup.config.js",
       ".eslintrc.js"
     ],
-    "exclude": [    
-    "dist",
-    "**/*.js",
-    "**/*.jsx"],
     "compilerOptions": {
         "target": "ES2020",
         "typeRoots": ["node_modules/@types"],
         "jsx": "react",
         "module": "ES2020",
-        "allowJs": true,
-        "checkJs": false,
         "moduleResolution": "Node16",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
@@ -29,6 +24,6 @@
       }
   }
 
- 
 
-  
+
+
