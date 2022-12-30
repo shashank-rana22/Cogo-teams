@@ -5,7 +5,7 @@ import useInterval from '../../../hooks/useInterval';
 
 const UPLOD_URL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/get_media_upload_url`;
 
-function FileUploader(props: any) {
+function FileUploader(props) {
 	const {
 		uploadedFilesList: filesList,
 		value,
@@ -26,7 +26,7 @@ function FileUploader(props: any) {
 	let newValue = value;
 
 	if (onlyURLOnChange && multiple) {
-		newValue = (value || []).map((item: any, i: number): any => ({
+		newValue = (value || []).map((item, i) => ({
 			url  : item,
 			name : `${docName} ${i + 1}`,
 			uid  : item,
@@ -57,7 +57,7 @@ function FileUploader(props: any) {
 	useEffect(() => {
 		let newValue1 = value;
 		if (onlyURLOnChange && multiple) {
-			newValue1 = (value || []).map((item: any, i: number) => ({
+			newValue1 = (value || []).map((item, i) => ({
 				url  : item,
 				name : `${docName} ${i + 1}`,
 				uid  : item,
@@ -77,7 +77,7 @@ function FileUploader(props: any) {
 		setUploadedFileList(filesToSet);
 	}, [value]);
 
-	const uploadDocument = (file: any, documentData: any) => new Promise((resolve, reject) => {
+	const uploadDocument = (file, documentData) => new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
 		const { url, headers } = JSON.parse(documentData);
 		if (url) {
@@ -100,7 +100,7 @@ function FileUploader(props: any) {
 		}
 	});
 
-	const getRequest = (url: string, params: any) => new Promise((resolve, reject) => {
+	const getRequest = (url, params) => new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', `${url}?file_name=${params.file_name}`, true);
 		xhr.onreadystatechange = () => {
@@ -116,9 +116,9 @@ function FileUploader(props: any) {
 		xhr.send();
 	});
 
-	const getSignature = async (params: any) => {
+	const getSignature = async (params) => {
 		try {
-			const response: any = await getRequest(UPLOD_URL, params);
+			const response = await getRequest(UPLOD_URL, params);
 			if (response.success) return response.data;
 			return response;
 		} catch (error) {
@@ -127,15 +127,15 @@ function FileUploader(props: any) {
 		}
 	};
 
-	const handleFilesChange = (files: any) => {
-		const urls = files.map((item: any) => item.url);
+	const handleFilesChange = (files) => {
+		const urls = files.map((item) => item.url);
 		if (onlyURLOnChange) {
 			onChange(urls, files);
 		} else {
 			onChange(files);
 		}
 	};
-	const setImageUrls = (url: any, file: any) => {
+	const setImageUrls = (url, file) => {
 		const files = [
 			...uploadedFileList,
 			{
@@ -167,11 +167,11 @@ function FileUploader(props: any) {
 	// 	setPercentComplete(0);
 	// };
 
-	const handleUpload = (name: string, file: any) => {
+	const handleUpload = (name, file) => {
 		if (file) {
 			getSignature({ file_name: name })
-				.then((response: any) => uploadDocument(file, response))
-				.then((res: any) => {
+				.then((response) => uploadDocument(file, response))
+				.then((res) => {
 					const resObj = JSON.parse(res);
 					if ((resObj || {}).url) {
 						setImageUrls(resObj.url.split('?')[0], file);
@@ -192,7 +192,7 @@ function FileUploader(props: any) {
 		}
 	};
 
-	const handleChange = (info: any) => {
+	const handleChange = (info) => {
 		if (maxSize && info?.size > Number(maxSize)) {
 			const sizeInMb = (maxSize / 1048576).toFixed(2);
 			return Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);

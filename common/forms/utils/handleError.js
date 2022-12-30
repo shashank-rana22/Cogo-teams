@@ -1,4 +1,4 @@
-const handleError = (props: any) => {
+const handleError = (props) => {
 	const {
 		errorClass, error, rules, errorName, label,
 	} = props;

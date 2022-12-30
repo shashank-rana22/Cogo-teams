@@ -1,8 +1,8 @@
-import { Datepicker } from '@cogoport/components';
+import { Input } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function DatepickerController(props: any) {
+function InputController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -14,16 +14,15 @@ function DatepickerController(props: any) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Datepicker
+				<Input
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
-					data-test-value={value}
 				/>
 			)}
 		/>
 	);
 }
-export default DatepickerController;
+export default InputController;
