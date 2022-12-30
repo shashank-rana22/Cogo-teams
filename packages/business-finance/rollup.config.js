@@ -1,4 +1,3 @@
-import commonJs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
@@ -30,13 +29,13 @@ export default ({ watch }) => defineConfig({
 	plugins: [
 		...(watch ? [] : [del({ targets: 'dist/*' })]),
 		nodeResolve(),
-		commonJs(),
 		swc({
 			include  : /\.[jt]sx?$/,
 			exclude  : /node_modules/,
 			tsconfig : 'tsconfig.json',
-			jsc      : {},
-			minify   : true,
+			module   : {
+				type: 'commonjs',
+			},
 		}),
 		json(),
 	],
