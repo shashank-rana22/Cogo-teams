@@ -4,7 +4,6 @@ import styled from './styles.module.css'
 import {FILTERS_DATA,FILTERS_DAY_DATA,FILTERS_URGENT_DATA} from '../../../constants/purchase-list-filters'
 import {Input} from "@cogoport/components";
 import { IcMSearchdark } from '@cogoport/icons-react';
-import { IcMSearchlight } from '@cogoport/icons-react';
 
 interface segmentFilterProps{
     setSearchValue: React.Dispatch<React.SetStateAction<string | number>>
@@ -55,9 +54,8 @@ function SegmentedFilters({setCurrentTab,currentTab,setSearchValue,searchValue}:
                     value={searchValue}
 				    onChange={(e:any) => setSearchValue(e)}
                     placeholder="Search by Invoice No./Shipment ID"
-                    buttonIcon={<IcMSearchdark />}
-                    prefix={(
-						<IcMSearchlight
+                    suffix={(
+						<IcMSearchdark
 							height={15}
 							width={15}
 						/>

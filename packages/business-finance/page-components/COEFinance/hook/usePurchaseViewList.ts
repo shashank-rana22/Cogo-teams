@@ -24,6 +24,7 @@ const  useGetPurchaseViewList=({filters}:Props)=> {
 			method  : 'get',
 			params : {
 				pageIndex : page,
+				q:query||undefined,
 				...filters,
 				},
 			authKey : 'get_purchase_bills_list',
