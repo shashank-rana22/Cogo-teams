@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import getRows from '../../../../../utils/revenueDeskUtils/getRows';
@@ -37,7 +38,7 @@ function RateCard(allprops) {
 		if (istype === 'other') {
 			const foundRow = (rowKeyMapping[key] || []).find((obj) => obj.id === id);
 			if (foundRow) {
-				ids = [...(foundRow?.allid || {})];
+				ids = [...(foundRow.allid || {})];
 			}
 		} else {
 			ids = [id];
@@ -47,10 +48,10 @@ function RateCard(allprops) {
 
 	const currentData = rowKeyMapping[key];
 	const inceremt = 4;
-	const min = currentData?.length > inceremt ? inceremt : currentData?.length;
-	const len = showAll ? currentData?.length : min;
-	const sliceLength = expanded ? currentData?.length : len;
-	const currentDataRows = currentData?.slice(0, sliceLength);
+	const min = currentData.length > inceremt ? inceremt : currentData.length;
+	const len = showAll ? currentData.length : min;
+	const sliceLength = expanded ? currentData.length : len;
+	const currentDataRows = currentData.slice(0, sliceLength);
 
 	const renderSingle = key === 'single_booking_notes';
 	// const isExpandable = currentData?.length > min;
@@ -59,12 +60,12 @@ function RateCard(allprops) {
 	const handlePreference = (row_id, istype) => {
 		const allIds = getAllIds(row_id, istype);
 		if (prefrences.length) {
-			const foundItem = (prefrences || []).find((obj) => obj?.id === row_id);
+			const foundItem = (prefrences || []).find((obj) => obj.id === row_id);
 			if (foundItem) {
 				const oldItems = prefrences;
 				const newItems = [];
 				oldItems.forEach((item) => {
-					if (item?.id !== row_id) {
+					if (item.id !== row_id) {
 						newItems.push(item);
 					}
 				});
@@ -99,14 +100,14 @@ function RateCard(allprops) {
 		<tr
 			className={styles.tr}
 			style={{ cursor: 'pointer' }}
-			id={elememt?.id}
-			onClick={() => handlePreference(elememt?.id, key)}
+			id={elememt.id}
+			onClick={() => handlePreference(elememt.id, key)}
 		>
 			<td className={styles.td}>
-				<Priority data={prefrences} id={elememt?.id} showPriority={false} />
+				<Priority data={prefrences} id={elememt.id} showPriority={false} />
 			</td>
 
-			{(elememt?.rowData || []).map((value) => (
+			{(elememt.rowData || []).map((value) => (
 				<td className={styles.td}>{showData(value)}</td>
 			))}
 		</tr>
@@ -116,14 +117,14 @@ function RateCard(allprops) {
 		<tr
 			className={styles.tr}
 			style={{ cursor: 'pointer' }}
-			id={elememt?.id}
-			onClick={() => handlePreference(elememt?.id, key)}
+			id={elememt.id}
+			onClick={() => handlePreference(elememt.id, key)}
 		>
 			<td className={styles.td}>
-				<Priority data={prefrences} id={elememt?.id} showPriority={false} />
+				<Priority data={prefrences} id={elememt.id} showPriority={false} />
 			</td>
 
-			{elememt?.childrens?.[0].map((childval) => (
+			{elememt.childrens[0].map((childval) => (
 				<td className={styles.td}>{showData(childval)}</td>
 			))}
 		</tr>
@@ -131,7 +132,7 @@ function RateCard(allprops) {
 
 	return (
 		<div className={styles.container}>
-			{currentDataRows?.length ? (
+			{currentDataRows.length ? (
 				<div className={styles.rates_container}>
 					<div className={styles.description}>{type}</div>
 
@@ -146,16 +147,16 @@ function RateCard(allprops) {
 						{renderSingle ? SingleRender : otherRenders}
 					</table>
 
-					<div
+					<Button
 						className={styles.addMore}
 						onClick={() => setShowAll(!showAll)}
 					>
-						{currentData?.length > min && !expanded ? (
+						{currentData.length > min && !expanded ? (
 							<div>
-								{showAll && currentData?.length ? 'See Less' : 'See More'}
+								{showAll && currentData.length ? 'See Less' : 'See More'}
 							</div>
 						) : null}
-					</div>
+					</Button>
 				</div>
 			) : null}
 		</div>

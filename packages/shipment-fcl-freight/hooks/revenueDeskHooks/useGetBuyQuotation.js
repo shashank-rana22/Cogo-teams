@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetBuyQuotation = (shipmentData) => {
+const useGetBuyQuotation = (shipmentData = {}) => {
 	const allServices = [];
-	const all_services = shipmentData?.services || [];
+	const all_services = shipmentData.services || [];
 	all_services.forEach((service) => {
 		allServices.push(...(shipmentData[`${service}s`] || []));
 	});
@@ -20,7 +20,7 @@ const useGetBuyQuotation = (shipmentData) => {
 		try {
 			await trigger({
 				params: {
-					shipment_id : shipmentData?.id,
+					shipment_id : shipmentData.id,
 					service_ids : allServiceIds,
 				},
 			});

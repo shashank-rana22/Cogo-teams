@@ -13,8 +13,8 @@ const ratesTypes = {
 };
 function ExistingRates({
 	type,
-	data,
-	prefrences,
+	data = {},
+	prefrences = {},
 	setPrefrences = () => {},
 	expanded,
 }) {
@@ -37,7 +37,7 @@ function ExistingRates({
 					setPrefrences={setPrefrences}
 					type={sub_type[0]}
 					objectkey={sub_type[1]}
-					details={data?.docs}
+					details={data.docs}
 				/>
 			))}
 		</div>

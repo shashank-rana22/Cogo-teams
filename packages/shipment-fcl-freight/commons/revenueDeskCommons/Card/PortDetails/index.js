@@ -16,11 +16,11 @@ function PortDetails({ data = {} }) {
 
 	const { destination_main_port, origin_main_port } = data;
 
-	const handleLocationDetails = (location, isSingle, icdInfo) => {
+	const handleLocationDetails = (location, isSingle, icdInfo = {}) => {
 		let show = true;
-		if (location?.port_code === null || location?.postal_code === null) {
+		if (location.port_code === null || location.postal_code === null) {
 			show = false;
-		} else if (!location?.port_code && !location?.postal_code) {
+		} else if (!location.port_code && !location.postal_code) {
 			show = false;
 		}
 		return (
@@ -29,26 +29,26 @@ function PortDetails({ data = {} }) {
 					{show ? (
 						<p className={styles.code}>
 							(
-							{location?.port_code || location?.postal_code}
+							{location.port_code || location.postal_code}
 							)
 						</p>
 					) : null}
 
-					<p className={styles.country}>{location?.country?.name}</p>
+					<p className={styles.country}>{location.country.name}</p>
 				</div>
 
 				{isSingle ? (
-					<div className={styles.value}>{location?.name}</div>
+					<div className={styles.value}>{location.name}</div>
 				) : (
 					<Tooltip
 						placement="bottom"
 						theme="light"
 						content={
-							<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
+							<div style={{ fontSize: '10px' }}>{location.display_name}</div>
 						}
 					>
 						<>
-							<div className={styles.value}>{location?.name}</div>
+							<div className={styles.value}>{location.name}</div>
 							{icdInfo?.name && <div className={styles.icd}>{icdInfo?.name}</div>}
 						</>
 					</Tooltip>

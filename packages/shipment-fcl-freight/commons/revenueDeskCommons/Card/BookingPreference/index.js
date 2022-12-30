@@ -15,7 +15,7 @@ function BookingPreference({ loading = false, bookingData = [] }) {
 		);
 	}
 
-	if (!loading && bookingData?.length === 0) {
+	if (!loading && bookingData.length === 0) {
 		return <EmptyState />;
 	}
 
@@ -25,7 +25,7 @@ function BookingPreference({ loading = false, bookingData = [] }) {
 				<Item
 					bookingItem={booking_item}
 					idx={idx}
-					isLast={(bookingData?.length || 0) - 1 === idx}
+					isLast={(bookingData.length || 0) - 1 === idx}
 				/>
 			))}
 		</div>

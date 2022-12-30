@@ -15,10 +15,10 @@ function ShipmentDetails({
 		<div className={styles.container}>
 			<div className={styles.id}>
 				<div style={{ fontWeight: 600 }}>
-					{data?.importer_exporter?.business_name}
+					{data.importer_exporter.business_name}
 				</div>
 				Shipment ID #
-				<strong>{data?.serial_id}</strong>
+				<strong>{data.serial_id}</strong>
 			</div>
 
 			<div className={styles.line} />
@@ -31,7 +31,7 @@ function ShipmentDetails({
 				<CargoDetails data={data} />
 			</div>
 
-			{data?.shipment_type === 'fcl_freight' ? (
+			{data.shipment_type === 'fcl_freight' ? (
 				<Cancellation
 					data={data}
 					refetch={refetch}

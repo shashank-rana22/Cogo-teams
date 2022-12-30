@@ -9,7 +9,7 @@ import getShipmentQuotation from '../../../../../../hooks/revenueDeskHooks/getSh
 import styles from './styles.module.css';
 
 function SellServcieQuotation({ shipmentData = {} }) {
-	const { service_charges, loading } = getShipmentQuotation(shipmentData?.id);
+	const { service_charges = {}, loading } = getShipmentQuotation(shipmentData.id);
 
 	const EmptyContent = {
 		heading     : 'No Results Found!',
@@ -19,11 +19,11 @@ function SellServcieQuotation({ shipmentData = {} }) {
 	return (
 		<div className={styles.container}>
 			{loading ? <Loader height="20px" width="20px" /> : null}
-			{ !loading && !service_charges?.length ? (
+			{ !loading && !service_charges.length ? (
 				<EmptyState showContent={EmptyContent} />
 			) : null}
 
-			{service_charges?.length ? (
+			{service_charges.length ? (
 				<>
 					<div className={styles.heading}>Full Sell Quotation</div>
 					<div className={styles.service_content}>
@@ -32,17 +32,17 @@ function SellServcieQuotation({ shipmentData = {} }) {
 					</div>
 
 					{(service_charges || []).map((serviceObj) => {
-						if (serviceObj?.service_type) {
+						if (serviceObj.service_type) {
 							return (
 								<div className={styles.service_content}>
 									<div>
-										{startCase(serviceObj?.service_type)}
+										{startCase(serviceObj.service_type)}
 									</div>
 									<div>
 										{ getFormattedPrice(
 											'en-IN',
-											serviceObj?.total_price_discounted,
-											serviceObj?.currency,
+											serviceObj.total_price_discounted,
+											serviceObj.currency,
 										)}
 									</div>
 								</div>

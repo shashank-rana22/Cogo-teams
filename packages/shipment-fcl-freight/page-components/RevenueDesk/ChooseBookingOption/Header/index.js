@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 // import SopRevenueDesk from '../../Sop';
 
 function Header({
-	data, expanded, statsLoading, stats, activeTab,
+	data = {}, expanded, statsLoading, stats = {}, activeTab,
 }) {
 	return (
 		<div>
@@ -17,12 +17,12 @@ function Header({
 			<div className={styles.header_container}>
 				<div className={styles.header_left}>
 					<div className={styles.header_text}>
-						{stats?.length
+						{stats.length
 							? <IcMFtaskUnableToDo height={20} width={20} />
 							: <IcMFtaskCompleted height={20} width={20} />}
 
 						<div style={{ marginLeft: '5px' }}>
-							{stats?.length
+							{stats.length
 								? 'Choosen Booking Option'
 								: 'Choose Booking Option'}
 						</div>
@@ -45,7 +45,7 @@ function Header({
 				<p className={styles.timer_info}>
 					{activeTab === 'pending'
 						? `(Due ${getHoursElasped(
-							data?.confirmed_by_importer_exporter_at,
+							data.confirmed_by_importer_exporter_at,
 						)})`
 						: ''}
 				</p>
@@ -54,13 +54,13 @@ function Header({
 
 			<StakeHolderDetails data={data} />
 
-			{(!statsLoading && stats?.length > 0) ? null : (
+			{(!statsLoading && stats.length > 0) ? null : (
 				<div className={styles.booking_options_text} style={{ opacity: expanded ? 0.5 : null }}>
 					Booking Options Available (Select and Priortise Preferences)
 				</div>
 			)}
 
-			{data?.is_flashed && !(stats?.length > 0) && !statsLoading ? (
+			{data.is_flashed && !(stats.length > 0) && !statsLoading ? (
 				<div className={styles.flashed_information}>
 					<div className={styles.text}>Revert from Ongoing Flash Rates</div>
 

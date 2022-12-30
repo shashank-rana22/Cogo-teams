@@ -9,7 +9,7 @@ import useGetBuyQuotation from '../../../../../../hooks/revenueDeskHooks/useGetB
 import styles from './styles.module.css';
 
 function BuyServiceQuotation({ shipmentData = {} }) {
-	const { service_charges, loading } = useGetBuyQuotation(shipmentData);
+	const { service_charges = {}, loading } = useGetBuyQuotation(shipmentData);
 
 	const EmptyContent = {
 		heading     : 'No Results Found!',
@@ -23,7 +23,7 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 				<EmptyState showContent={EmptyContent} />
 			) : null}
 
-			{ service_charges?.length ? (
+			{ service_charges.length ? (
 				<>
 					<div className={styles.heading}>Buy Quotation</div>
 					<div className={styles.service_content}>
@@ -31,17 +31,17 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 						<div className={styles.sub_heading}>Services Charge</div>
 					</div>
 					{(service_charges || []).map((serviceObj) => {
-						if (serviceObj?.service_type) {
+						if (serviceObj.service_type) {
 							return (
 								<div className={styles.service_content}>
 									<div>
-										{startCase(serviceObj?.service_type)}
+										{startCase(serviceObj.service_type)}
 									</div>
 									<div>
 										{ getFormattedPrice(
 											'en-IN',
-											serviceObj?.total_price,
-											serviceObj?.currency,
+											serviceObj.total_price,
+											serviceObj.currency,
 										)}
 									</div>
 								</div>

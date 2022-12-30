@@ -20,7 +20,6 @@ function RevenueDesk() {
 		list: { total, data },
 		refetch,
 	} = useListShipments({ status: activeTab });
-
 	return (
 		<div className={styles.container}>
 			{!showBookingOption ? (

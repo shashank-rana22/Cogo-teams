@@ -26,28 +26,28 @@ function Header({ data = {}, activeTab = '' }) {
 			<div className={styles.column}>
 				<div className={styles.title_container}>
 
-					<p className={styles.heading}>{getHeading({ state: data?.state })}</p>
+					<p className={styles.heading}>{getHeading({ state: data.state })}</p>
 
-					{ ((data?.trade_type || incoTerms[data?.inco_term]) === 'export')
+					{ ((data.trade_type || incoTerms[data.inco_term]) === 'export')
 						? (
 							<p className={styles.trade_type}>
-								{startCase(data?.trade_type)
-						|| startCase(incoTerms[data?.inco_term])}
+								{startCase(data.trade_type)
+						|| startCase(incoTerms[data.inco_term])}
 							</p>
 						)
 						:					(
 							<p className={styles.import}>
-								{startCase(data?.trade_type)
-					|| startCase(incoTerms[data?.inco_term])}
+								{startCase(data.trade_type)
+					|| startCase(incoTerms[data.inco_term])}
 							</p>
 						)}
 					<p className={`${styles.trade_type} ${styles.booking_source}`}>
-						{data?.source === 'direct'
+						{data.source === 'direct'
 							? 'Sell Without Buy'
 							: startCase(data.source || '')}
 					</p>
 
-					{data?.is_cogo_assured ? (
+					{data.is_cogo_assured ? (
 						<div className={styles.cogo_assured}>
 							<div className={styles.icon_wrapper}>
 								<IcCCogoassured />

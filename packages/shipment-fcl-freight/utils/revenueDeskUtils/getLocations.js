@@ -83,10 +83,10 @@ const getLocationInfo = (
 	data,
 	keys = { origin: null, destination: null },
 ) => {
-	if (keys?.destination || keys?.origin) {
-		const origin =	getByKey(data, keys?.origin) || getByKey(data, keys?.alternateOrigin);
+	if (keys.destination || keys.origin) {
+		const origin =	getByKey(data, keys.origin) || getByKey(data, keys.alternateOrigin);
 
-		const destination =	getByKey(data, keys?.destination) || getByKey(data, keys?.alternateDestination);
+		const destination =	getByKey(data, keys.destination) || getByKey(data, keys.alternateDestination);
 
 		return { origin, destination };
 	}
@@ -102,19 +102,19 @@ const getLocationInfo = (
 
 	const serviceRoute = routeInfo[service_type];
 	if (serviceRoute) {
-		const origin = data[serviceRoute?.port_of_loading]
-			|| data[serviceRoute?.origin_pickup]
-			|| data[serviceRoute?.origin_port]
-			|| data[serviceRoute?.origin_main_port]
-			|| data[serviceRoute?.origin_location];
+		const origin = data[serviceRoute.port_of_loading]
+			|| data[serviceRoute.origin_pickup]
+			|| data[serviceRoute.origin_port]
+			|| data[serviceRoute.origin_main_port]
+			|| data[serviceRoute.origin_location];
 
-		let destination = data[serviceRoute?.destination_drop]
-			|| data[serviceRoute?.destination_port]
-			|| data[serviceRoute?.destination_main_port]
-			|| data[serviceRoute?.destination_location];
+		let destination = data[serviceRoute.destination_drop]
+			|| data[serviceRoute.destination_port]
+			|| data[serviceRoute.destination_main_port]
+			|| data[serviceRoute.destination_location];
 
-		if (data[serviceRoute?.port_of_loading]) {
-			destination = data[serviceRoute?.origin_port];
+		if (data[serviceRoute.port_of_loading]) {
+			destination = data[serviceRoute.origin_port];
 		}
 
 		return { origin, destination };

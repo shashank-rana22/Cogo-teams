@@ -13,7 +13,7 @@ function MultiServiceDetails({
 }) {
 	const [show, setShow] = useState(false);
 
-	if (mainServices?.length <= 1 && !showSingle) {
+	if (mainServices.length <= 1 && !showSingle) {
 		return null;
 	}
 	const renderBody = () => (

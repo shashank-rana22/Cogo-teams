@@ -1,4 +1,4 @@
-import { Toast, Select } from '@cogoport/components';
+import { Toast, Select, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import React from 'react';
@@ -104,20 +104,22 @@ function FclRevenueFilters({
 				/>
 			</div>
 			<div className={styles.button_container}>
-				<button
+				<Button
+					themeType="secondary"
 					onClick={() => clearFilters()}
 					style={{ marginRight: '10px' }}
 					className={styles.button_primary}
 				>
 					Reset
-				</button>
+				</Button>
 
-				<button
+				<Button
+					themeType="ternary"
 					onClick={() => handleApply()}
 					className={styles.button_secondary}
 				>
 					Apply
-				</button>
+				</Button>
 
 			</div>
 		</div>

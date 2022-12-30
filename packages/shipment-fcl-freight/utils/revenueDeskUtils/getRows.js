@@ -1,6 +1,6 @@
 import { format } from '@cogoport/utils';
 
-const getRows = ({ key, details }) => {
+const getRows = ({ key, details = {} }) => {
 	let response = null;
 	const rows = [];
 
@@ -11,17 +11,17 @@ const getRows = ({ key, details }) => {
 			if (key === 'single_booking_notes') {
 				(data || []).forEach((element) => {
 					const row = [];
-					row.push(element?.operator?.business_name || '');
-					row.push(`${element?.containers_count} X ${element?.container_size}`);
+					row.push(element.operator.business_name || '');
+					row.push(`${element.containers_count} X ${element.container_size}`);
 					row.push(
-						`${element?.charges?.line_items?.[0]?.currency} ${element?.charges?.line_items?.[0]?.price}`,
+						`${element.charges.line_items[0].currency} ${element.charges.line_items[0].price}`,
 					);
-					row.push(format(element?.bn_expiry, 'dd MMM yyyy'));
+					row.push(format(element.bn_expiry, 'dd MMM yyyy'));
 					row.push(
-						format(element?.schedule_departure, 'dd MMM yyyy'),
+						format(element.schedule_departure, 'dd MMM yyyy'),
 					);
-					row.push(element?.booking_party || '');
-					rows.push({ rowData: row, id: element?.id });
+					row.push(element.booking_party || '');
+					rows.push({ rowData: row, id: element.id });
 				});
 				response = rows;
 			} else if (
@@ -51,16 +51,16 @@ const getRows = ({ key, details }) => {
 
 					(data[datakey] || []).forEach((child) => {
 						const row = [];
-						row.push(child?.operator?.business_name || '');
+						row.push(child.operator.business_name || '');
 						row.push(containers);
 						row.push(`${currency} ${total_buy_price}` || 'NA');
-						row.push(format(child?.bn_expiry, 'dd MMM yyyy'));
+						row.push(format(child.bn_expiry, 'dd MMM yyyy'));
 						row.push(
-							format(child?.schedule_departure, 'dd MMM yyyy'),
+							format(child.schedule_departure, 'dd MMM yyyy'),
 						);
-						row.push(child?.booking_party);
+						row.push(child.booking_party);
 						childrens.push(row);
-						ids.push(child?.id);
+						ids.push(child.id);
 					});
 					let stringID = '';
 					(ids || []).forEach((id, index) => {

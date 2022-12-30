@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
-function Priority({ data, id, showPriority }) {
-	const searchObject = (data || []).find((obj) => obj?.id === id);
+function Priority({ data = {}, id, showPriority }) {
+	const searchObject = (data || []).find((obj) => obj.id === id);
 
 	let priority = null;
 	if (searchObject) {

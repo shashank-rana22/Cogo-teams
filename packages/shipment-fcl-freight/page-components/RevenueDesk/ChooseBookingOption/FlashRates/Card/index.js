@@ -8,9 +8,9 @@ import styles from './styles.module.css';
 function FlashRateCard(allprops) {
 	const {
 		type,
-		data,
+		data = {},
 		prefrence_key,
-		prefrences,
+		prefrences = [],
 		setPrefrences = () => {},
 		expanded,
 		unit = 'Container',
@@ -19,16 +19,16 @@ function FlashRateCard(allprops) {
 
 	const currentData = data;
 	const inceremt = 4;
-	const min = currentData?.length > inceremt ? inceremt : currentData?.length;
-	const len = showAll ? currentData?.length : min;
-	const sliceLength = expanded ? currentData?.length : len;
-	const currentDataRows = currentData?.slice(0, sliceLength);
+	const min = currentData.length > inceremt ? inceremt : currentData.length;
+	const len = showAll ? currentData.length : min;
+	const sliceLength = expanded ? currentData.length : len;
+	const currentDataRows = currentData.slice(0, sliceLength);
 
 	const handlePrefrence = (row_id) => {
-		const foundItem = (prefrences || []).find((obj) => obj?.id === row_id);
+		const foundItem = (prefrences || []).find((obj) => obj.id === row_id);
 		if (foundItem) {
 			const oldItems = prefrences;
-			const newRows = oldItems.filter((val) => val?.id !== row_id);
+			const newRows = oldItems.filter((val) => val.id !== row_id);
 
 			if (newRows.length) {
 				setPrefrences([...newRows]);
@@ -48,7 +48,7 @@ function FlashRateCard(allprops) {
 
 	const { column_names } = controls.flash_rates;
 
-	return currentDataRows?.length ? (
+	return currentDataRows.length ? (
 		<div className={styles.container}>
 			<div className={styles.description}>{type}</div>
 
@@ -73,38 +73,38 @@ function FlashRateCard(allprops) {
 				{(currentDataRows || []).map((elememt) => (
 					<tr
 						className={styles.tr}
-						id={elememt?.id}
+						id={elememt.id}
 						style={{ cursor: 'pointer' }}
-						onClick={() => handlePrefrence(elememt?.id)}
+						onClick={() => handlePrefrence(elememt.id)}
 					>
 						<td className={styles.td}>
-							<Priority data={prefrences} id={elememt?.id} showPriority />
+							<Priority data={prefrences} id={elememt.id} showPriority />
 						</td>
-						<td className={styles.td}>{showData(elememt?.rowData?.shipping_line)}</td>
+						<td className={styles.td}>{showData(elememt.rowData.shipping_line)}</td>
 						<td className={styles.td}>
-							{showData(elememt?.rowData?.service_provider)}
-							{elememt?.rowData?.via_route && (
+							{showData(elememt.rowData.service_provider)}
+							{elememt.rowData.via_route && (
 								<span style={{ color: 'blue' }}>
-									{` Via (${elememt?.rowData?.via_route})`}
+									{` Via (${elememt.rowData.via_route})`}
 								</span>
 							)}
-							{elememt?.rowData?.schedule_type ? (
+							{elememt.rowData.schedule_type ? (
 								<span style={{ color: '#5936f0' }}>
-									{` (${elememt?.rowData?.schedule_type})`}
+									{` (${elememt.rowData.schedule_type})`}
 								</span>
 							) : null}
 						</td>
 						<td className={styles.td}>
-							{`${showData(elememt?.rowData?.currency)} ${showData(
-								elememt?.rowData?.buy_price,
+							{`${showData(elememt.rowData.currency)} ${showData(
+								elememt.rowData.buy_price,
 							)}`}
-							{elememt?.rowData?.is_rate_expired ? (
+							{elememt.rowData.is_rate_expired ? (
 								<span style={{ color: 'red' }}> (This Rate is Expired)</span>
 							) : null}
 						</td>
-						<td className={styles.td}>{showData(elememt?.rowData?.allocation_ratio)}</td>
-						<td className={styles.td}>{showData(elememt?.rowData?.allocation_ratio)}</td>
-						<td className={styles.td}>{showData(elememt?.rowData?.reliability_ratio)}</td>
+						<td className={styles.td}>{showData(elememt.rowData.allocation_ratio)}</td>
+						<td className={styles.td}>{showData(elememt.rowData.allocation_ratio)}</td>
+						<td className={styles.td}>{showData(elememt.rowData.reliability_ratio)}</td>
 					</tr>
 				))}
 			</table>
@@ -113,7 +113,7 @@ function FlashRateCard(allprops) {
 					className={styles.add_more}
 					onClick={() => setShowAll(!showAll)}
 				>
-					{currentData?.length > min && !expanded ? (
+					{currentData.length > min && !expanded ? (
 						<span>
 							{showAll && currentData?.length
 								? 'See Less' : 'See More'}

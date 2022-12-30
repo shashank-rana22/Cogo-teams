@@ -10,7 +10,7 @@ function ShipmentDetails({ data = {} }) {
 		<div className={styles.container}>
 			<div className={styles.box}>
 				<div className={styles.price_text}>
-					{getFormattedPrice('en-IN', data?.freight_total, data?.freight_currency)}
+					{getFormattedPrice('en-IN', data.freight_total, data.freight_currency)}
 
 					<div className={styles.sub}>
 						/

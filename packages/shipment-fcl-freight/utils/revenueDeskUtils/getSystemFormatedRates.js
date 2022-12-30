@@ -1,20 +1,20 @@
-const getSystemFormatedRates = (data) => {
-	const getMinRate = (rates) => {
+const getSystemFormatedRates = (data = []) => {
+	const getMinRate = (rates = []) => {
 		let minimumRate = null;
 		let currency = null;
 		let is_rate_expired = null;
 		let schedule_type = null;
-		if (rates?.length) {
-			let min = rates[0]?.price;
-			currency = rates[0]?.currency;
-			is_rate_expired = rates[0]?.is_rate_expired;
-			schedule_type = rates[0]?.schedule_type;
+		if (rates.length) {
+			let min = rates[0].price;
+			currency = rates[0].currency;
+			is_rate_expired = rates[0].is_rate_expired;
+			schedule_type = rates[0].schedule_type;
 			rates.forEach((rate) => {
-				if (rate?.price < min) {
-					min = rate?.price;
-					currency = rate?.currency;
-					is_rate_expired = rate?.is_rate_expired;
-					schedule_type = rate?.schedule_type;
+				if (rate.price < min) {
+					min = rate.price;
+					currency = rate.currency;
+					is_rate_expired = rate.is_rate_expired;
+					schedule_type = rate.schedule_type;
 				}
 			});
 			minimumRate = min;

@@ -14,12 +14,10 @@
 	align-items: center;
 	width: fit-content !important;
 	height: 20px;
-	padding: 2px;
+	padding-left: 0px;
 	padding-bottom: 10px;
 	margin-top: 8px;
 	margin-left: -5px;
-	color: blue !important;
 	text-decoration: underline;
 	cursor: pointer;
-	background-color: white !important;
 }

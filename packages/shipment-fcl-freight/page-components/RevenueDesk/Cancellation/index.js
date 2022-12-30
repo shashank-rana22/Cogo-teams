@@ -62,9 +62,12 @@ function Cancellation({
 				onClickOutside={() => setShow(false)}
 				render={renderBody}
 			>
-				<button onClick={showOptions} className={styles.popover_content}>
+				<Button
+					themeType="tertiary"
+					onClick={showOptions}
+				>
 					<IcMOverflowDot />
-				</button>
+				</Button>
 			</Popover>
 
 			{showCancel ? (
@@ -87,6 +90,7 @@ function Cancellation({
 					<Modal.Footer>
 						<div className={styles.button_div}>
 							<Button
+								themeType="secondary"
 								onClick={onClose}
 								// disabled={loading}
 								style={{ marginRight: '8px' }}

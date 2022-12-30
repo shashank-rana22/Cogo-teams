@@ -10,14 +10,15 @@ function ChooseBookingOption({
 	currentShipmentData,
 	setShowBookingOption,
 	statsLoading,
-	data,
+	data = {},
 	children = null,
 }) {
-	const dataCount = data?.list?.length;
+	const dataCount = data.list?.length;
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_container}>
 				<Button
+					themeType="secondary"
 					className={styles.back_container}
 					onClick={() => setShowBookingOption(false)}
 				>
@@ -33,7 +34,7 @@ function ChooseBookingOption({
 					activeTab={activeTab}
 					expanded={dataCount > 0}
 					statsLoading={statsLoading}
-					stats={data?.list}
+					stats={data.list}
 					currentShipmentData={currentShipmentData}
 				/>
 				{children}

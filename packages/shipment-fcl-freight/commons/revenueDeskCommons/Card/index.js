@@ -32,7 +32,7 @@ function Card({
 		view,
 	} = useListBookingPreference({ data, selectedService });
 
-	const activeService = activeTab === 'completed' ? selectedService.id : clickedCard?.service?.id;
+	const activeService = activeTab === 'completed' ? selectedService.id : clickedCard?.service.id;
 
 	return (
 		<div className={styles.container}>
@@ -79,6 +79,7 @@ function Card({
 					) : null}
 
 					<Button
+						themeType="link"
 						onClick={(service) => {
 							setView(!view);
 							setSelectedService(service);

@@ -27,8 +27,8 @@ function BookingOption(params) {
 		bnSalvage,
 		statsLoading,
 		existingDataLoading,
-		existingData,
-		data,
+		existingData = {},
+		data = {},
 		flashParams,
 		flash,
 		flashDirectLoading,
@@ -46,7 +46,7 @@ function BookingOption(params) {
 	});
 
 	const { choosen_bookings_docs, choosen_flash_params } = CreateDataFromChoosen(
-		{ data: data?.list, shipment_id: currentShipmentData?.id },
+		{ data: data.list, shipment_id: currentShipmentData.id },
 	);
 	useEffect(() => {
 		setExistingRatePrefrences([...bnSalvage]);
@@ -56,9 +56,9 @@ function BookingOption(params) {
 	const hasExistingRates = () => {
 		if (!statsLoading || existingDataLoading) {
 			let hasdata = false;
-			const keys = Object.keys(existingData?.docs || {});
+			const keys = Object.keys(existingData.docs || {});
 			(keys || []).forEach((key) => {
-				if (Object.keys(existingData?.docs[key]).length) {
+				if (Object.keys(existingData.docs[key]).length) {
 					hasdata = true;
 				}
 			});
@@ -68,7 +68,7 @@ function BookingOption(params) {
 		return true;
 	};
 
-	const dataCount = data?.list?.length;
+	const dataCount = data.list?.length;
 
 	const customStyle = dataCount ? { pointerEvents: 'none', opacity: 0.5 } : {};
 
@@ -110,12 +110,12 @@ function BookingOption(params) {
 							unit="Container"
 						/>
 
-						{!dataCount && !currentShipmentData?.is_flashed ? (
+						{!dataCount && !currentShipmentData.is_flashed ? (
 							<div className={styles.flash_container}>
 								<p className={styles.flash_text}>Trigger Flash to more Supplier</p>
 
 								<Button
-									className="primary sm"
+									themeType="primary"
 									onClick={() => handleFlashDirect()}
 									disabled={flashDirectLoading}
 								>
@@ -128,14 +128,14 @@ function BookingOption(params) {
 					{!dataCount ? (
 						<div className={styles.buttons_container}>
 							<Button
-								className="secondary md"
+								themeType="accent"
 								style={{ marginRight: '12px' }}
 								onClick={() => setShowBookingOption(false)}
 							>
 								Back
 							</Button>
 
-							<Button onClick={() => setShow(true)} disabled={loading}>
+							<Button themeType="secondary" onClick={() => setShow(true)} disabled={loading}>
 								Save Prefrences
 							</Button>
 						</div>

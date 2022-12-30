@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetShipmentQuotation = (shipment_id) => {
+const useGetShipmentQuotation = (shipment_id = '') => {
 	const [{ data:listQuotationData, loading }, trigger] = useRequest(
 		'/get_shipment_quotation',
 		{ manual: true },

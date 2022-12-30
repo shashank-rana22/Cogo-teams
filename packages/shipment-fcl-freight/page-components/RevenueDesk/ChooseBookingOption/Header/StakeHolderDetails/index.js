@@ -5,14 +5,14 @@ import useListInternalStakeholders from '../../../../../hooks/revenueDeskHooks/u
 
 import styles from './styles.module.css';
 
-function StakeHolderDetails({ data }) {
-	const { internalStakeHoldersList } = useListInternalStakeholders({
-		shipment_id: data?.id,
+function StakeHolderDetails({ data = {} }) {
+	const { internalStakeHoldersList = [] } = useListInternalStakeholders({
+		shipment_id: data.id,
 	});
 
-	const mainServiceStakeholders = internalStakeHoldersList?.filter(
-		(item) => item?.service_type === `${data?.shipment_type}_service`
-			|| isEmpty(item?.service_type),
+	const mainServiceStakeholders = (internalStakeHoldersList || []).filter(
+		(item) => item.service_type === `${data.shipment_type}_service`
+			|| isEmpty(item.service_type),
 	);
 	if (isEmpty(mainServiceStakeholders)) {
 		return null;
@@ -23,13 +23,13 @@ function StakeHolderDetails({ data }) {
 			{(mainServiceStakeholders || []).map((item) => (item?.stakeholder_type !== 'service_ops2' ? (
 				<div className={styles.stake_holder_details}>
 					<div className={(styles.stake_holder_key)}>
-						{startCase(item?.stakeholder_type)}
+						{startCase(item.stakeholder_type)}
 						{' '}
 						:
 					</div>
 
 					<div className={styles.stake_holder_value}>
-						{startCase(item?.user?.name)}
+						{startCase(item.user.name)}
 					</div>
 				</div>
 			) : null))}
