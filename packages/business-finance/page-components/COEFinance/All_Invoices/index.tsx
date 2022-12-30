@@ -3,7 +3,7 @@ import PurchaseInvoice from './PurchaseInvoiceView/index';
 import styles from './styles.module.css'
 import ShipmentIdView from "./ShipmentIdView/index";
 import FilterModal from "../Components/FilterModal";
-import useGetPurchaseViewList from "../hook/usePurchaseViewList";
+
 const AllInvoices = () => {
     const [isPurchase, setIsPurchase] = useState(true);
     const [filters, setFilters]=useState({})
@@ -38,7 +38,7 @@ const AllInvoices = () => {
                 </div>
                 <FilterModal setFilters={setFilters} filters={filters}/>
             </div>
-            {isPurchase && <PurchaseInvoice filters={filters} />}
+            {isPurchase && <PurchaseInvoice filters={filters} setFilters={setFilters} />}
             {!isPurchase && <ShipmentIdView />}
         </div>
     );

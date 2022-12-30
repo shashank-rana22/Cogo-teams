@@ -17,21 +17,20 @@ import {fieldProps,fieldItemProps} from './interfaces/index'
 
 interface Props{
   filters:GenericObject;
+  setFilters: (p: object) => void;
 }
 
-function PurchaseInvoice({filters}:Props) {
+function PurchaseInvoice({filters,setFilters}:Props) {
 const router = useRouter();
 
   const {data,
       loading,
       config,
-      handlePageChange,
-      page,
       setSearchValue,	
 		  searchValue,
       currentTab,
      setCurrentTab,
-    }=useGetPurchaseViewList({filters});
+    }=useGetPurchaseViewList({filters,setFilters});
 
   const handleChange =(itemData:any)=>{
     router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}`);
@@ -77,9 +76,11 @@ const router = useRouter();
        itemData={data}
        functions={functions}
        loading={loading}
-       page={page}
-       handlePageChange={handlePageChange}
-     />
+       page={filters.pageIndex||1}
+       handlePageChange={(pageValue:number)=>{
+        setFilters((p:GenericObject)=>({...p,pageIndex:pageValue}))
+      }}
+    />
  </div>
   )
 }
