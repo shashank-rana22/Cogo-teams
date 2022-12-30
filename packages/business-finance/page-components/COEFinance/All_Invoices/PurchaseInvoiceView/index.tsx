@@ -1,14 +1,13 @@
-import React,{useState} from 'react'
+import React from 'react'
 import List from '../../../commons/List/index';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
-import ShowRemarkData from './RenderData/ShowRemark/index'
 import RenderStatus from './RenderData/RenderStatus/index'
 import FieldPair from './RenderData/FiledPair/index';
 import RenderCustomer from './RenderData/RenderCustomer/index'
 import FormatedDate from './RenderData/FormatedDate/index';
 import SegmentedFilters from './SegmentedFilters/index'
 import {FunctionObjects, GenericObject} from '../../../commons/Interfaces/index'
-import {fieldProps,fieldItemProps} from './PurchaseInterfaces/index'
+import {fieldProps,fieldItemProps} from './interfaces/index'
 
 
 
@@ -29,9 +28,6 @@ function PurchaseInvoice() {
     
 
     const functions:FunctionObjects = {
-        renderRemark:(itemData:GenericObject,field:fieldProps)=>(
-          <ShowRemarkData itemData={itemData} field={field}/>
-        ),
         renderStatus: (itemData:GenericObject) => (
           <RenderStatus item={itemData}/>
       ),
