@@ -4,9 +4,13 @@ import {IcMFship, IcMPortArrow} from '@cogoport/icons-react';
 import {Tags} from '@cogoport/components';
 import styles from './styles.module.css';
 import TimeLine from '../TimeLine/index';
+import useListShipment from '../../../../hook/useListShipment';
 
-const Details = ({orgId}) => {
+const Details = ({jobNumber,orgId}) => {
+    const {data} = useListShipment(jobNumber);
+	
 	const Router=useRouter();
+
 return(
 <div>	
  <div className={styles.container}>

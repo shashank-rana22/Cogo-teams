@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRequestBf } from '@cogoport/request';
+import { useRequest,useRequestBf } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 
 const useUpdateTag = ({
@@ -20,11 +20,11 @@ const useUpdateTag = ({
 		{ autoCancel: false },
 	);
 
-	const [{}, CollectionPartyTrigger ] = useRequestBf(
+	const [{}, CollectionPartyTrigger ] = useRequest(
 		{
-			url     : '/update_shipment_collection_party',
+			url     : 'shipment/update_shipment_collection_party',
 			method  : 'post',
-			authKey : 'update_shipment_collection_party',
+			// authKey : 'update_shipment_collection_party',
 		},
 		{ autoCancel: false },
 	);
@@ -41,16 +41,16 @@ const useUpdateTag = ({
 						urgencyRemarks: remarks || undefined,
 					},
 				});
-
+		 
 				if (!response?.hasError) {
-					const finalRes = await CollectionPartyTrigger({
-						data: {
-							id: collectionPartyId,
-							urgency_tag: tagValue || null,
-							remarks: remarks.length ? [remarks] : undefined,
-						},
-					});
-
+						const finalRes = await CollectionPartyTrigger({
+							data: {
+								id: collectionPartyId,
+								urgency_tag: tagValue || null,
+								remarks: remarks.length ? [remarks] : undefined,
+							},
+						});
+				   
 					if (!finalRes?.error) {
 						Toast.success('Tag successfully Updated');
 						setLoading(false);

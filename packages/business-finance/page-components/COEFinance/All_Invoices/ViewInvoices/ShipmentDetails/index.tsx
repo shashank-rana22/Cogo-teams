@@ -9,9 +9,7 @@ import PdfDisplay from "./PdfDisplay/index";
 import POC from './../POC';
 
 const ShipmentDetails = ({data,orgId})=>{
-    
     const jobNumber=data?.job?.jobNumber || '';
-    
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
 
@@ -52,7 +50,7 @@ const ShipmentDetails = ({data,orgId})=>{
                </div>
             </div> 
             {showDocuments && <div className={styles.hr}/>}
-            <div> { showDocuments && <Documents/> } </div>               
+            <div className={styles.documents}> { showDocuments && <Documents data={data}/> } </div>               
         </div>
         {/* <POC/> */}
 
