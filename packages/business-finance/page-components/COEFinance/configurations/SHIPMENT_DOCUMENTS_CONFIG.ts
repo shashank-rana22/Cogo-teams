@@ -5,41 +5,45 @@
 	fields             : [
         {
 			label: 'Document type',
-            key: 'documentType',
+            key: 'document_type',
 			span: 1.5,
+			func: 'DocumentTypeFunc'
 		},
         {
 			label: 'Uploaded by',
-            key: 'uploadedBy',
+            key: 'uploaded_by_user.name',
 			span: 1.5,
 		},
         {
 			label: 'Uploaded on',
-            key: 'uploadedOn',
+            key: 'uploaded_at',
 			span: 1.5,
+			func: 'UploadedOnFunc'
 		},
         {
 			label: 'Source',
-            key: 'source',
+            key: 'uploaded_by_org.business_name',
 			span: 1.5,
 		},
         {
 			label: 'Service',
-            key: 'service',
+            key: 'service_type',
 			span: 1.5,
 		},
         {
 			label: 'Document Status',
-            key: 'documentStatus',
+            key: 'state',
 			span: 1.5,
 		},
         {
             key: 'view',
 			span: 0.5,
+			func: 'viewFunc'
 		},
         {
             key: 'download',
 			span: 0.5,
+			func: 'downloadFunc'
 		},
 			],
 };

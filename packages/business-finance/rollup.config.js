@@ -3,7 +3,7 @@ import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import del from 'rollup-plugin-delete';
-import typescript from 'rollup-plugin-typescript2';
+import { swc } from 'rollup-plugin-swc3';
 
 export default ({ watch }) => defineConfig({
 	input: {
@@ -31,10 +31,12 @@ export default ({ watch }) => defineConfig({
 		...(watch ? [] : [del({ targets: 'dist/*' })]),
 		nodeResolve(),
 		commonJs(),
-		typescript({
-			useTsconfigDeclarationDir : true,
-			tsconfig                  : 'tsconfig.json',
-			tsconfigOverride          : { compilerOptions: { declaration: true, declarationDir: 'dist/types' } },
+		swc({
+			include  : /\.[jt]sx?$/,
+			exclude  : /node_modules/,
+			tsconfig : 'tsconfig.json',
+			jsc      : {},
+			minify   : true,
 		}),
 		json(),
 	],

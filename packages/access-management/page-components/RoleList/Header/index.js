@@ -18,17 +18,6 @@ function Header({
 			/>
 
 			<div className={styles.role_group}>
-				<Pills
-					className={styles.pills}
-					onChange={(val) => setStakeHolderType(val[0])}
-					value={stakeHolderType}
-					list={[
-						{ label: 'All Roles', value: 'all' },
-						{ label: 'Cogoport', value: 'cogoport' },
-						{ label: 'Channel Partner', value: 'channel_partner' },
-						{ label: 'Customer', value: 'customer' },
-					]}
-				/>
 				<Button
 					id="rnp_role_list_create_new_role_button"
 					onClick={() => onChangeShowCreateRoleModal(true)}
