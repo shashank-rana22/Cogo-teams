@@ -20,7 +20,7 @@ function RfqEnquiries() {
 		<>
 			{' '}
 			{!rfq ? (
-				<div>
+				<div className={styles.rfq}>
 					<div className={styles.heading}>RFQ (Rate For Quotation)</div>
 					<div className={styles.line} />
 					<div className={styles.body}>

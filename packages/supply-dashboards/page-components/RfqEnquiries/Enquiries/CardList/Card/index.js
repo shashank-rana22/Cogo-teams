@@ -11,7 +11,7 @@ function Card({ item, selectedCard, setSelectedCard }) {
 		>
 			<Header item={item} />
 			<div className={styles.line} />
-			<Body item={item} />
+			<Body item={item?.detail} />
 		</div>
 	);
 }

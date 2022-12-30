@@ -29,8 +29,12 @@
 }
 
 .filter {
-	width: 489px;
+	width: 289px;
 	padding-bottom: 4px;
 	margin-top: 8px;
 	background: #fff;
+}
+
+.rfq {
+	font-family: Poppins;
 }

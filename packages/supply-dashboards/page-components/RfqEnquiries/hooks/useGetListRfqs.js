@@ -7,7 +7,7 @@ const useGetListRfqs = () => {
 	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 
 	const [{ loading: apiLoading }, trigger] = useRequest({
-		method : 'get',
+		method : 'GET',
 		url    : '/list_rfqs',
 		scope,
 	}, { manual: false });
@@ -23,10 +23,10 @@ const useGetListRfqs = () => {
 		return trigger({
 			params: {
 				filters: {
+					relevent_supply_agent : user_profile?.id,
 					negotiation_status    : 'awaiting_responses',
 					...(filters || {}),
 					service_type          : undefined,
-					relevent_supply_agent : user_profile?.id,
 				},
 				created_by_user_details_required : true,
 				page                             : currentPage,

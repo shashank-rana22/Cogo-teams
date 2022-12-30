@@ -21,6 +21,7 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
+    "@fontsource/poppins": "^4.5.10",
     "swr": "^2.0.0"
   },
   "devDependencies": {

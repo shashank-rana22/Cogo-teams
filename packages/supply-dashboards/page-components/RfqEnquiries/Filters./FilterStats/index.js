@@ -93,11 +93,13 @@ function FilterStats({ filters, hookSetters }) {
 				<Checkbox
 					className={styles.checkbox}
 					label="Expiring in 20 days"
+					checked={filters?.expires_in === '20'}
 					onChange={() => handleOnChangeCheckbox('20', 'expires_in')}
 				/>
 				<Checkbox
 					className={styles.checkbox}
 					label="Expiring in 8 days"
+					checked={filters?.expires_in === '8'}
 					onChange={() => handleOnChangeCheckbox('8', 'expires_in')}
 				/>
 			</div>

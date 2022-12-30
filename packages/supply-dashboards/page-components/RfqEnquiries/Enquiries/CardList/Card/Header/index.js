@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header({ item }) {
-	const service = item?.service_type.split('_')[0];
+	const service = item?.detail?.service_type.split('_')[0];
 	const inco_term_mapping = {
 		cif : 'export',
 		cfr : 'export',
@@ -19,7 +19,7 @@ function Header({ item }) {
 		fca : 'import',
 		fas : 'import',
 	};
-	const trade_type = startCase(inco_term_mapping[item?.inco_term]);
+	const trade_type = startCase(inco_term_mapping[item?.detail?.inco_term]);
 	return (
 		<div className={styles.heading}>
 			<div className={styles.service}>
