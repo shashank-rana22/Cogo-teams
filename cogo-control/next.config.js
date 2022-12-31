@@ -2,6 +2,11 @@
 const path = require('path');
 
 const loadEnvConfig = require('@cogoport/core/helpers/load-env');
+// eslint-disable-next-line import/order
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true',
+});
+
 // eslint-disable-next-line
 const fs = require('fs-extra');
 
@@ -17,7 +22,7 @@ const modulesToTranspile = loadCogoModules();
 
 const withTM = require('next-transpile-modules')(modulesToTranspile);
 
-module.exports = withTM({
+module.exports = withBundleAnalyzer(withTM({
 	env             : { ...loadEnvConfig.parsed },
 	reactStrictMode : true,
 	swcMinify       : true,
@@ -29,4 +34,4 @@ module.exports = withTM({
 		});
 		return config;
 	},
-}, []);
+}, []));
