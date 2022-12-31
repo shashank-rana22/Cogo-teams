@@ -12,21 +12,19 @@ const fs = require('fs-extra');
 
 const loadCogoModules = () => {
 	const rootDirectory = path.join(__dirname, './node_modules/@cogoport');
-	const cogoModules = fs
-		.readdirSync(rootDirectory)
+	const cogoModules = fs.readdirSync(rootDirectory)
 		.map((file) => `@cogoport/${file}`);
 	return cogoModules;
 };
 
 const modulesToTranspile = loadCogoModules();
 
-const withTM = require('next-transpile-modules')(modulesToTranspile);
-
-module.exports = withBundleAnalyzer(withTM({
-	env             : { ...loadEnvConfig.parsed },
-	reactStrictMode : true,
-	swcMinify       : true,
-	webpack         : (config) => {
+module.exports = withBundleAnalyzer({
+	env               : { ...loadEnvConfig.parsed },
+	reactStrictMode   : true,
+	swcMinify         : true,
+	transpilePackages : modulesToTranspile,
+	webpack           : (config) => {
 		const newConfig = { ...config };
 		newConfig.module.rules.push({
 			test : /\.svg$/i,
@@ -34,4 +32,4 @@ module.exports = withBundleAnalyzer(withTM({
 		});
 		return config;
 	},
-}, []));
+});

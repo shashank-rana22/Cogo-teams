@@ -7,8 +7,5 @@
   "module": "index.js",
   "dependencies": {
     "react": "18.2.0"
-  },
-  "devDependencies": {
-    "next-transpile-modules": "^10.0.0"
   }
 }
