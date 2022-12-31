@@ -48,11 +48,9 @@
 	margin-right: 10px;
 	font-weight: 500;
 	line-height: 16px;
-	
 	text-transform: capitalize;
 	cursor: pointer;
 	background-color: rgb(255 255 255);
-
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
@@ -74,7 +72,6 @@
 	color: rgb(255 255 255);
 	letter-spacing: 0.04em;
 	white-space: nowrap;
-
 	border-radius: 4px;
 	outline: none;
 }
