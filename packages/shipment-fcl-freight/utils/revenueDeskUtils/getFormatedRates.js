@@ -38,7 +38,7 @@ const getFormatedRates = (type, data) => {
 			rowData.buy_price = rate;
 			rowData.currency = currency;
 			rowData.is_rate_expired = is_rate_expired;
-			rowData.via_route = element?.destination_main_port?.name;
+			rowData.via_route = element.destination_main_port?.name;
 			rowData.schedule_type = schedule_type;
 			rowData.allocation_ratio = '_ _ _';
 			rowData.fullfillment_ratio = '_ _ _';

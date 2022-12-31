@@ -19,7 +19,7 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 	return (
 		<div className={styles.container}>
 			{loading ? <Loader height="20px" /> : null}
-			{!service_charges?.length && !loading ? (
+			{!service_charges.length && !loading ? (
 				<EmptyState showContent={EmptyContent} />
 			) : null}
 

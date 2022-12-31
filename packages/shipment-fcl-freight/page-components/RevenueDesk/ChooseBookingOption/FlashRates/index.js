@@ -72,7 +72,7 @@ function FlashRates({
 		<div>
 			<div className={styles.heading}>Supplier Booking Options</div>
 
-			{rateCardObj?.map((item) => (
+			{(rateCardObj || {}).map((item) => (
 				<FlashRateCard
 					expanded={expanded}
 					prefrence_key={item.prefrence_key}

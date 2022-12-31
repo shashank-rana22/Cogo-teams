@@ -113,9 +113,9 @@ function FlashRateCard(allprops) {
 					className={styles.add_more}
 					onClick={() => setShowAll(!showAll)}
 				>
-					{currentData?.length > min && !expanded ? (
+					{currentData.length > min && !expanded ? (
 						<span>
-							{showAll && currentData?.length
+							{showAll && currentData.length
 								? 'See Less' : 'See More'}
 
 						</span>
