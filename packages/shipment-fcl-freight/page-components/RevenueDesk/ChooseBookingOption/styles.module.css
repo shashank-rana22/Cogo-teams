@@ -20,4 +20,5 @@
 	margin-left: -5px;
 	text-decoration: underline;
 	cursor: pointer;
+	border: 1px solid #ee3124 !important;
 }
