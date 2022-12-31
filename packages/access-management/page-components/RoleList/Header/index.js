@@ -1,4 +1,4 @@
-import { Button, Pills } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React from 'react';
 
 import Heading from '../../../common/Heading';
