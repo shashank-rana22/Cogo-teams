@@ -12,7 +12,11 @@ const useGetRfqSearches = ({ rfq } = {}) => {
 	const [{ loading }, refetch] = useRequest({
 		method : 'GET',
 		url    : '/list_rfq_searches',
-		params : { filters: { rfq_id: rfq?.source_id }, page, service_data_required: true },
+		params : {
+			filters               : { rfq_id: rfq?.source_id },
+			page,
+			service_data_required : true,
+		},
 	}, { manual: false });
 
 	useEffect(() => {

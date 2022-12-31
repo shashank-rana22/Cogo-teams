@@ -1,0 +1,19 @@
+.row {
+	display: flex;
+	width: 100%;
+}
+
+.fieldarray {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 4px;
+}
+
+.child {
+	width: 100%;
+}
+
+.element {
+	padding: 4px;
+}

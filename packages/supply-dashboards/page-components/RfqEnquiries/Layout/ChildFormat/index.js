@@ -3,12 +3,12 @@ import { useFieldArray } from '@cogoport/forms';
 import React from 'react';
 
 import Child from './child';
+import styles from './styles.module.css';
 
 function FieldArray({
 	name,
 	control,
 	controls,
-	error,
 	showElements,
 	buttonText,
 	showButtons = true,
@@ -26,7 +26,7 @@ function FieldArray({
 	});
 
 	return (
-		<div>
+		<div className={styles.child}>
 			{fields.map((field, index) => (
 				<Child
 					{...rest}
@@ -37,19 +37,25 @@ function FieldArray({
 					controls={controls}
 					name={name}
 					remove={remove}
-					error={error?.[index]}
 					showElements={showElements?.[index]}
 					disabled={disabled}
 				/>
 			))}
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				{showButtons && !disabled ? (
+					<Button
+						style={{ margin: '4px' }}
+						size="sm"
+						themeType="link"
+						onClick={() => append(childEmptyValues)}
+					>
+						+
+						{' '}
+						{buttonText}
+					</Button>
+				) : null}
+			</div>
 
-			{showButtons && !disabled ? (
-				<Button themeType="secondary" onClick={() => append(childEmptyValues)}>
-					+
-					{' '}
-					{buttonText}
-				</Button>
-			) : null}
 		</div>
 	);
 }
