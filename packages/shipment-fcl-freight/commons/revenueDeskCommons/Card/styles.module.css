@@ -37,6 +37,8 @@
 }
 
 .icon_wrapper {
+	box-shadow: 5px;
+	margin-top: 6px;
 	margin-right: 6px;
 	color: #ee3124;
 }

@@ -4,7 +4,7 @@
 	align-items: start;
 	height: fit-content;
 	padding: 15px 10px;
-	background: #fffce8;
+	background: #fff;
 }
 
 .detail_left {
@@ -64,7 +64,7 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #ee3124;
-	background: #fffce8;
+	background: #fff;
 }
 
 .details_balance {
@@ -90,4 +90,5 @@
 
 .quotation_details {
 	display: flex;
+	padding: 10px;
 }

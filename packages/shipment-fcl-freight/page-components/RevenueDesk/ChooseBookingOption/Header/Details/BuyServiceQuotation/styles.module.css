@@ -1,8 +1,8 @@
 .container {
 	width: 50%;
-	padding-left: 4px;
+	margin: 5px;
 	background: #f9f9f9;
-	border: 2px solid #000;
+	border: 2px solid #e40e2d;
 }
 
 .heading {
