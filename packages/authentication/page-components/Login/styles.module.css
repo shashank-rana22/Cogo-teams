@@ -9,6 +9,7 @@
 
 	@media (max-width: 768px) {
 		align-items: flex-start;
+		height: unset;
 	}
 }
 
@@ -29,7 +30,7 @@
 	box-shadow: 0 0 44px rgb(98 127 172 / 20%);
 
 	@media (max-width: 768px) {
-		margin-top: 20px;
+		margin: 20px 0;
 	}
 }
 
