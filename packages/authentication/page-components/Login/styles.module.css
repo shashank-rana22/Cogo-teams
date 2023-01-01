@@ -6,6 +6,10 @@
 	height: 100vh;
 	background-color: #f8f2e7;
 	background-size: cover;
+
+	@media (max-width: 768px) {
+		align-items: flex-start;
+	}
 }
 
 .logo {
@@ -23,26 +27,10 @@
 	background: #fff;
 	border-radius: 12px;
 	box-shadow: 0 0 44px rgb(98 127 172 / 20%);
-}
 
-.heading {
-	padding-top: 48px;
-	font-size: 56px;
-	font-weight: 900;
-	color: black;
-	letter-spacing: 4px;
-}
-
-.sub_heading {
-	margin: 0;
-	margin-top: -12px;
-	margin-bottom: 15px;
-	font-size: 20px;
-	font-weight: bold;
-	line-height: 28px;
-	color: #000;
-	text-align: center;
-	text-transform: uppercase;
+	@media (max-width: 768px) {
+		margin-top: 20px;
+	}
 }
 
 .input_container {
@@ -50,10 +38,6 @@
 	flex-direction: column;
 	width: 100%;
 	margin-top: 20px;
-}
-
-.label {
-	color: #221f20;
 }
 
 .input_label {
@@ -70,11 +54,6 @@
 
 .password_container {
 	border-radius: 5px;
-}
-
-.show {
-	min-width: none;
-	height: 30px !important;
 }
 
 .submit_button {
