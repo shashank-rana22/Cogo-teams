@@ -67,7 +67,7 @@ const navigationMappings = {
 		main_apis : ['list_shipments'],
 		options   : [
 			{
-				key       : 'coe-fcl_booking_note_desk',
+				key       : 'coe-booking_note_desk',
 				title     : 'Booking Desk',
 				href      : '/booking-desk/fcl-freight',
 				as        : '/booking-desk/fcl-freight',

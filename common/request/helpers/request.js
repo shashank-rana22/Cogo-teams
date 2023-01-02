@@ -24,9 +24,9 @@ request.interceptors.request.use((oldConfig) => {
 		...oldConfig,
 		paramsSerializer : { serialize: customSerializer },
 		headers          : {
-			authorizationscope      : 'partner',
-			authorization           : `Bearer: ${token}`,
-			authorizationparameters : 'coe-booking_note_desk:across_all',
+			authorizationscope : 'partner',
+			authorization      : `Bearer: ${token}`,
+			authorizationparameters,
 		},
 	};
 });
