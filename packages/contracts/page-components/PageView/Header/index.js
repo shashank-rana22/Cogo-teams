@@ -1,11 +1,17 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 
-import TABS_MAPPING from '../../../confifurations/tabs';
+import TABS_MAPPING from '../../../configurations/tabs';
 
-function Header({ activeTab, setActiveTab }) {
+function Header({ filters, setFilters }) {
 	return (
 		<div>
-			<Tabs activeTab={activeTab} onChange={setActiveTab} id="locations_tab_view">
+			<Tabs
+				activeTab={filters?.status}
+				onChange={(val) => {
+					setFilters({ ...filters, status: val });
+				}}
+				id="contracts_tab_view"
+			>
 				{TABS_MAPPING.map(({ label = '', value = '' }) => <TabPanel name={value} title={label} />)}
 			</Tabs>
 		</div>

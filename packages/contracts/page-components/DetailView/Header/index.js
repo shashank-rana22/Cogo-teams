@@ -3,7 +3,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import Stats from './Stats';
 import styles from './styles.module.css';
 
-function Header({ setShowDetail }) {
+function Header({ setShowDetail, data }) {
 	return (
 		<div>
 			<div className={styles.heading}>
@@ -11,12 +11,12 @@ function Header({ setShowDetail }) {
 					style={{ cursor: 'pointer' }}
 					onClick={() => { setShowDetail(null); }}
 				/>
-				<div>Back to Pending Jobs</div>
+				<div className={styles.head}>Back to Contracts</div>
 			</div>
 			<div className={styles.contract}>
 				Contract Details
 			</div>
-			<Stats />
+			<Stats data={data} />
 		</div>
 	);
 }

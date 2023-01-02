@@ -2,28 +2,28 @@ import PortPair from '../../../PageView/List/Card/PortPair';
 
 import styles from './styles.module.css';
 
-function SideBar() {
+function SideBar({ data, activePair, setActivePair }) {
+	const handlePortChange = (val) => {
+		if (val?.uniqueId !== activePair?.uniqueId) {
+			setActivePair(val);
+		}
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				Port Pairs Requested
 			</div>
-			<div className={`${styles.port_pair_active}`}>
-				<PortPair />
-				<div className={styles.line} />
-			</div>
-			<div className={`${styles.port_pair}`}>
-				<PortPair />
-				<div className={styles.line} />
-			</div>
-			<div className={`${styles.port_pair}`}>
-				<PortPair />
-				<div className={styles.line} />
-			</div>
-			<div className={`${styles.port_pair}`}>
-				<PortPair />
-				<div className={styles.line} />
-			</div>
+			{data?.map((portPair) => (
+				<div
+					className={activePair?.uniqueId === `${portPair?.origin_port_id} ${portPair?.destination_port_id}`
+						? styles.port_pair_active : ''}
+				>
+					<div className={styles.pair}>
+						<PortPair portPair={portPair} handlePortChange={handlePortChange} detailView />
+						<div className={styles.line} />
+					</div>
+				</div>
+			))}
 		</div>
 	);
 }
