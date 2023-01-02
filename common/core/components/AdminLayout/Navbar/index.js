@@ -15,6 +15,7 @@ function Navbar({
 	className,
 	style,
 	nav = [],
+	mobileShow = false,
 }) {
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
@@ -35,13 +36,13 @@ function Navbar({
 	return (
 		<div
 			style={style}
-			className={cl`${styles.container}${className}`}
+			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
 		>
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={() => setResetSubnavs(false)}
 			>
-				<div className={styles.bg_nav} />
+				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img

@@ -13,6 +13,7 @@ function Layout({ children, layout }) {
 	return (
 		<AdminLayout
 			showNavbar
+			showTopbar
 			navbar={navigationMappings}
 		>
 			<div style={{ margin: 0, padding: '24px 20px' }}>{children}</div>

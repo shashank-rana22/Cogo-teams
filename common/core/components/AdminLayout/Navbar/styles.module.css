@@ -138,8 +138,6 @@
 }
 
 .icon {
-	position: absolute;
-	right: 20px;
 	width: 10px !important;
 	height: 10px !important;
 	transform: rotate(-90deg);
@@ -174,4 +172,28 @@
 			transform: translate3d(0, 0, 0);
 		}
 	}
+}
+
+.mobile_container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: var(--layout-navbar);
+	height: calc(100vh - var(--layout-topbar));
+	padding: 16px;
+	will-change: width;
+	transition: width 0.5s ease;
+}
+
+.mobile_bg_nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--layout-navbar);
+	height: 100vh;
+	background-color: white;
+	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 25%));
+	transition: transform 0.5s ease;
+	will-change: transform;
+	transform: translate3d(0, 0, 0) !important;
 }
