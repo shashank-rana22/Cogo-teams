@@ -22,7 +22,7 @@
 .active{
   background-color: #FFFAEB !important;
   color: #ED3726 !important;
-  padding: 5px;
+  padding: 3px 10px;
   border: 1px solid #ED3726 !important;
   border-radius: 8px;
   cursor: pointer;
@@ -37,4 +37,5 @@
   border-radius: 8px;
   border: 1px solid #333333 !important;
   cursor: pointer;
+  padding: 3px 10px;
 }

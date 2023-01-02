@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.165",
+    "@cogoport/components": "^1.0.198",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/next": "workspace:^0.1.0",

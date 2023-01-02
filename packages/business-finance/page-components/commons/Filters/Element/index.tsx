@@ -53,7 +53,7 @@ const tagClick=(val:Options)=>{
 					<div className={styles.flex}>
 					{rest?.options?.map((val)=>(
 					<div style={{margin:'5px'}} onClick={()=>tagClick(val)}>
-							<Tags themeType="yellow" size="md" className={val.value===filters[name as keyof typeof filters]?styles.active:styles.normal} >{val.label}</Tags>
+							<div className={val.value===filters[name as keyof typeof filters]?styles.active:styles.normal} >{val.label}</div>
 					</div>))}
 					</div>
 				);
