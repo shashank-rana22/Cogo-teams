@@ -5,20 +5,10 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function CardHeader({ data = {} }) {
-	const tradeType = data?.trade_type;
+	const tradeType = data.trade_type;
 
 	return (
 		<div className={styles.container}>
-			{data?.is_cogo_assured && (
-				<div className={styles.cogo_assured}>
-					<div className={styles.icon_wrapper}>
-						<IcCCogoassured />
-					</div>
-
-					<div className={styles.text}>Cogoport Assured</div>
-				</div>
-			)}
-
 			{tradeType ? (
 				tradeType === 'export' ? (
 					<p className={(`${styles.trade_type} ${styles.yellow}`)}>
@@ -37,7 +27,17 @@ function CardHeader({ data = {} }) {
 				<p className={(`${styles.trade_type} ${styles.customer}`)}>Channel Partner</p>
 			) : null}
 
-			{data?.source ? (
+			{data.is_cogo_assured && (
+				<div className={styles.cogo_assured}>
+					<div className={styles.icon_wrapper}>
+						<IcCCogoassured />
+					</div>
+
+					<div className={styles.text}>Cogoport Assured</div>
+				</div>
+			)}
+
+			{data.source ? (
 				<p className={styles.source}>
 					{data.source === 'direct'
 						? 'Sell Without Buy'

@@ -1,0 +1,17 @@
+.button_div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 22px;
+}
+
+.button_text {
+	width: 150px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #828282;
+	text-align: center;
+	cursor: pointer;
+	background-color: white;
+	border: none;
+}

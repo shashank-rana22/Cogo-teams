@@ -45,7 +45,7 @@ function ShipmentFilters({
 
 	const handleShipmentChange = (val) => {
 		if (!visibleTabs.includes(activeTab)) {
-			setActiveTab(visibleTabs[0]?.name);
+			setActiveTab(visibleTabs[0].name);
 		}
 
 		setCurrentShipment(val);

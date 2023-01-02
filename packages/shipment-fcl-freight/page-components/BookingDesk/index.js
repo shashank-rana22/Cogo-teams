@@ -22,7 +22,7 @@ function BookingDesk() {
 		filters,
 		page,
 		hookSetters,
-		list: { total, data },
+		list: { total, data = {} },
 	} = useListShipments();
 
 	const handleRender = () => {
@@ -33,7 +33,7 @@ function BookingDesk() {
 				</div>
 			);
 		}
-		if (!loading && data?.length === 0) {
+		if (!loading && data.length === 0) {
 			return (
 				<EmptyState />
 			);

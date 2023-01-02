@@ -3,20 +3,20 @@ import getConfigs from '../configurations/get-configs';
 import getLocationShipmentDetails from './getLocationShipmentDetail';
 import isSingleLocation from './isSingleLocation';
 
-const getPortConfigs = (data) => {
-	if (data?.search_type) {
+const getPortConfigs = (data = {}) => {
+	if (data.search_type) {
 		const origin = getLocationShipmentDetails({}, data, 'origin');
 
-		const destination = !isSingleLocation(data?.search_type)
+		const destination = !isSingleLocation(data.search_type)
 			? getLocationShipmentDetails({}, data, 'destination')
 			: null;
 
 		return { origin, destination };
 	}
 
-	if (data?.service_type) {
+	if (data.service_type) {
 		const { service_type } = data;
-		const { routeInfo } = getConfigs(data?.service_type) || {};
+		const { routeInfo } = getConfigs(data.service_type) || {};
 
 		const isSingleShipmentLocation =			(service_type || '').includes('customs')
 			|| (service_type || '').includes('cfs')

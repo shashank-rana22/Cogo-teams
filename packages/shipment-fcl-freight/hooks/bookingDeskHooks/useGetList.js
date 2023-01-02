@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 
 const useListShipments = () => {
 	const [loading, setLoading] = useState(true);
-
 	const [filters, setFilters] = useState({ page: 1, highlight: undefined });
 	const [list, setList] = useState({
 		data         : [],
@@ -49,7 +48,7 @@ const useListShipments = () => {
 			}
 		} catch (err) {
 			setLoading(false);
-
+			if (err?.message === 'canceled') { return; }
 			setList(() => ({
 				data         : [],
 				total        : 0,
@@ -57,7 +56,6 @@ const useListShipments = () => {
 				fullResponse : {},
 				reverted     : 0,
 			}));
-
 			Toast.error('Something went wrong!');
 		}
 	};

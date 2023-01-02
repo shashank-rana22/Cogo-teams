@@ -7,6 +7,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 const routeConfig = {
 	...homeConfig,
 	...businessConfig,
+	...coeConfig,
 	...localConfig,
 	...rolesAndPermissions,
 	...coeConfig,

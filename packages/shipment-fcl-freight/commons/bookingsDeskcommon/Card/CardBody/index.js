@@ -13,12 +13,12 @@ import styles from './styles.module.css';
 function CardBody({ data = {} }) {
 	const { origin, destination } = getPortConfigs({
 		...data,
-		search_type: data?.shipment_type || {},
+		search_type: data.shipment_type || {},
 	});
 
-	const { serviceIcon, serviceText } = getServiceInfo(data?.shipment_type);
+	const { serviceIcon, serviceText } = getServiceInfo(data.shipment_type);
 
-	const service = `${data?.shipment_type}_services`;
+	const service = `${data.shipment_type}_services`;
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +26,7 @@ function CardBody({ data = {} }) {
 			<div className={styles.importer_exporter_details}>
 				<p>
 					Shipment ID #
-					{data?.serial_id || data?.shipment_serial_id}
+					{data.serial_id || data.shipment_serial_id}
 				</p>
 
 				<Tooltip
@@ -34,12 +34,12 @@ function CardBody({ data = {} }) {
 					placement="bottom"
 					content={(
 						<span style={{ fontSize: 10 }}>
-							{data?.service_provider?.business_name || ''}
+							{data.service_provider?.business_name || ''}
 						</span>
 					)}
 				>
 					<div className={styles.service_provider}>
-						{data?.service_provider?.business_name || ''}
+						{data.service_provider?.business_name || ''}
 					</div>
 				</Tooltip>
 			</div>
@@ -60,34 +60,34 @@ function CardBody({ data = {} }) {
 						content={(
 							<div style={{ fontSize: '10px' }}>
 								(
-								{origin?.port_code}
+								{origin.port_code}
 								)
-								{origin?.country}
+								{origin.country}
 							</div>
 						)}
 						placement="top"
 					>
 						<div className={styles.country}>
 							(
-							{origin?.port_code}
+							{origin.port_code}
 							)
 							{' '}
-							{origin?.country}
+							{origin.country}
 						</div>
 					</Tooltip>
 
 					<Tooltip
 						theme="light"
 						placement="bottom"
-						content={<div style={{ fontSize: '10px' }}>{origin?.name}</div>}
+						content={<div style={{ fontSize: '10px' }}>{origin.name}</div>}
 					>
-						<div className={styles.port}>{origin?.name}</div>
+						<div className={styles.port}>{origin.name}</div>
 					</Tooltip>
 					<div className={(`${styles.short_name} ${styles.eta_etd}`)}>
 						ETD:
 						{' '}
 						{format(
-							data?.schedule_departure || data?.selected_schedule_departure,
+							data.schedule_departure || data.selected_schedule_departure,
 							'dd MMM yyyy',
 						)}
 					</div>
@@ -101,19 +101,19 @@ function CardBody({ data = {} }) {
 						content={(
 							<div style={{ fontSize: '10px' }}>
 								(
-								{destination?.port_code}
+								{destination.port_code}
 								)
-								{destination?.country}
+								{destination.country}
 							</div>
 						)}
 						placement="top"
 					>
 						<div className={styles.country}>
 							(
-							{destination?.port_code}
+							{destination.port_code}
 							)
 							{' '}
-							{destination?.country}
+							{destination.country}
 						</div>
 					</Tooltip>
 
@@ -121,16 +121,16 @@ function CardBody({ data = {} }) {
 						theme="light"
 						placement="bottom"
 						content={
-							<div style={{ fontSize: '10px' }}>{destination?.name}</div>
+							<div style={{ fontSize: '10px' }}>{destination.name}</div>
 						}
 					>
-						<div className={styles.port}>{destination?.name}</div>
+						<div className={styles.port}>{destination.name}</div>
 					</Tooltip>
 					<div className={(`${styles.short_name} ${styles.eta_etd}`)}>
 						ETA:
 						{' '}
 						{format(
-							data?.schedule_arrival || data?.selected_schedule_arrival,
+							data.schedule_arrival || data.selected_schedule_arrival,
 							'dd MMM yyyy',
 						)}
 					</div>
@@ -140,14 +140,14 @@ function CardBody({ data = {} }) {
 			<div className={styles.vertical_line} />
 
 			<div className={styles.container_details}>
-				{data[service]?.length === 1 ? (
+				{data[service].length === 1 ? (
 					<div className={styles.multi_service}>
 						<CargoDetailsPills detail={data || {}} />
 
 						<MultiServiceDetails mainServices={data[service]}>
 							+
 							{' '}
-							{(data[service]?.length || 1) - 1}
+							{(data[service].length || 1) - 1}
 							{' '}
 							Details
 						</MultiServiceDetails>
