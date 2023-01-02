@@ -1,5 +1,7 @@
-import { AdminLayout, navigationMappings } from '@cogoport/layout';
+import { navigationMappings } from '@cogoport/navigation-configs';
 import React from 'react';
+
+import AdminLayout from '../AdminLayout';
 
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
@@ -11,14 +13,6 @@ function Layout({ children, layout }) {
 	return (
 		<AdminLayout
 			showNavbar
-			// topbar={{
-			// 	logo: <img
-			// 		alt="cogoport-logo"
-			// 		height="32px"
-			// 		width="132px"
-			// 		src="https://cdn.cogoport.io/cms-prod/vault/original/logo-cogoport-1.svg"
-			// 	/>,
-			// }}
 			navbar={navigationMappings}
 		>
 			<div style={{ margin: 0, padding: '24px 20px' }}>{children}</div>

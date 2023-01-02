@@ -1,4 +1,4 @@
-import navigationMappings from '@cogoport/layout/navigation-mappings';
+import navigationMappings from '@cogoport/navigation-configs/navigation-mappings';
 
 const getAllNavigations = () => {
 	const allNavs = [];

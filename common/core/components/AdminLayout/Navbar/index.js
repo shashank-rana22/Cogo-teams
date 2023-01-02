@@ -1,9 +1,10 @@
 import cl from '@cogoport/components/src/utils/classname-processor';
 import React, { useState } from 'react';
 
-import { LOGO } from '../../constants/logo';
+import { LOGO } from '../../../constants/logo';
 import Items from '../Items';
 
+import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 
 function Navbar({
@@ -12,6 +13,8 @@ function Navbar({
 	nav = [],
 }) {
 	const [resetSubnavs, setResetSubnavs] = useState(false);
+	const [show, setShow] = useState(false);
+
 	return (
 		<div
 			style={style}
@@ -30,6 +33,9 @@ function Navbar({
 							alt="Logo Cogoport"
 						/>
 					</div>
+
+					<ProfileManager resetSubnavs={resetSubnavs} />
+
 					<ul className={styles.list_container}>
 						{Object.keys(nav).map((item) => (
 							<Items key={item} item={nav[item]} resetSubnavs={resetSubnavs} />
