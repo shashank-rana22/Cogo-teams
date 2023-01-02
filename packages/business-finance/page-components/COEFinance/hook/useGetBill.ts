@@ -24,7 +24,7 @@ const useGetBill = (allParams = {}) => {
 		authorizationparameters: profile?.authorizationparameters,
 	}));
 
-	const [{ data, loading:apiLoading }, trigger] = useRequestBf(
+	const [{ loading:apiLoading }, trigger] = useRequestBf(
 		{
 			url     : `/purchase/bills/${params?.billId}`,
 			method  : 'get',
@@ -33,7 +33,7 @@ const useGetBill = (allParams = {}) => {
 		{ autoCancel: false },
 	);
 
-    const [{ data:paymentsData, loading:accPaymentLoading, error }, accPaymentTrigger] = useRequestBf(
+    const [{ data:paymentsData, loading:accPaymentLoading }, accPaymentTrigger] = useRequestBf(
 		{
 			url     : 'payments/accounts/org-stats',
 			method  : 'get',

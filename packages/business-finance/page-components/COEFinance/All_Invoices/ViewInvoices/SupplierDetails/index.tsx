@@ -2,9 +2,29 @@ import React  from "react";
 import { Tags } from "@cogoport/components";
 import {IcCFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
-const SupplierDetails =({data,paymentsData,accPaymentLoading})=>{
+
+interface SellerDetail {
+    organizationName?:string
+
+}
+interface DataProps {
+    sellerDetail?:SellerDetail
+}
+
+interface PaymentsData {
+    payables?:string
+    receivables?:string
+    ledgerCurrency?:string
+}
+interface SupplierDetailsProps {
+       data:DataProps
+       paymentsData?:PaymentsData
+       accPaymentLoading?:boolean
+
+}
+const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsProps)=>{
     
-    const {sellerDetail} = data || {}
+    const { sellerDetail } = data || [{}]
     const {payables,receivables,ledgerCurrency} = paymentsData || {}
     
     return(
