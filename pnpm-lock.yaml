@@ -39,6 +39,8 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.188
+      '@cogoport/components': ^1.0.174
+      '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/home': workspace:0.1.0
@@ -64,6 +66,8 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.188_j6lhi3hgh37lo4qhb7qouvcgr4
+      '@cogoport/components': 1.0.174_27ghnklenyaalfqdgsm7fqt7de
+      '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
       '@cogoport/home': link:../packages/home
