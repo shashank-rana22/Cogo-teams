@@ -1,0 +1,59 @@
+.financeAccepted {
+    background: #cdf7d4;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}
+
+.initiated {
+    background: #fcedbf;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}
+
+.accepted {
+    background: #cdf7d4;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}
+
+.financeRejected {
+    background: #f68b21;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}
+.void {
+    background: #fcedbf;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}
+.posted {
+    background: #cdf7d4;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}
+.coeRejected {
+    background: #f68b21;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    font-size: 12px;
+    color: #333333;
+    font-weight: 400;
+}

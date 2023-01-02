@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TabSelect from "../../../../../commons/TabSelect/index";
 import styles from "./styles.module.css";
-// import TabSelect from "../../commons/TabSelect/index";
 
 interface propsType {
     itemData: any;

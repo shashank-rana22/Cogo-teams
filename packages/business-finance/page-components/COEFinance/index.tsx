@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { TabPanel, Tabs } from "@cogoport/components";
 import styles from "./styles.module.css";
 import { useRouter } from "@cogoport/next";
-import { IcMAccountSettings } from '@cogoport/icons-react';
 import AllInvoices from "./All_Invoices/index";
 import MyResponsiveBar from "./Components/ResponsiveBar";
 import MyResponsiveLine from "./Components/Stream";
@@ -14,15 +13,7 @@ import SegmentedControl from "../commons/SegmentedControl";
 const CoeFinance=()=>{
     const { push, query } = useRouter();
     const [currentTab, setCurrentTab] = useState('');
-    const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
-
-    useEffect(()=>{
-        push(
-			'/business-finance/coe-finance/[active_tab]',
-			`/business-finance/coe-finance/${activeTab}`,
-		);
-    },[activeTab])
-    
+    const {view,active_tab}=query;
     const OPTIONS = [
 		{
 			label: 'Open Jobs',
@@ -34,6 +25,12 @@ const CoeFinance=()=>{
 		},
 	];
 
+    const handleTab=(activeTab:string) => {
+        push(
+            "/business-finance/coe-finance/[active_tab]",
+            `/business-finance/coe-finance/${activeTab}`
+        );
+    }
 
     return (
     <div>
@@ -41,7 +38,7 @@ const CoeFinance=()=>{
 
 			<h1>COE Finance</h1>
 		</div>
-    <Tabs activeTab={activeTab} onChange={setActiveTab}>
+    <Tabs activeTab={active_tab} onChange={handleTab}>
      
         <TabPanel className={styles.tab_panel_dashboard} name="dashboard" title="Dashboard" >
         <div className={styles.spacebetween}>
