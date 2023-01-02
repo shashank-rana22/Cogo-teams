@@ -12,8 +12,8 @@
     "common/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "deploy": "pnpm deploy",
+    "build": "node scripts/build-pages && turbo run build",
     "dev": "node scripts/build-pages && turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
@@ -28,7 +28,7 @@
     "@cogoport/eslint-config": "^1.0.18",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.5.1",
-    "eslint": "^8.30.0",
+    "eslint": "^8.31.0",
     "fs-extra": "^11.1.0",
     "postcss": "^8.4.20",
     "postcss-flexbugs-fixes": "^5.0.2",
