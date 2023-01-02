@@ -9,7 +9,7 @@ import RemoveTagConfirmation from './RemoveTagConfirmation/index';
 
 
 const InvoiceDetails =({data={},getBillRefetch})=>{
-    const {bill} = data ;
+    const {bill,remarks=[]} = data ;
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const {grandTotal} = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
@@ -97,7 +97,7 @@ const InvoiceDetails =({data={},getBillRefetch})=>{
                 </span>
                 </div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>Remark - The remarks from payables/S02</div>
+            <div className={styles.cardField}>Remarks - <span className={styles.remarks}>{remarks[0] || 'No Remarks'}</span></div>
         </div>
 
         {removeTag ? (

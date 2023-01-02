@@ -12,6 +12,7 @@ function Navbar({
 	mobileShow = false,
 }) {
 	const [resetSubnavs, setResetSubnavs] = useState(false);
+
 	return (
 		<nav
 			style={style}

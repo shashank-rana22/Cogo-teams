@@ -6,14 +6,15 @@ import ShipmentDetails from "./ShipmentDetails/index"
 import useGetBill from "../../hook/useGetBill"
 import InvoiceDetails from "./InvoiceDetails/index"
 const ViewInvoices =()=>{
-    const {query} = useRouter();
+    const {push, query} = useRouter();
+    const {billId,orgId,jobNumber}=query;
     const {
 		loading,
 		list: { fullResponse },
 		refetch: getBillRefetch,
 		accPaymentLoading,
 		paymentsData,
-	} = useGetBill({ billId: query?.billId, orgId: query?.orgId});
+	} = useGetBill({ billId:billId, orgId:orgId});
    
     return(
     <div>
@@ -30,6 +31,7 @@ const ViewInvoices =()=>{
         <ShipmentDetails 
         	data={fullResponse}
             orgId = {query?.orgId || ''}
+            jobNumber={jobNumber}
             />
   
 
