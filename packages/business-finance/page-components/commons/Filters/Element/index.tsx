@@ -1,4 +1,4 @@
-import {Input, Modal, Pills, Select, Tags, Tooltip, Datepicker} from '@cogoport/components';
+import {Input, Modal, Pill, Select, Tags, Tooltip, Datepicker} from '@cogoport/components';
 import React, { CSSProperties, useState } from 'react';
 import freightMapping  from '../../Constants/freight-mappings';
 import CostView from '../../costView/index';
@@ -9,7 +9,7 @@ import {IcMSearchlight} from '@cogoport/icons-react';
 
 interface ElementProps{
 	type?:string;
-	value?:string;
+	value?:string|Date;
 	className?:string;
 	url?:string;
 	href?:string;
@@ -57,7 +57,7 @@ const tagClick=(val:Options)=>{
 			case 'href':
 				return (
 					<div>
-						<div className={styles.urlContainer} onClick={() => setShow(true)}>{value}</div>
+						<div className={styles.urlContainer} onClick={() => setShow(true)}>{value as string}</div>
 						{show && href && (
 							<Modal
 								className="primary lg"
@@ -74,32 +74,34 @@ const tagClick=(val:Options)=>{
 				return (
 					<div>
 						<div className={styles.urlContainer} onClick={() => window.open(url, '_blank')}>
-							{value!.length > 15 ? (
+							{(value as string)!.length > 15 ? (
 								<Tooltip
 									interactive
 									placement="top"
-									content={value}
+									content={value as string}
 								>
-									<div className={styles.textDiv}>{`${value!.substring(0, 15)}...`}</div>
+									<div className={styles.textDiv}>{`${(value as string)!.substring(0, 15)}...`}</div>
 								</Tooltip>
 							) : (
-								<div className={styles.textDiv}>{value}</div>
+								<div className={styles.textDiv}>{value as string}</div>
 							)}
 						</div>
 					</div>
 				);
 			case 'pills':
 				return (
-					<Pills value={value} className={className} {...rest} />
-				);
+					<>
+					{rest?.options?.map((val)=>(<Pill size="sm" color="yellow" className={className}>{val.label}</Pill>))};
+					</>
+				)
 			case 'select':
 				return (
 					<div className={styles.select_container} style={{'--width':rest.selectWidth||'200px'} as CSSProperties }>
-					<Select value={value} className={className} options={rest.options||[]} {...rest}/>
+					<Select value={value as string} className={className} options={rest.options||[]} {...rest}/>
 					</div>
 				);
 			case 'input':
-				return <Input value={value} className={className} prefix={(
+				return <Input value={value as string} className={className} prefix={(
 					<IcMSearchlight
 						height={15}
 						width={15}
@@ -107,7 +109,7 @@ const tagClick=(val:Options)=>{
 				)} {...rest} />;
 			case 'datepicker':
 				return (
-					<Datepicker name="date" {...rest} />
+					<Datepicker name="date" value={value as Date} {...rest} />
 				);
 			case 'serviceType':
 				return (
@@ -118,7 +120,7 @@ const tagClick=(val:Options)=>{
 			case 'segmented':
 				return(
 					<SegmentedControl options={rest?.options as {label:string ,value:string, icon?: JSX.Element ,badge?:number}[] } 
-					activeTab={value||''} 
+					activeTab={value as string||''} 
 					setActiveTab={(val:string)=>{setFilters((p:object)=>({...p,[name]    : val}))}}
 					{...rest}
 					/>
@@ -127,7 +129,7 @@ const tagClick=(val:Options)=>{
 			default:
 				return (
 					<div className={className} {...rest}>
-						{value}
+						{value as string}
 					</div>
 				);
 		}
