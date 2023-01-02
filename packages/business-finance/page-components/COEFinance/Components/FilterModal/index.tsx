@@ -18,9 +18,7 @@ return (
 	<div className={styles.modal_container}>
     <Modal size="lg" placement="center" show={showModal} onClose={()=>{setShowModal(false)}}>
 			<Modal.Header title={(
-				<div className={styles.heading_container}>
-					FILTERS
-				</div>
+					"FILTERS"
 			)}
 			/>
 			<Modal.Body>

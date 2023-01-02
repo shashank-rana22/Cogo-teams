@@ -1,5 +1,5 @@
 import {Input, Modal, Pills, Select, Tags, Tooltip, Datepicker} from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import freightMapping  from '../../Constants/freight-mappings';
 import CostView from '../../costView/index';
 import styles from './styles.module.css'
@@ -32,9 +32,6 @@ const Element = ({
 	filters,
 	...rest
 }:ElementProps) => {
-
-	console.log(value,"value")
-
 
 const [show, setShow] = useState<boolean>(false);
 const {setFilters}=rest;
@@ -80,7 +77,6 @@ const tagClick=(val:Options)=>{
 							{value!.length > 15 ? (
 								<Tooltip
 									interactive
-									theme="light"
 									placement="top"
 									content={value}
 								>
@@ -98,8 +94,8 @@ const tagClick=(val:Options)=>{
 				);
 			case 'select':
 				return (
-					<div className={styles.select_container}>
-					<Select value={value} className={className} {...rest}/>
+					<div className={styles.select_container} style={{'--width':rest.selectWidth||'200px'} as CSSProperties }>
+					<Select value={value} className={className} options={rest.options||[]} {...rest}/>
 					</div>
 				);
 			case 'input':
@@ -111,7 +107,7 @@ const tagClick=(val:Options)=>{
 				)} {...rest} />;
 			case 'datepicker':
 				return (
-					<Datepicker name="date"  value={value} {...rest} />
+					<Datepicker name="date" {...rest} />
 				);
 			case 'serviceType':
 				return (

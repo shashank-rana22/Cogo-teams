@@ -30,6 +30,7 @@
 
 .select_container{
   padding-left: 5px;
+  width: var(--width);
 }
 
 .normal{

@@ -4,6 +4,7 @@ export const FILTERS =[
 			type: 'select',
 			placeholder: 'Geography',
 			className: 'primary md',
+            selectWidth:"200px",
 			hideSelectedOptions: false,
 			multiple: true,
 			isMulti: true,

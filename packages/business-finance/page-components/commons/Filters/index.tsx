@@ -9,7 +9,7 @@ interface FilterProps {
 	filters: object,
 	setFilters: (p:object) => void,
 	showClearBtn?:boolean,
-	clearFilters?:Function,
+	clearFilters?:()=>void,
 	types?:string,
 }
 
