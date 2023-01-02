@@ -24,7 +24,7 @@ const useGetBill = (allParams = {}) => {
         })
     );
 
-    const [{ data, loading: apiLoading }, trigger] = useRequestBf(
+    const [{ loading: apiLoading }, trigger] = useRequestBf(
         {
             url: `/purchase/bills/${params?.billId}`,
             method: "get",
@@ -34,7 +34,7 @@ const useGetBill = (allParams = {}) => {
     );
 
     const [
-        { data: paymentsData, loading: accPaymentLoading, error },
+        { data: paymentsData, loading: accPaymentLoading },
         accPaymentTrigger,
     ] = useRequestBf(
         {
@@ -45,13 +45,26 @@ const useGetBill = (allParams = {}) => {
         { autoCancel: false }
     );
 
-    const listApi = (restFilters: any) => {
-        return trigger({
-            params: {
-                jobNumber: params?.billNumber,
-                ...restFilters,
-            },
-        });
+    const [{ data, loading: apiLoading }, trigger] = useRequestBf(
+        {
+            url: `/purchase/bills/${params?.billId}`,
+            method: "get",
+            authKey: "get_purchase_bills_by_id",
+        },
+        { autoCancel: false }
+    );
+
+    const listApi = async (restFilters: any) => {
+        try {
+            return await trigger({
+                params: {
+                    jobNumber: params?.billNumber,
+                    ...restFilters,
+                },
+            });
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const handleAccPayments = async () => {

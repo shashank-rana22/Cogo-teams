@@ -36,7 +36,7 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 				{TABS_MAPPING.map(({ label = '', value = '' }) => <TabPanel name={value} title={label} />)}
 			</Tabs>
 
-			<section id="locations_list_view">
+			<section className={styles.list_view} id="locations_list_view">
 				<Header columns={columns} id="locations_list_header" />
 				{(list.data || []).map((item) => (
 					<List

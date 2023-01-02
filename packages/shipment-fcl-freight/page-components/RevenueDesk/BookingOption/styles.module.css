@@ -1,0 +1,49 @@
+.buttons_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 24px;
+}
+
+.buttons_container button {
+	color: black;
+}
+
+.existing_rates_container {
+	padding: 16px;
+	background: #fff;
+	border: 1px solid #ee3124;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+}
+
+.flash_rates_container {
+	padding: 20px;
+	margin-top: 16px;
+	background: #fff;
+	border: 1px solid #ee3124;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+}
+
+.flash_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 98%;
+}
+
+.flash_container button {
+	padding: 4px 12px;
+	font-size: 12px;
+	color: white;
+	text-transform: capitalize;
+	background-color: #393f70;
+}
+
+.flash_text {
+	margin: 8px 10px;
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #393f70;
+}

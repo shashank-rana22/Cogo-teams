@@ -9,7 +9,7 @@ import RemoveTagConfirmation from './RemoveTagConfirmation/index';
 
 
 const InvoiceDetails =({data={},getBillRefetch})=>{
-    const {bill} = data ;
+    const {bill,remarks=[]} = data ;
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const {grandTotal} = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
@@ -33,9 +33,9 @@ const InvoiceDetails =({data={},getBillRefetch})=>{
 	};
 
     const renderEditTag = (
-		<div>
+		<div className={styles.flexdiv}>
 			<div className={styles.cardField}>
-				<p>Tag - {displayTag}</p>
+				<div>{displayTag}</div>
 
 				{!isEmpty(data?.billAdditionalObject?.urgencyRemarks) &&
 				data?.billAdditionalObject?.urgencyTag === 'urgent' ? (
@@ -50,12 +50,12 @@ const InvoiceDetails =({data={},getBillRefetch})=>{
 				) : null}
 			</div >
 
-			<div>
-				<Button className="secondary sl" onClick={() => setRemoveTag(true)}>
+			<div className={styles.buttonContainer}>
+				<Button themeType="secondary" size="xs" onClick={() => setRemoveTag(true)}>
 					Remove Tag
 				</Button>
 
-				<Button className="secondary sl" onClick={() => setShowAddTag(true)}>
+				<Button themeType="secondary"  size="xs" onClick={() => setShowAddTag(true)}>
 					Edit Tag
 				</Button>
 			</div>
@@ -97,7 +97,7 @@ const InvoiceDetails =({data={},getBillRefetch})=>{
                 </span>
                 </div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>Remark - The remarks from payables/S02</div>
+            <div className={styles.cardField}>Remarks - <span className={styles.remarks}>{remarks[0] || 'No Remarks'}</span></div>
         </div>
 
         {removeTag ? (

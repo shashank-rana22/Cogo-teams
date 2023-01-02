@@ -10,7 +10,7 @@ export const PURCHASE_VIEW_CONFIG = {
 				key: 'billNumber',
 				type: 'href',
 			},
-			lowerKey: {
+			bottomKey: {
 				key: 'billType',
 				type: 'tags',
 				
@@ -24,7 +24,7 @@ export const PURCHASE_VIEW_CONFIG = {
 				key: 'jobNumber',
 				type: 'href',
 			},
-			lowerKey: {
+			bottomKey: {
 				key: 'serviceType',
 			},
 			func: 'renderFieldPair',

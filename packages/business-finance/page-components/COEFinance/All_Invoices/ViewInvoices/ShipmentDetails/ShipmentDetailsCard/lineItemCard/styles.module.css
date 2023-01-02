@@ -5,23 +5,17 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  padding: 24px;
+  padding: 24px 0px 0px 24px;
 }
 .rejected {
   cursor: pointer;
   display: flex;
 }
 .popoverRejected {
-  width: 125px;
   color: red;
-  position: absolute;
-  left: 88%;
-  top: 110%;
-  padding: 8px 12px;
   font-size: 14px;
   background: #fff;
-  border-radius: 4px;
-  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+  cursor: pointer;
 }
 .circle {
   border: 1px solid #ed3726;
@@ -32,8 +26,29 @@
 }
 .circleBig {
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 10px;
   padding: 3px;
   cursor: pointer;
+}
+.modalContainer {
+  padding: 24px;
+}
+.smallHr {
+  border: 1px solid #ed3726;
+  border-radius: 30px;
+  width: 25%;
+  margin: 8px 0px;
+}
+.mainHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 24px;
+}
+.headerDetail {
+  font-weight: 600;
+  display: flex;
+  color: #616161;
+  align-items: center;
 }
