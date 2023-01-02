@@ -1,4 +1,6 @@
+import { Input } from '@cogoport/components';
 import cl from '@cogoport/components/src/utils/classname-processor';
+import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -13,7 +15,6 @@ function Navbar({
 	nav = [],
 }) {
 	const [resetSubnavs, setResetSubnavs] = useState(false);
-	const [show, setShow] = useState(false);
 
 	return (
 		<div
@@ -35,6 +36,10 @@ function Navbar({
 					</div>
 
 					<ProfileManager resetSubnavs={resetSubnavs} />
+
+					<div className={styles.search_container}>
+						<Input className={styles.input_search} prefix={<IcMSearchdark width={16} height={16} />} />
+					</div>
 
 					<ul className={styles.list_container}>
 						{Object.keys(nav).map((item) => (

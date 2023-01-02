@@ -43,25 +43,47 @@
 		margin-right: 16px;
 	}
 
-	/*&:hover {*/
-	/*	background-color: #FEF199;*/
-	/*}*/
+	&:hover {
+		background-color: #fef199;
+	}
 
 	&:active {
 		color: var(--color-accent);
-		background-color: #FEF199;
+		background-color: #fef199;
 	}
 }
 
-.outer_container {
-	background-color:#FFFCE6
+.search_container {
+	padding: 4px;
+	margin: 10px 0;
 }
+
+.input_search:global(.ui_input_container) {
+	background-color: #fdebe9;
+	border: none;
+
+	svg {
+		margin-right: 14px;
+	}
+}
+
+.input_search:global(.ui_input_control) {
+	background-color: #fdebe9;
+}
+
+.input_search:global(.prefix) {
+}
+
+.outer_container {
+	background-color: #fffce6;
+}
+
 .active_item {
 	display: flex;
 	align-items: center;
 	padding: 8px 16px;
 	cursor: pointer;
-	background-color: #FEF199;
+	background-color: #fef199;
 	border-radius: 4px;
 	transition: background-color 0.1s linear, color 0.1s linear;
 	will-change: background-color;
