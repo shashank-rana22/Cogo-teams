@@ -6,6 +6,8 @@ import {
 	IcMFinanceCrm,
 	IcMFinanceDashboard,
 	IcMProductCodeMapping,
+	IcMFfcl,
+	IcMBldesk,
 } from '@cogoport/icons-react';
 
 import partner from './apis/partner-apis';
@@ -63,7 +65,7 @@ const navigationMappings = {
 		title     : 'Center of Excellence',
 		href      : '/coe',
 		as        : '/coe',
-		icon      : IcMBookingDesk,
+		icon      : IcMBldesk,
 		main_apis : ['list_shipments'],
 		options   : [
 			{
@@ -79,7 +81,7 @@ const navigationMappings = {
 				title     : 'FCL Revenue Desk',
 				href      : '/revenue-desk/fcl-freight',
 				as        : '/revenue-desk/fcl-freight',
-				icon      : IcMBookingDesk,
+				icon      : IcMFfcl,
 				main_apis : ['list_shipments'],
 			},
 		],
