@@ -29,6 +29,7 @@
 .tag{
     background-color: #CDF7D4 !important;
     padding: 5px !important;
+    border-radius: 8px;
 }
 
 .line{

@@ -30,7 +30,7 @@ const CostSheet = () => {
     <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]','/business-finance/coe-finance/all_invoices/shipment-view')}>Go Back</Button>
     <div className={styles.flexwidth}>
     <div>Status - </div>
-    <Tags themeType='green' className={styles.tag}>Operationally Closed</Tags>
+    <div  className={styles.tag}>Operationally Closed</div>
     <div className={styles.link} onClick={()=>{}}>Undo</div>
     <Button size="md" themeType="primary" onClick={()=>{}}>Close Financially</Button>
     </div>
@@ -44,14 +44,14 @@ const CostSheet = () => {
     <StatRect heading="Air Freight Service" expected='8.30%' actual='6.44%'/>
     </div>
     <DiscountRect heading='Discount Applied' statvalue='KAM - INR 30,000' statlabel='Revenue Desk - INR 30,000' />
-    <Accordion type="text" title={<span className={styles.label}>Documents <span className={styles.icon}><IcADocumentTemplates/></span></span>} style={{ backgroundColor:"#FFFFFF", 
+    <Accordion type="text" title={<span className={styles.label}>Documents <span className={styles.icon}><IcADocumentTemplates/></span></span> as unknown as string} style={{ backgroundColor:"#FFFFFF", 
     borderRadius:'8px', margin:"25px 0px",
     boxShadow:'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
 			condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
 			ligula, eget aliquam nunc nisl sit amet nisl. Nulla facilisi.
 		</Accordion>
-    <Accordion type="text" title={<span className={styles.details}>Shipment Details <div className={styles.shipmentag}>Export</div></span>} style={{ backgroundColor:"#FFFFFF", 
+    <Accordion type="text" title={<span className={styles.details}>Shipment Details <div className={styles.shipmentag}>Export</div></span> as unknown as string} style={{ backgroundColor:"#FFFFFF", 
     borderRadius:'8px', margin:"25px 0px",
     boxShadow:'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
