@@ -1,7 +1,7 @@
 {
-  "name": "@cogoport/things-to-do",
+  "name": "@cogoport/home",
   "version": "0.1.0",
-  "description": "Things to do component",
+  "description": "Home component to test Typescript",
   "private": true,
   "main": "index.js",
   "module": "index.js",

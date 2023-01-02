@@ -39,6 +39,7 @@ importers:
       '@cogoport/components': ^1.0.188
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/locations': workspace:0.1.0
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -46,7 +47,6 @@ importers:
       '@cogoport/request': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
-      '@cogoport/things-to-do': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       '@next/bundle-analyzer': ^13.1.1
       '@types/node': ^18.11.18
@@ -63,6 +63,7 @@ importers:
       '@cogoport/components': 1.0.188_j6lhi3hgh37lo4qhb7qouvcgr4
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
+      '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
       '@cogoport/locations': link:../packages/locations
       '@cogoport/navigation-configs': link:../common/navigation-configs
@@ -70,7 +71,6 @@ importers:
       '@cogoport/request': link:../common/request
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/store': link:../common/store
-      '@cogoport/things-to-do': link:../packages/things-to-do
       '@cogoport/utils': 1.2.2
       '@next/bundle-analyzer': 13.1.1
       '@types/node': 18.11.18
@@ -260,6 +260,12 @@ importers:
       rollup-plugin-typescript2: 0.34.1_fjmngzu5qr6xzjooxkpjm6imha
       typescript: 4.9.4
 
+  packages/home:
+    specifiers:
+      react: 18.2.0
+    dependencies:
+      react: 18.2.0
+
   packages/locations:
     specifiers:
       '@cogoport/components': ^1.0.188
@@ -292,12 +298,6 @@ importers:
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/utils': 1.2.2
-      react: 18.2.0
-
-  packages/things-to-do:
-    specifiers:
-      react: 18.2.0
-    dependencies:
       react: 18.2.0
 
 packages:
