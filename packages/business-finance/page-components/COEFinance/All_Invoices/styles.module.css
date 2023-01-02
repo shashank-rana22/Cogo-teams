@@ -1,11 +1,12 @@
 .container {
   display: flex;
   height: 59px;
+  margin-top: 14px;
   margin-bottom: -20px;
   justify-content: space-between;
 }
 
-.flex{
+.flex {
   display: flex;
 }
 

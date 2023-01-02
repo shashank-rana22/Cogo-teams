@@ -33,7 +33,6 @@ const Element = ({
 	...rest
 }:ElementProps) => {
 
-	console.log(value,"value")
 
 
 const [show, setShow] = useState<boolean>(false);
