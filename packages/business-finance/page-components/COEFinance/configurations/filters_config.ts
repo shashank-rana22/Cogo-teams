@@ -4,7 +4,7 @@ export const FILTERS =[
 			type: 'select',
 			placeholder: 'Geography',
 			className: 'primary md',
-            selectWidth:"200px",
+            style:{width:"230px"},
 			hideSelectedOptions: false,
 			multiple: true,
 			isMulti: true,
@@ -18,13 +18,13 @@ export const FILTERS =[
 			],
 	},
     {
-		label: 'Service',
 		name: 'services',
 		type: 'select',
 		className: 'primaryfilter primary md',
 		isClearable: true,
 		multiple: true,
 		defaultOptions: false,
+        style:{width:"230px"},
 		placeholder: ' Select Service',
 		span: 4,
 		options: [
@@ -46,33 +46,24 @@ export const FILTERS =[
         span:12,
         groupBy:[
             {
-                label: 'Date',
-                name: 'date',
-                type: 'segmented',
-                color:"#ED3726", 
-                background: "#FFFAEB",
-                className: 'primaryfilter primary md',
-                span:7.5,
-                options: [
-                    {
-                        label: 'Invoice Date',
-                        value: 'invoice_date',
-                    },
-                    {
-                        label: 'Payment Due Date',
-                        value: 'payment_due_date',
-                    },
-                    {
-                        label: 'Last Modified Date',
-                        value: 'last_modified_date',
-                    },
-                ],
-            },
-            {
-                label: 'Date',
+                label: 'Invoice Date',
                 name: 'createdAt',
                 type: 'datepicker',
                 placeholder: 'Created At',
+                span: 3,
+            },
+            {
+                label: 'Payment Due Date',
+                name: 'paymentDueDate',
+                type: 'datepicker',
+                placeholder: 'Invoice Date',
+                span: 3,
+            },
+            {
+                label: 'Last Modified Date',
+                name: 'modifiedDate',
+                type: 'datepicker',
+                placeholder: 'Last Modified Date',
                 span: 3,
             }
         ],

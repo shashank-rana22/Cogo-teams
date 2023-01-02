@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRequestBf } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 
 interface Params{
-    shipment_id: string;
+    shipment_id?: string|string[]|undefined;
 }
 
 const useGetShipmentCostSheet = ({shipment_id}:Params) => {
@@ -11,7 +11,6 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
             {
                 url     : `/get_shipment_cost_sheet`,
                 method  : 'get',
-                authKey : 'get_shipment_cost_sheet',
             },
             { manual: true },
         );
@@ -19,7 +18,7 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
         const getdataFromApi = async () => {
             try {
                 const res = await trigger({ params: { shipment_id } });
-                if (res?.hasError) {
+                if (res.status!==200) {
                     Toast.error('Something went wrong!');
                 }
             } catch (err) {

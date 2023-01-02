@@ -15,7 +15,7 @@ const AllInvoices = () => {
     useEffect(() => {
         push(
             "/business-finance/coe-finance/[active_tab]/[view]",
-            `/business-finance/coe-finance/all_invoices/${subActiveTab}`
+            `/business-finance/coe-finance/all_invoices/${subActiveTab}` as never as null
         );
     }, [subActiveTab]);
 
