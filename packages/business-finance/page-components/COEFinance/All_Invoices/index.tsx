@@ -1,16 +1,25 @@
-import React,{useState} from "react"
+import React,{useEffect, useState} from "react"
 import PurchaseInvoice from './PurchaseInvoiceView';
 import styles from './styles.module.css'
 import { useRouter } from '@cogoport/next';
 import ShipmentIdView from "./ShipmentIdView/index";
 const AllInvoices = () => {
     const { push, query } = useRouter();
-    const [isPurchase, setIsPurchase] = useState(true);
+    const [subActiveTab, setSubActiveTab] = useState(query.view || "purchase-view");
+
+    const isPurchase =subActiveTab==="purchase-view"
+
+    useEffect(() => {
+        push(
+            "/business-finance/coe-finance/[active_tab]/[view]",
+            `/business-finance/coe-finance/all_invoices/${subActiveTab}`
+        );
+    }, [subActiveTab]);
 
     return (
         <div>
             <div className={styles.container}>
-                <div onClick={() => setIsPurchase(true)}>
+                <div onClick={() =>{setSubActiveTab("purchase-view")}}>
                     <div
                         className={
                             isPurchase
@@ -22,7 +31,7 @@ const AllInvoices = () => {
                         PURCHASE INVOICE VIEW{" "}
                     </div>
                 </div>
-                <div onClick={() => setIsPurchase(false)}>
+                <div onClick={() =>{ setSubActiveTab("shipment-view")}}>
                     <div
                         className={
                             !isPurchase

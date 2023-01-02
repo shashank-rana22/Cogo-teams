@@ -22,15 +22,16 @@ const CoeFinance=()=>{
 		},
 	];
     const { push, query } = useRouter();
+    const {view,active_tab}=query;
 
-    const [activeTab, setActiveTab] = useState(query.active_tab || "dashboard");
+    console.log(view,'view')
 
-    useEffect(() => {
+const handleTab=(activeTab:string) => {
         push(
             "/business-finance/coe-finance/[active_tab]",
             `/business-finance/coe-finance/${activeTab}`
         );
-    }, [activeTab]);
+    }
 
     return (
     <div>
@@ -38,7 +39,7 @@ const CoeFinance=()=>{
 
 			<h1>COE Finance</h1>
 		</div>
-    <Tabs activeTab={activeTab} onChange={setActiveTab}>
+    <Tabs activeTab={active_tab} onChange={handleTab}>
      
         <TabPanel className={styles.tab_panel_dashboard} name="dashboard" title="Dashboard" >
         <div className={styles.spacebetween}>

@@ -5,6 +5,7 @@ import Header from './CardHeader';
 import { ConfigType, NestedObj,FunctionObjects,ListDataProps } from '../Interfaces/index';
 import commonFunctions from "../..//commons/List/commonFunctions";
 import styles from "./styles.module.css";
+import { useSelector } from '@cogoport/store';
 
 export interface Props {
 	config: ConfigType;
@@ -22,7 +23,11 @@ export interface Props {
 function List({
 	config, sort, setSort, itemData, renderHeaderCheckbox,functions={},loading=false,page=1,handlePageChange,pageSize=10
 }:Props) {
-	const isMobile = false;
+
+	const {
+		general: { isMobile = false },
+	} = useSelector((state:object) => state);
+
 	const {
 		showHeader = true, fields, headerStyles, itemStyles, bodyStyles, showHeaderCheckbox,
 	} = config;
