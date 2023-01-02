@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function ProfileManager({ resetSubnavs }) {
 	const profileComponents = [
 		{
-			title : 'Product Code Mappings',
+			title : 'Logout',
 			fun   : logout,
 			icon  : IcMLogout,
 		},

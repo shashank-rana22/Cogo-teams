@@ -22,9 +22,10 @@
 }
 
 .accordion[aria-expanded="true"] {
-	max-height: 1000px;
+	max-height: 100px;
+	margin-top: 10px;
 	overflow: hidden;
-	transition: max-height 2s;
+	transition: max-height 0.4s;
 }
 
 .inner_image_container {

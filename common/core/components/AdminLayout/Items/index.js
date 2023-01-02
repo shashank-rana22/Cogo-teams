@@ -41,7 +41,7 @@ function Items({ item, resetSubnavs }) {
 		</div>
 	);
 	return (
-		<>
+		<div className={showSubNav ? styles.outer_container : ''}>
 			<li key={item.title} className={styles.list_item}>
 				{!item.options ? (
 					<Link href={item.href ?? ''} as={`${item.as}`}>
@@ -69,7 +69,7 @@ function Items({ item, resetSubnavs }) {
 					</li>
 				);
 			})}
-		</>
+		</div>
 	);
 }
 
