@@ -13,9 +13,8 @@ import styles from './styles.module.css';
 
 function BookingDesk() {
 	const [activeTab, setActiveTab] = useState('place_booking');
-	const [currentShipment, setCurrentShipment] = useState('fcl_freight');
 
-	const visibleTabs = getTabs(currentShipment);
+	const visibleTabs = getTabs('fcl_freight');
 
 	const {
 		loading,
@@ -54,10 +53,6 @@ function BookingDesk() {
 				<ShipmentFilters
 					hookSetters={hookSetters}
 					activeTab={activeTab}
-					setActiveTab={setActiveTab}
-					currentShipment={currentShipment}
-					setCurrentShipment={setCurrentShipment}
-					visibleTabs={visibleTabs}
 				/>
 			</div>
 			<Tabs

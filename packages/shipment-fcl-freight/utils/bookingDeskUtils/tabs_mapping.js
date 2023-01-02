@@ -24,12 +24,7 @@ export const getTabs = (activeTab) => {
 				title : 'Container Pick Up',
 			},
 		],
-		air_freight: [
-			{
-				name  : 'bn_uploaded',
-				title : 'BN Uploaded',
-			},
-		],
+
 	};
 	if (additionalTab[activeTab]) {
 		tabs.splice(2, 0, ...additionalTab[activeTab]);

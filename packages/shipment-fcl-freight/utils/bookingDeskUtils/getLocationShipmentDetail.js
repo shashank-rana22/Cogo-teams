@@ -5,11 +5,8 @@ const getLocationShipmentDetails = (data, summary, type) => {
 
 	const suffixConfig = {
 		fcl_freight       : 'port',
-		lcl_freight       : 'port',
 		fcl_customs       : 'port',
-		lcl_customs       : 'location',
 		fcl_freight_local : 'port',
-		lcl_freight_local : 'port',
 	};
 
 	const suffix =		suffixConfig[`${type}_${search_type}`] || suffixConfig[search_type];
