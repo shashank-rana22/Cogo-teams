@@ -20,7 +20,19 @@ function FilterStats({ filters, hookSetters }) {
 	});
 	const options = useGetPartnerUserServices({ partner_user });
 	const handleChange = (value) => {
-		hookSetters.setFilters({ ...filters, is_negotiation_not_reverted: value });
+		if (value === 'not_reverted') {
+			hookSetters.setFilters({
+				...filters,
+				is_negotiation_not_reverted : true,
+				is_negotiation_reverted     : undefined,
+			});
+		} else {
+			hookSetters.setFilters({
+				...filters,
+				is_negotiation_reverted     : true,
+				is_negotiation_not_reverted : undefined,
+			});
+		}
 	};
 	const handleOnClick = (value) => {
 		hookSetters.setFilters((prev) => ({ ...prev, service_type: value }));
@@ -29,11 +41,8 @@ function FilterStats({ filters, hookSetters }) {
 	const handleOnChangeCheckbox = (value, checkbox) => {
 		if (checkbox === 'under_negotiation') {
 			let { under_negotiation_rank } = filters;
-			if (!under_negotiation_rank) { under_negotiation_rank = []; }
-			if ((under_negotiation_rank || []).includes(value)) {
-				under_negotiation_rank = under_negotiation_rank.filter((item) => item !== value);
-			} else {
-				under_negotiation_rank.push(value);
+			if (under_negotiation_rank === value) { under_negotiation_rank = undefined; } else {
+				under_negotiation_rank = value;
 			}
 			hookSetters.setFilters({ ...filters, under_negotiation_rank });
 		} else {
@@ -61,8 +70,8 @@ function FilterStats({ filters, hookSetters }) {
 			<div className={styles.radio}>
 				<Radio
 					label="Reverted "
-					checked={filters.is_negotiation_not_reverted === false}
-					onChange={() => { handleChange(false); }}
+					checked={filters.is_negotiation_reverted}
+					onChange={() => { handleChange('reverted'); }}
 				/>
 
 			</div>
@@ -84,7 +93,7 @@ function FilterStats({ filters, hookSetters }) {
 				<Radio
 					checked={filters.is_negotiation_not_reverted}
 					label="Not Reverted"
-					onChange={() => { handleChange(true); }}
+					onChange={() => { handleChange('not_reverted'); }}
 				/>
 
 			</div>

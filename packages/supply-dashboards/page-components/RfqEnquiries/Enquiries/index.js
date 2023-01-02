@@ -18,7 +18,7 @@ function Enquiries({ rfq, setRfq }) {
 
 	useEffect(() => {
 		if (data) {
-			setSelectedCard(data?.data[0]?.id);
+			setSelectedCard(data?.data[0]);
 		}
 	}, [data]);
 	return (
@@ -50,7 +50,7 @@ function Enquiries({ rfq, setRfq }) {
 
 				</div>
 				<div className={styles.form}>
-					<NegotiateRate />
+					<NegotiateRate selectedCard={selectedCard} />
 				</div>
 			</div>
 		</div>

@@ -13,9 +13,10 @@ const useGetRfqSearches = ({ rfq } = {}) => {
 		method : 'GET',
 		url    : '/list_rfq_searches',
 		params : {
-			filters               : { rfq_id: rfq?.source_id },
+			filters                         : { rfq_id: rfq?.source_id },
 			page,
-			service_data_required : true,
+			service_data_required           : true,
+			spot_negotiation_rates_required : true,
 		},
 	}, { manual: false });
 

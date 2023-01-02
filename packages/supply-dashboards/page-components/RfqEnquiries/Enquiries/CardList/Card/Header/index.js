@@ -2,24 +2,14 @@ import { Tags } from '@cogoport/components';
 import { IcMFcl } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import getIncoTermMapping from '../../../../utils/getIncoTermMapping';
+
 import styles from './styles.module.css';
 
 function Header({ item }) {
 	const service = item?.detail?.service_type.split('_')[0];
-	const inco_term_mapping = {
-		cif : 'export',
-		cfr : 'export',
-		cpt : 'export',
-		cip : 'export',
-		dat : 'export',
-		dap : 'export',
-		ddp : 'export',
-		fob : 'import',
-		exw : 'import',
-		fca : 'import',
-		fas : 'import',
-	};
-	const trade_type = startCase(inco_term_mapping[item?.detail?.inco_term]);
+	const trade_type = startCase(getIncoTermMapping[item?.detail?.inco_term]);
+	const items = [{ children: trade_type, color: 'blue' }];
 	return (
 		<div className={styles.heading}>
 			<div className={styles.service}>
@@ -27,7 +17,7 @@ function Header({ item }) {
 				{service}
 			</div>
 			<div>
-				<Tags themeType="blue">{trade_type}</Tags>
+				<Tags items={items} closable />
 			</div>
 		</div>
 
