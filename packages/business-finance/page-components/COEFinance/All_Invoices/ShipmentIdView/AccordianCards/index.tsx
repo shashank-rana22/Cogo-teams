@@ -5,6 +5,7 @@ import { useState } from "react";
 import CardItem from "./CardItem/index";
 import { startCase } from "@cogoport/utils";
 import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
+import { useRouter } from '@cogoport/next';
 
 interface ItemDataProps {
     expense_total_price: number;
@@ -38,6 +39,8 @@ const AccordianCards = ({
     refetch,
 }: listData) => {
     const [amountTab, setAmountTab] = useState("expense");
+    const router=useRouter()
+    
     const handleClick = () => {
         setCurrentOpenSID("");
     };
@@ -147,6 +150,7 @@ const AccordianCards = ({
                                 themeType="secondary"
                                 onClick={() => {
                                     setCurrentOpenSID(itemData?.id);
+                                    router.push(`/business-finance/coe-finance/cost-sheet?orgId=${itemData.id}`);
                                 }}
                             >
                                 Cost View

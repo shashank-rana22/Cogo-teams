@@ -1,0 +1,99 @@
+.layout{
+    background: #FFFFFF;
+    margin: 15px 0px;
+    display: flex;
+    padding: 15px 25px 5px 25px;
+    @media (max-width: 768px){
+        padding: 5px 0px 5px 25px;
+    }
+}
+
+.values{
+    background: #FFFFFF;
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    padding: 20px 25px 5px 25px;
+    border-top: 1px solid #D9D9D9;
+     @media (max-width: 768px){
+        padding: 20px 25px 5px 25px;
+    }
+}
+
+.flex{
+    display: flex;
+    flex: var(--span);
+    @media (max-width: 768px){
+        flex-direction: column;
+        padding-right: 5px;
+    }
+}
+
+.heading{
+    display: flex;
+    flex: var(--span);
+    justify-content: flex-start;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.card{
+    background: #FFFFFF;
+    padding: 0px 20px;
+    margin: 20px 0px;
+    border: 1px solid var(--bordercolor);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 4px;
+    @media (max-width: 768px){
+        padding: 0px;
+    }
+}
+
+.total{
+    background: #FFFFFF;
+    margin: 15px 0px;
+    display: flex;
+    padding: 15px 25px;
+    border-top: 1px solid #D9D9D9;
+}
+
+.totalamount{
+    font-weight: 700;
+    font-size: 15px;
+    color: #333333;
+}
+
+.coloredlabel{
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    flex: var(--span);
+    justify-content: flex-start;
+}
+
+.profiticon{
+    transform: translateX(10px) rotate(-45deg) ;
+    color: #34C759;
+}
+
+.negativeIcon{
+    transform: translateX(10px) rotate(45deg) ;
+    color: #ED3726;
+}
+
+.neutralIcon{
+    display: none;
+}
+
+.positive{
+    color: #67C676;
+}
+
+.negative{
+    color: #ED3726;
+}
+
+.neutral{
+    color: #333333;
+}
