@@ -1,4 +1,4 @@
-import { Pills, MultiSelect, Popover } from '@cogoport/components';
+import { Pill, MultiSelect, Popover } from '@cogoport/components';
 import React from 'react';
 
 const OPTIONS = [
@@ -172,7 +172,7 @@ function Departments({ onChange = () => {}, selectedDepartments = {} }) {
 			</div>
 			<div>
 				<p>Departments</p>
-				<Pills
+				<Pill
 					options={OPTIONS}
 					value={getDepartment(selectedDepartments.through_criteria || [])}
 					onChange={(item) => onChange({ through_criteria: getThroughCriteria(item) })}
