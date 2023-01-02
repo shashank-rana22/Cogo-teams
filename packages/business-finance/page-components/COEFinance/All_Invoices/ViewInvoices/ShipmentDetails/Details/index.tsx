@@ -6,9 +6,7 @@ import styles from './styles.module.css';
 import TimeLine from '../TimeLine/index';
 import useListShipment from '../../../../hook/useListShipment';
 
-const Details = ({jobNumber,orgId}) => {
-    const {data} = useListShipment(jobNumber);
-	
+const Details = ({jobNumber, orgId}) => {
 	const Router=useRouter();
 
 return(

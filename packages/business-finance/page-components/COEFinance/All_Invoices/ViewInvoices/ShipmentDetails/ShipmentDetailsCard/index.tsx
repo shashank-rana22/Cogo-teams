@@ -3,9 +3,14 @@ import { IcCFtick } from "@cogoport/icons-react";
 import React, { useState } from "react";
 import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
+import { Modal, Textarea} from '@cogoport/components'
+
 const ShipmentDetailsCard = ({data}:any) =>{
     const [showValue, setShowValue ] =  useState([])
     const [showLineItem , setShowLineItem] = useState(false)
+    const [showRejected , setShowRejected] = useState({})
+    
+
     const {lineItems } = data || {}
     const {buyerDetail , sellerBankDetail , sellerDetail , bill} = data || {}
     const {entityCode ='' , organizationName:organizationNameBuyer ='', address ='' , registrationNumber:registrationNumberBuyer ='', taxNumber:taxNumberBuyer ='' } = buyerDetail || {}
@@ -21,23 +26,35 @@ const ShipmentDetailsCard = ({data}:any) =>{
     ]);
 
 
-    const handleClick = (id:any) => { 
+    const handleClick = (id:number) => { 
         const approveData = [...showValue,id]  
         setShowValue(approveData) 
         DetailsCard.push(DetailsCard.shift())
         setDetailsCard(DetailsCard)
     }
 
-    const handleClickUndo = (id:any) => {
+    const handleClickUndo = (id:number) => {
        const undoData = showValue.filter(item => item !== id)
        setShowValue(undoData)
-       console.log(showValue,"showValue");
     }
 
+    const handleClickReject =(id:number) => {
+        setShowRejected((previousActions) => ({
+			...previousActions,
+			[id]: !previousActions[id],
+		}));
+
+    }
+
+    const onClose = () => {
+		setShowRejected(false);
+	};
+    console.log(Object.keys(showRejected)[0]==="1","showRejected");
     
 
 return(
     <div>
+
 
 { showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem}/> : 
     <div>
@@ -45,6 +62,7 @@ return(
             <div style={{fontWeight:'600'}}>
                 Check the Details  ( As filled by SO2 in the cogo form )
             </div>
+            
             <div style={{fontWeight:'600'}}>
                 Completed {showValue.length  || 0}/3
             </div>
@@ -56,6 +74,55 @@ return(
         
 return(
     <>
+
+        {
+            showRejected[id] &&                 
+                <Modal size="lg" show={showRejected[id]} onClose={onClose}>
+                    <Modal.Header title="CHOOSE THE DETAiLS YOU WANT TO REJECT" />
+
+                    
+                        {Object.keys(showRejected).includes("1") &&
+                                            <div className={styles.rejectedBillingPartyContainer}>
+                                                  <div style={{marginBottom:'8px'}}>Name</div>
+                                                  <div style={{marginBottom:'8px'}}> Bank Name </div>
+                                                  <div style={{marginBottom:'8px'}}> Account Number </div>
+                                                  <div style={{marginBottom:'8px'}}> IFSC </div>
+                                                  <div style={{marginBottom:'8px'}}>PAN Number</div>
+                                                  <div style={{marginBottom:'8px'}}>GST Number </div>
+
+                                                
+                                                <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                                               
+                                            </div>
+
+                            }
+
+                        {Object.keys(showRejected).includes("2")&&     
+                                            <div className={styles.rejectedBillingPartyContainer}>
+                                                <div style={{marginBottom:'8px'}}>Entity </div>
+                                                <div style={{marginBottom:'8px'}}>Address </div>
+                                                <div style={{marginBottom:'8px'}}>PAN Number </div>
+                                                <div style={{marginBottom:'8px'}}>GST Number </div>
+
+                                                <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                                            </div>
+                            }
+                        {Object.keys(showRejected).includes("3") &&
+                                    <div className={styles.rejectedBillingPartyContainer}>
+                                            <div style={{marginBottom:'8px'}}>Invoice Number </div>
+                                            <div style={{marginBottom:'8px'}}>Invoice Date </div>
+                                            <div style={{marginBottom:'8px'}}>Status </div>
+                                            <div style={{marginBottom:'8px'}}>Place Of Supply</div>
+
+                                            <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                                    </div>
+                            }
+            
+                    <Modal.Footer>
+                        <Button onClick={onClose}>Submit</Button>
+                    </Modal.Footer>
+                </Modal>
+        }
 
         {id === 1 &&
             <div className={styles.container } >
@@ -74,7 +141,7 @@ return(
                      </div> :         
                      <div className={styles.buttonContainer}>
                          <Button size='sm'  themeType="secondary" onClick={()=>{handleClick(id)}}>Approve</Button>
-                         <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}}>Reject</Button>
+                         <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}} onClick={()=>{handleClickReject(id)}}>Reject</Button>
                      </div>
                     } 
             
@@ -110,7 +177,7 @@ return(
                     </div> :         
                     <div className={styles.buttonContainer}>
                         <Button size='sm'  themeType="secondary" onClick={()=>{handleClick(id)}}>Approve</Button>
-                        <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}}>Reject</Button>
+                        <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}} onClick={()=>{handleClickReject(id)}} >Reject</Button>
                     </div>
                    } 
            
@@ -144,7 +211,7 @@ return(
              </div>   :         
              <div className={styles.buttonContainer}>
                  <Button size='sm'  themeType="secondary" onClick={()=>{handleClick(id)}}>Approve</Button>
-                 <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}}>Reject</Button>
+                 <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}} onClick={()=>{handleClickReject(id)}}>Reject</Button>
              </div>
             } 
     

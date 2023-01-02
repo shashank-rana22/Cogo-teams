@@ -21,6 +21,7 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
     "swr": "^2.0.0"
   },
   "devDependencies": {

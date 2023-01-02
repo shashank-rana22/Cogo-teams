@@ -12,10 +12,10 @@ const businessConfig = {
 		isMainNav  : true,
 	},
 	'/[partner_id]/business-finance/coe-finance/[active_tab]': {
-		navigation: 'coe_finance',
+		navigation: 'coe-finance',
 	},
 	'/[partner_id]/business-finance/coe-finance/[active_tab]/view-invoices': {
-		navigation: 'coe_finance',
+		navigation: 'coe-finance',
 	},
 
 };

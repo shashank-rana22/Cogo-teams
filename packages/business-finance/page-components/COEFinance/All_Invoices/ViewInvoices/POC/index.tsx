@@ -22,7 +22,6 @@ import {
 	FadeInActionControls,
 	IconView,
 } from './styles';
-import Profitability from './Profitability';
 import CustomerInformation from './CustomerInformation';
 import POCInformation from './POCInformation';
 import useInvoiceDetails from './useInvoiceDetails';
