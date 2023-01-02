@@ -1,15 +1,17 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import Stats from './Stats';
 import styles from './styles.module.css';
 
-function Header({ setShowDetail, data }) {
+function Header({ data }) {
+	const router = useRouter();
 	return (
 		<div>
 			<div className={styles.heading}>
 				<IcMArrowBack
 					style={{ cursor: 'pointer' }}
-					onClick={() => { setShowDetail(null); }}
+					onClick={() => { router.push('/contracts'); }}
 				/>
 				<div className={styles.head}>Back to Contracts</div>
 			</div>

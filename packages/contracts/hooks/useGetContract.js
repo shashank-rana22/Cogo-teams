@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetContract = ({ showDetail }) => {
+const useGetContract = ({ id }) => {
 	const [data, setData] = useState();
 
 	const [{ error, loading }, trigger] = useRequest({
@@ -13,7 +13,7 @@ const useGetContract = ({ showDetail }) => {
 			const res = await trigger({
 				params: {
 					services_data_required : true,
-					filters                : { id: showDetail },
+					filters                : { id },
 				},
 			});
 			setData(res?.data?.list);
@@ -23,12 +23,11 @@ const useGetContract = ({ showDetail }) => {
 	};
 
 	useEffect(() => {
-		if (showDetail) {
+		if (id) {
 			getContract();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	console.log(data, 'values');
 
 	return {
 		data: data?.[0],

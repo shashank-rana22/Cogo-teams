@@ -7,7 +7,7 @@ import List from './List';
 import Loader from './Loader';
 import styles from './styles.module.css';
 
-function PageView({ setShowDetail }) {
+function PageView() {
 	const {
 		data, loading, filters, setFilters,
 	} = useListContracts();
@@ -17,7 +17,7 @@ function PageView({ setShowDetail }) {
 	if (data?.list && !loading) {
 		content = (
 			<>
-				<List setShowDetail={setShowDetail} data={data} />
+				<List data={data} />
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"

@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 
 import PortPair from './PortPair';
 import styles from './styles.module.css';
 
-function Card({ setShowDetail, item }) {
+function Card({ item }) {
+	const router = useRouter();
 	const portPairData = item?.fcl_freight_services[0]?.service_details;
 	const newPortPairs = [];
 	if (
@@ -20,20 +22,19 @@ function Card({ setShowDetail, item }) {
 		<div className={styles.card}>
 			<div className={styles.header}>
 				<div className={styles.heading}>
-					<div>Contract ID #2322</div>
-					{/* {item?.trade_type ? (
-						<div className={styles.trade}>
-							{item?.trade_type}
-						</div>
-					) : null} */}
+					Contract ID
+					{' '}
+					#
+					{item?.contract_reference_id}
 				</div>
+
 				<div className={styles.details}>
 					<div className={styles.pair}>
 						<div>
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							150
+							{item?.fcl_freight_services[0]?.max_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -73,7 +74,7 @@ function Card({ setShowDetail, item }) {
 					<Button
 						style={{ marginBottom: '10px' }}
 						size="md"
-						onClick={() => { setShowDetail(item?.id); }}
+						onClick={() => { router.push(`/contracts/details?id=${item?.id}`); }}
 						themeType="secondary"
 					>
 						View

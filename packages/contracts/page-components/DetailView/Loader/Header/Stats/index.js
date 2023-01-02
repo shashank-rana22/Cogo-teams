@@ -11,9 +11,6 @@ function Stats() {
 					<div className={styles.contract_id}>
 						<Placeholder />
 					</div>
-					<div className={styles.trade}>
-						<Placeholder />
-					</div>
 				</div>
 				<div className={styles.details}>
 					<div><Placeholder /></div>

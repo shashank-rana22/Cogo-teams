@@ -1,10 +1,10 @@
 import Card from './Card';
 import styles from './styles.module.css';
 
-function List({ setShowDetail, data }) {
+function List({ data }) {
 	return (
 		<div className={styles.container}>
-			{(data?.list || []).map((item) => <Card setShowDetail={setShowDetail} item={item} />)}
+			{(data?.list || []).map((item) => <Card item={item} />)}
 		</div>
 	);
 }
