@@ -1,4 +1,4 @@
-import { Pills } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
@@ -14,7 +14,7 @@ function PillsController(props) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Pills
+				<Pill
 					{...rest}
 					key={rest.id}
 					onChange={onChange}

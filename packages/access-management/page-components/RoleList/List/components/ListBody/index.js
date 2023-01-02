@@ -1,4 +1,6 @@
-import { Button, Tags, Placeholder } from '@cogoport/components';
+import {
+	Button, Placeholder, Pill,
+} from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
@@ -23,17 +25,10 @@ function ListBody({
 			),
 			renderRoleType: (itemData) => {
 				const roleType = (itemData?.role_type || '').toLowerCase() === 'default';
-
 				return (
-					<section
-						className={styles.role_type_container}
-						style={{
-							backgroundColor : roleType ? '#6fa5ab' : '#888fd1',
-							color           : roleType ? '#fff' : '#fff',
-						}}
-					>
-						<Tags>{itemData?.role_type}</Tags>
-					</section>
+					<Pill className={styles.role_type_container} color={roleType ? 'blue' : 'orange'}>
+						{itemData?.role_type}
+					</Pill>
 				);
 			},
 			renderPartner: (itemData) => (
@@ -52,26 +47,28 @@ function ListBody({
 				</section>
 			),
 			renderFunction: (itemData) => (
-				<section className={styles.function_head}>
+				<section>
 					{(itemData?.role_functions || []).map((item) => (
-						<Tags
+						<Pill
+							className={styles.function_head}
 							style={{ margin: 5 }}
-							themeType="orange"
+							color="red"
 						>
 							{item}
-						</Tags>
+						</Pill>
 					))}
 				</section>
 			),
 			renderSubFunction: (itemData) => (
-				<section className={styles.function_head}>
+				<section>
 					{(itemData?.role_sub_functions || []).map((item) => (
-						<Tags
+						<Pill
+							className={styles.function_head}
 							style={{ margin: 5 }}
-							themeType="blue"
+							color="green"
 						>
 							{item}
-						</Tags>
+						</Pill>
 					))}
 				</section>
 			),

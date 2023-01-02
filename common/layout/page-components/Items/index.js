@@ -52,7 +52,7 @@ function Items({ item, resetSubnavs }) {
 			{showSubNav && item?.options?.map((singleOption) => {
 				const isHrefMatch = pathname.includes(singleOption.href);
 
-				const Element = singleOption.icon || null;
+				const Elem = singleOption.icon || null;
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<Link
@@ -61,7 +61,7 @@ function Items({ item, resetSubnavs }) {
 							href={singleOption.href ?? ''}
 							as={`${singleOption.as}`}
 						>
-							<Element />
+							<Elem />
 							<span>
 								{singleOption.title}
 							</span>
