@@ -16,8 +16,13 @@ interface UseSelectorProps {
     profile?: Profile;
 }
 
+interface AllParams {
+    activeJobs?: string;
+    pendingApproval?: string;
+}
+
 const useShipmentIdView = (allParams?: any) => {
-    const { ...params } = allParams || {};
+    const { ...params }: AllParams = allParams || {};
     const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({
             authorizationparameters: profile?.authorizationparameters,

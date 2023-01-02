@@ -2,3 +2,11 @@
     display: flex;
     justify-content: flex-end;
 }
+.toggle {
+    display: flex;
+    gap: 12px;
+    padding: 20px 10px 8px 10px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}

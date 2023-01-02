@@ -12,9 +12,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* &:hover {
-        cursor: pointer;
-    } */
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 .sid {
     flex-direction: column;
@@ -31,7 +31,7 @@
 .sidLabelText {
     font-weight: 500;
     font-size: 18px;
-    /* line-height: 21px; */
+
     display: flex;
     align-items: center;
     color: #333333;
@@ -39,7 +39,7 @@
 .sidValueText {
     font-weight: 500;
     font-size: 18px;
-    /* line-height: 21px; */
+
     display: flex;
     align-items: center;
     color: #333333;
@@ -47,10 +47,15 @@
 .vr {
     width: 2px;
     height: 56px;
-    /* left: 388px;
-    top: 336px; */
+
     background: #f68b21;
     border-radius: 4px;
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 2px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
 }
 
 .expenseAmount {
@@ -71,6 +76,9 @@
 }
 .expense {
     display: flex;
+    @media (max-width: 768px) {
+        padding: 8px;
+    }
 }
 .urgent {
     display: flex;
@@ -126,7 +134,7 @@
         var(--r) calc(50% - var(--f) / 2)
     );
     background: #cdf7d4;
-    /* background: ${({ background }) => background}; */
+
     box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
     margin-left: 10px;
 }

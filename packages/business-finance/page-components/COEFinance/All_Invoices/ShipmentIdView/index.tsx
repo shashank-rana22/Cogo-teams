@@ -1,5 +1,6 @@
 import { Pagination } from "@cogoport/components";
 import React, { useState } from "react";
+import SegmentedControl from "../../../commons/SegmentedControl/index";
 import useShipmentIdView from "../../hook/useShipmentIdView";
 import AccordianCards from "./AccordianCards/index";
 import LoadingState from "./LoadingState/index";
@@ -27,6 +28,8 @@ interface ItemProps {
 
 const ShipmentIdView = () => {
     const [currentOpenSID, setCurrentOpenSID] = useState("");
+    const [pendingApproval, setPendingApproval] = useState("all");
+    const [activeJobs, setActiveJobs] = useState("all");
 
     const {
         hookSetters,
@@ -37,10 +40,57 @@ const ShipmentIdView = () => {
         refetch,
         statsData,
         statsLoading,
-    } = useShipmentIdView();
+    } = useShipmentIdView({ pendingApproval, activeJobs });
+
+    const options1 = [
+        {
+            label: "ALL",
+            value: "all",
+        },
+        {
+            label: "Pending Approval",
+            value: "pendingApproval",
+        },
+        {
+            label: "Not Pending Approval",
+            value: "notPendingApproval",
+        },
+    ];
+    const options2 = [
+        {
+            label: "ALL",
+            value: "all",
+        },
+        {
+            label: "Open Jobs",
+            value: "openJobs",
+        },
+        {
+            label: "Operationally Closed",
+            value: "operationallyClosed",
+        },
+        {
+            label: "Closed Jobs",
+            value: "closedJobs",
+        },
+    ];
 
     return (
         <div>
+            <div className={styles.toggle}>
+                <SegmentedControl
+                    options={options1}
+                    activeTab={pendingApproval}
+                    setActiveTab={setPendingApproval}
+                />
+
+                <SegmentedControl
+                    options={options2}
+                    activeTab={activeJobs}
+                    setActiveTab={setActiveJobs}
+                />
+            </div>
+
             <div>
                 {loading && (
                     <div style={{ marginTop: "50px" }}>
