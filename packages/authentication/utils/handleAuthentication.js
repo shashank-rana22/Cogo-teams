@@ -90,7 +90,7 @@ const handleAuthentication = async ({
 		redirect({
 			isServer,
 			res,
-			path: `${asPrefix}/home`,
+			path: `${asPrefix}/things-to-do`,
 		});
 
 		return { asPrefix, query: { partner_id } };

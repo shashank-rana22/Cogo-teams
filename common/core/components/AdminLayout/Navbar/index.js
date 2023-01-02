@@ -1,7 +1,11 @@
+import { Input } from '@cogoport/components';
 import cl from '@cogoport/components/src/utils/classname-processor';
-import React, { useState } from 'react';
+import { IcMSearchdark } from '@cogoport/icons-react';
+import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
+import { applyFilter } from '../../../helpers/applyFilter';
+import { sortNavs } from '../../../helpers/sortItems';
 import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
@@ -13,7 +17,20 @@ function Navbar({
 	nav = [],
 }) {
 	const [resetSubnavs, setResetSubnavs] = useState(false);
-	const [show, setShow] = useState(false);
+	const [searchString, setSearchString] = useState('');
+
+	const filterdList = searchString
+		? applyFilter(searchString, nav, 'title', ['key', 'href', 'title'])
+		: nav;
+
+	const listItems = sortNavs(filterdList);
+
+	const setSearchFunc = useCallback(
+		(value) => {
+			setSearchString(value);
+		},
+		[searchString],
+	);
 
 	return (
 		<div
@@ -36,9 +53,18 @@ function Navbar({
 
 					<ProfileManager resetSubnavs={resetSubnavs} />
 
+					<div className={styles.search_container}>
+						<Input
+							value={searchString}
+							className={styles.input_search}
+							prefix={<IcMSearchdark width={16} height={16} />}
+							onChange={setSearchFunc}
+						/>
+					</div>
+
 					<ul className={styles.list_container}>
-						{Object.keys(nav).map((item) => (
-							<Items key={item} item={nav[item]} resetSubnavs={resetSubnavs} />
+						{(listItems || []).map((item) => (
+							<Items key={item} item={item} resetSubnavs={resetSubnavs} />
 						))}
 					</ul>
 				</div>

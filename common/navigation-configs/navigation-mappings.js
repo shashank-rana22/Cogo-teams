@@ -13,14 +13,13 @@ import {
 import partner from './apis/partner-apis';
 
 const navigationMappings = {
-	home: {
-		key           : 'home',
-		title         : 'Home',
-		href          : '/home',
-		as            : '/home',
-		icon          : IcMBookingDesk,
-		main_apis     : ['list_shipments'],
-		possible_apis : [],
+	things_to_do: {
+		key         : 'things_to_do',
+		title       : 'Things To Do',
+		href        : '/things-to-do',
+		as          : '/things-to-do',
+		icon        : IcMBookingDesk,
+		module_type : 'dashboards',
 	},
 	business_finance: {
 		key           : 'business_finance',

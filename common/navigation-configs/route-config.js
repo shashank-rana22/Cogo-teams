@@ -1,16 +1,15 @@
 import businessConfig from './config/business-finance';
 import coeConfig from './config/coe';
-import homeConfig from './config/home';
 import localConfig from './config/locations';
 import rolesAndPermissions from './config/roles-n-permission';
+import thingsToDo from './config/things-to-do';
 
 const routeConfig = {
-	...homeConfig,
 	...businessConfig,
 	...coeConfig,
 	...localConfig,
 	...rolesAndPermissions,
-	...coeConfig,
+	...thingsToDo,
 };
 
 export default routeConfig;
