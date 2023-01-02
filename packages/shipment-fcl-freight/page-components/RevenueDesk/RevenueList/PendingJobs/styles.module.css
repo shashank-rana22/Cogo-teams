@@ -1,0 +1,11 @@
+.pagination_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.loader_container {
+	display: flex;
+	justify-content: center;
+}
