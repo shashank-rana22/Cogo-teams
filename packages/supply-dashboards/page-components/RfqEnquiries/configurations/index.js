@@ -1,24 +1,32 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsOrganization, asyncFieldsOrganizationUsers } from '@cogoport/forms/utils/getAsyncFields';
+import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsShippingLines }
+	from '@cogoport/forms/utils/getAsyncFields';
 import { merge } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+import airFields from './air-controls';
 import fclControl from './fcl-controls';
 import fclDetetionFreeDays from './fcl-detetion-free-days';
 import fclLocals from './fcl-local-charges';
 
 const Config = ({ service, serviceProviderId }) => {
+	const [orgUsers, setOrgUsers] = useState([]);
 	const serviceProviderOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));
+	const shippingLineOptions = useGetAsyncOptions(merge(asyncFieldsShippingLines()));
 
 	const organizationUsersOptions = useGetAsyncOptions(
 		merge(asyncFieldsOrganizationUsers()),
 		{ params: { filters: { valueKey: 'organization_id' } } },
 	);
+	const getOptions = async () => {
+		if (serviceProviderId) {
+			const res = await organizationUsersOptions?.onHydrateValue([serviceProviderId]);
+			setOrgUsers(res);
+		}
+	};
 
 	useEffect(() => {
-		if (serviceProviderId) {
-			organizationUsersOptions?.onHydrateValue([serviceProviderId]);
-		}
+		getOptions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [serviceProviderId]);
 
@@ -34,6 +42,8 @@ const Config = ({ service, serviceProviderId }) => {
 		if (service?.data?.free_days_detention_destination > 0) {
 			field.push(...fclDetetionFreeDays({ heading: 'Destination Detention Days' }));
 		}
+	} else if (service?.service === 'air_freight') {
+		field.push({ ...airFields });
 	}
 	const newField = field.map((control) => {
 		const { name } = control;
@@ -41,7 +51,9 @@ const Config = ({ service, serviceProviderId }) => {
 		if (name === 'service_provider_id') {
 			newControl = { ...newControl, ...serviceProviderOptions };
 		} else if (name === 'sourced_by_id') {
-			newControl = { ...newControl, ...organizationUsersOptions };
+			newControl = { ...newControl, ...organizationUsersOptions, options: orgUsers };
+		} else if (name === 'shipping_line_id') {
+			newControl = { ...newControl, ...shippingLineOptions };
 		}
 		return { ...newControl };
 	});

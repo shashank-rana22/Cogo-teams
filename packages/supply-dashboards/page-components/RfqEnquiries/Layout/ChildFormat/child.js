@@ -9,51 +9,70 @@ function Child({
 	controls,
 	control,
 	index,
+	value,
 	name,
 	remove,
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	disabled = false,
+	register,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
-	controls.forEach((field) => {
-		span += field.span || 11;
+	controls.forEach((fields) => {
+		span += fields.span || 11;
 		if (span === 11) {
-			rowWiseFields.push(field);
+			rowWiseFields.push(fields);
 			totalFields.push(rowWiseFields);
 			rowWiseFields = [];
 			span = 0;
 		} else if (span < 11) {
-			rowWiseFields.push(field);
+			rowWiseFields.push(fields);
 		} else {
 			totalFields.push(rowWiseFields);
 			rowWiseFields = [];
-			rowWiseFields.push(field);
-			span = field.span;
+			rowWiseFields.push(fields);
+			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
+
 	return (
 		<div className={styles.fieldarray}>
-			{totalFields.map((field) => (
+			{totalFields.map((fields) => (
 				<div className={styles.row}>
-					{field.map((controlItem) => {
+					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
+						const extraProps = {};
+						if (controlItem.customProps) {
+							if (Array.isArray(controlItem.customProps)) {
+								extraProps.options = controlItem.customProps;
+							} else {
+								extraProps.options = controlItem.customProps[index];
+							}
+						}
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }}>
-								<h4 style={{ height: '16px', marginBottom: '6px' }}>
+								<h4 style={{
+									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
+								}}
+								>
 									{controlItem?.label}
 								</h4>
 								<Element
 									style={{ minWidth: '0px' }}
+									key={`${name}.${index}.${controlItem.name}`}
+									options={extraProps?.options}
+									index={index}
 									control={control}
 									{...controlItem}
+									value={value[controlItem.name]}
+									{...register(`${name}.${index}.${controlItem.name}`)}
 								/>
 							</div>
 						);

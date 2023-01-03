@@ -1,4 +1,4 @@
-const fclFields =	[
+const airFields =	[
 	{
 		name        : 'service_provider_id',
 		label       : 'Service Provider',
@@ -17,8 +17,8 @@ const fclFields =	[
 		span           : 4,
 	},
 	{
-		label       : 'Shipping Line',
-		name        : 'shipping_line_id',
+		label       : 'Air Line',
+		name        : 'airline_id',
 		placeholder : 'Select',
 		type        : 'select',
 		isClearable : true,
@@ -62,14 +62,13 @@ const fclFields =	[
 				name        : 'code',
 				type        : 'select',
 				span        : 4,
-				label       : 'Charge Code',
 				valueKey    : 'code',
 				placeholder : 'Charge Name',
+				className   : 'primary lg',
 				rules       : { required: 'This is required' },
 			},
 			{
 				name        : 'unit',
-				label       : 'Unit',
 				span        : 4,
 				type        : 'select',
 				className   : 'primary lg',
@@ -79,7 +78,6 @@ const fclFields =	[
 			{
 				name           : 'currency',
 				span           : 1.5,
-				label          : 'Currency',
 				type           : 'select',
 				placeholder    : 'Curr...',
 				className      : 'primary lg',
@@ -91,7 +89,6 @@ const fclFields =	[
 				name         : 'price',
 				span         : 1.5,
 				type         : 'text',
-				label        : 'Price',
 				showOptional : false,
 				className    : 'primary lg',
 				placeholder  : 'Amount',
@@ -101,4 +98,4 @@ const fclFields =	[
 	},
 ];
 
-export default fclFields;
+export default airFields;

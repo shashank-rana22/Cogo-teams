@@ -1,6 +1,6 @@
 const fclLocals = ({ heading }) => {
 	const controls = 		{
-		name               : `${heading}_line_items`,
+		name               : 'local_line_items',
 		type               : 'fieldArray',
 		heading,
 		showButtons        : true,
