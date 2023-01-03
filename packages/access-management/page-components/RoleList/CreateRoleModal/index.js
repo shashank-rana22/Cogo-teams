@@ -32,10 +32,6 @@ function CreateRoleModal({
 					redirect={redirect}
 				/>
 			</Modal.Body>
-			<Modal.Footer>
-				<Button themeType="secondary">Cancel</Button>
-				<Button type="submit">Create</Button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

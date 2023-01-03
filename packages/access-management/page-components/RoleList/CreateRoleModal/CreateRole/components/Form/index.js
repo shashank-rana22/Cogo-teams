@@ -71,6 +71,11 @@ function Form({
 				);
 			})}
 
+			<Modal.Footer>
+				<Button themeType="secondary">Cancel</Button>
+				<Button type="submit">Create</Button>
+			</Modal.Footer>
+
 		</form>
 	);
 }
