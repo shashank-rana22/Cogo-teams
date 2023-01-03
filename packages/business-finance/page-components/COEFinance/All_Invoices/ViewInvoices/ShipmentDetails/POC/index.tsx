@@ -6,11 +6,11 @@ import {
 	IcMOverview,
 	IcMArrowRotateUp,
 } from '@cogoport/icons-react';
-import POCTimeLine from './POCTimeLine';
+import POCTimeLine from './POCTimeLine/index';
 import styles from './styles.module.css'
-import CustomerInformation from './CustomerInformation';
-import usePOCDetails from '../../../hook/usePOCDetails';
-import { POC_DATA_MAPPING } from '../../../constants/constant';
+import CustomerInformation from './CustomerInformation/index';
+import usePOCDetails from '../../../../hook/usePOCDetails';
+import { POC_DATA_MAPPING } from '../../../../constants/constant';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
 
 function getNumber(labelValue) {

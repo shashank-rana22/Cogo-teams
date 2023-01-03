@@ -1,7 +1,7 @@
 import { useRequest} from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useListShipment = (jobNumber) => {
+const useListShipment = (jobNumber:string) => {
 	
 	const [{ data, loading }, trigger] = useRequest(
 		{

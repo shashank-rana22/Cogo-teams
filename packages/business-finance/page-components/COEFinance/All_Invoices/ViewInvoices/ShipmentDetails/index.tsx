@@ -6,15 +6,27 @@ import Details from "./Details/index";
 import Documents from "./Documents/index";
 import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
-import POC from './../POC';
+import POC from './POC/index';
 import useListShipment from "../../../hook/useListShipment";
 
-const ShipmentDetails = ({data,orgId})=>{
+interface JobInterface {
+    jobNumber:string
+
+}
+interface DataInterface {
+    job:JobInterface
+}
+interface ShipmentDetailsInterface {
+    data:DataInterface
+    orgId?:string
+    
+}
+const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
 
     const { job } = data || {}
-    const {  jobNumber } = job || {};
+    const {  jobNumber } = job || '';
 
     const {data:shipmentData} = useListShipment(jobNumber);
     const shipmentId = shipmentData?.list[0]?.id;
