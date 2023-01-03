@@ -1,29 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@cogoport/components'
 import {useRouter} from '@cogoport/next'
 import styles from "./styles.module.css"
-import { Tags } from '@cogoport/components'
 import StatRect from './StatRect'
 import Line from './Line'
 import DiscountRect from './DiscountRect'
 import { Accordion } from '@cogoport/components'
 import { IcADocumentTemplates, IcMArrowNext, IcMInfo } from '@cogoport/icons-react'
-import { Select } from '@cogoport/components'
+import { Select,Placeholder } from '@cogoport/components'
 import CardHeader from './Card/CardHeader'
 import { CardBody } from './Card/CardBody'
 import useGetShipmentCostSheet from '../hook/useGetShipmentCostSheet'
 import { GenericObject } from '../../commons/Interfaces'
 import getFormattedPrice from '../../commons/utils/getFormattedPrice'
+import getFormattedData from '../utils/getFormattedData'
 
 const CostSheet = () => {
   const Router=useRouter();
-  const shipment_id=Router.query.orgId;
-  const {data,loading}=useGetShipmentCostSheet({shipment_id});
+  const shipment_id=Router.query.shipmentId;
+  const {selldata,buydata,apiloading, data}=useGetShipmentCostSheet({shipment_id});
   const{buy_quotation={}, sell_quotation={}}=data||{};
-  const{service_charges: buyServicesCharges =[],net_total:netTotalPriceSell,net_total_price_currency:netTotalPriceCurrencySell,net_total_price_discounted:netTotalPriceDiscountedSell}=sell_quotation;
-  const{service_charges: sellServicesCharges =[],net_total:netTotalPriceBuy,net_total_price_currency:netTotalPriceCurrencyBuy,net_total_price_discounted:netTotalPriceDiscountedBuy}=buy_quotation;
+  const{service_charges: buyServicesCharges,net_total:netTotalPriceSell,net_total_price_currency:netTotalPriceCurrencySell,net_total_price_discounted:netTotalPriceDiscountedSell}=sell_quotation||{};
+  const{service_charges: sellServicesCharges,net_total:netTotalPriceBuy,net_total_price_currency:netTotalPriceCurrencyBuy,net_total_price_discounted:netTotalPriceDiscountedBuy}=buy_quotation||{};
   
-
   return (
     <div>
     <div className={styles.flex}>
@@ -67,19 +66,19 @@ const CostSheet = () => {
     </div>
     <div className={`${styles.displayflex} ${styles.responsive}`}>
     <div className={styles.amountselect}>Show Amount in</div>
-    <Select/>
+    <Select options={[]}/>
     </div>
     </div>
     <div className={styles.flex}>
     <div className={styles.width}>
     <CardHeader header='Sell' value={getFormattedPrice(netTotalPriceSell||netTotalPriceDiscountedSell,
 							netTotalPriceCurrencySell || 'INR')||'-'} />
-    {buyServicesCharges.map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
+    {(selldata||[1,2,3]).map((charge:GenericObject)=>((apiloading)?<Placeholder margin="20px" width='96%' height='220px'/>:<CardBody charge={charge}/>))}
     </div>
     <div className={styles.width}>
     <CardHeader header='Buy' value={getFormattedPrice(netTotalPriceBuy||netTotalPriceDiscountedBuy,
 							netTotalPriceCurrencyBuy || 'INR')||'-'}/>
-    {sellServicesCharges.map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
+    {(buydata ||[1,2,3]).map((charge:GenericObject)=>((apiloading)?<Placeholder margin="20px" width='96%' height='220px'/>:<CardBody charge={charge}/>))}
     </div>
     </div>
     </div>

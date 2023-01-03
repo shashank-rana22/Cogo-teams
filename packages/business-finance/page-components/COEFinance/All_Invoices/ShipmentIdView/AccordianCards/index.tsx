@@ -150,7 +150,7 @@ const AccordianCards = ({
                                 themeType="secondary"
                                 onClick={() => {
                                     setCurrentOpenSID(itemData?.id);
-                                    router.push(`/business-finance/coe-finance/cost-sheet?orgId=${itemData.id}`);
+                                    router.push(`/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}`);
                                 }}
                             >
                                 Cost View
