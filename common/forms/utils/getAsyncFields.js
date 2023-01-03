@@ -58,10 +58,24 @@ function asyncFieldsOrganizationUsers() {
 		endpoint    : 'list_organization_users',
 		initialCall : false,
 		params      : {
-
 			filters: {
 				status: 'active',
 			},
+		},
+	};
+}
+
+function asyncFieldsShippingLines() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_operators',
+		initialCall : true,
+		params      : {
+			filters    : { operator_type: 'shipping_line', status: 'active' },
+			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
 		},
 	};
 }
@@ -71,4 +85,5 @@ export {
 	asyncFieldsPartner,
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
+	asyncFieldsShippingLines,
 };

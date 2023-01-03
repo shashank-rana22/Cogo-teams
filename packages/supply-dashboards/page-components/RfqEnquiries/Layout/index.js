@@ -1,8 +1,12 @@
+import React from 'react';
+
 import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
-function Layout({ control, fields, showElements = {} }) {
+function Layout({
+	control, fields, showElements = {}, register,
+}) {
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
@@ -36,13 +40,18 @@ function Layout({ control, fields, showElements = {} }) {
 						const show = !(showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
-							// <>
-							// <div style={styles.heading}>{heading}</div>
-								<FieldArray
-									{...fieldsItem}
-									control={control}
-								/>
-							// </>
+								<>
+									<div className={styles.heading}>
+										{heading}
+									</div>
+
+									<FieldArray
+										{...fieldsItem}
+										control={control}
+										register={register}
+									/>
+
+								</>
 							);
 						}
 						return show
