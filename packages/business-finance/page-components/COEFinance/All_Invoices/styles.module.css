@@ -2,6 +2,7 @@
   display: flex;
   height: 59px;
   margin-bottom: -20px;
+  margin-top: 12px;
 }
 .subContainerClick {
   display: flex;
@@ -16,11 +17,11 @@
   cursor: pointer;
   font-weight: 600;
   height: 42px;
-  width: 92%;
+  width: 93%;
   &:hover {
     box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.3);
     height: 46px;
-    width: 95%;
+    width: 94%;
     transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
   }
 }
@@ -36,12 +37,11 @@
   cursor: pointer;
   font-weight: 600;
   height: 42px;
-  width: 92%;
+  width: 93%;
   &:hover {
     box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.3);
     height: 46px;
-    width: 95%;
+    width: 94%;
     transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
   }
-  display: flex;
 }
