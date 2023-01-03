@@ -26,8 +26,7 @@ const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
     const[showDocuments,setShowDocuments] = useState(false)
 
     const { job } = data || {}
-    const {  jobNumber } = job || '';
-
+    const {  jobNumber } = job || {};
     const {data:shipmentData} = useListShipment(jobNumber);
     const shipmentId = shipmentData?.list[0]?.id;
 
