@@ -75,7 +75,7 @@ const useRoleList = () => {
 
 	useEffect(() => onChangeParams({ page: 1 }), [filters]);
 
-	useEffect(() => getListAuthRoles(), [JSON.stringify(params)]);
+	useEffect(() => getListAuthRoles(), [params]);
 
 	const onChangeShowCreateRoleModal = useCallback((value = false) => {
 		setShowCreateRoleModal(!!value);
