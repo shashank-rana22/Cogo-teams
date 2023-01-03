@@ -1,21 +1,25 @@
 import { useState } from 'react';
 
+import formatPortPair from '../../../utils/formatPortPair';
+
 import Main from './Main';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
 function Body({ data }) {
+	const formattedData = formatPortPair({ item: data });
 	const uniqueId = `${
-		data?.services_data?.fcl_freight[0]?.service_details[0].origin_port_id
-	} ${data?.services_data?.fcl_freight[0]?.service_details[0].destination_port_id}`;
+		formattedData[0].origin_code
+	} ${formattedData[0].destination_code}`;
 	const [activePair, setActivePair] = useState({
-		...data?.services_data?.fcl_freight[0]?.service_details[0],
+		...formattedData[0],
 		uniqueId,
 	});
+
 	return (
 		<div className={styles.body}>
 			<SideBar
-				data={data?.services_data?.fcl_freight[0]?.service_details}
+				data={formattedData}
 				activePair={activePair}
 				setActivePair={setActivePair}
 			/>

@@ -3,13 +3,13 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function PortPair({ portPair, handlePortChange = () => {} }) {
-	const originCode = portPair?.origin_port?.port_code;
-	const originName = portPair?.origin_port?.name.split('(')[0];
-	const originCountry = portPair?.origin_port?.display_name.split(' ').slice(-1);
-	const destinationCode = portPair?.destination_port?.port_code;
-	const destinationName = portPair?.destination_port?.name.split('(')[0];
-	const destinationCountry = portPair?.destination_port?.display_name.split(' ').slice(-1);
-	const uniqueId = `${portPair?.origin_port_id} ${portPair?.destination_port_id}`;
+	const originCode = portPair?.origin_code;
+	const originName = portPair?.origin.split('(')[0];
+	const originCountry = portPair?.origin.split(' ').slice(-1);
+	const destinationCode = portPair?.destination_code;
+	const destinationName = portPair?.destination.split('(')[0];
+	const destinationCountry = portPair?.destination.split(' ').slice(-1);
+	const uniqueId = `${portPair?.origin_code} ${portPair?.destination_code}`;
 	return (
 		<div
 			role="presentation"

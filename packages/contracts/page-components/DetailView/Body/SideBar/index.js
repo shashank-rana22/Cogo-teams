@@ -15,7 +15,7 @@ function SideBar({ data, activePair, setActivePair }) {
 			</div>
 			{data?.map((portPair) => (
 				<div
-					className={activePair?.uniqueId === `${portPair?.origin_port_id} ${portPair?.destination_port_id}`
+					className={activePair?.uniqueId === `${portPair?.origin_code} ${portPair?.destination_code}`
 						? styles.port_pair_active : ''}
 				>
 					<div className={styles.pair}>

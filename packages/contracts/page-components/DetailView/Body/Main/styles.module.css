@@ -18,5 +18,6 @@
 }
 
 .line{
-    border: 1px solid #D6DBEB;
+    border: 0.5px solid #D6DBEB;
+    background-color: #D6DBEB
 }

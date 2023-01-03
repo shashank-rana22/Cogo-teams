@@ -36,13 +36,13 @@ function Layout({ control, fields, showElements = {} }) {
 						const show = !(showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
-								<>
-									<div style={styles.heading}>{heading}</div>
-									<FieldArray
-										{...fieldsItem}
-										control={control}
-									/>
-								</>
+							// <>
+							// <div style={styles.heading}>{heading}</div>
+								<FieldArray
+									{...fieldsItem}
+									control={control}
+								/>
+							// </>
 							);
 						}
 						return show
