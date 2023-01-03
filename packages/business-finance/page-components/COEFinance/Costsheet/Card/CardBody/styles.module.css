@@ -2,7 +2,7 @@
     background: #FFFFFF;
     margin: 15px 0px;
     display: flex;
-    padding: 15px 25px 5px 25px;
+    padding: 15px 25px 0px 25px;
     @media (max-width: 768px){
         padding: 5px 0px 5px 25px;
     }
@@ -13,7 +13,7 @@
     margin: 15px 0px;
     display: flex;
     align-items: center;
-    padding: 20px 25px 5px 25px;
+    padding: 20px 25px 0px 25px;
     border-top: 1px solid #D9D9D9;
     @media (max-width: 768px){
         padding: 20px 25px 5px 25px;
@@ -33,7 +33,7 @@
     display: flex;
     flex: var(--span);
     justify-content: flex-start;
-    font-weight: 600;
+    font-weight: 550;
     font-size: 20px;
     line-height: 20px;
 }
@@ -45,7 +45,6 @@
     border: 1px solid var(--bordercolor);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 4px;
-    min-height: 258px;
     position: relative;
     @media (max-width: 768px){
         padding: 0px;
@@ -56,7 +55,7 @@
     background: #FFFFFF;
     margin: 15px 0px;
     display: flex;
-    padding: 15px 25px 0px 25px;
+    padding: 15px 25px 15px 25px;
     border-top: 1px solid #D9D9D9;
 }
 
@@ -67,7 +66,7 @@
 }
 
 .coloredlabel{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 15px;
     display: flex;
     flex: var(--span);
@@ -102,12 +101,12 @@
 
 .custompadding{
     background: #FFFFFF;
-    padding: 12px 20px;
+    padding: 10px 20px;
     margin: 20px 0px;
     border: 1px solid var(--bordercolor);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 4px;
-    min-height: 258px;
+    min-height: 240px;
     position: relative;
     @media (max-width: 768px){
         padding: 0px;
@@ -116,13 +115,15 @@
 .viewmore{
     display: flex;
     justify-content: center;
-    text-decoration: underline;
     font-size: small;
-    color: blue;
+    color: rgb(57, 63, 112);
     cursor: pointer;
     position: absolute;
     bottom: 0px;
-    left: 45%;
+    right: 0px;
+    background-color: rgb(242, 246, 255);
+    width: 100%;
+    border-radius: 0px 0px 8px 8px;
 }
 
 .arrowicon{
@@ -144,7 +145,7 @@
     border: 1px solid var(--bordercolor);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 4px;
-    min-height: 258px;
+    min-height: 240px;
     position: relative;
     @media (max-width: 768px){
         padding: 0px;

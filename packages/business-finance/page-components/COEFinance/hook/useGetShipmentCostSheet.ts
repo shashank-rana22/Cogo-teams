@@ -8,10 +8,10 @@ interface Params{
 }
 
 const useGetShipmentCostSheet = ({shipment_id}:Params) => {
-    const[loadingState,setLoadingState]=useState(true)
+    const[loadingState,setLoadingState]=useState(false)
     const[selldata,setSelldata]=useState<any[]>([])
     const[buydata,setBuydata]=useState<any[]>([])
-    const [{ data}, trigger] = useRequestBf(
+    const [{ data, loading}, trigger] = useRequestBf(
             {
                 url     : `/get_shipment_cost_sheet`,
                 method  : 'get',
@@ -26,6 +26,7 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
         const getdataFromApi = async () => {
             try {
                 const res = await trigger({ params: { shipment_id } });
+                setLoadingState(true)
                 const {formattedBuyData,sellQuotationData}=getFormattedData(res.data )
                 setSelldata(sellQuotationData);
                 setBuydata(formattedBuyData);
@@ -42,7 +43,7 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
                 getdataFromApi();
         }, [shipment_id]);
 
-        return {data, selldata,buydata,apiloading:(loadingState)};
+        return {data, selldata,buydata,apiloading:(loading||loadingState)};
 }
 
 export default useGetShipmentCostSheet
