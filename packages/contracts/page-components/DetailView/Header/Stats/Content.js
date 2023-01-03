@@ -8,7 +8,7 @@ import useUpdateContract from '../../../../hooks/useUpdateContract';
 
 import styles from './styles.module.css';
 
-function Content({ data }) {
+function Content({ data, status }) {
 	const { updateContract } = useUpdateContract();
 
 	const handleUpdateContract = async (val) => {
@@ -28,26 +28,28 @@ function Content({ data }) {
 				<Line />
 				<Margin />
 			</div>
-			<div className={styles.button_container}>
-				<Button
-					themeType="secondary"
-					size="md"
-					onClick={() => {
-						handleUpdateContract('rejected');
-					}}
-				>
-					Reject
-				</Button>
-				<Button
-					themeType="primary"
-					size="md"
-					onClick={() => {
-						handleUpdateContract('approved');
-					}}
-				>
-					Approve
-				</Button>
-			</div>
+			{status === 'pending_approval' ? (
+				<div className={styles.button_container}>
+					<Button
+						themeType="secondary"
+						size="md"
+						onClick={() => {
+							handleUpdateContract('rejected');
+						}}
+					>
+						Reject
+					</Button>
+					<Button
+						themeType="primary"
+						size="md"
+						onClick={() => {
+							handleUpdateContract('active');
+						}}
+					>
+						Approve
+					</Button>
+				</div>
+			) : null}
 		</div>
 	);
 }

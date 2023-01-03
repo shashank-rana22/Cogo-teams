@@ -6,13 +6,16 @@ import styles from './styles.module.css';
 
 function Body({ data }) {
 	const uniqueId = `${
-		data?.fcl_freight_services[0]?.service_details[0].origin_port_id
-	} ${data?.fcl_freight_services[0]?.service_details[0].destination_port_id}`;
-	const [activePair, setActivePair] = useState({ ...data?.fcl_freight_services[0]?.service_details[0], uniqueId });
+		data?.services_data?.fcl_freight[0]?.service_details[0].origin_port_id
+	} ${data?.services_data?.fcl_freight[0]?.service_details[0].destination_port_id}`;
+	const [activePair, setActivePair] = useState({
+		...data?.services_data?.fcl_freight[0]?.service_details[0],
+		uniqueId,
+	});
 	return (
 		<div className={styles.body}>
 			<SideBar
-				data={data?.fcl_freight_services[0]?.service_details}
+				data={data?.services_data?.fcl_freight[0]?.service_details}
 				activePair={activePair}
 				setActivePair={setActivePair}
 			/>

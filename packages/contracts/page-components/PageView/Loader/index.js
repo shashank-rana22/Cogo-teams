@@ -9,9 +9,6 @@ function Card() {
 			<div className={styles.header}>
 				<div className={styles.heading}>
 					<div><Placeholder /></div>
-					<div className={styles.trade}>
-						<Placeholder />
-					</div>
 				</div>
 				<div className={styles.details}>
 					<div><Placeholder /></div>

@@ -6,6 +6,7 @@ import {
 	IcMFinanceCrm,
 	IcMFinanceDashboard,
 	IcMProductCodeMapping,
+	IcMContractRates,
 } from '@cogoport/icons-react';
 
 import partner from './apis/partner-apis';
@@ -95,6 +96,15 @@ const navigationMappings = {
 		icon        : IcMBookingDesk,
 		href        : '/supply/dashboards',
 		as          : '/supply/dashboards',
+		type        : 'link',
+		module_type : 'dashboards',
+	},
+	contracts: {
+		key         : 'contracts',
+		title       : 'Contracts',
+		icon        : IcMContractRates,
+		href        : '/contracts',
+		as          : '/contracts',
 		type        : 'link',
 		module_type : 'dashboards',
 	},

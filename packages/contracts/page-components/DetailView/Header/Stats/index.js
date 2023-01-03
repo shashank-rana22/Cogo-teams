@@ -1,7 +1,7 @@
 import Content from './Content';
 import styles from './styles.module.css';
 
-function Stats({ data }) {
+function Stats({ data, status }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -10,9 +10,6 @@ function Stats({ data }) {
 						#
 						{data?.contract_reference_id}
 					</div>
-					<div className={styles.trade}>
-						Export
-					</div>
 				</div>
 				<div className={styles.details}>
 					<div className={styles.pair}>
@@ -20,7 +17,7 @@ function Stats({ data }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							10 June  2022
+							{data?.services_data?.fcl_freight[0]?.max_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -36,12 +33,13 @@ function Stats({ data }) {
 							Validity :
 						</div>
 						<div className={styles.value}>
-							10 June  2022
+							{data?.validity_left_days}
+							days
 						</div>
 					</div>
 				</div>
 			</div>
-			<Content data={data} />
+			<Content data={data} status={status} />
 		</div>
 	);
 }

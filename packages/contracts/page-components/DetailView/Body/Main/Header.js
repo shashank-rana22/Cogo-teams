@@ -8,7 +8,7 @@ function Header({ activePair }) {
 	const originName = activePair?.origin_port?.name.split('(')[0];
 	const destinationCode = activePair?.destination_port?.port_code;
 	const destinationName = activePair?.destination_port?.name.split('(')[0];
-	const items = [{ key: 'trade_type', children: activePair?.trade_type }];
+	const items = [{ children: activePair?.trade_type }];
 	return (
 		<div className={styles.heading}>
 			<div className={styles.port_pair}>
@@ -30,7 +30,7 @@ function Header({ activePair }) {
 					/ctr.
 				</div>
 			) : null}
-			<Tags items={items} />
+			<Tags items={items} closable />
 		</div>
 	);
 }

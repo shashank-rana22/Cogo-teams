@@ -1,11 +1,16 @@
+import { useSelector } from '@cogoport/store';
+
 import useGetContract from '../../hooks/useGetContract';
 
 import Body from './Body';
 import Header from './Header';
 import Loader from './Loader';
 
-function DetailView({ showDetail, setShowDetail }) {
-	const { data, loading } = useGetContract({ showDetail });
+function DetailView() {
+	const { query } = useSelector(({ general }) => ({
+		query: general?.query,
+	}));
+	const { data, loading } = useGetContract({ id: query?.id });
 
 	let content = (
 		<Loader />
@@ -15,7 +20,7 @@ function DetailView({ showDetail, setShowDetail }) {
 		content = (
 			<>
 				{' '}
-				<Header setShowDetail={setShowDetail} data={data} />
+				<Header data={data} status={query?.status} />
 				<Body data={data} />
 			</>
 		);
