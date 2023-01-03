@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { format } from '@cogoport/utils';
 
 import PortPair from './PortPair';
 import styles from './styles.module.css';
@@ -42,7 +43,7 @@ function Card({ item, filters }) {
 							Request Date :
 						</div>
 						<div className={styles.value}>
-							10 June  2022
+							{format(item?.requested_at, 'dd MMM YYYY')}
 						</div>
 					</div>
 					<div className={styles.pair}>
