@@ -1,3 +1,4 @@
+import fclCfsControls from './fcl-cfs';
 import fclControl from './fcl-controls';
 import fclLocals from './fcl-local-charges';
 
@@ -12,6 +13,9 @@ const config = ({ service }) => {
 		if (service?.data?.include_origin_local) {
 			field.push(fclLocals({ heading: 'Add Origin Local Charges' }));
 		}
+	}
+	if (service?.service === 'fcl_cfs') {
+		field.push(fclCfsControls);
 	}
 	console.log(field, 'values');
 
