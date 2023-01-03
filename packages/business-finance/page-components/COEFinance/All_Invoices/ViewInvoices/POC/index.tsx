@@ -1,6 +1,5 @@
-import { Skeleton } from '@cogoport/front/components/admin';
+import { Placeholder } from '@cogoport/components';
 import React,{ useState } from 'react';
-import usei18n, { getFormattedPrice } from '@cogo/i18n';
 import {
 	IcMArrowRotateLeft,
 	IcMArrowRotateDown,
@@ -8,24 +7,11 @@ import {
 	IcMArrowRotateUp,
 } from '@cogoport/icons-react';
 import POCTimeLine from './POCTimeLine';
-import {
-	InvoiceDetailsContainer,
-	Container,
-	InvoiceDetailsContainerBg,
-	IconContainer,
-	InvoiceCardData,
-	Information,
-	DropdownContainer,
-	InformationData,
-	HR,
-	DataContainer,
-	FadeInActionControls,
-	IconView,
-} from './styles';
+import styles from './styles.module.css'
 import CustomerInformation from './CustomerInformation';
-import POCInformation from './POCInformation';
-import useInvoiceDetails from './useInvoiceDetails';
-import { INVOICE_DATA_MAPPING } from '../../../constants/constants';
+import usePOCDetails from '../../../hook/usePOCDetails';
+import { POC_DATA_MAPPING } from '../../../constants/constant';
+import { IcMArrowRotateRight } from '@cogoport/icons-react';
 
 function getNumber(labelValue) {
 	if (Math.abs(Number(labelValue)) >= 1.0e9) {
@@ -40,27 +26,25 @@ function getNumber(labelValue) {
 	return Math.abs(Number(labelValue));
 }
 
-const InvoiceDetails = ({ itemData, setDataList = () => {} }) => {
-	const { numLocale } = usei18n();
+// interface Props {
+// 	bill :object
+// 	job:object
+// }
+
+const POCDetails = ( {itemData} :any) => {
+
+	const {bill , job } = itemData
+
 	const {
 		loading,
 		invoiceData,
 		timeLineData,
 		timeLineLoading,
-		profitabilityData,
-		profitabilityLoading,
-		supplierDetailsData,
-		supplierDetailsLoading,
 		getInvoiceDetailsApi,
 		getTimeLineDetailsApi,
-		getProfitabilityApi,
-		getSupplierDetailsApi,
-	} = useInvoiceDetails({
-		id: itemData?.id,
-		jobId: itemData?.jobId,
-		serviceProviderId: itemData?.serviceProviderId,
-		billId: itemData?.billId,
-	});
+	} = usePOCDetails(
+		bill?.id,
+	);
 
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 
@@ -68,10 +52,7 @@ const InvoiceDetails = ({ itemData, setDataList = () => {} }) => {
 
 	const handleShow = () => {
 		setShowDetailsCard(true);
-		setDataList(itemData.id || itemData.billId);
 		getInvoiceDetailsApi();
-		getSupplierDetailsApi();
-		getProfitabilityApi();
 		document.body.style.overflow = 'hidden';
 	};
 
@@ -80,141 +61,62 @@ const InvoiceDetails = ({ itemData, setDataList = () => {} }) => {
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
-		if (key === '4') getTimeLineDetailsApi();
+		if (key === '2') getTimeLineDetailsApi();
 	};
-	const {
-		overallExpense,
-		overallIncome,
-		totalPayables,
-		totalReceivable,
-		totalCreditNoteAmount,
-	} = invoiceData || {};
 
-	const { invoiceNumber, jobNumber, billNumber, sid } = itemData || {};
+	const {  jobNumber } = job || {};
+	
 
 	return (
 		<>
-			<IconView style={{ color: '#5936F0' }} onClick={handleShow}>
-				<IcMOverview width={30} height={30} />
-			</IconView>
+			<div className={styles.iconView} onClick={handleShow}>
+				<div className={styles.iconContainer} >
+				   <IcMArrowRotateRight width={20} height={20} />
+				</div>
+				<div className={styles.pocContainer}>
+				    POC & Other Details
+				</div>
+			</div>
 			{showDetailsCard && (
 				<>
-					<InvoiceDetailsContainerBg />
+					<div className={styles.invoiceDetailsContainerBg} />
 
-					<InvoiceDetailsContainer style={{ width: '35vw' }}>
-						<Container type={showDetailsCard ? 'enter' : 'exit'}>
-							<div className="content-caret">
-								<IconContainer
+					<div className={styles.invoiceDetailsContainer}  style={{ width: '35vw' }}>
+						<div className = {showDetailsCard ? styles.enter : styles.exit}>
+							<div className={styles.contentCaret}>
+								<div className={styles.iconContainer} 
 									onClick={() => {
 										setShowDetailsCard(false);
-										setDataList('');
 										document.body.style.overflow = 'auto';
 									}}
 								>
 									<IcMArrowRotateLeft />
-								</IconContainer>
+								</div>
 
-								<div className="header-details">
-									INVOICE DETAILS -
-									<span style={{ textDecorationLine: 'underline' }}>
-										{invoiceNumber || billNumber}
+								<div className={styles.headerDetails}>
+								    POC & Other Details - SID 
+									<span style={{marginLeft:'4px' }}>
+										{jobNumber}
 									</span>
 								</div>
 							</div>
 
-							<div className="body-details">
-								{loading ? (
-									<Skeleton
-										margin="10px 0px 14px 25px"
-										height="150px"
-										width="492px"
-										borderRadius="4px"
-									/>
-								) : (
-									<div className="body-details_card01">
-										<InvoiceCardData>
-											<div className="supplier-data-header">
-												<div>
-													SID -
-													<span
-														style={{ fontWeight: '600', marginLeft: '4px' }}
-													>
-														{jobNumber || sid}
-													</span>
-												</div>
-												<div>
-													Bill Credit Note Worth - INR
-													<span
-														style={{ fontWeight: '600', marginLeft: '4px' }}
-													>
-														{getNumber(totalCreditNoteAmount)}
-													</span>
-												</div>
-											</div>
-											<div className="supplier-data">
-												<div className="supplier-data-body">
-													<div>
-														Overall Expense
-														<span style={{ marginLeft: '4px' }}>
-															{getFormattedPrice(
-																numLocale,
-																overallExpense,
-																'INR',
-															)}
-														</span>
-													</div>
-													<div>
-														Total Payable
-														<span style={{ marginLeft: '4px' }}>
-															{getFormattedPrice(
-																numLocale,
-																totalPayables,
-																'INR',
-															)}
-														</span>
-													</div>
-												</div>
-												<div className="supplier-data-body">
-													<div>
-														Overall Income
-														<span style={{ marginLeft: '4px' }}>
-															{getFormattedPrice(
-																numLocale,
-																overallIncome,
-																'INR',
-															)}
-														</span>
-													</div>
-													<div>
-														Total Receivable
-														<span style={{ marginLeft: '4px' }}>
-															{getFormattedPrice(
-																numLocale,
-																totalReceivable,
-																'INR',
-															)}
-														</span>
-													</div>
-												</div>
-											</div>
-										</InvoiceCardData>
-									</div>
-								)}
+							<div className={styles.bodyDetails}>
 								{loading ? (
 									<>
-										<Skeleton
+										<Placeholder
 											margin="5px 0px 14px 25px"
 											height="45px"
 											width="492px"
 											borderRadius="4px"
 										/>
-										<Skeleton
+										<Placeholder
 											margin="5px 0px 14px 25px"
 											height="45px"
 											width="492px"
 											borderRadius="4px"
 										/>
-										<Skeleton
+										<Placeholder
 											margin="5px 0px 14px 25px"
 											height="45px"
 											width="492px"
@@ -222,70 +124,56 @@ const InvoiceDetails = ({ itemData, setDataList = () => {} }) => {
 										/>
 									</>
 								) : (
-									(INVOICE_DATA_MAPPING || [{}]).map((item) => {
+									(POC_DATA_MAPPING || [{}]).map((item) => {
 										const { id, label } = item;
 
 										return (
-											<Information key={id}>
-												<DataContainer
+											<div className={styles.information}  key={id}>
+												<div className={styles.dataContainer} 
 													onClick={() => {
 														handleDropdown(id);
 													}}
 												>
 													{label}
-													<DropdownContainer>
+													<div className={styles.dropdownContainer} >
 														{dropDownData[id] ? (
 															<IcMArrowRotateUp width={15} height={15} />
 														) : (
 															<IcMArrowRotateDown width={15} height={15} />
 														)}
-													</DropdownContainer>
-												</DataContainer>
+													</div>
+												</div>
 
-												{dropDownData[id] && <HR />}
+												{dropDownData[id] && <div className={styles.hR} />}
 
 												{dropDownData[id] && (
-													<FadeInActionControls
+													<div
 														type={dropDownData ? 'enter' : 'exit'}
 													>
-														<InformationData>
-															{label === 'Profitability' && (
-																<Profitability
-																	data={profitabilityData}
-																	loading={profitabilityLoading}
-																/>
-															)}
-
-															{label === 'Supplier Information' && (
-																<POCInformation
-																	data={supplierDetailsData}
-																	loading={supplierDetailsLoading}
-																/>
-															)}
-
-															{label === 'Customer Information' && (
+														<div  className={styles.informationData} >
+														{label === 'Customer Information' && (
 																<CustomerInformation data={invoiceData} />
 															)}
 
-															{label === 'Invoice Timeline' && (
+														{label === 'Timeline' && (
 																<POCTimeLine
 																	data={timeLineData}
 																	loading={timeLineLoading}
 																/>
-															)}
-														</InformationData>
-													</FadeInActionControls>
+														)}
+														</div>
+													</div>
 												)}
-											</Information>
+											</div>
 										);
 									})
 								)}
 							</div>
-						</Container>
-					</InvoiceDetailsContainer>
+						</div>
+					</div>
 				</>
 			)}
 		</>
 	);
 };
-export default InvoiceDetails;
+export default POCDetails;

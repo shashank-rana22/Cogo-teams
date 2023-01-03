@@ -34,13 +34,6 @@ const CoeFinance=()=>{
 	];
 
     
-     
-    useEffect(()=>{
-        push(
-			'/business-finance/coe-finance/[active_tab]',
-			`/business-finance/coe-finance/${activeTab}`,
-		);
-    },[activeTab])
 
     return(
     <div>

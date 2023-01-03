@@ -9,9 +9,12 @@ import PdfDisplay from "./PdfDisplay/index";
 import POC from './../POC';
 import useListShipment from "../../../hook/useListShipment";
 
-const ShipmentDetails = ({data,orgId,jobNumber})=>{
+const ShipmentDetails = ({data,orgId})=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
+
+    const { job } = data || {}
+    const {  jobNumber } = job || {};
 
     const {data:shipmentData} = useListShipment(jobNumber);
     const shipmentId = shipmentData?.list[0]?.id;
@@ -55,7 +58,12 @@ const ShipmentDetails = ({data,orgId,jobNumber})=>{
             {showDocuments && <div className={styles.hr}/>}
             <div className={styles.documents}> { showDocuments && <Documents data={data}  shipmentId={shipmentId}/> } </div>               
         </div>
-        {/* <POC/> */}
+
+        <div style={{display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
+            <div>hjfugvhg</div>
+            <POC itemData={data}/>
+        </div>
+        
 
         <div className={styles.shipmentDetailsFooter}>
             <div className={styles.pdfDisplay}>

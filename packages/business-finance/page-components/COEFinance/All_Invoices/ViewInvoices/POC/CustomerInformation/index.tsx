@@ -1,10 +1,8 @@
-import usei18n, { getFormattedPrice } from '@cogo/i18n';
-import { Container, SubContainer } from './styles';
+import styles from './styles.module.css'
 import React from 'react';
 const CustomerInformation = ({ data }) => {
+	
 	const { customerDetails } = data || {};
-
-	const { numLocale } = usei18n();
 
 	return (customerDetails || []).map((item) => {
 		const {
@@ -15,29 +13,31 @@ const CustomerInformation = ({ data }) => {
 		} = item || {};
 
 		return (
-			<Container key={id}>
-				<SubContainer>
+			<div className={styles.container} key={id}>
+				<div className={styles.subContainer}>
 					Name - <span style={{ fontWeight: 600 }}>{customerName}</span>
-				</SubContainer>
+				</div>
 
-				<SubContainer>
+				<div className={styles.subContainer}>
 					Total Outstanding -
 					<span style={{ fontWeight: 600 }}>
-						{getFormattedPrice(numLocale, customerOutstandingAmount, 'INR')}
+						{customerOutstandingAmount}
+						{/* {getFormattedPrice(numLocale, customerOutstandingAmount, 'INR')} */}
 					</span>
-				</SubContainer>
+				</div>
 
-				<SubContainer>
+				<div className={styles.subContainer}>
 					On Account Payments -
 					<span style={{ fontWeight: 600 }}>
-						{getFormattedPrice(
+						{customerOutstandingAmountOnSid}
+						{/* {getFormattedPrice(
 							numLocale,
 							customerOutstandingAmountOnSid,
 							'INR',
-						)}
+						)} */}
 					</span>
-				</SubContainer>
-			</Container>
+				</div>
+			</div>
 		);
 	});
 };
