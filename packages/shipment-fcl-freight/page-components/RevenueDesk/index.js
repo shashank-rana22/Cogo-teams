@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import useListShipments from '../../hooks/revenueDeskHooks/useGetList';
+import useListShipments from '../../hooks/revenueDeskHooks/useListShipments';
 
 import BookingOption from './BookingOption';
 import RevenueList from './RevenueList';

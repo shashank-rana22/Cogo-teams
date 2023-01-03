@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const useGetBuyQuotation = (shipmentData = {}) => {
 	const allServices = [];
@@ -10,7 +10,6 @@ const useGetBuyQuotation = (shipmentData = {}) => {
 	});
 
 	const allServiceIds = allServices.map((service) => service.id);
-	const firstRender = useRef(true);
 	const [{ data:listQuotationData, loading }, trigger] = useRequest(
 		'/get_shipment_services_quotation',
 		{ manual: true },
@@ -30,10 +29,6 @@ const useGetBuyQuotation = (shipmentData = {}) => {
 	};
 
 	useEffect(() => {
-		if (firstRender.current) {
-			firstRender.current = false;
-			return;
-		}
 		getQuotation();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [shipmentData?.id]);

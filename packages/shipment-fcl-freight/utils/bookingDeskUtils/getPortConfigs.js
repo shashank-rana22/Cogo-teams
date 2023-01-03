@@ -1,7 +1,53 @@
 import getConfigs from '../configurations/get-configs';
 
-import getLocationShipmentDetails from './getLocationShipmentDetail';
-import isSingleLocation from './isSingleLocation';
+const isSingleLocation = (search_type) => {
+	const onlySingleLocation = [
+		'fcl_customs',
+		'origin_fcl_customs',
+		'destination_fcl_customs',
+		'fcl_freight_local',
+	];
+
+	return onlySingleLocation.includes(search_type);
+};
+const getLocationShipmentDetails = (data, summary, type) => {
+	const { search_type } = summary;
+
+	const suffixConfig = {
+		fcl_freight       : 'port',
+		fcl_customs       : 'port',
+		fcl_freight_local : 'port',
+	};
+
+	const suffix =		suffixConfig[`${type}_${search_type}`] || suffixConfig[search_type];
+
+	const objName =		!isSingleLocation(search_type)
+		&& !['ftl_freight', 'ltl_freight'].includes(search_type)
+		? `${type}_${suffix}`
+		: suffix;
+
+	const location = (summary[objName] || {}).name || '';
+
+	const port_code =		(summary[objName] || {}).port_code
+		|| (summary[objName] || {}).postal_code
+		|| null;
+
+	const country = ((summary[objName] || {}).country || {}).name || '';
+
+	const { id } = summary[objName] || {};
+
+	const display_name = (summary[objName] || {}).display_name || '';
+
+	const mainLocation = (data[`${type}_main_${suffix}`] || {}).name;
+
+	return {
+		name: mainLocation || location,
+		port_code,
+		country,
+		id,
+		display_name,
+	};
+};
 
 const getPortConfigs = (data = {}) => {
 	if (data.search_type) {

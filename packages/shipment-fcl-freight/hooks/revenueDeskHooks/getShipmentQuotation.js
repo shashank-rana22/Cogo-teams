@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const useGetShipmentQuotation = (shipment_id = '') => {
-	const firstRender = useRef(true);
 	const [{ data:listQuotationData, loading }, trigger] = useRequest(
 		'/get_shipment_quotation',
 		{ manual: true },
@@ -24,10 +23,6 @@ const useGetShipmentQuotation = (shipment_id = '') => {
 	};
 
 	useEffect(() => {
-		if (firstRender.current) {
-			firstRender.current = false;
-			return;
-		}
 		getQuotation();
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
