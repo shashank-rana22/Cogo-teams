@@ -1,0 +1,39 @@
+.container{
+    margin-top: 20px;
+}
+.heading_wrapper{
+    display: flex;
+	justify-content: space-between;
+	margin-bottom: 4px;
+}
+.heading{
+    font-weight: 500;
+	font-size: 24px;
+	color: #333333;
+}
+.cards_container{
+    padding: 20px;
+	background: #fff;
+}
+.loader_container{
+    background: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 8px;
+}
+
+.pagination_wrapper{
+	padding: 5px 5px 0px 0px;
+    background: white;
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+	color: blue;
+}
+.upper{
+    padding: 12px 0 0;
+}
+
+.lower{
+    margin-top: -30px;
+}

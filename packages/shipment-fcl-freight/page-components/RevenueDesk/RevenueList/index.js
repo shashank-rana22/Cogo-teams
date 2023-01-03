@@ -63,7 +63,7 @@ function RevenueList({
 				<div className={styles.fcl_filters}>
 					<Popover
 						render={renderBody}
-						placement="bottom"
+						placement="left"
 						className={styles.filter_popover}
 					>
 						<Button

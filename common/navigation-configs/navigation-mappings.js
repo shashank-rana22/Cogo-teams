@@ -69,6 +69,14 @@ const navigationMappings = {
 		main_apis : ['list_shipments'],
 		options   : [
 			{
+				key       : 'coe-booking_note_desk',
+				title     : 'Booking Desk',
+				href      : '/booking-desk/fcl-freight',
+				as        : '/booking-desk/fcl-freight',
+				icon      : IcMBookingDesk,
+				main_apis : ['list_shipments'],
+			},
+			{
 				key       : 'coe-fcl_revenue_desk',
 				title     : 'FCL Revenue Desk',
 				href      : '/revenue-desk/fcl-freight',
@@ -78,7 +86,6 @@ const navigationMappings = {
 			},
 		],
 	},
-
 	locations: {
 		key           : 'locations',
 		title         : 'Locations',

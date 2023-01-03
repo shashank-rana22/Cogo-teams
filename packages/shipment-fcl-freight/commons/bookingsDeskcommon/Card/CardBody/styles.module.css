@@ -1,0 +1,113 @@
+.container{
+    margin-right: 16px;
+	display: flex;
+	flex: 1.2;
+	margin-bottom: -4px;
+}
+
+.dot{
+    width: 25px;
+	height: 25px;
+	border-radius: 100%;
+	background: #5936f0;
+	margin-right: 6px;
+	align-self: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.importer_exporter_details{
+    font-size: 14px;
+	line-height: 16px;
+	min-height: 60px;
+	padding: 4px 12px;
+	font-weight: 500;
+	flex-direction: column;
+	align-self: center;
+	width: 20%;
+}
+.service_provider{
+    font-size: 10px;
+}
+.location_details{
+    display: flex;
+	padding: 4px 12px;
+	align-items: center;
+	min-height: 60px;
+	width: 50%;
+}
+.location{
+    display: flex;
+	flex-direction: column;
+	font-size: 12px;
+	justify-content: center;
+	width: 35%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.shipment_type{
+	float:left; 
+	width: 100%;
+	margin-bottom: 0px;
+	height: max-content;
+}
+.container_details{
+    padding: 4px 12px;
+	width: 30%;
+}
+
+.short_name{
+    color: #5936f0;
+	margin-top: 4px;
+}
+.eta_etd{
+    color: #333;
+	font-weight: 500;
+}
+.country{
+    display: flex;
+	margin: 0px;
+	color: #828282;
+	width: 20%;
+	text-overflow: ellipsis;
+	flex-wrap: nowrap;
+}
+.port{
+    margin: 0px;
+	font-weight: 500;
+}
+.service_provider{
+    font-size: 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.vertical_line{
+    width: 1px;
+	background-color: #ee3124;
+}
+.multi_service{
+    display: flex;
+	flex-wrap: wrap;
+	white-space: nowrap;
+	overflow-x: auto;
+}
+.service_icon{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-left:auto;
+        margin-right:auto;
+        height:auto; 
+        width:auto;
+		align-items: center;
+}
+.service_icon_text{
+	
+	margin-top: -10px;
+	font-size: 10px;
+	text-align: center;
+	font-weight: 600;
+}
