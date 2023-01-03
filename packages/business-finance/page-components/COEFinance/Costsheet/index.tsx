@@ -26,7 +26,8 @@ const CostSheet = () => {
   return (
     <div>
     <div className={styles.flex}>
-    <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]','/business-finance/coe-finance/all_invoices/shipment-view')}>Go Back</Button>
+    <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]',
+    '/business-finance/coe-finance/all_invoices/shipment-view' as never as null)}>Go Back</Button>
     <div className={styles.flexwidth}>
     <div>Status - </div>
     <div  className={styles.tag}>Operationally Closed</div>

@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import { startCase } from '@cogoport/utils'
 import { GenericObject } from '../../../../commons/Interfaces'
 import getFormattedPrice from '../../../../commons/utils/getFormattedPrice'
-import { IcMArrowNext, IcMArrowDown } from '@cogoport/icons-react'
+import { IcMArrowNext, IcMArrowRotateDown } from '@cogoport/icons-react'
 
 interface Props{
   charge:GenericObject;
@@ -53,7 +53,7 @@ export const CardBody = ({charge}:Props) => {
         <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>INR 70,000</div>
         <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(charge?.tax_total_price||charge?.total_price,charge?.currency||'INR')}</div>
     </div>}
-    <div className={`${styles.viewmore} ${hidden}`} role='presentation' onClick={handleWidth}>{showFullDetails?"View Less":"View More"}<span className={showFullDetails?styles.arrowicon:styles.bottomicon}><IcMArrowDown/></span></div>
+    <div className={`${styles.viewmore} ${hidden}`} role='presentation' onClick={handleWidth}>{showFullDetails?"View Less":"View More"}<span className={showFullDetails?styles.arrowicon:styles.bottomicon}><IcMArrowRotateDown height={15} width={15}/></span></div>
     </div>):null
   )
 }
