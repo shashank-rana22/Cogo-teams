@@ -11,6 +11,7 @@
 	padding-bottom: 14px;
 	margin-right: 20px;
 }
+
 .fcl_filters {
 	position: relative;
 	display: flex;
@@ -21,12 +22,11 @@
 	cursor: pointer;
 	background: #f9f5ec;
 	border: none;
-	
 }
 
 .filter_button {
 	width: 100%;
+	width: max-content;
 	cursor: pointer;
 	border: none;
-	width: max-content;
 }
