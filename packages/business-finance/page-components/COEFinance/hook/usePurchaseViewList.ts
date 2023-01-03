@@ -40,10 +40,12 @@ const  useGetPurchaseViewList=({filters,setFilters,sort}:Props)=> {
 	}, [searchValue]);
 
 	useEffect(() => {
-		setFilters((prev:GenericObject)=>({...prev,q:query||undefined,pageIndex:1}))
+		setFilters((prev:GenericObject)=>({...prev,q:query||undefined,pageIndex:1,pageSize:10}))
 	},[query])
 
-	
+	useEffect(() => {
+		refetch();
+	}, [sort]);
 	
 	
 const config=PURCHASE_VIEW_CONFIG;
