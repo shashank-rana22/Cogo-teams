@@ -8,14 +8,22 @@ import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
 import POC from './POC/index';
 import useListShipment from "../../../hook/useListShipment";
+import useGetVariance from "../../../hook/useGetVariance";
+import { Button } from "@cogoport/components";
+import VarianceView from "./VarianceView/index";
 
 interface JobInterface {
     jobNumber:string
 
 }
+
+interface BillAdditionalObjectInterface {
+    collectionPartyId:string
+}
 interface DataInterface {
     job:JobInterface
     bill :object
+    billAdditionalObject : BillAdditionalObjectInterface
 }
 interface ShipmentDetailsInterface {
     data:DataInterface
@@ -25,12 +33,15 @@ interface ShipmentDetailsInterface {
 const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
-
+    const [showVariance, setShowVariance] = useState(false);
     const { job } = data || {}
     const {  jobNumber } = job || '';
-
+    const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
+    const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
     const {data:shipmentData} = useListShipment(jobNumber);
     const shipmentId = shipmentData?.list[0]?.id;
+
+
 
     return(
     <div className={styles.container}>
@@ -73,9 +84,33 @@ const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
         </div>
 
         <div style={{display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
-            <div>hjfugvhg</div>
+        {collectionPartyId ? (
+				<div className={styles.variance} >
+					<div>
+						VARIANCE -{' '}
+						{loading
+							? 'Getting...'
+							: `${varianceFullData?.currency}${' '}
+					${varianceFullData?.total_variance}`}
+					</div>
+					<div
+						className={styles.viewMore}
+						onClick={() => setShowVariance(true)}
+					>
+						View More
+					</div>
+				</div>
+			) : null}
             <POC itemData={data}/>
         </div>
+
+        {showVariance ? (
+				<VarianceView
+					show={showVariance}
+					onClose={() => setShowVariance(false)}
+					data={varianceFullData}
+				/>
+			) : null}
         
 
         <div className={styles.shipmentDetailsFooter}>
