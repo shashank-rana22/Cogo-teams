@@ -12,4 +12,9 @@
     font-size: 18px;
     line-height: 20px;
     color: #ffffff;
+    display: flex;
+}
+
+.placeholder{
+    margin-left: 10px;
 }
