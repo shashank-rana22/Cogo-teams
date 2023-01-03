@@ -69,6 +69,15 @@ const navigationMappings = {
 		main_apis: ['list_shipments'],
 		options: [
 			{
+				key: 'coe-finance',
+				title: 'Finance',
+				href: '/coe-finance',
+				as: '/coe-finance',
+				icon: IcMProductCodeMapping,
+				main_apis: ['list_shipments'],
+				// possible_apis : [...partner.coe_finance, ...partner.shipment],
+			},
+			{
 				key: 'coe-fcl_revenue_desk',
 				title: 'FCL Revenue Desk',
 				href: '/revenue-desk/fcl-freight',
