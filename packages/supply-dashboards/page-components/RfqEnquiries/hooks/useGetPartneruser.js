@@ -29,6 +29,7 @@ const useGetPartnerUser = ({ user_id }) => {
 		if (user_id) {
 			fetch();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user_id]);
 
 	return {

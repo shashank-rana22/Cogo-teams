@@ -39,7 +39,6 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.188
-      '@cogoport/components': ^1.0.174
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
@@ -66,7 +65,6 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.188_j6lhi3hgh37lo4qhb7qouvcgr4
-      '@cogoport/components': 1.0.174_27ghnklenyaalfqdgsm7fqt7de
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
@@ -269,6 +267,24 @@ importers:
       rollup-plugin-swc3: 0.8.0_cijd2s7xrqy4w76x6gd5m627fu
       rollup-plugin-typescript2: 0.34.1_fjmngzu5qr6xzjooxkpjm6imha
       typescript: 4.9.4
+
+  packages/contracts:
+    specifiers:
+      '@cogoport/components': ^1.0.159
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.188_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      react: 18.2.0
 
   packages/home:
     specifiers:

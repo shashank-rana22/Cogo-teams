@@ -4,15 +4,17 @@ import Service from './Service';
 import styles from './styles.module.css';
 
 function NegotiateRate({ selectedCard }) {
-	const service = selectedCard?.detail?.services;
+	const service = [];
 	const [activeService, setActiveService] = useState(
 		null,
 	);
-	useEffect(() => {
-		if (selectedCard) {
-			setActiveService(selectedCard?.detail?.services[0]);
-		}
-	}, [selectedCard]);
+
+	if (selectedCard) {
+		selectedCard?.detail?.spot_negotiations.forEach((card) => {
+			service.push(card);
+		});
+	}
+
 	return (
 		<div>
 			<div>Add Rates</div>

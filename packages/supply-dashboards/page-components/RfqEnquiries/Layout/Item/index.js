@@ -12,7 +12,7 @@ function Item(props) {
 		label,
 	} = props || {};
 	const Element = getElementController(type);
-	const flex = ((span || 12) / 12) * 100;
+	const flex = ((span || 12) / 12) * 100 - 1;
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%`, padding: '4px' }}>

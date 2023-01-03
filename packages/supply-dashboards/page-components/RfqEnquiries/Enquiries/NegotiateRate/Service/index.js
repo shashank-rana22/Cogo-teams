@@ -1,41 +1,44 @@
-import { Tags } from '@cogoport/components';
 import {
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
 import getIncoTermMapping from '../../../utils/getIncoTermMapping';
+
+import AddRate from './AddRate';
+import styles from './styles.module.css';
 
 function Service({
 	selectedCard, service, activeService, setActiveService,
 }) {
-	const [serviceAdded, setServiceAdded] = useState([]);
+	const handleClick = () => {
+		if (activeService === service) {
+			setActiveService(null);
+		} else {
+			setActiveService(service);
+		}
+	};
 	const tradetype = getIncoTermMapping[selectedCard?.detail?.inco_term] === 'export' ? 'Origin' : 'Destination';
 	return (
-		<div>
-			<div>
+		<div className={styles.container}>
+			<div
+				role="presentation"
+				onClick={() => {
+					handleClick();
+				}}
+				className={styles.service}
+			>
 				{activeService === service ? (
-					<IcMArrowRotateDown
-						onClick={() => {
-							setActiveService(null);
-						}}
-					/>
+					<IcMArrowRotateDown />
 				) : (
-					<IcMArrowRotateRight
-						onClick={() => {
-							setActiveService(service);
-						}}
-					/>
+					<IcMArrowRotateRight />
 				)}
-				{selectedCard?.detail?.service_type !== service && tradetype}
-				{' '}
-				{startCase(service)}
-				{serviceAdded.includes(service) ? (
-					<Tags themeType="green">Submitted</Tags>
-				) : <Tags themeType="pink">Pending</Tags>}
+				{selectedCard?.detail.service_type === service?.service
+					? 'Freight Rate'
+					: `${tradetype} ${startCase(service?.service)}`}
 			</div>
+			{activeService === service && <AddRate service={service} />}
 		</div>
 	);
 }

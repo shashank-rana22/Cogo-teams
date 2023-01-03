@@ -39,4 +39,17 @@ function asyncFieldsPartner() {
 		},
 	};
 }
-export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner };
+function asyncFieldsOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organizations',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+export {
+	asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsOrganization,
+};
