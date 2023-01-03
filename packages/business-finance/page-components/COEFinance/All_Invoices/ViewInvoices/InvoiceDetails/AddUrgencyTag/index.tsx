@@ -4,14 +4,23 @@ import updateTag from '../../../../hook/useUpdateTag';
 import { urgencyOptions } from '../controls';
 import styles from './styles.module.css';
 
+interface AddUrgencyTag {
+	billId?:string
+	showAddTag?:boolean
+	serviceType?:string
+	getBillRefetch?:()=> void
+	collectionPartyId?:string
+	setShowAddTag: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 const AddUrgencyTag = ({
 	billId = '',
 	showAddTag = false,
 	serviceType = '',
-	setShowAddTag = () => {},
-	getBillRefetch = () => {},
+	setShowAddTag,
+	getBillRefetch = ()=>{},
 	collectionPartyId = '',
-}) => {
+}:AddUrgencyTag) => {
 	const [tagValue, setTagValue] = useState('');
 	const [remarks, setRemarks] = useState('');
 
@@ -41,14 +50,14 @@ const AddUrgencyTag = ({
 					className="primary lg"
 					placeholder="Select the urgency Tag"
 					value={tagValue}
-					onChange={(e) => setTagValue(e)}
+					onChange={(e:any) => setTagValue(e)}
 					options={urgencyOptions}
 				/>
 
 				{tagValue === 'urgent' ? (
 					<TextArea
 						value={remarks}
-						onChange={(e) => setRemarks(e.target?.value)}
+						onChange={(e:any) => setRemarks(e.target?.value)}
 						placeholder="Enter Urgent Remarks..."
 					/>
 				) : null}

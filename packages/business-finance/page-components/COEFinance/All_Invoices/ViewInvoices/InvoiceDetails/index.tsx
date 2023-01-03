@@ -7,8 +7,29 @@ import { urgencyOptions } from "./controls";
 import AddUrgencyTag from "./AddUrgencyTag/index";
 import RemoveTagConfirmation from './RemoveTagConfirmation/index';
 
+interface BillInterFace{
+	grandTotal?:string
+	id?:string
 
-const InvoiceDetails =({data={},getBillRefetch})=>{
+}
+interface BillAdditionalObject {
+	collectionPartyId?:string
+	urgencyTag?:string
+	urgencyRemarks?:string
+}
+interface DataProps {
+	bill?:BillInterFace
+	billAdditionalObject?:BillAdditionalObject
+	remarks?:Array<string>
+	serviceType?:string
+	
+
+}
+interface Props {
+	data?:DataProps
+	getBillRefetch:()=> void
+}
+const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
     const {bill,remarks=[]} = data ;
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const {grandTotal} = bill || {};

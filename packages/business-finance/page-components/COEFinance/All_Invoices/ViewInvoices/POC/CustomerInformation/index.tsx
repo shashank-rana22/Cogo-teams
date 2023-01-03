@@ -3,6 +3,7 @@ import React from 'react';
 const CustomerInformation = ({ data }) => {
 	
 	const { customerDetails } = data || {};
+		
 
 	return (customerDetails || []).map((item) => {
 		const {
