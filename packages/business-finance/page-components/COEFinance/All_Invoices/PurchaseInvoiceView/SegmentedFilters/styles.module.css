@@ -14,10 +14,19 @@
 }
 
 .search {
-  margin-top: 24px;
-  width: 24%;
+  :global {
+    width: 278px;
+    margin-right: 20px;
+    .ui_input_container {
+      height: 36px;
+    }
+  }
   ::placeholder {
     font-size: 11px;
     color: #cacaca;
   }
+}
+.searchFilter {
+  display: flex;
+  margin-top: 20px;
 }
