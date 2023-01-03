@@ -1,3 +1,4 @@
+import { Input } from "@cogoport/components";
 import { Pagination } from "@cogoport/components";
 import React, { useState } from "react";
 import SegmentedControl from "../../../commons/SegmentedControl/index";
@@ -5,6 +6,7 @@ import useShipmentIdView from "../../hook/useShipmentIdView";
 import AccordianCards from "./AccordianCards/index";
 import LoadingState from "./LoadingState/index";
 import styles from "./styles.module.css";
+import { IcMSearchdark } from "@cogoport/icons-react";
 
 interface ItemProps {
     expense_total_price: number;
@@ -30,6 +32,7 @@ const ShipmentIdView = () => {
     const [currentOpenSID, setCurrentOpenSID] = useState("");
     const [pendingApproval, setPendingApproval] = useState("all");
     const [activeJobs, setActiveJobs] = useState("all");
+    const [serial_id, setSerialId] = useState<number | string>("");
 
     const {
         hookSetters,
@@ -38,9 +41,15 @@ const ShipmentIdView = () => {
         loading,
         list: { total, data },
         refetch,
+
         statsData,
         statsLoading,
-    } = useShipmentIdView({ pendingApproval, activeJobs });
+    } = useShipmentIdView({
+        pendingApproval,
+        activeJobs,
+        setSerialId,
+        serial_id,
+    });
 
     const options1 = [
         {
@@ -78,17 +87,30 @@ const ShipmentIdView = () => {
     return (
         <div>
             <div className={styles.toggle}>
-                <SegmentedControl
-                    options={options1}
-                    activeTab={pendingApproval}
-                    setActiveTab={setPendingApproval}
-                />
+                <div className={styles.segmented}>
+                    <SegmentedControl
+                        options={options1}
+                        activeTab={pendingApproval}
+                        setActiveTab={setPendingApproval}
+                    />
 
-                <SegmentedControl
-                    options={options2}
-                    activeTab={activeJobs}
-                    setActiveTab={setActiveJobs}
-                />
+                    <SegmentedControl
+                        options={options2}
+                        activeTab={activeJobs}
+                        setActiveTab={setActiveJobs}
+                    />
+                </div>
+
+                <div className={styles.search}>
+                    <Input
+                        name="q"
+                        size="sm"
+                        value={serial_id}
+                        onChange={(e: any) => setSerialId(e)}
+                        placeholder="Search by Shipment ID"
+                        buttonIcon={<IcMSearchdark />}
+                    />
+                </div>
             </div>
 
             <div>
@@ -114,20 +136,22 @@ const ShipmentIdView = () => {
                         )}
                     </>
                 ))}
-                <div className={styles.pagination}>
-                    <Pagination
-                        currentPage={page}
-                        handlePageChange={(val: number) =>
-                            hookSetters.setFilters({
-                                ...filters,
-                                page: val,
-                            })
-                        }
-                        totalItems={total}
-                        pageSize={10}
-                        type="table"
-                    />
-                </div>
+                {data.length > 0 ? (
+                    <div className={styles.pagination}>
+                        <Pagination
+                            currentPage={page}
+                            handlePageChange={(val: number) =>
+                                hookSetters.setFilters({
+                                    ...filters,
+                                    page: val,
+                                })
+                            }
+                            totalItems={total}
+                            pageSize={10}
+                            type="table"
+                        />
+                    </div>
+                ) : null}
             </div>
         </div>
     );

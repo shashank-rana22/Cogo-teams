@@ -4,9 +4,20 @@
 }
 .toggle {
     display: flex;
-    gap: 12px;
     padding: 20px 10px 8px 10px;
+    justify-content: space-between;
     @media (max-width: 768px) {
         flex-direction: column;
     }
+}
+.search {
+    width: 24%;
+    ::placeholder {
+        font-size: 11px;
+        color: #cacaca;
+    }
+}
+.segmented {
+    display: flex;
+    gap: 16px;
 }
