@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const useListShipments = () => {
+	const firstRender = useRef(true);
 	const [loading, setLoading] = useState(true);
 	const [filters, setFilters] = useState({ page: 1, highlight: undefined });
 	const [list, setList] = useState({
@@ -61,6 +62,10 @@ const useListShipments = () => {
 	};
 
 	useEffect(() => {
+		if (firstRender.current) {
+			firstRender.current = false;
+			return;
+		}
 		setLoading(true);
 		refetch();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
