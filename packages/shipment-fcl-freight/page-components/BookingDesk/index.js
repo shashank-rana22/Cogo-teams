@@ -33,7 +33,6 @@ function BookingDesk() {
 				hookSetters={hookSetters}
 				filters={filters}
 			/>
-
 		</div>
 	);
 }

@@ -60,7 +60,7 @@ function PendingJobs({
 			)}
 			{total > 10 ? (
 				<div className={styles.pagination_wrapper}>
-					{renderPagination('number')}
+					{renderPagination('table')}
 				</div>
 			) : null}
 		</div>

@@ -1,6 +1,6 @@
 .cards_container{
     padding: 20px;
-	background: #fff;
+	background: #f9f5ec;
 }
 .loader_container{
     background: #fff;
@@ -11,9 +11,9 @@
 
 .pagination_wrapper{
 	padding: 5px 5px 0px 0px;
-    background: white;
+    background: #f9f5ec;
 	display: flex;
 	width: 100%;
 	justify-content: flex-end;
-	color: blue;
+
 }
