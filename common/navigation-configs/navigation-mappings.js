@@ -6,6 +6,8 @@ import {
 	IcMFinanceCrm,
 	IcMFinanceDashboard,
 	IcMProductCodeMapping,
+	IcMFfcl,
+	IcMBldesk,
 } from '@cogoport/icons-react';
 
 import partner from './apis/partner-apis';
@@ -60,26 +62,18 @@ const navigationMappings = {
 	},
 	coe: {
 		key: 'coe',
-		title: 'Center of Excellence [COE]',
-		icon: IcMBusinessFinance,
-		href: '/',
-		as: '/',
+		title: 'Center of Excellence',
+		href: '/coe',
+		as: '/coe',
+		icon: IcMBldesk,
+		main_apis: ['list_shipments'],
 		options: [
-			{
-				key: 'coe-finance',
-				title: 'Finance',
-				href: '/coe-finance',
-				as: '/coe-finance',
-				icon: IcMProductCodeMapping,
-				// main_apis : ['list_shipments'],
-				// possible_apis : [...partner.coe_finance, ...partner.shipment],
-			},
 			{
 				key: 'coe-fcl_revenue_desk',
 				title: 'FCL Revenue Desk',
 				href: '/revenue-desk/fcl-freight',
 				as: '/revenue-desk/fcl-freight',
-				icon: IcMBookingDesk,
+				icon: IcMFfcl,
 				main_apis: ['list_shipments'],
 			},
 		],

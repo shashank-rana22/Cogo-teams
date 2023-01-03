@@ -1,4 +1,4 @@
-import { routeConfig } from '@cogoport/layout';
+import { routeConfig } from '@cogoport/navigation-configs';
 
 import getNavData from './get-nav-data';
 

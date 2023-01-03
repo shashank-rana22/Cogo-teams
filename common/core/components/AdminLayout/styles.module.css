@@ -4,7 +4,6 @@
 	--layout-navbar: 280px;
 
 	min-height: 100vh;
-	padding-top: var(--layout-topbar);
 	background: #f9f5ec;
 
 	@media (max-height: 600px) {

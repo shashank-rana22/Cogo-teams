@@ -45,9 +45,9 @@ function RevenueList({
 
 	return (
 		<div>
-			<div className={styles.heading}>
+			<h1>
 				FCL Revenue Desk
-			</div>
+			</h1>
 			<div className={styles.row}>
 
 				<div className={styles.input}>
