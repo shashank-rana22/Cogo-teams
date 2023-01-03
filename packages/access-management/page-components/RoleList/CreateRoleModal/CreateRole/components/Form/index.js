@@ -26,10 +26,13 @@ function Form({
 	controls = () => [],
 	formProps = {},
 	onSubmit = () => {},
+	createRoleApi = {},
 }) {
 	const {
 		handleSubmit, control, watch, formState: { errors },
 	} = formProps;
+
+	const { loading } = createRoleApi;
 	const type = watch('role_functions') || [];
 
 	const subRoleFunctionOptions = [];
@@ -73,7 +76,7 @@ function Form({
 
 			<Modal.Footer>
 				<Button themeType="secondary">Cancel</Button>
-				<Button type="submit">Create</Button>
+				<Button loading={loading} type="submit">Create</Button>
 			</Modal.Footer>
 
 		</form>

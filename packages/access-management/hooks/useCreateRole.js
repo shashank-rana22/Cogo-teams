@@ -2,10 +2,8 @@ import { Toast } from '@cogoport/components';
 import { asyncFieldsPartner, useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
 import { controls } from '../configurations/create-controls';
-import functionSubFunctionMapping from '../configurations/function-sub-function-mapping';
 
 const useCreateRole = ({
 	onChangeShowCreateRoleModal = () => {},
@@ -13,12 +11,7 @@ const useCreateRole = ({
 }) => {
 	const formProps = useForm();
 
-	// const subRoleFunctionOptions = [];
-	// type?.forEach((subType) => {
-	// 	subRoleFunctionOptions.push(...(functionSubFunctionMapping[subType] || []));
-	// });
-
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/create_auth_role',
 		method : 'POST',
 	});
@@ -60,9 +53,7 @@ const useCreateRole = ({
 		controls      : modifiedControls,
 		formProps,
 		onSubmit,
-		createRoleApi : {
-			trigger, loading, data,
-		},
+		createRoleApi : { loading },
 	};
 };
 
