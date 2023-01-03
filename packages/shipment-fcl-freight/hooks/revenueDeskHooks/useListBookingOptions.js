@@ -14,7 +14,6 @@ const useListBookingOptions = ({
 	setShowBookingOption = () => {},
 	supplierPayload,
 	refetch = () => {},
-	shipment_type = 'fcl_freight',
 	service,
 }) => {
 	const { statsLoading, data } = getPrefrencesUpdatedStats({
@@ -25,33 +24,24 @@ const useListBookingOptions = ({
 	const { existingData, existingDataLoading } = getExistingRates({
 		currentShipmentData,
 		api     : '',
-		statsLoading,
 		choosen : data?.list?.length,
-		shipment_type,
-		service,
 	});
 
 	const CurrentRates = getFlashRates({
 		api     : 'current',
 		currentShipmentData,
-		statsLoading,
-		shipment_type,
 		choosen : data?.list?.length,
 		service,
 	});
 	const PreviousRates = getFlashRates({
 		api     : 'previous',
 		currentShipmentData,
-		statsLoading,
-		shipment_type,
 		choosen : data?.list?.length,
 		service,
 	});
 
 	const SystemRates = getSystemRates({
 		shipment_data : currentShipmentData,
-		statsLoading,
-		shipment_type,
 		choosen       : data?.list?.length,
 		service,
 	});
