@@ -3,7 +3,7 @@ export const columns = [
 		label    : 'Role Description',
 		key      : 'name',
 		func     : 'renderRoleDescription',
-		flex     : 2,
+		flex     : 2.5,
 		topKey   : { key: 'name' },
 		lowerKey : { key: 'remarks' },
 		tooltip  : true,

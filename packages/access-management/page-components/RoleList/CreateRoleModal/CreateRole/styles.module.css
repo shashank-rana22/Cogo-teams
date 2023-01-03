@@ -1,7 +1,7 @@
-.section {
-	width: 850px;
-}
-
-.heading_container {
-	padding: 10px;
+.modal_container {
+    :global {
+        .ui_modal_body_container {
+           padding: 0 16px;
+        }
+    }
 }

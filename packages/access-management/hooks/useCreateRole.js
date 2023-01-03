@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { asyncFieldsPartner, useForm } from '@cogoport/forms';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -10,8 +11,6 @@ const useCreateRole = ({
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
 }) => {
-	const [errors, setErrors] = useState();
-
 	const formProps = useForm();
 
 	// const subRoleFunctionOptions = [];
@@ -50,18 +49,18 @@ const useCreateRole = ({
 		}
 	};
 
-	const onErrors = (errs, e) => {
-		e?.preventDefault();
-		setErrors({ ...errs });
-	};
+	const partnerOptions = useGetAsyncOptions({
+		...asyncFieldsPartner(),
+		initialCall: false,
+	});
+
+	const modifiedControls = controls(partnerOptions);
 
 	return {
-		controls,
+		controls      : modifiedControls,
 		formProps,
-		errors,
 		onSubmit,
-		onErrors,
-		createRoleApi: {
+		createRoleApi : {
 			trigger, loading, data,
 		},
 	};
