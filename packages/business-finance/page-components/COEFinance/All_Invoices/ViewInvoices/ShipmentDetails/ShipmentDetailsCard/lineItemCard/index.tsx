@@ -7,17 +7,22 @@ import { IcCFtick ,IcMOverflowDot,IcCFcrossInCircle} from "@cogoport/icons-react
 import { Tooltip ,Modal,Checkbox } from "@cogoport/components";
 import { Textarea } from "@cogoport/components";
 
+interface LineItemCard {
+    lineItems?:Array<object>
+    setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
+
+const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
     const [radio , setRadio ] = useState(false)
     const [popover, setPopover] = useState(false)
-    const [showRejectedModal , setShowRejectedModal] = useState({})
+    const [showRejectedModal , setShowRejectedModal] = useState({ id : ""})
 
-    const renderAction =(id)=>{
-        if(radio[id]){
+    const renderAction =(id:string)=>{
+        if(radio[id as keyof typeof radio]){
            return  <IcCFtick width="17px" height="17px" /> 
         }
-        if(popover[id]){
+        if(popover[id as keyof typeof popover]){
             
             return <IcCFcrossInCircle width="17px" height="17px" />
         }
@@ -26,15 +31,15 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
 
     
     const handleApproveClick = (key = '') => {   
-		setRadio((previousActions) => ({
+		setRadio((previousActions:any) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
 	};
 
-    const handleRejectClick =(item) => {
+    const handleRejectClick =(item:any) => {
         setShowRejectedModal(item)
-        setPopover((previousActions) => ({
+        setPopover((previousActions:any) => ({
 			...previousActions,
 			[item?.id]: !previousActions[item?.id],
 		}));
@@ -42,19 +47,19 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
 
 
     const onClose = () => {
-		setShowRejectedModal(false);
+		setPopover(false);
 	};
     
     const functions = {
-        renderIcon: (item)=>(       
+        renderIcon: (item:any)=>(       
             <div className={styles.circleBig} onClick={()=>{handleApproveClick(item?.id)}} >
             {renderAction(item?.id)}
             </div>
         ),
         
-        renderReject: (item) => (
+        renderReject: (item:any) => (
             <div style={{cursor:"pointer"}}>
-                <Tooltip  placement="left" interactive content={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}} >{popover[item?.id] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div> }>
+                <Tooltip  placement="left" interactive content={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div> }>
                       <IcMOverflowDot width="20px" height="20px"/>
                 </Tooltip>
             </div>
@@ -86,8 +91,8 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
                 <Button size='md'  onClick={()=>{}}> Save </Button>
             </div>
             {
-            popover[id] && 
-                <Modal size="lg" placement="center" show={popover[id]} onClose={onClose}>
+            popover[id as keyof typeof popover] && 
+                <Modal size="lg" placement="center" show={popover[id as keyof typeof popover]} onClose={onClose}>
                     <Modal.Header title="Rejected line items" />
             <Modal.Body>
                   <div className={styles.modalContainer}>

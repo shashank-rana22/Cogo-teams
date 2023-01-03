@@ -5,8 +5,46 @@ import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
 import { Modal, Textarea ,Checkbox} from '@cogoport/components'
 
-const ShipmentDetailsCard = ({data}:any) =>{
-    const [showValue, setShowValue ] =  useState([])
+interface BuyerDetailInterface {
+    entityCode?:string
+    organizationName?:string
+    address?:string
+    registrationNumber?:string
+    taxNumber?:string
+}
+
+interface SellerDetailInterface {
+    organizationName?:string
+    registrationNumber?:string
+    taxNumber?:string
+}
+
+interface SellerBankDetailInterface {
+    bankName?:string
+    accountNumber?:string
+    ifscCode?:string
+}
+
+interface BillInterface {
+    billNumber?:string
+    billDate?:string
+    status?:string
+    placeOfSupply?:string
+}
+
+interface DataInterface {
+    lineItems?:Array<object>
+    buyerDetail?:BuyerDetailInterface
+    sellerBankDetail?:SellerBankDetailInterface
+    sellerDetail?:SellerDetailInterface
+    bill?:BillInterface
+}
+interface ShipmentDetailsCardInterface{
+    data?:DataInterface
+}
+
+const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
+    const [showValue, setShowValue ] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
     const [showRejected , setShowRejected] = useState({})
     
@@ -23,7 +61,7 @@ const ShipmentDetailsCard = ({data}:any) =>{
         {id :1, name:'billing-details', label:'Bank Details - Collection Party'},
         {id :2, name:'billing-party', label:'Billing Party'},
         {id :3, name:'invoice-details', label:'Invoice Details'},
-    ]);
+    ] as any);
 
 
     const handleClick = (id:number) => { 
@@ -34,12 +72,12 @@ const ShipmentDetailsCard = ({data}:any) =>{
     }
 
     const handleClickUndo = (id:number) => {
-       const undoData = showValue.filter(item => item !== id)
+       const undoData = showValue.filter((item:any) => item !== id)
        setShowValue(undoData)
     }
 
     const handleClickReject =(id:number) => {
-        setShowRejected((previousActions) => ({
+        setShowRejected((previousActions:any) => ({
 			...previousActions,
 			[id]: !previousActions[id],
 		}));
@@ -53,8 +91,6 @@ const ShipmentDetailsCard = ({data}:any) =>{
 
 return(
     <div>
-
-
 { showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem}/> : 
     <div>
         <div className={styles.mainHeader}>
@@ -67,7 +103,7 @@ return(
             </div>
         </div>
 
-{  DetailsCard.map((itemData) => {
+{  DetailsCard.map((itemData:any) => {
         
         const {id , label = ''} = itemData || {}
         
@@ -75,8 +111,8 @@ return(
     <>
 
         {
-            showRejected[id] &&                 
-                <Modal size="lg" show={showRejected[id]} onClose={onClose}>
+            showRejected[id as keyof typeof showRejected] &&                 
+                <Modal size="lg" show={showRejected[id as keyof typeof showRejected]} onClose={onClose}>
                     <Modal.Header title="CHOOSE THE DETAiLS YOU WANT TO REJECT" />
                     <Modal.Body>
                     

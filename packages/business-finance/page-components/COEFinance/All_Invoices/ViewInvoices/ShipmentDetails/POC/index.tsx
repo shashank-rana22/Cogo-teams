@@ -13,7 +13,23 @@ import usePOCDetails from '../../../../hook/usePOCDetails';
 import { POC_DATA_MAPPING } from '../../../../constants/constant';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
 
-function getNumber(labelValue) {
+interface BillInterface {
+	id?:string
+}
+interface JobInterface{
+	jobNumber?:string
+	
+}
+
+interface ItemDataInterface {
+	bill :BillInterface
+	job:JobInterface
+}
+interface Props {
+	itemData:ItemDataInterface
+}
+
+function getNumber(labelValue:string) {
 	if (Math.abs(Number(labelValue)) >= 1.0e9) {
 		return `${(Math.abs(Number(labelValue)) / 1.0e9).toFixed(2)}B`;
 	}
@@ -26,12 +42,7 @@ function getNumber(labelValue) {
 	return Math.abs(Number(labelValue));
 }
 
-// interface Props {
-// 	bill :object
-// 	job:object
-// }
-
-const POCDetails = ( {itemData} :any) => {
+const POCDetails = ( {itemData} :Props) => {
 
 	const {bill , job } = itemData
 
@@ -57,7 +68,7 @@ const POCDetails = ( {itemData} :any) => {
 	};
 
 	const handleDropdown = (key = '') => {
-		setDropDownData((previousActions) => ({
+		setDropDownData((previousActions:any) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
@@ -136,7 +147,7 @@ const POCDetails = ( {itemData} :any) => {
 												>
 													{label}
 													<div className={styles.dropdownContainer} >
-														{dropDownData[id] ? (
+														{dropDownData[id as keyof typeof dropDownData] ? (
 															<IcMArrowRotateUp width={15} height={15} />
 														) : (
 															<IcMArrowRotateDown width={15} height={15} />
@@ -144,12 +155,10 @@ const POCDetails = ( {itemData} :any) => {
 													</div>
 												</div>
 
-												{dropDownData[id] && <div className={styles.hR} />}
+												{dropDownData[id as keyof typeof dropDownData] && <div className={styles.hR} />}
 
-												{dropDownData[id] && (
-													<div
-														type={dropDownData ? 'enter' : 'exit'}
-													>
+												{dropDownData[id as keyof typeof dropDownData] && (
+													<div>
 														<div  className={styles.informationData} >
 														{label === 'Customer Information' && (
 																<CustomerInformation data={invoiceData} />
