@@ -7,7 +7,7 @@
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "@cogoport/components": "^1.0.188",
+    "@cogoport/components": "^1.0.209",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/request": "workspace:0.1.0",
@@ -19,7 +19,7 @@
     "@rollup/plugin-json": "^5.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/react": "^18.0.26",
-    "rollup": "^3.9.0",
+    "rollup": "^3.9.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-swc3": "^0.8.0",
     "rollup-plugin-typescript2": "^0.34.1",

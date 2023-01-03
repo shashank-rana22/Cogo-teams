@@ -29,15 +29,16 @@ function Items({ item, resetSubnavs }) {
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
+
+			<Element />
+			<span>
+				{item.title}
+			</span>
 			{item.options?.length > 0 && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
 			)}
-			<Element />
-			<span>
-				{item.title}
-			</span>
 		</div>
 	);
 	return (
