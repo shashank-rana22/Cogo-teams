@@ -29,7 +29,7 @@ function StakeHolderDetails({ data = {} }) {
 					</div>
 
 					<div className={styles.stake_holder_value}>
-						{startCase(item.user.name)}
+						{startCase(item.user?.name)}
 					</div>
 				</div>
 			) : null))}

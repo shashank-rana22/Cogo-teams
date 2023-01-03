@@ -10,43 +10,10 @@
 	color: #333;
 }
 
-.row {
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: -36px;
-}
-
-.input {
-	display: flex;
-	justify-content: flex-end;
-	width: 400px;
-	padding-bottom: 14px;
-	margin-right: 20px;
-}
-
 .loader_container {
 	display: flex;
 	justify-content: center;
 }
 
-.fcl_filters {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	width: 50px;
-	height: fit-content;
-	margin-right: 15px;
-	cursor: pointer;
-	background: #f9f5ec;
-	border: none;
-	
-}
-
-.filter_button {
-	width: 100%;
-	cursor: pointer;
-	border: none;
-	width: max-content;
-}
 
 

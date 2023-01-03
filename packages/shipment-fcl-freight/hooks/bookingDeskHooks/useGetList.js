@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListShipments = () => {
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({ page: 1, highlight: undefined });
 	const [list, setList] = useState({
 		data         : [],
@@ -61,8 +61,9 @@ const useListShipments = () => {
 	};
 
 	useEffect(() => {
-		setLoading(true);
-		refetch();
+		if (restFilters?.shipment_type) {
+			refetch();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters]);
 

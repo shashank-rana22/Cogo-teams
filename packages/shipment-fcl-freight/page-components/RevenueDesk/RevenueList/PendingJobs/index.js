@@ -21,60 +21,48 @@ function PendingJobs({
 		setClickedCard(data_item);
 	};
 
-	const handlePageChange = (pageNumber) => {
-		hookSetters.setFilters({ ...filters, page: pageNumber });
-	};
-
+	const renderPagination = (type) => (
+		<Pagination
+			type={type}
+			totalItems={total}
+			currentPage={page}
+			pageSize={10}
+			handlePageChange={(val) => {
+				hookSetters.setFilters({ ...filters, page: val });
+			}}
+		/>
+	);
 	return (
 		<div className={styles.container}>
 			<div>
 				{total > 10 ? (
 					<div className={styles.pagination_wrapper}>
-						<Pagination
-							type="table"
-							totalItems={total}
-							pageSize={10}
-							currentPage={page}
-							handlePageChange={handlePageChange}
-						/>
+						{renderPagination('table')}
 					</div>
 				) : null}
 			</div>
-			{data.length
-
-				? (
-					<div>
-						{(data || []).map((item) => (
-							<Card
-								data={item}
-								handleCardClick={handleCardClick}
-								activeTab={activeTab}
-								clickedCard={clickedCard}
-								shipment_type={shipment_type}
-							/>
-						))}
-					</div>
-				)
-				: (
-					<div className={styles.loader_container}>
-						<Loader />
-					</div>
-				)}
-
-			<div>
-				{total > 10 ? (
-					<div className={styles.pagination_wrapper}>
-						<Pagination
-							type="table"
-							currentPage={page}
-							totalItems={total}
-							pageSize={10}
-							handlePageChange={handlePageChange}
+			{data.length ? (
+				<div>
+					{(data || []).map((item) => (
+						<Card
+							data={item}
+							handleCardClick={handleCardClick}
+							activeTab={activeTab}
+							clickedCard={clickedCard}
+							shipment_type={shipment_type}
 						/>
-					</div>
-				) : null}
-			</div>
-
+					))}
+				</div>
+			) : (
+				<div className={styles.loader_container}>
+					<Loader />
+				</div>
+			)}
+			{total > 10 ? (
+				<div className={styles.pagination_wrapper}>
+					{renderPagination('number')}
+				</div>
+			) : null}
 		</div>
 	);
 }
