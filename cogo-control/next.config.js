@@ -21,7 +21,6 @@ const modulesToTranspile = loadCogoModules();
 
 module.exports = withBundleAnalyzer({
 	env               : { ...loadEnvConfig.parsed },
-	reactStrictMode   : true,
 	swcMinify         : true,
 	transpilePackages : modulesToTranspile,
 	webpack           : (config) => {
