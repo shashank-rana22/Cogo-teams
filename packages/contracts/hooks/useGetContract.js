@@ -5,18 +5,18 @@ const useGetContract = ({ id }) => {
 	const [data, setData] = useState();
 
 	const [{ error, loading }, trigger] = useRequest({
-		url    : '/list_contracts',
+		url    : '/get_contract',
 		method : 'GET',
 	}, { manual: true });
 	const getContract = async () => {
 		try {
 			const res = await trigger({
 				params: {
-					services_data_required : true,
-					filters                : { id },
+					services_data_required: true,
+					id,
 				},
 			});
-			setData(res?.data?.list);
+			setData(res?.data?.data);
 		} catch (err) {
 			console.log(err);
 		}
@@ -30,7 +30,7 @@ const useGetContract = ({ id }) => {
 	}, []);
 
 	return {
-		data: data?.[0],
+		data,
 		loading,
 		error,
 		getContract,

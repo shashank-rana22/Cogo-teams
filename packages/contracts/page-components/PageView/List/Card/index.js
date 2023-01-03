@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import PortPair from './PortPair';
 import styles from './styles.module.css';
 
-function Card({ item }) {
+function Card({ item, filters }) {
 	const router = useRouter();
 	const portPairData = item?.fcl_freight_services[0]?.service_details;
 	const newPortPairs = [];
@@ -74,7 +74,7 @@ function Card({ item }) {
 					<Button
 						style={{ marginBottom: '10px' }}
 						size="md"
-						onClick={() => { router.push(`/contracts/details?id=${item?.id}`); }}
+						onClick={() => { router.push(`/contracts/details?id=${item?.id}&status=${filters?.status}`); }}
 						themeType="secondary"
 					>
 						View

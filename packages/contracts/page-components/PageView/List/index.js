@@ -1,10 +1,10 @@
 import Card from './Card';
 import styles from './styles.module.css';
 
-function List({ data }) {
+function List({ data, filters }) {
 	return (
 		<div className={styles.container}>
-			{(data?.list || []).map((item) => <Card item={item} />)}
+			{(data?.list || []).map((item) => <Card item={item} filters={filters} />)}
 		</div>
 	);
 }

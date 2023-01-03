@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import Stats from './Stats';
 import styles from './styles.module.css';
 
-function Header({ data }) {
+function Header({ data, status }) {
 	const router = useRouter();
 	return (
 		<div>
@@ -18,7 +18,7 @@ function Header({ data }) {
 			<div className={styles.contract}>
 				Contract Details
 			</div>
-			<Stats data={data} />
+			<Stats data={data} status={status} />
 		</div>
 	);
 }

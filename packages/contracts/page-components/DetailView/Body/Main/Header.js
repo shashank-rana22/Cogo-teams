@@ -4,7 +4,6 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function Header({ activePair }) {
-	console.log(activePair?.trade_type, 'values');
 	const originCode = activePair?.origin_port?.port_code;
 	const originName = activePair?.origin_port?.name.split('(')[0];
 	const destinationCode = activePair?.destination_port?.port_code;

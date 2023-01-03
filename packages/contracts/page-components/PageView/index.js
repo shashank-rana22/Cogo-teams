@@ -17,7 +17,7 @@ function PageView() {
 	if (data?.list && !loading) {
 		content = (
 			<>
-				<List data={data} />
+				<List data={data} filters={filters} />
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"

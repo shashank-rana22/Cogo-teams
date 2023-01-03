@@ -19,8 +19,9 @@ const useListContracts = () => {
 		try {
 			const res = await trigger({
 				params: {
-					filters                : {},
-					services_data_required : true,
+					filters                            : {},
+					services_data_required             : true,
+					contract_utilisation_data_required : true,
 					status,
 					page,
 				},

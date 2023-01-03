@@ -1,4 +1,3 @@
-import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 
 import useGetContract from '../../hooks/useGetContract';
@@ -8,10 +7,10 @@ import Header from './Header';
 import Loader from './Loader';
 
 function DetailView() {
-	const { id } = useSelector(({ general }) => ({
-		id: general?.query?.id,
+	const { query } = useSelector(({ general }) => ({
+		query: general?.query,
 	}));
-	const { data, loading } = useGetContract({ id });
+	const { data, loading } = useGetContract({ id: query?.id });
 
 	let content = (
 		<Loader />
@@ -21,7 +20,7 @@ function DetailView() {
 		content = (
 			<>
 				{' '}
-				<Header data={data} />
+				<Header data={data} status={query?.status} />
 				<Body data={data} />
 			</>
 		);

@@ -1,7 +1,7 @@
 import Content from './Content';
 import styles from './styles.module.css';
 
-function Stats({ data }) {
+function Stats({ data, status }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -17,7 +17,7 @@ function Stats({ data }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{data?.fcl_freight_services[0]?.max_containers_count}
+							{data?.services_data?.fcl_freight[0]?.max_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -39,7 +39,7 @@ function Stats({ data }) {
 					</div>
 				</div>
 			</div>
-			<Content data={data} />
+			<Content data={data} status={status} />
 		</div>
 	);
 }
