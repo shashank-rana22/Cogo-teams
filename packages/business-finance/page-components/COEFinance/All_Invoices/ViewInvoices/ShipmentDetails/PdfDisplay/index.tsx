@@ -1,5 +1,16 @@
 import React from "react";
-const PdfDisplay = ({data}:any) =>{
+
+interface BillInterface{
+    billDocumentUrl?:string
+}
+interface DataInterface {
+    bill?:BillInterface
+}
+interface Props {
+    data?:DataInterface
+}
+const PdfDisplay = ({data}:Props) =>{
+    
     return(
         <div>
             <object

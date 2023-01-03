@@ -1,9 +1,19 @@
-import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
 import React,{ useState, useEffect } from 'react';
+import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
 import { Placeholder, Tooltip } from '@cogoport/components';
 import styles from './styles.module.css'
 
-function formatAMPM(date) {
+interface DataInterface {
+	eventName:string
+	occurredAt:string
+
+}
+interface  POCTimeLineInterface {
+	loading:boolean
+	data:Array<DataInterface>
+}
+
+function formatAMPM(date:any) {
 	let hours = date.getHours();
 	let minutes = date.getMinutes();
 	const ampm = hours >= 12 ? 'pm' : 'am';
@@ -14,9 +24,9 @@ function formatAMPM(date) {
 	return strTime;
 }
 
-const POCTimeLine = ({ data, loading }) => {
 
-	// const { numLocale } = usei18n();
+const POCTimeLine = ({ data, loading }:POCTimeLineInterface) => {
+
 	const [complete, setComplete] = useState(false);
 
 	const timeLine = data || [{}];

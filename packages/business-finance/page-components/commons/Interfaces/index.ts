@@ -51,9 +51,9 @@ export interface TableProps {
 
 export interface ListDataProps{
 	list: object[];
-	pageIndex: number;
-	totalPage: number;
-	totalRecords: number;
+	pageIndex?: number;
+	totalPage?: number;
+	totalRecords?: number;
 }
 
 export interface Options{

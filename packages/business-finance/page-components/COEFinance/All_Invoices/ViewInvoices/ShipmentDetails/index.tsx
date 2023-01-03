@@ -15,6 +15,7 @@ interface JobInterface {
 }
 interface DataInterface {
     job:JobInterface
+    bill :object
 }
 interface ShipmentDetailsInterface {
     data:DataInterface
@@ -53,7 +54,7 @@ const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
                </div>      
             </div>
             {showDetails && <div className={styles.hr}/>}
-            <div className={styles.details}>{showDetails && <Details  jobNumber={jobNumber} orgId={orgId}/>}</div>
+            <div className={styles.details}>{showDetails && <Details orgId={orgId}/>}</div>
         </div>
 
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>
@@ -68,7 +69,7 @@ const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
                </div>
             </div> 
             {showDocuments && <div className={styles.hr}/>}
-            <div className={styles.documents}> { showDocuments && <Documents data={data}  shipmentId={shipmentId}/> } </div>               
+            <div className={styles.documents}> { showDocuments && <Documents  shipmentId={shipmentId}/> } </div>               
         </div>
 
         <div style={{display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
