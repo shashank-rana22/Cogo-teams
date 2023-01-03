@@ -6,10 +6,13 @@
   color: #333333;
   font-weight: 400;
   margin-top: 4px;
+  width: max-content;
+}
+.billnumbers {
+  cursor: pointer;
 }
 .sid {
   text-decoration: underline;
-  cursor: pointer;
   margin-bottom: 10px;
 }
 .serviceType {

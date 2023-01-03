@@ -12,7 +12,6 @@
     "common/*"
   ],
   "scripts": {
-    "deploy": "pnpm deploy",
     "build": "node scripts/build-pages && turbo run build",
     "dev": "node scripts/build-pages && turbo run dev",
     "start": "turbo run start",
@@ -22,6 +21,7 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
     "swr": "^2.0.0"
   },
   "devDependencies": {

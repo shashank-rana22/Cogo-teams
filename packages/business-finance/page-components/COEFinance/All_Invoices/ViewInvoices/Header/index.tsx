@@ -3,7 +3,7 @@ import { Button } from '@cogoport/components'
 import {useRouter} from '@cogoport/next'
 import styles from './styles.module.css'
 const Header =()=>{
-    const Router=useRouter();
+    const Router = useRouter();
 return(
 <div>
     <div className={styles.container}>

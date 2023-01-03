@@ -2,7 +2,6 @@ import React,{useEffect, useState} from "react"
 import PurchaseInvoice from './PurchaseInvoiceView/index';
 import styles from './styles.module.css'
 import ShipmentIdView from "./ShipmentIdView/index";
-import FilterModal from "../Components/FilterModal";
 import { useRouter } from '@cogoport/next';
 
 const AllInvoices = () => {
@@ -47,7 +46,6 @@ const AllInvoices = () => {
                     </div>
                 </div>
                 </div>
-                <FilterModal setFilters={setFilters} filters={filters}/>
             </div>
             {isPurchase && <PurchaseInvoice filters={filters} setFilters={setFilters} />}
             {!isPurchase && <ShipmentIdView />}

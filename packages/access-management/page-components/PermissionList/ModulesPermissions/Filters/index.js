@@ -1,4 +1,4 @@
-import { Popover, ChipsGroup, Button } from '@cogoport/components';
+import { Popover, Chips, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -15,14 +15,15 @@ function Filters({
 	const content = () => (
 		<div style={{ padding: '12px 8px' }}>
 			<span>Navigation Status</span>
-			<ChipsGroup
-				list={[
-					{ label: 'Assigned', value: 'assigned' },
-					{ label: 'Not Assigned', value: 'not_assigned' },
-					{ label: 'All', value: 'all' },
+			<Chips
+				items={[
+					{ children: 'Assigned', key: 'assigned' },
+					{ children: 'Not Assigned', key: 'not_assigned' },
+					{ children: 'All', key: 'all' },
 				]}
-				value={navStatus}
-				onClick={(val) => setNavStatus(val)}
+				enableMultiSelect
+				selectedItems={navStatus}
+				onItemChange={(val) => setNavStatus(val)}
 			/>
 		</div>
 	);

@@ -33,7 +33,9 @@ const Element = ({
 	...rest
 }:ElementProps) => {
 
-const [show, setShow] = useState<boolean>(false);
+
+
+const [show, setShow] = useState(false);
 const {style,selectWidth,options}=rest||{}
 const {setFilters}=rest;
 const tagClick=(val:Options)=>{

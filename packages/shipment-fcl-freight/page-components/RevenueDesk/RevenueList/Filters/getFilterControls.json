@@ -1,0 +1,33 @@
+[
+	{
+		"label":"Trade Type",
+		"name":"trade_type",
+		"span":12,
+		"type":"select",
+		"placeholder": "Select Trade Type",
+		"theme": "admin",
+		"options":[
+			{
+				"label":"Export",
+				"value":"export"
+			},
+			{
+				"label":"Import",
+				"value":"import"
+			}
+			
+		]
+	},
+	{
+		"valueKey":"id",
+		"labelKey":"display_name",
+		"endpoint":"list_locations",
+		"initialCall" : true,
+		"params":{
+			"filters":{ "type":[ "seaport"]}, 
+			"page_limit" : 10,
+			"sort_by"    : "name",
+			"sort_type" : "asc"
+		}
+	}
+]

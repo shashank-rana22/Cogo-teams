@@ -7,11 +7,14 @@ import Documents from "./Documents/index";
 import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
 import POC from './../POC';
+import useListShipment from "../../../hook/useListShipment";
 
-const ShipmentDetails = ({data,orgId})=>{
-    const jobNumber=data?.job?.jobNumber || '';
+const ShipmentDetails = ({data,orgId,jobNumber})=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
+
+    const {data:shipmentData} = useListShipment(jobNumber);
+    const shipmentId = shipmentData?.list[0]?.id;
 
     return(
     <div className={styles.container}>
@@ -50,7 +53,7 @@ const ShipmentDetails = ({data,orgId})=>{
                </div>
             </div> 
             {showDocuments && <div className={styles.hr}/>}
-            <div className={styles.documents}> { showDocuments && <Documents data={data}/> } </div>               
+            <div className={styles.documents}> { showDocuments && <Documents data={data}  shipmentId={shipmentId}/> } </div>               
         </div>
         {/* <POC/> */}
 

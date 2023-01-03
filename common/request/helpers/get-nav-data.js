@@ -1,4 +1,4 @@
-import { navigationMappings } from '@cogoport/layout';
+import { navigationMappings } from '@cogoport/navigation-configs';
 
 const getNavData = (navigation) => {
 	const navs = navigation.split('-');
