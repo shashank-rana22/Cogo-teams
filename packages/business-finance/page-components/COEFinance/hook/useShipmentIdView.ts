@@ -21,7 +21,7 @@ interface AllParams {
     pendingApproval?: string;
 }
 
-const useShipmentIdView = (allParams?: any) => {
+const useShipmentIdView = (allParams?: {}) => {
     const { ...params }: AllParams = allParams || {};
     const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({

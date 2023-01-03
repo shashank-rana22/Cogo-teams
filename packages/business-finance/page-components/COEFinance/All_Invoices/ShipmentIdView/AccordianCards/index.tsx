@@ -5,7 +5,7 @@ import { useState } from "react";
 import CardItem from "./CardItem/index";
 import { startCase } from "@cogoport/utils";
 import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
-import { useRouter } from '@cogoport/next';
+import { useRouter } from "@cogoport/next";
 
 interface ItemDataProps {
     expense_total_price: number;
@@ -39,123 +39,137 @@ const AccordianCards = ({
     refetch,
 }: listData) => {
     const [amountTab, setAmountTab] = useState("expense");
-    const router=useRouter()
-    
-    const handleClick = () => {
-        setCurrentOpenSID("");
-    };
+    const router = useRouter();
 
     return (
         <div>
             <div className={styles.container}>
                 <div className={styles.subContainer}>
-                    <div className={styles.sid}>
-                        <div className={styles.sidContainer}>
-                            <div className={styles.sidLabelText}>SID - </div>
-                            <div className={styles.sidValueText}>
-                                {itemData.serial_id}
+                    <div className={styles.column1}>
+                        <div className={styles.sid}>
+                            <div className={styles.sidContainer}>
+                                <div className={styles.sidLabelText}>
+                                    SID -{" "}
+                                </div>
+                                <div className={styles.sidValueText}>
+                                    {itemData.serial_id}
+                                </div>
+                            </div>
+                            <div className={styles.pendingText}>
+                                Pending Approval - {itemData.pending_approvals}
                             </div>
                         </div>
-                        <div className={styles.pendingText}>
-                            Pending Approval - {itemData.pending_approvals}
+                        <div className={styles.freightWidth}>
+                            <div className={styles.freight}>
+                                {startCase(itemData.shipment_type)}
+                            </div>
                         </div>
+                    </div>
+                    <div className={styles.rightBorder}>
+                        <div className={styles.vr} />
                     </div>
 
-                    <div className={styles.freight}>
-                        {startCase(itemData.shipment_type)}
+                    <div className={styles.column2}>
+                        <div className={styles.expenseAmount}>
+                            <div className={styles.expense}>
+                                <div className={styles.expenseLabelText}>
+                                    Expense ({itemData.expense_count || 0})
+                                </div>
+                                <div className={styles.expenseValueText}>
+                                    {getFormattedPrice(
+                                        itemData.expense_total_price,
+                                        itemData.expense_total_currency
+                                    )}
+                                </div>
+                            </div>
+                            <div className={styles.urgent}>
+                                <div className={styles.urgentLabelText}>
+                                    Urgent ({itemData.urgency_expense_count})
+                                </div>
+                                <div className={styles.urgentValueText}>
+                                    {getFormattedPrice(
+                                        itemData.urgency_total_price,
+                                        itemData.urgency_total_currency || "INR"
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.expenseAmount}>
+                            <div className={styles.expense}>
+                                <div className={styles.expenseLabelText}>
+                                    Income ({itemData.income_count})
+                                </div>
+                                <div className={styles.expenseValueText}>
+                                    {getFormattedPrice(
+                                        itemData.income_total_price,
+                                        itemData.income_total_currency || "INR"
+                                    )}
+                                </div>
+                            </div>
+                            <div className={styles.expense}>
+                                <div className={styles.expenseLabelText}>
+                                    Credit Note ({itemData.credit_expense_count}
+                                    )
+                                </div>
+                                <div className={styles.expenseValueText}>
+                                    {getFormattedPrice(
+                                        itemData.credit_total_price,
+                                        "INR"
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className={styles.vr} />
-                    <div className={styles.expenseAmount}>
-                        <div className={styles.expense}>
-                            <div className={styles.expenseLabelText}>
-                                Expense ({itemData.expense_count || 0})
-                            </div>
-                            <div className={styles.expenseValueText}>
-                                {getFormattedPrice(
-                                    itemData.expense_total_price,
-                                    itemData.expense_total_currency
-                                )}
-                            </div>
-                        </div>
-                        <div className={styles.urgent}>
-                            <div className={styles.urgentLabelText}>
-                                Urgent ({itemData.urgency_expense_count})
-                            </div>
-                            <div className={styles.urgentValueText}>
-                                {getFormattedPrice(
-                                    itemData.urgency_total_price,
-                                    itemData.urgency_total_currency || "INR"
-                                )}
-                            </div>
-                        </div>
+                    <div className={styles.rightBorder}>
+                        <div className={styles.vr} />
                     </div>
-                    <div className={styles.expenseAmount}>
-                        <div className={styles.expense}>
-                            <div className={styles.expenseLabelText}>
-                                Income ({itemData.income_count})
-                            </div>
-                            <div className={styles.expenseValueText}>
-                                {getFormattedPrice(
-                                    itemData.income_total_price,
-                                    itemData.income_total_currency || "INR"
-                                )}
-                            </div>
-                        </div>
-                        <div className={styles.expense}>
-                            <div className={styles.expenseLabelText}>
-                                Credit Note ({itemData.credit_expense_count})
-                            </div>
-                            <div className={styles.expenseValueText}>
-                                {getFormattedPrice(
-                                    itemData.credit_total_price,
-                                    "INR"
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.vr} />
-                    <div className={styles.expenseAmount}>
-                        <div className={styles.expense}>
-                            <div className={styles.profitibility}>
-                                Quotation Profitability
+
+                    <div className={styles.column3}>
+                        <div className={styles.expenseAmount}>
+                            <div className={styles.expense}>
+                                <div className={styles.profitibility}>
+                                    Quotation Profitability
+                                </div>
+
+                                <div className={styles.profitibilityValue}>
+                                    {itemData.quotation_profit}%
+                                </div>
                             </div>
 
-                            <div className={styles.profitibilityValue}>
-                                {itemData.quotation_profit}%
+                            <div className={styles.expense}>
+                                <div className={styles.profitibility}>
+                                    Tentative Profitability
+                                </div>
+
+                                <div className={styles.profitibilityValue}>
+                                    {itemData.tentative_profit} %
+                                </div>
                             </div>
                         </div>
-
-                        <div className={styles.expense}>
-                            <div className={styles.profitibility}>
-                                Tentative Profitability
-                            </div>
-
-                            <div className={styles.profitibilityValue}>
-                                {itemData.tentative_profit} %
-                            </div>
+                        <div className={styles.viewButton}>
+                            {currentOpenSID !== itemData?.id ? (
+                                <Button
+                                    onClick={() => {
+                                        setCurrentOpenSID(itemData?.id);
+                                    }}
+                                    themeType="secondary"
+                                >
+                                    View More
+                                </Button>
+                            ) : (
+                                <Button
+                                    themeType="secondary"
+                                    onClick={() => {
+                                        setCurrentOpenSID(itemData?.id);
+                                        router.push(
+                                            `/business-finance/coe-finance/cost-sheet?orgId=${itemData.id}`
+                                        );
+                                    }}
+                                >
+                                    Cost View
+                                </Button>
+                            )}
                         </div>
-                    </div>
-                    <div>
-                        {currentOpenSID !== itemData?.id ? (
-                            <Button
-                                onClick={() => {
-                                    setCurrentOpenSID(itemData?.id);
-                                }}
-                                themeType="secondary"
-                            >
-                                View More
-                            </Button>
-                        ) : (
-                            <Button
-                                themeType="secondary"
-                                onClick={() => {
-                                    setCurrentOpenSID(itemData?.id);
-                                    router.push(`/business-finance/coe-finance/cost-sheet?orgId=${itemData.id}`);
-                                }}
-                            >
-                                Cost View
-                            </Button>
-                        )}
                     </div>
                     <div className={styles.ribben}>
                         <div className={styles.ribbon}>Closed</div>

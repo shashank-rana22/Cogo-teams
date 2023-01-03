@@ -1,7 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
-    @media (max-width: 768px) {
+    @media (max-width: 1068px) {
         flex-direction: column;
     }
 }
@@ -9,15 +9,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 768px) {
+    @media (max-width: 1068px) {
         flex-direction: column;
     }
 }
 .status {
     display: flex;
     align-items: center;
-    @media (max-width: 768px) {
-        padding-left: 60px;
+    @media (max-width: 1068px) {
+        justify-content: center;
     }
 }
 .statusLabel {
@@ -37,8 +37,7 @@
 .discount {
     display: flex;
     margin-left: 30px;
-    @media (max-width: 768px) {
-        flex-direction: column;
+    @media (max-width: 1068px) {
         padding: 8px;
     }
 }
