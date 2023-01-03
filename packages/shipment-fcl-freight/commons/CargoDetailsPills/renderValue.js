@@ -1,4 +1,4 @@
-import { ToolTip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMOpenlink } from '@cogoport/icons-react';
 import { startCase, upperCase, format } from '@cogoport/utils';
 
@@ -35,10 +35,10 @@ export const renderValue = (label, detail) => {
 	const packageDetails = () => {
 		if (packages?.length > 1) {
 			return (
-				<ToolTip
+				<Tooltip
 					placement="bottom"
 					theme="light"
-					content={(
+					render={(
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item) => {
 								const values = item
@@ -57,7 +57,7 @@ export const renderValue = (label, detail) => {
 						} more`}
 
 					</div>
-				</ToolTip>
+				</Tooltip>
 			);
 		}
 		return `Package: ${inputValue}`;
