@@ -19,8 +19,6 @@ const FieldPair = ({ itemData , field}:props) => {
 	const { topKey = {}, bottomKey = {} } = field;
 	const {	billType = '',billNumber='',isProforma='',billDocumentUrl,jobNumber='',serviceType} = itemData;
 
-	
-	
     const handleBillType = (item:object) => {
         let invoiceType;		
 		if (billType=== "BILL") {
@@ -47,7 +45,7 @@ const FieldPair = ({ itemData , field}:props) => {
 			{field?.label==='Invoice No.' &&(
 				<div>
 					{topKey && (
-						<div>
+						<div className={styled.billnumbers}>
 							{billNumber.length > 11 ? (
 						<Tooltip
 							interactive
@@ -63,7 +61,7 @@ const FieldPair = ({ itemData , field}:props) => {
 					) : (
 						<text onClick={() => window.open(billDocumentUrl, '_blank')}>
 							{billNumber}
-							</text>
+						</text>
 					)}
 					</div>
 				)}
