@@ -32,14 +32,17 @@ function Layout({ control, fields, showElements = {} }) {
 			{totalFields.map((field) => (
 				<div className={styles.row}>
 					{field.map((fieldsItem) => {
-						const { type } = fieldsItem;
+						const { type, heading = '' } = fieldsItem;
 						const show = !(fieldsItem.name in showElements) || showElements[fieldsItem.name];
 						if (type === 'fieldArray' && show) {
 							return (
-								<FieldArray
-									{...fieldsItem}
-									control={control}
-								/>
+								<>
+									<div style={styles.heading}>{heading}</div>
+									<FieldArray
+										{...fieldsItem}
+										control={control}
+									/>
+								</>
 							);
 						}
 						return show
