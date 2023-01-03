@@ -39,7 +39,7 @@ function useGetAsyncOptions({
 				const res = await triggerSingle({
 					params: merge(params, { filters: { [valueKey]: value } }),
 				});
-				return res?.data?.list || [];
+				return res?.data?.list || res?.list || [];
 			}
 			return [];
 		}

@@ -50,6 +50,25 @@ function asyncFieldsOrganization() {
 		},
 	};
 }
+
+function asyncFieldsOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'organization_id',
+		endpoint    : 'list_organization_users',
+		initialCall : false,
+		params      : {
+
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
 export {
-	asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsOrganization,
+	asyncFieldsLocations,
+	asyncFieldsLocations2,
+	asyncFieldsPartner,
+	asyncFieldsOrganization,
+	asyncFieldsOrganizationUsers,
 };
