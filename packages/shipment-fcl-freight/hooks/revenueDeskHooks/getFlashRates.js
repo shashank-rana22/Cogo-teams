@@ -8,7 +8,6 @@ const useGetFlashRates = ({
 	api,
 	currentShipmentData,
 	choosen,
-	shipment_type,
 	service,
 }) => {
 	const [{ data, loading }, trigger] = useRequest(
@@ -18,7 +17,7 @@ const useGetFlashRates = ({
 
 	const date = new Date();
 	date.setDate(date.getDate() - 4);
-	const service_type = `${shipment_type}_service`;
+	const service_type = 'fcl_freight_service';
 
 	const { options } = getPreviousFalshPayload(currentShipmentData);
 

@@ -2,29 +2,24 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const getServiceWiseFilters = (shipment_type, shipment_data, service) => {
-	if (shipment_type === 'fcl_freight') {
-		return {
-			origin_port_id      : shipment_data?.origin_port?.id,
-			destination_port_id : shipment_data?.destination_port?.id,
-			shipping_line_id    : shipment_data?.shipping_line_id?.id,
-			container_size      : service?.container_size,
-			container_type      : service?.container_type,
-			commodity           : service?.commodity,
-			is_rate_available   : true,
-		};
-	}
-	return {};
-};
+const getServiceWiseFilters = (shipment_data, service) => ({
+	origin_port_id      : shipment_data?.origin_port?.id,
+	destination_port_id : shipment_data?.destination_port?.id,
+	shipping_line_id    : shipment_data?.shipping_line_id?.id,
+	container_size      : service?.container_size,
+	container_type      : service?.container_type,
+	commodity           : service?.commodity,
+	is_rate_available   : true,
+});
 
 const useGetSystemRates = ({
-	shipment_data, choosen, shipment_type, service,
+	shipment_data, choosen, service,
 }) => {
-	const api = `/list_${shipment_type}_rates`;
+	const api = '/list_fcl_freight_rates';
 
 	const [{ data, loading }, trigger] = useRequest(api, { manual: true });
 
-	const filters = getServiceWiseFilters(shipment_type, shipment_data, service);
+	const filters = getServiceWiseFilters(shipment_data, service);
 
 	const availableFilters = {};
 

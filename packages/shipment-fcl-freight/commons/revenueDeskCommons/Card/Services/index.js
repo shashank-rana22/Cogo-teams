@@ -6,8 +6,6 @@ import styles from './styles.module.css';
 
 const notToShowServices = [
 	'fcl_freight_local_service',
-	'lcl_freight_local_service',
-	'air_freight_local_service',
 ];
 
 function Services({ services, onClick }) {

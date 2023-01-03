@@ -13,8 +13,11 @@ function Cancellation({
 	setShowBookingOption = () => {},
 }) {
 	const { id } = data;
+
 	const [showCancel, setShowCancel] = useState(false);
+
 	const ref = useRef(null);
+
 	const [show, setShow] = useState(false);
 
 	const onClose = () => {

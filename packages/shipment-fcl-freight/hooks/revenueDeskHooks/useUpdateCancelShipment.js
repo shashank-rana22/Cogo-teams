@@ -2,8 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-// import { getApiErrorString } from '@cogoport/front/utils';
-
 const useUpdateCancelShipment = ({
 	id,
 	setShowCancel = () => {},

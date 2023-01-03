@@ -1,4 +1,4 @@
-export const getTabs = (activeTab) => {
+export const getTabs = () => {
 	const tabs = [
 		{
 			name  : 'place_booking',
@@ -16,19 +16,12 @@ export const getTabs = (activeTab) => {
 			name  : 'cancelled',
 			title : 'Cancelled',
 		},
+		{
+			name  : 'container_pick_up',
+			title : 'Container Pick Up',
+		},
 	];
-	const additionalTab = {
-		fcl_freight: [
-			{
-				name  : 'container_pick_up',
-				title : 'Container Pick Up',
-			},
-		],
 
-	};
-	if (additionalTab[activeTab]) {
-		tabs.splice(2, 0, ...additionalTab[activeTab]);
-	}
 	return tabs;
 };
 

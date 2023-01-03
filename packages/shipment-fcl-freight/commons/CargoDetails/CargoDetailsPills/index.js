@@ -26,11 +26,6 @@ const labels = [
 	'lr_number',
 ];
 
-/**
- * Renders a CargoDetails Component
- * @param {Object}      					props
- * @param {Array of Object} 				[props.detail=[{}]] - Specifies details of cargo
- */
 function CargoDetailsPills({ detail }) {
 	return (
 		<>

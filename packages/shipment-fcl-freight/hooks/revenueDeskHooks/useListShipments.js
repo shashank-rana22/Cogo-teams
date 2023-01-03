@@ -1,12 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const useListShipments = ({ status = '' }) => {
 	const shipment_type = 'fcl_freight';
 
 	const [loading, setLoading] = useState(true);
-	const firstRender = useRef(true);
 
 	const [filters, setFilters] = useState({
 		page      : 1,
@@ -87,10 +86,6 @@ const useListShipments = ({ status = '' }) => {
 	};
 
 	useEffect(() => {
-		if (firstRender.current) {
-			firstRender.current = false;
-			return;
-		}
 		setLoading(true);
 		refetch();
 	// eslint-disable-next-line react-hooks/exhaustive-deps

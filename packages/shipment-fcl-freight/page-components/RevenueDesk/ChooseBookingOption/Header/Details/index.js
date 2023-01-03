@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 
 function Details({ data = {} }) {
 	const departure_date =		data.schedule_departure || data.selected_schedule_departure;
-	const cargoStuffingLocation =		data.fcl_freight_services[0].cargo_stuffing_location;
-	const shippingLine = data.shipping_line.business_name;
+	const cargoStuffingLocation =		data.fcl_freight_services?.[0].cargo_stuffing_location;
+	const shippingLine = data.shipping_line?.business_name;
 	const preferredShippingLine = data.preferred_shipping_line?.business_name;
 
 	return (
