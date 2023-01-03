@@ -49,7 +49,7 @@ function BookingDesk() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_wrapper}>
-				<div className={styles.heading}>Bookings Desk</div>
+				<h1 className={styles.heading}>Bookings Desk</h1>
 				<ShipmentFilters
 					hookSetters={hookSetters}
 					activeTab={activeTab}
