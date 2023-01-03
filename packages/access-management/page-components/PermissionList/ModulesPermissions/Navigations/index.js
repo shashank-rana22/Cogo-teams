@@ -1,5 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import navigationMappings from '@cogoport/layout/navigation-mappings';
+import navigationMappings from '@cogoport/navigation-configs/navigation-mappings';
 import React from 'react';
 
 import applyRegEx from '../../../../utils/apply-regex';

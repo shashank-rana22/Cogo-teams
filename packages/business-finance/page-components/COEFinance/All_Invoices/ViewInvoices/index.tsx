@@ -7,7 +7,7 @@ import useGetBill from "../../hook/useGetBill"
 import InvoiceDetails from "./InvoiceDetails/index"
 const ViewInvoices =()=>{
     const {push, query} = useRouter();
-    const {billId,orgId,jobNumber}=query;
+    const {billId,orgId}=query;
     const {
 		loading,
 		list: { fullResponse },
@@ -31,7 +31,6 @@ const ViewInvoices =()=>{
         <ShipmentDetails 
         	data={fullResponse}
             orgId = {query?.orgId || ''}
-            jobNumber={jobNumber}
             />
   
 

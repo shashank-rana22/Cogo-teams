@@ -3,7 +3,7 @@ import { IcCFtick } from "@cogoport/icons-react";
 import React, { useState } from "react";
 import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
-import { Modal, Textarea} from '@cogoport/components'
+import { Modal, Textarea ,Checkbox} from '@cogoport/components'
 
 const ShipmentDetailsCard = ({data}:any) =>{
     const [showValue, setShowValue ] =  useState([])
@@ -49,7 +49,6 @@ const ShipmentDetailsCard = ({data}:any) =>{
     const onClose = () => {
 		setShowRejected(false);
 	};
-    console.log(Object.keys(showRejected)[0]==="1","showRejected");
     
 
 return(
@@ -79,18 +78,42 @@ return(
             showRejected[id] &&                 
                 <Modal size="lg" show={showRejected[id]} onClose={onClose}>
                     <Modal.Header title="CHOOSE THE DETAiLS YOU WANT TO REJECT" />
-
+                    <Modal.Body>
                     
                         {Object.keys(showRejected).includes("1") &&
-                                            <div className={styles.rejectedBillingPartyContainer}>
-                                                  <div style={{marginBottom:'8px'}}>Name</div>
-                                                  <div style={{marginBottom:'8px'}}> Bank Name </div>
-                                                  <div style={{marginBottom:'8px'}}> Account Number </div>
-                                                  <div style={{marginBottom:'8px'}}> IFSC </div>
-                                                  <div style={{marginBottom:'8px'}}>PAN Number</div>
-                                                  <div style={{marginBottom:'8px'}}>GST Number </div>
+                                            <div>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Name</div>
+                                                </div>
 
-                                                
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Bank Name </div>
+                                                </div>
+
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Account Number </div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>IFSC</div>
+                                                </div>
+
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>PAN Number</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>GST Number </div>
+                                                </div>
+                                                 
                                                 <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
                                                
                                             </div>
@@ -98,26 +121,56 @@ return(
                             }
 
                         {Object.keys(showRejected).includes("2")&&     
-                                            <div className={styles.rejectedBillingPartyContainer}>
-                                                <div style={{marginBottom:'8px'}}>Entity </div>
-                                                <div style={{marginBottom:'8px'}}>Address </div>
-                                                <div style={{marginBottom:'8px'}}>PAN Number </div>
-                                                <div style={{marginBottom:'8px'}}>GST Number </div>
+                                            <div>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Entity</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Address</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>PAN Number </div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>GST Number</div>
+                                                </div>
 
                                                 <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
                                             </div>
                             }
                         {Object.keys(showRejected).includes("3") &&
-                                    <div className={styles.rejectedBillingPartyContainer}>
-                                            <div style={{marginBottom:'8px'}}>Invoice Number </div>
-                                            <div style={{marginBottom:'8px'}}>Invoice Date </div>
-                                            <div style={{marginBottom:'8px'}}>Status </div>
-                                            <div style={{marginBottom:'8px'}}>Place Of Supply</div>
+                                    <div>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Invoice Number</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Invoice Date</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Status</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Place Of Supply</div>
+                                                </div>
 
                                             <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
                                     </div>
                             }
-            
+                        </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={onClose}>Submit</Button>
                     </Modal.Footer>

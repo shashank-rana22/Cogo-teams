@@ -1,10 +1,18 @@
 .container {
   display: flex;
   height: 59px;
+  margin-top: 14px;
   margin-bottom: -20px;
   margin-top: 12px;
+  justify-content: space-between;
 }
+
+.flex {
+  display: flex;
+}
+
 .subContainerClick {
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,6 +34,7 @@
   }
 }
 .subContainer {
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;

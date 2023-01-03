@@ -5,6 +5,7 @@ import { LINE_ITEMS ,LINE_ITEMS_CHECK} from "../../../../../configurations/LINE_
 import List from "../../../../../../commons/List/index";
 import { IcCFtick ,IcMOverflowDot,IcCFcrossInCircle} from "@cogoport/icons-react";
 import { Tooltip ,Modal,Checkbox } from "@cogoport/components";
+import { Textarea } from "@cogoport/components";
 
 
 const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
@@ -53,7 +54,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
         
         renderReject: (item) => (
             <div style={{cursor:"pointer"}}>
-                <Tooltip  placement="left" interactive content={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}}>{popover[item?.id] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div> }>
+                <Tooltip  placement="left" interactive content={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}} >{popover[item?.id] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div> }>
                       <IcMOverflowDot width="20px" height="20px"/>
                 </Tooltip>
             </div>
@@ -86,10 +87,10 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
             </div>
             {
             popover[id] && 
-                <Modal size="lg" show={popover[id]} onClose={onClose}>
+                <Modal size="lg" placement="center" show={popover[id]} onClose={onClose}>
                     <Modal.Header title="Rejected line items" />
-
-                    <div className={styles.modalContainer}>
+            <Modal.Body>
+                  <div className={styles.modalContainer}>
                         <List config={LINE_ITEMS_CHECK} itemData={{list:[showRejectedModal]}} functions={functions} />
                     </div>
 
@@ -105,7 +106,11 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}) => {
                           )
                           
                     })}
-                    </div>
+                </div>
+                <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+            </Modal.Body>
+
+
                     
                     <Modal.Footer>
                         <Button onClick={onClose}>Submit</Button>

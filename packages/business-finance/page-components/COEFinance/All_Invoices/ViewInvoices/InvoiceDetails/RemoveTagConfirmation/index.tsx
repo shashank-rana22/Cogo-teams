@@ -4,12 +4,18 @@ import { IcMDelete } from '@cogoport/icons-react';
 import useUpdateTag from '../../../../hook/useUpdateTag';
 import styles from './styles.module.css';
 
+interface RemoveTageInterface {
+	billId?:string
+	getBillRefetch?:()=> void
+	collectionPartyId?:string
+	setRemoveTag: React.Dispatch<React.SetStateAction<boolean>>
+}
 const RemoveTagConfirmation = ({
 	setRemoveTag = () => {},
 	getBillRefetch = () => {},
 	billId = '',
 	collectionPartyId = '',
-}) => {
+}:RemoveTageInterface) => {
 	const onClose = () => {
 		setRemoveTag(false);
 		getBillRefetch();

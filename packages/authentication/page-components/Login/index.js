@@ -15,7 +15,7 @@ function Login() {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const renderSuffix = () => {
-		if (showPassword) {
+		if (!showPassword) {
 			return <IcMEyeopen className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
 		}
 		return <IcMEyeclose className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;

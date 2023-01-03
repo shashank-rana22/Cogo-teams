@@ -1,0 +1,40 @@
+.urlContainer {
+  color: #3471ae;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.textDiv {
+  color: #3471ae;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.flex{
+  display: flex;
+  :global{
+    .ui_tag_container{
+      background-color: transparent;
+      padding: 4px 18px;
+    }
+  }
+}
+
+.active{
+  background-color: #FFFAEB !important;
+  color: #ED3726 !important;
+  padding: 5px;
+  border: 1px solid #ED3726 !important;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.select_container{
+  padding-left: 5px;
+}
+
+.normal{
+  background: #FFFFFF !important;
+  border-radius: 8px;
+  border: 1px solid #333333 !important;
+  cursor: pointer;
+}

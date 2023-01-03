@@ -1,5 +1,6 @@
 import React from 'react';
 import { GenericObject } from '../../../../../commons/Interfaces/index';
+import { startCase } from '@cogoport/utils';
 import styled from './styles.module.css';
 
 interface props{
@@ -7,30 +8,13 @@ interface props{
 }
 
 function RenderStatus ({ item}:props)  {
+	const StatusItem = (item?.status).toLowerCase();
+	
 	return (
 		<div>
-       		 {(item?.status==='FINANCE_ACCEPTED') &&
-				<div className={styled.StatusFinanceAccepted}>Finance Accepted</div>
-			}
-			 {(item?.status==='INITIATED') &&
-				<div className={styled.StatusInitiated}>Initiated</div>
-			}
-			{(item?.status==='ACCEPTED') &&
-				<div className={styled.StatusAccepted}>Accepted</div>
-			}
-			 {(item?.status==='FINANCE_REJECTED') &&
-				<div className={styled.StatusFinanceRejected}>Finance Rejected</div>
-			}
-			 {(item?.status==='POSTED') &&
-				<div className={styled.StatusPosted}>Posted</div>
-			}
-			{(item?.status==='VOID') &&
-				<div className={styled.StatusVoid}>Void</div>
-			}
-			{(item?.status==='COE_REJECTED') &&
-				<div className={styled.StatusCOERejected}>COE Rejected</div>
-			}
-
+			<div className={styled[item?.status]}>
+				{startCase(StatusItem)}
+			</div>
 		</div>
 	);
 };

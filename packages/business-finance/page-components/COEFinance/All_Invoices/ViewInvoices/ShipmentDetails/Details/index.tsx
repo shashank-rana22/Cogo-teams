@@ -3,11 +3,16 @@ import {useRouter} from '@cogoport/next';
 import {IcMFship, IcMPortArrow} from '@cogoport/icons-react';
 import {Tags} from '@cogoport/components';
 import styles from './styles.module.css';
-import TimeLine from '../TimeLine/index';
+import TimeLine from './TimeLine/index';
 import useListShipment from '../../../../hook/useListShipment';
+import { StackTypeMap } from '@mui/material';
 
-const Details = ({jobNumber, orgId}) => {
-	const Router=useRouter();
+interface Details {
+	orgId?:string
+
+}
+const Details = ({orgId}:Details) => {
+	const Router = useRouter();
 
 return(
 <div>	

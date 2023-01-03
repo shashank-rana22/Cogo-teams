@@ -55,3 +55,17 @@ export interface ListDataProps{
 	totalPage: number;
 	totalRecords: number;
 }
+
+export interface Options{
+    label: string;
+    value: string;
+}
+
+export interface ControlProps {
+	span?: number;
+	name?: string;
+	type?: string;
+	options?: Options[];
+	groupBy?:ControlProps[];
+	[key:string]: string|number|undefined|boolean|Options[]|object[];
+}

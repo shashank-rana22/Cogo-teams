@@ -46,20 +46,25 @@ export const PURCHASE_VIEW_CONFIG = {
 		{
             label : 'Last Modified Date',
 			key   : 'createdDate',
-			span  : 1.5,
-			func 	:'rendeFormate',
+			span  : 1.8,
+			func  :'rendeFormate',
+		 sorting  : { name: 'modifiedDateSortType' },
+
 		},
 		{
 			label : 'Invoice Date',
             key   : 'billDate',
-			func 	:'rendeFormate',
+			func  :'rendeFormate',
 			span  : 1.5,
+		   sorting: { name: 'billDateSortType' },
 		},
 		{
 			label : 'Payment Due Date',
             key   : 'dueDate',
-			func 	:'rendeFormate',
+			func  :'rendeFormate',
 			span  : 1.7,
+		   sorting: { name: 'dueDateSortType' },
+
 		},
 		{
 			
