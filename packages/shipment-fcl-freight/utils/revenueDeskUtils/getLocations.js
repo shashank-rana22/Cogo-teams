@@ -68,14 +68,6 @@ const routeInfo = {
 		destination_drop      : '',
 		port_of_loading       : 'port_of_loading',
 	},
-	ftl_freight_service: {
-		origin_pickup         : 'origin_location',
-		origin_port           : 'origin_port',
-		origin_main_port      : '',
-		destination_main_port : '',
-		destination_port      : 'destination_drop',
-		destination_drop      : 'destination_location',
-	},
 };
 
 const getLocationInfo = (
