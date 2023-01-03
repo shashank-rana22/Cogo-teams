@@ -1,4 +1,4 @@
-import { Tags, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { startCase, upperCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -10,7 +10,7 @@ const notToShowServices = [
 	'air_freight_local_service',
 ];
 
-function Services({ services, onClick, activeService }) {
+function Services({ services, onClick }) {
 	return (
 		<div className={styles.container}>
 			{(services || [])
@@ -24,11 +24,7 @@ function Services({ services, onClick, activeService }) {
 							className={styles.tag_wrapper}
 							onClick={() => onClick(service)}
 						>
-							<Tags
-								className={
-									activeService === service.id ? 'ell' : 'all'
-								}
-							>
+							<div className={styles.details}>
 								Select
 								{' '}
 								{tradeType}
@@ -36,7 +32,7 @@ function Services({ services, onClick, activeService }) {
 								{upperCase(startCase(newShipmentType))}
 								{' '}
 								Preferences
-							</Tags>
+							</div>
 						</Button>
 					);
 				})}
