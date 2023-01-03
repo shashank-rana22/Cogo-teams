@@ -1,4 +1,4 @@
-const fclCfsControls = ({ heading }) => {
+const fclCfsControls = () => {
 	const controls = [
 		{
 			name       : 'service_provider_id',
@@ -20,7 +20,6 @@ const fclCfsControls = ({ heading }) => {
 			type               : 'fieldArray',
 			showButtons        : true,
 			name               : 'line_items',
-			heading,
 			buttonText         : 'Add Line Items',
 			noDeleteButtonTill : 1,
 			controls           : [
