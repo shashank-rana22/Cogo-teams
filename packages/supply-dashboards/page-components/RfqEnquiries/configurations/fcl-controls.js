@@ -1,19 +1,20 @@
 const fclFields =	[
 	{
-		name       : 'service_provider_id',
-		label      : 'Service Provider',
-		span       : 4,
-		type       : 'select',
-		placeolder : 'select service provider',
+		name        : 'service_provider_id',
+		label       : 'Service Provider',
+		span        : 4,
+		type        : 'select',
+		placeholder : 'Select',
 
 	},
 	{
-		label       : 'Rate Provided by user',
-		name        : 'sourced_by_id',
-		placeholder : 'Select',
-		type        : 'select',
-		isClearable : true,
-		span        : 4,
+		label          : 'Rate Provided by user',
+		name           : 'sourced_by_id',
+		placeholder    : 'Select',
+		type           : 'select',
+		isClearable    : true,
+		defaultOptions : false,
+		span           : 4,
 	},
 	{
 		label       : 'Shipping Line',

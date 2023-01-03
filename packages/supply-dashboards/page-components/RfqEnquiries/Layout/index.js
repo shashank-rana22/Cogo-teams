@@ -7,7 +7,7 @@ function Layout({ control, fields, showElements = {} }) {
 	const totalFields = [];
 	let span = 0;
 	fields.forEach((field) => {
-		if (!(field.name in showElements)) {
+		if (!showElements[field.name]) {
 			span += field.span || 12;
 			if (span === 12) {
 				rowWiseFields.push(field);
@@ -33,7 +33,7 @@ function Layout({ control, fields, showElements = {} }) {
 				<div className={styles.row}>
 					{field.map((fieldsItem) => {
 						const { type } = fieldsItem;
-						const show = !(fieldsItem.name in showElements) || showElements[fieldsItem.name];
+						const show = !(showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
 								<FieldArray

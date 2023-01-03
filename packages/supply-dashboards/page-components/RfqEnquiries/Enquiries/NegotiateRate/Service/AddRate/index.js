@@ -2,9 +2,9 @@ import useUpdateSpotNegotiationRate from '../../../../hooks/useUpdateSpotNegotia
 import Layout from '../../../../Layout';
 
 function AddRate({ service }) {
-	const { fields, control } = useUpdateSpotNegotiationRate({ service });
+	const { fields, control, showElements } = useUpdateSpotNegotiationRate({ service });
 	return (
-		<Layout fields={fields} control={control} />
+		<Layout fields={fields} control={control} showElements={showElements} />
 	);
 }
 export default AddRate;
