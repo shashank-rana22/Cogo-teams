@@ -1,3 +1,27 @@
 .billCurrency {
   margin-right: 4px;
 }
+.invoiceAmount {
+  display: flex;
+}
+.IcMinIcon {
+  margin-left: 8px;
+  color: #f68b21;
+}
+.preTax {
+  color: #ed3726;
+}
+.preTaxAmount {
+  background: #fffaeb;
+  color: rgb(51, 51, 51);
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+.postTax {
+  color: #00a300;
+}
+.postTaxAmount {
+  background: #fffaeb;
+  color: rgb(51, 51, 51);
+  margin-left: 10px;
+}
