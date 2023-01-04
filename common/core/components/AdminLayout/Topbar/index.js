@@ -1,5 +1,6 @@
 import cl from '@cogoport/components/src/utils/classname-processor';
 import { IcMOverflowLine, IcMCross } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -12,6 +13,7 @@ function Topbar({
 	onClickMobileNav = () => {},
 	showMobileNavbar = false,
 }) {
+	const router = useRouter();
 	return (
 		<div className={cl`${styles.container} ${className}`}>
 			{showMobileNav && (
@@ -22,6 +24,7 @@ function Topbar({
 
 			<div className={styles.brand_logo}>
 				<img
+					onClick={() => router.push('/home')}
 					className={styles.logo}
 					src={LOGO.LARGE}
 					alt="Logo Cogoport"

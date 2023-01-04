@@ -1,4 +1,3 @@
-import { Button, Modal } from '@cogoport/components';
 import { InputController, SelectController, MultiselectController } from '@cogoport/forms';
 import React from 'react';
 
@@ -22,17 +21,9 @@ const getElementController = (type = 'text') => {
 	}
 };
 
-function Form({
-	controls = () => [],
-	formProps = {},
-	onSubmit = () => {},
-	createRoleApi = {},
-}) {
-	const {
-		handleSubmit, control, watch, formState: { errors },
-	} = formProps;
+function Form({ controls = () => [], formProps = {} }) {
+	const { control, watch, formState: { errors } } = formProps;
 
-	const { loading } = createRoleApi;
 	const type = watch('role_functions') || [];
 
 	const subRoleFunctionOptions = [];
@@ -42,11 +33,7 @@ function Form({
 	});
 
 	return (
-		<form
-			className={styles.form_container}
-			id="rnp_role_list_create_role_form"
-			onSubmit={handleSubmit(onSubmit)}
-		>
+		<section className={styles.form_container}>
 			{controls.map((controlItem) => {
 				const el = { ...controlItem };
 				const Element = getElementController(el.type);
@@ -73,13 +60,7 @@ function Form({
 					</div>
 				);
 			})}
-
-			<Modal.Footer>
-				<Button themeType="secondary">Cancel</Button>
-				<Button loading={loading} type="submit">Create</Button>
-			</Modal.Footer>
-
-		</form>
+		</section>
 	);
 }
 
