@@ -4,16 +4,22 @@ import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsShipp
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import fclCfsControls from './fcl-cfs';
 import airFields from './air-controls';
+import fclCfsControls from './fcl-cfs';
 import fclControl from './fcl-controls';
-import fclDetetionFreeDays from './fcl-detetion-free-days';
 import fclLocals from './fcl-local-charges';
+import freeDaysSection from './free-days-section';
+import lclFields from './lcl-controls';
 
 const Config = ({ service, serviceProviderId }) => {
 	const [orgUsers, setOrgUsers] = useState([]);
 	const serviceProviderOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));
 	const shippingLineOptions = useGetAsyncOptions(merge(asyncFieldsShippingLines()));
+	const units = {
+		air_freight : 'per_kg_per_hour',
+		lcl_freight : 'per_kg_per_day',
+		fcl_freight : 'per_container',
+	};
 
 	const organizationUsersOptions = useGetAsyncOptions(
 		merge(asyncFieldsOrganizationUsers()),
@@ -48,12 +54,29 @@ const Config = ({ service, serviceProviderId }) => {
 		}
 
 		if (service?.data?.free_days_detention_destination > 0) {
-			field.push(...fclDetetionFreeDays({ heading: 'Destination Detention Days' }));
+			field.push(...freeDaysSection({
+				heading : 'Destination Detention Days',
+				unit    : units[service?.service],
+			}));
 		}
 	} else if (service?.service === 'fcl_cfs') {
 		field.push(...fclCfsControls);
 	} else if (service?.service === 'air_freight') {
 		field.push({ ...airFields });
+	} else if (service?.service === 'lcl_freight') {
+		field.push({ ...lclFields });
+		if (service?.data?.destination_storage_free_days > 0) {
+			field.push(...freeDaysSection({
+				heading : 'Origin Storage Days',
+				unit    : units[service?.service],
+			}));
+		}
+		if (service?.data?.origin_storage_free_days > 0) {
+			field.push(...freeDaysSection({
+				heading : 'Destination Storage Days',
+				unit    : units[service?.service],
+			}));
+		}
 	}
 
 	const newField = field.map((control) => {

@@ -1,5 +1,4 @@
-import PortPair from '../../../PageView/List/Card/PortPair';
-
+import Content from './Content';
 import styles from './styles.module.css';
 
 function SideBar({ data, activePair, setActivePair }) {
@@ -14,15 +13,11 @@ function SideBar({ data, activePair, setActivePair }) {
 				Port Pairs Requested
 			</div>
 			{data?.map((portPair) => (
-				<div
-					className={activePair?.uniqueId === `${portPair?.origin_code} ${portPair?.destination_code}`
-						? styles.port_pair_active : ''}
-				>
-					<div className={styles.pair}>
-						<PortPair portPair={portPair} handlePortChange={handlePortChange} detailView />
-						<div className={styles.line} />
-					</div>
-				</div>
+				<Content
+					portPair={portPair}
+					activePair={activePair}
+					handlePortChange={handlePortChange}
+				/>
 			))}
 		</div>
 	);

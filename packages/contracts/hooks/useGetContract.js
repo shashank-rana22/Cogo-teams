@@ -12,8 +12,11 @@ const useGetContract = ({ id }) => {
 		try {
 			const res = await trigger({
 				params: {
-					services_data_required : true,
-					filters                : { id },
+					services_data_required             : true,
+					contract_utilisation_data_required : true,
+					filters                            : {
+						id,
+					},
 				},
 			});
 			setData(res?.data);

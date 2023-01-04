@@ -19,7 +19,9 @@ const useListContracts = () => {
 		try {
 			const res = await trigger({
 				params: {
-					filters                            : {},
+					filters: {
+						service_types: ['fcl_freight', 'lcl_freight', 'air_freight'],
+					},
 					services_data_required             : true,
 					contract_utilisation_data_required : true,
 					status,
