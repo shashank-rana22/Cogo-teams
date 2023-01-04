@@ -28,7 +28,7 @@ const useOnBoardRole = () => {
 	const [{ data: possiblePermissionsData }] = useRequest({
 		url    : '/get_auth_possible_permissions',
 		method : 'get',
-	});
+	}, { manual: false });
 
 	const roleData = data?.list?.[0] || {};
 
@@ -59,6 +59,7 @@ const useOnBoardRole = () => {
 	 */
 	const getNavOptions = (navigation = '') => {
 		const navObj = getNavData(navigation);
+		console.log('navObjnavObj', permissions);
 		return getNavigationOptions(permissions, navObj || []);
 	};
 

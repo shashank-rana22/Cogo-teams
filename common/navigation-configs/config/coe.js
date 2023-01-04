@@ -1,9 +1,9 @@
 const coeConfig = {
-	'/[partner_id]/booking-desk/fcl-freight': {
-		navigation: 'coe-booking_note_desk',
+	'/[partner_id]/coe/booking-desk': {
+		navigation: 'coe-booking_desk',
 	},
-	'/[partner_id]/revenue-desk/fcl-freight': {
-		navigation: 'coe-fcl_revenue_desk',
+	'/[partner_id]/coe/revenue-desk/fcl-freight': {
+		navigation: 'coe-revenue_desk_fcl_freight',
 	},
 };
 

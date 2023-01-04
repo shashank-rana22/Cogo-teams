@@ -1,26 +1,28 @@
-import { Pill, MultiSelect, Popover } from '@cogoport/components';
+import { Chips, MultiSelect } from '@cogoport/components';
 import React from 'react';
+
+import styles from './styles.module.css';
 
 const OPTIONS = [
 	{
-		label : 'Supply',
-		value : 'supply',
+		children : 'Supply',
+		key      : 'supply',
 	},
 	{
-		label : 'Sales',
-		value : 'sales',
+		children : 'Sales',
+		key      : 'sales',
 	},
 	{
-		label : 'Operations',
-		value : 'operations',
+		children : 'Operations',
+		key      : 'operations',
 	},
 	{
-		label : 'Finance',
-		value : 'finance',
+		children : 'Finance',
+		key      : 'finance',
 	},
 	{
-		label : 'Channel Partner',
-		value : 'channel_partner',
+		children : 'Channel Partner',
+		key      : 'channel_partner',
 	},
 ];
 
@@ -82,6 +84,7 @@ const through_criteria = {
 };
 
 const getThroughCriteria = (item) => {
+	console.log('item', item);
 	const allTC = [];
 	(item || []).forEach((key) => {
 		allTC.push(...through_criteria[key]);
@@ -91,7 +94,7 @@ const getThroughCriteria = (item) => {
 
 const getDepartment = (item) => {
 	const allDepartments = [];
-	Object.keys(through_criteria).forEach((key) => {
+	Object.keys(through_criteria)?.forEach((key) => {
 		if (through_criteria[key].filter((tc) => item.includes(tc)).length > 0) {
 			allDepartments.push(key);
 		}
@@ -99,94 +102,40 @@ const getDepartment = (item) => {
 	return allDepartments;
 };
 
-const scopesContent = () => (
-	<div style={{ display: 'flex', flexDirection: 'column', width: '360px' }}>
-		<div>
-			<span className="bold">Allow:</span>
-			{' '}
-			Allow data access data
-			{' '}
-		</div>
-		<div>
-			<span className="bold">Self:</span>
-			{' '}
-			Access own data
-			{' '}
-		</div>
-		<div>
-			<span className="bold">Team:</span>
-			{' '}
-			Access own team Data
-		</div>
-		<div>
-			<span className="bold">All:</span>
-			{' '}
-			Access current partners data
-		</div>
-		<div>
-			<span className="bold">Across All:</span>
-			{' '}
-			Access all partners data
-		</div>
-		<div>
-			<span className="bold">Channel Partner:</span>
-			Access channel partners data in which he/she is Key Account Manager
-		</div>
-		<div>
-			<span className="bold">Channel Partner Team:</span>
-			Access channel partners team data in which he/she is Key Account Manager
-		</div>
-	</div>
-);
-
 function Departments({ onChange = () => {}, selectedDepartments = {} }) {
 	return (
-		<div>
-			<div>
-				<p>Access types (scopes)</p>
-				<MultiSelect
-					placeholder="Choose type"
-					value={selectedDepartments.scopes}
-					onChange={(val) => onChange({ scopes: val })}
-					options={OPTIONS_Select}
-					multiple
+		<section>
+			<h4>Access types (scopes)</h4>
+			<MultiSelect
+				placeholder="Choose type"
+				value={selectedDepartments.scopes}
+				onChange={(val) => onChange({ scopes: val })}
+				options={OPTIONS_Select}
+				style={{ marginBottom: '8px' }}
+			/>
+			<span>
+				Access type allows this role too see data in different formats. For
+				e.g. if you are selecting team, role will be able to see their team
+				memebers data in that navigation.
+			</span>
+			<div style={{ marginTop: '20px' }}>
+				<h4>Departments</h4>
+				<Chips
+					className={styles.chips}
+					items={OPTIONS}
+					selectedItems={getDepartment(selectedDepartments.through_criteria || [])}
+					onItemChange={(item) => onChange({ through_criteria: getThroughCriteria(item) })}
+					enableMultiSelect
 				/>
 			</div>
-			<div>
-				<span>
-					Access type allows this role too see data in different formats. For
-					e.g. if you are selecting team, role will be able to see their team
-					memebers data in that navigation.
-					{' '}
-					<Popover
-						render={scopesContent}
-						theme="light"
-						interactive
-						trigger="mouseenter"
-					>
-						<span style={{ color: 'blue', cursor: 'pointer' }}>
-							See more...
-						</span>
-					</Popover>
-				</span>
-			</div>
-			<div>
-				<p>Departments</p>
-				<Pill
-					options={OPTIONS}
-					value={getDepartment(selectedDepartments.through_criteria || [])}
-					onChange={(item) => onChange({ through_criteria: getThroughCriteria(item) })}
-					multiple
-				/>
-			</div>
-			<div>
+			<span>
 				Department allow this role too see data via different criterias in a
 				particular scope. For e.g If you have selected sales then role will be
 				able to see data in which they are tagged as sales owner or team members
 				data in which their team members are tagged as sales owner
 				{' '}
-			</div>
-		</div>
+			</span>
+		</section>
 	);
 }
 
