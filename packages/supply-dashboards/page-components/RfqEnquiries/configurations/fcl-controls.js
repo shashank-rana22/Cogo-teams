@@ -1,3 +1,5 @@
+import currencies from '../utils/currencies';
+
 const fclFields =	[
 	{
 		name        : 'service_provider_id',
@@ -49,22 +51,14 @@ const fclFields =	[
 		name               : 'line_items',
 		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 1,
-		value              : [
-			{
-				code     : 'BAS',
-				unit     : 'per_container',
-				currency : 'USD',
-				price    : null,
-			},
-		],
-		controls: [
+		controls           : [
 			{
 				name        : 'code',
 				type        : 'select',
 				span        : 4,
 				label       : 'Charge Code',
-				valueKey    : 'code',
 				placeholder : 'Charge Name',
+				valueKey    : 'code',
 				rules       : { required: 'This is required' },
 			},
 			{
@@ -72,30 +66,25 @@ const fclFields =	[
 				label       : 'Unit',
 				span        : 4,
 				type        : 'select',
-				className   : 'primary lg',
 				placeholder : 'Unit',
 				rules       : { required: 'This is required' },
 			},
 			{
-				name           : 'currency',
-				span           : 1.5,
-				label          : 'Currency',
-				type           : 'select',
-				placeholder    : 'Curr...',
-				className      : 'primary lg',
-				optionsListKey : 'currencies',
-				showOptional   : false,
-				rules          : { required: 'This is required' },
+				name        : 'currency',
+				span        : 1.5,
+				label       : 'Currency',
+				type        : 'select',
+				placeholder : 'Curr...',
+				options     : currencies,
+				rules       : { required: 'This is required' },
 			},
 			{
-				name         : 'price',
-				span         : 1.5,
-				type         : 'text',
-				label        : 'Price',
-				showOptional : false,
-				className    : 'primary lg',
-				placeholder  : 'Amount',
-				rules        : { required: 'This is required' },
+				name        : 'price',
+				span        : 1.5,
+				type        : 'text',
+				label       : 'Price',
+				placeholder : 'Amount',
+				rules       : { required: 'This is required' },
 			},
 		],
 	},

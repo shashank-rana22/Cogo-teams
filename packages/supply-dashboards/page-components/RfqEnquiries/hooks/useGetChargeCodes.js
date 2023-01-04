@@ -27,13 +27,13 @@ const useGetChargeCodes = ({
 
 	const listApi = async () => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					service_name,
 				},
 			});
-		} 	catch (err) {
-			console.log(err);
+		} catch (err) {
+			console.log(err, 'hello');
 		}
 	};
 	const list = (data?.list || [])

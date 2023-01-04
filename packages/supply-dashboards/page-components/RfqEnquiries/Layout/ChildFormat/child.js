@@ -9,7 +9,6 @@ function Child({
 	controls,
 	control,
 	index,
-	value,
 	name,
 	remove,
 	showDeleteButton = true,
@@ -71,7 +70,6 @@ function Child({
 									index={index}
 									control={control}
 									{...controlItem}
-									value={value[controlItem.name]}
 									{...register(`${name}.${index}.${controlItem.name}`)}
 								/>
 							</div>
