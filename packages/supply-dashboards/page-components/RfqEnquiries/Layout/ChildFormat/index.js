@@ -13,8 +13,8 @@ function FieldArray({
 	buttonText,
 	showButtons = true,
 	disabled = false,
-	actionOnAdd,
 	register,
+	value,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -23,9 +23,6 @@ function FieldArray({
 	});
 
 	const childEmptyValues = {};
-	controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
-	});
 
 	return (
 		<div className={styles.child}>

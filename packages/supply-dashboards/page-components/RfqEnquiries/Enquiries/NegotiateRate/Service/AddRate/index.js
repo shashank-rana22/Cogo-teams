@@ -7,13 +7,13 @@ import styles from './styles.module.css';
 
 function AddRate({ service }) {
 	const {
-		fields, control, showElements, register,
+		fields, control, showElements = {}, register, errors, onError, handleSubmit, handleData,
 	} = useUpdateSpotNegotiationRate({ service });
 	return (
 		<>
-			<Layout fields={fields} control={control} showElements={showElements} register={register} />
+			<Layout fields={fields} control={control} showElements={showElements} register={register} errors={errors} />
 			<div className={styles.button}>
-				<Button themeType="accent">Submit</Button>
+				<Button themeType="accent" onClick={handleSubmit(handleData, onError)}>Submit</Button>
 			</div>
 		</>
 	);

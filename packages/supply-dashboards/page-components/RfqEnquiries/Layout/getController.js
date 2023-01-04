@@ -1,4 +1,6 @@
-import { InputController, PillsController, SelectController } from '@cogoport/forms';
+import {
+	InputController, PillsController, SelectController, DatepickerController,
+} from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
 const getElementController = (type = 'text') => {
@@ -14,6 +16,8 @@ const getElementController = (type = 'text') => {
 
 		case 'pills':
 			return PillsController;
+		case 'date_picker':
+			return DatepickerController;
 
 		default:
 			return null;
