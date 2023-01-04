@@ -44,7 +44,7 @@ export const incomeConfig = {
         {
             label: "Status",
             key: "status",
-            span: 2,
+            span: 3,
             func: "renderStatus",
         },
         {

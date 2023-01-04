@@ -10,12 +10,12 @@ interface propsType {
 }
 const RemarksContent = ({ item }: propsType) => {
     return (
-        <div className={styles.conatiner}>
-            <li className={styles.listStyle}>
-                {item.remarks}
-                Remarks goes here
-                <div>Updated by jaipraksh - 14:15 PM on 28/05/2022</div>
-            </li>
+        <div>
+            {item?.remarks ? (
+                <div className={styles.conatiner}>{item.remarks}</div>
+            ) : (
+                "No remarks"
+            )}
         </div>
     );
 };

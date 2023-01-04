@@ -175,18 +175,18 @@ const AccordianCards = ({
                         <div className={styles.ribbon}>Closed</div>
                     </div>
                 </div>
-            </div>
-            <div>
-                {currentOpenSID === itemData?.id ? (
-                    <CardItem
-                        cardData={itemData}
-                        currentOpenSID={currentOpenSID}
-                        setCurrentOpenSID={setCurrentOpenSID}
-                        refetch={refetch}
-                        amountTab={amountTab}
-                        setAmountTab={setAmountTab}
-                    />
-                ) : null}
+                <div>
+                    {currentOpenSID === itemData?.id ? (
+                        <CardItem
+                            cardData={itemData}
+                            currentOpenSID={currentOpenSID}
+                            setCurrentOpenSID={setCurrentOpenSID}
+                            refetch={refetch}
+                            amountTab={amountTab}
+                            setAmountTab={setAmountTab}
+                        />
+                    ) : null}
+                </div>
             </div>
         </div>
     );

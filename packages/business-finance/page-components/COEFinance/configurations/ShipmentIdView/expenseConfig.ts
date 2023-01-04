@@ -49,7 +49,7 @@ export const expenseConfig = {
         {
             label: "Status",
             key: "status",
-            span: 2,
+            span: 3,
             func: "renderStatus",
         },
         {
