@@ -55,6 +55,7 @@ const FieldMutation = ({ fields, values, service }) => {
 	}, [JSON.stringify(list)]);
 
 	const genericLineitems = values?.line_items;
+	console.log(genericLineitems, 'values');
 
 	fields.forEach((ctrl) => {
 		if (ctrl.controls) {

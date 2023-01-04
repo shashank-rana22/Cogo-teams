@@ -1,6 +1,6 @@
 import currencies from '../utils/currencies';
 
-const childControls = ({ heading }) => 	{
+const childControls = ({ heading = '' }) => 	{
 	const controls = 		{
 		type        : 'fieldArray',
 		showButtons : true,

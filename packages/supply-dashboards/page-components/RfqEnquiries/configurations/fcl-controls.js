@@ -59,7 +59,7 @@ const fclFields =	[
 		placeholder : 'Pick',
 		span        : 4,
 	},
-	fclChildControls(),
+	fclChildControls({ heading: '' }),
 ];
 
 export default fclFields;

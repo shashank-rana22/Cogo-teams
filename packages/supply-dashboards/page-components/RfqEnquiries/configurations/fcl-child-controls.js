@@ -1,11 +1,13 @@
+import currencies from '../utils/currencies';
+
 const fclLocals = ({ heading = '' }) => {
 	const controls = 		{
-		name  : 'local_line_items',
+		name  : 'line_items',
 		type  : 'fieldArray',
 		heading,
 		value : [
 			{
-				code     : '',
+				code     : 'BAS',
 				unit     : '',
 				currency : 'USD',
 				price    : null,
@@ -35,14 +37,13 @@ const fclLocals = ({ heading = '' }) => {
 				rules       : { required: 'This is required' },
 			},
 			{
-				placeholder    : 'Currency',
-				name           : 'currency',
-				type           : 'select',
-				value          : 'USD',
-				span           : 3,
-				optionsListKey : 'currencies',
-				className      : 'primary lg',
-				rules          : { required: 'This is required' },
+				placeholder : 'Currency',
+				name        : 'currency',
+				type        : 'select',
+				span        : 3,
+				options     : currencies,
+				className   : 'primary lg',
+				rules       : { required: 'This is required' },
 			},
 			{
 				name        : 'price',

@@ -16,8 +16,6 @@ const fclPayload = ({ service, value }) => {
 		},
 	};
 
-	console.log(payload, 'values');
-
 	return payload;
 };
 

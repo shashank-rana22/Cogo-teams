@@ -85,7 +85,7 @@ const lclFields =	[
 		span        : 2,
 		rules       : { required: 'This is required' },
 	},
-	lclChildControls(),
+	lclChildControls({ heading: '' }),
 ];
 
 export default lclFields;

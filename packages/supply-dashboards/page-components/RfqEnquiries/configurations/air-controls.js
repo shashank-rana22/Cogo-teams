@@ -45,7 +45,7 @@ const airFields =	[
 		accept          : 'image/*',
 		uploadType      : 'aws',
 	},
-	airChildControlsFunc(),
+	airChildControlsFunc({ heading: '' }),
 ];
 
 export default airFields;

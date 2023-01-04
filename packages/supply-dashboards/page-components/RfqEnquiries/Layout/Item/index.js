@@ -12,6 +12,7 @@ function Item(props) {
 		label,
 	} = props || {};
 	const Element = getElementController(type);
+
 	const flex = ((span || 12) / 12) * 100 - 1;
 
 	return (
@@ -23,7 +24,6 @@ function Item(props) {
 				{label}
 			</h4>
 			<Element
-				className={type === 'date_picker' ? styles.date : styles.item}
 				control={control}
 				{...props}
 			/>
