@@ -44,6 +44,7 @@ function Header({ hookSetters = {}, activeTab = '' }) {
 						render={renderBody}
 						placement="left"
 						className={styles.filter_popover}
+						trigger="mouseenter"
 					>
 						<Button
 							themeType="accent"

@@ -22,11 +22,6 @@ function Body({
 
 	return (
 		<>
-			{total > 10 ? (
-				<div className={styles.pagination_wrapper}>
-					{renderPagination('table')}
-				</div>
-			) : null}
 			{loading ? (
 				<div className={styles.loader_container}>
 					<Loader />

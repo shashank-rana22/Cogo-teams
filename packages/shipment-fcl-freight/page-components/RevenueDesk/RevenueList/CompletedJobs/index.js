@@ -36,14 +36,6 @@ function CompletedJobs({
 	return (
 		<div>
 			<div>
-				{total > 10 ? (
-					<div className={styles.pagination_wrapper}>
-						{renderPagination('table')}
-					</div>
-				) : null}
-			</div>
-
-			<div>
 				{(data || []).map((item) => (
 					<Card
 						data={item}
