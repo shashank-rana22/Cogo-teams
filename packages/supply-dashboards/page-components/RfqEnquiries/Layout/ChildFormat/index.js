@@ -15,7 +15,6 @@ function FieldArray({
 	disabled = false,
 	actionOnAdd,
 	register,
-	value,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -36,7 +35,6 @@ function FieldArray({
 					key={field.id}
 					field={field}
 					index={index}
-					value={value}
 					control={control}
 					controls={controls}
 					name={name}

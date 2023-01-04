@@ -16,6 +16,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 
 	const genericLineitems = watch('line_items');
 
+
 	useEffect(() => {
 		if (list?.length) {
 			const chargeCodesObj = {};
@@ -26,6 +27,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(list)]);
+
 	fields.forEach((ctrl) => {
 		if (ctrl.controls) {
 			const chargeCode = genericLineitems;
@@ -36,7 +38,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 						const chargeCodes = {};
 						chargeCodes[item.code] = selectedCodes[item.code];
 						unitOptions[i] = (
-							chargeCodes[item.code]?.units || ['per_bl']
+							chargeCodes[item.code]?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
