@@ -1,10 +1,11 @@
 import currencies from '../utils/currencies';
 
 const childControls = ({ heading = '' }) => 	{
+	const name = heading ? 'local_line_items' : 'line_items';
 	const controls = 		{
 		type        : 'fieldArray',
+		name,
 		showButtons : true,
-		name        : 'line_items',
 		heading,
 		value       : [
 			{
@@ -61,13 +62,6 @@ const childControls = ({ heading = '' }) => 	{
 				min         : 0,
 				placeholder : 'Type minimum price',
 				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'remarks',
-				placeholder : 'Remarks',
-				type        : 'text',
-				className   : 'primary lg',
-				span        : 1,
 			},
 		],
 	};

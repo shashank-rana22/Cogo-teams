@@ -46,7 +46,6 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 	const handleData = async (value) => {
 		try {
 			const payload = getPayload({ value, service });
-			console.log(payload, 'values');
 			const response = await trigger({ params: { payload } });
 			if (response.hasError) {
 				Toast.error(response?.message || 'Something Went Wrong');

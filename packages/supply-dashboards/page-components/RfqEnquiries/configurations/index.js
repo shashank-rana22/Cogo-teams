@@ -1,25 +1,26 @@
 import airChildControlsFunc from './air-child-controls';
 import airFields from './air-controls';
 // import carriageControls from './carriage-controls';
+import chargeContolsFunc from './charge-controls';
+import commonControlsFunc from './common-controls';
 import fclCfsControls from './fcl-cfs';
-import fclChildContolsFunc from './fcl-child-controls';
 import fclControl from './fcl-controls';
 import freeDaysSection from './free-days-section';
 import lclChildControlsFunc from './lcl-child-controls';
 import lclFields from './lcl-controls';
 
 const Config = ({ data }) => {
-	const field = [];
+	const field = commonControlsFunc({ service: data?.service });
 
 	if (data?.service === 'fcl_freight') {
 		field.push(...fclControl);
 
 		if (data?.data?.include_destination_local) {
-			field.push(fclChildContolsFunc({ heading: 'Add Destination Local Charges' }));
+			field.push(chargeContolsFunc({ heading: 'Add Destination Local Charges' }));
 		}
 
 		if (data?.data?.include_origin_local) {
-			field.push(fclChildContolsFunc({ heading: 'Add Origin Local Charges' }));
+			field.push(chargeContolsFunc({ heading: 'Add Origin Local Charges' }));
 		}
 
 		if (data?.data?.free_days_detention_destination > 0) {
@@ -27,15 +28,6 @@ const Config = ({ data }) => {
 				heading : 'Destination Detention Days',
 				unit    : 'per_container',
 			}));
-		}
-	} else if (data?.service === 'fcl_cfs') {
-		field.push(...fclCfsControls);
-		if (data?.data?.include_destination_local) {
-			field.push(fclChildContolsFunc({ heading: 'Add Destination Local Charges' }));
-		}
-
-		if (data?.data?.include_origin_local) {
-			field.push(fclChildContolsFunc({ heading: 'Add Origin Local Charges' }));
 		}
 	} else if (data?.service === 'air_freight') {
 		field.push(...airFields);
@@ -100,6 +92,10 @@ const Config = ({ data }) => {
 		// 		),
 		// 	);
 		// }
+	} else if (data?.service === 'fcl_cfs') {
+		field.push(...fclCfsControls);
+	} else if (['trailer_freight', 'haulage_freight', 'ltl_freight', 'ftl_freight'].includes(data?.service)) {
+		field.push(chargeContolsFunc({ heading: '' }));
 	}
 	return field;
 };

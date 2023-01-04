@@ -1,10 +1,12 @@
 import currencies from '../utils/currencies';
 
-const childControls = ({ heading }) => {
+const childControls = ({ heading = '' }) => {
+	const name = heading ? 'local_line_items' : 'line_items';
+
 	const controls = {
 		type        : 'fieldArray',
 		showButtons : true,
-		name        : 'line_items',
+		name,
 		heading,
 		value       : [
 			{
@@ -31,8 +33,9 @@ const childControls = ({ heading }) => {
 			{
 				name        : 'price',
 				span        : 1.5,
-				type        : 'text',
+				type        : 'number',
 				label       : 'Price',
+				min         : 0,
 				placeholder : 'Amount',
 				rules       : { required: 'This is required' },
 			},
@@ -48,7 +51,7 @@ const childControls = ({ heading }) => {
 			{
 				name        : 'min_price',
 				label       : 'Minimum Price',
-				type        : 'text',
+				type        : 'number',
 				span        : 3,
 				placeholder : 'Type minimum price',
 				rules       : { required: 'This is required' },
@@ -56,21 +59,18 @@ const childControls = ({ heading }) => {
 			{
 				name        : 'cbm_weight_ratio',
 				label       : 'Weight Ratio',
-				type        : 'text',
+				type        : 'number',
 				placeholder : 'Type Weight Ratio',
 				rules       : { required: 'This is required' },
 				span        : 3,
 			},
 			{
-				name         : 'unit',
-				label        : 'Unit',
-				type         : 'select',
-				span         : 3,
-				caret        : true,
-				showToolTip  : true,
-				placeholder  : 'Unit',
-				popoverWidth : '172px',
-				rules        : { required: 'This is required' },
+				name        : 'unit',
+				placeholder : 'Unit',
+				type        : 'select',
+				span        : 2,
+				className   : 'primary lg',
+				rules       : { required: 'This is required' },
 			},
 		],
 	};
