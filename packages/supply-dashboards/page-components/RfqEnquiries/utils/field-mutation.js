@@ -6,9 +6,18 @@ import { useEffect, useState } from 'react';
 
 import useGetChargeCodes from '../hooks/useGetChargeCodes';
 
+import IncoTermMapping from './getIncoTermMapping';
+
 const FieldMutation = ({ fields, values, service }) => {
+	const getLocalChargeCode = ['fcl_freight', 'lcl_freight', 'air_freight'].includes(service?.service);
 	const [selectedCodes, setSelectedCodes] = useState({});
-	const { list } = useGetChargeCodes({ service_name: `${service?.service}_charges` });
+	const trade_type = IncoTermMapping[service?.data?.inco_term];
+	const { list } = useGetChargeCodes({ service_name: `${service?.service}_charges`, trade_type });
+	const { list: localCharges } = useGetChargeCodes({
+		service_name: `${service?.service}_local_charges`,
+		getLocalChargeCode,
+		trade_type,
+	});
 	const [orgUsers, setOrgUsers] = useState([]);
 	const serviceProviderOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));
 	const shippingLineOptions = useGetAsyncOptions(merge(asyncFieldsShippingLines()));
@@ -55,11 +64,11 @@ const FieldMutation = ({ fields, values, service }) => {
 	}, [JSON.stringify(list)]);
 
 	const genericLineitems = values?.line_items;
-	console.log(genericLineitems, 'values');
+	const localLineItems = values?.local_line_items;
 
 	fields.forEach((ctrl) => {
 		if (ctrl.controls) {
-			const chargeCode = genericLineitems;
+			const chargeCode = ctrl.name === ' local_line_items' ? localLineItems : genericLineitems;
 			ctrl.controls.forEach((childCtrl) => {
 				if (childCtrl.name === 'unit') {
 					const unitOptions = {};
@@ -78,7 +87,7 @@ const FieldMutation = ({ fields, values, service }) => {
 				}
 				if (childCtrl.name === 'code') {
 					// eslint-disable-next-line no-param-reassign
-					childCtrl.options = list;
+					childCtrl.options = ctrl.name === 'line_items' ? list : localCharges;
 				}
 			});
 		}

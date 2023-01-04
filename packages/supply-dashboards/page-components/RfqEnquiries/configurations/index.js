@@ -30,13 +30,6 @@ const Config = ({ data }) => {
 		}
 	} else if (data?.service === 'fcl_cfs') {
 		field.push(...fclCfsControls);
-		if (data?.data?.include_destination_local) {
-			field.push(fclChildContolsFunc({ heading: 'Add Destination Local Charges' }));
-		}
-
-		if (data?.data?.include_origin_local) {
-			field.push(fclChildContolsFunc({ heading: 'Add Origin Local Charges' }));
-		}
 	} else if (data?.service === 'air_freight') {
 		field.push(...airFields);
 		if (data?.data?.include_destination_local) {

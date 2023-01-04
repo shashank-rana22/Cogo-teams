@@ -1,16 +1,17 @@
 import currencies from '../utils/currencies';
 
 const fclLocals = ({ heading = '' }) => {
+	const name = heading ? 'local_line_items' : 'line_items';
 	const controls = 		{
-		name  : 'line_items',
+		name,
 		type  : 'fieldArray',
 		heading,
 		value : [
 			{
 				code     : 'BAS',
-				unit     : '',
+				unit     : 'per_bl',
 				currency : 'USD',
-				price    : null,
+				price    : '',
 			},
 		],
 		showButtons        : true,
@@ -47,7 +48,7 @@ const fclLocals = ({ heading = '' }) => {
 			},
 			{
 				name        : 'price',
-				type        : 'text',
+				type        : 'number',
 				span        : 3,
 				placeholder : 'Price Per Unit',
 				className   : 'primary lg',

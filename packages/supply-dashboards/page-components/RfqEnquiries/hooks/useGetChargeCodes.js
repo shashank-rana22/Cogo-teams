@@ -10,14 +10,13 @@ const service_names = [
 	'fcl_freight_charges',
 	'haulage_freight_charges',
 	'air_freight_surcharges',
-	'air_freight_local_charges',
-	'fcl_freight_local_charges',
 ];
 const useGetChargeCodes = ({
 	service_name = 'fcl_customs_charges',
 	trade_type = null,
-	cfsChargeRequired = false,
+	getLocalChargeCode = false,
 }) => {
+	console.log(trade_type, 'values');
 	const { scope = '' } = useSelector((state) => state.general);
 	const [{ data }, trigger] = useRequest({
 		method : 'GET',
@@ -33,7 +32,7 @@ const useGetChargeCodes = ({
 				},
 			});
 		} catch (err) {
-			console.log(err, 'hello');
+			console.log(err);
 		}
 	};
 	const list = (data?.list || [])
@@ -48,7 +47,7 @@ const useGetChargeCodes = ({
 		);
 
 	useEffect(() => {
-		if (service_names.includes(service_name) || cfsChargeRequired) {
+		if (service_names.includes(service_name) || getLocalChargeCode) {
 			listApi();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

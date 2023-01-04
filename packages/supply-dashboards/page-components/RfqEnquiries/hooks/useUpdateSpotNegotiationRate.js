@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import getField from '../configurations';
@@ -8,23 +9,28 @@ import FieldMutation from '../utils/field-mutation';
 import getPayload from '../utils/getPayload';
 
 const useUpdateSpotNegotiationRate = ({ service }) => {
-	const fields = getField({ data: service });
+	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
+
+	const { user_profile } = useSelector(({ profile }) => ({
+		user_profile: profile,
+	}));
 
 	const getDefaultValues = () => {
 		const defaultValues = {};
-		fields.forEach((field) => {
-			const { value, name } = field;
+		const newfields = oldfields.map((field) => {
+			const { value, ...rest } = field;
 			if (field.type === 'fieldArray') {
-				defaultValues[name] = value || [];
+				defaultValues[field.name] = value || [];
 			} else {
-				defaultValues[name] = value || '';
+				defaultValues[field.name] = value || '';
 			}
+			return rest;
 		});
-		return { defaultValues };
+		return { defaultValues, fields: newfields };
 	};
 
-	const { defaultValues } = getDefaultValues();
+	const { defaultValues, fields } = getDefaultValues();
 	const {
 		control, watch, register, handleSubmit,
 	} = useForm({ defaultValues });
@@ -38,7 +44,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 		setErrors({ ...errs });
 	};
 
-	const [trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/update_spot_negotiation_rate',
 		method : 'POST',
 	}, { manual: true });
@@ -46,8 +52,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 	const handleData = async (value) => {
 		try {
 			const payload = getPayload({ value, service });
-			console.log(payload, 'values');
-			const response = await trigger({ params: { payload } });
+			const response = await trigger({ data: { ...payload, procured_by_id: user_profile?.id } });
 			if (response.hasError) {
 				Toast.error(response?.message || 'Something Went Wrong');
 				return;
@@ -67,6 +72,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 		onError,
 		handleSubmit,
 		handleData,
+		loading,
 	};
 };
 export default useUpdateSpotNegotiationRate;
