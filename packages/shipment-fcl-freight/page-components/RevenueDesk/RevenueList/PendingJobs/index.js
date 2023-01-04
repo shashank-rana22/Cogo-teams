@@ -34,15 +34,8 @@ function PendingJobs({
 	);
 	return (
 		<div className={styles.container}>
-			<div>
-				{total > 10 ? (
-					<div className={styles.pagination_wrapper}>
-						{renderPagination('table')}
-					</div>
-				) : null}
-			</div>
 			{data.length ? (
-				<div>
+				<div className={styles.card_container}>
 					{(data || []).map((item) => (
 						<Card
 							data={item}
@@ -60,7 +53,7 @@ function PendingJobs({
 			)}
 			{total > 10 ? (
 				<div className={styles.pagination_wrapper}>
-					{renderPagination('number')}
+					{renderPagination('table')}
 				</div>
 			) : null}
 		</div>

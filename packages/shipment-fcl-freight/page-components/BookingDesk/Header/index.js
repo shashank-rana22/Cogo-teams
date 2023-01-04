@@ -15,7 +15,7 @@ function Header({
 	return (
 		<>
 			<div className={styles.heading_wrapper}>
-				<h1 className={styles.heading}>Bookings Desk</h1>
+				<h1>Bookings Desk</h1>
 				<ShipmentFilters
 					hookSetters={hookSetters}
 					activeTab={activeTab}

@@ -21,25 +21,20 @@ function CompletedJobs({
 		setShowBookingOption(true);
 	};
 
-	return (
-		<div>
-			<div>
-				{total > 10 ? (
-					<div className={styles.pagination_wrapper}>
-						<Pagination
-							type="table"
-							totalItems={total}
-							pageSize={10}
-							currentPage={page}
-							handlePageChange={(val) => hookSetters.setFilters({
-								...filters,
-								page: val,
-							})}
-						/>
-					</div>
-				) : null}
-			</div>
+	const renderPagination = (type) => (
+		<Pagination
+			type={type}
+			totalItems={total}
+			currentPage={page}
+			pageSize={10}
+			handlePageChange={(val) => {
+				hookSetters.setFilters({ ...filters, page: val });
+			}}
+		/>
+	);
 
+	return (
+		<div className={styles.container}>
 			<div>
 				{(data || []).map((item) => (
 					<Card
@@ -55,16 +50,7 @@ function CompletedJobs({
 			<div>
 				{total > 10 ? (
 					<div className={styles.pagination_wrapper}>
-						<Pagination
-							type="table"
-							totalItems={total}
-							pageSize={10}
-							currentPage={page}
-							handlePageChange={(val) => hookSetters.setFilters({
-								...filters,
-								page: val,
-							})}
-						/>
+						{renderPagination('table')}
 					</div>
 				) : null}
 			</div>

@@ -18,14 +18,14 @@ function ChooseBookingOption({
 		<div className={styles.container}>
 			<div className={styles.header_container}>
 				<Button
-					themeType="secondary"
+					themeType="tertiary"
 					className={styles.back_container}
 					onClick={() => setShowBookingOption(false)}
 				>
-
-					<IcMArrowBack width={20} height={20} />
-					{' '}
-					Back to Bookings
+					<div className={styles.back_icon}>
+						<IcMArrowBack width={20} height={20} />
+					</div>
+					{'  Back to Bookings'}
 
 				</Button>
 

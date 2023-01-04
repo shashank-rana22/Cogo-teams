@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function FclRevenueFilters({
 	hookSetters,
-	setShowFilters = () => {},
 	activeTab,
 
 }) {
@@ -45,8 +44,6 @@ function FclRevenueFilters({
 		if (isEmpty) {
 			Toast.warn('Please Apply filters');
 		} else {
-			setShowFilters(false);
-
 			filled_filters.state = activeTab === 'pending' ? 'awaiting_service_provider_confirmation'
 				: 'confirmed_by_service_provider';
 
@@ -64,7 +61,6 @@ function FclRevenueFilters({
 						: 'confirmed_by_service_provider',
 			},
 		});
-		setShowFilters(false);
 	};
 
 	return (
