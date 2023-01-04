@@ -34,7 +34,7 @@ function CompletedJobs({
 	);
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div>
 				{(data || []).map((item) => (
 					<Card

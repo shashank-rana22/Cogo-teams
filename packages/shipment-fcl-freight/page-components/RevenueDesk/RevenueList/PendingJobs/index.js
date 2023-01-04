@@ -33,7 +33,7 @@ function PendingJobs({
 		/>
 	);
 	return (
-		<div>
+		<div className={styles.container}>
 			{data.length ? (
 				<div className={styles.card_container}>
 					{(data || []).map((item) => (
