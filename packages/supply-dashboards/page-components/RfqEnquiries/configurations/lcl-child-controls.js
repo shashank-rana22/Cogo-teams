@@ -2,10 +2,20 @@ import currencies from '../utils/currencies';
 
 const childControls = ({ heading }) => {
 	const controls = {
-		type               : 'fieldArray',
-		showButtons        : true,
-		name               : 'line_items',
+		type        : 'fieldArray',
+		showButtons : true,
+		name        : 'line_items',
 		heading,
+		value       : [
+			{
+				code             : '',
+				price            : null,
+				currency         : 'USD',
+				min_price        : null,
+				cbm_weight_ratio : null,
+				unit             : '',
+			},
+		],
 		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 1,
 		controls           : [
@@ -61,13 +71,6 @@ const childControls = ({ heading }) => {
 				placeholder  : 'Unit',
 				popoverWidth : '172px',
 				rules        : { required: 'This is required' },
-			},
-			{
-				name        : 'remarks',
-				placeholder : 'Remarks',
-				type        : 'text',
-				className   : 'primary lg',
-				span        : 2,
 			},
 		],
 	};

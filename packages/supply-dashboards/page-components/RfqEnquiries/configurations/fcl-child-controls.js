@@ -1,8 +1,16 @@
 const fclLocals = ({ heading = '' }) => {
 	const controls = 		{
-		name               : 'local_line_items',
-		type               : 'fieldArray',
+		name  : 'local_line_items',
+		type  : 'fieldArray',
 		heading,
+		value : [
+			{
+				code     : '',
+				unit     : '',
+				currency : 'USD',
+				price    : null,
+			},
+		],
 		showButtons        : true,
 		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 1,

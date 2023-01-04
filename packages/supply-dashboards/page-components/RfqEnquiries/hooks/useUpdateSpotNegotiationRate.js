@@ -3,12 +3,12 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getField from '../configurations/index';
+import getField from '../configurations';
 import FieldMutation from '../utils/field-mutation';
 import getPayload from '../utils/getPayload';
 
 const useUpdateSpotNegotiationRate = ({ service }) => {
-	const fields = getField({ service });
+	const fields = getField({ data: service });
 	const [errors, setErrors] = useState({});
 
 	const getDefaultValues = () => {

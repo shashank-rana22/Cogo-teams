@@ -1,3 +1,5 @@
+import lclChildControls from './lcl-child-controls';
+
 const lclFields =	[
 	{
 		name        : 'service_provider_id',
@@ -45,14 +47,18 @@ const lclFields =	[
 		uploadType      : 'aws',
 	},
 	{
-		name        : 'validity',
-		type        : 'datepicker',
+		name        : 'validity_start',
+		type        : 'date_picker',
+		label       : 'Validity Start',
+		placeholder : 'Pick',
 		span        : 4,
-		pickerType  : 'range',
-		placeholder : 'Date Validty',
-		rules       : {
-			required: 'Validity End date is required',
-		},
+	},
+	{
+		name        : 'validity_end',
+		type        : 'date_picker',
+		label       : 'Validity End',
+		placeholder : 'Pick',
+		span        : 4,
 	},
 	{
 		name        : 'departure_dates',
@@ -79,70 +85,7 @@ const lclFields =	[
 		span        : 2,
 		rules       : { required: 'This is required' },
 	},
-	{
-		type               : 'fieldArray',
-		showButtons        : true,
-		name               : 'line_items',
-		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
-		value              : [
-			{
-				code     : 'BAS',
-				unit     : 'per_container',
-				currency : 'USD',
-				price    : null,
-			},
-		],
-		controls: [
-			{
-				name        : 'code',
-				type        : 'select',
-				span        : 3,
-				label       : 'Charge Code',
-				valueKey    : 'code',
-				placeholder : 'Charge Name',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'unit',
-				label       : 'Unit',
-				span        : 3,
-				type        : 'select',
-				className   : 'primary lg',
-				placeholder : 'Unit',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name           : 'currency',
-				span           : 1.5,
-				label          : 'Currency',
-				type           : 'select',
-				placeholder    : 'Curr...',
-				className      : 'primary lg',
-				optionsListKey : 'currencies',
-				showOptional   : false,
-				rules          : { required: 'This is required' },
-			},
-			{
-				name         : 'price',
-				span         : 1.5,
-				type         : 'text',
-				label        : 'Price',
-				showOptional : false,
-				className    : 'primary lg',
-				placeholder  : 'Amount',
-				rules        : { required: 'This is required' },
-			},
-			{
-				name        : 'remarks',
-				placeholder : 'Remarks',
-				type        : 'text',
-				className   : 'primary lg',
-				span        : 2,
-			},
-		],
-	},
-
+	lclChildControls(),
 ];
 
 export default lclFields;

@@ -1,3 +1,5 @@
+import fclChildControls from './fcl-child-controls';
+
 const fclFields =	[
 	{
 		name        : 'service_provider_id',
@@ -43,6 +45,21 @@ const fclFields =	[
 		accept          : 'image/*',
 		uploadType      : 'aws',
 	},
+	{
+		name        : 'validity_start',
+		type        : 'date_picker',
+		label       : 'Validity Start',
+		placeholder : 'Pick',
+		span        : 4,
+	},
+	{
+		name        : 'validity_end',
+		type        : 'date_picker',
+		label       : 'Validity End',
+		placeholder : 'Pick',
+		span        : 4,
+	},
+	fclChildControls(),
 ];
 
 export default fclFields;
