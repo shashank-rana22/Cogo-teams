@@ -1,21 +1,36 @@
-const fclDetetionFreeDays = ({ heading }) => {
+const fclDetetionFreeDays = ({ heading, unit }) => {
 	const controls = 		[{
-		name         : 'detention_free_days',
+		name         : 'free_days',
 		type         : 'number',
 		span         : 4,
 		heading,
-		label        : 'Detention Free Days',
+		label        : 'Free Days Limit',
 		placeholder  : 'type here...',
 		showOptional : false,
 		className    : 'primary lg',
 		min          : 0,
 	},
 	{
-		name               : 'detention_days',
+		name        : 'unit',
+		span        : 4,
+		type        : 'select',
+		className   : 'primary lg',
+		placeholder : 'Unit',
+		disabled    : true,
+		options     : [
+			{ label: 'Per Container', value: 'per_container' },
+			{ label: 'Per Kg per Day', value: 'per_kg_per_day' },
+			{ label: 'Per Kg per Hour', value: 'per_kg_per_hour' },
+		],
+		values : unit || 'per_container',
+		rules  : { required: 'This is required' },
+	},
+	{
+		name               : 'days_slab',
 		type               : 'fieldArray',
-		label              : 'Detention Days',
+		label              : 'Days Slab beyond Free day',
 		showButtons        : false,
-		buttonText         : 'Add Detention Days Slab',
+		buttonText         : 'Add More Slab',
 		className          : 'primary lg',
 		noDeleteButtonTill : 0,
 		controls           : [

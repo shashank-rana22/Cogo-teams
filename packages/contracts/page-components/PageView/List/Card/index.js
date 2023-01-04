@@ -1,19 +1,22 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { format } from '@cogoport/utils';
+
+import formatPortPair from '../../../../utils/formatPortPair';
 
 import PortPair from './PortPair';
 import styles from './styles.module.css';
 
 function Card({ item, filters }) {
 	const router = useRouter();
-	const portPairData = item?.fcl_freight_services[0]?.service_details;
-	const newPortPairs = [];
+	const formattedData = formatPortPair({ item });
+	const newFormattedData = [];
 	if (
-		portPairData?.length
+		formattedData?.length
 	) {
-		(portPairData || []).forEach((pair, i) => {
-			if (i <= 2 && Object.keys(pair || {})) {
-				newPortPairs.push(pair);
+		(formattedData || []).forEach((pair, i) => {
+			if (i <= 1 && Object.keys(pair || {})) {
+				newFormattedData.push(pair);
 			}
 		});
 	}
@@ -39,10 +42,12 @@ function Card({ item, filters }) {
 					</div>
 					<div className={styles.pair}>
 						<div>
-							Request Date :
+							{filters?.status === 'active' ? 'Approved Date' : 'Request Date '}
+							:
 						</div>
 						<div className={styles.value}>
-							10 June  2022
+							{ format(filters?.status === 'active'
+								? item?.approved_at : item?.requested_at, 'dd MMM YYYY') }
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -57,20 +62,22 @@ function Card({ item, filters }) {
 				</div>
 			</div>
 			<div className={styles.body}>
-				<div className={styles.port_pair}>
-					{(newPortPairs || []).map((portPair) => <PortPair portPair={portPair} />)}
-				</div>
-				<div className={styles.last}>
-					{portPairData?.length > 3
+				<div className={styles.sub_container}>
+					<div className={styles.port_pair}>
+						{(newFormattedData || []).map((portPair) => <PortPair portPair={portPair} />)}
+					</div>
+					{formattedData?.length > 2
 						? (
 							<div className={styles.extra}>
 								<div>
 									+
-									{Number(portPairData?.length) - 3}
+									{Number(formattedData?.length) - 2}
 								</div>
 								<div>more</div>
 							</div>
 						) : null}
+				</div>
+				<div className={styles.last}>
 					<Button
 						style={{ marginBottom: '10px' }}
 						size="md"

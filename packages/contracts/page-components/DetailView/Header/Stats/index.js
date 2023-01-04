@@ -1,3 +1,5 @@
+import { format } from '@cogoport/utils';
+
 import Content from './Content';
 import styles from './styles.module.css';
 
@@ -17,15 +19,19 @@ function Stats({ data, status }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{data?.services_data?.fcl_freight[0]?.max_containers_count}
+							{data?.services_data?.fcl_freight[0]?.max_containers_count
+								? data?.services_data?.fcl_freight[0]?.max_containers_count
+								: '-'}
 						</div>
 					</div>
 					<div className={styles.pair}>
 						<div>
-							Request Date :
+							{status === 'active' ? 'Approved Date' : 'Request Date '}
+							:
 						</div>
 						<div className={styles.value}>
-							10 June  2022
+							{ format(status === 'active'
+								? data?.approved_at : data?.requested_at, 'dd MMM YYYY') }
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -33,7 +39,7 @@ function Stats({ data, status }) {
 							Validity :
 						</div>
 						<div className={styles.value}>
-							{data?.validity_left_days}
+							{data?.validity_left_days ? data?.validity_left_days : '-'}
 							days
 						</div>
 					</div>
