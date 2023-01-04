@@ -1,5 +1,3 @@
-import currencies from '../utils/currencies';
-
 const fclFields =	[
 	{
 		name        : 'service_provider_id',
@@ -44,49 +42,6 @@ const fclFields =	[
 		onlyURLOnChange : true,
 		accept          : 'image/*',
 		uploadType      : 'aws',
-	},
-	{
-		type               : 'fieldArray',
-		showButtons        : true,
-		name               : 'line_items',
-		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
-		controls           : [
-			{
-				name        : 'code',
-				type        : 'select',
-				span        : 4,
-				label       : 'Charge Code',
-				placeholder : 'Charge Name',
-				valueKey    : 'code',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'unit',
-				label       : 'Unit',
-				span        : 4,
-				type        : 'select',
-				placeholder : 'Unit',
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'currency',
-				span        : 1.5,
-				label       : 'Currency',
-				type        : 'select',
-				placeholder : 'Curr...',
-				options     : currencies,
-				rules       : { required: 'This is required' },
-			},
-			{
-				name        : 'price',
-				span        : 1.5,
-				type        : 'text',
-				label       : 'Price',
-				placeholder : 'Amount',
-				rules       : { required: 'This is required' },
-			},
-		],
 	},
 ];
 
