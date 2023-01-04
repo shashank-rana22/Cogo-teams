@@ -1,17 +1,18 @@
-.cards_container{
-    padding: 20px;
+.cards_container {
+	padding: 20px;
 	background: #f9f5ec;
 }
-.loader_container{
-    background: #f9f5ec;
+
+.loader_container {
 	display: flex;
 	flex-direction: column;
 	padding: 20px 8px;
+	background: #f9f5ec;
 }
 
-.pagination_wrapper{
-	padding: 5px 5px 0px 0px;
-    background: #f9f5ec;
+.pagination_wrapper {
 	display: flex;
 	justify-content: flex-end;
+	padding: 5px 5px 0 0;
+	background: #f9f5ec;
 }

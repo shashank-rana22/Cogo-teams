@@ -30,6 +30,7 @@ function RevenueList({
 			<Header hookSetters={hookSetters} activeTab={activeTab} />
 
 			<Tabs
+				className={styles.tabs}
 				activeTab={activeTab}
 				onChange={(tab) => {
 					setActiveTab(tab);
