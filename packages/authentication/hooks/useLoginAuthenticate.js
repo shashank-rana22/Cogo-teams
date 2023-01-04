@@ -27,7 +27,6 @@ const useLoginAuthenticate = () => {
 				setCookieAndRedirect(token, {});
 			}
 		} catch (err) {
-			console.log(err);
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
 		}
 	};

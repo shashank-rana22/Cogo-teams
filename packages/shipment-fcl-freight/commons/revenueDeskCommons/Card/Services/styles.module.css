@@ -4,13 +4,15 @@
 	padding: 12px 16px;
 }
 
-.tag_wrapper{
+.tag_wrapper {
 	margin-right: 16px;
 }
-.details{
+
+.details {
 	font-size: 12px;
 	font-size: 500;
 }
+
 .tag_wrapper:hover {
 	cursor: pointer;
 }

@@ -1,3 +1,4 @@
+import { Button, Modal } from '@cogoport/components';
 import { InputController, SelectController, MultiselectController } from '@cogoport/forms';
 import React from 'react';
 
@@ -24,14 +25,15 @@ const getElementController = (type = 'text') => {
 function Form({
 	controls = () => [],
 	formProps = {},
-	errors = {},
 	onSubmit = () => {},
-	onErrors = () => {},
+	createRoleApi = {},
 }) {
-	const { handleSubmit, control, watch } = formProps;
-	const type = watch('role_functions') || [];
+	const {
+		handleSubmit, control, watch, formState: { errors },
+	} = formProps;
 
-	console.log('type', type);
+	const { loading } = createRoleApi;
+	const type = watch('role_functions') || [];
 
 	const subRoleFunctionOptions = [];
 
@@ -43,7 +45,7 @@ function Form({
 		<form
 			className={styles.form_container}
 			id="rnp_role_list_create_role_form"
-			onSubmit={handleSubmit(onSubmit, onErrors)}
+			onSubmit={handleSubmit(onSubmit)}
 		>
 			{controls.map((controlItem) => {
 				const el = { ...controlItem };
@@ -56,23 +58,26 @@ function Form({
 				if (!Element) return null;
 
 				return (
-					<div style={{ flex: el.flex }}>
-						<div className={styles.form_group}>
-							<span>{el.label}</span>
-							<div className={styles.input_group}>
-								<Element
-									{...el}
-									control={control}
-									id={`rnp_role_list_create_role_form_${el.name}_input`}
-								/>
-								<div className={styles.error_message}>
-									{errors?.[el.name]?.message}
-								</div>
+					<div className={styles.form_group}>
+						<span>{el.label}</span>
+						<div className={styles.input_group}>
+							<Element
+								{...el}
+								control={control}
+								id={`rnp_role_list_create_role_form_${el.name}_input`}
+							/>
+							<div className={styles.error_message}>
+								{errors?.[el.name]?.message}
 							</div>
 						</div>
 					</div>
 				);
 			})}
+
+			<Modal.Footer>
+				<Button themeType="secondary">Cancel</Button>
+				<Button loading={loading} type="submit">Create</Button>
+			</Modal.Footer>
 
 		</form>
 	);

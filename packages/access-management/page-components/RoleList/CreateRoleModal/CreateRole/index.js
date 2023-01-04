@@ -1,3 +1,4 @@
+import { Portal } from '@cogoport/components';
 import React from 'react';
 
 import useCreateRole from '../../../../hooks/useCreateRole';
@@ -10,7 +11,7 @@ function CreateRole({
 	redirect = () => {},
 }) {
 	const {
-		controls, formProps, errors, onSubmit, onErrors, createRoleApi,
+		controls, formProps, onSubmit, createRoleApi,
 	} =	useCreateRole({ onChangeShowCreateRoleModal, redirect });
 
 	return (
@@ -18,9 +19,7 @@ function CreateRole({
 			<Form
 				controls={controls}
 				formProps={formProps}
-				errors={errors}
 				onSubmit={onSubmit}
-				onErrors={onErrors}
 				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
 				createRoleApi={createRoleApi}
 			/>

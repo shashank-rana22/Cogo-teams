@@ -13,15 +13,17 @@ function CreateRoleModal({
 }) {
 	if (!showCreateRoleModal) return null;
 
+	const onChange = () => {
+		onChangeShowCreateRoleModal(false);
+	};
+
 	return (
-		<Modal size="lg" show={showCreateRoleModal} onClose={onChangeShowCreateRoleModal} placement="center">
+		<Modal className={styles.modal_container} show={showCreateRoleModal} onClose={onChange} placement="top">
 			<Modal.Header title={(
-				<div className={styles.heading_container} id="rnp_role_list_create_role_heading_container">
-					<Heading
-						title="Create Role"
-						subTitle="Set role name and role description"
-					/>
-				</div>
+				<Heading
+					title="Create Role"
+					subTitle="Set role name and role description"
+				/>
 			)}
 			/>
 			<Modal.Body>

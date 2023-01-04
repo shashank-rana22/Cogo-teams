@@ -56,8 +56,6 @@ function Grouped(props) {
 		handleSetNavRef,
 	} = useTogglePermissions(props);
 
-	console.log('Grouped', allignAPis(possible_apis));
-
 	const renderExplanation = () => (
 		<p className="normal">
 			{featureExplanation[featureKey]

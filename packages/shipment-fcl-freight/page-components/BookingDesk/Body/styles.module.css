@@ -7,13 +7,12 @@
 	display: flex;
 	flex-direction: column;
 	padding: 20px 8px;
+	background: #fff;
 }
 
 .pagination_wrapper{
 	padding: 5px 5px 0px 0px;
     background: #f9f5ec;
 	display: flex;
-	width: 100%;
 	justify-content: flex-end;
-
 }

@@ -117,7 +117,6 @@ function Navigation(props) {
 		}
 	};
 
-	console.log('navigation', show, showStatus);
 	let buttonText = 'Assign Now';
 	let background = 'primary';
 	if (isActive) {
