@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function Header({ hookSetters = {}, activeTab = '' }) {
 	const [serialId, setSerialId] = useState('');
-	const [showFilters, setShowFilters] = useState(false);
 	const handleChangeSerial = (value) => {
 		hookSetters.setFilters({ q: value });
 		setSerialId(value);
@@ -17,7 +16,6 @@ function Header({ hookSetters = {}, activeTab = '' }) {
 	const renderBody = (
 		<Filters
 			hookSetters={hookSetters}
-			setShowFilters={setShowFilters}
 			activeTab={activeTab}
 		/>
 
@@ -48,7 +46,6 @@ function Header({ hookSetters = {}, activeTab = '' }) {
 					>
 						<Button
 							themeType="accent"
-							onClick={() => setShowFilters(!showFilters)}
 							className={styles.filter_button}
 						>
 							<IcMFilter width="20px" height="28px" />
