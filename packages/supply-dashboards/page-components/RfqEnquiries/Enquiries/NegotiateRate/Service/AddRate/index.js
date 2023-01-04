@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function AddRate({ service }) {
 	const {
-		fields, control, showElements, register,
+		fields, control, showElements = {}, register,
 	} = useUpdateSpotNegotiationRate({ service });
 	return (
 		<>

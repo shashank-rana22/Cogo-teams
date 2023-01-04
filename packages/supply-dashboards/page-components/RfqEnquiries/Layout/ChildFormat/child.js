@@ -10,6 +10,7 @@ function Child({
 	control,
 	index,
 	name,
+	field,
 	remove,
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,

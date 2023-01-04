@@ -51,7 +51,13 @@ const fclFields =	[
 		name               : 'line_items',
 		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 1,
-		controls           : [
+		value              : [{
+			code     : 'BAS',
+			unit     : 'per_bl',
+			currency : 'USD',
+			price    : '',
+		}],
+		controls: [
 			{
 				name        : 'code',
 				type        : 'select',

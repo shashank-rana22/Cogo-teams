@@ -49,6 +49,7 @@ function Layout({
 										{...fieldsItem}
 										control={control}
 										register={register}
+										showElements={showElements}
 									/>
 
 								</>
@@ -56,10 +57,16 @@ function Layout({
 						}
 						return show
 							? (
-								<Item
-									control={control}
-									{...fieldsItem}
-								/>
+								<>
+									<div className={styles.heading}>
+										{heading}
+									</div>
+									<Item
+										control={control}
+										{...fieldsItem}
+									/>
+
+								</>
 
 							)
 							: null;

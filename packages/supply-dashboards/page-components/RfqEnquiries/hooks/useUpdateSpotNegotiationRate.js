@@ -1,62 +1,35 @@
 import { useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
 
 import getField from '../configurations/index';
-
-import useGetChargeCodes from './useGetChargeCodes';
+import FieldMutation from '../utils/field-mutation';
 
 const useUpdateSpotNegotiationRate = ({ service }) => {
-	const [selectedCodes, setSelectedCodes] = useState({});
-	const { control, watch, register } = useForm();
-	const { list } = useGetChargeCodes({ service_name: `${service?.service}_charges` });
+	const fields = getField({ service });
+
+	const getDefaultValues = () => {
+		const defaultValues = {};
+		fields.forEach((field) => {
+			const { value, name } = field;
+			if (field.type === 'fieldArray') {
+				defaultValues[name] = value || [];
+			} else {
+				defaultValues[name] = value || '';
+			}
+		});
+		return { defaultValues };
+	};
+
+	const { defaultValues } = getDefaultValues();
+	const {
+		control, watch, register,
+	} = useForm({ defaultValues });
 	const values = watch();
 	const showElements = { sourced_by_id: !values?.service_provider_id };
-	const fields = getField({ service, serviceProviderId: values?.service_provider_id });
 
-	const genericLineitems = watch('line_items');
-
-
-	useEffect(() => {
-		if (list?.length) {
-			const chargeCodesObj = {};
-			list.forEach((chrg) => {
-				chargeCodesObj[chrg.code] = chrg;
-			});
-			setSelectedCodes({ ...chargeCodesObj });
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(list)]);
-
-	fields.forEach((ctrl) => {
-		if (ctrl.controls) {
-			const chargeCode = genericLineitems;
-			ctrl.controls.forEach((childCtrl) => {
-				if (childCtrl.name === 'unit') {
-					const unitOptions = {};
-					chargeCode?.forEach((item, i) => {
-						const chargeCodes = {};
-						chargeCodes[item.code] = selectedCodes[item.code];
-						unitOptions[i] = (
-							chargeCodes[item.code]?.units || ['per_container']
-						).map((unit) => ({
-							label : startCase(unit),
-							value : unit,
-						}));
-					});
-					// eslint-disable-next-line no-param-reassign
-					childCtrl.customProps = unitOptions;
-				}
-				if (childCtrl.name === 'code') {
-					// eslint-disable-next-line no-param-reassign
-					childCtrl.options = list;
-				}
-			});
-		}
-	});
+	const { newField } = FieldMutation({ fields, values, service });
 
 	return {
-		fields,
+		fields: newField,
 		control,
 		showElements,
 		register,
