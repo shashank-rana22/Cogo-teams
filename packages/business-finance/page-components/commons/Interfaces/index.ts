@@ -69,5 +69,6 @@ export interface ControlProps {
 	type?: string;
 	options?: Options[];
 	groupBy?:ControlProps[];
-	[key:string]: string|number|undefined|boolean|Options[]|object[];
+    style?:React.CSSProperties;
+	[key:string]: string|number|undefined|boolean|Options[]|object[]| React.CSSProperties;
 }

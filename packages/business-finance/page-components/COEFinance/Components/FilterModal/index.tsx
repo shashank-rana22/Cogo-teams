@@ -16,7 +16,7 @@ const FilterModal = ({filters,setFilters}:Props) => {
 	const [showModal, setShowModal] =useState(false)
 return (
 	<div className={styles.modal_container}>
-    <Modal size="lg" placement="center" show={showModal} onClose={()=>{setShowModal(false)}}>
+    <Modal size="md" placement="center" scroll={false} show={showModal} onClose={()=>{setShowModal(false)}}>
 			<Modal.Header title={(
 				<div className={styles.heading_container}>
 					FILTERS

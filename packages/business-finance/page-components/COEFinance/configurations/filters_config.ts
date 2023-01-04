@@ -1,14 +1,16 @@
-export const FILTERS =[
+import { ControlProps } from "../../commons/Interfaces";
+
+export const FILTERS : ControlProps[]=[
     {
 			name: 'zone',
 			type: 'select',
 			placeholder: 'Geography',
 			className: 'primary md',
-            style:{width:"230px"},
+            style:{width:"210px"},
 			hideSelectedOptions: false,
 			multiple: true,
 			isMulti: true,
-			span: 4,
+			span: 4.5,
 			isClearable: true,
 			options: [
 				{ label: 'North', value: 'north' },
@@ -24,7 +26,7 @@ export const FILTERS =[
 		isClearable: true,
 		multiple: true,
 		defaultOptions: false,
-        style:{width:"230px"},
+        style:{width:"210px"},
 		placeholder: ' Select Service',
 		span: 4,
 		options: [
@@ -50,21 +52,21 @@ export const FILTERS =[
                 name: 'createdAt',
                 type: 'datepicker',
                 placeholder: 'Created At',
-                span: 3,
+                span: 3.5,
             },
             {
                 label: 'Payment Due Date',
                 name: 'paymentDueDate',
                 type: 'datepicker',
                 placeholder: 'Invoice Date',
-                span: 3,
+                span: 3.5,
             },
             {
                 label: 'Last Modified Date',
                 name: 'modifiedDate',
                 type: 'datepicker',
                 placeholder: 'Last Modified Date',
-                span: 3,
+                span: 3.5,
             }
         ],
     },
