@@ -46,6 +46,20 @@ const fclFields =	[
 		uploadType      : 'aws',
 	},
 	{
+		name        : 'validity_start',
+		type        : 'date_picker',
+		label       : 'Validity Start',
+		placeholder : 'Pick',
+		span        : 4,
+	},
+	{
+		name        : 'validity_end',
+		type        : 'date_picker',
+		label       : 'Validity End',
+		placeholder : 'Pick',
+		span        : 4,
+	},
+	{
 		type               : 'fieldArray',
 		showButtons        : true,
 		name               : 'line_items',

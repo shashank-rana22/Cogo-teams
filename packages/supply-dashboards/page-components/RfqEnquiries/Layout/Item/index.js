@@ -23,9 +23,9 @@ function Item(props) {
 				{label}
 			</h4>
 			<Element
+				className={type === 'date_picker' ? styles.date : styles.item}
 				control={control}
 				{...props}
-				style={{ minWidth: '0px' }}
 			/>
 		</div>
 	);
