@@ -15,11 +15,11 @@ const Config = ({ data }) => {
 		field.push(...fclControl);
 
 		if (data?.data?.include_destination_local) {
-			field.push(chargeContolsFunc({ heading: 'Add Destination Local Charges' }));
+			field.push(chargeContolsFunc({ heading: 'add_destination_local_charges' }));
 		}
 
 		if (data?.data?.include_origin_local) {
-			field.push(chargeContolsFunc({ heading: 'Add Origin Local Charges' }));
+			field.push(chargeContolsFunc({ heading: 'add_origin_local_charges' }));
 		}
 
 		if (data?.data?.free_days_detention_destination > 0) {

@@ -6,17 +6,13 @@ import { useEffect, useState } from 'react';
 
 import useGetChargeCodes from '../hooks/useGetChargeCodes';
 
-import IncoTermMapping from './getIncoTermMapping';
-
 const FieldMutation = ({ fields, values, service }) => {
 	const getLocalChargeCode = ['fcl_freight', 'lcl_freight', 'air_freight'].includes(service?.service);
 	const [selectedCodes, setSelectedCodes] = useState({});
-	const trade_type = IncoTermMapping[service?.data?.inco_term];
-	const { list } = useGetChargeCodes({ service_name: `${service?.service}_charges`, trade_type });
+	const { list } = useGetChargeCodes({ service_name: `${service?.service}_charges` });
 	const { list: localCharges } = useGetChargeCodes({
 		service_name: `${service?.service}_local_charges`,
 		getLocalChargeCode,
-		trade_type,
 	});
 	const [orgUsers, setOrgUsers] = useState([]);
 	const serviceProviderOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));

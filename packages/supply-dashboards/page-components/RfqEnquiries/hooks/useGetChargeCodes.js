@@ -10,6 +10,7 @@ const service_names = [
 	'fcl_freight_charges',
 	'haulage_freight_charges',
 	'air_freight_surcharges',
+	'fcl_cfs_charges',
 ];
 const useGetChargeCodes = ({
 	service_name = 'fcl_customs_charges',
@@ -21,7 +22,7 @@ const useGetChargeCodes = ({
 		method : 'GET',
 		url    : '/list_rate_charge_codes',
 		scope,
-	}, { manual: false });
+	}, { manual: true });
 
 	const listApi = async () => {
 		try {

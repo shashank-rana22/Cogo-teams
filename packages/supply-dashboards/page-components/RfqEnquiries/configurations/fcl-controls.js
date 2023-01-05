@@ -2,14 +2,6 @@ import fclChildControls from './charge-controls';
 
 const fclFields =	[
 	{
-		label       : 'Shipping Line',
-		name        : 'shipping_line_id',
-		placeholder : 'Select',
-		type        : 'select',
-		isClearable : true,
-		span        : 4,
-	},
-	{
 		name        : 'rate_reference_number',
 		type        : 'text',
 		label       : 'Rate Reference Number',

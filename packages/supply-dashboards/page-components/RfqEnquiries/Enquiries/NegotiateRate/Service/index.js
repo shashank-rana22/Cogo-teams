@@ -4,8 +4,6 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import getIncoTermMapping from '../../../utils/getIncoTermMapping';
-
 import AddRate from './AddRate';
 import styles from './styles.module.css';
 
@@ -19,7 +17,7 @@ function Service({
 			setActiveService(service);
 		}
 	};
-	const tradetype = getIncoTermMapping[selectedCard?.detail?.inco_term] === 'export' ? 'Origin' : 'Destination';
+	const tradetype = service?.data?.trade_type === 'import' ? 'Destiantion' : 'Origin';
 	return (
 		<div className={styles.container}>
 			<div

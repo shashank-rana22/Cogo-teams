@@ -1,13 +1,18 @@
+import { startCase } from '@cogoport/utils';
+
 import currencies from '../utils/currencies';
 
 const chargeControls = ({ heading = '' }) => {
-	const name = heading ? 'local_line_items' : 'line_items';
+	let name = heading ? 'origin_line_items' : 'line_items';
+	if (heading === 'add_destination_local_charges') {
+		name = 'destination_line_items';
+	}
 
 	const controls = 		{
 		name,
-		type  : 'fieldArray',
-		heading,
-		value : [
+		type    : 'fieldArray',
+		heading : startCase(heading),
+		value   : [
 			{
 				code     : 'BAS',
 				unit     : 'per_bl',
