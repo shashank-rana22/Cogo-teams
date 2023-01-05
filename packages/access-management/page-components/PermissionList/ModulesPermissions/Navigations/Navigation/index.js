@@ -81,7 +81,6 @@ function Navigation(props) {
 		setShow(false);
 	};
 
-	console.log('showshowshow', show);
 	const handleSubmit = (vals) => {
 		if (authRoleId) {
 			createRole(authRoleId, vals, afterSave, roleData);
@@ -143,6 +142,7 @@ function Navigation(props) {
 					</div>
 					<div className={styles.row}>
 						<Button
+							size="sm"
 							themeType={background}
 							onClick={handlePrimaryAction}
 							disabled={loading}
@@ -151,6 +151,7 @@ function Navigation(props) {
 						</Button>
 						{isActive && containsApis ? (
 							<Button
+								size="sm"
 								className={styles.edit}
 								onClick={() => setShow(2)}
 								disabled={loading}

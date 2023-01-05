@@ -97,7 +97,7 @@ const useCreateRole = () => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/onboard_auth_role',
 		method : 'POST',
-	});
+	}, { autoCancel: false });
 
 	const createRole = async (
 		auth_role_id,
