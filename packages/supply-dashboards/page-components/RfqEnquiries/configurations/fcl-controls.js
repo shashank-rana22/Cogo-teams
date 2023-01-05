@@ -36,13 +36,14 @@ const fclFields =	[
 	{
 		name            : 'booking_rate_procurement_proof',
 		label           : 'Booking rate procurement proof',
-		span            : 6,
+		span            : 10,
 		type            : 'file',
 		themeType       : 'secondary',
 		drag            : true,
 		uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
-		accept          : 'image/*',
+		// eslint-disable-next-line max-len
+		accept          : 'image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		uploadType      : 'aws',
 	},
 	{

@@ -16,7 +16,6 @@ const useGetChargeCodes = ({
 	trade_type = null,
 	getLocalChargeCode = false,
 }) => {
-	console.log(trade_type, 'values');
 	const { scope = '' } = useSelector((state) => state.general);
 	const [{ data }, trigger] = useRequest({
 		method : 'GET',
