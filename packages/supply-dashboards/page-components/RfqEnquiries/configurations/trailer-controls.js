@@ -3,8 +3,9 @@ const trailerControls = [
 		name    : 'haulage_type',
 		type    : 'select',
 		label   : 'Haulage Type',
+		span    : 4,
 		options : [{
-			lable : 'Carrier',
+			label : 'Carrier',
 			value : 'carrier',
 		}, {
 			label : 'Merchant',
@@ -16,8 +17,9 @@ const trailerControls = [
 		name    : 'transportation_modes',
 		type    : 'select',
 		label   : 'Transportation Modes',
+		span    : 4,
 		options : [{
-			lable : 'Rail',
+			label : 'Rail',
 			value : 'rail',
 		}, {
 			label : 'Trailer',
