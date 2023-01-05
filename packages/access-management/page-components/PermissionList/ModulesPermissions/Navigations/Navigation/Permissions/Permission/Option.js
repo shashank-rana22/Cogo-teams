@@ -26,7 +26,7 @@ function Option({
 					!(permissionValue || []).includes(option.type)
 					|| controls[selectKey]?.disabled
 				}
-				style={{ width: '50px' }}
+				style={{ width: '80%' }}
 				rules={{ required: (permissionValue || []).includes(option.type) }}
 				valueKey="type"
 				labelKey="type_display_name"
@@ -53,14 +53,12 @@ function Option({
 			<div className={styles.row}>
 				{option.type === 'none' || option.type === 'allowed' ? (
 					<Radio
-						themeType="black small"
 						onChange={() => handleOptionChange(option.type, option)}
 						checked={(permissionValue || []).includes(option.type)}
 						disabled={controls[permission.value]?.disabled}
 					/>
 				) : (
 					<Checkbox
-						themeType="black small"
 						onChange={() => handleOptionChange(option.type, option)}
 						checked={(permissionValue || []).includes(option.type)}
 						disabled={controls[permission.value]?.disabled}

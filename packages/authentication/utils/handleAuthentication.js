@@ -86,6 +86,7 @@ const handleAuthentication = async ({
 
 	asPrefix = `/${partner_id || ''}`;
 	const navigations = Object.keys(permissions_navigations || {});
+
 	if (partner_id && [`/${partner_id}`, '/'].includes(asPath) && navigations.length > 0) {
 		redirect({
 			isServer,

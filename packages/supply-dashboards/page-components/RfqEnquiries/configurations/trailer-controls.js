@@ -1,3 +1,5 @@
+import chargeControl from './charge-controls';
+
 const trailerControls = [
 	{
 		name    : 'haulage_type',
@@ -11,8 +13,7 @@ const trailerControls = [
 			label : 'Merchant',
 			value : 'merchant',
 		}],
-		requirement : true,
-		rules       : { required: 'This is required' },
+		rules: { required: 'This is required' },
 	},
 	{
 		name    : 'transportation_modes',
@@ -29,9 +30,9 @@ const trailerControls = [
 			label : 'Barge',
 			value : 'barge',
 		}],
-		requirement : true,
-		rules       : { required: 'This is required' },
+		rules: { required: 'This is required' },
 	},
+	chargeControl({ heading: '', charge_code_name: 'freights_charge_codes' }),
 ];
 
 export default trailerControls;

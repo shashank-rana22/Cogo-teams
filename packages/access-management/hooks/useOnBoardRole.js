@@ -59,7 +59,6 @@ const useOnBoardRole = () => {
 	 */
 	const getNavOptions = (navigation = '') => {
 		const navObj = getNavData(navigation);
-		console.log('navObjnavObj', permissions);
 		return getNavigationOptions(permissions, navObj || []);
 	};
 

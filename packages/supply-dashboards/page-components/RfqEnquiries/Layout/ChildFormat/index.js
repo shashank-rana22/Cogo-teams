@@ -15,6 +15,7 @@ function FieldArray({
 	disabled = false,
 	register,
 	value,
+	error,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -39,6 +40,7 @@ function FieldArray({
 					showElements={showElements?.[index]}
 					disabled={disabled}
 					register={register}
+					error={error?.[index]}
 				/>
 			))}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>

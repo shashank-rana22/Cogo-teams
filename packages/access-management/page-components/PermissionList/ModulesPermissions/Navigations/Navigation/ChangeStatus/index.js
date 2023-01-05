@@ -42,13 +42,18 @@ function ChangeStatus({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
+					size="sm"
 					style={{ marginRight: 10 }}
 					themeType="secondary"
 					onClick={onClose}
 				>
 					Cancel
 				</Button>
-				<Button onClick={handleSubmit} loading={loading}>
+				<Button
+					size="sm"
+					onClick={handleSubmit}
+					loading={loading}
+				>
 					{headingText}
 				</Button>
 			</Modal.Footer>
