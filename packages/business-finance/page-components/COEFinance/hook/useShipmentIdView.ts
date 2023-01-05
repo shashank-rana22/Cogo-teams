@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector } from "@cogoport/store";
 import useGetFiniteList from "./useGetFiniteList";
-import useDebounceQuery from "../../commons/utils/debounce";
 
 type dataType = {
     currentPage: number;
@@ -25,7 +24,6 @@ interface AllParams {
 }
 
 const useShipmentIdView = (allParams?: {}) => {
-    const { debounceQuery, query } = useDebounceQuery();
     const { ...params }: AllParams = allParams || {};
     const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({
@@ -110,10 +108,6 @@ const useShipmentIdView = (allParams?: {}) => {
         handleStats();
         refetch();
     };
-
-    useEffect(() => {
-        refetch();
-    }, [page, query]);
 
     return {
         loading: loading || apiLoading,
