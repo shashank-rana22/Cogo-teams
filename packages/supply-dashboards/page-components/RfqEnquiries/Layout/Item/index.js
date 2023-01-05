@@ -1,45 +1,9 @@
 import React from 'react';
 
 import getElementController from '../getController';
+import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
-
-const getErrorMessage = (props) => {
-	const {
-		errorClass, error, rules, errorName, label,
-	} = props;
-	const errorMessage = [];
-
-	if (errorClass) {
-		if (rules?.required && error.type === 'required') {
-			errorMessage.push(error?.message || `${errorName || label} is Required`);
-		}
-		if ((rules?.min || rules?.min === 0) && error.type === 'min') {
-			errorMessage.push(
-				`${errorName || label} cannot be less than ${rules.min}`,
-			);
-		}
-		if (rules?.max && error.type === 'max') {
-			errorMessage.push(
-				`${errorName || label} cannot be greater than ${rules.max}`,
-			);
-		}
-		if (rules?.minLength && error.type === 'minLength') {
-			errorMessage.push(
-				`${errorName || label} should be ${rules.minLength} character(s) long`,
-			);
-		}
-		if (rules?.maxLength && error.type === 'maxLength') {
-			errorMessage.push(
-				`${errorName || label} should be less than ${rules.maxLength}`,
-			);
-		}
-	}
-	if (errorMessage.length) {
-		return errorMessage.join(' ,');
-	}
-	return error?.message;
-};
 
 function Item(props) {
 	const {
@@ -62,7 +26,6 @@ function Item(props) {
 	});
 	const Element = getElementController(type);
 
-
 	const flex = ((span || 12) / 12) * 100 - 1;
 
 	return (
@@ -82,8 +45,20 @@ function Item(props) {
 			<Element
 				control={control}
 				{...props}
-				error={errorOriginal}
 			/>
+			<p style={{
+				fontStyle     : 'normal',
+				fontSize      : '12px',
+				lineHeight    : '16px',
+				letterSpacing : '0.02em',
+				paddingLeft   : '4px',
+				margin        : '0px',
+				color         : '#cb6464',
+			}}
+			>
+				{errorOriginal}
+
+			</p>
 		</div>
 	);
 }

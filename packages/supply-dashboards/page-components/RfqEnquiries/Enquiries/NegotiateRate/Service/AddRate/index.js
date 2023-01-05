@@ -9,6 +9,7 @@ function AddRate({ service }) {
 	const {
 		fields, control, showElements = {}, register, errors, onError, handleSubmit, handleData,
 	} = useUpdateSpotNegotiationRate({ service });
+
 	return (
 		<>
 			<Layout fields={fields} control={control} showElements={showElements} register={register} errors={errors} />

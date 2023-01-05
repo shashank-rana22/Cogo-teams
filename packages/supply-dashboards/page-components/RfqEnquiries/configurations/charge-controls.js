@@ -19,8 +19,8 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 		charge_code_name,
 		value   : [
 			{
-				code     : 'BAS',
-				unit     : 'per_bl',
+				code     : '',
+				unit     : '',
 				currency : 'USD',
 				price    : '',
 			},
@@ -31,12 +31,10 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 		controls           : [
 			{
 				name        : 'code',
-				caret       : true,
 				type        : 'select',
 				valueKey    : 'code',
 				labelKey    : 'label',
 				placeholder : 'Select Charge',
-				className   : 'primary lg',
 				span        : 3,
 				rules       : { required: 'This is required' },
 			},
@@ -45,7 +43,6 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 				placeholder : 'Unit',
 				type        : 'select',
 				span        : 2,
-				className   : 'primary lg',
 				rules       : { required: 'This is required' },
 			},
 			{
@@ -54,7 +51,6 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 				type        : 'select',
 				span        : 3,
 				options     : currencies,
-				className   : 'primary lg',
 				rules       : { required: 'This is required' },
 			},
 			{
@@ -62,7 +58,6 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 				type        : 'number',
 				span        : 3,
 				placeholder : 'Price Per Unit',
-				className   : 'primary lg',
 				rules       : { required: 'This is required' },
 			},
 		],

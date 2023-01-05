@@ -34,7 +34,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 
 	const { defaultValues, fields } = getDefaultValues(oldfields);
 	const {
-		control, watch, register, handleSubmit,
+		control, watch, register, handleSubmit, getValues,
 	} = useForm({ defaultValues });
 	const values = watch();
 	const { data } = useGetSpotNegotiationRate({

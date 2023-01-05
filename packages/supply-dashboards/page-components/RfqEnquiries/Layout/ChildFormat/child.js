@@ -2,6 +2,7 @@ import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
 import getElementController from '../getController';
+import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,9 @@ function Child({
 	noDeleteButtonTill = 0,
 	disabled = false,
 	field,
+	error,
+	label,
+	rules,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -45,6 +49,14 @@ function Child({
 				<div className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
+						const errorClass = error ? 'error' : null;
+
+						const errorOriginal = getErrorMessage({
+							errorClass,
+							error: error?.[controlItem.name],
+							rules,
+							label,
+						});
 						const extraProps = {};
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
@@ -69,6 +81,19 @@ function Child({
 									control={control}
 
 								/>
+								<p style={{
+									fontStyle     : 'normal',
+									fontSize      : '12px',
+									lineHeight    : '16px',
+									letterSpacing : '0.02em',
+									paddingLeft   : '4px',
+									margin        : '0px',
+									color         : '#cb6464',
+								}}
+								>
+									{errorOriginal}
+
+								</p>
 							</div>
 						);
 					})}
