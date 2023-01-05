@@ -25,8 +25,14 @@ const airPayload = ({ service, value }) => {
 					min_price : Number(charge.min_price),
 				})),
 			}],
-			surcharge     : { line_items: value?.surcharge },
-			[storageType] : {
+			surcharge: {
+				line_items: value?.surcharge.map((charge) => ({
+					...charge,
+					price     : Number(charge.price),
+					min_price : Number(charge.min_price),
+				})),
+			},
+			[storageType]: {
 				free_limit : value?.free_days,
 				unit       : value?.unit,
 				slabs      : value?.days_slab.map((slab) => ({

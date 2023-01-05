@@ -12,7 +12,7 @@ const chargeControls = ({ heading = '' }) => {
 				code     : 'BAS',
 				unit     : '',
 				currency : 'USD',
-				price    : null,
+				price    : '',
 			},
 		],
 		showButtons        : true,

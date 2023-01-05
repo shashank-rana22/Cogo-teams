@@ -10,9 +10,9 @@ const childControls = ({ heading = '' }) => 	{
 		value       : [
 			{
 				code      : '',
-				price     : null,
+				price     : '',
 				currency  : 'USD',
-				min_price : null,
+				min_price : '',
 				unit      : '',
 			},
 		],

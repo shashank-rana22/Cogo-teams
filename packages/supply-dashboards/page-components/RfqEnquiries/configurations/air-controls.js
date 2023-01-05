@@ -1,3 +1,5 @@
+import currencies from '../utils/currencies';
+
 import airChildControlsFunc from './air-child-controls';
 
 const airFields =	[
@@ -33,6 +35,7 @@ const airFields =	[
 		type        : 'fieldArray',
 		showButtons : true,
 		name        : 'surcharge',
+		heading     : 'Add Surcharge',
 		value       : [
 			{
 				code: '',
@@ -48,6 +51,42 @@ const airFields =	[
 				label       : 'Charge Code',
 				placeholder : 'Charge Name',
 				valueKey    : 'code',
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'price',
+				span        : 1.5,
+				type        : 'text',
+				min         : 0,
+				label       : 'Price',
+				placeholder : 'Amount',
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'currency',
+				span        : 1.5,
+				label       : 'Currency',
+				type        : 'select',
+				placeholder : 'Curr...',
+				options     : currencies,
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'unit',
+				label       : 'Unit',
+				type        : 'select',
+				span        : 3,
+				placeholder : 'Select unit',
+				showToolTip : true,
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'min_price',
+				label       : 'Minimum Price per shipment',
+				type        : 'text',
+				span        : 2,
+				min         : 0,
+				placeholder : 'Type minimum price',
 				rules       : { required: 'This is required' },
 			},
 		],
