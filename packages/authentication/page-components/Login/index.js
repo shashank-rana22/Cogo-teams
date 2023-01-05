@@ -1,7 +1,7 @@
 import { FluidContainer, Button } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
-import { IcCMicrosoft } from '@cogoport/icons-react';
-import React from 'react';
+import { IcCMicrosoft, IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import useFormLoginwithMS from '../../hooks/useFormLoginwithMS';
 import useLoginAuthenticate from '../../hooks/useLoginAuthenticate';
@@ -12,39 +12,64 @@ function Login() {
 	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
+<<<<<<< HEAD
+=======
+	const [showPassword, setShowPassword] = useState(false);
+
+	const renderSuffix = () => {
+		if (!showPassword) {
+			return <IcMEyeopen className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
+		}
+		return <IcMEyeclose className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
+	};
+
+>>>>>>> release-master
 	return (
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/vault/original/logo-cogoport-1.svg"
+					src="https://cdn.cogoport.io/cms-prod/vault/original/cogoport-admin.svg"
 					alt="Logo Cogoport"
 					className={styles.logo}
 				/>
-				<h3 className={styles.sub_heading}>ADMIN</h3>
-
+				<div className={styles.input_label}>
+					Please provide your email and password to login
+				</div>
 				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>
-						<div className={styles.input_label}>
-							Please provide your email and password to login
-						</div>
 						<InputController
 							control={control}
 							name="email"
-							placeholder="Please enter Email"
+							type="email"
+							placeholder="Email"
 							rules={{ required: 'Email is required.' }}
 						/>
-						{errors.email && <div>{errors.email.message}</div>}
+						{errors.email && (
+							<span className={styles.errors}>
+								{errors.email.message}
+							</span>
+						)}
 						<br />
 						<div className={styles.password_container}>
 							<InputController
 								control={control}
 								name="password"
-								type="password"
-								placeholder="Please enter Password"
+								type={showPassword ? 'text' : 'password'}
+								suffix={renderSuffix()}
+								placeholder="Password"
 								rules={{ required: 'Password is required.' }}
 							/>
 						</div>
-						{errors.password && <div>{errors.password.message}</div>}
+						{errors.password && (
+							<span className={styles.errors}>
+								{errors.password.message}
+							</span>
+						)}
+
+						<div className={styles.forgot}>
+							<a href="/forgot-password">Forgot your password?</a>
+						</div>
+
 						<Button
 							loading={loading}
 							className={styles.submit_button}
@@ -53,25 +78,22 @@ function Login() {
 							LOGIN
 						</Button>
 
-						<div className={styles.forgot}>
-							<span>Forgot your password? </span>
-							<a href="/forgot-password">Click here</a>
-						</div>
-						<div className={styles.or} style={{ margin: '16px 0' }}>
-							<hr className={styles.line} style={{ width: '40%' }} />
+						<div className={styles.or}>
+							<hr className={styles.line} />
 							OR
-							<hr className={styles.line} style={{ width: '40%' }} />
+							<hr className={styles.line} />
 						</div>
 
 						<Button
 							loading={socialLoginLoading}
 							themeType="secondary"
+							className={styles.submit_button}
+							style={{ fontWeight: '500' }}
 							onClick={onLogin}
 						>
 							<IcCMicrosoft />
 							<p className={styles.micro}>CONTINUE WITH MICROSOFT</p>
 						</Button>
-
 					</div>
 				</form>
 			</div>

@@ -42,7 +42,7 @@ const getUserData = async ({
 				await store.dispatch(setProfileState(user_data));
 			}
 		} catch (e) {
-			console.log(e.error);
+			// console.log(e.error);
 		}
 	};
 	if (isServer) {

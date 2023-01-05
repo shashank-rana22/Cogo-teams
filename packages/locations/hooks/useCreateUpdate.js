@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
+import { merge } from '@cogoport/utils';
 
 import getControls from '../configurations/create-form';
 
@@ -33,12 +34,43 @@ const useCreateUpdate = () => {
 		}
 	};
 
-	const locationOptions = useGetAsyncOptions({
-		...asyncFieldsLocations(),
-		labelKey: 'name',
-	});
+	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['country'] } },
+	}));
 
-	const fields = getControls({ locationOptions });
+	const zoneOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['zone'] } },
+	}));
+
+	const regionOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['region'] } },
+	}));
+
+	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['city'] } },
+	}));
+
+	const clusterOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['cluster'] } },
+	}));
+
+	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['pincode'] } },
+	}));
+
+	const cfsOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['cfs'] } },
+	}));
+
+	const fields = getControls({
+		countryOptions,
+		zoneOptions,
+		regionOptions,
+		cityOptions,
+		clusterOptions,
+		pincodeOptions,
+		cfsOptions,
+	});
 
 	return {
 		handleSubmit,

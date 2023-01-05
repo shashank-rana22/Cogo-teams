@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { useForm, DatepickerController, PillsController } from '@cogoport/components/src/forms';
+import { useForm, DatepickerController, PillsController } from '@cogoport/forms';
 
 import DateRangeOptions from './DateRangeOptions';
 import DateTypeOptions from './DateTypeOptions';

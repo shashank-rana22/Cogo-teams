@@ -33,7 +33,9 @@ const handleAuthentication = async ({
 }) => {
 	let asPrefix = '';
 
-	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(asPath)
+	const actualAsPath = asPath.split('?')[0];
+
+	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(actualAsPath)
 		|| UNAUTHENTICATED_PATHS.includes(pathname);
 	console.log('authname', AUTH_TOKEN_NAME);
 
@@ -62,7 +64,7 @@ const handleAuthentication = async ({
 			try {
 				deleteCookie(AUTH_TOKEN_NAME, { req, res });
 			} catch (e) {
-				console.log(e);
+				// console.log(e);
 			}
 		}
 
@@ -86,6 +88,7 @@ const handleAuthentication = async ({
 
 	asPrefix = `/${partner_id || ''}`;
 	const navigations = Object.keys(permissions_navigations || {});
+
 	if (partner_id && [`/${partner_id}`, '/'].includes(asPath) && navigations.length > 0) {
 		redirect({
 			isServer,

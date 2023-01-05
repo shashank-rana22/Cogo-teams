@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+}
+
+.item {
+	width: 100%;
+	padding: 20px;
+	margin-bottom: 20px;
+	word-break: break-all;
+	cursor: pointer;
+	background-color: #fff;
+	box-shadow: 4px 4px 4px 0 rgb(0 0 0 / 10%);
+}
+
+.role_description_container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 20px;
+}
+
+.subtitle {
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+}
+
+.role_type_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+	text-transform: uppercase;
+	border: none;
+}
+
+.partner_container {
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.function_head {
+	flex-direction: row;
+	gap: 6px;
+	justify-content: space-between;
+	font-weight: 500;
+	text-transform: uppercase;
+}
