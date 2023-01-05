@@ -16,8 +16,6 @@ function LinkComponent({
 
 	const { locale } = useSelector((state) => state.general);
 
-	console.log('locale', locale);
-
 	const newHref = withPrefix ? `${pathPrefix || ''}${href}` : href;
 	const newAs = withPrefix ? `${asPrefix || ''}${as || href}` : as || href;
 
