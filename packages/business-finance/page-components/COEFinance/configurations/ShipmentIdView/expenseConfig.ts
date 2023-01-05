@@ -26,14 +26,9 @@ export const expenseConfig = {
             label: "Service Ops 2",
             key: "createdBy",
             // func: "renderAllAmountDetailsOnTooltip",
-            span: 1.3,
+            span: 1.5,
         },
-        {
-            label: "Last Modified Date",
-            key: "createdDate",
-            func: "renderDates",
-            span: 2,
-        },
+
         {
             label: "Invoice Date",
             key: "billDate",
@@ -43,6 +38,12 @@ export const expenseConfig = {
         {
             label: "Payment Due Date",
             key: "dueDate",
+            func: "renderDates",
+            span: 2,
+        },
+        {
+            label: "Last Modified At",
+            key: "createdDate",
             func: "renderDates",
             span: 2,
         },

@@ -42,6 +42,12 @@ export const incomeConfig = {
             span: 2,
         },
         {
+            label: "Last Modified Date",
+            key: "createdDate",
+            func: "renderDates",
+            span: 2,
+        },
+        {
             label: "Status",
             key: "status",
             span: 3,
@@ -54,7 +60,7 @@ export const incomeConfig = {
             span: 1,
         },
         {
-            span: 2,
+            span: 1,
             func: "renderInvoices",
         },
     ],

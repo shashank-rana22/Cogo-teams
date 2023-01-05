@@ -17,7 +17,10 @@ const FormatedDate = ({ item, field }: propsType) => {
     const getBillDate = format(item?.billDate, "dd/MMM/yyyy");
     const getDueDate = format(item?.dueDate, "dd/MMM/yyyy");
     const getInvoiceDate = format(item?.invoiceDate, "dd/MMM/yyyy");
-    const getLastModifiedDate = format(item?.createdDate, "dd/MMM/yyyy");
+    const getLastModifiedDate = format(
+        item?.createdDate,
+        "dd/MMM/yyyy hh:mm:ss"
+    );
 
     return (
         <div>

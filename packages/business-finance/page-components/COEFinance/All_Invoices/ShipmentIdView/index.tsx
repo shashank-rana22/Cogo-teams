@@ -1,12 +1,16 @@
 import { Input } from "@cogoport/components";
 import { Pagination } from "@cogoport/components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SegmentedControl from "../../../commons/SegmentedControl/index";
 import useShipmentIdView from "../../hook/useShipmentIdView";
 import AccordianCards from "./AccordianCards/index";
 import LoadingState from "./LoadingState/index";
 import styles from "./styles.module.css";
 import { IcMSearchdark } from "@cogoport/icons-react";
+import { SelectController } from "@cogoport/forms";
+import controls from "./Filters/controls";
+import Filter from "../../../commons/Filters";
+import Filters from "./Filters";
 
 interface ItemProps {
     expense_total_price: number;
@@ -30,10 +34,6 @@ interface ItemProps {
 
 const ShipmentIdView = () => {
     const [currentOpenSID, setCurrentOpenSID] = useState("");
-    const [pendingApproval, setPendingApproval] = useState("all");
-    const [activeJobs, setActiveJobs] = useState("all");
-    const [serial_id, setSerialId] = useState<number | string>("");
-
     const {
         hookSetters,
         page,
@@ -41,77 +41,11 @@ const ShipmentIdView = () => {
         loading,
         list: { total, data },
         refetch,
-
-        statsData,
-        statsLoading,
-    } = useShipmentIdView({
-        pendingApproval,
-        activeJobs,
-        setSerialId,
-        serial_id,
-    });
-
-    const options1 = [
-        {
-            label: "ALL",
-            value: "all",
-        },
-        {
-            label: "Pending Approval",
-            value: "pendingApproval",
-        },
-        {
-            label: "Not Pending Approval",
-            value: "notPendingApproval",
-        },
-    ];
-    const options2 = [
-        {
-            label: "ALL",
-            value: "all",
-        },
-        {
-            label: "Open Jobs",
-            value: "openJobs",
-        },
-        {
-            label: "Operationally Closed",
-            value: "operationallyClosed",
-        },
-        {
-            label: "Closed Jobs",
-            value: "closedJobs",
-        },
-    ];
+    } = useShipmentIdView({});
 
     return (
         <div>
-            <div className={styles.toggle}>
-                <div className={styles.segmented}>
-                    <SegmentedControl
-                        options={options1}
-                        activeTab={pendingApproval}
-                        setActiveTab={setPendingApproval}
-                    />
-
-                    <SegmentedControl
-                        options={options2}
-                        activeTab={activeJobs}
-                        setActiveTab={setActiveJobs}
-                    />
-                </div>
-
-                <div className={styles.search}>
-                    <Input
-                        name="q"
-                        size="sm"
-                        value={serial_id}
-                        onChange={(e: any) => setSerialId(e)}
-                        placeholder="Search by Shipment ID"
-                        buttonIcon={<IcMSearchdark />}
-                    />
-                </div>
-            </div>
+            <Filters hookSetters={hookSetters} filters={filters} />
 
             <div>
                 {loading && (
@@ -151,7 +85,9 @@ const ShipmentIdView = () => {
                             type="table"
                         />
                     </div>
-                ) : null}
+                ) : (
+                    <div className={styles.noData}>No Data Available</div>
+                )}
             </div>
         </div>
     );
