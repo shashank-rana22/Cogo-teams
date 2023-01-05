@@ -6,6 +6,7 @@ const commonControls = ({ service }) => {
 			span        : 4,
 			type        : 'select',
 			placeholder : 'Select',
+			rules       : { required: 'This is required' },
 
 		},
 		{
@@ -16,6 +17,7 @@ const commonControls = ({ service }) => {
 			isClearable    : true,
 			defaultOptions : false,
 			span           : 4,
+			rules          : { required: 'This is required' },
 		},
 	];
 	const lineControls = {
@@ -27,6 +29,7 @@ const commonControls = ({ service }) => {
 		type        : 'select',
 		isClearable : true,
 		span        : 4,
+		rules       : { required: 'This is required' },
 	};
 	if (['fcl_freight', 'haulage_freight', 'air_freight', 'trailer_freight'].includes(service)) {
 		return [...controls, lineControls].map((ctrl) => ({ ...ctrl, requirement: true }));

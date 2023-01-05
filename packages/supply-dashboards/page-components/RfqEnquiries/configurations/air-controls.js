@@ -10,6 +10,7 @@ const airFields =	[
 		type        : 'select',
 		isClearable : true,
 		span        : 4,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'rate_reference_number',

@@ -27,6 +27,7 @@ const fclFields =	[
 		label       : 'Validity Start',
 		placeholder : 'Pick',
 		span        : 4,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'validity_end',
@@ -34,6 +35,7 @@ const fclFields =	[
 		label       : 'Validity End',
 		placeholder : 'Pick',
 		span        : 4,
+		rules       : { required: 'This is required' },
 	},
 	fclChildControls({ heading: '', charge_code_name: 'freights_charge_codes' }),
 ];

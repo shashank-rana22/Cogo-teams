@@ -26,6 +26,7 @@ const lclFields =	[
 		label       : 'Validity Start',
 		placeholder : 'Pick',
 		span        : 4,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'validity_end',
@@ -33,6 +34,7 @@ const lclFields =	[
 		label       : 'Validity End',
 		placeholder : 'Pick',
 		span        : 4,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'departure_dates',

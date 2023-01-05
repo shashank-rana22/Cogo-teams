@@ -13,6 +13,7 @@ const trailerControls = [
 			label : 'Merchant',
 			value : 'merchant',
 		}],
+		rules: { required: 'This is required' },
 	},
 	{
 		name    : 'transportation_modes',
@@ -29,6 +30,7 @@ const trailerControls = [
 			label : 'Barge',
 			value : 'barge',
 		}],
+		rules: { required: 'This is required' },
 	},
 	chargeControl({ heading: '', charge_code_name: 'freights_charge_codes' }),
 ];
