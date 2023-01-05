@@ -9,14 +9,14 @@ function MultiSelectController(props) {
 
 	return (
 		<Controller
-			key={rest.id}
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<MultiSelect
 					{...rest}
-					key={rest.id}
+					key={name}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}

@@ -1,0 +1,63 @@
+.container {
+	display: flex;
+	margin-bottom: 6px;
+}
+
+.text {
+	font-size: 10px;
+	font-weight: 500;
+	color: #333;
+}
+
+.trade_type {
+	display: flex;
+	align-items: center;
+	padding: 2px 10px;
+	margin: 10px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #393f70;
+	background: #fef6df;
+	border-radius: 4px;
+}
+
+.yellow {
+	background: #fef6df;
+}
+
+.blue {
+	background: #d9eafd;
+}
+
+.customer {
+	margin-left: 10px;
+	background: #d9eafd;
+	border-radius: 4px;
+}
+
+.cogo_assured {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 4px 8px;
+	margin: 12px;
+	background: #e6fbe9;
+	border-radius: 4px 0;
+}
+
+.icon_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 6px;
+}
+
+.source {
+	padding: 4px;
+	margin: 10px 10px auto;
+	margin-left: auto;
+	font-size: 10px;
+	font-weight: 700;
+	background-color: #dfe1ef;
+	border-radius: 4px;
+}

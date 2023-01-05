@@ -1,0 +1,28 @@
+.cards_container {
+	padding: 20px;
+	background: #fff;
+}
+
+.loader_container {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 8px;
+	background: #fff;
+}
+
+.pagination_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 5px 5px 0 0;
+	color: blue;
+	background: white;
+}
+
+.upper {
+	padding: 12px 0 0;
+}
+
+.lower {
+	margin-top: -30px;
+}

@@ -2,7 +2,7 @@ import { Tags } from '@cogoport/components';
 import { IcMFcl } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import getIncoTermMapping from '../../../../utils/getIncoTermMapping';
+import getIncoTermMapping from '../../../../helpers/getIncoTermMapping';
 
 import styles from './styles.module.css';
 

@@ -58,17 +58,11 @@ function Layout({
 						}
 						return show
 							? (
-								<>
-									<div className={styles.heading}>
-										{heading}
-									</div>
-									<Item
-										control={control}
-										error={errors[fieldsItem.name]}
-										{...fieldsItem}
-									/>
-
-								</>
+								<Item
+									control={control}
+									error={errors[fieldsItem.name]}
+									{...fieldsItem}
+								/>
 
 							)
 							: null;

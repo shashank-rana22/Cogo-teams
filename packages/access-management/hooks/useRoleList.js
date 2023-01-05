@@ -39,7 +39,6 @@ const getFilter = (val) => {
 
 const useRoleList = () => {
 	const router = useRouter();
-
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 	const [stakeHolderType, setStakeHolderType] = useState('all');
 	const [filters, setFilters] = useState({});
@@ -56,23 +55,7 @@ const useRoleList = () => {
 	const [{ data, loading, error }, trigger] = useRequest({
 		method : apiMethod,
 		url    : apiUri,
-	}, { autoCancel: false });
-
-	useEffect(() => onChangeParams({ page: 1 }), [filters]);
-
-	useEffect(() => getListAuthRoles(), [params]);
-
-	const onChangeShowCreateRoleModal = useCallback((value = false) => {
-		setShowCreateRoleModal(!!value);
-	}, []);
-
-	const onChangeFilters = (values) => {
-		setFilters((previousState) => ({
-			...getFilter(null),
-			...previousState,
-			...values,
-		}));
-	};
+	});
 
 	const onChangeParams = useCallback((values = {}) => {
 		setParams((previousState) => ({
@@ -90,11 +73,26 @@ const useRoleList = () => {
 		});
 	}, [filters, params]);
 
+	useEffect(() => onChangeParams({ page: 1 }), [filters]);
+
+	useEffect(() => getListAuthRoles(), [params]);
+
+	const onChangeShowCreateRoleModal = useCallback((value = false) => {
+		setShowCreateRoleModal(!!value);
+	}, []);
+
+	const onChangeFilters = (values) => {
+		setFilters((previousState) => ({
+			...getFilter(null),
+			...previousState,
+			...values,
+		}));
+	};
+
 	const handleSTChange = (val) => {
 		setStakeHolderType(val);
 		setFilters((previousState) => ({ ...previousState, ...getFilter(val) }));
 	};
-
 	const redirect = useCallback((roleId = '') => {
 		if (!roleId) return;
 

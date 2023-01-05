@@ -17,3 +17,9 @@
 	line-height: 150%;
 	color: #221f20;
 }
+
+.item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}

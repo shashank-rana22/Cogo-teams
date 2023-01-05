@@ -5,8 +5,24 @@ import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import getField from '../configurations';
-import FieldMutation from '../utils/field-mutation';
-import getPayload from '../utils/getPayload';
+import FieldMutation from '../helpers/field-mutation';
+import getPayload from '../helpers/getPayload';
+
+import useGetSpotNegotiationRate from './useGetSpotNegotiatonRate';
+
+const getDefaultValues = (oldfields) => {
+	const defaultValues = {};
+	const newfields = oldfields.map((field) => {
+		const { value, ...rest } = field;
+		if (field.type === 'fieldArray') {
+			defaultValues[field.name] = value || [];
+		} else {
+			defaultValues[field.name] = value || '';
+		}
+		return rest;
+	});
+	return { defaultValues, fields: newfields };
+};
 
 const useUpdateSpotNegotiationRate = ({ service }) => {
 	const oldfields = getField({ data: service });
@@ -16,28 +32,22 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 		user_profile: profile,
 	}));
 
-	const getDefaultValues = () => {
-		const defaultValues = {};
-		const newfields = oldfields.map((field) => {
-			const { value, ...rest } = field;
-			if (field.type === 'fieldArray') {
-				defaultValues[field.name] = value || [];
-			} else {
-				defaultValues[field.name] = value || '';
-			}
-			return rest;
-		});
-		return { defaultValues, fields: newfields };
-	};
-
-	const { defaultValues, fields } = getDefaultValues();
+	const { defaultValues, fields } = getDefaultValues(oldfields);
 	const {
 		control, watch, register, handleSubmit,
 	} = useForm({ defaultValues });
 	const values = watch();
+	const { data } = useGetSpotNegotiationRate({
+		values   : { ...values, spot_negotiation_id: service.id },
+		controls : fields,
+		service  : service.service,
+	});
 	const showElements = { sourced_by_id: !values?.service_provider_id };
+	console.log(values, 'ff');
 
-	const { newField } = FieldMutation({ fields, values, service });
+	const { newField } = FieldMutation({
+		fields, values, service, data,
+	});
 
 	const onError = (errs, e) => {
 		e.preventDefault();

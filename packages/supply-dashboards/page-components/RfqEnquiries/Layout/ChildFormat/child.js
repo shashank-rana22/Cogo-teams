@@ -14,7 +14,7 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	disabled = false,
-	register,
+	field,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -40,18 +40,14 @@ function Child({
 	}
 
 	return (
-		<div className={styles.fieldarray}>
+		<div className={styles.fieldarray} key={field.id}>
 			{totalFields.map((fields) => (
 				<div className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 						const extraProps = {};
-						if (controlItem.customProps) {
-							if (Array.isArray(controlItem.customProps)) {
-								extraProps.options = controlItem.customProps;
-							} else {
-								extraProps.options = controlItem.customProps[index];
-							}
+						if (controlItem.customProps?.options) {
+							extraProps.options = controlItem.customProps.options[index];
 						}
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element) return null;
@@ -64,13 +60,14 @@ function Child({
 									{controlItem?.label}
 								</h4>
 								<Element
+									{...controlItem}
+									{...extraProps}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
-									options={extraProps?.options}
+									name={`${name}.${index}.${controlItem.name}`}
 									index={index}
 									control={control}
-									{...controlItem}
-									{...register(`${name}.${index}.${controlItem.name}`)}
+
 								/>
 							</div>
 						);

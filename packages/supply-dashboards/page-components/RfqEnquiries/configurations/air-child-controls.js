@@ -1,7 +1,10 @@
-import currencies from '../utils/currencies';
+import currencies from '../helpers/currencies';
 
 const childControls = ({ heading = '' }) => 	{
-	const name = heading ? 'local_line_items' : 'line_items';
+	let name = heading ? 'origin_line_items' : 'line_items';
+	if (heading === 'add_destination_local_charges') {
+		name = 'destination_line_items';
+	}
 	const controls = 		{
 		type        : 'fieldArray',
 		name,

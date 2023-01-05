@@ -1,4 +1,4 @@
-import currencies from '../utils/currencies';
+import currencies from '../helpers/currencies';
 
 import airChildControlsFunc from './air-child-controls';
 

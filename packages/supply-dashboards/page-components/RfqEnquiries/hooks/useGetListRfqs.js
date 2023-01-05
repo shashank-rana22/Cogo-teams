@@ -23,10 +23,10 @@ const useGetListRfqs = () => {
 		return trigger({
 			params: {
 				filters: {
-					negotiation_status    : 'awaiting_responses',
+					negotiation_status : 'awaiting_responses',
 					...(filters || {}),
-					service_type          : undefined,
-					relevant_supply_agent : 'b207f0e6-bb2e-43f6-a7be-97f385695abd' || user_profile?.id,
+					service_type       : undefined,
+					// relevant_supply_agent : 'b207f0e6-bb2e-43f6-a7be-97f385695abd' || user_profile?.id,
 				},
 				created_by_user_details_required : true,
 				page                             : currentPage,
