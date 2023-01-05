@@ -3,7 +3,6 @@ import airFields from './air-controls';
 // import carriageControls from './carriage-controls';
 import chargeContolsFunc from './charge-controls';
 import commonControlsFunc from './common-controls';
-import fclCfsControls from './fcl-cfs';
 import fclControl from './fcl-controls';
 import freeDaysSection from './free-days-section';
 import lclChildControlsFunc from './lcl-child-controls';
@@ -93,7 +92,7 @@ const Config = ({ data }) => {
 		// 	);
 		// }
 	} else if (data?.service === 'fcl_cfs') {
-		field.push(...fclCfsControls);
+		field.push(chargeContolsFunc({ heading: '' }));
 	} else if (['trailer_freight', 'haulage_freight', 'ltl_freight', 'ftl_freight'].includes(data?.service)) {
 		field.push(chargeContolsFunc({ heading: '' }));
 	}
