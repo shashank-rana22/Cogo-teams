@@ -159,7 +159,7 @@ const useTogglePermissions = (props) => {
 	useEffect(() => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		setNavigationRefs(initilaFormValues);
-	}, [JSON.stringify(newApiPermissions)]);
+	}, [newApiPermissions]);
 
 	useEffect(() => {
 		const initilaFormValues = setInitialFormValues(apiGroup);

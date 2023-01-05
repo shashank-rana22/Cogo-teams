@@ -108,17 +108,19 @@ function Permission({
 				) : null}
 			</div>
 
-			{permission.options.map((option) => (
-				<Option
-					option={option}
-					controls={allControls}
-					permission={permission}
-					handleOptionChange={handleOptionChange}
-					permissionValue={permissionValue}
-					errors={errors}
-					formValues={newFormValues}
-				/>
-			))}
+			<div className={styled.container_options}>
+				{permission.options.map((option) => (
+					<Option
+						option={option}
+						controls={allControls}
+						permission={permission}
+						handleOptionChange={handleOptionChange}
+						permissionValue={permissionValue}
+						errors={errors}
+						formValues={newFormValues}
+					/>
+				))}
+			</div>
 			{isError && (
 				<span>
 					{allControls[permission?.value].message || allControls[permission?.value].error}

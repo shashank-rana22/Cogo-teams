@@ -84,7 +84,6 @@ const through_criteria = {
 };
 
 const getThroughCriteria = (item) => {
-	console.log('item', item);
 	const allTC = [];
 	(item || []).forEach((key) => {
 		allTC.push(...through_criteria[key]);

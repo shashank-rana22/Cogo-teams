@@ -56,21 +56,25 @@ function Grouped(props) {
 	return (
 		<div className={styles.group_container}>
 			{featureKey ? (
-				<div className={`${styles.role_logic_group}`}>
+				<div
+					role="presentation"
+					onClick={() => setShow(!show)}
+					className={`${styles.role_logic_group}`}
+				>
 					<div className={styles.row}>
 						<p>{displayNames[featureKey] || `Manage ${startCase(featureKey)}`}</p>
 					</div>
+					{/* todo: Radio group is bugged will uncomment later */}
 					{/* <RadioGroup */}
-					{/* options={OPTIONS} */}
-					{/* values={value} */}
-					{/* onChange={handleApiStatus} */}
-					{/* disabled={creatingNavs} */}
+					{/*	options={OPTIONS} */}
+					{/*	values={value} */}
+					{/*	onChange={handleApiStatus} */}
+					{/*	disabled={creatingNavs} */}
 					{/* /> */}
 					<div>
 						<Button
 							themeType="tertiary"
 							id={`access_mgmt_edit_role_sh_${featureKey}`}
-							onClick={() => setShow(!show)}
 							disabled={creatingNavs}
 						>
 							{show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}

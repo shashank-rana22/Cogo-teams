@@ -81,7 +81,6 @@ function Navigation(props) {
 		setShow(false);
 	};
 
-	console.log('showshowshow', show);
 	const handleSubmit = (vals) => {
 		if (authRoleId) {
 			createRole(authRoleId, vals, afterSave, roleData);
