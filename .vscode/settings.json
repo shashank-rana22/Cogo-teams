@@ -6,11 +6,5 @@
         "source.fixAll.eslint": true,
         "source.fixAll.stylelint": true
     },
-    "stylelint.validate": [
-        "css",
-        "scss"
-    ],
-    "eslint.alwaysShowStatus": true,
-    "eslint.debug": false,
-    "eslint.format.enable": true
+    "stylelint.validate": ["css", "scss"]
 }
