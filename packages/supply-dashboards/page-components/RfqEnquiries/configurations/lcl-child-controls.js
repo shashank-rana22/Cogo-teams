@@ -1,4 +1,4 @@
-import currencies from '../utils/currencies';
+import currencies from '../helpers/currencies';
 
 const childControls = ({ heading = '' }) => {
 	let name = heading ? 'origin_line_items' : 'line_items';

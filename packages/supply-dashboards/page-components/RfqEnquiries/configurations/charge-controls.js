@@ -1,17 +1,22 @@
 import { startCase } from '@cogoport/utils';
 
-import currencies from '../utils/currencies';
+import currencies from '../helpers/currencies';
 
-const chargeControls = ({ heading = '' }) => {
-	let name = heading ? 'origin_line_items' : 'line_items';
-	if (heading === 'add_destination_local_charges') {
-		name = 'destination_line_items';
-	}
+const nameMapping = {
+	freights_charge_codes          : 'freights',
+	destination_local_charge_codes : 'destination_local',
+	origin_local_charge_codes      : 'origin_local',
+	cfs_charge_codes               : 'line_items',
+	customs_charge_codes           : 'line_items',
+};
 
+const chargeControls = ({ heading = '', charge_code_name }) => {
+	const name = nameMapping[charge_code_name];
 	const controls = 		{
 		name,
 		type    : 'fieldArray',
 		heading : startCase(heading),
+		charge_code_name,
 		value   : [
 			{
 				code     : 'BAS',

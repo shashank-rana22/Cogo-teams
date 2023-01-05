@@ -1,5 +1,5 @@
 import {
-	IcMBookingDesk, IcMSettings, IcMFfcl, IcMBldesk,
+	IcMBookingDesk, IcMSettings, IcMFfcl, IcMBldesk, IcMContractRates,
 } from '@cogoport/icons-react';
 
 import roles_permissions from './apis/roles-n-permission-apis';
@@ -53,6 +53,24 @@ const navigationMappings = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : [...roles_permissions],
 		module_type   : 'crm',
+	},
+	supply_dashboards: {
+		key         : 'supply_dashboards',
+		title       : 'Supply Dashboards',
+		icon        : IcMBookingDesk,
+		href        : '/supply/dashboards',
+		as          : '/supply/dashboards',
+		type        : 'link',
+		module_type : 'dashboards',
+	},
+	contracts: {
+		key         : 'contracts',
+		title       : 'Contracts',
+		icon        : IcMContractRates,
+		href        : '/contracts',
+		as          : '/contracts',
+		type        : 'link',
+		module_type : 'dashboards',
 	},
 };
 

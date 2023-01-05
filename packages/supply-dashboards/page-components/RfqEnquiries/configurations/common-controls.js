@@ -19,17 +19,19 @@ const commonControls = ({ service }) => {
 		},
 	];
 	const lineControls = {
-		label       : ['fcl_freight', 'haulage_freight'].includes(service) ? 'Shipping Line' : 'Air Line',
-		name        : ['fcl_freight', 'haulage_freight'].includes(service) ? 'shipping_line_id' : 'airline_id',
+		label: ['fcl_freight', 'haulage_freight', 'trailer_freight']
+			.includes(service) ? 'Shipping Line' : 'Air Line',
+		name: ['fcl_freight', 'haulage_freight', 'trailer_freight']
+			.includes(service) ? 'shipping_line_id' : 'airline_id',
 		placeholder : 'Select',
 		type        : 'select',
 		isClearable : true,
 		span        : 4,
 	};
-	if (['fcl_freight', 'haulage_freight', 'air_freight'].includes(service)) {
-		return [...controls, lineControls];
+	if (['fcl_freight', 'haulage_freight', 'air_freight', 'trailer_freight'].includes(service)) {
+		return [...controls, lineControls].map((ctrl) => ({ ...ctrl, requirement: true }));
 	}
-	return controls;
+	return controls.map((ctrl) => ({ ...ctrl, requirement: true }));
 };
 
 export default commonControls;

@@ -35,7 +35,7 @@ const fclFields =	[
 		placeholder : 'Pick',
 		span        : 4,
 	},
-	fclChildControls({ heading: '' }),
+	fclChildControls({ heading: '', charge_code_name: 'freights_charge_codes' }),
 ];
 
 export default fclFields;

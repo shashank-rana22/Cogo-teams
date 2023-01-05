@@ -49,9 +49,11 @@ function Enquiries({ rfq, setRfq }) {
 					/>
 
 				</div>
-				<div className={styles.form}>
-					<NegotiateRate selectedCard={selectedCard} />
-				</div>
+				{selectedCard ? (
+					<div className={styles.form}>
+						<NegotiateRate selectedCard={selectedCard} />
+					</div>
+				) : null}
 			</div>
 		</div>
 	);

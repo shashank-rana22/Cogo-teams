@@ -4,7 +4,7 @@ const fclPayload = ({ service, value }) => {
 	const key3 = 'destination_detention';
 
 	const line_items = [];
-	value?.line_items.forEach((item) => {
+	value?.freights.forEach((item) => {
 		const val = {
 			code     : item?.code,
 			unit     : item?.unit,
@@ -14,7 +14,7 @@ const fclPayload = ({ service, value }) => {
 		line_items.push(val);
 	});
 	const origin_line_items = [];
-	value?.origin_line_items.forEach((item) => {
+	value?.origin_local.forEach((item) => {
 		const val = {
 			code     : item?.code,
 			unit     : item?.unit,
@@ -25,7 +25,7 @@ const fclPayload = ({ service, value }) => {
 	});
 
 	const destination_line_items = [];
-	value?.destination_line_items.forEach((item) => {
+	value?.destination_local.forEach((item) => {
 		const val = {
 			code     : item?.code,
 			unit     : item?.unit,
@@ -36,7 +36,7 @@ const fclPayload = ({ service, value }) => {
 	});
 
 	const slabs = [];
-	value?.slabs.forEach((item) => {
+	(value?.slabs || []).forEach((item) => {
 		const val = {
 			lower_limit : Number(item?.lower_limit),
 			upper_limit : Number(item?.upper_limit),
@@ -55,8 +55,12 @@ const fclPayload = ({ service, value }) => {
 			shipping_line_id : value?.shipping_line_id,
 			[key1]           : { line_items: origin_line_items },
 			[key2]           : { line_items: destination_line_items },
-			[key3]           : { slabs, free_limit: Number(value?.free_days), unit: value?.unit },
-			freights         : [{
+			[key3]           : {
+				slabs,
+				free_limit : Number(value?.free_days || 0),
+				unit       : value?.unit || 'per_container',
+			},
+			freights: [{
 				validity_end   : value?.validity_end,
 				validity_start : value?.validity_start,
 				line_items,
