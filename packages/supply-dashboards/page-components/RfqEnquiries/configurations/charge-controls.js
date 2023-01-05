@@ -1,7 +1,8 @@
 import currencies from '../utils/currencies';
 
-const fclLocals = ({ heading = '' }) => {
+const chargeControls = ({ heading = '' }) => {
 	const name = heading ? 'local_line_items' : 'line_items';
+
 	const controls = 		{
 		name,
 		type  : 'fieldArray',
@@ -59,4 +60,4 @@ const fclLocals = ({ heading = '' }) => {
 
 	return controls;
 };
-export default fclLocals;
+export default chargeControls;

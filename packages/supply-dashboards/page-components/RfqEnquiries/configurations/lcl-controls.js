@@ -2,34 +2,8 @@ import lclChildControls from './lcl-child-controls';
 
 const lclFields =	[
 	{
-		name        : 'service_provider_id',
-		label       : 'Service Provider',
-		span        : 4,
-		type        : 'select',
-		placeholder : 'Select',
-
-	},
-	{
-		label          : 'Rate Provided by user',
-		name           : 'sourced_by_id',
-		placeholder    : 'Select',
-		type           : 'select',
-		isClearable    : true,
-		defaultOptions : false,
-		span           : 4,
-	},
-	{
-		label          : 'Rate procured by agent',
-		name           : 'procured_by_id',
-		type           : 'select',
-		showForScope   : ['partner'],
-		optionsListKey : 'partner-users',
-		valueKey       : 'user_id',
-		disabled       : true,
-	},
-	{
 		name        : 'rate_reference_number',
-		type        : 'text',
+		type        : 'number',
 		label       : 'Rate Reference Number',
 		placeholder : 'Type rate reference Number here',
 		span        : 4,

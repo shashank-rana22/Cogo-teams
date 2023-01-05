@@ -1,4 +1,4 @@
-const fclDetetionFreeDays = ({ heading, unit }) => {
+const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 	const controls = 		[{
 		name         : 'free_days',
 		type         : 'number',
@@ -28,7 +28,7 @@ const fclDetetionFreeDays = ({ heading, unit }) => {
 	{
 		name               : 'days_slab',
 		type               : 'fieldArray',
-		label              : 'Days Slab beyond Free day',
+		label              : unit === 'per_kg_per_hour' ? 'Hours Slab beyond Free day' : 'Days Slab beyond Free day',
 		showButtons        : false,
 		buttonText         : 'Add More Slab',
 		className          : 'primary lg',

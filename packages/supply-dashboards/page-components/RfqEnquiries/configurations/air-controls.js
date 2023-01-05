@@ -1,23 +1,8 @@
+import currencies from '../utils/currencies';
+
 import airChildControlsFunc from './air-child-controls';
 
 const airFields =	[
-	{
-		name        : 'service_provider_id',
-		label       : 'Service Provider',
-		span        : 4,
-		type        : 'select',
-		placeholder : 'Select',
-
-	},
-	{
-		label          : 'Rate Provided by user',
-		name           : 'sourced_by_id',
-		placeholder    : 'Select',
-		type           : 'select',
-		isClearable    : true,
-		defaultOptions : false,
-		span           : 4,
-	},
 	{
 		label       : 'Air Line',
 		name        : 'airline_id',
@@ -46,6 +31,66 @@ const airFields =	[
 		uploadType      : 'aws',
 	},
 	airChildControlsFunc({ heading: '' }),
+	{
+		type        : 'fieldArray',
+		showButtons : true,
+		name        : 'surcharge',
+		heading     : 'Add Surcharge',
+		value       : [
+			{
+				code: '',
+			},
+		],
+		buttonText         : 'Add Line Items',
+		noDeleteButtonTill : 0,
+		controls           : [
+			{
+				name        : 'code',
+				type        : 'select',
+				span        : 3,
+				label       : 'Charge Code',
+				placeholder : 'Charge Name',
+				valueKey    : 'code',
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'price',
+				span        : 1.5,
+				type        : 'text',
+				min         : 0,
+				label       : 'Price',
+				placeholder : 'Amount',
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'currency',
+				span        : 1.5,
+				label       : 'Currency',
+				type        : 'select',
+				placeholder : 'Curr...',
+				options     : currencies,
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'unit',
+				label       : 'Unit',
+				type        : 'select',
+				span        : 3,
+				placeholder : 'Select unit',
+				showToolTip : true,
+				rules       : { required: 'This is required' },
+			},
+			{
+				name        : 'min_price',
+				label       : 'Minimum Price per shipment',
+				type        : 'text',
+				span        : 2,
+				min         : 0,
+				placeholder : 'Type minimum price',
+				rules       : { required: 'This is required' },
+			},
+		],
+	},
 ];
 
 export default airFields;
