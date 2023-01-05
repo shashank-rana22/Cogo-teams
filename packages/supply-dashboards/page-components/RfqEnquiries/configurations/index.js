@@ -10,9 +10,8 @@ import lclFields from './lcl-controls';
 import trailerControls from './trailer-controls';
 
 const chargeCodeMapping = {
-	fcl_cfs         : 'cfs_charge_codes',
-	fcl_customs     : 'customs_charge_codes',
-	trailer_freight : 'charge_codes',
+	fcl_cfs     : 'cfs_charge_codes',
+	fcl_customs : 'customs_charge_codes',
 };
 
 const Config = ({ data }) => {

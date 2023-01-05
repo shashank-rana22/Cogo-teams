@@ -10,7 +10,7 @@ function Layout({
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
-	fields.forEach((field) => {
+	(fields || []).forEach((field) => {
 		if (!showElements[field.name]) {
 			span += field.span || 12;
 			if (span === 12) {
