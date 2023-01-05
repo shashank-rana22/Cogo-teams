@@ -1,0 +1,13 @@
+.container {
+	display: block;
+	padding-bottom: 12px;
+	margin-bottom: 16px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 6px #a9bcdaa6;
+}
+
+.container &:hover {
+	box-shadow: 0 0 4px #00000040;
+}

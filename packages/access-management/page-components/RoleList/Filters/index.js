@@ -15,6 +15,7 @@ function Filters({
 }) {
 	const partnerOptions = useGetAsyncOptions({
 		...asyncFieldsPartner(),
+		initialCall: false,
 	});
 
 	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);

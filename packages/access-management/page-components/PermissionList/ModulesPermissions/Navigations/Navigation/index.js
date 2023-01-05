@@ -1,7 +1,7 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useCreateRole from '../../../../../hooks/useCreateRole';
+import useCreateRole from '../../../../../hooks/useCreateRoles';
 import descriptions from '../../../../../utils/descriptions';
 
 import ChangeStatus from './ChangeStatus';
@@ -67,7 +67,7 @@ function Navigation(props) {
 	const [showStatus, setShowStatus] = useState(null);
 	const [navigationRefs, setNavigationRefs] = useState({});
 	const [selectedDepartments, setSelectedDepartments] = useState({ scopes: ['allowed'] });
-	const { createRole, loading: creatingNavs } = useCreateRole({});
+	const { createRole, loading: creatingNavs } = useCreateRole();
 
 	const navigationApis = getNavOptions(navigation.key);
 
@@ -81,6 +81,7 @@ function Navigation(props) {
 		setShow(false);
 	};
 
+	console.log('showshowshow', show);
 	const handleSubmit = (vals) => {
 		if (authRoleId) {
 			createRole(authRoleId, vals, afterSave, roleData);
@@ -117,12 +118,16 @@ function Navigation(props) {
 		}
 	};
 
-	console.log('navigation', show, showStatus);
 	let buttonText = 'Assign Now';
 	let background = 'primary';
 	if (isActive) {
 		buttonText = 'Un-Assign Now';
 		background = 'secondary';
+	}
+
+	let btnText = creatingNavs ? 'Saving, Please wait...' : 'Save';
+	if (show === 1) {
+		btnText = 'NEXT';
 	}
 
 	return (
@@ -161,12 +166,16 @@ function Navigation(props) {
 				size="lg"
 				show={!!show}
 				onClose={() => setShow(null)}
-				styles={show === 1 ? { dialog: { overflow: 'visible' } } : {}}
 			>
+				<Modal.Header title={(
+					<div>
+						<h2>{navigation?.title}</h2>
+						<span>{descriptions[navigation?.key] || ''}</span>
+					</div>
+				)}
+				/>
 				<Modal.Body>
 					<NavContent
-						title={navigation?.title}
-						description={descriptions[navigation?.key] || ''}
 						navigationApis={{ ...navigationApis, isActive }}
 						setNavigationRefs={(newValues) => {
 							setNavigationRefs((prev) => ({ ...prev, ...newValues }));
@@ -174,12 +183,37 @@ function Navigation(props) {
 						roleData={roleData}
 						creatingNavs={creatingNavs}
 						handleSave={handleSave}
-						setShow={setShow}
 						show={show}
 						onDepartmentChange={onDepartmentChange}
 						selectedDepartments={selectedDepartments}
 					/>
 				</Modal.Body>
+
+				<Modal.Footer>
+					<div className={styles.buttons_container}>
+						<Button
+							style={{ marginRight: 10 }}
+							themeType="secondary"
+							disabled={creatingNavs}
+							onClick={() => {
+								if (show === 1 || roleData.isImported) {
+									setShow(null);
+								} else {
+									setShow(1);
+								}
+							}}
+						>
+							{show === 1 || roleData.isImported ? 'Cancel' : 'BACK'}
+						</Button>
+						<Button
+							onClick={show === 1 ? () => setShow(2) : handleSave}
+							loading={creatingNavs}
+							disabled={creatingNavs}
+						>
+							{btnText}
+						</Button>
+					</div>
+				</Modal.Footer>
 			</Modal>
 			{/* </AnimatedContainer> */}
 			<ChangeStatus

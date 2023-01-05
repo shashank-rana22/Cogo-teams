@@ -1,4 +1,4 @@
-import { routeConfig } from '@cogoport/layout';
+import { routeConfig } from '@cogoport/navigation-configs';
 
 import getAuthParam from './get-auth-params';
 import getOtherApiPipe from './get-other-pipe';
