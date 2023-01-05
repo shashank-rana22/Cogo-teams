@@ -1,4 +1,4 @@
-import { Tags } from '@cogoport/components';
+import { Pills } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -8,7 +8,7 @@ function Header({ activePair }) {
 	const originName = activePair?.origin.split('(')[0];
 	const destinationCode = activePair?.destination_code;
 	const destinationName = activePair?.destination.split('(')[0];
-	const items = [{ children: activePair?.trade_type }];
+
 	return (
 		<div className={styles.heading}>
 			<div className={styles.port_pair}>
@@ -30,7 +30,13 @@ function Header({ activePair }) {
 					/ctr.
 				</div>
 			) : null}
-			<Tags items={items} closable />
+
+			<Pills
+				size="md"
+				color="#CFEAED"
+			>
+				{activePair?.trade_type}
+			</Pills>
 		</div>
 	);
 }
