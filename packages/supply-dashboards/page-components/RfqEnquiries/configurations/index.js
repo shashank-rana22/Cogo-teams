@@ -91,10 +91,14 @@ const Config = ({ data }) => {
 		// 		),
 		// 	);
 		// }
-	} else if (data?.service === 'fcl_cfs') {
+	} else if (['fcl_cfs', 'fcl_customs'].includes(data?.service)) {
 		field.push(chargeContolsFunc({ heading: '' }));
 	} else if (['trailer_freight', 'haulage_freight', 'ltl_freight', 'ftl_freight'].includes(data?.service)) {
 		field.push(chargeContolsFunc({ heading: '' }));
+	} else if (data?.service === 'lcl_customs') {
+		field.push(lclChildControlsFunc({ heading: '' }));
+	} else if (data?.service === 'air_customs') {
+		field.push(airChildControlsFunc({ heading: '' }));
 	}
 	return field;
 };
