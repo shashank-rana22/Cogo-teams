@@ -10,7 +10,7 @@ const chargeControls = ({ heading = '' }) => {
 		value : [
 			{
 				code     : 'BAS',
-				unit     : '',
+				unit     : 'per_bl',
 				currency : 'USD',
 				price    : '',
 			},

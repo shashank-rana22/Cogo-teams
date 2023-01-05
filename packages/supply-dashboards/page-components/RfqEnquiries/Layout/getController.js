@@ -8,6 +8,9 @@ const getElementController = (type = 'text') => {
 		case 'text':
 			return InputController;
 
+		case 'number':
+			return InputController;
+
 		case 'select':
 			return SelectController;
 
