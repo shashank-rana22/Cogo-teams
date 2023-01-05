@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import Link from 'next/link';
 import React, { useContext } from 'react';
 
@@ -13,11 +14,15 @@ function LinkComponent({
 	const routesContext = useContext(RoutesContext);
 	const { pathPrefix, asPrefix } = routesContext || {};
 
+	const { locale } = useSelector((state) => state.general);
+
+	console.log('locale', locale);
+
 	const newHref = withPrefix ? `${pathPrefix || ''}${href}` : href;
 	const newAs = withPrefix ? `${asPrefix || ''}${as || href}` : as || href;
 
 	return (
-		<Link {...rest} href={newHref} as={newAs} passHref>
+		<Link {...rest} href={newHref} as={newAs} locale={locale}>
 			{children}
 		</Link>
 	);

@@ -141,10 +141,12 @@ importers:
 
   common/next:
     specifiers:
+      '@cogoport/store': workspace:*
       next: 13.1.1
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
+      '@cogoport/store': link:../store
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
