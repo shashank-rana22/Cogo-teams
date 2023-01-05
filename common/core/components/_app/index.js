@@ -4,6 +4,7 @@ import { Router, RoutesProvider } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { appWithTranslation } from 'next-i18next';
 import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
@@ -55,7 +56,7 @@ function MyApp({
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
 	const {
-		req, pathname, asPath, query,
+		req, pathname, asPath, query, locale,
 	} = ctx;
 	const pathPrefix = '/[partner_id]';
 
@@ -79,6 +80,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		unPrefixedPath,
 		pathPrefix,
 		asPrefix,
+		locale,
 		scope : 'partner',
 		query : { ...query, ...(qError || {}) },
 		isServer,
@@ -100,4 +102,4 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 	};
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);

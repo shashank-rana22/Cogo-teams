@@ -7,6 +7,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 });
 
+// eslint-disable-next-line import/extensions
+const { i18n } = require('./next-i18next.config.js');
+
 // eslint-disable-next-line
 const fs = require('fs-extra');
 
@@ -24,6 +27,7 @@ module.exports = withBundleAnalyzer({
 	reactStrictMode   : true,
 	swcMinify         : true,
 	transpilePackages : modulesToTranspile,
+	i18n,
 	webpack           : (config) => {
 		const newConfig = { ...config };
 		newConfig.module.rules.push({

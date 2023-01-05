@@ -30,10 +30,19 @@ const handleAuthentication = async ({
 	res,
 	req,
 	pathname,
+	query,
 }) => {
 	let asPrefix = '';
 
-	const actualAsPath = asPath.split('?')[0];
+	let modifiedAsPath = asPath;
+
+	if (pathname.includes('[partner_id]')) {
+		const { partner_id } = query;
+		const modifiedPathname = pathname.replace('/[partner_id]/', '');
+		modifiedAsPath = `/${partner_id}/${modifiedPathname}`;
+	}
+
+	const actualAsPath = modifiedAsPath.split('?')[0];
 
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(actualAsPath)
 		|| UNAUTHENTICATED_PATHS.includes(pathname);
@@ -87,7 +96,7 @@ const handleAuthentication = async ({
 	asPrefix = `/${partner_id || ''}`;
 	const navigations = Object.keys(permissions_navigations || {});
 
-	if (partner_id && [`/${partner_id}`, '/'].includes(asPath) && navigations.length > 0) {
+	if (partner_id && [`/${partner_id}`, '/'].includes(modifiedAsPath) && navigations.length > 0) {
 		redirect({
 			isServer,
 			res,
@@ -99,7 +108,7 @@ const handleAuthentication = async ({
 
 	const defaultRoute = `${asPrefix}/`;
 
-	if (!asPath.startsWith(asPrefix)) {
+	if (!modifiedAsPath.startsWith(asPrefix)) {
 		redirect({ isServer, res, path: defaultRoute });
 	}
 
