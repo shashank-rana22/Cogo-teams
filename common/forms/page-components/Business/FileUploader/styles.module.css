@@ -1,32 +1,32 @@
-.progress_container{
+.progress_container {
 	display: flex;
 	align-items: flex-end;
-	background: #F6F5FE;
+	width: fit-content;
 	padding: 8px;
-    width: fit-content
+	background: #f6f5fe;
 }
 
-.file_name{
-	margin-left: 10px;
+.file_name {
 	margin-bottom: 6px;
-    font-size: 12px;
+	margin-left: 10px;
+	font-size: 12px;
 }
 
-  .progressBar {
-    background-color: #fefefe;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    margin-left: 10px;
-    margin-bottom: 4px;
-    height: 5px;
-    width: 340px;
-    max-width: 100%;
+.progressBar {
+	width: 340px;
+	max-width: 100%;
+	height: 5px;
+	margin-bottom: 4px;
+	margin-left: 10px;
+	background-color: #fefefe;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
 }
 
 .progress {
-    background: #ad5389;
-    background: #5936F0;
-    border-radius: 3px;
-    height: 5px;
-    transition: width 0.2s ease-in;
+	height: 5px;
+	background: #ad5389;
+	background: #5936f0;
+	border-radius: 3px;
+	transition: width 0.2s ease-in;
 }
