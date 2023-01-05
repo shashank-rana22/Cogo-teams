@@ -58,6 +58,15 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 	const {
 		req, pathname, asPath, query, locale,
 	} = ctx;
+
+	let modifiedAsPath = asPath;
+
+	if (pathname.includes('[partner_id]')) {
+		const { partner_id } = query;
+		const modifiedPathname = pathname.replace('/[partner_id]/', '');
+		modifiedAsPath = `/${partner_id}/${modifiedPathname}`;
+	}
+
 	const pathPrefix = '/[partner_id]';
 
 	const ctxParams = {
@@ -66,9 +75,10 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		req,
 		isServer,
 		pathPrefix,
+		asPath: modifiedAsPath,
 	};
 
-	const unPrefixedPath = `/${asPath.split('/').slice(2).join('/')}`;
+	const unPrefixedPath = `/${pathname.replace('/[partner_id]/', '')}`;
 
 	const { asPrefix, query: qError } = await handleAuthentication(ctxParams);
 
@@ -76,13 +86,13 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 
 	const generalData = {
 		pathname,
-		asPath,
+		asPath : modifiedAsPath,
 		unPrefixedPath,
 		pathPrefix,
 		asPrefix,
 		locale,
-		scope : 'partner',
-		query : { ...query, ...(qError || {}) },
+		scope  : 'partner',
+		query  : { ...query, ...(qError || {}) },
 		isServer,
 	};
 
@@ -91,11 +101,11 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 		: {};
 
 	return {
-		pageProps: { ...(initialProps || {}) },
+		pageProps : { ...(initialProps || {}) },
 		pathname,
 		pathPrefix,
 		asPrefix,
-		asPath,
+		asPath    : modifiedAsPath,
 		query,
 		profile,
 		generalData,
