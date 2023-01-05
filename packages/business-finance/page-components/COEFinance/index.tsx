@@ -5,7 +5,7 @@ import { useRouter } from "@cogoport/next";
 import AllInvoices from "./All_Invoices/index";
 import MyResponsiveBar from "./Components/ResponsiveBar";
 import MyResponsiveLine from "./Components/Stream";
-import MyResponsiveLines from "./Components/linecharts";
+import MyResponsiveLines from "./Components/linecharts/index";
 import data from "./Components/ResponsiveBar/data";
 import lineData from "./Components/Stream/data";
 import SegmentedControl from "../commons/SegmentedControl";
@@ -14,13 +14,13 @@ const CoeFinance = () => {
     const { push, query } = useRouter();
     const [currentTab, setCurrentTab] = useState("");
     const [activeTab, setActiveTab] = useState(query.active_tab || "dashboard");
-
-    useEffect(() => {
+    const { view, active_tab } = query;
+    const handleTab = (activeTab: string) => {
         push(
             "/business-finance/coe-finance/[active_tab]",
             `/business-finance/coe-finance/${activeTab}`
         );
-    }, [activeTab]);
+    };
 
     const OPTIONS = [
         {

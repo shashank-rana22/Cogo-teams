@@ -38,10 +38,6 @@ function List({
     pageSize = 10,
 }: Props) {
     const {
-        general: { isMobile = false },
-    } = useSelector((state: object) => state);
-
-    const {
         showHeader = true,
         fields,
         headerStyles,
@@ -50,6 +46,10 @@ function List({
         showHeaderCheckbox,
     } = config;
     const list = itemData?.list;
+
+    const {
+        general: { isMobile = false },
+    } = useSelector((state: object) => state);
 
     return (
         <section>

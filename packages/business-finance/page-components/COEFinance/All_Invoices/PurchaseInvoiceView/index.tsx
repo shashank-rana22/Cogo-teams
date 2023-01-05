@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react'
 import {useRouter} from '@cogoport/next';
 import {Button} from '@cogoport/components'
 import List from '../../../commons/List/index';
@@ -10,24 +10,28 @@ import RenderCustomer from './RenderData/RenderCustomer/index'
 import FormatedDate from './RenderData/FormatedDate/index';
 import SegmentedFilters from './SegmentedFilters/index'
 import {FunctionObjects, GenericObject} from '../../../commons/Interfaces/index'
-import {fieldProps,fieldItemProps} from './PurchaseInterfaces/index'
+import {fieldProps,fieldItemProps} from './interfaces/index'
 
 
 
 
-function PurchaseInvoice() {
+interface Props{
+  filters:GenericObject;
+  setFilters: (p: object) => void;
+}
+
+function PurchaseInvoice({filters,setFilters}:Props) {
 const router = useRouter();
+const [sort, setSort] = useState({});
 
   const {data,
       loading,
       config,
-      handlePageChange,
-      page,
       setSearchValue,	
 		  searchValue,
       currentTab,
      setCurrentTab,
-    }=useGetPurchaseViewList();
+    }=useGetPurchaseViewList({filters,setFilters,sort});
 
   const handleChange =(itemData:any)=>{
     router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}`);
@@ -73,9 +77,13 @@ const router = useRouter();
        itemData={data}
        functions={functions}
        loading={loading}
-       page={page}
-       handlePageChange={handlePageChange}
-     />
+       sort={sort}
+       setSort={setSort}
+       page={filters.pageIndex||1}
+       handlePageChange={(pageValue:number)=>{
+        setFilters((p:GenericObject)=>({...p,pageIndex:pageValue}))
+      }}
+    />
  </div>
   )
 }

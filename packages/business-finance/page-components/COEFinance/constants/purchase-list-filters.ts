@@ -1,7 +1,7 @@
 export const FILTERS_DATA = [
     {
-        label : 'Pending',
-        value : 'pending',
+        label : 'Initiated',
+        value : 'INITIATED',
     },
     {
         label : 'On Hold',
@@ -9,7 +9,7 @@ export const FILTERS_DATA = [
     },
     {
         label : 'Approved',
-        value : 'approved',
+        value : 'FINANCE_ACCEPTED',
     },
 ];
 export const FILTERS_DAY_DATA = [
@@ -31,10 +31,6 @@ export const FILTERS_DAY_DATA = [
     },
 ];
 export const FILTERS_URGENT_DATA = [
-    {
-        label : 'All',
-        value : 'allUrgentInvoices',
-    },
     {
         label : 'Urgent Invoices',
         value : 'urgencyTag',

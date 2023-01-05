@@ -7,6 +7,7 @@ interface Props{
 	setActiveTab:Function;
 	color?: string;
 	background?:string;
+	style?:React.CSSProperties;
 }
 
 function SegmentedControl(props:Props) {
@@ -16,23 +17,13 @@ function SegmentedControl(props:Props) {
 		setActiveTab,
 		color="#356EFD",
 		background="#F2F6FF",
+		style,
 	} = props;
 
 	const options = !optionsProp ? [] : optionsProp;
 
-	const [isMounted, setIsMounted] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (isMounted) {
-			return;
-		}
-
-		setActiveTab(activeTab || (options[0] || {}).value || '');
-		setIsMounted(true);
-	}, [isMounted]);
-
 	return (
-		<div className={styles.segmented_control}>
+		<div className={styles.segmented_control} style={style}>
 			<div className={styles.segmented_container}>
 				{options.map((tabOption) => {
 					const { label, value, icon ,badge} = tabOption;
@@ -47,15 +38,13 @@ function SegmentedControl(props:Props) {
 							onClick={() => setActiveTab(value)}
 						>
 							{icon && (
-								<div className={`${styles.segmented_icon} ${isActive?styles.active:""}`}>
+								<div className={`${styles.segmented_icon} ${isActive?styles.active:""}`} style={{ '--color': color} as React.CSSProperties}>
 									{icon}
 								</div>
 							)}
-
 							<div className={`${styles.segmented_label} ${isActive?styles.active:""}`} style={{ '--color': color} as React.CSSProperties}>
 								{label}
 							</div>
-
 							{badge && (
 								<div className={`${styles.segmented_badge} ${isActive?styles.activebadge:""}`}  style={{ '--color': color} as React.CSSProperties}>
 									{badge}

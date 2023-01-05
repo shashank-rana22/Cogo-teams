@@ -51,9 +51,24 @@ export interface TableProps {
     getRowId?: (row: object) => string;
 }
 
-export interface ListDataProps {
-    list?: object[];
-    pageIndex?: number;
-    totalPage?: number;
-    totalRecords?: number;
+export interface ListDataProps{
+	list: object[];
+	pageIndex: number;
+	totalPage: number;
+	totalRecords: number;
+}
+
+export interface Options{
+    label: string;
+    value: string;
+}
+
+export interface ControlProps {
+	span?: number;
+	name?: string;
+	type?: string;
+	options?: Options[];
+	groupBy?:ControlProps[];
+    style?:React.CSSProperties;
+	[key:string]: string|number|undefined|boolean|Options[]|object[]| React.CSSProperties;
 }

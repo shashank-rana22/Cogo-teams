@@ -146,30 +146,30 @@ const AccordianCards = ({
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.viewButton}>
-                            {currentOpenSID !== itemData?.id ? (
-                                <Button
-                                    onClick={() => {
-                                        setCurrentOpenSID(itemData?.id);
-                                    }}
-                                    themeType="secondary"
-                                >
-                                    View More
-                                </Button>
-                            ) : (
-                                <Button
-                                    themeType="secondary"
-                                    onClick={() => {
-                                        setCurrentOpenSID(itemData?.id);
-                                        router.push(
-                                            `/business-finance/coe-finance/cost-sheet?orgId=${itemData.id}`
-                                        );
-                                    }}
-                                >
-                                    Cost View
-                                </Button>
-                            )}
-                        </div>
+                    </div>
+                    <div>
+                        {currentOpenSID !== itemData?.id ? (
+                            <Button
+                                onClick={() => {
+                                    setCurrentOpenSID(itemData?.id);
+                                }}
+                                themeType="secondary"
+                            >
+                                View More
+                            </Button>
+                        ) : (
+                            <Button
+                                themeType="secondary"
+                                onClick={() => {
+                                    setCurrentOpenSID(itemData?.id);
+                                    router.push(
+                                        `/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}`
+                                    );
+                                }}
+                            >
+                                Cost View
+                            </Button>
+                        )}
                     </div>
                     <div className={styles.ribben}>
                         <div className={styles.ribbon}>Closed</div>

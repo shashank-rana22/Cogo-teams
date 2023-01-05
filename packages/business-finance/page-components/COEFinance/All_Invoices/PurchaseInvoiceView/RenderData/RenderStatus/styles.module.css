@@ -1,4 +1,4 @@
-.StatusFinanceAccepted {
+.FINANCE_ACCEPTED {
   background: #cdf7d4;
   border-radius: 4px;
   padding: 2px 4px;
@@ -7,7 +7,7 @@
   font-weight: 400;
 }
 
-.StatusInitiated {
+.INITIATED {
   background: #fcedbf;
   border-radius: 4px;
   padding: 2px 4px;
@@ -16,7 +16,7 @@
   font-weight: 400;
 }
 
-.StatusAccepted {
+.ACCEPTED {
   background: #cdf7d4;
   border-radius: 4px;
   padding: 2px 4px;
@@ -25,7 +25,7 @@
   font-weight: 400;
 }
 
-.StatusFinanceRejected {
+.FINANCE_REJECTED {
   background: #f68b21;
   border-radius: 4px;
   padding: 2px 4px;
@@ -33,7 +33,7 @@
   color: #333333;
   font-weight: 400;
 }
-.StatusVoid {
+.VOID {
   background: #fcedbf;
   border-radius: 4px;
   padding: 2px 4px;
@@ -41,7 +41,7 @@
   color: #333333;
   font-weight: 400;
 }
-.StatusPosted {
+.POSTED {
   background: #cdf7d4;
   border-radius: 4px;
   padding: 2px 4px;
@@ -49,7 +49,7 @@
   color: #333333;
   font-weight: 400;
 }
-.StatusCOERejected {
+.COE_REJECTED {
   background: #f68b21;
   border-radius: 4px;
   padding: 2px 4px;

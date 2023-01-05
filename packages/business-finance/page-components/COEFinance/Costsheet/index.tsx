@@ -1,36 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@cogoport/components'
 import {useRouter} from '@cogoport/next'
 import styles from "./styles.module.css"
-import { Tags } from '@cogoport/components'
 import StatRect from './StatRect'
 import Line from './Line'
 import DiscountRect from './DiscountRect'
 import { Accordion } from '@cogoport/components'
 import { IcADocumentTemplates, IcMArrowNext, IcMInfo } from '@cogoport/icons-react'
-import { Select } from '@cogoport/components'
+import { Select,Placeholder } from '@cogoport/components'
 import CardHeader from './Card/CardHeader'
 import { CardBody } from './Card/CardBody'
 import useGetShipmentCostSheet from '../hook/useGetShipmentCostSheet'
 import { GenericObject } from '../../commons/Interfaces'
 import getFormattedPrice from '../../commons/utils/getFormattedPrice'
+import getFormattedData from '../utils/getFormattedData'
 
 const CostSheet = () => {
   const Router=useRouter();
-  const shipment_id=Router.query.orgId;
-  const {data,loading}=useGetShipmentCostSheet({shipment_id});
+  const shipment_id=Router.query.shipmentId;
+  const {selldata,buydata,apiloading, data}=useGetShipmentCostSheet({shipment_id});
   const{buy_quotation={}, sell_quotation={}}=data||{};
-  const{service_charges: buyServicesCharges =[],net_total:netTotalPriceSell,net_total_price_currency:netTotalPriceCurrencySell,net_total_price_discounted:netTotalPriceDiscountedSell}=sell_quotation;
-  const{service_charges: sellServicesCharges =[],net_total:netTotalPriceBuy,net_total_price_currency:netTotalPriceCurrencyBuy,net_total_price_discounted:netTotalPriceDiscountedBuy}=buy_quotation;
+  const{service_charges: buyServicesCharges,net_total:netTotalPriceSell,net_total_price_currency:netTotalPriceCurrencySell,net_total_price_discounted:netTotalPriceDiscountedSell}=sell_quotation||{};
+  const{service_charges: sellServicesCharges,net_total:netTotalPriceBuy,net_total_price_currency:netTotalPriceCurrencyBuy,net_total_price_discounted:netTotalPriceDiscountedBuy}=buy_quotation||{};
   
-
   return (
     <div>
     <div className={styles.flex}>
-    <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]','/business-finance/coe-finance/all_invoices/shipment-view')}>Go Back</Button>
+    <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]',
+    '/business-finance/coe-finance/all_invoices/shipment-view' as never as null)}>Go Back</Button>
     <div className={styles.flexwidth}>
     <div>Status - </div>
-    <Tags themeType='green' className={styles.tag}>Operationally Closed</Tags>
+    <div  className={styles.tag}>Operationally Closed</div>
     <div className={styles.link} onClick={()=>{}}>Undo</div>
     <Button size="md" themeType="primary" onClick={()=>{}}>Close Financially</Button>
     </div>
@@ -44,14 +44,14 @@ const CostSheet = () => {
     <StatRect heading="Air Freight Service" expected='8.30%' actual='6.44%'/>
     </div>
     <DiscountRect heading='Discount Applied' statvalue='KAM - INR 30,000' statlabel='Revenue Desk - INR 30,000' />
-    <Accordion type="text" title={<span className={styles.label}>Documents <span className={styles.icon}><IcADocumentTemplates/></span></span>} style={{ backgroundColor:"#FFFFFF", 
+    <Accordion type="text" title={<span className={styles.label}>Documents <span className={styles.icon}><IcADocumentTemplates/></span></span> as unknown as string} style={{ backgroundColor:"#FFFFFF", 
     borderRadius:'8px', margin:"25px 0px",
     boxShadow:'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
 			condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
 			ligula, eget aliquam nunc nisl sit amet nisl. Nulla facilisi.
 		</Accordion>
-    <Accordion type="text" title={<span className={styles.details}>Shipment Details <Tags themeType='green' className={styles.shipmentag}>Export</Tags></span>} style={{ backgroundColor:"#FFFFFF", 
+    <Accordion type="text" title={<span className={styles.details}>Shipment Details <div className={styles.shipmentag}>Export</div></span> as unknown as string} style={{ backgroundColor:"#FFFFFF", 
     borderRadius:'8px', margin:"25px 0px",
     boxShadow:'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px' }}>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -67,19 +67,19 @@ const CostSheet = () => {
     </div>
     <div className={`${styles.displayflex} ${styles.responsive}`}>
     <div className={styles.amountselect}>Show Amount in</div>
-    <Select/>
+    <Select options={[]}/>
     </div>
     </div>
     <div className={styles.flex}>
     <div className={styles.width}>
     <CardHeader header='Sell' value={getFormattedPrice(netTotalPriceSell||netTotalPriceDiscountedSell,
 							netTotalPriceCurrencySell || 'INR')||'-'} />
-    {buyServicesCharges.map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
+    {(selldata||[1,2,3]).map((charge:GenericObject)=>((apiloading)?<Placeholder margin="20px" width='96%' height='220px'/>:<CardBody charge={charge}/>))}
     </div>
     <div className={styles.width}>
     <CardHeader header='Buy' value={getFormattedPrice(netTotalPriceBuy||netTotalPriceDiscountedBuy,
 							netTotalPriceCurrencyBuy || 'INR')||'-'}/>
-    {sellServicesCharges.map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
+    {(buydata ||[1,2,3]).map((charge:GenericObject)=>((apiloading)?<Placeholder margin="20px" width='96%' height='220px'/>:<CardBody charge={charge}/>))}
     </div>
     </div>
     </div>

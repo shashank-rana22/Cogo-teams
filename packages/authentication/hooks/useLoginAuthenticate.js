@@ -28,7 +28,7 @@ const useLoginAuthenticate = () => {
 			}
 		} catch (err) {
 			console.log(err);
-			Toast.error(getApiErrorString(err.response.data) || 'Failed to login, please try again...');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
 		}
 	};
 

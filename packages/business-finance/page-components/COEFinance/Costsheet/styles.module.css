@@ -15,7 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
+    min-width: 450px;
 }
 
 .link{
@@ -29,6 +29,7 @@
 .tag{
     background-color: #CDF7D4 !important;
     padding: 5px !important;
+    border-radius: 8px;
 }
 
 .line{
@@ -60,6 +61,7 @@
     background-color: #FCEDBF !important;
     padding: 5px !important;
     margin-left: 20px;
+    border-radius: 4px;
 }
 .details{
     font-weight: 500;
