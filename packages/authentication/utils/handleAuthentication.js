@@ -37,10 +37,8 @@ const handleAuthentication = async ({
 
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(actualAsPath)
 		|| UNAUTHENTICATED_PATHS.includes(pathname);
-	console.log('authname', AUTH_TOKEN_NAME);
 
 	const token = getCookie(AUTH_TOKEN_NAME, isServer ? { req } : null);
-	console.log('tokenn', token);
 
 	if (!token) {
 		if (isUnauthenticatedPath) {

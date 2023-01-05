@@ -12,8 +12,6 @@ function Login() {
 	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
-<<<<<<< HEAD
-=======
 	const [showPassword, setShowPassword] = useState(false);
 
 	const renderSuffix = () => {
@@ -23,7 +21,6 @@ function Login() {
 		return <IcMEyeclose className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
 	};
 
->>>>>>> release-master
 	return (
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
