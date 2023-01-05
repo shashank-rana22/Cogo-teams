@@ -9,6 +9,7 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 		label       : 'Free Days Limit',
 		placeholder : 'type here...',
 		min         : 0,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name : 'unit',

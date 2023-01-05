@@ -43,7 +43,6 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 		service  : service.service,
 	});
 	const showElements = { sourced_by_id: !values?.service_provider_id };
-	console.log(values, 'ff');
 
 	const { newField } = FieldMutation({
 		fields, values, service, data,
@@ -69,7 +68,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 			}
 			Toast.success('Negotiation Updated');
 		} catch (err) {
-			console.log(err);
+			Toast.error('something went wrong');
 		}
 	};
 

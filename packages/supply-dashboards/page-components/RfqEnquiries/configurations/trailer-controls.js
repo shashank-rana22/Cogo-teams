@@ -11,7 +11,8 @@ const trailerControls = [
 			label : 'Merchant',
 			value : 'merchant',
 		}],
-		requirement: true,
+		requirement : true,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name    : 'transportation_modes',
@@ -28,7 +29,8 @@ const trailerControls = [
 			label : 'Barge',
 			value : 'barge',
 		}],
-		requirement: true,
+		requirement : true,
+		rules       : { required: 'This is required' },
 	},
 ];
 
