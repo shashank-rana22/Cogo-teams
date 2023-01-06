@@ -19,9 +19,7 @@ function Stats({ data, status }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{data?.services_data?.fcl_freight[0]?.max_containers_count
-								? data?.services_data?.fcl_freight[0]?.max_containers_count
-								: '-'}
+							{data?.utilisation_data?.total_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>
