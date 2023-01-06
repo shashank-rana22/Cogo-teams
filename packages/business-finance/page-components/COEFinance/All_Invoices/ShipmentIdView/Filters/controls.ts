@@ -1,50 +1,67 @@
+import styles from "styles.module.css";
+// interface ControlProps {
+//     pending_approval: string;
+//     setPending_approval: Function;
+//     jobs: string;
+//     setJobs: Function;
+// }
+
 const controls = [
-    {
-        name: "pending_approval",
-        type: "segmented",
-        theme: "admin",
-        isClearable: true,
-        span: 1,
-        options: [
-            {
-                label: "ALL",
-                value: "all",
-            },
-            {
-                label: "Pending Approval",
-                value: "pendingApproval",
-            },
-            {
-                label: "Not Pending Approval",
-                value: "notPendingApproval",
-            },
-        ],
-    },
-    {
-        name: "jobs",
-        type: "segmented",
-        theme: "admin",
-        isClearable: true,
-        span: 1,
-        options: [
-            {
-                label: "ALL",
-                value: "all",
-            },
-            {
-                label: "Open Jobs",
-                value: "openJobs",
-            },
-            {
-                label: "Operationally Closed",
-                value: "operationallyClosed",
-            },
-            {
-                label: "Closed Jobs",
-                value: "closedJobs",
-            },
-        ],
-    },
+    // {
+    //     name: "pending_approval",
+    //     type: "segmented",
+    //     theme: "admin",
+    //     // activeTab: pending_approval,
+    //     // setActiveTab: setPending_approval,
+    //     isClearable: true,
+    //     span: 1,
+    //     background: "#FFFAEB",
+    //     color: "#ED3726",
+    //     options: [
+    //         {
+    //             label: "ALL",
+    //             value: "all",
+    //         },
+    //         {
+    //             label: "Pending Approval",
+    //             value: "pendingApproval",
+    //         },
+    //         {
+    //             label: "Not Pending Approval",
+    //             value: "notPendingApproval",
+    //         },
+    //     ],
+    // },
+    // {
+    //     name: "jobs",
+    //     type: "segmented",
+    //     theme: "admin",
+    //     isClearable: true,
+    //     // activeTab: jobs,
+    //     // setActiveTab: setJobs,
+    //     span: 1,
+    //     background: "#FFFAEB",
+    //     color: "#ED3726",
+
+    //     options: [
+    //         {
+    //             label: "ALL",
+    //             value: "all",
+    //         },
+    //         {
+    //             label: "Open Jobs",
+    //             value: "openJobs",
+    //         },
+    //         {
+    //             label: "Operationally Closed",
+    //             value: "operationallyClosed",
+    //         },
+    //         {
+    //             label: "Closed Jobs",
+    //             value: "closedJobs",
+    //         },
+    //     ],
+    // },
     {
         name: "shipment_type",
         type: "select",
@@ -89,7 +106,7 @@ const controls = [
         name: "serial_id",
         type: "input",
         theme: "admin",
-        span: 1.9,
+        span: 3.8,
         isClearable: true,
         placeholder: "Search by Shipment ID",
     },

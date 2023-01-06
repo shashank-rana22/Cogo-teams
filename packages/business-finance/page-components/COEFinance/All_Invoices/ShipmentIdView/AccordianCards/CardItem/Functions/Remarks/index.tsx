@@ -14,7 +14,6 @@ const Remarks = ({ item }: propsType) => {
         <div>
             <Tooltip
                 interactive
-                theme="light"
                 placement="left"
                 content={<RemarksContent item={item} />}
             >

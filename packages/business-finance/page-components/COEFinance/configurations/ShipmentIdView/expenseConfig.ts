@@ -25,7 +25,7 @@ export const expenseConfig = {
         {
             label: "Service Ops 2",
             key: "createdBy",
-            // func: "renderAllAmountDetailsOnTooltip",
+
             span: 1.5,
         },
 

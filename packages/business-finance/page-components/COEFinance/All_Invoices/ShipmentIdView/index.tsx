@@ -1,15 +1,9 @@
-import { Input } from "@cogoport/components";
 import { Pagination } from "@cogoport/components";
-import React, { useEffect, useState } from "react";
-import SegmentedControl from "../../../commons/SegmentedControl/index";
+import React, { useState } from "react";
 import useShipmentIdView from "../../hook/useShipmentIdView";
 import AccordianCards from "./AccordianCards/index";
 import LoadingState from "./LoadingState/index";
 import styles from "./styles.module.css";
-import { IcMSearchdark } from "@cogoport/icons-react";
-import { SelectController } from "@cogoport/forms";
-import controls from "./Filters/controls";
-import Filter from "../../../commons/Filters";
 import Filters from "./Filters";
 
 interface ItemProps {
@@ -34,6 +28,8 @@ interface ItemProps {
 
 const ShipmentIdView = () => {
     const [currentOpenSID, setCurrentOpenSID] = useState("");
+    const [pending_approval, setPending_approval] = useState("all");
+    const [jobs, setJobs] = useState("all");
     const {
         hookSetters,
         page,
@@ -41,16 +37,23 @@ const ShipmentIdView = () => {
         loading,
         list: { total, data },
         refetch,
-    } = useShipmentIdView({});
+    } = useShipmentIdView({ jobs, pending_approval });
 
     return (
         <div>
-            <Filters hookSetters={hookSetters} filters={filters} />
+            <Filters
+                hookSetters={hookSetters}
+                filters={filters}
+                pending_approval={pending_approval}
+                setPending_approval={setPending_approval}
+                jobs={jobs}
+                setJobs={setJobs}
+            />
 
             <div>
                 {loading && (
-                    <div style={{ marginTop: "50px" }}>
-                        {[1, 2, 3, 4, 5, 6, 7].map(() => {
+                    <div style={{ marginTop: "10px" }}>
+                        {[1, 2, 3, 4, 5].map(() => {
                             return <LoadingState />;
                         })}
                     </div>
@@ -85,9 +88,7 @@ const ShipmentIdView = () => {
                             type="table"
                         />
                     </div>
-                ) : (
-                    <div className={styles.noData}>No Data Available</div>
-                )}
+                ) : null}
             </div>
         </div>
     );

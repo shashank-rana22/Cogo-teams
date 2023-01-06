@@ -1,4 +1,3 @@
-import { Button } from "@cogoport/components";
 import React from "react";
 import List from "../../../../../commons/List/index";
 import useListBills from "../../../../hook/useListBills";
@@ -31,7 +30,6 @@ const CardItem = ({
     cardData,
     currentOpenSID,
     setCurrentOpenSID,
-    refetch,
     amountTab,
     setAmountTab,
 }: propsType) => {
@@ -55,23 +53,25 @@ const CardItem = ({
         fullResponse || {};
 
     const functions = {
-        renderInvoiceNumber: (item: any, field: any) => (
+        renderInvoiceNumber: (item: {}, field: {}) => (
             <InvoiceNumber item={item} field={field} />
         ),
-        renderDates: (item: any, field: any) => (
+        renderDates: (item: {}, field: {}) => (
             <FormatedDate item={item} field={field} />
         ),
-        renderName: (item: any, field: any) => (
+        renderName: (item: {}, field: {}) => (
             <ModifiedName item={item} field={field} />
         ),
-        renderAmount: (item: any, field: any) => (
+        renderAmount: (item: any, field: {}) => (
             <AmountWithCurrency item={item} field={field} />
         ),
-        renderStatus: (item: any, field: any) => (
+        renderStatus: (item: {}, field: {}) => (
             <Status item={item} field={field} />
         ),
-        renderInvoices: (item: any, field: any) => <ViewInvoice />,
-        renderRemarks: (item: any) => <Remarks item={item} />,
+        renderInvoices: (item: {}, field: {}) => (
+            <ViewInvoice item={item} field={field} />
+        ),
+        renderRemarks: (item: {}) => <Remarks item={item} />,
     };
 
     return (
@@ -96,6 +96,7 @@ const CardItem = ({
                         loading={loading}
                         page={pageIndex}
                         pageSize={totalRecords}
+                        showPagination={false}
                     />
                 )}
             </div>

@@ -23,6 +23,7 @@ export interface Props {
     page?: number;
     handlePageChange?: Function;
     pageSize?: number;
+    showPagination?: boolean;
 }
 
 function List({
@@ -36,6 +37,7 @@ function List({
     page = 1,
     handlePageChange,
     pageSize = 10,
+    showPagination = true,
 }: Props) {
     const {
         showHeader = true,
@@ -76,15 +78,19 @@ function List({
                     />
                 ))}
             </div>
-            {itemData?.totalRecords && (
-                <div className={styles.pagination_container}>
-                    <Pagination
-                        type="table"
-                        currentPage={page}
-                        totalItems={itemData?.totalRecords}
-                        pageSize={pageSize}
-                        handlePageChange={handlePageChange}
-                    />
+            {showPagination && (
+                <div>
+                    {itemData?.totalRecords && (
+                        <div className={styles.pagination_container}>
+                            <Pagination
+                                type="table"
+                                currentPage={page}
+                                totalItems={itemData?.totalRecords}
+                                pageSize={pageSize}
+                                handlePageChange={handlePageChange}
+                            />
+                        </div>
+                    )}
                 </div>
             )}
         </section>

@@ -9,15 +9,15 @@ interface itemTypes {
 
 interface propsType {
     item: itemTypes;
-    field: any;
+    field?: any;
 }
 
 const AmountWithCurrency = ({ item, field }: propsType) => {
-    const { grandTotal, billCurrency, currency } = item;
+    const { grandTotal, billCurrency, currency }: itemTypes = item;
     return (
         <div>
             <div>
-                {field?.key === "grandTotal" && (
+                {field.key === "grandTotal" && (
                     <div>
                         {getFormattedPrice(
                             grandTotal,

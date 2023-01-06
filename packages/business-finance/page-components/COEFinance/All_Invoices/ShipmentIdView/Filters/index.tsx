@@ -1,27 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Filter from "../../../../commons/Filters";
-import SegmentedControl from "../../../../commons/SegmentedControl";
-import { APPROVAL, JOBS } from "../../../constants/shipmentListFilters";
 import styles from "./styles.module.css";
 import controls from "./controls";
-import { Input } from "@cogoport/components";
-import { IcMSearchdark } from "@cogoport/icons-react";
-
+import SegmentedControl from "../../../../commons/SegmentedControl";
+import { APPROVAL, JOBS } from "../../../constants/shipmentListFilters";
 interface propsType {
-    hookSetters: {};
+    hookSetters: { setFilters };
     filters: {};
+    jobs: string;
+    setJobs: Function;
+    pending_approval: string;
+    setPending_approval: Function;
 }
 
-const Filters = ({ hookSetters, filters }: propsType) => {
+const Filters = ({
+    hookSetters,
+    filters,
+    pending_approval,
+    setPending_approval,
+    jobs,
+    setJobs,
+}: propsType) => {
     return (
         <div className={styles.container}>
-            <div className={styles.service}>
-                <Filter
-                    controls={controls}
-                    filters={filters}
-                    setFilters={hookSetters.setFilters}
+            <div className={styles.segmented}>
+                <SegmentedControl
+                    options={APPROVAL}
+                    activeTab={pending_approval}
+                    setActiveTab={setPending_approval}
+                    background="#FFFAEB"
+                    color="#ED3726"
+                />
+                <SegmentedControl
+                    options={JOBS}
+                    activeTab={jobs}
+                    setActiveTab={setJobs}
+                    background="#FFFAEB"
+                    color="#ED3726"
                 />
             </div>
+            <Filter
+                controls={controls}
+                filters={filters}
+                setFilters={hookSetters.setFilters}
+            />
         </div>
     );
 };

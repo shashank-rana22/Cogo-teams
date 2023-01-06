@@ -55,9 +55,12 @@ const AccordianCards = ({
                                     {itemData.serial_id}
                                 </div>
                             </div>
-                            <div className={styles.pendingText}>
-                                Pending Approval - {itemData.pending_approvals}
-                            </div>
+                            {itemData.pending_approvals === 0 ? null : (
+                                <div className={styles.pendingText}>
+                                    Pending Approval -{" "}
+                                    {itemData.pending_approvals}
+                                </div>
+                            )}
                         </div>
                         <div className={styles.freightWidth}>
                             <div className={styles.freight}>

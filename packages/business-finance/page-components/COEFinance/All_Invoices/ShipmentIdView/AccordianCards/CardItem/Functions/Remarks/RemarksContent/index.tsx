@@ -11,7 +11,7 @@ interface propsType {
 const RemarksContent = ({ item }: propsType) => {
     return (
         <div>
-            {item?.remarks ? (
+            {item.remarks ? (
                 <div className={styles.conatiner}>{item.remarks}</div>
             ) : (
                 "No remarks"

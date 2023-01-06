@@ -11,7 +11,7 @@ interface propsType {
 }
 
 const Status = ({ item, field }: propsType) => {
-    const { status } = item;
+    const { status }: itemTypes = item;
     return (
         <div>
             <div>

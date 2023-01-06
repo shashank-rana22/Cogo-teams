@@ -17,10 +17,8 @@ interface UseSelectorProps {
 }
 
 interface AllParams {
-    // activeJobs?: string;
-    // pendingApproval?: string;
-    // serial_id?: string;
-    // setSerialId?: Function;
+    jobs?: string;
+    pending_approval?: string;
 }
 
 const useShipmentIdView = (allParams?: {}) => {
@@ -39,16 +37,6 @@ const useShipmentIdView = (allParams?: {}) => {
             },
             { autoCancel: false }
         );
-
-    // const [{ loading: statsLoading, data: statsData }, statsTrigger] =
-    //     useRequestBf(
-    //         {
-    //             url: "/purchase/bills/stats",
-    //             method: "get",
-    //             authkey: "get_purchase_bills_stats",
-    //         },
-    //         { autoCancel: false }
-    //     );
 
     const listAPi = (restFilters: dataType, currentPage: dataType) => {
         const allFilters = {
@@ -80,23 +68,10 @@ const useShipmentIdView = (allParams?: {}) => {
         });
     };
 
-    // const handleStats = async () => {
-    //     try {
-    //         await statsTrigger();
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     handleStats();
-    // }, []);
-
     const {
         loading,
         page,
         filters,
-        setFilters,
         list: { data, total, total_page, fullResponse },
         hookSetters,
         refetch,
@@ -106,7 +81,6 @@ const useShipmentIdView = (allParams?: {}) => {
     });
 
     const handleRefetch = () => {
-        // handleStats();
         refetch();
     };
 
@@ -123,8 +97,6 @@ const useShipmentIdView = (allParams?: {}) => {
         hookSetters,
         refetchList: refetch,
         refetch: handleRefetch,
-        // statsData,
-        // statsLoading,
         apiLoading,
     };
 };

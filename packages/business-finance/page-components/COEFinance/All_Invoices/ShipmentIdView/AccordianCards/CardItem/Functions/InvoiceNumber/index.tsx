@@ -28,12 +28,12 @@ const InvoiceNumber = ({ item, field }: propsType) => {
 
     return (
         <div>
-            {field?.key === "billNumber" && (
+            {field.key === "billNumber" && (
                 <>
                     <div
                         className={styles.invoice}
                         onClick={() =>
-                            window.open(item?.billDocumentUrl, "_blank")
+                            window.open(item.billDocumentUrl, "_blank")
                         }
                     >
                         {item?.billNumber}
@@ -41,17 +41,17 @@ const InvoiceNumber = ({ item, field }: propsType) => {
                     <div className={styles.color}>{handleBillType(item)}</div>
                 </>
             )}
-            {field?.key === "invoiceNumber" && (
+            {field.key === "invoiceNumber" && (
                 <div
                     className={styles.invoice}
                     onClick={() =>
                         window.open(
-                            item?.invoicePdfUrl || item?.proformaPdfUrl,
+                            item.invoicePdfUrl || item.proformaPdfUrl,
                             "_blank"
                         )
                     }
                 >
-                    {item?.invoiceNumber || item?.proformaNumber}
+                    {item.invoiceNumber || item.proformaNumber}
                 </div>
             )}
         </div>
