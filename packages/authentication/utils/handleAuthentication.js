@@ -1,3 +1,4 @@
+import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { deleteCookie, getCookie } from 'cookies-next';
 
@@ -31,6 +32,9 @@ const handleAuthentication = async ({
 	req,
 	pathname,
 }) => {
+	// const { basePath } = Router;
+	// console.log({ a: Object.keys(req.server) });
+
 	let asPrefix = '';
 	const actualAsPath = asPath.split('?')[0];
 
@@ -44,7 +48,8 @@ const handleAuthentication = async ({
 			return { asPrefix };
 		}
 
-		const path = `${DEFAULT_PATHS.UNAUTHENTICATED}?redirectPath=${asPath}`;
+		const path = `/v2${asPrefix}${DEFAULT_PATHS.UNAUTHENTICATED}?redirectPath=${asPath}`;
+
 		redirect({ isServer, res, path });
 		return { asPrefix };
 	}
@@ -69,7 +74,7 @@ const handleAuthentication = async ({
 			return { asPrefix };
 		}
 
-		const path = `${DEFAULT_PATHS.UNAUTHENTICATED}?redirectPath=${asPath}`;
+		const path = `${asPrefix}${DEFAULT_PATHS.UNAUTHENTICATED}?redirectPath=${asPath}`;
 
 		redirect({ isServer, res, path });
 		return { asPrefix };
@@ -83,15 +88,12 @@ const handleAuthentication = async ({
 
 	const partner_id = userData.partner.id;
 
-	asPrefix = `/${partner_id || ''}`;
+	asPrefix = `/v2/${partner_id || ''}`;
 	const navigations = Object.keys(permissions_navigations || {});
 
 	if (partner_id && [`/${partner_id}`, '/'].includes(asPath) && navigations.length > 0) {
-		redirect({
-			isServer,
-			res,
-			path: `${asPrefix}/home`,
-		});
+		console.log('3');
+		redirect({ isServer, res, path: `${asPrefix}/home` });
 
 		return { asPrefix, query: { partner_id } };
 	}
@@ -101,6 +103,7 @@ const handleAuthentication = async ({
 	console.log('defaultRoute', asPath);
 
 	if (!asPath.startsWith(asPrefix)) {
+		console.log('4');
 		redirect({ isServer, res, path: defaultRoute });
 	}
 

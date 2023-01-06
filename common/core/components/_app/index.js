@@ -1,5 +1,5 @@
 import '@cogoport/components/dist/themes/dawn.css';
-import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
+// import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
 import { Router, RoutesProvider } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
@@ -9,18 +9,19 @@ import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
 import { useEffect } from 'react';
-import { SWRConfig } from 'swr';
+// import { SWRConfig } from 'swr';
 
 import Layout from './layout';
+import SessionCheck from './SessionCheck';
 
-const isServer = typeof window === 'undefined';
+// const isServer = typeof window === 'undefined';
 
-if (!isServer) {
-	window[process.env.NEXT_PUBLIC_ADMIN_STORE] = store;
-}
+// if (!isServer) {
+// 	window[process.env.NEXT_PUBLIC_ADMIN_STORE] = store;
+// }
 
 function MyApp({
-	Component, pageProps, pathPrefix, asPrefix, query, profile, generalData,
+	Component, pageProps, pathPrefix, asPrefix, query,
 }) {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
@@ -32,84 +33,86 @@ function MyApp({
 			pageProgessBar.done();
 		});
 	}, []);
-	store.dispatch(setProfileState(profile));
-	store.dispatch(setGeneralState(generalData));
+	// store.dispatch(setProfileState(profile));
+	// store.dispatch(setGeneralState(generalData));
 
 	return (
-		<SWRConfig value={{
-			provider : () => new Map(),
-			suspense : true,
-			fallback : { 'https://api.github.com/repos/vercel/swr': null },
-		}}
-		>
-			<Provider store={store} initialProps={{ profile }}>
-				<RoutesProvider config={{ pathPrefix, asPrefix, query }}>
+	// <SWRConfig value={{
+	// 	provider : () => new Map(),
+	// 	suspense : true,
+	// 	fallback : { 'https://api.github.com/repos/vercel/swr': null },
+	// }}
+	// >
+		<Provider store={store}>
+			<RoutesProvider config={{ pathPrefix, asPrefix, query }}>
+				<SessionCheck>
 					<title>Admin | Cogoport</title>
 					<Layout layout={pageProps.layout || 'authenticated'}>
 						<Component {...pageProps} />
 					</Layout>
-				</RoutesProvider>
-			</Provider>
-		</SWRConfig>
+				</SessionCheck>
+			</RoutesProvider>
+		</Provider>
+	// </SWRConfig>
 	);
 }
 
-MyApp.getInitialProps = async ({ Component, ctx }) => {
-	const {
-		req, pathname, asPath, query, locale,
-	} = ctx;
+// MyApp.getInitialProps = async ({ Component, ctx }) => {
+// 	const {
+// 		req, pathname, asPath, query, locale,
+// 	} = ctx;
 
-	let modifiedAsPath = asPath;
+// 	let modifiedAsPath = asPath;
 
-	if (pathname.includes('[partner_id]')) {
-		const { partner_id } = query;
-		const modifiedPathname = pathname.replace('/[partner_id]/', '');
-		modifiedAsPath = `/${partner_id}/${modifiedPathname}`;
-	}
+// 	if (pathname.includes('[partner_id]')) {
+// 		const { partner_id } = query;
+// 		const modifiedPathname = pathname.replace('/[partner_id]/', '');
+// 		modifiedAsPath = `/${partner_id}/${modifiedPathname}`;
+// 	}
 
-	const pathPrefix = '/[partner_id]';
+// 	const pathPrefix = '/[partner_id]';
 
-	const ctxParams = {
-		...ctx,
-		store,
-		req,
-		isServer,
-		pathPrefix,
-		asPath: modifiedAsPath,
-	};
+// 	const ctxParams = {
+// 		...ctx,
+// 		store,
+// 		req,
+// 		isServer,
+// 		pathPrefix,
+// 		asPath: modifiedAsPath,
+// 	};
 
-	const unPrefixedPath = `/${pathname.replace('/[partner_id]/', '')}`;
+// 	const unPrefixedPath = `/${pathname.replace('/[partner_id]/', '')}`;
 
-	const { asPrefix, query: qError } = await handleAuthentication(ctxParams);
+// 	// const { asPrefix, query: qError } = await handleAuthentication(ctxParams);
 
-	const { profile } = store.getState();
+// 	const { profile } = store.getState();
 
-	const generalData = {
-		pathname,
-		asPath : modifiedAsPath,
-		unPrefixedPath,
-		pathPrefix,
-		asPrefix,
-		locale,
-		scope  : 'partner',
-		query  : { ...query, ...(qError || {}) },
-		isServer,
-	};
+// 	const generalData = {
+// 		pathname,
+// 		asPath : modifiedAsPath,
+// 		unPrefixedPath,
+// 		pathPrefix,
+// 		// asPrefix,
+// 		locale,
+// 		scope  : 'partner',
+// 		// query  : { ...query, ...(qError || {}) },
+// 		isServer,
+// 	};
 
-	const initialProps = Component.getInitialProps
-		? await Component.getInitialProps(ctxParams)
-		: {};
+// 	const initialProps = Component.getInitialProps
+// 		? await Component.getInitialProps(ctxParams)
+// 		: {};
 
-	return {
-		pageProps : { ...(initialProps || {}) },
-		pathname,
-		pathPrefix,
-		asPrefix,
-		asPath    : modifiedAsPath,
-		query,
-		profile,
-		generalData,
-	};
-};
+// 	return {
+// 		pageProps : { ...(initialProps || {}) },
+// 		pathname,
+// 		pathPrefix,
+// 		// asPrefix,
+// 		asPath    : modifiedAsPath,
+// 		query,
+// 		profile,
+// 		generalData,
+// 	};
+// };
 
 export default appWithTranslation(MyApp);

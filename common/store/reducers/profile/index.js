@@ -1,17 +1,22 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-export const counterSlice = createSlice({
+export const profileSlice = createSlice({
 	name         : 'profile',
-	initialState : {},
-	reducers     : {
-		setProfileState: (state, data) => {
-			state = { ...(state || {}), ...(data?.payload || {}) };
+	initialState : {
+		_initialized: false,
+	},
+	reducers: {
+		setProfileState: (state, action) => {
+			console.log({ a: action.payload });
+			state = { ...state, ...action.payload };
+			console.log({ state });
 			return state;
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setProfileState } = counterSlice.actions;
+export const { setProfileState } = profileSlice.actions;
 
-export default counterSlice.reducer;
+export default profileSlice.reducer;

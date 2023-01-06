@@ -11,6 +11,8 @@ export async function middleware(req) {
 		return;
 	}
 
+	console.log({ aa: req.nextUrl });
+
 	if (req.nextUrl.locale === 'default') {
 		const cookieLocale = req.cookies.get('NEXT_LOCALE');
 

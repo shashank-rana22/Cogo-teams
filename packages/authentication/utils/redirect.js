@@ -4,9 +4,7 @@ const redirect = ({
 	isServer, res, path, hardRedirect,
 }) => {
 	if (isServer) {
-		res.writeHead(302, {
-			Location: path,
-		});
+		res.writeHead(302, { Location: path });
 		res.end();
 	} else if (hardRedirect) {
 		// eslint-disable-next-line no-undef
