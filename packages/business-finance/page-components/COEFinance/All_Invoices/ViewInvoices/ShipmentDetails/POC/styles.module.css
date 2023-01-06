@@ -13,7 +13,6 @@
 
 .iconView {
   display: flex;
-  width: 50%;
   justify-content: flex-end;
   color: "#ED3726";
   cursor: pointer;

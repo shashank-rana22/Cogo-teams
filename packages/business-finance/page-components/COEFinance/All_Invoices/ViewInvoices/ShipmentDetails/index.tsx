@@ -85,7 +85,7 @@ const ShipmentDetails = ({data,orgId,jobNumber}:ShipmentDetailsInterface)=>{
             <div className={styles.documents}> { showDocuments && <Documents  shipmentId={shipmentId}/> } </div>               
         </div>
 
-        <div style={{display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
+        <div>
         {collectionPartyId ? (
 				<div className={styles.variance} >
 					<div>

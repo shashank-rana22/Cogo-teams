@@ -14,7 +14,7 @@ interface LineItemCard {
 
 
 const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
-    const [radio , setRadio ] = useState(false)
+    const [radio , setRadio ] = useState({})
     const [popover, setPopover] = useState(false)
     const [showRejectedModal , setShowRejectedModal] = useState({ id : ""})
 
