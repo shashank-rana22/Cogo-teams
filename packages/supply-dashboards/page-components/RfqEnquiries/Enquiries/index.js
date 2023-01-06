@@ -13,6 +13,7 @@ function Enquiries() {
 	const [selectedCard, setSelectedCard] = useState(null);
 	const { query, push } = useRouter();
 	const rfqId = query?.id;
+
 	const {
 		loading,
 		list:data,
@@ -49,7 +50,6 @@ function Enquiries() {
 					<CardList
 						data={data}
 						loading={loading}
-						rfq={data}
 						selectedCard={selectedCard}
 						setSelectedCard={setSelectedCard}
 						setPage={setPage}

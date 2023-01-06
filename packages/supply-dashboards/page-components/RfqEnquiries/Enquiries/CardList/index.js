@@ -5,12 +5,12 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 
 function CardList({
-	data, setPage, loading, rfq, selectedCard, setSelectedCard,
+	data, setPage, loading, selectedCard, setSelectedCard,
 }) {
 	return (
 		<div className={styles.leftpanel}>
 			<div className={styles.heading}>
-				{rfq?.total_port_pair}
+				{data?.total}
 				{' '}
 				Port Pairs
 			</div>
