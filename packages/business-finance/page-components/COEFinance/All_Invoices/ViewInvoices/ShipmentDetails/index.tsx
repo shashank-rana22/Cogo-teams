@@ -9,7 +9,6 @@ import PdfDisplay from "./PdfDisplay/index";
 import POC from './POC/index';
 import useListShipment from "../../../hook/useListShipment";
 import useGetVariance from "../../../hook/useGetVariance";
-import { Button } from "@cogoport/components";
 import VarianceView from "./VarianceView/index";
 
 interface JobInterface {
@@ -41,6 +40,7 @@ const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
     const {data:shipmentData} = useListShipment(jobNumber);
     const shipmentId = shipmentData?.list[0]?.id;
 
+console.log(varianceFullData,"varianceFullData");
 
 
     return(
@@ -107,6 +107,7 @@ const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
         {showVariance ? (
 				<VarianceView
 					show={showVariance}
+                    loading={loading}
 					onClose={() => setShowVariance(false)}
 					data={varianceFullData}
 				/>

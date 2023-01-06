@@ -1,7 +1,8 @@
 import React from 'react';
 import { Modal } from '@cogoport/components';
 import List from '../../../../../commons/List/index';
-
+import {ConfigType, ListDataProps, FunctionObjects} from '../../../../../commons/Interfaces/index';
+import styles from './styles.module.css'
 interface DataInterface {
     currency?:string
     data?:Array<object>
@@ -10,9 +11,10 @@ interface DataInterface {
 interface VarianceViewInterface {
     show?:boolean
     onClose?:()=> void
-    data: DataInterface
+    data: ListDataProps
+    loading?:boolean
 }
-const columns = {
+const config:ConfigType = {
     showHeader         : true,
 	headerStyles       : { marginBottom: '16px', borderRadius: '8px', background: '#333',marginTop:'20px' },
     bodyStyles          :{color:' #333333',fontWeight: '400',fontSize: '12px',lineHeight: '14px'},
@@ -20,50 +22,57 @@ const columns = {
 	fields             : [
         {
             label: 'Purchase Invoice Line Item',
-            func: (item:any) => (
-                <div>
-                    <span>
-                        {(item?.purchase_line_items || [])
-                            .map((charge) => charge.name)
-                            .join(',')}
-                    </span>
-                    <span style={{ marginLeft: 4 }}>
-                        ({item?.currency} {item?.purchase_invoice})
-                    </span>
-                </div>
-            ),
+            func:'PurchaseInvoiceLineItem',
             span: 5,
         },
         {
             label: 'Live Invoice Line Item',
-            func: (item:any) => (
-                <div>
-                    <span>
-                        {(item?.buy_line_items || []).map((charge) => charge.name).join(',')}
-                    </span>
-                    <span style={{ marginLeft: 4 }}>
-                        ({item?.currency} {item?.live_invoice})
-                    </span>
-                </div>
-            ),
+            func: 'LiveInvoiceLineItem',
             span: 5,
         },
         {
             label: 'Variance',
-            func: (item:any) => `${item?.currency} ${item?.variance}`,
+            func: 'Variance',
             span: 2,
         },
     ]
 	
 };
 
-const VarianceView = ({ show, onClose, data }:VarianceViewInterface) => {
-
+const VarianceView = ({ show, onClose, data,loading }:VarianceViewInterface) => {
+    const functions:FunctionObjects={
+        PurchaseInvoiceLineItem:  (item:any) => (
+            <div>
+                <span>
+                    {(item?.purchase_line_items || [])
+                        .map((charge:any) => charge.name)
+                        .join(',')}
+                </span>
+                <span style={{ marginLeft: 4 }}>
+                    ({item?.currency} {item?.purchase_invoice})
+                </span>
+            </div>
+        ),
+        LiveInvoiceLineItem: (item:any) => (
+            <div>
+                <span>
+                    {(item?.buy_line_items || []).map((charge:any) => charge.name).join(',')}
+                </span>
+                <span style={{ marginLeft: 4 }}>
+                    ({item?.currency} {item?.live_invoice})
+                </span>
+            </div>
+        ),
+        Variance: (item:any) =>( <div>{item?.currency} {item?.variance}</div> ),
+       
+    };
+   
 	return (
 		<Modal size="lg" show={show} onClose={onClose} >
+            <Modal.Header title="Variance" />
             <Modal.Body>
                 <div className={styles.modalContainer}>
-                        <List config={columns} itemData={data}  />
+                <List config={config || {}}  itemData={data} loading={loading}  functions={functions}/>
                 </div>
             </Modal.Body>
 		</Modal>
