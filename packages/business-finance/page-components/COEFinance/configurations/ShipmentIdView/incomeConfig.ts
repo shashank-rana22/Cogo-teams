@@ -8,26 +8,26 @@ export const incomeConfig = {
         {
             key: "invoiceNumber",
             label: "Invoice No.",
-            span: 2,
+            span: 2.4,
             func: "renderInvoiceNumber",
         },
         {
             label: "Customer Name",
             key: "businessName",
             func: "renderName",
-            span: 2,
+            span: 2.3,
         },
         {
             label: "Invoice Amount",
             key: "grandTotal",
             func: "renderAmount",
-            span: 1.5,
+            span: 2,
         },
         {
             label: "Service Ops 2",
             key: "createdBy",
 
-            span: 2,
+            span: 1.9,
         },
         {
             label: "Invoice Date",
@@ -39,18 +39,18 @@ export const incomeConfig = {
             label: "Payment Due Date",
             key: "dueDate",
             func: "renderDates",
-            span: 2,
+            span: 2.2,
         },
         {
             label: "Last Modified Date",
             key: "createdDate",
             func: "renderDates",
-            span: 2,
+            span: 2.2,
         },
         {
             label: "Status",
             key: "status",
-            span: 3,
+            span: 2.3,
             func: "renderStatus",
         },
         {
@@ -60,7 +60,7 @@ export const incomeConfig = {
             span: 1,
         },
         {
-            span: 1,
+            span: 2,
             func: "renderInvoices",
         },
     ],

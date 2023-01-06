@@ -48,7 +48,6 @@ const ModifiedName = ({ item, field }: propsType) => {
                     {businessName.length > 18 ? (
                         <Tooltip
                             interactive
-                            theme="light"
                             placement="top"
                             content={businessName}
                         >

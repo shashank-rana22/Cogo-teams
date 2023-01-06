@@ -29,14 +29,13 @@ const useShipmentIdView = (allParams?: {}) => {
         })
     );
 
-    const [{ data: shipmentData, loading: apiLoading, error }, trigger] =
-        useRequest(
-            {
-                url: "list_shipments",
-                method: "get",
-            },
-            { autoCancel: false }
-        );
+    const [{ data: shipmentData, loading: apiLoading }, trigger] = useRequest(
+        {
+            url: "list_shipments",
+            method: "get",
+        },
+        { autoCancel: false }
+    );
 
     const listAPi = (restFilters: dataType, currentPage: dataType) => {
         const allFilters = {
@@ -97,7 +96,6 @@ const useShipmentIdView = (allParams?: {}) => {
         hookSetters,
         refetchList: refetch,
         refetch: handleRefetch,
-        apiLoading,
     };
 };
 

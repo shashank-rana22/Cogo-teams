@@ -2,13 +2,13 @@ import React from "react";
 import List from "../../../../../commons/List/index";
 import useListBills from "../../../../hook/useListBills";
 import CardHeader from "../CardHeader/index";
-import AmountWithCurrency from "./Functions/AmountWithCurrency/index";
-import FormatedDate from "./Functions/FormatedDate/index";
-import InvoiceNumber from "./Functions/InvoiceNumber/index";
-import ModifiedName from "./Functions/ModifiedName/index";
-import Remarks from "./Functions/Remarks/index";
-import Status from "./Functions/Status/index";
-import ViewInvoice from "./Functions/ViewInvoice/index";
+import AmountWithCurrency from "./RenderData/AmountWithCurrency/index";
+import FormatedDate from "./RenderData/FormatedDate/index";
+import InvoiceNumber from "./RenderData/InvoiceNumber/index";
+import ModifiedName from "./RenderData/ModifiedName/index";
+import Remarks from "./RenderData/Remarks/index";
+import Status from "./RenderData/Status/index";
+import ViewInvoice from "./RenderData/ViewInvoice/index";
 import styles from "./styles.module.css";
 
 interface propsType {
