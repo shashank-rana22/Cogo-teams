@@ -15,7 +15,7 @@ const ViewInvoices =()=>{
 		accPaymentLoading,
 		paymentsData,
 	} = useGetBill({ billId:billId, orgId:orgId});
-   
+    
     return(
     <div>
         <Header/>

@@ -3,10 +3,48 @@ import { IcCFtick } from "@cogoport/icons-react";
 import React, { useState } from "react";
 import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
-import { Modal, Textarea} from '@cogoport/components'
+import { Modal, Textarea ,Checkbox} from '@cogoport/components'
 
-const ShipmentDetailsCard = ({data}:any) =>{
-    const [showValue, setShowValue ] =  useState([])
+interface BuyerDetailInterface {
+    entityCode?:string
+    organizationName?:string
+    address?:string
+    registrationNumber?:string
+    taxNumber?:string
+}
+
+interface SellerDetailInterface {
+    organizationName?:string
+    registrationNumber?:string
+    taxNumber?:string
+}
+
+interface SellerBankDetailInterface {
+    bankName?:string
+    accountNumber?:string
+    ifscCode?:string
+}
+
+interface BillInterface {
+    billNumber?:string
+    billDate?:string
+    status?:string
+    placeOfSupply?:string
+}
+
+interface DataInterface {
+    lineItems?:Array<object>
+    buyerDetail?:BuyerDetailInterface
+    sellerBankDetail?:SellerBankDetailInterface
+    sellerDetail?:SellerDetailInterface
+    bill?:BillInterface
+}
+interface ShipmentDetailsCardInterface{
+    data?:DataInterface
+}
+
+const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
+    const [showValue, setShowValue ] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
     const [showRejected , setShowRejected] = useState({})
     
@@ -23,7 +61,7 @@ const ShipmentDetailsCard = ({data}:any) =>{
         {id :1, name:'billing-details', label:'Bank Details - Collection Party'},
         {id :2, name:'billing-party', label:'Billing Party'},
         {id :3, name:'invoice-details', label:'Invoice Details'},
-    ]);
+    ] as any);
 
 
     const handleClick = (id:number) => { 
@@ -34,12 +72,12 @@ const ShipmentDetailsCard = ({data}:any) =>{
     }
 
     const handleClickUndo = (id:number) => {
-       const undoData = showValue.filter(item => item !== id)
+       const undoData = showValue.filter((item:any) => item !== id)
        setShowValue(undoData)
     }
 
     const handleClickReject =(id:number) => {
-        setShowRejected((previousActions) => ({
+        setShowRejected((previousActions:any) => ({
 			...previousActions,
 			[id]: !previousActions[id],
 		}));
@@ -49,13 +87,10 @@ const ShipmentDetailsCard = ({data}:any) =>{
     const onClose = () => {
 		setShowRejected(false);
 	};
-    console.log(Object.keys(showRejected)[0]==="1","showRejected");
     
 
 return(
     <div>
-
-
 { showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem}/> : 
     <div>
         <div className={styles.mainHeader}>
@@ -68,7 +103,7 @@ return(
             </div>
         </div>
 
-{  DetailsCard.map((itemData) => {
+{  DetailsCard.map((itemData:any) => {
         
         const {id , label = ''} = itemData || {}
         
@@ -76,21 +111,45 @@ return(
     <>
 
         {
-            showRejected[id] &&                 
-                <Modal size="lg" show={showRejected[id]} onClose={onClose}>
+            showRejected[id as keyof typeof showRejected] &&                 
+                <Modal size="lg" show={showRejected[id as keyof typeof showRejected]} onClose={onClose}>
                     <Modal.Header title="CHOOSE THE DETAiLS YOU WANT TO REJECT" />
-
+                    <Modal.Body>
                     
                         {Object.keys(showRejected).includes("1") &&
-                                            <div className={styles.rejectedBillingPartyContainer}>
-                                                  <div style={{marginBottom:'8px'}}>Name</div>
-                                                  <div style={{marginBottom:'8px'}}> Bank Name </div>
-                                                  <div style={{marginBottom:'8px'}}> Account Number </div>
-                                                  <div style={{marginBottom:'8px'}}> IFSC </div>
-                                                  <div style={{marginBottom:'8px'}}>PAN Number</div>
-                                                  <div style={{marginBottom:'8px'}}>GST Number </div>
+                                            <div>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Name</div>
+                                                </div>
 
-                                                
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Bank Name </div>
+                                                </div>
+
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Account Number </div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>IFSC</div>
+                                                </div>
+
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>PAN Number</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>GST Number </div>
+                                                </div>
+                                                 
                                                 <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
                                                
                                             </div>
@@ -98,26 +157,56 @@ return(
                             }
 
                         {Object.keys(showRejected).includes("2")&&     
-                                            <div className={styles.rejectedBillingPartyContainer}>
-                                                <div style={{marginBottom:'8px'}}>Entity </div>
-                                                <div style={{marginBottom:'8px'}}>Address </div>
-                                                <div style={{marginBottom:'8px'}}>PAN Number </div>
-                                                <div style={{marginBottom:'8px'}}>GST Number </div>
+                                            <div>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Entity</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Address</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>PAN Number </div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>GST Number</div>
+                                                </div>
 
                                                 <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
                                             </div>
                             }
                         {Object.keys(showRejected).includes("3") &&
-                                    <div className={styles.rejectedBillingPartyContainer}>
-                                            <div style={{marginBottom:'8px'}}>Invoice Number </div>
-                                            <div style={{marginBottom:'8px'}}>Invoice Date </div>
-                                            <div style={{marginBottom:'8px'}}>Status </div>
-                                            <div style={{marginBottom:'8px'}}>Place Of Supply</div>
+                                    <div>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Invoice Number</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Invoice Date</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Status</div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div>Place Of Supply</div>
+                                                </div>
 
                                             <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
                                     </div>
                             }
-            
+                        </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={onClose}>Submit</Button>
                     </Modal.Footer>

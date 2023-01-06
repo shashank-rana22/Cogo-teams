@@ -6,6 +6,34 @@ interface UseSelectorProps {
     profile?: object;
 }
 
+interface JobInterface {
+    jobNumber:string
+
+}
+
+interface BillAdditionalObjectInterface {
+    collectionPartyId:string
+}
+
+interface SellerDetail {
+    organizationName?:string
+}
+
+interface Response{
+    job:JobInterface
+    bill :object
+    billAdditionalObject : BillAdditionalObjectInterface
+    sellerDetail: SellerDetail
+}
+
+interface ListInterface{
+    data: Array<object>,
+    total: number,
+    total_page: number,
+    fullResponse: Response | {},
+    reverted: number,
+}
+
 const useGetFiniteList = (hook: any, params = {}) => {
     const { pathname } = useSelector(
         ({ general, profile }: UseSelectorProps) => ({
@@ -17,14 +45,13 @@ const useGetFiniteList = (hook: any, params = {}) => {
     const [loading, setLoading] = useState(true);
     const [initialPath] = useState(pathname);
     const [filters, setFilters] = useState({ page: 1 });
-    const [list, setList] = useState({
+    const [list, setList] = useState<ListInterface>({
         data: [],
         total: 0,
         total_page: 0,
-        fullResponse: {},
+        fullResponse : {}, 
         reverted: 0,
     });
-
     const { page, ...restFilters } = filters;
 
     const refetch = () => {

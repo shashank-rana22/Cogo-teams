@@ -1,20 +1,19 @@
-import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
 import React,{ useState, useEffect } from 'react';
-import { Skeleton, ToolTip } from '@cogoport/front/components/admin';
-import usei18n, { getFormattedPrice } from '@cogo/i18n';
-import {
-	Container,
-	DullCircle,
-	Line,
-	LineContainer,
-	SubContainer,
-	EventContainer,
-	DateContainer,
-	AmountContainer,
-	UserContainer,
-} from './styles';
+import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
+import { Placeholder, Tooltip } from '@cogoport/components';
+import styles from './styles.module.css'
 
-function formatAMPM(date) {
+interface DataInterface {
+	eventName:string
+	occurredAt:string
+
+}
+interface  POCTimeLineInterface {
+	loading:boolean
+	data:Array<DataInterface>
+}
+
+function formatAMPM(date:any) {
 	let hours = date.getHours();
 	let minutes = date.getMinutes();
 	const ampm = hours >= 12 ? 'pm' : 'am';
@@ -25,8 +24,9 @@ function formatAMPM(date) {
 	return strTime;
 }
 
-const POCTimeLine = ({ data, loading }) => {
-	const { numLocale } = usei18n();
+
+const POCTimeLine = ({ data, loading }:POCTimeLineInterface) => {
+
 	const [complete, setComplete] = useState(false);
 
 	const timeLine = data || [{}];
@@ -49,7 +49,7 @@ const POCTimeLine = ({ data, loading }) => {
 	const timeLineInitialStage = () => {
 		if (loading) {
 			return (
-				<Skeleton
+				<Placeholder
 					height="35px"
 					width="35px"
 					className="circle"
@@ -63,38 +63,38 @@ const POCTimeLine = ({ data, loading }) => {
 		}
 
 		return (
-			<SubContainer>
+			<div className={styles.subContainer}>
 				{timeLine[0]?.eventName === 'FULL' ||
 				timeLine[0]?.eventName === 'OVERPAID' ? null : (
-					<DateContainer>
+					<div className={styles.dateContainer}>
 						{dateWithTimeForIndex[0]}
 						<div>{formatAMPM(new Date(timeLine[0]?.occurredAt))}</div>
-					</DateContainer>
+					</div>
 				)}
-				<DullCircle />
+				<div className={styles.dullCircle}  />
 				{timeLine[0]?.eventName === 'FULL' ||
 				timeLine[0]?.eventName === 'OVERPAID' ? null : (
-					<EventContainer>PAYMENT DUE</EventContainer>
+					<div className={styles.eventContainer} >PAYMENT DUE</div>
 				)}
-			</SubContainer>
+			</div>
 		);
 	};
 
 	return (
-		<Container>
+		<div className={styles.container} >
 			{timeLine[0]?.eventName === 'POSTED' ? (
-				<SubContainer>
-					<DateContainer>
+				<div className={styles.subContainer} >
+					<div className={styles.dateContainer} >
 						{dateWithTimeForIndex[0]}
 						<div>{formatAMPM(new Date(timeLine[0]?.occurredAt))}</div>
-					</DateContainer>
+					</div>
 
 					<IcCFtick width="35px" height="35px" />
 
-					<EventContainer>POSTED</EventContainer>
-				</SubContainer>
+					<div className={styles.eventContainer}>POSTED</div>
+				</div>
 			) : (
-				<SubContainer>{timeLineInitialStage()}</SubContainer>
+				<div className={styles.subContainer}>{timeLineInitialStage()}</div>
 			)}
 
 			{(gettimeLineData() || []).map((item:any) => {
@@ -112,51 +112,51 @@ const POCTimeLine = ({ data, loading }) => {
 				return (
 					<div key={id}>
 						{loading ? (
-							<SubContainer>
-								<Skeleton height="60px" width="6px" margin="10px 0px 0px" />
-							</SubContainer>
+							<div className={styles.subContainer}>
+								<Placeholder height="60px" width="6px" margin="10px 0px 0px" />
+							</div>
 						) : (
-							<LineContainer>
-								<Line className={complete ? 'complete' : 'pending'} />
-							</LineContainer>
+							<div className={styles.lineContainer}>
+								<div className={complete ? styles.lineComplete : styles.linePending} />
+							</div>
 						)}
 
 						{loading ? (
-							<SubContainer>
-								<Skeleton
+							<div className={styles.subContainer}>
+								<Placeholder
 									height="35px"
 									width="35px"
 									className="circle"
 									margin="10px 0px 0px"
 								/>
-							</SubContainer>
+							</div>
 						) : (
-							<SubContainer>
-								<DateContainer>
+							<div className={styles.subContainer}>
+								<div className={styles.dateContainer} >
 									{dateWithTime[0]}
 									<div>{formatAMPM(new Date(occurredAt))}</div>
-								</DateContainer>
+								</div>
 
 								<div style={{ marginTop: '4px' }}>
 									<IcCFtick width="30px" height="30px" />
 								</div>
 
-								<EventContainer>
+								<div className={styles.eventContainer}>
 									{eventName === 'FULL' ? (
 										<span>PAID</span>
 									) : (
 										(eventName || '').replaceAll('_', ' ')
 									)}
 									<div style={{ display: 'flex', gap: '4px' }}>
-										<UserContainer>{performedByUser}</UserContainer>
+										<div className={styles.userContainer}>{performedByUser}</div>
 										{userEmail ? (
-											<ToolTip
+											<Tooltip
 												theme="light-border"
 												interactive
 												content={
-													<UserContainer>
+													<div className={styles.userContainer}>
 														<a href={`mailto:${userEmail}`}>{userEmail}</a>
-													</UserContainer>
+													</div>
 												}
 											>
 												<div style={{ cursor: 'pointer' }}>
@@ -164,7 +164,7 @@ const POCTimeLine = ({ data, loading }) => {
 														<IcCSendEmail />
 													</a>
 												</div>
-											</ToolTip>
+											</Tooltip>
 										) : null}
 									</div>
 
@@ -172,18 +172,18 @@ const POCTimeLine = ({ data, loading }) => {
 									eventName === 'PAYMENT_INITIATED' ||
 									eventName === 'PAYMENT_FAILED' ||
 									eventName === 'PARTIAL' ? (
-										<AmountContainer>
+										<div className={styles.amountContainer}>
 											Amount :-
-											{getFormattedPrice(numLocale, payingAmount, 'INR')}
-										</AmountContainer>
+											{/* {getFormattedPrice(numLocale, payingAmount, 'INR')} */}
+										</div>
 									) : null}
-								</EventContainer>
-							</SubContainer>
+								</div>
+							</div>
 						)}
 					</div>
 				);
 			})}
-		</Container>
+		</div>
 	);
 };
 export default POCTimeLine;

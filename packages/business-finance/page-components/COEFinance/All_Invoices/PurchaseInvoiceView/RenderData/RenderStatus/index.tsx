@@ -8,7 +8,7 @@ interface props{
 }
 
 function RenderStatus ({ item}:props)  {
-	const StatusItem = (item?.status).toLowerCase();
+	const StatusItem = (item?.status)?.toLowerCase();
 	
 	return (
 		<div>

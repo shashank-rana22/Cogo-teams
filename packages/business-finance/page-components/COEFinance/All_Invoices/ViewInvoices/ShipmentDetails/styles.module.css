@@ -55,10 +55,26 @@
 .shipmentDetailsCard {
   width: 40%;
 }
-.details{
+.details {
   width: 100%;
 }
 
-.documents{
+.documents {
   width: 100%;
+}
+.variance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  margin-right: 4px;
+  max-width: 30%;
+}
+.viewMore {
+  cursor: pointer;
+  color: #ed3726;
+  text-decoration: underline;
 }
