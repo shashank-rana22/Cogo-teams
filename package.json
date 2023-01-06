@@ -21,6 +21,7 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
+    "accept-language": "^3.0.18",
     "swr": "^2.0.0"
   },
   "devDependencies": {
