@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import getField from '../configurations';
 import FieldMutation from '../helpers/field-mutation';
@@ -24,7 +24,7 @@ const getDefaultValues = (oldfields) => {
 	return { defaultValues, fields: newfields };
 };
 
-const useUpdateSpotNegotiationRate = ({ service }) => {
+const useUpdateSpotNegotiationRate = ({ service, setSubmittedEnquiry, setActiveService }) => {
 	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
 
@@ -34,7 +34,7 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 
 	const { defaultValues, fields } = getDefaultValues(oldfields);
 	const {
-		control, watch, register, handleSubmit, getValues,
+		control, watch, register, handleSubmit, setValue,
 	} = useForm({ defaultValues });
 	const values = watch();
 	const { data } = useGetSpotNegotiationRate({
@@ -42,6 +42,34 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 		controls : fields,
 		service  : service.service,
 	});
+
+	useEffect(() => {
+		(Object.keys(data?.data || {})).forEach((item) => {
+			const val = data?.data[item];
+			if (val) {
+				if (item === 'line_items') {
+					setValue('line_items', val);
+				} else if (Array.isArray(val)) {
+					(Object.keys(val[0])).forEach((prefill) => {
+						if (prefill === 'line_items') {
+							setValue(item, val[0]?.[prefill]);
+						} else {
+							setValue(prefill, val[0]?.[prefill]);
+						}
+					});
+				} else {
+					(Object.keys(val)).forEach((prefill) => {
+						if (prefill === 'line_items') {
+							setValue(item, val?.[prefill]);
+						} else {
+							setValue(prefill, val?.[prefill]);
+						}
+					});
+				}
+			}
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(data)]);
 	const showElements = { sourced_by_id: !values?.service_provider_id };
 
 	const { newField } = FieldMutation({
@@ -67,6 +95,8 @@ const useUpdateSpotNegotiationRate = ({ service }) => {
 				return;
 			}
 			Toast.success('Negotiation Updated');
+			setActiveService(null);
+			setSubmittedEnquiry((prev) => [...prev, service?.service]);
 		} catch (err) {
 			Toast.error('something went wrong');
 		}

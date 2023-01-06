@@ -10,8 +10,11 @@ const nameMapping = {
 	customs_charge_codes           : 'line_items',
 };
 
-const chargeControls = ({ heading = '', charge_code_name }) => {
-	const name = nameMapping[charge_code_name];
+const chargeControls = ({ heading = '', charge_code_name, service = '' }) => {
+	let name = nameMapping[charge_code_name];
+	if (service === 'trailer' || service === 'ftl') {
+		name = 'line_items';
+	}
 	const controls = 		{
 		name,
 		type    : 'fieldArray',
@@ -32,6 +35,7 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 			{
 				name        : 'code',
 				type        : 'select',
+				label       : 'Charge Code',
 				valueKey    : 'code',
 				labelKey    : 'label',
 				placeholder : 'Select Charge',
@@ -41,6 +45,7 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 			{
 				name        : 'unit',
 				placeholder : 'Unit',
+				label       : 'Unit',
 				type        : 'select',
 				span        : 2,
 				rules       : { required: 'This is required' },
@@ -48,6 +53,7 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 			{
 				placeholder : 'Currency',
 				name        : 'currency',
+				label       : 'Currency',
 				type        : 'select',
 				span        : 3,
 				options     : currencies,
@@ -56,6 +62,7 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 			{
 				name        : 'price',
 				type        : 'number',
+				label       : 'Price',
 				span        : 3,
 				placeholder : 'Price Per Unit',
 				rules       : { required: 'This is required' },

@@ -1,5 +1,7 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsShippingLines }
+import {
+	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsShippingLines,
+}
 	from '@cogoport/forms/utils/getAsyncFields';
 import { merge, startCase } from '@cogoport/utils';
 
@@ -64,29 +66,6 @@ const FieldMutation = ({
 					childcontrol.options = newOptions;
 				}
 			});
-		}
-		if (name === 'freights') {
-			newControl = {
-				...newControl,
-				value: (data?.data?.freights[0]?.line_items || []).map((item) => ({
-					code     : item?.code,
-					unit     : item?.unit,
-					currency : item?.currency,
-					price    : item?.price,
-
-				})) || control?.value,
-			};
-		} else if (['destination_local', 'origin_local'].includes(name)) {
-			newControl = {
-				...newControl,
-				value: data?.data?.[name]?.line_items.map((item) => ({
-					code     : item?.code,
-					unit     : item?.unit,
-					currency : item?.currency,
-					price    : item?.price,
-
-				})) || control?.value,
-			};
 		}
 		return { ...newControl };
 	});

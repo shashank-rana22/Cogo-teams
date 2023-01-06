@@ -11,7 +11,7 @@ function NegotiateRate({ selectedCard }) {
 
 	return (
 		<div>
-			<div>Add Rates</div>
+			<div className={styles.heading}>Negotiate Rates</div>
 			<div className={styles.service}>
 				{(service || []).map((item) => (
 					<Service

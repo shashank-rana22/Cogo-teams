@@ -16,7 +16,7 @@ const columns = [
 		key    : 'customer_name',
 		render : (item) => (
 			<div className="card-list-item-value">
-				{item?.user?.name}
+				{item?.importer_exporter?.short_name}
 			</div>
 		),
 		flex: 3,

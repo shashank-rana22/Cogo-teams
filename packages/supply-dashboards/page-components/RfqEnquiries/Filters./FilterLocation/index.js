@@ -16,7 +16,7 @@ function FilterLocation({ filters, hookSetters }) {
 	}));
 	const heading = service === 'air_freight' ? 'airport' : 'port';
 	const handleChange = (value) => {
-		hookSetters?.setFilters({ ...filters, trade_type: value });
+		hookSetters?.setFilters({ ...filters, trade_type: value, page: 1 });
 	};
 	return (
 		<div className={styles.filter}>
@@ -53,7 +53,9 @@ function FilterLocation({ filters, hookSetters }) {
 					isClearable
 					placeholder="Select Origin Location"
 					value={filters[`origin_${heading}_id`]}
-					onChange={(value) => { hookSetters.setFilters({ ...filters, [`origin_${heading}_id`]: value }); }}
+					onChange={(value) => {
+						hookSetters.setFilters({ ...filters, [`origin_${heading}_id`]: value, page: 1 });
+					}}
 				/>
 				<div>
 					Destination
@@ -68,7 +70,7 @@ function FilterLocation({ filters, hookSetters }) {
 					value={filters[`destination_${heading}_id`]}
 					onChange={(value) => {
 						hookSetters.setFilters(
-							{ ...filters, [`destination_${heading}_id`]: value },
+							{ ...filters, [`destination_${heading}_id`]: value, page: 1 },
 						);
 					}}
 				/>
@@ -82,7 +84,7 @@ function FilterLocation({ filters, hookSetters }) {
 					isClearable
 					placeholder="Select Origin Country"
 					value={filters?.origin_country_id}
-					onChange={(value) => { hookSetters.setFilters({ ...filters, origin_country_id: value }); }}
+					onChange={(value) => { hookSetters.setFilters({ ...filters, origin_country_id: value, page: 1 }); }}
 				/>
 				<div>Destination Country</div>
 				<Select
@@ -91,7 +93,9 @@ function FilterLocation({ filters, hookSetters }) {
 					isClearable
 					placeholder="Select Destination Country"
 					value={filters?.destination_country_id}
-					onChange={(value) => { hookSetters.setFilters({ ...filters, destination_country_id: value }); }}
+					onChange={(value) => {
+						hookSetters.setFilters({ ...filters, destination_country_id: value, page: 1 });
+					}}
 				/>
 			</div>
 		</div>

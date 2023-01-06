@@ -7,6 +7,7 @@ import fclControl from './fcl-controls';
 import freeDaysSection from './free-days-section';
 import lclChildControlsFunc from './lcl-child-controls';
 import lclFields from './lcl-controls';
+import locationControls from './locationControls';
 import trailerControls from './trailer-controls';
 
 const chargeCodeMapping = {
@@ -62,13 +63,19 @@ const Config = ({ data }) => {
 			}));
 		}
 	} else if (data?.service === 'lcl_freight') {
-		field.push(...lclFields);
+		field.push(...lclFields());
 		if (data?.data?.include_destination_local) {
-			field.push(lclChildControlsFunc({ heading: 'Add Destination Local Charges' }));
+			field.push(lclChildControlsFunc({
+				heading          : 'Add Destination Local Charges',
+				charge_code_name : 'destination_local_charge_codes',
+			}));
 		}
 
 		if (data?.data?.include_origin_local) {
-			field.push(lclChildControlsFunc({ heading: 'Add Origin Local Charges' }));
+			field.push(lclChildControlsFunc({
+				heading          : 'Add Origin Local Charges',
+				charge_code_name : 'origin_local_charge_codes',
+			}));
 		}
 		if (data?.data?.destination_storage_free_days > 0) {
 			field.push(...freeDaysSection({
@@ -105,13 +112,16 @@ const Config = ({ data }) => {
 		// }
 	} else if (['trailer_freight', 'haulage_freight'].includes(data?.service)) {
 		field.push(...trailerControls);
-	} else if (['fcl_cfs', 'fcl_customs', 'ltl_freight', 'ftl_freight'].includes(data?.service)) {
+	} else if (['ltl_freight', 'ftl_freight'].includes(data?.service)) {
+		field.push(...locationControls(data));
+	} else if (['fcl_cfs', 'fcl_customs'].includes(data?.service)) {
 		field.push(chargeContolsFunc({ heading: '', charge_code_name: chargeCodeMapping[data?.service] }));
 	} else if (data?.service === 'lcl_customs') {
 		field.push(lclChildControlsFunc({ heading: '' }));
 	} else if (data?.service === 'air_customs') {
 		field.push(airChildControlsFunc({ heading: '' }));
 	}
+	console.log(field, 'values');
 	return field;
 };
 

@@ -11,7 +11,7 @@ import useGetPartnerUserServices from '../../hooks/useGetPartnerUserServices';
 import styles from './styles.module.css';
 
 function FilterStats({ filters, hookSetters }) {
-	const { service_type = 'fcl_freight' } = filters;
+	const { service_type } = filters;
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
@@ -25,17 +25,19 @@ function FilterStats({ filters, hookSetters }) {
 				...filters,
 				is_negotiation_not_reverted : true,
 				is_negotiation_reverted     : undefined,
+				page                        : 1,
 			});
 		} else {
 			hookSetters.setFilters({
 				...filters,
 				is_negotiation_reverted     : true,
 				is_negotiation_not_reverted : undefined,
+				page                        : 1,
 			});
 		}
 	};
 	const handleOnClick = (value) => {
-		hookSetters.setFilters((prev) => ({ ...prev, service_type: value }));
+		hookSetters.setFilters((prev) => ({ ...prev, service_type: value, page: 1 }));
 	};
 
 	const handleOnChangeCheckbox = (value, checkbox) => {
@@ -44,18 +46,23 @@ function FilterStats({ filters, hookSetters }) {
 			if (under_negotiation_rank === value) { under_negotiation_rank = undefined; } else {
 				under_negotiation_rank = value;
 			}
-			hookSetters.setFilters({ ...filters, under_negotiation_rank });
+			hookSetters.setFilters({ ...filters, under_negotiation_rank, page: 1 });
 		} else {
 			let { expires_in } = filters;
 			if (expires_in === value) {
 				expires_in = undefined;
 			} else {
 				expires_in = value;
-			} hookSetters.setFilters({ ...filters, expires_in });
+			} hookSetters.setFilters({ ...filters, expires_in, page: 1 });
 		}
 	};
 	const onTabChange = (tab) => {
-		hookSetters.setFilters({ ...filters, status: tab });
+		hookSetters.setFilters({
+			...filters,
+			status             : tab,
+			negotiation_status : tab === 'draft' ? undefined : 'awaiting_responses',
+			page               : 1,
+		});
 	};
 
 	return (

@@ -32,7 +32,7 @@ const trailerControls = [
 		}],
 		rules: { required: 'This is required' },
 	},
-	chargeControl({ heading: '', charge_code_name: 'freights_charge_codes' }),
+	chargeControl({ heading: '', charge_code_name: 'freights_charge_codes', service: 'trailer' }),
 ];
 
 export default trailerControls;

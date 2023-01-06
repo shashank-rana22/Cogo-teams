@@ -1,10 +1,12 @@
 import { Placeholder } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
 function List({
-	fields, item, loading, setRfq,
+	fields, item, loading,
 }) {
+	const { push } = useRouter();
 	return (
 		<div className={styles.container}>
 			{fields.map((field) => {
@@ -12,12 +14,10 @@ function List({
 				return (
 					<div
 						role="presentation"
-						onClick={() => setRfq({
-							rfq_id          : item?.serial_id,
-							source          : 'rfq',
-							source_id       : item?.id,
-							total_port_pair : item?.total_port_pair,
-						})}
+						onClick={() => push(
+							'/supply/dashboards/rfq-enquiries/[id]',
+							`/supply/dashboards/rfq-enquiries/${item?.id}`,
+						)}
 						className={styles.item}
 						key={key || label}
 						style={{ flex }}

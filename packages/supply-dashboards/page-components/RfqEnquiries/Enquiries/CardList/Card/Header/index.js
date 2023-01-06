@@ -1,4 +1,4 @@
-import { Tags } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { IcMFcl } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function Header({ item }) {
 	const service = item?.detail?.service_type.split('_')[0];
 	const trade_type = startCase(getIncoTermMapping[item?.detail?.inco_term]);
-	const items = [{ children: trade_type, color: 'blue' }];
 	return (
 		<div className={styles.heading}>
 			<div className={styles.service}>
@@ -17,7 +16,7 @@ function Header({ item }) {
 				{service}
 			</div>
 			<div>
-				<Tags items={items} closable />
+				<Pill color="blue">{trade_type}</Pill>
 			</div>
 		</div>
 

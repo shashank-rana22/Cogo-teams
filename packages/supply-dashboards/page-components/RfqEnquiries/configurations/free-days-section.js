@@ -2,7 +2,7 @@ import currencies from '../helpers/currencies';
 
 const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 	const controls = 		[{
-		name        : 'free_days',
+		name        : 'free_limit',
 		type        : 'number',
 		span        : 4,
 		heading,

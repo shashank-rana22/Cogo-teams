@@ -11,7 +11,7 @@ const fclFields =	[
 	{
 		name            : 'booking_rate_procurement_proof',
 		label           : 'Booking rate procurement proof',
-		span            : 10,
+		span            : 8,
 		type            : 'file',
 		themeType       : 'secondary',
 		drag            : true,
