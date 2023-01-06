@@ -135,3 +135,8 @@ export interface DetailInterface{
 	buy_quotation_agreed_rates:number,
 	hs_code?:{hs_code: number|string , name: string},
 }
+export interface RemarksValInterface{
+	bankDetailsRemarks:string,
+	billingPartyRemarks:string,
+	invoiceDetailsRemarks:string,
+}

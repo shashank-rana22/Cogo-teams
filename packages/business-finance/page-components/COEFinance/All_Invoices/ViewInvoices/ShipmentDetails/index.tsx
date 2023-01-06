@@ -11,6 +11,7 @@ import POC from './POC/index';
 import useListShipment from "../../../hook/useListShipment";
 import useGetVariance from "../../../hook/useGetVariance";
 import VarianceView from "./VarianceView/index";
+import {RemarksValInterface} from '../../../../commons/Interfaces/index'
 
 interface JobInterface {
     jobNumber:string
@@ -25,13 +26,15 @@ interface DataInterface {
     bill :object
     billAdditionalObject : BillAdditionalObjectInterface
 }
+
 interface ShipmentDetailsInterface {
     data:DataInterface
     orgId?:string
     jobNumber?:string
-    
+    remarksVal:RemarksValInterface
+    setRemarksVal:any
 }
-const ShipmentDetails = ({data,orgId,jobNumber}:ShipmentDetailsInterface)=>{
+const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
     const [showVariance, setShowVariance] = useState(false);
@@ -120,7 +123,7 @@ const ShipmentDetails = ({data,orgId,jobNumber}:ShipmentDetailsInterface)=>{
                 <PdfDisplay data={data}/>
             </div>
             <div className={styles.shipmentDetailsCard}>
-                <ShipmentDetailsCard data={data}/>
+                <ShipmentDetailsCard data={data} remarksVal={remarksVal} setRemarksVal={setRemarksVal}/>
             </div>
         </div>
         

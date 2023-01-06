@@ -10,12 +10,15 @@ import { Textarea } from "@cogoport/components";
 interface LineItemCard {
     lineItems?:Array<object>
     setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>
+    setRemarksVal:any,
+    remarksVal:object|{}
 }
 
-
-const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
+const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remarksVal}:LineItemCard) => {
     const [radio , setRadio ] = useState(false)
     const [popover, setPopover] = useState(false)
+    const [lineItemsRemarks,setLineItemsRemarks] = useState({});
+    const [activeLineItem, setActiveLineItem] = useState(0);
     const [showRejectedModal , setShowRejectedModal] = useState({ id : ""})
 
     const renderAction =(id:string)=>{
@@ -38,6 +41,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
 	};
 
     const handleRejectClick =(item:any) => {
+        setActiveLineItem(item);
         setShowRejectedModal(item)
         setPopover((previousActions:any) => ({
 			...previousActions,
@@ -67,6 +71,10 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
      
       const { id } = showRejectedModal;
 
+      const handleLineItemsRemarks=(val:string)=>{
+          setLineItemsRemarks({...lineItemsRemarks,[activeLineItem]:val});
+          setRemarksVal({...remarksVal,lineItemsRemarks});
+    }
 
     return(
     <div>
@@ -86,7 +94,6 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
 
             <div className={styles.footer}>
                 <Button size='md'  onClick={()=>{setShowLineItem(false)}}> Go Back </Button>
-                <Button size='md'  onClick={()=>{}}> Save </Button>
             </div>
             {
             popover[id as keyof typeof popover] && 
@@ -98,19 +105,15 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
                     </div>
 
                     <div style={{display:'flex',justifyContent:'center'}}>
-                    {LINE_ITEMS_CHECK.fields.map((item) => {
-                        
-                        
-                          return (
-                                <div style={{display:'flex' , alignItems:"center",margin:'0px 8px'}}>
-                                    <Checkbox value={item?.label}/>
-                                    <div>{item?.label}</div>
-                                </div>
-                          )
-                          
-                    })}
+                   
                 </div>
-                <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                <Textarea 
+                  name="remark" 
+                  size="md" 
+                  placeholder="Remarks Here ..." 
+                  style={{width:'700' ,height:'100px'}}
+                  onChange={(val:string)=>handleLineItemsRemarks(val)}
+                  />
             </Modal.Body>
 
 

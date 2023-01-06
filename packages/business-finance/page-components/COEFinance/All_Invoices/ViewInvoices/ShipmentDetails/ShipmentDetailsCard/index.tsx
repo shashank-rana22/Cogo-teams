@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
 import { Modal, Textarea ,Checkbox} from '@cogoport/components'
+import {RemarksValInterface} from '../../../../../commons/Interfaces/index'
 
 interface BuyerDetailInterface {
     entityCode?:string
@@ -39,22 +40,18 @@ interface DataInterface {
     sellerDetail?:SellerDetailInterface
     bill?:BillInterface
 }
+
 interface ShipmentDetailsCardInterface{
     data?:DataInterface
+    remarksVal:RemarksValInterface
+    setRemarksVal:any
 }
 
-const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
+const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal}:ShipmentDetailsCardInterface) =>{
     const [showValue, setShowValue ] = useState([] as any)
     const [rejected,setRejected] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
     const [showRejected , setShowRejected] = useState({})
-    const [remarksVal, setRemarksVal]=useState({
-        bankDetailsRemarks:'',
-        billingPartyRemarks:'',
-        invoiceDetailsRemarks:''
-    });
-    
-
     const {lineItems } = data || {}
     const {buyerDetail , sellerBankDetail , sellerDetail , bill} = data || {}
     const {entityCode ='' , organizationName:organizationNameBuyer ='', address ='' , registrationNumber:registrationNumberBuyer ='', taxNumber:taxNumberBuyer ='' } = buyerDetail || {}
@@ -116,7 +113,7 @@ const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
 
 return(
     <div>
-{ showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem}/> : 
+{ showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem} setRemarksVal={setRemarksVal} remarksVal={remarksVal}/> : 
     <div>
         <div className={styles.mainHeader}>
             <div className={styles.instructions}>
