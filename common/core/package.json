@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@cogoport/authentication": "workspace:0.1.0",
-		"@cogoport/components": "^1.0.216",
+		"@cogoport/components": "^1.0.221",
 		"@cogoport/icons-react": "^1.0.48",
 		"@cogoport/navigation-configs": "workspace:0.1.0",
 		"@cogoport/next": "workspace:0.1.0",
@@ -14,10 +14,10 @@
 		"cookies-next": "^2.1.1",
 		"dotenv": "^16.0.3",
 		"dotenv-expand": "^9.0.0",
+		"i18next": "^22.4.8",
 		"next-i18next": "^13.0.3",
 		"nprogress": "^0.2.0",
-		"react-i18next": "^12.1.1",
-		"i18next": "^22.4.8",
-		"react": "18.2.0"
+		"react": "18.2.0",
+		"react-i18next": "^12.1.1"
 	}
 }
