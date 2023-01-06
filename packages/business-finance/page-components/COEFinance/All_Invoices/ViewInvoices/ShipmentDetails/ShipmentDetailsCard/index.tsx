@@ -1,5 +1,5 @@
 import { Button } from "@cogoport/components";
-import { IcCFtick } from "@cogoport/icons-react";
+import { IcCFtick, IcMCrossInCircle } from "@cogoport/icons-react";
 import React, { useState } from "react";
 import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
@@ -45,8 +45,14 @@ interface ShipmentDetailsCardInterface{
 
 const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
     const [showValue, setShowValue ] = useState([] as any)
+    const [rejected,setRejected] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
     const [showRejected , setShowRejected] = useState({})
+    const [remarksVal, setRemarksVal]=useState({
+        bankDetailsRemarks:'',
+        billingPartyRemarks:'',
+        invoiceDetailsRemarks:''
+    });
     
 
     const {lineItems } = data || {}
@@ -71,9 +77,17 @@ const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
         setDetailsCard(DetailsCard)
     }
 
+    const handleRejected = (id:number)=>{
+        setRejected([...rejected,id]);
+        DetailsCard.push(DetailsCard.shift())
+        setDetailsCard(DetailsCard)
+    }
+
     const handleClickUndo = (id:number) => {
-       const undoData = showValue.filter((item:any) => item !== id)
-       setShowValue(undoData)
+       const undoApprovedData = showValue.filter((item:any) => item !== id);
+       setShowValue(undoApprovedData);
+       const undoRejectedData = rejected.filter((item:any) => item !== id);
+       setRejected(undoRejectedData);
     }
 
     const handleClickReject =(id:number) => {
@@ -81,25 +95,36 @@ const ShipmentDetailsCard = ({data}:ShipmentDetailsCardInterface) =>{
 			...previousActions,
 			[id]: !previousActions[id],
 		}));
-
     }
 
     const onClose = () => {
+        if(Object.keys(showRejected).includes('1')){
+            setRemarksVal({...remarksVal,bankDetailsRemarks:'' });
+        }else if(Object.keys(showRejected).includes('2')){
+            setRemarksVal({...remarksVal,billingPartyRemarks:'' });
+        }else{
+            setRemarksVal({...remarksVal,invoiceDetailsRemarks:'' });
+        }
 		setShowRejected(false);
 	};
-    
+
+    const onSubmit=()=>{
+        const current = Object.keys(showRejected)?.[0];
+        handleRejected(+current);
+        setShowRejected(false);
+    }
 
 return(
     <div>
 { showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem}/> : 
     <div>
         <div className={styles.mainHeader}>
-            <div style={{fontWeight:'600'}}>
+            <div className={styles.instructions}>
                 Check the Details  ( As filled by SO2 in the cogo form )
             </div>
             
-            <div style={{fontWeight:'600'}}>
-                Completed {showValue.length  || 0}/3
+            <div className={styles.completed}>
+                Completed {(showValue.length + rejected.length) || 0}/3
             </div>
         </div>
 
@@ -109,13 +134,11 @@ return(
         
 return(
     <>
-
         {
             showRejected[id as keyof typeof showRejected] &&                 
                 <Modal size="lg" show={showRejected[id as keyof typeof showRejected]} onClose={onClose}>
                     <Modal.Header title="CHOOSE THE DETAiLS YOU WANT TO REJECT" />
                     <Modal.Body>
-                    
                         {Object.keys(showRejected).includes("1") &&
                                             <div>
                                                 <div style={{display:'flex',alignItems:'center'}}>
@@ -150,7 +173,14 @@ return(
                                                    <div>GST Number </div>
                                                 </div>
                                                  
-                                                <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                                                <Textarea
+                                                 name="remark" 
+                                                 size="md" 
+                                                 placeholder="Remarks Here ..." 
+                                                 style={{width:'700' ,height:'100px'}}
+                                                 value={remarksVal.bankDetailsRemarks} 
+                                                 onChange={(value:string)=>setRemarksVal({...remarksVal, bankDetailsRemarks:value})} 
+                                                 />
                                                
                                             </div>
 
@@ -178,7 +208,13 @@ return(
                                                    <div>GST Number</div>
                                                 </div>
 
-                                                <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                                                <Textarea
+                                                 name="remark" 
+                                                 size="md"
+                                                 placeholder="Remarks Here ..."
+                                                 value={remarksVal.billingPartyRemarks} 
+                                                 onChange={(value:string)=>setRemarksVal({...remarksVal, billingPartyRemarks:value})}
+                                                 style={{width:'700' ,height:'100px'}} />
                                             </div>
                             }
                         {Object.keys(showRejected).includes("3") &&
@@ -203,12 +239,18 @@ return(
                                                    <div>Place Of Supply</div>
                                                 </div>
 
-                                            <Textarea name="remark" size="md" placeholder="Remarks Here ..." style={{width:'700' ,height:'100px'}} />
+                                            <Textarea 
+                                            name="remark" 
+                                            size="md" 
+                                            placeholder="Remarks Here ..." 
+                                            value={remarksVal.invoiceDetailsRemarks} 
+                                            onChange={(value:string)=>setRemarksVal({...remarksVal, invoiceDetailsRemarks:value})}
+                                            style={{width:'700' ,height:'100px'}} />
                                     </div>
                             }
                         </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={onClose}>Submit</Button>
+                        <Button onClick={onSubmit}>Submit</Button>
                     </Modal.Footer>
                 </Modal>
         }
@@ -216,15 +258,15 @@ return(
         {id === 1 &&
             <div className={styles.container } >
                  <div className={styles.headerContainer}>
-                     <div className={showValue.includes(1) ? styles.labelApproved : styles.label}>
+                     <div className={showValue.includes(1) ? styles.labelApproved : (rejected.includes(1) ? styles.labelRejected:styles.label)}>
                              {label}
                          <div style={{justifyContent:'center',display:'flex'}} >
-                             {showValue.includes(1)  && <IcCFtick height="17px" width="17px" />}
+                             {showValue.includes(1)  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(1) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
                          </div>
                      </div>
  
                     {
-                     (showValue.includes(1))  ? 
+                     (showValue.includes(1) || rejected.includes(1))  ? 
                      <div className={styles.buttonContainer} onClick={()=>{handleClickUndo(id)}}>
                          <Button size='sm' themeType="secondary">Undo</Button>
                      </div> :         
@@ -252,15 +294,15 @@ return(
 {id === 2 &&
         <div className={styles.container } >
                 <div className={styles.headerContainer}>
-                    <div className={showValue.includes(2)  ? styles.labelApproved : styles.label}>
+                    <div className={showValue.includes(2) ? styles.labelApproved : (rejected.includes(2) ? styles.labelRejected:styles.label)}>
                             {label}
                         <div style={{justifyContent:'center',display:'flex'}} >
-                            {showValue.includes(2)  && <IcCFtick height="17px" width="17px" />}
+                        {showValue.includes(2)  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(2) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
                         </div>
                     </div>
 
                    {
-                    showValue.includes(2)  ? 
+                    (showValue.includes(2) || rejected.includes(2))  ? 
                     <div className={styles.buttonContainer} onClick={()=>{handleClickUndo(id)}}>
                         <Button size='sm' themeType="secondary">Undo</Button>
                     </div> :         
@@ -286,15 +328,15 @@ return(
 {id === 3 &&
     <div className={styles.container } >
          <div className={styles.headerContainer}>
-             <div className={showValue.includes(3)   ? styles.labelApproved : styles.label}>
+             <div className={showValue.includes(3) ? styles.labelApproved : (rejected.includes(3) ? styles.labelRejected:styles.label)}>
                      {label}
                  <div style={{justifyContent:'center',display:'flex'}} >
-                     {showValue.includes(3)   && <IcCFtick height="17px" width="17px" />}
+                 {showValue.includes(3)  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(3) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
                  </div>
              </div>
 
             {
-             showValue.includes(3) ? 
+             (showValue.includes(3) || rejected.includes(3)) ? 
              <div className={styles.buttonContainer} onClick={()=>{handleClickUndo(id)}}>
                  <Button size='sm' themeType="secondary">Undo</Button>
              </div>   :         
@@ -322,7 +364,7 @@ return(
         })}
 
     <div className={styles.footer}>
-        <Button size='md' disabled ={showValue.length == 3 ? false : true} onClick={()=>{setShowLineItem(true)}} >Save And Next</Button>
+        <Button size='md' disabled ={showValue.length + rejected.length == 3 ? false : true} onClick={()=>{setShowLineItem(true)}} >Save And Next</Button>
     </div>
     
    </div>
