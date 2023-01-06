@@ -1,7 +1,33 @@
 import React from 'react';
 import { Tooltip } from '@cogoport/components';
+import {formatDate} from '../../../../../../../commons/utils/formatDate';
 import {IcMFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
+
+interface ItemInt{
+	service_type:string,
+	completed_on?:any,
+	is_sub:boolean,
+	milestone:string,
+}
+
+interface ShipmentInt{
+	services:string[],
+}
+
+interface ObjInt{
+	completed_on:string,
+}
+
+interface TimeLineProps{
+	item:ItemInt,
+	isLast:boolean,
+	shipmentData:ShipmentInt,
+	timeLine:ObjInt[],
+	index:number,
+	isCompleted:any,
+	isNextMain:any,
+}
 
 const TimeLineItem = ({
 	item,
@@ -11,7 +37,7 @@ const TimeLineItem = ({
 	index,
 	isCompleted,
 	isNextMain,
-}) => {
+}:TimeLineProps) => {
 	const checkService = (shipmentData?.services || []).includes(
 		item?.service_type,
 	);
@@ -27,16 +53,16 @@ const TimeLineItem = ({
 		return (
 			<>
 				<div className={styles.ToolTipText}>
-					Milestone
-					<div className="tooltipcontent">{item?.milestone}</div>
+					Milestone:
+					<div className={styles.tooltipItem}>{item?.milestone}</div>
 				</div>
 
 				{item?.completed_on ? (
 					<div className={styles.ToolTipText}>
-						{isComplete ? 'Completed On' : 'Expected'}
+						{isComplete ? 'Completed On:' : 'Expected:'}
 
-						<div className="tooltipcontent">
-							{item?.completed_on}
+						<div className={styles.tooltipItem}>
+							{formatDate(item?.completed_on)}
 						</div>
 					</div>
 				) : null}
@@ -47,22 +73,29 @@ const TimeLineItem = ({
 	return (
 		<>
 			{!item?.service_type && !checkService ? (
-				<div className={`${isLast ? `last ${styles.Wrapper}` : styles.Wrapper}`}>
+				<div className={isLast ?  styles.WrapperLast : styles.Wrapper}>
 					<Tooltip
 						placement="top"
 						content={content()}
 						theme="light"
 					>
 						<div className={styles.Flex}>
-							{item?.is_sub && <div className={styles.FilledCircle}/>}
+							{item?.completed_on && item?.is_sub && <div className={styles.FilledCircle}/>}
+							{!item?.completed_on && item?.is_sub && <div className={styles.DotCircle}/>}
 							{item?.completed_on && !item?.is_sub &&  <IcMFtick fill='red' width={20} height={20}/>}
-							{!item?.completed_on && <div className={styles.BorderedCircle}/>}
+							{!item?.completed_on && !item?.is_sub &&  <div className={styles.BorderedCircle}/>}
 						</div>
 					</Tooltip>
 
-					{!isLast ? (
+					{!isLast && item?.completed_on ? (
 						<div
 							className={`${styles.Line} ${className} ${minWidthAllow ? 'min_width' : ''}`}
+						/>
+					) : null}
+
+                    {!isLast && !item?.completed_on ? (
+						<div
+							className={`${styles.LineGrey} ${className} ${minWidthAllow ? 'min_width' : ''}`}
 						/>
 					) : null}
 
@@ -72,7 +105,7 @@ const TimeLineItem = ({
 
 							{item?.completed_on ? (
 								<div className={`${styles.Desc} ${className}`}>
-									{item.completed_on}
+									{item?.completed_on}
 								</div>
 							) : null}
 						</div>

@@ -17,10 +17,13 @@ interface BillAdditionalObject {
 	urgencyTag?:string
 	urgencyRemarks?:string
 }
+interface RemarkObj{
+	remarks?: string
+}
 interface DataProps {
 	bill?:BillInterFace
 	billAdditionalObject?:BillAdditionalObject
-	remarks?:Array<string>
+	remarks?:Array<RemarkObj>
 	serviceType?:string
 	
 
@@ -118,7 +121,7 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
                 </span>
                 </div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>Remarks - <span className={styles.remarks}>{remarks[0] || 'No Remarks'}</span></div>
+            <div className={styles.cardField}>Remarks - <span className={styles.remarks}>{remarks?.[0]?.remarks || 'No Remarks'}</span></div>
         </div>
 
         {removeTag ? (

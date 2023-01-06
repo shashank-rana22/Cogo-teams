@@ -1,15 +1,15 @@
 import React from 'react';
+import {Placeholder} from '@cogoport/components';
 import TimeLineItem from './TimeLineItem/index';
+import useGetShipmentTimeLine from '../../../../../hook/useGetShipmentTimeLine';
 import styles from './styles.module.css';
 
-const TimeLine = ({ loading = false }) => {
+interface Int{
+	shipmentId:string,
+}
 
-	const timeLine=[
-			{milestone: 'Booking Confirmed1', completed_on: '2022-12-28T06:58:51.318Z', is_sub: false},
-			{milestone: 'Booking Confirmed2', completed_on: '2022-12-28T06:58:51.318Z', is_sub: true},
-			{milestone: 'Booking Confirmed3', completed_on: '2022-12-28T06:58:51.318Z', is_sub: false},
-			{milestone: 'Booking Confirmed4', completed_on: null, is_sub: false},
-	]
+const TimeLine = ({shipmentId}:Int) => {
+    const {data: timelineData, loading} = useGetShipmentTimeLine(shipmentId);
 	
 	const shipment_data={};
 	let isCompleted = true;
@@ -17,26 +17,31 @@ const TimeLine = ({ loading = false }) => {
 	return (
 		<div className={styles.Container} >
 			<div className={styles.Wrapper}>
-				{timeLine?.map((item, i) => {
+				{!loading ? timelineData?.map((item, i) => {
 					if (!item?.completed_on) {
 						isCompleted = false;
 					}
 
-					const isNextMain = !timeLine[i + 1]?.is_sub;
+					const isNextMain = !timelineData[i + 1]?.is_sub;
 
 					return (
-						<TimeLineItem
-							key={timeLine?.milestone}
-							timeLine={timeLine}
+						 <TimeLineItem
+							key={timelineData?.milestone}
+							timeLine={timelineData}
 							index={i}
 							isCompleted={isCompleted}
 							shipmentData={shipment_data}
 							item={item}
 							isNextMain={isNextMain}
-							isLast={i === timeLine?.length - 1}
-						/>
+							isLast={i === timelineData?.length - 1}
+						/>  
 					);
-				})}
+				}) : <div className={styles.loading}>
+				<Placeholder height="30px" width="300px"/>
+				<Placeholder height="30px" width="300px"/>
+				<Placeholder height="30px" width="300px"/>
+			     </div>
+			}
 			</div>
 		</div>
 	);

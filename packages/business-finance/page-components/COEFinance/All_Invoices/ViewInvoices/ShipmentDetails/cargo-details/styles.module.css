@@ -1,0 +1,35 @@
+.Box{
+	background: #f2f2f2;
+	border-radius: 4px;
+	margin-bottom: 4px;
+	margin-right: 4px;
+	padding: 4px 6px;
+	width: max-content;
+	display: inline-block;
+	font-size: 10px;
+	line-height: 12px;
+}
+
+.CertificateContainer{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	a {
+		font-weight: 400;
+		font-size: 14px;
+		color: #a8acce;
+		display: flex;
+		align-items: center;
+
+		svg {
+			margin-left: 4px;
+		}
+	}
+}
+.divContainer{
+	display: flex;
+	flex-flow: wrap;
+}
+
+
