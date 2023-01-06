@@ -99,3 +99,8 @@
 	padding: 0px 20px;
 	cursor: pointer;
 }
+.loading{
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}

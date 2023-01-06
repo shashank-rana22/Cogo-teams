@@ -1,6 +1,7 @@
 import React ,{useState}from "react";
+import {startCase} from '@cogoport/utils';
+import {  Pill } from "@cogoport/components";
 import styles from './styles.module.css';
-import { Tags } from "@cogoport/components";
 import {IcMArrowRotateDown,IcMArrowRotateUp,IcADocumentTemplates} from '@cogoport/icons-react'
 import Details from "./Details/index";
 import Documents from "./Documents/index";
@@ -27,21 +28,22 @@ interface DataInterface {
 interface ShipmentDetailsInterface {
     data:DataInterface
     orgId?:string
+    jobNumber?:string
     
 }
-const ShipmentDetails = ({data,orgId}:ShipmentDetailsInterface)=>{
+const ShipmentDetails = ({data,orgId,jobNumber}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
     const [showVariance, setShowVariance] = useState(false);
-    const { job } = data || {}
-    const {  jobNumber } = job || {};
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
     const {data:shipmentData} = useListShipment(jobNumber);
-    const shipmentId = shipmentData?.list[0]?.id;
+    
+    const dataList=shipmentData?.list[0] || {};
+    const {source, trade_type} = dataList;
+    const shipmentId = dataList.id ||  ''; 
 
-console.log(varianceFullData,"varianceFullData");
-
+    const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 
     return(
     <div className={styles.container}>
@@ -54,8 +56,8 @@ console.log(varianceFullData,"varianceFullData");
                 <div className={styles.subContainer}>
                     Details 
                     <div className={styles.tagsContainer}>
-                        <Tags themeType="blue" size="md">Sell without buy</Tags>
-                        <Tags themeType="blue" size="md">Export</Tags>
+                        <Pill color="blue">{sourceText}</Pill>
+                        <Pill color="yellow">{startCase(trade_type)}</Pill>
                     </div>
                     <div>Wallet Usage - USD 50</div>
                 </div>
@@ -65,7 +67,7 @@ console.log(varianceFullData,"varianceFullData");
                </div>      
             </div>
             {showDetails && <div className={styles.hr}/>}
-            <div className={styles.details}>{showDetails && <Details orgId={orgId}/>}</div>
+            <div className={styles.details}>{showDetails && <Details orgId={orgId} dataList={dataList} shipmentId={shipmentId}/>}</div>
         </div>
 
         <div className={styles.card} onClick={()=>{setShowDocuments(!showDocuments)}}>

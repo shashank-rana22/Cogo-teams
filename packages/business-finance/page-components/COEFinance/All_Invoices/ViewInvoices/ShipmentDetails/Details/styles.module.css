@@ -16,6 +16,8 @@
 .subDiv{
   width: 16%;
   border-right: 2px solid red;
+  display: flex;
+  align-items: center;
 }
 .tags{
   margin-left: 20px;
@@ -28,7 +30,10 @@
 .icon{
    color: #5936F0;
    font-size: 24px;
-}
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+  }
 
 .arrow{
   font-size: 24px;
@@ -36,6 +41,12 @@
 
 .bold{
   font-weight: 600;
+}
+
+.name{
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .flexDiv{
@@ -52,4 +63,13 @@
   border-radius: 4px;
   padding:12px;
   margin-top:20px;
+}
+.shipmentType{
+  font-size: 8px;
+  width: 47px;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+.postalData{
+  font-size: 10px;
 }

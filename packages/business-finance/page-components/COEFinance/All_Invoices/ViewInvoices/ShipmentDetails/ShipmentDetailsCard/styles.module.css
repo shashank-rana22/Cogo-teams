@@ -21,6 +21,15 @@
   color: #6cc077;
   align-items: center;
 }
+.labelRejected{
+  display: flex;
+  gap: 8px;
+  padding: 24px 16px 0px 32px;
+  width: 100%;
+  font-weight: 700;
+  color: red;
+  align-items: center;
+}
 .hr {
   border: 1px solid #ed3726;
   margin: 16px 0px;
@@ -53,4 +62,12 @@
   justify-content: flex-end;
   width: 100%;
   padding: 24px;
+}
+.instructions{
+  font-weight: 500;
+  font-size: 13px;
+}
+.completed{
+  font-weight: 600;
+  color: red;
 }

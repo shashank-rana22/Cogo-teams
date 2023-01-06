@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 import { LINE_ITEMS ,LINE_ITEMS_CHECK} from "../../../../../configurations/LINE_ITEMS";
 import List from "../../../../../../commons/List/index";
 import { IcCFtick ,IcMOverflowDot,IcCFcrossInCircle} from "@cogoport/icons-react";
-import { Tooltip ,Modal,Checkbox } from "@cogoport/components";
+import { Popover ,Modal,Checkbox } from "@cogoport/components";
 import { Textarea } from "@cogoport/components";
 
 interface LineItemCard {
@@ -49,21 +49,19 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
     const onClose = () => {
 		setPopover(false);
 	};
-    
+
     const functions = {
         renderIcon: (item:any)=>(       
             <div className={styles.circleBig} onClick={()=>{handleApproveClick(item?.id)}} >
             {renderAction(item?.id)}
             </div>
         ),
-        
         renderReject: (item:any) => (
             <div style={{cursor:"pointer"}}>
-                <Tooltip  placement="left" interactive content={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div> }>
-                      <IcMOverflowDot width="20px" height="20px"/>
-                </Tooltip>
+                <Popover  placement="left" interactive render={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
+                    <div> <IcMOverflowDot width="20px" height="20px"/> </div> 
+                </Popover>
             </div>
-
         )
       };
      
@@ -74,7 +72,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}}:LineItemCard) => {
     <div>
      
         <div className={styles.mainHeader}>
-            <div style={{fontWeight:'600'}}>
+            <div style={{fontWeight:'500'}}> 
                   Check off Line Items and Tax Rate ( As filled by SO2 in the cogo form )
             </div>
                <div className={styles.smallHr} />
