@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMFcl } from '@cogoport/icons-react';
+import { IcMFcl, IcmAir, IcMLcl } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import getIncoTermMapping from '../../../../helpers/getIncoTermMapping';
@@ -9,10 +9,16 @@ import styles from './styles.module.css';
 function Header({ item }) {
 	const service = item?.detail?.service_type.split('_')[0];
 	const trade_type = startCase(getIncoTermMapping[item?.detail?.inco_term]);
+	let Icon = IcMFcl;
+	if (service === 'air') {
+		Icon = IcmAir;
+	} else if (service === 'lcl') {
+		Icon = IcMLcl;
+	}
 	return (
 		<div className={styles.heading}>
 			<div className={styles.service}>
-				<IcMFcl width={30} height={30} style={{ padding: '4px' }} />
+				<Icon width={30} height={30} style={{ padding: '4px' }} />
 				{service}
 			</div>
 			<div>

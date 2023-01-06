@@ -33,7 +33,7 @@ function Body({ item }) {
 				</div>
 			</div>
 			<div>
-				{`${item?.containers_count} Container x ${item?.container_size} x ${startCase(item?.container_type)}, 
+				{`${item?.containers_count} Container x ${item?.container_size} x ${startCase(item?.container_type)},
                 ${startCase(item?.commodity)}`}
 			</div>
 
