@@ -88,7 +88,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal}:Shipmen
             <div className={styles.documents}> { showDocuments && <Documents  shipmentId={shipmentId}/> } </div>               
         </div>
 
-        <div style={{display:'flex',justifyContent:'space-between', alignItems: 'center'}}>
+        <div>
         {collectionPartyId ? (
 				<div className={styles.variance} >
 					<div>
@@ -112,6 +112,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal}:Shipmen
         {showVariance ? (
 				<VarianceView
 					show={showVariance}
+                    loading={loading}
 					onClose={() => setShowVariance(false)}
 					data={varianceFullData}
 				/>

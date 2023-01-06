@@ -40,7 +40,7 @@ function CargoDetails({ detail }:DetailInt) {
 	return (
 		<div className={styles.divContainer}>
 			{labels.map((label) => {
-				if (detail?.[label] && renderValue(label, detail)) {
+				if (detail?.[label as keyof typeof detail ] && renderValue(label, detail)) {
 					return (
 						<div className={styles.container}>
 							<div className={`${styles.Box} cargo-detail-pill`} key={label}>

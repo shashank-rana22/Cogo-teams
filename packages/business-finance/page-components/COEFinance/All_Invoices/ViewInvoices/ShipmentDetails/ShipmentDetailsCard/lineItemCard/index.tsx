@@ -15,7 +15,7 @@ interface LineItemCard {
 }
 
 const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remarksVal}:LineItemCard) => {
-    const [radio , setRadio ] = useState(false)
+    const [radio , setRadio ] = useState({})
     const [popover, setPopover] = useState(false)
     const [lineItemsRemarks,setLineItemsRemarks] = useState({});
     const [activeLineItem, setActiveLineItem] = useState(0);

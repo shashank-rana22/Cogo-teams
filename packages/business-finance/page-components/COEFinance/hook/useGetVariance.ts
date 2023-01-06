@@ -31,6 +31,7 @@ const useGetVariance = ({ collectionPartyId }:useGetVarianceInterface) => {
 			console.log(err);
 		}
 	};
+	
 
 	useEffect(() => {
 		if (collectionPartyId) {

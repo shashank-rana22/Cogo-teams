@@ -50,11 +50,23 @@
 }
 .accounts {
   display: flex;
-  margin: 0px 32px;
+  margin: 0px 16px;
 }
 .supplierDetails {
   display: flex;
   width: 29%;
   align-items: center;
   justify-content: space-around;
+}
+.textDecoration {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.supplierHistory {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #ed3726;
 }
