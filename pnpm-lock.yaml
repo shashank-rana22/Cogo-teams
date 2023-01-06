@@ -10,15 +10,21 @@ importers:
       accept-language: ^3.0.18
       eslint: ^8.31.0
       fs-extra: ^11.1.0
+      i18next: ^22.4.8
+      next-i18next: ^13.0.3
       postcss: ^8.4.20
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^5.0.6
       postcss-preset-env: ^7.8.3
+      react-i18next: ^12.1.1
       stylelint: ^14.16.1
       swr: ^2.0.0
       turbo: ^1.6.3
     dependencies:
       accept-language: 3.0.18
+      i18next: 22.4.8
+      next-i18next: 13.0.3_4q5plaeszuxllg5nqb5z5vkpsm
+      react-i18next: 12.1.1_i18next@22.4.8
       swr: 2.0.0
     devDependencies:
       '@cogoport/eslint-config': 1.0.18_eslint@8.31.0
@@ -94,11 +100,8 @@ importers:
       cookies-next: ^2.1.1
       dotenv: ^16.0.3
       dotenv-expand: ^9.0.0
-      i18next: ^22.4.8
-      next-i18next: ^13.0.3
       nprogress: ^0.2.0
       react: 18.2.0
-      react-i18next: ^12.1.1
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
       '@cogoport/components': 1.0.221_xt4ifl6qxlrythdsvwl2iwyvb4
@@ -111,11 +114,8 @@ importers:
       cookies-next: 2.1.1
       dotenv: 16.0.3
       dotenv-expand: 9.0.0
-      i18next: 22.4.8
-      next-i18next: 13.0.3_gsjofd24yhwnbclazk64c3crui
       nprogress: 0.2.0
       react: 18.2.0
-      react-i18next: 12.1.1_jryjlwowal7h3agr2hmmrftubq
 
   common/forms:
     specifiers:
@@ -4502,7 +4502,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-i18next/13.0.3_gsjofd24yhwnbclazk64c3crui:
+  /next-i18next/13.0.3_4q5plaeszuxllg5nqb5z5vkpsm:
     resolution: {integrity: sha512-7AA8J6WbkxRBtSf1+97LSAE7btxWZHsBIJEJ3FuTSBgYtpRiO5NGjcb8XbNAlz6yGU0TtS+yZE+/Wu83KhIT1Q==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4517,8 +4517,7 @@ packages:
       hoist-non-react-statics: 3.3.2
       i18next: 22.4.8
       i18next-fs-backend: 2.1.1
-      react: 18.2.0
-      react-i18next: 12.1.1_jryjlwowal7h3agr2hmmrftubq
+      react-i18next: 12.1.1_i18next@22.4.8
     dev: false
 
   /next/12.3.1_biqbaboplfbrettd7655fr4n2y:
@@ -5423,7 +5422,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-i18next/12.1.1_jryjlwowal7h3agr2hmmrftubq:
+  /react-i18next/12.1.1_i18next@22.4.8:
     resolution: {integrity: sha512-mFdieOI0LDy84q3JuZU6Aou1DoWW2fhapcTGeBS8+vWSJuViuoCLQAMYSb0QoHhXS8B0WKUOPpx4cffAP7r/aA==}
     peerDependencies:
       i18next: '>= 19.0.0'
@@ -5439,7 +5438,6 @@ packages:
       '@babel/runtime': 7.20.7
       html-parse-stringify: 3.0.1
       i18next: 22.4.8
-      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
