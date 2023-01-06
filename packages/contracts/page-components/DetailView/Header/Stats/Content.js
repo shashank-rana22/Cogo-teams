@@ -4,6 +4,7 @@ import Line from '../../../../common/Line';
 import Margin from '../../../../common/MiniCard/Margin';
 import Percentage from '../../../../common/MiniCard/Percentage';
 import Price from '../../../../common/MiniCard/Price';
+import useGetContractStats from '../../../../hooks/useGetContractStats';
 import useUpdateContract from '../../../../hooks/useUpdateContract';
 
 import styles from './styles.module.css';
@@ -19,12 +20,14 @@ function Content({ data, status }) {
 			},
 		});
 	};
+	const { data: statsData } = useGetContractStats({ id: data?.id });
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.information}>
-				<Percentage />
+				<Percentage data={statsData?.project_consolidated_profitability} />
 				<Line />
-				<Price />
+				<Price data={statsData?.project_consolidated_revenue} />
 				<Line />
 				<Margin />
 			</div>

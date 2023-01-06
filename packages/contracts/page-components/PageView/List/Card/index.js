@@ -37,7 +37,7 @@ function Card({ item, filters }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{item?.fcl_freight_services[0]?.max_containers_count}
+							{item?.utilisation_data?.total_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>

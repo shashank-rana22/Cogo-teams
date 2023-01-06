@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 function Body({ data }) {
 	const formattedData = formatPortPair({ item: data });
 	const uniqueId = `${
-		formattedData[0].origin_code
-	} ${formattedData[0].destination_code}`;
+		formattedData[0]?.origin_code
+	} ${formattedData[0]?.destination_code}`;
 	const [activePair, setActivePair] = useState({
 		...formattedData[0],
 		uniqueId,

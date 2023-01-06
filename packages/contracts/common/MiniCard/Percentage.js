@@ -1,13 +1,17 @@
 import styles from './styles.module.css';
 
-function Percentage() {
+function Percentage({ data }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.heading}>
 				Projected
 				Consolidated Profitability
 			</div>
-			<div>10.3%</div>
+			<div>
+				{data}
+				{' '}
+				%
+			</div>
 		</div>
 	);
 }

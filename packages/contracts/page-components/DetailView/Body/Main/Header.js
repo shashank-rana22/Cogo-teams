@@ -1,13 +1,13 @@
-import { Pills } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function Header({ activePair }) {
 	const originCode = activePair?.origin_code;
-	const originName = activePair?.origin.split('(')[0];
+	const originName = activePair?.origin?.split('(')[0];
 	const destinationCode = activePair?.destination_code;
-	const destinationName = activePair?.destination.split('(')[0];
+	const destinationName = activePair?.destination?.split('(')[0];
 
 	return (
 		<div className={styles.heading}>
@@ -31,12 +31,12 @@ function Header({ activePair }) {
 				</div>
 			) : null}
 
-			<Pills
+			<Pill
 				size="md"
 				color="#CFEAED"
 			>
 				{activePair?.trade_type}
-			</Pills>
+			</Pill>
 		</div>
 	);
 }
