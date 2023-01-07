@@ -7,16 +7,24 @@ importers:
       '@cogoport/eslint-config': ^1.0.18
       '@cogoport/stylelint-config': ^1.0.3
       '@svgr/webpack': ^6.5.1
+      accept-language: ^3.0.18
       eslint: ^8.31.0
       fs-extra: ^11.1.0
+      i18next: ^22.4.8
+      next-i18next: ^13.0.3
       postcss: ^8.4.20
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^5.0.6
       postcss-preset-env: ^7.8.3
+      react-i18next: ^12.1.1
       stylelint: ^14.16.1
       swr: ^2.0.0
       turbo: ^1.6.3
     dependencies:
+      accept-language: 3.0.18
+      i18next: 22.4.8
+      next-i18next: 13.0.3_4q5plaeszuxllg5nqb5z5vkpsm
+      react-i18next: 12.1.1_i18next@22.4.8
       swr: 2.0.0
     devDependencies:
       '@cogoport/eslint-config': 1.0.18_eslint@8.31.0
@@ -92,11 +100,8 @@ importers:
       cookies-next: ^2.1.1
       dotenv: ^16.0.3
       dotenv-expand: ^9.0.0
-      i18next: ^22.4.8
-      next-i18next: ^13.0.3
       nprogress: ^0.2.0
       react: 18.2.0
-      react-i18next: ^12.1.1
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
       '@cogoport/components': 1.0.221_xt4ifl6qxlrythdsvwl2iwyvb4
@@ -109,11 +114,8 @@ importers:
       cookies-next: 2.1.1
       dotenv: 16.0.3
       dotenv-expand: 9.0.0
-      i18next: 22.4.8
-      next-i18next: 13.0.3_gsjofd24yhwnbclazk64c3crui
       nprogress: 0.2.0
       react: 18.2.0
-      react-i18next: 12.1.1_jryjlwowal7h3agr2hmmrftubq
 
   common/forms:
     specifiers:
@@ -2604,6 +2606,13 @@ packages:
     resolution: {integrity: sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw==}
     dev: false
 
+  /accept-language/3.0.18:
+    resolution: {integrity: sha512-sUofgqBPzgfcF20sPoBYGQ1IhQLt2LSkxTnlQSuLF3n5gPEqd5AimbvOvHEi0T1kLMiGVqPWzI5a9OteBRth3A==}
+    dependencies:
+      bcp47: 1.1.2
+      stable: 0.1.8
+    dev: false
+
   /acorn-jsx/5.3.2_acorn@8.8.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -2830,6 +2839,11 @@ packages:
   /balanced-match/2.0.0:
     resolution: {integrity: sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==}
     dev: true
+
+  /bcp47/1.1.2:
+    resolution: {integrity: sha512-JnkkL4GUpOvvanH9AZPX38CxhiLsXMBicBY2IAtqiVN8YulGDQybUydWA4W6yAMtw6iShtw+8HEF6cfrTHU+UQ==}
+    engines: {node: '>=0.10'}
+    dev: false
 
   /boolbase/1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
@@ -4488,7 +4502,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-i18next/13.0.3_gsjofd24yhwnbclazk64c3crui:
+  /next-i18next/13.0.3_4q5plaeszuxllg5nqb5z5vkpsm:
     resolution: {integrity: sha512-7AA8J6WbkxRBtSf1+97LSAE7btxWZHsBIJEJ3FuTSBgYtpRiO5NGjcb8XbNAlz6yGU0TtS+yZE+/Wu83KhIT1Q==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4503,8 +4517,7 @@ packages:
       hoist-non-react-statics: 3.3.2
       i18next: 22.4.8
       i18next-fs-backend: 2.1.1
-      react: 18.2.0
-      react-i18next: 12.1.1_jryjlwowal7h3agr2hmmrftubq
+      react-i18next: 12.1.1_i18next@22.4.8
     dev: false
 
   /next/12.3.1_biqbaboplfbrettd7655fr4n2y:
@@ -5409,7 +5422,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-i18next/12.1.1_jryjlwowal7h3agr2hmmrftubq:
+  /react-i18next/12.1.1_i18next@22.4.8:
     resolution: {integrity: sha512-mFdieOI0LDy84q3JuZU6Aou1DoWW2fhapcTGeBS8+vWSJuViuoCLQAMYSb0QoHhXS8B0WKUOPpx4cffAP7r/aA==}
     peerDependencies:
       i18next: '>= 19.0.0'
@@ -5425,7 +5438,6 @@ packages:
       '@babel/runtime': 7.20.7
       html-parse-stringify: 3.0.1
       i18next: 22.4.8
-      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
@@ -5791,7 +5803,6 @@ packages:
   /stable/0.1.8:
     resolution: {integrity: sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==}
     deprecated: 'Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility'
-    dev: true
 
   /string-width/4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}

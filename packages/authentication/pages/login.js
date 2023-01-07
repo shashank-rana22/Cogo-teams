@@ -1,7 +1,13 @@
 import LoginComponent from '@cogoport/authentication/page-components/Login';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-LoginComponent.getInitialProps = () => ({
-	layout: 'hidden',
-});
+export async function getServerSideProps({ locale }) {
+	return {
+		props: {
+			...(await serverSideTranslations(locale, ['common', 'login'])),
+			layout: 'hidden',
+		},
+	};
+}
 
 export default LoginComponent;
