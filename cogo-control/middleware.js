@@ -20,11 +20,10 @@ export const middleware = async (request) => {
 		}
 
 		if (request.nextUrl.locale === 'default') {
-			const language =				acceptLanguage.get(request.headers.get('accept-language'))
+			const language = acceptLanguage.get(request.headers.get('accept-language'))
 				|| process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
 
-			const locale =				request.cookies.get(process.env.NEXT_PUBLIC_LOCALE_KEY)?.value
-				|| language;
+			const locale = request.cookies.get(process.env.NEXT_PUBLIC_LOCALE_KEY)?.value || language;
 
 			const url = `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`;
 			// eslint-disable-next-line compat/compat
