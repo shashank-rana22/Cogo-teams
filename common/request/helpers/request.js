@@ -20,8 +20,6 @@ request.interceptors.request.use((oldConfig) => {
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 	const authorizationparameters = getAuthorizationParams(store, oldConfig.url);
 
-	console.log({ token });
-
 	return {
 		...oldConfig,
 		paramsSerializer : { serialize: customSerializer },

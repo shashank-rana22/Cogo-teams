@@ -8,9 +8,7 @@ export const profileSlice = createSlice({
 	},
 	reducers: {
 		setProfileState: (state, action) => {
-			console.log({ a: action.payload });
 			state = { ...state, ...action.payload };
-			console.log({ state });
 			return state;
 		},
 	},

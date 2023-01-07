@@ -1,8 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import Link from 'next/link';
-import React, { useContext } from 'react';
 
-import { RoutesContext } from './RoutesProvider';
+import getModifiedRoutes from '../utils/getModifiedRoutes';
 
 function LinkComponent({
 	href,
@@ -11,16 +10,14 @@ function LinkComponent({
 	withPrefix,
 	...rest
 }) {
-	const routesContext = useContext(RoutesContext);
-	const { pathPrefix, asPrefix } = routesContext || {};
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
-	const { locale } = useSelector((state) => state.general);
-
-	const newHref = withPrefix ? `${pathPrefix || ''}${href}` : href;
-	const newAs = withPrefix ? `${asPrefix || ''}${as || href}` : as || href;
+	const { newHref, newAs } = getModifiedRoutes({
+		href, as, partnerId, withPrefix,
+	});
 
 	return (
-		<Link {...rest} href={newHref} as={newAs} locale={locale}>
+		<Link {...rest} href={newHref} as={newAs}>
 			{children}
 		</Link>
 	);
