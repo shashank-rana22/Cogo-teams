@@ -26,7 +26,7 @@ export const middleware = async (request) => {
 			const locale = request.cookies.get(process.env.NEXT_PUBLIC_LOCALE_KEY)?.value || language;
 
 			const url = `/${locale}${request.nextUrl.pathname}${request.nextUrl.search}`;
-			// eslint-disable-next-line compat/compat
+
 			const urlObj = new URL(url, request.url);
 
 			// eslint-disable-next-line consistent-return
@@ -35,7 +35,6 @@ export const middleware = async (request) => {
 
 		if (request.headers.has('referer')) {
 			const refererUrl = new URL(request.headers.get('referer'));
-			// console.log('refererUrl :: ', refererUrl);
 
 			const lngInReferer = languages.find((l) => refererUrl.pathname.startsWith(`/${l}`));
 			const response = NextResponse.next();

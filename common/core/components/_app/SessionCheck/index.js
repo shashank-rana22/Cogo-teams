@@ -1,6 +1,7 @@
 import { useRouter } from '@cogoport/next';
 import { request } from '@cogoport/request/helpers/request';
 import { useDispatch, useSelector } from '@cogoport/store';
+import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState, useEffect } from 'react';
 
@@ -17,38 +18,53 @@ const UNAUTHENTICATED_PATHS = [
 ];
 
 function SessionCheck({ children }) {
-	const router = useRouter();
+	const {
+		pathname, query, locale, locales, route, push,
+	} = useRouter();
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
-	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(router.route);
+	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
 	const isProfilePresent = Object.keys(profile).length !== 0;
 
 	const dispatch = useDispatch();
 
 	const [sessionInitialized, setSessionInitialized] = useState(false);
 
+	dispatch(setGeneralState({
+		pathname, query, locale, locales,
+	}));
+
 	useEffect(() => {
 		(async () => {
-			const res = await request.get('get_user_session');
-			dispatch(setProfileState({ _initialized: true, ...res.data }));
+			if (!_initialized) {
+				const res = await request.get('get_user_session');
+				dispatch(setProfileState({ _initialized: true, ...res.data }));
+			}
 		})();
 	}, [dispatch]);
 
 	useEffect(() => {
 		(async () => {
 			if (!sessionInitialized && _initialized) {
-				if (isProfilePresent && (isUnauthenticatedPath || router.route === '/')) {
-					await router.push('/home');
-				} else if (!isProfilePresent && (!isUnauthenticatedPath || router.route === '/')) {
-					await router.push('/login');
+				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
+					await push('/home');
+				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
+					await push('/login');
 				}
 				setSessionInitialized(true);
 			}
 		})();
-	}, [_initialized, isProfilePresent, isUnauthenticatedPath, router, sessionInitialized]);
+	}, [_initialized, isProfilePresent, isUnauthenticatedPath, sessionInitialized]);
 
 	if (!sessionInitialized) {
-		return <div className={styles.container}>Initializing Session ...</div>;
+		return (
+			<div className={styles.container}>
+				<img
+					alt="cogoport-loading"
+					src="https://cdn.cogoport.io/cms-prod/vault/original/cogoport-loading.gif"
+				/>
+			</div>
+		);
 	}
 
 	return children;
