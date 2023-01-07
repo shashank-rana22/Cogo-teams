@@ -25,7 +25,6 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<Provider store={store}>
 			<SessionCheck>
-				<title>Admin | Cogoport</title>
 				<Layout layout={pageProps.layout || 'authenticated'}>
 					<Component {...pageProps} />
 				</Layout>
