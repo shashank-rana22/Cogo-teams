@@ -1,10 +1,9 @@
-import startCase from '@cogo/utils/startCase';
-import { Checkbox } from '@cogoport/front/components';
+import { Checkbox } from '@cogoport/components';
+import { IcCFtick } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { ScopeDetail, Row, ApiRole } from '../styles';
-
-import IconCheck from './ic-checkbox-small.svg';
 
 function ApiDetails({
 	api, handleConflictResolve, apiKey, newPermissions,
@@ -19,7 +18,7 @@ function ApiDetails({
 			<ApiRole>{api.name}</ApiRole>
 			{api.scopes.map((scope) => (
 				<Row className="single">
-					<IconCheck style={{ marginRight: 8 }} />
+					<IcCFtick style={{ marginRight: 8 }} />
 					<ScopeDetail>
 						{startCase(scope.type)}
 						{' '}

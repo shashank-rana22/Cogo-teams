@@ -1,4 +1,4 @@
-import navigationMappings from '@cogo/project-partner/page-components/layout/configurations/navigation-mappings';
+import navigationMappings from '@cogoport/navigation-configs/navigation-mappings';
 import React, { useEffect } from 'react';
 
 import { Heading, ApiBox } from '../styles';
