@@ -21,14 +21,21 @@ interface HeaderInterface {
 
 const Header =({data,remarksVal,lineItem}:HeaderInterface) => {
     const [approve,setApprove]=useState(false)
+    const [modalData , setModalData] = useState('')
     const Router = useRouter();
 
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
-    const {loading, rejectApi} = useApproveReject({collectionPartyId,remarksVal});
+    const {loading, rejectApi} = useApproveReject({collectionPartyId,remarksVal,modalData});
 
-    const handleReject=()=>{
+    const handleModalData = (e:any) =>{
+        setModalData(e.target.innerText)        
+        setApprove(true)
+    }
+
+    const handleApproveAndReject =()=>{
         rejectApi();
+        setApprove(false)
         console.log('remarksVal->',remarksVal);
     }
 
@@ -37,19 +44,19 @@ return(
     <div className={styles.container}>
         <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]','/business-finance/coe-finance/all_invoices')}>Go Back</Button>
         <div className={styles.subContainer}>
-            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem}  onClick={()=>{setApprove(true)}}>Approve</Button>
-            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem} >Approve & Hold</Button>
-            <Button size="md" style={{marginRight:'8px' ,background: '#ED3726'}} onClick={handleReject} disabled={!lineItem}>Reject</Button>
+            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem}  onClick={(e:any)=>handleModalData(e)}>Approve</Button>
+            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem} onClick={(e:any)=>handleModalData(e)}>Approve & Hold</Button>
+            <Button size="md" style={{marginRight:'8px' ,background: '#ED3726'}} disabled={!lineItem} onClick={(e:any)=>handleModalData(e)} >Reject</Button>
         </div>
     </div>
     <div className={styles.hr}/>
     {approve && 
         <Modal size="lg" show={approve} onClose={()=>{setApprove(false)}}>
-             <Modal.Header title="Are you sure you want to approve this invoice ?" />
+             <Modal.Header title={`Are you sure you want to ${modalData} this invoice ?`}/>
              <Modal.Body>
                 <div className={styles.button}>
-                  <Button size="md" style={{marginRight:'8px'}} >No</Button>
-                  <Button size="md" style={{marginRight:'8px'}} >Yes</Button>
+                  <Button size="md" style={{marginRight:'8px'}} onClick={()=>{setApprove(false)}} >No</Button>
+                  <Button size="md" style={{marginRight:'8px'}} onClick={()=>handleApproveAndReject()}>Yes</Button>
                 </div>
              </Modal.Body>
              

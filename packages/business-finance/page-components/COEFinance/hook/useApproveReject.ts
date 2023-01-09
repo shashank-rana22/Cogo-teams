@@ -5,9 +5,25 @@ import { RemarksValInterface } from '../../commons/Interfaces/index';
 interface ApproveRejectInterface {
     collectionPartyId?:string
     remarksVal?:RemarksValInterface
+    modalData?:string
 }
 
-const ApproveReject = ({collectionPartyId,remarksVal}:ApproveRejectInterface) => {
+const ApproveReject = ({collectionPartyId,remarksVal,modalData}:ApproveRejectInterface) => {
+   
+    const getStatus = () =>{
+        if(modalData === 'Approve'){
+            return 'FINANCE_ACCEPTED'
+        }
+        if(modalData === 'Approve & Hold'){
+            return 'HOLD'
+        }     
+        if(modalData === 'Reject'){
+            return 'COE_REJECTED'
+        }
+    }
+
+
+    
     const [
         { data, loading },
         trigger,
@@ -23,6 +39,7 @@ const ApproveReject = ({collectionPartyId,remarksVal}:ApproveRejectInterface) =>
     const rejectApi = async()=>{
         try{
             await trigger({
+                status:getStatus(),
                 remarks: remarksVal
             })
             Toast.success('Rejected Successfully')
