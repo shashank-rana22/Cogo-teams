@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils'
 import { GenericObject } from '../../../../commons/Interfaces'
 import getFormattedPrice from '../../../../commons/utils/getFormattedPrice'
 import { IcMArrowNext, IcMArrowRotateDown } from '@cogoport/icons-react'
+import { Placeholder } from '@cogoport/components'
 
 interface Props{
   charge:GenericObject;
@@ -19,6 +20,7 @@ export const CardBody = ({charge}:Props) => {
   const {serviceType,lineItems=[]}=charge||{}
   const hidden=lineItems.length<2?styles.hidden:''
   const borderColor='#333333'
+
   return (charge?(
     <div className={`${showFullDetails?styles.card:styles.custompadding} ${lineItems.length<2?styles.padding:""}`} style={{ '--bordercolor':borderColor} as React.CSSProperties}>
     <div className={styles.layout}>
@@ -27,7 +29,7 @@ export const CardBody = ({charge}:Props) => {
         <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>Actual</div>
     </div>
     {(showFullDetails?lineItems:lineItems.slice(0,2)).map((lineItem:GenericObject)=>{
-      const value=(lineItem?.actual_price)-(lineItem?.tax_total_price_discounted || lineItem?.tax_total_price)
+      const value=(lineItem?.priceActual)-(lineItem?.priceQuotation)
       let className=styles.neutral
       let iconClassName=styles.neutralIcon
       if(value>0){

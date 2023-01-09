@@ -167,7 +167,7 @@ const AccordianCards = ({
                                     onClick={() => {
                                         setCurrentOpenSID(itemData?.id);
                                         router.push(
-                                            `/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}`
+                                            `/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}&jobNumber=${itemData.jobNumber}&jobSource=${itemData.jobSource}&jobType=${itemData.jobType}&orgId=${itemData.organizationId}`
                                         );
                                     }}
                                 >

@@ -59,9 +59,11 @@
 }
 .shipmentag{
     background-color: #FCEDBF !important;
-    padding: 5px !important;
+    padding: 4px !important;
     margin-left: 20px;
     border-radius: 4px;
+    font-weight: 500;
+    font-size: 12px;
 }
 .details{
     font-weight: 500;
@@ -124,4 +126,8 @@
 .lossicon{
     transform: rotate(45deg);
     color: #ED3726;
+}
+
+.legends{
+    margin-left: -15px;
 }
