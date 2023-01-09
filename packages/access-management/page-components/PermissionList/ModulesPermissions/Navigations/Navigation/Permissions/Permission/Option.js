@@ -6,31 +6,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const SELECT_STYLE = {
-	control: {
-		fontSize     : '14px',
-		lineHeight   : '16px',
-		color        : 'black',
-		minHeight    : '20px',
-		cursor       : 'auto',
-		width        : '185px',
-		background   : '#FFFFFF',
-		marginTop    : '6px',
-		boxShadow    : '0px 0px 3px rgba(0, 0, 0, 0.25)',
-		borderRadius : '4px',
-	},
-	indicatorsContainer : { height: '30px' },
-	menu                : {
-		width        : 'auto',
-		background   : 'white',
-		boxShadow    : '0 4px 80px rgba(0, 0, 0, 0.15)',
-		borderRadius : 10,
-		zIndex       : 999999,
-		maxWidth     : '350px',
-		left         : 0,
-	},
-};
-
 const nameMappings = { allowed: 'Allow' };
 
 function Option({
@@ -46,13 +21,12 @@ function Option({
 	const select = (
 		<>
 			<MultiSelect
-
 				{...controls[selectKey]}
 				disabled={
 					!(permissionValue || []).includes(option.type)
 					|| controls[selectKey]?.disabled
 				}
-				style={{ width: '50px' }}
+				style={{ width: '80%' }}
 				rules={{ required: (permissionValue || []).includes(option.type) }}
 				valueKey="type"
 				labelKey="type_display_name"
@@ -79,14 +53,12 @@ function Option({
 			<div className={styles.row}>
 				{option.type === 'none' || option.type === 'allowed' ? (
 					<Radio
-						themeType="black small"
 						onChange={() => handleOptionChange(option.type, option)}
 						checked={(permissionValue || []).includes(option.type)}
 						disabled={controls[permission.value]?.disabled}
 					/>
 				) : (
 					<Checkbox
-						themeType="black small"
 						onChange={() => handleOptionChange(option.type, option)}
 						checked={(permissionValue || []).includes(option.type)}
 						disabled={controls[permission.value]?.disabled}

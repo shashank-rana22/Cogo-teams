@@ -1,12 +1,10 @@
-export const controls = [
+export const controls = (partnerOptions) => [
 	{
 		name        : 'name',
 		label       : 'Role Name',
 		type        : 'text',
 		placeholder : 'Enter Role Name',
 		rules       : { required: 'Role Name is required' },
-		flex        : 2,
-		size        : 'lg',
 	},
 	{
 		name        : 'short_name',
@@ -15,20 +13,16 @@ export const controls = [
 		type        : 'text',
 		placeholder : 'Enter Role Short Name',
 		rules       : { required: 'Role Short Name is required' },
-		flex        : 2,
-		size        : 'lg',
 	},
 	{
+		...partnerOptions,
 		name        : 'stakeholder_id',
 		label       : 'Partner',
 		type        : 'select',
-		options     : [],
 		isClearable : true,
 		placeholder : 'Choose Partner',
 		rules       : { required: 'Partner is required' },
-		flex        : 2,
 		params      : { page_limit: 10 },
-		size        : 'lg',
 	},
 	{
 		name    : 'role_functions',
@@ -55,8 +49,6 @@ export const controls = [
 		isClearable : true,
 		placeholder : 'Choose role functions',
 		rules       : { required: 'Function is required' },
-		flex        : 1,
-		size        : 'lg',
 	},
 	{
 		name        : 'role_sub_functions',
@@ -64,8 +56,6 @@ export const controls = [
 		type        : 'multiSelect',
 		isClearable : true,
 		placeholder : 'Choose role sub functions',
-		flex        : 1,
-		size        : 'lg',
 	},
 	{
 		name    : 'hierarchy_level',
@@ -105,8 +95,6 @@ export const controls = [
 		isClearable : true,
 		rules       : { required: 'Hierarchy Level is required' },
 		placeholder : 'Choose Hierarchy Level',
-		flex        : 1,
-		size        : 'lg',
 	},
 	{
 		name        : 'remarks',
@@ -114,7 +102,5 @@ export const controls = [
 		type        : 'text',
 		placeholder : 'Enter role description',
 		rules       : { required: 'Description is required' },
-		flex        : 1,
-		size        : 'lg',
 	},
 ];

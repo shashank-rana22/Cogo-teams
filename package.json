@@ -21,15 +21,19 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
+    "accept-language": "^3.0.18",
+    "i18next": "^22.4.9",
+    "next-i18next": "^13.0.3",
+    "react-i18next": "^12.1.4",
     "swr": "^2.0.0"
   },
   "devDependencies": {
-    "@cogoport/eslint-config": "^1.0.18",
+    "@cogoport/eslint-config": "^1.1.0",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.5.1",
     "eslint": "^8.31.0",
     "fs-extra": "^11.1.0",
-    "postcss": "^8.4.20",
+    "postcss": "^8.4.21",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^5.0.6",
     "postcss-preset-env": "^7.8.3",

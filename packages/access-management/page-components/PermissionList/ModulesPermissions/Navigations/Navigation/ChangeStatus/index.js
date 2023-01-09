@@ -1,9 +1,7 @@
-import { Modal, Toast } from '@cogoport/components';
-import showErrorsInToast from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import useUpdateStatus from '../../../../../../hooks/useUpdateStatus';
 
 function ChangeStatus({
 	type,
@@ -13,78 +11,52 @@ function ChangeStatus({
 	auth_role_id,
 	getList,
 }) {
-	const api =		type === 'active'
-		? '/onboard_auth_role'
-		: '/update_auth_role_permission_mapping';
-
-	const [{ loading: isLoading }, trigger] = useRequest({
-		url    : api,
-		method : 'POST',
+	const { handleSubmit, loading } = useUpdateStatus({
+		navigation, auth_role_id, getList, onClose, type,
 	});
 
-	const handleSubmit = async () => {
-		try {
-			const payload =	type === 'active'
-				? {
-					auth_role_id,
-					navigation_permission_pairs: [{ navigation, permissions: [] }],
-				}
-				: {
-					status: type,
-					navigation,
-					auth_role_id,
-				};
-			const res = await trigger({
-				data: payload,
-			});
-			if (!res.hasError) {
-				Toast.success('Status updated');
-				getList(auth_role_id, false);
-				onClose();
-			}
-		} catch (err) {
-			if (err.status !== 403) {
-				Toast.error(showErrorsInToast(err.message));
-			}
-		}
-	};
+	const headingText = type === 'active' ? 'Assign' : 'Un-assign';
 
-	const headerContent = () => (
-		<div>
-			<span>
-				{type === 'active' ? 'Assign' : 'Un-assign'}
-				{' '}
-				Module
-				{' '}
-			</span>
-		</div>
+	const headerContent = (
+		<span>
+			{headingText}
+			{' '}
+			Module
+			{' '}
+		</span>
 	);
 
 	return (
-		<Modal
-			show={show}
-			headerContent={headerContent}
-			width="400px"
-			submitText={type === 'active' ? 'Assign' : 'Un-assign'}
-			onClose={() => {
-				onClose();
-			}}
-			handleSubmit={handleSubmit}
-			loading={isLoading}
-			isScollable={false}
-		>
-
+		<Modal show={show} size="sm" onClose={onClose}>
+			<Modal.Header title={headerContent} />
 			<Modal.Body>
-				<section className={styles.container}>
+				<section>
 					<h3 style={{ padding: '0px 22px' }}>
 						Are you sure you want to
 						{' '}
-						{type === 'active' ? 'Assign' : 'Un-assign'}
+						{headingText}
 						{' '}
 						?
 					</h3>
 				</section>
 			</Modal.Body>
+			<Modal.Footer>
+				<Button
+					size="sm"
+					style={{ marginRight: 10 }}
+					themeType="secondary"
+					onClick={onClose}
+				>
+					Cancel
+				</Button>
+				<Button
+					size="sm"
+					onClick={handleSubmit}
+					loading={loading}
+				>
+					{headingText}
+				</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }

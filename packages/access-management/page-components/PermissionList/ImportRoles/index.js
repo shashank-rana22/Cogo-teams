@@ -1,5 +1,4 @@
-import Select from '@cogo/business-modules/form/components/Business/Select';
-import ModalNew from '@cogo/commons/components/ModalNew';
+import { Select, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Priority from './Priority';
@@ -64,7 +63,7 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 	}
 
 	return (
-		<ModalNew
+		<Modal
 			show={show}
 			onClose={view === 'priority' ? () => setView('import') : onClose}
 			headerContent={headerContent}
@@ -128,7 +127,7 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 					/>
 				)}
 			</div>
-		</ModalNew>
+		</Modal>
 	);
 }
 export default ImportRoles;

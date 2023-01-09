@@ -1,17 +1,14 @@
 import {
-	Button, Tooltip,
-	// RadioGroup
+	Button,
+	// RadioGroup,
 } from '@cogoport/components';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import displayNames from '../../../../../../configurations/feature-descriptions';
-import featureExplanation from '../../../../../../configurations/feature-explanation';
 import useTogglePermissions from '../../../../../../hooks/useTogglePermissions';
 
-import IcCv from './ic-chevron-down.svg';
-import IcCvUp from './ic-chevron-up.svg';
-import IcInfo from './ic-info.svg';
 import Permission from './Permission';
 import styles from './styles.module.css';
 
@@ -56,73 +53,64 @@ function Grouped(props) {
 		handleSetNavRef,
 	} = useTogglePermissions(props);
 
-	console.log('Grouped', allignAPis(possible_apis));
-
-	const renderExplanation = () => (
-		<p className="normal">
-			{featureExplanation[featureKey]
-					|| `By clicking yes you will allow this role to perform actions related to ${startCase(
-						featureKey,
-					)} in ${navigation.title} `}
-			{' '}
-		</p>
-	);
-
 	return (
 		<div className={styles.group_container}>
 			{featureKey ? (
-				<div className={`${styles.role_logic_group}`}>
+				<div
+					role="presentation"
+					onClick={() => setShow(!show)}
+					className={`${styles.role_logic_group}`}
+				>
 					<div className={styles.row}>
 						<p>{displayNames[featureKey] || `Manage ${startCase(featureKey)}`}</p>
 					</div>
-					asas
+					{/* todo: Radio group is bugged will uncomment later */}
 					{/* <RadioGroup */}
-					{/* 	options={OPTIONS} */}
-					{/* 	value={value} */}
-					{/* 	onChange={handleApiStatus} */}
-					{/* 	disabled={creatingNavs} */}
+					{/*	options={OPTIONS} */}
+					{/*	values={value} */}
+					{/*	onChange={handleApiStatus} */}
+					{/*	disabled={creatingNavs} */}
 					{/* /> */}
 					<div>
 						<Button
-							ghost
+							themeType="tertiary"
 							id={`access_mgmt_edit_role_sh_${featureKey}`}
-							onClick={() => setShow(!show)}
 							disabled={creatingNavs}
 						>
-							{show ? <IcCvUp /> : <IcCv />}
+							{show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 						</Button>
 					</div>
 				</div>
 			) : null}
-			{/* {show ? ( */}
-			<div className={styles.accordion} aria-expanded={show}>
-				<p className={styles.description}>
-					Configure your permissions according to you and save. For modifying
-					permissions in bulk click on feature radio buttons above
-				</p>
-				{allignAPis(possible_apis || []).map((api) => (
-					<Permission
-						permission={api}
-						key={api.value}
-						navigation={navigation}
-						creatingNavs={creatingNavs}
-						setNavigationRefs={(r) => handleSetNavRef(r, api)}
-						data={roleData}
-						customPermissions={newApiPermissions}
-					/>
-				))}
-				{Object.keys(rest || {}).map((key) => (
-					<Grouped
-						apiGroup={rest[key]}
-						setNavigationRefs={setNavigationRefs}
-						roleData={roleData}
-						creatingNavs={creatingNavs}
-						navigation={navigation}
-						featureKey={key}
-					/>
-				))}
-			</div>
-			{/* ) : null} */}
+			{show ? (
+				<div className={styles.accordion}>
+					<p className={styles.description}>
+						Configure your permissions according to you and save. For modifying
+						permissions in bulk click on feature radio buttons above
+					</p>
+					{allignAPis(possible_apis || []).map((api) => (
+						<Permission
+							permission={api}
+							key={api.value}
+							navigation={navigation}
+							creatingNavs={creatingNavs}
+							setNavigationRefs={(r) => handleSetNavRef(r, api)}
+							data={roleData}
+							customPermissions={newApiPermissions}
+						/>
+					))}
+					{Object.keys(rest || {}).map((key) => (
+						<Grouped
+							apiGroup={rest[key]}
+							setNavigationRefs={setNavigationRefs}
+							roleData={roleData}
+							creatingNavs={creatingNavs}
+							navigation={navigation}
+							featureKey={key}
+						/>
+					))}
+				</div>
+			) : null}
 		</div>
 	);
 }
