@@ -24,6 +24,7 @@ function PurchaseInvoice({filters,setFilters}:Props) {
 const router = useRouter();
 const [sort, setSort] = useState({});
 
+
   const {data,
       loading,
       config,
@@ -71,6 +72,8 @@ const [sort, setSort] = useState({});
         searchValue={searchValue}
          currentTab={currentTab}
          setCurrentTab={setCurrentTab}
+         filters={filters}
+         setFilters={setFilters}
       />
      <List
        config={config}  

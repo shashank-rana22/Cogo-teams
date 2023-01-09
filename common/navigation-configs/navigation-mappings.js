@@ -66,11 +66,11 @@ const navigationMappings = {
 			{
 				key       : 'coe-finance',
 				title     : 'Finance',
-				href      : '/coe-finance',
-				as        : '/coe-finance',
+				href      : '/coe-finance/dashboard',
+				as        : '/coe-finance/dashboard',
 				icon      : IcMProductCodeMapping,
 				main_apis : ['list_shipments'],
-				// possible_apis : [...roles_permissions.coe_finance, ...roles_permissions.shipment],
+				// possible_apis : [...partner.coe_finance, ...partner.shipment],
 			},
 			{
 				key       : 'coe-fcl_revenue_desk',

@@ -14,6 +14,7 @@ interface Props{
 
 const FilterModal = ({filters,setFilters}:Props) => {
 	const [showModal, setShowModal] =useState(false)
+	
 return (
 	<div className={styles.modal_container}>
     <Modal size="md" placement="center" scroll={false} show={showModal} onClose={()=>{setShowModal(false)}}>
@@ -26,6 +27,7 @@ return (
 			<Modal.Body>
 				<div className={styles.container_filter}>
 				<Filter controls={FILTERS} filters={filters} setFilters={setFilters} />
+				
 				</div>
 				<div className={styles.buttons}>
 					<div className={styles.clear}>

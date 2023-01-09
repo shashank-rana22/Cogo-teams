@@ -70,21 +70,21 @@ export const FILTERS : ControlProps[]=[
             }
         ],
     },
-	{
-		name:'Status',
-		span:12,
-		groupBy: [
-        {
-			name: 'Status',
-			type: 'tags',
-			className: 'primary md',
-			span: 12,
-			options: [
-				{ label: 'Initiated', value: 'initiated' },
-				{ label: 'Finance Accepted', value: 'finance_accepted' },
-			],
-		}],
-	},
+	// {
+	// 	name:'Status',
+	// 	span:12,
+	// 	groupBy: [
+    //     {
+	// 		name: 'Status',
+	// 		type: 'tags',
+	// 		className: 'primary md',
+	// 		span: 12,
+	// 		options: [
+	// 			{ label: 'Initiated', value: 'initiated' },
+	// 			{ label: 'Finance Accepted', value: 'finance_accepted' },
+	// 		],
+	// 	}],
+	// },
     {
         name: 'Invoice Type',
         span: 12,
@@ -95,10 +95,10 @@ export const FILTERS : ControlProps[]=[
                 className: 'primary md',
                 span: 12,
                 options: [
-                    { label: 'Purchase', value: 'purchase' },
-                    { label: 'Proforma', value: 'proforma' },
-                    { label: 'Credit Note', value: 'credit_note' },
-                    { label: 'Reimburement', value: 'reimburement' },
+                    { label: 'Purchase', value: 'PURCHASE' },
+                    { label: 'Proforma', value: 'PROFORMA' },
+                    { label: 'Credit Note', value: 'CREDIT_NOTE' },
+                    { label: 'Reimburement', value: 'REIMBURSEMENT' },
                 ],
             }
         ],

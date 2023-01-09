@@ -52,11 +52,10 @@ const FieldPair = ({ itemData , field}:props) => {
 							theme="light"
 							placement="top"
 							content={billNumber}
-							
 						>
 							<text  onClick={() => window.open(billDocumentUrl, '_blank')}>
 								{`${billNumber.substring(0, 11)}...`}
-								</text>
+							</text>
 						</Tooltip>
 					) : (
 						<text onClick={() => window.open(billDocumentUrl, '_blank')}>

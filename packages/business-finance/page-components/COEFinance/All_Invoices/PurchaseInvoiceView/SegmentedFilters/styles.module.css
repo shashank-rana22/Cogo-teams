@@ -15,7 +15,7 @@
 
 .search {
   :global {
-    width: 278px;
+    width: 336px;
     margin-right: 20px;
     .ui_input_container {
       height: 36px;
