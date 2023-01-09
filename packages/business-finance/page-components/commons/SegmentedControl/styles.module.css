@@ -1,72 +1,73 @@
+.segmented_control {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
+  overflow-x: hidden;
+  width: max-content;
+  font-family: "Roboto";
+  font-style: normal;
+}
 
-	.segmented_control {
-		background: #FFFFFF;
-        border-radius: 4px;
-        box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
-		overflow-x: hidden;
-		width: max-content;
-		font-family: 'Roboto';
-		font-style: normal;
-	}
+.segmented_container {
+  padding: 6px 4px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+}
 
-	.segmented_container {
-		padding: 6px 4px;
-		background-color: #ffffff;
-		border-radius: 4px;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		position: relative;
-	}
+.segmented_option {
+  background: #ffffff;
+  font-weight: 400;
+  font-size: 12px;
+  color: #000000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: pointer;
+}
 
-    .segmented_option{
-        background: #FFFFFF;
-        font-weight: 400;
-        font-size: 12px;
-		color: #000000;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding: 4px 8px;
-		cursor: pointer;
-    }
-	
-    .activeoption{
-        background: var(--background);
-        border-radius: 4px;
-    }
+.activeoption {
+  background: var(--background);
+  border-radius: 4px;
+}
 
+.segmented_icon {
+  margin-right: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
-	.segmented_icon {
-		margin-right: 8px;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-	}
+.segmented_label {
+  color: #2c3e50;
+  font-size: 12px;
+  font-weight: 400;
+}
 
-	.segmented_label {
-		color: #2c3e50;
-		font-size: 12px;
-		font-weight: 400;
-	}
+.segmented_badge {
+  background: var(--background);
+  padding: 1px 4px;
+  color: #4b5c6d;
+  margin-left: 8px;
+  border-radius: 4px;
+}
 
-    .segmented_badge{
-        background: var(--background);
-        padding: 1px 4px;
-		color: #4B5C6D;
-		margin-left: 8px;
-		border-radius: 4px;
-    }
-
-    .activebadge{
-        background: var(--color);
-        border-radius: 4px;
-        color: #FFFFFF;
-    }
-
-    .active{
-        color: var(--color);
-    }
-
+.activebadge {
+  background: var(--color);
+  border-radius: 4px;
+  color: #ffffff;
+}
+.atvbadge {
+  /* border-radius: 4px; */
+  background: #f37166;
+  color: #ffffff;
+}
+.active {
+  color: var(--color);
+}

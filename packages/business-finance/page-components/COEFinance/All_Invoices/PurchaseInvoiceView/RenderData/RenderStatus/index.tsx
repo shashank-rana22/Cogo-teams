@@ -8,12 +8,16 @@ interface props{
 }
 
 function RenderStatus ({ item}:props)  {
-	const StatusItem = (item?.status).toLowerCase();
+	const StatusItem = (item?.status)?.toLowerCase();
+	console.log(item,'item');
 	
 	return (
 		<div>
 			<div className={styled[item?.status]}>
-				{startCase(StatusItem)}
+				{/* {startCase(StatusItem)} */}
+				{
+					item?.status
+				}
 			</div>
 		</div>
 	);

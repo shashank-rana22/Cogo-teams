@@ -19,15 +19,39 @@ const  useGetPurchaseViewList=({filters,setFilters,sort}:Props)=> {
 	const [searchValue, setSearchValue] = useState('');
 
 	
+	console.log(filters,'filtersfiltersfilters');
+	const showFilter=()=>{
+		if(filters?.invoiceType==='PURCHASE'){
+			return 'BILL';
+		}
+		else if(filters?.invoiceType==='PROFORMA'){
+			return 'BILL';
+		}
+		return filters;
+	}
 	
-	
+	// const showBill=()=>{
+	// 	if(filters?.invoiceType==='PURCHASE')
+	// 	{
+	// 		return true;
+	// 	}
+	// 	else if(filters?.invoiceType==='PROFORMA')
+	// 	{
+	// 		return false;
+	// 	}
+	// 	return undefined;
+	// }
+
     const [{ data, loading, error }, refetch] = useRequestBf(
 		{
 			url     : '/purchase/bills/list',
 			method  : 'get',
 			params : {
-				...filters,
-				status: currentTab,
+				// ...filters,
+				filter:showFilter(),
+				proforma:filters?.invoiceType==='PURCHASE'?true:undefined,
+				status: currentTab!=='all' && currentTab!=='UrgencyTag' ? currentTab : undefined,
+				isUrgent: currentTab==='UrgencyTag'?true:undefined,
 				...sort,
 				},
 			authKey : 'get_purchase_bills_list',

@@ -10,6 +10,11 @@
 }
 .billnumbers {
   cursor: pointer;
+  text-decoration: underline;
+  color: #ed3726;
+}
+.bills {
+  color: #ed3726;
 }
 .sid {
   text-decoration: underline;

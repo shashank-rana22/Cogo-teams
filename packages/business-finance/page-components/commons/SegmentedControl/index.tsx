@@ -46,7 +46,7 @@ function SegmentedControl(props:Props) {
 								{label}
 							</div>
 							{badge && (
-								<div className={`${styles.segmented_badge} ${isActive?styles.activebadge:""}`}  style={{ '--color': color} as React.CSSProperties}>
+								<div className={`${styles.segmented_badge} ${isActive?styles.activebadge:styles.atvbadge}`}  style={{ '--color': color} as React.CSSProperties}>
 									{badge}
 								</div>
 							)}

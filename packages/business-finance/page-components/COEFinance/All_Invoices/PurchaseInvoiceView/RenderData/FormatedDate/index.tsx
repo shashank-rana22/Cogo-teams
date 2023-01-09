@@ -16,7 +16,7 @@ interface props{
 }
 function FormatedDate({item, field}:props) {
 
-   const getCreatedDate =  formatDate(item?.createdDate, 'dd MMM yy | hh:mm a');
+   const getCreatedDate =  formatDate(item?.createdDate, 'dd/MMM/yy | hh:mm a');
    const getBillDate =  format(item?.billDate, 'dd/MMM/yyyy');
    const getDueDate =  format(item?.dueDate, 'dd/MMM/yyyy');
 

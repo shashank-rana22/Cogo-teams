@@ -71,8 +71,8 @@ const navigationMappings = {
 			{
 				key: 'coe-finance',
 				title: 'Finance',
-				href: '/coe-finance',
-				as: '/coe-finance',
+				href: '/coe-finance/dashboard',
+				as: '/coe-finance/dashboard',
 				icon: IcMProductCodeMapping,
 				main_apis: ['list_shipments'],
 				// possible_apis : [...partner.coe_finance, ...partner.shipment],
