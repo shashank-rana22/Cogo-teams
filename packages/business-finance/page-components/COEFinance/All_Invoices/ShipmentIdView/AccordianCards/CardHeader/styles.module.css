@@ -1,7 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
-    @media (max-width: 768px) {
+    @media (max-width: 1068px) {
         flex-direction: column;
     }
 }
@@ -9,10 +9,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 1068px) {
+        flex-direction: column;
+    }
 }
 .status {
     display: flex;
     align-items: center;
+    @media (max-width: 1068px) {
+        justify-content: center;
+    }
 }
 .statusLabel {
     font-weight: 500;
@@ -24,13 +30,15 @@
     background: #cdf7d4;
     border-radius: 4px;
     color: #333333;
-    padding: 10px 8px;
-    height: 100%;
+    padding: 2px 8px;
     margin-left: 4px;
 }
 .discount {
     display: flex;
     margin-left: 30px;
+    @media (max-width: 1068px) {
+        padding: 8px;
+    }
 }
 .labelText {
     font-weight: 900px;

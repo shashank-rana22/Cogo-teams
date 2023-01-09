@@ -1,0 +1,127 @@
+.flexresponsive{
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 768px){
+        flex-direction: column;
+    }
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexwidth{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 450px;
+}
+
+.link{
+    text-decoration: underline;
+    color: #ED3726;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.tag{
+    background-color: #CDF7D4 !important;
+    padding: 5px !important;
+    border-radius: 8px;
+}
+
+.line{
+    border: 1px solid #333333;
+    margin-top: 25px;
+}
+
+.heading{
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 22px;
+    color: #333333;
+    margin-top: 20px;
+}
+
+.statscontainer{
+    margin-top: 25px;
+    display: flex;
+    @media (max-width: 768px){
+        flex-direction: column;
+    }
+}
+
+.label{
+    font-weight: 500;
+    font-size: 14px;
+}
+.shipmentag{
+    background-color: #FCEDBF !important;
+    padding: 5px !important;
+    margin-left: 20px;
+    border-radius: 4px;
+}
+.details{
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+}
+
+.icon{
+    margin-left: 5px;
+}
+
+.displayflex{
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.responsive{
+    @media (max-width: 768px){
+        margin-top: 20px;
+    }
+}
+
+.warning{
+    color: #ED3726;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px 10px 10px;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-left: 20px;
+    margin-top: 15px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.icon{
+    color: #ED3726;
+    margin: 5px 10px;
+}
+
+.amountselect{
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.width{
+    width: 49%;
+}
+
+.profiticon{
+    transform: translateX(10px) rotate(-45deg) ;
+    color: #34C759;
+}
+
+.lossicon{
+    transform: rotate(45deg);
+    color: #ED3726;
+}

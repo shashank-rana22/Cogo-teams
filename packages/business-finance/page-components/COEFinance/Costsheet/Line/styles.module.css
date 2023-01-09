@@ -1,0 +1,5 @@
+.line{
+    border: var(--thickness) solid var(--color);
+    width: var(--width);
+    margin: var(--margin);
+}

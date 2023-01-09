@@ -17,7 +17,6 @@ interface AllParams {
     serial_id?: number;
     status?: string;
     amountTab?: string;
-    // pageIndex?: number;
 }
 interface Profile {
     authorizationparameters?: string;
@@ -31,10 +30,9 @@ const useListBills = (allParams = {}) => {
     const { ...params }: AllParams = allParams || {};
     delete params.status;
 
-    const { authorizationparameters, serviceOpId } = useSelector(
+    const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({
             authorizationparameters: profile?.authorizationparameters,
-            // serviceOpId: profile?.id,
         })
     );
 
@@ -76,7 +74,6 @@ const useListBills = (allParams = {}) => {
                 jobNumbers: params.serial_id ? [params?.serial_id] : undefined,
                 jobSource: "LOGISTICS",
                 jobType: "SHIPMENT",
-                // serviceOpIds: check ? [serviceOpId] : undefined,
                 q: q || undefined,
                 ...restFilters,
                 ...params,

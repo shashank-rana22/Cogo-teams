@@ -9,7 +9,7 @@ interface FilterProps {
 	filters: object,
 	setFilters: (p:object) => void,
 	showClearBtn?:boolean,
-	clearFilters?:Function,
+	clearFilters?:()=>void,
 	types?:string,
 }
 
@@ -22,7 +22,7 @@ function Filter({
 }:FilterProps) {
 
 	const getElement=(singlecontrol:ControlProps) => {
-		const { span=0, name = '', type = '',groupby, ...rest }  = singlecontrol || {};
+		const { span=0, name = '', type = '',groupby,showlabel=false,label, ...rest }  = singlecontrol || {};
 		const customiseControl = {
 			id       : `filter-${name}`,
 			value    : filters![name as keyof typeof filters] || '',
@@ -47,7 +47,10 @@ function Filter({
 			<div className={styles.col} style={{
 				'--width': `${(singlecontrol.span || 1)*(100/12)}%`,
 			} as React.CSSProperties}>
+				<div>
+				{!showlabel&&<div className={styles.showlabel}>{label as string}</div>}
 				<Element key={name} {...customiseControl} />
+				</div>
 			</div>
 		);
 	}

@@ -6,17 +6,26 @@ const LoadingState = () => {
         <div className={styles.mainContainer}>
             <div className={styles.container}>
                 <div className={styles.flexRow}>
-                    <div className={styles.details}>
+                    <div className={styles.percent}>
                         <Placeholder />
                         <Placeholder />
                     </div>
                 </div>
-
-                <div className={styles.flexRow}>
+                <div className={styles.details}>
                     <Placeholder />
                 </div>
+
                 <div className={styles.flexRow}>
-                    <Placeholder />
+                    <div className={styles.percent}>
+                        <Placeholder />
+                        <Placeholder />
+                    </div>
+                </div>
+                <div className={styles.flexRow}>
+                    <div className={styles.percent}>
+                        <Placeholder />
+                        <Placeholder />
+                    </div>
                 </div>
 
                 <div className={styles.flexRow}>

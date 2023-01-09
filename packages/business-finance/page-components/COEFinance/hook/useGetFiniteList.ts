@@ -44,7 +44,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(true);
     const [initialPath] = useState(pathname);
-    const [filters, setFilters] = useState({ page: 1, highlight: undefined });
+    const [filters, setFilters] = useState({ page: 1 });
     const [list, setList] = useState<ListInterface>({
         data: [],
         total: 0,
@@ -52,7 +52,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
         fullResponse : {}, 
         reverted: 0,
     });
-    const { page, highlight = false, ...restFilters } = filters;
+    const { page, ...restFilters } = filters;
 
     const refetch = () => {
         setLoading(true);
@@ -68,7 +68,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
                 }));
                 setLoading(false);
             })
-            .catch((e:any) => {
+            .catch((e: any) => {
                 console.log(e);
                 setList(() => ({
                     data: [],
@@ -103,7 +103,6 @@ const useGetFiniteList = (hook: any, params = {}) => {
         errors,
         hookSetters,
         refetch,
-        highlight,
     };
 };
 

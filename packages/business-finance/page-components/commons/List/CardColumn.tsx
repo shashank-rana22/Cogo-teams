@@ -7,7 +7,7 @@ import { Placeholder } from '@cogoport/components';
 export interface Props {
 	fields: FieldType[];
 	itemStyles?: React.CSSProperties;
-	singleitem?: object;
+	singleitem?: number | object;
 	functions?: FunctionObjects;
 	config: ConfigType;
 	isMobile?: boolean;

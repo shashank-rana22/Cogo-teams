@@ -1,78 +1,76 @@
-import React,{useState} from 'react'
-import SegmentedControl from '../../../../commons/SegmentedControl/index';
-import styled from './styles.module.css'
-import {FILTERS_DATA,FILTERS_DAY_DATA,FILTERS_URGENT_DATA} from '../../../constants/purchase-list-filters'
-import {Input} from "@cogoport/components";
-import { IcMSearchdark } from '@cogoport/icons-react';
+import React, { useState } from "react";
+import SegmentedControl from "../../../../commons/SegmentedControl/index";
+import styled from "./styles.module.css";
+import {
+    FILTERS_DATA,
+    FILTERS_DAY_DATA,
+    FILTERS_URGENT_DATA,
+} from "../../../constants/purchase-list-filters";
+import { Input } from "@cogoport/components";
+import { IcMSearchdark } from "@cogoport/icons-react";
 import FilterModal from "../../../Components/FilterModal/index";
 
-interface segmentFilterProps{
-    setSearchValue: React.Dispatch<React.SetStateAction<string | number>>
-    searchValue: string | number
-    currentTab: string
-    setCurrentTab: React.Dispatch<React.SetStateAction<string>>
+interface segmentFilterProps {
+    setSearchValue: React.Dispatch<React.SetStateAction<string | number>>;
+    searchValue: string | number;
+    currentTab: string;
+    setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function SegmentedFilters({setCurrentTab,currentTab,setSearchValue,searchValue}:segmentFilterProps) {  
-    const [filters, setFilters]=useState({})
+function SegmentedFilters({
+    setCurrentTab,
+    currentTab,
+    setSearchValue,
+    searchValue,
+}: segmentFilterProps) {
+    const [filters, setFilters] = useState({});
 
-
-  return (
-      <div className={styled.main}>
+    return (
+        <div className={styled.main}>
             <div className={styled.segment}>
                 <div className={styled.filterData}>
-                 <SegmentedControl
-                    options={FILTERS_DATA}
-                    activeTab={currentTab}
-                    setActiveTab={setCurrentTab}
-                    color={"#ED3726"} 
-                    background={"#FFFAEB"}
+                    <SegmentedControl
+                        options={FILTERS_DATA}
+                        activeTab={currentTab}
+                        setActiveTab={setCurrentTab}
+                        color={"#ED3726"}
+                        background={"#FFFAEB"}
                     />
                 </div>
                 <div className={styled.filterData}>
                     <SegmentedControl
-                    options={FILTERS_DAY_DATA}
-                    activeTab={currentTab}
-                    setActiveTab={setCurrentTab}
-                    color={"#ED3726"} 
-                    background={"#FFFAEB"}
+                        options={FILTERS_DAY_DATA}
+                        activeTab={currentTab}
+                        setActiveTab={setCurrentTab}
+                        color={"#ED3726"}
+                        background={"#FFFAEB"}
                     />
                 </div>
-                <div className={styled.filterDataUrgent} >
+                <div className={styled.filterDataUrgent}>
                     <SegmentedControl
-                    options={FILTERS_URGENT_DATA}
-                    activeTab={currentTab}
-                    setActiveTab={setCurrentTab}
-                    color={"#ED3726"} 
-                    background={"#FFFAEB"}
+                        options={FILTERS_URGENT_DATA}
+                        activeTab={currentTab}
+                        setActiveTab={setCurrentTab}
+                        color={"#ED3726"}
+                        background={"#FFFAEB"}
                     />
-                 </div>
+                </div>
             </div>
             <div className={styled.searchFilter}>
-            <div className={styled.search}>
-                <Input
-                    name="q"
-                    size="sm"
-                    value={searchValue}
-				    onChange={(e:any) => setSearchValue(e)}
-                    placeholder="Search by Invoice No./Shipment ID"
-                    suffix={(
-						<IcMSearchdark
-							height={15}
-							width={15}
-						/>
-					)}
-                />
+                <div className={styled.search}>
+                    <Input
+                        name="q"
+                        size="sm"
+                        value={searchValue}
+                        onChange={(e: any) => setSearchValue(e)}
+                        placeholder="Search by Invoice No./Shipment ID"
+                        suffix={<IcMSearchdark height={15} width={15} />}
+                    />
+                </div>
+                <FilterModal setFilters={setFilters} filters={filters} />
             </div>
-            <FilterModal setFilters={setFilters} filters={filters}/>
-            </div>
-  </div>
-  )
+        </div>
+    );
 }
 
 export default SegmentedFilters;
-
-
-
-
-

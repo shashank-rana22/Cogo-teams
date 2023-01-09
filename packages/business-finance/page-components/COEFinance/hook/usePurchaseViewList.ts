@@ -14,9 +14,9 @@ interface Props{
 }
 
 const  useGetPurchaseViewList=({filters,setFilters,sort}:Props)=> {
-	const [currentTab, setCurrentTab] = useState<string>('all');
+	const [currentTab, setCurrentTab] = useState('all');
 	const {debounceQuery, query }=useDebounceQuery();
-	const [searchValue, setSearchValue] = useState<number|string>('');
+	const [searchValue, setSearchValue] = useState('');
 
 	
 	

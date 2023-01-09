@@ -7,6 +7,7 @@ interface Props{
 	setActiveTab:Function;
 	color?: string;
 	background?:string;
+	style?:React.CSSProperties;
 }
 
 function SegmentedControl(props:Props) {
@@ -16,12 +17,13 @@ function SegmentedControl(props:Props) {
 		setActiveTab,
 		color="#356EFD",
 		background="#F2F6FF",
+		style,
 	} = props;
 
 	const options = !optionsProp ? [] : optionsProp;
 
 	return (
-		<div className={styles.segmented_control}>
+		<div className={styles.segmented_control} style={style}>
 			<div className={styles.segmented_container}>
 				{options.map((tabOption) => {
 					const { label, value, icon ,badge} = tabOption;

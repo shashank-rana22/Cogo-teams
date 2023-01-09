@@ -1,0 +1,20 @@
+.header{
+    background: #333333;
+    border-radius: 4px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 35px;
+}
+
+.font{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    color: #ffffff;
+    display: flex;
+}
+
+.placeholder{
+    margin-left: 10px;
+}

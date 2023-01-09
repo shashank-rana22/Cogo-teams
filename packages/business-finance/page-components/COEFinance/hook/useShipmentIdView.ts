@@ -1,5 +1,5 @@
 import { useRequest, useRequestBf } from "@cogoport/request";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSelector } from "@cogoport/store";
 import useGetFiniteList from "./useGetFiniteList";
@@ -16,32 +16,26 @@ interface UseSelectorProps {
     profile?: Profile;
 }
 
-const useShipmentIdView = (allParams: any) => {
-    const { ...params } = allParams || {};
+interface AllParams {
+    jobs?: string;
+    pending_approval?: string;
+}
+
+const useShipmentIdView = (allParams?: {}) => {
+    const { ...params }: AllParams = allParams || {};
     const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({
             authorizationparameters: profile?.authorizationparameters,
         })
     );
 
-    const [{ data: shipmentData, loading: apiLoading, error }, trigger] =
-        useRequest(
-            {
-                url: "list_shipments",
-                method: "get",
-            },
-            { autoCancel: false }
-        );
-
-    const [{ loading: statsLoading, data: statsData }, statsTrigger] =
-        useRequestBf(
-            {
-                url: "/purchase/bills/stats",
-                method: "get",
-                authkey: "get_purchase_bills_stats",
-            },
-            { autoCancel: false }
-        );
+    const [{ data: shipmentData, loading: apiLoading }, trigger] = useRequest(
+        {
+            url: "list_shipments",
+            method: "get",
+        },
+        { autoCancel: false }
+    );
 
     const listAPi = (restFilters: dataType, currentPage: dataType) => {
         const allFilters = {
@@ -73,18 +67,6 @@ const useShipmentIdView = (allParams: any) => {
         });
     };
 
-    const handleStats = async () => {
-        try {
-            await statsTrigger();
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    useEffect(() => {
-        handleStats();
-    }, []);
-
     const {
         loading,
         page,
@@ -98,7 +80,6 @@ const useShipmentIdView = (allParams: any) => {
     });
 
     const handleRefetch = () => {
-        handleStats();
         refetch();
     };
 
@@ -115,9 +96,6 @@ const useShipmentIdView = (allParams: any) => {
         hookSetters,
         refetchList: refetch,
         refetch: handleRefetch,
-        statsData,
-        statsLoading,
-        apiLoading,
     };
 };
 
