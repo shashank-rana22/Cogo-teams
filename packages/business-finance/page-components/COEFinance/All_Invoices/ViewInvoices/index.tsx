@@ -24,7 +24,7 @@ const ViewInvoices =()=>{
     
     return(
     <div>
-        <Header remarksVal={remarksVal}/>
+        <Header data={fullResponse} remarksVal={remarksVal}/>
 
         <SupplierDetails 
            data={fullResponse}
