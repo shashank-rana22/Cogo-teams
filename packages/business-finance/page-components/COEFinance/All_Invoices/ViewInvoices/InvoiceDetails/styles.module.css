@@ -1,60 +1,59 @@
 .smallHr {
-    border: 1px solid #ed3726;
-    border-radius: 30px;
-    width: 5%;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column; 
-  }
+  border: 1px solid #ed3726;
+  border-radius: 30px;
+  width: 5%;
+}
 
-  .card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 8px 16px;
-    margin: 12px 0px;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+}
 
-  .verticalSmallHr {
-    border: 1px solid #ed3726;
-    border-radius: 30px;
-    width: 2px;
-    height: 36px;
-    margin: 0px 16px;
-  }
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 12px 0px;
+}
 
-  .cardField{
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    align-items: center;
-  }
-  .amount{
-    color: #F68B21;
-    font-weight: 700;
-  }
+.verticalSmallHr {
+  border: 1px solid #ed3726;
+  border-radius: 30px;
+  width: 2px;
+  height: 36px;
+  margin: 0px 16px;
+}
 
-  .tag{
-    color: red;
-    font-weight: 600;
-  }
+.cardField {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.amount {
+  color: #f68b21;
+  font-weight: 700;
+}
 
-  .flexdiv{
-    display: flex;
-    align-items: center;
-  }
+.tag {
+  color: red;
+  font-weight: 600;
+}
 
-  .buttonContainer{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 8px;
-    width: 140px;
-  }
+.flexdiv {
+  display: flex;
+  align-items: center;
+}
 
-  .remarks{
-    font-weight: 600;
-  }
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 8px;
+  width: 140px;
+}
+
+.remarks {
+  font-weight: 600;
+}
