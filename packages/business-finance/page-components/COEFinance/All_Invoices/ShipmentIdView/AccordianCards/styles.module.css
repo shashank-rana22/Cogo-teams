@@ -135,11 +135,31 @@
         0 calc(100% - var(--f)),
         var(--r) calc(50% - var(--f) / 2)
     );
-    background: #cdf7d4;
+    background: #fef1df;
     font-size: 10px;
     box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
 }
 
+.ribbonClosed {
+    --f: 9px;
+    --r: 8px;
+    --t: 2px;
+    position: absolute;
+    inset: var(--t) calc(-1 * var(--f)) auto auto;
+    padding: 0 10px var(--f) calc(10px + var(--r));
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - var(--f)),
+        calc(100% - var(--f)) 100%,
+        calc(100% - var(--f)) calc(100% - var(--f)),
+        0 calc(100% - var(--f)),
+        var(--r) calc(50% - var(--f) / 2)
+    );
+    background: #cdf7d4;
+    font-size: 10px;
+    box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+}
 .freight {
     padding: 4px;
     border-radius: 4px;

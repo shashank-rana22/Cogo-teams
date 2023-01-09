@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TabSelect from "../../../../../commons/TabSelect/index";
+import getFormattedPrice from "../../../../../commons/utils/getFormattedPrice";
 import styles from "./styles.module.css";
 
 interface propsType {
@@ -27,18 +28,23 @@ const CardHeader = ({ amountTab, setAmountTab, itemData }: propsType) => {
                     <div className={styles.labelText}>
                         Discount Applied (KAM) -
                     </div>
-                    <div className={styles.valueText}> INR 30,000</div>
+                    <div className={styles.valueText}>
+                        {getFormattedPrice(
+                            itemData.discount_amount,
+                            itemData.discount_amount_currency
+                        )}
+                    </div>
                 </div>
                 <div className={styles.discount}>
                     <div className={styles.labelText}>
                         Discount Applied (Revenue Desk) -
                     </div>
-                    <div className={styles.valueText}> INR 30,000 </div>
+                    <div className={styles.valueText}> {} </div>
                 </div>
             </div>
             <div className={styles.status}>
                 <div className={styles.statusLabel}>Status - </div>
-                <div className={styles.statusValue}> Operationally closed</div>
+                <div className={styles.statusValue}>N/A</div>
             </div>
         </div>
     );

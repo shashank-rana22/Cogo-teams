@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useRequestBf } from "@cogoport/request";
 import { useSelector } from "@cogoport/store";
 import useGetFiniteList from "./useGetFiniteList";
-
 interface AllParams {
     billId?: number;
     billNumber?: number;
@@ -14,17 +13,14 @@ interface Profile {
 interface UseSelectorProps {
     profile?: Profile;
 }
-
 const useGetBill = (allParams = {}) => {
     const { ...params }: AllParams = allParams || {};
-
     const { authorizationparameters } = useSelector(
         ({ profile }: UseSelectorProps) => ({
             authorizationparameters: profile?.authorizationparameters,
         })
     );
-
-    const [{ loading: apiLoading }, trigger] = useRequestBf(
+    const [{ data, loading: apiLoading }, trigger] = useRequestBf(
         {
             url: `/purchase/bills/${params?.billId}`,
             method: "get",
@@ -32,9 +28,8 @@ const useGetBill = (allParams = {}) => {
         },
         { autoCancel: false }
     );
-
     const [
-        { data: paymentsData, loading: accPaymentLoading },
+        { data: paymentsData, loading: accPaymentLoading, error },
         accPaymentTrigger,
     ] = useRequestBf(
         {
@@ -44,29 +39,14 @@ const useGetBill = (allParams = {}) => {
         },
         { autoCancel: false }
     );
-
-    const [{ data, loading: apiLoading }, trigger] = useRequestBf(
-        {
-            url: `/purchase/bills/${params?.billId}`,
-            method: "get",
-            authKey: "get_purchase_bills_by_id",
-        },
-        { autoCancel: false }
-    );
-
-    const listApi = async (restFilters: any) => {
-        try {
-            return await trigger({
-                params: {
-                    jobNumber: params?.billNumber,
-                    ...restFilters,
-                },
-            });
-        } catch (err) {
-            console.log(err);
-        }
+    const listApi = (restFilters: any) => {
+        return trigger({
+            params: {
+                jobNumber: params?.billNumber,
+                ...restFilters,
+            },
+        });
     };
-
     const handleAccPayments = async () => {
         try {
             await accPaymentTrigger({
@@ -76,16 +56,13 @@ const useGetBill = (allParams = {}) => {
             console.log(err);
         }
     };
-
     useEffect(() => {
         handleAccPayments();
     }, []);
-
     const { loading, page, filters, list, hookSetters, refetch } =
         useGetFiniteList(listApi, {
             authorizationparameters,
         });
-
     return {
         loading: loading || apiLoading,
         page,
@@ -98,5 +75,4 @@ const useGetBill = (allParams = {}) => {
         paymentsData,
     };
 };
-
 export default useGetBill;

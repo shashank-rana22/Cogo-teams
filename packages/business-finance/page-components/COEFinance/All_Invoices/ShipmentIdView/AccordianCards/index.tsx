@@ -25,6 +25,7 @@ interface ItemDataProps {
     income_total_price: number;
     income_total_currency: string;
     id: string;
+    is_job_closed: boolean;
 }
 interface listData {
     itemData: ItemDataProps;
@@ -177,8 +178,11 @@ const AccordianCards = ({
                         </div>
                     </div>
 
-                    <div className={styles.ribben}>
-                        <div className={styles.ribbon}>Closed</div>
+                    <div className={styles.ribbon}>
+                        {itemData.is_job_closed === false && "Open"}
+                    </div>
+                    <div className={styles.ribbonBackground}>
+                        {itemData.is_job_closed === true && "Closed"}
                     </div>
                 </div>
                 <div>
