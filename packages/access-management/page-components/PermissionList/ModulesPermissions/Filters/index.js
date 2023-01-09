@@ -12,20 +12,20 @@ function Filters({
 	navStatus = {},
 	setNavStatus = () => {},
 }) {
-	const content = () => (
-		<div style={{ padding: '12px 8px' }}>
+	const content = (
+		<section>
 			<span>Navigation Status</span>
 			<Chips
+				className={styles.chips_container}
 				items={[
 					{ children: 'Assigned', key: 'assigned' },
 					{ children: 'Not Assigned', key: 'not_assigned' },
 					{ children: 'All', key: 'all' },
 				]}
-				enableMultiSelect
-				selectedItems={navStatus}
+				selectedItems={[navStatus]}
 				onItemChange={(val) => setNavStatus(val)}
 			/>
-		</div>
+		</section>
 	);
 	return (
 		<section className={styles.container}>
@@ -36,8 +36,8 @@ function Filters({
 				placeholder="Search Navigation"
 			/>
 			<Popover placement="left" render={content} interactive>
-				<Button size="md">
-					FILTER
+				<Button themeType="tertiary">
+					Filters
 					{' '}
 					<IcMFilter />
 				</Button>

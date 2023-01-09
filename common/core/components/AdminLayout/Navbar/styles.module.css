@@ -54,24 +54,24 @@
 }
 
 .search_container {
-	padding: 4px;
 	margin: 10px 0;
 }
 
 .input_search:global(.ui_input_container) {
 	background-color: #fdebe9;
 	border: none;
-
-	svg {
-		margin-right: 14px;
-	}
 }
 
 .input_search:global(.ui_input_control) {
 	background-color: #fdebe9;
 }
 
-.input_search:global(.prefix) {
+.input_search {
+	:global(.ui_input_prefix) {
+		padding-left: 14px;
+		margin-right: 4px;
+		background-color: unset;
+	}
 }
 
 .outer_container {

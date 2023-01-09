@@ -1,6 +1,7 @@
 import { Input } from '@cogoport/components';
 import cl from '@cogoport/components/src/utils/classname-processor';
 import { IcMSearchdark } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -17,6 +18,8 @@ function Navbar({
 	nav = [],
 	mobileShow = false,
 }) {
+	const router = useRouter();
+
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
@@ -46,6 +49,7 @@ function Navbar({
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img
+							onClick={() => router.push('/home')}
 							className={styles.logo}
 							src={resetSubnavs ? LOGO.LARGE : LOGO.SMALL}
 							alt="Logo Cogoport"

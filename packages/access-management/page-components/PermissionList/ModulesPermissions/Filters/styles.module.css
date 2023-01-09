@@ -13,3 +13,11 @@
 		justify-content: flex-end;
 	}
 }
+
+.chips_container {
+	margin: 10px;
+
+	:global(.ui_ps_size_md) {
+		min-width: 0;
+	}
+}
