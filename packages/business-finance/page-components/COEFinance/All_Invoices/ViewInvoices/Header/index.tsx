@@ -14,9 +14,11 @@ interface DataInterface {
 interface HeaderInterface {
     data?:DataInterface
     remarksVal?:RemarksValInterface
+    lineItem?:boolean
 
 }
-const Header =({data,remarksVal}:HeaderInterface) => {
+
+const Header =({data,remarksVal,lineItem}:HeaderInterface) => {
     const [approve,setApprove]=useState(false)
     const Router = useRouter();
     const handleReject=()=>{
@@ -24,6 +26,7 @@ const Header =({data,remarksVal}:HeaderInterface) => {
     }
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 
+    console.log(lineItem,"lineItem");
     // const {handleSubmit} = useApproveReject({collectionPartyId})
 
 return(
@@ -31,9 +34,9 @@ return(
     <div className={styles.container}>
         <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]','/business-finance/coe-finance/all_invoices')}>Go Back</Button>
         <div className={styles.subContainer}>
-            <Button size="md" style={{marginRight:'8px'}}  onClick={()=>{setApprove(true)}} >Approve</Button>
-            <Button size="md" style={{marginRight:'8px'}} disabled>Approve & Hold</Button>
-            <Button size="md" style={{marginRight:'8px' ,background: '#ED3726'}} onClick={handleReject}>Reject</Button>
+            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem}  onClick={()=>{setApprove(true)}}>Approve</Button>
+            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem} >Approve & Hold</Button>
+            <Button size="md" style={{marginRight:'8px' ,background: '#ED3726'}} onClick={handleReject} disabled={!lineItem}>Reject</Button>
         </div>
     </div>
     <div className={styles.hr}/>

@@ -35,8 +35,9 @@ interface ShipmentDetailsInterface {
     remarksVal:RemarksValInterface
     setRemarksVal:any
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
+    lineItem?:boolean
 }
-const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,setLineItem}:ShipmentDetailsInterface)=>{
+const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,setLineItem,lineItem}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
     const [showVariance, setShowVariance] = useState(false);
@@ -124,7 +125,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,setLineI
 				/>
 			) : null}
         
-        <TimeLineItemCheck itemCheck={itemCheck}/>
+        <TimeLineItemCheck itemCheck={itemCheck} lineItem={lineItem}/>
 
         <div className={styles.shipmentDetailsFooter}>
             <div className={styles.pdfDisplay}>

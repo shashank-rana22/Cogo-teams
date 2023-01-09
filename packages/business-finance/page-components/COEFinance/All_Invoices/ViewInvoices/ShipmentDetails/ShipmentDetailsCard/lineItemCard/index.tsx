@@ -1,5 +1,5 @@
 import { Button } from "@cogoport/components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './styles.module.css'
 import { LINE_ITEMS ,LINE_ITEMS_CHECK} from "../../../../../configurations/LINE_ITEMS";
 import List from "../../../../../../commons/List/index";
@@ -16,38 +16,74 @@ interface LineItemCard {
 }
 
 const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remarksVal,setLineItem}:LineItemCard) => {
-    const [radio , setRadio ] = useState({})
-    const [popover, setPopover] = useState(false)
+    const [approvedItems , setApprovedItems ] = useState({})
+    const [popover, setPopover] = useState(false);
+    const [rejectedItems, setRejectedItems]=useState({});
     const [lineItemsRemarks,setLineItemsRemarks] = useState({});
     const [activeLineItem, setActiveLineItem] = useState(0);
     const [showRejectedModal , setShowRejectedModal] = useState({ id : ""})
 
     const renderAction =(id:string)=>{
-        if(radio[id as keyof typeof radio]){
+        if(approvedItems[id as keyof typeof approvedItems]){
            return  <IcCFtick width="17px" height="17px" /> 
         }
-        if(popover[id as keyof typeof popover]){
-            
+        if(rejectedItems[id as keyof typeof rejectedItems]){
             return <IcCFcrossInCircle width="17px" height="17px" />
         }
         return <div className={styles.circle} />
-    }
+    } 
+
+    const ApproveCheck = Object.values(approvedItems).filter((item)=> item === true).length
+    
+    const RejectCheck = Object.keys(rejectedItems).length
+
+    useEffect(()=>{
+        if(lineItems?.length === ApproveCheck + RejectCheck){
+            setLineItem(true)
+        }
+        else if(lineItems?.length !== ApproveCheck + RejectCheck){
+            setLineItem(false)
+        }
+    },[ApproveCheck,RejectCheck])
     
     
     const handleApproveClick = (key = '') => {   
-		setRadio((previousActions:any) => ({
+		setApprovedItems((previousActions:any) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
+        setRejectedItems((p)=>{
+            delete p[key as keyof typeof p];
+           return {...p};
+       });
+       setLineItemsRemarks((prev)=>{
+           delete prev[key as keyof typeof prev];
+           return {...prev};
+       });
 	};
 
-    const handleRejectClick =(item:any) => {
-        setActiveLineItem(item);
-        setShowRejectedModal(item)
-        setPopover((previousActions:any) => ({
+    const openRejectModal  =(item:any) => {
+        setActiveLineItem(item?.id);
+        setShowRejectedModal(item);
+        setPopover((previousActions:any) => (
+            {
 			...previousActions,
 			[item?.id]: !previousActions[item?.id],
 		}));
+    }
+
+    const handleRejectClick =(key:string='') => {
+        setRejectedItems((p:any)=>{
+            return {
+                ...p,
+                [key]: true
+            }
+        });
+        setApprovedItems((p)=>{
+             delete p[key as keyof typeof p];
+            return {...p};
+        });
+		setPopover(false);
     }
 
 
@@ -61,13 +97,14 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
             {renderAction(item?.id)}
             </div>
         ),
-        renderReject: (item:any) => (
+        renderReject: (item:any) => {
+            return (
             <div style={{cursor:"pointer"}}>
-                <Popover  placement="left" interactive render={<div className={styles.popoverRejected} onClick={()=>{handleRejectClick(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
+                <Popover  placement="left" interactive render={<div className={styles.popoverRejected} onClick={()=>{openRejectModal(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
                     <div> <IcMOverflowDot width="20px" height="20px"/> </div> 
                 </Popover>
             </div>
-        )
+        )}
       };
      
       const { id } = showRejectedModal;
@@ -120,7 +157,10 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
 
                     
                     <Modal.Footer>
-                        <Button onClick={onClose}>Submit</Button>
+                        <Button
+                         onClick={()=>handleRejectClick(id)}
+                         disabled={ !lineItemsRemarks[id as keyof typeof lineItemsRemarks] || lineItemsRemarks[id]?.length<0}
+                         >Submit</Button>
                     </Modal.Footer>
                 </Modal>
             }

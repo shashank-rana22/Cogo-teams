@@ -4,8 +4,9 @@ import styles  from './styles.module.css'
 
 interface TimeLine {
     itemCheck?:boolean
+    lineItem?:boolean
 }
-const TimeLineItemCheck = ({itemCheck}:TimeLine) => {
+const TimeLineItemCheck = ({itemCheck,lineItem}:TimeLine) => {
    
     return (
     <div>
@@ -14,7 +15,7 @@ const TimeLineItemCheck = ({itemCheck}:TimeLine) => {
             {itemCheck ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
             
             <div className={styles.line}/>
-            {itemCheck ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
+            {lineItem ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
         </div>
         <div className={styles.container}>
             <div className={styles.textContainer}>Invoice Details</div>

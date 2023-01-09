@@ -119,7 +119,7 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal ,setItemCheck,setLin
 
 return(
     <div>
-{ showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem} setRemarksVal={setRemarksVal} remarksVal={remarksVal}/> : 
+{ showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem} setRemarksVal={setRemarksVal} remarksVal={remarksVal} setLineItem={setLineItem}/> : 
     <div>
         <div className={styles.mainHeader}>
             <div className={styles.instructions}>
