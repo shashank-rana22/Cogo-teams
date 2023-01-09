@@ -7,7 +7,7 @@ import useGetBill from "../../hook/useGetBill"
 import InvoiceDetails from "./InvoiceDetails/index"
 
 const ViewInvoices =()=>{
-    const {push, query} = useRouter();
+    const {query} = useRouter();
     const {billId,orgId,jobNumber}=query;
     const [remarksVal, setRemarksVal]=useState({
         bankDetailsRemarks:'',
@@ -15,7 +15,6 @@ const ViewInvoices =()=>{
         invoiceDetailsRemarks:'',
     });
     const {
-		loading,
 		list: { fullResponse },
 		refetch: getBillRefetch,
 		accPaymentLoading,
@@ -41,7 +40,6 @@ const ViewInvoices =()=>{
             remarksVal={remarksVal}
             setRemarksVal={setRemarksVal}
             />
-  
 
     </div>
     )

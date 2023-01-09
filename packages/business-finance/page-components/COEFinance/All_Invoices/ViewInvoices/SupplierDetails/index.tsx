@@ -13,6 +13,7 @@ interface SellerDetail {
 interface AdditionDetailInt{
     kycStatus?:string
 }
+
 interface DataProps {
     sellerDetail?:SellerDetail
     serviceProviderCategory?:string,
