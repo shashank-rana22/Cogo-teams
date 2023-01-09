@@ -41,7 +41,6 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     const handleChange = () =>{
         setShowModal(!showModal) 
          getSupplierHistory()
-
     }
     
     return(
