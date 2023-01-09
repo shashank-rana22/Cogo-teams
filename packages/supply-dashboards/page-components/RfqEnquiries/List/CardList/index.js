@@ -6,12 +6,12 @@ import List from './List';
 import styles from './styles.module.css';
 
 function CardList({
-	fields, list, loading, filters, hookSetters, setRfq,
+	fields, list, loading, filters, hookSetters,
 }) {
 	return (
 		<div className={styles.cardlist}>
 			<Header columns={fields} />
-			{list?.data.map((item) => (<List fields={fields} item={item} loading={loading} setRfq={setRfq} />))}
+			{list?.data.map((item) => (<List fields={fields} item={item} loading={loading} />))}
 			{!loading && !(list?.data || []).length && (
 				<div className={styles.empty_state}>
 					<IcMSearchlight
