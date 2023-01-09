@@ -14,6 +14,7 @@ const ViewInvoices =()=>{
         billingPartyRemarks:'',
         invoiceDetailsRemarks:'',
     });
+    const [lineItem,setLineItem] = useState(false)
     const {
 		list: { fullResponse },
 		refetch: getBillRefetch,
@@ -39,6 +40,7 @@ const ViewInvoices =()=>{
             jobNumber={jobNumber}
             remarksVal={remarksVal}
             setRemarksVal={setRemarksVal}
+            setLineItem={setLineItem}
             />
 
     </div>

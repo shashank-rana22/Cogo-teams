@@ -45,9 +45,11 @@ interface ShipmentDetailsCardInterface{
     data?:DataInterface
     remarksVal:RemarksValInterface
     setRemarksVal:any
+    setItemCheck:  React.Dispatch<React.SetStateAction<boolean>>
+    setLineItem:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal}:ShipmentDetailsCardInterface) =>{
+const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal ,setItemCheck,setLineItem}:ShipmentDetailsCardInterface) =>{
     const [showValue, setShowValue ] = useState([] as any)
     const [rejected,setRejected] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
@@ -109,6 +111,10 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal}:ShipmentDetailsCard
         const current = Object.keys(showRejected)?.[0];
         handleRejected(+current);
         setShowRejected(false);
+    }
+    const handleSave = () =>{
+        setShowLineItem(true)
+        setItemCheck(true)
     }
 
 return(
@@ -361,7 +367,7 @@ return(
         })}
 
     <div className={styles.footer}>
-        <Button size='md' disabled ={showValue.length + rejected.length == 3 ? false : true} onClick={()=>{setShowLineItem(true)}} >Save And Next</Button>
+        <Button size='md' disabled ={showValue.length + rejected.length == 3 ? false : true} onClick={()=>handleSave()} >Save And Next</Button>
     </div>
     
    </div>

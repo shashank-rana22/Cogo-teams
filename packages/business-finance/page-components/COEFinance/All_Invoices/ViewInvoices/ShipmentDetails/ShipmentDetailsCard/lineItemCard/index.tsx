@@ -12,9 +12,10 @@ interface LineItemCard {
     setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>
     setRemarksVal:any,
     remarksVal:object|{}
+    setLineItem:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remarksVal}:LineItemCard) => {
+const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remarksVal,setLineItem}:LineItemCard) => {
     const [radio , setRadio ] = useState({})
     const [popover, setPopover] = useState(false)
     const [lineItemsRemarks,setLineItemsRemarks] = useState({});
@@ -31,7 +32,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
         }
         return <div className={styles.circle} />
     }
-
+    
     
     const handleApproveClick = (key = '') => {   
 		setRadio((previousActions:any) => ({
