@@ -1,5 +1,5 @@
 import React, { useState }  from "react";
-import { Tags } from "@cogoport/components";
+import { Pill } from "@cogoport/components";
 import {IcCFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import { Modal } from "@cogoport/components";
@@ -10,8 +10,13 @@ interface SellerDetail {
     organizationName?:string
 
 }
+interface AdditionDetailInt{
+    kycStatus?:string
+}
 interface DataProps {
     sellerDetail?:SellerDetail
+    serviceProviderCategory?:string,
+    serviceProviderAdditionalDetail:AdditionDetailInt,
 }
 
 interface PaymentsData {
@@ -29,8 +34,9 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     const {historyData,getSupplierHistory,loading} = useSupplierHistory();
     const [showModal, setShowModal] = useState(false)
     
-    const { sellerDetail } = data || [{}]
-    const {payables,receivables,ledgerCurrency} = paymentsData || {}
+    const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail} = data || [{}];
+    const {kycStatus=''}=serviceProviderAdditionalDetail;
+    const {payables,receivables,ledgerCurrency} = paymentsData || {};
 
     const handleChange = () =>{
         setShowModal(!showModal) 
@@ -49,9 +55,8 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                 <div className={styles.orgNameAndVerified}>
                     <div>Name - <span className={styles.textDecoration}>{sellerDetail?.organizationName}</span></div>
                     <div className={styles.tagsContainer}>
-                        <Tags themeType="blue" size="md">Non - Asset</Tags>
-                        <Tags themeType="blue" size="md">MSME</Tags>
-                        <div className={styles.kycVerified}><IcCFtick/><div>kyc verified</div></div>
+                        <Pill color="blue" size="sm">{serviceProviderCategory}</Pill>
+                        {kycStatus==="verified" && <div className={styles.kycVerified}><IcCFtick/><div>kyc verified</div></div>}
                     </div>      
                 </div>
 
