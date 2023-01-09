@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-
 const getFormattedData = (data) => {
     const {sell_quotation={},buy_quotation={}}=data ||{};
-    const allservicesFeedata=sell_quotation.service_charges.filter((item)=>(item.service_type))
-    const platformFeedata=sell_quotation.service_charges.filter((item)=>(!item.service_type))
+    const allservicesFeedata=sell_quotation.serviceCharges?.filter((item)=>(item.serviceType))||[]
+    const platformFeedata=sell_quotation.serviceCharges?.filter((item)=>(!item.serviceType))||[]
 
-    const buyQuotationData=buy_quotation.service_charges.map((item)=>{
-        return {...item,service_type:item.service_type||'Platform Fees'}
+    const buyQuotationData=buy_quotation.serviceCharges?.map((item)=>{
+        return {...item,serviceType:item.serviceType||'Platform Fees'}
     })
     const formattedBuyData=[...allservicesFeedata,...platformFeedata]?.map((items)=>{
-        const serviceType=items.service_type;
-        const filterData=buyQuotationData.filter((item)=>(item.service_type==serviceType))||[];
+        const serviceType=items.serviceType;
+        const filterData=buyQuotationData?.filter((item)=>(item.serviceType==serviceType))||[];
         return filterData[0];
     })
     return {formattedBuyData,sellQuotationData:[...allservicesFeedata,...platformFeedata]}

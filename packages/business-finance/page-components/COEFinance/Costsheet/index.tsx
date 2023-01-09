@@ -20,8 +20,8 @@ const CostSheet = () => {
   const shipment_id=Router.query.shipmentId;
   const {selldata,buydata,apiloading, data}=useGetShipmentCostSheet({shipment_id});
   const{buy_quotation={}, sell_quotation={}}=data||{};
-  const{service_charges: buyServicesCharges,net_total:netTotalPriceSell,net_total_price_currency:netTotalPriceCurrencySell,net_total_price_discounted:netTotalPriceDiscountedSell}=sell_quotation||{};
-  const{service_charges: sellServicesCharges,net_total:netTotalPriceBuy,net_total_price_currency:netTotalPriceCurrencyBuy,net_total_price_discounted:netTotalPriceDiscountedBuy}=buy_quotation||{};
+  const{net_total:netTotalPriceSell,net_total_price_currency:netTotalPriceCurrencySell,net_total_price_discounted:netTotalPriceDiscountedSell}=sell_quotation||{};
+  const{net_total:netTotalPriceBuy,net_total_price_currency:netTotalPriceCurrencyBuy,net_total_price_discounted:netTotalPriceDiscountedBuy}=buy_quotation||{};
   
   return (
     <div>
@@ -64,10 +64,6 @@ const CostSheet = () => {
     <div className={styles.displayflex}>
     <DiscountRect heading='Legends' statlabel={<span className={styles.displayflex}>Profit <span className={styles.profiticon}><IcMArrowNext height={20} width={20}/></span></span>} statvalue={<span className={styles.displayflex}>Loss <span className={styles.lossicon}><IcMArrowNext height={20} width={20}/></span></span>} marginTop='15px' width='320px' headingwidth='90px'/>
     <div className={styles.warning}><span className={styles.icon}><IcMInfo height={20} width={20}/></span>Check Incidental Charge</div>
-    </div>
-    <div className={`${styles.displayflex} ${styles.responsive}`}>
-    <div className={styles.amountselect}>Show Amount in</div>
-    <Select options={[]}/>
     </div>
     </div>
     <div className={styles.flex}>

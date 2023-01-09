@@ -16,17 +16,17 @@ export const CardBody = ({charge}:Props) => {
     setShowFullDetails(!showFullDetails)
   }
 
-  const {service_type,line_items=[]}=charge||{}
-  const hidden=line_items.length<2?styles.hidden:''
+  const {serviceType,lineItems=[]}=charge||{}
+  const hidden=lineItems.length<2?styles.hidden:''
   const borderColor='#333333'
   return (charge?(
-    <div className={`${showFullDetails?styles.card:styles.custompadding} ${line_items.length<2?styles.padding:""}`} style={{ '--bordercolor':borderColor} as React.CSSProperties}>
+    <div className={`${showFullDetails?styles.card:styles.custompadding} ${lineItems.length<2?styles.padding:""}`} style={{ '--bordercolor':borderColor} as React.CSSProperties}>
     <div className={styles.layout}>
-        <div className={styles.heading} style={{ '--span': 2 } as React.CSSProperties}>{startCase(service_type) || 'Platform Fees'}</div>
+        <div className={styles.heading} style={{ '--span': 2 } as React.CSSProperties}>{startCase(serviceType) || 'Platform Fees'}</div>
         <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>Expected</div>
         <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>Actual</div>
     </div>
-    {(showFullDetails?line_items:line_items.slice(0,2)).map((lineItem:GenericObject)=>{
+    {(showFullDetails?lineItems:lineItems.slice(0,2)).map((lineItem:GenericObject)=>{
       const value=(lineItem?.actual_price)-(lineItem?.tax_total_price_discounted || lineItem?.tax_total_price)
       let className=styles.neutral
       let iconClassName=styles.neutralIcon
@@ -39,19 +39,18 @@ export const CardBody = ({charge}:Props) => {
       }
       return(
       <div className={styles.values}>
-      <div className={`${styles.coloredlabel} ${className}`} style={{ '--span': 2 } as React.CSSProperties}>{lineItem.name}</div>
-      <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(lineItem?.tax_total_price_discounted ||
-											lineItem?.tax_total_price,
-                      lineItem?.currency || 'INR')}</div>
-      <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(lineItem?.actual_price,
-										lineItem?.actual_price_currency || 'INR',)}<span className={iconClassName}><IcMArrowNext height={15} width={15}/></span></div>
+      <div className={`${styles.coloredlabel} ${className}`} style={{ '--span': 2 } as React.CSSProperties}>{lineItem.nameQuotation||lineItem.nameActual}</div>
+      <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(lineItem?.priceQuotation,
+                      lineItem?.currencyQuotation)||'-'}</div>
+      <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(lineItem?.priceActual,
+										lineItem?.currencyActual)||'-'}<span className={iconClassName}><IcMArrowNext height={15} width={15}/></span></div>
   </div>
     )
     })}
-    {(showFullDetails||line_items.length<2)&&<div className={styles.total}>
+    {(showFullDetails||lineItems.length<2)&&<div className={styles.total}>
         <div className={styles.heading} style={{ '--span': 2 } as React.CSSProperties}></div>
-        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>INR 70,000</div>
-        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(charge?.tax_total_price||charge?.total_price,charge?.currency||'INR')}</div>
+        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(charge?.serviceTotalQuotational,'INR')||'-'}</div>
+        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(charge?.serviceTotalActual,'INR')||'-'}</div>
     </div>}
     <div className={`${styles.viewmore} ${hidden}`} role='presentation' onClick={handleWidth}>{showFullDetails?"View Less":"View More"}<span className={showFullDetails?styles.arrowicon:styles.bottomicon}><IcMArrowRotateDown height={15} width={15}/></span></div>
     </div>):null
