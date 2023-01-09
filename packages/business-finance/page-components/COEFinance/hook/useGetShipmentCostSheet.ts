@@ -8,30 +8,38 @@ interface Params{
 }
 
 const useGetShipmentCostSheet = ({shipment_id}:Params) => {
-    const[loadingState,setLoadingState]=useState(false)
-    const[selldata,setSelldata]=useState<any[]>([])
-    const[buydata,setBuydata]=useState<any[]>([])
-    const [{ data, loading}, trigger] = useRequestBf(
+    const [{ data:sellData, loading:sellLoading}, sellTrigger] = useRequestBf(
             {
-                url     : `/get_shipment_cost_sheet`,
+                url     : `/common/job/list-service-charges`,
                 method  : 'get',
+                params:{ jobId:"Vw7m",chargeType:'sell' }
+            },
+            { manual: true },
+        );
+        const [{ data:buyData, loading:buyLoading}, buyTrigger] = useRequestBf(
+            {
+                url     : `/common/job/list-service-charges`,
+                method  : 'get',
+                params:{ jobId:"Vw7m",chargeType:'buy' }
             },
             { manual: true },
         );
 
-        // useEffect(()=>{
-        //     const {formattedBuyData,sellQuotationData}=getFormattedData(data,setLoadingState )
-        //    },[data])
-    
-        const getdataFromApi = async () => {
+        const getbuydataFromApi = async () => {
             try {
-                const res = await trigger({ params: { shipment_id } });
-                setLoadingState(true)
-                const {formattedBuyData,sellQuotationData}=getFormattedData(res.data )
-                setSelldata(sellQuotationData);
-                setBuydata(formattedBuyData);
-                setLoadingState(false)
+                const res = await sellTrigger();
                 if (res.status!==200) {
+                    Toast.error('Something went wrong!');
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        const getselldataFromApi = async () => {
+            try {
+                const resp = await buyTrigger();
+                if (resp.status!==200) {
                     Toast.error('Something went wrong!');
                 }
             } catch (err) {
@@ -40,10 +48,12 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
         };
     
         useEffect(() => {
-                getdataFromApi();
+            getbuydataFromApi();
+            getselldataFromApi();
         }, [shipment_id]);
+        const {formattedBuyData,sellQuotationData}=getFormattedData({sell_quotation:sellData,buy_quotation:buyData})
 
-        return {data, selldata,buydata,apiloading:(loading||loadingState)};
+        return {data:sellData, selldata:sellQuotationData,buydata:formattedBuyData,apiloading:(sellLoading||buyLoading)};
 }
 
 export default useGetShipmentCostSheet
