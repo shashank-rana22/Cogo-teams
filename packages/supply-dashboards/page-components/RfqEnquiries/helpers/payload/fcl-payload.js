@@ -66,6 +66,8 @@ const fclPayload = ({ service, value }) => {
 				validity_start : value?.validity_start,
 				line_items,
 			}],
+			origin_main_port_id      : value?.origin_main_port_id,
+			destination_main_port_id : value?.destination_main_port_id,
 		},
 	};
 

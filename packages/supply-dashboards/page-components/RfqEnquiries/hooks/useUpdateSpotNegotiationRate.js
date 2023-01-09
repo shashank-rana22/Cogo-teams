@@ -70,7 +70,11 @@ const useUpdateSpotNegotiationRate = ({ service, setSubmittedEnquiry, setActiveS
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
-	const showElements = { sourced_by_id: !values?.service_provider_id };
+	const showElements = {
+		sourced_by_id            : !values?.service_provider_id,
+		origin_main_port_id      : !service?.data?.origin_port?.is_icd,
+		destination_main_port_id : !service?.data?.destination_port?.is_icd,
+	};
 
 	const { newField } = FieldMutation({
 		fields, values, service, data,

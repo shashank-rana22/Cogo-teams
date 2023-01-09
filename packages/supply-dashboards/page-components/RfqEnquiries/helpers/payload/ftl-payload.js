@@ -1,5 +1,4 @@
 const ftlPayload = ({ service, value }) => {
-	console.log(value);
 	const line_items = [];
 	value?.line_items.forEach((item) => {
 		const val = {
