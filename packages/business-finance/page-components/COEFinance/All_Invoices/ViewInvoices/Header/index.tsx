@@ -3,8 +3,9 @@ import { Button } from '@cogoport/components'
 import {useRouter} from '@cogoport/next'
 import styles from './styles.module.css'
 import {RemarksValInterface} from '../../../../commons/Interfaces/index';
-// import useApproveReject from '../../../hook/useApproveReject'
+import useApproveReject from '../../../hook/useApproveReject'
 import { Modal } from '@cogoport/components';
+
 interface BillAdditionalInterface{
     collectionPartyId?:string
 }
@@ -17,9 +18,11 @@ interface HeaderInterface {
 
 }
 const Header =({data,remarksVal}:HeaderInterface) => {
+   const {loading, rejectApi} =useApproveReject(remarksVal);
     const [approve,setApprove]=useState(false)
     const Router = useRouter();
     const handleReject=()=>{
+        rejectApi();
         console.log('remarksVal->',remarksVal);
     }
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
