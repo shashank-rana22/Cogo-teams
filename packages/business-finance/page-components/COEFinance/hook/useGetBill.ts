@@ -45,14 +45,7 @@ const useGetBill = (allParams = {}) => {
         { autoCancel: false }
     );
 
-    const [{ data, loading: apiLoading }, trigger] = useRequestBf(
-        {
-            url: `/purchase/bills/${params?.billId}`,
-            method: "get",
-            authKey: "get_purchase_bills_by_id",
-        },
-        { autoCancel: false }
-    );
+
 
     const listApi = async (restFilters: any) => {
         try {

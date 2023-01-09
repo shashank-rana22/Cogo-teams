@@ -129,7 +129,6 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 					show={removeTag}
 					onClose={() => setRemoveTag(false)}
 					className="secondary sm"
-					closable={false}
 				>
 					<RemoveTagConfirmation
 						setRemoveTag={setRemoveTag}
