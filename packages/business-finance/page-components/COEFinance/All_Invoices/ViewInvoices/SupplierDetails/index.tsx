@@ -75,7 +75,7 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                     <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
                         <Modal.Header title="SUPPLIER HISTORY" />
                         <Modal.Body>
-                            <List config={config || {}} itemData={{list:historyData}}  loading={loading} />
+                            <List config={config} itemData={{list:historyData}}  loading={loading} />
                             
                         </Modal.Body>
                     </Modal> 
