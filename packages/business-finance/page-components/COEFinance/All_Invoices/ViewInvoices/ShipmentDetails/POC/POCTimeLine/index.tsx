@@ -29,7 +29,7 @@ const POCTimeLine = ({ data, loading }:POCTimeLineInterface) => {
 
 	const [complete, setComplete] = useState(false);
 
-	const timeLine = data || [{}];
+	const timeLine = data;
 
 	const gettimeLineData = () => {
 		if (timeLine[0]?.eventName === 'POSTED') {
