@@ -15,9 +15,6 @@ const getAuthorizationParams = (store, url) => {
 			profile?.permissions_navigations,
 			pathname,
 		);
-		console.log(authorizationparameters, 'authorizationparameters');
-
-		console.log({ profile, pathname, fallback_navigation, routeConfig }, 'data');
 
 		if (authorizationparameters || fallback_navigation) {
 			const { pipe, isMain } = getOtherApiPipe(

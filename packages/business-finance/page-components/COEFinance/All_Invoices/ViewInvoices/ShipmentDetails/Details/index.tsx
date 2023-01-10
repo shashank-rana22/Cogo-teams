@@ -9,7 +9,7 @@ import CargoDetailPills from '../cargo-details/index';
 import {DetailInterface} from '../../../../../commons/Interfaces/index';
 
 interface Details {
-	orgId?:string,
+	orgId:string,
     dataList:DetailInterface,
 	shipmentId:string,
 }

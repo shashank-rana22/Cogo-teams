@@ -16,6 +16,7 @@ import getFormattedPrice from '../../commons/utils/getFormattedPrice'
 import Documents from '../All_Invoices/ViewInvoices/ShipmentDetails/Documents'
 import useListShipment from '../hook/useListShipment'
 import Details from '../All_Invoices/ViewInvoices/ShipmentDetails/Details'
+import useUpdateJob from '../hook/useUpdateJob'
 
 const CostSheet = () => {
   const [showButton,setShowButton] = useState(false)
@@ -28,6 +29,8 @@ const CostSheet = () => {
   const {data:shipmentData} = useListShipment(jobNumber);
   const{total:buyTotal}=buyData||{};
   const{total:sellTotal}=sellData||{};
+
+  const {} = useUpdateJob({shipmentData})
   
   return (
     <div>

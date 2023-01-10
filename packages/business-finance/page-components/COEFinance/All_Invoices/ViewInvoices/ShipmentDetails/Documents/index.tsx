@@ -10,7 +10,7 @@ import { saveAs } from "file-saver";
 import styles from './styles.module.css';
 
 interface  DocumentsInterface {
-    shipmentId?:string
+    shipmentId:string
 }
 
 const Documents =({shipmentId=''}:DocumentsInterface)=>{
