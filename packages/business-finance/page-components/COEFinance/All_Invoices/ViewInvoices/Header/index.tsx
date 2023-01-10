@@ -53,11 +53,11 @@ return(
     </div>
     <div className={styles.hr}/>
     {approve && 
-        <Modal size="lg" show={approve} onClose={()=>{setApprove(false)}}>
-             <Modal.Header title={`Are you sure you want to ${modalData} this invoice ?`}/>
+        <Modal size="md" show={approve} onClose={()=>{setApprove(false)}}>
              <Modal.Body>
-                <div className={styles.button}>
-                  <Button size="md" style={{marginRight:'8px'}} onClick={()=>{setApprove(false)}} >No</Button>
+                 <div className={styles.heading}>Are you sure you want to {modalData} this invoice ?</div>
+                 <div className={styles.button}>
+                  <Button size="md" themeType="secondary" style={{marginRight:'8px'}} onClick={()=>{setApprove(false)}} >No</Button>
                   <Button size="md" style={{marginRight:'8px'}} onClick={()=>handleApproveAndReject()}>Yes</Button>
                 </div>
              </Modal.Body>
