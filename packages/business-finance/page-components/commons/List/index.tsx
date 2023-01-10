@@ -21,7 +21,7 @@ export interface Props {
     functions?: FunctionObjects;
     loading?: boolean;
     page?: number;
-    handlePageChange?: Function;
+    handlePageChange: (currentPage: number) => void;
     pageSize?: number;
     showPagination?: boolean;
 }
