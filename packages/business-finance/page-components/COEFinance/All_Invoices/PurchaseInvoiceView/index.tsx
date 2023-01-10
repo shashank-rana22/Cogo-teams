@@ -24,6 +24,7 @@ function PurchaseInvoice({filters,setFilters}:Props) {
 const router = useRouter();
 const [sort, setSort] = useState({});
 
+
   const {data,
       loading,
       config,
@@ -54,7 +55,7 @@ const [sort, setSort] = useState({});
         <FormatedDate item={itemData} field={field} />
       ),
       renderRemarks: (itemData:any,field:any)=>(
-        <RenderRemarks itemData={itemData} field={field}/>
+        <RenderRemarks item={itemData} field={field}/>
       ),
       renderViewMore : (itemData:any)=>(
         <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
@@ -71,6 +72,8 @@ const [sort, setSort] = useState({});
         searchValue={searchValue}
          currentTab={currentTab}
          setCurrentTab={setCurrentTab}
+         filters={filters}
+         setFilters={setFilters}
       />
      <List
        config={config}  
