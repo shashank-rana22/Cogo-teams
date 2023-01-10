@@ -56,7 +56,6 @@ const FieldPair = ({ itemData , field}:Props) => {
 							{billNumber.length > 11 ? (
 						<Tooltip
 							interactive
-							theme="light"
 							placement="top"
 							content={billNumber}
 						>
