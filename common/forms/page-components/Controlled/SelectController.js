@@ -7,7 +7,6 @@ function SelectController(props) {
 		name, control, rules, value, ...rest
 	} = props;
 
-
 	return (
 		<Controller
 			key={name}

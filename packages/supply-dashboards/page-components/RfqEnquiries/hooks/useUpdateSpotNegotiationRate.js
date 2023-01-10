@@ -51,7 +51,6 @@ const useUpdateSpotNegotiationRate = ({
 	const { newField } = FieldMutation({
 		fields, values, service, data,
 	});
-	console.log(rateSelected, 'values');
 
 	useEffect(() => {
 		if (!rateSelected) {

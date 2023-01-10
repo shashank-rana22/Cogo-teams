@@ -23,6 +23,7 @@
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
     "@fontsource/poppins": "^4.5.10",
+    "@cogoport/components": "^1.0.230",
     "swr": "^2.0.0"
   },
   "devDependencies": {

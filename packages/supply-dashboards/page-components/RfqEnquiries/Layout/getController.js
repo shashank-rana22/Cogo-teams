@@ -19,6 +19,7 @@ const getElementController = (type = 'text') => {
 
 		case 'pills':
 			return PillsController;
+
 		case 'date_picker':
 			return DatepickerController;
 
