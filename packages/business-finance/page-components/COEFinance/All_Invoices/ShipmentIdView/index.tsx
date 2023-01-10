@@ -6,24 +6,25 @@ import LoadingState from "./LoadingState/index";
 import styles from "./styles.module.css";
 import Filters from "./Filters";
 
-interface ItemProps {
-    expense_total_price: number;
-    serial_id: string;
-    pending_approvals: number;
-    shipment_type: string;
-    expense_count: number;
-    expense_total_currency: string;
-    urgency_expense_count: number;
-    urgency_total_price: number;
-    urgency_total_currency: string;
-    income_count: number;
-    credit_expense_count: number;
-    credit_total_price: number;
-    quotation_profit: string;
-    tentative_profit: string;
-    income_total_price: number;
-    income_total_currency: string;
-    id: string;
+export interface ItemDataProps {
+    expense_total_price?: number;
+    serial_id?: string;
+    pending_approvals?: number;
+    shipment_type?: string;
+    expense_count?: number;
+    expense_total_currency?: string;
+    urgency_expense_count?: number;
+    urgency_total_price?: number;
+    urgency_total_currency?: string;
+    income_count?: number;
+    credit_expense_count?: number;
+    credit_total_price?: number;
+    quotation_profit?: string;
+    tentative_profit?: string;
+    income_total_price?: number;
+    income_total_currency?: string;
+    id?: string;
+    is_job_closed?: boolean;
 }
 
 const ShipmentIdView = () => {
@@ -58,7 +59,7 @@ const ShipmentIdView = () => {
                         })}
                     </div>
                 )}
-                {data?.map((item: ItemProps) => (
+                {data?.map((item: ItemDataProps) => (
                     <>
                         {loading ? (
                             <LoadingState />
