@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import getValue from './getValue';
 import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 import styles from './styles.module.css';
@@ -53,7 +53,7 @@ function CardColumn({
 									field,
 									functions,
 									'-',
-								)}
+								) as ReactNode}
 							</div>
 							}
 						</div>
