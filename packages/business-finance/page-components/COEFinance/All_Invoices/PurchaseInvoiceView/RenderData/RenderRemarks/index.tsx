@@ -12,7 +12,7 @@ interface Props{
     item:itemProps;
 }
 
-const RenderRemarks = ({ item, field }) => {
+const RenderRemarks = ({ item }) => {
     const remarkData = item?.remarksTimeline;
 
     const remarkTimeline = () => {

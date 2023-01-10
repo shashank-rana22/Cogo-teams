@@ -9,8 +9,8 @@ import FieldPair from './RenderData/FiledPair/index';
 import RenderCustomer from './RenderData/RenderCustomer/index'
 import FormatedDate from './RenderData/FormatedDate/index';
 import SegmentedFilters from './SegmentedFilters/index'
-import {FunctionObjects, GenericObject} from '../../../commons/Interfaces/index'
-import {fieldProps,fieldItemProps} from './interfaces/index'
+import { GenericObject} from '../../../commons/Interfaces/index'
+import {fieldProps} from './interfaces/index'
 
 interface itemProps {
   createdDate:Date,
@@ -55,7 +55,7 @@ const [sort, setSort] = useState({});
 
       
 
-    const functions:FunctionObjects = {
+    const functions:any = {
       renderStatus: (itemData:itemProps) => (
           <RenderStatus item={itemData}/>
       ),
