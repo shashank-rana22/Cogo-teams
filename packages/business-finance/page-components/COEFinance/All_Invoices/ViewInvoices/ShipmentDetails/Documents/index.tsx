@@ -18,7 +18,7 @@ const Documents =({shipmentId=''}:DocumentsInterface)=>{
     
     const functions={
         DocumentTypeFunc: (item:any) => <p>{startCase(item?.document_type)}</p>,
-        UploadedOnFunc: (item:any)=> <p>{formatDate(item?.uploaded_at, 'dd/MMM/yyyy')}</p>,
+        UploadedOnFunc: (item:any)=> <p>{formatDate(item?.uploaded_at, 'dd/MMM/yyyy'{},true)}</p>,
         viewFunc: (item:any)=> <Button 
                                 themeType="secondary"
                                 size="xs" 

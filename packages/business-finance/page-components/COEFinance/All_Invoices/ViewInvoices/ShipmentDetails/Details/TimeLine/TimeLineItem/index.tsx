@@ -62,7 +62,7 @@ const TimeLineItem = ({
 						{isComplete ? 'Completed On:' : 'Expected:'}
 
 						<div className={styles.tooltipItem}>
-							{formatDate(item?.completed_on)}
+							{formatDate(item?.completed_on,"dd-MMM-yy",{},true)}
 						</div>
 					</div>
 				) : null}

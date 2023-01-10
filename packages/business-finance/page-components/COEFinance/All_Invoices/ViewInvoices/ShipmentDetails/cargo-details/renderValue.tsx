@@ -242,47 +242,47 @@ export const renderValue = (label:string, detail:any) => {
 		case 'schedule_departure':
 			return formatDate(
 				detail?.schedule_departure || detail?.selected_schedule_departure,
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'schedule_arrival':
 			return formatDate(
 				detail?.schedule_arrival || detail?.selected_schedule_arrival,
-				'dd MMM yyyy',
+				'dd MMM yyyy',{},true
 			);
 		case 'bn_expiry':
 			return formatDate(
 				detail?.bn_expiry || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'booking_note_deadline':
 			return formatDate(
 				detail?.booking_note_deadline || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'si_cutoff':
 			return formatDate(
 				detail?.si_cutoff || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'vgm_cutoff':
 			return formatDate(
 				detail?.vgm_cutoff || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'gate_in_cutoff':
 			return formatDate(
 				detail?.gate_in_cutoff || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'document_cutoff':
 			return formatDate(
 				detail?.document_cutoff || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'tr_cutoff':
 			return formatDate(
 				detail?.tr_cutoff || '',
-				'dd MMM yyyy - hh:mm a',
+				'dd MMM yyyy - hh:mm a',{},true
 			);
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
@@ -295,7 +295,7 @@ export const renderValue = (label:string, detail:any) => {
 		case 'cargo_readiness_date':
 			return formatDate(
 				detail?.cargo_readiness_date || '',
-				'dd MMM yyyy',
+				'dd MMM yyyy',{},true
 			);
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
