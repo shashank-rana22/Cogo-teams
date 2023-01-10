@@ -48,7 +48,7 @@ return(
         <div className={styles.subContainer}>
             <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem || isApproveDisabled}  onClick={(e:any)=>handleModalData(e)}>Approve</Button>
             <Button size="md" style={{marginRight:'8px'}}  onClick={(e:any)=>handleModalData(e)}>Hold</Button>
-            <Button size="md" style={{marginRight:'8px' ,background: '#ED3726'}} disabled={!lineItem || !isApproveDisabled} onClick={(e:any)=>handleModalData(e)} >Reject</Button>
+            <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem || !isApproveDisabled} onClick={(e:any)=>handleModalData(e)} >Reject</Button>
         </div>
     </div>
     <div className={styles.hr}/>
