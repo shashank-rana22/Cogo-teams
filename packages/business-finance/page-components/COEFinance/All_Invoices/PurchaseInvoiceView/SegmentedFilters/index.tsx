@@ -23,7 +23,7 @@ interface segmentFilterProps{
 
     setSearchValue: React.Dispatch<React.SetStateAction<string | number>>
 
-    searchValue: string | number
+    searchValue: string 
 
     currentTab: string
 
@@ -48,7 +48,7 @@ function SegmentedFilters({setCurrentTab,
 
     
 
-    const{statsData}=useShipmentIdView();
+    const{statsData}:any =useShipmentIdView();
 
  
 

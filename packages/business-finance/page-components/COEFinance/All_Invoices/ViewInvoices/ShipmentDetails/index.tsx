@@ -23,9 +23,9 @@ interface BillAdditionalObjectInterface {
     collectionPartyId:string
 }
 interface DataInterface {
-    job:JobInterface
-    bill :object
-    billAdditionalObject : BillAdditionalObjectInterface
+    job?:JobInterface
+    bill?:object
+    billAdditionalObject?: BillAdditionalObjectInterface
 }
 
 interface ShipmentDetailsInterface {

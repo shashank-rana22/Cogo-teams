@@ -37,7 +37,7 @@ const RemoveTagConfirmation = ({
 
 			<div className={styles.BtnWrap}>
 				<Button
-					themeType="secondary md"
+					themeType="secondary"
 					onClick={() => setRemoveTag(false)}
 					disabled={loading}
 				>
@@ -45,7 +45,7 @@ const RemoveTagConfirmation = ({
 				</Button>
 
 				<Button
-					themeType="primary md"
+					themeType="primary"
 					className={styles.primary}
 					disabled={loading}
 					onClick={() => handleSubmit()}

@@ -17,7 +17,7 @@ interface AdditionDetailInt{
 interface DataProps {
     sellerDetail?:SellerDetail
     serviceProviderCategory?:string,
-    serviceProviderAdditionalDetail:AdditionDetailInt,
+    serviceProviderAdditionalDetail?:AdditionDetailInt,
 }
 
 interface PaymentsData {

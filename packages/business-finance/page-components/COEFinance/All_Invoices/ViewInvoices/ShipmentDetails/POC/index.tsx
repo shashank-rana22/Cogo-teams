@@ -22,8 +22,8 @@ interface JobInterface{
 }
 
 interface ItemDataInterface {
-	bill :BillInterface
-	job:JobInterface
+	bill ?:BillInterface
+	job?:JobInterface
 }
 interface Props {
 	itemData:ItemDataInterface

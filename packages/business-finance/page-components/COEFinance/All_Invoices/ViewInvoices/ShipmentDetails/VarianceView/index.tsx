@@ -9,7 +9,7 @@ interface DataInterface {
 }
 
 interface VarianceViewInterface {
-    show?:boolean
+    show:boolean
     onClose?:()=> void
     data: ListDataProps
     loading?:boolean
