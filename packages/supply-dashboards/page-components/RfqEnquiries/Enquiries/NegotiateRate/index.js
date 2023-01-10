@@ -4,7 +4,17 @@ import Service from './Service';
 import styles from './styles.module.css';
 
 function NegotiateRate({ selectedCard }) {
-	const service = selectedCard?.detail?.spot_negotiations.map((card) => card);
+	const service = [];
+	selectedCard?.detail?.spot_negotiations.forEach((card) => {
+		if (card?.service === selectedCard?.detail?.service_type) {
+			service.push(card);
+		}
+	});
+	selectedCard?.detail?.spot_negotiations.forEach((card) => {
+		if (card?.service !== selectedCard?.detail?.service_type) {
+			service.push(card);
+		}
+	});
 	const [activeService, setActiveService] = useState(
 		null,
 	);

@@ -39,8 +39,15 @@ function RateModal({
 				selectedRate={selectedRate}
 			/>
 			<div className={styles.button}>
-				<Button themeType="accent" onClick={() => handleOnClick()}>Cancel</Button>
-				<Button themeType="accent" onClick={() => setShowModal(false)}>Select Rates</Button>
+				<Button themeType="accent" style={{ margin: '4px' }} onClick={() => handleOnClick()}>Cancel</Button>
+				<Button
+					themeType="accent"
+					style={{ margin: '4px' }}
+					onClick={() => setShowModal(false)}
+				>
+					Select Rates
+
+				</Button>
 			</div>
 		</div>
 	);

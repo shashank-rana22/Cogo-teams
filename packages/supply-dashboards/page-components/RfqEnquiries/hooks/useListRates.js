@@ -24,9 +24,9 @@ const useGetRates = ({ service }) => {
 			await triggerSystemData({
 				params: {
 					filters: {
-						// origin_port_id      : service?.data?.origin_port_id,
-						// destination_port_id : service?.data?.destination_port_id,
-						is_rate_available: true,
+						origin_port_id      : service?.data?.origin_port_id,
+						destination_port_id : service?.data?.destination_port_id,
+						is_rate_available   : true,
 					},
 					page_limit: 5,
 				},
@@ -41,7 +41,7 @@ const useGetRates = ({ service }) => {
 				params: {
 					audit_data_required : true,
 					filters             : {
-						// past_similar_negotiation_reverts_for_negotiation_id: service?.id,
+						past_similar_negotiation_reverts_for_negotiation_id: service?.id,
 					},
 					page_limit: 5,
 				},

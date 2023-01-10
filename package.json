@@ -21,9 +21,10 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
-    "@cogoport/charts": "^1.0.1",
-    "@fontsource/poppins": "^4.5.10",
-    "@cogoport/components": "^1.0.230",
+    "accept-language": "^3.0.18",
+    "i18next": "^22.4.9",
+    "next-i18next": "^13.0.3",
+    "react-i18next": "^12.1.4",
     "swr": "^2.0.0"
   },
   "devDependencies": {

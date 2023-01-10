@@ -31,3 +31,8 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.action{
+     display: flex;
+     align-items: center;
+}

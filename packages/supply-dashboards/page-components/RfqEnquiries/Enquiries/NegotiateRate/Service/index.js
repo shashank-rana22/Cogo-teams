@@ -26,6 +26,11 @@ function Service({
 		}
 	};
 
+	const handleOnClick = (e) => {
+		e.stopPropagation();
+		setShowModal(true);
+	};
+
 	useEffect(() => {
 		if (selectedRate && !showModal) {
 			setActiveService(service);
@@ -36,9 +41,6 @@ function Service({
 	const tradetype = service?.data?.trade_type === 'import' ? 'Destiantion' : 'Origin';
 	return (
 		<div className={styles.container}>
-			<div className={styles.button}>
-				<Button themeType="accent" size="sm" onClick={() => setShowModal(true)}>Quick Add Rates</Button>
-			</div>
 			<div
 				className={styles.service}
 				role="presentation"
@@ -65,8 +67,9 @@ function Service({
 						</div>
 					)}
 				</div>
-				<div>
+				<div className={styles.action}>
 					<Pill color={status === 'Submitted' ? '#849E4C' : '#F37166'}>{status}</Pill>
+					<Button themeType="accent" size="sm" onClick={(e) => handleOnClick(e)}>Quick Add Rates</Button>
 				</div>
 
 			</div>

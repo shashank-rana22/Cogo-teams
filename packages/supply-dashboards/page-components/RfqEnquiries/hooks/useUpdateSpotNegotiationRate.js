@@ -63,6 +63,9 @@ const useUpdateSpotNegotiationRate = ({
 						(Object.keys(val[0])).forEach((prefill) => {
 							if (prefill === 'line_items') {
 								setValue(item, val[0]?.[prefill]);
+							} else if (prefill === 'validity_start' || prefill === 'validity_end'
+							|| prefill === 'departure_dates') {
+								setValue(prefill, new Date(val[0]?.[prefill]));
 							} else {
 								setValue(prefill, val[0]?.[prefill]);
 							}
@@ -96,6 +99,9 @@ const useUpdateSpotNegotiationRate = ({
 							(Object.keys(val[0])).forEach((prefill) => {
 								if (prefill === 'line_items') {
 									setValue(item, val[0]?.[prefill]);
+								} else if (prefill === 'validity_start' || prefill === 'validity_end'
+								|| prefill === 'departure_dates') {
+									setValue(prefill, new Date(val[0]?.[prefill]));
 								} else {
 									setValue(prefill, val[0]?.[prefill]);
 								}
