@@ -1,7 +1,7 @@
 import { useRequestBf } from "@cogoport/request";
 import React, { useState, useEffect } from "react";
 import { PURCHASE_VIEW_CONFIG } from "../configurations/PURCHASE_VIEW_LIST";
-import useDebounceQuery from "../../commons/utils/debounce";
+import useDebounceQuery from "../../../../../common/forms/hooks/useDebounceQuery";
 import { GenericObject, NestedObj } from "../../commons/Interfaces/index";
 
 interface Props {
