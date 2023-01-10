@@ -8,8 +8,8 @@ import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
-		arrayFormat: 'brackets',
-		serializeDate: (date) => format(date),
+		arrayFormat   : 'brackets',
+		serializeDate : (date) => format(date),
 	});
 	return paramsStringify;
 };
@@ -22,12 +22,11 @@ request.interceptors.request.use((oldConfig) => {
 
 	return {
 		...oldConfig,
-		paramsSerializer: { serialize: customSerializer },
-		headers: {
-			authorizationscope: 'partner',
-			authorization: `Bearer: ${token}`,
-			// authorizationparameters,
-			authorizationparameters: authorizationparameters || 'coe-finance:allowed',
+		paramsSerializer : { serialize: customSerializer },
+		headers          : {
+			authorizationscope : 'partner',
+			authorization      : `Bearer: ${token}`,
+			authorizationparameters,
 		},
 	};
 });

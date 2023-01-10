@@ -22,8 +22,8 @@ importers:
       swr: ^2.0.0
       turbo: ^1.6.3
     dependencies:
-      file-saver: 2.0.5
       accept-language: 3.0.18
+      file-saver: 2.0.5
       i18next: 22.4.9
       next-i18next: 13.0.3_5i4az4cstzckm6ljit5k2cfwvm
       react-i18next: 12.1.4_i18next@22.4.9
@@ -255,7 +255,7 @@ importers:
       react-dom: 18.2.0
     dependencies:
       '@cogoport/charts': 1.0.1_v2m5e27vhdewzwhryxwfaorcca
-      '@cogoport/components': 1.0.224_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.224_27ghnklenyaalfqdgsm7fqt7de
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
@@ -269,9 +269,6 @@ importers:
     devDependencies:
       '@types/file-saver': 2.0.5
       '@types/react': 18.0.26
-
-  packages/coe:
-    specifiers: {}
 
   packages/home:
     specifiers:
@@ -4777,6 +4774,7 @@ packages:
   /internmap/1.0.1:
     resolution: {integrity: sha512-lDB5YccMydFBtasVtxnZ3MRBHuaoE8GKsppq+EchKL2U4nK/DmEpPHNH8MZe5HkMtpSiTSOZwfN0tzYjO/lJEw==}
     dev: false
+
   /is-array-buffer/3.0.1:
     resolution: {integrity: sha512-ASfLknmY8Xa2XtB4wmbz13Wu202baeA18cJBCeCy0wXUHZF0IPyVEXqKEcd+t2fNSLLL1vC6k7lxZEojNbISXQ==}
     dependencies:
