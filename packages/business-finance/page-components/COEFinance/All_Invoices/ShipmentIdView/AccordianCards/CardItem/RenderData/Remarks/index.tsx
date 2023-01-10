@@ -25,8 +25,8 @@ const Remarks = ({ itemData }: propsType) => {
             return (
                 <div className={styles.timeline_wrapper}>
                     <div className={styles.left_content}>
-                        {formatDate(item?.createdAt, "dd-MMM-yy")}
-                        <div>{formatDate(item?.createdAt, " hh:mm a")}</div>
+                        {formatDate(item?.createdAt, "dd-MMM-yy",{},true)}
+                        <div>{formatDate(item?.createdAt, " hh:mm a",{},true)}</div>
                     </div>
                     <div className={styles.path}>
                         <div className={styles.circle} />
