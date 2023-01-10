@@ -45,7 +45,7 @@ const AccordianCards = ({
                         </div>
                         <div className={styles.freightWidth}>
                             <div className={styles.freight}>
-                                {startCase(itemData.shipment_type)}
+                                {startCase(itemData.shipment_type!)}
                             </div>
                         </div>
                     </div>
@@ -61,8 +61,8 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
-                                        itemData.expense_total_price,
-                                        itemData.expense_total_currency
+                                        itemData.expense_total_price!,
+                                        itemData.expense_total_currency!
                                     )}
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.urgentValueText}>
                                     {getFormattedPrice(
-                                        itemData.urgency_total_price,
+                                        itemData.urgency_total_price!,
                                         itemData.urgency_total_currency || "INR"
                                     )}
                                 </div>
@@ -85,7 +85,7 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
-                                        itemData.income_total_price,
+                                        itemData.income_total_price!,
                                         itemData.income_total_currency || "INR"
                                     )}
                                 </div>
@@ -97,7 +97,7 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
-                                        itemData.credit_total_price,
+                                        itemData.credit_total_price!,
                                         "INR"
                                     )}
                                 </div>

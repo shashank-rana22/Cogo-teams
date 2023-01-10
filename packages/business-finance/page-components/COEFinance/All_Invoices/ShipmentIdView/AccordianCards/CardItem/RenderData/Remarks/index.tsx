@@ -1,22 +1,54 @@
-import { Tooltip } from "@cogoport/components";
+import { Popover } from "@cogoport/components";
 import { IcMProvision } from "@cogoport/icons-react";
+import { startCase } from "@cogoport/utils";
 import React from "react";
-import RemarksContent from "./RemarksContent/index";
+import { formatDate } from "../../../../../../../commons/utils/formatDate";
 import styles from "./styles.module.css";
-interface itemTypes {}
-
-interface propsType {
-    item: itemTypes;
+interface itemTypes {
+    remarksTimeline: any;
+    remark?: string;
 }
 
-const Remarks = ({ item }: propsType) => {
+interface propsType {
+    itemData: itemTypes;
+}
+
+const Remarks = ({ itemData }: propsType) => {
+    const remarkData = itemData.remarksTimeline;
+
+    const RemarksContent = () => {
+        if (!itemData?.remark) {
+            return <div>No Data</div>;
+        }
+        return (remarkData || []).map((item: any, idx: any) => {
+            const StatusItem = item?.billStatus?.toLowerCase();
+            return (
+                <div className={styles.timeline_wrapper}>
+                    <div className={styles.left_content}>
+                        {formatDate(item?.createdAt, "dd-MMM-yy")}
+                        <div>{formatDate(item?.createdAt, " hh:mm a")}</div>
+                    </div>
+                    <div className={styles.path}>
+                        <div className={styles.circle} />
+                        {idx !== remarkData?.length - 1 ? (
+                            <div className={styles.line} />
+                        ) : null}
+                    </div>
+
+                    <div className={styles.right_content}>
+                        <div className={styles.status_content}>
+                            {startCase(StatusItem)}
+                        </div>
+                        <div>{item?.remark}</div>
+                    </div>
+                </div>
+            );
+        });
+    };
+
     return (
         <div>
-            <Tooltip
-                interactive
-                placement="left"
-                content={<RemarksContent item={item} />}
-            >
+            <Popover placement="top" render={RemarksContent()}>
                 <div>
                     <IcMProvision
                         height={20}
@@ -25,7 +57,7 @@ const Remarks = ({ item }: propsType) => {
                         style={{ cursor: "pointer" }}
                     />
                 </div>
-            </Tooltip>
+            </Popover>
         </div>
     );
 };
