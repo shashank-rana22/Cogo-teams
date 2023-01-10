@@ -40,7 +40,7 @@ export const PURCHASE_VIEW_CONFIG = {
 		{
 			label : 'Invoice Amount',
 			key   : 'grandTotal',
-			span  : 1.5,
+			span  : 1.3,
 			func  :'rendeFormate',
 		},
 		{
@@ -55,7 +55,7 @@ export const PURCHASE_VIEW_CONFIG = {
 			label : 'Invoice Date',
             key   : 'billDate',
 			func  :'rendeFormate',
-			span  : 1.5,
+			span  : 1,
 		   sorting: { name: 'billDateSortType' },
 		},
 		{
@@ -76,13 +76,12 @@ export const PURCHASE_VIEW_CONFIG = {
 		{
 			label : 'Remarks ',
             key   : 'remarks',
-            func :  'renderRemark',
-			span  : 1.2,
+			span  : 0.8,
 			func  : 'renderRemarks'
 		},
 		{
 			key  : 'viewMore',
-			span : 1.4,
+			span : 1.3,
 			func : 'renderViewMore'
 		},
 	],

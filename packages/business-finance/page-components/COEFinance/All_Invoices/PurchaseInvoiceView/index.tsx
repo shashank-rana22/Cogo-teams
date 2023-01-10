@@ -12,9 +12,23 @@ import SegmentedFilters from './SegmentedFilters/index'
 import {FunctionObjects, GenericObject} from '../../../commons/Interfaces/index'
 import {fieldProps,fieldItemProps} from './interfaces/index'
 
-
-
-
+interface itemProps {
+  createdDate:Date,
+    billDate:Date,
+    dueDate:Date,
+    billCurrency:string,
+    subTotal:number,
+    grandTotal:number,
+    status:string
+    billType:string,
+    billDocumentUrl:string,
+    serviceType:string,
+    billNumber:string,
+	isProforma:boolean,
+	jobNumber:string,
+  organizationName:string,
+  remarksTimeline?:Array<{billStatus:string,remark:string,createdAt:Date}>
+}
 interface Props{
   filters:GenericObject;
   setFilters: (p: object) => void;
@@ -42,23 +56,23 @@ const [sort, setSort] = useState({});
       
 
     const functions:FunctionObjects = {
-        renderStatus: (itemData:GenericObject) => (
+        renderStatus: (itemData:itemProps) => (
           <RenderStatus item={itemData}/>
       ),
-      renderFieldPair: (itemData:GenericObject, field:fieldProps) => (
+      renderFieldPair: (itemData:itemProps, field:fieldProps) => (
         <FieldPair itemData={itemData} field={field} />
       ),
-      renderCustomer: (itemData:GenericObject, field:fieldProps) => (
+      renderCustomer: (itemData:itemProps, field:fieldProps) => (
         <RenderCustomer itemData={itemData} field={field} />
       ),
-      rendeFormate: (itemData:GenericObject, field:fieldProps) => (
+      rendeFormate: (itemData:itemProps, field:fieldProps) => (
         <FormatedDate item={itemData} field={field} />
       ),
-      renderRemarks: (itemData:any,field:any)=>(
-        <RenderRemarks item={itemData} field={field}/>
+      renderRemarks: (itemData:itemProps)=>(
+        <RenderRemarks item={itemData} />
       ),
-      renderViewMore : (itemData:any)=>(
-        <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
+      renderViewMore : (itemData:fieldProps)=>(
+        <Button size="xs" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
       ),
     };
 
