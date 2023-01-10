@@ -11,3 +11,7 @@
   margin: 32px 0px;
   width: 100%;
 }
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

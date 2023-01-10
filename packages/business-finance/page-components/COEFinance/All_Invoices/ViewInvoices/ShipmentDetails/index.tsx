@@ -12,6 +12,7 @@ import useListShipment from "../../../hook/useListShipment";
 import useGetVariance from "../../../hook/useGetVariance";
 import VarianceView from "./VarianceView/index";
 import {RemarksValInterface} from '../../../../commons/Interfaces/index'
+import TimeLineItemCheck from "./TimelineItemCheck/index";
 
 interface JobInterface {
     jobNumber:string
@@ -33,11 +34,17 @@ interface ShipmentDetailsInterface {
     jobNumber?:string
     remarksVal:RemarksValInterface
     setRemarksVal:any
+    setLineItem:React.Dispatch<React.SetStateAction<boolean>>
+    lineItem?:boolean
 }
-const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal}:ShipmentDetailsInterface)=>{
+const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,setLineItem,lineItem}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
     const [showVariance, setShowVariance] = useState(false);
+    const [itemCheck,setItemCheck] =  useState(false)
+   
+    
+
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
     const {data:shipmentData} = useListShipment(jobNumber);
@@ -92,7 +99,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal}:Shipmen
         {collectionPartyId ? (
 				<div className={styles.variance} >
 					<div>
-						VARIANCE -{' '}
+						VARIANCE -
 						{loading
 							? 'Getting...'
 							: `${varianceFullData?.currency}${' '}
@@ -118,13 +125,14 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal}:Shipmen
 				/>
 			) : null}
         
+        <TimeLineItemCheck itemCheck={itemCheck} lineItem={lineItem}/>
 
         <div className={styles.shipmentDetailsFooter}>
             <div className={styles.pdfDisplay}>
                 <PdfDisplay data={data}/>
             </div>
             <div className={styles.shipmentDetailsCard}>
-                <ShipmentDetailsCard data={data} remarksVal={remarksVal} setRemarksVal={setRemarksVal}/>
+                <ShipmentDetailsCard data={data} remarksVal={remarksVal} setRemarksVal={setRemarksVal} setItemCheck={setItemCheck} setLineItem={setLineItem}/>
             </div>
         </div>
         

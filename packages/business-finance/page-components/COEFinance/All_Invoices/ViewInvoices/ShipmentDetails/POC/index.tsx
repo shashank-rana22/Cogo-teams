@@ -80,8 +80,8 @@ const POCDetails = ( {itemData} :Props) => {
 
 	return (
 		<>
-			<div className={styles.iconView} onClick={handleShow}>
-				<div className={styles.iconContainer} >
+			<div className={styles.iconView} >
+				<div className={styles.iconContainer} onClick={handleShow} >
 				   <IcMArrowRotateRight width={20} height={20} />
 				</div>
 				<div className={styles.pocContainer}>

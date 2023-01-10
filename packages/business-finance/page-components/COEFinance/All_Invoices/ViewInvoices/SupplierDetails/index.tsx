@@ -13,6 +13,7 @@ interface SellerDetail {
 interface AdditionDetailInt{
     kycStatus?:string
 }
+
 interface DataProps {
     sellerDetail?:SellerDetail
     serviceProviderCategory?:string,
@@ -35,13 +36,12 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     const [showModal, setShowModal] = useState(false)
     
     const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail} = data || [{}];
-    const {kycStatus=''} = serviceProviderAdditionalDetail || '';
+    const {kycStatus=''}=serviceProviderAdditionalDetail || {};
     const {payables,receivables,ledgerCurrency} = paymentsData || {};
 
     const handleChange = () =>{
         setShowModal(!showModal) 
          getSupplierHistory()
-
     }
     
     return(
