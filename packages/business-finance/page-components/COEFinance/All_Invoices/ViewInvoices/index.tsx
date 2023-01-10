@@ -10,10 +10,11 @@ const ViewInvoices =()=>{
     const {query} = useRouter();
     const {billId,orgId,jobNumber}=query;
     const [remarksVal, setRemarksVal]=useState({
-        bankDetailsRemarks:'',
-        billingPartyRemarks:'',
-        invoiceDetailsRemarks:'',
+        collectionPartyRemark:'',
+        billingPartyRemark:'',
+        invoiceDetailsRemark:'',
     });
+    const [lineItemsRemarks,setLineItemsRemarks]=useState({});
     const [lineItem,setLineItem] = useState(false)
     const {
 		list: { fullResponse },
@@ -24,7 +25,12 @@ const ViewInvoices =()=>{
     
     return(
     <div>
-        <Header data={fullResponse} remarksVal={remarksVal} lineItem={lineItem}/>
+        <Header 
+        data={fullResponse} 
+        remarksVal={remarksVal} 
+        lineItemsRemarks={lineItemsRemarks}
+        lineItem={lineItem}
+        />
 
         <SupplierDetails 
            data={fullResponse}
@@ -40,6 +46,8 @@ const ViewInvoices =()=>{
             jobNumber={jobNumber}
             remarksVal={remarksVal}
             setRemarksVal={setRemarksVal}
+            lineItemsRemarks={lineItemsRemarks}
+            setLineItemsRemarks={setLineItemsRemarks}
             setLineItem={setLineItem}
             lineItem={lineItem}
             />

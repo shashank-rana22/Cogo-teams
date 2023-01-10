@@ -34,10 +34,12 @@ interface ShipmentDetailsInterface {
     jobNumber?:string
     remarksVal:RemarksValInterface
     setRemarksVal:any
+    lineItemsRemarks:object 
+    setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
     lineItem?:boolean
 }
-const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,setLineItem,lineItem}:ShipmentDetailsInterface)=>{
+const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItemsRemarks,setLineItemsRemarks,setLineItem,lineItem}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
     const [showVariance, setShowVariance] = useState(false);
@@ -132,7 +134,14 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,setLineI
                 <PdfDisplay data={data}/>
             </div>
             <div className={styles.shipmentDetailsCard}>
-                <ShipmentDetailsCard data={data} remarksVal={remarksVal} setRemarksVal={setRemarksVal} setItemCheck={setItemCheck} setLineItem={setLineItem}/>
+                <ShipmentDetailsCard 
+                data={data} 
+                remarksVal={remarksVal} 
+                setRemarksVal={setRemarksVal} 
+                lineItemsRemarks={lineItemsRemarks}
+                setLineItemsRemarks={setLineItemsRemarks}
+                setItemCheck={setItemCheck} 
+                setLineItem={setLineItem}/>
             </div>
         </div>
         

@@ -11,15 +11,16 @@ interface LineItemCard {
     lineItems?:Array<object>
     setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>
     setRemarksVal:any,
+    lineItemsRemarks:object 
+    setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>
     remarksVal:object|{}
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remarksVal,setLineItem}:LineItemCard) => {
+const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineItemsRemarks,setLineItemsRemarks, remarksVal,setLineItem}:LineItemCard) => {
     const [approvedItems , setApprovedItems ] = useState({})
     const [popover, setPopover] = useState(false);
     const [rejectedItems, setRejectedItems]=useState({});
-    const [lineItemsRemarks,setLineItemsRemarks] = useState({});
     const [activeLineItem, setActiveLineItem] = useState(0);
     const [showRejectedModal , setShowRejectedModal] = useState({ id : ""})
 
@@ -47,7 +48,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
     },[ApproveCheck,RejectCheck])
     
     
-    const handleApproveClick = (key = '') => {   
+    const handleApproveClick = (key = '',name='') => { 
 		setApprovedItems((previousActions:any) => ({
 			...previousActions,
 			[key]: !previousActions[key],
@@ -57,13 +58,13 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
            return {...p};
        });
        setLineItemsRemarks((prev)=>{
-           delete prev[key as keyof typeof prev];
+           delete prev[name as keyof typeof prev];
            return {...prev};
        });
 	};
 
     const openRejectModal  =(item:any) => {
-        setActiveLineItem(item?.id);
+        setActiveLineItem(item?.name);
         setShowRejectedModal(item);
         setPopover((previousActions:any) => (
             {
@@ -92,8 +93,8 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
 	};
 
     const functions = {
-        renderIcon: (item:any)=>(       
-            <div className={styles.circleBig} onClick={()=>{handleApproveClick(item?.id)}} >
+        renderIcon: (item:any)=>(     
+            <div className={styles.circleBig} onClick={()=>{handleApproveClick(item?.id, item?.name)}} >
             {renderAction(item?.id)}
             </div>
         ),
@@ -107,11 +108,10 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
         )}
       };
      
-      const { id } = showRejectedModal;
-
+      const { id, name:lineItemName } = showRejectedModal;
+      
       const handleLineItemsRemarks=(val:string)=>{
           setLineItemsRemarks({...lineItemsRemarks,[activeLineItem]:val});
-          setRemarksVal({...remarksVal,lineItemsRemarks});
     }
 
     return(
@@ -159,7 +159,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal, remar
                     <Modal.Footer>
                         <Button
                          onClick={()=>handleRejectClick(id)}
-                         disabled={ !lineItemsRemarks[id as keyof typeof lineItemsRemarks] || lineItemsRemarks[id]?.length<0}
+                         disabled={ !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks] || lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks]?.length<0}
                          >Submit</Button>
                     </Modal.Footer>
                 </Modal>
