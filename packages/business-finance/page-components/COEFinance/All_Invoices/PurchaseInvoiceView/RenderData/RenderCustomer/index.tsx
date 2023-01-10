@@ -22,7 +22,6 @@ const renderCustomer = ({ itemData, field}:Props) => {
             {organizationName.length > 18 ? (
 					<Tooltip
 						interactive
-						theme="light"
 						placement="top"
 						content={organizationName}
 					>
