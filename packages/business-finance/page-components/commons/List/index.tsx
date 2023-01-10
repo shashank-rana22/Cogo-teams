@@ -21,7 +21,7 @@ export interface Props {
     functions?: FunctionObjects;
     loading?: boolean;
     page?: number;
-    handlePageChange: (currentPage: number) => void;
+    handlePageChange?: (currentPage: number) => void;
     pageSize?: number;
     showPagination?: boolean;
 }
@@ -35,7 +35,7 @@ function List({
     functions = {},
     loading = false,
     page = 1,
-    handlePageChange,
+    handlePageChange =()=>{},
     pageSize = 10,
     showPagination = true,
 }: Props) {

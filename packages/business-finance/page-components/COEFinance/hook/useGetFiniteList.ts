@@ -6,31 +6,11 @@ interface UseSelectorProps {
     profile?: object;
 }
 
-interface JobInterface {
-    jobNumber:string
-
-}
-
-interface BillAdditionalObjectInterface {
-    collectionPartyId:string
-}
-
-interface SellerDetail {
-    organizationName?:string
-}
-
-interface Response{
-    job:JobInterface
-    bill :object
-    billAdditionalObject : BillAdditionalObjectInterface
-    sellerDetail: SellerDetail
-}
-
 interface ListInterface{
     data: Array<object>,
     total: number,
     total_page: number,
-    fullResponse: Response | {},
+    fullResponse: any,
     reverted: number,
 }
 
@@ -49,7 +29,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
         data: [],
         total: 0,
         total_page: 0,
-        fullResponse : {}, 
+        fullResponse:{}, 
         reverted: 0,
     });
     const { page, ...restFilters } = filters;
