@@ -29,7 +29,7 @@ const Documents =({shipmentId=''}:DocumentsInterface)=>{
     };
     return(
         <div>
-             <List config={config || {}}  itemData={documentData} functions={functions} loading={loading}/>
+             <List config={config}  itemData={documentData} functions={functions} loading={loading}/>
         </div>
     )
 }
