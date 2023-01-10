@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, Button, TextArea, Modal } from '@cogoport/components';
+import { Select, Button, Textarea, Modal } from '@cogoport/components';
 import updateTag from '../../../../hook/useUpdateTag';
 import { urgencyOptions } from '../controls';
 import styles from './styles.module.css';
@@ -55,7 +55,7 @@ const AddUrgencyTag = ({
 				/>
 
 				{tagValue === 'urgent' ? (
-					<TextArea
+					<Textarea
 						value={remarks}
 						onChange={(e:any) => setRemarks(e.target?.value)}
 						placeholder="Enter Urgent Remarks..."
