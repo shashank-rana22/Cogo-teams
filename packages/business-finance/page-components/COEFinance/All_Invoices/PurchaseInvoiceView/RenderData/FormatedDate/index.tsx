@@ -5,20 +5,27 @@ import { Tooltip } from '@cogoport/components';
 import styled from './styles.module.css'
 import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice'
 import {formatDate} from '../../../../../commons/utils/formatDate'
-import { GenericObject } from '../../../../../commons/Interfaces/index';
 
-
-interface props{
-    item:GenericObject
+interface itemProps {
+    createdDate:Date,
+    billDate:Date,
+    dueDate:Date,
+    billCurrency:string,
+    subTotal:number,
+    grandTotal:number,
+}
+interface Props{
+    item:itemProps;
     field:{
         key:string
     }
 }
-function FormatedDate({item, field}:props) {
+
+function FormatedDate({item, field}:Props) {
 
    const getCreatedDate =  formatDate(item?.createdDate, 'dd/MMM/yy | hh:mm a');
-   const getBillDate =  format(item?.billDate, 'dd/MMM/yyyy');
-   const getDueDate =  format(item?.dueDate, 'dd/MMM/yyyy');
+   const getBillDate =  formatDate(item?.billDate, 'dd/MMM/yyyy');
+   const getDueDate =  formatDate(item?.dueDate, 'dd/MMM/yyyy');
 
    const content=(
        <>

@@ -2,18 +2,25 @@ import React from 'react';
 import {Tooltip} from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import styled from './styles.module.css'
-import {FieldType,GenericObject,ListDataProps} from '../../../../../commons/Interfaces/index'
 
-interface props{
-	itemData:GenericObject
-	  field: {
-		  topKey:object,
+interface itemProps {
+    billType:string,
+    billDocumentUrl:string,
+    serviceType:string,
+    billNumber:string,
+	isProforma:boolean,
+	jobNumber:string,
+}
+interface Props{
+    itemData:itemProps;
+    field:{
+		topKey:object,
 		  bottomKey:object,
 		  label :string
-	  },	
+    }
 }
 
-const FieldPair = ({ itemData , field}:props) => {
+const FieldPair = ({ itemData , field}:Props) => {
 
 	
 	const { topKey = {}, bottomKey = {} } = field;

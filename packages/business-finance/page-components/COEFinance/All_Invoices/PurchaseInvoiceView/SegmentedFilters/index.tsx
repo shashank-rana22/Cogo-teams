@@ -7,12 +7,15 @@ import {Input} from "@cogoport/components";
 import { IcMSearchdark } from '@cogoport/icons-react';
 import FilterModal from "../../../Components/FilterModal/index";
 import useShipmentIdView from '../../../hook/useShipmentIdView'
+import { GenericObject} from '../../../../commons/Interfaces/index'
 
 interface segmentFilterProps{
     setSearchValue: React.Dispatch<React.SetStateAction<string | number>>
     searchValue: string | number
     currentTab: string
     setCurrentTab: React.Dispatch<React.SetStateAction<string>>
+    filters:GenericObject;
+    setFilters: (p: object) => void
 }
 
 function SegmentedFilters({setCurrentTab,
@@ -36,15 +39,6 @@ function SegmentedFilters({setCurrentTab,
                     background={"#FFFAEB"}
                     />
                 </div>
-                {/* <div className={styled.filterData}>
-                    <SegmentedControl
-                    options={FILTERS_DAY_DATA}
-                    activeTab={currentTab}
-                    setActiveTab={setCurrentTab}
-                    color={"#ED3726"} 
-                    background={"#FFFAEB"}
-                    />
-                </div> */}
                 <div className={styled.filterDataUrgent} >
                     <SegmentedControl
                     options={FILTERS_URGENT_DATA}

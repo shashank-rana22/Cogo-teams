@@ -5,10 +5,17 @@ import {formatDate} from '../../../../../commons/utils/formatDate'
 import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css'
 
- 
-const RenderRemarks=({item,field})=>{  
-				
 
+
+
+interface itemProps {
+    remarksTimeline?:Array<{billStatus:string,remark:string,createdAt:Date}>
+}
+interface Props{
+    item:itemProps;
+}
+
+const RenderRemarks=({item}:Props)=>{  
 const remarkData=item?.remarksTimeline;
 
 
