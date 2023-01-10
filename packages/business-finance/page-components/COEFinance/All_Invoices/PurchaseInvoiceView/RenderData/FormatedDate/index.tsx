@@ -23,9 +23,9 @@ interface Props{
 
 function FormatedDate({item, field}:Props) {
 
-   const getCreatedDate =  formatDate(item?.createdDate, 'dd/MMM/yy | hh:mm a');
-   const getBillDate =  formatDate(item?.billDate, 'dd/MMM/yyyy');
-   const getDueDate =  formatDate(item?.dueDate, 'dd/MMM/yyyy');
+   const getCreatedDate =  formatDate(item?.createdDate, 'dd/MMM/yy | hh:mm a',{},true);
+   const getBillDate =  formatDate(item?.billDate, 'dd/MMM/yyyy',{},true);
+   const getDueDate =  formatDate(item?.dueDate, 'dd/MMM/yyyy',{},true);
 
    const content=(
        <>

@@ -15,12 +15,12 @@ interface propsType {
 }
 
 const FormatedDate = ({ item, field }: propsType) => {
-    const getBillDate = formatDate(item.billDate, "dd/MMM/yyyy");
-    const getDueDate = formatDate(item.dueDate, "dd/MMM/yyyy");
-    const getInvoiceDate = formatDate(item.invoiceDate, "dd/MMM/yyyy");
+    const getBillDate = formatDate(item.billDate, "dd/MMM/yyyy",{},true);
+    const getDueDate = formatDate(item.dueDate, "dd/MMM/yyyy",{},true);
+    const getInvoiceDate = formatDate(item.invoiceDate, "dd/MMM/yyyy",{},true);
     const getLastModifiedDate = formatDate(
         item.createdDate,
-        "dd/MMM/yyyy hh:mm:ss"
+        "dd/MMM/yyyy hh:mm:ss",{},true
     );
 
     return (
