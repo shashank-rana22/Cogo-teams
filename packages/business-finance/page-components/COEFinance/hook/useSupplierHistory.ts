@@ -1,14 +1,11 @@
 import { useRequestBf} from '@cogoport/request';
-import { useEffect } from 'react';
-import {useRouter} from '@cogoport/next';
 import { Toast } from '@cogoport/components';
-const useShipmentDocument = () => {
-	const { query} = useRouter();
-    const {billId}=query;
+const useSupplierHistory = ({data}) => {
+	const { job }  = data || {}
 	
 	const [{ data:historyData, loading }, trigger] = useRequestBf(
 		{
-			url     : '/purchase/bills/supplier-history',
+			url     : '/common/job/supplier-history',
 			method  : 'get',
 		},
 		{ autoCancel: false },
@@ -17,7 +14,7 @@ const useShipmentDocument = () => {
 		try {
 			await trigger({
 				params:{
-					id:billId,
+					id:job?.id,
 				}
 			});
 		} catch (err) {
@@ -33,4 +30,4 @@ const useShipmentDocument = () => {
 	};
 };
 
-export default useShipmentDocument;
+export default useSupplierHistory;

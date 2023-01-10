@@ -32,7 +32,7 @@ interface SupplierDetailsProps {
 
 }
 const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsProps)=>{
-    const {historyData,getSupplierHistory,loading} = useSupplierHistory();
+    const {historyData,getSupplierHistory,loading} = useSupplierHistory({data});
     const [showModal, setShowModal] = useState(false)
     
     const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail} = data || [{}];
