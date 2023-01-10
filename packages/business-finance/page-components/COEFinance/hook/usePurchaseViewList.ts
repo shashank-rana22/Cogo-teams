@@ -19,7 +19,7 @@ const  useGetPurchaseViewList=({filters,setFilters,sort}:Props)=> {
 	const [searchValue, setSearchValue] = useState('');
 
 	
-	console.log(filters,'filtersfiltersfilters');
+
 	const showFilter=()=>{
 		if(filters?.invoiceType==='PURCHASE'){
 			return 'BILL';
@@ -27,29 +27,25 @@ const  useGetPurchaseViewList=({filters,setFilters,sort}:Props)=> {
 		else if(filters?.invoiceType==='PROFORMA'){
 			return 'BILL';
 		}
-		return filters;
+		else if(filters?.invoiceType==='CREDIT_NOTE'){
+			return 'CREDIT_NOTE';
+		}
+		return 'REIMBURSEMENT';
 	}
 	
-	// const showBill=()=>{
-	// 	if(filters?.invoiceType==='PURCHASE')
-	// 	{
-	// 		return true;
-	// 	}
-	// 	else if(filters?.invoiceType==='PROFORMA')
-	// 	{
-	// 		return false;
-	// 	}
-	// 	return undefined;
-	// }
+	const showInvoiceType=filters?.invoiceType==='PURCHASE'?false:undefined;
+	const showProforma=filters?.invoiceType==='PROFORMA'?true:undefined;
+
+
 
     const [{ data, loading, error }, refetch] = useRequestBf(
 		{
 			url     : '/purchase/bills/list',
 			method  : 'get',
 			params : {
-				// ...filters,
-				filter:showFilter(),
-				proforma:filters?.invoiceType==='PURCHASE'?true:undefined,
+				...filters,
+				invoiceType:showFilter(),
+				proforma:showInvoiceType||showProforma,
 				status: currentTab!=='all' && currentTab!=='UrgencyTag' ? currentTab : undefined,
 				isUrgent: currentTab==='UrgencyTag'?true:undefined,
 				...sort,
