@@ -72,7 +72,7 @@ const VarianceView = ({ show, onClose, data,loading }:VarianceViewInterface) => 
             <Modal.Header title="Variance" />
             <Modal.Body>
                 <div className={styles.modalContainer}>
-                <List config={config || {}}  itemData={data} loading={loading}  functions={functions}/>
+                <List config={config}  itemData={data} loading={loading}  functions={functions}/>
                 </div>
             </Modal.Body>
 		</Modal>
