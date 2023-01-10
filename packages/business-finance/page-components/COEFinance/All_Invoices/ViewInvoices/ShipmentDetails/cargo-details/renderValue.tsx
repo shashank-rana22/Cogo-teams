@@ -4,7 +4,6 @@ import { startCase, upperCase } from '@cogoport/utils';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
 import styles from './styles.module.css';
-import {DetailInterface} from '../../../../../commons/Interfaces/index'
 
 interface PocDetailsInt{
 	name?: string,
@@ -18,8 +17,8 @@ interface ShipperDetailsInt{
 	address?:string
 }
 
-export const renderValue = (label:string, detail:DetailInterface) => {
-	const { packages = [] } = detail || {};
+export const renderValue = (label:string, detail:any) => {
+	const { packages =[] } = detail ||[{}];
 	const isAir =
 		detail?.service_type === 'air_freight_service' ||
 		detail?.service_type === 'domestic_air_freight_service';
