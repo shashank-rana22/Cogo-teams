@@ -18,6 +18,7 @@ import useListShipment from '../hook/useListShipment'
 import Details from '../All_Invoices/ViewInvoices/ShipmentDetails/Details'
 
 const CostSheet = () => {
+  const [showButton,setShowButton] = useState(false)
   const Router=useRouter();
   const {query}=Router||{};
   const {shipmentId:shipment_id,jobNumber,orgId}=query||{};
@@ -34,10 +35,14 @@ const CostSheet = () => {
     <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]',
     '/business-finance/coe-finance/all_invoices/shipment-view' as never as null)}>Go Back</Button>
     <div className={styles.flexwidth}>
+
+{    showButton ? <>
     <div>Status - </div>
     <div  className={styles.tag}>Operationally Closed</div>
-    <div className={styles.link} onClick={()=>{}}>Undo</div>
-    <Button size="md" themeType="primary" onClick={()=>{}}>Close Financially</Button>
+    <div className={styles.link} onClick={()=>{setShowButton(!showButton)}}>Undo</div> 
+                  </> : <Button size="md" themeType="primary" onClick={()=>{setShowButton(true)}}>Operationally Closed</Button>}
+  
+    <Button size="md" themeType="primary" disabled={!showButton} onClick={()=>{}}>Close Financially</Button>
     </div>
     </div>
     <Line margin='20px 0px 0px 0px'/>
