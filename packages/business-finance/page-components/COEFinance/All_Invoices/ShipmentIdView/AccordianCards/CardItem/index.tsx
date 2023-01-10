@@ -54,7 +54,7 @@ const CardItem = ({
         renderInvoiceNumber: (item: {}, field: {}) => (
             <InvoiceNumber item={item} field={field} />
         ),
-        renderDates: (item: {}, field: {}) => (
+        renderDates: (item: any, field: {}) => (
             <FormatedDate item={item} field={field} />
         ),
         renderName: (item: {}, field: {}) => (
