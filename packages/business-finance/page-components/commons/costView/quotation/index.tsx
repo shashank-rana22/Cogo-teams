@@ -1,4 +1,4 @@
-import { Skeleton } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 import QuotationCard from './quotationCard/index';
 import styles from './styles.module.css';
@@ -16,7 +16,7 @@ function Quotation({ data = {}, loading = false }) {
 			<div className={styles.flex}>
 				<div className={styles.flex}>
 					{loading ? (
-						<Skeleton height="500px" width="90%" margin="4px 0px 0px 10px" />
+						<Placeholder height="500px" width="90%" margin="4px 0px 0px 10px" />
 					) : (
 						<QuotationCard quotation={sellQuotation} />
 					)}
@@ -27,7 +27,7 @@ function Quotation({ data = {}, loading = false }) {
 					<div className={styles.marginDiv} />
 
 					{loading ? (
-						<Skeleton height="500px" width="90%" margin="4px 0px 0px 10px" />
+						<Placeholder height="500px" width="90%" margin="4px 0px 0px 10px" />
 					) : (
 						<QuotationCard quotation={buyQuotation} isBuyQuotation />
 					)}
