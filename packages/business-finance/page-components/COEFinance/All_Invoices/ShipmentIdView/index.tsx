@@ -7,6 +7,10 @@ import styles from "./styles.module.css";
 import Filters from "./Filters";
 
 export interface ItemDataProps {
+    organizationId?:string
+    jobType?:string
+    jobSource?:string
+    jobNumber?:string
     expense_total_price?: number;
     serial_id?: string;
     pending_approvals?: number;
