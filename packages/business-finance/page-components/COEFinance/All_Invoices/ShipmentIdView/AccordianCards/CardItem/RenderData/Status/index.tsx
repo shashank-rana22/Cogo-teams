@@ -31,7 +31,7 @@ const Status = ({ item, field }: propsType) => {
         return <div className={styles.coeRejected}>COE Rejected</div>;
     }
 
-    return <div className={styles.draft}>{startCase(status)} </div>;
+    return <div className={styles.draft}>{startCase(status!)} </div>;
 };
 
 export default Status;

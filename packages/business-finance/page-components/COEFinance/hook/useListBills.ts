@@ -123,7 +123,6 @@ const useListBills = (allParams = {}) => {
         params?.amountTab === "expense" ? expenseConfig : incomeConfig;
 
     const apiLoading = loading || billsApiLoading || invoicesApiLoading;
-
     return {
         loading: apiLoading,
         page,
