@@ -47,7 +47,7 @@ return(
 	</div>
 
 	<div className={styles.tags}>
-		<CargoDetailPills detail={dataList || {}} />
+		<CargoDetailPills detail={dataList} />
 	</div>
 	<a className={styles.flexDiv} onClick={()=>Router.push(`/shipments/${orgId}`)}>
 		Go to SID →
