@@ -28,7 +28,7 @@ function Login() {
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/vault/original/cogoport-admin.svg"
+					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg"
 					alt="Logo Cogoport"
 					className={styles.logo}
 				/>
