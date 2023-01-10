@@ -1,19 +1,22 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Button, Modal } from '@cogoport/components';
 import {
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
 	IcMPortArrow,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import AddRate from './AddRate';
+import RateModal from './RatesModal';
 import styles from './styles.module.css';
 
 function Service({
 	selectedCard, service, activeService, setActiveService,
 }) {
+	const [selectedRate, setSelectedRate] = useState(null);
 	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
+	const [showModal, setShowModal] = useState(false);
 	const status = submittedEnquiry.includes(service?.service) ? 'Submitted' : 'Pending';
 	const handleClick = () => {
 		if (activeService === service) {
@@ -22,9 +25,20 @@ function Service({
 			setActiveService(service);
 		}
 	};
+
+	useEffect(() => {
+		if (selectedRate && !showModal) {
+			setActiveService(service);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [showModal]);
+
 	const tradetype = service?.data?.trade_type === 'import' ? 'Destiantion' : 'Origin';
 	return (
 		<div className={styles.container}>
+			<div className={styles.button}>
+				<Button themeType="accent" size="sm" onClick={() => setShowModal(true)}>Quick Add Rates</Button>
+			</div>
 			<div
 				className={styles.service}
 				role="presentation"
@@ -61,8 +75,20 @@ function Service({
 					service={service}
 					setSubmittedEnquiry={setSubmittedEnquiry}
 					setActiveService={setActiveService}
+					selectedRate={selectedRate}
 				/>
 			)}
+			{showModal && (
+				<Modal size="lg" show={showModal}>
+					<RateModal
+						service={service}
+						setShowModal={setShowModal}
+						setSelectedRate={setSelectedRate}
+						selectedRate={selectedRate}
+					/>
+				</Modal>
+			)}
+
 		</div>
 	);
 }

@@ -8,6 +8,7 @@ import getField from '../configurations';
 import FieldMutation from '../helpers/field-mutation';
 import getPayload from '../helpers/getPayload';
 
+import useGetRates from './useGetRates';
 import useGetSpotNegotiationRate from './useGetSpotNegotiatonRate';
 
 const getDefaultValues = (oldfields) => {
@@ -24,7 +25,9 @@ const getDefaultValues = (oldfields) => {
 	return { defaultValues, fields: newfields };
 };
 
-const useUpdateSpotNegotiationRate = ({ service, setSubmittedEnquiry, setActiveService }) => {
+const useUpdateSpotNegotiationRate = ({
+	service, setSubmittedEnquiry, setActiveService, selectedRate,
+}) => {
 	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
 
@@ -43,42 +46,90 @@ const useUpdateSpotNegotiationRate = ({ service, setSubmittedEnquiry, setActiveS
 		service  : service.service,
 	});
 
+	const { data:rateSelected } = useGetRates({ service, selectedRate });
+
+	const { newField } = FieldMutation({
+		fields, values, service, data,
+	});
+	console.log(rateSelected, 'values');
+
 	useEffect(() => {
-		(Object.keys(data?.data || {})).forEach((item) => {
-			const val = data?.data[item];
-			if (val) {
-				if (item === 'line_items') {
-					setValue('line_items', val);
-				} else if (Array.isArray(val)) {
-					(Object.keys(val[0])).forEach((prefill) => {
-						if (prefill === 'line_items') {
-							setValue(item, val[0]?.[prefill]);
-						} else {
-							setValue(prefill, val[0]?.[prefill]);
-						}
-					});
-				} else {
-					(Object.keys(val)).forEach((prefill) => {
-						if (prefill === 'line_items') {
-							setValue(item, val?.[prefill]);
-						} else {
-							setValue(prefill, val?.[prefill]);
-						}
-					});
+		if (!rateSelected) {
+			(Object.keys(data?.data || {})).forEach((item) => {
+				const val = data?.data[item];
+				if (val) {
+					if (item === 'line_items') {
+						setValue('line_items', val);
+					} else if (Array.isArray(val)) {
+						(Object.keys(val[0])).forEach((prefill) => {
+							if (prefill === 'line_items') {
+								setValue(item, val[0]?.[prefill]);
+							} else {
+								setValue(prefill, val[0]?.[prefill]);
+							}
+						});
+					} else {
+						(Object.keys(val)).forEach((prefill) => {
+							if (prefill === 'line_items') {
+								setValue(item, val?.[prefill]);
+							} else {
+								setValue(prefill, val?.[prefill]);
+							}
+						});
+					}
 				}
-			}
-		});
+			});
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
+
+	useEffect(() => {
+		if (rateSelected) {
+			if (rateSelected?.spot_negotiation_id) {
+				setValue('service_provider_id', rateSelected?.service_provider_id);
+				setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
+				(Object.keys(rateSelected?.data || {})).forEach((item) => {
+					const val = rateSelected?.data[item];
+					if (val) {
+						if (item === 'line_items') {
+							setValue('line_items', val);
+						} else if (Array.isArray(val)) {
+							(Object.keys(val[0])).forEach((prefill) => {
+								if (prefill === 'line_items') {
+									setValue(item, val[0]?.[prefill]);
+								} else {
+									setValue(prefill, val[0]?.[prefill]);
+								}
+							});
+						} else {
+							(Object.keys(val)).forEach((prefill) => {
+								if (prefill === 'line_items') {
+									setValue(item, val?.[prefill]);
+								} else {
+									setValue(prefill, val?.[prefill]);
+								}
+							});
+						}
+					}
+				});
+			} else {
+				setValue('service_provider_id', selectedRate?.service_provider_id);
+				setValue('shipping_line_id', selectedRate?.shipping_line_id);
+				if ((rateSelected?.validities || []).length) {
+					setValue('freights', rateSelected?.validities[0]?.line_items);
+					setValue('validity_start', rateSelected?.validities[0]?.validity_start);
+					setValue('validity_end', rateSelected?.validities[0]?.validity_end);
+				}
+			}
+		}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(rateSelected)]);
 	const showElements = {
 		sourced_by_id            : !values?.service_provider_id,
 		origin_main_port_id      : !service?.data?.origin_port?.is_icd,
 		destination_main_port_id : !service?.data?.destination_port?.is_icd,
 	};
-
-	const { newField } = FieldMutation({
-		fields, values, service, data,
-	});
 
 	const onError = (errs, e) => {
 		e.preventDefault();

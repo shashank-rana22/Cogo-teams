@@ -39,5 +39,10 @@ const supplyDashboard = {
 		navigation : 'supply_dashboard',
 		isMainNav  : true,
 	},
+	'/[partner_id]/supply/dashboards/rfq-enquiries/[id]': {
+		layoutType : 'no_header',
+		navigation : 'supply_dashboard',
+		isMainNav  : true,
+	},
 };
 module.exports = supplyDashboard;

@@ -4,9 +4,17 @@ import { useRouter } from '@cogoport/next';
 import styles from './styles.module.css';
 
 function List({
-	fields, item, loading,
+	fields, item, loading, headerRequired, setSelectedRate, selectedRate,
 }) {
 	const { push } = useRouter();
+	const handleOnClick = () => {
+		if (headerRequired) {
+			push(
+				'/supply/dashboards/rfq-enquiries/[id]',
+				`/supply/dashboards/rfq-enquiries/${item?.id}`,
+			);
+		}
+	};
 	return (
 		<div className={styles.container}>
 			{fields.map((field) => {
@@ -14,19 +22,27 @@ function List({
 				return (
 					<div
 						role="presentation"
-						onClick={() => push(
-							'/supply/dashboards/rfq-enquiries/[id]',
-							`/supply/dashboards/rfq-enquiries/${item?.id}`,
-						)}
-						className={styles.item}
+						onClick={() => {
+							handleOnClick();
+						}}
+						className={headerRequired ? styles.item : styles.smallItem}
 						key={key || label}
 						style={{ flex }}
 					>
-						{loading ? <Placeholder /> : field.render(item) }
+						{loading ? (
+							<div className={styles.placeholder}>
+								{' '}
+								<Placeholder />
+							</div>
+						)
+							: field.render(item, setSelectedRate, selectedRate) }
 					</div>
+
 				);
 			})}
+			{!headerRequired && <div className={styles.line} />}
 		</div>
+
 	);
 }
 export default List;

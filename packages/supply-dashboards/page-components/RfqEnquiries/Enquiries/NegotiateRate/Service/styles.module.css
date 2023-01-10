@@ -26,3 +26,8 @@
 .port{
     font-weight: 600;
 }
+
+.button{
+    display: flex;
+    justify-content: flex-end;
+}

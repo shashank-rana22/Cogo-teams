@@ -5,10 +5,14 @@ import Layout from '../../../../Layout';
 
 import styles from './styles.module.css';
 
-function AddRate({ service, setSubmittedEnquiry, setActiveService }) {
+function AddRate({
+	service, setSubmittedEnquiry, setActiveService, selectedRate,
+}) {
 	const {
 		fields, control, showElements = {}, errors, onError, handleSubmit, handleData,
-	} = useUpdateSpotNegotiationRate({ service, setSubmittedEnquiry, setActiveService });
+	} = useUpdateSpotNegotiationRate({
+		service, setSubmittedEnquiry, setActiveService, selectedRate,
+	});
 
 	return (
 		<>

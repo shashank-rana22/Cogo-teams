@@ -7,7 +7,7 @@ function List({
 	return (
 		<CardList
 			fields={fields}
-			list={list || []}
+			list={list?.data || []}
 			loading={loading}
 			filters={filters}
 			hookSetters={hookSetters}

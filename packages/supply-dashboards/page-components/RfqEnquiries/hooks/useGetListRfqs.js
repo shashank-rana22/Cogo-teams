@@ -25,12 +25,11 @@ const useGetListRfqs = () => {
 				filters: {
 					negotiation_status       : 'awaiting_responses',
 					...(filters || {}),
-					service_type             : undefined,
 					relevant_supply_agent_id : user_profile?.id,
+					service_type             : filters.service_type,
 				},
 				created_by_user_details_required : true,
 				page                             : currentPage,
-				service_type                     : filters.service_type,
 			},
 		});
 	};

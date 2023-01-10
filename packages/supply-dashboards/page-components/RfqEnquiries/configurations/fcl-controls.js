@@ -4,7 +4,7 @@ import { merge } from '@cogoport/utils';
 
 import fclChildControls from './charge-controls';
 
-const fclFields = () => {
+const FclFields = () => {
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['seaport'] } },
 	}));
@@ -48,12 +48,13 @@ const fclFields = () => {
 			rules       : { required: 'This is required' },
 		},
 		{
-			name        : 'validity_start',
-			type        : 'date_picker',
-			label       : 'Validity Start',
-			placeholder : 'Pick',
-			span        : 4,
-			rules       : { required: 'This is required' },
+			name           : 'validity_start',
+			type           : 'date_picker',
+			label          : 'Validity Start',
+			showTimeSelect : true,
+			placeholder    : 'Pick',
+			span           : 4,
+			rules          : { required: 'This is required' },
 		},
 		{
 			name        : 'validity_end',
@@ -68,4 +69,4 @@ const fclFields = () => {
 	return control;
 };
 
-export default fclFields;
+export default FclFields;
