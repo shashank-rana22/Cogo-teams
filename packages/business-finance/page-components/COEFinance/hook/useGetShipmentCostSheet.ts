@@ -2,17 +2,35 @@ import { useEffect, useState } from 'react'
 import { useRequestBf } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 import getFormattedData from '../utils/getFormattedData';
+import { GenericObject } from '../../commons/Interfaces';
 
 interface Params{
-    shipment_id?: string|string[]|undefined;
+    query?: GenericObject
 }
 
-const useGetShipmentCostSheet = ({shipment_id}:Params) => {
-    const [{ data:sellData, loading:sellLoading}, sellTrigger] = useRequestBf(
+const useGetShipmentCostSheet = ({query}:Params) => {
+    const{shipment_id,jobNumber,jobSource,jobType}=query||{}
+    const [{ data:postTaxData , loading:postTaxLoading}, postTaxFetch] = useRequestBf(
             {
-                url     : `/common/job/list-service-charges`,
+                url     : `/common/job/profit`,
                 method  : 'get',
-                params:{ jobId:"Vw7m",chargeType:'sell' }
+                params:{ jobType,jobSource,jobNumber}
+            },
+            { manual: true },
+        );
+        const [{ data:preTaxData , loading:preTaxLoading}, preTaxFetch] = useRequestBf(
+            {
+                url     : `/common/job/pre-tax/profit`,
+                method  : 'get',
+                params:{ jobType,jobSource,jobNumber}
+            },
+            { manual: true },
+        );
+        const [{ data:sellData, loading:sellLoading}, sellTrigger] = useRequestBf(
+            {
+                url     : `/common/job/profit`,
+                method  : 'get',
+                params:{ jobType,jobSource,jobNumber,chargeType:'sell' }
             },
             { manual: true },
         );
@@ -20,7 +38,7 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
             {
                 url     : `/common/job/list-service-charges`,
                 method  : 'get',
-                params:{ jobId:"Vw7m",chargeType:'buy' }
+                params:{ jobType,jobSource,jobNumber,chargeType:'buy' }
             },
             { manual: true },
         );
@@ -53,7 +71,17 @@ const useGetShipmentCostSheet = ({shipment_id}:Params) => {
         }, [shipment_id]);
         const {formattedBuyData,sellQuotationData}=getFormattedData({sell_quotation:sellData,buy_quotation:buyData})
 
-        return {data:sellData, selldata:sellQuotationData,buydata:formattedBuyData,apiloading:(sellLoading||buyLoading)};
+        return {
+            selldata:sellQuotationData,
+            buydata:formattedBuyData,
+            sellData,
+            buyData,
+            apiloading:sellLoading||buyLoading,
+            postTaxData,
+            preTaxData,
+            preTaxLoading,
+            postTaxLoading,
+        };
 }
 
 export default useGetShipmentCostSheet

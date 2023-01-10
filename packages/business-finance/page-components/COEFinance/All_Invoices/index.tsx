@@ -13,12 +13,12 @@ const AllInvoices = () => {
 
     const isPurchase = subActiveTab === "purchase-view";
 
-    // useEffect(() => {
-    //     push(
-    //         "/business-finance/coe-finance/[active_tab]/[view]",
-    //         `/business-finance/coe-finance/all_invoices/${subActiveTab}` as never as null
-    //     );
-    // }, [subActiveTab]);
+    useEffect(() => {
+        push(
+            "/business-finance/coe-finance/[active_tab]/[view]",
+            `/business-finance/coe-finance/all_invoices/${subActiveTab}` as never as null
+        );
+    }, [subActiveTab]);
 
     return (
         <div>

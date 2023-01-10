@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react'
 import styles from './styles.module.css'
 
 interface Props{
-  heading?: string;
+  heading?: string|JSX.Element;
   statlabel?: string|JSX.Element;
   statvalue?: string|JSX.Element;
   width?: string|number;

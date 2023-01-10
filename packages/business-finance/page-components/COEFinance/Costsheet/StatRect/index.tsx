@@ -1,16 +1,20 @@
 import React from 'react';
 import styles from './styles.module.css';
 import Line from '../Line';
+import { Placeholder } from '@cogoport/components';
 
 interface Props{
   heading?:string;
   expected?:string|number;
   actual?:string|number;
+  loading?:boolean;
 }
 
-const StatRect = ({heading,expected,actual}:Props) => {
+const StatRect = ({heading,expected,actual,loading}:Props) => {
   return (
     <div className={styles.layout}>
+        {!loading?(
+        <>
         <div className={styles.heading}>
         {heading}
         </div>
@@ -24,6 +28,8 @@ const StatRect = ({heading,expected,actual}:Props) => {
           <span className={styles.number}>{actual}</span>
           <span className={styles.label}>Actual</span></div>
         </div>
+        </>
+        ):<Placeholder height='100px' width='100%'/>}
     </div>
   )
 }
