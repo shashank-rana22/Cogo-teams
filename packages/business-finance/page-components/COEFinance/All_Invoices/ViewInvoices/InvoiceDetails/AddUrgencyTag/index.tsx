@@ -66,7 +66,7 @@ const AddUrgencyTag = ({
 			<div className={styles.buttonContainer}>
 				<Button
 				    className={styles.cancelbtn}
-					themeType="secondary md"
+					themeType="secondary"
 					onClick={() => setShowAddTag(false)}
 					disabled={loading}
 				>

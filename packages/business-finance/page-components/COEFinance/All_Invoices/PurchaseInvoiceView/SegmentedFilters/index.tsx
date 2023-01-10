@@ -15,6 +15,7 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import FilterModal from "../../../Components/FilterModal/index";
 
 import useShipmentIdView from '../../../hook/useShipmentIdView'
+
 import { GenericObject} from '../../../../commons/Interfaces/index'
 
 
@@ -28,8 +29,11 @@ interface segmentFilterProps{
     currentTab: string
 
     setCurrentTab: React.Dispatch<React.SetStateAction<string>>
+
     filters:GenericObject;
+
     setFilters: (p: object) => void
+
 }
 
 
@@ -75,6 +79,7 @@ function SegmentedFilters({setCurrentTab,
                     />
 
                 </div>
+
                 <div className={styled.filterDataUrgent} >
 
                     <SegmentedControl
@@ -140,5 +145,4 @@ function SegmentedFilters({setCurrentTab,
 
 
 export default SegmentedFilters;
-
 

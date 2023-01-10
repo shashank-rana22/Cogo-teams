@@ -6,26 +6,7 @@ import CardItem from "./CardItem/index";
 import { startCase } from "@cogoport/utils";
 import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
 import { useRouter } from "@cogoport/next";
-
-interface ItemDataProps {
-    expense_total_price: number;
-    serial_id: string;
-    pending_approvals: number;
-    shipment_type: string;
-    expense_count: number;
-    expense_total_currency: string;
-    urgency_expense_count: number;
-    urgency_total_price: number;
-    urgency_total_currency: string;
-    income_count: number;
-    credit_expense_count: number;
-    credit_total_price: number;
-    quotation_profit: string;
-    tentative_profit: string;
-    income_total_price: number;
-    income_total_currency: string;
-    id: string;
-}
+import { ItemDataProps } from "../index";
 interface listData {
     itemData: ItemDataProps;
     currentOpenSID: string;
@@ -64,7 +45,7 @@ const AccordianCards = ({
                         </div>
                         <div className={styles.freightWidth}>
                             <div className={styles.freight}>
-                                {startCase(itemData.shipment_type)}
+                                {startCase(itemData.shipment_type!)}
                             </div>
                         </div>
                     </div>
@@ -80,8 +61,8 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
-                                        itemData.expense_total_price,
-                                        itemData.expense_total_currency
+                                        itemData.expense_total_price!,
+                                        itemData.expense_total_currency!
                                     )}
                                 </div>
                             </div>
@@ -91,7 +72,7 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.urgentValueText}>
                                     {getFormattedPrice(
-                                        itemData.urgency_total_price,
+                                        itemData.urgency_total_price!,
                                         itemData.urgency_total_currency || "INR"
                                     )}
                                 </div>
@@ -104,7 +85,7 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
-                                        itemData.income_total_price,
+                                        itemData.income_total_price!,
                                         itemData.income_total_currency || "INR"
                                     )}
                                 </div>
@@ -116,7 +97,7 @@ const AccordianCards = ({
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
-                                        itemData.credit_total_price,
+                                        itemData.credit_total_price!,
                                         "INR"
                                     )}
                                 </div>
@@ -177,8 +158,11 @@ const AccordianCards = ({
                         </div>
                     </div>
 
-                    <div className={styles.ribben}>
-                        <div className={styles.ribbon}>Closed</div>
+                    <div className={styles.ribbon}>
+                        {itemData.is_job_closed === false && "Open"}
+                    </div>
+                    <div className={styles.ribbonBackground}>
+                        {itemData.is_job_closed === true && "Closed"}
                     </div>
                 </div>
                 <div>

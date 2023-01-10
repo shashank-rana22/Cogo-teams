@@ -8,7 +8,7 @@ import { Popover ,Modal,Checkbox } from "@cogoport/components";
 import { Textarea } from "@cogoport/components";
 
 interface LineItemCard {
-    lineItems?:Array<object>
+    lineItems:Array<object>
     setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>
     setRemarksVal:any,
     lineItemsRemarks:object 
@@ -22,7 +22,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
     const [popover, setPopover] = useState(false);
     const [rejectedItems, setRejectedItems]=useState({});
     const [activeLineItem, setActiveLineItem] = useState(0);
-    const [showRejectedModal , setShowRejectedModal] = useState({ id : ""})
+    const [showRejectedModal , setShowRejectedModal] = useState({ id : "",name:''})
 
     const renderAction =(id:string)=>{
         if(approvedItems[id as keyof typeof approvedItems]){
@@ -101,7 +101,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
         renderReject: (item:any) => {
             return (
             <div style={{cursor:"pointer"}}>
-                <Popover  placement="left" interactive render={<div className={styles.popoverRejected} onClick={()=>{openRejectModal(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
+                <Popover  placement="left"  render={<div className={styles.popoverRejected} onClick={()=>{openRejectModal(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
                     <div> <IcMOverflowDot width="20px" height="20px"/> </div> 
                 </Popover>
             </div>
@@ -135,7 +135,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
             </div>
             {
             popover[id as keyof typeof popover] && 
-                <Modal size="lg" placement="center" show={popover[id as keyof typeof popover]} onClose={onClose}>
+                <Modal size="lg" placement="center" show={popover[id]} onClose={onClose}>
                     <Modal.Header title="Rejected line items" />
             <Modal.Body>
                   <div className={styles.modalContainer}>
@@ -159,7 +159,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
                     <Modal.Footer>
                         <Button
                          onClick={()=>handleRejectClick(id)}
-                         disabled={ !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks] || lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks]?.length<0}
+                         disabled={ !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks] || lineItemsRemarks[lineItemName]?.length<0}
                          >Submit</Button>
                     </Modal.Footer>
                 </Modal>

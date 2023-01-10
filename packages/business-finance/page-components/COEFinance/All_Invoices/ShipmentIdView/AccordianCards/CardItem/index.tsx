@@ -35,8 +35,6 @@ const CardItem = ({
 }: propsType) => {
     const {
         loading,
-        hookSetters,
-        filters,
         list: { fullResponse },
         config,
     } = useListBills({
@@ -71,7 +69,7 @@ const CardItem = ({
         renderInvoices: (item: {}, field: {}) => (
             <ViewInvoice item={item} field={field} />
         ),
-        renderRemarks: (item: {}) => <Remarks item={item} />,
+        renderRemarks: (item: any) => <Remarks itemData={item} />,
     };
 
     return (

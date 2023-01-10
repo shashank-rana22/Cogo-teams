@@ -151,7 +151,6 @@ const POCTimeLine = ({ data, loading }:POCTimeLineInterface) => {
 										<div className={styles.userContainer}>{performedByUser}</div>
 										{userEmail ? (
 											<Tooltip
-												theme="light-border"
 												interactive
 												content={
 													<div className={styles.userContainer}>

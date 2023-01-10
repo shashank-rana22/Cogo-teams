@@ -56,7 +56,7 @@ const [sort, setSort] = useState({});
       
 
     const functions:FunctionObjects = {
-        renderStatus: (itemData:itemProps) => (
+      renderStatus: (itemData:itemProps) => (
           <RenderStatus item={itemData}/>
       ),
       renderFieldPair: (itemData:itemProps, field:fieldProps) => (
