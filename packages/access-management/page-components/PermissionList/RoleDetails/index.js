@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 
 import Heading from '../../../common/Heading';
 
-// import EditRoles from './EditRoles';
+import EditRoles from './EditRoles';
 import styles from './styles.module.css';
 
 function RoleDetails({
@@ -81,8 +81,11 @@ function RoleDetails({
 					subTitle="Update permissions for the role"
 				/>
 
-				{/* <EditRoles roleData={roleData} getRole={getRole} /> */}
-				{importPermissionsButton}
+				<section className={styles.permissions_container}>
+					<EditRoles roleData={roleData} getRole={getRole} />
+					{importPermissionsButton}
+				</section>
+
 			</div>
 
 			<div className={styles.content}>

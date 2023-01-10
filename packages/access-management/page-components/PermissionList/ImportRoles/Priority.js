@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect } from 'react';
 
-import IcDrag from './ic-drag.svg';
 import { Li, Ul, SubHeading } from './styles';
 
 function Priority({ value, options, setPriority = () => {} }) {

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function Items({ item, resetSubnavs }) {
 	const [showSubNav, setShowSubNav] = useState(false);
 	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
+		user_data: profile?.user || {},
 	}));
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
