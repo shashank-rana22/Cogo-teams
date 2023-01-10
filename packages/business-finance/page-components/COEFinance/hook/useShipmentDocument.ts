@@ -7,7 +7,6 @@ const useShipmentDocument = (shipmentId) => {
 		{
 			url     : '/shipment/list_shipment_documents',
 			method  : 'get',
-			// authKey : 'get_list_shipments',
 		},
 		{ autoCancel: false },
 	);

@@ -24,7 +24,6 @@ const useUpdateTag = ({
 		{
 			url     : 'shipment/update_shipment_collection_party',
 			method  : 'post',
-			// authKey : 'update_shipment_collection_party',
 		},
 		{ autoCancel: false },
 	);

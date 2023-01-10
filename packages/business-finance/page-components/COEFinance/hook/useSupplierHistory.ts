@@ -10,7 +10,6 @@ const useShipmentDocument = () => {
 		{
 			url     : '/purchase/bills/supplier-history',
 			method  : 'get',
-			// authKey : 'get_list_shipments',
 		},
 		{ autoCancel: false },
 	);
