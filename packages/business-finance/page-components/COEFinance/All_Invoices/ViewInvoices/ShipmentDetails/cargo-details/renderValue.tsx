@@ -53,7 +53,6 @@ export const renderValue = (label:string, detail:any) => {
 			return (
 				<Tooltip
 					placement="bottom"
-					theme="light"
 					content={
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item) => {
