@@ -132,4 +132,5 @@ const CoeFinance = () => {
         </div>
     );
 };
+
 export default CoeFinance;

@@ -47,4 +47,5 @@ const ViewInvoices =()=>{
     </div>
     )
 }
+
 export default ViewInvoices
