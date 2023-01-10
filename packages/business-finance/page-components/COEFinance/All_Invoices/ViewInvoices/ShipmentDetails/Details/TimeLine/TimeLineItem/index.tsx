@@ -12,7 +12,7 @@ interface ItemInt{
 }
 
 interface ShipmentInt{
-	services:string[],
+	services?:string[],
 }
 
 interface ObjInt{
@@ -77,7 +77,6 @@ const TimeLineItem = ({
 					<Tooltip
 						placement="top"
 						content={content()}
-						theme="light"
 					>
 						<div className={styles.Flex}>
 							{item?.completed_on && item?.is_sub && <div className={styles.FilledCircle}/>}
