@@ -1,3 +1,4 @@
+import '@cogoport/components/dist/themes/base.css';
 import '@cogoport/components/dist/themes/dawn.css';
 import handleAuthentication from '@cogoport/authentication/utils/handleAuthentication';
 import { Router, RoutesProvider } from '@cogoport/next';
