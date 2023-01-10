@@ -35,7 +35,7 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     const {historyData,getSupplierHistory,loading} = useSupplierHistory({data});
     const [showModal, setShowModal] = useState(false)
     
-    const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail} = data || [{}];
+    const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail} = data;
     const {kycStatus=''}=serviceProviderAdditionalDetail || {};
     const {payables,receivables,ledgerCurrency} = paymentsData || {};
 
