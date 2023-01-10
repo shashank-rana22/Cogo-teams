@@ -136,7 +136,7 @@ export interface DetailInterface{
 	hs_code?:{hs_code: number|string , name: string},
 }
 export interface RemarksValInterface{
-	bankDetailsRemarks:string,
-	billingPartyRemarks:string,
-	invoiceDetailsRemarks:string,
+	collectionPartyRemark:string,
+	billingPartyRemark:string,
+	invoiceDetailsRemark:string,
 }

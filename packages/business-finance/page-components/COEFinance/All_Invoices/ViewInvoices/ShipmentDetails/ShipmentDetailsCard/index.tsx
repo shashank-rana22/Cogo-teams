@@ -45,11 +45,13 @@ interface ShipmentDetailsCardInterface{
     data?:DataInterface
     remarksVal:RemarksValInterface
     setRemarksVal:any
+    lineItemsRemarks:object 
+    setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>
     setItemCheck:  React.Dispatch<React.SetStateAction<boolean>>
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal ,setItemCheck,setLineItem}:ShipmentDetailsCardInterface) =>{
+const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal, lineItemsRemarks, setLineItemsRemarks ,setItemCheck,setLineItem}:ShipmentDetailsCardInterface) =>{
     const [showValue, setShowValue ] = useState([] as any)
     const [rejected,setRejected] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
@@ -87,6 +89,15 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal ,setItemCheck,setLin
        setShowValue(undoApprovedData);
        const undoRejectedData = rejected.filter((item:any) => item !== id);
        setRejected(undoRejectedData);
+
+    //    Removing remarks of selected card on Undo here 
+          if(id===1){
+              setRemarksVal({...remarksVal,collectionPartyRemark:''})
+          }else if(id===2){
+            setRemarksVal({...remarksVal,billingPartyRemark:''})
+          }else if(id===3){
+            setRemarksVal({...remarksVal,invoiceDetailsRemark:''})
+          }
     }
 
     const handleClickReject =(id:number) => {
@@ -98,11 +109,11 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal ,setItemCheck,setLin
 
     const onClose = () => {
         if(Object.keys(showRejected).includes('1')){
-            setRemarksVal({...remarksVal,bankDetailsRemarks:'' });
+            setRemarksVal({...remarksVal,collectionPartyRemark:'' });
         }else if(Object.keys(showRejected).includes('2')){
-            setRemarksVal({...remarksVal,billingPartyRemarks:'' });
+            setRemarksVal({...remarksVal,billingPartyRemark:'' });
         }else{
-            setRemarksVal({...remarksVal,invoiceDetailsRemarks:'' });
+            setRemarksVal({...remarksVal,invoiceDetailsRemark:'' });
         }
 		setShowRejected(false);
 	};
@@ -119,7 +130,15 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal ,setItemCheck,setLin
 
 return(
     <div>
-{ showLineItem ? <LineItemCard lineItems={lineItems} setShowLineItem={setShowLineItem} setRemarksVal={setRemarksVal} remarksVal={remarksVal} setLineItem={setLineItem}/> : 
+{ showLineItem ? <LineItemCard 
+                  lineItems={lineItems} 
+                  setShowLineItem={setShowLineItem} 
+                  setRemarksVal={setRemarksVal} 
+                  lineItemsRemarks={lineItemsRemarks}
+                  setLineItemsRemarks={setLineItemsRemarks}
+                  remarksVal={remarksVal} 
+                  setLineItem={setLineItem}
+                  /> : 
     <div>
         <div className={styles.mainHeader}>
             <div className={styles.instructions}>
@@ -181,8 +200,8 @@ return(
                                                  size="md" 
                                                  placeholder="Remarks Here ..." 
                                                  style={{width:'700' ,height:'100px'}}
-                                                 value={remarksVal.bankDetailsRemarks} 
-                                                 onChange={(value:string)=>setRemarksVal({...remarksVal, bankDetailsRemarks:value})} 
+                                                 value={remarksVal.collectionPartyRemark} 
+                                                 onChange={(value:string)=>setRemarksVal({...remarksVal, collectionPartyRemark:value})} 
                                                  />
                                                
                                             </div>
@@ -215,8 +234,8 @@ return(
                                                  name="remark" 
                                                  size="md"
                                                  placeholder="Remarks Here ..."
-                                                 value={remarksVal.billingPartyRemarks} 
-                                                 onChange={(value:string)=>setRemarksVal({...remarksVal, billingPartyRemarks:value})}
+                                                 value={remarksVal.billingPartyRemark} 
+                                                 onChange={(value:string)=>setRemarksVal({...remarksVal, billingPartyRemark:value})}
                                                  style={{width:'700' ,height:'100px'}} />
                                             </div>
                             }
@@ -246,8 +265,8 @@ return(
                                             name="remark" 
                                             size="md" 
                                             placeholder="Remarks Here ..." 
-                                            value={remarksVal.invoiceDetailsRemarks} 
-                                            onChange={(value:string)=>setRemarksVal({...remarksVal, invoiceDetailsRemarks:value})}
+                                            value={remarksVal.invoiceDetailsRemark} 
+                                            onChange={(value:string)=>setRemarksVal({...remarksVal, invoiceDetailsRemark:value})}
                                             style={{width:'700' ,height:'100px'}} />
                                     </div>
                             }
