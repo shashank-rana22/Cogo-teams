@@ -6,34 +6,17 @@ import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
 import GetServiceInfo from '../../../../../commons/GetServiceInfo';
 import CargoDetailPills from '../cargo-details/index';
-
-interface IEInterface{
-	business_name:string
-}
-interface PickupDropInt{
-	postal_code:string,
-	country:{name:string},
-	display_name:string,
-	name:string
-}
-
-interface ListInterface{
-	importer_exporter:IEInterface,
-	shipment_type:string,
-	pickup:PickupDropInt,
-	drop:PickupDropInt
-}
+import {DetailInterface} from '../../../../../commons/Interfaces/index';
 
 interface Details {
 	orgId?:string,
-    dataList:ListInterface,
+    dataList:DetailInterface,
 	shipmentId:string,
 }
 const Details = ({orgId, dataList, shipmentId}:Details) => {
 	const {importer_exporter, shipment_type, pickup, drop}=dataList || {};
-	const shipmentTypeName=shipment_type?.replaceAll('_'," ")?.toUpperCase();
+	const shipmentTypeName=shipment_type?.split('_')?.join(' ')?.toUpperCase();
 	const Router = useRouter();
-
 	const  ServiceIcon  = GetServiceInfo(shipment_type);
 
 return(
@@ -67,7 +50,7 @@ return(
 		<CargoDetailPills detail={dataList || {}} />
 	</div>
 	<a className={styles.flexDiv} onClick={()=>Router.push(`/shipments/${orgId}`)}>
-		Go to SID ->
+		Go to SID →
 	</a>
 </div>
 

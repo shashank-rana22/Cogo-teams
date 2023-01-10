@@ -77,6 +77,16 @@ interface PortInterface{
 	display_name?:string
 }
 
+interface IEInterface{
+	business_name:string
+}
+interface PickupDropInt{
+	postal_code:string,
+	country:{name:string},
+	display_name:string,
+	name:string
+}
+
 export interface DetailInterface{
 	service_type?:string,
 	services?:Array<string>,
@@ -137,6 +147,10 @@ export interface DetailInterface{
 	shipper_details:object,
 	buy_quotation_agreed_rates:number,
 	hs_code?:{hs_code: number|string , name: string},
+    importer_exporter:IEInterface,
+	shipment_type:string,
+	pickup:PickupDropInt,
+	drop:PickupDropInt
 }
 export interface RemarksValInterface{
 	collectionPartyRemark:string,
