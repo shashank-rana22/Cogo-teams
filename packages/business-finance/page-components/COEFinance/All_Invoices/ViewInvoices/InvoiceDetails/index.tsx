@@ -1,5 +1,5 @@
 import React,{useState}  from "react";
-import { Button,ToolTip,Modal } from "@cogoport/components";
+import { Button,Tooltip,Modal } from "@cogoport/components";
 import styles from './styles.module.css';
 import { isEmpty } from '@cogoport/utils';
 import { IcMInfo } from '@cogoport/icons-react';
@@ -63,14 +63,13 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 
 				{!isEmpty(data?.billAdditionalObject?.urgencyRemarks) &&
 				data?.billAdditionalObject?.urgencyTag === 'urgent' ? (
-					<ToolTip
+					<Tooltip
 						placement="bottom"
-						theme="light-border"
 						interactive
 						content={remarkRender()}
 					>
 							<IcMInfo />
-					</ToolTip>
+					</Tooltip>
 				) : null}
 			</div >
 
