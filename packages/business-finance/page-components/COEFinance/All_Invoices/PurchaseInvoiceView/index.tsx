@@ -55,7 +55,7 @@ const [sort, setSort] = useState({});
         <FormatedDate item={itemData} field={field} />
       ),
       renderRemarks: (itemData:any,field:any)=>(
-        <RenderRemarks itemData={itemData} field={field}/>
+        <RenderRemarks item={itemData} field={field}/>
       ),
       renderViewMore : (itemData:any)=>(
         <Button size="sm" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>

@@ -49,21 +49,21 @@ export const FILTERS : ControlProps[]=[
         groupBy:[
             {
                 label: 'Invoice Date',
-                name: 'createdAt',
+                name: 'billDate',
                 type: 'datepicker',
                 placeholder: 'Created At',
                 span: 3.5,
             },
             {
                 label: 'Payment Due Date',
-                name: 'paymentDueDate',
+                name: 'dueDate',
                 type: 'datepicker',
                 placeholder: 'Invoice Date',
                 span: 3.5,
             },
             {
                 label: 'Last Modified Date',
-                name: 'modifiedDate',
+                name: 'updatedDate',
                 type: 'datepicker',
                 placeholder: 'Last Modified Date',
                 span: 3.5,

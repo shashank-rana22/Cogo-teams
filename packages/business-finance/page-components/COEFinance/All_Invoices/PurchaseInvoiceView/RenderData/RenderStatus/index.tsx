@@ -13,10 +13,7 @@ function RenderStatus ({ item}:props)  {
 	return (
 		<div>
 			<div className={styled[item?.status]}>
-				{/* {startCase(StatusItem)} */}
-				{
-					item?.status
-				}
+				{startCase(StatusItem)}
 			</div>
 		</div>
 	);
