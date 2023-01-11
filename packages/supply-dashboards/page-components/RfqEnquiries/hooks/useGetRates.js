@@ -23,19 +23,20 @@ const useGetRates = ({ service, selectedRate }) => {
 		try {
 			await triggerSystemData({
 				params: {
-					filters: {
-						origin_port_id           : selectedRate.origin_port_id,
-						destination_port_id      : selectedRate?.destination_port_id,
-						origin_main_port_id      : selectedRate?.origin_main_port_id,
-						destination_main_port_id : selectedRate?.destination_main_port_id,
-						container_size           : selectedRate?.container_size,
-						container_type           : selectedRate?.container_type,
-						commodity                : selectedRate?.commodity,
-						service_provider_id      : selectedRate?.service_provider_id,
-						shipping_line_id         : selectedRate?.shipping_line_id,
-						importer_exporter_id     : selectedRate?.importer_exporter_id,
-						rate_not_available_entry : false,
-					},
+					origin_port_id           : selectedRate.origin_port_id,
+					destination_port_id      : selectedRate?.destination_port_id,
+					origin_airport_id        : selectedRate?.origin_airport_id,
+					destination_airport_id   : selectedRate?.destination_airport_id,
+					origin_main_port_id      : selectedRate?.origin_main_port_id,
+					destination_main_port_id : selectedRate?.destination_main_port_id,
+					container_size           : selectedRate?.container_size,
+					container_type           : selectedRate?.container_type,
+					commodity                : selectedRate?.commodity,
+					service_provider_id      : selectedRate?.service_provider_id,
+					shipping_line_id         : selectedRate?.shipping_line_id,
+					importer_exporter_id     : selectedRate?.importer_exporter_id,
+					rate_not_available_entry : false,
+
 				},
 			});
 		} catch (err) {

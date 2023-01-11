@@ -21,6 +21,7 @@ function Service({
 	const handleClick = () => {
 		if (activeService === service) {
 			setActiveService(null);
+			setSelectedRate(null);
 		} else {
 			setActiveService(service);
 		}

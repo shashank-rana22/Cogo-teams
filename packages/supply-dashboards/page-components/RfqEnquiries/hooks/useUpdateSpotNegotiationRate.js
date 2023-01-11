@@ -214,7 +214,6 @@ const useUpdateSpotNegotiationRate = ({
 			Toast.error('something went wrong');
 		}
 	};
-	console.log(values, 'values');
 
 	return {
 		fields: newField,

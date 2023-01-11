@@ -27,8 +27,12 @@ const columns = [
 		key    : 'shipping_line',
 		render : (item) => (
 			<div className={styles.value}>
-				<img src={item?.shipping_line?.logo_url} style={{ width: '50px', height: '50px' }} />
-				<div>{item?.shipping_line?.short_name}</div>
+				<img
+					src={item?.shipping_line?.logo_url || item?.airline?.logo_url}
+					alt=""
+					style={{ width: '50px', height: '50px' }}
+				/>
+				<div>{(item?.shipping_line || item?.airline)?.short_name }</div>
 
 			</div>
 
@@ -50,9 +54,9 @@ const columns = [
 		key    : 'rate',
 		render : (item) => (
 			<div className={styles.lastval}>
-				{item?.freight_price_currency || item?.validities?.[0].currency}
+				{item?.freight_price_currency || item?.validities?.[0].currency || item?.validity?.currency}
 				{' '}
-				{item?.freight_price || item?.validities?.[0].price}
+				{item?.freight_price || item?.validities?.[0].price || item?.validity?.min_price}
 			</div>
 		),
 		flex: 3,
