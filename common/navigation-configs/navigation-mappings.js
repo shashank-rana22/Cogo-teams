@@ -41,7 +41,35 @@ import {
 	IcMCreditRequest,
 } from '@cogoport/icons-react';
 
+import app_pay_later from './apis/app-paylater';
+import auto_quotation from './apis/auto_quotation';
+import business from './apis/business';
+import { business_dashboard } from './apis/business-dashboard';
+import checkout_promotions from './apis/checkout-promotions';
+import contract_rates from './apis/contract-rates-apis';
+import demand_crm from './apis/demand_crm';
+import feedback from './apis/feedback-apis';
+import finance_crm from './apis/finance-crm';
+import forecast from './apis/forecast';
+import lead_dashboard from './apis/lead-dashboard';
+import lead_management from './apis/lead-management';
+import okam_dashboard from './apis/okam-dashboard';
+import onboarding_crm from './apis/onboarding-crm';
+import partner from './apis/partner';
+import partner_application from './apis/partner_application';
+import payments from './apis/payments-apis';
+import product_pricing from './apis/product_pricing';
+import rfq from './apis/rfq-apis';
 import roles_permissions from './apis/roles-n-permission-apis';
+import sales from './apis/sales';
+import sales_dashboard from './apis/sales-dashboard';
+import search_apis from './apis/search-apis';
+import shipment_apis from './apis/shipment-apis';
+import supply_dashboard from './apis/supply-dashboard';
+import supply_crm from './apis/supply_crm';
+import support_crm from './apis/support-crm';
+import terms_and_conditons from './apis/terms-and-conditions';
+import user_allocation from './apis/user_allocation';
 
 const navigationMappings = {
 	channel_partner_dashboard: {
@@ -63,12 +91,19 @@ const navigationMappings = {
 		module_type   : 'dashboards',
 	},
 	business_dashboard: {
-		key       : 'business_dashboard',
-		title     : 'Business Dashboard',
-		href      : '/v1/business-dashboard',
-		as        : '/v1/business-dashboard',
-		type      : 'link',
-		main_apis : [
+		key           : 'business_dashboard',
+		title         : 'Business Dashboard',
+		href          : '/v1/business-dashboard',
+		as            : '/v1/business-dashboard',
+		type          : 'link',
+		possible_apis : [
+			...sales_dashboard,
+			...business_dashboard,
+			...search_apis,
+			...shipment_apis,
+			...auto_quotation,
+		],
+		main_apis: [
 			'list_organizations',
 			'list_shipments',
 			'list_spot_searches',
@@ -78,50 +113,66 @@ const navigationMappings = {
 		module_type: 'dashboards',
 	},
 	partner_application: {
-		key         : 'partner_application',
-		title       : 'Partner Applications',
-		href        : '/v1/applications',
-		as          : '/v1/applications',
-		type        : 'link',
-		main_apis   : ['list_partner_applications'],
-		module_type : 'crm',
+		key           : 'partner_application',
+		title         : 'Partner Applications',
+		href          : '/v1/applications',
+		as            : '/v1/applications',
+		type          : 'link',
+		possible_apis : [...partner_application],
+		main_apis     : ['list_partner_applications'],
+		module_type   : 'crm',
 	},
 	partner: {
-		key         : 'partner',
-		title       : 'Partners - Cogoport',
-		href        : '/v1/partners',
-		as          : '/v1/partners',
-		type        : 'link',
-		icon        : IcMPartnersCogoport,
-		main_apis   : ['list_partners'],
-		module_type : 'crm',
+		key           : 'partner',
+		title         : 'Partners - Cogoport',
+		href          : '/v1/partners',
+		as            : '/v1/partners',
+		type          : 'link',
+		possible_apis : [...partner, ...product_pricing],
+		icon          : IcMPartnersCogoport,
+		main_apis     : ['list_partners'],
+		module_type   : 'crm',
 	},
 	user_allocation: {
-		key         : 'user_allocation',
-		title       : 'User Allocations',
-		href        : '/v1/partner-user-allocations',
-		as          : '/v1/partner-user-allocations',
-		type        : 'link',
-		main_apis   : ['list_partner_user_allocations'],
-		module_type : 'crm',
+		key           : 'user_allocation',
+		title         : 'User Allocations',
+		href          : '/v1/partner-user-allocations',
+		as            : '/v1/partner-user-allocations',
+		type          : 'link',
+		possible_apis : [...user_allocation],
+		main_apis     : ['list_partner_user_allocations'],
+		module_type   : 'crm',
 	},
 	business: {
-		key         : 'business',
-		title       : 'Business',
-		href        : '/v1/business',
-		as          : '/v1/business',
-		type        : 'link',
-		icons       : IcMBusiness,
-		main_apis   : ['list_business_entities'],
-		module_type : 'crm',
+		key           : 'business',
+		title         : 'Business',
+		href          : '/v1/business',
+		as            : '/v1/business',
+		type          : 'link',
+		possible_apis : [...business],
+		icons         : IcMBusiness,
+		main_apis     : ['list_business_entities'],
+		module_type   : 'crm',
 	},
 	demand_crm: {
-		key       : 'demand_crm',
-		title     : 'Sales CRM',
-		href      : '/v1/lead-management',
-		as        : '/v1/lead-management',
-		type      : 'link',
-		main_apis : [
+		key           : 'demand_crm',
+		title         : 'Sales CRM',
+		href          : '/v1/lead-management',
+		as            : '/v1/lead-management',
+		type          : 'link',
+		possible_apis : [
+			...demand_crm,
+			...payments,
+			...lead_management,
+			...terms_and_conditons,
+			...search_apis,
+			...shipment_apis,
+			...sales,
+			...app_pay_later,
+			...feedback,
+			...checkout_promotions,
+		],
+		main_apis: [
 			'list_organization_users',
 			'list_lead_users',
 			'list_lead_organizations',
@@ -130,59 +181,81 @@ const navigationMappings = {
 		module_type: 'crm',
 	},
 	supply_crm: {
-		key         : 'supply_crm',
-		title       : 'Supply CRM',
-		href        : '/v1/crm/supply',
-		as          : '/v1/crm/supply',
-		type        : 'link',
+		key           : 'supply_crm',
+		title         : 'Supply CRM',
+		href          : '/v1/crm/supply',
+		as            : '/v1/crm/supply',
+		type          : 'link',
+		possible_apis : [
+			...supply_crm,
+			...shipment_apis,
+			...sales,
+		],
 		main_apis   : ['list_organizations'],
 		module_type : 'crm',
 	},
 	support_crm: {
-		key         : 'support_crm',
-		title       : 'Support CRM',
-		href        : '/v1/crm/support',
-		as          : '/v1/crm/support',
-		type        : 'link',
-		main_apis   : ['list_organizations'],
-		module_type : 'crm',
+		key           : 'support_crm',
+		title         : 'Support CRM',
+		href          : '/v1/crm/support',
+		as            : '/v1/crm/support',
+		type          : 'link',
+		possible_apis : [...support_crm, ...sales],
+		main_apis     : ['list_organizations'],
+		module_type   : 'crm',
 	},
 	onboarding_crm: {
-		key         : 'onboarding_crm',
-		title       : 'Onboarding CRM',
-		href        : '/v1/crm/onboarding',
-		as          : '/v1/crm/onboarding',
-		type        : 'link',
-		main_apis   : ['list_organizations'],
-		module_type : 'crm',
+		key           : 'onboarding_crm',
+		title         : 'Onboarding CRM',
+		href          : '/v1/crm/onboarding',
+		as            : '/v1/crm/onboarding',
+		type          : 'link',
+		possible_apis : [...onboarding_crm, ...sales],
+		main_apis     : ['list_organizations'],
+		module_type   : 'crm',
 	},
 	lead_dashboard: {
-		key         : 'lead_dashboard',
-		title       : 'Lead Dashboard',
-		href        : '/v1/lead-dashboard',
-		as          : '/v1/lead-dashboard',
-		type        : 'link',
-		main_apis   : ['get_lead_organization_conversion_stats'],
-		module_type : 'dashboards',
+		key           : 'lead_dashboard',
+		title         : 'Lead Dashboard',
+		href          : '/v1/lead-dashboard',
+		as            : '/v1/lead-dashboard',
+		type          : 'link',
+		possible_apis : [...lead_dashboard],
+		main_apis     : ['get_lead_organization_conversion_stats'],
+		module_type   : 'dashboards',
 	},
 	finance_crm: {
-		key         : 'finance_crm',
-		title       : 'Finance CRM',
-		href        : '/v1/crm/finance',
-		as          : '/v1/crm/finance',
-		type        : 'link',
-		statsKey    : 'finance_crm',
-		icon        : IcMFinanceCrm,
-		main_apis   : ['list_organizations'],
-		module_type : 'crm',
+		key           : 'finance_crm',
+		title         : 'Finance CRM',
+		href          : '/v1/crm/finance',
+		as            : '/v1/crm/finance',
+		type          : 'link',
+		statsKey      : 'finance_crm',
+		possible_apis : [...finance_crm],
+		icon          : IcMFinanceCrm,
+		main_apis     : ['list_organizations'],
+		module_type   : 'crm',
 	},
 	sales_dashboard: {
-		key       : 'sales_dashboard',
-		title     : 'Sales Dashboard',
-		href      : '/v1/sales/dashboards',
-		as        : '/v1/sales/dashboards',
-		type      : 'link',
-		main_apis : [
+		key           : 'sales_dashboard',
+		title         : 'Sales Dashboard',
+		href          : '/v1/sales/dashboards',
+		as            : '/v1/sales/dashboards',
+		type          : 'link',
+		possible_apis : [
+			...sales_dashboard,
+			...search_apis,
+			...shipment_apis,
+			...demand_crm,
+			...payments,
+			...sales,
+			...rfq,
+			...forecast,
+			...contract_rates,
+			...feedback,
+			...checkout_promotions,
+		],
+		main_apis: [
 			'list_organizations',
 			'list_shipments',
 			'list_spot_searches',
@@ -192,22 +265,32 @@ const navigationMappings = {
 		module_type: 'dashboards',
 	},
 	supply_dashboard: {
-		key         : 'supply_dashboard',
-		title       : 'Supply Dashboard',
-		href        : '/v1/supply/dashboards',
-		as          : '/v1/supply/dashboards',
-		type        : 'link',
+		key           : 'supply_dashboard',
+		title         : 'Supply Dashboard',
+		href          : '/v1/supply/dashboards',
+		as            : '/v1/supply/dashboards',
+		type          : 'link',
+		possible_apis : [
+			...supply_dashboard,
+			...shipment_apis,
+			...supply_crm,
+			...payments,
+			...sales,
+			...forecast,
+			...auto_quotation,
+		],
 		main_apis   : ['list_shipments'],
 		module_type : 'dashboards',
 	},
 	okam_dashboard: {
-		key         : 'okam_dashboard',
-		title       : 'KAM Dashboard',
-		href        : '/v1/okam/dashboards',
-		as          : '/v1/okam/dashboards',
-		type        : 'link',
-		main_apis   : ['list_organizations', 'list_shipment_pending_tasks'],
-		module_type : 'dashboards',
+		key           : 'okam_dashboard',
+		title         : 'KAM Dashboard',
+		href          : '/v1/okam/dashboards',
+		as            : '/v1/okam/dashboards',
+		type          : 'link',
+		possible_apis : [...okam_dashboard, ...shipment_apis],
+		main_apis     : ['list_organizations', 'list_shipment_pending_tasks'],
+		module_type   : 'dashboards',
 	},
 	operations_dashboard: {
 		key         : 'operations_dashboard',
@@ -1494,13 +1577,6 @@ const navigationMappings = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : [...roles_permissions],
 		module_type   : 'crm',
-	},
-	home: {
-		key   : 'home',
-		title : 'Home',
-		href  : '/home',
-		as    : '/home',
-		icon  : IcMSettings,
 	},
 };
 
