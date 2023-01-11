@@ -1,6 +1,7 @@
 import { useSelector } from '@cogoport/store';
 
 import useGetContract from '../../hooks/useGetContract';
+import useUpdateContract from '../../hooks/useUpdateContract';
 
 import Body from './Body';
 import Header from './Header';
@@ -11,6 +12,16 @@ function DetailView() {
 		query: general?.query,
 	}));
 	const { data, loading } = useGetContract({ id: query?.id });
+	const { updateContract } = useUpdateContract();
+
+	const handleUpdateContract = async (val) => {
+		await updateContract({
+			payload: {
+				id     : query?.id,
+				status : val,
+			},
+		});
+	};
 
 	let content = (
 		<Loader />
@@ -20,8 +31,8 @@ function DetailView() {
 		content = (
 			<>
 				{' '}
-				<Header data={data} status={query?.status} />
-				<Body data={data} />
+				<Header data={data} status={query?.status} handleUpdateContract={handleUpdateContract} />
+				<Body data={data} handleUpdateContract={handleUpdateContract} />
 			</>
 		);
 	}

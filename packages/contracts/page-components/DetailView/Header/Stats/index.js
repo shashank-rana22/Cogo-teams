@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 import Content from './Content';
 import styles from './styles.module.css';
 
-function Stats({ data, status }) {
+function Stats({ data, status, handleUpdateContract }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -19,7 +19,7 @@ function Stats({ data, status }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{data?.utilisation_data?.total_containers_count}
+							{data?.contract_utilisation_data?.total_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -43,7 +43,7 @@ function Stats({ data, status }) {
 					</div>
 				</div>
 			</div>
-			<Content data={data} status={status} />
+			<Content data={data} handleUpdateContract={handleUpdateContract} />
 		</div>
 	);
 }

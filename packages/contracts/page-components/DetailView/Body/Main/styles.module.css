@@ -4,20 +4,37 @@
     margin-left: 10px;
     width: 100%;
     margin: 16px;
+    gap: 12px;
 }
 
 .heading{
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+    gap: 8px;
     margin-top: 60px;
 }
 
 .port_pair{
     display: flex;
     gap: 12px;
+    align-items: center;
+}
+.pills{
+    display: flex;
 }
 
-.line{
-    border: 0.5px solid #D6DBEB;
-    background-color: #D6DBEB
+.actions{
+    display: flex;
+    justify-content: space-between;
 }
+
+.stats{
+    display: flex;
+    gap: 16px;
+}
+.buttons{
+    display: flex;
+    gap: 16px;
+    margin-right: 32px;
+}
+

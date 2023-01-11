@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    max-height: 134px;
     margin: 8px;
     padding: 16px;
     background-color: #ffff;

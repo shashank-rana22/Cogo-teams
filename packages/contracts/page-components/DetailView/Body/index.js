@@ -6,7 +6,7 @@ import Main from './Main';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
-function Body({ data }) {
+function Body({ data, handleUpdateContract }) {
 	const formattedData = formatPortPair({ item: data });
 	const uniqueId = `${
 		formattedData[0]?.origin_code
@@ -22,9 +22,10 @@ function Body({ data }) {
 				data={formattedData}
 				activePair={activePair}
 				setActivePair={setActivePair}
+				handleUpdateContract={handleUpdateContract}
 			/>
 			<div className={styles.big_line} />
-			<Main activePair={activePair} />
+			<Main activePair={activePair} handleUpdateContract={handleUpdateContract} />
 		</div>
 	);
 }

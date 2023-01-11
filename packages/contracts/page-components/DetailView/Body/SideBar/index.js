@@ -1,7 +1,9 @@
 import Content from './Content';
 import styles from './styles.module.css';
 
-function SideBar({ data, activePair, setActivePair }) {
+function SideBar({
+	data, activePair, setActivePair, handleUpdateContract,
+}) {
 	const handlePortChange = (val) => {
 		if (val?.uniqueId !== activePair?.uniqueId) {
 			setActivePair(val);
@@ -17,6 +19,7 @@ function SideBar({ data, activePair, setActivePair }) {
 					portPair={portPair}
 					activePair={activePair}
 					handlePortChange={handlePortChange}
+					handleUpdateContract={handleUpdateContract}
 				/>
 			))}
 		</div>
