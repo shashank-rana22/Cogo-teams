@@ -5,7 +5,7 @@ const useGetRates = ({ service, selectedRate }) => {
 	const apiMapping = {
 		fcl_freight : '/get_fcl_freight_rate',
 		air_freight : '/get_air_freight_rate',
-		lcl_freigth : '/get_lcl_freight_rate',
+		lcl_freight : '/get_lcl_freight_rate',
 	};
 
 	const api = apiMapping[service?.service];

@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 const useGetRates = ({ service }) => {
 	const apiMapping = {
+		lcl_freight : '/list_lcl_freight_rates',
 		fcl_freight : '/list_fcl_freight_rates',
 		air_freight : '/list_air_freight_rates',
-		lcl_freigth : '/list_lcl_freight_rates',
 	};
 
 	const api = apiMapping[service?.service];
@@ -24,9 +24,9 @@ const useGetRates = ({ service }) => {
 			await triggerSystemData({
 				params: {
 					filters: {
-						origin_port_id      : service?.data?.origin_port_id,
-						destination_port_id : service?.data?.destination_port_id,
-						is_rate_available   : true,
+						origin_port_id           : service?.data?.origin_port_id,
+						destination_port_id      : service?.data?.destination_port_id,
+						rate_not_available_entry : false,
 					},
 					page_limit: 5,
 				},
