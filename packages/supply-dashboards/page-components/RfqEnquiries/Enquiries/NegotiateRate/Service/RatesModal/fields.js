@@ -54,9 +54,9 @@ const columns = [
 		key    : 'rate',
 		render : (item) => (
 			<div className={styles.lastval}>
-				{item?.freight_price_currency || item?.validities?.[0].currency || item?.validity?.currency}
+				{item?.freight_price_currency || item?.validities?.[0]?.currency || item?.validity?.currency}
 				{' '}
-				{item?.freight_price || item?.validities?.[0].price || item?.validity?.min_price}
+				{item?.freight_price || item?.validities?.[0]?.price || item?.validity?.min_price}
 			</div>
 		),
 		flex: 3,
