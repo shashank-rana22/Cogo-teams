@@ -1,5 +1,13 @@
 import {
-	IcMAccountSettings, IcMSettings,
+	IcMAccountSettings,
+	IcMSettings,
+	IcMTracking,
+	IcMAgentManagement,
+	IcMAirport,
+	IcMAir,
+	IcMBusiness,
+	IcMBusinessFinance,
+	IcMCoe,
 } from '@cogoport/icons-react';
 
 import roles_permissions from './apis/roles-n-permission-apis';
@@ -70,6 +78,7 @@ const navigationMappings = {
 		href        : '/v1/business',
 		as          : '/v1/business',
 		type        : 'link',
+		icons       : IcMBusiness,
 		main_apis   : ['list_business_entities'],
 		module_type : 'crm',
 	},
@@ -445,6 +454,7 @@ const navigationMappings = {
 		title       : 'Agent Management',
 		href        : '/v1/agent-management',
 		as          : '/v1/agent-management',
+		icon        : IcMAgentManagement,
 		type        : 'link',
 		main_apis   : ['list_fcl_freight_rate_local_agents'],
 		module_type : 'crm',
@@ -490,6 +500,7 @@ const navigationMappings = {
 		title       : 'Air Port Pairs',
 		href        : '/v1/air-schedules',
 		as          : '/v1/air-schedules',
+		icon        : IcMAirport,
 		type        : 'link',
 		main_apis   : ['list_air_schedule_airport_pairs'],
 		module_type : 'crm',
@@ -581,6 +592,7 @@ const navigationMappings = {
 		key       : 'business_finance',
 		title     : 'Business Finance',
 		isSubNavs : true,
+		icon      : IcMBusinessFinance,
 		options   : [
 			{
 				key       : 'business_finance-jobs',
@@ -756,6 +768,7 @@ const navigationMappings = {
 		href        : '/v1/saas/air-schedules',
 		as          : '/v1/saas/air-schedules',
 		type        : 'link',
+		icon        : IcMAir,
 		main_apis   : [],
 		module_type : 'crm',
 	},
@@ -840,6 +853,7 @@ const navigationMappings = {
 		title       : 'Center of Excellence [COE]',
 		isSubNavs   : true,
 		module_type : 'dashboards',
+		icon        : IcMCoe,
 		options     : [
 			{
 				key       : 'coe-booking_tasks',
@@ -1194,6 +1208,7 @@ const navigationMappings = {
 		href        : '/v1/saas/tracking-job',
 		as          : '/v1/saas/tracking-job',
 		type        : 'link',
+		icon        : IcMTracking,
 		main_apis   : [],
 		module_type : 'dashboards',
 	},
