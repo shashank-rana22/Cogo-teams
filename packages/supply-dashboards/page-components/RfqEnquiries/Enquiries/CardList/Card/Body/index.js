@@ -4,12 +4,12 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Body({ item }) {
-	const originCode = item?.origin_port?.port_code;
-	const originName = item?.origin_port?.name.split('(')[0];
-	const originCountry = item?.origin_port?.display_name.split(' ').slice(-1);
-	const destinationCode = item?.destination_port?.port_code;
-	const destinationName = item?.destination_port?.name.split('(')[0];
-	const destinationCountry = item?.destination_port?.display_name.split(' ').slice(-1);
+	const originCode = (item?.origin_port || item?.origin_airport)?.port_code;
+	const originName = (item?.origin_port || item?.origin_airport)?.name.split('(')[0];
+	const originCountry = (item?.origin_port || item?.origin_airport)?.display_name.split(' ').slice(-1);
+	const destinationCode = (item?.destination_port || item?.destination_airport)?.port_code;
+	const destinationName = (item?.destination_port || item?.destination_airport)?.name.split('(')[0];
+	const destinationCountry = (item?.destination_port || item?.destination_airport)?.display_name.split(' ').slice(-1);
 	return (
 		<div className={styles.body}>
 			<div className={styles.upper_body}>

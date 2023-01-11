@@ -1,8 +1,8 @@
 .service {
 	display: flex;
-    justify-content: space-between;
 	gap: 8px;
 	align-items: center;
+	justify-content: space-between;
 	padding: 12px 24px;
 	font-size: 13;
 	font-weight: 400;
@@ -19,20 +19,20 @@
 }
 
 .location {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
-.port{
-    font-weight: 600;
+.port {
+	font-weight: 600;
 }
 
-.button{
-    display: flex;
-    justify-content: flex-end;
+.button {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.action{
-     display: flex;
-     align-items: center;
+.action {
+	display: flex;
+	align-items: center;
 }

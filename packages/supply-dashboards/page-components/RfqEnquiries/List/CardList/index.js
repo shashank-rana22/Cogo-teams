@@ -15,6 +15,7 @@ function CardList({
 	paginationRequired = true,
 	setSelectedRate = {},
 	selectedRate,
+	total,
 }) {
 	return (
 		<div className={styles.cardlist}>
@@ -55,7 +56,7 @@ function CardList({
 						<Pagination
 							type="table"
 							currentPage={filters?.page}
-							totalItems={list?.total}
+							totalItems={total}
 							pageSize={10}
 							handlePageChange={(val) => { hookSetters.setFilters({ ...filters, page: val }); }}
 						/>

@@ -1,9 +1,9 @@
 .heading {
+	margin: 12px;
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 23px;
-	margin: 12px;
 	color: #221f20;
 }
 
@@ -15,7 +15,7 @@
 
 .stats {
 	max-width: 1300px;
-	min-height: 200.89px;
+	height: 249.89px;
 	background: #fff;
 	border-radius: 4px;
 }
@@ -30,7 +30,7 @@
 }
 
 .filter {
-	width: 389px;
+	width: 369px;
 	padding-bottom: 4px;
 	margin-top: 8px;
 	background: #fff;
@@ -38,8 +38,4 @@
 
 .rfq {
 	font-family: Poppins;
-}
-
-.stats{
-	height: 249px;
 }
