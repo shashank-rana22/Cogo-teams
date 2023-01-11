@@ -83,12 +83,6 @@ const Config = ({ data }) => {
 				unit    : 'per_kg_per_day',
 			}));
 		}
-		if (data?.data?.origin_storage_free_days > 0) {
-			field.push(...freeDaysSection({
-				heading : 'Destination Storage Days',
-				unit    : 'per_kg_per_day',
-			}));
-		}
 		// if (Object.keys(allData.origin_carriage_charge_codes || {}).length > 0) {
 		// 	sections.push(
 		// 		carriageCharges('origin_carriage', 'Origin carriage charges', null, {

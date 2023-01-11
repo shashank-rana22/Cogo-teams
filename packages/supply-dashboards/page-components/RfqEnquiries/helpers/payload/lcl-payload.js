@@ -54,18 +54,25 @@ const lclPayload = ({ service, value }) => {
 	const payload = {
 		service_provider_id            : value?.service_provider_id,
 		rate_reference_number          : value?.rate_reference_number,
-		booking_rate_procurement_proof : value?.booking_rate_procurement_proof,
+		booking_rate_procurement_proof : value?.booking_rate_procurement_proof?.finalUrl,
 		sourced_by_id                  : value?.sourced_by_id,
 		spot_negotiation_id            : service?.id,
 		data                           : {
-			shipping_line_id : value?.shipping_line_id,
-			[key1]           : { line_items: origin_line_items },
-			[key2]           : { line_items: destination_line_items },
-			freights         : [{
+			shipping_line_id    : value?.shipping_line_id,
+			[key1]              : { line_items: origin_line_items },
+			[key2]              : { line_items: destination_line_items },
+			destination_storage : {
+				slabs,
+				free_limit : Number(value?.free_limit || 0),
+				unit       : value?.unit || 'per_kg_per_day',
+			},
+			freights: [{
 				validity_end    : value?.validity_end,
 				validity_start  : value?.validity_start,
-				departure_dates : [value?.departure_dates],
+				departure_dates : value?.departure_dates,
 				line_items,
+				transit_time    : Number(value?.transit_time),
+				number_of_stops : Number(value?.number_of_stops),
 			}],
 		},
 	};

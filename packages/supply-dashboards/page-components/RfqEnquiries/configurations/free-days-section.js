@@ -23,13 +23,13 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 			{ label: 'Per Kg per Day', value: 'per_kg_per_day' },
 			{ label: 'Per Kg per Hour', value: 'per_kg_per_hour' },
 		],
-		values : unit || 'per_container',
-		rules  : { required: 'This is required' },
+		value : unit || 'per_container',
+		rules : { required: 'This is required' },
 	},
 	{
 		name        : 'slabs',
 		type        : 'fieldArray',
-		label       : unit === 'per_kg_per_hour' ? 'Hours Slab beyond Free day' : 'Days Slab beyond Free day',
+		heading     : unit === 'per_kg_per_hour' ? 'Hours Slab beyond Free day' : 'Days Slab beyond Free day',
 		showButtons : true,
 		buttonText  : 'Add More Slab',
 

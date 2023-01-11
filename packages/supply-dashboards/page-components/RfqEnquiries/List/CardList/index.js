@@ -43,7 +43,7 @@ function CardList({
 			{!loading && !(list || []).length && (
 				<div className={headerRequired ? styles.empty_state : styles.small_empty_state}>
 					<IcMSearchlight
-						style={headerRequired ? { width: '300px', height: '200px' } : { width: '50px', height: '50px' }}
+						style={headerRequired ? { width: '300px', height: '200px' } : { width: '30px', height: '20px' }}
 					/>
 					Sorry, We Could Not Find What You Were Looking For
 				</div>

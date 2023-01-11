@@ -39,7 +39,7 @@ const lclFields = () => {
 		},
 		{
 			name        : 'departure_dates',
-			type        : 'date_picker',
+			type        : 'departure_date',
 			label       : 'Departure Dates',
 			span        : 4,
 			placeholder : 'Enter Departure Dates',

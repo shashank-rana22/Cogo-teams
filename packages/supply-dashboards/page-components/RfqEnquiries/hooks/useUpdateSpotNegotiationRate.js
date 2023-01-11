@@ -63,9 +63,10 @@ const useUpdateSpotNegotiationRate = ({
 						(Object.keys(val[0])).forEach((prefill) => {
 							if (prefill === 'line_items') {
 								setValue(item, val[0]?.[prefill]);
-							} else if (prefill === 'validity_start' || prefill === 'validity_end'
-							|| prefill === 'departure_dates') {
+							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 								setValue(prefill, new Date(val[0]?.[prefill]));
+							} else if (prefill === 'departure_dates') {
+								setValue(prefill, [new Date(val[0]?.[prefill])]);
 							} else {
 								setValue(prefill, val[0]?.[prefill]);
 							}
@@ -99,9 +100,10 @@ const useUpdateSpotNegotiationRate = ({
 							(Object.keys(val[0])).forEach((prefill) => {
 								if (prefill === 'line_items') {
 									setValue(item, val[0]?.[prefill]);
-								} else if (prefill === 'validity_start' || prefill === 'validity_end'
-								|| prefill === 'departure_dates') {
+								} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 									setValue(prefill, new Date(val[0]?.[prefill]));
+								} else if (prefill === 'departure_dates') {
+									setValue(prefill, [new Date(val[0]?.[prefill])]);
 								} else {
 									setValue(prefill, val[0]?.[prefill]);
 								}
@@ -130,6 +132,21 @@ const useUpdateSpotNegotiationRate = ({
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(rateSelected)]);
+
+	useEffect(() => {
+		values?.slabs.forEach((obj, index) => {
+			if (index === 0) {
+				setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
+			} else {
+				setValue(
+					`slabs.${index}.lower_limit`,
+					Number(values?.slabs[index - 1].upper_limit) + 1,
+				);
+			}
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values?.free_limit, JSON.stringify(values?.slabs)]);
+
 	const showElements = {
 		sourced_by_id            : !values?.service_provider_id,
 		origin_main_port_id      : !service?.data?.origin_port?.is_icd,
