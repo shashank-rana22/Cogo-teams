@@ -1,9 +1,10 @@
 .container {
 	display: flex;
+    align-items: center;
 }
 
 .item {
-	padding: 24px;
+	padding: 20px;
 	margin-bottom: 2px;
 	font-size: 12px;
 	font-weight: 400;
@@ -14,3 +15,12 @@
 	background-color: #fff;
 	box-shadow: 4px 4px 4px 0 rgb(0 0 0 / 10%);
 }
+.line{
+    border: 1px solid #FFE5CE;
+    margin-right: 15px;
+}
+
+.placeholder{
+    margin: 10px;
+}
+

@@ -32,10 +32,13 @@ function Body({ item }) {
 					</div>
 				</div>
 			</div>
-			<div>
-				{`${item?.containers_count} Container x ${item?.container_size} x ${startCase(item?.container_type)}, 
+			{item?.service_type === 'fcl_freight' && (
+				<div>
+					{`${item?.containers_count}
+					 Container x ${item?.container_size} x ${startCase(item?.container_type)},
                 ${startCase(item?.commodity)}`}
-			</div>
+				</div>
+			)}
 
 		</div>
 

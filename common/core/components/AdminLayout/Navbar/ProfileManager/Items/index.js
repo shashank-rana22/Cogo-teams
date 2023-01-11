@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function Items({ item, resetSubnavs }) {
 	const [showSubNav, setShowSubNav] = useState(false);
 	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
+		user_data: profile?.user || {},
 	}));
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
@@ -22,7 +22,7 @@ function Items({ item, resetSubnavs }) {
 		>
 			<div className={styles.inner_image_container}>
 				<img
-					src={picture || 'https://cdn.cogoport.io/cms-prod/vault/original/avatar-placeholder.webp'}
+					src={picture || 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp'}
 					alt="avatar-placeholder"
 				/>
 			</div>

@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetRfqSearches = ({ rfq } = {}) => {
+const useGetRfqSearches = ({ rfqId } = {}) => {
 	const [list, setList] = useState({
 		data       : [],
 		total      : 0,
@@ -13,7 +13,7 @@ const useGetRfqSearches = ({ rfq } = {}) => {
 		method : 'GET',
 		url    : '/list_rfq_searches',
 		params : {
-			filters                         : { rfq_id: rfq?.source_id },
+			filters                         : { rfq_id: rfqId },
 			page,
 			service_data_required           : true,
 			spot_negotiation_rates_required : true,

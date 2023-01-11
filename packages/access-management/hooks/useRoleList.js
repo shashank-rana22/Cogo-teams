@@ -55,7 +55,7 @@ const useRoleList = () => {
 	const [{ data, loading, error }, trigger] = useRequest({
 		method : apiMethod,
 		url    : apiUri,
-	});
+	}, { manual: true });
 
 	const onChangeParams = useCallback((values = {}) => {
 		setParams((previousState) => ({

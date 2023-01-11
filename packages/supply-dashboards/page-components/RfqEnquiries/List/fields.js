@@ -1,3 +1,4 @@
+import { Pill } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 const columns = [
@@ -16,10 +17,10 @@ const columns = [
 		key    : 'customer_name',
 		render : (item) => (
 			<div className="card-list-item-value">
-				{item?.user?.name}
+				{item?.importer_exporter?.short_name}
 			</div>
 		),
-		flex: 3,
+		flex: 4,
 	},
 	{
 		label  : 'No Of Port Pairs',
@@ -29,7 +30,7 @@ const columns = [
 				{item?.total_port_pair}
 			</div>
 		),
-		flex: 3,
+		flex: 2,
 	},
 	{
 		label  : 'Last Updated',
@@ -49,7 +50,15 @@ const columns = [
 		key    : 'edit',
 		flex   : 3,
 		render : (item) => (
-			<div>{item.total_port_pair}</div>
+			<div className="card-list-item-value">
+				{item.expiring_in ? (
+					<Pill color="blue" style={{ margin: '0px', paddingTop: '0px', paddingBottom: '0px' }}>
+						{item?.expiring_in}
+						{' '}
+						Days
+					</Pill>
+				) : '-'}
+			</div>
 		),
 	},
 ];

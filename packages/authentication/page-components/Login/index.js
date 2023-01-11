@@ -1,6 +1,7 @@
 import { FluidContainer, Button } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import { IcCMicrosoft, IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useFormLoginwithMS from '../../hooks/useFormLoginwithMS';
@@ -9,6 +10,8 @@ import useLoginAuthenticate from '../../hooks/useLoginAuthenticate';
 import styles from './styles.module.css';
 
 function Login() {
+	const { t } = useTranslation(['login']);
+
 	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
@@ -25,12 +28,13 @@ function Login() {
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/vault/original/cogoport-admin.svg"
+					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg"
 					alt="Logo Cogoport"
 					className={styles.logo}
 				/>
 				<div className={styles.input_label}>
-					Please provide your email and password to login
+					{t('login:title')}
+					{/* Please provide your email and password to login */}
 				</div>
 				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>

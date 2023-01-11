@@ -14,7 +14,7 @@ const fclPayload = ({ service, value }) => {
 		line_items.push(val);
 	});
 	const origin_line_items = [];
-	value?.origin_local.forEach((item) => {
+	(value?.origin_local || []).forEach((item) => {
 		const val = {
 			code     : item?.code,
 			unit     : item?.unit,
@@ -25,7 +25,7 @@ const fclPayload = ({ service, value }) => {
 	});
 
 	const destination_line_items = [];
-	value?.destination_local.forEach((item) => {
+	(value?.destination_local || []).forEach((item) => {
 		const val = {
 			code     : item?.code,
 			unit     : item?.unit,
@@ -47,17 +47,18 @@ const fclPayload = ({ service, value }) => {
 	});
 
 	const payload = {
-		service_provider_id   : value?.service_provider_id,
-		rate_reference_number : value?.rate_reference_number,
-		sourced_by_id         : value?.sourced_by_id,
-		spot_negotiation_id   : service?.id,
-		data                  : {
+		service_provider_id            : value?.service_provider_id,
+		rate_reference_number          : value?.rate_reference_number,
+		booking_rate_procurement_proof : value?.booking_rate_procurement_proof?.finalUrl,
+		sourced_by_id                  : value?.sourced_by_id,
+		spot_negotiation_id            : service?.id,
+		data                           : {
 			shipping_line_id : value?.shipping_line_id,
 			[key1]           : { line_items: origin_line_items },
 			[key2]           : { line_items: destination_line_items },
 			[key3]           : {
 				slabs,
-				free_limit : Number(value?.free_days || 0),
+				free_limit : Number(value?.free_limit || 0),
 				unit       : value?.unit || 'per_container',
 			},
 			freights: [{
@@ -65,6 +66,8 @@ const fclPayload = ({ service, value }) => {
 				validity_start : value?.validity_start,
 				line_items,
 			}],
+			origin_main_port_id      : value?.origin_main_port_id,
+			destination_main_port_id : value?.destination_main_port_id,
 		},
 	};
 

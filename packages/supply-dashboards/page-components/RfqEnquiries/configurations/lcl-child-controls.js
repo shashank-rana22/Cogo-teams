@@ -1,16 +1,21 @@
 import currencies from '../helpers/currencies';
 
-const childControls = ({ heading = '' }) => {
-	let name = heading ? 'origin_line_items' : 'line_items';
-	if (heading === 'add_destination_local_charges') {
-		name = 'destination_line_items';
-	}
+const nameMapping = {
+	freights_charge_codes          : 'freights',
+	destination_local_charge_codes : 'destination_local',
+	origin_local_charge_codes      : 'origin_local',
+	customs_charge_codes           : 'line_items',
+};
+
+const childControls = ({ heading = '', charge_code_name }) => {
+	const name = nameMapping[charge_code_name];
 
 	const controls = {
 		type        : 'fieldArray',
 		showButtons : true,
 		name,
 		heading,
+		charge_code_name,
 		value       : [
 			{
 				code             : '',
@@ -27,7 +32,7 @@ const childControls = ({ heading = '' }) => {
 			{
 				name        : 'code',
 				type        : 'select',
-				span        : 4,
+				span        : 2,
 				label       : 'Charge Code',
 				placeholder : 'Charge Name',
 				valueKey    : 'code',
@@ -35,7 +40,7 @@ const childControls = ({ heading = '' }) => {
 			},
 			{
 				name        : 'price',
-				span        : 1.5,
+				span        : 2,
 				type        : 'number',
 				label       : 'Price',
 				min         : 0,
@@ -55,7 +60,7 @@ const childControls = ({ heading = '' }) => {
 				name        : 'min_price',
 				label       : 'Minimum Price',
 				type        : 'number',
-				span        : 3,
+				span        : 2,
 				placeholder : 'Type minimum price',
 				rules       : { required: 'This is required' },
 			},
@@ -65,13 +70,13 @@ const childControls = ({ heading = '' }) => {
 				type        : 'number',
 				placeholder : 'Type Weight Ratio',
 				rules       : { required: 'This is required' },
-				span        : 3,
+				span        : 2,
 			},
 			{
 				name        : 'unit',
 				placeholder : 'Unit',
 				type        : 'select',
-				span        : 2,
+				span        : 1.5,
 				className   : 'primary lg',
 				rules       : { required: 'This is required' },
 			},

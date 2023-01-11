@@ -1,5 +1,6 @@
 .service {
 	display: flex;
+    justify-content: space-between;
 	gap: 8px;
 	align-items: center;
 	padding: 12px 24px;
@@ -15,4 +16,23 @@
 .container {
 	margin: 8px;
 	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
+}
+
+.location {
+    display: flex;
+    align-items: center;
+}
+
+.port{
+    font-weight: 600;
+}
+
+.button{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action{
+     display: flex;
+     align-items: center;
 }

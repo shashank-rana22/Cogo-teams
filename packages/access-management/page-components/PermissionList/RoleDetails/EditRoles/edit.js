@@ -1,44 +1,55 @@
-import FormLayout from '@cogo/app-search/common/FormElement';
 import React from 'react';
 
-import useEditRole from '../../../../hooks/useEditRole';
+import functionSubFunctionMapping from '../../../../configurations/function-sub-function-mapping';
+import { getElementController } from '../../../../utils/get-element-controller';
 
-import {
-	Container, Heading, ButtonDiv, EditButton,
-} from './styles';
+import styles from './styles.module.css';
 
-function Edit({ roleData, onClose, getRole }) {
+function Edit({ formProps, controls }) {
 	const {
-		controls,
-		onError,
-		formProps,
-		errors,
-		handleSubmit,
-		editRoleApi,
-		editRole,
-	} = useEditRole({ roleData, onClose, getRole });
+		control, watch, formState: { errors },
+	} = formProps;
+
+	const type = watch('role_functions') || [];
+
+	const subRoleFunctionOptionsEdit = [];
+
+	type?.forEach((subType) => {
+		subRoleFunctionOptionsEdit.push(
+			...(functionSubFunctionMapping[subType] || []),
+		);
+	});
 
 	return (
-		<Container>
-			<Heading>Edit Role </Heading>
-			<form onSubmit={handleSubmit(editRole, onError)}>
-				<FormLayout
-					controls={controls}
-					fields={formProps.fields}
-					errors={errors}
-					formValues={{}}
-				/>
-				<ButtonDiv>
-					<EditButton
-						type="submit"
-						disabled={editRoleApi.loading}
-						id="edit_role_btn"
-					>
-						{editRoleApi.loading ? 'Updating Role ' : 'Update Role'}
-					</EditButton>
-				</ButtonDiv>
-			</form>
-		</Container>
+		<section className={styles.form_container}>
+			{controls.map((controlItem) => {
+				const el = { ...controlItem };
+
+				if (el.name === 'role_sub_functions') {
+					el.options = subRoleFunctionOptionsEdit;
+				}
+
+				const Element = getElementController(el.type);
+
+				if (!Element) return null;
+
+				return (
+					<div className={styles.form_group}>
+						<span>{el.label}</span>
+						<div className={styles.input_group}>
+							<Element
+								{...el}
+								control={control}
+								id={`rnp_role_update_role_form_${el.name}_input`}
+							/>
+							<div className={styles.error_message}>
+								{errors?.[el.name]?.message}
+							</div>
+						</div>
+					</div>
+				);
+			})}
+		</section>
 	);
 }
 export default Edit;

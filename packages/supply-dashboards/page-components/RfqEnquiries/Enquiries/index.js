@@ -1,4 +1,5 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -8,33 +9,41 @@ import CardList from './CardList';
 import NegotiateRate from './NegotiateRate';
 import styles from './styles.module.css';
 
-function Enquiries({ rfq, setRfq }) {
+function Enquiries() {
 	const [selectedCard, setSelectedCard] = useState(null);
+	const { query, push } = useRouter();
+	const rfqId = query?.id;
+
 	const {
 		loading,
 		list:data,
 		setPage,
-	} = useGetRfqSearches({ rfq });
+	} = useGetRfqSearches({ rfqId });
 
 	useEffect(() => {
 		if (data) {
 			setSelectedCard(data?.data[0]);
 		}
 	}, [data]);
+
 	return (
 		<div className={styles.enquirypage}>
-			<div className={styles.heading} role="presentation" onClick={() => setRfq(null)}>
+			<div
+				className={styles.heading}
+				role="presentation"
+				onClick={() => push('/supply/dashboards/rfq-enquiries')}
+			>
 				{' '}
 				<IcMArrowBack style={{ marginRight: '6px' }} />
 				RFQ ID:
 				{' '}
-				{rfq?.rfq_id}
+				{data?.data[0]?.rfq_data?.serial_id}
 			</div>
 			<div className={styles.subheading}>
 				<div>
 					LAST UPDATED:
 					{' '}
-					{format(rfq?.updated_at, 'dd MMM yyyy')}
+					{format(data?.data[0]?.rfq_data?.updated_at, 'dd MMM yyyy')}
 				</div>
 			</div>
 			<div className={styles.enquiries}>
@@ -42,7 +51,6 @@ function Enquiries({ rfq, setRfq }) {
 					<CardList
 						data={data}
 						loading={loading}
-						rfq={rfq}
 						selectedCard={selectedCard}
 						setSelectedCard={setSelectedCard}
 						setPage={setPage}

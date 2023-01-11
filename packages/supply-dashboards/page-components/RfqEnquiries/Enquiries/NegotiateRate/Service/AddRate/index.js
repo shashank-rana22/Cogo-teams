@@ -5,14 +5,18 @@ import Layout from '../../../../Layout';
 
 import styles from './styles.module.css';
 
-function AddRate({ service }) {
+function AddRate({
+	service, setSubmittedEnquiry, setActiveService, selectedRate,
+}) {
 	const {
-		fields, control, showElements = {}, register, errors, onError, handleSubmit, handleData,
-	} = useUpdateSpotNegotiationRate({ service });
+		fields, control, showElements = {}, errors, onError, handleSubmit, handleData,
+	} = useUpdateSpotNegotiationRate({
+		service, setSubmittedEnquiry, setActiveService, selectedRate,
+	});
 
 	return (
 		<>
-			<Layout fields={fields} control={control} showElements={showElements} register={register} errors={errors} />
+			<Layout fields={fields} control={control} showElements={showElements} errors={errors} />
 			<div className={styles.button}>
 				<Button themeType="accent" onClick={handleSubmit(handleData, onError)}>Submit</Button>
 			</div>
