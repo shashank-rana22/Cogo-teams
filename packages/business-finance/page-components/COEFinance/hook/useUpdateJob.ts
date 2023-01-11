@@ -8,9 +8,7 @@ const useUpdateJob = ({shipmentData}) => {
 			method  : 'post',
 		}
 	);
-    console.log(shipmentData,"shipmentData");
     
-
 	const getData = async()=>{
 		try{
 			await trigger({
@@ -24,8 +22,7 @@ const useUpdateJob = ({shipmentData}) => {
 		}
 	}
 
-    useEffect(()=>{getData()},[])
-    return{data}
+    return{getData , loading}
 }
 
 

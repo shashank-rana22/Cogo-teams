@@ -20,6 +20,7 @@ const AccordianCards = ({
     refetch,
 }: listData) => {
     const [amountTab, setAmountTab] = useState("expense");
+    const [dataCard , setDataCard] = useState({jobNumber:'' ,jobSource:'',jobType:'',organizationId:''})
     const router = useRouter();
 
     return (
@@ -148,7 +149,7 @@ const AccordianCards = ({
                                     onClick={() => {
                                         setCurrentOpenSID(itemData?.id);
                                         router.push(
-                                            `/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}&jobNumber=${itemData.jobNumber}&jobSource=${itemData.jobSource}&jobType=${itemData.jobType}&orgId=${itemData.organizationId}`
+                                            `/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}&jobNumber=${dataCard.jobNumber}&jobSource=${dataCard.jobSource}&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}`
                                         );
                                     }}
                                 >
@@ -172,6 +173,7 @@ const AccordianCards = ({
                             currentOpenSID={currentOpenSID}
                             setCurrentOpenSID={setCurrentOpenSID}
                             refetch={refetch}
+                            setDataCard={setDataCard}
                             amountTab={amountTab}
                             setAmountTab={setAmountTab}
                         />

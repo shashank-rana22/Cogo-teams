@@ -30,7 +30,12 @@ const CostSheet = () => {
   const{total:buyTotal}=buyData||{};
   const{total:sellTotal}=sellData||{};
 
-  const {} = useUpdateJob({shipmentData})
+  const {getData , loading} = useUpdateJob({shipmentData})
+
+  const handleOperationalClose =()=>{
+    getData()
+    setShowButton(true)
+  }
   
   return (
     <div>
@@ -39,11 +44,13 @@ const CostSheet = () => {
     '/business-finance/coe-finance/all_invoices/shipment-view' as never as null)}>Go Back</Button>
     <div className={styles.flexwidth}>
 
-{    showButton ? <>
+{showButton ? 
+    <>
     <div>Status - </div>
     <div  className={styles.tag}>Operationally Closed</div>
     <div className={styles.link} onClick={()=>{setShowButton(!showButton)}}>Undo</div> 
-                  </> : <Button size="md" themeType="primary" onClick={()=>{setShowButton(true)}}>Operationally Closed</Button>}
+    </> : 
+    <Button size="md" themeType="primary" disabled={loading} onClick={()=>handleOperationalClose()}>Operationally Closed</Button>}
   
     <Button size="md" themeType="primary" disabled={!showButton} onClick={()=>{}}>Close Financially</Button>
     </div>

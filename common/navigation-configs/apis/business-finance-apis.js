@@ -70,6 +70,11 @@ const business_finance = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'update_shipment',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 
 };
