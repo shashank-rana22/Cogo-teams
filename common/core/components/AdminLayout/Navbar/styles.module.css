@@ -1,9 +1,15 @@
 .list_container {
 	display: block;
+	height: 100vh;
 	padding: 0;
 	margin: 0;
 	margin-bottom: 16px;
+	overflow-y: auto;
 	list-style-type: none;
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
 }
 
 .list_item {

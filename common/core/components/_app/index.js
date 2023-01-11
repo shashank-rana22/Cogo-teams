@@ -1,3 +1,4 @@
+import '@cogoport/components/dist/themes/base.css';
 import '@cogoport/components/dist/themes/dawn.css';
 import { Router } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';

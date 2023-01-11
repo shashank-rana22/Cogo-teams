@@ -1,26 +1,35 @@
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { Link, useRouter } from '@cogoport/next';
+import { IcMArrowRotateDown, IcMBookingManagement } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const router = useRouter();
-	const { pathname } = router;
+	const { pathname, query } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
 	const handleClickOnItem = (itemdata) => {
+		if (itemdata.href.includes('/v1')) {
+			window.location.href = `/v1/${query.partner_id}${itemdata.href.replace('/v1', '')}`;
+		} else {
+			router.push(itemdata.href, itemdata.as);
+		}
+
 		if (itemdata.options?.length > 0) {
 			setShowSubNav(!showSubNav);
 		}
 	};
 
-	const isHref = pathname.includes(item.href);
+	const splitasPathWithoutPartnerId = `/${pathname.split('/').slice(2, 5).join('/')}`;
 
-	const Element = item.icon || null;
+	const isHref =	splitasPathWithoutPartnerId === item.as
+		|| item?.options?.some((singleOption) => singleOption.as === splitasPathWithoutPartnerId);
+
+	const Element = item.icon || IcMBookingManagement;
 
 	const singleNav = (
 		<div
@@ -44,29 +53,23 @@ function Items({ item, resetSubnavs }) {
 	return (
 		<div className={showSubNav ? styles.outer_container : ''}>
 			<li key={item.title} className={styles.list_item}>
-				{!item.options ? (
-					<Link href={item.href ?? ''} as={`${item.as}`}>
-						{singleNav}
-					</Link>
-				) : singleNav }
+				{singleNav}
 			</li>
 			{showSubNav && item?.options?.map((singleOption) => {
-				const isHrefMatch = pathname.includes(singleOption.href);
-
-				const Elem = singleOption.icon || null;
+				const isHrefMatch = splitasPathWithoutPartnerId === singleOption.as;
+				const Elem = singleOption.icon || IcMBookingManagement;
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
-						<Link
+						<div
+							role="presentation"
 							onClick={() => handleClickOnItem(singleOption)}
 							className={isHrefMatch ? styles.active_item : styles.list_item_inner}
-							href={singleOption.href ?? ''}
-							as={`${singleOption.as}`}
 						>
 							<Elem />
 							<span>
 								{singleOption.title}
 							</span>
-						</Link>
+						</div>
 					</li>
 				);
 			})}
