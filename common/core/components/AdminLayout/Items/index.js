@@ -13,14 +13,12 @@ function Items({ item, resetSubnavs }) {
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
 	const handleClickOnItem = (itemdata) => {
-		if (itemdata.href.includes('/v1')) {
+		if (itemdata.options?.length > 0) {
+			setShowSubNav(!showSubNav);
+		} else if (itemdata?.href?.includes('/v1')) {
 			window.location.href = `/v1/${query.partner_id}${itemdata.href.replace('/v1', '')}`;
 		} else {
 			router.push(itemdata.href, itemdata.as);
-		}
-
-		if (itemdata.options?.length > 0) {
-			setShowSubNav(!showSubNav);
 		}
 	};
 
