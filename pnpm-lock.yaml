@@ -47,7 +47,6 @@ importers:
       '@cogoport/components': ^1.0.236
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
-      '@cogoport/home': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.48
       '@cogoport/locations': workspace:0.1.0
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -70,7 +69,6 @@ importers:
       '@cogoport/components': 1.0.236_27ghnklenyaalfqdgsm7fqt7de
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
-      '@cogoport/home': link:../packages/home
       '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
       '@cogoport/locations': link:../packages/locations
       '@cogoport/navigation-configs': link:../common/navigation-configs
@@ -251,12 +249,6 @@ importers:
       '@cogoport/icons-react': 1.0.48_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
-      react: 18.2.0
-
-  packages/home:
-    specifiers:
-      react: 18.2.0
-    dependencies:
       react: 18.2.0
 
   packages/locations:
