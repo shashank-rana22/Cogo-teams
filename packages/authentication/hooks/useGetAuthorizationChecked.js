@@ -6,6 +6,8 @@ import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useEffect, useState } from 'react';
 
+import redirections from '../utils/redirections';
+
 const UNAUTHENTICATED_PATHS = [
 	'/login',
 	'/signup',
@@ -42,18 +44,12 @@ const useGetAuthorizationChecked = () => {
 		(async () => {
 			if (!sessionInitialized && _initialized) {
 				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
-					const configs = getSideBarConfigs(profile);
-					const { nav_items } = configs;
-					const navs = nav_items?.partner || [];
-
-					const navItemToShow = navs[0]?.key !== 'dashboards' ? navs[0] : navs?.[1];
-
-					if (navItemToShow?.href) {
-						if (navItemToShow?.href?.includes('v1')) {
-							const url = `/v1/${profile?.partner?.id}${navItemToShow.href.replace('/v1', '')}`;
-							window.location.href = url;
+					const configs = redirections(profile);
+					if (configs?.href) {
+						if (configs?.href?.includes('v1')) {
+							window.location.href = `/v1/${profile?.partner?.id}${configs.href.replace('/v1', '')}`;
 						} else {
-							await push(navItemToShow?.href);
+							await push(configs?.href);
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
