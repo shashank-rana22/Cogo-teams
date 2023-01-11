@@ -5,21 +5,10 @@ import Margin from '../../../../common/MiniCard/Margin';
 import Percentage from '../../../../common/MiniCard/Percentage';
 import Price from '../../../../common/MiniCard/Price';
 import useGetContractStats from '../../../../hooks/useGetContractStats';
-import useUpdateContract from '../../../../hooks/useUpdateContract';
 
 import styles from './styles.module.css';
 
-function Content({ data, status }) {
-	const { updateContract } = useUpdateContract();
-
-	const handleUpdateContract = async (val) => {
-		await updateContract({
-			payload: {
-				id     : data?.id,
-				status : val,
-			},
-		});
-	};
+function Content({ data, handleUpdateContract }) {
 	const { data: statsData } = useGetContractStats({ id: data?.id });
 
 	return (
@@ -31,28 +20,20 @@ function Content({ data, status }) {
 				<Line />
 				<Margin />
 			</div>
-			{status === 'pending_approval' ? (
-				<div className={styles.button_container}>
-					<Button
-						themeType="secondary"
-						size="md"
-						onClick={() => {
-							handleUpdateContract('rejected');
-						}}
-					>
-						Reject
-					</Button>
-					<Button
-						themeType="primary"
-						size="md"
-						onClick={() => {
-							handleUpdateContract('active');
-						}}
-					>
-						Approve
-					</Button>
+			<div className={styles.button_container}>
+				<Button
+					themeType="accent"
+					size="md"
+					onClick={() => {
+						handleUpdateContract('active');
+					}}
+				>
+					FINISH JOB
+				</Button>
+				<div className={styles.pending}>
+					Pending : 3/3
 				</div>
-			) : null}
+			</div>
 		</div>
 	);
 }

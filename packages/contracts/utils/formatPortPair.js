@@ -30,13 +30,19 @@ const formatPortPair = ({ item }) => {
 		});
 	});
 
-	const formattedData = serviceData.map((val) => ({
+	const formattedData = serviceData.map((val, index) => ({
 		origin           : val?.origin_port?.display_name || val?.origin_airport?.display_name,
 		destination      : val?.destination_port?.display_name || val?.destination_airport?.display_name,
 		origin_code      : val?.origin_port?.port_code || val?.origin_airport?.port_code,
 		destination_code : val?.destination_port?.port_code || val?.destination_airport?.port_code,
 		service_type     : val?.service_type,
 		trade_type       : val?.trade_type || incoTermMapping[val?.inco_term],
+		commodity        : val?.commodity,
+		container_size   : val?.container_size,
+		container_type   : val?.container_type,
+		containers_count : val?.containers_count,
+		status           : item[serviceDataMapping?.[val?.service_type]][index]?.status,
+		inco_term        : val?.inco_term,
 	}));
 
 	return formattedData;

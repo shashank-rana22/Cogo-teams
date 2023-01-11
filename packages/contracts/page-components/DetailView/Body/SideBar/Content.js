@@ -1,7 +1,9 @@
+import { Button } from '@cogoport/components';
 import { IcMAir, IcMFcl, IcMLcl } from '@cogoport/icons-react';
 
 import PortPair from '../../../PageView/List/Card/PortPair';
 
+import Footer from './Footer';
 import styles from './styles.module.css';
 
 const iconMapping = {
@@ -10,7 +12,9 @@ const iconMapping = {
 	air_freight : IcMAir,
 };
 
-function Content({ portPair, activePair, handlePortChange }) {
+function Content({
+	portPair, activePair, handlePortChange, handleUpdateContract,
+}) {
 	const Element = iconMapping[portPair?.service_type];
 	return (
 		<div
@@ -24,10 +28,35 @@ function Content({ portPair, activePair, handlePortChange }) {
 				</div>
 
 				<div className={styles.pair}>
-					<PortPair portPair={portPair} handlePortChange={handlePortChange} detailView />
-					<div className={styles.line} />
+					<div className={styles.port_pair}>
+						<PortPair portPair={portPair} handlePortChange={handlePortChange} detailView />
+						{portPair?.status === 'quoted' ? (
+							<div className={styles.buttons}>
+								<div
+									className={styles.button_reject}
+									role="presentation"
+									onClick={() => {
+										handleUpdateContract('rejected');
+									}}
+								>
+									REJECT
+								</div>
+								<div
+									className={styles.button_approve}
+									role="presentation"
+									onClick={() => {
+										handleUpdateContract('active');
+									}}
+								>
+									APPROVE
+								</div>
+							</div>
+						) : null}
+					</div>
+					<Footer />
 				</div>
 			</div>
+			<div className={styles.line} />
 		</div>
 	);
 }

@@ -44,8 +44,9 @@
 }
 .button_container{
     display: flex;
-    gap: 16px;
-    margin-top: 14px;
+    flex-direction: column;
+    gap: 4px;
+    margin-right: 32px;
 }
 
 .pair{
@@ -56,4 +57,12 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
+}
+.pending{
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #7B7F8E;
+    text-align: center;
 }
