@@ -30,7 +30,8 @@ const CostSheet = () => {
   const{total:buyTotal}=buyData||{};
   const{total:sellTotal}=sellData||{};
 
-  const {getData , loading} = useUpdateJob({shipmentData})
+
+  const {getData ,getFinalData,FinalLoading, loading} = useUpdateJob({query})
 
   const handleOperationalClose =(e:any)=>{
     const data = e.target.innerText
@@ -53,7 +54,7 @@ const CostSheet = () => {
     </> : 
     <Button size="md" themeType="primary" disabled={loading} onClick={(e)=>handleOperationalClose(e)}>Operationally Closed</Button>}
   
-    <Button size="md" themeType="primary" disabled={!showButton} onClick={()=>{}}>Close Financially</Button>
+    <Button size="md" themeType="primary" disabled={!showButton || FinalLoading } onClick={()=>{getFinalData()}}>Close Financially</Button>
     </div>
     </div>
     <Line margin='20px 0px 0px 0px'/>
@@ -84,12 +85,12 @@ const CostSheet = () => {
     </div>
     <div className={styles.flex}>
     <div className={styles.width}>
-    <CardHeader header='Sell' value={getFormattedPrice(buyTotal, 'INR')||'-'} loading={apiloading}/>
+    <CardHeader header='Sell' value={getFormattedPrice(sellTotal, 'INR')||'-'} loading={apiloading}/>
     {apiloading&& [1,2,3,4].map(()=>(<Placeholder margin="20px" width='96%' height='220px'/>))}
     {!apiloading&&(selldata).map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
     </div>
     <div className={styles.width}>
-    <CardHeader header='Buy' value={getFormattedPrice(sellTotal,'INR')||'-'} loading={apiloading}/>
+    <CardHeader header='Buy' value={getFormattedPrice(buyTotal,'INR')||'-'} loading={apiloading}/>
     {apiloading&& [1,2,3,4].map(()=>(<Placeholder margin="20px" width='96%' height='220px'/>))}
     {!apiloading&&(buydata).map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
     </div>
