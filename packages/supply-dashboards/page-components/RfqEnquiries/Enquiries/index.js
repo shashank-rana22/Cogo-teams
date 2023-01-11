@@ -25,6 +25,7 @@ function Enquiries() {
 			setSelectedCard(data?.data[0]);
 		}
 	}, [data]);
+
 	return (
 		<div className={styles.enquirypage}>
 			<div
@@ -36,13 +37,13 @@ function Enquiries() {
 				<IcMArrowBack style={{ marginRight: '6px' }} />
 				RFQ ID:
 				{' '}
-				{data?.serial_id}
+				{data?.data[0]?.rfq_data?.serial_id}
 			</div>
 			<div className={styles.subheading}>
 				<div>
 					LAST UPDATED:
 					{' '}
-					{format(data?.updated_at, 'dd MMM yyyy')}
+					{format(data?.data[0]?.rfq_data?.updated_at, 'dd MMM yyyy')}
 				</div>
 			</div>
 			<div className={styles.enquiries}>

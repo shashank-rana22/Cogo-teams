@@ -26,7 +26,7 @@ const lclFields = () => {
 			type        : 'date_picker',
 			label       : 'Validity Start',
 			placeholder : 'Pick',
-			span        : 4,
+			span        : 3,
 			rules       : { required: 'This is required' },
 		},
 		{
@@ -34,7 +34,7 @@ const lclFields = () => {
 			type        : 'date_picker',
 			label       : 'Validity End',
 			placeholder : 'Pick',
-			span        : 4,
+			span        : 3,
 			rules       : { required: 'This is required' },
 		},
 		{
@@ -52,7 +52,7 @@ const lclFields = () => {
 			type        : 'number',
 			placeholder : 'Enter No. of Stops',
 			className   : 'primary lg',
-			span        : 2,
+			span        : 4,
 			rules       : { required: 'This is required' },
 		},
 		{
@@ -60,7 +60,7 @@ const lclFields = () => {
 			type        : 'number',
 			placeholder : 'Enter Transit time (days)',
 			className   : 'primary lg',
-			span        : 2,
+			span        : 4,
 			rules       : { required: 'This is required' },
 		},
 		lclChildControls({ heading: '', charge_code_name: 'freights_charge_codes' }),

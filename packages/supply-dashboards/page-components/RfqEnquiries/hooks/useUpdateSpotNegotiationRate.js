@@ -134,16 +134,18 @@ const useUpdateSpotNegotiationRate = ({
 	}, [JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
-		values?.slabs.forEach((obj, index) => {
-			if (index === 0) {
-				setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
-			} else {
-				setValue(
-					`slabs.${index}.lower_limit`,
-					Number(values?.slabs[index - 1].upper_limit) + 1,
-				);
-			}
-		});
+		if (values?.slabs) {
+			values?.slabs.forEach((obj, index) => {
+				if (index === 0) {
+					setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
+				} else {
+					setValue(
+						`slabs.${index}.lower_limit`,
+						Number(values?.slabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [values?.free_limit, JSON.stringify(values?.slabs)]);
 
