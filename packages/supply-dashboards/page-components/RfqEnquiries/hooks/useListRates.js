@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 const useGetRates = ({ service }) => {
 	const apiMapping = {
+		lcl_freight : '/list_lcl_freight_rates',
 		fcl_freight : '/list_fcl_freight_rates',
 		air_freight : '/list_air_freight_rates',
-		lcl_freigth : '/list_lcl_freight_rates',
 	};
 
 	const api = apiMapping[service?.service];
