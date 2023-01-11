@@ -19,7 +19,17 @@ export const middleware = async (request) => {
 			return;
 		}
 
-		if (request.nextUrl.locale === 'default') {
+		if (request.nextUrl.pathname.includes('/v1/')) {
+			const language = acceptLanguage.get(request.headers.get('accept-language'))
+				|| process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
+			const locale = request.cookies.get(process.env.NEXT_PUBLIC_LOCALE_KEY)?.value || language;
+			const url = request.nextUrl.clone();
+			const newUrl = url.pathname.replace(`/${locale}`, '');
+			const urlObj = new URL(newUrl, request.url);
+			return NextResponse.redirect(urlObj);
+		}
+
+		if (request.nextUrl.locale === 'default' && !request.nextUrl.pathname.includes('/v1/')) {
 			const language = acceptLanguage.get(request.headers.get('accept-language'))
 				|| process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
 
