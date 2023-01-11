@@ -21,10 +21,11 @@
     "pre-build": "node scripts/build-pages"
   },
   "dependencies": {
-    "file-saver": "^2.0.5",
     "accept-language": "^3.0.18",
+    "file-saver": "^2.0.5",
     "i18next": "^22.4.9",
     "next-i18next": "^13.0.3",
+    "pm2": "^5.2.2",
     "react-i18next": "^12.1.4",
     "swr": "^2.0.0"
   },

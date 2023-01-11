@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "../../../../../commons/List/index";
 import useListBills from "../../../../hook/useListBills";
 import CardHeader from "../CardHeader/index";
@@ -18,6 +18,7 @@ interface propsType {
     refetch: Function;
     amountTab: string;
     setAmountTab: Function;
+    setDataCard:Function
 }
 
 interface fullResponseProps {
@@ -31,6 +32,7 @@ const CardItem = ({
     currentOpenSID,
     setCurrentOpenSID,
     amountTab,
+    setDataCard,
     setAmountTab,
 }: propsType) => {
     const {
@@ -41,8 +43,11 @@ const CardItem = ({
         serial_id: cardData?.serial_id,
         amountTab,
         currentOpenSID,
+        setDataCard,
     });
 
+
+        
     const handleClick = () => {
         setCurrentOpenSID("");
     };

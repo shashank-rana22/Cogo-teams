@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { useRequest } from '@cogoport/request';
-
+import { Toast } from '@cogoport/components';
 const useUpdateJob = ({shipmentData}) => {
     const [{ data, loading }, trigger] = useRequest(
 		{
@@ -8,24 +7,31 @@ const useUpdateJob = ({shipmentData}) => {
 			method  : 'post',
 		}
 	);
-    console.log(shipmentData,"shipmentData");
-    
 
-	const getData = async()=>{
+    
+	const getData = async(data:string)=>{
+
+		const jobClose = () =>{
+			if(data=== 'Undo'){
+				return false
+			}
+				return true	
+		}
+		
 		try{
 			await trigger({
 				data:{
-                    id: shipmentData?.id,
-					is_job_closed: !shipmentData?.is_job_closed,
+                    id: shipmentData?.list?.[0]?.id,
+					is_job_closed: jobClose(),
 				}
 			})
+			Toast.success('Close successfully...');
 		}catch(error){
-			console.log('error->',error);
+			Toast.error('Job Not Found...');
 		}
 	}
 
-    useEffect(()=>{getData()},[])
-    return{data}
+    return{getData , loading}
 }
 
 

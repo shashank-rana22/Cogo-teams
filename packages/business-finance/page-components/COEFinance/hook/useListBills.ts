@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRequestBf } from "@cogoport/request";
 import { useSelector } from "@cogoport/store";
 import useGetFiniteList from "./useGetFiniteList";
@@ -17,6 +17,7 @@ interface AllParams {
     serial_id?: number;
     status?: string;
     amountTab?: string;
+    setDataCard:Function
 }
 interface Profile {
     authorizationparameters?: string;
@@ -24,7 +25,7 @@ interface Profile {
 interface UseSelectorProps {
     profile?: Profile;
 }
-const useListBills = (allParams = {}) => {
+const useListBills = (allParams) => {
     const [q, setQ] = useState("");
 
     const { ...params }: AllParams = allParams || {};
@@ -80,8 +81,9 @@ const useListBills = (allParams = {}) => {
                 amountTab: undefined,
                 pageIndex: currentPage || restFilters?.pageIndex,
                 pageSize: 10,
-            },
+            },     
         });
+        
     };
 
     const listSalesInvoicesApi = (
@@ -118,6 +120,11 @@ const useListBills = (allParams = {}) => {
         q,
         authorizationparameters,
     });
+
+    useEffect(()=>{
+        params.setDataCard(fullResponse?.list?.[0] || {})
+    },[fullResponse])
+    
 
     const config =
         params?.amountTab === "expense" ? expenseConfig : incomeConfig;

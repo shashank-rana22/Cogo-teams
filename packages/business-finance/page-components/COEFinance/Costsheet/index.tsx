@@ -7,7 +7,7 @@ import Line from './Line'
 import DiscountRect from './DiscountRect'
 import { Accordion } from '@cogoport/components'
 import { IcADocumentTemplates, IcMArrowNext, IcMInfo } from '@cogoport/icons-react'
-import { Select,Placeholder } from '@cogoport/components'
+import { Placeholder } from '@cogoport/components'
 import CardHeader from './Card/CardHeader'
 import { CardBody } from './Card/CardBody'
 import useGetShipmentCostSheet from '../hook/useGetShipmentCostSheet'
@@ -30,7 +30,13 @@ const CostSheet = () => {
   const{total:buyTotal}=buyData||{};
   const{total:sellTotal}=sellData||{};
 
-  const {} = useUpdateJob({shipmentData})
+  const {getData , loading} = useUpdateJob({shipmentData})
+
+  const handleOperationalClose =(e:any)=>{
+    const data = e.target.innerText
+    getData(data)
+    setShowButton(!showButton)
+  }
   
   return (
     <div>
@@ -39,11 +45,13 @@ const CostSheet = () => {
     '/business-finance/coe-finance/all_invoices/shipment-view' as never as null)}>Go Back</Button>
     <div className={styles.flexwidth}>
 
-{    showButton ? <>
+{showButton ? 
+    <>
     <div>Status - </div>
     <div  className={styles.tag}>Operationally Closed</div>
-    <div className={styles.link} onClick={()=>{setShowButton(!showButton)}}>Undo</div> 
-                  </> : <Button size="md" themeType="primary" onClick={()=>{setShowButton(true)}}>Operationally Closed</Button>}
+    <div className={styles.link} onClick={(e)=>handleOperationalClose(e)}>Undo</div> 
+    </> : 
+    <Button size="md" themeType="primary" disabled={loading} onClick={(e)=>handleOperationalClose(e)}>Operationally Closed</Button>}
   
     <Button size="md" themeType="primary" disabled={!showButton} onClick={()=>{}}>Close Financially</Button>
     </div>
