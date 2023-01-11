@@ -1,8 +1,20 @@
 import currencies from '../helpers/currencies';
 
-const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
+const fclDetetionFreeDays = ({ heading = '', unit = 'per_container', type = '' }) => {
+	let name1 = 'free_limit';
+	let name2 = 'unit';
+	let name3 = 'slabs';
+	if (type === 'origin_air') {
+		name1 = 'origin_free_limit';
+		name2 = 'origin_unit';
+		name3 = 'origin_slabs';
+	} else if (type === 'destination_air') {
+		name1 = 'destination_free_limit';
+		name2 = 'destination_unit';
+		name3 = 'destination_slabs';
+	}
 	const controls = 		[{
-		name        : 'free_limit',
+		name        : name1,
 		type        : 'number',
 		span        : 4,
 		heading,
@@ -12,7 +24,7 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 		rules       : { required: 'This is required' },
 	},
 	{
-		name : 'unit',
+		name : name2,
 		span : 4,
 		type : 'select',
 
@@ -27,7 +39,7 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 		rules : { required: 'This is required' },
 	},
 	{
-		name        : 'slabs',
+		name        : name3,
 		type        : 'fieldArray',
 		heading     : unit === 'per_kg_per_hour' ? 'Hours Slab beyond Free day' : 'Days Slab beyond Free day',
 		showButtons : true,
@@ -39,7 +51,7 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container' }) => {
 				label       : 'Lower Limit',
 				name        : 'lower_limit',
 				type        : 'number',
-				// disabled     : true,
+				disabled    : true,
 				span        : 4,
 				placeholder : 'Lower Limit (in MT)',
 				rules       : { required: 'This is required' },

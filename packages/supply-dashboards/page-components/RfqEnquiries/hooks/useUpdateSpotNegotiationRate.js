@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
@@ -134,11 +135,13 @@ const useUpdateSpotNegotiationRate = ({
 	}, [JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
-		if (values?.slabs) {
-			values?.slabs.forEach((obj, index) => {
+		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {
+			(values?.slabs || values?.origin_slabs || values?.destination_slabs || []).forEach((obj, index) => {
 				if (index === 0) {
-					setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
-				} else {
+					if (values?.slabs) {
+						setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
+					}
+				} else if (values?.slabs) {
 					setValue(
 						`slabs.${index}.lower_limit`,
 						Number(values?.slabs[index - 1].upper_limit) + 1,
@@ -147,7 +150,38 @@ const useUpdateSpotNegotiationRate = ({
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [values?.free_limit, JSON.stringify(values?.slabs)]);
+	}, [values?.free_limit,
+		JSON.stringify(values?.slabs),
+	]);
+	useEffect(() => {
+		if (values?.origin_slabs) {
+			(values?.origin_slabs || []).forEach((obj, index) => {
+				if (index === 0) {
+					setValue('origin_slabs.0.lower_limit', Number(values?.origin_free_limit) + 1 || 0);
+				} else if (values?.origin_slabs) {
+					setValue(
+						`origin_slabs.${index}.lower_limit`,
+						Number(values?.origin_slabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	}, [values?.origin_free_limit, JSON.stringify(values?.origin_slabs)]);
+
+	useEffect(() => {
+		if (values?.destination_slabs) {
+			(values?.destination_slabs || []).forEach((obj, index) => {
+				if (index === 0) {
+					setValue('destination_slabs.0.lower_limit', Number(values?.destination_free_limit) + 1 || 0);
+				} else if (values?.destination_slabs) {
+					setValue(
+						`destination_slabs.${index}.lower_limit`,
+						Number(values?.destination_slabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	}, [values?.destination_free_limit, JSON.stringify(values?.destination_slabs)]);
 
 	const showElements = {
 		sourced_by_id            : !values?.service_provider_id,

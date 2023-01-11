@@ -1,6 +1,6 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
-	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsShippingLines,
+	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsOperators,
 }
 	from '@cogoport/forms/utils/getAsyncFields';
 import { merge, startCase } from '@cogoport/utils';
@@ -14,7 +14,15 @@ const FieldMutation = ({
 			{ params: { filters: { account_type: 'service_provider', kyc_status: 'verified' } } },
 		),
 	);
-	const shippingLineOptions = useGetAsyncOptions(merge(asyncFieldsShippingLines()));
+	const shippingLineOptions = useGetAsyncOptions(merge(
+		asyncFieldsOperators(),
+		{ params: { filters: { operator_type: 'shipping_line' } } },
+	));
+
+	const airLineOptions = useGetAsyncOptions(merge(
+		asyncFieldsOperators(),
+		{ params: { filters: { operator_type: 'airline' } } },
+	));
 	const organizationUsersOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -32,6 +40,8 @@ const FieldMutation = ({
 			newControl = { ...newControl, ...organizationUsersOptions };
 		} else if (name === 'shipping_line_id') {
 			newControl = { ...newControl, ...shippingLineOptions };
+		} else if (name === 'airline_id') {
+			newControl = { ...newControl, ...airLineOptions };
 		}
 		if (newControl.controls) {
 			let chargeCodes = {};
