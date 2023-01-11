@@ -17,10 +17,8 @@ const useGetShipmentTimeLine = (shipmentId:string) => {
 		});
 	};
 	useEffect(() => {
-		if (shipmentId) {
 			getList();
-		}
-	}, [shipmentId]);
+	}, []);
 
 	return {
 		loading,

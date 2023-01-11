@@ -30,7 +30,7 @@ interface DataInterface {
 
 interface ShipmentDetailsInterface {
     data:DataInterface
-    orgId?:string
+    orgId:string
     jobNumber?:string
     remarksVal:RemarksValInterface
     setRemarksVal:any
@@ -50,10 +50,10 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
     const {data:shipmentData} = useListShipment(jobNumber);
-    
     const dataList=shipmentData?.list[0] || {};
     const {source, trade_type} = dataList;
     const shipmentId = dataList.id ||  ''; 
+    
 
     const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 
