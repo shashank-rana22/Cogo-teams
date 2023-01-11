@@ -15,7 +15,7 @@ const businessFinance = {
 		navigation : 'business_finance-product_code_mapping',
 		isMainNav  : true,
 	},
-	'/[partner_id]/business-finance/coe-finance/[active-tab]': {
+	'/[partner_id]/business-finance/coe-finance/[active_tab]': {
 		navigation : 'business_finance-coe_finance',
 		isMainNav  : true,
 	},
