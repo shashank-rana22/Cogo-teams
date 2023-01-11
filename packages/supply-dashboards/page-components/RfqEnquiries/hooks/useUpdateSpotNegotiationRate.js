@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import getField from '../configurations';
 import FieldMutation from '../helpers/field-mutation';
 import getPayload from '../helpers/getPayload';
+import IncompletionReasons from '../IncompleteReasons/IncompleteReason';
 
 import useGetRates from './useGetRates';
 import useGetSpotNegotiationRate from './useGetSpotNegotiatonRate';
@@ -41,7 +42,7 @@ const useUpdateSpotNegotiationRate = ({
 		control, watch, register, handleSubmit, setValue,
 	} = useForm({ defaultValues });
 	const values = watch();
-	const { data } = useGetSpotNegotiationRate({
+	const { data, fetch } = useGetSpotNegotiationRate({
 		values   : { ...values, spot_negotiation_id: service.id },
 		controls : fields,
 		service  : service.service,
@@ -207,9 +208,14 @@ const useUpdateSpotNegotiationRate = ({
 				Toast.error(response?.message || 'Something Went Wrong');
 				return;
 			}
-			Toast.success('Negotiation Updated');
-			setActiveService(null);
-			setSubmittedEnquiry((prev) => [...prev, service?.service]);
+			await fetch();
+			if (!data?.is_complete) {
+				Toast.errror(<IncompletionReasons completionMessages={data?.completion_messages} />);
+			} else {
+				setActiveService(null);
+				setSubmittedEnquiry((prev) => [...prev, service?.service]);
+				Toast.success('Negotiation Updated');
+			}
 		} catch (err) {
 			Toast.error('something went wrong');
 		}

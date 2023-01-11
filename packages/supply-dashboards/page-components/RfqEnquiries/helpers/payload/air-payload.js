@@ -83,12 +83,12 @@ const airPayload = ({ service, value }) => {
 			destination_storage : {
 				slabs      : destination_slabs,
 				unit       : value?.destination_unit,
-				free_limit : Number(value?.destination_free_limit),
+				free_limit : Number(value?.destination_free_limit || 0),
 			},
 			origin_storage: {
 				slabs      : origin_slabs,
 				unit       : value?.origin_unit,
-				free_limit : Number(value?.origin_free_limit),
+				free_limit : Number(value?.origin_free_limit || 0),
 			},
 			freights: [{
 				validity_end   : value?.validity_end,

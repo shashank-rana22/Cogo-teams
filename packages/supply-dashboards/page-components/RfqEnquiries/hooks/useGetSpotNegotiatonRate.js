@@ -15,20 +15,19 @@ const allFieldsPresent = (value, controls) => {
 	return !(msg.length > 0);
 };
 
-const useGetSpotNegotiationRate = ({ values, controls, service }) => {
+const useGetSpotNegotiationRate = ({ values, controls }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_spot_negotiation_rate',
 	}, { manual: true });
 
 	const fetch = async () => {
-		const { spot_negotiation_id, service_provider_id, ...rest } = values;
+		const { spot_negotiation_id, service_provider_id } = values;
 		try {
 			await trigger({
 				params: {
 					spot_negotiation_id,
 					service_provider_id,
-					[service]: rest,
 				},
 			});
 		} catch (err) {

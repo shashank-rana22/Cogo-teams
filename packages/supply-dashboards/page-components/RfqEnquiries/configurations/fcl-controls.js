@@ -33,7 +33,7 @@ const FclFields = () => {
 			name        : 'origin_main_port_id',
 			type        : 'select',
 			...locationOptions,
-			label       : 'Origin Location',
+			label       : 'Origin Main Port',
 			span        : 4,
 			placeholder : 'Select',
 			rules       : { required: 'This is required' },
@@ -41,7 +41,7 @@ const FclFields = () => {
 		{
 			name        : 'destination_main_port_id',
 			type        : 'select',
-			label       : 'Destination Location',
+			label       : 'Destination Main Port',
 			span        : 4,
 			placeholder : 'Select',
 			...locationOptions,
