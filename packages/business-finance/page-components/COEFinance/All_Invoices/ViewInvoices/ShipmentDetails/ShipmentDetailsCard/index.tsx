@@ -49,9 +49,10 @@ interface ShipmentDetailsCardInterface{
     setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>
     setItemCheck:  React.Dispatch<React.SetStateAction<boolean>>
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
+    invoiceStatus:string
 }
 
-const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal, lineItemsRemarks, setLineItemsRemarks ,setItemCheck,setLineItem}:ShipmentDetailsCardInterface) =>{
+const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal, lineItemsRemarks, setLineItemsRemarks ,setItemCheck,setLineItem, invoiceStatus}:ShipmentDetailsCardInterface) =>{
     const [showValue, setShowValue ] = useState([] as any)
     const [rejected,setRejected] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
@@ -63,13 +64,13 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal, lineItemsRemarks, s
     const {bankName ='' , accountNumber ='' , ifscCode =''}  = sellerBankDetail || {}
     const {billNumber ='' , billDate ='' ,status ='' ,placeOfSupply =''} = bill || {}
 
-
     const [ DetailsCard, setDetailsCard ] = useState([
         {id :1, name:'billing-details', label:'Bank Details - Collection Party'},
         {id :2, name:'billing-party', label:'Billing Party'},
         {id :3, name:'invoice-details', label:'Invoice Details'},
     ] as any);
 
+    const isInvoiceApproved = invoiceStatus==='FINANCE_ACCEPTED';
 
     const handleClick = (id:number) => { 
         const approveData = [...showValue,id]  
@@ -138,6 +139,7 @@ return(
                   setLineItemsRemarks={setLineItemsRemarks}
                   remarksVal={remarksVal} 
                   setLineItem={setLineItem}
+                  isInvoiceApproved={isInvoiceApproved}
                   /> : 
     <div>
         <div className={styles.mainHeader}>
@@ -145,9 +147,9 @@ return(
                 Check the Details  ( As filled by SO2 in the cogo form )
             </div>
             
-            <div className={styles.completed}>
+           {!isInvoiceApproved && <div className={styles.completed}>
                 Completed {(showValue.length + rejected.length) || 0}/3
-            </div>
+            </div>}
         </div>
 
 {  DetailsCard.map((itemData:any) => {
@@ -280,13 +282,14 @@ return(
         {id === 1 &&
             <div className={styles.container } >
                  <div className={styles.headerContainer}>
-                     <div className={showValue.includes(1) ? styles.labelApproved : (rejected.includes(1) ? styles.labelRejected:styles.label)}>
+                     <div className={showValue.includes(1) || isInvoiceApproved ? styles.labelApproved : (rejected.includes(1) ? styles.labelRejected:styles.label)}>
                              {label}
                          <div style={{justifyContent:'center',display:'flex'}} >
-                             {showValue.includes(1)  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(1) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
+                             {showValue.includes(1) || isInvoiceApproved  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(1) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
                          </div>
                      </div>
  
+                    {!isInvoiceApproved && <div>
                     {
                      (showValue.includes(1) || rejected.includes(1))  ? 
                      <div className={styles.buttonContainer} onClick={()=>{handleClickUndo(id)}}>
@@ -297,6 +300,7 @@ return(
                          <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}} onClick={()=>{handleClickReject(id)}}>Reject</Button>
                      </div>
                     } 
+                    </div>}
             
                  </div>
                  <div className={styles.hr}/>
@@ -313,17 +317,18 @@ return(
                    
                    }
 
-{id === 2 &&
+    {id === 2 &&
         <div className={styles.container } >
                 <div className={styles.headerContainer}>
-                    <div className={showValue.includes(2) ? styles.labelApproved : (rejected.includes(2) ? styles.labelRejected:styles.label)}>
+                    <div className={showValue.includes(2) || isInvoiceApproved ? styles.labelApproved : (rejected.includes(2) ? styles.labelRejected:styles.label)}>
                             {label}
                         <div style={{justifyContent:'center',display:'flex'}} >
-                        {showValue.includes(2)  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(2) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
+                        {showValue.includes(2) || isInvoiceApproved ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(2) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
                         </div>
                     </div>
 
-                   {
+                   {!isInvoiceApproved && <div>
+                    {
                     (showValue.includes(2) || rejected.includes(2))  ? 
                     <div className={styles.buttonContainer} onClick={()=>{handleClickUndo(id)}}>
                         <Button size='sm' themeType="secondary">Undo</Button>
@@ -333,6 +338,7 @@ return(
                         <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}} onClick={()=>{handleClickReject(id)}} >Reject</Button>
                     </div>
                    } 
+                   </div>}
            
                 </div>
 
@@ -350,13 +356,14 @@ return(
 {id === 3 &&
     <div className={styles.container } >
          <div className={styles.headerContainer}>
-             <div className={showValue.includes(3) ? styles.labelApproved : (rejected.includes(3) ? styles.labelRejected:styles.label)}>
+             <div className={showValue.includes(3) || isInvoiceApproved ? styles.labelApproved : (rejected.includes(3) ? styles.labelRejected:styles.label)}>
                      {label}
                  <div style={{justifyContent:'center',display:'flex'}} >
-                 {showValue.includes(3)  ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(3) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
+                 {showValue.includes(3) || isInvoiceApproved ? <IcCFtick height="17px" width="17px" /> : (rejected.includes(3) ? <IcMCrossInCircle height="17px" width="17px"/>:null)}
                  </div>
              </div>
 
+             {!isInvoiceApproved && <div>
             {
              (showValue.includes(3) || rejected.includes(3)) ? 
              <div className={styles.buttonContainer} onClick={()=>{handleClickUndo(id)}}>
@@ -367,6 +374,7 @@ return(
                  <Button  size='sm' themeType="secondary" style={{border:'1px solid #ed3726'}} onClick={()=>{handleClickReject(id)}}>Reject</Button>
              </div>
             } 
+            </div>}
     
          </div>
 
@@ -385,9 +393,9 @@ return(
             )
         })}
 
-    <div className={styles.footer}>
-        <Button size='md' disabled ={showValue.length + rejected.length == 3 ? false : true} onClick={()=>handleSave()} >Save And Next</Button>
-    </div>
+  {<div className={styles.footer}>
+        <Button size='md' disabled ={(showValue.length + rejected.length == 3) || isInvoiceApproved ? false : true} onClick={()=>handleSave()} >{isInvoiceApproved ? 'Check line items ➢ ':' Save And Next ➢ '}</Button>
+    </div>}
     
    </div>
 

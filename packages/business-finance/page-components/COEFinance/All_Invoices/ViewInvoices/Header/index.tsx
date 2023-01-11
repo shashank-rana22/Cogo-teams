@@ -17,9 +17,10 @@ interface HeaderInterface {
     remarksVal:RemarksValInterface
     lineItem?:boolean
     lineItemsRemarks:object
+    status:string
 }
 
-const Header =({data,remarksVal,lineItem, lineItemsRemarks}:HeaderInterface) => {
+const Header =({data,remarksVal,lineItem, lineItemsRemarks, status}:HeaderInterface) => {
     const [approve,setApprove]=useState(false)
     const [modalData , setModalData] = useState('')
     const Router = useRouter();
@@ -47,7 +48,7 @@ return(
         <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]','/business-finance/coe-finance/all_invoices')}>Go Back</Button>
         <div className={styles.subContainer}>
             <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem || isApproveDisabled}  onClick={(e:any)=>handleModalData(e)}>Approve</Button>
-            <Button size="md" style={{marginRight:'8px'}}  onClick={(e:any)=>handleModalData(e)}>Hold</Button>
+            <Button size="md" style={{marginRight:'8px'}} disabled={status==="FINANCE_ACCEPTED"}  onClick={(e:any)=>handleModalData(e)}>Hold</Button>
             <Button size="md" style={{marginRight:'8px'}} disabled={!lineItem || !isApproveDisabled} onClick={(e:any)=>handleModalData(e)} >Reject</Button>
         </div>
     </div>

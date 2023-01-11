@@ -15,9 +15,10 @@ interface LineItemCard {
     setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>
     remarksVal:object|{}
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
+    isInvoiceApproved:boolean
 }
 
-const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineItemsRemarks,setLineItemsRemarks, remarksVal,setLineItem}:LineItemCard) => {
+const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineItemsRemarks,setLineItemsRemarks, remarksVal,setLineItem, isInvoiceApproved}:LineItemCard) => {
     const [approvedItems , setApprovedItems ] = useState({})
     const [popover, setPopover] = useState(false);
     const [rejectedItems, setRejectedItems]=useState({});
@@ -25,7 +26,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
     const [showRejectedModal , setShowRejectedModal] = useState({ id : "",name:''})
 
     const renderAction =(id:string)=>{
-        if(approvedItems[id as keyof typeof approvedItems]){
+        if(approvedItems[id as keyof typeof approvedItems] || isInvoiceApproved){
            return  <IcCFtick width="17px" height="17px" /> 
         }
         if(rejectedItems[id as keyof typeof rejectedItems]){
@@ -101,9 +102,9 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
         renderReject: (item:any) => {
             return (
             <div style={{cursor:"pointer"}}>
-                <Popover  placement="left"  render={<div className={styles.popoverRejected} onClick={()=>{openRejectModal(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
+               {!isInvoiceApproved && <Popover  placement="left"  render={<div className={styles.popoverRejected} onClick={()=>{openRejectModal(item)}} >{popover[item?.id as keyof typeof popover] ?  <div>Undo</div>  : <div>Reject Line Item</div> }</div>}>
                     <div> <IcMOverflowDot width="20px" height="20px"/> </div> 
-                </Popover>
+                </Popover>}
             </div>
         )}
       };
@@ -122,20 +123,20 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
                   Check off Line Items and Tax Rate ( As filled by SO2 in the cogo form )
             </div>
                <div className={styles.smallHr} />
-            <div className={styles.headerDetail}>
+            {!isInvoiceApproved && <div className={styles.headerDetail}>
                 Click  <IcMOverflowDot/>   To reject line item
-            </div>
+            </div>}
         </div>
 
         <div className={styles.container}>
                 <List config={LINE_ITEMS} itemData={{list:lineItems}} functions={functions} />
 
             <div className={styles.footer}>
-                <Button size='md'  onClick={()=>{setShowLineItem(false)}}> Go Back </Button>
+                <Button size='md'  onClick={()=>{setShowLineItem(false)}}> Go Back ↩</Button>
             </div>
             {
             popover[id as keyof typeof popover] && 
-                <Modal size="lg" placement="center" show={popover[id]} onClose={onClose}>
+                <Modal size="lg" placement="center" show={popover[id as keyof typeof popover]} onClose={onClose}>
                     <Modal.Header title="Rejected line items" />
             <Modal.Body>
                   <div className={styles.modalContainer}>
@@ -159,7 +160,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
                     <Modal.Footer>
                         <Button
                          onClick={()=>handleRejectClick(id)}
-                         disabled={ !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks] || lineItemsRemarks[lineItemName]?.length<0}
+                         disabled={ !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks] || (lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks] as Array<string>).length<0}
                          >Submit</Button>
                     </Modal.Footer>
                 </Modal>
