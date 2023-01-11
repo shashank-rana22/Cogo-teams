@@ -1,75 +1,78 @@
-.container{
-  display: flex;
-  border: 1px solid #B0B0B0;
-  border-radius: 4px;
-  padding:12px;
+.container {
+	display: flex;
+	padding: 12px;
+	border: 1px solid #b0b0b0;
+	border-radius: 4px;
 }
 
-.flex{
-  display: flex;
-  align-items: center;
-  width: 50%;
-  justify-content: space-evenly;
-  border-right: 2px solid red;
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 50%;
+	border-right: 2px solid red;
 }
 
-.subDiv{
-  width: 16%;
-  border-right: 2px solid red;
-  display: flex;
-  align-items: center;
-}
-.tags{
-  margin-left: 20px;
-  display: flex;
-  width: 20%;
-  justify-content: space-around;
-  align-self: center;
+.subDiv {
+	display: flex;
+	align-items: center;
+	width: 16%;
+	border-right: 2px solid red;
 }
 
-.icon{
-   color: #5936F0;
-   font-size: 24px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-  }
-
-.arrow{
-  font-size: 24px;
+.tags {
+	display: flex;
+	align-self: center;
+	justify-content: space-around;
+	width: 20%;
+	margin-left: 20px;
 }
 
-.bold{
-  font-weight: 600;
+.icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 24px;
+	color: #5936f0;
 }
 
-.name{
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.arrow {
+	font-size: 24px;
 }
 
-.flexDiv{
-  display: flex;
-  align-items: center;
-  margin-left: 40px;
-  color: red;
-  cursor: pointer;
+.bold {
+	font-weight: 600;
 }
 
-.timelineContainer{
-  display: flex;
-  border: 1px solid #B0B0B0;
-  border-radius: 4px;
-  padding:12px;
-  margin-top:20px;
+.name {
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
 }
-.shipmentType{
-  font-size: 8px;
-  width: 47px;
-  overflow: auto;
-  text-overflow: ellipsis;
+
+.flexDiv {
+	display: flex;
+	align-items: center;
+	margin-left: 40px;
+	color: red;
+	cursor: pointer;
 }
-.postalData{
-  font-size: 10px;
+
+.timelineContainer {
+	display: flex;
+	padding: 12px;
+	margin-top: 20px;
+	border: 1px solid #b0b0b0;
+	border-radius: 4px;
+}
+
+.shipmentType {
+	width: 47px;
+	overflow: auto;
+	font-size: 8px;
+	text-overflow: ellipsis;
+}
+
+.postalData {
+	font-size: 10px;
 }

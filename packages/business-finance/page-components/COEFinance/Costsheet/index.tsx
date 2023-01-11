@@ -24,19 +24,18 @@ const CostSheet = () => {
   const {query}=Router||{};
   const {shipmentId:shipment_id,jobNumber,orgId}=query||{};
   const {selldata,buydata,apiloading,preTaxData,postTaxData,preTaxLoading,postTaxLoading,sellData,buyData}=useGetShipmentCostSheet({query});
-  const{preTaxActual,preTaxExpected}=preTaxData||{}
-  const{postTaxActual,postTaxExpected}=postTaxData||{}
+  const{tentativeProfit:preTaxActual,quotationalProfit:preTaxExpected}=preTaxData||{}
+  const{tentativeProfit:postTaxActual,quotationalProfit:postTaxExpected}=postTaxData||{}
   const {data:shipmentData} = useListShipment(jobNumber);
   const{total:buyTotal}=buyData||{};
   const{total:sellTotal}=sellData||{};
 
 
-  const {getData ,getFinalData,FinalLoading, loading} = useUpdateJob({query})
+  const {getData ,getFinalData,FinalLoading, loading} = useUpdateJob({query,setShowButton,showButton})
 
   const handleOperationalClose =(e:any)=>{
     const data = e.target.innerText
     getData(data)
-    setShowButton(!showButton)
   }
   
   return (
@@ -80,19 +79,19 @@ const CostSheet = () => {
     <div className={styles.flexresponsive}>
     <div className={styles.displayflex}>
     <DiscountRect heading={<span className={styles.legends}>Legends</span>} statlabel={<span className={styles.displayflex}>Profit <span className={styles.profiticon}><IcMArrowNext height={20} width={20}/></span></span>} statvalue={<span className={styles.displayflex}>Loss <span className={styles.lossicon}><IcMArrowNext height={20} width={20}/></span></span>} marginTop='15px' width='320px' headingwidth='90px'/>
-    <div className={styles.warning}><span className={styles.icon}><IcMInfo height={20} width={20}/></span>Check Incidental Charge</div>
+    {/* <div className={styles.warning}><span className={styles.icon}><IcMInfo height={20} width={20}/></span>Check Incidental Charge</div> */}
     </div>
     </div>
     <div className={styles.flex}>
     <div className={styles.width}>
-    <CardHeader header='Sell' value={getFormattedPrice(sellTotal, 'INR')||'-'} loading={apiloading}/>
+    <CardHeader header='Sell' value={getFormattedPrice(sellTotal, 'INR') ||'-'} loading={apiloading}/>
     {apiloading&& [1,2,3,4].map(()=>(<Placeholder margin="20px" width='96%' height='220px'/>))}
-    {!apiloading&&(selldata).map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
+    {!apiloading&&(selldata).map((charge:GenericObject)=>(<CardBody charge={charge} type='buy'/>))}
     </div>
     <div className={styles.width}>
-    <CardHeader header='Buy' value={getFormattedPrice(buyTotal,'INR')||'-'} loading={apiloading}/>
+    <CardHeader header='Buy' value={getFormattedPrice(buyTotal,'INR') ||'-'} loading={apiloading}/>
     {apiloading&& [1,2,3,4].map(()=>(<Placeholder margin="20px" width='96%' height='220px'/>))}
-    {!apiloading&&(buydata).map((charge:GenericObject)=>(<CardBody charge={charge}/>))}
+    {!apiloading&&(buydata).map((charge:GenericObject)=>(<CardBody charge={charge} type='buy'/>))}
     </div>
     </div>
     </div>

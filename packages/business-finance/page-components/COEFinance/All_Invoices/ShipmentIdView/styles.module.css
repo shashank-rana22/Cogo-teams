@@ -1,15 +1,15 @@
 .pagination {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .noData {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #dfe1ef;
-    border-radius: 4px;
-    padding: 4px;
-    font-size: 18px;
-    font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	font-size: 18px;
+	font-weight: bold;
+	background: #dfe1ef;
+	border-radius: 4px;
 }

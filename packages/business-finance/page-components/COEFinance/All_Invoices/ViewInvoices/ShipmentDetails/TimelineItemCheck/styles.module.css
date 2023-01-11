@@ -1,34 +1,38 @@
 .filled {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
 }
+
 .dull {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  border: 2px solid #ed3726;
-  background-color: #ffffff;
-  margin: 4px;
+	width: 30px;
+	height: 30px;
+	margin: 4px;
+	background-color: #fff;
+	border: 2px solid #ed3726;
+	border-radius: 50%;
 }
+
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .line {
-  width: 40%;
-  background-color: #ed3726;
-  height: 4px;
-  border-radius: 2px;
+	width: 40%;
+	height: 4px;
+	background-color: #ed3726;
+	border-radius: 2px;
 }
+
 .subContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
+
 .textContainer {
-  width: 43%;
+	width: 43%;
 }

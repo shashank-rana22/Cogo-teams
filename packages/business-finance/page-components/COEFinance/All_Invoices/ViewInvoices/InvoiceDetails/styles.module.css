@@ -1,59 +1,60 @@
 .smallHr {
-  border: 1px solid #ed3726;
-  border-radius: 30px;
-  width: 5%;
+	width: 5%;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .card {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin: 12px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 8px 16px;
+	margin: 12px 0;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .verticalSmallHr {
-  border: 1px solid #ed3726;
-  border-radius: 30px;
-  width: 2px;
-  height: 36px;
-  margin-right: 36px;
+	width: 2px;
+	height: 36px;
+	margin-right: 36px;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
 }
 
 .cardField {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
+
 .amount {
-  color: #f68b21;
-  font-weight: 700;
+	font-weight: 700;
+	color: #f68b21;
 }
 
 .tag {
-  color: red;
-  font-weight: 600;
+	font-weight: 600;
+	color: red;
 }
 
 .flexdiv {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 8px;
-  width: 140px;
+	display: flex;
+	justify-content: space-between;
+	width: 140px;
+	margin-left: 8px;
 }
 
 .remarks {
-  font-weight: 600;
+	font-weight: 600;
 }

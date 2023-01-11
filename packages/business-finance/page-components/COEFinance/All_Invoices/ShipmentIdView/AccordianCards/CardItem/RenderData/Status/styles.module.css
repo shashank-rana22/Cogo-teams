@@ -1,67 +1,71 @@
 .financeAccepted {
-    background: #cdf7d4;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
 }
 
 .initiated {
-    background: #fcedbf;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
 }
 
 .accepted {
-    background: #cdf7d4;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
 }
 
 .financeRejected {
-    background: #f68b21;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #f68b21;
+	border-radius: 4px;
 }
+
 .void {
-    background: #fcedbf;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
 }
+
 .posted {
-    background: #cdf7d4;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
 }
+
 .coeRejected {
-    background: #f68b21;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #f68b21;
+	border-radius: 4px;
 }
+
 .draft {
-    background: #fcedbf;
-    border-radius: 4px;
-    padding: 2px 8px 2px 8px;
-    font-size: 12px;
-    color: #333333;
-    font-weight: 400;
+	padding: 2px 8px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
 }

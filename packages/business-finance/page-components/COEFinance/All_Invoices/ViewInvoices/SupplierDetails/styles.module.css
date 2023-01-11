@@ -1,72 +1,81 @@
 .smallHr {
-  border: 1px solid #ed3726;
-  border-radius: 30px;
-  width: 5%;
+	width: 5%;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
 }
+
 .card {
-  display: flex;
-  justify-content: center;
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 16px 28px;
-  margin: 12px 0px;
+	display: flex;
+	justify-content: center;
+	padding: 16px 28px;
+	margin: 12px 0;
+	background: #fff;
+	border-radius: 8px;
 }
+
 .container {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
+
 .orgNameAndVerified {
-  display: flex;
-  flex-direction: column;
-  width: 29%;
-  align-items: flex-start;
-  gap: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	align-items: flex-start;
+	width: 29%;
 }
 
 .tagsContainer {
-  display: flex;
-  gap: 24px;
+	display: flex;
+	gap: 24px;
 }
+
 .kycVerified {
-  display: flex;
-  align-items: center;
-  color: #67c676;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  gap: 8px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	color: #67c676;
 }
+
 .verticalSmallHr {
-  border: 1px solid #ed3726;
-  border-radius: 30px;
-  width: 2px;
-  margin: 0px 16px;
+	width: 2px;
+	margin: 0 16px;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
 }
+
 .accountDetails {
-  display: flex;
-  width: 42%;
-  align-items: center;
-  justify-content: space-around;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 42%;
 }
+
 .accounts {
-  display: flex;
-  margin: 0px 16px;
+	display: flex;
+	margin: 0 16px;
 }
+
 .supplierDetails {
-  display: flex;
-  width: 29%;
-  align-items: center;
-  justify-content: space-around;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 29%;
 }
+
 .textDecoration {
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .supplierHistory {
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: #ed3726;
+	text-decoration: underline;
+	text-decoration-color: #ed3726;
+	cursor: pointer;
 }

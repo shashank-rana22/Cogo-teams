@@ -70,6 +70,8 @@ const useGetShipmentCostSheet = ({query}:Params) => {
         useEffect(() => {
             getbuydataFromApi();
             getselldataFromApi();
+            postTaxFetch();
+            preTaxFetch();
         }, [shipment_id]);
         const {formattedBuyData,sellQuotationData}=getFormattedData({sell_quotation:sellData,buy_quotation:buyData})
 

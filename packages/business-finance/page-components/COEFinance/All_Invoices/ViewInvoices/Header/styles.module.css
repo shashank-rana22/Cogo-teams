@@ -1,23 +1,27 @@
 .container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
+
 .subContainer {
-  display: flex;
+	display: flex;
 }
+
 .hr {
-  border: 1px solid #333333;
-  margin: 32px 0px;
-  width: 100%;
+	width: 100%;
+	margin: 32px 0;
+	border: 1px solid #333;
 }
+
 .button {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
-.heading{
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
-  margin:20px;
+
+.heading {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+	font-weight: 600;
 }

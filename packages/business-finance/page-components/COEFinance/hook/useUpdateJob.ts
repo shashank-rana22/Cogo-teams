@@ -5,10 +5,12 @@ import { useSelector } from '@cogoport/store';
 interface Params{
 	shipmentData?:GenericObject
     query?: GenericObject
+	showButton?:boolean
+	setShowButton?:Function
 }
-const useUpdateJob = ({query}:Params) => {
+const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
 
-	const{shipment_id,jobNumber,jobSource,jobType}=query||{}
+	const{orgId,jobNumber,jobSource,jobType}=query||{}
 
 	const { user_data } = useSelector(({ profile }:any) => ({
 		user_data: profile?.user || {},
@@ -40,6 +42,7 @@ const useUpdateJob = ({query}:Params) => {
 				}
 			})
 			Toast.success('Close successfully...');
+			setShowButton!(!showButton)
 		}catch(error){
 			Toast.error('Job Not Found...');
 		}
@@ -57,7 +60,7 @@ const useUpdateJob = ({query}:Params) => {
 		try{
 			await trigger({
 				data:{
-                    id: shipment_id,
+                    id: orgId,
 					is_job_closed: jobClose(),
 				}
 			})

@@ -1,58 +1,69 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-    @media (max-width: 1068px) {
-        flex-direction: column;
-    }
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 1068px) {
+		flex-direction: column;
+	}
 }
+
 .amount {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @media (max-width: 1068px) {
-        flex-direction: column;
-    }
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@media (max-width: 1068px) {
+		flex-direction: column;
+	}
 }
+
 .status {
-    display: flex;
-    align-items: center;
-    @media (max-width: 1068px) {
-        justify-content: center;
-    }
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 1068px) {
+		justify-content: center;
+	}
 }
+
 .statusLabel {
-    font-weight: 500;
-    font-size: 12px;
-    display: flex;
-    color: #333333;
+	display: flex;
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
 }
+
 .statusValue {
-    background: #cdf7d4;
-    border-radius: 4px;
-    color: #333333;
-    padding: 2px 8px;
-    margin-left: 4px;
+	padding: 2px 8px;
+	margin-left: 4px;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
 }
+
 .discount {
-    display: flex;
-    margin-left: 30px;
-    @media (max-width: 1068px) {
-        padding: 8px;
-    }
+	display: flex;
+	margin-left: 30px;
+
+	@media (max-width: 1068px) {
+		padding: 8px;
+	}
 }
+
 .labelText {
-    font-weight: 900px;
-    font-size: 12px;
-    color: #333333;
+	font-size: 12px;
+	font-weight: 900px;
+	color: #333;
 }
+
 .valueText {
-    font-weight: 500px;
-    font-weight: bold;
-    font-size: 12px;
-    color: #333333;
-    margin-left: 4px;
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500px;
+	font-weight: bold;
+	color: #333;
 }
 
 .toggle {
-    display: flex;
+	display: flex;
 }

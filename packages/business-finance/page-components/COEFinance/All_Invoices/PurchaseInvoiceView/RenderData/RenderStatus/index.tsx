@@ -10,7 +10,7 @@ interface Props{
     item:itemProps;
 }
 function RenderStatus ({ item}:Props)  {
-	const StatusItem = (item?.status).toLowerCase();
+	const StatusItem = (item?.status)?.toLowerCase();
 	
 	return (
 		<div className={styled.container}> 
