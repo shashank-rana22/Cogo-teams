@@ -22,9 +22,9 @@ import { GenericObject} from '../../../../commons/Interfaces/index'
 
 interface segmentFilterProps{
 
-    setSearchValue: React.Dispatch<React.SetStateAction<string >>
+    setSearchValue: React.Dispatch<React.SetStateAction<string | number>>
 
-    searchValue: string 
+    searchValue: string | number
 
     currentTab: string
 
@@ -52,7 +52,7 @@ function SegmentedFilters({setCurrentTab,
 
     
 
-    const{statsData}:any=useShipmentIdView();
+    const{statsData}:any = useShipmentIdView();
 
  
 

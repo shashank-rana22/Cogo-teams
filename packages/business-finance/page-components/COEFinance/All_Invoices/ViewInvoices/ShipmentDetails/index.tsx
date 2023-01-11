@@ -38,23 +38,19 @@ interface ShipmentDetailsInterface {
     setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>
     setLineItem:React.Dispatch<React.SetStateAction<boolean>>
     lineItem?:boolean
+    status:string
 }
-const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItemsRemarks,setLineItemsRemarks,setLineItem,lineItem}:ShipmentDetailsInterface)=>{
+const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItemsRemarks,setLineItemsRemarks,setLineItem,lineItem,status}:ShipmentDetailsInterface)=>{
     const[showDetails,setShowDetails] = useState(false)
     const[showDocuments,setShowDocuments] = useState(false)
     const [showVariance, setShowVariance] = useState(false);
     const [itemCheck,setItemCheck] =  useState(false)
-   
-    
-
     const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
     const {data:shipmentData} = useListShipment(jobNumber);
     const dataList=shipmentData?.list[0] || {};
     const {source, trade_type} = dataList;
     const shipmentId = dataList.id ||  ''; 
-    
-
     const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 
     return(
@@ -127,7 +123,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
 				/>
 			) : null}
         
-        <TimeLineItemCheck itemCheck={itemCheck} lineItem={lineItem}/>
+        <TimeLineItemCheck itemCheck={itemCheck} lineItem={lineItem} status={status}/>
 
         <div className={styles.shipmentDetailsFooter}>
             <div className={styles.pdfDisplay}>
@@ -141,7 +137,9 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
                 lineItemsRemarks={lineItemsRemarks}
                 setLineItemsRemarks={setLineItemsRemarks}
                 setItemCheck={setItemCheck} 
-                setLineItem={setLineItem}/>
+                setLineItem={setLineItem}
+                invoiceStatus={status}
+                />
             </div>
         </div>
         

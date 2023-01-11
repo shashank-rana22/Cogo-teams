@@ -12,7 +12,7 @@ interface Props{
     item:itemProps;
 }
 
-const RenderRemarks = ({ item }) => {
+const RenderRemarks = ({ item }:Props) => {
     const remarkData = item?.remarksTimeline;
 
     const remarkTimeline = () => {
@@ -26,7 +26,7 @@ const RenderRemarks = ({ item }) => {
                     </div>
                     <div className={styles.path}>
                         <div className={styles.circle} />
-                        {idx !== remarkData?.length - 1 ? (
+                        {idx !== (remarkData || []).length - 1 ? (
                             <div className={styles.line} />
                         ) : null}
                     </div>

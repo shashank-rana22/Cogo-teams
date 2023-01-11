@@ -5,17 +5,18 @@ import styles  from './styles.module.css'
 interface TimeLine {
     itemCheck?:boolean
     lineItem?:boolean
+    status:string
 }
-const TimeLineItemCheck = ({itemCheck,lineItem}:TimeLine) => {
-   
+const TimeLineItemCheck = ({itemCheck,lineItem, status}:TimeLine) => {
+    const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
     return (
     <div>
         <div className={styles.container}>
             
-            {itemCheck ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
+            {itemCheck || isInvoiceApproved ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
             
             <div className={styles.line}/>
-            {lineItem ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
+            {lineItem || isInvoiceApproved ?  <IcMFtick  color="red" height={40} width={40}/> : <div className={styles.dull}/>}
         </div>
         <div className={styles.container}>
             <div className={styles.textContainer}>Invoice Details</div>

@@ -8,7 +8,7 @@ import InvoiceDetails from "./InvoiceDetails/index"
 
 const ViewInvoices =()=>{
     const {query} = useRouter();
-    const {billId,orgId,jobNumber}=query;
+    const {billId, orgId, jobNumber, status}=query;
     const [remarksVal, setRemarksVal]=useState({
         collectionPartyRemark:'',
         billingPartyRemark:'',
@@ -30,6 +30,7 @@ const ViewInvoices =()=>{
         remarksVal={remarksVal} 
         lineItemsRemarks={lineItemsRemarks}
         lineItem={lineItem}
+        status={status}
         />
 
         <SupplierDetails 
@@ -50,6 +51,7 @@ const ViewInvoices =()=>{
             setLineItemsRemarks={setLineItemsRemarks}
             setLineItem={setLineItem}
             lineItem={lineItem}
+            status={status}
             />
 
     </div>
