@@ -67,7 +67,7 @@ const useUpdateSpotNegotiationRate = ({
 							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 								setValue(prefill, new Date(val[0]?.[prefill]));
 							} else if (prefill === 'departure_dates') {
-								setValue(prefill, [new Date(val[0]?.[prefill])]);
+								setValue(prefill, val[0]?.[prefill]);
 							} else {
 								setValue(prefill, val[0]?.[prefill]);
 							}
@@ -104,7 +104,7 @@ const useUpdateSpotNegotiationRate = ({
 								} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 									setValue(prefill, new Date(val[0]?.[prefill]));
 								} else if (prefill === 'departure_dates') {
-									setValue(prefill, [new Date(val[0]?.[prefill])]);
+									setValue(prefill, [(val[0]?.[prefill])]);
 								} else {
 									setValue(prefill, val[0]?.[prefill]);
 								}
@@ -214,6 +214,7 @@ const useUpdateSpotNegotiationRate = ({
 			Toast.error('something went wrong');
 		}
 	};
+	console.log(values, 'values');
 
 	return {
 		fields: newField,
