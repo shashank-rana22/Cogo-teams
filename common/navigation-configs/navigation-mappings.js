@@ -26,7 +26,6 @@ import {
 	IcMPrm,
 	IcMMoney,
 	IcMContractRates,
-	IcMSchedules,
 	IcMPortManagement,
 	IcMProfile,
 	IcMMarketing,
