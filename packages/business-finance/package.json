@@ -7,9 +7,9 @@
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "@cogoport/components": "^1.0.242",
+    "@cogoport/components": "^1.0.244",
     "@cogoport/forms": "workspace:0.1.0",
-    "@cogoport/icons-react": "^1.0.49",
+    "@cogoport/icons-react": "^1.0.50",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
     "react": "18.2.0"
