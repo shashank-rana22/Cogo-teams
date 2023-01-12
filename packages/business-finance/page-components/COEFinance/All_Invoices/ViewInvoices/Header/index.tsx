@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button } from '@cogoport/components'
+import { Button, Textarea } from '@cogoport/components'
 import {useRouter} from '@cogoport/next'
 import styles from './styles.module.css'
 import {RemarksValInterface} from '../../../../commons/Interfaces/index';
@@ -18,9 +18,10 @@ interface HeaderInterface {
     lineItem?:boolean
     lineItemsRemarks:object
     status:string
+    setRemarksVal:any
 }
 
-const Header =({data,remarksVal,lineItem, lineItemsRemarks, status}:HeaderInterface) => {
+const Header =({data,remarksVal,lineItem, lineItemsRemarks, status, setRemarksVal}:HeaderInterface) => {
     const [approve,setApprove]=useState(false)
     const [modalData , setModalData] = useState('')
     const Router = useRouter();
@@ -57,6 +58,13 @@ return(
         <Modal size="md" show={approve} onClose={()=>{setApprove(false)}}>
              <Modal.Body>
                  <div className={styles.heading}>Are you sure you want to {modalData} this invoice ?</div>
+                 <Textarea 
+			name="remark" 
+			size="md" 
+			placeholder="Remarks Here ..." 
+			value={remarksVal.overAll} 
+			onChange={(value:string)=>setRemarksVal({...remarksVal, overAll:value})}
+			style={{width:'700' ,height:'100px', marginBottom: '12px'}} />
                  <div className={styles.button}>
                   <Button size="md" themeType="secondary" style={{marginRight:'8px'}} onClick={()=>{setApprove(false)}} >No</Button>
                   <Button size="md" style={{marginRight:'8px'}} onClick={()=>handleApproveAndReject()}>Yes</Button>
