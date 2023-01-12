@@ -1,4 +1,4 @@
-import { IcMArrowRotateDown, IcMBookingManagement } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMDefault } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
@@ -27,7 +27,7 @@ function Items({ item, resetSubnavs }) {
 	const isHref =	splitasPathWithoutPartnerId === item.as
 		|| item?.options?.some((singleOption) => singleOption.as === splitasPathWithoutPartnerId);
 
-	const Element = item.icon || IcMBookingManagement;
+	const Element = item.icon || IcMDefault;
 
 	const singleNav = (
 		<div
@@ -55,15 +55,13 @@ function Items({ item, resetSubnavs }) {
 			</li>
 			{showSubNav && item?.options?.map((singleOption) => {
 				const isHrefMatch = splitasPathWithoutPartnerId === singleOption.as;
-				const Elem = singleOption.icon || IcMBookingManagement;
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<div
 							role="presentation"
 							onClick={() => handleClickOnItem(singleOption)}
-							className={isHrefMatch ? styles.active_item : styles.list_item_inner}
+							className={isHrefMatch ? styles.active_item : styles.list_item_subitem}
 						>
-							<Elem />
 							<span>
 								{singleOption.title}
 							</span>

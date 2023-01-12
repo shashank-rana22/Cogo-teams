@@ -30,7 +30,7 @@ function Navbar({
 		(value) => {
 			setSearchString(value);
 		},
-		[searchString],
+		[],
 	);
 
 	return (

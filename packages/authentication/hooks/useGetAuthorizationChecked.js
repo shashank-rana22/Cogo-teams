@@ -1,4 +1,3 @@
-import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
 import { useRouter } from '@cogoport/next';
 import { request } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
