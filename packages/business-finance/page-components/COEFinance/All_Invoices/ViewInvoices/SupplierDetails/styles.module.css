@@ -44,17 +44,18 @@
 }
 .accountDetails {
   display: flex;
-  width: 42%;
+  width: 50%;
   align-items: center;
   justify-content: space-around;
+  font-size: 13px;
 }
 .accounts {
   display: flex;
-  margin: 0px 16px;
+  align-items: center;
 }
 .supplierDetails {
   display: flex;
-  width: 29%;
+  width: 28%;
   align-items: center;
   justify-content: space-around;
 }
@@ -63,10 +64,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 600;
 }
 
 .supplierHistory {
   cursor: pointer;
   text-decoration: underline;
   text-decoration-color: #ed3726;
+}
+.tooltip{
+  margin-top: 4px;
+}
+.values{
+  display: flex;
 }

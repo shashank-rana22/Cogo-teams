@@ -110,9 +110,9 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 			) : null}
         <div className={styles.smallHr} />
         <div className={styles.card} >
-            <div className={styles.cardField}>Invoice Amount - &nbsp; <span className={styles.amount}>INR {grandTotal}</span></div>
+            <div className={styles.cardFieldFirst}>Invoice Amount - &nbsp; <span className={styles.amount}>INR {grandTotal}</span></div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>
+            <div className={styles.cardFieldSecond}>
                 Tag - &nbsp; <span className={styles.tag}>
                 {data?.billAdditionalObject?.urgencyTag
 				? renderEditTag
@@ -120,7 +120,7 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
                 </span>
                 </div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>Remarks - <span className={styles.remarks}>{remarks?.[0]?.remarks || 'No Remarks'}</span></div>
+            <div className={styles.cardFieldThird}>Remarks - <span className={styles.remarks}>{remarks?.[0]?.remarks || 'No Remarks'}</span></div>
         </div>
 
         {removeTag ? (
