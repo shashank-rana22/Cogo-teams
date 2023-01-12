@@ -5,23 +5,18 @@ import { GenericObject } from '../../../../commons/Interfaces'
 import getFormattedPrice from '../../../../commons/utils/getFormattedPrice'
 import { IcMArrowNext, IcMArrowRotateDown } from '@cogoport/icons-react'
 import { Placeholder } from '@cogoport/components'
-
 interface Props{
   charge:GenericObject;
   type:string;
 }
-
 export const CardBody = ({charge}:Props) => {
   const [showFullDetails, setShowFullDetails] =useState(false);
-
   const handleWidth=()=>{
     setShowFullDetails(!showFullDetails)
   }
-
   const {serviceType,lineItems=[],type}=charge||{}
   const hidden=lineItems.length<2?styles.hidden:''
   const borderColor='#333333'
-
   return (charge?(
     <div className={`${showFullDetails?styles.card:styles.custompadding} ${lineItems.length<2?styles.padding:""}`} style={{ '--bordercolor':borderColor} as React.CSSProperties}>
     <div className={styles.layout}>
@@ -52,14 +47,14 @@ export const CardBody = ({charge}:Props) => {
       <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(lineItem?.priceQuotation,
                       lineItem?.currencyQuotation)||'-'}</div>
       <div className={styles.flex} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(lineItem?.priceActual,
-										lineItem?.currencyActual)||'-'}<span className={iconClassName}><IcMArrowNext height={15} width={15}/></span></div>
+                                        lineItem?.currencyActual)||'-'}<span className={iconClassName}><IcMArrowNext height={15} width={15}/></span></div>
   </div>
     )
     })}
     {(showFullDetails||lineItems.length<2)&&<div className={styles.total}>
         <div className={styles.heading} style={{ '--span': 2 } as React.CSSProperties}></div>
-        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(charge?.serviceTotalQuotational,'INR')||'-'}</div>
-        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{getFormattedPrice(charge?.serviceTotalActual,'INR')||'-'}</div>
+        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{charge?.serviceTotalQuotational?getFormattedPrice(charge?.serviceTotalQuotational,'INR'):'-'}</div>
+        <div className={`${styles.flex} ${styles.totalamount}`} style={{ '--span': 1 } as React.CSSProperties}>{charge?.serviceTotalActual?getFormattedPrice(charge?.serviceTotalActual,'INR'):'-'}</div>
     </div>}
     <div className={`${styles.viewmore} ${hidden}`} role='presentation' onClick={handleWidth}>{showFullDetails?"View Less":"View More"}<span className={showFullDetails?styles.arrowicon:styles.bottomicon}><IcMArrowRotateDown height={15} width={15}/></span></div>
     </div>):null
