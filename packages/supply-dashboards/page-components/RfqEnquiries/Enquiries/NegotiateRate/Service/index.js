@@ -17,7 +17,7 @@ function Service({
 	const [selectedRate, setSelectedRate] = useState(null);
 	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
 	const [showModal, setShowModal] = useState(false);
-	const status = submittedEnquiry.includes(service?.service) ? 'Submitted' : 'Pending';
+	const status = submittedEnquiry.includes(`${selectedCard?.id}${service?.service}`) ? 'Submitted' : 'Pending';
 	const handleClick = () => {
 		if (activeService === service) {
 			setActiveService(null);
@@ -80,6 +80,7 @@ function Service({
 					setSubmittedEnquiry={setSubmittedEnquiry}
 					setActiveService={setActiveService}
 					selectedRate={selectedRate}
+					selectedCard={selectedCard}
 				/>
 			)}
 			{showModal && (

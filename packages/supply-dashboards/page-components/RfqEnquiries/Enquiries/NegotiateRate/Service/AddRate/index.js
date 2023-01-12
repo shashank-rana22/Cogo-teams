@@ -6,12 +6,12 @@ import Layout from '../../../../Layout';
 import styles from './styles.module.css';
 
 function AddRate({
-	service, setSubmittedEnquiry, setActiveService, selectedRate,
+	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 }) {
 	const {
 		fields, control, showElements = {}, errors, onError, handleSubmit, handleData,
 	} = useUpdateSpotNegotiationRate({
-		service, setSubmittedEnquiry, setActiveService, selectedRate,
+		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 	});
 
 	return (
