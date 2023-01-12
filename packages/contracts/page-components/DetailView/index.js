@@ -32,7 +32,7 @@ function DetailView() {
 			<>
 				{' '}
 				<Header data={data} status={query?.status} handleUpdateContract={handleUpdateContract} />
-				<Body data={data} handleUpdateContract={handleUpdateContract} />
+				<Body data={data} />
 			</>
 		);
 	}

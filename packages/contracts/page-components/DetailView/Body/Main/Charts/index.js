@@ -4,7 +4,7 @@ import RevenuePrediction from './RevenuePrediction';
 import ServiceProvier from './ServiceProvider';
 import styles from './styles.module.css';
 
-function Charts() {
+function Charts({ activePair }) {
 	return (
 		<div className={styles.container}>
 			<div>
@@ -18,8 +18,8 @@ function Charts() {
 				<div className={styles.heading}>
 					Profitability Prediction
 				</div>
-				<ProfitabilityPrediction />
-				<div className={styles.stats} />
+				<ProfitabilityPrediction activePair={activePair} />
+
 			</div>
 			<div>
 				<div className={styles.heading}>

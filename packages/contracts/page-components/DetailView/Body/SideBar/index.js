@@ -5,7 +5,7 @@ function SideBar({
 	data, activePair, setActivePair, handleUpdateContract,
 }) {
 	const handlePortChange = (val) => {
-		if (val?.uniqueId !== activePair?.uniqueId) {
+		if (val?.id !== activePair?.id) {
 			setActivePair(val);
 		}
 	};

@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
+import EmptyState from '../../common/EmptyState';
 import useListContracts from '../../hooks/useListContracts';
 
 import Header from './Header';
@@ -13,6 +14,10 @@ function PageView() {
 	} = useListContracts();
 
 	let content = [...Array(10)].map(() => <Loader />);
+
+	if (!data?.list && !loading) {
+		content = <EmptyState />;
+	}
 
 	if (data?.list && !loading) {
 		content = (

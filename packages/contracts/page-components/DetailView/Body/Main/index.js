@@ -33,10 +33,16 @@ function Main({ activePair, handleUpdateContract }) {
 					{activePair?.status === 'quoted' ? (
 						<div className={styles.buttons}>
 							<Button
-								themeType=""
+								themeType="secondary"
 								size="md"
 								onClick={() => {
-									handleUpdateContract('rejected');
+									handleUpdateContract({
+										payload: {
+											id           : activePair?.id,
+											service_type : activePair?.service_type,
+											status       : 'pending',
+										},
+									});
 								}}
 							>
 								Reject
@@ -45,7 +51,13 @@ function Main({ activePair, handleUpdateContract }) {
 								size="md"
 								themeType="accent"
 								onClick={() => {
-									handleUpdateContract('active');
+									handleUpdateContract({
+										payload: {
+											id           : activePair?.id,
+											service_type : activePair?.service_type,
+											status       : 'active',
+										},
+									});
 								}}
 							>
 								Approve
@@ -54,7 +66,7 @@ function Main({ activePair, handleUpdateContract }) {
 					) : null}
 				</div>
 			</div>
-			<Charts />
+			<Charts activePair={activePair} />
 		</div>
 	);
 }

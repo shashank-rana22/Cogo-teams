@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcMAir, IcMFcl, IcMLcl } from '@cogoport/icons-react';
 
 import PortPair from '../../../PageView/List/Card/PortPair';
@@ -18,8 +17,7 @@ function Content({
 	const Element = iconMapping[portPair?.service_type];
 	return (
 		<div
-			className={activePair?.uniqueId === `${portPair?.origin_code} ${portPair?.destination_code}`
-				? styles.port_pair_active : ''}
+			className={activePair?.id === portPair?.id ? styles.port_pair_active : ''}
 		>
 			<div className={styles.sub_container}>
 				<div className={styles.service}>
@@ -36,7 +34,13 @@ function Content({
 									className={styles.button_reject}
 									role="presentation"
 									onClick={() => {
-										handleUpdateContract('rejected');
+										handleUpdateContract({
+											payload: {
+												id           : portPair?.id,
+												service_type : portPair?.service_type,
+												status       : 'pending',
+											},
+										});
 									}}
 								>
 									REJECT
@@ -45,7 +49,13 @@ function Content({
 									className={styles.button_approve}
 									role="presentation"
 									onClick={() => {
-										handleUpdateContract('active');
+										handleUpdateContract({
+											payload: {
+												id           : portPair?.id,
+												service_type : portPair?.service_type,
+												status       : 'active',
+											},
+										});
 									}}
 								>
 									APPROVE

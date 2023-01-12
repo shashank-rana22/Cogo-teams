@@ -24,12 +24,13 @@ function Card({ item, filters }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
-				<div className={styles.heading}>
-					Contract ID
-					{' '}
-					#
-					{item?.contract_reference_id}
-				</div>
+				{item?.contract_reference_id ? (
+					<div className={styles.heading}>
+						Contract ID
+						#
+						{item?.contract_reference_id}
+					</div>
+				) : null}
 
 				<div className={styles.details}>
 					<div className={styles.pair}>

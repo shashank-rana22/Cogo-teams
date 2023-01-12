@@ -257,6 +257,7 @@ importers:
 
   packages/contracts:
     specifiers:
+      '@cogoport/charts': ^1.0.1
       '@cogoport/components': ^1.0.235
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.48
@@ -264,8 +265,11 @@ importers:
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.2
+      axios: ^1.2.2
+      axios-hooks: ^4.0.0
       react: 18.2.0
     dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
       '@cogoport/components': 1.0.235_xt4ifl6qxlrythdsvwl2iwyvb4
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.48_react@18.2.0
@@ -273,6 +277,8 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
+      axios: 1.2.2
+      axios-hooks: 4.0.0_axios@1.2.2+react@18.2.0
       react: 18.2.0
 
   packages/home:

@@ -14,9 +14,14 @@ function Content({ data, handleUpdateContract }) {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.information}>
-				<Percentage data={statsData?.project_consolidated_profitability} />
-				<Line />
-				<Price data={statsData?.project_consolidated_revenue} />
+				{statsData?.projected_consolidated_profitability
+					? (
+						<>
+							<Percentage data={statsData?.projected_consolidated_profitability} />
+							<Line />
+						</>
+					) : null}
+				<Price data={statsData?.projected_consolidated_revenue} />
 				<Line />
 				<Margin />
 			</div>

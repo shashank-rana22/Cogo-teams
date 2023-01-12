@@ -8,10 +8,12 @@ function Stats({ data, status, handleUpdateContract }) {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>
-					<div className={styles.contract_id}>
-						#
-						{data?.contract_reference_id}
-					</div>
+					{data?.contract_reference_id ? (
+						<div className={styles.contract_id}>
+							#
+							{data?.contract_reference_id}
+						</div>
+					) : null}
 				</div>
 				<div className={styles.details}>
 					<div className={styles.pair}>
