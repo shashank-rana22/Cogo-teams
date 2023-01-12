@@ -19,19 +19,11 @@
 }
 
 .orgNameAndVerified {
-<<<<<<< HEAD
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
+  gap: 6px;
+  align-items: center;
   width: 29%;
-=======
-	display: flex;
-	flex-direction: column;
-	gap: 6px;
-	align-items: center;
-	width: 29%;
->>>>>>> 0258e806bf8930e7d3d9639511489ffa2146919f
 }
 
 .tagsContainer {
@@ -83,8 +75,8 @@
   font-weight: 600;
 }
 
-.organizationName{
-	width: 260px;
+.organizationName {
+  width: 260px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -103,7 +95,6 @@
   display: flex;
 }
 
-<<<<<<< HEAD
 .docsIcon {
   padding-top: 4px;
   margin: 0px 6px;
@@ -118,8 +109,6 @@
   justify-content: center;
   font-weight: 600;
 }
-=======
-.flex{
-	display: flex;
+.flex {
+  display: flex;
 }
->>>>>>> 0258e806bf8930e7d3d9639511489ffa2146919f
