@@ -49,6 +49,7 @@ const useLoginAuthenticate = () => {
 			});
 			const { token } = response.data || {};
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
+			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME_2, token);
 			const res = await triggerSession();
 			dispatch(setProfileState(res.data));
 		} catch (err) {
