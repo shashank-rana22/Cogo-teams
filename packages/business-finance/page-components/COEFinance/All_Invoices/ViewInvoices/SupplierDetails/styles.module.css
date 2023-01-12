@@ -21,8 +21,8 @@
 .orgNameAndVerified {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-	align-items: flex-start;
+	gap: 6px;
+	align-items: center;
 	width: 29%;
 }
 
@@ -75,6 +75,14 @@
   font-weight: 600;
 }
 
+.organizationName{
+	width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
 .supplierHistory {
 	text-decoration: underline;
 	text-decoration-color: #ed3726;
@@ -85,4 +93,8 @@
 }
 .values{
   display: flex;
+}
+
+.flex{
+	display: flex;
 }
