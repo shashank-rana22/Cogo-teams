@@ -1,0 +1,292 @@
+const sales_dashboard = [
+	{
+		api          : 'list_fcl_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_fcl_freight_rate_local_requests',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_lcl_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'lcl_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_air_customs_rate_requests',
+		access_type  : 'private',
+		service_name : 'air_customs_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_air_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_domestic_air_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'domestic_air_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_fcl_customs_rate_requests',
+		access_type  : 'private',
+		service_name : 'fcl_customs_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_ftl_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_haulage_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_trailer_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_lcl_customs_rate_requests',
+		access_type  : 'private',
+		service_name : 'lcl_customs_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_ltl_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'ltl_freight_rate',
+		feature      : 'rate_requests',
+	},
+	{
+		api          : 'list_fcl_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_lcl_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'lcl_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_air_customs_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'air_customs_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_air_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_domestic_air_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'domestic_air_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_fcl_customs_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'fcl_customs_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_ftl_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_haulage_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_trailer_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_lcl_customs_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'lcl_customs_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_ltl_freight_rate_feedbacks',
+		access_type  : 'private',
+		service_name : 'ltl_freight_rate',
+		feature      : 'rate_feedbacks',
+	},
+	{
+		api          : 'list_organizations',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_trade_requirement_drafts',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_trade_requirement_draft',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'onboard_organization_user',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_shipments',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_spot_searches',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'list_margins',
+		access_type  : 'private',
+		service_name : 'margin',
+	},
+	{
+		api          : 'create_spot_search',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'update_organization_search_history',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_organization_search_history',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
+	{
+		api          : 'list_checkouts',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'list_contracts',
+		access_type  : 'private',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_organization_trade_party',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_invoicing_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_billing_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api         : 'create_feedback',
+		access_type : 'private',
+		feature     : 'feedback',
+	},
+	{
+		api          : 'send_trade_requirement_draft_confirmation_otp',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'verify_trade_requirement_draft_confirmation_otp',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_air_freight_incoterms',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'get_kam_promotion_stats',
+		access_type  : 'private',
+		service_name : 'promotion',
+	},
+	{
+		api          : 'create_kam_promotion',
+		access_type  : 'private',
+		service_name : 'promotion',
+	},
+	{
+		api          : 'publish_kam_promotion',
+		access_type  : 'private',
+		service_name : 'promotion',
+	},
+	{
+		api          : 'get_incentive_user_detail_stat',
+		access_type  : 'private',
+		service_name : 'incentive',
+	},
+	{
+		api          : 'list_incentive_user_details',
+		access_type  : 'private',
+		service_name : 'incentive',
+	},
+	{
+		api          : 'get_incentive_user_breakup',
+		access_type  : 'private',
+		service_name : 'incentive',
+	},
+	{
+		api          : 'create_incentive_report',
+		access_type  : 'private',
+		service_name : 'incentive',
+	},
+	{
+		api          : 'get_air_freight_incoterms',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+];
+
+export default sales_dashboard;
