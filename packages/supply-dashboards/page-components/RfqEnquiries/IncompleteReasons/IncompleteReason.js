@@ -1,14 +1,9 @@
-import styles from './styles.module.css';
-
 function IncompletionReasons({ completionMessages }) {
-	const reasons = Object.keys(completionMessages || {}).map((key) => (
-		<li key={key}>{`${key} ${completionMessages[key]}`}</li>
-	));
-	return completionMessages ? (
-		<div className={styles.container}>
-			<div className={styles.heading}>Incompletion reasons :</div>
-			<ul className={styles.ul}>{reasons}</ul>
-		</div>
-	) : null;
+	let message = '';
+	// eslint-disable-next-line no-return-assign
+	Object.keys(completionMessages || {}).forEach((key) => {
+		message	+= (`${key} ${completionMessages[key][0]}, `);
+	});
+	return message;
 }
 export default IncompletionReasons;

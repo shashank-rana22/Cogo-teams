@@ -21,17 +21,19 @@ const useGetSpotNegotiationRate = ({ values, controls }) => {
 		url    : '/get_spot_negotiation_rate',
 	}, { manual: true });
 
-	const fetch = async () => {
+	const fetch = async (val) => {
 		const { spot_negotiation_id, service_provider_id } = values;
 		try {
-			await trigger({
+			const handleData = await trigger({
 				params: {
-					spot_negotiation_id,
-					service_provider_id,
+					spot_negotiation_id : spot_negotiation_id || val?.spot_negotiation_id,
+					service_provider_id : service_provider_id || val?.service_provider_id,
 				},
 			});
+			return handleData;
 		} catch (err) {
 			console.log(err);
+			return null;
 		}
 	};
 

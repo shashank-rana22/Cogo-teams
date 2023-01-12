@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
@@ -152,6 +151,7 @@ const useUpdateSpotNegotiationRate = ({
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [values?.free_limit,
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		JSON.stringify(values?.slabs),
 	]);
 	useEffect(() => {
@@ -167,6 +167,7 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			});
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [values?.origin_free_limit, JSON.stringify(values?.origin_slabs)]);
 
 	useEffect(() => {
@@ -182,6 +183,7 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			});
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [values?.destination_free_limit, JSON.stringify(values?.destination_slabs)]);
 
 	const showElements = {
@@ -208,16 +210,25 @@ const useUpdateSpotNegotiationRate = ({
 				Toast.error(response?.message || 'Something Went Wrong');
 				return;
 			}
-			await fetch();
-			if (!data?.is_complete) {
-				Toast.errror(<IncompletionReasons completionMessages={data?.completion_messages} />);
-			} else {
-				setActiveService(null);
-				setSubmittedEnquiry((prev) => [...prev, service?.service]);
-				Toast.success('Negotiation Updated');
+			try {
+				const newRes = await fetch(
+					{ service_provider_id: value?.service_provider_id, spot_negotiation_id: service?.id },
+				);
+				if (!(newRes?.data?.is_complete)) {
+					let completeMessage = 'Incompletion Reasons :';
+					const message = IncompletionReasons({ completionMessages: newRes?.data?.completion_messages });
+					completeMessage += message;
+					Toast.error(`${completeMessage}`);
+				} else {
+					setActiveService(null);
+					setSubmittedEnquiry((prev) => [...prev, service?.service]);
+					Toast.success('Negotiation Updated');
+				}
+			} catch (err) {
+				Toast.error(err);
 			}
 		} catch (err) {
-			Toast.error('something went wrong');
+			Toast.error(err);
 		}
 	};
 
