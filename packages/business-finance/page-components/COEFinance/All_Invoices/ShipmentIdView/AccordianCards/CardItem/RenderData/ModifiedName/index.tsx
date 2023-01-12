@@ -2,8 +2,8 @@ import { Tooltip } from "@cogoport/components";
 import React from "react";
 
 interface itemTypes {
-    billNumber?: string;
     organizationName?: string;
+    createdBy: string;
     buyerDetails?: businessNameTypes;
 }
 
@@ -17,7 +17,7 @@ interface propsType {
 }
 
 const ModifiedName = ({ item, field }: propsType) => {
-    const { organizationName = "", billNumber = "", buyerDetails } = item || {};
+    const { organizationName = "", createdBy, buyerDetails } = item || {};
 
     const { businessName = "" } = buyerDetails || {};
 
@@ -54,6 +54,22 @@ const ModifiedName = ({ item, field }: propsType) => {
                         </Tooltip>
                     ) : (
                         <text>{businessName}</text>
+                    )}
+                </div>
+            )}
+
+            {field?.key === "createdBy" && (
+                <div>
+                    {createdBy?.length > 10 ? (
+                        <Tooltip
+                            interactive
+                            placement="top"
+                            content={createdBy}
+                        >
+                            <text>{`${createdBy?.substring(0, 10)}...`}</text>
+                        </Tooltip>
+                    ) : (
+                        <text>{createdBy}</text>
                     )}
                 </div>
             )}

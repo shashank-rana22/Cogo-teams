@@ -26,7 +26,7 @@ export const incomeConfig = {
         {
             label: "Service Ops 2",
             key: "createdBy",
-
+            func: "renderName",
             span: 1.9,
         },
         {

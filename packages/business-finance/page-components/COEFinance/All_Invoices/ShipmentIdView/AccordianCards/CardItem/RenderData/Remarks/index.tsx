@@ -18,15 +18,17 @@ const Remarks = ({ itemData }: propsType) => {
 
     const RemarksContent = () => {
         if (!itemData?.remark) {
-            return <div>No Data</div>;
+            return <div>No Remarks</div>;
         }
         return (remarkData || []).map((item: any, idx: any) => {
             const StatusItem = item?.billStatus?.toLowerCase();
             return (
                 <div className={styles.timeline_wrapper}>
                     <div className={styles.left_content}>
-                        {formatDate(item?.createdAt, "dd-MMM-yy",{},true)}
-                        <div>{formatDate(item?.createdAt, " hh:mm a",{},true)}</div>
+                        {formatDate(item?.createdAt, "dd-MMM-yy", {}, true)}
+                        <div>
+                            {formatDate(item?.createdAt, " hh:mm a", {}, true)}
+                        </div>
                     </div>
                     <div className={styles.path}>
                         <div className={styles.circle} />
