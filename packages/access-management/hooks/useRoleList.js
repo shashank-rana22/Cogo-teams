@@ -75,7 +75,7 @@ const useRoleList = () => {
 				filters: { ...params?.filters, ...filters },
 			},
 		});
-	}, [filters, params]);
+	}, [filters, params, trigger]);
 
 	useEffect(() => onChangeParams({ page: 1 }), [filters]);
 
@@ -101,158 +101,156 @@ const useRoleList = () => {
 		if (!roleId) return;
 
 		router.push('/edit-role/[role_id]', `/edit-role/${roleId}`);
-	}, []);
+	}, [router]);
 
 	const columns = [
 		{
 			Header   : 'Role Description',
-			accessor : (itemData) => (
+			accessor : ({ name = '', remarks = '' }) => (
 				<section className={styles.role_description_container}>
-					<div className={styles.title}>{itemData?.name}</div>
-					<div className={styles.subtitle}>{itemData?.remarks}</div>
+					<div className={styles.title}>{name}</div>
+					<div className={styles.subtitle}>{remarks}</div>
 				</section>
 			),
 		},
 		{
 			Header   : 'Role Type',
-			accessor : (itemData) => {
-				const roleType = (itemData?.role_type || '').toLowerCase() === 'default';
+			accessor : ({ role_type = '' }) => {
+				const roleType = (role_type).toLowerCase() === 'default';
 				return (
 					<Pill className={styles.role_type_container} color={roleType ? 'blue' : 'orange'}>
-						{itemData?.role_type}
+						{role_type}
 					</Pill>
 				);
 			},
 		},
 		{
 			Header   : 'Partner',
-			accessor : (itemData) => (
+			accessor : ({ partner = {} }) => (
 				<section className={styles.partner_container}>
-					{itemData?.partner?.business_name}
+					{partner?.business_name}
 				</section>
 			),
 		},
 		{
 			Header   : 'Users',
-			accessor : (itemData) => (
+			accessor : ({ user_count = '' }) => (
 				<section className={styles.partner_container}>
-					{itemData?.user_count}
+					{user_count}
 				</section>
 			),
 		},
 		{
 			Header   : 'Level',
-			accessor : (itemData) => (
+			accessor : ({ hierarchy_level = '' }) => (
 				<section className={styles.partner_container}>
-					{startCase(itemData?.hierarchy_level)}
+					{startCase(hierarchy_level)}
 				</section>
 			),
 		},
 		{
 			Header   : 'Functions',
-			accessor : (itemData) => {
-				const totalFunctionPills = itemData.role_functions.length;
+			accessor : ({ role_functions }) => {
+				const totalFunctionPills = role_functions.length;
+
+				if (totalFunctionPills <= 1) {
+					(role_functions).map((item) => (
+						<Pill
+							className={styles.function_head}
+							color="red"
+						>
+							{item}
+						</Pill>
+					));
+				}
+
+				const renderTooltip = role_functions.slice(1).map((item) => (
+					<Pill
+						className={styles.function_head}
+						color="red"
+					>
+						{item}
+					</Pill>
+				));
+
 				return (
 					<section>
-						{
-							itemData?.role_functions?.length <= 1 ? (
-								(itemData.role_functions || []).map((item) => (
-									<Pill
-										className={styles.function_head}
-										color="red"
-									>
-										{item}
-									</Pill>
-								))
-							) : (
-								<div className={styles.sub_functions_container}>
-									<Pill
-										className={styles.function_head}
-										color="red"
-									>
-										{itemData?.role_functions[0]}
-									</Pill>
+						<div className={styles.sub_functions_container}>
+							{role_functions[0] && (
+								<Pill className={styles.function_head} color="red">
+									{role_functions[0]}
+								</Pill>
+							)}
 
-									<Tooltip
-										content={(
-									itemData?.role_functions.slice(1).map((item) => (
-										<Pill
-											className={styles.function_head}
-											color="red"
-										>
-											{item}
-										</Pill>
-									))
-										)}
-										placement="top"
-									>
-										<strong>
-											(+
-											{totalFunctionPills - 1}
-											)
-										</strong>
-									</Tooltip>
-								</div>
-							)
-						}
+							{totalFunctionPills > 1 && (
+								<Tooltip content={renderTooltip} placement="top">
+									<strong>
+										(+
+										{totalFunctionPills - 1}
+										)
+									</strong>
+								</Tooltip>
+							)}
+
+						</div>
 					</section>
 				);
 			},
 		},
 		{
 			Header   : 'Sub Functions',
-			accessor : (itemData) => {
-				const totalSubFunctionPills = itemData.role_sub_functions.length;
+			accessor : ({ role_sub_functions }) => {
+				const totalSubFunctionPills = role_sub_functions.length;
+
+				if (totalSubFunctionPills <= 1) {
+					(role_sub_functions).map((item) => (
+						<Pill
+							className={styles.function_head}
+							color="green"
+						>
+							{item}
+						</Pill>
+					));
+				}
+
+				const renderTooltip = role_sub_functions.slice(1).map((item) => (
+					<Pill
+						className={styles.function_head}
+						color="green"
+					>
+						{item}
+					</Pill>
+				));
+
 				return (
 					<section>
-						{itemData?.role_sub_functions?.length <= 1 ? (
-							(itemData.role_sub_functions || []).map((item) => (
-								<Pill
-									className={styles.function_head}
-									color="green"
-								>
-									{item}
+						<div className={styles.sub_functions_container}>
+							{role_sub_functions[0] && (
+								<Pill className={styles.function_head} color="green">
+									{role_sub_functions[0]}
 								</Pill>
-							))
-						) : (
-							<div className={styles.sub_functions_container}>
-								<Pill
-									className={styles.function_head}
-									color="green"
-								>
-									{itemData?.role_sub_functions[0]}
-								</Pill>
+							)}
 
-								<Tooltip
-									content={(
-									itemData?.role_sub_functions.slice(1).map((item) => (
-										<Pill
-											className={styles.function_head}
-											color="green"
-										>
-											{item}
-										</Pill>
-									))
-									)}
-									placement="top"
-								>
+							{totalSubFunctionPills > 1 && (
+								<Tooltip content={renderTooltip} placement="top">
 									<strong>
 										(+
 										{totalSubFunctionPills - 1}
 										)
 									</strong>
 								</Tooltip>
-							</div>
-						)}
+							)}
+
+						</div>
 					</section>
 				);
 			},
 		},
 		{
 			Header   : ' ',
-			accessor : (itemData) => (
+			accessor : ({ id = '' }) => (
 				<section>
-					<Button themeType="secondary" onClick={() => redirect(itemData?.id)}>
+					<Button size="md" themeType="secondary" onClick={() => redirect(id)}>
 						<IcMEdit style={{ marginRight: 5 }} />
 						Edit
 					</Button>

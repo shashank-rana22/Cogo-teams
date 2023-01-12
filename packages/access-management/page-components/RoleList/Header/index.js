@@ -19,6 +19,7 @@ function Header({
 
 			<div className={styles.role_group}>
 				<Button
+					size="md"
 					id="rnp_role_list_create_new_role_button"
 					onClick={() => onChangeShowCreateRoleModal(true)}
 				>

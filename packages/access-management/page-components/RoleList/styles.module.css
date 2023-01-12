@@ -12,11 +12,11 @@
 	flex-direction: column;
 	gap: 0.25rem;
 	justify-content: flex-start;
-	margin-left: 12px;
-	max-width: 300px;
-	white-space: initial;
-	word-break: break-word;
 	width: 100%;
+	max-width: 300px;
+	margin-left: 12px;
+	word-break: break-word;
+	white-space: initial;
 }
 
 .title {
@@ -29,8 +29,8 @@
 	font-size: 10px;
 	font-weight: 400;
 	line-height: 12px;
-	white-space: initial;
 	word-break: break-word;
+	white-space: initial;
 }
 
 .role_type_container {
@@ -43,12 +43,12 @@
 }
 
 .partner_container {
+	max-width: 200px;
+	font-size: 14px;
 	font-weight: 500;
 	text-transform: uppercase;
-	font-size: 14px;
-	max-width: 200px;
-	white-space: initial;
 	word-break: break-word;
+	white-space: initial;
 }
 
 .function_head {
@@ -65,24 +65,24 @@
 }
 
 .table_container {
-	:global {
+	padding: unset !important;
 
+	:global {
 		.ui_table_head_row {
 			.ui_table_head_cell {
+				font-size: 14px;
 				color: black;
-				font-size: 14px;	
 			}
 		}
 
 		.ui_table_body_container {
 			background-color: white;
 
-			
 			.ui_table_body_row {
 				.ui_table_body_cell {
+					padding-block: 20px;
 					color: #221f20;
 					cursor: pointer;
-					padding-block: 20px;
 					border-bottom: 20px solid var(--color-tertiary-beige-4);
 				}
 			}
