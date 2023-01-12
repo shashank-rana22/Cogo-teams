@@ -1,4 +1,4 @@
-import { Tabs, TabsPanel } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import RfqEnquiries from '../page-components/RfqEnquiries';
@@ -16,10 +16,10 @@ function RfqEnquiriesView() {
 	return (
 		<div>
 			<Tabs activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
-				<TabsPanel name="live_bookings" title="Live Bookings">--</TabsPanel>
-				<TabsPanel name="rfq_enquiries" title="RFQ Enquiries">
+				<TabPanel name="live_bookings" title="Live Bookings">--</TabPanel>
+				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
 					<RfqEnquiries />
-				</TabsPanel>
+				</TabPanel>
 			</Tabs>
 		</div>
 	);
