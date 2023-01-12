@@ -131,8 +131,35 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
         <div className={styles.container}>
                 <List config={LINE_ITEMS} itemData={{list:lineItems}} functions={functions} />
 
+             <div className={styles.outer}>
+                 <div className={styles.flex}>
+                 <div className={styles.flexDiv}>
+                    <div className={styles.info}>T: Taxable</div> 
+                    <div className={styles.info}>P: Pure Agent</div> 
+                    <div className={styles.info}>E: Exempted</div> 
+                    <div className={styles.info}>N: Nil Rated</div> 
+                    <div className={styles.info}>NG: Non GST</div> 
+                    <div className={styles.info}>R: Reverse Charge</div>
+                 </div>
+
+                 <div className={styles.amount}>[value]</div>
+                 <div className={styles.amountRight}>[value]</div>
+                 </div>
+
+                 <div className={styles.flex}>
+                    <div className={styles.bottomDiv}>
+                        <div>Total payable in words : </div>
+                        <div>------</div>
+                    </div>
+                        <div className={styles.bottomDiv}>
+                        <div>Total payable in words : </div>
+                        <div>------</div>
+                    </div>
+                 </div>
+             </div>
+            
             <div className={styles.footer}>
-                <Button size='md'  onClick={()=>{setShowLineItem(false)}}> Go Back ↩</Button>
+                <Button size='md'  onClick={()=>{setShowLineItem(false)}}> Go Back </Button>
             </div>
             {
             popover[id as keyof typeof popover] && 
