@@ -12,7 +12,7 @@ function DepartureDateSelect({ value, onChange, showPopover, datePair, ...rest }
 
 	const getValue = () => {
 		let valueString = '';
-		const formattedValues = (value || []).map((item) => format(item, 'dd MMM yy '));
+		const formattedValues = (value || []).map((item) => format((item), 'dd MMM yy '));
 		valueString += formattedValues.concat();
 
 		return valueString;

@@ -1,15 +1,20 @@
 import currencies from '../helpers/currencies';
 
-const childControls = ({ heading = '' }) => 	{
-	let name = heading ? 'origin_line_items' : 'line_items';
-	if (heading === 'add_destination_local_charges') {
-		name = 'destination_line_items';
-	}
+const nameMapping = {
+	freights_charge_codes          : 'freights',
+	destination_local_charge_codes : 'destination_local',
+	origin_local_charge_codes      : 'origin_local',
+	customs_charge_codes           : 'line_items',
+};
+
+const childControls = ({ heading = '', charge_code_name = '' }) => 	{
+	const name = nameMapping[charge_code_name];
 	const controls = 		{
 		type        : 'fieldArray',
 		name,
 		showButtons : true,
 		heading,
+		charge_code_name,
 		value       : [
 			{
 				code      : '',
@@ -59,7 +64,7 @@ const childControls = ({ heading = '' }) => 	{
 			},
 			{
 				name        : 'min_price',
-				label       : 'Minimum Price per shipment',
+				label       : 'Minimum Price',
 				type        : 'text',
 				span        : 2,
 				min         : 0,

@@ -11,6 +11,7 @@ function List({
 			loading={loading}
 			filters={filters}
 			hookSetters={hookSetters}
+			total={list?.total}
 		/>
 	);
 }

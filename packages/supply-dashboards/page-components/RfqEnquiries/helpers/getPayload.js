@@ -8,7 +8,7 @@ import trailerPayload from './payload/trailer-payload';
 const getPayload = ({ service, value }) => {
 	const payloadMapping = {
 		fcl_freight     : fclPayload,
-		air_frieght     : airPayload,
+		air_freight     : airPayload,
 		lcl_freight     : lclPayload,
 		fcl_cfs         : fclCfsPayload,
 		fcl_customs     : fclCfsPayload,

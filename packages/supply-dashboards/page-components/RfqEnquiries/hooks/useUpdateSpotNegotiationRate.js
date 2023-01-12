@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import getField from '../configurations';
 import FieldMutation from '../helpers/field-mutation';
 import getPayload from '../helpers/getPayload';
+import IncompletionReasons from '../IncompleteReasons/IncompleteReason';
 
 import useGetRates from './useGetRates';
 import useGetSpotNegotiationRate from './useGetSpotNegotiatonRate';
@@ -26,7 +27,7 @@ const getDefaultValues = (oldfields) => {
 };
 
 const useUpdateSpotNegotiationRate = ({
-	service, setSubmittedEnquiry, setActiveService, selectedRate,
+	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 }) => {
 	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
@@ -40,7 +41,7 @@ const useUpdateSpotNegotiationRate = ({
 		control, watch, register, handleSubmit, setValue,
 	} = useForm({ defaultValues });
 	const values = watch();
-	const { data } = useGetSpotNegotiationRate({
+	const { data, fetch } = useGetSpotNegotiationRate({
 		values   : { ...values, spot_negotiation_id: service.id },
 		controls : fields,
 		service  : service.service,
@@ -66,7 +67,7 @@ const useUpdateSpotNegotiationRate = ({
 							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 								setValue(prefill, new Date(val[0]?.[prefill]));
 							} else if (prefill === 'departure_dates') {
-								setValue(prefill, [new Date(val[0]?.[prefill])]);
+								setValue(prefill, val[0]?.[prefill]);
 							} else {
 								setValue(prefill, val[0]?.[prefill]);
 							}
@@ -103,7 +104,7 @@ const useUpdateSpotNegotiationRate = ({
 								} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 									setValue(prefill, new Date(val[0]?.[prefill]));
 								} else if (prefill === 'departure_dates') {
-									setValue(prefill, [new Date(val[0]?.[prefill])]);
+									setValue(prefill, [(val[0]?.[prefill])]);
 								} else {
 									setValue(prefill, val[0]?.[prefill]);
 								}
@@ -134,11 +135,13 @@ const useUpdateSpotNegotiationRate = ({
 	}, [JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
-		if (values?.slabs) {
-			values?.slabs.forEach((obj, index) => {
+		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {
+			(values?.slabs || values?.origin_slabs || values?.destination_slabs || []).forEach((obj, index) => {
 				if (index === 0) {
-					setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
-				} else {
+					if (values?.slabs) {
+						setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
+					}
+				} else if (values?.slabs) {
 					setValue(
 						`slabs.${index}.lower_limit`,
 						Number(values?.slabs[index - 1].upper_limit) + 1,
@@ -147,7 +150,41 @@ const useUpdateSpotNegotiationRate = ({
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [values?.free_limit, JSON.stringify(values?.slabs)]);
+	}, [values?.free_limit,
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		JSON.stringify(values?.slabs),
+	]);
+	useEffect(() => {
+		if (values?.origin_slabs) {
+			(values?.origin_slabs || []).forEach((obj, index) => {
+				if (index === 0) {
+					setValue('origin_slabs.0.lower_limit', Number(values?.origin_free_limit) + 1 || 0);
+				} else if (values?.origin_slabs) {
+					setValue(
+						`origin_slabs.${index}.lower_limit`,
+						Number(values?.origin_slabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values?.origin_free_limit, JSON.stringify(values?.origin_slabs)]);
+
+	useEffect(() => {
+		if (values?.destination_slabs) {
+			(values?.destination_slabs || []).forEach((obj, index) => {
+				if (index === 0) {
+					setValue('destination_slabs.0.lower_limit', Number(values?.destination_free_limit) + 1 || 0);
+				} else if (values?.destination_slabs) {
+					setValue(
+						`destination_slabs.${index}.lower_limit`,
+						Number(values?.destination_slabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values?.destination_free_limit, JSON.stringify(values?.destination_slabs)]);
 
 	const showElements = {
 		sourced_by_id            : !values?.service_provider_id,
@@ -173,11 +210,25 @@ const useUpdateSpotNegotiationRate = ({
 				Toast.error(response?.message || 'Something Went Wrong');
 				return;
 			}
-			Toast.success('Negotiation Updated');
-			setActiveService(null);
-			setSubmittedEnquiry((prev) => [...prev, service?.service]);
+			try {
+				const newRes = await fetch(
+					{ service_provider_id: value?.service_provider_id, spot_negotiation_id: service?.id },
+				);
+				if (!(newRes?.data?.is_complete)) {
+					let completeMessage = 'Incompletion Reasons :';
+					const message = IncompletionReasons({ completionMessages: newRes?.data?.completion_messages });
+					completeMessage += message;
+					Toast.error(`${completeMessage}`);
+				} else {
+					setActiveService(null);
+					setSubmittedEnquiry((prev) => [...prev, `${selectedCard?.id}${service?.service}`]);
+					Toast.success('Negotiation Updated');
+				}
+			} catch (err) {
+				console.log(err);
+			}
 		} catch (err) {
-			Toast.error('something went wrong');
+			console.log(err);
 		}
 	};
 

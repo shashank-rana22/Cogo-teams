@@ -1,4 +1,4 @@
-import { Tabs, TabsPanel } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import LiveBookings from '../page-components/LiveBookings';
@@ -16,10 +16,10 @@ function LiveBookingsView() {
 	return (
 		<div>
 			<Tabs activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
-				<TabsPanel name="live_bookings" title="Live Bookings"><LiveBookings /></TabsPanel>
-				<TabsPanel name="rfq_enquiries" title="RFQ Enquiries">
+				<TabPanel name="live_bookings" title="Live Bookings"><LiveBookings /></TabPanel>
+				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
 					--
-				</TabsPanel>
+				</TabPanel>
 			</Tabs>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import {
+	IcMBookingDesk, IcMSettings, IcMContractRates,
 	IcMAccountSettings,
-	IcMSettings,
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
@@ -25,7 +25,6 @@ import {
 	IcMPromotions,
 	IcMPrm,
 	IcMMoney,
-	IcMContractRates,
 	IcMPortManagement,
 	IcMProfile,
 	IcMMarketing,
@@ -1679,6 +1678,13 @@ const navigationMappings = {
 		as          : '/contracts',
 		type        : 'link',
 		module_type : 'dashboards',
+		home        : {
+			key   : 'home',
+			title : 'Home',
+			href  : '/home',
+			as    : '/home',
+			icon  : IcMSettings,
+		},
 	},
 };
 

@@ -1,5 +1,5 @@
 import {
-	Radio, Checkbox, Tabs, TabsPanel,
+	Radio, Checkbox, Tabs, TabPanel,
 } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -70,8 +70,8 @@ function FilterStats({ filters, hookSetters }) {
 			<div className={styles.heading}>RFQ Status</div>
 			<div>
 				<Tabs activeTab={filters.type} onChange={onTabChange}>
-					<TabsPanel name="processing" title="Running" />
-					<TabsPanel name="draft" title="Archive" />
+					<TabPanel name="processing" title="Running" />
+					<TabPanel name="draft" title="Archive" />
 				</Tabs>
 			</div>
 			<div className={styles.radio}>

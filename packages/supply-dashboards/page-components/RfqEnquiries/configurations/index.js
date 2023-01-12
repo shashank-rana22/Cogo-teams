@@ -44,22 +44,30 @@ const Config = ({ data }) => {
 	} else if (data?.service === 'air_freight') {
 		field.push(...airFields);
 		if (data?.data?.include_destination_local) {
-			field.push(airChildControlsFunc({ heading: 'Add Destination Local Charges' }));
+			field.push(airChildControlsFunc({
+				heading          : 'Add Destination Local Charges',
+				charge_code_name : 'destination_local_charge_codes',
+			}));
 		}
 
 		if (data?.data?.include_origin_local) {
-			field.push(airChildControlsFunc({ heading: 'Add Origin Local Charges' }));
-		}
-		if (data?.data?.destination_storage_free_days > 0) {
-			field.push(...freeDaysSection({
-				heading : 'Origin Storage Hours',
-				unit    : 'per_kg_per_hour',
+			field.push(airChildControlsFunc({
+				heading          : 'Add Origin Local Charges',
+				charge_code_name : 'origin_local_charge_codes',
 			}));
 		}
 		if (data?.data?.origin_storage_free_days > 0) {
 			field.push(...freeDaysSection({
+				heading : 'Origin Storage Hours',
+				unit    : 'per_kg_per_hour',
+				type    : 'origin_air',
+			}));
+		}
+		if (data?.data?.destination_storage_free_days > 0) {
+			field.push(...freeDaysSection({
 				heading : 'Destination Storage Hours',
 				unit    : 'per_kg_per_hour',
+				type    : 'destination_air',
 			}));
 		}
 	} else if (data?.service === 'lcl_freight') {

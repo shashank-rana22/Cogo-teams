@@ -17,15 +17,15 @@
 
 .name {
 	display: flex;
-    align-self: center;
+	align-self: center;
 	font-size: 13px;
 	font-weight: 600;
 	color: #221f20;
 }
 
 .country {
+	padding: 1px;
 	font-size: 12px;
 	font-weight: 500;
 	color: #4f4f4f;
-    padding: 1px;
 }

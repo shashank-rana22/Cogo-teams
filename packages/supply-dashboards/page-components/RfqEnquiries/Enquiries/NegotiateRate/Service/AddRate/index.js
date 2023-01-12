@@ -6,19 +6,26 @@ import Layout from '../../../../Layout';
 import styles from './styles.module.css';
 
 function AddRate({
-	service, setSubmittedEnquiry, setActiveService, selectedRate,
+	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 }) {
 	const {
-		fields, control, showElements = {}, errors, onError, handleSubmit, handleData,
+		fields, control, showElements = {}, errors, onError, handleSubmit, handleData, loading,
 	} = useUpdateSpotNegotiationRate({
-		service, setSubmittedEnquiry, setActiveService, selectedRate,
+		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 	});
 
 	return (
 		<>
 			<Layout fields={fields} control={control} showElements={showElements} errors={errors} />
 			<div className={styles.button}>
-				<Button themeType="accent" onClick={handleSubmit(handleData, onError)}>Submit</Button>
+				<Button
+					themeType="accent"
+					disabled={loading}
+					onClick={handleSubmit(handleData, onError)}
+				>
+					Submit
+
+				</Button>
 			</div>
 		</>
 	);
