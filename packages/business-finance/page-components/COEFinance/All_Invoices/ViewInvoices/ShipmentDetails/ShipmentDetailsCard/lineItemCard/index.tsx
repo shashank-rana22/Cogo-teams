@@ -119,8 +119,8 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
     <div>
      
         <div className={styles.mainHeader}>
-            <div style={{fontWeight:'500'}}> 
-                  Check off Line Items and Tax Rate ( As filled by SO2 in the cogo form )
+            <div style={{fontWeight:'500',width: '500px'}}> 
+                  Check off Line Items and Tax Rate (As filled by SO2 in the cogo form)
             </div>
                <div className={styles.smallHr} />
             {!isInvoiceApproved && <div className={styles.headerDetail}>

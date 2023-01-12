@@ -1,6 +1,6 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import { Pill, Placeholder, Tooltip } from "@cogoport/components";
-import {IcCFtick, IcMInfo} from '@cogoport/icons-react';
+import {IcADocumentTemplates, IcCFtick, IcMInfo} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import { Modal } from "@cogoport/components";
 import config from '../../../configurations/SUPPLIER_HISTORY';
@@ -43,7 +43,7 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
 
     const handleChange = () =>{
         setShowModal(!showModal) 
-         getSupplierHistory()
+        getSupplierHistory()
     }
     
     return(
@@ -113,12 +113,15 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                     <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
                         <Modal.Header title="SUPPLIER HISTORY" />
                         <Modal.Body>
-                            <List config={config} itemData={{list:historyData}}  loading={loading} />
+                            {historyData ? <List config={config} itemData={{list:historyData}}  loading={loading} /> : <div className={styles.supplyCard}>NO HISTORY</div>}
                             
                         </Modal.Body>
                     </Modal> 
                     }
-                    <div>Documents</div> 
+                    <div className={styles.docsContainer}>
+                        <div className={styles.docsIcon}><IcADocumentTemplates/></div>
+                        <div>Documents</div>
+                    </div> 
                 </div>
             </div>
           

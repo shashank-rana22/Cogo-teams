@@ -20,7 +20,12 @@ const AccordianCards = ({
     refetch,
 }: listData) => {
     const [amountTab, setAmountTab] = useState("expense");
-    const [dataCard , setDataCard] = useState({jobNumber:'' ,jobSource:'',jobType:'',organizationId:''})
+    const [dataCard, setDataCard] = useState({
+        jobNumber: "",
+        jobSource: "",
+        jobType: "",
+        organizationId: "",
+    });
     const router = useRouter();
 
     return (
@@ -60,6 +65,9 @@ const AccordianCards = ({
                                 <div className={styles.expenseLabelText}>
                                     Expense ({itemData.expense_count || 0})
                                 </div>
+                                <div className={styles.smallRightBorder}>
+                                    <div className={styles.smallVr} />
+                                </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
                                         itemData.expense_total_price!,
@@ -70,6 +78,9 @@ const AccordianCards = ({
                             <div className={styles.urgent}>
                                 <div className={styles.urgentLabelText}>
                                     Urgent ({itemData.urgency_expense_count})
+                                </div>
+                                <div className={styles.smallRightBorder}>
+                                    <div className={styles.urgentVr} />
                                 </div>
                                 <div className={styles.urgentValueText}>
                                     {getFormattedPrice(
@@ -84,6 +95,9 @@ const AccordianCards = ({
                                 <div className={styles.expenseLabelText}>
                                     Income ({itemData.income_count})
                                 </div>
+                                <div className={styles.smallRightBorder}>
+                                    <div className={styles.smallVr} />
+                                </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
                                         itemData.income_total_price!,
@@ -95,6 +109,9 @@ const AccordianCards = ({
                                 <div className={styles.expenseLabelText}>
                                     Credit Note ({itemData.credit_expense_count}
                                     )
+                                </div>
+                                <div className={styles.smallRightBorder}>
+                                    <div className={styles.smallVr} />
                                 </div>
                                 <div className={styles.expenseValueText}>
                                     {getFormattedPrice(
@@ -115,7 +132,11 @@ const AccordianCards = ({
                                 <div className={styles.profitibility}>
                                     Quotation Profitability
                                 </div>
-
+                                <div className={styles.smallRightBorder}>
+                                    <div
+                                        className={styles.profitibilityBorder}
+                                    />
+                                </div>
                                 <div className={styles.profitibilityValue}>
                                     {itemData.quotation_profit}%
                                 </div>
@@ -123,9 +144,13 @@ const AccordianCards = ({
 
                             <div className={styles.expense}>
                                 <div className={styles.profitibility}>
-                                    Tentative Profitability
+                                    Actual Profitability
                                 </div>
-
+                                <div className={styles.smallRightBorder}>
+                                    <div
+                                        className={styles.profitibilityBorder}
+                                    />
+                                </div>
                                 <div className={styles.profitibilityValue}>
                                     {itemData.tentative_profit} %
                                 </div>
@@ -134,7 +159,7 @@ const AccordianCards = ({
                         <div className={styles.buttonStyle}>
                             {currentOpenSID !== itemData?.id ? (
                                 <Button
-                                    style={{ height: "30px" }}
+                                    style={{ height: "30px", fontSize: "12px" }}
                                     onClick={() => {
                                         setCurrentOpenSID(itemData?.id);
                                     }}
@@ -145,7 +170,7 @@ const AccordianCards = ({
                             ) : (
                                 <Button
                                     themeType="secondary"
-                                    style={{ height: "30px" }}
+                                    style={{ height: "30px", fontSize: "12px" }}
                                     onClick={() => {
                                         setCurrentOpenSID(itemData?.id);
                                         router.push(
@@ -158,13 +183,11 @@ const AccordianCards = ({
                             )}
                         </div>
                     </div>
-
-                    <div className={styles.ribbon}>
-                        {itemData.is_job_closed === false && "Open"}
-                    </div>
-                    <div className={styles.ribbonBackground}>
-                        {itemData.is_job_closed === true && "Closed"}
-                    </div>
+                    {itemData.is_job_closed === false ? (
+                        <div className={styles.ribbon}>Open</div>
+                    ) : (
+                        <div className={styles.ribbonClosed}>Closed</div>
+                    )}
                 </div>
                 <div>
                     {currentOpenSID === itemData?.id ? (

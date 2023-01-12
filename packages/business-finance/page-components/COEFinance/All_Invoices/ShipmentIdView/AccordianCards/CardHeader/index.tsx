@@ -39,13 +39,20 @@ const CardHeader = ({ amountTab, setAmountTab, itemData }: propsType) => {
                     <div className={styles.labelText}>
                         Discount Applied (Revenue Desk) -
                     </div>
-                    <div className={styles.valueText}> {} </div>
+                    <div className={styles.valueText}>
+                        {getFormattedPrice(
+                            itemData.discount_amount_revenue || "0",
+                            itemData.discount_amount_revenue_currency || "INR"
+                        )}
+                    </div>
                 </div>
             </div>
-            <div className={styles.status}>
-                <div className={styles.statusLabel}>Status - </div>
-                <div className={styles.statusValue}>N/A</div>
-            </div>
+            {itemData.status && (
+                <div className={styles.status}>
+                    <div className={styles.statusLabel}>Status - </div>
+                    <div className={styles.statusValue}>{itemData.status}</div>
+                </div>
+            )}
         </div>
     );
 };

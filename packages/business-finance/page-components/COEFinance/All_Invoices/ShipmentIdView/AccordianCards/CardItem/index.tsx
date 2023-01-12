@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import List from "../../../../../commons/List/index";
 import useListBills from "../../../../hook/useListBills";
 import CardHeader from "../CardHeader/index";
@@ -18,7 +18,7 @@ interface propsType {
     refetch: Function;
     amountTab: string;
     setAmountTab: Function;
-    setDataCard:Function
+    setDataCard: Function;
 }
 
 interface fullResponseProps {
@@ -46,8 +46,6 @@ const CardItem = ({
         setDataCard,
     });
 
-
-        
     const handleClick = () => {
         setCurrentOpenSID("");
     };
@@ -62,7 +60,7 @@ const CardItem = ({
         renderDates: (item: any, field: {}) => (
             <FormatedDate item={item} field={field} />
         ),
-        renderName: (item: {}, field: {}) => (
+        renderName: (item: any, field: {}) => (
             <ModifiedName item={item} field={field} />
         ),
         renderAmount: (item: any, field: {}) => (
