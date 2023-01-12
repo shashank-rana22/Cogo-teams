@@ -41,24 +41,24 @@ const useUpdateTag = ({
 					},
 				});
 		 
-				if (!response?.hasError) {
-						const finalRes = await CollectionPartyTrigger({
-							data: {
-								id: collectionPartyId,
-								urgency_tag: tagValue || null,
-								remarks: remarks.length ? [remarks] : undefined,
-							},
-						});
+				// if (!response?.hasError) {
+				// 		const finalRes = await CollectionPartyTrigger({
+				// 			data: {
+				// 				id: collectionPartyId,
+				// 				urgency_tag: tagValue || null,
+				// 				remarks: remarks.length ? [remarks] : undefined,
+				// 			},
+				// 		});
 				   
-					if (!finalRes?.error) {
-						Toast.success('Tag successfully Updated');
-						setLoading(false);
-						onClose();
-					} else {
-						Toast.error('Something went wrong!');
-						setLoading(false);
-					}
-				}
+				// 	if (!finalRes?.error) {
+				// 		Toast.success('Tag successfully Updated');
+				// 		setLoading(false);
+				// 		onClose();
+				// 	} else {
+				// 		Toast.error('Something went wrong!');
+				// 		setLoading(false);
+				// 	}
+				// }
 			} catch (err) {
 				setLoading(false);
 				Toast.error(err.message);
