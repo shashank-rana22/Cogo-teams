@@ -11,7 +11,7 @@ function Charts({ activePair }) {
 				<div className={styles.heading}>
 					Service Provider
 				</div>
-				<ServiceProvier />
+				<ServiceProvier activePair={activePair}/>
 				<div className={styles.stats} />
 			</div>
 			<div>
@@ -27,12 +27,12 @@ function Charts({ activePair }) {
 				</div>
 				<RevenuePrediction />
 			</div>
-			<div>
+			{/* <div>
 				<div className={styles.heading}>
 					Demand Visibility for Shanghai - Mumbai
 				</div>
 				<DemandVisibility />
-			</div>
+			</div> */}
 
 		</div>
 	);

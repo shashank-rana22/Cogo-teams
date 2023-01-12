@@ -17,7 +17,7 @@ const controls = {
 
 };
 
-function ServiceProvier() {
+function ServiceProvier({activePair}) {
 	const [serviceProvider, setServiceProvider] = useState('');
 	const [showServiceProvider, setShowServiceProvider] = useState('');
 	const serviceProviderOptions = useGetAsyncOptions(
@@ -46,10 +46,10 @@ function ServiceProvier() {
 					: (
 						<>
 							<div>
-								Name:
+								Name
 							</div>
 							<div className={styles.name}>
-								Avarak Prabhusinghan
+                                {'Avarak Prabhusinghan' || activePair?.service_provide_id?.display_name}
 							</div>
 							<Button
 								themeType="link"

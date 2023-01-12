@@ -24,7 +24,6 @@ function Main({ activePair, handleUpdateContract }) {
 							</div>
 						) : null}
 					</div>
-					<Line />
 					<div>
 						<Percentage />
 					</div>

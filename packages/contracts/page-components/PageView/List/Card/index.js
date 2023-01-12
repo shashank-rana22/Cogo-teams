@@ -28,7 +28,7 @@ function Card({ item, filters }) {
 					<div className={styles.heading}>
 						Contract ID
 						#
-						{item?.contract_reference_id}
+						{item?.contract_reference_id || '23422'}
 					</div>
 				) : null}
 
@@ -38,7 +38,8 @@ function Card({ item, filters }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{item?.contract_utilisation_data?.total_containers_count}
+							{item?.contract_utilisation_data?.total_containers_count || 
+							'150'}
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -56,7 +57,7 @@ function Card({ item, filters }) {
 							Validity :
 						</div>
 						<div className={styles.value}>
-							{item?.validity_left_days}
+							{item?.validity_left_days  || '24'}
 							days
 						</div>
 					</div>

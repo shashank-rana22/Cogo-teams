@@ -14,6 +14,7 @@ const iconMapping = {
 function Content({
 	portPair, activePair, handlePortChange, handleUpdateContract,
 }) {
+	console.log(portPair, activePair, 'valuesdata')
 	const Element = iconMapping[portPair?.service_type];
 	return (
 		<div
@@ -63,7 +64,7 @@ function Content({
 							</div>
 						) : null}
 					</div>
-					<Footer />
+					<Footer statsData={portPair} />
 				</div>
 			</div>
 			<div className={styles.line} />

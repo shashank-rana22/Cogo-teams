@@ -13,9 +13,10 @@ const useUpdateContractService = () => {
 			const res = await trigger({
 
 				data: {
-					service_id   : payload?.id,
+					contract_service_id   : payload?.id,
 					service_type : payload?.service_type,
-					status       : payload?.status,
+					status       : payload?.status || undefined,
+					service_provider_id : payload?.service_provider_id || undefined
 				},
 			});
 			if (res?.data) {

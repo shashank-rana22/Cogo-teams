@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 import Content from './Content';
 import styles from './styles.module.css';
 
-function Stats({ data, status, handleUpdateContract }) {
+function Stats({ data, status, handleUpdateContract, statsData }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -11,7 +11,7 @@ function Stats({ data, status, handleUpdateContract }) {
 					{data?.contract_reference_id ? (
 						<div className={styles.contract_id}>
 							#
-							{data?.contract_reference_id}
+							{'289220' || data?.contract_reference_id}
 						</div>
 					) : null}
 				</div>
@@ -21,7 +21,7 @@ function Stats({ data, status, handleUpdateContract }) {
 							No. of Containers :
 						</div>
 						<div className={styles.value}>
-							{data?.contract_utilisation_data?.total_containers_count}
+							{'150' || data?.contract_utilisation_data?.total_containers_count}
 						</div>
 					</div>
 					<div className={styles.pair}>
@@ -39,13 +39,13 @@ function Stats({ data, status, handleUpdateContract }) {
 							Validity :
 						</div>
 						<div className={styles.value}>
-							{data?.validity_left_days ? data?.validity_left_days : '-'}
+							{data?.validity_left_days ? data?.validity_left_days : '26'}
 							days
 						</div>
 					</div>
 				</div>
 			</div>
-			<Content data={data} handleUpdateContract={handleUpdateContract} />
+			<Content data={data} handleUpdateContract={handleUpdateContract} statsData={statsData} />
 		</div>
 	);
 }

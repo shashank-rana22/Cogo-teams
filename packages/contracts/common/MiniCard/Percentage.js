@@ -10,7 +10,7 @@ function Percentage({ data }) {
 			<div>
 				{data}
 				{' '}
-				%
+				86%
 			</div>
 		</div>
 	);

@@ -7,7 +7,7 @@ import Main from './Main';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
-function Body({ data }) {
+function Body({ data , statsData}) {
 	const formattedData = formatPortPair({ item: data });
 
 	const [activePair, setActivePair] = useState(
@@ -26,6 +26,7 @@ function Body({ data }) {
 				activePair={activePair}
 				setActivePair={setActivePair}
 				handleUpdateContract={handleUpdateContractServicer}
+				statsData={statsData}
 			/>
 			<div className={styles.big_line} />
 			<Main activePair={activePair} handleUpdateContract={handleUpdateContractServicer} />

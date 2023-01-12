@@ -6,6 +6,8 @@ import useUpdateContract from '../../hooks/useUpdateContract';
 import Body from './Body';
 import Header from './Header';
 import Loader from './Loader';
+import useGetContractStats from '../../hooks/useGetContractStats';
+
 
 function DetailView() {
 	const { query } = useSelector(({ general }) => ({
@@ -23,6 +25,9 @@ function DetailView() {
 		});
 	};
 
+	const { data: statsData } = useGetContractStats({ id: query?.id });
+
+	console.log(statsData, 'valuedata')
 	let content = (
 		<Loader />
 	);
@@ -31,8 +36,8 @@ function DetailView() {
 		content = (
 			<>
 				{' '}
-				<Header data={data} status={query?.status} handleUpdateContract={handleUpdateContract} />
-				<Body data={data} />
+				<Header data={data} status={query?.status} handleUpdateContract={handleUpdateContract} statsData={statsData} />
+				<Body data={data}  statsData={statsData}/>
 			</>
 		);
 	}

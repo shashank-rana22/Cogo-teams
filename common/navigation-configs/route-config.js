@@ -3,7 +3,6 @@ import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
 
 const routeConfig = {
-
 	...rolesAndPermissions,
 	...supplyDashboard,
 	...contracts,
