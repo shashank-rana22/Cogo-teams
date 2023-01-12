@@ -1,0 +1,244 @@
+.list_container {
+	display: block;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 16px;
+	overflow-y: auto;
+	list-style-type: none;
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
+}
+
+.list_item {
+	margin-bottom: 8px;
+}
+
+.list_sub_item {
+	margin-bottom: 6px;
+}
+
+.list_item_inner {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	font-weight: 500 !important;
+	cursor: pointer;
+	border-radius: 4px;
+	will-change: background-color;
+	transition: background-color 0.1s linear, color 0.1s linear;
+
+	span {
+		flex: 1;
+		padding-top: 1px;
+		overflow: hidden;
+		font-weight: 500;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		user-select: none;
+	}
+
+	svg {
+		display: block;
+		flex-grow: 0;
+		flex-shrink: 0;
+		width: 16px;
+		height: 16px;
+		margin-right: 16px;
+	}
+
+	&:hover {
+		background-color: #fef199;
+	}
+
+	&:active {
+		color: var(--color-accent);
+		background-color: #fef199;
+	}
+}
+
+.list_item_subitem {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	font-weight: 500 !important;
+	cursor: pointer;
+	border-radius: 4px;
+	will-change: background-color;
+	transition: background-color 0.1s linear, color 0.1s linear;
+
+	span {
+		flex: 1;
+		padding-top: 1px;
+		margin-left: 30px;
+		overflow: hidden;
+		font-weight: 500;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		user-select: none;
+	}
+
+	svg {
+		display: block;
+		flex-grow: 0;
+		flex-shrink: 0;
+		width: 16px;
+		height: 16px;
+		margin-right: 16px;
+	}
+
+	&:hover {
+		background-color: #fef199;
+	}
+
+	&:active {
+		color: var(--color-accent);
+		background-color: #fef199;
+	}
+}
+
+.search_container {
+	margin: 10px 0;
+}
+
+.input_search:global(.ui_input_container) {
+	background-color: #fdebe9;
+	border: none;
+}
+
+.input_search:global(.ui_input_control) {
+	background-color: #fdebe9;
+}
+
+.input_search {
+	:global(.ui_input_prefix) {
+		padding-left: 14px;
+		margin-right: 4px;
+		background-color: unset;
+	}
+}
+
+.outer_container {
+	background-color: #fffce6;
+}
+
+.active_item {
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	cursor: pointer;
+	background-color: #fef199;
+	border-radius: 4px;
+	transition: background-color 0.1s linear, color 0.1s linear;
+	will-change: background-color;
+
+	span {
+		padding-top: 1px;
+		overflow: hidden;
+		font-weight: 600 !important;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		user-select: none;
+	}
+
+	svg {
+		display: block;
+		flex-grow: 0;
+		flex-shrink: 0;
+		width: 16px;
+		height: 16px;
+		margin-right: 16px;
+	}
+}
+
+.inner_container {
+	position: sticky;
+	overflow: hidden;
+}
+
+.brand_logo {
+	display: flex;
+	justify-content: center;
+	margin: 10px 0 20px;
+}
+
+.logo {
+	width: 200px;
+	height: 30px;
+}
+
+.bg_nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--layout-navbar);
+	height: 100vh;
+	background-color: white;
+	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 25%));
+	transition: transform 0.5s ease;
+	transform: translateX(-200px);
+	will-change: transform;
+}
+
+.icon {
+	width: 10px !important;
+	height: 10px !important;
+	transform: rotate(-90deg);
+}
+
+.active {
+	transform: rotate(360deg);
+}
+
+.container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: var(--layout-navbar-collapsed);
+	height: calc(100vh - var(--layout-topbar));
+	padding: 16px;
+	will-change: width;
+	transition: width 0.5s ease;
+
+	@media (max-width: 576px) {
+		left: calc(var(--layout-navbar) * -1);
+
+		&.mobile_show {
+			left: 0;
+		}
+	}
+
+	&:hover {
+		width: var(--layout-navbar);
+
+		.bg_nav {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+}
+
+.mobile_container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: var(--layout-navbar);
+	height: calc(100vh - var(--layout-topbar));
+	padding: 16px;
+	will-change: width;
+	transition: width 0.5s ease;
+}
+
+.mobile_bg_nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--layout-navbar);
+	height: 100vh;
+	background-color: white;
+	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 25%));
+	transition: transform 0.5s ease;
+	will-change: transform;
+	transform: translate3d(0, 0, 0) !important;
+}

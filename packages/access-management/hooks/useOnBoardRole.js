@@ -1,12 +1,9 @@
+import { useRouter } from '@cogoport/next';
+import { useRequest } from '@cogoport/request';
+import getNavData from '@cogoport/request/helpers/get-nav-data';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
-import { useSelector } from '@cogo/store';
-import { useRouter } from '@cogo/next';
-import { useRequest } from '@cogo/commons/hooks';
-import getNavData from '@cogo/business-modules/helpers/get-nav-data';
 
-import navigationMappingsPartner from '@cogo/project-partner/page-components/layout/configurations/navigation-mappings';
-import importerExporterNavs from '@cogo/app-layout/configurations/nav-items.shipper';
-import sellerNavs from '@cogo/app-layout/configurations/nav-items.seller';
 import getNavigationOptions from '../utils/get-navigation-options';
 
 /**
@@ -18,36 +15,24 @@ const useOnBoardRole = () => {
 	const [initialLoading, setInitialLoad] = useState(true);
 	const [showImportRole, setShowImportRole] = useState(false);
 	const [importedPermissions, setImportedPermissions] = useState(null);
-	const { role_id, scope } = useSelector(({ general }) => ({
+	const { role_id } = useSelector(({ general }) => ({
 		role_id: general?.query?.role_id,
-		scope: general?.scope,
 	}));
 	const router = useRouter();
 
-	const { loading, trigger, data } = useRequest(
-		'get',
-		false,
-		scope,
-	)('/list_auth_roles');
-	const { data: possiblePermissionsData } = useRequest(
-		'get',
-		true,
-		scope,
-	)('/get_auth_possible_permissions');
+	const [{ loading, data }, trigger] = useRequest({
+		url    : '/list_auth_roles',
+		method : 'get',
+	});
+
+	const [{ data: possiblePermissionsData }] = useRequest({
+		url    : '/get_auth_possible_permissions',
+		method : 'get',
+	}, { manual: false });
 
 	const roleData = data?.list?.[0] || {};
 
 	const { permissions } = possiblePermissionsData || {};
-
-	let navigationMappings = navigationMappingsPartner;
-
-	if (roleData?.stakeholder_type === 'organization') {
-		if (roleData?.id === '6fbc5d22-b79b-4db6-aeab-d5db3b58db17') {
-			navigationMappings = sellerNavs;
-		} else {
-			navigationMappings = importerExporterNavs;
-		}
-	}
 
 	/**
 	 * Get role data
@@ -73,8 +58,8 @@ const useOnBoardRole = () => {
 	 * @param {string} [navigation='']
 	 */
 	const getNavOptions = (navigation = '') => {
-		const navObj = getNavData(navigation, navigationMappings);
-		return getNavigationOptions(permissions, navObj);
+		const navObj = getNavData(navigation);
+		return getNavigationOptions(permissions, navObj || []);
 	};
 
 	const onBack = useCallback(() => router.push('/list-roles'), []);
@@ -101,13 +86,12 @@ const useOnBoardRole = () => {
 	}, [role_id]);
 
 	return {
-		roleData: { ...roleData, importedPermissions, isImported },
-		authRoleId: role_id,
+		roleData   : { ...roleData, importedPermissions, isImported },
+		authRoleId : role_id,
 		loading,
 		initialLoading,
 		getRole,
 		getNavOptions,
-		navigationMappings,
 		permissions,
 		onBack,
 		setShowImportRole,

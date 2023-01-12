@@ -17,7 +17,9 @@ const customSerializer = (params) => {
 const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 request.interceptors.request.use((oldConfig) => {
-	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, oldConfig.ctx);
+	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME || process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME_2;
+
+	const token = getCookie(auth);
 	const authorizationparameters = getAuthorizationParams(store, oldConfig.url);
 
 	return {

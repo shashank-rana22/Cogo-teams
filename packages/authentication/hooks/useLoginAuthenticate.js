@@ -1,18 +1,44 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import useRequest from '@cogoport/request/hooks/useRequest';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
+import { setCookie } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-import setCookieAndRedirect from '../utils/setCookieAndRedirect';
+import redirections from '../utils/redirections';
 
 const useLoginAuthenticate = () => {
-	const [{ loading, error }, trigger] = useRequest({
+	const router = useRouter();
+	const dispatch = useDispatch();
+	const { _initialized, ...profile } = useSelector((s) => s.profile);
+
+	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
 		method : 'post',
-	}, { manual: false });
+	}, { manual: true });
+
+	const [{ loading: sessionLoading }, triggerSession] = useRequest({
+		url    : '/get_user_session',
+		method : 'get',
+	}, { manual: true });
+
+	useEffect(() => {
+		if (Object.keys(profile).length > 0) {
+			const configs = redirections(profile);
+			if (configs?.href) {
+				if (configs?.href?.includes('v1')) {
+					window.location.href = `/v1/${profile?.partner?.id}${configs.href.replace('/v1', '')}`;
+				} else {
+					router.push(configs?.href);
+				}
+			}
+		}
+	}, [profile, router]);
 
 	const onSubmit = async (values, e) => {
 		e.preventDefault();
-
 		try {
 			const response = await trigger({
 				data: {
@@ -21,18 +47,16 @@ const useLoginAuthenticate = () => {
 					platform   : 'admin',
 				},
 			});
-
-			if (!response.hasError) {
-				const { token } = (response || {}).data || {};
-				setCookieAndRedirect(token, {});
-			}
+			const { token } = response.data || {};
+			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
+			const res = await triggerSession();
+			dispatch(setProfileState(res.data));
 		} catch (err) {
-			console.log('err', err);
-			Toast.error(getApiErrorString(error?.response?.data) || 'Failed to login, please try again...');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
 		}
 	};
 
-	return { onSubmit, loading };
+	return { onSubmit, loading: loginLoading || sessionLoading };
 };
 
 export default useLoginAuthenticate;

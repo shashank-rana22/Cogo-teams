@@ -1,32 +1,71 @@
+import { Modal, Button } from '@cogoport/components';
 import React from 'react';
-import { Modal } from '@cogoport/front/components';
-import { useSelector } from '@cogo/store';
-import CreateRole from './CreateRole';
 
-const CreateRoleModal = ({
+import Heading from '../../../common/Heading';
+import useCreateRole from '../../../hooks/useCreateRole';
+
+import CreateRole from './CreateRole';
+import styles from './CreateRole/styles.module.css';
+
+function CreateRoleModal({
 	showCreateRoleModal = false,
 	onChangeShowCreateRoleModal = () => {},
 	redirect = () => {},
-}) => {
-	const { isMobile } = useSelector(({ general }) => general?.isMobile);
-	if (!showCreateRoleModal) return null;
+}) {
+	const onChange = () => {
+		onChangeShowCreateRoleModal(false);
+	};
+
+	const {
+		controls, formProps, onSubmit, createRoleApi,
+	} =	useCreateRole({ onChangeShowCreateRoleModal, redirect });
+
+	const { handleSubmit } = formProps;
+	const { loading } = createRoleApi;
 
 	return (
 		<Modal
+			scroll={false}
+			size="lg"
+			className={styles.modal_container}
 			show={showCreateRoleModal}
-			position="basic"
-			onClose={() => onChangeShowCreateRoleModal(false)}
-			fullscreen={isMobile}
-			onOuterClick={() => {}}
-			closable={false}
-			styles={!isMobile ? { dialog: { overflow: 'visible' } } : {}}
+			onClose={onChange}
+			placement="center"
 		>
-			<CreateRole
-				onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
-				redirect={redirect}
+			<Modal.Header
+				title={(
+					<Heading
+						title="Create Role"
+						subTitle="Set role name and role description"
+					/>
+				)}
 			/>
+			<form
+				id="rnp_role_list_create_role_form"
+				onSubmit={handleSubmit(onSubmit)}
+			>
+				<Modal.Body>
+					<CreateRole
+						onChangeShowCreateRoleModal={onChangeShowCreateRoleModal}
+						redirect={redirect}
+						formProps={formProps}
+						controls={controls}
+						createRoleApi={createRoleApi}
+					/>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button
+						style={{ marginRight: 10 }}
+						themeType="secondary"
+						onClick={onChange}
+					>
+						Cancel
+					</Button>
+					<Button loading={loading} type="submit">Create</Button>
+				</Modal.Footer>
+			</form>
 		</Modal>
 	);
-};
+}
 
 export default CreateRoleModal;
