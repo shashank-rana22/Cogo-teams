@@ -10,27 +10,39 @@
 }
 
 .card {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	padding: 8px 16px;
-	margin: 12px 0;
-	background: #fff;
-	border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 12px 0px;
 }
 
 .verticalSmallHr {
-	width: 2px;
-	height: 36px;
-	margin-right: 36px;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
+  width: 2px;
+  height: 36px;
 }
 
-.cardField {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+.cardFieldFirst {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 27%;
+}
+
+.cardFieldSecond {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46%;
+}
+.cardFieldThird {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26%;
 }
 
 .amount {

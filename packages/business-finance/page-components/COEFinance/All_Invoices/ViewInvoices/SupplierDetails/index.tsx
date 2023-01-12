@@ -1,15 +1,17 @@
 import React, { useState }  from "react";
-import { Pill } from "@cogoport/components";
-import {IcCFtick} from '@cogoport/icons-react';
+import { Pill, Placeholder, Tooltip } from "@cogoport/components";
+import {IcCFtick, IcMInfo} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import { Modal } from "@cogoport/components";
 import config from '../../../configurations/SUPPLIER_HISTORY';
 import List from "../../../../commons/List/index";
 import useSupplierHistory from '../../../hook/useSupplierHistory'
+import showOverflowingNumber from "../../../../commons/showOverflowingNumber";
+
 interface SellerDetail {
     organizationName?:string
-
 }
+
 interface AdditionDetailInt{
     kycStatus?:string
 }
@@ -63,8 +65,38 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                 <div className={styles.verticalSmallHr}/>
 
                 <div className={styles.accountDetails}>
-                    <div className={styles.accounts}>Amount Payables : <div className={styles.textDecoration}>{ledgerCurrency} {payables}</div></div>  
-                    <div className={styles.accounts}>Amount Receivables : <div className={styles.textDecoration}>{ledgerCurrency} {receivables}</div></div>  
+                    <div className={styles.accounts}>
+                        <Tooltip content="description here...">
+                        <div className={styles.tooltip}>
+                        <IcMInfo/>
+                        </div>
+                        </Tooltip>
+                         &nbsp; Amount Payables : &nbsp; <div className={styles.textDecoration}>
+                            {!accPaymentLoading ? <div className={styles.values}>
+                             {ledgerCurrency} &nbsp;  {showOverflowingNumber(payables || '-',7)}
+                             </div>:
+                                 <div>
+                                     <Placeholder height="20px" width="100px"/>
+                                 </div>
+                                 }
+                             </div>
+                    </div>  
+                    <div className={styles.accounts}>
+                        <Tooltip content="description here...">
+                        <div className={styles.tooltip}>
+                        <IcMInfo/>
+                        </div>
+                        </Tooltip>
+                         &nbsp; Amount Receivables : &nbsp; <div className={styles.textDecoration}>
+                           {!accPaymentLoading ? <div className={styles.values}>
+                             {ledgerCurrency} &nbsp; {showOverflowingNumber(receivables || '-',7)}
+                             </div>:
+                                 <div>
+                                     <Placeholder height="20px" width="100px"/>
+                                 </div>
+                                 }
+                         </div>
+                    </div>  
                 </div>
 
                 <div className={styles.verticalSmallHr}/>
