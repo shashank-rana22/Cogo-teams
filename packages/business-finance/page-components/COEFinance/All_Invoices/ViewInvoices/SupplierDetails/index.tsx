@@ -55,9 +55,15 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
 
             <div className={styles.card}>
                 <div className={styles.orgNameAndVerified}>
-                    <div>Name - <span className={styles.textDecoration}>{sellerDetail?.organizationName}</span></div>
+                    <div className={styles.flex}>Name -
+                         {!accPaymentLoading ? <span className={styles.organizationName}>{sellerDetail?.organizationName}</span>
+                         :   <div >
+                               <Placeholder height="20px" width="148px"/>
+                             </div> 
+                        }
+                         </div>
                     <div className={styles.tagsContainer}>
-                        <Pill color="blue" size="sm">{serviceProviderCategory}</Pill>
+                      {serviceProviderCategory &&  <Pill color="blue" size="sm">{serviceProviderCategory}</Pill>}
                         {kycStatus==="verified" && <div className={styles.kycVerified}><IcCFtick/><div>kyc verified</div></div>}
                     </div>      
                 </div>
