@@ -763,7 +763,7 @@ const navigationMappings = {
 		title         : 'Trade Parties',
 		href          : '/v1/trade-parties',
 		as            : '/v1/trade-parties',
-		icons         : IcMTradeparties,
+		icon          : IcMTradeparties,
 		type          : 'link',
 		possible_apis : [...trade_parties],
 		main_apis     : ['list_organization_trade_party_details'],

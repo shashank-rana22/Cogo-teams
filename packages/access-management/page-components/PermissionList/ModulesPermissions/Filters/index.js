@@ -36,7 +36,7 @@ function Filters({
 				placeholder="Search Navigation"
 			/>
 			<Popover placement="left" render={content} interactive>
-				<Button themeType="tertiary">
+				<Button themeType="tertiary" size="lg">
 					Filters
 					{' '}
 					<IcMFilter />
