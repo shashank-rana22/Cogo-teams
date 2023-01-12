@@ -73,7 +73,7 @@ const useGetShipmentCostSheet = ({query}:Params) => {
             postTaxFetch();
             preTaxFetch();
         }, [shipment_id]);
-        const {formattedBuyData,sellQuotationData}=getFormattedData({sell_quotation:sellData,buy_quotation:buyData})
+        const {formattedBuyData,sellQuotationData}:any=getFormattedData({sell_quotation:sellData,buy_quotation:buyData})
 
         return {
             selldata:sellQuotationData,
