@@ -225,10 +225,10 @@ const useUpdateSpotNegotiationRate = ({
 					Toast.success('Negotiation Updated');
 				}
 			} catch (err) {
-				Toast.error(err);
+				console.log(err);
 			}
 		} catch (err) {
-			Toast.error(err);
+			console.log(err);
 		}
 	};
 
