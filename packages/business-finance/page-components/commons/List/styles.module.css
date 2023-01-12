@@ -1,87 +1,94 @@
 .header {
-  display: flex;
-  align-items: center;
-  background-color: #393f70;
-  height: 40px;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 12px;
+	display: flex;
+	align-items: center;
+	height: 40px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #fff;
+	background-color: #393f70;
 }
+
 .paginations {
-  display: flex;
-  justify-content: end;
-  padding: 16px;
+	display: flex;
+	justify-content: end;
+	padding: 16px;
 }
+
 .row {
-  display: flex;
-  border-top: 1px solid #e0e0e0;
-  padding-left: 10px;
-  min-height: 40px;
-  align-items: center;
-  background-color: #ffffff;
+	display: flex;
+	align-items: center;
+	min-height: 40px;
+	padding-left: 10px;
+	background-color: #fff;
+	border-top: 1px solid #e0e0e0;
 }
 
 @media screen and (max-width: 768px) {
-  .row.isMobile {
-    flex-flow: row wrap;
-  }
+	.row.isMobile {
+		flex-flow: row wrap;
+	}
 
-  .col.isMobile {
-    flex: 0 0 50%;
-    flex-direction: column;
-  }
+	.col.isMobile {
+		flex: 0 0 50%;
+		flex-direction: column;
+	}
 }
 
 .clickable:hover {
-  opacity: 0.8;
-  cursor: pointer;
+	cursor: pointer;
+	opacity: 0.8;
 }
 
 .col {
-  display: flex;
-  flex: var(--span);
-  padding: 10px;
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
 }
 
 .asc {
-  /* transform: rotate(180deg); */
-  /* transition: transform 0.3s ease-in-out; */
-  cursor: pointer;
-  color: #f68b21;
+	color: #f68b21;
+
+	/* transform: rotate(180deg); */
+
+	/* transition: transform 0.3s ease-in-out; */
+	cursor: pointer;
 }
 
 .desc {
-  /* transform: rotate(0deg); */
-  /* transition: transform 0.3s ease-in-out; */
-  cursor: pointer;
-  color: #f68b21;
+	color: #f68b21;
+
+	/* transform: rotate(0deg); */
+
+	/* transition: transform 0.3s ease-in-out; */
+	cursor: pointer;
 }
 
 .center {
-  width: 0px;
-  align-items: center;
-  margin-left: 8px;
+	align-items: center;
+	width: 0;
+	margin-left: 8px;
 }
+
 .centers {
-  margin-bottom: -10px;
-  align-items: center;
-  margin-top: 10px;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: -10px;
 }
 
 .tablelabel {
-  display: flex;
-  font-size: 12px;
-  font-weight: 600;
-  color: #303b67;
+	display: flex;
+	font-size: 12px;
+	font-weight: 600;
+	color: #303b67;
 }
 
 .flex {
-  display: flex;
+	display: flex;
 }
 
 .pagination_container {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin-top: 10px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	margin-top: 10px;
 }

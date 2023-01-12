@@ -136,7 +136,7 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
             </div>
             {
             popover[id as keyof typeof popover] && 
-                <Modal size="lg" placement="center" show={popover[id as keyof typeof popover]} onClose={onClose}>
+                <Modal size="lg" placement="center" show={popover[id]} onClose={onClose}>
                     <Modal.Header title="Rejected line items" />
             <Modal.Body>
                   <div className={styles.modalContainer}>

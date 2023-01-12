@@ -1,73 +1,80 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin: 24px;
+	display: flex;
+	flex-direction: column;
+	margin: 24px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
 }
 
 .label {
-  padding: 24px 16px 0px 32px;
-  width: 100%;
-  font-weight: 700;
+	width: 100%;
+	padding: 24px 16px 0 32px;
+	font-weight: 700;
 }
+
 .labelApproved {
-  display: flex;
-  gap: 8px;
-  padding: 24px 16px 0px 32px;
-  width: 100%;
-  font-weight: 700;
-  color: #6cc077;
-  align-items: center;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	width: 100%;
+	padding: 24px 16px 0 32px;
+	font-weight: 700;
+	color: #6cc077;
 }
-.labelRejected{
-  display: flex;
-  gap: 8px;
-  padding: 24px 16px 0px 32px;
-  width: 100%;
-  font-weight: 700;
-  color: red;
-  align-items: center;
+
+.labelRejected {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	width: 100%;
+	padding: 24px 16px 0 32px;
+	font-weight: 700;
+	color: red;
 }
+
 .hr {
-  border: 1px solid #ed3726;
-  margin: 16px 0px;
-  width: 100%;
+	width: 100%;
+	margin: 16px 0;
+	border: 1px solid #ed3726;
 }
 
 .headerContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
+
 .buttonContainer {
-  display: flex;
-  align-items: center;
-  padding: 24px 16px 0px 32px;
-  gap: 8px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	padding: 24px 16px 0 32px;
 }
 
 .billingPartyContainer {
-  padding: 24px 16px 16px 32px;
+	padding: 24px 16px 16px 32px;
 }
 
 .mainHeader {
-  display: flex;
-  justify-content: space-between;
-  margin: 24px;
+	display: flex;
+	justify-content: space-between;
+	margin: 24px;
 }
+
 .footer {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 24px;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 24px;
 }
-.instructions{
-  font-weight: 500;
-  font-size: 13px;
+
+.instructions {
+	font-size: 13px;
+	font-weight: 500;
 }
-.completed{
-  font-weight: 600;
-  color: red;
+
+.completed {
+	font-weight: 600;
+	color: red;
 }

@@ -1,23 +1,23 @@
-.discountcontainer{
-    margin-top: var(--marginTop);
-    background-color: #FFFFFF;
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    padding: var(--padding);
-    display: flex;
-    width: var(--width);
+.discountcontainer {
+	display: flex;
+	width: var(--width);
+	padding: var(--padding);
+	margin-top: var(--marginTop);
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 12%) 0 1px 3px, rgb(0 0 0 / 24%) 0 1px 2px;
 }
 
-.label{
-    font-weight: 500;
-    font-size: 14px;
-    border-right: 2px solid #F68B21;
-    min-width: var(--headingwidth);
-    padding-left: 10px;
+.label {
+	min-width: var(--headingwidth);
+	padding-left: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	border-right: 2px solid #f68b21;
 }
 
-.stat{
-    font-weight: 500;
-    font-size: 14px;
-    margin: 0px 25px;
+.stat {
+	margin: 0 25px;
+	font-size: 14px;
+	font-weight: 500;
 }

@@ -1,6 +1,22 @@
-import { useRequest } from '@cogoport/request';
+import { useRequest, useRequestBf } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
-const useUpdateJob = ({shipmentData}) => {
+import { GenericObject } from '../../commons/Interfaces';
+import { useSelector } from '@cogoport/store';
+interface Params{
+	shipmentData?:GenericObject
+    query?: GenericObject
+	showButton?:boolean
+	setShowButton?:Function
+}
+const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
+
+	const{orgId,jobNumber,jobSource,jobType}=query||{}
+
+	const { user_data } = useSelector(({ profile }:any) => ({
+		user_data: profile?.user || {},
+	}));
+
+
     const [{ data, loading }, trigger] = useRequest(
 		{
 			url     : '/update_shipment',
@@ -8,20 +24,43 @@ const useUpdateJob = ({shipmentData}) => {
 		}
 	);
 
-    
+	const [{ data:FinalDataClose, loading:FinalLoading }, FinalTrigger] = useRequestBf(
+		{
+			url     : '/common/job/close-financially',
+			method  : 'post',
+		}
+	);
+
+    const getFinalData = async() =>{
+		try{
+			await FinalTrigger({
+				data:{
+					jobNumber:jobNumber,
+					jobType: jobType,
+					jobSource: jobSource,
+					updatedBy: user_data?.id
+				}
+			})
+			Toast.success('Close successfully...');
+			setShowButton!(!showButton)
+		}catch(error){
+			Toast.error('Job Not Found...');
+		}
+
+	}
 	const getData = async(data:string)=>{
 
 		const jobClose = () =>{
 			if(data=== 'Undo'){
 				return false
 			}
-				return true	
+			return true	
 		}
 		
 		try{
 			await trigger({
 				data:{
-                    id: shipmentData?.list?.[0]?.id,
+                    id: orgId,
 					is_job_closed: jobClose(),
 				}
 			})
@@ -31,7 +70,7 @@ const useUpdateJob = ({shipmentData}) => {
 		}
 	}
 
-    return{getData , loading}
+    return{getData ,getFinalData,FinalLoading, loading}
 }
 
 

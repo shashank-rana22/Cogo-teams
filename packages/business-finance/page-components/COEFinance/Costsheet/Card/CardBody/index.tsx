@@ -8,6 +8,7 @@ import { Placeholder } from '@cogoport/components'
 
 interface Props{
   charge:GenericObject;
+  type:string;
 }
 
 export const CardBody = ({charge}:Props) => {
@@ -17,7 +18,7 @@ export const CardBody = ({charge}:Props) => {
     setShowFullDetails(!showFullDetails)
   }
 
-  const {serviceType,lineItems=[]}=charge||{}
+  const {serviceType,lineItems=[],type}=charge||{}
   const hidden=lineItems.length<2?styles.hidden:''
   const borderColor='#333333'
 
@@ -32,12 +33,18 @@ export const CardBody = ({charge}:Props) => {
       const value=(lineItem?.priceActual)-(lineItem?.priceQuotation)
       let className=styles.neutral
       let iconClassName=styles.neutralIcon
-      if(value>0){
+      if(value>0 && type==='sell'){
         className=styles.positive
         iconClassName=styles.profiticon
-      }else if(value<0){
+      }else if(value<0 && type==='sell'){
         className=styles.negative
         iconClassName=styles.negativeIcon
+      }else if(value>0 && type==='buy'){
+        className=styles.negative
+        iconClassName=styles.negativeIcon
+      }else if(value<0 && type==='buy'){
+        className=styles.positive
+        iconClassName=styles.profiticon
       }
       return(
       <div className={styles.values}>

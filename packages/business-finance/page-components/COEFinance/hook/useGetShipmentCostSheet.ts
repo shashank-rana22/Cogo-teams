@@ -9,10 +9,12 @@ interface Params{
 }
 
 const useGetShipmentCostSheet = ({query}:Params) => {
+
     const{shipment_id,jobNumber,jobSource,jobType}=query||{}
+    
     const [{ data:postTaxData , loading:postTaxLoading}, postTaxFetch] = useRequestBf(
             {
-                url     : `/common/job/profit`,
+                url     : `/common/job/post-tax/profit`,
                 method  : 'get',
                 params:{ jobType,jobSource,jobNumber}
             },
@@ -28,7 +30,7 @@ const useGetShipmentCostSheet = ({query}:Params) => {
         );
         const [{ data:sellData, loading:sellLoading}, sellTrigger] = useRequestBf(
             {
-                url     : `/common/job/profit`,
+                url     : `/common/job/list-service-charges`,
                 method  : 'get',
                 params:{ jobType,jobSource,jobNumber,chargeType:'sell' }
             },
@@ -68,6 +70,8 @@ const useGetShipmentCostSheet = ({query}:Params) => {
         useEffect(() => {
             getbuydataFromApi();
             getselldataFromApi();
+            postTaxFetch();
+            preTaxFetch();
         }, [shipment_id]);
         const {formattedBuyData,sellQuotationData}=getFormattedData({sell_quotation:sellData,buy_quotation:buyData})
 

@@ -1,46 +1,47 @@
 .tab_panel_dashboard {
-  background-color: red;
+	background-color: red;
 }
 
-.spacebetween{
-display: flex;
-justify-content: space-between;
-@media (max-width: 1120px){
-  flex-direction: column;
-}
+.spacebetween {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 1120px) {
+		flex-direction: column;
+	}
 }
 
-.flex{
-  display: flex;
-  justify-content: space-between;
+.flex {
+	display: flex;
+	justify-content: space-between;
 }
 
-.heading{
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 27px;
-  color: #333333;
-  border-bottom: 2px solid black;
-  width: max-content;
+.heading {
+	width: max-content;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 27px;
+	color: #333;
+	border-bottom: 2px solid black;
 }
 
-.stat{
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 54px;
-  color: #ED3726;
+.stat {
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 54px;
+	color: #ed3726;
 }
 
-.month{
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  color: #333333;
+.month {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #333;
 }
 
-.totalstats{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 80px 80px 0px 60px ;
+.totalstats {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 80px 80px 0 60px;
 }
