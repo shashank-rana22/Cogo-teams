@@ -121,8 +121,9 @@ const useListBills = (allParams) => {
         authorizationparameters,
     });
 
+    
     useEffect(()=>{
-        params.setDataCard(fullResponse?.list?.[0] || {})
+        params.setDataCard(fullResponse?.list?.[0]?.job  || fullResponse?.list?.[0] )
     },[fullResponse])
     
 
