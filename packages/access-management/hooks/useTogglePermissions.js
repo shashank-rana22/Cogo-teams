@@ -109,7 +109,7 @@ const useTogglePermissions = (props) => {
 		roleData,
 	);
 	const [show, setShow] = useState(false);
-	const [value, setValue] = useState('yes');
+	const [value, setValue] = useState(null);
 	const [newApiPermissions, setNewApiPermissions] = useState(
 		formattedApiPermissions || [],
 	);
