@@ -88,7 +88,7 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
     const renderEmpty = (
 		<div className={styles.flexdiv}>
 			<div>No Urgency Tag &nbsp;</div>
-			<Button className="secondary sl" onClick={() => setShowAddTag(true)}>
+			<Button themeType="secondary"  onClick={() => setShowAddTag(true)}>
 				Add Tag
 			</Button>
 		</div>
