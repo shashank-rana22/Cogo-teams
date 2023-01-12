@@ -62,12 +62,12 @@ return(
 			name="remark" 
 			size="md" 
 			placeholder="Remarks Here ..." 
-			value={remarksVal.overAll} 
-			onChange={(value:string)=>setRemarksVal({...remarksVal, overAll:value})}
+			value={remarksVal.overall} 
+			onChange={(value:string)=>setRemarksVal({...remarksVal, overall:value})}
 			style={{width:'700' ,height:'100px', marginBottom: '12px'}} />
                  <div className={styles.button}>
                   <Button size="md" themeType="secondary" style={{marginRight:'8px'}} onClick={()=>{setApprove(false)}} >No</Button>
-                  <Button size="md" style={{marginRight:'8px'}} onClick={()=>handleApproveAndReject()}>Yes</Button>
+                  <Button size="md" style={{marginRight:'8px'}} disabled ={!(remarksVal.overall.length > 0)}onClick={()=>handleApproveAndReject()}>Yes</Button>
                 </div>
              </Modal.Body>
              
