@@ -8,20 +8,25 @@ interface AddUrgencyTag {
 	billId?:string
 	showAddTag?:boolean
 	serviceType?:string
+	tagValue?:string
 	getBillRefetch?:()=> void
 	collectionPartyId?:string
 	setShowAddTag: React.Dispatch<React.SetStateAction<boolean>>
+	setTagValue: React.Dispatch<React.SetStateAction<string>>
+
 }
 
 const AddUrgencyTag = ({
 	billId = '',
 	showAddTag = false,
 	serviceType = '',
+	tagValue = '',
 	setShowAddTag,
+	setTagValue,
 	getBillRefetch = ()=>{},
 	collectionPartyId = '',
 }:AddUrgencyTag) => {
-	const [tagValue, setTagValue] = useState('');
+
 	const [remarks, setRemarks] = useState('');
 
 	if (serviceType === 'air_freight') {
