@@ -44,10 +44,10 @@ importers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
-      '@cogoport/components': ^1.0.236
+      '@cogoport/components': ^1.0.240
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/icons-react': ^1.0.49
       '@cogoport/locations': workspace:0.1.0
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
@@ -66,10 +66,10 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
-      '@cogoport/components': 1.0.236_27ghnklenyaalfqdgsm7fqt7de
+      '@cogoport/components': 1.0.240_7jlafebzbknnhash5prtclph5q
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
-      '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.49_biqbaboplfbrettd7655fr4n2y
       '@cogoport/locations': link:../packages/locations
       '@cogoport/navigation-configs': link:../common/navigation-configs
       '@cogoport/next': link:../common/next
@@ -88,8 +88,8 @@ importers:
   common/core:
     specifiers:
       '@cogoport/authentication': workspace:0.1.0
-      '@cogoport/components': ^1.0.236
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/components': ^1.0.240
+      '@cogoport/icons-react': ^1.0.49
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -102,8 +102,8 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
-      '@cogoport/components': 1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@cogoport/navigation-configs': link:../navigation-configs
       '@cogoport/next': link:../next
       '@cogoport/request': link:../request
@@ -117,15 +117,15 @@ importers:
 
   common/forms:
     specifiers:
-      '@cogoport/components': ^1.0.236
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/components': ^1.0.240
+      '@cogoport/icons-react': ^1.0.49
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
       react-hook-form: ^7.41.5
     dependencies:
-      '@cogoport/components': 1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.2
       react: 18.2.0
@@ -133,10 +133,10 @@ importers:
 
   common/navigation-configs:
     specifiers:
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/icons-react': ^1.0.49
       react: 18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       react: 18.2.0
 
   common/next:
@@ -191,9 +191,9 @@ importers:
 
   packages/access-management:
     specifiers:
-      '@cogoport/components': ^1.0.236
+      '@cogoport/components': ^1.0.240
       '@cogoport/forms': workspace:0.1.0
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/icons-react': ^1.0.49
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
@@ -201,9 +201,9 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -213,10 +213,10 @@ importers:
 
   packages/authentication:
     specifiers:
-      '@cogoport/components': ^1.0.236
+      '@cogoport/components': ^1.0.240
       '@cogoport/forms': workspace:0.1.0
-      '@cogoport/icons-react': ^1.0.48
-      '@cogoport/navigation-configs': workspace:*
+      '@cogoport/icons-react': ^1.0.49
+      '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -224,9 +224,9 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -237,33 +237,33 @@ importers:
 
   packages/business-finance:
     specifiers:
-      '@cogoport/components': ^1.0.236
+      '@cogoport/components': ^1.0.240
       '@cogoport/forms': workspace:0.1.0
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/icons-react': ^1.0.49
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       react: 18.2.0
 
   packages/locations:
     specifiers:
-      '@cogoport/components': ^1.0.236
+      '@cogoport/components': ^1.0.240
       '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/icons-react': ^1.0.49
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
@@ -1544,14 +1544,14 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cogoport/components/1.0.236_27ghnklenyaalfqdgsm7fqt7de:
-    resolution: {integrity: sha512-tlyWTLhCHEt1JB5WYqVVrY1LIOE672iRnjFoZLlBk4ZnUQ6+2YDJLMEeHFd2jqkZvkYU7Iy90SxaPxZNzlx2bQ==}
+  /@cogoport/components/1.0.240_7jlafebzbknnhash5prtclph5q:
+    resolution: {integrity: sha512-r9ZdHhWBDc91LYht9uOL/ohiAvnKtnPNnQLHLVlv4O4hij6aEolILi5uFnGDk3lhZP0Pq1wD5+YgyCaxEfm1gg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.48_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.49_biqbaboplfbrettd7655fr4n2y
       '@tippyjs/react': 4.2.6_biqbaboplfbrettd7655fr4n2y
       axios: 1.2.2
       axios-hooks: 4.0.0_axios@1.2.2+react@18.2.0
@@ -1575,14 +1575,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.236_xt4ifl6qxlrythdsvwl2iwyvb4:
-    resolution: {integrity: sha512-tlyWTLhCHEt1JB5WYqVVrY1LIOE672iRnjFoZLlBk4ZnUQ6+2YDJLMEeHFd2jqkZvkYU7Iy90SxaPxZNzlx2bQ==}
+  /@cogoport/components/1.0.240_q6n2up4lo4ehhk77v5iq2d7bui:
+    resolution: {integrity: sha512-r9ZdHhWBDc91LYht9uOL/ohiAvnKtnPNnQLHLVlv4O4hij6aEolILi5uFnGDk3lhZP0Pq1wD5+YgyCaxEfm1gg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.48_react@18.2.0
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       axios: 1.2.2
       axios-hooks: 4.0.0_axios@1.2.2+react@18.2.0
@@ -1613,13 +1613,13 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
       '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
       eslint: 8.31.0
-      eslint-config-airbnb: 19.0.4_uxvbcbsmijt6bwfubyr4a75nre
-      eslint-config-airbnb-base: 15.0.0_ol7jqilc3wemtdbq3nzhywgxq4
-      eslint-config-airbnb-typescript: 17.0.0_2zlw3x3sr6whguaqnvgpdh2zra
-      eslint-import-resolver-custom-alias: 1.3.0_fkfqfehjtk7sk2efaqbgxsuasa
+      eslint-config-airbnb: 19.0.4_clj2sc35kiuw2ndh55gxznyd44
+      eslint-config-airbnb-base: 15.0.0_hnftvkj7qg3s6bbigj4pr6djxy
+      eslint-config-airbnb-typescript: 17.0.0_wg2eoxotyrorthai2nnacchumy
+      eslint-import-resolver-custom-alias: 1.3.0_xwyoujhv2zz5pj5vdvbnv64eri
       eslint-plugin-cypress: 2.12.1_eslint@8.31.0
-      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
-      eslint-plugin-jsx-a11y: 6.7.0_eslint@8.31.0
+      eslint-plugin-import: 2.27.4_qdjeohovcytra7xto5vgmxssaq
+      eslint-plugin-jsx-a11y: 6.7.1_eslint@8.31.0
       eslint-plugin-react: 7.32.0_eslint@8.31.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.31.0
     optionalDependencies:
@@ -1631,29 +1631,29 @@ packages:
       - supports-color
     dev: true
 
-  /@cogoport/icons-react/1.0.48_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-Rrc6PCpMOmDHA3jqbpMpdVpAF2x9yTcGCyNEc/4FdZEbRi9upDC1gDEHk9QseXJqe/Evc+hv+SpTZD7BIoXolg==}
+  /@cogoport/icons-react/1.0.49_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5Lx9x725LVWF/XiBlbfog0ZH4c0oJCA2HOzNQwm3Q4s47zU8DieXFPOwogUvqHLUGbPo6Q63ptVtYlw/jANnsw==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
-      '@cogoport/icons': 1.0.48
+      '@cogoport/icons': 1.0.49
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@cogoport/icons-react/1.0.48_react@18.2.0:
-    resolution: {integrity: sha512-Rrc6PCpMOmDHA3jqbpMpdVpAF2x9yTcGCyNEc/4FdZEbRi9upDC1gDEHk9QseXJqe/Evc+hv+SpTZD7BIoXolg==}
+  /@cogoport/icons-react/1.0.49_react@18.2.0:
+    resolution: {integrity: sha512-5Lx9x725LVWF/XiBlbfog0ZH4c0oJCA2HOzNQwm3Q4s47zU8DieXFPOwogUvqHLUGbPo6Q63ptVtYlw/jANnsw==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
-      '@cogoport/icons': 1.0.48
+      '@cogoport/icons': 1.0.49
       react: 18.2.0
     dev: false
 
-  /@cogoport/icons/1.0.48:
-    resolution: {integrity: sha512-yX1TYi8FUybZ4JHrV2ndRMxuZ+9t+SMcHUr1b3oNhH6QI3UQHX9S7AgFy6FADpM3On+stnvh5azyVtP+hyIkaw==}
+  /@cogoport/icons/1.0.49:
+    resolution: {integrity: sha512-iASllNuTJ4XA1eEItvciOkXUUOYCSs2xnkrV1EwwCSrWj2OFwxiUfr6990/bOYrC36uws0AX9nvSqChncFSLWw==}
     dev: false
 
   /@cogoport/stylelint-config/1.0.3_stylelint@14.16.1:
@@ -2737,7 +2737,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001442
+      caniuse-lite: 1.0.30001443
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2856,7 +2856,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001442
+      caniuse-lite: 1.0.30001443
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
       update-browserslist-db: 1.0.10_browserslist@4.21.4
@@ -2892,8 +2892,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001442:
-    resolution: {integrity: sha512-239m03Pqy0hwxYPYR5JwOIxRJfLTWtle9FV8zosfV5pHg+/51uD4nxcUlM8+mWWGfwKtt8lJNHnD3cWw9VZ6ow==}
+  /caniuse-lite/1.0.30001443:
+    resolution: {integrity: sha512-jUo8svymO8+Mkj3qbUbVjR8zv8LUGpGkUM/jKvc9SO2BvjCI980dp9fQbf/dyLs6RascPzgR4nhAKFA4OHeSaA==}
 
   /chalk/2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -3103,17 +3103,6 @@ packages:
     resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
     engines: {node: '>=0.11'}
     dev: false
-
-  /debug/2.6.9:
-    resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.0.0
-    dev: true
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -3384,7 +3373,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-airbnb-base/15.0.0_ol7jqilc3wemtdbq3nzhywgxq4:
+  /eslint-config-airbnb-base/15.0.0_hnftvkj7qg3s6bbigj4pr6djxy:
     resolution: {integrity: sha512-xaX3z4ZZIcFLvh2oUNvcX5oEofXda7giYmuplVxoOg5A7EXJMrUyqRgR+mhDhPK8LZ4PttFOBvCYDbX3sUoUig==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -3393,13 +3382,13 @@ packages:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 8.31.0
-      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
+      eslint-plugin-import: 2.27.4_qdjeohovcytra7xto5vgmxssaq
       object.assign: 4.1.4
       object.entries: 1.1.6
       semver: 6.3.0
     dev: true
 
-  /eslint-config-airbnb-typescript/17.0.0_2zlw3x3sr6whguaqnvgpdh2zra:
+  /eslint-config-airbnb-typescript/17.0.0_wg2eoxotyrorthai2nnacchumy:
     resolution: {integrity: sha512-elNiuzD0kPAPTXjFWg+lE24nMdHMtuxgYoD30OyMD6yrW1AhFZPAg27VX7d3tzOErw+dgJTNWfRSDqEcXb4V0g==}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^5.13.0
@@ -3410,11 +3399,11 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
       '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
       eslint: 8.31.0
-      eslint-config-airbnb-base: 15.0.0_ol7jqilc3wemtdbq3nzhywgxq4
-      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
+      eslint-config-airbnb-base: 15.0.0_hnftvkj7qg3s6bbigj4pr6djxy
+      eslint-plugin-import: 2.27.4_qdjeohovcytra7xto5vgmxssaq
     dev: true
 
-  /eslint-config-airbnb/19.0.4_uxvbcbsmijt6bwfubyr4a75nre:
+  /eslint-config-airbnb/19.0.4_clj2sc35kiuw2ndh55gxznyd44:
     resolution: {integrity: sha512-T75QYQVQX57jiNgpF9r1KegMICE94VYwoFQyMGhrvc+lB8YF2E/M/PYDaQe1AJcWaEgqLE+ErXV1Og/+6Vyzew==}
     engines: {node: ^10.12.0 || ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3425,35 +3414,36 @@ packages:
       eslint-plugin-react-hooks: ^4.3.0
     dependencies:
       eslint: 8.31.0
-      eslint-config-airbnb-base: 15.0.0_ol7jqilc3wemtdbq3nzhywgxq4
-      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
-      eslint-plugin-jsx-a11y: 6.7.0_eslint@8.31.0
+      eslint-config-airbnb-base: 15.0.0_hnftvkj7qg3s6bbigj4pr6djxy
+      eslint-plugin-import: 2.27.4_qdjeohovcytra7xto5vgmxssaq
+      eslint-plugin-jsx-a11y: 6.7.1_eslint@8.31.0
       eslint-plugin-react: 7.32.0_eslint@8.31.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.31.0
       object.assign: 4.1.4
       object.entries: 1.1.6
     dev: true
 
-  /eslint-import-resolver-custom-alias/1.3.0_fkfqfehjtk7sk2efaqbgxsuasa:
+  /eslint-import-resolver-custom-alias/1.3.0_xwyoujhv2zz5pj5vdvbnv64eri:
     resolution: {integrity: sha512-9rrpduF6/SZHFXrJgjeA+edJek6xulplYfo/UJvLPrY38O9UY00rAq76dHRnZ289yftc5NIfx3THi0IILRQ3dg==}
     peerDependencies:
       eslint-plugin-import: '>=2.2.0'
     dependencies:
-      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
+      eslint-plugin-import: 2.27.4_qdjeohovcytra7xto5vgmxssaq
       glob-parent: 5.1.2
       resolve: 1.22.1
     dev: true
 
-  /eslint-import-resolver-node/0.3.6:
-    resolution: {integrity: sha512-0En0w03NRVMn9Uiyn8YRPDKvWjxCWkslUEhGNTdGx15RvPJYQ+lbOlqrlNI2vEAs4pDYK4f/HN2TbDmk5TP0iw==}
+  /eslint-import-resolver-node/0.3.7:
+    resolution: {integrity: sha512-gozW2blMLJCeFpBwugLTGyvVjNoeo1knonXAcatC6bjPBZitotxdWf7Gimr25N4c0AAOo4eOUfaG82IJPDpqCA==}
     dependencies:
       debug: 3.2.7
+      is-core-module: 2.11.0
       resolve: 1.22.1
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /eslint-module-utils/2.7.4_wwvwfwokyq5c63apkeumvsvvgq:
+  /eslint-module-utils/2.7.4_sqt5xxn4ciiurbqrzlaarm6ama:
     resolution: {integrity: sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -3477,7 +3467,7 @@ packages:
       '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
       debug: 3.2.7
       eslint: 8.31.0
-      eslint-import-resolver-node: 0.3.6
+      eslint-import-resolver-node: 0.3.7
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3491,8 +3481,8 @@ packages:
       globals: 11.12.0
     dev: true
 
-  /eslint-plugin-import/2.26.0_qdjeohovcytra7xto5vgmxssaq:
-    resolution: {integrity: sha512-hYfi3FXaM8WPLf4S1cikh/r4IxnO6zrhZbEGz2b660EJRbuxgpDS5gkCuYgGWg2xxh2rBuIr4Pvhve/7c31koA==}
+  /eslint-plugin-import/2.27.4_qdjeohovcytra7xto5vgmxssaq:
+    resolution: {integrity: sha512-Z1jVt1EGKia1X9CnBCkpAOhWy8FgQ7OmJ/IblEkT82yrFU/xJaxwujaTzLWqigewwynRQ9mmHfX9MtAfhxm0sA==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -3504,17 +3494,19 @@ packages:
       '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
       array-includes: 3.1.6
       array.prototype.flat: 1.3.1
-      debug: 2.6.9
+      array.prototype.flatmap: 1.3.1
+      debug: 3.2.7
       doctrine: 2.1.0
       eslint: 8.31.0
-      eslint-import-resolver-node: 0.3.6
-      eslint-module-utils: 2.7.4_wwvwfwokyq5c63apkeumvsvvgq
+      eslint-import-resolver-node: 0.3.7
+      eslint-module-utils: 2.7.4_sqt5xxn4ciiurbqrzlaarm6ama
       has: 1.0.3
       is-core-module: 2.11.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.values: 1.1.6
       resolve: 1.22.1
+      semver: 6.3.0
       tsconfig-paths: 3.14.1
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
@@ -3522,8 +3514,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-jsx-a11y/6.7.0_eslint@8.31.0:
-    resolution: {integrity: sha512-EGGRKhzejSzXKtjmEjWNtr4SK/DkMkSzkBH7g7e7moBDXZXrqaUIxkmD7uF93upMysc4dKYEJwupu7Dff+ShwA==}
+  /eslint-plugin-jsx-a11y/6.7.1_eslint@8.31.0:
+    resolution: {integrity: sha512-63Bog4iIethyo8smBklORknVjB0T2dwB8Mr/hIC+fBS0uyHdYYpzM/Ed+YC8VxTjlXHEWFOdmgwcDn1U2L9VCA==}
     engines: {node: '>=4.0'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -4530,10 +4522,6 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /ms/2.0.0:
-    resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
-    dev: true
-
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -4594,7 +4582,7 @@ packages:
     dependencies:
       '@next/env': 12.3.1
       '@swc/helpers': 0.4.11
-      caniuse-lite: 1.0.30001442
+      caniuse-lite: 1.0.30001443
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -4641,7 +4629,7 @@ packages:
     dependencies:
       '@next/env': 12.3.1
       '@swc/helpers': 0.4.11
-      caniuse-lite: 1.0.30001442
+      caniuse-lite: 1.0.30001443
       postcss: 8.4.14
       react: 18.2.0
       styled-jsx: 5.0.7_react@18.2.0
@@ -4686,7 +4674,7 @@ packages:
     dependencies:
       '@next/env': 13.1.1
       '@swc/helpers': 0.4.14
-      caniuse-lite: 1.0.30001442
+      caniuse-lite: 1.0.30001443
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
