@@ -17,7 +17,6 @@ import Documents from '../All_Invoices/ViewInvoices/ShipmentDetails/Documents'
 import useListShipment from '../hook/useListShipment'
 import Details from '../All_Invoices/ViewInvoices/ShipmentDetails/Details'
 import useUpdateJob from '../hook/useUpdateJob'
-
 const CostSheet = () => {
   const [showButton,setShowButton] = useState(false)
   const Router=useRouter();
@@ -27,32 +26,26 @@ const CostSheet = () => {
   const{tentativeProfit:preTaxActual,quotationalProfit:preTaxExpected}=preTaxData||{}
   const{tentativeProfit:postTaxActual,quotationalProfit:postTaxExpected}=postTaxData||{}
   const {data:shipmentData} = useListShipment(jobNumber);
-  const{total:buyTotal}=buyData||{};
-  const{total:sellTotal}=sellData||{};
-
-
+  const{totalActual:buyTotal}=buyData||{};
+  const{totalActual:sellTotal}=sellData||{};
   const {getData ,getFinalData,FinalLoading, loading} = useUpdateJob({query,setShowButton,showButton})
-
   const handleOperationalClose =(e:any)=>{
     const data = e.target.innerText
     getData(data)
   }
-  
   return (
     <div>
     <div className={styles.flex}>
     <Button size="md" themeType="secondary" onClick={()=>Router.push('/business-finance/coe-finance/[active_tab]/[view]',
     '/business-finance/coe-finance/all_invoices/shipment-view' as never as null)}>Go Back</Button>
     <div className={styles.flexwidth}>
-
-{showButton ? 
+{showButton ?
     <>
     <div>Status - </div>
     <div  className={styles.tag}>Operationally Closed</div>
     <div className={styles.link} onClick={(e)=>handleOperationalClose(e)}>Undo</div> 
     </> : 
     <Button size="md" themeType="primary" disabled={loading} onClick={(e)=>handleOperationalClose(e)}>Operationally Closed</Button>}
-  
     <Button size="md" themeType="primary" disabled={!showButton || FinalLoading } onClick={()=>{getFinalData()}}>Close Financially</Button>
     </div>
     </div>
@@ -67,13 +60,13 @@ const CostSheet = () => {
     <Accordion type="text" title={<span className={styles.label}>Documents <span className={styles.icon}><IcADocumentTemplates/></span></span> as unknown as string} style={{ backgroundColor:"#FFFFFF", 
     borderRadius:'8px', margin:"25px 0px",
     }}>
-			<Documents  shipmentId={shipment_id}/>
-		</Accordion>
+            <Documents  shipmentId={shipment_id}/>
+        </Accordion>
     <Accordion type="text" title={<span className={styles.details}>Shipment Details <div className={styles.shipmentag}>Export</div></span> as unknown as string} style={{ backgroundColor:"#FFFFFF", 
     borderRadius:'8px', margin:"25px 0px",
   }}>
-			<Details orgId={orgId} dataList={shipmentData?.list?.[0]} shipmentId={shipment_id}/>
-		</Accordion>
+            <Details orgId={orgId} dataList={shipmentData?.list?.[0]} shipmentId={shipment_id}/>
+        </Accordion>
     <div className={styles.heading}>Cost Sheet</div>
     <Line width="60px" color='#F68B21' margin='5px 0px 0px 0px'/>
     <div className={styles.flexresponsive}>
@@ -97,5 +90,4 @@ const CostSheet = () => {
     </div>
   )
 }
-
 export default CostSheet

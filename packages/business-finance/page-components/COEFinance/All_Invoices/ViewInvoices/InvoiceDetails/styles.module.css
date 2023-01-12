@@ -1,60 +1,73 @@
 .smallHr {
-	width: 5%;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
+  width: 5%;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	padding: 8px 16px;
-	margin: 12px 0;
-	background: #fff;
-	border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 12px 0px;
 }
 
 .verticalSmallHr {
-	width: 2px;
-	height: 36px;
-	margin-right: 36px;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
+  width: 2px;
+  height: 36px;
 }
 
-.cardField {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+.cardFieldFirst {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 27%;
+}
+
+.cardFieldSecond {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46%;
+}
+.cardFieldThird {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26%;
 }
 
 .amount {
-	font-weight: 700;
-	color: #f68b21;
+  font-weight: 700;
+  color: #f68b21;
 }
 
 .tag {
-	font-weight: 600;
-	color: red;
+  font-weight: 600;
+  color: red;
 }
 
 .flexdiv {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .buttonContainer {
-	display: flex;
-	justify-content: space-between;
-	width: 140px;
-	margin-left: 8px;
+  display: flex;
+  justify-content: space-between;
+  width: 210px;
+  margin-left: 10px;
+  gap: 4px;
 }
 
 .remarks {
-	font-weight: 600;
+  font-weight: 600;
 }

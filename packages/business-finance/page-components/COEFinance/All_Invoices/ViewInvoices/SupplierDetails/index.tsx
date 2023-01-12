@@ -1,15 +1,17 @@
-import React, { useState }  from "react";
-import { Pill } from "@cogoport/components";
-import {IcCFtick} from '@cogoport/icons-react';
+import React, { useEffect, useState }  from "react";
+import { Pill, Placeholder, Tooltip } from "@cogoport/components";
+import {IcADocumentTemplates, IcCFtick, IcMInfo} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import { Modal } from "@cogoport/components";
 import config from '../../../configurations/SUPPLIER_HISTORY';
 import List from "../../../../commons/List/index";
 import useSupplierHistory from '../../../hook/useSupplierHistory'
+import showOverflowingNumber from "../../../../commons/showOverflowingNumber";
+
 interface SellerDetail {
     organizationName?:string
-
 }
+
 interface AdditionDetailInt{
     kycStatus?:string
 }
@@ -41,7 +43,7 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
 
     const handleChange = () =>{
         setShowModal(!showModal) 
-         getSupplierHistory()
+        getSupplierHistory()
     }
     
     return(
@@ -53,9 +55,15 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
 
             <div className={styles.card}>
                 <div className={styles.orgNameAndVerified}>
-                    <div>Name - <span className={styles.textDecoration}>{sellerDetail?.organizationName}</span></div>
+                    <div className={styles.flex}>Name -
+                         {!accPaymentLoading ? <span className={styles.organizationName}>{sellerDetail?.organizationName}</span>
+                         :   <div >
+                               <Placeholder height="20px" width="148px"/>
+                             </div> 
+                        }
+                         </div>
                     <div className={styles.tagsContainer}>
-                        <Pill color="blue" size="sm">{serviceProviderCategory}</Pill>
+                      {serviceProviderCategory &&  <Pill color="blue" size="sm">{serviceProviderCategory}</Pill>}
                         {kycStatus==="verified" && <div className={styles.kycVerified}><IcCFtick/><div>kyc verified</div></div>}
                     </div>      
                 </div>
@@ -63,8 +71,38 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                 <div className={styles.verticalSmallHr}/>
 
                 <div className={styles.accountDetails}>
-                    <div className={styles.accounts}>Amount Payables : <div className={styles.textDecoration}>{ledgerCurrency} {payables}</div></div>  
-                    <div className={styles.accounts}>Amount Receivables : <div className={styles.textDecoration}>{ledgerCurrency} {receivables}</div></div>  
+                    <div className={styles.accounts}>
+                        <Tooltip content="description here...">
+                        <div className={styles.tooltip}>
+                        <IcMInfo/>
+                        </div>
+                        </Tooltip>
+                         &nbsp; Amount Payables : &nbsp; <div className={styles.textDecoration}>
+                            {!accPaymentLoading ? <div className={styles.values}>
+                             {ledgerCurrency} &nbsp;  {showOverflowingNumber(payables || '-',7)}
+                             </div>:
+                                 <div>
+                                     <Placeholder height="20px" width="100px"/>
+                                 </div>
+                                 }
+                             </div>
+                    </div>  
+                    <div className={styles.accounts}>
+                        <Tooltip content="description here...">
+                        <div className={styles.tooltip}>
+                        <IcMInfo/>
+                        </div>
+                        </Tooltip>
+                         &nbsp; Amount Receivables : &nbsp; <div className={styles.textDecoration}>
+                           {!accPaymentLoading ? <div className={styles.values}>
+                             {ledgerCurrency} &nbsp; {showOverflowingNumber(receivables || '-',7)}
+                             </div>:
+                                 <div>
+                                     <Placeholder height="20px" width="100px"/>
+                                 </div>
+                                 }
+                         </div>
+                    </div>  
                 </div>
 
                 <div className={styles.verticalSmallHr}/>
@@ -75,12 +113,15 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                     <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
                         <Modal.Header title="SUPPLIER HISTORY" />
                         <Modal.Body>
-                            <List config={config} itemData={{list:historyData}}  loading={loading} />
+                            {historyData ? <List config={config} itemData={{list:historyData}}  loading={loading} /> : <div className={styles.supplyCard}>NO HISTORY</div>}
                             
                         </Modal.Body>
                     </Modal> 
                     }
-                    <div>Documents</div> 
+                    <div className={styles.docsContainer}>
+                        <div className={styles.docsIcon}><IcADocumentTemplates/></div>
+                        <div>Documents</div>
+                    </div> 
                 </div>
             </div>
           

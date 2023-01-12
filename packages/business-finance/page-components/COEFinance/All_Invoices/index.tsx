@@ -32,8 +32,8 @@ const AllInvoices = () => {
                         <div
                             className={
                                 isPurchase
-                                    ? styles.subContainerClick
-                                    : styles.subContainer
+                                    ? styles.sub_container_click
+                                    : styles.sub_container
                             }
                         >
                             {" "}

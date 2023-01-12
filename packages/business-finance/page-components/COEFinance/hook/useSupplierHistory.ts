@@ -1,7 +1,9 @@
 import { useRequestBf} from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 const useSupplierHistory = ({data}) => {
-	const { job }  = data || {}
+	
+	const {serviceProviderDetail} = data
+	
 	
 	const [{ data:historyData, loading }, trigger] = useRequestBf(
 		{
@@ -14,11 +16,11 @@ const useSupplierHistory = ({data}) => {
 		try {
 			await trigger({
 				params:{
-					id:job?.id,
+					id:serviceProviderDetail?.organizationId,
 				}
 			});
 		} catch (err) {
-			Toast.error('INVOICE DETAILS DOES NOT EXIST');
+			Toast.error('SUPPLIER HISTORY DOES NOT EXIST');
 		}
 	};
 

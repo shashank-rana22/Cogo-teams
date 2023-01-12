@@ -167,34 +167,34 @@ return(
                                             <div>
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Name</div>
+                                                   <div style={{marginBottom:'8px'}}>Name - <span>{organizationName}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Bank Name </div>
-                                                </div>
-
-
-                                                <div style={{display:'flex',alignItems:'center'}}>
-                                                   <Checkbox/>
-                                                   <div>Account Number </div>
-                                                </div>
-
-                                                <div style={{display:'flex',alignItems:'center'}}>
-                                                   <Checkbox/>
-                                                   <div>IFSC</div>
+                                                   <div style={{marginBottom:'8px'}}> Bank Name - <span>{bankName}</span></div>
                                                 </div>
 
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>PAN Number</div>
+                                                   <div style={{marginBottom:'8px'}}> Account Number - <span style={{color:"#ed3726"}} >{accountNumber}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>GST Number </div>
+                                                   <div style={{marginBottom:'8px'}}> IFSC - <span style={{color:"#ed3726"}}>{ifscCode}</span></div>
+                                                </div>
+
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div style={{marginBottom:'8px'}}>PAN Number - <span>{registrationNumber}</span></div>
+                                                </div>
+
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                   <Checkbox/>
+                                                   <div style={{marginBottom:'8px'}}>GST Number - <span>{taxNumber}</span></div>
                                                 </div>
                                                  
                                                 <Textarea
@@ -214,22 +214,22 @@ return(
                                             <div>
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Entity</div>
+                                                   <div style={{marginBottom:'8px'}}>Entity - <span style={{fontWeight:'600'}}>{entityCode}</span> - <span style={{fontWeight:'600'}}>{organizationNameBuyer}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Address</div>
+                                                   <div style={{marginBottom:'8px'}}>Address - <span>{address}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>PAN Number </div>
+                                                   <div style={{marginBottom:'8px'}}>PAN Number - <span>{registrationNumberBuyer}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>GST Number</div>
+                                                   <div style={{marginBottom:'8px'}}>GST Number - <span>{taxNumberBuyer}</span></div>
                                                 </div>
 
                                                 <Textarea
@@ -245,22 +245,22 @@ return(
                                     <div>
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Invoice Number</div>
+                                                   <div style={{marginBottom:'8px'}}>Invoice Number - <span>{billNumber}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Invoice Date</div>
+                                                   <div style={{marginBottom:'8px'}}>Invoice Date - <span>{billDate}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Status</div>
+                                                   <div style={{marginBottom:'8px'}}>Status - <span>{status}</span></div>
                                                 </div>
 
                                                 <div style={{display:'flex',alignItems:'center'}}>
                                                    <Checkbox/>
-                                                   <div>Place Of Supply</div>
+                                                   <div style={{marginBottom:'8px'}}>Place Of Supply - <span>{placeOfSupply}</span></div>
                                                 </div>
 
                                             <Textarea 

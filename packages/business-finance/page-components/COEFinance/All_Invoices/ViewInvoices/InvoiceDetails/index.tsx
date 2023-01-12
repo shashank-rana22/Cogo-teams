@@ -38,6 +38,7 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
     const {grandTotal} = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
+	const [tagValue, setTagValue] = useState('');
 
     if (data?.serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
@@ -74,11 +75,11 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 			</div >
 
 			<div className={styles.buttonContainer}>
-				<Button themeType="secondary" size="xs" onClick={() => setRemoveTag(true)}>
+				<Button themeType="secondary" size="sm" onClick={() => setRemoveTag(true)}>
 					Remove Tag
 				</Button>
 
-				<Button themeType="secondary"  size="xs" onClick={() => setShowAddTag(true)}>
+				<Button themeType="secondary"  size="sm" onClick={() => setShowAddTag(true)}>
 					Edit Tag
 				</Button>
 			</div>
@@ -88,11 +89,14 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
     const renderEmpty = (
 		<div className={styles.flexdiv}>
 			<div>No Urgency Tag &nbsp;</div>
-			<Button className="secondary sl" onClick={() => setShowAddTag(true)}>
+			<Button themeType="secondary" size="sm"  onClick={() => setShowAddTag(true)}>
 				Add Tag
 			</Button>
 		</div>
 	);
+	
+	console.log(tagValue,"tagValue");
+	
 
     return(
         <div className={styles.container}> 
@@ -103,6 +107,8 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 					billId={data?.bill?.id}
 					serviceType={data?.serviceType}
 					showAddTag={showAddTag}
+					tagValue={tagValue}
+					setTagValue={setTagValue}
 					getBillRefetch={getBillRefetch}
 					setShowAddTag={setShowAddTag}
 					collectionPartyId={collectionPartyId}
@@ -110,9 +116,9 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 			) : null}
         <div className={styles.smallHr} />
         <div className={styles.card} >
-            <div className={styles.cardField}>Invoice Amount - &nbsp; <span className={styles.amount}>INR {grandTotal}</span></div>
+            <div className={styles.cardFieldFirst}>Invoice Amount - &nbsp; <span className={styles.amount}>INR {grandTotal}</span></div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>
+            <div className={styles.cardFieldSecond}>
                 Tag - &nbsp; <span className={styles.tag}>
                 {data?.billAdditionalObject?.urgencyTag
 				? renderEditTag
@@ -120,7 +126,7 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
                 </span>
                 </div>
             <div className={styles.verticalSmallHr}/>
-            <div className={styles.cardField}>Remarks - <span className={styles.remarks}>{remarks?.[0]?.remarks || 'No Remarks'}</span></div>
+            <div className={styles.cardFieldThird}>Remarks - <span className={styles.remarks}>{remarks?.[0]?.remarks || 'No Remarks'}</span></div>
         </div>
 
         {removeTag ? (
