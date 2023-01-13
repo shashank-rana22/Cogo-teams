@@ -167,9 +167,8 @@ function Navigation(props) {
 					</div>
 				</div>
 			</div>
-			{/* <AnimatedContainer type={show ? 'enter' : 'exit'}> */}
 			<Modal
-				size="lg"
+				size="xl"
 				show={!!show}
 				onClose={() => setShow(null)}
 			>
@@ -223,7 +222,6 @@ function Navigation(props) {
 					</div>
 				</Modal.Footer>
 			</Modal>
-			{/* </AnimatedContainer> */}
 			<ChangeStatus
 				type={showStatus}
 				show={!!showStatus}
