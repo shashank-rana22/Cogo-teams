@@ -35,10 +35,16 @@ const CoeFinance = () => {
 
     return (
         <div>
-            <div>
-                <h1>COE Finance</h1>
+            <div className={styles.heading}>
+                <h1 className={styles.heading}>COE Finance</h1>
             </div>
-            <Tabs activeTab={activeTab} onChange={setActiveTab}>
+            <Tabs
+                activeTab={activeTab}
+                onChange={setActiveTab}
+                fullWidth
+                themeType="primary"
+                className={styles.tab}
+            >
                 <TabPanel
                     className={styles.tab_panel_dashboard}
                     name="dashboard"
@@ -134,4 +140,3 @@ const CoeFinance = () => {
 };
 
 export default CoeFinance;
-
