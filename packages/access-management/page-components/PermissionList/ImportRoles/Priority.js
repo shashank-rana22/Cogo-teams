@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
+import { IcMDrag } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
-
-import { Li, Ul, SubHeading } from './styles';
 
 function Priority({ value, options, setPriority = () => {} }) {
 	const dragStartHandler = (ev) => {
@@ -49,27 +48,27 @@ function Priority({ value, options, setPriority = () => {} }) {
 	}, [value]);
 	return (
 		<>
-			<SubHeading>1. Drag and drop to set priority.</SubHeading>
-			<SubHeading>
+			<h3>1. Drag and drop to set priority.</h3>
+			<h3>
 				2. Ranking will prioritize the preset configuration incase of a
 				conflict.
-			</SubHeading>
-			<Ul id="target">
+			</h3>
+			<ul id="target">
 				{value.map((singleValue, i) => (
-					<Li
+					<li
 						onDrop={dropHandler}
 						onDragOver={dragoverHandler}
 						id={singleValue}
 						key={singleValue}
 						draggable
 					>
-						<IcDrag size={1.75} style={{ marginRight: 16 }} />
+						<IcMDrag style={{ marginRight: 16 }} />
 						{i + 1}
 						.
 						{options.find((option) => option.id === singleValue)?.name}
-					</Li>
+					</li>
 				))}
-			</Ul>
+			</ul>
 		</>
 	);
 }

@@ -39,4 +39,17 @@ function asyncFieldsPartner() {
 		},
 	};
 }
-export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner };
+
+function asyncFieldsPartnerRoles() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_auth_roles',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsPartnerRoles };

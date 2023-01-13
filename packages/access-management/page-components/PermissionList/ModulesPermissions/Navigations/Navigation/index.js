@@ -129,6 +129,11 @@ function Navigation(props) {
 		btnText = 'NEXT';
 	}
 
+	if (roleData?.isImported) {
+		buttonText = 'Allow Navigation';
+		background = 'primary';
+	}
+
 	return (
 		<section className={`${styles.wrapper} ${isNested ? styles.nested : ''}`}>
 			<div className={isNested ? styles.arrow_nested : ''} />
