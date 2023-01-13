@@ -36,8 +36,7 @@ const AllInvoices = () => {
                                     : styles.sub_container
                             }
                         >
-                            {" "}
-                            PURCHASE INVOICE VIEW{" "}
+                            PURCHASE INVOICE VIEW
                         </div>
                     </div>
                     <div
@@ -48,8 +47,8 @@ const AllInvoices = () => {
                         <div
                             className={
                                 !isPurchase
-                                    ? styles.subContainerClick
-                                    : styles.subContainer
+                                    ? styles.sub_container_click
+                                    : styles.sub_container
                             }
                         >
                             SHIPMENT ID VIEW

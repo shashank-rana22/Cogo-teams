@@ -1,44 +1,41 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 
-import SegmentedControl from '../../../../commons/SegmentedControl/index';
+import SegmentedControl from "../../../../commons/SegmentedControl/index";
 
-import styled from './styles.module.css'
+import styled from "./styles.module.css";
 
-import { FILTERS_URGENT_DATA} from '../../../constants/purchase-list-filters'
+import { FILTERS_URGENT_DATA } from "../../../constants/purchase-list-filters";
 
-import FILTERS_DATA from '../../../constants/purchase-list-filters';
+import FILTERS_DATA from "../../../constants/purchase-list-filters";
 
-import {Input} from "@cogoport/components";
+import { Input } from "@cogoport/components";
 
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchdark } from "@cogoport/icons-react";
 
 import FilterModal from "../../../Components/FilterModal/index";
 
-import useShipmentIdView from '../../../hook/useShipmentIdView'
+import useShipmentIdView from "../../../hook/useShipmentIdView";
 
-import { GenericObject} from '../../../../commons/Interfaces/index'
+import { GenericObject } from "../../../../commons/Interfaces/index";
+import Filter from "../../../../commons/Filters";
+import controls from "./controls";
 
+interface segmentFilterProps {
+    setSearchValue: any;
 
+    searchValue: string;
 
-interface segmentFilterProps{
+    currentTab: string;
 
-    setSearchValue: any
+    setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 
-    searchValue: string 
+    filters: GenericObject;
 
-    currentTab: string
-
-    setCurrentTab: React.Dispatch<React.SetStateAction<string>>
-
-    filters:GenericObject;
-
-    setFilters: (p: object) => void
-
+    setFilters: (p: object) => void;
 }
 
-
-
-function SegmentedFilters({setCurrentTab,
+function SegmentedFilters({
+    setCurrentTab,
 
     currentTab,
 
@@ -48,101 +45,57 @@ function SegmentedFilters({setCurrentTab,
 
     filters,
 
-    setFilters}:segmentFilterProps) {  
+    setFilters,
+}: segmentFilterProps) {
+    const { statsData }: any = useShipmentIdView();
 
-    
-
-    const{statsData}:any = useShipmentIdView();
-
- 
-
-  return (
-
-      <div className={styled.main}>
-
+    return (
+        <div className={styled.main}>
             <div className={styled.segment}>
-
                 <div className={styled.filterData}>
-
-                 <SegmentedControl
-
-                    options={FILTERS_DATA(statsData)}
-
-                    activeTab={currentTab}
-
-                    setActiveTab={setCurrentTab}
-
-                    color={"#ED3726"}
-
-                    background={"#FFFAEB"}
-
+                    <SegmentedControl
+                        options={FILTERS_DATA(statsData)}
+                        activeTab={currentTab}
+                        setActiveTab={setCurrentTab}
+                        color={"#ED3726"}
+                        background={"#FFFAEB"}
                     />
-
                 </div>
 
-                <div className={styled.filterDataUrgent} >
-
+                <div className={styled.filterDataUrgent}>
                     <SegmentedControl
-
-                    options={FILTERS_URGENT_DATA}
-
-                    activeTab={currentTab}
-
-                    setActiveTab={setCurrentTab}
-
-                    color={"#ED3726"}
-
-                    background={"#FFFAEB"}
-
+                        options={FILTERS_URGENT_DATA}
+                        activeTab={currentTab}
+                        setActiveTab={setCurrentTab}
+                        color={"#ED3726"}
+                        background={"#FFFAEB"}
                     />
-
-                 </div>
-
+                </div>
+                <div className={styled.urgency}>
+                    <Filter
+                        controls={controls}
+                        filters={filters}
+                        setFilters={setFilters}
+                    />
+                </div>
             </div>
 
             <div className={styled.searchFilter}>
+                <div className={styled.search}>
+                    <Input
+                        name="q"
+                        size="sm"
+                        value={searchValue}
+                        onChange={(e: any) => setSearchValue(e)}
+                        placeholder="Search by Invoice No./Shipment ID/Supplier name..."
+                        suffix={<IcMSearchdark height={15} width={15} />}
+                    />
+                </div>
 
-            <div className={styled.search}>
-
-                <Input
-
-                    name="q"
-
-                    size="sm"
-
-                    value={searchValue}
-
-                    onChange={(e:any) => setSearchValue(e)}
-
-                    placeholder="Search by Invoice No./Shipment ID/Supplier name..."
-
-                    suffix={(
-
-                        <IcMSearchdark
-
-                            height={15}
-
-                            width={15}
-
-                        />
-
-                    )}
-
-                />
-
+                <FilterModal setFilters={setFilters} filters={filters} />
             </div>
-
-            <FilterModal setFilters={setFilters} filters={filters}/>
-
-            </div>
-
-  </div>
-
-  )
-
+        </div>
+    );
 }
 
-
-
 export default SegmentedFilters;
-

@@ -5,14 +5,15 @@ import { Tooltip } from "@cogoport/components";
 import styled from "./styles.module.css";
 import getFormattedPrice from "../../../../../commons/utils/getFormattedPrice";
 import { formatDate } from "../../../../../commons/utils/formatDate";
+import showOverflowingNumber from "../../../../../commons/showOverflowingNumber";
 
 interface itemProps {
     createdDate: Date;
     billDate: Date;
     dueDate: Date;
-    billCurrency: string;
-    subTotal: number;
-    grandTotal: number;
+    billCurrency?: string;
+    subTotal?: number;
+    grandTotal?: number;
 }
 interface Props {
     item: itemProps;
@@ -36,18 +37,19 @@ function FormatedDate({ item, field }: Props) {
             <div className={styled.preTax}>
                 Pre Tax :
                 <text className={styled.preTaxAmount}>
-                    {getFormattedPrice(item?.subTotal, item?.billCurrency)}
+                    {getFormattedPrice(item.subTotal!, item.billCurrency!)}
                 </text>
             </div>
             <div className={styled.postTax}>
                 Post Tax:
                 <text className={styled.postTaxAmount}>
-                    {getFormattedPrice(item?.grandTotal, item?.billCurrency)}
+                    {getFormattedPrice(item.grandTotal!, item.billCurrency!)}
                 </text>
             </div>
         </>
     );
-
+    const formatAmount =
+        getFormattedPrice(item.grandTotal!, item.billCurrency!) || "";
     return (
         <div>
             {field?.key === "createdDate" && <div>{getCreatedDate}</div>}
@@ -55,12 +57,7 @@ function FormatedDate({ item, field }: Props) {
             {field?.key === "dueDate" && <div>{getDueDate}</div>}
             {field?.key === "grandTotal" && (
                 <div className={styled.invoiceAmount}>
-                    <text>
-                        {getFormattedPrice(
-                            item?.grandTotal,
-                            item?.billCurrency
-                        )}
-                    </text>
+                    <text>{showOverflowingNumber(formatAmount, 12)}</text>
 
                     <Tooltip placement="top" content={content}>
                         <div className={styled.IcMinIcon}>

@@ -46,10 +46,22 @@
     padding: 80px 80px 0 60px;
 }
 
-.tab {
-    /* background: #ffffff; */
+.tabStyle {
+    font-weight: 500;
+    font-size: 16px;
+    background: white;
 }
-.heading {
-    border-bottom: 4px solid #ed3726;
-    border-radius: 2px;
+.headerStyle {
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 28px;
+}
+.border {
+    border-radius: 4px;
+    height: 4px;
+    width: 96px;
+    background: #ed3726;
+}
+.header {
+    padding-bottom: 16px;
 }
