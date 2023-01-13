@@ -17,7 +17,7 @@ function Footer({ statsData, index }) {
 
 	return (
 		<div className={styles.footer}>
-			<div className={styles.sub_container}>
+			<div className={styles.agent}>
 				<div className={styles.label}>Overseas Agent</div>
 				<div className={styles.value}>
 					{statsData?.port_pairs_data[index]?.overseas_agent?.short_name
