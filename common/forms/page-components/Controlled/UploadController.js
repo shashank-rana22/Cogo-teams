@@ -8,8 +8,6 @@ function UploadController(props) {
 		name, control, rules, ...rest
 	} = props;
 
-	console.log(rest,"values")
-
 	return (
 		<Controller
 			key={name}

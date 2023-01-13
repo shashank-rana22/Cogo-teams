@@ -45,7 +45,6 @@ function Item(props) {
 			<Element
 				{...props}
 				control={control}
-				style={{height: '42px'}}
 			/>
 			<p style={{
 				fontStyle     : 'normal',
