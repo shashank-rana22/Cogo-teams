@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import useUpdateTag from '../../../../hook/useUpdateTag';
@@ -21,11 +21,12 @@ const RemoveTagConfirmation = ({
 		getBillRefetch();
 	};
 
-	const { loading, handleSubmit } = useUpdateTag({
+	const { loading, handleSubmit, data } = useUpdateTag({
 		onClose,
 		billId,
 		collectionPartyId,
 	});
+
 
 	return (
 		<div>

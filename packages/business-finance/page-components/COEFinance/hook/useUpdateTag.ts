@@ -40,7 +40,7 @@ const useUpdateTag = ({
 						urgencyRemarks: remarks || undefined,
 					},
 				});
-		 
+				onClose();
 				// if (!response?.hasError) {
 				// 		const finalRes = await CollectionPartyTrigger({
 				// 			data: {
@@ -67,9 +67,12 @@ const useUpdateTag = ({
 		}
 	};
 
+	
+
 	return {
 		loading,
 		handleSubmit,
+		data,
 	};
 };
 
