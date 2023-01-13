@@ -5,48 +5,11 @@ import LineItemCard from "./lineItemCard/index";
 import styles from './styles.module.css'
 import { Modal, Textarea ,Checkbox} from '@cogoport/components'
 import {RemarksValInterface} from '../../../../../commons/Interfaces/index'
+import { DataInterface } from "..";
 
-interface BuyerDetailInterface {
-    entityCode?:string
-    organizationName?:string
-    address?:string
-    registrationNumber?:string
-    taxNumber?:string
-}
-
-interface SellerDetailInterface {
-    organizationName?:string
-    registrationNumber?:string
-    taxNumber?:string
-}
-
-interface SellerBankDetailInterface {
-    bankName?:string
-    accountNumber?:string
-    ifscCode?:string
-}
-
-interface BillInterface {
-    billNumber?:string
-    billDate?:string
-    status?:string
-    placeOfSupply?:string
-    taxTotal: any,
-    billCurrency:string,
-    grandTotal:any,
-    subTotal:string|number
-}
-
-interface DataInterface {
-    lineItems?:Array<object>
-    buyerDetail?:BuyerDetailInterface
-    sellerBankDetail?:SellerBankDetailInterface
-    sellerDetail?:SellerDetailInterface
-    bill?:BillInterface
-}
 
 interface ShipmentDetailsCardInterface{
-    data?:DataInterface
+    data:DataInterface
     remarksVal:RemarksValInterface
     setRemarksVal:any
     lineItemsRemarks:object 

@@ -14,6 +14,38 @@ import VarianceView from "./VarianceView/index";
 import {RemarksValInterface} from '../../../../commons/Interfaces/index'
 import TimeLineItemCheck from "./TimelineItemCheck/index";
 
+interface BuyerDetailInterface {
+    entityCode?:string
+    organizationName?:string
+    address?:string
+    registrationNumber?:string
+    taxNumber?:string
+}
+
+interface SellerDetailInterface {
+    organizationName?:string
+    registrationNumber?:string
+    taxNumber?:string
+}
+
+interface SellerBankDetailInterface {
+    bankName?:string
+    accountNumber?:string
+    ifscCode?:string
+}
+
+interface BillInterface {
+    id?:string
+    billDocumentUrl?:string
+    billNumber?:string
+    billDate?:string
+    status?:string
+    placeOfSupply?:string
+    taxTotal: any,
+    billCurrency:string,
+    grandTotal:any,
+    subTotal:string|number
+}
 interface JobInterface {
     jobNumber:string
 
@@ -22,10 +54,14 @@ interface JobInterface {
 interface BillAdditionalObjectInterface {
     collectionPartyId:string
 }
-interface DataInterface {
+export interface DataInterface {
     job?:JobInterface
-    bill?:object
+    lineItems:Array<object>
     billAdditionalObject?: BillAdditionalObjectInterface
+    buyerDetail?:BuyerDetailInterface
+    sellerBankDetail?:SellerBankDetailInterface
+    sellerDetail?:SellerDetailInterface
+    bill?:BillInterface
 }
 
 interface ShipmentDetailsInterface {
@@ -130,7 +166,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
                 <PdfDisplay data={data}/>
             </div>
             <div className={styles.shipmentDetailsCard}>
-                <ShipmentDetailsCard 
+            <ShipmentDetailsCard 
                 data={data} 
                 remarksVal={remarksVal} 
                 setRemarksVal={setRemarksVal} 

@@ -1,11 +1,7 @@
 import React from "react";
+import { DataInterface } from "..";
 
-interface BillInterface{
-    billDocumentUrl?:string
-}
-interface DataInterface {
-    bill?:BillInterface
-}
+
 interface Props {
     data?:DataInterface
 }
