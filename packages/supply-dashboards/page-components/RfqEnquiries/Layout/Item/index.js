@@ -30,21 +30,21 @@ function Item(props) {
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%`, padding: '4px' }}>
-			<div style={{
+			{heading && <div style={{
 				height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
 			}}
 			>
 				{heading}
-			</div>
-			<h4 style={{
+			</div>}
+			<h4  style={{
 				height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
 			}}
 			>
 				{label}
 			</h4>
 			<Element
-				control={control}
 				{...props}
+				control={control}
 			/>
 			<p style={{
 				fontStyle     : 'normal',

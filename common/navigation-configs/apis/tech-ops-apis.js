@@ -1,0 +1,158 @@
+const apis = [
+	{
+		api          : 'list_shipment_additional_services',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api         : 'list_organizations',
+		access_type : 'private',
+		feature     : 'tech_ops',
+	},
+	{
+		api          : 'update_shipment_additional_service',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_fcl_freight_rate_task',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_air_freight_rate_task',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_fcl_freight_rate_tasks',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_air_freight_rate_tasks',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_fcl_freight_rate_stats',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_fcl_freight_rate_local',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_all_exchange_rates',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'exchange_rate',
+	},
+	{
+		api          : 'list_fcl_freight_rate_local_requests',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'delete_fcl_freight_rate_local_request',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'create_fcl_freight_rate_local',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'missing_rates',
+	},
+	{
+		api         : 'list_rate_charge_codes',
+		access_type : 'private',
+		feature     : 'missing_rates',
+	},
+	{
+		api          : 'list_haulage_freight_rate_requests',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'delete_haulage_freight_rate_request',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'create_haulage_freight_rate',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'get_haulage_freight_rate_visibility',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'get_haulage_freight_rate',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'list_subsidiary_service_rate_request',
+		access_type  : 'private',
+		service_name : 'subsidiary_service_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'delete_subsidiary_service_rate_request',
+		access_type  : 'private',
+		service_name : 'subsidiary_service_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'create_subsidiary_service_rate',
+		access_type  : 'private',
+		service_name : 'subsidiary_service_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'list_air_freight_rate_local_requests',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+		feature      : 'missing_rates',
+	},
+	{
+		api          : 'get_air_freight_rate_stats',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_air_freight_rate_local',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+];
+
+export default apis;

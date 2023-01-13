@@ -69,7 +69,7 @@ function FilterStats({ filters, hookSetters }) {
 		<div className={styles.filter}>
 			<div className={styles.heading}>RFQ Status</div>
 			<div>
-				<Tabs activeTab={filters.type} onChange={onTabChange}>
+				<Tabs size="lg" fullWidth activeTab={filters.type} onChange={onTabChange}>
 					<TabPanel name="processing" title="Running" />
 					<TabPanel name="draft" title="Archive" />
 				</Tabs>

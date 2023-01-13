@@ -573,5 +573,4 @@ const rms = [
 		service_name : 'fcl_freight_rate',
 	},
 ];
-
 export default rms;

@@ -29,12 +29,12 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 				setView('priority');
 			} else {
 				const [firstRoleId] = formValues?.role_ids || [];
-				const permissions =					options.find((role) => role.id === firstRoleId)?.permissions || [];
+				const permissions =	options.find((role) => role.id === firstRoleId)?.permissions || [];
 				onSubmit(permissions);
 			}
 		} else {
 			const [firstRoleId, ...rest] = formValues?.role_ids || [];
-			const permissions =				options.find((role) => role.id === firstRoleId)?.permissions || [];
+			const permissions =	options.find((role) => role.id === firstRoleId)?.permissions || [];
 			const takenPermissions = Object.keys(hashedOptions[firstRoleId]);
 			rest.forEach((id) => {
 				const hashedRole = hashedOptions[id] || {};

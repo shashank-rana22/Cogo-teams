@@ -46,20 +46,17 @@ const columns = [
 		flex: 2,
 	},
 	{
-		label  : '',
-		key    : 'edit',
-		flex   : 3,
-		render : (item) => (
-			<div className="card-list-item-value">
-				{item.expiring_in ? (
-					<Pill color="blue" style={{ margin: '0px', paddingTop: '0px', paddingBottom: '0px' }}>
-						{item?.expiring_in}
-						{' '}
-						Days
-					</Pill>
-				) : '-'}
-			</div>
-		),
+		label  : 'Created  At',
+		key    : 'created_at',
+		render : (item) => {
+			const formatDate = format(item.created_at, 'dd MMM yy | hh:mm a');
+			return (
+				<div className="card-list-item-value">
+					{formatDate}
+				</div>
+			);
+		},
+		flex: 2,
 	},
 ];
 
