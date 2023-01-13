@@ -1,6 +1,9 @@
 import { Button } from "@cogoport/components";
 import React, { useEffect, useState } from "react";
-import styles from './styles.module.css'
+import { startCase } from '@cogoport/utils';
+import converter from 'number-to-words';
+import styles from './styles.module.css';
+import getFormattedPrice from "../../../../../../commons/utils/getFormattedPrice";
 import { LINE_ITEMS ,LINE_ITEMS_CHECK} from "../../../../../configurations/LINE_ITEMS";
 import List from "../../../../../../commons/List/index";
 import { IcCFtick ,IcMOverflowDot,IcCFcrossInCircle} from "@cogoport/icons-react";
@@ -9,6 +12,12 @@ import { Textarea } from "@cogoport/components";
 
 interface LineItemCard {
     lineItems:Array<object>
+    bill:{
+        taxTotal: any,
+         billCurrency:string,
+         grandTotal:any,
+         subTotal:string|number
+        }
     setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>
     setRemarksVal:any,
     lineItemsRemarks:object 
@@ -18,7 +27,7 @@ interface LineItemCard {
     isInvoiceApproved:boolean
 }
 
-const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineItemsRemarks,setLineItemsRemarks, remarksVal,setLineItem, isInvoiceApproved}:LineItemCard) => {
+const LineItemCard = ({ lineItems, bill , setShowLineItem=()=>{}, setRemarksVal,lineItemsRemarks,setLineItemsRemarks, remarksVal,setLineItem, isInvoiceApproved}:LineItemCard) => {
     const [approvedItems , setApprovedItems ] = useState({})
     const [popover, setPopover] = useState(false);
     const [rejectedItems, setRejectedItems]=useState({});
@@ -142,18 +151,33 @@ const LineItemCard = ({ lineItems , setShowLineItem=()=>{}, setRemarksVal,lineIt
                     <div className={styles.info}>R: Reverse Charge</div>
                  </div>
 
-                 <div className={styles.amount}>[value]</div>
-                 <div className={styles.amountRight}>[value]</div>
+                 <div className={styles.amount}>
+                     <div className={styles.border}>
+                    {getFormattedPrice(
+                            bill?.taxTotal || "0",
+                            bill?.billCurrency || "INR"
+                        )}
+                        </div>
+                 </div>
+                 <div className={styles.amountRight}>
+                 <div className={styles.borderRight}>
+                 {getFormattedPrice(
+                            bill?.grandTotal || "0",
+                            bill?.billCurrency || "INR"
+                        )}
+                        </div>
+                 </div>
                  </div>
 
                  <div className={styles.flex}>
                     <div className={styles.bottomDiv}>
                         <div>Total payable in words : </div>
-                        <div>------</div>
-                    </div>
-                        <div className={styles.bottomDiv}>
-                        <div>Total payable in words : </div>
-                        <div>------</div>
+                        <div className={styles.wordsCurrency}>
+                        {bill?.billCurrency}{' '}
+					{bill?.subTotal
+						? (<>{startCase(converter.toWords(bill?.grandTotal))} only</>)
+						: null}
+                        </div>
                     </div>
                  </div>
              </div>
