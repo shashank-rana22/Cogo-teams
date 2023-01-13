@@ -31,6 +31,10 @@ interface BillInterface {
     billDate?:string
     status?:string
     placeOfSupply?:string
+    taxTotal: any,
+    billCurrency:string,
+    grandTotal:any,
+    subTotal:string|number
 }
 
 interface DataInterface {
@@ -57,8 +61,7 @@ const ShipmentDetailsCard = ({data,remarksVal,setRemarksVal, lineItemsRemarks, s
     const [rejected,setRejected] = useState([] as any)
     const [showLineItem , setShowLineItem] = useState(false)
     const [showRejected , setShowRejected] = useState({})
-    const {lineItems } = data || {}
-    const {buyerDetail , sellerBankDetail , sellerDetail , bill} = data || {}
+    const {lineItems, buyerDetail , sellerBankDetail , sellerDetail , bill} = data || {}
     const {entityCode ='' , organizationName:organizationNameBuyer ='', address ='' , registrationNumber:registrationNumberBuyer ='', taxNumber:taxNumberBuyer ='' } = buyerDetail || {}
     const {organizationName =''  , registrationNumber ='',taxNumber ='' } = sellerDetail || {}
     const {bankName ='' , accountNumber ='' , ifscCode =''}  = sellerBankDetail || {}
@@ -133,6 +136,7 @@ return(
     <div>
 { showLineItem ? <LineItemCard 
                   lineItems={lineItems} 
+                  bill={bill}
                   setShowLineItem={setShowLineItem} 
                   setRemarksVal={setRemarksVal} 
                   lineItemsRemarks={lineItemsRemarks}

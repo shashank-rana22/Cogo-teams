@@ -32,7 +32,6 @@
 .circleBig {
 	width: 10px;
 	height: 10px;
-	padding: 3px;
 	cursor: pointer;
 	border-radius: 50%;
 }
@@ -80,7 +79,7 @@
 	border-right:1px solid #c5c5c5;
 	font-size: 12px;
 	padding:12px;
-	width: 50%;
+	width: 100%;
 	border-top:1px solid #c5c5c5;
 }
 .flex{
@@ -88,12 +87,24 @@
 }
 .amount{
 	font-weight: 600;
-	margin-top: 12px;
-	border-right:1px solid #c5c5c5;
     padding: 0px 6px;
+	font-size: 10px;
 }
 .amountRight{
 	font-weight: 600;
-	margin-top: 12px;
-    padding: 0px 6px;
+	font-size: 10px;
+}
+.wordsCurrency{
+	font-weight: 600;
+}
+.border{
+	border-right:1px solid #c5c5c5;
+	height: 100%;
+    margin: 0;
+    padding: 16px 2px;
+}
+.borderRight{
+	height: 100%;
+    margin: 0;
+    padding: 16px 2px;
 }
