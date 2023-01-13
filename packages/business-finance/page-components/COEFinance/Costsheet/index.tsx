@@ -210,7 +210,7 @@ const CostSheet = () => {
                     />
                     <div className={styles.quotationAmount}>
                         Quotation Total :
-                        {getFormattedPrice(sellData.totalQuotational, "INR") ||
+                        {getFormattedPrice(sellData?.totalQuotational, "INR") ||
                             "-"}
                     </div>
                     {apiloading &&
@@ -234,7 +234,7 @@ const CostSheet = () => {
                     />
                     <div className={styles.quotationAmount}>
                         Quotation Total :
-                        {getFormattedPrice(buyData.totalQuotational, "INR") ||
+                        {getFormattedPrice(buyData?.totalQuotational, "INR") ||
                             "-"}
                     </div>
                     {apiloading &&
