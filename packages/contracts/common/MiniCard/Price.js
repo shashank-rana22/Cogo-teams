@@ -7,7 +7,7 @@ function Price({ data }) {
 				Projected Consolidated Revenue
 				from
 			</div>
-			<div>
+			<div className={styles.price}>
 				$
 				{' '}
 				{data}

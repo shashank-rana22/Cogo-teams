@@ -7,10 +7,10 @@ function Percentage({ data }) {
 				Projected
 				Consolidated Profitability
 			</div>
-			<div>
-				{data}
+			<div className={data > 0 ? styles.percentage : styles.neg_percentage}>
+				{(data)}
 				{' '}
-				86%
+				%
 			</div>
 		</div>
 	);
