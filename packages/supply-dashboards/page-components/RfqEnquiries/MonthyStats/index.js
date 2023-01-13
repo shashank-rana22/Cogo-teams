@@ -4,17 +4,27 @@ import { startCase } from '@cogoport/utils';
 import useGetStats from '../hooks/useGetStats';
 
 function MonthyStats() {
-	const { data:stats } = useGetStats();
-	const data = [];
+	const { data:stats,loading } = useGetStats();
+	let data = [];
+
+	if(loading){
+		[1,2,3,4,5,6,7,8,9,10,11,12].forEach((item)=>{
+			const obj = {};
+			obj.month = item;
+			obj.loading = item;
+			data.push(obj);
+		})
+	}
 
 	if (stats) {
+		data=[];
 		(stats).forEach((statLabel) => {
 			const obj = {};
 			obj.month = (startCase(Object.keys(statLabel)));
-			obj.Reverted = (Object.values(statLabel)[0].reverted_rfqs_count);
-			obj.Totat = (Object.values(statLabel)[0].total_rfqs_count);
-			obj.Booked = (Object.values(statLabel)[0]
-				.atleast_one_booking_received_count_direct);
+			// obj.Reverted = (Object.values(statLabel)[0].reverted_rfqs_count);
+			obj.Totat = (Object.values(statLabel)[0].total_rfqs_count );
+			// obj.Booked = (Object.values(statLabel)[0]
+			// 	.atleast_one_booking_received_count_direct );
 			data.push(obj);
 		});
 	}
@@ -22,7 +32,7 @@ function MonthyStats() {
 	return (
 		<ResponsiveBar
 			data={data}
-			keys={['Totat', 'Reverted', 'Booked']}
+			keys={stats ?['Totat', 'Reverted', 'Booked']: ['loading']}
 			indexBy="month"
 			margin={{
 				top: 10, right: 30, bottom: 26, left: 0,
@@ -53,7 +63,7 @@ function MonthyStats() {
 					anchor        : 'top-right',
 					direction     : 'row',
 					justify       : false,
-					translateY    : 10,
+					translateY    : -10,
 					translateX    : -80,
 					itemsSpacing  : 60,
 					itemWidth     : 100,

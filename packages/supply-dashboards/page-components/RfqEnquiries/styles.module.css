@@ -14,10 +14,10 @@
 }
 
 .stats {
-	max-width: 1300px;
+	max-width: 1400px;
 	height: 249.89px;
 	background: #fff;
-	border-radius: 4px;
+	border-radius: 6px;
 }
 
 .body {
@@ -30,7 +30,7 @@
 }
 
 .filter {
-	width: 369px;
+	width: 349px;
 	padding-bottom: 4px;
 	margin-top: 8px;
 	background: #fff;

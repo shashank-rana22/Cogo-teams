@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input,Button } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
 import FilterLocation from './FilterLocation';
@@ -9,9 +9,17 @@ function Filters({
 	filters,
 	hookSetters,
 }) {
+
+	const handleButton=()=>{
+		hookSetters.setFilters({page: 1, status: 'processing' });
+	}
 	return (
 		<div className={styles.filter}>
-			<div className={styles.heading}>Filters</div>
+			<div className={styles.header}>
+				<div className={styles.heading}>Filters</div>
+				<Button size="sm" onClick={()=>handleButton()}>Clear Filter</Button>
+			</div>
+			
 			<div className={styles.line} />
 			<div>
 				<div className={styles.input}>

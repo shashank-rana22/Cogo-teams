@@ -19,7 +19,7 @@ const FclFields = () => {
 		{
 			name            : 'booking_rate_procurement_proof',
 			label           : 'Booking rate procurement proof',
-			span            : 8,
+			span            : 4,
 			type            : 'file',
 			themeType       : 'secondary',
 			drag            : true,
