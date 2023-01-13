@@ -72,7 +72,7 @@ const useUpdateSpotNegotiationRate = ({
 								setValue(prefill, val[0]?.[prefill]);
 							}
 						});
-					} else if(typeof(val)==='object') {
+					} else if (typeof (val) === 'object') {
 						(Object.keys(val)).forEach((prefill) => {
 							if (prefill === 'line_items') {
 								setValue(item, val?.[prefill]);
@@ -105,9 +105,9 @@ const useUpdateSpotNegotiationRate = ({
 									setValue(prefill, val[0]?.[prefill]);
 								}
 							});
-						} else if(typeof(val)==='object') {
+						} else if (typeof (val) === 'object') {
 							(Object.keys(val)).forEach((prefill) => {
-								if (prefill === 'line_items' ) {
+								if (prefill === 'line_items') {
 									setValue(item, val?.[prefill]);
 								} else {
 									setValue(prefill, val?.[prefill]);
@@ -127,8 +127,7 @@ const useUpdateSpotNegotiationRate = ({
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data),JSON.stringify(rateSelected)]);
-
+	}, [JSON.stringify(data), JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
 		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {
@@ -224,12 +223,9 @@ const useUpdateSpotNegotiationRate = ({
 				console.log(err?.message);
 			}
 		} catch (err) {
-			console.log(err,"values");
-			Toast.error(err?.response?.data?.message ||err?.response?.data?.base[0] || 'Something Went Wrong');
+			Toast.error(err?.response?.data?.message || err?.response?.data?.base[0] || 'Something Went Wrong');
 		}
 	};
-
-	console.log(values);
 
 	return {
 		fields: newField,
