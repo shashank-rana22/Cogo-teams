@@ -1,13 +1,14 @@
 import React, { useEffect, useState }  from "react";
-import { Pill, Placeholder, Tooltip } from "@cogoport/components";
-import {IcADocumentTemplates, IcCFtick, IcMInfo} from '@cogoport/icons-react';
+import { Button, Pill, Placeholder, Tooltip } from "@cogoport/components";
+import {IcADocumentTemplates, IcCFtick, IcMDownload, IcMInfo} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import { Modal } from "@cogoport/components";
 import config from '../../../configurations/SUPPLIER_HISTORY';
+import DOCUMENTS from '../../../configurations/DOCUMENTS'
 import List from "../../../../commons/List/index";
 import useSupplierHistory from '../../../hook/useSupplierHistory'
 import showOverflowingNumber from "../../../../commons/showOverflowingNumber";
-
+import { saveAs } from "file-saver";
 interface SellerDetail {
     organizationName?:string
 }
@@ -15,11 +16,15 @@ interface SellerDetail {
 interface AdditionDetailInt{
     kycStatus?:string
 }
+interface DocumentData{
+    list:Array<object>
+}
 
 interface DataProps {
     sellerDetail?:SellerDetail
     serviceProviderCategory?:string,
     serviceProviderAdditionalDetail?:AdditionDetailInt,
+    serviceProviderDocuments:DocumentData
 }
 
 interface PaymentsData {
@@ -37,14 +42,28 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     const {historyData,getSupplierHistory,loading} = useSupplierHistory({data});
     const [showModal, setShowModal] = useState(false)
     
-    const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail} = data;
+    const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail,serviceProviderDocuments} = data;
     const {kycStatus=''}=serviceProviderAdditionalDetail || {};
     const {payables,receivables,ledgerCurrency} = paymentsData || {};
+    
+console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
 
-    const handleChange = () =>{
+    const handleChange = (e) =>{
+        if(e.target.innerText === 'Supplier History')
+        { getSupplierHistory()}
         setShowModal(!showModal) 
-        getSupplierHistory()
+       
     }
+
+    const functions={
+        viewFunc: (item:any)=> <Button 
+                                themeType="secondary"
+                                size="xs" 
+                                onClick={() => window.open(item?.document_url, '_blank')}>
+                                View
+                               </Button>,
+        downloadFunc: (item:any) => <div className={styles.download} onClick={() => saveAs(item?.document_url)}><IcMDownload height={20} width={20}/></div>,
+    };
     
     return(
         <div className={styles.container}> 
@@ -108,7 +127,7 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                 <div className={styles.verticalSmallHr}/>
 
                 <div className={styles.supplierDetails}>
-                    <div className={styles.supplierHistory} onClick={()=>{handleChange()}}>Supplier History</div>
+                    <div className={styles.supplierHistory} onClick={(e)=>{handleChange(e)}}>Supplier History</div>
                     {showModal && 
                     <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
                         <Modal.Header title="SUPPLIER HISTORY" />
@@ -118,9 +137,20 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
                         </Modal.Body>
                     </Modal> 
                     }
+
                     <div className={styles.docsContainer}>
                         <div className={styles.docsIcon}><IcADocumentTemplates/></div>
-                        <div>Documents</div>
+                    <div className={styles.supplierHistory} onClick={(e)=>{handleChange(e)}}>Documents</div>
+
+                    {showModal && 
+                    <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
+                        <Modal.Header title="Documents" />
+                        <Modal.Body>
+                            {kycStatus==="verified"  ? <List config={DOCUMENTS} itemData={{list:serviceProviderDocuments?.list}}  loading={loading} functions={functions} /> : <div className={styles.supplyCard}>NO Documents</div>}
+                            
+                        </Modal.Body>
+                    </Modal> 
+                    }
                     </div> 
                 </div>
             </div>
