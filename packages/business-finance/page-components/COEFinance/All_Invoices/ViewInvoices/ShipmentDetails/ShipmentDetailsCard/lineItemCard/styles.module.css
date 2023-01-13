@@ -32,7 +32,6 @@
 .circleBig {
 	width: 10px;
 	height: 10px;
-	padding: 3px;
 	cursor: pointer;
 	border-radius: 50%;
 }
