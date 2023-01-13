@@ -29,7 +29,6 @@ const getDefaultValues = (oldfields) => {
 const useUpdateSpotNegotiationRate = ({
 	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 }) => {
-	console.log(selectedRate,"values")
 	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
 
@@ -73,7 +72,7 @@ const useUpdateSpotNegotiationRate = ({
 								setValue(prefill, val[0]?.[prefill]);
 							}
 						});
-					} else {
+					} else if(typeof(val)==='object') {
 						(Object.keys(val)).forEach((prefill) => {
 							if (prefill === 'line_items') {
 								setValue(item, val?.[prefill]);
@@ -85,10 +84,6 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data)]);
-
-	useEffect(() => {
 		if (rateSelected) {
 			if (rateSelected?.spot_negotiation_id) {
 				setValue('service_provider_id', rateSelected?.service_provider_id);
@@ -110,9 +105,9 @@ const useUpdateSpotNegotiationRate = ({
 									setValue(prefill, val[0]?.[prefill]);
 								}
 							});
-						} else {
+						} else if(typeof(val)==='object') {
 							(Object.keys(val)).forEach((prefill) => {
-								if (prefill === 'line_items') {
+								if (prefill === 'line_items' ) {
 									setValue(item, val?.[prefill]);
 								} else {
 									setValue(prefill, val?.[prefill]);
@@ -131,9 +126,9 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			}
 		}
-
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rateSelected)]);
+	}, [JSON.stringify(data),JSON.stringify(rateSelected)]);
+
 
 	useEffect(() => {
 		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {
@@ -226,12 +221,15 @@ const useUpdateSpotNegotiationRate = ({
 					Toast.success('Negotiation Updated');
 				}
 			} catch (err) {
-				console.log(err);
+				console.log(err?.message);
 			}
 		} catch (err) {
-			console.log(err);
+			console.log(err,"values");
+			Toast.error(err?.response?.data?.message ||err?.response?.data?.base[0] || 'Something Went Wrong');
 		}
 	};
+
+	console.log(values);
 
 	return {
 		fields: newField,
