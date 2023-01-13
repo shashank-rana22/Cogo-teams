@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function Footer({ statsData, portPair, index }) {
+function Footer({ statsData, index }) {
 	//   const keys = ["id"],
 	//     filteredData = (statsData?.port_pair_stats || []).filter(
 	//       (
