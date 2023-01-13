@@ -1,4 +1,4 @@
-const contract_rates = [
+const apis = [
 	{
 		api          : 'list_contracts',
 		access_type  : 'private',
@@ -541,4 +541,4 @@ const contract_rates = [
 	},
 ];
 
-export default contract_rates;
+export default apis;

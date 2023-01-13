@@ -118,7 +118,7 @@ function Navigation(props) {
 	};
 
 	let buttonText = 'Assign Now';
-	let background = 'primary';
+	let background = 'accent';
 	if (isActive) {
 		buttonText = 'Un-Assign Now';
 		background = 'secondary';
@@ -142,7 +142,7 @@ function Navigation(props) {
 					</div>
 					<div className={styles.row}>
 						<Button
-							size="sm"
+							size="md"
 							themeType={background}
 							onClick={handlePrimaryAction}
 							disabled={loading}
@@ -151,7 +151,7 @@ function Navigation(props) {
 						</Button>
 						{isActive && containsApis ? (
 							<Button
-								size="sm"
+								size="md"
 								className={styles.edit}
 								onClick={() => setShow(2)}
 								disabled={loading}
@@ -193,6 +193,7 @@ function Navigation(props) {
 				<Modal.Footer>
 					<div className={styles.buttons_container}>
 						<Button
+							size="md"
 							style={{ marginRight: 10 }}
 							themeType="secondary"
 							disabled={creatingNavs}
@@ -207,6 +208,7 @@ function Navigation(props) {
 							{show === 1 || roleData.isImported ? 'Cancel' : 'BACK'}
 						</Button>
 						<Button
+							size="md"
 							onClick={show === 1 ? () => setShow(2) : handleSave}
 							loading={creatingNavs}
 							disabled={creatingNavs}

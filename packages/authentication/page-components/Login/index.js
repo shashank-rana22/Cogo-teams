@@ -34,7 +34,6 @@ function Login() {
 				/>
 				<div className={styles.input_label}>
 					{t('login:title')}
-					{/* Please provide your email and password to login */}
 				</div>
 				<form className={styles.form_container} onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>
