@@ -67,7 +67,7 @@ export const CardBody = ({ charge, type }: Props) => {
                     return (
                         <div className={styles.values}>
                             <div
-                                className={`${styles.coloredlabel} ${className}`}
+                                className={`${styles.coloredlabel} ${lineItem?.sameCurrencyDataPresent && className}`}
                                 style={{ "--span": 2 } as React.CSSProperties}
                             >
                                 {lineItem.nameQuotation || lineItem.nameActual}
