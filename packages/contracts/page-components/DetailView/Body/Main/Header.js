@@ -10,7 +10,6 @@ function Header({ activePair }) {
 	const originName = activePair?.origin?.split('(')[0];
 	const destinationCode = activePair?.destination_code;
 	const destinationName = activePair?.destination?.split('(')[0];
-
 	return (
 		<div className={styles.heading}>
 			<div className={styles.port_pair}>

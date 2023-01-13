@@ -1,108 +1,108 @@
-import { Button, Select } from "@cogoport/components";
-import useGetAsyncOptions from "@cogoport/forms/hooks/useGetAsyncOptions";
-import { asyncFieldsOrganization } from "@cogoport/forms/utils/getAsyncFields";
-import { merge } from "@cogoport/utils";
-import { useState } from "react";
+import { Button, Select } from '@cogoport/components';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { asyncFieldsOrganization } from '@cogoport/forms/utils/getAsyncFields';
+import { merge } from '@cogoport/utils';
+import { useState } from 'react';
 
-import Line from "../../../../../common/Line";
+import Line from '../../../../../common/Line';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const controls = {
-  name: "service_provider_id",
-  label: "Service Provider",
-  span: 4,
-  type: "select",
-  placeholder: "Select",
+	name        : 'service_provider_id',
+	label       : 'Service Provider',
+	span        : 4,
+	type        : 'select',
+	placeholder : 'Select',
 };
 
 function ServiceProvier({
-  activePair,
-  handleUpdateContract,
-  status,
-  statsData,
+	activePair,
+	handleUpdateContract,
+	statsData,
+	stats,
+	data,
 }) {
-  const stats = (statsData?.port_pairs_data || []).map((item) => {
-    if (item.id === activePair?.id) {
-      return statsData?.port_pairs_data;
-    }
-  })[0];
-  const [serviceProvider, setServiceProvider] = useState("");
-  const [showServiceProvider, setShowServiceProvider] = useState("");
-  const serviceProviderOptions = useGetAsyncOptions(
-    merge(asyncFieldsOrganization(), {
-      params: {
-        filters: { account_type: "service_provider", kyc_status: "verified" },
-      },
-    })
-  );
-  const newControl = { ...controls, ...serviceProviderOptions };
+	const [serviceProvider, setServiceProvider] = useState('');
+	const [showServiceProvider, setShowServiceProvider] = useState('');
+	const serviceProviderOptions = useGetAsyncOptions(
+		merge(asyncFieldsOrganization(), {
+			params: {
+				filters: { account_type: 'service_provider', kyc_status: 'verified' },
+			},
+		}),
+	);
+	const newControl = { ...controls, ...serviceProviderOptions };
 
-  const handleServiceProvider = (val) => {
-    setServiceProvider(val);
-    setShowServiceProvider(false);
-    handleUpdateContract({
-      payload: {
-        id: activePair?.id,
-        service_type: activePair?.service_type,
-        status: activePair?.status,
-        service_provider_id: val,
-      },
-    });
-  };
-  return (
-    <div className={styles.service_provider}>
-      <div className={styles.details}>
-        {showServiceProvider ? (
-          <Select
-            style={{ width: "300px" }}
-            {...newControl}
-            value={serviceProvider}
-            onChange={(val) => {
-              handleServiceProvider(val);
-            }}
-          />
-        ) : (
-          <>
-            {stats?.[0]?.overseas_agent?.short_name ? (
-              <>
-                <div>Name :</div>
-                <div className={styles.name}>
-                  {stats?.[0]?.overseas_agent?.short_name}
-                </div>
-              </>
-            ) : null}
-            {status === "pending_approval" &&
-            activePair?.status === "quoted" ? (
-              <Button
-                themeType="link"
-                style={{ color: "#0B44F9" }}
-                onClick={() => {
-                  setShowServiceProvider(true);
-                }}
-              >
-                Change
-              </Button>
-            ) : null}
-          </>
-        )}
-      </div>
-      <div className={styles.mini_container}>
-        <div>
-          <div className={styles.label}>Requested Port Pair:</div>
-          <div className={styles.value}>
-            {stats?.[0]?.service_provider_selected_for}/
-            {(statsData?.port_pairs_data || []).length}
-          </div>
-        </div>
-        <Line />
-        <div>
-          <div className={styles.label}>Fulfilment in %</div>
-          <div className={styles.value}>{stats?.[0]?.fulfilment}%</div>
-        </div>
-      </div>
-    </div>
-  );
+	const handleServiceProvider = (val) => {
+		setServiceProvider(val);
+		setShowServiceProvider(false);
+		handleUpdateContract({
+			payload: {
+				id                  : activePair?.id,
+				service_type        : activePair?.service_type,
+				status              : activePair?.status,
+				service_provider_id : val,
+			},
+		});
+	};
+	return (
+		<div className={styles.service_provider}>
+			<div className={styles.details}>
+				{showServiceProvider ? (
+					<Select
+						style={{ width: '300px' }}
+						{...newControl}
+						value={serviceProvider}
+						onChange={(val) => {
+							handleServiceProvider(val);
+						}}
+					/>
+				) : (
+					<>
+						{stats?.overseas_agent?.short_name ? (
+							<>
+								<div>Name :</div>
+								<div className={styles.name}>
+									{stats?.overseas_agent?.short_name}
+								</div>
+							</>
+						) : null}
+						{data?.status === 'pending_approval'
+            && activePair?.status === 'quoted' ? (
+	<Button
+		themeType="link"
+		style={{ color: '#0B44F9' }}
+		onClick={() => {
+			setShowServiceProvider(true);
+		}}
+	>
+		Change
+	</Button>
+							) : null}
+					</>
+				)}
+			</div>
+			<div className={styles.mini_container}>
+				<div>
+					<div className={styles.label}>Requested Port Pair:</div>
+					<div className={styles.value}>
+						{stats?.service_provider_selected_for}
+						/
+						{(statsData?.port_pairs_data || []).length}
+					</div>
+				</div>
+				<Line />
+				<div>
+					<div className={styles.label}>Fulfilment in %</div>
+					<div className={styles.value}>
+						{stats?.fulfilment}
+						%
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default ServiceProvier;

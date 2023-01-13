@@ -2,7 +2,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function PortPair({ portPair, handlePortChange = () => {} }) {
+function PortPair({ portPair }) {
 	const originCode = portPair?.origin_code;
 	const originName = portPair?.origin?.split('(')[0];
 	const originCountry = portPair?.origin?.split(' ')?.slice(-1);
@@ -11,8 +11,6 @@ function PortPair({ portPair, handlePortChange = () => {} }) {
 	const destinationCountry = portPair?.destination?.split(' ')?.slice(-1);
 	return (
 		<div
-			role="presentation"
-			onClick={() => handlePortChange(portPair)}
 			className={styles.container}
 		>
 			<div>
@@ -22,7 +20,6 @@ function PortPair({ portPair, handlePortChange = () => {} }) {
 				<div>
 					{originCountry}
 				</div>
-
 			</div>
 			<IcMPortArrow />
 			<div>
