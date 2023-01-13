@@ -17,6 +17,7 @@ function Content({
   handlePortChange,
   handleUpdateContract,
   statsData,
+  status
 }) {
   const Element = iconMapping[portPair?.service_type || "fcl_freight"];
   return (
@@ -38,7 +39,7 @@ function Content({
               handlePortChange={handlePortChange}
               detailView
             />
-            {portPair?.status === "quoted" ? (
+            {portPair?.status === "quoted"  && status=== 'pending_approval' ? (
               <div className={styles.buttons}>
                 <div
                   className={styles.button_reject}

@@ -27,6 +27,7 @@ function Body({ data, statsData, getContract, status, getContractStats }) {
         setActivePair={setActivePair}
         handleUpdateContract={handleUpdateContractServicer}
         statsData={statsData}
+        status={status}
       />
       <div className={styles.big_line} />
       <Main

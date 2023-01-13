@@ -7,6 +7,7 @@ function SideBar({
   setActivePair,
   handleUpdateContract,
   statsData,
+  status
 }) {
   const handlePortChange = (val) => {
     if (val?.id !== activePair?.id) {
@@ -24,6 +25,7 @@ function SideBar({
           handlePortChange={handlePortChange}
           handleUpdateContract={handleUpdateContract}
           statsData={statsData}
+          status={status}
         />
       ))}
     </div>
