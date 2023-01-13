@@ -15,11 +15,11 @@ function PageView() {
 
 	let content = [...Array(10)].map(() => <Loader />);
 
-	if (!data?.list && !loading) {
+	if (!(data?.list || []).length && !loading) {
 		content = <EmptyState />;
 	}
 
-	if (data?.list && !loading) {
+	if ((data?.list|| []).length && !loading) {
 		content = (
 			<>
 				<List data={data} filters={filters} />
