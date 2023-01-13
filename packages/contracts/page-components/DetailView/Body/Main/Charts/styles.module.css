@@ -1,70 +1,79 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    gap:24px;
-    width: 100%;
-    border-radius: 4px;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  border-radius: 4px;
 }
 
-.heading{
-    font-family: 'Poppins';
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 150%;
-    color: #221F20;
-    margin: 14px 0px 14px 0px;
+.heading {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: #221f20;
+  margin: 14px 0px 14px 0px;
 }
 
-.chart{
-    min-height: 420px;
-    background: #FFFFFF;
-    border-radius: 4px;
+.chart {
+  min-height: 420px;
+  background: #ffffff;
+  border-radius: 4px;
 }
 
-.head_profit{
-    display: flex;
-    gap: 32px;
-    padding: 16px;
+.head_profit {
+  display: flex;
+  gap: 32px;
+  padding: 16px;
 }
 
-.mini_container{
-    display: flex;
-    gap: 32px;
-    padding: 16px;
-    background-color: #FFFFFF;
-    min-height: 132px;
+.mini_container {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background-color: #ffffff;
+  min-height: 132px;
 }
-.details{
-    display: flex;
-    gap:4px;
-    align-items: center;
+.details {
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
-.name{
-    font-family: 'Poppins';
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 150%;
-    color: #000000;
+.name {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  color: #000000;
 }
 
-.service_provider{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    background-color: #FFFFFF;
-    padding: 12px 24px 12px 24px;
+.service_provider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #ffffff;
+  padding: 12px 24px 12px 24px;
 }
-.label{
-    font-family: 'Poppins';
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%; 
-    color: #7B7F8E;
+.label {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #7b7f8e;
 }
-.value{
-    font-family: 'Poppins';
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 32px;
-    color: #333333;
+.value {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 32px;
+  color: #333333;
+}
+.graph_heading {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  color: #221f20;
+  margin-top: 20px;
+  margin-left: 20px;
 }

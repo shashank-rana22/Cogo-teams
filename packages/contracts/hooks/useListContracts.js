@@ -21,10 +21,10 @@ const useListContracts = () => {
 				params: {
 					filters: {
 						service_types: ['fcl_freight', 'lcl_freight', 'air_freight'],
+						status,
 					},
 					services_data_required             : true,
 					contract_utilisation_data_required : true,
-					status,
 					page,
 				},
 			});

@@ -257,6 +257,32 @@ importers:
 
   packages/contracts:
     specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.235
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.48
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      axios: ^1.2.2
+      axios-hooks: ^4.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/components': 1.0.240_q6n2up4lo4ehhk77v5iq2d7bui
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.49_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      axios: 1.2.2
+      axios-hooks: 4.0.0_axios@1.2.2+react@18.2.0
+      react: 18.2.0
+
+  packages/locations:
+    specifiers:
       '@cogoport/components': ^1.0.235
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.48
@@ -292,7 +318,7 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
       react: 18.2.0
-
+      
   packages/supply-dashboards:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -315,7 +341,7 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
       react: 18.2.0
-      react-hook-form: 7.42.0_react@18.2.0
+      react-hook-form: 7.41.5_react@18.2.0
 
 packages:
 
@@ -1617,8 +1643,8 @@ packages:
       - react-dom
     dev: false
 
-  /@cogoport/components/1.0.246_p6peho6ylnuex5z4b2ipstsevu:
-    resolution: {integrity: sha512-FImSAwI7kPlokSFzY89jOFuIstWvwXWbM+QiGdFlyV8GtLgqn/sZUbBX0fNV/zWr85DISWWnrh5XMSXfKLtKXg==}
+  /@cogoport/components/1.0.240_7jlafebzbknnhash5prtclph5q:
+    resolution: {integrity: sha512-r9ZdHhWBDc91LYht9uOL/ohiAvnKtnPNnQLHLVlv4O4hij6aEolILi5uFnGDk3lhZP0Pq1wD5+YgyCaxEfm1gg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0

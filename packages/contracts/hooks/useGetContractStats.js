@@ -2,6 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useGetContractStats = ({ id }) => {
+	console.log(id, 'values')
 	const [data, setData] = useState();
 
 	const [{ error, loading }, trigger] = useRequest({

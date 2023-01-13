@@ -1,47 +1,58 @@
-import { useSelector } from '@cogoport/store';
+import { useSelector } from "@cogoport/store";
 
-import useGetContract from '../../hooks/useGetContract';
-import useUpdateContract from '../../hooks/useUpdateContract';
+import useGetContract from "../../hooks/useGetContract";
+import useUpdateContract from "../../hooks/useUpdateContract";
 
-import Body from './Body';
-import Header from './Header';
-import Loader from './Loader';
+import Body from "./Body";
+import Header from "./Header";
+import Loader from "./Loader";
+import useGetContractStats from "../../hooks/useGetContractStats";
 
 function DetailView() {
-	const { query } = useSelector(({ general }) => ({
-		query: general?.query,
-	}));
-	const { data, loading } = useGetContract({ id: query?.id });
-	const { updateContract } = useUpdateContract();
+  const { query } = useSelector(({ general }) => ({
+    query: general?.query,
+  }));
+  const { data, loading, getContract } = useGetContract({ id: query?.id });
+  const { updateContract, loading: loadingUpdate } = useUpdateContract();
 
-	const handleUpdateContract = async (val) => {
-		await updateContract({
-			payload: {
-				id     : query?.id,
-				status : val,
-			},
-		});
-	};
+  const handleUpdateContract = async (val) => {
+    await updateContract({
+      payload: {
+        id: query?.id,
+        status: val,
+      },
+    });
+  };
 
-	let content = (
-		<Loader />
-	);
+  const { data: statsData, getContractStats } = useGetContractStats({
+    id: query?.id,
+  });
 
-	if (data?.id && !loading) {
-		content = (
-			<>
-				{' '}
-				<Header data={data} status={query?.status} handleUpdateContract={handleUpdateContract} />
-				<Body data={data} handleUpdateContract={handleUpdateContract} />
-			</>
-		);
-	}
+  let content = <Loader />;
 
-	return (
-		<div>
-			{content}
-		</div>
-	);
+  if (data?.id && !loading) {
+    content = (
+      <>
+        {" "}
+        <Header
+          data={data}
+          status={query?.status}
+          handleUpdateContract={handleUpdateContract}
+          statsData={statsData}
+          loadingUpdate={loadingUpdate}
+        />
+        <Body
+          data={data}
+          statsData={statsData}
+          status={query?.status}
+          getContract={getContract}
+          getContractStats={getContractStats}
+        />
+      </>
+    );
+  }
+
+  return <div>{content}</div>;
 }
 
 export default DetailView;

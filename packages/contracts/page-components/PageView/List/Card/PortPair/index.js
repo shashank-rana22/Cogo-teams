@@ -9,11 +9,10 @@ function PortPair({ portPair, handlePortChange = () => {} }) {
 	const destinationCode = portPair?.destination_code;
 	const destinationName = portPair?.destination?.split('(')[0];
 	const destinationCountry = portPair?.destination?.split(' ')?.slice(-1);
-	const uniqueId = `${portPair?.origin_code} ${portPair?.destination_code}`;
 	return (
 		<div
 			role="presentation"
-			onClick={() => handlePortChange({ ...portPair, uniqueId })}
+			onClick={() => handlePortChange(portPair)}
 			className={styles.container}
 		>
 			<div>

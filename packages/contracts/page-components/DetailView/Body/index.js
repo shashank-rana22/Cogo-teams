@@ -1,33 +1,44 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import formatPortPair from '../../../utils/formatPortPair';
+import useUpdateContractService from "../../../hooks/useUpdateContractService";
+import formatPortPair from "../../../utils/formatPortPair";
 
-import Main from './Main';
-import SideBar from './SideBar';
-import styles from './styles.module.css';
+import Main from "./Main";
+import SideBar from "./SideBar";
+import styles from "./styles.module.css";
 
-function Body({ data, handleUpdateContract }) {
-	const formattedData = formatPortPair({ item: data });
-	const uniqueId = `${
-		formattedData[0]?.origin_code
-	} ${formattedData[0]?.destination_code}`;
-	const [activePair, setActivePair] = useState({
-		...formattedData[0],
-		uniqueId,
-	});
+function Body({ data, statsData, getContract, status, getContractStats }) {
+  const formattedData = formatPortPair({ item: data });
 
-	return (
-		<div className={styles.body}>
-			<SideBar
-				data={formattedData}
-				activePair={activePair}
-				setActivePair={setActivePair}
-				handleUpdateContract={handleUpdateContract}
-			/>
-			<div className={styles.big_line} />
-			<Main activePair={activePair} handleUpdateContract={handleUpdateContract} />
-		</div>
-	);
+  const [activePair, setActivePair] = useState(formattedData[0]);
+
+  const { updateContractService } = useUpdateContractService({
+    getContract,
+    getContractStats,
+  });
+  const handleUpdateContractServicer = ({ payload }) => {
+    updateContractService({ payload });
+  };
+  return (
+    <div className={styles.body}>
+      <SideBar
+        data={formattedData}
+        activePair={activePair}
+        setActivePair={setActivePair}
+        handleUpdateContract={handleUpdateContractServicer}
+        statsData={statsData}
+        status={status}
+      />
+      <div className={styles.big_line} />
+      <Main
+        activePair={activePair}
+        handleUpdateContract={handleUpdateContractServicer}
+        data={data}
+        status={status}
+        statsData={statsData}
+      />
+    </div>
+  );
 }
 
 export default Body;
