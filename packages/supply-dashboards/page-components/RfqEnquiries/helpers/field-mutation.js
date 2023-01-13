@@ -67,7 +67,7 @@ const FieldMutation = ({
 				}
 				if (childcontrol.name === 'code') {
 					const newOptions = Object.keys(chargeCodes).map((code) => ({
-						label : chargeCodes[code]?.name,
+						label : `${code} ${chargeCodes[code]?.name}`,
 						value : code,
 						code,
 						...(chargeCodes[code] || {}),
