@@ -21,7 +21,7 @@ function MonthyStats() {
 		(stats).forEach((statLabel) => {
 			const obj = {};
 			obj.month = (startCase(Object.keys(statLabel)));
-			// obj.Reverted = (Object.values(statLabel)[0].reverted_rfqs_count);
+			obj.Reverted = (Object.values(statLabel)[0].reverted_rfqs_count);
 			obj.Totat = (Object.values(statLabel)[0].total_rfqs_count );
 			// obj.Booked = (Object.values(statLabel)[0]
 			// 	.atleast_one_booking_received_count_direct );

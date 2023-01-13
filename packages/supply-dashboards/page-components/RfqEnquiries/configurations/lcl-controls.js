@@ -12,7 +12,7 @@ const lclFields = () => {
 		{
 			name            : 'booking_rate_procurement_proof',
 			label           : 'Booking rate procurement proof',
-			span            : 6,
+			span            : 4,
 			type            : 'file',
 			themeType       : 'secondary',
 			drag            : true,
@@ -26,7 +26,7 @@ const lclFields = () => {
 			type        : 'date_picker',
 			label       : 'Validity Start',
 			placeholder : 'Select Validity Start',
-			span        : 3,
+			span        : 4,
 			rules       : { required: 'This is required' },
 		},
 		{
@@ -34,7 +34,7 @@ const lclFields = () => {
 			type        : 'date_picker',
 			label       : 'Validity End',
 			placeholder : 'Select Validity End',
-			span        : 3,
+			span        : 4,
 			rules       : { required: 'This is required' },
 		},
 		{

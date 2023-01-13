@@ -29,6 +29,7 @@ const getDefaultValues = (oldfields) => {
 const useUpdateSpotNegotiationRate = ({
 	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
 }) => {
+	console.log(selectedRate,"values")
 	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
 

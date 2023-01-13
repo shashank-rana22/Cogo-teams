@@ -29,6 +29,7 @@ function Service({
 
 	const handleOnClick = (e) => {
 		e.stopPropagation();
+		setActiveService(null);
 		setShowModal(true);
 	};
 

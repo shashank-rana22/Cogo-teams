@@ -13,7 +13,7 @@ const airFields =	[
 	{
 		name            : 'booking_rate_procurement_proof',
 		label           : 'Booking rate procurement proof',
-		span            : 6,
+		span            : 4,
 		type            : 'file',
 		themeType       : 'secondary',
 		drag            : true,
