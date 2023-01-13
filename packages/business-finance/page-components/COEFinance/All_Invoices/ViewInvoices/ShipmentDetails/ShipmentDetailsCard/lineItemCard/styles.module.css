@@ -61,3 +61,39 @@
 	font-weight: 600;
 	color: #616161;
 }
+.outer{
+	border:1px solid #c5c5c5;
+	margin-top:16px;
+}
+.flexDiv{
+	display: flex;
+	width: 65%;
+	flex-wrap: wrap;
+	font-size: 10px;
+	border-right:1px solid #c5c5c5;
+	padding:12px
+}
+.info{
+	width: 30%;
+}
+.bottomDiv{
+	border-right:1px solid #c5c5c5;
+	font-size: 12px;
+	padding:12px;
+	width: 50%;
+	border-top:1px solid #c5c5c5;
+}
+.flex{
+	display: flex
+}
+.amount{
+	font-weight: 600;
+	margin-top: 12px;
+	border-right:1px solid #c5c5c5;
+    padding: 0px 6px;
+}
+.amountRight{
+	font-weight: 600;
+	margin-top: 12px;
+    padding: 0px 6px;
+}
