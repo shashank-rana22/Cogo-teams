@@ -54,7 +54,7 @@ function RoleList() {
 							currentPage={page}
 							totalItems={totalPage}
 							pageSize={pageLimit}
-							handlePageChange={(val) => onChangeParams({ page: val })}
+							onPageChange={(val) => onChangeParams({ page: val })}
 						/>
 					</div>
 				</section>

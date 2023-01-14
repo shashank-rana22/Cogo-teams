@@ -2,10 +2,11 @@
 	display: flex;
 	flex-direction: column;
 
-	@media (min-width: 768px) {
+	@media (max-width: 768px) {
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		padding-top: 50px;
 	}
 }
 
@@ -14,6 +15,24 @@
 }
 
 .role_group {
+	position: fixed;
+	right: 20px;
+	bottom: 25px;
 	display: flex;
 	align-items: center;
+}
+
+.role_group_button {
+	width: 50px;
+	height: 50px !important;
+	border-radius: 50%;
+
+	@media (max-width: 768px) {
+		padding: 0 !important;
+	}
+}
+
+.role_group_icon {
+	width: 30px;
+	height: 30px;
 }

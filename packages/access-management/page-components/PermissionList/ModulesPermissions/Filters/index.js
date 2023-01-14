@@ -13,7 +13,7 @@ function Filters({
 	setNavStatus = () => {},
 }) {
 	const content = (
-		<section>
+		<section className={styles.filters_popover_content}>
 			<span>Navigation Status</span>
 			<Chips
 				className={styles.chips_container}
@@ -35,7 +35,7 @@ function Filters({
 				size="md"
 				placeholder="Search Navigation"
 			/>
-			<Popover placement="left" render={content} interactive>
+			<Popover placement="top" render={content} interactive className={styles.filters_popover}>
 				<Button themeType="tertiary" size="lg">
 					Filters
 					{' '}
