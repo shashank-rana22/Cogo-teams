@@ -1661,6 +1661,7 @@ const navigationMappings = {
 		key         : 'allocations',
 		title       : 'Allocations',
 		isSubNavs   : true,
+		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
 		options     : [
 			{
