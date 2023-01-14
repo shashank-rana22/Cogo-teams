@@ -1,4 +1,4 @@
-const { NODE_ENV } = process.env;
+const NODE_ENV = 'production';
 
 const ifProd = (valueIfProd, valueIfDev) => {
 	if (NODE_ENV === 'production') {
