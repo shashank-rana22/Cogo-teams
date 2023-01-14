@@ -32,8 +32,6 @@ const useGetPartnerUser = ({ user_id }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user_id]);
 
-	console.log(partner_user, 'values');
-
 	return {
 		fetch,
 		partner_user,
