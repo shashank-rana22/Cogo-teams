@@ -11,7 +11,7 @@ module.exports = {
 	apps: [
 		{
 			name      : 'cogo-admin',
-			instances : ifProd(2, 1),
+			instances : ifProd(1, 1),
 			exec_mode : ifProd('cluster', 'fork'),
 		},
 	],
