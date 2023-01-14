@@ -1,4 +1,4 @@
-.modal_container{
+.modal_container {
 	@media (max-width: 768px) {
 		width: 300px !important;
 	}
