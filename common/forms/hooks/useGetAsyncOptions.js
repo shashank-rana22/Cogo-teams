@@ -50,17 +50,7 @@ function useGetAsyncOptions({
 				return singleHydratedValue;
 			});
 
-<<<<<<< HEAD
-			if (value.length > 0) {
-				const res = await triggerSingle({
-					params: merge(params, { filters: { [valueKey]: value } }),
-				});
-				return res?.data?.list || res?.list || [];
-			}
-			return [];
-=======
 			return hydratedValue;
->>>>>>> 413bdc718f278499d8ed8cd97b0845b086f58185
 		}
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
