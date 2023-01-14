@@ -10,8 +10,10 @@ const ifProd = (valueIfProd, valueIfDev) => {
 module.exports = {
 	apps: [
 		{
-			name      : 'cogo-admin',
-			instances : ifProd(1, 1),
+			name      : 'project-admin',
+			script    : 'node_modules/.bin/next',
+			args      : ['start', '-p', '4073'],
+			instances : ifProd(2, 1),
 			exec_mode : ifProd('cluster', 'fork'),
 		},
 	],
