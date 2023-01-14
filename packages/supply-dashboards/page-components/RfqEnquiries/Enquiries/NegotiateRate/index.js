@@ -20,7 +20,7 @@ function NegotiateRate({ selectedCard }) {
 	);
 
 	return (
-		<div>
+		<div className={styles.form}>
 			<div className={styles.heading}>Negotiate Rates</div>
 			<div className={styles.service}>
 				{(service || []).map((item) => (

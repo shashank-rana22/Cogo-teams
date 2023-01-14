@@ -10,3 +10,8 @@
 	line-height: 150%;
 	color: #221f20;
 }
+
+.form {
+	height: 76vh;
+	overflow: scroll;
+}
