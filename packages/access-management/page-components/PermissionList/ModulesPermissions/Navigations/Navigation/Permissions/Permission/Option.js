@@ -1,5 +1,5 @@
 import {
-	MultiSelect, Checkbox, Tooltip, Radio,
+	Checkbox, Tooltip, Radio, MultiSelect,
 } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -11,13 +11,18 @@ const nameMappings = { allowed: 'Allow' };
 function Option({
 	option,
 	permission,
-	controls,
+	controls: allControls,
 	handleOptionChange = () => {},
 	permissionValue,
 	errors = {},
 	formValues = {},
 }) {
 	const selectKey = `${permission?.value}-${option.type}`;
+	const controls = allControls.reduce((acc, c) => {
+		acc[c.name] = c;
+		return acc;
+	}, {});
+
 	const select = (
 		<>
 			<MultiSelect

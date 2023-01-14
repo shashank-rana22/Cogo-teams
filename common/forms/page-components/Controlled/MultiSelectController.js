@@ -17,7 +17,7 @@ function MultiSelectController(props) {
 				<MultiSelect
 					{...rest}
 					key={rest.id}
-					onChange={onChange}
+					onChange={(val) => onChange(val)}
 					value={value}
 					onBlur={onBlur}
 					data-test-value={value}
