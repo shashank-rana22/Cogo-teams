@@ -70,7 +70,6 @@ function Grouped(props) {
 					/>
 					<div>
 						<ButtonIcon
-							themeType=""
 							id={`access_mgmt_edit_role_sh_${featureKey}`}
 							disabled={creatingNavs}
 							icon={show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
