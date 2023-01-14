@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useEditRole from '../../../../hooks/useEditRole';
 
 import Edit from './edit';
+import styles from './styles.module.css';
 
 function EditRoleModal({ roleData, getRole }) {
 	const [show, setShow] = useState(false);
@@ -37,6 +38,7 @@ function EditRoleModal({ roleData, getRole }) {
 				position="basic"
 				onClose={() => setShow(false)}
 				onOuterClick={onOuterClick}
+				className={styles.modal_container}
 			>
 				<Modal.Header title={(<h2>Edit Role </h2>)} />
 				<form onSubmit={handleSubmit(editRole)}>

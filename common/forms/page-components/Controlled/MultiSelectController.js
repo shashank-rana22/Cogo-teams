@@ -6,21 +6,18 @@ function MultiSelectController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
-
 	return (
 		<Controller
-			key={rest.id}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<MultiSelect
 					{...rest}
-					key={rest.id}
-					onChange={(val) => onChange(val)}
+					name={name}
+					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
-					data-test-value={value}
 				/>
 			)}
 		/>
