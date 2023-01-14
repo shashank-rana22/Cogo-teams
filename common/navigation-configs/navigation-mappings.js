@@ -4,6 +4,7 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
+	IcMProductCodeMapping,
 	IcMAir,
 	IcMShip,
 	IcMOceanSchedules,
