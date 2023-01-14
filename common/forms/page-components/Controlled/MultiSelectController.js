@@ -1,4 +1,3 @@
-// import { MultiSelect } from '@cogoport/components';
 import { MultiSelect } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
