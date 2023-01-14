@@ -25,6 +25,7 @@ function ImportRoles({ show, onClose, onSubmit = () => {} }) {
 			onClose={view === 'priority' ? () => setView('import') : onClose}
 			handleSubmit={handleSubmit}
 			scroll={false}
+			className={styles.modal_container}
 		>
 			<Modal.Header title={(<h3>Import Roles</h3>)} />
 			<Modal.Body>

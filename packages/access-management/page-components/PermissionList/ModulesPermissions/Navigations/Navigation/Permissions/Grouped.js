@@ -1,4 +1,4 @@
-import { Button, RadioGroup } from '@cogoport/components';
+import { Button, ButtonIcon, RadioGroup } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -66,15 +66,15 @@ function Grouped(props) {
 						value={value}
 						onChange={handleApiStatus}
 						disabled={creatingNavs}
+						className={styles.group_radio}
 					/>
 					<div>
-						<Button
-							themeType="tertiary"
+						<ButtonIcon
+							themeType=""
 							id={`access_mgmt_edit_role_sh_${featureKey}`}
 							disabled={creatingNavs}
-						>
-							{show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-						</Button>
+							icon={show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						/>
 					</div>
 				</div>
 			) : null}

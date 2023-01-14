@@ -11,13 +11,20 @@
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 	margin-left: 12px;
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
+
 
 .container_options {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	width: calc(100% - 33.3%);
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .space_between {
@@ -31,6 +38,9 @@
 	align-items: center;
 	justify-content: flex-start;
 	width: 33%;
+	@media (max-width: 768px) {
+		width: 50%;
+	}
 }
 
 .options {
@@ -42,4 +52,9 @@
 .row {
 	display: flex;
 	align-items: center;
+	:global{
+		.ui_checkbox_container{
+			padding:0px;
+		}
+	}
 }

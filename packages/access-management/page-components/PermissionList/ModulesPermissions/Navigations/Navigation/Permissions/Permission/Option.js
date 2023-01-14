@@ -22,7 +22,7 @@ function Option({
 		<>
 			<MultiSelect
 				{...controls[selectKey]}
-				disabled={
+				isDisabled={
 					!(permissionValue || []).includes(option.type)
 					|| controls[selectKey]?.disabled
 				}
@@ -75,7 +75,7 @@ function Option({
 								<span style={{ fontWeight: 'bold', marginRight: 4 }}>
 									Selected Views:
 								</span>
-								{controls[selectKey].options
+								{controls[selectKey]?.options
 									.map((optionObj) => (formValues[selectKey].includes(optionObj.type)
 										? optionObj.type_display_name
 										: null))

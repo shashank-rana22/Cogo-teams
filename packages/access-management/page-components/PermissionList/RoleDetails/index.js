@@ -58,7 +58,6 @@ function RoleDetails({
 		importPermissionsButton = (
 			<Tooltip
 				placement="top"
-				theme="light"
 				trigger="mouseenter"
 				interactive
 				content={<div>Prefill permissions from other roles</div>}

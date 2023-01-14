@@ -2,6 +2,9 @@
 	box-sizing: border-box;
 	padding: 18px 35px 18px 18px;
 	border-bottom: 1px solid #bdbdbd;
+	@media (max-width: 768px) {
+		padding: 18px 0px 18px 18px;
+	}
 }
 
 .container:last-child {
