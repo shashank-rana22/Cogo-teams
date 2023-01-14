@@ -10,9 +10,9 @@ const ifProd = (valueIfProd, valueIfDev) => {
 module.exports = {
 	apps: [
 		{
-			name      : 'cogo-admin',
+			name      : 'project-admin',
 			instances : ifProd(1, 1),
-			exec_mode : ifProd('fork', 'fork'),
+			exec_mode : ifProd('cluster', 'fork'),
 		},
 	],
 };
