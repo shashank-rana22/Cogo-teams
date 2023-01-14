@@ -12,7 +12,7 @@
     "@cogoport/access-management": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
-    "@cogoport/components": "^1.0.255",
+    "@cogoport/components": "^1.0.257",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.50",
