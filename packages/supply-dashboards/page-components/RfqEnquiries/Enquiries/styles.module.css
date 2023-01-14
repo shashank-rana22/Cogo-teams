@@ -9,6 +9,8 @@
 	color: #221f20;
 
 	&:hover {
+		font-style: normal;
+		font-weight: 700;
 		cursor: pointer;
 	}
 }
@@ -38,4 +40,9 @@
 
 .enquirypage {
 	max-height: 749px;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-start;
 }

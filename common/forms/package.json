@@ -6,7 +6,11 @@
     "main": "index.js",
     "module": "index.js",
     "dependencies": {
+<<<<<<< HEAD
         "@cogoport/components": "^1.0.252",
+=======
+        "@cogoport/components": "^1.0.255",
+>>>>>>> 413bdc718f278499d8ed8cd97b0845b086f58185
         "@cogoport/icons-react": "^1.0.50",
         "@cogoport/request": "workspace:0.1.0",
         "@cogoport/utils": "^1.2.2",

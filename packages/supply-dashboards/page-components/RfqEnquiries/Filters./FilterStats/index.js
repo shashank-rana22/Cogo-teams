@@ -16,7 +16,7 @@ function FilterStats({ filters, hookSetters }) {
 		user_profile: profile,
 	}));
 	const { partner_user } = useGetPartnerUser({
-		user_id: user_profile.id,
+		user_id: user_profile?.user?.id,
 	});
 	const options = useGetPartnerUserServices({ partner_user });
 	const handleChange = (value) => {
@@ -59,8 +59,7 @@ function FilterStats({ filters, hookSetters }) {
 	const onTabChange = (tab) => {
 		hookSetters.setFilters({
 			...filters,
-			status             : tab,
-			negotiation_status : tab === 'draft' ? undefined : 'awaiting_responses',
+			negotiation_status : tab,
 			page               : 1,
 		});
 	};
@@ -70,8 +69,8 @@ function FilterStats({ filters, hookSetters }) {
 			<div className={styles.heading}>RFQ Status</div>
 			<div>
 				<Tabs size="lg" fullWidth activeTab={filters.type} onChange={onTabChange}>
-					<TabPanel name="live" title="Running" />
-					<TabPanel name="draft" title="Archive" />
+					<TabPanel name="awaiting_responses" title="Running" />
+					<TabPanel name="completed" title="Archive" />
 				</Tabs>
 			</div>
 			<div className={styles.radio}>

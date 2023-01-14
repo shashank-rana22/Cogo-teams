@@ -30,11 +30,27 @@ function useGetAsyncOptions({
 
 	const onHydrateValue = async (value) => {
 		if (Array.isArray(value)) {
-			const getOptions = value.map((val) => options
-				.filter((item) => item[valueKey] === val)[0]).filter(Boolean);
+			let unorderedHydratedValue = [];
+			const toBeFetched = [];
+			value.forEach((v) => {
+				const singleHydratedValue = options.find((o) => o?.[valueKey] === v);
+				if (singleHydratedValue) {
+					unorderedHydratedValue.push(singleHydratedValue);
+				} else {
+					toBeFetched.push(v);
+				}
+			});
+			const res = await triggerSingle({
+				params: merge(params, { filters: { [valueKey]: toBeFetched } }),
+			});
+			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.list || []);
 
-			if (getOptions.length > 0) { return getOptions; }
+			const hydratedValue = value.map((v) => {
+				const singleHydratedValue = unorderedHydratedValue.find((uv) => uv?.[valueKey] === v);
+				return singleHydratedValue;
+			});
 
+<<<<<<< HEAD
 			if (value.length > 0) {
 				const res = await triggerSingle({
 					params: merge(params, { filters: { [valueKey]: value } }),
@@ -42,6 +58,9 @@ function useGetAsyncOptions({
 				return res?.data?.list || res?.list || [];
 			}
 			return [];
+=======
+			return hydratedValue;
+>>>>>>> 413bdc718f278499d8ed8cd97b0845b086f58185
 		}
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);

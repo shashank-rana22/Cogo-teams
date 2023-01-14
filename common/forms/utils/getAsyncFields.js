@@ -39,6 +39,7 @@ function asyncFieldsPartner() {
 		},
 	};
 }
+<<<<<<< HEAD
 function asyncFieldsOrganization() {
 	return {
 		labelKey    : 'business_name',
@@ -70,10 +71,19 @@ function asyncFieldsOperators() {
 		labelKey    : 'short_name',
 		valueKey    : 'id',
 		endpoint    : 'list_operators',
+=======
+
+function asyncFieldsPartnerRoles() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_auth_roles',
+>>>>>>> 413bdc718f278499d8ed8cd97b0845b086f58185
 		initialCall : true,
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
+<<<<<<< HEAD
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
 		},
@@ -88,3 +98,9 @@ export {
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
 };
+=======
+		},
+	};
+}
+export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsPartnerRoles };
+>>>>>>> 413bdc718f278499d8ed8cd97b0845b086f58185

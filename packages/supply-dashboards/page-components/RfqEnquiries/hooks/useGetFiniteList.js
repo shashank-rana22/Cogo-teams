@@ -9,7 +9,7 @@ const useGetFiniteList = (hook) => {
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [initialPath] = useState(pathname);
-	const [filters, setFilters] = useState({ page: 1, status: 'processing' });
+	const [filters, setFilters] = useState({ page: 1, negotiation_status: 'awaiting_responses' });
 	const [list, setList] = useState({
 		data         : [],
 		total        : 0,

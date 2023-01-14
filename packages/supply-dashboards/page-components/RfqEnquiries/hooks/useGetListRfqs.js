@@ -23,7 +23,6 @@ const useGetListRfqs = () => {
 		return trigger({
 			params: {
 				filters: {
-					negotiation_status       : 'awaiting_responses',
 					...(filters || {}),
 					relevant_supply_agent_id : user_profile?.id,
 					service_type             : filters.service_type,

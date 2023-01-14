@@ -28,17 +28,20 @@ function Enquiries() {
 
 	return (
 		<div className={styles.enquirypage}>
-			<div
-				className={styles.heading}
-				role="presentation"
-				onClick={() => push('/supply/dashboards/rfq-enquiries')}
-			>
-				{' '}
-				<IcMArrowBack style={{ marginRight: '6px' }} />
-				RFQ ID:
-				{' '}
-				{data?.data[0]?.rfq_data?.serial_id}
+			<div className={styles.header}>
+				<div
+					className={styles.heading}
+					role="presentation"
+					onClick={() => push('/supply/dashboards/rfq-enquiries')}
+				>
+					{' '}
+					<IcMArrowBack style={{ marginRight: '6px' }} />
+					RFQ ID:
+					{' '}
+					{data?.data[0]?.rfq_data?.serial_id}
+				</div>
 			</div>
+
 			<div className={styles.subheading}>
 				<div>
 					LAST UPDATED:

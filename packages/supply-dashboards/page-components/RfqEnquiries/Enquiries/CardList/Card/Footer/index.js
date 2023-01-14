@@ -5,10 +5,9 @@ function Footer({ item }) {
 	return (
 		<div className={styles.footer}>
 			<div className={styles.label}>
-				Total Reverts :
+				Total Reverts:
 			</div>
-			<div>
-				{' '}
+			<div style={{ marginLeft: '2px' }}>
 				{total_reverts}
 			</div>
 		</div>

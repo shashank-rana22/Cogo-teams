@@ -6,17 +6,19 @@ import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const router = useRouter();
-	const { pathname, query } = router;
+	const { pathname, query, asPath } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
+	const splitAspath = asPath.split('/')?.[1];
+
 	const handleClickOnItem = (itemdata) => {
 		if (itemdata.options?.length > 0) {
 			setShowSubNav(!showSubNav);
 		} else if (itemdata?.href?.includes('/v1')) {
-			window.location.href = `/v1/${query.partner_id}${itemdata.href.replace('/v1', '')}`;
+			window.location.href = `/v1/${query.partner_id || splitAspath}${itemdata.href.replace('/v1', '')}`;
 		} else {
 			router.push(itemdata.href, itemdata.as);
 		}

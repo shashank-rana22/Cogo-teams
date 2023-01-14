@@ -129,6 +129,11 @@ function Navigation(props) {
 		btnText = 'NEXT';
 	}
 
+	if (roleData?.isImported) {
+		buttonText = 'Allow Navigation';
+		background = 'primary';
+	}
+
 	return (
 		<section className={`${styles.wrapper} ${isNested ? styles.nested : ''}`}>
 			<div className={isNested ? styles.arrow_nested : ''} />
@@ -162,9 +167,8 @@ function Navigation(props) {
 					</div>
 				</div>
 			</div>
-			{/* <AnimatedContainer type={show ? 'enter' : 'exit'}> */}
 			<Modal
-				size="lg"
+				size="xl"
 				show={!!show}
 				onClose={() => setShow(null)}
 			>
@@ -218,7 +222,6 @@ function Navigation(props) {
 					</div>
 				</Modal.Footer>
 			</Modal>
-			{/* </AnimatedContainer> */}
 			<ChangeStatus
 				type={showStatus}
 				show={!!showStatus}

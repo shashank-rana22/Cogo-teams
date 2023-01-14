@@ -75,8 +75,8 @@ function Permission({
 	};
 
 	useEffect(() => {
-		allControls.forEach((control) => {
-			setValue(control.name, formValues[control.name]);
+		allControls.forEach((c) => {
+			setValue(c.name, formValues[c.name]);
 		});
 	}, [JSON.stringify(formValues)]);
 
