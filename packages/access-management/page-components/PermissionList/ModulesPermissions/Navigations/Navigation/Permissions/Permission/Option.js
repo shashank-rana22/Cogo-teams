@@ -1,5 +1,5 @@
 import {
-	Checkbox, Tooltip, Radio, MultiSelect,
+	Checkbox, Tooltip, Radio,
 } from '@cogoport/components';
 import { MultiselectController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
