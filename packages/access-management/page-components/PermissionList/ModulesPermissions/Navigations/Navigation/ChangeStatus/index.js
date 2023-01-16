@@ -3,6 +3,8 @@ import React from 'react';
 
 import useUpdateStatus from '../../../../../../hooks/useUpdateStatus';
 
+import styles from './styles.module.css';
+
 function ChangeStatus({
 	type,
 	show,
@@ -27,7 +29,7 @@ function ChangeStatus({
 	);
 
 	return (
-		<Modal show={show} size="sm" onClose={onClose}>
+		<Modal show={show} size="sm" onClose={onClose} className={styles.modal_container}>
 			<Modal.Header title={headerContent} />
 			<Modal.Body>
 				<section>
