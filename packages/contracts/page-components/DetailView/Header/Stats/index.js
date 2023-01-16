@@ -34,8 +34,8 @@ function Stats({
 						</div>
 						<div className={styles.value}>
 							{format(
-              	status === 'active' ? data?.approved_at : data?.requested_at,
-              	'dd MMM YYYY',
+								data?.status === 'active' ? data?.approved_at : data?.requested_at,
+								'dd MMM YYYY',
 							)}
 						</div>
 					</div>
