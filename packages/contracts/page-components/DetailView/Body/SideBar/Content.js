@@ -1,3 +1,4 @@
+import { Pill } from '@cogoport/components';
 import { IcMAir, IcMFcl, IcMLcl } from '@cogoport/icons-react';
 
 import PortPair from '../../../PageView/List/Card/PortPair';
@@ -28,7 +29,7 @@ function Content({
 			onClick={() => handlePortChange(portPair)}
 		>
 			<div
-				className={activePair?.id === portPair?.id ? styles.port_pair_active : styles.port_pair}
+				className={activePair?.id === portPair?.id ? styles.port_pair_active : styles.port_pair_inactive}
 			>
 				<div className={styles.sub_container}>
 					<div className={styles.service}>
@@ -79,9 +80,15 @@ function Content({
 								</div>
 							</div>
 						) : 	(
-							<div className={styles.show_tag}>
+							<Pill
+								color={portPair?.status === 'rejected' ? 'red' : 'green'}
+								style={{
+									padding    : '4px',
+									marginLeft : '6px',
+								}}
+							>
 								{portPair?.status === 'rejected' ? 'Rejected' : 'Approved'}
-							</div>
+							</Pill>
 						)}
 					</div>
 					<Footer statsData={statsData} portPair={portPair} index={index} />

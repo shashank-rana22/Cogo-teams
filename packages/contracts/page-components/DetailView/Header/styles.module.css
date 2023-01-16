@@ -4,6 +4,17 @@
     gap: 10px;;
     margin-bottom: 12px;
     align-items: center;
+    cursor: pointer;
+    max-width: 200px;
+    padding: 8px;
+    border-radius: 6px;
+    &:hover{
+        svg{ 
+        color:  #ed3726;
+        }
+    }
+    
+
 }
 
 .contract{

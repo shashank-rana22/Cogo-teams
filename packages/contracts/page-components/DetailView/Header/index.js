@@ -13,12 +13,16 @@ function Header({
 	const router = useRouter();
 	return (
 		<div>
-			<div className={styles.heading}>
+			<div
+				role="presentation"
+				className={styles.heading}
+				onClick={() => {
+					router.push('/contracts');
+				}}
+			>
 				<IcMArrowBack
-					style={{ cursor: 'pointer' }}
-					onClick={() => {
-						router.push('/contracts');
-					}}
+					style={{ width: '1.5em', height: '1.5em', marginLeft: '2px' }}
+
 				/>
 				<div className={styles.head}>Back to Contracts</div>
 			</div>
