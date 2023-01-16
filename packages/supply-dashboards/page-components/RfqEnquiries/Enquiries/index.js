@@ -18,6 +18,7 @@ function Enquiries() {
 		loading,
 		list:data,
 		setPage,
+		refetch = () => {},
 	} = useGetRfqSearches({ rfqId });
 
 	useEffect(() => {
@@ -62,7 +63,7 @@ function Enquiries() {
 				</div>
 				{selectedCard ? (
 					<div className={styles.form}>
-						<NegotiateRate selectedCard={selectedCard} />
+						<NegotiateRate selectedCard={selectedCard} refetch={refetch} />
 					</div>
 				) : null}
 			</div>

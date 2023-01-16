@@ -12,10 +12,9 @@ import RateModal from './RatesModal';
 import styles from './styles.module.css';
 
 function Service({
-	selectedCard, service, activeService, setActiveService,
+	selectedCard, service, activeService, setActiveService, refetch = () => {}, submittedEnquiry, setSubmittedEnquiry,
 }) {
 	const [selectedRate, setSelectedRate] = useState(null);
-	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const status = submittedEnquiry.includes(`${selectedCard?.id}${service?.service}`) ? 'Submitted!' : 'Pending';
 	const handleClick = () => {
@@ -82,6 +81,7 @@ function Service({
 					setActiveService={setActiveService}
 					selectedRate={selectedRate}
 					selectedCard={selectedCard}
+					refetch={refetch}
 				/>
 			)}
 			{showModal && (
