@@ -6,7 +6,7 @@
     align-items: center;
     cursor: pointer;
     max-width: 200px;
-    padding: 8px;
+    padding: 0px 8px 0px 0px;
     border-radius: 6px;
     &:hover{
         svg{ 

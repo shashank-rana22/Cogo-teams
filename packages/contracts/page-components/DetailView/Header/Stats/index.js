@@ -1,4 +1,4 @@
-import { format } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 
 import Content from './Content';
 import styles from './styles.module.css';
@@ -15,18 +15,15 @@ function Stats({
 				<div className={styles.heading}>
 					{data?.contract_reference_id ? (
 						<div className={styles.contract_id}>
-							#
-							{data?.contract_reference_id || '289220'}
+							Contract ID #
+							{data?.contract_reference_id}
 						</div>
 					) : null}
+					<div className={styles.name}>
+						{startCase(data?.contract_name)}
+					</div>
 				</div>
 				<div className={styles.details}>
-					{/* <div className={styles.pair}>
-            <div>No. of Containers :</div>
-            <div className={styles.value}>
-              {data?.contract_utilisation_data[0]?.max_containers_count || "-"}
-            </div>
-          </div> */}
 					<div className={styles.pair}>
 						<div>
 							{data?.status === 'active' ? 'Approved Date' : 'Request Date '}
@@ -39,13 +36,15 @@ function Stats({
 							)}
 						</div>
 					</div>
-					<div className={styles.pair}>
-						<div>Validity :</div>
-						<div className={styles.value}>
-							{data?.validity_left_days ? data?.validity_left_days : '26'}
-							days
+					{data?.status === 'active' ? (
+						<div className={styles.pair}>
+							<div>Validity :</div>
+							<div className={styles.value}>
+								{data?.validity_left_days ? data?.validity_left_days : '26'}
+								days
+							</div>
 						</div>
-					</div>
+					) : null}
 				</div>
 			</div>
 			<Content

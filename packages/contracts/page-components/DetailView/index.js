@@ -33,7 +33,6 @@ function DetailView() {
 	if (data?.id && !loading) {
 		content = (
 			<>
-				{' '}
 				<Header
 					data={data}
 					handleUpdateContract={handleUpdateContract}

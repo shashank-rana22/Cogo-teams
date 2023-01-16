@@ -25,16 +25,10 @@ function Content({
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.information}>
-				{/* {statsData?.projected_consolidated_profitability
-					? ( */}
-				{/* <> */}
 				<Percentage data={statsData?.projected_consolidated_profitability.toFixed(2)} />
 				<Line />
-				{/* </> */}
-				{/* ) : null} */}
 				<Price data={statsData?.projected_consolidated_revenue} />
 				<Line />
-				{/* <Margin /> */}
 			</div>
 			{data?.status === 'pending_approval' ? (
 				<div className={styles.button_container}>
@@ -51,7 +45,6 @@ function Content({
 					{counter !== 0 ? (
 						<div className={styles.pending}>
 							Pending:
-							{' '}
 							{`${counter}/${formattedData.length}`}
 						</div>
 					) : null}

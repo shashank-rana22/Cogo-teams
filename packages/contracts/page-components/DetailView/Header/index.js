@@ -21,7 +21,7 @@ function Header({
 				}}
 			>
 				<IcMArrowBack
-					style={{ width: '1.5em', height: '1.5em', marginLeft: '2px' }}
+					style={{ width: '1.5em', height: '1.5em' }}
 
 				/>
 				<div className={styles.head}>Back to Contracts</div>
