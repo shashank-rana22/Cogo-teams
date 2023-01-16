@@ -19,7 +19,7 @@ export const middleware = async (request) => {
 			return;
 		}
 
-		if (request.nextUrl.pathname.includes('/v1/')) {
+		if (!request.nextUrl.pathname.includes('/v2/')) {
 			const language = acceptLanguage.get(request.headers.get('accept-language'))
 				|| process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
 			const locale = request.cookies.get(process.env.NEXT_PUBLIC_LOCALE_KEY)?.value || language;
@@ -29,7 +29,7 @@ export const middleware = async (request) => {
 			return NextResponse.redirect(urlObj);
 		}
 
-		if (request.nextUrl.locale === 'default' && !request.nextUrl.pathname.includes('/v1/')) {
+		if (request.nextUrl.locale === 'default' && request.nextUrl.pathname.includes('/v2/')) {
 			const language = acceptLanguage.get(request.headers.get('accept-language'))
 				|| process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
 

@@ -29,7 +29,7 @@ const useLoginAuthenticate = () => {
 			const configs = redirections(profile);
 			if (configs?.href) {
 				if (configs?.href?.includes('v1')) {
-					window.location.href = `/v1/${profile?.partner?.id}${configs.href.replace('/v1', '')}`;
+					window.location.href = `${profile?.partner?.id}${configs.href.replace('/v1', '')}`;
 				} else {
 					router.push(configs?.href);
 				}
