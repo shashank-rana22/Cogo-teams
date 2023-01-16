@@ -40,3 +40,7 @@
 .status_content {
 	width: 100%;
 }
+
+.remarksDiv{
+	cursor:pointer
+}
