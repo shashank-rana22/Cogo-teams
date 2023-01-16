@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 
 import Line from '../../../../common/Line';
 import Percentage from '../../../../common/MiniCard/Percentage';
@@ -66,9 +66,15 @@ function Main({ activePair, handleUpdateContract, data, statsData }) {
 							</Button>
 						</div>
 					) : (
-						<div className={styles.show_tag}>
+						<Pill
+							color={activePair?.status === 'rejected' ? 'red' : 'green'}
+							style={{
+								padding     : '4px',
+								marginRight : '34px',
+							}}
+						>
 							{activePair?.status === 'rejected' ? 'Rejected' : 'Approved'}
-						</div>
+						</Pill>
 					)}
 				</div>
 			</div>

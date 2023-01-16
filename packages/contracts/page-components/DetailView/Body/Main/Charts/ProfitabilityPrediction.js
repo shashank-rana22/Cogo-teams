@@ -34,8 +34,8 @@ function ProfitabilityPrediction({ activePair, statsDataRevenue }) {
 				<div className={styles.graph_heading}>
 					Predicted Avg. Price Data for the next 30 Days
 				</div>
-				{activePair?.service_type === 'fcl_freight'
-					? 					<Frequency data={data} avgPrice={avgPrice} /> : null}
+				{activePair?.service_type === 'fcl_freight' && (data || []).length
+					? <Frequency data={data} avgPrice={avgPrice} /> : null}
 			</div>
 		</div>
 	);

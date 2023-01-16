@@ -1,7 +1,22 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { addDays, format } from '@cogoport/utils';
+import { addDays, format, getMonth } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const monthsKey = {
+	0  : 'Jan',
+	1  : 'Feb',
+	2  : 'Mar',
+	3  : 'Apr',
+	4  : 'May',
+	5  : 'Jun',
+	6  : 'Jul',
+	7  : 'Aug',
+	8  : 'Sep',
+	9  : 'Oct',
+	10 : 'Nov',
+	11 : 'Dec',
+};
 
 function Frequency({
 	data,
@@ -10,7 +25,9 @@ function Frequency({
 	let date = new Date();
 	const lineData = [];
 	// const avgData = [];
+	const monthstart = getMonth(date);
 
+	console.log(monthstart, 'val');
 	(data || []).forEach((item) => {
 		lineData.push({
 			x : format(date, 'dd'),
@@ -22,6 +39,7 @@ function Frequency({
 		// });
 		date = addDays(date, 1);
 	});
+	const monthend = getMonth(date);
 
 	const finalData = [
 		{
@@ -65,7 +83,7 @@ function Frequency({
 					tickSize       : 0,
 					tickPadding    : 5,
 					tickRotation   : 0,
-					legend         : 'Dates',
+					legend         : `${monthsKey[monthstart]}-${monthsKey[monthend]}`,
 					legendOffset   : 36,
 					legendPosition : 'middle',
 				}}

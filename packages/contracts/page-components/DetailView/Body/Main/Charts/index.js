@@ -13,6 +13,7 @@ function Charts({ activePair, handleUpdateContract, data, statsData, stats }) {
 			service_type        : activePair?.service_type,
 			origin_port_id      : activePair?.origin_port_id,
 			destination_port_id : activePair?.destination_port_id,
+			shipping_line_id    : activePair?.shipping_line_id,
 		},
 	});
 
