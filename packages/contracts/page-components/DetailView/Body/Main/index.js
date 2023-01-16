@@ -53,19 +53,23 @@ function Main({ activePair, handleUpdateContract, data, statsData }) {
 								size="md"
 								themeType="accent"
 								onClick={() => {
-                	handleUpdateContract({
-                		payload: {
-                			id           : activePair?.id,
-                			service_type : activePair?.service_type,
-                			status       : 'approved',
-                		},
-                	});
+									handleUpdateContract({
+										payload: {
+											id           : activePair?.id,
+											service_type : activePair?.service_type,
+											status       : 'approved',
+										},
+									});
 								}}
 							>
 								Approve
 							</Button>
 						</div>
-					) : null}
+					) : (
+						<div className={styles.show_tag}>
+							{activePair?.status === 'rejected' ? 'Rejected' : 'Approved'}
+						</div>
+					)}
 				</div>
 			</div>
 			<Charts

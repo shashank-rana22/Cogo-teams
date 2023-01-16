@@ -1,7 +1,5 @@
 import Line from '../../../../../common/Line';
 import Margin from '../../../../../common/MiniCard/Margin';
-import Percentage from '../../../../../common/MiniCard/Percentage';
-import Price from '../../../../../common/MiniCard/Price';
 import useFclFreightRateForecasting from '../../../../../hooks/useFclFreightRateForecasting';
 
 import Frequency from './Frequency';
@@ -36,7 +34,8 @@ function ProfitabilityPrediction({ activePair, statsDataRevenue }) {
 				<div className={styles.graph_heading}>
 					Predicted Avg. Price Data for the next 30 Days
 				</div>
-				<Frequency data={data} avgPrice={avgPrice} />
+				{activePair?.service_type === 'fcl_freight'
+					? 					<Frequency data={data} avgPrice={avgPrice} /> : null}
 			</div>
 		</div>
 	);

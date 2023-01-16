@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function Frequency({
 	data,
-	// avgPrice
+	// avgPrice,
 }) {
 	let date = new Date();
 	const lineData = [];
@@ -17,15 +17,12 @@ function Frequency({
 			y : item,
 		});
 		// avgData.push({
-	  //   x : format(date, 'dd'),
-	  //   y : avgPrice,
-	  // });
+		//   x : format(date, 'dd'),
+		//   y : avgPrice,
+		// });
 		date = addDays(date, 1);
 	});
 
-	// for (let i = 0; i <= 30; i++) {
-	//   date = addDays(date, 1);
-	// }
 	const finalData = [
 		{
 			id   : 'price',
