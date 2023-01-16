@@ -41,6 +41,7 @@ const CoeFinance = () => {
                     <div className={styles.border} />
                 </div>
             </div>
+            <div className={styles.tabsContainer}> 
             <Tabs
                 activeTab={activeTab}
                 onChange={setActiveTab}
@@ -138,6 +139,7 @@ const CoeFinance = () => {
                     <div>Rejected</div>
                 </TabPanel>
             </Tabs>
+            </div>
         </div>
     );
 };
