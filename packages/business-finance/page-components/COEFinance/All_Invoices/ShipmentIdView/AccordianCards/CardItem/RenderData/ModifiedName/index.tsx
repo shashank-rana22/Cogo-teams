@@ -3,7 +3,7 @@ import React from "react";
 
 interface itemTypes {
     organizationName?: string;
-    createdBy: string;
+    createdByName: string;
     buyerDetails?: businessNameTypes;
 }
 
