@@ -47,13 +47,6 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #221f20;
-
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-	:global {
-		.ui_radio_label {
-			margin-top: 8px;
-		}
-	}
 }
 
 .heading {
