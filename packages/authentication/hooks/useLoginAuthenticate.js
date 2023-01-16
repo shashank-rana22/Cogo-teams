@@ -27,12 +27,14 @@ const useLoginAuthenticate = () => {
 	useEffect(() => {
 		if (Object.keys(profile).length > 0) {
 			const configs = redirections(profile);
-			if (configs?.href) {
-				if (configs?.href?.includes('v1')) {
-					window.location.href = `${profile?.partner?.id}${configs.href.replace('/v1', '')}`;
-				} else {
-					router.push(configs?.href);
-				}
+			if (configs?.href?.includes('/v2')) {
+				const replaceHref = configs?.href?.replace('/v2', '');
+				const replaceAs = configs?.as?.replace('/v2', '');
+				router.push(replaceHref?.href, replaceAs?.as);
+			} else if (process.env.NODE_ENV === 'production') {
+				window.location.href = `/${profile?.partner?.id}${configs.href}`;
+			} else {
+				router.push(configs.href, configs.as);
 			}
 		}
 	}, [profile, router]);

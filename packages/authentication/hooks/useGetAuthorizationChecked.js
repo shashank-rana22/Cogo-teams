@@ -45,7 +45,7 @@ const useGetAuthorizationChecked = () => {
 				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
 					const configs = redirections(profile);
 					if (configs?.href) {
-						if (configs?.href?.includes('v2')) {
+						if (configs?.href?.includes('/v2')) {
 							const replaceHref = configs?.href?.replace('/v2', '');
 							const replaceAs = configs?.as?.replace('/v2', '');
 							await push(replaceHref?.href, replaceAs?.as);
