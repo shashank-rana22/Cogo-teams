@@ -17,7 +17,7 @@ interface propsType {
 }
 
 const ModifiedName = ({ item, field }: propsType) => {
-    const { organizationName = "", createdBy, buyerDetails } = item || {};
+    const { organizationName = "", createdByName, buyerDetails } = item || {};
 
     const { businessName = "" } = buyerDetails || {};
 
@@ -58,18 +58,18 @@ const ModifiedName = ({ item, field }: propsType) => {
                 </div>
             )}
 
-            {field?.key === "createdBy" && (
+            {field?.key === "createdByName" && (
                 <div>
-                    {createdBy?.length > 10 ? (
+                    {createdByName?.length > 10 ? (
                         <Tooltip
                             interactive
                             placement="top"
-                            content={createdBy}
+                            content={createdByName}
                         >
-                            <text>{`${createdBy?.substring(0, 10)}...`}</text>
+                            <text>{`${createdByName?.substring(0, 10)}...`}</text>
                         </Tooltip>
                     ) : (
-                        <text>{createdBy}</text>
+                        <text>{createdByName}</text>
                     )}
                 </div>
             )}
