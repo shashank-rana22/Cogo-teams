@@ -23,11 +23,11 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = {};
+	const childEmptyValues = { };
 
 	return (
 		<div className={styles.child}>
-			{fields.map((field, index) => (
+			{(fields || []).map((field, index) => (
 				<Child
 					{...rest}
 					key={field.id}

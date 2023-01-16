@@ -11,14 +11,12 @@ const commonControls = ({ service }) => {
 
 		},
 		{
-			label          : 'Rate Provided by user',
-			name           : 'sourced_by_id',
-			placeholder    : 'Select',
-			type           : 'select',
-			isClearable    : true,
-			defaultOptions : false,
-			span           : 4,
-			rules          : { required: 'This is required' },
+			label       : 'Rate Provided by user',
+			name        : 'sourced_by_id',
+			placeholder : 'Select',
+			type        : 'select',
+			span        : 4,
+			rules       : { required: 'This is required' },
 		},
 	];
 	const lineControls = {
@@ -28,7 +26,6 @@ const commonControls = ({ service }) => {
 			.includes(service) ? 'shipping_line_id' : 'airline_id',
 		placeholder : 'Select',
 		type        : 'select',
-		isClearable : true,
 		span        : 4,
 		requirement : true,
 		rules       : { required: 'This is required' },

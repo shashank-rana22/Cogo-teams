@@ -56,7 +56,7 @@ function asyncFieldsOrganizationUsers() {
 		labelKey    : 'name',
 		valueKey    : 'organization_id',
 		endpoint    : 'list_organization_users',
-		initialCall : false,
+		initialCall : true,
 		params      : {
 			filters: {
 				status: 'active',
@@ -67,9 +67,10 @@ function asyncFieldsOrganizationUsers() {
 
 function asyncFieldsOperators() {
 	return {
-		labelKey : 'short_name',
-		valueKey : 'id',
-		endpoint : 'list_operators',
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_operators',
+		initialCall : true,
 	};
 }
 

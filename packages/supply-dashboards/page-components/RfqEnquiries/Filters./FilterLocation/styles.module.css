@@ -4,6 +4,9 @@
 
 .tradetype {
 	display: flex;
+	font-size: 12px;
+	font-weight: 400;
+	color: #221f20;
 }
 
 .heading {

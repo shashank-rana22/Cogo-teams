@@ -65,7 +65,7 @@ function Navbar({
 
 					<ul className={styles.list_container}>
 						{(listItems || []).map((item) => (
-							<Items key={item} item={item} resetSubnavs={resetSubnavs} />
+							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
 						))}
 					</ul>
 				</div>

@@ -19,7 +19,7 @@ function PageView() {
 		content = <EmptyState />;
 	}
 
-	if ((data?.list|| []).length && !loading) {
+	if ((data?.list || []).length && !loading) {
 		content = (
 			<>
 				<List data={data} filters={filters} />

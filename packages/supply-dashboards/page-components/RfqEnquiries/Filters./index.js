@@ -24,7 +24,7 @@ function Filters({
 				<div className={styles.input}>
 					<Input
 						className="primary md"
-						value={filters?.searchParameter}
+						value={filters?.q}
 						placeholder="Filter via RFQ ID or Organization Name"
 						suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}
 						onChange={(val) => {
