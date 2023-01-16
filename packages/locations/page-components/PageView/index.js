@@ -55,7 +55,7 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 					currentPage={page}
 					totalItems={list.total}
 					pageSize={page_limit}
-					handlePageChange={handlePageChange}
+					onPageChange={handlePageChange}
 				/>
 			</div>
 

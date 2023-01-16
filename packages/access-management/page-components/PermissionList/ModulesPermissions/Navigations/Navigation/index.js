@@ -151,6 +151,7 @@ function Navigation(props) {
 							themeType={background}
 							onClick={handlePrimaryAction}
 							disabled={loading}
+							className={styles.row_button}
 						>
 							{buttonText}
 						</Button>
@@ -160,6 +161,7 @@ function Navigation(props) {
 								className={styles.edit}
 								onClick={() => setShow(2)}
 								disabled={loading}
+
 							>
 								Edit
 							</Button>
@@ -171,6 +173,7 @@ function Navigation(props) {
 				size="xl"
 				show={!!show}
 				onClose={() => setShow(null)}
+				className={styles.modal_container}
 			>
 				<Modal.Header title={(
 					<div>

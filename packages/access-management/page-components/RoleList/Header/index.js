@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMPlus } from '@cogoport/icons-react';
 import React from 'react';
 
 import Heading from '../../../common/Heading';
@@ -19,11 +20,12 @@ function Header({
 
 			<div className={styles.role_group}>
 				<Button
-					size="md"
+					className={styles.role_group_button}
+					size="sm"
 					id="rnp_role_list_create_new_role_button"
 					onClick={() => onChangeShowCreateRoleModal(true)}
 				>
-					+ &nbsp; Create new role
+					<IcMPlus className={styles.role_group_icon} />
 				</Button>
 			</div>
 		</section>
