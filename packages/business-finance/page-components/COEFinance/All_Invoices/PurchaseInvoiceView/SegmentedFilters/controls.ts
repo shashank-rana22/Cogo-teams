@@ -6,7 +6,7 @@ const controls = [
         type: "select",
         placeholder: "Select Urgency",
         theme: "admin",
-        span: 4,
+        span: 6,
         isClearable: true,
         options: [
             { label: "Advanced PDA Accounts", value: "pda" },
@@ -21,3 +21,5 @@ const controls = [
     },
 ];
 export default controls;
+
+

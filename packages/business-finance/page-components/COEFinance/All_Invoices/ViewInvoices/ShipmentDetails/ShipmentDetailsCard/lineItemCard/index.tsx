@@ -12,7 +12,7 @@ import { Textarea } from "@cogoport/components";
 
 interface LineItemCard {
     lineItems:Array<object>
-    bill:{
+    bill?:{
         taxTotal: any,
          billCurrency:string,
          grandTotal:any,

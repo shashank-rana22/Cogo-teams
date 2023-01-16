@@ -12,21 +12,10 @@ import CustomerInformation from './CustomerInformation/index';
 import usePOCDetails from '../../../../hook/usePOCDetails';
 import { POC_DATA_MAPPING } from '../../../../constants/constant';
 import { IcMArrowRotateRight } from '@cogoport/icons-react';
+import { DataInterface } from '..';
 
-interface BillInterface {
-	id?:string
-}
-interface JobInterface{
-	jobNumber?:string
-	
-}
-
-interface ItemDataInterface {
-	bill ?:BillInterface
-	job?:JobInterface
-}
 interface Props {
-	itemData:ItemDataInterface
+	itemData:DataInterface
 }
 
 function getNumber(labelValue:string) {
