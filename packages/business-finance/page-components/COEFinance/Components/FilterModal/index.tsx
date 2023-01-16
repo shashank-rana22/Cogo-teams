@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 import Filter from '../../../commons/Filters'
 import { FILTERS } from '../../configurations/filters_config'
 import { Button } from '@cogoport/components'
-import {IcMFilter} from "@cogoport/icons-react"
+import {IcMFilter, IcCRedCircle} from "@cogoport/icons-react"
 import { GenericObject } from '../../../commons/Interfaces'
 
 interface Props{
@@ -44,6 +44,9 @@ return (
 	</Modal>
 	<div role="button" className={styles.filterButton} onClick={()=>{setShowModal(true)}}>
 		Filters <span className={styles.icon}><IcMFilter/></span>
+		{(Object.keys(filters||{})?.length!==0 && Object.keys(filters||{})?.length!==3) && <div className={styles.filterApplied}>
+			<IcCRedCircle height={8} width={8}/>
+			</div>}
 	</div>
 	</div>
 )
