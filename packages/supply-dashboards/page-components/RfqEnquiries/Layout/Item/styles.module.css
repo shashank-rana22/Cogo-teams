@@ -59,7 +59,8 @@
 
 		/* stylelint-disable-next-line selector-id-pattern */
 		#booking_rate_procurement_proof {
-			min-height: 42px;
+			height: unset;
+			min-height: 40px;
 		}
 
 		.ui_upload_droparea_heading {
