@@ -48,7 +48,7 @@ const fclPayload = ({ service, value }) => {
 
 	const payload = {
 		service_provider_id            : value?.service_provider_id,
-		rate_reference_number          : value?.rate_reference_number,
+		rate_reference_number          : value?.rate_reference_number || undefined,
 		booking_rate_procurement_proof : value?.booking_rate_procurement_proof?.finalUrl,
 		sourced_by_id                  : value?.sourced_by_id,
 		spot_negotiation_id            : service?.id,
