@@ -1,7 +1,4 @@
-import {
-	Button,
-	// RadioGroup,
-} from '@cogoport/components';
+import { ButtonIcon, RadioGroup } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -64,21 +61,19 @@ function Grouped(props) {
 					<div className={styles.row}>
 						<p>{displayNames[featureKey] || `Manage ${startCase(featureKey)}`}</p>
 					</div>
-					{/* todo: Radio group is bugged will uncomment later */}
-					{/* <RadioGroup */}
-					{/*	options={OPTIONS} */}
-					{/*	values={value} */}
-					{/*	onChange={handleApiStatus} */}
-					{/*	disabled={creatingNavs} */}
-					{/* /> */}
+					<RadioGroup
+						options={OPTIONS}
+						value={value}
+						onChange={handleApiStatus}
+						disabled={creatingNavs}
+						className={styles.group_radio}
+					/>
 					<div>
-						<Button
-							themeType="tertiary"
+						<ButtonIcon
 							id={`access_mgmt_edit_role_sh_${featureKey}`}
 							disabled={creatingNavs}
-						>
-							{show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-						</Button>
+							icon={show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						/>
 					</div>
 				</div>
 			) : null}

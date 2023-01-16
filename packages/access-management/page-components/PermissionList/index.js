@@ -2,7 +2,7 @@ import React from 'react';
 
 import useOnBoardRole from '../../hooks/useOnBoardRole';
 
-// import ImportRoles from './ImportRoles';
+import ImportRoles from './ImportRoles';
 import ModulesPermissions from './ModulesPermissions';
 import RoleDetails from './RoleDetails';
 import styles from './styles.module.css';
@@ -12,7 +12,6 @@ function PermissionList() {
 	const {
 		loading,
 		roleData,
-		onBack,
 		setShowImportRole,
 		showImportRole,
 		handleRoleImport,
@@ -31,14 +30,14 @@ function PermissionList() {
 			/>
 
 			<ModulesPermissions {...props} />
-			{/* {showImportRole ? ( */}
-			{/* 	<ImportRoles */}
-			{/* 		onSubmit={handleRoleImport} */}
-			{/* 		show={showImportRole} */}
-			{/* 		onClose={() => setShowImportRole(false)} */}
-			{/* 		permissions={permissions} */}
-			{/* 	/> */}
-			{/* ) : null} */}
+			{showImportRole ? (
+				<ImportRoles
+					onSubmit={handleRoleImport}
+					show={showImportRole}
+					onClose={() => setShowImportRole(false)}
+					permissions={permissions}
+				/>
+			) : null}
 		</section>
 	);
 }

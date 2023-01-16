@@ -6,11 +6,11 @@
     "main": "index.js",
     "module": "index.js",
     "dependencies": {
-        "@cogoport/components": "^1.0.240",
-        "@cogoport/icons-react": "^1.0.49",
+        "@cogoport/components": "^1.0.257",
+        "@cogoport/icons-react": "^1.0.50",
         "@cogoport/request": "workspace:0.1.0",
         "@cogoport/utils": "^1.2.2",
         "react": "18.2.0",
-        "react-hook-form": "^7.41.5"
+        "react-hook-form": "^7.42.0"
     }
 }

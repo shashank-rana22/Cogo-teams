@@ -45,7 +45,7 @@ function Permission({
 		}
 	});
 	const allControls = [...controls, ...otherControls];
-	const { handleSubmit, setValue, watch } = useForm();
+	const { handleSubmit, control, setValue, watch } = useForm();
 
 	const newFormValues = watch();
 
@@ -75,8 +75,8 @@ function Permission({
 	};
 
 	useEffect(() => {
-		allControls.forEach((control) => {
-			setValue(control.name, formValues[control.name]);
+		allControls.forEach((c) => {
+			setValue(c.name, formValues[c.name]);
 		});
 	}, [JSON.stringify(formValues)]);
 
@@ -111,6 +111,7 @@ function Permission({
 			<div className={styled.container_options}>
 				{permission.options.map((option) => (
 					<Option
+						control={control}
 						option={option}
 						controls={allControls}
 						permission={permission}

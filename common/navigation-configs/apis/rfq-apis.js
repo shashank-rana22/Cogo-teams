@@ -1,4 +1,4 @@
-const rfq = [
+const apis = [
 	{
 		api          : 'create_rfq',
 		access_type  : 'private',
@@ -138,4 +138,4 @@ const rfq = [
 		service_name : 'checkout',
 	},
 ];
-export default rfq;
+export default apis;

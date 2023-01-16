@@ -21,7 +21,7 @@ const bfRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_BUSINESS_FINAN
 bfRequest.interceptors.request.use((oldConfig) => {
 	const { authKey = '', ...axiosConfig } = oldConfig;
 
-	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME || process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME_2;
+	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
 
 	const token = getCookie(auth, oldConfig.ctx);
 	const authorizationparameters = getAuthorizationParams(store, authKey);
