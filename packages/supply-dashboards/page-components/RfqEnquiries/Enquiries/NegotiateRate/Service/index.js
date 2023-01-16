@@ -12,12 +12,11 @@ import RateModal from './RatesModal';
 import styles from './styles.module.css';
 
 function Service({
-	selectedCard, service, activeService, setActiveService,
+	selectedCard, service, activeService, setActiveService, refetch = () => {}, submittedEnquiry, setSubmittedEnquiry,
 }) {
 	const [selectedRate, setSelectedRate] = useState(null);
-	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
 	const [showModal, setShowModal] = useState(false);
-	const status = submittedEnquiry.includes(`${selectedCard?.id}${service?.service}`) ? 'Submitted' : 'Pending';
+	const status = submittedEnquiry.includes(`${selectedCard?.id}${service?.service}`) ? 'Submitted!' : 'Pending';
 	const handleClick = () => {
 		if (activeService === service) {
 			setActiveService(null);
@@ -70,7 +69,7 @@ function Service({
 					)}
 				</div>
 				<div className={styles.action}>
-					<Pill color={status === 'Submitted' ? '#849E4C' : '#F37166'}>{status}</Pill>
+					<Pill color={status === 'Submitted!' ? '#849E4C' : '#F37166'}>{status}</Pill>
 					<Button themeType="accent" size="sm" onClick={(e) => handleOnClick(e)}>Quick Add Rates</Button>
 				</div>
 
@@ -82,6 +81,7 @@ function Service({
 					setActiveService={setActiveService}
 					selectedRate={selectedRate}
 					selectedCard={selectedCard}
+					refetch={refetch}
 				/>
 			)}
 			{showModal && (

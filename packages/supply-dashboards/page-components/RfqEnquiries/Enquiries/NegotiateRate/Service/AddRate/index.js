@@ -6,12 +6,12 @@ import Layout from '../../../../Layout';
 import styles from './styles.module.css';
 
 function AddRate({
-	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
+	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, refetch = () => {},
 }) {
 	const {
 		fields, control, showElements = {}, errors, onError, handleSubmit, handleData, loading,
 	} = useUpdateSpotNegotiationRate({
-		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard,
+		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, refetch,
 	});
 
 	return (
@@ -24,7 +24,6 @@ function AddRate({
 					onClick={handleSubmit(handleData, onError)}
 				>
 					Submit
-
 				</Button>
 			</div>
 		</>

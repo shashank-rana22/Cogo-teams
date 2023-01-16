@@ -8,6 +8,13 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 4px;
+
+	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+	:global {
+		.ui_pagination_table_container {
+			display: flex;
+		}
+	}
 }
 
 .empty_state {
