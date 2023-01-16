@@ -24,7 +24,7 @@ export const expenseConfig = {
         },
         {
             label: "Service Ops 2",
-            key: "createdBy",
+            key: "createdByName",
             func: "renderName",
             span: 1.5,
         },

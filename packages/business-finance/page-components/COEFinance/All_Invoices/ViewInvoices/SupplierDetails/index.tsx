@@ -41,6 +41,7 @@ interface SupplierDetailsProps {
 const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsProps)=>{
     const {historyData,getSupplierHistory,loading} = useSupplierHistory({data});
     const [showModal, setShowModal] = useState(false)
+    const [showDocsModal, setShowDocsModal] = useState(false)
     
     const { sellerDetail, serviceProviderCategory='', serviceProviderAdditionalDetail,serviceProviderDocuments} = data;
     const {kycStatus=''}=serviceProviderAdditionalDetail || {};
@@ -48,9 +49,8 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     
 console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
 
-    const handleChange = (e) =>{
-        if(e.target.innerText === 'Supplier History')
-        { getSupplierHistory()}
+    const handleChange = () =>{
+         getSupplierHistory()
         setShowModal(!showModal) 
        
     }
@@ -64,6 +64,7 @@ console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
                                </Button>,
         downloadFunc: (item:any) => <div className={styles.download} onClick={() => saveAs(item?.document_url)}><IcMDownload height={20} width={20}/></div>,
     };
+    console.log(showDocsModal,"showDocsModal");
     
     return(
         <div className={styles.container}> 
@@ -127,7 +128,7 @@ console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
                 <div className={styles.verticalSmallHr}/>
 
                 <div className={styles.supplierDetails}>
-                    <div className={styles.supplierHistory} onClick={(e)=>{handleChange(e)}}>Supplier History</div>
+                    <div className={styles.supplierHistory} onClick={(e)=>{handleChange()}}>Supplier History</div>
                     {showModal && 
                     <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
                         <Modal.Header title="SUPPLIER HISTORY" />
@@ -140,10 +141,10 @@ console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
 
                     <div className={styles.docsContainer}>
                         <div className={styles.docsIcon}><IcADocumentTemplates/></div>
-                    <div className={styles.supplierHistory} onClick={(e)=>{handleChange(e)}}>Documents</div>
+                    <div className={styles.supplierHistory} onClick={()=>{setShowDocsModal(true)}}>Documents</div>
 
-                    {showModal && 
-                    <Modal size="lg" show={showModal} onClose={()=>{setShowModal(false)}}>
+                    {showDocsModal && 
+                    <Modal size="lg" show={showDocsModal} onClose={()=>{setShowDocsModal(false)}}>
                         <Modal.Header title="Documents" />
                         <Modal.Body>
                             {kycStatus==="verified"  ? <List config={DOCUMENTS} itemData={{list:serviceProviderDocuments?.list}}  loading={loading} functions={functions} /> : <div className={styles.supplyCard}>NO Documents</div>}
