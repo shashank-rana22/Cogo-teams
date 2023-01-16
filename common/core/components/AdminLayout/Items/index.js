@@ -21,8 +21,10 @@ function Items({ item, resetSubnavs }) {
 			const replaceHref = itemdata?.href?.replace('/v2', '');
 			const replaceAs = itemdata?.as?.replace('/v2', '');
 			router.push(replaceHref, replaceAs);
-		} else {
+		} else if (process.env.NODE_ENV === 'production') {
 			window.location.href = `/${query.partner_id || splitAspath}${itemdata.href}`;
+		} else {
+			router.push(itemdata.href, itemdata.as);
 		}
 	};
 

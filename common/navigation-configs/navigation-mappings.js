@@ -1736,7 +1736,6 @@ const navigationMappings = {
 				as            : '/constants',
 				main_apis     : [],
 				possible_apis : apis.constants,
-
 			},
 		],
 		module_type: 'dashboards',
