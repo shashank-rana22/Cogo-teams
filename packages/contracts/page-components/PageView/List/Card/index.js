@@ -39,14 +39,14 @@ function Card({ item, filters }) {
           </div> */}
 					<div className={styles.pair}>
 						<div>
-							{filters?.status === 'active' ? 'Approved Date' : 'Request Date '}
+							{filters?.status === 'active' ? 'Updated Date' : 'Request Date '}
 							:
 						</div>
 						<div className={styles.value}>
 							{format(
 								filters?.status === 'active'
 									? item?.approved_at
-									: item?.created_at,
+									: item?.updated_at,
 								'dd MMM YYYY',
 							)}
 						</div>

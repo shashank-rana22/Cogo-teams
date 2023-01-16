@@ -78,7 +78,11 @@ function Content({
 									APPROVE
 								</div>
 							</div>
-						) : null}
+						) : 	(
+							<div className={styles.show_tag}>
+								{portPair?.status === 'rejected' ? 'Rejected' : 'Approved'}
+							</div>
+						)}
 					</div>
 					<Footer statsData={statsData} portPair={portPair} index={index} />
 				</div>
