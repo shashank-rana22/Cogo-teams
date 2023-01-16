@@ -3922,6 +3922,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'rate_density',
 		},
+		{
+			api              : 'list_rfq_searches',
+			access_type      : 'private',
+			feature          : 'rfq',
+			defaultparameter : 'supply_dashboard:allowed',
+		},
 	],
 	operations_dashboard: [
 		{
