@@ -37,7 +37,7 @@ const useGetAuthorizationChecked = () => {
 				dispatch(setProfileState({ _initialized: true, ...res.data }));
 			}
 		})();
-	}, [dispatch]);
+	}, [_initialized, dispatch]);
 
 	useEffect(() => {
 		(async () => {

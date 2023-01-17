@@ -34,6 +34,7 @@ function Form({ controls = () => [], formProps = {} }) {
 						<div className={styles.input_group}>
 							<Element
 								{...el}
+								key={el.name}
 								control={control}
 								id={`rnp_role_list_create_role_form_${el.name}_input`}
 							/>
