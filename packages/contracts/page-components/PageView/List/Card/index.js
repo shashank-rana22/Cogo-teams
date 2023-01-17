@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 
 import formatPortPair from '../../../../utils/formatPortPair';
 
@@ -25,21 +25,27 @@ function Card({ item, filters }) {
 				{item?.contract_reference_id ? (
 					<div className={styles.heading}>
 						Contract ID #
-						{item?.contract_reference_id || '23422'}
+						{item?.contract_reference_id}
+						<div className={styles.content}>
+							<div>
+								{startCase(item?.contract_name)}
+							</div>
+						</div>
+						{item?.services?.map((service) => (
+							<Pill
+								size="md"
+								color="#DFE1EF"
+							>
+								{startCase(service)}
+							</Pill>
+						))}
 					</div>
 				) : null}
 
 				<div className={styles.details}>
-					{/* <div className={styles.pair}>
-            <div>No. of Containers :</div>
-            <div className={styles.value}>
-              {item?.contract_utilisation_data[0]?.max_containers_count ||
-                "150"}
-            </div>
-          </div> */}
 					<div className={styles.pair}>
 						<div>
-							{filters?.status === 'active' ? 'Updated Date' : 'Request Date '}
+							{filters?.status === 'active' ? 'Updated Date' : 'Requested Date '}
 							:
 						</div>
 						<div className={styles.value}>
@@ -51,13 +57,15 @@ function Card({ item, filters }) {
 							)}
 						</div>
 					</div>
-					<div className={styles.pair}>
-						<div>Validity :</div>
-						<div className={styles.value}>
-							{item?.validity_left_days || '24'}
-							days
+					{ filters?.status === 'active' ? (
+						<div className={styles.pair}>
+							<div>Validity :</div>
+							<div className={styles.value}>
+								{item?.validity_left_days || '24'}
+								days
+							</div>
 						</div>
-					</div>
+					) : null}
 				</div>
 			</div>
 			<div className={styles.body}>

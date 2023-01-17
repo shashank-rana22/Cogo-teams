@@ -5,6 +5,7 @@ import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Line from '../../../../../common/Line';
+import Percentage from '../../../../../common/MiniCard/Percentage';
 
 import styles from './styles.module.css';
 
@@ -84,7 +85,7 @@ function ServiceProvier({
 				)}
 			</div>
 			<div className={styles.mini_container}>
-				<div>
+				<div className={styles.box}>
 					<div className={styles.label}>Requested Port Pair:</div>
 					<div className={styles.value}>
 						{stats?.service_provider_selected_for}
@@ -93,11 +94,9 @@ function ServiceProvier({
 					</div>
 				</div>
 				<Line />
-				<div>
-					<div className={styles.label}>Fulfilment in %</div>
-					<div className={styles.value}>
-						{stats?.fulfilment}
-						%
+				<div className={styles.box}>
+					<div>
+						<Percentage heading="Fulfilment in %" data={stats?.fulfilment} />
 					</div>
 				</div>
 			</div>

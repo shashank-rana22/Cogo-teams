@@ -27,7 +27,6 @@ function Frequency({
 	// const avgData = [];
 	const monthstart = getMonth(date);
 
-	console.log(monthstart, 'val');
 	(data || []).forEach((item) => {
 		lineData.push({
 			x : format(date, 'dd'),
