@@ -1,6 +1,6 @@
 import '@cogoport/components/dist/themes/base.css';
 import '@cogoport/components/dist/themes/dawn.css';
-import { Head, Router } from '@cogoport/next';
+import { Router } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
 import { appWithTranslation } from 'next-i18next';
 import pageProgessBar from 'nprogress';
@@ -24,18 +24,14 @@ function MyApp({ Component, pageProps }) {
 	}, []);
 
 	return (
-		<>
-			<Head>
+		<Provider store={store}>
+			<SessionCheck>
 				<title>Cogoport - Simplifying International Logistics</title>
-			</Head>
-			<Provider store={store}>
-				<SessionCheck>
-					<Layout layout={pageProps.layout || 'authenticated'}>
-						<Component {...pageProps} />
-					</Layout>
-				</SessionCheck>
-			</Provider>
-		</>
+				<Layout layout={pageProps.layout || 'authenticated'}>
+					<Component {...pageProps} />
+				</Layout>
+			</SessionCheck>
+		</Provider>
 	);
 }
 

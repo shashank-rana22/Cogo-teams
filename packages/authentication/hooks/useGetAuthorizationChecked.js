@@ -49,7 +49,8 @@ const useGetAuthorizationChecked = () => {
 							const replaceHref = configs?.href?.replace('/v2', '');
 							const replaceAs = configs?.as?.replace('/v2', '');
 							await push(replaceHref?.href, replaceAs?.as);
-						} else if (process.env.NODE_ENV === 'production') {
+						}
+						if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 							window.location.href = `/${profile?.partner?.id}${configs.href}`;
 						} else {
 							await push(configs.href, configs.as);
