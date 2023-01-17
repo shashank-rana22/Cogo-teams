@@ -74,49 +74,38 @@ function RoleDetails({
 	}
 
 	return (
-		<>
-			<Button
-				size="md"
-				style={{ width: 80 }}
-				themeType="secondary"
-				onClick={() => router.back()}
-			>
-				<IcMArrowBack fill="#221F20" style={{ marginRight: 4 }} />
-				{' '}
-				Back
-			</Button>
-			<section className={styles.container}>
-				<div className={styles.heading_container}>
-					<Heading
-						title="Update Role"
-						subTitle="Update permissions for the role"
-					/>
 
-					<section className={styles.permissions_container}>
-						<EditRoles roleData={roleData} getRole={getRole} />
-						{importPermissionsButton}
-					</section>
+		<section className={styles.container}>
+			<div className={styles.heading_container}>
+				<Heading
+					title="Update Role"
+					subTitle="Update permissions for the role"
+				/>
 
-				</div>
+				<section className={styles.permissions_container}>
+					<EditRoles roleData={roleData} getRole={getRole} />
+					{importPermissionsButton}
+				</section>
 
-				<div className={styles.content}>
-					{(details || []).map((detail) => (
-						<div key={detail.title} className={styles.details}>
-							<span className={styles.title}>
-								{detail?.title}
-								{' '}
-								-
-							</span>
-							{loading ? (
-								<Placeholder height="16px" width={detail?.skeleton.width} />
-							) : (
-								<span className={styles.data}>{detail?.data}</span>
-							)}
-						</div>
-					))}
-				</div>
-			</section>
-		</>
+			</div>
+
+			<div className={styles.content}>
+				{(details || []).map((detail) => (
+					<div key={detail.title} className={styles.details}>
+						<span className={styles.title}>
+							{detail?.title}
+							{' '}
+							-
+						</span>
+						{loading ? (
+							<Placeholder height="16px" width={detail?.skeleton.width} />
+						) : (
+							<span className={styles.data}>{detail?.data}</span>
+						)}
+					</div>
+				))}
+			</div>
+		</section>
 	);
 }
 
