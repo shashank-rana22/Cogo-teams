@@ -1,6 +1,5 @@
 import { Placeholder, Tooltip, Button } from '@cogoport/components';
-import { IcMArrowBack, IcMArrowDoubleLeft } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { IcMArrowDoubleLeft } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
 import Heading from '../../../common/Heading';
@@ -21,7 +20,6 @@ function RoleDetails({
 		stakeholder_type = '',
 		importedPermissions,
 	} = roleData;
-	const router = useRouter();
 	const details = useMemo(
 		() => [
 			{
@@ -74,7 +72,6 @@ function RoleDetails({
 	}
 
 	return (
-
 		<section className={styles.container}>
 			<div className={styles.heading_container}>
 				<Heading
