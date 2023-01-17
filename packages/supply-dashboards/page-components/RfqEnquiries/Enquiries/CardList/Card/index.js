@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function Card({ item, selectedCard, setSelectedCard }) {
+function Card({ item, selectedCard, setSelectedCard, revertCounts }) {
 	return (
 		<div
 			role="presentation"
@@ -14,7 +14,7 @@ function Card({ item, selectedCard, setSelectedCard }) {
 			<div className={styles.line} />
 			<Body item={item?.detail} />
 			<div className={styles.line} />
-			<Footer item={item} />
+			<Footer item={item} revertCounts={revertCounts} />
 		</div>
 	);
 }

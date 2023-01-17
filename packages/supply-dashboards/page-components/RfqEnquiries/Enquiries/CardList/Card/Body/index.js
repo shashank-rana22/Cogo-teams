@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -16,8 +17,10 @@ function Body({ item }) {
 				<div>
 					<div className={styles.code}>{`(${originCode})`}</div>
 					<div className={styles.name}>
-						<div>{`${originName},`}</div>
-						<div className={styles.country}>{`${originCountry}`}</div>
+						<Tooltip content={originName}>
+							<div className={styles.subname}>{`${originName}`}</div>
+						</Tooltip>
+						<div className={styles.country}>{`,${originCountry}`}</div>
 					</div>
 				</div>
 				<div>
@@ -27,8 +30,10 @@ function Body({ item }) {
 					<div className={styles.code}>{`(${destinationCode})`}</div>
 
 					<div className={styles.name}>
-						<div>{`${destinationName},`}</div>
-						<div className={styles.country}>{`${destinationCountry}`}</div>
+						<Tooltip content={destinationName}>
+							<div className={styles.subname}>{`${destinationName}`}</div>
+						</Tooltip>
+						<div className={styles.country}>{`,${destinationCountry}`}</div>
 					</div>
 				</div>
 			</div>
@@ -37,6 +42,11 @@ function Body({ item }) {
 					{`${item?.containers_count || 1}
 					 Container x ${item?.container_size} x ${startCase(item?.container_type)},
                 ${startCase(item?.commodity)}`}
+				</div>
+			)}
+			{['lcl_freight', 'air_freight'].includes(item?.service_type) && (
+				<div>
+					{`${startCase(item?.commodity)}`}
 				</div>
 			)}
 

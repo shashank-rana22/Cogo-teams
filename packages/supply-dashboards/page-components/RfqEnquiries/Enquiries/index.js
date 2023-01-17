@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 function Enquiries() {
 	const [selectedCard, setSelectedCard] = useState(null);
+	const [revertCounts, setRevertCounts] = useState({});
 	const { query, push } = useRouter();
 	const rfqId = query?.id;
 
@@ -18,12 +19,16 @@ function Enquiries() {
 		loading,
 		list:data,
 		setPage,
-		refetch = () => {},
 	} = useGetRfqSearches({ rfqId });
 
 	useEffect(() => {
 		if (data) {
+			const obj = {};
 			setSelectedCard(data?.data[0]);
+			(data?.data || []).forEach((item) => {
+				obj[item?.id] = item?.negotiation_reverts_count;
+			});
+			setRevertCounts(obj);
 		}
 	}, [data]);
 
@@ -58,12 +63,16 @@ function Enquiries() {
 						selectedCard={selectedCard}
 						setSelectedCard={setSelectedCard}
 						setPage={setPage}
+						revertCounts={revertCounts}
 					/>
 
 				</div>
 				{selectedCard ? (
 					<div className={styles.form}>
-						<NegotiateRate selectedCard={selectedCard} refetch={refetch} />
+						<NegotiateRate
+							selectedCard={selectedCard}
+							setRevertCounts={setRevertCounts}
+						/>
 					</div>
 				) : null}
 			</div>

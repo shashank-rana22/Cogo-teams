@@ -12,7 +12,13 @@ import RateModal from './RatesModal';
 import styles from './styles.module.css';
 
 function Service({
-	selectedCard, service, activeService, setActiveService, refetch = () => {}, submittedEnquiry, setSubmittedEnquiry,
+	selectedCard,
+	service,
+	activeService,
+	setActiveService,
+	submittedEnquiry,
+	setSubmittedEnquiry,
+	setRevertCounts,
 }) {
 	const [selectedRate, setSelectedRate] = useState(null);
 	const [showModal, setShowModal] = useState(false);
@@ -30,6 +36,10 @@ function Service({
 		e.stopPropagation();
 		setActiveService(null);
 		setShowModal(true);
+	};
+	const handleOnClose = () => {
+		setSelectedRate(null);
+		setShowModal(false);
 	};
 
 	useEffect(() => {
@@ -81,16 +91,17 @@ function Service({
 					setActiveService={setActiveService}
 					selectedRate={selectedRate}
 					selectedCard={selectedCard}
-					refetch={refetch}
+					setRevertCounts={setRevertCounts}
 				/>
 			)}
 			{showModal && (
-				<Modal size="lg" show={showModal}>
+				<Modal size="lg" show={showModal} onClose={() => handleOnClose()}>
 					<RateModal
 						service={service}
 						setShowModal={setShowModal}
 						setSelectedRate={setSelectedRate}
 						selectedRate={selectedRate}
+						handleOnClose={handleOnClose}
 					/>
 				</Modal>
 			)}

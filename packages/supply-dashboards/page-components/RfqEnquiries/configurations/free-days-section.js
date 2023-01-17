@@ -80,7 +80,7 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container', type = '' }
 				span  : 1.5,
 
 				placeholder : 'Price',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 			},
 		],
 	}];

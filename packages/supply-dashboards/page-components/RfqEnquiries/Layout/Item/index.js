@@ -16,10 +16,7 @@ function Item(props) {
 		rules,
 	} = props || {};
 
-	const errorClass = error ? 'error' : null;
-
 	const errorOriginal = getErrorMessage({
-		errorClass,
 		error,
 		rules,
 		label,

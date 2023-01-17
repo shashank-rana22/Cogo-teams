@@ -3,10 +3,10 @@ import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsOperators,
 }
 	from '@cogoport/forms/utils/getAsyncFields';
-import { merge, startCase } from '@cogoport/utils';
+import { merge, startCase, addDays } from '@cogoport/utils';
 
 const FieldMutation = ({
-	fields, values, data,
+	fields, values, data, service,
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(
@@ -42,6 +42,12 @@ const FieldMutation = ({
 			newControl = { ...newControl, ...shippingLineOptions };
 		} else if (name === 'airline_id') {
 			newControl = { ...newControl, ...airLineOptions };
+		} else if (name === 'validity_start' || name === 'validity_end') {
+			newControl = {
+				...newControl,
+				minDate : addDays(new Date(service?.data?.validity_start), 1),
+				maxDate : new Date(service?.data?.validity_end),
+			};
 		}
 		if (newControl.controls) {
 			let chargeCodes = {};

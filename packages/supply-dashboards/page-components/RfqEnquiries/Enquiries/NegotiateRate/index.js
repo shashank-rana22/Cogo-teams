@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Service from './Service';
 import styles from './styles.module.css';
 
-function NegotiateRate({ selectedCard, refetch = () => {} }) {
+function NegotiateRate({ selectedCard, setRevertCounts }) {
 	const service = [];
 	selectedCard?.detail?.spot_negotiations.forEach((card) => {
 		if (card?.service === selectedCard?.detail?.service_type) {
@@ -30,9 +30,9 @@ function NegotiateRate({ selectedCard, refetch = () => {} }) {
 						service={item}
 						activeService={activeService}
 						setActiveService={setActiveService}
-						refetch={refetch}
 						submittedEnquiry={submittedEnquiry}
 						setSubmittedEnquiry={setSubmittedEnquiry}
+						setRevertCounts={setRevertCounts}
 					/>
 
 				))}

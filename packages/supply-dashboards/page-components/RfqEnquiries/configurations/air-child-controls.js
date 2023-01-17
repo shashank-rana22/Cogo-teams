@@ -42,7 +42,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 				type        : 'text',
 				label       : 'Price',
 				placeholder : 'Amount',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 			},
 			{
 				name        : 'currency',
@@ -69,7 +69,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 				span        : 2,
 				min         : 0,
 				placeholder : 'Type minimum price',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 			},
 		],
 	};
