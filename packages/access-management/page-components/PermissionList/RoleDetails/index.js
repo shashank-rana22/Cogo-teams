@@ -20,7 +20,6 @@ function RoleDetails({
 		stakeholder_type = '',
 		importedPermissions,
 	} = roleData;
-
 	const details = useMemo(
 		() => [
 			{

@@ -31,7 +31,8 @@ const useLoginAuthenticate = () => {
 				const replaceHref = configs?.href?.replace('/v2', '');
 				const replaceAs = configs?.as?.replace('/v2', '');
 				router.push(replaceHref?.href, replaceAs?.as);
-			} else if (process.env.NODE_ENV === 'production') {
+			}
+			if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 				window.location.href = `/${profile?.partner?.id}${configs.href}`;
 			} else {
 				router.push(configs.href, configs.as);
