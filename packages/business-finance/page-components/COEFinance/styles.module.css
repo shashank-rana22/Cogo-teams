@@ -2,6 +2,14 @@
     background-color: red;
 }
 
+
+.tabsContainer{
+    button{
+        border-right:1px solid #E0E0E0;
+        background:white;
+    }
+}
+
 .spacebetween {
     display: flex;
     justify-content: space-between;

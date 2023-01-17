@@ -64,7 +64,7 @@ export const PURCHASE_VIEW_CONFIG = {
             label: "Invoice Date",
             key: "billDate",
             func: "rendeFormate",
-            span: 1,
+            span: 1.4,
             sorting: { name: "billDateSortType" },
         },
         {
@@ -77,7 +77,7 @@ export const PURCHASE_VIEW_CONFIG = {
         {
             label: "Status",
             key: "status",
-            span: 1.4,
+            span: 1,
             func: "renderStatus",
         },
         {
