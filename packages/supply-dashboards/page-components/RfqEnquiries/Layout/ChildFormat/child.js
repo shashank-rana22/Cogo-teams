@@ -17,7 +17,6 @@ function Child({
 	disabled = false,
 	field,
 	error,
-	label,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -48,10 +47,8 @@ function Child({
 				<div className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
-						const errorClass = error ? 'error' : null;
 
 						const errorOriginal = getErrorMessage({
-							errorClass,
 							error : error?.[controlItem.name],
 							rules : controlItem?.rules,
 							label : controlItem?.label,
