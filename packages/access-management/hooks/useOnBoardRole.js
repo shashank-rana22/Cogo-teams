@@ -1,3 +1,6 @@
+import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMappingSeller from '@cogoport/navigation-configs/navigation-mapping-seller';
+import navigationMappingShipper from '@cogoport/navigation-configs/navigation-mapping-shipper';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import getNavData from '@cogoport/request/helpers/get-nav-data';
@@ -33,6 +36,16 @@ const useOnBoardRole = () => {
 	const roleData = data?.list?.[0] || {};
 
 	const { permissions } = possiblePermissionsData || {};
+
+	let navigationMappings = navigationMappingAdmin;
+
+	if (roleData?.stakeholder_type === 'organization') {
+		if (roleData?.id === '6fbc5d22-b79b-4db6-aeab-d5db3b58db17') {
+			navigationMappings = navigationMappingSeller;
+		} else {
+			navigationMappings = navigationMappingShipper;
+		}
+	}
 
 	/**
 	 * Get role data
@@ -94,6 +107,7 @@ const useOnBoardRole = () => {
 		getNavOptions,
 		permissions,
 		onBack,
+		navigationMappings,
 		setShowImportRole,
 		showImportRole,
 		handleRoleImport,
