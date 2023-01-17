@@ -13,7 +13,7 @@ const useFormLoginwithMS = () => {
 	);
 
 	const openDocument = (url) => {
-		let modifiedUrl = `https://v1/${url}`;
+		let modifiedUrl = `https://${url}`;
 
 		if (url?.includes('http://') || url?.includes('https://')) {
 			modifiedUrl = url;

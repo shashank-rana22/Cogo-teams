@@ -37,7 +37,7 @@ const useGetAuthorizationChecked = () => {
 				dispatch(setProfileState({ _initialized: true, ...res.data }));
 			}
 		})();
-	}, [dispatch]);
+	}, [_initialized, dispatch]);
 
 	useEffect(() => {
 		(async () => {
@@ -45,10 +45,14 @@ const useGetAuthorizationChecked = () => {
 				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
 					const configs = redirections(profile);
 					if (configs?.href) {
-						if (configs?.href?.includes('v1')) {
-							window.location.href = `/v1/${profile?.partner?.id}${configs.href.replace('/v1', '')}`;
+						if (configs?.href?.includes('/v2')) {
+							const replaceHref = configs?.href?.replace('/v2', '');
+							const replaceAs = configs?.as?.replace('/v2', '');
+							await push(replaceHref?.href, replaceAs?.as);
+						} else if (process.env.NODE_ENV === 'production') {
+							window.location.href = `/${profile?.partner?.id}${configs.href}`;
 						} else {
-							await push(configs?.href);
+							await push(configs.href, configs.as);
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
