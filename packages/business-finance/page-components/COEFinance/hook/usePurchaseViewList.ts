@@ -1,6 +1,6 @@
 import { useRequestBf } from "@cogoport/request";
 import { useState, useEffect } from "react";
-import { PURCHASE_VIEW_CONFIG } from "../configurations/PURCHASE_VIEW_LIST";
+import  PURCHASE_VIEW_CONFIG  from "../configurations/PURCHASE_VIEW_LIST";
 import useDebounceQuery from "../../../../../common/forms/hooks/useDebounceQuery";
 import { GenericObject, NestedObj } from "../../commons/Interfaces/index";
 import { format } from "@cogoport/utils";
@@ -37,11 +37,11 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 
     
 const billDatesFilters=
-    filters?.billDate && format(filters?.billDate,"yyyy-MM-dd'T'HH:mm:sso",null,false);
+    filters?.billDate && format(filters?.billDate,"yyyy-MM-dd'T'HH:mm:sso",{},false);
 const dueDatesFilters=
-    filters?.dueDate && format(filters?.dueDate,"yyyy-MM-dd'T'HH:mm:sso",null,false);
+    filters?.dueDate && format(filters?.dueDate,"yyyy-MM-dd'T'HH:mm:sso",{},false);
 const updatedDateFilters=
-    filters?.updatedDate && format(filters?.updatedDate,"yyyy-MM-dd'T'HH:mm:sso",null,false);
+    filters?.updatedDate && format(filters?.updatedDate,"yyyy-MM-dd'T'HH:mm:sso",{},false);
 
 
 

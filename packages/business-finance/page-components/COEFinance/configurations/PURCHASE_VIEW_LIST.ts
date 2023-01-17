@@ -1,21 +1,9 @@
-export const PURCHASE_VIEW_CONFIG = {
+const PURCHASE_VIEW_CONFIG = {
     showHeader: true,
-    headerStyles: {
-        marginBottom: "16px",
-        borderRadius: "8px",
-        background: "#333",
-        marginTop: "20px",
-    },
-    bodyStyles: {
-        border: "1px solid #C7C7C7",
-        color: " #333333",
-        fontWeight: "400",
-        fontSize: "12px",
-        lineHeight: "14px",
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-    },
-    fields: [
+    headerStyles       : { marginBottom: '16px', borderRadius: '8px', background: '#333',marginTop:'20px' },
+    bodyStyles         :{ border: "1px solid #C7C7C7",color:' #333333',fontWeight: '400',fontSize: '12px',lineHeight: '14px',fontFamily: "Roboto",fontStyle: "normal"},
+	itemStyles         :{marginTop:'8px'},
+    fields             : [
         {
             label: "Invoice No.",
             topKey: {
@@ -93,14 +81,15 @@ export const PURCHASE_VIEW_CONFIG = {
             func:"renderUrgencyTag",
         },
         {
-            label:'',
             key: "viewMore",
             span: 1.2,
             func: "renderViewMore",
         },
         {
-            // span: .1,
+            key:'ribbon',
             func:'renderRibbon',
         }
     ],
 };
+
+export default PURCHASE_VIEW_CONFIG

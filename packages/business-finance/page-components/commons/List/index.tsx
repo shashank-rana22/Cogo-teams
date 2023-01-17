@@ -13,7 +13,7 @@ import styles from "./styles.module.css";
 import { useSelector } from "@cogoport/store";
 
 export interface Props {
-    config: ConfigType;
+    config?: ConfigType;
     sort?: NestedObj;
     setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
     itemData: ListDataProps;
@@ -51,7 +51,7 @@ function List({
 
     const {
         general: { isMobile = false },
-    } = useSelector((state: object) => state);
+    }:any = useSelector((state: object) => state);
 
     return (
         <section>

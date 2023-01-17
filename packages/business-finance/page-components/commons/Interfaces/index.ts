@@ -7,7 +7,7 @@ export interface ConfigType {
     bodyStyles?: React.CSSProperties;
     clickable?: boolean;
     showHeaderCheckbox?: boolean;
-    fields: FieldType[];
+    fields?: FieldType[];
 }
 
 export interface FunctionObjects {
