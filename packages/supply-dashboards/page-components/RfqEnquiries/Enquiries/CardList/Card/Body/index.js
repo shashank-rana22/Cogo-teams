@@ -11,6 +11,10 @@ function Body({ item }) {
 	const destinationCode = (item?.destination_port || item?.destination_airport)?.port_code;
 	const destinationName = (item?.destination_port || item?.destination_airport)?.name.split('(')[0];
 	const destinationCountry = (item?.destination_port || item?.destination_airport)?.display_name.split(' ').slice(-1);
+	const commodity = item?.commodity.split('.')?.[1] !== undefined
+		? `${startCase(item?.commodity.split('.')[0])}.${
+			item?.commodity.split('.')[1]}`
+		: startCase(item?.commodity);
 	return (
 		<div className={styles.body}>
 			<div className={styles.upper_body}>
@@ -41,12 +45,12 @@ function Body({ item }) {
 				<div>
 					{`${item?.containers_count || 1}
 					 Container x ${item?.container_size} x ${startCase(item?.container_type)},
-                ${startCase(item?.commodity)}`}
+                ${commodity}`}
 				</div>
 			)}
 			{['lcl_freight', 'air_freight'].includes(item?.service_type) && (
 				<div>
-					{`${startCase(item?.commodity)}`}
+					{`${commodity}`}
 				</div>
 			)}
 
