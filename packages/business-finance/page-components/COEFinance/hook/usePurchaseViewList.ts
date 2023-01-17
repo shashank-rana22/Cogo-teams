@@ -1,6 +1,5 @@
 import { useRequestBf } from "@cogoport/request";
 import { useState, useEffect } from "react";
-import  PURCHASE_VIEW_CONFIG  from "../configurations/PURCHASE_VIEW_LIST";
 import useDebounceQuery from "../../../../../common/forms/hooks/useDebounceQuery";
 import { GenericObject, NestedObj } from "../../commons/Interfaces/index";
 import { format } from "@cogoport/utils";
@@ -87,12 +86,9 @@ const updatedDateFilters=
         refetch();
     }, [sort]);
 
-    const config = PURCHASE_VIEW_CONFIG;
-
     return {
         data,
         loading,
-        config,
         currentTab,
         setCurrentTab,
         setSearchValue,

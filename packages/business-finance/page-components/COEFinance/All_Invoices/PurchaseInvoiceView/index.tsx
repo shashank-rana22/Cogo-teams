@@ -13,7 +13,7 @@ import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index'
 import SegmentedFilters from './SegmentedFilters/index'
 import { GenericObject} from '../../../commons/Interfaces/index'
 import {fieldProps} from './interfaces/index'
-
+import  PURCHASE_VIEW_CONFIG  from "../..//configurations/PURCHASE_VIEW_LIST";
 interface itemProps {
   createdDate:Date,
     billDate:Date,
@@ -44,7 +44,6 @@ const [sort, setSort] = useState({});
 
   const {data,
       loading,
-      config,
       setSearchValue,	
 		  searchValue,
       currentTab,
@@ -97,7 +96,7 @@ const [sort, setSort] = useState({});
          setFilters={setFilters}
       />
      <List
-       config={config}  
+       config={PURCHASE_VIEW_CONFIG}  
        itemData={data}
        functions={functions}
        loading={loading}
