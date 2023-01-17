@@ -8,6 +8,7 @@ import RenderStatus from './RenderData/RenderStatus/index'
 import FieldPair from './RenderData/FiledPair/index';
 import RenderCustomer from './RenderData/RenderCustomer/index'
 import FormatedDate from './RenderData/FormatedDate/index';
+import RenderRibbon from './RenderData/RenderRibbon/index'
 import SegmentedFilters from './SegmentedFilters/index'
 import { GenericObject} from '../../../commons/Interfaces/index'
 import {fieldProps} from './interfaces/index'
@@ -27,6 +28,7 @@ interface itemProps {
 	isProforma:boolean,
 	jobNumber:string,
   organizationName:string,
+  urgencyTag:Array<string>,
   remarksTimeline?:Array<{billStatus:string,remark:string,createdAt:Date}>
 }
 interface Props{
@@ -74,10 +76,13 @@ const [sort, setSort] = useState({});
       renderViewMore : (itemData:fieldProps)=>(
         <Button size="xs" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
       ),
+      renderRibbon: (itemData:itemProps)=>(
+        <RenderRibbon item={itemData} />
+      ),
     };
 
     
-   
+    
     
   return (
     <div>

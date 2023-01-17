@@ -36,18 +36,14 @@ interface segmentFilterProps {
 
 function SegmentedFilters({
     setCurrentTab,
-
     currentTab,
-
     setSearchValue,
-
     searchValue,
-
     filters,
-
     setFilters,
 }: segmentFilterProps) {
     const { statsData }: any = useShipmentIdView();
+
 
     return (
         <div className={styled.main}>

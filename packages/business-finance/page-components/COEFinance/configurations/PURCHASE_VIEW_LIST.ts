@@ -91,5 +91,9 @@ export const PURCHASE_VIEW_CONFIG = {
             span: 1.3,
             func: "renderViewMore",
         },
+        {
+            span: .1,
+            func:'renderRibbon',
+        }
     ],
 };

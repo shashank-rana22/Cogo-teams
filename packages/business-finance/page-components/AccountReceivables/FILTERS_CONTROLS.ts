@@ -69,7 +69,7 @@ export const INVOICE_FILTERS:any[] =[
 			{ label: 'Purchase', value: 'bill' },
 			{ label: 'Proforma', value: 'proforma' },
 			{ label: 'Credit Note', value: 'creditNote' },
-			{ label: 'Reimbursement', value: 'reimbursement' },
+			{ label: 'Reimbersement', value: 'reimbersement' },
 		],
 	},
 	{

@@ -45,6 +45,6 @@ export const FILTERS_URGENT_DATA = [
     },
     {
         label : 'Urgent Invoices',
-        value : 'UrgencyTag',
+        value : 'Urgency_tag',
     },
 ];

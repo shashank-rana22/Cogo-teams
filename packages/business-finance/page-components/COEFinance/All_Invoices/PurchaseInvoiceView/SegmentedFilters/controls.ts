@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 
 const controls = [
     {
-        name: "urgency_tag",
+        name: "urgencyTag",
         type: "select",
         placeholder: "Select Urgency",
         theme: "admin",
@@ -17,9 +17,17 @@ const controls = [
             { label: "LDC/LBC Payments", value: "ldc_lbc" },
             { label: "Cancel Charges", value: "cxl" },
             { label: "Detention Payments", value: "dtn" },
+            { label: 'Direct Port Delivery (DPD)', value: 'dpd' },
+            { label: 'Short Payment', value: 'short_payment' },
+            { label: 'ODEX', value: 'odex' },
+            { label: 'Short Transit Shipment', value: 'short_transit_shipment' },
+            { label: 'Co-ordination Charges', value: 'coordination_charges' },
+            { label: 'SEZ Shipment', value: 'sez_shipment' },
+            { label: 'Airlines DO Payments', value: 'air_do' },
         ],
     },
 ];
 export default controls;
+
 
 
