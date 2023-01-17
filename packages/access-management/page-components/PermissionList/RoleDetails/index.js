@@ -1,5 +1,6 @@
 import { Placeholder, Tooltip, Button } from '@cogoport/components';
-import { IcMArrowDoubleLeft } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMArrowDoubleLeft } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useMemo } from 'react';
 
 import Heading from '../../../common/Heading';
@@ -20,7 +21,7 @@ function RoleDetails({
 		stakeholder_type = '',
 		importedPermissions,
 	} = roleData;
-
+	const router = useRouter();
 	const details = useMemo(
 		() => [
 			{
@@ -73,37 +74,49 @@ function RoleDetails({
 	}
 
 	return (
-		<section className={styles.container}>
-			<div className={styles.heading_container}>
-				<Heading
-					title="Update Role"
-					subTitle="Update permissions for the role"
-				/>
+		<>
+			<Button
+				size="md"
+				style={{ width: 80 }}
+				themeType="secondary"
+				onClick={() => router.back()}
+			>
+				<IcMArrowBack fill="#221F20" style={{ marginRight: 4 }} />
+				{' '}
+				Back
+			</Button>
+			<section className={styles.container}>
+				<div className={styles.heading_container}>
+					<Heading
+						title="Update Role"
+						subTitle="Update permissions for the role"
+					/>
 
-				<section className={styles.permissions_container}>
-					<EditRoles roleData={roleData} getRole={getRole} />
-					{importPermissionsButton}
-				</section>
+					<section className={styles.permissions_container}>
+						<EditRoles roleData={roleData} getRole={getRole} />
+						{importPermissionsButton}
+					</section>
 
-			</div>
+				</div>
 
-			<div className={styles.content}>
-				{(details || []).map((detail) => (
-					<div key={detail.title} className={styles.details}>
-						<span className={styles.title}>
-							{detail?.title}
-							{' '}
-							-
-						</span>
-						{loading ? (
-							<Placeholder height="16px" width={detail?.skeleton.width} />
-						) : (
-							<span className={styles.data}>{detail?.data}</span>
-						)}
-					</div>
-				))}
-			</div>
-		</section>
+				<div className={styles.content}>
+					{(details || []).map((detail) => (
+						<div key={detail.title} className={styles.details}>
+							<span className={styles.title}>
+								{detail?.title}
+								{' '}
+								-
+							</span>
+							{loading ? (
+								<Placeholder height="16px" width={detail?.skeleton.width} />
+							) : (
+								<span className={styles.data}>{detail?.data}</span>
+							)}
+						</div>
+					))}
+				</div>
+			</section>
+		</>
 	);
 }
 
