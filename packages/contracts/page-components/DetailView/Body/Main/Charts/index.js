@@ -37,18 +37,6 @@ function Charts({ activePair, handleUpdateContract, data, statsData, stats }) {
 					statsDataRevenue={statsDataRevenue}
 				/>
 			</div>
-			{/* <div>
-        <div className={styles.heading}>
-          Revenue Prediction from Previous Contracts
-        </div>
-        <RevenuePrediction />
-      </div> */}
-			{/* <div>
-				<div className={styles.heading}>
-					Demand Visibility for Shanghai - Mumbai
-				</div>
-				<DemandVisibility />
-			</div> */}
 		</div>
 	);
 }

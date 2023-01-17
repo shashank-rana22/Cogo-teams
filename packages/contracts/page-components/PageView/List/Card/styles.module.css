@@ -72,3 +72,6 @@
     align-items: center;
     gap: 4px;
 }
+.name{
+font-weight: 400;
+}

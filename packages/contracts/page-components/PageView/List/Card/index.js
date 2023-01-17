@@ -27,7 +27,7 @@ function Card({ item, filters }) {
 						Contract ID #
 						{item?.contract_reference_id}
 						<div className={styles.content}>
-							<div>
+							<div className={styles.name}>
 								{startCase(item?.contract_name)}
 							</div>
 						</div>

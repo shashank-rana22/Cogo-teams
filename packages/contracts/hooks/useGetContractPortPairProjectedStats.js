@@ -20,7 +20,7 @@ const useGetContractPortPairProjectedStats = ({ payload }) => {
 					service_type        : payload?.service_type,
 					origin_port_id      : payload?.origin_port_id,
 					destination_port_id : payload?.destination_port_id,
-					// shipping_line_id    : payload?.shipping_line_id,
+					shipping_line_id    : payload?.shipping_line_id || undefined,
 				},
 			});
 			setData(res?.data);

@@ -26,7 +26,7 @@ function Stats({
 				<div className={styles.details}>
 					<div className={styles.pair}>
 						<div>
-							{data?.status === 'active' ? 'Approved Date' : 'Request Date '}
+							{data?.status === 'active' ? 'Approved Date' : 'Requested Date '}
 							:
 						</div>
 						<div className={styles.value}>
