@@ -55,14 +55,14 @@ const Config = ({ data }) => {
 				charge_code_name : 'origin_local_charge_codes',
 			}));
 		}
-		if (true) {
+		if (data?.data?.origin_storage_free_days > 0) {
 			field.push(...freeDaysSection({
 				heading : 'Origin Storage Hours',
 				unit    : 'per_kg_per_hour',
 				type    : 'origin_air',
 			}));
 		}
-		if (true) {
+		if (data?.data?.destination_storage_free_days > 0) {
 			field.push(...freeDaysSection({
 				heading : 'Destination Storage Hours',
 				unit    : 'per_kg_per_hour',
