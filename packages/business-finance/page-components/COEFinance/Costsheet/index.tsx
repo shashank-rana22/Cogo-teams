@@ -91,7 +91,7 @@ const CostSheet = () => {
                             disabled={loading}
                             onClick={(e) => handleOperationalClose(e)}
                         >
-                            Operationally Closed
+                            Close Operationally
                         </Button>
                     )}
                     <Button
