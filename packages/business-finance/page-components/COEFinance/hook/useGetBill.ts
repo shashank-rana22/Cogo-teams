@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRequestBf } from "@cogoport/request";
 import { useSelector } from "@cogoport/store";
 import useGetFiniteList from "./useGetFiniteList";
+import { Toast } from "@cogoport/components";
 interface AllParams {
     billId?: number;
     billNumber?: number;
@@ -51,7 +52,7 @@ const useGetBill = (allParams = {}) => {
                 },
             });
         } catch (err) {
-            console.log(err);
+            Toast.error(err);
         }
     };
     const handleAccPayments = async () => {
@@ -60,7 +61,7 @@ const useGetBill = (allParams = {}) => {
                 params: { orgId: params?.orgId },
             });
         } catch (err) {
-            console.log(err);
+            Toast.error(err);
         }
     };
     useEffect(() => {
