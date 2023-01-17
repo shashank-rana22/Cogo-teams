@@ -1,6 +1,5 @@
 import airChildControlsFunc from './air-child-controls';
 import airFields from './air-controls';
-// import carriageControls from './carriage-controls';
 import chargeContolsFunc from './charge-controls';
 import commonControlsFunc from './common-controls';
 import fclControl from './fcl-controls';
@@ -91,27 +90,6 @@ const Config = ({ data }) => {
 				unit    : 'per_kg_per_day',
 			}));
 		}
-		// if (Object.keys(allData.origin_carriage_charge_codes || {}).length > 0) {
-		// 	sections.push(
-		// 		carriageCharges('origin_carriage', 'Origin carriage charges', null, {
-		// 			startDate : data.validity_start,
-		// 			endDate   : data.validity_end,
-		// 		}),
-		// 	);
-		// }
-		// if (Object.keys(allData.destination_carriage_charge_codes || {}).length > 0) {
-		// 	sections.push(
-		// 		carriageCharges(
-		// 			'destination_carriage',
-		// 			'Destination carriage charges',
-		// 			null,
-		// 			{
-		// 				startDate : data.validity_start,
-		// 				endDate   : data.validity_end,
-		// 			},
-		// 		),
-		// 	);
-		// }
 	} else if (['trailer_freight', 'haulage_freight'].includes(data?.service)) {
 		field.push(...trailerControls);
 	} else if (['ltl_freight', 'ftl_freight'].includes(data?.service)) {
