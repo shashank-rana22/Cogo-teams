@@ -1,7 +1,6 @@
 import { Input } from '@cogoport/components';
 import { IcMCalendar } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-import { string, func, bool, arrayOf, shape } from 'prop-types';
 import React, { useState } from 'react';
 
 import OptionsModal from './OptionsModal';
@@ -41,19 +40,5 @@ function DepartureDateSelect({ value, onChange, showPopover, datePair, ...rest }
 		</>
 	);
 }
-
-DepartureDateSelect.propTypes = {
-	value       : arrayOf(string),
-	onChange    : func,
-	showPopover : bool,
-	datePair    : shape({}),
-};
-
-DepartureDateSelect.defaultProps = {
-	value       : [],
-	onChange    : () => {},
-	showPopover : false,
-	datePair    : {},
-};
 
 export default DepartureDateSelect;

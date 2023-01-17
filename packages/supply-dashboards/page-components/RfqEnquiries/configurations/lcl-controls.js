@@ -50,6 +50,7 @@ const lclFields = () => {
 		{
 			name        : 'number_of_stops',
 			type        : 'number',
+			label       : 'Enter No Of Stops',
 			placeholder : 'Enter No. of Stops',
 			className   : 'primary lg',
 			span        : 4,
@@ -58,6 +59,7 @@ const lclFields = () => {
 		{
 			name        : 'transit_time',
 			type        : 'number',
+			label       : 'Enter Transit Time',
 			placeholder : 'Enter Transit time (days)',
 			className   : 'primary lg',
 			span        : 4,

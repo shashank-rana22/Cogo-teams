@@ -48,6 +48,15 @@ const FieldMutation = ({
 				minDate : addDays(new Date(service?.data?.validity_start), 1),
 				maxDate : new Date(service?.data?.validity_end),
 			};
+		} else if (name === 'departure_dates') {
+			newControl = {
+				...newControl,
+				disabled : !(values?.validity_start && values?.validity_end),
+				datePair : {
+					startDate : values?.validity_start,
+					endDate   : values?.validity_end,
+				},
+			};
 		}
 		if (newControl.controls) {
 			let chargeCodes = {};
