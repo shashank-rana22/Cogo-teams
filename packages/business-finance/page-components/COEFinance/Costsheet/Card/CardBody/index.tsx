@@ -4,7 +4,8 @@ import { startCase } from "@cogoport/utils";
 import { GenericObject } from "../../../../commons/Interfaces";
 import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
 import { IcMArrowNext, IcMArrowRotateDown } from "@cogoport/icons-react";
-import { Placeholder } from "@cogoport/components";
+import {Tooltip} from '@cogoport/components';
+import { IcMInfo} from '@cogoport/icons-react';
 interface Props {
     charge: GenericObject;
     type: string;
@@ -17,6 +18,11 @@ export const CardBody = ({ charge, type }: Props) => {
     const { serviceType, lineItems = [] } = charge || {};
     const hidden = lineItems.length < 2 ? styles.hidden : "";
     const borderColor = "#6CC077";
+    const ToolTipContent=(quotation,actual)=>(<div className={styles.content}>
+        <div><span className={styles.label}>Expected Quantity:</span> {quotation}</div>
+        <div><span className={styles.label}>Actual Quantity:</span> {actual}</div>
+        </div>)
+
     return charge ? (
         <div
             className={`${
@@ -71,6 +77,11 @@ export const CardBody = ({ charge, type }: Props) => {
                                 style={{ "--span": 2 } as React.CSSProperties}
                             >
                                 {lineItem.nameQuotation || lineItem.nameActual}
+                                <Tooltip content={ToolTipContent(lineItem?.quantityQuotation,lineItem?.quantityActual)} placement="right">
+                        <div className={styles.tooltip}>
+                        <IcMInfo/>
+                        </div>
+                        </Tooltip>
                             </div>
                             <div
                                 className={styles.flex}
