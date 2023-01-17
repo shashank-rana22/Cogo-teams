@@ -96,6 +96,7 @@ const useListBills = (allParams) => {
                 jobSource: "LOGISTICS",
                 jobType: "SHIPMENT",
                 q: q || undefined,
+                isCreatedByDetailRequired:true,
                 ...restFilters,
                 amountTab: undefined,
                 page: currentPage || restFilters?.pageIndex,
