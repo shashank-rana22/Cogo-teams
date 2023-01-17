@@ -25,11 +25,11 @@ function FormatedDate({ item, field }: Props) {
      const getCreatedDate = format(
         item?.createdDate,
         "dd/MMM/yyyy  hh:mm a",
-        {},
-        true
+        null,
+        false
     );
-    const getBillDate = format(item?.billDate, "dd/MMM/yyyy", {}, true);
-    const getDueDate = format(item?.dueDate, "dd/MMM/yyyy", {}, true);
+    const getBillDate = format(item?.billDate, "dd/MMM/yyyy", null, false);
+    const getDueDate = format(item?.dueDate, "dd/MMM/yyyy", null, false);
 
     const content = (
         <>

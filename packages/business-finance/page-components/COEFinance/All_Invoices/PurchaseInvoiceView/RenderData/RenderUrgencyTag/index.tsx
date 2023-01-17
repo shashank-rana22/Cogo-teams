@@ -8,15 +8,18 @@ interface itemProps {
 interface Props{
     item:itemProps;
 }
-function RenderRibbon ({ item}:Props)  {
-
+function RenderUrgencyTag ({ item}:Props)  {
+    console.log(item,'kkkkk');
+    
+    
+	
 	return (
-		<div style={{marginLeft:'40px'}}> 
+		<div> 
           {item?.urgencyTag ?(
-            <div className={styled.ribbon}>Urgent</div>
+            <div className={styled.urgency}> {item?.urgencyTag[0]} </div>
           ):''}
 	    </div>
 	);
 };
 
-export default RenderRibbon;
+export default RenderUrgencyTag;

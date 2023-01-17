@@ -9,6 +9,7 @@ import FieldPair from './RenderData/FiledPair/index';
 import RenderCustomer from './RenderData/RenderCustomer/index'
 import FormatedDate from './RenderData/FormatedDate/index';
 import RenderRibbon from './RenderData/RenderRibbon/index'
+import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index'
 import SegmentedFilters from './SegmentedFilters/index'
 import { GenericObject} from '../../../commons/Interfaces/index'
 import {fieldProps} from './interfaces/index'
@@ -53,9 +54,7 @@ const [sort, setSort] = useState({});
   const handleChange =(itemData:any)=>{
     router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}&status=${itemData?.status}`);
   
-  }
-
-      
+  }   
 
     const functions:any = {
       renderStatus: (itemData:itemProps) => (
@@ -79,6 +78,9 @@ const [sort, setSort] = useState({});
       renderRibbon: (itemData:itemProps)=>(
         <RenderRibbon item={itemData} />
       ),
+      renderUrgencyTag:(itemData:itemProps)=>(
+        <RenderUrgencyTag item={itemData} />
+      )
     };
 
     

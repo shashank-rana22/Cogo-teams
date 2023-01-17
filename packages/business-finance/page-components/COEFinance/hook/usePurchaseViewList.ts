@@ -1,5 +1,5 @@
 import { useRequestBf } from "@cogoport/request";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { PURCHASE_VIEW_CONFIG } from "../configurations/PURCHASE_VIEW_LIST";
 import useDebounceQuery from "../../../../../common/forms/hooks/useDebounceQuery";
 import { GenericObject, NestedObj } from "../../commons/Interfaces/index";
@@ -36,9 +36,12 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
     const showProforma = filters?.billType === "PROFORMA" ? true : undefined;
 
     
-const billDatesFilters=filters?.billDate && format(filters?.billDate,'yyyy-MM-dd|hh:mm:ss',{},true).replace("|","T");
-const dueDatesFilters=filters?.dueDate && format(filters?.dueDate,'yyyy-MM-dd|hh:mm:ss',{},true).replace("|","T");
-const updatedDateFilters=filters?.updatedDate && format(filters?.updatedDate,'yyyy-MM-dd|hh:mm:ss',{},true).replace("|","T");
+const billDatesFilters=
+    filters?.billDate && format(filters?.billDate,"yyyy-MM-dd'T'HH:mm:sso",null,false);
+const dueDatesFilters=
+    filters?.dueDate && format(filters?.dueDate,"yyyy-MM-dd'T'HH:mm:sso",null,false);
+const updatedDateFilters=
+    filters?.updatedDate && format(filters?.updatedDate,"yyyy-MM-dd'T'HH:mm:sso",null,false);
 
 
 
