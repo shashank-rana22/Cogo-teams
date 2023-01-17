@@ -13,7 +13,7 @@ const ViewInvoices =()=>{
         collectionPartyRemark:'',
         billingPartyRemark:'',
         invoiceDetailsRemark:'',
-        overall:'',
+        overallRemark:'',
     });
     const [lineItemsRemarks,setLineItemsRemarks]=useState({});
     const [lineItem,setLineItem] = useState(false)

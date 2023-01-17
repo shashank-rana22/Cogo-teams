@@ -38,7 +38,7 @@ const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
 					jobNumber:jobNumber,
 					jobType: jobType,
 					jobSource: jobSource,
-					updatedBy: user_data?.id
+					updatedBy: user_data?.user?.id
 				}
 			})
 			Toast.success('Close successfully...');

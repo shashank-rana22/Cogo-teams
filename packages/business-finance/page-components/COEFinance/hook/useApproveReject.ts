@@ -17,8 +17,9 @@ const ApproveReject = ({collectionPartyId,remarksVal, lineItemsRemarks,modalData
     const { user_data } = useSelector(({ profile }:any) => ({
 		user_data: profile || {},
 	}));
-    
 
+   
+    
     const getStatus = () =>{
         if(modalData === 'Approve'){
             return 'FINANCE_ACCEPTED'
@@ -42,13 +43,15 @@ const ApproveReject = ({collectionPartyId,remarksVal, lineItemsRemarks,modalData
         { autoCancel: false }
     );
 
+
+    
     const rejectApproveApi = async()=>{
         try{
-            await trigger({
+            await trigger({                
                 data :{
                     status:getStatus(),
                     id:billId,
-                    updatedBy:user_data?.id,
+                    updatedBy:user_data?.user?.id,
                     performedByUserType:user_data?.session_type,
                     remarksList: modalData!=='Approve' ? remarksVal :undefined,
                     lineItemsRemarks: modalData!=='Approve' ? lineItemsRemarks : undefined,

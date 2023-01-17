@@ -7,6 +7,9 @@ const useShipmentDocument = (shipmentId) => {
 		{
 			url     : '/shipment/list_shipment_documents',
 			method  : 'get',
+			headers: {
+				authorizationparameters: 'business_finance-coe_finance:across_all',
+			},
 		},
 		{ autoCancel: false },
 	);
