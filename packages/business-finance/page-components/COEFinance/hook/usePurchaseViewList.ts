@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { PURCHASE_VIEW_CONFIG } from "../configurations/PURCHASE_VIEW_LIST";
 import useDebounceQuery from "../../../../../common/forms/hooks/useDebounceQuery";
 import { GenericObject, NestedObj } from "../../commons/Interfaces/index";
+import { format } from "@cogoport/utils";
+
 
 interface Props {
     filters: GenericObject;
@@ -11,26 +13,34 @@ interface Props {
 }
 
 const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
-    const [currentTab, setCurrentTab] = useState("all");
+    const [currentTab, setCurrentTab] = useState("INITIATED");
     const { debounceQuery, query } = useDebounceQuery();
     const [searchValue, setSearchValue] = useState("");
+    
 
     const showFilter = () => {
-        if (filters?.invoiceType === "PURCHASE") {
+        if (filters?.billType === "PURCHASE") {
             return "BILL";
-        } else if (filters?.invoiceType === "PROFORMA") {
+        } else if (filters?.billType === "PROFORMA") {
             return "BILL";
-        } else if (filters?.invoiceType === "CREDIT_NOTE") {
+        } else if (filters?.billType === "CREDIT_NOTE") {
             return "CREDIT_NOTE";
-        } else if (filters?.invoiceType === "REIMBURSEMENT") {
-            return "REIMBURSEMENT";
+        } else if (filters?.billType === "REIMBERSEMENT") {
+            return "REIMBERSEMENT";
         }
         return undefined;
     };
 
-    const showInvoiceType =
-        filters?.invoiceType === "PURCHASE" ? false : undefined;
-    const showProforma = filters?.invoiceType === "PROFORMA" ? true : undefined;
+    const showbillType =
+        filters?.billType === "PURCHASE" ? false : undefined;
+    const showProforma = filters?.billType === "PROFORMA" ? true : undefined;
+
+    
+const billDatesFilters=filters?.billDate && format(filters?.billDate,'yyyy-MM-dd|hh:mm:ss',{},true).replace("|","T");
+const dueDatesFilters=filters?.dueDate && format(filters?.dueDate,'yyyy-MM-dd|hh:mm:ss',{},true).replace("|","T");
+const updatedDateFilters=filters?.updatedDate && format(filters?.updatedDate,'yyyy-MM-dd|hh:mm:ss',{},true).replace("|","T");
+
+
 
     const [{ data, loading, error }, refetch] = useRequestBf(
         {
@@ -38,14 +48,19 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
             method: "get",
             params: {
                 ...filters,
-                invoiceType: showFilter(),
-                proforma: showInvoiceType || showProforma,
+                dueDate: dueDatesFilters|| undefined,
+                billDate: billDatesFilters || undefined,
+                updatedDate:updatedDateFilters|| undefined,
+                urgencyTag: filters?.urgencyTag || undefined,
+                billType: showFilter(),
+                proforma: showbillType || showProforma,
                 status:
-                    currentTab !== "all" && currentTab !== "UrgencyTag"
+                    currentTab !== "all" && currentTab !== "Urgency_tag"
                         ? currentTab
                         : undefined,
-                isUrgent: currentTab === "UrgencyTag" ? true : undefined,
+                isUrgent: currentTab === "Urgency_tag" ? true : undefined,
                 ...sort,
+                pageSize:10,
             },
             authKey: "get_purchase_bills_list",
         },
