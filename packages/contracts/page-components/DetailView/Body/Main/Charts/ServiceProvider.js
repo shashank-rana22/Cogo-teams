@@ -94,10 +94,8 @@ function ServiceProvier({
 					</div>
 				</div>
 				<Line />
-				<div className={styles.box}>
-					<div>
-						<Percentage heading="Fulfilment in %" data={stats?.fulfilment} />
-					</div>
+				<div>
+					<Percentage heading="Fulfilment in %" data={stats?.fulfilment} />
 				</div>
 			</div>
 		</div>
