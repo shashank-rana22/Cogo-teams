@@ -1,10 +1,10 @@
 const getErrorMessage = (props) => {
 	const {
-		errorClass, error, rules, errorName, label,
+		error, rules, errorName, label,
 	} = props;
 	const errorMessage = [];
 
-	if (errorClass) {
+	if (error) {
 		if (rules?.required && error.type === 'required') {
 			errorMessage.push(error?.message || `${errorName || label} is Required`);
 		}

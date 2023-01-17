@@ -17,6 +17,7 @@ function CardList({
 	selectedRate,
 	total,
 }) {
+	const loadingArray = headerRequired ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5];
 	return (
 		<div className={styles.cardlist}>
 			{headerRequired
@@ -34,7 +35,7 @@ function CardList({
 					{!headerRequired && <div className={styles.line} />}
 				</div>
 			))}
-			{loading && ([1, 2, 3, 4, 5]).map((item) => (
+			{loading && (loadingArray).map((item) => (
 				<div>
 					{!headerRequired && <div className={styles.line} />}
 					<List fields={fields} item={item} loading={loading} headerRequired={headerRequired} />
@@ -50,7 +51,7 @@ function CardList({
 				</div>
 
 			)}
-			{!loading && (list || []).length === 10 && paginationRequired
+			{!loading && total > 10 && paginationRequired
 				&& (
 					<div className={styles.pagination}>
 						<Pagination
@@ -58,7 +59,7 @@ function CardList({
 							currentPage={filters?.page}
 							totalItems={total}
 							pageSize={10}
-							handlePageChange={(val) => { hookSetters.setFilters({ ...filters, page: val }); }}
+							onPageChange={(val) => { hookSetters.setFilters({ ...filters, page: val }); }}
 						/>
 					</div>
 				)}

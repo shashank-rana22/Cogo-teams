@@ -123,6 +123,7 @@ const Config = ({ data }) => {
 	} else if (data?.service === 'air_customs') {
 		field.push(airChildControlsFunc({ heading: '' }));
 	}
+
 	return field;
 };
 

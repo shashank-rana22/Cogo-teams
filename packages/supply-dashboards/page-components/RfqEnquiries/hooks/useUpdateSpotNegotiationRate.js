@@ -27,7 +27,7 @@ const getDefaultValues = (oldfields) => {
 };
 
 const useUpdateSpotNegotiationRate = ({
-	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, refetch = () => {},
+	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, setRevertCounts,
 }) => {
 	const oldfields = getField({ data: service });
 	const [errors, setErrors] = useState({});
@@ -218,7 +218,9 @@ const useUpdateSpotNegotiationRate = ({
 					setActiveService(null);
 					setSubmittedEnquiry((prev) => [...prev, `${selectedCard?.id}${service?.service}`]);
 					Toast.success('Negotiation Updated');
-					refetch();
+					if (!data?.is_complete) {
+						setRevertCounts((prev) => ({ ...prev, [selectedCard?.id]: prev[selectedCard.id] + 1 }));
+					}
 				}
 			} catch (err) {
 				console.log(err?.message);

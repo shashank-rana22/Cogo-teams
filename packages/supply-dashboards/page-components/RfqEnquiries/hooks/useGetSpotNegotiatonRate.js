@@ -44,7 +44,7 @@ const useGetSpotNegotiationRate = ({ values, controls }) => {
 			fetch();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAllPresent]);
+	}, [values.service_provider_id, values.shipping_line_id, values.airline_id]);
 
 	return {
 		fetch,

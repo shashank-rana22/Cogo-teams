@@ -18,7 +18,6 @@ function Child({
 	field,
 	error,
 	label,
-	rules,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -53,9 +52,9 @@ function Child({
 
 						const errorOriginal = getErrorMessage({
 							errorClass,
-							error: error?.[controlItem.name],
-							rules,
-							label,
+							error : error?.[controlItem.name],
+							rules : controlItem?.rules,
+							label : controlItem?.label,
 						});
 						const extraProps = {};
 						if (controlItem.customProps?.options) {

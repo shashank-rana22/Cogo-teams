@@ -7,7 +7,7 @@
   "types": "./index.js",
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.262",
+    "@cogoport/components": "^1.0.264",
     "@cogoport/forms": "workspace:^0.1.0",
     "@cogoport/icons-react": "^1.0.48",
     "@cogoport/next": "workspace:0.1.0",

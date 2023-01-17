@@ -65,7 +65,7 @@ const chargeControls = ({ heading = '', charge_code_name, service = '' }) => {
 				label       : 'Price',
 				span        : 3,
 				placeholder : 'Price Per Unit',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 			},
 		],
 	};

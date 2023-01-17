@@ -1,4 +1,5 @@
 import Body from './Body';
+import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
@@ -10,6 +11,8 @@ function Card() {
 			<Header />
 			<div className={styles.line} />
 			<Body />
+			<div className={styles.line} />
+			<Footer />
 		</div>
 	);
 }

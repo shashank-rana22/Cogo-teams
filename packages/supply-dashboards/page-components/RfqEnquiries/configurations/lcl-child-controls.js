@@ -45,7 +45,7 @@ const childControls = ({ heading = '', charge_code_name }) => {
 				label       : 'Price',
 				min         : 0,
 				placeholder : 'Amount',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 			},
 			{
 				name        : 'currency',
@@ -62,14 +62,14 @@ const childControls = ({ heading = '', charge_code_name }) => {
 				type        : 'number',
 				span        : 2,
 				placeholder : 'Type minimum price',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 			},
 			{
 				name        : 'cbm_weight_ratio',
 				label       : 'Weight Ratio',
 				type        : 'number',
 				placeholder : 'Type Weight Ratio',
-				rules       : { required: 'This is required' },
+				rules       : { required: 'This is required', min: 0 },
 				span        : 2,
 			},
 			{

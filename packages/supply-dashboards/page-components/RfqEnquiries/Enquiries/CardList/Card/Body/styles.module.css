@@ -29,3 +29,10 @@
 	font-weight: 500;
 	color: #4f4f4f;
 }
+
+.subname {
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

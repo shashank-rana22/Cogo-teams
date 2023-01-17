@@ -5,7 +5,7 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 
 function CardList({
-	data, setPage, loading, selectedCard, setSelectedCard,
+	data, setPage, loading, selectedCard, setSelectedCard, revertCounts,
 }) {
 	return (
 		<div className={styles.leftpanel}>
@@ -19,6 +19,7 @@ function CardList({
 					item={item}
 					selectedCard={selectedCard}
 					setSelectedCard={setSelectedCard}
+					revertCounts={revertCounts}
 				/>
 			))}
 			{
@@ -29,7 +30,7 @@ function CardList({
 					currentPage={data?.page}
 					totalItems={data?.total}
 					pageSize={10}
-					handlePageChange={(val) => { setPage(val); }}
+					onPageChange={(val) => { setPage(val); }}
 				/>
 			) : null}
 
