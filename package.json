@@ -31,7 +31,7 @@
     "@cogoport/eslint-config": "^1.1.0",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.5.1",
-    "eslint": "^8.31.0",
+    "eslint": "^8.32.0",
     "fs-extra": "^11.1.0",
     "postcss": "^8.4.21",
     "postcss-flexbugs-fixes": "^5.0.2",
