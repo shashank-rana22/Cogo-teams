@@ -17,7 +17,7 @@ function RenderUrgencyTag ({ item}:Props)  {
 		<div> 
           {item?.urgencyTag ?(
             <div className={styled.urgency}> {item?.urgencyTag[0]} </div>
-          ):''}
+          ):'-'}
 	    </div>
 	);
 };
