@@ -46,7 +46,7 @@
 
 .port_pair{
     display: flex;
-    gap: 8px;
+    gap: 20px;
 }
 .extra{
     border-right: 1px solid #F2F2F2;

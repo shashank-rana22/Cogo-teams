@@ -13,7 +13,7 @@ function Card({ item, filters }) {
 	const newFormattedData = [];
 	if (formattedData?.length) {
 		(formattedData || []).forEach((pair, i) => {
-			if (i <= 1 && Object.keys(pair || {})) {
+			if (i <= 2 && Object.keys(pair || {})) {
 				newFormattedData.push(pair);
 			}
 		});
@@ -75,11 +75,11 @@ function Card({ item, filters }) {
 							<PortPair portPair={portPair} />
 						))}
 					</div>
-					{formattedData?.length > 2 ? (
+					{formattedData?.length > 3 ? (
 						<div className={styles.extra}>
 							<div>
 								+
-								{Number(formattedData?.length) - 2}
+								{Number(formattedData?.length) - 3}
 							</div>
 							<div>more</div>
 						</div>

@@ -4,8 +4,9 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 8px;
-    gap: 34px;
+    gap: 18px;
     border-right: 1px solid #F2F2F2;
+    padding-right: 2px;
 }
 
 .body {
