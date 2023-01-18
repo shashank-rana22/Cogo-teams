@@ -71,8 +71,8 @@ const useOnBoardRole = () => {
 	 * @param {string} [navigation='']
 	 */
 	const getNavOptions = (navigation = '') => {
-		const navObj = getNavData(navigation);
-		return getNavigationOptions(permissions, navObj || []);
+		const navObj = getNavData(navigation, navigationMappings);
+		return getNavigationOptions(permissions, navObj || {});
 	};
 
 	const onBack = useCallback(() => router.push('/list-roles'), []);

@@ -50,7 +50,7 @@ function Navigations(props) {
 	const crmNavs = navigationOptions.filter((nav) => nav?.module_type === 'crm');
 	const dashBoardNavs = navigationOptions.filter((nav) => nav?.module_type === 'dashboards' || !nav?.module_type);
 
-	const navElement = (navigation) => (navigation.options ? NestedNavigations : Navigation);
+	const navElement = (navigation) => (navigation.options && navigation.isSubNavs ? NestedNavigations : Navigation);
 	return (
 		<section className={styles.container}>
 			<Tabs activeTab={activeTab} onChange={setActiveTab}>
