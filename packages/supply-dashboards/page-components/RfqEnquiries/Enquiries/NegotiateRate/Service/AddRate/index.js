@@ -9,7 +9,7 @@ function AddRate({
 	service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, setRevertCounts,
 }) {
 	const {
-		fields, control, showElements = {}, errors, onError, handleSubmit, handleData, loading,
+		fields, control, showElements = {}, errors, onError, handleSubmit, handleData, disableButton,
 	} = useUpdateSpotNegotiationRate({
 		service, setSubmittedEnquiry, setActiveService, selectedRate, selectedCard, setRevertCounts,
 	});
@@ -20,7 +20,7 @@ function AddRate({
 			<div className={styles.button}>
 				<Button
 					themeType="accent"
-					disabled={loading}
+					disabled={disableButton}
 					onClick={handleSubmit(handleData, onError)}
 				>
 					Submit
