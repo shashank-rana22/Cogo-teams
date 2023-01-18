@@ -38,9 +38,16 @@ function RateModal({
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.button}>
-					<Button themeType="accent" style={{ margin: '4px' }} onClick={() => handleOnClose()}>Cancel</Button>
 					<Button
-						themeType="accent"
+						themeType="secondary"
+						style={{ margin: '4px' }}
+						onClick={() => handleOnClose()}
+					>
+						Cancel
+
+					</Button>
+					<Button
+						themeType="primary"
 						style={{ margin: '4px' }}
 						onClick={() => setShowModal(false)}
 					>
