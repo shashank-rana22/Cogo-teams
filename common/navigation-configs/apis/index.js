@@ -14,6 +14,7 @@ import feedback from './feedback-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
 import ltl_operations from './ltl-operations-apis';
+import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
@@ -88,6 +89,7 @@ const apis = {
 	cogolens: cogoLens,
 	shipment_cancellation_policies,
 	kam_payments_dashboard,
+	manage_rfq,
 	allocation,
 	bl_do_collection_release,
 	...saas,

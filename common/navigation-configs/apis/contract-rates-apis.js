@@ -528,6 +528,18 @@ const apis = [
 		service_name : 'contract',
 	},
 	{
+		api          : 'list_contract_services_utilisations',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'get_contract_stats',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
 		api          : 'create_organization_payment_mode',
 		access_type  : 'private',
 		feature      : 'contract_rates',
@@ -537,6 +549,42 @@ const apis = [
 		api          : 'create_organization_billing_cycle',
 		access_type  : 'private',
 		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_service_shipment_details',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_bulk_contract_utilisation',
+		access_type  : 'private',
+		feature      : 'contract',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_services_utilisations',
+		access_type  : 'private',
+		feature      : 'contract',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_services_utilisations',
+		access_type  : 'private',
+		feature      : 'contract',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_bulk_contract_service_utilisations',
+		access_type  : 'private',
+		feature      : 'contract',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_service_checkout_mappings',
+		access_type  : 'private',
+		feature      : 'contract',
 		service_name : 'contract',
 	},
 ];

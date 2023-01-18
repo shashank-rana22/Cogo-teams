@@ -824,6 +824,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_exchange_rate_deviation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'get_shipment_data_for_invoice',
 		access_type  : 'private',
 		service_name : 'sage',
@@ -929,6 +934,12 @@ const apis = [
 		api         : 'list_lcl_customs_rates',
 		access_type : 'private',
 		feature     : 'revenue_desk',
+	},
+	{
+		api          : 'get_contract_previous_service_providers',
+		access_type  : 'private',
+		service_name : 'shipment',
+		feature      : 'revenue_desk',
 	},
 	{
 		api         : 'create_shipment_booking_confirmation_preference',
@@ -1194,6 +1205,11 @@ const apis = [
 		api          : 'list_trade_documents',
 		access_type  : 'private',
 		service_name : 'trade',
+	},
+	{
+		api          : 'create_awb_inventory',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 

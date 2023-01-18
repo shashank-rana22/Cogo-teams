@@ -1,6 +1,8 @@
 import { Pill } from '@cogoport/components';
 import { IcMAir, IcMFcl, IcMLcl } from '@cogoport/icons-react';
+import { useState } from 'react';
 
+import SureModal from '../../../../common/SureModal';
 import PortPair from '../../../PageView/List/Card/PortPair';
 
 import Footer from './Footer';
@@ -21,6 +23,15 @@ function Content({
 	index,
 	data,
 }) {
+	const [showModal, setShowModal] = useState(null);
+	const handleCloseModal = () => {
+		setShowModal(null);
+	};
+	const handleFinalSubmit = () => {
+		handleUpdateContract(showModal);
+		setShowModal(null);
+	};
+
 	const Element = iconMapping[portPair?.service_type || 'fcl_freight'];
 	return (
 		<div
@@ -51,7 +62,7 @@ function Content({
 									role="presentation"
 									onClick={(e) => {
 										e.stopPropagation();
-										handleUpdateContract({
+										setShowModal({
 											payload: {
 												id           : portPair?.id,
 												service_type : portPair?.service_type,
@@ -67,7 +78,7 @@ function Content({
 									role="presentation"
 									onClick={(e) => {
 										e.stopPropagation();
-										handleUpdateContract({
+										setShowModal({
 											payload: {
 												id           : portPair?.id,
 												service_type : portPair?.service_type,
@@ -95,6 +106,11 @@ function Content({
 				</div>
 			</div>
 			<div className={styles.line} />
+			<SureModal
+				showModal={showModal}
+				handleCloseModal={handleCloseModal}
+				handleFinalSubmit={handleFinalSubmit}
+			/>
 		</div>
 	);
 }

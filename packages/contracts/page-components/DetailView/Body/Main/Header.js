@@ -1,14 +1,24 @@
 import { Pill, Button } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import Line from '../../../../common/Line';
 import Percentage from '../../../../common/MiniCard/Percentage';
 import Price from '../../../../common/MiniCard/Price';
+import SureModal from '../../../../common/SureModal';
 
 import styles from './styles.module.css';
 
 function Header({ activePair, handleUpdateContract, data, stats }) {
+	const [showModal, setShowModal] = useState(null);
+
+	const handleCloseModal = () => {
+		setShowModal(null);
+	};
+	const handleFinalSubmit = () => {
+		handleUpdateContract(showModal);
+	};
 	const keys = ['commodity', 'container_size', 'container_type',
 		'trade_type', 'containers_count', 'inco_term', 'weight', 'packing_type'];
 	const keysToMap = {
@@ -74,7 +84,7 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 								themeType="secondary"
 								size="md"
 								onClick={() => {
-									handleUpdateContract({
+									setShowModal({
 										payload: {
 											id           : activePair?.id,
 											service_type : activePair?.service_type,
@@ -89,7 +99,7 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 								size="md"
 								themeType="accent"
 								onClick={() => {
-									handleUpdateContract({
+									setShowModal({
 										payload: {
 											id           : activePair?.id,
 											service_type : activePair?.service_type,
@@ -112,8 +122,14 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 							{activePair?.status === 'rejected' ? 'Rejected' : 'Approved'}
 						</Pill>
 					)}
+
 				</div>
 			</div>
+			<SureModal
+				showModal={showModal}
+				handleCloseModal={handleCloseModal}
+				handleFinalSubmit={handleFinalSubmit}
+			/>
 		</div>
 	);
 }

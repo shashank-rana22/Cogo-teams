@@ -1,8 +1,10 @@
 import { Button } from '@cogoport/components';
+import { useState } from 'react';
 
 import Line from '../../../../common/Line';
 import Percentage from '../../../../common/MiniCard/Percentage';
 import Price from '../../../../common/MiniCard/Price';
+import SureModal from '../../../../common/SureModal';
 import formatPortPair from '../../../../utils/formatPortPair';
 
 import styles from './styles.module.css';
@@ -13,6 +15,8 @@ function Content({
 	data,
 	loadingUpdate,
 }) {
+	const [showModal, setShowModal] = useState(null);
+
 	const formattedData = formatPortPair({ item: data });
 
 	let counter = 0;
@@ -21,6 +25,13 @@ function Content({
 			counter += 1;
 		}
 	});
+	const handleCloseModal = () => {
+		setShowModal(null);
+	};
+	const handleFinalSubmit = () => {
+		handleUpdateContract(showModal);
+		setShowModal(null);
+	};
 
 	return (
 		<div className={styles.main_container}>
@@ -36,7 +47,7 @@ function Content({
 						themeType="accent"
 						size="md"
 						onClick={() => {
-							handleUpdateContract('active');
+							setShowModal('active');
 						}}
 						disabled={counter !== 0 || loadingUpdate}
 					>
@@ -50,6 +61,12 @@ function Content({
 					) : null}
 				</div>
 			) : null}
+			<SureModal
+				showModal={showModal}
+				handleCloseModal={handleCloseModal}
+				handleFinalSubmit={handleFinalSubmit}
+				toFinish
+			/>
 		</div>
 	);
 }
