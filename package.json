@@ -12,14 +12,15 @@
     "common/*"
   ],
   "scripts": {
-    "deploy": "(pnpm build && cd cogo-control && pm2 start pm2.config.js)",
-    "build": "(NODE_ENV=production node scripts/build-pages && NODE_ENV=production turbo run build)",
+    "deploy": "(pnpm run prod:build && cd cogo-control && pm2 start pm2.config.js)",
+    "prod:build": "pnpm run pre-build && pnpm run build",
+    "build": "NODE_ENV=production turbo run build",
+    "pre-build": "NODE_ENV=production node scripts/build-pages",
     "dev": "node scripts/build-pages && turbo run dev",
-    "start": "turbo run start",
+    "start": "NODE_ENV=production pm2 start pm2.config.js",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
     "stylelint": "stylelint \"**/*.css\" --fix",
-    "clean": "turbo run clean",
-    "pre-build": "node scripts/build-pages"
+    "clean": "turbo run clean"
   },
   "dependencies": {
     "@sentry/nextjs": "^7.31.1",
