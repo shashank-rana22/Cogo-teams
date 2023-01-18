@@ -9,9 +9,6 @@ interface Props{
     item:itemProps;
 }
 function RenderUrgencyTag ({ item}:Props)  {
-    console.log(item,'kkkkk');
-    
-    
 	
 	return (
 		<div> 
