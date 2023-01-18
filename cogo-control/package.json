@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production pm2 start pm2.config.js",
     "lint": "next lint"
   },
   "dependencies": {
