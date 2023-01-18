@@ -31,7 +31,7 @@ function CardList({
 						headerRequired={headerRequired}
 						setSelectedRate={setSelectedRate}
 						selectedRate={selectedRate}
-						status={filters.negotiation_status}
+						status={filters?.negotiation_status}
 					/>
 					{!headerRequired && <div className={styles.line} />}
 				</div>
