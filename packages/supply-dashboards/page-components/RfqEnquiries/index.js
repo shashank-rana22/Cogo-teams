@@ -18,14 +18,14 @@ function RfqEnquiriesView() {
 		<div>
 			<Tabs fullWidth activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
 				<TabPanel name="live_bookings" title="Live Bookings">--</TabPanel>
-				<TabPanel name="missing_rates" title="Missing Rates">--</TabPanel>
-				<TabPanel name="dislike_rates" title="Disliked Rates">--</TabPanel>
+				<TabPanel name="trade_enquiry" title="Missing Rates">--</TabPanel>
+				<TabPanel name="disliked_rates" title="Disliked Rates">--</TabPanel>
 				<TabPanel name="rate_density" title="Rate Density & Coverage">--</TabPanel>
 				<TabPanel name="manage_forecast" title="Manage Forcast">--</TabPanel>
 				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
 					<RfqEnquiries />
 				</TabPanel>
-				<TabPanel name="rate_sheets" title="Rate Sheets">--</TabPanel>
+				<TabPanel name="rates_sheets" title="Rate Sheets">--</TabPanel>
 			</Tabs>
 		</div>
 	);
