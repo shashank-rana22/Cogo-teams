@@ -16,7 +16,7 @@ function NegotiateRate({ selectedCard, setRevertCounts }) {
 		}
 	});
 	const [activeService, setActiveService] = useState(
-		null,
+		service[0],
 	);
 	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
 
