@@ -9,8 +9,5 @@
 }
 
 .back_container {
-	display: flex;
-	align-items: center;
-	font-size: 14px;
-	font-weight: 500;
+	width: 100px;
 }

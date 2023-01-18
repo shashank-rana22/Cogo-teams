@@ -24,10 +24,10 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container', type = '' }
 		rules       : { required: 'This is required' },
 	},
 	{
-		name : name2,
-		span : 4,
-		type : 'select',
-
+		name        : name2,
+		span        : 4,
+		type        : 'select',
+		label       : 'Unit',
 		placeholder : 'Unit',
 		disabled    : true,
 		options     : [

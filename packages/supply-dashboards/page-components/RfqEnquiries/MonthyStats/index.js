@@ -21,9 +21,9 @@ function MonthyStats() {
 		(stats).forEach((statLabel) => {
 			const obj = {};
 			obj.month = (startCase(Object.keys(statLabel)));
-			obj.Reverted = (Object.values(statLabel)[0].reverted_rfqs_count);
-			obj.Totat = (Object.values(statLabel)[0].total_rfqs_count);
-			obj.Booked = (Object.values(statLabel)[0]
+			obj.reverted = (Object.values(statLabel)[0].reverted_rfqs_count);
+			obj.total = (Object.values(statLabel)[0].total_rfqs_count);
+			obj.booked = (Object.values(statLabel)[0]
 				.atleast_one_booking_received_count);
 			data.push(obj);
 		});
@@ -32,10 +32,10 @@ function MonthyStats() {
 	return (
 		<ResponsiveBar
 			data={data}
-			keys={stats ? ['Totat', 'Reverted', 'Booked'] : ['loading']}
+			keys={stats ? ['total', 'reverted', 'booked'] : ['loading']}
 			indexBy="month"
 			margin={{
-				top: 10, right: 30, bottom: 26, left: 0,
+				top: 20, right: 30, bottom: 26, left: 0,
 			}}
 			padding={0.5}
 			valueScale={{ type: 'linear' }}
@@ -57,13 +57,25 @@ function MonthyStats() {
 			isInteractive
 			innerPadding={0}
 			label
+			borderRadius="1px"
+			legendLabel={(e) => {
+				if (e.id === 'total') {
+					return 'Total RFQs Count';
+				}
+				if (e.id === 'reverted') {
+					return 'Reverted RFQs Count';
+				}
+				if (e.id === 'booked') {
+					return 'Atleast 1 Booking Received Count';
+				}
+				return 'Loading Data';
+			}}
 			legends={[
 				{
-					dataFrom      : 'keys',
 					anchor        : 'top-right',
 					direction     : 'row',
 					justify       : false,
-					translateY    : -10,
+					translateY    : -20,
 					translateX    : -80,
 					itemsSpacing  : 60,
 					itemWidth     : 100,
@@ -71,6 +83,7 @@ function MonthyStats() {
 					itemDirection : 'left-to-right',
 					itemOpacity   : 0.85,
 					symbolSize    : 10,
+					symbolShape   : 'circle',
 				},
 			]}
 		/>

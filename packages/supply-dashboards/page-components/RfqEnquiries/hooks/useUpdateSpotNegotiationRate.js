@@ -60,6 +60,12 @@ const useUpdateSpotNegotiationRate = ({
 				if (val) {
 					if (item === 'line_items') {
 						setValue('line_items', val);
+					} else if (item === 'origin_storage') {
+						setValue('origin_free_limit', val?.free_limit);
+						setValue('origin_slabs', val?.slabs);
+					} else if (item === 'destination_storage') {
+						setValue('destination_free_limit', val?.free_limit);
+						setValue('destination_slabs', val?.slabs);
 					} else if (Array.isArray(val)) {
 						(Object.keys(val[0])).forEach((prefill) => {
 							if (prefill === 'line_items') {
@@ -93,6 +99,12 @@ const useUpdateSpotNegotiationRate = ({
 					if (val) {
 						if (item === 'line_items') {
 							setValue('line_items', val);
+						} else if (item === 'origin_storage') {
+							setValue('origin_free_limit', val?.free_limit);
+							setValue('origin_slabs', val?.slabs);
+						} else if (item === 'destination_storage') {
+							setValue('destination_free_limit', val?.free_limit);
+							setValue('destination_slabs', val?.slabs);
 						} else if (Array.isArray(val)) {
 							(Object.keys(val[0])).forEach((prefill) => {
 								if (prefill === 'line_items') {
@@ -226,7 +238,7 @@ const useUpdateSpotNegotiationRate = ({
 				console.log(err?.message);
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data?.message || err?.response?.data?.base[0] || 'Something Went Wrong');
+			Toast.error(err?.response?.data?.message || 'Something Went Wrong');
 		}
 	};
 

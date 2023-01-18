@@ -55,7 +55,6 @@ function Grouped(props) {
 			{featureKey ? (
 				<div
 					role="presentation"
-					onClick={() => setShow(!show)}
 					className={`${styles.role_logic_group}`}
 				>
 					<div className={styles.row}>
@@ -71,6 +70,7 @@ function Grouped(props) {
 					<div>
 						<ButtonIcon
 							id={`access_mgmt_edit_role_sh_${featureKey}`}
+							onClick={() => setShow(!show)}
 							disabled={creatingNavs}
 							icon={show ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 						/>

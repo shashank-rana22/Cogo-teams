@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<Provider store={store}>
 			<SessionCheck>
+				<title>Cogoport - Simplifying International Logistics</title>
 				<Layout layout={pageProps.layout || 'authenticated'}>
 					<Component {...pageProps} />
 				</Layout>
