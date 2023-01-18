@@ -61,6 +61,7 @@ function Frequency({
 					bottom : 50,
 					left   : 60,
 				}}
+				enableArea
 				xScale={{ type: 'point' }}
 				yScale={{
 					type    : 'linear',
