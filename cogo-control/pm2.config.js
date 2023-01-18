@@ -11,7 +11,7 @@ module.exports = {
 	apps: [
 		{
 			name      : 'project-admin',
-			script    : 'yarn',
+			script    : 'npm',
 			args      : ['start', '-p', '4160'],
 			instances : ifProd(2, 1),
 			exec_mode : ifProd('cluster', 'fork'),
