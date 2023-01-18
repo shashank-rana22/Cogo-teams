@@ -10,11 +10,17 @@ function FilterLocation({ filters, hookSetters }) {
 		params: { filters: { type: ['country'] } },
 	}));
 	const { service_type:service } = filters;
-	const filterOption = service === 'fcl_freight' ? 'seaport' : 'airport';
+	let filterOption = service === 'air_freight' ? ['airport'] : ['seaport'];
+	if (!service) {
+		filterOption = ['seaport', 'airport'];
+	}
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: [filterOption] } },
+		params: { filters: { type: filterOption } },
 	}));
-	const heading = service === 'air_freight' ? 'airport' : 'port';
+	let heading = service === 'air_freight' ? 'airport' : 'port';
+	if (!service) {
+		heading = 'Port or Airport';
+	}
 	const handleChange = (value) => {
 		hookSetters?.setFilters({ ...filters, trade_type: value, page: 1 });
 	};
