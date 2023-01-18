@@ -45,7 +45,8 @@
 
 		.ui_upload_droparea_container {
 			align-items: center;
-			min-height: 42px;
+			min-height: 40px;
+			margin-bottom: 0;
 			border: 1px solid #ebebeb;
 			border-radius: 4px;
 		}
@@ -60,7 +61,6 @@
 		/* stylelint-disable-next-line selector-id-pattern */
 		#booking_rate_procurement_proof {
 			height: unset;
-			min-height: 40px;
 		}
 
 		.ui_upload_droparea_heading {

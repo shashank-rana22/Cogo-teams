@@ -40,7 +40,7 @@ function Layout({
 						const show = !(showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
-								<>
+								<div>
 									<div className={styles.heading}>
 										{heading}
 									</div>
@@ -53,7 +53,7 @@ function Layout({
 										showElements={showElements}
 									/>
 
-								</>
+								</div>
 							);
 						}
 						return show
