@@ -45,6 +45,7 @@ importers:
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.267
+      '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.50
@@ -68,6 +69,7 @@ importers:
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.267_p6peho6ylnuex5z4b2ipstsevu
+      '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
       '@cogoport/icons-react': 1.0.50_biqbaboplfbrettd7655fr4n2y
@@ -268,15 +270,15 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.249_rbajqidr47d2wuutoeqehqjlly
+      '@cogoport/components': 1.0.267_rbajqidr47d2wuutoeqehqjlly
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.50_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
-      axios: 1.2.2
-      axios-hooks: 4.0.0_axios@1.2.2+react@18.2.0
+      axios: 1.2.3
+      axios-hooks: 4.0.0_axios@1.2.3+react@18.2.0
       react: 18.2.0
 
   packages/locations:
@@ -311,7 +313,7 @@ importers:
       react-hook-form: ^7.41.5
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.266_rbajqidr47d2wuutoeqehqjlly
+      '@cogoport/components': 1.0.267_rbajqidr47d2wuutoeqehqjlly
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.50_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -1596,6 +1598,31 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
+  /@cogoport/charts/1.0.1_react@18.2.0:
+    resolution: {integrity: sha512-YQ6y+fADwyiMd5FkMTd2eruP5Q5bNVjd3pfI8Zzff21TJeLt3W5bDiFHgTxhzl8jPMsIzKPXf20wSKJAWpaq+Q==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      '@nivo/bar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/bullet': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/bump': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/calendar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
+      '@nivo/funnel': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/geo': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/line': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/marimekko': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/pie': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/scatterplot': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/stream': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/sunburst': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/tooltip': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@cogoport/components/1.0.267_p6peho6ylnuex5z4b2ipstsevu:
     resolution: {integrity: sha512-pZFF2LL9qZ6iM8Oy0CoQ5kDK56hhAx/tT+wN4XCK0SrQwxsn38DoxdvmpKOs/s5Pk4P4VZADZiSeCNBZC0lKzA==}
     peerDependencies:
@@ -1643,7 +1670,7 @@ packages:
       react: 18.2.0
       react-date-picker: 9.2.0_react@18.2.0
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
-      react-hook-form: 7.42.1_react@18.2.0
+      react-hook-form: 7.42.0_react@18.2.0
       react-table: 7.8.0_react@18.2.0
       tippy.js: 6.3.7
     optionalDependencies:
@@ -2676,7 +2703,7 @@ packages:
       react-redux:
         optional: true
     dependencies:
-      immer: 9.0.16
+      immer: 9.0.18
       react: 18.2.0
       react-redux: 8.0.5_biqbaboplfbrettd7655fr4n2y
       redux: 4.2.0

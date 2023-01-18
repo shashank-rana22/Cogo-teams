@@ -1,5 +1,5 @@
 import {
-	IcMBookingDesk, IcMSettings, IcMContractRates,
+	IcMSettings, IcMContractRates,
 	IcMAccountSettings,
 	IcMTracking,
 	IcMAgentManagement,
@@ -1750,15 +1750,6 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
-	supply_dashboard: {
-		key         : 'supply_dashboard',
-		title       : 'Supply Dashboard',
-		icon        : IcMBookingDesk,
-		href        : '/supply/dashboards',
-		as          : '/supply/dashboards',
-		type        : 'link',
-		module_type : 'dashboards',
-	},
 	home: {
 		key   : 'home',
 		title : 'Home',
@@ -1770,12 +1761,11 @@ const navigationMappingAdmin = {
 		key           : 'contracts',
 		title         : 'Contracts',
 		icon          : IcMContractRates,
-		href          : '/contracts',
-		as            : '/contracts',
+		href          : '/v2/contracts',
+		as            : '/v2/contracts',
 		type          : 'link',
 		possible_apis : apis.contracts,
 		module_type   : 'dashboards',
-
 	},
 };
 
