@@ -26,7 +26,7 @@ request.interceptors.request.use((oldConfig) => {
 		headers          : {
 			authorizationscope      : 'partner',
 			authorization           : `Bearer: ${token}`,
-			authorizationparameters : authorizationparameters || 'coe-shipments:allowed',
+			authorizationparameters : authorizationparameters || 'business_finance-coe_finance:allowed',
 		},
 	};
 });
