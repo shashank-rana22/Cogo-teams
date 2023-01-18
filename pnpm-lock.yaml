@@ -1640,7 +1640,7 @@ packages:
       react-date-picker: 9.2.0_biqbaboplfbrettd7655fr4n2y
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
       react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.42.0_react@18.2.0
+      react-hook-form: 7.42.1_react@18.2.0
       react-table: 7.8.0_react@18.2.0
       tippy.js: 6.3.7
     optionalDependencies:
