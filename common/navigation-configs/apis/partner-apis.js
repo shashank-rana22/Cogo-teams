@@ -9135,5 +9135,37 @@ const partner = {
 			service_name : 'platform_config',
 		},
 	],
+	contracts: [
+		{
+			api          : 'get_contract_projected_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contracts',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_shipments_avg_price',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_contract_port_pair_projected_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+	],
 };
 export default partner;

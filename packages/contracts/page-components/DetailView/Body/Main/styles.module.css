@@ -27,11 +27,13 @@
 .actions{
     display: flex;
     justify-content: space-between;
+    margin-left: 4px;
 }
 
 .stats{
     display: flex;
-    gap: 16px;
+    gap: 82px;
+    padding-left: 18px;
 }
 .buttons{
     display: flex;

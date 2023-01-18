@@ -1760,21 +1760,23 @@ const navigationMappings = {
 		type        : 'link',
 		module_type : 'dashboards',
 	},
+	home: {
+		key   : 'home',
+		title : 'Home',
+		href  : '/home',
+		as    : '/home',
+		icon  : IcMSettings,
+	},
 	contracts: {
-		key         : 'contracts',
-		title       : 'Contracts',
-		icon        : IcMContractRates,
-		href        : '/contracts',
-		as          : '/contracts',
-		type        : 'link',
-		module_type : 'dashboards',
-		home        : {
-			key   : 'home',
-			title : 'Home',
-			href  : '/home',
-			as    : '/home',
-			icon  : IcMSettings,
-		},
+		key           : 'contracts',
+		title         : 'Contracts',
+		icon          : IcMContractRates,
+		href          : '/contracts',
+		as            : '/contracts',
+		type          : 'link',
+		possible_apis : apis.contracts,
+		module_type   : 'dashboards',
+
 	},
 };
 

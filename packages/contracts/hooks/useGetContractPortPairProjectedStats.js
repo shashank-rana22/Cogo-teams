@@ -11,16 +11,19 @@ const useGetContractPortPairProjectedStats = ({ payload }) => {
 		},
 		{ manual: true },
 	);
+
 	const getPortPairStats = async () => {
 		try {
 			const res = await trigger({
 				params: {
-					contract_id         : payload?.id,
-					contract_service_id : payload?.contract_service_id,
-					service_type        : payload?.service_type,
-					origin_port_id      : payload?.origin_port_id,
-					destination_port_id : payload?.destination_port_id,
-					shipping_line_id    : payload?.shipping_line_id || undefined,
+					contract_id              : payload?.id,
+					contract_service_id      : payload?.contract_service_id,
+					service_type             : payload?.service_type,
+					origin_port_id           : payload?.origin_port_id || undefined,
+					destination_port_id      : payload?.destination_port_id || undefined,
+					requested_contract_price : Number(payload?.requested_contract_price || 0) || undefined,
+					origin_airport_id        : payload?.origin_airport_id || undefined,
+					destination_airport_id   : payload?.destination_airport_id || undefined,
 				},
 			});
 			setData(res?.data);
@@ -31,9 +34,7 @@ const useGetContractPortPairProjectedStats = ({ payload }) => {
 
 	const getStats = !!payload?.id
     && !!payload?.contract_service_id
-    && !!payload?.service_type
-    && !!payload?.origin_port_id
-    && !!payload?.destination_port_id;
+    && !!payload?.service_type;
 
 	useEffect(() => {
 		if (getStats) {
