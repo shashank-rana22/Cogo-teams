@@ -24,8 +24,8 @@ const useGetShipmentsAvgPrice = ({ payload }) => {
 					destination_airport_id : payload?.destination_airport_id || undefined,
 					shipping_line_id       : payload?.shipping_line_id || undefined,
 					airline_id             : payload?.airline_id || undefined,
-					weight                 : payload?.weight || undefined,
-					volume                 : payload?.volume || undefined,
+					weight                 : parseInt(payload?.weight, 10) || undefined,
+					volume                 : parseInt(payload?.volume, 10) || undefined,
 
 				},
 			});

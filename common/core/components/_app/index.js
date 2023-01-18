@@ -2,6 +2,7 @@ import '@cogoport/components/dist/themes/base.css';
 import '@cogoport/components/dist/themes/dawn.css';
 import { Router } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
+import * as Sentry from '@sentry/nextjs';
 import { appWithTranslation } from 'next-i18next';
 import pageProgessBar from 'nprogress';
 import './global.css';
@@ -10,6 +11,29 @@ import { useEffect } from 'react';
 
 import Layout from './layout';
 import SessionCheck from './SessionCheck';
+
+if (process.env.NODE_ENV === 'production') {
+	const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
+	if (SENTRY_DSN) {
+		try {
+			Sentry.init({
+				dsn              : SENTRY_DSN,
+				integrations     : [new Sentry.BrowserTracing()],
+				tracesSampleRate : 1.0,
+				ignoreErrors     : [
+					'Non-Error promise rejection captured with keys: message',
+					'Non-Error promise rejection captured with keys: message',
+					'Request failed with status code 403',
+					'Non-Error promise rejection captured with keys: data, error, status',
+					'Request failed with status code 401',
+					"Cannot read properties of null (reading 'getBoundingClientRect')",
+				],
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}
+}
 
 function MyApp({ Component, pageProps }) {
 	useEffect(() => {

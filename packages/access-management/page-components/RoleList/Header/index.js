@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Chips } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -13,10 +13,25 @@ function Header({
 }) {
 	return (
 		<section className={styles.container} id="rnp_role_list_header_container">
-			<Heading
-				title="Roles and Permission"
-				subTitle="Manage and create new roles and their permissions"
-			/>
+			<section className={styles.heading_container}>
+				<Heading
+					title="Roles and Permission"
+					subTitle="Manage and create new roles and their permissions"
+				/>
+
+				<Chips
+					selectedItems={[stakeHolderType]}
+					items={[
+						{ children: 'All Roles', key: 'all' },
+						{ children: 'Cogoport', key: 'cogoport' },
+						{ children: 'Channel Partner', key: 'channel_partner' },
+						{ children: 'Customer', key: 'customer' },
+					]}
+					onItemChange={(val) => {
+						setStakeHolderType(val);
+					}}
+				/>
+			</section>
 
 			<div className={styles.role_group}>
 				<Button
