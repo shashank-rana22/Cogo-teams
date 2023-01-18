@@ -5,10 +5,10 @@
 
 .item {
 	padding: 20px;
-	margin-bottom: 2px;
+	margin-bottom: 3px;
 	font-size: 12px;
 	font-weight: 400;
-	line-height: 18px;
+	line-height: 25px;
 	color: #333;
 	word-break: break-all;
 	cursor: pointer;

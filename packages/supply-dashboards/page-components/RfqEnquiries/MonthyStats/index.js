@@ -35,7 +35,7 @@ function MonthyStats() {
 			keys={stats ? ['total', 'reverted', 'booked'] : ['loading']}
 			indexBy="month"
 			margin={{
-				top: 20, right: 30, bottom: 26, left: 0,
+				top: 40, right: 30, bottom: 26, left: 0,
 			}}
 			padding={0.5}
 			valueScale={{ type: 'linear' }}
@@ -75,7 +75,7 @@ function MonthyStats() {
 					anchor        : 'top-right',
 					direction     : 'row',
 					justify       : false,
-					translateY    : -20,
+					translateY    : -30,
 					translateX    : -80,
 					itemsSpacing  : 60,
 					itemWidth     : 100,
