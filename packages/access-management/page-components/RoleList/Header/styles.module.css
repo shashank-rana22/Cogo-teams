@@ -23,6 +23,7 @@
 		:global(.ui_chips_container) {
 			flex-wrap: wrap;
 			width: 100%;
+			margin-top: 20px;
 		}
 	}
 }
