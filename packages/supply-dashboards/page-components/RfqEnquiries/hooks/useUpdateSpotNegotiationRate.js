@@ -209,7 +209,7 @@ const useUpdateSpotNegotiationRate = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const disableButton = loading || !(values?.rate_reference_number && values?.booking_rate_procurement_proof);
+	const disableButton = loading || !(values?.rate_reference_number || values?.booking_rate_procurement_proof);
 
 	const handleData = async (value) => {
 		try {
