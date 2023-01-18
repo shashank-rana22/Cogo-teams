@@ -1,4 +1,3 @@
-import { Pill } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 const columns = [

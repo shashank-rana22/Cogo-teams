@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import styles from './styles.module.css';
 
 function List({
-	fields, item, loading, headerRequired, setSelectedRate, selectedRate,
+	fields, item, loading, headerRequired, setSelectedRate, selectedRate, status,
 }) {
 	const { push } = useRouter();
 	const handleOnClick = () => {
@@ -23,7 +23,7 @@ function List({
 					<div
 						role="presentation"
 						onClick={() => {
-							handleOnClick();
+							if (status === 'awaiting_responses') { handleOnClick(); }
 						}}
 						className={headerRequired ? styles.item : styles.smallItem}
 						key={key || label}
