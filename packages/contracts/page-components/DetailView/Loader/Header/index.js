@@ -7,11 +7,11 @@ function Header() {
 	return (
 		<div>
 			<div className={styles.heading}>
-				<Placeholder />
-				<div><Placeholder /></div>
+				<Placeholder styles={{ width: '50px', height: '50px' }} />
+				<div><Placeholder styles={{ width: '50px', height: '50px' }} /></div>
 			</div>
 			<div className={styles.contract}>
-				<Placeholder />
+				<Placeholder styles={{ width: '50px', height: '50px' }} />
 			</div>
 			<Stats />
 		</div>

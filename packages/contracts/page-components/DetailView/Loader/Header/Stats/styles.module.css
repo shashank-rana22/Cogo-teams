@@ -34,7 +34,8 @@
 }
 .information{
     display: flex;
-    gap:16px
+    margin-left: 16px;
+    gap: 80px;
 }
 
 .main_container{
