@@ -52,6 +52,8 @@
     border-right: 1px solid #F2F2F2;
     border-radius: 4px;
     padding: 8px 12px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .sub_container{

@@ -36,7 +36,7 @@ function Footer({ statsData, index }) {
 				<div className={styles.label}>Rate</div>
 				<div className={styles.value}>
 					{statsData?.port_pairs_data[index]?.price
-						? statsData?.port_pairs_data[index]?.price.toFixed(2) : '-'}
+						? `${statsData?.port_pairs_data[index]?.price.toFixed(2)}/ ctr` : '-'}
 				</div>
 			</div>
 			<div className={styles.sub_container}>

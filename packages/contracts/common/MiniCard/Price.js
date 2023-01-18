@@ -1,16 +1,15 @@
 import styles from './styles.module.css';
 
-function Price({ data }) {
+function Price({ heading = 'Projected Consolidated Revenue from', data }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.heading}>
-				Projected Consolidated Revenue
-				from
+				{heading}
 			</div>
 			<div className={styles.price}>
 				$
-				{' '}
 				{data}
+				/ctr
 			</div>
 		</div>
 	);

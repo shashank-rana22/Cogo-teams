@@ -4,12 +4,12 @@ import { format } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Frequency({
-	statsDataRevenue,
+	avgPriceData,
 }) {
 	const sellData = [];
 	const buyData = [];
 
-	(statsDataRevenue?.last_30_days_avg_price || []).forEach((item) => {
+	(avgPriceData?.last_30_days_avg_price || []).forEach((item) => {
 		sellData.push({
 			x : format(item?.date, 'dd'),
 			y : item?.avg_sell_price,

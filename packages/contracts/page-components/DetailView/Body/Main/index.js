@@ -12,6 +12,7 @@ function Main({ activePair, handleUpdateContract, data, statsData }) {
 				statsData={statsData}
 				handleUpdateContract={handleUpdateContract}
 				data={data}
+				stats={stats}
 			/>
 			<Charts
 				activePair={activePair}

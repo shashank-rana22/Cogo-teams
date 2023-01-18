@@ -8,9 +8,17 @@ import Price from '../../../../common/MiniCard/Price';
 
 import styles from './styles.module.css';
 
-function Header({ activePair, statsData, handleUpdateContract, data }) {
-	const keys = ['commodity', 'container_size', 'container_type', 'trade_type', 'containers_count', 'inco_term'];
-	const keysToMap = { container_size: 'ft', containers_count: 'Container' };
+function Header({ activePair, handleUpdateContract, data, stats }) {
+	const keys = ['commodity', 'container_size', 'container_type',
+		'trade_type', 'containers_count', 'inco_term', 'weight', 'packing_type'];
+	const keysToMap = {
+		container_size   : 'ft',
+		containers_count : 'Container',
+		weight           : {
+			lcl_freight : 'Mt',
+			air_freight : 'Kg',
+		},
+	};
 	const originCode = activePair?.origin_code;
 	const originName = activePair?.origin?.split('(')[0];
 	const destinationCode = activePair?.destination_code;
@@ -29,36 +37,34 @@ function Header({ activePair, statsData, handleUpdateContract, data }) {
 			</div>
 
 			<div className={styles.pills}>
-				{keys.map((item) => (
-					<div>
-						{activePair[item] ? (
-							<Pill
-								size="md"
-								color="#DFE1EF"
-							>
-								{Object.keys(keysToMap).includes(item)
-									? `${activePair[item]} ${keysToMap[item]}`
-									: startCase(activePair[item])}
-							</Pill>
-						) : null}
-					</div>
-				))}
+				{keys.map((item) => {
+					const content = item === 'weight' ? `${activePair[item]} 
+					${keysToMap[item][activePair?.service_type]}`
+						: `${activePair[item]} ${keysToMap[item]}`;
+					return (
+						<div>
+							{activePair[item] ? (
+								<Pill
+									size="md"
+									color="#DFE1EF"
+								>
+									{Object.keys(keysToMap).includes(item)
+										? content
+										: startCase(activePair[item])}
+								</Pill>
+							) : null}
+						</div>
+					);
+				})}
 			</div>
 			<div className={styles.actions}>
 				<div className={styles.stats}>
-					<div>
-						{activePair?.total_price ? (
-							<div>
-								Requested Price:
-								{' '}
-								{`${activePair?.currency} ${activePair?.total_price}`}
-								/ctr.
-							</div>
-						) : null}
-					</div>
-					<Price data={statsData?.projected_consolidated_revenue} />
+					<Price heading="Requested Price" data={stats?.price?.toFixed(2)} />
 					<Line />
-					<Percentage data={statsData?.projected_consolidated_profitability.toFixed(2)} />
+					<Percentage
+						heading="Profitability in the next 30 days"
+						data={stats?.profitability?.toFixed(2)}
+					/>
 					<Line />
 				</div>
 				<div>
