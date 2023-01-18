@@ -1,5 +1,4 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import navigationMappings from '@cogoport/navigation-configs/navigation-mappings';
 import React from 'react';
 
 import applyRegEx from '../../../../utils/apply-regex';
@@ -22,6 +21,7 @@ import styles from './styles.module.css';
 function Navigations(props) {
 	const {
 		roleData = {},
+		navigationMappings = {},
 		authRoleId = '',
 		getRole = () => {},
 		getNavOptions = () => {},
@@ -57,7 +57,6 @@ function Navigations(props) {
 				<TabPanel title="CRM" name="crm">
 					{(crmNavs || []).map((navigation) => {
 						const NavElement = navElement(navigation);
-
 						return (
 							<NavElement
 								navigation={navigation}

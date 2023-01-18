@@ -50,7 +50,7 @@ import {
 
 import apis from './apis';
 
-const navigationMappings = {
+const navigationMappingAdmin = {
 	channel_partner_dashboard: {
 		key           : 'channel_partner_dashboard',
 		title         : 'Dashboard',
@@ -1779,4 +1779,4 @@ const navigationMappings = {
 	},
 };
 
-export default navigationMappings;
+export default navigationMappingAdmin;
