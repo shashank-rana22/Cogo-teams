@@ -98,6 +98,7 @@ export const FILTERS : ControlProps[]=[
             {
                 name: 'billType',
                 type: 'tags',
+				multiple: true,
                 className: 'primary md',
                 span: 12,
                 options: [

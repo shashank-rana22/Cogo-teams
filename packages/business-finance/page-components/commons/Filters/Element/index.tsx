@@ -4,6 +4,7 @@ import {
     Pill,
     Select,
     Tags,
+    MultiSelect,
     Tooltip,
     Datepicker,
 } from "@cogoport/components";
@@ -17,7 +18,7 @@ import { IcMSearchlight } from "@cogoport/icons-react";
 
 interface ElementProps {
     type?: string;
-    value?: string | Date;
+    value?: string | Date | string[] ;
     className?: string;
     url?: string;
     href?: string;
@@ -150,7 +151,7 @@ const Element = ({
                         ;
                     </>
                 );
-            case "select":
+                case "select":
                 return (
                     <div
                         className={styles.select_container}
@@ -162,6 +163,25 @@ const Element = ({
                     >
                         <Select
                             value={value as string}
+                            className={className}
+                            options={options || []}
+                            style={style as CSSProperties}
+                            {...rest}
+                        />
+                    </div>
+                );
+            case "multiSelect":
+                return (
+                    <div
+                        className={styles.select_container}
+                        style={
+                            {
+                                "--width": selectWidth || "200px",
+                            } as CSSProperties
+                        }
+                    >
+                        <MultiSelect
+                            value={value as string[]}
                             className={className}
                             options={options || []}
                             style={style as CSSProperties}
