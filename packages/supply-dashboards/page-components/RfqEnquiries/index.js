@@ -9,6 +9,7 @@ function RfqEnquiriesView() {
 	const handleTabChange = (tab) => {
 		if (tab !== 'rfq_enquiries') {
 			const route = tab.replace('_', '-');
+			// eslint-disable-next-line no-undef
 			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
