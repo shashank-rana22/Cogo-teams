@@ -40,7 +40,7 @@ function Layout({
 						const show = !(showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
-								<div>
+								<div style={{ width: '100%' }}>
 									<div className={styles.heading}>
 										{heading}
 									</div>
