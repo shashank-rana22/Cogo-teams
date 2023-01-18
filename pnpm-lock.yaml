@@ -55,7 +55,6 @@ importers:
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       '@next/bundle-analyzer': ^13.1.2
-      '@sentry/nextjs': ^7.31.1
       '@types/node': ^18.11.18
       '@types/react': ^18.0.26
       next: 13.1.1
@@ -78,7 +77,6 @@ importers:
       '@cogoport/store': link:../common/store
       '@cogoport/utils': 1.2.2
       '@next/bundle-analyzer': 13.1.2
-      '@sentry/nextjs': 7.31.1_next@13.1.1+react@18.2.0
       '@types/node': 18.11.18
       '@types/react': 18.0.26
       next: 13.1.1_biqbaboplfbrettd7655fr4n2y
@@ -2310,36 +2308,6 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/nextjs/7.31.1_next@13.1.1+react@18.2.0:
-    resolution: {integrity: sha512-Azqa2YwVH4LZjq/U1gsSwqoLBcbNhxxaMIDOocHm7ACbk0Dl3u3cZKDnRUJZ591+DTlDSfgE/WXjs/hWuNohSQ==}
-    engines: {node: '>=8'}
-    peerDependencies:
-      next: ^10.0.8 || ^11.0 || ^12.0 || ^13.0
-      react: 15.x || 16.x || 17.x || 18.x
-      webpack: '>= 4.0.0'
-    peerDependenciesMeta:
-      webpack:
-        optional: true
-    dependencies:
-      '@rollup/plugin-commonjs': 24.0.0_rollup@2.78.0
-      '@sentry/core': 7.31.1
-      '@sentry/integrations': 7.31.1
-      '@sentry/node': 7.31.1
-      '@sentry/react': 7.31.1_react@18.2.0
-      '@sentry/tracing': 7.31.1
-      '@sentry/types': 7.31.1
-      '@sentry/utils': 7.31.1
-      '@sentry/webpack-plugin': 1.20.0
-      chalk: 3.0.0
-      next: 13.1.1_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      rollup: 2.78.0
-      tslib: 1.14.1
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    dev: false
-
   /@sentry/node/7.31.1:
     resolution: {integrity: sha512-4VzfOU1YHeoGkBQmkVXlXoXITf+1NkZEREKhdzgpVAkVjb2Tk3sMoFov4wOKWnNTTj4ka50xyaw/ZmqApgQ4Pw==}
     engines: {node: '>=8'}
@@ -2365,20 +2333,6 @@ packages:
       '@sentry/types': 7.31.1
       '@sentry/utils': 7.31.1
       hoist-non-react-statics: 3.3.2
-      tslib: 1.14.1
-    dev: false
-
-  /@sentry/react/7.31.1_react@18.2.0:
-    resolution: {integrity: sha512-h65vrF7xVFV+JAvgUJQSqfY4EPU+E4Y39nwjQdnMvdrhb3gjlhOUQTBVGibuM0/bvwm7vBgjfVSBOezavfp6eA==}
-    engines: {node: '>=8'}
-    peerDependencies:
-      react: 15.x || 16.x || 17.x || 18.x
-    dependencies:
-      '@sentry/browser': 7.31.1
-      '@sentry/types': 7.31.1
-      '@sentry/utils': 7.31.1
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
       tslib: 1.14.1
     dev: false
 
