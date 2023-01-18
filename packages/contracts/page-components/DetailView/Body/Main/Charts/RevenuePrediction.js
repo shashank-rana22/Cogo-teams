@@ -1,5 +1,4 @@
 import Line from '../../../../../common/Line';
-import Margin from '../../../../../common/MiniCard/Margin';
 import Percentage from '../../../../../common/MiniCard/Percentage';
 import Price from '../../../../../common/MiniCard/Price';
 import useGetContractPortPairProjectedStats from '../../../../../hooks/useGetContractPortPairProjectedStats';

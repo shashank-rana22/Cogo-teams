@@ -48,6 +48,11 @@ function ProfitabilityPrediction({ activePair }) {
 				) : null}
 				{activePair?.service_type === 'fcl_freight' && (forecastData || []).length
 					? <FutureFrequency data={forecastData} avgPrice={avgPrice} /> : null}
+				{(avgPriceData?.last_30_days_avg_price || []).length ? (
+					<div className={styles.graph_heading}>
+						Last 30 Days Buy Price vs. Sell Price
+					</div>
+				) : null}
 				{(avgPriceData?.last_30_days_avg_price || []).length
 					? <PastFrequecy avgPriceData={avgPriceData} /> : null}
 			</div>

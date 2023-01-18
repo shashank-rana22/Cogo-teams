@@ -20,11 +20,10 @@ const monthsKey = {
 
 function Frequency({
 	data,
-	// avgPrice,
 }) {
 	let date = new Date();
 	const lineData = [];
-	// const avgData = [];
+
 	const monthstart = getMonth(date);
 
 	(data || []).forEach((item) => {
@@ -32,10 +31,7 @@ function Frequency({
 			x : format(date, 'dd'),
 			y : item,
 		});
-		// avgData.push({
-		//   x : format(date, 'dd'),
-		//   y : avgPrice,
-		// });
+
 		date = addDays(date, 1);
 	});
 	const monthend = getMonth(date);
@@ -45,10 +41,6 @@ function Frequency({
 			id   : 'price',
 			data : lineData,
 		},
-		// {
-		//   id   : 'Avg Price',
-		//   data : avgData,
-		// },
 	];
 
 	return (
@@ -95,7 +87,6 @@ function Frequency({
 					legendOffset   : -40,
 					legendPosition : 'middle',
 				}}
-        // colors={{ scheme: 'yellow_green' }}
 				pointSize={10}
 				pointColor={{ theme: 'background' }}
 				pointBorderWidth={2}

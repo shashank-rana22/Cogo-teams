@@ -9,13 +9,12 @@ function Stats() {
 			<div className={styles.header}>
 				<div className={styles.heading}>
 					<div className={styles.contract_id}>
-						<Placeholder />
+						<Placeholder style={{ width: '100px', height: '20px' }} />
 					</div>
+					<Placeholder style={{ width: '60px', height: '10px' }} />
 				</div>
 				<div className={styles.details}>
-					<div><Placeholder /></div>
-					<div><Placeholder /></div>
-					<div><Placeholder /></div>
+					<div><Placeholder style={{ width: '100px', height: '20px' }} /></div>
 				</div>
 			</div>
 			<Content />

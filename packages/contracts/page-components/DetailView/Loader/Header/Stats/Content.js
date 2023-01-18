@@ -8,15 +8,13 @@ function Content() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.information}>
-				<Placeholder />
+				<Placeholder style={{ width: '80px', height: '60px' }} />
 				<Line />
-				<Placeholder />
+				<Placeholder style={{ width: '80px', height: '60px' }} />
 				<Line />
-				<Placeholder />
 			</div>
 			<div className={styles.button_container}>
-				<Placeholder />
-				<Placeholder />
+				<Placeholder style={{ width: '100px', height: '30px' }} />
 			</div>
 		</div>
 	);

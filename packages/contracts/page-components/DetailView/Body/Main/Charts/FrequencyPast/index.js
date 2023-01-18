@@ -3,20 +3,35 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const monthsKey = {
+	'01' : 'Jan',
+	'02' : 'Feb',
+	'03' : 'Mar',
+	'04' : 'Apr',
+	'05' : 'May',
+	'06' : 'Jun',
+	'07' : 'Jul',
+	'08' : 'Aug',
+	'09' : 'Sep',
+	10   : 'Oct',
+	11   : 'Nov',
+	12   : 'Dec',
+};
 function Frequency({
 	avgPriceData,
 }) {
 	const sellData = [];
 	const buyData = [];
-
+	const startMonth = avgPriceData?.last_30_days_avg_price[0]?.day.split('-')?.[1];
+	const endMonth = avgPriceData?.last_30_days_avg_price[29]?.day.split('-')?.[1];
 	(avgPriceData?.last_30_days_avg_price || []).forEach((item) => {
 		sellData.push({
-			x : format(item?.date, 'dd'),
-			y : item?.avg_sell_price,
+			x : format(item?.day, 'dd'),
+			y : item?.day_usd_avg_sell_price,
 		});
 		buyData.push({
-			x : format(item?.date, 'dd'),
-			y : item?.avg_buy_price,
+			x : format(item?.day, 'dd'),
+			y : item?.day_usd_avg_buy_price,
 		});
 	});
 
@@ -62,7 +77,7 @@ function Frequency({
 					tickSize       : 0,
 					tickPadding    : 5,
 					tickRotation   : 0,
-					legend         : '',
+					legend         : `${monthsKey[startMonth]}-${monthsKey[endMonth]}`,
 					legendOffset   : 36,
 					legendPosition : 'middle',
 				}}
