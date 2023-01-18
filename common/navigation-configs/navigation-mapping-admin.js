@@ -1,10 +1,13 @@
 import {
 	IcMAccountSettings,
 	IcMSettings,
+	IcMLocation,
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
 	IcMProductCodeMapping,
+	IcMRateManagement,
+	IcMDemurrage,
 	IcMAir,
 	IcMShip,
 	IcMOceanSchedules,
@@ -306,6 +309,7 @@ const navigationMappingAdmin = {
 	logistics_rate: {
 		key       : 'logistics_rate',
 		title     : 'Rate Management',
+		icon      : IcMRateManagement,
 		main_apis : [
 			'list_fcl_freight_rates',
 			'list_fcl_freight_rate_locals',
@@ -418,6 +422,7 @@ const navigationMappingAdmin = {
 			'list_fcl_freight_rate_locals',
 			'list_organization_serviceable_ports',
 		],
+		icon          : IcMPortManagement,
 		possible_apis : apis.pms,
 		options       : [
 			{
@@ -610,6 +615,7 @@ const navigationMappingAdmin = {
 		key           : 'locations',
 		title         : 'Locations',
 		main_apis     : ['list_locations'],
+		icon          : IcMLocation,
 		possible_apis : apis.locations,
 		options       : [
 			{
@@ -1621,6 +1627,7 @@ const navigationMappingAdmin = {
 	supply_tools: {
 		key           : 'supply_tools',
 		title         : 'Supply Tools',
+		icon          : IcMDemurrage,
 		main_apis     : [],
 		possible_apis : apis.supply_tools,
 		options       : [
