@@ -534,6 +534,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api: 'create_channel_partner_persona',
+			access_type: 'private',
+			service_name: 'partner',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1602,6 +1607,12 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
+		},
+		{
+			api: 'create_channel_partner_persona',
+			access_type: 'private',
+			feature: 'demand_crm',
+			service_name: 'partner',
 		},
 	],
 	supply_crm: [
