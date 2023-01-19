@@ -23,14 +23,14 @@ const FilterModal = ({filters,setFilters}:Props) => {
 	const [showModal, setShowModal] =useState(false);
 	
  const isFilterApplied = () =>{
-	 if(filters?.billDate || filters?.billType || filters?.dueDate || filters?.services || filters?.updatedDate){
+	 if(filters?.billDate || filters?.billType || filters?.dueDate || filters?.serviceType || filters?.updatedDate||filters?.currency){
 		return true;
 	 }else{
 		 return false;
 	 }
  }
 
-const [currencyValue, setCurrencyValue] = useState<currencyData>();
+const [currencyValue, setCurrencyValue] = useState<currencyData|{}>();
 	
 return (
 	<div className={styles.modal_container}>
@@ -49,7 +49,7 @@ return (
 
 								<>
 									<div className={`${styles.currencyValues} 
-											${currencyValue?.id === item.id ? styles.selected:styles.unselected}`}
+											${(currencyValue as currencyData)?.id === item.id ? styles.selected:styles.unselected}`}
 										onClick={() => {
 											setCurrencyValue(item);
 											setFilters({
@@ -74,6 +74,7 @@ return (
 					<div className={styles.clear}>
 					<Button onClick={()=>{
 						setFilters({})
+						setCurrencyValue({})
 						setShowModal(false)}}
 						>Clear Filters</Button>
 					</div>
