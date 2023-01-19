@@ -3,7 +3,7 @@ import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapp
 const getAllNavigations = () => {
 	const allNavs = [];
 	Object.values(navigationMappingAdmin || {}).forEach((navigation) => {
-		if (navigation?.options?.length > 0) {
+		if (navigation.isSubNavs) {
 			navigation.options.forEach((navOpt) => {
 				allNavs.push({ label: navOpt?.title, value: navOpt?.key });
 			});

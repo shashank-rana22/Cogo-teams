@@ -79,53 +79,6 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 					/>
 					<Line />
 				</div>
-				{/* <div>
-					{data?.status === 'pending_approval' && activePair?.status === 'quoted' ? (
-						<div className={styles.buttons}>
-							<Button
-								themeType="secondary"
-								size="md"
-								onClick={() => {
-									setShowModal({
-										payload: {
-											id           : activePair?.id,
-											service_type : activePair?.service_type,
-											status       : 'rejected',
-										},
-									});
-								}}
-							>
-								Reject
-							</Button>
-							<Button
-								size="md"
-								themeType="accent"
-								onClick={() => {
-									setShowModal({
-										payload: {
-											id           : activePair?.id,
-											service_type : activePair?.service_type,
-											status       : 'approved',
-										},
-									});
-								}}
-							>
-								Approve
-							</Button>
-						</div>
-					) : (
-						<Pill
-							color={activePair?.status === 'rejected' ? 'red' : 'green'}
-							style={{
-								padding     : '4px',
-								marginRight : '34px',
-							}}
-						>
-							{activePair?.status === 'rejected' ? 'Rejected' : 'Approved'}
-						</Pill>
-					)}
-
-				</div> */}
 			</div>
 			<SureModal
 				showModal={showModal}

@@ -405,5 +405,17 @@ const navigationMappingShipper = {
 		isNew         : true,
 		showInNav     : true,
 	},
+	app_manage_rfq: {
+		key           : 'app_manage_rfq',
+		title         : 'Manage RFQ',
+		href          : '/manage-rfq',
+		as            : '/manage-rfq',
+		type          : 'link',
+		icon          : 'nav-payments',
+		main_apis     : [],
+		possible_apis : app_apis.app_manage_rfq,
+		module_type   : 'dashboards',
+		showInNav     : true,
+	},
 };
 export default navigationMappingShipper;

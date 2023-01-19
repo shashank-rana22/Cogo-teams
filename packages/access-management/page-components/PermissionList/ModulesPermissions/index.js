@@ -7,7 +7,6 @@ import Navigations from './Navigations';
 import styles from './styles.module.css';
 
 function ModulesPermissions(props) {
-	// const { navigationListHook = {} } = useModulesPermissions({ roleDetails });
 	const { roleData = {} } = props || {};
 	const [searchString, setSearchString] = useState('');
 	const [navStatus, setNavStatus] = useState('all');

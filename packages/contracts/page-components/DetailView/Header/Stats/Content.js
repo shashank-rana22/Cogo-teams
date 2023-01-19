@@ -38,7 +38,7 @@ function Content({
 			<div className={styles.information}>
 				<Percentage data={statsData?.projected_consolidated_profitability.toFixed(2)} />
 				<Line />
-				<Price data={statsData?.projected_consolidated_revenue} />
+				<Price data={statsData?.projected_consolidated_revenue.toFixed(2)} />
 				<Line />
 			</div>
 			{data?.status === 'pending_approval' ? (

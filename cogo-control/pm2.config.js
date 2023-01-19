@@ -1,4 +1,4 @@
-const { NODE_ENV } = process.env;
+const NODE_ENV = 'production';
 
 const ifProd = (valueIfProd, valueIfDev) => {
 	if (NODE_ENV === 'production') {
@@ -11,7 +11,9 @@ module.exports = {
 	apps: [
 		{
 			name      : 'project-admin',
-			instances : ifProd(1, 1),
+			script    : 'yarn',
+			args      : ['start', '-p', '4160'],
+			instances : ifProd(2, 1),
 			exec_mode : ifProd('cluster', 'fork'),
 		},
 	],

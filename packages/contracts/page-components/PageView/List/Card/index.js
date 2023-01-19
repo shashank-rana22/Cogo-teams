@@ -2,6 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
+import Line from '../../../../common/Line';
 import formatPortPair from '../../../../utils/formatPortPair';
 
 import PortPair from './PortPair';
@@ -13,7 +14,7 @@ function Card({ item, filters }) {
 	const newFormattedData = [];
 	if (formattedData?.length) {
 		(formattedData || []).forEach((pair, i) => {
-			if (i <= 2 && Object.keys(pair || {})) {
+			if (i <= 1 && Object.keys(pair || {})) {
 				newFormattedData.push(pair);
 			}
 		});
@@ -22,25 +23,27 @@ function Card({ item, filters }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
-				{item?.contract_reference_id ? (
-					<div className={styles.heading}>
-						Contract ID #
-						{item?.contract_reference_id}
-						<div className={styles.content}>
-							<div className={styles.name}>
-								{startCase(item?.contract_name)}
-							</div>
+				<div className={styles.heading}>
+					{item?.contract_reference_id ? (
+						<>
+							Contract ID #
+							{item?.contract_reference_id}
+						</>
+					) : null}
+					<div className={styles.content}>
+						<div className={styles.name}>
+							{startCase(item?.contract_name)}
 						</div>
-						{item?.services?.map((service) => (
-							<Pill
-								size="md"
-								color="#DFE1EF"
-							>
-								{startCase(service)}
-							</Pill>
-						))}
 					</div>
-				) : null}
+					{item?.services?.map((service) => (
+						<Pill
+							size="md"
+							color="#DFE1EF"
+						>
+							{startCase(service)}
+						</Pill>
+					))}
+				</div>
 
 				<div className={styles.details}>
 					<div className={styles.pair}>
@@ -72,17 +75,23 @@ function Card({ item, filters }) {
 				<div className={styles.sub_container}>
 					<div className={styles.port_pair}>
 						{(newFormattedData || []).map((portPair) => (
-							<PortPair portPair={portPair} />
+							<>
+								<PortPair portPair={portPair} />
+								<Line />
+							</>
 						))}
 					</div>
-					{formattedData?.length > 3 ? (
-						<div className={styles.extra}>
-							<div>
-								+
-								{Number(formattedData?.length) - 3}
+					{formattedData?.length > 2 ? (
+						<>
+							<div className={styles.extra}>
+								<div>
+									+
+									{Number(formattedData?.length) - 2}
+								</div>
+								<div>more</div>
 							</div>
-							<div>more</div>
-						</div>
+							<Line />
+						</>
 					) : null}
 				</div>
 				<div className={styles.last}>

@@ -26,7 +26,7 @@ function RevenuePrediction({ activePair, data, statsData }) {
 					<>
 						<Margin
 							heading="Requested Contract Price"
-							data={statsDataRevenue?.requested_contract_price?.toFixed(2)}
+							value={statsDataRevenue?.requested_contract_price?.toFixed(2)}
 						/>
 						<Line />
 					</>
