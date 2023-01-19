@@ -2185,6 +2185,11 @@ const partner = {
 			service_name : 'organization',
 			feature      : 'inventory_management',
 		},
+		{
+			api: 'create_channel_partner_persona',
+			access_type: 'private',
+			service_name: 'partner',
+		},
 	],
 	support_crm: [
 		{
@@ -2495,11 +2500,6 @@ const partner = {
 			api          : 'get_organization_communication_reminder_stats',
 			access_type  : 'private',
 			service_name : 'organization',
-		},
-		{
-			api: 'create_channel_partner_persona',
-			access_type: 'private',
-			service_name: 'partner',
 		},
 	],
 	finance_crm: [
