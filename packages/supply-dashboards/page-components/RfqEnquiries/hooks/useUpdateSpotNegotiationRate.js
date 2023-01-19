@@ -59,6 +59,10 @@ const useUpdateSpotNegotiationRate = ({
 				setValue('service_provider_id', rateSelected?.service_provider_id);
 				setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
 				setValue('airline_id', rateSelected?.data?.airline_id);
+			} else {
+				setValue('service_provider_id', selectedRate?.service_provider_id);
+				setValue('shipping_line_id', selectedRate?.data?.shipping_line_id);
+				setValue('airline_id', selectedRate?.data?.airline_id);
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
