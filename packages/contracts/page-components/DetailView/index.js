@@ -7,6 +7,7 @@ import useUpdateContract from '../../hooks/useUpdateContract';
 import Body from './Body';
 import Header from './Header';
 import Loader from './Loader';
+import styles from './styles.module.css';
 
 function DetailView() {
 	const { query } = useSelector(({ general }) => ({
@@ -32,7 +33,7 @@ function DetailView() {
 
 	if (data?.id && !loading) {
 		content = (
-			<>
+			<div className={styles.container}>
 				<Header
 					data={data}
 					handleUpdateContract={handleUpdateContract}
@@ -45,7 +46,7 @@ function DetailView() {
 					getContract={getContract}
 					getContractStats={getContractStats}
 				/>
-			</>
+			</div>
 		);
 	}
 

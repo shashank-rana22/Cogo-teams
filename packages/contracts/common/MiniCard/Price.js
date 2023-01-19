@@ -9,7 +9,6 @@ function Price({ heading = 'Projected Consolidated Revenue from', data }) {
 			<div className={styles.price}>
 				$
 				{data}
-				/ctr
 			</div>
 		</div>
 	);
