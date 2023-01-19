@@ -41,7 +41,6 @@ function Items({ item, resetSubnavs }) {
 			{singleNav}
 			{item.map((singleOption) => (
 				<div
-					role="presentation"
 					className={styles.accordion}
 					aria-expanded={showSubNav}
 					onClick={() => {
@@ -50,6 +49,7 @@ function Items({ item, resetSubnavs }) {
 						}
 					}}
 					key={singleOption.title}
+					aria-hidden
 				>
 					<div className={styles.active_item}>
 						{singleOption.icon()}
