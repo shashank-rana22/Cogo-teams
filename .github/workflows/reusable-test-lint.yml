@@ -53,6 +53,6 @@ jobs:
       - name: Test ESLint
         run: pnpm run eslint
 
-#      - name: Test Stylelint
-#        if: always()
-#        run: pnpm run stylelint
+      - name: Test Stylelint
+        if: always()
+        run: pnpm run stylelint
