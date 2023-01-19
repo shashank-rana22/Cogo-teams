@@ -6,23 +6,31 @@ import { FILTERS } from '../../configurations/filters_config'
 import { Button } from '@cogoport/components'
 import {IcMFilter, IcCRedCircle} from "@cogoport/icons-react"
 import { GenericObject } from '../../../commons/Interfaces'
+import { CURRENCY_DATA } from '../../constants/constant';
 
 interface Props{
 	filters: GenericObject;
 	setFilters:(p: object) => void;
 }
+interface currencyData {
+	 id: string;
+	icon: JSX.Element;
+	text: string;
+}
+
 
 const FilterModal = ({filters,setFilters}:Props) => {
 	const [showModal, setShowModal] =useState(false);
 	
  const isFilterApplied = () =>{
-	 if(filters?.billDate || filters?.billType || filters?.dueDate || filters?.services || filters?.updatedDate){
+	 if(filters?.billDate || filters?.billType || filters?.dueDate || filters?.serviceType || filters?.updatedDate||filters?.currency){
 		return true;
 	 }else{
 		 return false;
 	 }
  }
 
+const [currencyValue, setCurrencyValue] = useState<currencyData|{}>();
 	
 return (
 	<div className={styles.modal_container}>
@@ -33,7 +41,31 @@ return (
 				</div> as never as string
 			)}
 			/>
+			
 			<Modal.Body>
+					<div className={styles.currencys}>Currency</div>
+					<div style={{display:'flex',marginBottom:"24px", marginLeft: '26px'}}>
+							{CURRENCY_DATA.map((item) => (
+
+								<>
+									<div className={`${styles.currencyValues} 
+											${(currencyValue as currencyData)?.id === item.id ? styles.selected:styles.unselected}`}
+										onClick={() => {
+											setCurrencyValue(item);
+											setFilters({
+												...filters,
+												currency: item.text,
+											});
+										}}
+
+									>
+										<div className="iconShow">{item.icon}</div>
+										<div className="textShow">{item.text}</div>
+									</div>
+								</>
+							))}
+						</div>
+
 				<div className={styles.container_filter}>
 				<Filter controls={FILTERS} filters={filters} setFilters={setFilters} />
 				
@@ -42,6 +74,7 @@ return (
 					<div className={styles.clear}>
 					<Button onClick={()=>{
 						setFilters({})
+						setCurrencyValue({})
 						setShowModal(false)}}
 						>Clear Filters</Button>
 					</div>

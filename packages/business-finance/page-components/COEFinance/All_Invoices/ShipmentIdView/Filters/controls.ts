@@ -4,7 +4,7 @@ const controls = [
     {
         name: "shipment_type",
         type: "select",
-        placeholder: "Shipment Type",
+        placeholder: "Service",
         theme: "admin",
         span: 1,
         isClearable: true,
@@ -24,10 +24,39 @@ const controls = [
         ],
     },
     {
+        name:"jobs",
+        type:"select",
+        placeholder:'Job Status',
+        theme:"admin",
+        span:3,
+        isClearable: true,
+        multiple: true,
+        defaultOptions: false,
+        options:[
+                {
+                    label: "ALL",
+                    value: "all",
+                },
+                {
+                    label: "Open Jobs",
+                    value: "openJobs",
+                },
+                {
+                    label: "Operationally Closed",
+                    value: "operationallyClosed",
+                },
+                {
+                    label: "Closed Jobs",
+                    value: "closedJobs",
+                },
+        ],
+
+    },
+    {
         name: "serial_id",
         type: "input",
         theme: "admin",
-        span: 5.8,
+        span: 3.8,
         isClearable: true,
         placeholder: "Search by Shipment ID",
     },

@@ -24,7 +24,7 @@ export const FILTERS : ControlProps[]=[
         span: 12,
         groupBy: [
             {
-				name: 'services',
+				name: 'serviceType',
 				type: 'select',
 				className: 'primaryfilter primary md',
 				isClearable: true,

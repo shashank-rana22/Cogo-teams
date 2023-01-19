@@ -31,7 +31,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
     };
 
     const showbillType =
-        filters?.billType === "PURCHASE" ? false : undefined;
+        filters?.billType === "PURCHASE" ? 'false' : undefined;
     const showProforma = filters?.billType === "PROFORMA" ? true : undefined;
 
     

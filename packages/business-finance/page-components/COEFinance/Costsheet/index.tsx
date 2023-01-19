@@ -210,8 +210,10 @@ const CostSheet = () => {
                     />
                     <div className={styles.quotationAmount}>
                         Quotation Total :
-                        {getFormattedPrice(sellData?.totalQuotational, "INR") ||
+                        <div className={styles.valueText}>
+                        {sellData?.totalQuotational ? getFormattedPrice(sellData?.totalQuotational, "INR") : "  --" ||
                             "-"}
+                            </div>
                     </div>
                     {apiloading &&
                         [1, 2, 3, 4].map(() => (
@@ -223,7 +225,7 @@ const CostSheet = () => {
                         ))}
                     {!apiloading &&
                         selldata.map((charge: GenericObject) => (
-                            <CardBody charge={charge} type="buy" />
+                            <CardBody charge={charge} type="sell" />
                         ))}
                 </div>
                 <div className={styles.width}>
@@ -234,8 +236,10 @@ const CostSheet = () => {
                     />
                     <div className={styles.quotationAmount}>
                         Quotation Total :
-                        {getFormattedPrice(buyData?.totalQuotational, "INR") ||
+                        <div className={styles.valueText}>
+                        {buyData?.totalQuotational ?  getFormattedPrice(buyData?.totalQuotational, "INR") : "  --"||
                             "-"}
+                            </div>
                     </div>
                     {apiloading &&
                         [1, 2, 3, 4].map(() => (
