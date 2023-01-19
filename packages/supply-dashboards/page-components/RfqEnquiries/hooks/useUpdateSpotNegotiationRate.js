@@ -128,6 +128,11 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			});
 		}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(data)]);
+
+	useEffect(() => {
 		if (rateSelected) {
 			if (rateSelected?.spot_negotiation_id) {
 				setValue('service_provider_id', rateSelected?.service_provider_id);
@@ -176,9 +181,8 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			}
 		}
-
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data), JSON.stringify(rateSelected)]);
+	}, [JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
 		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {
