@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover, Tooltip } from '@cogoport/components';
 import { IcMProvision } from '@cogoport/icons-react'; 
-import {formatDate} from '../../../../../commons/utils/formatDate'
+import { format } from "@cogoport/utils";
 import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css'
 
@@ -13,6 +13,7 @@ interface Props{
 }
 
 const RenderRemarks = ({ item }:Props) => {
+    
     const remarkData = item?.remarksTimeline;
 
     const remarkTimeline = () => {
@@ -21,8 +22,8 @@ const RenderRemarks = ({ item }:Props) => {
             return (
                 <div className={styles.timeline_wrapper}>
                     <div className={styles.left_content}>
-                        {formatDate(item?.createdAt, "dd-MMM-yy",{},true)}
-                        <div>{formatDate(item?.createdAt, " hh:mm a",{},true)}</div>
+                        {format(item?.createdAt, "dd/MMM/yyyy",null,false)}
+                        <div>{format(item?.createdAt, " hh:mm a",null,false)}</div>
                     </div>
                     <div className={styles.path}>
                         <div className={styles.circle} />
@@ -44,7 +45,7 @@ const RenderRemarks = ({ item }:Props) => {
 
     return (
         <div>
-            <Popover placement="top" render={remarkTimeline()}>
+            <Popover placement="top" render={remarkData?remarkTimeline():'no remark found !!'}>
                 <div className={styles.remarksDiv}>
                 <IcMProvision width="20px" height="20px" color="#F68B21" />
                 </div>
