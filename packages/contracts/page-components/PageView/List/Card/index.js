@@ -2,6 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
+import Line from '../../../../common/Line';
 import formatPortPair from '../../../../utils/formatPortPair';
 
 import PortPair from './PortPair';
@@ -72,17 +73,23 @@ function Card({ item, filters }) {
 				<div className={styles.sub_container}>
 					<div className={styles.port_pair}>
 						{(newFormattedData || []).map((portPair) => (
-							<PortPair portPair={portPair} />
+							<>
+								<PortPair portPair={portPair} />
+								<Line />
+							</>
 						))}
 					</div>
 					{formattedData?.length > 2 ? (
-						<div className={styles.extra}>
-							<div>
-								+
-								{Number(formattedData?.length) - 2}
+						<>
+							<div className={styles.extra}>
+								<div>
+									+
+									{Number(formattedData?.length) - 2}
+								</div>
+								<div>more</div>
 							</div>
-							<div>more</div>
-						</div>
+							<Line />
+						</>
 					) : null}
 				</div>
 				<div className={styles.last}>
