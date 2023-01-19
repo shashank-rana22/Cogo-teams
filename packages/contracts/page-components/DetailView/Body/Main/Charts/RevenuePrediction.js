@@ -1,6 +1,6 @@
 import Line from '../../../../../common/Line';
+import Margin from '../../../../../common/MiniCard/Margin';
 import Percentage from '../../../../../common/MiniCard/Percentage';
-import Price from '../../../../../common/MiniCard/Price';
 import useGetContractPortPairProjectedStats from '../../../../../hooks/useGetContractPortPairProjectedStats';
 
 import styles from './styles.module.css';
@@ -24,7 +24,7 @@ function RevenuePrediction({ activePair, data, statsData }) {
 				<Line />
 				{statsDataRevenue?.requested_contract_price ? (
 					<>
-						<Price
+						<Margin
 							heading="Requested Contract Price"
 							data={statsDataRevenue?.requested_contract_price?.toFixed(2)}
 						/>

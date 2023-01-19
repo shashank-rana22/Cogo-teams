@@ -4,8 +4,8 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Line from '../../../../common/Line';
+import Margin from '../../../../common/MiniCard/Margin';
 import Percentage from '../../../../common/MiniCard/Percentage';
-import Price from '../../../../common/MiniCard/Price';
 import SureModal from '../../../../common/SureModal';
 
 import styles from './styles.module.css';
@@ -71,7 +71,7 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 			</div>
 			<div className={styles.actions}>
 				<div className={styles.stats}>
-					<Price heading="Requested Price" data={stats?.price?.toFixed(2)} />
+					<Margin heading="Requested Price" value={stats?.price?.toFixed(2)} />
 					<Line />
 					<Percentage
 						heading="Profitability in the next 30 days"
@@ -79,7 +79,7 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 					/>
 					<Line />
 				</div>
-				<div>
+				{/* <div>
 					{data?.status === 'pending_approval' && activePair?.status === 'quoted' ? (
 						<div className={styles.buttons}>
 							<Button
@@ -125,7 +125,7 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 						</Pill>
 					)}
 
-				</div>
+				</div> */}
 			</div>
 			<SureModal
 				showModal={showModal}
