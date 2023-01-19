@@ -4001,6 +4001,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'incentive',
 		},
+		{
+			api          : 'list_contract_lcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_air_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'create_bulk_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
 	],
 	discount: [
 		{
