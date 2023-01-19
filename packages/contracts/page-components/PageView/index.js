@@ -29,7 +29,7 @@ function PageView() {
 						currentPage={data?.page}
 						totalItems={data?.total_count}
 						pageSize={10}
-						handlePageChange={(val) => {
+						onPageChange={(val) => {
 							setFilters({ ...filters, page: val });
 						}}
 					/>

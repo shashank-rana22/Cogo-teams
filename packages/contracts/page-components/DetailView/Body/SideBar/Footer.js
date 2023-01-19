@@ -1,20 +1,6 @@
 import styles from './styles.module.css';
 
 function Footer({ statsData, index }) {
-	//   const keys = ["id"],
-	//     filteredData = (statsData?.port_pair_stats || []).filter(
-	//       (
-	//         (s) => (o) =>
-	//           ((k) => !s.has(k) && s.add(k))(keys.map((k) => o[k]).join("|"))
-	//       )(new Set())
-	//     );
-
-	// const stats = (statsData?.port_pairs_data || []).map((item) => {
-	// 	if (item.id === portPair?.id) {
-	// 		return statsData?.port_pairs_data;
-	// 	}
-	// })[0];
-
 	return (
 		<div className={styles.footer}>
 			<div className={styles.agent}>

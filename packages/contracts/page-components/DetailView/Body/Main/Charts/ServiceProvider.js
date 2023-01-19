@@ -51,14 +51,25 @@ function ServiceProvier({
 		<div className={styles.service_provider}>
 			<div className={styles.details}>
 				{showServiceProvider ? (
-					<Select
-						style={{ width: '300px' }}
-						{...newControl}
-						value={serviceProvider}
-						onChange={(val) => {
-							handleServiceProvider(val);
-						}}
-					/>
+					<>
+						<Select
+							style={{ width: '300px' }}
+							{...newControl}
+							value={serviceProvider}
+							onChange={(val) => {
+								handleServiceProvider(val);
+							}}
+						/>
+						<Button
+							themeType="link"
+							style={{ color: '#0B44F9' }}
+							onClick={() => {
+								setShowServiceProvider(false);
+							}}
+						>
+							Close
+						</Button>
+					</>
 				) : (
 					<>
 						{stats?.overseas_agent?.short_name ? (

@@ -38,7 +38,7 @@ const useListContracts = () => {
 	useEffect(() => {
 		listContracts();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters]);
+	}, [JSON.stringify(filters)]);
 
 	return {
 		data,

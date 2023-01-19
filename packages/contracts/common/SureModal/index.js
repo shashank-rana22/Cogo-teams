@@ -12,19 +12,17 @@ function SureModal({ showModal, handleCloseModal, handleFinalSubmit, toFinish = 
 			}}
 		>
 			<Modal.Body>
-				<div>
-					Are You Sure To
-					{' '}
-					{toFinish
-						? 'Finish Job' : startCase(showModal?.payload?.status === 'rejected' ? 'reject' : 'approve')}
-					{' '}
-					?
-				</div>
+				Are You Sure To
+				{' '}
+				{toFinish
+					? 'Finish Job' : startCase(showModal?.payload?.status === 'rejected' ? 'reject' : 'approve')}
+				{' '}
+				?
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.button_container}>
-					<Button themeType="primary" onClick={handleFinalSubmit}>Yes</Button>
 					<Button themeType="secondary" onClick={handleCloseModal}>No</Button>
+					<Button themeType="primary" onClick={handleFinalSubmit}>Yes</Button>
 				</div>
 			</Modal.Footer>
 		</Modal>
