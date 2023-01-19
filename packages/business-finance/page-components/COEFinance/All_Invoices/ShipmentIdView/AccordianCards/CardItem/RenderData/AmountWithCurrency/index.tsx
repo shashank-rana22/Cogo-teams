@@ -1,6 +1,7 @@
 import React from "react";
 import showOverflowingNumber from "../../../../../../../commons/showOverflowingNumber";
 import getFormattedPrice from "../../../../../../../commons/utils/getFormattedPrice";
+import styles from './styles.module.css';
 
 interface itemTypes {
     grandTotal?: number;
@@ -18,19 +19,19 @@ const AmountWithCurrency = ({ item, field }: propsType) => {
 
     const formatAmount =
         getFormattedPrice(
-            item.grandTotal!,
-            item.billCurrency! || currency || "INR"
+            grandTotal!,
+            billCurrency! || currency || "INR"
         ) || "";
     return (
-        <div>
-            <div>
+        
+            <div className={styles.text} >
                 {field.key === "grandTotal" && (
                     <div>
                         <text>{showOverflowingNumber(formatAmount, 12)}</text>
                     </div>
                 )}
             </div>
-        </div>
+        
     );
 };
 

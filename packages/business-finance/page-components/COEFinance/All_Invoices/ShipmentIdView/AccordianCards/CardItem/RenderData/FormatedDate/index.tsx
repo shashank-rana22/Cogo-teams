@@ -1,5 +1,5 @@
 import React from "react";
-import { format } from "@cogoport/utils";
+import styles from './styles.module.css';
 import { formatDate } from "../../../../../../../commons/utils/formatDate";
 
 interface itemTypes {
@@ -24,7 +24,7 @@ const FormatedDate = ({ item, field }: propsType) => {
     );
 
     return (
-        <div>
+        <div className={styles.text}>
             {field?.key === "billDate" && <div>{getBillDate}</div>}
             {field?.key === "dueDate" && <div>{getDueDate}</div>}
             {field?.key === "invoiceDate" && <div> {getInvoiceDate}</div>}

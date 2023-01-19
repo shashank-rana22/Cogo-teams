@@ -34,6 +34,7 @@ export interface ItemDataProps {
 const ShipmentIdView = () => {
     const [currentOpenSID, setCurrentOpenSID] = useState("");
     const [pending_approval, setPending_approval] = useState("all");
+    const [serial_id,setSerial_id]=useState('');
     const {
         hookSetters,
         page,
@@ -41,7 +42,7 @@ const ShipmentIdView = () => {
         loading,
         list: { total, data },
         refetch,
-    } = useShipmentIdView({ pending_approval });
+    } = useShipmentIdView({ pending_approval,serial_id });
 
     return (
         <div>
@@ -50,6 +51,8 @@ const ShipmentIdView = () => {
                 filters={filters}
                 pending_approval={pending_approval}
                 setPending_approval={setPending_approval}
+                serial_id={serial_id}
+                setSerial_id={setSerial_id}
             />
 
             <div>

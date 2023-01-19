@@ -52,14 +52,6 @@ const controls = [
         ],
 
     },
-    {
-        name: "serial_id",
-        type: "input",
-        theme: "admin",
-        span: 3.8,
-        isClearable: true,
-        placeholder: "Search by Shipment ID",
-    },
 ];
 
 export default controls;

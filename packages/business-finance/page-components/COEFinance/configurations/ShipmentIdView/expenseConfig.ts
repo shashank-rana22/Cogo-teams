@@ -7,7 +7,7 @@ export const expenseConfig = {
         {
             key: "billNumber",
             label: "Invoice No.",
-            span: 2,
+            span: 2.9,
             func: "renderInvoiceNumber",
         },
         {
@@ -26,7 +26,7 @@ export const expenseConfig = {
             label: "Service Ops 2",
             key: "createdByName",
             func: "renderName",
-            span: 1.5,
+            span: 2,
         },
 
         {
@@ -39,7 +39,7 @@ export const expenseConfig = {
             label: "Payment Due Date",
             key: "dueDate",
             func: "renderDates",
-            span: 2,
+            span: 2.2,
         },
         {
             label: "Last Modified At",
@@ -50,7 +50,7 @@ export const expenseConfig = {
         {
             label: "Status",
             key: "status",
-            span: 3,
+            span: 2.5,
             func: "renderStatus",
         },
         {
@@ -60,7 +60,7 @@ export const expenseConfig = {
             span: 1,
         },
         {
-            span: 1.5,
+            span: 1.9,
             func: "renderInvoices",
         },
     ],
