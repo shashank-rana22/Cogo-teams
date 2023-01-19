@@ -78,6 +78,7 @@ function Permission({
 		allControls.forEach((c) => {
 			setValue(c.name, formValues[c.name]);
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(formValues)]);
 
 	useEffect(() => {
@@ -89,6 +90,7 @@ function Permission({
 			});
 		});
 		return () => subscription.unsubscribe();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [watch]);
 
 	const isError = errors[permission?.value];

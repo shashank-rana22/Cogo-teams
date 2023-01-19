@@ -51,6 +51,7 @@ const useGetAuthorizationChecked = () => {
 							await push(replaceHref?.href, replaceAs?.as);
 						}
 						if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+							// eslint-disable-next-line no-undef
 							window.location.href = `/${profile?.partner?.id}${configs.href}`;
 						} else {
 							await push(configs.href, configs.as);
@@ -62,6 +63,7 @@ const useGetAuthorizationChecked = () => {
 				setSessionInitialized(true);
 			}
 		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [_initialized, isProfilePresent, isUnauthenticatedPath, sessionInitialized]);
 
 	return { sessionInitialized, setSessionInitialized };
