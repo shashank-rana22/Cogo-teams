@@ -1608,7 +1608,6 @@ const partner = {
 			feature      : 'allocation',
 			service_name : 'allocation',
 		},
-		
 	],
 	supply_crm: [
 		{
