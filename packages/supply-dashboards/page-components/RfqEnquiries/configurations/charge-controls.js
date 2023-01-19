@@ -24,7 +24,7 @@ const chargeControls = ({ heading = '', charge_code_name, service = '' }) => {
 			{
 				code     : '',
 				unit     : '',
-				currency : 'USD',
+				currency : '',
 				price    : '',
 			},
 		],
