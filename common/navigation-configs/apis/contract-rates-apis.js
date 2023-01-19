@@ -587,6 +587,12 @@ const apis = [
 		feature      : 'contract',
 		service_name : 'contract',
 	},
+	{
+		api          : 'create_contract',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;
