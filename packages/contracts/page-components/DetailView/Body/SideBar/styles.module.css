@@ -23,7 +23,7 @@
 .port_pair {
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 4px;
   justify-content: space-between;
   padding: 6px;
 
