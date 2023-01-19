@@ -16,7 +16,7 @@ export const applyFilter = (searchString, list, key, aliases = []) => {
 			return isPresentInAlias;
 		}
 
-		const subNavsOptions =			item?.isSubNavs || item?.options?.length ? item?.options : [];
+		const subNavsOptions = item?.isSubNavs || item?.options?.length ? item?.options : [];
 		let isPresentInSubNavs = false;
 		(subNavsOptions || []).forEach((nav) => {
 			(aliases || []).forEach((alias) => {

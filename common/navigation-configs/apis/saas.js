@@ -1511,5 +1511,110 @@ const saas = {
 			feature     : 'trade-partner',
 		},
 	],
+	app_saas_product_inventory: [
+		{
+			api         : 'put_saas_product_archive',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_category',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_top_products',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_hs_code_section',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_hs_code_heading',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_hs_code',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_category_list',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_list',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'post_saas_product',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_top_list',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_total_revenue',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'put_saas_product_unarchived',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_hs_code_countries',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'put_saas_product_unarchive',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'delete_saas_product',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'put_saas_product',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+	],
+
 };
 export default saas;
