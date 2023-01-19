@@ -88,7 +88,7 @@ function Frequency({
 					tickPadding    : 5,
 					tickRotation   : 0,
 					legend         : 'Price (In USD)',
-					legendOffset   : -40,
+					legendOffset   : -50,
 					legendPosition : 'middle',
 				}}
 				pointSize={10}
