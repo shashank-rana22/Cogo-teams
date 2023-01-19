@@ -14,7 +14,7 @@ const PURCHASE_VIEW_CONFIG = {
                 type: "tags",
             },
             func: "renderFieldPair",
-            span: 1,
+            span: 1.4,
         },
         {
             label: "SID",
@@ -32,7 +32,7 @@ const PURCHASE_VIEW_CONFIG = {
             label: "Supplier Name",
             key: "organizationName",
             func: "renderCustomer",
-            span: 1,
+            span: 1.2,
         },
         {
             label: "Invoice Amount",
@@ -43,7 +43,7 @@ const PURCHASE_VIEW_CONFIG = {
         {
             label: "Last Modified Date",
             key: "createdDate",
-            span: 1.2,
+            span: 1.4,
             func: "rendeFormate",
             sorting: { name: "modifiedDateSortType" },
         },
@@ -64,24 +64,24 @@ const PURCHASE_VIEW_CONFIG = {
         {
             label: "Status",
             key: "status",
-            span: 1.4,
+            span: 1.8,
             func: "renderStatus",
         },
         {
             label: "Remarks ",
             key: "remarks",
-            span: .5,
+            span: .8,
             func: "renderRemarks",
         },
         {
             label:"Urgency",
-            span:.7,
+            span:.8,
             key:"urgencyTag",
             func:"renderUrgencyTag",
         },
         {
             key: "viewMore",
-            span: 1.2,
+            span: 1.3,
             func: "renderViewMore",
         },
         {
