@@ -27,7 +27,7 @@ const InvoiceNumber = ({ item, field }: propsType) => {
     };
 
     return (
-        <div>
+        <div className={styles.text}>
             {field.key === "billNumber" && (
                 <>
                     <div
