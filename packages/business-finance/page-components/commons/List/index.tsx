@@ -51,7 +51,7 @@ function List({
 
     const {
         general: { isMobile = false },
-    } = useSelector((state: object) => state);
+    }:any = useSelector((state: object) => state);
 
     return (
         <section>

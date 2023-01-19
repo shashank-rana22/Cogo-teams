@@ -1,53 +1,37 @@
 import React, { useState } from "react";
-
 import SegmentedControl from "../../../../commons/SegmentedControl/index";
-
 import styled from "./styles.module.css";
-
-import { FILTERS_URGENT_DATA } from "../../../constants/purchase-list-filters";
-
+import FILTERS_URGENT_DATA from "../../../constants/purchase-list-segments";
 import FILTERS_DATA from "../../../constants/purchase-list-filters";
-
 import { Input } from "@cogoport/components";
-
 import { IcMSearchdark } from "@cogoport/icons-react";
-
 import FilterModal from "../../../Components/FilterModal/index";
-
-import useShipmentIdView from "../../../hook/useShipmentIdView";
-
+import usePurchaseViewStats from "../../../hook/getPurchaseViewStats"
 import { GenericObject } from "../../../../commons/Interfaces/index";
 import Filter from "../../../../commons/Filters";
 import controls from "./controls";
 
 interface segmentFilterProps {
     setSearchValue: any;
-
     searchValue: string;
-
     currentTab: string;
-
     setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
-
     filters: GenericObject;
-
     setFilters: (p: object) => void;
 }
 
 function SegmentedFilters({
     setCurrentTab,
-
     currentTab,
-
     setSearchValue,
-
     searchValue,
-
     filters,
-
     setFilters,
 }: segmentFilterProps) {
-    const { statsData }: any = useShipmentIdView();
+
+    const{statsData}:any=usePurchaseViewStats();
+
+    
 
     return (
         <div className={styled.main}>
@@ -64,7 +48,7 @@ function SegmentedFilters({
 
                 <div className={styled.filterDataUrgent}>
                     <SegmentedControl
-                        options={FILTERS_URGENT_DATA}
+                        options={FILTERS_URGENT_DATA(statsData)}
                         activeTab={currentTab}
                         setActiveTab={setCurrentTab}
                         color={"#ED3726"}

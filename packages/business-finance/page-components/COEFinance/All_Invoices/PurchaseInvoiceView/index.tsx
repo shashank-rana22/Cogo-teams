@@ -8,10 +8,12 @@ import RenderStatus from './RenderData/RenderStatus/index'
 import FieldPair from './RenderData/FiledPair/index';
 import RenderCustomer from './RenderData/RenderCustomer/index'
 import FormatedDate from './RenderData/FormatedDate/index';
+import RenderRibbon from './RenderData/RenderRibbon/index'
+import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index'
 import SegmentedFilters from './SegmentedFilters/index'
 import { GenericObject} from '../../../commons/Interfaces/index'
 import {fieldProps} from './interfaces/index'
-
+import  PURCHASE_VIEW_CONFIG  from "../..//configurations/PURCHASE_VIEW_LIST";
 interface itemProps {
   createdDate:Date,
     billDate:Date,
@@ -27,6 +29,7 @@ interface itemProps {
 	isProforma:boolean,
 	jobNumber:string,
   organizationName:string,
+  urgencyTag:Array<string>,
   remarksTimeline?:Array<{billStatus:string,remark:string,createdAt:Date}>
 }
 interface Props{
@@ -41,7 +44,6 @@ const [sort, setSort] = useState({});
 
   const {data,
       loading,
-      config,
       setSearchValue,	
 		  searchValue,
       currentTab,
@@ -51,9 +53,7 @@ const [sort, setSort] = useState({});
   const handleChange =(itemData:any)=>{
     router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}&status=${itemData?.status}`);
   
-  }
-
-      
+  }   
 
     const functions:any = {
       renderStatus: (itemData:itemProps) => (
@@ -74,10 +74,16 @@ const [sort, setSort] = useState({});
       renderViewMore : (itemData:fieldProps)=>(
         <Button size="xs" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
       ),
+      renderRibbon: (itemData:itemProps)=>(
+        <RenderRibbon item={itemData} />
+      ),
+      renderUrgencyTag:(itemData:itemProps)=>(
+        <RenderUrgencyTag item={itemData} />
+      )
     };
 
     
-   
+    
     
   return (
     <div>
@@ -90,7 +96,7 @@ const [sort, setSort] = useState({});
          setFilters={setFilters}
       />
      <List
-       config={config}  
+       config={PURCHASE_VIEW_CONFIG}  
        itemData={data}
        functions={functions}
        loading={loading}

@@ -1,6 +1,4 @@
-import { useRequest, useRequestBf } from "@cogoport/request";
-import React, { useEffect, useState } from "react";
-
+import { useRequest} from "@cogoport/request";
 import { useSelector } from "@cogoport/store";
 import useGetFiniteList from "./useGetFiniteList";
 
@@ -34,16 +32,6 @@ const useShipmentIdView = (allParams?: {}) => {
             {
                 url: "list_shipments",
                 method: "get",
-            },
-            { autoCancel: false }
-        );
-
-    const [{ loading: statsLoading, data: statsData }, statsTrigger] =
-        useRequestBf(
-            {
-                url: "/purchase/bills/stats",
-                method: "get",
-                authkey: "get_purchase_bills_stats",
             },
             { autoCancel: false }
         );

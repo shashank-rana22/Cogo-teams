@@ -145,3 +145,12 @@
     background: #f3fafa;
     padding-right: 20px;
 }
+
+.content{
+    padding: 15px;
+}
+
+.label{
+	font-size: 12;
+	font-weight: 500;
+}

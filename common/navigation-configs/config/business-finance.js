@@ -19,11 +19,13 @@ const businessFinance = {
 		navigation : 'business_finance-coe_finance',
 		isMainNav  : true,
 	},
-
 	'/[partner_id]/business-finance/coe-finance/[active_tab]/[view]': {
 		navigation: 'business_finance-coe_finance',
 	},
 	'/[partner_id]/business-finance/coe-finance/[active_tab]/view-invoices': {
+		navigation: 'business_finance-coe_finance',
+	},
+	'/[partner_id]/business-finance/coe-finance/all_invoices/view-invoices': {
 		navigation: 'business_finance-coe_finance',
 	},
 	'/[partner_id]/business-finance/coe-finance/cost-sheet': {

@@ -4,7 +4,6 @@ import { IcMInfo } from "@cogoport/icons-react";
 import { Tooltip } from "@cogoport/components";
 import styled from "./styles.module.css";
 import getFormattedPrice from "../../../../../commons/utils/getFormattedPrice";
-import { formatDate } from "../../../../../commons/utils/formatDate";
 import showOverflowingNumber from "../../../../../commons/showOverflowingNumber";
 
 interface itemProps {
@@ -23,14 +22,14 @@ interface Props {
 }
 
 function FormatedDate({ item, field }: Props) {
-    const getCreatedDate = formatDate(
+     const getCreatedDate = format(
         item?.createdDate,
-        "dd/MMM/yyyy | hh:mm a",
-        {},
-        true
+        "dd/MMM/yyyy  hh:mm a",
+        null,
+        false
     );
-    const getBillDate = formatDate(item?.billDate, "dd/MMM/yyyy", {}, true);
-    const getDueDate = formatDate(item?.dueDate, "dd/MMM/yyyy", {}, true);
+    const getBillDate = format(item?.billDate, "dd/MMM/yyyy", null, false);
+    const getDueDate = format(item?.dueDate, "dd/MMM/yyyy", null, false);
 
     const content = (
         <>
@@ -53,8 +52,8 @@ function FormatedDate({ item, field }: Props) {
     return (
         <div>
             {field?.key === "createdDate" && <div>{getCreatedDate}</div>}
-            {field?.key === "billDate" && <div>{getBillDate}</div>}
-            {field?.key === "dueDate" && <div>{getDueDate}</div>}
+           {field?.key === "billDate" && <div>{getBillDate}</div>}
+           {field?.key === "dueDate" && <div>{getDueDate}</div>} 
             {field?.key === "grandTotal" && (
                 <div className={styled.invoiceAmount}>
                     <text>{showOverflowingNumber(formatAmount, 12)}</text>

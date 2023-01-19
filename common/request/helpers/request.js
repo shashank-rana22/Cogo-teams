@@ -24,9 +24,9 @@ request.interceptors.request.use((oldConfig) => {
 		...oldConfig,
 		paramsSerializer : { serialize: customSerializer },
 		headers          : {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
-			authorizationparameters,
+			authorizationscope      : 'partner',
+			authorization           : `Bearer: ${token}`,
+			authorizationparameters : authorizationparameters || 'business_finance-coe_finance:allowed',
 		},
 	};
 });

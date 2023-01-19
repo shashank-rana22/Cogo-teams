@@ -156,5 +156,5 @@ export interface RemarksValInterface{
 	collectionPartyRemark:string,
 	billingPartyRemark:string,
 	invoiceDetailsRemark:string,
-	overall: string
+	overallRemark: string
 }

@@ -20,7 +20,7 @@ const useShipmentDocument = (shipmentId) => {
 				  }
 			}
 		})
-	},[])
+	},[shipmentId])
 
 	
 	return {

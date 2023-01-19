@@ -18,14 +18,24 @@ const Documents =({shipmentId=''}:DocumentsInterface)=>{
     
     const functions={
         DocumentTypeFunc: (item:any) => <p>{startCase(item?.document_type)}</p>,
-        UploadedOnFunc: (item:any)=> <p>{formatDate(item?.uploaded_at, 'dd/MMM/yyyy',{},true)}</p>,
-        viewFunc: (item:any)=> <Button 
+        UploadedOnFunc: (item:any)=> <p>
+            {item?.uploaded_at ? formatDate(item?.uploaded_at, 'dd/MMM/yyyy',{},true) : null}
+            </p>,
+        viewFunc: (item:any)=>{
+            return <> {item?.document_url ? <Button 
                                 themeType="secondary"
                                 size="xs" 
                                 onClick={() => window.open(item?.document_url, '_blank')}>
                                 View
-                               </Button>,
-        downloadFunc: (item:any) => <div className={styles.download} onClick={() => saveAs(item?.document_url)}><IcMDownload height={20} width={20}/></div>,
+                               </Button> :null}
+                               </>
+                               },
+        downloadFunc: (item:any) => {
+         return <>
+             {item?.document_url ? <div className={styles.download} onClick={() => saveAs(item?.document_url)}>
+                <IcMDownload height={20} width={20}/>
+                 </div> : null}
+             </>},
     };
     return(
         <div>

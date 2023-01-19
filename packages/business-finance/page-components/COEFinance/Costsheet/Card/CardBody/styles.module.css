@@ -155,3 +155,8 @@
 		padding: 0;
 	}
 }
+
+.tooltip{
+	padding-top: 2px;
+	padding-left: 4px;
+}
