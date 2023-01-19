@@ -13,6 +13,7 @@ import useGetVariance from "../../../hook/useGetVariance";
 import VarianceView from "./VarianceView/index";
 import {RemarksValInterface} from '../../../../commons/Interfaces/index'
 import TimeLineItemCheck from "./TimelineItemCheck/index";
+import useGetWallet from "../../../hook/useGetWallet";
 
 interface BuyerDetailInterface {
     entityCode?:string
@@ -88,6 +89,10 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
     const {source, trade_type} = dataList;
     const shipmentId = dataList?.id ||  ''; 
     const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
+    const {data:dataWallet,loading:loadingWallet} = useGetWallet(shipmentId) 
+
+    console.log(dataWallet,"dataWallet");
+    
 
     return(
     <div className={styles.container}>

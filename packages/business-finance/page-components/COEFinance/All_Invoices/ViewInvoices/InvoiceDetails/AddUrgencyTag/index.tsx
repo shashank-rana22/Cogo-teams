@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 interface AddUrgencyTag {
 	billId?:string
+	remark?:string
 	showAddTag?:boolean
 	serviceType?:string
 	tagValue?:string
@@ -13,6 +14,7 @@ interface AddUrgencyTag {
 	collectionPartyId?:string
 	setShowAddTag: React.Dispatch<React.SetStateAction<boolean>>
 	setTagValue: React.Dispatch<React.SetStateAction<string>>
+	setRemark:React.Dispatch<React.SetStateAction<string>>
 
 }
 
@@ -22,12 +24,14 @@ const AddUrgencyTag = ({
 	serviceType = '',
 	tagValue = '',
 	setShowAddTag,
+	remark,
+	setRemark,
 	setTagValue,
 	getBillRefetch = ()=>{},
 	collectionPartyId = '',
 }:AddUrgencyTag) => {
 
-	const [remarks, setRemarks] = useState('');
+
 
 	if (serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
@@ -43,8 +47,9 @@ const AddUrgencyTag = ({
 		billId,
 		tagValue,
 		collectionPartyId,
-		remarks,
+		remark,
 	});
+
 
 	return (
 		<Modal show={showAddTag} onClose={onClose}>
@@ -61,8 +66,8 @@ const AddUrgencyTag = ({
 
 				{tagValue === 'urgent' ? (
 					<Textarea
-						value={remarks}
-						onChange={(e:any) => setRemarks(e.target?.value)}
+						value={remark}
+						onChange={(e:any) => setRemark(e)}
 						placeholder="Enter Urgent Remarks..."
 					/>
 				) : null}

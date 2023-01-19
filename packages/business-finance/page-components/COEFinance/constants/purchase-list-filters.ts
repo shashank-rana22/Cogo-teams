@@ -1,6 +1,6 @@
 function FILTERS_DATA(statsData){
       const{INITIATED='',FINANCE_ACCEPTED='',ON_HOLD='' }=statsData || {};
-      console.log(statsData,'statsDatastatsData',);
+
       
     return [
             {

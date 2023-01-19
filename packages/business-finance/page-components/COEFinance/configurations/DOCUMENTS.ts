@@ -7,6 +7,7 @@ const DOCUMENTS = {
 			label: 'Document Type',
             key: 'document_type',
 			span: 1.5,
+			func:'DocumentTypeFunc'
 		},
         {
             label: 'View',

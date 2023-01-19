@@ -14,11 +14,11 @@ interface Details {
 	shipmentId:string,
 }
 const Details = ({orgId, dataList, shipmentId}:Details) => {
-	const {importer_exporter, shipment_type, pickup, drop}=dataList || {};
+	const {importer_exporter, shipment_type, origin_port:pickup, destination_port:drop}=dataList || {};
 	const shipmentTypeName=shipment_type?.split('_')?.join(' ')?.toUpperCase();
 	const Router = useRouter();
 	const  ServiceIcon  = GetServiceInfo(shipment_type);
-
+	
 return(
 <div>	
  <div className={styles.container}>
@@ -32,15 +32,15 @@ return(
 			<div className={styles.shipmentType}>{shipmentTypeName || '-'}</div> 
 			</div>
          <div>
-			 <div className={styles.postalData}>({pickup?.postal_code}){pickup?.country?.name}</div>
-			 <Tooltip content={pickup?.display_name}>
+			 <div className={styles.postalData}>({pickup?.port_code}){pickup?.country?.name}</div>
+			 <Tooltip content={<div style={{fontSize:'10px'}}>{pickup?.display_name}</div>}>
 			 <div className={styles.bold}>{pickup?.name}</div>
 			 </Tooltip>
 		 </div>
 		 <div className={styles.arrow}><IcMPortArrow/></div>
 		 <div>
-		 <div  className={styles.postalData}>({drop?.postal_code}){drop?.country?.name}</div>
-			 <Tooltip content={drop?.display_name}>
+		 <div  className={styles.postalData}>({drop?.port_code}){drop?.country?.name}</div>
+			 <Tooltip content={<div style={{fontSize:'10px'}}>{drop?.display_name}</div>}>
 			 <div className={styles.bold}>{drop?.name}</div>
 			 </Tooltip>
 		 </div>
