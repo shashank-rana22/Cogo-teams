@@ -23,25 +23,27 @@ function Card({ item, filters }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
-				{item?.contract_reference_id ? (
-					<div className={styles.heading}>
-						Contract ID #
-						{item?.contract_reference_id}
-						<div className={styles.content}>
-							<div className={styles.name}>
-								{startCase(item?.contract_name)}
-							</div>
+				<div className={styles.heading}>
+					{item?.contract_reference_id ? (
+						<>
+							Contract ID #
+							{item?.contract_reference_id}
+						</>
+					) : null}
+					<div className={styles.content}>
+						<div className={styles.name}>
+							{startCase(item?.contract_name)}
 						</div>
-						{item?.services?.map((service) => (
-							<Pill
-								size="md"
-								color="#DFE1EF"
-							>
-								{startCase(service)}
-							</Pill>
-						))}
 					</div>
-				) : null}
+					{item?.services?.map((service) => (
+						<Pill
+							size="md"
+							color="#DFE1EF"
+						>
+							{startCase(service)}
+						</Pill>
+					))}
+				</div>
 
 				<div className={styles.details}>
 					<div className={styles.pair}>

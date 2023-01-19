@@ -1,7 +1,20 @@
 import { format, startCase } from '@cogoport/utils';
 
+import formatPortPair from '../../../../utils/formatPortPair';
+
 import Content from './Content';
 import styles from './styles.module.css';
+
+const mapping = {
+	fcl_freight : 'containers_count',
+	lcl_freight : 'weight',
+	air_freight : 'weight',
+};
+const unitMapping = {
+	fcl_freight : 'Containers',
+	lcl_freight : 'Mt',
+	air_freight : 'Kgs',
+};
 
 function Stats({
 	data,
@@ -9,6 +22,10 @@ function Stats({
 	statsData,
 	loadingUpdate,
 }) {
+	const portPairdata = formatPortPair({ item: data });
+
+	let contentToShow = 0;
+	(portPairdata || []).forEach((item) => { contentToShow += Number(item?.[mapping?.[item?.service_type]]); });
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -34,6 +51,15 @@ function Stats({
 								data?.status === 'active' ? data?.approved_at : data?.requested_at,
 								'dd MMM YYYY',
 							)}
+						</div>
+					</div>
+					<div className={styles.pair}>
+						<div>
+							{portPairdata[0]?.service_type === 'fcl_freight' ? 'No Of Containers :' : 'Weight :'}
+						</div>
+						<div className={styles.value}>
+							{`${contentToShow} 
+							${startCase([unitMapping[portPairdata[0]?.service_type]])}`}
 						</div>
 					</div>
 					{data?.status === 'active' ? (
