@@ -86,7 +86,7 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
     const {data:shipmentData} = useListShipment(jobNumber);
     const dataList=shipmentData?.list[0] || {};
     const {source, trade_type} = dataList;
-    const shipmentId = dataList.id ||  ''; 
+    const shipmentId = dataList?.id ||  ''; 
     const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 
     return(

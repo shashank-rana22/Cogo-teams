@@ -61,7 +61,6 @@ function AccountRecievables() {
         },
     ];
 	const [currentTab, setCurrentTab] = useState('');
-    console.log(filters,"filters")
 	return (
 		<div>
 			<h1>Account Recievables</h1>

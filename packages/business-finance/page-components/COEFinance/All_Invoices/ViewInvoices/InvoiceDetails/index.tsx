@@ -95,9 +95,6 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
 		</div>
 	);
 	
-	console.log(tagValue,"tagValue");
-	
-
     return(
         <div className={styles.container}> 
 

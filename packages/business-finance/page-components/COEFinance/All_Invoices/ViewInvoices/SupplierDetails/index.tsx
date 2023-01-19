@@ -47,8 +47,6 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     const {kycStatus=''}=serviceProviderAdditionalDetail || {};
     const {payables,receivables,ledgerCurrency} = paymentsData || {};
     
-console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
-
     const handleChange = () =>{
          getSupplierHistory()
         setShowModal(!showModal) 
@@ -64,8 +62,7 @@ console.log(serviceProviderDocuments?.list,"serviceProviderDocuments?.list");
                                </Button>,
         downloadFunc: (item:any) => <div className={styles.download} onClick={() => saveAs(item?.document_url)}><IcMDownload height={20} width={20}/></div>,
     };
-    console.log(showDocsModal,"showDocsModal");
-    
+
     return(
         <div className={styles.container}> 
 

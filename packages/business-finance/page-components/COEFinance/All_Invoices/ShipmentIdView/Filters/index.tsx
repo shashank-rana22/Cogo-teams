@@ -7,8 +7,6 @@ import { APPROVAL, JOBS } from "../../../constants/shipmentListFilters";
 interface propsType {
     hookSetters: { setFilters };
     filters: {};
-    jobs: string;
-    setJobs: Function;
     pending_approval: string;
     setPending_approval: Function;
 }
@@ -18,8 +16,7 @@ const Filters = ({
     filters,
     pending_approval,
     setPending_approval,
-    jobs,
-    setJobs,
+
 }: propsType) => {
     return (
         <div className={styles.container}>
@@ -31,13 +28,7 @@ const Filters = ({
                     background="#FFFAEB"
                     color="#ED3726"
                 />
-                <SegmentedControl
-                    options={JOBS}
-                    activeTab={jobs}
-                    setActiveTab={setJobs}
-                    background="#FFFAEB"
-                    color="#ED3726"
-                />
+              
             </div>
             <Filter
                 controls={controls}
