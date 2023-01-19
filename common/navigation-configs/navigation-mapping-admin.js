@@ -1788,7 +1788,7 @@ const navigationMappingAdmin = {
 				href          : '/contract-rates/dashboard',
 				as            : '/contract-rates/dashboard',
 				type          : 'link',
-				main_apis     : ['list_contracts', 'list_organizations'],
+				main_apis     : ['list_contracts'],
 				possible_apis : [...apis.contract_rates, ...apis.shipment],
 			},
 			{
@@ -1797,7 +1797,7 @@ const navigationMappingAdmin = {
 				href          : '/contract-rates',
 				as            : '/contract-rates',
 				type          : 'link',
-				main_apis     : ['list_contracts', 'list_organizations'],
+				main_apis     : ['list_contracts'],
 				possible_apis : [...apis.contract_rates, ...apis.shipment],
 			},
 		],

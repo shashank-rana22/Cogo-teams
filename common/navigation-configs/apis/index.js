@@ -1,4 +1,5 @@
 import allocation from './allocation-apis';
+import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
 import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do_collection_release';
@@ -90,6 +91,7 @@ const apis = {
 	shipment_cancellation_policies,
 	kam_payments_dashboard,
 	manage_rfq,
+	app_manage_rfq,
 	allocation,
 	bl_do_collection_release,
 	...saas,
