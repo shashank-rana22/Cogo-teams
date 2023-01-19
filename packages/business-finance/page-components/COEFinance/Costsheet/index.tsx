@@ -223,7 +223,7 @@ const CostSheet = () => {
                         ))}
                     {!apiloading &&
                         selldata.map((charge: GenericObject) => (
-                            <CardBody charge={charge} type="buy" />
+                            <CardBody charge={charge} type="sell" />
                         ))}
                 </div>
                 <div className={styles.width}>
