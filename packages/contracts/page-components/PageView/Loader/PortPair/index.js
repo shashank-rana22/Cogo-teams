@@ -8,21 +8,21 @@ function PortPair() {
 		<div className={styles.container}>
 			<div>
 				<div className={styles.name}>
-					<Placeholder style={{ width: '150px', height: '30px' }} />
+					<Placeholder style={{ width: '120px', height: '30px' }} />
 
 				</div>
 				<div>
-					<Placeholder style={{ width: '150px', height: '30px' }} />
+					<Placeholder style={{ width: '120px', height: '30px' }} />
 				</div>
 
 			</div>
 			<IcMPortArrow />
 			<div>
 				<div className={styles.name}>
-					<Placeholder style={{ width: '150px', height: '30px' }} />
+					<Placeholder style={{ width: '120px', height: '30px' }} />
 				</div>
 				<div>
-					<Placeholder style={{ width: '150px', height: '30px' }} />
+					<Placeholder style={{ width: '120px', height: '30px' }} />
 				</div>
 			</div>
 		</div>

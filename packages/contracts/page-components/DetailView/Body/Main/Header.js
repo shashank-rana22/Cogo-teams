@@ -20,7 +20,7 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 		handleUpdateContract(showModal);
 	};
 	const keys = ['commodity', 'container_size', 'container_type',
-		'trade_type', 'containers_count', 'inco_term', 'weight', 'packing_type'];
+		'trade_type', 'containers_count', 'inco_term', 'weight', 'packing_type', 'volume', 'max_weight'];
 	const keysToMap = {
 		container_size   : 'ft',
 		containers_count : 'Container',
@@ -28,6 +28,8 @@ function Header({ activePair, handleUpdateContract, data, stats }) {
 			lcl_freight : 'Mt',
 			air_freight : 'Kg',
 		},
+		volume     : 'CBM',
+		max_weight : 'Weight',
 	};
 	const originCode = activePair?.origin_code;
 	const originName = activePair?.origin?.split('(')[0];
