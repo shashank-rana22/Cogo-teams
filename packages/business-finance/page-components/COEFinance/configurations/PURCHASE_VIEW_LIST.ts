@@ -14,7 +14,7 @@ const PURCHASE_VIEW_CONFIG = {
                 type: "tags",
             },
             func: "renderFieldPair",
-            span: 1.4,
+            span: 1.2,
         },
         {
             label: "SID",
@@ -32,18 +32,18 @@ const PURCHASE_VIEW_CONFIG = {
             label: "Supplier Name",
             key: "organizationName",
             func: "renderCustomer",
-            span: 1.2,
+            span: 1.3,
         },
         {
             label: "Invoice Amount",
             key: "grandTotal",
-            span: 1.3,
+            span: 1.4,
             func: "rendeFormate",
         },
         {
             label: "Last Modified Date",
             key: "createdDate",
-            span: 1.4,
+            span: 1.2,
             func: "rendeFormate",
             sorting: { name: "modifiedDateSortType" },
         },
@@ -51,44 +51,44 @@ const PURCHASE_VIEW_CONFIG = {
             label: "Invoice Date",
             key: "billDate",
             func: "rendeFormate",
-            span: 1.1,
+            span: 1,
             sorting: { name: "billDateSortType" },
         },
         {
             label: "Payment Due Date",
             key: "dueDate",
             func: "rendeFormate",
-            span: 1.4,
+            span: 1.2,
             sorting: { name: "dueDateSortType" },
         },
         {
             label: "Status",
             key: "status",
-            span: 1.8,
+            span: 1.4,
             func: "renderStatus",
         },
         {
             label: "Remarks ",
             key: "remarks",
-            span: .8,
+            span: 1,
             func: "renderRemarks",
         },
         {
             label:"Urgency",
-            span:.8,
+            span: 1,
             key:"urgencyTag",
             func:"renderUrgencyTag",
         },
         {
             key: "viewMore",
-            span: 1.3,
+            span: 1.5,
             func: "renderViewMore",
         },
-        {
-            key:'ribbon',
-            span:0,
-            func:'renderRibbon',
-        }
+        // {
+        //     key:'ribbon',
+        //     span:0.01,
+        //     func:'renderRibbon',
+        // }
     ],
 };
 

@@ -1,4 +1,5 @@
 import { Tooltip } from "@cogoport/components";
+import styles from './styles.module.css';
 import React from "react";
 
 interface itemTypes {
@@ -22,10 +23,10 @@ const ModifiedName = ({ item, field }: propsType) => {
     const { businessName = "" } = buyerDetails || {};
 
     return (
-        <div>
+        <div className={styles.text}>
             {field?.key === "organizationName" && (
                 <div>
-                    {organizationName.length > 18 ? (
+                    {organizationName.length > 10 ? (
                         <Tooltip
                             interactive
                             placement="top"
@@ -33,7 +34,7 @@ const ModifiedName = ({ item, field }: propsType) => {
                         >
                             <text>{`${organizationName.substring(
                                 0,
-                                15
+                                10
                             )}...`}</text>
                         </Tooltip>
                     ) : (
@@ -44,13 +45,13 @@ const ModifiedName = ({ item, field }: propsType) => {
 
             {field?.key === "businessName" && (
                 <div>
-                    {businessName.length > 18 ? (
+                    {businessName.length > 10 ? (
                         <Tooltip
                             interactive
                             placement="top"
                             content={businessName}
                         >
-                            <text>{`${businessName.substring(0, 15)}...`}</text>
+                            <text>{`${businessName.substring(0, 10)}...`}</text>
                         </Tooltip>
                     ) : (
                         <text>{businessName}</text>

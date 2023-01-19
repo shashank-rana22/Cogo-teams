@@ -15,7 +15,7 @@ interface UseSelectorProps {
 }
 
 interface AllParams {
-
+    serial_id?:string;
     pending_approval?: string;
 }
 

@@ -8,7 +8,7 @@ export const incomeConfig = {
         {
             key: "invoiceNumber",
             label: "Invoice No.",
-            span: 2.4,
+            span: 2.9,
             func: "renderInvoiceNumber",
         },
         {

@@ -78,7 +78,7 @@
   font-size: 10px;
 
   .ribbon {
-    --f: 9.2px; /* control the folded part */
+    --f: 12.5px; /* control the folded part */
     --r: 8px; /* control the ribbon shape */
     --t: -21px; /* the top offset */
 
@@ -96,5 +96,6 @@
     );
     background: #ed3726;
     box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+    margin-left: 20%;
   }
 }

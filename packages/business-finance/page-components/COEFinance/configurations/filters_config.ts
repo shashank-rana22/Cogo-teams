@@ -25,7 +25,7 @@ export const FILTERS : ControlProps[]=[
         groupBy: [
             {
 				name: 'serviceType',
-				type: 'select',
+				type: 'multiSelect',
 				className: 'primaryfilter primary md',
 				isClearable: true,
 				multiple: true,
@@ -102,10 +102,10 @@ export const FILTERS : ControlProps[]=[
                 className: 'primary md',
                 span: 12,
                 options: [
-                    { label: 'Purchase', value: 'PURCHASE' },
+					{ label: 'Purchase', value: 'PURCHASE' },
                     { label: 'Proforma', value: 'PROFORMA' },
                     { label: 'Credit Note', value: 'CREDIT_NOTE' },
-                    { label: 'Reimbersement', value: 'REIMBERSEMENT' },
+                    { label: 'Reimbursement', value: 'REIMBURSEMENT' },
                 ],
             }
         ],
