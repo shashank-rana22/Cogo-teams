@@ -17,7 +17,7 @@ interface UseSelectorProps {
 }
 
 interface AllParams {
-    jobs?: string;
+
     pending_approval?: string;
 }
 

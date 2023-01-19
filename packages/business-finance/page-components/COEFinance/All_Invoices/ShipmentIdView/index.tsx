@@ -34,7 +34,6 @@ export interface ItemDataProps {
 const ShipmentIdView = () => {
     const [currentOpenSID, setCurrentOpenSID] = useState("");
     const [pending_approval, setPending_approval] = useState("all");
-    const [jobs, setJobs] = useState("all");
     const {
         hookSetters,
         page,
@@ -42,7 +41,7 @@ const ShipmentIdView = () => {
         loading,
         list: { total, data },
         refetch,
-    } = useShipmentIdView({ jobs, pending_approval });
+    } = useShipmentIdView({ pending_approval });
 
     return (
         <div>
@@ -51,8 +50,6 @@ const ShipmentIdView = () => {
                 filters={filters}
                 pending_approval={pending_approval}
                 setPending_approval={setPending_approval}
-                jobs={jobs}
-                setJobs={setJobs}
             />
 
             <div>
