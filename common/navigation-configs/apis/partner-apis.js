@@ -1608,12 +1608,7 @@ const partner = {
 			feature      : 'allocation',
 			service_name : 'allocation',
 		},
-		{
-			api: 'create_channel_partner_persona',
-			access_type: 'private',
-			feature: 'demand_crm',
-			service_name: 'partner',
-		},
+		
 	],
 	supply_crm: [
 		{
@@ -2501,6 +2496,11 @@ const partner = {
 			api          : 'get_organization_communication_reminder_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api: 'create_channel_partner_persona',
+			access_type: 'private',
+			service_name: 'partner',
 		},
 	],
 	finance_crm: [
