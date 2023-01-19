@@ -54,45 +54,11 @@ const useUpdateSpotNegotiationRate = ({
 	});
 
 	useEffect(() => {
-		if (data) {
-			const mandatoryFreightCodes = [];
-			const mandatoryOriginChargeCodes = [];
-			const mandatoryDestinationChargeCodes = [];
-			const mandatorySurchargeCodes = [];
-			Object.keys(data?.freights_charge_codes || {}).forEach((code) => {
-				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatoryFreightCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			Object.keys(data?.origin_local_charge_codes || {}).forEach((code) => {
-				if (data?.origin_local_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatoryOriginChargeCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			Object.keys(data?.destination_local_charge_codes || {}).forEach((code) => {
-				if (data?.destination_local_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatoryDestinationChargeCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			Object.keys(data?.surcharge_charge_codes || {}).forEach((code) => {
-				if (data?.surcharge_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatorySurchargeCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			if (mandatoryFreightCodes.length) {
-				setValue('freights', mandatoryFreightCodes);
-			}
-			if (mandatoryOriginChargeCodes.length) {
-				setValue('origin_local', mandatoryOriginChargeCodes);
-			}
-			if (mandatoryDestinationChargeCodes.length) {
-				setValue('destination_local', mandatoryDestinationChargeCodes);
-			}
-			if (mandatorySurchargeCodes) {
-				setValue('surcharge', mandatorySurchargeCodes);
-			}
-		}
-		if (!rateSelected) {
+		let mandatoryFreightCodes = [];
+		let mandatoryOriginChargeCodes = [];
+		let mandatoryDestinationChargeCodes = [];
+		let mandatorySurchargeCodes = [];
+		if (!rateSelected && data) {
 			(Object.keys(data?.data || {})).forEach((item) => {
 				const val = data?.data[item];
 				if (val) {
@@ -107,7 +73,7 @@ const useUpdateSpotNegotiationRate = ({
 					} else if (Array.isArray(val)) {
 						(Object.keys(val[0])).forEach((prefill) => {
 							if (prefill === 'line_items') {
-								setValue(item, val[0]?.[prefill]);
+								mandatoryFreightCodes = val[0]?.[prefill];
 							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 								setValue(prefill, new Date(val[0]?.[prefill]));
 							} else if (prefill === 'departure_dates') {
@@ -119,7 +85,13 @@ const useUpdateSpotNegotiationRate = ({
 					} else if (typeof (val) === 'object') {
 						(Object.keys(val)).forEach((prefill) => {
 							if (prefill === 'line_items') {
-								setValue(item, val?.[prefill]);
+								if (item === 'origin_local') {
+									mandatoryOriginChargeCodes = val?.[prefill];
+								} else if (item === 'destination_local') {
+									mandatoryDestinationChargeCodes = val?.[prefill];
+								} else if (item === 'surcharge') {
+									mandatorySurchargeCodes = val?.[prefill];
+								}
 							} else {
 								setValue(prefill, val?.[prefill]);
 							}
@@ -127,62 +99,231 @@ const useUpdateSpotNegotiationRate = ({
 					}
 				}
 			});
+			Object.keys(data?.freights_charge_codes || {}).forEach((code) => {
+				const mandatoryCode = [];
+				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')) {
+					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+				}
+				mandatoryCode.forEach((mandateCode) => {
+					if ((data?.data?.freights || []).length) {
+						(data?.data?.freights[0]?.line_items || []).forEach((charges) => {
+							if (charges?.code !== mandateCode?.code) {
+								mandatoryFreightCodes = [...mandatoryFreightCodes, mandateCode];
+							}
+						});
+					}
+				});
+				if (!mandatoryFreightCodes.length) {
+					mandatoryFreightCodes = mandatoryCode;
+				}
+			});
+			Object.keys(data?.origin_local_charge_codes || {}).forEach((code) => {
+				const mandatoryCode = [];
+				if (data?.origin_local_charge_codes?.[code].tags?.includes('mandatory')) {
+					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+				}
+				mandatoryCode.forEach((mandateCode) => {
+					(data?.data?.origin_local?.line_items || []).forEach((charges) => {
+						if (charges?.code !== mandateCode?.code) {
+							mandatoryOriginChargeCodes = [...mandatoryOriginChargeCodes, mandateCode];
+						}
+					});
+				});
+				if (!mandatoryOriginChargeCodes.length) {
+					mandatoryOriginChargeCodes = mandatoryCode;
+				}
+			});
+			Object.keys(data?.destination_local_charge_codes || {}).forEach((code) => {
+				const mandatoryCode = [];
+				if (data?.destination_local_charge_codes?.[code].tags?.includes('mandatory')) {
+					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+				}
+				mandatoryCode.forEach((mandateCode) => {
+					(data?.data?.destination_local?.line_items || []).forEach((charges) => {
+						if (charges?.code !== mandateCode?.code) {
+							mandatoryDestinationChargeCodes = [...mandatoryDestinationChargeCodes, mandateCode];
+						}
+					});
+				});
+				if (!mandatoryDestinationChargeCodes.length) {
+					mandatoryDestinationChargeCodes = mandatoryCode;
+				}
+			});
+			Object.keys(data?.surcharge_charge_codes || {}).forEach((code) => {
+				const mandatoryCode = [];
+				if (data?.surcharge_charge_codes?.[code].tags?.includes('mandatory')) {
+					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+				}
+				mandatoryCode.forEach((mandateCode) => {
+					(data?.data?.surcharges?.line_items || []).forEach((charges) => {
+						if (charges?.code !== mandateCode) {
+							mandatorySurchargeCodes = [...mandatorySurchargeCodes,
+								{ code: mandateCode, price: '', unit: '', currency: '' }];
+						}
+					});
+				});
+				if (!mandatoryDestinationChargeCodes.length) {
+					mandatoryDestinationChargeCodes = mandatoryCode;
+				}
+			});
+			if (mandatoryFreightCodes.length) {
+				setValue('freights', mandatoryFreightCodes);
+			}
+			if (mandatoryOriginChargeCodes.length) {
+				setValue('origin_local', mandatoryOriginChargeCodes);
+			}
+			if (mandatoryDestinationChargeCodes.length) {
+				setValue('destination_local', mandatoryDestinationChargeCodes);
+			}
+			if (mandatorySurchargeCodes.length) {
+				setValue('surcharge', mandatorySurchargeCodes);
+			}
 		}
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
 
-	useEffect(() => {
-		if (rateSelected) {
-			if (rateSelected?.spot_negotiation_id) {
-				setValue('service_provider_id', rateSelected?.service_provider_id);
-				setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
-				(Object.keys(rateSelected?.data || {})).forEach((item) => {
-					const val = rateSelected?.data[item];
-					if (val) {
-						if (item === 'line_items') {
-							setValue('line_items', val);
-						} else if (item === 'origin_storage') {
-							setValue('origin_free_limit', val?.free_limit);
-							setValue('origin_slabs', val?.slabs);
-						} else if (item === 'destination_storage') {
-							setValue('destination_free_limit', val?.free_limit);
-							setValue('destination_slabs', val?.slabs);
-						} else if (Array.isArray(val)) {
-							(Object.keys(val[0])).forEach((prefill) => {
-								if (prefill === 'line_items') {
-									setValue(item, val[0]?.[prefill]);
-								} else if (prefill === 'validity_start' || prefill === 'validity_end') {
-									setValue(prefill, new Date(val[0]?.[prefill]));
-								} else if (prefill === 'departure_dates') {
-									setValue(prefill, [(val[0]?.[prefill])]);
-								} else {
-									setValue(prefill, val[0]?.[prefill]);
-								}
-							});
-						} else if (typeof (val) === 'object') {
-							(Object.keys(val)).forEach((prefill) => {
-								if (prefill === 'line_items') {
-									setValue(item, val?.[prefill]);
-								} else {
-									setValue(prefill, val?.[prefill]);
-								}
-							});
-						}
-					}
-				});
-			} else {
-				setValue('service_provider_id', selectedRate?.service_provider_id);
-				setValue('shipping_line_id', selectedRate?.shipping_line_id);
-				if ((rateSelected?.validities || []).length) {
-					setValue('freights', rateSelected?.validities[0]?.line_items);
-					setValue('validity_start', rateSelected?.validities[0]?.validity_start);
-					setValue('validity_end', rateSelected?.validities[0]?.validity_end);
-				}
-			}
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rateSelected)]);
+	// useEffect(() => {
+	// 	let mandatoryFreightCodes = [];
+	// 	let mandatoryOriginChargeCodes = [];
+	// 	let mandatoryDestinationChargeCodes = [];
+	// 	let mandatorySurchargeCodes = [];
+	// 	if (rateSelected) {
+	// 		if (rateSelected?.spot_negotiation_id) {
+	// 			setValue('service_provider_id', rateSelected?.service_provider_id);
+	// 			setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
+	// 			(Object.keys(rateSelected?.data || {})).forEach((item) => {
+	// 				const val = rateSelected?.data[item];
+	// 				if (val) {
+	// 					if (item === 'line_items') {
+	// 						setValue('line_items', val);
+	// 					} else if (item === 'origin_storage') {
+	// 						setValue('origin_free_limit', val?.free_limit);
+	// 						setValue('origin_slabs', val?.slabs);
+	// 					} else if (item === 'destination_storage') {
+	// 						setValue('destination_free_limit', val?.free_limit);
+	// 						setValue('destination_slabs', val?.slabs);
+	// 					} else if (Array.isArray(val)) {
+	// 						(Object.keys(val[0])).forEach((prefill) => {
+	// 							if (prefill === 'line_items') {
+	// 								mandatoryFreightCodes = val[0]?.[prefill];
+	// 							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
+	// 								setValue(prefill, new Date(val[0]?.[prefill]));
+	// 							} else if (prefill === 'departure_dates') {
+	// 								setValue(prefill, [(val[0]?.[prefill])]);
+	// 							} else {
+	// 								setValue(prefill, val[0]?.[prefill]);
+	// 							}
+	// 						});
+	// 					} else if (typeof (val) === 'object') {
+	// 						(Object.keys(val)).forEach((prefill) => {
+	// 							if (prefill === 'line_items') {
+	// 								if (item === 'origin_local') {
+	// 									mandatoryOriginChargeCodes = val?.[prefill];
+	// 								} else if (item === 'destination_local') {
+	// 									mandatoryDestinationChargeCodes = val?.[prefill];
+	// 								} else if (item === 'surcharge') {
+	// 									mandatorySurchargeCodes = val?.[prefill];
+	// 								}
+	// 							} else {
+	// 								setValue(prefill, val?.[prefill]);
+	// 							}
+	// 						});
+	// 					}
+	// 				}
+	// 			});
+	// 			Object.keys(rateSelected?.freights_charge_codes || {}).forEach((code) => {
+	// 				const mandatoryCode = [];
+	// 				if (rateSelected?.freights_charge_codes?.[code].tags?.includes('mandatory')) {
+	// 					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+	// 				}
+	// 				mandatoryCode.forEach((mandateCode) => {
+	// 					if ((rateSelected?.data?.freights || []).length) {
+	// 						(rateSelected?.data?.freights[0]?.line_items || []).forEach((charges) => {
+	// 							if (charges?.code !== mandateCode?.code) {
+	// 								mandatoryFreightCodes = [...mandatoryFreightCodes, mandateCode];
+	// 							}
+	// 						});
+	// 					}
+	// 				});
+	// 				if (!mandatoryFreightCodes.length) {
+	// 					mandatoryFreightCodes = mandatoryCode;
+	// 				}
+	// 			});
+	// 			Object.keys(rateSelected?.origin_local_charge_codes || {}).forEach((code) => {
+	// 				const mandatoryCode = [];
+	// 				if (rateSelected?.origin_local_charge_codes?.[code].tags?.includes('mandatory')) {
+	// 					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+	// 				}
+	// 				mandatoryCode.forEach((mandateCode) => {
+	// 					(rateSelected?.data?.origin_local?.line_items || []).forEach((charges) => {
+	// 						if (charges?.code !== mandateCode?.code) {
+	// 							mandatoryOriginChargeCodes = [...mandatoryOriginChargeCodes, mandateCode];
+	// 						}
+	// 					});
+	// 				});
+	// 				if (!mandatoryOriginChargeCodes.length) {
+	// 					mandatoryOriginChargeCodes = mandatoryCode;
+	// 				}
+	// 			});
+	// 			Object.keys(rateSelected?.destination_local_charge_codes || {}).forEach((code) => {
+	// 				const mandatoryCode = [];
+	// 				if (rateSelected?.destination_local_charge_codes?.[code].tags?.includes('mandatory')) {
+	// 					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+	// 				}
+	// 				mandatoryCode.forEach((mandateCode) => {
+	// 					(rateSelected?.data?.destination_local?.line_items || []).forEach((charges) => {
+	// 						if (charges?.code !== mandateCode?.code) {
+	// 							mandatoryDestinationChargeCodes = [...mandatoryDestinationChargeCodes, mandateCode];
+	// 						}
+	// 					});
+	// 				});
+	// 				if (!mandatoryDestinationChargeCodes.length) {
+	// 					mandatoryDestinationChargeCodes = mandatoryCode;
+	// 				}
+	// 			});
+	// 			Object.keys(rateSelected?.surcharge_charge_codes || {}).forEach((code) => {
+	// 				const mandatoryCode = [];
+	// 				if (rateSelected?.surcharge_charge_codes?.[code].tags?.includes('mandatory')) {
+	// 					mandatoryCode.push({ code, price: '', unit: '', currency: '' });
+	// 				}
+	// 				mandatoryCode.forEach((mandateCode) => {
+	// 					(rateSelected?.data?.surcharges?.line_items || []).forEach((charges) => {
+	// 						if (charges?.code !== mandateCode) {
+	// 							mandatorySurchargeCodes = [...mandatorySurchargeCodes,
+	// 								{ code: mandateCode, price: '', unit: '', currency: '' }];
+	// 						}
+	// 					});
+	// 				});
+	// 				if (!mandatoryDestinationChargeCodes.length) {
+	// 					mandatoryDestinationChargeCodes = mandatoryCode;
+	// 				}
+	// 			});
+	// 			console.log(mandatoryFreightCodes, 'values');
+	// 			if (mandatoryFreightCodes.length && data) {
+	// 				setValue('freights', mandatoryFreightCodes);
+	// 			}
+	// 			// if (mandatoryOriginChargeCodes.length) {
+	// 			// 	setValue('origin_local', mandatoryOriginChargeCodes);
+	// 			// }
+	// 			// if (mandatoryDestinationChargeCodes.length) {
+	// 			// 	setValue('destination_local', mandatoryDestinationChargeCodes);
+	// 			// }
+	// 			// if (mandatorySurchargeCodes.length) {
+	// 			// 	setValue('surcharge', mandatorySurchargeCodes);
+	// 			// }
+	// 		} else {
+	// 			setValue('service_provider_id', selectedRate?.service_provider_id);
+	// 			setValue('shipping_line_id', selectedRate?.shipping_line_id);
+	// 			if ((rateSelected?.validities || []).length) {
+	// 				setValue('freights', rateSelected?.validities[0]?.line_items);
+	// 				setValue('validity_start', rateSelected?.validities[0]?.validity_start);
+	// 				setValue('validity_end', rateSelected?.validities[0]?.validity_end);
+	// 			}
+	// 		}
+	// 	}
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [JSON.stringify(rateSelected), JSON.stringify(data)]);
 
 	useEffect(() => {
 		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {

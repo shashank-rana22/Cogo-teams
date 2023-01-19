@@ -27,6 +27,7 @@ const useGetListRfqs = () => {
 					relevant_supply_agent_id : user_profile?.id,
 					service_type             : filters.service_type,
 				},
+				sort_by                          : 'updated_at',
 				created_by_user_details_required : true,
 				page                             : currentPage,
 			},
