@@ -44,17 +44,12 @@ function Content({
 			>
 				<div className={styles.sub_container}>
 					<div className={styles.service}>
-						<Element width={30} height={30} style={{ padding: '4px' }} />
-						{`${portPair?.service_type?.split('_')[0]} ${
-							portPair?.service_type?.split('_')[1]
-						}`}
-					</div>
-
-					<div className={styles.port_pair}>
-						<PortPair
-							portPair={portPair}
-							detailView
-						/>
+						<div className={styles.display_service}>
+							<Element width={30} height={30} style={{ padding: '4px' }} />
+							{`${portPair?.service_type?.split('_')[0]} ${
+								portPair?.service_type?.split('_')[1]
+							}`}
+						</div>
 						{portPair?.status === 'quoted' && data?.status === 'pending_approval' ? (
 							<div className={styles.buttons}>
 								<div
@@ -101,6 +96,13 @@ function Content({
 								{portPair?.status === 'rejected' ? 'Rejected' : 'Approved'}
 							</Pill>
 						)}
+					</div>
+
+					<div className={styles.port_pair}>
+						<PortPair
+							portPair={portPair}
+							detailView
+						/>
 					</div>
 					<Footer statsData={statsData} portPair={portPair} index={index} />
 				</div>
