@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import LoginComponent from '@cogoport/authentication/page-components/Login';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 

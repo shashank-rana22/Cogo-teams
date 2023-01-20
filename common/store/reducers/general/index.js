@@ -9,10 +9,7 @@ export const counterSlice = createSlice({
 		isServer,
 	},
 	reducers: {
-		setGeneralState: (state, data) => {
-			state = { ...(state || {}), ...(data?.payload || {}) };
-			return state;
-		},
+		setGeneralState: (state, data) => ({ ...(state || {}), ...(data?.payload || {}) }),
 	},
 });
 

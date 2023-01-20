@@ -1,9 +1,9 @@
-import navigationMappings from '@cogoport/navigation-configs/navigation-mappings';
+import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
 
 const getAllNavigations = () => {
 	const allNavs = [];
-	Object.values(navigationMappings || {}).forEach((navigation) => {
-		if (navigation?.options?.length > 0) {
+	Object.values(navigationMappingAdmin || {}).forEach((navigation) => {
+		if (navigation.isSubNavs) {
 			navigation.options.forEach((navOpt) => {
 				allNavs.push({ label: navOpt?.title, value: navOpt?.key });
 			});

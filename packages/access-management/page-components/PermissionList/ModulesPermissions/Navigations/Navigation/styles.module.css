@@ -3,6 +3,10 @@
 	box-sizing: border-box;
 	padding: 18px 35px 18px 18px;
 	border-bottom: 1px solid #bdbdbd;
+
+	@media (max-width: 768px) {
+		padding: 18px 0 18px 18px;
+	}
 }
 
 .container {
@@ -50,6 +54,10 @@
 
 .edit {
 	margin-left: 16px;
+
+	@media (max-width: 768px) {
+		height: 45px !important;
+	}
 }
 
 .name {
@@ -60,6 +68,10 @@
 	font-weight: 500;
 	line-height: 21px;
 	letter-spacing: -0.02em;
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+	}
 }
 
 .description {
@@ -69,4 +81,24 @@
 	font-size: 12px;
 	line-height: 14px;
 	letter-spacing: -0.02em;
+}
+
+.modal_container {
+	@media (max-width: 768px) {
+		width: 300px !important;
+	}
+
+	:global {
+		.ui_modal_body_container {
+			@media (max-width: 768px) {
+				height: 300px;
+			}
+		}
+	}
+}
+
+.row_button {
+	@media (max-width: 768px) {
+		height: 45px !important;
+	}
 }

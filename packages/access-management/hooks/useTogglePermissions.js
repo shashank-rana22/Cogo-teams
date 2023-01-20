@@ -109,7 +109,7 @@ const useTogglePermissions = (props) => {
 		roleData,
 	);
 	const [show, setShow] = useState(false);
-	const [value, setValue] = useState('yes');
+	const [value, setValue] = useState(null);
 	const [newApiPermissions, setNewApiPermissions] = useState(
 		formattedApiPermissions || [],
 	);
@@ -159,12 +159,14 @@ const useTogglePermissions = (props) => {
 	useEffect(() => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		setNavigationRefs(initilaFormValues);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newApiPermissions]);
 
 	useEffect(() => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		const isAnyApiSelected = isAnyApiSelectedFunc(initilaFormValues);
 		setValue(isAnyApiSelected ? 'yes' : 'no');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return {
 		handleApiStatus,
