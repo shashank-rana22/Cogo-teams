@@ -17,12 +17,13 @@ function CardList({
 	selectedRate,
 	total,
 }) {
+	// loading = true;
 	const loadingArray = headerRequired ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [1, 2, 3, 4, 5];
 	return (
 		<div className={styles.cardlist}>
 			{headerRequired
 			&& <Header columns={fields} />}
-			{(list || []).map((item) => (
+			{!loading && (list || []).map((item) => (
 				<div>
 					<List
 						fields={fields}
