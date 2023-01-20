@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import getField from '../configurations';
 import FieldMutation from '../helpers/field-mutation';
@@ -48,53 +48,40 @@ const useUpdateSpotNegotiationRate = ({
 	});
 
 	const { data:rateSelected } = useGetRates({ service, selectedRate });
+	const prefillData = useRef();
 
 	const { newField } = FieldMutation({
 		fields, values, service, data,
 	});
 
 	useEffect(() => {
-		if (data) {
-			const mandatoryFreightCodes = [];
-			const mandatoryOriginChargeCodes = [];
-			const mandatoryDestinationChargeCodes = [];
-			const mandatorySurchargeCodes = [];
-			Object.keys(data?.freights_charge_codes || {}).forEach((code) => {
-				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatoryFreightCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			Object.keys(data?.origin_local_charge_codes || {}).forEach((code) => {
-				if (data?.origin_local_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatoryOriginChargeCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			Object.keys(data?.destination_local_charge_codes || {}).forEach((code) => {
-				if (data?.destination_local_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatoryDestinationChargeCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			Object.keys(data?.surcharge_charge_codes || {}).forEach((code) => {
-				if (data?.surcharge_charge_codes?.[code].tags?.includes('mandatory')) {
-					mandatorySurchargeCodes.push({ code, price: '', unit: '', currency: '' });
-				}
-			});
-			if (mandatoryFreightCodes.length) {
-				setValue('freights', mandatoryFreightCodes);
-			}
-			if (mandatoryOriginChargeCodes.length) {
-				setValue('origin_local', mandatoryOriginChargeCodes);
-			}
-			if (mandatoryDestinationChargeCodes.length) {
-				setValue('destination_local', mandatoryDestinationChargeCodes);
-			}
-			if (mandatorySurchargeCodes) {
-				setValue('surcharge', mandatorySurchargeCodes);
+		if (rateSelected) {
+			if (rateSelected?.spot_negotiation_id) {
+				setValue('service_provider_id', rateSelected?.service_provider_id);
+				setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
+				setValue('airline_id', rateSelected?.data?.airline_id);
+			} else {
+				setValue('service_provider_id', selectedRate?.service_provider_id);
+				setValue('shipping_line_id', selectedRate?.data?.shipping_line_id);
+				setValue('airline_id', selectedRate?.data?.airline_id);
 			}
 		}
-		if (!rateSelected) {
-			(Object.keys(data?.data || {})).forEach((item) => {
-				const val = data?.data[item];
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(rateSelected)]);
+
+	useEffect(() => {
+		let mandatoryFreightCodes = [];
+		let mandatoryOriginChargeCodes = [];
+		let mandatoryDestinationChargeCodes = [];
+		let mandatorySurchargeCodes = [];
+		if (data) {
+			if (prefillData.current || !rateSelected) {
+				prefillData.current = data;
+			} else if (!prefillData.current) {
+				prefillData.current = rateSelected;
+			}
+			(Object.keys(prefillData.current?.data || {})).forEach((item) => {
+				const val = prefillData.current?.data[item];
 				if (val) {
 					if (item === 'line_items') {
 						setValue('line_items', val);
@@ -107,7 +94,7 @@ const useUpdateSpotNegotiationRate = ({
 					} else if (Array.isArray(val)) {
 						(Object.keys(val[0])).forEach((prefill) => {
 							if (prefill === 'line_items') {
-								setValue(item, val[0]?.[prefill]);
+								mandatoryFreightCodes = val[0]?.[prefill];
 							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 								setValue(prefill, new Date(val[0]?.[prefill]));
 							} else if (prefill === 'departure_dates') {
@@ -119,7 +106,13 @@ const useUpdateSpotNegotiationRate = ({
 					} else if (typeof (val) === 'object') {
 						(Object.keys(val)).forEach((prefill) => {
 							if (prefill === 'line_items') {
-								setValue(item, val?.[prefill]);
+								if (item === 'origin_local') {
+									mandatoryOriginChargeCodes = val?.[prefill];
+								} else if (item === 'destination_local') {
+									mandatoryDestinationChargeCodes = val?.[prefill];
+								} else if (item === 'surcharge') {
+									mandatorySurchargeCodes = val?.[prefill];
+								}
 							} else {
 								setValue(prefill, val?.[prefill]);
 							}
@@ -127,62 +120,79 @@ const useUpdateSpotNegotiationRate = ({
 					}
 				}
 			});
+			Object.keys(data?.freights_charge_codes || {}).forEach((code) => {
+				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')) {
+					let flag = 0;
+					mandatoryFreightCodes.forEach((charge) => {
+						if (charge.code === code) {
+							flag = 1;
+						}
+					});
+					if (!flag) {
+						mandatoryFreightCodes = [...mandatoryFreightCodes,
+							{ code, price: '', unit: '', currency: '' }];
+					}
+				}
+			});
+			Object.keys(data?.origin_local_charge_codes || {}).forEach((code) => {
+				if (data?.origin_local_charge_codes?.[code].tags?.includes('mandatory')) {
+					let flag = 0;
+					mandatoryOriginChargeCodes.forEach((charge) => {
+						if (charge.code === code) {
+							flag = 1;
+						}
+					});
+					if (!flag) {
+						mandatoryOriginChargeCodes = [...mandatoryOriginChargeCodes,
+							{ code, price: '', unit: '', currency: '' }];
+					}
+				}
+			});
+			Object.keys(data?.destination_local_charge_codes || {}).forEach((code) => {
+				if (data?.destination_local_charge_codes?.[code].tags?.includes('mandatory')) {
+					let flag = 0;
+					mandatoryDestinationChargeCodes.forEach((charge) => {
+						if (charge.code === code) {
+							flag = 1;
+						}
+					});
+					if (!flag) {
+						mandatoryDestinationChargeCodes = [...mandatoryDestinationChargeCodes,
+							{ code, price: '', unit: '', currency: '' }];
+					}
+				}
+			});
+			Object.keys(data?.surcharge_charge_codes || {}).forEach((code) => {
+				if (data?.surcharge_charge_codes?.[code].tags?.includes('mandatory')) {
+					let flag = 0;
+					mandatorySurchargeCodes.forEach((charge) => {
+						if (charge.code === code) {
+							flag = 1;
+						}
+					});
+					if (!flag) {
+						mandatorySurchargeCodes = [...mandatorySurchargeCodes,
+							{ code, price: '', unit: '', currency: '' }];
+					}
+				}
+			});
+
+			if (mandatoryFreightCodes.length) {
+				setValue('freights', mandatoryFreightCodes);
+			}
+			if (mandatoryOriginChargeCodes.length) {
+				setValue('origin_local', mandatoryOriginChargeCodes);
+			}
+			if (mandatoryDestinationChargeCodes.length) {
+				setValue('destination_local', mandatoryDestinationChargeCodes);
+			}
+			if (mandatorySurchargeCodes.length) {
+				setValue('surcharge', mandatorySurchargeCodes);
+			}
 		}
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
-
-	useEffect(() => {
-		if (rateSelected) {
-			if (rateSelected?.spot_negotiation_id) {
-				setValue('service_provider_id', rateSelected?.service_provider_id);
-				setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
-				(Object.keys(rateSelected?.data || {})).forEach((item) => {
-					const val = rateSelected?.data[item];
-					if (val) {
-						if (item === 'line_items') {
-							setValue('line_items', val);
-						} else if (item === 'origin_storage') {
-							setValue('origin_free_limit', val?.free_limit);
-							setValue('origin_slabs', val?.slabs);
-						} else if (item === 'destination_storage') {
-							setValue('destination_free_limit', val?.free_limit);
-							setValue('destination_slabs', val?.slabs);
-						} else if (Array.isArray(val)) {
-							(Object.keys(val[0])).forEach((prefill) => {
-								if (prefill === 'line_items') {
-									setValue(item, val[0]?.[prefill]);
-								} else if (prefill === 'validity_start' || prefill === 'validity_end') {
-									setValue(prefill, new Date(val[0]?.[prefill]));
-								} else if (prefill === 'departure_dates') {
-									setValue(prefill, [(val[0]?.[prefill])]);
-								} else {
-									setValue(prefill, val[0]?.[prefill]);
-								}
-							});
-						} else if (typeof (val) === 'object') {
-							(Object.keys(val)).forEach((prefill) => {
-								if (prefill === 'line_items') {
-									setValue(item, val?.[prefill]);
-								} else {
-									setValue(prefill, val?.[prefill]);
-								}
-							});
-						}
-					}
-				});
-			} else {
-				setValue('service_provider_id', selectedRate?.service_provider_id);
-				setValue('shipping_line_id', selectedRate?.shipping_line_id);
-				if ((rateSelected?.validities || []).length) {
-					setValue('freights', rateSelected?.validities[0]?.line_items);
-					setValue('validity_start', rateSelected?.validities[0]?.validity_start);
-					setValue('validity_end', rateSelected?.validities[0]?.validity_end);
-				}
-			}
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
 		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {

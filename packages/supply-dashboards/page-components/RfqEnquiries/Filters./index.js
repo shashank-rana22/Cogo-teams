@@ -10,7 +10,7 @@ function Filters({
 	hookSetters,
 }) {
 	const handleButton = () => {
-		hookSetters.setFilters({ page: 1, status: 'live' });
+		hookSetters.setFilters({ page: 1, negotiation_status: 'awaiting_responses' });
 	};
 	return (
 		<div className={styles.filter}>

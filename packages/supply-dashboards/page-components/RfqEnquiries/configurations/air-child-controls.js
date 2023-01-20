@@ -19,7 +19,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 			{
 				code      : '',
 				price     : '',
-				currency  : 'USD',
+				currency  : '',
 				min_price : '',
 				unit      : '',
 			},
