@@ -8,6 +8,7 @@ const logout = () => {
 		.then((res) => {
 			if (!res.hasError) {
 				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+				// eslint-disable-next-line no-undef
 				window.location.href = '/v2/login';
 			} else {
 				Toast.error(

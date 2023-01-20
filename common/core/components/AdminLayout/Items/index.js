@@ -25,6 +25,7 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 			const replaceAs = itemdata?.as?.replace('/v2', '');
 			router.push(replaceHref, replaceAs);
 		} else if (process.env.NODE_ENV === 'production') {
+			// eslint-disable-next-line no-undef
 			window.location.href = `/${query.partner_id || splitAspath}${itemdata.href}`;
 		} else {
 			router.push(itemdata.href, itemdata.as);

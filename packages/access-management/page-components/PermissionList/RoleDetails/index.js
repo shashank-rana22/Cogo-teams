@@ -43,6 +43,7 @@ function RoleDetails({
 				skeleton : { width: '100%' },
 			},
 		],
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[name, stakeholder_type, descriptions],
 	);
 
