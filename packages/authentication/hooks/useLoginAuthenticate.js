@@ -33,12 +33,12 @@ const useLoginAuthenticate = () => {
 	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	}, { manual: true });
+	}, { manual: false });
 
 	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
-	}, { manual: true });
+	}, { manual: false });
 
 	const getUserSessionMappings = async () => {
 		try {
