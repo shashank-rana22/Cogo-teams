@@ -23,7 +23,8 @@ const FilterModal = ({filters,setFilters}:Props) => {
 	const [showModal, setShowModal] =useState(false);
 	
  const isFilterApplied = () =>{
-	 if(filters?.billDate || filters?.billType || filters?.dueDate || filters?.serviceType || filters?.updatedDate||filters?.currency){
+	 
+	 if(filters?.billDate || filters?.billType || filters?.dueDate || filters?.serviceType?.length>0 || filters?.updatedDate||filters?.currency?.length>0){
 		return true;
 	 }else{
 		 return false;

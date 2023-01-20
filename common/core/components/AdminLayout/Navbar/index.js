@@ -1,11 +1,11 @@
 import { Input } from '@cogoport/components';
 import cl from '@cogoport/components/src/utils/classname-processor';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
+import formatUserBasedNavView from '../../../helpers/formatUserBasedNavView';
 import { sortNavs } from '../../../helpers/sortItems';
 import Items from '../Items';
 
@@ -18,14 +18,14 @@ function Navbar({
 	nav = [],
 	mobileShow = false,
 }) {
-	const router = useRouter();
+	const userBasedNavView = formatUserBasedNavView(nav);
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
-		? applyFilter(searchString, nav, 'title', ['key', 'href', 'title'])
-		: nav;
+		? applyFilter(searchString, userBasedNavView, 'title', ['key', 'href', 'title'])
+		: userBasedNavView;
 
 	const listItems = sortNavs(filterdList);
 
@@ -33,7 +33,7 @@ function Navbar({
 		(value) => {
 			setSearchString(value);
 		},
-		[searchString],
+		[],
 	);
 
 	return (
@@ -49,7 +49,6 @@ function Navbar({
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img
-							onClick={() => router.push('/home')}
 							className={styles.logo}
 							src={resetSubnavs ? LOGO.LARGE : LOGO.SMALL}
 							alt="Logo Cogoport"
@@ -69,7 +68,7 @@ function Navbar({
 
 					<ul className={styles.list_container}>
 						{(listItems || []).map((item) => (
-							<Items key={item} item={item} resetSubnavs={resetSubnavs} />
+							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
 						))}
 					</ul>
 				</div>

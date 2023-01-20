@@ -20,7 +20,6 @@ function RoleDetails({
 		stakeholder_type = '',
 		importedPermissions,
 	} = roleData;
-
 	const details = useMemo(
 		() => [
 			{
@@ -44,6 +43,7 @@ function RoleDetails({
 				skeleton : { width: '100%' },
 			},
 		],
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[name, stakeholder_type, descriptions],
 	);
 
@@ -58,7 +58,6 @@ function RoleDetails({
 		importPermissionsButton = (
 			<Tooltip
 				placement="top"
-				theme="light"
 				trigger="mouseenter"
 				interactive
 				content={<div>Prefill permissions from other roles</div>}
@@ -90,7 +89,7 @@ function RoleDetails({
 
 			<div className={styles.content}>
 				{(details || []).map((detail) => (
-					<div className={styles.details}>
+					<div key={detail.title} className={styles.details}>
 						<span className={styles.title}>
 							{detail?.title}
 							{' '}

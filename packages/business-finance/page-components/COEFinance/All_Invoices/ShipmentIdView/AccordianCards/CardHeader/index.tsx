@@ -42,9 +42,9 @@ const CardHeader = ({ amountTab, setAmountTab, itemData }: propsType) => {
                     </div>
                     <div className={styles.valueText}>
                         {getFormattedPrice(
-                            itemData.discount_amount_revenue || "0",
-                            itemData.discount_amount_revenue_currency || "INR"
-                        )}
+                            itemData.discount_amount_revenue,
+                            itemData.discount_amount_revenue_currency
+                        ) || " -"}
                     </div>
                 </div>
             </div>

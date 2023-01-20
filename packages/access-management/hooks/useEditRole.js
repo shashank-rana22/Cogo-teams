@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
 const controls = [
 	{
@@ -101,10 +102,16 @@ const controls = [
 const useEditRole = ({ roleData, setShow, getRole }) => {
 	const withValueControls = controls.map((control) => ({
 		...control,
-		value: roleData[control.name],
+		// value: roleData[control.name],
 	}));
 
-	const { handleSubmit, ...rest } = useForm();
+	const { setValue, handleSubmit, ...rest } = useForm();
+
+	useEffect(() => {
+		controls.forEach((c) => {
+			setValue(c.name, roleData[c.name]);
+		});
+	}, [setValue, roleData]);
 
 	const [{ loading, error }, trigger] = useRequest({
 		url    : '/update_auth_role',

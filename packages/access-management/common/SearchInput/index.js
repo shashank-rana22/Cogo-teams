@@ -13,10 +13,9 @@ function SearchInput({
 	return (
 		<section className={styles.container}>
 			<Input
-				inputIcon={<IcMSearchlight />}
-				suffixInline
+				prefix={<IcMSearchlight />}
 				value={value}
-				onChange={(value) => onChange(value)}
+				onChange={(val) => onChange(val)}
 				size={size}
 				placeholder={placeholder}
 			/>

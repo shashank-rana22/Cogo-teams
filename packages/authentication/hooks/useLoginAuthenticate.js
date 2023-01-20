@@ -7,6 +7,8 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { setCookie } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import redirections from '../utils/redirections';
+
 const useLoginAuthenticate = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -24,7 +26,18 @@ const useLoginAuthenticate = () => {
 
 	useEffect(() => {
 		if (Object.keys(profile).length > 0) {
-			router.push('/home');
+			const configs = redirections(profile);
+			if (configs?.href?.includes('/v2')) {
+				const replaceHref = configs?.href?.replace('/v2', '');
+				const replaceAs = configs?.as?.replace('/v2', '');
+				router.push(replaceHref?.href, replaceAs?.as);
+			}
+			if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+				// eslint-disable-next-line no-undef
+				window.location.href = `/${profile?.partner?.id}${configs.href}`;
+			} else {
+				router.push(configs.href, configs.as);
+			}
 		}
 	}, [profile, router]);
 

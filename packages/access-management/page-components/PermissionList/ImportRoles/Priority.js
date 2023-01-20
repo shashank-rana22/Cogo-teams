@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
+import { IcMDrag } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
-
-import { Li, Ul, SubHeading } from './styles';
 
 function Priority({ value, options, setPriority = () => {} }) {
 	const dragStartHandler = (ev) => {
@@ -16,9 +15,12 @@ function Priority({ value, options, setPriority = () => {} }) {
 	const dropHandler = (ev) => {
 		ev.preventDefault();
 		const id = ev.dataTransfer.getData('text/plain');
+		// eslint-disable-next-line no-undef
 		const list = document.getElementById('target');
 		list.insertBefore(
+			// eslint-disable-next-line no-undef
 			document.getElementById(id),
+			// eslint-disable-next-line no-undef
 			document.getElementById(ev.target.id),
 		);
 		const ids = [];
@@ -32,6 +34,7 @@ function Priority({ value, options, setPriority = () => {} }) {
 	useEffect(() => {
 		if (value) {
 			value.forEach((id) => {
+				// eslint-disable-next-line no-undef
 				const element = document.getElementById(id);
 				element.addEventListener('dragstart', dragStartHandler);
 			});
@@ -39,6 +42,7 @@ function Priority({ value, options, setPriority = () => {} }) {
 		return () => {
 			if (value) {
 				value.forEach((id) => {
+					// eslint-disable-next-line no-undef
 					const element = document.getElementById(id);
 					if (element) {
 						element.removeEventListener('dragstart', dragStartHandler);
@@ -49,27 +53,27 @@ function Priority({ value, options, setPriority = () => {} }) {
 	}, [value]);
 	return (
 		<>
-			<SubHeading>1. Drag and drop to set priority.</SubHeading>
-			<SubHeading>
+			<h3>1. Drag and drop to set priority.</h3>
+			<h3>
 				2. Ranking will prioritize the preset configuration incase of a
 				conflict.
-			</SubHeading>
-			<Ul id="target">
+			</h3>
+			<ul id="target">
 				{value.map((singleValue, i) => (
-					<Li
+					<li
 						onDrop={dropHandler}
 						onDragOver={dragoverHandler}
 						id={singleValue}
 						key={singleValue}
 						draggable
 					>
-						<IcDrag size={1.75} style={{ marginRight: 16 }} />
+						<IcMDrag style={{ marginRight: 16 }} />
 						{i + 1}
 						.
 						{options.find((option) => option.id === singleValue)?.name}
-					</Li>
+					</li>
 				))}
-			</Ul>
+			</ul>
 		</>
 	);
 }

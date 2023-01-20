@@ -118,7 +118,7 @@ function Navigation(props) {
 	};
 
 	let buttonText = 'Assign Now';
-	let background = 'primary';
+	let background = 'accent';
 	if (isActive) {
 		buttonText = 'Un-Assign Now';
 		background = 'secondary';
@@ -127,6 +127,11 @@ function Navigation(props) {
 	let btnText = creatingNavs ? 'Saving, Please wait...' : 'Save';
 	if (show === 1) {
 		btnText = 'NEXT';
+	}
+
+	if (roleData?.isImported) {
+		buttonText = 'Allow Navigation';
+		background = 'primary';
 	}
 
 	return (
@@ -142,19 +147,21 @@ function Navigation(props) {
 					</div>
 					<div className={styles.row}>
 						<Button
-							size="sm"
+							size="md"
 							themeType={background}
 							onClick={handlePrimaryAction}
 							disabled={loading}
+							className={styles.row_button}
 						>
 							{buttonText}
 						</Button>
 						{isActive && containsApis ? (
 							<Button
-								size="sm"
+								size="md"
 								className={styles.edit}
 								onClick={() => setShow(2)}
 								disabled={loading}
+
 							>
 								Edit
 							</Button>
@@ -162,11 +169,11 @@ function Navigation(props) {
 					</div>
 				</div>
 			</div>
-			{/* <AnimatedContainer type={show ? 'enter' : 'exit'}> */}
 			<Modal
-				size="lg"
+				size="xl"
 				show={!!show}
 				onClose={() => setShow(null)}
+				className={styles.modal_container}
 			>
 				<Modal.Header title={(
 					<div>
@@ -193,6 +200,7 @@ function Navigation(props) {
 				<Modal.Footer>
 					<div className={styles.buttons_container}>
 						<Button
+							size="md"
 							style={{ marginRight: 10 }}
 							themeType="secondary"
 							disabled={creatingNavs}
@@ -207,6 +215,7 @@ function Navigation(props) {
 							{show === 1 || roleData.isImported ? 'Cancel' : 'BACK'}
 						</Button>
 						<Button
+							size="md"
 							onClick={show === 1 ? () => setShow(2) : handleSave}
 							loading={creatingNavs}
 							disabled={creatingNavs}
@@ -216,7 +225,6 @@ function Navigation(props) {
 					</div>
 				</Modal.Footer>
 			</Modal>
-			{/* </AnimatedContainer> */}
 			<ChangeStatus
 				type={showStatus}
 				show={!!showStatus}

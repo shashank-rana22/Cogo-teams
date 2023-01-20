@@ -28,15 +28,14 @@ function Login() {
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/vault/original/cogoport-admin.svg"
+					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg"
 					alt="Logo Cogoport"
 					className={styles.logo}
 				/>
 				<div className={styles.input_label}>
 					{t('login:title')}
-					{/* Please provide your email and password to login */}
 				</div>
-				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
+				<form className={styles.form_container} onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>
 						<InputController
 							control={control}

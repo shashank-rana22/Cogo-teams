@@ -1,5 +1,4 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import navigationMappings from '@cogoport/navigation-configs/navigation-mappings';
 import React from 'react';
 
 import applyRegEx from '../../../../utils/apply-regex';
@@ -22,6 +21,7 @@ import styles from './styles.module.css';
 function Navigations(props) {
 	const {
 		roleData = {},
+		navigationMappings = {},
 		authRoleId = '',
 		getRole = () => {},
 		getNavOptions = () => {},
@@ -50,14 +50,13 @@ function Navigations(props) {
 	const crmNavs = navigationOptions.filter((nav) => nav?.module_type === 'crm');
 	const dashBoardNavs = navigationOptions.filter((nav) => nav?.module_type === 'dashboards' || !nav?.module_type);
 
-	const navElement = (navigation) => (navigation.options ? NestedNavigations : Navigation);
+	const navElement = (navigation) => (navigation.options && navigation.isSubNavs ? NestedNavigations : Navigation);
 	return (
 		<section className={styles.container}>
 			<Tabs activeTab={activeTab} onChange={setActiveTab}>
 				<TabPanel title="CRM" name="crm">
 					{(crmNavs || []).map((navigation) => {
 						const NavElement = navElement(navigation);
-
 						return (
 							<NavElement
 								navigation={navigation}
