@@ -76,9 +76,9 @@ const useRoleList = () => {
 			},
 		});
 	}, [filters, params, trigger]);
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => onChangeParams({ page: 1 }), [filters]);
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => getListAuthRoles(), [params]);
 
 	const onChangeShowCreateRoleModal = useCallback((value = false) => {

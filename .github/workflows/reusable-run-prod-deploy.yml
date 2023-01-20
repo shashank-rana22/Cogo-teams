@@ -1,0 +1,23 @@
+name: Prod Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: ${{ contains('prashantp01', github.actor) }}
+    name: Deploying Servers via SSH
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploying Logistic Frontend
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_SERVER_SSH_HOST }}
+          sync: true
+          username: ubuntu
+          key: ${{ secrets.PROD_SERVER_SSH_KEY }}
+          script_stop: true
+          command_timeout: 60m
+          script: |
+            cd cogo-admin
+            pnpm run deploy

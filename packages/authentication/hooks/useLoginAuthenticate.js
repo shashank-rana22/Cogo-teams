@@ -33,6 +33,7 @@ const useLoginAuthenticate = () => {
 				router.push(replaceHref?.href, replaceAs?.as);
 			}
 			if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+				// eslint-disable-next-line no-undef
 				window.location.href = `/${profile?.partner?.id}${configs.href}`;
 			} else {
 				router.push(configs.href, configs.as);

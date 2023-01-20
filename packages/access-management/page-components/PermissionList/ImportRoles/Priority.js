@@ -15,9 +15,12 @@ function Priority({ value, options, setPriority = () => {} }) {
 	const dropHandler = (ev) => {
 		ev.preventDefault();
 		const id = ev.dataTransfer.getData('text/plain');
+		// eslint-disable-next-line no-undef
 		const list = document.getElementById('target');
 		list.insertBefore(
+			// eslint-disable-next-line no-undef
 			document.getElementById(id),
+			// eslint-disable-next-line no-undef
 			document.getElementById(ev.target.id),
 		);
 		const ids = [];
@@ -31,6 +34,7 @@ function Priority({ value, options, setPriority = () => {} }) {
 	useEffect(() => {
 		if (value) {
 			value.forEach((id) => {
+				// eslint-disable-next-line no-undef
 				const element = document.getElementById(id);
 				element.addEventListener('dragstart', dragStartHandler);
 			});
@@ -38,6 +42,7 @@ function Priority({ value, options, setPriority = () => {} }) {
 		return () => {
 			if (value) {
 				value.forEach((id) => {
+					// eslint-disable-next-line no-undef
 					const element = document.getElementById(id);
 					if (element) {
 						element.removeEventListener('dragstart', dragStartHandler);
