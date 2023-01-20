@@ -33,7 +33,6 @@ const useShipmentIdView = (allParams?: {}) => {
                 url: "list_shipments",
                 method: "get",
             },
-            { autoCancel: false }
         );
     
 

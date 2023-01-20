@@ -33,6 +33,7 @@ interface Props {
 	getBillRefetch:()=> void
 }
 const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
+	const [remark, setRemark] = useState('');
     const {bill,remarks=[]} = data ;
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
     const {grandTotal} = bill || {};
@@ -60,7 +61,7 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
     const renderEditTag = (
 		<div className={styles.flexdiv}>
 			<div className={styles.cardField}>
-				<div>{displayTag}</div>
+				<div className={styles.tags}>{displayTag}<div>{remark}</div></div>
 
 				{!isEmpty(data?.billAdditionalObject?.urgencyRemarks) &&
 				data?.billAdditionalObject?.urgencyTag === 'urgent' ? (
@@ -101,6 +102,8 @@ const InvoiceDetails =({data={},getBillRefetch}:Props)=>{
         <h3>Invoice Details</h3>
         {showAddTag ? (
 				<AddUrgencyTag
+				    remark={remark}
+					setRemark={setRemark}
 					billId={data?.bill?.id}
 					serviceType={data?.serviceType}
 					showAddTag={showAddTag}

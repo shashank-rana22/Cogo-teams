@@ -2,7 +2,9 @@ import { Button } from "@cogoport/components";
 import { useRouter } from "@cogoport/next";
 import React from "react";
 import styles from "./styles.module.css";
-interface itemTypes {}
+interface itemTypes {
+    urgencyTag?: string;
+}
 
 interface propsType {
     item: itemTypes;
@@ -17,13 +19,20 @@ const ViewInvoice = ({ item, field }: propsType) => {
         );
     };
     return (
-        <div
-            className={styles.link}
-            onClick={() => {
-                handleChange(item);
-            }}
-        >
-            View Invoices
+        <div className={styles.button}>
+            {item?.urgencyTag && (
+                <div className={styles.Ribbons}>
+                    <div className={styles.ribbon}>Urgent</div>
+                </div>
+            )}
+            <div
+                className={styles.link}
+                onClick={() => {
+                    handleChange(item);
+                }}
+            >
+                View Invoices
+            </div>
         </div>
     );
 };

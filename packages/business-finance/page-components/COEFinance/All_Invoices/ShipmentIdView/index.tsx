@@ -44,6 +44,29 @@ const ShipmentIdView = () => {
         refetch,
     } = useShipmentIdView({ pending_approval,serial_id });
 
+    const handleShipmentView = () => {
+		if (loading) {
+            return (
+                <>
+                    <div style={{ marginTop: "10px" }}>
+                                {[1, 2, 3, 4, 5].map(() => {
+                                    return <LoadingState />;
+                                })}
+                    </div>
+                </>
+            );
+		}
+		return data?.map((item:ItemDataProps) => (
+			<AccordianCards
+                itemData={item}
+                currentOpenSID={currentOpenSID}
+                setCurrentOpenSID={setCurrentOpenSID}
+                key={item?.id}
+                refetch={refetch}
+            />
+		));
+	};
+
     return (
         <div>
             <Filters
@@ -54,30 +77,9 @@ const ShipmentIdView = () => {
                 serial_id={serial_id}
                 setSerial_id={setSerial_id}
             />
-
+            
             <div>
-                {loading && (
-                    <div style={{ marginTop: "10px" }}>
-                        {[1, 2, 3, 4, 5].map(() => {
-                            return <LoadingState />;
-                        })}
-                    </div>
-                )}
-                {data?.map((item: ItemDataProps) => (
-                    <>
-                        {loading ? (
-                            <LoadingState />
-                        ) : (
-                            <AccordianCards
-                                itemData={item}
-                                currentOpenSID={currentOpenSID}
-                                setCurrentOpenSID={setCurrentOpenSID}
-                                key={item?.id}
-                                refetch={refetch}
-                            />
-                        )}
-                    </>
-                ))}
+               {handleShipmentView()}
                 {data.length > 0 ? (
                     <div className={styles.pagination}>
                         <Pagination

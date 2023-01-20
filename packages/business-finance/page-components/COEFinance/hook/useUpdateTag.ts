@@ -7,7 +7,7 @@ const useUpdateTag = ({
 	billId = '',
 	tagValue = '',
 	collectionPartyId = '',
-	remarks = '',
+	remark = '',
 }) => {
 	const [loading, setLoading] = useState(false);
 
@@ -28,8 +28,9 @@ const useUpdateTag = ({
 		{ autoCancel: false },
 	);
 
+	
 	const handleSubmit = async () => {
-		if (tagValue === 'urgent' && !remarks.length) {
+		if (tagValue === 'urgent' && !remark.length) {
 			Toast.error('Please add why its urgent!!');
 		} else {
 			setLoading(true);
@@ -37,7 +38,7 @@ const useUpdateTag = ({
 				const response = await trigger({
 					data: {
 						urgencyTag: tagValue,
-						urgencyRemarks: remarks || undefined,
+						urgencyRemarks: remark || undefined,
 					},
 				});
 				onClose();
@@ -46,7 +47,7 @@ const useUpdateTag = ({
 				// 			data: {
 				// 				id: collectionPartyId,
 				// 				urgency_tag: tagValue || null,
-				// 				remarks: remarks.length ? [remarks] : undefined,
+				// 				remarks: remark.length ? [remark] : undefined,
 				// 			},
 				// 		});
 				   
