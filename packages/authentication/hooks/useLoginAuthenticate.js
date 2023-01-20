@@ -65,7 +65,7 @@ const useLoginAuthenticate = () => {
 	}, []);
 
 	useEffect(() => {
-		if (Object.keys(profile).length > 0) {
+		if (Object.keys(profile).length > 0 && source !== 'add_account') {
 			const configs = redirections(profile);
 			if (configs?.href?.includes('/v2')) {
 				const replaceHref = configs?.href?.replace('/v2', '');
@@ -145,6 +145,11 @@ const useLoginAuthenticate = () => {
 
 			setCookie('cogo-parent-auth-token', parent_token);
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
+
+			if (source === 'add_account') {
+				// eslint-disable-next-line no-undef
+				window.location.href = '/';
+			}
 
 			const res = await triggerSession();
 			dispatch(setProfileState(res.data));

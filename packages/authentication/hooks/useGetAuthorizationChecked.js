@@ -23,6 +23,8 @@ const useGetAuthorizationChecked = () => {
 
 	const { pathname, query, locale, locales, route, push } = useRouter();
 
+	const { source = '' } = query || {};
+
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
@@ -42,7 +44,8 @@ const useGetAuthorizationChecked = () => {
 	useEffect(() => {
 		(async () => {
 			if (!sessionInitialized && _initialized) {
-				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
+				console.log(profile);
+				if (isProfilePresent && (isUnauthenticatedPath || route === '/') && source !== 'add_account') {
 					const configs = redirections(profile);
 					if (configs?.href) {
 						if (configs?.href?.includes('/v2')) {
