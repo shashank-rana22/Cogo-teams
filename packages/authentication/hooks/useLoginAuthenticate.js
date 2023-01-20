@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { setCookie } from '@cogoport/utils';
+import { getCookie, setCookie } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import redirections from '../utils/redirections';
@@ -13,6 +13,12 @@ const useLoginAuthenticate = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
+	const {
+		general: { query = {} },
+	} = useSelector((state) => state);
+	const { source = '' } = query || {};
+
+	const cogo_parent_auth_token = getCookie('cogo-parent-auth-token');
 
 	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
@@ -23,6 +29,39 @@ const useLoginAuthenticate = () => {
 		url    : '/get_user_session',
 		method : 'get',
 	}, { manual: true });
+
+	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
+		url    : '/get_user_session_mappings',
+		method : 'get',
+	}, { manual: true });
+
+	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
+		url    : '/update_parent_and_child_user_session_mappings',
+		method : 'post',
+	}, { manual: true });
+
+	const getUserSessionMappings = async () => {
+		try {
+			const sessionData = await triggerUserSessionMapping({
+				params: { parent_user_session_id: cogo_parent_auth_token },
+			});
+			if (!sessionData.hasError) {
+				if (sessionData?.data?.list?.length === 0) {
+					setCookie('cogo-parent-auth-token', 'expired', -1);
+					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+				}
+				return;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		if (source !== 'add_account') {
+			getUserSessionMappings();
+		}
+	});
 
 	useEffect(() => {
 		if (Object.keys(profile).length > 0) {
@@ -44,6 +83,45 @@ const useLoginAuthenticate = () => {
 	const onSubmit = async (values, e) => {
 		e.preventDefault();
 		try {
+			let check_duplicate_email = false;
+			let user_data = {};
+
+			if (cogo_parent_auth_token) {
+				const mapping_response = await triggerUserSessionMapping({
+					params: { parent_user_session_id: cogo_parent_auth_token },
+				});
+
+				if (!mapping_response.hasError) {
+					(mapping_response?.data?.list || []).forEach((user) => {
+						if (values?.email === user?.user_data?.email) {
+							user_data = {
+								...user,
+								user_active: true,
+							};
+						}
+
+						return null;
+					});
+
+					check_duplicate_email = user_data?.user_active || false;
+				}
+			}
+
+			if (check_duplicate_email) {
+				if (source !== 'add_account') {
+					const { user_session_id = '' } = user_data || {};
+					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_session_id);
+					// eslint-disable-next-line no-undef
+					window.location.reload();
+				}
+
+				if (source === 'add_account') {
+					Toast.error('Cannot login with already active account');
+				}
+
+				return;
+			}
+
 			const response = await trigger({
 				data: {
 					...values,
@@ -52,7 +130,21 @@ const useLoginAuthenticate = () => {
 				},
 			});
 			const { token } = response.data || {};
+
+			const payload = {
+				active_user_session_id : token,
+				parent_user_session_id : cogo_parent_auth_token || undefined,
+			};
+
+			const updateSession = await triggerUpdateSessionMapping({
+				data: payload,
+			});
+
+			const { parent_token } = (updateSession || {}).data || {};
+
+			setCookie('cogo-parent-auth-token', parent_token);
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
+
 			const res = await triggerSession();
 			dispatch(setProfileState(res.data));
 		} catch (err) {
@@ -60,7 +152,10 @@ const useLoginAuthenticate = () => {
 		}
 	};
 
-	return { onSubmit, loading: loginLoading || sessionLoading };
+	return {
+		onSubmit,
+		loading: loginLoading || sessionLoading || updateSessionMappingLoading || userSessionMappingLoading,
+	};
 };
 
 export default useLoginAuthenticate;
