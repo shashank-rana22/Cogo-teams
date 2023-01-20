@@ -2995,6 +2995,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'create_spot_search_contract',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
 	],
 	okam_dashboard: [
 		{

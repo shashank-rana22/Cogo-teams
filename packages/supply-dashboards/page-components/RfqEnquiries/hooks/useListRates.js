@@ -43,7 +43,7 @@ const useGetRates = ({ service }) => {
 				params: {
 					audit_data_required : true,
 					filters             : {
-						past_similar_negotiation_reverts_for_negotiation_id: service?.id,
+						// past_similar_negotiation_reverts_for_negotiation_id: service?.id,
 					},
 					page_limit: 5,
 				},
