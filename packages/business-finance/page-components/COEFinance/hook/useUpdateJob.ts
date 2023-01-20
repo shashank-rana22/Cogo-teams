@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRequest, useRequestBf } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 import { GenericObject } from '../../commons/Interfaces';
@@ -6,18 +7,19 @@ interface Params{
 	shipmentData?:GenericObject
     query?: GenericObject
 	showButton?:boolean
-	setShowButton?:Function
+	showFinal?:boolean
+	setShowButton:Function
+	setShowFinal:Function
 }
-const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
-
-	const{orgId,jobNumber,jobSource,jobType}=query||{}
+const useUpdateJob = ({query,setShowButton,showButton,setShowFinal,showFinal}:Params) => {
+	const{shipmentId,jobNumber,jobSource,jobType}=query||{}
 
 	const { user_data } = useSelector(({ profile }:any) => ({
 		user_data: profile?.user || {},
 	}));
 
 
-    const [{ data, loading }, trigger] = useRequest(
+    const [{ data:CloseOperationally, loading }, trigger] = useRequest(
 		{
 			url     : '/update_shipment',
 			method  : 'post',
@@ -33,6 +35,7 @@ const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
 
     const getFinalData = async() =>{
 		try{
+			setShowFinal(!showFinal)
 			await FinalTrigger({
 				data:{
 					jobNumber:jobNumber,
@@ -42,9 +45,9 @@ const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
 				}
 			})
 			Toast.success('Close successfully...');
-			setShowButton!(!showButton)
+			
 		}catch(error){
-			Toast.error('Job Not Found...');
+			Toast.error(error);
 		}
 
 	}
@@ -52,19 +55,23 @@ const useUpdateJob = ({query,setShowButton,showButton}:Params) => {
 
 		const jobClose = () =>{
 			if(data=== 'Undo'){
+				
 				return false
 			}
 			return true	
 		}
 		
+		
 		try{
 			await trigger({
 				data:{
-                    id: orgId,
+                    id: shipmentId,
 					is_job_closed: jobClose(),
 				}
 			})
 			Toast.success('Close successfully...');
+			setShowButton(!showButton)
+			
 		}catch(error){
 			Toast.error('Job Not Found...');
 		}

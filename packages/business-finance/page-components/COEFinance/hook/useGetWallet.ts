@@ -2,7 +2,7 @@ import { useRequest} from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetWallet = (shipmentId) => {
-	
+		
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url     : '/list_promotion_budget_transactions',
@@ -15,7 +15,7 @@ const useGetWallet = (shipmentId) => {
 		trigger({
 			params:{
                 service_object_required: true,
-                budget_allocation_data_requred: true,
+				budget_allocation_data_required: true,
                 filters: {transaction_reason: 'negative margin', shipment_id: shipmentId}
 			}
 		})
