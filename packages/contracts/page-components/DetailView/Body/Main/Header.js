@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ import SureModal from '../../../../common/SureModal';
 
 import styles from './styles.module.css';
 
-function Header({ activePair, handleUpdateContract, data, stats }) {
+function Header({ activePair, handleUpdateContract, stats }) {
 	const [showModal, setShowModal] = useState(null);
 
 	const handleCloseModal = () => {
