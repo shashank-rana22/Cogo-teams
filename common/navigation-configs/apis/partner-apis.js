@@ -4057,6 +4057,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'list_contracts',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
 	],
 	discount: [
 		{
