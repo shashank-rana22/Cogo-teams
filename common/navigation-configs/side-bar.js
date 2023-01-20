@@ -1,9 +1,13 @@
 import navigationMappingAdmin from './navigation-mapping-admin';
 
-const getSideBarConfigs = (userData) => {
+const getSideBarConfigs = (userData, pinnedNavKeys = []) => {
 	const pNavs = userData?.permissions_navigations || {};
 
-	const filteredKeys = Object.keys(navigationMappingAdmin);
+	const modifiedPinnedNavKeys = pinnedNavKeys.filter((key) => Object.keys(navigationMappingAdmin).includes(key));
+
+	const filteredKeys = Object.keys(navigationMappingAdmin).filter(
+		(key) => !modifiedPinnedNavKeys.includes(key),
+	);
 
 	const getNavMappings = (navMappingKeys) => {
 		const nav_items = [];
@@ -19,7 +23,8 @@ const getSideBarConfigs = (userData) => {
 
 	return {
 		nav_items: {
-			partner: getNavMappings(filteredKeys),
+			partner    : getNavMappings(filteredKeys),
+			pinnedNavs : getNavMappings(modifiedPinnedNavKeys),
 		},
 	};
 };

@@ -3,9 +3,15 @@
 	height: 100vh;
 	padding: 0;
 	margin: 0;
-	margin-bottom: 16px;
 	overflow-y: auto;
 	list-style-type: none;
+}
+
+.sticky_pins {
+	position: sticky;
+	top: 0px;
+	z-index: 1;
+	background-color: #ffffff;
 }
 
 .list_container::-webkit-scrollbar {
@@ -33,6 +39,7 @@
 	span {
 		flex: 1;
 		padding-top: 1px;
+		margin-left: 16px;
 		overflow: hidden;
 		font-weight: 500;
 		text-overflow: ellipsis;
@@ -46,10 +53,9 @@
 		flex-shrink: 0;
 		width: 16px;
 		height: 16px;
-		margin-right: 16px;
 	}
 
-	&:hover {
+	&:hover{
 		background-color: #fef199;
 	}
 
@@ -153,6 +159,28 @@
 	}
 }
 
+.has_options {
+	margin-left: -10px;
+}
+
+.pin {
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+	transition: transform 0.3s ease;
+
+	&:hover {
+		transform: rotate(30deg);
+	}
+}
+
+.loader {
+	width: 18px;
+	height: 18px;
+	margin: 0px;
+}
+
 .inner_container {
 	position: sticky;
 	overflow: hidden;
@@ -241,4 +269,10 @@
 	transition: transform 0.5s ease;
 	will-change: transform;
 	transform: translate3d(0, 0, 0) !important;
+}
+
+.line {
+	height: 1px;
+	margin-bottom: 8px;
+	background-color: #e0e0e0;
 }

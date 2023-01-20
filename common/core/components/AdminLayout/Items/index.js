@@ -1,14 +1,17 @@
-import { IcMArrowRotateDown, IcMDefault } from '@cogoport/icons-react';
+import { Loader } from '@cogoport/components';
+import cl from '@cogoport/components/src/utils/classname-processor';
+import { IcMArrowRotateDown, IcMDefault, IcMPin, IcCPin } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
 
-function Items({ item, resetSubnavs }) {
+function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading }) {
 	const router = useRouter();
 	const { pathname, query, asPath } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
+	const [pinLoadingState, setPinLoadingState] = useState(false);
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
@@ -37,21 +40,40 @@ function Items({ item, resetSubnavs }) {
 
 	const singleNav = (
 		<div
-			className={isHref ? styles.active_item : styles.list_item_inner}
+			className={cl`
+			${item.options?.length > 0 ? styles.has_options : ''} 
+			${isHref ? styles.active_item : styles.list_item_inner}`}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-
-			<Element />
-			<span>
-				{item.title}
-			</span>
 			{item.options?.length > 0 && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
 			)}
+			<Element />
+			<span>
+				{item.title}
+			</span>
+
+			{!pinLoadingState ? (
+				<div
+					role="button"
+					tabIndex={0}
+					className={styles.pin}
+					onClick={(e) => {
+						e.stopPropagation();
+						// setShowSubNav(!showSubNav);
+						if (!newPinUnpinLoading) {
+							pinUnpinNavs(!isPinned, item, setPinLoadingState);
+						}
+					}}
+				>
+					{isPinned ? <IcCPin /> : <IcMPin /> }
+				</div>
+			) : <Loader className={styles.loader} />}
+
 		</div>
 	);
 	return (

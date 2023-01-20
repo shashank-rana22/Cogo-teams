@@ -1,6 +1,7 @@
 import { Input } from '@cogoport/components';
 import cl from '@cogoport/components/src/utils/classname-processor';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchdark, IcCPin } from '@cogoport/icons-react';
+import { useRequest } from '@cogoport/request';
 import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -16,6 +17,10 @@ function Navbar({
 	className,
 	style,
 	nav = [],
+	pinListLoading = false,
+	partner_user_id = '',
+	pinnedNavs = [],
+	setPinnedNavKeys = () => {},
 	mobileShow = false,
 }) {
 	const userBasedNavView = formatUserBasedNavView(nav);
@@ -29,12 +34,44 @@ function Navbar({
 
 	const listItems = sortNavs(filterdList);
 
+	const filterdPinnedNavList = searchString
+		? applyFilter(searchString, pinnedNavs, 'title', ['key', 'href', 'title'])
+		: pinnedNavs;
+
+	const pinnedListItems = sortNavs(filterdPinnedNavList);
+
 	const setSearchFunc = useCallback(
 		(value) => {
 			setSearchString(value);
 		},
 		[],
 	);
+
+	const [{ loading: newPinUnpinLoading = false }, trigger] = useRequest({
+		url    : 'create_partner_user_setting',
+		method : 'POST',
+	}, { manual: false });
+
+	const pinUnpinNavs = async (action, navItem, setPinLoadingState) => {
+		setPinLoadingState(true);
+
+		const payload = {
+			partner_user_id,
+			setting_config : { navigation_preferences: [navItem.key] },
+			setting_type   : 'navigation_preference',
+			action_name    : action ? 'add' : 'remove',
+		};
+
+		await trigger({ data: payload });
+
+		if (action) {
+			setPinnedNavKeys((prevNavKeys) => [...prevNavKeys, navItem.key]);
+		} else {
+			setPinnedNavKeys((prevNavKeys) => prevNavKeys.filter((navKey) => navKey !== navItem.key));
+		}
+
+		setPinLoadingState(false);
+	};
 
 	return (
 		<div
@@ -67,8 +104,42 @@ function Navbar({
 					</div>
 
 					<ul className={styles.list_container}>
+						<div className={styles.sticky_pins}>
+							<div className={styles.line} />
+
+							<div className={`${styles.pin_header} ${styles.list_item_inner} ${styles.list_item}`}>
+								<IcCPin />
+								<span>
+									{(!pinListLoading && (pinnedListItems || []).length === 0) ? 'No Pins Found'
+										: 'Pinned List'}
+
+								</span>
+							</div>
+
+							{(pinnedListItems || []).map((item) => (
+								<Items
+									key={item.key}
+									item={item}
+									resetSubnavs={resetSubnavs}
+									pinUnpinNavs={pinUnpinNavs}
+									newPinUnpinLoading={newPinUnpinLoading}
+									isPinned
+								/>
+							))}
+
+							<div className={styles.line} />
+
+						</div>
+
 						{(listItems || []).map((item) => (
-							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
+							<Items
+								key={item.key}
+								item={item}
+								resetSubnavs={resetSubnavs}
+								pinUnpinNavs={pinUnpinNavs}
+								newPinUnpinLoading={newPinUnpinLoading}
+								isPinned={false}
+							/>
 						))}
 					</ul>
 				</div>
