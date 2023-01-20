@@ -1,5 +1,5 @@
 import { Tooltip } from "@cogoport/components";
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 import React from "react";
 
 interface itemTypes {
@@ -67,10 +67,13 @@ const ModifiedName = ({ item, field }: propsType) => {
                             placement="top"
                             content={createdByName}
                         >
-                            <text>{`${createdByName?.substring(0, 10)}...`}</text>
+                            <text>{`${createdByName?.substring(
+                                0,
+                                10
+                            )}...`}</text>
                         </Tooltip>
                     ) : (
-                        <text>{createdByName}</text>
+                        <text>{createdByName || " --"}</text>
                     )}
                 </div>
             )}
