@@ -7615,6 +7615,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api: 'create_communication_template_suggestions',
+			access_type: 'private',
+			service_name: 'communication',
+		},
 	],
 	cogopoints: [
 		{
