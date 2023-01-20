@@ -44,7 +44,6 @@ const useGetAuthorizationChecked = () => {
 	useEffect(() => {
 		(async () => {
 			if (!sessionInitialized && _initialized) {
-				console.log(profile);
 				if (isProfilePresent && (isUnauthenticatedPath || route === '/') && source !== 'add_account') {
 					const configs = redirections(profile);
 					if (configs?.href) {
