@@ -1,0 +1,25 @@
+
+
+name: Tests
+
+on: [pull_request]
+
+jobs:
+  init:
+    name: Init
+    if: ${{ github.triggering_actor != 'dependabot[bot]' }}
+    uses: ./.github/workflows/reusable-run-setup.yml
+    secrets: inherit
+  
+  lint:
+    name: Test
+    needs: init
+    uses: ./.github/workflows/reusable-test-lint.yml
+    secrets: inherit
+
+  build:
+    name: Test
+    needs: init
+    uses: ./.github/workflows/reusable-test-build.yml
+    secrets: inherit
+    
