@@ -535,9 +535,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api: 'create_channel_partner_persona',
-			access_type: 'private',
-			service_name: 'partner',
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	terms_and_conditons: [
@@ -2186,9 +2186,9 @@ const partner = {
 			feature      : 'inventory_management',
 		},
 		{
-			api: 'create_channel_partner_persona',
-			access_type: 'private',
-			service_name: 'partner',
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	support_crm: [
@@ -5739,9 +5739,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api: 'get_cc_communication_stats',
-			access_type: 'private',
-			service_name: 'sage',
+			api          : 'get_cc_communication_stats',
+			access_type  : 'private',
+			service_name : 'sage',
 		},
 	],
 	unified_dashboard: [
@@ -9173,6 +9173,11 @@ const partner = {
 			api          : 'create_platform_config_constant_mapping',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 };
