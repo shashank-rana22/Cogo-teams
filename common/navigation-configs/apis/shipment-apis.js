@@ -931,6 +931,16 @@ const apis = [
 		feature     : 'revenue_desk',
 	},
 	{
+		api         : 'update_shipment_flash_booking_rate',
+		access_type : 'private',
+		feature     : 'revenue_desk',
+	},
+	{
+		api         : 'get_shipment_quotation',
+		access_type : 'private',
+		feature     : 'revenue_desk',
+	},
+	{
 		api         : 'create_shipment_booking_confirmation_preference',
 		access_type : 'private',
 	},

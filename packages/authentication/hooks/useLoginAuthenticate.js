@@ -33,12 +33,12 @@ const useLoginAuthenticate = () => {
 	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	}, { manual: false });
+	});
 
 	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
 		method : 'post',
-	}, { manual: false });
+	});
 
 	const getUserSessionMappings = async () => {
 		try {
@@ -79,7 +79,7 @@ const useLoginAuthenticate = () => {
 				router.push(configs.href, configs.as);
 			}
 		}
-	}, [profile, router]);
+	}, [profile, router, source]);
 
 	const onSubmit = async (values, e) => {
 		e.preventDefault();
