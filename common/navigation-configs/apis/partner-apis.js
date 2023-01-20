@@ -5738,6 +5738,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api: 'get_cc_communication_stats',
+			access_type: 'private',
+			service_name: 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
