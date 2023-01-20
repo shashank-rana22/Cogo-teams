@@ -1,3 +1,6 @@
+import navigationMappingAdmin from '@cogoport/navigation-configs/navigation-mapping-admin';
+import navigationMappingSeller from '@cogoport/navigation-configs/navigation-mapping-seller';
+import navigationMappingShipper from '@cogoport/navigation-configs/navigation-mapping-shipper';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import getNavData from '@cogoport/request/helpers/get-nav-data';
@@ -34,6 +37,16 @@ const useOnBoardRole = () => {
 
 	const { permissions } = possiblePermissionsData || {};
 
+	let navigationMappings = navigationMappingAdmin;
+
+	if (roleData?.stakeholder_type === 'organization') {
+		if (roleData?.id === '6fbc5d22-b79b-4db6-aeab-d5db3b58db17') {
+			navigationMappings = navigationMappingSeller;
+		} else {
+			navigationMappings = navigationMappingShipper;
+		}
+	}
+
 	/**
 	 * Get role data
 	 * @param {string} [id=null]
@@ -58,10 +71,10 @@ const useOnBoardRole = () => {
 	 * @param {string} [navigation='']
 	 */
 	const getNavOptions = (navigation = '') => {
-		const navObj = getNavData(navigation);
-		return getNavigationOptions(permissions, navObj || []);
+		const navObj = getNavData(navigation, navigationMappings);
+		return getNavigationOptions(permissions, navObj || {});
 	};
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const onBack = useCallback(() => router.push('/list-roles'), []);
 
 	const handleRoleImport = (vals) => {
@@ -83,6 +96,7 @@ const useOnBoardRole = () => {
 		if (role_id) {
 			getRole();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [role_id]);
 
 	return {
@@ -94,6 +108,7 @@ const useOnBoardRole = () => {
 		getNavOptions,
 		permissions,
 		onBack,
+		navigationMappings,
 		setShowImportRole,
 		showImportRole,
 		handleRoleImport,

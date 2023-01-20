@@ -17,8 +17,13 @@ function Items({ item, resetSubnavs }) {
 	const handleClickOnItem = (itemdata) => {
 		if (itemdata.options?.length > 0) {
 			setShowSubNav(!showSubNav);
-		} else if (itemdata?.href?.includes('/v1')) {
-			window.location.href = `/v1/${query.partner_id || splitAspath}${itemdata.href.replace('/v1', '')}`;
+		} else if (itemdata?.href?.includes('/v2')) {
+			const replaceHref = itemdata?.href?.replace('/v2', '');
+			const replaceAs = itemdata?.as?.replace('/v2', '');
+			router.push(replaceHref, replaceAs);
+		} else if (process.env.NODE_ENV === 'production') {
+			// eslint-disable-next-line no-undef
+			window.location.href = `/${query.partner_id || splitAspath}${itemdata.href}`;
 		} else {
 			router.push(itemdata.href, itemdata.as);
 		}

@@ -2,10 +2,13 @@ import Document, {
 	Head, Html, Main, NextScript,
 } from 'next/document';
 
+import GTM from './GtmHandler';
+
 function CogoDocument() {
 	return (
 		<Html>
 			<Head>
+				{process.env.NEXT_PUBLIC_GTM_ID && <GTM gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
 				<link
@@ -20,6 +23,9 @@ function CogoDocument() {
 			<body>
 				<Main />
 				<NextScript />
+				{process.env.NEXT_PUBLIC_GTM_ID && (
+					<GTM.NoScript gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+				)}
 			</body>
 		</Html>
 	);

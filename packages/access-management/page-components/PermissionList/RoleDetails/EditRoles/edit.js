@@ -39,6 +39,7 @@ function Edit({ formProps, controls }) {
 						<div className={styles.input_group}>
 							<Element
 								{...el}
+								key={el.name}
 								control={control}
 								id={`rnp_role_update_role_form_${el.name}_input`}
 							/>

@@ -5,6 +5,7 @@ import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
+import formatUserBasedNavView from '../../../helpers/formatUserBasedNavView';
 import { sortNavs } from '../../../helpers/sortItems';
 import Items from '../Items';
 
@@ -17,12 +18,14 @@ function Navbar({
 	nav = [],
 	mobileShow = false,
 }) {
+	const userBasedNavView = formatUserBasedNavView(nav);
+
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
-		? applyFilter(searchString, nav, 'title', ['key', 'href', 'title'])
-		: nav;
+		? applyFilter(searchString, userBasedNavView, 'title', ['key', 'href', 'title'])
+		: userBasedNavView;
 
 	const listItems = sortNavs(filterdList);
 
@@ -65,7 +68,7 @@ function Navbar({
 
 					<ul className={styles.list_container}>
 						{(listItems || []).map((item) => (
-							<Items key={item} item={item} resetSubnavs={resetSubnavs} />
+							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
 						))}
 					</ul>
 				</div>

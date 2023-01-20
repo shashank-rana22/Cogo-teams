@@ -10,6 +10,24 @@
 	}
 }
 
+.heading_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: flex-start;
+
+		:global(.ui_chips_container) {
+			flex-wrap: wrap;
+			width: 100%;
+			margin-top: 20px;
+		}
+	}
+}
+
 .pills {
 	margin-right: 20px;
 }
@@ -17,7 +35,7 @@
 .role_group {
 	position: fixed;
 	right: 20px;
-	bottom: 25px;
+	bottom: 60px;
 	display: flex;
 	align-items: center;
 }

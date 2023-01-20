@@ -50,6 +50,7 @@ function Filters({
 					}
 					return (
 						<Element
+							key={control.name}
 							className={styles.select}
 							value={filters?.[control?.name]}
 							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}

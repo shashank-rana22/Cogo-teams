@@ -1,3 +1,5 @@
+import { Button } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
 import useOnBoardRole from '../../hooks/useOnBoardRole';
@@ -14,6 +16,7 @@ function PermissionList() {
 		roleData,
 		setShowImportRole,
 		showImportRole,
+		onBack,
 		handleRoleImport,
 		permissions,
 		onImport,
@@ -22,6 +25,11 @@ function PermissionList() {
 
 	return (
 		<section className={styles.container}>
+			<Button className={styles.back_container} size="md" themeType="secondary" onClick={onBack}>
+				<IcMArrowBack fill="#221F20" style={{ marginRight: 4 }} />
+				Back
+			</Button>
+
 			<RoleDetails
 				roleData={roleData}
 				loading={loading}

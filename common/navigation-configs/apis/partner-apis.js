@@ -534,6 +534,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api: 'create_channel_partner_persona',
+			access_type: 'private',
+			service_name: 'partner',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -836,6 +841,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_organization_commodity_segmentation_stats',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'create_organization_document_handling_preference',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -905,6 +915,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_organization_commodity_trade_port_pairs',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api         : 'list_lead_contacts',
 			access_type : 'private',
 		},
@@ -937,16 +952,25 @@ const partner = {
 			access_type : 'private',
 			feature     : 'demand_crm',
 		},
-
 		{
 			api          : 'get_organization_segment_trade_information',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_organization_segment_trade_information',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			api          : 'get_organizations_segmentation_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_organizations_segmentation_stats',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organization_wallet_share_stats',
@@ -1074,10 +1098,22 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_organizations_trade_port_pairs',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
+		},
+		{
 			api          : 'get_trade_information_on_port_pair',
 			access_type  : 'private',
 			feature      : 'demand_crm',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_trade_information_on_port_pair',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organization_trade_intelligence',
@@ -2148,6 +2184,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 			feature      : 'inventory_management',
+		},
+		{
+			api: 'create_channel_partner_persona',
+			access_type: 'private',
+			service_name: 'partner',
 		},
 	],
 	support_crm: [
