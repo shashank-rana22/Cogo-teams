@@ -153,6 +153,18 @@ const apis = [
 		feature      : 'tech_ops',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_rfq_request_sheets',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_plan_sheet_uploads',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;
