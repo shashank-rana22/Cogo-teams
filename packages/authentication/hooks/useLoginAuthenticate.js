@@ -33,7 +33,7 @@ const useLoginAuthenticate = () => {
 	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	}, { manual: true });
+	});
 
 	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
@@ -58,9 +58,9 @@ const useLoginAuthenticate = () => {
 	};
 
 	useEffect(() => {
-		// if (source !== 'add_account') {
-		getUserSessionMappings();
-		// }
+		if (source !== 'add_account') {
+			getUserSessionMappings();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
