@@ -109,6 +109,13 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'update_spot_search',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'spot_search',
+
+	},
 ];
 
 export default apis;
