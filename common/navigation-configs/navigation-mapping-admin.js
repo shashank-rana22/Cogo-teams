@@ -1,5 +1,5 @@
 import {
-	IcMSettings, IcMContractRates,
+	IcMSettings,
 	IcMAccountSettings,
 	IcMLocation,
 	IcMTracking,
@@ -1054,7 +1054,6 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_events'],
 		module_type   : 'dashboards',
 	},
-
 	coe: {
 		key         : 'coe',
 		title       : 'Center of Excellence [COE]',
@@ -1121,6 +1120,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_shipments'],
 				module_type   : 'crm',
 				possible_apis : apis.shipment,
+			},
+			{
+				key           : 'coe-contracts',
+				title         : 'Contracts Revenue Desk',
+				href          : '/v2/contracts',
+				as            : '/v2/contracts',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.contracts,
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',
@@ -1763,16 +1771,6 @@ const navigationMappingAdmin = {
 		href  : '/home',
 		as    : '/home',
 		icon  : IcMSettings,
-	},
-	contracts: {
-		key           : 'contracts',
-		title         : 'Contracts',
-		icon          : IcMContractRates,
-		href          : '/v2/contracts',
-		as            : '/v2/contracts',
-		type          : 'link',
-		possible_apis : apis.contracts,
-		module_type   : 'dashboards',
 	},
 	manage_rfq: {
 		key           : 'manage_rfq',
