@@ -40,28 +40,28 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	}, { manual: false });
 
-	// const getUserSessionMappings = async () => {
-	// 	try {
-	// 		const sessionData = await triggerUserSessionMapping({
-	// 			params: { parent_user_session_id: cogo_parent_auth_token },
-	// 		});
-	// 		if (!sessionData.hasError) {
-	// 			if (sessionData?.data?.list?.length === 0) {
-	// 				setCookie('cogo-parent-auth-token', 'expired', -1);
-	// 				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
-	// 			}
-	// 			return;
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
+	const getUserSessionMappings = async () => {
+		try {
+			const sessionData = await triggerUserSessionMapping({
+				params: { parent_user_session_id: cogo_parent_auth_token },
+			});
+			if (!sessionData.hasError) {
+				if (sessionData?.data?.list?.length === 0) {
+					setCookie('cogo-parent-auth-token', 'expired', -1);
+					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+				}
+				return;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-	// useEffect(() => {
-	// 	if (source !== 'add_account') {
-	// 		getUserSessionMappings();
-	// 	}
-	// });
+	useEffect(() => {
+		if (source !== 'add_account') {
+			getUserSessionMappings();
+		}
+	}, []);
 
 	useEffect(() => {
 		if (Object.keys(profile).length > 0) {
