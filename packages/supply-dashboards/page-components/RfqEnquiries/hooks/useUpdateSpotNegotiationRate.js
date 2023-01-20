@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import getField from '../configurations';
 import FieldMutation from '../helpers/field-mutation';
@@ -48,13 +48,14 @@ const useUpdateSpotNegotiationRate = ({
 	});
 
 	const { data:rateSelected } = useGetRates({ service, selectedRate });
+	const prefillData = useRef();
 
 	const { newField } = FieldMutation({
 		fields, values, service, data,
 	});
 
 	useEffect(() => {
-		if (rateSelected && !data) {
+		if (rateSelected) {
 			if (rateSelected?.spot_negotiation_id) {
 				setValue('service_provider_id', rateSelected?.service_provider_id);
 				setValue('shipping_line_id', rateSelected?.data?.shipping_line_id);
@@ -67,7 +68,6 @@ const useUpdateSpotNegotiationRate = ({
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(rateSelected)]);
-	const prefillData = rateSelected || data;
 
 	useEffect(() => {
 		let mandatoryFreightCodes = [];
@@ -75,8 +75,13 @@ const useUpdateSpotNegotiationRate = ({
 		let mandatoryDestinationChargeCodes = [];
 		let mandatorySurchargeCodes = [];
 		if (data) {
-			(Object.keys(prefillData?.data || {})).forEach((item) => {
-				const val = prefillData?.data[item];
+			if (prefillData.current || !rateSelected) {
+				prefillData.current = data;
+			} else if (!prefillData.current) {
+				prefillData.current = rateSelected;
+			}
+			(Object.keys(prefillData.current?.data || {})).forEach((item) => {
+				const val = prefillData.current?.data[item];
 				if (val) {
 					if (item === 'line_items') {
 						setValue('line_items', val);
