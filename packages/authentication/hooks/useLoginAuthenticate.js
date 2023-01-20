@@ -33,7 +33,7 @@ const useLoginAuthenticate = () => {
 	const [{ loading: userSessionMappingLoading }, triggerUserSessionMapping] = useRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	});
+	}, { manual: true });
 
 	const [{ loading: updateSessionMappingLoading }, triggerUpdateSessionMapping] = useRequest({
 		url    : '/update_parent_and_child_user_session_mappings',
@@ -58,15 +58,16 @@ const useLoginAuthenticate = () => {
 	};
 
 	useEffect(() => {
-		if (source !== 'add_account') {
-			getUserSessionMappings();
-		}
+		// if (source !== 'add_account') {
+		getUserSessionMappings();
+		// }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (Object.keys(profile).length > 0 && source !== 'add_account') {
 			const configs = redirections(profile);
+
 			if (configs?.href?.includes('/v2')) {
 				const replaceHref = configs?.href?.replace('/v2', '');
 				const replaceAs = configs?.as?.replace('/v2', '');
@@ -126,10 +127,12 @@ const useLoginAuthenticate = () => {
 			const response = await trigger({
 				data: {
 					...values,
-					auth_scope : 'partner',
-					platform   : 'admin',
+					auth_scope   : 'partner',
+					platform     : 'admin',
+					parent_token : cogo_parent_auth_token,
 				},
 			});
+
 			const { token } = response.data || {};
 
 			const payload = {
