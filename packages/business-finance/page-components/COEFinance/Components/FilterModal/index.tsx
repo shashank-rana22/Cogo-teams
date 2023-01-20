@@ -1,5 +1,5 @@
 import { Modal } from '@cogoport/components'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styles from './styles.module.css'
 import Filter from '../../../commons/Filters'
 import { FILTERS } from '../../configurations/filters_config'
@@ -12,11 +12,11 @@ interface Props{
 	filters: GenericObject;
 	setFilters:(p: object) => void;
 }
-interface currencyData {
-	 id: string;
-	icon: JSX.Element;
-	text: string;
-}
+// interface currencyData {
+// 	 id: string;
+// 	icon: JSX.Element;
+// 	text: string;
+// }
 
 
 const FilterModal = ({filters,setFilters}:Props) => {
@@ -30,7 +30,15 @@ const FilterModal = ({filters,setFilters}:Props) => {
 	 }
  }
 
-const [currencyValue, setCurrencyValue] = useState<currencyData|{}>();
+const[currencies,setCurrencies]=useState([]);
+
+useEffect(()=>{
+	setFilters({
+		...filters,
+		currency: CURRENCY_DATA.filter((ite)=>(currencies.includes(ite.id))).map((ite)=>(ite.text)),
+	});
+},[currencies])
+
 	
 return (
 	<div className={styles.modal_container}>
@@ -46,24 +54,25 @@ return (
 					<div className={styles.currencys}>Currency</div>
 					<div style={{display:'flex',marginBottom:"24px", marginLeft: '26px'}}>
 							{CURRENCY_DATA.map((item) => (
-
 								<>
-									<div className={`${styles.currencyValues} 
-											${(currencyValue as currencyData)?.id === item.id ? styles.selected:styles.unselected}`}
+									<div className={`${styles.currencyValues}
+											${currencies.includes(item.id) ? styles.selected:styles.unselected}`}
 										onClick={() => {
-											setCurrencyValue(item);
-											setFilters({
-												...filters,
-												currency: item.text,
-											});
+											if(currencies?.includes(item.id)){
+												const value=currencies.filter((it)=>(it!==item?.id));
+												setCurrencies(value)
+											}
+											else{
+												setCurrencies([...currencies,item.id])
+											}
 										}}
-
 									>
 										<div className="iconShow">{item.icon}</div>
 										<div className="textShow">{item.text}</div>
 									</div>
 								</>
-							))}
+							)
+							)}
 						</div>
 
 				<div className={styles.container_filter}>
@@ -74,7 +83,7 @@ return (
 					<div className={styles.clear}>
 					<Button onClick={()=>{
 						setFilters({})
-						setCurrencyValue({})
+						setCurrencies([])			
 						setShowModal(false)}}
 						>Clear Filters</Button>
 					</div>

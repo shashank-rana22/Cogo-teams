@@ -35,8 +35,8 @@ const FieldPair = ({ itemData , field}:Props) => {
 				invoiceType = 'Purchase Invoice';
 			}
 		}
-		else if(billType=== "REIMBERSEMENT"){
-			invoiceType='reimbersement'
+		else if(billType=== "REIMBURSEMENT"){
+			invoiceType='reimbursement'
 		}
 		else if(billType=== "EXPENSE"){
 			invoiceType="Expense"

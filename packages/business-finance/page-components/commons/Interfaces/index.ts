@@ -75,13 +75,17 @@ export interface ControlProps {
 
 interface PortInterface{
 	display_name?:string
+	postal_code?:string,
+	country:{name:string},
+	name:string
+	port_code:string
 }
 
 interface IEInterface{
 	business_name:string
 }
 interface PickupDropInt{
-	postal_code:string,
+	postal_code?:string,
 	country:{name:string},
 	display_name:string,
 	name:string

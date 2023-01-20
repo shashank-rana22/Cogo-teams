@@ -9,6 +9,7 @@ import List from "../../../../commons/List/index";
 import useSupplierHistory from '../../../hook/useSupplierHistory'
 import showOverflowingNumber from "../../../../commons/showOverflowingNumber";
 import { saveAs } from "file-saver";
+import {startCase} from '@cogoport/utils';
 interface SellerDetail {
     organizationName?:string
 }
@@ -54,14 +55,18 @@ const SupplierDetails =({data,paymentsData,accPaymentLoading}:SupplierDetailsPro
     }
 
     const functions={
+        DocumentTypeFunc: (item:any) => <p>{startCase(item?.document_type)}</p>,
         viewFunc: (item:any)=> <Button 
                                 themeType="secondary"
                                 size="xs" 
-                                onClick={() => window.open(item?.document_url, '_blank')}>
+                                onClick={() => window.open(item?.image_url, '_blank')}>
                                 View
                                </Button>,
-        downloadFunc: (item:any) => <div className={styles.download} onClick={() => saveAs(item?.document_url)}><IcMDownload height={20} width={20}/></div>,
+        downloadFunc: (item:any) => <div className={styles.download} onClick={() => saveAs(item?.image_url)}><IcMDownload height={20} width={20}/></div>,
     };
+
+
+    
 
     return(
         <div className={styles.container}> 
