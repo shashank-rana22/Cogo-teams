@@ -1,12 +1,13 @@
-import { Button } from "@cogoport/components";
-import { IcCFtick, IcMCrossInCircle } from "@cogoport/icons-react";
+import { Button, Pill, Tooltip } from "@cogoport/components";
+import { IcCFtick, IcMCrossInCircle, IcMInfo } from "@cogoport/icons-react";
 import React, { useState } from "react";
 import LineItemCard from "./lineItemCard/index";
 import styles from "./styles.module.css";
 import { Modal, Textarea, Checkbox } from "@cogoport/components";
 import { RemarksValInterface } from "../../../../../commons/Interfaces/index";
 import { DataInterface } from "..";
-
+import { useRouter } from "@cogoport/next";
+import { startCase } from "@cogoport/utils";
 interface ShipmentDetailsCardInterface {
   data: DataInterface;
   remarksVal: RemarksValInterface;
@@ -58,6 +59,9 @@ const ShipmentDetailsCard = ({
     placeOfSupply = "",
   } = bill || {};
 
+  const { query } = useRouter();
+  const { billType, isProforma } = query;
+
   const [DetailsCard, setDetailsCard] = useState([
     {
       id: 1,
@@ -82,6 +86,16 @@ const ShipmentDetailsCard = ({
     DetailsCard.push(DetailsCard.shift());
     setDetailsCard(DetailsCard);
   };
+
+  let invoiceType = startCase(billType);
+
+  if (billType === "BILL") {
+    if (isProforma === true) {
+      invoiceType = "PROFORMA INVOICE";
+    } else {
+      invoiceType = "PURCHASE INVOICE";
+    }
+  }
 
   const handleClickUndo = (id: number) => {
     const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -145,7 +159,19 @@ const ShipmentDetailsCard = ({
         <div>
           <div className={styles.mainHeader}>
             <div className={styles.instructions}>
-              Check the Details ( As filled by SO2 in the cogo form )
+              Check the Details
+              <Tooltip
+                content={
+                  <div className={styles.formStyle}>
+                    As filled by SO2 In The COGO Invoice
+                  </div>
+                }
+              >
+                <div className={styles.tooltip}>
+                  <IcMInfo />
+                </div>
+              </Tooltip>
+              <Pill color="blue">{invoiceType}</Pill>
             </div>
 
             {!isInvoiceApproved && (

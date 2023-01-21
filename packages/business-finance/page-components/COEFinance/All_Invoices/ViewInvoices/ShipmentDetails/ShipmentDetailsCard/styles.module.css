@@ -70,10 +70,19 @@
 }
 
 .instructions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
   font-weight: 500;
 }
 
+.tooltip {
+  margin-top: 2px;
+}
+.formStyle {
+  font-size: 10px;
+}
 .completed {
   font-weight: 600;
   color: red;

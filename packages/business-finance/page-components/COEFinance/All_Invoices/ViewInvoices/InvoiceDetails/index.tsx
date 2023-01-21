@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button, Tooltip, Modal } from "@cogoport/components";
 import styles from "./styles.module.css";
-import { isEmpty } from "@cogoport/utils";
+import { isEmpty, startCase } from "@cogoport/utils";
 import { IcMInfo } from "@cogoport/icons-react";
 import { urgencyOptions } from "./controls";
 import AddUrgencyTag from "./AddUrgencyTag/index";
 import RemoveTagConfirmation from "./RemoveTagConfirmation/index";
-
+import { useRouter } from "@cogoport/next";
+import { Pill } from "@cogoport/components";
 interface BillInterFace {
   grandTotal?: string;
   id?: string;
@@ -37,9 +38,20 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
   const [removeTag, setRemoveTag] = useState(false);
   const [showAddTag, setShowAddTag] = useState(false);
   const [tagValue, setTagValue] = useState("");
+  const { query } = useRouter();
+  const { billType, isProforma } = query;
 
   if (data?.serviceType === "air_freight") {
     urgencyOptions.push({ label: "Airlines DO Payments", value: "air_do" });
+  }
+  let invoiceType = startCase(billType);
+
+  if (billType === "BILL") {
+    if (isProforma === true) {
+      invoiceType = "PROFORMA INVOICE";
+    } else {
+      invoiceType = "PURCHASE INVOICE";
+    }
   }
 
   let displayTag = "";
@@ -105,7 +117,11 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
 
   return (
     <div className={styles.container}>
-      <h3>Invoice Details</h3>
+      <div className={styles.heading}>
+        <h3>Invoice Details</h3>
+        <Pill color="blue">{invoiceType}</Pill>
+      </div>
+
       {showAddTag ? (
         <AddUrgencyTag
           remark={remark}
