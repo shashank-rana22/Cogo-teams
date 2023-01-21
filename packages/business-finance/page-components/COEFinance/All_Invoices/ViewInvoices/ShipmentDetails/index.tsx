@@ -88,10 +88,13 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
     const {source, trade_type} = dataList;
     const shipmentId = dataList?.id ||  ''; 
     const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
-
+    
     return(
     <div className={styles.container}>
-             <h3>Shipment Details</h3>
+             <h3>Shipment Details {jobNumber && <span>- SID
+                 <span className={styles.serialId}> #{jobNumber}</span>
+                 </span>}
+                 </h3>
 
             <div className={styles.smallHr} />
 
@@ -100,8 +103,8 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
                 <div className={styles.subContainer}>
                     Details 
                     <div className={styles.tagsContainer}>
-                        <Pill color="blue">{sourceText}</Pill>
-                        <Pill color="yellow">{startCase(trade_type)}</Pill>
+                        {sourceText && <Pill color="blue">{sourceText}</Pill>}
+                      { trade_type && <Pill color="yellow">{startCase(trade_type)}</Pill>}
                     </div>
                     <div>Wallet Usage - USD 50</div>
                 </div>

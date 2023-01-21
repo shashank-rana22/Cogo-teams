@@ -1,0 +1,109 @@
+{
+	"name": "haulage_freight_service",
+	"title": "Shipments",
+	"filter_controls": [
+		{
+			"label": "BL Number",
+			"name": "bl_number",
+			"type": "text"
+		},
+		{
+			"name": "origin_location_id",
+			"label": "Origin Port",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport", "pincode", "city", "country"]
+				}
+			}
+		},
+		{
+			"name": "destination_location_id",
+			"label": "Destination Location",
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport", "pincode", "city", "country"]
+				}
+			}
+		},
+		{
+			"name": "container_size",
+			"label": "Container Size",
+			"type": "select-2",
+			"optionsListKey": "container-sizes",
+			"selectType": "pills"
+		},
+		{
+			"name": "container_type",
+			"label": "Container Type",
+			"type": "select-2",
+			"optionsListKey": "container-types"
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "freight"
+		},
+		{
+			"name": "transport_mode",
+			"label": "Transportation mode",
+			"type": "select-2",
+			"selectType": "pills",
+			"options": [
+				{
+					"label": "Rail",
+					"value": "rail"
+				},
+				{
+					"label": "Barge",
+					"value": "barge"
+				},
+				{
+					"label": "Trailer",
+					"value": "trailer"
+				}
+			],
+			"multiple": false
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Container arrived", "value": "container_arrived" },
+				{ "label": "Container departed", "value": "container_departed" },
+				{ "label": "Confirmed by service provider", "value": "confirmed_by_service_provider" },
+				{
+					"label": "Awaiting service provider confirmation",
+					"value": "awaiting_service_provider_confirmation"
+				},
+				{ "label": "Completed", "value": "completed" },
+				{ "label": "Cancelled", "value": "cancelled" },
+				{ "label": "Aborted", "value": "aborted" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"container_departed",
+			"container_arrived",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_location",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_location",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}

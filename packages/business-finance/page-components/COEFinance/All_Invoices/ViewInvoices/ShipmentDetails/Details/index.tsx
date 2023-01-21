@@ -1,12 +1,10 @@
 import React from 'react';
 import {useRouter} from '@cogoport/next';
-import {IcMPortArrow} from '@cogoport/icons-react';
-import {Tooltip} from '@cogoport/components';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
-import GetServiceInfo from '../../../../../commons/GetServiceInfo';
 import CargoDetailPills from '../cargo-details/index';
 import {DetailInterface} from '../../../../../commons/Interfaces/index';
+import PortDetails  from './PortDetails';
 
 interface Details {
 	orgId:string,
@@ -14,10 +12,9 @@ interface Details {
 	shipmentId:string,
 }
 const Details = ({orgId, dataList, shipmentId}:Details) => {
-	const {importer_exporter, shipment_type, pickup, drop}=dataList || {};
+	const {importer_exporter, shipment_type}=dataList || {};
 	const shipmentTypeName=shipment_type?.split('_')?.join(' ')?.toUpperCase();
 	const Router = useRouter();
-	const  ServiceIcon  = GetServiceInfo(shipment_type);
 
 return(
 <div>	
@@ -27,23 +24,7 @@ return(
 	</div>
 
 	<div className={styles.flex}>
-		<div className={styles.icon}>
-			<div>{ServiceIcon}</div> 
-			<div className={styles.shipmentType}>{shipmentTypeName || '-'}</div> 
-			</div>
-         <div>
-			 <div className={styles.postalData}>({pickup?.postal_code}){pickup?.country?.name}</div>
-			 <Tooltip content={pickup?.display_name}>
-			 <div className={styles.bold}>{pickup?.name}</div>
-			 </Tooltip>
-		 </div>
-		 <div className={styles.arrow}><IcMPortArrow/></div>
-		 <div>
-		 <div  className={styles.postalData}>({drop?.postal_code}){drop?.country?.name}</div>
-			 <Tooltip content={drop?.display_name}>
-			 <div className={styles.bold}>{drop?.name}</div>
-			 </Tooltip>
-		 </div>
+    <PortDetails data={dataList}/>
 	</div>
 
 	<div className={styles.tags}>

@@ -1,3 +1,11 @@
 .download {
 	cursor: pointer;
 }
+.List{
+   section{
+      header+div{
+         max-height: 600px;
+         overflow: scroll;
+      }
+   }
+}

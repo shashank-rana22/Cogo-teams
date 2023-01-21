@@ -1,0 +1,83 @@
+{
+	"name": "fcl_cfs_service",
+	"title": "Shipments",
+	"filter_controls": [
+		{
+			"label": "BL Number",
+			"name": "bl_number",
+			"type": "text"
+		},
+		{
+			"name": "port_id",
+			"label": "Port",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport"]
+				}
+			}
+		},
+		{
+			"name": "country_id",
+			"label": "Country ",
+			"multiple": false,
+			"sort": true,
+			"type": "select-2",
+			"optionsListKey": "countries"
+		},
+		{
+			"name": "container_size",
+			"label": "Container Size",
+			"type": "select-2",
+			"optionsListKey": "container-sizes",
+			"selectType": "pills"
+		},
+		{
+			"name": "container_type",
+			"label": "Container Type",
+			"type": "select-2",
+			"optionsListKey": "container-types"
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "freight"
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Customs cleared", "value": "customs_cleared" },
+				{ "label": "Confirmed by service provider", "value": "confirmed_by_service_provider" },
+				{
+					"label": "Awaiting service provider confirmation",
+					"value": "awaiting_service_provider_confirmation"
+				},
+				{ "label": "Completed", "value": "completed" },
+				{ "label": "Cancelled", "value": "cancelled" },
+				{ "label": "Aborted", "value": "aborted" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"customs_cleared",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "port",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_port",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}

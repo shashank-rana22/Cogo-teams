@@ -19,7 +19,7 @@ const Documents =({shipmentId=''}:DocumentsInterface)=>{
     const functions={
         DocumentTypeFunc: (item:any) => <p>{startCase(item?.document_type)}</p>,
         UploadedOnFunc: (item:any)=> <p>
-            {item?.uploaded_at ? formatDate(item?.uploaded_at, 'dd/MMM/yyyy',{},true) : null}
+            {item?.uploaded_at ? formatDate(item?.uploaded_at, 'dd MMM yy | hh:mm a',{},true) : null}
             </p>,
         viewFunc: (item:any)=>{
             return <> {item?.document_url ? <Button 
@@ -38,7 +38,7 @@ const Documents =({shipmentId=''}:DocumentsInterface)=>{
              </>},
     };
     return(
-        <div>
+        <div className={styles.List}>
              <List config={config}  itemData={documentData} functions={functions} loading={loading}/>
         </div>
     )
