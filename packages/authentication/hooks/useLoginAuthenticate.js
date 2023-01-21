@@ -18,7 +18,7 @@ const useLoginAuthenticate = () => {
 	} = useSelector((state) => state);
 	const { source = '' } = query || {};
 
-	const cogo_parent_auth_token = getCookie('cogo-parent-auth-token');
+	const cogo_parent_auth_token = getCookie('cogo-admin-auth-token');
 
 	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
@@ -47,7 +47,7 @@ const useLoginAuthenticate = () => {
 			});
 			if (!sessionData.hasError) {
 				if (sessionData?.data?.list?.length === 0) {
-					setCookie('cogo-parent-auth-token', 'expired', -1);
+					setCookie('cogo-admin-auth-token', 'expired', -1);
 					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
 				}
 				return;
@@ -146,7 +146,7 @@ const useLoginAuthenticate = () => {
 
 			const { parent_token } = (updateSession || {}).data || {};
 
-			setCookie('cogo-parent-auth-token', parent_token);
+			setCookie('cogo-admin-auth-token', parent_token);
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
 
 			if (source === 'add_account') {

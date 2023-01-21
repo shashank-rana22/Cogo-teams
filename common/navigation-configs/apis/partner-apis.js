@@ -535,9 +535,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api: 'create_channel_partner_persona',
-			access_type: 'private',
-			service_name: 'partner',
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	terms_and_conditons: [
@@ -2186,9 +2186,9 @@ const partner = {
 			feature      : 'inventory_management',
 		},
 		{
-			api: 'create_channel_partner_persona',
-			access_type: 'private',
-			service_name: 'partner',
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	support_crm: [
