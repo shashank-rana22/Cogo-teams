@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import {useSelector} from '@cogoport/store';
 import {  Toast } from '@cogoport/components';
@@ -13,7 +14,7 @@ interface ApproveRejectInterface {
 }
 
 const ApproveReject = ({collectionPartyId,remarksVal, lineItemsRemarks,modalData,setApprove, billId}:ApproveRejectInterface) => {
-   
+    const router = useRouter();
     const { user_data } = useSelector(({ profile }:any) => ({
 		user_data: profile || {},
 	}));
@@ -58,7 +59,8 @@ const ApproveReject = ({collectionPartyId,remarksVal, lineItemsRemarks,modalData
                 }
             })
             setApprove(false)
-            Toast.success('Rejected Successfully')
+            Toast.success(`${modalData}Successfully`)
+            router.push('/business-finance/coe-finance/all_invoices/purchase-view')
         }catch(error:any){
             console.log('error->',error);
             Toast.error(error?.message || 'Something went wrong');

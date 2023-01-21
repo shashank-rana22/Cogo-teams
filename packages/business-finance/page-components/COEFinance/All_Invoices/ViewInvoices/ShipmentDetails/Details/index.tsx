@@ -13,7 +13,6 @@ interface Details {
 }
 const Details = ({orgId, dataList, shipmentId}:Details) => {
 	const {importer_exporter, shipment_type}=dataList || {};
-	const shipmentTypeName=shipment_type?.split('_')?.join(' ')?.toUpperCase();
 	const Router = useRouter();
 
 return(

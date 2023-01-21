@@ -25,8 +25,6 @@ const usePurchaseViewStats= () => {
                 Toast.error("stats data not prasent");
             }
         };
-
-    console.log(statsData,'statsData');
     
 
     return {

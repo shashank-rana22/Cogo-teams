@@ -1,4 +1,4 @@
-import navigationMappings from './navigation-mappings';
+import navigationMappingAdmin from './navigation-mapping-admin';
 
 const getCondition = (urlItem) => {
 	const condition = {};
@@ -19,30 +19,25 @@ const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
 const getSideBarConfigs = (
 	userData,
 	dashboardUrls = [],
-	pinnedNavKeys = [],
 ) => {
 	const pNavs = userData?.permissions_navigations || {};
 
-	const modifiedPinnedNavKeys = pinnedNavKeys.filter((key) => Object.keys(navigationMappings).includes(key));
-
-	const filteredKeys = Object.keys(navigationMappings).filter(
-		(key) => !modifiedPinnedNavKeys.includes(key),
-	);
+	const filteredKeys = Object.keys(navigationMappingAdmin);
 
 	const getNavMappings = (navMappingKeys) => {
 		const nav_items = [];
 
 		(navMappingKeys || []).forEach((key) => {
-			const { showInNav = true } = navigationMappings?.[key] || {};
+			const { showInNav = true } = navigationMappingAdmin?.[key] || {};
 
 			if (
 				key
 				&& showInNav
-				&& (pNavs?.[key] || navigationMappings[key]?.options)
+				&& (pNavs?.[key] || navigationMappingAdmin[key]?.options)
 			) {
 				if (key === 'dashboards') {
 					nav_items.push({
-						...navigationMappings[key],
+						...navigationMappingAdmin[key],
 						options: dashboardUrls.map((urlItem) => ({
 							title     : urlItem.title,
 							type      : 'link',
@@ -51,8 +46,11 @@ const getSideBarConfigs = (
 							condition : getCondition(urlItem),
 						})),
 					});
-				} else if (navigationMappings[key]?.options) {
-					const allOpts = navigationMappings[key]?.options || [];
+				} else if (
+					navigationMappingAdmin[key]?.options
+					&& navigationMappingAdmin[key].isSubNavs
+				) {
+					const allOpts = navigationMappingAdmin[key]?.options || [];
 					const selectedSubNavs = Object.keys(pNavs).filter(
 						(nav) => nav.split('-')[0] === key,
 					);
@@ -63,12 +61,12 @@ const getSideBarConfigs = (
 					);
 					if (filteredOpts.length) {
 						nav_items.push({
-							...navigationMappings[key],
+							...navigationMappingAdmin[key],
 							options: filteredOpts,
 						});
 					}
 				} else if (pNavs?.[key]) {
-					nav_items.push(navigationMappings[key]);
+					nav_items.push(navigationMappingAdmin[key]);
 				}
 			}
 		});

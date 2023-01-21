@@ -24,14 +24,14 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
             return "BILL";
         } else if (filters?.billType === "CREDIT_NOTE") {
             return "CREDIT_NOTE";
-        } else if (filters?.billType === "REIMBERSEMENT") {
-            return "REIMBERSEMENT";
+        } else if (filters?.billType === "REIMBURSEMENT") { 
+            return "REIMBURSEMENT";
         }
         return undefined;
     };
 
     const showbillType =
-        filters?.billType === "PURCHASE" ? false : undefined;
+        filters?.billType === "PURCHASE" ? 'false' : undefined;
     const showProforma = filters?.billType === "PROFORMA" ? true : undefined;
 
     

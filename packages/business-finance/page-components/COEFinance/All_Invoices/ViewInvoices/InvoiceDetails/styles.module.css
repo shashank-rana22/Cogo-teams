@@ -24,6 +24,16 @@
   width: 2px;
   height: 36px;
 }
+.heading {
+  display: flex;
+  gap: 6px;
+}
+.cardField {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
 
 .cardFieldFirst {
   display: flex;
@@ -70,4 +80,12 @@
 
 .remarks {
   font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  gap: 8px;
+  align-items: center;
 }

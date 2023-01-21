@@ -55,13 +55,20 @@ function CreateRoleModal({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
+						size="md"
 						style={{ marginRight: 10 }}
 						themeType="secondary"
 						onClick={onChange}
 					>
 						Cancel
 					</Button>
-					<Button loading={loading} type="submit">Create</Button>
+					<Button
+						size="md"
+						loading={loading}
+						type="submit"
+					>
+						Create
+					</Button>
 				</Modal.Footer>
 			</form>
 		</Modal>

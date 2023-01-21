@@ -75,6 +75,11 @@ const business_finance = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_promotion_budget_transactions',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
 	],
 
 };

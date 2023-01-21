@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useEditRole from '../../../../hooks/useEditRole';
 
 import Edit from './edit';
+import styles from './styles.module.css';
 
 function EditRoleModal({ roleData, getRole }) {
 	const [show, setShow] = useState(false);
@@ -27,8 +28,8 @@ function EditRoleModal({ roleData, getRole }) {
 
 	return (
 		<section>
-			<Button onClick={() => onClick()}>
-				<IcMEdit size={1.2} />
+			<Button size="md" onClick={() => onClick()}>
+				<IcMEdit style={{ marginRight: 5 }} size={1.2} />
 				Edit
 			</Button>
 
@@ -37,6 +38,7 @@ function EditRoleModal({ roleData, getRole }) {
 				position="basic"
 				onClose={() => setShow(false)}
 				onOuterClick={onOuterClick}
+				className={styles.modal_container}
 			>
 				<Modal.Header title={(<h2>Edit Role </h2>)} />
 				<form onSubmit={handleSubmit(editRole)}>
@@ -49,6 +51,7 @@ function EditRoleModal({ roleData, getRole }) {
 					</Modal.Body>
 					<Modal.Footer>
 						<Button
+							size="md"
 							type="submit"
 							disabled={editRoleApi.loading}
 							id="edit_role_btn"

@@ -12,6 +12,7 @@ import RenderRibbon from './RenderData/RenderRibbon/index'
 import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index'
 import SegmentedFilters from './SegmentedFilters/index'
 import { GenericObject} from '../../../commons/Interfaces/index'
+import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index'
 import {fieldProps} from './interfaces/index'
 import  PURCHASE_VIEW_CONFIG  from "../..//configurations/PURCHASE_VIEW_LIST";
 interface itemProps {
@@ -50,10 +51,9 @@ const [sort, setSort] = useState({});
      setCurrentTab,
     }=useGetPurchaseViewList({filters,setFilters,sort});
 
-  const handleChange =(itemData:any)=>{
-    router.push(`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}&status=${itemData?.status}`);
   
-  }   
+  
+  
 
     const functions:any = {
       renderStatus: (itemData:itemProps) => (
@@ -71,12 +71,12 @@ const [sort, setSort] = useState({});
       renderRemarks: (itemData:itemProps)=>(
         <RenderRemarks item={itemData} />
       ),
-      renderViewMore : (itemData:fieldProps)=>(
-        <Button size="xs" themeType="secondary" onClick={()=>{handleChange(itemData)}}>View Invoice</Button>
+      renderViewMore : (itemData:itemProps)=>(
+        <RenderViewMoreButton itemData={itemData}/>
       ),
-      renderRibbon: (itemData:itemProps)=>(
-        <RenderRibbon item={itemData} />
-      ),
+      // renderRibbon: (itemData:itemProps)=>(
+      //   <RenderRibbon item={itemData} />
+      // ),
       renderUrgencyTag:(itemData:itemProps)=>(
         <RenderUrgencyTag item={itemData} />
       )

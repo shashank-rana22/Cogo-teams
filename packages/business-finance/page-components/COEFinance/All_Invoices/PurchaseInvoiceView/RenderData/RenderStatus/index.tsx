@@ -22,7 +22,6 @@ function RenderStatus ({ item}:Props)  {
 				<div className={styled.ribbon}>Urgent</div>
 			</div> */}
 			
-		
 	    </div>
 	);
 };

@@ -107,7 +107,7 @@ const PortDetails = ({ data , showDate = false }:Props) => {
 	
 						{showDate ? (
 							<div className={styles.Status}>
-								Status: <div className={styles.State}>{startCase(data?.state)}</div>
+								Status: <div className={styles.State}>{startCase(data?.state || '')}</div>
 							</div>
 						) : null}
 					</div>

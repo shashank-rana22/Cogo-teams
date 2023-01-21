@@ -15,7 +15,7 @@ interface UseSelectorProps {
 }
 
 interface AllParams {
-    jobs?: string;
+    serial_id?:string;
     pending_approval?: string;
 }
 
@@ -33,7 +33,6 @@ const useShipmentIdView = (allParams?: {}) => {
                 url: "list_shipments",
                 method: "get",
             },
-            { autoCancel: false }
         );
     
 
