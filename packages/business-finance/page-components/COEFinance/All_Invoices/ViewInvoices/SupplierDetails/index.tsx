@@ -125,7 +125,14 @@ const SupplierDetails = ({
 
         <div className={styles.accountDetails}>
           <div className={styles.accounts}>
-            <Tooltip content="description here...">
+            <Tooltip
+              content={
+                <div style={{ fontSize: "10px" }}>
+                  This amount is the overall outstanding Cogoport has against
+                  the vendor.
+                </div>
+              }
+            >
               <div className={styles.tooltip}>
                 <IcMInfo />
               </div>
@@ -145,7 +152,14 @@ const SupplierDetails = ({
             </div>
           </div>
           <div className={styles.accounts}>
-            <Tooltip content="description here...">
+            <Tooltip
+              content={
+                <div style={{ fontSize: "10.3px" }}>
+                  This amount is the overall outstanding the vendor has against
+                  Cogoport. (Freight Forwarders etc.)
+                </div>
+              }
+            >
               <div className={styles.tooltip}>
                 <IcMInfo />
               </div>

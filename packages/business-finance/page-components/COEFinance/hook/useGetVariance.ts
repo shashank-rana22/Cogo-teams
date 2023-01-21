@@ -20,7 +20,7 @@ const useGetVariance = ({ collectionPartyId }:useGetVarianceInterface) => {
 	const getVaraince = async () => {
 		try {
 			const payload = {
-				collection_party_id: '17d34106-8f62-475f-8a75-fab213193ad4',
+				collection_party_id: collectionPartyId,
 			};
 
 			const res = await trigger({ data: payload });
