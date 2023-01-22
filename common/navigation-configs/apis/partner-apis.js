@@ -5743,6 +5743,16 @@ const partner = {
 			access_type: 'private',
 			service_name: 'sage',
 		},
+		{
+			api: 'list_communication_templates',
+			access_type: 'private',
+			service_name: 'communication',
+		},
+		{
+			api: 'send_demand_notice_to_prelegal_accounts',
+			access_type: 'private',
+			service_name: 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
