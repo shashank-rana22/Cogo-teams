@@ -90,6 +90,12 @@ interface PickupDropInt{
 	display_name:string,
 	name:string
 }
+interface PortDetailsInt{
+	port_code?:string|number,
+	country?:{name?:string},
+	display_name?:string,
+	name?:string
+}
 
 export interface DetailInterface{
 	service_type?:string,
@@ -122,10 +128,6 @@ export interface DetailInterface{
 	shipping_line?:{business_name:string},
 	preferred_shipping_line?:{business_name:string},
 	state?:string,
-	origin_port?:PortInterface,
-	destination_port?:PortInterface,
-	origin_main_port?:PortInterface,
-	destination_main_port?:PortInterface,
 	origin_location?:PortInterface,
 	container_handover_location?:PortInterface,
 	container_pickup_location?:PortInterface,
@@ -154,7 +156,11 @@ export interface DetailInterface{
     importer_exporter:IEInterface,
 	shipment_type:string,
 	pickup:PickupDropInt,
-	drop:PickupDropInt
+	drop:PickupDropInt,
+	origin_port?: PortDetailsInt,
+	origin_main_port?: PortDetailsInt,
+	destination_port?: PortDetailsInt,
+	destination_main_port?: PortDetailsInt
 }
 export interface RemarksValInterface{
 	collectionPartyRemark:string,

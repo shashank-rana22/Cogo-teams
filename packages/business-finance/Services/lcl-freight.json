@@ -1,0 +1,94 @@
+{
+	"name": "lcl_freight_service",
+	"title": "Shipments",
+	"description": "Manage all your Shipments at a single place by viewing all your new bookings, completing pending tasks for each shipment, communicating with right stakeholders through comments and submitting invoices",
+	"filter_controls": [
+		{
+			"label": "BL Number",
+			"name": "bl_number",
+			"type": "text"
+		},
+		{
+			"name": "origin_port_id",
+			"label": "Origin Port",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport"]
+				}
+			}
+		},
+		{
+			"name": "origin_country_id",
+			"label": "Origin Country ",
+			"multiple": false,
+			"sort": true,
+			"type": "select-2",
+			"optionsListKey": "countries"
+		},
+		{
+			"name": "destination_port_id",
+			"label": "Destination Location",
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport"]
+				}
+			}
+		},
+		{
+			"name": "destination_country_id",
+			"label": "Destination Country",
+			"type": "select-2",
+			"optionsListKey": "countries",
+			"sort": true,
+			"multiple": false
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "lcl_freight",
+			"multiple": false
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Cargo carted in", "value": "cargo_carted_in" },
+				{ "label": "Cargo Stuffed", "value": "cargo_stuffed" },
+				{ "label": "Vessel departed", "value": "vessel_departed" },
+				{ "label": "Vessel arrived", "value": "vessel_arrived" },
+				{ "label": "Cargo handed over", "value": "cargo_handed_over" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"vessel_arrived",
+			"containers_gated_out",
+			"vessel_departed",
+			"containers_gated_in",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_pincode",
+		"origin_port": "origin_port",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_port",
+		"destination_drop": "destination_pincode",
+		"address": {
+			"origin_port": "console_point",
+			"destination_port": "deconsole_point"
+		}
+	},
+	"commnets": { "emptyContent": "" }
+}

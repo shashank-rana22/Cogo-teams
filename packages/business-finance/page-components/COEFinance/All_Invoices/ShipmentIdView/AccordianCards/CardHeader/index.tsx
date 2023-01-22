@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TabSelect from "../../../../../commons/TabSelect/index";
 import getFormattedPrice from "../../../../../commons/utils/getFormattedPrice";
+import useGetWallet from "../../../../hook/useGetWallet";
 import styles from "./styles.module.css";
 
 interface propsType {
