@@ -56,24 +56,25 @@ export const FILTERS : ControlProps[]=[
             {
                 label: 'Invoice Date',
                 name: 'billDate',
-                type: 'datepicker',
+                type: 'singleDateRange',
                 placeholder: 'Created At',
                 span: 3.5,
             },
             {
                 label: 'Payment Due Date',
                 name: 'dueDate',
-                type: 'datepicker',
+				type: 'singleDateRange',
                 placeholder: 'Invoice Date',
                 span: 3.5,
             },
             {
                 label: 'Last Modified Date',
                 name: 'updatedDate',
-                type: 'datepicker',
+                type: 'singleDateRange',
                 placeholder: 'Last Modified Date',
                 span: 3.5,
-            }
+            },
+			
         ],
     },
 	// {

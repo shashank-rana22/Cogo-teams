@@ -7,6 +7,7 @@ import {
     MultiSelect,
     Tooltip,
     Datepicker,
+    SingleDateRange,
 } from "@cogoport/components";
 import React, { CSSProperties, useState } from "react";
 import freightMapping from "../../Constants/freight-mappings";
@@ -208,6 +209,16 @@ const Element = ({
                         {...rest}
                     />
                 );
+                case "singleDateRange":
+                    return (
+                        <SingleDateRange
+                            name="date"
+                            value={value as Date}
+                            style={style as CSSProperties}
+                            {...rest}
+                        />
+                    );
+                
             case "serviceType":
                 return (
                     <div className={className} {...rest}>

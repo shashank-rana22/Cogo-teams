@@ -4,10 +4,10 @@
   .ribbon {
     --f: 9px; /* control the folded part */
     --r: 8px; /* control the ribbon shape */
-    --t: -17px; /* the top offset */
+    --t: -19px; /* the top offset */
 
     position: absolute;
-    inset: var(--t) calc(-6 * var(--f)) auto auto;
+    inset: var(--t) calc(-7 * var(--f)) auto auto;
     padding: 0 10px var(--f) calc(10px + var(--r));
     clip-path: polygon(
       0 0,

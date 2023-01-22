@@ -78,7 +78,7 @@ function List({
                     />
                 ))}
             </div>
-            {showPagination && (
+        {showPagination && ( 
                 <div>
                     {itemData?.totalRecords && (
                         <div className={styles.pagination_container}>
@@ -87,12 +87,12 @@ function List({
                                 currentPage={page}
                                 totalItems={itemData?.totalRecords}
                                 pageSize={pageSize}
-                                handlePageChange={handlePageChange}
+                                onPageChange={handlePageChange}
                             />
                         </div>
                     )}
                 </div>
-            )}
+           )} 
         </section>
     );
 }

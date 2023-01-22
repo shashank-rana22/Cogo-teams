@@ -29,7 +29,7 @@ function Filter({
 			onChange : (val:string) => {
 				let value:string;					
 				if (type === 'input') value = val;
-				else if (type === 'datepicker') value = val;
+				else if (type === 'datepicker'||type==='singleDateRange') value = val;
 				else value = val;
 				setFilters((prev:object) => ({
 					...prev,
