@@ -64,22 +64,27 @@ const useLoginAuthenticate = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const redirectFunction = () => {
+		const configs = redirections(profile);
+
+		if (configs?.href?.includes('/v2')) {
+			const replaceHref = configs?.href?.replace('/v2', '');
+			const replaceAs = configs?.as?.replace('/v2', '');
+			router.push(replaceHref?.href, replaceAs?.as);
+		}
+		if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+			// eslint-disable-next-line no-undef
+			window.location.href = `/${profile?.partner?.id}${configs.href}`;
+		} else {
+			router.push(configs.href, configs.as);
+		}
+	};
+
 	useEffect(() => {
 		if (Object.keys(profile).length > 0 && source !== 'add_account') {
-			const configs = redirections(profile);
-
-			if (configs?.href?.includes('/v2')) {
-				const replaceHref = configs?.href?.replace('/v2', '');
-				const replaceAs = configs?.as?.replace('/v2', '');
-				router.push(replaceHref?.href, replaceAs?.as);
-			}
-			if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
-				// eslint-disable-next-line no-undef
-				window.location.href = `/${profile?.partner?.id}${configs.href}`;
-			} else {
-				router.push(configs.href, configs.as);
-			}
+			redirectFunction();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [profile, router, source]);
 
 	const onSubmit = async (values, e) => {
@@ -144,9 +149,7 @@ const useLoginAuthenticate = () => {
 			dispatch(setProfileState(res.data));
 
 			if (source === 'add_account') {
-				// eslint-disable-next-line no-undef
-				window.location.href = '/';
-				return;
+				redirectFunction();
 			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
