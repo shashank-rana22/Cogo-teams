@@ -149,7 +149,9 @@ const useLoginAuthenticate = () => {
 			dispatch(setProfileState(res.data));
 
 			if (source === 'add_account') {
-				redirectFunction();
+				// eslint-disable-next-line no-undef
+				window.location.href = '/';
+				return;
 			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
