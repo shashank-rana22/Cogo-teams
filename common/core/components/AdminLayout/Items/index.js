@@ -53,6 +53,7 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
 			)}
+
 			<Element />
 			<span>
 				{item.title}
@@ -65,7 +66,6 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 					className={styles.pin}
 					onClick={(e) => {
 						e.stopPropagation();
-						// setShowSubNav(!showSubNav);
 						if (!newPinUnpinLoading) {
 							pinUnpinNavs(!isPinned, item, setPinLoadingState);
 						}
@@ -77,6 +77,7 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 
 		</div>
 	);
+
 	return (
 		<div className={showSubNav ? styles.outer_container : ''}>
 			<li key={item.title} className={styles.list_item}>

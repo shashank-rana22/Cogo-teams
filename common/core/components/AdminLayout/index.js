@@ -1,18 +1,17 @@
 import cl from '@cogoport/components/src/utils/classname-processor';
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
-import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Navbar from './Navbar';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
+import useFetchPinnedNavs from './useFetchPinnedNavs';
 
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
 	const [showMobileNavbar, setShowMobileNavbar] = useState(false);
-	const [pinnedNavKeys, setPinnedNavKeys] = useState([]);
 
 	const {
 		user_data,
@@ -22,23 +21,11 @@ function AdminLayout({
 
 	const { user: { id: user_id = '' }, partner: { id: partner_id = '', partner_user_id = '' } } = user_data;
 
-	const [{ loading: pinListLoading = false }, trigger] = useRequest({
-		url    : 'list_partner_user_settings',
-		method : 'GET',
-		params : { filters: { user_id: user_data.id, partner_id } },
-	}, { manual: false });
-
-	const fetchPinnedNavs = async () => {
-		const response = await trigger({ params: { filters: { user_id, partner_id } } });
-
-		setPinnedNavKeys(
-			(response.data?.list || [])
-				.map((setting) => setting.setting_config.navigation_preferences)
-				.flat(),
-		);
-	};
-
-	useEffect(() => { fetchPinnedNavs(); }, []);
+	const {
+		pinnedNavKeys = [],
+		setPinnedNavKeys = () => {},
+		pinListLoading = false,
+	} = useFetchPinnedNavs({ user_id, partner_id });
 
 	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });
 

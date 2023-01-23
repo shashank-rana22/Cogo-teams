@@ -5,6 +5,7 @@
 	margin: 0;
 	overflow-y: auto;
 	list-style-type: none;
+	scroll-behavior: smooth;
 }
 
 .sticky_pins {
@@ -160,7 +161,7 @@
 }
 
 .has_options {
-	margin-left: -10px;
+	padding-left: 6px;
 }
 
 .pin {
@@ -273,6 +274,14 @@
 
 .line {
 	height: 1px;
+	background-color: #e0e0e0;
+}
+
+.sticky_line {
+	z-index: 2;
+	height: 1px;
 	margin-bottom: 8px;
+	position: sticky;
+	top: 39px;
 	background-color: #e0e0e0;
 }

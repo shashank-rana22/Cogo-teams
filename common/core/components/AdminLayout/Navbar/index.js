@@ -1,8 +1,7 @@
 import { Input } from '@cogoport/components';
 import cl from '@cogoport/components/src/utils/classname-processor';
 import { IcMSearchdark, IcCPin } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -12,6 +11,7 @@ import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
+import useAddRemovePin from './useAddRemovePIn';
 
 function Navbar({
 	className,
@@ -23,6 +23,8 @@ function Navbar({
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
 }) {
+	const ref = useRef(null);
+
 	const userBasedNavView = formatUserBasedNavView(nav);
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
@@ -47,30 +49,15 @@ function Navbar({
 		[],
 	);
 
-	const [{ loading: newPinUnpinLoading = false }, trigger] = useRequest({
-		url    : 'create_partner_user_setting',
-		method : 'POST',
-	}, { manual: false });
+	const {
+		newPinUnpinLoading = false,
+		pinUnpinNavs = () => {},
+	} = useAddRemovePin({ partner_user_id, setPinnedNavKeys });
 
-	const pinUnpinNavs = async (action, navItem, setPinLoadingState) => {
-		setPinLoadingState(true);
+	const scrollToPinnedList = (scrollRef) => {
+		const container = scrollRef.current;
 
-		const payload = {
-			partner_user_id,
-			setting_config : { navigation_preferences: [navItem.key] },
-			setting_type   : 'navigation_preference',
-			action_name    : action ? 'add' : 'remove',
-		};
-
-		await trigger({ data: payload });
-
-		if (action) {
-			setPinnedNavKeys((prevNavKeys) => [...prevNavKeys, navItem.key]);
-		} else {
-			setPinnedNavKeys((prevNavKeys) => prevNavKeys.filter((navKey) => navKey !== navItem.key));
-		}
-
-		setPinLoadingState(false);
+		container.scrollTop = 0;
 	};
 
 	return (
@@ -103,11 +90,16 @@ function Navbar({
 						/>
 					</div>
 
-					<ul className={styles.list_container}>
+					<ul ref={ref} className={styles.list_container}>
 						<div className={styles.sticky_pins}>
 							<div className={styles.line} />
 
-							<div className={`${styles.pin_header} ${styles.list_item_inner} ${styles.list_item}`}>
+							<div
+								role="button"
+								tabIndex={0}
+								onClick={() => scrollToPinnedList(ref)}
+								className={`${styles.list_item_inner} ${styles.list_item} ${styles.pin_header}`}
+							>
 								<IcCPin />
 								<span>
 									{(!pinListLoading && (pinnedListItems || []).length === 0) ? 'No Pins Found'
@@ -116,20 +108,20 @@ function Navbar({
 								</span>
 							</div>
 
-							{(pinnedListItems || []).map((item) => (
-								<Items
-									key={item.key}
-									item={item}
-									resetSubnavs={resetSubnavs}
-									pinUnpinNavs={pinUnpinNavs}
-									newPinUnpinLoading={newPinUnpinLoading}
-									isPinned
-								/>
-							))}
-
-							<div className={styles.line} />
-
 						</div>
+
+						{(pinnedListItems || []).map((item) => (
+							<Items
+								key={item.key}
+								item={item}
+								resetSubnavs={resetSubnavs}
+								pinUnpinNavs={pinUnpinNavs}
+								newPinUnpinLoading={newPinUnpinLoading}
+								isPinned
+							/>
+						))}
+
+						<div className={styles.sticky_line} />
 
 						{(listItems || []).map((item) => (
 							<Items
