@@ -81,7 +81,6 @@ function Login() {
 						{source === 'add_account'
 						&& (
 							<Button
-								loading={loading}
 								themeType="accent"
 								onClick={() => router.back()}
 								className={styles.go_back}
