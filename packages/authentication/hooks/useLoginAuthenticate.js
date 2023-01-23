@@ -40,29 +40,29 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	});
 
-	// const getUserSessionMappings = async () => {
-	// 	try {
-	// 		const sessionData = await triggerUserSessionMapping({
-	// 			params: { parent_user_session_id: cogo_admin_auth_token },
-	// 		});
-	// 		if (!sessionData.hasError) {
-	// 			if (sessionData?.data?.list?.length === 0) {
-	// 				setCookie('cogo-admin-auth-token', 'expired', -1);
-	// 				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
-	// 			}
-	// 			return;
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
+	const getUserSessionMappings = async () => {
+		try {
+			const sessionData = await triggerUserSessionMapping({
+				params: { parent_user_session_id: cogo_admin_auth_token },
+			});
+			if (!sessionData.hasError) {
+				if (sessionData?.data?.list?.length === 0) {
+					setCookie('cogo-admin-auth-token', 'expired', -1);
+					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+				}
+				return;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-	// useEffect(() => {
-	// 	if (source !== 'add_account') {
-	// 		getUserSessionMappings();
-	// 	}
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
+	useEffect(() => {
+		if (source !== 'add_account') {
+			getUserSessionMappings();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const redirectFunction = () => {
 		const configs = redirections(profile);
