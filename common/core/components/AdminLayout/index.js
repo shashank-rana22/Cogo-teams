@@ -40,7 +40,7 @@ function AdminLayout({
 
 	useEffect(() => { fetchPinnedNavs(); }, []);
 
-	const configs = getSideBarConfigs(user_data, pinnedNavKeys);
+	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });
 
 	const { nav_items = {} } = configs || {};
 

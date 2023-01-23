@@ -16,11 +16,11 @@ const getCondition = (urlItem) => {
 
 const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
 
-const getSideBarConfigs = (
+const getSideBarConfigs = ({
 	userData,
 	dashboardUrls = [],
 	pinnedNavKeys = [],
-) => {
+}) => {
 	const pNavs = userData?.permissions_navigations || {};
 
 	const modifiedPinnedNavKeys = pinnedNavKeys.filter((key) => Object.keys(navigationMappingAdmin).includes(key));
