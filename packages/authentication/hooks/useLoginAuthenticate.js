@@ -90,7 +90,7 @@ const useLoginAuthenticate = () => {
 	const onSubmit = async (values, e) => {
 		e.preventDefault();
 		try {
-			let check_duplicate_email = false;
+			let is_already_added_email = false;
 			let user_data = {};
 
 			if (cogo_admin_auth_token) {
@@ -110,21 +110,12 @@ const useLoginAuthenticate = () => {
 						return null;
 					});
 
-					check_duplicate_email = user_data?.user_active || false;
+					is_already_added_email = !!user_data?.user_active;
 				}
 			}
 
-			if (check_duplicate_email) {
-				if (source !== 'add_account') {
-					const { user_session_id = '' } = user_data || {};
-					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_session_id);
-					// eslint-disable-next-line no-undef
-					window.location.reload();
-				}
-
-				if (source === 'add_account') {
-					Toast.error('Cannot login with already active account');
-				}
+			if (is_already_added_email && source === 'add_account') {
+				Toast.error('Cannot login with already active account');
 
 				return;
 			}
