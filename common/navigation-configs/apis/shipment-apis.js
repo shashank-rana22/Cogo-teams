@@ -1195,11 +1195,6 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'trade',
 	},
-	{
-		api          : 'create_awb_inventory',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
 ];
 
 export default apis;
