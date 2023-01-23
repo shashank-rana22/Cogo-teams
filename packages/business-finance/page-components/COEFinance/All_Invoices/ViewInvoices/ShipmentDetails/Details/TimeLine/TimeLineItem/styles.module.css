@@ -38,6 +38,17 @@
 	}
 }
 
+.pending {
+	z-index: 2;
+	background: #fff;
+	border-color: #e0e0e0;
+}
+
+.complete {
+	background: red;
+	border:none;
+}
+
 .FilledCircle {
 	width: 8px;
 	height: 8px;
@@ -92,6 +103,10 @@
 	&.min_width {
 		min-width: 100%;
 	}
+}
+
+.min_width {
+	min-width: 100%;
 }
 
 .LineGrey {
