@@ -52,7 +52,7 @@ const useGetAuthorizationChecked = () => {
 						}
 						if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 							// eslint-disable-next-line no-undef
-							window.location.href = `/${profile?.partner?.id}${configs.href}`;
+							window.location.href = `/${profile?.partner?.id}${configs.as || configs.href}`;
 						} else {
 							await push(configs.href, configs.as);
 						}

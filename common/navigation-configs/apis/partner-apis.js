@@ -5738,6 +5738,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api: 'get_cc_communication_stats',
+			access_type: 'private',
+			service_name: 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -7610,6 +7615,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api: 'create_communication_template_suggestions',
+			access_type: 'private',
+			service_name: 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -8789,6 +8799,28 @@ const partner = {
 			api          : 'create_organization_setting',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+	],
+	rail_freight: [
+		{
+			api: 'list_rail_domestic_freight_rates',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
+		},
+		{
+			api: 'create_rail_domestic_freight_rate',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
+		},
+		{
+			api: 'create_rail_domestic_freight_rate_bulk_operation',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
+		},
+		{
+			api: 'update_rail_domestic_freight_rate',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
 		},
 	],
 	voice_call: [
