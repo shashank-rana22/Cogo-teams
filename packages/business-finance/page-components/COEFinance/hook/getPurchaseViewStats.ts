@@ -18,7 +18,7 @@ const usePurchaseViewStats= () => {
             try {
                 await statsTrigger({
                     params:{
-                        // id:serviceProviderDetail?.organizationId,
+                        jobTypeShipment:'false'
                     }
                 });
             } catch (err) {

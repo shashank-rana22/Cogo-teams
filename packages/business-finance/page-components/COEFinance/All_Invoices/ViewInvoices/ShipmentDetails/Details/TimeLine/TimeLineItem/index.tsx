@@ -1,6 +1,7 @@
 import React from 'react';
-import { Tooltip } from '@cogoport/components';
 import {formatDate} from '../../../../../../../commons/utils/formatDate';
+import startCase from "@cogoport/utils/src/utilities/startCase";
+import { Tooltip } from '@cogoport/components';
 import {IcMFtick} from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
@@ -53,13 +54,13 @@ const TimeLineItem = ({
 		return (
 			<>
 				<div className={styles.ToolTipText}>
-					Milestone:
-					<div className={styles.tooltipItem}>{item?.milestone}</div>
+					Milestone
+					<div className={styles.tooltipItem}>{startCase(item?.milestone)}</div>
 				</div>
 
 				{item?.completed_on ? (
-					<div className={styles.ToolTipText}>
-						{isComplete ? 'Completed On:' : 'Expected:'}
+				<div className={styles.ToolTipText}>
+						{isComplete ? 'Completed On' : 'Expected'}
 
 						<div className={styles.tooltipItem}>
 							{formatDate(item?.completed_on,"dd-MMM-yy",{},true)}
@@ -77,40 +78,45 @@ const TimeLineItem = ({
 					<Tooltip
 						placement="top"
 						content={content()}
+						theme="light"
+						animation="perspective"
 					>
 						<div className={styles.Flex}>
-							{item?.completed_on && item?.is_sub && <div className={styles.FilledCircle}/>}
-							{!item?.completed_on && item?.is_sub && <div className={styles.DotCircle}/>}
-							{item?.completed_on && !item?.is_sub &&  <IcMFtick fill='red' width={20} height={20}/>}
-							{!item?.completed_on && !item?.is_sub &&  <div className={styles.BorderedCircle}/>}
+							{!item?.is_sub || isLast ? (
+								<>
+								{className==='complete' &&  item?.completed_on && !item?.is_sub ? (
+									<IcMFtick color="red" height={20} width={20}/>
+								):(
+									<div className={`${styles.BorderedCircle} ${styles[className]}`} />
+								)}
+								</>
+							) : (
+								<div className={`${styles.FilledCircle} ${styles[className]}`} />
+							)}
 						</div>
 					</Tooltip>
 
-					{!isLast && item?.completed_on ? (
-						<div
-							className={`${styles.Line} ${className} ${minWidthAllow ? 'min_width' : ''}`}
-						/>
-					) : null}
-
-                    {!isLast && !item?.completed_on ? (
-						<div
-							className={`${styles.LineGrey} ${className} ${minWidthAllow ? 'min_width' : ''}`}
-						/>
-					) : null}
+                    {!isLast ? (
+                           <>
+                           {minWidthAllow ? <div className={`${styles.Line} ${styles[className]} ${styles.min_width}`} />
+                              :<div className={`${styles.Line} ${styles[className]}`}/>
+                           }
+                           </>
+                    ):null}
 
 					{!item?.is_sub || isLast ? (
-						<div className={`${styles.MileStoneDescription } ${isLast ? 'last' : ''}`}>
-							<div className={`${styles.Desc} ${className}`}>{item.milestone}</div>
+                        <div className={isLast ? `${styles.MileStoneDescription} ${styles.last}` :`${ styles.MileStoneDescription}`}>
+                            <div className={className === 'pending' ? `${styles.Desc} ${styles[className]}` : styles.Desc}>{startCase(item.milestone)}</div>
 
 							{item?.completed_on ? (
-								<div className={`${styles.Desc} ${className}`}>
-									{item?.completed_on}
+								 <div className={className === 'pending' ? `${styles.Desc} ${styles[className]}` : styles.Desc}>
+									{formatDate(item.completed_on,"dd-MMM-yy",{},true)}
 								</div>
 							) : null}
-						</div>
-					) : null}
+                            </div>
+					) : null }
 				</div>
-			) :null}
+			) : null}
 		</>
 	);
 };
