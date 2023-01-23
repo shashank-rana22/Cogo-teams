@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { getCookie, setCookie } from '@cogoport/utils';
+import { getCookie, isEmpty, setCookie } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import redirections from '../utils/redirections';
