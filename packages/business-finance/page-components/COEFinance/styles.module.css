@@ -1,75 +1,74 @@
 .tab_panel_dashboard {
-    background-color: red;
+  background-color: red;
 }
 
-
-.tabsContainer{
-    button{
-        border-right:1px solid #E0E0E0;
-        background:white;
-    }
+.tabsContainer {
+  button {
+    border-right: 1px solid #e0e0e0;
+    background: white;
+  }
 }
 
 .spacebetween {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    @media (max-width: 1120px) {
-        flex-direction: column;
-    }
+  @media (max-width: 1120px) {
+    flex-direction: column;
+  }
 }
 
 .flex {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .heading {
-    width: max-content;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 27px;
-    color: #333;
-    border-bottom: 2px solid black;
+  width: max-content;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  color: #333;
+  border-bottom: 2px solid black;
 }
 
 .stat {
-    font-size: 36px;
-    font-weight: 500;
-    line-height: 54px;
-    color: #ed3726;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 54px;
+  color: #ed3726;
 }
 
 .month {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #333;
 }
 
 .totalstats {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 80px 80px 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 80px 0 60px;
 }
 
 .tabStyle {
-    font-weight: 500;
-    font-size: 16px;
-    background: white;
+  font-weight: 500;
+  font-size: 16px;
+  background: white;
 }
 .headerStyle {
-    flex-direction: column;
-    font-weight: 600;
-    font-size: 28px;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 28px;
 }
 .border {
-    border-radius: 4px;
-    height: 4px;
-    width: 96px;
-    background: #ed3726;
+  border-radius: 4px;
+  height: 4px;
+  width: 96px;
+  background: #ed3726;
 }
 .header {
-    padding-bottom: 16px;
+  padding-bottom: 16px;
 }

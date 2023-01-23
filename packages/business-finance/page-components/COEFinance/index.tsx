@@ -14,13 +14,6 @@ const CoeFinance = () => {
   const { push, query } = useRouter();
   const [currentTab, setCurrentTab] = useState("");
   const [activeTab, setActiveTab] = useState(query.active_tab || "dashboard");
-  const { view, active_tab } = query;
-  const handleTab = (activeTab: string) => {
-    push(
-      "/business-finance/coe-finance/[active_tab]",
-      `/business-finance/coe-finance/${activeTab}`
-    );
-  };
 
   const OPTIONS = [
     {

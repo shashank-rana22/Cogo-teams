@@ -106,19 +106,16 @@ const POCDetails = ({ itemData }: Props) => {
                       margin="5px 0px 14px 25px"
                       height="45px"
                       width="492px"
-                      borderRadius="4px"
                     />
                     <Placeholder
                       margin="5px 0px 14px 25px"
                       height="45px"
                       width="492px"
-                      borderRadius="4px"
                     />
                     <Placeholder
                       margin="5px 0px 14px 25px"
                       height="45px"
                       width="492px"
-                      borderRadius="4px"
                     />
                   </>
                 ) : (
