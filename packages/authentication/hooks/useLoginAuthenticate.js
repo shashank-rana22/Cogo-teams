@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { getCookie, isEmpty, setCookie } from '@cogoport/utils';
+import { getCookie, setCookie } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import redirections from '../utils/redirections';
@@ -67,6 +67,7 @@ const useLoginAuthenticate = () => {
 	const redirectFunction = () => {
 		const configs = redirections(profile);
 
+		console.log(configs);
 		if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');
@@ -145,12 +146,12 @@ const useLoginAuthenticate = () => {
 			setCookie('cogo-admin-auth-token', parent_token);
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
 
+			const res = await triggerSession();
+			dispatch(setProfileState(res.data));
+
 			if (source === 'add_account') {
 				redirectFunction();
 			}
-
-			const res = await triggerSession();
-			dispatch(setProfileState(res.data));
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
 		}
