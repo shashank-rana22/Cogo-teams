@@ -13,12 +13,9 @@ const useLoginAuthenticate = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
-	const {
-		general: { query = {} },
-	} = useSelector((state) => state);
-	const { source = '' } = query || {};
+	const { source = '' } = router?.query || {};
 
-	const cogo_admin_auth_token = getCookie('cogo-admin-auth-token');
+	const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
 
 	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
@@ -47,7 +44,7 @@ const useLoginAuthenticate = () => {
 			});
 			if (!sessionData.hasError) {
 				if (sessionData?.data?.list?.length === 0) {
-					setCookie('cogo-admin-auth-token', 'expired', -1);
+					setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
 					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
 				}
 				return;
@@ -142,7 +139,7 @@ const useLoginAuthenticate = () => {
 
 			const { parent_token } = (updateSession || {}).data || {};
 
-			setCookie('cogo-admin-auth-token', parent_token);
+			setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, parent_token);
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
 
 			const res = await triggerSession();
@@ -162,7 +159,6 @@ const useLoginAuthenticate = () => {
 		onSubmit,
 		loading: loginLoading || sessionLoading || updateSessionMappingLoading || userSessionMappingLoading,
 		source,
-		router,
 	};
 };
 
