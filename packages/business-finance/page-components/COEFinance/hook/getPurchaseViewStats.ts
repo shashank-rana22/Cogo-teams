@@ -1,3 +1,4 @@
+import {useEffect}  from 'react'
 import {useRequestBf } from "@cogoport/request";
 import { Toast } from '@cogoport/components';
 
@@ -18,13 +19,17 @@ const usePurchaseViewStats= () => {
             try {
                 await statsTrigger({
                     params:{
-                        jobTypeShipment:'false'
+                        jobTypeShipment: 'false',
                     }
                 });
             } catch (err) {
                 Toast.error("stats data not prasent");
             }
         };
+    
+    useEffect(() => {
+        getStatsData();
+    }, [])
     
 
     return {

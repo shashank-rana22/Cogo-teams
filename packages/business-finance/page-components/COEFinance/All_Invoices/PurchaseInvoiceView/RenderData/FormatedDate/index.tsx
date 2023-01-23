@@ -16,15 +16,30 @@ interface itemProps {
 }
 interface Props {
     item: itemProps;
-    field: {
+    field:{
         key: string;
-    };
+		topKey:object,
+		  bottomKey:object,
+		  label :string
+    }
 }
 
+ // item?.createdDate,
+        // "dd/MMM/yyyy  hh:mm a",
+        // null,
+        // false
+
 function FormatedDate({ item, field }: Props) {
+    const { topKey = {}, bottomKey = {} } = field;
      const getCreatedDate = format(
         item?.createdDate,
-        "dd/MMM/yyyy  hh:mm a",
+        "dd/MMM/yyyy",
+        null,
+        false
+    );
+    const getCreatedDateTime = format(
+        item?.createdDate,
+        "h:mm:aa",
         null,
         false
     );
@@ -51,7 +66,7 @@ function FormatedDate({ item, field }: Props) {
         getFormattedPrice(item.grandTotal!, item.billCurrency!) || "";
     return (
         <div>
-            {field?.key === "createdDate" && <div>{getCreatedDate}</div>}
+            {/* {field?.key === "createdDate" && <div>{getCreatedDate}</div>} */}
            {field?.key === "billDate" && <div>{getBillDate}</div>}
            {field?.key === "dueDate" && <div>{getDueDate}</div>} 
             {field?.key === "grandTotal" && (
@@ -65,7 +80,21 @@ function FormatedDate({ item, field }: Props) {
                     </Tooltip>
                 </div>
             )}
+
+            {field?.label==='Last Modified Date' &&(
+                <div>
+                    {topKey && (
+                        <text className={styled.sid}>
+                            {getCreatedDate}
+                        </text>
+                    )}
+                    {bottomKey && (
+                    <div className={styled.serviceType}>{getCreatedDateTime}</div>
+                    )}
+                </div>
+            )}
         </div>
+
     );
 }
 

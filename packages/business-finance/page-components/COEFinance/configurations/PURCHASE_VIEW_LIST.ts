@@ -26,7 +26,7 @@ const PURCHASE_VIEW_CONFIG = {
                 key: "serviceType",
             },
             func: "renderFieldPair",
-            span: 1,
+            span: .7,
         },
         {
             label: "Supplier Name",
@@ -43,7 +43,7 @@ const PURCHASE_VIEW_CONFIG = {
         {
             label: "Last Modified Date",
             key: "createdDate",
-            span: .94,
+            span: 1.25,
             func: "rendeFormate",
             sorting: { name: "modifiedDateSortType" },
         },
@@ -58,7 +58,7 @@ const PURCHASE_VIEW_CONFIG = {
             label: "Payment Due Date",
             key: "dueDate",
             func: "rendeFormate",
-            span: 1,
+            span: 1.3,
             sorting: { name: "dueDateSortType" },
         },
         {
