@@ -18,7 +18,7 @@ const useLoginAuthenticate = () => {
 	} = useSelector((state) => state);
 	const { source = '' } = query || {};
 
-	const cogo_parent_auth_token = getCookie('cogo-admin-auth-token');
+	const cogo_admin_auth_token = getCookie('cogo-admin-auth-token');
 
 	const [{ loading: loginLoading }, trigger] = useRequest({
 		url    : '/login_user',
@@ -43,7 +43,7 @@ const useLoginAuthenticate = () => {
 	const getUserSessionMappings = async () => {
 		try {
 			const sessionData = await triggerUserSessionMapping({
-				params: { parent_user_session_id: cogo_parent_auth_token },
+				params: { parent_user_session_id: cogo_admin_auth_token },
 			});
 			if (!sessionData.hasError) {
 				if (sessionData?.data?.list?.length === 0) {
@@ -88,9 +88,9 @@ const useLoginAuthenticate = () => {
 			let check_duplicate_email = false;
 			let user_data = {};
 
-			if (cogo_parent_auth_token) {
+			if (cogo_admin_auth_token) {
 				const mapping_response = await triggerUserSessionMapping({
-					params: { parent_user_session_id: cogo_parent_auth_token },
+					params: { parent_user_session_id: cogo_admin_auth_token },
 				});
 
 				if (!mapping_response.hasError) {
@@ -129,7 +129,7 @@ const useLoginAuthenticate = () => {
 					...values,
 					auth_scope   : 'partner',
 					platform     : 'admin',
-					parent_token : cogo_parent_auth_token,
+					parent_token : cogo_admin_auth_token,
 				},
 			});
 
@@ -137,7 +137,7 @@ const useLoginAuthenticate = () => {
 
 			const payload = {
 				active_user_session_id : token,
-				parent_user_session_id : cogo_parent_auth_token || undefined,
+				parent_user_session_id : cogo_admin_auth_token || undefined,
 			};
 
 			const updateSession = await triggerUpdateSessionMapping({
