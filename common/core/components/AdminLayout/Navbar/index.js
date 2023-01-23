@@ -98,7 +98,10 @@ function Navbar({
 								role="button"
 								tabIndex={0}
 								onClick={() => scrollToPinnedList(ref)}
-								className={`${styles.list_item_inner} ${styles.list_item} ${styles.pin_header}`}
+								className={`
+								${styles.list_item_inner} 
+								${styles.list_item} 
+								${(pinnedListItems || []).length === 0 ? styles.empty_pin_header : ''}`}
 							>
 								<IcCPin />
 								<span>

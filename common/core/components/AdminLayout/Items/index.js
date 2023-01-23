@@ -1,5 +1,4 @@
 import { Loader } from '@cogoport/components';
-import cl from '@cogoport/components/src/utils/classname-processor';
 import { IcMArrowRotateDown, IcMDefault, IcMPin, IcCPin } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
@@ -41,9 +40,10 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 
 	const singleNav = (
 		<div
-			className={cl`
-			${item.options?.length > 0 ? styles.has_options : ''} 
-			${isHref ? styles.active_item : styles.list_item_inner}`}
+			className={
+			`${item.options?.length > 0 ? styles.has_options : ''} 
+			${isHref ? styles.active_item : styles.list_item_inner}`
+}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}

@@ -15,6 +15,10 @@
 	background-color: #ffffff;
 }
 
+.empty_pin_header {
+	margin-bottom: 0px !important;
+}
+
 .list_container::-webkit-scrollbar {
 	display: none;
 }
