@@ -25,6 +25,18 @@ const navigationMappingShipper = {
 		possible_apis : app_apis.app_discover_rates,
 		module_type   : 'crm',
 	},
+	app_contract_management: {
+		key           : 'app_contract_management',
+		title         : 'Contract Management',
+		href          : '/contract-management',
+		as            : '/contract-management',
+		type          : 'link',
+		icon          : 'nav-g-dollar',
+		main_apis     : [],
+		possible_apis : app_apis.app_contract_rates,
+		module_type   : 'dashboards',
+		showInNav     : true,
+	},
 	app_contract_rates: {
 		key           : 'app_contract_rates',
 		title         : 'Contract Rates',
