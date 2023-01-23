@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function Login() {
 	const { t } = useTranslation(['login']);
 
-	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
+	const { onSubmit = () => {}, loading = false, source = '', router } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
 	const [showPassword, setShowPassword] = useState(false);
@@ -77,6 +77,19 @@ function Login() {
 						>
 							LOGIN
 						</Button>
+
+						{source === 'add_account'
+						&& (
+							<Button
+								loading={loading}
+								themeType="accent"
+								onClick={() => router.back()}
+								className={styles.go_back}
+								type="button"
+							>
+								GO BACK
+							</Button>
+						)}
 
 						<div className={styles.or}>
 							<hr className={styles.line} />
