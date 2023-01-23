@@ -67,6 +67,11 @@ const useLoginAuthenticate = () => {
 	const redirectFunction = () => {
 		const configs = redirections(profile);
 
+		if (source === 'add_account') {
+			// eslint-disable-next-line no-undef
+			window.location.href = '/';
+			return;
+		}
 		if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
 			const replaceAs = configs?.as?.replace('/v2', '');
@@ -76,7 +81,7 @@ const useLoginAuthenticate = () => {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs.href}`;
 		} else {
-			router.push('/', '/');
+			router.push(configs.href, configs.as);
 		}
 	};
 
