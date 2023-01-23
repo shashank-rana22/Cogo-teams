@@ -40,46 +40,51 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	});
 
-	const getUserSessionMappings = async () => {
-		try {
-			const sessionData = await triggerUserSessionMapping({
-				params: { parent_user_session_id: cogo_admin_auth_token },
-			});
-			if (!sessionData.hasError) {
-				if (sessionData?.data?.list?.length === 0) {
-					setCookie('cogo-admin-auth-token', 'expired', -1);
-					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
-				}
-				return;
-			}
-		} catch (error) {
-			console.log(error);
+	// const getUserSessionMappings = async () => {
+	// 	try {
+	// 		const sessionData = await triggerUserSessionMapping({
+	// 			params: { parent_user_session_id: cogo_admin_auth_token },
+	// 		});
+	// 		if (!sessionData.hasError) {
+	// 			if (sessionData?.data?.list?.length === 0) {
+	// 				setCookie('cogo-admin-auth-token', 'expired', -1);
+	// 				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
+	// 			}
+	// 			return;
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	if (source !== 'add_account') {
+	// 		getUserSessionMappings();
+	// 	}
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
+
+	const redirectFunction = () => {
+		const configs = redirections(profile);
+
+		if (configs?.href?.includes('/v2')) {
+			const replaceHref = configs?.href?.replace('/v2', '');
+			const replaceAs = configs?.as?.replace('/v2', '');
+			router.push(replaceHref?.href, replaceAs?.as);
+		}
+		if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+			// eslint-disable-next-line no-undef
+			window.location.href = `/${profile?.partner?.id}${configs.href}`;
+		} else {
+			router.push(configs.href, configs.as);
 		}
 	};
 
 	useEffect(() => {
-		if (source !== 'add_account') {
-			getUserSessionMappings();
+		if (Object.keys(profile).length > 0 && source !== 'add_account') {
+			redirectFunction();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useEffect(() => {
-		if (Object.keys(profile).length > 0 && source !== 'add_account') {
-			const configs = redirections(profile);
-
-			if (configs?.href?.includes('/v2')) {
-				const replaceHref = configs?.href?.replace('/v2', '');
-				const replaceAs = configs?.as?.replace('/v2', '');
-				router.push(replaceHref?.href, replaceAs?.as);
-			}
-			if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
-				// eslint-disable-next-line no-undef
-				window.location.href = `/${profile?.partner?.id}${configs.href}`;
-			} else {
-				router.push(configs.href, configs.as);
-			}
-		}
 	}, [profile, router, source]);
 
 	const onSubmit = async (values, e) => {
@@ -150,8 +155,7 @@ const useLoginAuthenticate = () => {
 			setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, token);
 
 			if (source === 'add_account') {
-				// eslint-disable-next-line no-undef
-				window.location.href = '/';
+				redirectFunction();
 			}
 
 			const res = await triggerSession();
