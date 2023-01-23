@@ -36,9 +36,10 @@ interface itemProps {
 interface Props{
   filters:GenericObject;
   setFilters: (p: object) => void;
+  subActiveTab:string
 }
 
-function PurchaseInvoice({filters,setFilters}:Props) {
+function PurchaseInvoice({filters,setFilters,subActiveTab}:Props) {
 const router = useRouter();
 const [sort, setSort] = useState({});
 
@@ -49,11 +50,7 @@ const [sort, setSort] = useState({});
 		  searchValue,
       currentTab,
      setCurrentTab,
-    }=useGetPurchaseViewList({filters,setFilters,sort});
-
-  
-  
-  
+    }=useGetPurchaseViewList({filters,setFilters,sort});  
 
     const functions:any = {
       renderStatus: (itemData:itemProps) => (
@@ -106,6 +103,7 @@ const [sort, setSort] = useState({});
        handlePageChange={(pageValue:number)=>{
         setFilters((p:GenericObject)=>({...p,pageIndex:pageValue}))
       }}
+      subActiveTab={subActiveTab}
     />
  </div>
   )

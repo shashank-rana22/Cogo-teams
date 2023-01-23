@@ -32,10 +32,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 
     const showbillType =
         filters?.billType === "PURCHASE" ? 'false' : undefined;
-    const showProforma = filters?.billType === "PROFORMA" ? true : undefined;
-
-    console.log(filters?.billDate&&filters?.billDate?.startDate,'filters2 ' ,filters?.billDate,filters);
-    
+    const showProforma = filters?.billType === "PROFORMA" ? true : undefined;    
     
 const billDatesStartFilters=
     (filters?.billDate?.startDate===undefined || filters?.billDate?.startDate===null)?null: format(filters?.billDate?.startDate,"yyyy-MM-dd'T'HH:mm:sso",{},false);
@@ -55,9 +52,6 @@ const updatedDateStartFilters=
 const updatedDateEndFilters=
     (filters?.updatedDate?.endDate===undefined||filters?.updatedDate?.endDate===null)?null : format(filters?.updatedDate?.endDate,"yyyy-MM-dd'T'HH:mm:sso",{},false);
 
-
-
-    console.log(filters,'filtersfilters',filters?.billDate?.startDate,filters?.billDate?.endDate,billDatesStartFilters,billDatesEndFilters);
     
 
     const [{ data, loading }, refetch] = useRequestBf(

@@ -7,7 +7,7 @@ import { useRouter } from "@cogoport/next";
 const AllInvoices = () => {
   const [filters, setFilters] = useState({});
   const { push, query } = useRouter();
-  const [subActiveTab, setSubActiveTab] = useState(
+  const [subActiveTab, setSubActiveTab] = useState<string>(
     query.view || "purchase-view"
   );
 
@@ -19,6 +19,7 @@ const AllInvoices = () => {
       `/business-finance/coe-finance/all_invoices/${subActiveTab}` as never as null
     );
   }, [subActiveTab]);
+  
 
   return (
     <div>
@@ -53,7 +54,7 @@ const AllInvoices = () => {
         </div>
       </div>
       {isPurchase && (
-        <PurchaseInvoice filters={filters} setFilters={setFilters} />
+        <PurchaseInvoice filters={filters} setFilters={setFilters} subActiveTab={subActiveTab}/>
       )}
       {!isPurchase && <ShipmentIdView />}
     </div>

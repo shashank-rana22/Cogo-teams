@@ -3,6 +3,7 @@ import getValue from './getValue';
 import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 import styles from './styles.module.css';
 import { Placeholder } from '@cogoport/components';
+import RenderRibbon from '../../COEFinance/All_Invoices/PurchaseInvoiceView/RenderData/RenderRibbon';
 
 export interface Props {
 	fields: FieldType[];
@@ -12,6 +13,7 @@ export interface Props {
 	config: ConfigType;
 	isMobile?: boolean;
 	loading?: boolean;
+	subActiveTab:string
 }
 
 function CardColumn({
@@ -22,10 +24,11 @@ function CardColumn({
 	config,
 	isMobile,
 	loading,
+	subActiveTab,
 }:Props) {
 	const { clickable } = config;
 	return (
-		<section style={itemStyles}>
+		<section style={{...itemStyles, position:'relative'}}>
 			<div
 				className={`${styles.row} ${clickable ? styles.clickable : ''} ${
 					isMobile ? styles.isMobile : ''
@@ -60,6 +63,9 @@ function CardColumn({
 					);
 				})}
 			</div>
+			{subActiveTab==='purchase-view'&&
+				<RenderRibbon item={singleitem}/>
+			}			
 		</section>
 	);
 }

@@ -3,8 +3,11 @@
   --r: 8px;
   --t: 2px;
 
-  position: relative;
-  inset: var(--t) calc(-1 * var(--f)) auto 20px;
+  /* position: relative; */
+  /* inset: var(--t) calc(-1 * var(--f)) 10px 10px; */
+  position: absolute;
+  top: 0px;
+  right: -10px;
   padding: 0 10px var(--f) calc(10px + var(--r));
   clip-path: polygon(
     0 0,

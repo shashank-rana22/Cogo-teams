@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@cogoport/components";
 import { useRouter } from "@cogoport/next";
-
 import styled from "./styles.module.css";
+// import { IcCRedCircle } from '@cogoport/icons-react';
 
 interface itemProps {
   status: string;
@@ -22,11 +22,12 @@ function RenderViewMoreButton({ itemData }: Props) {
 
   return (
     <div className={styled.buttonss}>
-      {itemData?.urgencyTag && (
+     {/* {itemData?.urgencyTag && (
         <div className={styled.Ribbons}>
           <div className={styled.ribbon}>Urgent</div>
         </div>
-      )}
+      )}  */}
+      
       <div>
         <Button
           size="xs"

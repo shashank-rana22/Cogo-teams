@@ -11,6 +11,7 @@ import { Pagination } from "@cogoport/components";
 import commonFunctions from "../..//commons/List/commonFunctions";
 import styles from "./styles.module.css";
 import { useSelector } from "@cogoport/store";
+import RenderRibbon from '../../COEFinance/All_Invoices/PurchaseInvoiceView/RenderData/RenderRibbon'
 
 export interface Props {
     config: ConfigType;
@@ -24,6 +25,7 @@ export interface Props {
     handlePageChange?: (currentPage: number) => void;
     pageSize?: number;
     showPagination?: boolean;
+    subActiveTab:string
 }
 
 function List({
@@ -38,6 +40,7 @@ function List({
     handlePageChange =()=>{},
     pageSize = 10,
     showPagination = true,
+    subActiveTab,
 }: Props) {
     const {
         showHeader = true,
@@ -67,6 +70,7 @@ function List({
             )}
             <div style={bodyStyles}>
                 {(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+                    <>
                     <CardColumn
                         fields={fields}
                         itemStyles={itemStyles}
@@ -75,7 +79,9 @@ function List({
                         loading={loading}
                         functions={commonFunctions(functions)}
                         isMobile={isMobile}
+                        subActiveTab={subActiveTab}
                     />
+                    </>
                 ))}
             </div>
         {showPagination && ( 
