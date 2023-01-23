@@ -4058,7 +4058,12 @@ const partner = {
 			service_name : 'contract',
 		},
 		{
-			api          : 'create_bulk_contract_plan_sheet_upload',
+			api          : 'update_bulk_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_plan_sheet_upload',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
