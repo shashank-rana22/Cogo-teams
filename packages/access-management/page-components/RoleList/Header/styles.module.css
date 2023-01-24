@@ -16,8 +16,7 @@
 	justify-content: space-between;
 
 	@media (max-width: 768px) {
-		flex-direction: column;
-		flex-wrap: wrap;
+		flex-flow: column wrap;
 		align-items: flex-start;
 
 		:global(.ui_chips_container) {

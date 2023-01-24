@@ -85,7 +85,7 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
       <div className={styles.buttonContainer}>
         <Button
           themeType="secondary"
-          size="sm"
+          size="md"
           onClick={() => setRemoveTag(true)}
         >
           Remove Tag
@@ -93,7 +93,7 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
 
         <Button
           themeType="secondary"
-          size="sm"
+          size="md"
           onClick={() => setShowAddTag(true)}
         >
           Edit Tag
@@ -107,7 +107,7 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
       <div>No Urgency Tag &nbsp;</div>
       <Button
         themeType="secondary"
-        size="sm"
+        size="md"
         onClick={() => setShowAddTag(true)}
       >
         Add Tag

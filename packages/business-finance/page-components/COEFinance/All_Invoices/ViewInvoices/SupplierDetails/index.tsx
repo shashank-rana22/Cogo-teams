@@ -73,7 +73,7 @@ const SupplierDetails = ({
     viewFunc: (item: any) => (
       <Button
         themeType="secondary"
-        size="xs"
+        size="md"
         onClick={() => window.open(item?.image_url, "_blank")}
       >
         View
@@ -237,7 +237,8 @@ const SupplierDetails = ({
               >
                 <Modal.Header title="Documents" />
                 <Modal.Body>
-                  {kycStatus === "verified" ? (
+                  {kycStatus === "verified" &&
+                  serviceProviderDocuments?.list ? (
                     <List
                       config={DOCUMENTS}
                       itemData={{ list: serviceProviderDocuments?.list }}

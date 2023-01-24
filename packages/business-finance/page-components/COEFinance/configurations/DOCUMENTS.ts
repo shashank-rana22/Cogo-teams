@@ -6,19 +6,19 @@ const DOCUMENTS = {
         {
 			label: 'Document Type',
             key: 'document_type',
-			span: 1.5,
+			span: 2.2,
 			func:'DocumentTypeFunc'
 		},
         {
             label: 'View',
             key: 'view',
-			span: 0.5,
+			span: 1,
 			func: 'viewFunc'
 		},
         {
             label: 'Download',
             key: 'download',
-			span: 0.5,
+			span: 1,
 			func: 'downloadFunc'
 		},
 	],

@@ -114,7 +114,7 @@ function FileUploader(props) {
 						<div className={styles.file_name}>
 							{`File uploading (${progress[key]}%)...`}
 						</div>
-						<div className={styles.progressBar}>
+						<div className={styles.progress_bar}>
 							<div
 								className={styles.progress}
 								style={{ width: `${progress[key]}%` }}
