@@ -148,7 +148,6 @@ const useLoginAuthenticate = () => {
 			if (source === 'add_account') {
 				// eslint-disable-next-line no-undef
 				window.location.href = '/';
-				return;
 			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
@@ -159,7 +158,6 @@ const useLoginAuthenticate = () => {
 		onSubmit,
 		loading: loginLoading || sessionLoading || updateSessionMappingLoading || userSessionMappingLoading,
 		source,
-		router,
 	};
 };
 
