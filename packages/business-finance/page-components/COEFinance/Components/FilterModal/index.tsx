@@ -48,6 +48,12 @@ const FilterModal = ({ filters, setFilters }: Props) => {
     });
   }, [currencies]);
 
+  const handleClose = () => {
+    setFilters({});
+    setCurrencies([]);
+    setShowModal(false);
+  };
+
   return (
     <div className={styles.modal_container}>
       <Modal
@@ -56,7 +62,7 @@ const FilterModal = ({ filters, setFilters }: Props) => {
         scroll={false}
         show={showModal}
         onClose={() => {
-          setShowModal(false);
+          handleClose();
         }}
       >
         <Modal.Header
