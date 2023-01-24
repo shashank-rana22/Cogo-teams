@@ -1,7 +1,7 @@
 const PURCHASE_VIEW_CONFIG = {
     showHeader: true,
     headerStyles       : { marginBottom: '16px', borderRadius: '8px', background: '#333',marginTop:'20px' },
-    bodyStyles         :{ border: "1px solid #C7C7C7",color:' #333333',fontWeight: '400',fontSize: '12px',lineHeight: '14px',fontFamily: "Roboto",fontStyle: "normal"},
+    bodyStyles         :{ border: "1px solid #C7C7C7",color:' #333333',fontWeight: '400',fontSize: '12px',lineHeight: '14px',fontStyle: "normal"},
     fields             : [
         {
             label: "Invoice No.",
