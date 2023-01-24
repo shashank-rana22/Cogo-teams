@@ -1,0 +1,12 @@
+.container {
+    margin: -24px;
+    padding: 16px;
+}
+
+.heading {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42px;
+}
