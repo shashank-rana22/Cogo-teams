@@ -64,7 +64,7 @@ const Header = ({
     <div>
       <div className={styles.container}>
         <Button
-          size="sm"
+          size="md"
           themeType="secondary"
           onClick={() =>
             Router.push(
@@ -77,7 +77,7 @@ const Header = ({
         </Button>
         <div className={styles.subContainer}>
           <Button
-            size="sm"
+            size="md"
             themeType="secondary"
             style={{ marginRight: "8px" }}
             disabled={!lineItem || isApproveDisabled}
@@ -86,7 +86,7 @@ const Header = ({
             Approve
           </Button>
           <Button
-            size="sm"
+            size="md"
             themeType="secondary"
             style={{ marginRight: "8px" }}
             disabled={status === "FINANCE_ACCEPTED"}
