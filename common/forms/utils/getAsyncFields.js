@@ -36,7 +36,7 @@ function asyncFieldsPartner(stakeHolderType = '') {
 		params      : {
 			filters: {
 				status       : 'active',
-				entity_types : stakeHolderType === 'channel_partner' ? stakeHolderType : undefined,
+				entity_types : stakeHolderType === ['channel_partner'] ? stakeHolderType : undefined,
 			},
 			page_limit: 100,
 		},
