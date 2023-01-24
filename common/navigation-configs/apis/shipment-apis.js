@@ -282,6 +282,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'update_shipment_export_invoice_combination',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'create_shipment_third_party_booking',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1197,6 +1202,11 @@ const apis = [
 	},
 	{
 		api          : 'create_awb_inventory',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_ltl_shipment_booking_parameter',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
