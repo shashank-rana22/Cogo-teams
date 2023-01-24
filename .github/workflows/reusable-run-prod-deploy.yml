@@ -19,5 +19,5 @@ jobs:
           script_stop: true
           command_timeout: 60m
           script: |
-            cd cogo-admin
-            pnpm run deploy
+            whoami
+            ls -al
