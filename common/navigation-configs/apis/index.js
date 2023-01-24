@@ -13,6 +13,7 @@ import enquiry_supply from './enquiry-supply-apis';
 import feedback from './feedback-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
+import login_apis from './login_apis';
 import ltl_operations from './ltl-operations-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
@@ -95,6 +96,7 @@ const apis = {
 	...partner,
 	...tools,
 	...consolidated_invoices,
+	login_apis,
 
 };
 export default apis;
