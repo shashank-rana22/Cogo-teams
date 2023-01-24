@@ -429,14 +429,14 @@ const ShipmentDetailsCard = ({
                                 handleClickUndo(id);
                               }}
                             >
-                              <Button size="sm" themeType="secondary">
+                              <Button size="md" themeType="secondary">
                                 Undo
                               </Button>
                             </div>
                           ) : (
                             <div className={styles.buttonContainer}>
                               <Button
-                                size="sm"
+                                size="md"
                                 themeType="secondary"
                                 onClick={() => {
                                   handleClick(id);
@@ -445,7 +445,7 @@ const ShipmentDetailsCard = ({
                                 Approve
                               </Button>
                               <Button
-                                size="sm"
+                                size="md"
                                 themeType="secondary"
                                 style={{ border: "1px solid #ed3726" }}
                                 onClick={() => {
@@ -524,14 +524,14 @@ const ShipmentDetailsCard = ({
                                 handleClickUndo(id);
                               }}
                             >
-                              <Button size="sm" themeType="secondary">
+                              <Button size="md" themeType="secondary">
                                 Undo
                               </Button>
                             </div>
                           ) : (
                             <div className={styles.buttonContainer}>
                               <Button
-                                size="sm"
+                                size="md"
                                 themeType="secondary"
                                 onClick={() => {
                                   handleClick(id);
@@ -540,7 +540,7 @@ const ShipmentDetailsCard = ({
                                 Approve
                               </Button>
                               <Button
-                                size="sm"
+                                size="md"
                                 themeType="secondary"
                                 style={{ border: "1px solid #ed3726" }}
                                 onClick={() => {
@@ -612,14 +612,14 @@ const ShipmentDetailsCard = ({
                                 handleClickUndo(id);
                               }}
                             >
-                              <Button size="sm" themeType="secondary">
+                              <Button size="md" themeType="secondary">
                                 Undo
                               </Button>
                             </div>
                           ) : (
                             <div className={styles.buttonContainer}>
                               <Button
-                                size="sm"
+                                size="md"
                                 themeType="secondary"
                                 onClick={() => {
                                   handleClick(id);
@@ -628,7 +628,7 @@ const ShipmentDetailsCard = ({
                                 Approve
                               </Button>
                               <Button
-                                size="sm"
+                                size="md"
                                 themeType="secondary"
                                 style={{ border: "1px solid #ed3726" }}
                                 onClick={() => {

@@ -22,15 +22,15 @@ function RenderViewMoreButton({ itemData }: Props) {
 
   return (
     <div className={styled.buttonss}>
-     {/* {itemData?.urgencyTag && (
+      {/* {itemData?.urgencyTag && (
         <div className={styled.Ribbons}>
           <div className={styled.ribbon}>Urgent</div>
         </div>
       )}  */}
-      
+
       <div>
         <Button
-          size="xs"
+          style={{ height: "30px", fontSize: "12px" }}
           themeType="secondary"
           onClick={() => {
             handleChange(itemData);
