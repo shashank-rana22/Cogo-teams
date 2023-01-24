@@ -1781,8 +1781,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'contract_rates-international_contracts',
 				title         : 'Overseas Contract',
-				href          : '/contract-rates/dashboard',
-				as            : '/contract-rates/dashboard',
+				href          : '/contract-rates/dashboard/[active_tab]',
+				as            : '/contract-rates/dashboard/active',
 				type          : 'link',
 				main_apis     : ['list_contracts'],
 				possible_apis : [...apis.contract_rates, ...apis.shipment],
