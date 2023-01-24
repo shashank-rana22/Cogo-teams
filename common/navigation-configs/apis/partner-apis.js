@@ -7865,6 +7865,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api: 'create_servetel_agent',
+			access_type: 'private',
+			service_name: 'voice_call',
+		},
+		{
+			api: 'list_servetel_agents',
+			access_type: 'private',
+			service_name: 'voice_call',
+		},
+		{
+			api: 'update_servetel_agent',
+			access_type: 'private',
+			service_name: 'voice_call',
+		},
 	],
 	prm_feedback: [
 		{
