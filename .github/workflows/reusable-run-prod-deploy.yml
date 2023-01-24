@@ -19,5 +19,8 @@ jobs:
           script_stop: true
           command_timeout: 60m
           script: |
-            cd cogo-admin 
+            cd cogo-admin
+            git pull
+            nvm use 18
             pnpm run deploy
+            
