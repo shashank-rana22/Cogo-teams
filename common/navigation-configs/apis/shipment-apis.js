@@ -282,6 +282,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'update_shipment_export_invoice_combination',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'create_shipment_third_party_booking',
 		access_type  : 'private',
 		service_name : 'shipment',

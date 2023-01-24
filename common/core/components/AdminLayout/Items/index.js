@@ -23,7 +23,7 @@ function Items({ item, resetSubnavs }) {
 			router.push(replaceHref, replaceAs);
 		} else if (process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
-			window.location.href = `/${query.partner_id || splitAspath}${itemdata.href}`;
+			window.location.href = `/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`;
 		} else {
 			router.push(itemdata.href, itemdata.as);
 		}

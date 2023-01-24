@@ -5784,6 +5784,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api: 'send_demand_notice_to_prelegal_accounts',
+			access_type: 'private',
+			service_name: 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -7656,6 +7661,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api: 'create_communication_template_suggestions',
+			access_type: 'private',
+			service_name: 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -8493,6 +8503,11 @@ const partner = {
 	],
 	ltl_freight: [
 		{
+			api: 'update_ltl_shipment_booking_parameter',
+			access_type: 'private',
+			service_name: 'shipment',
+		},
+		{
 			api          : 'list_ltl_freight_rates',
 			access_type  : 'private',
 			// feature: 'rms',
@@ -8835,6 +8850,28 @@ const partner = {
 			api          : 'create_organization_setting',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+	],
+	rail_freight: [
+		{
+			api: 'list_rail_domestic_freight_rates',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
+		},
+		{
+			api: 'create_rail_domestic_freight_rate',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
+		},
+		{
+			api: 'create_rail_domestic_freight_rate_bulk_operation',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
+		},
+		{
+			api: 'update_rail_domestic_freight_rate',
+			access_type: 'private',
+			service_name: 'rail_domestic_freight_rate',
 		},
 	],
 	voice_call: [
