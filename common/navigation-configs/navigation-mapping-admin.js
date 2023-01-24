@@ -750,8 +750,8 @@ const navigationMappingAdmin = {
 	tech_ops: {
 		key           : 'tech_ops',
 		title         : 'TechOps',
-		href          : '/tech-ops',
-		as            : '/tech-ops',
+		href          : '/tech-ops/locals',
+		as            : '/tech-ops/locals',
 		type          : 'link',
 		icon          : IcMTechops,
 		possible_apis : apis.tech_ops,
