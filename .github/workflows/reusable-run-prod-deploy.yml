@@ -3,6 +3,7 @@ name: Prod Deploy
 on:
   workflow_dispatch:
 
+
 jobs:
   deploy:
     if: ${{ contains('prashantp01', github.actor) }}
@@ -10,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploying Logistic Frontend
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.PROD_SERVER_SSH_HOST }}
           sync: true
