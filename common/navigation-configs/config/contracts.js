@@ -1,12 +1,12 @@
-const coe = {
+const contracts = {
 	'/[partner_id]/contracts': {
-		navigation : 'coe-contracts',
+		navigation : 'contracts',
 		isMainNav  : true,
 	},
 	'/[partner_id]/contracts/details': {
-		navigation : 'coe-contracts',
+		navigation : 'contracts',
 		isMainNav  : true,
 	},
 };
 
-export default coe;
+export default contracts;

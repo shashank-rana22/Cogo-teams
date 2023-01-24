@@ -1122,15 +1122,6 @@ const navigationMappingAdmin = {
 				possible_apis : apis.shipment,
 			},
 			{
-				key           : 'coe-contracts',
-				title         : 'Contracts Revenue Desk',
-				href          : '/v2/contracts',
-				as            : '/v2/contracts',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.contracts,
-			},
-			{
 				key           : 'coe-fcl_revenue_desk',
 				title         : 'FCL Revenue Desk',
 				href          : '/revenue-desk/fcl',
@@ -1807,7 +1798,15 @@ const navigationMappingAdmin = {
 			},
 		],
 		module_type: 'dashboards',
-
+	},
+	contracts: {
+		key           : 'contracts',
+		title         : 'Contracts Revenue Desk',
+		href          : '/v2/contracts',
+		as            : '/v2/contracts',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.contracts,
 	},
 };
 
