@@ -15,7 +15,7 @@ function useGetAsyncOptions({
 	const [{ data, loading }] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-		params : merge(params, { filters: { q: query } }),
+		params : merge(params, { filters: { q: query, entity_types: ['channel_partner'] } }),
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || [];
 

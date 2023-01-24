@@ -70,7 +70,7 @@ export const controls = (role_functions, partnerOptions) => [
 		size        : 'lg',
 		type        : 'select',
 		isClearable : true,
-		params      : { filters: { status: 'active' } },
+		params      : { filters: { status: 'active', entity_types: ['channel_partner'] } },
 	},
 	{
 		name           : 'navigation',
