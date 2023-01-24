@@ -56,10 +56,7 @@ const useGetAuthorizationChecked = () => {
 							// eslint-disable-next-line no-undef
 							window.location.href = `/${profile?.partner?.id}${configs.as || configs.href}`;
 						} else {
-							await push(
-								`/${profile?.partner?.id}${configs.href}`,
-								`/${profile?.partner?.id}${configs.as}`,
-							);
+							await push(configs.href, configs.as);
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
