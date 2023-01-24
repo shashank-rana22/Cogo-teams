@@ -1,6 +1,7 @@
 import { FluidContainer, Button } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import { IcCMicrosoft, IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
@@ -10,9 +11,10 @@ import useLoginAuthenticate from '../../hooks/useLoginAuthenticate';
 import styles from './styles.module.css';
 
 function Login() {
+	const router = useRouter();
 	const { t } = useTranslation(['login']);
 
-	const { onSubmit = () => {}, loading = false } = useLoginAuthenticate();
+	const { onSubmit = () => {}, loading = false, source = '' } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
 	const { handleSubmit, formState: { errors }, control } = useForm();
 	const [showPassword, setShowPassword] = useState(false);
@@ -77,6 +79,18 @@ function Login() {
 						>
 							LOGIN
 						</Button>
+
+						{source === 'add_account'
+						&& (
+							<Button
+								themeType="accent"
+								onClick={() => router.back()}
+								className={styles.go_back}
+								type="button"
+							>
+								GO BACK
+							</Button>
+						)}
 
 						<div className={styles.or}>
 							<hr className={styles.line} />
