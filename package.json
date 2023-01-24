@@ -16,7 +16,7 @@
     "prod:build": "pnpm run pre-build && pnpm run build",
     "build": "NODE_ENV=production turbo run build",
     "pre-build": "NODE_ENV=production node scripts/build-pages",
-    "dev": "sh ./scripts/setup-node.sh && node scripts/build-pages && turbo run dev",
+    "dev": "./scripts/setup-node.sh && node scripts/build-pages && turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
     "stylelint": "stylelint \"**/*.css\" --fix",
