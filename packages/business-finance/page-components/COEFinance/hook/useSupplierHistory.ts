@@ -1,8 +1,9 @@
+import { useRouter } from '@cogoport/next';
 import { useRequestBf} from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 const useSupplierHistory = ({data}) => {
-	
-	const {serviceProviderDetail} = data
+	const {query} = useRouter()
+	const {orgId} = query
 	
 	
 	const [{ data:historyData, loading }, trigger] = useRequestBf(
@@ -16,7 +17,7 @@ const useSupplierHistory = ({data}) => {
 		try {
 			await trigger({
 				params:{
-					id:serviceProviderDetail?.organizationId,
+					id:orgId,
 				}
 			});
 		} catch (err) {

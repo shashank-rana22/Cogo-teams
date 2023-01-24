@@ -5743,6 +5743,11 @@ const partner = {
 			access_type: 'private',
 			service_name: 'sage',
 		},
+		{
+			api: 'send_demand_notice_to_prelegal_accounts',
+			access_type: 'private',
+			service_name: 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -8456,6 +8461,11 @@ const partner = {
 		},
 	],
 	ltl_freight: [
+		{
+			api: 'update_ltl_shipment_booking_parameter',
+			access_type: 'private',
+			service_name: 'shipment',
+		},
 		{
 			api          : 'list_ltl_freight_rates',
 			access_type  : 'private',
