@@ -11,7 +11,6 @@ import { API } from '../utils/api';
 const getFilter = (val) => {
 	if (val === 'cogoport') {
 		return {
-
 			entity_types            : ['cogoport'],
 			stakeholder_type        : 'partner',
 			exclude_stakeholder_ids : undefined,
@@ -29,12 +28,14 @@ const getFilter = (val) => {
 			stakeholder_type        : 'organization',
 			exclude_stakeholder_ids : undefined,
 			stakeholder_id          : undefined,
+			entity_types            : undefined,
 		};
 	}
 	return {
 		stakeholder_type        : undefined,
 		exclude_stakeholder_ids : undefined,
 		stakeholder_id          : undefined,
+		entity_types            : undefined,
 	};
 };
 
