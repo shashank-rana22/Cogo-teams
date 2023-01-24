@@ -22,5 +22,6 @@ jobs:
             cd cogo-admin
             git pull
             nvm use 18
+            pnpm install
             pnpm run deploy
             
