@@ -47,7 +47,7 @@ const useImportRoles = ({ onSubmit = () => {} }) => {
 		submitText = 'Assign Priority';
 	}
 	const partnerOptions = useGetAsyncOptions({
-		...asyncFieldsPartner(),
+		...asyncFieldsPartner({}),
 	});
 
 	const partnerRoleOptions = useGetAsyncOptions({

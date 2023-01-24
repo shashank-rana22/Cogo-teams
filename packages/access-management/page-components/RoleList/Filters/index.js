@@ -14,7 +14,7 @@ function Filters({
 	stakeHolderType = '',
 }) {
 	const partnerOptions = useGetAsyncOptions({
-		...asyncFieldsPartner(stakeHolderType),
+		...asyncFieldsPartner({ stakeHolderType }),
 		initialCall: false,
 	});
 

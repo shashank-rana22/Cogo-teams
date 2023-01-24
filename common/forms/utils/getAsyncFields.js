@@ -27,7 +27,7 @@ function asyncFieldsLocations() {
 		},
 	};
 }
-function asyncFieldsPartner(stakeHolderType = '') {
+function asyncFieldsPartner({ stakeHolderType = '' }) {
 	return {
 		labelKey    : 'business_name',
 		valueKey    : 'id',
