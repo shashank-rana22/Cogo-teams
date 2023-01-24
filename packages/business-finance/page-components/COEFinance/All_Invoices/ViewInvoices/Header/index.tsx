@@ -95,7 +95,7 @@ const Header = ({
             Hold
           </Button>
           <Button
-            size="sm"
+            size="md"
             style={{ marginRight: "8px" }}
             disabled={!lineItem || !isApproveDisabled}
             onClick={(e: any) => handleModalData(e)}
