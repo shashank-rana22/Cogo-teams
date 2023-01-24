@@ -9,7 +9,7 @@ jobs:
     name: Deploying Servers via SSH
     runs-on: ubuntu-latest
     steps:
-      - name: Deploying Logistic Frontend
+      - name: Deploying Admin Frontend
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.PROD_SERVER_SSH_HOST }}
@@ -19,6 +19,5 @@ jobs:
           script_stop: true
           command_timeout: 60m
           script: |
-            nvm use 18
-            pnpm install 
+            cd cogo-admin 
             pnpm run deploy
