@@ -3,7 +3,6 @@ name: Prod Deploy
 on:
   workflow_dispatch:
 
-
 jobs:
   deploy:
     if: ${{ contains('prashantp01', github.actor) }}
@@ -11,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploying Logistic Frontend
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.PROD_SERVER_SSH_HOST }}
           sync: true
@@ -20,5 +19,6 @@ jobs:
           script_stop: true
           command_timeout: 60m
           script: |
-            whoami
-            ls -al
+            nvm use 18
+            pnpm install 
+            pnpm run deploy
