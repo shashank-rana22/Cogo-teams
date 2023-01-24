@@ -1,0 +1,11 @@
+.header{
+    font-weight: 800;
+    margin: 0;
+}
+.underline{
+    border-top: 5px solid#ED3726;
+    width: 10%;
+}
+.tabs{
+    margin: 32px 0px;
+}

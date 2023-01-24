@@ -1,7 +1,12 @@
 import { useRequestBf } from '@cogoport/request';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import {Tabs, TabPanel} from '@cogoport/components';
+import Overheads from './Components/Overheads/index';
+import styles from './styles.module.css';
 
 function AccountPayables() {
+	const [activeTab, setActiveTab] = useState('overheads');
+
 	const [{ data, loading, error }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payable-bill/list',
@@ -17,7 +22,25 @@ function AccountPayables() {
 
 	return (
 		<div>
-			<h1>Account Payables</h1>
+			<h1 className={styles.header}>Account Payables</h1>
+			<div className={styles.underline}/>
+
+				<div className={styles.tabs}>
+					<Tabs
+						activeTab={activeTab}
+						fullWidth
+						themeType="primary"
+						onChange={setActiveTab}
+					>
+				<TabPanel name="overheads" title="Overheads">
+					<Overheads/>
+				</TabPanel>
+
+				<TabPanel name="others" title="Others">
+					<div>No data :)</div>
+				</TabPanel>
+			</Tabs>
+				</div>
 		</div>
 	);
 }
