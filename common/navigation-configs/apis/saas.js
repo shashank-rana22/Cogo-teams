@@ -1615,6 +1615,104 @@ const saas = {
 			feature     : 'product',
 		},
 	],
+	app_saas_premium_services: [
+		{
+			api         : 'get_sailing_schedules',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_exchange_rate',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'saas_get_user_quota_usage',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_bill_status',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_exchange_rate',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'post_saas_trade_engine_duties_draft',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'saas_get_user_quota_usage',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'post_saas_payment',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'post_saas_trade_engine',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'post_saas_trade_engine_hs_engine',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_hs_code_section',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_hs_code_heading',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_hs_code',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_product_category_list',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_product_list',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+	],
 
 };
 export default saas;
