@@ -1205,6 +1205,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'update_ltl_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
