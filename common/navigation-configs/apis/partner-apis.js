@@ -7893,6 +7893,13 @@ const partner = {
 			service_name : 'segmentation',
 		},
 		{
+
+			api          : 'create_duplicate_promotion',
+			access_type  : 'private',
+			service_name : 'promotion',
+
+		},
+		{
 			api          : 'list_promotions',
 			access_type  : 'private',
 			service_name : 'promotion',
