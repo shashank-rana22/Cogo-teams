@@ -153,6 +153,7 @@ const navigationMappingAdmin = {
 			...apis.shipment,
 			...apis.payments,
 			...apis.sales,
+			...apis.sop,
 			...apis.app_pay_later,
 			...apis.feedback,
 			...apis.checkout_promotions,
@@ -1339,6 +1340,7 @@ const navigationMappingAdmin = {
 		],
 		possible_apis: [
 			...apis.prm,
+			...apis.sop,
 			...apis.search,
 			...apis.shipment,
 			...apis.payments,

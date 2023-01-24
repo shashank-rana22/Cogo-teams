@@ -28,6 +28,7 @@ import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
+import sop from './sop-apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -38,6 +39,10 @@ const apis = {
 		module  : 'shipment',
 		feature : 'shipment',
 		...api,
+	})),
+	sop: sop.map((api) => ({
+		...api,
+		module: 'demand_crm',
 	})),
 	revenue_desk: revenue_desk_apis.map((api) => ({
 		...api,
