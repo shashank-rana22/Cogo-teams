@@ -31,6 +31,28 @@
 	margin-bottom: 6px;
 }
 
+.input_search {
+	:global(.ui_input_prefix) {
+		padding-left: 14px;
+		margin-right: 4px;
+		background-color: unset;
+	}
+}
+
+.input_search_hover {
+	:global(.ui_input_prefix) {
+		padding-left: 14px;
+		margin-right: 4px;
+		background-color: unset;
+		border: none;
+	}
+}
+
+.input_search_hover:global(.ui_input_container) {
+	border: none;
+	border-radius: 6px;
+}
+
 .list_item_inner {
 	display: flex;
 	align-items: center;
@@ -115,24 +137,17 @@
 }
 
 .input_search:global(.ui_input_container) {
-	background-color: #fdebe9;
+	background: #f8f8f8;
 	border: none;
+	border-radius: 6px;
 }
 
 .input_search:global(.ui_input_control) {
-	background-color: #fdebe9;
-}
-
-.input_search {
-	:global(.ui_input_prefix) {
-		padding-left: 14px;
-		margin-right: 4px;
-		background-color: unset;
-	}
+	background: #f8f8f8;
 }
 
 .outer_container {
-	background-color: #fffce6;
+	background: #f8f8f8;
 }
 
 .active_item {

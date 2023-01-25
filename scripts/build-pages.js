@@ -26,7 +26,7 @@ const createPages = async () => {
 		} else if (fs.existsSync(pagesPath)) {
 			fs.copySync(pagesPath, appPath, { recursive: true });
 		} else {
-			console.log(`${pagesPath} does not exists`);
+			// console.log(`${pagesPath} does not exists`);
 		}
 	});
 };

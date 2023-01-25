@@ -1,4 +1,4 @@
-import cl from '@cogoport/components/src/utils/classname-processor';
+import { cl } from '@cogoport/components';
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
