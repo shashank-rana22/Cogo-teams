@@ -401,7 +401,7 @@ const apis = [
 	{
 		api          : 'send_booking_whatsapp_confirmation',
 		access_type  : 'private',
-		feature      : 'send Whatsapp booking',
+		feature      : 'search',
 		service_name : 'checkout',
 	},
 ];
