@@ -6,9 +6,7 @@ const useAddRemovePin = ({ partner_user_id, setPinnedNavKeys = () => {} }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const pinUnpinNavs = async (action, navItem, setPinLoadingState) => {
-		setPinLoadingState(true);
-
+	const pinUnpinNavs = async (action, navItem) => {
 		const payload = {
 			partner_user_id,
 			setting_config : { navigation_preferences: [navItem.key] },
@@ -23,8 +21,6 @@ const useAddRemovePin = ({ partner_user_id, setPinnedNavKeys = () => {} }) => {
 		} else {
 			setPinnedNavKeys((prevNavKeys) => prevNavKeys.filter((navKey) => navKey !== navItem.key));
 		}
-
-		setPinLoadingState(false);
 	};
 
 	return { newPinUnpinLoading, pinUnpinNavs };

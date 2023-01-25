@@ -11,7 +11,6 @@ import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
-import useAddRemovePin from './useAddRemovePIn';
 
 function Navbar({
 	className,
@@ -26,6 +25,8 @@ function Navbar({
 	const ref = useRef(null);
 
 	const userBasedNavView = formatUserBasedNavView(nav);
+
+	const showPin = userBasedNavView === nav;
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
@@ -48,11 +49,6 @@ function Navbar({
 		},
 		[],
 	);
-
-	const {
-		newPinUnpinLoading = false,
-		pinUnpinNavs = () => {},
-	} = useAddRemovePin({ partner_user_id, setPinnedNavKeys });
 
 	const scrollToPinnedList = (scrollRef) => {
 		const container = scrollRef.current;
@@ -118,9 +114,10 @@ function Navbar({
 								key={item.key}
 								item={item}
 								resetSubnavs={resetSubnavs}
-								pinUnpinNavs={pinUnpinNavs}
-								newPinUnpinLoading={newPinUnpinLoading}
 								isPinned
+								partner_user_id={partner_user_id}
+								setPinnedNavKeys={setPinnedNavKeys}
+								showPin={showPin}
 							/>
 						))}
 
@@ -131,9 +128,10 @@ function Navbar({
 								key={item.key}
 								item={item}
 								resetSubnavs={resetSubnavs}
-								pinUnpinNavs={pinUnpinNavs}
-								newPinUnpinLoading={newPinUnpinLoading}
 								isPinned={false}
+								partner_user_id={partner_user_id}
+								setPinnedNavKeys={setPinnedNavKeys}
+								showPin={showPin}
 							/>
 						))}
 					</ul>

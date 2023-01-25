@@ -5,12 +5,17 @@ import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
 
-function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading }) {
+import useAddRemovePin from './useAddRemovePin';
+
+function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin }) {
 	const router = useRouter();
 	const { pathname, query, asPath } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
-	const [pinLoadingState, setPinLoadingState] = useState(false);
+	const {
+		newPinUnpinLoading = false,
+		pinUnpinNavs = () => {},
+	} = useAddRemovePin({ partner_user_id, setPinnedNavKeys });
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
@@ -59,7 +64,8 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 				{item.title}
 			</span>
 
-			{!pinLoadingState ? (
+			{showPin
+			&& (!newPinUnpinLoading ? (
 				<div
 					role="button"
 					tabIndex={0}
@@ -67,13 +73,13 @@ function Items({ isPinned, item, resetSubnavs, pinUnpinNavs, newPinUnpinLoading 
 					onClick={(e) => {
 						e.stopPropagation();
 						if (!newPinUnpinLoading) {
-							pinUnpinNavs(!isPinned, item, setPinLoadingState);
+							pinUnpinNavs(!isPinned, item);
 						}
 					}}
 				>
 					{isPinned ? <IcCPin /> : <IcMPin /> }
 				</div>
-			) : <Loader className={styles.loader} />}
+			) : <Loader className={styles.loader} />)}
 
 		</div>
 	);
