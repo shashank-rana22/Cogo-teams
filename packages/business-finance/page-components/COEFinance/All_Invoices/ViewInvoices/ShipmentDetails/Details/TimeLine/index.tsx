@@ -1,21 +1,23 @@
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
-import {Placeholder} from '@cogoport/components';
-import TimeLineItem from './TimeLineItem/index';
-import useGetShipmentTimeLine from '../../../../../hook/useGetShipmentTimeLine';
-import styles from './styles.module.css';
 
-interface Int{
+import useGetShipmentTimeLine from '../../../../../hook/useGetShipmentTimeLine';
+
+import styles from './styles.module.css';
+import TimeLineItem from './TimeLineItem/index';
+
+interface Int {
 	shipmentId:string,
 }
 
-const TimeLine = ({shipmentId}:Int) => {
-    const {data: timelineData, loading} = useGetShipmentTimeLine(shipmentId);
-	
-	const shipment_data={};
+function TimeLine({ shipmentId }:Int) {
+	const { data: timelineData, loading } = useGetShipmentTimeLine(shipmentId);
+
+	const shipment_data = {};
 	let isCompleted = true;
 
 	return (
-		<div className={styles.Container} >
+		<div className={styles.Container}>
 			<div className={styles.Wrapper}>
 				{!loading ? timelineData?.map((item, i) => {
 					if (!item?.completed_on) {
@@ -34,17 +36,18 @@ const TimeLine = ({shipmentId}:Int) => {
 							item={item}
 							isNextMain={isNextMain}
 							isLast={i === timelineData?.length - 1}
-						/>  
+						 />
 					);
-				}) : <div className={styles.loading}>
-				<Placeholder height="30px" width="300px"/>
-				<Placeholder height="30px" width="300px"/>
-				<Placeholder height="30px" width="300px"/>
-			     </div>
-			}
+				}) : (
+					<div className={styles.loading}>
+						<Placeholder height="30px" width="300px" />
+						<Placeholder height="30px" width="300px" />
+						<Placeholder height="30px" width="300px" />
+					</div>
+				)}
 			</div>
 		</div>
 	);
-};
+}
 
 export default TimeLine;

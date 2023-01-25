@@ -1,33 +1,32 @@
 import { Tooltip } from '@cogoport/components';
-import React from 'react';
-import { startCase, upperCase } from '@cogoport/utils';
-import { formatDate } from '../../../../../commons/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
+import { startCase, upperCase } from '@cogoport/utils';
+import React from 'react';
+
+import { formatDate } from '../../../../../commons/utils/formatDate';
+
 import styles from './styles.module.css';
 
-interface PocDetailsInt{
+interface PocDetailsInt {
 	name?: string,
 	mobile_country_code?:string,
 	mobile_number?:string,
 	email?:string
 }
 
-interface ShipperDetailsInt{
+interface ShipperDetailsInt {
 	name?:string,
 	address?:string
 }
 
 export const renderValue = (label:string, detail:any) => {
-	const { packages =[] } = detail ||[{}];
-	const isAir =
-		detail?.service_type === 'air_freight_service' ||
-		detail?.service_type === 'domestic_air_freight_service';
-	const isLTL =
-		detail?.service_type === 'ltl_freight_service' ||
-		detail?.services?.includes('ltl_freight_service');
+	const { packages = [] } = detail || [{}];
+	const isAir =		detail?.service_type === 'air_freight_service'
+		|| detail?.service_type === 'domestic_air_freight_service';
+	const isLTL =		detail?.service_type === 'ltl_freight_service'
+		|| detail?.services?.includes('ltl_freight_service');
 
-	const valueForInput =
-		Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+	const valueForInput =		Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
 
 	const chargableWeight = isLTL
 		? detail?.chargable_weight || detail?.weight
@@ -39,7 +38,7 @@ export const renderValue = (label:string, detail:any) => {
 
 	const inputValue = valueForInput
 		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(
-				valueForInput?.packing_type,
+			valueForInput?.packing_type,
 		  )}`
 		: '';
 
@@ -53,63 +52,63 @@ export const renderValue = (label:string, detail:any) => {
 			return (
 				<Tooltip
 					placement="bottom"
-					content={
+					content={(
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${
-											item?.width
+										item?.width
 									  }cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
 								return <div>{values}</div>;
 							})}
 						</div>
-					}
+					)}
 				>
-					<div className="cargo-details-info">{`Package: ${inputValue} + ${
-						packages?.length - 1
-					} more`}</div>
+					<div className="cargo-details-info">
+						{`Package: ${inputValue} + ${
+							packages?.length - 1
+						} more`}
+					</div>
 				</Tooltip>
 			);
 		}
 		return `Package: ${inputValue}`;
 	};
 
-	const formatPocData = (pocDetails:PocDetailsInt) => {
-		return (
+	const formatPocData = (pocDetails:PocDetailsInt) => (
+		<div>
+			<div>{pocDetails?.name}</div>
 			<div>
-				<div>{pocDetails?.name}</div>
-				<div>
-					{pocDetails?.mobile_country_code}- {pocDetails?.mobile_number}
-				</div>
-				<div>{pocDetails?.email}</div>
+				{pocDetails?.mobile_country_code}
+				-
+				{pocDetails?.mobile_number}
 			</div>
-		);
-	};
+			<div>{pocDetails?.email}</div>
+		</div>
+	);
 
-	const formatShipperDetails = (shipperDetails:ShipperDetailsInt) => {
-		return (
-			<div>
-				<div>{shipperDetails?.name}</div>
-				<div>{shipperDetails?.address}</div>
-			</div>
-		);
-	};
+	const formatShipperDetails = (shipperDetails:ShipperDetailsInt) => (
+		<div>
+			<div>{shipperDetails?.name}</div>
+			<div>{shipperDetails?.address}</div>
+		</div>
+	);
 
-	const formatCertificate = (certificates:any) => {
-		return (
-			<div className={styles.CertificateContainer}>
-				{(certificates || []).map((item, key) => {
-					return (
-						<a href={item} target="_blank" rel="noreferrer">
-							Click to view certificate {key + 1} <IcMOpenlink />
-							<br />
-						</a>
-					);
-				})}
-			</div>
-		);
-	};
+	const formatCertificate = (certificates:any) => (
+		<div className={styles.CertificateContainer}>
+			{(certificates || []).map((item, key) => (
+				<a href={item} target="_blank" rel="noreferrer">
+					Click to view certificate
+					{' '}
+					{key + 1}
+					{' '}
+					<IcMOpenlink />
+					<br />
+				</a>
+			))}
+		</div>
+	);
 
 	switch (label) {
 		case 'container_size':
@@ -167,9 +166,9 @@ export const renderValue = (label:string, detail:any) => {
 
 		case 'volume':
 			return ` ${volume} ${
-				detail.service_type === 'ftl_freight_service' ||
-				detail.service_type === 'haulage_freight_service'
-					? ``
+				detail.service_type === 'ftl_freight_service'
+				|| detail.service_type === 'haulage_freight_service'
+					? ''
 					: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
 			}`;
 
@@ -177,28 +176,28 @@ export const renderValue = (label:string, detail:any) => {
 			if (isLTL) {
 				return `Docket Number : ${lr_number || ''}`;
 			}
-			return ``;
+			return '';
 
 		case 'master_airway_bill_number':
 			if (isAir) {
 				return `MAWB Number: ${detail?.master_airway_bill_number || ''}`;
 			}
-			return ``;
+			return '';
 		case 'house_airway_bill_number':
 			if (isAir) {
 				return `HAWB Number: ${detail?.house_airway_bill_number || ''}`;
 			}
-			return ``;
+			return '';
 		case 'eway_bill_number':
 			if (isLTL) {
 				return `Eway Bill Number : ${eway_bill_number || ''}`;
 			}
-			return ``;
+			return '';
 		case 'airline':
 			if (isAir) {
 				return `Airline : ${detail?.airline?.business_name || ''}`;
 			}
-			return ``;
+			return '';
 		case 'weight':
 			return ` ${detail.weight} kgs`;
 		case 'haulage_type':
@@ -242,47 +241,65 @@ export const renderValue = (label:string, detail:any) => {
 		case 'schedule_departure':
 			return formatDate(
 				detail?.schedule_departure || detail?.selected_schedule_departure,
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'schedule_arrival':
 			return formatDate(
 				detail?.schedule_arrival || detail?.selected_schedule_arrival,
-				'dd MMM yyyy',{},true
+				'dd MMM yyyy',
+				{},
+				true,
 			);
 		case 'bn_expiry':
 			return formatDate(
 				detail?.bn_expiry || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'booking_note_deadline':
 			return formatDate(
 				detail?.booking_note_deadline || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'si_cutoff':
 			return formatDate(
 				detail?.si_cutoff || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'vgm_cutoff':
 			return formatDate(
 				detail?.vgm_cutoff || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'gate_in_cutoff':
 			return formatDate(
 				detail?.gate_in_cutoff || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'document_cutoff':
 			return formatDate(
 				detail?.document_cutoff || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'tr_cutoff':
 			return formatDate(
 				detail?.tr_cutoff || '',
-				'dd MMM yyyy - hh:mm a',{},true
+				'dd MMM yyyy - hh:mm a',
+				{},
+				true,
 			);
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
@@ -295,7 +312,9 @@ export const renderValue = (label:string, detail:any) => {
 		case 'cargo_readiness_date':
 			return formatDate(
 				detail?.cargo_readiness_date || '',
-				'dd MMM yyyy',{},true
+				'dd MMM yyyy',
+				{},
+				true,
 			);
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});

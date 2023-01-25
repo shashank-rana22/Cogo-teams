@@ -1,148 +1,141 @@
-import { useEffect, useState } from "react";
-import { useRequestBf } from "@cogoport/request";
-import { useSelector } from "@cogoport/store";
-import useGetFiniteList from "./useGetFiniteList";
-import { expenseConfig } from "../configurations/ShipmentIdView/expenseConfig";
-import { incomeConfig } from "../configurations/ShipmentIdView/incomeConfig";
+import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { useEffect, useState } from 'react';
+
+import { expenseConfig } from '../configurations/ShipmentIdView/expenseConfig';
+import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
+
+import useGetFiniteList from './useGetFiniteList';
 
 interface dataType {
-    currentPage: number;
-    restFilters: any;
-    pageIndex: number;
+	currentPage: number;
+	restFilters: any;
+	pageIndex: number;
 }
 interface AllParams {
-    billId?: number;
-    billNumber?: number;
-    orgId?: number;
-    serial_id?: number;
-    status?: string;
-    amountTab?: string;
-    setDataCard:Function
+	billId?: number;
+	billNumber?: number;
+	orgId?: number;
+	serial_id?: number;
+	status?: string;
+	amountTab?: string;
+	setDataCard:Function
 }
 interface Profile {
-    authorizationparameters?: string;
+	authorizationparameters?: string;
 }
 interface UseSelectorProps {
-    profile?: Profile;
+	profile?: Profile;
 }
 const useListBills = (allParams) => {
-    const [q, setQ] = useState("");
+	const [q, setQ] = useState('');
 
-    const { ...params }: AllParams = allParams || {};
-    delete params.status;
+	const { ...params }: AllParams = allParams || {};
+	delete params.status;
 
-    const { authorizationparameters } = useSelector(
-        ({ profile }: UseSelectorProps) => ({
-            authorizationparameters: profile?.authorizationparameters,
-        })
-    );
+	const { authorizationparameters } = useSelector(
+		({ profile }: UseSelectorProps) => ({
+			authorizationparameters: profile?.authorizationparameters,
+		}),
+	);
 
-    let check = true;
-    if (authorizationparameters?.split(":")?.[1] === "across_all") {
-        check = false;
-    }
+	let check = true;
+	if (authorizationparameters?.split(':')?.[1] === 'across_all') {
+		check = false;
+	}
 
-    const [
-        { data: billsData, loading: billsApiLoading },
-        listExpenseInvoicesTrigger,
-    ] = useRequestBf(
-        {
-            url: "/purchase/bills/list",
-            method: "get",
-            authkey: "get_purchase_bills_list",
-        },
-        { autoCancel: false }
-    );
+	const [
+		{ data: billsData, loading: billsApiLoading },
+		listExpenseInvoicesTrigger,
+	] = useRequestBf(
+		{
+			url     : '/purchase/bills/list',
+			method  : 'get',
+			authkey : 'get_purchase_bills_list',
+		},
+		{ autoCancel: false },
+	);
 
-    const [
-        { data: salesData, loading: invoicesApiLoading },
-        listSalesInvoicesTrigger,
-    ] = useRequestBf(
-        {
-            url: "/sales/invoice/list",
-            method: "get",
-            authkey: "get_sales_invoice_list",
-        },
-        { autoCancel: false }
-    );
+	const [
+		{ data: salesData, loading: invoicesApiLoading },
+		listSalesInvoicesTrigger,
+	] = useRequestBf(
+		{
+			url     : '/sales/invoice/list',
+			method  : 'get',
+			authkey : 'get_sales_invoice_list',
+		},
+		{ autoCancel: false },
+	);
 
-    const listExpenseInvoicesApi = (
-        restFilters: dataType,
-        currentPage: dataType
-    ) => {
-        return listExpenseInvoicesTrigger({
-            params: {
-                jobNumbers: params.serial_id ? [params?.serial_id] : undefined,
-                jobSource: "LOGISTICS",
-                jobType: "SHIPMENT",
-                q: q || undefined,
-                ...restFilters,
-                ...params,
-                amountTab: undefined,
-                pageIndex: currentPage || restFilters?.pageIndex,
-                pageSize: 10,
-            },     
-        });
-        
-    };
+	const listExpenseInvoicesApi = (
+		restFilters: dataType,
+		currentPage: dataType,
+	) => listExpenseInvoicesTrigger({
+		params: {
+			jobNumbers : params.serial_id ? [params?.serial_id] : undefined,
+			jobSource  : 'LOGISTICS',
+			jobType    : 'SHIPMENT',
+			q          : q || undefined,
+			...restFilters,
+			...params,
+			amountTab  : undefined,
+			pageIndex  : currentPage || restFilters?.pageIndex,
+			pageSize   : 10,
+		},
+	});
 
-    const listSalesInvoicesApi = (
-        restFilters: dataType,
-        currentPage: dataType
-    ) => {
-        return listSalesInvoicesTrigger({
-            params: {
-                jobNumber: params?.serial_id,
-                jobSource: "LOGISTICS",
-                jobType: "SHIPMENT",
-                q: q || undefined,
-                isCreatedByDetailRequired:true,
-                ...restFilters,
-                amountTab: undefined,
-                page: currentPage || restFilters?.pageIndex,
-                pageLimit: 10,
-            },
-        });
-    };
+	const listSalesInvoicesApi = (
+		restFilters: dataType,
+		currentPage: dataType,
+	) => listSalesInvoicesTrigger({
+		params: {
+			jobNumber                 : params?.serial_id,
+			jobSource                 : 'LOGISTICS',
+			jobType                   : 'SHIPMENT',
+			q                         : q || undefined,
+			isCreatedByDetailRequired : true,
+			...restFilters,
+			amountTab                 : undefined,
+			page                      : currentPage || restFilters?.pageIndex,
+			pageLimit                 : 10,
+		},
+	});
 
-    const currentApi =
-        params?.amountTab === "expense"
-            ? listExpenseInvoicesApi
-            : listSalesInvoicesApi;
-    const {
-        loading,
-        page,
-        filters,
-        list: { fullResponse },
-        hookSetters,
-        refetch,
-    } = useGetFiniteList(currentApi, {
-        ...(params || {}),
-        q,
-        authorizationparameters,
-    });
+	const currentApi = params?.amountTab === 'expense'
+        	? listExpenseInvoicesApi
+        	: listSalesInvoicesApi;
+	const {
+		loading,
+		page,
+		filters,
+		list: { fullResponse },
+		hookSetters,
+		refetch,
+	} = useGetFiniteList(currentApi, {
+		...(params || {}),
+		q,
+		authorizationparameters,
+	});
 
-    
-    useEffect(()=>{
-        params.setDataCard(fullResponse?.list?.[0]?.job  || fullResponse?.list?.[0] )
-    },[fullResponse])
-    
+	useEffect(() => {
+		params.setDataCard(fullResponse?.list?.[0]?.job || fullResponse?.list?.[0]);
+	}, [fullResponse]);
 
-    const config =
-        params?.amountTab === "expense" ? expenseConfig : incomeConfig;
+	const config = params?.amountTab === 'expense' ? expenseConfig : incomeConfig;
 
-    const apiLoading = loading || billsApiLoading || invoicesApiLoading;
-    return {
-        loading: apiLoading,
-        page,
-        filters,
-        list: { fullResponse },
-        hookSetters,
-        refetch,
-        setQ,
-        q,
-        config,
-    };
+	const apiLoading = loading || billsApiLoading || invoicesApiLoading;
+	return {
+		loading : apiLoading,
+		page,
+		filters,
+		list    : { fullResponse },
+		hookSetters,
+		refetch,
+		setQ,
+		q,
+		config,
+	};
 };
 
 export default useListBills;

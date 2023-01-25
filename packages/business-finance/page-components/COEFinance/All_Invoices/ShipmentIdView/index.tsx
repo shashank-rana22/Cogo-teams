@@ -1,104 +1,100 @@
-import { Pagination } from "@cogoport/components";
-import React, { useState } from "react";
-import useShipmentIdView from "../../hook/useShipmentIdView";
-import AccordianCards from "./AccordianCards/index";
-import LoadingState from "./LoadingState/index";
-import styles from "./styles.module.css";
-import Filters from "./Filters";
+import { Pagination } from '@cogoport/components';
+import React, { useState } from 'react';
+
+import useShipmentIdView from '../../hook/useShipmentIdView';
+
+import AccordianCards from './AccordianCards/index';
+import Filters from './Filters';
+import LoadingState from './LoadingState/index';
+import styles from './styles.module.css';
 
 export interface ItemDataProps {
-  organizationId?: string;
-  jobType?: string;
-  jobSource?: string;
-  jobNumber?: string;
-  expense_total_price?: number;
-  serial_id?: string;
-  pending_approvals?: number;
-  shipment_type?: string;
-  expense_count?: number;
-  expense_total_currency?: string;
-  urgency_expense_count?: number;
-  urgency_total_price?: number;
-  urgency_total_currency?: string;
-  income_count?: number;
-  credit_expense_count?: number;
-  credit_total_price?: number;
-  quotation_profit?: string;
-  tentative_profit?: string;
-  income_total_price?: number;
-  income_total_currency?: string;
-  id?: string;
-  is_job_closed?: boolean;
+	organizationId?: string;
+	jobType?: string;
+	jobSource?: string;
+	jobNumber?: string;
+	expense_total_price?: number;
+	serial_id?: string;
+	pending_approvals?: number;
+	shipment_type?: string;
+	expense_count?: number;
+	expense_total_currency?: string;
+	urgency_expense_count?: number;
+	urgency_total_price?: number;
+	urgency_total_currency?: string;
+	income_count?: number;
+	credit_expense_count?: number;
+	credit_total_price?: number;
+	quotation_profit?: string;
+	tentative_profit?: string;
+	income_total_price?: number;
+	income_total_currency?: string;
+	id?: string;
+	is_job_closed?: boolean;
 }
 
-const ShipmentIdView = () => {
-  const [currentOpenSID, setCurrentOpenSID] = useState("");
-  const [pending_approval, setPending_approval] = useState("all");
-  const [serial_id, setSerial_id] = useState("");
-  const {
-    hookSetters,
-    page,
-    filters,
-    loading,
-    list: { total, data },
-    refetch,
-  } = useShipmentIdView({ pending_approval, serial_id });
+function ShipmentIdView() {
+	const [currentOpenSID, setCurrentOpenSID] = useState('');
+	const [pending_approval, setPending_approval] = useState('all');
+	const [serial_id, setSerial_id] = useState('');
+	const {
+		hookSetters,
+		page,
+		filters,
+		loading,
+		list: { total, data },
+		refetch,
+	} = useShipmentIdView({ pending_approval, serial_id });
 
-  const handleShipmentView = () => {
-    if (loading) {
-      return (
-        <>
-          <div style={{ marginTop: "10px" }}>
-            {[1, 2, 3, 4, 5].map(() => {
-              return <LoadingState />;
-            })}
-          </div>
-        </>
-      );
-    }
-    return data?.map((item: ItemDataProps) => (
-      <AccordianCards
-        itemData={item}
-        currentOpenSID={currentOpenSID}
-        setCurrentOpenSID={setCurrentOpenSID}
-        key={item?.id}
-        refetch={refetch}
-      />
-    ));
-  };
+	const handleShipmentView = () => {
+		if (loading) {
+			return (
+				<div style={{ marginTop: '10px' }}>
+					{[1, 2, 3, 4, 5].map(() => <LoadingState />)}
+				</div>
+			);
+		}
+		return data?.map((item: ItemDataProps) => (
+			<AccordianCards
+				itemData={item}
+				currentOpenSID={currentOpenSID}
+				setCurrentOpenSID={setCurrentOpenSID}
+				key={item?.id}
+				refetch={refetch}
+			/>
+		));
+	};
 
-  return (
-    <div>
-      <Filters
-        hookSetters={hookSetters}
-        filters={filters}
-        pending_approval={pending_approval}
-        setPending_approval={setPending_approval}
-        serial_id={serial_id}
-        setSerial_id={setSerial_id}
-      />
+	return (
+		<div>
+			<Filters
+				hookSetters={hookSetters}
+				filters={filters}
+				pending_approval={pending_approval}
+				setPending_approval={setPending_approval}
+				serial_id={serial_id}
+				setSerial_id={setSerial_id}
+			/>
 
-      <div>
-        {handleShipmentView()}
-        {data.length > 0 ? (
-          <div className={styles.pagination}>
-            <Pagination
-              currentPage={page}
-              onPageChange={(val: number) =>
-                hookSetters.setFilters({
-                  ...filters,
-                  page: val,
-                })
-              }
-              totalItems={total}
-              pageSize={10}
-              type="table"
-            />
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
-};
+			<div>
+				{handleShipmentView()}
+				{data.length > 0 ? (
+					<div className={styles.pagination}>
+						<Pagination
+							currentPage={page}
+							onPageChange={(val: number) => hookSetters.setFilters({
+              		...filters,
+              		page: val,
+              	})}
+							totalItems={total}
+							pageSize={10}
+							type="table"
+						/>
+					</div>
+				) : null}
+			</div>
+		</div>
+	);
+}
 
 export default ShipmentIdView;

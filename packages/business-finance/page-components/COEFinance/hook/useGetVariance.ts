@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
-import { useRequest } from '@cogoport/request';
-import { useSelector } from "@cogoport/store";
 import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
-interface  useGetVarianceInterface {
-    collectionPartyId?:string
+interface useGetVarianceInterface {
+	collectionPartyId?:string
 }
 const useGetVariance = ({ collectionPartyId }:useGetVarianceInterface) => {
 	const scope = useSelector(({ general }:any) => general.scope);
 
-    const [{data: varianceFullData,loading}, trigger] = useRequest(
-        {
-            url: '/get_collection_party_variance',
-            method: "post",
-        },
-        { autoCancel: false }
-    );
+	const [{ data: varianceFullData, loading }, trigger] = useRequest(
+		{
+			url    : '/get_collection_party_variance',
+			method : 'post',
+		},
+		{ autoCancel: false },
+	);
 
 	const getVaraince = async () => {
 		try {
@@ -31,7 +31,6 @@ const useGetVariance = ({ collectionPartyId }:useGetVarianceInterface) => {
 			console.log(err);
 		}
 	};
-	
 
 	useEffect(() => {
 		if (collectionPartyId) {

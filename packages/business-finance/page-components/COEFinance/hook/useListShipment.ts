@@ -1,35 +1,35 @@
-import { useRequest} from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useListShipment = (jobNumber:string | undefined) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url     : 'list_shipments',
-			method  : 'get',
-		}
+			url    : 'list_shipments',
+			method : 'get',
+		},
 	);
 
-	const getData=async()=>{
-		try{
+	const getData = async () => {
+		try {
 			await trigger({
-				params:{
-					  filters:{
-							serial_id: jobNumber
-					  }
-				}
-			})
-		}catch(error){
-			console.log('error->',error);
+				params: {
+					  filters: {
+						serial_id: jobNumber,
+					  },
+				},
+			});
+		} catch (error) {
+			console.log('error->', error);
 		}
-	}
+	};
 
-	useEffect(()=>{
+	useEffect(() => {
 	      getData();
-	},[jobNumber])
+	}, [jobNumber]);
 
 	return {
 		data,
-		loading
+		loading,
 	};
 };
 

@@ -1,13 +1,13 @@
-import { useRequest} from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetShipmentTimeLine = (shipmentId:string) => {
-	const [{data, loading}, trigger] = useRequest(
+	const [{ data, loading }, trigger] = useRequest(
 		{
-			url     : '/shipment/get_service_timeline',
-			method  : 'get',
-		}
-	)
+			url    : '/shipment/get_service_timeline',
+			method : 'get',
+		},
+	);
 
 	const getList = async () => {
 		await trigger({
@@ -17,7 +17,7 @@ const useGetShipmentTimeLine = (shipmentId:string) => {
 		});
 	};
 	useEffect(() => {
-			getList();
+		getList();
 	}, []);
 
 	return {

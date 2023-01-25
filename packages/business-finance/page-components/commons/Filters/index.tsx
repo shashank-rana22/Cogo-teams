@@ -1,7 +1,9 @@
-import React from 'react';
 import { Button } from '@cogoport/components';
+import React from 'react';
+
+import { ControlProps } from '../Interfaces';
+
 import Element from './Element/index';
-import {ControlProps} from "../Interfaces";
 import styles from './styles.module.css';
 
 interface FilterProps {
@@ -20,16 +22,15 @@ function Filter({
 	showClearBtn = false,
 	clearFilters,
 }:FilterProps) {
-
-	const getElement=(singlecontrol:ControlProps) => {
-		const { span=0, name = '', type = '',groupby,showlabel=false,label, ...rest }  = singlecontrol || {};
+	const getElement = (singlecontrol:ControlProps) => {
+		const { span = 0, name = '', type = '', groupby, showlabel = false, label, ...rest } = singlecontrol || {};
 		const customiseControl = {
 			id       : `filter-${name}`,
 			value    : filters![name as keyof typeof filters] || '',
 			onChange : (val:string) => {
-				let value:string;					
+				let value:string;
 				if (type === 'input') value = val;
-				else if (type === 'datepicker'||type==='singleDateRange') value = val;
+				else if (type === 'datepicker' || type === 'singleDateRange') value = val;
 				else value = val;
 				setFilters((prev:object) => ({
 					...prev,
@@ -44,39 +45,41 @@ function Filter({
 			...rest,
 		};
 		return (
-			<div className={styles.col} style={{
-				'--width': `${(singlecontrol.span || 1)*(100/12)}%`,
-			} as React.CSSProperties}>
+			<div
+				className={styles.col}
+				style={{
+					'--width': `${(singlecontrol.span || 1) * (100 / 12)}%`,
+				} as React.CSSProperties}
+			>
 				<div>
-				{!showlabel&&<div className={styles.showlabel}>{label as string}</div>}
-				<Element key={name} {...customiseControl} />
+					{!showlabel && <div className={styles.showlabel}>{label as string}</div>}
+					<Element key={name} {...customiseControl} />
 				</div>
 			</div>
 		);
-	}
+	};
 
 	return (
 		<div className={styles.flex}>
-			{(controls || []).map((control)=>{
-				const {groupBy,span,name, showGroupName=true}=control;
-				if(groupBy){
+			{(controls || []).map((control) => {
+				const { groupBy, span, name, showGroupName = true } = control;
+				if (groupBy) {
 					return (
 						<>
-						{showGroupName&&<div className={styles.groupHead}>{name}</div>}
-						<div className={styles.col} style={{width:`${(span || 12)*(100/12)}%`}}>
-							{(groupBy).map((each)=>(getElement(each)))}
-						</div>
+							{showGroupName && <div className={styles.groupHead}>{name}</div>}
+							<div className={styles.col} style={{ width: `${(span || 12) * (100 / 12)}%` }}>
+								{(groupBy).map((each) => (getElement(each)))}
+							</div>
 						</>
-						)
-				}else{
-					return(<>{getElement(control)}</>)
+					);
 				}
+				return (<>{getElement(control)}</>);
 			})}
 			{showClearBtn && (
 				<Button
 					id="clear-filters-btn"
 					className="primary sm btn-create-payrun"
-					disabled={Object.keys(filters||{}).length < 2}
+					disabled={Object.keys(filters || {}).length < 2}
 					onClick={clearFilters}
 				>
 					Clear Filters

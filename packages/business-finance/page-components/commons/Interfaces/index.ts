@@ -1,66 +1,66 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 export interface ConfigType {
-    showHeader?: boolean;
-    headerStyles?: React.CSSProperties;
-    itemStyles?: React.CSSProperties;
-    bodyStyles?: React.CSSProperties;
-    clickable?: boolean;
-    showHeaderCheckbox?: boolean;
-    fields: FieldType[];
+	showHeader?: boolean;
+	headerStyles?: React.CSSProperties;
+	itemStyles?: React.CSSProperties;
+	bodyStyles?: React.CSSProperties;
+	clickable?: boolean;
+	showHeaderCheckbox?: boolean;
+	fields: FieldType[];
 }
 
 export interface FunctionObjects {
-    [key: string]: React.FC;
+	[key: string]: React.FC;
 }
 
 export interface GenericObject {
-    [key: string]: any;
+	[key: string]: any;
 }
 
 export interface NestedObj {
-    [key: string]: string;
+	[key: string]: string;
 }
 
 export interface SortingType {
-    name: string;
+	name: string;
 }
 
 export interface FieldType {
-    key?: string;
-    topKey?: GenericObject;
-    bottomKey?: GenericObject;
-    label?: string | ReactNode;
-    sorting?: SortingType;
-    span: number;
-    className?: string;
-    styles?: NestedObj;
-    func?: string;
+	key?: string;
+	topKey?: GenericObject;
+	bottomKey?: GenericObject;
+	label?: string | ReactNode;
+	sorting?: SortingType;
+	span: number;
+	className?: string;
+	styles?: NestedObj;
+	func?: string;
 }
 
 export interface TableProps {
-    id?: string;
-    className?: string;
-    style?: React.CSSProperties;
-    columns: object[];
-    data: object[];
-    layoutType?: "table" | "block" | "flex" | "absolute";
-    selectType?: "single" | "multiple";
-    onRowSelect?: (row: object) => void;
-    onRowClick?: (row: object) => void;
-    getRowId?: (row: object) => string;
+	id?: string;
+	className?: string;
+	style?: React.CSSProperties;
+	columns: object[];
+	data: object[];
+	layoutType?: 'table' | 'block' | 'flex' | 'absolute';
+	selectType?: 'single' | 'multiple';
+	onRowSelect?: (row: object) => void;
+	onRowClick?: (row: object) => void;
+	getRowId?: (row: object) => string;
 }
 
-export interface ListDataProps{
+export interface ListDataProps {
 	list: object[];
 	pageIndex?: number;
 	totalPage?: number;
 	totalRecords?: number;
 }
 
-export interface Options{
-    label: string;
-    value: string;
+export interface Options {
+	label: string;
+	value: string;
 }
 
 export interface ControlProps {
@@ -69,39 +69,39 @@ export interface ControlProps {
 	type?: string;
 	options?: Options[];
 	groupBy?:ControlProps[];
-    style?:React.CSSProperties;
-	[key:string]: string|number|undefined|boolean|Options[]|object[]| React.CSSProperties;
+	style?:React.CSSProperties;
+	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties;
 }
 
-interface PortInterface{
+interface PortInterface {
 	display_name?:string
 	postal_code?:string,
-	country:{name:string},
+	country:{ name:string },
 	name:string
 	port_code:string
 }
 
-interface IEInterface{
+interface IEInterface {
 	business_name:string
 }
-interface PickupDropInt{
+interface PickupDropInt {
 	postal_code?:string,
-	country:{name:string},
+	country:{ name:string },
 	display_name:string,
 	name:string
 }
-interface PortDetailsInt{
-	port_code?:string|number,
-	country?:{name?:string},
+interface PortDetailsInt {
+	port_code?:string | number,
+	country?:{ name?:string },
 	display_name?:string,
 	name?:string
 }
 
-export interface DetailInterface{
+export interface DetailInterface {
 	service_type?:string,
 	services?:Array<string>,
 	chargable_weight?: number | string,
-	weight: number ,
+	weight: number,
 	volume: number,
 	lr_number:number | string,
 	eway_bill_number: number | string,
@@ -118,15 +118,15 @@ export interface DetailInterface{
 	master_airway_bill_number?:string,
 	house_airway_bill_number?:string,
 	haulage_type?:string,
-	airline?:{business_name:string},
+	airline?:{ business_name:string },
 	transport_mode?:string,
-	cargo_weight_per_container?:string|number,
+	cargo_weight_per_container?:string | number,
 	destination_cargo_handling_type?:string,
 	origin_cargo_handling_type?:string,
 	container_status?:string,
 	source?:string,
-	shipping_line?:{business_name:string},
-	preferred_shipping_line?:{business_name:string},
+	shipping_line?:{ business_name:string },
+	preferred_shipping_line?:{ business_name:string },
 	state?:string,
 	origin_location?:PortInterface,
 	container_handover_location?:PortInterface,
@@ -152,8 +152,8 @@ export interface DetailInterface{
 	origin_oversea_agent:object,
 	shipper_details:object,
 	buy_quotation_agreed_rates:number,
-	hs_code?:{hs_code: number|string , name: string},
-    importer_exporter:IEInterface,
+	hs_code?:{ hs_code: number | string, name: string },
+	importer_exporter:IEInterface,
 	shipment_type:string,
 	pickup:PickupDropInt,
 	drop:PickupDropInt,
@@ -162,7 +162,7 @@ export interface DetailInterface{
 	destination_port?: PortDetailsInt,
 	destination_main_port?: PortDetailsInt
 }
-export interface RemarksValInterface{
+export interface RemarksValInterface {
 	collectionPartyRemark:string,
 	billingPartyRemark:string,
 	invoiceDetailsRemark:string,

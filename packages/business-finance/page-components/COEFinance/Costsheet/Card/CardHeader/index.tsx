@@ -1,20 +1,24 @@
-import React from 'react'
-import styles from './styles.module.css'
-import {Placeholder} from '@cogoport/components'
+import { Placeholder } from '@cogoport/components';
+import React from 'react';
 
-interface Props{
-    header?: string;
-    value?: string|number;
-    loading?:boolean;
+import styles from './styles.module.css';
+
+interface Props {
+	header?: string;
+	value?: string | number;
+	loading?:boolean;
 }
 
-const CardHeader = ({header,value,loading}:Props) => {
-  return (
-    <div className={styles.header}>
-        <span className={styles.font}>{header}</span>
-        <span className={styles.font}>Total - {loading?<span className={styles.placeholder}><Placeholder/></span>:value}</span>
-    </div>
-  )
+function CardHeader({ header, value, loading }:Props) {
+	return (
+		<div className={styles.header}>
+			<span className={styles.font}>{header}</span>
+			<span className={styles.font}>
+				Total -
+				{loading ? <span className={styles.placeholder}><Placeholder /></span> : value}
+			</span>
+		</div>
+	);
 }
 
-export default CardHeader
+export default CardHeader;

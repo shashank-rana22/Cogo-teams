@@ -1,7 +1,9 @@
 import React from 'react';
+
+import { DetailInterface } from '../../../../../commons/Interfaces/index';
+
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
-import {DetailInterface} from '../../../../../commons/Interfaces/index';
 
 const labels = [
 	'airline',
@@ -32,15 +34,15 @@ const labels = [
  * @param {Array of Object} 				[props.detail=[{}]] - Specifies details of cargo
  */
 
-interface DetailInt{
-  detail:DetailInterface
+interface DetailInt {
+	detail:DetailInterface
 }
 
 function CargoDetails({ detail }:DetailInt) {
 	return (
 		<div className={styles.divContainer}>
 			{labels.map((label) => {
-				if (detail?.[label as keyof typeof detail ] && renderValue(label, detail)) {
+				if (detail?.[label as keyof typeof detail] && renderValue(label, detail)) {
 					return (
 						<div className={styles.container}>
 							<div className={`${styles.Box} cargo-detail-pill`} key={label}>
