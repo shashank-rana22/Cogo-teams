@@ -12,6 +12,7 @@ function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
 	const [showMobileNavbar, setShowMobileNavbar] = useState(false);
+	const [pinnedNavKeys, setPinnedNavKeys] = useState([]);
 
 	const {
 		user_data,
@@ -22,10 +23,8 @@ function AdminLayout({
 	const { user: { id: user_id = '' }, partner: { id: partner_id = '', partner_user_id = '' } } = user_data;
 
 	const {
-		pinnedNavKeys = [],
-		setPinnedNavKeys = () => {},
 		pinListLoading = false,
-	} = useFetchPinnedNavs({ user_id, partner_id });
+	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys });
 
 	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys });
 

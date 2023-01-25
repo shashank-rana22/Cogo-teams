@@ -1,9 +1,7 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-const useFetchPinnedNavs = ({ user_id, partner_id }) => {
-	const [pinnedNavKeys, setPinnedNavKeys] = useState([]);
-
+const useFetchPinnedNavs = ({ user_id, partner_id, setPinnedNavKeys = () => {} }) => {
 	const [{ loading: pinListLoading = false }, trigger] = useRequest({
 		url    : 'list_partner_user_settings',
 		method : 'GET',
@@ -19,9 +17,10 @@ const useFetchPinnedNavs = ({ user_id, partner_id }) => {
 		);
 	};
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchPinnedNavs(); }, []);
 
-	return { pinnedNavKeys, setPinnedNavKeys, pinListLoading };
+	return { pinListLoading };
 };
 
 export default useFetchPinnedNavs;
