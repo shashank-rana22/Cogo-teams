@@ -1,54 +1,73 @@
-import React, {useState} from "react";
-import { Button } from "@cogoport/components";
-import VenderComponent from "./Vendors";
-import ExpenseComponent from "./Expenses";
-import ReportComponent from "./Reports";
+import React,{useState} from 'react';
+import styles from './styles.module.css';
+import Vendors from './Vendors/index';
 
-
-function OverHead () {
-    const [tabValue, setTabValue] = useState('VENDORS');
-    const overHeadMapping = {
-        "VENDORS": {
-            "component": <VenderComponent />
-        },
-        "EXPENSES": {
-            "component": <ExpenseComponent />
-        },
-        "REPORTS": {
-            "component": <ReportComponent />
-        }
-    }
-
-    const renderButtons = () => {
-        return (
-            <div style={{
-                borderRadius   : '10px',
-                display        : 'flex',
-                justifyContent : 'flex-start',
-                marginBottom   : '20px',
-                marginTop   : '16px',
-                gap         : '10px',
-            }}
-            >
-            {
-                Object.keys(overHeadMapping).map ((key) => {
-                    return (<Button size="lg" themeType="primary" onClick={() => setTabValue(key)}>{key}</Button>)
-                })
-            }
-            </div>
-        )
-    }
-
+const Overheads = () =>{
+    const [activeTab, setActiveTab] = useState('vendors');
     return (
-    <div>
-        {renderButtons()}
-        <div>
-            {overHeadMapping?.[tabValue]?.component}
-        </div>
+      <div>
+        <div className={styles.container}>
+          <div className={styles.flex}>
+            <div
+              onClick={() => {
+                setActiveTab("vendors");
+              }}
+            >
+              <div 
+                className={
+                  activeTab==='vendors' ? styles.sub_container_click : styles.sub_container
+                }
+              >
+               VENDORS
+              </div>
+            </div>
 
-    </div>
+            <div
+              onClick={() => {
+                setActiveTab("expenses");
+              }}
+            >
+              <div
+                className={
+                    activeTab==='expenses' ? styles.sub_container_click : styles.sub_container
+                }
+              >
+              EXPENSES
+              </div>
+              </div>
+
+              <div
+                onClick={() => {
+                    setActiveTab("reports");
+                }}
+                >
+              <div
+                className={
+                    activeTab==='reports' ? styles.sub_container_click : styles.sub_container
+                }
+              >
+              REPORTS
+              </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div className={styles.section}>
+           {activeTab==='vendors' && <div>
+                  <Vendors/>
+              </div>}
+
+            {activeTab==='expenses' && <div>
+                  expense tab
+              </div>}
+          </div>
+
+
+        </div>
     )
 }
 
 
-export default OverHead;
+export default Overheads;

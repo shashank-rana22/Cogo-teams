@@ -1,9 +1,8 @@
 import { useRequestBf } from '@cogoport/request';
 import React, { useEffect, useState } from 'react';
 import {Tabs, TabPanel} from '@cogoport/components';
-import OverHead from './OverHeads';
 import styles from "./styles.module.css"
-// import Overheads from './Components/Overheads/index';
+import Overheads from './Overheads/index';
 // import styles from './styles.module.css';
 
 function AccountPayables() {
