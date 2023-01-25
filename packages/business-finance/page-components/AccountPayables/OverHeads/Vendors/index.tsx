@@ -120,14 +120,25 @@ function VenderComponent () {
         )
     }
     
-    const RenderInvoice = (item) => {
-        const {item: itemData = {}}=  item
+    const RenderInvoice = ({item}) => {
+        const {item: itemData = {}}=  item;
         const {openInvoices = ''} = itemData;
         return (
             <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                 {openInvoices} <div> (INR 12000) </div>
             </div>
         )
+    }
+    
+    const RenderViewMoreButton = ({item}) =>{
+        return (
+            <Button 
+               themeType="secondary" 
+               size="sm" 
+               onClick={() => setShowModal(true)}
+               >
+                View More
+            </Button>)
     }
 
     const functions:any = {
@@ -138,7 +149,10 @@ function VenderComponent () {
             <RenderPayments item={itemData}/>
         ),
         renderInvoice: (itemData:itemProps) => (
-            <RenderInvoice item={itemData}/>
+            <RenderInvoice item={itemData}/> 
+        ),
+        renderViewMoreButton: (itemData:itemProps) => (
+            <RenderViewMoreButton item={itemData} />
         )
     }
 
