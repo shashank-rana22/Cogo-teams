@@ -217,12 +217,16 @@ const ShipmentDetails = ({
                 : `${varianceFullData?.currency || "--"}${" "}
 					${varianceFullData?.total_variance || "--"}`}
             </div>
-            <div
-              className={styles.viewMore}
-              onClick={() => setShowVariance(true)}
-            >
-              View More
-            </div>
+            {varianceFullData?.data ? (
+              <div
+                className={styles.viewMore}
+                onClick={() => setShowVariance(true)}
+              >
+                View More
+              </div>
+            ) : (
+              <div>NO DATA FOUND</div>
+            )}
           </div>
         ) : null}
         <POC itemData={data} />
