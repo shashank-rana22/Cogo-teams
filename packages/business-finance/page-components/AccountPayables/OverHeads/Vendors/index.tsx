@@ -1,7 +1,7 @@
 import { Select, Button, Input, Tooltip } from "@cogoport/components"
 import React, {useState, useEffect} from "react";
 import { GenericObject } from "../../../commons/Interfaces";
-// import List from "../../../../page-components/";
+import List from "../../commons/List/index";
 import OVER_HEAD_CONFIG from "./utils/config";
 import Controls from "./utils/controls";
 import styles from "./styles.module.css";
@@ -94,7 +94,7 @@ function VenderComponent () {
         <div>
             {renderHeaders()}
 
-            {/* <List
+            <List
                 config={OVER_HEAD_CONFIG}  
                 itemData={dummyData}
                 loading={false}
@@ -106,7 +106,7 @@ function VenderComponent () {
                     setFilters((p) => ({...p, pageIndex: pageValue}))
                 }}
                 showPagination = {true}
-            /> */}
+            />
 
             {
                 showModal && <CreateExpenseModal showModal = {showModal} setShowModal = {setShowModal}/>
