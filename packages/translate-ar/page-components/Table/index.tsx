@@ -5,7 +5,7 @@ import { TableProps } from '../../common/interfaces';
 
 import styles from './styles.module.css';
 
-function StyledTable({ id, className, columns, data, ...rest }: TableProps) {
+function StyledTable({ id, className, columns, data, loading, ...rest }: TableProps) {
 	return (
 		<div className={styles.table}>
 			<Table
@@ -13,6 +13,7 @@ function StyledTable({ id, className, columns, data, ...rest }: TableProps) {
 				data={data}
 				id={id}
 				className={className}
+				loading={loading}
 				{...rest}
 			/>
 		</div>

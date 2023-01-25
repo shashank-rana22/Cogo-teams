@@ -18,8 +18,8 @@ function TranslateAR() {
 		setReceivables(v);
 	};
 	const PropMapping = {
-		pending   : { heading: 'pending' },
-		completed : { heading: 'completed' },
+		pending   : { status: 'pending' },
+		completed : { status: 'completed' },
 	};
 	return (
 		<>
