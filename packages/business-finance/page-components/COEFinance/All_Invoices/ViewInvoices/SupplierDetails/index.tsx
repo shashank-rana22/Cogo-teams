@@ -97,9 +97,17 @@ const SupplierDetails = ({
           <div className={styles.flex}>
             Name -
             {!accPaymentLoading ? (
-              <span className={styles.organizationName}>
-                {sellerDetail?.organizationName}
-              </span>
+              <Tooltip
+                content={
+                  <div style={{ fontSize: "10px" }}>
+                    {sellerDetail?.organizationName}
+                  </div>
+                }
+              >
+                <div className={styles.organizationName}>
+                  {sellerDetail?.organizationName}
+                </div>
+              </Tooltip>
             ) : (
               <div>
                 <Placeholder height="20px" width="148px" />
@@ -134,7 +142,7 @@ const SupplierDetails = ({
               }
             >
               <div className={styles.tooltip}>
-                <IcMInfo />
+                <IcMInfo width={15} height={15} />
               </div>
             </Tooltip>
             &nbsp; Amount Payables : &nbsp;{" "}
@@ -161,7 +169,7 @@ const SupplierDetails = ({
               }
             >
               <div className={styles.tooltip}>
-                <IcMInfo />
+                <IcMInfo width={15} height={15} />
               </div>
             </Tooltip>
             &nbsp; Amount Receivables : &nbsp;{" "}

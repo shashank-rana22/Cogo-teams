@@ -32,6 +32,12 @@
   font-weight: 700;
   color: red;
 }
+.smallHr {
+  width: 37%;
+  margin: 8px 24px;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
+}
 
 .hr {
   width: 100%;
@@ -59,7 +65,8 @@
 .mainHeader {
   display: flex;
   justify-content: space-between;
-  margin: 24px;
+  margin: 24px 24px 0px 24px;
+  align-items: center;
 }
 
 .footer {
@@ -73,12 +80,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
 }
 
 .tooltip {
-  margin-top: 2px;
+  margin-top: 4px;
 }
 .formStyle {
   font-size: 10px;

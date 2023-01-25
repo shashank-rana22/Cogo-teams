@@ -118,7 +118,7 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h3>Invoice Details</h3>
+        <div className={styles.details}>Invoice Details</div>
         <Pill color="blue">{invoiceType}</Pill>
       </div>
 

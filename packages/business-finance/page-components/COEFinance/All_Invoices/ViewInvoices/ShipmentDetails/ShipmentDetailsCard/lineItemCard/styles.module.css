@@ -41,10 +41,24 @@
 }
 
 .smallHr {
-  width: 25%;
+  width: 57%;
   margin: 8px 0;
   border: 1px solid #ed3726;
   border-radius: 30px;
+}
+.instructions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tooltip {
+  margin-top: 4px;
+}
+.formStyle {
+  font-size: 10px;
 }
 
 .mainHeader {

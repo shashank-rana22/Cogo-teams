@@ -29,6 +29,7 @@
 .tagsContainer {
   display: flex;
   gap: 24px;
+  width: 100%;
 }
 
 .kycVerified {
@@ -111,4 +112,5 @@
 }
 .flex {
   display: flex;
+  width: 100%;
 }

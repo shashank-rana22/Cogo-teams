@@ -153,6 +153,7 @@ const ShipmentDetailsCard = ({
           setLineItemsRemarks={setLineItemsRemarks}
           remarksVal={remarksVal}
           setLineItem={setLineItem}
+          invoiceType={invoiceType}
           isInvoiceApproved={isInvoiceApproved}
         />
       ) : (
@@ -168,7 +169,7 @@ const ShipmentDetailsCard = ({
                 }
               >
                 <div className={styles.tooltip}>
-                  <IcMInfo />
+                  <IcMInfo width={15} height={15} />
                 </div>
               </Tooltip>
               <Pill color="blue">{invoiceType}</Pill>
@@ -180,7 +181,7 @@ const ShipmentDetailsCard = ({
               </div>
             )}
           </div>
-
+          <div className={styles.smallHr} />
           {DetailsCard.map((itemData: any) => {
             const { id, label = "" } = itemData || {};
 
@@ -192,7 +193,7 @@ const ShipmentDetailsCard = ({
                     show={showRejected[id as keyof typeof showRejected]}
                     onClose={onClose}
                   >
-                    <Modal.Header title="CHOOSE THE DETAiLS YOU WANT TO REJECT" />
+                    <Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
                     <Modal.Body>
                       {Object.keys(showRejected).includes("1") && (
                         <div>

@@ -1,4 +1,4 @@
-import { Button } from "@cogoport/components";
+import { Button, Pill, Tooltip } from "@cogoport/components";
 import React, { useEffect, useState } from "react";
 import { startCase } from "@cogoport/utils";
 import converter from "number-to-words";
@@ -13,6 +13,7 @@ import {
   IcCFtick,
   IcMOverflowDot,
   IcCFcrossInCircle,
+  IcMInfo,
 } from "@cogoport/icons-react";
 import { Popover, Modal, Checkbox } from "@cogoport/components";
 import { Textarea } from "@cogoport/components";
@@ -30,6 +31,7 @@ interface LineItemCard {
   lineItemsRemarks: object;
   setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
   remarksVal: object | {};
+  invoiceType?: string;
   setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
   isInvoiceApproved: boolean;
 }
@@ -42,6 +44,7 @@ const LineItemCard = ({
   lineItemsRemarks,
   setLineItemsRemarks,
   remarksVal,
+  invoiceType = "",
   setLineItem,
   isInvoiceApproved,
 }: LineItemCard) => {
@@ -172,8 +175,20 @@ const LineItemCard = ({
   return (
     <div>
       <div className={styles.mainHeader}>
-        <div style={{ fontWeight: "500", width: "500px" }}>
-          Check off Line Items and Tax Rate (As filled by SO2 in the cogo form)
+        <div className={styles.instructions}>
+          Check off Line Items and Tax Rate
+          <Tooltip
+            content={
+              <div className={styles.formStyle}>
+                As filled by SO2 In The COGO Invoice
+              </div>
+            }
+          >
+            <div className={styles.tooltip}>
+              <IcMInfo width={15} height={15} />
+            </div>
+          </Tooltip>
+          <Pill color="blue">{invoiceType}</Pill>
         </div>
         <div className={styles.smallHr} />
         {!isInvoiceApproved && (

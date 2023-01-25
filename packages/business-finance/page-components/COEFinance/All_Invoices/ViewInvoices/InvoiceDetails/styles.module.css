@@ -24,6 +24,10 @@
   width: 2px;
   height: 36px;
 }
+.details {
+  font-size: 18px;
+  font-weight: 600;
+}
 .heading {
   display: flex;
   gap: 6px;

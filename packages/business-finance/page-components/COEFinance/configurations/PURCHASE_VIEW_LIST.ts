@@ -1,6 +1,6 @@
 const PURCHASE_VIEW_CONFIG = {
     showHeader: true,
-    headerStyles       : { marginBottom: '16px', borderRadius: '8px', background: '#333',marginTop:'20px' },
+    headerStyles       : { marginBottom: '16px', borderRadius: '8px', background: '#333',marginTop:'20px' ,paddingLeft: "14px"},
     bodyStyles         :{ border: "1px solid #C7C7C7",color:' #333333',fontWeight: '400',fontSize: '12px',lineHeight: '14px',fontStyle: "normal"},
     fields             : [
         {

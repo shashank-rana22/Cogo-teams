@@ -17,6 +17,7 @@
   margin: 12px 0;
   background: #fff;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
 .cardUpper {
@@ -95,6 +96,6 @@
   font-weight: 700;
   display: flex;
 }
-.serialId{
-	color: #ed3726;
+.serialId {
+  color: #ed3726;
 }
