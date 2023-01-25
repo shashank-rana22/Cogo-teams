@@ -60,7 +60,8 @@ function Navbar({
 					<div className={styles.search_container}>
 						<Input
 							value={searchString}
-							className={styles.input_search}
+							placeholder="Search menu..."
+							className={resetSubnavs ? styles.input_search : styles.input_search_hover}
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}
 						/>
