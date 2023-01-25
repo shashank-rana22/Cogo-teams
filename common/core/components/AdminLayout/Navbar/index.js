@@ -1,5 +1,4 @@
-import { Input } from '@cogoport/components';
-import cl from '@cogoport/components/src/utils/classname-processor';
+import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useCallback, useState } from 'react';
 
@@ -60,7 +59,8 @@ function Navbar({
 					<div className={styles.search_container}>
 						<Input
 							value={searchString}
-							className={styles.input_search}
+							placeholder="Search menu..."
+							className={resetSubnavs ? styles.input_search : styles.input_search_hover}
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}
 						/>

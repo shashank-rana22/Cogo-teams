@@ -1,4 +1,4 @@
-import cl from '@cogoport/components/src/utils/classname-processor';
+import { cl } from '@cogoport/components';
 import { IcMOverflowLine, IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
