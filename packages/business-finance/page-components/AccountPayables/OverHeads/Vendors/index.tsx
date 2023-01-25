@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { Select, Button, Input, Tooltip } from "@cogoport/components"
 import { GenericObject } from "../../commons/Interfaces";
-import List from "../../commons/List/index";
+import List from ".././../../commons/List";
 import VENDOR_CONFIG from "./utils/config";
 import {IcMSearchlight} from '@cogoport/icons-react';
 import Controls from "./utils/controls";
 import styles from "./styles.module.css";
 import dummyData from "./utils/data";
-import CreateExpenseModal from "./CreateExpenseModal";
+import CreateVendorModal from "./CreateVendorModal";
 import useListVendors from "./hooks/useListVendors";
 import { IcMFtick,  IcMInfo } from "@cogoport/icons-react"
 
@@ -173,7 +173,7 @@ function VenderComponent () {
             />
 
             {
-                showModal && <CreateExpenseModal showModal = {showModal} setShowModal = {setShowModal}/>
+                showModal && <CreateVendorModal showModal = {showModal} setShowModal = {setShowModal}/>
             }
         </div>
     )

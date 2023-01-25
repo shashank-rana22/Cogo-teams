@@ -36,3 +36,9 @@
     align-items: center;
     color: #e10d1f;
 }
+.segmentedControl{
+    div{
+        font-weight: 600;
+        font-family: Poppins;
+    }
+}
