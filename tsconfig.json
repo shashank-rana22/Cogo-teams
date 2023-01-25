@@ -1,33 +1,33 @@
 {
-    "include": [
-        "packages/**/*",
-        "postcss.config.js",
-        ".eslintrc.js",
-        ".stylelintrc.js",
-        "./cogo-control/next-env.d.ts",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "exclude": [
-        "dist"
-    ],
-    "compilerOptions": {
-        "target": "es5",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "allowJs": true,
-        "checkJs": false,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "incremental": true,
-        "esModuleInterop": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "preserve",
-        "strict": false
-    },
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "strict": false
+  },
+  "include": [
+    "./cogo-control/next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    ".eslintrc.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
