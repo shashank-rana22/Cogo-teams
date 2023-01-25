@@ -20,6 +20,11 @@ const Documents = ({ shipmentId = "" }: DocumentsInterface) => {
     DocumentTypeFunc: (item: any) => <p>{startCase(item?.document_type)}</p>,
     ServiceTypeFunc: (item: any) => <p>{startCase(item?.service_type)}</p>,
     DocumentStatus: (item: any) => <p>{startCase(item?.state)}</p>,
+    UploadedTypeFunc: (item: any) => (
+      <p>
+        {item?.uploaded_by_user?.name || item?.uploaded_by_org?.business_name}
+      </p>
+    ),
     UploadedOnFunc: (item: any) => (
       <p>
         {item?.uploaded_at

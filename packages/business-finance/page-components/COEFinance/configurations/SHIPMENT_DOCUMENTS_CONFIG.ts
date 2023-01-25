@@ -13,6 +13,7 @@
 			label: 'Uploaded by',
             key: 'uploaded_by_org.business_name',
 			span: 1.5,
+			func: 'UploadedTypeFunc'
 		},
         {
 			label: 'Uploaded on',
