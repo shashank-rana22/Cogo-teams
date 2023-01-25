@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 				tracesSampleRate : 1.0,
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	}
 }

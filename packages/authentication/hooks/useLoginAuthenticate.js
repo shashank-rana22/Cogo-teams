@@ -47,10 +47,9 @@ const useLoginAuthenticate = () => {
 					setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
 					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
 				}
-				return;
 			}
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 

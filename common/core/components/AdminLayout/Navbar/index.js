@@ -1,5 +1,4 @@
-import { Input } from '@cogoport/components';
-import cl from '@cogoport/components/src/utils/classname-processor';
+import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useCallback, useState } from 'react';
 
