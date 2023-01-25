@@ -35,6 +35,8 @@
     "@svgr/webpack": "^6.5.1",
     "eslint": "^8.32.0",
     "fs-extra": "^11.1.0",
+    "git-precommit-checks": "^3.1.0",
+    "husky": "^8.0.3",
     "postcss": "^8.4.21",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-nested": "^6.0.0",
