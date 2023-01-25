@@ -42,6 +42,7 @@ importers:
   cogo-control:
     specifiers:
       '@cogoport/access-management': workspace:0.1.0
+      '@cogoport/artranslate': workspace:^0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.274
@@ -64,6 +65,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@cogoport/access-management': link:../packages/access-management
+      '@cogoport/artranslate': link:../packages/translate-ar
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.274_jthxcj6wkatiu54kxs3nfsn2by
@@ -268,6 +270,33 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
       react: 18.2.0
+
+  packages/translate-ar:
+    specifiers:
+      '@cogoport/components': ^1.0.274
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/icons-react': ^1.0.51
+      '@cogoport/navigation-configs': workspace:0.1.0
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.2
+      '@types/react': ^18.0.27
+      cookies-next: ^2.1.1
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.274_o2l4nx4q63klemh4fkcnibifoq
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.51_react@18.2.0
+      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      cookies-next: 2.1.1
+      react: 18.2.0
+    devDependencies:
+      '@types/react': 18.0.27
 
 packages:
 
@@ -2728,7 +2757,6 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-    dev: false
 
   /@types/react-calendar/3.9.0:
     resolution: {integrity: sha512-KpAu1MKAGFw5hNwlDnWsHWqI9i/igAB+8jH97YV7QpC2v7rlwNEU5i6VMFb73lGRacuejM/Zd2LklnEzkFV3XA==}
@@ -2742,11 +2770,9 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.1
-    dev: false
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: false
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
@@ -3442,7 +3468,6 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
-    dev: false
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}

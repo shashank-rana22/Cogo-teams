@@ -6852,6 +6852,21 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
+	translate_account_receivables: [
+		{
+			api          : 'get_sales_outstanding_invoice_list',
+			access_type  : 'private',
+			service_name : 'shipment',
+			module       : 'Translate-AR',
+			feature      : 'Translate-AR',
+		},
+		{
+			api         : 'get_shipment_cost_sheet',
+			access_type : 'private',
+			module      : 'Translate-AR',
+			feature     : 'Translate-AR',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
