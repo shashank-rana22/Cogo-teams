@@ -8,12 +8,12 @@ const Controls = {
                 value : 'ALL_VENDORS',
             },
             {
-                label : 'KYC VERIFIED',
-                value : 'KYC_VERIFIED',
-            },
-            {
                 label : 'KYC PENDING',
                 value : 'KYC_PENDING',
+            },
+            {
+                label : 'KYC VERIFIED',
+                value : 'KYC_VERIFIED',
             },
         ]
     },
@@ -22,29 +22,81 @@ const Controls = {
         "placeholder": "Select Category",
         "options": [
             {
-                label : 'RENT',
-                value : 'RENT',
+                label : 'Facility Rent',
+                value : 'Facility Rent',
             },
             {
-                label : 'OFFICIAL MAINTENANCE',
-                value : 'OFFICIAL_MAINTENANCE',
+                label : 'Equipment on Rent',
+                value : 'Equipment on Rent',
             },
             {
-                label : 'BUSINESS EXPENSE',
-                value : 'BUSINESS_EXPENSE',
+                label : 'Software Expense',
+                value : 'Software Expense',
             },
             {
-                label : 'INTERNET/COMMUNICATION',
-                value : 'INTERNET_COMMUNICATION',
+                label : 'Salary - Contract',
+                value : 'Salary - Contract',
             },
             {
-                label : 'PROFESSIONAL SERVICES',
-                value : 'PROFESSIONAL_SERVICES',
+                label : 'Facility repairs and maintenance',
+                value : 'Facility repairs and maintenance',
             },
             {
-                label : 'MISCELLANEOUS',
-                value : 'MISCELLANEOUS',
-            }
+                label : 'Equipment Repair & Maintenance',
+                value : 'Equipment Repair & Maintenance',
+            },
+            {
+                label : 'House Keeping & Other Office Expense',
+                value : 'House Keeping & Other Office Expense',
+            },
+            {
+                label : 'Courier Charges',
+                value : 'Courier Charges',
+            },
+            {
+                label : 'Communication Charges',
+                value : 'Communication Charges',
+            },
+            {
+                label : 'Electricity',
+                value : 'Electricity',
+            },
+            {
+                label : 'Staff Welfare expenses',
+                value : 'Staff Welfare expenses',
+            },
+            {
+                label : 'Travelling Expenses',
+                value : 'Travelling Expenses',
+            },
+            {
+                label : 'Printing and stationery',
+                value : 'Printing and stationery',
+            },
+            {
+                label : 'Lodging & Boarding Expenses',
+                value : 'Lodging & Boarding Expenses',
+            },
+            {
+                label : 'Legal Fees',
+                value : 'Legal Fees',
+            },
+            {
+                label : 'Professional Fees',
+                value : 'Professional Fees',
+            },
+            {
+                label : 'Recruitment Charges',
+                value : 'Recruitment Charges',
+            },
+            {
+                label : 'Security Charges',
+                value : 'Security Charges',
+            },
+            {
+                label : 'Other Expense',
+                value : 'Other Expense',
+            },
         ]
     }
 }

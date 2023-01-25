@@ -1,14 +1,15 @@
-import { Select, Button, Input, Tooltip } from "@cogoport/components"
 import React, {useState, useEffect} from "react";
-import { GenericObject } from "../../../commons/Interfaces";
+import { Select, Button, Input, Tooltip } from "@cogoport/components"
+import { GenericObject } from "../../commons/Interfaces";
 import List from "../../commons/List/index";
-import OVER_HEAD_CONFIG from "./utils/config";
+import VENDOR_CONFIG from "./utils/config";
+import {IcMSearchlight} from '@cogoport/icons-react';
 import Controls from "./utils/controls";
 import styles from "./styles.module.css";
 import dummyData from "./utils/data";
 import CreateExpenseModal from "./CreateExpenseModal";
 import useListVendors from "./hooks/useListVendors";
-import { IcMFtick, IcMCrossInCircle, IcMInfo } from "@cogoport/icons-react"
+import { IcMFtick,  IcMInfo } from "@cogoport/icons-react"
 
 interface itemProps {
     createdDate:String,
@@ -28,11 +29,11 @@ subActiveTab:string
 
 function VenderComponent () {
     const [filters, setFilters] = useState({
-        KYC_STATUS: 'ALL_VENDORS', 
-        CATEGORY: 'RENT',
+        KYC_STATUS: '', 
+        CATEGORY: '',
+        searchValue: '',
         pageIndex: 1,
-        pageLimit: 15,
-        searchValue: ''
+        pageLimit: 10
     })
 
     const [sort, setSort] = useState({});
@@ -56,24 +57,75 @@ function VenderComponent () {
             <div className ={styles.headerContainer}>
                 <div className={styles.leftContainer} >
                     {
-                        Object.keys(Controls).map ((key)=> {
-                            const  {options = [], placeholder = '', value =''} = Controls?.[key]
-                            return (
-                                <Select value={filters?.[key]} onChange={(e) => handleChange(e, value)} placeholder={placeholder} options={options} className ={styles.select}/>
+                        Object.keys(Controls).map((key)=> {
+                            const  {options = [], placeholder = '', value =''} = Controls[key];
+                            return ( 
+                                <Select 
+                                   value={filters?.[key]} 
+                                   onChange={(e) => handleChange(e, value)} 
+                                   placeholder={placeholder} 
+                                   options={options} 
+                                   className ={styles.select}
+                                   isClearable
+                                   />
                             )
                         })
                     }
+
                 </div>
                 <div className={styles.rightContainer}>
-                    <Button size="xl" themeType="primary" onClick={ () => setShowModal(true)} >Create Vendor</Button>
+                    <Button 
+                       size="lg" 
+                       themeType="secondary" 
+                       onClick={ () => setShowModal(true)} >Create Vendor</Button>
                     <Input 
-                        size="lg" 
-                        placeholder="Vendor Name/PAN/Organization ID/ Sage ID" 
+                        size="md" 
+                        placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID" 
+                        prefix={<IcMSearchlight/>}
                         value={filters.searchValue} 
                         onChange = {(e)=> handleChange(e, 'searchValue')}  
                         className = {styles.search}
                     />
                 </div>
+            </div>
+        )
+    }
+
+    const RenderKYCStatus = (item) => {
+        const {item: itemData = {}}=  item
+        const {kycStatus = ''} = itemData
+        return (
+            <div style={{display: 'flex', alignItems: 'center'}}>
+                { kycStatus === 'verified' ? <div className={styles.verified}>
+                        <div> <IcMFtick color ='#67C676'/> </div>
+                         <div>&nbsp;Verified </div>
+                          </div>
+                          : <div className={styles.pending}>
+                            <div><IcMInfo color ='#e10d1f' style={{rotate:'180deg', fontSize:'12px'}}/></div> 
+                            <div>&nbsp;Pending</div>
+                            </div>}
+            </div>
+        )
+    }
+    
+    const RenderPayments = (item) => {
+        const {item: itemData = {}}=  item
+        const {payments = ''} = itemData
+        return (
+            <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                {payments} <Tooltip content="heyy" placement="top">
+                    <IcMInfo />
+                </Tooltip>
+            </div>
+        )
+    }
+    
+    const RenderInvoice = (item) => {
+        const {item: itemData = {}}=  item
+        const {openInvoices = ''} = itemData;
+        return (
+            <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                {openInvoices} <div> (INR 12000) </div>
             </div>
         )
     }
@@ -95,7 +147,7 @@ function VenderComponent () {
             {renderHeaders()}
 
             <List
-                config={OVER_HEAD_CONFIG}  
+                config={VENDOR_CONFIG}  
                 itemData={dummyData}
                 loading={false}
                 sort={sort}
@@ -118,34 +170,3 @@ function VenderComponent () {
 export default VenderComponent
 
 
-const RenderKYCStatus = (item) => {
-    const {item: itemData = {}}=  item
-    const {kycStatus = ''} = itemData
-    return (
-        <div style={{display: 'flex', alignItems: 'center'}}>
-            { kycStatus === 'verified' ? <div><IcMFtick color ='#67C676'/> Verified</div> : <div><IcMCrossInCircle color ='#e10d1f'/> Pending</div>}
-        </div>
-    )
-}
-
-const RenderPayments = (item) => {
-    const {item: itemData = {}}=  item
-    const {payments = ''} = itemData
-    return (
-        <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-            {payments} <Tooltip content="heyy motherfucker" placement="top">
-		        <IcMInfo />
-	        </Tooltip>
-        </div>
-    )
-}
-
-const RenderInvoice = (item) => {
-    const {item: itemData = {}}=  item
-    const {openInvoices = ''} = itemData;
-    return (
-        <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-            {openInvoices} <div> (INR 12000) </div>
-        </div>
-    )
-}

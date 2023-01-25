@@ -16,9 +16,23 @@
 }
 
 .select {
-    width: 150px;
+    width: 175px;
 }
 
 .search {
-    width: 200px;
+    width: 341px;
+    input{
+        font-size: 11px !important;
+    }
+}
+.verified{
+    display: flex;
+    align-items: center;
+    color: #67C676;
+}
+
+.pending{
+    display: flex;
+    align-items: center;
+    color: #e10d1f;
 }

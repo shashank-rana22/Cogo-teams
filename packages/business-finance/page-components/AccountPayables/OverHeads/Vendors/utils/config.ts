@@ -2,6 +2,7 @@ import React from "react";
 
 const headerStyle = { 
     marginBottom: '16px', 
+    paddingLeft: '10px',
     borderRadius: '8px', 
     background: '#333',
     marginTop:'20px',
@@ -16,28 +17,28 @@ const bodyStyles = {
     fontWeight: '400',
     fontSize: '14px',
     lineHeight: '14px',
-    fontFamily: "Roboto",
+    fontFamily: "Poppins",
     fontStyle: "normal"
 }
 
-const OVER_HEAD_CONFIG = {
+const VENDOR_CONFIG = {
     showHeader: true,
     headerStyles       : headerStyle,
     bodyStyles         : bodyStyles,
     fields             : [
         {
-            label: "Vendor Serial Id",
+            label: "Vendor ID",
             key: "vendorSerialId",
             span: 1.2,
         },
         {
-            label: "KYC STATUS",
+            label: "Kyc Status",
             key: "kycStatus",
             span: .7,
             func: "renderKYCStatus"
         },
         {
-            label: 'NAME',
+            label: 'Name',
             key: "name",
             span: 1.2,
         },
@@ -48,13 +49,13 @@ const OVER_HEAD_CONFIG = {
 
         },
         {
-            label: "CATEGORY",
+            label: "Category",
             key: "category",
             span: 1,
 
         },
         {
-            label: "PAYMENTS",
+            label: "Payments",
             key: "payments",
             span: 1,
             sorting: { name: "payments" },
@@ -62,14 +63,14 @@ const OVER_HEAD_CONFIG = {
 
         },
         {
-            label: "OPEN INVOICES",
+            label: "Open Invoices",
             key: "openInvoices",
             span: 1,
             sorting: { name: "invoicesCount" },
             func: 'renderInvoice'
         },
         {
-            label: "CREATED AT",
+            label: "Created At",
             key: "createdDate",
             span: 1.25,
             func: "rendeFormate",
@@ -78,5 +79,5 @@ const OVER_HEAD_CONFIG = {
     ],
 };
 
-export default OVER_HEAD_CONFIG
+export default VENDOR_CONFIG
 
