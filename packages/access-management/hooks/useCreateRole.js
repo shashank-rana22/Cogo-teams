@@ -43,7 +43,7 @@ const useCreateRole = ({
 	};
 
 	const partnerOptions = useGetAsyncOptions({
-		...asyncFieldsPartner({}),
+		...asyncFieldsPartner(),
 		initialCall: false,
 	});
 

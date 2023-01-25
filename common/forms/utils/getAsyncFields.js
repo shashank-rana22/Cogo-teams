@@ -27,7 +27,7 @@ function asyncFieldsLocations() {
 		},
 	};
 }
-function asyncFieldsPartner({ stakeHolderType = '' }) {
+function asyncFieldsPartner() {
 	return {
 		labelKey    : 'business_name',
 		valueKey    : 'id',
@@ -35,8 +35,7 @@ function asyncFieldsPartner({ stakeHolderType = '' }) {
 		initialCall : true,
 		params      : {
 			filters: {
-				status       : 'active',
-				entity_types : stakeHolderType === 'channel_partner' ? [stakeHolderType] : undefined,
+				status: 'active',
 			},
 			page_limit: 100,
 		},
