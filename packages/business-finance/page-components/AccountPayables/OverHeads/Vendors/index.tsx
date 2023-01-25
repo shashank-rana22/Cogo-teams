@@ -34,13 +34,11 @@ function VenderComponent () {
         searchValue: '',
         pageIndex: 1,
         pageLimit: 10
-    })
-
+    });
     const [sort, setSort] = useState({});
     const [showModal, setShowModal] = useState(false);
-
     const {loading = false, data, listApi = () => {}} = useListVendors();
-
+  
     const handleChange = (e, value) => {
         setFilters((previousState) => ({
 			...previousState,
@@ -113,7 +111,7 @@ function VenderComponent () {
         const {payments = ''} = itemData
         return (
             <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                {payments} <Tooltip content="heyy" placement="top">
+                {payments} <Tooltip content="Current Month: " placement="top">
                     <IcMInfo />
                 </Tooltip>
             </div>
@@ -134,7 +132,7 @@ function VenderComponent () {
         return (
             <Button 
                themeType="secondary" 
-               size="sm" 
+               size="md" 
                onClick={() => setShowModal(true)}
                >
                 View More

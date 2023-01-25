@@ -65,7 +65,7 @@ const VENDOR_CONFIG = {
         {
             label: "Open Invoices",
             key: "openInvoices",
-            span: 1,
+            span: 1.5,
             sorting: { name: "invoicesCount" },
             func: 'renderInvoice'
         },

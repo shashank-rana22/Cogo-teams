@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import styles from './styles.module.css';
 import Vendors from './Vendors/index';
+import Expenses from './Expenses/index';
 
 const Overheads = () =>{
     const [activeTab, setActiveTab] = useState('vendors');
@@ -60,7 +61,7 @@ const Overheads = () =>{
               </div>}
 
             {activeTab==='expenses' && <div>
-                  expense tab
+                 <Expenses/>
               </div>}
           </div>
 
