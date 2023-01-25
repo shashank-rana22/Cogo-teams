@@ -29,11 +29,13 @@
 			label: 'Service',
             key: 'service_type',
 			span: 1.5,
+			func: 'ServiceTypeFunc'
 		},
         {
 			label: 'Document Status',
             key: 'state',
 			span: 1.5,
+			func: 'DocumentStatus'
 		},
         {
             key: 'view',

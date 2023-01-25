@@ -54,7 +54,7 @@ const ShipmentDetailsCard = ({
   } = sellerBankDetail || {};
   const {
     billNumber = "",
-    billDate = "",
+    createdAt = "",
     status = "",
     placeOfSupply = "",
   } = bill || {};
@@ -140,6 +140,7 @@ const ShipmentDetailsCard = ({
     setShowLineItem(true);
     setItemCheck(true);
   };
+  const billDate = createdAt.split(" ");
 
   return (
     <div>
@@ -353,7 +354,7 @@ const ShipmentDetailsCard = ({
                           >
                             <Checkbox />
                             <div style={{ marginBottom: "8px" }}>
-                              Invoice Date - <span>{billDate}</span>
+                              Invoice Date - <span>{billDate[0]}</span>
                             </div>
                           </div>
 
@@ -650,7 +651,7 @@ const ShipmentDetailsCard = ({
                         Invoice Number - <span>{billNumber}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
-                        Invoice Date - <span>{billDate}</span>
+                        Invoice Date - <span>{billDate[0]}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
                         Status - <span>{status}</span>

@@ -43,7 +43,7 @@ interface BillInterface {
   id?: string;
   billDocumentUrl?: string;
   billNumber?: string;
-  billDate?: string;
+  createdAt?: string;
   status?: string;
   placeOfSupply?: string;
   taxTotal: any;
@@ -80,28 +80,45 @@ interface ShipmentDetailsInterface {
   lineItem?: boolean;
   status: string;
 }
-const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItemsRemarks,setLineItemsRemarks,setLineItem,lineItem,status}:ShipmentDetailsInterface)=>{
-    const[showDetails,setShowDetails] = useState(false)
-    const[showDocuments,setShowDocuments] = useState(false)
-    const [showVariance, setShowVariance] = useState(false);
-    const [itemCheck,setItemCheck] =  useState(false)
-    const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-    const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
-    const {data:shipmentData} = useListShipment(jobNumber);
-    const dataList=shipmentData?.list[0] || {};
-    const {source, trade_type} = dataList;
-    const shipmentId = dataList?.id ||  ''; 
-    const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
-    const { data: dataWallet, loading: loadingWallet } = useGetWallet(shipmentId);
+const ShipmentDetails = ({
+  data,
+  orgId,
+  jobNumber,
+  remarksVal,
+  setRemarksVal,
+  lineItemsRemarks,
+  setLineItemsRemarks,
+  setLineItem,
+  lineItem,
+  status,
+}: ShipmentDetailsInterface) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const [showDocuments, setShowDocuments] = useState(false);
+  const [showVariance, setShowVariance] = useState(false);
+  const [itemCheck, setItemCheck] = useState(false);
+  const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
+  const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
+  const { data: shipmentData } = useListShipment(jobNumber);
+  const dataList = shipmentData?.list[0] || {};
+  const { source, trade_type } = dataList;
+  const shipmentId = dataList?.id || "";
+  const sourceText =
+    source === "direct" ? "Sell Without Buy" : startCase(source);
+  const { data: dataWallet, loading: loadingWallet } = useGetWallet(shipmentId);
   const { agent_data, agent_role_data, amount, amount_currency } =
     dataWallet?.list?.[0] || {};
-    
-    return(
+
+  return (
     <div className={styles.container}>
-             <h3>Shipment Details {jobNumber && <span>- SID
-                 <span className={styles.serialId}> #{jobNumber}</span>
-                 </span>}
-                 </h3>
+      <h3>
+        Shipment Details{" "}
+        {jobNumber && (
+          <span>
+            - SID
+            <span className={styles.serialId}> #{jobNumber}</span>
+          </span>
+        )}
+      </h3>
 
       <div className={styles.smallHr} />
 
@@ -115,8 +132,10 @@ const ShipmentDetails = ({data,orgId,jobNumber,remarksVal,setRemarksVal,lineItem
           <div className={styles.subContainer}>
             Details
             <div className={styles.tagsContainer}>
-            {sourceText && <Pill color="blue">{sourceText}</Pill>}
-            { trade_type && <Pill color="yellow">{startCase(trade_type)}</Pill>}
+              {sourceText && <Pill color="blue">{sourceText}</Pill>}
+              {trade_type && (
+                <Pill color="yellow">{startCase(trade_type)}</Pill>
+              )}
             </div>
             {dataWallet?.list?.[0] && (
               <div className={styles.Data}>
