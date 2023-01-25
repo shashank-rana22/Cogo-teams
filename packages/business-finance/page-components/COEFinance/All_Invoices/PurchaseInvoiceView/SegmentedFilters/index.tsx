@@ -4,7 +4,7 @@ import styled from "./styles.module.css";
 import FILTERS_URGENT_DATA from "../../../constants/purchase-list-segments";
 import FILTERS_DATA from "../../../constants/purchase-list-filters";
 import { Input } from "@cogoport/components";
-import { IcMSearchdark } from "@cogoport/icons-react";
+import { IcMSearchlight } from "@cogoport/icons-react";
 import FilterModal from "../../../Components/FilterModal/index";
 import usePurchaseViewStats from "../../../hook/getPurchaseViewStats"
 import { GenericObject } from "../../../../commons/Interfaces/index";
@@ -72,7 +72,7 @@ function SegmentedFilters({
                         value={searchValue}
                         onChange={(e: any) => setSearchValue(e)}
                         placeholder="Search by Invoice No./Shipment ID/Supplier name..."
-                        suffix={<IcMSearchdark height={15} width={15} />}
+                        suffix={<IcMSearchlight height={17} width={35} color="#CACACA"/>}
                     />
                 </div>
 
