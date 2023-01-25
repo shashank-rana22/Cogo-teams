@@ -398,5 +398,11 @@ const apis = [
 		feature      : 'search',
 		service_name : 'organization',
 	},
+	{
+		api          : 'create_spot_search_contract',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;
