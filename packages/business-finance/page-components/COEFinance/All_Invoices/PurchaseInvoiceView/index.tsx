@@ -85,12 +85,12 @@ const [sort, setSort] = useState({});
   return (
     <div>
     <SegmentedFilters
-        setSearchValue={setSearchValue}
-        searchValue={searchValue}
-         currentTab={currentTab}
-         setCurrentTab={setCurrentTab}
          filters={filters}
          setFilters={setFilters}
+         setSearchValue={setSearchValue}
+         searchValue={searchValue}
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
       />
      <List
        config={PURCHASE_VIEW_CONFIG}  

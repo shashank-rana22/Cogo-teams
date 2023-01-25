@@ -4,7 +4,7 @@ import styled from "./styles.module.css";
 import FILTERS_URGENT_DATA from "../../../constants/purchase-list-segments";
 import FILTERS_DATA from "../../../constants/purchase-list-filters";
 import { Input } from "@cogoport/components";
-import { IcMSearchdark } from "@cogoport/icons-react";
+import { IcMSearchlight } from "@cogoport/icons-react";
 import FilterModal from "../../../Components/FilterModal/index";
 import usePurchaseViewStats from "../../../hook/getPurchaseViewStats";
 import { GenericObject } from "../../../../commons/Interfaces/index";
