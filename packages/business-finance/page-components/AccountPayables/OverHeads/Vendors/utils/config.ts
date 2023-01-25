@@ -74,6 +74,12 @@ const OVER_HEAD_CONFIG = {
             span: 1.25,
             func: "rendeFormate",
             sorting: { name: "modifiedDateSortType" },
+        },
+        {
+            label: "",
+            key: "viewMoreButton",
+            span: 1.25,
+            func: "renderViewMoreButton"
         }
     ],
 };

@@ -1,6 +1,6 @@
 import { Select, Button, Input, Tooltip } from "@cogoport/components"
 import React, {useState, useEffect} from "react";
-import { GenericObject } from "../../../commons/Interfaces";
+import { GenericObject } from "../../commons/Interfaces";
 import List from "../../commons/List/index";
 import OVER_HEAD_CONFIG from "./utils/config";
 import Controls from "./utils/controls";
@@ -78,6 +78,42 @@ function VenderComponent () {
         )
     }
 
+    const RenderKYCStatus = (item) => {
+        const {item: itemData = {}}=  item
+        const {kycStatus = ''} = itemData
+        return (
+            <div style={{display: 'flex', alignItems: 'center'}}>
+                { kycStatus === 'verified' ? <div><IcMFtick color ='#67C676'/> Verified</div> : <div><IcMCrossInCircle color ='#e10d1f'/> Pending</div>}
+            </div>
+        )
+    }
+    
+    const RenderPayments = (item) => {
+        const {item: itemData = {}}=  item
+        const {payments = ''} = itemData
+        return (
+            <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                {payments} <Tooltip content="heyy" placement="top">
+                    <IcMInfo />
+                </Tooltip>
+            </div>
+        )
+    }
+    
+    const RenderInvoice = (item) => {
+        const {item: itemData = {}}=  item
+        const {openInvoices = ''} = itemData;
+        return (
+            <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                {openInvoices} <div> (INR 12000) </div>
+            </div>
+        )
+    }
+    
+    const RenderViewMoreButton = () =>{
+        return (<Button themeType="secondary" size="md" onClick={() => setShowModal(true)}>View More</Button>)
+    }
+
     const functions:any = {
         renderKYCStatus: (itemData:itemProps) => (
             <RenderKYCStatus item={itemData}/>
@@ -87,6 +123,9 @@ function VenderComponent () {
         ),
         renderInvoice: (itemData:itemProps) => (
             <RenderInvoice item={itemData}/>
+        ),
+        renderViewMoreButton: (itemData:itemProps) => (
+            <RenderViewMoreButton item={itemData} />
         )
     }
 
@@ -118,34 +157,3 @@ function VenderComponent () {
 export default VenderComponent
 
 
-const RenderKYCStatus = (item) => {
-    const {item: itemData = {}}=  item
-    const {kycStatus = ''} = itemData
-    return (
-        <div style={{display: 'flex', alignItems: 'center'}}>
-            { kycStatus === 'verified' ? <div><IcMFtick color ='#67C676'/> Verified</div> : <div><IcMCrossInCircle color ='#e10d1f'/> Pending</div>}
-        </div>
-    )
-}
-
-const RenderPayments = (item) => {
-    const {item: itemData = {}}=  item
-    const {payments = ''} = itemData
-    return (
-        <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-            {payments} <Tooltip content="heyy motherfucker" placement="top">
-		        <IcMInfo />
-	        </Tooltip>
-        </div>
-    )
-}
-
-const RenderInvoice = (item) => {
-    const {item: itemData = {}}=  item
-    const {openInvoices = ''} = itemData;
-    return (
-        <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-            {openInvoices} <div> (INR 12000) </div>
-        </div>
-    )
-}
