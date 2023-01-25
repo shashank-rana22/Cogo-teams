@@ -654,7 +654,7 @@ const ShipmentDetailsCard = ({
                         Invoice Date - <span>{billDate[0]}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
-                        Status - <span>{status}</span>
+                        Status - <span>{startCase(status)}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
                         Place Of Supply - <span>{placeOfSupply}</span>
