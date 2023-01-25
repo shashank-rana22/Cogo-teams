@@ -19,5 +19,10 @@ const login_apis = [
 		access_type  : 'private',
 		service_name : 'user',
 	},
+	{
+		api          : 'get_user_social_login_link',
+		access_type  : 'private',
+		service_name : 'user',
+	},
 ];
 export default login_apis;
