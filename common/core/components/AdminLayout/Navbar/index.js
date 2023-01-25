@@ -36,8 +36,6 @@ function Navbar({
 		[],
 	);
 
-	console.log('listItems', resetSubnavs);
-
 	return (
 		<div
 			style={style}
