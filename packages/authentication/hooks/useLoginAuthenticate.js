@@ -54,7 +54,7 @@ const useLoginAuthenticate = () => {
 	};
 
 	useEffect(() => {
-		if (source !== 'add_account') {
+		if (source !== 'add_account' && cogo_admin_auth_token) {
 			getUserSessionMappings();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
