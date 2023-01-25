@@ -49,6 +49,7 @@ function ExpenseComponent () {
                         activeTab={recurringState}
                         setActiveTab={setRecurringState}
                         color="#ED3726"
+                        background="#FFFAEB"
                         />
                     </div>
 
