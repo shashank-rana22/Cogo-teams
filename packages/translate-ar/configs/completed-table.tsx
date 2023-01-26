@@ -1,32 +1,37 @@
 import { format, getByKey, startCase } from '@cogoport/utils';
 
-import Remarks from '../page-components/ListComponents/Remarks';
-import UploadInvoice from '../page-components/ListComponents/UploadInvoice';
 import checkInvoice from '../utils/checkInvoice';
-import { getDocumentNumber, getDocumentUrl } from '../utils/getDocumentNumber';
+import { getDocumentNumber } from '../utils/getDocumentNumber';
 import getPrice from '../utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
-const pendingColumns = (refetch) => [
+const completedColumn = [
 	{
 		Header   : 'Name',
 		accessor : ({ buyerDetails: { businessName } }) => (<div className={styles.name}>{businessName}</div>)
 		,
 	},
 	{
-		Header   : 'Invoice number',
+		Header   : 'Cogo Invoice No.',
 		accessor : (row) => (
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+					onClick={() => window.open(getByKey(row, 'proformaPdfUrl') as string, '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}
 
 				</div>
 				<div>{checkInvoice({ itemData: row })}</div>
+			</div>
+		),
+	}, {
+		Header   : 'Vietnam Invoice No.',
+		accessor : (row) => (
+			<div>
+				{getByKey(row, 'einvoiceNumber') as string}
 			</div>
 		),
 	},
@@ -61,19 +66,23 @@ const pendingColumns = (refetch) => [
 		),
 	},
 	{
-		Header   : 'Remark History',
-		accessor : (row) => (
-			<Remarks itemData={row} />
-		),
-	},
-	{
 		Header   : '',
-		id       : 'upload_invoice',
-		accessor : (row) => (
-			<UploadInvoice itemData={row} refetch={refetch} />
+		id       : 'view_invoice',
+		accessor : (row) => {
+			const url = getByKey(row, 'systemGeneratedInvoice') || getByKey(row, 'systemGeneratedProforma');
+			return (
+				<div
+					className={styles.link}
+					onClick={() => window.open(url as string, '_blank')}
+					role="presentation"
+				>
+					View Generated Invoice
 
-		),
+				</div>
+
+			);
+		},
 	},
 ];
 
-export default pendingColumns;
+export default completedColumn;

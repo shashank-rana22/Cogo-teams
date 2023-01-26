@@ -1,6 +1,8 @@
 import { Pagination } from '@cogoport/components';
 import React from 'react';
 
+import Filters from '../../common/Filters';
+import completedColumn from '../../configs/completed-table';
 import pendingColumns from '../../configs/pending-table';
 import useGetShipmentInvoices from '../../hooks/useGetShipmentInvoices';
 import StyledTable from '../Table';
@@ -15,9 +17,12 @@ function StatusComponent({ status }: { status: string }) {
 
 	const { list = [], pageIndex = 0, totalRecords = 0, pageLimit = 10 } = invoiceData || {};
 
+	const columns = status === 'completed' ? completedColumn : pendingColumns(refetch);
+
 	return (
 		<>
-			<StyledTable data={list} columns={pendingColumns(refetch)} loading={invoiceLoading} />
+			<Filters />
+			<StyledTable data={list} columns={columns} loading={invoiceLoading} />
 			<div className={styles.pagination_container} id="rnp_role">
 				<Pagination
 					type="table"

@@ -15,8 +15,8 @@ interface Props {
 
 const useUpdateStatus = ({ url, setOpen, itemData = {}, refetch }: Props) => {
 	const profile = useSelector((state) => state);
-	const { partner } = profile || {};
-	const { id: partnerId } = partner || {};
+	const { profile:{ user } } = profile || {};
+	const { id: partnerId } = user || {};
 
 	const [
 		{ loading },
