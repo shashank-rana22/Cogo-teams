@@ -1,12 +1,11 @@
 .table {
 	:global {
 		table {
+			padding: 0;
 			border-spacing: 0 16px;
 			border-collapse: separate;
 		}
 
-		padding-top: 10px;
-		margin-top: 10px;
 		overflow-x: scroll;
 		background-color: transparent;
 		border-radius: 10px;

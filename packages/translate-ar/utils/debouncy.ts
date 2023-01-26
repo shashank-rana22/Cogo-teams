@@ -1,10 +1,16 @@
-import { debounce } from '@cogoport/utils';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useState } from 'react';
 
 const useSearchQuery = () => {
 	const [query, setQuery] = useState('');
+	let timeoutId: NodeJS.Timeout;
 
-	const debounceQuery = useCallback((value: string) => debounce(() => {
+	function debounce(callback: () => void, delay: number) {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(callback, delay);
+	}
+
+	const debounceQuery = useCallback((value) => debounce(() => {
 		setQuery(value);
 	}, 600), []);
 

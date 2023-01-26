@@ -7,9 +7,10 @@ import styles from './styles.module.css';
 import { filterControls } from './utils/controls';
 
 function Filters({
-	filters = { q: '' },
+	filters,
 	onChangeFilters = (v) => v,
 }) {
+	const { search } = filters || {};
 	const getElements = (type) => {
 		switch (type) {
 			case 'select':
@@ -31,15 +32,22 @@ function Filters({
 							key={control.name}
 							className={styles.select}
 							value={filters?.[control?.name]}
-							onChange={(value) => onChangeFilters({ [control?.name]: value || undefined })}
+							onChange={(value) => onChangeFilters({
+								...filters,
+								[control?.name] : value || undefined,
+								page            : 1,
+							})}
 							{...control}
 						/>
 					);
 				})}
 			</div>
 			<SearchInput
-				value={filters?.q || ''}
-				onChange={(value) => onChangeFilters({ q: value || undefined })}
+				value={search || ''}
+				onChange={(value) => onChangeFilters({
+					...filters,
+					search: value || undefined,
+				})}
 				size="md"
 				placeholder="Search by Invoice/Proforma Number "
 			/>

@@ -21,7 +21,7 @@ function StatusComponent({ status }: { status: string }) {
 
 	return (
 		<>
-			<Filters />
+			<Filters onChangeFilters={setShipmentFilters} filters={shipmentFilters} />
 			<StyledTable data={list} columns={columns} loading={invoiceLoading} />
 			<div className={styles.pagination_container} id="rnp_role">
 				<Pagination

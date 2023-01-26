@@ -57,11 +57,11 @@ const useGetShipmentInvoices = ({ status }) => {
 
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(rest), query]);
+	}, [JSON.stringify(rest)]);
 
 	useEffect(() => {
 		refetch(1);
-	}, [status]);
+	}, [status, query]);
 
 	return {
 		invoiceLoading : loading,

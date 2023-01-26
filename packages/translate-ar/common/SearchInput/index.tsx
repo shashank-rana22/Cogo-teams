@@ -4,6 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+type SizeProps = 'lg' | 'xs' | 'sm' | 'md';
+
 function SearchInput({
 	value = '',
 	onChange = (v) => v,
@@ -16,7 +18,7 @@ function SearchInput({
 				prefix={<IcMSearchlight />}
 				value={value}
 				onChange={(val) => onChange(val)}
-				size={size}
+				size={size as SizeProps}
 				placeholder={placeholder}
 			/>
 		</section>
