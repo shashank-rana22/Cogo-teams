@@ -12,45 +12,32 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Header from './CardHeader';
 import CardItem from './CardItem';
 import EmptyState from './EmptyState';
-// import commonFunctions from './commonFunctions';
+import { FunctionObjects, FieldType, DataType } from './Interfaces';
 import styles from './styles.module.css';
 
-// export interface Props {
-// 	sort?: NestedObj;
-// 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
-// 	itemData: ListDataProps;
-// 	fields: any;
-// 	functions?: FunctionObjects;
-// 	loading?: boolean;
-// 	currentPage?: number;
-// 	handlePageChange?: (currentPage: number) => void;
-// 	showPagination?: boolean;
-// 	showHeader?: boolean;
-// 	setPage?: any;
-// 	finalData?: any;
-// 	setFinalData?: any;
-// 	activeTab?: any;
-// 	checkedRows?: any;
-// 	setCheckedRows?: any;
-// 	setBulkEnabled?: any;
-// }
+ interface Props {
+	fields: FieldType[];
+	data: DataType;
+	loading?: boolean;
+	page?: number;
+	setPage?: any;
+	finalList?: any;
+	setFinalList?: any;
+	functions?: FunctionObjects;
+}
 
 function CardList({
 	fields = [],
-	data = [],
+	data = {},
 	loading = false,
-	statsLoading,
-	setEdit = false,
-	setItem,
-	setPage,
 	page,
+	setPage,
 	finalList = [],
 	setFinalList,
-	functions = () => {},
-}) {
-	const { list = [], total_count = 0 } = data;
+	functions,
+} :Props) {
 
-	console.log('loading', loading);
+	const { list= [], total_count = 0 } = data;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -58,12 +45,11 @@ function CardList({
 				setPage((p) => p + 1);
 			}
 		}, 1000);
-	}, [loading]);
+	}, [loading, setPage]);
 
 	const handleRender = () => (finalList || [1, 2, 3, 4, 5]).map((singleitem) => (
 		<CardItem
 			singleitem={singleitem}
-			loading={loading}
 			fields={fields}
 			functions={functions}
 		/>
@@ -75,7 +61,7 @@ function CardList({
 		} else {
 			setFinalList(finalList.concat(list));
 		}
-	}, [list]);
+	}, [finalList, list, page, setFinalList]);
 
 	return (
 		<section>

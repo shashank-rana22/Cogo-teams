@@ -35,6 +35,7 @@ const fields = [
 		],
 		theme     : 'admin',
 		className : 'primary lg',
+		disabled  :	false,
 		rules     : {
 			required: 'This is Required',
 		},

@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMAirport } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
@@ -6,12 +6,14 @@ import useGetListData from '../hooks/useGetListData';
 
 import CardList from './CardList';
 import CreateOperators from './CreateOperators';
+import EditOperators from './EditOperators';
 import Header from './Header';
 import styles from './styles.module.css';
 
 function List() {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
+	const [item, setItem] = useState(null);
 
 	const {
 		config,
@@ -27,25 +29,36 @@ function List() {
 	} = useGetListData();
 
 	const functions = {
-		handleLogo: (item:any) => (
+		handleLogo: (singleItem:any) => (
 			<div className={styles.title_black}>
-				{item?.logo_url ? (
-					<img className={styles.image} alt="logo" src={item.logo_url} />
+				{singleItem?.logo_url ? (
+					<img className={styles.image} alt="logo" src={singleItem.logo_url} />
 				) : (
 					<IcMAirport width={40} height={40} fill="#393F70" />
 				)}
 			</div>
 		),
-		handleStatus: (item:any) => (
+		handleStatus: (singleItem:any) => (
 			<div className={styles.title_black}>
-				{item?.status === 'active' ? (
-					<div className={styles.event} style={{ backgroundColor: '#d2ffe4' }}>{item?.status}</div>
+				{singleItem?.status === 'active' ? (
+					<div className={styles.event} style={{ backgroundColor: '#d2ffe4' }}>{singleItem?.status}</div>
 				) : (
 					<div className={styles.event} style={{ backgroundColor: '#ffd0d0' }}>
-						{item?.status}
+						{singleItem?.status}
 					</div>
 				)}
 			</div>
+		),
+		handleEdit: (singleItem:any) => (
+			<Button
+				className={styles.edit}
+				onClick={() => {
+					setEdit(true);
+					setItem(singleItem);
+				}}
+			>
+				<IcMEdit />
+			</Button>
 		),
 	};
 
@@ -72,7 +85,6 @@ function List() {
 
 			</Modal>
 
-			{/*
 			<Modal
 				show={edit}
 				onClose={() => setEdit(false)}
@@ -84,16 +96,14 @@ function List() {
 					refetch={getLocationData}
 					setPage={setPage}
 					setFinalList={setFinalList}
-					setShowLoading={setShowLoading}
 					page={page}
 				/>
 			</Modal>
-			*/}
+
 			<CardList
 				fields={config.fields}
 				data={listData}
 				loading={loading}
-				setEdit={setEdit}
 				page={page}
 				setPage={setPage}
 				finalList={finalList}

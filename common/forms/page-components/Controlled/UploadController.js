@@ -14,16 +14,19 @@ function UploadController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, onBlur, value } }) => (
-				<FileUploader
-					{...rest}
-					key={rest.id}
-					onChange={onChange}
-					value={value}
-					onBlur={onBlur}
-					data-test-value={value}
-				/>
-			)}
+			render={({ field: { onChange, onBlur, value } }) => {
+				console.log('values', value);
+				return (
+					<FileUploader
+						{...rest}
+						key={rest.id}
+						onChange={onChange}
+						value={value}
+						onBlur={onBlur}
+						data-test-value={value}
+					/>
+				);
+			}}
 		/>
 	);
 }

@@ -1,48 +1,59 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import getElementController from '../../hooks/getController';
-import useCreateOperators from '../../hooks/useCreateOperators';
+import useEditOperators from '../../hooks/useEditOperators';
 
 import styles from './styles.module.css';
 
-function CreateOperators({
-	setShow,
+function EditOperators({
+	item,
+	setEdit,
 	refetch,
 	setPage,
 	setFinalList,
-	setShowLoading = () => {},
 	page,
 }) {
 	const {
-		handleCreateOperators,
+		handleEditOperators,
 		control,
 		fields,
+		setValue,
 		handleSubmit,
 		showElements,
 		onError,
 		errors,
 		loading,
-	} = useCreateOperators({
-		setShow,
+	} = useEditOperators({
+		setEdit,
 		refetch,
+		item,
 		setPage,
 		setFinalList,
-		setShowLoading,
 		page,
 	});
 
-	(fields || []).forEach((control, index) => {
-		if (control.name === 'operator_type') {
-			fields[index].disabled = false;
+	(fields || []).forEach((ctrl:any, index) => {
+		if (ctrl.name === 'operator_type') {
+			fields[index].disabled = true;
 		}
 	});
 
+	useEffect(() => {
+		fields.forEach((c) => {
+			setValue(c.name, item[c.name]);
+		});
+		setValue('is_nvocc', String(item.is_nvocc));
+		setValue('logo_url', String(item.logo_url));
+		console.log('item', item);
+	}, [setValue, item, fields]);
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Create Operators</div>
+			<div className={styles.heading}>Edit Operators</div>
 
 			<div className={styles.flex}>
-				<form onSubmit={handleSubmit(handleCreateOperators, onError)}>
+				<form onSubmit={handleSubmit(handleEditOperators, onError)}>
 					<div className={styles.content}>
 						{fields.map((field) => {
 							const show = !(field.name in showElements)
@@ -65,7 +76,7 @@ function CreateOperators({
 					<div className={styles.button_container}>
 						<Button
 							className="primary md"
-							onClick={handleSubmit(handleCreateOperators, onError)}
+							onClick={handleSubmit(handleEditOperators, onError)}
 						>
 							{!loading ? 'Submit' : 'Submiting'}
 						</Button>
@@ -77,4 +88,4 @@ function CreateOperators({
 	);
 }
 
-export default CreateOperators;
+export default EditOperators;

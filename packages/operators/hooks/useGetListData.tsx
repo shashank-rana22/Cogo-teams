@@ -8,7 +8,7 @@ const useGetListData = () => {
 	const [finalList, setFinalList] = useState([]);
 	const [page, setPage] = useState(1);
 
-	const [{ data, loading }, trigger] = useRequest('/list_operators', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequest('/list_operators', { manual: true });
 
 	const config = OPERATORS;
 
@@ -33,12 +33,6 @@ const useGetListData = () => {
 	useEffect(() => {
 		getLocationData();
 	}, [searchValue, page]);
-	// useEffect(() => {
-	// 	setFinalList([]);
-	// 	setPage(1);
-	// 	setShowLoading(true);
-	// 	getLocationData();
-	// }, [query]);
 
 	return {
 		config,

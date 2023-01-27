@@ -1,4 +1,3 @@
-import { Placeholder } from '@cogoport/components';
 import React, { ReactNode } from 'react';
 
 import { FieldType, FunctionObjects } from '../Interfaces/index';
@@ -11,7 +10,6 @@ export interface Props {
 	singleitem?: any;
 	functions?: FunctionObjects;
 	isMobile?: boolean;
-	loading?: boolean;
 }
 
 function CardItem({
@@ -19,7 +17,6 @@ function CardItem({
 	singleitem,
 	functions = {},
 	isMobile = false,
-	loading,
 }:Props) {
 	return (
 		<section className={styles.list_container}>
@@ -43,17 +40,16 @@ function CardItem({
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
 							)}
-							{loading ? <Placeholder />
-								: (
-									<div className={styles.flex}>
-										{getValue(
-											singleitem,
-											field,
-											functions,
-											'-',
-										) as ReactNode}
-									</div>
-								)}
+
+							<div className={styles.flex}>
+								{getValue(
+									singleitem,
+									field,
+									functions,
+									'-',
+								) as ReactNode}
+							</div>
+
 						</div>
 					);
 				})}

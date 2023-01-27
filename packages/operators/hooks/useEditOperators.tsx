@@ -6,18 +6,18 @@ import { useState } from 'react';
 import fields from '../configurations/controls';
 
 const useCreateOperators = ({
-	setShow,
+	setEdit,
 	refetch,
+	item,
 	setPage,
 	setFinalList,
-	setShowLoading,
 	page,
 }) => {
-	const { control, watch, handleSubmit } = useForm();
+	const { control, watch, setValue, handleSubmit } = useForm();
 	const [errors, setErrors] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_operators',
+		url    : '/update_operator',
 		method : 'POST',
 	});
 
@@ -27,28 +27,23 @@ const useCreateOperators = ({
 		iata_code          : operatorType === 'airline',
 		icao_code          : operatorType === 'airline',
 		airway_bill_prefix : operatorType === 'airline',
-		status             : false,
 		is_nvocc           : operatorType === 'shipping_line',
 	};
 
-	const handleCreateOperators = async (value) => {
-		let isNvocc;
-		if (value.is_nvocc) {
-			isNvocc = value.is_nvocc === 'true';
-		}
+	const handleEditOperators = async (value) => {
+		console.log('value', value);
+
 		const data = {
+			id       : item.id,
 			...value,
-			logo_url : value.logo_url.finalUrl,
-			is_nvocc : isNvocc,
-			status   : 'active',
+			logo_url : value?.logo_url?.finalUrl || undefined,
 		};
 
 		try {
 			await trigger({ data });
-			Toast.success('Operators Added Successfully');
+			Toast.success('Operator Updated Successfully');
 			setFinalList([]);
-			setShow(false);
-			setShowLoading(true);
+			setEdit(false);
 			if (page === 1) {
 				refetch();
 			} else {
@@ -62,9 +57,10 @@ const useCreateOperators = ({
 		setErrors({ ...errs });
 	};
 	return {
-		control,
+		handleEditOperators,
 		fields,
-		handleCreateOperators,
+		control,
+		setValue,
 		handleSubmit,
 		showElements,
 		loading,

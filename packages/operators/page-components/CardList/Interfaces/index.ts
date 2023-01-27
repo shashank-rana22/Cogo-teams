@@ -14,11 +14,15 @@ export interface NestedObj {
 
 export interface FieldType {
 	key?: string;
-	topKey?: GenericObject;
-	bottomKey?: GenericObject;
 	label?: string | ReactNode;
 	span: number;
 	className?: string;
 	styles?: NestedObj;
 	func?: string;
 }
+
+export interface DataType {
+	list?: Array<object>;
+	total_count?: number;
+}
+
