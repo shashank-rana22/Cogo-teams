@@ -37,7 +37,6 @@ interface Props {
 function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const [remark, setRemark] = useState('');
 	const { bill, remarks = [] } = data;
-	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { grandTotal, billCurrency } = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
@@ -180,7 +179,6 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 						setRemoveTag={setRemoveTag}
 						getBillRefetch={getBillRefetch}
 						billId={data?.bill?.id}
-						collectionPartyId={collectionPartyId}
 					/>
 				</Modal>
 			) : null}
