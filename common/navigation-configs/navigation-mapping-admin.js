@@ -1747,7 +1747,7 @@ const navigationMappingAdmin = {
 				href          : '/constants',
 				icon          : IcMAccountSettings,
 				as            : '/constants',
-				main_apis     : [],
+				main_apis     : ['list_platform_config_constants'],
 				possible_apis : apis.constants,
 			},
 		],
