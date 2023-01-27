@@ -1,64 +1,60 @@
-import React from 'react';
+import React from "react";
 
-import getFormattedPrice from '../../../../../../commons/utils/getFormattedPrice';
+import getFormattedPrice from "../../../../../../commons/utils/getFormattedPrice";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 interface CustomerDetailsInterface {
-	id: string;
-	customerName: string;
-	customerOutstandingAmount: number;
-	customerOutstandingAmountOnSid: number;
+  id: string;
+  customerName: string;
+  customerOutstandingAmount: number;
+  customerOutstandingAmountOnSid: number;
 }
 interface DataInterface {
-	customerDetails?: Array<CustomerDetailsInterface>;
+  customerDetails?: Array<CustomerDetailsInterface>;
 }
 type CustomerInformationInterface = {
-	data: DataInterface;
+  data: DataInterface;
 };
 
 function CustomerInformation({
-	data,
+  data,
 }: CustomerInformationInterface): JSX.Element {
-	const { customerDetails } = data || {};
+  const { customerDetails } = data || {};
 
-	return (
-		<>
-			{(customerDetails || []).map((item) => {
-      	const {
-      		id,
-      		customerName,
-      		customerOutstandingAmount,
-      		customerOutstandingAmountOnSid,
-      	} = item || {};
+  return (
+    <>
+      {(customerDetails || []).map((item) => {
+        const {
+          id,
+          customerName,
+          customerOutstandingAmount,
+          customerOutstandingAmountOnSid,
+        } = item || {};
 
-      	return (
-	<div className={styles.container} key={id}>
-		<div className={styles.subContainer}>
-			Name -
-			{' '}
-			<span style={{ fontWeight: 600 }}>{customerName}</span>
-		</div>
+        return (
+          <div className={styles.container} key={id}>
+            <div className={styles.subContainer}>
+              Name - <span style={{ fontWeight: 600 }}>{customerName}</span>
+            </div>
 
-		<div className={styles.subContainer}>
-			Total Outstanding -
-			<span style={{ fontWeight: 600 }}>
-				{customerOutstandingAmount}
-				{getFormattedPrice(customerOutstandingAmount, 'INR')}
-			</span>
-		</div>
+            <div className={styles.subContainer}>
+              Total Outstanding -
+              <span style={{ fontWeight: 600 }}>
+                {getFormattedPrice(customerOutstandingAmount, "INR")}
+              </span>
+            </div>
 
-		<div className={styles.subContainer}>
-			On Account Payments -
-			<span style={{ fontWeight: 600 }}>
-				{customerOutstandingAmountOnSid}
-				{getFormattedPrice(customerOutstandingAmountOnSid, 'INR')}
-			</span>
-		</div>
-	</div>
-      	);
-			})}
-		</>
-	);
+            <div className={styles.subContainer}>
+              On Account Payments -
+              <span style={{ fontWeight: 600 }}>
+                {getFormattedPrice(customerOutstandingAmountOnSid, "INR")}
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
 }
 export default CustomerInformation;
