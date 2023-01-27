@@ -15,9 +15,9 @@
 	background: #f9f9f9;
 
 	svg {
-		color: #4f4f4f;
 		width: 20px !important;
 		height: 20px !important;
+		color: #4f4f4f;
 	}
 
 	span {
@@ -148,7 +148,7 @@
 }
 
 .search_container {
-	margin: 10px 0 0 0;
+	margin: 10px 0 0;
 }
 
 .input_search:global(.ui_input_container) {
@@ -311,6 +311,6 @@
 
 .line {
 	height: 1px;
-	background-color: #e0e0e0;
 	margin-bottom: 8px;
+	background-color: #e0e0e0;
 }
