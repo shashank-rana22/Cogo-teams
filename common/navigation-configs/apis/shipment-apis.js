@@ -1211,19 +1211,19 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api: 'list_shipment_air_freight_rates',
-		access_type: 'private',
-		service_name: 'shipment',
+		api          : 'list_shipment_air_freight_rates',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api: 'list_awb_inventories',
-		access_type: 'private',
-		service_name: 'shipment',
+		api          : 'list_awb_inventories',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api: 'create_shipment_air_freight_e_booking',
-		access_type: 'private',
-		service_name: 'shipment',
+		api          : 'create_shipment_air_freight_e_booking',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 
