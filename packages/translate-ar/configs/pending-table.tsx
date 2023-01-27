@@ -1,4 +1,5 @@
-import { format, getByKey, startCase } from '@cogoport/utils';
+import { Pill } from '@cogoport/components';
+import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
 
 import Remarks from '../page-components/ListComponents/Remarks';
 import UploadInvoice from '../page-components/ListComponents/UploadInvoice';
@@ -26,7 +27,11 @@ const pendingColumns = (refetch) => [
 					{getDocumentNumber({ itemData: row })}
 
 				</div>
-				<div>{checkInvoice({ itemData: row })}</div>
+				<div>
+					<Pill size="md" color={checkInvoice({ itemData: row }) === 'Proforma' ? '#FCEDBF' : '#CDF7D4'}>
+						{checkInvoice({ itemData: row })}
+					</Pill>
+				</div>
 			</div>
 		),
 	},
@@ -40,7 +45,7 @@ const pendingColumns = (refetch) => [
 					{getByKey(row, 'job.jobNumber') as string}
 
 				</div>
-				<div>{startCase(getByKey(row, 'job.shipmentType') as string)}</div>
+				<div className={styles.service}>{startCase(getByKey(row, 'job.shipmentType') as string)}</div>
 			</div>
 		),
 	},
@@ -61,7 +66,8 @@ const pendingColumns = (refetch) => [
 		),
 	},
 	{
-		Header   : 'Remark History',
+		Header   : <div className={styles.center}>Remark History</div>,
+		id       : 'remarks',
 		accessor : (row) => (
 			<Remarks itemData={row} />
 		),
@@ -70,8 +76,23 @@ const pendingColumns = (refetch) => [
 		Header   : '',
 		id       : 'upload_invoice',
 		accessor : (row) => (
-			<UploadInvoice itemData={row} refetch={refetch} />
+			<div className={styles.center}>
+				<UploadInvoice itemData={row} refetch={refetch} />
+			</div>
 
+		),
+	},
+	{
+		Header   : '',
+		id       : 'ribbon',
+		accessor : (row) => (
+			<div className={styles.width}>
+				{!isEmpty(getByKey(row, 'translationRemark')) && (
+					<div className={styles.ribbon}>
+						Rejected
+					</div>
+				)}
+			</div>
 		),
 	},
 ];

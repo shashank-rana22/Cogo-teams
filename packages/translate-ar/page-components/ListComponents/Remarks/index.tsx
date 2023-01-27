@@ -3,10 +3,11 @@ import { IcMProvision } from '@cogoport/icons-react';
 import React from 'react';
 
 import RemarkContent from './RemarksContent';
+import styles from './styles.module.css';
 
 function Remarks({ itemData }) {
 	return (
-		<div>
+		<div className={styles.center}>
 			<Popover
 				placement="bottom"
 				render={<RemarkContent itemData={itemData} />}

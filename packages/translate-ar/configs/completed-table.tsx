@@ -1,3 +1,4 @@
+import { Pill } from '@cogoport/components';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
 import checkInvoice from '../utils/checkInvoice';
@@ -24,10 +25,15 @@ const completedColumn = [
 					{getDocumentNumber({ itemData: row })}
 
 				</div>
-				<div>{checkInvoice({ itemData: row })}</div>
+				<div>
+					<Pill size="md" color={checkInvoice({ itemData: row }) === 'Proforma' ? '#FCEDBF' : '#CDF7D4'}>
+						{checkInvoice({ itemData: row })}
+					</Pill>
+				</div>
 			</div>
 		),
-	}, {
+	},
+	{
 		Header   : 'Vietnam Invoice No.',
 		accessor : (row) => (
 			<div>
@@ -45,7 +51,7 @@ const completedColumn = [
 					{getByKey(row, 'job.jobNumber') as string}
 
 				</div>
-				<div>{startCase(getByKey(row, 'job.shipmentType') as string)}</div>
+				<div className={styles.service}>{startCase(getByKey(row, 'job.shipmentType') as string)}</div>
 			</div>
 		),
 	},
