@@ -22,7 +22,7 @@ function RoleList() {
 		columns,
 	} = useRoleList();
 
-	const { page = 0, page_limit: pageLimit = 0, total: totalPage = 0 } = listAuthRolesApi.data || {};
+	const { page = 0, page_limit: pageLimit = 0, total_count = 0 } = listAuthRolesApi.data || {};
 
 	return (
 		<section className={styles.container} id="rnp_role_list_container">
@@ -52,7 +52,7 @@ function RoleList() {
 						<Pagination
 							type="table"
 							currentPage={page}
-							totalItems={totalPage}
+							totalItems={total_count}
 							pageSize={pageLimit}
 							onPageChange={(val) => onChangeParams({ page: val })}
 						/>
