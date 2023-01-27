@@ -1,1 +1,1 @@
-export { default } from '@cogoport/operators/page-components';
+export { default } from '@cogoport/operators/page-components/Operators';

@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import getElementController from '../../hooks/getController';
-import useEditOperators from '../../hooks/useEditOperators';
+import getElementController from '../../../hooks/getController';
+import useEditOperators from '../../../hooks/useEditOperators';
 
 import styles from './styles.module.css';
 
