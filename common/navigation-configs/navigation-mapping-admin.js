@@ -104,6 +104,7 @@ const navigationMappingAdmin = {
 		href          : '/applications',
 		as            : '/applications',
 		type          : 'link',
+		icon          : IcMPartnersCogoport,
 		possible_apis : apis.partner_application,
 		main_apis     : ['list_partner_applications'],
 		module_type   : 'crm',
