@@ -56,17 +56,22 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 				billDateFrom:
 					billDatesStartFilters === null && billDatesEndFilters === null ? undefined : billDatesStartFilters || null,
 				billDateTo:
-					billDatesStartFilters && billDatesEndFilters === null ? billDatesStartFilters : billDatesStartFilters === null && billDatesEndFilters === null ? undefined : billDatesEndFilters || null,
+					billDatesStartFilters && billDatesEndFilters === null ? billDatesStartFilters : billDatesStartFilters === null
+					&& billDatesEndFilters === null ? undefined : billDatesEndFilters || null,
 
 				dueDateFrom:
 					dueDatesStartFilters === null && dueDatesEndFilters === null ? undefined : dueDatesStartFilters || null,
 				dueDateTo:
-					dueDatesStartFilters && dueDatesEndFilters === null ? dueDatesStartFilters : dueDatesStartFilters === null && dueDatesEndFilters === null ? undefined : dueDatesEndFilters || null,
+					dueDatesStartFilters && dueDatesEndFilters === null ? dueDatesStartFilters
+						: dueDatesStartFilters === null
+					&& dueDatesEndFilters === null ? undefined : dueDatesEndFilters || null,
 
 				updatedDateFrom:
-					updatedDateStartFilters === null && updatedDateEndFilters === null ? undefined : updatedDateStartFilters || null,
+					updatedDateStartFilters === null && updatedDateEndFilters === null ? undefined
+						: updatedDateStartFilters || null,
 				updatedDateTo:
-					updatedDateStartFilters && updatedDateEndFilters === null ? updatedDateStartFilters : updatedDateStartFilters === null && updatedDateEndFilters === null ? undefined : updatedDateEndFilters || null,
+					updatedDateStartFilters && updatedDateEndFilters === null ? updatedDateStartFilters : updatedDateStartFilters === null
+					&& updatedDateEndFilters === null ? undefined : updatedDateEndFilters || null,
 
 				urgencyTag : filters?.urgencyTag || undefined,
 				billType   : showFilter(),
