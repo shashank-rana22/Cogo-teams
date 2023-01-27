@@ -9238,6 +9238,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'platform_config',
 		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 };
 export default partner;
