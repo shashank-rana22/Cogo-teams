@@ -33,7 +33,7 @@ const useGetShipmentInvoices = ({ status }: StatusObject) => {
 		debounceQuery(search);
 	}, [search]);
 
-	const refetch = (p?:number) => {
+	const refetch = () => {
 		try {
 			trigger({
 				params: {
@@ -44,7 +44,7 @@ const useGetShipmentInvoices = ({ status }: StatusObject) => {
 							? ['PROFORMA_INIT', 'INVOICE_INIT']
 							: ['PROFORMA_COMPLETE', 'INVOICE_COMPLETE'],
 					q           : query || undefined,
-					page        : p || shipmentFilters?.page,
+					page        : shipmentFilters.page,
 					status      : undefined,
 					searchQuery : undefined,
 				},

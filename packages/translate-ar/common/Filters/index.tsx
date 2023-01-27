@@ -27,11 +27,11 @@ function Filters({
 						<Element
 							key={control.name}
 							className={styles.select}
-							value={filters?.[control?.name]}
+							value={filters[control.name]}
 							onChange={(value) => onChangeFilters({
 								...filters,
-								[control?.name] : value || undefined,
-								page            : 1,
+								[control.name] : value || undefined,
+								page           : 1,
 							})}
 							{...control}
 						/>
