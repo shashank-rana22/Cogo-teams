@@ -8,8 +8,10 @@ import { FilterProps, StatusObject } from '../common/interfaces';
 
 const useGetShipmentInvoices = ({ status }: StatusObject) => {
 	const [shipmentFilters, setShipmentFilters] = useState<FilterProps>({
-		page      : 1,
-		pageLimit : 10,
+		page        : 1,
+		pageLimit   : 10,
+		status,
+		searchQuery : '',
 	});
 
 	const { search, ...rest } = shipmentFilters || {};
@@ -23,10 +25,10 @@ const useGetShipmentInvoices = ({ status }: StatusObject) => {
 			method  : 'get',
 			authKey : 'get_sales_invoice_list',
 		},
-		{ autoCancel: false, manual: true },
+		{ manual: true },
 	);
 
-	const { query, debounceQuery } = useDebounceQuery();
+	const { query = '', debounceQuery } = useDebounceQuery();
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search]);
@@ -41,8 +43,10 @@ const useGetShipmentInvoices = ({ status }: StatusObject) => {
 						status !== 'completed'
 							? ['PROFORMA_INIT', 'INVOICE_INIT']
 							: ['PROFORMA_COMPLETE', 'INVOICE_COMPLETE'],
-					q    : query || undefined,
-					page : p || shipmentFilters?.page,
+					q           : query || undefined,
+					page        : p || shipmentFilters?.page,
+					status      : undefined,
+					searchQuery : undefined,
 				},
 			});
 		} catch (e) {
@@ -55,7 +59,12 @@ const useGetShipmentInvoices = ({ status }: StatusObject) => {
 	}, [JSON.stringify(rest)]);
 
 	useEffect(() => {
-		refetch(1);
+		setShipmentFilters({
+			...shipmentFilters,
+			status,
+			searchQuery : query,
+			page        : 1,
+		});
 	}, [status, query]);
 
 	return {

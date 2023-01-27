@@ -6852,7 +6852,7 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
-	translate_account_receivables: [
+	vietnam_account_receivables: [
 		{
 			api         : 'get_sales_invoice_list',
 			access_type : 'private',

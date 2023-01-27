@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, getByKey } from '@cogoport/utils';
 
 interface Props {
 	finalUrl?: string;
@@ -31,21 +30,14 @@ const useUpdateStatus = ({ finalUrl, setOpen, itemData = {}, refetch }: Props) =
 	);
 
 	const { id } = itemData;
-	let docType = '';
-	if (!isEmpty(getByKey(itemData, 'invoiceNumber'))) {
-		docType = 'INVOICE';
-	} else {
-		docType = 'PROFORMA';
-	}
 
 	const uploadDoc = async () => {
 		try {
 			await trigger({
 				data: {
-					url          : finalUrl,
-					createdBy    : partnerId,
-					invoiceId    : id,
-					documentType : docType,
+					url       : finalUrl,
+					createdBy : partnerId,
+					invoiceId : id,
 				},
 			});
 			Toast.success('Uploaded successful');

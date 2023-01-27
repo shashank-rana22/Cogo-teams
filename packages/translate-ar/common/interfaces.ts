@@ -26,4 +26,6 @@ export type FilterProps = {
 	page: number,
 	pageLimit: number,
 	search?: string,
+	status?: string,
+	searchQuery?: string,
 };
