@@ -120,18 +120,19 @@ function Navbar({
 								/>
 							))}
 						</div>
-
-						{(listItems || []).map((item) => (
-							<Items
-								key={item.key}
-								item={item}
-								resetSubnavs={resetSubnavs}
-								isPinned={false}
-								partner_user_id={partner_user_id}
-								setPinnedNavKeys={setPinnedNavKeys}
-								showPin={showPin}
-							/>
-						))}
+						<div className={styles.unpinned_list}>
+							{(listItems || []).map((item) => (
+								<Items
+									key={item.key}
+									item={item}
+									resetSubnavs={resetSubnavs}
+									isPinned={false}
+									partner_user_id={partner_user_id}
+									setPinnedNavKeys={setPinnedNavKeys}
+									showPin={showPin}
+								/>
+							))}
+						</div>
 					</ul>
 				</div>
 			</nav>
