@@ -1097,7 +1097,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.bn_salvage,
-
 			},
 			{
 				key           : 'coe-tasks_dashboard',

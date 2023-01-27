@@ -10,13 +10,13 @@
 
 .sticky_pins {
 	position: sticky;
-	top: 0px;
+	top: 0;
 	z-index: 1;
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
 .empty_pin_header {
-	margin-bottom: 0px !important;
+	margin-bottom: 0 !important;
 }
 
 .list_container::-webkit-scrollbar {
@@ -82,7 +82,7 @@
 		height: 16px;
 	}
 
-	&:hover{
+	&:hover {
 		background-color: #fef199;
 	}
 
@@ -188,6 +188,7 @@
 		width: 16px;
 		height: 16px;
 	}
+
 	transition: transform 0.3s ease;
 
 	&:hover {
@@ -198,7 +199,7 @@
 .loader {
 	width: 18px;
 	height: 18px;
-	margin: 0px;
+	margin: 0;
 }
 
 .inner_container {
@@ -297,10 +298,10 @@
 }
 
 .sticky_line {
+	position: sticky;
+	top: 39px;
 	z-index: 2;
 	height: 1px;
 	margin-bottom: 8px;
-	position: sticky;
-	top: 39px;
 	background-color: #e0e0e0;
 }
