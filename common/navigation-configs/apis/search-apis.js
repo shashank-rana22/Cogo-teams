@@ -399,10 +399,10 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api: 'send_booking_whatsapp',
-		access_type: 'private',
-		feature: 'send Whatsapp booking',
-		service_name: 'checkout',
+		api          : 'send_booking_whatsapp',
+		access_type  : 'private',
+		feature      : 'send Whatsapp booking',
+		service_name : 'checkout',
 	},
 ];
 export default apis;
