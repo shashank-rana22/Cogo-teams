@@ -60,6 +60,7 @@ function POCDetails({ itemData }: Props) {
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
+
 		if (key === '2') getTimeLineDetailsApi();
 	};
 
@@ -105,20 +106,20 @@ function POCDetails({ itemData }: Props) {
 								{loading ? (
 									<>
 										<Placeholder
-											margin="5px 0px 14px 25px"
-											height="45px"
-											width="492px"
-										/>
+										margin="5px 0px 14px 25px"
+										height="45px"
+										width="492px"
+									/>
 										<Placeholder
-											margin="5px 0px 14px 25px"
-											height="45px"
-											width="492px"
-										/>
+										margin="5px 0px 14px 25px"
+										height="45px"
+										width="492px"
+									/>
 										<Placeholder
-											margin="5px 0px 14px 25px"
-											height="45px"
-											width="492px"
-										/>
+										margin="5px 0px 14px 25px"
+										height="45px"
+										width="492px"
+									/>
 									</>
 								) : (
                 	(POC_DATA_MAPPING || [{}]).map((item) => {
