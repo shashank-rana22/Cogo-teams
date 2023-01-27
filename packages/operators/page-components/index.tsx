@@ -10,7 +10,7 @@ import EditOperators from './EditOperators';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function List() {
+function Operators() {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [item, setItem] = useState(null);
@@ -114,4 +114,4 @@ function List() {
 	);
 }
 
-export default List;
+export default Operators;
