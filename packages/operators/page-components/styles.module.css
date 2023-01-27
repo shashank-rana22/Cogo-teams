@@ -1,0 +1,15 @@
+.container {
+    margin: 12px 10px;
+}
+
+.image {
+    max-height: 40px;
+	max-width: 100px;
+}
+
+.event {
+    text-transform: capitalize;
+	padding: 2px 4px;
+	background: #f9f9f9;
+	border-radius: 4px;
+}

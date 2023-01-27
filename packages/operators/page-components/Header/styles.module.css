@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+}
+
+.container .search-icon {
+	width: 20px;
+	height: 20px;
+	margin-top: 5px;
+}
+
+.container .cross-icon {
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+.heading {
+	font-family: 'Avenir';
+	font-weight: 800;
+    font-size: 28px;
+}
+
+.heading::after {
+    display: block;
+	content: '';
+	width: 50%;
+	height: 4px;
+	background: #ED3726;
+    border-radius: 8px;
+}
+
+.right {
+	display: flex;
+	align-items: center;
+}
+
+.input_search {
+	height: 32px !important;
+	:global(.ui_input_control) {
+		font-size: 12px !important;
+	}
+}
