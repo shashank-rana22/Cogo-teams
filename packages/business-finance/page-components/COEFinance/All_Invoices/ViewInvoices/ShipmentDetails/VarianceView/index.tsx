@@ -3,17 +3,11 @@ import React from 'react';
 
 import {
 	ConfigType,
-	ListDataProps,
 	FunctionObjects,
 } from '../../../../../commons/Interfaces/index';
 import List from '../../../../../commons/List/index';
 
 import styles from './styles.module.css';
-
-interface DataInterface {
-	currency?: string;
-	data?: Array<object>;
-}
 
 interface VarianceViewInterface {
 	show: boolean;

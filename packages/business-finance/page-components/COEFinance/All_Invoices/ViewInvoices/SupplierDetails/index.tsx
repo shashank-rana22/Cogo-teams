@@ -56,9 +56,7 @@ function SupplierDetails({
 	paymentsData,
 	accPaymentLoading,
 }: SupplierDetailsProps) {
-	const { historyData, getSupplierHistory, loading } = useSupplierHistory({
-		data,
-	});
+	const { historyData, getSupplierHistory, loading } = useSupplierHistory();
 	const [showModal, setShowModal] = useState(false);
 	const [showDocsModal, setShowDocsModal] = useState(false);
 

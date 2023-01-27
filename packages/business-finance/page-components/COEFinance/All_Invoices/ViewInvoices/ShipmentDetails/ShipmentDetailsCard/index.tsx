@@ -52,7 +52,6 @@ function ShipmentDetailsCard({
 	} = buyerDetail || {};
 	const {
 		organizationName = '',
-		registrationNumber = '',
 		taxNumber = '',
 	} = sellerDetail || {};
 	const {
