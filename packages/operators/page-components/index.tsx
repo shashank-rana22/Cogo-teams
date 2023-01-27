@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMAirport } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
-import useGetListData from '../../hooks/useGetListData';
+import useGetListData from '../hooks/useGetListData';
 
 import CardList from './CardList';
 import CreateOperators from './CreateOperators';

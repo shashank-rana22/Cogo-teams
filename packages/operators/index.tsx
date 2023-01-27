@@ -1,1 +1,1 @@
-export { default as Operators } from './page-components/Operators';
+export { default as Operators } from './page-components';

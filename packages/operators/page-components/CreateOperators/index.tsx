@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
-import getElementController from '../../../hooks/getController';
-import useCreateOperators from '../../../hooks/useCreateOperators';
+import getElementController from '../../hooks/getController';
+import useCreateOperators from '../../hooks/useCreateOperators';
 
 import styles from './styles.module.css';
 
