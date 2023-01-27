@@ -23,7 +23,7 @@
     "clean": "turbo run clean"
   },
   "dependencies": {
-    "@sentry/nextjs": "^7.33.0",
+    "@sentry/nextjs": "^7.34.0",
     "accept-language": "^3.0.18",
     "i18next": "^22.4.9",
     "next-i18next": "^13.0.3",
