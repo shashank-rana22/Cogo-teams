@@ -1,5 +1,5 @@
 import {
-	IcCFclLocals, IcMFtrailorFull, IcMFcfs,
+	IcCFclLocals,
 	IcMFship,
 	IcMAirport,
 	IcMFhaulage,
@@ -8,7 +8,7 @@ import {
 import React from 'react';
 
 function GetServiceInfo(service:any = '') {
-	const ServiceIcon:any = null;
+	// const ServiceIcon:any = null;
 
 	if (service === 'fcl_freight') {
 		return <IcMFship color="#5936F0" height={20} width={20} />;
