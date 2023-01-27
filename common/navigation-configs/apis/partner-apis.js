@@ -7920,6 +7920,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	prm_feedback: [
 		{
@@ -9267,6 +9282,11 @@ const partner = {
 			api          : 'create_platform_config_constant_mapping',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 };
