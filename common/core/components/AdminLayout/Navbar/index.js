@@ -86,42 +86,40 @@ function Navbar({
 						/>
 					</div>
 
-					<ul ref={ref} className={styles.list_container}>
-						<div className={styles.sticky_pins}>
-							<div className={styles.line} />
+					<div className={styles.line} />
 
-							<div
-								role="button"
-								tabIndex={0}
-								onClick={() => scrollToPinnedList(ref)}
-								className={`
+					<div className={styles.sticky_pins}>
+						<div
+							role="button"
+							tabIndex={0}
+							onClick={() => scrollToPinnedList(ref)}
+							className={`
 								${styles.list_item_inner} 
-								${styles.list_item} 
 								${(pinnedListItems || []).length === 0 ? styles.empty_pin_header : ''}`}
-							>
-								<IcCPin />
-								<span>
-									{(!pinListLoading && (pinnedListItems || []).length === 0) ? 'No Pins Found'
-										: 'Pinned List'}
+						>
+							<IcCPin />
+							<span>
+								{(!pinListLoading && (pinnedListItems || []).length === 0) ? 'No Pins Found'
+									: 'Pinned List'}
 
-								</span>
-							</div>
-
+							</span>
 						</div>
+					</div>
 
-						{(pinnedListItems || []).map((item) => (
-							<Items
-								key={item.key}
-								item={item}
-								resetSubnavs={resetSubnavs}
-								isPinned
-								partner_user_id={partner_user_id}
-								setPinnedNavKeys={setPinnedNavKeys}
-								showPin={showPin}
-							/>
-						))}
-
-						<div className={styles.sticky_line} />
+					<ul ref={ref} className={styles.list_container}>
+						<div className={styles.pinned_list}>
+							{(pinnedListItems || []).map((item) => (
+								<Items
+									key={item.key}
+									item={item}
+									resetSubnavs={resetSubnavs}
+									isPinned
+									partner_user_id={partner_user_id}
+									setPinnedNavKeys={setPinnedNavKeys}
+									showPin={showPin}
+								/>
+							))}
+						</div>
 
 						{(listItems || []).map((item) => (
 							<Items
