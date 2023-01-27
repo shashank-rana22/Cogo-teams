@@ -1,62 +1,64 @@
-import React, { useState } from "react";
-import Header from "./Header/index";
-import { useRouter } from "@cogoport/next";
-import SupplierDetails from "./SupplierDetails/index";
-import ShipmentDetails from "./ShipmentDetails/index";
-import useGetBill from "../../hook/useGetBill";
-import InvoiceDetails from "./InvoiceDetails/index";
+import { useRouter } from '@cogoport/next';
+import React, { useState } from 'react';
 
-const ViewInvoices = () => {
-  const { query } = useRouter();
-  const { billId, orgId, jobNumber, status } = query;
-  const [remarksVal, setRemarksVal] = useState({
-    collectionPartyRemark: "",
-    billingPartyRemark: "",
-    invoiceDetailsRemark: "",
-    overallRemark: "",
-  });
-  const [lineItemsRemarks, setLineItemsRemarks] = useState({});
-  const [lineItem, setLineItem] = useState(false);
-  const {
-    list: { fullResponse },
-    refetch: getBillRefetch,
-    accPaymentLoading,
-    paymentsData,
-  } = useGetBill({ billId: billId, orgId: orgId });
+import useGetBill from '../../hook/useGetBill';
 
-  return (
-    <div>
-      <Header
-        data={fullResponse}
-        remarksVal={remarksVal}
-        lineItemsRemarks={lineItemsRemarks}
-        lineItem={lineItem}
-        status={status}
-        setRemarksVal={setRemarksVal}
-      />
+import Header from './Header/index';
+import InvoiceDetails from './InvoiceDetails/index';
+import ShipmentDetails from './ShipmentDetails/index';
+import SupplierDetails from './SupplierDetails/index';
 
-      <SupplierDetails
-        data={fullResponse}
-        paymentsData={paymentsData}
-        accPaymentLoading={accPaymentLoading}
-      />
+function ViewInvoices() {
+	const { query } = useRouter();
+	const { billId, orgId, jobNumber, status } = query;
+	const [remarksVal, setRemarksVal] = useState({
+		collectionPartyRemark : '',
+		billingPartyRemark    : '',
+		invoiceDetailsRemark  : '',
+		overallRemark         : '',
+	});
+	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
+	const [lineItem, setLineItem] = useState(false);
+	const {
+		list: { fullResponse },
+		refetch: getBillRefetch,
+		accPaymentLoading,
+		paymentsData,
+	} = useGetBill({ billId, orgId });
 
-      <InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch} />
+	return (
+		<div>
+			<Header
+				data={fullResponse}
+				remarksVal={remarksVal}
+				lineItemsRemarks={lineItemsRemarks}
+				lineItem={lineItem}
+				status={status}
+				setRemarksVal={setRemarksVal}
+			/>
 
-      <ShipmentDetails
-        data={fullResponse}
-        orgId={query?.orgId || ""}
-        jobNumber={jobNumber}
-        remarksVal={remarksVal}
-        setRemarksVal={setRemarksVal}
-        lineItemsRemarks={lineItemsRemarks}
-        setLineItemsRemarks={setLineItemsRemarks}
-        setLineItem={setLineItem}
-        lineItem={lineItem}
-        status={status}
-      />
-    </div>
-  );
-};
+			<SupplierDetails
+				data={fullResponse}
+				paymentsData={paymentsData}
+				accPaymentLoading={accPaymentLoading}
+			/>
+
+			<InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch} />
+
+			<ShipmentDetails
+				data={fullResponse}
+				orgId={query?.orgId || ''}
+				jobNumber={jobNumber}
+				remarksVal={remarksVal}
+				setRemarksVal={setRemarksVal}
+				lineItemsRemarks={lineItemsRemarks}
+				setLineItemsRemarks={setLineItemsRemarks}
+				setLineItem={setLineItem}
+				lineItem={lineItem}
+				status={status}
+			/>
+		</div>
+	);
+}
 
 export default ViewInvoices;

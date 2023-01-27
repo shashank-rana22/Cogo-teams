@@ -1,12 +1,14 @@
-import React from "react";
-import { format } from "@cogoport/utils";
-import { IcMInfo } from "@cogoport/icons-react";
 import { Tooltip } from "@cogoport/components";
-import styled from "./styles.module.css";
-import getFormattedPrice from "../../../../../commons/utils/getFormattedPrice";
-import showOverflowingNumber from "../../../../../commons/showOverflowingNumber";
+import { IcMInfo } from "@cogoport/icons-react";
+import { format } from "@cogoport/utils";
+import React from "react";
 
-interface itemProps {
+import showOverflowingNumber from "../../../../../commons/showOverflowingNumber";
+import getFormattedPrice from "../../../../../commons/utils/getFormattedPrice";
+
+import styled from "./styles.module.css";
+
+interface ItemProps {
   createdDate: Date;
   billDate: Date;
   dueDate: Date;
@@ -15,7 +17,7 @@ interface itemProps {
   grandTotal?: number;
 }
 interface Props {
-  item: itemProps;
+  item: ItemProps;
   field: {
     key: string;
     topKey: object;

@@ -1,7 +1,9 @@
 import React from "react";
+
+import { DetailInterface } from "../../../../../commons/Interfaces/index";
+
 import { renderValue } from "./renderValue";
 import styles from "./styles.module.css";
-import { DetailInterface } from "../../../../../commons/Interfaces/index";
 
 const labels = [
   "airline",

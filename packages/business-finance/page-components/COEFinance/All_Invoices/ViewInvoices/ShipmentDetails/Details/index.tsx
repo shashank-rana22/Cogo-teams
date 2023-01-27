@@ -1,18 +1,20 @@
-import React from "react";
+import { Tooltip } from "@cogoport/components";
 import { useRouter } from "@cogoport/next";
+import React from "react";
+
+import { DetailInterface } from "../../../../../commons/Interfaces/index";
+import CargoDetailPills from "../cargo-details/index";
+
+import PortDetails from "./PortDetails";
 import styles from "./styles.module.css";
 import TimeLine from "./TimeLine/index";
-import CargoDetailPills from "../cargo-details/index";
-import { DetailInterface } from "../../../../../commons/Interfaces/index";
-import PortDetails from "./PortDetails";
-import { Tooltip } from "@cogoport/components";
 
 interface Details {
   orgId: string;
   dataList: DetailInterface;
   shipmentId: string;
 }
-const Details = ({ orgId, dataList, shipmentId }: Details) => {
+function Details({ orgId, dataList, shipmentId }: Details) {
   const { importer_exporter, shipment_type } = dataList || {};
   const Router = useRouter();
 
@@ -54,6 +56,6 @@ const Details = ({ orgId, dataList, shipmentId }: Details) => {
       </div>
     </div>
   );
-};
+}
 
 export default Details;

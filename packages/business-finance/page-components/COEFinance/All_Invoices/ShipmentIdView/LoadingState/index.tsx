@@ -1,45 +1,47 @@
-import React from "react";
-import styles from "./styles.module.css";
-import { Placeholder } from "@cogoport/components";
-const LoadingState = () => {
-    return (
-        <div className={styles.mainContainer}>
-            <div className={styles.container}>
-                <div className={styles.flexRow}>
-                    <div className={styles.percent}>
-                        <Placeholder />
-                        <Placeholder />
-                    </div>
-                </div>
-                <div className={styles.details}>
-                    <Placeholder />
-                </div>
+import { Placeholder } from '@cogoport/components';
+import React from 'react';
 
-                <div className={styles.flexRow}>
-                    <div className={styles.percent}>
-                        <Placeholder />
-                        <Placeholder />
-                    </div>
-                </div>
-                <div className={styles.flexRow}>
-                    <div className={styles.percent}>
-                        <Placeholder />
-                        <Placeholder />
-                    </div>
-                </div>
+import styles from './styles.module.css';
 
-                <div className={styles.flexRow}>
-                    <div className={styles.percent}>
-                        <Placeholder />
-                        <Placeholder />
-                    </div>
-                </div>
-                <div className={styles.button}>
-                    <Placeholder />
-                </div>
-            </div>
-        </div>
-    );
-};
+function LoadingState() {
+	return (
+		<div className={styles.mainContainer}>
+			<div className={styles.container}>
+				<div className={styles.flexRow}>
+					<div className={styles.percent}>
+						<Placeholder />
+						<Placeholder />
+					</div>
+				</div>
+				<div className={styles.details}>
+					<Placeholder />
+				</div>
+
+				<div className={styles.flexRow}>
+					<div className={styles.percent}>
+						<Placeholder />
+						<Placeholder />
+					</div>
+				</div>
+				<div className={styles.flexRow}>
+					<div className={styles.percent}>
+						<Placeholder />
+						<Placeholder />
+					</div>
+				</div>
+
+				<div className={styles.flexRow}>
+					<div className={styles.percent}>
+						<Placeholder />
+						<Placeholder />
+					</div>
+				</div>
+				<div className={styles.button}>
+					<Placeholder />
+				</div>
+			</div>
+		</div>
+	);
+}
 
 export default LoadingState;

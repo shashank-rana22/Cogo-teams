@@ -5749,14 +5749,14 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api: 'list_communication_templates',
-			access_type: 'private',
-			service_name: 'communication',
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 		{
-			api: 'send_demand_notice_to_prelegal_accounts',
-			access_type: 'private',
-			service_name: 'sage',
+			api          : 'send_demand_notice_to_prelegal_accounts',
+			access_type  : 'private',
+			service_name : 'sage',
 		},
 	],
 	unified_dashboard: [
@@ -7875,6 +7875,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	prm_feedback: [
 		{
@@ -7891,6 +7906,13 @@ const partner = {
 			api          : 'list_segments',
 			access_type  : 'private',
 			service_name : 'segmentation',
+		},
+		{
+
+			api          : 'create_duplicate_promotion',
+			access_type  : 'private',
+			service_name : 'promotion',
+
 		},
 		{
 			api          : 'list_promotions',
@@ -9215,6 +9237,11 @@ const partner = {
 			api          : 'create_platform_config_constant_mapping',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 };

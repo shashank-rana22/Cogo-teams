@@ -1,13 +1,22 @@
-import { Button, Pill, Tooltip } from "@cogoport/components";
+import {
+  Button,
+  Pill,
+  Tooltip,
+  Modal,
+  Textarea,
+  Checkbox,
+} from "@cogoport/components";
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from "@cogoport/icons-react";
-import React, { useState } from "react";
-import LineItemCard from "./lineItemCard/index";
-import styles from "./styles.module.css";
-import { Modal, Textarea, Checkbox } from "@cogoport/components";
-import { RemarksValInterface } from "../../../../../commons/Interfaces/index";
-import { DataInterface } from "..";
 import { useRouter } from "@cogoport/next";
 import { format, startCase } from "@cogoport/utils";
+import React, { useState } from "react";
+
+import { DataInterface } from "..";
+import { RemarksValInterface } from "../../../../../commons/Interfaces/index";
+
+import LineItemCard from "./lineItemCard/index";
+import styles from "./styles.module.css";
+
 interface ShipmentDetailsCardInterface {
   data: DataInterface;
   remarksVal: RemarksValInterface;
@@ -19,7 +28,7 @@ interface ShipmentDetailsCardInterface {
   invoiceStatus: string;
 }
 
-const ShipmentDetailsCard = ({
+function ShipmentDetailsCard({
   data,
   remarksVal,
   setRemarksVal,
@@ -28,7 +37,7 @@ const ShipmentDetailsCard = ({
   setItemCheck,
   setLineItem,
   invoiceStatus,
-}: ShipmentDetailsCardInterface) => {
+}: ShipmentDetailsCardInterface) {
   const [showValue, setShowValue] = useState([] as any);
   const [rejected, setRejected] = useState([] as any);
   const [showLineItem, setShowLineItem] = useState(false);
@@ -177,7 +186,8 @@ const ShipmentDetailsCard = ({
 
             {!isInvoiceApproved && (
               <div className={styles.completed}>
-                Completed {showValue.length + rejected.length || 0}/3
+                Completed {showValue.length + rejected.length || 0}
+                /3
               </div>
             )}
           </div>
@@ -673,26 +683,20 @@ const ShipmentDetailsCard = ({
             );
           })}
 
-          {
-            <div className={styles.footer}>
-              <Button
-                size="md"
-                disabled={
-                  showValue.length + rejected.length == 3 || isInvoiceApproved
-                    ? false
-                    : true
-                }
-                onClick={() => handleSave()}
-              >
-                {isInvoiceApproved
-                  ? "Check line items ➢ "
-                  : " Save And Next ➢ "}
-              </Button>
-            </div>
-          }
+          <div className={styles.footer}>
+            <Button
+              size="md"
+              disabled={
+                !(showValue.length + rejected.length == 3 || isInvoiceApproved)
+              }
+              onClick={() => handleSave()}
+            >
+              {isInvoiceApproved ? "Check line items ➢ " : " Save And Next ➢ "}
+            </Button>
+          </div>
         </div>
       )}
     </div>
   );
-};
+}
 export default ShipmentDetailsCard;

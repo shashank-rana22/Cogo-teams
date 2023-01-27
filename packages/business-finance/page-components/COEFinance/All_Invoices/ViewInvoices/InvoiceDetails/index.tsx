@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { Button, Tooltip, Modal } from "@cogoport/components";
-import styles from "./styles.module.css";
-import { isEmpty, startCase } from "@cogoport/utils";
+import { Button, Tooltip, Modal, Pill } from "@cogoport/components";
 import { IcMInfo } from "@cogoport/icons-react";
-import { urgencyOptions } from "./controls";
-import AddUrgencyTag from "./AddUrgencyTag/index";
-import RemoveTagConfirmation from "./RemoveTagConfirmation/index";
 import { useRouter } from "@cogoport/next";
-import { Pill } from "@cogoport/components";
+import { isEmpty, startCase } from "@cogoport/utils";
+import React, { useState } from "react";
+
 import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
+
+import AddUrgencyTag from "./AddUrgencyTag/index";
+import { urgencyOptions } from "./controls";
+import RemoveTagConfirmation from "./RemoveTagConfirmation/index";
+import styles from "./styles.module.css";
+
 interface BillInterFace {
   grandTotal: number;
   billCurrency: string;
@@ -32,7 +34,7 @@ interface Props {
   data: DataProps;
   getBillRefetch: () => void;
 }
-const InvoiceDetails = ({ data, getBillRefetch }: Props) => {
+function InvoiceDetails({ data, getBillRefetch }: Props) {
   const [remark, setRemark] = useState("");
   const { bill, remarks = [] } = data;
   const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -62,11 +64,9 @@ const InvoiceDetails = ({ data, getBillRefetch }: Props) => {
       displayTag = option.label;
   });
 
-  const remarkRender = () => {
-    return (
-      <div>Urgent Remarks - {data?.billAdditionalObject?.urgencyRemarks}</div>
-    );
-  };
+  const remarkRender = () => (
+    <div>Urgent Remarks -{data?.billAdditionalObject?.urgencyRemarks}</div>
+  );
 
   const renderEditTag = (
     <div className={styles.flexdiv}>
@@ -180,6 +180,6 @@ const InvoiceDetails = ({ data, getBillRefetch }: Props) => {
       ) : null}
     </div>
   );
-};
+}
 
 export default InvoiceDetails;

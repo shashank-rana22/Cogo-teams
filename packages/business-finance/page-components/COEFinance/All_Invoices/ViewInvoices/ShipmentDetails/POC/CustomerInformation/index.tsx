@@ -1,6 +1,9 @@
 import React from "react";
+
 import getFormattedPrice from "../../../../../../commons/utils/getFormattedPrice";
+
 import styles from "./styles.module.css";
+
 interface CustomerDetailsInterface {
   id: string;
   customerName: string;
@@ -14,9 +17,9 @@ type CustomerInformationInterface = {
   data: DataInterface;
 };
 
-const CustomerInformation = ({
+function CustomerInformation({
   data,
-}: CustomerInformationInterface): JSX.Element => {
+}: CustomerInformationInterface): JSX.Element {
   const { customerDetails } = data || {};
 
   return (
@@ -53,5 +56,5 @@ const CustomerInformation = ({
       })}
     </>
   );
-};
+}
 export default CustomerInformation;

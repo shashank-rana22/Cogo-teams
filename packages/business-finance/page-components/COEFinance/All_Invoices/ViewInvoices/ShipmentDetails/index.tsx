@@ -1,23 +1,25 @@
-import React, { useState } from "react";
-import { startCase } from "@cogoport/utils";
 import { Pill } from "@cogoport/components";
-import styles from "./styles.module.css";
 import {
   IcMArrowRotateDown,
   IcMArrowRotateUp,
   IcADocumentTemplates,
 } from "@cogoport/icons-react";
+import { startCase } from "@cogoport/utils";
+import React, { useState } from "react";
+
+import { RemarksValInterface } from "../../../../commons/Interfaces/index";
+import useGetVariance from "../../../hook/useGetVariance";
+import useGetWallet from "../../../hook/useGetWallet";
+import useListShipment from "../../../hook/useListShipment";
+
 import Details from "./Details/index";
 import Documents from "./Documents/index";
-import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
 import PdfDisplay from "./PdfDisplay/index";
 import POC from "./POC/index";
-import useListShipment from "../../../hook/useListShipment";
-import useGetVariance from "../../../hook/useGetVariance";
-import VarianceView from "./VarianceView/index";
-import { RemarksValInterface } from "../../../../commons/Interfaces/index";
+import ShipmentDetailsCard from "./ShipmentDetailsCard/index";
+import styles from "./styles.module.css";
 import TimeLineItemCheck from "./TimelineItemCheck/index";
-import useGetWallet from "../../../hook/useGetWallet";
+import VarianceView from "./VarianceView/index";
 
 interface BuyerDetailInterface {
   entityCode?: string;
@@ -80,7 +82,7 @@ interface ShipmentDetailsInterface {
   lineItem?: boolean;
   status: string;
 }
-const ShipmentDetails = ({
+function ShipmentDetails({
   data,
   orgId,
   jobNumber,
@@ -91,7 +93,7 @@ const ShipmentDetails = ({
   setLineItem,
   lineItem,
   status,
-}: ShipmentDetailsInterface) => {
+}: ShipmentDetailsInterface) {
   const [showDetails, setShowDetails] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
   const [showVariance, setShowVariance] = useState(false);
@@ -141,7 +143,9 @@ const ShipmentDetails = ({
               <div className={styles.Data}>
                 <div className={styles.kamData}>KAM -</div>
                 <div>
-                  {agent_data?.name}&nbsp;({agent_role_data?.name})
+                  {agent_data?.name}
+                  &nbsp;(
+                  {agent_role_data?.name})
                 </div>
                 <div className={styles.kamData}>Wallet Usage - </div>
                 <div>
@@ -267,5 +271,5 @@ const ShipmentDetails = ({
       </div>
     </div>
   );
-};
+}
 export default ShipmentDetails;

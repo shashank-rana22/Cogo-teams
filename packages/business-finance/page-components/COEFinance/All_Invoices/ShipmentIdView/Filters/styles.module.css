@@ -28,28 +28,29 @@
 		margin-top: 10px;
 	}
 }
-.last{
+
+.last {
 	display: flex;
 }
+
 .search {
 	:global {
-	  width: 306px;
-	  margin-right: 10px;
-  
-	  .ui_input_container {
-		height: 38px;
-		margin-top: 8px;
-		margin-left: 9px;
-		
-	  }
+		width: 306px;
+		margin-right: 10px;
+
+		.ui_input_container {
+			height: 38px;
+			margin-top: 8px;
+			margin-left: 9px;
+		}
 	}
-  
+
 	::placeholder {
-	  font-size: 11px;
-	  color: #cacaca;
+		font-size: 11px;
+		color: #cacaca;
 	}
-  }
-  
-  .searchFilter {
+}
+
+.searchFilter {
 	display: flex;
-  }
+}

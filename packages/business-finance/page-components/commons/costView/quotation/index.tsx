@@ -1,5 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
+
 import QuotationCard from './quotationCard/index';
 import styles from './styles.module.css';
 

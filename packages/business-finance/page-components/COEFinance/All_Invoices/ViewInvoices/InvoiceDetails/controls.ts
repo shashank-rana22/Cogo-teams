@@ -13,24 +13,3 @@ export const urgencyOptions = [
 	{ label: 'Airlines DO Payments', value: 'adp' },
 	{ label: 'Urgent', value: 'urgent' },
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

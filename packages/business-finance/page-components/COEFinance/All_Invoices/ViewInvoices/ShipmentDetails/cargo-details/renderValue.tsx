@@ -1,8 +1,10 @@
 import { Tooltip } from "@cogoport/components";
-import React from "react";
-import { startCase, upperCase } from "@cogoport/utils";
-import { formatDate } from "../../../../../commons/utils/formatDate";
 import { IcMOpenlink } from "@cogoport/icons-react";
+import { startCase, upperCase } from "@cogoport/utils";
+import React from "react";
+
+import { formatDate } from "../../../../../commons/utils/formatDate";
+
 import styles from "./styles.module.css";
 
 interface PocDetailsInt {
@@ -66,50 +68,42 @@ export const renderValue = (label: string, detail: any) => {
             </div>
           }
         >
-          <div className="cargo-details-info">{`Package: ${inputValue} + ${
-            packages?.length - 1
-          } more`}</div>
+          <div className="cargo-details-info">
+            {`Package: ${inputValue} + ${packages?.length - 1} more`}
+          </div>
         </Tooltip>
       );
     }
     return `Package: ${inputValue}`;
   };
 
-  const formatPocData = (pocDetails: PocDetailsInt) => {
-    return (
+  const formatPocData = (pocDetails: PocDetailsInt) => (
+    <div>
+      <div>{pocDetails?.name}</div>
       <div>
-        <div>{pocDetails?.name}</div>
-        <div>
-          {pocDetails?.mobile_country_code}- {pocDetails?.mobile_number}
-        </div>
-        <div>{pocDetails?.email}</div>
+        {pocDetails?.mobile_country_code}-{pocDetails?.mobile_number}
       </div>
-    );
-  };
+      <div>{pocDetails?.email}</div>
+    </div>
+  );
 
-  const formatShipperDetails = (shipperDetails: ShipperDetailsInt) => {
-    return (
-      <div>
-        <div>{shipperDetails?.name}</div>
-        <div>{shipperDetails?.address}</div>
-      </div>
-    );
-  };
+  const formatShipperDetails = (shipperDetails: ShipperDetailsInt) => (
+    <div>
+      <div>{shipperDetails?.name}</div>
+      <div>{shipperDetails?.address}</div>
+    </div>
+  );
 
-  const formatCertificate = (certificates: any) => {
-    return (
-      <div className={styles.CertificateContainer}>
-        {(certificates || []).map((item, key) => {
-          return (
-            <a href={item} target="_blank" rel="noreferrer">
-              Click to view certificate {key + 1} <IcMOpenlink />
-              <br />
-            </a>
-          );
-        })}
-      </div>
-    );
-  };
+  const formatCertificate = (certificates: any) => (
+    <div className={styles.CertificateContainer}>
+      {(certificates || []).map((item, key) => (
+        <a href={item} target="_blank" rel="noreferrer">
+          Click to view certificate {key + 1} <IcMOpenlink />
+          <br />
+        </a>
+      ))}
+    </div>
+  );
 
   switch (label) {
     case "container_size":
@@ -169,7 +163,7 @@ export const renderValue = (label: string, detail: any) => {
       return ` ${volume} ${
         detail.service_type === "ftl_freight_service" ||
         detail.service_type === "haulage_freight_service"
-          ? ``
+          ? ""
           : `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
       }`;
 
@@ -177,28 +171,28 @@ export const renderValue = (label: string, detail: any) => {
       if (isLTL) {
         return `Docket Number : ${lr_number || ""}`;
       }
-      return ``;
+      return "";
 
     case "master_airway_bill_number":
       if (isAir) {
         return `MAWB Number: ${detail?.master_airway_bill_number || ""}`;
       }
-      return ``;
+      return "";
     case "house_airway_bill_number":
       if (isAir) {
         return `HAWB Number: ${detail?.house_airway_bill_number || ""}`;
       }
-      return ``;
+      return "";
     case "eway_bill_number":
       if (isLTL) {
         return `Eway Bill Number : ${eway_bill_number || ""}`;
       }
-      return ``;
+      return "";
     case "airline":
       if (isAir) {
         return `Airline : ${detail?.airline?.business_name || ""}`;
       }
-      return ``;
+      return "";
     case "weight":
       return ` ${detail.weight} kgs`;
     case "haulage_type":
