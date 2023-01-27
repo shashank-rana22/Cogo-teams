@@ -1,6 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl';
 
@@ -51,22 +51,22 @@ function CoeFinance() {
 						<div className={styles.spacebetween}>
 							<div
 								style={{
-                minWidth     : '60%',
-                height       : 368,
-                background   : '#ffffff',
-                borderRadius : '8px',
-                margin       : '16px',
+									minWidth     : '60%',
+									height       : 368,
+									background   : '#ffffff',
+									borderRadius : '8px',
+									margin       : '16px',
 								}}
 							>
 								<MyResponsiveLine data={lineData} />
 							</div>
 							<div
 								style={{
-                height       : 368,
-                minWidth     : '35%',
-                background   : '#ffffff',
-                borderRadius : '8px',
-                margin       : '16px',
+									height       : 368,
+									minWidth     : '35%',
+									background   : '#ffffff',
+									borderRadius : '8px',
+									margin       : '16px',
 								}}
 							>
 								<MyResponsiveBar data={data} />
@@ -75,12 +75,12 @@ function CoeFinance() {
 						<div className={styles.spacebetween}>
 							<div
 								style={{
-                background   : '#ffffff',
-                minWidth     : '50%',
-                height       : 323,
-                borderRadius : '8px',
-                margin       : '16px',
-                padding      : '16px',
+									background   : '#ffffff',
+									minWidth     : '50%',
+									height       : 323,
+									borderRadius : '8px',
+									margin       : '16px',
+									padding      : '16px',
 								}}
 							>
 								<div className={styles.flex}>
@@ -110,11 +110,11 @@ function CoeFinance() {
 							</div>
 							<div
 								style={{
-                height       : 323,
-                minWidth     : '45%',
-                background   : '#ffffff',
-                borderRadius : '8px',
-                margin       : '16px',
+									height       : 323,
+									minWidth     : '45%',
+									background   : '#ffffff',
+									borderRadius : '8px',
+									margin       : '16px',
 								}}
 							>
 								<MyResponsiveLines data={{}} />

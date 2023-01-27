@@ -1,702 +1,746 @@
 import {
-  Button,
-  Pill,
-  Tooltip,
-  Modal,
-  Textarea,
-  Checkbox,
-} from "@cogoport/components";
-import { IcCFtick, IcMCrossInCircle, IcMInfo } from "@cogoport/icons-react";
-import { useRouter } from "@cogoport/next";
-import { format, startCase } from "@cogoport/utils";
-import React, { useState } from "react";
+	Button,
+	Pill,
+	Tooltip,
+	Modal,
+	Textarea,
+	Checkbox,
+} from '@cogoport/components';
+import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { format, startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
-import { DataInterface } from "..";
-import { RemarksValInterface } from "../../../../../commons/Interfaces/index";
+import { DataInterface } from '..';
+import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 
-import LineItemCard from "./lineItemCard/index";
-import styles from "./styles.module.css";
+import LineItemCard from './lineItemCard/index';
+import styles from './styles.module.css';
 
 interface ShipmentDetailsCardInterface {
-  data: DataInterface;
-  remarksVal: RemarksValInterface;
-  setRemarksVal: any;
-  lineItemsRemarks: object;
-  setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-  setItemCheck: React.Dispatch<React.SetStateAction<boolean>>;
-  setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
-  invoiceStatus: string;
+	data: DataInterface;
+	remarksVal: RemarksValInterface;
+	setRemarksVal: any;
+	lineItemsRemarks: object;
+	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
+	setItemCheck: React.Dispatch<React.SetStateAction<boolean>>;
+	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
+	invoiceStatus: string;
 }
 
 function ShipmentDetailsCard({
-  data,
-  remarksVal,
-  setRemarksVal,
-  lineItemsRemarks,
-  setLineItemsRemarks,
-  setItemCheck,
-  setLineItem,
-  invoiceStatus,
+	data,
+	remarksVal,
+	setRemarksVal,
+	lineItemsRemarks,
+	setLineItemsRemarks,
+	setItemCheck,
+	setLineItem,
+	invoiceStatus,
 }: ShipmentDetailsCardInterface) {
-  const [showValue, setShowValue] = useState([] as any);
-  const [rejected, setRejected] = useState([] as any);
-  const [showLineItem, setShowLineItem] = useState(false);
-  const [showRejected, setShowRejected] = useState({});
-  const { lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill } =
-    data || {};
-  const {
-    entityCode = "",
-    organizationName: organizationNameBuyer = "",
-    address = "",
-    registrationNumber: registrationNumberBuyer = "",
-    taxNumber: taxNumberBuyer = "",
-  } = buyerDetail || {};
-  const {
-    organizationName = "",
-    registrationNumber = "",
-    taxNumber = "",
-  } = sellerDetail || {};
-  const {
-    bankName = "",
-    accountNumber = "",
-    ifscCode = "",
-  } = sellerBankDetail || {};
-  const {
-    billNumber = "",
-    billDate,
-    status = "",
-    placeOfSupply = "",
-  } = bill || {};
+	const [showValue, setShowValue] = useState([] as any);
+	const [rejected, setRejected] = useState([] as any);
+	const [showLineItem, setShowLineItem] = useState(false);
+	const [showRejected, setShowRejected] = useState({});
+	const { lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill } = data || {};
+	const {
+		entityCode = '',
+		organizationName: organizationNameBuyer = '',
+		address = '',
+		registrationNumber: registrationNumberBuyer = '',
+		taxNumber: taxNumberBuyer = '',
+	} = buyerDetail || {};
+	const {
+		organizationName = '',
+		registrationNumber = '',
+		taxNumber = '',
+	} = sellerDetail || {};
+	const {
+		bankName = '',
+		accountNumber = '',
+		ifscCode = '',
+	} = sellerBankDetail || {};
+	const {
+		billNumber = '',
+		billDate,
+		status = '',
+		placeOfSupply = '',
+	} = bill || {};
 
-  const { query } = useRouter();
-  const { billType, isProforma } = query;
+	const { query } = useRouter();
+	const { billType, isProforma } = query;
 
-  const [DetailsCard, setDetailsCard] = useState([
-    {
-      id: 1,
-      name: "billing-details",
-      label: "Bank Details - Collection Party",
-    },
-    { id: 2, name: "billing-party", label: "Billing Party" },
-    { id: 3, name: "invoice-details", label: "Invoice Details" },
-  ] as any);
+	const [DetailsCard, setDetailsCard] = useState([
+		{
+			id    : 1,
+			name  : 'billing-details',
+			label : 'Bank Details - Collection Party',
+		},
+		{ id: 2, name: 'billing-party', label: 'Billing Party' },
+		{ id: 3, name: 'invoice-details', label: 'Invoice Details' },
+	] as any);
 
-  const isInvoiceApproved = invoiceStatus === "FINANCE_ACCEPTED";
+	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
 
-  const handleClick = (id: number) => {
-    const approveData = [...showValue, id];
-    setShowValue(approveData);
-    DetailsCard.push(DetailsCard.shift());
-    setDetailsCard(DetailsCard);
-  };
+	const handleClick = (id: number) => {
+		const approveData = [...showValue, id];
+		setShowValue(approveData);
+		DetailsCard.push(DetailsCard.shift());
+		setDetailsCard(DetailsCard);
+	};
 
-  const handleRejected = (id: number) => {
-    setRejected([...rejected, id]);
-    DetailsCard.push(DetailsCard.shift());
-    setDetailsCard(DetailsCard);
-  };
+	const handleRejected = (id: number) => {
+		setRejected([...rejected, id]);
+		DetailsCard.push(DetailsCard.shift());
+		setDetailsCard(DetailsCard);
+	};
 
-  let invoiceType = startCase(billType);
+	let invoiceType = startCase(billType);
 
-  if (billType === "BILL") {
-    if (isProforma === true) {
-      invoiceType = "PROFORMA INVOICE";
-    } else {
-      invoiceType = "PURCHASE INVOICE";
-    }
-  }
+	if (billType === 'BILL') {
+		if (isProforma === true) {
+			invoiceType = 'PROFORMA INVOICE';
+		} else {
+			invoiceType = 'PURCHASE INVOICE';
+		}
+	}
 
-  const handleClickUndo = (id: number) => {
-    const undoApprovedData = showValue.filter((item: any) => item !== id);
-    setShowValue(undoApprovedData);
-    const undoRejectedData = rejected.filter((item: any) => item !== id);
-    setRejected(undoRejectedData);
+	const handleClickUndo = (id: number) => {
+		const undoApprovedData = showValue.filter((item: any) => item !== id);
+		setShowValue(undoApprovedData);
+		const undoRejectedData = rejected.filter((item: any) => item !== id);
+		setRejected(undoRejectedData);
 
-    //    Removing remarks of selected card on Undo here
-    if (id === 1) {
-      setRemarksVal({ ...remarksVal, collectionPartyRemark: "" });
-    } else if (id === 2) {
-      setRemarksVal({ ...remarksVal, billingPartyRemark: "" });
-    } else if (id === 3) {
-      setRemarksVal({ ...remarksVal, invoiceDetailsRemark: "" });
-    }
-  };
+		//    Removing remarks of selected card on Undo here
+		if (id === 1) {
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
+		} else if (id === 2) {
+			setRemarksVal({ ...remarksVal, billingPartyRemark: '' });
+		} else if (id === 3) {
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: '' });
+		}
+	};
 
-  const handleClickReject = (id: number) => {
-    setShowRejected((previousActions: any) => ({
-      ...previousActions,
-      [id]: !previousActions[id],
-    }));
-  };
+	const handleClickReject = (id: number) => {
+		setShowRejected((previousActions: any) => ({
+			...previousActions,
+			[id]: !previousActions[id],
+		}));
+	};
 
-  const onClose = () => {
-    if (Object.keys(showRejected).includes("1")) {
-      setRemarksVal({ ...remarksVal, collectionPartyRemark: "" });
-    } else if (Object.keys(showRejected).includes("2")) {
-      setRemarksVal({ ...remarksVal, billingPartyRemark: "" });
-    } else {
-      setRemarksVal({ ...remarksVal, invoiceDetailsRemark: "" });
-    }
-    setShowRejected(false);
-  };
+	const onClose = () => {
+		if (Object.keys(showRejected).includes('1')) {
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
+		} else if (Object.keys(showRejected).includes('2')) {
+			setRemarksVal({ ...remarksVal, billingPartyRemark: '' });
+		} else {
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: '' });
+		}
+		setShowRejected(false);
+	};
 
-  const onSubmit = () => {
-    const current = Object.keys(showRejected)?.[0];
-    handleRejected(+current);
-    setShowRejected(false);
-  };
-  const handleSave = () => {
-    setShowLineItem(true);
-    setItemCheck(true);
-  };
+	const onSubmit = () => {
+		const current = Object.keys(showRejected)?.[0];
+		handleRejected(+current);
+		setShowRejected(false);
+	};
+	const handleSave = () => {
+		setShowLineItem(true);
+		setItemCheck(true);
+	};
 
-  return (
-    <div>
-      {showLineItem ? (
-        <LineItemCard
-          lineItems={lineItems}
-          bill={bill}
-          setShowLineItem={setShowLineItem}
-          setRemarksVal={setRemarksVal}
-          lineItemsRemarks={lineItemsRemarks}
-          setLineItemsRemarks={setLineItemsRemarks}
-          remarksVal={remarksVal}
-          setLineItem={setLineItem}
-          invoiceType={invoiceType}
-          isInvoiceApproved={isInvoiceApproved}
-        />
-      ) : (
-        <div>
-          <div className={styles.mainHeader}>
-            <div className={styles.instructions}>
-              Check the Details
-              <Tooltip
-                content={
-                  <div className={styles.formStyle}>
-                    As filled by SO2 In The COGO Invoice
-                  </div>
-                }
-              >
-                <div className={styles.tooltip}>
-                  <IcMInfo width={15} height={15} />
-                </div>
-              </Tooltip>
-              <Pill color="blue">{invoiceType}</Pill>
-            </div>
+	return (
+		<div>
+			{showLineItem ? (
+				<LineItemCard
+					lineItems={lineItems}
+					bill={bill}
+					setShowLineItem={setShowLineItem}
+					setRemarksVal={setRemarksVal}
+					lineItemsRemarks={lineItemsRemarks}
+					setLineItemsRemarks={setLineItemsRemarks}
+					remarksVal={remarksVal}
+					setLineItem={setLineItem}
+					invoiceType={invoiceType}
+					isInvoiceApproved={isInvoiceApproved}
+				/>
+			) : (
+				<div>
+					<div className={styles.mainHeader}>
+						<div className={styles.instructions}>
+							Check the Details
+							<Tooltip
+								content={(
+									<div className={styles.formStyle}>
+										As filled by SO2 In The COGO Invoice
+									</div>
+								)}
+							>
+								<div className={styles.tooltip}>
+									<IcMInfo width={15} height={15} />
+								</div>
+							</Tooltip>
+							<Pill color="blue">{invoiceType}</Pill>
+						</div>
 
-            {!isInvoiceApproved && (
-              <div className={styles.completed}>
-                Completed {showValue.length + rejected.length || 0}
-                /3
-              </div>
-            )}
-          </div>
-          <div className={styles.smallHr} />
-          {DetailsCard.map((itemData: any) => {
-            const { id, label = "" } = itemData || {};
+						{!isInvoiceApproved && (
+							<div className={styles.completed}>
+								Completed
+								{' '}
+								{showValue.length + rejected.length || 0}
+								/3
+							</div>
+						)}
+					</div>
+					<div className={styles.smallHr} />
+					{DetailsCard.map((itemData: any) => {
+          	const { id, label = '' } = itemData || {};
 
-            return (
-              <>
-                {showRejected[id as keyof typeof showRejected] && (
-                  <Modal
-                    size="lg"
-                    show={showRejected[id as keyof typeof showRejected]}
-                    onClose={onClose}
-                  >
-                    <Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
-                    <Modal.Body>
-                      {Object.keys(showRejected).includes("1") && (
-                        <div>
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Name - <span>{organizationName}</span>
-                            </div>
-                          </div>
+          	return (
+	<>
+		{showRejected[id as keyof typeof showRejected] && (
+			<Modal
+				size="lg"
+				show={showRejected[id as keyof typeof showRejected]}
+				onClose={onClose}
+			>
+				<Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
+				<Modal.Body>
+					{Object.keys(showRejected).includes('1') && (
+						<div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Name -
+									{' '}
+									<span>{organizationName}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              {" "}
-                              Bank Name - <span>{bankName}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									{' '}
+									Bank Name -
+									{' '}
+									<span>{bankName}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              {" "}
-                              Account Number -{" "}
-                              <span style={{ color: "#ed3726" }}>
-                                {accountNumber}
-                              </span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									{' '}
+									Account Number -
+									{' '}
+									<span style={{ color: '#ed3726' }}>
+										{accountNumber}
+									</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              {" "}
-                              IFSC -{" "}
-                              <span style={{ color: "#ed3726" }}>
-                                {ifscCode}
-                              </span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									{' '}
+									IFSC -
+									{' '}
+									<span style={{ color: '#ed3726' }}>
+										{ifscCode}
+									</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              PAN Number -{" "}
-                              <span>{(taxNumber || "").slice(2, 12)}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									PAN Number -
+									{' '}
+									<span>{(taxNumber || '').slice(2, 12)}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              GST Number - <span>{taxNumber}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									GST Number -
+									{' '}
+									<span>{taxNumber}</span>
+								</div>
+							</div>
 
-                          <Textarea
-                            name="remark"
-                            size="md"
-                            placeholder="Remarks Here ..."
-                            style={{ width: "700", height: "100px" }}
-                            value={remarksVal.collectionPartyRemark}
-                            onChange={(value: string) =>
-                              setRemarksVal({
-                                ...remarksVal,
-                                collectionPartyRemark: value,
-                              })
-                            }
-                          />
-                        </div>
-                      )}
+							<Textarea
+								name="remark"
+								size="md"
+								placeholder="Remarks Here ..."
+								style={{ width: '700', height: '100px' }}
+								value={remarksVal.collectionPartyRemark}
+								onChange={(value: string) => setRemarksVal({
+                            		...remarksVal,
+                            		collectionPartyRemark: value,
+                            	})}
+							/>
+						</div>
+					)}
 
-                      {Object.keys(showRejected).includes("2") && (
-                        <div>
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Entity -{" "}
-                              <span style={{ fontWeight: "600" }}>
-                                {entityCode}
-                              </span>{" "}
-                              -{" "}
-                              <span style={{ fontWeight: "600" }}>
-                                {organizationNameBuyer}
-                              </span>
-                            </div>
-                          </div>
+					{Object.keys(showRejected).includes('2') && (
+						<div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Entity -
+									{' '}
+									<span style={{ fontWeight: '600' }}>
+										{entityCode}
+									</span>
+									{' '}
+									-
+									{' '}
+									<span style={{ fontWeight: '600' }}>
+										{organizationNameBuyer}
+									</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Address - <span>{address}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Address -
+									{' '}
+									<span>{address}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              PAN Number -{" "}
-                              <span>{registrationNumberBuyer}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									PAN Number -
+									{' '}
+									<span>{registrationNumberBuyer}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              GST Number - <span>{taxNumberBuyer}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									GST Number -
+									{' '}
+									<span>{taxNumberBuyer}</span>
+								</div>
+							</div>
 
-                          <Textarea
-                            name="remark"
-                            size="md"
-                            placeholder="Remarks Here ..."
-                            value={remarksVal.billingPartyRemark}
-                            onChange={(value: string) =>
-                              setRemarksVal({
-                                ...remarksVal,
-                                billingPartyRemark: value,
-                              })
-                            }
-                            style={{ width: "700", height: "100px" }}
-                          />
-                        </div>
-                      )}
-                      {Object.keys(showRejected).includes("3") && (
-                        <div>
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Invoice Number - <span>{billNumber}</span>
-                            </div>
-                          </div>
+							<Textarea
+								name="remark"
+								size="md"
+								placeholder="Remarks Here ..."
+								value={remarksVal.billingPartyRemark}
+								onChange={(value: string) => setRemarksVal({
+                            		...remarksVal,
+                            		billingPartyRemark: value,
+                            	})}
+								style={{ width: '700', height: '100px' }}
+							/>
+						</div>
+					)}
+					{Object.keys(showRejected).includes('3') && (
+						<div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Invoice Number -
+									{' '}
+									<span>{billNumber}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Invoice Date -{" "}
-                              <span>
-                                {format(billDate, "dd/MMM/yyyy", {}, false)}
-                              </span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Invoice Date -
+									{' '}
+									<span>
+										{format(billDate, 'dd/MMM/yyyy', {}, false)}
+									</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Status - <span>{status}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Status -
+									{' '}
+									<span>{status}</span>
+								</div>
+							</div>
 
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <Checkbox />
-                            <div style={{ marginBottom: "8px" }}>
-                              Place Of Supply - <span>{placeOfSupply}</span>
-                            </div>
-                          </div>
+							<div
+								style={{ display: 'flex', alignItems: 'center' }}
+							>
+								<Checkbox />
+								<div style={{ marginBottom: '8px' }}>
+									Place Of Supply -
+									{' '}
+									<span>{placeOfSupply}</span>
+								</div>
+							</div>
 
-                          <Textarea
-                            name="remark"
-                            size="md"
-                            placeholder="Remarks Here ..."
-                            value={remarksVal.invoiceDetailsRemark}
-                            onChange={(value: string) =>
-                              setRemarksVal({
-                                ...remarksVal,
-                                invoiceDetailsRemark: value,
-                              })
-                            }
-                            style={{ width: "700", height: "100px" }}
-                          />
-                        </div>
-                      )}
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button onClick={onSubmit}>Submit</Button>
-                    </Modal.Footer>
-                  </Modal>
-                )}
+							<Textarea
+								name="remark"
+								size="md"
+								placeholder="Remarks Here ..."
+								value={remarksVal.invoiceDetailsRemark}
+								onChange={(value: string) => setRemarksVal({
+                            		...remarksVal,
+                            		invoiceDetailsRemark: value,
+                            	})}
+								style={{ width: '700', height: '100px' }}
+							/>
+						</div>
+					)}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={onSubmit}>Submit</Button>
+				</Modal.Footer>
+			</Modal>
+		)}
 
-                {id === 1 && (
-                  <div className={styles.container}>
-                    <div className={styles.headerContainer}>
-                      <div
-                        className={
+		{id === 1 && (
+			<div className={styles.container}>
+				<div className={styles.headerContainer}>
+					<div
+						className={
                           showValue.includes(1) || isInvoiceApproved
-                            ? styles.labelApproved
-                            : rejected.includes(1)
-                            ? styles.labelRejected
-                            : styles.label
+                          	? styles.labelApproved
+                          	: rejected.includes(1)
+                          		? styles.labelRejected
+                          		: styles.label
                         }
-                      >
-                        {label}
-                        <div
-                          style={{ justifyContent: "center", display: "flex" }}
-                        >
-                          {showValue.includes(1) || isInvoiceApproved ? (
-                            <IcCFtick height="17px" width="17px" />
-                          ) : rejected.includes(1) ? (
-                            <IcMCrossInCircle height="17px" width="17px" />
-                          ) : null}
-                        </div>
-                      </div>
+					>
+						{label}
+						<div
+							style={{ justifyContent: 'center', display: 'flex' }}
+						>
+							{showValue.includes(1) || isInvoiceApproved ? (
+								<IcCFtick height="17px" width="17px" />
+							) : rejected.includes(1) ? (
+								<IcMCrossInCircle height="17px" width="17px" />
+							) : null}
+						</div>
+					</div>
 
-                      {!isInvoiceApproved && (
-                        <div>
-                          {showValue.includes(1) || rejected.includes(1) ? (
-                            <div
-                              className={styles.buttonContainer}
-                              onClick={() => {
-                                handleClickUndo(id);
-                              }}
-                            >
-                              <Button size="md" themeType="secondary">
-                                Undo
-                              </Button>
-                            </div>
-                          ) : (
-                            <div className={styles.buttonContainer}>
-                              <Button
-                                size="md"
-                                themeType="secondary"
-                                onClick={() => {
-                                  handleClick(id);
-                                }}
-                              >
-                                Approve
-                              </Button>
-                              <Button
-                                size="md"
-                                themeType="secondary"
-                                style={{ border: "1px solid #ed3726" }}
-                                onClick={() => {
-                                  handleClickReject(id);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                    <div className={styles.hr} />
+					{!isInvoiceApproved && (
+						<div>
+							{showValue.includes(1) || rejected.includes(1) ? (
+								<div
+									className={styles.buttonContainer}
+									onClick={() => {
+                              	handleClickUndo(id);
+									}}
+								>
+									<Button size="md" themeType="secondary">
+										Undo
+									</Button>
+								</div>
+							) : (
+								<div className={styles.buttonContainer}>
+									<Button
+										size="md"
+										themeType="secondary"
+										onClick={() => {
+                                	handleClick(id);
+										}}
+									>
+										Approve
+									</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ border: '1px solid #ed3726' }}
+										onClick={() => {
+                                	handleClickReject(id);
+										}}
+									>
+										Reject
+									</Button>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
+				<div className={styles.hr} />
 
-                    <div className={styles.billingPartyContainer}>
-                      <div style={{ marginBottom: "8px" }}>
-                        Name - <span>{organizationName}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        {" "}
-                        Bank Name - <span>{bankName}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        {" "}
-                        Account Number -{" "}
-                        <span style={{ color: "#ed3726" }}>
-                          {accountNumber}
-                        </span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        {" "}
-                        IFSC -{" "}
-                        <span style={{ color: "#ed3726" }}>{ifscCode}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        PAN Number -{" "}
-                        <span>{(taxNumber || "").slice(2, 12)}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        GST Number - <span>{taxNumber}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+				<div className={styles.billingPartyContainer}>
+					<div style={{ marginBottom: '8px' }}>
+						Name -
+						{' '}
+						<span>{organizationName}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						{' '}
+						Bank Name -
+						{' '}
+						<span>{bankName}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						{' '}
+						Account Number -
+						{' '}
+						<span style={{ color: '#ed3726' }}>
+							{accountNumber}
+						</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						{' '}
+						IFSC -
+						{' '}
+						<span style={{ color: '#ed3726' }}>{ifscCode}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						PAN Number -
+						{' '}
+						<span>{(taxNumber || '').slice(2, 12)}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						GST Number -
+						{' '}
+						<span>{taxNumber}</span>
+					</div>
+				</div>
+			</div>
+		)}
 
-                {id === 2 && (
-                  <div className={styles.container}>
-                    <div className={styles.headerContainer}>
-                      <div
-                        className={
+		{id === 2 && (
+			<div className={styles.container}>
+				<div className={styles.headerContainer}>
+					<div
+						className={
                           showValue.includes(2) || isInvoiceApproved
-                            ? styles.labelApproved
-                            : rejected.includes(2)
-                            ? styles.labelRejected
-                            : styles.label
+                          	? styles.labelApproved
+                          	: rejected.includes(2)
+                          		? styles.labelRejected
+                          		: styles.label
                         }
-                      >
-                        {label}
-                        <div
-                          style={{ justifyContent: "center", display: "flex" }}
-                        >
-                          {showValue.includes(2) || isInvoiceApproved ? (
-                            <IcCFtick height="17px" width="17px" />
-                          ) : rejected.includes(2) ? (
-                            <IcMCrossInCircle height="17px" width="17px" />
-                          ) : null}
-                        </div>
-                      </div>
+					>
+						{label}
+						<div
+							style={{ justifyContent: 'center', display: 'flex' }}
+						>
+							{showValue.includes(2) || isInvoiceApproved ? (
+								<IcCFtick height="17px" width="17px" />
+							) : rejected.includes(2) ? (
+								<IcMCrossInCircle height="17px" width="17px" />
+							) : null}
+						</div>
+					</div>
 
-                      {!isInvoiceApproved && (
-                        <div>
-                          {showValue.includes(2) || rejected.includes(2) ? (
-                            <div
-                              className={styles.buttonContainer}
-                              onClick={() => {
-                                handleClickUndo(id);
-                              }}
-                            >
-                              <Button size="md" themeType="secondary">
-                                Undo
-                              </Button>
-                            </div>
-                          ) : (
-                            <div className={styles.buttonContainer}>
-                              <Button
-                                size="md"
-                                themeType="secondary"
-                                onClick={() => {
-                                  handleClick(id);
-                                }}
-                              >
-                                Approve
-                              </Button>
-                              <Button
-                                size="md"
-                                themeType="secondary"
-                                style={{ border: "1px solid #ed3726" }}
-                                onClick={() => {
-                                  handleClickReject(id);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
+					{!isInvoiceApproved && (
+						<div>
+							{showValue.includes(2) || rejected.includes(2) ? (
+								<div
+									className={styles.buttonContainer}
+									onClick={() => {
+                              	handleClickUndo(id);
+									}}
+								>
+									<Button size="md" themeType="secondary">
+										Undo
+									</Button>
+								</div>
+							) : (
+								<div className={styles.buttonContainer}>
+									<Button
+										size="md"
+										themeType="secondary"
+										onClick={() => {
+                                	handleClick(id);
+										}}
+									>
+										Approve
+									</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ border: '1px solid #ed3726' }}
+										onClick={() => {
+                                	handleClickReject(id);
+										}}
+									>
+										Reject
+									</Button>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
 
-                    <div className={styles.hr} />
+				<div className={styles.hr} />
 
-                    <div className={styles.billingPartyContainer}>
-                      <div style={{ marginBottom: "8px" }}>
-                        Entity -{" "}
-                        <span style={{ fontWeight: "600" }}>{entityCode}</span>{" "}
-                        -{" "}
-                        <span style={{ fontWeight: "600" }}>
-                          {organizationNameBuyer}
-                        </span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        Address - <span>{address}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        PAN Number - <span>{registrationNumberBuyer}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        GST Number - <span>{taxNumberBuyer}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+				<div className={styles.billingPartyContainer}>
+					<div style={{ marginBottom: '8px' }}>
+						Entity -
+						{' '}
+						<span style={{ fontWeight: '600' }}>{entityCode}</span>
+						{' '}
+						-
+						{' '}
+						<span style={{ fontWeight: '600' }}>
+							{organizationNameBuyer}
+						</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						Address -
+						{' '}
+						<span>{address}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						PAN Number -
+						{' '}
+						<span>{registrationNumberBuyer}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						GST Number -
+						{' '}
+						<span>{taxNumberBuyer}</span>
+					</div>
+				</div>
+			</div>
+		)}
 
-                {id === 3 && (
-                  <div className={styles.container}>
-                    <div className={styles.headerContainer}>
-                      <div
-                        className={
+		{id === 3 && (
+			<div className={styles.container}>
+				<div className={styles.headerContainer}>
+					<div
+						className={
                           showValue.includes(3) || isInvoiceApproved
-                            ? styles.labelApproved
-                            : rejected.includes(3)
-                            ? styles.labelRejected
-                            : styles.label
+                          	? styles.labelApproved
+                          	: rejected.includes(3)
+                          		? styles.labelRejected
+                          		: styles.label
                         }
-                      >
-                        {label}
-                        <div
-                          style={{ justifyContent: "center", display: "flex" }}
-                        >
-                          {showValue.includes(3) || isInvoiceApproved ? (
-                            <IcCFtick height="17px" width="17px" />
-                          ) : rejected.includes(3) ? (
-                            <IcMCrossInCircle height="17px" width="17px" />
-                          ) : null}
-                        </div>
-                      </div>
+					>
+						{label}
+						<div
+							style={{ justifyContent: 'center', display: 'flex' }}
+						>
+							{showValue.includes(3) || isInvoiceApproved ? (
+								<IcCFtick height="17px" width="17px" />
+							) : rejected.includes(3) ? (
+								<IcMCrossInCircle height="17px" width="17px" />
+							) : null}
+						</div>
+					</div>
 
-                      {!isInvoiceApproved && (
-                        <div>
-                          {showValue.includes(3) || rejected.includes(3) ? (
-                            <div
-                              className={styles.buttonContainer}
-                              onClick={() => {
-                                handleClickUndo(id);
-                              }}
-                            >
-                              <Button size="md" themeType="secondary">
-                                Undo
-                              </Button>
-                            </div>
-                          ) : (
-                            <div className={styles.buttonContainer}>
-                              <Button
-                                size="md"
-                                themeType="secondary"
-                                onClick={() => {
-                                  handleClick(id);
-                                }}
-                              >
-                                Approve
-                              </Button>
-                              <Button
-                                size="md"
-                                themeType="secondary"
-                                style={{ border: "1px solid #ed3726" }}
-                                onClick={() => {
-                                  handleClickReject(id);
-                                }}
-                              >
-                                Reject
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
+					{!isInvoiceApproved && (
+						<div>
+							{showValue.includes(3) || rejected.includes(3) ? (
+								<div
+									className={styles.buttonContainer}
+									onClick={() => {
+                              	handleClickUndo(id);
+									}}
+								>
+									<Button size="md" themeType="secondary">
+										Undo
+									</Button>
+								</div>
+							) : (
+								<div className={styles.buttonContainer}>
+									<Button
+										size="md"
+										themeType="secondary"
+										onClick={() => {
+                                	handleClick(id);
+										}}
+									>
+										Approve
+									</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ border: '1px solid #ed3726' }}
+										onClick={() => {
+                                	handleClickReject(id);
+										}}
+									>
+										Reject
+									</Button>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
 
-                    <div className={styles.hr} />
-                    <div className={styles.billingPartyContainer}>
-                      <div style={{ marginBottom: "8px" }}>
-                        Invoice Number - <span>{billNumber}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        Invoice Date -{" "}
-                        <span>
-                          {format(billDate, "dd/MMM/yyyy", {}, false)}
-                        </span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        Status - <span>{startCase(status)}</span>
-                      </div>
-                      <div style={{ marginBottom: "8px" }}>
-                        Place Of Supply - <span>{placeOfSupply}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </>
-            );
-          })}
+				<div className={styles.hr} />
+				<div className={styles.billingPartyContainer}>
+					<div style={{ marginBottom: '8px' }}>
+						Invoice Number -
+						{' '}
+						<span>{billNumber}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						Invoice Date -
+						{' '}
+						<span>
+							{format(billDate, 'dd/MMM/yyyy', {}, false)}
+						</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						Status -
+						{' '}
+						<span>{startCase(status)}</span>
+					</div>
+					<div style={{ marginBottom: '8px' }}>
+						Place Of Supply -
+						{' '}
+						<span>{placeOfSupply}</span>
+					</div>
+				</div>
+			</div>
+		)}
+	</>
+          	);
+					})}
 
-          <div className={styles.footer}>
-            <Button
-              size="md"
-              disabled={
+					<div className={styles.footer}>
+						<Button
+							size="md"
+							disabled={
                 !(showValue.length + rejected.length == 3 || isInvoiceApproved)
               }
-              onClick={() => handleSave()}
-            >
-              {isInvoiceApproved ? "Check line items ➢ " : " Save And Next ➢ "}
-            </Button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+							onClick={() => handleSave()}
+						>
+							{isInvoiceApproved ? 'Check line items ➢ ' : ' Save And Next ➢ '}
+						</Button>
+					</div>
+				</div>
+			)}
+		</div>
+	);
 }
 export default ShipmentDetailsCard;
