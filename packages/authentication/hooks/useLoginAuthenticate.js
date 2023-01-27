@@ -47,15 +47,14 @@ const useLoginAuthenticate = () => {
 					setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
 					setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
 				}
-				return;
 			}
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
 	useEffect(() => {
-		if (source !== 'add_account') {
+		if (source !== 'add_account' && cogo_admin_auth_token) {
 			getUserSessionMappings();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
