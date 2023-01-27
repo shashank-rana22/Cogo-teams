@@ -282,9 +282,8 @@ function ShipmentDetailsCard({
 								style={{ width: '700', height: '100px' }}
 								value={remarksVal.collectionPartyRemark}
 								onChange={(value: string) => setRemarksVal({
-                            		...remarksVal,
-                            		collectionPartyRemark: value,
-                            	})}
+                        ...remarksVal,
+                            collectionPartyRemark: value,})}
 							/>
 						</div>
 					)}
@@ -349,9 +348,8 @@ function ShipmentDetailsCard({
 								placeholder="Remarks Here ..."
 								value={remarksVal.billingPartyRemark}
 								onChange={(value: string) => setRemarksVal({
-                            		...remarksVal,
-                            		billingPartyRemark: value,
-                            	})}
+                    ...remarksVal,
+                        billingPartyRemark: value,})}
 								style={{ width: '700', height: '100px' }}
 							/>
 						</div>
@@ -408,9 +406,9 @@ function ShipmentDetailsCard({
 								placeholder="Remarks Here ..."
 								value={remarksVal.invoiceDetailsRemark}
 								onChange={(value: string) => setRemarksVal({
-                            		...remarksVal,
-                            		invoiceDetailsRemark: value,
-                            	})}
+                            ...remarksVal,
+                            invoiceDetailsRemark: value,
+                    })}
 								style={{ width: '700', height: '100px' }}
 							/>
 						</div>
@@ -426,12 +424,9 @@ function ShipmentDetailsCard({
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<div
-						className={
-                          showValue.includes(1) || isInvoiceApproved
-                          	? styles.labelApproved
-                          	: rejected.includes(1)
-                          		? styles.labelRejected
-                          		: styles.label
+						className={ showValue.includes(1) || isInvoiceApproved
+                ? styles.labelApproved : rejected.includes(1)
+                ? styles.labelRejected : styles.label
                         }
 					>
 						{label}
@@ -451,9 +446,7 @@ function ShipmentDetailsCard({
 							{showValue.includes(1) || rejected.includes(1) ? (
 								<div
 									className={styles.buttonContainer}
-									onClick={() => {
-                              	handleClickUndo(id);
-									}}
+									onClick={() => {handleClickUndo(id);}}
 								>
 									<Button size="md" themeType="secondary">
 										Undo
@@ -464,9 +457,7 @@ function ShipmentDetailsCard({
 									<Button
 										size="md"
 										themeType="secondary"
-										onClick={() => {
-                                	handleClick(id);
-										}}
+										onClick={() => {handleClick(id);}}
 									>
 										Approve
 									</Button>
@@ -474,9 +465,7 @@ function ShipmentDetailsCard({
 										size="md"
 										themeType="secondary"
 										style={{ border: '1px solid #ed3726' }}
-										onClick={() => {
-                                	handleClickReject(id);
-										}}
+										onClick={() => {handleClickReject(id);}}
 									>
 										Reject
 									</Button>
@@ -531,12 +520,9 @@ function ShipmentDetailsCard({
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<div
-						className={
-                          showValue.includes(2) || isInvoiceApproved
-                          	? styles.labelApproved
-                          	: rejected.includes(2)
-                          		? styles.labelRejected
-                          		: styles.label
+						className={showValue.includes(2) || isInvoiceApproved ? styles.labelApproved : rejected.includes(2)
+                        ? styles.labelRejected
+                        : styles.label
                         }
 					>
 						{label}
@@ -557,7 +543,7 @@ function ShipmentDetailsCard({
 								<div
 									className={styles.buttonContainer}
 									onClick={() => {
-                              	handleClickUndo(id);
+                            handleClickUndo(id);
 									}}
 								>
 									<Button size="md" themeType="secondary">
@@ -570,7 +556,7 @@ function ShipmentDetailsCard({
 										size="md"
 										themeType="secondary"
 										onClick={() => {
-                                	handleClick(id);
+                                handleClick(id);
 										}}
 									>
 										Approve
@@ -580,7 +566,7 @@ function ShipmentDetailsCard({
 										themeType="secondary"
 										style={{ border: '1px solid #ed3726' }}
 										onClick={() => {
-                                	handleClickReject(id);
+                                handleClickReject(id);
 										}}
 									>
 										Reject
@@ -628,12 +614,9 @@ function ShipmentDetailsCard({
 			<div className={styles.container}>
 				<div className={styles.headerContainer}>
 					<div
-						className={
-                          showValue.includes(3) || isInvoiceApproved
-                          	? styles.labelApproved
-                          	: rejected.includes(3)
-                          		? styles.labelRejected
-                          		: styles.label
+						className={showValue.includes(3) || isInvoiceApproved	? styles.labelApproved
+                    : rejected.includes(3)
+                    ? styles.labelRejected	: styles.label
                         }
 					>
 						{label}
@@ -654,7 +637,7 @@ function ShipmentDetailsCard({
 								<div
 									className={styles.buttonContainer}
 									onClick={() => {
-                              	handleClickUndo(id);
+                            handleClickUndo(id);
 									}}
 								>
 									<Button size="md" themeType="secondary">
@@ -667,7 +650,7 @@ function ShipmentDetailsCard({
 										size="md"
 										themeType="secondary"
 										onClick={() => {
-                                	handleClick(id);
+                                handleClick(id);
 										}}
 									>
 										Approve
@@ -677,7 +660,7 @@ function ShipmentDetailsCard({
 										themeType="secondary"
 										style={{ border: '1px solid #ed3726' }}
 										onClick={() => {
-                                	handleClickReject(id);
+                                handleClickReject(id);
 										}}
 									>
 										Reject
@@ -714,20 +697,17 @@ function ShipmentDetailsCard({
 			</div>
 		)}
 	</>
-          	);
+	);
 					})}
 
 					<div className={styles.footer}>
 						<Button
 							size="md"
-							disabled={
-                  !(showValue.length + rejected.length == 3 || isInvoiceApproved)
+							disabled={ !(showValue.length + rejected.length == 3 || isInvoiceApproved)
                 }
 							onClick={() => handleSave()}
 						>
-							{isInvoiceApproved
-                	? 'Check line items ➢ '
-                	: ' Save And Next ➢ '}
+							{isInvoiceApproved? 'Check line items ➢ ': ' Save And Next ➢ '}
 						</Button>
 					</div>
 				</div>

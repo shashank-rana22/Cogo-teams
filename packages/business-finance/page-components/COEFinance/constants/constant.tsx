@@ -19,8 +19,6 @@ const CURRENCY_DATA = 		[
 	{ id: '5', icon: <IcMFeuro width={25} height={25} />, text: 'EUR' },
 ];
 
-
-
 export {
 	CURRENCY_DATA,
 };
