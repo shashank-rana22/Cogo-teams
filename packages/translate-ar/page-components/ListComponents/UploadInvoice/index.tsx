@@ -1,11 +1,21 @@
 import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import { Refetch } from '../../../common/interfaces';
+
 import UploadInvoiceModal from './UploadInvoiceModel';
 
-function UploadInvoice({ itemData, refetch }) {
+type Props = {
+	itemData: {
+		id?: string,
+		[key: string]: string
+	};
+	refetch: Refetch;
+};
+
+function UploadInvoice({ itemData, refetch }: Props) {
 	const [openUpload, setOpenUpload] = useState(false);
-	const [uploadProof, setUploadProof] = useState(false);
+	const [uploadProof, setUploadProof] = useState();
 	return (
 		<section>
 			<Button size="sm" themeType="secondary" onClick={() => setOpenUpload(true)}>

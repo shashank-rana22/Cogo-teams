@@ -3,9 +3,8 @@ import React from 'react';
 
 import Filters from '../../common/Filters';
 import { StatusObject } from '../../common/interfaces';
-import completedColumn from '../../configs/completed-table';
-import pendingColumns from '../../configs/pending-table';
 import useGetShipmentInvoices from '../../hooks/useGetShipmentInvoices';
+import getColumns from '../../utils/getColumns';
 import StyledTable from '../Table';
 
 import styles from './styles.module.css';
@@ -18,7 +17,7 @@ function StatusComponent({ status }: StatusObject) {
 
 	const { list = [], pageIndex = 0, totalRecords = 0, pageLimit = 10 } = invoiceData || {};
 
-	const columns = status === 'completed' ? completedColumn : pendingColumns(refetch);
+	const columns = getColumns(status, refetch);
 
 	return (
 		<>

@@ -1,6 +1,6 @@
-import { Select, MultiSelect } from '@cogoport/components';
 import React from 'react';
 
+import { getElements } from '../../utils/getElements';
 import { FilterProps } from '../interfaces';
 import SearchInput from '../SearchInput';
 
@@ -17,21 +17,11 @@ function Filters({
 	onChangeFilters = (v) => v,
 }: Props) {
 	const { search } = filters || {};
-	const getElements = (type:string) => {
-		switch (type) {
-			case 'select':
-				return Select;
-			case 'multiSelect':
-				return MultiSelect;
-			default:
-				return null;
-		}
-	};
 
 	return (
 		<section className={styles.container} id="filters">
 			<div className={styles.select_container}>
-				{filterControls?.map((control) => {
+				{filterControls.map((control) => {
 					const Element = getElements(control.type);
 					return (
 						<Element

@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
 
 import { Refetch } from '../common/interfaces';
@@ -6,7 +7,6 @@ import Remarks from '../page-components/ListComponents/Remarks';
 import UploadInvoice from '../page-components/ListComponents/UploadInvoice';
 import checkInvoice from '../utils/checkInvoice';
 import { getDocumentNumber, getDocumentUrl } from '../utils/getDocumentNumber';
-import getPrice from '../utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 

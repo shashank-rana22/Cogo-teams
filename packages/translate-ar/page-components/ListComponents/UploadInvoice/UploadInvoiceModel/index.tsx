@@ -4,14 +4,27 @@ import { IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { Refetch } from '../../../../common/interfaces';
 import useUpdateStatus from '../../../../hooks/useGetUpdateStatus';
 
 import styles from './styles.module.css';
 
-function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }) {
+type Props = {
+	setOpen?: (v) => void;
+	uploadProof: { fileName: string; finalUrl : string };
+	setUploadProof?: (v) => void;
+	itemData: {
+		id?: string,
+		[key: string]: string
+	};
+	refetch: Refetch
+	open: boolean;
+};
+
+function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }: Props) {
 	const { fileName, finalUrl } = uploadProof || {};
 	const { uploadDoc, loading } = useUpdateStatus({
-		url: finalUrl,
+		finalUrl,
 		setOpen,
 		itemData,
 		refetch,

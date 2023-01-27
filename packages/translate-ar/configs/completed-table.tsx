@@ -1,9 +1,9 @@
 import { Pill } from '@cogoport/components';
+import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
 import checkInvoice from '../utils/checkInvoice';
 import { getDocumentNumber } from '../utils/getDocumentNumber';
-import getPrice from '../utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 

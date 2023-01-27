@@ -6854,17 +6854,12 @@ const partner = {
 	],
 	translate_account_receivables: [
 		{
-			api          : 'get_sales_outstanding_invoice_list',
-			access_type  : 'private',
-			service_name : 'shipment',
-			module       : 'Translate-AR',
-			feature      : 'Translate-AR',
+			api         : 'get_sales_invoice_list',
+			access_type : 'private',
 		},
 		{
-			api         : 'get_shipment_cost_sheet',
+			api         : 'post_sales_upload_translated_invoice',
 			access_type : 'private',
-			module      : 'Translate-AR',
-			feature     : 'Translate-AR',
 		},
 	],
 	settlement: [

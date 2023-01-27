@@ -19,8 +19,8 @@
 		.ui_table_body_cell {
 			border-spacing: 0 15px;
 			border-collapse: separate;
-			background: #fff !important;
-			background-color: #fff !important;
+			background: #fff;
+			background-color: #fff;
 			border-right: none !important;
 		}
 

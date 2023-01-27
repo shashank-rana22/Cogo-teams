@@ -3,24 +3,16 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import TABS_MAPPING from '../../configs/index';
+import PropMapping from '../../constants/mappings';
+import { handleTabChange } from '../../utils/handleTabChange';
 
 import styles from './styles.module.css';
 
 function TranslateAR() {
-	const { push, query } = useRouter();
+	const { query, push } = useRouter();
 	const { activeTab } = query;
-	const [receivables, setReceivables] = useState(activeTab || 'pending');
-	const handleTabChange = (v: string) => {
-		push(
-			'/business-finance/translate-account-receivables/[activeTab]',
-			`/business-finance/translate-account-receivables/${v}`,
-		);
-		setReceivables(v);
-	};
-	const PropMapping = {
-		pending   : { status: 'pending' },
-		completed : { status: 'completed' },
-	};
+	const [receivables, setReceivables] = useState<string>(activeTab || 'pending');
+
 	return (
 		<>
 			<div className={styles.heading}>Account Receivables - Vietnam</div>
@@ -28,7 +20,7 @@ function TranslateAR() {
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={receivables}
-					onChange={handleTabChange}
+					onChange={(val) => handleTabChange(val, setReceivables, push)}
 					themeType="primary"
 					id="translate_tab_view"
 					size="lg"

@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, getByKey } from '@cogoport/utils';
 
 interface Props {
-	url?: string;
+	finalUrl?: string;
 	setOpen?:(v:boolean)=>void;
 	itemData?: {
 		id?: string,
@@ -13,7 +13,7 @@ interface Props {
 	refetch: Function;
 }
 
-const useUpdateStatus = ({ url, setOpen, itemData = {}, refetch }: Props) => {
+const useUpdateStatus = ({ finalUrl, setOpen, itemData = {}, refetch }: Props) => {
 	const profile = useSelector((state) => state);
 	const { profile:{ user } } = profile || {};
 	const { id: partnerId } = user || {};
@@ -27,7 +27,7 @@ const useUpdateStatus = ({ url, setOpen, itemData = {}, refetch }: Props) => {
 			method  : 'post',
 			authKey : 'post_sales_upload_translated_invoice',
 		},
-		{ autoCancel: false, manual: true },
+		{ manual: true },
 	);
 
 	const { id } = itemData;
@@ -42,7 +42,7 @@ const useUpdateStatus = ({ url, setOpen, itemData = {}, refetch }: Props) => {
 		try {
 			await trigger({
 				data: {
-					url,
+					url          : finalUrl,
 					createdBy    : partnerId,
 					invoiceId    : id,
 					documentType : docType,

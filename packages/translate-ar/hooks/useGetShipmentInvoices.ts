@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 import { FilterProps, StatusObject } from '../common/interfaces';
-import useSearchQuery from '../utils/debouncy';
 
 const useGetShipmentInvoices = ({ status }: StatusObject) => {
 	const [shipmentFilters, setShipmentFilters] = useState<FilterProps>({
@@ -26,7 +26,7 @@ const useGetShipmentInvoices = ({ status }: StatusObject) => {
 		{ autoCancel: false, manual: true },
 	);
 
-	const { query, debounceQuery } = useSearchQuery();
+	const { query, debounceQuery } = useDebounceQuery();
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search]);
