@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -835,6 +840,11 @@ const partner = {
 		},
 	],
 	demand_crm: [
+		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 		{
 			api          : 'get_organization_commodity_segmentation_stats',
 			access_type  : 'parivate',
