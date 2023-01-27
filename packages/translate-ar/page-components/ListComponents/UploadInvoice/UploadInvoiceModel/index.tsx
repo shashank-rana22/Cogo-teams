@@ -51,6 +51,7 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 						fileLink={finalUrl}
 						multipleUploadDesc="Upload Invoice"
 						uploadIcon={<IcMUpload height={40} width={40} />}
+						accept=".pdf"
 					/>
 				</section>
 			</Modal.Body>
