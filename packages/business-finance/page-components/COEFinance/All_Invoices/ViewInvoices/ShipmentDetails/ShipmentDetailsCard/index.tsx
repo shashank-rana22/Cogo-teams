@@ -164,26 +164,26 @@ function ShipmentDetailsCard({
 						<div className={styles.instructions}>
 							Check the Details
 							<Tooltip
-					content={(
-						<div className={styles.formStyle}>
-							As filled by SO2 In The COGO Invoice
-						</div>
-					)}
-				>
-					<div className={styles.tooltip}>
-						<IcMInfo width={15} height={15} />
-					</div>
-				</Tooltip>
+								content={(
+									<div className={styles.formStyle}>
+										As filled by SO2 In The COGO Invoice
+									</div>
+								)}
+							>
+								<div className={styles.tooltip}>
+									<IcMInfo width={15} height={15} />
+								</div>
+							</Tooltip>
 							<Pill color="blue">{invoiceType}</Pill>
 						</div>
 
 						{!isInvoiceApproved && (
 							<div className={styles.completed}>
-								Completed 
-{' '}
+								Completed
+								{' '}
 								{showValue.length + rejected.length || 0}
 								/3
-				</div>
+							</div>
 						)}
 					</div>
 					<div className={styles.smallHr} />
@@ -207,7 +207,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Name - <span>{organizationName}</span>
+									Name -
+									{' '}
+									<span>{organizationName}</span>
 								</div>
 							</div>
 
@@ -217,7 +219,9 @@ function ShipmentDetailsCard({
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
 									{' '}
-									Bank Name - <span>{bankName}</span>
+									Bank Name -
+									{' '}
+									<span>{bankName}</span>
 								</div>
 							</div>
 
@@ -227,10 +231,11 @@ function ShipmentDetailsCard({
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
 									{' '}
-									Account Number -{' '}
+									Account Number -
+									{' '}
 									<span style={{ color: '#ed3726' }}>
-									{accountNumber}
-								</span>
+										{accountNumber}
+									</span>
 								</div>
 							</div>
 
@@ -240,10 +245,11 @@ function ShipmentDetailsCard({
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
 									{' '}
-									IFSC -{' '}
+									IFSC -
+									{' '}
 									<span style={{ color: '#ed3726' }}>
-									{ifscCode}
-								</span>
+										{ifscCode}
+									</span>
 								</div>
 							</div>
 
@@ -252,7 +258,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									PAN Number - <span>{registrationNumber}</span>
+									PAN Number -
+									{' '}
+									<span>{registrationNumber}</span>
 								</div>
 							</div>
 
@@ -261,7 +269,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									GST Number - <span>{taxNumber}</span>
+									GST Number -
+									{' '}
+									<span>{taxNumber}</span>
 								</div>
 							</div>
 
@@ -286,16 +296,17 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Entity -{' '}
+									Entity -
+									{' '}
 									<span style={{ fontWeight: '600' }}>
-									{entityCode}
-								</span>
+										{entityCode}
+									</span>
 									{' '}
 									-
-{' '}
+									{' '}
 									<span style={{ fontWeight: '600' }}>
-									{organizationNameBuyer}
-								</span>
+										{organizationNameBuyer}
+									</span>
 								</div>
 							</div>
 
@@ -304,7 +315,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Address - <span>{address}</span>
+									Address -
+									{' '}
+									<span>{address}</span>
 								</div>
 							</div>
 
@@ -313,7 +326,8 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									PAN Number -{' '}
+									PAN Number -
+									{' '}
 									<span>{registrationNumberBuyer}</span>
 								</div>
 							</div>
@@ -323,7 +337,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									GST Number - <span>{taxNumberBuyer}</span>
+									GST Number -
+									{' '}
+									<span>{taxNumberBuyer}</span>
 								</div>
 							</div>
 
@@ -347,7 +363,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Invoice Number - <span>{billNumber}</span>
+									Invoice Number -
+									{' '}
+									<span>{billNumber}</span>
 								</div>
 							</div>
 
@@ -356,7 +374,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Invoice Date - <span>{billDate[0]}</span>
+									Invoice Date -
+									{' '}
+									<span>{billDate[0]}</span>
 								</div>
 							</div>
 
@@ -365,7 +385,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Status - <span>{status}</span>
+									Status -
+									{' '}
+									<span>{status}</span>
 								</div>
 							</div>
 
@@ -374,7 +396,9 @@ function ShipmentDetailsCard({
 							>
 								<Checkbox />
 								<div style={{ marginBottom: '8px' }}>
-									Place Of Supply - <span>{placeOfSupply}</span>
+									Place Of Supply -
+									{' '}
+									<span>{placeOfSupply}</span>
 								</div>
 							</div>
 
@@ -429,34 +453,34 @@ function ShipmentDetailsCard({
 									className={styles.buttonContainer}
 									onClick={() => {
                               	handleClickUndo(id);
-								}}
+									}}
 								>
 									<Button size="md" themeType="secondary">
-									Undo
-                              </Button>
+										Undo
+									</Button>
 								</div>
 							) : (
 								<div className={styles.buttonContainer}>
-								<Button
-								size="md"
-								themeType="secondary"
-								onClick={() => {
+									<Button
+										size="md"
+										themeType="secondary"
+										onClick={() => {
                                 	handleClick(id);
-							}}
-							>
-			Approve
-							</Button>
-								<Button
-								size="md"
-								themeType="secondary"
-								style={{ border: '1px solid #ed3726' }}
-								onClick={() => {
+										}}
+									>
+										Approve
+									</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ border: '1px solid #ed3726' }}
+										onClick={() => {
                                 	handleClickReject(id);
-							}}
-							>
-			Reject
-							</Button>
-							</div>
+										}}
+									>
+										Reject
+									</Button>
+								</div>
 							)}
 						</div>
 					)}
@@ -534,34 +558,34 @@ function ShipmentDetailsCard({
 									className={styles.buttonContainer}
 									onClick={() => {
                               	handleClickUndo(id);
-								}}
+									}}
 								>
 									<Button size="md" themeType="secondary">
-									Undo
-                              </Button>
+										Undo
+									</Button>
 								</div>
 							) : (
 								<div className={styles.buttonContainer}>
-								<Button
-								size="md"
-								themeType="secondary"
-								onClick={() => {
+									<Button
+										size="md"
+										themeType="secondary"
+										onClick={() => {
                                 	handleClick(id);
-							}}
-							>
-			Approve
-							</Button>
-								<Button
-								size="md"
-								themeType="secondary"
-								style={{ border: '1px solid #ed3726' }}
-								onClick={() => {
+										}}
+									>
+										Approve
+									</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ border: '1px solid #ed3726' }}
+										onClick={() => {
                                 	handleClickReject(id);
-							}}
-							>
-			Reject
-							</Button>
-							</div>
+										}}
+									>
+										Reject
+									</Button>
+								</div>
 							)}
 						</div>
 					)}
@@ -631,34 +655,34 @@ function ShipmentDetailsCard({
 									className={styles.buttonContainer}
 									onClick={() => {
                               	handleClickUndo(id);
-								}}
+									}}
 								>
 									<Button size="md" themeType="secondary">
-									Undo
-                              </Button>
+										Undo
+									</Button>
 								</div>
 							) : (
 								<div className={styles.buttonContainer}>
-								<Button
-								size="md"
-								themeType="secondary"
-								onClick={() => {
+									<Button
+										size="md"
+										themeType="secondary"
+										onClick={() => {
                                 	handleClick(id);
-							}}
-							>
-			Approve
-							</Button>
-								<Button
-								size="md"
-								themeType="secondary"
-								style={{ border: '1px solid #ed3726' }}
-								onClick={() => {
+										}}
+									>
+										Approve
+									</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ border: '1px solid #ed3726' }}
+										onClick={() => {
                                 	handleClickReject(id);
-							}}
-							>
-			Reject
-							</Button>
-							</div>
+										}}
+									>
+										Reject
+									</Button>
+								</div>
 							)}
 						</div>
 					)}

@@ -1,4 +1,4 @@
-function FILTERS_DATA(statsData) {
+function filtersData(statsData) {
 	const { INITIATED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
 
 	return [
@@ -20,4 +20,4 @@ function FILTERS_DATA(statsData) {
 
 	];
 }
-export default FILTERS_DATA;
+export default filtersData;

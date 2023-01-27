@@ -34,9 +34,9 @@ function Status({ item, field }: propsType) {
 
 	return (
 		<div className={styles.draft}>
-	{startCase(status!)}
-	{' '}
-</div>
+			{startCase(status!)}
+			{' '}
+		</div>
 	);
 }
 

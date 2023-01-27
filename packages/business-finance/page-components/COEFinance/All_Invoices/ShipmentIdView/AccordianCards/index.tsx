@@ -38,7 +38,8 @@ function AccordianCards({
 						<div className={styles.sid}>
 							<div className={styles.sidContainer}>
 								<div className={styles.sidLabelText}>
-									SID -{' '}
+									SID -
+									{' '}
 								</div>
 								<div className={styles.sidValueText}>
 									{itemData.serial_id}
@@ -46,7 +47,8 @@ function AccordianCards({
 							</div>
 							{itemData.pending_approvals === 0 ? null : (
 								<div className={styles.pendingText}>
-									Pending Approval -{' '}
+									Pending Approval -
+									{' '}
 									{itemData.pending_approvals}
 								</div>
 							)}
@@ -65,9 +67,10 @@ function AccordianCards({
 						<div className={styles.expenseAmount}>
 							<div className={styles.expense}>
 								<div className={styles.expenseLabelText}>
-									Expense ({itemData.expense_count || 0}
+									Expense (
+									{itemData.expense_count || 0}
 									)
-</div>
+								</div>
 								<div className={styles.smallRightBorder}>
 									<div className={styles.smallVr} />
 								</div>
@@ -75,14 +78,15 @@ function AccordianCards({
 									{getFormattedPrice(
                                     	itemData.expense_total_price!,
                                     	itemData.expense_total_currency!,
-								)}
+									)}
 								</div>
 							</div>
 							<div className={styles.urgent}>
 								<div className={styles.urgentLabelText}>
-									Urgent ({itemData.urgency_expense_count}
+									Urgent (
+									{itemData.urgency_expense_count}
 									)
-</div>
+								</div>
 								<div className={styles.smallRightBorder}>
 									<div className={styles.urgentVr} />
 								</div>
@@ -90,16 +94,17 @@ function AccordianCards({
 									{getFormattedPrice(
                                     	itemData.urgency_total_price!,
                                     	itemData.urgency_total_currency || 'INR',
-								)}
+									)}
 								</div>
 							</div>
 						</div>
 						<div className={styles.expenseAmount}>
 							<div className={styles.expense}>
 								<div className={styles.expenseLabelText}>
-									Income ({itemData.income_count}
+									Income (
+									{itemData.income_count}
 									)
-</div>
+								</div>
 								<div className={styles.smallRightBorder}>
 									<div className={styles.smallVr} />
 								</div>
@@ -107,14 +112,15 @@ function AccordianCards({
 									{getFormattedPrice(
                                     	itemData.income_total_price!,
                                     	itemData.income_total_currency || 'INR',
-								)}
+									)}
 								</div>
 							</div>
 							<div className={styles.expense}>
 								<div className={styles.expenseLabelText}>
-									Credit Note ({itemData.credit_expense_count}
+									Credit Note (
+									{itemData.credit_expense_count}
 									)
-                                </div>
+								</div>
 								<div className={styles.smallRightBorder}>
 									<div className={styles.smallVr} />
 								</div>
@@ -122,7 +128,7 @@ function AccordianCards({
 									{getFormattedPrice(
                                     	itemData.credit_total_price!,
                                     	'INR',
-								)}
+									)}
 								</div>
 							</div>
 						</div>
@@ -136,32 +142,32 @@ function AccordianCards({
 							<div className={styles.expense}>
 								<div className={styles.profitibility}>
 									Quotation Profitability
-                                </div>
+								</div>
 								<div className={styles.smallRightBorder}>
 									<div
-									className={styles.profitibilityBorder}
-								/>
+										className={styles.profitibilityBorder}
+									/>
 								</div>
 								<div className={styles.profitibilityValue}>
 									{itemData.quotation_profit}
 									%
-</div>
+								</div>
 							</div>
 
 							<div className={styles.expense}>
 								<div className={styles.profitibility}>
 									Actual Profitability
-                                </div>
+								</div>
 								<div className={styles.smallRightBorder}>
 									<div
-									className={styles.profitibilityBorder}
-								/>
+										className={styles.profitibilityBorder}
+									/>
 								</div>
 								<div className={styles.profitibilityValue}>
 									{itemData.tentative_profit}
 									{' '}
 									%
-</div>
+								</div>
 							</div>
 						</div>
 						<div className={styles.buttonStyle}>
@@ -170,24 +176,24 @@ function AccordianCards({
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
                                     	setCurrentOpenSID(itemData?.id);
-								}}
+									}}
 									themeType="secondary"
 								>
-	View More
+									View More
 								</Button>
 							) : (
 								<Button
-								themeType="secondary"
-								style={{ height: '30px', fontSize: '12px' }}
-								onClick={() => {
+									themeType="secondary"
+									style={{ height: '30px', fontSize: '12px' }}
+									onClick={() => {
                                     	setCurrentOpenSID(itemData?.id);
                                     	router.push(
                                     		`/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}&jobNumber=${dataCard.jobNumber}&jobSource=${dataCard.jobSource}&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}`,
-								);
-							}}
-							>
-		Cost View
-							</Button>
+										);
+									}}
+								>
+									Cost View
+								</Button>
 							)}
 						</div>
 					</div>

@@ -90,36 +90,36 @@ function POCDetails({ itemData }: Props) {
 									onClick={() => {
                   	setShowDetailsCard(false);
                   	document.body.style.overflow = 'auto';
-								}}
+									}}
 								>
 									<IcMArrowRotateLeft />
 								</div>
 
 								<div className={styles.headerDetails}>
 									POC & Other Details - SID
-                  <span style={{ marginLeft: '4px' }}>{jobNumber}</span>
+									<span style={{ marginLeft: '4px' }}>{jobNumber}</span>
 								</div>
 							</div>
 
 							<div className={styles.bodyDetails}>
 								{loading ? (
 									<>
-									<Placeholder
-									margin="5px 0px 14px 25px"
-									height="45px"
-									width="492px"
-								/>
-									<Placeholder
-									margin="5px 0px 14px 25px"
-									height="45px"
-									width="492px"
-								/>
-									<Placeholder
-									margin="5px 0px 14px 25px"
-									height="45px"
-									width="492px"
-								/>
-								</>
+										<Placeholder
+											margin="5px 0px 14px 25px"
+											height="45px"
+											width="492px"
+										/>
+										<Placeholder
+											margin="5px 0px 14px 25px"
+											height="45px"
+											width="492px"
+										/>
+										<Placeholder
+											margin="5px 0px 14px 25px"
+											height="45px"
+											width="492px"
+										/>
+									</>
 								) : (
                 	(POC_DATA_MAPPING || [{}]).map((item) => {
                 		const { id, label } = item;

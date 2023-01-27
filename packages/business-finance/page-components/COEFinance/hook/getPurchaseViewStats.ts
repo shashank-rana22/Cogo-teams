@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 
 const usePurchaseViewStats = () => {
 	const [{ loading: statsLoading, data: statsData }, statsTrigger] = useRequestBf(
-        	{
-        		url     : '/purchase/bills/stats',
-        		method  : 'get',
-        		authkey : 'get_purchase_bills_stats',
-        	},
-        	{ autoCancel: false },
+        {
+        url     : '/purchase/bills/stats',
+        method  : 'get',
+		authkey : 'get_purchase_bills_stats',
+	},
+    { autoCancel: false },
 	);
 	const getStatsData = async () => {
 		try {

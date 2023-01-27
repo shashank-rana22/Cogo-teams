@@ -178,7 +178,7 @@ function LineItemCard({
 						content={(
 							<div className={styles.formStyle}>
 								As filled by SO2 In The COGO Invoice
-		</div>
+							</div>
 						)}
 					>
 						<div className={styles.tooltip}>
@@ -243,10 +243,10 @@ function LineItemCard({
 								{' '}
 								{bill?.subTotal ? (
 									<>
-									{startCase(converter.toWords(bill?.grandTotal))}
-									{' '}
-									only
-</>
+										{startCase(converter.toWords(bill?.grandTotal))}
+										{' '}
+										only
+									</>
 								) : null}
 							</div>
 						</div>

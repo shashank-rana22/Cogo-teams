@@ -36,7 +36,7 @@ function ModifiedName({ item, field }: propsType) {
 							<text>
 								{`${organizationName.substring(
 									0,
-									10
+									10,
 								)}...`}
 							</text>
 						</Tooltip>
@@ -73,7 +73,7 @@ function ModifiedName({ item, field }: propsType) {
 							<text>
 								{`${createdByName?.substring(
 									0,
-									10
+									10,
 								)}...`}
 							</text>
 						</Tooltip>

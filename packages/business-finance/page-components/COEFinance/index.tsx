@@ -86,26 +86,26 @@ function CoeFinance() {
 								<div className={styles.flex}>
 									<div className={styles.heading}>Job Related Statistics</div>
 									<SegmentedControl
-									options={OPTIONS}
-									activeTab={currentTab}
-									setActiveTab={setCurrentTab}
-									color="#ED3726"
-									background="#FFFAEB"
-								/>
+										options={OPTIONS}
+										activeTab={currentTab}
+										setActiveTab={setCurrentTab}
+										color="#ED3726"
+										background="#FFFAEB"
+									/>
 								</div>
 								<div className={styles.totalstats}>
 									<div>
-									<div className={styles.stat}>25</div>
-									<div className={styles.month}>Current Month - March</div>
-								</div>
+										<div className={styles.stat}>25</div>
+										<div className={styles.month}>Current Month - March</div>
+									</div>
 									<div>
-									<div className={styles.stat}>25</div>
-									<div className={styles.month}>February</div>
-								</div>
+										<div className={styles.stat}>25</div>
+										<div className={styles.month}>February</div>
+									</div>
 									<div>
-									<div className={styles.stat}>25</div>
-									<div className={styles.month}>January</div>
-								</div>
+										<div className={styles.stat}>25</div>
+										<div className={styles.month}>January</div>
+									</div>
 								</div>
 							</div>
 							<div

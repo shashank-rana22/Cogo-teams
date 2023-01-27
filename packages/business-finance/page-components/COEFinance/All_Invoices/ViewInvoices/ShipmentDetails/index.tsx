@@ -9,8 +9,6 @@ import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetVariance from '../../../hook/useGetVariance';
-
-
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 
@@ -152,7 +150,7 @@ function ShipmentDetails({
 &nbsp;(
 									{agent_role_data?.name}
 									)
-	</div>
+								</div>
 								<div className={styles.kamData}>Wallet Usage - </div>
 								<div>
 									{amount_currency || 'USD'}

@@ -1,4 +1,4 @@
-function FILTERS_URGENT_DATA(statsData) {
+function filtersUrgentData(statsData) {
 	const { URGENT_INVOICE_COUNT = '' } = statsData || {};
 	return [
 		{
@@ -13,4 +13,4 @@ function FILTERS_URGENT_DATA(statsData) {
 
 	];
 }
-export default FILTERS_URGENT_DATA;
+export default filtersUrgentData;
