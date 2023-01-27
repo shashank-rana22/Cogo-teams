@@ -4,19 +4,19 @@ import { formatDate } from '../../../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	billDate: Date;
 	dueDate: Date;
 	invoiceDate: Date;
 	createdDate: Date;
 }
 
-interface propsType {
-	item: itemTypes;
+interface PropsType {
+	item: ItemTypes;
 	field: any;
 }
 
-function FormatedDate({ item, field }: propsType) {
+function FormatedDate({ item, field }: PropsType) {
 	const getBillDate = formatDate(item.billDate, 'dd/MMM/yyyy', {}, true);
 	const getDueDate = formatDate(item.dueDate, 'dd/MMM/yyyy', {}, true);
 	const getInvoiceDate = formatDate(item.invoiceDate, 'dd/MMM/yyyy', {}, true);

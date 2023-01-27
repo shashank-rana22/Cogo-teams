@@ -7,7 +7,7 @@ import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
 
 import useGetFiniteList from './useGetFiniteList';
 
-interface dataType {
+interface DataType {
 	currentPage: number;
 	restFilters: any;
 	pageIndex: number;
@@ -45,7 +45,7 @@ const useListBills = (allParams) => {
 	}
 
 	const [
-		{ data: billsData, loading: billsApiLoading },
+		{ loading: billsApiLoading },
 		listExpenseInvoicesTrigger,
 	] = useRequestBf(
 		{
@@ -57,7 +57,7 @@ const useListBills = (allParams) => {
 	);
 
 	const [
-		{ data: salesData, loading: invoicesApiLoading },
+		{ loading: invoicesApiLoading },
 		listSalesInvoicesTrigger,
 	] = useRequestBf(
 		{
@@ -69,8 +69,8 @@ const useListBills = (allParams) => {
 	);
 
 	const listExpenseInvoicesApi = (
-		restFilters: dataType,
-		currentPage: dataType,
+		restFilters: DataType,
+		currentPage: DataType,
 	) => listExpenseInvoicesTrigger({
 		params: {
 			jobNumbers : params.serial_id ? [params?.serial_id] : undefined,
@@ -86,8 +86,8 @@ const useListBills = (allParams) => {
 	});
 
 	const listSalesInvoicesApi = (
-		restFilters: dataType,
-		currentPage: dataType,
+		restFilters: DataType,
+		currentPage: DataType,
 	) => listSalesInvoicesTrigger({
 		params: {
 			jobNumber                 : params?.serial_id,
@@ -103,8 +103,8 @@ const useListBills = (allParams) => {
 	});
 
 	const currentApi = params?.amountTab === 'expense'
-        	? listExpenseInvoicesApi
-        	: listSalesInvoicesApi;
+		? listExpenseInvoicesApi
+		: listSalesInvoicesApi;
 	const {
 		loading,
 		page,

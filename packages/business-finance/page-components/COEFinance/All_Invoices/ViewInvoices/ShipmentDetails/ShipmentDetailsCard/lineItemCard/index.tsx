@@ -254,7 +254,7 @@ function LineItemCard({
 										{startCase(converter.toWords(bill?.grandTotal))}
 										{' '}
 										only
-</>
+									</>
 								) : null}
 							</div>
 						</div>

@@ -19,7 +19,10 @@ function PortDetails({ data, showDate = false }: Props) {
 		return null;
 	}
 
-	const { origin_main_port = '', destination_main_port = '' } = data || {};
+	const {
+		origin_main_port: originMainPort = '',
+		destination_main_port: destinationMainPort = '',
+	} = data || {};
 
 	const { origin, destination } = getLocations({ ...data, search_type: data?.shipment_type }) || {};
 
@@ -86,7 +89,7 @@ function PortDetails({ data, showDate = false }: Props) {
 			<div className={styles.LocationContainer}>
 				<div className={styles.PortPairContainer}>
 					<div className={styles.FlexRowOrigin}>
-						{handleLocationDetails(origin, origin_main_port)}
+						{handleLocationDetails(origin, originMainPort)}
 						{showDate ? (
 							<div className={styles.DateContainer}>
 								ETD -
@@ -100,7 +103,7 @@ function PortDetails({ data, showDate = false }: Props) {
 					</div>
 
 					<div className={styles.FlexRowDest}>
-						{handleLocationDetails(destination, destination_main_port)}
+						{handleLocationDetails(destination, destinationMainPort)}
 						{showDate ? (
 							<div className={styles.DateContainer}>
 								ETA -

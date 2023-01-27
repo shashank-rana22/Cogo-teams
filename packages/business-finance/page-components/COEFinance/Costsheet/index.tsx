@@ -133,7 +133,7 @@ function CostSheet() {
 		<div className={styles.kamData}>KAM -</div>
 		<div>
 			{agent_data?.name}
-&nbsp;(
+                &nbsp;(
 			{agent_role_data?.name}
 			)
 		</div>

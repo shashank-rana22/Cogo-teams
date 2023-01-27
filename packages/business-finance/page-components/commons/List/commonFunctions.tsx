@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { FunctionObjects, FieldType, GenericObject } from '../Interfaces/index';
+import { FunctionObjects } from '../Interfaces/index';
 
-const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
-	const newFunctions:any = {
-		renderTag: (itemData:GenericObject, field:FieldType) => (<div>tag</div>),
+const commonFunctions = (functions: { functions?: FunctionObjects }) => {
+	const newFunctions: any = {
+		renderTag: () => <div>tag</div>,
 		...(functions || {}),
-
 	};
 
 	return newFunctions;

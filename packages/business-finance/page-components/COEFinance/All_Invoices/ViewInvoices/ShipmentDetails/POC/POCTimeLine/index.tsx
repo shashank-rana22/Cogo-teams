@@ -158,14 +158,14 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 								interactive
 								content={(
 									<div className={styles.userContainer}>
-									<a href={`mailto:${userEmail}`}>{userEmail}</a>
-								</div>
+										<a href={`mailto:${userEmail}`}>{userEmail}</a>
+									</div>
 								)}
 							>
 								<div style={{ cursor: 'pointer' }}>
 									<a href={`mailto:${userEmail}`}>
-									<IcCSendEmail />
-								</a>
+										<IcCSendEmail />
+									</a>
 								</div>
 							</Tooltip>
 						) : null}

@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
-import { array } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -14,7 +13,7 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 }
-interface ite {
+interface Ite {
 	id?: string;
 	icon?: JSX.Element;
 	text?: string;
@@ -82,7 +81,7 @@ function FilterModal({ filters, setFilters }: Props) {
             	marginLeft   : '26px',
 						}}
 					>
-						{CURRENCY_DATA.map((item: ite) => {
+						{CURRENCY_DATA.map((item: Ite) => {
             	const { id = '', icon, text } = item;
             	return (
 	<div
@@ -93,14 +92,12 @@ function FilterModal({ filters, setFilters }: Props) {
                         	: styles.unselected
 		}`}
 		onClick={() => {
-                    	if (currencies?.includes(id)) {
-                    		const value = currencies.filter(
-                    			(it) => it !== item?.id,
-				);
-                    		setCurrencies(value);
-                    	} else {
-                    		setCurrencies([...currencies, id]);
-                    	}
+                  	if (currencies?.includes(id)) {
+                  		const value = currencies.filter((it) => it !== item?.id);
+                  		setCurrencies(value);
+                  	} else {
+                  		setCurrencies([...currencies, id]);
+                  	}
 		}}
 	>
 		<div className="iconShow">{icon}</div>

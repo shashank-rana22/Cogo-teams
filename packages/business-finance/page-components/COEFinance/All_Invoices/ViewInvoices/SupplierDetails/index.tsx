@@ -13,7 +13,7 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import List from '../../../../commons/List/index';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';

@@ -1,7 +1,7 @@
 import isSingleLocation from './isSingleLocation';
 
 const getLocationShipmentDetails = (data, summary, type) => {
-	const { search_type } = summary;
+	const { search_type:searchType } = summary;
 
 	const suffixConfig = {
 		fcl_freight             : 'port',
@@ -24,16 +24,16 @@ const getLocationShipmentDetails = (data, summary, type) => {
 		lcl_freight_local : 'port',
 	};
 
-	const suffix =		suffixConfig[`${type}_${search_type}`] || suffixConfig[search_type];
+	const suffix =		suffixConfig[`${type}_${searchType}`] || suffixConfig[searchType];
 
-	const objName =		!isSingleLocation(search_type)
-		&& !['ftl_freight', 'ltl_freight'].includes(search_type)
+	const objName =		!isSingleLocation(searchType)
+		&& !['ftl_freight', 'ltl_freight'].includes(searchType)
 		? `${type}_${suffix}`
 		: suffix;
 
 	const location = (summary[objName] || {}).name || '';
 
-	const port_code =		(summary[objName] || {}).port_code
+	const portCode = (summary[objName] || {}).port_code
 		|| (summary[objName] || {}).postal_code
 		|| null;
 
@@ -41,16 +41,16 @@ const getLocationShipmentDetails = (data, summary, type) => {
 
 	const { id } = summary[objName] || {};
 
-	const display_name = (summary[objName] || {}).display_name || '';
+	const displayName = (summary[objName] || {}).display_name || '';
 
 	const mainLocation = (data[`${type}_main_${suffix}`] || {}).name;
 
 	return {
 		name: mainLocation || location,
-		port_code,
+		portCode,
 		country,
 		id,
-		display_name,
+		displayName,
 	};
 };
 

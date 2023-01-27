@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const usePOCDetails = (billId?:string) => {
-	const [{ data:listInvoiceDetailsApiData, loading:listInvoiceDetailsApiLoading }, listInvoiceDetailsApi] = useRequestBf(
+const usePOCDetails = (billId?: string) => {
+	const [
+		{ data: listInvoiceDetailsApiData, loading: listInvoiceDetailsApiLoading },
+		listInvoiceDetailsApi,
+	] = useRequestBf(
 		{
 			url     : `/purchase/bills/sid-details/${billId}`,
 			method  : 'get',
@@ -11,7 +14,10 @@ const usePOCDetails = (billId?:string) => {
 		{ autoCancel: false },
 	);
 
-	const [{ data:timeLineDetailsApiData, loading:timeLineDetailsApiLoading }, timeLineDetailsApi] = useRequestBf(
+	const [
+		{ data: timeLineDetailsApiData, loading: timeLineDetailsApiLoading },
+		timeLineDetailsApi,
+	] = useRequestBf(
 		{
 			url     : `/purchase/bills/${billId}/bill-time-line`,
 			method  : 'get',
@@ -43,7 +49,6 @@ const usePOCDetails = (billId?:string) => {
 		timeLineLoading : timeLineDetailsApiLoading,
 		getInvoiceDetailsApi,
 		getTimeLineDetailsApi,
-
 	};
 };
 export default usePOCDetails;

@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
 
-type dataType = {
+type DataType = {
 	currentPage: number;
 	restFilters: any;
 };
@@ -28,14 +28,14 @@ const useShipmentIdView = (allParams?: {}) => {
 		}),
 	);
 
-	const [{ data: shipmentData, loading: apiLoading, error }, trigger] = useRequest(
-        	{
-        		url    : 'list_shipments',
-        		method : 'get',
-        	},
+	const [{ loading: apiLoading }, trigger] = useRequest(
+		{
+			url    : 'list_shipments',
+			method : 'get',
+		},
 	);
 
-	const listAPi = (restFilters: dataType, currentPage: dataType) => {
+	const listAPi = (restFilters: DataType, currentPage: DataType) => {
 		const allFilters = {
 			...(restFilters || {}),
 			...allParams,
@@ -69,7 +69,7 @@ const useShipmentIdView = (allParams?: {}) => {
 		loading,
 		page,
 		filters,
-		list: { data, total, total_page, fullResponse },
+		list: { data, total, total_page:totalPage, fullResponse },
 		hookSetters,
 		refetch,
 	} = useGetFiniteList(listAPi, {
@@ -88,7 +88,7 @@ const useShipmentIdView = (allParams?: {}) => {
 		list    : {
 			data,
 			total,
-			total_page,
+			totalPage,
 			fullResponse,
 		},
 		hookSetters,
