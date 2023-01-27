@@ -108,8 +108,8 @@ function SupplierDetails({
 							<Tooltip
 								content={(
 									<div style={{ fontSize: '10px' }}>
-				{sellerDetail?.organizationName}
-			</div>
+										{sellerDetail?.organizationName}
+									</div>
 								)}
 							>
 								<div className={styles.organizationName}>
