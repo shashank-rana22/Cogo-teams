@@ -1,4 +1,3 @@
-
 export const routeInfo = {
 	air_customs : { origin_port: 'airport', origin_pickup: 'location' },
 	fcl_customs : {

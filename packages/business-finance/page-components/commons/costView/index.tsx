@@ -11,7 +11,7 @@ interface CostViewProps {
 }
 
 function CostView({ shipment_id = '' }:CostViewProps) {
-	const [{ data, loading}, trigger] = useRequest(
+	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/get_shipment_cost_sheet',
 			method : 'get',

@@ -1,31 +1,31 @@
-import React from "react";
+import React from 'react';
 
-import { DetailInterface } from "../../../../../commons/Interfaces/index";
+import { DetailInterface } from '../../../../../commons/Interfaces/index';
 
-import { renderValue } from "./renderValue";
-import styles from "./styles.module.css";
+import { renderValue } from './renderValue';
+import styles from './styles.module.css';
 
 const labels = [
-  "airline",
-  "container_size",
-  "containers_count",
-  "container_type",
-  "commodity",
-  "inco_term",
-  "trucks_count",
-  "trade_type",
-  "packages",
-  "volume",
-  "weight",
-  "master_airway_bill_number",
-  "house_airway_bill_number",
-  "haulage_type",
-  "transport_mode",
-  "cargo_weight_per_container",
-  "destination_cargo_handling_type",
-  "truck_type",
-  "trip_type",
-  "lr_number",
+	'airline',
+	'container_size',
+	'containers_count',
+	'container_type',
+	'commodity',
+	'inco_term',
+	'trucks_count',
+	'trade_type',
+	'packages',
+	'volume',
+	'weight',
+	'master_airway_bill_number',
+	'house_airway_bill_number',
+	'haulage_type',
+	'transport_mode',
+	'cargo_weight_per_container',
+	'destination_cargo_handling_type',
+	'truck_type',
+	'trip_type',
+	'lr_number',
 ];
 
 /**
@@ -35,29 +35,29 @@ const labels = [
  */
 
 interface DetailInt {
-  detail: DetailInterface;
+	detail: DetailInterface;
 }
 
 function CargoDetails({ detail }: DetailInt) {
-  return (
-    <div className={styles.divContainer}>
-      {labels.map((label) => {
-        if (
-          detail?.[label as keyof typeof detail] &&
-          renderValue(label, detail)
-        ) {
-          return (
-            <div className={styles.container}>
-              <div className={`${styles.Box} cargo-detail-pill`} key={label}>
-                {renderValue(label, detail)}
-              </div>
-            </div>
-          );
-        }
+	return (
+		<div className={styles.divContainer}>
+			{labels.map((label) => {
+      	if (
+      		detail?.[label as keyof typeof detail]
+          && renderValue(label, detail)
+      	) {
+      		return (
+	<div className={styles.container}>
+		<div className={`${styles.Box} cargo-detail-pill`} key={label}>
+			{renderValue(label, detail)}
+		</div>
+	</div>
+      		);
+      	}
 
-        return null;
-      })}
-    </div>
-  );
+      	return null;
+			})}
+		</div>
+	);
 }
 export default CargoDetails;

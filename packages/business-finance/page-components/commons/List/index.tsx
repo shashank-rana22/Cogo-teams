@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import React, { ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 
 import {
 	ConfigType,

@@ -13,7 +13,7 @@ import lineData from './Components/Stream/data';
 import styles from './styles.module.css';
 
 function CoeFinance() {
-	const {query } = useRouter();
+	const { query } = useRouter();
 	const [currentTab, setCurrentTab] = useState('');
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
