@@ -38,7 +38,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
   const [remark, setRemark] = useState("");
   const { bill, remarks = [] } = data;
   const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-  const { grandTotal, billCurrency } = bill;
+  const { grandTotal, billCurrency } = bill || {};
   const [removeTag, setRemoveTag] = useState(false);
   const [showAddTag, setShowAddTag] = useState(false);
   const [tagValue, setTagValue] = useState("");
@@ -60,8 +60,9 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 
   let displayTag = "";
   urgencyOptions.forEach((option) => {
-    if (option.value === data?.billAdditionalObject?.urgencyTag)
+    if (option.value === data?.billAdditionalObject?.urgencyTag) {
       displayTag = option.label;
+    }
   });
 
   const remarkRender = () => (
