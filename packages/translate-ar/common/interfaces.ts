@@ -12,10 +12,18 @@ export interface TableProps {
 	getRowId?: (row: object) => string;
 }
 
-export interface GenericObject {
-	[key: string]: any;
+export interface StatusObject {
+	status: string
 }
 
-export interface NestedObj {
-	[key: string]: string;
+export interface Object {
+	itemData: object;
 }
+
+export type Refetch = (p?: number) => void;
+
+export type FilterProps = {
+	page: number,
+	pageLimit: number,
+	search?: string,
+};

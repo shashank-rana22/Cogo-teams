@@ -1,9 +1,11 @@
 import { getByKey, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { Object } from '../../../../common/interfaces';
+
 import styles from './styles.module.css';
 
-function RemarkContent({ itemData }) {
+function RemarkContent({ itemData }: Object) {
 	return (
 		<div className={styles.container}>
 			{!isEmpty(getByKey(itemData, 'translationRemark')) && (

@@ -1,17 +1,23 @@
 import { Select, MultiSelect } from '@cogoport/components';
 import React from 'react';
 
+import { FilterProps } from '../interfaces';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 import { filterControls } from './utils/controls';
 
+interface Props {
+	filters: FilterProps;
+	onChangeFilters: (v: object) => void;
+}
+
 function Filters({
 	filters,
 	onChangeFilters = (v) => v,
-}) {
+}: Props) {
 	const { search } = filters || {};
-	const getElements = (type) => {
+	const getElements = (type:string) => {
 		switch (type) {
 			case 'select':
 				return Select;

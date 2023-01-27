@@ -6,12 +6,19 @@ import styles from './styles.module.css';
 
 type SizeProps = 'lg' | 'xs' | 'sm' | 'md';
 
+type Search = {
+	value: string;
+	onChange: (value: string) => void;
+	placeholder: string;
+	size: SizeProps;
+};
+
 function SearchInput({
 	value = '',
 	onChange = (v) => v,
 	placeholder = '',
 	size = 'lg',
-}) {
+}:Search) {
 	return (
 		<section className={styles.container}>
 			<Input

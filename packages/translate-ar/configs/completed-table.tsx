@@ -59,7 +59,7 @@ const completedColumn = [
 		Header   : 'Invoice Amount',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{getPrice(getByKey(row, 'grandTotal'), getByKey(row, 'currency'))}</div>
+				<div>{getPrice(getByKey(row, 'grandTotal') as number, getByKey(row, 'currency') as string)}</div>
 			</div>
 		),
 	},

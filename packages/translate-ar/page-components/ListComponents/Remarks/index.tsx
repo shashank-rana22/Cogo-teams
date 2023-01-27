@@ -2,10 +2,12 @@ import { Popover } from '@cogoport/components';
 import { IcMProvision } from '@cogoport/icons-react';
 import React from 'react';
 
+import { Object } from '../../../common/interfaces';
+
 import RemarkContent from './RemarksContent';
 import styles from './styles.module.css';
 
-function Remarks({ itemData }) {
+function Remarks({ itemData }: Object) {
 	return (
 		<div className={styles.center}>
 			<Popover

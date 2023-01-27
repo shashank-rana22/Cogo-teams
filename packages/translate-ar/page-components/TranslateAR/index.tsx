@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function TranslateAR() {
 	const { push, query } = useRouter();
 	const { activeTab } = query;
-	const [receivables, setReceivables] = useState(activeTab);
+	const [receivables, setReceivables] = useState(activeTab || 'pending');
 	const handleTabChange = (v: string) => {
 		push(
 			'/business-finance/translate-account-receivables/[activeTab]',

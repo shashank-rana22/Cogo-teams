@@ -1,4 +1,4 @@
-const getPrice = (price, currency, options = {}, locale = 'en-IN') => (currency
+const getPrice = (price: number, currency: string, options: object = {}, locale: string = 'en-IN') => (currency
 	? Number(price || 0).toLocaleString(locale, {
 		style           : 'currency',
 		currency,
@@ -6,4 +6,5 @@ const getPrice = (price, currency, options = {}, locale = 'en-IN') => (currency
 		...options,
 	})
 	: null);
+
 export default getPrice;

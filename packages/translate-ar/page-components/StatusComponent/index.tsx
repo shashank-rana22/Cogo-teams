@@ -2,6 +2,7 @@ import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import Filters from '../../common/Filters';
+import { StatusObject } from '../../common/interfaces';
 import completedColumn from '../../configs/completed-table';
 import pendingColumns from '../../configs/pending-table';
 import useGetShipmentInvoices from '../../hooks/useGetShipmentInvoices';
@@ -9,7 +10,7 @@ import StyledTable from '../Table';
 
 import styles from './styles.module.css';
 
-function StatusComponent({ status }: { status: string }) {
+function StatusComponent({ status }: StatusObject) {
 	const {
 		invoiceLoading, invoiceData, setShipmentFilters,
 		shipmentFilters, refetch,

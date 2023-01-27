@@ -3,15 +3,10 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
+import { FilterProps, StatusObject } from '../common/interfaces';
 import useSearchQuery from '../utils/debouncy';
 
-const useGetShipmentInvoices = ({ status }) => {
-	type FilterProps = {
-		page: number,
-		pageLimit: number,
-		search?:string,
-	};
-
+const useGetShipmentInvoices = ({ status }: StatusObject) => {
 	const [shipmentFilters, setShipmentFilters] = useState<FilterProps>({
 		page      : 1,
 		pageLimit : 10,
