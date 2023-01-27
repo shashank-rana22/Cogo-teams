@@ -45,10 +45,9 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 
 	const singleNav = (
 		<div
-			className={
-			`${item.options?.length > 0 ? styles.has_options : ''} 
-			${isHref ? styles.active_item : styles.list_item_inner}`
-}
+			className={`
+			${item.options?.length > 0 ? styles.has_options : ''}
+			${isHref ? styles.active_item : styles.list_item_inner}`}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}

@@ -10,7 +10,7 @@
 
 .sticky_pins {
 	position: sticky;
-	top: 0px;
+	top: 0;
 	z-index: 1;
 	background: #f9f9f9;
 
@@ -30,7 +30,7 @@
 }
 
 .empty_pin_header {
-	margin-bottom: 0px !important;
+	margin-bottom: 0 !important;
 }
 
 .list_container::-webkit-scrollbar {
@@ -94,9 +94,10 @@
 		flex-shrink: 0;
 		width: 16px;
 		height: 16px;
+		margin-right: 4px;
 	}
 
-	&:hover{
+	&:hover {
 		background-color: #fef199;
 	}
 
@@ -194,7 +195,7 @@
 }
 
 .has_options {
-	padding-left: 6px;
+	padding-left: 2px;
 }
 
 .pin {
@@ -204,6 +205,7 @@
 		width: 20px;
 		height: 20px;
 	}
+
 	transition: transform 0.3s ease;
 
 	&:hover {
@@ -214,7 +216,7 @@
 .loader {
 	width: 18px;
 	height: 18px;
-	margin: 0px;
+	margin: 0;
 }
 
 .inner_container {
