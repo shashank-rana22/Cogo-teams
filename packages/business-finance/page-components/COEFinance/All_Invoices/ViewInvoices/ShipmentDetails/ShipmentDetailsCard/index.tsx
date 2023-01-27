@@ -7,7 +7,7 @@ import { Modal, Textarea, Checkbox } from "@cogoport/components";
 import { RemarksValInterface } from "../../../../../commons/Interfaces/index";
 import { DataInterface } from "..";
 import { useRouter } from "@cogoport/next";
-import { startCase } from "@cogoport/utils";
+import { format, startCase } from "@cogoport/utils";
 interface ShipmentDetailsCardInterface {
   data: DataInterface;
   remarksVal: RemarksValInterface;
@@ -54,7 +54,7 @@ const ShipmentDetailsCard = ({
   } = sellerBankDetail || {};
   const {
     billNumber = "",
-    createdAt = "",
+    billDate,
     status = "",
     placeOfSupply = "",
   } = bill || {};
@@ -140,7 +140,6 @@ const ShipmentDetailsCard = ({
     setShowLineItem(true);
     setItemCheck(true);
   };
-  const billDate = createdAt.split(" ");
 
   return (
     <div>
@@ -248,7 +247,8 @@ const ShipmentDetailsCard = ({
                           >
                             <Checkbox />
                             <div style={{ marginBottom: "8px" }}>
-                              PAN Number - <span>{registrationNumber}</span>
+                              PAN Number -{" "}
+                              <span>{(taxNumber || "").slice(2, 12)}</span>
                             </div>
                           </div>
 
@@ -354,7 +354,10 @@ const ShipmentDetailsCard = ({
                           >
                             <Checkbox />
                             <div style={{ marginBottom: "8px" }}>
-                              Invoice Date - <span>{billDate[0]}</span>
+                              Invoice Date -{" "}
+                              <span>
+                                {format(billDate, "dd/MMM/yyyy", {}, false)}
+                              </span>
                             </div>
                           </div>
 
@@ -484,7 +487,8 @@ const ShipmentDetailsCard = ({
                         <span style={{ color: "#ed3726" }}>{ifscCode}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
-                        PAN Number - <span>{registrationNumber}</span>
+                        PAN Number -{" "}
+                        <span>{(taxNumber || "").slice(2, 12)}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
                         GST Number - <span>{taxNumber}</span>
@@ -651,7 +655,10 @@ const ShipmentDetailsCard = ({
                         Invoice Number - <span>{billNumber}</span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
-                        Invoice Date - <span>{billDate[0]}</span>
+                        Invoice Date -{" "}
+                        <span>
+                          {format(billDate, "dd/MMM/yyyy", {}, false)}
+                        </span>
                       </div>
                       <div style={{ marginBottom: "8px" }}>
                         Status - <span>{startCase(status)}</span>

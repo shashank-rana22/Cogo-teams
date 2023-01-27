@@ -8,8 +8,10 @@ import AddUrgencyTag from "./AddUrgencyTag/index";
 import RemoveTagConfirmation from "./RemoveTagConfirmation/index";
 import { useRouter } from "@cogoport/next";
 import { Pill } from "@cogoport/components";
+import getFormattedPrice from "../../../../commons/utils/getFormattedPrice";
 interface BillInterFace {
-  grandTotal?: string;
+  grandTotal: number;
+  billCurrency: string;
   id?: string;
 }
 interface BillAdditionalObject {
@@ -21,20 +23,20 @@ interface RemarkObj {
   remarks?: string;
 }
 interface DataProps {
-  bill?: BillInterFace;
+  bill: BillInterFace;
   billAdditionalObject?: BillAdditionalObject;
   remarks?: Array<RemarkObj>;
   serviceType?: string;
 }
 interface Props {
-  data?: DataProps;
+  data: DataProps;
   getBillRefetch: () => void;
 }
-const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
+const InvoiceDetails = ({ data, getBillRefetch }: Props) => {
   const [remark, setRemark] = useState("");
   const { bill, remarks = [] } = data;
   const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-  const { grandTotal } = bill || {};
+  const { grandTotal, billCurrency } = bill;
   const [removeTag, setRemoveTag] = useState(false);
   const [showAddTag, setShowAddTag] = useState(false);
   const [tagValue, setTagValue] = useState("");
@@ -140,7 +142,9 @@ const InvoiceDetails = ({ data = {}, getBillRefetch }: Props) => {
       <div className={styles.card}>
         <div className={styles.cardFieldFirst}>
           Invoice Amount - &nbsp;{" "}
-          <span className={styles.amount}>INR {grandTotal}</span>
+          <span className={styles.amount}>
+            {getFormattedPrice(grandTotal, billCurrency)}
+          </span>
         </div>
         <div className={styles.verticalSmallHr} />
         <div className={styles.cardFieldSecond}>

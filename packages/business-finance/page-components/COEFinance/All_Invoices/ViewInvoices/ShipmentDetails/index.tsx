@@ -43,7 +43,7 @@ interface BillInterface {
   id?: string;
   billDocumentUrl?: string;
   billNumber?: string;
-  createdAt?: string;
+  billDate: Date;
   status?: string;
   placeOfSupply?: string;
   taxTotal: any;
@@ -65,7 +65,7 @@ export interface DataInterface {
   buyerDetail?: BuyerDetailInterface;
   sellerBankDetail?: SellerBankDetailInterface;
   sellerDetail?: SellerDetailInterface;
-  bill?: BillInterface;
+  bill: BillInterface;
 }
 
 interface ShipmentDetailsInterface {
