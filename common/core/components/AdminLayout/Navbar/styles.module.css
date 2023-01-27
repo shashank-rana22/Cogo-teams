@@ -80,6 +80,7 @@
 		flex-shrink: 0;
 		width: 16px;
 		height: 16px;
+		margin-right: 4px;
 	}
 
 	&:hover {
@@ -180,7 +181,7 @@
 }
 
 .has_options {
-	padding-left: 6px;
+	padding-left: 2px;
 }
 
 .pin {
