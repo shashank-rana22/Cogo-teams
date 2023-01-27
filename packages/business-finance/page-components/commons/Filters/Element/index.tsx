@@ -74,8 +74,8 @@ function Element({
 								<div
 									className={
                     val.value === filters[name as keyof typeof filters]
-                    ? styles.active
-                    : styles.normal
+                    	? styles.active
+                    	: styles.normal
                 }
 								>
 									{val.label}
@@ -145,7 +145,7 @@ function Element({
 					<div
 						className={styles.select_container}
 						style={
-            {	'--width': selectWidth || '200px',} as CSSProperties
+            {	'--width': selectWidth || '200px' } as CSSProperties
             }
 					>
 						<Select
@@ -161,8 +161,7 @@ function Element({
 				return (
 					<div
 						className={styles.select_container}
-						style={ {	'--width': selectWidth || '200px',} as CSSProperties
-            }
+						style={{	'--width': selectWidth || '200px' } as CSSProperties}
 					>
 						<MultiSelect
 							value={value as string[]}
@@ -206,8 +205,8 @@ function Element({
 				return (
 					<div className={className} {...rest}>
 						{freightMapping[value as keyof typeof freightMapping]?.name.replace(
-            '_',
-            '',
+							'_',
+							'',
 						) || '-'}
 					</div>
 				);
@@ -216,15 +215,15 @@ function Element({
 					<SegmentedControl
 						options={
             rest?.options as {
-            label: string;
-            value: string;
-            icon?: JSX.Element;
-            badge?: number;
+            	label: string;
+            	value: string;
+            	icon?: JSX.Element;
+            	badge?: number;
             }[]
             }
 						activeTab={(value as string) || ''}
 						setActiveTab={(val: string) => {
-            setFilters((p: object) => ({ ...p, [name]: val }));
+							setFilters((p: object) => ({ ...p, [name]: val }));
 						}}
 						style={style as CSSProperties}
 						{...rest}

@@ -1,8 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode} from 'react';
 
-import RenderRibbon from '../../COEFinance/All_Invoices/PurchaseInvoiceView/RenderData/RenderRibbon';
 import {
 	ConfigType,
 	NestedObj,

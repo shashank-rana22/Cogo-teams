@@ -54,61 +54,61 @@ function QuotationCard(quotation: any, isBuyQuotation: boolean) {
 			</div>
 
 			{serviceCharge.map(
-            ({ service_type = '', id = '', line_items = [] }) => (
-	<div key={id}>
-		<div className={styles.mainContainer}>
-			<div className={styles.flex}>
-				<b
-					style={{
-                                    color    : '#333333',
-                                    fontSize : '20px',
-					}}
-				>
-					{service_type}
-				</b>
-			</div>
-		</div>
-		<div className={styles.headerHR} />
+				({ service_type = '', id = '', line_items = [] }) => (
+					<div key={id}>
+						<div className={styles.mainContainer}>
+							<div className={styles.flex}>
+								<b
+									style={{
+										color    : '#333333',
+										fontSize : '20px',
+									}}
+								>
+									{service_type}
+								</b>
+							</div>
+						</div>
+						<div className={styles.headerHR} />
 
-		{line_items.map((serviceItem: LineItems) => {
-                        const {
-                        name = '',
-                        code = '',
-                        tax_total_price_discounted:
+						{line_items.map((serviceItem: LineItems) => {
+							const {
+								name = '',
+								code = '',
+								tax_total_price_discounted:
                                     taxTotalPriceDiscounted = 0,
-                        tax_total_price: taxTotalPrice = 0,
-                        currency = '',
-                        actual_price: actualPrice = 0,
-                        actual_price_currency: actualPriceCurrency = '',
-                        } = serviceItem || {};
+								tax_total_price: taxTotalPrice = 0,
+								currency = '',
+								actual_price: actualPrice = 0,
+								actual_price_currency: actualPriceCurrency = '',
+							} = serviceItem || {};
 
-                        return (
-	<div
-		className={styles.mainContainer}
-		key={code}
-		style={{ padding: '10px 0px' }}
-	>
-		<div className={styles.flex}>{name}</div>
+							return (
+								<div
+									className={styles.mainContainer}
+									key={code}
+									style={{ padding: '10px 0px' }}
+								>
+									<div className={styles.flex}>{name}</div>
 
-		<div className={styles.customFlex}>
-			{showPrice(
-                                        taxTotalPriceDiscounted
+									<div className={styles.customFlex}>
+										{showPrice(
+											taxTotalPriceDiscounted
                                                 || taxTotalPrice,
-                                    currency || 'INR',
-			)}
-		</div>
+											currency || 'INR',
+										)}
+									</div>
 
-		<div className={styles.customFlex}>
-			{showPrice(
-                                        actualPrice,
-                                        actualPriceCurrency || 'INR',
-			)}
-		</div>
-	</div>
-                        );
-		})}
-	</div>
-            ),
+									<div className={styles.customFlex}>
+										{showPrice(
+											actualPrice,
+											actualPriceCurrency || 'INR',
+										)}
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				),
 			)}
 			<div className={styles.br} />
 
@@ -120,12 +120,12 @@ function QuotationCard(quotation: any, isBuyQuotation: boolean) {
 				<div className={styles.showPriceContainer}>
 					<div
 						style={{
-                        marginRight: '5px',
+							marginRight: '5px',
 						}}
 					>
 						{showPrice(
-                        netTotalPriceDiscounted,
-                        netTotalPriceCurrency || 'INR',
+							netTotalPriceDiscounted,
+							netTotalPriceCurrency || 'INR',
 						)}
 					</div>
 				</div>
@@ -133,8 +133,8 @@ function QuotationCard(quotation: any, isBuyQuotation: boolean) {
 				<div className={styles.showPriceContainer}>
 					<div>
 						{showPrice(
-                        actualTotalPrice,
-                        actualTotalPriceCurrency || 'INR',
+							actualTotalPrice,
+							actualTotalPriceCurrency || 'INR',
 						)}
 					</div>
 				</div>
