@@ -154,8 +154,8 @@
 }
 
 .search_container {
-	margin: 10px 0 0;
 	padding: 0 16px;
+	margin: 10px 0 0;
 }
 
 .input_search:global(.ui_input_container) {
@@ -206,13 +206,13 @@
 }
 
 .pin {
-	color: #4f4f4f;
 	overflow: hidden;
+	color: #4f4f4f;
 
 	svg {
 		width: 20px;
 		height: 20px;
-		margin: 0px;
+		margin: 0;
 	}
 
 	transition: transform 0.3s ease;
@@ -236,8 +236,8 @@
 .brand_logo {
 	display: flex;
 	justify-content: center;
-	margin: 10px 0 20px;
 	padding: 16px 0 0;
+	margin: 10px 0 20px;
 }
 
 .logo {
@@ -246,8 +246,8 @@
 }
 
 .bg_nav {
-	padding: 0 16px;
 	position: absolute;
+	padding: 0 16px;
 	top: 0;
 	left: 0;
 	width: var(--layout-navbar);
