@@ -4,4 +4,4 @@ declare module '*.module.css' {
 	export default classes;
 }
 
-declare module '@cogoport/artranslate/page-components/TranslateAR';
+declare module '@cogoport/translatear/page-components/TranslateAR';

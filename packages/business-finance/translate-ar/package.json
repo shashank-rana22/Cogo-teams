@@ -1,10 +1,8 @@
 {
-  "name": "@cogoport/artranslate",
+  "name": "@cogoport/translatear",
   "version": "0.1.0",
   "description": "Translate for Cogoport",
   "private": true,
-  "main": "./index.js",
-  "types": "./index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.274",
     "@cogoport/forms": "workspace:0.1.0",
