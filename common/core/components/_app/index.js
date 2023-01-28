@@ -19,6 +19,16 @@ if (process.env.NODE_ENV === 'production') {
 			Sentry.init({
 				dsn              : SENTRY_DSN,
 				tracesSampleRate : 1.0,
+				ignoreErrors     : [
+					'Non-Error promise rejection captured with keys: message',
+					'Non-Error promise rejection captured with keys: message',
+					'Request failed with status code 403',
+					'Non-Error promise rejection captured with keys: data, error, status',
+					'Request failed with status code 401',
+					"Cannot read properties of null (reading 'getBoundingClientRect')",
+					'AxiosError: Network Error',
+					'CanceledError: canceled',
+				],
 			});
 		} catch (err) {
 			// console.log(err);

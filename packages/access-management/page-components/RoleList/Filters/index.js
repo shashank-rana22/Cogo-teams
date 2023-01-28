@@ -15,7 +15,13 @@ function Filters({
 }) {
 	const partnerOptions = useGetAsyncOptions({
 		...asyncFieldsPartner(),
-		initialCall: false,
+		initialCall : false,
+		params      : {
+			filters: {
+				status       : 'active',
+				entity_types : stakeHolderType === 'channel_partner' ? [stakeHolderType] : undefined,
+			},
+		},
 	});
 
 	const modifiedControls = controls(filters?.role_functions || [], partnerOptions);
