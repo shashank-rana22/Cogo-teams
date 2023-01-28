@@ -89,7 +89,7 @@ const apis = {
 	cogolens: cogoLens,
 	shipment_cancellation_policies,
 	kam_payments_dashboard,
-	allocation,
+	...allocation,
 	bl_do_collection_release,
 	...saas,
 	...common_apis,
