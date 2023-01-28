@@ -25,7 +25,7 @@ function CostSheet() {
 	const [showFinal, setShowFinal] = useState(false);
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId: shipment_id, jobNumber, orgId } = query || {};
+	const { shipmentId: shipmentid, jobNumber, orgId } = query || {};
 	const {
 		selldata,
 		buydata,
@@ -41,11 +41,11 @@ function CostSheet() {
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { data: shipmentData } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
-	const { source, trade_type } = dataList;
+	const { source, tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
-	const { data: dataWallet, loading: loadingWallet } = useGetWallet(shipmentId);
-	const { agent_data, agent_role_data, amount, amount_currency } = dataWallet?.list?.[0] || {};
+	const { data: dataWallet } = useGetWallet(shipmentId);
+	const { agentData, agentRoleData, amount, amountCurrency } = dataWallet?.list?.[0] || {};
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
 	const { getData, getFinalData, FinalLoading, loading } = useUpdateJob({
@@ -67,8 +67,8 @@ function CostSheet() {
 					size="md"
 					themeType="secondary"
 					onClick={() => Router.push(
-          		'/business-finance/coe-finance/[active_tab]/[view]',
-          		'/business-finance/coe-finance/all_invoices/shipment-view' as never as null,
+						'/business-finance/coe-finance/[active_tab]/[view]',
+						'/business-finance/coe-finance/all_invoices/shipment-view' as never as null,
 					)}
 				>
 					Go Back
@@ -81,6 +81,7 @@ function CostSheet() {
 							<div
 								className={styles.link}
 								onClick={(e) => handleOperationalClose(e)}
+								role="presentation"
 							>
 								Undo
 							</div>
@@ -101,7 +102,7 @@ function CostSheet() {
 						themeType="primary"
 						disabled={!showButton || FinalLoading || showFinal}
 						onClick={() => {
-            	getFinalData();
+							getFinalData();
 						}}
 					>
 						{showFinal ? 'Financially Closed' : 'Close Financially'}
@@ -128,69 +129,70 @@ function CostSheet() {
 			<DiscountRect
 				heading="Discount Applied"
 				statvalue={
-          dataWallet?.list?.[0] && (
-	<div className={styles.discountData}>
-		<div className={styles.kamData}>KAM -</div>
-		<div>
-			{agent_data?.name}
-&nbsp;(
-			{agent_role_data?.name}
-			)
-		</div>
-		<div className={styles.kamData}>Wallet Usage - </div>
-		<div>
-			{amount_currency || 'USD'}
-			{' '}
-			{amount || 0}
-		</div>
-	</div>
-				)
-        }
+					dataWallet?.list?.[0]
+						? (
+							<div className={styles.discount_data}>
+								<div className={styles.kam_data}>KAM -</div>
+								<div>
+									{agentData?.name}
+								&nbsp;(
+									{agentRoleData?.name}
+									)
+								</div>
+								<div className={styles.kam_data}>Wallet Usage - </div>
+								<div>
+									{amountCurrency || 'USD'}
+									{' '}
+									{amount || 0}
+								</div>
+							</div>
+						) : null
+                }
 				statlabel="Revenue Desk - "
 			/>
 			<Accordion
 				type="text"
 				title={
-          (
+        (
 	<span className={styles.label}>
 		Documents
 		<span className={styles.icon}>
 			<IcADocumentTemplates />
 		</span>
 	</span>
-          ) as unknown as string
+        ) as unknown as string
         }
 				style={{
-        	backgroundColor : '#FFFFFF',
-        	borderRadius    : '8px',
-        	margin          : '25px 0px',
+					backgroundColor : '#FFFFFF',
+					borderRadius    : '8px',
+					margin          : '25px 0px',
 				}}
 			>
-				<Documents shipmentId={shipment_id} />
+				<Documents shipmentId={shipmentid} />
 			</Accordion>
 			<Accordion
 				type="text"
 				title={
-          (
+        (
 	<span className={styles.details}>
 		Shipment Details
-		<div className={styles.tagsContainer}>
+		<div className={styles.tags_container}>
 			<Pill color="blue">{sourceText}</Pill>
-			<Pill color="yellow">{startCase(trade_type)}</Pill>
+			<Pill color="yellow">{startCase(tradeType)}</Pill>
 		</div>
 	</span>
-          ) as unknown as string
+        ) as unknown as string
         }
 				style={{
-        	backgroundColor : '#FFFFFF',
-        	borderRadius    : '8px',
-        	margin          : '25px 0px',
+					backgroundColor : '#FFFFFF',
+					borderRadius    : '8px',
+					margin          : '25px 0px',
 				}}
 			>
 				<Details
 					orgId={orgId}
 					dataList={shipmentData?.list?.[0]}
-					shipmentId={shipment_id}
+					shipmentId={shipmentid}
 				/>
 			</Accordion>
 			<div className={styles.heading}>Cost Sheet</div>
@@ -221,7 +223,8 @@ function CostSheet() {
 						width="320px"
 						headingwidth="90px"
 					/>
-					{/* <div className={styles.warning}><span className={styles.icon}><IcMInfo height={20} width={20}/></span>Check Incidental Charge</div> */}
+					{/* <div className={styles.warning}><span className={styles.icon}><IcMInfo
+					height={20} width={20}/></span>Check Incidental Charge</div> */}
 				</div>
 			</div>
 			<div className={styles.flex}>
@@ -231,12 +234,12 @@ function CostSheet() {
 						value={getFormattedPrice(sellTotal, 'INR') || '-'}
 						loading={apiloading}
 					/>
-					<div className={styles.quotationAmount}>
+					<div className={styles.quotation_amount}>
 						Quotation Total :
-						<div className={styles.valueText}>
+						<div className={styles.value_text}>
 							{sellData?.totalQuotational
-              	? getFormattedPrice(sellData?.totalQuotational, 'INR')
-              	: '  --' || '-'}
+								? getFormattedPrice(sellData?.totalQuotational, 'INR')
+								: '  --' || '-'}
 						</div>
 					</div>
 					{apiloading
@@ -254,12 +257,12 @@ function CostSheet() {
 						value={getFormattedPrice(buyTotal, 'INR') || '-'}
 						loading={apiloading}
 					/>
-					<div className={styles.quotationAmount}>
+					<div className={styles.quotation_amount}>
 						Quotation Total :
-						<div className={styles.valueText}>
+						<div className={styles.value_text}>
 							{buyData?.totalQuotational
-              	? getFormattedPrice(buyData?.totalQuotational, 'INR')
-              	: '  --' || '-'}
+								? getFormattedPrice(buyData?.totalQuotational, 'INR')
+								: '  --' || '-'}
 						</div>
 					</div>
 					{apiloading

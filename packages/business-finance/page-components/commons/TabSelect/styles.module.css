@@ -10,7 +10,7 @@
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 }
 
-.focusedTab {
+.focused_tab {
 	padding: 4px;
 	margin: 0 8px;
 	font-weight: 500;

@@ -21,11 +21,11 @@ function Quotation({ data = {}, loading = false }) {
 					) : (
 						<QuotationCard quotation={sellQuotation} />
 					)}
-					<div className={styles.marginDiv} />
+					<div className={styles.margin_div} />
 				</div>
 
 				<div className={styles.flex}>
-					<div className={styles.marginDiv} />
+					<div className={styles.margin_div} />
 
 					{loading ? (
 						<Placeholder height="500px" width="90%" margin="4px 0px 0px 10px" />

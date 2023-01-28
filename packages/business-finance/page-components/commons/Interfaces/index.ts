@@ -158,9 +158,9 @@ export interface DetailInterface {
 	pickup:PickupDropInt,
 	drop:PickupDropInt,
 	origin_port?: PortDetailsInt,
-	origin_main_port?: PortDetailsInt,
+	originmainport?: PortDetailsInt,
 	destination_port?: PortDetailsInt,
-	destination_main_port?: PortDetailsInt
+	destinationmainport?: PortDetailsInt
 }
 export interface RemarksValInterface {
 	collectionPartyRemark:string,

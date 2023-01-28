@@ -1,5 +1,3 @@
-import styles from 'styles.module.css';
-
 const controls = [
 	{
 		name           : 'shipment_type',

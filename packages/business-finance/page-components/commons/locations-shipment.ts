@@ -1,6 +1,4 @@
-import { getByKey } from '@cogoport/utils';
-
-const routeInfo = {
+export const routeInfo = {
 	air_customs : { origin_port: 'airport', origin_pickup: 'location' },
 	fcl_customs : {
 		origin_pickup         : 'location',

@@ -2,7 +2,7 @@
 	display: flex;
 	width: var(--width);
 	padding: var(--padding);
-	margin-top: var(--marginTop);
+	margin-top: var(--margin-top);
 	background-color: #fff;
 	border-radius: 8px;
 }

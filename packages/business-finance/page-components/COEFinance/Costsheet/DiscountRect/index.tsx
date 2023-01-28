@@ -24,13 +24,11 @@ function DiscountRect({
 	return (
 		<div
 			className={styles.discountcontainer}
-			style={
-        {
-        	'--width'     : width,
-        	'--marginTop' : marginTop,
-        	'--padding'   : padding,
-        } as CSSProperties
-      }
+			style={{
+				'--width'      : width,
+				'--margin-top' : marginTop,
+				'--padding'    : padding,
+			} as CSSProperties}
 		>
 			<div
 				className={styles.label}

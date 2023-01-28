@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 
-const showOverflowingNumber = (value: number | string = '', maxLength:number) => {
+const showOverflowingNumber = (value: number | string, maxLength:number) => {
 	const newValue = String(value) || '';
 
 	if (String(newValue).length > maxLength) {

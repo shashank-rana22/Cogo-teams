@@ -18,14 +18,12 @@ function Line({
 	return (
 		<div
 			className={styles.line}
-			style={
-        {
-        	'--width'     : width,
-        	'--margin'    : margin,
-        	'--color'     : color,
-        	'--thickness' : thickness,
-        } as CSSProperties
-      }
+			style={{
+				'--width'     : width,
+				'--margin'    : margin,
+				'--color'     : color,
+				'--thickness' : thickness,
+			} as CSSProperties}
 		/>
 	);
 }

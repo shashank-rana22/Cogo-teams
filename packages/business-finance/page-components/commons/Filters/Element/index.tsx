@@ -3,7 +3,6 @@ import {
 	Modal,
 	Pill,
 	Select,
-	Tags,
 	MultiSelect,
 	Tooltip,
 	Datepicker,
@@ -71,13 +70,11 @@ function Element({
 				return (
 					<div className={styles.flex} style={style as CSSProperties}>
 						{rest?.options?.map((val) => (
-							<div style={{ margin: '5px' }} onClick={() => tagClick(val)}>
+							<div role="presentation" style={{ margin: '5px' }} onClick={() => tagClick(val)}>
 								<div
-									className={
-                    val.value === filters[name as keyof typeof filters]
-                    	? styles.active
-                    	: styles.normal
-                  }
+									className={val.value === filters[name as keyof typeof filters]
+										? styles.active
+										: styles.normal}
 								>
 									{val.label}
 								</div>
@@ -88,7 +85,7 @@ function Element({
 			case 'href':
 				return (
 					<div style={style as CSSProperties}>
-						<div className={styles.urlContainer} onClick={() => setShow(true)}>
+						<div role="presentation" className={styles.url_container} onClick={() => setShow(true)}>
 							{value as string}
 						</div>
 						{show && href && (
@@ -97,7 +94,7 @@ function Element({
 								show={show}
 								onClose={() => setShow(false)}
 							>
-								<CostView onClose={() => setShow(false)} shipment_id={href} />
+								<CostView shipment_id={href} />
 							</Modal>
 						)}
 					</div>
@@ -107,20 +104,21 @@ function Element({
 				return (
 					<div>
 						<div
-							className={styles.urlContainer}
+							className={styles.url_container}
 							style={style as CSSProperties}
 							onClick={() => window.open(url, '_blank')}
+							role="presentation"
 						>
 							{(value as string)!.length > 15 ? (
 								<Tooltip interactive placement="top" content={value as string}>
 									<div
-										className={styles.textDiv}
+										className={styles.text_div}
 									>
 										{`${(value as string)!.substring(0, 15)}...`}
 									</div>
 								</Tooltip>
 							) : (
-								<div className={styles.textDiv}>{value as string}</div>
+								<div className={styles.text_div}>{value as string}</div>
 							)}
 						</div>
 					</div>
@@ -145,11 +143,9 @@ function Element({
 				return (
 					<div
 						className={styles.select_container}
-						style={
-              {
-              	'--width': selectWidth || '200px',
-              } as CSSProperties
-            }
+						style={{
+							'--width': selectWidth || '200px',
+						} as CSSProperties}
 					>
 						<Select
 							value={value as string}
@@ -164,11 +160,9 @@ function Element({
 				return (
 					<div
 						className={styles.select_container}
-						style={
-              {
-              	'--width': selectWidth || '200px',
-              } as CSSProperties
-            }
+						style={{
+							'--width': selectWidth || '200px',
+						} as CSSProperties}
 					>
 						<MultiSelect
 							value={value as string[]}
@@ -212,25 +206,23 @@ function Element({
 				return (
 					<div className={className} {...rest}>
 						{freightMapping[value as keyof typeof freightMapping]?.name.replace(
-            	'_',
-            	'',
+							'_',
+							'',
 						) || '-'}
 					</div>
 				);
 			case 'segmented':
 				return (
 					<SegmentedControl
-						options={
-              rest?.options as {
-              	label: string;
-              	value: string;
-              	icon?: JSX.Element;
-              	badge?: number;
-              }[]
-            }
+						options={rest?.options as {
+							label: string;
+							value: string;
+							icon?: JSX.Element;
+							badge?: number;
+						}[]}
 						activeTab={(value as string) || ''}
 						setActiveTab={(val: string) => {
-            	setFilters((p: object) => ({ ...p, [name]: val }));
+							setFilters((p: object) => ({ ...p, [name]: val }));
 						}}
 						style={style as CSSProperties}
 						{...rest}

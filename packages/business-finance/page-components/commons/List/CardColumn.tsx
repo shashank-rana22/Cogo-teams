@@ -33,7 +33,7 @@ function CardColumn({
 		<section style={{ ...itemStyles, position: 'relative' }}>
 			<div
 				className={`${styles.row} ${clickable ? styles.clickable : ''} ${
-					isMobile ? styles.isMobile : ''
+					isMobile ? styles.is_mobile : ''
 				}`}
 			>
 				{fields.map((field) => {
@@ -41,14 +41,12 @@ function CardColumn({
 					return (
 						<div
 							className={`${styles.col} ${field.className || ''} ${
-								isMobile ? styles.isMobile : ''
+								isMobile ? styles.is_mobile : ''
 							}`}
-							style={
-                {
-                	'--span': field.span || 1,
-                	...itemStyle,
-                } as React.CSSProperties
-              }
+							style={{
+								'--span': field.span || 1,
+								...itemStyle,
+							} as React.CSSProperties}
 						>
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>

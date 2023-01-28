@@ -4,7 +4,7 @@ import { FunctionObjects, FieldType, GenericObject } from '../Interfaces/index';
 
 const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
 	const newFunctions:any = {
-		renderTag: (itemData:GenericObject, field:FieldType) => (<div>tag</div>),
+		renderName: (itemData: GenericObject, field: FieldType) => (<div>{itemData[field.key]}</div>),
 		...(functions || {}),
 
 	};

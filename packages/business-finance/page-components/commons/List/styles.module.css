@@ -25,11 +25,11 @@
 }
 
 @media screen and (max-width: 768px) {
-	.row.isMobile {
+	.row.is_mobile {
 		flex-flow: row wrap;
 	}
 
-	.col.isMobile {
+	.col.is_mobile {
 		flex: 0 0 50%;
 		flex-direction: column;
 	}

@@ -40,7 +40,7 @@ export function CardBody({ charge, type }: Props) {
 	return charge ? (
 		<div
 			className={`${showFullDetails ? styles.card : styles.custompadding} ${
-      	lineItems.length < 2 ? styles.padding : ''
+				lineItems.length < 2 ? styles.padding : ''
 			}`}
 			style={{ '--bordercolor': borderColor } as React.CSSProperties}
 		>
@@ -64,72 +64,70 @@ export function CardBody({ charge, type }: Props) {
 					Actual
 				</div>
 			</div>
-			{(showFullDetails ? lineItems : lineItems.slice(0, 2)).map(
-      	(lineItem: GenericObject) => {
-      		const value = lineItem?.priceInInrActual - lineItem?.priceInInrQuotation;
-      		let className = styles.neutral;
-      		let iconClassName = styles.neutralIcon;
-      		if (value > 0 && type === 'sell') {
-      			className = styles.positive;
-      			iconClassName = styles.profiticon;
-      		} else if (value < 0 && type === 'sell') {
-      			className = styles.negative;
-      			iconClassName = styles.negativeIcon;
-      		} else if (value > 0 && type === 'buy') {
-      			className = styles.negative;
-      			iconClassName = styles.negativeIcon;
-      		} else if (value < 0 && type === 'buy') {
-      			className = styles.positive;
-      			iconClassName = styles.profiticon;
-      		}
-      		return (
-	<div className={styles.values}>
-		<div
-			className={`${styles.coloredlabel} ${
-                	lineItem?.sameCurrencyDataPresent && className
-			}`}
-			style={{ '--span': 2 } as React.CSSProperties}
-		>
-			{lineItem.nameQuotation || lineItem.nameActual}
-			<Tooltip
-				content={ToolTipContent(
-                  	lineItem?.quantityQuotation,
-                  	lineItem?.quantityActual,
-				)}
-				placement="right"
-			>
-				<div className={styles.tooltip}>
-					<IcMInfo />
-				</div>
-			</Tooltip>
-		</div>
-		<div
-			className={styles.flex}
-			style={{ '--span': 1 } as React.CSSProperties}
-		>
-			{getFormattedPrice(
-                	lineItem?.priceQuotation,
-                	lineItem?.currencyQuotation,
-			) || '-'}
-		</div>
-		<div
-			className={styles.flex}
-			style={{ '--span': 1 } as React.CSSProperties}
-		>
-			{getFormattedPrice(
-                	lineItem?.priceActual,
-                	lineItem?.currencyActual,
-			) || '-'}
-			{lineItem?.sameCurrencyDataPresent && (
-				<span className={iconClassName}>
-					<IcMArrowNext height={15} width={15} />
-				</span>
-			)}
-		</div>
-	</div>
-      		);
-      	},
-			)}
+			{(showFullDetails ? lineItems : lineItems.slice(0, 2)).map((lineItem: GenericObject) => {
+				const value = Number(lineItem?.priceInInrActual) - Number(lineItem?.priceInInrQuotation);
+				let className = styles.neutral;
+				let iconClassName = styles.neutral_icon;
+				if (value > 0 && type === 'sell') {
+					className = styles.positive;
+					iconClassName = styles.profiticon;
+				} else if (value < 0 && type === 'sell') {
+					className = styles.negative;
+					iconClassName = styles.negative_icon;
+				} else if (value > 0 && type === 'buy') {
+					className = styles.negative;
+					iconClassName = styles.negative_icon;
+				} else if (value < 0 && type === 'buy') {
+					className = styles.positive;
+					iconClassName = styles.profiticon;
+				}
+				return (
+					<div className={styles.values}>
+						<div
+							className={`${styles.coloredlabel} ${
+								lineItem?.sameCurrencyDataPresent && className
+							}`}
+							style={{ '--span': 2 } as React.CSSProperties}
+						>
+							{lineItem.nameQuotation || lineItem.nameActual}
+							<Tooltip
+								content={ToolTipContent(
+									lineItem?.quantityQuotation,
+									lineItem?.quantityActual,
+								)}
+								placement="right"
+							>
+								<div className={styles.tooltip}>
+									<IcMInfo />
+								</div>
+							</Tooltip>
+						</div>
+						<div
+							className={styles.flex}
+							style={{ '--span': 1 } as React.CSSProperties}
+						>
+							{getFormattedPrice(
+								lineItem?.priceQuotation,
+								lineItem?.currencyQuotation,
+							) || '-'}
+						</div>
+						<div
+							className={styles.flex}
+							style={{ '--span': 1 } as React.CSSProperties}
+						>
+							{getFormattedPrice(
+								lineItem?.priceActual,
+								lineItem?.currencyActual,
+							) || '-'}
+							{lineItem?.sameCurrencyDataPresent && (
+								<span className={iconClassName}>
+									<IcMArrowNext height={15} width={15} />
+								</span>
+							)}
+						</div>
+					</div>
+				);
+			})}
 			{(showFullDetails || lineItems.length < 2) && (
 				<div className={styles.total}>
 					<div
@@ -141,16 +139,16 @@ export function CardBody({ charge, type }: Props) {
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalQuotational
-            	? getFormattedPrice(charge?.serviceTotalQuotational, 'INR')
-            	: '-'}
+							? getFormattedPrice(charge?.serviceTotalQuotational, 'INR')
+							: '-'}
 					</div>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalActual
-            	? getFormattedPrice(charge?.serviceTotalActual, 'INR')
-            	: '-'}
+							? getFormattedPrice(charge?.serviceTotalActual, 'INR')
+							: '-'}
 					</div>
 				</div>
 			)}

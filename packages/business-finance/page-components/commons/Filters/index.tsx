@@ -48,7 +48,7 @@ function Filter({
 			<div
 				className={styles.col}
 				style={{
-					'--width': `${(singlecontrol.span || 1) * (100 / 12)}%`,
+					'--width': `${(span || 1) * (100 / 12)}%`,
 				} as React.CSSProperties}
 			>
 				<div>
@@ -66,7 +66,7 @@ function Filter({
 				if (groupBy) {
 					return (
 						<>
-							{showGroupName && <div className={styles.groupHead}>{name}</div>}
+							{showGroupName && <div className={styles.group_head}>{name}</div>}
 							<div className={styles.col} style={{ width: `${(span || 12) * (100 / 12)}%` }}>
 								{(groupBy).map((each) => (getElement(each)))}
 							</div>

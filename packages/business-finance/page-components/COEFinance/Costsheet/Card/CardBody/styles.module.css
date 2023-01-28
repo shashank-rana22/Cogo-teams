@@ -81,12 +81,12 @@
 	transform: translate(10px, 2px) rotate(-45deg);
 }
 
-.negativeIcon {
+.negative_icon {
 	color: #ed3726;
 	transform: translateX(10px) rotate(45deg);
 }
 
-.neutralIcon {
+.neutral_icon {
 	display: none;
 }
 

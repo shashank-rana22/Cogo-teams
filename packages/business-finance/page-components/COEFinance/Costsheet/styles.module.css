@@ -55,11 +55,6 @@
 	}
 }
 
-.label {
-	font-size: 14px;
-	font-weight: 500;
-}
-
 .shipmentag {
 	padding: 4px !important;
 	margin-left: 20px;
@@ -74,10 +69,6 @@
 	align-items: center;
 	font-size: 14px;
 	font-weight: 500;
-}
-
-.icon {
-	margin-left: 5px;
 }
 
 .displayflex {
@@ -119,7 +110,7 @@
 	font-weight: 500;
 }
 
-.kamData {
+.kam_data {
 	display: flex;
 	font-weight: 700;
 }
@@ -133,12 +124,12 @@
 	transform: translateX(10px) rotate(-45deg);
 }
 
-.discountData {
+.discount_data {
 	display: flex;
 	gap: 10px;
 }
 
-.tagsContainer {
+.tags_container {
 	display: flex;
 	gap: 24px;
 }
@@ -152,7 +143,7 @@
 	margin-left: -15px;
 }
 
-.quotationAmount {
+.quotation_amount {
 	display: flex;
 	justify-content: flex-end;
 	padding: 4px;
@@ -163,7 +154,7 @@
 	border-radius: 4px;
 }
 
-.valueText {
+.value_text {
 	padding: 1px;
 	padding-left: 4px;
 }
