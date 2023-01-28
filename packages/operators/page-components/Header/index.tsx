@@ -9,7 +9,7 @@ function Header({ setShow, searchValue, setSearchValue }) {
 		(value) => {
 			setSearchValue(value);
 		},
-		[],
+		[setSearchValue],
 	);
 	return (
 		<div className={styles.container}>
