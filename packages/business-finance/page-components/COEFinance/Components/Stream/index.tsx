@@ -20,32 +20,32 @@ function MyResponsiveLine({ data }) {
 			enableSlices={false}
 			crosshairType="cross"
 			yScale={{
-            	type    : 'linear',
-            	min     : 'auto',
-            	max     : 'auto',
-            	stacked : true,
-            	reverse : false,
+            type    : 'linear',
+            min     : 'auto',
+            max     : 'auto',
+            stacked : true,
+            reverse : false,
 			}}
 			yFormat=" >-.2f"
 			axisTop={null}
 			axisRight={null}
 			axisBottom={{
             	// orient: 'bottom',
-            	tickSize       : 5,
-            	tickPadding    : 5,
-            	tickRotation   : 0,
-            	legend         : 'Dates',
-            	legendOffset   : 36,
-            	legendPosition : 'middle',
+            tickSize       : 5,
+            tickPadding    : 5,
+            tickRotation   : 0,
+            legend         : 'Dates',
+            legendOffset   : 36,
+            legendPosition : 'middle',
 			}}
 			axisLeft={{
             	// orient: 'left',
-            	tickSize       : 5,
-            	tickPadding    : 5,
-            	tickRotation   : 0,
-            	legend         : 'Rates',
-            	legendOffset   : -40,
-            	legendPosition : 'middle',
+            tickSize       : 5,
+            tickPadding    : 5,
+            tickRotation   : 0,
+            legend         : 'Rates',
+            legendOffset   : -40,
+            legendPosition : 'middle',
 			}}
 			pointSize={10}
 			pointColor={{ theme: 'background' }}
@@ -54,30 +54,30 @@ function MyResponsiveLine({ data }) {
 			pointLabelYOffset={-12}
 			useMesh
 			legends={[
-            	{
-            		anchor            : 'bottom-right',
-            		direction         : 'column',
-            		justify           : false,
-            		translateX        : 60,
-            		translateY        : -280,
-            		itemsSpacing      : 0,
-            		itemDirection     : 'left-to-right',
-            		itemWidth         : 80,
-            		itemHeight        : 20,
-            		itemOpacity       : 0.75,
-            		symbolSize        : 12,
-            		symbolShape       : 'circle',
-            		symbolBorderColor : 'rgba(0, 0, 0, .5)',
-            		effects           : [
-            			{
-            				on    : 'hover',
-            				style : {
-            					itemBackground : 'rgba(0, 0, 0, .03)',
-            					itemOpacity    : 1,
+            {
+            anchor            : 'bottom-right',
+            direction         : 'column',
+            justify           : false,
+            translateX        : 60,
+            translateY        : -280,
+            itemsSpacing      : 0,
+            itemDirection     : 'left-to-right',
+            itemWidth         : 80,
+            itemHeight        : 20,
+            itemOpacity       : 0.75,
+            symbolSize        : 12,
+            symbolShape       : 'circle',
+            symbolBorderColor : 'rgba(0, 0, 0, .5)',
+            effects           : [
+            {
+            on    : 'hover',
+            style : {
+            itemBackground : 'rgba(0, 0, 0, .03)',
+            itemOpacity    : 1,
 							},
-            			},
-            		],
-            	},
+            },
+            ],
+            },
 			]}
 		/>
 	);
