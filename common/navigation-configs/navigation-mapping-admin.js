@@ -858,8 +858,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance_vietnam-account_receivables_translate',
 				title         : 'AR',
-				href          : '/business-finance/translate-account-receivables/[active_tab]',
-				as            : '/business-finance/translate-account-receivables/pending',
+				href          : '/v2/business-finance/translate-account-receivables/[active_tab]',
+				as            : '/v2/business-finance/translate-account-receivables/pending',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
