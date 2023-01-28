@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	@media (max-width: 768px) {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 50px;
+	}
+}
+
+.heading_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-flow: column wrap;
+		align-items: flex-start;
+	}
+}
