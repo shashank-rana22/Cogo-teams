@@ -1,4 +1,4 @@
-export { default as AllocationConfigurations } from './page-components/AllocationConfigurations';
+export { default as CoreAllocationEngine } from './page-components/CoreAllocationEngine';
 
 // export { default as AllocationQuotas } from './components/AllocationQuotas';
 
