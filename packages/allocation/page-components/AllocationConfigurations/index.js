@@ -1,5 +1,5 @@
 function AllocationConfigurations() {
-	return "Allocation Configurations";
+	return 'Allocation Configurations';
 }
 
 export default AllocationConfigurations;
