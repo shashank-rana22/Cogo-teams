@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 
-const useSupplierHistory = ({ data }) => {
+const useSupplierHistory = () => {
 	const { query } = useRouter();
 	const { orgId } = query;
 

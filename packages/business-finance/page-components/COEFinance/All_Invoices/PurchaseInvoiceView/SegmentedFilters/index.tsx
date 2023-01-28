@@ -6,8 +6,8 @@ import Filter from '../../../../commons/Filters';
 import { GenericObject } from '../../../../commons/Interfaces/index';
 import SegmentedControl from '../../../../commons/SegmentedControl/index';
 import FilterModal from '../../../Components/FilterModal/index';
-import FILTERS_DATA from '../../../constants/purchase-list-filters';
-import FILTERS_URGENT_DATA from '../../../constants/purchase-list-segments';
+import filtersData from '../../../constants/purchase-list-filters';
+import filtersUrgentData from '../../../constants/purchase-list-segments';
 import usePurchaseViewStats from '../../../hook/getPurchaseViewStats';
 
 import controls from './controls';
@@ -37,7 +37,7 @@ function SegmentedFilters({
 			<div className={styled.segment}>
 				<div className={styled.filterData}>
 					<SegmentedControl
-						options={FILTERS_DATA(statsData)}
+						options={filtersData(statsData)}
 						activeTab={currentTab}
 						setActiveTab={setCurrentTab}
 						color="#ED3726"
@@ -47,7 +47,7 @@ function SegmentedFilters({
 
 				<div className={styled.filterDataUrgent}>
 					<SegmentedControl
-						options={FILTERS_URGENT_DATA(statsData)}
+						options={filtersUrgentData(statsData)}
 						activeTab={currentTab}
 						setActiveTab={setCurrentTab}
 						color="#ED3726"

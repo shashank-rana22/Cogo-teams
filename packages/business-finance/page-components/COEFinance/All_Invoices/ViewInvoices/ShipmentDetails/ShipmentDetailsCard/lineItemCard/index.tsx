@@ -1,4 +1,12 @@
-import { Button, Pill, Tooltip, Popover, Modal, Checkbox, Textarea } from '@cogoport/components';
+import {
+	Button,
+	Pill,
+	Tooltip,
+	Popover,
+	Modal,
+	Checkbox,
+	Textarea,
+} from '@cogoport/components';
 import {
 	IcCFtick,
 	IcMOverflowDot,
@@ -141,7 +149,7 @@ function LineItemCard({
 							<div
 								className={styles.popoverRejected}
 								onClick={() => {
-                  	openRejectModal(item);
+                	openRejectModal(item);
 								}}
 							>
 								{popover[item?.id as keyof typeof popover] ? (
@@ -178,7 +186,7 @@ function LineItemCard({
 						content={(
 							<div className={styles.formStyle}>
 								As filled by SO2 In The COGO Invoice
-		</div>
+							</div>
 						)}
 					>
 						<div className={styles.tooltip}>
@@ -243,10 +251,10 @@ function LineItemCard({
 								{' '}
 								{bill?.subTotal ? (
 									<>
-									{startCase(converter.toWords(bill?.grandTotal))}
-									{' '}
-									only
-</>
+										{startCase(converter.toWords(bill?.grandTotal))}
+										{' '}
+										only
+									</>
 								) : null}
 							</div>
 						</div>

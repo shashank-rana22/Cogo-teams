@@ -90,8 +90,8 @@ function TimeLineItem({
 								</>
 							) : (
 								<div
-								className={`${styles.FilledCircle} ${styles[className]}`}
-							/>
+									className={`${styles.FilledCircle} ${styles[className]}`}
+								/>
 							)}
 						</div>
 					</Tooltip>

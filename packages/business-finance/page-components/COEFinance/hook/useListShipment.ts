@@ -13,9 +13,9 @@ const useListShipment = (jobNumber:string | undefined) => {
 		try {
 			await trigger({
 				params: {
-					  filters: {
+					filters: {
 						serial_id: jobNumber,
-					  },
+					},
 				},
 			});
 		} catch (error) {
@@ -24,7 +24,7 @@ const useListShipment = (jobNumber:string | undefined) => {
 	};
 
 	useEffect(() => {
-	      getData();
+		getData();
 	}, [jobNumber]);
 
 	return {

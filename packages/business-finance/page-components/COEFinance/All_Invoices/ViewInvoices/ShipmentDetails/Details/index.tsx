@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -9,11 +10,11 @@ import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
 
 interface Details {
-	orgId:string,
-	dataList:DetailInterface,
-	shipmentId:string,
+	orgId: string;
+	dataList: DetailInterface;
+	shipmentId: string;
 }
-function Details({ orgId, dataList, shipmentId }:Details) {
+function Details({ orgId, dataList, shipmentId }: Details) {
 	const { importer_exporter, shipment_type } = dataList || {};
 	const Router = useRouter();
 
@@ -21,7 +22,18 @@ function Details({ orgId, dataList, shipmentId }:Details) {
 		<div>
 			<div className={styles.container}>
 				<div className={styles.subDiv}>
-					<div className={styles.name}>{importer_exporter?.business_name || '-'}</div>
+					<Tooltip
+						interactive
+						content={(
+							<div className={styles.name}>
+								{importer_exporter?.business_name || '-'}
+							</div>
+						)}
+					>
+						<div className={styles.orgnizationName}>
+							{importer_exporter?.business_name || '-'}
+						</div>
+					</Tooltip>
 				</div>
 
 				<div className={styles.flex}>
@@ -31,7 +43,10 @@ function Details({ orgId, dataList, shipmentId }:Details) {
 				<div className={styles.tags}>
 					<CargoDetailPills detail={dataList} />
 				</div>
-				<a className={styles.flexDiv} onClick={() => Router.push(`/shipments/${orgId}`)}>
+				<a
+					className={styles.flexDiv}
+					onClick={() => Router.push(`/shipments/${orgId}`)}
+				>
 					Go to SID →
 				</a>
 			</div>

@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest, useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
 import { GenericObject } from '../../commons/Interfaces';
 
@@ -16,18 +15,18 @@ interface Params {
 const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFinal }:Params) => {
 	const { shipmentId, jobNumber, jobSource, jobType } = query || {};
 
-	const { user_data } = useSelector(({ profile }:any) => ({
+	const { user_data:userData } = useSelector(({ profile }:any) => ({
 		user_data: profile?.user || {},
 	}));
 
-	const [{ data:CloseOperationally, loading }, trigger] = useRequest(
+	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_shipment',
 			method : 'post',
 		},
 	);
 
-	const [{ data:FinalDataClose, loading:FinalLoading }, FinalTrigger] = useRequestBf(
+	const [{ loading:FinalLoading }, FinalTrigger] = useRequestBf(
 		{
 			url    : '/common/job/close-financially',
 			method : 'post',
@@ -42,7 +41,7 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 					jobNumber,
 					jobType,
 					jobSource,
-					updatedBy: user_data?.user?.id,
+					updatedBy: userData?.user?.id,
 				},
 			});
 			Toast.success('Close successfully...');

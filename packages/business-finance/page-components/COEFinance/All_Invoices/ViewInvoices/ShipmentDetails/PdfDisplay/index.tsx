@@ -13,6 +13,7 @@ function PdfDisplay({ data }: Props) {
 				type="application/pdf"
 				height="850px"
 				width="100%"
+				aria-label="Document"
 			/>
 		</div>
 	);

@@ -6,7 +6,7 @@ import { urgencyOptions } from '../controls';
 
 import styles from './styles.module.css';
 
-interface AddUrgencyTag {
+interface AddUrgencyTagInterface {
 	billId?: string;
 	remark?: string;
 	showAddTag?: boolean;
@@ -29,8 +29,7 @@ function AddUrgencyTag({
 	setRemark,
 	setTagValue,
 	getBillRefetch = () => {},
-	collectionPartyId = '',
-}: AddUrgencyTag) {
+}: AddUrgencyTagInterface) {
 	if (serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
 	}
@@ -44,7 +43,6 @@ function AddUrgencyTag({
 		onClose,
 		billId,
 		tagValue,
-		collectionPartyId,
 		remark,
 	});
 

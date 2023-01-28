@@ -1,6 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import SegmentedControl from '../commons/SegmentedControl';
 
@@ -13,7 +13,7 @@ import lineData from './Components/Stream/data';
 import styles from './styles.module.css';
 
 function CoeFinance() {
-	const { push, query } = useRouter();
+	const { query } = useRouter();
 	const [currentTab, setCurrentTab] = useState('');
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
@@ -86,26 +86,26 @@ function CoeFinance() {
 								<div className={styles.flex}>
 									<div className={styles.heading}>Job Related Statistics</div>
 									<SegmentedControl
-									options={OPTIONS}
-									activeTab={currentTab}
-									setActiveTab={setCurrentTab}
-									color="#ED3726"
-									background="#FFFAEB"
-								/>
+										options={OPTIONS}
+										activeTab={currentTab}
+										setActiveTab={setCurrentTab}
+										color="#ED3726"
+										background="#FFFAEB"
+									/>
 								</div>
 								<div className={styles.totalstats}>
 									<div>
-									<div className={styles.stat}>25</div>
-									<div className={styles.month}>Current Month - March</div>
-								</div>
+										<div className={styles.stat}>25</div>
+										<div className={styles.month}>Current Month - March</div>
+									</div>
 									<div>
-									<div className={styles.stat}>25</div>
-									<div className={styles.month}>February</div>
-								</div>
+										<div className={styles.stat}>25</div>
+										<div className={styles.month}>February</div>
+									</div>
 									<div>
-									<div className={styles.stat}>25</div>
-									<div className={styles.month}>January</div>
-								</div>
+										<div className={styles.stat}>25</div>
+										<div className={styles.month}>January</div>
+									</div>
 								</div>
 							</div>
 							<div

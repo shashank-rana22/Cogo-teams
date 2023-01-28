@@ -10,18 +10,21 @@ import { formatDate } from '../../../../../../commons/utils/formatDate';
 import styles from './styles.module.css';
 
 interface Props {
-	data: DetailInterface,
-	showDate?:boolean
+	data: DetailInterface;
+	showDate?: boolean;
 }
 
-function PortDetails({ data, showDate = false }:Props) {
+function PortDetails({ data, showDate = false }: Props) {
 	if (isEmpty(data)) {
 		return null;
 	}
 
-	const { origin_main_port = '', destination_main_port = '' } = data || {};
+	const {
+		origin_main_port: originMainPort = '',
+		destination_main_port: destinationMainPort = '',
+	} = data || {};
 
-	const { origin, destination } =		getLocations({ ...data, search_type: data?.shipment_type }) || {};
+	const { origin, destination } = getLocations({ ...data, search_type: data?.shipment_type }) || {};
 
 	const serviceIcon = GetServiceInfo(data?.shipment_type);
 
@@ -38,7 +41,7 @@ function PortDetails({ data, showDate = false }:Props) {
 					<div style={{ height: '16px' }} />
 				)}
 
-				<div className={styles.Country}>{location?.country?.name}</div>
+				<div className={styles.Country}>{location?.country}</div>
 			</div>
 
 			<div className={styles.Value}>{location?.name}</div>
@@ -63,7 +66,9 @@ function PortDetails({ data, showDate = false }:Props) {
 							<div className={styles.Text}>Location : </div>
 						</div>
 
-						<div className={styles.FlexRowOrigin}>{handleLocationDetails(origin, {})}</div>
+						<div className={styles.FlexRowOrigin}>
+							{handleLocationDetails(origin, {})}
+						</div>
 					</>
 				);
 			}
@@ -74,7 +79,9 @@ function PortDetails({ data, showDate = false }:Props) {
 						<div className={styles.Text}>custom clearance : </div>
 					</div>
 
-					<div className={styles.FlexRowOrigin}>{handleLocationDetails(origin, {})}</div>
+					<div className={styles.FlexRowOrigin}>
+						{handleLocationDetails(origin, {})}
+					</div>
 				</>
 			);
 		}
@@ -82,7 +89,7 @@ function PortDetails({ data, showDate = false }:Props) {
 			<div className={styles.LocationContainer}>
 				<div className={styles.PortPairContainer}>
 					<div className={styles.FlexRowOrigin}>
-						{handleLocationDetails(origin, origin_main_port)}
+						{handleLocationDetails(origin, originMainPort)}
 						{showDate ? (
 							<div className={styles.DateContainer}>
 								ETD -
@@ -96,7 +103,7 @@ function PortDetails({ data, showDate = false }:Props) {
 					</div>
 
 					<div className={styles.FlexRowDest}>
-						{handleLocationDetails(destination, destination_main_port)}
+						{handleLocationDetails(destination, destinationMainPort)}
 						{showDate ? (
 							<div className={styles.DateContainer}>
 								ETA -
@@ -116,7 +123,10 @@ function PortDetails({ data, showDate = false }:Props) {
 			</div>
 		);
 	};
-	const shipmentTypeName = data?.shipment_type?.split('_')?.join(' ')?.toUpperCase();
+	const shipmentTypeName = data?.shipment_type
+		?.split('_')
+		?.join(' ')
+		?.toUpperCase();
 	return (
 		<div className={styles.Container}>
 			<div className={styles.IconAndService}>

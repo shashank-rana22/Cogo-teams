@@ -3,12 +3,10 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-interface useGetVarianceInterface {
+interface UseGetVarianceInterface {
 	collectionPartyId?:string
 }
-const useGetVariance = ({ collectionPartyId }:useGetVarianceInterface) => {
-	const scope = useSelector(({ general }:any) => general.scope);
-
+const useGetVariance = ({ collectionPartyId }:UseGetVarianceInterface) => {
 	const [{ data: varianceFullData, loading }, trigger] = useRequest(
 		{
 			url    : '/get_collection_party_variance',

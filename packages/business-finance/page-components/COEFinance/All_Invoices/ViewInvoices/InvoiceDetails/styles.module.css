@@ -1,99 +1,99 @@
 .smallHr {
-	width: 5%;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
+  width: 5%;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
-	display: flex;
-	align-items: center;
-	padding: 8px 16px;
-	margin: 12px 0;
-	background: #fff;
-	border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  margin: 12px 0;
+  background: #fff;
+  border-radius: 8px;
 }
 
 .verticalSmallHr {
-	width: 2px;
-	height: 36px;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
+  width: 2px;
+  height: 36px;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
 }
 
 .details {
-	font-size: 18px;
-	font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .heading {
-	display: flex;
-	gap: 6px;
+  display: flex;
+  gap: 6px;
 }
 
 .cardField {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardFieldFirst {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 27%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27%;
 }
 
 .cardFieldSecond {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 46%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46%;
 }
 
 .cardFieldThird {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 26%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26%;
 }
 
 .amount {
-	font-weight: 700;
-	color: #f68b21;
+  font-weight: 700;
+  color: #f68b21;
 }
 
 .tag {
-	font-weight: 600;
-	color: red;
+  font-weight: 600;
+  color: red;
 }
 
 .flexdiv {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .buttonContainer {
-	display: flex;
-	gap: 4px;
-	justify-content: space-between;
-	width: 210px;
-	margin-left: 10px;
+  display: flex;
+  gap: 4px;
+  justify-content: space-between;
+  width: 210px;
+  margin-left: 10px;
 }
 
 .remarks {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 .tags {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	justify-content: center;
-	width: fit-content;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
 }

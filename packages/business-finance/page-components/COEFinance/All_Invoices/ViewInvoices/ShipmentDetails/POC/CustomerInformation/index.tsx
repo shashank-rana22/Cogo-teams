@@ -43,7 +43,6 @@ function CustomerInformation({
 		<div className={styles.subContainer}>
 			Total Outstanding -
 			<span style={{ fontWeight: 600 }}>
-				{customerOutstandingAmount}
 				{getFormattedPrice(customerOutstandingAmount, 'INR')}
 			</span>
 		</div>
@@ -51,7 +50,6 @@ function CustomerInformation({
 		<div className={styles.subContainer}>
 			On Account Payments -
 			<span style={{ fontWeight: 600 }}>
-				{customerOutstandingAmountOnSid}
 				{getFormattedPrice(customerOutstandingAmountOnSid, 'INR')}
 			</span>
 		</div>

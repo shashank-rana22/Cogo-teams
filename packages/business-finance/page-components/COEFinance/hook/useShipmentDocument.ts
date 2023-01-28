@@ -16,7 +16,7 @@ const useShipmentDocument = (shipmentId) => {
 				created_by_user_details_required : true,
 				filters                          : {
 					shipment_id: shipmentId,
-				  },
+				},
 			},
 		});
 	}, [shipmentId]);

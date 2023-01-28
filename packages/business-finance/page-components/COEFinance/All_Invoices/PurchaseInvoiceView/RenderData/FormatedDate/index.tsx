@@ -8,7 +8,7 @@ import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
 
 import styled from './styles.module.css';
 
-interface itemProps {
+interface ItemProps {
 	createdDate: Date;
 	billDate: Date;
 	dueDate: Date;
@@ -17,13 +17,13 @@ interface itemProps {
 	grandTotal?: number;
 }
 interface Props {
-	item: itemProps;
-	field:{
+	item: ItemProps;
+	field: {
 		key: string;
-		topKey:object,
-		  bottomKey:object,
-		  label :string
-	}
+		topKey: object;
+		bottomKey: object;
+		label: string;
+	};
 }
 
 // item?.createdDate,
@@ -33,20 +33,10 @@ interface Props {
 
 function FormatedDate({ item, field }: Props) {
 	const { topKey = {}, bottomKey = {} } = field;
-	const getCreatedDate = format(
-		item?.createdDate,
-		'dd/MMM/yyyy',
-		null,
-		false,
-	);
-	const getCreatedDateTime = format(
-		item?.createdDate,
-		'h:mm:aa',
-		null,
-		false,
-	);
-	const getBillDate = format(item?.billDate, 'dd/MMM/yyyy', null, false);
-	const getDueDate = format(item?.dueDate, 'dd/MMM/yyyy', null, false);
+	const getCreatedDate = format(item?.createdDate, 'dd/MMM/yyyy', {}, false);
+	const getCreatedDateTime = format(item?.createdDate, 'h:mm:aa', {}, false);
+	const getBillDate = format(item?.billDate, 'dd/MMM/yyyy', {}, false);
+	const getDueDate = format(item?.dueDate, 'dd/MMM/yyyy', {}, false);
 
 	const content = (
 		<>
@@ -84,18 +74,13 @@ function FormatedDate({ item, field }: Props) {
 
 			{field?.label === 'Last Modified Date' && (
 				<div>
-					{topKey && (
-						<text className={styled.sid}>
-							{getCreatedDate}
-						</text>
-					)}
+					{topKey && <text className={styled.sid}>{getCreatedDate}</text>}
 					{bottomKey && (
 						<div className={styled.serviceType}>{getCreatedDateTime}</div>
 					)}
 				</div>
 			)}
 		</div>
-
 	);
 }
 

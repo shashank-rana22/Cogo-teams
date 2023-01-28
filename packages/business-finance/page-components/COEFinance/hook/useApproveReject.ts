@@ -14,9 +14,9 @@ interface ApproveRejectInterface {
 	lineItemsRemarks?:object
 }
 
-const ApproveReject = ({ collectionPartyId, remarksVal, lineItemsRemarks, modalData, setApprove, billId }:ApproveRejectInterface) => {
+const ApproveReject = ({ remarksVal, lineItemsRemarks, modalData, setApprove, billId }:ApproveRejectInterface) => {
 	const router = useRouter();
-	const { user_data } = useSelector(({ profile }:any) => ({
+	const { user_data:userData } = useSelector(({ profile }:any) => ({
 		user_data: profile || {},
 	}));
 
@@ -33,7 +33,7 @@ const ApproveReject = ({ collectionPartyId, remarksVal, lineItemsRemarks, modalD
 	};
 
 	const [
-		{ data, loading },
+		{ loading },
 		trigger,
 	] = useRequestBf(
 		{
@@ -49,8 +49,8 @@ const ApproveReject = ({ collectionPartyId, remarksVal, lineItemsRemarks, modalD
 				data: {
 					status              : getStatus(),
 					id                  : billId,
-					updatedBy           : user_data?.user?.id,
-					performedByUserType : user_data?.session_type,
+					updatedBy           : userData?.user?.id,
+					performedByUserType : userData?.session_type,
 					remarksList         : modalData !== 'Approve' ? remarksVal : undefined,
 					lineItemsRemarks    : modalData !== 'Approve' ? lineItemsRemarks : undefined,
 				},

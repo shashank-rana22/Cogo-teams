@@ -9,8 +9,6 @@ import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetVariance from '../../../hook/useGetVariance';
-
-
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 
@@ -47,7 +45,7 @@ interface BillInterface {
 	id?: string;
 	billDocumentUrl?: string;
 	billNumber?: string;
-	createdAt?: string;
+	billDate: Date;
 	status?: string;
 	placeOfSupply?: string;
 	taxTotal: any;
@@ -69,7 +67,7 @@ export interface DataInterface {
 	buyerDetail?: BuyerDetailInterface;
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
-	bill?: BillInterface;
+	bill: BillInterface;
 }
 
 interface ShipmentDetailsInterface {
@@ -149,10 +147,10 @@ function ShipmentDetails({
 								<div className={styles.kamData}>KAM -</div>
 								<div>
 									{agent_data?.name}
-&nbsp;(
+                  &nbsp;(
 									{agent_role_data?.name}
 									)
-	</div>
+								</div>
 								<div className={styles.kamData}>Wallet Usage - </div>
 								<div>
 									{amount_currency || 'USD'}

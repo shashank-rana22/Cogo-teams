@@ -1,4 +1,10 @@
-import { Button, Pill, Placeholder, Tooltip, Modal } from '@cogoport/components';
+import {
+	Button,
+	Pill,
+	Placeholder,
+	Tooltip,
+	Modal,
+} from '@cogoport/components';
 import {
 	IcADocumentTemplates,
 	IcCFtick,
@@ -7,7 +13,7 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import List from '../../../../commons/List/index';
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
@@ -50,9 +56,7 @@ function SupplierDetails({
 	paymentsData,
 	accPaymentLoading,
 }: SupplierDetailsProps) {
-	const { historyData, getSupplierHistory, loading } = useSupplierHistory({
-		data,
-	});
+	const { historyData, getSupplierHistory, loading } = useSupplierHistory();
 	const [showModal, setShowModal] = useState(false);
 	const [showDocsModal, setShowDocsModal] = useState(false);
 
@@ -101,19 +105,19 @@ function SupplierDetails({
 						{!accPaymentLoading ? (
 							<Tooltip
 								content={(
-			<div style={{ fontSize: '10px' }}>
-				{sellerDetail?.organizationName}
-			</div>
-		)}
+									<div style={{ fontSize: '10px' }}>
+										{sellerDetail?.organizationName}
+									</div>
+								)}
 							>
 								<div className={styles.organizationName}>
-			{sellerDetail?.organizationName}
-		</div>
+									{sellerDetail?.organizationName}
+								</div>
 							</Tooltip>
 						) : (
 							<div>
-		<Placeholder height="20px" width="148px" />
-	</div>
+								<Placeholder height="20px" width="148px" />
+							</div>
 						)}
 					</div>
 					<div className={styles.tagsContainer}>
@@ -140,7 +144,7 @@ function SupplierDetails({
 								<div style={{ fontSize: '10px' }}>
 									This amount is the overall outstanding Cogoport has against
 									the vendor.
-                </div>
+								</div>
 							)}
 						>
 							<div className={styles.tooltip}>
@@ -160,8 +164,8 @@ function SupplierDetails({
 								</div>
 							) : (
 								<div>
-								<Placeholder height="20px" width="100px" />
-							</div>
+									<Placeholder height="20px" width="100px" />
+								</div>
 							)}
 						</div>
 					</div>
@@ -171,7 +175,7 @@ function SupplierDetails({
 								<div style={{ fontSize: '10.3px' }}>
 									This amount is the overall outstanding the vendor has against
 									Cogoport. (Freight Forwarders etc.)
-                </div>
+								</div>
 							)}
 						>
 							<div className={styles.tooltip}>
@@ -191,8 +195,8 @@ function SupplierDetails({
 								</div>
 							) : (
 								<div>
-								<Placeholder height="20px" width="100px" />
-							</div>
+									<Placeholder height="20px" width="100px" />
+								</div>
 							)}
 						</div>
 					</div>
@@ -221,12 +225,12 @@ function SupplierDetails({
 							<Modal.Body>
 								{historyData ? (
 									<List
-									config={config}
-									itemData={{ list: historyData }}
-									loading={loading}
-								/>
+										config={config}
+										itemData={{ list: historyData }}
+										loading={loading}
+									/>
 								) : (
-								<div className={styles.supplyCard}>NO HISTORY</div>
+									<div className={styles.supplyCard}>NO HISTORY</div>
 								)}
 							</Modal.Body>
 						</Modal>

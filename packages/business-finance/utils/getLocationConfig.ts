@@ -14,12 +14,12 @@ const getPortConfigs = (data) => {
 	}
 
 	if (data?.service_type) {
-		const { service_type } = data;
+		const { service_type:serviceType } = data;
 		const { routeInfo } = getConfigs(data?.service_type) || {};
 
-		const isSingleShipmentLocation =			(service_type || '').includes('customs')
-			|| (service_type || '').includes('cfs')
-			|| (service_type || '').includes('fcl_freight_local');
+		const isSingleShipmentLocation =			(serviceType || '').includes('customs')
+			|| (serviceType || '').includes('cfs')
+			|| (serviceType || '').includes('fcl_freight_local');
 
 		const origin = data[routeInfo.origin_pickup] || data[routeInfo.origin_port];
 		const destination =			data[routeInfo.destination_drop] || data[routeInfo.destination_port];

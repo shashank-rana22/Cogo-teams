@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import useUpdateTag from '../../../../hook/useUpdateTag';
 
@@ -9,24 +9,22 @@ import styles from './styles.module.css';
 interface RemoveTageInterface {
 	billId?: string;
 	getBillRefetch?: () => void;
-	collectionPartyId?: string;
+
 	setRemoveTag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 function RemoveTagConfirmation({
 	setRemoveTag = () => {},
 	getBillRefetch = () => {},
 	billId = '',
-	collectionPartyId = '',
 }: RemoveTageInterface) {
 	const onClose = () => {
 		setRemoveTag(false);
 		getBillRefetch();
 	};
 
-	const { loading, handleSubmit, data } = useUpdateTag({
+	const { loading, handleSubmit } = useUpdateTag({
 		onClose,
 		billId,
-		collectionPartyId,
 	});
 
 	return (

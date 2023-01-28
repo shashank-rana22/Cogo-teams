@@ -3,17 +3,11 @@ import React from 'react';
 
 import {
 	ConfigType,
-	ListDataProps,
 	FunctionObjects,
 } from '../../../../../commons/Interfaces/index';
 import List from '../../../../../commons/List/index';
 
 import styles from './styles.module.css';
-
-interface DataInterface {
-	currency?: string;
-	data?: Array<object>;
-}
 
 interface VarianceViewInterface {
 	show: boolean;
@@ -68,8 +62,8 @@ function VarianceView({
 			<div>
 				<span>
 					{(item?.purchase_line_items || [])
-            	.map((charge: any) => charge.name)
-            	.join(',')}
+          	.map((charge: any) => charge.name)
+          	.join(',')}
 				</span>
 				<span style={{ marginLeft: 4 }}>
 					(
@@ -84,8 +78,8 @@ function VarianceView({
 			<div>
 				<span>
 					{(item?.buy_line_items || [])
-            	.map((charge: any) => charge.name)
-            	.join(',')}
+          	.map((charge: any) => charge.name)
+          	.join(',')}
 				</span>
 				<span style={{ marginLeft: 4 }}>
 					(

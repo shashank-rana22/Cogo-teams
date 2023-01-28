@@ -4,13 +4,16 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
+
 import AddUrgencyTag from './AddUrgencyTag/index';
 import { urgencyOptions } from './controls';
 import RemoveTagConfirmation from './RemoveTagConfirmation/index';
 import styles from './styles.module.css';
 
 interface BillInterFace {
-	grandTotal?: string;
+	grandTotal: number;
+	billCurrency: string;
 	id?: string;
 }
 interface BillAdditionalObject {
@@ -22,20 +25,19 @@ interface RemarkObj {
 	remarks?: string;
 }
 interface DataProps {
-	bill?: BillInterFace;
+	bill: BillInterFace;
 	billAdditionalObject?: BillAdditionalObject;
 	remarks?: Array<RemarkObj>;
 	serviceType?: string;
 }
 interface Props {
-	data?: DataProps;
+	data: DataProps;
 	getBillRefetch: () => void;
 }
-function InvoiceDetails({ data = {}, getBillRefetch }: Props) {
+function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const [remark, setRemark] = useState('');
 	const { bill, remarks = [] } = data;
-	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-	const { grandTotal } = bill || {};
+	const { grandTotal, billCurrency } = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
 	const [tagValue, setTagValue] = useState('');
@@ -57,7 +59,9 @@ function InvoiceDetails({ data = {}, getBillRefetch }: Props) {
 
 	let displayTag = '';
 	urgencyOptions.forEach((option) => {
-		if (option.value === data?.billAdditionalObject?.urgencyTag) displayTag = option.label;
+		if (option.value === data?.billAdditionalObject?.urgencyTag) {
+			displayTag = option.label;
+		}
 	});
 
 	const remarkRender = () => (
@@ -134,7 +138,6 @@ function InvoiceDetails({ data = {}, getBillRefetch }: Props) {
 					setTagValue={setTagValue}
 					getBillRefetch={getBillRefetch}
 					setShowAddTag={setShowAddTag}
-					collectionPartyId={collectionPartyId}
 				/>
 			) : null}
 			<div className={styles.smallHr} />
@@ -143,8 +146,7 @@ function InvoiceDetails({ data = {}, getBillRefetch }: Props) {
 					Invoice Amount - &nbsp;
 					{' '}
 					<span className={styles.amount}>
-						INR
-						{grandTotal}
+						{getFormattedPrice(grandTotal, billCurrency)}
 					</span>
 				</div>
 				<div className={styles.verticalSmallHr} />
@@ -177,7 +179,6 @@ function InvoiceDetails({ data = {}, getBillRefetch }: Props) {
 						setRemoveTag={setRemoveTag}
 						getBillRefetch={getBillRefetch}
 						billId={data?.bill?.id}
-						collectionPartyId={collectionPartyId}
 					/>
 				</Modal>
 			) : null}

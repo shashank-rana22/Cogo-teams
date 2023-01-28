@@ -54,7 +54,11 @@ function AllInvoices() {
 				</div>
 			</div>
 			{isPurchase && (
-				<PurchaseInvoice filters={filters} setFilters={setFilters} subActiveTab={subActiveTab} />
+				<PurchaseInvoice
+					filters={filters}
+					setFilters={setFilters}
+					subActiveTab={subActiveTab}
+				/>
 			)}
 			{!isPurchase && <ShipmentIdView />}
 		</div>

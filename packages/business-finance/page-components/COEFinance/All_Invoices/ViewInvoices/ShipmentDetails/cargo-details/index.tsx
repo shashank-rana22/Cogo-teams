@@ -35,24 +35,27 @@ const labels = [
  */
 
 interface DetailInt {
-	detail:DetailInterface
+	detail: DetailInterface;
 }
 
-function CargoDetails({ detail }:DetailInt) {
+function CargoDetails({ detail }: DetailInt) {
 	return (
 		<div className={styles.divContainer}>
 			{labels.map((label) => {
-				if (detail?.[label as keyof typeof detail] && renderValue(label, detail)) {
-					return (
-						<div className={styles.container}>
-							<div className={`${styles.Box} cargo-detail-pill`} key={label}>
-								{renderValue(label, detail)}
-							</div>
-						</div>
-					);
-				}
+      	if (
+      		detail?.[label as keyof typeof detail]
+          && renderValue(label, detail)
+      	) {
+      		return (
+	<div className={styles.container}>
+		<div className={`${styles.Box} cargo-detail-pill`} key={label}>
+			{renderValue(label, detail)}
+		</div>
+	</div>
+      		);
+      	}
 
-				return null;
+      	return null;
 			})}
 		</div>
 	);

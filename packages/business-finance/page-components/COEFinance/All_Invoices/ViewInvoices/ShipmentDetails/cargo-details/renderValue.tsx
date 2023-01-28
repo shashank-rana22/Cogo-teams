@@ -8,25 +8,25 @@ import { formatDate } from '../../../../../commons/utils/formatDate';
 import styles from './styles.module.css';
 
 interface PocDetailsInt {
-	name?: string,
-	mobile_country_code?:string,
-	mobile_number?:string,
-	email?:string
+	name?: string;
+	mobile_country_code?: string;
+	mobile_number?: string;
+	email?: string;
 }
 
 interface ShipperDetailsInt {
-	name?:string,
-	address?:string
+	name?: string;
+	address?: string;
 }
 
-export const renderValue = (label:string, detail:any) => {
+export const renderValue = (label: string, detail: any) => {
 	const { packages = [] } = detail || [{}];
-	const isAir =		detail?.service_type === 'air_freight_service'
-		|| detail?.service_type === 'domestic_air_freight_service';
-	const isLTL =		detail?.service_type === 'ltl_freight_service'
-		|| detail?.services?.includes('ltl_freight_service');
+	const isAir = detail?.service_type === 'air_freight_service'
+    || detail?.service_type === 'domestic_air_freight_service';
+	const isLTL = detail?.service_type === 'ltl_freight_service'
+    || detail?.services?.includes('ltl_freight_service');
 
-	const valueForInput =		Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
 
 	const chargableWeight = isLTL
 		? detail?.chargable_weight || detail?.weight
@@ -39,7 +39,7 @@ export const renderValue = (label:string, detail:any) => {
 	const inputValue = valueForInput
 		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(
 			valueForInput?.packing_type,
-		  )}`
+		)}`
 		: '';
 
 	const lr_number = detail?.lr_number;
@@ -55,20 +55,18 @@ export const renderValue = (label:string, detail:any) => {
 					content={(
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item) => {
-								const values = item
-									? `${item.packages_count} Pkg, (${item?.length}cm X ${
-										item?.width
-									  }cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
-									: '';
-								return <div>{values}</div>;
+              	const values = item
+              		? `${item.packages_count} Pkg, (${item?.length}cm X ${
+              			item?.width
+              		}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
+              		: '';
+              	return <div>{values}</div>;
 							})}
 						</div>
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${
-							packages?.length - 1
-						} more`}
+						{`Package: ${inputValue} + ${packages?.length - 1} more`}
 					</div>
 				</Tooltip>
 			);
@@ -76,7 +74,7 @@ export const renderValue = (label:string, detail:any) => {
 		return `Package: ${inputValue}`;
 	};
 
-	const formatPocData = (pocDetails:PocDetailsInt) => (
+	const formatPocData = (pocDetails: PocDetailsInt) => (
 		<div>
 			<div>{pocDetails?.name}</div>
 			<div>
@@ -88,14 +86,14 @@ export const renderValue = (label:string, detail:any) => {
 		</div>
 	);
 
-	const formatShipperDetails = (shipperDetails:ShipperDetailsInt) => (
+	const formatShipperDetails = (shipperDetails: ShipperDetailsInt) => (
 		<div>
 			<div>{shipperDetails?.name}</div>
 			<div>{shipperDetails?.address}</div>
 		</div>
 	);
 
-	const formatCertificate = (certificates:any) => (
+	const formatCertificate = (certificates: any) => (
 		<div className={styles.CertificateContainer}>
 			{(certificates || []).map((item, key) => (
 				<a href={item} target="_blank" rel="noreferrer">
@@ -167,7 +165,7 @@ export const renderValue = (label:string, detail:any) => {
 		case 'volume':
 			return ` ${volume} ${
 				detail.service_type === 'ftl_freight_service'
-				|| detail.service_type === 'haulage_freight_service'
+        || detail.service_type === 'haulage_freight_service'
 					? ''
 					: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
 			}`;
