@@ -46,6 +46,7 @@ importers:
   cogo-control:
     specifiers:
       '@cogoport/access-management': workspace:0.1.0
+      '@cogoport/allocation': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/components': ^1.0.274
@@ -68,6 +69,7 @@ importers:
       typescript: ^4.9.4
     dependencies:
       '@cogoport/access-management': link:../packages/access-management
+      '@cogoport/allocation': link:../packages/allocation
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/components': 1.0.274_jthxcj6wkatiu54kxs3nfsn2by
