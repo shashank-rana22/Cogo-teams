@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Heading from '../../common/Heading';
 
+import AllocationConfigurations from './AllocationConfigurations';
 import styles from './styles.module.css';
 
 function CoreAllocationEngine() {
@@ -27,7 +28,7 @@ function CoreAllocationEngine() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="configurations" title="Configurations">
-						<div>Config</div>
+						<AllocationConfigurations />
 					</TabPanel>
 
 					<TabPanel name="relations" title="Relations">
