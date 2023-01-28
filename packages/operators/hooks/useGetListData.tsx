@@ -32,6 +32,7 @@ const useGetListData = () => {
 	};
 	useEffect(() => {
 		getLocationData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue, page]);
 
 	return {

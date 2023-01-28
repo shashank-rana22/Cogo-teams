@@ -31,8 +31,6 @@ const useCreateOperators = ({
 	};
 
 	const handleEditOperators = async (value) => {
-		console.log('value', value);
-
 		const data = {
 			id       : item.id,
 			...value,

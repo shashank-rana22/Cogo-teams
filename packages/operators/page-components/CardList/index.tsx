@@ -15,7 +15,7 @@ import EmptyState from './EmptyState';
 import { FunctionObjects, FieldType, DataType } from './Interfaces';
 import styles from './styles.module.css';
 
- interface Props {
+interface Props {
 	fields: FieldType[];
 	data: DataType;
 	loading?: boolean;
@@ -36,8 +36,8 @@ function CardList({
 	setFinalList,
 	functions,
 } :Props) {
-
-	const { list= [], total_count = 0 } = data;
+	// eslint-disable-next-line @typescript-eslint/naming-convention
+	const { list = [], total_count = 0 } = data;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {

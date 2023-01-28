@@ -25,4 +25,3 @@ export interface DataType {
 	list?: Array<object>;
 	total_count?: number;
 }
-

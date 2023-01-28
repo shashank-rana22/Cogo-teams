@@ -45,7 +45,6 @@ function EditOperators({
 		});
 		setValue('is_nvocc', String(item.is_nvocc));
 		setValue('logo_url', String(item.logo_url));
-		console.log('item', item);
 	}, [setValue, item, fields]);
 
 	return (

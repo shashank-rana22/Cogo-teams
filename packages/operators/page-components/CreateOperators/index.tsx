@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
+
 import getElementController from '../../hooks/getController';
 import useCreateOperators from '../../hooks/useCreateOperators';
 
@@ -31,8 +32,8 @@ function CreateOperators({
 		page,
 	});
 
-	(fields || []).forEach((control, index) => {
-		if (control.name === 'operator_type') {
+	(fields || []).forEach((ctrl, index) => {
+		if (ctrl.name === 'operator_type') {
 			fields[index].disabled = false;
 		}
 	});
