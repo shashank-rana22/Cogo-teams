@@ -6,6 +6,12 @@ const app_manage_rfq = [
 		service_name : 'rfq',
 	},
 	{
+		api          : 'update_rfq',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
 		api          : 'list_rfqs',
 		access_type  : 'private',
 		feature      : 'rfq',
