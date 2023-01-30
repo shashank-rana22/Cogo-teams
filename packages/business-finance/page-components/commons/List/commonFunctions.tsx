@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { FunctionObjects } from '../Interfaces/index';
+import { FieldType, FunctionObjects, GenericObject } from "../Interfaces/index";
 
-const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
-	const newFunctions:any = {
-		renderName: (itemData: GenericObject, field: FieldType) => (<div>{itemData[field.key]}</div>),
-		...(functions || {}),
-	};
+const commonFunctions = (functions: { functions?: FunctionObjects }) => {
+  const newFunctions: any = {
+    renderName: (itemData: GenericObject, field: FieldType) => (
+      <div>{itemData[field.key]}</div>
+    ),
+    ...(functions || {}),
+  };
 
-	return newFunctions;
+  return newFunctions;
 };
 
 export default commonFunctions;
