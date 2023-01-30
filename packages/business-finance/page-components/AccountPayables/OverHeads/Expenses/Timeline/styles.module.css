@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fadedCircle{
+    border: 2px solid #C6C6C6;
+    height: 24px;
+    width: 24px;
+    border-radius: 16px;
+}
+.borderedCircle{
+    border: 2px solid red;
+    height: 24px;
+    width: 24px;
+    border-radius: 16px;
+}
+.line{
+    border-top: 2px solid #C6C6C6;
+    width: 30%;
+    margin:10px;
+}

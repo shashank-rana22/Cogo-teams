@@ -57,6 +57,10 @@
 }
 .recurringButtons{
     padding: 6px 11px;
+    background: none;
+    border:none;
+    width: 100%;
+    font-size: 15px;
     &:hover{
         background: #FFFAEB;
         cursor: pointer;
