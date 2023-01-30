@@ -149,7 +149,7 @@
 	margin: 16px 0;
 	word-wrap: wrap;
 	background: #fff;
-	filter: drop-shadow(0 0 5.9029px rgba(0 0 0 15%));
+	filter: drop-shadow(0 0 5.9029px rgb(0 0 0 / 15%));
 	border-radius: 4px;
 	transition: 0.3s;
 }
