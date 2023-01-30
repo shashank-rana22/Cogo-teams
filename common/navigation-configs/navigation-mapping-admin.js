@@ -763,17 +763,17 @@ const navigationMappingAdmin = {
 	business_finance: {
 		key       : 'business_finance',
 		title     : 'Business Finance',
-		isSubNavs : true,
 		icon      : IcMBusinessFinance,
+		isSubNavs : true,
 		options   : [
 			{
 				key           : 'business_finance-jobs',
 				title         : 'Old Jobs',
 				href          : '/business-finance',
 				as            : '/business-finance',
-				possible_apis : apis.business_finance,
 				type          : 'link',
 				main_apis     : [],
+				possible_apis : apis.business_finance,
 			},
 			{
 				key           : 'business_finance-sales_list',
@@ -1743,7 +1743,7 @@ const navigationMappingAdmin = {
 				href          : '/constants',
 				icon          : IcMAccountSettings,
 				as            : '/constants',
-				main_apis     : [],
+				main_apis     : ['list_platform_config_constants'],
 				possible_apis : apis.constants,
 			},
 		],

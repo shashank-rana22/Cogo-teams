@@ -1,3 +1,11 @@
 module.exports = {
-	extends: ['@cogoport/stylelint-config'],
+	extends : ['@cogoport/stylelint-config'],
+	rules   : {
+		'selector-pseudo-class-no-unknown': [
+			true,
+			{
+				ignorePseudoClasses: ['global'],
+			},
+		],
+	},
 };

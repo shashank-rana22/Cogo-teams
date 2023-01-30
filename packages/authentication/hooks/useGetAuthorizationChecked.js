@@ -23,6 +23,8 @@ const useGetAuthorizationChecked = () => {
 
 	const { pathname, query, locale, locales, route, push } = useRouter();
 
+	const { source = '' } = query || {};
+
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
@@ -42,7 +44,7 @@ const useGetAuthorizationChecked = () => {
 	useEffect(() => {
 		(async () => {
 			if (!sessionInitialized && _initialized) {
-				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
+				if (isProfilePresent && (isUnauthenticatedPath || route === '/') && source !== 'add_account') {
 					const configs = redirections(profile);
 					if (configs?.href) {
 						if (configs?.href?.includes('/v2')) {
@@ -51,9 +53,10 @@ const useGetAuthorizationChecked = () => {
 							await push(replaceHref?.href, replaceAs?.as);
 						}
 						if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
-							window.location.href = `/${profile?.partner?.id}${configs.href}`;
+							// eslint-disable-next-line no-undef
+							window.location.href = `/${profile?.partner?.id}${configs.as || configs.href}`;
 						} else {
-							await push(configs.href, configs.as);
+							await push('/', '/');
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
@@ -62,6 +65,7 @@ const useGetAuthorizationChecked = () => {
 				setSessionInitialized(true);
 			}
 		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [_initialized, isProfilePresent, isUnauthenticatedPath, sessionInitialized]);
 
 	return { sessionInitialized, setSessionInitialized };

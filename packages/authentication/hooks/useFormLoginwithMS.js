@@ -19,6 +19,7 @@ const useFormLoginwithMS = () => {
 			modifiedUrl = url;
 		}
 
+		// eslint-disable-next-line no-undef
 		window.location.href = modifiedUrl;
 	};
 
@@ -38,7 +39,7 @@ const useFormLoginwithMS = () => {
 
 			setResponseUrl(response);
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 		}
 	};
 

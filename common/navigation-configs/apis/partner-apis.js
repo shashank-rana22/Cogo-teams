@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -534,6 +539,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -830,6 +840,11 @@ const partner = {
 		},
 	],
 	demand_crm: [
+		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 		{
 			api          : 'get_organization_commodity_segmentation_stats',
 			access_type  : 'parivate',
@@ -2115,6 +2130,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 			feature      : 'inventory_management',
+		},
+		{
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	support_crm: [
@@ -5664,6 +5684,26 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'get_cc_communication_stats',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'send_demand_notice_to_prelegal_accounts',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'send_demand_notice_to_prelegal_accounts',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -7536,6 +7576,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_communication_template_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -7776,6 +7821,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	prm_feedback: [
 		{
@@ -7792,6 +7852,13 @@ const partner = {
 			api          : 'list_segments',
 			access_type  : 'private',
 			service_name : 'segmentation',
+		},
+		{
+
+			api          : 'create_duplicate_promotion',
+			access_type  : 'private',
+			service_name : 'promotion',
+
 		},
 		{
 			api          : 'list_promotions',
@@ -8717,6 +8784,28 @@ const partner = {
 			service_name : 'organization',
 		},
 	],
+	rail_freight: [
+		{
+			api          : 'list_rail_domestic_freight_rates',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_bulk_operation',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+	],
 	voice_call: [
 		{
 			api          : 'list_organizations',
@@ -9094,6 +9183,11 @@ const partner = {
 			api          : 'create_platform_config_constant_mapping',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 };
