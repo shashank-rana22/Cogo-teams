@@ -64,12 +64,13 @@ export const expenseRecurringConfig = () => {
             label: renderExpensePeriod(),
             key: "expensePeriod",
             span: 2.5,
-
+            func: 'renderExpensePeriod'
         },
         {
             label: "Recurring Amount",
             key: "recurringAmount",
             span: 2,
+            func: 'renderRecurringAmount'
         },
         {
             label: "Approved By",
@@ -78,7 +79,8 @@ export const expenseRecurringConfig = () => {
         },
         {
             key: "actionButton",
-            span: 1.25,
+            span: 1.5,
+            func: "addExpense",
         }
     ],
 }

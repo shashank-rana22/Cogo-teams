@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Select, Button, Input, Tooltip } from "@cogoport/components"
 import { GenericObject } from "../../commons/Interfaces";
-import List from ".././../../commons/List";
+import List from "../../commons/List";
 import VENDOR_CONFIG from "./utils/config";
 import {IcMSearchlight} from '@cogoport/icons-react';
 import Controls from "./utils/controls";
@@ -37,6 +37,7 @@ function VenderComponent () {
     });
     const [sort, setSort] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const [dropdownId, setDropdownId] = useState(null);
     const {loading = false, data, listApi = () => {}} = useListVendors();
   
     const handleChange = (e, value) => {
@@ -133,11 +134,20 @@ function VenderComponent () {
             <Button 
                themeType="secondary" 
                size="md" 
-               onClick={() => setShowModal(true)}
+               onClick={() => {
+                setDropdownId(item?.vendorSerialId);
+            }}
                >
                 View More
             </Button>)
-    }
+        }
+
+        const renderDropdown = (id:string|number='')=>{
+             if(id===dropdownId){
+                return <h1>hey there</h1>
+             }
+             return null
+        }
 
     const functions:any = {
         renderKYCStatus: (itemData:itemProps) => (
@@ -170,6 +180,7 @@ function VenderComponent () {
                     setFilters((p) => ({...p, pageIndex: pageValue}))
                 }}
                 showPagination = {true}
+                renderDropdown={(id)=>renderDropdown(id)}
             />
 
             {

@@ -9,13 +9,9 @@ function CreateVendorModal ({
 
     return (
         <Modal size="md" show={showModal} onClose={() =>  setShowModal(false)} placement="center">
-            <Modal.Header title="Are you sure?" />
+            <Modal.Header title="Create Vendor" />
             <Modal.Body>
-                et consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda et soluta expedita
-                consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas. Pariatur eaque aut sunt?
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda 
-                et soluta expedita consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas. 
-                Pariatur eaque aut sunt?
+                through Vendor CRM
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={() =>  setShowModal(false)}>OK</Button>

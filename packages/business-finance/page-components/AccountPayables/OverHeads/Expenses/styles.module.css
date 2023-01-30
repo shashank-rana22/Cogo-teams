@@ -42,3 +42,13 @@
         font-family: Poppins;
     }
 }
+
+.dataContainer{
+    display: flex;
+}
+.expensePeriodData{
+     width: 64%;
+}
+.recurringAmountData{
+    width: 90%;
+}
