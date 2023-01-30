@@ -12,10 +12,7 @@ const createPages = async () => {
 	const rootPath = `${cwd}/cogo-control/pages/`;
 	const packageRootPath = `${cwd}/packages`;
 
-	if (fs.existsSync(appPath)) {
-		fs.rmdirSync(appPath, { recursive: true });
-		fs.mkdirSync(appPath);
-	} else {
+	if (!fs.existsSync(appPath)) {
 		fs.mkdirSync(appPath);
 	}
 

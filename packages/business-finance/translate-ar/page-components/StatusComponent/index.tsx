@@ -23,7 +23,7 @@ function StatusComponent({ status }: StatusObject) {
 		<>
 			<Filters onChangeFilters={setShipmentFilters} filters={shipmentFilters} />
 			<StyledTable data={list} columns={columns} loading={invoiceLoading} />
-			<div className={styles.pagination_container} id="rnp_role">
+			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
 					currentPage={pageIndex}
