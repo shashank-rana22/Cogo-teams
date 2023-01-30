@@ -3,3 +3,7 @@
 		width: 300px !important;
 	}
 }
+
+.body {
+	min-height: 170px;
+}

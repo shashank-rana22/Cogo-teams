@@ -23,6 +23,7 @@ type Props = {
 
 function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, refetch, open }: Props) {
 	const { fileName, finalUrl } = uploadProof || {};
+	const bodyStyle = finalUrl ? styles.body : '';
 	const { uploadDoc, loading } = useUpdateStatus({
 		finalUrl,
 		setOpen,
@@ -40,7 +41,7 @@ function UploadInvoiceModal({ setOpen, uploadProof, setUploadProof, itemData, re
 		<Modal show={open} size="sm" onClose={() => setOpen(false)} className={styles.modal_container}>
 			<Modal.Header title="Upload Scan of Invoice" />
 			<Modal.Body>
-				<section>
+				<section className={bodyStyle}>
 					<FileUploader
 						value={finalUrl}
 						docName={fileName}
