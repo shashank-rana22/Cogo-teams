@@ -26,10 +26,10 @@ import saas from './saas';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
+import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
-import sop from './sop-apis';
 
 const apis = {
 	search: search.map((api) => ({
