@@ -1,6 +1,16 @@
 .container {
 	width: 100%;
 
+	:global {
+		.ui_input_prefix {
+			height: 90%;
+		}
+
+		input::placeholder {
+			font-size: 14px;
+		}
+	}
+
 	@media (min-width: 768px) {
 		width: 30%;
 	}

@@ -13,8 +13,7 @@ import styles from './styles.module.css';
 const pendingColumns = (refetch: Refetch) => [
 	{
 		Header   : 'Name',
-		accessor : ({ buyerDetails: { businessName } }) => (<div className={styles.name}>{businessName}</div>)
-		,
+		accessor : ({ buyerDetails: { businessName } }) => (<div className={styles.name}>{businessName}</div>),
 	},
 	{
 		Header   : 'Invoice number',
