@@ -33,7 +33,14 @@ const useGetListData = () => {
 	useEffect(() => {
 		getLocationData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue, page]);
+	}, [page]);
+
+	useEffect(() => {
+		setFinalList([]);
+		setPage(1);
+		getLocationData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchValue]);
 
 	return {
 		config,

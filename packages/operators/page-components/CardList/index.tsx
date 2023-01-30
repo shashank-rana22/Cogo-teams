@@ -3,12 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-// import {
-// 	NestedObj,
-// 	FunctionObjects,
-// 	ListDataProps,
-// } from '../Interfaces/index';
-
 import Header from './CardHeader';
 import CardItem from './CardItem';
 import EmptyState from './EmptyState';
@@ -61,7 +55,8 @@ function CardList({
 		} else {
 			setFinalList(finalList.concat(list));
 		}
-	}, [finalList, list, page, setFinalList]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [list]);
 
 	return (
 		<section>
