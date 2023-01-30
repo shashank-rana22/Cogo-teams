@@ -2,12 +2,6 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useAllocationConfigurations = () => {
-	const [showCreateConfig, setShowCreateConfig] = useState(false);
-
-	const [showPublishConfiguration, setShowPublishConfiguration] =		useState(false);
-
-	const [showUpdatePreference, setShowUpdatePreference] = useState(false);
-
 	const [params, setParams] = useState({
 		sort_type : 'desc',
 		sort_by   : 'created_at',
@@ -17,15 +11,11 @@ const useAllocationConfigurations = () => {
 		},
 	});
 
-	const listAllocationConfigurationsAPI = useRequest({
+	const [{ loading, data }, refetch] = useRequest({
 		url    : '/list_allocation_configurations',
 		method : 'get',
 		params,
-	}, { manual: true });
-
-	const fetchList = async () => {
-		await listAllocationConfigurationsAPI.trigger({ params });
-	};
+	}, { manual: false });
 
 	const getNextPage = (newPage) => {
 		setParams((previousParams) => ({
@@ -35,26 +25,19 @@ const useAllocationConfigurations = () => {
 	};
 
 	useEffect(() => {
-		fetchList();
+		refetch();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
 
-	const { loading = false, data: { list = [], ...paginationData } = {} } = listAllocationConfigurationsAPI;
+	const { list = [], ...paginationData } = data || {};
 
 	return {
 		loading,
 		list,
 		paginationData,
-		showCreateConfig,
-		setShowCreateConfig,
-		// fetchList,
 		getNextPage,
 		params,
 		setParams,
-		showPublishConfiguration,
-		setShowPublishConfiguration,
-		showUpdatePreference,
-		setShowUpdatePreference,
 	};
 };
 
