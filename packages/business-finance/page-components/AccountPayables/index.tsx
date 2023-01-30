@@ -1,8 +1,9 @@
+import { Tabs, TabPanel } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import React, { useEffect, useState } from 'react';
-import {Tabs, TabPanel} from '@cogoport/components';
-import styles from "./styles.module.css"
+
 import Overheads from './Overheads/index';
+import styles from './styles.module.css';
 // import styles from './styles.module.css';
 
 function AccountPayables() {
@@ -24,24 +25,24 @@ function AccountPayables() {
 	return (
 		<div>
 			<h1 className={styles.header}>Account Payables</h1>
-			<div className={styles.underline}/>
+			<div className={styles.underline} />
 
-				<div className={styles.tabs}>
-					<Tabs
-						activeTab={activeTab}
-						fullWidth
-						themeType="primary"
-						onChange={setActiveTab}
-					>
-				<TabPanel name="overheads" title="Overheads">
-					<Overheads/>
-				</TabPanel>
+			<div className={styles.tabs}>
+				<Tabs
+					activeTab={activeTab}
+					fullWidth
+					themeType="primary"
+					onChange={setActiveTab}
+				>
+					<TabPanel name="overheads" title="Overheads">
+						<Overheads />
+					</TabPanel>
 
-				<TabPanel name="others" title="Others">
-					<div>No data :)</div>
-				</TabPanel>
-			</Tabs>
-				</div>
+					<TabPanel name="others" title="Others">
+						<div>No data :)</div>
+					</TabPanel>
+				</Tabs>
+			</div>
 		</div>
 	);
 }
