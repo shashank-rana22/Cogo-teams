@@ -5895,6 +5895,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	pay_later: [
 		{
