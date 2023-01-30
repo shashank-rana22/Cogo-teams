@@ -1,5 +1,5 @@
 const allocations = {
-	'/allocation/core-engine': {
+	'[partner_id]/allocation/core-engine': {
 		layoutType : 'no_header',
 		navigation : 'allocations-core_engine',
 		isMainNav  : true,
