@@ -96,14 +96,7 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 			)}
 
 			{(gettimeLineData() || []).map((item: any) => {
-      	const {
-      		id,
-      		eventName,
-      		payingAmount,
-      		occurredAt,
-      		performedByUser,
-      		userEmail,
-      	} = item || {};
+      	const { id, eventName, occurredAt, performedByUser, userEmail } = item || {};
 
       	const dateWithTime = occurredAt?.split(' ') || '';
 

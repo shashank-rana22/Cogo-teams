@@ -1,137 +1,137 @@
 .container {
-	margin: 24px;
+  margin: 24px;
 }
 
 .footer {
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
-	padding: 24px 0 0 24px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 24px 0 0 24px;
 }
 
 .rejected {
-	display: flex;
-	cursor: pointer;
+  display: flex;
+  cursor: pointer;
 }
 
 .popoverRejected {
-	font-size: 14px;
-	color: red;
-	cursor: pointer;
-	background: #fff;
+  font-size: 14px;
+  color: red;
+  cursor: pointer;
+  background: #fff;
 }
 
 .circle {
-	width: 15px;
-	height: 15px;
-	cursor: pointer;
-	border: 1px solid #ed3726;
-	border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  border: 1px solid #ed3726;
+  border-radius: 50%;
 }
 
 .circleBig {
-	width: 10px;
-	height: 10px;
-	cursor: pointer;
-	border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  border-radius: 50%;
 }
 
 .modalContainer {
-	padding: 24px;
+  padding: 24px;
 }
 
 .smallHr {
-	width: 57%;
-	margin: 8px 0;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
+  width: 57%;
+  margin: 8px 0;
+  border: 1px solid #ed3726;
+  border-radius: 30px;
 }
 
 .instructions {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	font-size: 14px;
-	font-weight: 500;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .tooltip {
-	margin-top: 4px;
+  margin-top: 4px;
 }
 
 .formStyle {
-	font-size: 10px;
+  font-size: 10px;
 }
 
 .mainHeader {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	margin: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 24px;
 }
 
 .headerDetail {
-	display: flex;
-	align-items: center;
-	font-weight: 600;
-	color: #616161;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #616161;
 }
 
 .outer {
-	margin-top: 16px;
-	background: #fff;
-	border: 1px solid #c5c5c5;
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #c5c5c5;
 }
 
 .flexDiv {
-	display: flex;
-	flex-wrap: wrap;
-	width: 65%;
-	padding: 12px;
-	font-size: 10px;
-	border-right: 1px solid #c5c5c5;
+  display: flex;
+  flex-wrap: wrap;
+  width: 65%;
+  padding: 12px;
+  font-size: 10px;
+  border-right: 1px solid #c5c5c5;
 }
 
 .info {
-	width: 30%;
+  width: 30%;
 }
 
 .bottomDiv {
-	width: 100%;
-	padding: 12px;
-	font-size: 12px;
-	border-top: 1px solid #c5c5c5;
-	border-right: 1px solid #c5c5c5;
+  width: 100%;
+  padding: 12px;
+  font-size: 12px;
+  border-top: 1px solid #c5c5c5;
+  border-right: 1px solid #c5c5c5;
 }
 
 .flex {
-	display: flex;
+  display: flex;
 }
 
 .amount {
-	padding: 0 6px;
-	font-size: 10px;
-	font-weight: 600;
+  padding: 0 6px;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .amountRight {
-	font-size: 10px;
-	font-weight: 600;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .wordsCurrency {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 .border {
-	height: 100%;
-	padding: 16px 2px;
-	margin: 0;
-	border-right: 1px solid #c5c5c5;
+  height: 100%;
+  padding: 16px 2px;
+  margin: 0;
+  border-right: 1px solid #c5c5c5;
 }
 
 .borderRight {
-	height: 100%;
-	padding: 16px 2px;
-	margin: 0;
+  height: 100%;
+  padding: 16px 2px;
+  margin: 0;
 }

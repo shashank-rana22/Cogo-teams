@@ -26,7 +26,7 @@ import {
 
 import styles from './styles.module.css';
 
-interface LineItemCard {
+interface LineItemCardInterface {
 	lineItems: Array<object>;
 	bill?: {
 		taxTotal: any;
@@ -35,10 +35,8 @@ interface LineItemCard {
 		subTotal: string | number;
 	};
 	setShowLineItem: React.Dispatch<React.SetStateAction<boolean>>;
-	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	remarksVal: object | {};
 	invoiceType?: string;
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	isInvoiceApproved: boolean;
@@ -48,14 +46,12 @@ function LineItemCard({
 	lineItems,
 	bill,
 	setShowLineItem = () => {},
-	setRemarksVal,
 	lineItemsRemarks,
 	setLineItemsRemarks,
-	remarksVal,
 	invoiceType = '',
 	setLineItem,
 	isInvoiceApproved,
-}: LineItemCard) {
+}: LineItemCardInterface) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
 	const [rejectedItems, setRejectedItems] = useState({});
@@ -136,6 +132,7 @@ function LineItemCard({
 				onClick={() => {
         	handleApproveClick(item?.id, item?.name);
 				}}
+				role="presentation"
 			>
 				{renderAction(item?.id)}
 			</div>
@@ -151,6 +148,7 @@ function LineItemCard({
 								onClick={() => {
                 	openRejectModal(item);
 								}}
+								role="presentation"
 							>
 								{popover[item?.id as keyof typeof popover] ? (
 									<div>Undo</div>

@@ -102,11 +102,16 @@ function ShipmentDetails({
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
-	const { source, trade_type } = dataList;
+	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
-	const { data: dataWallet, loading: loadingWallet } = useGetWallet(shipmentId);
-	const { agent_data, agent_role_data, amount, amount_currency } = dataWallet?.list?.[0] || {};
+	const { data: dataWallet } = useGetWallet(shipmentId);
+	const {
+		agent_data: agentData,
+		agent_role_data: agentRoleData,
+		amount,
+		amount_currency: amountCurrency,
+	} = dataWallet?.list?.[0] || {};
 
 	return (
 		<div className={styles.container}>
@@ -133,28 +138,27 @@ function ShipmentDetails({
 					onClick={() => {
           	setShowDetails(!showDetails);
 					}}
+					role="presentation"
 				>
 					<div className={styles.subContainer}>
 						Details
 						<div className={styles.tagsContainer}>
 							{sourceText && <Pill color="blue">{sourceText}</Pill>}
-							{trade_type && (
-								<Pill color="yellow">{startCase(trade_type)}</Pill>
-							)}
+							{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
 						</div>
 						{dataWallet?.list?.[0] && (
 							<div className={styles.Data}>
 								<div className={styles.kamData}>KAM -</div>
 								<div>
-									{agent_data?.name}
+									{agentData?.name}
                   &nbsp;(
-									{agent_role_data?.name}
+									{agentRoleData?.name}
 									)
 								</div>
 								<div className={styles.kamData}>Wallet Usage - </div>
 								<div>
-									{amount_currency || 'USD'}
-									{' '}
+									{amountCurrency || 'USD'}
+
 									{amount || 0}
 								</div>
 							</div>
@@ -166,6 +170,7 @@ function ShipmentDetails({
 						onClick={() => {
             	setShowDetails(!showDetails);
 						}}
+						role="presentation"
 					>
 						{showDetails ? (
 							<IcMArrowRotateUp height="17px" width="17px" />
@@ -191,6 +196,7 @@ function ShipmentDetails({
 				onClick={() => {
         	setShowDocuments(!showDocuments);
 				}}
+				role="presentation"
 			>
 				<div className={styles.cardUpper}>
 					<div className={styles.subContainer}>
@@ -203,6 +209,7 @@ function ShipmentDetails({
 						onClick={() => {
             	setShowDocuments(!showDocuments);
 						}}
+						role="presentation"
 					>
 						{showDocuments ? (
 							<IcMArrowRotateUp height="17px" width="17px" />
@@ -232,6 +239,7 @@ function ShipmentDetails({
 							<div
 								className={styles.viewMore}
 								onClick={() => setShowVariance(true)}
+								role="presentation"
 							>
 								View More
 							</div>

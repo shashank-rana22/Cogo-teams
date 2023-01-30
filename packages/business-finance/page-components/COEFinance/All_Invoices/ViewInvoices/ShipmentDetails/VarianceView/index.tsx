@@ -58,45 +58,55 @@ function VarianceView({
 	currency,
 }: VarianceViewInterface) {
 	const functions: FunctionObjects = {
-		PurchaseInvoiceLineItem: (item: any) => (
-			<div>
-				<span>
-					{(item?.purchase_line_items || [])
-          	.map((charge: any) => charge.name)
-          	.join(',')}
-				</span>
-				<span style={{ marginLeft: 4 }}>
-					(
+		PurchaseInvoiceLineItem: (item: any) => {
+			const {
+				purchase_line_items: purchaseLineItems,
+				purchase_invoice: purchaseInvoice,
+			} = item || {};
+			return (
+				<div>
+					<span>
+						{(purchaseLineItems || [])
+            	.map((charge: any) => charge.name)
+            	.join(',')}
+					</span>
+					<span style={{ marginLeft: 4 }}>
+						(
+						{currency}
+						{' '}
+						{purchaseInvoice}
+						)
+					</span>
+				</div>
+			);
+		},
+		LiveInvoiceLineItem: (item: any) => {
+			const { buy_line_items: buyLineItems, live_invoice: LineInvoice } = item || {};
+			return (
+				<div>
+					<span>
+						{(buyLineItems || []).map((charge: any) => charge.name).join(',')}
+					</span>
+					<span style={{ marginLeft: 4 }}>
+						(
+						{currency}
+						{' '}
+						{LineInvoice}
+						)
+					</span>
+				</div>
+			);
+		},
+		Variance: (item: any) => {
+			const { variance } = item || {};
+			return (
+				<div>
 					{currency}
 					{' '}
-					{item?.purchase_invoice}
-					)
-				</span>
-			</div>
-		),
-		LiveInvoiceLineItem: (item: any) => (
-			<div>
-				<span>
-					{(item?.buy_line_items || [])
-          	.map((charge: any) => charge.name)
-          	.join(',')}
-				</span>
-				<span style={{ marginLeft: 4 }}>
-					(
-					{currency}
-					{' '}
-					{item?.live_invoice}
-					)
-				</span>
-			</div>
-		),
-		Variance: (item: any) => (
-			<div>
-				{currency}
-				{' '}
-				{item?.variance}
-			</div>
-		),
+					{variance}
+				</div>
+			);
+		},
 	};
 
 	return (

@@ -69,10 +69,18 @@ function POCDetails({ itemData }: Props) {
 	return (
 		<>
 			<div className={styles.iconView}>
-				<div className={styles.iconContainer} onClick={handleShow}>
+				<div
+					className={styles.iconContainer}
+					onClick={handleShow}
+					role="presentation"
+				>
 					<IcMArrowRotateRight width={20} height={20} />
 				</div>
-				<div className={styles.pocContainer} onClick={handleShow}>
+				<div
+					className={styles.pocContainer}
+					onClick={handleShow}
+					role="presentation"
+				>
 					POC & Other Details
 				</div>
 			</div>
@@ -92,6 +100,7 @@ function POCDetails({ itemData }: Props) {
                   	setShowDetailsCard(false);
                   	document.body.style.overflow = 'auto';
 									}}
+									role="presentation"
 								>
 									<IcMArrowRotateLeft />
 								</div>
@@ -132,6 +141,7 @@ function POCDetails({ itemData }: Props) {
 			onClick={() => {
                           	handleDropdown(id);
 			}}
+			role="presentation"
 		>
 			{label}
 			<div className={styles.dropdownContainer}>

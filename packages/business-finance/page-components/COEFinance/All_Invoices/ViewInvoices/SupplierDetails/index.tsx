@@ -75,8 +75,11 @@ function SupplierDetails({
 	};
 
 	const functions = {
-		DocumentTypeFunc : (item: any) => <p>{startCase(item?.document_type)}</p>,
-		viewFunc         : (item: any) => (
+		DocumentTypeFunc: (item: any) => {
+			const { document_type: DocumentType } = item;
+			return <p>{startCase(DocumentType)}</p>;
+		},
+		viewFunc: (item: any) => (
 			<Button
 				themeType="secondary"
 				size="md"
@@ -86,7 +89,11 @@ function SupplierDetails({
 			</Button>
 		),
 		downloadFunc: (item: any) => (
-			<div className={styles.download} onClick={() => saveAs(item?.image_url)}>
+			<div
+				className={styles.download}
+				onClick={() => saveAs(item?.image_url)}
+				role="presentation"
+			>
 				<IcMDownload height={20} width={20} />
 			</div>
 		),
@@ -210,6 +217,7 @@ function SupplierDetails({
 						onClick={(e) => {
             	handleChange();
 						}}
+						role="presentation"
 					>
 						Supplier History
 					</div>
@@ -245,6 +253,7 @@ function SupplierDetails({
 							onClick={() => {
               	setShowDocsModal(true);
 							}}
+							role="presentation"
 						>
 							Documents
 						</div>
@@ -256,6 +265,7 @@ function SupplierDetails({
 								onClose={() => {
                 	setShowDocsModal(false);
 								}}
+								role="presentation"
 							>
 								<Modal.Header title="Documents" />
 								<Modal.Body>

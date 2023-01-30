@@ -9,13 +9,13 @@ import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
 
-interface Details {
+interface DetailsInterface {
 	orgId: string;
 	dataList: DetailInterface;
 	shipmentId: string;
 }
-function Details({ orgId, dataList, shipmentId }: Details) {
-	const { importer_exporter, shipment_type } = dataList || {};
+function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
+	const { importer_exporter: importerExporter } = dataList || {};
 	const Router = useRouter();
 
 	return (
@@ -26,12 +26,12 @@ function Details({ orgId, dataList, shipmentId }: Details) {
 						interactive
 						content={(
 							<div className={styles.name}>
-								{importer_exporter?.business_name || '-'}
+								{importerExporter?.business_name || '-'}
 							</div>
 						)}
 					>
 						<div className={styles.orgnizationName}>
-							{importer_exporter?.business_name || '-'}
+							{importerExporter?.business_name || '-'}
 						</div>
 					</Tooltip>
 				</div>
@@ -46,6 +46,7 @@ function Details({ orgId, dataList, shipmentId }: Details) {
 				<a
 					className={styles.flexDiv}
 					onClick={() => Router.push(`/shipments/${orgId}`)}
+					role="presentation"
 				>
 					Go to SID →
 				</a>

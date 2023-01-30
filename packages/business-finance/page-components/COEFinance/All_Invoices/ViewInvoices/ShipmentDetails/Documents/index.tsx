@@ -19,47 +19,65 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 	const { data: documentData, loading } = useShipmentDocument(shipmentId);
 
 	const functions = {
-		DocumentTypeFunc : (item: any) => <p>{startCase(item?.document_type)}</p>,
-		ServiceTypeFunc  : (item: any) => <p>{startCase(item?.service_type)}</p>,
-		DocumentStatus   : (item: any) => <p>{startCase(item?.state)}</p>,
-		UploadedTypeFunc : (item: any) => (
-			<p>
-				{item?.uploaded_by_user?.name || item?.uploaded_by_org?.business_name}
-			</p>
-		),
-		UploadedOnFunc: (item: any) => (
-			<p>
-				{item?.uploaded_at
-        	? formatDate(item?.uploaded_at, 'dd MMM yy | hh:mm a', {}, true)
-        	: null}
-			</p>
-		),
-		viewFunc: (item: any) => (
-			<>
-				{' '}
-				{item?.document_url ? (
-					<Button
-						themeType="secondary"
-						size="xs"
-						onClick={() => window.open(item?.document_url, '_blank')}
-					>
-						View
-					</Button>
-				) : null}
-			</>
-		),
-		downloadFunc: (item: any) => (
-			<>
-				{item?.document_url ? (
-					<div
-						className={styles.download}
-						onClick={() => saveAs(item?.document_url)}
-					>
-						<IcMDownload height={20} width={20} />
-					</div>
-				) : null}
-			</>
-		),
+		DocumentTypeFunc: (item: any) => {
+			const { document_type: DocumentType } = item || {};
+			return <p>{startCase(DocumentType)}</p>;
+		},
+		ServiceTypeFunc: (item: any) => {
+			const { service_type: serviceType } = item || {};
+			return <p>{startCase(serviceType)}</p>;
+		},
+		DocumentStatus: (item: any) => {
+			const { state } = item || {};
+			return <p>{startCase(state)}</p>;
+		},
+		UploadedTypeFunc: (item: any) => {
+			const {
+				uploaded_by_user: UploadedByUser,
+				uploaded_by_org: uploadedByOrg,
+			} = item || {};
+			return <p>{UploadedByUser?.name || uploadedByOrg?.business_name}</p>;
+		},
+		UploadedOnFunc: (item: any) => {
+			const { uploaded_at: uploadedAt } = item || {};
+			return (
+				<p>
+					{uploadedAt
+          	? formatDate(uploadedAt, 'dd MMM yy | hh:mm a', {}, true)
+          	: null}
+				</p>
+			);
+		},
+		viewFunc: (item: any) => {
+			const { document_url: DocumentUrl } = item || {};
+			return (
+				<>
+					{' '}
+					{DocumentUrl ? (
+						<Button
+							themeType="secondary"
+							size="xs"
+							onClick={() => window.open(DocumentUrl, '_blank')}
+							role="presentation"
+						>
+							View
+						</Button>
+					) : null}
+				</>
+			);
+		},
+		downloadFunc: (item: any) => {
+			const { document_url: DocumentUrl } = item || {};
+			return DocumentUrl ? (
+				<div
+					className={styles.download}
+					onClick={() => saveAs(DocumentUrl)}
+					role="presentation"
+				>
+					<IcMDownload height={20} width={20} />
+				</div>
+			) : null;
+		},
 	};
 
 	return (

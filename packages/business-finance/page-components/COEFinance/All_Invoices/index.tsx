@@ -29,6 +29,7 @@ function AllInvoices() {
 						onClick={() => {
             	setSubActiveTab('purchase-view');
 						}}
+						role="presentation"
 					>
 						<div
 							className={
@@ -42,6 +43,7 @@ function AllInvoices() {
 						onClick={() => {
             	setSubActiveTab('shipment-view');
 						}}
+						role="presentation"
 					>
 						<div
 							className={

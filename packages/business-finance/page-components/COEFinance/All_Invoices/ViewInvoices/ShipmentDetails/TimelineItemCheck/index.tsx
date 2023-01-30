@@ -1,5 +1,5 @@
 import { IcMFtick } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 

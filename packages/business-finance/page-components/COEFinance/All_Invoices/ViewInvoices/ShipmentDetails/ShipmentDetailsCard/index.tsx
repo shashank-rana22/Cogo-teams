@@ -50,10 +50,7 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const {
-		organizationName = '',
-		taxNumber = '',
-	} = sellerDetail || {};
+	const { organizationName = '', taxNumber = '' } = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
@@ -461,6 +458,7 @@ function ShipmentDetailsCard({
 									onClick={() => {
                               	handleClickUndo(id);
 									}}
+									role="presentation"
 								>
 									<Button size="md" themeType="secondary">
 										Undo
@@ -566,6 +564,7 @@ function ShipmentDetailsCard({
 									onClick={() => {
                               	handleClickUndo(id);
 									}}
+									role="presentation"
 								>
 									<Button size="md" themeType="secondary">
 										Undo
@@ -663,6 +662,7 @@ function ShipmentDetailsCard({
 									onClick={() => {
                               	handleClickUndo(id);
 									}}
+									role="presentation"
 								>
 									<Button size="md" themeType="secondary">
 										Undo
