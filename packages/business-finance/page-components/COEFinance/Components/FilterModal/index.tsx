@@ -45,7 +45,7 @@ function FilterModal({ filters, setFilters }: Props) {
 				(ite) => ite.text,
 			),
 		});
-	}, [currencies]);
+	}, [currencies, filters, setFilters]);
 
 	const handleClose = () => {
 		setFilters({});
@@ -61,7 +61,7 @@ function FilterModal({ filters, setFilters }: Props) {
 				scroll={false}
 				show={showModal}
 				onClose={() => {
-        	handleClose();
+					handleClose();
 				}}
 			>
 				<Modal.Header
@@ -76,34 +76,34 @@ function FilterModal({ filters, setFilters }: Props) {
 					<div className={styles.currencys}>Currency</div>
 					<div
 						style={{
-            	display      : 'flex',
-            	marginBottom : '24px',
-            	marginLeft   : '26px',
+							display      : 'flex',
+							marginBottom : '24px',
+							marginLeft   : '26px',
 						}}
 					>
 						{CURRENCY_DATA.map((item: Ite) => {
-            	const { id = '', icon, text } = item;
-            	return (
-	<div
-		className={`${styles.currencyValues}
+							const { id = '', icon, text } = item;
+							return (
+								<div
+									className={`${styles.currencyValues}
 											${
-                        currencies.includes(id as keyof typeof currencies)
-                        	? styles.selected
-                        	: styles.unselected
-		}`}
-		onClick={() => {
-                  	if (currencies?.includes(id)) {
-                  		const value = currencies.filter((it) => it !== item?.id);
-                  		setCurrencies(value);
-                  	} else {
-                  		setCurrencies([...currencies, id]);
-                  	}
-		}}
-	>
-		<div className="iconShow">{icon}</div>
-		<div className="textShow">{text}</div>
-	</div>
-            	);
+                                            currencies.includes(id as keyof typeof currencies) ? styles.selected
+                                            	: styles.unselected
+									}`}
+									onClick={() => {
+										if (currencies?.includes(id)) {
+											const value = currencies.filter((it) => it !== item?.id);
+											setCurrencies(value);
+										} else {
+											setCurrencies([...currencies, id]);
+										}
+									}}
+									role="presentation"
+								>
+									<div className="iconShow">{icon}</div>
+									<div className="textShow">{text}</div>
+								</div>
+							);
 						})}
 					</div>
 
@@ -118,9 +118,9 @@ function FilterModal({ filters, setFilters }: Props) {
 						<div className={styles.clear}>
 							<Button
 								onClick={() => {
-                	setFilters({});
-                	setCurrencies([]);
-                	setShowModal(false);
+									setFilters({});
+									setCurrencies([]);
+									setShowModal(false);
 								}}
 							>
 								Clear Filters
@@ -129,7 +129,7 @@ function FilterModal({ filters, setFilters }: Props) {
 						<div className={styles.apply}>
 							<Button
 								onClick={() => {
-                	setShowModal(false);
+									setShowModal(false);
 								}}
 							>
 								Apply
@@ -139,10 +139,10 @@ function FilterModal({ filters, setFilters }: Props) {
 				</Modal.Body>
 			</Modal>
 			<div
-				role="button"
+				role="presentation"
 				className={styles.filterButton}
 				onClick={() => {
-        	setShowModal(true);
+					setShowModal(true);
 				}}
 			>
 				Filters

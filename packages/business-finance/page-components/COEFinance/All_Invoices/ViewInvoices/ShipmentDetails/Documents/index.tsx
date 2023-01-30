@@ -43,8 +43,8 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 			return (
 				<p>
 					{uploadedAt
-          	? formatDate(uploadedAt, 'dd MMM yy | hh:mm a', {}, true)
-          	: null}
+						? formatDate(uploadedAt, 'dd MMM yy | hh:mm a', {}, true)
+						: null}
 				</p>
 			);
 		},

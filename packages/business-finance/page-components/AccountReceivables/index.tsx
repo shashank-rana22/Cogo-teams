@@ -1,16 +1,13 @@
 import { IcMAccountSettings } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { PAYRUN_PAID_CONFIG } from '../account-payables/configurations/PAID_TABLE';
 import Filter from '../commons/Filters';
-import List from '../commons/List/index';
 import SegmentedControl from '../commons/SegmentedControl';
 import StyledTable from '../commons/StyledTable';
 
 import { INVOICE_FILTERS } from './FILTERS_CONTROLS';
 
 function AccountRecievables() {
-	const [sort, setSort] = useState({});
 	const [filters, setFilters] = useState({});
 	const OPTIONS = [
 		{

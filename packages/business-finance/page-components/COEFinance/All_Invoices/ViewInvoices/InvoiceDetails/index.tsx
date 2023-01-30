@@ -84,7 +84,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 	<Tooltip placement="bottom" interactive content={remarkRender()}>
 		<IcMInfo />
 	</Tooltip>
-        	) : null}
+					) : null}
 			</div>
 
 			<div className={styles.buttonContainer}>
@@ -155,8 +155,8 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					{' '}
 					<span className={styles.tag}>
 						{data?.billAdditionalObject?.urgencyTag
-            	? renderEditTag
-            	: !isEmpty(data) && renderEmpty}
+							? renderEditTag
+							: !isEmpty(data) && renderEmpty}
 					</span>
 				</div>
 				<div className={styles.verticalSmallHr} />

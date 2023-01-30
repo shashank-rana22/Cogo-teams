@@ -13,17 +13,16 @@ import Status from './RenderData/Status/index';
 import ViewInvoice from './RenderData/ViewInvoice/index';
 import styles from './styles.module.css';
 
-interface propsType {
+interface PropsType {
 	cardData: any;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
-	refetch: Function;
 	amountTab: string;
 	setAmountTab: Function;
 	setDataCard: Function;
 }
 
-interface fullResponseProps {
+interface FullResponseProps {
 	totalRecords?: number;
 	pageIndex?: number;
 	list?: object[];
@@ -36,7 +35,7 @@ function CardItem({
 	amountTab,
 	setDataCard,
 	setAmountTab,
-}: propsType) {
+}: PropsType) {
 	const {
 		loading,
 		list: { fullResponse },
@@ -52,7 +51,7 @@ function CardItem({
 		setCurrentOpenSID('');
 	};
 
-	const { totalRecords, pageIndex, list }: fullResponseProps = fullResponse || {};
+	const { totalRecords, pageIndex, list }: FullResponseProps = fullResponse || {};
 
 	const functions = {
 		renderInvoiceNumber: (item: {}, field: {}) => (
@@ -67,11 +66,11 @@ function CardItem({
 		renderAmount: (item: any, field: {}) => (
 			<AmountWithCurrency item={item} field={field} />
 		),
-		renderStatus: (item: {}, field: {}) => (
-			<Status item={item} field={field} />
+		renderStatus: (item: {}) => (
+			<Status item={item} />
 		),
-		renderInvoices: (item: {}, field: {}) => (
-			<ViewInvoice item={item} field={field} />
+		renderInvoices: (item: {}) => (
+			<ViewInvoice item={item} />
 		),
 		renderRemarks: (item: any) => <Remarks itemData={item} />,
 	};
@@ -107,6 +106,7 @@ function CardItem({
 				<div
 					className={styles.footerText}
 					onClick={() => handleClick()}
+					role="presentation"
 				>
 					View Less
 				</div>

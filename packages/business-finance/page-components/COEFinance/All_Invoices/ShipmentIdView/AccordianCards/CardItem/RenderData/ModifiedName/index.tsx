@@ -3,22 +3,22 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	organizationName?: string;
 	createdByName: string;
-	buyerDetails?: businessNameTypes;
+	buyerDetails?: BusinessNameTypes;
 }
 
-interface businessNameTypes {
+interface BusinessNameTypes {
 	businessName: string;
 }
 
-interface propsType {
-	item: itemTypes;
+interface PropsType {
+	item: ItemTypes;
 	field: any;
 }
 
-function ModifiedName({ item, field }: propsType) {
+function ModifiedName({ item, field }: PropsType) {
 	const { organizationName = '', createdByName, buyerDetails } = item || {};
 
 	const { businessName = '' } = buyerDetails || {};

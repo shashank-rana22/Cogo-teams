@@ -214,8 +214,8 @@ function SupplierDetails({
 				<div className={styles.supplierDetails}>
 					<div
 						className={styles.supplierHistory}
-						onClick={(e) => {
-            	handleChange();
+						onClick={() => {
+							handleChange();
 						}}
 						role="presentation"
 					>
@@ -226,7 +226,7 @@ function SupplierDetails({
 							size="lg"
 							show={showModal}
 							onClose={() => {
-              	setShowModal(false);
+								setShowModal(false);
 							}}
 						>
 							<Modal.Header title="SUPPLIER HISTORY" />
@@ -251,7 +251,7 @@ function SupplierDetails({
 						<div
 							className={styles.supplierHistory}
 							onClick={() => {
-              	setShowDocsModal(true);
+								setShowDocsModal(true);
 							}}
 							role="presentation"
 						>
@@ -263,22 +263,22 @@ function SupplierDetails({
 								size="lg"
 								show={showDocsModal}
 								onClose={() => {
-                	setShowDocsModal(false);
+									setShowDocsModal(false);
 								}}
 							>
 								<Modal.Header title="Documents" />
 								<Modal.Body>
 									{kycStatus === 'verified'
-                  && serviceProviderDocuments?.list ? (
+ && serviceProviderDocuments?.list ? (
 	<List
 		config={DOCUMENTS}
 		itemData={{ list: serviceProviderDocuments?.list }}
 		loading={loading}
 		functions={functions}
 	/>
-                  	) : (
-	<div className={styles.supplyCard}>NO Documents</div>
-                  	)}
+										) : (
+											<div className={styles.supplyCard}>NO Documents</div>
+										)}
 								</Modal.Body>
 							</Modal>
 						)}

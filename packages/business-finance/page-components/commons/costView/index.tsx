@@ -6,10 +6,10 @@ import Quotation from './quotation/index';
 import styles from './styles.module.css';
 
 interface CostViewProps {
-	shipment_id?:string
+	shipment_id?: string;
 }
 
-function CostView({ shipment_id = '' }:CostViewProps) {
+function CostView({ shipment_id = '' }: CostViewProps) {
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/get_shipment_cost_sheet',
@@ -32,7 +32,7 @@ function CostView({ shipment_id = '' }:CostViewProps) {
 			};
 			getDataFromApi();
 		}
-	}, [shipment_id]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [shipment_id, trigger]);
 
 	return (
 		<div>

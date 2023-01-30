@@ -67,8 +67,8 @@ function VarianceView({
 				<div>
 					<span>
 						{(purchaseLineItems || [])
-            	.map((charge: any) => charge.name)
-            	.join(',')}
+							.map((charge: any) => charge.name)
+							.join(',')}
 					</span>
 					<span style={{ marginLeft: 4 }}>
 						(

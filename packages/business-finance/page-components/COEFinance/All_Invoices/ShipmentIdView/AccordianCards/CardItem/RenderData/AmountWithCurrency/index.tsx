@@ -5,23 +5,23 @@ import getFormattedPrice from '../../../../../../../commons/utils/getFormattedPr
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	grandTotal?: number;
 	billCurrency?: string;
 	currency?: string;
 }
 
-interface propsType {
-	item: itemTypes;
+interface PropsType {
+	item: ItemTypes;
 	field?: any;
 }
 
-function AmountWithCurrency({ item, field }: propsType) {
-	const { grandTotal, billCurrency, currency }: itemTypes = item;
+function AmountWithCurrency({ item, field }: PropsType) {
+	const { grandTotal, billCurrency, currency }: ItemTypes = item;
 
 	const formatAmount = getFormattedPrice(
-        	grandTotal!,
-        	billCurrency! || currency || 'INR',
+		grandTotal!,
+		billCurrency! || currency || 'INR',
 	) || '';
 	return (
 

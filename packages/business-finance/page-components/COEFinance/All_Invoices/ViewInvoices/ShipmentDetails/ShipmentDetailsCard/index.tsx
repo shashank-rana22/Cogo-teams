@@ -11,6 +11,7 @@ import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+// eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 
@@ -188,547 +189,547 @@ function ShipmentDetailsCard({
 					</div>
 					<div className={styles.smallHr} />
 					{DetailsCard.map((itemData: any) => {
-          	const { id, label = '' } = itemData || {};
+						const { id, label = '' } = itemData || {};
 
-          	return (
-	<>
-		{showRejected[id as keyof typeof showRejected] && (
-			<Modal
-				size="lg"
-				show={showRejected[id as keyof typeof showRejected]}
-				onClose={onClose}
-			>
-				<Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
-				<Modal.Body>
-					{Object.keys(showRejected).includes('1') && (
-						<div>
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Name -
-									{' '}
-									<span>{organizationName}</span>
-								</div>
-							</div>
+						return (
+							<>
+								{showRejected[id as keyof typeof showRejected] && (
+									<Modal
+										size="lg"
+										show={showRejected[id as keyof typeof showRejected]}
+										onClose={onClose}
+									>
+										<Modal.Header title="CHOOSE THE DETAILS YOU WANT TO REJECT" />
+										<Modal.Body>
+											{Object.keys(showRejected).includes('1') && (
+												<div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Name -
+															{' '}
+															<span>{organizationName}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									{' '}
-									Bank Name -
-									{' '}
-									<span>{bankName}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															{' '}
+															Bank Name -
+															{' '}
+															<span>{bankName}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									{' '}
-									Account Number -
-									{' '}
-									<span style={{ color: '#ed3726' }}>
-										{accountNumber}
-									</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															{' '}
+															Account Number -
+															{' '}
+															<span style={{ color: '#ed3726' }}>
+																{accountNumber}
+															</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									{' '}
-									IFSC -
-									{' '}
-									<span style={{ color: '#ed3726' }}>
-										{ifscCode}
-									</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															{' '}
+															IFSC -
+															{' '}
+															<span style={{ color: '#ed3726' }}>
+																{ifscCode}
+															</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									PAN Number -
-									{' '}
-									<span>{(taxNumber || '').slice(2, 12)}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															PAN Number -
+															{' '}
+															<span>{(taxNumber || '').slice(2, 12)}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									GST Number -
-									{' '}
-									<span>{taxNumber}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															GST Number -
+															{' '}
+															<span>{taxNumber}</span>
+														</div>
+													</div>
 
-							<Textarea
-								name="remark"
-								size="md"
-								placeholder="Remarks Here ..."
-								style={{ width: '700', height: '100px' }}
-								value={remarksVal.collectionPartyRemark}
-								onChange={(value: string) => setRemarksVal({
-                            		...remarksVal,
-                            		collectionPartyRemark: value,
-                            	})}
-							/>
-						</div>
-					)}
+													<Textarea
+														name="remark"
+														size="md"
+														placeholder="Remarks Here ..."
+														style={{ width: '700', height: '100px' }}
+														value={remarksVal.collectionPartyRemark}
+														onChange={(value: string) => setRemarksVal({
+															...remarksVal,
+															collectionPartyRemark: value,
+														})}
+													/>
+												</div>
+											)}
 
-					{Object.keys(showRejected).includes('2') && (
-						<div>
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Entity -
-									{' '}
-									<span style={{ fontWeight: '600' }}>
-										{entityCode}
-									</span>
-									{' '}
-									-
-									{' '}
-									<span style={{ fontWeight: '600' }}>
-										{organizationNameBuyer}
-									</span>
-								</div>
-							</div>
+											{Object.keys(showRejected).includes('2') && (
+												<div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Entity -
+															{' '}
+															<span style={{ fontWeight: '600' }}>
+																{entityCode}
+															</span>
+															{' '}
+															-
+															{' '}
+															<span style={{ fontWeight: '600' }}>
+																{organizationNameBuyer}
+															</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Address -
-									{' '}
-									<span>{address}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Address -
+															{' '}
+															<span>{address}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									PAN Number -
-									{' '}
-									<span>{registrationNumberBuyer}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															PAN Number -
+															{' '}
+															<span>{registrationNumberBuyer}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									GST Number -
-									{' '}
-									<span>{taxNumberBuyer}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															GST Number -
+															{' '}
+															<span>{taxNumberBuyer}</span>
+														</div>
+													</div>
 
-							<Textarea
-								name="remark"
-								size="md"
-								placeholder="Remarks Here ..."
-								value={remarksVal.billingPartyRemark}
-								onChange={(value: string) => setRemarksVal({
-                            		...remarksVal,
-                            		billingPartyRemark: value,
-                            	})}
-								style={{ width: '700', height: '100px' }}
-							/>
-						</div>
-					)}
-					{Object.keys(showRejected).includes('3') && (
-						<div>
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Invoice Number -
-									{' '}
-									<span>{billNumber}</span>
-								</div>
-							</div>
+													<Textarea
+														name="remark"
+														size="md"
+														placeholder="Remarks Here ..."
+														value={remarksVal.billingPartyRemark}
+														onChange={(value: string) => setRemarksVal({
+															...remarksVal,
+															billingPartyRemark: value,
+														})}
+														style={{ width: '700', height: '100px' }}
+													/>
+												</div>
+											)}
+											{Object.keys(showRejected).includes('3') && (
+												<div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Invoice Number -
+															{' '}
+															<span>{billNumber}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Invoice Date -
-									{' '}
-									<span>
-										{format(billDate, 'dd/MMM/yyyy', {}, false)}
-									</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Invoice Date -
+															{' '}
+															<span>
+																{format(billDate, 'dd/MMM/yyyy', {}, false)}
+															</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Status -
-									{' '}
-									<span>{status}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Status -
+															{' '}
+															<span>{status}</span>
+														</div>
+													</div>
 
-							<div
-								style={{ display: 'flex', alignItems: 'center' }}
-							>
-								<Checkbox />
-								<div style={{ marginBottom: '8px' }}>
-									Place Of Supply -
-									{' '}
-									<span>{placeOfSupply}</span>
-								</div>
-							</div>
+													<div
+														style={{ display: 'flex', alignItems: 'center' }}
+													>
+														<Checkbox />
+														<div style={{ marginBottom: '8px' }}>
+															Place Of Supply -
+															{' '}
+															<span>{placeOfSupply}</span>
+														</div>
+													</div>
 
-							<Textarea
-								name="remark"
-								size="md"
-								placeholder="Remarks Here ..."
-								value={remarksVal.invoiceDetailsRemark}
-								onChange={(value: string) => setRemarksVal({
-                            		...remarksVal,
-                            		invoiceDetailsRemark: value,
-                            	})}
-								style={{ width: '700', height: '100px' }}
-							/>
-						</div>
-					)}
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={onSubmit}>Submit</Button>
-				</Modal.Footer>
-			</Modal>
-		)}
+													<Textarea
+														name="remark"
+														size="md"
+														placeholder="Remarks Here ..."
+														value={remarksVal.invoiceDetailsRemark}
+														onChange={(value: string) => setRemarksVal({
+															...remarksVal,
+															invoiceDetailsRemark: value,
+														})}
+														style={{ width: '700', height: '100px' }}
+													/>
+												</div>
+											)}
+										</Modal.Body>
+										<Modal.Footer>
+											<Button onClick={onSubmit}>Submit</Button>
+										</Modal.Footer>
+									</Modal>
+								)}
 
-		{id === 1 && (
-			<div className={styles.container}>
-				<div className={styles.headerContainer}>
-					<div
-						className={
-                          showValue.includes(1) || isInvoiceApproved
+								{id === 1 && (
+									<div className={styles.container}>
+										<div className={styles.headerContainer}>
+											<div
+												className={
+                            showValue.includes(1) || isInvoiceApproved
                           	? styles.labelApproved
                           	: rejected.includes(1)
                           		? styles.labelRejected
                           		: styles.label
                         }
-					>
-						{label}
-						<div
-							style={{ justifyContent: 'center', display: 'flex' }}
-						>
-							{showValue.includes(1) || isInvoiceApproved ? (
-								<IcCFtick height="17px" width="17px" />
-							) : rejected.includes(1) ? (
-								<IcMCrossInCircle height="17px" width="17px" />
-							) : null}
-						</div>
-					</div>
+											>
+												{label}
+												<div
+													style={{ justifyContent: 'center', display: 'flex' }}
+												>
+													{showValue.includes(1) || isInvoiceApproved ? (
+														<IcCFtick height="17px" width="17px" />
+													) : rejected.includes(1) ? (
+														<IcMCrossInCircle height="17px" width="17px" />
+													) : null}
+												</div>
+											</div>
 
-					{!isInvoiceApproved && (
-						<div>
-							{showValue.includes(1) || rejected.includes(1) ? (
-								<div
-									className={styles.buttonContainer}
-									onClick={() => {
-                              	handleClickUndo(id);
-									}}
-									role="presentation"
-								>
-									<Button size="md" themeType="secondary">
-										Undo
-									</Button>
-								</div>
-							) : (
-								<div className={styles.buttonContainer}>
-									<Button
-										size="md"
-										themeType="secondary"
-										onClick={() => {
-                                	handleClick(id);
-										}}
-									>
-										Approve
-									</Button>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ border: '1px solid #ed3726' }}
-										onClick={() => {
-                                	handleClickReject(id);
-										}}
-									>
-										Reject
-									</Button>
-								</div>
-							)}
-						</div>
-					)}
-				</div>
-				<div className={styles.hr} />
+											{!isInvoiceApproved && (
+												<div>
+													{showValue.includes(1) || rejected.includes(1) ? (
+														<div
+															className={styles.buttonContainer}
+															onClick={() => {
+																handleClickUndo(id);
+															}}
+															role="presentation"
+														>
+															<Button size="md" themeType="secondary">
+																Undo
+															</Button>
+														</div>
+													) : (
+														<div className={styles.buttonContainer}>
+															<Button
+																size="md"
+																themeType="secondary"
+																onClick={() => {
+																	handleClick(id);
+																}}
+															>
+																Approve
+															</Button>
+															<Button
+																size="md"
+																themeType="secondary"
+																style={{ border: '1px solid #ed3726' }}
+																onClick={() => {
+																	handleClickReject(id);
+																}}
+															>
+																Reject
+															</Button>
+														</div>
+													)}
+												</div>
+											)}
+										</div>
+										<div className={styles.hr} />
 
-				<div className={styles.billingPartyContainer}>
-					<div style={{ marginBottom: '8px' }}>
-						Name -
-						{' '}
-						<span>{organizationName}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						{' '}
-						Bank Name -
-						{' '}
-						<span>{bankName}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						{' '}
-						Account Number -
-						{' '}
-						<span style={{ color: '#ed3726' }}>
-							{accountNumber}
-						</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						{' '}
-						IFSC -
-						{' '}
-						<span style={{ color: '#ed3726' }}>{ifscCode}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						PAN Number -
-						{' '}
-						<span>{(taxNumber || '').slice(2, 12)}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						GST Number -
-						{' '}
-						<span>{taxNumber}</span>
-					</div>
-				</div>
-			</div>
-		)}
+										<div className={styles.billingPartyContainer}>
+											<div style={{ marginBottom: '8px' }}>
+												Name -
+												{' '}
+												<span>{organizationName}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												{' '}
+												Bank Name -
+												{' '}
+												<span>{bankName}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												{' '}
+												Account Number -
+												{' '}
+												<span style={{ color: '#ed3726' }}>
+													{accountNumber}
+												</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												{' '}
+												IFSC -
+												{' '}
+												<span style={{ color: '#ed3726' }}>{ifscCode}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												PAN Number -
+												{' '}
+												<span>{(taxNumber || '').slice(2, 12)}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												GST Number -
+												{' '}
+												<span>{taxNumber}</span>
+											</div>
+										</div>
+									</div>
+								)}
 
-		{id === 2 && (
-			<div className={styles.container}>
-				<div className={styles.headerContainer}>
-					<div
-						className={
+								{id === 2 && (
+									<div className={styles.container}>
+										<div className={styles.headerContainer}>
+											<div
+												className={
                           showValue.includes(2) || isInvoiceApproved
                           	? styles.labelApproved
                           	: rejected.includes(2)
                           		? styles.labelRejected
                           		: styles.label
                         }
-					>
-						{label}
-						<div
-							style={{ justifyContent: 'center', display: 'flex' }}
-						>
-							{showValue.includes(2) || isInvoiceApproved ? (
-								<IcCFtick height="17px" width="17px" />
-							) : rejected.includes(2) ? (
-								<IcMCrossInCircle height="17px" width="17px" />
-							) : null}
-						</div>
-					</div>
+											>
+												{label}
+												<div
+													style={{ justifyContent: 'center', display: 'flex' }}
+												>
+													{showValue.includes(2) || isInvoiceApproved ? (
+														<IcCFtick height="17px" width="17px" />
+													) : rejected.includes(2) ? (
+														<IcMCrossInCircle height="17px" width="17px" />
+													) : null}
+												</div>
+											</div>
 
-					{!isInvoiceApproved && (
-						<div>
-							{showValue.includes(2) || rejected.includes(2) ? (
-								<div
-									className={styles.buttonContainer}
-									onClick={() => {
-                              	handleClickUndo(id);
-									}}
-									role="presentation"
-								>
-									<Button size="md" themeType="secondary">
-										Undo
-									</Button>
-								</div>
-							) : (
-								<div className={styles.buttonContainer}>
-									<Button
-										size="md"
-										themeType="secondary"
-										onClick={() => {
-                                	handleClick(id);
-										}}
-									>
-										Approve
-									</Button>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ border: '1px solid #ed3726' }}
-										onClick={() => {
-                                	handleClickReject(id);
-										}}
-									>
-										Reject
-									</Button>
-								</div>
-							)}
-						</div>
-					)}
-				</div>
+											{!isInvoiceApproved && (
+												<div>
+													{showValue.includes(2) || rejected.includes(2) ? (
+														<div
+															className={styles.buttonContainer}
+															onClick={() => {
+																handleClickUndo(id);
+															}}
+															role="presentation"
+														>
+															<Button size="md" themeType="secondary">
+																Undo
+															</Button>
+														</div>
+													) : (
+														<div className={styles.buttonContainer}>
+															<Button
+																size="md"
+																themeType="secondary"
+																onClick={() => {
+																	handleClick(id);
+																}}
+															>
+																Approve
+															</Button>
+															<Button
+																size="md"
+																themeType="secondary"
+																style={{ border: '1px solid #ed3726' }}
+																onClick={() => {
+																	handleClickReject(id);
+																}}
+															>
+																Reject
+															</Button>
+														</div>
+													)}
+												</div>
+											)}
+										</div>
 
-				<div className={styles.hr} />
+										<div className={styles.hr} />
 
-				<div className={styles.billingPartyContainer}>
-					<div style={{ marginBottom: '8px' }}>
-						Entity -
-						{' '}
-						<span style={{ fontWeight: '600' }}>{entityCode}</span>
-						{' '}
-						-
-						{' '}
-						<span style={{ fontWeight: '600' }}>
-							{organizationNameBuyer}
-						</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						Address -
-						{' '}
-						<span>{address}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						PAN Number -
-						{' '}
-						<span>{registrationNumberBuyer}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						GST Number -
-						{' '}
-						<span>{taxNumberBuyer}</span>
-					</div>
-				</div>
-			</div>
-		)}
+										<div className={styles.billingPartyContainer}>
+											<div style={{ marginBottom: '8px' }}>
+												Entity -
+												{' '}
+												<span style={{ fontWeight: '600' }}>{entityCode}</span>
+												{' '}
+												-
+												{' '}
+												<span style={{ fontWeight: '600' }}>
+													{organizationNameBuyer}
+												</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												Address -
+												{' '}
+												<span>{address}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												PAN Number -
+												{' '}
+												<span>{registrationNumberBuyer}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												GST Number -
+												{' '}
+												<span>{taxNumberBuyer}</span>
+											</div>
+										</div>
+									</div>
+								)}
 
-		{id === 3 && (
-			<div className={styles.container}>
-				<div className={styles.headerContainer}>
-					<div
-						className={
+								{id === 3 && (
+									<div className={styles.container}>
+										<div className={styles.headerContainer}>
+											<div
+												className={
                           showValue.includes(3) || isInvoiceApproved
                           	? styles.labelApproved
                           	: rejected.includes(3)
                           		? styles.labelRejected
                           		: styles.label
                         }
-					>
-						{label}
-						<div
-							style={{ justifyContent: 'center', display: 'flex' }}
-						>
-							{showValue.includes(3) || isInvoiceApproved ? (
-								<IcCFtick height="17px" width="17px" />
-							) : rejected.includes(3) ? (
-								<IcMCrossInCircle height="17px" width="17px" />
-							) : null}
-						</div>
-					</div>
+											>
+												{label}
+												<div
+													style={{ justifyContent: 'center', display: 'flex' }}
+												>
+													{showValue.includes(3) || isInvoiceApproved ? (
+														<IcCFtick height="17px" width="17px" />
+													) : rejected.includes(3) ? (
+														<IcMCrossInCircle height="17px" width="17px" />
+													) : null}
+												</div>
+											</div>
 
-					{!isInvoiceApproved && (
-						<div>
-							{showValue.includes(3) || rejected.includes(3) ? (
-								<div
-									className={styles.buttonContainer}
-									onClick={() => {
+											{!isInvoiceApproved && (
+												<div>
+													{showValue.includes(3) || rejected.includes(3) ? (
+														<div
+															className={styles.buttonContainer}
+															onClick={() => {
                               	handleClickUndo(id);
-									}}
-									role="presentation"
-								>
-									<Button size="md" themeType="secondary">
-										Undo
-									</Button>
-								</div>
-							) : (
-								<div className={styles.buttonContainer}>
-									<Button
-										size="md"
-										themeType="secondary"
-										onClick={() => {
-                                	handleClick(id);
-										}}
-									>
-										Approve
-									</Button>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ border: '1px solid #ed3726' }}
-										onClick={() => {
-                                	handleClickReject(id);
-										}}
-									>
-										Reject
-									</Button>
-								</div>
-							)}
-						</div>
-					)}
-				</div>
+															}}
+															role="presentation"
+														>
+															<Button size="md" themeType="secondary">
+																Undo
+															</Button>
+														</div>
+													) : (
+														<div className={styles.buttonContainer}>
+															<Button
+																size="md"
+																themeType="secondary"
+																onClick={() => {
+																	handleClick(id);
+																}}
+															>
+																Approve
+															</Button>
+															<Button
+																size="md"
+																themeType="secondary"
+																style={{ border: '1px solid #ed3726' }}
+																onClick={() => {
+																	handleClickReject(id);
+																}}
+															>
+																Reject
+															</Button>
+														</div>
+													)}
+												</div>
+											)}
+										</div>
 
-				<div className={styles.hr} />
-				<div className={styles.billingPartyContainer}>
-					<div style={{ marginBottom: '8px' }}>
-						Invoice Number -
-						{' '}
-						<span>{billNumber}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						Invoice Date -
-						{' '}
-						<span>
-							{format(billDate, 'dd/MMM/yyyy', {}, false)}
-						</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						Status -
-						{' '}
-						<span>{startCase(status)}</span>
-					</div>
-					<div style={{ marginBottom: '8px' }}>
-						Place Of Supply -
-						{' '}
-						<span>{placeOfSupply}</span>
-					</div>
-				</div>
-			</div>
-		)}
-	</>
-          	);
+										<div className={styles.hr} />
+										<div className={styles.billingPartyContainer}>
+											<div style={{ marginBottom: '8px' }}>
+												Invoice Number -
+												{' '}
+												<span>{billNumber}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												Invoice Date -
+												{' '}
+												<span>
+													{format(billDate, 'dd/MMM/yyyy', {}, false)}
+												</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												Status -
+												{' '}
+												<span>{startCase(status)}</span>
+											</div>
+											<div style={{ marginBottom: '8px' }}>
+												Place Of Supply -
+												{' '}
+												<span>{placeOfSupply}</span>
+											</div>
+										</div>
+									</div>
+								)}
+							</>
+						);
 					})}
 
 					<div className={styles.footer}>
 						<Button
 							size="md"
 							disabled={
-                !(showValue.length + rejected.length == 3 || isInvoiceApproved)
+                !(showValue.length + rejected.length === 3 || isInvoiceApproved)
               }
 							onClick={() => handleSave()}
 						>

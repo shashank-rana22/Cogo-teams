@@ -4,12 +4,13 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
+// eslint-disable-next-line import/no-cycle
 import { ItemDataProps } from '../index';
 
 import CardItem from './CardItem/index';
 import styles from './styles.module.css';
 
-interface listData {
+interface ListData {
 	itemData: ItemDataProps;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
@@ -20,7 +21,7 @@ function AccordianCards({
 	currentOpenSID,
 	setCurrentOpenSID,
 	refetch,
-}: listData) {
+}: ListData) {
 	const [amountTab, setAmountTab] = useState('expense');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
@@ -76,8 +77,8 @@ function AccordianCards({
 								</div>
 								<div className={styles.expenseValueText}>
 									{getFormattedPrice(
-                                    	itemData.expense_total_price!,
-                                    	itemData.expense_total_currency!,
+										itemData.expense_total_price!,
+										itemData.expense_total_currency!,
 									)}
 								</div>
 							</div>
@@ -92,8 +93,8 @@ function AccordianCards({
 								</div>
 								<div className={styles.urgentValueText}>
 									{getFormattedPrice(
-                                    	itemData.urgency_total_price!,
-                                    	itemData.urgency_total_currency || 'INR',
+										itemData.urgency_total_price!,
+										itemData.urgency_total_currency || 'INR',
 									)}
 								</div>
 							</div>
@@ -110,8 +111,8 @@ function AccordianCards({
 								</div>
 								<div className={styles.expenseValueText}>
 									{getFormattedPrice(
-                                    	itemData.income_total_price!,
-                                    	itemData.income_total_currency || 'INR',
+										itemData.income_total_price!,
+										itemData.income_total_currency || 'INR',
 									)}
 								</div>
 							</div>
@@ -126,8 +127,8 @@ function AccordianCards({
 								</div>
 								<div className={styles.expenseValueText}>
 									{getFormattedPrice(
-                                    	itemData.credit_total_price!,
-                                    	'INR',
+										itemData.credit_total_price!,
+										'INR',
 									)}
 								</div>
 							</div>
@@ -175,7 +176,7 @@ function AccordianCards({
 								<Button
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
-                                    	setCurrentOpenSID(itemData?.id);
+										setCurrentOpenSID(itemData?.id);
 									}}
 									themeType="secondary"
 								>
@@ -186,9 +187,11 @@ function AccordianCards({
 									themeType="secondary"
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
-                                    	setCurrentOpenSID(itemData?.id);
-                                    	router.push(
-                                    		`/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}&jobNumber=${dataCard.jobNumber}&jobSource=${dataCard.jobSource}&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}`,
+										setCurrentOpenSID(itemData?.id);
+										router.push(
+											`/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}
+										&jobNumber=${dataCard.jobNumber}&jobSource=${dataCard.jobSource}
+										&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}`,
 										);
 									}}
 								>

@@ -39,8 +39,9 @@ const useListBills = (allParams) => {
 		}),
 	);
 
-	let check = true;
 	if (authorizationparameters?.split(':')?.[1] === 'across_all') {
+		let check = true;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		check = false;
 	}
 
@@ -120,7 +121,7 @@ const useListBills = (allParams) => {
 
 	useEffect(() => {
 		params.setDataCard(fullResponse?.list?.[0]?.job || fullResponse?.list?.[0]);
-	}, [fullResponse]);
+	}, [fullResponse, params]);
 
 	const config = params?.amountTab === 'expense' ? expenseConfig : incomeConfig;
 

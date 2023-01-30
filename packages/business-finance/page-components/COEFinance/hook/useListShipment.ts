@@ -9,23 +9,22 @@ const useListShipment = (jobNumber:string | undefined) => {
 		},
 	);
 
-	const getData = async () => {
-		try {
-			await trigger({
-				params: {
-					filters: {
-						serial_id: jobNumber,
-					},
-				},
-			});
-		} catch (error) {
-			console.log('error->', error);
-		}
-	};
-
 	useEffect(() => {
+		const getData = async () => {
+			try {
+				await trigger({
+					params: {
+						filters: {
+							serial_id: jobNumber,
+						},
+					},
+				});
+			} catch (error) {
+				console.log('error->', error);
+			}
+		};
 		getData();
-	}, [jobNumber]);
+	}, [jobNumber, trigger]);
 
 	return {
 		data,

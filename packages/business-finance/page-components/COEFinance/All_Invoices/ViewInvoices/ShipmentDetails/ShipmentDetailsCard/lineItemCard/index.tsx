@@ -4,7 +4,6 @@ import {
 	Tooltip,
 	Popover,
 	Modal,
-	Checkbox,
 	Textarea,
 } from '@cogoport/components';
 import {
@@ -83,7 +82,7 @@ function LineItemCard({
 		} else if (lineItems?.length !== ApproveCheck + RejectCheck) {
 			setLineItem(false);
 		}
-	}, [ApproveCheck, RejectCheck]);
+	}, [ApproveCheck, RejectCheck, lineItems?.length, setLineItem]);
 
 	const handleApproveClick = (key = '', name = '') => {
 		setApprovedItems((previousActions: any) => ({
@@ -130,7 +129,7 @@ function LineItemCard({
 			<div
 				className={styles.circleBig}
 				onClick={() => {
-        	handleApproveClick(item?.id, item?.name);
+					handleApproveClick(item?.id, item?.name);
 				}}
 				role="presentation"
 			>
@@ -146,7 +145,7 @@ function LineItemCard({
 							<div
 								className={styles.popoverRejected}
 								onClick={() => {
-                	openRejectModal(item);
+									openRejectModal(item);
 								}}
 								role="presentation"
 							>
@@ -226,16 +225,16 @@ function LineItemCard({
 						<div className={styles.amount}>
 							<div className={styles.border}>
 								{getFormattedPrice(
-                	bill?.taxTotal || '0',
-                	bill?.billCurrency || 'INR',
+									bill?.taxTotal || '0',
+									bill?.billCurrency || 'INR',
 								)}
 							</div>
 						</div>
 						<div className={styles.amountRight}>
 							<div className={styles.borderRight}>
 								{getFormattedPrice(
-                	bill?.grandTotal || '0',
-                	bill?.billCurrency || 'INR',
+									bill?.grandTotal || '0',
+									bill?.billCurrency || 'INR',
 								)}
 							</div>
 						</div>
@@ -263,7 +262,7 @@ function LineItemCard({
 					<Button
 						size="md"
 						onClick={() => {
-            	setShowLineItem(false);
+							setShowLineItem(false);
 						}}
 					>
 						{' '}
@@ -302,9 +301,9 @@ function LineItemCard({
 							<Button
 								onClick={() => handleRejectClick(id)}
 								disabled={
-                  !lineItemsRemarks[
-                  	lineItemName as keyof typeof lineItemsRemarks
-                  ]
+                     !lineItemsRemarks[
+                     	lineItemName as keyof typeof lineItemsRemarks
+                     ]
                   || (
                   	lineItemsRemarks[
                   		lineItemName as keyof typeof lineItemsRemarks

@@ -14,8 +14,11 @@ import useListShipment from '../../../hook/useListShipment';
 
 import Details from './Details/index';
 import Documents from './Documents/index';
+// eslint-disable-next-line import/no-cycle
 import PdfDisplay from './PdfDisplay/index';
+// eslint-disable-next-line import/no-cycle
 import POC from './POC/index';
+// eslint-disable-next-line import/no-cycle
 import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import styles from './styles.module.css';
 import TimeLineItemCheck from './TimelineItemCheck/index';
@@ -136,7 +139,7 @@ function ShipmentDetails({
 				<div
 					className={styles.cardUpper}
 					onClick={() => {
-          	setShowDetails(!showDetails);
+						setShowDetails(!showDetails);
 					}}
 					role="presentation"
 				>
@@ -168,7 +171,7 @@ function ShipmentDetails({
 					<div
 						className={styles.caret}
 						onClick={() => {
-            	setShowDetails(!showDetails);
+							setShowDetails(!showDetails);
 						}}
 						role="presentation"
 					>
@@ -194,7 +197,7 @@ function ShipmentDetails({
 			<div
 				className={styles.card}
 				onClick={() => {
-        	setShowDocuments(!showDocuments);
+					setShowDocuments(!showDocuments);
 				}}
 				role="presentation"
 			>
@@ -207,7 +210,7 @@ function ShipmentDetails({
 					<div
 						className={styles.caret}
 						onClick={() => {
-            	setShowDocuments(!showDocuments);
+							setShowDocuments(!showDocuments);
 						}}
 						role="presentation"
 					>
@@ -231,8 +234,8 @@ function ShipmentDetails({
 						<div>
 							VARIANCE -
 							{loading
-              	? 'Getting......'
-              	: `${varianceFullData?.currency || '--'}${' '}
+								? 'Getting......'
+								: `${varianceFullData?.currency || '--'}${' '}
 					${varianceFullData?.total_variance || '--'}`}
 						</div>
 						{varianceFullData?.data ? (

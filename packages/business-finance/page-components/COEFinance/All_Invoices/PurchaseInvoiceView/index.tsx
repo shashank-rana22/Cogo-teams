@@ -5,7 +5,7 @@ import List from '../../../commons/List/index';
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
-import { fieldProps } from './interfaces/index';
+import { FieldProps } from './interfaces/index';
 import FieldPair from './RenderData/FiledPair/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import RenderCustomer from './RenderData/RenderCustomer/index';
@@ -57,13 +57,13 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 
 	const functions: any = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
-		renderFieldPair : (itemData: ItemProps, field: fieldProps) => (
+		renderFieldPair : (itemData: ItemProps, field: FieldProps) => (
 			<FieldPair itemData={itemData} field={field} />
 		),
-		renderCustomer: (itemData: ItemProps, field: fieldProps) => (
+		renderCustomer: (itemData: ItemProps, field: FieldProps) => (
 			<RenderCustomer itemData={itemData} field={field} />
 		),
-		rendeFormate: (itemData: ItemProps, field: fieldProps) => (
+		rendeFormate: (itemData: ItemProps, field: FieldProps) => (
 			<FormatedDate item={itemData} field={field} />
 		),
 		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,

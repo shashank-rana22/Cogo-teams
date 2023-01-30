@@ -2,20 +2,20 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	remarks?: string;
 }
 
-interface propsType {
-	item: itemTypes;
+interface PropsType {
+	item: ItemTypes;
 }
-function RemarksContent({ item }: propsType) {
+function RemarksContent({ item }: PropsType) {
 	return (
 		<div>
 			{item.remarks ? (
 				<div className={styles.conatiner}>{item.remarks}</div>
 			) : (
-            	'No remarks'
+				'No remarks'
 			)}
 		</div>
 	);

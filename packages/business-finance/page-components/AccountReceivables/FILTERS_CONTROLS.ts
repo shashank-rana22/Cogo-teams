@@ -1,5 +1,3 @@
-import { ControlProps } from '../commons/Interfaces';
-
 export const INVOICE_FILTERS:any[] = [
 	{
 		name    : 'InvoiceDates',

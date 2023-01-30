@@ -43,13 +43,13 @@ function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
 				<div className={styles.tags}>
 					<CargoDetailPills detail={dataList} />
 				</div>
-				<a
+				<div
 					className={styles.flexDiv}
 					onClick={() => Router.push(`/shipments/${orgId}`)}
 					role="presentation"
 				>
 					Go to SID →
-				</a>
+				</div>
 			</div>
 
 			<div className={styles.timelineContainer}>

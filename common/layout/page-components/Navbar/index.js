@@ -1,8 +1,12 @@
+// eslint-disable-next-line import/no-unresolved
 import cl from '@cogoport/components/src/utils/classname-processor';
+// eslint-disable-next-line import/no-unresolved
 import React, { useState } from 'react';
 
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import Items from '../Items';
 
+// eslint-disable-next-line import/no-unresolved
 import styles from './styles.module.css';
 
 function Navbar({

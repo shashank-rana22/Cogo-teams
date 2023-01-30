@@ -1,15 +1,15 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Filter from '../../../../commons/Filters';
 import SegmentedControl from '../../../../commons/SegmentedControl';
-import { APPROVAL, JOBS } from '../../../constants/shipmentListFilters';
+import { APPROVAL } from '../../../constants/shipmentListFilters';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-interface propsType {
+interface PropsType {
 	hookSetters: { setFilters };
 	filters: {};
 	pending_approval: string;
@@ -26,7 +26,7 @@ function Filters({
 	serial_id,
 	setSerial_id,
 
-}: propsType) {
+}: PropsType) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.segmented}>

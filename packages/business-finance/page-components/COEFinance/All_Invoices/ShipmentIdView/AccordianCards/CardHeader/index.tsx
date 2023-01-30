@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import TabSelect from '../../../../../commons/TabSelect/index';
 import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
-import useGetWallet from '../../../../hook/useGetWallet';
 
 import styles from './styles.module.css';
 
-interface propsType {
+interface PropsType {
 	itemData: any;
 	amountTab: string;
 	setAmountTab: Function;
 }
 
-function CardHeader({ amountTab, setAmountTab, itemData }: propsType) {
+function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 	const options = [
 		{ name: 'Expense', value: 'expense' },
 		{ name: 'Income', value: 'income' },
@@ -33,8 +32,8 @@ function CardHeader({ amountTab, setAmountTab, itemData }: propsType) {
 					</div>
 					<div className={styles.valueText}>
 						{getFormattedPrice(
-                        	itemData.discount_amount,
-                        	itemData.discount_amount_currency,
+							itemData.discount_amount,
+							itemData.discount_amount_currency,
 						)}
 					</div>
 				</div>
@@ -44,8 +43,8 @@ function CardHeader({ amountTab, setAmountTab, itemData }: propsType) {
 					</div>
 					<div className={styles.valueText}>
 						{getFormattedPrice(
-                        	itemData.discount_amount_revenue,
-                        	itemData.discount_amount_revenue_currency,
+							itemData.discount_amount_revenue,
+							itemData.discount_amount_revenue_currency,
 						) || ' -'}
 					</div>
 				</div>
