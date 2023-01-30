@@ -99,6 +99,8 @@ interface PortDetailsInt {
 
 export interface DetailInterface {
 	service_type?:string,
+	origin_main_port?:string,
+	destination_main_port?:string
 	services?:Array<string>,
 	chargable_weight?: number | string,
 	weight: number,
