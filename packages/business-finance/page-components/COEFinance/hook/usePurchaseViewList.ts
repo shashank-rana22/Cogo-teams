@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable max-len */
+/* eslint-disable no-nested-ternary */
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
@@ -56,44 +59,44 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 		|| filters?.updatedDate?.endDate === null)
 		? null : format(filters?.updatedDate?.endDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false);
 
+	const billFromData = billDatesStartFilters === null
+	&& billDatesEndFilters === null ? undefined : billDatesStartFilters || null;
+
+	const billToData = billDatesStartFilters && billDatesEndFilters === null ? billDatesStartFilters
+		: (billDatesStartFilters === null && billDatesEndFilters === null ? undefined : (billDatesEndFilters || null));
+
+	const dueFromData = dueDatesStartFilters === null && dueDatesEndFilters === null
+		? undefined : dueDatesStartFilters || null;
+
+	const dueToData = dueDatesStartFilters && dueDatesEndFilters === null ? dueDatesStartFilters
+		: (dueDatesStartFilters === null && dueDatesEndFilters === null ? undefined : dueDatesEndFilters || null);
+
+	const updatedFromData = updatedDateStartFilters === null && updatedDateEndFilters === null ? undefined
+		: updatedDateStartFilters || null;
+
+	const updatedToData = updatedDateStartFilters && updatedDateEndFilters === null ? updatedDateStartFilters
+		: (updatedDateStartFilters === null && updatedDateEndFilters === null ? undefined : updatedDateEndFilters || null);
+
 	const [{ data, loading }, refetch] = useRequestBf(
 		{
 			url    : '/purchase/bills/list',
 			method : 'get',
 			params : {
 				...filters,
-				billDate    : undefined,
-				dueDate     : undefined,
-				updatedDate : undefined,
-				billDateFrom:
-					billDatesStartFilters === null
-					&& billDatesEndFilters === null ? undefined : billDatesStartFilters || null,
-				billDateTo:
-					billDatesStartFilters && billDatesEndFilters === null
-						? billDatesStartFilters : billDatesStartFilters === null
-					&& billDatesEndFilters === null ? undefined : billDatesEndFilters || null,
-
-				dueDateFrom:
-					dueDatesStartFilters === null && dueDatesEndFilters === null ? undefined : dueDatesStartFilters || null,
-				dueDateTo:
-					dueDatesStartFilters && dueDatesEndFilters === null ? dueDatesStartFilters
-						: dueDatesStartFilters === null
-					&& dueDatesEndFilters === null ? undefined : dueDatesEndFilters || null,
-
-				updatedDateFrom:
-					updatedDateStartFilters === null && updatedDateEndFilters === null ? undefined
-						: updatedDateStartFilters || null,
-				updatedDateTo:
-					updatedDateStartFilters && updatedDateEndFilters === null ? updatedDateStartFilters : updatedDateStartFilters === null
-					&& updatedDateEndFilters === null ? undefined : updatedDateEndFilters || null,
-
-				urgencyTag : filters?.urgencyTag || undefined,
-				billType   : showFilter(),
-				proforma   : showbillType || showProforma,
+				billDate        : undefined,
+				dueDate         : undefined,
+				updatedDate     : undefined,
+				billDateFrom    : billFromData,
+				billDateTo      : billToData,
+				dueDateFrom     : dueFromData,
+				dueDateTo       : dueToData,
+				updatedDateFrom : updatedFromData,
+				updatedDateTo   : updatedToData,
+				urgencyTag      : filters?.urgencyTag || undefined,
+				billType        : showFilter(),
+				proforma        : showbillType || showProforma,
 				status:
-                    currentTab !== 'all' && currentTab !== 'Urgency_tag'
-                    	? currentTab
-                    	: undefined,
+                    currentTab !== 'all' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
 				isUrgent : currentTab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,

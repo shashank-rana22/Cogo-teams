@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
-interface itemProps {
+interface ItemProps {
 	organizationName:string,
 }
 interface Props {
-	itemData:itemProps;
+	itemData:ItemProps;
 	field:{
 		key :string
 	}

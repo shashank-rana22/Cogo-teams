@@ -2,11 +2,11 @@ import React from 'react';
 
 import styled from './styles.module.css';
 
-interface itemProps {
+interface ItemProps {
 	urgencyTag:Array<string>
 }
 interface Props {
-	item:itemProps;
+	item:ItemProps;
 }
 function RenderUrgencyTag({ item }:Props) {
 	return (

@@ -1,5 +1,3 @@
-import { Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces/index';
@@ -12,7 +10,6 @@ import FieldPair from './RenderData/FiledPair/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import RenderCustomer from './RenderData/RenderCustomer/index';
 import RenderRemarks from './RenderData/RenderRemarks/index';
-import RenderRibbon from './RenderData/RenderRibbon/index';
 import RenderStatus from './RenderData/RenderStatus/index';
 import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index';
 import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index';
@@ -47,7 +44,6 @@ interface Props {
 }
 
 function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
-	const router = useRouter();
 	const [sort, setSort] = useState({});
 
 	const {
@@ -74,9 +70,6 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		renderViewMore : (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
-		// renderRibbon: (itemData:ItemProps)=>(
-		//   <RenderRibbon item={itemData} />
-		// ),
 		renderUrgencyTag: (itemData: ItemProps) => (
 			<RenderUrgencyTag item={itemData} />
 		),
@@ -101,7 +94,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 				setSort={setSort}
 				page={filters.pageIndex || 1}
 				handlePageChange={(pageValue: number) => {
-        	setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
+					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
 			/>

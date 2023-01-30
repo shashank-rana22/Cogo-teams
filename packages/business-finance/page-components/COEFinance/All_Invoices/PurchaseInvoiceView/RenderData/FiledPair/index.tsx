@@ -4,7 +4,7 @@ import React from 'react';
 
 import styled from './styles.module.css';
 
-interface itemProps {
+interface ItemProps {
 	billType:string,
 	billDocumentUrl:string,
 	serviceType:string,
@@ -13,11 +13,11 @@ interface itemProps {
 	jobNumber:string,
 }
 interface Props {
-	itemData:itemProps;
+	itemData:ItemProps;
 	field:{
 		topKey:object,
-		  bottomKey:object,
-		  label :string
+		bottomKey:object,
+		label :string
 	}
 }
 
@@ -25,7 +25,7 @@ function FieldPair({ itemData, field }:Props) {
 	const { topKey = {}, bottomKey = {} } = field;
 	const {	billType = '', billNumber = '', isProforma = '', billDocumentUrl, jobNumber = '', serviceType } = itemData;
 
-	const handleBillType = (item:object) => {
+	const handleBillType = () => {
 		let invoiceType;
 		if (billType === 'BILL') {
 			if (isProforma) {
@@ -68,7 +68,7 @@ function FieldPair({ itemData, field }:Props) {
 					)}
 
 					{bottomKey && (
-						<div className={styled.lowerKeys}>{handleBillType(itemData)}</div>
+						<div className={styled.lowerKeys}>{handleBillType()}</div>
 					)}
 				</div>
 			)}

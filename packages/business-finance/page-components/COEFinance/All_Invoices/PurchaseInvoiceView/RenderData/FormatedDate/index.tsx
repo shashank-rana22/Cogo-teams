@@ -54,7 +54,7 @@ function FormatedDate({ item, field }: Props) {
 			</div>
 		</>
 	);
-	const formatAmount = getFormattedPrice(item.grandTotal!, item.billCurrency!) || '';
+	const formatAmount = getFormattedPrice(item.grandTotal!, item.billCurrency!) || '-';
 	return (
 		<div>
 			{/* {field?.key === "createdDate" && <div>{getCreatedDate}</div>} */}
