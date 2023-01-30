@@ -1,0 +1,38 @@
+.list_item_container{
+	display: flex;
+    background: #FFFFFF;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+
+    margin: 16px 0px;
+	padding: 16px;
+}
+
+.content_container{
+	display: flex;
+	margin-bottom: 4px; 
+
+	@media (min-width: 768px) {
+		flex-direction: column;
+		margin-bottom: 0;
+		word-break: break-word;
+	}
+}
+
+.label{
+	color:#BDBDBD;
+	font-size: 16px;
+	margin-bottom: 2px;
+}
+
+.value{
+	color:#221F20;
+}
+
+.reason{
+	display: block;
+	white-space: nowrap;
+	width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

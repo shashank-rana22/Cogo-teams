@@ -3,10 +3,11 @@ import { useState } from 'react';
 
 import Heading from '../../common/Heading';
 
+import Requests from './Requests';
 import styles from './styles.module.css';
 
 function CoreAllocationEngine() {
-	const [activeTab, setActiveTab] = useState('configurations');
+	const [activeAllocation, setActiveAllocation] = useState('configurations');
 
 	return (
 		<section className={styles.container} id="core_engine_container">
@@ -21,10 +22,10 @@ function CoreAllocationEngine() {
 				{/* // Todo make it a mapping  with title,tab Component,key */}
 
 				<Tabs
-					activeTab={activeTab}
+					activeTab={activeAllocation}
 					fullWidth
 					themeType="primary"
-					onChange={setActiveTab}
+					onChange={setActiveAllocation}
 				>
 					<TabPanel name="configurations" title="Configurations">
 						<div>Config</div>
@@ -35,7 +36,7 @@ function CoreAllocationEngine() {
 					</TabPanel>
 
 					<TabPanel name="requests" title="Requests">
-						<div>Requests</div>
+						<Requests />
 					</TabPanel>
 
 					<TabPanel name="quotas" title="Quotas">
