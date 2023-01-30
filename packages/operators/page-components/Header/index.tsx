@@ -16,10 +16,10 @@ function Header({ setShow, searchValue, setSearchValue }) {
 			<div className={styles.heading}>Operators</div>
 			<div className={styles.right}>
 				<Input
-					prefix={<IcMSearchlight className="search-icon" />}
+					prefix={<IcMSearchlight className="search_icon" />}
 					suffix={(
 						<IcMCross
-							className="cross-icon"
+							className="cross_icon"
 							onClick={() => setSearchValue('')}
 							style={{ cursor: 'pointer' }}
 						/>

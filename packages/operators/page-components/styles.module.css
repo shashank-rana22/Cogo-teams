@@ -1,22 +1,22 @@
 .container {
-    margin: 12px 10px;
+	margin: 12px 10px;
 }
 
 .image {
 	max-width: 100px;
-    max-height: 40px;
+	max-height: 40px;
 }
 
 .event {
 	padding: 2px 4px;
-    text-transform: capitalize;
+	text-transform: capitalize;
 	background: #f9f9f9;
 	border-radius: 4px;
 }
 
 .edit {
 	font-size: 12px;
-	background: none !important;
 	color: #000 !important;
+	background: none !important;
 	border: none;
 }

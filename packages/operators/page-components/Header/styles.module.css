@@ -1,34 +1,33 @@
 .container {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.container .search-icon {
+.container .search_icon {
 	width: 20px;
 	height: 20px;
 	margin-top: 5px;
 }
 
-.container .cross-icon {
-	cursor: pointer;
+.container .cross_icon {
 	margin-top: 5px;
+	cursor: pointer;
 }
 
 .heading {
-	font-family: 'Avenir';
+	font-size: 28px;
 	font-weight: 800;
-    font-size: 28px;
 }
 
 .heading::after {
-    display: block;
-	content: '';
+	display: block;
 	width: 50%;
 	height: 4px;
-	background: #ED3726;
-    border-radius: 8px;
+	content: "";
+	background: #ed3726;
+	border-radius: 8px;
 }
 
 .right {
@@ -38,6 +37,7 @@
 
 .input_search {
 	height: 32px !important;
+
 	:global(.ui_input_control) {
 		font-size: 12px !important;
 	}

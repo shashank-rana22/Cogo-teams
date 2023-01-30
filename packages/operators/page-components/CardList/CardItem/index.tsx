@@ -22,7 +22,7 @@ function CardItem({
 		<section className={styles.list_container}>
 			<div
 				className={`${styles.row} ${
-					isMobile ? styles.isMobile : ''
+					isMobile ? styles.is_mobile : ''
 				}`}
 			>
 				{fields.map((field) => {
@@ -30,7 +30,7 @@ function CardItem({
 					return (
 						<div
 							className={`${styles.col} ${field.className || ''} ${
-								isMobile ? styles.isMobile : ''
+								isMobile ? styles.is_mobile : ''
 							}`}
 							style={{
 								'--span': (field.span || 1),
