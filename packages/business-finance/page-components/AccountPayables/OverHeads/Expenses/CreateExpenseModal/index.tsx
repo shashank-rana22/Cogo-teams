@@ -1,24 +1,31 @@
-import React from "react";
+import React,{useState} from "react";
 import { Modal, Button } from "@cogoport/components";
 
 
 function CreateExpenseModal ({
     setShowModal, 
-    showModal = false
+    showModal = false,
+    createExpenseType=""
 }){
+   const [timeline, setTimeline] = useState(['expenseDetails','uploadInvoice','finalConfirmation']);
+     const [active, setActive] = useState('expenseDetails');
+     
+     const handleClick =()=>{
+
+     }
 
     return (
-        <Modal size="md" show={showModal} onClose={() =>  setShowModal(false)} placement="center">
-            <Modal.Header title="Are you sure?" />
+        <Modal size="xl" show={showModal} onClose={() =>  setShowModal(false)} placement="top">
+            <Modal.Header title={`CREATE EXPENSE - ${createExpenseType}`}/>
             <Modal.Body>
-                et consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda et soluta expedita
-                consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas. Pariatur eaque aut sunt?
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda 
-                et soluta expedita consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas. 
-                Pariatur eaque aut sunt?
+                 <div>
+                    timeline
+                 </div>
+
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() =>  setShowModal(false)}>OK</Button>
+               {active!=='expenseDetails' && <Button >Back</Button>}
+                <Button onClick={handleClick}>Save & Next</Button>
             </Modal.Footer>
 	</Modal>
     )

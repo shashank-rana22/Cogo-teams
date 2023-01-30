@@ -10,14 +10,16 @@ import CreateExpenseModal from "./CreateExpenseModal";
 import styles from './styles.module.css';
 
 function ExpenseComponent () {
-    const [recurringState, setRecurringState] = useState('recurring')
+    const [recurringState, setRecurringState] = useState('recurring');
+    const [createExpenseType, setCreateExpenseType] = useState('');
+    const [visible,setVisible] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [expenseFilters, setExpenseFilters] = useState({
         expenseType:recurringState,
         searchValue: '',
         pageIndex: 1,
         pageLimit: 10
     });
-    const [showModal, setShowModal] = useState(false);
 
     const OPTIONS = [
         {
@@ -31,12 +33,33 @@ function ExpenseComponent () {
     ]
 
     const handleChange = (e) => {
-        console.log('e-',e);
-        
         setExpenseFilters((previousState) => ({
 			...previousState,
 			
 		})); 
+    }
+    const expenseType=()=>{
+        return <div>
+            <div className={styles.recurringButtons} 
+                   onClick={()=>{
+                    setCreateExpenseType('RECURRING');
+                    setShowModal(true);
+                    setVisible(false);
+                }}
+                   >
+                    Recurring
+            </div>
+            <div className={styles.underline}/>
+            <div className={styles.recurringButtons} 
+                   onClick={()=>{
+                    setCreateExpenseType('NON RECURRING');
+                    setShowModal(true);
+                    setVisible(false);
+                }}
+                   >
+                   Non-Recurring
+            </div>
+        </div>
     }
 
     const renderHeaders = () => {
@@ -56,10 +79,16 @@ function ExpenseComponent () {
 
                 </div>
                 <div className={styles.rightContainer}>
+                    <Popover visible={visible} render={expenseType()} placement="bottom">
                     <Button 
                        size="lg" 
                        themeType="secondary" 
-                       onClick={ () => setShowModal(true)} >Create Expense</Button>
+                       onClick={()=>setVisible(true)}
+                     >
+                        Create Expense
+                    </Button>
+                    </Popover>
+
                     <Input 
                         size="md" 
                         placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID" 
@@ -107,8 +136,11 @@ function ExpenseComponent () {
                 }}
                 showPagination = {true}
             />
-
-            {showModal && <CreateExpenseModal showModal={showModal} setShowModal={setShowModal}/>}
+            {showModal && <CreateExpenseModal
+                  setShowModal={setShowModal}
+                  showModal={showModal}
+                  createExpenseType={createExpenseType}
+             />}
         </div>
     )
 }

@@ -52,3 +52,13 @@
 .recurringAmountData{
     width: 90%;
 }
+.underline{
+    border-top: 1px solid #EDD7A9;
+}
+.recurringButtons{
+    padding: 6px 11px;
+    &:hover{
+        background: #FFFAEB;
+        cursor: pointer;
+    }
+}
