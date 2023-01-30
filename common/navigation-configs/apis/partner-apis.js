@@ -5793,6 +5793,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_invoices',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
 	],
 	unified_dashboard: [
 		{
