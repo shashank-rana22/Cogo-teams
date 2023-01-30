@@ -1510,6 +1510,12 @@ const saas = {
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
 		},
+		{
+			api: 'get_saas_organization_get_excel',
+			access_type: 'private',
+			module: 'trade-partner',
+			feature: 'trade-partner',
+		},
 	],
 	app_saas_product_inventory: [
 		{
@@ -1613,7 +1619,20 @@ const saas = {
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
+		},	
+		{
+			api: 'put_saas_product',
+			access_type: 'private',
+			module: 'product',
+			feature: 'product',
 		},
+		{
+			api: 'get_saas_product_get_excel',
+			access_type: 'private',
+			module: 'product',
+			feature: 'product',
+		},			
+			
 	],
 
 };
