@@ -30,7 +30,6 @@ function MyResponsiveLine({ data }) {
 			axisTop={null}
 			axisRight={null}
 			axisBottom={{
-				// orient: 'bottom',
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
@@ -39,7 +38,6 @@ function MyResponsiveLine({ data }) {
 				legendPosition : 'middle',
 			}}
 			axisLeft={{
-				// orient: 'left',
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
