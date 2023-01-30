@@ -3,11 +3,11 @@ import React from 'react';
 
 import styled from './styles.module.css';
 
-interface itemProps {
+interface ItemProps {
 	status:string
 }
 interface Props {
-	item:itemProps;
+	item:ItemProps;
 }
 function RenderStatus({ item }:Props) {
 	const StatusItem = (item?.status)?.toLowerCase();

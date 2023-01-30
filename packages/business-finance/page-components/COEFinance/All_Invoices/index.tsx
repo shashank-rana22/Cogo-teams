@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
@@ -27,7 +29,7 @@ function AllInvoices() {
 				<div className={styles.flex}>
 					<div
 						onClick={() => {
-            	setSubActiveTab('purchase-view');
+							setSubActiveTab('purchase-view');
 						}}
 						role="presentation"
 					>
@@ -41,7 +43,7 @@ function AllInvoices() {
 					</div>
 					<div
 						onClick={() => {
-            	setSubActiveTab('shipment-view');
+							setSubActiveTab('shipment-view');
 						}}
 						role="presentation"
 					>

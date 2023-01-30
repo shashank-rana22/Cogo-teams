@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { GenericObject } from '../../../../commons/Interfaces/index';
@@ -13,7 +13,7 @@ import usePurchaseViewStats from '../../../hook/getPurchaseViewStats';
 import controls from './controls';
 import styled from './styles.module.css';
 
-interface segmentFilterProps {
+interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
 	currentTab: string;
@@ -29,7 +29,7 @@ function SegmentedFilters({
 	searchValue,
 	filters,
 	setFilters,
-}: segmentFilterProps) {
+}: SegmentFilterProps) {
 	const { statsData }: any = usePurchaseViewStats();
 
 	return (

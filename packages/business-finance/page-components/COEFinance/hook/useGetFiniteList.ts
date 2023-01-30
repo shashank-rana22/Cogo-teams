@@ -66,6 +66,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
 			setLoading(true);
 			refetch();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, JSON.stringify(params)]);
 
 	const hookSetters = {

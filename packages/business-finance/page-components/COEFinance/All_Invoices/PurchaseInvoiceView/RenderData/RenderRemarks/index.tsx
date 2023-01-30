@@ -1,10 +1,11 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMProvision } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 interface itemProps {
 	remarksTimeline?:Array<{ billStatus:string, remark:string, createdAt:Date }>
 }
@@ -15,13 +16,13 @@ interface Props {
 function RenderRemarks({ item }:Props) {
 	const remarkData = item?.remarksTimeline;
 
-	const remarkTimeline = () => (remarkData || []).map((item, idx) => {
-		const StatusItem = item?.billStatus?.toLowerCase();
+	const remarkTimeline = () => (remarkData || []).map((items, idx) => {
+		const StatusItem = items?.billStatus?.toLowerCase();
 		return (
 			<div className={styles.timeline_wrapper}>
 				<div className={styles.left_content}>
-					{format(item?.createdAt, 'dd/MMM/yyyy', null, false)}
-					<div>{format(item?.createdAt, ' hh:mm a', null, false)}</div>
+					{format(items?.createdAt, 'dd/MMM/yyyy', null, false)}
+					<div>{format(items?.createdAt, ' hh:mm a', null, false)}</div>
 				</div>
 				<div className={styles.path}>
 					<div className={styles.circle} />
@@ -35,7 +36,7 @@ function RenderRemarks({ item }:Props) {
 						{startCase(StatusItem)}
 						{' '}
 					</div>
-					<div>{item?.remark}</div>
+					<div>{items?.remark}</div>
 				</div>
 			</div>
 		);

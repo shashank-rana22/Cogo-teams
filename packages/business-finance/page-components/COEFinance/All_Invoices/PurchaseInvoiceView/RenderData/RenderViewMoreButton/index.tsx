@@ -5,19 +5,21 @@ import React from 'react';
 import styled from './styles.module.css';
 // import { IcCRedCircle } from '@cogoport/icons-react';
 
-interface itemProps {
+interface ItemProps {
 	status: string;
 	urgencyTag: Array<string>;
 }
 interface Props {
-	itemData: itemProps;
+	itemData: ItemProps;
 }
 function RenderViewMoreButton({ itemData }: Props) {
 	const router = useRouter();
 
-	const handleChange = (itemData: any) => {
+	const handleChange = (item: any) => {
 		router.push(
-			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}&status=${itemData?.status}&billType=${itemData?.billType}&isProforma=${itemData?.isProforma}`,
+			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${item?.billId}
+			&billNumber=${item?.billNumber}&orgId=${item?.organizationId}&jobNumber=${item?.jobNumber}
+			&status=${item?.status}&billType=${item?.billType}&isProforma=${item?.isProforma}`,
 		);
 	};
 
@@ -34,7 +36,7 @@ function RenderViewMoreButton({ itemData }: Props) {
 					style={{ height: '30px', fontSize: '12px' }}
 					themeType="secondary"
 					onClick={() => {
-          	handleChange(itemData);
+						handleChange(itemData);
 					}}
 				>
 					View Invoice
