@@ -5751,6 +5751,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_invoices',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -5852,6 +5862,11 @@ const partner = {
 			api          : 'list_monthly_profit',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	pay_later: [
@@ -6843,6 +6858,16 @@ const partner = {
 			access_type : 'private',
 			module      : 'Bpr',
 			feature     : 'Bpr',
+		},
+	],
+	vietnam_account_receivables: [
+		{
+			api         : 'get_sales_invoice_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
 		},
 	],
 	settlement: [
