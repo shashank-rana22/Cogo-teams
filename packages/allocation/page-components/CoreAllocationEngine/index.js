@@ -16,7 +16,6 @@ function CoreAllocationEngine() {
 				<Heading
 					title="Core Engine"
 				/>
-
 			</section>
 
 			<div style={{ margin: '16px 0px' }}>
