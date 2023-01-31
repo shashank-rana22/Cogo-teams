@@ -7,8 +7,6 @@ import {
 } from '../../../../../commons/Interfaces/index';
 import List from '../../../../../commons/List/index';
 
-import styles from './styles.module.css';
-
 interface VarianceViewInterface {
 	show: boolean;
 	onClose?: () => void;
@@ -113,7 +111,7 @@ function VarianceView({
 		<Modal size="lg" show={show} onClose={onClose}>
 			<Modal.Header title="Variance" />
 			<Modal.Body>
-				<div className={styles.modalContainer}>
+				<div>
 					<List
 						config={config}
 						itemData={{ list: data }}
