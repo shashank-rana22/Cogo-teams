@@ -9375,6 +9375,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
+		{
+			api          : 'get_exchange_rate_approval_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 	],
 };
 export default partner;
