@@ -1742,6 +1742,12 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api         : 'get_saas_trade_engine_verify_six_digit',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
 	],
 
 };
