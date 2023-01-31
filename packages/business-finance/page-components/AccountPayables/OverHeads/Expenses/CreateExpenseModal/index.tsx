@@ -10,12 +10,12 @@ function CreateExpenseModal({
 	showModal = false,
 	createExpenseType = '',
 }) {
-	const timeline = ['expenseDetails', 'uploadInvoice', 'finalConfirmation'];
-	const [active, setActive] = useState('expenseDetails');
+	const timeline = ['Expense Details', 'Upload Invoice', 'Final Confirmation'];
+	const [active, setActive] = useState('Expense Details');
 
 	const handleClick = () => {
 		const current = timeline.indexOf(active);
-		setActive(timeline[current + 1]);
+		if (current < timeline.length - 1) { setActive(timeline[current + 1]); }
 	};
 	const handleBack = () => {
 		const current = timeline.indexOf(active);
@@ -35,13 +35,13 @@ function CreateExpenseModal({
 
 			</Modal.Body>
 			<Modal.Footer>
-				{active !== 'expenseDetails' && (
+				{timeline.indexOf(active) !== 0 && (
 					<Button onClick={handleBack} style={{ marginRight: '10px' }} themeType="secondary">
 						Back
 					</Button>
 				)}
-				{active !== 'finalConfirmation' && <Button onClick={handleClick}>Save & Next</Button>}
-				{active === 'finalConfirmation' && <Button>Request Email</Button>}
+				{timeline.indexOf(active) !== timeline.length - 1
+					? <Button onClick={handleClick}>Save & Next</Button> : <Button>Request Email</Button>}
 			</Modal.Footer>
 		</Modal>
 	);
