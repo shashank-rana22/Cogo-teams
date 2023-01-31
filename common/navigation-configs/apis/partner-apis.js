@@ -544,6 +544,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_organization_exchange_rate_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1617,6 +1632,16 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
+		},
+		{
+			api          : 'create_organization_exchange_rate_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	supply_crm: [
@@ -9252,6 +9277,103 @@ const partner = {
 			api          : 'list_communication_templates',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+	],
+	cogo_fx: [
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_live_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_cogofx_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_cogofx_exchange_rates',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_exchange_rate_revised_cogofx',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_exchange_rate_cogofx_settings',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_transactional_currencies',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_exchange_rate_transactional_currencies',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_cogofx_conversions',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'list_exchange_rate_currencies',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_analytics_data',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'list_exchange_rate_organization_approvals',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'create_organization_exchange_rate_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_exchange_rate_currency_conversion',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_invoice_currency_pair_conversions',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 	],
 };
