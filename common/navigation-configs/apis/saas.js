@@ -1753,14 +1753,14 @@ const saas = {
 		{
 			api         : 'get_saas_trade_engine',
 			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			module      : 'order-history',
+			feature     : 'order-history',
 		},
 		{
 			api         : 'get_saas_trade_engine_order_history',
 			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			module      : 'order-history',
+			feature     : 'order-history',
 		},
 	],
 
