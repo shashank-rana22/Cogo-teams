@@ -12,7 +12,7 @@ import VENDOR_CONFIG from './utils/config';
 import Controls from './utils/controls';
 import dummyData from './utils/data';
 
-interface itemProps {
+interface ItemProps {
 	createdDate:String,
 	venderSerialId: Number,
 	kycStatus: String,
@@ -21,11 +21,6 @@ interface itemProps {
 	category: String,
 	payments: Number,
 	openInvoices: Number,
-}
-interface Props {
-	filters:GenericObject;
-	setFilters: (p: object) => void;
-	subActiveTab:string
 }
 
 function VenderComponent() {
@@ -165,16 +160,16 @@ function VenderComponent() {
 	};
 
 	const functions:any = {
-		renderKYCStatus: (itemData:itemProps) => (
+		renderKYCStatus: (itemData:ItemProps) => (
 			<RenderKYCStatus item={itemData} />
 		),
-		renderPayments: (itemData:itemProps) => (
+		renderPayments: (itemData:ItemProps) => (
 			<RenderPayments item={itemData} />
 		),
-		renderInvoice: (itemData:itemProps) => (
+		renderInvoice: (itemData:ItemProps) => (
 			<RenderInvoice item={itemData} />
 		),
-		renderViewMoreButton: (itemData:itemProps) => (
+		renderViewMoreButton: (itemData:ItemProps) => (
 			<RenderViewMoreButton item={itemData} />
 		),
 	};

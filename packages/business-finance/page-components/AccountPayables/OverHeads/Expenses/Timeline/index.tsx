@@ -3,7 +3,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Timeline({ active, timeline = [] }) {
+interface Props {
+	active:string,
+	timeline:string[]
+}
+
+function Timeline({ active, timeline = [] }:Props) {
 	return (
 		<div className={styles.container}>
 

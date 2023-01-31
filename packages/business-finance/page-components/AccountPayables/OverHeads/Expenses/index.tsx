@@ -34,10 +34,10 @@ function ExpenseComponent() {
 		},
 	];
 
-	const handleChange = (e) => {
+	const handleChange = (e:string) => {
 		setExpenseFilters((previousState) => ({
 			...previousState,
-
+			searchValue: e,
 		}));
 	};
 	const expenseType = () => (

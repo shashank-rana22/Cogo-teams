@@ -1,8 +1,10 @@
-import React, { ReactNode } from 'react';
-import getValue from './getValue';
-import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
-import styles from './styles.module.css';
 import { Placeholder } from '@cogoport/components';
+import React, { ReactNode } from 'react';
+
+import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
+
+import getValue from './getValue';
+import styles from './styles.module.css';
 
 export interface Props {
 	fields: FieldType[];
@@ -18,7 +20,7 @@ function CardColumn({
 	fields,
 	itemStyles,
 	singleitem,
-	functions={},
+	functions = {},
 	config,
 	isMobile,
 	loading,
@@ -46,16 +48,17 @@ function CardColumn({
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
 							)}
-							{loading?<Placeholder/>:
-							<div className={styles.flex}>
-								{getValue(
-									singleitem,
-									field,
-									functions,
-									'-',
-								) as ReactNode}
-							</div>
-							}
+							{loading ? <Placeholder />
+								: (
+									<div className={styles.flex}>
+										{getValue(
+											singleitem,
+											field,
+											functions,
+											'-',
+										) as ReactNode}
+									</div>
+								)}
 						</div>
 					);
 				})}

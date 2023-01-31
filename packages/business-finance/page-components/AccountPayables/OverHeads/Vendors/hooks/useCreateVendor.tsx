@@ -1,37 +1,36 @@
-import { useRequestBf } from "@cogoport/request";
-import OVERHEAD_APIS from "../../api";
-import { Toast } from "@cogoport/components";
+import { useRequestBf } from '@cogoport/request';
 
-const useCreateVendor = () =>{
+import OVERHEAD_APIS from '../../api';
 
-    const {apiMethod = '', apiUrl = '', apiAuthKey = ''} = OVERHEAD_APIS.CREATE_VENDORS
+const useCreateVendor = () => {
+	const { apiMethod = '', apiUrl = '', apiAuthKey = '' } = OVERHEAD_APIS.CREATE_VENDORS;
 
-    const [{ data, loading = false, error },trigger] = useRequestBf(
-        {
-            url: apiUrl,
-            method: apiMethod,
-            authKey: apiAuthKey,
-        },
-        { autoCancel: false }
-    );
+	const [{ data, loading = false, error }, trigger] = useRequestBf(
+		{
+			url     : apiUrl,
+			method  : apiMethod,
+			authKey : apiAuthKey,
+		},
+		{ autoCancel: false },
+	);
 
-    const createApi = async (filters) => {
-        try {
-            return await trigger({
-                params: {
-                    filters: filters,
-                },
-            });
-        } catch (err) {
-            // Toast.error(err);
-        }
-    };
+	const createApi = async (filters) => {
+		try {
+			return await trigger({
+				params: {
+					filters,
+				},
+			});
+		} catch (err) {
+			// Toast.error(err);
+		}
+	};
 
-    return {
-        createApi,
-        loading, 
-        data
-    }
-}
+	return {
+		createApi,
+		loading,
+		data,
+	};
+};
 
 export default useCreateVendor;

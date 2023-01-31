@@ -1,7 +1,7 @@
-import React, {useState} from "react"
+import React from 'react';
 
-function ReportComponent () {
-    return <h1>Reports</h1>
+function ReportComponent() {
+	return <h1>Reports</h1>;
 }
 
-export default ReportComponent
+export default ReportComponent;

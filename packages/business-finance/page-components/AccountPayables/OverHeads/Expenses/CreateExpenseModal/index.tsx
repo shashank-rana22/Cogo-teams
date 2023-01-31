@@ -6,7 +6,7 @@ import Timeline from '../Timeline';
 import RecurringForm from './RecurringForm';
 
 interface Props {
-	setShowModal:React.useState<boolean>,
+	setShowModal:any,
 	showModal?: boolean,
 	createExpenseType?: string
 

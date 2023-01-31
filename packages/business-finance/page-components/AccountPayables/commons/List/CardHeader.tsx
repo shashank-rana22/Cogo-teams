@@ -1,7 +1,8 @@
-import { IcMArrowRotateDown,IcMArrowRotateUp} from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { ReactNode } from 'react';
 
 import { NestedObj, FieldType } from '../Interfaces/index';
+
 import styles from './styles.module.css';
 
 export interface Props {
@@ -16,7 +17,6 @@ export interface Props {
 function Header({
 	fields, sort, setSort = () => [], headerStyles, renderHeaderCheckbox = () => '', showHeaderCheckbox = false,
 }:Props) {
-	
 	const handleOnChangeUp = (item: FieldType) => {
 		const fieldType = item.sorting!.name;
 		setSort(() => ({
@@ -26,7 +26,7 @@ function Header({
 	const handleOnChangeDown = (item: FieldType) => {
 		const fieldType = item.sorting!.name;
 		setSort(() => ({
-			[fieldType]: sort?.[fieldType] === 'desc' ? 'desc':'desc',
+			[fieldType]: sort?.[fieldType] === 'desc' ? 'desc' : 'desc',
 		}));
 	};
 	return (
@@ -40,23 +40,23 @@ function Header({
 					{field.label}
 					{field.sorting && (
 						<>
-						<div className={styles.center}>
-							<IcMArrowRotateUp
-								className={
-									sort?.[field.sorting.name] === 'asc' && styles.asc 
+							<div className={styles.center}>
+								<IcMArrowRotateUp
+									className={
+									sort?.[field.sorting.name] === 'asc' && styles.asc
 								}
-								onClick={() => handleOnChangeUp(field)}
-							/>
-						</div>
-						<div className={styles.centers}>
-						<IcMArrowRotateDown
-							className={
-								sort?.[field.sorting.name] === 'desc'&& styles.desc
+									onClick={() => handleOnChangeUp(field)}
+								/>
+							</div>
+							<div className={styles.centers}>
+								<IcMArrowRotateDown
+									className={
+								sort?.[field.sorting.name] === 'desc' && styles.desc
 							}
-							onClick={() => handleOnChangeDown(field)}
-						/>
-					</div>
-					</>
+									onClick={() => handleOnChangeDown(field)}
+								/>
+							</div>
+						</>
 					)}
 				</div>
 			))}
