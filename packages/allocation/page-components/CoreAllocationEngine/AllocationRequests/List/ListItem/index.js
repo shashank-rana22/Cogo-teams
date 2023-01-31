@@ -7,7 +7,7 @@ const columnsMapping = [
 	{
 		key      : 'id',
 		label    : 'Serial Id',
-		getValue : (data) => <Badge color="#fef199" size="lg" text={getByKey(data, 'service.serial_id', '___')} />,
+		getValue : (data) => <Badge color="blue" size="lg" text={getByKey(data, 'service.serial_id', '___')} />,
 		flex     : 2,
 	},
 	{
@@ -16,7 +16,7 @@ const columnsMapping = [
 		getValue : (data) => (
 			getByKey(data, 'service.business_name', '___')
 		),
-		flex: 2,
+		flex: 2.5,
 	},
 	{
 		key      : 'service_user',
@@ -24,9 +24,7 @@ const columnsMapping = [
 		getValue : (data) => (
 			<div>
 				{getByKey(data, 'service_user.name', '___')}
-				{' '}
-				<br />
-				{getByKey(data, 'service_user.email', '___')}
+				<div className={styles.email_id}>{getByKey(data, 'service_user.email', '___')}</div>
 			</div>
 		),
 		flex: 3,
@@ -44,8 +42,7 @@ const columnsMapping = [
 			<div>
 				{getByKey(data, 'user.name', '___')}
 				{' '}
-				<br />
-				{getByKey(data, 'user.email', '___')}
+				<div className={styles.email_id}>{getByKey(data, 'user.email', '___')}</div>
 			</div>
 		),
 		flex: 3,
@@ -54,7 +51,7 @@ const columnsMapping = [
 		key      : 'created_by',
 		label    : 'Requested By',
 		getValue : (data) => getByKey(data, 'created_by.name', '___'),
-		flex     : 2,
+		flex     : 2.5,
 	},
 	{
 		key      : 'reason',
@@ -66,12 +63,12 @@ const columnsMapping = [
 				</p>
 			</Tooltip>
 		),
-		flex: 2,
+		flex: 2.5,
 	},
 	{
 		key      : 'action',
 		label    : 'Action',
-		getValue : (data) => console.log({ data }),
+		getValue : () => {},
 		flex     : 2,
 	},
 ];

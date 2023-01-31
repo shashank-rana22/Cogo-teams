@@ -3,7 +3,9 @@ import { IcMFilter } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header(props) {
+	const { onClickCreateReqBtn } = props;
+
 	// Todo search filter should expand on clicking
 
 	return (
@@ -25,7 +27,13 @@ function Header() {
 					<div className={styles.filter_dot} />
 				</Button>
 
-				<Button size="md" themeType="accent">CREATE REQUEST</Button>
+				<Button
+					size="md"
+					themeType="accent"
+					onClick={onClickCreateReqBtn}
+				>
+					CREATE REQUEST
+				</Button>
 			</div>
 		</div>
 	);
