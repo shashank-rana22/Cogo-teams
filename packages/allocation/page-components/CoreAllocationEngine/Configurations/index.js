@@ -9,8 +9,6 @@ function Configurations() {
 		list,
 	} = useAllocationConfigurations();
 
-	console.log('list :: ', list);
-
 	return (
 		<div className={styles.container}>
 			<Header />
