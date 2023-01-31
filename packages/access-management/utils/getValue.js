@@ -8,8 +8,8 @@ import iterateSubKeys from './iterate-object';
 const getValue = (
 	itemData,
 	itemField,
-	functions = {},
 	emptyState,
+	functions = {},
 ) => {
 	if (isEmpty(itemData) || isEmpty(itemField)) {
 		return emptyState || '';
