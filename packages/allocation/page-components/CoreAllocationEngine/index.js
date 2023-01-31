@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import Heading from '../../common/Heading';
 
-import Configurations from './Configurations';
+import Configurations from './AllocationConfigurations';
 import Requests from './Requests';
 import styles from './styles.module.css';
 
