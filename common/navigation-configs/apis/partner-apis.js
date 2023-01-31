@@ -988,6 +988,16 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
+			api          : 'get_organization_communication_log_info',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organizations_communication_log_stats',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_organizations_segmentation_stats',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1145,6 +1155,18 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'demand_crm',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_organization_trade_intelligence',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
+		},
+		{
+			api          : 'get_lead_organization_country_shipment_stats',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organization_country_shipment_stats',
