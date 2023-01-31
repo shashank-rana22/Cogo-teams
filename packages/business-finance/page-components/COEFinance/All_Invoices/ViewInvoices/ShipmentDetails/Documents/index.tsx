@@ -80,7 +80,7 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 	};
 
 	return (
-		<div className={styles.List}>
+		<div className={styles.list}>
 			<List
 				config={config}
 				itemData={documentData}

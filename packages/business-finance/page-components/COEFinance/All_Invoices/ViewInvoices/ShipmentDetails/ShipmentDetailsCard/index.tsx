@@ -162,12 +162,12 @@ function ShipmentDetailsCard({
 				/>
 			) : (
 				<div>
-					<div className={styles.mainHeader}>
+					<div className={styles.main_header}>
 						<div className={styles.instructions}>
 							Check the Details
 							<Tooltip
 								content={(
-									<div className={styles.formStyle}>
+									<div className={styles.form_style}>
 										As filled by SO2 In The COGO Invoice
 									</div>
 								)}
@@ -188,7 +188,7 @@ function ShipmentDetailsCard({
 							</div>
 						)}
 					</div>
-					<div className={styles.smallHr} />
+					<div className={styles.small_hr} />
 					{DetailsCard.map((itemData: any) => {
 						const { id, label = '' } = itemData || {};
 
@@ -428,12 +428,12 @@ function ShipmentDetailsCard({
 
 								{id === 1 && (
 									<div className={styles.container}>
-										<div className={styles.headerContainer}>
+										<div className={styles.header_container}>
 											<div
 												className={
-                showValue.includes(1) || isInvoiceApproved ? styles.labelApproved : rejected.includes(1)
+                showValue.includes(1) || isInvoiceApproved ? styles.label_approved : rejected.includes(1)
                 // eslint-disable-next-line no-mixed-spaces-and-tabs
-                	? styles.labelRejected : styles.label
+                	? styles.label_rejected : styles.label
                         }
 											>
 												{label}
@@ -452,7 +452,7 @@ function ShipmentDetailsCard({
 												<div>
 													{showValue.includes(1) || rejected.includes(1) ? (
 														<div
-															className={styles.buttonContainer}
+															className={styles.button_container}
 															onClick={() => {
 																handleClickUndo(id);
 															}}
@@ -463,7 +463,7 @@ function ShipmentDetailsCard({
 															</Button>
 														</div>
 													) : (
-														<div className={styles.buttonContainer}>
+														<div className={styles.button_container}>
 															<Button
 																size="md"
 																themeType="secondary"
@@ -490,7 +490,7 @@ function ShipmentDetailsCard({
 										</div>
 										<div className={styles.hr} />
 
-										<div className={styles.billingPartyContainer}>
+										<div className={styles.billing_party_container}>
 											<div style={{ marginBottom: '8px' }}>
 												Name -
 												{' '}
@@ -532,12 +532,12 @@ function ShipmentDetailsCard({
 
 								{id === 2 && (
 									<div className={styles.container}>
-										<div className={styles.headerContainer}>
+										<div className={styles.header_container}>
 											<div
 												className={
-                          showValue.includes(2) || isInvoiceApproved ? styles.labelApproved : rejected.includes(2)
+                          showValue.includes(2) || isInvoiceApproved ? styles.label_approved : rejected.includes(2)
                           // eslint-disable-next-line no-mixed-spaces-and-tabs
-                          	? styles.labelRejected : styles.label
+                          	? styles.label_rejected : styles.label
                         }
 											>
 												{label}
@@ -556,7 +556,7 @@ function ShipmentDetailsCard({
 												<div>
 													{showValue.includes(2) || rejected.includes(2) ? (
 														<div
-															className={styles.buttonContainer}
+															className={styles.button_container}
 															onClick={() => {
 																handleClickUndo(id);
 															}}
@@ -567,7 +567,7 @@ function ShipmentDetailsCard({
 															</Button>
 														</div>
 													) : (
-														<div className={styles.buttonContainer}>
+														<div className={styles.button_container}>
 															<Button
 																size="md"
 																themeType="secondary"
@@ -595,7 +595,7 @@ function ShipmentDetailsCard({
 
 										<div className={styles.hr} />
 
-										<div className={styles.billingPartyContainer}>
+										<div className={styles.billing_party_container}>
 											<div style={{ marginBottom: '8px' }}>
 												Entity -
 												{' '}
@@ -628,12 +628,12 @@ function ShipmentDetailsCard({
 
 								{id === 3 && (
 									<div className={styles.container}>
-										<div className={styles.headerContainer}>
+										<div className={styles.header_container}>
 											<div
 												className={
-                          showValue.includes(3) || isInvoiceApproved ? styles.labelApproved : rejected.includes(3)
+                          showValue.includes(3) || isInvoiceApproved ? styles.label_approved : rejected.includes(3)
                           // eslint-disable-next-line no-mixed-spaces-and-tabs
-                          	? styles.labelRejected : styles.label
+                          	? styles.label_rejected : styles.label
                         }
 											>
 												{label}
@@ -652,7 +652,7 @@ function ShipmentDetailsCard({
 												<div>
 													{showValue.includes(3) || rejected.includes(3) ? (
 														<div
-															className={styles.buttonContainer}
+															className={styles.button_container}
 															onClick={() => {
 																handleClickUndo(id);
 															}}
@@ -663,7 +663,7 @@ function ShipmentDetailsCard({
 															</Button>
 														</div>
 													) : (
-														<div className={styles.buttonContainer}>
+														<div className={styles.button_container}>
 															<Button
 																size="md"
 																themeType="secondary"
@@ -690,7 +690,7 @@ function ShipmentDetailsCard({
 										</div>
 
 										<div className={styles.hr} />
-										<div className={styles.billingPartyContainer}>
+										<div className={styles.billing_party_container}>
 											<div style={{ marginBottom: '8px' }}>
 												Invoice Number -
 												{' '}

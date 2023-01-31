@@ -40,7 +40,7 @@ interface DetailInt {
 
 function CargoDetails({ detail }: DetailInt) {
 	return (
-		<div className={styles.divContainer}>
+		<div className={styles.div_container}>
 			{labels.map((label) => {
 				if (
 					detail?.[label as keyof typeof detail]
@@ -48,7 +48,7 @@ function CargoDetails({ detail }: DetailInt) {
 				) {
 					return (
 						<div className={styles.container}>
-							<div className={`${styles.Box} cargo-detail-pill`} key={label}>
+							<div className={`${styles.box} cargo-detail-pill`} key={label}>
 								{renderValue(label, detail)}
 							</div>
 						</div>

@@ -130,7 +130,7 @@ function LineItemCard({
 	const functions = {
 		renderIcon: (item: any) => (
 			<div
-				className={styles.circleBig}
+				className={styles.circle_big}
 				onClick={() => {
 					handleApproveClick(item?.id, item?.name);
 				}}
@@ -146,7 +146,7 @@ function LineItemCard({
 						placement="left"
 						render={(
 							<div
-								className={styles.popoverRejected}
+								className={styles.popover_rejected}
 								onClick={() => {
 									openRejectModal(item);
 								}}
@@ -179,12 +179,12 @@ function LineItemCard({
 
 	return (
 		<div>
-			<div className={styles.mainHeader}>
+			<div className={styles.main_header}>
 				<div className={styles.instructions}>
 					Check off Line Items and Tax Rate
 					<Tooltip
 						content={(
-							<div className={styles.formStyle}>
+							<div className={styles.form_style}>
 								As filled by SO2 In The COGO Invoice
 							</div>
 						)}
@@ -195,9 +195,9 @@ function LineItemCard({
 					</Tooltip>
 					<Pill color="blue">{invoiceType}</Pill>
 				</div>
-				<div className={styles.smallHr} />
+				<div className={styles.small_hr} />
 				{!isInvoiceApproved && (
-					<div className={styles.headerDetail}>
+					<div className={styles.header_detail}>
 						Click
 						{' '}
 						<IcMOverflowDot />
@@ -216,7 +216,7 @@ function LineItemCard({
 
 				<div className={styles.outer}>
 					<div className={styles.flex}>
-						<div className={styles.flexDiv}>
+						<div className={styles.flex_div}>
 							<div className={styles.info}>T: Taxable</div>
 							<div className={styles.info}>P: Pure Agent</div>
 							<div className={styles.info}>E: Exempted</div>
@@ -233,8 +233,8 @@ function LineItemCard({
 								)}
 							</div>
 						</div>
-						<div className={styles.amountRight}>
-							<div className={styles.borderRight}>
+						<div className={styles.amount_right}>
+							<div className={styles.border_right}>
 								{getFormattedPrice(
 									bill?.grandTotal || '0',
 									bill?.billCurrency || 'INR',
@@ -244,9 +244,9 @@ function LineItemCard({
 					</div>
 
 					<div className={styles.flex}>
-						<div className={styles.bottomDiv}>
+						<div className={styles.bottom_div}>
 							<div>Total payable in words : </div>
-							<div className={styles.wordsCurrency}>
+							<div className={styles.words_currency}>
 								{bill?.billCurrency}
 								{' '}
 								{bill?.subTotal ? (
@@ -282,7 +282,7 @@ function LineItemCard({
 					>
 						<Modal.Header title="Rejected line items" />
 						<Modal.Body>
-							<div className={styles.modalContainer}>
+							<div className={styles.modal_container}>
 								<List
 									config={LINE_ITEMS_CHECK}
 									itemData={{ list: [showRejectedModal] }}

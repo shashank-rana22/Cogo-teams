@@ -34,20 +34,20 @@ function CustomerInformation({
 
 				return (
 					<div className={styles.container} key={id}>
-						<div className={styles.subContainer}>
+						<div className={styles.sub_container}>
 							Name -
 							{' '}
 							<span style={{ fontWeight: 600 }}>{customerName}</span>
 						</div>
 
-						<div className={styles.subContainer}>
+						<div className={styles.sub_container}>
 							Total Outstanding -
 							<span style={{ fontWeight: 600 }}>
 								{getFormattedPrice(customerOutstandingAmount, 'INR')}
 							</span>
 						</div>
 
-						<div className={styles.subContainer}>
+						<div className={styles.sub_container}>
 							On Account Payments -
 							<span style={{ fontWeight: 600 }}>
 								{getFormattedPrice(customerOutstandingAmountOnSid, 'INR')}

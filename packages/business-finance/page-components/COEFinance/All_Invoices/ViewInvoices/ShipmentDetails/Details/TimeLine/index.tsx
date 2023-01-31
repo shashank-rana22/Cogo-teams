@@ -17,8 +17,8 @@ function TimeLine({ shipmentId }:Int) {
 	let isCompleted = true;
 
 	return (
-		<div className={styles.Container}>
-			<div className={styles.Wrapper}>
+		<div className={styles.container}>
+			<div className={styles.wrapper}>
 				{!loading ? timelineData?.map((item, i) => {
 					if (!item?.completed_on) {
 						isCompleted = false;

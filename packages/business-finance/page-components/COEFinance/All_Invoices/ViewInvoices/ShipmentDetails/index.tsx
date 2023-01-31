@@ -124,7 +124,7 @@ function ShipmentDetails({
 				{jobNumber && (
 					<span>
 						- SID
-						<span className={styles.serialId}>
+						<span className={styles.serial_id}>
 							{' '}
 							#
 							{jobNumber}
@@ -133,32 +133,32 @@ function ShipmentDetails({
 				)}
 			</h3>
 
-			<div className={styles.smallHr} />
+			<div className={styles.small_hr} />
 
 			<div className={styles.card}>
 				<div
-					className={styles.cardUpper}
+					className={styles.card_upper}
 					onClick={() => {
 						setShowDetails(!showDetails);
 					}}
 					role="presentation"
 				>
-					<div className={styles.subContainer}>
+					<div className={styles.sub_container}>
 						Details
-						<div className={styles.tagsContainer}>
+						<div className={styles.tags_container}>
 							{sourceText && <Pill color="blue">{sourceText}</Pill>}
 							{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
 						</div>
 						{dataWallet?.list?.[0] && (
-							<div className={styles.Data}>
-								<div className={styles.kamData}>KAM -</div>
+							<div className={styles.data}>
+								<div className={styles.kam_data}>KAM -</div>
 								<div>
 									{agentData?.name}
                   &nbsp;(
 									{agentRoleData?.name}
 									)
 								</div>
-								<div className={styles.kamData}>Wallet Usage - </div>
+								<div className={styles.kam_data}>Wallet Usage - </div>
 								<div>
 									{amountCurrency || 'USD'}
 
@@ -201,8 +201,8 @@ function ShipmentDetails({
 				}}
 				role="presentation"
 			>
-				<div className={styles.cardUpper}>
-					<div className={styles.subContainer}>
+				<div className={styles.card_upper}>
+					<div className={styles.sub_container}>
 						Documents
 						<IcADocumentTemplates height="17px" width="17px" />
 					</div>
@@ -240,7 +240,7 @@ function ShipmentDetails({
 						</div>
 						{varianceFullData?.data ? (
 							<div
-								className={styles.viewMore}
+								className={styles.view_more}
 								onClick={() => setShowVariance(true)}
 								role="presentation"
 							>
@@ -270,11 +270,11 @@ function ShipmentDetails({
 				status={status}
 			/>
 
-			<div className={styles.shipmentDetailsFooter}>
+			<div className={styles.shipment_details_footer}>
 				<div className={styles.pdfDisplay}>
 					<PdfDisplay data={data} />
 				</div>
-				<div className={styles.shipmentDetailsCard}>
+				<div className={styles.shipment_details_card}>
 					<ShipmentDetailsCard
 						data={data}
 						remarksVal={remarksVal}

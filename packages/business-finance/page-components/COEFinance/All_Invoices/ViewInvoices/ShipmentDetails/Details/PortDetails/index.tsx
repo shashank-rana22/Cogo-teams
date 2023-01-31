@@ -30,9 +30,9 @@ function PortDetails({ data, showDate = false }: Props) {
 
 	const handleLocationDetails = (location, icdInfo) => (
 		<>
-			<div className={styles.PortCode}>
+			<div className={styles.port_code}>
 				{location?.port_code || location?.postal_code ? (
-					<div className={styles.Code}>
+					<div className={styles.code}>
 						(
 						{location?.port_code || location?.postal_code}
 						)
@@ -41,11 +41,11 @@ function PortDetails({ data, showDate = false }: Props) {
 					<div style={{ height: '16px' }} />
 				)}
 
-				<div className={styles.Country}>{location?.country}</div>
+				<div className={styles.country}>{location?.country}</div>
 			</div>
 
-			<div className={styles.Value}>{location?.name}</div>
-			{icdInfo?.name ? <div className={styles.Icd}>{icdInfo?.name}</div> : null}
+			<div className={styles.value}>{location?.name}</div>
+			{icdInfo?.name ? <div className={styles.icd}>{icdInfo?.name}</div> : null}
 		</>
 	);
 
@@ -61,12 +61,12 @@ function PortDetails({ data, showDate = false }: Props) {
 			if (data?.shipment_type?.includes('_local')) {
 				return (
 					<>
-						<div className={`customs ${styles.FlexRowOrigin}`}>
-							<div className={styles.Text}>{tradeType}</div>
-							<div className={styles.Text}>Location : </div>
+						<div className={`customs ${styles.flex_row_origin}`}>
+							<div className={styles.text}>{tradeType}</div>
+							<div className={styles.text}>Location : </div>
 						</div>
 
-						<div className={styles.FlexRowOrigin}>
+						<div className={styles.flex_row_origin}>
 							{handleLocationDetails(origin, {})}
 						</div>
 					</>
@@ -74,38 +74,38 @@ function PortDetails({ data, showDate = false }: Props) {
 			}
 			return (
 				<>
-					<div className={`customs ${styles.FlexRowOrigin}`}>
-						<div className={styles.Text}>{tradeType}</div>
-						<div className={styles.Text}>custom clearance : </div>
+					<div className={`customs ${styles.flex_row_origin}`}>
+						<div className={styles.text}>{tradeType}</div>
+						<div className={styles.text}>custom clearance : </div>
 					</div>
 
-					<div className={styles.FlexRowOrigin}>
+					<div className={styles.flex_row_origin}>
 						{handleLocationDetails(origin, {})}
 					</div>
 				</>
 			);
 		}
 		return (
-			<div className={styles.LocationContainer}>
-				<div className={styles.PortPairContainer}>
-					<div className={styles.FlexRowOrigin}>
+			<div className={styles.location_container}>
+				<div className={styles.port_pair_container}>
+					<div className={styles.flex_row_origin}>
 						{handleLocationDetails(origin, originMainPort)}
 						{showDate ? (
-							<div className={styles.DateContainer}>
+							<div className={styles.date_container}>
 								ETD -
 								{formatDate(data?.schedule_departure, 'dd-MM-yyyy', {}, true)}
 							</div>
 						) : null}
 					</div>
 
-					<div className={styles.IconWrapper}>
+					<div className={styles.icon_wrapper}>
 						<IcMPortArrow />
 					</div>
 
-					<div className={styles.FlexRowDest}>
+					<div className={styles.flex_row_dest}>
 						{handleLocationDetails(destination, destinationMainPort)}
 						{showDate ? (
-							<div className={styles.DateContainer}>
+							<div className={styles.date_container}>
 								ETA -
 								{formatDate(data?.schedule_arrival, 'dd-MM-yyyy', {}, true)}
 							</div>
@@ -114,10 +114,10 @@ function PortDetails({ data, showDate = false }: Props) {
 				</div>
 
 				{showDate ? (
-					<div className={styles.Status}>
+					<div className={styles.status}>
 						Status:
 						{' '}
-						<div className={styles.State}>{startCase(data?.state || '')}</div>
+						<div className={styles.state}>{startCase(data?.state || '')}</div>
 					</div>
 				) : null}
 			</div>
@@ -128,13 +128,13 @@ function PortDetails({ data, showDate = false }: Props) {
 		?.join(' ')
 		?.toUpperCase();
 	return (
-		<div className={styles.Container}>
-			<div className={styles.IconAndService}>
+		<div className={styles.container}>
+			<div className={styles.icon_and_service}>
 				<div>
 					{' '}
 					{serviceIcon}
 				</div>
-				<div className={styles.serviceName}>{shipmentTypeName || ''}</div>
+				<div className={styles.service_name}>{shipmentTypeName || ''}</div>
 			</div>
 
 			{renderLocation()}

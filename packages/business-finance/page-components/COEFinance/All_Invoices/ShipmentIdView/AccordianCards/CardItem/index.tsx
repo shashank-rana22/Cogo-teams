@@ -86,9 +86,9 @@ function CardItem({
 				/>
 			</div>
 
-			<div className={styles.cardList}>
+			<div className={styles.card_list}>
 				{list?.length === 0 ? (
-					<div className={styles.noData}>No Data Available</div>
+					<div className={styles.no_data}>No Data Available</div>
 				) : (
 					<List
 						config={config}
@@ -104,7 +104,7 @@ function CardItem({
 
 			<div className={styles.footer}>
 				<div
-					className={styles.footerText}
+					className={styles.footer_text}
 					onClick={() => handleClick()}
 					role="presentation"
 				>

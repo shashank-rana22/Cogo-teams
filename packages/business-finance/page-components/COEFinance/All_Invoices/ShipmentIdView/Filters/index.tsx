@@ -39,7 +39,7 @@ function Filters({
 				/>
 
 			</div>
-			<div className={styles.searchFilter}>
+			<div className={styles.search_filter}>
 				<Filter
 					controls={controls}
 					filters={filters}

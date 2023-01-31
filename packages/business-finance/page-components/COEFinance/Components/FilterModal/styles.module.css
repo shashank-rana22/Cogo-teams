@@ -8,7 +8,7 @@
 	letter-spacing: 0.04em;
 }
 
-.filterButton {
+.filter_button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -85,12 +85,12 @@
 	margin-top: -20px;
 }
 
-.filterApplied {
+.filter_applied {
 	margin-top: -15px;
 	margin-left: -2px;
 }
 
-.currencyValues {
+.currency_values {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -113,13 +113,13 @@
 		background-color: #fff;
 	}
 
-	&.iconShow {
+	&.icon_show {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 4px;
 	}
 
-	&.textShow {
+	&.text_show {
 		display: flex;
 		justify-content: center;
 		font-size: 14px;

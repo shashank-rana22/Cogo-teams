@@ -1,4 +1,4 @@
-.smallHr {
+.small_hr {
 	width: 5%;
 	border: 1px solid #ed3726;
 	border-radius: 30px;
@@ -20,7 +20,7 @@
 	box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
-.cardUpper {
+.card_upper {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -28,17 +28,17 @@
 	cursor: pointer;
 }
 
-.tagsContainer {
+.tags_container {
 	display: flex;
 	gap: 24px;
 }
 
-.Data {
+.data {
 	display: flex;
 	gap: 8px;
 }
 
-.subContainer {
+.sub_container {
 	display: flex;
 	gap: 10px;
 	align-items: center;
@@ -55,16 +55,16 @@
 	border: 1px solid #333;
 }
 
-.shipmentDetailsFooter {
+.shipment_details_footer {
 	display: flex;
 }
 
-.pdfDisplay {
+.pdf_display {
 	width: 60%;
 	margin-top: 26px;
 }
 
-.shipmentDetailsCard {
+.shipment_details_card {
 	width: 40%;
 }
 
@@ -88,17 +88,17 @@
 	border-radius: 4px;
 }
 
-.viewMore {
+.view_more {
 	color: #ed3726;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-.kamData {
+.kam_data {
 	display: flex;
 	font-weight: 700;
 }
 
-.serialId {
+.serial_id {
 	color: #ed3726;
 }

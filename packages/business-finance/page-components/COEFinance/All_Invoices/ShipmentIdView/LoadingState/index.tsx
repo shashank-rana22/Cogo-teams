@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 
 function LoadingState() {
 	return (
-		<div className={styles.mainContainer}>
+		<div className={styles.main_container}>
 			<div className={styles.container}>
-				<div className={styles.flexRow}>
+				<div className={styles.flex_row}>
 					<div className={styles.percent}>
 						<Placeholder />
 						<Placeholder />
@@ -17,20 +17,20 @@ function LoadingState() {
 					<Placeholder />
 				</div>
 
-				<div className={styles.flexRow}>
+				<div className={styles.flex_row}>
 					<div className={styles.percent}>
 						<Placeholder />
 						<Placeholder />
 					</div>
 				</div>
-				<div className={styles.flexRow}>
+				<div className={styles.flex_row}>
 					<div className={styles.percent}>
 						<Placeholder />
 						<Placeholder />
 					</div>
 				</div>
 
-				<div className={styles.flexRow}>
+				<div className={styles.flex_row}>
 					<div className={styles.percent}>
 						<Placeholder />
 						<Placeholder />

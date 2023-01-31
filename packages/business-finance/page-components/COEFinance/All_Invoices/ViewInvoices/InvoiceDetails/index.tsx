@@ -73,7 +73,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 
 	const renderEditTag = (
 		<div className={styles.flexdiv}>
-			<div className={styles.cardField}>
+			<div className={styles.card_field}>
 				<div className={styles.tags}>
 					{displayTag}
 					<div>{remark}</div>
@@ -87,7 +87,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					) : null}
 			</div>
 
-			<div className={styles.buttonContainer}>
+			<div className={styles.button_container}>
 				<Button
 					themeType="secondary"
 					size="md"
@@ -140,17 +140,17 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					setShowAddTag={setShowAddTag}
 				/>
 			) : null}
-			<div className={styles.smallHr} />
+			<div className={styles.small_hr} />
 			<div className={styles.card}>
-				<div className={styles.cardFieldFirst}>
+				<div className={styles.card_field_first}>
 					Invoice Amount - &nbsp;
 					{' '}
 					<span className={styles.amount}>
 						{getFormattedPrice(grandTotal, billCurrency)}
 					</span>
 				</div>
-				<div className={styles.verticalSmallHr} />
-				<div className={styles.cardFieldSecond}>
+				<div className={styles.vertical_small_hr} />
+				<div className={styles.card_field_second}>
 					Tag - &nbsp;
 					{' '}
 					<span className={styles.tag}>
@@ -159,8 +159,8 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 							: !isEmpty(data) && renderEmpty}
 					</span>
 				</div>
-				<div className={styles.verticalSmallHr} />
-				<div className={styles.cardFieldThird}>
+				<div className={styles.vertical_small_hr} />
+				<div className={styles.card_field_third}>
 					Remarks -
 					{' '}
 					<span className={styles.remarks}>

@@ -5,27 +5,14 @@
 	padding: 12px;
 }
 
-.buttonContainer {
+.button_container {
 	display: flex;
 	justify-content: flex-end;
 	margin: 20px;
 }
 
-.subContainer {
+.sub_container {
 	margin: 20px;
-
-	.core-ui-select__control {
-		width: 65%;
-	}
-
-	.core-ui-select__menu {
-		width: 65%;
-	}
-
-	.ui-textarea-root {
-		padding: 12px;
-		margin-top: 24px;
-	}
 }
 
 .heading {

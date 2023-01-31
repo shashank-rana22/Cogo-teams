@@ -27,10 +27,10 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 					/>
 				</div>
 				<div className={styles.discount}>
-					<div className={styles.labelText}>
+					<div className={styles.label_text}>
 						Discount Applied (KAM) -
 					</div>
-					<div className={styles.valueText}>
+					<div className={styles.value_text}>
 						{getFormattedPrice(
 							itemData.discount_amount,
 							itemData.discount_amount_currency,
@@ -38,10 +38,10 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 					</div>
 				</div>
 				<div className={styles.discount}>
-					<div className={styles.labelText}>
+					<div className={styles.label_text}>
 						Discount Applied (Revenue Desk) -
 					</div>
-					<div className={styles.valueText}>
+					<div className={styles.value_text}>
 						{getFormattedPrice(
 							itemData.discount_amount_revenue,
 							itemData.discount_amount_revenue_currency,
@@ -51,8 +51,8 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 			</div>
 			{itemData.status && (
 				<div className={styles.status}>
-					<div className={styles.statusLabel}>Status - </div>
-					<div className={styles.statusValue}>{itemData.status}</div>
+					<div className={styles.status_label}>Status - </div>
+					<div className={styles.status_value}>{itemData.status}</div>
 				</div>
 			)}
 		</div>

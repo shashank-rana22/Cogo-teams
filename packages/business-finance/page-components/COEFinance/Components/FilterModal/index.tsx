@@ -85,7 +85,7 @@ function FilterModal({ filters, setFilters }: Props) {
 							const { id = '', icon, text } = item;
 							return (
 								<div
-									className={`${styles.currencyValues}
+									className={`${styles.currency_values}
 											${
                         currencies.includes(id as keyof typeof currencies) ? styles.selected : styles.unselected
 									}`}
@@ -139,7 +139,7 @@ function FilterModal({ filters, setFilters }: Props) {
 			</Modal>
 			<div
 				role="presentation"
-				className={styles.filterButton}
+				className={styles.filter_button}
 				onClick={() => {
 					setShowModal(true);
 				}}

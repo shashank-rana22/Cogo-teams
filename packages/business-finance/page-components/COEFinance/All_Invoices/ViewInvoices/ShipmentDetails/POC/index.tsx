@@ -55,16 +55,16 @@ function POCDetails({ itemData }: Props) {
 
 	return (
 		<>
-			<div className={styles.iconView}>
+			<div className={styles.icon_view}>
 				<div
-					className={styles.iconContainer}
+					className={styles.icon_container}
 					onClick={handleShow}
 					role="presentation"
 				>
 					<IcMArrowRotateRight width={20} height={20} />
 				</div>
 				<div
-					className={styles.pocContainer}
+					className={styles.poc_container}
 					onClick={handleShow}
 					role="presentation"
 				>
@@ -73,16 +73,16 @@ function POCDetails({ itemData }: Props) {
 			</div>
 			{showDetailsCard && (
 				<>
-					<div className={styles.invoiceDetailsContainerBg} />
+					<div className={styles.invoice_details_container_bg} />
 
 					<div
-						className={styles.invoiceDetailsContainer}
+						className={styles.invoice_details_container}
 						style={{ width: '35vw' }}
 					>
 						<div className={showDetailsCard ? styles.enter : styles.exit}>
-							<div className={styles.contentCaret}>
+							<div className={styles.content_caret}>
 								<div
-									className={styles.iconContainer}
+									className={styles.icon_container}
 									onClick={() => {
 										setShowDetailsCard(false);
 										document.body.style.overflow = 'auto';
@@ -92,13 +92,13 @@ function POCDetails({ itemData }: Props) {
 									<IcMArrowRotateLeft />
 								</div>
 
-								<div className={styles.headerDetails}>
+								<div className={styles.header_details}>
 									POC & Other Details - SID
 									<span style={{ marginLeft: '4px' }}>{jobNumber}</span>
 								</div>
 							</div>
 
-							<div className={styles.bodyDetails}>
+							<div className={styles.body_details}>
 								{loading ? (
 									<>
 										<Placeholder
@@ -124,14 +124,14 @@ function POCDetails({ itemData }: Props) {
 										return (
 											<div className={styles.information} key={id}>
 												<div
-													className={styles.dataContainer}
+													className={styles.data_container}
 													onClick={() => {
 														handleDropdown(id);
 													}}
 													role="presentation"
 												>
 													{label}
-													<div className={styles.dropdownContainer}>
+													<div className={styles.drop_down_container}>
 														{dropDownData[id as keyof typeof dropDownData] ? (
 															<IcMArrowRotateUp width={15} height={15} />
 														) : (
@@ -141,12 +141,12 @@ function POCDetails({ itemData }: Props) {
 												</div>
 
 												{dropDownData[id as keyof typeof dropDownData] && (
-													<div className={styles.hR} />
+													<div className={styles.hr} />
 												)}
 
 												{dropDownData[id as keyof typeof dropDownData] && (
 													<div>
-														<div className={styles.informationData}>
+														<div className={styles.information_data}>
 															{label === 'Customer Information' && (
 																<CustomerInformation data={invoiceData} />
 															)}

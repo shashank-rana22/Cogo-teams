@@ -1,4 +1,4 @@
-.smallHr {
+.small_hr {
 	width: 5%;
 	border: 1px solid #ed3726;
 	border-radius: 30px;
@@ -18,7 +18,7 @@
 	border-radius: 8px;
 }
 
-.verticalSmallHr {
+.vertical_small_hr {
 	width: 2px;
 	height: 36px;
 	border: 1px solid #ed3726;
@@ -35,28 +35,28 @@
 	gap: 6px;
 }
 
-.cardField {
+.card_field {
 	display: flex;
 	gap: 4px;
 	align-items: center;
 	justify-content: center;
 }
 
-.cardFieldFirst {
+.card_field_first {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 27%;
 }
 
-.cardFieldSecond {
+.card_field_second {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 46%;
 }
 
-.cardFieldThird {
+.card_field_third {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -78,7 +78,7 @@
 	align-items: center;
 }
 
-.buttonContainer {
+.button_container {
 	display: flex;
 	gap: 4px;
 	justify-content: space-between;

@@ -73,7 +73,7 @@ function Header({
 				>
 					Go Back
 				</Button>
-				<div className={styles.subContainer}>
+				<div className={styles.sub_container}>
 					<Button
 						size="md"
 						themeType="secondary"

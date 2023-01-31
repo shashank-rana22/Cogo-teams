@@ -29,15 +29,15 @@ function RemoveTagConfirmation({
 
 	return (
 		<div>
-			<div className={styles.StyleSvg}>
+			<div className={styles.style_svg}>
 				<IcMDelete />
 			</div>
 
-			<div className={styles.Txt}>
+			<div className={styles.txt}>
 				Are you sure you want to remove this Tag?
 			</div>
 
-			<div className={styles.BtnWrap}>
+			<div className={styles.btn_wrap}>
 				<Button
 					themeType="secondary"
 					onClick={() => setRemoveTag(false)}

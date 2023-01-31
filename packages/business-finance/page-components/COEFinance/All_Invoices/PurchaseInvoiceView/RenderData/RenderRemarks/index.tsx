@@ -45,7 +45,7 @@ function RenderRemarks({ item }:Props) {
 	return (
 		<div>
 			<Popover placement="top" render={remarkData ? remarkTimeline() : 'no remark found !!'}>
-				<div className={styles.remarksDiv}>
+				<div className={styles.remarks_div}>
 					<IcMProvision width="20px" height="20px" color="#F68B21" />
 				</div>
 			</Popover>

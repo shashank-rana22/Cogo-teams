@@ -32,48 +32,48 @@ function AccordianCards({
 	return (
 		<div>
 			<div className={styles.container}>
-				<div className={styles.subContainer}>
+				<div className={styles.sub_container}>
 					<div className={styles.column1}>
 						<div className={styles.sid}>
-							<div className={styles.sidContainer}>
-								<div className={styles.sidLabelText}>
+							<div className={styles.sid_container}>
+								<div className={styles.sid_label_text}>
 									SID -
 									{' '}
 								</div>
-								<div className={styles.sidValueText}>
+								<div className={styles.sid_value_text}>
 									{itemData.serial_id}
 								</div>
 							</div>
 							{itemData.pending_approvals === 0 ? null : (
-								<div className={styles.pendingText}>
+								<div className={styles.pending_text}>
 									Pending Approval -
 									{' '}
 									{itemData.pending_approvals}
 								</div>
 							)}
 						</div>
-						<div className={styles.freightWidth}>
+						<div className={styles.freight_width}>
 							<div className={styles.freight}>
 								{startCase(itemData.shipment_type!)}
 							</div>
 						</div>
 					</div>
-					<div className={styles.rightBorder}>
+					<div className={styles.right_border}>
 						<div className={styles.vr} />
 					</div>
 
 					<div className={styles.column2}>
-						<div className={styles.expenseAmount}>
+						<div className={styles.expense_amount}>
 							<div className={styles.expense}>
-								<div className={styles.expenseLabelText}>
+								<div className={styles.expense_label_text}>
 									Expense (
 									{itemData.expense_count || 0}
 									)
 								</div>
-								<div className={styles.smallRightBorder}>
+								<div className={styles.small_right_border}>
 									<div className={styles.smallVr} />
 								</div>
-								<div className={styles.expenseValueText}>
+								<div className={styles.expense_value_text}>
 									{getFormattedPrice(
 										itemData.expense_total_price!,
 										itemData.expense_total_currency!,
@@ -81,15 +81,15 @@ function AccordianCards({
 								</div>
 							</div>
 							<div className={styles.urgent}>
-								<div className={styles.urgentLabelText}>
+								<div className={styles.urgent_label_text}>
 									Urgent (
 									{itemData.urgency_expense_count}
 									)
 								</div>
-								<div className={styles.smallRightBorder}>
-									<div className={styles.urgentVr} />
+								<div className={styles.small_right_border}>
+									<div className={styles.urgent_vr} />
 								</div>
-								<div className={styles.urgentValueText}>
+								<div className={styles.urgent_value_text}>
 									{getFormattedPrice(
 										itemData.urgency_total_price!,
 										itemData.urgency_total_currency || 'INR',
@@ -97,17 +97,17 @@ function AccordianCards({
 								</div>
 							</div>
 						</div>
-						<div className={styles.expenseAmount}>
+						<div className={styles.expense_amount}>
 							<div className={styles.expense}>
-								<div className={styles.expenseLabelText}>
+								<div className={styles.expense_label_text}>
 									Income (
 									{itemData.income_count}
 									)
 								</div>
-								<div className={styles.smallRightBorder}>
-									<div className={styles.smallVr} />
+								<div className={styles.small_right_border}>
+									<div className={styles.small_vr} />
 								</div>
-								<div className={styles.expenseValueText}>
+								<div className={styles.expense_value_text}>
 									{getFormattedPrice(
 										itemData.income_total_price!,
 										itemData.income_total_currency || 'INR',
@@ -115,15 +115,15 @@ function AccordianCards({
 								</div>
 							</div>
 							<div className={styles.expense}>
-								<div className={styles.expenseLabelText}>
+								<div className={styles.expense_label_text}>
 									Credit Note (
 									{itemData.credit_expense_count}
 									)
 								</div>
-								<div className={styles.smallRightBorder}>
+								<div className={styles.small_right_border}>
 									<div className={styles.smallVr} />
 								</div>
-								<div className={styles.expenseValueText}>
+								<div className={styles.expense_value_text}>
 									{getFormattedPrice(
 										itemData.credit_total_price!,
 										'INR',
@@ -132,22 +132,22 @@ function AccordianCards({
 							</div>
 						</div>
 					</div>
-					<div className={styles.rightBorder}>
+					<div className={styles.right_border}>
 						<div className={styles.vr} />
 					</div>
 
 					<div className={styles.column3}>
-						<div className={styles.expenseAmount}>
+						<div className={styles.expense_amount}>
 							<div className={styles.expense}>
 								<div className={styles.profitibility}>
 									Quotation Profitability
 								</div>
-								<div className={styles.smallRightBorder}>
+								<div className={styles.small_right_border}>
 									<div
-										className={styles.profitibilityBorder}
+										className={styles.profitibility_border}
 									/>
 								</div>
-								<div className={styles.profitibilityValue}>
+								<div className={styles.profitibility_value}>
 									{itemData.quotation_profit}
 									%
 								</div>
@@ -157,19 +157,19 @@ function AccordianCards({
 								<div className={styles.profitibility}>
 									Actual Profitability
 								</div>
-								<div className={styles.smallRightBorder}>
+								<div className={styles.small_right_border}>
 									<div
-										className={styles.profitibilityBorder}
+										className={styles.profitibility_border}
 									/>
 								</div>
-								<div className={styles.profitibilityValue}>
+								<div className={styles.profitibility_value}>
 									{itemData.tentative_profit}
 									{' '}
 									%
 								</div>
 							</div>
 						</div>
-						<div className={styles.buttonStyle}>
+						<div className={styles.button_style}>
 							{currentOpenSID !== itemData?.id ? (
 								<Button
 									style={{ height: '30px', fontSize: '12px' }}
@@ -201,7 +201,7 @@ function AccordianCards({
 					{itemData.is_job_closed === false ? (
 						<div className={styles.ribbon}>Open</div>
 					) : (
-						<div className={styles.ribbonClosed}>Closed</div>
+						<div className={styles.ribbon_closed}>Closed</div>
 					)}
 				</div>
 				<div>
