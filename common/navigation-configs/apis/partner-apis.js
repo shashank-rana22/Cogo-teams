@@ -6845,6 +6845,16 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
+	vietnam_account_receivables: [
+		{
+			api         : 'get_sales_invoice_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
