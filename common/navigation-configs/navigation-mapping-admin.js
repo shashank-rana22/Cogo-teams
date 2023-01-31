@@ -1578,6 +1578,14 @@ const navigationMappingAdmin = {
 
 				module_type: 'crm',
 			},
+			{
+				key           : 'transaction_setting-cogo_fx',
+				title         : 'Cogo FX',
+				href          : '/cogo-fx',
+				as            : '/cogo-fx',
+				main_apis     : [],
+				possible_apis : apis.cogo_fx,
+			},
 		],
 		module_type: 'dashboards',
 	},
