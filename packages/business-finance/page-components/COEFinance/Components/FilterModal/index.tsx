@@ -87,8 +87,7 @@ function FilterModal({ filters, setFilters }: Props) {
 								<div
 									className={`${styles.currencyValues}
 											${
-                                            currencies.includes(id as keyof typeof currencies) ? styles.selected
-                                            	: styles.unselected
+                        currencies.includes(id as keyof typeof currencies) ? styles.selected : styles.unselected
 									}`}
 									onClick={() => {
 										if (currencies?.includes(id)) {

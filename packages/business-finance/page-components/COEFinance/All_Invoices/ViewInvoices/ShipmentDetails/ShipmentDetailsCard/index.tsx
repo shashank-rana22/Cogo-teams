@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import {
 	Button,
 	Pill,
@@ -430,11 +431,9 @@ function ShipmentDetailsCard({
 										<div className={styles.headerContainer}>
 											<div
 												className={
-                            showValue.includes(1) || isInvoiceApproved
-                          	? styles.labelApproved
-                          	: rejected.includes(1)
-                          		? styles.labelRejected
-                          		: styles.label
+                showValue.includes(1) || isInvoiceApproved ? styles.labelApproved : rejected.includes(1)
+                // eslint-disable-next-line no-mixed-spaces-and-tabs
+                	? styles.labelRejected : styles.label
                         }
 											>
 												{label}
@@ -536,11 +535,9 @@ function ShipmentDetailsCard({
 										<div className={styles.headerContainer}>
 											<div
 												className={
-                          showValue.includes(2) || isInvoiceApproved
-                          	? styles.labelApproved
-                          	: rejected.includes(2)
-                          		? styles.labelRejected
-                          		: styles.label
+                          showValue.includes(2) || isInvoiceApproved ? styles.labelApproved : rejected.includes(2)
+                          // eslint-disable-next-line no-mixed-spaces-and-tabs
+                          	? styles.labelRejected : styles.label
                         }
 											>
 												{label}
@@ -634,11 +631,9 @@ function ShipmentDetailsCard({
 										<div className={styles.headerContainer}>
 											<div
 												className={
-                          showValue.includes(3) || isInvoiceApproved
-                          	? styles.labelApproved
-                          	: rejected.includes(3)
-                          		? styles.labelRejected
-                          		: styles.label
+                          showValue.includes(3) || isInvoiceApproved ? styles.labelApproved : rejected.includes(3)
+                          // eslint-disable-next-line no-mixed-spaces-and-tabs
+                          	? styles.labelRejected : styles.label
                         }
 											>
 												{label}
@@ -659,7 +654,7 @@ function ShipmentDetailsCard({
 														<div
 															className={styles.buttonContainer}
 															onClick={() => {
-                              	handleClickUndo(id);
+																handleClickUndo(id);
 															}}
 															role="presentation"
 														>

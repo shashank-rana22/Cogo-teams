@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { Tooltip } from '@cogoport/components';
 import { IcMFtick } from '@cogoport/icons-react';
 import startCase from '@cogoport/utils/src/utilities/startCase';
@@ -82,11 +83,11 @@ function TimeLineItem({
                   && item?.completed_on
                   && !item?.is_sub ? (
 	<IcMFtick color="red" height={20} width={20} />
-                  	) : (
-	<div
-		className={`${styles.bordered_circle} ${styles[className]}`}
-	/>
-                  	)
+								) : (
+									<div
+										className={`${styles.bordered_circle} ${styles[className]}`}
+									/>
+								)
 
 						) : (
 							<div
@@ -97,7 +98,6 @@ function TimeLineItem({
 				</Tooltip>
 
 				{!isLast ? (
-
 					minWidthAllow ? (
 						<div
 							className={`${styles.line} ${styles[className]} ${styles.min_width}`}
@@ -105,22 +105,17 @@ function TimeLineItem({
 					) : (
 						<div className={`${styles.line} ${styles[className]}`} />
 					)
-
 				) : null}
 
 				{!item?.is_sub || isLast ? (
 					<div
 						className={
-                isLast
-                	? `${styles.mile_stone_description} ${styles.last}`
-                	: `${styles.mile_stone_description}`
+                isLast ? `${styles.mile_stone_description} ${styles.last}` : `${styles.mile_stone_description}`
               }
 					>
 						<div
 							className={
-                  className === 'pending'
-                  	? `${styles.desc} ${styles[className]}`
-                  	: styles.desc
+                  className === 'pending' ? `${styles.desc} ${styles[className]}` : styles.desc
                 }
 						>
 							{startCase(item.milestone)}
@@ -129,9 +124,7 @@ function TimeLineItem({
 						{item?.completed_on ? (
 							<div
 								className={
-                    className === 'pending'
-                    	? `${styles.desc} ${styles[className]}`
-                    	: styles.desc
+                    className === 'pending' ? `${styles.desc} ${styles[className]}` : styles.desc
                   }
 							>
 								{formatDate(item.completed_on, 'dd-MMM-yy', {}, true)}

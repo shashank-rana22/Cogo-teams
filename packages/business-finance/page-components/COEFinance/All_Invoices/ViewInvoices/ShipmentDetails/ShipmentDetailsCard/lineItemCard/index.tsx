@@ -90,10 +90,12 @@ function LineItemCard({
 			[key]: !previousActions[key],
 		}));
 		setRejectedItems((p) => {
+			// eslint-disable-next-line no-param-reassign
 			delete p[key as keyof typeof p];
 			return { ...p };
 		});
 		setLineItemsRemarks((prev) => {
+			// eslint-disable-next-line no-param-reassign
 			delete prev[name as keyof typeof prev];
 			return { ...prev };
 		});
@@ -114,6 +116,7 @@ function LineItemCard({
 			[key]: true,
 		}));
 		setApprovedItems((p) => {
+			// eslint-disable-next-line no-param-reassign
 			delete p[key as keyof typeof p];
 			return { ...p };
 		});
@@ -301,14 +304,10 @@ function LineItemCard({
 							<Button
 								onClick={() => handleRejectClick(id)}
 								disabled={
-                     !lineItemsRemarks[
-                     	lineItemName as keyof typeof lineItemsRemarks
-                     ]
-                  || (
-                  	lineItemsRemarks[
-                  		lineItemName as keyof typeof lineItemsRemarks
-                  	] as Array<string>
-                  ).length < 0
+                     !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks
+                     ] || (lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks
+                     ] as Array<string>
+                     ).length < 0
                 }
 							>
 								Submit
