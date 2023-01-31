@@ -1749,6 +1749,20 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 	],
+	app_saas_order_history: [
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_trade_engine_order_history',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+	],
 
 };
 export default saas;

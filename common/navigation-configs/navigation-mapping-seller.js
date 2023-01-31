@@ -514,6 +514,14 @@ const navigationMappingSeller = {
 				main_apis     : [],
 				possible_apis : app_apis.saas_premium_services,
 			},
+			{
+				key           : 'saas_premium_services-order_history',
+				title         : 'Order History',
+				href          : '/saas/premium-services/order-history',
+				as            : '/saas/premium-services/order-history',
+				main_apis     : [],
+				possible_apis : app_apis.saas_order_history,
+			},
 		],
 	},
 };
