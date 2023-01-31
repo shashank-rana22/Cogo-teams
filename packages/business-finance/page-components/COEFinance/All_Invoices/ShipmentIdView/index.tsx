@@ -44,7 +44,6 @@ function ShipmentIdView() {
 		filters,
 		loading,
 		list: { total, data },
-		refetch,
 	} = useShipmentIdView({ pendingApproval, serialId });
 
 	const handleShipmentView = () => {
@@ -61,7 +60,6 @@ function ShipmentIdView() {
 				currentOpenSID={currentOpenSID}
 				setCurrentOpenSID={setCurrentOpenSID}
 				key={item?.id}
-				refetch={refetch}
 			/>
 		));
 	};

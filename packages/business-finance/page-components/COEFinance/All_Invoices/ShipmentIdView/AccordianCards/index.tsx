@@ -14,13 +14,11 @@ interface ListData {
 	itemData: ItemDataProps;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
-	refetch: any;
 }
 function AccordianCards({
 	itemData,
 	currentOpenSID,
 	setCurrentOpenSID,
-	refetch,
 }: ListData) {
 	const [amountTab, setAmountTab] = useState('expense');
 	const [dataCard, setDataCard] = useState({
@@ -212,7 +210,6 @@ function AccordianCards({
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}
 							setCurrentOpenSID={setCurrentOpenSID}
-							refetch={refetch}
 							setDataCard={setDataCard}
 							amountTab={amountTab}
 							setAmountTab={setAmountTab}
