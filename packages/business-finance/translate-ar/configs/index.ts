@@ -1,4 +1,4 @@
-import StatusComponent from '../page-components/StatusComponent/index';
+import StatusComponent from '../page-components/StatusComponent';
 
 const TABS_MAPPING = [
 	{

@@ -18,8 +18,8 @@ function Remarks({ itemData }: Object) {
 					<IcMProvision
 						onClick={() => { }}
 						style={{ cursor: 'pointer' }}
-						height={25}
-						width={25}
+						height={26}
+						width={26}
 					/>
 				</div>
 			</Popover>

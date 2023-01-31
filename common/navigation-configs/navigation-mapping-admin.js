@@ -846,18 +846,9 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.manual_invoice,
 			},
-		],
-		module_type: 'dashboards',
-	},
-	business_finance_vietnam: {
-		key       : 'business_finance_vietnam',
-		title     : 'BF (Vietnam)',
-		icon      : IcMBusinessFinance,
-		isSubNavs : true,
-		options   : [
 			{
-				key           : 'business_finance_vietnam-account_receivables_translate',
-				title         : 'AR',
+				key           : 'business_finance-account_receivables_translate',
+				title         : 'AR (Vietnam)',
 				href          : '/v2/business-finance/translate-account-receivables/[active_tab]',
 				as            : '/v2/business-finance/translate-account-receivables/pending',
 				type          : 'link',

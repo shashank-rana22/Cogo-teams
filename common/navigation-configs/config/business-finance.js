@@ -1,6 +1,6 @@
 const businessFinance = {
-	'/business-finance/translate-account-receivables/[activeTab]': {
-		navigation : 'business_finance_vietnam-account_receivables_translate',
+	'/[partner_id]/business-finance/translate-account-receivables/[activeTab]': {
+		navigation : 'business_finance-account_receivables_translate',
 		isMainNav  : true,
 	},
 };

@@ -12,7 +12,6 @@ function FileUploader(props) {
 		showProgress,
 		multiple,
 		docName,
-		accept,
 		...rest
 	} = props;
 
@@ -103,7 +102,6 @@ function FileUploader(props) {
 				multipleUploadDesc="Upload files"
 				uploadIcon={<IcMUpload height={40} width={40} />}
 				fileData={urlStore}
-				accept={accept}
 			/>
 
 			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
