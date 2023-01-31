@@ -117,7 +117,7 @@ function CoeFinance() {
 									margin       : '16px',
 								}}
 							>
-								<MyResponsiveLines data={{}} />
+								<MyResponsiveLines />
 							</div>
 						</div>
 					</TabPanel>
