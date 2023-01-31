@@ -1,11 +1,12 @@
 import useAllocationConfigurations from '../../../hooks/useAllocationConfiguration';
 
 import Header from './Header';
+import List from './List';
 import styles from './styles.module.css';
 
-function AllocationConfigurations() {
+function Configurations() {
 	const {
-		list = [],
+		list,
 	} = useAllocationConfigurations();
 
 	console.log('list :: ', list);
@@ -13,8 +14,10 @@ function AllocationConfigurations() {
 	return (
 		<div className={styles.container}>
 			<Header />
+
+			<List list={list} />
 		</div>
 	);
 }
 
-export default AllocationConfigurations;
+export default Configurations;

@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const useAllocationConfigurations = () => {
 	const [params, setParams] = useState({
@@ -11,7 +11,7 @@ const useAllocationConfigurations = () => {
 		},
 	});
 
-	const [{ loading, data }, refetch] = useRequest({
+	const [{ loading, data }] = useRequest({
 		url    : '/list_allocation_configurations',
 		method : 'get',
 		params,
@@ -23,11 +23,6 @@ const useAllocationConfigurations = () => {
 			page: newPage,
 		}));
 	};
-
-	useEffect(() => {
-		refetch();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params]);
 
 	const { list = [], ...paginationData } = data || {};
 

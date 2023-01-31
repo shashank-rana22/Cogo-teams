@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function Header() {
 	return (
-		<div className={styles.container}>
+		<div className={styles.header_container}>
 			<Button size="md" themeType="secondary">
 				FILTER
 				<IcMFilter style={{ marginLeft: '4px' }} />
