@@ -1,6 +1,9 @@
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved, import/order
 import cl from '@cogoport/components/src/utils/classname-processor';
+
 // eslint-disable-next-line import/no-unresolved
+
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-unresolved, import/extensions
