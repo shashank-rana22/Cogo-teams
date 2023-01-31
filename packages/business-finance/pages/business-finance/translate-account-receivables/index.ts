@@ -1,1 +1,1 @@
-export { default } from '@cogoport/translatear/page-components/TranslateAR';
+export { default } from '@cogoport/business-finance/page-components/TranslateAr';
