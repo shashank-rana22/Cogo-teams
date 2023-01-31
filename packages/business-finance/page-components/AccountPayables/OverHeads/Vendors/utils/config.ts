@@ -10,7 +10,6 @@ const headerStyle = {
 };
 
 const bodyStyles = {
-	border     : '1px solid #C7C7C7',
 	color      : ' #333333',
 	fontWeight : '400',
 	fontSize   : '14px',

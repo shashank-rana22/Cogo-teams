@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    border-radius: 8px;
+}
+.buttonStyle{
+    border : none;
+	color  : #F68B21;
+    cursor: pointer;
+	text-decoration : underline;
+	margin         : 2px 0px;
+    display: flex;
+    align-items: center;
+}
+.dataDiv{
+    display:flex;
+    margin-top: 8px;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: rgb(254 248 228);
+}
+.section{
+    margin: 10px 36px 10px 16px;
+}
+.element{
+    margin-top: 10px;
+    font-weight: 600;
+}
+.moreDataContainer{
+    width: 100%;
+    background: white;
+    border-top: 1px solid #EDD7A9;
+
+}

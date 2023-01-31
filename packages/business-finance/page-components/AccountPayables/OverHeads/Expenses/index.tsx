@@ -2,10 +2,11 @@ import { Button, Input, Popover, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import List from '../../../commons/List';
 import SegmentedControl from '../../../commons/SegmentedControl/index';
+import List from '../../commons/List';
 
 import CreateExpenseModal from './CreateExpenseModal';
+import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import { expenseRecurringConfig, expenseNonRecurringConfig } from './utils/config';
 import dummyData from './utils/dummyData';
@@ -86,6 +87,7 @@ function ExpenseComponent() {
 						size="lg"
 						themeType="secondary"
 						onClick={() => setVisible(!visible)}
+						style={{ border: '1px solid black', fontSize: '14px' }}
 					>
 						Create Expense
 					</Button>
@@ -104,8 +106,16 @@ function ExpenseComponent() {
 	);
 
 	const functions = {
-		addExpense          : () => <Button themeType="secondary" size="md">Add Expense</Button>,
-		renderExpensePeriod : (itemData) => (
+		addExpense: () => (
+			<Button
+				themeType="secondary"
+				size="md"
+				style={{ border: '1px solid black' }}
+			>
+				Add Expense
+			</Button>
+		),
+		renderExpensePeriod: (itemData) => (
 			<div className={styles.dataContainer}>
 				<div className={styles.expensePeriodData}>
 					{' '}
@@ -129,6 +139,11 @@ function ExpenseComponent() {
 		),
 	};
 
+	const showDropDown = () => {
+		if (recurringState === 'recurring') return <ShowMore />;
+		return null;
+	};
+
 	return (
 		<div>
 			{renderHeaders()}
@@ -142,6 +157,7 @@ function ExpenseComponent() {
 					setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));
 				}}
 				showPagination
+				renderDropdown={showDropDown}
 			/>
 			{showModal && (
 				<CreateExpenseModal

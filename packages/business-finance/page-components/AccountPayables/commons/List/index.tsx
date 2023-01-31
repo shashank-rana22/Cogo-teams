@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 
 import {
 	ConfigType,
@@ -71,7 +71,7 @@ function List({
 			)}
 			<div style={bodyStyles}>
 				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<>
+					<div className={styles.cardContainer}>
 						<CardColumn
 							fields={fields}
 							itemStyles={itemStyles}
@@ -82,7 +82,7 @@ function List({
 							isMobile={isMobile}
 						/>
 						{renderDropdown(singleitem?.vendorSerialId)}
-					</>
+					</div>
 				))}
 			</div>
 			{showPagination && (

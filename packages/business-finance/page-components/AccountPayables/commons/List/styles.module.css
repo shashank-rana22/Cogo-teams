@@ -18,9 +18,10 @@
 	display: flex;
 	align-items: center;
 	min-height: 40px;
-	padding-left: 10px;
+	padding: 4px 8px;
 	background-color: #fff;
 	border-top: 1px solid #e0e0e0;
+	border-radius: 8px;
 }
 
 @media screen and (max-width: 768px) {
@@ -47,19 +48,11 @@
 
 .asc {
 	color: #f68b21;
-
-	/* transform: rotate(180deg); */
-
-	/* transition: transform 0.3s ease-in-out; */
 	cursor: pointer;
 }
 
 .desc {
 	color: #f68b21;
-
-	/* transform: rotate(0deg); */
-
-	/* transition: transform 0.3s ease-in-out; */
 	cursor: pointer;
 }
 
@@ -91,4 +84,10 @@
 	align-items: flex-end;
 	justify-content: flex-end;
 	margin-top: 10px;
+}
+.cardContainer{
+	border-radius: 8px;
+    margin: 12px 0px;
+	border-radius: 8px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 }

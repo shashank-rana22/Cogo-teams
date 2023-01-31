@@ -2,7 +2,6 @@ import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
-import { GenericObject } from '../../commons/Interfaces';
 import List from '../../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
@@ -72,6 +71,7 @@ function VenderComponent() {
 					size="lg"
 					themeType="secondary"
 					onClick={() => setShowModal(true)}
+					style={{ border: '1px solid black', fontSize: '14px' }}
 				>
 					Create Vendor
 				</Button>
