@@ -125,7 +125,7 @@ function FilterModal({ filters, setFilters }: Props) {
 								Clear Filters
 							</Button>
 						</div>
-						<div className={styles.apply}>
+						<div>
 							<Button
 								onClick={() => {
 									setShowModal(false);
