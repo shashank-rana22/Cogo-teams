@@ -2,5 +2,3 @@ packages:
   - '*'
   - 'packages/*'
   - 'common/*'
-  - 'packages/business-finance/*'
-

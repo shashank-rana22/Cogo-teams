@@ -9,8 +9,7 @@
   "workspaces": [
     "*",
     "packages/*",
-    "common/*",
-    "packages/business-finance/*"
+    "common/*"
   ],
   "scripts": {
     "deploy": "pnpm run prod:build && (cd cogo-control && pm2 start pm2.config.js)",
