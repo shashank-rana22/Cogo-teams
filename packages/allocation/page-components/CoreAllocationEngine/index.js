@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Heading from '../../common/Heading';
 
 import Configurations from './AllocationConfigurations';
-import Requests from './Requests';
+import Requests from './AllocationRequests';
 import styles from './styles.module.css';
 
 function CoreAllocationEngine() {
