@@ -5,11 +5,18 @@ import Timeline from '../Timeline';
 
 import RecurringForm from './RecurringForm';
 
+interface Props {
+	setShowModal:React.useState<boolean>,
+	showModal?: boolean,
+	createExpenseType?: string
+
+}
+
 function CreateExpenseModal({
 	setShowModal,
 	showModal = false,
 	createExpenseType = '',
-}) {
+}:Props) {
 	const timeline = ['Expense Details', 'Upload Invoice', 'Final Confirmation'];
 	const [active, setActive] = useState('Expense Details');
 
