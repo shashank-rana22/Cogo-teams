@@ -271,7 +271,7 @@ function ShipmentDetails({
 			/>
 
 			<div className={styles.shipment_details_footer}>
-				<div className={styles.pdfDisplay}>
+				<div className={styles.pdf_display}>
 					<PdfDisplay data={data} />
 				</div>
 				<div className={styles.shipment_details_card}>

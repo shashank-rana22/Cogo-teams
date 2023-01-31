@@ -116,6 +116,7 @@ function FilterModal({ filters, setFilters }: Props) {
 					<div className={styles.buttons}>
 						<div className={styles.clear}>
 							<Button
+								themeType="secondary"
 								onClick={() => {
 									setFilters({});
 									setCurrencies([]);
