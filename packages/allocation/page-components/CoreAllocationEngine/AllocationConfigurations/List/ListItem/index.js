@@ -1,4 +1,5 @@
 import { Legend, Pill, Tooltip } from '@cogoport/components';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -153,6 +154,11 @@ const columnsMapping = [
 		},
 		flex: 1,
 	},
+	{
+		key      : 'action',
+		getValue : () => <IcMOverflowDot height={16} width={16} style={{ marginTop: '16px' }} />,
+		flex     : 0,
+	},
 ];
 
 function ListItem({ item }) {
@@ -165,7 +171,7 @@ function ListItem({ item }) {
 
 				return (
 					<div key={key} className={styles.content_container} style={{ flex }}>
-						<div className={styles.label}>{label}</div>
+						{label ? <div className={styles.label}>{label}</div> : null}
 
 						<div className={styles.value}>{value}</div>
 					</div>
