@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 
 const pendingColumns = (refetch: Refetch) => [
 	{
-		Header   : 'Name',
+		Header   : <div className={styles.name}>Name</div>,
+		id       : 'name',
 		accessor : ({ buyerDetails: { businessName } }) => (<div className={styles.name}>{businessName}</div>),
 	},
 	{
@@ -66,7 +67,7 @@ const pendingColumns = (refetch: Refetch) => [
 		),
 	},
 	{
-		Header   : <div className={styles.center}>Remark History</div>,
+		Header   : <div className={styles.center}>Remarks</div>,
 		id       : 'remarks',
 		accessor : (row) => (
 			<Remarks itemData={row} />
