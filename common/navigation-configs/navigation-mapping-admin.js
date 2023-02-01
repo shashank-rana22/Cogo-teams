@@ -1311,6 +1311,16 @@ const navigationMappingAdmin = {
 				possible_apis : apis.bl_do_collection_release,
 
 			},
+			{
+				key           : 'coe-so2_payments_dashboard',
+				title         : 'SO2 Payments Dashboard',
+				href          : '/so2-payments-dashboard',
+				as			  : '/so2-payments-dashboard',
+				type		  : 'link',
+				main_apis     : ['list_shipments'],
+				possible_apis : apis.so2_payments_dashboard,
+
+			},
 		],
 	},
 	terms_and_conditions: {

@@ -29,6 +29,7 @@ import shipment_cancellation_policies from './shipment-cancellation-poilicies';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
+import so2_payments_dashboard from './so2-payments-dashboard';
 
 const apis = {
 	search: search.map((api) => ({
@@ -97,6 +98,6 @@ const apis = {
 	...tools,
 	...consolidated_invoices,
 	login_apis,
-
+	so2_payments_dashboard,
 };
 export default apis;
