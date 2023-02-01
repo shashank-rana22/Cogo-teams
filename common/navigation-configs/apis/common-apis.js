@@ -153,6 +153,16 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_credit_request_promotion',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 	forecast: [
 		{
@@ -303,11 +313,7 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
-		{
-			api          : 'get_credit_application_fee',
-			access_type  : 'private',
-			service_name : 'credit',
-		},
+
 		{
 			api          : 'check_organization_credit_eligibility',
 			access_type  : 'private',
@@ -370,6 +376,16 @@ const common_apis = {
 		},
 		{
 			api          : 'update_organization_credit_requirement_details',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_credit_request_promotion',
 			access_type  : 'private',
 			service_name : 'credit',
 		},
