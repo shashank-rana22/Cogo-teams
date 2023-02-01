@@ -7943,6 +7943,11 @@ const partner = {
 			service_name : 'promotion',
 		},
 		{
+			api          : 'download_promotion_shipment_csv',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
 			api          : 'list_promotions',
 			access_type  : 'private',
 			service_name : 'promotion',
