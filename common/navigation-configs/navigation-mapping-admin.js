@@ -1312,15 +1312,23 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'coe-so2_payments_dashboard',
-				title         : 'SO2 Payments Dashboard',
-				href          : '/so2-payments-dashboard',
-				as			  : '/so2-payments-dashboard',
-				type		  : 'link',
-				main_apis     : ['list_shipments'],
-				possible_apis : apis.so2_payments_dashboard,
-
-			},
+				key: "coe-first_mile",
+				title: "First Mile",
+				href: "/first-mile",
+				as: "/first-mile",
+				type: "link",
+				main_apis: ["list_first_mile_shipments"],
+				possible_apis: [...apis.shipment],
+			  },
+			  {
+				key: "coe-last_mile",
+				title: "Last Mile",
+				href: "/last-mile",
+				as: "/last-mile",
+				type: "link",
+				main_apis: ["list_last_mile_shipments"],
+				possible_apis: [...apis.shipment],
+			  },
 		],
 	},
 	terms_and_conditions: {

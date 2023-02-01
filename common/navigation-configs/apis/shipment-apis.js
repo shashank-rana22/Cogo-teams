@@ -1235,6 +1235,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_first_mile_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_last_mile_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 
 export default apis;
