@@ -14,18 +14,11 @@
 .dataDiv{
     display:flex;
     margin-top: 8px;
-    overflow: hidden;
-    animation-name: slidein;
-    animation-duration: 0.2s;
 
-    @keyframes slidein {
-        from {
-            height: 0px;
-        }
-        to {
-            height: 62px;
-        }
-      }
+}
+.dataDivClose{
+    display:flex;
+    margin-top: 8px;
 }
 .buttonContainer{
     display: flex;
@@ -44,5 +37,12 @@
     width: 100%;
     background: white;
     border-top: 1px solid #EDD7A9;
+    overflow: hidden;
+    max-height: 88px;
+    transition: max-height .3s ease;
+}
 
+.moreDataContainerClose{
+    max-height: 0px;
+    width: 0px;
 }
