@@ -16,7 +16,6 @@ function TranslateAR() {
 	return (
 		<>
 			<div className={styles.heading}>Account Receivables - Vietnam</div>
-			<div className={styles.hr} />
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={receivables}
