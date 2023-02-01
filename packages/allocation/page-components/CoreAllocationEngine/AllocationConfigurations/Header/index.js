@@ -1,16 +1,12 @@
 import { Button } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
 
+import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';
 
 function Header() {
 	return (
 		<div className={styles.header_container}>
-			<Button size="md" themeType="secondary">
-				FILTER
-				<IcMFilter style={{ marginLeft: '4px' }} />
-				<div className={styles.filter_dot} />
-			</Button>
+			<ConfigFilters />
 
 			<Button size="md" themeType="accent">CREATE CONFIG</Button>
 		</div>

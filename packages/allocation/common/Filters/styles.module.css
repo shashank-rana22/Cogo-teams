@@ -1,0 +1,10 @@
+.popover_container {
+    :global(.ui_popover_container) {
+        width: 500px;
+        max-height: 380px;
+    }
+
+    :global(.tippy-content){
+        width: 100%;
+    }
+}
