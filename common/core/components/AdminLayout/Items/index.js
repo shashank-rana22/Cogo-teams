@@ -30,13 +30,14 @@ function Items({ item, resetSubnavs }) {
 	};
 	const splitasPathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
 
-	const isHref = splitasPathWithoutPartnerId === item?.as?.replace('/v2', '');
+	const isHref = splitasPathWithoutPartnerId === item?.as?.replace('/v2', '')
+		|| item?.options?.some((singleOption) => singleOption.as?.replace('/v2', '') === splitasPathWithoutPartnerId);
 
 	const Element = item.icon || IcMDefault;
 
 	const singleNav = (
 		<div
-			className={isHref ? styles.active_item : styles.list_item_inner}
+			className={isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}

@@ -144,32 +144,7 @@
 }
 
 .active_item {
-	display: flex;
-	align-items: center;
-	padding: 8px 16px;
-	cursor: pointer;
 	background-color: #fef199;
-	border-radius: 4px;
-	transition: background-color 0.1s linear, color 0.1s linear;
-	will-change: background-color;
-
-	span {
-		padding-top: 1px;
-		overflow: hidden;
-		font-weight: 600 !important;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		user-select: none;
-	}
-
-	svg {
-		display: block;
-		flex-grow: 0;
-		flex-shrink: 0;
-		width: 16px;
-		height: 16px;
-		margin-right: 16px;
-	}
 }
 
 .inner_container {
