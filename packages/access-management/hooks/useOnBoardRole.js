@@ -62,7 +62,7 @@ const useOnBoardRole = () => {
 				params: { filters: { id: id || role_id }, partner_data_required: true },
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 

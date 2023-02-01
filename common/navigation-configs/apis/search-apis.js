@@ -399,6 +399,12 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+		api          : 'send_booking_whatsapp',
+		access_type  : 'private',
+		feature      : 'send Whatsapp booking',
+		service_name : 'checkout',
+	},
+	{
 		api          : 'create_spot_search_contract',
 		access_type  : 'private',
 		feature      : 'search',
