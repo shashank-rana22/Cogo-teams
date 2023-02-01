@@ -2,6 +2,8 @@ import { InputController, MultiselectController, SelectController, RadioGroupCon
 
 import styles from './styles.module.css';
 
+// Todo put it in a mapping remove switch case
+
 export const getElementController = (type = 'text') => {
 	switch (type) {
 		case 'text':
