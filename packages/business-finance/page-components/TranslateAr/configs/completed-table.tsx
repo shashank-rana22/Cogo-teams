@@ -9,7 +9,8 @@ import styles from './styles.module.css';
 
 const completedColumn = [
 	{
-		Header   : 'Name',
+		Header   : <div className={styles.name}>Name</div>,
+		id       : 'name',
 		accessor : ({ buyerDetails: { businessName } }) => (<div className={styles.name}>{businessName}</div>)
 		,
 	},
