@@ -14,6 +14,8 @@ function Items({ item, resetSubnavs }) {
 
 	const splitAspath = asPath.split('/')?.[1];
 
+	const { options = [] } = item || {};
+
 	const handleClickOnItem = (itemdata) => {
 		if (itemdata.options?.length > 0) {
 			setShowSubNav(!showSubNav);
@@ -28,10 +30,11 @@ function Items({ item, resetSubnavs }) {
 			router.push(itemdata.href, itemdata.as);
 		}
 	};
-	const splitasPathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
+	const pathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
 
-	const isHref = splitasPathWithoutPartnerId === item?.as?.replace('/v2', '')
-		|| item?.options?.some((singleOption) => singleOption.as?.replace('/v2', '') === splitasPathWithoutPartnerId);
+	const isSubActive = options?.some((singleOption) => singleOption.as?.replace('/v2', '') === pathWithoutPartnerId);
+
+	const isHref = pathWithoutPartnerId === item?.as?.replace('/v2', '') || isSubActive;
 
 	const Element = item.icon || IcMDefault;
 
@@ -47,7 +50,7 @@ function Items({ item, resetSubnavs }) {
 			<span>
 				{item.title}
 			</span>
-			{item.options?.length > 0 && (
+			{options?.length > 0 && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
@@ -59,8 +62,8 @@ function Items({ item, resetSubnavs }) {
 			<li key={item.title} className={styles.list_item}>
 				{singleNav}
 			</li>
-			{showSubNav && item?.options?.map((singleOption) => {
-				const isHrefMatch = splitasPathWithoutPartnerId === singleOption.as?.replace('/v2', '');
+			{showSubNav && options?.map((singleOption) => {
+				const isHrefMatch = pathWithoutPartnerId === singleOption.as?.replace('/v2', '');
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<div
