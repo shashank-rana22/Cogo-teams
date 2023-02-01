@@ -34,8 +34,10 @@ function asyncFieldsPartner() {
 		endpoint    : 'list_partners',
 		initialCall : true,
 		params      : {
-			filters    : { status: 'active' },
-			page_limit : 100,
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
 		},
 	};
 }

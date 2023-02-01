@@ -23,6 +23,8 @@ const useGetAuthorizationChecked = () => {
 
 	const { pathname, query, locale, locales, route, push } = useRouter();
 
+	const { source = '' } = query || {};
+
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
@@ -42,7 +44,7 @@ const useGetAuthorizationChecked = () => {
 	useEffect(() => {
 		(async () => {
 			if (!sessionInitialized && _initialized) {
-				if (isProfilePresent && (isUnauthenticatedPath || route === '/')) {
+				if (isProfilePresent && (isUnauthenticatedPath || route === '/') && source !== 'add_account') {
 					const configs = redirections(profile);
 					if (configs?.href) {
 						if (configs?.href?.includes('/v2')) {
@@ -54,7 +56,7 @@ const useGetAuthorizationChecked = () => {
 							// eslint-disable-next-line no-undef
 							window.location.href = `/${profile?.partner?.id}${configs.as || configs.href}`;
 						} else {
-							await push(configs.href, configs.as);
+							await push('/', '/');
 						}
 					}
 				} else if (!isProfilePresent && (!isUnauthenticatedPath || route === '/')) {
