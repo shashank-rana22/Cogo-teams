@@ -947,6 +947,16 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
+		api         : 'update_shipment_flash_booking_rate',
+		access_type : 'private',
+		feature     : 'revenue_desk',
+	},
+	{
+		api         : 'get_shipment_quotation',
+		access_type : 'private',
+		feature     : 'revenue_desk',
+	},
+	{
 		api         : 'create_shipment_booking_confirmation_preference',
 		access_type : 'private',
 	},
@@ -1213,6 +1223,26 @@ const apis = [
 	},
 	{
 		api          : 'create_awb_inventory',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_ltl_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_air_freight_rates',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_awb_inventories',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_air_freight_e_booking',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

@@ -54,6 +54,17 @@ import {
 import apis from './apis';
 
 const navigationMappingAdmin = {
+	things_to_do: {
+		key           : 'things_to_do',
+		title         : 'Things To Do',
+		href          : '/things-to-do',
+		as            : '/things-to-do',
+		type          : 'link',
+		icon          : IcMDashboard,
+		main_apis     : [],
+		possible_apis : [],
+		module_type   : 'dashboards',
+	},
 	channel_partner_dashboard: {
 		key           : 'channel_partner_dashboard',
 		title         : 'Dashboard',
@@ -152,6 +163,7 @@ const navigationMappingAdmin = {
 			...apis.shipment,
 			...apis.payments,
 			...apis.sales,
+			...apis.sop,
 			...apis.app_pay_later,
 			...apis.feedback,
 			...apis.checkout_promotions,
@@ -845,6 +857,15 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.manual_invoice,
 			},
+			{
+				key           : 'business_finance-account_receivables_translate',
+				title         : 'AR (Vietnam)',
+				href          : '/v2/business-finance/translate-account-receivables/[active_tab]',
+				as            : '/v2/business-finance/translate-account-receivables/pending',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.vietnam_account_receivables,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1337,6 +1358,7 @@ const navigationMappingAdmin = {
 		],
 		possible_apis: [
 			...apis.prm,
+			...apis.sop,
 			...apis.search,
 			...apis.shipment,
 			...apis.payments,
@@ -1619,6 +1641,14 @@ const navigationMappingAdmin = {
 
 				module_type: 'crm',
 			},
+			{
+				key           : 'transaction_setting-cogo_fx',
+				title         : 'Cogo FX',
+				href          : '/cogo-fx',
+				as            : '/cogo-fx',
+				main_apis     : [],
+				possible_apis : apis.cogo_fx,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1739,7 +1769,7 @@ const navigationMappingAdmin = {
 				href          : '/constants',
 				icon          : IcMAccountSettings,
 				as            : '/constants',
-				main_apis     : [],
+				main_apis     : ['list_platform_config_constants'],
 				possible_apis : apis.constants,
 			},
 		],
