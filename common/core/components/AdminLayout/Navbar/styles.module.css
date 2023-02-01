@@ -121,6 +121,10 @@
 	}
 }
 
+.active_option {
+	background-color: #fef199;
+}
+
 .search_container {
 	margin: 10px 0;
 }

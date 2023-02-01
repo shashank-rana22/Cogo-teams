@@ -6,7 +6,7 @@ import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const router = useRouter();
-	const { pathname, query, asPath } = router;
+	const { query, asPath } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
@@ -28,11 +28,9 @@ function Items({ item, resetSubnavs }) {
 			router.push(itemdata.href, itemdata.as);
 		}
 	};
+	const splitasPathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
 
-	const splitasPathWithoutPartnerId = `/${pathname.split('/').slice(2, 5).join('/')}`;
-
-	const isHref =	splitasPathWithoutPartnerId === item.as
-		|| item?.options?.some((singleOption) => singleOption.as === splitasPathWithoutPartnerId);
+	const isHref = splitasPathWithoutPartnerId === item?.as?.replace('/v2', '');
 
 	const Element = item.icon || IcMDefault;
 
@@ -61,13 +59,14 @@ function Items({ item, resetSubnavs }) {
 				{singleNav}
 			</li>
 			{showSubNav && item?.options?.map((singleOption) => {
-				const isHrefMatch = splitasPathWithoutPartnerId === singleOption.as;
+				const isHrefMatch = splitasPathWithoutPartnerId === singleOption.as?.replace('/v2', '');
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<div
 							role="presentation"
 							onClick={() => handleClickOnItem(singleOption)}
-							className={isHrefMatch ? styles.active_item : styles.list_item_subitem}
+							className={isHrefMatch ? `${styles.list_item_subitem} 
+							${styles.active_option}` : styles.list_item_subitem}
 						>
 							<span>
 								{singleOption.title}
