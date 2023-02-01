@@ -404,5 +404,11 @@ const apis = [
 		feature      : 'send Whatsapp booking',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'create_spot_search_contract',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;
