@@ -7,6 +7,7 @@ export { default as PillsController } from './page-components/Controlled/PillsCo
 export { default as DatepickerController } from './page-components/Controlled/DatepickerController';
 export { default as InputController } from './page-components/Controlled/InputController';
 export { default as UploadController } from './page-components/Controlled/UploadController';
+export { default as RadioGroupController } from './page-components/Controlled/RadioGroupController';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
