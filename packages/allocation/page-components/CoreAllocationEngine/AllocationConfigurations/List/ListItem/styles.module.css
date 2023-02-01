@@ -20,6 +20,7 @@
     
     @media (min-width: 768px) {
         flex-direction: column;
+        justify-content: center;
         margin-bottom: 0;
     }
 }
