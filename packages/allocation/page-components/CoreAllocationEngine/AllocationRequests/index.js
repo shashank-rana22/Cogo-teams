@@ -37,7 +37,7 @@ function Requests() {
 				<Modal
 					show={showModal}
 					position="basic"
-					size="md"
+					size="lg"
 					onClose={onClose}
 					onOuterClick={onClose}
 					className={styles.modal_container}

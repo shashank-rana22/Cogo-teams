@@ -54,4 +54,38 @@ function asyncFieldsPartnerRoles() {
 		},
 	};
 }
-export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsPartnerRoles };
+
+function asyncFieldsOrganizations() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organizations',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+function asyncFieldsOrganizationUser() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'user_id',
+		endpoint    : 'list_organization_users',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+export {
+	asyncFieldsLocations,
+	asyncFieldsLocations2,
+	asyncFieldsPartner,
+	asyncFieldsPartnerRoles,
+	asyncFieldsOrganizations,
+	asyncFieldsOrganizationUser,
+};

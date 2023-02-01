@@ -1,4 +1,4 @@
-import { InputController, MultiselectController, SelectController } from '@cogoport/forms';
+import { InputController, MultiselectController, SelectController, RadioGroupController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
@@ -12,6 +12,9 @@ export const getElementController = (type = 'text') => {
 
 		case 'multiSelect':
 			return MultiselectController;
+
+		case 'radioGroup':
+			return RadioGroupController;
 
 		default:
 			return null;

@@ -1,12 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { asyncFieldsOrganizations, asyncFieldsOrganizationUser } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
 
-const controls = [
+const getControls = ({ orgOptions, orgUserOptions }) => [
 	{
 		name    : 'service_type',
-		type    : 'radio',
+		type    : 'radioGroup',
 		label   : 'Allocation Type',
 		value   : 'organization',
 		options : [
@@ -22,33 +24,29 @@ const controls = [
 		rules: { required: true },
 	},
 	{
+		...orgOptions,
 		name           : 'organization_id',
 		type           : 'select',
 		label          : 'Organization',
 		placeholder    : 'Select Organization',
 		defaultOptions : false,
-		endpoint       : 'organizations',
-		span           : 6,
-		disabled       : false,
 		rules          : { required: true },
 	},
 	{
+		...orgUserOptions,
 		name           : 'organization_user_id',
 		type           : 'select',
 		label          : 'Organization User',
 		placeholder    : 'Select Organization User',
 		defaultOptions : false,
-		disabled       : true,
-		optionsListKey : 'organization-users',
-		valueKey       : 'user_id',
+		// disabled       : true,
 		rules          : { required: true },
-		params         : {
-			filters                  : {},
-			pagination_data_required : false,
-		},
+		// params         : {
+		// 	filters                  : {},
+		// 	pagination_data_required : false,
+		// },
 	},
-
-	{
+	{ // only for partner
 		name           : 'partner_id',
 		type           : 'select',
 		label          : 'Partner',
@@ -59,8 +57,7 @@ const controls = [
 		disabled       : false,
 		rules          : { required: true },
 	},
-
-	{
+	{ // only for partner
 		name           : 'partner_user_id',
 		type           : 'select',
 		label          : 'Partner User',
@@ -118,10 +115,15 @@ const controls = [
 const useSaveAllocationRequest = () => {
 	// const { data } = props;
 
-	const controlsWithValue = controls.map((control) => ({
-		...control,
-		// value: data[control.name],
-	}));
+	const orgOptions = useGetAsyncOptions({
+		...asyncFieldsOrganizations(),
+	});
+
+	const orgUserOptions = useGetAsyncOptions({
+		...asyncFieldsOrganizationUser(),
+	});
+
+	const controls = getControls({ orgOptions, orgUserOptions });
 
 	const formProps = useForm();
 
@@ -153,7 +155,7 @@ const useSaveAllocationRequest = () => {
 		onSave,
 		loading,
 		formProps,
-		controls: controlsWithValue,
+		controls,
 	};
 };
 
