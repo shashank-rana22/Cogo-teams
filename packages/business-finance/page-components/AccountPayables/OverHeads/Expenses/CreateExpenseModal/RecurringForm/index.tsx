@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import ExpenseDetailsForm from './ExpenseDetailsForm';
 
 function RecurringForm() {
+	const [filters, setFilters] = useState({});
+
 	return (
 		<div>
-			recurring form
+			<ExpenseDetailsForm filters={filters} setFilters={setFilters} />
 		</div>
 	);
 }
