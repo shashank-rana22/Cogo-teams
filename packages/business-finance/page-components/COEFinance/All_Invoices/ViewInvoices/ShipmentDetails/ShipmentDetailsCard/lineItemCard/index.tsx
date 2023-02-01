@@ -4,7 +4,6 @@ import {
 	Tooltip,
 	Popover,
 	Modal,
-	Checkbox,
 	Textarea,
 } from '@cogoport/components';
 import {
@@ -83,7 +82,7 @@ function LineItemCard({
 		} else if (lineItems?.length !== ApproveCheck + RejectCheck) {
 			setLineItem(false);
 		}
-	}, [ApproveCheck, RejectCheck]);
+	}, [ApproveCheck, RejectCheck, lineItems?.length, setLineItem]);
 
 	const handleApproveClick = (key = '', name = '') => {
 		setApprovedItems((previousActions: any) => ({
@@ -91,10 +90,12 @@ function LineItemCard({
 			[key]: !previousActions[key],
 		}));
 		setRejectedItems((p) => {
+			// eslint-disable-next-line no-param-reassign
 			delete p[key as keyof typeof p];
 			return { ...p };
 		});
 		setLineItemsRemarks((prev) => {
+			// eslint-disable-next-line no-param-reassign
 			delete prev[name as keyof typeof prev];
 			return { ...prev };
 		});
@@ -115,6 +116,7 @@ function LineItemCard({
 			[key]: true,
 		}));
 		setApprovedItems((p) => {
+			// eslint-disable-next-line no-param-reassign
 			delete p[key as keyof typeof p];
 			return { ...p };
 		});
@@ -128,9 +130,9 @@ function LineItemCard({
 	const functions = {
 		renderIcon: (item: any) => (
 			<div
-				className={styles.circleBig}
+				className={styles.circle_big}
 				onClick={() => {
-        	handleApproveClick(item?.id, item?.name);
+					handleApproveClick(item?.id, item?.name);
 				}}
 				role="presentation"
 			>
@@ -144,9 +146,9 @@ function LineItemCard({
 						placement="left"
 						render={(
 							<div
-								className={styles.popoverRejected}
+								className={styles.popover_rejected}
 								onClick={() => {
-                	openRejectModal(item);
+									openRejectModal(item);
 								}}
 								role="presentation"
 							>
@@ -177,12 +179,12 @@ function LineItemCard({
 
 	return (
 		<div>
-			<div className={styles.mainHeader}>
+			<div className={styles.main_header}>
 				<div className={styles.instructions}>
 					Check off Line Items and Tax Rate
 					<Tooltip
 						content={(
-							<div className={styles.formStyle}>
+							<div className={styles.form_style}>
 								As filled by SO2 In The COGO Invoice
 							</div>
 						)}
@@ -193,9 +195,9 @@ function LineItemCard({
 					</Tooltip>
 					<Pill color="blue">{invoiceType}</Pill>
 				</div>
-				<div className={styles.smallHr} />
+				<div className={styles.small_hr} />
 				{!isInvoiceApproved && (
-					<div className={styles.headerDetail}>
+					<div className={styles.header_detail}>
 						Click
 						{' '}
 						<IcMOverflowDot />
@@ -214,7 +216,7 @@ function LineItemCard({
 
 				<div className={styles.outer}>
 					<div className={styles.flex}>
-						<div className={styles.flexDiv}>
+						<div className={styles.flex_div}>
 							<div className={styles.info}>T: Taxable</div>
 							<div className={styles.info}>P: Pure Agent</div>
 							<div className={styles.info}>E: Exempted</div>
@@ -226,25 +228,25 @@ function LineItemCard({
 						<div className={styles.amount}>
 							<div className={styles.border}>
 								{getFormattedPrice(
-                	bill?.taxTotal || '0',
-                	bill?.billCurrency || 'INR',
+									bill?.taxTotal || '0',
+									bill?.billCurrency || 'INR',
 								)}
 							</div>
 						</div>
-						<div className={styles.amountRight}>
-							<div className={styles.borderRight}>
+						<div className={styles.amount_right}>
+							<div className={styles.border_right}>
 								{getFormattedPrice(
-                	bill?.grandTotal || '0',
-                	bill?.billCurrency || 'INR',
+									bill?.grandTotal || '0',
+									bill?.billCurrency || 'INR',
 								)}
 							</div>
 						</div>
 					</div>
 
 					<div className={styles.flex}>
-						<div className={styles.bottomDiv}>
+						<div className={styles.bottom_div}>
 							<div>Total payable in words : </div>
-							<div className={styles.wordsCurrency}>
+							<div className={styles.words_currency}>
 								{bill?.billCurrency}
 								{' '}
 								{bill?.subTotal ? (
@@ -263,7 +265,7 @@ function LineItemCard({
 					<Button
 						size="md"
 						onClick={() => {
-            	setShowLineItem(false);
+							setShowLineItem(false);
 						}}
 					>
 						{' '}
@@ -280,7 +282,7 @@ function LineItemCard({
 					>
 						<Modal.Header title="Rejected line items" />
 						<Modal.Body>
-							<div className={styles.modalContainer}>
+							<div className={styles.modal_container}>
 								<List
 									config={LINE_ITEMS_CHECK}
 									itemData={{ list: [showRejectedModal] }}
@@ -302,14 +304,10 @@ function LineItemCard({
 							<Button
 								onClick={() => handleRejectClick(id)}
 								disabled={
-                  !lineItemsRemarks[
-                  	lineItemName as keyof typeof lineItemsRemarks
-                  ]
-                  || (
-                  	lineItemsRemarks[
-                  		lineItemName as keyof typeof lineItemsRemarks
-                  	] as Array<string>
-                  ).length < 0
+                     !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks
+                     ] || (lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks
+                     ] as Array<string>
+                     ).length < 0
                 }
 							>
 								Submit

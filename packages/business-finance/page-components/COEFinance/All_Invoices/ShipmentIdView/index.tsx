@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import useShipmentIdView from '../../hook/useShipmentIdView';
 
+// eslint-disable-next-line import/no-cycle
 import AccordianCards from './AccordianCards/index';
 import Filters from './Filters';
 import LoadingState from './LoadingState/index';
@@ -35,16 +36,15 @@ export interface ItemDataProps {
 
 function ShipmentIdView() {
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
-	const [pending_approval, setPending_approval] = useState('all');
-	const [serial_id, setSerial_id] = useState('');
+	const [pendingApproval, setPendingApproval] = useState('all');
+	const [serialId, setSerialId] = useState('');
 	const {
 		hookSetters,
 		page,
 		filters,
 		loading,
 		list: { total, data },
-		refetch,
-	} = useShipmentIdView({ pending_approval, serial_id });
+	} = useShipmentIdView({ pendingApproval, serialId });
 
 	const handleShipmentView = () => {
 		if (loading) {
@@ -60,7 +60,6 @@ function ShipmentIdView() {
 				currentOpenSID={currentOpenSID}
 				setCurrentOpenSID={setCurrentOpenSID}
 				key={item?.id}
-				refetch={refetch}
 			/>
 		));
 	};
@@ -70,10 +69,10 @@ function ShipmentIdView() {
 			<Filters
 				hookSetters={hookSetters}
 				filters={filters}
-				pending_approval={pending_approval}
-				setPending_approval={setPending_approval}
-				serial_id={serial_id}
-				setSerial_id={setSerial_id}
+				pending_approval={pendingApproval}
+				setPending_approval={setPendingApproval}
+				serial_id={serialId}
+				setSerial_id={setSerialId}
 			/>
 
 			<div>
@@ -83,9 +82,9 @@ function ShipmentIdView() {
 						<Pagination
 							currentPage={page}
 							onPageChange={(val: number) => hookSetters.setFilters({
-              		...filters,
-              		page: val,
-              	})}
+								...filters,
+								page: val,
+							})}
 							totalItems={total}
 							pageSize={10}
 							type="table"

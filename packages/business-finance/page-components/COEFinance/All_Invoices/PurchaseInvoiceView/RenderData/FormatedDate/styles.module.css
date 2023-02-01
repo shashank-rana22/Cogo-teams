@@ -1,32 +1,32 @@
-.billCurrency {
+.bill_currency {
 	margin-right: 4px;
 }
 
-.invoiceAmount {
+.invoice_amount {
 	display: flex;
 }
 
-.IcMinIcon {
+.ic_min_icon {
 	margin-left: 8px;
 	color: #f68b21;
 }
 
-.preTax {
+.pre_tax {
 	color: #ed3726;
 }
 
-.preTaxAmount {
+.pre_tax_amount {
 	margin-bottom: 5px;
 	margin-left: 10px;
 	color: rgb(51 51 51);
 	background: #fffaeb;
 }
 
-.postTax {
+.post_tax {
 	color: #00a300;
 }
 
-.postTaxAmount {
+.post_tax_amount {
 	margin-left: 10px;
 	color: rgb(51 51 51);
 	background: #fffaeb;

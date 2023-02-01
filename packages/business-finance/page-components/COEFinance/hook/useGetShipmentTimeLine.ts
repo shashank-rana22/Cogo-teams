@@ -9,16 +9,16 @@ const useGetShipmentTimeLine = (shipmentId:string) => {
 		},
 	);
 
-	const getList = async () => {
-		await trigger({
-			params: {
-				shipment_id: shipmentId,
-			},
-		});
-	};
 	useEffect(() => {
+		const getList = async () => {
+			await trigger({
+				params: {
+					shipment_id: shipmentId,
+				},
+			});
+		};
 		getList();
-	}, []);
+	}, [shipmentId, trigger]);
 
 	return {
 		loading,

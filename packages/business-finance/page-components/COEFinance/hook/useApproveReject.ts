@@ -30,6 +30,7 @@ const ApproveReject = ({ remarksVal, lineItemsRemarks, modalData, setApprove, bi
 		if (modalData === 'Reject') {
 			return 'COE_REJECTED';
 		}
+		return null;
 	};
 
 	const [

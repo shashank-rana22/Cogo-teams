@@ -1,12 +1,10 @@
-import React, { ReactNode } from 'react';
-
-export interface fieldProps {
+export interface FieldProps {
 	topKey:object,
 	bottomKey:object,
 	label :string,
 	key:string
 }
-export interface fieldItemProps {
+export interface FieldItemProps {
 	billType:string,
 	billNumber: string,
 	billDocumentUrl:string,

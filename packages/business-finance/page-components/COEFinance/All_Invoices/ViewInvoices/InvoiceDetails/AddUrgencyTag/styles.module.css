@@ -1,40 +1,27 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 12px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 12px;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px;
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 20px;
 }
 
-.subContainer {
-  margin: 20px;
-
-  .core-ui-select__control {
-    width: 65%;
-  }
-
-  .core-ui-select__menu {
-    width: 65%;
-  }
-
-  .ui-textarea-root {
-    padding: 12px;
-    margin-top: 24px;
-  }
+.sub_container {
+	margin: 20px;
 }
 
 .heading {
-  margin-bottom: 8px;
-  font-size: 24px;
-  font-weight: 500;
-  color: #333;
+	margin-bottom: 8px;
+	font-size: 24px;
+	font-weight: 500;
+	color: #333;
 }
 
 .cancelbtn {
-  margin-right: 8px;
+	margin-right: 8px;
 }

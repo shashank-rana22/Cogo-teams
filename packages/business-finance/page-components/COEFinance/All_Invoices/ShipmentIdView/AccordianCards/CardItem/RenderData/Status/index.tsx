@@ -3,33 +3,38 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	status?: string;
 }
 
-interface propsType {
-	item: itemTypes;
-	field: any;
+interface PropsType {
+	item: ItemTypes;
 }
 
-function Status({ item, field }: propsType) {
-	const { status }: itemTypes = item;
+function Status({ item }: PropsType) {
+	const { status }: ItemTypes = item;
 	if (status === 'FINANCE_ACCEPTED') {
-		return <div className={styles.financeAccepted}>Finance Accepted</div>;
-	} if (status === 'INITIATED') {
+		return <div className={styles.finance_accepted}>Finance Accepted</div>;
+	}
+	if (status === 'INITIATED') {
 		return <div className={styles.initiated}>Initiated</div>;
-	} if (status === 'ACCEPTED') {
+	}
+	if (status === 'ACCEPTED') {
 		return <div className={styles.accepted}>Accepted</div>;
-	} if (status === 'financeRejected') {
+	}
+	if (status === 'financeRejected') {
 		return (
-			<div className={styles.StatusFinanceRejected}>Finance Rejected</div>
+			<div className={styles.status_finance_rejected}>Finance Rejected</div>
 		);
-	} if (status === 'POSTED') {
+	}
+	if (status === 'POSTED') {
 		return <div className={styles.posted}>Posted</div>;
-	} if (status === 'VOID') {
+	}
+	if (status === 'VOID') {
 		return <div className={styles.void}>Void</div>;
-	} if (status === 'COE_REJECTED') {
-		return <div className={styles.coeRejected}>COE Rejected</div>;
+	}
+	if (status === 'COE_REJECTED') {
+		return <div className={styles.coe_rejected}>COE Rejected</div>;
 	}
 
 	return (

@@ -1,4 +1,4 @@
-.Wrapper {
+.wrapper {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -9,14 +9,14 @@
 	}
 }
 
-.WrapperLast {
+.wrapper_last {
 	position: relative;
 	display: flex;
 	align-items: center;
 	width: 10%;
 }
 
-.BorderedCircle {
+.bordered_circle {
 	width: 15px;
 	height: 15px;
 	padding: 6px;
@@ -49,7 +49,7 @@
 	border: none;
 }
 
-.FilledCircle {
+.filled_circle {
 	width: 8px;
 	height: 8px;
 	background: red;
@@ -68,7 +68,7 @@
 	}
 }
 
-.DotCircle {
+.dot_circle {
 	width: 8px;
 	height: 8px;
 	background: grey;
@@ -87,7 +87,7 @@
 	}
 }
 
-.Line {
+.line {
 	width: 100%;
 	height: 2px;
 	background: red;
@@ -109,7 +109,7 @@
 	min-width: 100%;
 }
 
-.LineGrey {
+.line_grey {
 	width: 100%;
 	height: 2px;
 	background: grey;
@@ -127,7 +127,7 @@
 	}
 }
 
-.MileStoneDescription {
+.mile_stone_description {
 	position: absolute;
 	top: 20px;
 	left: -28px;
@@ -138,7 +138,7 @@
 	min-width: 100px;
 }
 
-.Desc {
+.desc {
 	width: 60px;
 	overflow: hidden;
 	font-size: 10px;
@@ -153,22 +153,22 @@
 	}
 }
 
-.ToolTipText {
+.tool_tip_text {
 	width: max-content;
 	padding: 5px;
 	font-size: 10px;
 	font-weight: 700;
 
-	.tooltipcontent {
+	.tool_tip_content {
 		font-size: 12px;
 		color: #000;
 	}
 }
 
-.Flex {
+.flex {
 	display: flex;
 }
 
-.tooltipItem {
+.tool_tip_item {
 	color: red;
 }

@@ -45,34 +45,33 @@ const useGetShipmentCostSheet = ({ query }:Params) => {
 		{ manual: true },
 	);
 
-	const getbuydataFromApi = async () => {
-		try {
-			const res = await sellTrigger();
-			if (res.status !== 200) {
-				Toast.error('Something went wrong!');
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	const getselldataFromApi = async () => {
-		try {
-			const resp = await buyTrigger();
-			if (resp.status !== 200) {
-				Toast.error('Something went wrong!');
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
 	useEffect(() => {
+		const getbuydataFromApi = async () => {
+			try {
+				const res = await sellTrigger();
+				if (res.status !== 200) {
+					Toast.error('Something went wrong!');
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		};
+
+		const getselldataFromApi = async () => {
+			try {
+				const resp = await buyTrigger();
+				if (resp.status !== 200) {
+					Toast.error('Something went wrong!');
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		};
 		getbuydataFromApi();
 		getselldataFromApi();
 		postTaxFetch();
 		preTaxFetch();
-	}, [ShipmentId]);
+	}, [ShipmentId, sellTrigger, buyTrigger, postTaxFetch, preTaxFetch]);
 	const { formattedBuyData, sellQuotationData }:
 	any	= getFormattedData({ sell_quotation: sellData, buy_quotation: buyData });
 

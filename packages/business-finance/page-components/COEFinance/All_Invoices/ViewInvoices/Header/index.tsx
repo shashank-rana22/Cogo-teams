@@ -37,7 +37,7 @@ function Header({
 
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
-	const { loading, rejectApproveApi } = useApproveReject({
+	const { rejectApproveApi } = useApproveReject({
 		collectionPartyId,
 		remarksVal,
 		lineItemsRemarks,
@@ -67,13 +67,13 @@ function Header({
 					size="md"
 					themeType="secondary"
 					onClick={() => Router.push(
-          		'/business-finance/coe-finance/[active_tab]',
-          		'/business-finance/coe-finance/all_invoices',
+						'/business-finance/coe-finance/[active_tab]',
+						'/business-finance/coe-finance/all_invoices',
 					)}
 				>
 					Go Back
 				</Button>
-				<div className={styles.subContainer}>
+				<div className={styles.sub_container}>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -108,7 +108,7 @@ function Header({
 					size="md"
 					show={approve}
 					onClose={() => {
-          	setApprove(false);
+						setApprove(false);
 					}}
 				>
 					<Modal.Body>
@@ -133,7 +133,7 @@ function Header({
 								themeType="secondary"
 								style={{ marginRight: '8px' }}
 								onClick={() => {
-                	setApprove(false);
+									setApprove(false);
 								}}
 							>
 								No

@@ -1,4 +1,4 @@
-.financeAccepted {
+.finance_accepted {
 	padding: 2px 8px;
 	font-size: 12px;
 	font-weight: 400;
@@ -25,7 +25,7 @@
 	border-radius: 4px;
 }
 
-.financeRejected {
+.finance_rejected {
 	padding: 2px 8px;
 	font-size: 12px;
 	font-weight: 400;
@@ -52,7 +52,7 @@
 	border-radius: 4px;
 }
 
-.coeRejected {
+.coe_rejected {
 	padding: 2px 8px;
 	font-size: 12px;
 	font-weight: 400;

@@ -18,7 +18,7 @@ const useGetWallet = (shipmentId) => {
 				filters                         : { transaction_reason: 'negative margin', shipment_id: shipmentId },
 			},
 		});
-	}, [shipmentId]);
+	}, [shipmentId, trigger]);
 
 	return {
 		data,

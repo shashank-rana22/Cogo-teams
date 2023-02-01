@@ -21,7 +21,7 @@ function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
 	return (
 		<div>
 			<div className={styles.container}>
-				<div className={styles.subDiv}>
+				<div className={styles.sub_div}>
 					<Tooltip
 						interactive
 						content={(
@@ -30,7 +30,7 @@ function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
 							</div>
 						)}
 					>
-						<div className={styles.orgnizationName}>
+						<div className={styles.orgnization_name}>
 							{importerExporter?.business_name || '-'}
 						</div>
 					</Tooltip>
@@ -43,16 +43,16 @@ function Details({ orgId, dataList, shipmentId }: DetailsInterface) {
 				<div className={styles.tags}>
 					<CargoDetailPills detail={dataList} />
 				</div>
-				<a
-					className={styles.flexDiv}
+				<div
+					className={styles.flex_div}
 					onClick={() => Router.push(`/shipments/${orgId}`)}
 					role="presentation"
 				>
 					Go to SID →
-				</a>
+				</div>
 			</div>
 
-			<div className={styles.timelineContainer}>
+			<div className={styles.timeline_container}>
 				<TimeLine shipmentId={shipmentId} />
 			</div>
 		</div>

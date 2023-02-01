@@ -1,119 +1,119 @@
-.smallHr {
-  width: 5%;
-  border: 1px solid #ed3726;
-  border-radius: 30px;
+.small_hr {
+	width: 5%;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
 }
 
 .card {
-  display: flex;
-  justify-content: center;
-  padding: 16px 28px;
-  margin: 12px 0;
-  background: #fff;
-  border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	padding: 16px 28px;
+	margin: 12px 0;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
-.orgNameAndVerified {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  width: 29%;
+.org_name_and_verified {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	align-items: center;
+	width: 29%;
 }
 
-.tagsContainer {
-  display: flex;
-  gap: 24px;
-  width: 100%;
+.tags_container {
+	display: flex;
+	gap: 24px;
+	width: 100%;
 }
 
-.kycVerified {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  color: #67c676;
+.kyc_verified {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	color: #67c676;
 }
 
-.verticalSmallHr {
-  width: 2px;
-  margin: 0 16px;
-  border: 1px solid #ed3726;
-  border-radius: 30px;
+.vertical_small_hr {
+	width: 2px;
+	margin: 0 16px;
+	border: 1px solid #ed3726;
+	border-radius: 30px;
 }
 
-.accountDetails {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 50%;
+.account_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 50%;
 }
 
 .accounts {
-  display: flex;
-  font-size: 13px;
+	display: flex;
+	font-size: 13px;
 }
 
-.supplierDetails {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 29%;
+.supplier_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 29%;
 }
 
-.textDecoration {
-  width: 100px;
-  overflow: hidden;
-  font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.text_decoration {
+	width: 100px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.organizationName {
-  width: 260px;
-  overflow: hidden;
-  font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.organization_name {
+	width: 260px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.supplierHistory {
-  text-decoration: underline;
-  text-decoration-color: #ed3726;
-  cursor: pointer;
+.supplier_history {
+	text-decoration: underline;
+	text-decoration-color: #ed3726;
+	cursor: pointer;
 }
 
 .tooltip {
-  margin-top: 2px;
+	margin-top: 2px;
 }
 
 .values {
-  display: flex;
+	display: flex;
 }
 
-.docsIcon {
-  padding-top: 4px;
-  margin: 0 6px;
+.docs_icon {
+	padding-top: 4px;
+	margin: 0 6px;
 }
 
-.docsContainer {
-  display: flex;
+.docs_container {
+	display: flex;
 }
 
-.supplyCard {
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
+.supply_card {
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
 }
 
 .flex {
-  display: flex;
-  width: 100%;
+	display: flex;
+	width: 100%;
 }

@@ -2,12 +2,12 @@ import { Placeholder } from '@cogoport/components';
 import {
 	IcMArrowRotateLeft,
 	IcMArrowRotateDown,
-	IcMOverview,
 	IcMArrowRotateUp,
 	IcMArrowRotateRight,
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+// eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { POC_DATA_MAPPING } from '../../../../constants/constant';
 import usePOCDetails from '../../../../hook/usePOCDetails';
@@ -18,19 +18,6 @@ import styles from './styles.module.css';
 
 interface Props {
 	itemData: DataInterface;
-}
-
-function getNumber(labelValue: string) {
-	if (Math.abs(Number(labelValue)) >= 1.0e9) {
-		return `${(Math.abs(Number(labelValue)) / 1.0e9).toFixed(2)}B`;
-	}
-	if (Math.abs(Number(labelValue)) >= 1.0e6) {
-		return `${(Math.abs(Number(labelValue)) / 1.0e6).toFixed(2)}M`;
-	}
-	if (Math.abs(Number(labelValue)) >= 1.0e3) {
-		return `${(Math.abs(Number(labelValue)) / 1.0e3).toFixed(2)}K`;
-	}
-	return Math.abs(Number(labelValue));
 }
 
 function POCDetails({ itemData }: Props) {
@@ -68,16 +55,16 @@ function POCDetails({ itemData }: Props) {
 
 	return (
 		<>
-			<div className={styles.iconView}>
+			<div className={styles.icon_view}>
 				<div
-					className={styles.iconContainer}
+					className={styles.icon_container}
 					onClick={handleShow}
 					role="presentation"
 				>
 					<IcMArrowRotateRight width={20} height={20} />
 				</div>
 				<div
-					className={styles.pocContainer}
+					className={styles.poc_container}
 					onClick={handleShow}
 					role="presentation"
 				>
@@ -86,32 +73,32 @@ function POCDetails({ itemData }: Props) {
 			</div>
 			{showDetailsCard && (
 				<>
-					<div className={styles.invoiceDetailsContainerBg} />
+					<div className={styles.invoice_details_container_bg} />
 
 					<div
-						className={styles.invoiceDetailsContainer}
+						className={styles.invoice_details_container}
 						style={{ width: '35vw' }}
 					>
 						<div className={showDetailsCard ? styles.enter : styles.exit}>
-							<div className={styles.contentCaret}>
+							<div className={styles.content_caret}>
 								<div
-									className={styles.iconContainer}
+									className={styles.icon_container}
 									onClick={() => {
-                  	setShowDetailsCard(false);
-                  	document.body.style.overflow = 'auto';
+										setShowDetailsCard(false);
+										document.body.style.overflow = 'auto';
 									}}
 									role="presentation"
 								>
 									<IcMArrowRotateLeft />
 								</div>
 
-								<div className={styles.headerDetails}>
+								<div className={styles.header_details}>
 									POC & Other Details - SID
 									<span style={{ marginLeft: '4px' }}>{jobNumber}</span>
 								</div>
 							</div>
 
-							<div className={styles.bodyDetails}>
+							<div className={styles.body_details}>
 								{loading ? (
 									<>
 										<Placeholder
@@ -131,51 +118,51 @@ function POCDetails({ itemData }: Props) {
 										/>
 									</>
 								) : (
-                	(POC_DATA_MAPPING || [{}]).map((item) => {
-                		const { id, label } = item;
+									(POC_DATA_MAPPING || [{}]).map((item) => {
+										const { id, label } = item;
 
-                		return (
-	<div className={styles.information} key={id}>
-		<div
-			className={styles.dataContainer}
-			onClick={() => {
-                          	handleDropdown(id);
-			}}
-			role="presentation"
-		>
-			{label}
-			<div className={styles.dropdownContainer}>
-				{dropDownData[id as keyof typeof dropDownData] ? (
-					<IcMArrowRotateUp width={15} height={15} />
-				) : (
-					<IcMArrowRotateDown width={15} height={15} />
-				)}
-			</div>
-		</div>
+										return (
+											<div className={styles.information} key={id}>
+												<div
+													className={styles.data_container}
+													onClick={() => {
+														handleDropdown(id);
+													}}
+													role="presentation"
+												>
+													{label}
+													<div className={styles.drop_down_container}>
+														{dropDownData[id as keyof typeof dropDownData] ? (
+															<IcMArrowRotateUp width={15} height={15} />
+														) : (
+															<IcMArrowRotateDown width={15} height={15} />
+														)}
+													</div>
+												</div>
 
-		{dropDownData[id as keyof typeof dropDownData] && (
-			<div className={styles.hR} />
-		)}
+												{dropDownData[id as keyof typeof dropDownData] && (
+													<div className={styles.hr} />
+												)}
 
-		{dropDownData[id as keyof typeof dropDownData] && (
-			<div>
-				<div className={styles.informationData}>
-					{label === 'Customer Information' && (
-						<CustomerInformation data={invoiceData} />
-					)}
+												{dropDownData[id as keyof typeof dropDownData] && (
+													<div>
+														<div className={styles.information_data}>
+															{label === 'Customer Information' && (
+																<CustomerInformation data={invoiceData} />
+															)}
 
-					{label === 'Timeline' && (
-						<POCTimeLine
-							data={timeLineData}
-							loading={timeLineLoading}
-						/>
-					)}
-				</div>
-			</div>
-		)}
-	</div>
-                		);
-                	})
+															{label === 'Timeline' && (
+																<POCTimeLine
+																	data={timeLineData}
+																	loading={timeLineLoading}
+																/>
+															)}
+														</div>
+													</div>
+												)}
+											</div>
+										);
+									})
 								)}
 							</div>
 						</div>

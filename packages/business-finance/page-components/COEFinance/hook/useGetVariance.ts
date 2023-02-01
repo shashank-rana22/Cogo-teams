@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 interface UseGetVarianceInterface {
@@ -15,26 +14,25 @@ const useGetVariance = ({ collectionPartyId }:UseGetVarianceInterface) => {
 		{ autoCancel: false },
 	);
 
-	const getVaraince = async () => {
-		try {
-			const payload = {
-				collection_party_id: collectionPartyId,
-			};
-
-			const res = await trigger({ data: payload });
-			if (res.hasError) {
-				Toast.error('Something went wrong! Please try again after sometime');
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
 	useEffect(() => {
 		if (collectionPartyId) {
+			const getVaraince = async () => {
+				try {
+					const payload = {
+						collection_party_id: collectionPartyId,
+					};
+
+					const res = await trigger({ data: payload });
+					if (res.hasError) {
+						Toast.error('Something went wrong! Please try again after sometime');
+					}
+				} catch (err) {
+					console.log(err);
+				}
+			};
 			getVaraince();
 		}
-	}, [collectionPartyId]);
+	}, [collectionPartyId, trigger]);
 
 	return { varianceFullData, loading };
 };

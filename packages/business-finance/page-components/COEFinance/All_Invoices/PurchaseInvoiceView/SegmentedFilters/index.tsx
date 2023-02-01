@@ -35,7 +35,7 @@ function SegmentedFilters({
 	return (
 		<div className={styled.main}>
 			<div className={styled.segment}>
-				<div className={styled.filterData}>
+				<div className={styled.filter_data}>
 					<SegmentedControl
 						options={filtersData(statsData)}
 						activeTab={currentTab}
@@ -45,7 +45,7 @@ function SegmentedFilters({
 					/>
 				</div>
 
-				<div className={styled.filterDataUrgent}>
+				<div className={styled.filter_data_urgent}>
 					<SegmentedControl
 						options={filtersUrgentData(statsData)}
 						activeTab={currentTab}
@@ -63,7 +63,7 @@ function SegmentedFilters({
 				</div>
 			</div>
 
-			<div className={styled.searchFilter}>
+			<div className={styled.search_filter}>
 				<div className={styled.search}>
 					<Input
 						name="q"

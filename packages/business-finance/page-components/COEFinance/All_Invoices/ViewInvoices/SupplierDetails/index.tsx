@@ -103,10 +103,10 @@ function SupplierDetails({
 		<div className={styles.container}>
 			<h3>Supplier Details</h3>
 
-			<div className={styles.smallHr} />
+			<div className={styles.small_hr} />
 
 			<div className={styles.card}>
-				<div className={styles.orgNameAndVerified}>
+				<div className={styles.org_name_and_verified}>
 					<div className={styles.flex}>
 						Name -
 						{!accPaymentLoading ? (
@@ -117,7 +117,7 @@ function SupplierDetails({
 									</div>
 								)}
 							>
-								<div className={styles.organizationName}>
+								<div className={styles.organization_name}>
 									{sellerDetail?.organizationName}
 								</div>
 							</Tooltip>
@@ -127,14 +127,14 @@ function SupplierDetails({
 							</div>
 						)}
 					</div>
-					<div className={styles.tagsContainer}>
+					<div className={styles.tags_container}>
 						{serviceProviderCategory && (
 							<Pill color="blue" size="sm">
 								{serviceProviderCategory}
 							</Pill>
 						)}
 						{kycStatus === 'verified' && (
-							<div className={styles.kycVerified}>
+							<div className={styles.kyc_verified}>
 								<IcCFtick />
 								<div>kyc verified</div>
 							</div>
@@ -142,9 +142,9 @@ function SupplierDetails({
 					</div>
 				</div>
 
-				<div className={styles.verticalSmallHr} />
+				<div className={styles.vertical_small_hr} />
 
-				<div className={styles.accountDetails}>
+				<div className={styles.account_details}>
 					<div className={styles.accounts}>
 						<Tooltip
 							content={(
@@ -160,7 +160,7 @@ function SupplierDetails({
 						</Tooltip>
             &nbsp; Amount Payables : &nbsp;
 						{' '}
-						<div className={styles.textDecoration}>
+						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
 									{ledgerCurrency}
@@ -191,7 +191,7 @@ function SupplierDetails({
 						</Tooltip>
             &nbsp; Amount Receivables : &nbsp;
 						{' '}
-						<div className={styles.textDecoration}>
+						<div className={styles.text_decoration}>
 							{!accPaymentLoading ? (
 								<div className={styles.values}>
 									{ledgerCurrency}
@@ -209,13 +209,13 @@ function SupplierDetails({
 					</div>
 				</div>
 
-				<div className={styles.verticalSmallHr} />
+				<div className={styles.vertical_small_hr} />
 
-				<div className={styles.supplierDetails}>
+				<div className={styles.supplier_details}>
 					<div
-						className={styles.supplierHistory}
-						onClick={(e) => {
-            	handleChange();
+						className={styles.supplier_history}
+						onClick={() => {
+							handleChange();
 						}}
 						role="presentation"
 					>
@@ -226,7 +226,7 @@ function SupplierDetails({
 							size="lg"
 							show={showModal}
 							onClose={() => {
-              	setShowModal(false);
+								setShowModal(false);
 							}}
 						>
 							<Modal.Header title="SUPPLIER HISTORY" />
@@ -238,20 +238,20 @@ function SupplierDetails({
 										loading={loading}
 									/>
 								) : (
-									<div className={styles.supplyCard}>NO HISTORY</div>
+									<div className={styles.supply_card}>NO HISTORY</div>
 								)}
 							</Modal.Body>
 						</Modal>
 					)}
 
-					<div className={styles.docsContainer}>
-						<div className={styles.docsIcon}>
+					<div className={styles.docs_container}>
+						<div className={styles.docs_icon}>
 							<IcADocumentTemplates />
 						</div>
 						<div
-							className={styles.supplierHistory}
+							className={styles.supplier_history}
 							onClick={() => {
-              	setShowDocsModal(true);
+								setShowDocsModal(true);
 							}}
 							role="presentation"
 						>
@@ -263,22 +263,22 @@ function SupplierDetails({
 								size="lg"
 								show={showDocsModal}
 								onClose={() => {
-                	setShowDocsModal(false);
+									setShowDocsModal(false);
 								}}
 							>
 								<Modal.Header title="Documents" />
 								<Modal.Body>
 									{kycStatus === 'verified'
-                  && serviceProviderDocuments?.list ? (
+ && serviceProviderDocuments?.list ? (
 	<List
 		config={DOCUMENTS}
 		itemData={{ list: serviceProviderDocuments?.list }}
 		loading={loading}
 		functions={functions}
 	/>
-                  	) : (
-	<div className={styles.supplyCard}>NO Documents</div>
-                  	)}
+										) : (
+											<div className={styles.supply_card}>NO Documents</div>
+										)}
 								</Modal.Body>
 							</Modal>
 						)}

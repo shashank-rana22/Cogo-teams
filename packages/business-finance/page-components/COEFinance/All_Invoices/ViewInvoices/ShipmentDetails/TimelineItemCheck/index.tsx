@@ -27,7 +27,7 @@ function TimeLineItemCheck({ itemCheck, lineItem, status }: TimeLine) {
 				)}
 			</div>
 			<div className={styles.container}>
-				<div className={styles.textContainer}>Invoice Details</div>
+				<div className={styles.text_container}>Invoice Details</div>
 				<div>Line item check</div>
 			</div>
 		</div>

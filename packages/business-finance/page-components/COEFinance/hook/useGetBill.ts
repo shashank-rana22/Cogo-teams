@@ -23,7 +23,7 @@ const useGetBill = (allParams = {}) => {
 			authorizationparameters: profile?.authorizationparameters,
 		}),
 	);
-	const [{ data, loading: apiLoading }, trigger] = useRequestBf(
+	const [{ loading: apiLoading }, trigger] = useRequestBf(
 		{
 			url     : `/purchase/bills/${params?.billId}`,
 			method  : 'get',
@@ -32,7 +32,7 @@ const useGetBill = (allParams = {}) => {
 		{ autoCancel: false },
 	);
 	const [
-		{ data: paymentsData, loading: accPaymentLoading, error },
+		{ data: paymentsData, loading: accPaymentLoading },
 		accPaymentTrigger,
 	] = useRequestBf(
 		{
@@ -45,7 +45,7 @@ const useGetBill = (allParams = {}) => {
 
 	const listApi = async (restFilters: any) => {
 		try {
-			return await trigger({
+			await trigger({
 				params: {
 					jobNumber: params?.billNumber,
 					...restFilters,
@@ -55,20 +55,21 @@ const useGetBill = (allParams = {}) => {
 			Toast.error(err);
 		}
 	};
-	const handleAccPayments = async () => {
-		try {
-			await accPaymentTrigger({
-				params: { orgId: params?.orgId },
-			});
-		} catch (err) {
-			Toast.error(err);
-		}
-	};
+
 	useEffect(() => {
+		const handleAccPayments = async () => {
+			try {
+				await accPaymentTrigger({
+					params: { orgId: params?.orgId },
+				});
+			} catch (err) {
+				Toast.error(err);
+			}
+		};
 		handleAccPayments();
-	}, []);
+	}, [accPaymentTrigger, params?.orgId]);
 	const { loading, page, filters, list, hookSetters, refetch } = useGetFiniteList(listApi, {
-        	authorizationparameters,
+		authorizationparameters,
 	});
 	return {
 		loading: loading || apiLoading,

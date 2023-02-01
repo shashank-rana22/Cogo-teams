@@ -1,9 +1,14 @@
 import React from 'react';
 
-import { DataInterface } from '..';
+interface BillDocument {
+	billDocumentUrl?:string
+}
+interface Data {
+	bill?:BillDocument
+}
 
 interface Props {
-	data?: DataInterface;
+	data?: Data;
 }
 function PdfDisplay({ data }: Props) {
 	return (

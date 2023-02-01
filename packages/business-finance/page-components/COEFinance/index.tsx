@@ -31,12 +31,12 @@ function CoeFinance() {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div className={styles.headerStyle}>
+				<div className={styles.header_style}>
 					COE Finance
 					<div className={styles.border} />
 				</div>
 			</div>
-			<div className={styles.tabsContainer}>
+			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
 					onChange={setActiveTab}
@@ -117,7 +117,7 @@ function CoeFinance() {
 									margin       : '16px',
 								}}
 							>
-								<MyResponsiveLines data={{}} />
+								<MyResponsiveLines />
 							</div>
 						</div>
 					</TabPanel>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	billDocumentUrl?: string;
 	billNumber?: string;
 	invoicePdfUrl?: string;
@@ -11,12 +11,12 @@ interface itemTypes {
 	proformaNumber?: string;
 }
 
-interface propsType {
-	item: itemTypes;
+interface PropsType {
+	item: ItemTypes;
 	field: any;
 }
 
-function InvoiceNumber({ item, field }: propsType) {
+function InvoiceNumber({ item, field }: PropsType) {
 	const handleBillType = (type: any) => {
 		let invoiceType = 'PURCHASE INVOICE';
 
@@ -35,6 +35,7 @@ function InvoiceNumber({ item, field }: propsType) {
 					<div
 						className={styles.invoice}
 						onClick={() => window.open(item.billDocumentUrl, '_blank')}
+						role="presentation"
 					>
 						{item?.billNumber}
 					</div>
@@ -45,9 +46,10 @@ function InvoiceNumber({ item, field }: propsType) {
 				<div
 					className={styles.invoice}
 					onClick={() => window.open(
-                    		item.invoicePdfUrl || item.proformaPdfUrl,
-                    		'_blank',
+						item.invoicePdfUrl || item.proformaPdfUrl,
+						'_blank',
 					)}
+					role="presentation"
 				>
 					{item.invoiceNumber || item.proformaNumber}
 				</div>

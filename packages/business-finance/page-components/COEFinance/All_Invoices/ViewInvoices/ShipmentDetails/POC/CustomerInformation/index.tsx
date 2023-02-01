@@ -25,36 +25,36 @@ function CustomerInformation({
 	return (
 		<>
 			{(customerDetails || []).map((item) => {
-      	const {
-      		id,
-      		customerName,
-      		customerOutstandingAmount,
-      		customerOutstandingAmountOnSid,
-      	} = item || {};
+				const {
+					id,
+					customerName,
+					customerOutstandingAmount,
+					customerOutstandingAmountOnSid,
+				} = item || {};
 
-      	return (
-	<div className={styles.container} key={id}>
-		<div className={styles.subContainer}>
-			Name -
-			{' '}
-			<span style={{ fontWeight: 600 }}>{customerName}</span>
-		</div>
+				return (
+					<div className={styles.container} key={id}>
+						<div className={styles.sub_container}>
+							Name -
+							{' '}
+							<span style={{ fontWeight: 600 }}>{customerName}</span>
+						</div>
 
-		<div className={styles.subContainer}>
-			Total Outstanding -
-			<span style={{ fontWeight: 600 }}>
-				{getFormattedPrice(customerOutstandingAmount, 'INR')}
-			</span>
-		</div>
+						<div className={styles.sub_container}>
+							Total Outstanding -
+							<span style={{ fontWeight: 600 }}>
+								{getFormattedPrice(customerOutstandingAmount, 'INR')}
+							</span>
+						</div>
 
-		<div className={styles.subContainer}>
-			On Account Payments -
-			<span style={{ fontWeight: 600 }}>
-				{getFormattedPrice(customerOutstandingAmountOnSid, 'INR')}
-			</span>
-		</div>
-	</div>
-      	);
+						<div className={styles.sub_container}>
+							On Account Payments -
+							<span style={{ fontWeight: 600 }}>
+								{getFormattedPrice(customerOutstandingAmountOnSid, 'INR')}
+							</span>
+						</div>
+					</div>
+				);
 			})}
 		</>
 	);

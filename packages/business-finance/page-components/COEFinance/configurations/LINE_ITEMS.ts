@@ -1,9 +1,15 @@
 export const LINE_ITEMS = {
 	showHeader   : true,
-	headerStyles : { marginBottom: '16px', borderRadius: '8px', background: '#333', marginTop: '20px', paddingLeft: '14px' },
-	bodyStyles   : { color: ' #333333', fontWeight: '400', fontSize: '12px', lineHeight: '14px' },
-	itemStyles   : { marginTop: '8px' },
-	fields       : [
+	headerStyles : {
+		marginBottom : '16px',
+		borderRadius : '8px',
+		background   : '#333',
+		marginTop    : '20px',
+		paddingLeft  : '14px',
+	},
+	bodyStyles : { color: ' #333333', fontWeight: '400', fontSize: '12px', lineHeight: '14px' },
+	itemStyles : { marginTop: '8px' },
+	fields     : [
 		{
 			key  : 'Icon',
 			span : 1.2,

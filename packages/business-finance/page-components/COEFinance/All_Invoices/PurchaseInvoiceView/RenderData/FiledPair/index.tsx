@@ -68,7 +68,7 @@ function FieldPair({ itemData, field }:Props) {
 					)}
 
 					{bottomKey && (
-						<div className={styled.lowerKeys}>{handleBillType()}</div>
+						<div className={styled.lower_keys}>{handleBillType()}</div>
 					)}
 				</div>
 			)}
@@ -80,7 +80,7 @@ function FieldPair({ itemData, field }:Props) {
 						</text>
 					)}
 					{bottomKey && (
-						<div className={styled.serviceType}>{startCase(serviceType)}</div>
+						<div className={styled.service_type}>{startCase(serviceType)}</div>
 					)}
 				</div>
 			)}

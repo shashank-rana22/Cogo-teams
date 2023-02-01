@@ -26,14 +26,14 @@
 	}
 }
 
-.statusLabel {
+.status_label {
 	display: flex;
 	font-size: 12px;
 	font-weight: 500;
 	color: #333;
 }
 
-.statusValue {
+.status_value {
 	padding: 2px 8px;
 	margin-left: 4px;
 	color: #333;
@@ -50,13 +50,13 @@
 	}
 }
 
-.labelText {
+.label_text {
 	font-size: 12px;
 	font-weight: 900px;
 	color: #333;
 }
 
-.valueText {
+.value_text {
 	margin-left: 4px;
 	font-size: 12px;
 	font-weight: 500px;

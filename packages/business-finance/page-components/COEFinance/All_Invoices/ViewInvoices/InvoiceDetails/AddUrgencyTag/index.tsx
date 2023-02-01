@@ -1,5 +1,4 @@
 import { Select, Button, Textarea, Modal } from '@cogoport/components';
-import React, { useState } from 'react';
 
 import updateTag from '../../../../hook/useUpdateTag';
 import { urgencyOptions } from '../controls';
@@ -13,7 +12,6 @@ interface AddUrgencyTagInterface {
 	serviceType?: string;
 	tagValue?: string;
 	getBillRefetch?: () => void;
-	collectionPartyId?: string;
 	setShowAddTag: React.Dispatch<React.SetStateAction<boolean>>;
 	setTagValue: React.Dispatch<React.SetStateAction<string>>;
 	setRemark: React.Dispatch<React.SetStateAction<string>>;
@@ -48,7 +46,7 @@ function AddUrgencyTag({
 
 	return (
 		<Modal show={showAddTag} onClose={onClose}>
-			<div className={styles.subContainer}>
+			<div className={styles.sub_container}>
 				<div className={styles.heading}>Urgency Tag</div>
 
 				<Select
@@ -68,7 +66,7 @@ function AddUrgencyTag({
 				) : null}
 			</div>
 
-			<div className={styles.buttonContainer}>
+			<div className={styles.button_container}>
 				<Button
 					className={styles.cancelbtn}
 					themeType="secondary"

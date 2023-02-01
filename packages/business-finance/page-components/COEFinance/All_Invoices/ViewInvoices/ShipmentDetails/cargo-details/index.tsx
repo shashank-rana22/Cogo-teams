@@ -40,22 +40,22 @@ interface DetailInt {
 
 function CargoDetails({ detail }: DetailInt) {
 	return (
-		<div className={styles.divContainer}>
+		<div className={styles.div_container}>
 			{labels.map((label) => {
-      	if (
-      		detail?.[label as keyof typeof detail]
+				if (
+					detail?.[label as keyof typeof detail]
           && renderValue(label, detail)
-      	) {
-      		return (
-	<div className={styles.container}>
-		<div className={`${styles.Box} cargo-detail-pill`} key={label}>
-			{renderValue(label, detail)}
-		</div>
-	</div>
-      		);
-      	}
+				) {
+					return (
+						<div className={styles.container}>
+							<div className={`${styles.box} cargo-detail-pill`} key={label}>
+								{renderValue(label, detail)}
+							</div>
+						</div>
+					);
+				}
 
-      	return null;
+				return null;
 			})}
 		</div>
 	);

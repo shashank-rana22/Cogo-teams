@@ -6,7 +6,7 @@
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 }
 
-.subContainer {
+.sub_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -23,13 +23,13 @@
 	width: 50%;
 }
 
-.pendingText {
+.pending_text {
 	font-size: 10px;
 	font-weight: 500;
 	color: #ed3726;
 }
 
-.sidContainer {
+.sid_container {
 	display: flex;
 
 	@media (max-width: 768px) {
@@ -37,7 +37,7 @@
 	}
 }
 
-.sidLabelText {
+.sid_label_text {
 	display: flex;
 	align-items: center;
 	font-size: 18px;
@@ -45,7 +45,7 @@
 	color: #333;
 }
 
-.sidValueText {
+.sid_value_text {
 	display: flex;
 	align-items: center;
 	font-size: 18px;
@@ -67,13 +67,13 @@
 	}
 }
 
-.expenseAmount {
+.expense_amount {
 	flex-direction: column;
 	width: 100%;
 	margin-right: 20px;
 }
 
-.expenseLabelText {
+.expense_label_text {
 	display: flex;
 	width: 45%;
 	padding-right: 5px;
@@ -83,7 +83,7 @@
 	color: #333;
 }
 
-.expenseValueText {
+.expense_value_text {
 	font-size: 12px;
 	font-weight: 400;
 	color: #333;
@@ -104,7 +104,7 @@
 	width: 100%;
 }
 
-.urgentLabelText {
+.urgent_label_text {
 	width: 45%;
 	padding-right: 5px;
 	margin-right: 5px;
@@ -113,7 +113,7 @@
 	color: #ed3726;
 }
 
-.urgentValueText {
+.urgent_value_text {
 	font-size: 12px;
 	font-weight: 400;
 	color: #ed3726;
@@ -130,7 +130,7 @@
 	color: #67c676;
 }
 
-.profitibilityValue {
+.profitibility_value {
 	display: flex;
 	align-items: center;
 	font-size: 12px;
@@ -161,7 +161,7 @@
 	box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
 }
 
-.ribbonClosed {
+.ribbon_closed {
 	--f: 9px;
 	--r: 8px;
 	--t: 2px;
@@ -201,7 +201,7 @@
 	border: 0.5px solid #f68b21;
 }
 
-.cardList {
+.card_list {
 	margin: -2px 24px 23px;
 	border: 1px solid #333;
 	border-radius: 4px;
@@ -220,7 +220,7 @@
 	box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
 }
 
-.footerText {
+.footer_text {
 	padding: 4px;
 	font-size: 10px;
 	font-weight: 500px;
@@ -256,7 +256,7 @@
 	}
 }
 
-.rightBorder {
+.right_border {
 	width: 3%;
 
 	@media (max-width: 1068px) {
@@ -264,31 +264,31 @@
 	}
 }
 
-.buttonStyle {
+.button_style {
 	width: 70%;
 	height: 25px;
 }
 
-.smallRightBorder {
+.small_right_border {
 	width: 2%;
 	padding-right: 20px;
 }
 
-.smallVr {
+.small_vr {
 	width: 1px;
 	height: 16px;
 	background: #333;
 	border-radius: 4px;
 }
 
-.urgentVr {
+.urgent_vr {
 	width: 1px;
 	height: 16px;
 	background: #ed3726;
 	border-radius: 4px;
 }
 
-.profitibilityBorder {
+.profitibility_border {
 	width: 1px;
 	height: 16px;
 	background: #67c676;

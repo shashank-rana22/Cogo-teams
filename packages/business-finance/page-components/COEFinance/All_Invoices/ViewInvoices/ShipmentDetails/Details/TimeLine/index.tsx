@@ -13,12 +13,12 @@ interface Int {
 function TimeLine({ shipmentId }:Int) {
 	const { data: timelineData, loading } = useGetShipmentTimeLine(shipmentId);
 
-	const shipment_data = {};
+	const shipmentData = {};
 	let isCompleted = true;
 
 	return (
-		<div className={styles.Container}>
-			<div className={styles.Wrapper}>
+		<div className={styles.container}>
+			<div className={styles.wrapper}>
 				{!loading ? timelineData?.map((item, i) => {
 					if (!item?.completed_on) {
 						isCompleted = false;
@@ -27,16 +27,16 @@ function TimeLine({ shipmentId }:Int) {
 					const isNextMain = !timelineData[i + 1]?.is_sub;
 
 					return (
-						 <TimeLineItem
+						<TimeLineItem
 							key={timelineData?.milestone}
 							timeLine={timelineData}
 							index={i}
 							isCompleted={isCompleted}
-							shipmentData={shipment_data}
+							shipmentData={shipmentData}
 							item={item}
 							isNextMain={isNextMain}
-							isLast={i === timelineData?.length - 1}
-						 />
+							isLast={i === timelineData.length - 1}
+						/>
 					);
 				}) : (
 					<div className={styles.loading}>

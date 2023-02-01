@@ -30,7 +30,7 @@ export const renderValue = (label: string, detail: any) => {
 
 	const chargableWeight = isLTL
 		? detail?.chargable_weight || detail?.weight
-		: Math.max(detail?.volume * 166.67, detail?.weight);
+		: Math.max(detail.volume * 166.67, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -42,8 +42,8 @@ export const renderValue = (label: string, detail: any) => {
 		)}`
 		: '';
 
-	const lr_number = detail?.lr_number;
-	const eway_bill_number = detail?.eway_bill_number;
+	const lRNumber = detail?.lr_number;
+	const ewayBillNumber = detail?.eway_bill_number;
 
 	const volume = ` ${detail.volume} ${isLTL ? 'cc' : 'cbm'}`;
 
@@ -55,18 +55,18 @@ export const renderValue = (label: string, detail: any) => {
 					content={(
 						<div style={{ fontSize: '10px' }}>
 							{(packages || []).map((item) => {
-              	const values = item
-              		? `${item.packages_count} Pkg, (${item?.length}cm X ${
-              			item?.width
-              		}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
-              		: '';
-              	return <div>{values}</div>;
+								const values = item
+									? `${item.packages_count} Pkg, (${item?.length}cm X ${
+										item?.width
+									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
+									: '';
+								return <div>{values}</div>;
 							})}
 						</div>
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages?.length - 1} more`}
+						{`Package: ${inputValue} + ${packages.length - 1} more`}
 					</div>
 				</Tooltip>
 			);
@@ -94,7 +94,7 @@ export const renderValue = (label: string, detail: any) => {
 	);
 
 	const formatCertificate = (certificates: any) => (
-		<div className={styles.CertificateContainer}>
+		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
 				<a href={item} target="_blank" rel="noreferrer">
 					Click to view certificate
@@ -172,7 +172,7 @@ export const renderValue = (label: string, detail: any) => {
 
 		case 'lr_number':
 			if (isLTL) {
-				return `Docket Number : ${lr_number || ''}`;
+				return `Docket Number : ${lRNumber || ''}`;
 			}
 			return '';
 
@@ -188,7 +188,7 @@ export const renderValue = (label: string, detail: any) => {
 			return '';
 		case 'eway_bill_number':
 			if (isLTL) {
-				return `Eway Bill Number : ${eway_bill_number || ''}`;
+				return `Eway Bill Number : ${ewayBillNumber || ''}`;
 			}
 			return '';
 		case 'airline':

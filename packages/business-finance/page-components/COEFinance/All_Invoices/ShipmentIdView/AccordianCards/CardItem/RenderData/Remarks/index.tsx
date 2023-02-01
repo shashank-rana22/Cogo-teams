@@ -7,16 +7,16 @@ import { formatDate } from '../../../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface itemTypes {
+interface ItemTypes {
 	remarksTimeline: any;
 	remark?: string;
 }
 
-interface propsType {
-	itemData: itemTypes;
+interface PropsType {
+	itemData: ItemTypes;
 }
 
-function Remarks({ itemData }: propsType) {
+function Remarks({ itemData }: PropsType) {
 	const remarkData = itemData.remarksTimeline;
 
 	function RemarksContent() {
@@ -29,21 +29,17 @@ function Remarks({ itemData }: propsType) {
 				<div className={styles.timeline_wrapper}>
 					<div className={styles.left_content}>
 						{formatDate(item?.createdAt, 'dd-MMM-yy', {}, true)}
-						<div>
-							{formatDate(item?.createdAt, ' hh:mm a', {}, true)}
-						</div>
+						<div>{formatDate(item?.createdAt, ' hh:mm a', {}, true)}</div>
 					</div>
 					<div className={styles.path}>
 						<div className={styles.circle} />
-						{idx !== remarkData?.length - 1 ? (
+						{idx !== remarkData.length - 1 ? (
 							<div className={styles.line} />
 						) : null}
 					</div>
 
 					<div className={styles.right_content}>
-						<div className={styles.status_content}>
-							{startCase(StatusItem)}
-						</div>
+						<div className={styles.status_content}>{startCase(StatusItem)}</div>
 						<div>{item?.remark}</div>
 					</div>
 				</div>

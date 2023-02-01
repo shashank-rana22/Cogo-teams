@@ -40,7 +40,7 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 
 	useEffect(() => {
 		setComplete(timeLine[0]?.eventName === 'POSTED');
-	}, []);
+	}, [timeLine]);
 
 	const dateWithTimeForIndex = timeLine[0]?.occurredAt?.split(' ') || '';
 
@@ -61,19 +61,19 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 		}
 
 		return (
-			<div className={styles.subContainer}>
+			<div className={styles.sub_container}>
 				{timeLine[0]?.eventName === 'FULL'
         || timeLine[0]?.eventName === 'OVERPAID' ? null : (
-	<div className={styles.dateContainer}>
+	<div className={styles.date_container}>
 		{dateWithTimeForIndex[0]}
 		<div>{formatAMPM(new Date(timeLine[0]?.occurredAt))}</div>
 	</div>
-        	)}
-				<div className={styles.dullCircle} />
+					)}
+				<div className={styles.dull_circle} />
 				{timeLine[0]?.eventName === 'FULL'
         || timeLine[0]?.eventName === 'OVERPAID' ? null : (
-	<div className={styles.eventContainer}>PAYMENT DUE</div>
-        	)}
+	<div className={styles.event_container}>PAYMENT DUE</div>
+					)}
 			</div>
 		);
 	};
@@ -81,103 +81,103 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 	return (
 		<div className={styles.container}>
 			{timeLine[0]?.eventName === 'POSTED' ? (
-				<div className={styles.subContainer}>
-					<div className={styles.dateContainer}>
+				<div className={styles.sub_container}>
+					<div className={styles.date_container}>
 						{dateWithTimeForIndex[0]}
 						<div>{formatAMPM(new Date(timeLine[0]?.occurredAt))}</div>
 					</div>
 
 					<IcCFtick width="35px" height="35px" />
 
-					<div className={styles.eventContainer}>POSTED</div>
+					<div className={styles.event_container}>POSTED</div>
 				</div>
 			) : (
-				<div className={styles.subContainer}>{timeLineInitialStage()}</div>
+				<div className={styles.sub_container}>{timeLineInitialStage()}</div>
 			)}
 
 			{(gettimeLineData() || []).map((item: any) => {
-      	const { id, eventName, occurredAt, performedByUser, userEmail } = item || {};
+				const { id, eventName, occurredAt, performedByUser, userEmail } = item || {};
 
-      	const dateWithTime = occurredAt?.split(' ') || '';
+				const dateWithTime = occurredAt?.split(' ') || '';
 
-      	return (
-	<div key={id}>
-		{loading ? (
-			<div className={styles.subContainer}>
-				<Placeholder height="60px" width="6px" margin="10px 0px 0px" />
-			</div>
-		) : (
-			<div className={styles.lineContainer}>
-				<div
-					className={
-                    complete ? styles.lineComplete : styles.linePending
+				return (
+					<div key={id}>
+						{loading ? (
+							<div className={styles.sub_container}>
+								<Placeholder height="60px" width="6px" margin="10px 0px 0px" />
+							</div>
+						) : (
+							<div className={styles.line_container}>
+								<div
+									className={
+                    complete ? styles.line_complete : styles.line_pending
                   }
-				/>
-			</div>
-		)}
+								/>
+							</div>
+						)}
 
-		{loading ? (
-			<div className={styles.subContainer}>
-				<Placeholder
-					height="35px"
-					width="35px"
-					className="circle"
-					margin="10px 0px 0px"
-				/>
-			</div>
-		) : (
-			<div className={styles.subContainer}>
-				<div className={styles.dateContainer}>
-					{dateWithTime[0]}
-					<div>{formatAMPM(new Date(occurredAt))}</div>
-				</div>
-
-				<div style={{ marginTop: '4px' }}>
-					<IcCFtick width="30px" height="30px" />
-				</div>
-
-				<div className={styles.eventContainer}>
-					{eventName === 'FULL' ? (
-						<span>PAID</span>
-					) : (
-                  	(eventName || '').replaceAll('_', ' ')
-					)}
-					<div style={{ display: 'flex', gap: '4px' }}>
-						<div className={styles.userContainer}>
-							{performedByUser}
-						</div>
-						{userEmail ? (
-							<Tooltip
-								interactive
-								content={(
-									<div className={styles.userContainer}>
-										<a href={`mailto:${userEmail}`}>{userEmail}</a>
-									</div>
-								)}
-							>
-								<div style={{ cursor: 'pointer' }}>
-									<a href={`mailto:${userEmail}`}>
-										<IcCSendEmail />
-									</a>
+						{loading ? (
+							<div className={styles.sub_container}>
+								<Placeholder
+									height="35px"
+									width="35px"
+									className="circle"
+									margin="10px 0px 0px"
+								/>
+							</div>
+						) : (
+							<div className={styles.sub_container}>
+								<div className={styles.date_container}>
+									{dateWithTime[0]}
+									<div>{formatAMPM(new Date(occurredAt))}</div>
 								</div>
-							</Tooltip>
-						) : null}
-					</div>
 
-					{eventName === 'FULL'
+								<div style={{ marginTop: '4px' }}>
+									<IcCFtick width="30px" height="30px" />
+								</div>
+
+								<div className={styles.event_container}>
+									{eventName === 'FULL' ? (
+										<span>PAID</span>
+									) : (
+										(eventName || '').replaceAll('_', ' ')
+									)}
+									<div style={{ display: 'flex', gap: '4px' }}>
+										<div className={styles.user_container}>
+											{performedByUser}
+										</div>
+										{userEmail ? (
+											<Tooltip
+												interactive
+												content={(
+													<div className={styles.user_container}>
+														<a href={`mailto:${userEmail}`}>{userEmail}</a>
+													</div>
+												)}
+											>
+												<div style={{ cursor: 'pointer' }}>
+													<a href={`mailto:${userEmail}`}>
+														<IcCSendEmail />
+													</a>
+												</div>
+											</Tooltip>
+										) : null}
+									</div>
+
+									{eventName === 'FULL'
                   || eventName === 'PAYMENT_INITIATED'
                   || eventName === 'PAYMENT_FAILED'
                   || eventName === 'PARTIAL' ? (
-	<div className={styles.amountContainer}>
+	<div className={styles.amount_container}>
 		Amount :-
 		{/* {getFormattedPrice(numLocale, payingAmount, 'INR')} */}
 	</div>
-                  	) : null}
-				</div>
-			</div>
-		)}
-	</div>
-      	);
+										) : null}
+								</div>
+							</div>
+						)}
+					</div>
+				);
 			})}
 		</div>
 	);

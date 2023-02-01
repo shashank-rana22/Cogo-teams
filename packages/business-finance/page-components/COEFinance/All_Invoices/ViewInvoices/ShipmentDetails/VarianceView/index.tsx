@@ -7,8 +7,6 @@ import {
 } from '../../../../../commons/Interfaces/index';
 import List from '../../../../../commons/List/index';
 
-import styles from './styles.module.css';
-
 interface VarianceViewInterface {
 	show: boolean;
 	onClose?: () => void;
@@ -67,8 +65,8 @@ function VarianceView({
 				<div>
 					<span>
 						{(purchaseLineItems || [])
-            	.map((charge: any) => charge.name)
-            	.join(',')}
+							.map((charge: any) => charge.name)
+							.join(',')}
 					</span>
 					<span style={{ marginLeft: 4 }}>
 						(
@@ -113,7 +111,7 @@ function VarianceView({
 		<Modal size="lg" show={show} onClose={onClose}>
 			<Modal.Header title="Variance" />
 			<Modal.Body>
-				<div className={styles.modalContainer}>
+				<div>
 					<List
 						config={config}
 						itemData={{ list: data }}

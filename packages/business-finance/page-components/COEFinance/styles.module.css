@@ -2,7 +2,7 @@
 	background-color: red;
 }
 
-.tabsContainer {
+.tabs_container {
 	button {
 		background: white;
 		border-right: 1px solid #e0e0e0;
@@ -53,13 +53,13 @@
 	padding: 80px 80px 0 60px;
 }
 
-.tabStyle {
+.tab_style {
 	font-size: 16px;
 	font-weight: 500;
 	background: white;
 }
 
-.headerStyle {
+.header_style {
 	flex-direction: column;
 	font-size: 28px;
 	font-weight: 600;

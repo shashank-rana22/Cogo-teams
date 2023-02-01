@@ -40,15 +40,15 @@ function FormatedDate({ item, field }: Props) {
 
 	const content = (
 		<>
-			<div className={styled.preTax}>
+			<div className={styled.pre_tax}>
 				Pre Tax :
-				<text className={styled.preTaxAmount}>
+				<text className={styled.pre_tax_amount}>
 					{getFormattedPrice(item.subTotal!, item.billCurrency!)}
 				</text>
 			</div>
-			<div className={styled.postTax}>
+			<div className={styled.post_tax}>
 				Post Tax:
-				<text className={styled.postTaxAmount}>
+				<text className={styled.post_tax_amount}>
 					{getFormattedPrice(item.grandTotal!, item.billCurrency!)}
 				</text>
 			</div>
@@ -61,11 +61,11 @@ function FormatedDate({ item, field }: Props) {
 			{field?.key === 'billDate' && <div>{getBillDate}</div>}
 			{field?.key === 'dueDate' && <div>{getDueDate}</div>}
 			{field?.key === 'grandTotal' && (
-				<div className={styled.invoiceAmount}>
+				<div className={styled.invoice_amount}>
 					<text>{showOverflowingNumber(formatAmount, 8)}</text>
 
 					<Tooltip placement="top" content={content}>
-						<div className={styled.IcMinIcon}>
+						<div className={styled.ic_min_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>
 					</Tooltip>
@@ -76,7 +76,7 @@ function FormatedDate({ item, field }: Props) {
 				<div>
 					{topKey && <text className={styled.sid}>{getCreatedDate}</text>}
 					{bottomKey && (
-						<div className={styled.serviceType}>{getCreatedDateTime}</div>
+						<div className={styled.service_type}>{getCreatedDateTime}</div>
 					)}
 				</div>
 			)}

@@ -7,12 +7,12 @@
 	display: flex;
 }
 
-.filterData {
+.filter_data {
 	margin-top: 20px;
 	margin-right: 10px;
 }
 
-.filterDataUrgent {
+.filter_data_urgent {
 	margin-top: 20px;
 }
 
@@ -32,7 +32,7 @@
 	}
 }
 
-.searchFilter {
+.search_filter {
 	display: flex;
 	margin-top: 20px;
 }

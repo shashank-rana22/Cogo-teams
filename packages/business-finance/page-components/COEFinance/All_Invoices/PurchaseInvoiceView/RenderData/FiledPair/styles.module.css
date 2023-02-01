@@ -1,4 +1,4 @@
-.lowerKeys {
+.lower_keys {
 	width: max-content;
 	padding: 2px 4px;
 	margin-top: 4px;
@@ -24,6 +24,6 @@
 	text-decoration: underline;
 }
 
-.serviceType {
+.service_type {
 	margin-top: 4px;
 }
