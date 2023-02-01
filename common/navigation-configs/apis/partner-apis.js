@@ -4318,6 +4318,33 @@ const partner = {
 			service_name : 'condition',
 		},
 	],
+	payment_modes_and_methods: [
+		{
+			api          : 'list_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'create_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'get_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'update_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+	],
 	condition: [
 		{
 			api          : 'update_condition',

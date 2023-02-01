@@ -1644,6 +1644,15 @@ const navigationMappingAdmin = {
 				module_type: 'crm',
 			},
 			{
+				key           : 'transaction_setting-payment_modes_and_methods',
+				title         : 'Payment Modes and Methods',
+				href          : '/payment-modes-and-methods',
+				as            : '/payment-modes-and-methods',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.payment_modes_and_methods,
+			},
+			{
 				key           : 'transaction_setting-cogo_fx',
 				title         : 'Cogo FX',
 				href          : '/cogo-fx',
