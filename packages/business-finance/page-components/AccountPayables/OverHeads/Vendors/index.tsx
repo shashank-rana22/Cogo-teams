@@ -146,6 +146,7 @@ function VenderComponent() {
 				onClick={() => {
                	setDropdownId(item?.vendorSerialId);
 				}}
+				style={{ border: '1px solid' }}
 			>
 				View More
 			</Button>
