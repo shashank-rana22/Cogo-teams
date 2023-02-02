@@ -3,7 +3,7 @@
 	height: 70vh;
 	padding: 0;
 	margin: 0;
-	margin-bottom: 16px;
+	margin-bottom: 10px;
 	overflow-y: auto;
 	list-style-type: none;
 	border-bottom: 1px solid #eaeaea;
@@ -80,6 +80,33 @@
 		color: var(--color-accent);
 		background-color: #fef199;
 	}
+}
+
+.toggle_button {
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
+	font-weight: 500 !important;
+	cursor: pointer;
+	border-radius: 4px;
+	will-change: background-color;
+	transition: background-color 0.1s linear, color 0.1s linear;
+
+	span {
+		flex: 1;
+		padding-top: 1px;
+		overflow: hidden;
+		font-weight: 600;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		user-select: none;
+	}
+}
+
+.theme_icon {
+	margin-right: 20px;
+	font-size: 1rem;
+	color: black;
 }
 
 .list_item_subitem {

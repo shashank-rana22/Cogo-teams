@@ -1,5 +1,5 @@
 import { Input, cl } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMSearchdark } from '@cogoport/icons-react';
 import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
@@ -19,6 +19,8 @@ function Navbar({
 	mobileShow = false,
 }) {
 	const userBasedNavView = formatUserBasedNavView(nav);
+	// eslint-disable-next-line no-undef
+	const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
@@ -72,7 +74,18 @@ function Navbar({
 							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
 						))}
 					</ul>
-					<ThemeToggle />
+
+					<ul className={styles.list_container}>
+						<li>
+							<div className={styles.toggle_button}>
+								<div className={styles.theme_icon}>
+									{activeTheme === 'light' ? '☀️' : '🌙' }
+								</div>
+								<span>{activeTheme === 'light' ? 'Light Mode' : 'Dark (beta)' }</span>
+								<ThemeToggle activeTheme={activeTheme} setActiveTheme={setActiveTheme} />
+							</div>
+						</li>
+					</ul>
 				</div>
 			</nav>
 		</div>
