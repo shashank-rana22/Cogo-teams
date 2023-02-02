@@ -60,5 +60,6 @@ const app_apis = {
 	saas_trade_partner              : apis.app_saas_trade_partner,
 	saas_product_inventory          : apis.app_saas_product_inventory,
 	saas_premium_services           : apis.app_saas_premium_services,
+	saas_order_history              : apis.app_saas_order_history,
 };
 export default app_apis;
