@@ -262,7 +262,8 @@ const useUpdateSpotNegotiationRate = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const disableButton = loading || !(values?.rate_reference_number || values?.booking_rate_procurement_proof);
+	const disableButton = loading || !((values?.rate_reference_number || values?.booking_rate_procurement_proof)
+	|| !['fcl_freight', 'lcl_freight', 'air_freight'].includes(service?.service));
 
 	const handleData = async (value) => {
 		try {
