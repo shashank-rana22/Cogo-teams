@@ -25,6 +25,7 @@ const getControls = () => [
 		rules          : { required: true },
 		asyncKey       : 'organizations',
 		initialCall    : false,
+		isClearable	   : true,
 		// getModifiedOptions : ({ options }) => options.map((option) => ({
 		// 	...options,
 		// 	business_name: `${option.business_name}`,
@@ -36,6 +37,7 @@ const getControls = () => [
 		label          : 'Organization User',
 		placeholder    : 'Select Organization User',
 		defaultOptions : false,
+		isClearable	   : true,
 		rules          : { required: true },
 	},
 	{
@@ -44,6 +46,7 @@ const getControls = () => [
 		label          : 'Partner',
 		placeholder    : 'Select Partner',
 		defaultOptions : false,
+		isClearable	   : true,
 		rules          : { required: true },
 	},
 	{
@@ -52,6 +55,7 @@ const getControls = () => [
 		label          : 'Partner User',
 		placeholder    : 'Select Partner User',
 		defaultOptions : false,
+		isClearable	   : true,
 		rules          : { required: true },
 	},
 	{
