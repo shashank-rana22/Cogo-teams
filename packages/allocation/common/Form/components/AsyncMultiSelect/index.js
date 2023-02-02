@@ -1,10 +1,10 @@
 import { MultiSelect } from '@cogoport/components';
 import { useGetAsyncOptions } from '@cogoport/forms';
-import { asyncFieldsOrganizations } from '@cogoport/forms/utils/getAsyncFields';
+import { asyncFieldsPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
 
 const keyAsyncFieldsParamsMapping = {
-	organizations: asyncFieldsOrganizations,
+	partner_users: asyncFieldsPartnerUsers,
 };
 
 function AsyncMultiSelect({ asyncKey, initialCall, params, getModifiedOptions, ...rest }) {
