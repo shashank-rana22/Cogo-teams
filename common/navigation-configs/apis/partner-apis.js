@@ -4157,6 +4157,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	trade_enquiry: [
 		{
