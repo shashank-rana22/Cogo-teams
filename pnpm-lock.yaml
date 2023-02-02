@@ -48,7 +48,7 @@ importers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
@@ -70,7 +70,7 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
-      '@cogoport/components': 1.0.279_acxc76o73cs57gtnhmpyojnosy
+      '@cogoport/components': 1.0.282_acxc76o73cs57gtnhmpyojnosy
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
       '@cogoport/icons-react': 1.0.52_biqbaboplfbrettd7655fr4n2y
@@ -92,7 +92,7 @@ importers:
   common/core:
     specifiers:
       '@cogoport/authentication': workspace:0.1.0
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
@@ -106,7 +106,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
-      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/navigation-configs': link:../navigation-configs
       '@cogoport/next': link:../next
@@ -121,14 +121,14 @@ importers:
 
   common/forms:
     specifiers:
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
       react-hook-form: ^7.43.0
     dependencies:
-      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.2
@@ -195,7 +195,7 @@ importers:
 
   packages/access-management:
     specifiers:
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -205,7 +205,7 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -217,7 +217,7 @@ importers:
 
   packages/authentication:
     specifiers:
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -228,7 +228,7 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -241,7 +241,7 @@ importers:
 
   packages/business-finance:
     specifiers:
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/next': workspace:0.1.0
@@ -251,7 +251,7 @@ importers:
       '@types/react': ^18.0.27
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -264,7 +264,7 @@ importers:
 
   packages/locations:
     specifiers:
-      '@cogoport/components': ^1.0.279
+      '@cogoport/components': ^1.0.282
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/request': workspace:^0.1.0
@@ -272,7 +272,7 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/request': link:../../common/request
@@ -1555,8 +1555,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cogoport/components/1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe:
-    resolution: {integrity: sha512-shpuIuqxpCpt33FaWnm03WS/jdQ10RoJqQT0RivqbRce9AqM8l+bjvg3JpPNzShC4zP1uNc63ObQQdY3VjLvcQ==}
+  /@cogoport/components/1.0.282_4qqsdfrobn2h6f6rxzbbfb35oe:
+    resolution: {integrity: sha512-BRK16fpy3e/GMzhl5bZYtaRcvXSFvFnw3jLnac7JxxqT3adoRUkCsb1/CVeJZt4opDMUx8Y9BYlYBj58PcnX3A==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1585,8 +1585,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.279_acxc76o73cs57gtnhmpyojnosy:
-    resolution: {integrity: sha512-shpuIuqxpCpt33FaWnm03WS/jdQ10RoJqQT0RivqbRce9AqM8l+bjvg3JpPNzShC4zP1uNc63ObQQdY3VjLvcQ==}
+  /@cogoport/components/1.0.282_acxc76o73cs57gtnhmpyojnosy:
+    resolution: {integrity: sha512-BRK16fpy3e/GMzhl5bZYtaRcvXSFvFnw3jLnac7JxxqT3adoRUkCsb1/CVeJZt4opDMUx8Y9BYlYBj58PcnX3A==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1692,6 +1692,11 @@ packages:
       '@csstools/css-tokenizer': 2.0.1
     dev: true
 
+  /@csstools/color-helpers/1.0.0:
+    resolution: {integrity: sha512-tgqtiV8sU/VaWYjOB3O7PWs7HR/MmOLl2kTYRW2qSsTSEniJq7xmyAYFB1LPpXvvQcE5u2ih2dK9fyc8BnrAGQ==}
+    engines: {node: ^14 || ^16 || >=18}
+    dev: true
+
   /@csstools/css-parser-algorithms/2.0.1_jcyrkspfsqbg4tr2sa6u4jvygy:
     resolution: {integrity: sha512-B9/8PmOtU6nBiibJg0glnNktQDZ3rZnGn/7UmDfrm2vMtrdlXO3p7ErE95N0up80IRk9YEtB5jyj/TmQ1WH3dw==}
     engines: {node: ^14 || ^16 || >=18}
@@ -1734,7 +1739,7 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/postcss-progressive-custom-properties': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-progressive-custom-properties': 2.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -1749,12 +1754,13 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@csstools/postcss-hwb-function/2.0.1_postcss@8.4.21:
-    resolution: {integrity: sha512-IYoJZ/lDgbXr5iRxlIYdTirWRerrcpezfpP6Xr+bfu8KJRgSMQVOxmXpfJwEXQuTBiX+DyVcAz+IbDdOexHq9g==}
+  /@csstools/postcss-hwb-function/2.1.0_postcss@8.4.21:
+    resolution: {integrity: sha512-B4uBMznejB5VM7rMB2C3KQdM3JwPAy3CxbI9DIMziCZzlaB1a59uV7NimuINndumgtzpVt++CdpY0XffURZ+eA==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
     dependencies:
+      '@csstools/color-helpers': 1.0.0
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -1765,13 +1771,13 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/postcss-progressive-custom-properties': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-progressive-custom-properties': 2.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@csstools/postcss-is-pseudo-class/3.0.1_postcss@8.4.21:
-    resolution: {integrity: sha512-N0GC8eRkHDsI8Y3AZ6HLJol1YANNk8PFWsUHOzuDkQW0zbrPL9arYpPTw4cr8yq0rkY/9TRaBDU74QA4ULmKHQ==}
+  /@csstools/postcss-is-pseudo-class/3.1.0_postcss@8.4.21:
+    resolution: {integrity: sha512-MSt4kjWvIuv7GWGEV2WNkcOTLXdYpBRbW/2YF9MAmrKKYui65P/LpsLfSwCWq4vdwWH1HSxFi4Qp6bGCEAZ8ag==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -1848,13 +1854,13 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/postcss-progressive-custom-properties': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-progressive-custom-properties': 2.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@csstools/postcss-progressive-custom-properties/2.0.1_postcss@8.4.21:
-    resolution: {integrity: sha512-ImgaFLEOhH/EdcrqDF8GSYSlsVR8EQBJ1p9ZhzoHgDkL7/uuzvSZOlRw5dFGFGnjdi7EXK4gsUjy2HU7ChHh3w==}
+  /@csstools/postcss-progressive-custom-properties/2.1.0_postcss@8.4.21:
+    resolution: {integrity: sha512-tRX1rinsXajZlc4WiU7s9Y6O9EdSHScT997zDsvDUjQ1oZL2nvnL6Bt0s9KyQZZTdC3lrG2PIdBqdOIWXSEPlQ==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -1883,12 +1889,13 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@csstools/postcss-text-decoration-shorthand/2.1.0_postcss@8.4.21:
-    resolution: {integrity: sha512-ARU7Oh9nplxt99cDONVrDt/c1osWRCtgAzegtvmkn6ed7wfmjeNOlXogK1SlAIfHl6X116kPTuFL7vuyDmlPQw==}
+  /@csstools/postcss-text-decoration-shorthand/2.2.0_postcss@8.4.21:
+    resolution: {integrity: sha512-++RtufygqFaeheLH1g8Y2Oi/l+xSt61+c0lQGjrpLUW4hhFo77V4Zsshm0oof7lqnpVXPaizlU0SnXf+f4GA7A==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
     dependencies:
+      '@csstools/color-helpers': 1.0.0
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -2869,8 +2876,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@wojtekmaj/date-utils/1.1.1:
-    resolution: {integrity: sha512-BNT0FH23VKGI148OZbno+G1xioG4kALScIAfBL+UJdaEtA618M6pWDrYTbpMs9tMQz9LOEb4mbkKemCUpocg2g==}
+  /@wojtekmaj/date-utils/1.1.2:
+    resolution: {integrity: sha512-06PQad/6pyYDjInBW2ih4Oy30EAg0mtXTCz+b/fGwzN2JB2X2Zsa4QtHl4I8M+IaCKN8bwj61OW3XAWxh+D9hA==}
     dev: false
 
   /accept-language/3.0.18:
@@ -3536,8 +3543,8 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /detect-element-overflow/1.3.0:
-    resolution: {integrity: sha512-/VHnPaQqFHoQm067JnVpBFt2rhS2RF+x1OVCjUUQSvk66UhSbpCbUb5ir1HQaqvsoLIWW0ZbRpeYybQcXOCfGA==}
+  /detect-element-overflow/1.3.1:
+    resolution: {integrity: sha512-E29Axx3pyotgg3j5HUbusTTarjPUHsC02p7fZ3/cnUufyK0kx5RzRA9waBvrKFWGc/LWiRj3pD9Y3y+mymMYiQ==}
     dev: false
 
   /dir-glob/3.0.1:
@@ -5572,7 +5579,7 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/postcss-progressive-custom-properties': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-progressive-custom-properties': 2.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -5646,7 +5653,7 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/postcss-progressive-custom-properties': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-progressive-custom-properties': 2.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -5741,9 +5748,9 @@ packages:
       '@csstools/postcss-cascade-layers': 3.0.1_postcss@8.4.21
       '@csstools/postcss-color-function': 2.0.1_postcss@8.4.21
       '@csstools/postcss-font-format-keywords': 2.0.1_postcss@8.4.21
-      '@csstools/postcss-hwb-function': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-hwb-function': 2.1.0_postcss@8.4.21
       '@csstools/postcss-ic-unit': 2.0.1_postcss@8.4.21
-      '@csstools/postcss-is-pseudo-class': 3.0.1_postcss@8.4.21
+      '@csstools/postcss-is-pseudo-class': 3.1.0_postcss@8.4.21
       '@csstools/postcss-logical-float-and-clear': 1.0.1_postcss@8.4.21
       '@csstools/postcss-logical-resize': 1.0.1_postcss@8.4.21
       '@csstools/postcss-logical-viewport-units': 1.0.2_postcss@8.4.21
@@ -5751,10 +5758,10 @@ packages:
       '@csstools/postcss-nested-calc': 2.0.1_postcss@8.4.21
       '@csstools/postcss-normalize-display-values': 2.0.1_postcss@8.4.21
       '@csstools/postcss-oklab-function': 2.0.1_postcss@8.4.21
-      '@csstools/postcss-progressive-custom-properties': 2.0.1_postcss@8.4.21
+      '@csstools/postcss-progressive-custom-properties': 2.1.0_postcss@8.4.21
       '@csstools/postcss-scope-pseudo-class': 2.0.1_postcss@8.4.21
       '@csstools/postcss-stepped-value-functions': 2.0.1_postcss@8.4.21
-      '@csstools/postcss-text-decoration-shorthand': 2.1.0_postcss@8.4.21
+      '@csstools/postcss-text-decoration-shorthand': 2.2.0_postcss@8.4.21
       '@csstools/postcss-trigonometric-functions': 2.0.1_postcss@8.4.21
       '@csstools/postcss-unset-value': 2.0.1_postcss@8.4.21
       autoprefixer: 10.4.13_postcss@8.4.21
@@ -5925,7 +5932,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@wojtekmaj/date-utils': 1.1.1
+      '@wojtekmaj/date-utils': 1.1.2
       clsx: 1.2.1
       get-user-locale: 1.5.1
       prop-types: 15.8.1
@@ -5939,7 +5946,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@wojtekmaj/date-utils': 1.1.1
+      '@wojtekmaj/date-utils': 1.1.2
       clsx: 1.2.1
       get-user-locale: 1.5.1
       prop-types: 15.8.1
@@ -5953,7 +5960,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@types/react-calendar': 3.9.0
-      '@wojtekmaj/date-utils': 1.1.1
+      '@wojtekmaj/date-utils': 1.1.2
       clsx: 1.2.1
       get-user-locale: 1.5.1
       make-event-props: 1.3.0
@@ -5962,7 +5969,7 @@ packages:
       react-calendar: 4.0.0_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
       react-fit: 1.4.0_biqbaboplfbrettd7655fr4n2y
-      update-input-width: 1.3.0
+      update-input-width: 1.3.1
     dev: false
 
   /react-date-picker/9.2.0_react@18.2.0:
@@ -5972,7 +5979,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@types/react-calendar': 3.9.0
-      '@wojtekmaj/date-utils': 1.1.1
+      '@wojtekmaj/date-utils': 1.1.2
       clsx: 1.2.1
       get-user-locale: 1.5.1
       make-event-props: 1.3.0
@@ -5980,7 +5987,7 @@ packages:
       react: 18.2.0
       react-calendar: 4.0.0_react@18.2.0
       react-fit: 1.4.0_react@18.2.0
-      update-input-width: 1.3.0
+      update-input-width: 1.3.1
     dev: false
 
   /react-date-range/1.4.0_r6j3756ioqf5pjc2u22wj25rla:
@@ -6013,7 +6020,7 @@ packages:
       react: ^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      detect-element-overflow: 1.3.0
+      detect-element-overflow: 1.3.1
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -6026,7 +6033,7 @@ packages:
       react: ^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^15.5.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      detect-element-overflow: 1.3.0
+      detect-element-overflow: 1.3.1
       prop-types: 15.8.1
       react: 18.2.0
       tiny-warning: 1.0.3
@@ -6954,8 +6961,8 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /update-input-width/1.3.0:
-    resolution: {integrity: sha512-LrlDGOlGfcYbIYjY6guuOrsB8Gc2JWlMdvzoBdiNBwbwIZcepFC0L+0pG41qumd2OAVwRTsN0oV2cSpPGDHy2g==}
+  /update-input-width/1.3.1:
+    resolution: {integrity: sha512-hV2DGiSn7FKerjIXaI3s0EG/AnmAeoRTV5cvpsFcygzUzKreYj5qSu7rVihzUOEXF/MP2mjJpUzwi14sZdp0nw==}
     dev: false
 
   /uri-js/4.4.1:
