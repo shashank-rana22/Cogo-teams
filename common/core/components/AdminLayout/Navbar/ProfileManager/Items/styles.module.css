@@ -48,6 +48,7 @@
 	width: 10%;
 	font-size: 14px;
 	font-weight: 600 !important;
+	color: var(--color-secondary-5);
 }
 
 .list_item_inner {
@@ -77,6 +78,8 @@
 	border-radius: 4px;
 	transition: background-color 0.1s linear, color 0.1s linear;
 	will-change: background-color;
+	color: var(--color-secondary-5);
+
 
 	span {
 		flex: 1;
@@ -100,8 +103,8 @@
 
 .active_item:hover {
 	background-color: #fef199;
-	border-bottom-right-radius: 6px;
-	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
 }
 
 .inner_container {

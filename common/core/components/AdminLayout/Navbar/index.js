@@ -1,5 +1,5 @@
 import { Input, cl } from '@cogoport/components';
-import { IcMArrowRotateDown, IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';

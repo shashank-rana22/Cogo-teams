@@ -17,15 +17,12 @@
 	background: var(--color-bg-toggle);
 	border: 0;
 	border-radius: calc(var(--toggle-width) / 2);
+	box-shadow: 0 0 5px 2px var(--color-bg-toggle);
 	transition: background 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 }
 
 .toggle_button:global(.ui_button_container) {
 	padding: unset !important;
-}
-
-.toggle_button:hover {
-	box-shadow: 0 0 5px 2px var(--color-bg-toggle);
 }
 
 .toggle_button:focus {
