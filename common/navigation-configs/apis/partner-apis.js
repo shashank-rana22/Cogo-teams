@@ -3973,11 +3973,6 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'rate_density',
 		},
-		{
-			api          : 'list_cogo_entities',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
 	],
 	operations_dashboard: [
 		{
@@ -4161,11 +4156,6 @@ const partner = {
 			api          : 'create_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
-		},
-		{
-			api          : 'list_cogo_entities',
-			access_type  : 'private',
-			service_name : 'partner',
 		},
 	],
 	trade_enquiry: [
@@ -8130,11 +8120,6 @@ const partner = {
 			api          : 'process_cogo_assured_rate_sheet',
 			access_type  : 'private',
 			service_name : 'cogo_assured_rate',
-		},
-		{
-			api          : 'list_cogo_entities',
-			access_type  : 'private',
-			service_name : 'partner',
 		},
 	],
 	product_code_mapping: [
