@@ -2,9 +2,9 @@ const controls = [
 	{
 		name        : 'role_ids',
 		label       : 'Roles',
-		type        : 'select',
-		multiple    : true,
+		type        : 'multiSelect',
 		placeholder : 'Select roles',
+		options     : [],
 	},
 	{
 		name        : 'stakeholder_type',
@@ -24,17 +24,17 @@ const controls = [
 	},
 	{
 		name    : 'locking_criterion',
-		type    : 'pills',
+		type    : 'chips',
 		label   : 'Locking Criterion',
 		options : [
 			{ value: 'quotations_last_date', label: 'Quotation' },
 			{ value: 'shipment_booked', label: 'Shipment Booked' },
 		],
-		multiple: true,
+		// multiple: true,
 	},
 	{
 		name    : 'schedule_type',
-		type    : 'pills',
+		type    : 'chips',
 		label   : 'Schedule Type',
 		options : [
 			{ value: 'daily', label: 'Daily' },
@@ -45,7 +45,7 @@ const controls = [
 	},
 	{
 		name    : 'status',
-		type    : 'pills',
+		type    : 'chips',
 		label   : 'Status',
 		options : [
 			{ value: 'active', label: 'Active' },
@@ -54,7 +54,7 @@ const controls = [
 			{ value: 'checking', label: 'Checking' },
 			{ value: 'not_publishable', label: 'Not publishable' },
 		],
-		multiple: true,
+		// multiple: true,
 	},
 ];
 
