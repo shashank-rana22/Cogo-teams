@@ -46,7 +46,7 @@ function Requests() {
 
 					<form onSubmit={handleSubmit(onSave)}>
 						<Modal.Body>
-							<Form data={{}} formProps={formProps} controls={controls} />
+							<Form formProps={formProps} controls={controls} />
 						</Modal.Body>
 
 						<Modal.Footer>

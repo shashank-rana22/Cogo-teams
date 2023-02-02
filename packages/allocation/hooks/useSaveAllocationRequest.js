@@ -114,7 +114,7 @@ const useSaveAllocationRequest = () => {
 
 	const { service_type, organization_id, partner_id } = watch();
 
-	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type });
+	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type }) || [];
 
 	// Todo put below in a seperate hook
 	// const orgOptions = useGetAsyncOptions({
@@ -192,11 +192,12 @@ const useSaveAllocationRequest = () => {
 		organization_user_id : orgUserOptions,
 		partner_id           : partnerOptions,
 		partner_user_id      : partnerUserOptions,
-		stakeholder_type     : stakeholderTypeOptions,
+		stakeholder_type     : { options: stakeholderTypeOptions },
 		stakeholder_id       : stakeholderOptions,
 	};
 
-	const modifiedControls = controls.map((control) => {
+	let modifiedControls = [];
+	modifiedControls = controls.map((control) => {
 		const { name } = control;
 
 		return {
@@ -210,6 +211,18 @@ const useSaveAllocationRequest = () => {
 			...(controlNameOptionsMapping[name] || {}),
 		};
 	});
+
+	// modifiedControls.forEach((control) => {
+	// 	if (control.name === service_type) {
+	// 		return {
+
+	// 		};
+	// 	}
+
+	// 	return { ...control };
+	// });
+
+	console.log('controls', modifiedControls);
 
 	return {
 		onSave,
