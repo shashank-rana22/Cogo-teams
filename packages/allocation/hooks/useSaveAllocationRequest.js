@@ -10,104 +10,22 @@ import {
 } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
 
+import getControls from '../utils/get-create-request-controls';
+import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
 import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
 // Todo seperate it out in utils
-
-const getControls = () => [
-	{
-		name    : 'service_type',
-		type    : 'radioGroup',
-		label   : 'Allocation Type',
-		value   : 'organization',
-		options : [
-			{
-				value : 'organization',
-				label : 'Organization',
-			},
-			{
-				value : 'partner',
-				label : 'Partner',
-			},
-		],
-		rules: { required: true },
-	},
-	{
-		name           : 'organization_id',
-		type           : 'asyncSelect',
-		label          : 'Organization',
-		placeholder    : 'Select Organization',
-		defaultOptions : false,
-		rules          : { required: true },
-		asyncKey       : 'organizations',
-		initialCall    : false,
-		// getModifiedOptions : ({ options }) => options.map((option) => ({
-		// 	...options,
-		// 	business_name: `${option.business_name}`,
-		// })),
-	},
-	{
-		name           : 'organization_user_id',
-		type           : 'select',
-		label          : 'Organization User',
-		placeholder    : 'Select Organization User',
-		defaultOptions : false,
-		rules          : { required: true },
-	},
-	{
-		name           : 'partner_id',
-		type           : 'select',
-		label          : 'Partner',
-		placeholder    : 'Select Partner',
-		defaultOptions : false,
-		rules          : { required: true },
-	},
-	{
-		name           : 'partner_user_id',
-		type           : 'select',
-		label          : 'Partner User',
-		placeholder    : 'Select Partner User',
-		defaultOptions : false,
-		rules          : { required: true },
-	},
-	{
-		name           : 'stakeholder_type',
-		label          : 'Stakeholder Type',
-		placeholder    : 'Select Stakeholder Type',
-		type           : 'multiSelect',
-		isClearable    : true,
-		options        : [],
-		defaultOptions : true,
-		rules          : {
-			required: true,
-		},
-	},
-	{
-		name           : 'stakeholder_id',
-		type           : 'select',
-		label          : 'Stakeholder',
-		isClearable    : true,
-		placeholder    : 'Select Stakeholder',
-		defaultOptions : false,
-		rules          : { required: true },
-	},
-	{
-		name        : 'reason',
-		label       : 'Request Reason',
-		placeholder : 'Type here...',
-		type        : 'text',
-		rules       : {
-			required: true,
-		},
-	},
-];
 
 const useSaveAllocationRequest = () => {
 	// const { data } = props;
 
 	const controls = getControls();
 
-	const formProps = useForm();
+	const formProps = useForm({
+		defaultValues: {
+			service_type: 'organization',
+		},
+	});
 	const {
 		watch,
 	} = formProps;
@@ -196,8 +114,7 @@ const useSaveAllocationRequest = () => {
 		stakeholder_id       : stakeholderOptions,
 	};
 
-	let modifiedControls = [];
-	modifiedControls = controls.map((control) => {
+	const modifiedControls = controls.map((control) => {
 		const { name } = control;
 
 		return {
@@ -212,23 +129,18 @@ const useSaveAllocationRequest = () => {
 		};
 	});
 
-	// modifiedControls.forEach((control) => {
-	// 	if (control.name === service_type) {
-	// 		return {
-
-	// 		};
-	// 	}
-
-	// 	return { ...control };
-	// });
-
-	// console.log('controls', modifiedControls);
+	const newControls = [];
+	modifiedControls.forEach((control) => {
+		if (SERVICE_TYPE_MAPPING[service_type]?.includes(control.name)) {
+			newControls.push(control);
+		}
+	});
 
 	return {
 		onSave,
 		loading,
 		formProps,
-		controls: modifiedControls,
+		controls: newControls,
 	};
 };
 
