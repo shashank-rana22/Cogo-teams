@@ -3,6 +3,12 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    flex-wrap: wrap;
+
+    :global(.ui_toggle_container){
+        padding: 0px;
+    }
 }
 
 .filter_and_create{
