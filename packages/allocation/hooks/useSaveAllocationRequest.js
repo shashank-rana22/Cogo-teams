@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import {
-	asyncFieldsOrganizations,
+	// asyncFieldsOrganizations,
 	asyncFieldsOrganizationUser,
 	asyncFieldsPartner,
 	asyncFieldsPartnerUsers,
@@ -33,12 +33,18 @@ const getControls = () => [
 		rules: { required: true },
 	},
 	{
-		name           : 'organization_id',
-		type           : 'select',
-		label          : 'Organization',
-		placeholder    : 'Select Organization',
-		defaultOptions : false,
-		rules          : { required: true },
+		name               : 'organization_id',
+		type               : 'asyncSelect',
+		label              : 'Organization',
+		placeholder        : 'Select Organization',
+		defaultOptions     : false,
+		rules              : { required: true },
+		asyncKey           : 'organizations',
+		initialCall        : false,
+		getModifiedOptions : ({ options }) => options.map((option) => ({
+			...options,
+			business_name: `${option.business_name}`,
+		})),
 	},
 	{
 		name           : 'organization_user_id',
@@ -111,10 +117,10 @@ const useSaveAllocationRequest = () => {
 	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type });
 
 	// Todo put below in a seperate hook
-	const orgOptions = useGetAsyncOptions({
-		...asyncFieldsOrganizations(),
-		initialCall: false,
-	});
+	// const orgOptions = useGetAsyncOptions({
+	// 	...asyncFieldsOrganizations(),
+	// 	initialCall: false,
+	// });
 
 	const orgUserOptions = useGetAsyncOptions({
 		...asyncFieldsOrganizationUser(),
@@ -182,7 +188,7 @@ const useSaveAllocationRequest = () => {
 	};
 
 	const controlNameOptionsMapping = {
-		organization_id      : orgOptions,
+		organization_id      : {}, // orgOptions,
 		organization_user_id : orgUserOptions,
 		partner_id           : partnerOptions,
 		partner_user_id      : partnerUserOptions,
