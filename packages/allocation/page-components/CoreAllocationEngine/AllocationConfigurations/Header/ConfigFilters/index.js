@@ -14,7 +14,6 @@ function ConfigFilters() {
 			controls={controls}
 			open={showFilters}
 			setOpen={setShowFilters}
-			heading="Filters"
 		>
 			<Button size="md" themeType="secondary" onClick={() => setShowFilters(!showFilters)}>
 				FILTER

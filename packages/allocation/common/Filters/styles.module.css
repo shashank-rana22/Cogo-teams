@@ -1,7 +1,7 @@
 .popover_container {
     :global(.ui_popover_container) {
         width: 500px;
-        max-height: 380px;
+        /* max-height: 380px; */
     }
 
     :global(.tippy-content){
@@ -10,10 +10,15 @@
 		box-sizing: border-box;
 		border-radius: 10px;
         padding: 16px 16px 16px 13px;
+        overflow-y: auto;
     }
 
     :global(.tippy-box){
         border-radius: 10px;
+    }
+
+    :global(.ui_chips_container){
+        flex-wrap: wrap;
     }
 }
 
@@ -41,6 +46,7 @@
 }
 
 .label {
+    color:#BDBDBD;
     font-size: 14px;
     line-height: 24px;
 }

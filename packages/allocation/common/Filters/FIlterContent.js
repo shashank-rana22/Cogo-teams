@@ -1,19 +1,17 @@
 import { Button } from '@cogoport/components';
 import {
-	InputController,
 	MultiselectController,
 	SelectController,
-	RadioGroupController,
+	ChipsController,
 	useForm,
 } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
 const ELEMENT_CONTROLLER_MAPPING = {
-	text        : InputController,
 	select      : SelectController,
 	multiSelect : MultiselectController,
-	radioGroup  : RadioGroupController,
+	chips       : ChipsController,
 };
 
 function FilterContent({
