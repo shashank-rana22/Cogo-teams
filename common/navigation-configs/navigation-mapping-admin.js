@@ -1332,6 +1332,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.bl_do_collection_release,
 
 			},
+			{
+				key           : 'coe-kam_desk',
+				title         : 'KAM Desk',
+				href          : '/kam-desk',
+				as            : '/kam-desk',
+				type          : 'link',
+				main_apis     : ['list_kam_booking_desk_shipments'],
+				possible_apis : [...apis.shipment],
+			},
 		],
 	},
 	terms_and_conditions: {

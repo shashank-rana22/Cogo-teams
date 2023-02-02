@@ -1235,6 +1235,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_kam_booking_desk_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 
 export default apis;
