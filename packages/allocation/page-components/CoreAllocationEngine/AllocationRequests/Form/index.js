@@ -24,7 +24,7 @@ export const getElementController = (type = 'text') => {
 };
 
 function Form(props) {
-	const { data, formProps, controls } = props;
+	const { formProps, controls } = props;
 	const {
 		control, formState: { errors },
 	} = formProps;
