@@ -30,7 +30,7 @@ const controls = [
 			{ value: 'quotations_last_date', label: 'Quotation' },
 			{ value: 'shipment_booked', label: 'Shipment Booked' },
 		],
-		// multiple: true,
+		multiple: true,
 	},
 	{
 		name    : 'schedule_type',
@@ -54,7 +54,7 @@ const controls = [
 			{ value: 'checking', label: 'Checking' },
 			{ value: 'not_publishable', label: 'Not publishable' },
 		],
-		// multiple: true,
+		multiple: true,
 	},
 ];
 
