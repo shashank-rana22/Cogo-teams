@@ -2,8 +2,6 @@ import { getFieldController } from '../../../../common/Form/Controlled';
 
 import styles from './styles.module.css';
 
-// Todo put it in a mapping remove switch case
-
 function Form(props) {
 	const { formProps, controls } = props;
 	const {

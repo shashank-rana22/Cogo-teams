@@ -23,6 +23,7 @@ function Requests() {
 		loading,
 		formProps,
 		controls,
+
 	} = useSaveAllocationRequest({});
 
 	const { handleSubmit } = formProps;
@@ -46,7 +47,10 @@ function Requests() {
 
 					<form onSubmit={handleSubmit(onSave)}>
 						<Modal.Body>
-							<Form formProps={formProps} controls={controls} />
+							<Form
+								formProps={formProps}
+								controls={controls}
+							/>
 						</Modal.Body>
 
 						<Modal.Footer>

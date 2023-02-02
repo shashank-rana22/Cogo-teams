@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 
 import getControls from '../utils/get-create-request-controls';
 import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
@@ -14,13 +14,22 @@ const useSaveAllocationRequest = () => {
 	const formProps = useForm({
 		defaultValues: {
 			service_type: 'organization',
+
 		},
 	});
 	const {
 		watch,
+		setValue,
+		getValues,
 	} = formProps;
 
 	const { service_type, organization_id, partner_id } = watch();
+
+	useEffect(() => {
+		setValue('organization_user_id', '');
+		setValue('partner_user_id', '');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [service_type, organization_id, partner_id]);
 
 	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type }) || [];
 
@@ -48,46 +57,51 @@ const useSaveAllocationRequest = () => {
 		}
 	};
 
-	const filteredControls = useMemo(() => {
-		const controlNames = SERVICE_TYPE_MAPPING[service_type] || [];
+	const controlNames = SERVICE_TYPE_MAPPING[service_type] || [];
 
-		return controls.filter((control) => controlNames.includes(control.name)).map((control) => {
-			const { name = '' } = control;
+	const filteredControls = controls.filter((control) => controlNames.includes(control.name)).map((control) => {
+		const { name = '' } = control;
 
-			return {
-				...control,
-				...(name === 'organization_user_id' && {
-					disabled : !organization_id,
-					params   : {
-						filters: {
-							status: 'active',
-							organization_id,
-						},
-						pagination_data_required: false,
+		return {
+			...control,
+			...(name === 'organization_user_id' && {
+				fieldKey : organization_id,
+				disabled : !organization_id,
+				params   : {
+					filters: {
+						status: 'active',
+						organization_id,
 					},
-				}),
-				...(name === 'partner_user_id' && {
-					disabled : !partner_id,
-					params   : {
-						filters: {
-							status: 'active',
-							partner_id,
-						},
-						pagination_data_required: false,
+					pagination_data_required: false,
+				},
+			}),
+			...(name === 'partner_user_id' && {
+				disabled : !partner_id,
+				params   : {
+					filters: {
+						status: 'active',
+						partner_id,
 					},
-				}),
-				...(name === 'stakeholder_type' && {
-					options: stakeholderTypeOptions,
-				}),
-			};
-		});
-	}, [service_type]);
+					pagination_data_required: false,
+				},
+			}),
+			...(name === 'stakeholder_type' && {
+				options: stakeholderTypeOptions,
+			}),
+		};
+	});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [service_type, organization_id, partner_id]);
+
+	console.log('values :: ', getValues());
 
 	return {
 		onSave,
 		loading,
 		formProps,
 		controls: filteredControls,
+		organization_id,
+		partner_id,
 	};
 };
 
