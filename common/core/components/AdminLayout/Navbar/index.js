@@ -10,6 +10,7 @@ import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
+import ThemeToggle from './ThemeToggle';
 
 function Navbar({
 	className,
@@ -71,6 +72,7 @@ function Navbar({
 							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
 						))}
 					</ul>
+					<ThemeToggle />
 				</div>
 			</nav>
 		</div>

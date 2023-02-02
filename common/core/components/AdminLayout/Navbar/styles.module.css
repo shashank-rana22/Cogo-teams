@@ -1,11 +1,12 @@
 .list_container {
 	display: block;
-	height: 100vh;
+	height: 70vh;
 	padding: 0;
 	margin: 0;
 	margin-bottom: 16px;
 	overflow-y: auto;
 	list-style-type: none;
+	border-bottom: 1px solid #eaeaea;
 }
 
 .list_container::-webkit-scrollbar {
