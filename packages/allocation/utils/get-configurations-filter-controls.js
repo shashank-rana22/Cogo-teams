@@ -2,9 +2,17 @@ const controls = [
 	{
 		name        : 'role_ids',
 		label       : 'Roles',
-		type        : 'multiSelect',
+		type        : 'asyncMultiSelect',
 		placeholder : 'Select roles',
-		options     : [],
+		asyncKey    : 'partner_users',
+		initialCall : false,
+		params      : {
+			permissions_data_required : false,
+			filters                   : {
+				stakeholder_id   : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+				stakeholder_type : 'partner',
+			},
+		},
 	},
 	{
 		name        : 'stakeholder_type',
