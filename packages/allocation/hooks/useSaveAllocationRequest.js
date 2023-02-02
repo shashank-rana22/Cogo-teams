@@ -33,18 +33,18 @@ const getControls = () => [
 		rules: { required: true },
 	},
 	{
-		name               : 'organization_id',
-		type               : 'asyncSelect',
-		label              : 'Organization',
-		placeholder        : 'Select Organization',
-		defaultOptions     : false,
-		rules              : { required: true },
-		asyncKey           : 'organizations',
-		initialCall        : false,
-		getModifiedOptions : ({ options }) => options.map((option) => ({
-			...options,
-			business_name: `${option.business_name}`,
-		})),
+		name           : 'organization_id',
+		type           : 'asyncSelect',
+		label          : 'Organization',
+		placeholder    : 'Select Organization',
+		defaultOptions : false,
+		rules          : { required: true },
+		asyncKey       : 'organizations',
+		initialCall    : false,
+		// getModifiedOptions : ({ options }) => options.map((option) => ({
+		// 	...options,
+		// 	business_name: `${option.business_name}`,
+		// })),
 	},
 	{
 		name           : 'organization_user_id',
@@ -222,7 +222,7 @@ const useSaveAllocationRequest = () => {
 	// 	return { ...control };
 	// });
 
-	console.log('controls', modifiedControls);
+	// console.log('controls', modifiedControls);
 
 	return {
 		onSave,
