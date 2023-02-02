@@ -1627,13 +1627,23 @@ const saas = {
 			feature: 'product',
 		},
 		{
+			api: 'post_saas_product_bulk_product_upload',
+			access_type: 'private',
+			module: 'product',
+			feature: 'product',
+		},
+		{
 			api: 'get_saas_product_get_excel',
 			access_type: 'private',
 			module: 'product',
 			feature: 'product',
-		},			
-			
+		},	
+		{
+			api: 'post_saas_product_bulk_product_upload_get_excel',
+			access_type: 'private',
+			module: 'product',
+			feature: 'product',
+		},				
 	],
-
 };
 export default saas;
