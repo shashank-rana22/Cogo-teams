@@ -79,20 +79,24 @@
 		.ui_table_head_row {
 			.ui_table_head_cell {
 				font-size: 14px;
-				color: black;
+				color: var(--font-color);
 			}
 		}
 
 		.ui_table_body_container {
-			background-color: white;
+			background-color: var(--color-secondary-5);
 
 			.ui_table_body_row {
 				.ui_table_body_cell {
 					padding-block: 20px;
-					color: #221f20;
+					color: var(--font-color);
 					cursor: pointer;
-					border-bottom: 20px solid var(--color-tertiary-beige-4);
+					border-bottom: 10px solid var(--color-accent-orange-5);
 				}
+			}
+
+			.ui_table_body_row:hover {
+				background-color: var(--color-secondary-greyscale-1);
 			}
 		}
 	}
