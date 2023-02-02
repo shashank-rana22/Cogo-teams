@@ -13,12 +13,11 @@ const useFclFreightRateForecasting = ({ data = {} }) => {
 		try {
 			await triggerForecaset({
 				data: {
-					...data,
-					shipping_line_id : data?.shipping_line_id || undefined,
-					airline_id       : data?.airline_id || undefined,
-
+					shipping_line_id    : data?.shipping_line_id,
+					origin_port_id      : data?.origin_port_id,
+					destination_port_id : data?.destination_port_id,
+					container_size      : data?.container_size,
 				},
-
 			});
 		} catch (err) {
 			console.log(err);

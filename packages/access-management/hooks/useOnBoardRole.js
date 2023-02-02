@@ -62,7 +62,7 @@ const useOnBoardRole = () => {
 				params: { filters: { id: id || role_id }, partner_data_required: true },
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 
@@ -74,7 +74,7 @@ const useOnBoardRole = () => {
 		const navObj = getNavData(navigation, navigationMappings);
 		return getNavigationOptions(permissions, navObj || {});
 	};
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const onBack = useCallback(() => router.push('/list-roles'), []);
 
 	const handleRoleImport = (vals) => {
@@ -96,6 +96,7 @@ const useOnBoardRole = () => {
 		if (role_id) {
 			getRole();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [role_id]);
 
 	return {

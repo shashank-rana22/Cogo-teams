@@ -11,7 +11,7 @@ const mapping = {
 	air_freight : 'weight',
 };
 const unitMapping = {
-	fcl_freight : 'Containers',
+	fcl_freight : '',
 	lcl_freight : 'Mt',
 	air_freight : 'Kgs',
 };

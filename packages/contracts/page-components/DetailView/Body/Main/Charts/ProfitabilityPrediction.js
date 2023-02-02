@@ -41,12 +41,12 @@ function ProfitabilityPrediction({ activePair }) {
 					: null}
 			</div>
 			<div className={styles.stats}>
-				{activePair?.service_type === 'fcl_freight' && (forecastData || []).length ? (
+				{activePair?.service_type === 'fcl_freight' && forecastData ? (
 					<div className={styles.graph_heading}>
 						Predicted Avg. Price Data for the next 30 Days
 					</div>
 				) : null}
-				{activePair?.service_type === 'fcl_freight'
+				{activePair?.service_type === 'fcl_freight' && forecastData
 					? <FutureFrequency data={forecastData} avgPrice={avgPrice} /> : null}
 
 				<div className={styles.graph_heading}>

@@ -496,5 +496,25 @@ const navigationMappingSeller = {
 		isNew         : true,
 		showInNav     : true,
 	},
+	saas_premium_services: {
+		key         : 'saas_premium_services',
+		title       : 'Premium Services',
+		type        : 'link',
+		icon        : 'nav-payments',
+		module_type : 'dashboards',
+		isNew       : true,
+		showInNav   : true,
+		isSubNavs   : true,
+		options     : [
+			{
+				key           : 'saas_premium_services-duties_and_taxes',
+				title         : 'Duties & Taxes Calculator',
+				href          : '/saas/premium-services/duties-taxes-calculator',
+				as            : '/saas/premium-services/duties-taxes-calculator',
+				main_apis     : [],
+				possible_apis : app_apis.saas_premium_services,
+			},
+		],
+	},
 };
 export default navigationMappingSeller;

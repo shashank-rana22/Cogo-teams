@@ -8,23 +8,19 @@ import { useState, useEffect, useCallback } from 'react';
 import styles from '../page-components/RoleList/styles.module.css';
 import { API } from '../utils/api';
 
-const globalCs = {
-	PARENT_PARTNER_ENTITY_ID: '6fd98605-9d5d-479d-9fac-cf905d292b88',
-};
-
 const getFilter = (val) => {
 	if (val === 'cogoport') {
 		return {
-			stakeholder_id          : globalCs.PARENT_PARTNER_ENTITY_ID,
+			entity_types            : ['cogoport'],
 			stakeholder_type        : 'partner',
 			exclude_stakeholder_ids : undefined,
 		};
 	}
 	if (val === 'channel_partner') {
 		return {
-			exclude_stakeholder_ids : [globalCs.PARENT_PARTNER_ENTITY_ID],
-			stakeholder_id          : undefined,
-			stakeholder_type        : 'partner',
+			entity_types     : ['channel_partner'],
+			stakeholder_id   : undefined,
+			stakeholder_type : 'partner',
 		};
 	}
 	if (val === 'customer') {
@@ -32,12 +28,14 @@ const getFilter = (val) => {
 			stakeholder_type        : 'organization',
 			exclude_stakeholder_ids : undefined,
 			stakeholder_id          : undefined,
+			entity_types            : undefined,
 		};
 	}
 	return {
 		stakeholder_type        : undefined,
 		exclude_stakeholder_ids : undefined,
 		stakeholder_id          : undefined,
+		entity_types            : undefined,
 	};
 };
 
@@ -76,9 +74,9 @@ const useRoleList = () => {
 			},
 		});
 	}, [filters, params, trigger]);
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => onChangeParams({ page: 1 }), [filters]);
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => getListAuthRoles(), [params]);
 
 	const onChangeShowCreateRoleModal = useCallback((value = false) => {

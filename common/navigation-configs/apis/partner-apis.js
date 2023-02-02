@@ -13,6 +13,11 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -534,6 +539,26 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'create_organization_exchange_rate_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -831,6 +856,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
 			api          : 'get_organization_commodity_segmentation_stats',
 			access_type  : 'parivate',
 			service_name : 'organization',
@@ -839,70 +869,6 @@ const partner = {
 			api          : 'get_lead_organization_commodity_segmentation_stats',
 			access_type  : 'private',
 			service_name : 'lead',
-		},
-		{
-			api          : 'create_organization_document_handling_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_partner_addresses',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'update_organization_document_handling_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_organization_document_handling_user_detail',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_document_handling_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_organization_additional_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_organization_additional_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_additional_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_organization_invoice_preference',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_organization_invoice_preference',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_invoice_preference',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_organization_invoice_preferences',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
 		},
 		{
 			api          : 'get_organization_commodity_trade_port_pairs',
@@ -956,6 +922,16 @@ const partner = {
 			api          : 'get_lead_organization_segment_trade_information',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'get_organization_communication_log_info',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organizations_communication_log_stats',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'get_organizations_segmentation_stats',
@@ -1115,6 +1091,18 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'demand_crm',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_organization_trade_intelligence',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
+		},
+		{
+			api          : 'get_lead_organization_country_shipment_stats',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organization_country_shipment_stats',
@@ -1602,6 +1590,16 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
+		},
+		{
+			api          : 'create_organization_exchange_rate_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	supply_crm: [
@@ -2179,6 +2177,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 			feature      : 'inventory_management',
+		},
+		{
+			api          : 'create_channel_partner_persona',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	support_crm: [
@@ -4048,12 +4051,22 @@ const partner = {
 			service_name : 'contract',
 		},
 		{
-			api          : 'create_bulk_contract_plan_sheet_upload',
+			api          : 'update_bulk_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_plan_sheet_upload',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
 		{
 			api          : 'get_contract_plan_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contracts',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
@@ -5759,6 +5772,36 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'get_cc_communication_stats',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'send_demand_notice_to_prelegal_accounts',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'send_demand_notice_to_prelegal_accounts',
+			access_type  : 'private',
+			service_name : 'sage',
+		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_invoices',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -5860,6 +5903,11 @@ const partner = {
 			api          : 'list_monthly_profit',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	pay_later: [
@@ -6853,6 +6901,16 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
+	vietnam_account_receivables: [
+		{
+			api         : 'get_sales_invoice_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
@@ -7631,6 +7689,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_communication_template_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
@@ -7871,6 +7934,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_servetel_agent',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	prm_feedback: [
 		{
@@ -7887,6 +7965,13 @@ const partner = {
 			api          : 'list_segments',
 			access_type  : 'private',
 			service_name : 'segmentation',
+		},
+		{
+
+			api          : 'create_duplicate_promotion',
+			access_type  : 'private',
+			service_name : 'promotion',
+
 		},
 		{
 			api          : 'list_promotions',
@@ -8812,6 +8897,28 @@ const partner = {
 			service_name : 'organization',
 		},
 	],
+	rail_freight: [
+		{
+			api          : 'list_rail_domestic_freight_rates',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_bulk_operation',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+		},
+	],
 	voice_call: [
 		{
 			api          : 'list_organizations',
@@ -9190,6 +9297,108 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'platform_config',
 		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+	],
+	cogo_fx: [
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_live_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_cogofx_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_cogofx_exchange_rates',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_exchange_rate_revised_cogofx',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_exchange_rate_cogofx_settings',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_transactional_currencies',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'update_exchange_rate_transactional_currencies',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_cogofx_conversions',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'list_exchange_rate_currencies',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_analytics_data',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'list_exchange_rate_organization_approvals',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'list_organization_approvals',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'create_organization_exchange_rate_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_exchange_rate_currency_conversion',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_invoice_currency_pair_conversions',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 	],
 	contracts: [
 		{
@@ -9204,6 +9413,11 @@ const partner = {
 		},
 		{
 			api          : 'update_contract',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_service',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
