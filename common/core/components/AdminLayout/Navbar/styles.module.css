@@ -73,12 +73,12 @@
 	}
 
 	&:hover {
-		color: var(--color-secondary-5);
+		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 
 	&:active {
-		color: var(--color-secondary-5);
+		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 }
@@ -117,9 +117,10 @@
 	font-weight: 500 !important;
 	cursor: pointer;
 	background-color: #fffce6;
-	border-radius: 4px;
+	border-radius: 6px;
 	transition: background-color 0.1s linear, color 0.1s linear;
 	will-change: background-color;
+	color: var(--font-color-secondary);
 
 	span {
 		flex: 1;
@@ -130,6 +131,7 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		user-select: none;
+		color: var(--font-color-secondary);
 	}
 
 	svg {
@@ -142,18 +144,18 @@
 	}
 
 	&:hover {
-		color: var(--color-secondary-5);
+		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 
 	&:active {
-		color: var(--color-secondary-5);
+		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 }
 
 .active_option {
-	color: var(--color-secondary-5);
+	color: var(--font-color-secondary);
 	background-color: #fef199;
 }
 
@@ -176,7 +178,9 @@
 }
 
 .active_item {
+	color: var(--font-color-secondary);
 	background-color: #fef199;
+
 }
 
 .inner_container {
