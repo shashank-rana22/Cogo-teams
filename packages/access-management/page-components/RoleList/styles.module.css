@@ -96,7 +96,7 @@
 			}
 
 			.ui_table_body_row:hover {
-				background-color: var(--color-secondary-greyscale-1);
+				background-color: unset;
 			}
 		}
 	}
