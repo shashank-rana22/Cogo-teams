@@ -4335,6 +4335,11 @@ const partner = {
 			service_name : 'payment',
 		},
 		{
+			api          : 'get_all_possible_payment_methods',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
 			api          : 'update_service_payment_modes',
 			access_type  : 'private',
 			service_name : 'payment',
