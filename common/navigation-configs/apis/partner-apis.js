@@ -871,70 +871,6 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
-			api          : 'create_organization_document_handling_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_partner_addresses',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api          : 'update_organization_document_handling_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_organization_document_handling_user_detail',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_document_handling_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_organization_additional_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_organization_additional_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_additional_preference',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_organization_invoice_preference',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_organization_invoice_preference',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
-			api          : 'get_organization_invoice_preference',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_organization_invoice_preferences',
-			access_type  : 'private',
-			feature      : 'demand_crm',
-			service_name : 'organization',
-		},
-		{
 			api          : 'get_organization_commodity_trade_port_pairs',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -986,6 +922,16 @@ const partner = {
 			api          : 'get_lead_organization_segment_trade_information',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'get_organization_communication_log_info',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organizations_communication_log_stats',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'get_organizations_segmentation_stats',
@@ -1145,6 +1091,18 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'demand_crm',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_organization_trade_intelligence',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
+		},
+		{
+			api          : 'get_lead_organization_country_shipment_stats',
+			access_type  : 'private',
+			feature      : 'demand_crm',
+			service_name : 'lead',
 		},
 		{
 			api          : 'get_organization_country_shipment_stats',
@@ -4360,6 +4318,33 @@ const partner = {
 			service_name : 'condition',
 		},
 	],
+	payment_modes_and_methods: [
+		{
+			api          : 'list_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'create_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'get_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'update_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+	],
 	condition: [
 		{
 			api          : 'update_condition',
@@ -5793,6 +5778,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'get_organization_wise_outstanding',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_outstanding_invoices',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -5894,6 +5889,11 @@ const partner = {
 			api          : 'list_monthly_profit',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	pay_later: [
@@ -6885,6 +6885,16 @@ const partner = {
 			access_type : 'private',
 			module      : 'Bpr',
 			feature     : 'Bpr',
+		},
+	],
+	vietnam_account_receivables: [
+		{
+			api         : 'get_sales_invoice_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
 		},
 	],
 	settlement: [
