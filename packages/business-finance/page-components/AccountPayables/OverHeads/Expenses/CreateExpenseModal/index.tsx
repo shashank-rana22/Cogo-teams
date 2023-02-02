@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Timeline from '../Timeline';
 
 import RecurringForm from './RecurringForm';
+import styles from './styles.module.css';
 
 interface Props {
 	setShowModal:any,
@@ -32,11 +33,11 @@ function CreateExpenseModal({
 	return (
 		<Modal size="xl" show={showModal} onClose={() => setShowModal(false)} placement="top">
 			<Modal.Header title={`CREATE EXPENSE - ${createExpenseType}`} />
-			<Modal.Body>
+			<Modal.Body className={styles.modalData}>
 				<div>
 					<Timeline active={active} timeline={timeline} />
 				</div>
-				<div style={{ marginTop: '40px' }}>
+				<div style={{ marginTop: '20px' }}>
 					{createExpenseType === 'RECURRING' ? <RecurringForm /> : 'non recurring'}
 				</div>
 

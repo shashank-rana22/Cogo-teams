@@ -1,6 +1,8 @@
-import { ControlProps } from '../../../../commons/Interfaces';
+interface Props {
+	repeatEvery?:string
+}
 
-export const recurringExpenseDetails : ControlProps[] = [
+export const recurringExpenseDetails = (filters:Props, setFilters:Function) => [
 	{
 		span    : 12,
 		groupBy : [
@@ -8,7 +10,6 @@ export const recurringExpenseDetails : ControlProps[] = [
 				name           : 'cogoEntity',
 				label          : 'Cogo Entity*',
 				type           : 'select',
-				isClearable    : true,
 				multiple       : false,
 				defaultOptions : false,
 				placeholder    : 'Entity',
@@ -24,7 +25,6 @@ export const recurringExpenseDetails : ControlProps[] = [
 				name           : 'vendorName',
 				label          : 'Vendor Name*',
 				type           : 'select',
-				isClearable    : true,
 				multiple       : false,
 				defaultOptions : false,
 				placeholder    : 'Category',
@@ -37,6 +37,7 @@ export const recurringExpenseDetails : ControlProps[] = [
 				name        : 'pan',
 				label       : 'PAN',
 				type        : 'textarea',
+				style       : { borderRadius: '4px' },
 				placeholder : 'Autofilled PAN',
 				span        : 2,
 			},
@@ -44,7 +45,6 @@ export const recurringExpenseDetails : ControlProps[] = [
 				name           : 'paymentType',
 				label          : 'Payment Type*',
 				type           : 'select',
-				isClearable    : true,
 				multiple       : false,
 				defaultOptions : false,
 				placeholder    : 'Type',
@@ -58,7 +58,6 @@ export const recurringExpenseDetails : ControlProps[] = [
 				name           : 'expenseCategory',
 				label          : 'Expense Category*',
 				type           : 'select',
-				isClearable    : true,
 				multiple       : false,
 				defaultOptions : false,
 				placeholder    : 'Category',
@@ -141,6 +140,125 @@ export const recurringExpenseDetails : ControlProps[] = [
 						value : 'Other Expense',
 					},
 				],
+			},
+		],
+	},
+	{
+		span    : 12,
+		groupBy : [
+			{
+				name           : 'expenseSubCategory',
+				label          : 'Expense Sub-Category*',
+				type           : 'select',
+				multiple       : false,
+				defaultOptions : false,
+				placeholder    : 'Sub-Category',
+				span           : 2,
+				options        : [
+				],
+			},
+			{
+				name        : 'payableAmount',
+				label       : 'Payable Amount*',
+				type        : 'textarea',
+				style       : { borderRadius: '4px' },
+				placeholder : 'Amount',
+				span        : 2,
+			},
+			{
+				name           : 'repeatEvery',
+				label          : 'Repeat Every*',
+				type           : 'select',
+				multiple       : false,
+				defaultOptions : false,
+				value          : filters.repeatEvery,
+				onChange       : (e:any) => setFilters({ ...filters, repeatEvery: e }),
+				span           : 1,
+				options        : [
+					{ label: 'Week', value: 'week' },
+					{ label: '2 Weeks', value: '2weeks' },
+					{ label: 'Month', value: 'month' },
+					{ label: 'Quarter', value: 'quarter' },
+					{ label: 'Year', value: 'year' },
+				],
+			},
+			{
+				name  : 'startDate',
+				label : 'Start Date*',
+				type  : 'datepicker',
+				span  : 1.5,
+			},
+			{
+				name  : 'endDate',
+				label : 'End Date*',
+				type  : 'datepicker',
+				span  : 1.5,
+			},
+			{
+				name    : 'neverExpires',
+				type    : 'checkboxGroup',
+				options : [{ label: 'Never Expires', value: 'neverExpires', name: 'neverExpires' }],
+				// onChange: disable end date
+				span    : 1.8,
+			},
+
+		],
+
+	},
+	{
+		span    : 12,
+		groupBy : [
+			{
+				name           : 'branch',
+				label          : 'Branch',
+				type           : 'select',
+				clearable      : true,
+				multiple       : false,
+				defaultOptions : false,
+				span           : 2,
+				options        : [
+					{ label: 'Mumbai', value: 'mumbai' },
+					{ label: 'Gurgaon - PDC', value: 'gurgaon-pdc' },
+					{ label: 'Gurgaon - Augusta Point', value: 'gurgaon-augusta-point' },
+					{ label: 'Others', value: 'others' },
+				],
+			},
+			{
+				name           : 'paymentMode',
+				label          : 'Payment Mode',
+				type           : 'select',
+				clearable      : true,
+				multiple       : false,
+				defaultOptions : false,
+				span           : 2,
+				options        : [
+					{ label: 'Pay Run', value: 'payrun' },
+					{ label: 'Non - Pay Run', value: 'nonpPayrun' },
+				],
+			},
+		],
+	},
+	{
+		span    : 12,
+		groupBy : [
+			{
+				name        : 'description',
+				label       : 'Description',
+				type        : 'textarea',
+				placeholder : 'Remark here...',
+				span        : 5,
+				style       : { height: '100px', borderRadius: '4px', width: '410px' },
+			},
+			{
+				name          : 'uploadAgreement',
+				label         : 'Upload Agreement*',
+				type          : 'upload',
+				draggable     : true,
+				loading       : true,
+				dropareaProps : { heading: 'Upload your file here', subHeading: 'supports - jpeg, pdf, docx' },
+				className     : 'file-uploader',
+				style         : { width: '410px' },
+				span          : 5,
 			},
 		],
 	},

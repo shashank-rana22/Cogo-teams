@@ -63,12 +63,31 @@ export interface Options {
 	value: string;
 }
 
-export interface ControlProps {
-	span?: number;
-	name?: string;
+interface GroupByProps {
+	span?: number,
+	name?: string,
 	type?: string;
 	options?: Options[];
 	groupBy?:ControlProps[];
+	style?:React.CSSProperties;
+	label?:string;
+	multiple?:boolean;
+	defaultOptions?:boolean;
+	placeholder?:string;
+	onChange?:any;
+	draggable?:boolean;
+	loading?:boolean;
+	value?:any;
+	dropareaProps?: any;
+	className?:string;
+}
+
+export interface ControlProps {
+	span?: number,
+	name?: string,
+	type?: string;
+	options?: Options[];
+	groupBy?:GroupByProps[];
 	style?:React.CSSProperties;
 	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties;
 }
