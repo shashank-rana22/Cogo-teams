@@ -1,7 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
-import controls from './utils/controls';
+import controls from '../../../../../utils/get-configurations-filter-controls';
 
 const useFilterContent = () => {
 	const [showFilters, setShowFilters] = useState(false);
