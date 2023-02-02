@@ -77,9 +77,9 @@
 	span {
 		flex: 1;
 		padding-top: 1px;
+		margin-left: 10px;
 		overflow: hidden;
 		font-weight: 500;
-		margin-left: 10px;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		user-select: none;
