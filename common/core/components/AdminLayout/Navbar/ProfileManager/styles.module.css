@@ -10,7 +10,7 @@
 
 .list_container {
 	display: block;
-	padding: 0;
+	padding: 0px;
 	margin: 0;
 	margin-bottom: 16px;
 	list-style-type: none;

@@ -16,13 +16,18 @@ const getCondition = (urlItem) => {
 
 const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
 
-const getSideBarConfigs = (
+const getSideBarConfigs = ({
 	userData,
 	dashboardUrls = [],
-) => {
+	pinnedNavKeys = [],
+}) => {
 	const pNavs = userData?.permissions_navigations || {};
 
-	const filteredKeys = Object.keys(navigationMappingAdmin);
+	const modifiedPinnedNavKeys = pinnedNavKeys.filter((key) => Object.keys(navigationMappingAdmin).includes(key));
+
+	const filteredKeys = Object.keys(navigationMappingAdmin).filter(
+		(key) => !modifiedPinnedNavKeys.includes(key),
+	);
 
 	const getNavMappings = (navMappingKeys) => {
 		const nav_items = [];
@@ -75,7 +80,8 @@ const getSideBarConfigs = (
 
 	return {
 		nav_items: {
-			partner: getNavMappings(filteredKeys),
+			partner    : getNavMappings(filteredKeys),
+			pinnedNavs : getNavMappings(modifiedPinnedNavKeys),
 		},
 	};
 };
