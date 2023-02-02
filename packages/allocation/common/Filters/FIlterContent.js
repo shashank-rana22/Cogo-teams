@@ -1,18 +1,9 @@
 import { Button } from '@cogoport/components';
-import {
-	MultiselectController,
-	SelectController,
-	ChipsController,
-	useForm,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
+
+import { getFieldController } from '../Form/Controlled';
 
 import styles from './styles.module.css';
-
-const ELEMENT_CONTROLLER_MAPPING = {
-	select      : SelectController,
-	multiSelect : MultiselectController,
-	chips       : ChipsController,
-};
 
 function FilterContent({
 	heading,
@@ -34,7 +25,7 @@ function FilterContent({
 	};
 
 	const renderElement = () => controls.map((control) => {
-		const Element = ELEMENT_CONTROLLER_MAPPING[control.type] || null;
+		const Element = getFieldController(control.type) || null;
 
 		if (!Element) return null;
 
