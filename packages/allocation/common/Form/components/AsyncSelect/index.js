@@ -11,9 +11,9 @@ function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, ...res
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
 	const getAsyncOptionsProps = useGetAsyncOptions({
-		...(defaultParams),
+		...defaultParams,
 		initialCall,
-		params,
+		params   : params || defaultParams.params,
 		labelKey : rest.labelKey || defaultParams.labelKey,
 		valueKey : rest.valueKey || defaultParams.valueKey,
 	});
