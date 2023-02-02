@@ -10,15 +10,13 @@ function Header(props) {
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<Toggle
-					name="allocation_type"
-					size="md"
-					disabled={false}
-					offLabel="Organization"
-					onLabel="Partner"
-				/>
-			</div>
+			<Toggle
+				name="allocation_type"
+				size="md"
+				disabled={false}
+				offLabel="Organization"
+				onLabel="Partner"
+			/>
 
 			<div className={styles.filter_and_create}>
 				<Button size="md" themeType="secondary">
