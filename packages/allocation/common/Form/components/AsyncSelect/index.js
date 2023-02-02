@@ -1,10 +1,18 @@
 import { Select } from '@cogoport/components';
 import { useGetAsyncOptions } from '@cogoport/forms';
-import { asyncFieldsOrganizations } from '@cogoport/forms/utils/getAsyncFields';
+import {
+	asyncFieldsOrganizations,
+	asyncFieldsOrganizationUser,
+	asyncFieldsPartner,
+	asyncFieldsPartnerUsers,
+} from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
 
 const keyAsyncFieldsParamsMapping = {
-	organizations: asyncFieldsOrganizations,
+	organizations      : asyncFieldsOrganizations,
+	organization_users : asyncFieldsOrganizationUser,
+	partners           : asyncFieldsPartner,
+	partner_users      : asyncFieldsPartnerUsers,
 };
 
 function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, ...rest }) {

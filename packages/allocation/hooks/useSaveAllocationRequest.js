@@ -17,8 +17,6 @@ import getStakeholderTypeOptions from '../utils/stakeholder-options';
 // Todo seperate it out in utils
 
 const useSaveAllocationRequest = () => {
-	// const { data } = props;
-
 	const controls = getControls();
 
 	const formProps = useForm({
@@ -40,46 +38,46 @@ const useSaveAllocationRequest = () => {
 	// 	initialCall: false,
 	// });
 
-	const orgUserOptions = useGetAsyncOptions({
-		...asyncFieldsOrganizationUser(),
-		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-				organization_id,
-			},
-			pagination_data_required: false,
-		},
-	});
+	// const orgUserOptions = useGetAsyncOptions({
+	// 	...asyncFieldsOrganizationUser(),
+	// 	initialCall : false,
+	// 	params      : {
+	// 		filters: {
+	// 			status: 'active',
+	// 			organization_id,
+	// 		},
+	// 		pagination_data_required: false,
+	// 	},
+	// });
 
-	const partnerOptions = useGetAsyncOptions({
-		...asyncFieldsPartner(),
-		initialCall: false,
-	});
+	// const partnerOptions = useGetAsyncOptions({
+	// 	...asyncFieldsPartner(),
+	// 	initialCall: false,
+	// });
 
-	const partnerUserOptions = useGetAsyncOptions({
-		...asyncFieldsPartnerUsers(),
-		initialCall : false,
-		params      : {
-			filters: {
-				status: 'active',
-				partner_id,
-			},
-			pagination_data_required: false,
-		},
-	});
+	// const partnerUserOptions = useGetAsyncOptions({
+	// 	...asyncFieldsPartnerUsers(),
+	// 	initialCall : false,
+	// 	params      : {
+	// 		filters: {
+	// 			status: 'active',
+	// 			partner_id,
+	// 		},
+	// 		pagination_data_required: false,
+	// 	},
+	// });
 
-	const stakeholderOptions = useGetAsyncOptions({
-		...asyncFieldsPartnerUsers(),
-		initialCall : false,
-		params      : {
-			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
-			},
-			page_limit: 100,
-		},
-	});
+	// const stakeholderOptions = useGetAsyncOptions({
+	// 	...asyncFieldsPartnerUsers(),
+	// 	initialCall : false,
+	// 	params      : {
+	// 		filters: {
+	// 			status               : 'active',
+	// 			partner_entity_types : ['cogoport'],
+	// 		},
+	// 		page_limit: 100,
+	// 	},
+	// });
 
 	const api = useRequest({
 		url    : '/create_allocation_request',
@@ -105,16 +103,17 @@ const useSaveAllocationRequest = () => {
 		}
 	};
 
-	const controlNameOptionsMapping = {
-		organization_id      : {}, // orgOptions,
-		organization_user_id : orgUserOptions,
-		partner_id           : partnerOptions,
-		partner_user_id      : partnerUserOptions,
-		stakeholder_type     : { options: stakeholderTypeOptions },
-		stakeholder_id       : stakeholderOptions,
-	};
+	// const controlNameOptionsMapping = {
+	// 	organization_id      : {}, // orgOptions,
+	// 	organization_user_id : orgUserOptions,
+	// 	partner_id           : partnerOptions,
+	// 	partner_user_id      : partnerUserOptions,
+	// 	stakeholder_type     : { options: stakeholderTypeOptions },
+	// 	stakeholder_id       : stakeholderOptions,
+	// };
 
-	const modifiedControls = controls.map((control) => {
+	const modifiedControls = [];
+	controls.map((control) => {
 		const { name } = control;
 
 		return {
@@ -125,14 +124,11 @@ const useSaveAllocationRequest = () => {
 			...(name === 'partner_user_id' && {
 				disabled: !partner_id,
 			}),
-			...(controlNameOptionsMapping[name] || {}),
+			// ...(controlNameOptionsMapping[name] || {}),
 		};
-	});
-
-	const newControls = [];
-	modifiedControls.forEach((control) => {
+	}).forEach((control) => {
 		if (SERVICE_TYPE_MAPPING[service_type]?.includes(control.name)) {
-			newControls.push(control);
+			modifiedControls.push(control);
 		}
 	});
 
@@ -140,7 +136,7 @@ const useSaveAllocationRequest = () => {
 		onSave,
 		loading,
 		formProps,
-		controls: newControls,
+		controls: modifiedControls,
 	};
 };
 
