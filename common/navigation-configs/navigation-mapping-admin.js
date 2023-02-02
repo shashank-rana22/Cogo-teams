@@ -1338,7 +1338,7 @@ const navigationMappingAdmin = {
 				href          : '/kam-desk',
 				as            : '/kam-desk',
 				type          : 'link',
-				main_apis     : ['list_kam_booking_desk_shipments'],
+				main_apis     : ['list_kam_desk_shipments'],
 				possible_apis : [...apis.shipment],
 			},
 		],
