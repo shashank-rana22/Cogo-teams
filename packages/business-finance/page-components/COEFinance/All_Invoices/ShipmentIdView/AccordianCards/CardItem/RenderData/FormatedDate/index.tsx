@@ -18,12 +18,12 @@ interface PropsType {
 
 function FormatedDate({ item, field }: PropsType) {
 	const { billDate, dueDate, invoiceDate, createdDate } = item || {};
-	const getBillDate = formatDate(billDate!, 'dd/MMM/yyyy', {}, true);
-	const getDueDate = formatDate(dueDate!, 'dd/MMM/yyyy', {}, true);
-	const getInvoiceDate = formatDate(invoiceDate!, 'dd/MMM/yyyy', {}, true);
+	const getBillDate = formatDate(billDate!, 'dd MMM, yyyy', {}, true);
+	const getDueDate = formatDate(dueDate!, 'dd MMM, yyyy', {}, true);
+	const getInvoiceDate = formatDate(invoiceDate!, 'dd MMM, yyyy', {}, true);
 	const getLastModifiedDate = formatDate(
 		createdDate!,
-		'dd/MMM/yyyy hh:mm:ss',
+		'dd MMM, yyyy hh:mm:ss',
 		{},
 		true,
 	);
