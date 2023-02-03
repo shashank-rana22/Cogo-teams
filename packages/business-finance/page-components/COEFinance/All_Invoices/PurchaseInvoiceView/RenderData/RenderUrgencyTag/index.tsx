@@ -1,4 +1,3 @@
-import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
@@ -21,18 +20,10 @@ function RenderUrgencyTag({ item, field }:Props) {
 	return (
 		<div>
 			{item?.urgencyTag && field?.key === 'urgencyTag' ? (
-				<Tooltip
-					placement="top"
-					content={(
-						<div className={styled.urgency}>
-							{item?.urgencyTag[0]}
-						</div>
-					)}
-				>
-					<div className={styled.urgency}>
-						{showOverflowingNumber(item?.urgencyTag[0], 8)}
-					</div>
-				</Tooltip>
+
+				<div className={styled.urgency}>
+					{showOverflowingNumber(item?.urgencyTag[0], 8)}
+				</div>
 
 			) : '-'}
 		</div>

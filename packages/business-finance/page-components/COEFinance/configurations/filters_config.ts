@@ -1,24 +1,6 @@
 import { ControlProps } from '../../commons/Interfaces';
 
 export const FILTERS : ControlProps[] = [
-	// {
-	// 		name: 'zone',
-	// 		type: 'select',
-	// 		placeholder: 'Geography',
-	// 		className: 'primary md',
-	//      style:{width:"210px"},
-	// 		hideSelectedOptions: false,
-	// 		multiple: true,
-	// 		isMulti: true,
-	// 		span: 4.5,
-	// 		isClearable: true,
-	// 		options: [
-	// 			{ label: 'North', value: 'north' },
-	// 			{ label: 'East', value: 'east' },
-	// 			{ label: 'South', value: 'south' },
-	// 			{ label: 'West', value: 'west' },
-	// 		],
-	// },
 	{
 		name    : 'Services',
 		span    : 12,
@@ -57,14 +39,14 @@ export const FILTERS : ControlProps[] = [
 				label       : 'Invoice Date',
 				name        : 'billDate',
 				type        : 'singleDateRange',
-				placeholder : 'Created At',
+				placeholder : 'Invoice Date',
 				span        : 3.5,
 			},
 			{
 				label       : 'Payment Due Date',
 				name        : 'dueDate',
 				type        : 'singleDateRange',
-				placeholder : 'Invoice Date',
+				placeholder : 'Payment Due Date',
 				span        : 3.5,
 			},
 			{
@@ -77,21 +59,6 @@ export const FILTERS : ControlProps[] = [
 
 		],
 	},
-	// {
-	// 	name:'Status',
-	// 	span:12,
-	// 	groupBy: [
-	//     {
-	// 		name: 'Status',
-	// 		type: 'tags',
-	// 		className: 'primary md',
-	// 		span: 12,
-	// 		options: [
-	// 			{ label: 'Initiated', value: 'initiated' },
-	// 			{ label: 'Finance Accepted', value: 'finance_accepted' },
-	// 		],
-	// 	}],
-	// },
 	{
 		name    : 'Invoice Type',
 		span    : 12,
