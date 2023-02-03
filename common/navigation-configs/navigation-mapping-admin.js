@@ -1670,23 +1670,23 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		options     : [
+		main_apis   : [
+			'list_allocation_configurations',
+			'list_allocation_relations',
+			'list_allocation_requests',
+			'list_allocation_quotas',
+		],
+		options: [
 			{
-				key       : 'allocations-core_engine',
-				title     : 'Core Engine',
-				href      : '/allocation/core-engine',
-				as        : '/allocation/core-engine',
-				main_apis : [
-					'list_allocation_configurations',
-					'list_allocation_relations',
-					'list_allocation_requests',
-					'list_allocation_quotas',
-				],
+				key   : 'allocations-core_engine',
+				title : 'Core Engine',
+				href  : '/allocation/core-engine',
+				as    : '/allocation/core-engine',
+
 				possible_apis: apis.allocation_engine,
 			},
 		],
 	},
-
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
