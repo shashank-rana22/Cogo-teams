@@ -1763,7 +1763,7 @@ const saas = {
 	],
 	app_saas_trader_eligibilty_check: [
 		{
-			api         : 'get_saas_user_quota_usage',
+			api         : 'saas_get_user_quota_usage',
 			access_type : 'private',
 		},
 		{
