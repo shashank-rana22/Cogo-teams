@@ -63,7 +63,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		renderCustomer: (itemData: ItemProps, field: FieldProps) => (
 			<RenderCustomer itemData={itemData} field={field} />
 		),
-		rendeFormate: (itemData: ItemProps, field: FieldProps) => (
+		renderFormate: (itemData: ItemProps, field: FieldProps) => (
 			<FormatedDate item={itemData} field={field} />
 		),
 		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,

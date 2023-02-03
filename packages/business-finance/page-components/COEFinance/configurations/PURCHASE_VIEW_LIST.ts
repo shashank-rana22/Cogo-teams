@@ -51,7 +51,7 @@ const PURCHASE_VIEW_CONFIG = {
 			label : 'Invoice Amount',
 			key   : 'grandTotal',
 			span  : 1.2,
-			func  : 'rendeFormate',
+			func  : 'renderFormate',
 		},
 		{
 			label   : 'Last Modified Date',
@@ -63,14 +63,14 @@ const PURCHASE_VIEW_CONFIG = {
 		{
 			label   : 'Invoice Date',
 			key     : 'billDate',
-			func    : 'rendeFormate',
+			func    : 'renderFormate',
 			span    : 1.2,
 			sorting : { name: 'billDateSortType' },
 		},
 		{
 			label   : 'Payment Due Date',
 			key     : 'dueDate',
-			func    : 'rendeFormate',
+			func    : 'renderFormate',
 			span    : 1.64,
 			sorting : { name: 'dueDateSortType' },
 		},
