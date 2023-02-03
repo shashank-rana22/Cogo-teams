@@ -70,8 +70,8 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		renderViewMore : (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
-		renderUrgencyTag: (itemData: ItemProps) => (
-			<RenderUrgencyTag item={itemData} />
+		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
+			<RenderUrgencyTag item={itemData} field={field} />
 		),
 	};
 
