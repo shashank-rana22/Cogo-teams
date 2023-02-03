@@ -20,7 +20,12 @@ const useCreateConfigurations = ({
 
 	const controls = getCreateConfigurationsControls({ value, setSegment });
 
-	const formProps = useForm({ defaultValues: value });
+	const formProps = useForm({
+		defaultValues: {
+			...value,
+			service_type: value.service_type || 'organization',
+		},
+	});
 
 	const {
 		reset,

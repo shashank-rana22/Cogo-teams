@@ -1,10 +1,15 @@
-const getCreateConfigurationsControls = ({ value = {}, setSegment = () => {} }) => {
+import { startCase } from '@cogoport/utils';
+
+const getCreateConfigurationsControls = ({
+	value = {},
+	// setSegment = () => {}
+}) => {
 	const controls = [
 		{
 			name    : 'service_type',
 			label   : 'Service Type',
 			type    : 'radioGroup',
-			value   : 'organization',
+			value   : value.service_type || 'organization',
 			options : [
 				{ value: 'organization', label: 'Organization' },
 				{ value: 'lead_organization', label: 'Lead Organization' },
@@ -18,9 +23,10 @@ const getCreateConfigurationsControls = ({ value = {}, setSegment = () => {} }) 
 			name        : 'role_ids',
 			label       : 'Roles',
 			placeholder : 'Select roles',
-			type        : 'asyncMultiSelect',
+			type        : 'asyncSelect',
+			multiple    : true,
 			asyncKey    : 'partner_roles',
-			initialCall : true,
+			initialCall : false,
 			value       : value.role_ids,
 			params      : {
 				permissions_data_required : false,
@@ -38,7 +44,7 @@ const getCreateConfigurationsControls = ({ value = {}, setSegment = () => {} }) 
 			name        : 'user_ids',
 			label       : 'Users',
 			placeholder : 'Select Users',
-			type        : 'asynSelect',
+			type        : 'asyncSelect',
 			multiple    : true,
 			asyncKey    : 'partner_users',
 			initialCall : false,
@@ -67,16 +73,22 @@ const getCreateConfigurationsControls = ({ value = {}, setSegment = () => {} }) 
 			},
 		},
 		{
-			name         : 'segment_id',
-			label        : 'Segment Type',
-			placeholder  : 'Type segment here...',
-			type         : 'select',
-			asyncKey     : 'segments',
-			initialCall  : true,
-			value        : value.segment_id,
-			handleChange : (obj) => {
-				setSegment(obj);
-			},
+			name               : 'segment_id',
+			label              : 'Segment Type',
+			placeholder        : 'Type segment here...',
+			type               : 'asyncSelect',
+			asyncKey           : 'segments',
+			initialCall        : false,
+			value              : value.segment_id,
+			// labelKey           : 'label',
+			// handleChange : (obj) => {
+			// 	console.log('obj :: ', obj);
+			// 	setSegment(obj);
+			// },
+			getModifiedOptions : ({ options }) => options.map((option) => ({
+				...option,
+				name: `${startCase(option.name)}`,
+			})),
 			params: {
 				segment_type         : 'global',
 				status               : 'active',

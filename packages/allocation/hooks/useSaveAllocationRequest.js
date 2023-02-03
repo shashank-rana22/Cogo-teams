@@ -27,11 +27,7 @@ const useSaveAllocationRequest = (props) => {
 			service_type: 'organization',
 		},
 	});
-	const {
-		watch,
-		setValue,
-		getValues,
-	} = formProps;
+	const { watch, setValue } = formProps;
 
 	const { service_type, organization_id, partner_id :servicePartnerId } = watch();
 
@@ -115,10 +111,6 @@ const useSaveAllocationRequest = (props) => {
 			}),
 		};
 	});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [service_type, organization_id, partner_id]);
-
-	console.log('values :: ', getValues());
 
 	return {
 		onSave,

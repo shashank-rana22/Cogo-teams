@@ -99,12 +99,13 @@ function asyncFieldsOrganizationUser() {
 
 function asyncFieldsCampaignSegments() {
 	return {
-		labelKey    : 'label',
+		labelKey    : 'name',
 		valueKey    : 'id',
 		endpoint    : 'list_segments',
 		initialCall : true,
 		params      : {
-			page_limit: 100,
+			filters    : { status: 'active' },
+			page_limit : 100,
 		},
 	};
 }

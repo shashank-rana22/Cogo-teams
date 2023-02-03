@@ -27,7 +27,13 @@ function CreateConfigurationModal({
 	const { handleSubmit } = formProps;
 
 	return (
-		<Modal size="md" show={showCreateConfig} onClose={setShowCreateConfig} placement="center">
+		<Modal
+			size="lg"
+			show={showCreateConfig}
+			onClose={() => setShowCreateConfig(false)}
+			closeOnOuterClick={false}
+			placement="center"
+		>
 			<Modal.Header title={`${viewType === 'create' ? 'Create' : 'Edit'} Configuration`} />
 
 			<form onSubmit={handleSubmit(onCreate)}>
@@ -43,6 +49,7 @@ function CreateConfigurationModal({
 							themeType="secondary"
 							onClick={() => setShowCreateConfig(false)}
 							disabled={loadingCreate}
+							style={{ marginRight: '10px' }}
 						>
 							CANCEL
 						</Button>

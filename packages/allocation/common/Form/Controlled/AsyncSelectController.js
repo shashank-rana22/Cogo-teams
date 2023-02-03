@@ -10,17 +10,14 @@ function AsyncSelectController(props) {
 
 	return (
 		<Controller
-			key={rest.id}
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, onBlur, value } }) => (
+			render={({ field: { onChange, value } }) => (
 				<AsyncSelect
 					{...rest}
-					key={rest.id}
 					onChange={onChange}
 					value={value}
-					onBlur={onBlur}
 					data-test-value={value}
 				/>
 			)}

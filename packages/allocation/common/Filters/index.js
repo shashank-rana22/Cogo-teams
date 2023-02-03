@@ -23,7 +23,7 @@ function Filters({
 				placement={placement}
 				visible={open}
 				onClickOutside={onClickOutside}
-				render={(
+				render={open ? (
 					<FilterContent
 						heading={heading}
 						controls={controls}
@@ -32,7 +32,7 @@ function Filters({
 						setOpen={setOpen}
 						formProps={formProps}
 					/>
-				)}
+				) : null}
 			>
 				{children || <Button onClick={() => setOpen(!open)}>{name}</Button>}
 			</Popover>
