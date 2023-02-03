@@ -27,11 +27,13 @@ const useAllocationRelations = () => {
 		data_required: true,
 	});
 
-	const [{ loading, data }] = useRequest({
+	const apiData = useRequest({
 		url    : '/list_allocation_relations',
 		method : 'get',
 		params,
 	}, { manual: false });
+
+	const [{ loading, data }] = apiData;
 
 	const { list = [], ...paginationData } = data || {};
 

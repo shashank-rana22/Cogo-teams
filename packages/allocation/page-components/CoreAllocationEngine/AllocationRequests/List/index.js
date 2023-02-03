@@ -5,8 +5,12 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { data, loading } = props;
+	const { data, loading, onChangeParams } = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
+
+	if (loading) {
+		return 'Loading...';
+	}
 
 	if (isEmpty(list)) {
 		return 'Empty';
@@ -14,7 +18,13 @@ function List(props) {
 
 	return (
 		<div>
-			{list.map((item) => <ListItem id="request_list" key={item.id} data={item} />)}
+			{list.map((item) => (
+				<ListItem
+					id="request_list"
+					key={item.id}
+					data={item}
+				/>
+			))}
 
 			<div className={styles.pagination_container}>
 				<Pagination
@@ -22,7 +32,7 @@ function List(props) {
 					currentPage={page}
 					totalItems={total_count}
 					pageSize={pageLimit}
-					// onPageChange={(val) => onChangeParams({ page: val })}
+					onPageChange={(val) => onChangeParams({ page: val })}
 				/>
 			</div>
 		</div>

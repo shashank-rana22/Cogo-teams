@@ -156,7 +156,7 @@ const columnsMapping = [
 	},
 	{
 		key      : 'action',
-		getValue : () => <IcMOverflowDot height={16} width={16} style={{ marginTop: '16px' }} />,
+		getValue : () => <div className={styles.svg_container}><IcMOverflowDot height={16} width={16} /></div>,
 		flex     : 0,
 	},
 ];

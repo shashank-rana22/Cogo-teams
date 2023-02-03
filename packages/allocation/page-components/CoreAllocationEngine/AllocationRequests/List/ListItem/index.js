@@ -1,4 +1,5 @@
 import { Badge, Tooltip } from '@cogoport/components';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { getByKey, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -8,7 +9,7 @@ const columnsMapping = [
 		key      : 'id',
 		label    : 'Serial Id',
 		getValue : (data) => <Badge color="blue" size="lg" text={getByKey(data, 'service.serial_id', '___')} />,
-		flex     : 2,
+		flex     : 1,
 	},
 	{
 		key      : 'service_type',
@@ -16,7 +17,7 @@ const columnsMapping = [
 		getValue : (data) => (
 			getByKey(data, 'service.business_name', '___')
 		),
-		flex: 2.5,
+		flex: 1.5,
 	},
 	{
 		key      : 'service_user',
@@ -27,13 +28,13 @@ const columnsMapping = [
 				<div className={styles.email_id}>{getByKey(data, 'service_user.email', '___')}</div>
 			</div>
 		),
-		flex: 3,
+		flex: 2,
 	},
 	{
 		key      : 'stakeholder_type',
 		label    : 'Stakeholder Type',
 		getValue : (data) => startCase(getByKey(data, 'stakeholder_type', '___')),
-		flex     : 2.5,
+		flex     : 1.5,
 	},
 	{
 		key      : 'requested_agent',
@@ -45,31 +46,34 @@ const columnsMapping = [
 				<div className={styles.email_id}>{getByKey(data, 'user.email', '___')}</div>
 			</div>
 		),
-		flex: 3,
+		flex: 2,
 	},
 	{
 		key      : 'created_by',
 		label    : 'Requested By',
 		getValue : (data) => getByKey(data, 'created_by.name', '___'),
-		flex     : 2.5,
+		flex     : 1.5,
 	},
 	{
 		key      : 'reason',
 		label    : 'Reason',
 		getValue : (data) => (
 			<Tooltip content={getByKey(data, 'reason', '___')} placement="top">
-				<p className={styles.reason}>
+				<span className={styles.reason}>
 					{getByKey(data, 'reason', '___')}
-				</p>
+				</span>
 			</Tooltip>
 		),
-		flex: 2.5,
+		flex: 1.5,
 	},
 	{
 		key      : 'action',
-		label    : 'Action',
-		getValue : () => {},
-		flex     : 2,
+		getValue : () => (
+			<div className={styles.svg_container}>
+				<IcMOverflowDot height={16} width={16} />
+			</div>
+		),
+		flex: 0,
 	},
 ];
 
