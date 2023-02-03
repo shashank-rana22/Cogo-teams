@@ -1245,6 +1245,18 @@ const saas = {
 			module      : 'hsCode',
 			feature     : 'hsCode',
 		},
+		{
+			api         : 'get_saas_product_category',
+			access_type : 'private',
+			module      : 'hsCode',
+			feature     : 'hsCode',
+		},
+		{
+			api         : 'post_saas_product',
+			access_type : 'private',
+			module      : 'hsCode',
+			feature     : 'hsCode',
+		},
 	],
 	app_saas_cogo_subscription: [
 		{
@@ -1749,6 +1761,7 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 	],
+	app_saas_order_history: [],
 
 };
 export default saas;
