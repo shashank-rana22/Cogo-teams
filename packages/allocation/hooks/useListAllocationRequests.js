@@ -1,8 +1,5 @@
-import {
-	useRequest,
-	// useCallback
-} from '@cogoport/request';
-import { useState } from 'react';
+import { useRequest } from '@cogoport/request';
+import { useCallback, useState } from 'react';
 
 const useListAllocationRequests = () => {
 	const [params, setParams] = useState({
@@ -11,7 +8,8 @@ const useListAllocationRequests = () => {
 		page_limit : 10,
 		page       : 1,
 		filters    : {
-			status: 'pending',
+			status       : 'pending',
+			service_type : 'organization',
 		},
 	});
 
@@ -23,18 +21,14 @@ const useListAllocationRequests = () => {
 
 	const [{ loading, data }, refetch] = apiData;
 
-	// useEffect(() => {
-	// 	refetch();
-	// }, [params]);
+	const onChangeParams = useCallback((values = {}) => {
+		setParams((previousState) => ({
+			...previousState,
+			...values,
+		}));
+	}, []);
 
-	// const onChangeParams = useCallback((values = {}) => {
-	// 	setParams((previousState) => ({
-	// 		...previousState,
-	// 		...values,
-	// 	}));
-	// }, []);
-
-	return { data, loading, refetch, setParams };
+	return { data, loading, refetch, params, onChangeParams };
 };
 
 export default useListAllocationRequests;

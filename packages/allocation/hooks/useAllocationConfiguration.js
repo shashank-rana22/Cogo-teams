@@ -11,11 +11,13 @@ const useAllocationConfigurations = () => {
 		},
 	});
 
-	const [{ loading, data }] = useRequest({
+	const apiData = useRequest({
 		url    : '/list_allocation_configurations',
 		method : 'get',
 		params,
 	}, { manual: false });
+
+	const [{ loading, data }] = apiData;
 
 	const getNextPage = (newPage) => {
 		setParams((previousParams) => ({
@@ -33,6 +35,7 @@ const useAllocationConfigurations = () => {
 		getNextPage,
 		params,
 		setParams,
+
 	};
 };
 

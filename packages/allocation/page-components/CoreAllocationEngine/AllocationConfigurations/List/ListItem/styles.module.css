@@ -62,3 +62,8 @@
     width: fit-content;
 }
 
+.svg_container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}

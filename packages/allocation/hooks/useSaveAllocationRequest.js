@@ -10,11 +10,17 @@ import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
 import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
 const useSaveAllocationRequest = (props) => {
-	const { onCloseModal } = props;
+	const { onCloseModal, refetch } = props;
 
 	const controls = getControls();
 
-	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+	const {
+		profile: {
+			partner: {
+				id: partnerId = '',
+			},
+		},
+	} = useSelector((reduxState) => reduxState);
 
 	const formProps = useForm({
 		defaultValues: {
@@ -68,6 +74,7 @@ const useSaveAllocationRequest = (props) => {
 			await trigger({ data: payload });
 
 			onCloseModal();
+			refetch();
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.data)

@@ -19,7 +19,10 @@ function Requests() {
 
 	const {
 		data,
-		loading, refetch, setParams,
+		loading: listLoading,
+		refetch,
+		params,
+		onChangeParams,
 	} = useListAllocationRequests();
 
 	const {
@@ -33,9 +36,18 @@ function Requests() {
 
 	return (
 		<section className={styles.container}>
-			<Header onClickCreateReqBtn={() => setShowModal(true)} />
+			<Header
+				onClickCreateReqBtn={() => setShowModal(true)}
+				loading={listLoading}
+				toggleValue={params?.filters.service_type}
+				onChangeParams={onChangeParams}
+			/>
 
-			<List data={data} loading={loading} />
+			<List
+				data={data}
+				loading={listLoading}
+				onChangeParams={onChangeParams}
+			/>
 
 			{showModal ? (
 				<Modal
