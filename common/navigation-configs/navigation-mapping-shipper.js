@@ -236,6 +236,34 @@ const navigationMappingShipper = {
 		isNew         : true,
 		module_type   : 'dashboards',
 	},
+	saas_premium_services: {
+		key         : 'saas_premium_services',
+		title       : 'Premium Services',
+		type        : 'link',
+		icon        : 'nav-payments',
+		module_type : 'dashboards',
+		isNew       : true,
+		showInNav   : true,
+		isSubNavs   : true,
+		options     : [
+			{
+				key           : 'saas_premium_services-duties_and_taxes',
+				title         : 'Duties & Taxes Calculator',
+				href          : '/saas/premium-services/duties-taxes-calculator',
+				as            : '/saas/premium-services/duties-taxes-calculator',
+				main_apis     : [],
+				possible_apis : app_apis.saas_premium_services,
+			},
+			{
+				key           : 'saas_premium_services-order_history',
+				title         : 'Order History',
+				href          : '/saas/premium-services/order-history',
+				as            : '/saas/premium-services/order-history',
+				main_apis     : [],
+				possible_apis : app_apis.saas_order_history,
+			},
+		],
+	},
 	saas_cogo_subscription: {
 		key         : 'saas_cogo_subscription',
 		title       : 'Subscriptions',
@@ -428,26 +456,6 @@ const navigationMappingShipper = {
 		possible_apis : app_apis.app_manage_rfq,
 		module_type   : 'dashboards',
 		showInNav     : true,
-	},
-	saas_premium_services: {
-		key         : 'saas_premium_services',
-		title       : 'Premium Services',
-		type        : 'link',
-		icon        : 'nav-payments',
-		module_type : 'dashboards',
-		isNew       : true,
-		showInNav   : true,
-		isSubNavs   : true,
-		options     : [
-			{
-				key           : 'saas_premium_services-duties_and_taxes',
-				title         : 'Duties & Taxes Calculator',
-				href          : '/saas/premium-services/duties-taxes-calculator',
-				as            : '/saas/premium-services/duties-taxes-calculator',
-				main_apis     : [],
-				possible_apis : app_apis.saas_premium_services,
-			},
-		],
 	},
 };
 export default navigationMappingShipper;

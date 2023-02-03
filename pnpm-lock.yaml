@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@cogoport/eslint-config': ^1.1.0
       '@cogoport/stylelint-config': ^1.0.3
-      '@sentry/nextjs': ^7.34.0
+      '@sentry/nextjs': ^7.35.0
       '@svgr/webpack': ^6.5.1
       accept-language: ^3.0.18
       eslint: ^8.33.0
@@ -21,9 +21,9 @@ importers:
       postcss-preset-env: ^8.0.1
       react-i18next: ^12.1.4
       stylelint: ^14.16.1
-      turbo: ^1.7.0
+      turbo: ^1.7.2
     dependencies:
-      '@sentry/nextjs': 7.34.0
+      '@sentry/nextjs': 7.35.0
       accept-language: 3.0.18
       i18next: 22.4.9
       next-i18next: 13.0.3_5i4az4cstzckm6ljit5k2cfwvm
@@ -41,14 +41,14 @@ importers:
       postcss-nested: 6.0.0_postcss@8.4.21
       postcss-preset-env: 8.0.1_postcss@8.4.21
       stylelint: 14.16.1
-      turbo: 1.7.0
+      turbo: 1.7.2
 
   cogo-control:
     specifiers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
@@ -71,7 +71,7 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
-      '@cogoport/components': 1.0.278_acxc76o73cs57gtnhmpyojnosy
+      '@cogoport/components': 1.0.279_acxc76o73cs57gtnhmpyojnosy
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
       '@cogoport/icons-react': 1.0.52_biqbaboplfbrettd7655fr4n2y
@@ -94,7 +94,7 @@ importers:
   common/core:
     specifiers:
       '@cogoport/authentication': workspace:0.1.0
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
@@ -108,7 +108,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
-      '@cogoport/components': 1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/navigation-configs': link:../navigation-configs
       '@cogoport/next': link:../next
@@ -123,14 +123,14 @@ importers:
 
   common/forms:
     specifiers:
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
       react-hook-form: ^7.43.0
     dependencies:
-      '@cogoport/components': 1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.2
@@ -163,7 +163,7 @@ importers:
       '@cogoport/next': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
-      axios: ^1.2.6
+      axios: ^1.3.1
       axios-hooks: ^4.0.0
       dotenv: ^16.0.3
       dotenv-expand: ^10.0.0
@@ -174,8 +174,8 @@ importers:
       '@cogoport/next': link:../next
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.2
-      axios: 1.2.6
-      axios-hooks: 4.0.0_axios@1.2.6+react@18.2.0
+      axios: 1.3.1
+      axios-hooks: 4.0.0_axios@1.3.1+react@18.2.0
       dotenv: 16.0.3
       dotenv-expand: 10.0.0
       qs: 6.11.0
@@ -197,7 +197,7 @@ importers:
 
   packages/access-management:
     specifiers:
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -207,7 +207,7 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -219,7 +219,7 @@ importers:
 
   packages/authentication:
     specifiers:
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -230,7 +230,7 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -243,7 +243,7 @@ importers:
 
   packages/business-finance:
     specifiers:
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/next': workspace:0.1.0
@@ -253,7 +253,7 @@ importers:
       '@types/react': ^18.0.27
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -292,7 +292,7 @@ importers:
 
   packages/locations:
     specifiers:
-      '@cogoport/components': ^1.0.278
+      '@cogoport/components': ^1.0.279
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.52
       '@cogoport/request': workspace:^0.1.0
@@ -300,7 +300,7 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe
+      '@cogoport/components': 1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@cogoport/request': link:../../common/request
@@ -1607,8 +1607,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cogoport/components/1.0.278_4qqsdfrobn2h6f6rxzbbfb35oe:
-    resolution: {integrity: sha512-Nv6+WWR7DB///9C5YCnSvtBwgX86r+7iI8mf6g27eslQ27ELP5pmHlaHDBeWiBeT1fI9/oqIRLvAeNaGskCTIg==}
+  /@cogoport/components/1.0.279_4qqsdfrobn2h6f6rxzbbfb35oe:
+    resolution: {integrity: sha512-shpuIuqxpCpt33FaWnm03WS/jdQ10RoJqQT0RivqbRce9AqM8l+bjvg3JpPNzShC4zP1uNc63ObQQdY3VjLvcQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1616,8 +1616,8 @@ packages:
     dependencies:
       '@cogoport/icons-react': 1.0.52_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
-      axios: 1.2.6
-      axios-hooks: 4.0.0_axios@1.2.6+react@18.2.0
+      axios: 1.3.1
+      axios-hooks: 4.0.0_axios@1.3.1+react@18.2.0
       date-fns: 2.29.3
       fs: 0.0.1-security
       react: 18.2.0
@@ -1637,8 +1637,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.278_acxc76o73cs57gtnhmpyojnosy:
-    resolution: {integrity: sha512-Nv6+WWR7DB///9C5YCnSvtBwgX86r+7iI8mf6g27eslQ27ELP5pmHlaHDBeWiBeT1fI9/oqIRLvAeNaGskCTIg==}
+  /@cogoport/components/1.0.279_acxc76o73cs57gtnhmpyojnosy:
+    resolution: {integrity: sha512-shpuIuqxpCpt33FaWnm03WS/jdQ10RoJqQT0RivqbRce9AqM8l+bjvg3JpPNzShC4zP1uNc63ObQQdY3VjLvcQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1646,8 +1646,8 @@ packages:
     dependencies:
       '@cogoport/icons-react': 1.0.52_biqbaboplfbrettd7655fr4n2y
       '@tippyjs/react': 4.2.6_biqbaboplfbrettd7655fr4n2y
-      axios: 1.2.6
-      axios-hooks: 4.0.0_axios@1.2.6+react@18.2.0
+      axios: 1.3.1
+      axios-hooks: 4.0.0_axios@1.3.1+react@18.2.0
       date-fns: 2.29.3
       fs: 0.0.1-security
       react: 18.2.0
@@ -2762,14 +2762,14 @@ packages:
       rollup: 2.78.0
     dev: false
 
-  /@sentry/browser/7.34.0:
-    resolution: {integrity: sha512-5Jmjj0DLxx+31o12T+VH4U+gO7wz3L+ftjuTxcQaC8GeFVe5qCyXZoDmWKNV9NEyREiZ3azV62bJc5wojZrIIg==}
+  /@sentry/browser/7.35.0:
+    resolution: {integrity: sha512-2uoBNVsO26aa+Ln9h0K2MklDg6OAt4S0upZcYF9EoPf3ryUNmv0GCX8MG0kQ7+WQfO/jrlKv9zJggyYWGutSZQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.34.0
-      '@sentry/replay': 7.34.0
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/core': 7.35.0
+      '@sentry/replay': 7.35.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       tslib: 1.14.1
     dev: false
 
@@ -2791,44 +2791,44 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/core/7.34.0:
-    resolution: {integrity: sha512-J1oxsYZX1N0tkEcaHt/uuDqk6zOnaivyampp+EvBsUMCdemjg7rwKvawlRB0ZtBEQu3HAhi8zecm03mlpWfCDw==}
+  /@sentry/core/7.35.0:
+    resolution: {integrity: sha512-j+UJaWDUyLCWOTKMrDFivy/rH5QuSvPK9TsOmYOIFctSKfp+e9Ap0cPRPXNObwim2YTpN4wpl7TqDGDANTKhuQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       tslib: 1.14.1
     dev: false
 
-  /@sentry/integrations/7.34.0:
-    resolution: {integrity: sha512-xbWnTvG4gkKeCVpmhhdPtMbQkPO0RAfEJ8VPO5TWmUMT23ZWy2kE0gTZHtnBopy7AXxg231XxTi4fxnwgQGxEQ==}
+  /@sentry/integrations/7.35.0:
+    resolution: {integrity: sha512-AIHAAkoxUrJC576KpjK1M35lHksRlqwczQhbsuEheb4A+SPlMNXz/P2R08gzENIgcYoImL5EuKpkxvbqQtcIRw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       localforage: 1.10.0
       tslib: 1.14.1
     dev: false
 
-  /@sentry/nextjs/7.34.0:
-    resolution: {integrity: sha512-vXtlpONIDU2kT2eA5STLBuGvw5njM7K/7IqjvvkwTwYUpKWs7xZvp7NeHAHpH6LkDSBljokS45fnvfMijEqN7A==}
+  /@sentry/nextjs/7.35.0:
+    resolution: {integrity: sha512-MtDwn7jfmVjnOpNO6MKEYWSxPDWs2xGrnj0qwjYtIOs+jrxLJ7dwnjZCbg5gx6/m2V0lZUqglDWUyqbh1xMFWA==}
     engines: {node: '>=8'}
     peerDependencies:
       next: ^10.0.8 || ^11.0 || ^12.0 || ^13.0
-      react: 15.x || 16.x || 17.x || 18.x
+      react: 16.x || 17.x || 18.x
       webpack: '>= 4.0.0'
     peerDependenciesMeta:
       webpack:
         optional: true
     dependencies:
       '@rollup/plugin-commonjs': 24.0.0_rollup@2.78.0
-      '@sentry/core': 7.34.0
-      '@sentry/integrations': 7.34.0
-      '@sentry/node': 7.34.0
-      '@sentry/react': 7.34.0
-      '@sentry/tracing': 7.34.0
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/core': 7.35.0
+      '@sentry/integrations': 7.35.0
+      '@sentry/node': 7.35.0
+      '@sentry/react': 7.35.0
+      '@sentry/tracing': 7.35.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       '@sentry/webpack-plugin': 1.20.0
       chalk: 3.0.0
       rollup: 2.78.0
@@ -2838,13 +2838,13 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/node/7.34.0:
-    resolution: {integrity: sha512-VM4XeydRdgeaNTRe8kwqYg2oNPddVyY74PlCFEFnPEN1NccycNuwiFno68kNrApeqxxLlTTmzkJy0BWo16x2Yg==}
+  /@sentry/node/7.35.0:
+    resolution: {integrity: sha512-uenomjlwSk1zX4gyNV6DdJFQXgDzzdLUcTCFWoO2D3sDqCGiJO6fmRXX+kVVanYcRXfKg14ko5uelfCj6pq9BQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.34.0
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/core': 7.35.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       cookie: 0.4.2
       https-proxy-agent: 5.0.1
       lru_map: 0.3.3
@@ -2853,48 +2853,48 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/react/7.34.0:
-    resolution: {integrity: sha512-vdonnZK9R8xyEBDaXNofHyoqy9biNRvlKrQXZp4x8WlYcBCwbU46qxZlSVsxa89pm7yUYS+KHq8cYL801+weqg==}
+  /@sentry/react/7.35.0:
+    resolution: {integrity: sha512-iyLCc1ahiccuiH5/GtkymSiYLDZxPZuvx3sAMf0lKBPyzJL2LONj8fxoDKjQrymPe3rtiIFRUtJ0CyHgJy8m/w==}
     engines: {node: '>=8'}
     peerDependencies:
       react: 15.x || 16.x || 17.x || 18.x
     dependencies:
-      '@sentry/browser': 7.34.0
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/browser': 7.35.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       hoist-non-react-statics: 3.3.2
       tslib: 1.14.1
     dev: false
 
-  /@sentry/replay/7.34.0:
-    resolution: {integrity: sha512-4L4YZfWt8mcVNcI99RxHORPb308URI1R9xsFj97fagk0ATjexLKr5QCA2ApnKaSn8Q0q1Zdzd4XmFtW9anU45Q==}
+  /@sentry/replay/7.35.0:
+    resolution: {integrity: sha512-msD76vT4yc5JvxcCVk21YkH8BP9unJ6xRmtCyaCHi7bDsfdu7RcQD+jIAOyS0534uHQLn6BZ2wAW8O4mpTk+7g==}
     engines: {node: '>=12'}
     dependencies:
-      '@sentry/core': 7.34.0
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/core': 7.35.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
     dev: false
 
-  /@sentry/tracing/7.34.0:
-    resolution: {integrity: sha512-JtfSWBfcWslfIujcpGEPF5oOiAOCd5shMoWYrdTvCfruHhYjp4w5kv/ndkvq2EpFkcQYhdmtQEytXEO8IJIqRw==}
+  /@sentry/tracing/7.35.0:
+    resolution: {integrity: sha512-+mXydQjsoX1Lyjil1IR51hVKsm6vYYCYaKZXo/BzUsjKS0INK1GsfanqHzu2So9bBS5dPLo78lq5YuFsIsAAkw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.34.0
-      '@sentry/types': 7.34.0
-      '@sentry/utils': 7.34.0
+      '@sentry/core': 7.35.0
+      '@sentry/types': 7.35.0
+      '@sentry/utils': 7.35.0
       tslib: 1.14.1
     dev: false
 
-  /@sentry/types/7.34.0:
-    resolution: {integrity: sha512-K+OeHIrl35PSYn6Zwqe4b8WWyAJQoI5NeWxHVkM7oQTGJ1YLG4BvLsR+UiUXnKdR5krE4EDtEA5jLsDlBEyPvw==}
+  /@sentry/types/7.35.0:
+    resolution: {integrity: sha512-gy1PhwYvER/F80N+ZI06PjMk55xAZ4P+r3jomsMnOXQBWzx2VEEpc2fS/3B21wymxSl+mjh+5sUlk/JpxxOQvQ==}
     engines: {node: '>=8'}
     dev: false
 
-  /@sentry/utils/7.34.0:
-    resolution: {integrity: sha512-VIHHXEBw0htzqxnU8A7WkXKvmsG2pZVqHlAn0H9W/yyFQtXMuP1j1i0NsjADB/3JXUKK83kTNWGzScXvp0o+Jg==}
+  /@sentry/utils/7.35.0:
+    resolution: {integrity: sha512-xB/uVNXrfSwQj5fZsYOHr70ORq9qNT+9FAoUGffAQUyVjRhXG27KxsstK1Rv2yt+FBCHY06e3vE4K9B4zwSe7Q==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.34.0
+      '@sentry/types': 7.35.0
       tslib: 1.14.1
     dev: false
 
@@ -3301,8 +3301,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@wojtekmaj/date-utils/1.0.3:
-    resolution: {integrity: sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw==}
+  /@wojtekmaj/date-utils/1.1.1:
+    resolution: {integrity: sha512-BNT0FH23VKGI148OZbno+G1xioG4kALScIAfBL+UJdaEtA618M6pWDrYTbpMs9tMQz9LOEb4mbkKemCUpocg2g==}
     dev: false
 
   /accept-language/3.0.18:
@@ -3473,7 +3473,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3491,21 +3491,21 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axios-hooks/4.0.0_axios@1.2.6+react@18.2.0:
+  /axios-hooks/4.0.0_axios@1.3.1+react@18.2.0:
     resolution: {integrity: sha512-IYpVCh/3I99KA826+Qtms581EegvlUVzDkhljglo21Ugc6P9lQQVG6q22seZy0ieYuepjS3kvCtzUG7jAX7BTA==}
     peerDependencies:
       axios: '>=0.24.0'
       react: ^16.8.0-0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.19.0
-      axios: 1.2.6
+      axios: 1.3.1
       dequal: 2.0.3
       lru-cache: 7.14.1
       react: 18.2.0
     dev: false
 
-  /axios/1.2.6:
-    resolution: {integrity: sha512-rC/7F08XxZwjMV4iuWv+JpD3E0Ksqg9nac4IIg6RwNuF0JTeWoCo/mBNG54+tNhhI11G3/VDRbdDQTs9hGp4pQ==}
+  /axios/1.3.1:
+    resolution: {integrity: sha512-78pWJsQTceInlyaeBQeYZ/QgZeWS8hGeKiIJiDKQe3hEyBb7sEMq0K4gjx+Va6WHTYO4zI/RRl8qGRzn0YMadA==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
@@ -3597,7 +3597,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       electron-to-chromium: 1.4.284
       node-releases: 2.0.9
       update-browserslist-db: 1.0.10_browserslist@4.21.5
@@ -3633,8 +3633,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001449:
-    resolution: {integrity: sha512-CPB+UL9XMT/Av+pJxCKGhdx+yg1hzplvFJQlJ2n68PyQGMz9L/E2zCyLdOL8uasbouTUgnPl+y0tccI/se+BEw==}
+  /caniuse-lite/1.0.30001450:
+    resolution: {integrity: sha512-qMBmvmQmFXaSxexkjjfMvD5rnDL0+m+dUMZKoDYsGG8iZN29RuYh9eRoMvKsT6uMAWlyUUGDEQGJJYjzCIO9ew==}
 
   /chalk/2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -5619,7 +5619,7 @@ packages:
     dependencies:
       '@next/env': 12.3.1
       '@swc/helpers': 0.4.11
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -5666,7 +5666,7 @@ packages:
     dependencies:
       '@next/env': 12.3.1
       '@swc/helpers': 0.4.11
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       postcss: 8.4.14
       react: 18.2.0
       styled-jsx: 5.0.7_react@18.2.0
@@ -5711,7 +5711,7 @@ packages:
     dependencies:
       '@next/env': 13.1.6
       '@swc/helpers': 0.4.14
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -6452,7 +6452,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@wojtekmaj/date-utils': 1.0.3
+      '@wojtekmaj/date-utils': 1.1.1
       clsx: 1.2.1
       get-user-locale: 1.5.1
       prop-types: 15.8.1
@@ -6466,7 +6466,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@wojtekmaj/date-utils': 1.0.3
+      '@wojtekmaj/date-utils': 1.1.1
       clsx: 1.2.1
       get-user-locale: 1.5.1
       prop-types: 15.8.1
@@ -6480,7 +6480,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@types/react-calendar': 3.9.0
-      '@wojtekmaj/date-utils': 1.0.3
+      '@wojtekmaj/date-utils': 1.1.1
       clsx: 1.2.1
       get-user-locale: 1.5.1
       make-event-props: 1.3.0
@@ -6499,7 +6499,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@types/react-calendar': 3.9.0
-      '@wojtekmaj/date-utils': 1.0.3
+      '@wojtekmaj/date-utils': 1.1.1
       clsx: 1.2.1
       get-user-locale: 1.5.1
       make-event-props: 1.3.0
@@ -7335,65 +7335,65 @@ packages:
       typescript: 4.9.5
     dev: true
 
-  /turbo-darwin-64/1.7.0:
-    resolution: {integrity: sha512-hSGAueSf5Ko8J67mpqjpt9FsP6ePn1nMcl7IVPoJq5dHsgX3anCP/BPlexJ502bNK+87DDyhQhJ/LPSJXKrSYQ==}
+  /turbo-darwin-64/1.7.2:
+    resolution: {integrity: sha512-Sml3WR8MSu80W+gS8SnoKNImcDOlIX7zlvezzds65mW11yGniIFfZ18aKWGOm92Nj2SvXCQ2+UmyGghbFaHNmQ==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.7.0:
-    resolution: {integrity: sha512-BLLOW5W6VZxk5+0ZOj5AO1qjM0P5isIgjbEuyAl8lHZ4s9antUbY4CtFrspT32XxPTYoDl4UjviPMcSsbcl3WQ==}
+  /turbo-darwin-arm64/1.7.2:
+    resolution: {integrity: sha512-JnlgGLScboUJGJxvmSsF+5xkImEDTMPg2FHzX4n8AMB9az9ZlPQAMtc+xu4p6Xp9eaykKiV2RG81YS3H0fxDLA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64/1.7.0:
-    resolution: {integrity: sha512-aw2qxmfZa+kT87SB3GNUoFimqEPzTlzlRqhPgHuAAT6Uf0JHnmebPt4K+ZPtDNl5yfVmtB05bhHPqw+5QV97Yg==}
+  /turbo-linux-64/1.7.2:
+    resolution: {integrity: sha512-vbLJw6ovG+lpiPqxniscBjljKJ2jbsHuKp8uK4j/wqgp68wAVKeAZW77GGDAUgDb88XH6Kvhh2hcizL+iWduww==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.7.0:
-    resolution: {integrity: sha512-AJEx2jX+zO5fQtJpO3r6uhTabj4oSA5ZhB7zTs/rwu/XqoydsvStA4X8NDW4poTbOjF7DcSHizqwi04tSMzpJw==}
+  /turbo-linux-arm64/1.7.2:
+    resolution: {integrity: sha512-zLnuS8WdHonKL74KqOopOH/leBOWumlVGF8/8hldbDPq0mwY+6myRR5/5LdveB51rkG4UJh/sQ94xV67tjBoyw==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64/1.7.0:
-    resolution: {integrity: sha512-ewj7PPv2uxqv0r31hgnBa3E5qwUu7eyVRP5M1gB/TJXfSHduU79gbxpKCyxIZv2fL/N2/3U7EPOQPSZxBAoljA==}
+  /turbo-windows-64/1.7.2:
+    resolution: {integrity: sha512-oE5PMoXjmR09okvVzteFb6FjA6yo+nMsacsgKH2yLNq4sOrVo9tG98JkRurOv5+L6ZQ3yGXPxWHiqeH7hLkAVQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.7.0:
-    resolution: {integrity: sha512-LzjOUzveWkvTD0jP8DBMYiAnYemmydsvqxdSmsUapHHJkl6wKZIOQNSO7pxsy+9XM/1/+0f9Y9F9ZNl5lePTEA==}
+  /turbo-windows-arm64/1.7.2:
+    resolution: {integrity: sha512-mdTUJk23acRv5qxA/yEstYhM1VFenVE3FDrssxGRFq7S80smtCGK1xUd4BEDDzDlVXOqBohmM5jRh9516rcjPQ==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo/1.7.0:
-    resolution: {integrity: sha512-cwympNwQNnQZ/TffBd8yT0i0O10Cf/hlxccCYgUcwhcGEb9rDjE5thDbHoHw1hlJQUF/5ua7ERJe7Zr0lNE/ww==}
+  /turbo/1.7.2:
+    resolution: {integrity: sha512-YR/x3GZEx0C1RV6Yvuw/HB1Ixx3upM6ZTTa4WqKz9WtLWN8u2g+u2h5KpG5YtjCS3wl/8zVXgHf2WiMK6KIghg==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.7.0
-      turbo-darwin-arm64: 1.7.0
-      turbo-linux-64: 1.7.0
-      turbo-linux-arm64: 1.7.0
-      turbo-windows-64: 1.7.0
-      turbo-windows-arm64: 1.7.0
+      turbo-darwin-64: 1.7.2
+      turbo-darwin-arm64: 1.7.2
+      turbo-linux-64: 1.7.2
+      turbo-linux-arm64: 1.7.2
+      turbo-windows-64: 1.7.2
+      turbo-windows-arm64: 1.7.2
     dev: true
 
   /type-check/0.4.0:

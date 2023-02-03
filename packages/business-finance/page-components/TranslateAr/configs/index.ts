@@ -2,12 +2,12 @@ import StatusComponent from '../page-components/StatusComponent';
 
 const TABS_MAPPING = [
 	{
-		label     : 'PENDING',
+		label     : 'Pending',
 		value     : 'pending',
 		Component : StatusComponent,
 	},
 	{
-		label     : 'COMPLETED',
+		label     : 'Completed',
 		value     : 'completed',
 		Component : StatusComponent,
 	},

@@ -860,7 +860,7 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_receivables_translate',
 				title         : 'AR (Vietnam)',
-				href          : '/v2/business-finance/translate-account-receivables/[active_tab]',
+				href          : '/v2/business-finance/translate-account-receivables/[activeTab]',
 				as            : '/v2/business-finance/translate-account-receivables/pending',
 				type          : 'link',
 				main_apis     : [],
@@ -1640,6 +1640,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.convenience_rate,
 
 				module_type: 'crm',
+			},
+			{
+				key           : 'transaction_setting-payment_modes_and_methods',
+				title         : 'Payment Modes and Methods',
+				href          : '/payment-modes-and-methods',
+				as            : '/payment-modes-and-methods',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.payment_modes_and_methods,
 			},
 			{
 				key           : 'transaction_setting-cogo_fx',
