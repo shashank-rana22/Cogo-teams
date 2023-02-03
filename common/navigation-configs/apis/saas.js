@@ -1751,9 +1751,8 @@ const saas = {
 	],
 	app_saas_trader_eligibilty_check: [
 		{
-			api          : 'get_saas_user_quota_usage',
-			access_type  : 'private',
-			service_name : '',
+			api         : 'get_saas_user_quota_usage',
+			access_type : 'private',
 		},
 		{
 			api         : 'get_saas_bill_status',
@@ -1770,7 +1769,7 @@ const saas = {
 		{
 			api          : 'list_locations',
 			access_type  : 'private',
-			service_name : '',
+			service_name : 'location',
 		},
 		{
 			api         : 'get_saas_trade_engine',
