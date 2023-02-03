@@ -1749,7 +1749,7 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 	],
-	saas_trader_eligibilty_check: [
+	app_saas_trader_eligibilty_check: [
 		{
 			api          : 'saas_get_user_quota_usage',
 			access_type  : 'private',
