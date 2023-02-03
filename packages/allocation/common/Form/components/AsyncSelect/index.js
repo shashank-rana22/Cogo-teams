@@ -1,9 +1,10 @@
-import { Select } from '@cogoport/components';
+import { MultiSelect, Select } from '@cogoport/components';
 import { useGetAsyncOptions } from '@cogoport/forms';
 import {
 	asyncFieldsOrganizations,
 	asyncFieldsOrganizationUser,
 	asyncFieldsPartner,
+	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
 import { isEmpty } from '@cogoport/utils';
@@ -13,9 +14,10 @@ const keyAsyncFieldsParamsMapping = {
 	organization_users : asyncFieldsOrganizationUser,
 	partners           : asyncFieldsPartner,
 	partner_users      : asyncFieldsPartnerUsers,
+	partner_roles      : asyncFieldsPartnerRoles,
 };
 
-function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, ...rest }) {
+function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, multiple, ...rest }) {
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
 	const getAsyncOptionsProps = useGetAsyncOptions({
@@ -30,8 +32,10 @@ function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, ...res
 		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
 	}
 
+	const Element = multiple ? MultiSelect : Select;
+
 	return (
-		<Select
+		<Element
 			{...rest}
 			{...getAsyncOptionsProps}
 		/>

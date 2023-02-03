@@ -2,7 +2,8 @@ const controls = [
 	{
 		name        : 'role_ids',
 		label       : 'Roles',
-		type        : 'asyncMultiSelect',
+		type        : 'asyncSelect',
+		multiple    : true,
 		placeholder : 'Select roles',
 		asyncKey    : 'partner_roles',
 		initialCall : false,
