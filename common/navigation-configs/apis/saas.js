@@ -1751,7 +1751,7 @@ const saas = {
 	],
 	app_saas_trader_eligibilty_check: [
 		{
-			api          : 'saas_get_user_quota_usage',
+			api          : 'get_saas_user_quota_usage',
 			access_type  : 'private',
 			service_name : '',
 		},
@@ -1773,7 +1773,7 @@ const saas = {
 			service_name : '',
 		},
 		{
-			api         : 'get_saas_trade_engine_service_rates',
+			api         : 'get_saas_trade_engine',
 			access_type : 'private',
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
