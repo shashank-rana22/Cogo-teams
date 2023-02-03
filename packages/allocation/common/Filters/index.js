@@ -10,18 +10,19 @@ function Filters({
 	name = 'APPLY',
 	heading = 'Search',
 	placement = 'bottom',
-	onClickOutside = () => {},
 	reset = () => {},
 	applyFilters = () => {},
 	controls = [],
+	formProps = {},
+	onClickOutside = () => {},
 }) {
 	return (
 		<div className={styles.popover_container}>
 			<Popover
 				interactive
 				placement={placement}
-				onClickOutside={onClickOutside}
 				visible={open}
+				onClickOutside={onClickOutside}
 				render={(
 					<FilterContent
 						heading={heading}
@@ -29,6 +30,7 @@ function Filters({
 						reset={reset}
 						applyFilters={applyFilters}
 						setOpen={setOpen}
+						formProps={formProps}
 					/>
 				)}
 			>
