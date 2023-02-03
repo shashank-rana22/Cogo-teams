@@ -1,48 +1,54 @@
-.container{
-    display: flex;
-    border-radius: 8px;
-}
-.buttonStyle{
-    border : none;
-	color  : #F68B21;
-    cursor: pointer;
-	text-decoration : underline;
-	margin         : 2px 0px;
-    display: flex;
-    align-items: center;
-}
-.dataDiv{
-    display:flex;
-    margin-top: 8px;
-
-}
-.dataDivClose{
-    display:flex;
-    margin-top: 8px;
-}
-.buttonContainer{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    background: rgb(254 248 228);
-}
-.section{
-    margin: 10px 36px 10px 16px;
-}
-.element{
-    margin-top: 10px;
-    font-weight: 600;
-}
-.moreDataContainer{
-    width: 100%;
-    background: white;
-    border-top: 1px solid #EDD7A9;
-    overflow: hidden;
-    max-height: 88px;
-    transition: max-height .3s ease;
+.container {
+	display: flex;
+	border-radius: 8px;
 }
 
-.moreDataContainerClose{
-    max-height: 0px;
-    width: 0px;
+.buttonStyle {
+	display: flex;
+	align-items: center;
+	margin: 2px 0;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+	border: none;
+}
+
+.dataDiv {
+	display: flex;
+	margin-top: 8px;
+}
+
+.dataDivClose {
+	display: flex;
+	margin-top: 8px;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	background: rgb(254 248 228);
+}
+
+.section {
+	margin: 10px 36px 10px 16px;
+}
+
+.element {
+	margin-top: 10px;
+	font-weight: 600;
+}
+
+.moreDataContainer {
+	width: 100%;
+	max-height: 88px;
+	overflow: hidden;
+	background: white;
+	border-top: 1px solid #edd7a9;
+	transition: max-height 0.3s ease;
+}
+
+.moreDataContainerClose {
+	width: 0;
+	max-height: 0;
 }

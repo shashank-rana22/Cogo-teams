@@ -1,15 +1,16 @@
-.container{
-    display: flex;
-    justify-content: space-around;
-}
-.uploadInvoice{
-    width:40%;
-    border: 1px solid black;
-    border-radius: 8px;
-    height: 400px;
-    overflow: scroll;
+.container {
+	display: flex;
+	justify-content: space-around;
 }
 
-.lineItem{
-    width:58%;
+.uploadInvoice {
+	width: 40%;
+	height: 400px;
+	overflow: scroll;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+
+.lineItem {
+	width: 58%;
 }

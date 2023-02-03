@@ -2,6 +2,8 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import React, { useEffect, useState } from 'react';
 
+import LineItemsForm from '../commons/LineItemsForm';
+
 import OverHeads from './OverHeads/index';
 import styles from './styles.module.css';
 
@@ -39,6 +41,7 @@ function AccountPayables() {
 
 					<TabPanel name="others" title="Others">
 						<div>No data :)</div>
+						<LineItemsForm />
 					</TabPanel>
 				</Tabs>
 			</div>

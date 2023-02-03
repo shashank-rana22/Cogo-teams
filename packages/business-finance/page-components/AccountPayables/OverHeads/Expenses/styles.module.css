@@ -1,72 +1,92 @@
 .headerContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .leftContainer {
-    display: flex;
-    gap: 8px;
+	display: flex;
+	gap: 8px;
 }
 
 .rightContainer {
-    display: flex;
-    gap: 8px;
+	display: flex;
+	gap: 8px;
 }
 
 .select {
-    width: 175px;
+	width: 175px;
 }
 
 .search {
-    width: 341px;
-    padding: 0px 4px;
-    svg{
-        margin:2px
-    }
-    input{
-        font-size: 11px !important;
-    }
-}
-.verified{
-    display: flex;
-    align-items: center;
-    color: #67C676;
+	width: 341px;
+	padding: 0 4px;
+
+	svg {
+		margin: 2px;
+	}
+
+	input {
+		font-size: 11px !important;
+	}
 }
 
-.pending{
-    display: flex;
-    align-items: center;
-    color: #e10d1f;
-}
-.segmentedControl{
-    div{
-        font-weight: 600;
-        font-family: Poppins;
-    }
+.verified {
+	display: flex;
+	align-items: center;
+	width: 341px;
+	color: #67c676;
+
+	input {
+		font-size: 11px !important;
+	}
 }
 
-.dataContainer{
-    display: flex;
+.verified {
+	display: flex;
+	align-items: center;
+	color: #67c676;
 }
-.expensePeriodData{
-     width: 64%;
+
+.pending {
+	display: flex;
+	align-items: center;
+	color: #e10d1f;
 }
-.recurringAmountData{
-    width: 90%;
+
+.segmentedControl {
+	div {
+		font-family: Poppins;
+		font-weight: 600;
+	}
 }
-.underline{
-    border-top: 1px solid #EDD7A9;
+
+.dataContainer {
+	display: flex;
 }
-.recurringButtons{
-    padding: 6px 11px;
-    background: none;
-    border:none;
-    width: 100%;
-    font-size: 15px;
-    &:hover{
-        background: #FFFAEB;
-        cursor: pointer;
-    }
+
+.expensePeriodData {
+	width: 64%;
+}
+
+.recurringAmountData {
+	width: 90%;
+}
+
+.underline {
+	border-top: 1px solid #edd7a9;
+}
+
+.recurringButtons {
+	width: 100%;
+	padding: 6px 11px;
+	font-size: 15px;
+	background: none;
+	border: none;
+
+	&:hover {
+		cursor: pointer;
+		background: #fffaeb;
+	}
 }

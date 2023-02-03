@@ -1,23 +1,26 @@
-.header{
-    font-weight: 800;
-    margin: 0;
+.header {
+	margin: 0;
+	font-weight: 800;
 }
-.underline{
-    border-top: 5px solid#ED3726;
-    width: 10%;
+
+.underline {
+	width: 10%;
+	border-top: 5px solid#ED3726;
 }
-.tabs{
-    margin: 32px 0px;
+
+.tabs {
+	margin: 32px 0;
 }
+
 .container {
-    margin: -24px;
-    padding: 16px;
+	padding: 16px;
+	margin: -24px;
 }
 
 .heading {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 28px;
-    line-height: 42px;
+	font-family: Poppins;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 42px;
 }
