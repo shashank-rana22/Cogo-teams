@@ -3,6 +3,10 @@
 	flex-direction: row;
 	justify-content: space-between;
 	padding-top: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .select_container {
@@ -18,4 +22,10 @@
 .select {
 	min-width: 250px !important;
 	margin: 0 6px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		width: 250px;
+		margin-bottom: 16px;
+	}
 }

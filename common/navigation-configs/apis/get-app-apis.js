@@ -60,6 +60,10 @@ const app_apis = {
 	saas_trade_partner              : apis.app_saas_trade_partner,
 	saas_product_inventory          : apis.app_saas_product_inventory,
 	saas_premium_services           : apis.app_saas_premium_services,
+<<<<<<< HEAD
 	saas_trader_eligibility_check   : apis.saas_trader_eligibilty_check,
+=======
+	saas_order_history              : apis.app_saas_order_history,
+>>>>>>> 61ef94a55e4110601a5a1ff26b8f2813227f97ed
 };
 export default app_apis;

@@ -389,6 +389,11 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 	trade_parties: [
 		{
