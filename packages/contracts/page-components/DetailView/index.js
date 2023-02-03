@@ -1,8 +1,10 @@
 import { useSelector } from '@cogoport/store';
+import { useState, useEffect } from 'react';
 
 import useGetContract from '../../hooks/useGetContract';
 import useGetContractStats from '../../hooks/useGetContractStats';
 import useUpdateContract from '../../hooks/useUpdateContract';
+import formatPortPair from '../../utils/formatPortPair';
 
 import Body from './Body';
 import Header from './Header';
@@ -14,6 +16,15 @@ function DetailView() {
 		query: general?.query,
 	}));
 	const { data, loading, getContract } = useGetContract({ id: query?.id });
+	const formattedData = formatPortPair({ item: data });
+	const [state, setState] = useState(formattedData);
+	const [serviceType, setServiceType] = useState('');
+
+	useEffect(() => {
+		if ((formattedData || []).length) { setState(formattedData); }
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(formattedData)]);
+
 	const { updateContract, loading: loadingUpdate } = useUpdateContract();
 
 	const handleUpdateContract = async (val) => {
@@ -27,11 +38,12 @@ function DetailView() {
 
 	const { data: statsData, getContractStats } = useGetContractStats({
 		id: query?.id,
+		serviceType,
 	});
 
 	let content = <Loader />;
 
-	if (data?.id && !loading) {
+	if (state[0]?.id && !loading) {
 		content = (
 			<div className={styles.container}>
 				<Header
@@ -39,12 +51,16 @@ function DetailView() {
 					handleUpdateContract={handleUpdateContract}
 					statsData={statsData}
 					loadingUpdate={loadingUpdate}
+					setState={setState}
+					state={state}
+					setServiceType={setServiceType}
 				/>
 				<Body
 					data={data}
 					statsData={statsData}
 					getContract={getContract}
 					getContractStats={getContractStats}
+					formattedData={state}
 				/>
 			</div>
 		);

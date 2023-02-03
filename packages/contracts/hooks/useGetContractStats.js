@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetContractStats = ({ id }) => {
+const useGetContractStats = ({ id, serviceType }) => {
 	const [data, setData] = useState();
 
 	const [{ error, loading }, trigger] = useRequest({
@@ -13,6 +13,7 @@ const useGetContractStats = ({ id }) => {
 			const res = await trigger({
 				params: {
 					id,
+					service_type: serviceType || undefined,
 				},
 			});
 			setData(res?.data);
@@ -26,7 +27,7 @@ const useGetContractStats = ({ id }) => {
 			getContractStats();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [serviceType]);
 
 	return {
 		data,

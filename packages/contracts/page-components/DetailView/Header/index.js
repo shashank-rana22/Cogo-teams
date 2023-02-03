@@ -2,6 +2,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import Stats from './Stats';
+import StatsTabs from './StatsTabs';
 import styles from './styles.module.css';
 
 function Header({
@@ -9,6 +10,9 @@ function Header({
 	handleUpdateContract,
 	statsData,
 	loadingUpdate,
+	state,
+	setState,
+	setServiceType,
 }) {
 	const router = useRouter();
 	return (
@@ -27,6 +31,7 @@ function Header({
 				<div className={styles.head}>Back to Contracts</div>
 			</div>
 			<div className={styles.contract}>Contract Details</div>
+			<StatsTabs data={data} state={state} setState={setState} setServiceType={setServiceType} />
 			<Stats
 				data={data}
 				handleUpdateContract={handleUpdateContract}

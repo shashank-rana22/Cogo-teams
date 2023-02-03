@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
@@ -6,6 +6,7 @@ import Line from '../../../../common/Line';
 import formatPortPair from '../../../../utils/formatPortPair';
 
 import PortPair from './PortPair';
+import ServiceDetail from './ServiceDetail';
 import styles from './styles.module.css';
 
 function Card({ item, filters }) {
@@ -19,6 +20,11 @@ function Card({ item, filters }) {
 			}
 		});
 	}
+
+	const services = {};
+	item.services.forEach((service) => {
+		services[`${service}_services`] = (item[`${service}_services`] || []).length;
+	});
 
 	return (
 		<div className={styles.card}>
@@ -35,14 +41,6 @@ function Card({ item, filters }) {
 							{startCase(item?.contract_name)}
 						</div>
 					</div>
-					{item?.services?.map((service) => (
-						<Pill
-							size="md"
-							color="#DFE1EF"
-						>
-							{startCase(service)}
-						</Pill>
-					))}
 				</div>
 
 				<div className={styles.details}>
@@ -71,27 +69,33 @@ function Card({ item, filters }) {
 					) : null}
 				</div>
 			</div>
+			<div className={styles.service_details}>
+				{item.services.map((service, index) => (
+					<>
+						<ServiceDetail
+							item={item}
+							service={service}
+							formattedData={formattedData}
+						/>
+						{index < item.services.length - 1 ? <Line /> : null}
+					</>
+				))}
+			</div>
 			<div className={styles.body}>
 				<div className={styles.sub_container}>
 					<div className={styles.port_pair}>
 						{(newFormattedData || []).map((portPair) => (
-							<>
-								<PortPair portPair={portPair} />
-								<Line />
-							</>
+							<PortPair portPair={portPair} />
 						))}
 					</div>
 					{formattedData?.length > 2 ? (
-						<>
-							<div className={styles.extra}>
-								<div>
-									+
-									{Number(formattedData?.length) - 2}
-								</div>
-								<div>more</div>
+						<div className={styles.extra}>
+							<div>
+								+
+								{Number(formattedData?.length) - 2}
 							</div>
-							<Line />
-						</>
+							<div>more</div>
+						</div>
 					) : null}
 				</div>
 				<div className={styles.last}>

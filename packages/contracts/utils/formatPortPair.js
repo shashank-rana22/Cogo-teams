@@ -1,10 +1,4 @@
 const formatPortPair = ({ item }) => {
-	const serviceDataMapping = {
-		fcl_freight : 'fcl_freight_services',
-		lcl_freight : 'lcl_freight_services',
-		air_freight : 'air_freight_services',
-	};
-
 	const incoTermMapping = {
 		cif : 'export',
 		cfr : 'export',
@@ -23,15 +17,19 @@ const formatPortPair = ({ item }) => {
 
 	const serviceData = [];
 	services?.forEach((val) => {
-		item[serviceDataMapping?.[val]]?.forEach((data) => {
+		item[`${val}_services`]?.forEach((data) => {
 			serviceData.push(
-				data.service_details?.filter((v) => v.service_type === val)[0],
+				{
+					...data.service_details?.filter((v) => v.service_type === val)[0],
+					id     : data?.id,
+					status : data?.status,
+				},
 			);
 		});
 	});
 
-	const formattedData = serviceData.map((val, index) => ({
-		id     : item[serviceDataMapping?.[val?.service_type]]?.[index]?.id,
+	const formattedData = serviceData.map((val) => 	({
+		id     : val.id,
 		origin : val?.origin_port?.display_name || val?.origin_airport?.display_name,
 		destination:
       val?.destination_port?.display_name
@@ -45,7 +43,7 @@ const formatPortPair = ({ item }) => {
 		container_size         : val?.container_size,
 		container_type         : val?.container_type,
 		containers_count       : val?.containers_count,
-		status                 : item[serviceDataMapping?.[val?.service_type]]?.[index]?.status,
+		status                 : val?.status,
 		inco_term              : val?.inco_term,
 		shipping_line_id       : val?.shipping_line_id,
 		origin_port_id         : val?.origin_port_id,
