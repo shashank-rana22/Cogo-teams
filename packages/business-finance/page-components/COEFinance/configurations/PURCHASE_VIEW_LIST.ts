@@ -27,7 +27,7 @@ const PURCHASE_VIEW_CONFIG = {
 				type : 'tags',
 			},
 			func : 'renderFieldPair',
-			span : 1.2,
+			span : 1.3,
 		},
 		{
 			label  : 'SID',
@@ -39,7 +39,7 @@ const PURCHASE_VIEW_CONFIG = {
 				key: 'serviceType',
 			},
 			func : 'renderFieldPair',
-			span : 0.7,
+			span : 1,
 		},
 		{
 			label : 'Supplier Name',
@@ -50,13 +50,13 @@ const PURCHASE_VIEW_CONFIG = {
 		{
 			label : 'Invoice Amount',
 			key   : 'grandTotal',
-			span  : 1,
+			span  : 1.2,
 			func  : 'rendeFormate',
 		},
 		{
 			label   : 'Last Modified Date',
 			key     : 'createdDate',
-			span    : 1.25,
+			span    : 1.6,
 			func    : 'rendeFormate',
 			sorting : { name: 'modifiedDateSortType' },
 		},
@@ -64,20 +64,20 @@ const PURCHASE_VIEW_CONFIG = {
 			label   : 'Invoice Date',
 			key     : 'billDate',
 			func    : 'rendeFormate',
-			span    : 1,
+			span    : 1.2,
 			sorting : { name: 'billDateSortType' },
 		},
 		{
 			label   : 'Payment Due Date',
 			key     : 'dueDate',
 			func    : 'rendeFormate',
-			span    : 1.3,
+			span    : 1.64,
 			sorting : { name: 'dueDateSortType' },
 		},
 		{
 			label : 'Status',
 			key   : 'status',
-			span  : 1.3,
+			span  : 0.9,
 			func  : 'renderStatus',
 		},
 		{
@@ -88,13 +88,13 @@ const PURCHASE_VIEW_CONFIG = {
 		},
 		{
 			label : 'Urgency',
-			span  : 1,
+			span  : 0.9,
 			key   : 'urgencyTag',
 			func  : 'renderUrgencyTag',
 		},
 		{
 			key  : 'viewMore',
-			span : 1.3,
+			span : 1.4,
 			func : 'renderViewMore',
 		},
 		// {
