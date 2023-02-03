@@ -524,6 +524,5 @@ const navigationMappingSeller = {
 		isNew         : true,
 		showInNav     : true,
 	},
-
 };
 export default navigationMappingSeller;

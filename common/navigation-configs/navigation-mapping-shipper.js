@@ -433,6 +433,5 @@ const navigationMappingShipper = {
 		isNew         : true,
 		showInNav     : true,
 	},
-
 };
 export default navigationMappingShipper;
