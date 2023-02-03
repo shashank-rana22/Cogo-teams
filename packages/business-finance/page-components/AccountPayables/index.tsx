@@ -2,9 +2,8 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import React, { useEffect, useState } from 'react';
 
-import Overheads from './Overheads/index';
+import OverHeads from './OverHeads/index';
 import styles from './styles.module.css';
-// import styles from './styles.module.css';
 
 function AccountPayables() {
 	const [activeTab, setActiveTab] = useState('overheads');
@@ -35,7 +34,7 @@ function AccountPayables() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="overheads" title="Overheads">
-						<Overheads />
+						<OverHeads />
 					</TabPanel>
 
 					<TabPanel name="others" title="Others">

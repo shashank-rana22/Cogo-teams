@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+.uploadInvoice{
+    width:40%;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 400px;
+    overflow: scroll;
+}
+
+.lineItem{
+    width:58%;
+}

@@ -21,6 +21,10 @@
 
 .search {
     width: 341px;
+    padding: 0px 4px;
+    svg{
+        margin:2px
+    }
     input{
         font-size: 11px !important;
     }

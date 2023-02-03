@@ -67,6 +67,14 @@ function VenderComponent() {
 
 			</div>
 			<div className={styles.rightContainer}>
+				<Input
+					size="md"
+					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
+					suffix={<IcMSearchlight />}
+					value={filters.searchValue}
+					onChange={(e) => handleChange(e, 'searchValue')}
+					className={styles.search}
+				/>
 				<Button
 					size="lg"
 					themeType="secondary"
@@ -75,14 +83,6 @@ function VenderComponent() {
 				>
 					Create Vendor
 				</Button>
-				<Input
-					size="md"
-					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
-					prefix={<IcMSearchlight />}
-					value={filters.searchValue}
-					onChange={(e) => handleChange(e, 'searchValue')}
-					className={styles.search}
-				/>
 			</div>
 		</div>
 	);

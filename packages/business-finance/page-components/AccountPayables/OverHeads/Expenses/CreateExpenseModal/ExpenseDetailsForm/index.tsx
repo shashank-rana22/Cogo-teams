@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Filter from '../../../../../../commons/Filters';
-import { recurringExpenseDetails } from '../../../../Controls/recurringExpenseDetails';
+import Filter from '../../../../../commons/Filters';
+import { recurringExpenseDetails } from '../../../controls/recurringExpenseDetails';
 
 interface Props {
 	filters:object,
@@ -11,7 +11,6 @@ interface Props {
 function ExpenseDetailsForm({ filters, setFilters }:Props) {
 	return (
 		<div>
-
 			<Filter
 				controls={recurringExpenseDetails(filters, setFilters)}
 				filters={filters}

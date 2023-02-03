@@ -82,6 +82,14 @@ function ExpenseComponent() {
 
 			</div>
 			<div className={styles.rightContainer}>
+				<Input
+					size="md"
+					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
+					suffix={<IcMSearchlight />}
+					value={expenseFilters.searchValue}
+					onChange={(e) => handleChange(e)}
+					className={styles.search}
+				/>
 				<Popover visible={visible} render={expenseType()} placement="bottom">
 					<Button
 						size="lg"
@@ -92,15 +100,6 @@ function ExpenseComponent() {
 						Create Expense
 					</Button>
 				</Popover>
-
-				<Input
-					size="md"
-					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
-					prefix={<IcMSearchlight />}
-					value={expenseFilters.searchValue}
-					onChange={(e) => handleChange(e)}
-					className={styles.search}
-				/>
 			</div>
 		</div>
 	);

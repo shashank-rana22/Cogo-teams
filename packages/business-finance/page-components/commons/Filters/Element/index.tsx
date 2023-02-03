@@ -1,6 +1,5 @@
 import {
 	CheckboxGroup,
-	Upload,
 	Textarea,
 	Input,
 	Modal,
@@ -11,7 +10,8 @@ import {
 	Datepicker,
 	SingleDateRange,
 } from '@cogoport/components';
-import { IcMCloudUpload, IcMSearchlight } from '@cogoport/icons-react';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { CSSProperties, useState } from 'react';
 
 import freightMapping from '../../Constants/freight-mappings';
@@ -246,13 +246,12 @@ function Element({
 						{...rest}
 					/>
 				);
-			case 'upload':
+			case 'fileUploader':
 				return (
-					<Upload
+					<FileUploader
 						className={className}
 						style={style as CSSProperties}
 						value={value}
-						uploadIcon={<IcMCloudUpload color="black" height={24} width={24} />}
 						{...rest}
 					/>
 				);

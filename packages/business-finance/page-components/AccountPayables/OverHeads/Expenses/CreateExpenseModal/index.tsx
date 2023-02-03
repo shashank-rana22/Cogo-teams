@@ -38,7 +38,7 @@ function CreateExpenseModal({
 					<Timeline active={active} timeline={timeline} />
 				</div>
 				<div style={{ marginTop: '20px' }}>
-					{createExpenseType === 'RECURRING' ? <RecurringForm /> : 'non recurring'}
+					{createExpenseType === 'RECURRING' ? <RecurringForm active={active} /> : 'non recurring'}
 				</div>
 
 			</Modal.Body>
