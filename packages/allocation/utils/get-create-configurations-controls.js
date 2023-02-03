@@ -38,7 +38,7 @@ const getCreateConfigurationsControls = ({
 			rules: {
 				required: true,
 			},
-
+			isClearable: true,
 		},
 		{
 			name        : 'user_ids',
@@ -51,6 +51,7 @@ const getCreateConfigurationsControls = ({
 			disabled    : true,
 			value       : value.user_ids,
 			valueKey    : 'user_id',
+			isClearable : true,
 		},
 		{
 			name        : 'stakeholder_type',
@@ -71,6 +72,7 @@ const getCreateConfigurationsControls = ({
 			rules: {
 				required: true,
 			},
+			isClearable: true,
 		},
 		{
 			name               : 'segment_id',
@@ -97,6 +99,7 @@ const getCreateConfigurationsControls = ({
 			rules: {
 				required: true,
 			},
+			isClearable: true,
 		},
 
 		{
@@ -112,6 +115,7 @@ const getCreateConfigurationsControls = ({
 			rules: {
 				required: true,
 			},
+			isClearable: true,
 		},
 		{
 			name        : 'locking_period',

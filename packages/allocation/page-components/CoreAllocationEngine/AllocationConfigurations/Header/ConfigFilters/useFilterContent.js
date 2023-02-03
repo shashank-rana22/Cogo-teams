@@ -14,7 +14,7 @@ const useFilterContent = ({ params, setParams }) => {
 	const { reset, getValues } = formProps;
 
 	useEffect(() => {
-		if (Object.keys(filters).length) {
+		if (!isEmpty(filters)) {
 			setParams({
 				...params,
 				page    : 1,

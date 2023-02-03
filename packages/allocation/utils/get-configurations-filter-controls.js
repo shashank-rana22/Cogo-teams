@@ -14,6 +14,7 @@ const controls = [
 				stakeholder_type : 'partner',
 			},
 		},
+		isClearable: true,
 	},
 	{
 		name        : 'stakeholder_type',
@@ -30,6 +31,7 @@ const controls = [
 			{ value: 'service_ops2', label: 'Service OPS 2' },
 			{ value: 'trade_finance_agent', label: 'Trade Finance Agent' },
 		],
+		isClearable: true,
 	},
 	{
 		name    : 'locking_criterion',
