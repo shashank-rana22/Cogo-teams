@@ -1236,12 +1236,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_first_mile_shipments',
-		access_type  : 'private',
-		service_name : 'bookings',
-	},
-	{
-		api          : 'list_last_mile_shipments',
+		api          : 'list_document_desk_shipments',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
