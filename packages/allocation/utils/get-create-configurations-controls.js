@@ -15,7 +15,7 @@ const getCreateConfigurationsControls = ({
 				{ value: 'lead_organization', label: 'Lead Organization' },
 			],
 			rules: {
-				required: true,
+				required: 'Service Type is required',
 			},
 		},
 
@@ -36,7 +36,7 @@ const getCreateConfigurationsControls = ({
 				},
 			},
 			rules: {
-				required: true,
+				required: 'Roles is required',
 			},
 			isClearable: true,
 		},
@@ -70,7 +70,7 @@ const getCreateConfigurationsControls = ({
 				{ value: 'trade_finance_agent', label: 'Trade Finance Agent' },
 			],
 			rules: {
-				required: true,
+				required: 'Stakeholder Type is required',
 			},
 			isClearable: true,
 		},
@@ -97,7 +97,7 @@ const getCreateConfigurationsControls = ({
 				is_lead_user_segment : false,
 			},
 			rules: {
-				required: true,
+				required: 'Segment is Required',
 			},
 			isClearable: true,
 		},
@@ -113,7 +113,7 @@ const getCreateConfigurationsControls = ({
 				{ value: 'shipment_booked', label: 'Shipment Booked' },
 			],
 			rules: {
-				required: true,
+				required: 'Locking Criteria is Required',
 			},
 			isClearable: true,
 		},
@@ -124,7 +124,7 @@ const getCreateConfigurationsControls = ({
 			type        : 'number',
 			value       : value.locking_period,
 			rules       : {
-				required: true,
+				required: 'Locking Period is Required',
 			},
 		},
 		{
@@ -134,7 +134,7 @@ const getCreateConfigurationsControls = ({
 			type        : 'number',
 			value       : value.cooling_period,
 			rules       : {
-				required: true,
+				required: 'Cooling Period is Required',
 			},
 		},
 		// {
