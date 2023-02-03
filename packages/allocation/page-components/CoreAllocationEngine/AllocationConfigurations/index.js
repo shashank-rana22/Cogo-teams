@@ -6,12 +6,15 @@ import styles from './styles.module.css';
 
 function Configurations() {
 	const {
-		list,
+		list, params, setParams,
 	} = useAllocationConfigurations();
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header
+				params={params}
+				setParams={setParams}
+			/>
 
 			<List list={list} />
 		</div>

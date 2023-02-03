@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Heading from '../../common/Heading';
 
 import Configurations from './AllocationConfigurations';
+import Relations from './AllocationRelations';
 import Requests from './AllocationRequests';
 import styles from './styles.module.css';
 
@@ -32,7 +33,7 @@ function CoreAllocationEngine() {
 					</TabPanel>
 
 					<TabPanel name="relations" title="Relations">
-						<div>Relations</div>
+						<Relations />
 					</TabPanel>
 
 					<TabPanel name="requests" title="Requests">

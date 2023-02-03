@@ -1,0 +1,26 @@
+.header_container {
+    display: flex;
+    flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.search_container {
+    display: flex;
+    margin-right: 8px;
+}
+
+.button_container{
+    display: flex;
+}
+
+.filter_dot {
+    height: 8px;
+	width: 8px;
+	border: 1px solid #ffffff;
+	border-radius: 100%;
+	background: #EE3425;
+	position: relative;
+	bottom: 4px;
+	right: 4px;
+}
