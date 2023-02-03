@@ -5,13 +5,25 @@ import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
+interface ItemProps {
+	discount_amount?:number;
+	discount_amount_currency?:string;
+	discount_amount_revenue?:number;
+	discount_amount_revenue_currency?:string;
+	status?:string;
+}
 interface PropsType {
-	itemData: any;
+	itemData: ItemProps;
 	amountTab: string;
 	setAmountTab: Function;
 }
 
 function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
+	const {
+		discount_amount:DiscountAmount, discount_amount_currency:DicountAmountCurrency,
+		discount_amount_revenue:DiscountAmountRevenue,
+		discount_amount_revenue_currency:DiscountAmountRevenueCurrency, status:Status,
+	} = itemData || {};
 	const options = [
 		{ name: 'Expense', value: 'expense' },
 		{ name: 'Income', value: 'income' },
@@ -32,8 +44,8 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 					</div>
 					<div className={styles.value_text}>
 						{getFormattedPrice(
-							itemData.discount_amount,
-							itemData.discount_amount_currency,
+							DiscountAmount,
+							DicountAmountCurrency,
 						)}
 					</div>
 				</div>
@@ -43,16 +55,16 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 					</div>
 					<div className={styles.value_text}>
 						{getFormattedPrice(
-							itemData.discount_amount_revenue,
-							itemData.discount_amount_revenue_currency,
+							DiscountAmountRevenue,
+							DiscountAmountRevenueCurrency,
 						) || ' -'}
 					</div>
 				</div>
 			</div>
-			{itemData.status && (
+			{Status && (
 				<div className={styles.status}>
 					<div className={styles.status_label}>Status - </div>
-					<div className={styles.status_value}>{itemData.status}</div>
+					<div className={styles.status_value}>{Status}</div>
 				</div>
 			)}
 		</div>

@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 interface ItemTypes {
 	organizationName?: string;
-	createdByName: string;
+	createdByName?: string;
 	buyerDetails?: BusinessNameTypes;
 }
 
@@ -64,7 +64,7 @@ function ModifiedName({ item, field }: PropsType) {
 
 			{field?.key === 'createdByName' && (
 				<div>
-					{createdByName?.length > 10 ? (
+					{createdByName!?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"

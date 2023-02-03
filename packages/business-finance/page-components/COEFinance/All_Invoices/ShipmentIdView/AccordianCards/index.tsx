@@ -20,6 +20,15 @@ function AccordianCards({
 	currentOpenSID,
 	setCurrentOpenSID,
 }: ListData) {
+	const {
+		serial_id:serialId, pending_approvals:pendingApproval, shipment_type:shipmentType,
+		expense_count:expenseCount, expense_total_price:expenceTotalPrice,
+		expense_total_currency:expenseTotalCurrency, urgency_expense_count:urgentExpenseCount,
+		urgency_total_price:urgencyTotalPrice, urgency_total_currency:urgencyTotalCurrency,
+		income_count:incomeCount, income_total_price:incomeTotalPrice, income_total_currency:incomeTotalCurrency,
+		credit_expense_count:creditExpanseCount, credit_total_price:creditTotalPrice, quotation_profit:quotationProfit,
+		tentative_profit:tentativeProfit, id,
+	} = itemData || {};
 	const [amountTab, setAmountTab] = useState('expense');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
@@ -41,20 +50,20 @@ function AccordianCards({
 									{' '}
 								</div>
 								<div className={styles.sid_value_text}>
-									{itemData.serial_id}
+									{serialId}
 								</div>
 							</div>
 							{itemData.pending_approvals === 0 ? null : (
 								<div className={styles.pending_text}>
 									Pending Approval -
 									{' '}
-									{itemData.pending_approvals}
+									{pendingApproval}
 								</div>
 							)}
 						</div>
 						<div className={styles.freight_width}>
 							<div className={styles.freight}>
-								{startCase(itemData.shipment_type!)}
+								{startCase(shipmentType!)}
 							</div>
 						</div>
 					</div>
@@ -67,23 +76,23 @@ function AccordianCards({
 							<div className={styles.expense}>
 								<div className={styles.expense_label_text}>
 									Expense (
-									{itemData.expense_count || 0}
+									{expenseCount || 0}
 									)
 								</div>
 								<div className={styles.small_right_border}>
-									<div className={styles.smallVr} />
+									<div className={styles.small_vr} />
 								</div>
 								<div className={styles.expense_value_text}>
 									{getFormattedPrice(
-										itemData.expense_total_price!,
-										itemData.expense_total_currency!,
+										expenceTotalPrice!,
+										expenseTotalCurrency!,
 									)}
 								</div>
 							</div>
 							<div className={styles.urgent}>
 								<div className={styles.urgent_label_text}>
 									Urgent (
-									{itemData.urgency_expense_count}
+									{urgentExpenseCount}
 									)
 								</div>
 								<div className={styles.small_right_border}>
@@ -91,8 +100,8 @@ function AccordianCards({
 								</div>
 								<div className={styles.urgent_value_text}>
 									{getFormattedPrice(
-										itemData.urgency_total_price!,
-										itemData.urgency_total_currency || 'INR',
+										urgencyTotalPrice!,
+										urgencyTotalCurrency || 'INR',
 									)}
 								</div>
 							</div>
@@ -101,7 +110,7 @@ function AccordianCards({
 							<div className={styles.expense}>
 								<div className={styles.expense_label_text}>
 									Income (
-									{itemData.income_count}
+									{incomeCount}
 									)
 								</div>
 								<div className={styles.small_right_border}>
@@ -109,23 +118,23 @@ function AccordianCards({
 								</div>
 								<div className={styles.expense_value_text}>
 									{getFormattedPrice(
-										itemData.income_total_price!,
-										itemData.income_total_currency || 'INR',
+										incomeTotalPrice!,
+										incomeTotalCurrency || 'INR',
 									)}
 								</div>
 							</div>
 							<div className={styles.expense}>
 								<div className={styles.expense_label_text}>
 									Credit Note (
-									{itemData.credit_expense_count}
+									{creditExpanseCount}
 									)
 								</div>
 								<div className={styles.small_right_border}>
-									<div className={styles.smallVr} />
+									<div className={styles.small_vr} />
 								</div>
 								<div className={styles.expense_value_text}>
 									{getFormattedPrice(
-										itemData.credit_total_price!,
+										creditTotalPrice!,
 										'INR',
 									)}
 								</div>
@@ -148,7 +157,7 @@ function AccordianCards({
 									/>
 								</div>
 								<div className={styles.profitibility_value}>
-									{itemData.quotation_profit}
+									{quotationProfit}
 									%
 								</div>
 							</div>
@@ -163,18 +172,18 @@ function AccordianCards({
 									/>
 								</div>
 								<div className={styles.profitibility_value}>
-									{itemData.tentative_profit}
+									{tentativeProfit}
 									{' '}
 									%
 								</div>
 							</div>
 						</div>
 						<div className={styles.button_style}>
-							{currentOpenSID !== itemData?.id ? (
+							{currentOpenSID !== id ? (
 								<Button
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
-										setCurrentOpenSID(itemData?.id);
+										setCurrentOpenSID(id);
 									}}
 									themeType="secondary"
 								>
@@ -185,9 +194,9 @@ function AccordianCards({
 									themeType="secondary"
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
-										setCurrentOpenSID(itemData?.id);
+										setCurrentOpenSID(id);
 										router.push(
-											`/business-finance/coe-finance/cost-sheet?shipmentId=${itemData.id}
+											`/business-finance/coe-finance/cost-sheet?shipmentId=${id}
 										&jobNumber=${dataCard.jobNumber}&jobSource=${dataCard.jobSource}
 										&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}`,
 										);
@@ -205,7 +214,7 @@ function AccordianCards({
 					)}
 				</div>
 				<div>
-					{currentOpenSID === itemData?.id ? (
+					{currentOpenSID === id ? (
 						<CardItem
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}

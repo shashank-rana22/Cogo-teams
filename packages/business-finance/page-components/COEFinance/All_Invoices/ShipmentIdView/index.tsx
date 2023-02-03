@@ -44,7 +44,7 @@ function ShipmentIdView() {
 		filters,
 		loading,
 		list: { total, data },
-	} = useShipmentIdView({ pendingApproval, serialId });
+	} = useShipmentIdView({ pendingApproval, serial_id: serialId });
 
 	const handleShipmentView = () => {
 		if (loading) {
@@ -69,10 +69,10 @@ function ShipmentIdView() {
 			<Filters
 				hookSetters={hookSetters}
 				filters={filters}
-				pending_approval={pendingApproval}
-				setPending_approval={setPendingApproval}
-				serial_id={serialId}
-				setSerial_id={setSerialId}
+				pendingApproval={pendingApproval}
+				setPendingApproval={setPendingApproval}
+				serialId={serialId}
+				setSerialId={setSerialId}
 			/>
 
 			<div>
