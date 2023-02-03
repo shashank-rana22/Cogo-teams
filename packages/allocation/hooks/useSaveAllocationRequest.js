@@ -2,7 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useMemo, useEffect } from 'react';
+import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
 import getControls from '../utils/get-create-request-controls';
 import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
@@ -10,6 +11,8 @@ import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
 const useSaveAllocationRequest = () => {
 	const controls = getControls();
+
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const formProps = useForm({
 		defaultValues: {
@@ -23,13 +26,13 @@ const useSaveAllocationRequest = () => {
 		getValues,
 	} = formProps;
 
-	const { service_type, organization_id, partner_id } = watch();
+	const { service_type, organization_id, partner_id :servicePartnerId } = watch();
 
 	useEffect(() => {
 		setValue('organization_user_id', '');
 		setValue('partner_user_id', '');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [service_type, organization_id, partner_id]);
+	}, [service_type, organization_id, servicePartnerId]);
 
 	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type }) || [];
 
@@ -43,8 +46,24 @@ const useSaveAllocationRequest = () => {
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
+		console.log('formValues', formValues);
+
 		try {
-			const payload = {};
+			const payload = {
+				service_type     : formValues.service_type,
+				stakeholder_type : formValues.stakeholder_type,
+				reason           : formValues.reason,
+				service_id:
+					formValues.service_type === 'organization'
+						? formValues.organization_id
+						: formValues.partner_id,
+				service_user_id:
+					formValues.service_type === 'organization'
+						? formValues.organization_user_id
+						: formValues.partner_user_id,
+				stakeholder_id : formValues.stakeholder_id,
+				partner_id     : partnerId,
+			};
 
 			await trigger({ data: payload });
 
@@ -76,11 +95,11 @@ const useSaveAllocationRequest = () => {
 				},
 			}),
 			...(name === 'partner_user_id' && {
-				disabled : !partner_id,
+				disabled : !servicePartnerId,
 				params   : {
 					filters: {
-						status: 'active',
-						partner_id,
+						status     : 'active',
+						partner_id : servicePartnerId,
 					},
 					pagination_data_required: false,
 				},
@@ -100,8 +119,6 @@ const useSaveAllocationRequest = () => {
 		loading,
 		formProps,
 		controls: filteredControls,
-		organization_id,
-		partner_id,
 	};
 };
 
