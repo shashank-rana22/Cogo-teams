@@ -4,7 +4,7 @@ const controls = [
 		label       : 'Roles',
 		type        : 'asyncMultiSelect',
 		placeholder : 'Select roles',
-		asyncKey    : 'partner_users',
+		asyncKey    : 'partner_roles',
 		initialCall : false,
 		params      : {
 			permissions_data_required : false,
