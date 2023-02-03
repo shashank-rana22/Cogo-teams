@@ -9,7 +9,9 @@ import getControls from '../utils/get-create-request-controls';
 import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
 import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
-const useSaveAllocationRequest = () => {
+const useSaveAllocationRequest = (props) => {
+	const { onCloseModal } = props;
+
 	const controls = getControls();
 
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
@@ -46,8 +48,6 @@ const useSaveAllocationRequest = () => {
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
-		console.log('formValues', formValues);
-
 		try {
 			const payload = {
 				service_type     : formValues.service_type,
@@ -67,7 +67,7 @@ const useSaveAllocationRequest = () => {
 
 			await trigger({ data: payload });
 
-			// close modal and refetch
+			onCloseModal();
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.data)

@@ -2,6 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 // import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useListAllocationRequests from '../../../hooks/useListAllocationRequests';
 import useSaveAllocationRequest from '../../../hooks/useSaveAllocationRequest';
 
 import Form from './Form';
@@ -12,19 +13,21 @@ import styles from './styles.module.css';
 function Requests() {
 	const [showModal, setShowModal] = useState(false);
 
-	// const showCreateUpdateModal = !isEmpty(editRequestItem);
-
-	const onClose = () => {
+	const onCloseModal = () => {
 		setShowModal(false);
 	};
 
 	const {
+		data,
+		loading, refetch, setParams,
+	} = useListAllocationRequests();
+
+	const {
 		onSave,
-		loading,
+		loading: loadingOnSave,
 		formProps,
 		controls,
-
-	} = useSaveAllocationRequest({});
+	} = useSaveAllocationRequest({ onCloseModal, refetch });
 
 	const { handleSubmit } = formProps;
 
@@ -32,14 +35,14 @@ function Requests() {
 		<section className={styles.container}>
 			<Header onClickCreateReqBtn={() => setShowModal(true)} />
 
-			<List />
+			<List data={data} loading={loading} />
 
 			{showModal ? (
 				<Modal
 					show={showModal}
 					position="basic"
 					size="lg"
-					onClose={onClose}
+					onClose={onCloseModal}
 					closeOnOuterClick={false}
 					className={styles.modal_container}
 				>
@@ -57,7 +60,7 @@ function Requests() {
 							<Button
 								size="md"
 								type="submit"
-								disabled={loading}
+								loading={loadingOnSave}
 								id="save_request_btn"
 							>
 								Save
