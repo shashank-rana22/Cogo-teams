@@ -1,16 +1,11 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import useListAllocationRequests from '../../../../hooks/useListAllocationRequests';
-
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-function List() {
-	const {
-		data,
-		// loading, refetch,setParams
-	} = useListAllocationRequests();
+function List(props) {
+	const { data, loading } = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
 	if (isEmpty(list)) {
