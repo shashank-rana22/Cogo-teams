@@ -7,15 +7,21 @@ import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
 function ConfigFilters() {
-	const { controls, showFilters, setShowFilters } = useFilterContent();
+	const { controls, formProps, showFilters, setShowFilters } = useFilterContent();
 
 	return (
 		<Filters
 			controls={controls}
 			open={showFilters}
 			setOpen={setShowFilters}
+			formProps={formProps}
+			onClickOutside={() => setShowFilters(false)}
 		>
-			<Button size="md" themeType="secondary" onClick={() => setShowFilters(!showFilters)}>
+			<Button
+				size="md"
+				themeType="secondary"
+				onClick={() => setShowFilters(!showFilters)}
+			>
 				FILTER
 				<IcMFilter style={{ marginLeft: '4px' }} />
 				<div className={styles.filter_dot} />

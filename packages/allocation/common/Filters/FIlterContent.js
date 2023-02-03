@@ -1,5 +1,4 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 
 import { getFieldController } from '../Form/Controlled';
 
@@ -11,8 +10,9 @@ function FilterContent({
 	reset = () => {},
 	applyFilters = () => {},
 	setOpen = () => {},
+	formProps = {},
 }) {
-	const { control: formControls } = useForm();
+	const { control: formControls } = formProps;
 
 	const handleClick = () => {
 		applyFilters();
