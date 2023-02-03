@@ -19,7 +19,6 @@ const useSaveAllocationRequest = (props) => {
 	const formProps = useForm({
 		defaultValues: {
 			service_type: 'organization',
-
 		},
 	});
 	const {

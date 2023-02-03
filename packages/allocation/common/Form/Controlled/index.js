@@ -11,6 +11,7 @@ import AsyncSelectController from './AsyncSelectController';
 
 const controlTypeControllerMapping = {
 	text        : InputController,
+	number      : InputController,
 	select      : SelectController,
 	multiSelect : MultiselectController,
 	radioGroup  : RadioGroupController,

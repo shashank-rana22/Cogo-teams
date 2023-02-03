@@ -2,6 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useAllocationConfigurations = () => {
+	const [showCreateConfig, setShowCreateConfig] = useState(false);
+
 	const [params, setParams] = useState({
 		sort_type : 'desc',
 		sort_by   : 'created_at',
@@ -11,7 +13,7 @@ const useAllocationConfigurations = () => {
 		},
 	});
 
-	const [{ loading, data }] = useRequest({
+	const [{ loading, data }, refetch] = useRequest({
 		url    : '/list_allocation_configurations',
 		method : 'get',
 		params,
@@ -33,6 +35,9 @@ const useAllocationConfigurations = () => {
 		getNextPage,
 		params,
 		setParams,
+		showCreateConfig,
+		setShowCreateConfig,
+		listRefresh: refetch,
 	};
 };
 

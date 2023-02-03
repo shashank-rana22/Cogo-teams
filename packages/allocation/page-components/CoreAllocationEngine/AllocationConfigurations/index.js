@@ -1,12 +1,18 @@
 import useAllocationConfigurations from '../../../hooks/useAllocationConfiguration';
 
+import CreateConfigurationModal from './CreateConfiguartionModal';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
 
 function Configurations() {
 	const {
-		list, params, setParams,
+		list,
+		params,
+		setParams,
+		showCreateConfig,
+		setShowCreateConfig,
+		listRefresh,
 	} = useAllocationConfigurations();
 
 	return (
@@ -14,9 +20,19 @@ function Configurations() {
 			<Header
 				params={params}
 				setParams={setParams}
+				setShowCreateConfig={setShowCreateConfig}
 			/>
 
 			<List list={list} />
+
+			{showCreateConfig && (
+				<CreateConfigurationModal
+					viewType="create"
+					showCreateConfig={showCreateConfig}
+					setShowCreateConfig={setShowCreateConfig}
+					listRefresh={listRefresh}
+				/>
+			)}
 		</div>
 	);
 }

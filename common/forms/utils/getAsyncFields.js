@@ -97,6 +97,18 @@ function asyncFieldsOrganizationUser() {
 	};
 }
 
+function asyncFieldsCampaignSegments() {
+	return {
+		labelKey    : 'label',
+		valueKey    : 'id',
+		endpoint    : 'list_segments',
+		initialCall : true,
+		params      : {
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -105,4 +117,5 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsOrganizations,
 	asyncFieldsOrganizationUser,
+	asyncFieldsCampaignSegments,
 };
