@@ -69,11 +69,11 @@
 }
 
 .go_back {
+	margin-top: 10px;
 	font-size: 12px;
 	font-weight: 600;
 	border-radius: 12px;
 	box-shadow: 0 4px 8px rgb(98 127 172 / 20%);
-	margin-top: 10px;
 }
 
 .errors {

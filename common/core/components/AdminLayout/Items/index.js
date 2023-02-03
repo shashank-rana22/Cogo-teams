@@ -6,13 +6,15 @@ import styles from '../Navbar/styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const router = useRouter();
-	const { pathname, query, asPath } = router;
+	const { query, asPath } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
 	const splitAspath = asPath.split('/')?.[1];
+
+	const { options = [] } = item || {};
 
 	const handleClickOnItem = (itemdata) => {
 		if (itemdata.options?.length > 0) {
@@ -28,17 +30,17 @@ function Items({ item, resetSubnavs }) {
 			router.push(itemdata.href, itemdata.as);
 		}
 	};
+	const pathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
 
-	const splitasPathWithoutPartnerId = `/${pathname.split('/').slice(2, 5).join('/')}`;
+	const isSubActive = options?.some((singleOption) => singleOption.as?.replace('/v2', '') === pathWithoutPartnerId);
 
-	const isHref =	splitasPathWithoutPartnerId === item.as
-		|| item?.options?.some((singleOption) => singleOption.as === splitasPathWithoutPartnerId);
+	const isHref = pathWithoutPartnerId === item?.as?.replace('/v2', '') || isSubActive;
 
 	const Element = item.icon || IcMDefault;
 
 	const singleNav = (
 		<div
-			className={isHref ? styles.active_item : styles.list_item_inner}
+			className={isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
@@ -48,7 +50,7 @@ function Items({ item, resetSubnavs }) {
 			<span>
 				{item.title}
 			</span>
-			{item.options?.length > 0 && (
+			{options?.length > 0 && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
@@ -60,14 +62,15 @@ function Items({ item, resetSubnavs }) {
 			<li key={item.title} className={styles.list_item}>
 				{singleNav}
 			</li>
-			{showSubNav && item?.options?.map((singleOption) => {
-				const isHrefMatch = splitasPathWithoutPartnerId === singleOption.as;
+			{showSubNav && options?.map((singleOption) => {
+				const isHrefMatch = pathWithoutPartnerId === singleOption.as?.replace('/v2', '');
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<div
 							role="presentation"
 							onClick={() => handleClickOnItem(singleOption)}
-							className={isHrefMatch ? styles.active_item : styles.list_item_subitem}
+							className={isHrefMatch ? `${styles.list_item_subitem} 
+							${styles.active_option}` : styles.list_item_subitem}
 						>
 							<span>
 								{singleOption.title}
