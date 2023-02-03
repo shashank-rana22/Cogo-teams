@@ -10,11 +10,17 @@ interface ItemProps {
 }
 interface Props {
 	item:ItemProps;
+	field: {
+		key: string;
+		topKey: object;
+		bottomKey: object;
+		label: string;
+	};
 }
-function RenderUrgencyTag({ item }:Props) {
+function RenderUrgencyTag({ item, field }:Props) {
 	return (
 		<div>
-			{item?.urgencyTag ? (
+			{item?.urgencyTag && field?.key === 'urgencyTag' ? (
 				<Tooltip
 					placement="top"
 					content={(
