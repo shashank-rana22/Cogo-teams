@@ -392,6 +392,11 @@ const partner = {
 			feature      : 'trade_party',
 		},
 		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'assign_partner_agents_with_filters',
 			access_type  : 'private',
 			service_name : 'partner',
