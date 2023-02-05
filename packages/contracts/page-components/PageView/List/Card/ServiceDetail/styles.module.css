@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.service{
+	display: flex;
+	gap: 6px;
+    align-items: center;
+}
+
+.port_pair{
+    padding: 6px;
+    box-shadow: 0px 0px 4px rgba(44, 62, 80, 0.2);
+    border-radius: 4px;
+}
+.quantity{
+    padding: 6px;
+    box-shadow: 0px 0px 4px rgba(44, 62, 80, 0.2);
+    border-radius: 4px;
+}

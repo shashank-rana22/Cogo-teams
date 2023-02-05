@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useUpdateContractService from '../../../hooks/useUpdateContractService';
-import formatPortPair from '../../../utils/formatPortPair';
 
 import Main from './Main';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
-function Body({ data, statsData, getContract, getContractStats }) {
-	const formattedData = formatPortPair({ item: data });
-
+function Body({ data, statsData, getContract, getContractStats, formattedData }) {
 	const [activePair, setActivePair] = useState(formattedData[0]);
+
+	useEffect(() => {
+		if ((formattedData || []).length) {
+			setActivePair(formattedData[0]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(formattedData)]);
 
 	const { updateContractService } = useUpdateContractService({
 		getContract,

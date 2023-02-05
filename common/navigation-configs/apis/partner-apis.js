@@ -2183,6 +2183,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'get_organization_branch_hierarchy',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	support_crm: [
 		{
@@ -4357,6 +4362,33 @@ const partner = {
 			api          : 'list_conditions',
 			access_type  : 'private',
 			service_name : 'condition',
+		},
+	],
+	payment_modes_and_methods: [
+		{
+			api          : 'list_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'create_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'get_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'update_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'payment',
 		},
 	],
 	condition: [
@@ -7972,6 +8004,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'promotion',
 
+		},
+		{
+			api          : 'get_promotion_shipment_stats',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'list_promotion_shipments',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'download_promotion_shipment_csv',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 		{
 			api          : 'list_promotions',

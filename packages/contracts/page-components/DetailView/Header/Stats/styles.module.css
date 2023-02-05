@@ -31,13 +31,18 @@
 
 .details{
     display: flex;
-    gap:56px;
+    gap: 96px;
     margin-left: 12px;
+    margin-bottom: 10px;
+}
+.service_details{
+    display: flex;
+    gap: 12px
 }
 .information{
     display: flex;
     margin-left: 16px;
-    gap: 80px;
+    gap: 102px;
 }
 
 .main_container{

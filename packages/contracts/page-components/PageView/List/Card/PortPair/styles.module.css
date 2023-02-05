@@ -39,3 +39,17 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.container{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #F2F2F2;
+	border-radius: 4px;
+	padding: 8px 12px;
+}
+.service{
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 10px;
+}

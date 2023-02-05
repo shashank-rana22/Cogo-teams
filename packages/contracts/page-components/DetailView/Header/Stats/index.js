@@ -1,20 +1,12 @@
 import { format, startCase } from '@cogoport/utils';
 
+import Line from '../../../../common/Line';
 import formatPortPair from '../../../../utils/formatPortPair';
+import getQuantity from '../../../../utils/getQuantity';
+import ServiceDetail from '../../../PageView/List/Card/ServiceDetail';
 
 import Content from './Content';
 import styles from './styles.module.css';
-
-const mapping = {
-	fcl_freight : 'containers_count',
-	lcl_freight : 'weight',
-	air_freight : 'weight',
-};
-const unitMapping = {
-	fcl_freight : '',
-	lcl_freight : 'Mt',
-	air_freight : 'Kgs',
-};
 
 function Stats({
 	data,
@@ -24,8 +16,6 @@ function Stats({
 }) {
 	const portPairdata = formatPortPair({ item: data });
 
-	let contentToShow = 0;
-	(portPairdata || []).forEach((item) => { contentToShow += Number(item?.[mapping?.[item?.service_type]]); });
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -53,14 +43,18 @@ function Stats({
 							)}
 						</div>
 					</div>
-					<div className={styles.pair}>
-						<div>
-							{portPairdata[0]?.service_type === 'fcl_freight' ? 'No Of Containers :' : 'Weight :'}
-						</div>
-						<div className={styles.value}>
-							{`${contentToShow} 
-							${startCase([unitMapping[portPairdata[0]?.service_type]])}`}
-						</div>
+
+					<div className={styles.service_details}>
+						{data.services.map((service, index) => (
+							<>
+								<ServiceDetail
+									item={data}
+									service={service}
+									formattedData={portPairdata}
+								/>
+								{index < data.services.length - 1 ? <Line /> : null}
+							</>
+						))}
 					</div>
 					{data?.status === 'active' ? (
 						<div className={styles.pair}>

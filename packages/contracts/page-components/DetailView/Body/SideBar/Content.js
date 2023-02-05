@@ -102,6 +102,7 @@ function Content({
 						<PortPair
 							portPair={portPair}
 							detailView
+							fromDetails
 						/>
 					</div>
 					<Footer statsData={statsData} portPair={portPair} index={index} />
