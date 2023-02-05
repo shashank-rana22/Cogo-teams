@@ -76,7 +76,7 @@ const airPayload = ({ service, value }) => {
 		sourced_by_id                  : value?.sourced_by_id,
 		spot_negotiation_id            : service?.id,
 		data                           : {
-			shipping_line_id    : value?.shipping_line_id,
+			airline_id          : value?.airline_id,
 			[key1]              : { line_items: origin_line_items },
 			[key2]              : { line_items: destination_line_items },
 			surcharge           : { line_items: surcharge_line_items },

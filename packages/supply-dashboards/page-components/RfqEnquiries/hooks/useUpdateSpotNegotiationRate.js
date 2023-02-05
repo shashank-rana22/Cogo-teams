@@ -84,7 +84,7 @@ const useUpdateSpotNegotiationRate = ({
 				const val = prefillData.current?.data[item];
 				if (val) {
 					if (item === 'line_items') {
-						setValue('line_items', val);
+						mandatoryFreightCodes = val;
 					} else if (item === 'origin_storage') {
 						setValue('origin_free_limit', val?.free_limit);
 						setValue('origin_slabs', val?.slabs);
@@ -120,8 +120,9 @@ const useUpdateSpotNegotiationRate = ({
 					}
 				}
 			});
-			Object.keys(data?.freights_charge_codes || {}).forEach((code) => {
-				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')) {
+			Object.keys(data?.freights_charge_codes || data?.cfs_charge_codes || {}).forEach((code) => {
+				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')
+				|| data?.cfs_charge_codes?.[code].tags?.includes('mandatory')) {
 					let flag = 0;
 					mandatoryFreightCodes.forEach((charge) => {
 						if (charge.code === code) {
@@ -250,6 +251,8 @@ const useUpdateSpotNegotiationRate = ({
 		sourced_by_id            : !values?.service_provider_id,
 		origin_main_port_id      : !service?.data?.origin_port?.is_icd,
 		destination_main_port_id : !service?.data?.destination_port?.is_icd,
+		shipping_line_id         : !service?.service === 'fcl_freight'
+		|| !(service?.service === 'haulage_freight' && values?.haulage_type === 'merchant'),
 	};
 
 	const onError = (errs, e) => {
@@ -284,7 +287,7 @@ const useUpdateSpotNegotiationRate = ({
 					Toast.error(`${completeMessage}`);
 				} else {
 					setActiveService(null);
-					setSubmittedEnquiry((prev) => [...prev, `${selectedCard?.id}${service?.service}`]);
+					setSubmittedEnquiry((prev) => [...prev, `${service?.id}${service?.service}`]);
 					Toast.success('Negotiation Updated');
 					if (!data?.is_complete) {
 						setRevertCounts((prev) => ({ ...prev, [selectedCard?.id]: prev[selectedCard.id] + 1 }));

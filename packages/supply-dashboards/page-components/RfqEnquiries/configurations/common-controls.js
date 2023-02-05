@@ -20,17 +20,16 @@ const commonControls = ({ service }) => {
 		},
 	];
 	const lineControls = {
-		label: ['fcl_freight', 'haulage_freight', 'trailer_freight']
+		label: ['fcl_freight', 'haulage_freight']
 			.includes(service) ? 'Shipping Line' : 'Air Line',
-		name: ['fcl_freight', 'haulage_freight', 'trailer_freight']
+		name: ['fcl_freight', 'haulage_freight']
 			.includes(service) ? 'shipping_line_id' : 'airline_id',
 		placeholder : 'Select',
 		type        : 'select',
 		span        : 4,
-		requirement : true,
 		rules       : { required: 'This is required' },
 	};
-	if (['fcl_freight', 'haulage_freight', 'air_freight', 'trailer_freight'].includes(service)) {
+	if (['fcl_freight', 'haulage_freight', 'air_freight'].includes(service)) {
 		return [...controls, lineControls];
 	}
 	return controls;
