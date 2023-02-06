@@ -1,6 +1,6 @@
 import useAllocationConfigurations from '../../../hooks/useAllocationConfiguration';
 
-import CreateConfigurationModal from './CreateConfiguartionModal';
+import CreateConfigurationModal from './CreateConfigurationModal';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';

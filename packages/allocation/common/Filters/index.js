@@ -1,6 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 
-import FilterContent from './FIlterContent';
+import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
 function Filters({
