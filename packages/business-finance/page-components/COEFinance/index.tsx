@@ -31,7 +31,12 @@ function CoeFinance() {
 
 	const handleChange = (tab) => {
 		setActiveTab(tab);
-		push('/business-finance/coe-finance/[active_tab]', `/business-finance/coe-finance/${tab}`);
+		push(
+			tab === 'all_invoices' ? '/business-finance/coe-finance/[active_tab]/purchase-view '
+				: '/business-finance/coe-finance/[active_tab]',
+			tab === 'all_invoices' ? `/business-finance/coe-finance/${tab}/purchase-view`
+				: `/business-finance/coe-finance/${tab}`,
+		);
 	};
 
 	return (
