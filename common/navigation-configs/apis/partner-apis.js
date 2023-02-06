@@ -392,6 +392,11 @@ const partner = {
 			feature      : 'trade_party',
 		},
 		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'assign_partner_agents_with_filters',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -4377,6 +4382,11 @@ const partner = {
 		},
 		{
 			api          : 'get_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'get_all_possible_payment_methods',
 			access_type  : 'private',
 			service_name : 'payment',
 		},
