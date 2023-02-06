@@ -13,6 +13,8 @@ function Configurations() {
 		showCreateConfig,
 		setShowCreateConfig,
 		listRefresh,
+		paginationData,
+		getNextPage,
 	} = useAllocationConfigurations();
 
 	return (
@@ -23,7 +25,11 @@ function Configurations() {
 				setShowCreateConfig={setShowCreateConfig}
 			/>
 
-			<List list={list} />
+			<List
+				list={list}
+				paginationData={paginationData}
+				getNextPage={getNextPage}
+			/>
 
 			{showCreateConfig && (
 				<CreateConfigurationModal
