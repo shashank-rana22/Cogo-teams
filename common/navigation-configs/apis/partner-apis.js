@@ -392,6 +392,11 @@ const partner = {
 			feature      : 'trade_party',
 		},
 		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'assign_partner_agents_with_filters',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -4335,6 +4340,11 @@ const partner = {
 			service_name : 'payment',
 		},
 		{
+			api          : 'get_all_possible_payment_methods',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
 			api          : 'update_service_payment_modes',
 			access_type  : 'private',
 			service_name : 'payment',
@@ -7958,6 +7968,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'promotion',
 
+		},
+		{
+			api          : 'get_promotion_shipment_stats',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'list_promotion_shipments',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'download_promotion_shipment_csv',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 		{
 			api          : 'list_promotions',
