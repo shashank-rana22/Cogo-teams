@@ -36,30 +36,28 @@ function CreateConfigurationModal({
 		>
 			<Modal.Header title={`${viewType === 'create' ? 'Create' : 'Edit'} Configuration`} />
 
-			<form onSubmit={handleSubmit(onCreate)}>
-				<Modal.Body>
-					<Form controls={controls} formProps={formProps} />
-				</Modal.Body>
+			<Modal.Body>
+				<Form controls={controls} formProps={formProps} />
+			</Modal.Body>
 
-				<Modal.Footer>
-					<div className={styles.button_container}>
-						<Button
-							type="button"
-							size="md"
-							themeType="secondary"
-							onClick={() => setShowCreateConfig(false)}
-							disabled={loadingCreate}
-							style={{ marginRight: '10px' }}
-						>
-							CANCEL
-						</Button>
+			<Modal.Footer>
+				<div className={styles.button_container}>
+					<Button
+						type="button"
+						size="md"
+						themeType="secondary"
+						onClick={() => setShowCreateConfig(false)}
+						disabled={loadingCreate}
+						style={{ marginRight: '10px' }}
+					>
+						CANCEL
+					</Button>
 
-						<Button type="submit" size="md" themeType="primary">
-							{`${viewType === 'create' ? 'Create' : 'Update'}`}
-						</Button>
-					</div>
-				</Modal.Footer>
-			</form>
+					<Button type="submit" size="md" themeType="primary" onClick={handleSubmit(onCreate)}>
+						{`${viewType === 'create' ? 'Create' : 'Update'}`}
+					</Button>
+				</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }

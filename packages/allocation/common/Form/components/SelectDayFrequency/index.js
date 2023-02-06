@@ -1,18 +1,14 @@
-import { Select, ButtonGroup } from '@cogoport/components';
+import { Select, Tabs, TabPanel } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 function SelectDayFrequency({
-	value = {},
+	value = { schedule_type: 'daily' },
 	onChange,
 	...rest
 }) {
 	const [selectedScheduleType, setSelectedScheduleType] = useState(
 		value.schedule_type,
 	);
-
-	useEffect(() => {
-		setSelectedScheduleType(value.schedule_type);
-	}, [value]);
 
 	const days = [
 		{ label: 'Monday', value: 1 },
@@ -60,6 +56,11 @@ function SelectDayFrequency({
 		}
 	};
 
+	useEffect(() => {
+		onFrequencyChange(selectedScheduleType);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedScheduleType]);
+
 	const onDayChange = (day) => {
 		onChange({
 			...value,
@@ -74,28 +75,18 @@ function SelectDayFrequency({
 		});
 	};
 
-	const ButtonGroupOptions = [
-		{
-			children : 'Daily',
-			onClick  : () => onFrequencyChange('daily'),
-		},
-		{
-			children : 'Weekly',
-			onClick  : () => onFrequencyChange('weekly'),
-		},
-		{
-			children : 'Monthly',
-			onClick  : () => onFrequencyChange('monthly'),
-		},
-	];
-
 	return (
 		<div>
-			<ButtonGroup size="md" options={ButtonGroupOptions} {...rest} />
+			<Tabs
+				themeType="tertiary"
+				activeTab={selectedScheduleType}
+				onChange={setSelectedScheduleType}
+				{...rest}
+			>
+				<TabPanel name="daily" title="Daily" />
 
-			<div style={{ marginTop: '10px' }}>
-				{selectedScheduleType === 'weekly'
-					? (
+				<TabPanel name="weekly" title="Weekly">
+					<div style={{ marginTop: '10px' }}>
 						<Select
 							placeholder="Select Day"
 							options={days}
@@ -103,12 +94,11 @@ function SelectDayFrequency({
 							value={value.days_of_week}
 							{...rest}
 						/>
+					</div>
+				</TabPanel>
 
-					)
-					: null}
-
-				{selectedScheduleType === 'monthly'
-					? (
+				<TabPanel name="monthly" title="Monthly">
+					<div style={{ marginTop: '10px' }}>
 						<Select
 							placeholder="Select Date"
 							options={dates.map((item) => ({ label: item, value: item }))}
@@ -116,9 +106,9 @@ function SelectDayFrequency({
 							value={value.dates_of_month}
 							{...rest}
 						/>
-					)
-					: null}
-			</div>
+					</div>
+				</TabPanel>
+			</Tabs>
 		</div>
 	);
 }
