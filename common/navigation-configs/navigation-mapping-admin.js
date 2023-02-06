@@ -1729,13 +1729,23 @@ const navigationMappingAdmin = {
 	},
 
 	awb_inventory: {
-		key           : 'awb_inventory',
-		title         : 'AWB Inventory',
-		href          : '/awb-inventory',
-		as            : '/awb-inventory',
+		key         : 'awb_inventory',
+		title       : 'AWB Inventory',
+		href        : '/awb-inventory',
+		as          : '/awb-inventory',
+		main_apis   : [],
+		icon        : IcMInvoiceApprovals,
+		// possible_apis : apis.awb_inventory,
+		module_type : 'dashboards',
+	},
+	ground_ops: {
+		key           : 'ground_ops',
+		title         : 'Ground Ops Dashboard',
+		href          : '/ground-ops',
+		as            : '/ground-ops',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
-		possible_apis : apis.awb_inventory,
+		possible_apis : apis.ground_ops,
 		module_type   : 'dashboards',
 	},
 	document_wallet: {
