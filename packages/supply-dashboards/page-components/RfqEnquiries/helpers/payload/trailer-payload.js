@@ -1,6 +1,6 @@
 const trailerPayload = ({ service, value }) => {
 	const line_items = [];
-	value?.line_items.forEach((item) => {
+	value?.freights.forEach((item) => {
 		const val = {
 			code     : item?.code,
 			unit     : item?.unit,

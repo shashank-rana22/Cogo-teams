@@ -6,7 +6,7 @@ import chargeControl from './charge-controls';
 
 const LocationControls = ({ data }) => {
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['pincode', 'seaport'] } },
+		params: { filters: { type: ['pincode', 'seaport', 'city'] } },
 	}));
 	const control = [
 		{

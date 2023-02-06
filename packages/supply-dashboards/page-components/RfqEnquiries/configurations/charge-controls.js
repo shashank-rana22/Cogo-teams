@@ -6,15 +6,13 @@ const nameMapping = {
 	freights_charge_codes          : 'freights',
 	destination_local_charge_codes : 'destination_local',
 	origin_local_charge_codes      : 'origin_local',
-	cfs_charge_codes               : 'line_items',
+	cfs_charge_codes               : 'freights',
 	customs_charge_codes           : 'line_items',
 };
 
-const chargeControls = ({ heading = '', charge_code_name, service = '' }) => {
-	let name = nameMapping[charge_code_name];
-	if (service === 'trailer' || service === 'ftl') {
-		name = 'line_items';
-	}
+const chargeControls = ({ heading = '', charge_code_name }) => {
+	const name = nameMapping[charge_code_name];
+
 	const controls = 		{
 		name,
 		type    : 'fieldArray',

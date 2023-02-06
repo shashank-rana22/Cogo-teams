@@ -22,7 +22,9 @@ function Service({
 }) {
 	const [selectedRate, setSelectedRate] = useState(null);
 	const [showModal, setShowModal] = useState(false);
-	const status = submittedEnquiry.includes(`${selectedCard?.id}${service?.service}`) ? 'Submitted!' : 'Pending';
+	const tradetype = service?.data?.trade_type === 'import' ? 'Destiantion' : 'Origin';
+	const status = submittedEnquiry.includes(`${service?.id}${service?.service}`)
+		? 'Submitted!' : 'Pending';
 	const handleClick = () => {
 		if (activeService === service) {
 			setActiveService(null);
@@ -49,7 +51,6 @@ function Service({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [showModal]);
 
-	const tradetype = service?.data?.trade_type === 'import' ? 'Destiantion' : 'Origin';
 	return (
 		<div className={styles.container}>
 			<div
