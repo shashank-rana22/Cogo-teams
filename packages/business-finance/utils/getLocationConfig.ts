@@ -1,4 +1,3 @@
-import getConfigs from './get-configs';
 import getLocationShipmentDetails from './getLocationShipmentDetails';
 import isSingleLocation from './isSingleLocation';
 
@@ -11,20 +10,6 @@ const getPortConfigs = (data) => {
 			: null;
 
 		return { origin, destination };
-	}
-
-	if (data?.service_type) {
-		const { service_type:serviceType } = data;
-		const { routeInfo } = getConfigs(data?.service_type) || {};
-
-		const isSingleShipmentLocation =			(serviceType || '').includes('customs')
-			|| (serviceType || '').includes('cfs')
-			|| (serviceType || '').includes('fcl_freight_local');
-
-		const origin = data[routeInfo.origin_pickup] || data[routeInfo.origin_port];
-		const destination =			data[routeInfo.destination_drop] || data[routeInfo.destination_port];
-
-		return { origin, destination, isSingleShipmentLocation };
 	}
 	return {};
 };
