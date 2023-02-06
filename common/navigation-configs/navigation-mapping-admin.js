@@ -1312,10 +1312,10 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'coe-first_mile',
-				title         : 'First Mile',
-				href          : '/first-mile',
-				as            : '/first-mile',
+				key           : 'coe-document_desk',
+				title         : 'Document Desk',
+				href          : '/document-desk',
+				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
 				possible_apis : [...apis.shipment],
