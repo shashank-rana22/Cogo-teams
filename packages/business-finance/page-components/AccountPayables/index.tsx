@@ -1,4 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import React, { useEffect, useState } from 'react';
 
@@ -8,7 +9,8 @@ import OverHeads from './OverHeads/index';
 import styles from './styles.module.css';
 
 function AccountPayables() {
-	const [activeTab, setActiveTab] = useState('overheads');
+	const { query, push } = useRouter();
+	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
 	const [{ data, loading, error }, trigger] = useRequestBf(
 		{
@@ -23,6 +25,14 @@ function AccountPayables() {
 		trigger();
 	}, []);
 
+	const handleChange = (tab) => {
+		setActiveTab(tab);
+		push(
+			'/business-finance/account-payables/[active_tab]',
+			`/business-finance/account-payables/${tab}`,
+		);
+	};
+
 	return (
 		<div>
 			<h1 className={styles.header}>Account Payables</h1>
@@ -33,8 +43,11 @@ function AccountPayables() {
 					activeTab={activeTab}
 					fullWidth
 					themeType="primary"
-					onChange={setActiveTab}
+					onChange={(tab) => handleChange(tab)}
 				>
+					<TabPanel name="dashboard" title="Dashboard">
+						<div>No data :)</div>
+					</TabPanel>
 					<TabPanel name="overheads" title="Overheads">
 						<OverHeads />
 					</TabPanel>
