@@ -173,15 +173,13 @@ function CostSheet() {
 			<Accordion
 				type="text"
 				title={
-        (
 	<span className={styles.details}>
 		Shipment Details
 		<div className={styles.tags_container}>
-			<Pill color="blue">{sourceText}</Pill>
-			<Pill color="yellow">{startCase(tradeType)}</Pill>
+			{sourceText && <Pill color="blue">{sourceText}</Pill>}
+			{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
 		</div>
 	</span>
-        ) as unknown as string
         }
 				style={{
 					backgroundColor : '#FFFFFF',
@@ -223,8 +221,6 @@ function CostSheet() {
 						width="320px"
 						headingwidth="90px"
 					/>
-					{/* <div className={styles.warning}><span className={styles.icon}><IcMInfo
-					height={20} width={20}/></span>Check Incidental Charge</div> */}
 				</div>
 			</div>
 			<div className={styles.flex}>

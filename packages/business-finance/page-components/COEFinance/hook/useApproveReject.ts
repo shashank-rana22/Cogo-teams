@@ -60,7 +60,6 @@ const ApproveReject = ({ remarksVal, lineItemsRemarks, modalData, setApprove, bi
 			Toast.success(`${modalData}Successfully`);
 			router.push('/business-finance/coe-finance/all_invoices/purchase-view');
 		} catch (error:any) {
-			console.log('error->', error);
 			Toast.error(error?.message || 'Something went wrong');
 		}
 	};
