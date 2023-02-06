@@ -79,7 +79,7 @@ function Option({
 						trigger="mouseenter"
 						interactive
 						content={(
-							<p style={{ margin: 0, width: '250px' }}>
+							<p style={{ margin: 0 }}>
 								<span style={{ fontWeight: 'bold', marginRight: 4 }}>
 									Selected Views:
 								</span>
