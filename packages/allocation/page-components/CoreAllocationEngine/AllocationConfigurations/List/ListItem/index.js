@@ -1,7 +1,8 @@
-import { Legend, Pill, Tooltip } from '@cogoport/components';
+import { Popover, Legend, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
+import ActionContent from './ActionContent';
 import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
@@ -156,8 +157,18 @@ const columnsMapping = [
 	},
 	{
 		key      : 'action',
-		getValue : () => <div className={styles.svg_container}><IcMOverflowDot height={16} width={16} /></div>,
-		flex     : 0,
+		getValue : (item) => {
+			const status = getByKey(item, 'status', '-');
+
+			return (
+				<div className={styles.svg_container}>
+					<Popover placement="left" interactive render={<ActionContent status={status} />}>
+						<IcMOverflowDot height={16} width={16} />
+					</Popover>
+				</div>
+			);
+		},
+		flex: 0,
 	},
 ];
 
