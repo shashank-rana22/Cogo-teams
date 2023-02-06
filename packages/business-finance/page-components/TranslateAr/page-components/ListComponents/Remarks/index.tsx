@@ -14,12 +14,12 @@ function Remarks({ itemData }: Object) {
 				placement="bottom"
 				render={<RemarkContent itemData={itemData} />}
 			>
-				<div style={{ color: '#393F70' }}>
+				<div>
 					<IcMProvision
-						onClick={() => { }}
 						style={{ cursor: 'pointer' }}
 						height={26}
 						width={26}
+						color="#F68B21"
 					/>
 				</div>
 			</Popover>

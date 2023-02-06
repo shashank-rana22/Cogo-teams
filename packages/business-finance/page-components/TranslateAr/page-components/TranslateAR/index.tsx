@@ -16,14 +16,12 @@ function TranslateAR() {
 	return (
 		<>
 			<div className={styles.heading}>Account Receivables - Vietnam</div>
-			<div className={styles.hr} />
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val) => handleTabChange(val, setReceivables, push)}
+					onChange={(val:string) => handleTabChange(val, setReceivables, push)}
 					themeType="primary"
 					id="translate_tab_view"
-					size="lg"
 				>
 					{TABS_MAPPING.map(({ label = '', value = '', Component }) => (
 						<TabPanel name={value} title={label}>
