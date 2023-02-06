@@ -173,6 +173,7 @@ function CostSheet() {
 			<Accordion
 				type="text"
 				title={
+        (
 	<span className={styles.details}>
 		Shipment Details
 		<div className={styles.tags_container}>
@@ -180,6 +181,7 @@ function CostSheet() {
 			{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
 		</div>
 	</span>
+        ) as unknown as string
         }
 				style={{
 					backgroundColor : '#FFFFFF',
