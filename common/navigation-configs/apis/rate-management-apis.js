@@ -572,5 +572,15 @@ const rms = [
 		access_type  : 'private',
 		service_name : 'fcl_freight_rate',
 	},
+	{
+		api          : 'create_fcl_cfs_rate_bulk_operation',
+		access_type  : 'private',
+		service_name : 'fcl_cfs_rate',
+	},
+	{
+		api          : 'delete_fcl_cfs_rate',
+		access_type  : 'private',
+		service_name : 'fcl_cfs_rate',
+	},
 ];
 export default rms;
