@@ -21,6 +21,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
 			user_profile: profile,
 		}),
 	);
+
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [initialPath] = useState(pathname);

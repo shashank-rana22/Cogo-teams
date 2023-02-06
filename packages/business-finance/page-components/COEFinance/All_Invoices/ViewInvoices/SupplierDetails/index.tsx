@@ -61,11 +61,11 @@ function SupplierDetails({
 	const [showDocsModal, setShowDocsModal] = useState(false);
 
 	const {
-		sellerDetail,
+		sellerDetail = '',
 		serviceProviderCategory = '',
 		serviceProviderAdditionalDetail,
 		serviceProviderDocuments,
-	} = data;
+	} = data || {};
 	const { kycStatus = '' } = serviceProviderAdditionalDetail || {};
 	const { payables, receivables, ledgerCurrency } = paymentsData || {};
 

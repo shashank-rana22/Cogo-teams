@@ -1,29 +1,17 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
-
-import useGetFiniteList from './useGetFiniteList';
 
 interface AllParams {
 	billId?: number;
 	billNumber?: number;
 	orgId?: number;
 }
-interface Profile {
-	authorizationparameters?: string;
-}
-interface UseSelectorProps {
-	profile?: Profile;
-}
+
 const useGetBill = (allParams = {}) => {
 	const { ...params }: AllParams = allParams || {};
-	const { authorizationparameters } = useSelector(
-		({ profile }: UseSelectorProps) => ({
-			authorizationparameters: profile?.authorizationparameters,
-		}),
-	);
-	const [{ loading: apiLoading }, trigger] = useRequestBf(
+
+	const [{ data, loading: apiLoading }, trigger] = useRequestBf(
 		{
 			url     : `/purchase/bills/${params?.billId}`,
 			method  : 'get',
@@ -43,12 +31,11 @@ const useGetBill = (allParams = {}) => {
 		{ autoCancel: false },
 	);
 
-	const listApi = async (restFilters: any) => {
+	const listApi = async () => {
 		try {
 			await trigger({
 				params: {
 					jobNumber: params?.billNumber,
-					...restFilters,
 				},
 			});
 		} catch (err) {
@@ -68,17 +55,11 @@ const useGetBill = (allParams = {}) => {
 		};
 		handleAccPayments();
 	}, [accPaymentTrigger, params?.orgId]);
-	const { loading, page, filters, list, hookSetters, refetch } = useGetFiniteList(listApi, {
-		authorizationparameters,
-	});
+
 	return {
-		loading: loading || apiLoading,
-		page,
-		filters,
-		list,
-		listApi,
-		hookSetters,
-		refetch,
+		loading : apiLoading,
+		data,
+		refetch : listApi,
 		accPaymentLoading,
 		paymentsData,
 	};
