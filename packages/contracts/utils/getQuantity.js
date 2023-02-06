@@ -12,8 +12,8 @@ const unitMapping = {
 };
 
 const getQuantity = ({ portPairdata, service }) => {
-	let contentToShow = 0;
-	(portPairdata || []).forEach((item) => { contentToShow += Number(item?.[mapping?.[service]]); });
+	let contentToShow = Number(0);
+	(portPairdata || []).forEach((item) => { contentToShow += Number(item?.[mapping?.[service]]) || 0; });
 	const unit = startCase([unitMapping[service]]);
 
 	return { contentToShow, unit };
