@@ -8,11 +8,10 @@ const COLUMNS_MAPPING = [
 		key      : 'business_name',
 		label    : 'Business Name',
 		getValue : (item) => {
-			const { business_name: businessName = '-' } = item.organization;
-
+			const businessName = getByKey(item, 'organization.business_name', '___');
 			return (
 				<Tooltip content={startCase(businessName.toLowerCase())} placement="bottom">
-					<div className={styles.tooltip_text}>{startCase(businessName.toLowerCase()) || '-'}</div>
+					<div className={styles.text}>{startCase(businessName.toLowerCase()) || '-'}</div>
 				</Tooltip>
 			);
 		},
@@ -21,37 +20,47 @@ const COLUMNS_MAPPING = [
 	{
 		key      : 'user',
 		label    : 'User',
-		getValue : (item) => (
-			<div className={styles.name_container}>
-				<div className={styles.text}>{startCase(item.user_id?.name.toLowerCase())}</div>
+		getValue : (item) => {
+			const name = getByKey(item, 'user_id.name');
+			const email = getByKey(item, 'user_id.email');
 
-				<div className={styles.lower_label}>{item.user_id?.email}</div>
-			</div>
-		),
+			return (
+				<div className={styles.name_container}>
+					<div className={styles.text}>{startCase(name || '').toLowerCase()}</div>
+
+					<div className={styles.lower_label}>{(email || '').toLowerCase()}</div>
+				</div>
+			);
+		},
 		flex: 1,
 	},
 	{
 		key      : 'stakeholder_name',
 		label    : 'Stakeholder Name',
-		getValue : (item) => (
-			<div>
-				<div className={styles.text}>{startCase(item.stakeholder_id?.name.toLowerCase())}</div>
+		getValue : (item) => {
+			const stakeholderType = getByKey(item, 'stakeholder_type', '___');
+			const stakeholderName = getByKey(item, 'stakeholder_id.name', '___');
 
-				<div className={styles.lower_label}>
-					{item.stakeholder_type
-						? startCase(item.stakeholder_type) : '-'}
+			return (
+				<div>
+					<div className={styles.text}>{startCase(stakeholderName.toLowerCase())}</div>
 
+					<div className={styles.lower_label}>
+						{stakeholderType
+							? startCase(stakeholderType) : ''}
+
+					</div>
 				</div>
-			</div>
-		),
+			);
+		},
 		flex: 1,
 	},
 	{
 		key      : 'reason',
 		label    : 'Reason',
 		getValue : (item) => (
-			<Tooltip placement="bottom" content={item.reason || '-'}>
-				<div className={styles.tooltip_text}>{item.reason || '-'}</div>
+			<Tooltip placement="bottom" content={getByKey(item, 'reason', '___')}>
+				<div className={styles.tooltip_text}>{getByKey(item, 'reason', '___')}</div>
 			</Tooltip>
 		),
 		flex: 1,
@@ -62,8 +71,8 @@ const COLUMNS_MAPPING = [
 		getValue : (item) => (
 			<div className={styles.name_container}>
 				<div className={styles.text}>
-					{' '}
-					{item.created_by}
+
+					{getByKey(item, 'created_by.name', '___')}
 				</div>
 			</div>
 		),
