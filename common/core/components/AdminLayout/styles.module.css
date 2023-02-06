@@ -4,7 +4,7 @@
 	--layout-navbar: 280px;
 
 	min-height: 100vh;
-	background: var(--color-accent-orange-5);
+	background: #f9f5ec;
 
 	@media (max-height: 600px) {
 		min-height: 600px;

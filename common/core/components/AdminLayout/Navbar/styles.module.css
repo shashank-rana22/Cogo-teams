@@ -96,12 +96,10 @@
 	}
 
 	&:hover {
-		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 
 	&:active {
-		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 }
@@ -138,7 +136,6 @@
 	align-items: center;
 	padding: 8px 16px;
 	font-weight: 500 !important;
-	color: var(--font-color-secondary);
 	cursor: pointer;
 	background-color: #fffce6;
 	border-radius: 6px;
@@ -151,7 +148,6 @@
 		margin-left: 30px;
 		overflow: hidden;
 		font-weight: 500;
-		color: var(--font-color-secondary);
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		user-select: none;
@@ -167,18 +163,15 @@
 	}
 
 	&:hover {
-		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 
 	&:active {
-		color: var(--font-color-secondary);
 		background-color: #fef199;
 	}
 }
 
 .active_option {
-	color: var(--font-color-secondary);
 	background-color: #fef199;
 }
 
@@ -197,7 +190,6 @@
 }
 
 .active_item {
-	color: var(--font-color-secondary);
 	background-color: #fde74d;
 }
 
@@ -250,7 +242,7 @@
 	left: 0;
 	width: var(--layout-navbar);
 	height: 100vh;
-	background-color: var(--color-secondary-5);
+	background-color: #fff;
 	filter: drop-shadow(0 4px 4px rgb(0 0 0 / 25%));
 	transition: transform 0.5s ease;
 	transform: translateX(-200px);
