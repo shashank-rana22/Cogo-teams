@@ -26,7 +26,7 @@ function FileUploader(props) {
 		} else {
 			onChange(urlStore[0]);
 		}
-	}, [multiple, urlStore, onChange]);
+	}, [multiple, urlStore]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({

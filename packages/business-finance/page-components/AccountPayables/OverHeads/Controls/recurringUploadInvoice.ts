@@ -1,8 +1,4 @@
-interface FilterProps {
-	invoice?:any
-}
-
-export const recurringUploadInvoice = (filters:FilterProps, setFilters:Function) => [
+export const recurringUploadInvoice = () => [
 	{
 		span    : 12,
 		groupBy : [

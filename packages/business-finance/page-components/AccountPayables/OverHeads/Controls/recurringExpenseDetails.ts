@@ -250,7 +250,7 @@ export const recurringExpenseDetails = (filters:Props, setFilters:Function) => [
 				style       : { height: '100px', borderRadius: '4px', width: '410px' },
 			},
 			{
-				name          : 'uploadAgreement',
+				name          : 'uploadedAgreement',
 				label         : 'Upload Agreement*',
 				type          : 'fileUploader',
 				draggable     : true,
