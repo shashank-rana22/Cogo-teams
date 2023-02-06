@@ -1250,6 +1250,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_document_desk_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 
 export default apis;
