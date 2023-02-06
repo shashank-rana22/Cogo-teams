@@ -1339,6 +1339,14 @@ const navigationMappingAdmin = {
 
 			},
 			{
+				key       : 'coe-kam_desk',
+				title     : 'KAM Desk',
+				href      : '/kam-desk',
+				as        : '/kam-desk',
+				type      : 'link',
+				main_apis : ['list_kam_desk_shipments'],
+			},
+			{
 				key           : 'coe-document_desk',
 				title         : 'Document Desk',
 				href          : '/document-desk',
