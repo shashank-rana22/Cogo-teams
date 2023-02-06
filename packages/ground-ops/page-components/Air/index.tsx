@@ -1,22 +1,20 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import Air from './Air';
-import Header from './Header';
 import styles from './styles.module.css';
 
-function GroundOps() {
-	const [activeTab, setActiveTab] = useState('air');
+function Air() {
+	const [activeTab, setActiveTab] = useState('cargo');
+
 	return (
 		<div className={styles.container}>
-			<Header />
 			<div style={{ marginTop: 20 }}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="tertiary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="air" title="Air">
+					<TabPanel name="cargo" title="Cargo">
 						<Air />
 					</TabPanel>
 				</Tabs>
@@ -25,4 +23,4 @@ function GroundOps() {
 	);
 }
 
-export default GroundOps;
+export default Air;
