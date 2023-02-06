@@ -6,6 +6,12 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+		api          : 'list_organization_trade_requirement_drafts',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'organization',
+	},
+	{
 		api          : 'list_contracts',
 		access_type  : 'private',
 		feature      : 'contract_rates',
