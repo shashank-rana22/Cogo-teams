@@ -1,12 +1,13 @@
 .list_container {
 	display: block;
-	height: 70vh;
+	height: 80vh;
 	padding: 0;
 	margin: 0;
 	margin-bottom: 10px;
 	overflow-y: auto;
 	list-style-type: none;
-	border-bottom: 1px solid #eaeaea;
+
+	/* border-bottom: 1px solid #eaeaea; */
 }
 
 .sticky_pins {
@@ -197,7 +198,7 @@
 
 .active_item {
 	color: var(--font-color-secondary);
-	background-color: #fef199;
+	background-color: #fde74d;
 }
 
 .has_options {

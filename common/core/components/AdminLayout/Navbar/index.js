@@ -10,7 +10,7 @@ import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
-import ThemeToggle from './ThemeToggle';
+// import ThemeToggle from './ThemeToggle';
 
 function Navbar({
 	className,
@@ -25,7 +25,7 @@ function Navbar({
 
 	const userBasedNavView = formatUserBasedNavView(nav);
 	// eslint-disable-next-line no-undef
-	const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
+	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
 	const showPin = userBasedNavView === nav;
 
@@ -112,17 +112,17 @@ function Navbar({
 						</div>
 					</ul>
 
-					<ul className={styles.list_container}>
-						<li>
-							<div className={styles.toggle_button}>
-								<div className={styles.theme_icon}>
-									{activeTheme === 'light' ? '☀️' : '🌙' }
-								</div>
-								<span>{activeTheme === 'light' ? 'Light Mode' : 'Dark (beta)' }</span>
-								<ThemeToggle activeTheme={activeTheme} setActiveTheme={setActiveTheme} />
-							</div>
-						</li>
-					</ul>
+					{/* <ul className={styles.list_container}> */}
+					{/* 	<li> */}
+					{/* 		<div className={styles.toggle_button}> */}
+					{/* 			<div className={styles.theme_icon}> */}
+					{/* 				{activeTheme === 'light' ? '☀️' : '🌙' } */}
+					{/* 			</div> */}
+					{/* 			<span>{activeTheme === 'light' ? 'Light Mode' : 'Dark (beta)' }</span> */}
+					{/* 			<ThemeToggle activeTheme={activeTheme} setActiveTheme={setActiveTheme} /> */}
+					{/* 		</div> */}
+					{/* 	</li> */}
+					{/* </ul> */}
 				</div>
 			</nav>
 		</div>
