@@ -1,6 +1,6 @@
 .container {
 	padding-top: 10px;
 	margin-top: 40px;
-	background: var(--font-color-secondary);
+	background: #fff;
 	border-radius: 8px;
 }
