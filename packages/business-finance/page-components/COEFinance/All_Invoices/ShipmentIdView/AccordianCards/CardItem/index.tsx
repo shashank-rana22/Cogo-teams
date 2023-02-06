@@ -13,8 +13,16 @@ import Status from './RenderData/Status/index';
 import ViewInvoice from './RenderData/ViewInvoice/index';
 import styles from './styles.module.css';
 
+interface ItemTypes {
+	serial_id?: string;
+	discount_amount?: number;
+	discount_amount_currency?: string;
+	discount_amount_revenue?: number;
+	discount_amount_revenue_currency?: string;
+	status?: string;
+}
 interface PropsType {
-	cardData: any;
+	cardData: ItemTypes;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
 	amountTab: string;
@@ -36,12 +44,13 @@ function CardItem({
 	setDataCard,
 	setAmountTab,
 }: PropsType) {
+	const { serial_id: serialId } = cardData || {};
 	const {
 		loading,
 		list: { fullResponse },
 		config,
 	} = useListBills({
-		serial_id: cardData?.serial_id,
+		serialId,
 		amountTab,
 		currentOpenSID,
 		setDataCard,
@@ -57,22 +66,18 @@ function CardItem({
 		renderInvoiceNumber: (item: {}, field: {}) => (
 			<InvoiceNumber item={item} field={field} />
 		),
-		renderDates: (item: any, field: {}) => (
+		renderDates: (item: {}, field: {}) => (
 			<FormatedDate item={item} field={field} />
 		),
-		renderName: (item: any, field: {}) => (
+		renderName: (item: {}, field: {}) => (
 			<ModifiedName item={item} field={field} />
 		),
-		renderAmount: (item: any, field: {}) => (
+		renderAmount: (item: {}, field: {}) => (
 			<AmountWithCurrency item={item} field={field} />
 		),
-		renderStatus: (item: {}) => (
-			<Status item={item} />
-		),
-		renderInvoices: (item: {}) => (
-			<ViewInvoice item={item} />
-		),
-		renderRemarks: (item: any) => <Remarks itemData={item} />,
+		renderStatus   : (item: {}) => <Status item={item} />,
+		renderInvoices : (item: {}) => <ViewInvoice item={item} />,
+		renderRemarks  : (item: {}) => <Remarks itemData={item} />,
 	};
 
 	return (

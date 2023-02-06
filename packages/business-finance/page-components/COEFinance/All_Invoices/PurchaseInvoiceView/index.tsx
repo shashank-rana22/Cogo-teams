@@ -63,15 +63,15 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		renderCustomer: (itemData: ItemProps, field: FieldProps) => (
 			<RenderCustomer itemData={itemData} field={field} />
 		),
-		rendeFormate: (itemData: ItemProps, field: FieldProps) => (
+		renderFormate: (itemData: ItemProps, field: FieldProps) => (
 			<FormatedDate item={itemData} field={field} />
 		),
 		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
 		renderViewMore : (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
-		renderUrgencyTag: (itemData: ItemProps) => (
-			<RenderUrgencyTag item={itemData} />
+		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
+			<RenderUrgencyTag item={itemData} field={field} />
 		),
 	};
 

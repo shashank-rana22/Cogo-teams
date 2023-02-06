@@ -28,16 +28,18 @@ function InvoiceNumber({ item, field }: PropsType) {
 		return invoiceType;
 	};
 
+	const { billDocumentUrl, billNumber, invoicePdfUrl, proformaPdfUrl, invoiceNumber, proformaNumber } = item || {};
+
 	return (
 		<div className={styles.text}>
 			{field.key === 'billNumber' && (
 				<>
 					<div
 						className={styles.invoice}
-						onClick={() => window.open(item.billDocumentUrl, '_blank')}
+						onClick={() => window.open(billDocumentUrl, '_blank')}
 						role="presentation"
 					>
-						{item?.billNumber}
+						{billNumber}
 					</div>
 					<div className={styles.color}>{handleBillType(item)}</div>
 				</>
@@ -46,12 +48,12 @@ function InvoiceNumber({ item, field }: PropsType) {
 				<div
 					className={styles.invoice}
 					onClick={() => window.open(
-						item.invoicePdfUrl || item.proformaPdfUrl,
+						invoicePdfUrl || proformaPdfUrl,
 						'_blank',
 					)}
 					role="presentation"
 				>
-					{item.invoiceNumber || item.proformaNumber}
+					{invoiceNumber || proformaNumber}
 				</div>
 			)}
 		</div>

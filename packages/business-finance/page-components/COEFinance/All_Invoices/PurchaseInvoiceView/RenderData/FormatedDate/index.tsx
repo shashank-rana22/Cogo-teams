@@ -33,10 +33,10 @@ interface Props {
 
 function FormatedDate({ item, field }: Props) {
 	const { topKey = {}, bottomKey = {} } = field;
-	const getCreatedDate = format(item?.createdDate, 'dd/MMM/yyyy', {}, false);
+	const getCreatedDate = format(item?.createdDate, 'dd MMM, yyyy', {}, false);
 	const getCreatedDateTime = format(item?.createdDate, 'h:mm:aa', {}, false);
-	const getBillDate = format(item?.billDate, 'dd/MMM/yyyy', {}, false);
-	const getDueDate = format(item?.dueDate, 'dd/MMM/yyyy', {}, false);
+	const getBillDate = format(item?.billDate, 'dd MMM, yyyy', {}, false);
+	const getDueDate = format(item?.dueDate, 'dd MMM, yyyy', {}, false);
 
 	const content = (
 		<>

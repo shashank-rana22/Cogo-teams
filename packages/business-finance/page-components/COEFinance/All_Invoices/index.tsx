@@ -1,70 +1,77 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useRouter } from '@cogoport/next';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import PurchaseInvoice from './PurchaseInvoiceView/index';
 import ShipmentIdView from './ShipmentIdView/index';
 import styles from './styles.module.css';
 
+const tabs = [
+	{
+		key   : 'purchase-view',
+		label : 'PURCHASE INVOICE VIEW',
+	},
+	{
+		key   : 'shipment-view',
+		label : 'SHIPMENT ID VIEW',
+	},
+];
+
+const tabsKeyComponentMapping = {
+	'purchase-view' : PurchaseInvoice,
+	'shipment-view' : ShipmentIdView,
+};
+
 function AllInvoices() {
-	const [filters, setFilters] = useState({});
 	const { push, query } = useRouter();
-	const [subActiveTab, setSubActiveTab] = useState<string>(
-		query.view || 'purchase-view',
-	);
+	const [filters, setFilters] = useState({});
+	const [subActiveTab, setSubActiveTab] = useState<string>(() => query.view || tabs[0].key);
+	const tabComponentProps = {
+		'purchase-view': {
+			filters,
+			setFilters,
+			subActiveTab,
+		},
+		'shipment-view': {},
+	};
 
-	const isPurchase = subActiveTab === 'purchase-view';
-
-	useEffect(() => {
+	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
+	const onChange = (view) => {
+		setSubActiveTab(view);
 		push(
 			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/all_invoices/${subActiveTab}` as never as null,
+			`/business-finance/coe-finance/all_invoices/${view}` as never as null,
 		);
-	}, [subActiveTab]);
+	};
 
 	return (
 		<div>
+
 			<div className={styles.container}>
+
 				<div className={styles.flex}>
-					<div
-						onClick={() => {
-							setSubActiveTab('purchase-view');
-						}}
-						role="presentation"
-					>
+
+					{tabs.map((tab) => (
 						<div
-							className={
-                isPurchase ? styles.sub_container_click : styles.sub_container
-              }
+							key={tab.key}
+							onClick={() => {
+								onChange(tab.key);
+							}}
+							role="presentation"
 						>
-							PURCHASE INVOICE VIEW
+							{' '}
+							<div className={tab.key === subActiveTab
+								? styles.sub_container_click : styles.sub_container}
+							>
+								{tab.label}
+
+							</div>
+
 						</div>
-					</div>
-					<div
-						onClick={() => {
-							setSubActiveTab('shipment-view');
-						}}
-						role="presentation"
-					>
-						<div
-							className={
-                !isPurchase ? styles.sub_container_click : styles.sub_container
-              }
-						>
-							SHIPMENT ID VIEW
-						</div>
-					</div>
+					))}
 				</div>
+
 			</div>
-			{isPurchase && (
-				<PurchaseInvoice
-					filters={filters}
-					setFilters={setFilters}
-					subActiveTab={subActiveTab}
-				/>
-			)}
-			{!isPurchase && <ShipmentIdView />}
+			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
 		</div>
 	);
 }
