@@ -137,20 +137,20 @@ const getCreateConfigurationsControls = ({
 				required: 'Cooling Period is Required',
 			},
 		},
-		// {
-		// 	name        : 'schedule_data',
-		// 	label       : 'Schedule',
-		// 	placeholder : 'Select Schedule',
-		// 	type        : 'select-day-frequency',
-		// 	rules       : {
-		// 		required: true,
-		// 	},
-		// 	value: {
-		// 		schedule_type  : value.schedule_type,
-		// 		dates_of_month : value.days,
-		// 		days_of_week   : value.days,
-		// 	},
-		// },
+		{
+			name        : 'schedule_data',
+			label       : 'Schedule',
+			placeholder : 'Select Schedule',
+			type        : 'selectDayFrequency',
+			rules       : {
+				required: 'Schedule is Required',
+			},
+			value: {
+				schedule_type  : value.schedule_type,
+				dates_of_month : value.days,
+				days_of_week   : value.days,
+			},
+		},
 	];
 
 	return controls;
