@@ -4,7 +4,7 @@ const nameMapping = {
 	freights_charge_codes          : 'freights',
 	destination_local_charge_codes : 'destination_local',
 	origin_local_charge_codes      : 'origin_local',
-	customs_charge_codes           : 'line_items',
+	customs_charge_codes           : 'freights',
 };
 
 const childControls = ({ heading = '', charge_code_name }) => {

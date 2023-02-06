@@ -25,8 +25,7 @@ const FclFields = () => {
 			drag            : true,
 			uploadIcon      : 'ic-upload',
 			onlyURLOnChange : true,
-			// eslint-disable-next-line max-len
-			accept          : 'image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+			accept          : 'image/*,.pdf,.doc,.docx',
 			uploadType      : 'aws',
 		},
 		{

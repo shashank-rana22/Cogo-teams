@@ -7,7 +7,7 @@ import freeDaysSection from './free-days-section';
 import lclChildControlsFunc from './lcl-child-controls';
 import lclFields from './lcl-controls';
 import locationControls from './locationControls';
-import trailerControls from './trailer-controls';
+import TrailerControls from './trailer-controls';
 
 const chargeCodeMapping = {
 	fcl_cfs     : 'cfs_charge_codes',
@@ -91,15 +91,15 @@ const Config = ({ data }) => {
 			}));
 		}
 	} else if (['trailer_freight', 'haulage_freight'].includes(data?.service)) {
-		field.push(...trailerControls);
+		field.push(...TrailerControls());
 	} else if (['ltl_freight', 'ftl_freight'].includes(data?.service)) {
 		field.push(...locationControls(data));
 	} else if (['fcl_cfs', 'fcl_customs'].includes(data?.service)) {
 		field.push(chargeContolsFunc({ heading: '', charge_code_name: chargeCodeMapping[data?.service] }));
 	} else if (data?.service === 'lcl_customs') {
-		field.push(lclChildControlsFunc({ heading: '' }));
+		field.push(lclChildControlsFunc({ heading: '', charge_code_name: 'customs_charge_codes' }));
 	} else if (data?.service === 'air_customs') {
-		field.push(airChildControlsFunc({ heading: '' }));
+		field.push(airChildControlsFunc({ heading: '', charge_code_name: 'customs_charge_codes' }));
 	}
 
 	return field;

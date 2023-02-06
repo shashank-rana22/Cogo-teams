@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetStats = () => {
-	const [{ data,loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_monthly_rfqs_stats',
 	}, { manual: true });
