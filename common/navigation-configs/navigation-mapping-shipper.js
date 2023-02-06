@@ -250,6 +250,15 @@ const navigationMappingShipper = {
 				main_apis     : [],
 				possible_apis : app_apis.saas_order_history,
 			},
+			{
+				key           : 'saas_premium_services-trader_eligibility_check',
+				title         : 'Trader Eligibility Check',
+				href          : '/saas/premium-services/trader-eligibility-check',
+				as            : '/saas/premium-services/trader-eligibility-check',
+				icon          : 'nav-trade-partner',
+				main_apis     : [],
+				possible_apis : app_apis.saas_trader_eligibility_check,
+			},
 		],
 	},
 	saas_cogo_subscription: {
@@ -433,6 +442,5 @@ const navigationMappingShipper = {
 		isNew         : true,
 		showInNav     : true,
 	},
-
 };
 export default navigationMappingShipper;
