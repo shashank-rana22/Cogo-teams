@@ -78,14 +78,14 @@ function Option({
 						theme="light"
 						trigger="mouseenter"
 						interactive
-						render={(
+						content={(
 							<p style={{ margin: 0, width: '250px' }}>
 								<span style={{ fontWeight: 'bold', marginRight: 4 }}>
 									Selected Views:
 								</span>
 								{controls[selectKey]?.options
-									.map((optionObj) => (formValues[selectKey].includes(optionObj.type)
-										? optionObj.type_display_name
+									.map((optionObj) => (formValues?.[selectKey]?.includes(optionObj?.type)
+										? optionObj?.type_display_name
 										: null))
 									.filter((item) => !!item)
 									.join(', ')}
