@@ -19,7 +19,7 @@ const keyAsyncFieldsParamsMapping = {
 	segments           : asyncFieldsCampaignSegments,
 };
 
-function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, multiple, ...rest }) {
+function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, multiple, handleChange, ...rest }) {
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
 	const getAsyncOptionsProps = useGetAsyncOptions({
@@ -32,6 +32,19 @@ function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, multip
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {
 		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
+	}
+
+	if (typeof handleChange === 'function' && !isEmpty(rest.value)) {
+		let selectedValue;
+		if (multiple) {
+			selectedValue = rest.value.slice(-1);
+		} else {
+			selectedValue = rest.value;
+		}
+
+		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
+
+		handleChange(selectedOption[0]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;

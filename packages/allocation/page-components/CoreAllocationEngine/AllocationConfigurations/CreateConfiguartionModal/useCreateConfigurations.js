@@ -112,7 +112,7 @@ const useCreateConfigurations = ({
 				...(values.user_ids.length === 0 && {
 					user_ids: undefined,
 				}),
-				segment_type: segment?.name,
+				segment_type: segment,
 			};
 			delete payload.schedule_data;
 

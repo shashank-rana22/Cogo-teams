@@ -2,7 +2,7 @@ import { startCase } from '@cogoport/utils';
 
 const getCreateConfigurationsControls = ({
 	value = {},
-	// setSegment = () => {}
+	setSegment = () => {},
 }) => {
 	const controls = [
 		{
@@ -18,7 +18,6 @@ const getCreateConfigurationsControls = ({
 				required: 'Service Type is required',
 			},
 		},
-
 		{
 			name        : 'role_ids',
 			label       : 'Roles',
@@ -75,22 +74,22 @@ const getCreateConfigurationsControls = ({
 			isClearable: true,
 		},
 		{
-			name               : 'segment_id',
-			label              : 'Segment Type',
-			placeholder        : 'Type segment here...',
-			type               : 'asyncSelect',
-			asyncKey           : 'segments',
-			initialCall        : false,
-			value              : value.segment_id,
-			// labelKey           : 'label',
-			// handleChange : (obj) => {
-			// 	console.log('obj :: ', obj);
-			// 	setSegment(obj);
-			// },
-			getModifiedOptions : ({ options }) => options.map((option) => ({
-				...option,
-				name: `${startCase(option.name)}`,
-			})),
+			name         : 'segment_id',
+			label        : 'Segment Type',
+			placeholder  : 'Type segment here...',
+			type         : 'asyncSelect',
+			asyncKey     : 'segments',
+			initialCall  : false,
+			value        : value.segment_id,
+			handleChange : (obj) => {
+				setSegment(obj.name);
+			},
+			getModifiedOptions({ options }) {
+				return options.map((option) => ({
+					...option,
+					label: startCase(option.name),
+				}));
+			},
 			params: {
 				segment_type         : 'global',
 				status               : 'active',
