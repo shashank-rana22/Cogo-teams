@@ -11,3 +11,9 @@
 	border-top-color: #fb0 !important;
 	border-left-color: #fb0 !important;
 }
+
+@media (prefers-color-scheme: dark) {
+	body {
+		color: #000 !important;
+	}
+}
