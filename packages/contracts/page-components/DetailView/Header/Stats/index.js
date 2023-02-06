@@ -2,7 +2,6 @@ import { format, startCase } from '@cogoport/utils';
 
 import Line from '../../../../common/Line';
 import formatPortPair from '../../../../utils/formatPortPair';
-import getQuantity from '../../../../utils/getQuantity';
 import ServiceDetail from '../../../PageView/List/Card/ServiceDetail';
 
 import Content from './Content';
