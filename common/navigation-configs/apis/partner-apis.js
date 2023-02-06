@@ -4303,24 +4303,44 @@ const partner = {
 	],
 	convenience_rate: [
 		{
-			api          : 'update_convenience_rate',
+			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'partner',
 		},
 		{
-			api          : 'create_convenience_rate',
+			api          : 'list_organizations',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'organization',
 		},
 		{
-			api          : 'list_convenience_rates',
+			api          : 'create_convenience_rate_configuration',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'convenience_rate',
 		},
 		{
-			api          : 'list_conditions',
+			api          : 'update_convenience_rate_configuration',
 			access_type  : 'private',
-			service_name : 'condition',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'list_convenience_rate_configurations',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'create_convenience_rate_custom_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'update_convenience_rate_custom_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'get_convenience_rate_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
 		},
 	],
 	payment_modes_and_methods: [
