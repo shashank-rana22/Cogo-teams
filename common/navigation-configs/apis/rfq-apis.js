@@ -137,5 +137,11 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'send_booking_whatsapp_confirmation',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'checkout',
+	},
 ];
 export default apis;
