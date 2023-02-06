@@ -7544,7 +7544,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'get_campaign_journey_matrics',
+			api          : 'get_campaign_journey_metrics',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
