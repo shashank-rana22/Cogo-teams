@@ -35,7 +35,7 @@ const columns = [
 		label  : 'Last Updated',
 		key    : 'last_updated',
 		render : (item) => {
-			const formatDate = format(item.updated_at, 'dd MMM yy | hh:mm a');
+			const formatDate = format(item.updated_at, 'dd MMM yy');
 			return (
 				<div className="card-list-item-value">
 					{formatDate}
@@ -48,7 +48,7 @@ const columns = [
 		label  : 'Created  At',
 		key    : 'created_at',
 		render : (item) => {
-			const formatDate = format(item.created_at, 'dd MMM yy | hh:mm a');
+			const formatDate = format(item.created_at, 'dd MMM yy');
 			return (
 				<div className="card-list-item-value">
 					{formatDate}
