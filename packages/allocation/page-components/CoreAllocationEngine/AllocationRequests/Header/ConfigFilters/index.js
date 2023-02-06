@@ -6,11 +6,17 @@ import Filters from '../../../../../common/Filters';
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
-function ConfigFilters({
+function RequestFilters({
 	params, setParams,
 }) {
 	const {
-		controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied,
+		controls,
+		formProps,
+		showFilters,
+		setShowFilters,
+		handleReset,
+		applyFilters,
+		filtersApplied,
 	} = useFilterContent({ params, setParams });
 
 	return (
@@ -38,4 +44,4 @@ function ConfigFilters({
 	);
 }
 
-export default ConfigFilters;
+export default RequestFilters;

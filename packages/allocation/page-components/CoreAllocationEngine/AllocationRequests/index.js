@@ -1,11 +1,10 @@
 import { Modal, Button } from '@cogoport/components';
-// import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import Form from '../../../common/Form';
 import useListAllocationRequests from '../../../hooks/useListAllocationRequests';
 import useSaveAllocationRequest from '../../../hooks/useSaveAllocationRequest';
 
-import Form from '../../../common/Form';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
@@ -22,6 +21,7 @@ function Requests() {
 		loading: listLoading,
 		refetch,
 		params,
+		setParams,
 		onChangeParams,
 	} = useListAllocationRequests();
 
@@ -41,6 +41,9 @@ function Requests() {
 				loading={listLoading}
 				toggleValue={params?.filters.service_type}
 				onChangeParams={onChangeParams}
+				// Either setParams or onChangeParams
+				params={params}
+				setParams={setParams}
 			/>
 
 			<List

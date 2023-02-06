@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import controls from '../../../../../utils/get-configurations-filter-controls';
+import controls from '../../../../../utils/get-requests-filter-controls';
 
 const useFilterContent = ({ params, setParams }) => {
 	const [showFilters, setShowFilters] = useState(false);
@@ -41,21 +41,13 @@ const useFilterContent = ({ params, setParams }) => {
 
 	const handleReset = () => {
 		if (!isEmpty(filters)) {
-			setParams({
-				...params,
-				sort_type : 'desc',
-				sort_by   : 'created_at',
-				page      : 1,
-				filters   : {
-					status: [
-						'active',
-						'draft',
-						'publishable',
-						'checking',
-						'not_publishable',
-					],
+			setParams((pv) => ({
+				...pv,
+				filters: {
+					...pv.filters,
+					assignment_type: undefined,
 				},
-			});
+			}));
 		}
 
 		reset();
@@ -65,9 +57,15 @@ const useFilterContent = ({ params, setParams }) => {
 		setShowFilters(false);
 	};
 
-	const filtersApplied = Object.keys(filters).length !== 0;
-
-	return { controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied };
+	return {
+		controls,
+		formProps,
+		showFilters,
+		setShowFilters,
+		handleReset,
+		applyFilters,
+		filtersApplied: !isEmpty(filters),
+	};
 };
 
 export default useFilterContent;

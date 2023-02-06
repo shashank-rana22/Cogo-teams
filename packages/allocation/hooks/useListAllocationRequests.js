@@ -28,7 +28,7 @@ const useListAllocationRequests = () => {
 		}));
 	}, []);
 
-	return { data, loading, refetch, params, onChangeParams };
+	return { data, loading, refetch, params, setParams, onChangeParams };
 };
 
 export default useListAllocationRequests;

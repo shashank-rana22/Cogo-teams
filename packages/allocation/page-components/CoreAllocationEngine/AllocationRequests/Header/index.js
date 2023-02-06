@@ -1,11 +1,10 @@
 import { Button, Toggle } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
-import { useState } from 'react';
 
+import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { onClickCreateReqBtn, loading, onChangeParams, toggleValue } = props;
+	const { onClickCreateReqBtn, loading, params, setParams, onChangeParams, toggleValue } = props;
 
 	// Todo search filter should expand on clicking
 
@@ -25,16 +24,7 @@ function Header(props) {
 			/>
 
 			<div className={styles.filter_and_create}>
-				<Button
-					size="md"
-					themeType="secondary"
-					disabled={loading}
-				>
-					FILTER
-					<IcMFilter style={{ marginLeft: '4px' }} />
-
-					<div className={styles.filter_dot} />
-				</Button>
+				<ConfigFilters params={params} setParams={setParams} />
 
 				<Button
 					size="md"
