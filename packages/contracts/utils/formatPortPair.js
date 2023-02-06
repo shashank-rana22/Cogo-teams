@@ -21,8 +21,11 @@ const formatPortPair = ({ item }) => {
 			serviceData.push(
 				{
 					...data.service_details?.filter((v) => v.service_type === val)[0],
-					id     : data?.id,
-					status : data?.status,
+					id               : data?.id,
+					status           : data?.status,
+					containers_count : data?.max_containers_count,
+					weight           : data?.max_weight,
+					volume           : data?.max_volume,
 				},
 			);
 		});
@@ -42,7 +45,6 @@ const formatPortPair = ({ item }) => {
 		commodity              : val?.commodity,
 		container_size         : val?.container_size,
 		container_type         : val?.container_type,
-		containers_count       : val?.containers_count,
 		status                 : val?.status,
 		inco_term              : val?.inco_term,
 		shipping_line_id       : val?.shipping_line_id,
@@ -51,8 +53,9 @@ const formatPortPair = ({ item }) => {
 		airline_id             : val?.airline_id,
 		destination_airport_id : val?.destination_airport_id,
 		origin_airport_id      : val?.origin_airport_id,
-		volume                 : val?.volume,
+		containers_count       : val?.containers_count,
 		weight                 : val?.weight,
+		volume                 : val?.volume,
 	}));
 
 	return formattedData;

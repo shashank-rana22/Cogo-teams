@@ -1,6 +1,6 @@
 import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -10,24 +10,14 @@ import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
-// import ThemeToggle from './ThemeToggle';
 
 function Navbar({
 	className,
 	style,
 	nav = [],
-	partner_user_id = '',
-	pinnedNavs = [],
-	setPinnedNavKeys = () => {},
 	mobileShow = false,
 }) {
-	const ref = useRef(null);
-
 	const userBasedNavView = formatUserBasedNavView(nav);
-	// eslint-disable-next-line no-undef
-	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
-
-	const showPin = userBasedNavView === nav;
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [searchString, setSearchString] = useState('');
@@ -37,12 +27,6 @@ function Navbar({
 		: userBasedNavView;
 
 	const listItems = sortNavs(filterdList);
-
-	const filterdPinnedNavList = searchString
-		? applyFilter(searchString, pinnedNavs, 'title', ['key', 'href', 'title'])
-		: pinnedNavs;
-
-	const pinnedListItems = sortNavs(filterdPinnedNavList);
 
 	const setSearchFunc = useCallback(
 		(value) => {
@@ -82,47 +66,11 @@ function Navbar({
 						/>
 					</div>
 
-					<div className={styles.line} />
-					<ul ref={ref} className={styles.list_container}>
-						<div className={styles.pinned_list}>
-							{(pinnedListItems || []).map((item) => (
-								<Items
-									key={item.key}
-									item={item}
-									resetSubnavs={resetSubnavs}
-									isPinned
-									partner_user_id={partner_user_id}
-									setPinnedNavKeys={setPinnedNavKeys}
-									showPin={showPin}
-								/>
-							))}
-						</div>
-						<div className={styles.unpinned_list}>
-							{(listItems || []).map((item) => (
-								<Items
-									key={item.key}
-									item={item}
-									resetSubnavs={resetSubnavs}
-									isPinned={false}
-									partner_user_id={partner_user_id}
-									setPinnedNavKeys={setPinnedNavKeys}
-									showPin={showPin}
-								/>
-							))}
-						</div>
+					<ul className={styles.list_container}>
+						{(listItems || []).map((item) => (
+							<Items key={item.key} item={item} resetSubnavs={resetSubnavs} />
+						))}
 					</ul>
-
-					{/* <ul className={styles.list_container}> */}
-					{/* 	<li> */}
-					{/* 		<div className={styles.toggle_button}> */}
-					{/* 			<div className={styles.theme_icon}> */}
-					{/* 				{activeTheme === 'light' ? '☀️' : '🌙' } */}
-					{/* 			</div> */}
-					{/* 			<span>{activeTheme === 'light' ? 'Light Mode' : 'Dark (beta)' }</span> */}
-					{/* 			<ThemeToggle activeTheme={activeTheme} setActiveTheme={setActiveTheme} /> */}
-					{/* 		</div> */}
-					{/* 	</li> */}
-					{/* </ul> */}
 				</div>
 			</nav>
 		</div>

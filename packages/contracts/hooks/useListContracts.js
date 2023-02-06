@@ -9,7 +9,7 @@ const useListContracts = () => {
 
 	const [data, setData] = useState();
 
-	const { page, status } = filters;
+	const { page, status, q } = filters;
 
 	const [{ error, loading }, trigger] = useRequest({
 		url    : '/list_contracts',
@@ -23,6 +23,7 @@ const useListContracts = () => {
 						service_types : ['fcl_freight', 'lcl_freight', 'air_freight'],
 						status,
 						sort_by       : status === 'active' ? 'updated_at' : undefined,
+						q             : q || undefined,
 					},
 					services_data_required             : true,
 					contract_utilisation_data_required : true,

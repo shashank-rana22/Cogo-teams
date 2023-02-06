@@ -5,7 +5,7 @@ function Contracts() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				Contracts
+				Contracts Revenue Desk
 			</div>
 			<PageView />
 		</div>

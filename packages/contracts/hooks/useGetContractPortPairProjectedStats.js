@@ -34,7 +34,8 @@ const useGetContractPortPairProjectedStats = ({ payload }) => {
 
 	const getStats = !!payload?.id
     && !!payload?.contract_service_id
-    && !!payload?.service_type;
+    && !!payload?.service_type
+	&& !!payload?.requested_contract_price;
 
 	useEffect(() => {
 		if (getStats) {
