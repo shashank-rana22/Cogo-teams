@@ -3,11 +3,12 @@ import { useCallback, useState } from 'react';
 
 const useListAllocationRequests = () => {
 	const [params, setParams] = useState({
-		sort_by    : 'created_at',
-		sort_type  : 'desc',
-		page_limit : 10,
-		page       : 1,
-		filters    : {
+		sort_by       : 'created_at',
+		sort_type     : 'desc',
+		page_limit    : 10,
+		page          : 1,
+		data_required : true,
+		filters       : {
 			status       : 'pending',
 			service_type : 'organization',
 		},
@@ -28,7 +29,14 @@ const useListAllocationRequests = () => {
 		}));
 	}, []);
 
-	return { data, loading, refetch, params, setParams, onChangeParams };
+	return {
+		data,
+		loading,
+		refetch,
+		params,
+		setParams,
+		onChangeParams,
+	};
 };
 
 export default useListAllocationRequests;

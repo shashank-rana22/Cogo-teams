@@ -4,7 +4,14 @@ import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { onClickCreateReqBtn, loading, params, setParams, onChangeParams, toggleValue } = props;
+	const {
+		onClickCreateReqBtn,
+		loading,
+		params,
+		setParams,
+		onChangeParams,
+		toggleValue,
+	} = props;
 
 	// Todo search filter should expand on clicking
 
