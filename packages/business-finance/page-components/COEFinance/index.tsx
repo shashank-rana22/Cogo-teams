@@ -13,7 +13,8 @@ import lineData from './Components/Stream/data';
 import styles from './styles.module.css';
 
 function CoeFinance() {
-	const { query } = useRouter();
+	const { query, push } = useRouter();
+
 	const [currentTab, setCurrentTab] = useState('');
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
@@ -28,6 +29,11 @@ function CoeFinance() {
 		},
 	];
 
+	const handleChange = (tab) => {
+		setActiveTab(tab);
+		push('/business-finance/coe-finance/[active_tab]', `/business-finance/coe-finance/${tab}`);
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -39,7 +45,7 @@ function CoeFinance() {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={setActiveTab}
+					onChange={(tab) => handleChange(tab)}
 					fullWidth
 					themeType="primary"
 				>
