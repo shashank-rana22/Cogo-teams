@@ -14,7 +14,6 @@ const getControls = () => [
 				label : 'Partner',
 			},
 		],
-		rules: { required: true },
 	},
 	{
 		name           : 'organization_id',
@@ -22,7 +21,6 @@ const getControls = () => [
 		label          : 'Organization',
 		placeholder    : 'Select Organization',
 		defaultOptions : false,
-		rules          : { required: true },
 		asyncKey       : 'organizations',
 		initialCall    : false,
 		isClearable	   : true,
@@ -30,6 +28,7 @@ const getControls = () => [
 		// 	...options,
 		// 	business_name: `${option.business_name}`,
 		// })),
+		rules          : { required: 'Organization Name is required' },
 	},
 	{
 		name        : 'organization_user_id',
@@ -39,8 +38,8 @@ const getControls = () => [
 		isClearable : true,
 		asyncKey    : 'organization_users',
 		valueKey    : 'user_id',
-		rules       : { required: true },
 		initialCall : false,
+		rules       : { required: 'Organization\'s User Name is required' },
 	},
 	{
 		name           : 'partner_id',
@@ -50,8 +49,8 @@ const getControls = () => [
 		placeholder    : 'Select Partner',
 		defaultOptions : false,
 		isClearable	   : true,
-		rules          : { required: true },
 		initialCall    : false,
+		rules          : { required: 'Partner Name is required' },
 	},
 	{
 		name           : 'partner_user_id',
@@ -62,7 +61,8 @@ const getControls = () => [
 		placeholder    : 'Select Partner User',
 		defaultOptions : false,
 		isClearable	   : true,
-		rules          : { required: true },
+		rules          : { required: 'Partner\'s User Name is required' },
+
 	},
 	{
 		name           : 'stakeholder_type',
@@ -72,9 +72,7 @@ const getControls = () => [
 		isClearable    : true,
 		options        : [],
 		defaultOptions : true,
-		rules          : {
-			required: true,
-		},
+		rules          : { required: 'Stakeholder Type is required' },
 	},
 	{
 		name           : 'stakeholder_id',
@@ -85,7 +83,6 @@ const getControls = () => [
 		isClearable    : true,
 		placeholder    : 'Select Stakeholder',
 		defaultOptions : false,
-		rules          : { required: true },
 		initialCall    : false,
 		params         : {
 			filters: {
@@ -94,15 +91,14 @@ const getControls = () => [
 			},
 			page_limit: 100,
 		},
+		rules: { required: 'Stakeholder Name is required' },
 	},
 	{
 		name        : 'reason',
 		label       : 'Request Reason',
 		placeholder : 'Type here...',
 		type        : 'text',
-		rules       : {
-			required: true,
-		},
+		rules       : { required: 'Reason should be specified' },
 	},
 ];
 

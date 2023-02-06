@@ -5,7 +5,7 @@ import { useState } from 'react';
 import useListAllocationRequests from '../../../hooks/useListAllocationRequests';
 import useSaveAllocationRequest from '../../../hooks/useSaveAllocationRequest';
 
-import Form from './Form';
+import Form from '../../../common/Form';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';

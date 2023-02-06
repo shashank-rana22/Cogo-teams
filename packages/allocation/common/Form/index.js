@@ -1,5 +1,4 @@
-import { getFieldController } from '../../../../common/Form/Controlled';
-
+import { getFieldController } from './Controlled';
 import styles from './styles.module.css';
 
 function Form(props) {
