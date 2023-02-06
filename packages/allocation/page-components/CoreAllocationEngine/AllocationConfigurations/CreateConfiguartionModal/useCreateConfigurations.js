@@ -86,17 +86,17 @@ const useCreateConfigurations = ({
 		return newControl;
 	});
 
-	// const getDays = (scheduleData = {}) => {
-	// 	if (scheduleData.schedule_type === 'weekly') {
-	// 		return scheduleData.days_of_week;
-	// 	}
+	const getDays = (scheduleData = {}) => {
+		if (scheduleData.schedule_type === 'weekly') {
+			return scheduleData.days_of_week;
+		}
 
-	// 	if (scheduleData.schedule_type === 'monthly') {
-	// 		return scheduleData.dates_of_month;
-	// 	}
+		if (scheduleData.schedule_type === 'monthly') {
+			return scheduleData.dates_of_month;
+		}
 
-	// 	return 1;
-	// };
+		return 1;
+	};
 
 	const onCreate = async (values = {}) => {
 		try {
@@ -106,7 +106,7 @@ const useCreateConfigurations = ({
 				configuration_type   : 'custom',
 				status               : 'draft',
 				schedule_type        : scheduleData.schedule_type,
-				// days                 : getDays(scheduleData),
+				days                 : getDays(scheduleData),
 				is_lead_user_segment : values.service_type === 'lead_organization',
 
 				...(values.user_ids.length === 0 && {
