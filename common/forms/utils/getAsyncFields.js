@@ -56,7 +56,7 @@ function asyncFieldsOrganization() {
 function asyncFieldsOrganizationUsers() {
 	return {
 		labelKey    : 'name',
-		valueKey    : 'organization_id',
+		valueKey    : 'id',
 		endpoint    : 'list_organization_users',
 		initialCall : false,
 		params      : {
