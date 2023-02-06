@@ -1,7 +1,7 @@
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
 
 const redirections = (profile) => {
-	const configs = getSideBarConfigs({ userData: profile });
+	const configs = getSideBarConfigs(profile);
 	const { nav_items } = configs;
 	const navs = nav_items?.partner || [];
 

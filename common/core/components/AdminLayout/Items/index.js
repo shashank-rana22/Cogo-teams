@@ -1,21 +1,14 @@
-import { Loader } from '@cogoport/components';
-import { IcMArrowRotateDown, IcMDefault, IcMPin, IcCPin } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMDefault } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
 
-import useAddRemovePin from './useAddRemovePin';
-
-function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin }) {
+function Items({ item, resetSubnavs }) {
 	const router = useRouter();
 	const { query, asPath } = router;
 
 	const [showSubNav, setShowSubNav] = useState(false);
-	const {
-		newPinUnpinLoading = false,
-		pinUnpinNavs = () => {},
-	} = useAddRemovePin({ partner_user_id, setPinnedNavKeys });
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
@@ -47,44 +40,23 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 
 	const singleNav = (
 		<div
-			className={`
-			${item.options?.length > 0 ? styles.has_options : ''}
-			${isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}`}
+			className={isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-			{item.options?.length > 0 && (
-				<IcMArrowRotateDown
-					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
-				/>
-			)}
 
 			<Element />
 			<span>
 				{item.title}
 			</span>
-
-			{showPin
-				&& (!newPinUnpinLoading ? (
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.pin}
-						onClick={(e) => {
-							e.stopPropagation();
-							if (!newPinUnpinLoading) {
-								pinUnpinNavs(!isPinned, item);
-							}
-						}}
-					>
-						{isPinned ? <IcCPin /> : <IcMPin /> }
-					</div>
-				) : <Loader className={styles.loader} />)}
-
+			{options?.length > 0 && (
+				<IcMArrowRotateDown
+					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
+				/>
+			)}
 		</div>
 	);
-
 	return (
 		<div className={showSubNav ? styles.outer_container : ''}>
 			<li key={item.title} className={styles.list_item}>
