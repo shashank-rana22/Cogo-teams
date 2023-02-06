@@ -55,9 +55,9 @@ const PURCHASE_VIEW_CONFIG = {
 		},
 		{
 			label   : 'Last Modified Date',
-			key     : 'createdDate',
 			span    : 1.6,
-			func    : 'rendeFormate',
+			key     : 'createdDate',
+			func    : 'renderFormate',
 			sorting : { name: 'modifiedDateSortType' },
 		},
 		{
