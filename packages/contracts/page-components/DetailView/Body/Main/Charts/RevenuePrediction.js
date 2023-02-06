@@ -14,6 +14,20 @@ function RevenuePrediction({ activePair, data, statsData }) {
 			requested_contract_price : statsData?.requested_contract_price,
 		},
 	});
+
+	let heading = 'No. Of Containers In Current Request';
+	let value = activePair?.containers_count;
+
+	if (activePair?.service_type === 'air_freight'
+	) {
+		heading = 'Weight In Current Request';
+		value = `${activePair?.weight} Kg`;
+	}
+	if (activePair?.service_type === 'lcl_freight'
+	) {
+		heading = 'Volume In Current Request';
+		value = `${activePair?.volume}  CBM`;
+	}
 	return (
 		<div className={styles.revenue}>
 			<div className={styles.revenue_stats}>
@@ -31,6 +45,14 @@ function RevenuePrediction({ activePair, data, statsData }) {
 						<Line />
 					</>
 				) : null}
+				<div className={styles.card}>
+					<div className={styles.value_heading}>{heading}</div>
+					<div className={styles.margin}>
+						<div className={styles.value}>
+							{value}
+						</div>
+					</div>
+				</div>
 			</div>
 			<div className={styles.projected_revenue}>
 				<div>
