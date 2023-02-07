@@ -312,7 +312,7 @@ const navigationMappingShipper = {
 		as            : '/saas/insurance/list',
 		type          : 'link',
 		icon          : 'nav-insurance',
-		main_apis     : [],
+		main_apis     : ['get_exchange_rate'],
 		possible_apis : app_apis.saas_insurance,
 		module_type   : 'dashboards',
 		isNew         : true,
