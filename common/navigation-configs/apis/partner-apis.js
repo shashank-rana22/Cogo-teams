@@ -1858,6 +1858,16 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_lead_lifecycle_stats',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_lead_organizations',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
 			feature      : 'supply_crm',
 			api          : 'list_spot_negotiations',
 			access_type  : 'private',
