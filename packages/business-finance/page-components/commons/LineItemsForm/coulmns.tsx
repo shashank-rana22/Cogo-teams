@@ -34,6 +34,7 @@ const lineItemColumns = (remove, control, register) => [
 		id       : 'tax',
 		accessor : (row, index) => (
 			<SelectController
+				options={[{ label: 'demo', value: 'demo' }]}
 				control={control}
 				name={`line_items.${index}.amount_before_tax`}
 				{...register(`line_items.${index}.amount_before_tax`)}
