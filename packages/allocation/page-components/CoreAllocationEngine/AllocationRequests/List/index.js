@@ -1,12 +1,21 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+
+import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest';
 
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { data, loading, onChangeParams } = props;
+	const { data, loading, onChangeParams, fetchList } = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
+
+	const {
+		onStatusUpdate,
+		loadingUpdate,
+		requestStatusItem,
+		setRequestStatusItem,
+	} = useUpdateRequestStatus({ fetchList });
 
 	if (loading) {
 		return 'Loading...';
@@ -16,6 +25,12 @@ function List(props) {
 		return 'Empty';
 	}
 
+	const showStatusConfirmationModal = !isEmpty(requestStatusItem);
+
+	const onCloseModal = () => {
+		setRequestStatusItem({});
+	};
+
 	return (
 		<div>
 			{list.map((item) => (
@@ -23,6 +38,13 @@ function List(props) {
 					id="request_list"
 					key={item.id}
 					data={item}
+					showModal={showStatusConfirmationModal}
+					onClickStatusChange={({ status }) => {
+						setRequestStatusItem({
+							status,
+							allocation_request_id: item.id,
+						});
+					}}
 				/>
 			))}
 
@@ -35,6 +57,36 @@ function List(props) {
 					onPageChange={(val) => onChangeParams({ page: val })}
 				/>
 			</div>
+
+			{showStatusConfirmationModal ? (
+				<Modal
+					size="md"
+					show={showStatusConfirmationModal}
+					onClose={onCloseModal}
+					onOuterClick={onCloseModal}
+					placement="top"
+				>
+					<div className={styles.status_change_container}>
+
+						<Modal.Header
+							title={`Are you sure you want to
+						 	${requestStatusItem.status || 'update'} 
+							this request ?`}
+						/>
+
+						<div className={styles.btn_container}>
+							<Button
+								size="md"
+								themeType="primary"
+								onClick={onStatusUpdate}
+								loading={loadingUpdate}
+							>
+								Yes, I do
+							</Button>
+						</div>
+					</div>
+				</Modal>
+			) : null}
 		</div>
 
 	);
