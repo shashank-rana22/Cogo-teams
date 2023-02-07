@@ -57,4 +57,16 @@
 	cursor: pointer;
 }
 
+.content_container{
+    display: flex;
+
+    margin-bottom: 4px;
+    
+    @media (min-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+}
+
 

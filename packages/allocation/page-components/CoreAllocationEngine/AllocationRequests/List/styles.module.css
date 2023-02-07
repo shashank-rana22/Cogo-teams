@@ -7,3 +7,11 @@
 		right: 0;
 	}
 }
+
+
+
+.btn_container{
+	padding: 16px;
+	display: flex;
+	justify-content:  flex-end;
+}

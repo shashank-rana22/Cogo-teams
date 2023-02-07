@@ -1,7 +1,9 @@
-import { Badge, Tooltip } from '@cogoport/components';
+import { Badge, Tooltip, Popover } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { getByKey, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
+import Actions from './Actions';
 import styles from './styles.module.css';
 
 const columnsMapping = [
@@ -66,19 +68,25 @@ const columnsMapping = [
 		),
 		flex: 1.5,
 	},
-	{
-		key      : 'action',
-		getValue : () => (
-			<div className={styles.svg_container}>
-				<IcMOverflowDot height={16} width={16} />
-			</div>
-		),
-		flex: 0,
-	},
+	// {
+	// 	key      : 'action',
+	// 	getValue : () => (
+	// 		<div
+	// 			className={styles.svg_container}
+	// 			onClick={() => {}}
+	// 			role="presentation"
+	// 		>
+	// 			<IcMOverflowDot height={16} width={16} />
+	// 		</div>
+	// 	),
+	// 	flex: 0,
+	// },
 ];
 
 function ListItem(props) {
-	const { data } = props;
+	const { data, onClickStatusChange } = props;
+
+	const [showPopover, setShowPopover] = useState(false);
 
 	return (
 		<div className={styles.list_item_container}>
@@ -97,6 +105,33 @@ function ListItem(props) {
 					</div>
 				);
 			})}
+
+			<div className={styles.content_container}>
+				<Popover
+					visible={showPopover}
+					placement="left"
+					interactive
+					render={(
+						<Actions
+							onClickCta={({ status }) => {
+								onClickStatusChange({ status });
+								setShowPopover(false);
+							}}
+							setShowPopover={setShowPopover}
+						/>
+					)}
+					onClickOutside={() => setShowPopover(false)}
+				>
+					<div
+						className={styles.svg_container}
+						onClick={() => setShowPopover(true)}
+						role="presentation"
+					>
+						<IcMOverflowDot height={16} width={16} />
+					</div>
+				</Popover>
+			</div>
+
 		</div>
 	);
 }

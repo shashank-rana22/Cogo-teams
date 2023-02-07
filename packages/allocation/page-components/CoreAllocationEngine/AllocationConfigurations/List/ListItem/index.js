@@ -196,6 +196,7 @@ const WORKFLOW_MAPPING = {
 };
 
 function ListItem({ item, listRefetch }) {
+	// Todo move the state up
 	const [workflowName, setWorkflowName] = useState(false);
 
 	return (
