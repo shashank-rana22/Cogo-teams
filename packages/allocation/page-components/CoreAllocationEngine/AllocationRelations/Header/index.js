@@ -7,12 +7,30 @@ import styles from './styles.module.css';
 
 function Header({
 	setShowCreateRelationModal = () => {},
+	setParams = () => {},
 }) {
+	const onChangeToggle = (event) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...((previousParams || {}).filters || {}),
+				status: event?.target?.checked ? 'pending' : 'active',
+			},
+		}));
+	};
+
 	return (
 		<div className={styles.header_container}>
 
 			<div>
-				<Toggle name="relation_status" size="md" offLabel="Active" onLabel="Pending" />
+				<Toggle
+					name="relation_status"
+					size="md"
+					offLabel="Active"
+					onLabel="Pending"
+					style={{ padding: '0px' }}
+					onChange={(event) => onChangeToggle(event)}
+				/>
 			</div>
 
 			<div className={styles.button_container}>

@@ -21,7 +21,16 @@
 }
 
 .text{
-    font-size: 14px;
+    font-size: 12px;
+}
+
+.reason_text{
+    display: block;
+	white-space: nowrap;
+    font-size: 12px;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .lower_label{
@@ -61,4 +70,15 @@
         justify-content: center;
         margin-bottom: 0;
     }
+}
+
+
+.expiry_date{
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.expiry_time{
+    font-size: 10px;
+    color: #828282;
 }

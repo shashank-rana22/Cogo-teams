@@ -6,11 +6,14 @@ import List from './List';
 import styles from './styles.module.css';
 
 function Relations() {
-	const { list, showCreateRelationModal, setShowCreateRelationModal, fetchList } = useAllocationRelations();
+	const {
+		list, showCreateRelationModal, setShowCreateRelationModal,
+		fetchList, setParams = () => {},
+	} = useAllocationRelations();
 
 	return (
 		<div className={styles.container}>
-			<Header setShowCreateRelationModal={setShowCreateRelationModal} />
+			<Header setShowCreateRelationModal={setShowCreateRelationModal} setParams={setParams} />
 
 			<List list={list} />
 
