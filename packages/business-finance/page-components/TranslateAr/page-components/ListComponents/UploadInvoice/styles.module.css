@@ -1,0 +1,11 @@
+.section {
+	:global {
+		.ui_button_container {
+			padding: 14px;
+		}
+	}
+}
+
+.text {
+	font-weight: 600;
+}
