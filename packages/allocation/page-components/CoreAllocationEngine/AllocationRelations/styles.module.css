@@ -1,3 +1,10 @@
 .container {
     margin-top: 16px;
 }
+
+.empty_container{
+    padding: 24px;
+    margin-top: 16px;
+    border-radius: 10px;
+    background: #FFFFFF;
+}

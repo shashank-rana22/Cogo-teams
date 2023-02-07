@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    justify-content: center;
+	align-items: center;
+    background: #ffffff;
+    height: max-content;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.text{
+    font-size: 16px;
+    color: #BDBDBD;
+}

@@ -1,3 +1,6 @@
+import { isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../../../common/EmptyState';
 import useAllocationRelations from '../../../hooks/useAllocationRelations';
 
 import CreateRelationModal from './CreateRelationModal';
@@ -8,14 +11,25 @@ import styles from './styles.module.css';
 function Relations() {
 	const {
 		list, showCreateRelationModal, setShowCreateRelationModal,
-		fetchList, setParams = () => {},
+		fetchList, setParams = () => {}, loading,
 	} = useAllocationRelations();
 
 	return (
 		<div className={styles.container}>
 			<Header setShowCreateRelationModal={setShowCreateRelationModal} setParams={setParams} />
 
-			<List list={list} />
+			{(!loading && isEmpty(list)) ? (
+				<div className={styles.empty_container}>
+					<EmptyState
+						height={400}
+						width={640}
+						emptyText="No records found"
+						textSize="24px"
+						flexDirection="column"
+					/>
+				</div>
+
+			) : <List list={list} />}
 
 			{showCreateRelationModal && (
 				<CreateRelationModal
