@@ -74,22 +74,20 @@ const getCreateConfigurationsControls = ({
 			isClearable: true,
 		},
 		{
-			name         : 'segment_id',
-			label        : 'Segment Type',
-			placeholder  : 'Type segment here...',
-			type         : 'asyncSelect',
-			asyncKey     : 'segments',
-			initialCall  : false,
-			value        : value.segment_id,
-			handleChange : (obj) => {
-				setSegment(obj.name);
+			name              : 'segment_id',
+			label             : 'Segment Type',
+			placeholder       : 'Type segment here...',
+			type              : 'asyncSelect',
+			asyncKey          : 'segments',
+			initialCall       : false,
+			value             : value.segment_id,
+			getSelectedOption : (obj) => {
+				setSegment(obj?.name);
 			},
-			getModifiedOptions({ options }) {
-				return options.map((option) => ({
-					...option,
-					label: startCase(option.name),
-				}));
-			},
+			getModifiedOptions: ({ options }) => options.map((option) => ({
+				...option,
+				label: startCase(option.name),
+			})),
 			params: {
 				segment_type         : 'global',
 				status               : 'active',
@@ -145,7 +143,7 @@ const getCreateConfigurationsControls = ({
 				required: 'Schedule is Required',
 			},
 			value: {
-				schedule_type  : value.schedule_type,
+				schedule_type  : value.schedule_type || 'daily',
 				dates_of_month : value.days,
 				days_of_week   : value.days,
 			},
