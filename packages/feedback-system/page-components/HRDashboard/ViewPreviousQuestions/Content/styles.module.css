@@ -1,0 +1,17 @@
+.popover_content {
+	width: 600px;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.select_container {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.popover_header {
+	p {
+		font-weight: 500; 
+		padding: 8px 0; 
+	}
+}

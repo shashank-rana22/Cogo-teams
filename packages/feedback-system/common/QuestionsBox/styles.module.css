@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	padding: 8px;
+	margin: 4px;
+	justify-content: space-between;
+	background: #f7f5fc;
+	border: 2px solid #f1efff;
+	border-radius: 8px;
+}
+
+.question_section {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 8px;
+
+	p {
+		font-weight: 500;
+	}
+}
+
+.question {
+	width: 100%;
+	overflow: hidden;
+	overflow-x: scroll;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

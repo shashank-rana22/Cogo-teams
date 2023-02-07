@@ -1,0 +1,32 @@
+.head_content {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.container {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000;
+}
+
+.improvement_needed {
+	color: #f00;
+}
+
+.average {
+	color: #f3aa18;
+}
+
+.good_performance {
+	color: #67c676;
+}

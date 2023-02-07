@@ -1,0 +1,16 @@
+.empty_state_container {
+	display: flex;
+	justify-content: center;
+	padding: 16px 0;
+	background: #fff;
+	border: 2px solid #f6f5fe;
+
+	h4 {
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 26px;
+		color: #000;
+		text-align: center;
+	}
+}

@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.checkbox_container {
+	width: 5%;
+}
+
+.question_container {
+	width: 90%;
+}

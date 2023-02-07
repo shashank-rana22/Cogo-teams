@@ -1,0 +1,20 @@
+.container {
+	margin: 16px;
+	
+	p {
+		font-weight: 500;
+		font-size: 18px; 
+	}
+
+	:global(.core-ui-select__control) {
+		margin: 16px 0;
+	}
+
+	:global(.core-ui-select__value-container) {
+		padding: 8px;
+	}
+}
+
+ .tab_container {
+	padding-top: 8px;
+ }

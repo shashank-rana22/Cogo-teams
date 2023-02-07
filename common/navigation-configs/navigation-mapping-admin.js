@@ -1797,6 +1797,36 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	feedback_system: {
+		key         : 'feedback_system',
+		title       : 'Feedback System',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		main_apis   : ['list_user_feedbacks'],
+		options     : [
+			{
+				key           : 'feedback_system-user_dashboard',
+				title         : 'User Dashboard',
+				href          : '/feedback-system/user-dashboard',
+				as            : '/feedback-system/user-dashboard',
+				possible_apis : apis.feedback_system,
+			},
+			{
+				key           : 'feedback_system-manager_dashboard',
+				title         : 'Manager Dashboard',
+				href          : '/feedback-system/manager-dashboard',
+				as            : '/feedback-system/manager-dashboard',
+				possible_apis : apis.feedback_system,
+			},
+			{
+				key           : 'feedback_system-hr_dashboard',
+				title         : 'HR Dashboard',
+				href          : '/feedback-system/hr-dashboard',
+				as            : '/feedback-system/hr-dashboard',
+				possible_apis : apis.feedback_system,
+			},
+		],
+	},
 };
 
 export default navigationMappingAdmin;

@@ -11,6 +11,7 @@ import contract_rates from './contract-rates-apis';
 import document_walet from './doc-walet';
 import enquiry_supply from './enquiry-supply-apis';
 import feedback from './feedback-apis';
+import feedback_system from './feedback-system-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
 import login_apis from './login_apis';
@@ -102,6 +103,6 @@ const apis = {
 	...tools,
 	...consolidated_invoices,
 	login_apis,
-
+	feedback_system,
 };
 export default apis;

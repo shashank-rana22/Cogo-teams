@@ -1,0 +1,15 @@
+.form_container {
+	:global(.form-item-label) {
+		margin: 16px 0;
+	}
+
+	:global(.core-ui-input-suffix) {
+		margin-top: 24px;
+		font-size: 14px;
+	}
+}
+
+.select_container {
+	display: flex;
+	justify-content: flex-start;
+}

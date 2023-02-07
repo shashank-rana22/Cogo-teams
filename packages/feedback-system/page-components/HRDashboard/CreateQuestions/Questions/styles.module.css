@@ -1,0 +1,18 @@
+.question_section {
+	display: flex;
+	margin: 16px 0;
+	background: #f1efff;
+	border-radius: 8px;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.question_details_container {
+	width: 90%;
+	background: #f1efff;
+	border-radius: 8px;
+}
