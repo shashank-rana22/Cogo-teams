@@ -1766,6 +1766,12 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
 	],
 	app_saas_trader_eligibilty_check: [
 		{
