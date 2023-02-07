@@ -572,5 +572,10 @@ const rms = [
 		access_type  : 'private',
 		service_name : 'fcl_freight_rate',
 	},
+	{
+		api          : 'list_cogo_entities',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
 ];
 export default rms;
