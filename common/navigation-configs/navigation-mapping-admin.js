@@ -5,6 +5,7 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
+	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
@@ -1808,6 +1809,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.cost_booking,
+		icon          : IcMBooking,
 		module_type   : 'dashboards',
 	},
 	platform_configuration: {
