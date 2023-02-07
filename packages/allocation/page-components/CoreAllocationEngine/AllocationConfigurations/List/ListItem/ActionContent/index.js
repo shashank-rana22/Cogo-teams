@@ -47,7 +47,7 @@ function ActionContent({ status, setWorkflowName }) {
 				role="presentation"
 			>
 				<div className={styles.cta_text}>
-					<IcMEyeopen width={16} height={16} />
+					<IcMEyeopen width={16} height={16} style={{ marginRight: '10px' }} />
 					View
 				</div>
 			</div>
