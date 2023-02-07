@@ -15,7 +15,7 @@ const COLUMNS_MAPPING = [
 				</Tooltip>
 			);
 		},
-		flex: 1,
+		flex: 1.25,
 	},
 	{
 		key      : 'user',
@@ -26,9 +26,11 @@ const COLUMNS_MAPPING = [
 
 			return (
 				<div className={styles.name_container}>
-					<div className={styles.text}>{startCase(name || '').toLowerCase()}</div>
+					<div className={styles.text}>{startCase((name || '').toLowerCase())}</div>
 
-					<div className={styles.lower_label}>{(email || '').toLowerCase()}</div>
+					<div className={`${styles.lower_label} ${styles.email_id}`}>
+						{(email || '').toLowerCase()}
+					</div>
 				</div>
 			);
 		},
@@ -41,13 +43,28 @@ const COLUMNS_MAPPING = [
 			const stakeholderType = getByKey(item, 'stakeholder_type', '___');
 			const stakeholderName = getByKey(item, 'stakeholder_id.name', '___');
 
+			const STAKEHOLDER_COLOR_MAPPING = {
+				ckam              : 'orange',
+				sales_agent       : 'blue',
+				credit_controller : 'red',
+
+			};
+
 			return (
-				<div>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div className={styles.text}>{startCase(stakeholderName.toLowerCase())}</div>
 
 					<div className={styles.lower_label}>
 						{stakeholderType
-							? startCase(stakeholderType) : ''}
+							? (
+								<Pill
+									size="sm"
+									color={STAKEHOLDER_COLOR_MAPPING[stakeholderType]}
+									style={{ marginLeft: '0px' }}
+								>
+									{startCase(stakeholderType)}
+								</Pill>
+							) : ''}
 
 					</div>
 				</div>
@@ -60,7 +77,7 @@ const COLUMNS_MAPPING = [
 		label    : 'Reason',
 		getValue : (item) => (
 			<Tooltip placement="bottom" content={getByKey(item, 'reason', '___')}>
-				<div className={styles.tooltip_text}>{getByKey(item, 'reason', '___')}</div>
+				<div className={styles.text}>{getByKey(item, 'reason', '___')}</div>
 			</Tooltip>
 		),
 		flex: 1,
@@ -83,7 +100,7 @@ const COLUMNS_MAPPING = [
 		label    : 'Expiry Date',
 		getValue : (item) => (getByKey(item, 'expiry_date')
 			? format(getByKey(item, 'expiry_date'), 'dd MMM yyyy') : '___'),
-		flex: 1,
+		flex: 0.75,
 	},
 	{
 		key      : 'status',
