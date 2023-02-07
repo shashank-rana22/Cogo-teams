@@ -2,7 +2,7 @@ const apis = [
 	{
 		api          : 'list_kam_desk_shipments',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'list_shipment_services',
@@ -189,6 +189,51 @@ const apis = [
 	},
 	{
 		api          : 'list_shipments',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
+	{
+		api          : 'get_shipment_fault_alarm_description',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_additional_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_currency_conversions',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_invoice_combination',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_documents',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organizations',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_shipment_documents',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_pending_task',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
