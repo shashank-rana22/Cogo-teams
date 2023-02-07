@@ -15,10 +15,9 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api           : 'get_shipment_invoice_preference',
-		access_type   : 'private',
-		project_scope : ['partner'],
-		service_name  : 'shipment',
+		api          : 'get_shipment_invoice_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_shipment',
@@ -81,10 +80,9 @@ const apis = [
 		service_name : 'sage',
 	},
 	{
-		api           : 'generate_freight_certificate',
-		access_type   : 'private',
-		project_scope : ['partner'],
-		service_name  : 'shipment',
+		api          : 'generate_freight_certificate',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_shipment_sell_quotations',
