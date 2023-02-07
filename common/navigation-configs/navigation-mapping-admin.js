@@ -1339,13 +1339,12 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'coe-kam_desk',
-				title         : 'KAM Desk',
-				href          : '/kam-desk',
-				as            : '/kam-desk',
-				type          : 'link',
-				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk],
+				key       : 'coe-kam_desk',
+				title     : 'KAM Desk',
+				href      : '/kam-desk',
+				as        : '/kam-desk',
+				type      : 'link',
+				main_apis : ['list_kam_desk_shipments'],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1354,7 +1353,7 @@ const navigationMappingAdmin = {
 				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.shipment],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1363,7 +1362,7 @@ const navigationMappingAdmin = {
 				as            : '/last-mile',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.shipment],
 			},
 		],
 	},
