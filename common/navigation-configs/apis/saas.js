@@ -1626,6 +1626,12 @@ const saas = {
 			module      : 'product',
 			feature     : 'product',
 		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
 	],
 	app_saas_premium_services: [
 		{
