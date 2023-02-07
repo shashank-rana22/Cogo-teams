@@ -3,6 +3,7 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import CheckConfigurationPublishablity from '../../CheckConfigurationPublishability';
 import CreateConfiguration from '../../CreateConfiguration';
 import DeleteConfiguration from '../../DeleteConfiguration';
 
@@ -177,6 +178,13 @@ const WORKFLOW_MAPPING = {
 			setShow={setWorkflowName}
 		/>
 	),
+	check: ({ item, listRefetch, setWorkflowName }) => (
+		<CheckConfigurationPublishablity
+			value={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
 };
 
 function ListItem({ item, listRefetch }) {
@@ -223,7 +231,7 @@ function ListItem({ item, listRefetch }) {
 					onClose={() => setWorkflowName(null)}
 					placement="top"
 				>
-					{WORKFLOW_MAPPING[workflowName]({ item, listRefetch, setWorkflowName })}
+					{WORKFLOW_MAPPING[workflowName]?.({ item, listRefetch, setWorkflowName })}
 				</Modal>
 			)}
 		</div>
