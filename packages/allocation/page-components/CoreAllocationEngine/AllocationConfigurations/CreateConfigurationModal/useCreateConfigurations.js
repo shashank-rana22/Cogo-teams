@@ -31,7 +31,6 @@ const useCreateConfigurations = ({
 	const {
 		reset,
 		watch,
-		setValue,
 	} = formProps;
 
 	const roleIds = watch('role_ids');
@@ -49,14 +48,14 @@ const useCreateConfigurations = ({
 			};
 		}
 
-		if (newControl.name === 'role_ids') {
-			newControl = {
-				...newControl,
-				handleChange: () => {
-					setValue('user_ids', []);
-				},
-			};
-		}
+		// if (newControl.name === 'role_ids') {
+		// 	newControl = {
+		// 		...newControl,
+		// 		handleChange: () => {
+		// 			setValue('user_ids', []);
+		// 		},
+		// 	};
+		// }
 
 		if (newControl.name === 'user_ids') {
 			if (roleIds) {
