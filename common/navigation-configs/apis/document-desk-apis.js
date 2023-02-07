@@ -204,5 +204,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipments',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 export default apis;
