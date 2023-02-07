@@ -50,6 +50,7 @@ function Requests() {
 				data={data}
 				loading={listLoading}
 				onChangeParams={onChangeParams}
+				fetchList={refetch}
 			/>
 
 			{showModal ? (

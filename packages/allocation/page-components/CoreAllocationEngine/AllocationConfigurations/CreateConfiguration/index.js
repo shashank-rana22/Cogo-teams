@@ -54,7 +54,12 @@ function CreateConfiguration({
 							CANCEL
 						</Button>
 
-						<Button type="submit" size="md" themeType="primary">
+						<Button
+							type="submit"
+							size="md"
+							themeType="primary"
+							disabled={loadingCreate || loadingUpdate}
+						>
 							{`${viewType === 'create' ? 'Create' : 'Update'}`}
 						</Button>
 					</div>

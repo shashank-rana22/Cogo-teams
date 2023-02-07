@@ -3,7 +3,10 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import CheckConfigurationPublishablity from '../../CheckConfigurationPublishability';
 import CreateConfiguration from '../../CreateConfiguration';
+import DeleteConfiguration from '../../DeleteConfiguration';
+import PublishConfiguration from '../../PublishConfiguration';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
@@ -169,9 +172,31 @@ const WORKFLOW_MAPPING = {
 			setShow={setWorkflowName}
 		/>
 	),
+	delete: ({ item, listRefetch, setWorkflowName }) => (
+		<DeleteConfiguration
+			value={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
+	check: ({ item, listRefetch, setWorkflowName }) => (
+		<CheckConfigurationPublishablity
+			value={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
+	publish: ({ item, listRefetch, setWorkflowName }) => (
+		<PublishConfiguration
+			value={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
 };
 
 function ListItem({ item, listRefetch }) {
+	// Todo move the state up
 	const [workflowName, setWorkflowName] = useState(false);
 
 	return (
@@ -215,7 +240,7 @@ function ListItem({ item, listRefetch }) {
 					onClose={() => setWorkflowName(null)}
 					placement="top"
 				>
-					{WORKFLOW_MAPPING[workflowName]({ item, listRefetch, setWorkflowName })}
+					{WORKFLOW_MAPPING[workflowName]?.({ item, listRefetch, setWorkflowName })}
 				</Modal>
 			)}
 		</div>

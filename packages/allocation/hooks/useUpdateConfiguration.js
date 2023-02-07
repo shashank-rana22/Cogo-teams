@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { getApiErrorString } from '@cogoport/forms/utils/getApiError';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateConfiguration = ({
@@ -12,9 +12,9 @@ const useUpdateConfiguration = ({
 		method : 'POST',
 	});
 
-	const onDelete = async (allocation_detail_id = '') => {
+	const onDelete = async () => {
 		try {
-			const payload = { id: allocation_detail_id, status: 'inactive' };
+			const payload = { id: value.id, status: 'inactive' };
 
 			await trigger({
 				data: payload,
