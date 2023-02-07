@@ -34,7 +34,7 @@ const COLUMNS_MAPPING = [
 				</div>
 			);
 		},
-		flex: 1,
+		flex: 1.25,
 	},
 	{
 		key      : 'stakeholder_name',
@@ -77,10 +77,10 @@ const COLUMNS_MAPPING = [
 		label    : 'Reason',
 		getValue : (item) => (
 			<Tooltip placement="bottom" content={getByKey(item, 'reason', '___')}>
-				<div className={styles.text}>{getByKey(item, 'reason', '___')}</div>
+				<div className={styles.reason_text}>{getByKey(item, 'reason', '___')}</div>
 			</Tooltip>
 		),
-		flex: 1,
+		flex: 1.5,
 	},
 	{
 		key      : 'created_by',
@@ -98,22 +98,19 @@ const COLUMNS_MAPPING = [
 	{
 		key      : 'expiry_date',
 		label    : 'Expiry Date',
-		getValue : (item) => (getByKey(item, 'expiry_date')
-			? format(getByKey(item, 'expiry_date'), 'dd MMM yyyy') : '___'),
-		flex: 0.75,
-	},
-	{
-		key      : 'status',
-		label    : 'Status',
-		getValue : (item) => {
-			const className = item.status === 'active' ? 'active' : 'inactive';
-			return (
-				<div className={className}>
-					{item.status ? startCase(item.status) : '-'}
+		getValue : (item) => (
+			<div className={styles.expiry_date}>
+				<div>
+					{getByKey(item, 'expiry_date')
+						? format(getByKey(item, 'expiry_date'), 'dd MMM yyyy') : '___'}
 				</div>
-			);
-		},
-		flex: 1,
+				<div className={styles.expiry_time}>
+					{getByKey(item, 'expiry_date')
+						? format(getByKey(item, 'expiry_date'), 'hh:mm aaa') : '___'}
+				</div>
+			</div>
+		),
+		flex: 0.75,
 	},
 	{
 		key      : 'relation_type',

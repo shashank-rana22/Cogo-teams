@@ -2,7 +2,7 @@ import { Select, Tabs, TabPanel } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 function SelectDayFrequency({
-	value,
+	value = {},
 	onChange,
 	...rest
 }) {

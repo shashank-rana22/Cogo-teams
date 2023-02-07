@@ -1,20 +1,20 @@
 import { Toast } from '@cogoport/components';
-import { getApiErrorString } from '@cogoport/forms/utils/getApiError';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateConfiguration = ({
 	value = {},
 	setShow = () => {},
-	fetchList = () => {},
+	listRefetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_allocation_configuration',
 		method : 'POST',
 	});
 
-	const onDelete = async (allocation_detail_id = '') => {
+	const onDelete = async () => {
 		try {
-			const payload = { id: allocation_detail_id, status: 'inactive' };
+			const payload = { id: value.id, status: 'inactive' };
 
 			await trigger({
 				data: payload,
@@ -22,7 +22,7 @@ const useUpdateConfiguration = ({
 
 			setShow(false);
 
-			fetchList();
+			listRefetch();
 
 			Toast.success('Configuration deleted successfully!');
 		} catch (error) {
@@ -43,7 +43,7 @@ const useUpdateConfiguration = ({
 				data: payload,
 			});
 
-			fetchList();
+			listRefetch();
 
 			setShow(false);
 
