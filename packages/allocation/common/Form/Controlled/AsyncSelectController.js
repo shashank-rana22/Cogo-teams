@@ -5,7 +5,7 @@ import AsyncSelect from '../components/AsyncSelect';
 
 function AsyncSelectController(props) {
 	const {
-		name, control, rules, ...rest
+		name, control, rules, value, ...rest
 	} = props;
 
 	return (
@@ -13,12 +13,11 @@ function AsyncSelectController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, value } }) => (
+			render={({ field: { onChange, value: newValue } }) => (
 				<AsyncSelect
 					{...rest}
 					onChange={onChange}
-					value={value}
-					data-test-value={value}
+					value={newValue || value}
 				/>
 			)}
 		/>

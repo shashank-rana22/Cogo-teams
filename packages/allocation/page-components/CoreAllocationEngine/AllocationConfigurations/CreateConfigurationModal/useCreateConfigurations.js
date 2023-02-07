@@ -108,7 +108,7 @@ const useCreateConfigurations = ({
 				days                 : getDays(scheduleData),
 				is_lead_user_segment : values.service_type === 'lead_organization',
 
-				...(values.user_ids.length === 0 && {
+				...(values.user_ids?.length === 0 && {
 					user_ids: undefined,
 				}),
 				segment_type: segment,
@@ -127,7 +127,7 @@ const useCreateConfigurations = ({
 
 			Toast.success('Configuration created successfully');
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response.data));
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 
