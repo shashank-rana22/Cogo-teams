@@ -5,12 +5,11 @@ import Form from '../../../../common/Form';
 import styles from './styles.module.css';
 import useCreateConfigurations from './useCreateConfigurations';
 
-function CreateConfigurationModal({
+function CreateConfiguration({
 	viewType = '',
 	value = {},
-	showCreateConfig,
 	setShowCreateConfig,
-	listRefresh,
+	listRefetch,
 }) {
 	const {
 		controls,
@@ -21,19 +20,13 @@ function CreateConfigurationModal({
 		viewType,
 		value,
 		setShowCreateConfig,
-		listRefresh,
+		listRefetch,
 	});
 
 	const { handleSubmit } = formProps;
 
 	return (
-		<Modal
-			size="lg"
-			show={showCreateConfig}
-			onClose={() => setShowCreateConfig(false)}
-			closeOnOuterClick={false}
-			placement="center"
-		>
+		<>
 			<Modal.Header title={`${viewType === 'create' ? 'Create' : 'Edit'} Configuration`} />
 
 			<Modal.Body>
@@ -58,8 +51,8 @@ function CreateConfigurationModal({
 					</Button>
 				</div>
 			</Modal.Footer>
-		</Modal>
+		</>
 	);
 }
 
-export default CreateConfigurationModal;
+export default CreateConfiguration;

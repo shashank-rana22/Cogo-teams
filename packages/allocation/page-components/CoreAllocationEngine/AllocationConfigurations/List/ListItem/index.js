@@ -1,6 +1,9 @@
-import { Popover, Legend, Pill, Tooltip } from '@cogoport/components';
+import { Modal, Popover, Legend, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
+import { useState } from 'react';
+
+import CreateConfiguration from '../../CreateConfiguration';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
@@ -155,24 +158,22 @@ const columnsMapping = [
 		},
 		flex: 1,
 	},
-	{
-		key      : 'action',
-		getValue : (item) => {
-			const status = getByKey(item, 'status', '-');
-
-			return (
-				<div className={styles.svg_container}>
-					<Popover placement="left" interactive render={<ActionContent status={status} />}>
-						<IcMOverflowDot height={16} width={16} />
-					</Popover>
-				</div>
-			);
-		},
-		flex: 0,
-	},
 ];
 
-function ListItem({ item }) {
+const WORKFLOW_MAPPING = {
+	edit: ({ item, listRefetch, setWorkflowName }) => (
+		<CreateConfiguration
+			viewType="edit"
+			value={item}
+			listRefetch={listRefetch}
+			setShowCreateConfig={setWorkflowName}
+		/>
+	),
+};
+
+function ListItem({ item, listRefetch }) {
+	const [workflowName, setWorkflowName] = useState(false);
+
 	return (
 		<div className={styles.list_item_container}>
 			{columnsMapping.map((columnDetail) => {
@@ -188,6 +189,35 @@ function ListItem({ item }) {
 					</div>
 				);
 			})}
+
+			<div className={styles.content_container}>
+				<Popover
+					placement="left"
+					interactive
+					render={(
+						<ActionContent
+							status={item.status}
+							setWorkflowName={setWorkflowName}
+						/>
+					)}
+					onOuterClick={() => setWorkflowName(false)}
+				>
+					<div className={styles.svg_container}>
+						<IcMOverflowDot height={16} width={16} />
+					</div>
+				</Popover>
+			</div>
+
+			{workflowName && (
+				<Modal
+					size="lg"
+					show={!!workflowName}
+					onClose={() => setWorkflowName(null)}
+					placement="top"
+				>
+					{WORKFLOW_MAPPING[workflowName]({ item, listRefetch, setWorkflowName })}
+				</Modal>
+			)}
 		</div>
 	);
 }

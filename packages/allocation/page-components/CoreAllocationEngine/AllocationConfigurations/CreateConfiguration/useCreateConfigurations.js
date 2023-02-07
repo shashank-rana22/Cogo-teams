@@ -10,7 +10,7 @@ const useCreateConfigurations = ({
 	viewType = '',
 	value = {},
 	setShowCreateConfig = () => {},
-	listRefresh = () => {},
+	listRefetch = () => {},
 }) => {
 	const [segment, setSegment] = useState();
 
@@ -119,7 +119,7 @@ const useCreateConfigurations = ({
 				data: payload,
 			});
 
-			listRefresh();
+			listRefetch();
 
 			reset();
 

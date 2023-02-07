@@ -1,6 +1,8 @@
+import { Modal } from '@cogoport/components';
+
 import useAllocationConfigurations from '../../../hooks/useAllocationConfiguration';
 
-import CreateConfigurationModal from './CreateConfigurationModal';
+import CreateConfigurationModal from './CreateConfiguration';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
@@ -12,7 +14,7 @@ function Configurations() {
 		setParams,
 		showCreateConfig,
 		setShowCreateConfig,
-		listRefresh,
+		listRefetch,
 		paginationData,
 		getNextPage,
 	} = useAllocationConfigurations();
@@ -29,15 +31,23 @@ function Configurations() {
 				list={list}
 				paginationData={paginationData}
 				getNextPage={getNextPage}
+				listRefetch={listRefetch}
 			/>
 
 			{showCreateConfig && (
-				<CreateConfigurationModal
-					viewType="create"
-					showCreateConfig={showCreateConfig}
-					setShowCreateConfig={setShowCreateConfig}
-					listRefresh={listRefresh}
-				/>
+				<Modal
+					size="lg"
+					show={showCreateConfig}
+					onClose={() => setShowCreateConfig(false)}
+					closeOnOuterClick={false}
+					placement="center"
+				>
+					<CreateConfigurationModal
+						viewType="create"
+						setShowCreateConfig={setShowCreateConfig}
+						listRefetch={listRefetch}
+					/>
+				</Modal>
 			)}
 		</div>
 	);

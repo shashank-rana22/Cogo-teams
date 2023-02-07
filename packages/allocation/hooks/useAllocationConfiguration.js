@@ -37,7 +37,7 @@ const useAllocationConfigurations = () => {
 		setParams,
 		showCreateConfig,
 		setShowCreateConfig,
-		listRefresh: refetch,
+		listRefetch: refetch,
 	};
 };
 
