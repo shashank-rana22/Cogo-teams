@@ -48,7 +48,7 @@ const getCreateConfigurationsControls = ({
 			asyncKey    : 'partner_users',
 			initialCall : false,
 			disabled    : true,
-			value       : value.user_ids,
+			value       : value.user_ids || [],
 			valueKey    : 'user_id',
 			isClearable : true,
 		},

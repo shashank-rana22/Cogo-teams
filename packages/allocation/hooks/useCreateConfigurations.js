@@ -4,12 +4,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getCreateConfigurationsControls from '../../../../utils/get-create-configurations-controls';
+import getCreateConfigurationsControls from '../utils/get-create-configurations-controls';
 
 const useCreateConfigurations = ({
 	viewType = '',
 	value = {},
-	setShowCreateConfig = () => {},
+	setShow = () => {},
 	listRefresh = () => {},
 }) => {
 	const [segment, setSegment] = useState();
@@ -108,7 +108,7 @@ const useCreateConfigurations = ({
 				days                 : getDays(scheduleData),
 				is_lead_user_segment : values.service_type === 'lead_organization',
 
-				...(values.user_ids.length === 0 && {
+				...(values.user_ids?.length === 0 && {
 					user_ids: undefined,
 				}),
 				segment_type: segment,
@@ -123,11 +123,11 @@ const useCreateConfigurations = ({
 
 			reset();
 
-			setShowCreateConfig(false);
+			setShow(false);
 
 			Toast.success('Configuration created successfully');
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response.data));
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 

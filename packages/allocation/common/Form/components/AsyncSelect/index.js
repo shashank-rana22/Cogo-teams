@@ -34,7 +34,7 @@ function AsyncSelect({ asyncKey, initialCall, params, getModifiedOptions, multip
 		getAsyncOptionsProps.options = getModifiedOptions({ options: getAsyncOptionsProps.options });
 	}
 
-	if (typeof handleChange === 'function' && !isEmpty(rest.value)) {
+	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
 			selectedValue = rest.value.slice(-1);

@@ -1,16 +1,16 @@
 import { Button, Modal } from '@cogoport/components';
 
 import Form from '../../../../common/Form';
+import useCreateConfigurations from '../../../../hooks/useCreateConfigurations';
+import useUpdateConfiguration from '../../../../hooks/useUpdateConfiguration';
 
 import styles from './styles.module.css';
-import useCreateConfigurations from './useCreateConfigurations';
 
-function CreateConfigurationModal({
+function CreateConfiguration({
 	viewType = '',
 	value = {},
-	showCreateConfig,
-	setShowCreateConfig,
-	listRefresh,
+	setShow,
+	listRefetch,
 }) {
 	const {
 		controls,
@@ -20,20 +20,20 @@ function CreateConfigurationModal({
 	} = useCreateConfigurations({
 		viewType,
 		value,
-		setShowCreateConfig,
-		listRefresh,
+		setShow,
+		listRefetch,
 	});
+
+	const {
+		onEdit = () => {}, loadingUpdate = false,
+	} = useUpdateConfiguration({ value, listRefetch, setShow });
 
 	const { handleSubmit } = formProps;
 
+	const onSubmit = viewType === 'create' ? onCreate : onEdit;
+
 	return (
-		<Modal
-			size="lg"
-			show={showCreateConfig}
-			onClose={() => setShowCreateConfig(false)}
-			closeOnOuterClick={false}
-			placement="center"
-		>
+		<>
 			<Modal.Header title={`${viewType === 'create' ? 'Create' : 'Edit'} Configuration`} />
 
 			<Modal.Body>
@@ -46,20 +46,20 @@ function CreateConfigurationModal({
 						type="button"
 						size="md"
 						themeType="secondary"
-						onClick={() => setShowCreateConfig(false)}
-						disabled={loadingCreate}
+						onClick={() => setShow(false)}
+						disabled={loadingCreate || loadingUpdate}
 						style={{ marginRight: '10px' }}
 					>
 						CANCEL
 					</Button>
 
-					<Button type="submit" size="md" themeType="primary" onClick={handleSubmit(onCreate)}>
+					<Button type="submit" size="md" themeType="primary" onClick={handleSubmit(onSubmit)}>
 						{`${viewType === 'create' ? 'Create' : 'Update'}`}
 					</Button>
 				</div>
 			</Modal.Footer>
-		</Modal>
+		</>
 	);
 }
 
-export default CreateConfigurationModal;
+export default CreateConfiguration;
