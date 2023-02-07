@@ -7,6 +7,7 @@ const controls = [
 		rules       : {
 			required: 'Start Date is Required',
 		},
+		isPreviousDaysAllowed: false,
 	},
 	{
 		name        : 'end_date',
