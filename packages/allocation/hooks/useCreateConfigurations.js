@@ -23,23 +23,41 @@ const useCreateConfigurations = ({
 
 	const formProps = useForm({
 		defaultValues: {
-			...value,
-			service_type: value.service_type || 'organization',
+			service_type      : value.service_type || 'organization',
+			role_ids          : value.role_ids,
+			user_ids          : value.user_ids,
+			stakeholder_type  : value.stakeholder_type,
+			segment_id        : value.segment_id,
+			locking_criterion : value.locking_criterion,
+			locking_period    : value.locking_period,
+			cooling_period    : value.cooling_period,
+			schedule_data     : {
+				schedule_type  : value.schedule_type || 'daily',
+				dates_of_month : value.days,
+				days_of_week   : value.days,
+			},
 		},
 	});
 
 	const {
 		reset,
 		watch,
+		// setValue,
 	} = formProps;
 
 	const roleIds = watch('role_ids');
 	const watchServiceType = watch('service_type');
 
+	// useEffect(() => {
+	// 	console.log('Here');
+	// 	setValue('user_ids', []);
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [roleIds]);
+
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
-		if (viewType === 'draft') {
+		if (viewType === 'edit') {
 			newControl = {
 				...newControl,
 				rules: {
@@ -52,6 +70,7 @@ const useCreateConfigurations = ({
 		// 	newControl = {
 		// 		...newControl,
 		// 		handleChange: () => {
+		// 			console.log('Here');
 		// 			setValue('user_ids', []);
 		// 		},
 		// 	};
