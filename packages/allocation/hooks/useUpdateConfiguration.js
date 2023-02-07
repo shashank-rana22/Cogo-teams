@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 const useUpdateConfiguration = ({
 	value = {},
 	setShow = () => {},
-	fetchList = () => {},
+	listRefetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_allocation_configuration',
@@ -22,7 +22,7 @@ const useUpdateConfiguration = ({
 
 			setShow(false);
 
-			fetchList();
+			listRefetch();
 
 			Toast.success('Configuration deleted successfully!');
 		} catch (error) {
@@ -43,7 +43,7 @@ const useUpdateConfiguration = ({
 				data: payload,
 			});
 
-			fetchList();
+			listRefetch();
 
 			setShow(false);
 

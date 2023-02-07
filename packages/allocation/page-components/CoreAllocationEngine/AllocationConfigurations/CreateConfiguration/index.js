@@ -25,7 +25,7 @@ function CreateConfiguration({
 	});
 
 	const {
-		onEdit = () => {}, loadingUpdate = false,
+		onEdit, loadingUpdate,
 	} = useUpdateConfiguration({ value, listRefetch, setShow });
 
 	const { handleSubmit } = formProps;
@@ -40,24 +40,26 @@ function CreateConfiguration({
 				<Form controls={controls} formProps={formProps} />
 			</Modal.Body>
 
-			<Modal.Footer>
-				<div className={styles.button_container}>
-					<Button
-						type="button"
-						size="md"
-						themeType="secondary"
-						onClick={() => setShow(false)}
-						disabled={loadingCreate || loadingUpdate}
-						style={{ marginRight: '10px' }}
-					>
-						CANCEL
-					</Button>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Modal.Footer>
+					<div className={styles.button_container}>
+						<Button
+							type="button"
+							size="md"
+							themeType="secondary"
+							onClick={() => setShow(false)}
+							disabled={loadingCreate || loadingUpdate}
+							style={{ marginRight: '10px' }}
+						>
+							CANCEL
+						</Button>
 
-					<Button type="submit" size="md" themeType="primary" onClick={handleSubmit(onSubmit)}>
-						{`${viewType === 'create' ? 'Create' : 'Update'}`}
-					</Button>
-				</div>
-			</Modal.Footer>
+						<Button type="submit" size="md" themeType="primary">
+							{`${viewType === 'create' ? 'Create' : 'Update'}`}
+						</Button>
+					</div>
+				</Modal.Footer>
+			</form>
 		</>
 	);
 }

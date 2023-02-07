@@ -1,7 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
 const getCreateConfigurationsControls = ({
-	value = {},
+	// value = {},
 	setSegment = () => {},
 }) => {
 	const controls = [
@@ -9,7 +9,7 @@ const getCreateConfigurationsControls = ({
 			name    : 'service_type',
 			label   : 'Service Type',
 			type    : 'radioGroup',
-			value   : value.service_type || 'organization',
+			// value   : value.service_type || 'organization',
 			options : [
 				{ value: 'organization', label: 'Organization' },
 				{ value: 'lead_organization', label: 'Lead Organization' },
@@ -26,7 +26,7 @@ const getCreateConfigurationsControls = ({
 			multiple    : true,
 			asyncKey    : 'partner_roles',
 			initialCall : false,
-			value       : value.role_ids,
+			// value       : value.role_ids,
 			params      : {
 				permissions_data_required : false,
 				filters                   : {
@@ -48,7 +48,7 @@ const getCreateConfigurationsControls = ({
 			asyncKey    : 'partner_users',
 			initialCall : false,
 			disabled    : true,
-			value       : value.user_ids || [],
+			// value       : value.user_ids || [],
 			valueKey    : 'user_id',
 			isClearable : true,
 		},
@@ -57,7 +57,7 @@ const getCreateConfigurationsControls = ({
 			label       : 'Stakeholder Type',
 			placeholder : 'Select stakeholder type',
 			type        : 'select',
-			value       : value.stakeholder_type,
+			// value       : value.stakeholder_type,
 			options     : [
 				{ value: 'sales_agent', label: 'Sales Agent' },
 				{ value: 'booking_agent', label: 'Booking Agent' },
@@ -80,7 +80,7 @@ const getCreateConfigurationsControls = ({
 			type              : 'asyncSelect',
 			asyncKey          : 'segments',
 			initialCall       : false,
-			value             : value.segment_id,
+			// value             : value.segment_id,
 			getSelectedOption : (obj) => {
 				setSegment(obj?.name);
 			},
@@ -104,7 +104,7 @@ const getCreateConfigurationsControls = ({
 			label       : 'Locking Criterion',
 			placeholder : 'Select Locking Criterion',
 			type        : 'select',
-			value       : value.locking_criterion,
+			// value       : value.locking_criterion,
 			options     : [
 				{ value: 'quotations_last_date', label: 'Quotation' },
 				{ value: 'shipment_booked', label: 'Shipment Booked' },
@@ -119,7 +119,7 @@ const getCreateConfigurationsControls = ({
 			label       : 'Locking Period (Days)',
 			placeholder : 'Enter Days',
 			type        : 'number',
-			value       : value.locking_period,
+			// value       : value.locking_period,
 			rules       : {
 				required: 'Locking Period is Required',
 			},
@@ -129,7 +129,7 @@ const getCreateConfigurationsControls = ({
 			label       : 'Cooling Period (Days)',
 			placeholder : 'Enter Days',
 			type        : 'number',
-			value       : value.cooling_period,
+			// value       : value.cooling_period,
 			rules       : {
 				required: 'Cooling Period is Required',
 			},
@@ -142,11 +142,11 @@ const getCreateConfigurationsControls = ({
 			rules       : {
 				required: 'Schedule is Required',
 			},
-			value: {
-				schedule_type  : value.schedule_type || 'daily',
-				dates_of_month : value.days,
-				days_of_week   : value.days,
-			},
+			// value: {
+			// 	schedule_type  : value.schedule_type || 'daily',
+			// 	dates_of_month : value.days,
+			// 	days_of_week   : value.days,
+			// },
 		},
 	];
 
