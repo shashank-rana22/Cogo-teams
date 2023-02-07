@@ -17,7 +17,9 @@ interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
 	currentTab: string;
+	tab:string;
 	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
+	setTab: React.Dispatch<React.SetStateAction<string>>;
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 }
@@ -25,6 +27,8 @@ interface SegmentFilterProps {
 function SegmentedFilters({
 	setCurrentTab,
 	currentTab,
+	tab,
+	setTab,
 	setSearchValue,
 	searchValue,
 	filters,
@@ -48,8 +52,8 @@ function SegmentedFilters({
 				<div className={styled.filter_data_urgent}>
 					<SegmentedControl
 						options={filtersUrgentData(statsData)}
-						activeTab={currentTab}
-						setActiveTab={setCurrentTab}
+						activeTab={tab}
+						setActiveTab={setTab}
 						color="#ED3726"
 						background="#FFFAEB"
 					/>

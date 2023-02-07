@@ -30,18 +30,16 @@ function FormatedDate({ item, field }: PropsType) {
 
 	return (
 		<div className={styles.text}>
-			{field.key === 'billDate' && <div>{getBillDate}</div>}
-			{field.key === 'dueDate' && <div>{getDueDate}</div>}
+			{field.key === 'billDate' && <div className={styles.size}>{getBillDate}</div>}
+			{field.key === 'dueDate' && <div className={styles.size}>{getDueDate}</div>}
 			{field.key === 'invoiceDate' && (
-				<div>
-					{' '}
+				<div className={styles.size}>
 					{getInvoiceDate}
 				</div>
 			)}
 			{field.key === 'createdDate' && (
-				<div>
+				<div className={styles.size}>
 					{getLastModifiedDate}
-					{' '}
 				</div>
 			)}
 		</div>

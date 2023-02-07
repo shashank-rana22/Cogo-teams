@@ -18,12 +18,12 @@ interface PropsType {
 
 function InvoiceNumber({ item, field }: PropsType) {
 	const handleBillType = (type: any) => {
-		let invoiceType = 'PURCHASE INVOICE';
+		let invoiceType = 'Purchase Invoice';
 
 		if (type?.billType === 'CREDIT_NOTE') {
-			invoiceType = 'CREDIT NOTE';
+			invoiceType = 'Credit Note';
 		} else if (type?.isProforma) {
-			invoiceType = 'PROFORMA INVOICE';
+			invoiceType = 'Proforma Invoice';
 		}
 		return invoiceType;
 	};

@@ -52,6 +52,8 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		setSearchValue,
 		searchValue,
 		currentTab,
+		tab,
+		setTab,
 		setCurrentTab,
 	} = useGetPurchaseViewList({ filters, setFilters, sort });
 
@@ -82,6 +84,8 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
+				tab={tab}
+				setTab={setTab}
 				currentTab={currentTab}
 				setCurrentTab={setCurrentTab}
 			/>

@@ -26,7 +26,7 @@ function ModifiedName({ item, field }: PropsType) {
 	return (
 		<div className={styles.text}>
 			{field?.key === 'organizationName' && (
-				<div>
+				<div className={styles.size}>
 					{organizationName.length > 10 ? (
 						<Tooltip
 							interactive
@@ -47,7 +47,7 @@ function ModifiedName({ item, field }: PropsType) {
 			)}
 
 			{field?.key === 'businessName' && (
-				<div>
+				<div className={styles.size}>
 					{businessName.length > 10 ? (
 						<Tooltip
 							interactive
@@ -63,7 +63,7 @@ function ModifiedName({ item, field }: PropsType) {
 			)}
 
 			{field?.key === 'createdByName' && (
-				<div>
+				<div className={styles.size}>
 					{createdByName!?.length > 10 ? (
 						<Tooltip
 							interactive

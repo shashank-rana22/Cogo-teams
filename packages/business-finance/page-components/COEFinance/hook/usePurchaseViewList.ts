@@ -16,6 +16,7 @@ interface Props {
 
 const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 	const [currentTab, setCurrentTab] = useState('INITIATED');
+	const [tab, setTab] = useState('all');
 	const { debounceQuery, query } = useDebounceQuery();
 	const [searchValue, setSearchValue] = useState('');
 
@@ -97,7 +98,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 				proforma        : showbillType || showProforma,
 				status:
                     currentTab !== 'all' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
-				isUrgent : currentTab === 'Urgency_tag' ? true : undefined,
+				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
 			},
@@ -128,6 +129,8 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort }: Props) => {
 		loading,
 		currentTab,
 		setCurrentTab,
+		tab,
+		setTab,
 		setSearchValue,
 		searchValue,
 	};
