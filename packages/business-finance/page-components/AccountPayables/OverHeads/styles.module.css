@@ -24,12 +24,12 @@
 	background: #fffaeb;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 
 	&:hover {
 		width: 94%;
 		height: 50px;
 		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
-		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 	}
 }
 
@@ -47,11 +47,11 @@
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 
 	&:hover {
 		width: 94%;
 		height: 50px;
 		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
-		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 	}
 }
