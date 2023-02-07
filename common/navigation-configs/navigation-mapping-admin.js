@@ -1728,8 +1728,8 @@ const navigationMappingAdmin = {
 	my_profile: {
 		key           : 'my_profile',
 		title         : 'My Profile',
-		href          : '/my-profile',
-		as            : '/my-profile',
+		href          : '/v2/my-profile',
+		as            : '/v2/my-profile',
 		icon          : IcMProfile,
 		main_apis     : [],
 		module_type   : 'dashboards',
