@@ -35,7 +35,6 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 
 	const getFinalData = async () => {
 		try {
-			setShowFinal(!showFinal);
 			await FinalTrigger({
 				data: {
 					jobNumber,
@@ -44,9 +43,10 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 					updatedBy: userData?.user?.id,
 				},
 			});
+			setShowFinal(!showFinal);
 			Toast.success('Close successfully...');
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 	const getData = async (data:string) => {
@@ -67,7 +67,7 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 			Toast.success('Close successfully...');
 			setShowButton(!showButton);
 		} catch (error) {
-			Toast.error('Job Not Found...');
+			Toast.error(error);
 		}
 	};
 

@@ -21,11 +21,11 @@ import StatRect from './StatRect';
 import styles from './styles.module.css';
 
 function CostSheet() {
-	const [showButton, setShowButton] = useState(false);
-	const [showFinal, setShowFinal] = useState(false);
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId: shipmentid, jobNumber, orgId } = query || {};
+	const { shipmentId: shipmentid, jobNumber, orgId, IsJobClose } = query || {};
+	const [showButton, setShowButton] = useState(IsJobClose || false);
+	const [showFinal, setShowFinal] = useState(false);
 	const {
 		selldata,
 		buydata,
