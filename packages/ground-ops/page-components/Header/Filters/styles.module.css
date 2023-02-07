@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    gap: 16px;
+}
+
+.select {
+    :global(.ui_select_display_container) {
+        border: 1px solid #333333;
+        border-radius: 4px;
+        height: 32px;
+	}
+}
+
+.date {
+    :global(.react-datepicker__input-container) {
+        input{
+            border: 1px solid #333333;
+            border-radius: 4px;
+            height: 32px;
+        }
+    }
+}

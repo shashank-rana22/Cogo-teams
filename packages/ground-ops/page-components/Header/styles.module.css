@@ -1,8 +1,5 @@
 .container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
+	
 }
 
 .heading {
@@ -30,9 +27,11 @@
 	cursor: pointer;
 }
 
-.right {
+.filters_container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0;
 }
 
 .input_search {

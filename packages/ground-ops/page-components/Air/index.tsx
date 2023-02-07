@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import CargoHandoverAtOrigin from './CargoHandoverAtOrigin';
-import CompletedTasks from './CompletedTasks';
-import GenerateFinalAirwayBill from './GenerateFinalAirwayBill';
+import CargoHandoverAtOrigin from './components/CargoHandoverAtOrigin';
+import CompletedTasks from './components/CompletedTasks';
+import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
+import UpdateOriginCustom from './components/UpdateOriginCustom';
 import styles from './styles.module.css';
-import UpdateOriginCustom from './UpdateOriginCustom';
 
 const tabs = [
 	{
