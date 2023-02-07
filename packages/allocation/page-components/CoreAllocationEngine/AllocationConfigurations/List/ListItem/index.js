@@ -6,6 +6,7 @@ import { useState } from 'react';
 import CheckConfigurationPublishablity from '../../CheckConfigurationPublishability';
 import CreateConfiguration from '../../CreateConfiguration';
 import DeleteConfiguration from '../../DeleteConfiguration';
+import PublishConfiguration from '../../PublishConfiguration';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
@@ -180,6 +181,13 @@ const WORKFLOW_MAPPING = {
 	),
 	check: ({ item, listRefetch, setWorkflowName }) => (
 		<CheckConfigurationPublishablity
+			value={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
+	publish: ({ item, listRefetch, setWorkflowName }) => (
+		<PublishConfiguration
 			value={item}
 			listRefetch={listRefetch}
 			setShow={setWorkflowName}
