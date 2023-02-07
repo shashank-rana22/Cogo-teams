@@ -5,7 +5,9 @@ import SearchInput from '../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({
+	setShowCreateRelationModal = () => {},
+}) {
 	return (
 		<div className={styles.header_container}>
 
@@ -26,7 +28,12 @@ function Header() {
 					<div className={styles.filter_dot} />
 				</Button>
 
-				<Button size="md" themeType="accent" style={{ marginLeft: '8px' }}>
+				<Button
+					size="md"
+					themeType="accent"
+					style={{ marginLeft: '8px' }}
+					onClick={() => setShowCreateRelationModal(true)}
+				>
 					CREATE RELATION
 				</Button>
 			</div>

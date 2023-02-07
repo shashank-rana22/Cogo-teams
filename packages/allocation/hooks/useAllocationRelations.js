@@ -14,7 +14,7 @@ const useAllocationRelations = () => {
 	// const [activeTab, setActiveTab] = useState('active');
 	// const [bulkMode, setBulkMode] = useState(false);
 	// const [checkedRowsId, setCheckedRowsId] = useState([]);
-	// const [showCreateRelationModal, setShowCreateRelationModal] = useState(false);
+	const [showCreateRelationModal, setShowCreateRelationModal] = useState(false);
 
 	const [params, setParams] = useState({
 		sort_type  : 'desc',
@@ -43,6 +43,8 @@ const useAllocationRelations = () => {
 		paginationData,
 		params,
 		setParams,
+		showCreateRelationModal,
+		setShowCreateRelationModal,
 	};
 };
 

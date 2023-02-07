@@ -1,17 +1,25 @@
 import useAllocationRelations from '../../../hooks/useAllocationRelations';
 
+import CreateRelationModal from './CreateRelationModal';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
 
 function Relations() {
-	const { list } = useAllocationRelations();
+	const { list, showCreateRelationModal, setShowCreateRelationModal } = useAllocationRelations();
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header setShowCreateRelationModal={setShowCreateRelationModal} />
 
 			<List list={list} />
+
+			{showCreateRelationModal && (
+				<CreateRelationModal
+					showCreateRelationModal={showCreateRelationModal}
+					setShowCreateRelationModal={setShowCreateRelationModal}
+				/>
+			)}
 		</div>
 	);
 }
