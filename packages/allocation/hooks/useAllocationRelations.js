@@ -27,15 +27,13 @@ const useAllocationRelations = () => {
 		data_required: true,
 	});
 
-	const apiData = useRequest({
+	const [{ loading, data: apiData }, refetch] = useRequest({
 		url    : '/list_allocation_relations',
 		method : 'get',
 		params,
 	}, { manual: false });
 
-	const [{ loading, data }] = apiData;
-
-	const { list = [], ...paginationData } = data || {};
+	const { list = [], ...paginationData } = apiData || {};
 
 	return {
 		loading,
@@ -45,6 +43,7 @@ const useAllocationRelations = () => {
 		setParams,
 		showCreateRelationModal,
 		setShowCreateRelationModal,
+		fetchList: refetch,
 	};
 };
 

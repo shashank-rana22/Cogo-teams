@@ -1,9 +1,17 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRequest } from '@cogoport/request';
 
 import getCreateRelationsControls from '../../../../utils/get-create-relations-controls';
 
-const useCreateRelations = () => {
+const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList = () => {} }) => {
 	const controls = getCreateRelationsControls();
+
+	const [{ loading }, trigger] = useRequest({
+		url    : '/create_allocation_relation',
+		method : 'POST',
+	});
 
 	const formProps = useForm({
 		defaultValues: {
@@ -11,12 +19,56 @@ const useCreateRelations = () => {
 		},
 	});
 
-	const { handleSubmit } = formProps;
+	const { handleSubmit, watch } = formProps;
+
+	const organizationId = watch('service_id');
+	const mutatedControls = controls.map((control) => {
+		let newControl = { ...control };
+
+		if (newControl.name === 'service_user_id' && organizationId) {
+			newControl = {
+				...newControl,
+				params: {
+					filters: {
+						organization_id: organizationId,
+					},
+					pagination_data_required: false,
+				},
+				disabled: false,
+			};
+		}
+
+		return newControl;
+	});
+
+	const onCreate = async (values = {}) => {
+		try {
+			const payload = {
+				...values,
+				source       : 'agent',
+				service_type : 'organization',
+			};
+
+			await trigger({
+				data: payload,
+			});
+
+			fetchList();
+
+			setShowCreateRelationModal(false);
+
+			Toast.success('Allocation Relation Created Successfully!');
+		} catch (err) {
+			Toast.error(getApiErrorString(err.response.data));
+		}
+	};
 
 	return {
-		controls,
+		controls: mutatedControls,
 		formProps,
+		onCreate,
 		handleSubmit,
+		loading,
 	};
 };
 

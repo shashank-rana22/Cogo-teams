@@ -4,10 +4,11 @@ import Form from '../../../../common/Form';
 
 import useCreateRelations from './useCreateRelations';
 
-function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRelationModal = () => {} }) {
-	const { controls, formProps, onCreate } = useCreateRelations();
-
-	// const { handleSubmit } = formProps;
+function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRelationModal = () => {}, fetchList }) {
+	const { controls, formProps, onCreate, handleSubmit, loading } = useCreateRelations({
+		fetchList,
+		setShowCreateRelationModal,
+	});
 
 	return (
 		<Modal
@@ -25,7 +26,16 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 
 			<Modal.Footer>
 
-				<Button type="submit" size="md" themeType="primary"> CREATE RELATION</Button>
+				<Button
+					type="submit"
+					size="md"
+					themeType="primary"
+					disabled={loading}
+					onClick={handleSubmit(onCreate)}
+				>
+					CREATE RELATION
+
+				</Button>
 			</Modal.Footer>
 		</Modal>
 
