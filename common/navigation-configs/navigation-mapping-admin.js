@@ -1768,6 +1768,16 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+	cost_booking: {
+		key           : 'cost_booking',
+		title         : 'FF Cost Booking',
+		href          : '/cost-booking',
+		as            : '/cost-booking',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cost_booking,
+		module_type   : 'dashboards',
+	},
 	platform_configuration: {
 		key       : 'platform_configuration',
 		title     : 'Platform configuration',
