@@ -4,6 +4,7 @@ import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CreateConfiguration from '../../CreateConfiguration';
+import DeleteConfiguration from '../../DeleteConfiguration';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
@@ -164,6 +165,13 @@ const WORKFLOW_MAPPING = {
 	edit: ({ item, listRefetch, setWorkflowName }) => (
 		<CreateConfiguration
 			viewType="edit"
+			value={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
+	delete: ({ item, listRefetch, setWorkflowName }) => (
+		<DeleteConfiguration
 			value={item}
 			listRefetch={listRefetch}
 			setShow={setWorkflowName}
