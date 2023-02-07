@@ -245,7 +245,6 @@ importers:
 
   packages/business-finance:
     specifiers:
-
       '@cogoport/charts': ^1.0.1
       '@cogoport/components': ^1.0.287
       '@cogoport/forms': workspace:0.1.0
@@ -263,7 +262,7 @@ importers:
       react-dom: 18.2.0
     dependencies:
       '@cogoport/charts': 1.0.1_v2m5e27vhdewzwhryxwfaorcca
-      '@cogoport/components': 1.0.287_cuv3fbgstiudyuqm5tzta5kpse
+      '@cogoport/components': 1.0.296_cuv3fbgstiudyuqm5tzta5kpse
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.53_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
@@ -1571,6 +1570,7 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
     dev: true
+
   /@cogoport/charts/1.0.1_v2m5e27vhdewzwhryxwfaorcca:
     resolution: {integrity: sha512-YQ6y+fADwyiMd5FkMTd2eruP5Q5bNVjd3pfI8Zzff21TJeLt3W5bDiFHgTxhzl8jPMsIzKPXf20wSKJAWpaq+Q==}
     peerDependencies:
@@ -1610,7 +1610,7 @@ packages:
       date-fns: 2.29.3
       fs: 0.0.1-security
       react: 18.2.0
-      react-date-picker: 9.1.0_react@18.2.0
+      react-date-picker: 9.1.0_biqbaboplfbrettd7655fr4n2y
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.43.0_react@18.2.0
