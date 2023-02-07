@@ -44,7 +44,7 @@ function Configurations() {
 				>
 					<CreateConfigurationModal
 						viewType="create"
-						setShowCreateConfig={setShowCreateConfig}
+						setShow={setShowCreateConfig}
 						listRefetch={listRefetch}
 					/>
 				</Modal>

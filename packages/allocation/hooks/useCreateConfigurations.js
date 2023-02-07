@@ -4,13 +4,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getCreateConfigurationsControls from '../../../../utils/get-create-configurations-controls';
+import getCreateConfigurationsControls from '../utils/get-create-configurations-controls';
 
 const useCreateConfigurations = ({
 	viewType = '',
 	value = {},
-	setShowCreateConfig = () => {},
-	listRefetch = () => {},
+	setShow = () => {},
+	listRefresh = () => {},
 }) => {
 	const [segment, setSegment] = useState();
 
@@ -119,11 +119,11 @@ const useCreateConfigurations = ({
 				data: payload,
 			});
 
-			listRefetch();
+			listRefresh();
 
 			reset();
 
-			setShowCreateConfig(false);
+			setShow(false);
 
 			Toast.success('Configuration created successfully');
 		} catch (err) {

@@ -166,7 +166,7 @@ const WORKFLOW_MAPPING = {
 			viewType="edit"
 			value={item}
 			listRefetch={listRefetch}
-			setShowCreateConfig={setWorkflowName}
+			setShow={setWorkflowName}
 		/>
 	),
 };
@@ -210,7 +210,7 @@ function ListItem({ item, listRefetch }) {
 
 			{workflowName && (
 				<Modal
-					size="lg"
+					size="md"
 					show={!!workflowName}
 					onClose={() => setWorkflowName(null)}
 					placement="top"

@@ -1,14 +1,15 @@
 import { Button, Modal } from '@cogoport/components';
 
 import Form from '../../../../common/Form';
+import useCreateConfigurations from '../../../../hooks/useCreateConfigurations';
+import useUpdateConfiguration from '../../../../hooks/useUpdateConfiguration';
 
 import styles from './styles.module.css';
-import useCreateConfigurations from './useCreateConfigurations';
 
 function CreateConfiguration({
 	viewType = '',
 	value = {},
-	setShowCreateConfig,
+	setShow,
 	listRefetch,
 }) {
 	const {
@@ -19,11 +20,17 @@ function CreateConfiguration({
 	} = useCreateConfigurations({
 		viewType,
 		value,
-		setShowCreateConfig,
+		setShow,
 		listRefetch,
 	});
 
+	const {
+		onEdit = () => {}, loadingUpdate = false,
+	} = useUpdateConfiguration({ value, listRefetch, setShow });
+
 	const { handleSubmit } = formProps;
+
+	const onSubmit = viewType === 'create' ? onCreate : onEdit;
 
 	return (
 		<>
@@ -39,14 +46,14 @@ function CreateConfiguration({
 						type="button"
 						size="md"
 						themeType="secondary"
-						onClick={() => setShowCreateConfig(false)}
-						disabled={loadingCreate}
+						onClick={() => setShow(false)}
+						disabled={loadingCreate || loadingUpdate}
 						style={{ marginRight: '10px' }}
 					>
 						CANCEL
 					</Button>
 
-					<Button type="submit" size="md" themeType="primary" onClick={handleSubmit(onCreate)}>
+					<Button type="submit" size="md" themeType="primary" onClick={handleSubmit(onSubmit)}>
 						{`${viewType === 'create' ? 'Create' : 'Update'}`}
 					</Button>
 				</div>
