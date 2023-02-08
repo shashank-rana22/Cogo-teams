@@ -9,8 +9,10 @@ import common_apis from './common-apis';
 import consolidated_invoices from './consolidated-invoices';
 import contract_rates from './contract-rates-apis';
 import document_walet from './doc-walet';
+import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
 import feedback from './feedback-apis';
+import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
 import login_apis from './login_apis';
@@ -26,6 +28,7 @@ import saas from './saas';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
+import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
@@ -39,6 +42,10 @@ const apis = {
 		module  : 'shipment',
 		feature : 'shipment',
 		...api,
+	})),
+	sop: sop.map((api) => ({
+		...api,
+		module: 'demand_crm',
 	})),
 	revenue_desk: revenue_desk_apis.map((api) => ({
 		...api,
@@ -91,12 +98,14 @@ const apis = {
 	kam_payments_dashboard,
 	allocation,
 	bl_do_collection_release,
+	kam_desk,
+	document_desk,
 	...saas,
 	...common_apis,
 	...partner,
 	...tools,
 	...consolidated_invoices,
 	login_apis,
-
 };
+
 export default apis;
