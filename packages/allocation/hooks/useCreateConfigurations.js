@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getCreateConfigurationsControls from '../utils/get-create-configurations-controls';
+import getCreateConfigurationsControls from '../utils/get-configurations-create-controls';
 
 const useCreateConfigurations = ({
 	viewType = '',

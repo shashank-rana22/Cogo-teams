@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 
-import useAllocationConfigurations from '../../../hooks/useAllocationConfiguration';
+import useListAllocationConfigurations from '../../../hooks/useListAllocationConfiguration';
 
 import CreateConfigurationModal from './CreateConfiguration';
 import Header from './Header';
@@ -17,7 +17,7 @@ function Configurations() {
 		listRefetch,
 		paginationData,
 		getNextPage,
-	} = useAllocationConfigurations();
+	} = useListAllocationConfigurations();
 
 	return (
 		<div className={styles.container}>
