@@ -1,20 +1,18 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useListAllocationPreferences = ({ item = {} }) => {
+const useListAllocationInstances = ({ item = {} }) => {
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
-		sort_type  : 'desc',
-		page_limit : 5,
 		page       : 1,
+		page_limit : 5,
 		filters    : {
-			status                      : 'active',
-			allocation_configuration_id : item.id,
+			allocation_id: item.allocation_schedule?.id,
 		},
 	});
 
 	const [{ data, loading }] = useRequest({
-		url    : '/list_allocation_configuration_mutual_exclusions',
+		url    : '/list_allocation_instances',
 		method : 'get',
 		params,
 	}, { manual: false });
@@ -36,4 +34,4 @@ const useListAllocationPreferences = ({ item = {} }) => {
 	};
 };
 
-export default useListAllocationPreferences;
+export default useListAllocationInstances;

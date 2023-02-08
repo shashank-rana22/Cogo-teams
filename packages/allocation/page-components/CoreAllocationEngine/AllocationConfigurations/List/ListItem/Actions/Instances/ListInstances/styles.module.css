@@ -1,0 +1,10 @@
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.table {
+    tr {
+        height: 60px;
+    }
+}

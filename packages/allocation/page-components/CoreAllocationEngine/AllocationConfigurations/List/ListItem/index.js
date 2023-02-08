@@ -7,6 +7,7 @@ import ActionContent from './ActionContent';
 import CheckConfigurationPublishablity from './Actions/CheckConfigurationPublishability';
 import CreateConfiguration from './Actions/CreateConfiguration';
 import DeleteConfiguration from './Actions/DeleteConfiguration';
+import Instances from './Actions/Instances';
 import PublishConfiguration from './Actions/PublishConfiguration';
 import UpdatePreferences from './Actions/UpdatePreferences';
 import styles from './styles.module.css';
@@ -215,6 +216,10 @@ const WORKFLOW_MAPPING = {
 				setShow={setWorkflowName}
 			/>
 		),
+	},
+	instances: {
+		size   : 'lg',
+		render : ({ item }) => <Instances item={item} />,
 	},
 };
 
