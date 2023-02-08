@@ -1,6 +1,7 @@
 import {
 	ChipsController,
 	DatepickerController,
+	DateRangePickerController,
 	InputController,
 	MultiselectController,
 	RadioGroupController,
@@ -20,6 +21,7 @@ const controlTypeControllerMapping = {
 	chips              : ChipsController,
 	selectDayFrequency : DayFrequencyController,
 	datePicker         : DatepickerController,
+	dateRangePicker    : DateRangePickerController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

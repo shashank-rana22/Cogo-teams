@@ -10,7 +10,7 @@ const useCreateConfigurations = ({
 	viewType = '',
 	value = {},
 	setShow = () => {},
-	listRefresh = () => {},
+	listRefetch = () => {},
 }) => {
 	const [segment, setSegment] = useState();
 
@@ -138,11 +138,11 @@ const useCreateConfigurations = ({
 				data: payload,
 			});
 
-			listRefresh();
-
 			reset();
 
 			setShow(false);
+
+			listRefetch();
 
 			Toast.success('Configuration created successfully');
 		} catch (err) {

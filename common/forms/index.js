@@ -8,6 +8,7 @@ export { default as DatepickerController } from './page-components/Controlled/Da
 export { default as InputController } from './page-components/Controlled/InputController';
 export { default as UploadController } from './page-components/Controlled/UploadController';
 export { default as RadioGroupController } from './page-components/Controlled/RadioGroupController';
+export { default as DateRangePickerController } from './page-components/Controlled/DateRangePickerController';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
