@@ -1351,15 +1351,15 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'marketing-marketing_campaigns',
-				title         : 'Campaigns',
-				href          : '/marketing/campaigns',
-				as            : '/marketing/campaigns',
+				key           : 'marketing-marketing_campaign-dashboard',
+				title         : 'Campaign Dashboard',
+				href          : '/marketing/campaign-dashboard',
+				as            : '/marketing/campaign-dashboard',
+				icon          : 'ic-campaign',
 				type          : 'link',
 				main_apis     : [],
+				possible_apis : apis.campaign_dashboard,
 				module_type   : 'crm',
-				possible_apis : apis.campaigns,
-
 			},
 			{
 				key           : 'marketing-marketing_templates',
