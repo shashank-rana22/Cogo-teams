@@ -6727,6 +6727,42 @@ const partner = {
 			feature     : 'payrun',
 		},
 		{
+			api         : 'post_purchase_treasury_req_fund_allocation',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_treasury_live_status',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'get_purchase_treasury_get_report',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'get_purchase_treasury_get_report_details',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'post_purchase_treasury_allocate_fund',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'put_purchase_treasury_reject_fund_req',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
 			api          : 'get_channel_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
