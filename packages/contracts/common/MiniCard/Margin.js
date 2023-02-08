@@ -1,6 +1,11 @@
 import styles from './styles.module.css';
 
-function Margin({ heading = '', value = '' }) {
+const serviceToUnit = {
+	fcl_freight : 'ctr',
+	lcl_freight : 'CBM',
+	air_freight : 'Kgs',
+};
+function Margin({ heading = '', value = '', service = 'fcl_freight' }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.heading}>{heading}</div>
@@ -8,7 +13,8 @@ function Margin({ heading = '', value = '' }) {
 				<div className={styles.value_ctr}>
 					$
 					{value}
-					/ctr
+					/
+					{serviceToUnit[service]}
 				</div>
 			</div>
 		</div>

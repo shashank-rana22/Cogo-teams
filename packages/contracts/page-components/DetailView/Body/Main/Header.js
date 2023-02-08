@@ -71,7 +71,11 @@ function Header({ activePair, handleUpdateContract, stats }) {
 			</div>
 			<div className={styles.actions}>
 				<div className={styles.stats}>
-					<Margin heading="Requested Price" value={stats?.price?.toFixed(2)} />
+					<Margin
+						heading="Requested Price"
+						value={stats?.price?.toFixed(2)}
+						service={activePair?.service_type}
+					/>
 					<Line />
 					<Percentage
 						heading="Profitability in the next 30 days"

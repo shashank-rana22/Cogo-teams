@@ -1,6 +1,12 @@
 import styles from './styles.module.css';
 
-function Footer({ statsData, index }) {
+const serviceToUnit = {
+	fcl_freight : 'ctr',
+	lcl_freight : 'CBM',
+	air_freight : 'Kgs',
+};
+
+function Footer({ statsData, index, portPair }) {
 	return (
 		<div className={styles.footer}>
 			<div className={styles.agent}>
@@ -22,7 +28,8 @@ function Footer({ statsData, index }) {
 				<div className={styles.label}>Rate</div>
 				<div className={styles.value}>
 					{statsData?.port_pairs_data?.[index]?.price
-						? `${statsData?.port_pairs_data?.[index]?.price.toFixed(2)}/ ctr` : '-'}
+						? `${statsData?.port_pairs_data?.[index]?.price.toFixed(2)}/ 
+						${serviceToUnit[portPair?.service_type]}` : '-'}
 				</div>
 			</div>
 			<div className={styles.sub_container}>
