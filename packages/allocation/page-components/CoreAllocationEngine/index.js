@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Heading from '../../common/Heading';
 
 import Configurations from './AllocationConfigurations';
+import AllocationQuotas from './AllocationQuotas';
 import Relations from './AllocationRelations';
 import Requests from './AllocationRequests';
 import styles from './styles.module.css';
@@ -41,7 +42,7 @@ function CoreAllocationEngine() {
 					</TabPanel>
 
 					<TabPanel name="quotas" title="Quotas">
-						<div>Quotas</div>
+						<AllocationQuotas />
 					</TabPanel>
 				</Tabs>
 			</div>

@@ -1,30 +1,15 @@
-import { Button, Modal, Pagination } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest';
-
 import ListItem from './ListItem';
+// import ListItem from './ListItem';
 import styles from './styles.module.css';
-
-const STATUS_MAPPING = {
-	approved: {
-		label: 'Approve',
-	},
-	rejected: {
-		label: 'Reject',
-	},
-};
 
 function List(props) {
 	const { data, loading, onChangeParams, fetchList } = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
-	const {
-		onStatusUpdate,
-		loadingUpdate,
-		requestStatusItem,
-		setRequestStatusItem,
-	} = useUpdateRequestStatus({ fetchList });
+	//  delete hook
 
 	if (loading) {
 		return 'Loading...';
@@ -34,26 +19,22 @@ function List(props) {
 		return 'Empty';
 	}
 
-	const showStatusConfirmationModal = !isEmpty(requestStatusItem);
+	// const showStatusConfirmationModal = !isEmpty(deleteQuotaId);
 
-	const onCloseModal = () => {
-		setRequestStatusItem({});
-	};
+	// const onCloseModal = () => {
+	// 	setRequestStatusItem({});
+	// };
 
 	return (
-		<div>
+		<div className={styles.list_container}>
 			{list.map((item) => (
 				<ListItem
 					id="request_list"
 					key={item.id}
 					data={item}
-					showModal={showStatusConfirmationModal}
-					onClickStatusChange={({ status }) => {
-						setRequestStatusItem({
-							status,
-							allocation_request_id: item.id,
-						});
-					}}
+					// showModal={showDeleteConfirmationModal}
+					// onClickDelete={() => {
+					// }}
 				/>
 			))}
 
@@ -67,7 +48,7 @@ function List(props) {
 				/>
 			</div>
 
-			{showStatusConfirmationModal ? (
+			{/* {showStatusConfirmationModal ? (
 				<Modal
 					size="md"
 					show={showStatusConfirmationModal}
@@ -79,7 +60,7 @@ function List(props) {
 
 						<Modal.Header
 							title={`Are you sure you want to
-						 	${STATUS_MAPPING[requestStatusItem.status].label || 'update'} 
+						 	${STATUS_MAPPING[requestStatusItem.status].label || 'update'}
 							this request ?`}
 						/>
 
@@ -87,7 +68,7 @@ function List(props) {
 							<Button
 								size="md"
 								themeType="primary"
-								onClick={onStatusUpdate}
+								onClick={onDelete}
 								loading={loadingUpdate}
 							>
 								Yes, I do
@@ -95,7 +76,7 @@ function List(props) {
 						</div>
 					</div>
 				</Modal>
-			) : null}
+			) : null} */}
 		</div>
 
 	);

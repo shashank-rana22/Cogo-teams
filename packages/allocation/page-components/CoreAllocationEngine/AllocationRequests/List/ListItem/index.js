@@ -117,7 +117,6 @@ function ListItem(props) {
 								onClickStatusChange({ status });
 								setShowPopover(false);
 							}}
-							setShowPopover={setShowPopover}
 						/>
 					)}
 					onClickOutside={() => setShowPopover(false)}

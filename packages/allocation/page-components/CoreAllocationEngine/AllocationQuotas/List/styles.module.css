@@ -1,0 +1,8 @@
+.list_container {
+    margin-top: 16px;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}
