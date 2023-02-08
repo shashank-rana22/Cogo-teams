@@ -3,10 +3,10 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import CheckConfigurationPublishablity from '../../CheckConfigurationPublishability';
-import CreateConfiguration from '../../CreateConfiguration';
-import DeleteConfiguration from '../../DeleteConfiguration';
-import PublishConfiguration from '../../PublishConfiguration';
+import CheckConfigurationPublishablity from '../../Actions/CheckConfigurationPublishability';
+import CreateConfiguration from '../../Actions/CreateConfiguration';
+import DeleteConfiguration from '../../Actions/DeleteConfiguration';
+import PublishConfiguration from '../../Actions/PublishConfiguration';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';

@@ -2,7 +2,7 @@ import { Modal } from '@cogoport/components';
 
 import useListAllocationConfigurations from '../../../hooks/useListAllocationConfiguration';
 
-import CreateConfigurationModal from './CreateConfiguration';
+import CreateConfigurationModal from './Actions/CreateConfiguration';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
