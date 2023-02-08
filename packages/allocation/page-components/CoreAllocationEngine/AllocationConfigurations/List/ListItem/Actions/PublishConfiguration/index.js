@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 
-import Form from '../../../../../common/Form';
-import usePublishConfiguration from '../../../../../hooks/usePublishConfiguration';
+import Form from '../../../../../../../common/Form';
+import usePublishConfiguration from '../../../../../../../hooks/usePublishConfiguration';
 
 function PublishConfiguration({
 	item = {},

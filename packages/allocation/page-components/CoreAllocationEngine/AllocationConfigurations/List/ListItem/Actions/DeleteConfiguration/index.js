@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 
-import useUpdateConfiguration from '../../../../../hooks/useUpdateConfiguration';
+import useUpdateConfiguration from '../../../../../../../hooks/useUpdateConfiguration';
 
 function DeleteConfiguration({
 	item = {},

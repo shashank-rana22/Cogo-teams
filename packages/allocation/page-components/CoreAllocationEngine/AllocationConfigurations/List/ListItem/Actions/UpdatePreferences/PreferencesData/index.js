@@ -1,7 +1,7 @@
 import { RadioGroup, Pagination, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../../common/EmptyState';
+import EmptyState from '../../../../../../../../common/EmptyState';
 
 import PreferenceCard from './PreferenceCard';
 import styles from './styles.module.css';

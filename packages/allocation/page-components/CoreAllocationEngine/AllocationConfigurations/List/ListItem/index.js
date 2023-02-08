@@ -3,13 +3,12 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import CheckConfigurationPublishablity from '../../Actions/CheckConfigurationPublishability';
-import CreateConfiguration from '../../Actions/CreateConfiguration';
-import DeleteConfiguration from '../../Actions/DeleteConfiguration';
-import PublishConfiguration from '../../Actions/PublishConfiguration';
-import UpdatePreferences from '../../Actions/UpdatePreferences';
-
 import ActionContent from './ActionContent';
+import CheckConfigurationPublishablity from './Actions/CheckConfigurationPublishability';
+import CreateConfiguration from './Actions/CreateConfiguration';
+import DeleteConfiguration from './Actions/DeleteConfiguration';
+import PublishConfiguration from './Actions/PublishConfiguration';
+import UpdatePreferences from './Actions/UpdatePreferences';
 import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
