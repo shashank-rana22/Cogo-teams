@@ -22,7 +22,6 @@ function TranslateAR() {
 					onChange={(val:string) => handleTabChange(val, setReceivables, push)}
 					themeType="primary"
 					id="translate_tab_view"
-					size="lg"
 				>
 					{TABS_MAPPING.map(({ label = '', value = '', Component }) => (
 						<TabPanel name={value} title={label}>
