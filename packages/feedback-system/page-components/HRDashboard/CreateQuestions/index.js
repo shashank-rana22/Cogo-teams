@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CreateQuestionsForm from './CreateQuestionsForm';
@@ -10,10 +11,11 @@ function CreateQuestions() {
 	return (
 		<div>
 			<Button
-				className="primary md"
-				style={{ marginRight: '16px' }}
+				size="md"
+				style={{ marginRight: '16px', backgroundColor: '#abb0de' }}
 				onClick={() => setShowCreateQForm(true)}
 			>
+				<IcMPlus style={{ marginRight: '4px' }} />
 				{showEditOption ? 'Edit Questions' : 'Create Questions'}
 			</Button>
 

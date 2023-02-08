@@ -1,7 +1,7 @@
 .container {
 	margin: 16px;
 	
-	p {
+	.tab_header {
 		font-weight: 500;
 		font-size: 18px; 
 	}

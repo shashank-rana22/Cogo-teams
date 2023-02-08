@@ -7,6 +7,10 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+
+	span {
+		padding: 4px;
+	}
 }
 
 .form_group:not(:first-child) { margin: 10px 0; }
@@ -14,13 +18,17 @@
 .input_group {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+
+	:global(.ui_select_display_container){
+		width: 120px;
+		height: 30px;
+	}
 }
 
 .button_container{
 	display: flex;
 	justify-content: flex-end;
-	padding-top: 8px;
+	padding-top: 16px;
 }
 
 .error_message {

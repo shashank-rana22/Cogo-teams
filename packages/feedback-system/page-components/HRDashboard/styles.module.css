@@ -4,6 +4,10 @@
 
 .stats_container {
 	display: flex;
+
+	@media(max-width: 768px){
+		flex-direction: column;
+	}
 }
 
 .question_button_container {

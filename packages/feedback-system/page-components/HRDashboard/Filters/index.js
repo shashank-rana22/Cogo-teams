@@ -1,4 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CreateForm from '../../../common/CreateForm';
@@ -33,9 +34,11 @@ function Filters({ params = {}, setParams = () => {} }) {
 			caret={false}
 		>
 			<Button
-				className="primary md"
+				size="md"
+				style={{ backgroundColor: '#abcd62' }}
 				onClick={() => setShowFilters(!showFilters)}
 			>
+				<IcMFilter style={{ marginRight: '4px' }} />
 				Filters
 			</Button>
 		</Popover>

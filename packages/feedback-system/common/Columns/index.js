@@ -11,8 +11,8 @@ const useGetColumns = () => {
 	const Router = useRouter();
 	const handleClick = (user_id) => {
 		Router.push(
-			'/feedback-hr-dashboard/feedback-management/[user_id]?path=/feedback-hr-dashboard',
-			`/feedback-hr-dashboard/feedback-management/${user_id}?path=/feedback-hr-dashboard`,
+			'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-hr-dashboard',
+			`/feedback-system/hr-dashboard/feedback-management/${user_id}?path=/feedback-hr-dashboard`,
 		);
 	};
 	const ratingClass = ({ value }) => {

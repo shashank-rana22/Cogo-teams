@@ -12,7 +12,7 @@ function CreateQuestionsForm({ showEditOption }) {
 
 	return (
 		<div className={styles.container}>
-			<p>
+			<p className={styles.tab_header}>
 				{showEditOption ? 'Edit Questions' : 'Create Questions'}
 			</p>
 			<div className={styles.tab_container}>
@@ -22,11 +22,11 @@ function CreateQuestionsForm({ showEditOption }) {
 					themeType="primary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="previous" title="Previous Questions" badge={3}>
+					<TabPanel name="previous" title="Previous Questions">
 						<PreviousQuestionsTab setActiveTab={setActiveTab} />
 					</TabPanel>
 
-					<TabPanel name="active" title="Active Questions" badge={5}>
+					<TabPanel name="active" title="Active Questions">
 						<CurrentQuestionsTab />
 					</TabPanel>
 				</Tabs>

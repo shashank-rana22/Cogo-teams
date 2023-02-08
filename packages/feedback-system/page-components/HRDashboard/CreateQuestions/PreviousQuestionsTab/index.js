@@ -22,6 +22,8 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 			department : 'technology',
 			work_scope : 'Associate Software Engineer',
 		},
+		page       : 1,
+		page_limit : 3,
 	});
 
 	const { data = {}, loading = false } = useListFeedbackQuestions({
@@ -60,14 +62,14 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 	}, [IsCheckedAll]);
 
 	const handleChange = (e) => {
-		setSearchValue(e.target?.value);
+		setSearchValue(e);
 	};
 
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>
-			{' '}
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
+			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="52px" />
+			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="52px" />
+			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="52px" />
 		</div>
 	);
 
@@ -90,11 +92,11 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 				</p>
 				<div className={styles.search_question_filter}>
 					<Input
-						size="lg"
+						size="sm"
 						value={searchValue}
 						onChange={(e) => handleChange(e)}
 						placeholder="Search by Question "
-						prefix={<IcMSearchlight style={{ marginTop: '6px' }} />}
+						prefix={<IcMSearchlight />}
 						type="text"
 					/>
 				</div>
@@ -104,17 +106,15 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 
 			{list?.length === 0 && !loading && <EmptyState />}
 
-			{!loading && (
+			{!loading && list?.length !== 0 && (
 				<div className={styles.question_section}>
 					{(list || []).map((item, index) => (
-						<div>
-							<Questions
-								item={item}
-								index={index}
-								setPreviousQuestions={setPreviousQuestions}
-								setIsCheckedAll={setIsCheckedAll}
-							/>
-						</div>
+						<Questions
+							item={item}
+							index={index}
+							setPreviousQuestions={setPreviousQuestions}
+							setIsCheckedAll={setIsCheckedAll}
+						/>
 					))}
 				</div>
 			)}
@@ -122,15 +122,15 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 			{list?.length > 0 && (
 				<div className={styles.layout_container}>
 					<Button
+						size="md"
+						style={{ backgroundColor: showAddToButton ? '#c4dc91' : '' }}
 						loading={updateApiLoading}
 						disabled={!showAddToButton}
-						className="primary sm"
 						onClick={() => {
 							saveAll();
 						}}
 					>
 						Add to Active Questions
-						{' '}
 						<IcMArrowNext
 							style={{ marginLeft: '8px' }}
 							height={12}

@@ -21,7 +21,7 @@ function QuestionsBox({ question_detail = {} }) {
 				</div>
 			</div>
 
-			<div className={styles.question_section}>
+			<div className={styles.remark}>
 				<p>Remark</p>
 
 				<div className={styles.question}>
@@ -36,7 +36,7 @@ function QuestionsBox({ question_detail = {} }) {
 				</div>
 			</div>
 
-			<div className={styles.question_section}>
+			<div className={styles.weightage}>
 				<p>Weightage</p>
 
 				<div className={styles.question}>

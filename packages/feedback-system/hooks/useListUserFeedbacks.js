@@ -1,13 +1,14 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useListUserFeedbacks = ({
 	userId = '',
 	key = '',
 	searchValue = '',
-	params = {},
+
 }) => {
 	const [pagination, setPagination] = useState(1);
+	const [params, setParams] = useState({ filters: {}, page: 1 });
 
 	const date = new Date();
 	const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -15,7 +16,7 @@ const useListUserFeedbacks = ({
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_user_feedbacks',
-	}, { manual: true });
+	}, { manual: false });
 
 	const getUserFeedbackList = () => {
 		try {
@@ -27,7 +28,7 @@ const useListUserFeedbacks = ({
 						...(key === 'users_under_manager'
 							? {
 								performed_by_id         : userId,
-								created_at_greater_than : firstDay,
+								created_at_greater_than : firstDay.toDateString(),
 							}
 							: { rating_exists: true }),
 
@@ -40,12 +41,11 @@ const useListUserFeedbacks = ({
 			console.log(e.toString());
 		}
 	};
-
-	useEffect(() => {
-		getUserFeedbackList();
-	}, [pagination, searchValue, params]);
+	useEffect(() => getUserFeedbackList(), [params, searchValue, pagination]);
 
 	return {
+		params,
+		setParams,
 		feedbackData,
 		loading,
 		pagination,

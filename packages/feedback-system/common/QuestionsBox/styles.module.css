@@ -3,18 +3,43 @@
 	padding: 8px;
 	margin: 4px;
 	justify-content: space-between;
-	background: #f7f5fc;
-	border: 2px solid #f1efff;
-	border-radius: 8px;
 }
 
 .question_section {
+	flex: 4;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 8px;
 
 	p {
+		font-size: 12px;
+		font-weight: 500;
+	}
+}
+
+.remark {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 8px;
+
+	p {
+		font-size: 12px;
+		font-weight: 500;
+	}
+}
+
+.weightage {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 8px;
+
+	p {
+		font-size: 12px;
 		font-weight: 500;
 	}
 }

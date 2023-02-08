@@ -18,11 +18,10 @@ function Questions({ item, index, setIsCheckedAll, setPreviousQuestions }) {
 		<div className={styles.container}>
 			<div className={styles.checkbox_container}>
 				<Checkbox
-					className="primary lg"
 					checked={checked}
-					onChange={(value) => {
+					onChange={() => {
 						setIscheched(!checked);
-						setIsCheckedAll((pv) => ({ ...pv, [index]: value }));
+						setIsCheckedAll((pv) => ({ ...pv, [index]: !checked }));
 						setPreviousQuestions((pv) => ({
 							...pv,
 							[index]: {

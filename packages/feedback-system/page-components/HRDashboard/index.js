@@ -1,8 +1,9 @@
 import { Input, Button } from '@cogoport/components';
-import { IcMArrowNext, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMArrowNext, IcMDownload, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import useGetColumns from '../../common/Columns';
 import DepartmentSelect from '../../common/DepartmentSelect';
 import PerformanceChart from '../../common/PerformanceChart';
 import RoleSelect from '../../common/RoleSelect';
@@ -10,7 +11,6 @@ import UserTableData from '../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 
-import useGetColumns from './Columns';
 import CreateQuestions from './CreateQuestions';
 import Filters from './Filters';
 import styles from './styles.module.css';
@@ -19,23 +19,16 @@ import ViewQuestionPopover from './ViewPreviousQuestions';
 
 function HRDashboard() {
 	const [searchValue, setSearchValue] = useState('');
-
 	const [selectedBucket, setSelectedBucket] = useState('');
-	const [params, setParams] = useState({ filters: {}, page: 1 });
 
 	const columns = useGetColumns();
 	const { getUserListCsv } = useDownloadCsvFeedbacks({});
 
-	const { feedbackData, pagination, loading, setPagination } = useListUserFeedbacks({
-		params,
+	const { params, setParams, feedbackData, pagination, loading, setPagination } = useListUserFeedbacks({
 		searchValue,
 	});
 
 	const { list = [], page_limit, total_count } = feedbackData || {};
-
-	const handleChange = (e) => {
-		setSearchValue(e?.target?.value);
-	};
 
 	const download = () => {
 		getUserListCsv();
@@ -43,7 +36,7 @@ function HRDashboard() {
 
 	const Router = useRouter();
 	const handleClick = () => {
-		Router.push('/feedback-hr-dashboard/feedback-management');
+		Router.push('/feedback-system/hr-dashboard/feedback-management');
 	};
 
 	return (
@@ -89,9 +82,9 @@ function HRDashboard() {
 					<div className={styles.filters}>
 						<div style={{ marginRight: '16px' }}>
 							<Input
-								size="md"
+								size="sm"
 								value={searchValue}
-								onChange={(e) => handleChange(e)}
+								onChange={setSearchValue}
 								placeholder="Search by Name/ Email "
 								prefix={<IcMSearchlight style={{ marginTop: '6px' }} />}
 								type="text"
@@ -106,11 +99,14 @@ function HRDashboard() {
 						</div>
 
 						<Button
-							className="secondary sm "
+							size="md"
+							className="secondary"
+							style={{ backgroundColor: '#88cad1' }}
 							onClick={() => {
 								download();
 							}}
 						>
+							<IcMDownload style={{ marginRight: '4px' }} />
 							Download CSV
 						</Button>
 					</div>

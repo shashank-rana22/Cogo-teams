@@ -9,13 +9,15 @@ const useFilters = ({ params = {}, setParams = () => {}, setShowFilters = () => 
 		setShowFilters(false);
 	};
 
-	const onSubmit = async (values) => {
-		if (!values) return;
+	const onSubmit = (values) => {
+		const newValues = {};
+		Object.keys(values).forEach((key) => { newValues[key] = values[key] || undefined; });
+
 		setShowFilters(false);
 
 		setParams({
 			...params,
-			filters: { ...(params.filters), ...values },
+			filters: { ...(params.filters), ...newValues },
 		});
 	};
 

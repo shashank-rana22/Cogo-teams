@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 function Content({ params = {}, setParams = () => {}, list = [], loading = false }) {
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>
-			{' '}
 			<Placeholder margin="0px 0px 8px" width="100%" height="80px" />
 			<Placeholder margin="0px 0px 8px" width="100%" height="80px" />
 		</div>

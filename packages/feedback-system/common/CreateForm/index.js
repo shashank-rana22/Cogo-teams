@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import { getElementController } from '../../utils/getElementController';
 
@@ -6,13 +7,12 @@ import styles from './styles.module.css';
 
 function CreateForm({
 	formProps,
-	type = 'filter',
+	type = '',
 	controls,
 	onSubmit = () => {},
 	onCancel = () => {},
 }) {
 	const { handleSubmit = () => {}, control, formState: { errors } } = formProps;
-	const submitButton = type === 'filter' ? 'Search' : 'Create';
 
 	return (
 		<form
@@ -48,7 +48,7 @@ function CreateForm({
 
 			<div className={styles.button_container}>
 				<Button
-					size="md"
+					size="sm"
 					style={{ marginRight: 10 }}
 					themeType="secondary"
 					onClick={() => onCancel()}
@@ -56,10 +56,11 @@ function CreateForm({
 					Cancel
 				</Button>
 				<Button
-					size="md"
+					size="sm"
 					type="submit"
+					style={{ backgroundColor: '#fbd1a6', color: '#221f20' }}
 				>
-					{submitButton}
+					{startCase(type)}
 				</Button>
 
 			</div>

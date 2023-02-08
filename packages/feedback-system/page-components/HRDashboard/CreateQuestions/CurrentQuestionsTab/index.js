@@ -1,4 +1,5 @@
 import { Button, Placeholder, toast } from '@cogoport/components';
+import { IcMPlus } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import CreateForm from '../../../../common/CreateForm';
@@ -140,9 +141,9 @@ function CurrentQuestionsTab() {
 
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>
-			{' '}
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
+			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="60px" />
+			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="60px" />
+			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="60px" />
 		</div>
 	);
 
@@ -166,8 +167,9 @@ function CurrentQuestionsTab() {
 						setShowForm(true);
 						setShowbutton(false);
 					}}
-					style={{ margin: '8px 0' }}
+					style={{ margin: '8px 0', backgroundColor: '#C4DC91' }}
 				>
+					<IcMPlus style={{ marginRight: '4px' }} />
 					Add Questions
 				</Button>
 			)}
@@ -178,7 +180,10 @@ function CurrentQuestionsTab() {
 					type="create_question"
 					onSubmit={AddQuestions}
 					controls={controls}
-					onCancel={setShowForm}
+					onCancel={() => {
+						setShowForm(false);
+						setShowbutton(true);
+					}}
 				/>
 			)}
 
