@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetFeedbackPerformanceStats = () => {
+const useGetFeedbackPerformanceStats = ({ user_id = '' }) => {
 	const [performanceFilter, setPerformanceFilter] = useState(90);
 
 	const [{ data: performanceStatsData = {}, loading = false }, trigger] = useRequest({
@@ -13,7 +13,7 @@ const useGetFeedbackPerformanceStats = () => {
 		try {
 			trigger({
 				params: {
-					filters: { last_n_days: performanceFilter || 30 },
+					filters: { last_n_days: performanceFilter || 30, user_id: user_id || undefined },
 				},
 			});
 		} catch (e) {

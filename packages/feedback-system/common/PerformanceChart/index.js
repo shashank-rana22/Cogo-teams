@@ -1,6 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { Select, Placeholder, Button } from '@cogoport/components';
-import { IcMRefresh } from '@cogoport/icons-react';
+import { Select, Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import useGetFeedbackPerformanceStats from '../../hooks/useGetFeedbackPerformanceStats';
@@ -9,7 +8,7 @@ import EmptyState from './EmptyState';
 import { getMonthControls } from './getMonthControls';
 import styles from './styles.module.css';
 
-function PerformanceChart() {
+function PerformanceChart({ user_id = '' }) {
 	const { placeholder, options } = getMonthControls;
 
 	const {
@@ -17,7 +16,7 @@ function PerformanceChart() {
 		loading,
 		performanceFilter,
 		setPerformanceFilter = () => {},
-	} = useGetFeedbackPerformanceStats();
+	} = useGetFeedbackPerformanceStats({ user_id });
 
 	const lineData1 = [];
 

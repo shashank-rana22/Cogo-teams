@@ -5,7 +5,6 @@ const useListUserFeedbacks = ({
 	userId = '',
 	key = '',
 	searchValue = '',
-
 }) => {
 	const [pagination, setPagination] = useState(1);
 	const [params, setParams] = useState({ filters: {}, page: 1 });

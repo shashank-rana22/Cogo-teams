@@ -1,0 +1,32 @@
+.container {
+	.name {
+		padding: 16px 0;
+		border-bottom: 1px solid #828282;
+		font-weight: 700;
+	}
+}
+
+.details_container {
+	padding: 16px 0;
+}
+
+.text_container {
+	display: flex;
+	padding: 8px;
+
+	.details {
+		width: 100px;
+		font-weight: 500;
+		color: #464646;
+	}
+
+	.data {
+		min-width: 144px;
+		font-weight: 500;
+	}
+}
+
+
+
+
+
