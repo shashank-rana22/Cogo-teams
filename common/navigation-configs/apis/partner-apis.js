@@ -18,6 +18,11 @@ const partner = {
 			service_name : 'credit',
 		},
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -866,6 +871,11 @@ const partner = {
 			service_name : 'credit',
 		},
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_organization_commodity_segmentation_stats',
 			access_type  : 'parivate',
 			service_name : 'organization',
@@ -1609,6 +1619,11 @@ const partner = {
 	],
 	supply_crm: [
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -2247,6 +2262,36 @@ const partner = {
 		},
 	],
 	onboarding_crm: [
+		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'verify_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_party_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'update_channel_partner',
 			access_type  : 'private',
