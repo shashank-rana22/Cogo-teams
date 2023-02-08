@@ -21,8 +21,8 @@ function Relations() {
 			{(!loading && isEmpty(list)) ? (
 				<div className={styles.empty_container}>
 					<EmptyState
-						height={400}
-						width={640}
+						height={280}
+						width={440}
 						emptyText="No records found"
 						textSize="24px"
 						flexDirection="column"
