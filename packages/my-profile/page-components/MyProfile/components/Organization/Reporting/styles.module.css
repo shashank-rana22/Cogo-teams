@@ -1,0 +1,31 @@
+
+.connector{
+	border-right: 1px solid #e0e0e0;
+	position: absolute;
+	height: 100%;
+}
+
+.container{
+    display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	position: relative;
+	z-index: 1;
+}
+
+.card_container{
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	z-index: 2;
+	margin-bottom: 32px;
+
+	&.no-margin {
+		margin-bottom: 0;
+	}
+
+	/* &.leaf-node {
+		margin-bottom: 0px;
+	} */
+}

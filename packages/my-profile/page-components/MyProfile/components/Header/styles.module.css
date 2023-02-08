@@ -1,0 +1,11 @@
+.main_heading{
+	font-weight: bold;
+	display: flex;
+	font-size: 26px;
+	color: #333333;
+	margin-top: 16px;
+	margin-left: 8px;
+	@media (max-width: 768px) {
+		margin-bottom: 16px;
+	}
+}

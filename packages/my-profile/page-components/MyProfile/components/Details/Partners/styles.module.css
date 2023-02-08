@@ -1,0 +1,28 @@
+.header_text{
+	font-weight: 500;
+	font-size: 16px;
+	text-align: center;
+	color: #000000;
+	padding-bottom: 14px;
+}
+
+.card_container{
+	padding: 12px;
+}
+
+.label_text{font-weight: 400;
+	font-size: 14px;
+	color: #828282;
+	padding: 4px 0 4px 4px;
+}
+
+.value_text{
+	font-weight: 400;
+	font-size: 14px;
+	padding: 4px;
+	color: #000000;
+}
+
+.label_value_container{
+	display: flex;
+}

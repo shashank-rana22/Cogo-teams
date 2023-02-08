@@ -1,0 +1,164 @@
+.blocked_user_tag{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: #ffe3e3;
+	border-radius: 0px 0px 0px 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 500;
+	padding: 4px 12px;
+}
+
+.container{
+	display: flex;
+	width: fit-content;
+	padding: 4px;
+	background: #ffffff;
+	/* border: 3px solid ${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; */
+	border-radius: 6px;
+	transform: rotate(-45deg);
+	position: relative;
+
+	&.active {
+		/* border: 3px solid ${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; */
+	}
+}
+
+.profile_image_container{
+	padding: 4px;
+	width: 28px;
+	height: 28px;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.profile_image{
+	transform: translateX(-10px) translateY(-8px) rotate(45deg) scale(1.25);
+	height: 40px;
+	width: 40px;
+	border-radius: 4px;
+}
+
+.avatar{
+	/* background: ${(props) =>
+		props.background ? `${props.background}` : '#cfdae8'}; */
+	border-radius: 4px;
+	padding: 4px;
+	height: 26px;
+	width: 26px;
+
+	&.active {
+		/* background: ${(props) =>
+			props.background ? `${props.background}` : '#ded7fc'}; */
+	}
+}
+
+.avatar_text{
+	display: flex;
+	justify-content: center;
+	transform: rotate(45deg);
+}
+
+.division_line{
+	display: flex;
+	width: 100%;
+	/* border-bottom: 3px solid
+		${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; */
+	margin: 4px 0 4px 0;
+
+	&.active {
+		/* border-bottom: 3px solid
+			${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; */
+	}
+}
+
+.card_container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 200px;
+	padding: 16px;
+	position: relative;
+
+	&.active {
+		/* border: 1px solid ${(props) => (props.isBlocked ? '#ef9b9b' : '#bdaff9')}; */
+		border-radius: 6px;
+	}
+
+	:hover {
+		cursor: pointer;
+		box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+		border-radius: 6px;
+	}
+}
+
+.line_container{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.name_text{
+	font-weight: bold;
+	max-width: 120px;
+	font-size: 11px;
+	line-height: 12px;
+	letter-spacing: 0.04em;
+	color: #000000;
+	margin-left: 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.designation{
+	font-size: 8px;
+	line-height: 12px;
+	font-weight: normal;
+	max-width: 120px;
+	letter-spacing: 0.04em;
+	color: #464646;
+	margin-left: 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.icon_container{
+	position: absolute;
+	right: 8px;
+	top: 4px;
+}
+
+.popover_container{
+	padding: 12px 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.value_text{
+	font-size: 10px;
+	line-height: 12px;
+	color: #828282;
+
+	&.role-name {
+		margin-bottom: 4px;
+	}
+}
+
+.header_text{
+	font-weight: 700;
+	font-size: 10px;
+	line-height: 10px;
+	letter-spacing: 0.04em;
+	color: #000000;
+	margin-bottom: 6px;
+}
+
+.flex_div{
+	display: flex;
+	alignItems:center;
+}

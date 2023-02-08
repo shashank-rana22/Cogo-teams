@@ -1,0 +1,39 @@
+/* import { Button as CogoButton } from '@cogoport/front/components/admin'; */
+
+.container{
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+}
+
+.title{	color: #333333;
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 16px;
+}
+
+.form{	display: flex;
+	flex-direction: column;
+
+	& .form-item-container .form-item-label {
+		all: unset;
+		margin-bottom: 8px;
+		color: #858484;
+		font-size: 12px;
+		font-weight: 400;
+	}
+
+	.core-ui-select__indicators {
+		height: 40px;
+	}
+}
+
+/* export const Button = styled(CogoButton)`
+	width: 100%;
+	margin-top: 16px;
+	padding: 8px;
+`; */
+
+.otp_container{
+		margin: 16px 0;
+}
