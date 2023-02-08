@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 const useListAllocationInstances = ({ item = {} }) => {
 	const [params, setParams] = useState({
@@ -10,6 +11,23 @@ const useListAllocationInstances = ({ item = {} }) => {
 			allocation_id: item.allocation_schedule?.id,
 		},
 	});
+
+	const [dateRange, setDateRange] = useState({});
+
+	useEffect(() => {
+		if (!isEmpty(dateRange)) {
+			setParams((previousParams) => ({
+				...(previousParams || {}),
+				filters: {
+					...((previousParams || {}).filters || {}),
+					created_at_greater_than : `${dateRange?.startDate}` || undefined,
+					created_at_less_than    : dateRange?.endDate || undefined,
+				},
+			}));
+
+			console.log('dateRange :: ', dateRange);
+		}
+	}, [dateRange]);
 
 	const [{ data, loading }] = useRequest({
 		url    : '/list_allocation_instances',
@@ -31,6 +49,8 @@ const useListAllocationInstances = ({ item = {} }) => {
 		list,
 		paginationData,
 		getNextPage,
+		dateRange,
+		setDateRange,
 	};
 };
 

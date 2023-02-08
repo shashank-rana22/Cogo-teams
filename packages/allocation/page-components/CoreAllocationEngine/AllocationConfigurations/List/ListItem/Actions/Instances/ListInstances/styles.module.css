@@ -8,3 +8,19 @@
         height: 60px;
     }
 }
+
+.legend {
+    margin: 0px;
+
+    :global(.ui_legend_item){
+        margin: 0px;
+    }
+}
+
+.daterange_container {
+    margin-bottom: 12px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
