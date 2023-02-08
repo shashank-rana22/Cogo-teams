@@ -1,0 +1,31 @@
+.configuration_card {
+    box-shadow: 0 0 8px 4px #e0e0e0;
+
+	background: #fff;
+	margin: 20px 12px;
+	padding: 16px 32px;
+	width: 48%;
+	border-radius: 4px;
+}
+
+.field_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+
+.first_element {
+	margin-top: 0px;
+}
+
+.label {
+	font-size: 12px;
+	line-height: 14px;
+	color: #828282;
+}
+
+.value {
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 14px;
+}

@@ -1,0 +1,20 @@
+.preferences_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.radio_container {
+    display: flex;
+    align-items: center;
+}
+
+.radio_label {
+    font-size: 14px;
+	font-weight: 600;
+}

@@ -7,6 +7,7 @@ import CheckConfigurationPublishablity from '../../Actions/CheckConfigurationPub
 import CreateConfiguration from '../../Actions/CreateConfiguration';
 import DeleteConfiguration from '../../Actions/DeleteConfiguration';
 import PublishConfiguration from '../../Actions/PublishConfiguration';
+import UpdatePreferences from '../../Actions/UpdatePreferences';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
@@ -193,6 +194,13 @@ const WORKFLOW_MAPPING = {
 			setShow={setWorkflowName}
 		/>
 	),
+	view: ({ item, listRefetch, setWorkflowName }) => (
+		<UpdatePreferences
+			item={item}
+			listRefetch={listRefetch}
+			setShow={setWorkflowName}
+		/>
+	),
 };
 
 function ListItem({ item, listRefetch }) {
@@ -235,7 +243,7 @@ function ListItem({ item, listRefetch }) {
 
 			{workflowName && (
 				<Modal
-					size="md"
+					size="lg"
 					show={!!workflowName}
 					onClose={() => setWorkflowName(null)}
 					placement="top"
