@@ -3,13 +3,13 @@ import { Button, Modal } from '@cogoport/components';
 import useUpdateConfiguration from '../../../../../hooks/useUpdateConfiguration';
 
 function DeleteConfiguration({
-	value = {},
+	item = {},
 	setShow,
 	listRefetch,
 }) {
 	const {
 		onDelete, loadingUpdate,
-	} = useUpdateConfiguration({ value, listRefetch, setShow });
+	} = useUpdateConfiguration({ item, listRefetch, setShow });
 
 	return (
 		<>

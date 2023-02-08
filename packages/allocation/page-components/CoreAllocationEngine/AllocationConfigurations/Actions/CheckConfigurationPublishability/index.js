@@ -3,13 +3,13 @@ import { Button, Modal } from '@cogoport/components';
 import useCheckConfigurationPublishability from '../../../../../hooks/useCheckConfigurationPublishability';
 
 function CheckConfigurationPublishablity({
-	value = {},
+	item = {},
 	setShow,
 	listRefetch,
 }) {
 	const {
 		onCheckPublish, loadingCheckPublishability,
-	} = useCheckConfigurationPublishability({ value, listRefetch, setShow });
+	} = useCheckConfigurationPublishability({ item, listRefetch, setShow });
 
 	return (
 		<>

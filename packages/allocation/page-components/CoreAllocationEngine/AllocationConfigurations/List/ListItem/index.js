@@ -167,28 +167,28 @@ const WORKFLOW_MAPPING = {
 	edit: ({ item, listRefetch, setWorkflowName }) => (
 		<CreateConfiguration
 			viewType="edit"
-			value={item}
+			item={item}
 			listRefetch={listRefetch}
 			setShow={setWorkflowName}
 		/>
 	),
 	delete: ({ item, listRefetch, setWorkflowName }) => (
 		<DeleteConfiguration
-			value={item}
+			item={item}
 			listRefetch={listRefetch}
 			setShow={setWorkflowName}
 		/>
 	),
 	check: ({ item, listRefetch, setWorkflowName }) => (
 		<CheckConfigurationPublishablity
-			value={item}
+			item={item}
 			listRefetch={listRefetch}
 			setShow={setWorkflowName}
 		/>
 	),
 	publish: ({ item, listRefetch, setWorkflowName }) => (
 		<PublishConfiguration
-			value={item}
+			item={item}
 			listRefetch={listRefetch}
 			setShow={setWorkflowName}
 		/>

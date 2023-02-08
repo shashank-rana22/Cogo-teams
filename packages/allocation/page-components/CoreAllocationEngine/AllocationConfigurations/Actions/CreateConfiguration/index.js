@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function CreateConfiguration({
 	viewType = '',
-	value = {},
+	item = {},
 	setShow,
 	listRefetch,
 }) {
@@ -19,14 +19,14 @@ function CreateConfiguration({
 		formProps,
 	} = useCreateConfigurations({
 		viewType,
-		value,
+		item,
 		setShow,
 		listRefetch,
 	});
 
 	const {
 		onEdit, loadingUpdate,
-	} = useUpdateConfiguration({ value, listRefetch, setShow });
+	} = useUpdateConfiguration({ item, listRefetch, setShow });
 
 	const { handleSubmit } = formProps;
 

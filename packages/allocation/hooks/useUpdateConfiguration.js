@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateConfiguration = ({
-	value = {},
+	item = {},
 	setShow = () => {},
 	listRefetch = () => {},
 }) => {
@@ -14,7 +14,7 @@ const useUpdateConfiguration = ({
 
 	const onDelete = async () => {
 		try {
-			const payload = { id: value.id, status: 'inactive' };
+			const payload = { id: item.id, status: 'inactive' };
 
 			await trigger({
 				data: payload,
@@ -34,7 +34,7 @@ const useUpdateConfiguration = ({
 		try {
 			const payload = {
 				...values,
-				id                 : value.id,
+				id                 : item.id,
 				configuration_type : 'custom',
 				status             : 'draft',
 			};

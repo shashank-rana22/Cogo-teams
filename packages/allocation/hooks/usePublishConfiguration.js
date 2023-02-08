@@ -6,7 +6,7 @@ import { useRequest } from '@cogoport/request';
 import controls from '../utils/get-configuration-publish-controls';
 
 const usePublishConfiguration = ({
-	value = {},
+	item = {},
 	listRefetch = () => {},
 	setShow = () => {},
 }) => {
@@ -38,7 +38,7 @@ const usePublishConfiguration = ({
 
 		try {
 			const payload = {
-				allocation_configuration_id : value.id,
+				allocation_configuration_id : item.id,
 				// ...values,
 				start_date                  : values.active_date_range?.startDate,
 				end_date                    : values.active_date_range?.endDate,
