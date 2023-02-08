@@ -18,7 +18,7 @@ const lclFields = () => {
 			drag            : true,
 			uploadIcon      : 'ic-upload',
 			onlyURLOnChange : true,
-			accept          : 'image/*',
+			accept          : 'image/*,.pdf,.doc,.docx',
 			uploadType      : 'aws',
 		},
 		{

@@ -120,8 +120,10 @@ const useUpdateSpotNegotiationRate = ({
 					}
 				}
 			});
-			Object.keys(data?.freights_charge_codes || data?.cfs_charge_codes || {}).forEach((code) => {
+			Object.keys(data?.freights_charge_codes || data?.customs_charge_codes
+				|| data?.cfs_charge_codes || {}).forEach((code) => {
 				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')
+				|| data?.customs_charge_codes?.[code].tags?.includes('mandatory')
 				|| data?.cfs_charge_codes?.[code].tags?.includes('mandatory')) {
 					let flag = 0;
 					mandatoryFreightCodes.forEach((charge) => {
@@ -196,8 +198,8 @@ const useUpdateSpotNegotiationRate = ({
 	}, [JSON.stringify(data)]);
 
 	useEffect(() => {
-		if (values?.slabs || values?.origin_slabs || values?.destination_slabs) {
-			(values?.slabs || values?.origin_slabs || values?.destination_slabs || []).forEach((obj, index) => {
+		if (values?.slabs) {
+			(values?.slabs || []).forEach((obj, index) => {
 				if (index === 0) {
 					if (values?.slabs) {
 						setValue('slabs.0.lower_limit', Number(values?.free_limit) + 1 || 0);
@@ -248,11 +250,14 @@ const useUpdateSpotNegotiationRate = ({
 	}, [values?.destination_free_limit, JSON.stringify(values?.destination_slabs)]);
 
 	const showElements = {
-		sourced_by_id            : !values?.service_provider_id,
-		origin_main_port_id      : !service?.data?.origin_port?.is_icd,
-		destination_main_port_id : !service?.data?.destination_port?.is_icd,
-		shipping_line_id         : !service?.service === 'fcl_freight'
-		|| !(service?.service === 'haulage_freight' && values?.haulage_type === 'merchant'),
+		sourced_by_id            : values?.service_provider_id,
+		origin_main_port_id      : service?.data?.origin_port?.is_icd,
+		destination_main_port_id : service?.data?.destination_port?.is_icd,
+		haulage_type             : service?.service === 'haulage_freight',
+		transportation_modes     : service?.service === 'haulage_freight',
+		shipping_line_id         : service?.service === 'fcl_freight'
+		|| (service?.service === 'haulage_freight' && values?.haulage_type === 'carrier'),
+		airline_id: service?.service === 'air_freight',
 	};
 
 	const onError = (errs, e) => {
@@ -302,7 +307,7 @@ const useUpdateSpotNegotiationRate = ({
 	};
 
 	return {
-		fields: newField,
+		fields         : newField,
 		control,
 		showElements,
 		register,
@@ -311,6 +316,7 @@ const useUpdateSpotNegotiationRate = ({
 		handleSubmit,
 		handleData,
 		disableButton,
+		requiredValues : values,
 	};
 };
 export default useUpdateSpotNegotiationRate;

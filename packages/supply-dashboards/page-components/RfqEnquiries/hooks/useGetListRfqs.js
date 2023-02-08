@@ -24,7 +24,7 @@ const useGetListRfqs = () => {
 			params: {
 				filters: {
 					...(filters || {}),
-					relevant_supply_agent_id : user_profile?.id,
+					relevant_supply_agent_id : user_profile?.user?.id,
 					service_type             : filters.service_type,
 				},
 				sort_by                          : 'updated_at',

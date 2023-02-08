@@ -619,6 +619,7 @@ const apis = [
 		service_name : 'contract',
 	},
 	{
+
 		api          : 'send_booking_whatsapp_confirmation',
 		access_type  : 'private',
 		feature      : 'search',

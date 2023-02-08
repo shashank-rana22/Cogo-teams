@@ -5,16 +5,16 @@ import { merge } from '@cogoport/utils';
 import chargeControl from './charge-controls';
 
 const LocationControls = ({ data }) => {
-	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['pincode', 'seaport', 'city'] } },
-	}));
+	const locationOptions1 = useGetAsyncOptions(merge(asyncFieldsLocations()));
+	const locationOptions2 = useGetAsyncOptions(merge(asyncFieldsLocations()));
 	const control = [
 		{
 			name        : 'origin_location_id',
 			type        : 'select',
-			...locationOptions,
+			...locationOptions1,
 			label       : 'Origin Location',
 			span        : 4,
+			key         : 'origin_location_id',
 			placeholder : 'Select',
 			value       : data?.origin_location_id || '',
 			rules       : { required: 'This is required' },
@@ -25,7 +25,8 @@ const LocationControls = ({ data }) => {
 			label       : 'Destination Location',
 			span        : 4,
 			placeholder : 'Select',
-			...locationOptions,
+			key         : 'destination_location_id',
+			...locationOptions2,
 			value       : data?.destination_location_id || '',
 			rules       : { required: 'This is required' },
 		},
