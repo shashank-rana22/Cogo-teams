@@ -24,8 +24,6 @@ const useListAllocationInstances = ({ item = {} }) => {
 					created_at_less_than    : dateRange?.endDate || undefined,
 				},
 			}));
-
-			console.log('dateRange :: ', dateRange);
 		}
 	}, [dateRange]);
 
