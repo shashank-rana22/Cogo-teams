@@ -165,42 +165,58 @@ const columnsMapping = [
 ];
 
 const WORKFLOW_MAPPING = {
-	edit: ({ item, listRefetch, setWorkflowName }) => (
-		<CreateConfiguration
-			viewType="edit"
-			item={item}
-			listRefetch={listRefetch}
-			setShow={setWorkflowName}
-		/>
-	),
-	delete: ({ item, listRefetch, setWorkflowName }) => (
-		<DeleteConfiguration
-			item={item}
-			listRefetch={listRefetch}
-			setShow={setWorkflowName}
-		/>
-	),
-	check: ({ item, listRefetch, setWorkflowName }) => (
-		<CheckConfigurationPublishablity
-			item={item}
-			listRefetch={listRefetch}
-			setShow={setWorkflowName}
-		/>
-	),
-	publish: ({ item, listRefetch, setWorkflowName }) => (
-		<PublishConfiguration
-			item={item}
-			listRefetch={listRefetch}
-			setShow={setWorkflowName}
-		/>
-	),
-	view: ({ item, listRefetch, setWorkflowName }) => (
-		<UpdatePreferences
-			item={item}
-			listRefetch={listRefetch}
-			setShow={setWorkflowName}
-		/>
-	),
+	edit: {
+		size   : 'lg',
+		render : ({ item, listRefetch, setWorkflowName }) => (
+			<CreateConfiguration
+				viewType="edit"
+				item={item}
+				listRefetch={listRefetch}
+				setShow={setWorkflowName}
+			/>
+		),
+	},
+	delete: {
+		size   : 'sm',
+		render : ({ item, listRefetch, setWorkflowName }) => (
+			<DeleteConfiguration
+				item={item}
+				listRefetch={listRefetch}
+				setShow={setWorkflowName}
+			/>
+		),
+
+	},
+	check: {
+		size   : 'sm',
+		render : ({ item, listRefetch, setWorkflowName }) => (
+			<CheckConfigurationPublishablity
+				item={item}
+				listRefetch={listRefetch}
+				setShow={setWorkflowName}
+			/>
+		),
+	},
+	publish: {
+		size   : 'md',
+		render : ({ item, listRefetch, setWorkflowName }) => (
+			<PublishConfiguration
+				item={item}
+				listRefetch={listRefetch}
+				setShow={setWorkflowName}
+			/>
+		),
+	},
+	view: {
+		size   : 'lg',
+		render : ({ item, listRefetch, setWorkflowName }) => (
+			<UpdatePreferences
+				item={item}
+				listRefetch={listRefetch}
+				setShow={setWorkflowName}
+			/>
+		),
+	},
 };
 
 function ListItem({ item, listRefetch }) {
@@ -243,12 +259,12 @@ function ListItem({ item, listRefetch }) {
 
 			{workflowName && (
 				<Modal
-					size="lg"
+					size={WORKFLOW_MAPPING[workflowName]?.size}
 					show={!!workflowName}
 					onClose={() => setWorkflowName(null)}
 					placement="top"
 				>
-					{WORKFLOW_MAPPING[workflowName]?.({ item, listRefetch, setWorkflowName })}
+					{WORKFLOW_MAPPING[workflowName]?.render({ item, listRefetch, setWorkflowName })}
 				</Modal>
 			)}
 		</div>
