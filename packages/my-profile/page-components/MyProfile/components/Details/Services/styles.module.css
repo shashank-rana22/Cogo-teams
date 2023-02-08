@@ -3,47 +3,42 @@
 }
 
 .label_text{
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 14px;
 	color: #828282;
-	padding: 4px 0 4px 4px;
 }
 
 .value_text{
 	font-weight: 400;
 	font-size: 14px;
-	padding: 4px;
 	color: #000000;
 }
 
-.label_value_container{
-	display: flex;
-	align-items: baseline;
-}
+
 
 .header_text{
 
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 16px;
-	text-align: center;
-	color: #000000;
-	padding-bottom: 14px;
+	color: #6FA5AB;
+
 }
 
 .pills_container{
 	display: flex;
 	flex-wrap: wrap;
-	width: 50%;
+	
+	
 }
 
 .service_tag{
-	background: #cbcff5;
-	border-radius: 4px;
+	background: #FEF3E9;
+    border-radius: 6px;
 	padding: 2px 5px;
 	font-size: 12px;
 	color: #333333;
 	width: fit-content;
-	margin: 2px 14px 0px 0;
+	margin: 4px 14px 6px 0;
 }
 
 .empty_text{
@@ -52,3 +47,18 @@
 	align-items: flex-end;
 	color: #bdbdbd;
 }
+
+.combined_container{
+	display: flex;
+	margin-top: 20px;
+
+}
+
+.location_container{
+	flex: 1;
+}
+
+.services{
+	margin-top: 20px;
+}
+

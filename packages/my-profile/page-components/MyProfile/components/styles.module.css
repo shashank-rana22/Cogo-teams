@@ -20,3 +20,45 @@
 	align-items: center;
 	height: 100vh;
 `; */
+
+.container{
+	display: flex;
+	flex-direction: row;
+	
+
+}
+
+.header{
+	flex:1
+	
+}
+
+.details{
+	display: flex;
+	flex:2
+}
+
+.main_container{
+	background: #F8F2E7;
+}
+
+.main_heading{
+	font-weight: bold;
+	display: flex;
+	font-size: 20px;
+	color: #4F4F4F;
+	margin-top: 16px;
+	margin-left: 8px;
+	margin-bottom: 12px;
+	
+	@media (max-width: 768px) {
+		margin-bottom: 16px;
+	}
+}
+
+.span{
+	font-weight: bold;
+	font-size: 20px;
+    color: #221F20;
+	margin-right:6px;
+}

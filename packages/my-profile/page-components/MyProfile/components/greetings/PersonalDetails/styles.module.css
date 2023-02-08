@@ -1,0 +1,62 @@
+
+.card_container{ 
+	padding: 12px;
+}
+
+.label_text {
+	font-weight: 400;
+	font-size: 14px;
+	color: #828282;
+	padding: 4px 0 4px 4px;
+}
+
+.value_text{
+	font-weight: 400;
+	font-size: 14px;
+	padding: 4px;
+	color: #000000;
+}
+
+.label_value_container{
+	display: flex;
+}
+
+.header_text{
+	font-weight: 500;
+	font-size: 16px;
+	text-align: center;
+	color: #000000;
+	padding-bottom: 14px;
+}
+
+.head{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.verify_text{
+	color: #9b86f0;
+	text-decoration: underline;
+	font-size: 14px;
+	cursor: pointer;
+	padding-left: 12px;
+}
+
+.languge_tag{
+	background: #FEF3E9;
+	border-radius: 4px;
+	padding: 2px 5px;
+	font-size: 12px;
+	margin-right: 12px;
+	margin-bottom: 4px;
+	line-height: 16px;
+	color: #333333;
+	width: fit-content;
+}
+
+.flex{
+	display: flex;
+	wrap:wrap
+
+}

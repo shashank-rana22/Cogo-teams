@@ -1,13 +1,13 @@
 .header_text{
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 16px;
-	text-align: center;
-	color: #000000;
-	padding-bottom: 14px;
+	color: #6FA5AB;
+
 }
 
 .card_container{
 	padding: 12px;
+	
 }
 
 .label_text{font-weight: 400;
@@ -19,10 +19,35 @@
 .value_text{
 	font-weight: 400;
 	font-size: 14px;
-	padding: 4px;
-	color: #000000;
+	font-weight: 500;
+	font-size: 14px;
+	color: #221F20;
 }
 
 .label_value_container{
+	/* display: flex; */
+	/* padding-right: 16px; */
+}
+
+.elements{
+	display:flex;
+	justify-content: space-between;
+}
+
+.header_container{
 	display: flex;
+
+}
+
+.pills_container{
+	margin-left: 14px;
+    font-size: 10px;
+	background: #DDEBC0;
+    border-radius: 4px;
+	display: flex;
+	align-items: center;
+	padding: 0px 6px;
+	color: #221F20;
+	height:20px;
+	margin-top:3px;
 }

@@ -20,6 +20,8 @@ function MyProfile() {
 		loading = false,
 	} = useMyDetails(partner_user_id);
 
+	const { name = '' } = detailsData || {};
+
 	const [showMobileVerificationModal, setShowMobileVerificationModal] =		useState(false);
 
 	if (loading) {
@@ -38,23 +40,47 @@ function MyProfile() {
 
 	return (
 		<>
-			<Header
-				detailsData={detailsData}
-				setRefetch={refetch}
-				partner_user_id={partner_user_id}
-			/>
-			<Details
-				detailsData={detailsData}
-				refetch={refetch}
-				showMobileVerificationModal={showMobileVerificationModal}
-				setShowMobileVerificationModal={setShowMobileVerificationModal}
-			/>
 
-			<div className={styles.organization_container}>
-				<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
-				<Organization personDetails={detailsData} />
+			<div className={styles.main_heading}>
+				<span className={styles.span}>Welcome!</span>
+				{' '}
+				{name}
+			</div>
+
+			<div className={styles.main_container}>
+				<div className={styles.container}>
+					<div className={styles.header}>
+
+						<Header
+							detailsData={detailsData}
+							setRefetch={refetch}
+							partner_user_id={partner_user_id}
+							showMobileVerificationModal={showMobileVerificationModal}
+							setShowMobileVerificationModal={setShowMobileVerificationModal}
+						/>
+					</div>
+
+					<div className={styles.details}>
+						<Details
+							detailsData={detailsData}
+							refetch={refetch}
+							showMobileVerificationModal={showMobileVerificationModal}
+							setShowMobileVerificationModal={setShowMobileVerificationModal}
+						/>
+
+					</div>
+
+				</div>
+
+				<div>
+					<div className={styles.organization_container}>
+						<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
+						<Organization personDetails={detailsData} />
+					</div>
+				</div>
 			</div>
 		</>
+
 	);
 }
 

@@ -1,5 +1,5 @@
 // import getField from '@cogo/business-modules/form/components';
-import { Button, Modal, Toast } from '@cogoport/components';
+import { Button, Modal, Toast, Avatar } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 // import Avatar from '@cogoport/front/components/admin/Avatar';
 import { IcMDelete, IcCCamera } from '@cogoport/icons-react';
@@ -10,12 +10,15 @@ import ChangePassword from '../ChangePassword';
 
 import getControls from './controls';
 import GrantOutlookAccess from './GrantOutlookAccess';
+import PersonDetails from './PersonalDetails';
 import styles from './styles.module.css';
 
 function Greetings({
 	detailsData,
 	setRefetch = () => {},
 	partner_user_id = '',
+	showMobileVerificationModal,
+	setShowMobileVerificationModal = () => {},
 }) {
 	// const updateUserApi = useRequest(
 	// 	'post',
@@ -28,7 +31,8 @@ function Greetings({
 		method : 'post',
 	}, { manual: false });
 
-	const { name = '', picture = '' } = detailsData || {};
+	const { name = '', picture = '', lowest_geo_location = {} } = detailsData || {};
+	const { name:locationName = '' } = lowest_geo_location || {};
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -95,21 +99,20 @@ function Greetings({
 	};
 
 	return (
-		<>
+		<div className={styles.main_container}>
 			<div className={styles.image_upload_container}>
 				<div
 					className={styles.image_container}
-					// className="primary sm"
 					role="presentation"
-					style={{ marginTop: '20px' }}
+					style={{ marginTop: '6px' }}
 					onClick={() => setShowModal(true)}
 				>
 					{picture ? (
 						<img src={picture} alt="loading" className="img" />
 					) : (
 						<div className={styles.avatar_container}>
-							{/* <Avatar name={name} /> */}
-							Avatar
+							<Avatar personName={name} size="140px" />
+
 						</div>
 					)}
 				</div>
@@ -124,10 +127,21 @@ function Greetings({
 				</div>
 			</div>
 			<div className={styles.greeting_text}>
-				Welcome,
 				{name}
-				!
+				,
+				{' '}
+				{locationName}
+
 			</div>
+
+			<PersonDetails
+				detailsData={detailsData}
+				refetch={setRefetch}
+				partner_user_id={partner_user_id}
+				showMobileVerificationModal={showMobileVerificationModal}
+				setShowMobileVerificationModal={setShowMobileVerificationModal}
+
+			/>
 
 			<div className={styles.change_password_container}>
 				<Button
@@ -211,7 +225,7 @@ function Greetings({
 					refetch={setRefetch}
 				/>
 			</Modal>
-		</>
+		</div>
 	);
 }
 export default Greetings;
