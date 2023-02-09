@@ -1358,7 +1358,7 @@ const navigationMappingAdmin = {
 				href          : '/last-mile',
 				as            : '/last-mile',
 				type          : 'link',
-				main_apis     : ['list_document_desk_shipments'],
+				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk],
 			},
 		],
