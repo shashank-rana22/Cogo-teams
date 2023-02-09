@@ -17,10 +17,6 @@ function Reports() {
 		setValue((p) => ({ ...p, reportType: e }));
 	};
 
-	const handleSubmit = () => {
-		api();
-	};
-
 	return (
 		<div>
 			<h1>Reports</h1>
@@ -54,7 +50,7 @@ function Reports() {
 						className={styles.button_class}
 						disabled={loading
 							|| !value.reportType || !value.dateRange?.startDate || !value.dateRange?.endDate}
-						onClick={handleSubmit}
+						onClick={() => api()}
 						size="md"
 					>
 						Submit
