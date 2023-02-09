@@ -1135,6 +1135,18 @@ const saas = {
 			module      : 'Quotation',
 			feature     : 'Quotation',
 		},
+		{
+			api         : 'put_saas_product_update_hscode',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
 	],
 	app_saas_cogopoint: [
 		{
