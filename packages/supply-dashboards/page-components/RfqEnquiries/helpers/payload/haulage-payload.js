@@ -16,10 +16,12 @@ const haulagePayload = ({ service, value }) => {
 		sourced_by_id         : value?.sourced_by_id,
 		spot_negotiation_id   : service?.id,
 		data                  : {
-			shipping_line_id : value?.shipping_line_id,
+			shipping_line_id        : value?.shipping_line_id,
 			line_items,
-			transport_mode   : value?.transportation_modes,
-			haulage_type     : value?.haulage_type,
+			transport_mode          : value?.transportation_modes,
+			haulage_type            : value?.haulage_type,
+			origin_location_id      : value?.origin_main_port_id,
+			destination_location_id : value?.destination_main_port_id,
 		},
 	};
 
