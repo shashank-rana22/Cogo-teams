@@ -46,16 +46,8 @@ function PersonDetails({
 	return (
 		<>
 			<div className={styles.card_container}>
-				{/* <div className={styles.header_text}> Personal Details</div> */}
 
 				<div className={styles.head}>
-					<div className={styles.label_value_container}>
-						<div className={styles.label_text}> Name </div>
-						<div className={styles.value_text}>
-							:
-							{name}
-						</div>
-					</div>
 					<IcMEdit
 						size={1.8}
 						onClick={() => setShowModal(true)}

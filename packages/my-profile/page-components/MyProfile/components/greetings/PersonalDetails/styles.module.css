@@ -21,13 +21,7 @@
 	display: flex;
 }
 
-.header_text{
-	font-weight: 500;
-	font-size: 16px;
-	text-align: center;
-	color: #000000;
-	padding-bottom: 14px;
-}
+
 
 .head{
 	display: flex;
