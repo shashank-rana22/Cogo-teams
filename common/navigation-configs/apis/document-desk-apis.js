@@ -5,6 +5,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'list_lastmile_desk_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_shipment_services',
 		access_type  : 'private',
 		service_name : 'shipment',
