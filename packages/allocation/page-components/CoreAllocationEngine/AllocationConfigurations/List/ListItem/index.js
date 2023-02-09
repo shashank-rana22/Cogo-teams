@@ -267,6 +267,7 @@ function ListItem({ item, listRefetch }) {
 					show={!!workflowName}
 					onClose={() => setWorkflowName(null)}
 					placement="top"
+					closeOnOuterClick={false}
 				>
 					{WORKFLOW_MAPPING[workflowName]?.render({ item, listRefetch, setWorkflowName })}
 				</Modal>

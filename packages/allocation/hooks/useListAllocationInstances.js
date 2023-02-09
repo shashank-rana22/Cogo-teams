@@ -20,14 +20,14 @@ const useListAllocationInstances = ({ item = {} }) => {
 				...(previousParams || {}),
 				filters: {
 					...((previousParams || {}).filters || {}),
-					created_at_greater_than : `${dateRange?.startDate}` || undefined,
+					created_at_greater_than : dateRange?.startDate || undefined,
 					created_at_less_than    : dateRange?.endDate || undefined,
 				},
 			}));
 		}
 	}, [dateRange]);
 
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }, refetch] = useRequest({
 		url    : '/list_allocation_instances',
 		method : 'get',
 		params,
@@ -43,12 +43,13 @@ const useListAllocationInstances = ({ item = {} }) => {
 	const { list = [], ...paginationData } = data || {};
 
 	return {
-		listLoading: loading,
+		listLoading          : loading,
 		list,
 		paginationData,
 		getNextPage,
 		dateRange,
 		setDateRange,
+		listInstancesRefetch : refetch,
 	};
 };
 

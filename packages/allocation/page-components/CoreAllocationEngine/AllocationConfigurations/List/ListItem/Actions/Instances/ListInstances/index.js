@@ -1,9 +1,12 @@
 import {
+	Button,
+	Popover,
 	ButtonIcon, DateRangepicker, Legend, Pill, Table, Pagination,
 } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
+import useDeleteAllocationInstance from '../../../../../../../../hooks/useDeleteAllocationInstance';
 import useListAllocationInstances from '../../../../../../../../hooks/useListAllocationInstances';
 
 import styles from './styles.module.css';
@@ -20,7 +23,7 @@ const LIST_COLUMNS_MAPPING = {
 const STATUS_COLOR_MAPPING = {
 	pending_approval : 'orange',
 	active           : 'green',
-	inactive         : 'red',
+	stopped          : 'red',
 };
 
 function ListInstances({ item }) {
@@ -31,7 +34,15 @@ function ListInstances({ item }) {
 		getNextaPage,
 		dateRange,
 		setDateRange,
+		listInstancesRefetch,
 	} =	 useListAllocationInstances({ item });
+
+	const {
+		onInstanceDelete,
+		loadingInstanceDelete,
+		instanceId,
+		setInstanceId,
+	} = useDeleteAllocationInstance({ listInstancesRefetch });
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
@@ -43,11 +54,30 @@ function ListInstances({ item }) {
 
 	const data = list.map((listItem) => {
 		const formattedData = {
-			serial_id    : <Pill color="blue" size="lg">{getByKey(listItem, 'serial_id', '___')}</Pill>,
-			created_at   : <div>{format(getByKey(listItem, 'created_at', '___'), 'dd MMM yyyy')}</div>,
-			updated_at   : <div>{format(getByKey(listItem, 'updated_at', '___'), 'dd MMM yyyy')}</div>,
-			execution_at : <div>{format(getByKey(listItem, 'execution_at', '___'), 'dd MMM yyyy')}</div>,
-			status       : (
+			serial_id: (
+				<Pill id={listItem.id} color="blue" size="lg">{getByKey(listItem, 'serial_id', '___')}</Pill>
+			),
+			created_at: (
+				<div>
+					{getByKey(listItem, 'created_at', '___')
+						? format(getByKey(listItem, 'created_at', '___'), 'dd MMM yyyy')
+						: '___'}
+				</div>),
+			updated_at: (
+				<div>
+					{getByKey(listItem, 'updated_at', '___')
+						? format(getByKey(listItem, 'updated_at', '___'), 'dd MMM yyyy')
+						: '___'}
+				</div>
+			),
+			execution_at: (
+				<div>
+					{getByKey(listItem, 'execution_at', '___')
+						? format(getByKey(listItem, 'execution_at', '___'), 'dd MMM yyyy')
+						: '___'}
+				</div>
+			),
+			status: (
 				<Legend
 					className={styles.legend}
 					hasBackground={false}
@@ -63,11 +93,46 @@ function ListInstances({ item }) {
 				/>
 			),
 			action: (
-				<ButtonIcon
-					size="lg"
-					icon={<IcMDelete />}
-					themeType="primary"
-				/>
+				<Popover
+					interactive
+					placement="left"
+					visible={instanceId === listItem.id}
+					onClickOutside={() => setInstanceId(false)}
+					render={(
+						<div className={styles.popover_container}>
+							<div className={styles.popover_heading}>
+								Are you sure you want to stop this instance?
+							</div>
+							<div className={styles.popover_button_container}>
+								<Button
+									size="md"
+									themeType="tertiary"
+									style={{ marginRight: '8px' }}
+									disabled={loadingInstanceDelete}
+									onClick={() => setInstanceId(null)}
+								>
+									No
+								</Button>
+								<Button
+									size="md"
+									themeType="accent"
+									onClick={(event) => onInstanceDelete(event, listItem.id)}
+									disabled={loadingInstanceDelete}
+								>
+									Stop
+								</Button>
+							</div>
+						</div>
+					)}
+				>
+					<ButtonIcon
+						size="lg"
+						icon={<IcMDelete />}
+						themeType="primary"
+						onClick={() => setInstanceId(listItem.id)}
+						disabled={listItem.status !== 'active'}
+					/>
+				</Popover>
 			),
 		};
 
@@ -91,7 +156,12 @@ function ListInstances({ item }) {
 				/>
 			</div>
 
-			<Table className={styles.table} columns={columns} data={data} loading={listLoading} />
+			<Table
+				className={styles.table}
+				columns={columns}
+				data={data}
+				loading={listLoading}
+			/>
 
 			<div className={styles.pagination_container}>
 				<Pagination
