@@ -18,6 +18,11 @@ const partner = {
 			service_name : 'credit',
 		},
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -390,6 +395,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 			feature      : 'trade_party',
+		},
+		{
+			api          : 'create_shipment_report',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'assign_partner_agents_with_filters',
@@ -859,6 +869,11 @@ const partner = {
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',
+		},
+		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'get_organization_commodity_segmentation_stats',
@@ -1604,6 +1619,11 @@ const partner = {
 	],
 	supply_crm: [
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -1851,6 +1871,16 @@ const partner = {
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_lead_lifecycle_stats',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_lead_organizations',
+			access_type  : 'private',
+			service_name : 'lead',
 		},
 		{
 			feature      : 'supply_crm',
@@ -2232,6 +2262,36 @@ const partner = {
 		},
 	],
 	onboarding_crm: [
+		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'verify_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_party_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'update_channel_partner',
 			access_type  : 'private',
@@ -4140,6 +4200,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	trade_enquiry: [
 		{
@@ -4331,6 +4396,11 @@ const partner = {
 		},
 		{
 			api          : 'get_service_payment_modes',
+			access_type  : 'private',
+			service_name : 'payment',
+		},
+		{
+			api          : 'get_all_possible_payment_methods',
 			access_type  : 'private',
 			service_name : 'payment',
 		},
@@ -6897,6 +6967,12 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	reports: [
+		{
+			api         : 'get_muneem_reports_profitability',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
@@ -7260,6 +7336,16 @@ const partner = {
 	],
 	campaigns: [
 		{
+			api          : 'get_campaign_nodes_result',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_node_details',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
 			api          : 'get_campaign_tracking_stats',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -7497,6 +7583,275 @@ const partner = {
 		},
 		{
 			api          : 'get_campaign_failure_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+	],
+	campaign_dashboard: [
+		{
+			api          : 'create_campaign_segment',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_failure_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_node_details',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
+		{
+			api          : 'get_campaign_tracking_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_journey_metrics',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_overall_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaigns',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_conditions',
+			access_type  : 'private',
+			service_name : 'condition',
+		},
+		{
+			api          : 'get_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_campaign_edge',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_mailjet_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_campaign_node_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaign_audiences',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_campaign_segment',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_email_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_unique_event_names',
+			access_type  : 'private',
+			service_name : 'event',
+		},
+		{
+			api          : 'create_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'update_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'publish_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_campaign_node',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'update_campaign_node',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'update_campaign_edge_status',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'delete_campaign_edge',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'delete_campaign_node',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'undo_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'redo_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'check_campaign_publishability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'auto_align_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'stop_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_tags',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_communication_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
+		{
+			api          : 'get_template_tags',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_event_mappings',
+			access_type  : 'private',
+			service_name : 'event',
+		},
+		{
+			api          : 'check_active_rules',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_stat_details',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_campaign_rule',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'update_campaign_rule',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'update_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_channel_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_previous_campaign_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_segment_dashboard',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_graphs_stats_dashboard',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_names',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaign_nodes',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'verify_segment',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_segments',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'get_segment',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'get_recurring_campaign_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_nodes_result',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -7958,6 +8313,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'promotion',
 
+		},
+		{
+			api          : 'get_promotion_shipment_stats',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'list_promotion_shipments',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'download_promotion_shipment_csv',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 		{
 			api          : 'list_promotions',

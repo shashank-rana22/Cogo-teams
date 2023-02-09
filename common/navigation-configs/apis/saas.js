@@ -1245,6 +1245,18 @@ const saas = {
 			module      : 'hsCode',
 			feature     : 'hsCode',
 		},
+		{
+			api         : 'get_saas_product_category',
+			access_type : 'private',
+			module      : 'hsCode',
+			feature     : 'hsCode',
+		},
+		{
+			api         : 'post_saas_product',
+			access_type : 'private',
+			module      : 'hsCode',
+			feature     : 'hsCode',
+		},
 	],
 	app_saas_cogo_subscription: [
 		{
@@ -1369,6 +1381,11 @@ const saas = {
 		},
 		{
 			api          : 'saas_get_plan_features',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'subscription_activate_now',
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
@@ -1645,7 +1662,14 @@ const saas = {
 			feature     : 'product',
 		},
 		{
-			api         : 'post_saas_product_bulk_product_upload',
+			api: 'post_saas_product_bulk_product_upload',
+
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
@@ -1783,6 +1807,59 @@ const saas = {
 			access_type : 'private',
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+	],
+	app_saas_trader_eligibilty_check: [
+		{
+			api         : 'saas_get_user_quota_usage',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_saas_bill_status',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api         : 'get_saas_trade_engine_service_rates',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api         : 'post_saas_payment',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api         : 'post_saas_trade_engine',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api         : 'post_saas_trade_engine_screening_draft',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
 		},
 	],
 	app_saas_order_history: [
