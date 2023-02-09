@@ -6967,6 +6967,12 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	reports: [
+		{
+			api         : 'get_muneem_reports_profitability',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
