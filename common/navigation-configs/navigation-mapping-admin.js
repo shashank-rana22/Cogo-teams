@@ -1218,7 +1218,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1228,7 +1227,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1238,7 +1236,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1316,7 +1313,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
