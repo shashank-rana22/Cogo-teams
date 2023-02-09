@@ -1511,7 +1511,7 @@ const saas = {
 			feature     : 'trade-partner',
 		},
 		{
-			api         : 'get_saas_organization_get_excel',
+			api         : 'get_saas_organization_export',
 			access_type : 'private',
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
@@ -1633,13 +1633,19 @@ const saas = {
 			feature     : 'product',
 		},
 		{
-			api         : 'get_saas_product_get_excel',
+			api         : 'get_saas_product_export',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
 		},
 		{
-			api         : 'post_saas_product_bulk_product_upload_get_excel',
+			api         : 'get_saas_error_export',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'post_saas_product_bulk_product_upload',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
