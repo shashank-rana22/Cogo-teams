@@ -24,7 +24,6 @@ function Reports() {
 	return (
 		<div>
 			<h1>Reports</h1>
-			<div className={styles.line} />
 			<div className={styles.flex}>
 				<div>
 					<div className={styles.title}>Report Type*</div>
