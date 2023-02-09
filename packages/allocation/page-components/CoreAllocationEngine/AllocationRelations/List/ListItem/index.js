@@ -130,9 +130,29 @@ const COLUMNS_MAPPING = [
 	//     }
 	// }
 ];
-function ListItem({ item }) {
+
+function ListItem({
+	item,
+	checkedRowsId = [],
+	setCheckedRowsId = () => {},
+}) {
+	const itemId = `${item?.id}`;
+	const isSelected = checkedRowsId.includes(itemId);
+
+	const onCardClick = () => {
+		if (!isSelected) {
+			setCheckedRowsId([...checkedRowsId, itemId]);
+		} else {
+			setCheckedRowsId(checkedRowsId.filter((Id) => Id !== itemId));
+		}
+	};
+
 	return (
-		<div className={styles.list_item_container}>
+		<div
+			className={`${styles.list_item_container} ${isSelected ? styles.orange : null}`}
+			role="presentation"
+			onClick={() => onCardClick(item)}
+		>
 			{COLUMNS_MAPPING.map((column) => {
 				const { key, label, getValue, flex } = column;
 

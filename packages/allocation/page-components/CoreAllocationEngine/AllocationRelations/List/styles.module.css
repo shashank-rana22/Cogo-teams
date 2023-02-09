@@ -1,3 +1,25 @@
 .list_container{
     margin-top: 16px;
 }
+
+.bulk_update_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.selection_text{
+    display: flex;
+    font-size: 12px;
+    color: #4F4F4F;
+    align-items: center;
+}
+
+.text{
+    margin-right: 8px;
+}

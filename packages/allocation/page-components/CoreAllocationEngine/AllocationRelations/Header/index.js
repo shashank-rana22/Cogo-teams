@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function Header({
 	setShowCreateRelationModal = () => {},
 	setParams = () => {},
+	setActiveTab = () => {},
 }) {
 	const onChangeToggle = (event) => {
 		setParams((previousParams) => ({
@@ -17,6 +18,13 @@ function Header({
 				status: event?.target?.checked ? 'pending' : 'active',
 			},
 		}));
+		setActiveTab(() => {
+			if (event?.target?.checked) {
+				return 'pending';
+			}
+
+			return 'active';
+		});
 	};
 
 	return (
