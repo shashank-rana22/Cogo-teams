@@ -7,11 +7,12 @@
     padding: 8px;
 	width: 150px;
     border-bottom: 1px solid #F8AEA8;
-    background: #FFFCE6;
+    /* background: #FFFCE6; */
 
     &:hover {
 		font-weight: 600;
-        background: #FEF199;
+        /* background: #FEF199; */
+        background: #FFFCE6;
 	}
 }
 

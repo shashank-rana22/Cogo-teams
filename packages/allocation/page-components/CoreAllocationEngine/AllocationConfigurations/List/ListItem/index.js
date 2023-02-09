@@ -25,13 +25,13 @@ const columnsMapping = [
 		key      : 'schedule_type',
 		label    : 'Schedule Type',
 		getValue : (item) => startCase(getByKey(item, 'schedule_type', '___')),
-		flex     : 1,
+		flex     : 0.9,
 	},
 	{
 		key      : 'segment_type',
 		label    : 'Segment',
 		getValue : (item) => startCase(getByKey(item, 'segment_type', '___')),
-		flex     : 1,
+		flex     : 0.7,
 	},
 	{
 		key      : 'roles',
@@ -68,7 +68,7 @@ const columnsMapping = [
 				</Tooltip>
 			);
 		},
-		flex: 1.75,
+		flex: 1.5,
 	},
 	{
 		key      : 'users',
@@ -121,7 +121,7 @@ const columnsMapping = [
 		key      : 'locking_criterion',
 		label    : 'Locking Criterion',
 		getValue : (item) => startCase(getByKey(item, 'locking_criterion', '___')),
-		flex     : 1.25,
+		flex     : 1.5,
 	},
 	{
 		key      : 'next_scheduled',
@@ -154,7 +154,7 @@ const columnsMapping = [
 				<Legend
 					hasBackground={false}
 					direction="horizontal"
-					size="sm"
+					size="md"
 					style={{ margin: 0 }}
 					items={legendItem}
 				/>
