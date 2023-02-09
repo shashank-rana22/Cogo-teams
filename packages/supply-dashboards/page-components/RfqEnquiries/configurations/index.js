@@ -10,8 +10,10 @@ import locationControls from './locationControls';
 import TrailerControls from './trailer-controls';
 
 const chargeCodeMapping = {
-	fcl_cfs     : 'cfs_charge_codes',
-	fcl_customs : 'customs_charge_codes',
+	fcl_cfs         : 'cfs_charge_codes',
+	fcl_customs     : 'customs_charge_codes',
+	haulage_freight : 'haulage_charge_codes',
+	trailer_freight : 'freight_charge_codes',
 };
 
 const Config = ({ data }) => {
@@ -91,7 +93,7 @@ const Config = ({ data }) => {
 			}));
 		}
 	} else if (['trailer_freight', 'haulage_freight'].includes(data?.service)) {
-		field.push(...TrailerControls());
+		field.push(...TrailerControls({ data, charge_code_name: chargeCodeMapping[data?.service] }));
 	} else if (['ltl_freight', 'ftl_freight'].includes(data?.service)) {
 		field.push(...locationControls(data));
 	} else if (['fcl_cfs', 'fcl_customs'].includes(data?.service)) {

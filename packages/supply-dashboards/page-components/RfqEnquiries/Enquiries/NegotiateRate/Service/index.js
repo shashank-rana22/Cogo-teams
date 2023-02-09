@@ -1,4 +1,4 @@
-import { Pill, Button, Modal } from '@cogoport/components';
+import { Pill, Button, Modal, Tooltip } from '@cogoport/components';
 import {
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
@@ -51,6 +51,12 @@ function Service({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [showModal]);
 
+	const origin = service?.data?.origin_location?.name || service?.data?.port?.name
+	|| service?.data?.origin_airport?.name || service?.data?.origin_port?.name || service?.data?.location?.name
+	|| service?.data?.airport?.name;
+	const destination = service?.data?.destination_location?.name || service?.data?.destination_airport?.name
+	|| service?.data?.destination_port?.name;
+
 	return (
 		<div className={styles.container}>
 			<div
@@ -70,14 +76,19 @@ function Service({
 						? 'Freight Rate'
 						: `${tradetype} ${startCase(service?.service)}`}
 				</div>
-				<div>
-					{(service?.service === 'trailer_freight' || service?.service === 'haulage_freight') && (
-						<div className={styles.location}>
-							<div className={styles.port}>{service?.data?.origin_location?.name}</div>
-							<IcMPortArrow style={{ paddingTop: '2px' }} />
-							<div className={styles.port}>{service?.data?.destination_location?.name}</div>
-						</div>
-					)}
+				<div className={styles.location}>
+					<Tooltip content={origin}>
+						<div className={styles.port}>{origin}</div>
+					</Tooltip>
+					{destination ? (
+						<>
+							<IcMPortArrow style={{ paddingTop: '2px', margin: '4px' }} />
+							<Tooltip content={destination}>
+								<div className={styles.port}>{destination}</div>
+							</Tooltip>
+						</>
+					) : null}
+
 				</div>
 				<div className={styles.action}>
 					<Pill color={status === 'Submitted!' ? '#849E4C' : '#F37166'}>{status}</Pill>

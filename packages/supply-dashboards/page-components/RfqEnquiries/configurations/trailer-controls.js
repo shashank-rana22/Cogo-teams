@@ -4,7 +4,7 @@ import { merge } from '@cogoport/utils';
 
 import chargeControl from './charge-controls';
 
-const TrailerControls = () => {
+const TrailerControls = ({ data, charge_code_name }) => {
 	const locationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['seaport'] } },
 	}));
@@ -39,6 +39,7 @@ const TrailerControls = () => {
 				label : 'Merchant',
 				value : 'merchant',
 			}],
+			value       : data?.data?.haulage_type,
 			placeholder : 'Select haulage type',
 			rules       : { required: 'This is required' },
 		},
@@ -57,7 +58,7 @@ const TrailerControls = () => {
 			placeholder : 'Select Transportation Modes',
 			rules       : { required: 'This is required' },
 		},
-		chargeControl({ heading: '', charge_code_name: 'freights_charge_codes', service: 'trailer' }),
+		chargeControl({ heading: '', charge_code_name, service: 'trailer' }),
 	];
 	return controls;
 };

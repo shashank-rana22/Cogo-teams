@@ -121,10 +121,11 @@ const useUpdateSpotNegotiationRate = ({
 				}
 			});
 			Object.keys(data?.freights_charge_codes || data?.customs_charge_codes
-				|| data?.cfs_charge_codes || {}).forEach((code) => {
+				|| data?.cfs_charge_codes || data?.haulage_charge_codes || {}).forEach((code) => {
 				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')
 				|| data?.customs_charge_codes?.[code].tags?.includes('mandatory')
-				|| data?.cfs_charge_codes?.[code].tags?.includes('mandatory')) {
+				|| data?.cfs_charge_codes?.[code].tags?.includes('mandatory')
+				|| data?.haulage_charge_codes?.[code].tags?.includes('mandatory')) {
 					let flag = 0;
 					mandatoryFreightCodes.forEach((charge) => {
 						if (charge.code === code) {
@@ -251,11 +252,12 @@ const useUpdateSpotNegotiationRate = ({
 
 	const showElements = {
 		sourced_by_id            : values?.service_provider_id,
-		origin_main_port_id      : service?.data?.origin_port?.is_icd,
-		destination_main_port_id : service?.data?.destination_port?.is_icd,
-		haulage_type             : service?.service === 'haulage_freight',
-		transportation_modes     : service?.service === 'haulage_freight',
-		shipping_line_id         : service?.service === 'fcl_freight'
+		origin_main_port_id      : service?.data?.origin_port?.is_icd || service?.data?.origin_location?.is_icd,
+		destination_main_port_id : service?.data?.destination_port?.is_icd
+		|| service?.data?.destination_location?.is_icd,
+		haulage_type         : service?.service === 'haulage_freight',
+		transportation_modes : service?.service === 'haulage_freight',
+		shipping_line_id     : service?.service === 'fcl_freight'
 		|| (service?.service === 'haulage_freight' && values?.haulage_type === 'carrier'),
 		airline_id: service?.service === 'air_freight',
 	};
