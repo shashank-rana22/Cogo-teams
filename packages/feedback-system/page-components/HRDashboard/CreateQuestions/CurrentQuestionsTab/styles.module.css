@@ -15,7 +15,7 @@
 	padding-top: 16px;
 }
 
-.pagination {
+.list_actions {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 }

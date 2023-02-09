@@ -6,7 +6,7 @@
 
 .select_container {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 }
 
 .popover_header {
@@ -15,4 +15,16 @@
 		font-weight: bold; 
 		padding: 8px 0; 
 	}
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	margin-bottom: 8px;
+}
+
+.select_filters {
+	display: flex;
+	justify-content: flex-start;
 }

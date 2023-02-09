@@ -1,12 +1,13 @@
 .container {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-end;
 	flex: 1;
+	gap: 12px;
 }
 
 .tile_container {
 	display: flex;
-	margin: 8px 0px 8px 8px;
 	flex-direction: column;
 	width: 300px;
 	padding: 16px;

@@ -165,20 +165,33 @@ function CurrentQuestionsTab() {
 				/>
 			</div>
 
-			{showButton && (
-				<Button
-					size="md"
-					themeType="accent"
-					onClick={() => {
-						setShowForm(true);
-						setShowbutton(false);
-					}}
-					style={{ margin: '8px 0' }}
-				>
-					<IcMPlus style={{ marginRight: '4px' }} />
-					Add Questions
-				</Button>
-			)}
+			<div className={styles.list_actions}>
+				{showButton && (
+					<Button
+						size="md"
+						themeType="accent"
+						onClick={() => {
+							setShowForm(true);
+							setShowbutton(false);
+						}}
+						style={{ margin: '8px 0' }}
+					>
+						<IcMPlus style={{ marginRight: '4px' }} />
+						Add Questions
+					</Button>
+				)}
+
+				{!confirmEdit && !showForm && total_count > 3 && (
+					<Pagination
+						type="compact"
+						currentPage={params.page}
+						totalItems={total_count}
+						pageSize={params.page_limit}
+						onPageChange={setPage}
+						style={{ marginRight: '8px' }}
+					/>
+				)}
+			</div>
 
 			{showForm && (
 				<CreateForm
@@ -199,19 +212,6 @@ function CurrentQuestionsTab() {
 			{questions?.length === 0 && !loading && !showForm && <EmptyState />}
 
 			<div>
-				{!confirmEdit && total_count > 3 && (
-					<div className={styles.pagination}>
-						<Pagination
-							type="compact"
-							currentPage={params.page}
-							totalItems={total_count}
-							pageSize={params.page_limit}
-							onPageChange={setPage}
-							style={{ marginRight: '8px' }}
-						/>
-					</div>
-				)}
-
 				{(questions || []).map((data) => {
 					const { status = '', feedback_question_id = '' } = data || {};
 					if (status === 'inactive' || !('feedback_question_id' in data)) return null;

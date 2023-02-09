@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Pagination, Placeholder } from '@cogoport/components';
 
 import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
@@ -7,11 +7,13 @@ import RoleSelect from '../../../../common/RoleSelect';
 
 import styles from './styles.module.css';
 
-function Content({ params = {}, setParams = () => {}, list = [], loading = false }) {
+function Content({ params = {}, setParams = () => {}, list = [], total_count = '', loading = false }) {
+	const setPage = (p) => { setParams({ ...params, page: p }); };
+
 	const showLoading = () => (
-		<div style={{ margin: '16px' }}>
-			<Placeholder margin="0px 0px 8px" width="100%" height="80px" />
-			<Placeholder margin="0px 0px 8px" width="100%" height="80px" />
+		<div style={{ margin: '16px 0px' }}>
+			<Placeholder margin="0px 0px 8px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
+			<Placeholder margin="0px 0px 8px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
 		</div>
 	);
 	return (
@@ -23,15 +25,31 @@ function Content({ params = {}, setParams = () => {}, list = [], loading = false
 				</p>
 
 				<div className={styles.select_container}>
-					<DepartmentSelect value={params.filters?.department} setValue={setParams} type="controller" />
+					<div className={styles.select_filters}>
+						<DepartmentSelect value={params.filters?.department} setValue={setParams} type="controller" />
 
-					<RoleSelect
-						value={params.filters?.work_scope}
-						department={params.filters.department}
-						setValue={setParams}
-						type="controller"
-					/>
+						<RoleSelect
+							value={params.filters?.work_scope}
+							department={params.filters.department}
+							setValue={setParams}
+							type="controller"
+						/>
+					</div>
+
+					{total_count > 4 && (
+						<div className={styles.pagination}>
+							<Pagination
+								type="compact"
+								currentPage={params.page}
+								totalItems={total_count}
+								pageSize={params.page_limit}
+								onPageChange={setPage}
+								style={{ marginRight: '8px' }}
+							/>
+						</div>
+					)}
 				</div>
+
 			</div>
 
 			<div>

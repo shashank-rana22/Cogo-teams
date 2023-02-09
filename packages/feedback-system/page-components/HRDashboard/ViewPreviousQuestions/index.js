@@ -1,5 +1,3 @@
-// import Layout from '@cogo/business-modules/form/Layout';
-
 import { Button, Popover } from '@cogoport/components';
 import { IcMActivePlans } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -17,6 +15,8 @@ function ViewQuestionPopover({ searchValue = '' }) {
 			department : 'technology',
 			work_scope : 'Associate Software Engineer',
 		},
+		page       : 1,
+		page_limit : 4,
 	});
 
 	const { data, loading, getQuestionList = () => {} } = useListFeedbackQuestions({
@@ -34,20 +34,27 @@ function ViewQuestionPopover({ searchValue = '' }) {
 		}
 	};
 
-	const { list = [] } = data || {};
+	const { list = [], total_count = '' } = data || {};
 
 	return (
 		<div className={styles.popover_container}>
 			<Popover
 				visible={showQuestion}
-				theme="light"
 				placement="bottom-start"
-				render={<Content params={params} setParams={setParams} list={list} loading={loading} />}
-				animation="shift-away"
+				render={(
+					<Content
+						params={params}
+						setParams={setParams}
+						list={list}
+						total_
+						total_count={total_count}
+						loading={loading}
+					/>
+				)}
+				// animation="shift-away"
 				interactive
-				caret={false}
+				onClickOutside={() => setShowQuestion(false)}
 			>
-
 				<Button
 					size="md"
 					themeType="secondary"
