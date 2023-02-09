@@ -4,6 +4,7 @@ import {
 	ButtonIcon, DateRangepicker, Legend, Pill, Table, Pagination,
 } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
 import useDeleteAllocationInstance from '../../../../../../../../hooks/useDeleteAllocationInstance';
@@ -22,8 +23,9 @@ const LIST_COLUMNS_MAPPING = {
 
 const STATUS_COLOR_MAPPING = {
 	pending_approval : 'orange',
-	active           : 'green',
+	active           : 'grey',
 	stopped          : 'red',
+	completed        : 'green',
 };
 
 function ListInstances({ item }) {
@@ -44,6 +46,20 @@ function ListInstances({ item }) {
 		setInstanceId,
 	} = useDeleteAllocationInstance({ listInstancesRefetch });
 
+	const { push } = useRouter();
+
+	const onRowClick = (val) => {
+		const status = getByKey(val, 'status.props.items[0].key', undefined);
+		const selectedInstanceId = getByKey(val, 'serial_id.props.id', undefined);
+
+		if (['pending_approval', 'completed'].includes(status)) {
+			push(
+				'/allocation/details/[instance_id]',
+				`/allocation/details/${selectedInstanceId}`,
+			);
+		}
+	};
+
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
@@ -62,7 +78,8 @@ function ListInstances({ item }) {
 					{getByKey(listItem, 'created_at', '___')
 						? format(getByKey(listItem, 'created_at', '___'), 'dd MMM yyyy')
 						: '___'}
-				</div>),
+				</div>
+			),
 			updated_at: (
 				<div>
 					{getByKey(listItem, 'updated_at', '___')
@@ -87,7 +104,7 @@ function ListInstances({ item }) {
 						{
 							label : startCase(getByKey(listItem, 'status', '___')),
 							color : STATUS_COLOR_MAPPING[getByKey(listItem, 'status', '___')],
-							key   : getByKey(listItem, 'id', '___'),
+							key   : getByKey(listItem, 'status', '___'),
 						},
 					]}
 				/>
@@ -161,6 +178,7 @@ function ListInstances({ item }) {
 				columns={columns}
 				data={data}
 				loading={listLoading}
+				onRowClick={onRowClick}
 			/>
 
 			<div className={styles.pagination_container}>
