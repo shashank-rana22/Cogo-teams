@@ -1662,8 +1662,7 @@ const saas = {
 			feature     : 'product',
 		},
 		{
-			api: 'post_saas_product_bulk_product_upload',
-
+			api         : 'post_saas_product_bulk_product_upload',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
