@@ -1830,6 +1830,32 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	helios_dashboard: {
+		key         : 'helios_dashboard',
+		title       : 'Helios Dashboard',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'helios_dashboard-management',
+				title         : 'Helios Dashboard Management',
+				href          : '/helios-dashboard-management',
+				as            : '/helios-dashboard-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.helios_dashboard,
+			},
+			{
+				key           : 'helios_dashboard-view',
+				title         : 'Helios Dashboard View',
+				href          : '/helios-dashboard-view',
+				as            : '/helios-dashboard-view',
+				type          : 'link',
+				main_apis     : ['list_dashboard_widgets', 'get_widget_data'],
+				possible_apis : apis.helios_dashboard,
+			},
+		],
+	},
 };
 
 export default navigationMappingAdmin;
