@@ -1,7 +1,7 @@
 import { SingleDateRange, Button, Select } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { REPORTTYPEOPTIONS } from './constants/REPORTTYPEOPTIONS';
+import { REPORT_TYPE_OPTIONS } from './constants/REPORT_TYPE_OPTIONS';
 import useSubmitReport from './hooks/useSubmitReport';
 import styles from './styles.module.css';
 
@@ -13,7 +13,7 @@ function Reports() {
 
 	const { api, loading } = useSubmitReport(value);
 
-	const onChange = (e) => {
+	const onChange = (e:string) => {
 		setValue((p) => ({ ...p, reportType: e }));
 	};
 
@@ -31,9 +31,9 @@ function Reports() {
 					<div className={styles.input}>
 						<Select
 							value={value.reportType}
-							onChange={(e) => onChange(e)}
+							onChange={(e:string) => onChange(e)}
 							placeholder="Select Report Type"
-							options={REPORTTYPEOPTIONS}
+							options={REPORT_TYPE_OPTIONS}
 						/>
 					</div>
 				</div>
@@ -44,7 +44,7 @@ function Reports() {
 							placeholder="Enter Date Range"
 							dateFormat="yyyy-MM-dd"
 							name="date"
-							onChange={(e) => setValue((p) => ({ ...p, dateRange: e }))}
+							onChange={(e:any) => setValue((p) => ({ ...p, dateRange: e }))}
 							value={value.dateRange}
 						/>
 					</div>
@@ -52,7 +52,7 @@ function Reports() {
 
 				<div className={styles.button}>
 					<Button
-						className={styles.buttonClass}
+						className={styles.button_class}
 						disabled={loading
 							|| !value.reportType || !value.dateRange?.startDate || !value.dateRange?.endDate}
 						onClick={handleSubmit}
