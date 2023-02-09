@@ -1218,7 +1218,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1228,7 +1227,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1238,7 +1236,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1316,7 +1313,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
@@ -1339,12 +1335,13 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key       : 'coe-kam_desk',
-				title     : 'KAM Desk',
-				href      : '/kam-desk',
-				as        : '/kam-desk',
-				type      : 'link',
-				main_apis : ['list_kam_desk_shipments'],
+				key           : 'coe-kam_desk',
+				title         : 'KAM Desk',
+				href          : '/kam-desk',
+				as            : '/kam-desk',
+				type          : 'link',
+				main_apis     : ['list_kam_desk_shipments'],
+				possible_apis : [...apis.kam_desk],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1353,7 +1350,7 @@ const navigationMappingAdmin = {
 				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.shipment],
+				possible_apis : [...apis.document_desk],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1362,7 +1359,7 @@ const navigationMappingAdmin = {
 				as            : '/last-mile',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.shipment],
+				possible_apis : [...apis.document_desk],
 			},
 		],
 	},
@@ -1420,15 +1417,15 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'marketing-marketing_campaigns',
-				title         : 'Campaigns',
-				href          : '/marketing/campaigns',
-				as            : '/marketing/campaigns',
+				key           : 'marketing-marketing_campaign-dashboard',
+				title         : 'Campaign Dashboard',
+				href          : '/marketing/campaign-dashboard',
+				as            : '/marketing/campaign-dashboard',
+				icon          : 'ic-campaign',
 				type          : 'link',
 				main_apis     : [],
+				possible_apis : apis.campaign_dashboard,
 				module_type   : 'crm',
-				possible_apis : apis.campaigns,
-
 			},
 			{
 				key           : 'marketing-marketing_templates',
