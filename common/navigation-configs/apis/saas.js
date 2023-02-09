@@ -1789,6 +1789,12 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
 	],
 	app_saas_trader_eligibilty_check: [
 		{
@@ -1832,12 +1838,6 @@ const saas = {
 		},
 		{
 			api         : 'post_saas_trade_engine_screening_draft',
-			access_type : 'private',
-			module      : 'trader-eligibility-check',
-			feature     : 'trader-eligibility-check',
-		},
-		{
-			api         : 'get_saas_bill_product_codes',
 			access_type : 'private',
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
