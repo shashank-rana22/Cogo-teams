@@ -82,11 +82,11 @@ function HRDashboard() {
 					<div className={styles.filters}>
 						<div style={{ marginRight: '16px' }}>
 							<Input
-								size="sm"
+								size="md"
 								value={searchValue}
 								onChange={setSearchValue}
-								placeholder="Search by Name/ Email "
-								prefix={<IcMSearchlight style={{ marginTop: '6px' }} />}
+								placeholder="Search User..."
+								prefix={<IcMSearchlight />}
 								type="text"
 							/>
 						</div>
@@ -99,9 +99,8 @@ function HRDashboard() {
 						</div>
 
 						<Button
-							size="md"
-							className="secondary"
-							style={{ backgroundColor: '#88cad1' }}
+							size="lg"
+							themeType="secondary"
 							onClick={() => {
 								download();
 							}}

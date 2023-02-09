@@ -29,7 +29,7 @@ const useListFeedbackQuestions = ({
 		}
 	};
 
-	useEffect(() => { if (showQuestion) { getQuestionList(); } }, [showQuestion, searchValue]);
+	useEffect(() => { if (showQuestion) { getQuestionList(); } }, [showQuestion, searchValue, params]);
 
 	return {
 		loading,

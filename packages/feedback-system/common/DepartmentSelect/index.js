@@ -19,7 +19,8 @@ function DepartmentSelect({
 	const resetDeptFilters = () => {
 		setValue((pv) => ({
 			...pv,
-			filters: {
+			page    : 1,
+			filters : {
 				...(pv.filters),
 				department : undefined,
 				work_scope : undefined,
@@ -56,7 +57,7 @@ function DepartmentSelect({
 		<div className={styles.control_container}>
 			{type === 'select' && (
 				<Button
-					size="md"
+					size="lg"
 					style={{ marginRight: 10 }}
 					themeType="secondary"
 					onClick={() => resetDeptFilters()}

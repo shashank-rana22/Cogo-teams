@@ -1,14 +1,14 @@
-import { Button, Input, Placeholder } from '@cogoport/components';
+import { Pagination, Button, Input, Placeholder } from '@cogoport/components';
 import { IcMArrowNext, IcMSearchlight } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
+import Questions from '../../../../common/Questions';
 import RoleSelect from '../../../../common/RoleSelect';
 import useUpdatefeedbackQuestion from '../../../../hooks/useBulkUpdateFeedbackQuestions';
 import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';
 
-import Questions from './Questions';
 import styles from './styles.module.css';
 
 function PreviousQuestionsTab({ setActiveTab = () => {} }) {
@@ -26,6 +26,8 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 		page_limit : 3,
 	});
 
+	const setPage = (p) => { setParams({ ...params, page: p }); };
+
 	const { data = {}, loading = false } = useListFeedbackQuestions({
 		status: 'inactive',
 		searchValue,
@@ -34,7 +36,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 
 	const { onBulkUpdate, updateApiLoading = false } =	useUpdatefeedbackQuestion();
 
-	const { list = [] } = data || {};
+	const { list = [], total_count = '' } = data || {};
 
 	const saveAll = () => {
 		const finalAddedQuestions = [];
@@ -66,10 +68,10 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 	};
 
 	const showLoading = () => (
-		<div style={{ margin: '16px' }}>
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="52px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="52px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="52px" />
+		<div style={{ margin: '16px 0px' }}>
+			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
+			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
+			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
 		</div>
 	);
 
@@ -91,6 +93,17 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 					Select Questions from the list
 				</p>
 				<div className={styles.search_question_filter}>
+					{total_count > 3 && (
+						<Pagination
+							type="compact"
+							currentPage={params.page}
+							totalItems={total_count}
+							pageSize={params.page_limit}
+							onPageChange={setPage}
+							style={{ marginRight: '8px' }}
+						/>
+					)}
+
 					<Input
 						size="sm"
 						value={searchValue}
@@ -114,6 +127,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 							index={index}
 							setPreviousQuestions={setPreviousQuestions}
 							setIsCheckedAll={setIsCheckedAll}
+							type="previous"
 						/>
 					))}
 				</div>
@@ -123,7 +137,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 				<div className={styles.layout_container}>
 					<Button
 						size="md"
-						style={{ backgroundColor: showAddToButton ? '#c4dc91' : '' }}
+						themeType="accent"
 						loading={updateApiLoading}
 						disabled={!showAddToButton}
 						onClick={() => {

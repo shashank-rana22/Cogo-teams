@@ -1,17 +1,28 @@
+import { upperCase } from '@cogoport/utils';
+
 import useGetUserDetails from '../../hooks/useGetUserDetails';
 
 import styles from './styles.module.css';
 import UserDetails from './UserDetails';
 
+const getNameTag = (name) => {
+	const newName = name.split(' ') || [];
+	let tagString = '';
+	tagString += newName[0][0];
+	tagString += newName[newName.length - 1][0];
+
+	return upperCase(tagString);
+};
+
 function UserProfile({ userId = '' }) {
 	const { userData = {}, loading } = useGetUserDetails({ userId });
-
-	const picture =	'https://cogoport-production.sgp1.digitaloceanspaces.com/6ffab48edc909122ff786b97204f1e30/DSC_0032.jpg';
+	const { picture = '', name = '' } = userData;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.image_container}>
-				<img src={picture} alt="loading" className={styles.img} />
+				{ picture ? <img src={picture} alt="loading" className={styles.img} />
+					: <div className={styles.tag}>{getNameTag(name)}</div> }
 			</div>
 
 			<div className={styles.user_details}>

@@ -4,10 +4,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function UserDetails({ userData = {}, loading = false }) {
-	const { list = [] } = userData || {};
-	const items = list[0];
-
-	const { name, email, mobile_number, department, manager } = items || {};
+	const { name, email, mobile_number, department, manager } = userData || {};
 
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>

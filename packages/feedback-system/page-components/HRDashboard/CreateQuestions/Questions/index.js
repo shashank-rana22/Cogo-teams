@@ -30,17 +30,20 @@ function Questions({
 				<QuestionsBox question_detail={data} />
 			</div>
 			<div className={styles.icon_container}>
-				<IcMEdit
-					width={20}
-					height={20}
-					fill="#393F70"
-					style={{
-						fontWeight : '100',
-						cursor     : 'pointer',
-						margin     : '0 16px',
-					}}
-					onClick={() => editItem(data, feedbackQuestionId)}
-				/>
+				<div>
+					<IcMEdit
+						width={20}
+						height={20}
+						fill="#393F70"
+						style={{
+							fontWeight : '100',
+							cursor     : 'pointer',
+							margin     : '0 16px',
+						}}
+						onClick={() => editItem(data, feedbackQuestionId)}
+					/>
+
+				</div>
 
 				<Tooltip
 					theme="light"

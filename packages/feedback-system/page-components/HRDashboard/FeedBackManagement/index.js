@@ -1,6 +1,6 @@
-import { Placeholder } from '@cogoport/components';
+import { Button, Upload, Placeholder } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMNotifications } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +10,7 @@ import useGetManagerFeedbackProgress from '../../../hooks/useGetManagerFeedbackP
 import getControls from './manager-controls';
 import ManagersListCard from './ManagersListCard';
 import styles from './styles.module.css';
+// import useUploadNormalCSV from './useUploadNormalCSV';
 
 function FeedbackManagement() {
 	const Router = useRouter();
@@ -17,6 +18,8 @@ function FeedbackManagement() {
 	const [showUserId, setShowUserId] = useState('');
 
 	const { data = {}, loading = false, setParams } = useGetManagerFeedbackProgress();
+
+	// const { fileValue, setFileValue, loading: uploadFileLoading = false } = useUploadNormalCSV();
 
 	const { list = [] } = data;
 
@@ -65,8 +68,20 @@ function FeedbackManagement() {
 			</div>
 
 			<div className={styles.list_header}>
-				<div className={styles.heading}>All Managers List</div>
+				<div className={styles.heading}>
+					<p className={styles.header_text}>
+						All Managers List
+					</p>
 
+					<div className={styles.notify}>
+						<Button themeType="accent" size="md">
+							<IcMNotifications style={{ marginRight: '4px' }} />
+							Notify
+						</Button>
+					</div>
+				</div>
+
+				{/* <Upload value={fileValue} onChange={setFileValue} loading={uploadFileLoading} /> */}
 				<SelectController {...getControls()} control={control} formProps={formProps} />
 			</div>
 

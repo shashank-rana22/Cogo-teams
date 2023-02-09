@@ -1,7 +1,7 @@
 export const deptControls = [
 	{
 		name        : 'department',
-		placeholder : 'Choose Department',
+		placeholder : 'Department...',
 		label       : 'Department',
 		type        : 'select',
 		span        : 5,
@@ -16,7 +16,7 @@ export const deptControls = [
 	},
 	{
 		name        : 'tech_role',
-		placeholder : 'Choose Role',
+		placeholder : 'Role...',
 		label       : 'Technology Role',
 		type        : 'select',
 		span        : 5,
@@ -35,7 +35,7 @@ export const deptControls = [
 	},
 	{
 		name        : 'finance_role',
-		placeholder : 'Choose Role',
+		placeholder : 'Role...',
 		label       : 'Finance Role',
 		type        : 'select',
 		span        : 5,
@@ -59,7 +59,7 @@ export const deptControls = [
 	},
 	{
 		name        : 'business_role',
-		placeholder : 'Choose Role',
+		placeholder : 'Role...',
 		label       : 'Business Role',
 		type        : 'select',
 		span        : 5,

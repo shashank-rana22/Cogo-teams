@@ -49,14 +49,13 @@ function ViewQuestionPopover({ searchValue = '' }) {
 			>
 
 				<Button
-					className="secondary md"
+					size="md"
+					themeType="secondary"
 					onClick={() => openQuestions()}
-					style={{ backgroundColor: '#d6b300' }}
 				>
 					<IcMActivePlans style={{ marginRight: '4px' }} />
 					Active Questions
 				</Button>
-
 			</Popover>
 		</div>
 	);

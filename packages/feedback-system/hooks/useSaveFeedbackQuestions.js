@@ -1,11 +1,11 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useSaveFeedbackQuestions = () => {
-	const getUpdatFeedbackApi = useRequest({
+	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
 		url    : 'update_feedback_question',
-	}, { manual: false });
+	}, { manual: true });
 
 	const onSaveFeedbackQuestions = async ({
 		questions = [],
@@ -17,7 +17,7 @@ const useSaveFeedbackQuestions = () => {
 		setShowbutton = () => {},
 	}) => {
 		try {
-			await getUpdatFeedbackApi.trigger({
+			await trigger({
 				params: {
 					...questions,
 					id     : feedback_question_id,
@@ -36,14 +36,15 @@ const useSaveFeedbackQuestions = () => {
 			setShowForm(false);
 			setShowbutton(true);
 
-			toast.success('Question Updated Successfully');
+			Toast.success('Question Updated Successfully');
 		} catch (e) {
-			toast.error(e?.data?.question);
+			Toast.error(e?.data?.question);
 		}
 	};
 
 	return {
 		onSaveFeedbackQuestions,
+		loading,
 	};
 };
 

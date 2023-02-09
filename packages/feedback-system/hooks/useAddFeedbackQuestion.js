@@ -10,7 +10,7 @@ const useAddFeedbackQuestion = ({ params }) => {
 	const [{ loading: apiLoading = false }, trigger] = useRequest({
 		method : 'post',
 		url    : 'create_feedback_question',
-	}, { manual: false });
+	}, { manual: true });
 
 	const onAddFeedbackQuestion = async ({
 		questions = [],
@@ -34,7 +34,12 @@ const useAddFeedbackQuestion = ({ params }) => {
 
 			const obj = { feedback_question_id: data?.id };
 
-			setQuestions((pv) => [...pv, { ...questions, ...obj, status: 'active' }]);
+			setQuestions((pv) => {
+				if (pv.length < 4) {
+					return [...pv, { ...questions, ...obj, status: 'active' }];
+				}
+				return [];
+			});
 			reset();
 			setShowForm(false);
 			setShowbutton(true);

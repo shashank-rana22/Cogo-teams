@@ -15,7 +15,7 @@ function RoleSelect({ value = '', department = 'technology', setValue = () => {}
     === DEPARTMENT_MAPPING[department]);
 
 	const setDeptFilters = (val) => {
-		setValue((pv) => ({ ...pv, filters: { ...(pv.filters), work_scope: val } }));
+		setValue((pv) => ({ ...pv, page: 1, filters: { ...(pv.filters), work_scope: val } }));
 	};
 
 	function SelectComponent({ control = {} }) {

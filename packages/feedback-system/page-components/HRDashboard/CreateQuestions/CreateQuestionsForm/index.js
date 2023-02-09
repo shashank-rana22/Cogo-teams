@@ -7,19 +7,16 @@ import PreviousQuestionsTab from '../PreviousQuestionsTab';
 
 import styles from './styles.module.css';
 
-function CreateQuestionsForm({ showEditOption }) {
+function CreateQuestionsForm() {
 	const [activeTab, setActiveTab] = useState('previous');
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.tab_header}>
-				{showEditOption ? 'Edit Questions' : 'Create Questions'}
-			</p>
 			<div className={styles.tab_container}>
 				<Tabs
 					tabIcon={<IcMProfile />}
 					activeTab={activeTab}
-					themeType="primary"
+					themeType="secondary"
 					onChange={setActiveTab}
 				>
 					<TabPanel name="previous" title="Previous Questions">

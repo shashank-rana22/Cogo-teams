@@ -4,7 +4,7 @@ export const getMonthControls = {
 	type           : 'select',
 	defaultOptions : true,
 	isClearable    : true,
-	placeholder    : 'Select Month Range',
+	placeholder    : 'Month Range...',
 	options        : [
 		{
 			label : 'last 3 months',

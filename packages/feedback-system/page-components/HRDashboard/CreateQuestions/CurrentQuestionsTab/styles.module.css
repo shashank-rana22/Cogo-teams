@@ -14,3 +14,8 @@
 	justify-content: flex-start;
 	padding-top: 16px;
 }
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}

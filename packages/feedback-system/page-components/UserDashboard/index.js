@@ -8,13 +8,14 @@ import UserFeedbackData from './UserFeedbackData';
 
 function UserDashboard() {
 	const {
-		general: {
-			query: { user_id = '' },
-		},
-		profile: { user: { id = '' } },
+		general,
+		profile,
 	} = useSelector((state) => state);
 
-	const userId = user_id || id;
+	const { user_id = '' } = general;
+	const { user = {} } = profile;
+
+	const userId = user_id || user.id;
 
 	return (
 		<div className={styles.container}>
@@ -23,7 +24,7 @@ function UserDashboard() {
 					<PerformanceChart userId={userId} />
 				</div>
 
-				<div className={styles.user_profile}><UserProfile userId={userId} /></div>
+				<div className={styles.user_profile}><UserProfile profileData={user} /></div>
 			</div>
 
 			<UserFeedbackData userId={userId} />

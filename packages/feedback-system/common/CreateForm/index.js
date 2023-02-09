@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function CreateForm({
 	formProps,
 	type = '',
+	loading = false,
 	controls,
 	onSubmit = () => {},
 	onCancel = () => {},
@@ -28,8 +29,8 @@ function CreateForm({
 
 					return (
 						<div className={styles.form_group}>
-							<span>{el.label}</span>
-							<div className={styles.input_group}>
+							<span style={{ flex: 12 - el.span }}>{el.label}</span>
+							<div style={{ flex: el.span }} className={styles.input_group}>
 								<Element
 									{...el}
 									key={el.name}
@@ -48,7 +49,7 @@ function CreateForm({
 
 			<div className={styles.button_container}>
 				<Button
-					size="sm"
+					size="md"
 					style={{ marginRight: 10 }}
 					themeType="secondary"
 					onClick={() => onCancel()}
@@ -56,9 +57,10 @@ function CreateForm({
 					Cancel
 				</Button>
 				<Button
-					size="sm"
+					size="md"
 					type="submit"
-					style={{ backgroundColor: '#fbd1a6', color: '#221f20' }}
+					loading={loading}
+					themeType="accent"
 				>
 					{startCase(type)}
 				</Button>

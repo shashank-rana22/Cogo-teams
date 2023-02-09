@@ -27,6 +27,17 @@
 	}
 }
 
+.tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	font-size: 150px;
+	
+	background-color: #8089cc;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.35);
+}
+
 .user_details {
 	flex: 7
 }

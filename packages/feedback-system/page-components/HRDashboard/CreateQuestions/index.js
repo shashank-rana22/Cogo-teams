@@ -3,6 +3,7 @@ import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CreateQuestionsForm from './CreateQuestionsForm';
+import styles from './styles.module.css';
 
 function CreateQuestions() {
 	const [showCreateQForm, setShowCreateQForm] = useState(false);
@@ -12,7 +13,8 @@ function CreateQuestions() {
 		<div>
 			<Button
 				size="md"
-				style={{ marginRight: '16px', backgroundColor: '#abb0de' }}
+				themeType="accent"
+				style={{ marginRight: '16px' }}
 				onClick={() => setShowCreateQForm(true)}
 			>
 				<IcMPlus style={{ marginRight: '4px' }} />
@@ -25,7 +27,13 @@ function CreateQuestions() {
 				onOuterClick={() => setShowCreateQForm(false)}
 				size="xl"
 			>
-				<CreateQuestionsForm showEditOption={showEditOption} />
+				<Modal.Header title="Create Questions" />
+
+				<div className={styles.modal_body}>
+					<Modal.Body>
+						<CreateQuestionsForm showEditOption={showEditOption} />
+					</Modal.Body>
+				</div>
 			</Modal>
 		</div>
 	);

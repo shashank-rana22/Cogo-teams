@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
-import QuestionsBox from '../../../../common/QuestionsBox';
+import Questions from '../../../../common/Questions';
 import RoleSelect from '../../../../common/RoleSelect';
 
 import styles from './styles.module.css';
@@ -39,7 +39,13 @@ function Content({ params = {}, setParams = () => {}, list = [], loading = false
 
 				{list?.length === 0 && !loading && <EmptyState />}
 
-				{!loading && (list || []).map((item) => <QuestionsBox key={item.id} question_detail={item} />)}
+				{!loading && (list || []).map((item) => (
+					<Questions
+						key={item.id}
+						item={item}
+						type="active"
+					/>
+				))}
 			</div>
 		</div>
 	);

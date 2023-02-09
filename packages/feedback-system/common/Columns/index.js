@@ -11,8 +11,8 @@ const useGetColumns = () => {
 	const Router = useRouter();
 	const handleClick = (user_id) => {
 		Router.push(
-			'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-hr-dashboard',
-			`/feedback-system/hr-dashboard/feedback-management/${user_id}?path=/feedback-hr-dashboard`,
+			'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
+			`/feedback-system/hr-dashboard/feedback-management/${user_id}?path=/feedback-system/hr-dashboard`,
 		);
 	};
 	const ratingClass = ({ value }) => {
@@ -67,14 +67,14 @@ const useGetColumns = () => {
 			id  : 'rating',
 			key : 'rating',
 		},
-		{
-			Header   : <div className={styles.head}>Rating Details</div>,
-			accessor : (item) => (
-				<RatingDetailsModal performance_item={item?.performance_item} />
-			),
-			id  : 'rating_details',
-			key : 'rating_details',
-		},
+		// {
+		// 	Header   : <div className={styles.head}>Rating Details</div>,
+		// 	accessor : (item) => (
+		// 		<RatingDetailsModal performance_item={item?.performance_item} />
+		// 	),
+		// 	id  : 'rating_details',
+		// 	key : 'rating_details',
+		// },
 		{
 			Header   : <div className={styles.head}>Feedback</div>,
 			accessor : (item) => (

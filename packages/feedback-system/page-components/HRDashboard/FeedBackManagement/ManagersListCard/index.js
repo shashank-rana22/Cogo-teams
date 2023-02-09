@@ -114,17 +114,6 @@ function ManagersListCard({
 					</div>
 				</div>
 
-				<div className={styles.notify}>
-					{!isEmpty(feedbacks_pending) && (
-						<div className={styles.column_content}>
-							<Button style={{ backgroundColor: '#f68b61' }} size="md">
-								<IcMNotifications style={{ marginRight: '4px' }} />
-								Notify
-							</Button>
-						</div>
-					)}
-				</div>
-
 				<div className={styles.show_more}>
 					<div
 						className={styles.show_more_container}
@@ -134,11 +123,8 @@ function ManagersListCard({
 							handleClick();
 						}}
 					>
-
-						<div className={styles.column_name}>
-							{show && showUserId === manager_id
-								? <IcMArrowRotateUp />
-								: <IcMArrowRotateDown />}
+						<div className={`${show && showUserId === manager_id ? styles.opened : null}`}>
+							<IcMArrowRotateUp />
 						</div>
 
 					</div>
@@ -154,28 +140,27 @@ function ManagersListCard({
 						<div className={styles.search_container}>
 							<div style={{ marginRight: '16px' }}>
 								<Input
-									size="xs"
+									size="sm"
 									value={searchValue}
 									onChange={(e) => handleChange(e)}
-									placeholder="Search.."
+									placeholder="Search Users.."
 									prefix={<IcMSearchlight />}
 									type="text"
 								/>
 							</div>
 
-							<Calculation
+							{/* <Calculation
 								manager_id={manager_id}
 								getUserFeedbackList={getUserFeedbackList}
-							/>
+							/> */}
 
 							<Button
-								size="sm"
+								themeType="secondary"
 								onClick={() => {
 									download();
 								}}
 								style={{
-									marginLeft      : '16px ',
-									backgroundColor : '#88cad1',
+									marginLeft: '16px ',
 								}}
 							>
 								<IcMDownload style={{ marginRight: '4px' }} />

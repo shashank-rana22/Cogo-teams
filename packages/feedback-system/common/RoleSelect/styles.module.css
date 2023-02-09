@@ -2,6 +2,15 @@
     display: flex;
 	justify-content: flex-start;
     padding: 8px 0px;
+
+    :global {
+        .ui_select_options_container {
+            width: 180px;
+        }
+        .ui_select_display_container {
+            width: 180px;
+        }
+    }
 }
 
 .controller {

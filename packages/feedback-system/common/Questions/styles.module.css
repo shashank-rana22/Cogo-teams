@@ -17,3 +17,12 @@
 .question_container {
 	width: 95%;
 }
+
+.icon_container {
+	display: flex;
+	width: 5%;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 4px;
+	padding: 8px;
+}

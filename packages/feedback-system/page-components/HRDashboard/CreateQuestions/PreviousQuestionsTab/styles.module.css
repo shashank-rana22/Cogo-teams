@@ -38,5 +38,6 @@
 }
 
 .search_question_filter {
+	display: flex;
 	margin-left: 16px;
 }

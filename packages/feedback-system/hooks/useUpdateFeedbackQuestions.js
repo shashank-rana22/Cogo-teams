@@ -1,18 +1,23 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateFeedbackQuestions = () => {
 	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
 		url    : 'update_feedback_question',
-	}, { manual: false });
+	}, { manual: true });
 
-	const onUpdateFeedback = ({ feedback_question_id = '' }) => {
-		trigger({
-			params: {
-				id     : feedback_question_id,
-				status : 'inactive',
-			},
-		});
+	const onUpdateFeedback = async ({ feedback_question_id = '' }) => {
+		try {
+			await trigger({
+				params: {
+					id     : feedback_question_id,
+					status : 'inactive',
+				},
+			});
+		} catch (e) {
+			Toast.error(e.toString());
+		}
 	};
 
 	return {

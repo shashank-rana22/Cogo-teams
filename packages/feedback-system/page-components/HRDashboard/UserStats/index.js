@@ -2,9 +2,9 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 
-// import PerformanceChart from '../../../feedback-user-dashboard/common/PerformanceChart';
-// import UserProfile from '../../../feedback-user-dashboard/common/UserProfile';
-// import UserFeedbackData from '../../../feedback-user-dashboard/components/user-dashboard/UserFeedbackData';
+import PerformanceChart from '../../../common/PerformanceChart';
+import UserProfile from '../../../common/UserProfile';
+import UserFeedbackData from '../../UserDashboard/UserFeedbackData';
 
 import styles from './styles.module.css';
 
@@ -15,17 +15,17 @@ function UserDashboard() {
 		general: {
 			query: { user_id = '', path = '' },
 		},
-		profile: { id = '' },
+		profile: { user = {} },
 	} = useSelector((state) => state);
 
-	const userId = user_id || id;
+	const userId = user_id || user.id;
 
 	const handleClick = () => {
 		Router.push(`${path}`);
 	};
 
 	return (
-		<div className={styles.Container}>
+		<div className={styles.container}>
 			<div>
 				<div
 					className={styles.redirect_container}
@@ -39,18 +39,16 @@ function UserDashboard() {
 					Go Back
 				</div>
 
-				<div>
-					{/* <Row>
-						<Col md={6}>
+				<div className={styles.stats_container}>
+					<div className={styles.header}>
+						<div className={styles.performance_chart}>
 							<PerformanceChart userId={userId} />
-						</Col>
+						</div>
 
-						<Col md={6}>
-							<UserProfile userId={userId} />
-						</Col>
-					</Row>
+						<div className={styles.user_profile}><UserProfile userId={userId} /></div>
+					</div>
 
-					<UserFeedbackData userId={userId} /> */}
+					<UserFeedbackData userId={userId} />
 				</div>
 			</div>
 		</div>

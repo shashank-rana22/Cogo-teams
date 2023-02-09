@@ -20,6 +20,15 @@
 		font-weight: bold;
 		color: "#393f70";
 	}
+
+	:global {
+        .ui_select_options_container {
+            width: 180px;
+        }
+        .ui_select_display_container {
+            width: 180px;
+        }
+    }
 }
 
 .empty_container {

@@ -12,3 +12,22 @@
 	color: #393f70;
 	cursor: pointer;
 }
+
+.stats_container {
+	padding: 16px;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+}
+
+.performance_chart {
+    flex: 6;
+    padding: 8px;
+}
+
+.user_profile {
+    flex: 6;
+    padding: 8px;
+}

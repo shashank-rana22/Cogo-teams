@@ -12,7 +12,7 @@ function QuestionsBox({ question_detail = {} }) {
 				<div className={styles.question}>
 					<Tooltip
 						theme="light"
-						placement="top"
+						placement="top-start"
 						animation="shift-away"
 						content={question}
 					>
@@ -27,7 +27,7 @@ function QuestionsBox({ question_detail = {} }) {
 				<div className={styles.question}>
 					<Tooltip
 						theme="light"
-						placement="top"
+						placement="top-start"
 						animation="shift-away"
 						content={remark}
 					>

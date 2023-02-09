@@ -34,8 +34,8 @@ function Filters({ params = {}, setParams = () => {} }) {
 			caret={false}
 		>
 			<Button
-				size="md"
-				style={{ backgroundColor: '#abcd62' }}
+				size="lg"
+				themeType="secondary"
 				onClick={() => setShowFilters(!showFilters)}
 			>
 				<IcMFilter style={{ marginRight: '4px' }} />

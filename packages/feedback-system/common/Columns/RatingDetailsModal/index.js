@@ -1,4 +1,4 @@
-import { Modal, ToolTip } from '@cogoport/components';
+import { Modal, Tooltip } from '@cogoport/components';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -14,14 +14,14 @@ function RatingDetailsModal({ performance_item = {} }) {
 					<div className={styles.item}>
 						<div className={styles.title}>
 							{' '}
-							<ToolTip
+							<Tooltip
 								theme="light"
 								placement="top"
 								animation="shift-away"
 								content={key}
 							>
 								<div className="title">{`${key}`}</div>
-							</ToolTip>
+							</Tooltip>
 						</div>
 
 						<div className={styles.value}>{`${performance_item[key]}`}</div>

@@ -23,7 +23,7 @@ const useGetFeedbackPerformanceStats = ({ user_id = '' }) => {
 
 	useEffect(() => {
 		feedbackPerformanceStats();
-	}, []);
+	}, [performanceFilter]);
 
 	return {
 		performanceStatsData,

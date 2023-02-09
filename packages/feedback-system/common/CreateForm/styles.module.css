@@ -4,7 +4,6 @@
 
 .form_group {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 
@@ -18,11 +17,6 @@
 .input_group {
 	display: flex;
 	flex-direction: column;
-
-	:global(.ui_select_display_container){
-		width: 120px;
-		height: 30px;
-	}
 }
 
 .button_container{

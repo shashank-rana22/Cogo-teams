@@ -1,22 +1,24 @@
-import { Button, Placeholder, toast } from '@cogoport/components';
+import { Pagination, Button, Placeholder, toast } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import CreateForm from '../../../../common/CreateForm';
 import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
+import Questions from '../../../../common/Questions';
 import RoleSelect from '../../../../common/RoleSelect';
 import useAddFeedbackQuestion from '../../../../hooks/useAddFeedbackQuestion';
 import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';
 import useSaveFeedbackQuestions from '../../../../hooks/useSaveFeedbackQuestions';
 import useUpdateFeedbackQuestions from '../../../../hooks/useUpdateFeedbackQuestions';
-import Questions from '../Questions';
 
 import styles from './styles.module.css';
 
 function CurrentQuestionsTab() {
 	const [params, setParams] = useState({
-		filters: {
+		page       : 1,
+		page_limit : 3,
+		filters    : {
 			department : 'technology',
 			work_scope : 'Associate Software Engineer',
 		},
@@ -34,17 +36,21 @@ function CurrentQuestionsTab() {
 
 	const { onUpdateFeedback } = useUpdateFeedbackQuestions();
 
-	const { onSaveFeedbackQuestions } = useSaveFeedbackQuestions();
+	const { onSaveFeedbackQuestions, loading: saveLoading = false } = useSaveFeedbackQuestions();
 
-	const { formProps, controls, apiLoading, onAddFeedbackQuestion } =	useAddFeedbackQuestion({ params });
+	const { formProps, controls, apiLoading = false, onAddFeedbackQuestion } =	useAddFeedbackQuestion({ params });
 
-	const { data: activeQuestionsData, loading } = useListFeedbackQuestions({
+	const { data: activeQuestionsData, loading, getQuestionList } = useListFeedbackQuestions({
 		status: 'active',
 		params,
 		setQuestions,
 	});
 
-	const { list: activeQuestionsList } = activeQuestionsData || {};
+	const { list: activeQuestionsList = [], total_count = '' } = activeQuestionsData || {};
+	const setPage = (p) => { setParams({ ...params, page: p }); };
+
+	useEffect(() => setQuestions([]), [params]);
+	useEffect(() => setPage(1), [params.filters]);
 
 	useEffect(() => {
 		(activeQuestionsList || []).forEach((item) => {
@@ -62,7 +68,7 @@ function CurrentQuestionsTab() {
 				},
 			]);
 		});
-	}, [activeQuestionsList?.length]);
+	}, [activeQuestionsList]);
 
 	const {
 		getValues,
@@ -116,7 +122,7 @@ function CurrentQuestionsTab() {
 	};
 
 	if (confirmDelete) {
-		const filteredQuestions = questions.filter((item) => {
+		questions.forEach((item) => {
 			if (
 				item.feedback_question_id === deleteItemId
 				&& 'feedback_question_id' in item
@@ -125,10 +131,9 @@ function CurrentQuestionsTab() {
 					feedback_question_id: item?.feedback_question_id,
 				});
 			}
-			return item.feedback_question_id !== deleteItemId;
 		});
-
-		setQuestions(filteredQuestions);
+		setQuestions([]);
+		getQuestionList();
 		setConfirmDelete(false);
 	}
 
@@ -140,10 +145,10 @@ function CurrentQuestionsTab() {
 	};
 
 	const showLoading = () => (
-		<div style={{ margin: '16px' }}>
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="60px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="60px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="60px" />
+		<div style={{ margin: '16px 0px' }}>
+			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
+			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
+			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
 		</div>
 	);
 
@@ -162,12 +167,13 @@ function CurrentQuestionsTab() {
 
 			{showButton && (
 				<Button
-					className="primary sm"
+					size="md"
+					themeType="accent"
 					onClick={() => {
 						setShowForm(true);
 						setShowbutton(false);
 					}}
-					style={{ margin: '8px 0', backgroundColor: '#C4DC91' }}
+					style={{ margin: '8px 0' }}
 				>
 					<IcMPlus style={{ marginRight: '4px' }} />
 					Add Questions
@@ -179,6 +185,7 @@ function CurrentQuestionsTab() {
 					formProps={formProps}
 					type="create_question"
 					onSubmit={AddQuestions}
+					loading={apiLoading}
 					controls={controls}
 					onCancel={() => {
 						setShowForm(false);
@@ -192,6 +199,19 @@ function CurrentQuestionsTab() {
 			{questions?.length === 0 && !loading && !showForm && <EmptyState />}
 
 			<div>
+				{!confirmEdit && total_count > 3 && (
+					<div className={styles.pagination}>
+						<Pagination
+							type="compact"
+							currentPage={params.page}
+							totalItems={total_count}
+							pageSize={params.page_limit}
+							onPageChange={setPage}
+							style={{ marginRight: '8px' }}
+						/>
+					</div>
+				)}
+
 				{(questions || []).map((data) => {
 					const { status = '', feedback_question_id = '' } = data || {};
 					if (status === 'inactive' || !('feedback_question_id' in data)) return null;
@@ -202,6 +222,7 @@ function CurrentQuestionsTab() {
 								formProps={formProps}
 								type="create_question"
 								onSubmit={AddQuestions}
+								loading={saveLoading}
 								controls={controls}
 								onCancel={onCancelEdit}
 							/>
@@ -209,13 +230,14 @@ function CurrentQuestionsTab() {
 					}
 					return (
 						<Questions
-							data={data}
+							item={data}
 							feedbackQuestionId={feedback_question_id}
 							setEditIndexId={setEditIndexId}
 							setDeleteItemId={setDeleteItemId}
 							setConfirmDelete={setConfirmDelete}
 							setEditItem={setEditItem}
 							setConfirmEdit={setConfirmEdit}
+							type="current"
 						/>
 					);
 				})}

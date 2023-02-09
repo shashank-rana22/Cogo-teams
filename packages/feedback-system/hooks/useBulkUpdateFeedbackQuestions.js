@@ -4,7 +4,7 @@ const useUpdatefeedbackQuestion = () => {
 	const [{ loading: updateApiLoading = false }, trigger] = useRequest({
 		method : 'post',
 		url    : 'bulk_update_feedback_questions',
-	}, { manual: 'true' });
+	}, { manual: true });
 
 	const onBulkUpdate = async ({
 		questions = [],
