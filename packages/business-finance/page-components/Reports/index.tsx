@@ -1,7 +1,7 @@
 import { SingleDateRange, Button, Select } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { REPORT_TYPE_OPTIONS } from './constants/REPORT_TYPE_OPTIONS';
+import { REPORT_TYPE_OPTIONS } from './constants';
 import useSubmitReport from './hooks/useSubmitReport';
 import styles from './styles.module.css';
 
