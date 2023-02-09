@@ -1463,13 +1463,13 @@ const saas = {
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_list_countries',
+			api         : 'get_saas_insurance_draft_details',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_list_commodities',
+			api         : 'get_saas_insurance_list_countries',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
@@ -1477,6 +1477,23 @@ const saas = {
 		{
 			api         : 'get_location_from_postal_code',
 			access_type : 'private',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'public',
+			service_name : 'location',
+		},
+		{
+			api         : 'get_saas_insurance_terms',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
+			api         : 'get_saas_insurance_cancel',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
 		},
 	],
 	app_saas_trade_partner: [
