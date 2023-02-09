@@ -1836,6 +1836,12 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
 	],
 	app_saas_order_history: [
 		{
