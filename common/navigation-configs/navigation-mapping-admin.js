@@ -857,6 +857,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.controller_dashboard,
 			},
 			{
+				key           : 'business_finance-incident_controller',
+				title         : 'Incident Controller',
+				href          : '/business-finance/incident-controller/[activeTab]',
+				as            : '/business-finance/incident-controller/requested',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.incident_controller,
+			},
+			{
 				key           : 'business_finance-manual_invoice',
 				title         : 'Manual Invoice',
 				href          : '/business-finance/manual-invoice',
@@ -874,6 +883,7 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
+
 		],
 		module_type: 'dashboards',
 	},

@@ -6912,7 +6912,8 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
-	vietnam_account_receivables: [
+	incident_controller         : [{}],
+	vietnam_account_receivables : [
 		{
 			api         : 'get_sales_invoice_list',
 			access_type : 'private',
