@@ -20,8 +20,8 @@ const haulagePayload = ({ service, value }) => {
 			line_items,
 			transport_mode          : value?.transportation_modes,
 			haulage_type            : value?.haulage_type,
-			origin_location_id      : value?.origin_main_port_id,
-			destination_location_id : value?.destination_main_port_id,
+			origin_location_id      : value?.destination_main_port_id,
+			destination_location_id : value?.origin_main_port_id,
 		},
 	};
 
