@@ -237,6 +237,15 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_shipment_quotation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api         : 'get_sales_invoice_shipment_list',
+		access_type : 'private',
+	},
 ];
 
 export default apis;

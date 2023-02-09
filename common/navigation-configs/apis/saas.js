@@ -1384,6 +1384,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'subscription_activate_now',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
@@ -1762,6 +1767,12 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_trade_engine_verify_six_digit',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
 			access_type : 'private',
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
