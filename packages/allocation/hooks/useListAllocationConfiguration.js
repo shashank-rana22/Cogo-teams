@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useAllocationConfigurations = () => {
+const useListAllocationConfigurations = () => {
 	const [showCreateConfig, setShowCreateConfig] = useState(false);
 
 	const [params, setParams] = useState({
@@ -41,4 +41,4 @@ const useAllocationConfigurations = () => {
 	};
 };
 
-export default useAllocationConfigurations;
+export default useListAllocationConfigurations;

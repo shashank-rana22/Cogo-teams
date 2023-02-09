@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useCheckConfigurationPublishability = ({
-	value = {},
+	item = {},
 	listRefetch = () => {},
 	setShow = () => {},
 }) => {
@@ -15,7 +15,7 @@ const useCheckConfigurationPublishability = ({
 	const onCheckPublish = async () => {
 		try {
 			const payload = {
-				allocation_configuration_id: value.id,
+				allocation_configuration_id: item.id,
 			};
 
 			await trigger({

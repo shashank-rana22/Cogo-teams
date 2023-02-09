@@ -6,7 +6,7 @@ import { useRequest } from '@cogoport/request';
 import controls from '../utils/get-configuration-publish-controls';
 
 const usePublishConfiguration = ({
-	value = {},
+	item = {},
 	listRefetch = () => {},
 	setShow = () => {},
 }) => {
@@ -17,16 +17,31 @@ const usePublishConfiguration = ({
 
 	const formProps = useForm({
 		defaultValues: {
-			start_date : null,
-			end_date   : null,
+			// start_date : null,
+			// end_date   : null,
+			active_date_range: null,
 		},
 	});
 
+	const { setError } = formProps;
+
 	const onPublish = async (values) => {
+		if (!values.active_date_range.startDate) {
+			setError('active_date_range', { type: 'required', message: 'Start Date is required' });
+			return;
+		}
+
+		if (!values.active_date_range.endDate) {
+			setError('active_date_range', { type: 'required', message: 'End Date is required' });
+			return;
+		}
+
 		try {
 			const payload = {
-				allocation_configuration_id: value.id,
-				...values,
+				allocation_configuration_id : item.id,
+				// ...values,
+				start_date                  : values.active_date_range?.startDate,
+				end_date                    : values.active_date_range?.endDate,
 			};
 
 			await trigger({

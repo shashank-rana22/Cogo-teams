@@ -6,6 +6,15 @@ import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
+const STATUS_MAPPING = {
+	approved: {
+		label: 'Approve',
+	},
+	rejected: {
+		label: 'Reject',
+	},
+};
+
 function List(props) {
 	const { data, loading, onChangeParams, fetchList } = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
@@ -70,7 +79,7 @@ function List(props) {
 
 						<Modal.Header
 							title={`Are you sure you want to
-						 	${requestStatusItem.status || 'update'} 
+						 	${STATUS_MAPPING[requestStatusItem.status].label || 'update'} 
 							this request ?`}
 						/>
 

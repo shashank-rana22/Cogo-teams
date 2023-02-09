@@ -1,14 +1,14 @@
 import { Button, Modal } from '@cogoport/components';
 
-import Form from '../../../../common/Form';
-import useCreateConfigurations from '../../../../hooks/useCreateConfigurations';
-import useUpdateConfiguration from '../../../../hooks/useUpdateConfiguration';
+import Form from '../../../../../../../common/Form';
+import useCreateConfigurations from '../../../../../../../hooks/useCreateConfigurations';
+import useUpdateConfiguration from '../../../../../../../hooks/useUpdateConfiguration';
 
 import styles from './styles.module.css';
 
 function CreateConfiguration({
 	viewType = '',
-	value = {},
+	item = {},
 	setShow,
 	listRefetch,
 }) {
@@ -19,14 +19,14 @@ function CreateConfiguration({
 		formProps,
 	} = useCreateConfigurations({
 		viewType,
-		value,
+		item,
 		setShow,
 		listRefetch,
 	});
 
 	const {
 		onEdit, loadingUpdate,
-	} = useUpdateConfiguration({ value, listRefetch, setShow });
+	} = useUpdateConfiguration({ item, listRefetch, setShow });
 
 	const { handleSubmit } = formProps;
 

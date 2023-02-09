@@ -1,14 +1,14 @@
 import { Button, Modal } from '@cogoport/components';
 
-import Form from '../../../../common/Form';
-import usePublishConfiguration from '../../../../hooks/usePublishConfiguration';
+import Form from '../../../../../../../common/Form';
+import usePublishConfiguration from '../../../../../../../hooks/usePublishConfiguration';
 
 function PublishConfiguration({
-	value = {},
+	item = {},
 	setShow,
 	listRefetch,
 }) {
-	const { onPublish, loadingPublish, formProps, controls } = usePublishConfiguration({ value, listRefetch, setShow });
+	const { onPublish, loadingPublish, formProps, controls } = usePublishConfiguration({ item, listRefetch, setShow });
 
 	const { handleSubmit } = formProps;
 

@@ -4,13 +4,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getCreateConfigurationsControls from '../utils/get-create-configurations-controls';
+import getCreateConfigurationsControls from '../utils/get-configurations-create-controls';
 
 const useCreateConfigurations = ({
 	viewType = '',
-	value = {},
+	item = {},
 	setShow = () => {},
-	listRefresh = () => {},
+	listRefetch = () => {},
 }) => {
 	const [segment, setSegment] = useState();
 
@@ -19,22 +19,22 @@ const useCreateConfigurations = ({
 		method : 'POST',
 	});
 
-	const controls = getCreateConfigurationsControls({ value, setSegment });
+	const controls = getCreateConfigurationsControls({ item, setSegment });
 
 	const formProps = useForm({
 		defaultValues: {
-			service_type      : value.service_type || 'organization',
-			role_ids          : value.role_ids,
-			user_ids          : value.user_ids,
-			stakeholder_type  : value.stakeholder_type,
-			segment_id        : value.segment_id,
-			locking_criterion : value.locking_criterion,
-			locking_period    : value.locking_period,
-			cooling_period    : value.cooling_period,
+			service_type      : item.service_type || 'organization',
+			role_ids          : item.role_ids,
+			user_ids          : item.user_ids,
+			stakeholder_type  : item.stakeholder_type,
+			segment_id        : item.segment_id,
+			locking_criterion : item.locking_criterion,
+			locking_period    : item.locking_period,
+			cooling_period    : item.cooling_period,
 			schedule_data     : {
-				schedule_type  : value.schedule_type || 'daily',
-				dates_of_month : value.days,
-				days_of_week   : value.days,
+				schedule_type  : item.schedule_type || 'daily',
+				dates_of_month : item.days,
+				days_of_week   : item.days,
 			},
 		},
 	});
@@ -138,11 +138,11 @@ const useCreateConfigurations = ({
 				data: payload,
 			});
 
-			listRefresh();
-
 			reset();
 
 			setShow(false);
+
+			listRefetch();
 
 			Toast.success('Configuration created successfully');
 		} catch (err) {

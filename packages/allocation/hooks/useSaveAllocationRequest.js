@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-import getControls from '../utils/get-create-request-controls';
+import getControls from '../utils/get-requests-create-controls';
 import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
 import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
