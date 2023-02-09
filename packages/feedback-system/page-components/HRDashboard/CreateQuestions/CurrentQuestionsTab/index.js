@@ -73,6 +73,7 @@ function CurrentQuestionsTab() {
 	const {
 		getValues,
 		reset,
+		setValue,
 	} = formProps;
 
 	const AddQuestions = (values) => {
@@ -87,6 +88,13 @@ function CurrentQuestionsTab() {
 			reset,
 			setShowForm,
 			setShowbutton,
+		});
+	};
+
+	const setEditFormValue = (questionData = {}) => {
+		controls.forEach((control) => {
+			const { name: controlName } = control;
+			setValue(controlName, questionData[controlName]);
 		});
 	};
 
@@ -153,7 +161,7 @@ function CurrentQuestionsTab() {
 	);
 
 	return (
-		<div className={styles.form_container}>
+		<div>
 			<div className={styles.select_container}>
 				<DepartmentSelect value={params.filters?.department} setValue={setParams} type="controller" />
 
@@ -217,11 +225,13 @@ function CurrentQuestionsTab() {
 					if (status === 'inactive' || !('feedback_question_id' in data)) return null;
 
 					if (confirmEdit && editIndexId === data.feedback_question_id) {
+						setEditFormValue(data);
+
 						return (
 							<CreateForm
 								formProps={formProps}
 								type="create_question"
-								onSubmit={AddQuestions}
+								onSubmit={SaveQuestions}
 								loading={saveLoading}
 								controls={controls}
 								onCancel={onCancelEdit}
