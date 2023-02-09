@@ -7,7 +7,7 @@ const iconMapping = {
 };
 
 const getService = ({ portPair }) => {
-	const Element = iconMapping[portPair?.service_type || 'fcl_freight'];
+	const Element = iconMapping[portPair?.service_type] || IcMFship;
 
 	return Element;
 };

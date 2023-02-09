@@ -18,7 +18,7 @@ function ServiceDetail({ item, service, formattedData }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.service}>
-				<Element width={24} height={24} style={{ color: service === 'air_freight' ? '#221F20;' : '#436DF4' }} />
+				<Element width={24} height={24} style={{ color: service === 'air_freight' ? '#221F20' : '#436DF4' }} />
 				{startCase(serviceMap[service])}
 			</div>
 			<div className={styles.port_pair}>

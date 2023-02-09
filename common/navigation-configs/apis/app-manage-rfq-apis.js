@@ -92,6 +92,11 @@ const app_manage_rfq = [
 		access_type  : 'private',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'create_contract_guide_audit',
+		access_type  : 'private',
+		service_name : 'rfq',
+	},
 ];
 
 export default app_manage_rfq;
