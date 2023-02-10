@@ -569,6 +569,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'public',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_verification_otp',
+			access_type  : 'public',
+			service_name : 'user',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1615,6 +1625,16 @@ const partner = {
 			api          : 'list_organization_approvals',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'public',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_verification_otp',
+			access_type  : 'public',
+			service_name : 'user',
 		},
 	],
 	supply_crm: [

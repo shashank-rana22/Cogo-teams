@@ -404,5 +404,15 @@ const apis = [
 		feature      : 'search',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'send_verification_otp',
+		access_type  : 'public',
+		service_name : 'user',
+	},
+	{
+		api          : 'verify_verification_otp',
+		access_type  : 'public',
+		service_name : 'user',
+	},
 ];
 export default apis;
