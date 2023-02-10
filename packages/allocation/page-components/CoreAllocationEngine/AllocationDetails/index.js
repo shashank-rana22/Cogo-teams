@@ -15,6 +15,9 @@ function Details() {
 		setParams,
 		partner_id,
 		locale,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	} = useListAllocationDetails();
 
 	return (
@@ -25,6 +28,9 @@ function Details() {
 				listRefetch={listRefetch}
 				partner_id={partner_id}
 				locale={locale}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 			/>
 
 			<List
