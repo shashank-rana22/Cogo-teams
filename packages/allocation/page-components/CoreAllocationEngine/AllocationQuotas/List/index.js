@@ -6,7 +6,14 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { data, toggleRoleType, loading, onChangeParams, setQuotaItem, fetchList } = props;
+	const {
+		data,
+		toggleRoleType,
+		loading,
+		onChangeParams,
+		setQuotaItem,
+		fetchList,
+	} = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
 	//  delete hook

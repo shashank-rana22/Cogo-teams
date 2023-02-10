@@ -19,6 +19,9 @@ function AllocationQuotas() {
 		params,
 		setParams,
 		refetch,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	} = useListAllocationQuotas();
 
 	const toggleRoleType = params?.filters?.quota_type;
@@ -27,9 +30,13 @@ function AllocationQuotas() {
 		<section className={styles.container}>
 			<Header
 				onClickCreateQuota={() => setQuotaItem(true)}
+				params={params}
 				setParams={setParams}
 				loading={listLoading}
 				toggleRoleType={toggleRoleType}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 			/>
 
 			<List
