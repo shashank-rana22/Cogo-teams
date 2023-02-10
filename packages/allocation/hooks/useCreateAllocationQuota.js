@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 const getFormattedValues = (formValues) => {
 	const quotaAttributes = {};
@@ -21,18 +21,41 @@ const getFormattedValues = (formValues) => {
 	return quotaAttributes;
 };
 
+const getPrefillValues = (quota_attributes) => {
+	const newQuotaAttributes = {};
+
+	Object.keys(quota_attributes).forEach((keyName) => {
+		newQuotaAttributes[keyName] = quota_attributes[keyName]?.toString();
+	});
+
+	return newQuotaAttributes;
+};
+
 const useCreateAllocationQuota = (props) => {
 	const {
 		onCloseModal,
 		refetch,
 		radioValue,
 		roleTypeId,
+		isUpdatable,
+		quotaItem,
+		setRoleTypeId,
 	} = props;
 
-	const formProps = useForm();
+	// Todo based on action props can be sent from outside filtered
+
+	const { quota_attributes: quotaAttributes = {}, id } = quotaItem;
+
+	const prefillValues = getPrefillValues(quotaAttributes);
+
+	const formProps = useForm({
+		defaultValues: prefillValues,
+	});
+
+	const apiName = isUpdatable ? 'update_allocation_quota' : 'create_allocation_quota';
 
 	const api = useRequest({
-		url    : '/create_allocation_quota',
+		url    : `/${apiName}`,
 		method : 'post',
 	}, { manual: true });
 
@@ -41,23 +64,19 @@ const useCreateAllocationQuota = (props) => {
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
-		console.log('roleTypeId', roleTypeId);
-
-		if (isEmpty(roleTypeId)) {
-			Toast.info('Please add role-type in order to save');
-
-			return;
-		}
-
-		const payload = {
-			quota_attributes : getFormattedValues(formValues),
-			quota_type       : radioValue,
+		const propsForCreation = {
+			quota_type: radioValue,
 			...(radioValue === 'role' && {
 				role_id: roleTypeId,
 			}),
 			...(radioValue === 'user' && {
 				user_id: roleTypeId,
 			}),
+		};
+
+		const payload = {
+			quota_attributes: getFormattedValues(formValues),
+			...(isUpdatable ? { id } : propsForCreation),
 		};
 
 		try {
@@ -73,6 +92,10 @@ const useCreateAllocationQuota = (props) => {
 			);
 		}
 	};
+
+	useEffect(() => {
+		setRoleTypeId('');
+	}, [radioValue]);
 
 	return {
 		formProps,

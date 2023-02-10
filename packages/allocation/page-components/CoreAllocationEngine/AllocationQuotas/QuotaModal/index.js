@@ -1,5 +1,6 @@
 import { Modal, Button, RadioGroup } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AsyncSelect from '../../../../common/Form/components/AsyncSelect';
@@ -39,7 +40,7 @@ const ROLE_OPTIONS = [
 
 function QuotaModal(props) {
 	const {
-		showCreateQuotas,
+		quotaItem,
 		onCloseModal,
 		refetch,
 	} = props;
@@ -52,8 +53,10 @@ function QuotaModal(props) {
 		},
 	} = useSelector((rdxState) => rdxState);
 
-	const [roleTypeId, setRoleTypeId] = useState('');
 	const [radioValue, setRadioValue] = useState('role');
+	const [roleTypeId, setRoleTypeId] = useState('');
+
+	const isUpdatable = !isEmpty(quotaItem.quota_attributes);
 
 	const {
 		onSave,
@@ -64,74 +67,77 @@ function QuotaModal(props) {
 		refetch,
 		radioValue,
 		roleTypeId,
+		isUpdatable,
+		quotaItem,
+		setRoleTypeId,
 	});
 
 	const { control, handleSubmit } = formProps;
 
-	// console.log('formProps :: ', formProps);
-
 	// Todo roleTypeId
+	// Todo ask radio type to disable
 
 	return (
 		<Modal
-			show={showCreateQuotas}
+			show={quotaItem}
 			position="basic"
 			size="lg"
 			onClose={onCloseModal}
 			closeOnOuterClick={false}
 		>
-			<Modal.Header title="Create Allocation Quota" />
+			<Modal.Header title={`${isUpdatable ? 'Update' : 'Create'} Allocation Quota`} />
 
 			<form onSubmit={handleSubmit(onSave)}>
 				<Modal.Body>
 					<section key={radioValue}>
-						<div className={styles.role_container}>
-							Role Type :
-							<RadioGroup
-								options={ROLE_OPTIONS}
-								value={radioValue}
-								onChange={(role) => setRadioValue(role)}
-								className={styles.group_radio}
-							/>
-
-							{radioValue === 'user' && (
-								<AsyncSelect
-									name="user_id"
-									asyncKey="partner_users"
-									valueKey="user_id"
-									initialCall={false}
-									onChange={(userId) => setRoleTypeId(userId)}
-									value={roleTypeId}
-									placeholder="Select Partner User"
-									params={{
-										filters: {
-											partner_entity_types: ['cogoport'],
-										},
-									}}
+						{!isUpdatable ? (
+							<div className={styles.role_container}>
+								Role Type :
+								<RadioGroup
+									options={ROLE_OPTIONS}
+									value={radioValue}
+									onChange={(role) => setRadioValue(role)}
+									className={styles.group_radio}
 								/>
-							)}
 
-							{radioValue === 'role' && (
-								<AsyncSelect
-									name="role_id"
-									asyncKey="partner_roles"
-									initialCall={false}
-									onChange={(roleId) => setRoleTypeId(roleId)}
-									value={roleTypeId}
-									placeholder="Select Role"
-									// Todo check for vietnam
-									params={{
-										permissions_data_required : false,
-										filters                   : {
-											status           : 'active',
-											stakeholder_id   : partnerId,
-											stakeholder_type : 'partner',
-										},
-									}}
-								/>
-							)}
+								{radioValue === 'user' && (
+									<AsyncSelect
+										name="user_id"
+										asyncKey="partner_users"
+										valueKey="user_id"
+										initialCall={false}
+										onChange={(userId) => setRoleTypeId(userId)}
+										value={roleTypeId}
+										placeholder="Select Partner User"
+										params={{
+											filters: {
+												partner_entity_types: ['cogoport'],
+											},
+										}}
+									/>
+								)}
 
-						</div>
+								{radioValue === 'role' && (
+									<AsyncSelect
+										name="role_id"
+										asyncKey="partner_roles"
+										initialCall={false}
+										onChange={(roleId) => setRoleTypeId(roleId)}
+										value={roleTypeId}
+										placeholder="Select Role"
+										// Todo check for vietnam
+										params={{
+											permissions_data_required : false,
+											filters                   : {
+												status           : 'active',
+												stakeholder_id   : partnerId,
+												stakeholder_type : 'partner',
+											},
+										}}
+									/>
+								)}
+							</div>
+						) : null}
 
 						<section className={styles.form_container}>
 							<div className={styles.form_columns}>
@@ -180,6 +186,7 @@ function QuotaModal(props) {
 					<Button
 						size="md"
 						type="submit"
+						disabled={isUpdatable ? false : !roleTypeId}
 						loading={loadingOnSave}
 						id="save_quota_btn"
 					>

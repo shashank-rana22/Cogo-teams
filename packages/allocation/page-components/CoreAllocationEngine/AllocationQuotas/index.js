@@ -9,11 +9,7 @@ import styles from './styles.module.css';
 
 function AllocationQuotas() {
 	// Todo should go inside hook
-	const [showCreateQuotas, setShowCreateQuotas] = useState(false);
-
-	const onCloseModal = () => {
-		setShowCreateQuotas(false);
-	};
+	const [quotaItem, setQuotaItem] = useState(null);
 
 	const {
 		data,
@@ -29,11 +25,10 @@ function AllocationQuotas() {
 	return (
 		<section className={styles.container}>
 			<Header
-				onClickCreateQuota={() => setShowCreateQuotas(true)}
+				onClickCreateQuota={() => setQuotaItem(true)}
 				setParams={setParams}
 				loading={listLoading}
 				toggleRoleType={toggleRoleType}
-				setShowCreateQuotas={setShowCreateQuotas}
 			/>
 
 			<List
@@ -42,12 +37,13 @@ function AllocationQuotas() {
 				// onChangeParams={onChangeParams}
 				fetchList={refetch}
 				toggleRoleType={toggleRoleType}
+				setQuotaItem={setQuotaItem}
 			/>
 
-			{showCreateQuotas ? (
+			{quotaItem ? (
 				<QuotaModal
-					showCreateQuotas={showCreateQuotas}
-					onCloseModal={onCloseModal}
+					quotaItem={quotaItem}
+					onCloseModal={() => setQuotaItem(null)}
 					refetch={refetch}
 				/>
 			) : null}
