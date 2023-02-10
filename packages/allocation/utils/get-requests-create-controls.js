@@ -1,4 +1,4 @@
-const getControls = () => [
+const controls = [
 	{
 		name    : 'service_type',
 		type    : 'radioGroup',
@@ -102,4 +102,4 @@ const getControls = () => [
 	},
 ];
 
-export default getControls;
+export default controls;

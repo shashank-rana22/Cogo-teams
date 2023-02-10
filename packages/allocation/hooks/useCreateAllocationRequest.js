@@ -5,14 +5,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-import getControls from '../utils/get-requests-create-controls';
+import controls from '../utils/get-requests-create-controls';
 import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
 import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
-const useSaveAllocationRequest = (props) => {
+const useCreateAllocationRequest = (props) => {
 	const { onCloseModal, refetch } = props;
-
-	const controls = getControls();
 
 	const {
 		profile: {
@@ -20,7 +18,7 @@ const useSaveAllocationRequest = (props) => {
 				id: partnerId = '',
 			},
 		},
-	} = useSelector((reduxState) => reduxState);
+	} = useSelector((rdxState) => rdxState);
 
 	const formProps = useForm({
 		defaultValues: {
@@ -70,14 +68,16 @@ const useSaveAllocationRequest = (props) => {
 
 			onCloseModal();
 			refetch();
+			Toast.success('Request created successfully');
 		} catch (err) {
 			Toast.error(
-				getApiErrorString(err?.data)
+				getApiErrorString(err?.response?.data)
 					|| 'Unable to Save, Please try again!!',
 			);
 		}
 	};
 
+	// Todo use useMemo
 	const controlNames = SERVICE_TYPE_MAPPING[service_type] || [];
 
 	const filteredControls = controls.filter((control) => controlNames.includes(control.name)).map((control) => {
@@ -120,4 +120,4 @@ const useSaveAllocationRequest = (props) => {
 	};
 };
 
-export default useSaveAllocationRequest;
+export default useCreateAllocationRequest;

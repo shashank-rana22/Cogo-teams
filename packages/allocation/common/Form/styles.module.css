@@ -1,11 +1,11 @@
 .form_container {
-	margin-top: 1rem;
+	margin-top: 16px;
 }
 
 .form_group {
 	display: flex;
 	flex-direction: row;
-	gap: 1rem;
+	gap: 16px;
 	align-items: center;
 	justify-content: space-between;
 }
