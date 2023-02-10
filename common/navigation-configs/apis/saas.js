@@ -1650,12 +1650,6 @@ const saas = {
 			feature     : 'product',
 		},
 		{
-			api         : 'put_saas_product',
-			access_type : 'private',
-			module      : 'product',
-			feature     : 'product',
-		},
-		{
 			api         : 'post_saas_product_bulk_product_upload',
 			access_type : 'private',
 			module      : 'product',
@@ -1668,13 +1662,13 @@ const saas = {
 			feature     : 'product',
 		},
 		{
-			api         : 'get_saas_error_export',
+			api         : 'get_saas_product_error_export',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
 		},
 		{
-			api         : 'post_saas_product_bulk_product_upload',
+			api         : 'post_saas_product_bulk_products_upload',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
