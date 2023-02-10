@@ -43,30 +43,14 @@ const COLUMNS_MAPPING = [
 			const stakeholderType = getByKey(item, 'stakeholder_type', '___');
 			const stakeholderName = getByKey(item, 'stakeholder_id.name', '___');
 
-			const STAKEHOLDER_COLOR_MAPPING = {
-				ckam              : 'orange',
-				sales_agent       : 'blue',
-				credit_controller : 'red',
-
-			};
-
 			return (
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div className={styles.text}>{startCase(stakeholderName.toLowerCase())}</div>
 
-					<div className={styles.lower_label}>
-						{stakeholderType
-							? (
-								<Pill
-									size="sm"
-									color={STAKEHOLDER_COLOR_MAPPING[stakeholderType]}
-									style={{ marginLeft: '0px' }}
-								>
-									{startCase(stakeholderType)}
-								</Pill>
-							) : ''}
-
+					<div className={`${styles.lower_label} ${styles.email_id}`}>
+						{startCase(stakeholderType)}
 					</div>
+
 				</div>
 			);
 		},

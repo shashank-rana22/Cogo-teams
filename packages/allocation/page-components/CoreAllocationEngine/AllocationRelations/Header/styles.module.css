@@ -18,6 +18,10 @@
     display: flex;
 }
 
+.toggle_container{
+	padding: 0px;
+}
+
 .filter_dot {
     height: 8px;
 	width: 8px;

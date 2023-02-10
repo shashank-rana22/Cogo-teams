@@ -20,7 +20,7 @@ function CoreAllocationEngine() {
 				/>
 			</section>
 
-			<div style={{ margin: '16px 0px' }}>
+			<div className={styles.tab_list}>
 				{/* // Todo make it a mapping  with title,tab Component,key */}
 
 				<Tabs

@@ -30,15 +30,15 @@ function Header({
 	return (
 		<div className={styles.header_container}>
 
-			<div>
+			<div className={styles.toggle_container}>
 				<Toggle
 					name="relation_status"
 					size="md"
 					offLabel="Active"
 					onLabel="Pending"
-					style={{ padding: '0px' }}
 					onChange={(event) => onChangeToggle(event)}
 				/>
+
 			</div>
 
 			<div className={styles.button_container}>
@@ -48,6 +48,7 @@ function Header({
 						placeholder="Search by Company Name/User/Stakeholder"
 					/>
 				</div>
+
 				<Button size="md" themeType="secondary">
 					FILTER
 					<IcMFilter style={{ marginLeft: '4px' }} />
@@ -65,6 +66,7 @@ function Header({
 			</div>
 
 		</div>
+
 	);
 }
 
