@@ -1,5 +1,6 @@
 // import Layout from '@cogo/business-modules/form/Layout';
 import { Button } from '@cogoport/components';
+import { InputController } from '@cogoport/forms';
 import React from 'react';
 
 import PasswordValidator from '../PasswordValidator';
@@ -15,22 +16,26 @@ function ChangePassword({
 }) {
 	const {
 		// controls = [],
-		formProps = {},
+		// formProps = {},
 		// error = {},
 		onCreate = () => {},
 		onError = () => {},
 		loading = false,
+		control,
+		errors,
+		handleSubmit = () => {},
+		getValues,
 	} = useChangePassword({
 		refetch,
 		personDetails,
 		updatePasswordControls,
 		setShowModal,
 	});
-	const {
-		// fields = {},
-		handleSubmit = () => {},
-		getValues = () => {},
-	} = formProps;
+	// const {
+	// 	// fields = {},
+	// 	handleSubmit = () => {},
+	// 	getValues = () => {},
+	// } = formProps;
 
 	const { password = '' } = getValues();
 
@@ -45,30 +50,40 @@ function ChangePassword({
 				id_prefix="partnerUser"
 			/> */}
 
-			<PasswordValidator password={password} />
+			<InputController
+				control={control}
+				errors={errors}
+				name="password"
+				// prefix="partnerUser"
+			/>
+
+			<div className={styles.password_validator}>
+				<PasswordValidator password={password} />
+			</div>
 
 			<div className={styles.button_container}>
 				<div
 					className={styles.primary_button}
-
 				>
 					<div className={styles.cancel_button}>
-						<Button onClick={() => setShowModal(false)} disabled={loading}>
+						<Button
+							onClick={() => setShowModal(false)}
+							disabled={loading}
+							themeType="secondary"
+						>
 							CANCEL
 						</Button>
 					</div>
-
 				</div>
 
 				<div className={styles.primary_button}>
 					<Button
 						disabled={loading}
 						onClick={handleSubmit(onCreate, onError)}
+						themeType="primary"
 					>
 						UPDATE
-
 					</Button>
-
 				</div>
 			</div>
 		</div>

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import useGetAutorizationUrl from './hooks/useGetAutorizationUrl';
 import useLocalStorage from './hooks/useLocalStorage';
 import useScopes from './hooks/useScopes';
+import styles from './styles.module.css';
 
 function GrantAccess({ email = '' }) {
 	const [scopes, setScopes] = useState([]);
@@ -37,21 +38,37 @@ function GrantAccess({ email = '' }) {
 	};
 
 	return (
-		<div>
-			<p>{email}</p>
+		<div className={styles.container}>
+			<p className={styles.email_id}>
+				(
+				{email}
+				)
+			</p>
+
 			<p>
 				Select Email permission. (We highly suggest keep all permission for
 				seamless experience)
 			</p>
+
 			<Select
 				options={scopeOptions}
 				onChange={setScopes}
 				value={scopes}
 				multiple
 			/>
-			<Button onClick={handleRedirect} style={{ marginTop: 16 }}>
-				Authorise
-			</Button>
+
+			<div className={styles.button_container}>
+				<Button
+					onClick={handleRedirect}
+					style={{
+						marginTop    : '16px',
+						marginBottom : '16px',
+					}}
+					className="primary"
+				>
+					Authorise
+				</Button>
+			</div>
 		</div>
 	);
 }

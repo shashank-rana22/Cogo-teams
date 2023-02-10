@@ -1,13 +1,18 @@
 
 .card_container{ 
 	padding: 12px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .label_text {
 	font-weight: 400;
 	font-size: 14px;
 	color: #828282;
-	padding: 4px 0 4px 4px;
+	padding: 4px 4px 4px 4px;
 }
 
 .value_text{
@@ -19,6 +24,7 @@
 
 .label_value_container{
 	display: flex;
+	align-items: center;
 }
 
 
@@ -30,9 +36,9 @@
 }
 
 .verify_text{
-	color: #9b86f0;
+	color: #034AFD;
 	text-decoration: underline;
-	font-size: 14px;
+	font-size: 12px;
 	cursor: pointer;
 	padding-left: 12px;
 }
@@ -42,8 +48,6 @@
 	border-radius: 4px;
 	padding: 2px 5px;
 	font-size: 12px;
-	margin-right: 12px;
-	margin-bottom: 4px;
 	line-height: 16px;
 	color: #333333;
 	width: fit-content;
@@ -51,6 +55,5 @@
 
 .flex{
 	display: flex;
-	wrap:wrap
-
+	flex-wrap: wrap;
 }

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+// import { useForm } from '@cogoport/forms';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
@@ -17,7 +18,7 @@ const controls = [
 ];
 
 const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
-	const [errors, setErrors] = useState({});
+	// const [errors, setErrors] = useState({});
 	const [showEnterOtpComponent, setShowEnterOtpComponent] = useState(false);
 	const [otpNumber, setOtpNumber] = useState('');
 
@@ -50,9 +51,10 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}), [controls, selectedUser]);
 
-	const formProps = useForm(newControls);
+	// const formProps = useForm(newControls);
+	const { handleSubmit, formState: { errors }, control: actualControl, watch, getValues } = useForm();
 
-	const watchMobileNumberControl = formProps.watch('mobileNumber');
+	const watchMobileNumberControl = watch('mobileNumber');
 
 	useEffect(() => {
 		if (showEnterOtpComponent) setShowEnterOtpComponent(false);
@@ -68,11 +70,11 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	// }, []);
 
-	const onErrors = (errs = {}) => setErrors({ ...errs });
+	// const onErrors = (errs = {}) => setErrors({ ...errs });
 
 	const verifyMobileNumber = async ({ actionType = {}, ...restProps }) => {
 		try {
-			const values = formProps.getValues();
+			const values = getValues();
 
 			let payload = {
 				id                  : selectedUser.user_id,
@@ -111,16 +113,18 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 
 	return {
 		controls: newControls,
-		formProps,
-		errors,
+		// formProps,
 		onSubmit,
-		onErrors,
+		// onErrors,
 		showEnterOtpComponent,
 		otpNumber,
 		setOtpNumber,
 		verifyMobileNumberAPI,
 		sendOtpNumber,
 		verifyOtpNumber,
+		actualControl,
+		errors,
+		handleSubmit,
 	};
 };
 

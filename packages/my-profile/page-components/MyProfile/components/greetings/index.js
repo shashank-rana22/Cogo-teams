@@ -1,16 +1,17 @@
 // import getField from '@cogo/business-modules/form/components';
 import { Button, Modal, Toast, Avatar } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { useForm, UploadController } from '@cogoport/forms';
 // import Avatar from '@cogoport/front/components/admin/Avatar';
-import { IcMDelete, IcCCamera } from '@cogoport/icons-react';
+import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import ChangePassword from '../ChangePassword';
 
-import getControls from './controls';
+// import getControls from './controls';
 import GrantOutlookAccess from './GrantOutlookAccess';
 import PersonDetails from './PersonalDetails';
+import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import styles from './styles.module.css';
 
 function Greetings({
@@ -26,38 +27,43 @@ function Greetings({
 	// 	'partner',
 	// )('/update_partner_user');
 
-	const [trigger] = useRequest({
-		url    : 'update_partner_user',
+	const [{ loading }, trigger] = useRequest({
+		url    : '/update_partner_user',
 		method : 'post',
-	}, { manual: false });
+	}, {
+		manual: false,
+	});
 
 	const { name = '', picture = '', lowest_geo_location = {} } = detailsData || {};
+
 	const { name:locationName = '' } = lowest_geo_location || {};
 
 	const [showModal, setShowModal] = useState(false);
+
+	const [editNameModal, setEditNameModal] = useState(false);
 
 	const [changePasswordModal, setChangepasswordModal] = useState(false);
 
 	// const FileUploader = getField('file');
 
-	const controls = getControls(detailsData);
+	// const controls = getControls(detailsData);
 
 	// const { fields, handleSubmit, watch, setValues } = useForm(controls);
-	const { handleSubmit, watch, setValues } = useForm(controls);
+	// const { handleSubmit, watch, setValues } = useForm(controls);
+	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
 
 	const watchProfilePicture = watch('profile_picture_url');
 
 	const onOuterClick = () => {
 		setShowModal(false);
-		setValues({
-			profile_picture_url: picture,
-		});
+		setEditNameModal(false);
+		setValue('profile_picture_url', watchProfilePicture?.finalUrl || picture);
 	};
 
 	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				picture : values?.profile_picture_url,
+				picture : values?.profile_picture_url?.finalUrl,
 				id      : partner_user_id,
 			};
 
@@ -100,6 +106,9 @@ function Greetings({
 
 	return (
 		<div className={styles.main_container}>
+
+			<div className={styles.empty_background} />
+
 			<div className={styles.image_upload_container}>
 				<div
 					className={styles.image_container}
@@ -108,30 +117,58 @@ function Greetings({
 					onClick={() => setShowModal(true)}
 				>
 					{picture ? (
-						<img src={picture} alt="loading" className="img" />
+						<img
+							src={picture}
+							alt="loading"
+							className={styles.avatar_container}
+						/>
 					) : (
 						<div className={styles.avatar_container}>
 							<Avatar personName={name} size="140px" />
-
 						</div>
 					)}
 				</div>
 				<div className={styles.camera_icon}>
 					<IcCCamera
 						onClick={() => setShowModal(true)}
-						height={35}
-						width={35}
-						fill="#FF00FF"
+						height={28}
+						width={28}
+						fill="#000000"
 						className="icon"
 					/>
 				</div>
 			</div>
-			<div className={styles.greeting_text}>
-				{name}
-				,
-				{' '}
-				{locationName}
 
+			<div>
+				<div className={styles.greeting_text}>
+					{name}
+					,
+					{' '}
+					<div className={styles.location_name}>
+						{locationName}
+					</div>
+
+					<div className={styles.head}>
+						<IcMEdit
+							size={1.8}
+							onClick={() => setEditNameModal(true)}
+							style={{ cursor: 'pointer', marginTop: '4px' }}
+						/>
+						<Modal
+							show={editNameModal}
+							onClose={() => setEditNameModal(false)}
+							onOuterClick={onOuterClick}
+							width={540}
+						>
+							<EditPersonalDetails
+								detailsData={detailsData}
+								setShowModal={setEditNameModal}
+								refetch={setRefetch}
+								partner_user_id={partner_user_id}
+							/>
+						</Modal>
+					</div>
+				</div>
 			</div>
 
 			<PersonDetails
@@ -158,59 +195,77 @@ function Greetings({
 				onClose={onOuterClick}
 				onOuterClick={onOuterClick}
 			>
-				<div className={styles.change_picture_text}>Change your profile picture</div>
+				<div className={styles.modal_container}>
+					<div className={styles.change_picture_text}>Change your profile picture</div>
 
-				<div className={styles.picture_container}>
-					<div style={{ paddingLeft: '20px', paddingTop: '20px' }}>
-						<div style={{ maxWidth: 300 }}>
-							<div className={styles.upload_picture_text}>Upload picture</div>
-							{/* <FileUploader {...fields.profile_picture_url} /> */}
-						</div>
+					<div className={styles.picture_container}>
+						<div>
 
-						<div className={styles.file_upload_container}>
-							<div className={styles.delete_icon}>
-								<IcMDelete
-									height={18}
-									width={20}
-									className="icon"
+							<div className={styles.upload_picture_container}>
+								<div className={styles.upload_picture_text}>Upload picture</div>
+
+								<div className={styles.upload_controller}>
+									<UploadController
+										control={control}
+										errors={errors}
+										name="profile_picture_url"
+									/>
+								</div>
+							</div>
+
+							<div className={styles.file_upload_container}>
+
+								<div className={styles.delete_icon}>
+									<IcMDelete
+										height={18}
+										width={20}
+										className="icon"
+										onClick={onDeleteButton}
+									/>
+								</div>
+
+								<div
+									className={styles.upload_picture_text}
+									role="presentation"
 									onClick={onDeleteButton}
-								/>
-							</div>
-							<div className={styles.upload_picture_text} role="presentation" onClick={onDeleteButton}>
-								Remove Picture
+								>
+									Remove Picture
+								</div>
+
 							</div>
 						</div>
+
+						{picture || watchProfilePicture ? (
+							<img
+								src={watchProfilePicture?.finalUrl || picture}
+								alt="loading"
+								className={styles.avatar_container}
+							/>
+						) : (
+							<div className={styles.avatar_container}>
+								<Avatar name={name} />
+							</div>
+						)}
+
 					</div>
 
-					{picture ? (
-						<img
-							src={watchProfilePicture || picture}
-							alt="loading"
-							className="img"
-						/>
-					) : (
-						<div className={styles.avatar_container}>
-							{/* <Avatar name={name} /> */}
-							Avatar
-						</div>
-					)}
-				</div>
-
-				<div className={styles.button_container}>
-					<Button
-						className="primary sm"
-						onClick={onOuterClick}
-						style={{ background: '#FFFFFF', color: '#393F70' }}
-					>
-						CANCEL
-					</Button>
-					<Button
-						onClick={handleSubmit(onSubmit)}
-						className="primary sm"
-						type="submit"
-					>
-						SAVE
-					</Button>
+					<div className={styles.button_container}>
+						<Button
+							className="secondary"
+							onClick={onOuterClick}
+							style={{ background: '#FFFFFF', color: '#393F70' }}
+						>
+							CANCEL
+						</Button>
+						<Button
+							onClick={handleSubmit(onSubmit)}
+							className="primary sm"
+							type="submit"
+							disable={loading}
+						>
+							SAVE
+						</Button>
+					</div>
 				</div>
 			</Modal>
 

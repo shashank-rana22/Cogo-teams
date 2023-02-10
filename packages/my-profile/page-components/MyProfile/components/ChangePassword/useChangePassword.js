@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -18,9 +19,11 @@ const useChangePassword = ({
 
 	const controls = updatePasswordControls();
 
-	const formProps = useForm(controls);
+	// const formProps = useForm(controls);
 
-	const watchPassword = formProps?.watch('password');
+	const { handleSubmit, formState: { errors }, control, watch, getValues } = useForm();
+
+	const watchPassword = watch('password');
 
 	useEffect(() => {
 		setError((previousErrors) => ({
@@ -46,8 +49,10 @@ const useChangePassword = ({
 
 			refetch();
 			setShowModal(false);
-		} catch (e) {
-			Toast.error(e.data);
+		} catch (err) {
+			Toast.error(
+				getApiErrorString(err?.data) || 'Invalid Password',
+			);
 		}
 	};
 
@@ -57,11 +62,15 @@ const useChangePassword = ({
 
 	return {
 		controls,
-		formProps,
+		// formProps,
 		error,
 		onCreate,
 		onError,
 		loading,
+		control,
+		handleSubmit,
+		errors,
+		getValues,
 	};
 };
 

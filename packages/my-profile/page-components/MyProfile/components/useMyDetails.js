@@ -11,7 +11,7 @@ const useMyDetails = (partner_user_id) => {
 	// });
 
 	const [{ loading = false, data }, trigger] = useRequest({
-		url    : 'get_partner_user',
+		url    : '/get_partner_user',
 		method : 'GET',
 	}, { manual: true });
 

@@ -4,13 +4,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-// const getColor = () => {
-// 	const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
+const getColor = () => {
+	const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
 
-// 	const index = Math.floor(Math.random() * (colorArr?.length + 1));
-// 	const color = colorArr[index];
-// 	return color;
-// };
+	const index = Math.floor(Math.random() * (colorArr.length + 1));
+	const color = colorArr[index];
+	return color;
+};
 
 function UserCard({
 	user_data = {},
@@ -98,7 +98,9 @@ function UserCard({
 						<div
 							className={styles.avatar}
 							// className={type}
-							// background={user_data?.block_access ? '#ffe3e3' : getColor()}
+							style={{
+								background: `${user_data?.block_access ? '#ffe3e3' : getColor()}`,
+							}}
 						>
 							<div className={styles.avatar_text}>{getInitials(user_data?.name)}</div>
 						</div>

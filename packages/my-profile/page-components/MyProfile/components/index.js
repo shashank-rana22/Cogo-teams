@@ -14,6 +14,7 @@ function MyProfile() {
 	} = useSelector((state) => state);
 
 	const { partner_user_id = '' } = partner || {};
+
 	const {
 		detailsData,
 		refetch = () => {},
@@ -50,7 +51,6 @@ function MyProfile() {
 			<div className={styles.main_container}>
 				<div className={styles.container}>
 					<div className={styles.header}>
-
 						<Header
 							detailsData={detailsData}
 							setRefetch={refetch}

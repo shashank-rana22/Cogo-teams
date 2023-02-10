@@ -14,7 +14,9 @@ function Services({ detailsData }) {
 			return <div className={styles.empty_text}>No services</div>;
 		}
 
-		return services.map((service) => <div className={styles.service_tag}>{displayServiceMapping[service]}</div>);
+		return services.map((service) => (displayServiceMapping[service]
+			? <div className={styles.service_tag}>{displayServiceMapping[service]}</div>
+			: null));
 	};
 
 	return (

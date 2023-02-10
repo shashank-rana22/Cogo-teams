@@ -1,5 +1,6 @@
 // import OTPLayout from '@cogo/business-modules/components/OTPLayout';
 // import Layout from '@cogo/business-modules/form/Layout';
+import { InputController } from '@cogoport/forms';
 import React from 'react';
 
 // import { Container, Title, Form, Button, OtpContainer } from './styles';
@@ -13,17 +14,18 @@ function MobileVerification({ selectedUser = {}, type = '' }) {
 		// controls = [],
 		// formProps = {},
 		// errors = {},
-		// onSubmit = () => {},
+		onSubmit = () => {},
 		// onErrors = () => {},
 		// showEnterOtpComponent = false,
-		otpNumber = '',
+		// otpNumber = '',
 		// setOtpNumber = () => {},
 		// verifyMobileNumberAPI = {},
 		// sendOtpNumber = () => {},
 		// verifyOtpNumber = () => {},
+		actualControl,
+		// errors = {},
+		handleSubmit = () => {},
 	} = useMobileNoVerification({ selectedUser, type });
-
-	console.log('otpNumber', otpNumber);
 
 	// const { fields = {}, handleSubmit = () => {} } = formProps;
 
@@ -31,10 +33,15 @@ function MobileVerification({ selectedUser = {}, type = '' }) {
 		<div className={styles.container}>
 			<div className={styles.title}>Mobile Number Verification</div>
 
-			{/* <div className={styles.form} onSubmit={handleSubmit(onSubmit, onErrors)}>
-				<Layout controls={controls} fields={fields} errors={errors} />
+			<div className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+				{/* <Layout controls={controls} fields={fields} errors={errors} /> */}
 
-				{showEnterOtpComponent && (
+				<InputController
+					control={actualControl}
+					name="mobileNumber"
+				/>
+
+				{/* {showEnterOtpComponent && (
 					<div className={styles.otp_container}>
 						<OTPLayout
 							otpLength={OTP_LENGTH}
@@ -43,20 +50,22 @@ function MobileVerification({ selectedUser = {}, type = '' }) {
 							sendOtp={(obj) => sendOtpNumber({ ...obj })}
 						/>
 					</div>
-				)}
+				)} */}
 
-				{!showEnterOtpComponent && (
-					<div className={styles.button}
+				{/* {!showEnterOtpComponent && (
+					<div
+						className={styles.button}
 						type="submit"
 						size="lg"
 						disabled={verifyMobileNumberAPI.loading}
 					>
 						Get OTP
 					</div>
-				)}
+				)} */}
 
-				{showEnterOtpComponent && (
-					<div className={styles.button}
+				{/* {showEnterOtpComponent && (
+					<div
+						// className={styles.button}
 						type="submit"
 						size="lg"
 						onClick={verifyOtpNumber}
@@ -64,8 +73,8 @@ function MobileVerification({ selectedUser = {}, type = '' }) {
 					>
 						Submit
 					</div>
-				)}
-			</div> */}
+				)} */}
+			</div>
 		</div>
 	);
 }

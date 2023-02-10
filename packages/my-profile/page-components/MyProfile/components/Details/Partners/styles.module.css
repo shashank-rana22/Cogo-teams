@@ -10,23 +10,20 @@
 	
 }
 
-.label_text{font-weight: 400;
+.label_text{
+	font-weight: 400;
 	font-size: 14px;
 	color: #828282;
 	padding: 4px 0 4px 4px;
 }
 
 .value_text{
-	font-weight: 400;
-	font-size: 14px;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 14px;
 	color: #221F20;
 }
 
 .label_value_container{
-	/* display: flex; */
-	/* padding-right: 16px; */
 }
 
 .elements{

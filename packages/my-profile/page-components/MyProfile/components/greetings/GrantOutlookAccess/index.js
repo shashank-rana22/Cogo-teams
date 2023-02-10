@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import GrantAccess from './GrantAccess';
 
 function GrantOutlookAccess() {
-	const email = useSelector(({ profile }) => profile.email);
+	const email = useSelector((state) => state?.profile?.user?.email);
+
 	const [showAccessUrl, setAccessUrl] = useState(false);
 	return (
 		<div>

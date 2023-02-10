@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
-// import { InputController } from '@cogoport/forms';
+import { useForm, InputController } from '@cogoport/forms';
 
+// import controls from './controls';
 import styles from './styles.module.css';
 import useEditPersonalDetails from './useEditPersonalDetails';
 
@@ -12,7 +13,7 @@ function EditPersonalDetails({
 }) {
 	const {
 		// fields = {},
-		handleSubmit = () => {},
+		// handleSubmit = () => {},
 		onCreate = () => {},
 		loading = false,
 	} = useEditPersonalDetails({
@@ -22,12 +23,23 @@ function EditPersonalDetails({
 		partner_user_id,
 	});
 
+	const { handleSubmit, formState: { errors }, control } = useForm();
+
 	return (
 		<div style={{ padding: '12px' }}>
 			<div className={styles.heading}>Edit Name</div>
 
 			<div className={styles.layout_container}>
-				{/* <InputController {...fields.name} /> */}
+				<InputController
+					control={control}
+					name="name"
+					rules={{ required: 'Name is required.' }}
+				/>
+				{errors.name && (
+					<div className={styles.error_text}>
+						{errors.name.message}
+					</div>
+				)}
 			</div>
 
 			<div className={styles.button_container}>

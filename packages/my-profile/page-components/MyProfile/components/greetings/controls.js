@@ -19,6 +19,7 @@ const getControls = (detailsData) => [
 		rules  : {
 			required: true,
 		},
+		span: 12,
 	},
 ];
 
