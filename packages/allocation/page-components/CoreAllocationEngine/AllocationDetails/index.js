@@ -1,5 +1,6 @@
 import useListAllocationDetails from '../../../hooks/useListAllocationDetails';
 
+import ConfigurationDetails from './ConfigurationDetails';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
@@ -18,6 +19,7 @@ function Details() {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		configurationDetails,
 	} = useListAllocationDetails();
 
 	return (
@@ -32,6 +34,8 @@ function Details() {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 			/>
+
+			<ConfigurationDetails configurationDetails={configurationDetails} />
 
 			<List
 				list={list}

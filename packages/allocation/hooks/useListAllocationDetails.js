@@ -47,7 +47,17 @@ const useListAllocationDetails = () => {
 		}));
 	};
 
-	const { list = [], ...paginationData } = data || {};
+	const {
+		allocation_configuration = {},
+		allocation_instance = {},
+		list = [],
+		...paginationData
+	} = data || {};
+
+	const configurationDetails = {
+		...allocation_configuration,
+		...allocation_instance,
+	};
 
 	return {
 		loading,
@@ -63,6 +73,7 @@ const useListAllocationDetails = () => {
 		searchQuery,
 		searchValue,
 		setSearchValue,
+		configurationDetails,
 	};
 };
 
