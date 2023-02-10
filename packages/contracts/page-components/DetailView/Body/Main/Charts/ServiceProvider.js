@@ -81,7 +81,7 @@ function ServiceProvier({
 							</>
 						) : null}
 						{data?.status === 'pending_approval'
-            && activePair?.status === 'quoted' ? (
+            && (activePair?.status === 'quoted' || activePair?.status === 'pending') ? (
 	<Button
 		themeType="link"
 		style={{ color: '#0B44F9' }}

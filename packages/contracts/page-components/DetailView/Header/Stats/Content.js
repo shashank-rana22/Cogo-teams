@@ -21,7 +21,7 @@ function Content({
 
 	let counter = 0;
 	formattedData.forEach((item) => {
-		if (item?.status === 'quoted') {
+		if (item?.status === 'quoted' || item?.status === 'pending') {
 			counter += 1;
 		}
 	});
