@@ -68,7 +68,7 @@ const columnsMapping = [
 				</Tooltip>
 			);
 		},
-		flex: 1.5,
+		flex: 1.6,
 	},
 	{
 		key      : 'users',
@@ -109,13 +109,13 @@ const columnsMapping = [
 				</Tooltip>
 			);
 		},
-		flex: 1.5,
+		flex: 1.6,
 	},
 	{
 		key      : 'stakeholder_type',
 		label    : 'Stakeholder Type',
 		getValue : (item) => startCase(getByKey(item, 'stakeholder_type', '___')),
-		flex     : 1.25,
+		flex     : 1.1,
 	},
 	{
 		key      : 'locking_criterion',
@@ -160,7 +160,7 @@ const columnsMapping = [
 				/>
 			);
 		},
-		flex: 1,
+		flex: 1.2,
 	},
 ];
 

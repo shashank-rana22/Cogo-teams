@@ -9,6 +9,9 @@ function Header({
 	setShowCreateRelationModal = () => {},
 	setParams = () => {},
 	setActiveTab = () => {},
+	searchValue,
+	setSearchValue = () => {},
+	debounceQuery,
 }) {
 	const onChangeToggle = (event) => {
 		setParams((previousParams) => ({
@@ -46,6 +49,9 @@ function Header({
 					<SearchInput
 						size="sm"
 						placeholder="Search by Company Name/User/Stakeholder"
+						setGlobalSearch={setSearchValue}
+						debounceQuery={debounceQuery}
+						value={searchValue}
 					/>
 				</div>
 

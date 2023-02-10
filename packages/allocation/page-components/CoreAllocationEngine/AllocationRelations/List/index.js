@@ -17,6 +17,7 @@ function List({
 	setConfirmModalState = () => {},
 	paginationData = {},
 	getNextPage,
+	searchQuery,
 	// setActiveTab = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -32,7 +33,8 @@ function List({
 			page    : 1,
 			filters : {
 				...params.filters,
-				id: checkedRowsId,
+				id : checkedRowsId,
+				q  : searchQuery || undefined,
 			},
 		});
 	};
