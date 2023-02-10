@@ -1,6 +1,6 @@
 import currencies from '../helpers/currencies';
 
-const fclDetetionFreeDays = ({ heading = '', unit = 'per_container', type = '' }) => {
+const fclDetetionFreeDays = ({ heading = '', unit = 'per_container', type = '', data }) => {
 	let name1 = 'free_limit';
 	let name2 = 'unit';
 	let name3 = 'slabs';
@@ -21,7 +21,9 @@ const fclDetetionFreeDays = ({ heading = '', unit = 'per_container', type = '' }
 		label       : 'Free Days Limit',
 		placeholder : 'type here...',
 		min         : 0,
-		rules       : { required: 'This is required' },
+		value       : data?.data?.free_days_detention_destination
+		|| data?.data?.destination_storage_Free_days,
+		rules: { required: 'This is required' },
 	},
 	{
 		name        : name2,

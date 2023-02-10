@@ -13,7 +13,7 @@ const chargeCodeMapping = {
 	fcl_cfs         : 'cfs_charge_codes',
 	fcl_customs     : 'customs_charge_codes',
 	haulage_freight : 'haulage_charge_codes',
-	trailer_freight : 'freight_charge_codes',
+	trailer_freight : 'freights_charge_codes',
 };
 
 const Config = ({ data }) => {
@@ -40,6 +40,7 @@ const Config = ({ data }) => {
 			field.push(...freeDaysSection({
 				heading : 'Destination Detention Days',
 				unit    : 'per_container',
+				data,
 			}));
 		}
 	} else if (data?.service === 'air_freight') {
@@ -69,6 +70,7 @@ const Config = ({ data }) => {
 				heading : 'Destination Storage Hours',
 				unit    : 'per_kg_per_hour',
 				type    : 'destination_air',
+				data,
 			}));
 		}
 	} else if (data?.service === 'lcl_freight') {
@@ -90,6 +92,7 @@ const Config = ({ data }) => {
 			field.push(...freeDaysSection({
 				heading : 'Origin Storage Days',
 				unit    : 'per_kg_per_day',
+				data,
 			}));
 		}
 	} else if (['trailer_freight', 'haulage_freight'].includes(data?.service)) {

@@ -276,6 +276,33 @@ const useUpdateSpotNegotiationRate = ({
 	|| !['fcl_freight', 'lcl_freight', 'air_freight'].includes(service?.service));
 
 	const handleData = async (value) => {
+		const slabs = value?.slabs || value?.destination?.slabs;
+		const satisfyingDaysLimit = slabs.every((itm) => (
+			Number(itm.lower_limit) < Number(itm.upper_limit)
+				&& Number(itm.upper_limit) > Number(value?.free_limit)
+		));
+		const checkIfFreeLimitConditionsMeet = () => {
+			const upperLimit = slabs.length
+				? slabs[slabs.length - 1]?.upper_limit
+				: value?.free_limit;
+			const maxSlab = Math.max(Number(value?.free_limit), Number(upperLimit));
+			return Number(maxSlab) >= Number(service?.data?.destination_storage_free_days
+				|| service?.data?.free_days_detention_destination);
+		};
+
+		if (!satisfyingDaysLimit) {
+			Toast.error(
+				'upper limit and lower limit of days should always be greater than free limit days',
+			);
+			return;
+		}
+		if (!checkIfFreeLimitConditionsMeet()) {
+			Toast.error(
+				`Requested No of Days is ${service?.data?.free_days_detention_destination} 
+				which is greater than the value entered.`,
+			);
+			return;
+		}
 		try {
 			const payload = getPayload({ value, service });
 			const response = await trigger({ data: { ...payload, procured_by_id: user_profile?.id } });
