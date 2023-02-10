@@ -1,0 +1,83 @@
+.container {
+	padding: 16px;
+}
+
+.header_section {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px 0;
+
+	.header_text {
+		font-size: 18px;
+		font-weight: bold;
+		color: #393f70;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.redirect_container {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+
+	.redirect_text {
+		font-size: 18px;
+		font-weight: bold;
+		margin: 0px;
+	}
+}
+
+.stats_section {
+	display: flex;
+
+	.performance_chart {
+		flex: 1;
+	}
+	
+	.team_stats {
+		flex: 1;
+		display: flex;
+		justify-content: flex-end;
+		padding-left: 8px;
+		gap: 12px;
+	}
+}
+
+.list_section {	
+}
+
+.list_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 0;
+	margin-top: 16px;
+
+	.list_header_text {
+		font-size: 18px;
+		font-weight: bold;
+		color: "#393f70";
+		margin: 0px;
+	}
+}
+
+.list_header_filters {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+
+.month_container {
+	margin-right: 16px;
+
+	:global(.ui_select_options_control) {
+		width: 160px;
+		height: 38px;
+	}
+}

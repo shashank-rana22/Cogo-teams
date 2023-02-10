@@ -1,0 +1,44 @@
+.container {
+	margin: 16px;
+}
+
+.go_back_container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	font-weight: 500;
+	font-size: 16px;
+	padding-top: 16px;
+	color: #393f70;
+	cursor: pointer;
+}
+
+.redirect_container {
+	display: flex;
+	align-items: center;
+	padding-top: 16px;
+}
+
+.top_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 0;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+
+	& .tippy-box .tippy-content {
+		max-height: 100%;
+	}
+	.filter-control-label {
+		margin-top: 16px;
+		font-weight: 500;
+	}
+	.bussiness_module_filter_header {
+		margin-bottom: 8px;
+	}
+}
+
