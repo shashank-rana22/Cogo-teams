@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@cogoport/icons-react": "^1.0.53",
+		"@cogoport/icons-react": "^1.0.57",
 		"react": "18.2.0"
 	}
 }
