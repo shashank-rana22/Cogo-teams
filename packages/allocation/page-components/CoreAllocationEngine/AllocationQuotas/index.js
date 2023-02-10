@@ -19,9 +19,10 @@ function AllocationQuotas() {
 		params,
 		setParams,
 		refetch,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	} = useListAllocationQuotas();
-
-	console.log('quotaItem', quotaItem);
 
 	const toggleRoleType = params?.filters?.quota_type;
 
@@ -29,9 +30,13 @@ function AllocationQuotas() {
 		<section className={styles.container}>
 			<Header
 				onClickCreateQuota={() => setQuotaItem(true)}
+				params={params}
 				setParams={setParams}
 				loading={listLoading}
 				toggleRoleType={toggleRoleType}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 			/>
 
 			<List
@@ -42,7 +47,7 @@ function AllocationQuotas() {
 				toggleRoleType={toggleRoleType}
 				setQuotaItem={setQuotaItem}
 			/>
-			{/* Todo isupdatable can be called   */}
+			{/* Todo isUpdatable can be called   */}
 
 			{quotaItem && (
 				<Modal

@@ -1,7 +1,12 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useListAllocationQuotas = () => {
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [searchValue, setSearchValue] = useState();
+
 	const [params, setParams] = useState({
 		sort_type : 'desc',
 		sort_by   : 'created_at',
@@ -20,12 +25,15 @@ const useListAllocationQuotas = () => {
 
 	const [{ loading, data }, refetch] = api;
 
-	// const getNextPage = (newPage) => {
-	// 	setParams((previousParams) => ({
-	// 		...previousParams,
-	// 		page: newPage,
-	// 	}));
-	// };
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
 
 	return {
 		data,
@@ -34,6 +42,9 @@ const useListAllocationQuotas = () => {
 		params,
 		setParams,
 		refetch,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	};
 };
 

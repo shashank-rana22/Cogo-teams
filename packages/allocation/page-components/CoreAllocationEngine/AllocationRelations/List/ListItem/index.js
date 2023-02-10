@@ -1,6 +1,9 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Popover, Pill, Tooltip } from '@cogoport/components';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
+import ActionContent from './ActionContent';
 import styles from './styles.module.css';
 
 const COLUMNS_MAPPING = [
@@ -107,27 +110,32 @@ const COLUMNS_MAPPING = [
 		flex: 1,
 	},
 	// {
-	//     key: 'action',
-	//     label: 'action',
-	//     getValue: (item) => {
-	//         const
-	//     }
-	// }
+	//     key      : 'action',
+	//     label    : 'action',
+	//     getValue : (item) => {
+
+	//     },
+	// },
 ];
 
 function ListItem({
 	item,
 	checkedRowsId = [],
 	setCheckedRowsId = () => {},
+	bulkMode = false,
+	activeTab,
 }) {
+	const [workflowName, setWorkflowName] = useState(false);
 	const itemId = `${item?.id}`;
-	const isSelected = checkedRowsId.includes(itemId);
+	const isSelected = bulkMode && checkedRowsId.includes(itemId);
 
 	const onCardClick = () => {
-		if (!isSelected) {
-			setCheckedRowsId([...checkedRowsId, itemId]);
-		} else {
-			setCheckedRowsId(checkedRowsId.filter((Id) => Id !== itemId));
+		if (bulkMode) {
+			if (!isSelected) {
+				setCheckedRowsId([...checkedRowsId, itemId]);
+			} else {
+				setCheckedRowsId(checkedRowsId.filter((Id) => Id !== itemId));
+			}
 		}
 	};
 
@@ -151,6 +159,25 @@ function ListItem({
 
 				);
 			})}
+
+			<div className={styles.content_container}>
+				<Popover
+					placement="left"
+					interactive
+					render={(
+						<ActionContent
+							setWorkflowName={setWorkflowName}
+							activeTab={activeTab}
+							workflowName={workflowName}
+						/>
+					)}
+					onOuterClick={() => setWorkflowName(false)}
+				>
+					<div className={styles.svg_container}>
+						<IcMOverflowDot height={16} width={16} />
+					</div>
+				</Popover>
+			</div>
 
 		</div>
 	);

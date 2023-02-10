@@ -78,7 +78,7 @@ function ListItem(props) {
 	});
 
 	return (
-		<div className={styles.list_item_container}>
+		<div className={styles.container}>
 			{filteredList.map((columnDetails) => {
 				const { key, flex, label, getValue } = columnDetails;
 

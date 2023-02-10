@@ -23,6 +23,9 @@ function Requests() {
 		params,
 		setParams,
 		onChangeParams,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	} = useListAllocationRequests();
 
 	const {
@@ -44,6 +47,9 @@ function Requests() {
 				// Either setParams or onChangeParams
 				params={params}
 				setParams={setParams}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 			/>
 
 			<List
@@ -59,7 +65,6 @@ function Requests() {
 					position="basic"
 					size="lg"
 					onClose={onCloseModal}
-					closeOnOuterClick={false}
 					className={styles.modal_container}
 				>
 					<Modal.Header title="Create Request" />

@@ -1,13 +1,14 @@
 import { Button, Toggle } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
 
 import SearchInput from '../../../../common/SearchInput';
 
+import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';
 
 function Header({
 	setShowCreateRelationModal = () => {},
 	setParams = () => {},
+	params,
 	setActiveTab = () => {},
 	searchValue,
 	setSearchValue = () => {},
@@ -55,11 +56,9 @@ function Header({
 					/>
 				</div>
 
-				<Button size="md" themeType="secondary">
-					FILTER
-					<IcMFilter style={{ marginLeft: '4px' }} />
-					<div className={styles.filter_dot} />
-				</Button>
+				<div>
+					<ConfigFilters params={params} setParams={setParams} />
+				</div>
 
 				<Button
 					size="md"

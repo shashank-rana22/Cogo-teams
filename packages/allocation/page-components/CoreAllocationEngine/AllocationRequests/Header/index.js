@@ -1,5 +1,7 @@
 import { Button, Toggle } from '@cogoport/components';
 
+import SearchInput from '../../../../common/SearchInput';
+
 import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';
 
@@ -11,6 +13,9 @@ function Header(props) {
 		setParams,
 		onChangeParams,
 		toggleValue,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	} = props;
 
 	// Todo search filter should expand on clicking
@@ -30,7 +35,17 @@ function Header(props) {
 				})}
 			/>
 
-			<div className={styles.filter_and_create}>
+			<div className={styles.filter_container}>
+				<div className={styles.search_container}>
+					<SearchInput
+						size="sm"
+						placeholder="Search by Organization name / User name"
+						setGlobalSearch={setSearchValue}
+						debounceQuery={debounceQuery}
+						value={searchValue}
+					/>
+				</div>
+
 				<ConfigFilters params={params} setParams={setParams} />
 
 				<Button

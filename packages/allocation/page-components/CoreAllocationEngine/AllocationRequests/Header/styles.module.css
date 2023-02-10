@@ -11,12 +11,12 @@
     }
 }
 
-.filter_and_create{
+.filter_container {
     display: flex;
+}
 
-    button:last-child {
-        margin-left: 8px;
-    }
+.filter_container > button:last-child {
+    margin-left: 8px;
 }
 
 .filter_dot {
@@ -28,4 +28,13 @@
 	position: relative;
 	bottom: 4px;
 	right: 4px;
+}
+
+.search_container {
+    display: flex;
+    margin-right: 8px;
+	
+	:global(.ui_input_container){
+		width: 300px;
+	}
 }

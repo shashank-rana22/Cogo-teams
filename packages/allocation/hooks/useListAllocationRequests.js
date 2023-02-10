@@ -1,7 +1,12 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useListAllocationRequests = () => {
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [searchValue, setSearchValue] = useState();
+
 	const [params, setParams] = useState({
 		sort_by       : 'created_at',
 		sort_type     : 'desc',
@@ -29,6 +34,16 @@ const useListAllocationRequests = () => {
 		}));
 	}, []);
 
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
 	return {
 		data,
 		loading,
@@ -36,6 +51,9 @@ const useListAllocationRequests = () => {
 		params,
 		setParams,
 		onChangeParams,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	};
 };
 
