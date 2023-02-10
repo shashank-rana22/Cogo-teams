@@ -19,14 +19,14 @@ function PersonDetails({
 
 	const {
 		email,
-		name,
+		// name,
 		mobile_number,
 		mobile_country_code,
-		office_location,
+		// office_location,
 		preferred_languages,
 	} = detailsData || {};
 
-	const { name: cityName } = office_location || {};
+	// const { name: cityName } = office_location || {};
 
 	const onClickVerifyMobileNoButton = () => {
 		setShowMobileVerificationModal(true);
@@ -79,14 +79,6 @@ function PersonDetails({
 					</div>
 
 				</div>
-
-				{/* <div className={styles.label_value_container}>
-					<div className={styles.label_text}> Office Location </div>
-					<div className={styles.value_text}>
-						:
-						{cityName}
-					</div>
-				</div> */}
 
 			</div>
 

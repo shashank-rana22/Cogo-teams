@@ -15,8 +15,8 @@ const getColor = () => {
 function UserCard({
 	user_data = {},
 	type = '',
-	// params = {},
-	// setParams = () => {},
+	params = {},
+	setParams = () => {},
 }) {
 	const getInitials = (name = '') => {
 		if (!name) {
@@ -28,11 +28,11 @@ function UserCard({
 		return initials.length > 2 ? initials.splice(0, 2) : initials;
 	};
 
-	// const handleClickOnUserCard = () => {
-	// 	if (type !== 'active') {
-	// 		setParams({ ...params, user_id: user_data?.id });
-	// 	}
-	// };
+	const handleClickOnUserCard = () => {
+		if (type !== 'active') {
+			setParams({ ...params, user_id: user_data?.id });
+		}
+	};
 
 	const renderUserDetails = () => (
 		<>
@@ -72,39 +72,32 @@ function UserCard({
 			interactive
 			animation="shift-away"
 		>
+
 			<div
 				className={styles.card_container}
-				// className={type}
-				// onClick={handleClickOnUserCard}
-				// isBlocked={user_data?.block_access ? true : null}
+				id={type}
+				role="presentation"
+				onClick={handleClickOnUserCard}
+				// eslint-disable-next-line react/no-unknown-property
+				isBlocked={user_data?.block_access ? true : null}
 			>
 				<div
 					className={styles.container}
-					// className={type}
 					// eslint-disable-next-line react/no-unknown-property
 					isBlocked={user_data?.block_access ? true : null}
 					// eslint-disable-next-line react/no-unknown-property
 					hasImage={user_data.picture}
 				>
-					{user_data.picture ? (
-						<div className={styles.profile_image_container}>
-							<div
-								className={styles.profile_image}
-								src={user_data.picture}
-								alt={getInitials(user_data?.name)}
-							/>
-						</div>
-					) : (
-						<div
-							className={styles.avatar}
-							// className={type}
-							style={{
-								background: `${user_data?.block_access ? '#ffe3e3' : getColor()}`,
-							}}
-						>
-							<div className={styles.avatar_text}>{getInitials(user_data?.name)}</div>
-						</div>
-					)}
+
+					<div
+						className={styles.avatar}
+						style={{
+							background: `${user_data?.block_access ? '#ffe3e3' : getColor()}`,
+						}}
+					>
+						<div className={styles.avatar_text}>{getInitials(user_data?.name)}</div>
+					</div>
+
 				</div>
 
 				{type === 'active' && (
@@ -118,8 +111,8 @@ function UserCard({
 
 					<div
 						className={styles.division_line}
-						// className={type}
-						// isBlocked={user_data?.block_access ? true : null}
+						// eslint-disable-next-line react/no-unknown-property
+						isBlocked={user_data?.block_access ? true : null}
 					/>
 
 					<div className={styles.designation}>{user_data?.role?.name || '-'}</div>

@@ -1,7 +1,5 @@
 import Greetings from '../greetings';
 
-// import styles from './styles.module.css';
-
 function Header({
 	detailsData,
 	setRefetch = () => {},
@@ -10,8 +8,6 @@ function Header({
 	setShowMobileVerificationModal = () => {},
 
 }) {
-	// const { name = '' } = detailsData || {};
-
 	return (
 		<Greetings
 			detailsData={detailsData}

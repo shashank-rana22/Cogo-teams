@@ -9,7 +9,7 @@ import { useState } from 'react';
 import ChangePassword from '../ChangePassword';
 
 // import getControls from './controls';
-import GrantOutlookAccess from './GrantOutlookAccess';
+// import GrantOutlookAccess from './GrantOutlookAccess';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import styles from './styles.module.css';
@@ -21,12 +21,6 @@ function Greetings({
 	showMobileVerificationModal,
 	setShowMobileVerificationModal = () => {},
 }) {
-	// const updateUserApi = useRequest(
-	// 	'post',
-	// 	false,
-	// 	'partner',
-	// )('/update_partner_user');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_partner_user',
 		method : 'post',
@@ -180,7 +174,7 @@ function Greetings({
 
 			/>
 
-			<div className={styles.change_password_container}>
+			{/* <div className={styles.change_password_container}>
 				<Button
 					className="primary sm"
 					onClick={() => setChangepasswordModal(true)}
@@ -188,7 +182,7 @@ function Greetings({
 					CHANGE PASSWORD
 				</Button>
 				<GrantOutlookAccess />
-			</div>
+			</div> */}
 
 			<Modal
 				show={showModal}
