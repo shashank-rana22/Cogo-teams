@@ -85,7 +85,7 @@ function QuotaModal(props) {
 			onClose={onCloseModal}
 			closeOnOuterClick={false}
 		>
-			<Modal.Header title="Create Allocation Quota" />
+			<Modal.Header title={`${isUpdatable ? 'Update' : 'Create'} Allocation Quota`} />
 
 			<form onSubmit={handleSubmit(onSave)}>
 				<Modal.Body>
