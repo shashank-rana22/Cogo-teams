@@ -66,7 +66,7 @@ const columnsMapping = [
 ];
 
 function ListItem(props) {
-	const { data, toggleRoleType, onClickStatusChange } = props;
+	const { data, toggleRoleType, onClickActionItem } = props;
 
 	const [showPopover, setShowPopover] = useState(false);
 
@@ -78,7 +78,7 @@ function ListItem(props) {
 	});
 
 	return (
-		<div className={styles.list_item_container}>
+		<div className={styles.container}>
 			{filteredList.map((columnDetails) => {
 				const { key, flex, label, getValue } = columnDetails;
 
@@ -101,8 +101,9 @@ function ListItem(props) {
 					placement="left"
 					interactive
 					render={(
-						<Actions onClickCta={() => {
+						<Actions onClickCta={({ type }) => {
 							setShowPopover(false);
+							onClickActionItem(type);
 						}}
 						/>
 					)}

@@ -59,7 +59,6 @@ function Requests() {
 					position="basic"
 					size="lg"
 					onClose={onCloseModal}
-					closeOnOuterClick={false}
 					className={styles.modal_container}
 				>
 					<Modal.Header title="Create Request" />

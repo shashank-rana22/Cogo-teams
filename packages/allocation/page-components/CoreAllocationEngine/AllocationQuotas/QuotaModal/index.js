@@ -1,10 +1,12 @@
 import { Modal, Button, RadioGroup } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AsyncSelect from '../../../../common/Form/components/AsyncSelect';
 import { getFieldController } from '../../../../common/Form/Controlled';
 import useCreateAllocationQuota from '../../../../hooks/useCreateAllocationQuota';
+import useDeleteAllocationQuota from '../../../../hooks/useDeleteAllocationQuota';
 import controls from '../../../../utils/get-quotas-table-controls';
 
 import styles from './styles.module.css';
@@ -39,7 +41,7 @@ const ROLE_OPTIONS = [
 
 function QuotaModal(props) {
 	const {
-		showCreateQuotas,
+		quotaItem,
 		onCloseModal,
 		refetch,
 	} = props;
@@ -52,8 +54,12 @@ function QuotaModal(props) {
 		},
 	} = useSelector((rdxState) => rdxState);
 
-	const [roleTypeId, setRoleTypeId] = useState('');
 	const [radioValue, setRadioValue] = useState('role');
+	const [roleTypeId, setRoleTypeId] = useState('');
+
+	const { quota_attributes, action = '' } = quotaItem;
+
+	const isUpdatable = !isEmpty(quota_attributes);
 
 	const {
 		onSave,
@@ -64,74 +70,99 @@ function QuotaModal(props) {
 		refetch,
 		radioValue,
 		roleTypeId,
+		isUpdatable,
+		quotaItem,
+		setRoleTypeId,
 	});
 
 	const { control, handleSubmit } = formProps;
 
-	// console.log('formProps :: ', formProps);
+	const { onDelete, loadingDelete } = useDeleteAllocationQuota({
+		id: quotaItem.id,
+		onCloseModal,
+		refetch,
+	});
 
 	// Todo roleTypeId
+	// Todo  3 mappings 2 same for create and edit and 1 for delete
+
+	if (action === 'delete') {
+		return (
+			<>
+				<Modal.Header title="Delete Quota" />
+
+				<Modal.Body>Do you want to delete this quota?</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						type="submit"
+						size="md"
+						themeType="primary"
+						loading={loadingDelete}
+						onClick={onDelete}
+					>
+						Delete
+					</Button>
+				</Modal.Footer>
+			</>
+		);
+	}
 
 	return (
-		<Modal
-			show={showCreateQuotas}
-			position="basic"
-			size="lg"
-			onClose={onCloseModal}
-			closeOnOuterClick={false}
-		>
-			<Modal.Header title="Create Allocation Quota" />
+		<>
+			<Modal.Header title={`${isUpdatable ? 'Update' : 'Create'} Allocation Quota`} />
 
 			<form onSubmit={handleSubmit(onSave)}>
 				<Modal.Body>
 					<section key={radioValue}>
-						<div className={styles.role_container}>
-							Role Type :
-							<RadioGroup
-								options={ROLE_OPTIONS}
-								value={radioValue}
-								onChange={(role) => setRadioValue(role)}
-								className={styles.group_radio}
-							/>
-
-							{radioValue === 'user' && (
-								<AsyncSelect
-									name="user_id"
-									asyncKey="partner_users"
-									valueKey="user_id"
-									initialCall={false}
-									onChange={(userId) => setRoleTypeId(userId)}
-									value={roleTypeId}
-									placeholder="Select Partner User"
-									params={{
-										filters: {
-											partner_entity_types: ['cogoport'],
-										},
-									}}
+						{!isUpdatable ? (
+							<div className={styles.role_container}>
+								Role Type :
+								<RadioGroup
+									options={ROLE_OPTIONS}
+									value={radioValue}
+									onChange={(role) => setRadioValue(role)}
+									className={styles.group_radio}
 								/>
-							)}
 
-							{radioValue === 'role' && (
-								<AsyncSelect
-									name="role_id"
-									asyncKey="partner_roles"
-									initialCall={false}
-									onChange={(roleId) => setRoleTypeId(roleId)}
-									value={roleTypeId}
-									placeholder="Select Role"
-									// Todo check for vietnam
-									params={{
-										permissions_data_required : false,
-										filters                   : {
-											status           : 'active',
-											stakeholder_id   : partnerId,
-											stakeholder_type : 'partner',
-										},
-									}}
-								/>
-							)}
+								{radioValue === 'user' && (
+									<AsyncSelect
+										name="user_id"
+										asyncKey="partner_users"
+										valueKey="user_id"
+										initialCall={false}
+										onChange={(userId) => setRoleTypeId(userId)}
+										value={roleTypeId}
+										placeholder="Select Partner User"
+										params={{
+											filters: {
+												partner_entity_types: ['cogoport'],
+											},
+										}}
+									/>
+								)}
 
-						</div>
+								{radioValue === 'role' && (
+									<AsyncSelect
+										name="role_id"
+										asyncKey="partner_roles"
+										initialCall={false}
+										onChange={(roleId) => setRoleTypeId(roleId)}
+										value={roleTypeId}
+										placeholder="Select Role"
+										// Todo check for vietnam
+										params={{
+											permissions_data_required : false,
+											filters                   : {
+												status           : 'active',
+												stakeholder_id   : partnerId,
+												stakeholder_type : 'partner',
+											},
+										}}
+									/>
+								)}
+							</div>
+						) : null}
 
 						<section className={styles.form_container}>
 							<div className={styles.form_columns}>
@@ -180,6 +211,7 @@ function QuotaModal(props) {
 					<Button
 						size="md"
 						type="submit"
+						disabled={isUpdatable ? false : !roleTypeId}
 						loading={loadingOnSave}
 						id="save_quota_btn"
 					>
@@ -187,7 +219,7 @@ function QuotaModal(props) {
 					</Button>
 				</Modal.Footer>
 			</form>
-		</Modal>
+		</>
 
 	);
 }

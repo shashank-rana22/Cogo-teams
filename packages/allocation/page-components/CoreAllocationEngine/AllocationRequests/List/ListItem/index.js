@@ -89,7 +89,7 @@ function ListItem(props) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	return (
-		<div className={styles.list_item_container}>
+		<div className={styles.container}>
 			{columnsMapping.map((columnDetails) => {
 				const { key, flex, label, getValue } = columnDetails;
 

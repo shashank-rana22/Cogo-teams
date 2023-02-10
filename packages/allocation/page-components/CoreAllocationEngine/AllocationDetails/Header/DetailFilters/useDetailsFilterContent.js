@@ -2,9 +2,9 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import controls from '../../../../../utils/get-configurations-filter-controls';
+import controls from '../../../../../utils/get-details-filter-controls';
 
-const useFilterContent = ({ params, setParams }) => {
+const useDetailsFilterContent = ({ params, setParams }) => {
 	const [showFilters, setShowFilters] = useState(false);
 
 	const [filters, setFilters] = useState({});
@@ -43,17 +43,10 @@ const useFilterContent = ({ params, setParams }) => {
 		if (!isEmpty(filters)) {
 			setParams({
 				...params,
-				sort_type : 'desc',
-				sort_by   : 'created_at',
-				page      : 1,
-				filters   : {
-					status: [
-						'active',
-						'draft',
-						'publishable',
-						'checking',
-						'not_publishable',
-					],
+				filters: {
+					...(params.filters || {}),
+					stakeholder_id     : undefined,
+					old_stakeholder_id : undefined,
 				},
 			});
 		}
@@ -78,4 +71,4 @@ const useFilterContent = ({ params, setParams }) => {
 	};
 };
 
-export default useFilterContent;
+export default useDetailsFilterContent;

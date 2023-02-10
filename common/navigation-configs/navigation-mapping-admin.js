@@ -1717,12 +1717,11 @@ const navigationMappingAdmin = {
 		],
 		options: [
 			{
-				key   : 'allocations-core_engine',
-				title : 'Core Engine',
-				href  : '/allocation/core-engine',
-				as    : '/allocation/core-engine',
-
-				possible_apis: apis.allocation_engine,
+				key           : 'allocations-core_engine',
+				title         : 'Core Engine',
+				href          : '/allocation/core-engine',
+				as            : '/allocation/core-engine',
+				possible_apis : apis.allocation_engine,
 			},
 		],
 	},

@@ -1,0 +1,55 @@
+.list_container {
+    overflow-x: scroll;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.table {
+    background-color: #ffffff;
+    margin: 16px 0px;
+    box-shadow: 0px 0px 16px rgba(44, 62, 80, 0.2);
+    
+    tr {
+        height: 60px;
+    }
+}
+
+.legend {
+    margin: 0px;
+
+    :global(.ui_legend_item){
+        margin: 0px;
+    }
+}
+
+.stakeholder_type {
+    font-size: 10px;
+    color: #849E4C;
+}
+
+.business_name {
+    font-weight: 600;
+    width: fit-content;
+    max-width: 250px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.toottip_content {
+    word-break: initial;
+}
+
+.emptystate {
+    background-color: #ffffff;
+    margin: 16px 0px;
+    box-shadow: 0px 0px 16px rgba(44, 62, 80, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 85vh;
+}

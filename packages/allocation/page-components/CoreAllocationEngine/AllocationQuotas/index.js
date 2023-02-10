@@ -1,3 +1,4 @@
+import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import useListAllocationQuotas from '../../../hooks/useListAllocationQuotas';
@@ -9,11 +10,7 @@ import styles from './styles.module.css';
 
 function AllocationQuotas() {
 	// Todo should go inside hook
-	const [showCreateQuotas, setShowCreateQuotas] = useState(false);
-
-	const onCloseModal = () => {
-		setShowCreateQuotas(false);
-	};
+	const [quotaItem, setQuotaItem] = useState(null);
 
 	const {
 		data,
@@ -29,11 +26,10 @@ function AllocationQuotas() {
 	return (
 		<section className={styles.container}>
 			<Header
-				onClickCreateQuota={() => setShowCreateQuotas(true)}
+				onClickCreateQuota={() => setQuotaItem(true)}
 				setParams={setParams}
 				loading={listLoading}
 				toggleRoleType={toggleRoleType}
-				setShowCreateQuotas={setShowCreateQuotas}
 			/>
 
 			<List
@@ -42,15 +38,25 @@ function AllocationQuotas() {
 				// onChangeParams={onChangeParams}
 				fetchList={refetch}
 				toggleRoleType={toggleRoleType}
+				setQuotaItem={setQuotaItem}
 			/>
+			{/* Todo isUpdatable can be called   */}
 
-			{showCreateQuotas ? (
-				<QuotaModal
-					showCreateQuotas={showCreateQuotas}
-					onCloseModal={onCloseModal}
-					refetch={refetch}
-				/>
-			) : null}
+			{quotaItem && (
+				<Modal
+					show={quotaItem}
+					position="basic"
+					size="lg"
+					onClose={() => setQuotaItem(null)}
+					// closeOnOuterClick={false}
+				>
+					<QuotaModal
+						quotaItem={quotaItem}
+						onCloseModal={() => setQuotaItem(null)}
+						refetch={refetch}
+					/>
+				</Modal>
+			)}
 		</section>
 	);
 }
