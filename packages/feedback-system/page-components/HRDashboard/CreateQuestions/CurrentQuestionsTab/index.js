@@ -202,17 +202,19 @@ function CurrentQuestionsTab() {
 			</div>
 
 			{showForm && (
-				<CreateForm
-					formProps={formProps}
-					type="create_question"
-					onSubmit={AddQuestions}
-					loading={apiLoading}
-					controls={controls}
-					onCancel={() => {
-						setShowForm(false);
-						setShowbutton(true);
-					}}
-				/>
+				<div className={styles.question_form}>
+					<CreateForm
+						formProps={formProps}
+						type="create_question"
+						onSubmit={AddQuestions}
+						loading={apiLoading}
+						controls={controls}
+						onCancel={() => {
+							setShowForm(false);
+							setShowbutton(true);
+						}}
+					/>
+				</div>
 			)}
 
 			{loading && showLoading()}
@@ -228,14 +230,16 @@ function CurrentQuestionsTab() {
 						setEditFormValue(data);
 
 						return (
-							<CreateForm
-								formProps={formProps}
-								type="create_question"
-								onSubmit={SaveQuestions}
-								loading={saveLoading}
-								controls={controls}
-								onCancel={onCancelEdit}
-							/>
+							<div className={styles.question_form}>
+								<CreateForm
+									formProps={formProps}
+									type="create_question"
+									onSubmit={SaveQuestions}
+									loading={saveLoading}
+									controls={controls}
+									onCancel={onCancelEdit}
+								/>
+							</div>
 						);
 					}
 					return (

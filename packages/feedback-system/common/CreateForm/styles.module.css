@@ -1,18 +1,21 @@
 .form_container {
+	display: flex;
+	flex-wrap: wrap;
 	margin-top: 1rem;
 }
 
 .form_group {
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: flex-start;
 	justify-content: space-between;
+	padding: 8px;
 
 	span {
 		padding: 4px;
+		font-weight: bold;
 	}
 }
-
-.form_group:not(:first-child) { margin: 10px 0; }
 
 .input_group {
 	display: flex;
@@ -22,7 +25,7 @@
 .button_container{
 	display: flex;
 	justify-content: flex-end;
-	padding-top: 16px;
+	padding: 16px 8px 8px;
 }
 
 .error_message {

@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.278",
+    "@cogoport/components": "^1.0.303",
     "@cogoport/forms": "workspace:^0.1.0",
     "@cogoport/icons-react": "^1.0.52",
     "@cogoport/next": "workspace:^0.1.0",

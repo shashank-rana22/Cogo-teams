@@ -22,11 +22,11 @@ export const getControls = () => {
 			...partnerOptions,
 			label          : 'Manager Name',
 			name           : 'performed_by_id',
-			placeholder    : 'Search via name',
+			placeholder    : 'Search..',
 			type           : 'select',
 			defaultOptions : true,
 			isClearable    : true,
-			span           : 12,
+			span           : 5.5,
 			validations    : [{ type: 'required', message: 'Required' }],
 		},
 		{
@@ -35,7 +35,7 @@ export const getControls = () => {
 			type           : 'select',
 			defaultOptions : true,
 			isClearable    : true,
-			placeholder    : 'Rating',
+			placeholder    : 'Select..',
 			options        : [
 				{ label: '1', value: 1 },
 				{ label: '2', value: 2 },
@@ -43,7 +43,7 @@ export const getControls = () => {
 				{ label: '4', value: 4 },
 				{ label: '5', value: 5 },
 			],
-			span: 12,
+			span: 4.5,
 		},
 		{
 			name           : 'created_at_month',
@@ -66,7 +66,7 @@ export const getControls = () => {
 				{ label: 'November', value: 11 },
 				{ label: 'December', value: 12 },
 			],
-			span: 6,
+			span: 5,
 		},
 		{
 			name           : 'created_at_year',
@@ -80,7 +80,7 @@ export const getControls = () => {
 				{ label: `${year - 1}`, value: year - 1 },
 				{ label: `${year - 2}`, value: year - 2 },
 			],
-			span: 6,
+			span: 5,
 		},
 	];
 };

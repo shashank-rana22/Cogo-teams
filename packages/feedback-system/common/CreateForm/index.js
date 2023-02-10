@@ -28,9 +28,9 @@ function CreateForm({
 					if (!Element) return null;
 
 					return (
-						<div className={styles.form_group}>
-							<span style={{ flex: 12 - el.span }}>{el.label}</span>
-							<div style={{ flex: el.span }} className={styles.input_group}>
+						<div style={{ width: `${Number(el.span) * 10}%` }} className={styles.form_group}>
+							<span>{el.label}</span>
+							<div style={{ width: '100%' }} className={styles.input_group}>
 								<Element
 									{...el}
 									key={el.name}
