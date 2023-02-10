@@ -9093,6 +9093,11 @@ const partner = {
 			service_name : 'air_freight_rate',
 		},
 		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'get_air_freight_rate_audit',
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
