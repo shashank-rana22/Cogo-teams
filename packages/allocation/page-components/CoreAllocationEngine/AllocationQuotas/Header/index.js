@@ -10,8 +10,6 @@ function Header(props) {
 		onClickCreateQuota,
 	} = props;
 
-	console.log('toggleValue', toggleRoleType);
-
 	// Todo search filter should expand on clicking
 
 	return (
