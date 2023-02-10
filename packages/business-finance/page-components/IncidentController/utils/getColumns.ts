@@ -1,12 +1,12 @@
 import { ColumnInterface } from './interface';
-import { RequestColumn } from './requestColumn';
+import { requestColumn } from './requestColumn';
 
 const getColumns = ({
 	activeTab, setIsAscendingActive, setFilters,
 	isAscendingActive, getIncidentData,
 }:ColumnInterface) => {
 	if (activeTab === 'requested') {
-		return RequestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
+		return requestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
 	}
 	return (
 		null

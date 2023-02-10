@@ -1,6 +1,5 @@
-import { Textarea, Button, Modal, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
 import BankDetails from '../Modals/BankDetails';
 import SettlementModal from '../Modals/SettlementModal';
@@ -10,8 +9,7 @@ import { TooltipInterface } from './interface';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const RequestColumn = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData }) => {
-	const [showTdsModal, setShowTdsModal] = useState(false);
+export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData }) => {
 	const toTitleCase = (str:string) => {
 		const titleCase = str
 			.toLowerCase()
@@ -129,58 +127,29 @@ export const RequestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 
 				return (
 					<>
-
-						<div>
-							<Button
-								style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-								themeType="secondary"
-								onClick={() => {
-									setShowTdsModal(true);
-								}}
-							>
-								View
-							</Button>
-						</div>
-						{(showTdsModal && type)(
-							<div>jlfnl</div>,
-							// <Modal
-							// 	size="lg"
-							// 	show={showTdsModal}
-							// 	onClose={() => {
-							// 		setShowTdsModal(false);
-							// 	}}
-							// >
-							// 	<Modal.Header title="TDS Deviation" />
-							// 	<Modal.Body>
-							// 		nvlkn
-
-						// 	</Modal.Body>
-						// </Modal>
-						)}
-
-						{/* {type === 'TDS_APPROVAL' && (
+						{type === 'TDS_APPROVAL' && (
 							<TDSModal
 								tdsData={tdsRequest}
 								id={id}
 								refetch={getIncidentData}
 								row={row}
 							/>
-						)} */}
-						{/* {type === 'SETTLEMENT_APPROVAL' && (
+						)}
+						{type === 'SETTLEMENT_APPROVAL' && (
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
 								refetch={getIncidentData}
 							/>
-						)} */}
-						{/* {type === 'BANK_DETAIL_APPROVAL' && (
+						)}
+						{type === 'BANK_DETAIL_APPROVAL' && (
 							<BankDetails
 								bankData={bankRequest}
 								bankId={id}
 								organization={organization}
 								refetch={getIncidentData}
 							/>
-						)} */}
+						)}
 						{/* {type === 'JOURNAL_VOUCHER_APPROVAL' && (
 							<JVModel
 								journalVoucherRequest={journalVoucherRequest}
