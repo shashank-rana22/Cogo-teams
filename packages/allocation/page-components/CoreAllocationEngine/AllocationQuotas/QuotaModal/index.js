@@ -6,6 +6,7 @@ import { useState } from 'react';
 import AsyncSelect from '../../../../common/Form/components/AsyncSelect';
 import { getFieldController } from '../../../../common/Form/Controlled';
 import useCreateAllocationQuota from '../../../../hooks/useCreateAllocationQuota';
+import useDeleteAllocationQuota from '../../../../hooks/useDeleteAllocationQuota';
 import controls from '../../../../utils/get-quotas-table-controls';
 
 import styles from './styles.module.css';
@@ -56,7 +57,9 @@ function QuotaModal(props) {
 	const [radioValue, setRadioValue] = useState('role');
 	const [roleTypeId, setRoleTypeId] = useState('');
 
-	const isUpdatable = !isEmpty(quotaItem.quota_attributes);
+	const { quota_attributes, action = '' } = quotaItem;
+
+	const isUpdatable = !isEmpty(quota_attributes);
 
 	const {
 		onSave,
@@ -74,17 +77,39 @@ function QuotaModal(props) {
 
 	const { control, handleSubmit } = formProps;
 
+	const { onDelete, loadingDelete } = useDeleteAllocationQuota({
+		id: quotaItem.id,
+		onCloseModal,
+		refetch,
+	});
+
 	// Todo roleTypeId
-	// Todo ask radio type to disable
+	// Todo  3 mappings 2 same for create and edit and 1 for delete
+
+	if (action === 'delete') {
+		return (
+			<>
+				<Modal.Header title="Delete Quota" />
+
+				<Modal.Body>Do you want to delete this quota?</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						type="submit"
+						size="md"
+						themeType="primary"
+						loading={loadingDelete}
+						onClick={onDelete}
+					>
+						Delete
+					</Button>
+				</Modal.Footer>
+			</>
+		);
+	}
 
 	return (
-		<Modal
-			show={quotaItem}
-			position="basic"
-			size="lg"
-			onClose={onCloseModal}
-			closeOnOuterClick={false}
-		>
+		<>
 			<Modal.Header title={`${isUpdatable ? 'Update' : 'Create'} Allocation Quota`} />
 
 			<form onSubmit={handleSubmit(onSave)}>
@@ -194,7 +219,7 @@ function QuotaModal(props) {
 					</Button>
 				</Modal.Footer>
 			</form>
-		</Modal>
+		</>
 
 	);
 }
