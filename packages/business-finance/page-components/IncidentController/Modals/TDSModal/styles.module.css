@@ -1,0 +1,53 @@
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+.org_name {
+  font-weight: 600;
+}
+.flex {
+  display: flex;
+}
+.name {
+  padding: 0px 4px;
+}
+.rates_data {
+  padding: 12px 24px;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  width: fit-content;
+  margin: 20px 24px 20px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rates {
+  font-weight: 600;
+}
+.label {
+  font-weight: 500;
+}
+.value_data {
+  margin: 20px 40px 20px 0px;
+}
+.label_value {
+  font-size: 12px;
+}
+.date_value {
+  font-size: 14px;
+  font-weight: 600;
+}
+.document {
+  font-weight: 600;
+  margin: 4px 0px;
+}
+.document_flex {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.remarks {
+  font-weight: 600;
+  font-size: 12px;
+  margin: 8px 0px;
+}

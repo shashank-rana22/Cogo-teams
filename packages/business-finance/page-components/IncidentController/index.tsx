@@ -30,9 +30,9 @@ function IncidentController() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState<string>(() => query.view || tabs[0].key);
 	const tabComponentProps = {
-		requested : {},
-		approved  : {},
-		rejected  : {},
+		requested : { activeTab },
+		approved  : { activeTab },
+		rejected  : { activeTab },
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
 	const onChange = (view:string) => {
@@ -61,6 +61,7 @@ function IncidentController() {
 						<TabPanel
 							name={key}
 							title={label}
+							badge={5}
 						>
 							{ActiveTabComponent && (
 								<ActiveTabComponent
