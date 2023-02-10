@@ -1,0 +1,14 @@
+.add_button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+}
+
+.feedback_form_button {
+	display: flex;
+	background: #cddbff;
+	color: #034afd;
+	padding: 4px 12px;
+	border-radius: 4px;
+}

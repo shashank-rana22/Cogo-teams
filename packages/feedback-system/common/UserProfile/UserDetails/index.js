@@ -23,9 +23,12 @@ function UserDetails({ userData = {}, loading = false }) {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.name}>
-				{loading ? showLoading() : startCase(name)}
-			</p>
+			{loading ? showLoading()
+				: (
+					<p className={styles.name}>
+						{startCase(name)}
+					</p>
+				)}
 
 			<div className={styles.details_container}>
 				{loading && showLoading1()}

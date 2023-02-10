@@ -29,6 +29,15 @@
 
 .show_more {
 	flex: 1;
+
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+
+	.opened {
+		transform: rotate(180deg);
+		animation: transform 0.3s ease-in-out;
+	}
 }
 
 .table_user_content {
@@ -66,23 +75,6 @@
 	font-size: 14px;
 	font-weight: 500;
 	margin-bottom: 0px;
-}
-
-.show_more_container {
-	display: flex;
-	justify-content: center;
-	border-radius: 4px;
-	margin: 2px 0;
-	font-size: 10px;
-	padding: 4px 0;
-	cursor: pointer;
-
-	.opened {
-		display: flex;
-		align-items: center;
-		transform: rotate(180deg);
-		animation: transform 0.3s ease-in-out;
-	}
 }
 
 .search_container {

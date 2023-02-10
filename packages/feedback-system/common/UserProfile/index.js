@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { upperCase } from '@cogoport/utils';
 
 import useGetUserDetails from '../../hooks/useGetUserDetails';
@@ -14,15 +15,25 @@ const getNameTag = (name) => {
 	return upperCase(tagString);
 };
 
+const renderImage = (loading, data) => {
+	const { picture = '', name = '' } = data;
+
+	if (loading) {
+		return <Loader />;
+	}
+
+	if (picture) { return <img src={picture} alt="loading" className={styles.img} />; }
+
+	return <div className={styles.tag}>{getNameTag(name)}</div>;
+};
+
 function UserProfile({ userId = '' }) {
-	const { userData = {}, loading } = useGetUserDetails({ userId });
-	const { picture = '', name = '' } = userData;
+	const { userData = {}, loading = false } = useGetUserDetails({ userId });
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.image_container}>
-				{ picture ? <img src={picture} alt="loading" className={styles.img} />
-					: <div className={styles.tag}>{getNameTag(name)}</div> }
+				{renderImage(loading, userData)}
 			</div>
 
 			<div className={styles.user_details}>

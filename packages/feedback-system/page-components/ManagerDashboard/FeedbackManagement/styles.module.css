@@ -2,28 +2,42 @@
 	margin: 16px;
 }
 
-.go_back_container {
+.redirect_container {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	font-weight: 500;
-	font-size: 16px;
-	padding-top: 16px;
-	color: #393f70;
-	cursor: pointer;
 }
 
-.redirect_container {
+.redirect_header {
 	display: flex;
 	align-items: center;
-	padding-top: 16px;
+
+	.redirect_text {
+		font-size: 16px;
+		font-weight: 500;
+		color: #393f70;
+		cursor: pointer;
+		margin: 0px;
+	}
 }
 
-.top_header {
+.header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 8px 0;
+
+	.header_text {
+		font-size: 18px;
+		font-weight: bold;
+		color: #393f70;
+		margin: 0px;
+	}
+
+	.header_filters {
+		display: flex;
+		align-items: center;
+	}
 }
 
 .filter_container {

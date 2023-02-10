@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 const useListFeedbackQuestions = ({
 	status = '',
+	userId = '',
 	params = {},
 	searchValue = '',
 	showQuestion = true,
@@ -19,7 +20,8 @@ const useListFeedbackQuestions = ({
 					...params,
 					filters: {
 						...(params.filters),
-						q: searchValue || undefined,
+						user_id : userId || undefined,
+						q       : searchValue || undefined,
 						status,
 					},
 				},

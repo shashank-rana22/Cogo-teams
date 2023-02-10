@@ -37,7 +37,6 @@ function PerformanceChart({ user_id = '' }) {
 
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>
-			{' '}
 			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
 			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
 		</div>

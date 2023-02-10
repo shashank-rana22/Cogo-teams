@@ -1,0 +1,99 @@
+.controls {
+	width: 100%;
+	margin-top: 14px;
+	display: flex;
+	background-color: rgb(248, 249, 255);
+	padding: 8px 0;
+
+	.core-ui-radiogroup-container {
+		display: flex;
+		align-items: center;
+		flex-direction: row !important;
+		justify-content: center;
+	}
+	.core-ui-radio-root {
+		width: 20%;
+		padding: 0 65px;
+	}
+	.core-ui-radio-label {
+		margin-left: 10px !important;
+		opacity: 1;
+	}
+}
+
+.form_container {
+	padding: 16px;
+}
+
+.heading {
+
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 500;
+	padding-bottom: 16px;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #000;
+}
+
+.header {
+	display: flex;
+	margin-top: 16px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #000;
+}
+
+.rating {
+	display: flex;
+	justify-content: center;
+	width: 144px;
+	font-weight: 500;
+}
+
+.side_heading {
+	display: flex;
+	align-items: center;
+	width: 200px;
+	margin: 0 16px;
+	font-weight: 500;
+}
+
+.feedback_comment {
+	margin-top: 32px;
+	display: flex;
+	flex-direction: column;
+
+	.comment {
+		font-weight: 500;
+		margin-bottom: 8px;
+	}
+
+	.ui-textarea {
+		font-size: 14px;
+
+		::placeholder {
+			padding: 4px;
+			color: #cbcff5;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+
+	.reset {
+		margin-right: 16px;
+	}
+}
+
+.question_container {
+	width: 80%;
+	height: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+

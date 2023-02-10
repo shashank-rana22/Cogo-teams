@@ -2,35 +2,27 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 32px;
+	margin-top: 24px;
 
 	.list_header {
 		color: "#393f70";
 		font-size: 18px;
-		padding: 16px;
 		font-weight: 500;
+		margin: 0;
 	}
 }
 
 .filter_container {
 	display: flex;
 	align-items: center;
-	& .tippy-box .tippy-content {
-		max-height: 100%;
-	}
-	.filter-control-label {
-		margin-top: 16px;
-		font-weight: 500;
-	}
-	.bussiness_module_filter_header {
-		margin-bottom: 8px;
+	
+	.month_container:not(:last-child) {
+		margin-right: 16px;
 	}
 }
 
 .month_container {
-	margin-right: 16px;
-
-	.core-ui-select__control {
+	:global(.ui_select_display_container) {
 		width: 160px;
 		height: 38px;
 	}

@@ -22,6 +22,13 @@ const useListUserFeedbacks = ({
 			trigger({
 				params: {
 					...params,
+
+					...(key === 'users_under_manager'
+						? {
+							team_data_required: true,
+						}
+						: {}),
+
 					filters: {
 						...(params.filters),
 						...(key === 'users_under_manager'
@@ -41,6 +48,7 @@ const useListUserFeedbacks = ({
 		}
 	};
 	useEffect(() => getUserFeedbackList(), [params, searchValue, pagination]);
+	useEffect(() => setPagination(1), [params, searchValue]);
 
 	return {
 		params,

@@ -1,132 +1,96 @@
-import FilterContent from '@cogo/business-modules/components/filters';
-import useGetFilters from '@cogo/business-modules/hooks/useGetFilters';
-import { useRouter } from '@cogo/next';
-import { Flex, Text } from '@cogoport/front/components';
-import { Button, Input } from '@cogoport/front/components/admin';
+import { Input } from '@cogoport/components';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
+import useGetColumns from '../../../common/Columns';
+import Filters from '../../../common/Filters';
 import UserTableData from '../../../common/userTableData';
-import useNewListUserFeedbacks from '../../../hooks/useNewListUserFeedbacks';
-import { getControls } from '../../../utils/getUserFilterControls';
-import getFeedbackManagementColumns from '../FeedbackManagementColumns';
+import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
+import getUserFilterControls from '../../../utils/getUserFilterControls';
 
-import {
-	Container,
-	GoBackContainer,
-	TopHeader,
-	FilterContainer,
-	RedirectContainer,
-} from './styles';
+import styles from './styles.module.css';
 
 function FeedbackManagement() {
-	const [searchValue, setSearchValue] = useState('');
-	const [openFilter, setOpenFilter] = useState(false);
-
 	const Router = useRouter();
 	const handleClick = () => {
-		Router.push('/feedback-manager-dashboard');
+		Router.push('/feedback-system/manager-dashboard');
 	};
 
-	const filterControls = getControls();
-	const filterProps = useGetFilters({ controls: filterControls || [] });
+	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
 
-	const { data, loading, setFilters, getTeamFeedbackList } =		useNewListUserFeedbacks({
-		searchValue,
-		activeTab: 'feedback_management',
-	});
+	const [searchValue, setSearchValue] = useState('');
 
-	const feedbackManagementColumns = getFeedbackManagementColumns({
-		getTeamFeedbackList,
-	});
-
-	const { list: newTeamList = [] } = data || {};
+	const filterControls = getUserFilterControls();
 
 	const {
-		fields,
-		filters,
-		applyFilters,
-		reset: resetFilters,
-		getValues,
-	} = filterProps || {};
+		params,
+		setParams,
+		feedbackData,
+		loading,
+		getUserFeedbackList = () => {},
+	} = useListUserFeedbacks({
+		searchValue,
+		activeTab : 'feedback_management',
+		key       : 'users_under_manager',
+		userId,
+	});
 
-	const finalFilters = getValues();
+	const feedbackManagementColumns = useGetColumns({
+		getUserFeedbackList,
+		source: 'manager_feedback',
+	});
 
-	useEffect(() => {
-		setFilters(() => ({
-			...finalFilters,
-		}));
-	}, [filters]);
-
-	const handleChange = (e) => {
-		setSearchValue(e?.target?.value);
-	};
-
-	const onClickOutside = () => {
-		setOpenFilter(false);
-	};
+	const { list: newTeamList = [] } = feedbackData || {};
 
 	return (
-		<Container>
-			<RedirectContainer>
-				<GoBackContainer
-					type="button"
+		<div className={styles.container}>
+			<div className={styles.redirect_container}>
+				<div
+					className={styles.redirect_header}
+					role="button"
+					tabIndex={0}
 					onClick={() => {
 						handleClick();
 					}}
 				>
 					<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
-					<Text size={18} style={{ fontWeight: '500' }}>
+
+					<p className={styles.redirect_text}>
 						Go Back
-					</Text>
-				</GoBackContainer>
-			</RedirectContainer>
+					</p>
+				</div>
+			</div>
 
-			<TopHeader>
-				<Text size={18} style={{ fontWeight: '500' }} color="#393f70">
+			<div className={styles.header}>
+				<p className={styles.header_text}>
 					Feedback Management
-				</Text>
+				</p>
 
-				<Flex justifyContent="flex-end" alignItems="center">
-					{' '}
+				<div className={styles.header_filters}>
 					<div style={{ marginRight: '16px' }}>
 						<Input
-							size="lg"
+							size="md"
 							value={searchValue}
-							onChange={(e) => handleChange(e)}
-							placeholder="Search by Name"
-							prefix={<IcMSearchlight style={{ marginTop: '6px' }} />}
+							onChange={setSearchValue}
+							placeholder="Search Member.."
+							prefix={<IcMSearchlight />}
 							type="text"
 						/>
 					</div>
-					<FilterContainer>
-						<FilterContent
-							fields={fields}
-							applyFilters={applyFilters}
-							reset={() => resetFilters()}
-							controls={filterControls}
-							setOpen={setOpenFilter}
-							open={openFilter}
-							isScrollable={false}
-							onClickOutside={onClickOutside}
-						>
-							<Button
-								className="primary md"
-								onClick={() => setOpenFilter(!openFilter)}
-							>
-								Filters
-							</Button>
-						</FilterContent>
-					</FilterContainer>
-				</Flex>
-			</TopHeader>
+					<div>
+						<Filters controls={filterControls} params={params} setParams={setParams} />
+					</div>
+				</div>
+			</div>
 
 			<UserTableData
 				columns={feedbackManagementColumns}
 				list={newTeamList}
 				loading={loading}
 			/>
-		</Container>
+		</div>
 	);
 }
 

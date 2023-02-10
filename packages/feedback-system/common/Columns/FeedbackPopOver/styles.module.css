@@ -21,7 +21,7 @@
 .feedback_button {
 	cursor: pointer;
 
-	p {
+	.styled_text {
 		padding: 2px 8px;
 		color: #5936f0;
 		background: #ded7fc;

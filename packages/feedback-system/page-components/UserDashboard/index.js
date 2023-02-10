@@ -2,9 +2,9 @@ import { useSelector } from '@cogoport/store';
 
 import PerformanceChart from '../../common/PerformanceChart';
 import UserProfile from '../../common/UserProfile';
+import UserFeedbackData from '../../common/UserStats/UserFeedbackData';
 
 import styles from './styles.module.css';
-import UserFeedbackData from './UserFeedbackData';
 
 function UserDashboard() {
 	const {
@@ -19,7 +19,9 @@ function UserDashboard() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
+			<p className={styles.header}>User Dashboard</p>
+
+			<div className={styles.stats_container}>
 				<div className={styles.performance_chart}>
 					<PerformanceChart userId={userId} />
 				</div>

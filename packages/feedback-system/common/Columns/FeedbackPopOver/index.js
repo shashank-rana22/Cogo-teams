@@ -1,19 +1,11 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function FeedbackModal({ feedback = '' }) {
 	const [show, setShow] = useState(false);
-	const content = () => (
-		<div className={styles.feedback}>
-			<p>Feedback</p>
-
-			<div className={styles.text_content}>
-				<div className={styles.title}>{feedback}</div>
-			</div>
-		</div>
-	);
 
 	const onOuterClick = () => {
 		setShow(false);
@@ -21,17 +13,32 @@ function FeedbackModal({ feedback = '' }) {
 
 	return (
 		<>
-			<div className={styles.feedback_button} role="button" tabIndex={0} onClick={() => setShow(true)}>
-				<p className={styles.styled_text}>Feedback </p>
+			<div className={styles.feedback_button}>
+				<Button
+					size="sm"
+					themeType="secondary"
+					disabled={isEmpty(feedback)}
+					onClick={() => setShow(true)}
+				>
+					Feedback
+				</Button>
 			</div>
 
 			<Modal
 				show={show}
 				onClose={() => setShow(false)}
-				className="primary sm"
+				size="sm"
 				onOuterClick={onOuterClick}
 			>
-				{content()}
+				<div className={styles.feedback}>
+					<Modal.Header title="Feedback" />
+
+					<Modal.Body>
+						<div className={styles.text_content}>
+							<div className={styles.title}>{feedback}</div>
+						</div>
+					</Modal.Body>
+				</div>
 			</Modal>
 		</>
 	);

@@ -30,3 +30,13 @@
 .good_performance {
 	color: #67c676;
 }
+
+.feedback_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.feedback_button_text{
+	margin: 0px;
+}

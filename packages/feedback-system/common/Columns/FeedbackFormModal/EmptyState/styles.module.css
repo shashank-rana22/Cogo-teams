@@ -1,0 +1,17 @@
+.empty_state_container {
+	display: flex;
+	justify-content: center;
+	padding: 16px 0;
+	border: 2px solid #f6f5fe;
+	background: #ffffff;
+}
+
+.content {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 26px;
+	text-align: center;
+	color: #000000;
+}
+

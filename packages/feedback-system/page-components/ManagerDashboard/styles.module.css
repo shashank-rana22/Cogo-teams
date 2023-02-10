@@ -6,7 +6,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 16px 0;
 
 	.header_text {
 		font-size: 18px;
@@ -34,17 +33,10 @@
 
 .stats_section {
 	display: flex;
+	padding-top: 16px;
 
-	.performance_chart {
-		flex: 1;
-	}
-	
-	.team_stats {
-		flex: 1;
-		display: flex;
-		justify-content: flex-end;
-		padding-left: 8px;
-		gap: 12px;
+	@media(max-width: 768px){
+		flex-direction: column;
 	}
 }
 
@@ -76,7 +68,7 @@
 .month_container {
 	margin-right: 16px;
 
-	:global(.ui_select_options_control) {
+	:global(.ui_select_container) {
 		width: 160px;
 		height: 38px;
 	}

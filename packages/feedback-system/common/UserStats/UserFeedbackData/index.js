@@ -1,10 +1,10 @@
 import { SelectController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-import useGetColumns from '../../../common/Columns';
-import UserTableData from '../../../common/userTableData';
 import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 import getMonthControls from '../../../utils/monthControls';
+import useGetColumns from '../../Columns';
+import UserTableData from '../../userTableData';
 
 import styles from './styles.module.css';
 
@@ -32,7 +32,7 @@ function UserFeedbackData({ userId = '' }) {
 		},
 	})), [monthFilter, yearFilter, ratingFilter]);
 
-	const columns = useGetColumns();
+	const columns = useGetColumns({});
 
 	const { list: FeedbackList, page_limit, total_count } = feedbackData || {};
 	return (

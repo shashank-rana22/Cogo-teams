@@ -2,7 +2,7 @@ const getUserFilterControls = () => [
 	{
 		name           : 'work_scope',
 		label          : 'Role',
-		placeholder    : 'Role',
+		placeholder    : 'Choose Role..',
 		type           : 'select',
 		defaultOptions : true,
 		isClearable    : true,
@@ -19,20 +19,20 @@ const getUserFilterControls = () => [
 	{
 		label          : 'Feedback Status',
 		name           : 'feedback_status',
-		placeholder    : 'Feedback Status',
+		placeholder    : 'Choose..',
 		type           : 'select',
 		defaultOptions : true,
 		isClearable    : true,
 		options        : [
-			{ label: 'Pending', value: 'Pending' },
-			{ label: 'Success', value: 'Success' },
+			{ label: 'Pending', value: 'false' },
+			{ label: 'Success', value: 'true' },
 		],
-		span: 5,
+		span: 5.5,
 	},
 	{
 		name           : 'rating',
 		label          : 'Rating',
-		placeholder    : 'Rating',
+		placeholder    : 'Choose..',
 		type           : 'select',
 		defaultOptions : true,
 		isClearable    : true,
@@ -43,7 +43,7 @@ const getUserFilterControls = () => [
 			{ label: '4', value: 4 },
 			{ label: '5', value: 5 },
 		],
-		span: 5,
+		span: 4.5,
 	},
 ];
 

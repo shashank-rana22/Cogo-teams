@@ -25,7 +25,7 @@ function ManagersListCard({
 	const [show, setShow] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
 
-	const columns = useGetColumns();
+	const columns = useGetColumns({ source: 'hr_feedback' });
 
 	const {
 		name = '',
@@ -64,7 +64,7 @@ function ManagersListCard({
 	};
 
 	const handleChange = (e) => {
-		setSearchValue(e?.target?.value);
+		setSearchValue(e);
 	};
 
 	const download = async () => {
@@ -116,17 +116,14 @@ function ManagersListCard({
 
 				<div className={styles.show_more}>
 					<div
-						className={styles.show_more_container}
+						className={`${show && showUserId === manager_id ? styles.opened : null}`}
 						role="button"
 						tabIndex={0}
 						onClick={() => {
 							handleClick();
 						}}
 					>
-						<div className={`${show && showUserId === manager_id ? styles.opened : null}`}>
-							<IcMArrowRotateUp />
-						</div>
-
+						<IcMArrowRotateUp />
 					</div>
 				</div>
 			</div>
@@ -143,7 +140,7 @@ function ManagersListCard({
 									size="sm"
 									value={searchValue}
 									onChange={(e) => handleChange(e)}
-									placeholder="Search Users.."
+									placeholder="Search Members.."
 									prefix={<IcMSearchlight />}
 									type="text"
 								/>

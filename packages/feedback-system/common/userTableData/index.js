@@ -16,7 +16,6 @@ function UserTableData({
 	if (list?.length === 0 && !loading) {
 		return <EmptyState />;
 	}
-
 	return (
 		<div className={styles.table_container}>
 			<Table

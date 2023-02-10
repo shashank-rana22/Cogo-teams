@@ -1,18 +1,25 @@
 .container {
 	padding: 16px;
     height: 100%;
+
+    .header {
+        font-size: 20px;
+        font-weight: bold;
+        color: #393f70;
+        margin: 0px;
+    }
 }
 
-.header {
+.stats_container {
     display: flex;
+    padding-top: 16px;
 }
 
 .performance_chart {
     flex: 6;
-    padding: 8px;
 }
 
 .user_profile {
     flex: 6;
-    padding: 8px;
+    padding-left: 16px;
 }

@@ -5,23 +5,29 @@ import React, { useState } from 'react';
 
 import useGetColumns from '../../common/Columns';
 import DepartmentSelect from '../../common/DepartmentSelect';
+import Filters from '../../common/Filters';
 import PerformanceChart from '../../common/PerformanceChart';
 import RoleSelect from '../../common/RoleSelect';
+import TeamStats from '../../common/TeamStats';
 import UserTableData from '../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
+import { getControls } from '../../utils/filterControls';
 
 import CreateQuestions from './CreateQuestions';
-import Filters from './Filters';
 import styles from './styles.module.css';
-import TeamStats from './TeamStats';
 import ViewQuestionPopover from './ViewPreviousQuestions';
 
 function HRDashboard() {
+	const Router = useRouter();
+	const handleClick = () => {
+		Router.push('/feedback-system/hr-dashboard/feedback-management');
+	};
+
 	const [searchValue, setSearchValue] = useState('');
 	const [selectedBucket, setSelectedBucket] = useState('');
 
-	const columns = useGetColumns();
+	const columns = useGetColumns({});
 	const { getUserListCsv } = useDownloadCsvFeedbacks({});
 
 	const { params, setParams, feedbackData, pagination, loading, setPagination } = useListUserFeedbacks({
@@ -33,11 +39,7 @@ function HRDashboard() {
 	const download = () => {
 		getUserListCsv();
 	};
-
-	const Router = useRouter();
-	const handleClick = () => {
-		Router.push('/feedback-system/hr-dashboard/feedback-management');
-	};
+	const filterControls = getControls();
 
 	return (
 		<div className={styles.container}>
@@ -93,6 +95,7 @@ function HRDashboard() {
 
 						<div className={styles.filter_container}>
 							<Filters
+								controls={filterControls}
 								params={params}
 								setParams={setParams}
 							/>

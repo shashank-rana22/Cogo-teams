@@ -30,6 +30,7 @@ function Filters({ controls = [], params = {}, setParams = () => {} }) {
 			animation="shift-away"
 			interactive
 			caret={false}
+			onClickOutside={() => { setShowFilters(false); }}
 		>
 			<Button
 				size="lg"
