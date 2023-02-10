@@ -1,3 +1,4 @@
+import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import useListAllocationQuotas from '../../../hooks/useListAllocationQuotas';
@@ -20,6 +21,8 @@ function AllocationQuotas() {
 		refetch,
 	} = useListAllocationQuotas();
 
+	console.log('quotaItem', quotaItem);
+
 	const toggleRoleType = params?.filters?.quota_type;
 
 	return (
@@ -39,14 +42,23 @@ function AllocationQuotas() {
 				toggleRoleType={toggleRoleType}
 				setQuotaItem={setQuotaItem}
 			/>
+			{/* Todo isupdatable can be called   */}
 
-			{quotaItem ? (
-				<QuotaModal
-					quotaItem={quotaItem}
-					onCloseModal={() => setQuotaItem(null)}
-					refetch={refetch}
-				/>
-			) : null}
+			{quotaItem && (
+				<Modal
+					show={quotaItem}
+					position="basic"
+					size="lg"
+					onClose={() => setQuotaItem(null)}
+					// closeOnOuterClick={false}
+				>
+					<QuotaModal
+						quotaItem={quotaItem}
+						onCloseModal={() => setQuotaItem(null)}
+						refetch={refetch}
+					/>
+				</Modal>
+			)}
 		</section>
 	);
 }
