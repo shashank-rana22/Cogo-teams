@@ -8,10 +8,18 @@
 .search_container {
     display: flex;
     margin-right: 8px;
+	:global(.ui_input_container){
+		width: 370px;
+	
+	}
 }
 
 .button_container{
     display: flex;
+}
+
+.toggle_container{
+	padding: 0px;
 }
 
 .filter_dot {
@@ -24,3 +32,4 @@
 	bottom: 4px;
 	right: 4px;
 }
+

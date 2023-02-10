@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useListAllocationPreferences = (item = {}) => {
+const useListAllocationPreferences = ({ item = {} }) => {
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
 		sort_type  : 'desc',

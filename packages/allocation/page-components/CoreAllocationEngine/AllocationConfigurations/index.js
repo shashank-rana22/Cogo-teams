@@ -2,9 +2,9 @@ import { Modal } from '@cogoport/components';
 
 import useListAllocationConfigurations from '../../../hooks/useListAllocationConfiguration';
 
-import CreateConfigurationModal from './Actions/CreateConfiguration';
 import Header from './Header';
 import List from './List';
+import CreateConfigurationModal from './List/ListItem/Actions/CreateConfiguration';
 import styles from './styles.module.css';
 
 function Configurations() {

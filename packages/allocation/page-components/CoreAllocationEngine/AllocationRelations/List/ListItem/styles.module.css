@@ -4,10 +4,15 @@
     border-radius: 8px;
     margin: 16px 0px;
     padding: 16px;
-
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    &.orange{
+        background: #FDF4F3;
+        border: 1px solid #EE3425;
+    }
 
     @media (min-width: 768px){
         flex-direction: row;
@@ -21,16 +26,19 @@
 }
 
 .text{
-    font-size: 12px;
+    font-size: 14px;
+    color: #221F20;
 }
 
 .reason_text{
     display: block;
 	white-space: nowrap;
-    font-size: 12px;
-	max-width: 150px;
+    font-size: 14px;
+	max-width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+    word-break: initial;
+    color: #221F20;
 }
 
 .lower_label{
@@ -44,8 +52,11 @@
 }
 
 .label{
-    color:#BDBDBD;
+    color:#4F4F4F;
+    opacity: 0.7;
+    margin-bottom: 4px;
     flex: 1;
+    font-size: 12px;
 }
 
 .roles_container {

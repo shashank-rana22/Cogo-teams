@@ -10,13 +10,32 @@ import styles from './styles.module.css';
 
 function Relations() {
 	const {
-		list, showCreateRelationModal, setShowCreateRelationModal,
-		fetchList, setParams = () => {}, loading,
+		list,
+		showCreateRelationModal,
+		setShowCreateRelationModal,
+		fetchList,
+		params,
+		setParams = () => {},
+		loading,
+		bulkMode = false,
+		setBulkMode = () => {},
+		checkedRowsId = [],
+		setCheckedRowsId = () => {},
+		activeTab,
+		setActiveTab = () => {},
+		setConfirmModalState = () => {},
+		confirmModalState = {},
+		paginationData = {},
+		getNextPage,
 	} = useAllocationRelations();
 
 	return (
 		<div className={styles.container}>
-			<Header setShowCreateRelationModal={setShowCreateRelationModal} setParams={setParams} />
+			<Header
+				setShowCreateRelationModal={setShowCreateRelationModal}
+				setParams={setParams}
+				setActiveTab={setActiveTab}
+			/>
 
 			{(!loading && isEmpty(list)) ? (
 				<div className={styles.empty_container}>
@@ -29,7 +48,23 @@ function Relations() {
 					/>
 				</div>
 
-			) : <List list={list} />}
+			) : (
+				<List
+					list={list}
+					params={params}
+					setParams={setParams}
+					bulkMode={bulkMode}
+					setBulkMode={setBulkMode}
+					checkedRowsId={checkedRowsId}
+					setCheckedRowsId={setCheckedRowsId}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+					confirmModalState={confirmModalState}
+					setConfirmModalState={setConfirmModalState}
+					paginationData={paginationData}
+					getNextPage={getNextPage}
+				/>
+			)}
 
 			{showCreateRelationModal && (
 				<CreateRelationModal

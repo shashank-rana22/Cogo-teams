@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 
-import useListAllocationPreferences from '../../../../../hooks/useListAllocationPreferences';
-import useUpdateAllocationPreferences from '../../../../../hooks/useUpdateAllocationPreferences';
+import useListAllocationPreferences from '../../../../../../../hooks/useListAllocationPreferences';
+import useUpdateAllocationPreferences from '../../../../../../../hooks/useUpdateAllocationPreferences';
 
 import PreferencesData from './PreferencesData';
 

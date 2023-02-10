@@ -3,13 +3,13 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import CheckConfigurationPublishablity from '../../Actions/CheckConfigurationPublishability';
-import CreateConfiguration from '../../Actions/CreateConfiguration';
-import DeleteConfiguration from '../../Actions/DeleteConfiguration';
-import PublishConfiguration from '../../Actions/PublishConfiguration';
-import UpdatePreferences from '../../Actions/UpdatePreferences';
-
 import ActionContent from './ActionContent';
+import CheckConfigurationPublishablity from './Actions/CheckConfigurationPublishability';
+import CreateConfiguration from './Actions/CreateConfiguration';
+import DeleteConfiguration from './Actions/DeleteConfiguration';
+import Instances from './Actions/Instances';
+import PublishConfiguration from './Actions/PublishConfiguration';
+import UpdatePreferences from './Actions/UpdatePreferences';
 import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
@@ -25,13 +25,13 @@ const columnsMapping = [
 		key      : 'schedule_type',
 		label    : 'Schedule Type',
 		getValue : (item) => startCase(getByKey(item, 'schedule_type', '___')),
-		flex     : 1,
+		flex     : 0.9,
 	},
 	{
 		key      : 'segment_type',
 		label    : 'Segment',
 		getValue : (item) => startCase(getByKey(item, 'segment_type', '___')),
-		flex     : 1,
+		flex     : 0.7,
 	},
 	{
 		key      : 'roles',
@@ -68,7 +68,7 @@ const columnsMapping = [
 				</Tooltip>
 			);
 		},
-		flex: 1.75,
+		flex: 1.5,
 	},
 	{
 		key      : 'users',
@@ -121,7 +121,7 @@ const columnsMapping = [
 		key      : 'locking_criterion',
 		label    : 'Locking Criterion',
 		getValue : (item) => startCase(getByKey(item, 'locking_criterion', '___')),
-		flex     : 1.25,
+		flex     : 1.5,
 	},
 	{
 		key      : 'next_scheduled',
@@ -154,7 +154,7 @@ const columnsMapping = [
 				<Legend
 					hasBackground={false}
 					direction="horizontal"
-					size="sm"
+					size="md"
 					style={{ margin: 0 }}
 					items={legendItem}
 				/>
@@ -217,6 +217,10 @@ const WORKFLOW_MAPPING = {
 			/>
 		),
 	},
+	instances: {
+		size   : 'lg',
+		render : ({ item }) => <Instances item={item} />,
+	},
 };
 
 function ListItem({ item, listRefetch }) {
@@ -263,6 +267,7 @@ function ListItem({ item, listRefetch }) {
 					show={!!workflowName}
 					onClose={() => setWorkflowName(null)}
 					placement="top"
+					closeOnOuterClick={false}
 				>
 					{WORKFLOW_MAPPING[workflowName]?.render({ item, listRefetch, setWorkflowName })}
 				</Modal>
