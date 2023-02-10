@@ -5,6 +5,18 @@ import Document, {
 import GTM from './GtmHandler';
 
 function CogoDocument() {
+	// const setInitialTheme = `
+	//   function getUserPreference() {
+	//     if(window.localStorage.getItem('theme')) {
+	//       return window.localStorage.getItem('theme')
+	//     }
+	//     return window.matchMedia('(prefers-color-scheme: dark)').matches
+	//       ? 'dark'
+	//       : 'light'
+	//   }
+	//   document.body.dataset.theme = getUserPreference();
+	// `;
+
 	return (
 		<Html>
 			<Head>
@@ -21,6 +33,7 @@ function CogoDocument() {
 				<link rel="icon" type="image/png" sizes="16x16" href="/v2/favicon-16x16.png" />
 			</Head>
 			<body>
+				{/* <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} /> */}
 				<Main />
 				<NextScript />
 				{process.env.NEXT_PUBLIC_GTM_ID && (
