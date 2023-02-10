@@ -78,10 +78,10 @@ function List({
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
 
-		// setConfirmModalState((prev) => ({
-		// 	...prev,
-		// 	showApproveAllButton: false,
-		// }));
+		setConfirmModalState((prev) => ({
+			...prev,
+			showApproveAllButton: false,
+		}));
 		setParams((previousParams) => ({
 			...(previousParams || {}),
 			filters: {
@@ -119,7 +119,7 @@ function List({
 						</div>
 
 						<Button
-							size="md"
+							size="sm"
 							themeType="primary"
 							disabled={!confirmModalState.showApproveAllButton}
 						>
@@ -128,7 +128,7 @@ function List({
 
 						</Button>
 					</div>
-					{checkedRowsId.length > 0 && (
+					{(checkedRowsId.length > 0 && bulkMode) && (
 						<div className={styles.selection_text}>
 							<div className={styles.text}>
 								{' '}
@@ -175,6 +175,7 @@ function List({
 						setBulkMode={setBulkMode}
 						checkedRowsId={checkedRowsId}
 						setCheckedRowsId={setCheckedRowsId}
+						activeTab={activeTab}
 					/>
 				))}
 

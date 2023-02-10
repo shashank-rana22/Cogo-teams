@@ -20,6 +20,9 @@
 
 .toggle_container{
 	padding: 0px;
+	:global(.ui_toggle_container){
+		padding: 0px;
+	}
 }
 
 .filter_dot {

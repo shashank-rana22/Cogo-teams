@@ -38,6 +38,7 @@ function Relations() {
 			<Header
 				setShowCreateRelationModal={setShowCreateRelationModal}
 				setParams={setParams}
+				params={params}
 				setActiveTab={setActiveTab}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
