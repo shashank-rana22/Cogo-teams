@@ -21,8 +21,6 @@ function AllocationQuotas() {
 		refetch,
 	} = useListAllocationQuotas();
 
-	console.log('quotaItem', quotaItem);
-
 	const toggleRoleType = params?.filters?.quota_type;
 
 	return (
@@ -42,7 +40,7 @@ function AllocationQuotas() {
 				toggleRoleType={toggleRoleType}
 				setQuotaItem={setQuotaItem}
 			/>
-			{/* Todo isupdatable can be called   */}
+			{/* Todo isUpdatable can be called   */}
 
 			{quotaItem && (
 				<Modal
