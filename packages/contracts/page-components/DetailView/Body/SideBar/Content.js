@@ -31,6 +31,18 @@ function Content({
 		handleUpdateContract(showModal);
 		setShowModal(null);
 	};
+	const handleApprove = () => {
+		if (portPair?.status === 'pending') {
+			return;
+		}
+		setShowModal({
+			payload: {
+				id           : portPair?.id,
+				service_type : portPair?.service_type,
+				status       : 'approved',
+			},
+		});
+	};
 
 	const Element = iconMapping[portPair?.service_type || 'fcl_freight'];
 	return (
@@ -72,17 +84,13 @@ function Content({
 									REJECT
 								</div>
 								<div
-									className={styles.button_approve}
+									className={portPair?.status === 'pending'
+										? styles.button_pending
+										: styles.button_approve}
 									role="presentation"
 									onClick={(e) => {
 										e.stopPropagation();
-										setShowModal({
-											payload: {
-												id           : portPair?.id,
-												service_type : portPair?.service_type,
-												status       : 'approved',
-											},
-										});
+										handleApprove();
 									}}
 								>
 									APPROVE
