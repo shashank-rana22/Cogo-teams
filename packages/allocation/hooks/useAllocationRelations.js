@@ -1,9 +1,11 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useAllocationRelations = () => {
 	// const [page, setPage] = useState(1);
-	// const [searchValue, setSearchValue] = useState('');
+
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [confirmModalState, setConfirmModalState] = useState({
 		type                  : '',
@@ -24,10 +26,13 @@ const useAllocationRelations = () => {
 		page_limit : 10,
 		page       : 1,
 		filters    : {
-			status: 'active',
+			status : 'active',
+			q      : searchQuery || undefined,
 		},
 		data_required: true,
 	});
+
+	const [searchValue, setSearchValue] = useState(params.filters?.q);
 
 	const [{ loading, data: apiData }, refetch] = useRequest({
 		url    : '/list_allocation_relations',
@@ -41,6 +46,16 @@ const useAllocationRelations = () => {
 			page: newPage,
 		}));
 	};
+
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
 
 	const { list = [], ...paginationData } = apiData || {};
 
@@ -62,6 +77,10 @@ const useAllocationRelations = () => {
 		confirmModalState,
 		setConfirmModalState,
 		getNextPage,
+		searchValue,
+		setSearchValue,
+		debounceQuery,
+		searchQuery,
 	};
 };
 

@@ -27,6 +27,10 @@ function Relations() {
 		confirmModalState = {},
 		paginationData = {},
 		getNextPage,
+		setSearchValue = () => {},
+		searchValue = '',
+		debounceQuery,
+		searchQuery,
 	} = useAllocationRelations();
 
 	return (
@@ -35,6 +39,9 @@ function Relations() {
 				setShowCreateRelationModal={setShowCreateRelationModal}
 				setParams={setParams}
 				setActiveTab={setActiveTab}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				debounceQuery={debounceQuery}
 			/>
 
 			{(!loading && isEmpty(list)) ? (
@@ -63,6 +70,7 @@ function Relations() {
 					setConfirmModalState={setConfirmModalState}
 					paginationData={paginationData}
 					getNextPage={getNextPage}
+					searchQuery={searchQuery}
 				/>
 			)}
 
