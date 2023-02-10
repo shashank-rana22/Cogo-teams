@@ -250,7 +250,6 @@ const apis = [
 		api          : 'get_kam_desk_shipment_stats',
 		access_type  : 'private',
 		service_name : 'bookings',
-
 	},
 ];
 
