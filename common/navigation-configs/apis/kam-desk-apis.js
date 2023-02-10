@@ -246,6 +246,12 @@ const apis = [
 		api         : 'get_sales_invoice_shipment_list',
 		access_type : 'private',
 	},
+	{
+		api          : 'get_kam_desk_shipment_stats',
+		access_type  : 'private',
+		service_name : 'bookings',
+
+	},
 ];
 
 export default apis;
