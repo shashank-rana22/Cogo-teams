@@ -2,8 +2,8 @@ import { Modal, Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import Form from '../../../common/Form';
+import useCreateAllocationRequest from '../../../hooks/useCreateAllocationRequest';
 import useListAllocationRequests from '../../../hooks/useListAllocationRequests';
-import useSaveAllocationRequest from '../../../hooks/useSaveAllocationRequest';
 
 import Header from './Header';
 import List from './List';
@@ -30,7 +30,7 @@ function Requests() {
 		loading: loadingOnSave,
 		formProps,
 		controls,
-	} = useSaveAllocationRequest({ onCloseModal, refetch });
+	} = useCreateAllocationRequest({ onCloseModal, refetch });
 
 	const { handleSubmit } = formProps;
 
@@ -53,7 +53,7 @@ function Requests() {
 				fetchList={refetch}
 			/>
 
-			{showModal ? (
+			{showModal && (
 				<Modal
 					show={showModal}
 					position="basic"
@@ -84,7 +84,7 @@ function Requests() {
 						</Modal.Footer>
 					</form>
 				</Modal>
-			) : null}
+			)}
 		</section>
 	);
 }

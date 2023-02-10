@@ -17,3 +17,8 @@
 		align-items: flex-start;
 	}
 }
+
+.tab_list{
+	overflow-x: scroll;
+	margin: 16px 0px;
+}

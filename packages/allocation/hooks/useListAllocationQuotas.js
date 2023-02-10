@@ -2,14 +2,13 @@ import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useListAllocationQuotas = () => {
-	const [showCreateQuotas, setShowCreateQuotas] = useState(false);
-
 	const [params, setParams] = useState({
 		sort_type : 'desc',
 		sort_by   : 'created_at',
 		page      : 1,
 		filters   : {
-
+			status     : 'active',
+			quota_type : 'role',
 		},
 	});
 
@@ -34,8 +33,6 @@ const useListAllocationQuotas = () => {
 		// getNextPage,
 		params,
 		setParams,
-		showCreateQuotas,
-		setShowCreateQuotas,
 		refetch,
 	};
 };

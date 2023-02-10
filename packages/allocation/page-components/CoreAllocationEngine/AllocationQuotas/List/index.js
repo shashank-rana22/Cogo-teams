@@ -6,7 +6,7 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { data, loading, onChangeParams, fetchList } = props;
+	const { data, toggleRoleType, loading, onChangeParams, fetchList } = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
 	//  delete hook
@@ -32,6 +32,7 @@ function List(props) {
 					id="request_list"
 					key={item.id}
 					data={item}
+					toggleRoleType={toggleRoleType}
 					// showModal={showDeleteConfirmationModal}
 					// onClickDelete={() => {
 					// }}

@@ -1,19 +1,23 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useAllocationRelations = () => {
 	// const [page, setPage] = useState(1);
-	// const [searchValue, setSearchValue] = useState('');
 
-	// const [confirmModalState, setConfirmModalState] = useState({
-	// 	type: '',
-	// 	relationData: {},
-	// 	showConfirmationModal: false,
-	// 	showApproveAllButton: false,
-	// });
-	// const [activeTab, setActiveTab] = useState('active');
-	// const [bulkMode, setBulkMode] = useState(false);
-	// const [checkedRowsId, setCheckedRowsId] = useState([]);
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [confirmModalState, setConfirmModalState] = useState({
+		type                  : '',
+		relationData          : {},
+		showConfirmationModal : false,
+		showApproveAllButton  : false,
+	});
+
+	const [activeTab, setActiveTab] = useState('active');
+
+	const [bulkMode, setBulkMode] = useState(false);
+	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [showCreateRelationModal, setShowCreateRelationModal] = useState(false);
 
 	const [params, setParams] = useState({
@@ -22,16 +26,36 @@ const useAllocationRelations = () => {
 		page_limit : 10,
 		page       : 1,
 		filters    : {
-			status: 'active',
+			status : 'active',
+			q      : searchQuery || undefined,
 		},
 		data_required: true,
 	});
+
+	const [searchValue, setSearchValue] = useState(params.filters?.q);
 
 	const [{ loading, data: apiData }, refetch] = useRequest({
 		url    : '/list_allocation_relations',
 		method : 'get',
 		params,
 	}, { manual: false });
+
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: newPage,
+		}));
+	};
+
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
 
 	const { list = [], ...paginationData } = apiData || {};
 
@@ -44,6 +68,19 @@ const useAllocationRelations = () => {
 		showCreateRelationModal,
 		setShowCreateRelationModal,
 		fetchList: refetch,
+		bulkMode,
+		setBulkMode,
+		checkedRowsId,
+		setCheckedRowsId,
+		activeTab,
+		setActiveTab,
+		confirmModalState,
+		setConfirmModalState,
+		getNextPage,
+		searchValue,
+		setSearchValue,
+		debounceQuery,
+		searchQuery,
 	};
 };
 

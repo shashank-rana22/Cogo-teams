@@ -5,16 +5,23 @@ import styles from './styles.module.css';
 
 function SearchInput({
 	value = '',
-	onChange = () => {},
 	placeholder = '',
 	size = 'lg',
+	setGlobalSearch = () => {},
+	debounceQuery,
 }) {
+	const handleGlobalSearch = (val) => {
+		setGlobalSearch(val);
+
+		debounceQuery(val);
+	};
+
 	return (
 		<div className={styles.container}>
 			<Input
 				prefix={<IcMSearchlight />}
 				value={value}
-				onChange={(val) => onChange(val)}
+				onChange={(val) => handleGlobalSearch(val)}
 				size={size}
 				placeholder={placeholder}
 			/>

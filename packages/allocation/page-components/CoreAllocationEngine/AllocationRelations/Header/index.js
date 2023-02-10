@@ -8,6 +8,10 @@ import styles from './styles.module.css';
 function Header({
 	setShowCreateRelationModal = () => {},
 	setParams = () => {},
+	setActiveTab = () => {},
+	searchValue,
+	setSearchValue = () => {},
+	debounceQuery,
 }) {
 	const onChangeToggle = (event) => {
 		setParams((previousParams) => ({
@@ -17,20 +21,27 @@ function Header({
 				status: event?.target?.checked ? 'pending' : 'active',
 			},
 		}));
+		setActiveTab(() => {
+			if (event?.target?.checked) {
+				return 'pending';
+			}
+
+			return 'active';
+		});
 	};
 
 	return (
 		<div className={styles.header_container}>
 
-			<div>
+			<div className={styles.toggle_container}>
 				<Toggle
 					name="relation_status"
 					size="md"
 					offLabel="Active"
 					onLabel="Pending"
-					style={{ padding: '0px' }}
 					onChange={(event) => onChangeToggle(event)}
 				/>
+
 			</div>
 
 			<div className={styles.button_container}>
@@ -38,8 +49,12 @@ function Header({
 					<SearchInput
 						size="sm"
 						placeholder="Search by Company Name/User/Stakeholder"
+						setGlobalSearch={setSearchValue}
+						debounceQuery={debounceQuery}
+						value={searchValue}
 					/>
 				</div>
+
 				<Button size="md" themeType="secondary">
 					FILTER
 					<IcMFilter style={{ marginLeft: '4px' }} />
@@ -57,6 +72,7 @@ function Header({
 			</div>
 
 		</div>
+
 	);
 }
 
