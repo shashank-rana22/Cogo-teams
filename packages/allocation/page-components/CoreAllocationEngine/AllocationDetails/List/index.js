@@ -1,5 +1,7 @@
 import { Table, Button, Legend, Tooltip, Pill, Pagination } from '@cogoport/components';
-import { getByKey, startCase } from '@cogoport/utils';
+import { getByKey, isEmpty, startCase } from '@cogoport/utils';
+
+import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
@@ -20,6 +22,20 @@ const LIST_COLUMNS_MAPPING = {
 };
 
 function List({ list, loading, paginationData, getNextaPage }) {
+	if (!loading && isEmpty(list)) {
+		return (
+			<div className={styles.emptystate}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No records found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+			</div>
+		);
+	}
+
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
@@ -110,7 +126,7 @@ function List({ list, loading, paginationData, getNextaPage }) {
 	});
 
 	return (
-		<div>
+		<div className={styles.list_container}>
 			<Table
 				className={styles.table}
 				columns={columns}

@@ -8,9 +8,9 @@
 .search_container {
     display: flex;
     margin-right: 8px;
+	
 	:global(.ui_input_container){
 		width: 370px;
-	
 	}
 }
 

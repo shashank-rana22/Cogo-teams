@@ -1,6 +1,7 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useListAllocationDetails = () => {
 	const {
@@ -9,12 +10,19 @@ const useListAllocationDetails = () => {
 
 	const { partner_id = '', instance_id = '' } = query;
 
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [searchValue, setSearchValue] = useState();
+
 	const [params, setParams] = useState({
 		page_limit                           : 50,
 		page                                 : 1,
 		is_allocation_instance_required      : true,
 		is_allocation_configuration_required : true,
-		filters                              : { allocation_instance_id: instance_id },
+		filters                              : {
+			allocation_instance_id : instance_id,
+			q                      : searchQuery || undefined,
+		},
 	});
 
 	const [{ loading, data }, refetch] = useRequest({
@@ -22,6 +30,16 @@ const useListAllocationDetails = () => {
 		method : 'get',
 		params,
 	}, { manual: false });
+
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
 
 	const getNextPage = (newPage) => {
 		setParams((previousParams) => ({
@@ -42,6 +60,10 @@ const useListAllocationDetails = () => {
 		setParams,
 		partner_id,
 		locale,
+		debounceQuery,
+		searchQuery,
+		searchValue,
+		setSearchValue,
 	};
 };
 

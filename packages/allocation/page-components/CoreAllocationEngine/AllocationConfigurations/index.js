@@ -36,7 +36,7 @@ function Configurations() {
 
 			{showCreateConfig && (
 				<Modal
-					size="lg"
+					size="md"
 					show={showCreateConfig}
 					onClose={() => setShowCreateConfig(false)}
 					closeOnOuterClick={false}

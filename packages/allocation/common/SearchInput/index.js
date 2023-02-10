@@ -9,6 +9,7 @@ function SearchInput({
 	size = 'lg',
 	setGlobalSearch = () => {},
 	debounceQuery,
+	...rest
 }) {
 	const handleGlobalSearch = (val) => {
 		setGlobalSearch(val);
@@ -24,6 +25,7 @@ function SearchInput({
 				onChange={(val) => handleGlobalSearch(val)}
 				size={size}
 				placeholder={placeholder}
+				{...rest}
 			/>
 		</div>
 	);
