@@ -166,7 +166,7 @@ const columnsMapping = [
 
 const WORKFLOW_MAPPING = {
 	edit: {
-		size   : 'lg',
+		size   : 'md',
 		render : ({ item, listRefetch, setWorkflowName }) => (
 			<CreateConfiguration
 				viewType="edit"

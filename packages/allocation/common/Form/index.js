@@ -18,7 +18,7 @@ function Form(props) {
 
 				return (
 					<div className={styles.form_group}>
-						<span>{el.label}</span>
+						<span className={styles.label}>{el.label}</span>
 
 						<div className={styles.input_group}>
 							<Element
