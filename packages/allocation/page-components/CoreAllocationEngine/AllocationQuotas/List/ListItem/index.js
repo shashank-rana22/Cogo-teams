@@ -6,23 +6,10 @@ import { useState } from 'react';
 import Actions from './Actions';
 import styles from './styles.module.css';
 
-// const LIST_COLUMNS_MAPPING = {
-// 	role: {
-// 		role             : 'Role',
-// 		quota_attributes : 'Quota Attributes',
-// 		created_by       : 'Created by',
-// 		created_at       : 'Created at',
-// 		action           : 'Action',
-// 	},
-// 	user: {
-// 		user             : 'User',
-// 		quota_attributes : 'Quota Attributes',
-// 		created_by       : 'Created by',
-// 		created_at       : 'Created at',
-// 		action           : 'Action',
-// 	},
-// };
-// make an array of strings
+const ROLE_TYPE_LIST_MAPPING = {
+	role : ['role', 'created_by', 'created_at'],
+	user : ['user', 'created_by', 'created_at'],
+};
 
 const columnsMapping = [
 	{
@@ -79,13 +66,20 @@ const columnsMapping = [
 ];
 
 function ListItem(props) {
-	const { data, onClickStatusChange } = props;
+	const { data, toggleRoleType, onClickStatusChange } = props;
 
 	const [showPopover, setShowPopover] = useState(false);
 
+	// Todo useMemo
+	const filteredList = columnsMapping.filter((listItem) => {
+		if (ROLE_TYPE_LIST_MAPPING[toggleRoleType]?.includes(listItem.key)) {
+			return listItem;
+		}
+	});
+
 	return (
 		<div className={styles.list_item_container}>
-			{columnsMapping.map((columnDetails) => {
+			{filteredList.map((columnDetails) => {
 				const { key, flex, label, getValue } = columnDetails;
 
 				const value = getValue(data);

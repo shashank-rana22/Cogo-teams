@@ -1,142 +1,54 @@
-const controls = [
+const quotasCreateControls = [
 	{
-		name  : 'el_mid_size',
-		type  : 'number',
-		rules : { min: 0 },
+		name    : 'role_type',
+		label   : 'Role Type',
+		type    : 'radio',
+		options : [
+			{
+				label : 'Role',
+				value : 'role',
+			},
+			{
+				label : 'User',
+				value : 'user',
+			},
+		],
 	},
 	{
-		name  : 'el_long_tail',
-		type  : 'number',
-		rules : { min: 0 },
+		name           : 'user_id',
+		label          : 'Partner User',
+		type           : 'asyncSelect',
+		valueKey       : 'user_id',
+		placeholder    : 'Select partner user',
+		asyncKey       : 'partner_users',
+		defaultOptions : true,
+		params         : {
+			filters: {
+				partner_entity_types: ['cogoport'],
+			},
+		},
+		rules: {
+			required: 'User is Required',
+		},
 	},
 	{
-		name  : 'el_enterprise',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-	{
-		name  : 'el_unknown',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-	{
-		name  : 'el_total',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-	{
-		name  : 'sql_mid_size',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-	{
-		name  : 'sql_long_tail',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-	{
-		name  : 'sql_enterprise',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'sql_unknown',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'sql_total',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-
-	{
-		name  : 'kyc_mid_size',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'kyc_long_tail',
-		type  : 'number',
-		rules : { min: 0 },
-	},
-	{
-		name  : 'kyc_enterprise',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'kyc_unknown',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'kyc_total',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-
-	{
-		name  : 'transacting_mid_size',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'transacting_long_tail',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'transacting_enterprise',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'transacting_unknown',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'transacting_total',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-
-	{
-		name  : 'total_mid_size',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'total_long_tail',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'total_enterprise',
-		type  : 'number',
-		rules : { min: 0 },
-
-	},
-	{
-		name  : 'total_unknown',
-		type  : 'number',
-		rules : { min: 0 },
-
+		name        : 'role_id',
+		label       : 'Role',
+		type        : 'select',
+		asyncKey    : 'partner_roles',
+		placeholder : 'Select role',
+		valueKey    : 'id',
+		params      : {
+			permissions_data_required : false,
+			filters                   : {
+				// ! stakeholder_id   : geo.uuid.parent_entity_id,
+				stakeholder_type: 'partner',
+			},
+		},
+		rules: {
+			required: 'Role is required',
+		},
 	},
 ];
 
-export default controls;
+export default quotasCreateControls;

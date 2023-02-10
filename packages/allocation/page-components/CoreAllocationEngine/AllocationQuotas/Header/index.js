@@ -5,11 +5,12 @@ import styles from './styles.module.css';
 function Header(props) {
 	const {
 		loading,
-		params,
 		setParams,
-		toggleValue,
+		toggleRoleType,
 		onClickCreateQuota,
 	} = props;
+
+	console.log('toggleValue', toggleRoleType);
 
 	// Todo search filter should expand on clicking
 
@@ -21,16 +22,15 @@ function Header(props) {
 				offLabel="Role"
 				onLabel="User"
 				disabled={loading}
-				value={toggleValue}
+				value={toggleRoleType}
 				onChange={(e) => setParams((pv) => ({
 					...pv,
 					filters:
-					{
-						...pv.filters,
-						service_type: e?.target?.checked ? 'role' : 'user',
-					},
+						{
+							...pv.filters,
+							quota_type: e?.target?.checked ? 'user' : 'role',
+						},
 				}))}
-
 			/>
 
 			<div>

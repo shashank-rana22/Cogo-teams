@@ -1,17 +1,18 @@
-import { Modal, Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import useListAllocationQuotas from '../../../hooks/useListAllocationQuotas';
 
 import Header from './Header';
 import List from './List';
+import QuotaModal from './QuotaModal';
 import styles from './styles.module.css';
 
 function AllocationQuotas() {
-	const [showModal, setShowModal] = useState(false);
+	// Todo should go inside hook
+	const [showCreateQuotas, setShowCreateQuotas] = useState(false);
 
 	const onCloseModal = () => {
-		setShowModal(false);
+		setShowCreateQuotas(false);
 	};
 
 	const {
@@ -20,19 +21,18 @@ function AllocationQuotas() {
 		// getNextPage,
 		params,
 		setParams,
-		showCreateQuotas,
-		setShowCreateQuotas,
 		refetch,
 	} = useListAllocationQuotas();
+
+	const toggleRoleType = params?.filters?.quota_type;
 
 	return (
 		<section className={styles.container}>
 			<Header
-				onClickCreateQuota={() => setShowModal(true)}
-				params={params}
+				onClickCreateQuota={() => setShowCreateQuotas(true)}
 				setParams={setParams}
 				loading={listLoading}
-				toggleValue={params?.filters.role_type}
+				toggleRoleType={toggleRoleType}
 				setShowCreateQuotas={setShowCreateQuotas}
 			/>
 
@@ -41,40 +41,15 @@ function AllocationQuotas() {
 				loading={listLoading}
 				// onChangeParams={onChangeParams}
 				fetchList={refetch}
+				toggleRoleType={toggleRoleType}
 			/>
 
 			{showCreateQuotas ? (
-				<Modal
-					show={showCreateQuotas}
-					position="basic"
-					size="lg"
-					onClose={onCloseModal}
-					closeOnOuterClick={false}
-					className={styles.modal_container}
-				>
-					<Modal.Header title="Create Quota" />
-
-					<form>
-						<Modal.Body>
-							{/* <Form
-								formProps={formProps}
-								controls={controls}
-							/> */}
-							n,mbnm
-						</Modal.Body>
-
-						<Modal.Footer>
-							<Button
-								size="md"
-								type="submit"
-								// loading={loadingOnSave}
-								id="save_quota_btn"
-							>
-								Save
-							</Button>
-						</Modal.Footer>
-					</form>
-				</Modal>
+				<QuotaModal
+					showCreateQuotas={showCreateQuotas}
+					onCloseModal={onCloseModal}
+					refetch={refetch}
+				/>
 			) : null}
 		</section>
 	);
