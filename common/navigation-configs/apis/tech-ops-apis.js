@@ -157,13 +157,19 @@ const apis = [
 		api          : 'list_rfq_request_sheets',
 		access_type  : 'private',
 		feature      : 'tech_ops',
-		service_name : 'contract',
+		service_name : 'rfq',
 	},
 	{
 		api          : 'list_contract_plan_sheet_uploads',
 		access_type  : 'private',
 		feature      : 'tech_ops',
 		service_name : 'contract',
+	},
+	{
+		api          : 'update_rfq_request_sheet',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'rfq',
 	},
 	{
 		api          : 'list_contracts',

@@ -44,13 +44,16 @@ function Content({
 			>
 				<div className={styles.sub_container}>
 					<div className={styles.service}>
+
 						<div className={styles.display_service}>
 							<Element width={30} height={30} style={{ padding: '4px' }} />
 							{`${portPair?.service_type?.split('_')[0]} ${
 								portPair?.service_type?.split('_')[1]
 							}`}
 						</div>
-						{portPair?.status === 'quoted' && data?.status === 'pending_approval' ? (
+						<div className={styles.information}>
+							{(portPair?.status === 'quoted' || portPair?.status === 'pending')
+						&& data?.status === 'pending_approval' ? (
 							<div className={styles.buttons}>
 								<div
 									className={styles.button_reject}
@@ -85,17 +88,20 @@ function Content({
 									APPROVE
 								</div>
 							</div>
-						) : 	(
-							<Pill
-								color={portPair?.status === 'rejected' ? 'red' : 'green'}
-								style={{
-									padding    : '4px',
-									marginLeft : '6px',
-								}}
-							>
-								{portPair?.status === 'rejected' ? 'Rejected' : 'Approved'}
-							</Pill>
-						)}
+								) : 	(
+									<Pill
+										color={portPair?.status === 'rejected' ? 'red' : 'green'}
+										style={{
+											padding    : '4px',
+											marginLeft : '6px',
+										}}
+									>
+										{portPair?.status === 'rejected' ? 'Rejected' : 'Approved'}
+									</Pill>
+								)}
+							{portPair?.status === 'pending'
+								? <div className={styles.info}> Locals are yet to be added</div> : null}
+						</div>
 					</div>
 
 					<div className={styles.port_pair}>

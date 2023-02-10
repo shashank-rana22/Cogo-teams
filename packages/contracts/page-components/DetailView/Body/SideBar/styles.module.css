@@ -80,6 +80,7 @@
 
 .buttons {
   display: flex;
+  justify-content: flex-end;
 }
 .button_approve {
   font-weight: 600;
@@ -123,4 +124,18 @@
 .display_service{
   display: flex;
   align-items: center;
+}
+.information{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: end;
+  margin-top: 4px;
+}
+
+.info{
+  background-color: #f4b97e;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 10px;
 }
