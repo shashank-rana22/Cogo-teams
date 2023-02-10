@@ -8,6 +8,7 @@ const nameMapping = {
 	origin_local_charge_codes      : 'origin_local',
 	cfs_charge_codes               : 'freights',
 	customs_charge_codes           : 'freights',
+	haulage_charge_codes           : 'freights',
 };
 
 const chargeControls = ({ heading = '', charge_code_name }) => {
