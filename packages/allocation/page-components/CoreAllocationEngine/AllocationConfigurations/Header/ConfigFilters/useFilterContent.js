@@ -67,7 +67,15 @@ const useFilterContent = ({ params, setParams }) => {
 
 	const filtersApplied = Object.keys(filters).length !== 0;
 
-	return { controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied };
+	return {
+		controls,
+		formProps,
+		showFilters,
+		setShowFilters,
+		handleReset,
+		applyFilters,
+		filtersApplied,
+	};
 };
 
 export default useFilterContent;

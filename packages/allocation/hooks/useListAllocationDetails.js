@@ -20,8 +20,7 @@ const useListAllocationDetails = () => {
 		is_allocation_instance_required      : true,
 		is_allocation_configuration_required : true,
 		filters                              : {
-			allocation_instance_id : instance_id,
-			q                      : searchQuery || undefined,
+			allocation_instance_id: instance_id,
 		},
 	});
 
