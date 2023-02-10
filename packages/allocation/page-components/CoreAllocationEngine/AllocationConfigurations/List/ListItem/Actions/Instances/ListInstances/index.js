@@ -54,8 +54,8 @@ function ListInstances({ item }) {
 
 		if (['pending_approval', 'completed'].includes(status)) {
 			push(
-				'/allocation/details/[instance_id]',
-				`/allocation/details/${selectedInstanceId}`,
+				'/allocation/core-engine/details/[instance_id]',
+				`/allocation/core-engine/details/${selectedInstanceId}`,
 			);
 		}
 	};
@@ -156,7 +156,7 @@ function ListInstances({ item }) {
 		const dataToPush = {};
 
 		Object.keys(LIST_COLUMNS_MAPPING).forEach((dataKey) => {
-			dataToPush[dataKey] = formattedData[dataKey] || item[dataKey] || '-';
+			dataToPush[dataKey] = formattedData[dataKey] || listItem[dataKey] || '___';
 		});
 
 		return dataToPush;

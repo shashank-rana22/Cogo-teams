@@ -1,0 +1,31 @@
+.pagination_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.table {
+    tr {
+        height: 60px;
+    }
+}
+
+.legend {
+    margin: 0px;
+
+    :global(.ui_legend_item){
+        margin: 0px;
+    }
+}
+
+.stakeholder_type {
+    font-size: 10px;
+    color: #828282;
+}
+
+.business_name {
+    /* font-weight: 600; */
+}
+
+.toottip_content {
+    word-break: initial;
+}
