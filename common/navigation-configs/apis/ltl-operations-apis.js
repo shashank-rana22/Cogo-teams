@@ -200,7 +200,58 @@ const apis = [
 		service_name : 'ltl_warehouse_ops',
 	},
 	{
-		api          : 'list_ltl_freight_warehouses',
+		api          : 'get_ltl_fm_consol',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'get_ltl_lm_consol',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+
+	},
+	{
+		api          : 'get_ltl_pickup_run_sheet',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'get_ltl_fm_lm_consol',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'create_ltl_fm_lm_consol',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'get_ltl_delivery_run_sheet',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'get_ltl_freight_fm_shipment',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'get_ltl_freight_lm_shipment',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'update_ltl_freight_vehicle_departure',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'update_ltl_freight_consol_milestone',
+		access_type  : 'private',
+		service_name : 'ltl_warehouse_ops',
+	},
+	{
+		api          : 'update_ltl_freight_fm_lm_vehicle_arrival',
 		access_type  : 'private',
 		service_name : 'ltl_warehouse_ops',
 	},
