@@ -45,35 +45,23 @@ function Relations() {
 				debounceQuery={debounceQuery}
 			/>
 
-			{(!loading && isEmpty(list)) ? (
-				<div className={styles.empty_container}>
-					<EmptyState
-						height={280}
-						width={440}
-						emptyText="No records found"
-						textSize="24px"
-						flexDirection="column"
-					/>
-				</div>
-
-			) : (
-				<List
-					list={list}
-					params={params}
-					setParams={setParams}
-					bulkMode={bulkMode}
-					setBulkMode={setBulkMode}
-					checkedRowsId={checkedRowsId}
-					setCheckedRowsId={setCheckedRowsId}
-					activeTab={activeTab}
-					setActiveTab={setActiveTab}
-					confirmModalState={confirmModalState}
-					setConfirmModalState={setConfirmModalState}
-					paginationData={paginationData}
-					getNextPage={getNextPage}
-					searchQuery={searchQuery}
-				/>
-			)}
+			<List
+				list={list}
+				loading={loading}
+				params={params}
+				setParams={setParams}
+				bulkMode={bulkMode}
+				setBulkMode={setBulkMode}
+				checkedRowsId={checkedRowsId}
+				setCheckedRowsId={setCheckedRowsId}
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				confirmModalState={confirmModalState}
+				setConfirmModalState={setConfirmModalState}
+				paginationData={paginationData}
+				getNextPage={getNextPage}
+				searchQuery={searchQuery}
+			/>
 
 			{showCreateRelationModal && (
 				<CreateRelationModal

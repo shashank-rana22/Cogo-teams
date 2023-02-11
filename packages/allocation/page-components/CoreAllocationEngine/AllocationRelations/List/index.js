@@ -1,11 +1,16 @@
 import { Pagination, Chips, Button, Checkbox } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import EmptyState from '../../../../common/EmptyState';
+import LoadingState from '../../../../common/LoadingState';
 
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List({
 	list,
+	loading,
 	params,
 	setParams = () => {},
 	bulkMode = false,
@@ -22,6 +27,24 @@ function List({
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState('');
+
+	if (loading) {
+		return <LoadingState />;
+	}
+
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No records found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+			</div>
+		);
+	}
 
 	const applyBulkFilter = async () => {
 		setConfirmModalState((prev) => ({

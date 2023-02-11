@@ -2,6 +2,7 @@ import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import LoadingState from '../../../../common/LoadingState';
 
 import ListItem from './ListItem';
 // import ListItem from './ListItem';
@@ -20,7 +21,7 @@ function List(props) {
 	//  delete hook
 
 	if (loading) {
-		return 'Loading...';
+		return <LoadingState />;
 	}
 
 	if (isEmpty(list)) {

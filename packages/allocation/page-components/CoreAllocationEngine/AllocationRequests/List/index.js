@@ -2,6 +2,7 @@ import { Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import LoadingState from '../../../../common/LoadingState';
 import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest';
 
 import ListItem from './ListItem';
@@ -28,7 +29,7 @@ function List(props) {
 	} = useUpdateRequestStatus({ fetchList });
 
 	if (loading) {
-		return 'Loading...';
+		return <LoadingState />;
 	}
 
 	if (isEmpty(list)) {

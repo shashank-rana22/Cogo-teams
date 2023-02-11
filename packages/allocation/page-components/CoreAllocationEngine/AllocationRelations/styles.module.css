@@ -2,13 +2,3 @@
     margin-top: 16px;
 }
 
-.empty_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-    margin-top: 16px;
-    border-radius: 10px;
-    background: #FFFFFF;
-    height: 70vh;
-}
