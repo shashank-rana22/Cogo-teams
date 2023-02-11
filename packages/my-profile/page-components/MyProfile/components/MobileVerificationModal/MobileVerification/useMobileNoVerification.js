@@ -28,7 +28,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 	// 	'partner',
 	// )('/verify_user_mobile');
 
-	const verifyMobileNumberAPI = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/verify_user_mobile',
 		method : 'post',
 	}, { manual: false });
@@ -42,7 +42,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 							selectedUser.mobile_country_code
 							|| control?.value?.country_code
 							|| '+91',
-					number: selectedUser.mobile_number || control?.value?.number || '',
+					number: selectedUser.mobile_number || control?.value?.number || 1,
 				},
 			};
 		}
@@ -52,23 +52,23 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 	}), [controls, selectedUser]);
 
 	// const formProps = useForm(newControls);
-	const { handleSubmit, formState: { errors }, control: actualControl, watch, getValues } = useForm();
+	const { handleSubmit, formState: { errors }, control: actualControl, getValues, setValue } = useForm();
 
-	const watchMobileNumberControl = watch('mobileNumber');
-
-	useEffect(() => {
-		if (showEnterOtpComponent) setShowEnterOtpComponent(false);
-	}, [watchMobileNumberControl, showEnterOtpComponent]);
+	// const watchMobileNumberControl = watch('mobileNumber');
 
 	// useEffect(() => {
-	// 	formProps.setValues({
-	// 		mobileNumber: {
-	// 			number       : selectedUser.mobile_number,
-	// 			country_code : selectedUser.mobile_country_code,
-	// 		},
-	// 	});
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
+	// 	if (showEnterOtpComponent) setShowEnterOtpComponent(false);
+	// }, [watchMobileNumberControl, showEnterOtpComponent]);
+
+	useEffect(() => {
+		setValue(
+			'mobileNumber',
+			{
+				number       : selectedUser?.mobile_number,
+				country_code : selectedUser?.mobile_country_code,
+			},
+		);
+	}, [type]);
 
 	// const onErrors = (errs = {}) => setErrors({ ...errs });
 
@@ -86,7 +86,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 				payload = { ...payload, mobile_otp: otpNumber };
 			}
 
-			await verifyMobileNumberAPI?.trigger({ data: payload });
+			await trigger({ data: payload });
 
 			if (actionType === 'SEND_OTP') {
 				setShowEnterOtpComponent(true);
@@ -119,12 +119,13 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 		showEnterOtpComponent,
 		otpNumber,
 		setOtpNumber,
-		verifyMobileNumberAPI,
+		// verifyMobileNumberAPI,
 		sendOtpNumber,
 		verifyOtpNumber,
 		actualControl,
 		errors,
 		handleSubmit,
+		loading,
 	};
 };
 

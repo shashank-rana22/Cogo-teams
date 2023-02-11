@@ -1,9 +1,8 @@
-import InputAdmin, { Input, Grid } from '@cogoport/components';
+import InputAdmin, { Input } from '@cogoport/components';
 import React from 'react';
 
 import SelectCountryCode from './SelectCountryCode';
-
-const { Row, Col } = Grid;
+import styles from './styles.module.css';
 
 function SelectMobileNumber({
 	value,
@@ -88,8 +87,8 @@ function SelectMobileNumber({
 	}
 
 	return (
-		<Row style={width ? { width: '104%' } : {}}>
-			<Col xs={4} sm={4} md={4} lg={4} xl={4} style={{ paddingRight: 0 }}>
+		<div className={styles.row_container} style={width ? { width: '104%' } : {}}>
+			<div className={styles.country_code} style={{ paddingRight: 0 }}>
 				<SelectCountryCode
 					{...rest}
 					{...props}
@@ -101,20 +100,21 @@ function SelectMobileNumber({
 					inputId={`${id || ''}_${codeKey || 'country_code'}`}
 					theme={theme}
 				/>
-			</Col>
-			<Col xs={8} sm={8} md={8} lg={8} xl={8}>
+			</div>
+
+			<div className={styles.mobile_number}>
 				<InputEle
 					{...rest}
 					width="100%"
 					id={`${id || ''}_${numberKey || 'number'}`}
 					name="mobile_number"
 					type={inputType || type}
-					value={number || (value || {})[numberKey] || ''}
+					value={number || (value || {})[numberKey]}
 					onChange={handleNumberChange}
 					style={inputStyle}
 				/>
-			</Col>
-		</Row>
+			</div>
+		</div>
 	);
 }
 
