@@ -13,9 +13,7 @@ function CoreAllocationEngine() {
 	return (
 		<section className={styles.container} id="core_engine_container">
 			<section className={styles.heading_container}>
-				<Heading
-					title="Core Engine"
-				/>
+				Core Engine
 			</section>
 
 			<div className={styles.tab_list}>
