@@ -9,6 +9,7 @@ function Header({
 	setShowCreateRelationModal = () => {},
 	setParams = () => {},
 	params,
+	loading,
 	setActiveTab = () => {},
 	searchValue,
 	setSearchValue = () => {},
@@ -41,6 +42,7 @@ function Header({
 					offLabel="Active"
 					onLabel="Pending"
 					onChange={(event) => onChangeToggle(event)}
+					disabled={loading}
 				/>
 
 			</div>
@@ -53,11 +55,16 @@ function Header({
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
+						disabled={loading}
 					/>
 				</div>
 
 				<div>
-					<ConfigFilters params={params} setParams={setParams} />
+					<ConfigFilters
+						params={params}
+						setParams={setParams}
+						disabled={loading}
+					/>
 				</div>
 
 				<Button

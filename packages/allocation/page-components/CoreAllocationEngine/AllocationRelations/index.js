@@ -36,6 +36,7 @@ function Relations() {
 				setShowCreateRelationModal={setShowCreateRelationModal}
 				setParams={setParams}
 				params={params}
+				loading={loading}
 				setActiveTab={setActiveTab}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
