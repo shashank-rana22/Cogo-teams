@@ -2,10 +2,26 @@ import { IcMCross, IcMDelete, IcMDoubleTick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function ActionContent({ activeTab, setWorkflowName = () => {} }) {
+function ActionContent({
+	activeTab,
+	setWorkflowName = () => {},
+	// confirmModalState,
+	setConfirmModalState = () => {}, item = {},
+}) {
 	const WORKFLOW_CTA_MAPPING = {
 		active: (
-			<div className={styles.workflow_cta} role="presentation" onClick={() => setWorkflowName('delete')}>
+			<div
+				className={styles.workflow_cta}
+				role="presentation"
+				onClick={() => {
+					setWorkflowName('delete');
+					setConfirmModalState(() => ({
+						type                  : 'delete',
+						relationData          : item,
+						showConfirmationModal : true,
+					}));
+				}}
+			>
 				<div className={styles.cta_text}>
 					<IcMDelete width={16} height={16} style={{ marginRight: '10px' }} />
 					Delete
@@ -15,14 +31,36 @@ function ActionContent({ activeTab, setWorkflowName = () => {} }) {
 		),
 		pending: (
 			<>
-				<div className={styles.workflow_cta} role="presentation" onClick={() => setWorkflowName('approve')}>
+				<div
+					className={styles.workflow_cta}
+					role="presentation"
+					onClick={() => {
+						setWorkflowName('approve');
+						setConfirmModalState(() => ({
+							type                  : 'approve',
+							relationData          : item,
+							showConfirmationModal : true,
+						}));
+					}}
+				>
 					<div className={styles.cta_text}>
 						<IcMDoubleTick width={16} height={16} style={{ marginRight: '10px' }} />
 						Approve
 					</div>
 
 				</div>
-				<div className={styles.workflow_cta} role="presentation" onClick={() => setWorkflowName('reject')}>
+				<div
+					className={styles.workflow_cta}
+					role="presentation"
+					onClick={() => {
+						setWorkflowName('reject');
+						setConfirmModalState(() => ({
+							type                  : 'reject',
+							relationData          : item,
+							showConfirmationModal : true,
+						}));
+					}}
+				>
 					<div className={styles.cta_text}>
 						<IcMCross width={16} height={16} style={{ marginRight: '10px' }} />
 						Reject

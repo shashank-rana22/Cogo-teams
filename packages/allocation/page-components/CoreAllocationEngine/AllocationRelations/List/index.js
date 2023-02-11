@@ -1,4 +1,4 @@
-import { Pagination, Chips, Button, Checkbox } from '@cogoport/components';
+import { Modal, Pagination, Chips, Button, Checkbox } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -6,6 +6,7 @@ import EmptyState from '../../../../common/EmptyState';
 import LoadingState from '../../../../common/LoadingState';
 
 import ListItem from './ListItem';
+import UserActions from './ListItem/UserActions';
 import styles from './styles.module.css';
 
 function List({
@@ -27,6 +28,7 @@ function List({
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState('');
+	const [workflowName, setWorkflowName] = useState(false);
 
 	if (loading) {
 		return <LoadingState />;
@@ -85,6 +87,10 @@ function List({
 	const onChangeCheckbox = (e) => {
 		if (e.target.checked === false) {
 			setCheckedRowsId([]);
+			setConfirmModalState((prev) => ({
+				...prev,
+				showApproveAllButton: e.target.checked,
+			}));
 			if ((checkedRowsId || []).length !== 0) {
 				setParams((p) => ({
 					...p,
@@ -116,6 +122,15 @@ function List({
 		setSelectAll('');
 	};
 
+	const onClickClose = () => {
+		setWorkflowName(null);
+		setConfirmModalState((prev) => ({
+			...prev,
+			showConfirmationModal : false,
+			type                  : '',
+		}));
+	};
+
 	return (
 		<div>
 
@@ -145,6 +160,13 @@ function List({
 							size="sm"
 							themeType="primary"
 							disabled={!confirmModalState.showApproveAllButton}
+							onClick={() => {
+								setConfirmModalState(() => ({
+									type                  : 'approve_all',
+									relationData          : {},
+									showConfirmationModal : true,
+								}));
+							}}
 						>
 							{' '}
 							APPROVE ALL
@@ -186,6 +208,24 @@ function List({
 						/>
 
 					</div>
+
+					{confirmModalState.showConfirmationModal && (
+						<Modal
+							show={confirmModalState.showConfirmationModal}
+							placement="top"
+							closeOnOuterClick={false}
+							onClose={onClickClose}
+						>
+
+							<UserActions
+								onClick={onClickClose}
+								confirmModalState={confirmModalState}
+								setConfirmModalState={setConfirmModalState}
+					// fetchList={fetchList}
+								checkedRowsId={checkedRowsId}
+							/>
+						</Modal>
+					)}
 				</>
 
 			) : null}
@@ -199,6 +239,11 @@ function List({
 						checkedRowsId={checkedRowsId}
 						setCheckedRowsId={setCheckedRowsId}
 						activeTab={activeTab}
+						confirmModalState={confirmModalState}
+						setConfirmModalState={setConfirmModalState}
+						onClickClose={onClickClose}
+						workflowName={workflowName}
+						setWorkflowName={setWorkflowName}
 					/>
 				))}
 
