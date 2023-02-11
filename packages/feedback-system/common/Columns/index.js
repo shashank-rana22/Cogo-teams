@@ -1,20 +1,11 @@
-import { Button, cl } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { format, startCase, addDays } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackPopOver from './FeedbackPopOver';
 import styles from './styles.module.css';
-
-const getSaturday = (date) => {
-	date.setDate(1);
-	while (date.getDay() !== 6) {
-		date.setDate(date.getDate() + 1);
-	}
-	return date;
-};
 
 const redirectPathSourceMapping = {
 	hr_dashboard: {
@@ -54,12 +45,6 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		return 'average';
 	};
 
-	const currentDate = new Date();
-
-	const firstSaturday = getSaturday(currentDate);
-
-	const timeAfterTwoDays = addDays(firstSaturday, 2);
-
 	const columnsToShow = [{
 		Header   : <div className={styles.head}>Name</div>,
 		accessor : (item) => (
@@ -85,7 +70,6 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{startCase(item?.work_scope) || '-'}</div>
-				{' '}
 			</div>
 		),
 		id  : 'role',
@@ -118,7 +102,6 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{format(item?.created_at, 'MMM yyyy')}</div>
-				{' '}
 			</div>
 		),
 		id  : 'month',
@@ -143,24 +126,13 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 			Header   : <div className={styles.head}>Feedback Form</div>,
 			accessor : (item) => (
 				<div className={styles.head_content}>
-					<div className={styles.feedback_button}>
-						{currentDate > firstSaturday && currentDate < timeAfterTwoDays ? (
-							<FeedbackFormModal
-								userId={item?.user_id}
-								performanceItem={item?.performance_item}
-								feedback={item?.feedback}
-								feedbackId={item?.id}
-								getTeamFeedbackList={getTeamFeedbackList}
-							/>
-						) : (
-							<Button className={styles.feedback_form_button} disabled>
-								<IcMEdit style={{ marginRight: '4px' }} width={14} height={14} fill="#393f70" />
-								<p className={styles.feedback_button_text}>
-									EDIT
-								</p>
-							</Button>
-						)}
-					</div>
+					<FeedbackFormModal
+						userId={item?.user_id}
+						performanceItem={item?.performance_item}
+						feedback={item?.feedback}
+						feedbackId={item?.id}
+						getTeamFeedbackList={getTeamFeedbackList}
+					/>
 				</div>
 			),
 			id  : 'add-kpi',

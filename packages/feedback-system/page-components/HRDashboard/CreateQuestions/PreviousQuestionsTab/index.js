@@ -1,4 +1,5 @@
 import { Pagination, Button, Input, Placeholder } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowNext, IcMSearchlight } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
@@ -16,22 +17,11 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 	const [previousQuestions, setPreviousQuestions] = useState({});
 	const [showAddToButton, setShowAddToButton] = useState(false);
 	const [searchValue, setSearchValue] = useState(null);
+	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [params, setParams] = useState({
-		filters: {
-			department : 'technology',
-			work_scope : 'Associate Software Engineer',
-		},
-		page       : 1,
-		page_limit : 3,
-	});
-
-	const setPage = (p) => { setParams({ ...params, page: p }); };
-
-	const { data = {}, loading = false } = useListFeedbackQuestions({
-		status: 'inactive',
-		searchValue,
-		params,
+	const { params, setParams, data = {}, loading = false, setPage } = useListFeedbackQuestions({
+		status      : 'inactive',
+		searchValue : query,
 	});
 
 	const { onBulkUpdate, updateApiLoading = false } =	useUpdatefeedbackQuestion();
@@ -63,9 +53,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 		});
 	}, [IsCheckedAll]);
 
-	const handleChange = (e) => {
-		setSearchValue(e);
-	};
+	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	const showLoading = () => (
 		<div style={{ margin: '16px 0px' }}>
@@ -78,11 +66,16 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 	return (
 		<div>
 			<div className={styles.select_container}>
-				<DepartmentSelect value={params.filters?.department} setValue={setParams} type="controller" />
+				<DepartmentSelect
+					value={params.filters?.department
+					|| 'technology'}
+					setValue={setParams}
+					type="controller"
+				/>
 
 				<RoleSelect
-					value={params.filters?.work_scope}
-					department={params.filters.department}
+					value={params.filters?.work_scope || 'Associate Software Engineer'}
+					department={params.filters.department || 'technology'}
 					setValue={setParams}
 					type="controller"
 				/>
@@ -107,7 +100,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 					<Input
 						size="sm"
 						value={searchValue}
-						onChange={(e) => handleChange(e)}
+						onChange={setSearchValue}
 						placeholder="Search by Question "
 						prefix={<IcMSearchlight />}
 						type="text"

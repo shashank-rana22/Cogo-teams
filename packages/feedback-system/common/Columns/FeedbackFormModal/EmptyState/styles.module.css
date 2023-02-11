@@ -1,6 +1,7 @@
 .empty_state_container {
 	display: flex;
 	justify-content: center;
+	height: 308px;
 	padding: 16px 0;
 	border: 2px solid #f6f5fe;
 	background: #ffffff;

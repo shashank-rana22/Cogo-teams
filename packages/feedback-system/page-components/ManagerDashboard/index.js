@@ -1,5 +1,5 @@
 import { Input } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { useDebounceQuery, useForm } from '@cogoport/forms';
 import SelectController from '@cogoport/forms/page-components/Controlled/SelectController';
 import { IcMArrowNext, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -19,6 +19,7 @@ import styles from './styles.module.css';
 function ManagerDashboard() {
 	const [searchValue, setSearchValue] = useState('');
 	const [selectedBucket, setSelectedBucket] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const feedbackColumns = useGetColumns({ source: 'manager_dashboard' });
 
@@ -30,16 +31,11 @@ function ManagerDashboard() {
 	const monthFilter = watchDateFilter('created_at_month');
 	const yearFilter = watchDateFilter('created_at_year');
 
-	const { params, setParams, data, loading, pagination, setPagination } = useListUserFeedbacks({
-		searchValue,
-		activeTab: 'feedbacks',
+	const { params, setParams, data, loading, setPage } = useListUserFeedbacks({
+		searchValue: query,
 	});
 
 	const { list: newTeamList, page_limit, total_count } = data || {};
-
-	const handleChange = (e) => {
-		setSearchValue(e);
-	};
 
 	const Router = useRouter();
 	const handleClick = () => {
@@ -54,6 +50,8 @@ function ManagerDashboard() {
 			created_at_year  : yearFilter || undefined,
 		},
 	})), [monthFilter, yearFilter]);
+
+	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	return (
 		<div className={styles.container}>
@@ -103,7 +101,7 @@ function ManagerDashboard() {
 							<Input
 								size="md"
 								value={searchValue}
-								onChange={(e) => handleChange(e)}
+								onChange={setSearchValue}
 								placeholder="Search User.."
 								prefix={<IcMSearchlight />}
 								type="text"
@@ -125,8 +123,8 @@ function ManagerDashboard() {
 					loading={loading}
 					page_limit={page_limit}
 					total_count={total_count}
-					pagination={pagination}
-					setPagination={setPagination}
+					pagination={params.page}
+					setPagination={setPage}
 				/>
 			</div>
 		</div>

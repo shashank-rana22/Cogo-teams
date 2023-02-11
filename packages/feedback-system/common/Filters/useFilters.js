@@ -15,7 +15,8 @@ const useFilters = ({ params = {}, setParams = () => {}, setShowFilters = () => 
 
 		setParams({
 			...params,
-			filters: { ...(params.filters), ...newValues },
+			filters : { ...(params.filters), ...newValues },
+			page    : 1,
 		});
 	};
 

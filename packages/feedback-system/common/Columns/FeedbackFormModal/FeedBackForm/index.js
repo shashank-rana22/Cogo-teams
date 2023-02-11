@@ -10,22 +10,31 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
+import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';
 import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
 function FeedBackForm({
+	showForm = 'false',
 	setShowForm = () => {},
 	rating,
 	comment,
 	newFeedbackId,
-	loading: QuestionsLoading,
 	setNewFeedbackId = () => {},
 	setComment = () => {},
 	setRating = () => {},
 	userId = '',
-	feedbackData = {},
 }) {
+	const {
+		feedbackData = {},
+		loading: questionsLoading = false,
+	} = useListFeedbackQuestions({
+		userId,
+		status       : 'active',
+		showQuestion : showForm,
+	});
+
 	const { list: feedbackQuestionList = [] } = feedbackData || {};
 
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
@@ -67,25 +76,25 @@ function FeedBackForm({
 
 	const content = (remark) => `${remark}`;
 
-	if (QuestionsLoading) {
+	if (questionsLoading) {
 		return (
-			<div style={{ margin: '16px' }}>
-				<Placeholder style={{ marginBottom: '16px' }} width="100%" height="40px" />
-				<Placeholder style={{ marginBottom: '16px' }} width="100%" height="40px" />
-				<Placeholder style={{ marginBottom: '16px' }} width="100%" height="40px" />
-				<Placeholder style={{ marginBottom: '16px' }} width="100%" height="40px" />
+			<div className={styles.loading_state}>
+				<Placeholder width="100%" height="60px" />
+				<Placeholder width="100%" height="60px" />
+				<Placeholder width="100%" height="60px" />
+				<Placeholder width="100%" height="60px" />
+				<Placeholder width="100%" height="60px" />
 			</div>
 		);
 	}
 
-	if (feedbackQuestionList.length === 0 && !QuestionsLoading) {
+	if (feedbackQuestionList.length === 0 && !questionsLoading) {
 		return <EmptyState />;
 	}
 
 	return (
 		<div className={styles.form_container}>
 			<div className={styles.heading}>
-				<div className={styles.title}>Feedback Form</div>
 				<div className={styles.header}>
 					<div className={styles.side_heading}>Questions</div>
 

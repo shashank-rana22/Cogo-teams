@@ -18,9 +18,11 @@ function UserFeedbackData({ userId = '' }) {
 	const yearFilter = watchDateFilter('created_at_year');
 	const ratingFilter = watchDateFilter('rating');
 
-	const { params, setParams, feedbackData, loading, pagination, setPagination } = useListUserFeedbacks({
+	const { params, setParams, feedbackData, loading, setPage } = useListUserFeedbacks({
 		userId,
 	});
+
+	const { list: FeedbackList, page_limit, total_count } = feedbackData || {};
 
 	useEffect(() => setParams((pv) => ({
 		...pv,
@@ -34,7 +36,6 @@ function UserFeedbackData({ userId = '' }) {
 
 	const columns = useGetColumns({});
 
-	const { list: FeedbackList, page_limit, total_count } = feedbackData || {};
 	return (
 		<>
 			<div className={styles.header}>
@@ -77,8 +78,8 @@ function UserFeedbackData({ userId = '' }) {
 				page_limit={page_limit}
 				total_count={total_count}
 				loading={loading}
-				pagination={pagination}
-				setPagination={setPagination}
+				pagination={params.page}
+				setPagination={setPage}
 			/>
 		</>
 	);

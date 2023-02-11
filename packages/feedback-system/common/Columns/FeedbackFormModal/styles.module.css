@@ -1,3 +1,13 @@
+.feedback_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.feedback_button_text{
+	margin: 0px;
+}
+
 .add_button {
 	display: flex;
 	flex-direction: row;

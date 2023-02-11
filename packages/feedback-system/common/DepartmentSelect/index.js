@@ -13,7 +13,7 @@ function DepartmentSelect({
 	const departmentControl = deptControls.find((control) => control.name === 'department');
 
 	const setDeptFilters = (val) => {
-		setValue((pv) => ({ ...pv, filters: { ...(pv.filters), department: val } }));
+		setValue((pv) => ({ ...pv, filters: { ...(pv.filters), department: val }, page: 1 }));
 	};
 
 	const resetDeptFilters = () => {

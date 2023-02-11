@@ -1,20 +1,18 @@
 import { Button, Input } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import {
-	IcMArrowRotateDown,
 	IcMArrowRotateUp,
 	IcMDownload,
-	IcMNotifications,
 	IcMSearchlight,
 } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
 import UserTableData from '../../../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../../../hooks/useListUserFeedbacks';
 
-import Calculation from './Calculation';
 import styles from './styles.module.css';
 
 function ManagersListCard({
@@ -24,6 +22,7 @@ function ManagersListCard({
 }) {
 	const [show, setShow] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const columns = useGetColumns({ source: 'hr_feedback' });
 
@@ -37,14 +36,14 @@ function ManagersListCard({
 
 	const {
 		feedbackData,
-		pagination,
 		loading,
-		setPagination,
+		params,
+		setPage,
 		getUserFeedbackList,
 	} = useListUserFeedbacks({
-		userId : manager_id,
-		key    : 'users_under_manager',
-		searchValue,
+		userId      : manager_id,
+		key         : 'users_under_manager',
+		searchValue : query,
 	});
 
 	const { getUserListCsv } = useDownloadCsvFeedbacks({
@@ -63,9 +62,7 @@ function ManagersListCard({
 		return null;
 	};
 
-	const handleChange = (e) => {
-		setSearchValue(e);
-	};
+	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	const download = async () => {
 		await getUserListCsv();
@@ -139,7 +136,7 @@ function ManagersListCard({
 								<Input
 									size="sm"
 									value={searchValue}
-									onChange={(e) => handleChange(e)}
+									onChange={setSearchValue}
 									placeholder="Search Members.."
 									prefix={<IcMSearchlight />}
 									type="text"
@@ -173,8 +170,8 @@ function ManagersListCard({
 							loading={loading}
 							page_limit={page_limit}
 							total_count={total_count}
-							pagination={pagination}
-							setPagination={setPagination}
+							pagination={params.page}
+							setPagination={setPage}
 						/>
 					</div>
 				</div>

@@ -1,7 +1,8 @@
 import { Input, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowNext, IcMDownload, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetColumns from '../../common/Columns';
 import DepartmentSelect from '../../common/DepartmentSelect';
@@ -25,14 +26,14 @@ function HRDashboard() {
 	};
 
 	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
+
 	const [selectedBucket, setSelectedBucket] = useState('');
 
 	const columns = useGetColumns({});
 	const { getUserListCsv } = useDownloadCsvFeedbacks({});
 
-	const { params, setParams, feedbackData, pagination, loading, setPagination } = useListUserFeedbacks({
-		searchValue,
-	});
+	const { params, setParams, feedbackData, loading, setPage } = useListUserFeedbacks({ searchValue: query });
 
 	const { list = [], page_limit, total_count } = feedbackData || {};
 
@@ -40,6 +41,8 @@ function HRDashboard() {
 		getUserListCsv();
 	};
 	const filterControls = getControls();
+
+	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	return (
 		<div className={styles.container}>
@@ -138,8 +141,8 @@ function HRDashboard() {
 						loading={loading}
 						page_limit={page_limit}
 						total_count={total_count}
-						pagination={pagination}
-						setPagination={setPagination}
+						pagination={params.page}
+						setPagination={setPage}
 					/>
 				</div>
 			</div>

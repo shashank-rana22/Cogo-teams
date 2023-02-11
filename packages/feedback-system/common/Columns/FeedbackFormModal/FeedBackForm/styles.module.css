@@ -79,16 +79,6 @@
 	}
 }
 
-.button_container {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 16px;
-
-	.reset {
-		margin-right: 16px;
-	}
-}
-
 .question_container {
 	width: 80%;
 	height: 20px;
@@ -97,3 +87,13 @@
 	text-overflow: ellipsis;
 }
 
+.loading_state {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	margin: 16px;
+
+	:global(.ui_placeholder_skeleton_loader:not(:last-child)){
+		margin-bottom: 16px;
+	}
+}

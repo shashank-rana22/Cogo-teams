@@ -26,17 +26,16 @@ function TeamStats({
 
 		if (name !== selectedBucket) {
 			setSelectedBucket(name);
-			setParams((pv) => ({ ...pv, filters: { ...(pv.filters), ...filter } }));
+			setParams((pv) => ({ ...pv, filters: { ...(pv.filters), ...filter }, page: 1 }));
 			return;
 		}
 
 		setSelectedBucket(null);
-		setParams((pv) => ({ ...pv, filters: { ...(pv.filters), ...unsetFilterValue } }));
+		setParams((pv) => ({ ...pv, filters: { ...(pv.filters), ...unsetFilterValue }, page: 1 }));
 	};
 
 	const showLoading = () => (
 		<div>
-			{' '}
 			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="20px" />
 			<Placeholder style={{ marginBottom: '16px' }} width="40%" />
 			<Placeholder style={{ marginBottom: '24px' }} width="40%" />

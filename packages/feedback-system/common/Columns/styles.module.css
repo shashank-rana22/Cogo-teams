@@ -1,3 +1,13 @@
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+}
+
 .head_content {
 	display: flex;
 	align-items: center;
@@ -7,16 +17,6 @@
 .container {
 	text-decoration: underline;
 	cursor: pointer;
-}
-
-.head {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	width: 100%;
-	font-size: 12px;
-	font-weight: bold;
-	color: #000;
 }
 
 .improvement_needed {
@@ -29,14 +29,4 @@
 
 .good_performance {
 	color: #67c676;
-}
-
-.feedback_button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.feedback_button_text{
-	margin: 0px;
 }

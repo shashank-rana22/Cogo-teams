@@ -1,4 +1,5 @@
 import { Input } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -21,6 +22,7 @@ function FeedbackManagement() {
 	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
 
 	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const filterControls = getUserFilterControls();
 
@@ -30,11 +32,10 @@ function FeedbackManagement() {
 		feedbackData,
 		loading,
 		getUserFeedbackList = () => {},
+		setPage,
 	} = useListUserFeedbacks({
-		searchValue,
-		activeTab : 'feedback_management',
-		key       : 'users_under_manager',
 		userId,
+		searchValue: query,
 	});
 
 	const feedbackManagementColumns = useGetColumns({
@@ -42,7 +43,11 @@ function FeedbackManagement() {
 		source: 'manager_feedback',
 	});
 
-	const { list: newTeamList = [] } = feedbackData || {};
+	const { list: newTeamList = [], total_count = '', page_limit } = feedbackData || {};
+
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [searchValue]);
 
 	return (
 		<div className={styles.container}>
@@ -89,6 +94,10 @@ function FeedbackManagement() {
 				columns={feedbackManagementColumns}
 				list={newTeamList}
 				loading={loading}
+				pagination={params.page}
+				setPagination={setPage}
+				total_count={total_count}
+				page_limit={page_limit}
 			/>
 		</div>
 	);

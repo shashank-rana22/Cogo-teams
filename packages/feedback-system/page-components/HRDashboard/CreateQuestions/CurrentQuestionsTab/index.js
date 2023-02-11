@@ -15,15 +15,6 @@ import useUpdateFeedbackQuestions from '../../../../hooks/useUpdateFeedbackQuest
 import styles from './styles.module.css';
 
 function CurrentQuestionsTab() {
-	const [params, setParams] = useState({
-		page       : 1,
-		page_limit : 3,
-		filters    : {
-			department : 'technology',
-			work_scope : 'Associate Software Engineer',
-		},
-	});
-
 	const [deleteItemId, setDeleteItemId] = useState('');
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [editItem, setEditItem] = useState({});
@@ -32,25 +23,24 @@ function CurrentQuestionsTab() {
 	const [showForm, setShowForm] = useState(false);
 	const [showButton, setShowbutton] = useState(true);
 
-	const [questions, setQuestions] = useState([]);
-
 	const { onUpdateFeedback } = useUpdateFeedbackQuestions();
 
 	const { onSaveFeedbackQuestions, loading: saveLoading = false } = useSaveFeedbackQuestions();
 
-	const { formProps, controls, apiLoading = false, onAddFeedbackQuestion } =	useAddFeedbackQuestion({ params });
-
-	const { data: activeQuestionsData, loading, getQuestionList } = useListFeedbackQuestions({
-		status: 'active',
+	const {
+		data: activeQuestionsData = {},
+		loading = false,
+		getQuestionList,
 		params,
-		setQuestions,
+		setParams,
+		setPage,
+	} = useListFeedbackQuestions({
+		status: 'active',
 	});
 
-	const { list: activeQuestionsList = [], total_count = '' } = activeQuestionsData || {};
-	const setPage = (p) => { setParams({ ...params, page: p }); };
+	const { formProps, controls, apiLoading = false, onAddFeedbackQuestion } =	useAddFeedbackQuestion({ params });
 
-	useEffect(() => setQuestions([]), [params]);
-	useEffect(() => setPage(1), [params.filters]);
+	const { list: activeQuestionsList = [], total_count = '' } = activeQuestionsData || {};
 
 	useEffect(() => {
 		(activeQuestionsList || []).forEach((item) => {
@@ -140,7 +130,6 @@ function CurrentQuestionsTab() {
 				});
 			}
 		});
-		setQuestions([]);
 		getQuestionList();
 		setConfirmDelete(false);
 	}
@@ -163,11 +152,16 @@ function CurrentQuestionsTab() {
 	return (
 		<div>
 			<div className={styles.select_container}>
-				<DepartmentSelect value={params.filters?.department} setValue={setParams} type="controller" />
+				<DepartmentSelect
+					value={params.filters?.department
+					|| 'technology'}
+					setValue={setParams}
+					type="controller"
+				/>
 
 				<RoleSelect
-					value={params.filters?.work_scope}
-					department={params.filters.department}
+					value={params.filters?.work_scope || 'Associate Software Engineer'}
+					department={params.filters.department || 'technology'}
 					setValue={setParams}
 					type="controller"
 				/>
@@ -233,7 +227,7 @@ function CurrentQuestionsTab() {
 							<div className={styles.question_form}>
 								<CreateForm
 									formProps={formProps}
-									type="create_question"
+									type="save_question"
 									onSubmit={SaveQuestions}
 									loading={saveLoading}
 									controls={controls}
