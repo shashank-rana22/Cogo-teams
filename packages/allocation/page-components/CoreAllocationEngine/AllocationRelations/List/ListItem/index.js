@@ -1,10 +1,10 @@
-import { Popover, Pill, Tooltip } from '@cogoport/components';
+import { Modal, Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
+import UserActions from './UserActions';
 
 const COLUMNS_MAPPING = [
 	{
@@ -109,13 +109,6 @@ const COLUMNS_MAPPING = [
 		),
 		flex: 1,
 	},
-	// {
-	//     key      : 'action',
-	//     label    : 'action',
-	//     getValue : (item) => {
-
-	//     },
-	// },
 ];
 
 function ListItem({
@@ -124,8 +117,12 @@ function ListItem({
 	setCheckedRowsId = () => {},
 	bulkMode = false,
 	activeTab,
+	confirmModalState,
+	setConfirmModalState = () => {},
+	workflowName,
+	setWorkflowName = () => {},
+	onClickClose = () => {},
 }) {
-	const [workflowName, setWorkflowName] = useState(false);
 	const itemId = `${item?.id}`;
 	const isSelected = bulkMode && checkedRowsId.includes(itemId);
 
@@ -169,6 +166,9 @@ function ListItem({
 							setWorkflowName={setWorkflowName}
 							activeTab={activeTab}
 							workflowName={workflowName}
+							confirmModalState={confirmModalState}
+							setConfirmModalState={setConfirmModalState}
+							item={item}
 						/>
 					)}
 					onOuterClick={() => setWorkflowName(false)}
@@ -178,6 +178,19 @@ function ListItem({
 					</div>
 				</Popover>
 			</div>
+
+			{workflowName && (
+				<Modal show={!!workflowName} placement="top" closeOnOuterClick={false} onClose={onClickClose}>
+
+					<UserActions
+						onClick={onClickClose}
+						confirmModalState={confirmModalState}
+						setConfirmModalState={setConfirmModalState}
+					// fetchList={fetchList}
+						checkedRowsId={checkedRowsId}
+					/>
+				</Modal>
+			)}
 
 		</div>
 	);
