@@ -63,9 +63,10 @@ function Requests() {
 				<Modal
 					show={showModal}
 					position="basic"
-					size="lg"
+					size="md"
 					onClose={onCloseModal}
 					className={styles.modal_container}
+					placement="center"
 				>
 					<Modal.Header title="Create Request" />
 

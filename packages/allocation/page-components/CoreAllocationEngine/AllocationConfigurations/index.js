@@ -12,6 +12,7 @@ function Configurations() {
 		list,
 		params,
 		setParams,
+		loading,
 		showCreateConfig,
 		setShowCreateConfig,
 		listRefetch,
@@ -24,6 +25,7 @@ function Configurations() {
 			<Header
 				params={params}
 				setParams={setParams}
+				loading={loading}
 				setShowCreateConfig={setShowCreateConfig}
 			/>
 

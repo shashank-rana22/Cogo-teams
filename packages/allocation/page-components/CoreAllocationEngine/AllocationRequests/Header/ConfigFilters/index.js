@@ -6,9 +6,9 @@ import Filters from '../../../../../common/Filters';
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
-function RequestFilters({
-	params, setParams,
-}) {
+function RequestFilters(props) {
+	const { params, setParams, disabled } = props;
+
 	const {
 		controls,
 		formProps,
@@ -32,6 +32,7 @@ function RequestFilters({
 			<Button
 				size="md"
 				themeType="secondary"
+				disabled={disabled}
 				onClick={() => setShowFilters(!showFilters)}
 			>
 				FILTER

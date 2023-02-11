@@ -43,10 +43,15 @@ function Header(props) {
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
+
 					/>
 				</div>
 
-				<ConfigFilters params={params} setParams={setParams} />
+				<ConfigFilters
+					params={params}
+					setParams={setParams}
+					disabled={loading}
+				/>
 
 				<Button
 					size="md"

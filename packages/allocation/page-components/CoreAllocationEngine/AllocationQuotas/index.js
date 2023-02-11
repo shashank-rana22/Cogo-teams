@@ -52,10 +52,10 @@ function AllocationQuotas() {
 			{quotaItem && (
 				<Modal
 					show={quotaItem}
-					position="basic"
-					size="lg"
+					placement="center"
+					size="md"
 					onClose={() => setQuotaItem(null)}
-					// closeOnOuterClick={false}
+					closeOnOuterClick={false}
 				>
 					<QuotaModal
 						quotaItem={quotaItem}
