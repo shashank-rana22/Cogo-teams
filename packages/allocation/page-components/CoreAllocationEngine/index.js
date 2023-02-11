@@ -1,8 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import Heading from '../../common/Heading';
-
 import Configurations from './AllocationConfigurations';
 import AllocationQuotas from './AllocationQuotas';
 import Relations from './AllocationRelations';
