@@ -1,6 +1,8 @@
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../common/EmptyState';
+
 import ListItem from './ListItem';
 // import ListItem from './ListItem';
 import styles from './styles.module.css';
@@ -12,7 +14,6 @@ function List(props) {
 		loading,
 		onChangeParams,
 		setQuotaItem,
-		fetchList,
 	} = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
@@ -23,7 +24,17 @@ function List(props) {
 	}
 
 	if (isEmpty(list)) {
-		return 'Empty';
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No records found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+			</div>
+		);
 	}
 
 	// const showStatusConfirmationModal = !isEmpty(deleteQuotaId);

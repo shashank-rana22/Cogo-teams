@@ -31,6 +31,7 @@ function Configurations() {
 
 			<List
 				list={list}
+				loading={loading}
 				paginationData={paginationData}
 				getNextPage={getNextPage}
 				listRefetch={listRefetch}

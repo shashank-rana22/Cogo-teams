@@ -1,6 +1,7 @@
 import { Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../common/EmptyState';
 import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest';
 
 import ListItem from './ListItem';
@@ -31,7 +32,17 @@ function List(props) {
 	}
 
 	if (isEmpty(list)) {
-		return 'Empty';
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No records found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+			</div>
+		);
 	}
 
 	const showStatusConfirmationModal = !isEmpty(requestStatusItem);
