@@ -6,9 +6,9 @@ import Filters from '../../../../../common/Filters';
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
-function ConfigFilters({
-	params, setParams,
-}) {
+function ConfigFilters(props) {
+	const { params, setParams, disabled } = props;
+
 	const {
 		controls, formProps, showFilters, setShowFilters, handleReset, applyFilters, filtersApplied,
 	} = useFilterContent({ params, setParams });
@@ -27,6 +27,7 @@ function ConfigFilters({
 				size="md"
 				themeType="secondary"
 				onClick={() => setShowFilters(!showFilters)}
+				disabled={disabled}
 			>
 				FILTER
 

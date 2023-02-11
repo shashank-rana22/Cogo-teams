@@ -42,6 +42,7 @@ function Header(props) {
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
+						disabled={loading}
 					/>
 				</div>
 
