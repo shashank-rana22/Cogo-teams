@@ -14,7 +14,7 @@ import useUpdateFeedbackQuestions from '../../../../hooks/useUpdateFeedbackQuest
 
 import styles from './styles.module.css';
 
-function CurrentQuestionsTab() {
+function CurrentQuestionsTab({ showQuestion = false }) {
 	const [deleteItemId, setDeleteItemId] = useState('');
 	const [confirmDelete, setConfirmDelete] = useState(false);
 	const [editItem, setEditItem] = useState({});
@@ -39,6 +39,7 @@ function CurrentQuestionsTab() {
 		status     : 'active',
 		department : 'technology',
 		work_scope : 'Associate Software Engineer',
+		showQuestion,
 	});
 
 	const { formProps, controls, apiLoading = false, onAddFeedbackQuestion } =	useAddFeedbackQuestion({ params });
@@ -46,21 +47,23 @@ function CurrentQuestionsTab() {
 	const { list: activeQuestionsList = [], total_count = '' } = activeQuestionsData || {};
 
 	useEffect(() => {
+		const newQuestionList = [];
+
 		(activeQuestionsList || []).forEach((item) => {
 			const { id, question, remark, weight, status, work_scope, department } = item;
-			setQuestions((pv) => [
-				...pv,
-				{
-					feedback_question_id: id,
-					question,
-					remark,
-					weight,
-					status,
-					department,
-					work_scope,
-				},
-			]);
+
+			newQuestionList.push({
+				feedback_question_id: id,
+				question,
+				remark,
+				weight,
+				status,
+				department,
+				work_scope,
+			});
 		});
+
+		setQuestions(newQuestionList);
 	}, [activeQuestionsList]);
 
 	const {

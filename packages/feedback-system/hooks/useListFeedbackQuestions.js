@@ -7,7 +7,7 @@ const useListFeedbackQuestions = ({
 	searchValue = '',
 	department = '',
 	work_scope = '',
-	showQuestion = true,
+	showQuestion = false,
 }) => {
 	const [params, setParams] = useState({
 		filters: {

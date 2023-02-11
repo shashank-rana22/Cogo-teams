@@ -12,11 +12,11 @@ import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions
 
 import styles from './styles.module.css';
 
-function PreviousQuestionsTab({ setActiveTab = () => {} }) {
+function PreviousQuestionsTab({ setActiveTab = () => {}, showQuestion = false }) {
 	const [IsCheckedAll, setIsCheckedAll] = useState({});
 	const [previousQuestions, setPreviousQuestions] = useState({});
 	const [showAddToButton, setShowAddToButton] = useState(false);
-	const [searchValue, setSearchValue] = useState(null);
+	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const { params, setParams, data = {}, loading = false, setPage } = useListFeedbackQuestions({
@@ -24,6 +24,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 		searchValue : query,
 		department  : 'technology',
 		work_scope  : 'Associate Software Engineer',
+		showQuestion,
 	});
 
 	const { onBulkUpdate, updateApiLoading = false } =	useUpdatefeedbackQuestion();

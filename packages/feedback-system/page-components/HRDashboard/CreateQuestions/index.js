@@ -6,7 +6,7 @@ import CreateQuestionsForm from './CreateQuestionsForm';
 import styles from './styles.module.css';
 
 function CreateQuestions() {
-	const [showCreateQForm, setShowCreateQForm] = useState(false);
+	const [showQuestionModal, setShowQuestionModal] = useState(false);
 
 	const showEditOption = false;
 	return (
@@ -15,23 +15,23 @@ function CreateQuestions() {
 				size="md"
 				themeType="accent"
 				style={{ marginRight: '16px' }}
-				onClick={() => setShowCreateQForm(true)}
+				onClick={() => setShowQuestionModal(true)}
 			>
 				<IcMPlus style={{ marginRight: '4px' }} />
 				{showEditOption ? 'Edit Questions' : 'Create Questions'}
 			</Button>
 
 			<Modal
-				show={showCreateQForm}
-				onClose={() => setShowCreateQForm(false)}
-				onOuterClick={() => setShowCreateQForm(false)}
+				show={showQuestionModal}
+				onClose={() => setShowQuestionModal(false)}
+				onOuterClick={() => setShowQuestionModal(false)}
 				size="xl"
 			>
 				<Modal.Header title="Create Questions" />
 
 				<div className={styles.modal_body}>
 					<Modal.Body>
-						<CreateQuestionsForm showEditOption={showEditOption} />
+						<CreateQuestionsForm showEditOption={showEditOption} showQuestion={showQuestionModal} />
 					</Modal.Body>
 				</div>
 			</Modal>

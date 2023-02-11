@@ -7,8 +7,12 @@ import PreviousQuestionsTab from '../PreviousQuestionsTab';
 
 import styles from './styles.module.css';
 
-function CreateQuestionsForm() {
+function CreateQuestionsForm({ showQuestion = false }) {
 	const [activeTab, setActiveTab] = useState('previous');
+
+	if (!showQuestion) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -20,11 +24,11 @@ function CreateQuestionsForm() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="previous" title="Previous Questions">
-						<PreviousQuestionsTab setActiveTab={setActiveTab} />
+						<PreviousQuestionsTab setActiveTab={setActiveTab} showQuestion={showQuestion} />
 					</TabPanel>
 
 					<TabPanel name="active" title="Active Questions">
-						<CurrentQuestionsTab />
+						<CurrentQuestionsTab showQuestion={showQuestion} />
 					</TabPanel>
 				</Tabs>
 			</div>
