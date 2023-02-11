@@ -22,6 +22,8 @@ function PreviousQuestionsTab({ setActiveTab = () => {} }) {
 	const { params, setParams, data = {}, loading = false, setPage } = useListFeedbackQuestions({
 		status      : 'inactive',
 		searchValue : query,
+		department  : 'technology',
+		work_scope  : 'Associate Software Engineer',
 	});
 
 	const { onBulkUpdate, updateApiLoading = false } =	useUpdatefeedbackQuestion();

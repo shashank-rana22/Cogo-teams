@@ -50,7 +50,7 @@ function HRDashboard() {
 				<div className={styles.question_button_container}>
 					<CreateQuestions />
 
-					<ViewQuestionPopover searchValue={searchValue} />
+					<ViewQuestionPopover />
 				</div>
 
 				<div

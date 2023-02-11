@@ -23,6 +23,7 @@ function CurrentQuestionsTab() {
 	const [showForm, setShowForm] = useState(false);
 	const [showButton, setShowbutton] = useState(true);
 
+	const [questions, setQuestions] = useState([]);
 	const { onUpdateFeedback } = useUpdateFeedbackQuestions();
 
 	const { onSaveFeedbackQuestions, loading: saveLoading = false } = useSaveFeedbackQuestions();
@@ -35,7 +36,9 @@ function CurrentQuestionsTab() {
 		setParams,
 		setPage,
 	} = useListFeedbackQuestions({
-		status: 'active',
+		status     : 'active',
+		department : 'technology',
+		work_scope : 'Associate Software Engineer',
 	});
 
 	const { formProps, controls, apiLoading = false, onAddFeedbackQuestion } =	useAddFeedbackQuestion({ params });

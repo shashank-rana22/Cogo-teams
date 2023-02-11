@@ -7,7 +7,7 @@ import useListFeedbackQuestions from '../../../hooks/useListFeedbackQuestions';
 import Content from './Content';
 import styles from './styles.module.css';
 
-function ViewQuestionPopover({ searchValue = '' }) {
+function ViewQuestionPopover() {
 	const [showQuestion, setShowQuestion] = useState(false);
 
 	const [params, setParams] = useState({
@@ -22,7 +22,6 @@ function ViewQuestionPopover({ searchValue = '' }) {
 	const { data, loading, getQuestionList = () => {} } = useListFeedbackQuestions({
 		status: 'active',
 		params,
-		searchValue,
 		showQuestion,
 	});
 
