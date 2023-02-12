@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import BankDetails from '../Modals/BankDetails';
+import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
 import TDSModal from '../Modals/TDSModal';
 
@@ -58,7 +59,12 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				) : (
 					<div>
 						{bankTradePartyName || tdsTradePartyName ? (
-							<div>{organization?.tradePartyName || toTitleCase(organization?.businessName)}</div>
+							<div>
+								{(organization?.tradePartyType === 'SELF'
+									? organization?.businessName : organization?.tradePartyName)
+									|| toTitleCase(organization?.businessName)}
+
+							</div>
 						) : (
 							<div>{toTitleCase(organization?.businessName)}</div>
 						)}
@@ -150,6 +156,9 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								refetch={getIncidentData}
 							/>
 						)}
+						{type === 'ISSUE_CREDIT_NOTE' && (
+							<RequestCN row={row} refetch={getIncidentData} id={id} />
+						)}
 						{/* {type === 'JOURNAL_VOUCHER_APPROVAL' && (
 							<JVModel
 								journalVoucherRequest={journalVoucherRequest}
@@ -166,9 +175,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								id={id}
 							/>
 						)}
-						{type === 'ISSUE_CREDIT_NOTE' && (
-							<RequestCreditNote row={row} refetch={getIncidentData} id={id} />
-						)}
+
 						{type === 'CONSOLIDATED_CREDIT_NOTE' && (
 							<RequestConsolidatedCreditNote
 								row={row}

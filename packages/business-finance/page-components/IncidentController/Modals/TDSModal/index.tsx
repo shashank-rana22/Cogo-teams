@@ -114,7 +114,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer">
-									document.pdf
+									{url.split('/')[4]}
 								</a>
 							) : (
 								<div> No document available</div>
@@ -124,7 +124,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						<Textarea
 							name="remark"
 							size="md"
-							placeholder="Remarks Here ..."
+							placeholder="Enter Remark Here..."
 							onChange={(value: string) => setRemark(value)}
 							style={{ width: '700', height: '100px', marginBottom: '12px' }}
 						/>
