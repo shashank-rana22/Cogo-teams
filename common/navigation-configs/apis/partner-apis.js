@@ -6967,6 +6967,12 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	reports: [
+		{
+			api         : 'get_muneem_reports_profitability',
+			access_type : 'private',
+		},
+	],
 	settlement: [
 		{
 			api          : 'list_organizations',
@@ -9085,6 +9091,11 @@ const partner = {
 			api          : 'list_air_freight_rates',
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'get_air_freight_rate_audit',
