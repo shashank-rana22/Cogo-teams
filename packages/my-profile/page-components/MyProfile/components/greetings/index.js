@@ -2,8 +2,6 @@ import { Button, Modal, Avatar } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 
-import ChangePassword from '../ChangePassword';
-
 // import GrantOutlookAccess from './GrantOutlookAccess';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
@@ -37,8 +35,6 @@ function Greetings({
 		onDeleteButton,
 		watchProfilePicture,
 		loading,
-		changePasswordModal,
-		setChangepasswordModal,
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
 
@@ -145,16 +141,6 @@ function Greetings({
 				setShowMobileVerificationModal={setShowMobileVerificationModal}
 			/>
 
-			{/* <div className={styles.change_password_container}>
-				<Button
-					className="primary sm"
-					onClick={() => setChangepasswordModal(true)}
-				>
-					CHANGE PASSWORD
-				</Button>
-				<GrantOutlookAccess />
-			</div> */}
-
 			<Modal
 				show={showModal}
 				onClose={onOuterClick}
@@ -232,17 +218,6 @@ function Greetings({
 				</div>
 			</Modal>
 
-			<Modal
-				show={changePasswordModal}
-				onClose={() => setChangepasswordModal(false)}
-				onOuterClick={onOuterClick}
-			>
-				<ChangePassword
-					personDetails={detailsData}
-					setShowModal={setChangepasswordModal}
-					refetch={setRefetch}
-				/>
-			</Modal>
 		</div>
 	);
 }

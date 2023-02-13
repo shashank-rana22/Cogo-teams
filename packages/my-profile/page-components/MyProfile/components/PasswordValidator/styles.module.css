@@ -1,6 +1,7 @@
 .password_validator {
 		margin-top: -16px;
 		padding: 16px;
+		margin-bottom: 20px;
 
 		display: flex;
 		flex-direction: column;
@@ -36,6 +37,8 @@
 					& svg {
 						width: 12px;
 						height: 12px;
+						display: flex;
+						align-items: center;
 					}
 				}
 

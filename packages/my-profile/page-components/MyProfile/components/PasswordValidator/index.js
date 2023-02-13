@@ -42,7 +42,7 @@ function PasswordValidator({ password = '' }) {
 					const isValid = regex.test(password);
 
 					return (
-						<div className={`item item--${key}}`}>
+						<div className={`item item--${key}}`} style={{ display: 'flex', alignItems: 'center' }}>
 							<div className={`icon icon--${isValid ? 'tick' : 'dot'}`}>
 								{isValid ? <TickIconSvg /> : <DotIconSvg />}
 							</div>

@@ -1,7 +1,8 @@
-// import Spinner from '@cogo/project-partner/page-components/commons/Spinner';
+import { Button, Modal } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import React, { useState } from 'react';
 
+import ChangePassword from './ChangePassword';
+import useChangePassword from './ChangePassword/useChangePassword';
 import Details from './Details';
 import Header from './Header';
 import Organization from './Organization';
@@ -19,11 +20,27 @@ function MyProfile() {
 		detailsData,
 		refetch = () => {},
 		loading = false,
+		showMobileVerificationModal,
+		setShowMobileVerificationModal,
+		changePasswordModal,
+		setChangepasswordModal,
 	} = useMyDetails(partner_user_id);
 
-	const { name = '' } = detailsData || {};
+	const {
+		onCreate = () => {},
+		onError = () => {},
+		loading:apiLoading = false,
+		control,
+		errors,
+		handleSubmit = () => {},
+		getValues,
+	} = useChangePassword({
+		refetch,
+		personDetails : detailsData,
+		setShowModal  : setChangepasswordModal,
+	});
 
-	const [showMobileVerificationModal, setShowMobileVerificationModal] =		useState(false);
+	const { name = '' } = detailsData || {};
 
 	if (loading) {
 		return (
@@ -41,11 +58,22 @@ function MyProfile() {
 
 	return (
 		<>
+			<div className={styles.greeting_container}>
+				<div className={styles.main_heading}>
+					<span className={styles.span}>Welcome!</span>
+					{' '}
+					{name}
+				</div>
 
-			<div className={styles.main_heading}>
-				<span className={styles.span}>Welcome!</span>
-				{' '}
-				{name}
+				<div className={styles.change_password_container}>
+					<Button
+						className="primary sm"
+						onClick={() => setChangepasswordModal(true)}
+					>
+						CHANGE PASSWORD
+					</Button>
+					{/* <GrantOutlookAccess /> */}
+				</div>
 			</div>
 
 			<div className={styles.main_container}>
@@ -79,6 +107,38 @@ function MyProfile() {
 					</div>
 				</div>
 			</div>
+			<Modal
+				show={changePasswordModal}
+				onClose={() => setChangepasswordModal(false)}
+				onOuterClick={() => setChangepasswordModal(false)}
+			>
+				<Modal.Header title="Update Password" />
+				<ChangePassword
+					control={control}
+					errors={errors}
+					getValues={getValues}
+
+				/>
+				<Modal.Footer>
+					<Button
+						onClick={() => setChangepasswordModal(false)}
+						disabled={apiLoading}
+						themeType="secondary"
+						style={{ marginRight: '10px' }}
+					>
+						CANCEL
+					</Button>
+
+					<Button
+						disabled={apiLoading}
+						onClick={handleSubmit(onCreate, onError)}
+						themeType="primary"
+					>
+						UPDATE
+					</Button>
+
+				</Modal.Footer>
+			</Modal>
 		</>
 
 	);

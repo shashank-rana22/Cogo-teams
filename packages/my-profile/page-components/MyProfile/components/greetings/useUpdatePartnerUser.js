@@ -8,8 +8,6 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 
 	const [editNameModal, setEditNameModal] = useState(false);
 
-	const [changePasswordModal, setChangepasswordModal] = useState(false);
-
 	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
 
 	const watchProfilePicture = watch('profile_picture_url');
@@ -102,8 +100,6 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 		onDeleteButton,
 		watchProfilePicture,
 		loading,
-		changePasswordModal,
-		setChangepasswordModal,
 		onClickCancel,
 	};
 };

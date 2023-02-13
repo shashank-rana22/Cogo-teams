@@ -19,7 +19,6 @@
 
 .image_container{
 	width: 200px;
-	/* height: 200px; */
 	display: flex;
 	justify-content: center;
 	margin: auto;
@@ -114,12 +113,6 @@
 			border:4px solid #addadf;
 		}
 	}
-}
-
-.change_password_container{
-	display: flex;
-	justify-content: flex-end;
-	padding: 8px;
 }
 
 .picture_container{

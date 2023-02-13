@@ -8,7 +8,6 @@ const useChangePassword = ({
 	setShowModal = () => {},
 	refetch = () => {},
 	personDetails = {},
-	// updatePasswordControls = () => {},
 }) => {
 	const [error, setError] = useState({});
 
@@ -16,10 +15,6 @@ const useChangePassword = ({
 		url    : 'update_user_password',
 		method : 'post',
 	}, { manual: false });
-
-	// const controls = updatePasswordControls();
-
-	// const formProps = useForm(controls);
 
 	const { handleSubmit, formState: { errors }, control, watch, getValues } = useForm();
 
@@ -61,8 +56,6 @@ const useChangePassword = ({
 	};
 
 	return {
-		// controls,
-		// formProps,
 		error,
 		onCreate,
 		onError,
