@@ -7,6 +7,10 @@
     justify-content: flex-end;
 }
 
+.table_container {
+    overflow-x: scroll;
+}
+
 .table {
     background-color: #ffffff;
     margin: 16px 0px;
