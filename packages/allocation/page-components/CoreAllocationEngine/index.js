@@ -2,7 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
 import Configurations from './AllocationConfigurations';
-import AllocationQuotas from './AllocationQuotas';
+import Quotas from './AllocationQuotas';
 import Relations from './AllocationRelations';
 import Requests from './AllocationRequests';
 import styles from './styles.module.css';
@@ -38,7 +38,7 @@ function CoreAllocationEngine() {
 					</TabPanel>
 
 					<TabPanel name="quotas" title="Quotas">
-						<AllocationQuotas />
+						<Quotas />
 					</TabPanel>
 				</Tabs>
 			</div>

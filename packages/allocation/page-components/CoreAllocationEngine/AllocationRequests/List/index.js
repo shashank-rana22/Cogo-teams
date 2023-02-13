@@ -111,13 +111,14 @@ function List(props) {
 					onOuterClick={onCloseModal}
 					placement="top"
 				>
-					<div className={styles.status_change_container}>
-
+					<div>
 						<Modal.Header
 							title={`Are you sure you want to
 						 	${STATUS_MAPPING[requestStatusItem.status].label || 'update'} 
 							this request ?`}
 						/>
+
+						{/* //Todo make this modal same as config */}
 
 						<div className={styles.btn_container}>
 							<Button
@@ -129,6 +130,7 @@ function List(props) {
 								Yes, I do
 							</Button>
 						</div>
+
 					</div>
 				</Modal>
 			) : null}

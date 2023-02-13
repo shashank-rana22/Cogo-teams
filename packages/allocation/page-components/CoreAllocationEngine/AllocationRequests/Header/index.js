@@ -23,6 +23,7 @@ function Header(props) {
 		selectAll,
 		onItemChangeInChips,
 		checkedRowsId,
+		setShowModal,
 	} = props;
 
 	const { service_type: toggleValue, id } = params.filters || {};
@@ -97,13 +98,7 @@ function Header(props) {
 					size="sm"
 					themeType="primary"
 					disabled={isEmpty(id)}
-					// onClick={() => {
-					// 	setConfirmModalState(() => ({
-					// 		type                  : 'approve_all',
-					// 		relationData          : {},
-					// 		showConfirmationModal : true,
-					// 	}));
-					// }}
+					onClick={() => setShowModal(true)}
 				>
 					APPROVE ALL
 				</Button>
@@ -143,7 +138,6 @@ function Header(props) {
 				/>
 			</div>
 
-			{/* // Todo modal for confirmation */}
 		</>
 	);
 }
