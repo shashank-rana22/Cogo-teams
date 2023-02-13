@@ -1,0 +1,9 @@
+.right_container {
+	background: #356EFD;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 5%;
+	padding: 6px;
+	margin-right: -20px;
+}
