@@ -47,6 +47,7 @@ function Customers() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.source_types}>
+
 					<div>
 						{pillsData.map((item) => (
 							<Pill
@@ -57,14 +58,20 @@ function Customers() {
 							</Pill>
 						))}
 					</div>
+
 					<div className={styles.more_counts}>
 						<TooltipInformation />
 					</div>
+
 				</div>
+
 				<div className={styles.filter_icon}>
 					<IcMDoubleFilter width={25} height={25} />
 				</div>
+			</div>
 
+			<div className={styles.card_Container}>
+				<div className={styles.card}>hello</div>
 			</div>
 		</div>
 	);

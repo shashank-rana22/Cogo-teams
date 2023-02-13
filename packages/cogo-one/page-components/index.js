@@ -7,6 +7,7 @@ import Tabs from './Tabs';
 
 function CogoOne() {
 	const [activeTab, setActiveTab] = useState('open');
+	const [activeCard, setActiveCard] = useState({});
 	return (
 		<>
 			<div className={styles.header}>Cogo One</div>
