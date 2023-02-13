@@ -1,6 +1,7 @@
 import { Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
@@ -123,13 +124,12 @@ function ListItem({
 	setCheckedRowsId = () => {},
 	bulkMode = false,
 	activeTab,
-	confirmModalState,
 	setConfirmModalState = () => {},
-	workflowName,
-	setWorkflowName = () => {},
 }) {
 	const itemId = `${item?.id}`;
 	const isSelected = bulkMode && checkedRowsId.includes(itemId);
+
+	const [showActions, setShowActions] = useState(false);
 
 	const onCardClick = () => {
 		if (bulkMode) {
@@ -139,6 +139,15 @@ function ListItem({
 				setCheckedRowsId(checkedRowsId.filter((Id) => Id !== itemId));
 			}
 		}
+	};
+
+	const onClickCta = (workflow) => {
+		setShowActions(false);
+		setConfirmModalState(() => ({
+			type                  : workflow,
+			relationData          : item,
+			showConfirmationModal : true,
+		}));
 	};
 
 	return (
@@ -170,20 +179,17 @@ function ListItem({
 				<Popover
 					placement="left"
 					interactive
+					visible={showActions}
 					render={(
 						<ActionContent
-							setWorkflowName={setWorkflowName}
 							activeTab={activeTab}
-							workflowName={workflowName}
-							confirmModalState={confirmModalState}
-							setConfirmModalState={setConfirmModalState}
-							item={item}
+							onClickCta={onClickCta}
 						/>
 					)}
-					onClickOutside={() => setWorkflowName(false)}
+					onClickOutside={() => setShowActions(false)}
 				>
 					<div className={styles.svg_container}>
-						<IcMOverflowDot height={16} width={16} />
+						<IcMOverflowDot height={16} width={16} onClick={() => setShowActions(!showActions)} />
 					</div>
 				</Popover>
 			</div>

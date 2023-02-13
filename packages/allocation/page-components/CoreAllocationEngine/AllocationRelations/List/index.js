@@ -30,7 +30,6 @@ function List({
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState('');
-	const [workflowName, setWorkflowName] = useState(false);
 
 	if (loading) {
 		return <LoadingState />;
@@ -51,7 +50,6 @@ function List({
 	}
 
 	const onClickClose = () => {
-		setWorkflowName(null);
 		setConfirmModalState((prev) => ({
 			...prev,
 			showConfirmationModal : false,
@@ -102,16 +100,11 @@ function List({
 					<ListItem
 						key={item.id}
 						item={item}
-						bulkMode={bulkMode}
-						setBulkMode={setBulkMode}
 						checkedRowsId={checkedRowsId}
 						setCheckedRowsId={setCheckedRowsId}
+						bulkMode={bulkMode}
 						activeTab={activeTab}
-						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
-						onClickClose={onClickClose}
-						workflowName={workflowName}
-						setWorkflowName={setWorkflowName}
 					/>
 				))}
 

@@ -4,22 +4,14 @@ import styles from './styles.module.css';
 
 function ActionContent({
 	activeTab,
-	setWorkflowName = () => {},
-	setConfirmModalState = () => {}, item = {},
+	onClickCta = () => {},
 }) {
 	const WORKFLOW_CTA_MAPPING = {
 		active: (
 			<div
 				className={styles.workflow_cta}
 				role="presentation"
-				onClick={() => {
-					setWorkflowName('delete');
-					setConfirmModalState(() => ({
-						type                  : 'delete',
-						relationData          : item,
-						showConfirmationModal : true,
-					}));
-				}}
+				onClick={() => onClickCta('delete')}
 			>
 				<div className={styles.cta_text}>
 					<IcMDelete width={16} height={16} style={{ marginRight: '10px' }} />
@@ -33,14 +25,7 @@ function ActionContent({
 				<div
 					className={styles.workflow_cta}
 					role="presentation"
-					onClick={() => {
-						setWorkflowName('approve');
-						setConfirmModalState(() => ({
-							type                  : 'approve',
-							relationData          : item,
-							showConfirmationModal : true,
-						}));
-					}}
+					onClick={() => onClickCta('approve')}
 				>
 					<div className={styles.cta_text}>
 						<IcMDoubleTick width={16} height={16} style={{ marginRight: '10px' }} />
@@ -51,14 +36,7 @@ function ActionContent({
 				<div
 					className={styles.workflow_cta}
 					role="presentation"
-					onClick={() => {
-						setWorkflowName('reject');
-						setConfirmModalState(() => ({
-							type                  : 'reject',
-							relationData          : item,
-							showConfirmationModal : true,
-						}));
-					}}
+					onClick={() => onClickCta('reject')}
 				>
 					<div className={styles.cta_text}>
 						<IcMCross width={16} height={16} style={{ marginRight: '10px' }} />
