@@ -164,11 +164,13 @@ function List({
 				/>
 			</div>
 
-			<UpdateStakeholderDetails
-				stakeholderDetail={stakeholderDetail}
-				setStakeholderDetail={setStakeholderDetail}
-				listRefetch={listRefetch}
-			/>
+			{!isEmpty(stakeholderDetail) ? (
+				<UpdateStakeholderDetails
+					stakeholderDetail={stakeholderDetail}
+					setStakeholderDetail={setStakeholderDetail}
+					listRefetch={listRefetch}
+				/>
+			) : null}
 		</div>
 	);
 }
