@@ -12,6 +12,7 @@
     "@cogoport/access-management": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
+	"@cogoport/omni-channel":"workspace:0.1.0",
     "@cogoport/components": "^1.0.301",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
