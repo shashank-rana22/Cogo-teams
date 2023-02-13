@@ -29,7 +29,7 @@ function CogoOne() {
 				searchValue={searchValue}
 				setFilterVisible={setFilterVisible}
 				filterVisible={filterVisible}
-				// fields={control}
+					// fields={fields}
 				reset={reset}
 			/>
 			<Conversations />

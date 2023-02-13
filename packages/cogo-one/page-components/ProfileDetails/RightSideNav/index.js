@@ -1,16 +1,28 @@
-import { Avatar } from '@cogoport/components';
+import { cl } from '@cogoport/components';
+import { useState } from 'react';
 
+import IconMapping from './IconMapping';
 import styles from './styles.module.css';
 
 function RightSideNav() {
+	const [activeSelect, setActiveSelect] = useState('profile');
+	const handleClick = (val) => {
+		setActiveSelect(val);
+	};
 	return (
 		<div className={styles.right_container}>
-			<Avatar
-				src="https://www.w3schools.com/howto/img_avatar.png"
-				alt="img"
-				disabled={false}
-				size="48px"
-			/>
+			{IconMapping.map((item) => {
+				const { icon, name } = item;
+				return (
+					<div
+						className={cl`${styles.icon_div} ${activeSelect === name ? styles.active : ''}`}
+						role="presentation"
+						onClick={() => handleClick(name)}
+					>
+						{icon}
+					</div>
+				);
+			})}
 		</div>
 	);
 }

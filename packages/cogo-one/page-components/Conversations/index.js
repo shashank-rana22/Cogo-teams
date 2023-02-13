@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 function Conversations() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.header_container}><Header /></div>
+			<Header />
 			<div className={styles.message_container}><MessageConversations /></div>
 		</div>
 

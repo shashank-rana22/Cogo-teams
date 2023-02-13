@@ -1,9 +1,30 @@
 .right_container {
-	background: #356EFD;
+	background: #FFFFFF;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 5%;
-	padding: 6px;
+	width: 20%;
+	padding: 10px 5px;
 	margin-right: -20px;
+	margin-bottom: 20px;
+}
+.active {
+	background: #FDEBE9;
+	border-radius: 12px;
+	svg{
+		fill:#EE3425 !important;
+	}
+}
+.icon_div {
+	width: 40px;
+	height: 40px;
+	align-items: center;
+	display: flex;
+	padding: 8px;
+	margin-bottom: 20px;
+	svg{
+		width: 25px;
+		height: 25px;
+		fill:#000000;
+	}
 }
