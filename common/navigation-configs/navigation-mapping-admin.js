@@ -888,6 +888,17 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_cogo_entities'],
 		module_type   : 'crm',
 	},
+	incident_management: {
+		key           : 'incident_management',
+		title         : 'Incident Management',
+		href          : '/incident-management',
+		as            : '/incident-management',
+		type          : 'link',
+		icon          : IcMFinance,
+		possible_apis : [],
+		main_apis     : [],
+		module_type   : 'dashboards',
+	},
 	incentives: {
 		key       : 'incentives',
 		title     : 'Incentives/KPI',

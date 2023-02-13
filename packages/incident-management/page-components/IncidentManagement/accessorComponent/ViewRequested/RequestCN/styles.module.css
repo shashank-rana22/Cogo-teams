@@ -1,0 +1,40 @@
+.name_container{
+    display: flex;
+}
+.label{
+    font-size: 12px;
+    color: #333333;
+    font-weight: 600;
+    margin-left: 2px;
+}
+.value{
+    font-size: 12px;
+    color: #333333;
+    margin-left: 1px;
+}
+.rate_conatiner{
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+.subcontainer{
+    padding-right: 80px;
+}
+.link{
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.text_area{
+    height: 10px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    min-height: 80px;
+}
+.remarks_style{
+    font-weight: 500;
+    font-size: 12px;
+    padding-left: 10px;
+}
