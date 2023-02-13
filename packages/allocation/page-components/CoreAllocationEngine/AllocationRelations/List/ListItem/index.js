@@ -17,7 +17,8 @@ const COLUMNS_MAPPING = [
 				</Tooltip>
 			);
 		},
-		flex: 1.25,
+		flex : 1.25,
+		tab  : ['active', 'pending'],
 	},
 	{
 		key      : 'user',
@@ -36,7 +37,8 @@ const COLUMNS_MAPPING = [
 				</div>
 			);
 		},
-		flex: 1.25,
+		flex : 1.25,
+		tab  : ['active', 'pending'],
 	},
 	{
 		key      : 'stakeholder_name',
@@ -56,7 +58,8 @@ const COLUMNS_MAPPING = [
 				</div>
 			);
 		},
-		flex: 1,
+		flex : 1,
+		tab  : ['active', 'pending'],
 	},
 	{
 		key      : 'reason',
@@ -66,7 +69,8 @@ const COLUMNS_MAPPING = [
 				<div className={styles.reason_text}>{getByKey(item, 'reason', '___')}</div>
 			</Tooltip>
 		),
-		flex: 1.5,
+		flex : 1.5,
+		tab  : ['active', 'pending'],
 	},
 	{
 		key      : 'created_by',
@@ -79,7 +83,8 @@ const COLUMNS_MAPPING = [
 				</div>
 			</div>
 		),
-		flex: 1,
+		flex : 1,
+		tab  : ['active', 'pending'],
 	},
 	{
 		key      : 'expiry_date',
@@ -96,7 +101,8 @@ const COLUMNS_MAPPING = [
 				</div>
 			</div>
 		),
-		flex: 0.75,
+		flex : 0.75,
+		tab  : ['active', 'pending'],
 	},
 	{
 		key      : 'relation_type',
@@ -106,7 +112,8 @@ const COLUMNS_MAPPING = [
 				{item.relation_type ? startCase(item.relation_type) : '-'}
 			</Pill>
 		),
-		flex: 1,
+		flex : 1,
+		tab  : ['active'],
 	},
 ];
 
@@ -141,18 +148,22 @@ function ListItem({
 			onClick={() => onCardClick(item)}
 		>
 			{COLUMNS_MAPPING.map((column) => {
-				const { key, label, getValue, flex } = column;
+				const { key, label, getValue, flex, tab } = column;
 
 				const value = getValue(item);
 
-				return (
-					<div key={key} className={styles.content_container} style={{ flex }}>
-						{label ? <div className={styles.label}>{label}</div> : null}
+				if (tab.includes(activeTab)) {
+					return (
+						<div key={key} className={styles.content_container} style={{ flex }}>
+							{label ? <div className={styles.label}>{label}</div> : null}
 
-						<div className={styles.value}>{value}</div>
-					</div>
+							<div className={styles.value}>{value}</div>
+						</div>
 
-				);
+					);
+				}
+
+				return null;
 			})}
 
 			<div className={styles.content_container}>

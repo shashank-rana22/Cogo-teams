@@ -51,7 +51,8 @@ const useUserActions = ({
 				relationData          : {},
 			}));
 
-			Toast.success(`${TOAST_MESSAGE_MAPPING[confirmModalState.type]} successfully!`);
+			Toast.success(`${TOAST_MESSAGE_MAPPING[confirmModalState.type]} successfully! Please wait 
+			for the changes to be reflected`);
 
 			fetchList();
 		} catch (error) {
