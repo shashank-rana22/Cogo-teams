@@ -88,6 +88,7 @@ function List({
 	const onChangeCheckbox = (e) => {
 		if (e.target.checked === false) {
 			setCheckedRowsId([]);
+			setSelectAll('');
 			setConfirmModalState((prev) => ({
 				...prev,
 				showApproveAllButton: e.target.checked,
