@@ -6,8 +6,8 @@ import EmptyState from '../../../../common/EmptyState';
 import LoadingState from '../../../../common/LoadingState';
 
 import ListItem from './ListItem';
-import UserActions from './ListItem/UserActions';
 import styles from './styles.module.css';
+import UserActions from './UserActions';
 
 function List({
 	list,
@@ -221,7 +221,7 @@ function List({
 								onClick={onClickClose}
 								confirmModalState={confirmModalState}
 								setConfirmModalState={setConfirmModalState}
-					// fetchList={fetchList}
+								// fetchList={fetchList}
 								checkedRowsId={checkedRowsId}
 							/>
 						</Modal>

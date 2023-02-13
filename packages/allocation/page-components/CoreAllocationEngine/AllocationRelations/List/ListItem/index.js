@@ -2,9 +2,10 @@ import { Modal, Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
+import UserActions from '../UserActions';
+
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';
-import UserActions from './UserActions';
 
 const COLUMNS_MAPPING = [
 	{
@@ -121,8 +122,8 @@ function ListItem({
 	setConfirmModalState = () => {},
 	workflowName,
 	setWorkflowName = () => {},
-	onClickClose = () => {},
 }) {
+	// console.log('bulkMode', bulkMode);
 	const itemId = `${item?.id}`;
 	const isSelected = bulkMode && checkedRowsId.includes(itemId);
 
@@ -179,7 +180,7 @@ function ListItem({
 				</Popover>
 			</div>
 
-			{workflowName && (
+			{/* {workflowName && (
 				<Modal show={!!workflowName} placement="top" closeOnOuterClick={false} onClose={onClickClose}>
 
 					<UserActions
@@ -190,7 +191,7 @@ function ListItem({
 						checkedRowsId={checkedRowsId}
 					/>
 				</Modal>
-			)}
+			)} */}
 
 		</div>
 	);
