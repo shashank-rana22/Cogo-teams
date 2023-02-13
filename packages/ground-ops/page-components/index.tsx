@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+// import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Air from './Air';
