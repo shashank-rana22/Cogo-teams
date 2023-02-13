@@ -1,0 +1,42 @@
+
+/* URL: https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg */
+.name{
+	font-size: 10px;
+	font-weight: 500;
+	text-align: right;
+	color:#000000;
+
+}
+.time_stamp{
+	font-family: Inter;
+	font-size: 10px;
+	font-weight: 500;
+	text-align: left;
+}
+
+.container{
+	max-width: 300px;
+	margin:10px 0;
+	display: flex;
+	align-items: flex-start;
+	height: fit-content;
+	float: right;
+}
+.receive_message_container{
+	box-shadow: 0px 0px 4px 0px #627FAC33;
+	padding: 12px;
+	font-size: 14px;
+	line-height: 21px;
+	color: #615F5F;
+	margin-top: 5px;
+	background-color: #FFFCE6;
+	border-radius:6px 6px 6px 0;
+}
+.styled_img{
+	height: 25px;
+	width: 25px;
+	
+}
+.message_div{
+	margin-right: 8px;
+}

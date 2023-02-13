@@ -24,7 +24,6 @@ function CogoOne() {
 			<div className={styles.header}>Cogo One</div>
 			<div className={styles.layout_container}>
 				<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-				<InputController control={control} />
 				<Customers
 					setActiveCard={setActiveCard}
 					activeCard={activeCard}
