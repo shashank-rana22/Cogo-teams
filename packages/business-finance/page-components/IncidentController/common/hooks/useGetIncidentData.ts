@@ -48,7 +48,6 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 
 	const getIncidentData = async () => {
 		const { startDate, endDate } = date || {};
-		console.log(startDate, 'startDate');
 
 		try {
 			await trigger({
