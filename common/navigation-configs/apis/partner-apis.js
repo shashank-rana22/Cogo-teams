@@ -6664,6 +6664,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'get_purchase_bills_bill_state',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'put_purchase_payrun_bill',
 			access_type : 'private',
 			module      : 'payrun',
