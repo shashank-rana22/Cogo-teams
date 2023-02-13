@@ -180,7 +180,7 @@ function ListItem({
 							item={item}
 						/>
 					)}
-					onOuterClick={() => setWorkflowName(false)}
+					onClickOutside={() => setWorkflowName(false)}
 				>
 					<div className={styles.svg_container}>
 						<IcMOverflowDot height={16} width={16} />

@@ -3,6 +3,7 @@ import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import ConfigurationDetails from '../ConfigurationDetails';
 
 import styles from './styles.module.css';
 import UpdateStakeholderDetails from './UpdateStakeholderDetails';
@@ -147,12 +148,16 @@ function List({
 
 	return (
 		<div className={styles.list_container}>
-			<Table
-				className={styles.table}
-				columns={columns}
-				data={data}
-				loading={loading}
-			/>
+			<ConfigurationDetails configurationDetails={configurationDetails} />
+
+			<div className={styles.table_container}>
+				<Table
+					className={styles.table}
+					columns={columns}
+					data={data}
+					loading={loading}
+				/>
+			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination
