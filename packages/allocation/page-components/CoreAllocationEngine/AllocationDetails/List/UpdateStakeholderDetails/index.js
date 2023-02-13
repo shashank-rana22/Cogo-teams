@@ -41,6 +41,7 @@ function UpdateStakeholderDetails({
 						size="md"
 						themeType="primary"
 						disabled={loading}
+						type="submit"
 					>
 						Save
 					</Button>
