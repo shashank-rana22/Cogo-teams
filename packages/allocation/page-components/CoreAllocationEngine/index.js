@@ -1,8 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import Heading from '../../common/Heading';
-
 import Configurations from './AllocationConfigurations';
 import AllocationQuotas from './AllocationQuotas';
 import Relations from './AllocationRelations';
@@ -15,9 +13,7 @@ function CoreAllocationEngine() {
 	return (
 		<section className={styles.container} id="core_engine_container">
 			<section className={styles.heading_container}>
-				<Heading
-					title="Core Engine"
-				/>
+				Core Engine
 			</section>
 
 			<div className={styles.tab_list}>
