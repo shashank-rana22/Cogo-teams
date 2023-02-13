@@ -1147,6 +1147,12 @@ const saas = {
 			module      : 'Quotation',
 			feature     : 'Quotation',
 		},
+		{
+			api         : 'put_saas_quote_update_duties',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
 	],
 	app_saas_cogopoint: [
 		{
