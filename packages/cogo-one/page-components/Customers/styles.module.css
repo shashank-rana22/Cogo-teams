@@ -23,3 +23,15 @@
 .more_counts{
 	font-size: 10px;
 }
+
+.card_Container{
+	margin: 15px -10px 0px -10px;
+	padding:9px 12px;
+	background: #FDFBF6;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.card{
+cursor: pointer;
+padding:8px;
+}

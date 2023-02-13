@@ -1,4 +1,4 @@
-const Dummy = [
+const customersListMapping = () => [
 	{
 		name         : 'John Wick',
 		organisation : 1,
@@ -32,5 +32,4 @@ const Dummy = [
 		content      : 'My name is cogoassist, Cogoport where we will show....',
 	},
 ];
-
-export default Dummy;
+export default customersListMapping;
