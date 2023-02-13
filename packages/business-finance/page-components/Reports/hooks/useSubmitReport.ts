@@ -17,7 +17,7 @@ const useSubmitReport = (value:Props) => {
 	const [{ loading }, trigger] = useRequestBf({
 		url     : `/muneem/reports/${reportType}`,
 		method  : 'GET',
-		authKey : 'get_muneem_reports_profitability',
+		authKey : `get_muneem_reports_${reportType}`,
 
 	}, { manual: true });
 
@@ -40,7 +40,7 @@ const useSubmitReport = (value:Props) => {
 		} catch (e) {
 			if (e.response?.status === 403) {
 				Toast.error(
-					'Forbidden',
+					'You do not have permission to access this feature',
 				);
 			} else {
 				Toast.error(
