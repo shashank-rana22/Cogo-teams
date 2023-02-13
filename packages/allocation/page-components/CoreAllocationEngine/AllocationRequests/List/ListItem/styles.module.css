@@ -7,6 +7,16 @@
 
 	display: flex;
 	flex-direction: column;
+	
+
+	&.card_selected{
+		background: #FDF4F3;
+		border: 1px solid #EE3425;    
+	}
+
+	&.selectable{
+		cursor: pointer;
+	}
 
     @media (min-width: 768px){
         flex-direction: row;
@@ -70,5 +80,7 @@
         margin-bottom: 0;
     }
 }
+
+
 
 

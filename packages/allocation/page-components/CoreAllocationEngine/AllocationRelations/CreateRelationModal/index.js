@@ -12,7 +12,7 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 
 	return (
 		<Modal
-			size="lg"
+			size="md"
 			show={showCreateRelationModal}
 			onClose={() => setShowCreateRelationModal(false)}
 			closeOnOuterClick={false}
