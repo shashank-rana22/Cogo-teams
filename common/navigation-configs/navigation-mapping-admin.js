@@ -1835,6 +1835,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	cogo_one: {
+		key           : 'cogo_one',
+		title         : 'Cogo One',
+		href          : '/v2/cogo-one',
+		as            : '/v2/cogo-one',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cogo_one,
+		module_type   : 'dashboards',
+	},
 };
 
 export default navigationMappingAdmin;

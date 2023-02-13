@@ -9761,5 +9761,6 @@ const partner = {
 			service_name : 'exchange_rate',
 		},
 	],
+	cogo_one: [],
 };
 export default partner;
