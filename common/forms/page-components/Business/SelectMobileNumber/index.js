@@ -18,15 +18,16 @@ function SelectMobileNumber({
 	theme = '',
 	...rest
 }) {
-	const { country_code, number } = value || {};
+	const { [codeKey]: country_code = '', [numberKey]: number = '' } =	value || {};
 
 	const handleCodeChange = (v) => {
 		onChange({ ...(value || {}), [codeKey]: v });
 	};
 
 	const handleNumberChange = (e) => {
-		onChange({ ...(value || {}), [numberKey]: e.target?.value });
+		onChange({ ...(value || {}), [numberKey]: e });
 	};
+
 	const props = {};
 	if (select2 && select2.includes('new')) {
 		if (select2.includes('big')) {

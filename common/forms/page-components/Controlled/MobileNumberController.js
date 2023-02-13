@@ -1,10 +1,15 @@
-// import { MobileNumberSelect } from '@cogoport/components';
-import React from 'react';
 import { Controller } from 'react-hook-form';
 
 import MobileNumberSelect from '../Business/SelectMobileNumber';
 
-function MobileNumberController({ itemKey, name, value, control, ...rest }) {
+function MobileNumberSelectController({
+	itemKey,
+	name,
+	value,
+	control,
+	mobileSelectRef,
+	...rest
+}) {
 	return (
 		<Controller
 			key={itemKey}
@@ -15,6 +20,7 @@ function MobileNumberController({ itemKey, name, value, control, ...rest }) {
 			shouldUnregister={rest.shouldUnregister}
 			render={({ field: { onChange, onBlur, value: newValue } }) => (
 				<MobileNumberSelect
+					mobileSelectRef={mobileSelectRef}
 					{...rest}
 					key={itemKey}
 					onChange={onChange}
@@ -25,4 +31,4 @@ function MobileNumberController({ itemKey, name, value, control, ...rest }) {
 		/>
 	);
 }
-export default MobileNumberController;
+export default MobileNumberSelectController;

@@ -86,7 +86,6 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 	};
 
 	const onClickCancel = () => {
-		console.log('onClickCancel');
 		setShowModal(false);
 	};
 
