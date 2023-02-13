@@ -1,4 +1,5 @@
 import { Chips, Button, Checkbox } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -60,7 +61,7 @@ function BulkUpdateMode({
 				...prev,
 				showApproveAllButton: e.target.checked,
 			}));
-			if ((checkedRowsId || []).length !== 0) {
+			if ((!isEmpty(checkedRowsId))) {
 				setParams((p) => ({
 					...p,
 					filters: {
@@ -104,12 +105,12 @@ function BulkUpdateMode({
 					<Button
 						size="sm"
 						themeType="accent"
-						disabled={!bulkMode || checkedRowsId.length === 0}
+						disabled={!bulkMode || isEmpty(checkedRowsId)}
 						onClick={() => applyBulkFilter()}
 					>
 						{' '}
 						APPLY BULK FILTER
-						{checkedRowsId.length ? ` (${checkedRowsId.length})` : ''}
+						{!isEmpty(checkedRowsId) ? ` (${checkedRowsId.length})` : ''}
 
 					</Button>
 				</div>
@@ -128,11 +129,11 @@ function BulkUpdateMode({
 				>
 					{' '}
 					APPROVE ALL
-					{checkedRowsId.length ? `(${checkedRowsId.length})` : ''}
+					{!isEmpty(checkedRowsId) ? `(${checkedRowsId.length})` : ''}
 
 				</Button>
 			</div>
-			{(checkedRowsId.length > 0 && bulkMode) && (
+			{(!isEmpty(checkedRowsId) && bulkMode) && (
 				<div className={styles.selection_text}>
 					<div className={styles.text}>
 						{' '}

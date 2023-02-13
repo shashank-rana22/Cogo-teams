@@ -10,7 +10,7 @@ function EmptyState({
 	return (
 		<div className={`${styles.container} ${styles[flexDirection]}`}>
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo-admin/vault/original/page_not_found.png"
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
 				width={width}
 				height={height}
 				alt="Empty-state"
