@@ -1,26 +1,30 @@
 .sub_container {
-  display: flex;
+	display: flex;
 }
+
 .debit_container {
-  border: 1px solid #cacaca;
-  border-radius: 4px;
-  width: fit-content;
-  padding: 12px 30px;
-  margin: 0px 16px;
-  gap: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	justify-content: center;
+	width: fit-content;
+	padding: 12px 30px;
+	margin: 0 16px;
+	border: 1px solid #cacaca;
+	border-radius: 4px;
 }
+
 .debit {
-  font-weight: 600;
-  display: flex;
-  color: #f68b21;
+	display: flex;
+	font-weight: 600;
+	color: #f68b21;
 }
+
 .color {
-  color: #828282;
+	color: #828282;
 }
+
 .button {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }

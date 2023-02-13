@@ -1,20 +1,21 @@
 .container {
-  width: 30%;
-  :global {
-    .ui_input_prefix {
-      height: 90%;
-    }
+	width: 30%;
 
-    input::placeholder {
-      font-size: 14px;
-    }
-  }
+	:global {
+		.ui_input_prefix {
+			height: 90%;
+		}
 
-  @media (max-width: 768px) {
-    width: 250px;
+		input::placeholder {
+			font-size: 14px;
+		}
+	}
 
-    input::placeholder {
-      font-size: 10px;
-    }
-  }
+	@media (max-width: 768px) {
+		width: 250px;
+
+		input::placeholder {
+			font-size: 10px;
+		}
+	}
 }

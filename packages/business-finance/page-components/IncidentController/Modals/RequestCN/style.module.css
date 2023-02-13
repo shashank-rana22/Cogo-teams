@@ -1,130 +1,157 @@
 .button {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
+
 .org_name {
-  font-weight: 600;
+	font-weight: 600;
 }
+
 .flex {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
+
 .name {
-  padding: 0px 4px;
+	padding: 0 4px;
 }
+
 .container {
-  width: 200px;
-  padding: 8px;
+	width: 200px;
+	padding: 8px;
 }
+
 .texts {
-  font-size: 12px;
-  font-weight: 500;
+	font-size: 12px;
+	font-weight: 500;
 }
+
 .rates_data {
-  padding: 12px 24px;
-  border: 1px solid #c2c2c2;
-  border-radius: 4px;
-  width: fit-content;
-  margin: 20px 24px 20px 0px;
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
 }
 
 .rates {
-  font-weight: 600;
+	font-weight: 600;
 }
+
 .label {
-  font-weight: 500;
+	font-weight: 500;
 }
+
 .value_data {
-  margin: 20px 40px 20px 0px;
+	margin: 20px 40px 20px 0;
 }
+
 .label_value {
-  font-size: 12px;
+	font-size: 12px;
 }
+
 .date_value {
-  font-size: 14px;
-  font-weight: 600;
+	font-size: 14px;
+	font-weight: 600;
 }
+
 .document {
-  font-weight: 600;
-  margin: 4px 0px;
+	margin: 4px 0;
+	font-weight: 600;
 }
+
 .document_flex {
-  display: flex;
-  align-items: center;
-  text-align: center;
+	display: flex;
+	align-items: center;
+	text-align: center;
 }
+
 .remarks {
-  font-weight: 600;
-  font-size: 12px;
-  margin: 8px 0px;
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
 }
+
 .button {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
+
 .org_name {
-  font-weight: 600;
+	font-weight: 600;
 }
+
 .flex {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
+
 .name {
-  padding: 0px 4px;
+	padding: 0 4px;
 }
+
 .rates_data {
-  padding: 12px 24px;
-  border: 1px solid #c2c2c2;
-  border-radius: 4px;
-  width: fit-content;
-  margin: 20px 24px 20px 0px;
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
 }
 
 .rates {
-  font-weight: 600;
+	font-weight: 600;
 }
+
 .label {
-  font-weight: 500;
+	font-weight: 500;
 }
+
 .value_data {
-  margin: 20px 38px 20px 0px;
+	margin: 20px 38px 20px 0;
 }
+
 .label_value {
-  font-size: 12px;
+	font-size: 12px;
 }
+
 .date_value {
-  font-size: 14px;
-  font-weight: 600;
+	font-size: 14px;
+	font-weight: 600;
 }
+
 .document {
-  font-weight: 600;
-  margin: 4px 0px;
+	margin: 4px 0;
+	font-weight: 600;
 }
+
 .document_flex {
-  display: flex;
-  align-items: center;
-  text-align: center;
+	display: flex;
+	align-items: center;
+	text-align: center;
 }
+
 .remarks {
-  font-weight: 600;
-  font-size: 12px;
-  margin: 8px 0px;
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
 }
+
 .icon_container {
-  display: flex;
-  align-items: center;
-  margin-left: 2px;
+	display: flex;
+	align-items: center;
+	margin-left: 2px;
 }
+
 .select_container {
-  margin: 4px 0px 16px 0px;
+	margin: 4px 0 16px;
 }
 
 .button_container {
-  margin-top: 8px;
-  display: flex;
-  flex-direction: row-reverse;
+	display: flex;
+	flex-direction: row-reverse;
+	margin-top: 8px;
 }
