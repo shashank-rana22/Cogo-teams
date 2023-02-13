@@ -1835,6 +1835,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	vendor_rm: {
+		key         : 'vendor_rm',
+		title       : 'VRM',
+		icon        : IcMSettings,
+		href        : '/v2/list-accounts',
+		as          : '/v2/list-accounts',
+		type        : 'link',
+		main_apis   : [],
+		module_type : 'crm',
+	},
 };
 
 export default navigationMappingAdmin;
