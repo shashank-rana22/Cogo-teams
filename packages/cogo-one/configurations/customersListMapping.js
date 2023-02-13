@@ -1,5 +1,6 @@
-const Dummy = [
+const customersListMapping = () => [
 	{
+		id           : 1,
 		name         : 'John Wick',
 		organisation : 1,
 		pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
@@ -8,6 +9,7 @@ const Dummy = [
 		content      : 'My name is cogoassist, Cogoport where we will show....',
 	},
 	{
+		id           : 2,
 		name         : 'John Wick',
 		organisation : 1,
 		pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
@@ -16,6 +18,7 @@ const Dummy = [
 		content      : 'My name is cogoassist, Cogoport where we will show....',
 	},
 	{
+		id           : 3,
 		name         : 'John Wick',
 		organisation : 1,
 		pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
@@ -24,6 +27,7 @@ const Dummy = [
 		content      : 'My name is cogoassist, Cogoport where we will show....',
 	},
 	{
+		id           : 4,
 		name         : 'John Wick',
 		organisation : 1,
 		pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
@@ -32,5 +36,4 @@ const Dummy = [
 		content      : 'My name is cogoassist, Cogoport where we will show....',
 	},
 ];
-
-export default Dummy;
+export default customersListMapping;
