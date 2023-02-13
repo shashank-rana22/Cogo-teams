@@ -4,6 +4,7 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import { CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS, REVENUE_OPTIONS } from './credit-note-config';
 import styles from './style.module.css';
@@ -182,6 +183,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 				>
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber}`} />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
 
 							<div className={styles.value_data}>

@@ -5,7 +5,7 @@ import BankDetails from '../Modals/BankDetails';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
-import SettlementModal from '../Modals/SettlementModal';
+// import SettlementModal from '../Modals/SettlementModal';
 import TDSModal from '../Modals/TDSModal';
 
 import { TooltipInterface } from './interface';
@@ -52,7 +52,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 						theme="light"
 						content={(list || [{}]).map((item:TooltipInterface) => (
 							<div className={styles.trade_party_name}>
-								<div>{toTitleCase(item?.div)}</div>
+								<div>{toTitleCase(item?.div || '-')}</div>
 							</div>
 						))}
 					>
@@ -64,11 +64,11 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 							<div>
 								{(organization?.tradePartyType === 'SELF'
 									? organization?.businessName : organization?.tradePartyName)
-									|| toTitleCase(organization?.businessName)}
+									|| toTitleCase(organization?.businessName || '-')}
 
 							</div>
 						) : (
-							<div>{toTitleCase(organization?.businessName)}</div>
+							<div>{toTitleCase(organization?.businessName || '-')}</div>
 						)}
 					</div>
 				);
@@ -90,7 +90,12 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			id       : 'request_type',
 			Cell     : ({ row: { original } }) => {
 				const { type: requestType = '' } = original || {};
-				return <div>{toTitleCase(requestType.replace(/_/g, ' '))}</div>;
+				return (
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+					</span>
+				);
 			},
 		},
 		{
@@ -123,7 +128,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					tdsRequest,
 					bankRequest,
 					organization,
-					settlementRequest,
+					// settlementRequest,
 					journalVoucherRequest,
 					interCompanyJournalVoucherRequest,
 				} = data || {};
@@ -140,19 +145,20 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								row={row}
 							/>
 						)}
-						{type === 'SETTLEMENT_APPROVAL' && (
+						{/* {type === 'SETTLEMENT_APPROVAL' && (
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
 								refetch={getIncidentData}
 							/>
-						)}
+						)} */}
 						{type === 'BANK_DETAIL_APPROVAL' && (
 							<BankDetails
 								bankData={bankRequest}
 								bankId={id}
 								organization={organization}
 								refetch={getIncidentData}
+								row={row}
 							/>
 						)}
 						{type === 'ISSUE_CREDIT_NOTE' && (
@@ -168,6 +174,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								journalVoucherRequest={journalVoucherRequest}
 								id={id}
 								refetch={getIncidentData}
+								row={row}
 							/>
 						)}
 
@@ -176,6 +183,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								interCompanyJournalVoucherRequest={
 								interCompanyJournalVoucherRequest
 								}
+								row={row}
 								refetch={getIncidentData}
 								id={id}
 							/>

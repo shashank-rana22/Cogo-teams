@@ -3,10 +3,11 @@ import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetJvData from '../../apisModal/useGetJvData';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import styles from './styles.module.css';
 
-function JvModal({ journalVoucherRequest, id, refetch, isEditable = true }) {
+function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row }) {
 	const [showJvModal, setShowJVModal] = useState(false);
 	const [remark, setRemark] = useState('');
 
@@ -78,6 +79,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true }) {
 				>
 					<Modal.Header title="Journal Voucher" />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
 							{getAllValidData.map((item) => (
 								<div className={styles.value_data}>

@@ -1,23 +1,23 @@
 import { useState } from 'react';
 
+import EmptyState from '../common/EmptyState';
 import Filters from '../common/Filters';
-import useGetIncidentData from '../common/hooks/useGetIncidentData';
-import { IncidentDataInterface, Tab } from '../interface';
+import { IncidentDataInterface } from '../interface';
 import StyledTable from '../StyledTable';
 import getColumns from '../utils/getColumns';
 
-function TabComponent({ activeTab }:Tab) {
+function TabComponent({
+	activeTab,
+	incidentData,
+	setFilters,
+	filters,
+	isSettlementExecutive,
+	incidentLoading,
+	getIncidentData,
+}:IncidentDataInterface) {
 	const [isAscendingActive, setIsAscendingActive] = useState();
-	const {
-		incidentData,
-		setFilters,
-		filters,
-		isSettlementExecutive,
-		incidentLoading,
-		getIncidentData,
-	}:IncidentDataInterface = useGetIncidentData({ activeTab });
-
-	const { list = [] } = incidentData || {};
+	const { list = [], paginationData } = incidentData || {};
+	const { pageIndex = 0, total = 0, pageSize = 10 } = paginationData || {};
 	const columns = getColumns({ activeTab, setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
 	return (
 		<div>
@@ -27,7 +27,17 @@ function TabComponent({ activeTab }:Tab) {
 				activeTab={activeTab}
 				filters={filters}
 			/>
-			<StyledTable data={list} columns={columns} loading={incidentLoading} />
+			<StyledTable
+				pageIndex={pageIndex}
+				total={total}
+				pageSize={pageSize}
+				data={list}
+				columns={columns}
+				loading={incidentLoading}
+				setFilters={setFilters}
+				filters={filters}
+			/>
+			{list.length === 0 && <EmptyState />}
 		</div>
 	);
 }

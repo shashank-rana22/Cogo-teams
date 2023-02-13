@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetBankData from '../../apisModal/useGetBankData';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import styles from './styles.module.css';
 
@@ -12,6 +13,7 @@ function BankDetails({
 	bankId,
 	organization,
 	refetch,
+	row,
 	isEditable = true,
 	remark = '',
 }) {
@@ -45,6 +47,7 @@ function BankDetails({
 		setShowBankModal,
 		refetch,
 		bankId,
+		value,
 	});
 
 	const options = [
@@ -63,11 +66,11 @@ function BankDetails({
 	];
 
 	const onApprove = () => {
-		OnAction(value, 'APPROVED');
+		OnAction('APPROVED');
 	};
 
 	const onReject = () => {
-		OnAction(value, 'REJECTED');
+		OnAction('REJECTED');
 	};
 
 	const {
@@ -104,6 +107,7 @@ function BankDetails({
 				>
 					<Modal.Header title="Bank Account - Add/Edit" />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.name_data}>
 							<div>Organization Name - </div>
 							<div role="presentation" onClick={() => checkData()} className={styles.name}>

@@ -10,9 +10,22 @@ interface DataInterface {
 	radioBranchName?:string
 	radioNumber?:string
 }
+interface BankInterface {
+	accountNumber?:string
+	documentUrls?:Array<object>
+	branchName?:string
+	bankName?:string
+	bankHolderName?:string
+	remark?:string
+	ifscCode?:string
+	id?:string
+}
 interface HookInterface {
-	data?:DataInterface
-	status?:string
+	value?:DataInterface
+	bankId?:string
+	bankData?:BankInterface
+	setShowBankModal?: React.Dispatch<React.SetStateAction<boolean>>
+	refetch?:()=>{}
 }
 
 const useGetBankData = ({
@@ -20,7 +33,8 @@ const useGetBankData = ({
 	setShowBankModal,
 	refetch,
 	bankId,
-}) => {
+	value,
+}:HookInterface) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
@@ -47,20 +61,20 @@ const useGetBankData = ({
 		id,
 	} = bankData || {};
 
-	const useOnActionBank = async ({ data, status }:HookInterface) => {
+	const useOnActionBank = async (status :string) => {
 		try {
 			const apiResponse = await trigger({
 				data: {
-					remark    : data?.text || '',
+					remark    : value?.text || '',
 					status,
 					updatedBy : userId,
 					data      : {
 						bankRequest: {
-							isBankNameValid      : data.radioName === 'true',
-							isAccountNumberValid : data.radioNumber === 'true',
-							isBranchNameValid    : data.radioBranchName === 'true',
-							isIfscCodeValid      : data.radioIFSC === 'true',
-							methodOfVerification : data.radioMethod,
+							isBankNameValid      : value.radioName === 'true',
+							isAccountNumberValid : value.radioNumber === 'true',
+							isBranchNameValid    : value.radioBranchName === 'true',
+							isIfscCodeValid      : value.radioIFSC === 'true',
+							methodOfVerification : value.radioMethod,
 							accountNumber,
 							bankHolderName,
 							bankName,

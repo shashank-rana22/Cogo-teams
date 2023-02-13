@@ -5,7 +5,7 @@ import BankDetails from '../Modals/BankDetails';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
-import SettlementModal from '../Modals/SettlementModal';
+// import SettlementModal from '../Modals/SettlementModal';
 import TDSModal from '../Modals/TDSModal';
 
 import { TooltipInterface } from './interface';
@@ -13,7 +13,7 @@ import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
 export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab }) => {
-	const toTitleCase = (str) => {
+	const toTitleCase = (str:string) => {
 		const titleCase = str
 			.toLowerCase()
 			.split(' ')
@@ -22,6 +22,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 
 		return titleCase;
 	};
+
 	return [
 		{
 			Header   : 'INCIDENT ID',
@@ -52,7 +53,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 						theme="light"
 						content={(list || [{}]).map((item:TooltipInterface) => (
 							<div className={styles.trade_party_name}>
-								<div>{toTitleCase(item?.div)}</div>
+								<div>{toTitleCase(item?.div || '-')}</div>
 							</div>
 						))}
 					>
@@ -60,16 +61,32 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					</Tooltip>
 				) : (
 					<div>
-						{bankTradePartyName || tdsTradePartyName ? (
-							<div>
-								{(organization?.tradePartyType === 'SELF'
-									? organization?.businessName : organization?.tradePartyName)
-									|| toTitleCase(organization?.businessName)}
 
-							</div>
-						) : (
-							<div>{toTitleCase(organization?.businessName)}</div>
-						)}
+						<Tooltip
+							theme="light"
+							content={bankTradePartyName || tdsTradePartyName ? (
+								<div>
+									{(organization?.tradePartyType === 'SELF'
+										? organization?.businessName : organization?.tradePartyName)
+									|| toTitleCase(organization?.businessName || '-')}
+
+								</div>
+							) : (
+								<div>{toTitleCase(organization?.businessName || '-')}</div>
+							)}
+						>
+							{bankTradePartyName || tdsTradePartyName ? (
+								<div className={styles.wrapper}>
+									{(organization?.tradePartyType === 'SELF'
+										? organization?.businessName : organization?.tradePartyName)
+									|| toTitleCase(organization?.businessName || '-')}
+
+								</div>
+							) : (
+								<div className={styles.wrapper}>{toTitleCase(organization?.businessName || '-')}</div>
+							)}
+						</Tooltip>
+
 					</div>
 				);
 			},
@@ -90,7 +107,12 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			id       : 'request_type',
 			Cell     : ({ row: { original } }) => {
 				const { type: requestType = '' } = original || {};
-				return <div>{toTitleCase(requestType.replace(/_/g, ' '))}</div>;
+				return (
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType.replace(/_/g, ' '))}
+					</span>
+				);
 			},
 		},
 		{
@@ -124,10 +146,10 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				const { updatedBy = {}, updatedAt } = original || {};
 				const { name = '' } = updatedBy || {};
 				return (
-					<span>
-						{name}
-						{updatedAt}
-					</span>
+					<div className={styles.flex_reverse}>
+						<div>{name}</div>
+						<div>{updatedAt}</div>
+					</div>
 				);
 			},
 		},
@@ -139,12 +161,10 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				const { remark = '' } = original || {};
 				return (
 					<Tooltip
-						maxWidth="115px"
-						placement="right"
-						theme="light-border"
-						content={<div>{remark}</div>}
+						theme="light"
+						content={<div className={styles.tooltip}>{remark}</div>}
 					>
-						<div>{remark}</div>
+						<div className={styles.remark}>{remark}</div>
 					</Tooltip>
 				);
 			},
@@ -156,7 +176,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					tdsRequest,
 					bankRequest,
 					organization,
-					settlementRequest,
+					// settlementRequest,
 					journalVoucherRequest,
 					interCompanyJournalVoucherRequest,
 				} = row.data || {};
@@ -174,18 +194,19 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 								row={row}
 							/>
 						)}
-						{requestType === 'SETTLEMENT_APPROVAL' && (
+						{/* {requestType === 'SETTLEMENT_APPROVAL' && (
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
 								refetch={getIncidentData}
 								isEditable={false}
 							/>
-						)}
+						)} */}
 						{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
 							<JvModal
 								journalVoucherRequest={journalVoucherRequest}
 								id={id}
+								row={row}
 								refetch={getIncidentData}
 								isEditable={false}
 							/>
@@ -195,6 +216,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 								interCompanyJournalVoucherRequest={
 								interCompanyJournalVoucherRequest
 								}
+								row={row}
 								refetch={getIncidentData}
 								isEditable={false}
 								id={id}
@@ -204,6 +226,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 							<BankDetails
 								bankData={bankRequest}
 								bankId={id}
+								row={row}
 								organization={organization}
 								refetch={getIncidentData}
 								isEditable={false}

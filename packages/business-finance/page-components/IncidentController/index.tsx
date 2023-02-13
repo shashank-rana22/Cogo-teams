@@ -2,6 +2,8 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import useGetIncidentData from './common/hooks/useGetIncidentData';
+import { IncidentDataInterface } from './interface';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
 
@@ -29,10 +31,45 @@ const tabsKeyComponentMapping = {
 function IncidentController() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState<string>(() => query.view || tabs[0].key);
+	const {
+		incidentData,
+		setFilters,
+		filters,
+		isSettlementExecutive,
+		incidentLoading,
+		getIncidentData,
+	}:IncidentDataInterface = useGetIncidentData({ activeTab });
+
+	const { statsData } = incidentData || {};
+
 	const tabComponentProps = {
-		requested : { activeTab },
-		approved  : { activeTab },
-		rejected  : { activeTab },
+		requested: {
+			activeTab,
+			incidentData,
+			setFilters,
+			filters,
+			isSettlementExecutive,
+			incidentLoading,
+			getIncidentData,
+		},
+		approved: {
+			activeTab,
+			incidentData,
+			setFilters,
+			filters,
+			isSettlementExecutive,
+			incidentLoading,
+			getIncidentData,
+		},
+		rejected: {
+			activeTab,
+			incidentData,
+			setFilters,
+			filters,
+			isSettlementExecutive,
+			incidentLoading,
+			getIncidentData,
+		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
 	const onChange = (view:string) => {
@@ -41,6 +78,19 @@ function IncidentController() {
 			'/business-finance/incident-controller/[activeTab]',
 			`/business-finance/incident-controller/${view}` as never as null,
 		);
+	};
+
+	const getStatsData = (key:string) => {
+		if (key === 'requested') {
+			return statsData?.REQUESTED;
+		}
+		if (key === 'approved') {
+			return statsData?.APPROVED;
+		}
+		if (key === 'rejected') {
+			return statsData?.REJECTED;
+		}
+		return 0;
 	};
 
 	return (
@@ -61,7 +111,7 @@ function IncidentController() {
 						<TabPanel
 							name={key}
 							title={label}
-							badge={5}
+							badge={getStatsData(key)}
 						>
 							{ActiveTabComponent && (
 								<ActiveTabComponent

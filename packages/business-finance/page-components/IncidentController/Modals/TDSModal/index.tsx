@@ -3,6 +3,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import styles from './styles.module.css';
 
@@ -32,10 +33,10 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		{ label: 'Requested Rate', value: requestedTdsRate },
 	];
 	const getAllValidData = [
-		{ id: '1', label: 'Valid From - ', value: validFrom },
-		{ id: '2', label: 'Valid Till - ', value: validTo },
-		{ id: '3', label: 'Current TDS style - ', value: currentTdsStyle },
-		{ id: '4', label: 'New TDS style Requested - ', value: requestedTdsStyle },
+		{ id: '1', label: 'Valid From', value: validFrom },
+		{ id: '2', label: 'Valid Till', value: validTo },
+		{ id: '3', label: 'Current TDS style', value: currentTdsStyle },
+		{ id: '4', label: 'New TDS style Requested ', value: requestedTdsStyle },
 	];
 	const { useOnAction:OnAction, loading } = useGetTdsData({
 		refetch,
@@ -74,6 +75,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 				>
 					<Modal.Header title="TDS Deviation" />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
 							<div className={styles.org_name}>Organization Name - </div>
 							<div className={styles.name}>

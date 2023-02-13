@@ -6,20 +6,22 @@ export type FilterProps = {
 	searchQuery?: string,
 	category?:string
 	date?:Date
+	urgency?:string
 };
 interface Date {
 	startDate?:object
 	endDate?:object
 }
 
-export interface Tab {
-	activeTab: string
-}
-
 export interface TableProps {
 	id?: string;
 	className?: string;
 	style?: React.CSSProperties;
+	pageIndex?:number,
+	pageSize?:number,
+	total?:number
+	setFilters?: React.Dispatch<React.SetStateAction<FilterProps>>
+	filters?:FilterProps
 	columns: object[];
 	data: object[];
 	loading?: boolean;
@@ -29,8 +31,15 @@ export interface TableProps {
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
 }
+interface StatsInterface {
+	REQUESTED?:number
+	APPROVED?:number
+	REJECTED?:number
+}
 export interface IncidentDataInterface {
-	incidentData?:{ list?:Array<object> }
+	activeTab?:string
+	incidentData?:{ list?:Array<object>, statsData:StatsInterface,
+		paginationData?:{ pageIndex?:number, pageSize?:number, total?:number } }
 	setFilters?: React.Dispatch<React.SetStateAction<FilterProps>>
 	filters?:FilterProps
 	isSettlementExecutive?:boolean

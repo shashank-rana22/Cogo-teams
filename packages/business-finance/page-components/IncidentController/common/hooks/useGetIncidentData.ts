@@ -4,8 +4,11 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { FilterProps, Tab } from '../../interface';
+import { FilterProps } from '../../interface';
 
+interface Tab {
+	activeTab?:string
+}
 const useGetIncidentData = ({ activeTab }:Tab) => {
 	const { user_profile:userProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
@@ -21,9 +24,10 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 		searchQuery : '',
 	});
 	const {
-		search, category, date,
+		search, category, date, page, urgency,
 		...rest
 	} = filters || {};
+
 	const [
 		{ data, loading },
 		trigger,
@@ -37,7 +41,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
-
+	console.log(rest, 'rest');
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
@@ -49,9 +53,11 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 					...rest,
 					status          : activeTab.toUpperCase(),
 					isStatsRequired : true,
+					urgencyTag      : urgency === 'urgent' && ['r', 'o'],
 					role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
 					q               : query !== '' ? query : undefined,
 					type            : category,
+					page,
 					createdFrom     : date?.startDate
 						? format(date?.startDate, 'yyyy-MM-dd 00:00:00')
 						: undefined,
@@ -67,15 +73,15 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 
 	useEffect(() => {
 		getIncidentData();
-	}, [JSON.stringify(rest), category, date, query]);
+	}, [JSON.stringify(rest), category, date, query, page, urgency]);
 
 	useEffect(() => {
-		setFilters({
-			...filters,
+		setFilters((prev) => ({
+			...prev,
 			activeTab,
 			searchQuery : query,
 			page        : 1,
-		});
+		}));
 	}, [activeTab, query]);
 
 	return {

@@ -2,12 +2,13 @@ import { Textarea, Modal, Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import useGetInterJvData from '../../apisModal/useGetInterJvData';
-import StyledTable from '../../StyledTable';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import controls from './contols';
+import StyledTableICJV from './StyledTableICJV';
 import styles from './styles.module.css';
 
-function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable = true }) {
+function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable = true, row }) {
 	const [showICJvModal, setShowICJvModal] = useState(false);
 	const [remark, setRemark] = useState('');
 
@@ -48,11 +49,12 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 						setShowICJvModal(false);
 					}}
 				>
-					<Modal.Header title="Journal Voucher" />
+					<Modal.Header title="Inter Company - Journal Voucher" />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.sub_container}>
 							<div className={styles.debit_container}>
-								<div>Debit - </div>
+								<div className={styles.color}>Debit  </div>
 								<div className={styles.debit}>
 									<div style={{ margin: '0px 2px' }}>
 										{list[0]?.currency}
@@ -62,7 +64,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 							</div>
 
 							<div className={styles.debit_container}>
-								<div>Credit - </div>
+								<div className={styles.color}>Credit  </div>
 								<div className={styles.debit}>
 									<div style={{ margin: '0px 2px' }}>
 										{list[0]?.currency}
@@ -72,7 +74,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 							</div>
 						</div>
 						<div>
-							<StyledTable
+							<StyledTableICJV
 								data={list || []}
 								columns={controls}
 								loading={false}

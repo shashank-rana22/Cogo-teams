@@ -1,13 +1,10 @@
 .table {
   :global {
     background-color: #ffff;
-    padding: 24px 16px;
+    padding-top: 20px;
     margin-bottom: 0 !important;
     .ui_table_container {
       border: none;
-    }
-    .ui_table_head_cell:first-child {
-      padding: 0px 0px 0px 30px;
     }
 
     .ui_table_body_cell {
@@ -16,15 +13,5 @@
     .ui_table_head_cell {
       border-bottom: 1px solid #f68b21;
     }
-  }
-}
-
-.pagination_container {
-  display: flex;
-  justify-content: flex-end;
-
-  @media (max-width: 768px) {
-    position: absolute;
-    right: 0;
   }
 }
