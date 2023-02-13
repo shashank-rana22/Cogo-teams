@@ -42,6 +42,8 @@ function Details() {
 				loading={loading}
 				paginationData={paginationData}
 				getNextaPage={getNextPage}
+				configurationDetails={configurationDetails}
+				listRefetch={listRefetch}
 			/>
 		</section>
 	);
