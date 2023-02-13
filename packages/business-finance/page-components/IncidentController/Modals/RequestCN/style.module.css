@@ -12,6 +12,14 @@
 .name {
   padding: 0px 4px;
 }
+.container {
+  width: 200px;
+  padding: 8px;
+}
+.texts {
+  font-size: 12px;
+  font-weight: 500;
+}
 .rates_data {
   padding: 12px 24px;
   border: 1px solid #c2c2c2;
@@ -61,6 +69,7 @@
 }
 .flex {
   display: flex;
+  align-items: center;
 }
 .name {
   padding: 0px 4px;
@@ -82,7 +91,7 @@
   font-weight: 500;
 }
 .value_data {
-  margin: 20px 40px 20px 0px;
+  margin: 20px 38px 20px 0px;
 }
 .label_value {
   font-size: 12px;
@@ -109,4 +118,13 @@
   display: flex;
   align-items: center;
   margin-left: 2px;
+}
+.select_container {
+  margin: 4px 0px 16px 0px;
+}
+
+.button_container {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row-reverse;
 }

@@ -108,7 +108,7 @@ function BankDetails({
 							<div>Organization Name - </div>
 							<div role="presentation" onClick={() => checkData()} className={styles.name}>
 								{tradePartyType === 'SELF'
-									? businessName : tradePartyName}
+									? businessName || '-' : tradePartyName || '-'}
 
 							</div>
 
@@ -116,7 +116,7 @@ function BankDetails({
 						<div className={styles.name_data}>
 							<div>Trade Party Type - </div>
 							<div className={styles.party_name}>
-								{startCase(tradePartyType)}
+								{startCase(tradePartyType) || '-'}
 							</div>
 						</div>
 
@@ -125,7 +125,7 @@ function BankDetails({
 						<div>
 							<div className={styles.simple_name}>Bank Holder Name </div>
 							<div className={styles.flex}>
-								<div className={styles.font_name}>{startCase(bankHolderName)}</div>
+								<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
 								<div>
 									<RadioGroup
 										options={options}
@@ -137,7 +137,7 @@ function BankDetails({
 
 							<div className={styles.simple_name}>Account Number </div>
 							<div className={styles.flex}>
-								<div className={styles.font_name}>{accountNumber}</div>
+								<div className={styles.font_name}>{accountNumber || '-'}</div>
 								<div>
 									<RadioGroup
 										options={options}
@@ -154,11 +154,11 @@ function BankDetails({
 
 							<div className={styles.flex}>
 								<div className={styles.font_name_data}>
-									{startCase(bankName)}
+									{startCase(bankName) || '-'}
 
 									<div className={styles.branch_name}>
 										-
-										{startCase(branchName)}
+										{startCase(branchName) || '-'}
 									</div>
 								</div>
 								<div>
@@ -177,7 +177,7 @@ function BankDetails({
 
 							<div className={styles.flex}>
 								<div className={styles.font_name}>
-									{ifscCode}
+									{ifscCode || '-'}
 								</div>
 								<div>
 									<RadioGroup
@@ -209,7 +209,7 @@ function BankDetails({
 							<div className={styles.flex_remark}>
 								Remark -
 								<div className={styles.font_name}>
-									{remark}
+									{remark || '-'}
 								</div>
 							</div>
 						)}
@@ -217,20 +217,24 @@ function BankDetails({
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer">
-									{url.split('/')[4]}
+									{url.split('/')[4] || '-'}
 								</a>
 							) : (
 								<div> No document available</div>
 							)))}
 						</div>
-						<div className={styles.remarks}>Remarks*</div>
-						<Textarea
-							name="remark"
-							size="md"
-							placeholder="Enter Remark Here..."
-							onChange={(v: string) => setValue((prev) => ({ ...prev, text: v }))}
-							style={{ width: '700', height: '100px', marginBottom: '12px' }}
-						/>
+						{isEditable && (
+							<>
+								<div className={styles.remarks}>Remarks*</div>
+								<Textarea
+									name="remark"
+									size="md"
+									placeholder="Enter Remark Here..."
+									onChange={(v: string) => setValue((prev) => ({ ...prev, text: v }))}
+									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+								/>
+							</>
+						)}
 
 					</Modal.Body>
 					{isEditable && (

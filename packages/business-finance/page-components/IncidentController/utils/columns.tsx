@@ -12,8 +12,8 @@ import { TooltipInterface } from './interface';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData }) => {
-	const toTitleCase = (str:string) => {
+export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab }) => {
+	const toTitleCase = (str) => {
 		const titleCase = str
 			.toLowerCase()
 			.split(' ')
@@ -117,8 +117,41 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			id       : 'request_date',
 		},
 		{
-			accessor: (row) => {
-				const { data } = row || {};
+			Header   : activeTab === 'approved' ? 'APPROVED BY & ON' : 'REJECTED BY & ON',
+			accessor : 'updatedBy',
+			id       : 'username',
+			Cell     : ({ row: { original } }) => {
+				const { updatedBy = {}, updatedAt } = original || {};
+				const { name = '' } = updatedBy || {};
+				return (
+					<span>
+						{name}
+						{updatedAt}
+					</span>
+				);
+			},
+		},
+		{
+			Header   : 'REMARK',
+			accessor : 'remark',
+			id       : 'remark',
+			Cell     : ({ row: { original } }) => {
+				const { remark = '' } = original || {};
+				return (
+					<Tooltip
+						maxWidth="115px"
+						placement="right"
+						theme="light-border"
+						content={<div>{remark}</div>}
+					>
+						<div>{remark}</div>
+					</Tooltip>
+				);
+			},
+		},
+
+		{
+			accessor: (row:any) => {
 				const {
 					tdsRequest,
 					bankRequest,
@@ -126,65 +159,82 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					settlementRequest,
 					journalVoucherRequest,
 					interCompanyJournalVoucherRequest,
-				} = data || {};
+				} = row.data || {};
 
-				const { type, id } = row || {};
+				const { type: requestType, id, remark, status } = row || {};
 
 				return (
 					<>
-						{type === 'TDS_APPROVAL' && (
+						{requestType === 'TDS_APPROVAL' && (
 							<TDSModal
 								tdsData={tdsRequest}
 								id={id}
 								refetch={getIncidentData}
+								isEditable={false}
 								row={row}
 							/>
 						)}
-						{type === 'SETTLEMENT_APPROVAL' && (
+						{requestType === 'SETTLEMENT_APPROVAL' && (
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
 								refetch={getIncidentData}
+								isEditable={false}
 							/>
 						)}
-						{type === 'BANK_DETAIL_APPROVAL' && (
-							<BankDetails
-								bankData={bankRequest}
-								bankId={id}
-								organization={organization}
-								refetch={getIncidentData}
-							/>
-						)}
-						{type === 'ISSUE_CREDIT_NOTE' && (
-							<RequestCN row={row} refetch={getIncidentData} id={id} />
-						)}
-
-						{type === 'CONSOLIDATED_CREDIT_NOTE' && (
-							<RequestCN row={row} refetch={getIncidentData} id={id} />
-						)}
-
-						{type === 'JOURNAL_VOUCHER_APPROVAL' && (
+						{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
 							<JvModal
 								journalVoucherRequest={journalVoucherRequest}
 								id={id}
 								refetch={getIncidentData}
+								isEditable={false}
 							/>
 						)}
-
-						{type === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
+						{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
 							<ICJVModal
 								interCompanyJournalVoucherRequest={
 								interCompanyJournalVoucherRequest
 								}
 								refetch={getIncidentData}
+								isEditable={false}
 								id={id}
+							/>
+						)}
+						{requestType === 'BANK_DETAIL_APPROVAL' && (
+							<BankDetails
+								bankData={bankRequest}
+								bankId={id}
+								organization={organization}
+								refetch={getIncidentData}
+								isEditable={false}
+								remark={remark}
+							/>
+						)}
+
+						{requestType === 'ISSUE_CREDIT_NOTE' && (
+							<RequestCN
+								row={row}
+								refetch={getIncidentData}
+								id={id}
+								isEditable={false}
+								status={status}
+							/>
+						)}
+
+						{requestType === 'CONSOLIDATED_CREDIT_NOTE' && (
+							<RequestCN
+								row={row}
+								refetch={getIncidentData}
+								id={id}
+								isEditable={false}
+								status={status}
 							/>
 						)}
 
 					</>
 				);
 			},
-			id: 'action',
+			id: 'actionColumn',
 		},
 	];
 };

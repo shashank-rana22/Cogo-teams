@@ -2,6 +2,19 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+interface DataInterface {
+	text?:string
+	radioName?:string
+	radioMethod?:string
+	radioIFSC?:string
+	radioBranchName?:string
+	radioNumber?:string
+}
+interface HookInterface {
+	data?:DataInterface
+	status?:string
+}
+
 const useGetBankData = ({
 	bankData,
 	setShowBankModal,
@@ -34,7 +47,7 @@ const useGetBankData = ({
 		id,
 	} = bankData || {};
 
-	const useOnActionBank = async (data, status) => {
+	const useOnActionBank = async ({ data, status }:HookInterface) => {
 		try {
 			const apiResponse = await trigger({
 				data: {

@@ -6921,6 +6921,14 @@ const partner = {
 			api         : 'patch_incident_management_incident_by_id',
 			access_type : 'private',
 		},
+		{
+			api         : 'post_payments_journal_voucher_approve',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{

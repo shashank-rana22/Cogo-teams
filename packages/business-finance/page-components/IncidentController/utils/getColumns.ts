@@ -1,3 +1,4 @@
+import { columns } from './columns';
 import { ColumnInterface } from './interface';
 import { requestColumn } from './requestColumn';
 
@@ -9,8 +10,8 @@ const getColumns = ({
 		return requestColumn({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
 	}
 	return (
-		null
-		// pendingColumns(refetch)
+
+		columns({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab })
 	);
 };
 

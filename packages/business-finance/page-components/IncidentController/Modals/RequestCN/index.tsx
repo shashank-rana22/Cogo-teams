@@ -1,22 +1,28 @@
-import { Popover, Textarea, Modal, Button } from '@cogoport/components';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 
+import { CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS, REVENUE_OPTIONS } from './credit-note-config';
 import styles from './style.module.css';
 
-function RequestCN({ id, refetch, row, isEditable = true }) {
+function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
+	const [CNCategoryValues, setCNCategoryValues] = useState({
+		CNType   : null,
+		CNValues : null,
+		remarks  : null,
+	});
+
 	const [shoPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { data = {} } = row || {};
-	const { creditNoteRequest } = data;
+	const { creditNoteRequest, consolidatedCreditNoteRequest } = data;
 	const {
 		invoiceNumber,
 		jobNumber,
-		lineItems,
 		subTotal,
 		taxAmount,
 		grandTotal,
@@ -25,10 +31,9 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 		remark,
 		creditNoteType,
 		creditNoteRemarks,
-		documentProof,
 		currency,
 		documentUrls,
-	} = creditNoteRequest;
+	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
 		refetch,
@@ -36,6 +41,7 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 		id,
 		row,
 		remark,
+		CNCategoryValues,
 	});
 	const onApprove = () => {
 		OnAction('APPROVED');
@@ -43,6 +49,115 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 	const onReject = () => {
 		OnAction('REJECTED');
 	};
+
+	const RevenueImpacting =	CNCategoryValues?.CNType === 'REVENUE_IMPACTING'
+	|| creditNoteType === 'REVENUE_IMPACTING';
+	const NonRevenueImpacting =	CNCategoryValues?.CNType === 'NON_REVENUE_IMPACTING'
+	|| creditNoteType === 'NON_REVENUE_IMPACTING';
+
+	const content = () => (
+		<div className={styles.container}>
+			<div>
+				<div className={styles.texts}>CN Category Type*</div>
+				<div className={styles.select_container}>
+					<Select
+						className="primary md"
+						placeholder="CN Category Type.."
+						value={creditNoteType || CNCategoryValues?.CNType}
+						disabled={!isEditable}
+						onChange={(e:any) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
+						options={CATEGORY_OPTIONS}
+					/>
+				</div>
+			</div>
+			{(CNCategoryValues?.CNType
+				|| status === 'APPROVED'
+				|| status === 'REJECTED') && (
+					<div>
+						{RevenueImpacting && <div className={styles.texts}>Revenue Impacting*</div>}
+						{NonRevenueImpacting && <div className={styles.texts}>Non-Revenue Impacting*</div>}
+						<div className={styles.select_container}>
+							{RevenueImpacting && (
+								<Select
+									className="primary md"
+									placeholder="Type here..."
+									value={creditNoteRemarks || CNCategoryValues?.CNValues}
+									disabled={!isEditable}
+									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
+									options={
+									creditNoteRemarks
+										? [
+											...REVENUE_OPTIONS,
+											{ label: creditNoteRemarks, value: creditNoteRemarks },
+										]
+										: REVENUE_OPTIONS
+								}
+								/>
+							)}
+							{NonRevenueImpacting && (
+								<Select
+									className="primary md"
+									placeholder="Type here..."
+									value={
+									NON_REVENUE_DATA.includes(creditNoteRemarks)
+										? creditNoteRemarks
+										: creditNoteRemarks || CNCategoryValues?.CNValues
+								}
+									disabled={!isEditable}
+									onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
+									options={
+									creditNoteRemarks
+										? [
+											...NON_REVENUE_OPTIONS,
+											{ label: creditNoteRemarks, value: creditNoteRemarks },
+										]
+										: NON_REVENUE_OPTIONS
+								}
+								/>
+							)}
+						</div>
+					</div>
+			)}
+			{(CNCategoryValues?.CNValues === 'revenueOthers'
+				|| CNCategoryValues?.CNValues === 'nonRevenueOthers') && (
+					<div>
+						<div className={styles.texts}>Remark</div>
+
+						<Textarea
+							value={CNCategoryValues?.remarks}
+							disabled={!isEditable}
+							onChange={(e:any) => setCNCategoryValues({
+								...CNCategoryValues,
+								remarks: e.target?.value,
+							})}
+							placeholder="Remark here ...."
+						/>
+
+					</div>
+			)}
+			<div className={styles.button_container}>
+				<Button themeType="primary sm" onClick={() => setShowPopover(false)}>
+					Done
+				</Button>
+			</div>
+		</div>
+	);
+
+	useEffect(() => {
+		setCNCategoryValues({
+			CNType   : CNCategoryValues?.CNType,
+			CNValues : null,
+			remarks  : null,
+		});
+	}, [CNCategoryValues?.CNType]);
+
+	useEffect(() => {
+		setCNCategoryValues({
+			CNType   : CNCategoryValues?.CNType,
+			CNValues : CNCategoryValues?.CNValues,
+			remarks  : null,
+		});
+	}, [CNCategoryValues?.CNValues, CNCategoryValues?.CNType]);
 
 	return (
 		<div>
@@ -75,7 +190,7 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 								</div>
 								<div className={styles.date_value}>
 									#
-									{jobNumber}
+									{jobNumber || '-'}
 								</div>
 							</div>
 
@@ -90,16 +205,42 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 										target="_blank"
 										rel="noreferrer"
 									>
-										{invoiceNumber}
+										{invoiceNumber || '-'}
 									</a>
+								</div>
+							</div>
+
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									TaxAmount
+								</div>
+								<div className={styles.date_value}>
+									{getFormattedPrice(taxAmount, currency) || '-'}
+								</div>
+							</div>
+
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									SubTotal
+								</div>
+								<div className={styles.date_value}>
+									{getFormattedPrice(subTotal, currency) || '-'}
+								</div>
+							</div>
+
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									GrandTotal
+								</div>
+								<div className={styles.date_value}>
+									{getFormattedPrice(grandTotal, currency) || '-'}
 								</div>
 							</div>
 							<Popover
 								placement="bottom"
 								visible={shoPopover}
-								caret={false}
 								trigger="click"
-								render={<div>jbdlj</div>}
+								render={content()}
 								interactive
 							>
 								<Button
@@ -109,7 +250,7 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 									<div className={styles.flex}>
 										CN Category
 										<div className={styles.icon_container}>
-											<IcMArrowRotateDown />
+											{shoPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 										</div>
 									</div>
 								</Button>
@@ -118,23 +259,33 @@ function RequestCN({ id, refetch, row, isEditable = true }) {
 						</div>
 
 						<div className={styles.document_flex}>
+							<div className={styles.document}>Remarks -</div>
+							{ remark || '-'}
+						</div>
+
+						<div className={styles.document_flex}>
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer">
-									{url.split('/')[4]}
+									{url.split('/')[4] || '-'}
 								</a>
 							) : (
 								<div> No document available</div>
 							)))}
 						</div>
-						<div className={styles.remarks}>Remarks*</div>
-						<Textarea
-							name="remark"
-							size="md"
-							placeholder="Enter Remark Here..."
-							onChange={(value: string) => setRemarks(value)}
-							style={{ width: '700', height: '100px', marginBottom: '12px' }}
-						/>
+						{isEditable && (
+							<>
+								<div className={styles.remarks}>Remarks*</div>
+
+								<Textarea
+									name="remark"
+									size="md"
+									placeholder="Enter Remark Here..."
+									onChange={(value: string) => setRemarks(value)}
+									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+								/>
+							</>
+						) }
 
 					</Modal.Body>
 					{isEditable && (

@@ -27,7 +27,7 @@ const useGetTdsData = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async (status) => {
+	const useOnAction = async (status:string) => {
 		const payload =	row.type !== 'TDS_APPROVAL'
 			? {
 				data: {

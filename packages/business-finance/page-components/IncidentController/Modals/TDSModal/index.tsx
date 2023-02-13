@@ -78,9 +78,13 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 							<div className={styles.org_name}>Organization Name - </div>
 							<div className={styles.name}>
 								{tdsTradePartyName ? (
-									<div>{organization?.tradePartyName || toTitleCase(organization?.businessName)}</div>
+									<div>
+										{organization?.tradePartyName || '-'
+										|| toTitleCase(organization?.businessName) || '-'}
+
+									</div>
 								) : (
-									<div>{toTitleCase(organization?.businessName)}</div>
+									<div>{toTitleCase(organization?.businessName) || '-'}</div>
 								)}
 							</div>
 						</div>
@@ -88,10 +92,10 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 							{getRatePercentageData.map((itemData) => (
 								<div className={styles.rates_data}>
 									<div className={styles.rates}>
-										{itemData?.value}
+										{itemData?.value || '-'}
 										%
 									</div>
-									<div className={styles.label}>{itemData?.label}</div>
+									<div className={styles.label}>{itemData?.label || '-'}</div>
 								</div>
 							))}
 						</div>
@@ -99,12 +103,12 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 							{getAllValidData.map((item) => (
 								<div className={styles.value_data}>
 									<div className={styles.label_value}>
-										{item?.label}
+										{item?.label || '-'}
 									</div>
 									<div className={styles.date_value}>
 										{(item?.id === '1' || item?.id === '2')
-											? item?.value
-											: startCase(item?.value)}
+											? item?.value || '-'
+											: startCase(item?.value) || '-'}
 
 									</div>
 								</div>
@@ -114,20 +118,25 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer">
-									{url.split('/')[4]}
+									{url.split('/')[4] || '-'}
 								</a>
 							) : (
 								<div> No document available</div>
 							)))}
 						</div>
-						<div className={styles.remarks}>Remarks*</div>
-						<Textarea
-							name="remark"
-							size="md"
-							placeholder="Enter Remark Here..."
-							onChange={(value: string) => setRemark(value)}
-							style={{ width: '700', height: '100px', marginBottom: '12px' }}
-						/>
+						{isEditable && (
+							<>
+								<div className={styles.remarks}>Remarks*</div>
+
+								<Textarea
+									name="remark"
+									size="md"
+									placeholder="Enter Remark Here..."
+									onChange={(value: string) => setRemark(value)}
+									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+								/>
+							</>
+						) }
 
 					</Modal.Body>
 					{isEditable && (
