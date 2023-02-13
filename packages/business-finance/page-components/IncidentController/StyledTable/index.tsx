@@ -6,7 +6,7 @@ import { TableProps } from '../interface';
 import styles from './style.module.css';
 
 function StyledTable({
-	id, className, columns, data, pageSize, pageIndex, total, setFilters, filters, loading, ...rest
+	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, ...rest
 }: TableProps) {
 	return (
 		<div className={styles.table}>
@@ -21,7 +21,7 @@ function StyledTable({
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
-					currentPage={pageIndex}
+					currentPage={page}
 					totalItems={total}
 					pageSize={pageSize}
 					onPageChange={(val:any) => setFilters({ ...filters, page: val })}

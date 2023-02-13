@@ -17,7 +17,7 @@ export interface TableProps {
 	id?: string;
 	className?: string;
 	style?: React.CSSProperties;
-	pageIndex?:number,
+	page?:number,
 	pageSize?:number,
 	total?:number
 	setFilters?: React.Dispatch<React.SetStateAction<FilterProps>>

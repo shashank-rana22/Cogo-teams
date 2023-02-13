@@ -20,3 +20,7 @@
 .color {
   color: #828282;
 }
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -17,7 +17,8 @@ function TabComponent({
 }:IncidentDataInterface) {
 	const [isAscendingActive, setIsAscendingActive] = useState();
 	const { list = [], paginationData } = incidentData || {};
-	const { pageIndex = 0, total = 0, pageSize = 10 } = paginationData || {};
+	const { total = 0, pageSize = 10 } = paginationData || {};
+	const { page } = filters || {};
 	const columns = getColumns({ activeTab, setIsAscendingActive, setFilters, isAscendingActive, getIncidentData });
 	return (
 		<div>
@@ -29,7 +30,7 @@ function TabComponent({
 			/>
 
 			<StyledTable
-				pageIndex={pageIndex}
+				page={page}
 				total={total}
 				pageSize={pageSize}
 				data={list}
