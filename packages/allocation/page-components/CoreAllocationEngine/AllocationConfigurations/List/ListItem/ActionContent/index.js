@@ -2,13 +2,13 @@ import { IcMDelete, IcMDoubleTick, IcMEdit, IcMEyeopen, IcMListView, IcMScreenSh
 
 import styles from './styles.module.css';
 
-function ActionContent({ status, setWorkflowName }) {
+function ActionContent({ status, onClickCta }) {
 	const WORKFLOW_CTA_MAPPING = {
 		draft: (
 			<>
 				<div
 					className={styles.workflow_cta}
-					onClick={() => setWorkflowName('edit')}
+					onClick={() => onClickCta('edit')}
 					role="presentation"
 				>
 					<div className={styles.cta_text}>
@@ -18,7 +18,7 @@ function ActionContent({ status, setWorkflowName }) {
 				</div>
 				<div
 					className={styles.workflow_cta}
-					onClick={() => setWorkflowName('check')}
+					onClick={() => onClickCta('check')}
 					role="presentation"
 				>
 					<div className={styles.cta_text}>
@@ -32,7 +32,7 @@ function ActionContent({ status, setWorkflowName }) {
 		publishable: (
 			<div
 				className={styles.workflow_cta}
-				onClick={() => setWorkflowName('publish')}
+				onClick={() => onClickCta('publish')}
 				role="presentation"
 			>
 				<div className={styles.cta_text}>
@@ -45,7 +45,7 @@ function ActionContent({ status, setWorkflowName }) {
 		not_publishable: (
 			<div
 				className={styles.workflow_cta}
-				onClick={() => setWorkflowName('view')}
+				onClick={() => onClickCta('view')}
 				role="presentation"
 			>
 				<div className={styles.cta_text}>
@@ -58,7 +58,7 @@ function ActionContent({ status, setWorkflowName }) {
 		active: (
 			<div
 				className={styles.workflow_cta}
-				onClick={() => setWorkflowName('instances')}
+				onClick={() => onClickCta('instances')}
 				role="presentation"
 			>
 				<div className={styles.cta_text}>
@@ -75,7 +75,7 @@ function ActionContent({ status, setWorkflowName }) {
 
 			<div
 				className={styles.workflow_cta}
-				onClick={() => setWorkflowName('delete')}
+				onClick={() => onClickCta('delete')}
 				role="presentation"
 			>
 				<div className={styles.cta_text}>
