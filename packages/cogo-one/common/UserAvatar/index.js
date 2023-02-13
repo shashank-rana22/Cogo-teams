@@ -17,10 +17,10 @@ function UserAvatar({ type = '', imageSource = '' }) {
 			)}
 
 			<Avatar
-				src={imageSource}
+				src={imageSource || 'https://www.w3schools.com/howto/img_avatar.png'}
 				alt="img"
 				disabled={false}
-				size="55px"
+				size="50px"
 			/>
 		</div>
 	);

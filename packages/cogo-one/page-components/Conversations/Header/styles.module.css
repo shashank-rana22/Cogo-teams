@@ -2,6 +2,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding-top: 15px;
+
+}
+.container{
+	padding:0 15px 5px 15px;
 }
 .flex{
 	display: flex;
@@ -20,3 +25,18 @@
 
 }
 
+.tags{
+	background: #F3FAFA;
+	font-size: 10px;
+	line-height: 15px;
+	color:#221F20;
+	border-radius:6px;
+	margin:0 5px;
+	padding:5px;
+}
+.margin{
+	margin:5px;
+}
+.more_tags{
+	margin:0 5px;
+}
