@@ -2,8 +2,15 @@ import { Button, Modal } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+import useUserActions from './useUserActions';
 
-function UserActions({ confirmModalState, checkedRowsId, onClick = () => {} }) {
+function UserActions({
+	confirmModalState,
+	setConfirmModalState = () => {},
+	checkedRowsId,
+	onClick = () => {},
+	fetchList = () => {},
+}) {
 	const requestType = confirmModalState.type;
 
 	const DISPLAY_TEXT_MAPPING = {
@@ -26,6 +33,13 @@ function UserActions({ confirmModalState, checkedRowsId, onClick = () => {} }) {
 
 	};
 
+	const { handleUpdateRelation = () => {}, loadingUpdateRelations = false } = useUserActions({
+		confirmModalState,
+		setConfirmModalState,
+		checkedRowsId,
+		fetchList,
+	});
+
 	return (
 		<>
 			<Modal.Header title={`${DISPLAY_TEXT_MAPPING[requestType].title}`} />
@@ -43,10 +57,17 @@ function UserActions({ confirmModalState, checkedRowsId, onClick = () => {} }) {
 						themeType="secondary"
 						style={{ marginRight: '10px' }}
 						onClick={onClick}
+						disabled={loadingUpdateRelations}
 					>
 						CANCEL
 					</Button>
-					<Button type="submit" size="md" themeType="primary">
+					<Button
+						type="submit"
+						size="md"
+						themeType="primary"
+						disabled={loadingUpdateRelations}
+						onClick={() => handleUpdateRelation()}
+					>
 						{startCase(requestType)}
 					</Button>
 				</div>

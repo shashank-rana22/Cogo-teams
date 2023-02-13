@@ -1,8 +1,6 @@
-import { Modal, Popover, Pill, Tooltip } from '@cogoport/components';
+import { Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
-
-import UserActions from '../UserActions';
 
 import ActionContent from './ActionContent';
 import styles from './styles.module.css';

@@ -24,6 +24,7 @@ function List({
 	paginationData = {},
 	getNextPage,
 	searchQuery,
+	fetchList = () => {},
 	// setActiveTab = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -228,7 +229,7 @@ function List({
 						onClick={onClickClose}
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
-								// fetchList={fetchList}
+						fetchList={fetchList}
 						checkedRowsId={checkedRowsId}
 					/>
 				</Modal>
