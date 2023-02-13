@@ -4,8 +4,8 @@ export type FilterProps = {
 	search?: string,
 	activeTab?: string,
 	searchQuery?: string,
-	category?:string
-	date?:Date
+	category?:string,
+	date?:{ startDate?:Date, endDate?:Date }
 	urgency?:string
 };
 interface Date {

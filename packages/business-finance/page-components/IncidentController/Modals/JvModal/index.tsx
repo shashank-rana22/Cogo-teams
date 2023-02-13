@@ -38,7 +38,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 		{ id: '2', label: 'Amount', value: amount.toFixed(2) },
 		{ id: '3', label: 'Exchange Rate', value: exchangeRate },
 		{ id: '4', label: 'Ledger Currency', value: ledCurrency },
-		{ id: '5', label: 'Validity Date', value: format(new Date(validityDate), 'dd MMM yyyy') },
+		{ id: '5', label: 'Validity Date', value: format(new Date(validityDate), 'dd MMM yyyy', {}, false) },
 	];
 
 	const { useOnAction:OnAction, loading } = useGetJvData({

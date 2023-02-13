@@ -41,12 +41,15 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
-	console.log(rest, 'rest');
+
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
 	const getIncidentData = async () => {
+		const { startDate, endDate } = date || {};
+		console.log(startDate, 'startDate');
+
 		try {
 			await trigger({
 				params: {
@@ -58,11 +61,11 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 					q               : query !== '' ? query : undefined,
 					type            : category,
 					page,
-					createdFrom     : date?.startDate
-						? format(date?.startDate, 'yyyy-MM-dd 00:00:00')
+					createdFrom     : startDate
+						? format(startDate, 'yyyy-MM-dd', {}, false)
 						: undefined,
-					createdTo: date?.endDate
-						? format(date?.endDate, 'yyyy-MM-dd 23:59:59')
+					createdTo: endDate
+						? format(endDate, 'yyyy-MM-dd', {}, false)
 						: undefined,
 				},
 			});
