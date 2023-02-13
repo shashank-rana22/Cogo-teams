@@ -194,5 +194,22 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			},
 			id: 'action',
 		},
+
+		{
+			Header   : '',
+			id       : 'ribbon',
+			accessor : (row:any) => {
+				const { urgencyTag } = row;
+				return (
+					urgencyTag &&	(
+						<div>
+							<div className={urgencyTag === 'r' ? styles.ribbon_red : styles.ribbon_orange}>
+								Urgent
+							</div>
+						</div>
+					)
+				);
+			},
+		},
 	];
 };

@@ -27,6 +27,7 @@ function TabComponent({
 				activeTab={activeTab}
 				filters={filters}
 			/>
+
 			<StyledTable
 				pageIndex={pageIndex}
 				total={total}
@@ -37,6 +38,7 @@ function TabComponent({
 				setFilters={setFilters}
 				filters={filters}
 			/>
+
 			{list.length === 0 && <EmptyState />}
 		</div>
 	);
