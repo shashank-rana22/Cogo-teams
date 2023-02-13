@@ -1,10 +1,11 @@
-import { Modal, Pagination, Chips, Button, Checkbox } from '@cogoport/components';
+import { Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import LoadingState from '../../../../common/LoadingState';
 
+import BulkUpdateMode from './BulkUpdateMode';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 import UserActions from './UserActions';
@@ -49,81 +50,6 @@ function List({
 		);
 	}
 
-	const applyBulkFilter = async () => {
-		setConfirmModalState((prev) => ({
-			...prev,
-			showApproveAllButton: true,
-		}));
-		setParams({
-			...params,
-			page    : 1,
-			filters : {
-				...params.filters,
-				id : checkedRowsId,
-				q  : searchQuery || undefined,
-			},
-		});
-	};
-
-	const onSelectAll = (val) => {
-		const listIds = list.map(({ id }) => id);
-
-		setCheckedRowsId((previousIds) => {
-			let newCheckedRowsIds = previousIds;
-
-			if (val) {
-				listIds.forEach((listId) => {
-					if (!previousIds.includes(listId)) {
-						newCheckedRowsIds.push(listId);
-					}
-				});
-			} else {
-				newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
-			}
-
-			return newCheckedRowsIds;
-		});
-	};
-
-	const onChangeCheckbox = (e) => {
-		if (e.target.checked === false) {
-			setCheckedRowsId([]);
-			setSelectAll('');
-			setConfirmModalState((prev) => ({
-				...prev,
-				showApproveAllButton: e.target.checked,
-			}));
-			if ((checkedRowsId || []).length !== 0) {
-				setParams((p) => ({
-					...p,
-					filters: {
-						...((p || {}).filters || {}),
-						id: undefined,
-					},
-				}));
-			}
-		}
-		setBulkMode(e.target.checked);
-	};
-
-	const onClearSelection = () => {
-		setCheckedRowsId([]);
-
-		setConfirmModalState((prev) => ({
-			...prev,
-			showApproveAllButton: false,
-		}));
-		setParams((previousParams) => ({
-			...(previousParams || {}),
-			filters: {
-				...((previousParams || {}).filters || {}),
-				id: undefined,
-			},
-		}));
-
-		setSelectAll('');
-	};
-
 	const onClickClose = () => {
 		setWorkflowName(null);
 		setConfirmModalState((prev) => ({
@@ -137,83 +63,20 @@ function List({
 		<div>
 
 			{activeTab === 'pending' ? (
-				<>
-					<div className={styles.bulk_update_container}>
-						<div style={{ display: 'flex', alignItems: 'center' }}>
-							<Checkbox
-								label="Bulk update mode"
-								value="bulkMode"
-								style={{ paddingLeft: '0px' }}
-								onChange={(e) => onChangeCheckbox(e)}
-							/>
-							<Button
-								size="sm"
-								themeType="accent"
-								disabled={!bulkMode || checkedRowsId.length === 0}
-								onClick={() => applyBulkFilter()}
-							>
-								{' '}
-								APPLY BULK FILTER
-								{checkedRowsId.length ? ` (${checkedRowsId.length})` : ''}
-
-							</Button>
-						</div>
-
-						<Button
-							size="sm"
-							themeType="primary"
-							disabled={!confirmModalState.showApproveAllButton}
-							onClick={() => {
-								setConfirmModalState(() => ({
-									type                  : 'approve_all',
-									relationData          : {},
-									showConfirmationModal : true,
-								}));
-							}}
-						>
-							{' '}
-							APPROVE ALL
-							{checkedRowsId.length ? `(${checkedRowsId.length})` : ''}
-
-						</Button>
-					</div>
-					{(checkedRowsId.length > 0 && bulkMode) && (
-						<div className={styles.selection_text}>
-							<div className={styles.text}>
-								{' '}
-								You have selected
-								{' '}
-								{checkedRowsId.length}
-								{' '}
-								row(s)
-
-							</div>
-
-							<Button
-								size="md"
-								themeType="linkUi"
-								onClick={() => onClearSelection()}
-								style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
-							>
-								clear selection
-
-							</Button>
-						</div>
-					)}
-					<div>
-
-						<Chips
-							selectedItems={selectAll}
-							items={[{ children: 'Select All', key: 'select_all', disabled: !bulkMode }]}
-							onItemChange={(val) => {
-								setSelectAll(val);
-								onSelectAll(val);
-							}}
-						/>
-
-					</div>
-				</>
-
+				<BulkUpdateMode
+					list={list}
+					checkedRowsId={checkedRowsId}
+					setCheckedRowsId={setCheckedRowsId}
+					confirmModalState={confirmModalState}
+					setConfirmModalState={setConfirmModalState}
+					bulkMode={bulkMode}
+					setBulkMode={setBulkMode}
+					params={params}
+					setParams={setParams}
+					selectAll={selectAll}
+					setSelectAll={setSelectAll}
+					searchQuery={searchQuery}
+				/>
 			) : null}
 
 			{confirmModalState.showConfirmationModal && (

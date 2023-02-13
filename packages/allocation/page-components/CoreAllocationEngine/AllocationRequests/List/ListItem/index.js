@@ -84,19 +84,37 @@ const columnsMapping = [
 ];
 
 function ListItem(props) {
-	const { data, onClickStatusChange } = props;
+	const {
+		data,
+		onClickStatusChange,
+		isSelectable,
+		isSelected,
+		onCardClick,
+	} = props;
 
 	const [showPopover, setShowPopover] = useState(false);
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={
+			`${styles.container}
+			${isSelected && styles.card_selected}
+			${isSelectable && styles.selectable}`
+}
+			role="presentation"
+			onClick={onCardClick}
+		>
 			{columnsMapping.map((columnDetails) => {
 				const { key, flex, label, getValue } = columnDetails;
 
 				const value = getValue(data);
 
 				return (
-					<div key={key} className={styles.content_container} style={{ flex }}>
+					<div
+						key={key}
+						className={styles.content_container}
+						style={{ flex }}
+					>
 						{label ? <div className={styles.label}>{label}</div> : null}
 
 						<div className={styles.value}>

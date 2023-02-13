@@ -18,7 +18,15 @@ const STATUS_MAPPING = {
 };
 
 function List(props) {
-	const { data, loading, onChangeParams, fetchList } = props;
+	const {
+		data,
+		loading,
+		onChangeParams,
+		fetchList,
+		bulkMode,
+		checkedRowsId,
+		setCheckedRowsId,
+	} = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
 	const {
@@ -54,20 +62,36 @@ function List(props) {
 
 	return (
 		<div>
-			{list.map((item) => (
-				<ListItem
-					id="request_list"
-					key={item.id}
-					data={item}
-					showModal={showStatusConfirmationModal}
-					onClickStatusChange={({ status }) => {
-						setRequestStatusItem({
-							status,
-							allocation_request_id: item.id,
-						});
-					}}
-				/>
-			))}
+			{list.map((item) => {
+				const itemId = item.id;
+				const isSelected = bulkMode && checkedRowsId.includes(itemId);
+
+				return (
+					<ListItem
+						id="request_list"
+						key={itemId}
+						data={item}
+						showModal={showStatusConfirmationModal}
+						onClickStatusChange={({ status }) => {
+							setRequestStatusItem({
+								status,
+								allocation_request_id: item.id,
+							});
+						}}
+						isSelectable={bulkMode}
+						isSelected={bulkMode && checkedRowsId.includes(itemId)}
+						onCardClick={() => {
+							if (bulkMode) {
+								if (!isSelected) {
+									setCheckedRowsId([...checkedRowsId, itemId]);
+								} else {
+									setCheckedRowsId(checkedRowsId.filter((id) => id !== itemId));
+								}
+							}
+						}}
+					/>
+				);
+			})}
 
 			<div className={styles.pagination_container}>
 				<Pagination

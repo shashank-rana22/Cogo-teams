@@ -23,9 +23,9 @@ function Requests() {
 		params,
 		setParams,
 		onChangeParams,
-		debounceQuery,
 		searchValue,
 		setSearchValue,
+		...restProps
 	} = useListAllocationRequests();
 
 	const {
@@ -42,14 +42,11 @@ function Requests() {
 			<Header
 				onClickCreateReqBtn={() => setShowModal(true)}
 				loading={listLoading}
-				toggleValue={params?.filters.service_type}
 				onChangeParams={onChangeParams}
 				// Either setParams or onChangeParams
 				params={params}
 				setParams={setParams}
-				debounceQuery={debounceQuery}
-				searchValue={searchValue}
-				setSearchValue={setSearchValue}
+				{...restProps}
 			/>
 
 			<List
@@ -57,6 +54,7 @@ function Requests() {
 				loading={listLoading}
 				onChangeParams={onChangeParams}
 				fetchList={refetch}
+				{...restProps}
 			/>
 
 			{showModal && (
