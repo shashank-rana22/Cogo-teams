@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 24% !important;
+	background: #FFFFFF;
+	border-radius: 8px;
+	padding: 12px;
+	margin-right: 5px;
+}
+
+.title {
+	font-weight: 500;
+	font-size: 14px;
+	color: #4F4F4F;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

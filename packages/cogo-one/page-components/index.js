@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
+import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 import Tabs from './Tabs';
 
@@ -15,6 +16,7 @@ function CogoOne() {
 				<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
 				<Customers />
 				<Conversations />
+				<ProfileDetails />
 			</div>
 		</>
 	);
