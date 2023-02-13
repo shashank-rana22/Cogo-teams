@@ -1,0 +1,16 @@
+.container{
+	width: 8%;
+	margin-right: 5px;
+}
+.tabs{
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+	border-radius: 8px;
+}
+.styled_buttons{
+	font-weight: 600;
+font-size: 11px;
+padding: 12px;
+cursor: pointer;
+}
