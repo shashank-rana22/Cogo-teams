@@ -12,20 +12,17 @@ function CogoOne() {
 	const [searchValue, setSearchValue] = useState('');
 
 	return (
-		<>
-			<div className={styles.header}>Cogo One</div>
-			<div className={styles.layout_container}>
-				<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-				<Customers
-					setActiveCard={setActiveCard}
-					activeCard={activeCard}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-				/>
-				<Conversations />
-				<ProfileDetails />
-			</div>
-		</>
+		<div className={styles.layout_container}>
+			<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Customers
+				setActiveCard={setActiveCard}
+				activeCard={activeCard}
+				setSearchValue={setSearchValue}
+				searchValue={searchValue}
+			/>
+			<Conversations />
+			<ProfileDetails />
+		</div>
 	);
 }
 
