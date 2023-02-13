@@ -884,6 +884,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.vietnam_account_receivables,
 			},
 
+			{
+				key           : 'business_finance-reports',
+				title         : 'Reports',
+				href          : '/v2/business-finance/reports',
+				as            : '/v2/business-finance/reports',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.reports,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1228,7 +1237,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1238,7 +1246,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1248,7 +1255,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1326,7 +1332,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
@@ -1372,7 +1377,7 @@ const navigationMappingAdmin = {
 				href          : '/last-mile',
 				as            : '/last-mile',
 				type          : 'link',
-				main_apis     : ['list_document_desk_shipments'],
+				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk],
 			},
 		],
