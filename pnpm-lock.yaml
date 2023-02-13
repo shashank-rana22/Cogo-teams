@@ -48,6 +48,7 @@ importers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/cogo-verse-analytics': workspace:0.1.0
       '@cogoport/components': ^1.0.301
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
@@ -70,6 +71,7 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
       '@cogoport/components': 1.0.301_3lsay7tntxf2ei2og2ktju5z3e
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
@@ -261,6 +263,26 @@ importers:
       react: 18.2.0
     devDependencies:
       '@types/react': 18.0.27
+
+  packages/cogo-verse-analytics:
+    specifiers:
+      '@cogoport/components': ^1.0.301
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/icons-react': ^1.0.57
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.301_tjjfbzrrgezq2qg342kvjgfsxe
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.57_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      react: 18.2.0
 
   packages/locations:
     specifiers:

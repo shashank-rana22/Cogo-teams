@@ -9607,7 +9607,8 @@ const partner = {
 			service_name : 'communication',
 		},
 	],
-	constants: [
+	cogo_verse_analytics : [],
+	constants            : [
 		{
 			api          : 'create_platform_config_constant',
 			access_type  : 'private',
