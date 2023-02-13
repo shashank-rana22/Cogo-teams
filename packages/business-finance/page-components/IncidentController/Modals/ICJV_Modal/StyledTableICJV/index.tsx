@@ -6,7 +6,7 @@ import { TableProps } from '../../../interface';
 import styles from './styles.module.css';
 
 function StyledTableICJV({
-	id, className, columns, data, pageSize, pageIndex, total, setFilters, filters, loading, ...rest
+	id, className, columns, data, loading, ...rest
 }: TableProps) {
 	return (
 		<div className={styles.table}>
