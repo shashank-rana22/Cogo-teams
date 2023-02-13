@@ -144,15 +144,14 @@ function List({
 								style={{ paddingLeft: '0px' }}
 								onChange={(e) => onChangeCheckbox(e)}
 							/>
+
 							<Button
 								size="sm"
 								themeType="accent"
 								disabled={!bulkMode || checkedRowsId.length === 0}
 								onClick={() => applyBulkFilter()}
 							>
-								{' '}
 								APPLY BULK FILTER
-
 							</Button>
 						</div>
 
@@ -173,7 +172,7 @@ function List({
 
 						</Button>
 					</div>
-					{(checkedRowsId.length > 0 && bulkMode) && (
+					{(!isEmpty(checkedRowsId) && bulkMode) && (
 						<div className={styles.selection_text}>
 							<div className={styles.text}>
 								{' '}
@@ -182,7 +181,6 @@ function List({
 								{checkedRowsId.length}
 								{' '}
 								row(s)
-
 							</div>
 
 							<Button
@@ -192,7 +190,6 @@ function List({
 								style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
 							>
 								clear selection
-
 							</Button>
 						</div>
 					)}
@@ -227,7 +224,6 @@ function List({
 						</Modal>
 					)}
 				</>
-
 			) : null}
 
 			<div className={styles.list_container}>
