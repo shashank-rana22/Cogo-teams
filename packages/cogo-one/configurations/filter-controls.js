@@ -12,6 +12,10 @@ const controls = [
 				label : 'All',
 				value : 'all',
 			},
+			{
+				label : 'Closed',
+				value : 'closed',
+			},
 		],
 	},
 	{
@@ -62,6 +66,22 @@ const controls = [
 				label : 'Low !',
 				value : 'low',
 			},
+		],
+	},
+	{
+		name    : 'escalation',
+		span    : 4,
+		type    : 'radio',
+		options : [
+			{
+				label : 'Warning',
+				value : 'warning',
+			},
+			{
+				label : 'Escalated',
+				value : 'escalated',
+			},
+
 		],
 	},
 ];

@@ -1,4 +1,4 @@
-import { InputController, useForm } from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
 import control from '../configurations/filter-controls';
@@ -20,24 +20,21 @@ function CogoOne() {
 	// const filterData = watch();
 
 	return (
-		<>
-			<div className={styles.header}>Cogo One</div>
-			<div className={styles.layout_container}>
-				<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-				<Customers
-					setActiveCard={setActiveCard}
-					activeCard={activeCard}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-					setFilterVisible={setFilterVisible}
-					filterVisible={filterVisible}
-					// fields={fields}
-					reset={reset}
-				/>
-				<Conversations />
-				<ProfileDetails />
-			</div>
-		</>
+		<div className={styles.layout_container}>
+			<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Customers
+				setActiveCard={setActiveCard}
+				activeCard={activeCard}
+				setSearchValue={setSearchValue}
+				searchValue={searchValue}
+				setFilterVisible={setFilterVisible}
+				filterVisible={filterVisible}
+				// fields={control}
+				reset={reset}
+			/>
+			<Conversations />
+			<ProfileDetails />
+		</div>
 	);
 }
 

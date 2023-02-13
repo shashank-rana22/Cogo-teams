@@ -124,7 +124,7 @@ function Customers({
 							placeholder="Search here..."
 							value={searchValue}
 							onChange={(val) => setSearchValue(val)}
-							style={{ width: 250 }}
+							style={{ width: 200 }}
 						/>
 					</div>
 
@@ -148,6 +148,7 @@ function Customers({
 						)}
 						visible={filterVisible}
 					>
+						<div className={styles.filter_dot} />
 						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
 					</Popover>
 
