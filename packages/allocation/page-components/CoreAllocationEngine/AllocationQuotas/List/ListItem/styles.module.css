@@ -28,7 +28,6 @@
 }
 
 .email_id{
-	font-size: 10px;
 	color: #888fd1;
 }
 
@@ -55,17 +54,16 @@
 }
 
 .svg_container {
-    height: 100%;
     display: flex;
     align-items: center;
 	cursor: pointer;
+    margin-top: 12px;
 }
 
 
 .created_date{
     font-size: 12px;
     display: flex;
-	flex-direction: column;
 }
 
 .created_time{

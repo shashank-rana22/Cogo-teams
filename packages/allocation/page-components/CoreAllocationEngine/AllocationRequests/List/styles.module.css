@@ -8,11 +8,6 @@
 	}
 }
 
-.btn_container{
-	padding: 16px;
-	display: flex;
-	justify-content:  flex-end;
-}
 
 .empty_container{
     display: flex;

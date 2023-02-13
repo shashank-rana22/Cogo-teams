@@ -26,7 +26,6 @@ function List({
 	getNextPage,
 	searchQuery,
 	fetchList = () => {},
-	// setActiveTab = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState('');
@@ -84,9 +83,7 @@ function List({
 					closeOnOuterClick={false}
 					onClose={onClickClose}
 				>
-
 					<UserActions
-						onClick={onClickClose}
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
 						fetchList={fetchList}
@@ -96,7 +93,7 @@ function List({
 			)}
 
 			<div className={styles.list_container}>
-				{list.map((item = {}) => (
+				{list.map((item) => (
 					<ListItem
 						key={item.id}
 						item={item}

@@ -1,14 +1,14 @@
 import { Popover } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { getByKey, format } from '@cogoport/utils';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Actions from './Actions';
 import styles from './styles.module.css';
 
 const ROLE_TYPE_LIST_MAPPING = {
-	role : ['role', 'created_by', 'created_at'],
-	user : ['user', 'created_by', 'created_at'],
+	role : ['role', 'created_by', 'email', 'created_at'],
+	user : ['user', 'user_email', 'created_by', 'email', 'created_at'],
 };
 
 const columnsMapping = [
@@ -28,10 +28,15 @@ const columnsMapping = [
 		getValue : (data) => (
 			<div>
 				{getByKey(data, 'user.name', '___')}
-				<div className={styles.email_id}>{getByKey(data, 'user.email', '___')}</div>
 			</div>
 		),
 		flex: 2,
+	},
+	{
+		key      : 'user_email',
+		label    : 'User Email',
+		getValue : (data) => (<div className={styles.email_id}>{getByKey(data, 'user.email', '___')}</div>),
+		flex     : 2,
 	},
 	{
 		key      : 'created_by',
@@ -39,10 +44,15 @@ const columnsMapping = [
 		getValue : (data) => (
 			<div>
 				{getByKey(data, 'created_by.name', '___')}
-				<div className={styles.email_id}>{getByKey(data, 'created_by.email', '___')}</div>
 			</div>
 		),
 		flex: 2,
+	},
+	{
+		key      : 'email',
+		label    : 'Email',
+		getValue : (data) => (<div className={styles.email_id}>{getByKey(data, 'created_by.email', '___')}</div>),
+		flex     : 2,
 	},
 	{
 		key      : 'created_at',
@@ -70,12 +80,10 @@ function ListItem(props) {
 
 	const [showPopover, setShowPopover] = useState(false);
 
-	// Todo useMemo
-	const filteredList = columnsMapping.filter((listItem) => {
-		if (ROLE_TYPE_LIST_MAPPING[toggleRoleType]?.includes(listItem.key)) {
-			return listItem;
-		}
-	});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const filteredList = useMemo(() => columnsMapping.filter((listItem) => (
+		ROLE_TYPE_LIST_MAPPING[toggleRoleType]?.includes(listItem.key)
+	), [toggleRoleType]));
 
 	return (
 		<div className={styles.container}>
