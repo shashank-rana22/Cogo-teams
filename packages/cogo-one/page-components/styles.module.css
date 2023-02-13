@@ -3,12 +3,13 @@
 font-size: 24px;
 }
 
+.tabs{
+	width: 8%;
+	margin-right: 5px;
+}
+
 .layout_container{
 	display: flex;
-	/* border-radius: 4px; */
-	/* padding: 12px 0px; */
 	margin-top:14px;
 	position: relative;
-	/* height: calc(100vh - 120px); */
-	/* overflow: hidden; */
 }

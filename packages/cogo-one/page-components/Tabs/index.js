@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import { Tabs, TabPanel } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Tabs() {
-	const [activeTab, setActiveTab] = useState('open');
-	console.log('setActiveTab', setActiveTab);
-	console.log('activeTab', activeTab);
-
+function SideTabs({ activeTab, setActiveTab = () => {} }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.tabs}>
-				<div className={styles.styled_buttons}>Open</div>
-				<div className={styles.styled_buttons}>Reassigned</div>
-				<div className={styles.styled_buttons}>Closed</div>
-			</div>
+			<Tabs
+				activeTab={activeTab}
+				themeType="primary-vertical"
+				onChange={setActiveTab}
+			>
+				<TabPanel name="open" title="Open" />
+
+				<TabPanel name="reassigned" title="Reassigned" />
+
+				<TabPanel name="closed" title="Closed" />
+			</Tabs>
 		</div>
 	);
 }
 
-export default Tabs;
+export default SideTabs;

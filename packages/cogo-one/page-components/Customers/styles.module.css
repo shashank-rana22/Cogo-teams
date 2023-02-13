@@ -5,3 +5,21 @@
 	border-radius: 8px;
 	padding:10px;
 }
+.header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.filter_icon{
+	cursor: pointer;
+}
+
+.source_types{
+	display: flex;
+	align-items: center;
+}
+
+.more_counts{
+	font-size: 10px;
+}
