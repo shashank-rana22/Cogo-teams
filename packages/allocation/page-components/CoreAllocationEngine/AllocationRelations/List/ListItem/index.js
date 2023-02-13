@@ -121,7 +121,6 @@ function ListItem({
 	workflowName,
 	setWorkflowName = () => {},
 }) {
-	// console.log('bulkMode', bulkMode);
 	const itemId = `${item?.id}`;
 	const isSelected = bulkMode && checkedRowsId.includes(itemId);
 
@@ -177,19 +176,6 @@ function ListItem({
 					</div>
 				</Popover>
 			</div>
-
-			{/* {workflowName && (
-				<Modal show={!!workflowName} placement="top" closeOnOuterClick={false} onClose={onClickClose}>
-
-					<UserActions
-						onClick={onClickClose}
-						confirmModalState={confirmModalState}
-						setConfirmModalState={setConfirmModalState}
-					// fetchList={fetchList}
-						checkedRowsId={checkedRowsId}
-					/>
-				</Modal>
-			)} */}
 
 		</div>
 	);

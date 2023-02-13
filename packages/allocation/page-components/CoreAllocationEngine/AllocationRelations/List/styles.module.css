@@ -2,11 +2,7 @@
     margin-top: 16px;
 }
 
-.bulk_update_container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 .pagination_container {
     display: flex;

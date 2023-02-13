@@ -5,7 +5,6 @@ import styles from './styles.module.css';
 function ActionContent({
 	activeTab,
 	setWorkflowName = () => {},
-	// confirmModalState,
 	setConfirmModalState = () => {}, item = {},
 }) {
 	const WORKFLOW_CTA_MAPPING = {
