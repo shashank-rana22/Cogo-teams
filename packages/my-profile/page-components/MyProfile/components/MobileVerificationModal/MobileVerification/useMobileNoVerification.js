@@ -22,12 +22,6 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 	const [showEnterOtpComponent, setShowEnterOtpComponent] = useState(false);
 	const [otpNumber, setOtpNumber] = useState('');
 
-	// const verifyMobileNumberAPI = useRequest(
-	// 	'post',
-	// 	false,
-	// 	'partner',
-	// )('/verify_user_mobile');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/verify_user_mobile',
 		method : 'post',
@@ -54,12 +48,6 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 	// const formProps = useForm(newControls);
 	const { handleSubmit, formState: { errors }, control: actualControl, getValues, setValue } = useForm();
 
-	// const watchMobileNumberControl = watch('mobileNumber');
-
-	// useEffect(() => {
-	// 	if (showEnterOtpComponent) setShowEnterOtpComponent(false);
-	// }, [watchMobileNumberControl, showEnterOtpComponent]);
-
 	useEffect(() => {
 		setValue(
 			'mobileNumber',
@@ -68,9 +56,8 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 				country_code : selectedUser?.mobile_country_code,
 			},
 		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type]);
-
-	// const onErrors = (errs = {}) => setErrors({ ...errs });
 
 	const verifyMobileNumber = async ({ actionType = {}, ...restProps }) => {
 		try {

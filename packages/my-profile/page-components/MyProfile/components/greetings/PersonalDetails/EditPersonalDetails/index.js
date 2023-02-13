@@ -1,66 +1,63 @@
-import { Button } from '@cogoport/components';
-import { useForm, InputController } from '@cogoport/forms';
+import { InputController, MultiselectController, MobileNumberController } from '@cogoport/forms';
 
-// import controls from './controls';
+import getControls from '../../controls';
+
 import styles from './styles.module.css';
-import useEditPersonalDetails from './useEditPersonalDetails';
+
+const MAPPING = {
+
+	name                : InputController,
+	email               : InputController,
+	mobileNumber        : MobileNumberController,
+	preferred_languages : MultiselectController,
+
+};
 
 function EditPersonalDetails({
-	setShowModal = () => {},
-	refetch = () => {},
-	detailsData = {},
-	partner_user_id = '',
+	control,
+	errors,
+	detailsData,
 }) {
-	const {
-		// fields = {},
-		// handleSubmit = () => {},
-		onCreate = () => {},
-		loading = false,
-	} = useEditPersonalDetails({
-		refetch,
-		detailsData,
-		setShowModal,
-		partner_user_id,
-	});
-
-	const { handleSubmit, formState: { errors }, control } = useForm();
+	const controls = getControls(detailsData);
 
 	return (
 		<div style={{ padding: '12px' }}>
-			<div className={styles.heading}>Edit Name</div>
 
-			<div className={styles.layout_container}>
-				<InputController
-					control={control}
-					name="name"
-					rules={{ required: 'Name is required.' }}
-				/>
-				{errors.name && (
-					<div className={styles.error_text}>
-						{errors.name.message}
-					</div>
-				)}
-			</div>
+			{
+				Object.keys(MAPPING).map((key) => {
+					const field = controls.find((b) => b.name === key);
 
-			<div className={styles.button_container}>
-				<div style={{ marginRight: '12px' }}>
-					<Button
-						disabled={loading}
-						className="secondary sm"
-						onClick={() => setShowModal(false)}
-					>
-						CANCEL
-					</Button>
-				</div>
+					const { name, label, rules } = field || {};
 
-				<Button
-					className="primary sm"
-					disabled={loading}
-					onClick={handleSubmit(onCreate)}
-				>
-					UPDATE
-				</Button>
-			</div>
+					const DynamicController = MAPPING[key];
+
+					return (
+						<div className={styles.layout_container}>
+							<div className={styles.label_value_container}>
+								<div className={styles.label}>{label}</div>
+
+								<div className={styles.value}>
+									<DynamicController
+										{...field}
+										control={control}
+										name={name}
+										rules={rules}
+									/>
+
+									{errors.name && (
+										<div className={styles.error_text}>
+											{errors.name.message}
+										</div>
+									)}
+
+								</div>
+
+							</div>
+						</div>
+					);
+				})
+			}
+
 		</div>
 	);
 }

@@ -1,18 +1,15 @@
-// import getField from '@cogo/business-modules/form/components';
-import { Button, Modal, Toast, Avatar } from '@cogoport/components';
-import { useForm, UploadController } from '@cogoport/forms';
-// import Avatar from '@cogoport/front/components/admin/Avatar';
+import { Button, Modal, Avatar } from '@cogoport/components';
+import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
 import ChangePassword from '../ChangePassword';
 
-// import getControls from './controls';
 // import GrantOutlookAccess from './GrantOutlookAccess';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
+import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEditPersonalDetails';
 import styles from './styles.module.css';
+import useUpdatePartnerUser from './useUpdatePartnerUser';
 
 function Greetings({
 	detailsData,
@@ -21,86 +18,41 @@ function Greetings({
 	showMobileVerificationModal,
 	setShowMobileVerificationModal = () => {},
 }) {
-	const [{ loading }, trigger] = useRequest({
-		url    : '/update_partner_user',
-		method : 'post',
-	}, {
-		manual: false,
+	const {
+		name = '',
+		picture = '',
+		lowest_geo_location = {},
+	} = detailsData || {};
+
+	const {
+		onOuterClick,
+		setShowModal,
+		onSubmit,
+		setEditNameModal,
+		editNameModal,
+		control,
+		errors,
+		handleSubmit,
+		showModal,
+		onDeleteButton,
+		watchProfilePicture,
+		loading,
+		changePasswordModal,
+		setChangepasswordModal,
+		onClickCancel,
+	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
+
+	const { name: locationName = '' } = lowest_geo_location || {};
+
+	const { onCreate = () => {}, loading: apiLoading = false } = useEditPersonalDetails({
+		refetch: setRefetch,
+		detailsData,
+		setShowModal,
+		partner_user_id,
 	});
-
-	const { name = '', picture = '', lowest_geo_location = {} } = detailsData || {};
-
-	const { name:locationName = '' } = lowest_geo_location || {};
-
-	const [showModal, setShowModal] = useState(false);
-
-	const [editNameModal, setEditNameModal] = useState(false);
-
-	const [changePasswordModal, setChangepasswordModal] = useState(false);
-
-	// const FileUploader = getField('file');
-
-	// const controls = getControls(detailsData);
-
-	// const { fields, handleSubmit, watch, setValues } = useForm(controls);
-	// const { handleSubmit, watch, setValues } = useForm(controls);
-	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
-
-	const watchProfilePicture = watch('profile_picture_url');
-
-	const onOuterClick = () => {
-		setShowModal(false);
-		setEditNameModal(false);
-		setValue('profile_picture_url', watchProfilePicture?.finalUrl || picture);
-	};
-
-	const onSubmit = async (values) => {
-		try {
-			const payload = {
-				picture : values?.profile_picture_url?.finalUrl,
-				id      : partner_user_id,
-			};
-
-			await trigger({
-				data: payload,
-			});
-
-			setRefetch();
-			// eslint-disable-next-line no-undef
-			window.location.reload();
-
-			setShowModal(false);
-			Toast.success('Image updated successfully!');
-		} catch (e) {
-			Toast.error(e?.data);
-		}
-	};
-
-	const onDeleteButton = async () => {
-		try {
-			const payload = {
-				picture : null,
-				id      : partner_user_id,
-			};
-
-			await trigger({
-				data: payload,
-			});
-
-			setRefetch();
-			// eslint-disable-next-line no-undef
-			window.location.reload();
-
-			setShowModal(false);
-			Toast.success('Image updated successfully!');
-		} catch (e) {
-			Toast.error(e?.data);
-		}
-	};
 
 	return (
 		<div className={styles.main_container}>
-
 			<div className={styles.empty_background} />
 
 			<div className={styles.image_upload_container}>
@@ -138,28 +90,48 @@ function Greetings({
 					{name}
 					,
 					{' '}
-					<div className={styles.location_name}>
-						{locationName}
-					</div>
-
+					<div className={styles.location_name}>{locationName}</div>
 					<div className={styles.head}>
 						<IcMEdit
 							size={1.8}
 							onClick={() => setEditNameModal(true)}
 							style={{ cursor: 'pointer', marginTop: '4px' }}
 						/>
+
 						<Modal
 							show={editNameModal}
 							onClose={() => setEditNameModal(false)}
 							onOuterClick={onOuterClick}
-							width={540}
+							size="md"
 						>
-							<EditPersonalDetails
-								detailsData={detailsData}
-								setShowModal={setEditNameModal}
-								refetch={setRefetch}
-								partner_user_id={partner_user_id}
-							/>
+							<Modal.Header title="Edit Name" />
+
+							<Modal.Body>
+								<EditPersonalDetails
+									control={control}
+									errors={errors}
+									detailsData={detailsData}
+								/>
+							</Modal.Body>
+							<Modal.Footer>
+								<>
+									<Button
+										disabled={apiLoading}
+										themeType="secondary"
+										onClick={onClickCancel}
+										style={{ marginRight: 10 }}
+									>
+										CANCEL
+									</Button>
+									<Button
+										className="primary sm"
+										disabled={apiLoading}
+										onClick={handleSubmit(onCreate)}
+									>
+										UPDATE
+									</Button>
+								</>
+							</Modal.Footer>
 						</Modal>
 					</div>
 				</div>
@@ -171,7 +143,6 @@ function Greetings({
 				partner_user_id={partner_user_id}
 				showMobileVerificationModal={showMobileVerificationModal}
 				setShowMobileVerificationModal={setShowMobileVerificationModal}
-
 			/>
 
 			{/* <div className={styles.change_password_container}>
@@ -190,11 +161,12 @@ function Greetings({
 				onOuterClick={onOuterClick}
 			>
 				<div className={styles.modal_container}>
-					<div className={styles.change_picture_text}>Change your profile picture</div>
+					<div className={styles.change_picture_text}>
+						Change your profile picture
+					</div>
 
 					<div className={styles.picture_container}>
 						<div>
-
 							<div className={styles.upload_picture_container}>
 								<div className={styles.upload_picture_text}>Upload picture</div>
 
@@ -208,7 +180,6 @@ function Greetings({
 							</div>
 
 							<div className={styles.file_upload_container}>
-
 								<div className={styles.delete_icon}>
 									<IcMDelete
 										height={18}
@@ -225,7 +196,6 @@ function Greetings({
 								>
 									Remove Picture
 								</div>
-
 							</div>
 						</div>
 
@@ -240,7 +210,6 @@ function Greetings({
 								<Avatar name={name} />
 							</div>
 						)}
-
 					</div>
 
 					<div className={styles.button_container}>

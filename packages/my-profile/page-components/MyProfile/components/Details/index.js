@@ -11,9 +11,6 @@ function Details({
 	// showMobileVerificationModal,
 }) {
 	return (
-	// <div className={styles.card_container}>
-
-	// </div>
 
 		<div className={styles.container}>
 			<div className={styles.card_details}>
@@ -21,14 +18,6 @@ function Details({
 			</div>
 
 			<div className={styles.detail_container}>
-				{/* <div className={styles.card_details}>
-					<PersonDetails
-						detailsData={detailsData}
-						refetch={refetch}
-						showMobileVerificationModal={showMobileVerificationModal}
-						setShowMobileVerificationModal={setShowMobileVerificationModal}
-					/>
-				</div> */}
 
 				<div className={styles.card_details}>
 					<Services detailsData={detailsData} />

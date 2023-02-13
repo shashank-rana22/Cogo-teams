@@ -25,7 +25,7 @@ function SelectMobileNumber({
 	};
 
 	const handleNumberChange = (e) => {
-		onChange({ ...(value || {}), [numberKey]: e.target.value });
+		onChange({ ...(value || {}), [numberKey]: e.target?.value });
 	};
 	const props = {};
 	if (select2 && select2.includes('new')) {
