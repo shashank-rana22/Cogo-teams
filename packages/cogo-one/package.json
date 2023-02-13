@@ -1,8 +1,10 @@
 {
-  "name": "@cogoport/omni-channel",
+  "name": "@cogoport/cogo-one",
   "version": "0.1.0",
-  "description": "Package for Omni channel",
+  "description": "Package for Cogo One",
   "private": true,
+  "main": "./index.js",
+  "types": "./index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.301",
     "@cogoport/forms": "workspace:0.1.0",

@@ -1,11 +1,11 @@
 import businessFinance from './config/business-finance';
-import omniChannel from './config/omni-channel';
+import cogoOne from './config/cogo-one';
 import rolesAndPermissions from './config/roles-n-permission';
 
 const routeConfig = {
 	...rolesAndPermissions,
 	...businessFinance,
-	...omniChannel,
+	...cogoOne,
 };
 
 export default routeConfig;

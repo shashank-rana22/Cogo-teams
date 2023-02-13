@@ -1835,15 +1835,15 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
-	omni_channel: {
-		key           : 'omni_channel',
-		title         : 'Omni Channel',
-		href          : '/v2/omni-channel',
-		as            : '/v2/omni-channel',
+	cogo_one: {
+		key           : 'cogo_one',
+		title         : 'Cogo One',
+		href          : '/v2/cogo-one',
+		as            : '/v2/cogo-one',
 		type          : 'link',
 		main_apis     : [],
-		possible_apis : apis.omni_channel,
-		module_type   : 'crm',
+		possible_apis : apis.cogo_one,
+		module_type   : 'dashboards',
 	},
 };
 

@@ -48,6 +48,7 @@ importers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/cogo-one': workspace:0.1.0
       '@cogoport/components': ^1.0.301
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
@@ -55,7 +56,6 @@ importers:
       '@cogoport/locations': workspace:0.1.0
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
-      '@cogoport/omni-channel': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
@@ -71,6 +71,7 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/cogo-one': link:../packages/cogo-one
       '@cogoport/components': 1.0.301_3lsay7tntxf2ei2og2ktju5z3e
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
@@ -78,7 +79,6 @@ importers:
       '@cogoport/locations': link:../packages/locations
       '@cogoport/navigation-configs': link:../common/navigation-configs
       '@cogoport/next': link:../common/next
-      '@cogoport/omni-channel': link:../packages/omni-channel
       '@cogoport/request': link:../common/request
       '@cogoport/store': link:../common/store
       '@cogoport/utils': 1.2.2
@@ -264,25 +264,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.27
 
-  packages/locations:
-    specifiers:
-      '@cogoport/components': ^1.0.301
-      '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/icons-react': ^1.0.57
-      '@cogoport/request': workspace:^0.1.0
-      '@cogoport/store': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.2
-      react: 18.2.0
-    dependencies:
-      '@cogoport/components': 1.0.301_tjjfbzrrgezq2qg342kvjgfsxe
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.57_react@18.2.0
-      '@cogoport/request': link:../../common/request
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.2
-      react: 18.2.0
-
-  packages/omni-channel:
+  packages/cogo-one:
     specifiers:
       '@cogoport/components': ^1.0.301
       '@cogoport/forms': workspace:0.1.0
@@ -297,6 +279,24 @@ importers:
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.57_react@18.2.0
       '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      react: 18.2.0
+
+  packages/locations:
+    specifiers:
+      '@cogoport/components': ^1.0.301
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.57
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.301_tjjfbzrrgezq2qg342kvjgfsxe
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.57_react@18.2.0
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.2
