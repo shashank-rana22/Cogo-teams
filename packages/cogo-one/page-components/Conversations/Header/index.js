@@ -2,6 +2,7 @@ import { Button, ToolTip, cl } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 
 import UserAvatar from '../../../common/UserAvatar';
+import { TAGS_COLORS } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -34,7 +35,7 @@ function Header() {
 		return (
 			<div className={styles.flex}>
 				{ showMoreList && showMorePlacement !== 'right' && toolTipFunc()}
-				{(lessList || []).map((item) => <div className={styles.tags}>{item}</div>)}
+				{(lessList || []).map((item, index) => (<div className={styles.tags} style={{ background: TAGS_COLORS[index] }}>{item}</div>))}
 				{showMoreList && showMorePlacement === 'right' && toolTipFunc()}
 			</div>
 		);

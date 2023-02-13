@@ -20,24 +20,21 @@ function CogoOne() {
 	// const filterData = watch();
 
 	return (
-		<>
-			<div className={styles.header}>Cogo One</div>
-			<div className={styles.layout_container}>
-				<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-				<Customers
-					setActiveCard={setActiveCard}
-					activeCard={activeCard}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-					setFilterVisible={setFilterVisible}
-					filterVisible={filterVisible}
+		<div className={styles.layout_container}>
+			<Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Customers
+				setActiveCard={setActiveCard}
+				activeCard={activeCard}
+				setSearchValue={setSearchValue}
+				searchValue={searchValue}
+				setFilterVisible={setFilterVisible}
+				filterVisible={filterVisible}
 					// fields={fields}
-					reset={reset}
-				/>
-				<Conversations />
-				<ProfileDetails />
-			</div>
-		</>
+				reset={reset}
+			/>
+			<Conversations />
+			<ProfileDetails />
+		</div>
 	);
 }
 

@@ -20,7 +20,6 @@ function RightSideNav() {
 						onClick={() => handleClick(name)}
 					>
 						{icon}
-
 					</div>
 				);
 			})}

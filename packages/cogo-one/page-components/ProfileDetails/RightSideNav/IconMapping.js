@@ -10,27 +10,27 @@ import {
 const IconMapping = [
 	{
 		name : 'profile',
-		icon : <IcMProfile width={25} height={25} fill="#EE3425" />,
+		icon : <IcMProfile />,
 	},
 	{
 		name : 'time',
-		icon : <IcMFtimer width={25} height={25} fill="#000000" />,
+		icon : <IcMFtimer />,
 	},
 	{
 		name : 'abc',
-		icon : <IcMDuplicate width={25} height={25} fill="#000000" />,
+		icon : <IcMDuplicate />,
 	},
 	{
 		name : 'xys',
-		icon : <IcMManufacturing width={25} height={25} fill="#000000" />,
+		icon : <IcMManufacturing />,
 	},
 	{
 		name : 'rojr',
-		icon : <IcMRolesIncluded width={25} height={25} fill="#000000" />,
+		icon : <IcMRolesIncluded />,
 	},
 	{
 		name : 'eopiwe',
-		icon : <IcMLogout width={25} height={25} fill="#000000" />,
+		icon : <IcMLogout />,
 	},
 ];
 export default IconMapping;

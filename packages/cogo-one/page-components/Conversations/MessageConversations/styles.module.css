@@ -1,13 +1,12 @@
 .container{
 	padding:10px;
-	min-height: 60vh;
+	min-height: 57vh;
 }
 .text_area{
 	resize: none;
 	line-height: 20px;
 	width: 100%;
 	overflow: auto;
-
 	padding: 10px;
 	border: none;
 	outline:none;
@@ -24,6 +23,7 @@
 	height: fit-content;
 	background: #fff;
 	width: 100%;
+	border-radius:4px;
 
 }
 .flex_space_between{
