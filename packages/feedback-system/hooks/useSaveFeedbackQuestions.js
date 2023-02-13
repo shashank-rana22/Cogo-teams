@@ -10,8 +10,8 @@ const useSaveFeedbackQuestions = () => {
 	const onSaveFeedbackQuestions = async ({
 		questions = [],
 		feedback_question_id = '',
+		setChangeQuestions = () => {},
 		setQuestions = () => {},
-		setConfirmEdit = () => {},
 		reset = () => {},
 		setShowForm = () => {},
 		setShowbutton = () => {},
@@ -31,7 +31,8 @@ const useSaveFeedbackQuestions = () => {
 				}
 				return { ...item };
 			}));
-			setConfirmEdit(false);
+
+			setChangeQuestions((pv) => ({ ...pv, edit: undefined }));
 			reset();
 			setShowForm(false);
 			setShowbutton(true);

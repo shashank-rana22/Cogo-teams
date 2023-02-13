@@ -15,13 +15,10 @@ import useUpdateFeedbackQuestions from '../../../../hooks/useUpdateFeedbackQuest
 import styles from './styles.module.css';
 
 function CurrentQuestionsTab({ showQuestion = false }) {
-	const [deleteItemId, setDeleteItemId] = useState('');
-	const [confirmDelete, setConfirmDelete] = useState(false);
-	const [editItem, setEditItem] = useState({});
-	const [confirmEdit, setConfirmEdit] = useState(false);
-	const [editIndexId, setEditIndexId] = useState(null);
+	const [changeQuestions, setChangeQuestions] = useState({});
 	const [showForm, setShowForm] = useState(false);
 	const [showButton, setShowbutton] = useState(true);
+	const [refetchList, setRefetchList] = useState(false);
 
 	const [questions, setQuestions] = useState([]);
 	const { onUpdateFeedback } = useUpdateFeedbackQuestions();
@@ -31,7 +28,6 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 	const {
 		data: activeQuestionsData = {},
 		loading = false,
-		getQuestionList,
 		params,
 		setParams,
 		setPage,
@@ -80,7 +76,7 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 
 		onAddFeedbackQuestion({
 			questions: finalQuestion,
-			setQuestions,
+			setRefetchList,
 			reset,
 			setShowForm,
 			setShowbutton,
@@ -102,12 +98,7 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 			weight: Number(newQuestion?.weight),
 		};
 
-		const { question, remark, weight } = newQuestion || {};
-
-		if (question === '' || remark === '' || weight === '') {
-			toast.error('Please fill all the details');
-			return;
-		}
+		const { weight } = newQuestion || {};
 
 		if (weight < 0 || weight > 100) {
 			toast.error('Enter Weightage between 1 to 100 ');
@@ -116,34 +107,28 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 
 		onSaveFeedbackQuestions({
 			questions            : finalQuestion,
-			feedback_question_id : editIndexId,
+			feedback_question_id : changeQuestions.edit?.feedback_question_id,
 			setQuestions,
-			setConfirmEdit,
+			setChangeQuestions,
 			reset,
 			setShowForm,
 			setShowbutton,
 		});
 	};
 
-	if (confirmDelete) {
-		questions.forEach((item) => {
-			if (
-				item.feedback_question_id === deleteItemId
-				&& 'feedback_question_id' in item
-			) {
-				onUpdateFeedback({
-					feedback_question_id: item?.feedback_question_id,
-				});
-			}
-		});
-		getQuestionList();
-		setConfirmDelete(false);
-	}
+	const deleteQuestion = (deleteItemId) => {
+		if (deleteItemId) {
+			onUpdateFeedback({
+				feedback_question_id: deleteItemId,
+				setRefetchList,
+			});
+		}
+	};
 
 	const onCancelEdit = () => {
+		setChangeQuestions((pv) => ({ ...pv, edit: undefined }));
 		setShowForm(false);
 		setShowbutton(true);
-		setConfirmEdit(false);
 		reset();
 	};
 
@@ -154,6 +139,15 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 			<Placeholder margin="8px 0px 0px" style={{ borderRadius: '4px' }} width="100%" height="52px" />
 		</div>
 	);
+
+	useEffect(() => deleteQuestion(changeQuestions.delete?.feedback_question_id), [changeQuestions.delete]);
+
+	useEffect(() => {
+		if (refetchList) {
+			setPage(1);
+		}
+		setRefetchList(false);
+	}, [refetchList]);
 
 	return (
 		<div>
@@ -174,7 +168,7 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 			</div>
 
 			<div className={styles.list_actions}>
-				{showButton && (
+				{!changeQuestions.edit && showButton && (
 					<Button
 						size="md"
 						themeType="accent"
@@ -189,7 +183,7 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 					</Button>
 				)}
 
-				{!confirmEdit && !showForm && total_count > 3 && (
+				{!changeQuestions.edit && !showForm && total_count > 3 && (
 					<Pagination
 						type="compact"
 						currentPage={params.page}
@@ -221,41 +215,40 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 
 			{questions?.length === 0 && !loading && !showForm && <EmptyState />}
 
-			<div>
-				{(questions || []).map((data) => {
-					const { status = '', feedback_question_id = '' } = data || {};
-					if (status === 'inactive' || !('feedback_question_id' in data)) return null;
+			{!loading && (
+				<div>
+					{(questions || []).map((data) => {
+						const { status = '', feedback_question_id = '' } = data || {};
+						if (status === 'inactive' || !('feedback_question_id' in data)) return null;
 
-					if (confirmEdit && editIndexId === data.feedback_question_id) {
-						setEditFormValue(data);
+						if (changeQuestions.edit?.feedback_question_id === data.feedback_question_id) {
+							setEditFormValue(data);
 
+							return (
+								<div className={styles.question_form}>
+									<CreateForm
+										formProps={formProps}
+										type="save_question"
+										onSubmit={SaveQuestions}
+										loading={saveLoading}
+										controls={controls}
+										onCancel={onCancelEdit}
+									/>
+								</div>
+							);
+						}
 						return (
-							<div className={styles.question_form}>
-								<CreateForm
-									formProps={formProps}
-									type="save_question"
-									onSubmit={SaveQuestions}
-									loading={saveLoading}
-									controls={controls}
-									onCancel={onCancelEdit}
-								/>
-							</div>
+							<Questions
+								item={data}
+								feedbackQuestionId={feedback_question_id}
+								setChangeQuestions={setChangeQuestions}
+								type="current"
+							/>
 						);
-					}
-					return (
-						<Questions
-							item={data}
-							feedbackQuestionId={feedback_question_id}
-							setEditIndexId={setEditIndexId}
-							setDeleteItemId={setDeleteItemId}
-							setConfirmDelete={setConfirmDelete}
-							setEditItem={setEditItem}
-							setConfirmEdit={setConfirmEdit}
-							type="current"
-						/>
-					);
-				})}
-			</div>
+					})}
+				</div>
+			)}
+
 		</div>
 	);
 }

@@ -1,11 +1,4 @@
 .container {
-	:global(.form-item-label) {
-		margin: 16px 0;
-	}
-
-	:global(.core-ui-select__control) {
-		margin: 0;
-	}
 }
 
 .header {

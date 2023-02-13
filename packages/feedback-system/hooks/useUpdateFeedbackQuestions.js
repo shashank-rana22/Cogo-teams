@@ -7,7 +7,10 @@ const useUpdateFeedbackQuestions = () => {
 		url    : 'update_feedback_question',
 	}, { manual: true });
 
-	const onUpdateFeedback = async ({ feedback_question_id = '' }) => {
+	const onUpdateFeedback = async ({
+		feedback_question_id = '',
+		setRefetchList = () => {},
+	}) => {
 		try {
 			await trigger({
 				params: {
@@ -15,6 +18,8 @@ const useUpdateFeedbackQuestions = () => {
 					status : 'inactive',
 				},
 			});
+
+			setRefetchList(true);
 		} catch (e) {
 			Toast.error(e.toString());
 		}

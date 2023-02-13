@@ -13,11 +13,7 @@ function Questions({
 	setIsCheckedAll = () => {},
 	setPreviousQuestions = () => {},
 	feedbackQuestionId = '',
-	setEditIndexId = () => {},
-	setDeleteItemId = () => {},
-	setConfirmDelete = () => {},
-	setEditItem = () => {},
-	setConfirmEdit = () => {},
+	setChangeQuestions = () => {},
 }) {
 	const {
 		question,
@@ -28,14 +24,11 @@ function Questions({
 	const [checked, setIscheched] = useState(false);
 
 	const deleteItem = (feedbackQuestionId1) => {
-		setDeleteItemId(feedbackQuestionId1);
-		setConfirmDelete(true);
+		setChangeQuestions((pv) => ({ ...pv, delete: { feedback_question_id: feedbackQuestionId1 } }));
 	};
 
-	const editItem = (newData, feedbackQuestionId1) => {
-		setEditItem(newData);
-		setEditIndexId(feedbackQuestionId1);
-		setConfirmEdit(true);
+	const editItem = (feedbackQuestionId1) => {
+		setChangeQuestions((pv) => ({ ...pv, edit: { feedback_question_id: feedbackQuestionId1 } }));
 	};
 
 	return (
@@ -78,7 +71,7 @@ function Questions({
 								cursor     : 'pointer',
 								margin     : '0 16px',
 							}}
-							onClick={() => editItem(item, feedbackQuestionId)}
+							onClick={() => editItem(feedbackQuestionId)}
 						/>
 
 					</div>

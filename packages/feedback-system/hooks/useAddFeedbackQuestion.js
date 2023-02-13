@@ -14,13 +14,13 @@ const useAddFeedbackQuestion = ({ params }) => {
 
 	const onAddFeedbackQuestion = async ({
 		questions = [],
-		setQuestions = () => {},
 		reset = () => {},
 		setShowForm = () => {},
 		setShowbutton = () => {},
+		setRefetchList = () => {},
 	}) => {
 		try {
-			const response = await trigger({
+			await trigger({
 				params: {
 					...questions,
 					department : params.filters.department,
@@ -30,16 +30,8 @@ const useAddFeedbackQuestion = ({ params }) => {
 
 			Toast.success('Question added successfully');
 
-			const { data = [] } = response || {};
+			setRefetchList(true);
 
-			const obj = { feedback_question_id: data?.id };
-
-			setQuestions((pv) => {
-				if (pv.length < 4) {
-					return [...pv, { ...questions, ...obj, status: 'active' }];
-				}
-				return [];
-			});
 			reset();
 			setShowForm(false);
 			setShowbutton(true);
