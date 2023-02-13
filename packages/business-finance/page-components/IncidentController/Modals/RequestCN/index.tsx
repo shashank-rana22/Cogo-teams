@@ -241,9 +241,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							<Popover
 								placement="bottom"
 								visible={shoPopover}
-								trigger="click"
-								render={content()}
 								interactive
+								render={content()}
 							>
 								<Button
 									themeType="secondary"
