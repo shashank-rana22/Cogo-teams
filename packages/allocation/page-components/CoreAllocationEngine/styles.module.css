@@ -7,15 +7,28 @@
 	}
 }
 
-.heading_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.heading_container{
+	color: #221F20;
+	display:inline-block;
+	position: relative;
+	width: fit-content;
+	font-weight: 600;
+	font-size: 18px;
+	margin-bottom: 8px;
 
-	@media (max-width: 768px) {
-		flex-flow: column wrap;
-		align-items: flex-start;
+	@media(min-width: 768px){
+		font-size: 24px;
 	}
+  }
+  
+.heading_container::after{
+	content:'';
+	height: 4px;
+	width: 50%;
+	background: #ED3726;
+	position:absolute;
+	left: 0px;
+	bottom: -4px;
 }
 
 .tab_list{
