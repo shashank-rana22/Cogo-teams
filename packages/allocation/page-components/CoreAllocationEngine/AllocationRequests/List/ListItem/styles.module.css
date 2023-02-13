@@ -67,6 +67,7 @@
     display: flex;
     align-items: center;
 	cursor: pointer;
+	margin-top: 16px;
 }
 
 .content_container{

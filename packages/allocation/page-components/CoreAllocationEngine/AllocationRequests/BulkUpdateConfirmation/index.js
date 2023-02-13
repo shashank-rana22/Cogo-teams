@@ -30,7 +30,7 @@ function BulkUpdateConfirmation(props) {
 					disabled={loading}
 					onClick={onBulkApprove}
 				>
-					Save
+					Yes, I do
 				</Button>
 
 			</Modal.Footer>

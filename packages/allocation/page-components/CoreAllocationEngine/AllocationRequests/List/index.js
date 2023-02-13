@@ -113,14 +113,18 @@ function List(props) {
 				>
 					<div>
 						<Modal.Header
-							title={`Are you sure you want to
-						 	${STATUS_MAPPING[requestStatusItem.status].label || 'update'} 
-							this request ?`}
+							title="Update Status"
 						/>
 
-						{/* //Todo make this modal same as config */}
+						<Modal.Body>
+							Are you sure you want to
+							{' '}
+							{STATUS_MAPPING[requestStatusItem.status].label || 'update'}
+							{' '}
+							this request ?
+						</Modal.Body>
 
-						<div className={styles.btn_container}>
+						<Modal.Footer>
 							<Button
 								size="md"
 								themeType="primary"
@@ -129,8 +133,7 @@ function List(props) {
 							>
 								Yes, I do
 							</Button>
-						</div>
-
+						</Modal.Footer>
 					</div>
 				</Modal>
 			) : null}

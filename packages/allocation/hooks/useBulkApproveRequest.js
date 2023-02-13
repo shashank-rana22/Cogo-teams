@@ -12,8 +12,6 @@ const useBulkApproveRequest = (props) => {
 
 	const [{ loading }, trigger] = api;
 
-	// Todo test the refetch here
-
 	const onBulkApprove = async () => {
 		try {
 			const payload = {
