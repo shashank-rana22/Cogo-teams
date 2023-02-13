@@ -132,8 +132,6 @@ function List({
 		}));
 	};
 
-	console.log('confirmModalState.showConfirmationModal', confirmModalState.showConfirmationModal);
-
 	return (
 		<div>
 
