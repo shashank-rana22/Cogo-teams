@@ -1,10 +1,11 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Form from '../../../common/Form';
-import useCreateAllocationRequest from '../../../hooks/useCreateAllocationRequest';
 import useListAllocationRequests from '../../../hooks/useListAllocationRequests';
 
+import BulkUpdateConfirmation from './BulkUpdateConfirmation';
+import CreateRequestModalContent from './CreateRequestModalContent';
 import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
@@ -25,17 +26,9 @@ function Requests() {
 		onChangeParams,
 		searchValue,
 		setSearchValue,
+		checkedRowsId,
 		...restProps
 	} = useListAllocationRequests();
-
-	const {
-		onSave,
-		loading: loadingOnSave,
-		formProps,
-		controls,
-	} = useCreateAllocationRequest({ onCloseModal, refetch });
-
-	const { handleSubmit } = formProps;
 
 	return (
 		<section className={styles.container}>
@@ -46,6 +39,8 @@ function Requests() {
 				// Either setParams or onChangeParams
 				params={params}
 				setParams={setParams}
+				setShowModal={setShowModal}
+				checkedRowsId={checkedRowsId}
 				{...restProps}
 			/>
 
@@ -54,39 +49,33 @@ function Requests() {
 				loading={listLoading}
 				onChangeParams={onChangeParams}
 				fetchList={refetch}
+				checkedRowsId={checkedRowsId}
 				{...restProps}
 			/>
 
 			{showModal && (
 				<Modal
 					show={showModal}
-					position="basic"
 					size="md"
+					closeOnOuterClick={false}
 					onClose={onCloseModal}
 					className={styles.modal_container}
-					placement="center"
+					placement="top"
 				>
-					<Modal.Header title="Create Request" />
+					{!isEmpty(checkedRowsId)
+						? (
+							<BulkUpdateConfirmation
+								refetch={refetch}
+								onCloseModal={onCloseModal}
+								checkedRowsId={checkedRowsId}
 
-					<form onSubmit={handleSubmit(onSave)}>
-						<Modal.Body>
-							<Form
-								formProps={formProps}
-								controls={controls}
 							/>
-						</Modal.Body>
-
-						<Modal.Footer>
-							<Button
-								size="md"
-								type="submit"
-								loading={loadingOnSave}
-								id="save_request_btn"
-							>
-								Save
-							</Button>
-						</Modal.Footer>
-					</form>
+						) : (
+							<CreateRequestModalContent
+								refetch={refetch}
+								onCloseModal={onCloseModal}
+							/>
+						)}
 				</Modal>
 			)}
 		</section>

@@ -31,16 +31,14 @@ function ApproveDetails({ showApprove, setShowApprove, listRefetch }) {
 			</Modal.Body>
 
 			<Modal.Footer>
-				<div>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={onApproveDetails}
-						disabled={loadingApproveDetails}
-					>
-						Approve
-					</Button>
-				</div>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={onApproveDetails}
+					disabled={loadingApproveDetails}
+				>
+					Approve
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

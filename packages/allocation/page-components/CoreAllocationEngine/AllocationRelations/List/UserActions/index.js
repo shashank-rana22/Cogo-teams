@@ -43,12 +43,14 @@ function UserActions({
 	return (
 		<>
 			<Modal.Header title={`${DISPLAY_TEXT_MAPPING[requestType].title}`} />
+
 			<Modal.Body>
 				Are you sure you want to
 				{' '}
 				{DISPLAY_TEXT_MAPPING[requestType].body_text}
 				?
 			</Modal.Body>
+
 			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button

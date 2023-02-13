@@ -1,9 +1,11 @@
 import { Table, Button, Legend, Tooltip, Pill, Pagination } from '@cogoport/components';
 import { getByKey, isEmpty, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
+import UpdateStakeholderDetails from './UpdateStakeholderDetails';
 
 const STATUS_COLOR_MAPPING = {
 	active   : 'green',
@@ -21,7 +23,16 @@ const LIST_COLUMNS_MAPPING = {
 	action          : 'ACTION',
 };
 
-function List({ list, loading, paginationData, getNextaPage }) {
+function List({
+	list,
+	loading,
+	paginationData,
+	getNextaPage,
+	configurationDetails,
+	listRefetch,
+}) {
+	const [stakeholderDetail, setStakeholderDetail] = useState({});
+
 	if (!loading && isEmpty(list)) {
 		return (
 			<div className={styles.emptystate}>
@@ -35,6 +46,14 @@ function List({ list, loading, paginationData, getNextaPage }) {
 			</div>
 		);
 	}
+
+	const onClickChangeStakeholder = (item) => {
+		setStakeholderDetail({
+			stakeholder_id       : item.stakeholder_id || '',
+			allocation_detail_id : item.id || '',
+			role_ids             : configurationDetails?.role_ids,
+		});
+	};
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
@@ -110,6 +129,7 @@ function List({ list, loading, paginationData, getNextaPage }) {
 					size="sm"
 					themeType="primary"
 					disabled={getByKey(listItem, 'status', undefined) === 'approved'}
+					onClick={() => onClickChangeStakeholder(listItem)}
 				>
 					Change Stakeholder
 				</Button>
@@ -143,6 +163,14 @@ function List({ list, loading, paginationData, getNextaPage }) {
 					onPageChange={getNextaPage}
 				/>
 			</div>
+
+			{!isEmpty(stakeholderDetail) ? (
+				<UpdateStakeholderDetails
+					stakeholderDetail={stakeholderDetail}
+					setStakeholderDetail={setStakeholderDetail}
+					listRefetch={listRefetch}
+				/>
+			) : null}
 		</div>
 	);
 }
