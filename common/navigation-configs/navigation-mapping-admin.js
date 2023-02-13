@@ -1835,6 +1835,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	omni_channel: {
+		key           : 'omni_channel',
+		title         : 'Omni Channel',
+		href          : '/v2/omni-channel',
+		as            : '/v2/omni-channel',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.omni_channel,
+		module_type   : 'crm',
+	},
 };
 
 export default navigationMappingAdmin;
