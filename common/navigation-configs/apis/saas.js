@@ -1529,7 +1529,7 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_organization_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
 		},
@@ -1651,13 +1651,13 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_product_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'product',
 			feature     : 'product',
 		},
 		{
 			api         : 'get_saas_error_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'product',
 			feature     : 'product',
 		},
