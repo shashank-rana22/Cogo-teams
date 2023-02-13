@@ -874,6 +874,15 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
+			{
+				key           : 'business_finance-reports',
+				title         : 'Reports',
+				href          : '/v2/business-finance/reports',
+				as            : '/v2/business-finance/reports',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.reports,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1218,7 +1227,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1228,7 +1236,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1238,7 +1245,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1316,7 +1322,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
@@ -1337,6 +1342,33 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : apis.bl_do_collection_release,
 
+			},
+			{
+				key           : 'coe-kam_desk',
+				title         : 'KAM Desk',
+				href          : '/kam-desk',
+				as            : '/kam-desk',
+				type          : 'link',
+				main_apis     : ['list_kam_desk_shipments'],
+				possible_apis : [...apis.kam_desk],
+			},
+			{
+				key           : 'coe-document_desk',
+				title         : 'Document Desk',
+				href          : '/document-desk',
+				as            : '/document-desk',
+				type          : 'link',
+				main_apis     : ['list_document_desk_shipments'],
+				possible_apis : [...apis.document_desk],
+			},
+			{
+				key           : 'coe-last_mile',
+				title         : 'Last Mile',
+				href          : '/last-mile',
+				as            : '/last-mile',
+				type          : 'link',
+				main_apis     : ['list_lastmile_desk_shipments'],
+				possible_apis : [...apis.document_desk],
 			},
 		],
 	},
@@ -1394,15 +1426,15 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'marketing-marketing_campaigns',
-				title         : 'Campaigns',
-				href          : '/marketing/campaigns',
-				as            : '/marketing/campaigns',
+				key           : 'marketing-marketing_campaign-dashboard',
+				title         : 'Campaign Dashboard',
+				href          : '/marketing/campaign-dashboard',
+				as            : '/marketing/campaign-dashboard',
+				icon          : 'ic-campaign',
 				type          : 'link',
 				main_apis     : [],
+				possible_apis : apis.campaign_dashboard,
 				module_type   : 'crm',
-				possible_apis : apis.campaigns,
-
 			},
 			{
 				key           : 'marketing-marketing_templates',
