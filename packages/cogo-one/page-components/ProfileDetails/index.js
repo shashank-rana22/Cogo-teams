@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function ProfileDetails () {
+function ProfileDetails() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Profile</div>
@@ -8,6 +8,6 @@ function ProfileDetails () {
 				<h4>hrllo</h4>
 			</div>
 		</div>
-	)
+	);
 }
 export default ProfileDetails;
