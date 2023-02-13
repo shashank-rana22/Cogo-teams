@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 function SideTabs({ activeTab, setActiveTab = () => {} }) {
 	return (
 		<div className={styles.container}>
+			<div className={styles.title}>CogoOne</div>
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary-vertical"

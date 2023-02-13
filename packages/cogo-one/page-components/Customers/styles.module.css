@@ -1,14 +1,16 @@
 .container{
-	width: 25%;
+	width: 23%;
 	background:#ffffff;
-	margin-right: 5px;
+	margin-right: 10px;
 	border-radius: 8px;
 	padding:10px;
 }
+
 .header{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
 .filter_icon{
@@ -25,13 +27,62 @@
 }
 
 .card_Container{
-	margin: 15px -10px 0px -10px;
-	padding:9px 12px;
-	background: #FDFBF6;
+	margin: 0px -10px 0px -10px;
+	padding:10px 12px;
 	border-bottom: 1px solid #E0E0E0;
+
+	
+}
+
+.card_Container:last-child{
+	border-bottom: none;
+}
+
+.active_card{
+background: #FDFBF6;
 }
 
 .card{
 cursor: pointer;
 padding:8px;
+}
+
+.user_information{
+	display: flex;
+	justify-content: space-between;
+}
+
+.activity_duration{
+	color: #4F4F4F;
+	font-weight: 500;
+	font-size: 10px;
+}
+
+.user_details{
+	margin-left: 15px;
+display: flex;
+flex-direction: column;
+}
+
+.user_name{
+	color: #4F4F4F;
+	font-size: 14px;
+}
+
+.organisation{
+	color: #828282;
+	font-size: 10px;
+}
+
+.avatar_Container{
+display: flex;
+}
+
+.content{
+	margin-top: 5px;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 100%;
 }

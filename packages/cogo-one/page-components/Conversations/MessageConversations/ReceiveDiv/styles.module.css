@@ -1,0 +1,30 @@
+.name{
+	font-size: 10px;
+	font-weight: 500;
+	text-align: left;
+	color:#000000;
+
+}
+.time_stamp{
+	font-family: Inter;
+	font-size: 10px;
+	font-weight: 500;
+	text-align: left;
+}
+
+.container{
+	max-width: 300px;
+	margin:10px 0;
+	height: fit-content;
+	float: left;
+}
+.receive_message_container{
+	box-shadow: 0px 0px 4px 0px #627FAC33;
+	padding: 12px;
+	font-size: 14px;
+	line-height: 21px;
+	color: #828282;
+	margin-top: 10px;
+	background-color:#FFFFFF;
+	border-radius:0 6px 6px 6px;
+}
