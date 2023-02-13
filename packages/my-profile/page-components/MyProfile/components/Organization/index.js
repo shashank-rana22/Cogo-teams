@@ -1,7 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import React from 'react';
 
-import LoadingState from './loading-state';
 import Reportees from './Reportees';
 import Reporting from './Reporting';
 import styles from './styles.module.css';
@@ -17,7 +16,11 @@ function Organization({ personDetails = {} }) {
 	} = useOrganizationRMMapping({ personDetails });
 
 	if (loading) {
-		return <LoadingState />;
+		return (
+			<div className={styles.loader_container}>
+				<Loader className={styles.loader} />
+			</div>
+		);
 	}
 
 	return (
