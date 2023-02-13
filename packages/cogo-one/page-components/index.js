@@ -1,4 +1,4 @@
-import { InputController, useForm } from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
 import control from '../configurations/filter-controls';
