@@ -59,6 +59,7 @@ function Relations() {
 				paginationData={paginationData}
 				getNextPage={getNextPage}
 				searchQuery={searchQuery}
+				fetchList={fetchList}
 			/>
 
 			{showCreateRelationModal && (

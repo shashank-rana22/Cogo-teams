@@ -24,6 +24,7 @@ function List({
 	paginationData = {},
 	getNextPage,
 	searchQuery,
+	fetchList = () => {},
 	// setActiveTab = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -87,6 +88,7 @@ function List({
 	const onChangeCheckbox = (e) => {
 		if (e.target.checked === false) {
 			setCheckedRowsId([]);
+			setSelectAll('');
 			setConfirmModalState((prev) => ({
 				...prev,
 				showApproveAllButton: e.target.checked,
@@ -152,6 +154,8 @@ function List({
 								onClick={() => applyBulkFilter()}
 							>
 								APPLY BULK FILTER
+								{checkedRowsId.length ? ` (${checkedRowsId.length})` : ''}
+
 							</Button>
 						</div>
 
@@ -169,6 +173,7 @@ function List({
 						>
 							{' '}
 							APPROVE ALL
+							{checkedRowsId.length ? `(${checkedRowsId.length})` : ''}
 
 						</Button>
 					</div>
@@ -205,26 +210,27 @@ function List({
 						/>
 
 					</div>
-
-					{confirmModalState.showConfirmationModal && (
-						<Modal
-							show={confirmModalState.showConfirmationModal}
-							placement="top"
-							closeOnOuterClick={false}
-							onClose={onClickClose}
-						>
-
-							<UserActions
-								onClick={onClickClose}
-								confirmModalState={confirmModalState}
-								setConfirmModalState={setConfirmModalState}
-								// fetchList={fetchList}
-								checkedRowsId={checkedRowsId}
-							/>
-						</Modal>
-					)}
 				</>
+
 			) : null}
+
+			{confirmModalState.showConfirmationModal && (
+				<Modal
+					show={confirmModalState.showConfirmationModal}
+					placement="top"
+					closeOnOuterClick={false}
+					onClose={onClickClose}
+				>
+
+					<UserActions
+						onClick={onClickClose}
+						confirmModalState={confirmModalState}
+						setConfirmModalState={setConfirmModalState}
+						fetchList={fetchList}
+						checkedRowsId={checkedRowsId}
+					/>
+				</Modal>
+			)}
 
 			<div className={styles.list_container}>
 				{list.map((item = {}) => (
