@@ -137,7 +137,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					</div>
 			)}
 			<div className={styles.button_container}>
-				<Button themeType="primary sm" onClick={() => setShowPopover(false)}>
+				<Button themeType="primary" onClick={() => setShowPopover(false)}>
 					Done
 				</Button>
 			</div>
