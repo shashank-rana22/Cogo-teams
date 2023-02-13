@@ -39,8 +39,6 @@ function MyProfile() {
 		);
 	}
 
-	console.log('Mrutyunjaya B');
-
 	return (
 		<>
 
