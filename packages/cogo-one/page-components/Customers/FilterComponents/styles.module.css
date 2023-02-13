@@ -1,0 +1,43 @@
+.container{
+	width:180px;
+}
+
+
+.header{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title{
+	font-size: 16px;
+}
+
+.styled_icon{
+	cursor: pointer;
+}
+
+.filter_container{
+	margin-top: 18px;
+display: flex;
+flex-direction: column;
+}
+
+.label{
+	font-weight: 600;
+	font-size: 14px;
+	color: #4F4F4F;
+}
+
+.filters_types{
+	margin-top: 8px;
+display: flex;
+flex-direction: column;
+}
+
+.actions{
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}

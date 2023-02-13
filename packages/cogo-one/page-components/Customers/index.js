@@ -1,4 +1,4 @@
-import { cl, Input } from '@cogoport/components';
+import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -6,9 +6,19 @@ import React, { useEffect } from 'react';
 // import TooltipInformation from '../../common/TooltipInformation';
 import UserAvatar from '../../common/UserAvatar';
 
+import FilterComponents from './FilterComponents';
 import styles from './styles.module.css';
 
-function Customers({ setActiveCard = () => {}, activeCard, setSearchValue = () => {}, searchValue }) {
+function Customers({
+	setActiveCard = () => {},
+	activeCard,
+	setSearchValue = () => {},
+	searchValue,
+	setFilterVisible = () => {},
+	filterVisible,
+	// fields,
+	reset,
+}) {
 	// const LIST = [
 	// 	{
 	// 		label: 'green',
@@ -125,7 +135,22 @@ function Customers({ setActiveCard = () => {}, activeCard, setSearchValue = () =
 				</div>
 
 				<div className={styles.filter_icon}>
-					<IcMDoubleFilter width={25} height={25} />
+					<Popover
+						placement="left"
+						caret={false}
+						render={(
+							<FilterComponents
+								setFilterVisible={setFilterVisible}
+								filterVisible={filterVisible}
+								// fields={fields}
+								reset={reset}
+							/>
+						)}
+						visible={filterVisible}
+					>
+						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
+					</Popover>
+
 				</div>
 			</div>
 			{(dummyData || []).map((item) => {
