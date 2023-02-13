@@ -131,6 +131,8 @@ function List({
 		}));
 	};
 
+	console.log('confirmModalState.showConfirmationModal', confirmModalState.showConfirmationModal);
+
 	return (
 		<div>
 
@@ -152,6 +154,7 @@ function List({
 							>
 								{' '}
 								APPLY BULK FILTER
+								{checkedRowsId.length ? ` (${checkedRowsId.length})` : ''}
 
 							</Button>
 						</div>
@@ -170,6 +173,7 @@ function List({
 						>
 							{' '}
 							APPROVE ALL
+							{checkedRowsId.length ? `(${checkedRowsId.length})` : ''}
 
 						</Button>
 					</div>
@@ -208,27 +212,27 @@ function List({
 						/>
 
 					</div>
-
-					{confirmModalState.showConfirmationModal && (
-						<Modal
-							show={confirmModalState.showConfirmationModal}
-							placement="top"
-							closeOnOuterClick={false}
-							onClose={onClickClose}
-						>
-
-							<UserActions
-								onClick={onClickClose}
-								confirmModalState={confirmModalState}
-								setConfirmModalState={setConfirmModalState}
-								// fetchList={fetchList}
-								checkedRowsId={checkedRowsId}
-							/>
-						</Modal>
-					)}
 				</>
 
 			) : null}
+
+			{confirmModalState.showConfirmationModal && (
+				<Modal
+					show={confirmModalState.showConfirmationModal}
+					placement="top"
+					closeOnOuterClick={false}
+					onClose={onClickClose}
+				>
+
+					<UserActions
+						onClick={onClickClose}
+						confirmModalState={confirmModalState}
+						setConfirmModalState={setConfirmModalState}
+								// fetchList={fetchList}
+						checkedRowsId={checkedRowsId}
+					/>
+				</Modal>
+			)}
 
 			<div className={styles.list_container}>
 				{list.map((item = {}) => (
