@@ -9807,6 +9807,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
+		{
+			api          : 'update_widget_data_for_filtered_query',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
 	],
 };
 export default partner;
