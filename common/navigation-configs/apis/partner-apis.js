@@ -9761,6 +9761,17 @@ const partner = {
 			service_name : 'exchange_rate',
 		},
 	],
-	cogo_one: [],
+	cogo_one: [
+		{
+			api          : 'get_user',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'create_organization_communication_log',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+	],
 };
 export default partner;

@@ -1,11 +1,15 @@
 import { Pill } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 
+// import useGetListOrganization from '../../../hooks/useGetListOrganization';
+
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
 function OrganizationDetails() {
+	// const { data } = useGetListOrganization();
+	// console.log('data', data);
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Organisation Details</div>
