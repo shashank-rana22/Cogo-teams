@@ -1,12 +1,13 @@
 .container{
-	width: 24%;
+	width: 25%;
 	background:#ffffff;
 	margin-right: 10px;
 	border-radius: 8px;
 	padding:10px;
 }
+
 .title{
-	font-weight: 600;
+font-weight: 600;
 font-size: 20px;
 }
 
