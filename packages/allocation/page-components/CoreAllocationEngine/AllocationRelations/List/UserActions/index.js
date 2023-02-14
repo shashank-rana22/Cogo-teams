@@ -1,8 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
+import useRelationActions from '../../../../../hooks/useRelationActions';
+
 import styles from './styles.module.css';
-import useUserActions from './useUserActions';
 
 function UserActions({
 	confirmModalState,
@@ -35,7 +36,7 @@ function UserActions({
 	const {
 		handleUpdateRelation = () => {},
 		loadingUpdateRelations = false,
-	} = useUserActions({
+	} = useRelationActions({
 		confirmModalState,
 		setConfirmModalState,
 		checkedRowsId,

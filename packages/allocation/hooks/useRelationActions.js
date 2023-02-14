@@ -15,7 +15,7 @@ const statusMapping = {
 	delete  : 'inactive',
 };
 
-const useUserActions = ({
+const useRelationActions = ({
 	confirmModalState = {},
 	setConfirmModalState = () => {},
 	checkedRowsId = [],
@@ -66,4 +66,4 @@ const useUserActions = ({
 	};
 };
 
-export default useUserActions;
+export default useRelationActions;

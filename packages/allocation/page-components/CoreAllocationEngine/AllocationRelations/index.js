@@ -1,4 +1,4 @@
-import useAllocationRelations from '../../../hooks/useAllocationRelations';
+import useAllocationRelations from '../../../hooks/useListAllocationRelations';
 
 import CreateRelationModal from './CreateRelationModal';
 import Header from './Header';

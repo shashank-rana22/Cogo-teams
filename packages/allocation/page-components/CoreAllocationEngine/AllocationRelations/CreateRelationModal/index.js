@@ -1,8 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 
 import Form from '../../../../common/Form';
-
-import useCreateRelations from './useCreateRelations';
+import useCreateRelations from '../../../../hooks/useCreateRelations';
 
 function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRelationModal = () => {}, fetchList }) {
 	const { controls, formProps, onCreate, handleSubmit, loading } = useCreateRelations({
