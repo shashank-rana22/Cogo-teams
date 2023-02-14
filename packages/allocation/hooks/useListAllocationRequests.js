@@ -83,6 +83,7 @@ const useListAllocationRequests = () => {
 	const onChangeCheckbox = (e) => {
 		if (!e.target.checked) {
 			setCheckedRowsId([]);
+			setSelectAll('');
 			if (!isEmpty(checkedRowsId)) {
 				setParams((pv) => ({
 					...pv,
