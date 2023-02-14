@@ -13,7 +13,7 @@
 }
 
 .container{
-	max-width: 300px;
+	width: 100%;
 	margin:10px 0;
 	height: fit-content;
 	float: left;
@@ -27,4 +27,6 @@
 	margin-top: 10px;
 	background-color:#FFFFFF;
 	border-radius:0 6px 6px 6px;
+	max-width: 320px;
+	width: fit-content;
 }

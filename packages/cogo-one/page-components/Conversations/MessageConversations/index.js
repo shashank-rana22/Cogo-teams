@@ -10,18 +10,18 @@ function MessageConversations() {
 	const messages = [{
 		name              : 'John Wick',
 		time              : '11:19',
-		messages          : 'Hello, I am calling to take confirmation ofmy shipment details',
+		message           : 'hi',
 		conversation_type : 'receive',
 	}, {
 		name              : 'John Wick',
 		time              : '11:19',
-		messages          : 'Hello, I am calling to take confirmation ofmy shipment details',
+		message           : 'Hello, I am calling to take confirmation ofmy shipment details',
 		conversation_type : 'sent',
 	}];
 	return (
-		<div>
+		<div className={styles.styled_div}>
 			<div className={styles.container}>
-				{(messages || []).map((eachMessage) => (eachMessage?.conversation_type !== 'sent' ? <ReceiveDiv /> : <SentDiv />))}
+				{(messages || []).map((eachMessage) => (eachMessage?.conversation_type !== 'sent' ? <ReceiveDiv eachMessage={eachMessage} /> : <SentDiv eachMessage={eachMessage} />))}
 			</div>
 			<div className={styles.text_area_div}>
 				<div className={styles.suggestions_div}>
@@ -31,7 +31,7 @@ function MessageConversations() {
 					</div>
 					<IcMInfo fill="#221F20" height="20px" width="20px" />
 				</div>
-				<textarea rows={3} placeholder="Type your message..." className={styles.text_area} />
+				<textarea rows={2} placeholder="Type your message..." className={styles.text_area} />
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
 						<IcMAttach fill="#828282" />
