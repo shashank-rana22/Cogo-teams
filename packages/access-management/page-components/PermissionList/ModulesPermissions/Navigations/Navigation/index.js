@@ -169,62 +169,66 @@ function Navigation(props) {
 					</div>
 				</div>
 			</div>
-			<Modal
-				size="xl"
-				show={!!show}
-				onClose={() => setShow(null)}
-				className={styles.modal_container}
-			>
-				<Modal.Header title={(
-					<div>
-						<h2>{navigation?.title}</h2>
-						<span>{descriptions[navigation?.key] || ''}</span>
-					</div>
-				)}
-				/>
-				<Modal.Body>
-					<NavContent
-						navigationApis={{ ...navigationApis, isActive }}
-						setNavigationRefs={(newValues) => {
-							setNavigationRefs((prev) => ({ ...prev, ...newValues }));
-						}}
-						roleData={roleData}
-						creatingNavs={creatingNavs}
-						handleSave={handleSave}
-						show={show}
-						onDepartmentChange={onDepartmentChange}
-						selectedDepartments={selectedDepartments}
-					/>
-				</Modal.Body>
 
-				<Modal.Footer>
-					<div className={styles.buttons_container}>
-						<Button
-							size="md"
-							style={{ marginRight: 10 }}
-							themeType="secondary"
-							disabled={creatingNavs}
-							onClick={() => {
-								if (show === 1 || roleData.isImported) {
-									setShow(null);
-								} else {
-									setShow(1);
-								}
+			{show && (
+				<Modal
+					size="xl"
+					show={show}
+					onClose={() => setShow(false)}
+					className={styles.modal_container}
+				>
+					<Modal.Header title={(
+						<div>
+							<h2>{navigation?.title}</h2>
+							<span>{descriptions[navigation?.key] || ''}</span>
+						</div>
+					)}
+					/>
+					<Modal.Body>
+						<NavContent
+							navigationApis={{ ...navigationApis, isActive }}
+							setNavigationRefs={(newValues) => {
+								setNavigationRefs((prev) => ({ ...prev, ...newValues }));
 							}}
-						>
-							{show === 1 || roleData.isImported ? 'Cancel' : 'BACK'}
-						</Button>
-						<Button
-							size="md"
-							onClick={show === 1 ? () => setShow(2) : handleSave}
-							loading={creatingNavs}
-							disabled={creatingNavs}
-						>
-							{btnText}
-						</Button>
-					</div>
-				</Modal.Footer>
-			</Modal>
+							roleData={roleData}
+							creatingNavs={creatingNavs}
+							handleSave={handleSave}
+							show={show}
+							onDepartmentChange={onDepartmentChange}
+							selectedDepartments={selectedDepartments}
+						/>
+					</Modal.Body>
+
+					<Modal.Footer>
+						<div className={styles.buttons_container}>
+							<Button
+								size="md"
+								style={{ marginRight: 10 }}
+								themeType="secondary"
+								disabled={creatingNavs}
+								onClick={() => {
+									if (show === 1 || roleData.isImported) {
+										setShow(null);
+									} else {
+										setShow(1);
+									}
+								}}
+							>
+								{show === 1 || roleData.isImported ? 'Cancel' : 'BACK'}
+							</Button>
+							<Button
+								size="md"
+								onClick={show === 1 ? () => setShow(2) : handleSave}
+								loading={creatingNavs}
+								disabled={creatingNavs}
+							>
+								{btnText}
+							</Button>
+						</div>
+					</Modal.Footer>
+				</Modal>
+			)}
+
 			<ChangeStatus
 				type={showStatus}
 				show={!!showStatus}
