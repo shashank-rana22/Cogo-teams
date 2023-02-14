@@ -575,7 +575,7 @@ const partner = {
 			service_name : 'user',
 		},
 		{
-			api          : 'verify_verification_otp',
+			api          : 'verify_otp',
 			access_type  : 'public',
 			service_name : 'user',
 		},
@@ -1632,7 +1632,7 @@ const partner = {
 			service_name : 'user',
 		},
 		{
-			api          : 'verify_verification_otp',
+			api          : 'verify_otp',
 			access_type  : 'public',
 			service_name : 'user',
 		},
