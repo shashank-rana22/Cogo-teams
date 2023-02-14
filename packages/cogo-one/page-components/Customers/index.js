@@ -1,12 +1,12 @@
-import { cl, Input, Popover, Tabs, TabPanel, Toggle, Pill } from '@cogoport/components';
+import { cl, Input, Popover, Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
-// import TooltipInformation from '../../common/TooltipInformation';
 import UserAvatar from '../../common/UserAvatar';
 
 import FilterComponents from './FilterComponents';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function Customers({
@@ -112,6 +112,7 @@ function Customers({
 		}
 	}, []);
 
+	const loading = true;
 	return (
 		<div className={styles.container}>
 
@@ -123,7 +124,6 @@ function Customers({
 					name="a1"
 					size="md"
 					showOnOff
-					disabled={false}
 					onChange={(val) => setToggleStatus(val)}
 					value={toggleStatus}
 				/>
@@ -144,7 +144,7 @@ function Customers({
 
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
-					{/* <div> */}
+
 					<Input
 						size="sm"
 						prefix={<IcMSearchlight width={18} height={18} />}
@@ -153,7 +153,6 @@ function Customers({
 						onChange={(val) => setSearchValue(val)}
 						style={{ width: 200 }}
 					/>
-					{/* </div> */}
 
 				</div>
 
@@ -177,16 +176,19 @@ function Customers({
 
 				</div>
 			</div>
+
+			{/* {loading ? <LoadingState /> : ( */}
 			<div className={styles.list_container}>
+
 				{(dummyData || []).map((item) => {
 					const checkActiveCard = activeCard?.id === item?.id;
 					return (
 						<div
 							role="presentation"
 							className={cl`
-			${styles.card_Container} 
-			${checkActiveCard ? styles.active_card : ''} 
-			`}
+			                    ${styles.card_Container} 
+			                    ${checkActiveCard ? styles.active_card : ''} 
+		                     	`}
 							onClick={() => setActiveCard(item)}
 						>
 							<div className={styles.card}>
@@ -222,6 +224,8 @@ function Customers({
 					);
 				})}
 			</div>
+			{/* )} */}
+
 		</div>
 	);
 }
