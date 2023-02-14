@@ -569,6 +569,91 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'get_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_graphs_stats_dashboard',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_names',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaign_audiences',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_previous_campaign_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_tags',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_channel_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_segments',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'publish_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_segment_audience',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_campaigns',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_segment',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'get_campaign_tracking_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_overall_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_stat_details',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1616,6 +1701,17 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'list_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
+		{
+			api          : 'stop_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
 	],
 	supply_crm: [
 		{
@@ -2212,6 +2308,91 @@ const partner = {
 			api          : 'create_channel_partner_persona',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_graphs_stats_dashboard',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_names',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaign_audiences',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_previous_campaign_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_tags',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_channel_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'publish_campaign',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_segments',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'get_segment_audience',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_campaigns',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_segment',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'get_campaign_tracking_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_overall_stats',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_stat_details',
+			access_type  : 'private',
+			service_name : 'campaign',
 		},
 	],
 	support_crm: [
@@ -5209,6 +5390,102 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'get_campaign_channel_availability',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_graphs_stats_dashboard',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_names',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaigns',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_campaign_audiences',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_previous_campaign_stats',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_tags',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'create_channel_campaign',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'publish_campaign',
+			feature      : 'lead_management',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_segment_audience',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'create_segment',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			feature      : 'lead_management',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_segments',
+			feature      : 'lead_management',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'get_campaign_tracking_stats',
+			feature      : 'lead_management',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'get_campaign_overall_stats',
+			feature      : 'lead_management',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_stat_details',
+			feature      : 'lead_management',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
 	],
 	bl_desk: [
 		{
@@ -5230,6 +5507,16 @@ const partner = {
 			api          : 'list_shipment_documents',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'list_segments',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'update_campaign_segment',
+			access_type  : 'private',
+			service_name : 'campaign',
 		},
 	],
 	lead_dashboard: [
