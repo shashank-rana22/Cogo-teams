@@ -406,12 +406,12 @@ const apis = [
 	},
 	{
 		api          : 'send_verification_otp',
-		access_type  : 'public',
+		access_type  : 'private',
 		service_name : 'user',
 	},
 	{
 		api          : 'verify_otp',
-		access_type  : 'public',
+		access_type  : 'private',
 		service_name : 'user',
 	},
 ];
