@@ -1,14 +1,10 @@
 import Partners from './Partners';
-// import PersonDetails from './PersonalDetails';
 import Services from './Services';
 import styles from './styles.module.css';
 import TaggedAgent from './TaggedAgents';
 
 function Details({
 	detailsData,
-	// refetch = () => {},
-	// setShowMobileVerificationModal = () => {},
-	// showMobileVerificationModal,
 }) {
 	return (
 

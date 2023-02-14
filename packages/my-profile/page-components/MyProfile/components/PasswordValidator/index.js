@@ -2,9 +2,6 @@ import DotIconSvg from './icons/dot.svg';
 import TickIconSvg from './icons/tick.svg';
 import styles from './styles.module.css';
 
-// const PASSWORD_PATTERN =
-// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm;
-
 const VALID_PASSWORD_MAPPINGS = {
 	lowercase: {
 		pattern : /[a-z]/gm,

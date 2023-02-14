@@ -77,9 +77,6 @@ function MyProfile() {
 					<div className={styles.details}>
 						<Details
 							detailsData={detailsData}
-							refetch={refetch}
-							showMobileVerificationModal={showMobileVerificationModal}
-							setShowMobileVerificationModal={setShowMobileVerificationModal}
 						/>
 
 					</div>

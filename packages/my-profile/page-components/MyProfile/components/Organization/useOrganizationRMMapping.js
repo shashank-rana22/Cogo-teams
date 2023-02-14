@@ -28,7 +28,6 @@ const useOrganizationRMMapping = ({ personDetails = {}, detailsLoading }) => {
 				user               : res?.data?.user,
 			});
 		} catch (err) {
-			// showErrorsInToast(err?.data);
 			console.log('err', err);
 		}
 	};

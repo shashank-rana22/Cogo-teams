@@ -60,7 +60,6 @@ const getControls = (detailsData) => [
 		name        : 'preferred_languages',
 		label       : 'Languages',
 		span        : 12,
-		// multiple    : true,
 		type        : 'multi-select',
 		placeholder : 'Select languages',
 		options,

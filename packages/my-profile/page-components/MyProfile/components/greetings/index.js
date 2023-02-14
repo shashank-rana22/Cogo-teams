@@ -135,8 +135,6 @@ function Greetings({
 
 			<PersonDetails
 				detailsData={detailsData}
-				refetch={setRefetch}
-				partner_user_id={partner_user_id}
 				showMobileVerificationModal={showMobileVerificationModal}
 				setShowMobileVerificationModal={setShowMobileVerificationModal}
 			/>

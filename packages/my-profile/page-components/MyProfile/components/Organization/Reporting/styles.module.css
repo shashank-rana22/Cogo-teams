@@ -24,8 +24,4 @@
 	&.no-margin {
 		margin-bottom: 0;
 	}
-
-	/* &.leaf-node {
-		margin-bottom: 0px;
-	} */
 }

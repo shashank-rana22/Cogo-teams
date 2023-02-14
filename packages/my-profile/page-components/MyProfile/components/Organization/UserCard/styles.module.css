@@ -17,15 +17,10 @@
 	width: fit-content;
 	padding: 4px;
 	background: #ffffff;
-	/* border: 3px solid ${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; */
 	border-radius: 6px;
 	transform: rotate(-45deg);
 	position: relative;
 	border: 3px solid #F9AE64;
-
-	 /* &.active {
-		 border: 3px solid ${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; 
-	}  */
 }
 
 .profile_image_container{
@@ -43,26 +38,12 @@
 	}
 }
 
-/* .profile_image{
-	transform: translateX(-10px) translateY(-8px) rotate(45deg) scale(1.25);
-	height: 40px;
-	width: 40px;
-	border-radius: 4px;
-} */
-
 .avatar{
-	/* background: ${(props) =>
-		props.background ? `${props.background}` : '#cfdae8'}; */
 	border-radius: 4px;
 	padding: 4px;
 	height: 26px;
 	width: 26px;
 	background:#cfdae8;
-
-	&.active {
-		/* background: ${(props) =>
-			props.background ? `${props.background}` : '#ded7fc'}; */
-	}
 }
 
 .avatar_text{
@@ -74,16 +55,8 @@
 .division_line{
 	display: flex;
 	width: 100%;
-	/* padding: 4px; */
-	/* border-bottom: 3px solid
-		${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')}; */
 	margin: 4px 0 4px 0;
 	border-bottom: 3px solid #F9AE64;
-
-	/* &#active {
-		border-bottom: 3px solid #ef9b9b;
-			${(props) => (props.isBlocked ? '#ef9b9b' : '#b3d5fb')};  
-	}  */
 }
 
 .card_container{
@@ -120,7 +93,6 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	/* padding-top: 8px; */
 }
 
 .designation{
@@ -169,7 +141,6 @@
 
 .flex_div{
 	display: flex;
-	alignItems:center;
 }
 
 
