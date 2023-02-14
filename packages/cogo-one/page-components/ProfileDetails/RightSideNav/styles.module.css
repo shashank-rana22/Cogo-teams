@@ -11,20 +11,21 @@
 .active {
 	background: #FDEBE9;
 	border-radius: 12px;
-	svg{
+	/* img{
 		fill:#EE3425 !important;
-	}
+	} */
 }
 .icon_div {
 	width: 40px;
 	height: 40px;
 	align-items: center;
+	justify-content: center;
 	display: flex;
 	padding: 8px;
 	margin-bottom: 20px;
-	svg{
+	img{
 		width: 25px;
 		height: 25px;
-		fill:#000000;
+		/* fill:#000000; */
 	}
 }

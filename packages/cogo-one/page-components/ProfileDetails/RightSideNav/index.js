@@ -1,11 +1,9 @@
 import { cl } from '@cogoport/components';
-import { useState } from 'react';
 
 import IconMapping from './IconMapping';
 import styles from './styles.module.css';
 
-function RightSideNav() {
-	const [activeSelect, setActiveSelect] = useState('profile');
+function RightSideNav({ activeSelect, setActiveSelect }) {
 	const handleClick = (val) => {
 		setActiveSelect(val);
 	};
