@@ -14,12 +14,17 @@ function VendorDetails() {
 		<div className={styles.form_container}>
 			{controls.map((controlItem) => {
 				const el = { ...controlItem };
+
+				const span = el.span;
+
+				console.log(span, 'span');
+
 				const Element = getElementController(el.type);
 
 				if (!Element) return null;
 
 				return (
-					<div className={styles.form_group}>
+					<div className={styles.form_group} style={{display: 'flex',flexDirection: 'column',flexBasis: span}}>
 						<div className={styles.form_label}>{el.label}</div>
 						<div>
 							<Element

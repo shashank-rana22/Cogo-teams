@@ -2,12 +2,11 @@
 	margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
-  height: 200px;
 }
 
 .form_group {
-  width: 30%;
-  margin: 0px 20px 0px 20px;
+  margin: 0px 20px 0px 0;
+  /* width: 30%; */
 }
 
 .form_label {
