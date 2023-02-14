@@ -1,8 +1,8 @@
 // import React from 'react';
 import EmptyPage from './EmptyPage';
 
-function ListAccounts() {
+function ListVendors() {
 	return <EmptyPage />;
 }
 
-export default ListAccounts;
+export default ListVendors;

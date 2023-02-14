@@ -1,0 +1,28 @@
+.back_container {
+	display: flex;
+}
+
+.back_text {
+	margin: 2px 0 0 10px;
+	font-family: Poppins;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 21px;
+}
+
+.header {
+	margin-top: 12px;
+	font-family: Poppins;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 42px;
+}
+
+.tab_container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 40px;
+}

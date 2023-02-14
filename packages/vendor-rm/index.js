@@ -1,2 +1,4 @@
-export { default as ListAccounts } from './page-components/ListAccounts';
-export { default as AddAccount } from './page-components/AddAccount';
+// eslint-disable-next-line import/no-unresolved
+
+export { default as ListVendors } from './page-components/ListVendors';
+export { default as OnBoardVendor } from './page-components/OnBoardVendor';

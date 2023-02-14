@@ -1,0 +1,55 @@
+.form_container {
+	margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  height: 320px;
+}
+
+.form_group {
+  width: 30%;
+  margin: 0px 20px 0px 20px;
+}
+
+.form_label {
+  text-align: start;
+}
+
+.error_message {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}
+
+/* .form_container {
+	margin-top: 1rem;
+}
+
+.form_group {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.form_group:not(:first-child) { margin: 10px 0; }
+
+.input_group {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+.error_message {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+	letter-spacing: 0.02em;
+}
+
+.modal_container {
+	@media (max-width: 768px) {
+		width: 300px !important;
+	}
+} */

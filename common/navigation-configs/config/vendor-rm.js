@@ -1,9 +1,9 @@
 const vendorRM = {
-	'/[partner_id]/list-accounts': {
+	'/[partner_id]/vendors-list': {
 		navigation : 'vendor_rm',
 		isMainNav  : true,
 	},
-	'/[partner_id]/add-account': {
+	'/[partner_id]/onboard-vendor': {
 		navigation: 'vendor_rm',
 	},
 };

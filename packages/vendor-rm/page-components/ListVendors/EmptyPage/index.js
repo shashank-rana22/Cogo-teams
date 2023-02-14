@@ -8,7 +8,7 @@ function EmptyPage() {
 	const router = useRouter();
 
 	const redirectHandler = () => {
-		router.push('/add-account/', '/add-account/');
+		router.push('/onboard-vendor/', '/onboard-vendor/');
 	};
 
 	return (
