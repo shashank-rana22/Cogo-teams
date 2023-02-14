@@ -1796,6 +1796,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+
+	enrichment: {
+		key           : 'enrichment',
+		title         : 'Enrichment',
+		href          : '/enrichment',
+		as            : '/enrichment',
+		main_apis     : ['/list_lead_organizations_enrichment'],
+		possible_apis : apis.enrichment,
+		module_type   : 'dashboards',
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
