@@ -38,7 +38,7 @@ function MessageConversations() {
 						<IcMHappy fill="#828282" />
 					</div>
 					<div>
-						<IcMAttach fill="#4F4F4F" />
+						<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Vector%20(5).svg" alt="img" />
 						<IcMSend fill="#EE3425" />
 					</div>
 				</div>
