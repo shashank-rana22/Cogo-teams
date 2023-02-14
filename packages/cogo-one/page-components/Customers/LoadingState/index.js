@@ -4,40 +4,33 @@ import styles from './styles.module.css';
 
 function LoadingState() {
 	return (
-		<div className={styles.container}>
-			<div className={styles.list_container}>
+		<div className={styles.list_container}>
+			{[...Array(6)].map(() => (
 				<div className={styles.card_Container}>
 					<div className={styles.card}>
 
 						<div className={styles.user_information}>
 							<div className={styles.avatar_Container}>
-								<Placeholder type="circle" radius="30px" />
+								<Placeholder type="circle" radius="40px" />
 								<div className={styles.user_details}>
-									<div className={styles.user_name}>
-										hello
-									</div>
-									<div className={styles.organisation}>
-										Organisation
-									</div>
+									<Placeholder height="15px" width="65px" />
+									<Placeholder height="10px" width="100px" margin="10px 0px 0px 0px" />
 								</div>
 							</div>
 
 							<div className={styles.user_activity}>
-								<div className={styles.pills_card}>Small</div>
-								<div className={styles.activity_duration}>
-									5 min
-								</div>
+								<Placeholder height="20px" width="65px" />
+								<Placeholder height="10px" width="65px" margin="4px 0px 0px 0px" />
 							</div>
 
 						</div>
-						<div className={styles.content}>
-							asdfghjklasdfghj dsfghj
-						</div>
+						<Placeholder height="13px" width="100%" margin="5px 0px 0px 0px" />
 					</div>
 				</div>
+			))}
 
-			</div>
 		</div>
+
 	);
 }
 
