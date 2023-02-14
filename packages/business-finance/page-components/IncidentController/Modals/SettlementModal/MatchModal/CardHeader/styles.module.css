@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: #f8f2e7;
+  border-radius: 8px;
+  margin: 16px 0px;
+  padding: 16px;
+  font-size: 12px;
+  gap: 30px;
+  :first-child {
+    padding: 0px 0px 0px 30px;
+  }
+}

@@ -1,0 +1,25 @@
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date_range {
+  margin-left: 8px;
+  :global {
+    .react-datepicker__input-container {
+      input {
+        font-size: 10px;
+        height: 30px;
+        width: 145px;
+      }
+      .react-datepicker-ignore-onclickoutside {
+        height: 30px;
+        width: 145px;
+      }
+      .react-datepicker__close-icon {
+        right: -44px;
+        padding: 0px;
+      }
+    }
+  }
+}

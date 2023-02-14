@@ -46,3 +46,14 @@ export interface IncidentDataInterface {
 	incidentLoading?:boolean
 	getIncidentData?:()=>{ }
 }
+
+export interface MatchModalInterface {
+	checkedData?:Array<object>
+	incidentMappingId?:string
+	settlementDate?:Date
+	supportingDocUrl?:string
+	id?:string
+	type?:string
+	refetch?:()=>{}
+	isEditable?:boolean
+}

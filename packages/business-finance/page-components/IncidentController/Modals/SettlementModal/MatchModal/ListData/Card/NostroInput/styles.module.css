@@ -1,0 +1,12 @@
+.text_styles {
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+.input_container {
+  text-align: center;
+  font-size: 12px;
+}
+.flex {
+  display: flex;
+}

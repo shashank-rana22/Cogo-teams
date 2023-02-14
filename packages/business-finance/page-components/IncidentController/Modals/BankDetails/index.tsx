@@ -54,17 +54,17 @@ function BankDetails({
 		{
 			label : 'Approve',
 			value : 'true',
-			name:'approve'
+			name  : 'approve',
 		},
 		{
 			label : 'Reject',
 			value : 'false',
-			name:'reject'
+			name  : 'reject',
 		}];
 
 	const optionsManual = [
-		{ label: 'Penny Testing', value: 'PENNY' ,name:'PENNY'},
-		{ label: 'Manual Verification', value: 'MANUAL' ,name:'MANUAL'},
+		{ label: 'Penny Testing', value: 'PENNY', name: 'PENNY' },
+		{ label: 'Manual Verification', value: 'MANUAL', name: 'MANUAL' },
 	];
 
 	const onApprove = () => {

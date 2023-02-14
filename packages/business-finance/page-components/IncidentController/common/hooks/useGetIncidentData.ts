@@ -55,7 +55,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 					...rest,
 					status          : activeTab.toUpperCase(),
 					isStatsRequired : true,
-					urgencyTag      : urgency === 'urgent' && ['r', 'o'],
+					urgencyTag      : urgency === 'urgent' && 'a',
 					role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
 					q               : query !== '' ? query : undefined,
 					type            : category,

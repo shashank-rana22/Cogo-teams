@@ -1,0 +1,13 @@
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.drag {
+  font-size: 12px;
+  font-weight: 400;
+}
