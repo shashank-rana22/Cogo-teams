@@ -8,10 +8,8 @@ import styles from './styles.module.css';
 function ChangePassword({
 	control,
 	errors,
-	getValues,
+	password,
 }) {
-	const { password = '' } = getValues();
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>Enter password</div>

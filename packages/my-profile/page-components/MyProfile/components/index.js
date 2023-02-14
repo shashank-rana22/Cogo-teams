@@ -42,6 +42,8 @@ function MyProfile() {
 
 	const { name = '' } = detailsData || {};
 
+	const { password = '' } = getValues();
+
 	return (
 		<>
 			<div className={styles.greeting_container}>
@@ -99,7 +101,7 @@ function MyProfile() {
 				<ChangePassword
 					control={control}
 					errors={errors}
-					getValues={getValues}
+					password={password}
 
 				/>
 				<Modal.Footer>
@@ -113,7 +115,7 @@ function MyProfile() {
 					</Button>
 
 					<Button
-						disabled={apiLoading}
+						disabled={apiLoading || !password}
 						onClick={handleSubmit(onCreate, onError)}
 						themeType="primary"
 					>

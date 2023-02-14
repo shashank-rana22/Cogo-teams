@@ -5,6 +5,7 @@ const useEditPersonalDetails = ({
 	refetch = () => {},
 	setShowModal = () => {},
 	partner_user_id,
+	setEditNameModal,
 }) => {
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'update_partner_user',
@@ -33,9 +34,10 @@ const useEditPersonalDetails = ({
 
 			refetch();
 			// eslint-disable-next-line no-undef
-			// window.location.reload();
+			window.location.reload();
 
 			setShowModal(false);
+			setEditNameModal(false);
 			Toast.success('Personal Details updated successfully!');
 		} catch (e) {
 			Toast.error('Mobile number is invalid');

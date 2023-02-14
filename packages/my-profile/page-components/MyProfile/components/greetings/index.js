@@ -44,6 +44,7 @@ function Greetings({
 		refetch: setRefetch,
 		detailsData,
 		setShowModal,
+		setEditNameModal,
 		partner_user_id,
 	});
 
@@ -145,6 +146,7 @@ function Greetings({
 				onOuterClick={onOuterClick}
 			>
 				<Modal.Header title="Change your profile picture" />
+
 				<Modal.Body>
 					<div className={styles.modal_container}>
 
@@ -172,7 +174,7 @@ function Greetings({
 								/>
 							) : (
 								<div className={styles.avatar_container}>
-									<Avatar name={name} />
+									<Avatar personName={name} size="100px" />
 								</div>
 							)}
 						</div>
@@ -194,6 +196,7 @@ function Greetings({
 							<div
 								role="presentation"
 								onClick={onDeleteButton}
+								className={styles.remove_picture_text}
 							>
 								Remove Picture
 							</div>
