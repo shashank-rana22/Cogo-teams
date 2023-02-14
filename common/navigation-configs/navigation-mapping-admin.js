@@ -344,6 +344,7 @@ const navigationMappingAdmin = {
 			...apis.ftl_freight,
 			...apis.ltl_freight,
 			...apis.trailer_freight,
+			...apis.rail_freight,
 		],
 		options: [
 			{
