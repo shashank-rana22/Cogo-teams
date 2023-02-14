@@ -40,7 +40,14 @@ function Header() {
 		return (
 			<div className={styles.flex}>
 				{ showMoreList && showMorePlacement !== 'right' && toolTipComp}
-				{(lessList || []).map((item, index) => (<div className={styles.tags} style={{ background: TAGS_COLORS[index] }}>{item}</div>))}
+				{(lessList || []).map((item, index) => (
+					<div
+						className={styles.tags}
+						style={{ background: TAGS_COLORS[index] }}
+					>
+						{item}
+					</div>
+				))}
 				{showMoreList && showMorePlacement === 'right' && toolTipComp}
 			</div>
 		);
@@ -53,6 +60,13 @@ function Header() {
 					{showContent(tagslist, 'right')}
 				</div>
 				<div className={styles.flex}>
+					<Button
+						themeType="secondary"
+						size="md"
+						className={cl`${styles.styled_button} ${styles.margin}`}
+					>
+						Escalate
+					</Button>
 					{(assignes || []).map((eachAssigne) => <AssigneeAvatar data={eachAssigne} />)}
 					<Button themeType="secondary" size="md" className={styles.styled_button}>Assign</Button>
 				</div>
