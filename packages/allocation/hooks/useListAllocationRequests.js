@@ -39,13 +39,15 @@ const useListAllocationRequests = () => {
 	}, []);
 
 	useEffect(() => {
-		setParams((pv) => ({
-			...pv,
-			filters: {
-				...pv.filters,
-				q: searchQuery || undefined,
-			},
-		}));
+		if (searchQuery) {
+			setParams((pv) => ({
+				...pv,
+				filters: {
+					...pv.filters,
+					q: searchQuery || undefined,
+				},
+			}));
+		}
 	}, [searchQuery]);
 
 	const applyBulkFilter = async () => {

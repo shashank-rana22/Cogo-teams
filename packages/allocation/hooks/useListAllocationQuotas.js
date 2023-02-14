@@ -6,6 +6,7 @@ const useListAllocationQuotas = () => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState();
+	const [quotaItem, setQuotaItem] = useState(null);
 
 	const [params, setParams] = useState({
 		sort_type : 'desc',
@@ -33,13 +34,15 @@ const useListAllocationQuotas = () => {
 	};
 
 	useEffect(() => {
-		setParams((prevParams) => ({
-			...prevParams,
-			filters: {
-				...prevParams.filters,
-				q: searchQuery || undefined,
-			},
-		}));
+		if (searchQuery) {
+			setParams((prevParams) => ({
+				...prevParams,
+				filters: {
+					...prevParams.filters,
+					q: searchQuery || undefined,
+				},
+			}));
+		}
 	}, [searchQuery]);
 
 	return {
@@ -48,6 +51,8 @@ const useListAllocationQuotas = () => {
 		getNextPage,
 		params,
 		setParams,
+		quotaItem,
+		setQuotaItem,
 		refetch,
 		debounceQuery,
 		searchValue,
