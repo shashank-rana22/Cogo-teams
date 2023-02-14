@@ -20,7 +20,7 @@ function UserAvatar({ type = '', imageSource = '' }) {
 				src={imageSource || 'https://www.w3schools.com/howto/img_avatar.png'}
 				alt="img"
 				disabled={false}
-				size="50px"
+				size="45px"
 			/>
 		</div>
 	);
