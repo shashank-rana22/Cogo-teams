@@ -290,13 +290,13 @@ const useUpdateSpotNegotiationRate = ({
 				|| service?.data?.free_days_detention_destination);
 		};
 
-		if (slabs && !satisfyingDaysLimit) {
+		if (slabs.length && !satisfyingDaysLimit) {
 			Toast.error(
 				'upper limit and lower limit of days should always be greater than free limit days',
 			);
 			return;
 		}
-		if (slabs && !checkIfFreeLimitConditionsMeet()) {
+		if (slabs.length && !checkIfFreeLimitConditionsMeet()) {
 			Toast.error(
 				`Requested No of Days is ${service?.data?.free_days_detention_destination} 
 				which is greater than the value entered.`,
