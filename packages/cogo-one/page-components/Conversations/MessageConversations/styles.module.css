@@ -1,6 +1,6 @@
 .container{
 	padding:10px;
-	min-height: 57vh;
+	height:60vh ;
 }
 .text_area{
 	resize: none;
@@ -67,4 +67,7 @@
 	align-items: center;
 	padding:5px 0px;
 	border-bottom: 1px solid #FBD1A6;
+}
+.styled_div{
+	height: 100%;
 }

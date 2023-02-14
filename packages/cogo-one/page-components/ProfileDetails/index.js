@@ -7,10 +7,11 @@ import styles from './styles.module.css';
 
 function ProfileDetails() {
 	const [activeSelect, setActiveSelect] = useState('profile');
+	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>
-				{COMPONENT_MAPPING[activeSelect] || null}
+				{ActiveComp && <ActiveComp />}
 			</div>
 			<RightSideNav activeSelect={activeSelect} setActiveSelect={setActiveSelect} />
 		</div>

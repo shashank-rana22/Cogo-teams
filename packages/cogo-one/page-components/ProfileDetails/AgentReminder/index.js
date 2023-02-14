@@ -1,11 +1,13 @@
-import { InputGroup, Timepicker, Input, SingleDateRange } from '@cogoport/components';
+import { Button, Timepicker, Input, Datepicker } from '@cogoport/components';
 // import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
 function AgentReminder() {
 	const [inputValue, setInputValue] = useState('');
+	const [date, setDate] = useState('');
 	const [time, setTime] = useState({
 		start_time : '',
 		end_time   : '',
@@ -25,22 +27,40 @@ function AgentReminder() {
 			</div>
 			<div className={styles.date_wrapper}>
 				<div className={styles.label}>Select a date</div>
-				<SingleDateRange
+				<Datepicker
 					placeholder="Enter Date"
 					dateFormat="MM/dd/yyyy"
+					showTimeSelect={false}
 					name="date"
-					// onChange={setDate}
-					// value={date}
+					onChange={setDate}
+					value={date}
 				/>
-				<InputGroup>
-					<div className={styles.label}>Start Time</div>
-					<Timepicker
-						name="date"
-						timeIntervals={1}
-						value={time?.start_time}
-						onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
-					/>
-				</InputGroup>
+				<div className={styles.time_container}>
+					<div className={styles.start_time}>
+						<div className={styles.time_title}>Start Time</div>
+						<Timepicker
+							name="date"
+							timeIntervals={1}
+							value={time?.start_time}
+							onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
+						/>
+					</div>
+					<div className={styles.end_time}>
+						<div className={styles.time_title}>End Time</div>
+						<Timepicker
+							name="date"
+							timeIntervals={1}
+							value={time?.end_time}
+							className="input_time"
+							onChange={(a) => setTime((p) => ({ ...p, end_time: a }))}
+						/>
+					</div>
+				</div>
+				<div className={styles.button_container}>
+					<Button size="md" themeType="tertiary">Reset</Button>
+					<Button size="md" themeType="primary">Set reminder</Button>
+				</div>
+				<PreviousReminder />
 			</div>
 		</div>
 	);

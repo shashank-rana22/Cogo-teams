@@ -1,15 +1,16 @@
 import styles from './styles.module.css';
 
-function ReceiveDiv() {
+function ReceiveDiv({ eachMessage = {} }) {
+	const { name = '', time = '', message = '' } =	eachMessage || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.name}>
-				John Wick,
-				<span className={styles.time_stamp}>11:19</span>
+				{name}
+				,
+				<span className={styles.time_stamp}>{time}</span>
 			</div>
 			<div className={styles.receive_message_container}>
-				Hello, I am calling to take confirmation of
-				my shipment details.
+				{message}
 			</div>
 		</div>
 	);
