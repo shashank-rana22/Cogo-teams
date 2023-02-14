@@ -1,10 +1,11 @@
-export const controls = [
+export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 	{
+		...countryOptions,
 		name        : 'country_id',
 		label       : 'Country of Registration',
 		type        : 'select',
 		placeholder : 'Select a Country',
-		span        : '30%',
+		style       : { flexBasis: '30%' },
 		condition   : {
 			type: [
 				'city',
@@ -26,15 +27,14 @@ export const controls = [
 		label       : 'Tax Number',
 		type        : 'select',
 		placeholder : 'Select',
-		span        : '8%',
+		style       : { flexBasis: '8%', marginRight: '2px' },
 		condition   : { type: ['country'] },
 		rules       : { required: 'Tax Number is Required' },
 	},
 	{
 		name        : 'tax_number',
-		label       : 'Document Number',
 		type        : 'text',
-		span        : '22%',
+		style       : { flexBasis: '22%', marginTop: '10px' },
 		condition   : { type: ['country'] },
 		placeholder : 'Enter Document No',
 		rules       : { required: 'Document No is required' },
@@ -43,7 +43,7 @@ export const controls = [
 		name        : 'name',
 		label       : 'Name of the Organization',
 		type        : 'text',
-		span        : '30%',
+		style       : { flexBasis: '33%', marginRight: '0px' },
 		placeholder : 'Type here',
 		rules       : { required: 'Role Short Name is required' },
 	},
@@ -51,7 +51,7 @@ export const controls = [
 		name            : 'tax_proof_url',
 		showLabel       : false,
 		label           : 'Upload Tax Document Proof (Pan/GST Certificate)',
-		span            : '100%',
+		style           : { flexBasis: '100%', marginRight: '0px' },
 		type            : 'file',
 		themeType       : 'secondary',
 		drag            : true,
@@ -65,14 +65,41 @@ export const controls = [
 		label       : 'Type of Company',
 		type        : 'select',
 		placeholder : 'Select an Organization Type',
-		span        : '40%',
+		style       : { flexBasis: '30%' },
 		rules       : { required: 'Company Type is required' },
+		options     : [
+			{
+				label : 'Private Limited',
+				value : 'private_limited',
+			},
+			{
+				label : 'Public Limited',
+				value : 'public_limited',
+			},
+			{
+				label : 'Limited Liability Partnership',
+				value : 'limited_liability_partnership',
+			},
+			{
+				label : 'Partnership',
+				value : 'partnership',
+			},
+			{
+				label : 'Proprietorship',
+				value : 'proprietorship',
+			},
+			{
+				label : 'Other',
+				value : 'other',
+			},
+		],
 	},
 	{
+		...cityOptions,
 		name        : 'city_id',
 		label       : 'Branch',
 		type        : 'select',
-		span        : '40%',
+		style       : { flexBasis: '30%' },
 		placeholder : 'Select a city',
 		condition   : {
 			type: [
@@ -86,6 +113,6 @@ export const controls = [
 				'railway_terminal',
 			],
 		},
-		rules : { message: 'City is Required' },
+		rules: { message: 'City is Required' },
 	},
 ];
