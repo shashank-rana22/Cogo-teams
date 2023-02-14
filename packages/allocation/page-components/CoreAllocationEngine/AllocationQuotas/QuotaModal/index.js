@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import AsyncSelect from '../../../../common/Form/components/AsyncSelect';
 import { getFieldController } from '../../../../common/Form/Controlled';
-import useCreateAllocationQuota from '../../../../hooks/useCreateAllocationQuota';
+import useCreateEditAllocationQuota from '../../../../hooks/useCreateEditAllocationQuota';
 import useDeleteAllocationQuota from '../../../../hooks/useDeleteAllocationQuota';
 import controls from '../../../../utils/get-quotas-table-controls';
 
@@ -65,7 +65,7 @@ function QuotaModal(props) {
 		onSave,
 		loading: loadingOnSave,
 		formProps,
-	} = useCreateAllocationQuota({
+	} = useCreateEditAllocationQuota({
 		onCloseModal,
 		refetch,
 		radioValue,

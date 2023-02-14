@@ -6,16 +6,29 @@ import EmptyState from '../../../../../../../../common/EmptyState';
 import PreferenceCard from './PreferenceCard';
 import styles from './styles.module.css';
 
-function PreferencesData({
-	list, listLoading, paginationData, getNextPage, CONFIGURATION_OPTIONS, radioValue, setRadioValue,
-}) {
+function PreferencesData(props) {
+	const {
+		list,
+		listLoading,
+		paginationData,
+		getNextPage,
+		CONFIGURATION_OPTIONS,
+		radioValue,
+		setRadioValue,
+	} = props;
+
 	const { page = 1, total_count = 0, page_limit = 0 } = paginationData;
 
 	if (listLoading) {
-		return <Loader themeType="primary" />;
+		return (
+			<div className={styles.spinner_container}>
+				<Loader themeType="primary" />
+				<p>Kindly wait, fetching relevant information...</p>
+			</div>
+		);
 	}
 
-	if (!listLoading && isEmpty(list)) {
+	if (isEmpty(list)) {
 		return <EmptyState />;
 	}
 

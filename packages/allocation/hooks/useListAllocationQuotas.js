@@ -25,6 +25,13 @@ const useListAllocationQuotas = () => {
 
 	const [{ loading, data }, refetch] = api;
 
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: newPage,
+		}));
+	};
+
 	useEffect(() => {
 		setParams((prevParams) => ({
 			...prevParams,
@@ -38,7 +45,7 @@ const useListAllocationQuotas = () => {
 	return {
 		data,
 		loading,
-		// getNextPage,
+		getNextPage,
 		params,
 		setParams,
 		refetch,

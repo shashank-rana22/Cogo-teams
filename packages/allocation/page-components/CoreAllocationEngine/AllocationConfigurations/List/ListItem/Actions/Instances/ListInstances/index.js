@@ -33,7 +33,7 @@ function ListInstances({ item }) {
 		list,
 		listLoading,
 		paginationData,
-		getNextaPage,
+		getNextPage,
 		dateRange,
 		setDateRange,
 		listInstancesRefetch,
@@ -187,7 +187,7 @@ function ListInstances({ item }) {
 					currentPage={page}
 					totalItems={total_count}
 					pageSize={page_limit}
-					onPageChange={getNextaPage}
+					onPageChange={getNextPage}
 				/>
 			</div>
 		</div>

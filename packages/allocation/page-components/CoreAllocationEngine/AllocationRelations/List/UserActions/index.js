@@ -8,7 +8,6 @@ function UserActions({
 	confirmModalState,
 	setConfirmModalState = () => {},
 	checkedRowsId,
-	onClick = () => {},
 	fetchList = () => {},
 }) {
 	const requestType = confirmModalState.type;
@@ -33,7 +32,10 @@ function UserActions({
 
 	};
 
-	const { handleUpdateRelation = () => {}, loadingUpdateRelations = false } = useUserActions({
+	const {
+		handleUpdateRelation = () => {},
+		loadingUpdateRelations = false,
+	} = useUserActions({
 		confirmModalState,
 		setConfirmModalState,
 		checkedRowsId,
@@ -54,21 +56,11 @@ function UserActions({
 			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button
-						type="button"
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '10px' }}
-						onClick={onClick}
-						disabled={loadingUpdateRelations}
-					>
-						CANCEL
-					</Button>
-					<Button
 						type="submit"
 						size="md"
 						themeType="primary"
 						disabled={loadingUpdateRelations}
-						onClick={() => handleUpdateRelation()}
+						onClick={handleUpdateRelation}
 					>
 						{startCase(requestType)}
 					</Button>

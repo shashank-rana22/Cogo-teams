@@ -42,7 +42,10 @@ function Header(props) {
 					value={toggleValue}
 					onChange={(e) => onChangeParams({
 						filters:
-					{ service_type: e?.target?.checked ? 'partner' : 'organization' },
+					{
+						status       : 'pending',
+						service_type : e?.target?.checked ? 'partner' : 'organization',
+					},
 					})}
 				/>
 

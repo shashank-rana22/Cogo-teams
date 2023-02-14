@@ -15,13 +15,13 @@ function AllocationQuotas() {
 	const {
 		data,
 		loading:listLoading,
-		// getNextPage,
 		params,
 		setParams,
 		refetch,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		getNextPage,
 	} = useListAllocationQuotas();
 
 	const toggleRoleType = params?.filters?.quota_type;
@@ -42,12 +42,12 @@ function AllocationQuotas() {
 			<List
 				data={data}
 				loading={listLoading}
-				// onChangeParams={onChangeParams}
+				getNextPage={getNextPage}
 				fetchList={refetch}
 				toggleRoleType={toggleRoleType}
 				setQuotaItem={setQuotaItem}
 			/>
-			{/* Todo isUpdatable can be called   */}
+			{/* Todo isUpdatable can be called */}
 
 			{quotaItem && (
 				<Modal

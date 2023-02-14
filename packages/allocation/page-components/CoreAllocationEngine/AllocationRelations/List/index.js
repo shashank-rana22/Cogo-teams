@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import LoadingState from '../../../../common/LoadingState';
+import ShimmerState from '../../../../common/ShimmerState';
 
 import BulkUpdateMode from './BulkUpdateMode';
 import ListItem from './ListItem';
@@ -26,14 +26,12 @@ function List({
 	getNextPage,
 	searchQuery,
 	fetchList = () => {},
-	// setActiveTab = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState('');
-	const [workflowName, setWorkflowName] = useState(false);
 
 	if (loading) {
-		return <LoadingState />;
+		return <ShimmerState />;
 	}
 
 	if (isEmpty(list)) {
@@ -51,7 +49,6 @@ function List({
 	}
 
 	const onClickClose = () => {
-		setWorkflowName(null);
 		setConfirmModalState((prev) => ({
 			...prev,
 			showConfirmationModal : false,
@@ -86,9 +83,7 @@ function List({
 					closeOnOuterClick={false}
 					onClose={onClickClose}
 				>
-
 					<UserActions
-						onClick={onClickClose}
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
 						fetchList={fetchList}
@@ -98,20 +93,15 @@ function List({
 			)}
 
 			<div className={styles.list_container}>
-				{list.map((item = {}) => (
+				{list.map((item) => (
 					<ListItem
 						key={item.id}
 						item={item}
-						bulkMode={bulkMode}
-						setBulkMode={setBulkMode}
 						checkedRowsId={checkedRowsId}
 						setCheckedRowsId={setCheckedRowsId}
+						bulkMode={bulkMode}
 						activeTab={activeTab}
-						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
-						onClickClose={onClickClose}
-						workflowName={workflowName}
-						setWorkflowName={setWorkflowName}
 					/>
 				))}
 

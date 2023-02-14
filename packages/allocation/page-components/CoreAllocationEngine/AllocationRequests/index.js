@@ -41,6 +41,8 @@ function Requests() {
 				setParams={setParams}
 				setShowModal={setShowModal}
 				checkedRowsId={checkedRowsId}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 				{...restProps}
 			/>
 

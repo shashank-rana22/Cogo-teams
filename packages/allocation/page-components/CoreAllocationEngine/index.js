@@ -7,6 +7,29 @@ import Relations from './AllocationRelations';
 import Requests from './AllocationRequests';
 import styles from './styles.module.css';
 
+const TAB_PANEL_MAPPING = {
+	configurations: {
+		name      : 'configurations',
+		title     : 'Configurations',
+		Component : Configurations,
+	},
+	relations: {
+		name      : 'relations',
+		title     : 'Relations',
+		Component : Relations,
+	},
+	requests: {
+		name      : 'requests',
+		title     : 'Requests',
+		Component :	Requests,
+	},
+	quotas: {
+		name      : 'quotas',
+		title     : 'Quotas',
+		Component :	Quotas,
+	},
+};
+
 function CoreAllocationEngine() {
 	const [activeAllocation, setActiveAllocation] = useState('configurations');
 
@@ -17,29 +40,19 @@ function CoreAllocationEngine() {
 			</section>
 
 			<div className={styles.tab_list}>
-				{/* // Todo make it a mapping  with title,tab Component,key */}
-
 				<Tabs
 					activeTab={activeAllocation}
 					fullWidth
 					themeType="primary"
 					onChange={setActiveAllocation}
 				>
-					<TabPanel name="configurations" title="Configurations">
-						<Configurations />
-					</TabPanel>
+					{Object.values(TAB_PANEL_MAPPING).map((item) => {
+						const { name = '', title = '', Component } = item;
 
-					<TabPanel name="relations" title="Relations">
-						<Relations />
-					</TabPanel>
+						if (!Component) return null;
 
-					<TabPanel name="requests" title="Requests">
-						<Requests />
-					</TabPanel>
-
-					<TabPanel name="quotas" title="Quotas">
-						<Quotas />
-					</TabPanel>
+						return <TabPanel name={name} title={title}><Component /></TabPanel>;
+					})}
 				</Tabs>
 			</div>
 		</section>

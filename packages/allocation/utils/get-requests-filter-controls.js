@@ -1,9 +1,10 @@
 const controls = [
 	{
-		name    : 'assignment_type',
-		type    : 'chips',
-		label   : 'Assignment Type',
-		options : [
+		name     : 'stakeholder_type',
+		type     : 'chips',
+		label    : 'Stakeholder Type',
+		multiple : true,
+		options  : [
 			{ value: 'sales_agent', label: 'Sales Agent' },
 			{ value: 'booking_agent', label: 'Booking Agent' },
 			{ value: 'ckam', label: 'CKAM' },

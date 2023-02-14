@@ -4,9 +4,9 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 const useListAllocationRequests = () => {
-	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
-	const [searchValue, setSearchValue] = useState();
+	const [searchValue, setSearchValue] = useState('');
 	const [bulkMode, setBulkMode] = useState(false);
 	const [selectAll, setSelectAll] = useState('');
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
@@ -39,10 +39,10 @@ const useListAllocationRequests = () => {
 	}, []);
 
 	useEffect(() => {
-		setParams((prevParams) => ({
-			...prevParams,
+		setParams((pv) => ({
+			...pv,
 			filters: {
-				...prevParams.filters,
+				...pv.filters,
 				q: searchQuery || undefined,
 			},
 		}));

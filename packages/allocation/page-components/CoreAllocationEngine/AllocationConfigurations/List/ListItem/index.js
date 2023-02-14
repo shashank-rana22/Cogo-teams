@@ -225,7 +225,14 @@ const WORKFLOW_MAPPING = {
 
 function ListItem({ item, listRefetch }) {
 	// Todo move the state up
-	const [workflowName, setWorkflowName] = useState(false);
+	const [workflowName, setWorkflowName] = useState(null);
+
+	const [showActions, setShowActions] = useState(false);
+
+	const onClickCta = (workflow) => {
+		setWorkflowName(workflow);
+		setShowActions(false);
+	};
 
 	return (
 		<div className={styles.list_item_container}>
@@ -247,16 +254,17 @@ function ListItem({ item, listRefetch }) {
 				<Popover
 					placement="left"
 					interactive
+					visible={showActions}
 					render={(
 						<ActionContent
 							status={item.status}
-							setWorkflowName={setWorkflowName}
+							onClickCta={onClickCta}
 						/>
 					)}
-					onOuterClick={() => setWorkflowName(false)}
+					onClickOutside={() => setShowActions(false)}
 				>
 					<div className={styles.svg_container}>
-						<IcMOverflowDot height={16} width={16} />
+						<IcMOverflowDot height={16} width={16} onClick={() => setShowActions(!showActions)} />
 					</div>
 				</Popover>
 			</div>

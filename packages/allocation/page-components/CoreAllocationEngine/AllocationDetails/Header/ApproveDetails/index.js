@@ -37,7 +37,7 @@ function ApproveDetails({ showApprove, setShowApprove, listRefetch }) {
 					onClick={onApproveDetails}
 					disabled={loadingApproveDetails}
 				>
-					Approve
+					Yes, Approve
 				</Button>
 			</Modal.Footer>
 		</Modal>
