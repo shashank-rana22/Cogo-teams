@@ -32,15 +32,27 @@ function AgentReminder() {
 					// onChange={setDate}
 					// value={date}
 				/>
-				<InputGroup>
-					<div className={styles.label}>Start Time</div>
-					<Timepicker
-						name="date"
-						timeIntervals={1}
-						value={time?.start_time}
-						onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
-					/>
-				</InputGroup>
+				<div className={styles.time_container}>
+					<div className={styles.start_time}>
+						<div className={styles.time_title}>Start Time</div>
+						<Timepicker
+							name="date"
+							timeIntervals={1}
+							value={time?.start_time}
+							onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
+						/>
+					</div>
+					<div className={styles.end_time}>
+						<div className={styles.time_title}>End Time</div>
+						<Timepicker
+							name="date"
+							timeIntervals={1}
+							value={time?.start_time}
+							className="input_time"
+							onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

@@ -1,9 +1,9 @@
-import { IcMProfile } from '@cogoport/icons-react';
+import { IcMProfile, IcACustomerCentre } from '@cogoport/icons-react';
 
 const IconMapping = [
 	{
 		name : 'profile',
-		icon : <IcMProfile width={25} height={25} />,
+		icon : <IcMProfile />,
 	},
 	{
 		name : 'organization',
@@ -23,22 +23,26 @@ const IconMapping = [
 		name : 'reminder',
 		icon : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg"
-			alt="organization"
+			alt="reminder"
 		/>,
 	},
 	{
 		name : 'notes',
 		icon : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg"
-			alt="organization"
+			alt="motes"
 		/>,
 	},
 	{
 		name : 'quick_actions',
 		icon : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
-			alt="organization"
+			alt="actions"
 		/>,
+	},
+	{
+		name : 'customer_insights',
+		icon : <IcACustomerCentre />,
 	},
 ];
 export default IconMapping;
