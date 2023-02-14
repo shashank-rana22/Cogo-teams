@@ -1147,6 +1147,12 @@ const saas = {
 			module      : 'Quotation',
 			feature     : 'Quotation',
 		},
+		{
+			api         : 'put_saas_quote_update_duties',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
 	],
 	app_saas_cogopoint: [
 		{
@@ -1541,7 +1547,7 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_organization_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
 		},
@@ -1657,13 +1663,13 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_product_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'product',
 			feature     : 'product',
 		},
 		{
-			api         : 'get_saas_product_error_export',
-			access_type : 'private',
+			api         : 'get_saas_error_export',
+			access_type : 'public',
 			module      : 'product',
 			feature     : 'product',
 		},
