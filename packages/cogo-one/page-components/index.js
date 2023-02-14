@@ -7,11 +7,10 @@ import Conversations from './Conversations';
 import Customers from './Customers';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
-// import Tabs from './Tabs';
 
 function CogoOne() {
 	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState('active');
+	const [toggleStatus, setToggleStatus] = useState(false);
 	console.log('toggleStatus', toggleStatus);
 	const [activeCard, setActiveCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');

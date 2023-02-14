@@ -4,8 +4,8 @@
 }
 
 .title {
-	font-weight: 500;
-	font-size: 14px;
+	font-weight: 600;
+    font-size: 14px;
 	color: #4F4F4F;
 	margin-bottom: 18px;
 }
@@ -14,7 +14,6 @@
 	display: flex;
 	width: 100%;
 	margin-bottom: 10px;
-	/* align-items: center; */
 }
 
 .organization_details {
@@ -39,7 +38,7 @@
 	font-weight: 500;
 	font-size: 12px;
 	color: #221F20;
-	margin-top: 34px;
+	margin-top: 15px;
 }
 
 .points {
@@ -65,25 +64,27 @@
 	font-size: 14px;
 }
 
-.promotion {
-	display: flex;
+.promotion_cards {
+	margin-top: 5px;
 	width: 100%;
-	position: relative;
-	background: linear-gradient(
-		90deg,
-		rgba(204, 197, 249, 0.8) -4.34%,
-		rgba(195, 216, 254, 0.6) 105.7%
-	);
-	box-shadow: 0px 1px 6px rgba(179, 213, 251, 0.45);
-	border-radius: 4px;
-	padding-bottom: 14px;
+	overflow-y: auto;
+	box-shadow: -10px 0px 10px rgba(100, 100, 111, 0.2) inset;
+} 
+
+.promotion_cards::-webkit-scrollbar {
+	display: none;
 }
 
-.promo_image {
-	background-image: url('https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 140px;
-	width: 214px;
-	display: flex;
+.cogo_icon{
+	margin: 6px 10px 0px 0px;
+	/* animation: slide 1s infinite ease-in-out; */
+}
+
+@keyframes slide {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
 }

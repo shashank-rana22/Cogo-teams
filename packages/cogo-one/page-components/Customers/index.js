@@ -112,7 +112,7 @@ function Customers({
 		}
 	}, []);
 
-	const loading = true;
+	const loading = false;
 	return (
 		<div className={styles.container}>
 
@@ -124,7 +124,7 @@ function Customers({
 					name="a1"
 					size="md"
 					showOnOff
-					onChange={(val) => setToggleStatus(val)}
+					onChange={() => setToggleStatus((p) => !p)}
 					value={toggleStatus}
 				/>
 			</div>
@@ -177,54 +177,54 @@ function Customers({
 				</div>
 			</div>
 
-			{/* {loading ? <LoadingState /> : ( */}
-			<div className={styles.list_container}>
+			{loading ? <LoadingState /> : (
+				<div className={styles.list_container}>
 
-				{(dummyData || []).map((item) => {
-					const checkActiveCard = activeCard?.id === item?.id;
-					return (
-						<div
-							role="presentation"
-							className={cl`
+					{(dummyData || []).map((item) => {
+						const checkActiveCard = activeCard?.id === item?.id;
+						return (
+							<div
+								role="presentation"
+								className={cl`
 			                    ${styles.card_Container} 
 			                    ${checkActiveCard ? styles.active_card : ''} 
 		                     	`}
-							onClick={() => setActiveCard(item)}
-						>
-							<div className={styles.card}>
+								onClick={() => setActiveCard(item)}
+							>
+								<div className={styles.card}>
 
-								<div className={styles.user_information}>
-									<div className={styles.avatar_Container}>
-										<UserAvatar type={item.source} imageSource={item.image} />
-										<div className={styles.user_details}>
-											<div className={styles.user_name}>
-												{item.name}
-											</div>
-											<div className={styles.organisation}>
-												Organisation
-												{' '}
-												{item.organisation}
+									<div className={styles.user_information}>
+										<div className={styles.avatar_Container}>
+											<UserAvatar type={item.source} imageSource={item.image} />
+											<div className={styles.user_details}>
+												<div className={styles.user_name}>
+													{item.name}
+												</div>
+												<div className={styles.organisation}>
+													Organisation
+													{' '}
+													{item.organisation}
+												</div>
 											</div>
 										</div>
-									</div>
 
-									<div className={styles.user_activity}>
-										<div className={styles.pills_card}>Small</div>
-										<div className={styles.activity_duration}>
-											{item.status}
+										<div className={styles.user_activity}>
+											<div className={styles.pills_card}>Small</div>
+											<div className={styles.activity_duration}>
+												{item.status}
+											</div>
 										</div>
-									</div>
 
-								</div>
-								<div className={styles.content}>
-									{item.content}
+									</div>
+									<div className={styles.content}>
+										{item.content}
+									</div>
 								</div>
 							</div>
-						</div>
-					);
-				})}
-			</div>
-			{/* )} */}
+						);
+					})}
+				</div>
+			)}
 
 		</div>
 	);
