@@ -1,11 +1,8 @@
-// import OTPLayout from '@cogo/business-modules/components/OTPLayout';
-// import Layout from '@cogo/business-modules/form/Layout';
 import { Button } from '@cogoport/components';
 import { MobileNumberController } from '@cogoport/forms';
 import OTPLayout from '@cogoport/forms/page-components/Business/OTPLayout';
 import React from 'react';
 
-// import { Container, Title, Form, Button, OtpContainer } from './styles';
 import styles from './styles.module.css';
 import useMobileNoVerification from './useMobileNoVerification';
 
@@ -14,30 +11,22 @@ const OTP_LENGTH = 4;
 function MobileVerification({ selectedUser = {}, type = '' }) {
 	const {
 		controls = [],
-		// formProps = {},
-		// errors = {},
 		onSubmit = () => {},
-		// onErrors = () => {},
 		showEnterOtpComponent = false,
 		otpNumber = '',
 		setOtpNumber = () => {},
-		// verifyMobileNumberAPI = {},
 		sendOtpNumber = () => {},
 		verifyOtpNumber = () => {},
 		actualControl,
-		// errors = {},
 		handleSubmit = () => {},
 		loading = false,
 	} = useMobileNoVerification({ selectedUser, type });
-
-	// const { fields = {}, handleSubmit = () => {} } = formProps;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Mobile Number Verification</div>
 
 			<div className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-				{/* <Layout controls={controls} fields={fields} errors={errors} /> */}
 
 				<MobileNumberController
 					{...controls[0]}
@@ -52,6 +41,7 @@ function MobileVerification({ selectedUser = {}, type = '' }) {
 							setOtpValue={setOtpNumber}
 							loading={false}
 							sendOtp={(obj) => sendOtpNumber({ ...obj })}
+							placeholder=" "
 						/>
 					</div>
 				)}

@@ -11,6 +11,8 @@ function OTPLayout({
 	loading = false,
 	sendOtp = () => {},
 	resendOtpTimerDuration = 30,
+	placeholder = ' ',
+
 }) {
 	const useImperativeHandleRef = useRef({});
 
@@ -29,6 +31,8 @@ function OTPLayout({
 				inputSize="lg"
 				onChange={(value) => handleChange(value)}
 				ref={useImperativeHandleRef}
+				placeholder={placeholder}
+
 			/>
 
 			<div className={styles.resend_otp_container}>

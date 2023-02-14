@@ -5,7 +5,7 @@ import useOtpInput from './hooks/useOtpInput';
 import styles from './styles.module.css';
 
 function OtpInput(props, ref) {
-	const { otpLength = 0, inputSize = 'md', onChange = () => {} } = props;
+	const { otpLength = 0, inputSize = 'md', onChange = () => {}, placeholder } = props;
 
 	const {
 		values = {},
@@ -17,6 +17,8 @@ function OtpInput(props, ref) {
 		onChange,
 		ref,
 	});
+
+	const appliedPlaceholder = placeholder || ' ';
 
 	return (
 		<div className={styles.container} ref={otpContainerRef}>
@@ -30,6 +32,7 @@ function OtpInput(props, ref) {
 						size={inputSize}
 						value={values[key]}
 						onChange={handleChange(index)}
+						placeholder={appliedPlaceholder}
 						ref={(element) => {
 							otpInputElementsRef.current[index] = element;
 						}}

@@ -42,20 +42,6 @@ function MyProfile() {
 
 	const { name = '' } = detailsData || {};
 
-	if (loading) {
-		return (
-			// <SpinnerContainer>
-			// 	<Spinner
-			// 		size={50}
-			// 		borderWidth={4}
-			// 		outerBorderColor="#dce1ff"
-			// 		spinBorderColor="#393f70"
-			// 	/>
-			// </SpinnerContainer>
-			<>prachi</>
-		);
-	}
-
 	return (
 		<>
 			<div className={styles.greeting_container}>
@@ -103,7 +89,7 @@ function MyProfile() {
 				<div>
 					<div className={styles.organization_container}>
 						<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
-						<Organization personDetails={detailsData} />
+						<Organization personDetails={detailsData} detailsLoading={loading} />
 					</div>
 				</div>
 			</div>

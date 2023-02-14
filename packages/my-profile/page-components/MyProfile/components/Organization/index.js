@@ -6,14 +6,14 @@ import Reporting from './Reporting';
 import styles from './styles.module.css';
 import useOrganizationRMMapping from './useOrganizationRMMapping';
 
-function Organization({ personDetails = {} }) {
+function Organization({ personDetails = {}, detailsLoading }) {
 	const {
 		loading = false,
 		handleReset = () => {},
 		hierarchy = {},
 		params = {},
 		setParams = () => {},
-	} = useOrganizationRMMapping({ personDetails });
+	} = useOrganizationRMMapping({ personDetails, detailsLoading });
 
 	if (loading) {
 		return (

@@ -1,13 +1,7 @@
-// import showErrorsInToast from '@cogo/utils/showErrorsInToastV2';
 import { useRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-const useOrganizationRMMapping = ({ personDetails = {} }) => {
-	// const {
-	// 	general: { scope = '' },
-	// } = useSelector((state) => state);
-
+const useOrganizationRMMapping = ({ personDetails = {}, detailsLoading }) => {
 	const [hierarchy, setHierarchy] = useState({
 		reporting_managers : [],
 		reportees          : [],
@@ -18,12 +12,6 @@ const useOrganizationRMMapping = ({ personDetails = {} }) => {
 		partner_id : personDetails.partner_id,
 		user_id    : personDetails.user_id,
 	});
-
-	// const getOrganizationHeirarchyAPI = useRequest(
-	// 	'get',
-	// 	false,
-	// 	scope,
-	// )('/get_partner_user_rm_mapping');
 
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'get_partner_user_rm_mapping',
@@ -46,24 +34,20 @@ const useOrganizationRMMapping = ({ personDetails = {} }) => {
 	};
 
 	useEffect(() => {
+		if (!detailsLoading) {
+			setParams({
+				partner_id : personDetails.partner_id,
+				user_id    : personDetails.user_id,
+			});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [detailsLoading]);
+
+	useEffect(() => {
 		fetchData();
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
-
-	// useEffect(async () => {
-	// 	try {
-	// 		const res = await getOrganizationHeirarchyAPI.trigger({ params });
-
-	// 		setHierarchy({
-	// 			reporting_managers : res?.data?.reporting_managers,
-	// 			reportees          : res?.data?.reportees,
-	// 			user               : res?.data?.user,
-	// 		});
-	// 	} catch (err) {
-	// 		// showErrorsInToast(err?.data);
-	// 		console.log('err', err);
-	// 	}
-	// }, [params]);
 
 	const handleReset = () => {
 		setParams({
