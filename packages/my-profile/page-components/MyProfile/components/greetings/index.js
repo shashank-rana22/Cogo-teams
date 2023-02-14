@@ -1,6 +1,7 @@
 import { Button, Modal, Avatar } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 // import GrantOutlookAccess from './GrantOutlookAccess';
 import PersonDetails from './PersonalDetails';
@@ -84,7 +85,7 @@ function Greetings({
 
 			<div>
 				<div className={styles.greeting_text}>
-					{name}
+					{startCase(name)}
 					,
 					{' '}
 					<div className={styles.location_name}>{locationName}</div>
@@ -101,7 +102,7 @@ function Greetings({
 							onOuterClick={onOuterClick}
 							size="md"
 						>
-							<Modal.Header title="Edit Name" />
+							<Modal.Header title="Edit Details" />
 
 							<Modal.Body>
 								<EditPersonalDetails
@@ -114,9 +115,9 @@ function Greetings({
 								<>
 									<Button
 										disabled={apiLoading}
-										themeType="secondary"
+										themeType="tertiary"
+										className="secondary sm"
 										onClick={onClickCancel}
-										style={{ marginRight: 10 }}
 									>
 										CANCEL
 									</Button>
@@ -155,13 +156,13 @@ function Greetings({
 								<div className={styles.upload_picture_container}>
 									<div className={styles.upload_picture_text}>Upload picture</div>
 
-									<div className={styles.upload_controller}>
-										<UploadController
-											control={control}
-											errors={errors}
-											name="profile_picture_url"
-										/>
-									</div>
+									<UploadController
+										control={control}
+										errors={errors}
+										name="profile_picture_url"
+										accept=".png, .jpeg"
+
+									/>
 								</div>
 
 							</div>
@@ -174,7 +175,7 @@ function Greetings({
 								/>
 							) : (
 								<div className={styles.avatar_container}>
-									<Avatar personName={name} size="100px" />
+									<Avatar personName={name} size="140px" />
 								</div>
 							)}
 						</div>
@@ -183,29 +184,32 @@ function Greetings({
 
 				<Modal.Footer>
 					<div className={styles.footer}>
-						<div className={styles.file_upload_container}>
-							<div className={styles.delete_icon}>
-								<IcMDelete
-									height={18}
-									width={20}
-									className="icon"
-									onClick={onDeleteButton}
-								/>
-							</div>
+						{(picture || watchProfilePicture)
+						&& (
+							<div className={styles.file_upload_container}>
+								<div className={styles.delete_icon}>
+									<IcMDelete
+										height={18}
+										width={20}
+										className="icon"
+										onClick={onDeleteButton}
+									/>
+								</div>
 
-							<div
-								role="presentation"
-								onClick={onDeleteButton}
-								className={styles.remove_picture_text}
-							>
-								Remove Picture
+								<div
+									role="presentation"
+									onClick={onDeleteButton}
+									className={styles.remove_picture_text}
+								>
+									Remove Picture
+								</div>
 							</div>
-						</div>
+						)}
 						<div className={styles.button_container}>
 							<Button
 								className="secondary"
 								onClick={onOuterClick}
-								style={{ background: '#FFFFFF', color: '#393F70' }}
+								themeType="tertiary"
 							>
 								CANCEL
 							</Button>

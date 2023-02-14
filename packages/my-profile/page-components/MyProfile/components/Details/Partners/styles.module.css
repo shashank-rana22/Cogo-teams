@@ -1,50 +1,47 @@
-.header_text{
-	font-weight: 600;
+.header_text {
 	font-size: 16px;
-	color: #6FA5AB;
-
-}
-
-.card_container{
-	padding: 12px;
-	
-}
-
-.label_text{
-	font-weight: 400;
-	font-size: 14px;
-	color: #828282;
-	padding: 4px 0 4px 4px;
-}
-
-.value_text{
 	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.card_container {
+	padding: 12px;
+}
+
+.label_text {
+	padding: 4px 0;
 	font-size: 14px;
-	color: #221F20;
+	font-weight: 400;
+	color: #828282;
 }
 
-.label_value_container{
+.value_text {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
 }
 
-.elements{
-	display:flex;
+.label_value_container {
+}
+
+.elements {
+	display: flex;
 	justify-content: space-between;
 }
 
-.header_container{
+.header_container {
 	display: flex;
-
 }
 
-.pills_container{
-	margin-left: 14px;
-    font-size: 10px;
-	background: #DDEBC0;
-    border-radius: 4px;
+.pills_container {
 	display: flex;
 	align-items: center;
-	padding: 0px 6px;
-	color: #221F20;
-	height:20px;
-	margin-top:3px;
+	height: 20px;
+	padding: 0 6px;
+	margin-top: 3px;
+	margin-left: 14px;
+	font-size: 10px;
+	color: #221f20;
+	background: #ddebc0;
+	border-radius: 4px;
 }

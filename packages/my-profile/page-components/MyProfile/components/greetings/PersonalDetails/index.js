@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import MobileNoVerificationModal from '../../MobileVerificationModal';
+import useMobileNoVerification from '../../MobileVerificationModal/MobileVerification/useMobileNoVerification';
 
 import styles from './styles.module.css';
 
@@ -23,8 +24,22 @@ function PersonDetails({
 		preferred_languages,
 	} = detailsData || {};
 
+	const {
+		controls = [],
+		onSubmit = () => {},
+		showEnterOtpComponent = false,
+		otpNumber = '',
+		setOtpNumber = () => {},
+		sendOtpNumber = () => {},
+		verifyOtpNumber = () => {},
+		actualControl,
+		handleSubmit = () => {},
+		loading = false,
+	} = useMobileNoVerification({ selectedUser: detailsData, type: showMobileVerificationModal });
+
 	const onClickVerifyMobileNoButton = () => {
 		setShowMobileVerificationModal(true);
+		onSubmit();
 	};
 
 	return (
@@ -51,7 +66,9 @@ function PersonDetails({
 							<IcMCall fill="#000000" style={{ marginTop: '4px' }} />
 						</div>
 						<div className={styles.value_text}>
-							{mobile_country_code + mobile_number}
+							{mobile_country_code}
+							-
+							{mobile_number}
 						</div>
 
 						{mobile_verified ? <IcCFtick width={20} height={20} /> : null}
@@ -82,6 +99,16 @@ function PersonDetails({
 					selectedUser={detailsData}
 					showMobileVerificationModal={showMobileVerificationModal}
 					setShowMobileVerificationModal={setShowMobileVerificationModal}
+					controls={controls}
+					onSubmit={onSubmit}
+					showEnterOtpComponent={showEnterOtpComponent}
+					otpNumber={otpNumber}
+					setOtpNumber={setOtpNumber}
+					sendOtpNumber={sendOtpNumber}
+					verifyOtpNumber={verifyOtpNumber}
+					actualControl={actualControl}
+					handleSubmit={handleSubmit}
+					loading={loading}
 				/>
 			</div>
 		</>

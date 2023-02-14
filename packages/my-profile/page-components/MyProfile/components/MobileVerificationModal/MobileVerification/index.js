@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { MobileNumberController } from '@cogoport/forms';
 import OTPLayout from '@cogoport/forms/page-components/Business/OTPLayout';
 import React from 'react';
@@ -14,15 +15,24 @@ function MobileVerification({
 	handleSubmit,
 	onSubmit,
 	showEnterOtpComponent,
+	loading,
+
 }) {
+	if (loading) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-
 				<MobileNumberController
 					{...controls[0]}
 					control={actualControl}
+					disabled
 					name="mobileNumber"
 				/>
 

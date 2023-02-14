@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 
 import ChangePassword from './ChangePassword';
 import useChangePassword from './ChangePassword/useChangePassword';
@@ -50,7 +51,7 @@ function MyProfile() {
 				<div className={styles.main_heading}>
 					<span className={styles.span}>Welcome!</span>
 					{' '}
-					{name}
+					{startCase(name)}
 				</div>
 
 				<div className={styles.change_password_container}>
@@ -108,8 +109,7 @@ function MyProfile() {
 					<Button
 						onClick={() => setChangepasswordModal(false)}
 						disabled={apiLoading}
-						themeType="secondary"
-						style={{ marginRight: '10px' }}
+						themeType="tertiary"
 					>
 						CANCEL
 					</Button>

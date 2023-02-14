@@ -1,26 +1,23 @@
-.card_container{
+.card_container {
 	display: flex;
+	flex-wrap: wrap;
 	margin: auto;
 	margin: 12px 0;
-
-	flex-wrap: wrap;
-
 }
 
-.card_details{
+.card_details {
+	flex: 1;
 	padding: 8px;
 	margin: 6px;
+	background-color: #fff;
 	border-radius: 12px;
-	background-color: #ffffff;
-	flex: 1;
 
 	@media (max-width: 768px) {
 		width: 100%;
 	}
-
 }
 
-.detail_container{
+.detail_container {
 	display: flex;
-	flex-direction:row
+	flex-direction: row;
 }

@@ -2,35 +2,29 @@ import { Modal, Button } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 
 import MobileVerification from './MobileVerification';
-import useMobileNoVerification from './MobileVerification/useMobileNoVerification';
 
 function MobileNoVerificationModal({
 	selectedUser = {},
-	setSelectedUser = () => {},
 	showMobileVerificationModal = false,
 	setShowMobileVerificationModal = () => {},
+	controls = [],
+	onSubmit = () => {},
+	showEnterOtpComponent = false,
+	otpNumber = '',
+	setOtpNumber = () => {},
+	sendOtpNumber = () => {},
+	verifyOtpNumber = () => {},
+	actualControl,
+	handleSubmit = () => {},
+	loading = false,
 }) {
 	const {
 		general: { isMobile = false },
 	} = useSelector((state) => state);
 
 	const handleCloseModal = () => {
-		setSelectedUser(null);
 		setShowMobileVerificationModal(false);
 	};
-
-	const {
-		controls = [],
-		onSubmit = () => {},
-		showEnterOtpComponent = false,
-		otpNumber = '',
-		setOtpNumber = () => {},
-		sendOtpNumber = () => {},
-		verifyOtpNumber = () => {},
-		actualControl,
-		handleSubmit = () => {},
-		loading = false,
-	} = useMobileNoVerification({ selectedUser, type: showMobileVerificationModal });
 
 	return (
 		<Modal
@@ -42,6 +36,7 @@ function MobileNoVerificationModal({
 			position={isMobile ? 'bottom' : ''}
 		>
 			<Modal.Header title="Mobile Number Verification" />
+
 			<Modal.Body>
 				{' '}
 				<MobileVerification
@@ -52,26 +47,17 @@ function MobileNoVerificationModal({
 					handleSubmit={handleSubmit}
 					onSubmit={onSubmit}
 					showEnterOtpComponent={showEnterOtpComponent}
+					selectedUser={selectedUser}
+					loading={loading}
 				/>
 
 			</Modal.Body>
 			<Modal.Footer>
-				{!showEnterOtpComponent && (
-					<Button
-						type="submit"
-						size="lg"
-						onClick={handleSubmit(onSubmit)}
-						disabled={loading}
-					>
-						Get OTP
-					</Button>
-				)}
-
 				{showEnterOtpComponent && (
-					// eslint-disable-next-line jsx-a11y/no-static-element-interactions
+				// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 					<Button
 						type="submit"
-						size="lg"
+						className="primary sm"
 						onClick={verifyOtpNumber}
 						disabled={loading || otpNumber?.length !== 4}
 					>

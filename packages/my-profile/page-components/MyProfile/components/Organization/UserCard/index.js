@@ -64,61 +64,63 @@ function UserCard({
 	);
 
 	return (
-		<Popover
-			placement="right"
-			content={renderUserDetails()}
-			trigger="mouseenter"
-			theme="light"
-			interactive
-			animation="shift-away"
-		>
-
-			<div
-				className={styles.card_container}
-				id={type}
-				role="presentation"
-				onClick={handleClickOnUserCard}
-				// eslint-disable-next-line react/no-unknown-property
-				isBlocked={user_data?.block_access ? true : null}
+		<div className={styles.main_container}>
+			<Popover
+				placement="right"
+				content={renderUserDetails()}
+				trigger="mouseenter"
+				theme="light"
+				interactive
+				animation="shift-away"
 			>
+
 				<div
-					className={styles.container}
-					// eslint-disable-next-line react/no-unknown-property
+					className={styles.card_container}
+					id={type}
+					role="presentation"
+					onClick={handleClickOnUserCard}
+				// eslint-disable-next-line react/no-unknown-property
 					isBlocked={user_data?.block_access ? true : null}
-					// eslint-disable-next-line react/no-unknown-property
-					hasImage={user_data.picture}
 				>
-
 					<div
-						className={styles.avatar}
-						style={{
-							background: `${user_data?.block_access ? '#ffe3e3' : getColor()}`,
-						}}
-					>
-						<div className={styles.avatar_text}>{getInitials(user_data?.name)}</div>
-					</div>
-
-				</div>
-
-				{type === 'active' && (
-					<div className={styles.icon_container}>
-						<IcMTick size={0.8} />
-					</div>
-				)}
-
-				<div className={styles.line_container}>
-					<div className={styles.name_text}>{user_data?.name || '-'}</div>
-
-					<div
-						className={styles.division_line}
-						// eslint-disable-next-line react/no-unknown-property
+						className={styles.container}
+					// eslint-disable-next-line react/no-unknown-property
 						isBlocked={user_data?.block_access ? true : null}
-					/>
+					// eslint-disable-next-line react/no-unknown-property
+						hasImage={user_data.picture}
+					>
 
-					<div className={styles.designation}>{user_data?.role?.name || '-'}</div>
+						<div
+							className={styles.avatar}
+							style={{
+								background: `${user_data?.block_access ? '#ffe3e3' : getColor()}`,
+							}}
+						>
+							<div className={styles.avatar_text}>{getInitials(user_data?.name)}</div>
+						</div>
+
+					</div>
+
+					{type === 'active' && (
+						<div className={styles.icon_container}>
+							<IcMTick size={0.8} />
+						</div>
+					)}
+
+					<div className={styles.line_container}>
+						<div className={styles.name_text}>{user_data?.name || '-'}</div>
+
+						<div
+							className={styles.division_line}
+						// eslint-disable-next-line react/no-unknown-property
+							isBlocked={user_data?.block_access ? true : null}
+						/>
+
+						<div className={styles.designation}>{user_data?.role?.name || '-'}</div>
+					</div>
 				</div>
-			</div>
-		</Popover>
+			</Popover>
+		</div>
 	);
 }
 

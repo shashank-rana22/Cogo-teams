@@ -1,22 +1,28 @@
 .container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .resend_otp_container {
-	margin-top: 8px;
-
-	width: 100%;
-
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .timer_text {
-	font-size: 18px;
-	font-weight: bold;
-	color: #81c0af;
+  font-size: 18px;
+  font-weight: bold;
+  color: #81c0af;
+
+  .red_text {
+    color: #ee3425;
+  }
+
+  .yellow_text {
+    color: #fce74c;
+  }
 }

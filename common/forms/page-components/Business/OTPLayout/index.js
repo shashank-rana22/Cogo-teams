@@ -23,6 +23,19 @@ function OTPLayout({
 	const handleChange = (value) => {
 		setOtpValue(value.length === otpLength ? `${value}` : '');
 	};
+	let abc = 'green_text';
+	const timerClass = () => {
+		if (timer.seconds <= 10) {
+			abc = 'red_text';
+			return abc;
+		}
+		if (timer.seconds <= 20) {
+			abc = 'yellow_text';
+			return abc;
+		}
+		return abc;
+	};
+	const color_text = timerClass();
 
 	return (
 		<div className={styles.container}>
@@ -36,25 +49,34 @@ function OTPLayout({
 			/>
 
 			<div className={styles.resend_otp_container}>
-				<div className={styles.timer_text}>
-					{timer.minutes}
-					{' '}
-					:
-					{timer.seconds}
-				</div>
 
-				<Button
-					type="button"
-					className="primary md text"
-					onClick={() => {
-						sendOtp({ timer });
+				{timer.seconds >= 1
+					? (
+						<div className={styles.timer_text}>
+							<div className={`${styles[color_text]}`}>
+								{timer.minutes}
+								:
+								{timer.seconds}
+							</div>
 
-						useImperativeHandleRef.current?.resetOtp();
-					}}
-					disabled={timer.isTimeRemaining || loading}
-				>
-					Resend OTP?
-				</Button>
+						</div>
+					)
+
+					: (
+						<Button
+							type="button"
+							className="primary md text"
+							onClick={() => {
+								sendOtp({ timer });
+
+								useImperativeHandleRef.current?.resetOtp();
+							}}
+							disabled={timer.isTimeRemaining || loading}
+						>
+							Resend OTP?
+						</Button>
+					)}
+
 			</div>
 		</div>
 	);

@@ -5,7 +5,6 @@ import getControls from '../../controls';
 import styles from './styles.module.css';
 
 const MAPPING = {
-
 	name                : InputController,
 	email               : InputController,
 	mobileNumber        : MobileNumberController,
@@ -21,7 +20,7 @@ function EditPersonalDetails({
 	const controls = getControls(detailsData);
 
 	return (
-		<div style={{ padding: '12px' }}>
+		<div>
 
 			{
 				Object.keys(MAPPING).map((key) => {

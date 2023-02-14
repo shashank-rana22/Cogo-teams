@@ -1,15 +1,14 @@
 .row_container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
 }
 
 .country_code {
-    width: 33%;
+	width: 33%;
 }
 
 .mobile_number {
-    width: 66%;
+	width: 66%;
 }
