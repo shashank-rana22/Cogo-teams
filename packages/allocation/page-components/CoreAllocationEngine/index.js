@@ -51,7 +51,15 @@ function CoreAllocationEngine() {
 
 						if (!Component) return null;
 
-						return <TabPanel name={name} title={title}><Component /></TabPanel>;
+						return (
+							<TabPanel
+								key={name}
+								name={name}
+								title={title}
+							>
+								<Component />
+							</TabPanel>
+						);
 					})}
 				</Tabs>
 			</div>
