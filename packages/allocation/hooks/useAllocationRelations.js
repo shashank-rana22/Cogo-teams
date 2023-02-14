@@ -3,8 +3,6 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useAllocationRelations = () => {
-	// const [page, setPage] = useState(1);
-
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [confirmModalState, setConfirmModalState] = useState({

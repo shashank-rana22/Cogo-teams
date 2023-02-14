@@ -34,7 +34,6 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 					onClick={handleSubmit(onCreate)}
 				>
 					CREATE RELATION
-
 				</Button>
 			</Modal.Footer>
 		</Modal>

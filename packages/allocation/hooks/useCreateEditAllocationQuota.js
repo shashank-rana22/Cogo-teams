@@ -31,7 +31,7 @@ const getPrefillValues = (quota_attributes) => {
 	return newQuotaAttributes;
 };
 
-const useCreateAllocationQuota = (props) => {
+const useCreateEditAllocationQuota = (props) => {
 	const {
 		onCloseModal,
 		refetch,
@@ -95,6 +95,7 @@ const useCreateAllocationQuota = (props) => {
 
 	useEffect(() => {
 		setRoleTypeId('');
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [radioValue]);
 
 	return {
@@ -104,4 +105,4 @@ const useCreateAllocationQuota = (props) => {
 	};
 };
 
-export default useCreateAllocationQuota;
+export default useCreateEditAllocationQuota;

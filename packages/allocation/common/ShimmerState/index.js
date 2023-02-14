@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function LoadingState() {
+function ShimmerState() {
 	return (
 		[1, 2, 3, 4, 5, 6, 7].map((loadingList) => (
 			<div key={loadingList} className={styles.list_loading_state}>
@@ -18,4 +18,4 @@ function LoadingState() {
 	);
 }
 
-export default LoadingState;
+export default ShimmerState;

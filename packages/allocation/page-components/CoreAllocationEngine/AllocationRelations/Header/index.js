@@ -71,6 +71,7 @@ function Header({
 					size="md"
 					themeType="accent"
 					style={{ marginLeft: '8px' }}
+					disabled={loading}
 					onClick={() => setShowCreateRelationModal(true)}
 				>
 					CREATE RELATION

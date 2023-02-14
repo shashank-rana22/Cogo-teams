@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import LoadingState from '../../../../common/LoadingState';
+import ShimmerState from '../../../../common/ShimmerState';
 
 import BulkUpdateMode from './BulkUpdateMode';
 import ListItem from './ListItem';
@@ -31,7 +31,7 @@ function List({
 	const [selectAll, setSelectAll] = useState('');
 
 	if (loading) {
-		return <LoadingState />;
+		return <ShimmerState />;
 	}
 
 	if (isEmpty(list)) {
