@@ -1,19 +1,24 @@
-import { Avatar, Pill } from '@cogoport/components';
+import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
+
+import useGetUser from '../../../hooks/useGetUser';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 
 function AgentDetails() {
+	const { listData, loading } = useGetUser();
+	// const loading = true;
+	const { mobile_country_code, mobile_number, name, picture, mobile_verified, whatsapp_verified } = listData || {};
 	const VERIFICATION_STATUS = [
 		{
-			label      : 'Verified',
+			label      : mobile_verified ? 'Verified' : 'Not Verified',
 			color      : 'green',
 			size       : 'sm',
 			prefixIcon : <IcMCall />,
 		},
 		{
-			label      : 'Verified',
+			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
 			color      : 'green',
 			size       : 'sm',
 			prefixIcon : <IcCWhatsapp />,
@@ -30,8 +35,19 @@ function AgentDetails() {
 					size="60px"
 				/>
 				<div className={styles.details}>
-					<div className={styles.name}>John Wick</div>
-					<div className={styles.name}>Product analyst</div>
+					{loading ? (
+						<>
+							<Placeholder height="13px" width="120px" margin="0px 0px 10px 0px" />
+							<Placeholder height="13px" width="120px" margin="0px 0px 0px 0px" />
+						</>
+					) : (
+						<>
+
+							<div className={styles.name}>{name || 'NA'}</div>
+							<div className={styles.name}>{picture || '-'}</div>
+						</>
+
+					)}
 				</div>
 			</div>
 			<div className={styles.verification_pills}>
@@ -50,7 +66,15 @@ function AgentDetails() {
 			</div>
 			<div className={styles.number_div}>
 				<IcMCall className={styles.call_icon} />
-				<div className={styles.number}>+91 9348630630</div>
+				{loading ? (
+					<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
+				) : (
+					<div className={styles.number}>
+						{mobile_country_code}
+						{' '}
+						{mobile_number}
+					</div>
+				)}
 			</div>
 			<div className={styles.conversation_title}>Other Channels (03)</div>
 			<ConversationContainer />
