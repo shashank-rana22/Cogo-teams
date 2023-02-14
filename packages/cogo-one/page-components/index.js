@@ -22,7 +22,7 @@ function CogoOne() {
 		userId  : profile?.user?.id,
 	}));
 
-	const props = useListChats({
+	const { listData = {} } = useListChats({
 		firestore,
 		userId,
 		user_role_ids: partner?.user_role_ids,
@@ -30,7 +30,7 @@ function CogoOne() {
 
 	const [activeTab, setActiveTab] = useState('message');
 	const [toggleStatus, setToggleStatus] = useState(false);
-	console.log('toggleStatus', toggleStatus);
+
 	const [activeCard, setActiveCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
@@ -41,7 +41,6 @@ function CogoOne() {
 
 	return (
 		<div className={styles.layout_container}>
-			{/* <Tabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
 			<Customers
 				setActiveCard={setActiveCard}
 				activeCard={activeCard}
@@ -51,7 +50,6 @@ function CogoOne() {
 				filterVisible={filterVisible}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-					// fields={fields}
 				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
