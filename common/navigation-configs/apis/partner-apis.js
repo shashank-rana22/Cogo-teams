@@ -36,7 +36,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -535,7 +535,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_allocation_requests',
+			api          : 'requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
@@ -984,7 +984,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1611,7 +1611,7 @@ const partner = {
 			service_name : 'voice_call',
 		},
 		{
-			api          : 'create_allocation_relation',
+			api          : 'relation',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1659,7 +1659,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -4826,7 +4826,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_allocation_requests',
+			api          : 'requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
@@ -6679,6 +6679,12 @@ const partner = {
 		},
 		{
 			api         : 'get_purchase_payable_bill_generate_invoice',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
+			api         : 'get_purchase_bills_bill_state',
 			access_type : 'private',
 			module      : 'invoices',
 			feature     : 'invoices',
