@@ -2,7 +2,7 @@
 	margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
-  height: 320px;
+  height: 200px;
 }
 
 .form_group {
@@ -12,6 +12,7 @@
 
 .form_label {
   text-align: start;
+  margin-bottom: 4px;
 }
 
 .error_message {

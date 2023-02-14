@@ -1,4 +1,9 @@
-import { InputController, MultiselectController, SelectController, UploadController } from '@cogoport/forms';
+import {
+	InputController,
+	MultiselectController,
+	SelectController,
+	UploadController,
+} from '@cogoport/forms';
 
 export const getElementController = (type = 'text') => {
 	switch (type) {
