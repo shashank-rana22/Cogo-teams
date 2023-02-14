@@ -1,5 +1,4 @@
 import { Modal } from '@cogoport/components';
-import { useState } from 'react';
 
 import useListAllocationQuotas from '../../../hooks/useListAllocationQuotas';
 
@@ -9,9 +8,6 @@ import QuotaModal from './QuotaModal';
 import styles from './styles.module.css';
 
 function AllocationQuotas() {
-	// Todo should go inside hook
-	const [quotaItem, setQuotaItem] = useState(null);
-
 	const {
 		data,
 		loading:listLoading,
@@ -22,6 +18,8 @@ function AllocationQuotas() {
 		searchValue,
 		setSearchValue,
 		getNextPage,
+		quotaItem,
+		setQuotaItem,
 	} = useListAllocationQuotas();
 
 	const toggleRoleType = params?.filters?.quota_type;
