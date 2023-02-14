@@ -1,4 +1,4 @@
-import { Pill, Carousel } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 
 import OrgAgentDetails from './OrgAgentDetails';
 import styles from './styles.module.css';
@@ -43,9 +43,9 @@ function OrganizationDetails() {
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
 			<div className={styles.promotion}>
-				<Carousel size="sm" showDots showArrow={false}>
+				{/* <Carousel size="sm" showDots showArrow={false}>
 					<div className={styles.promo_image} />
-				</Carousel>
+				</Carousel> */}
 			</div>
 		</div>
 

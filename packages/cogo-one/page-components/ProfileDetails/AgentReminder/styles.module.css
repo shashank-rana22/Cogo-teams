@@ -32,7 +32,6 @@
 	display: flex;
 	justify-content: space-around;
 	padding-top: 26px;
-	/* flex-direction: column; */
 	width: 100%;
 }
 
@@ -53,4 +52,13 @@
 	width: 50%;
 	border-radius: 0 4px 4px 0;
 	
+}
+
+.button_container {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 21px 0 16px 0;
+	border-bottom: 1px solid #E0E0E0;;
 }
