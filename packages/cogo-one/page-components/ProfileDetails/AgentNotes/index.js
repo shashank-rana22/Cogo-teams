@@ -1,4 +1,5 @@
-import { Toggle } from '@cogoport/components';
+import { Toggle, Textarea } from '@cogoport/components';
+import { IcMTick } from '@cogoport/icons-react';
 
 import dummyNotesData from '../../../configurations/dummyNotesData';
 
@@ -9,8 +10,16 @@ function AgentNotes() {
 		<div className={styles.container}>
 			<div className={styles.title}>Notes</div>
 			<div className={styles.note_editor}>
-				<div className={styles.editor_header} />
-				<h6>dfghdfjkgnf</h6>
+				<div>
+					<div className={styles.editor_header} />
+					<Textarea name="a5" size="md" placeholder="Description" />
+				</div>
+				<div className={styles.note_footer}>
+					<div className={styles.submit_button}>
+						<IcMTick width={18} height={18} />
+						Save
+					</div>
+				</div>
 			</div>
 			<div className={styles.toggle_div}>
 				<Toggle
