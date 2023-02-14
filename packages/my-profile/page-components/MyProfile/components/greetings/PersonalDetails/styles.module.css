@@ -51,6 +51,8 @@
 	line-height: 16px;
 	color: #333333;
 	width: fit-content;
+	margin-right: 4px;
+	margin-bottom: 4px;
 }
 
 .flex{

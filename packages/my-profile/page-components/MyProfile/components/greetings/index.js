@@ -146,76 +146,82 @@ function Greetings({
 				onClose={onOuterClick}
 				onOuterClick={onOuterClick}
 			>
-				<div className={styles.modal_container}>
-					<div className={styles.change_picture_text}>
-						Change your profile picture
-					</div>
+				<Modal.Header title="Change your profile picture" />
+				<Modal.Body>
+					<div className={styles.modal_container}>
 
-					<div className={styles.picture_container}>
-						<div>
-							<div className={styles.upload_picture_container}>
-								<div className={styles.upload_picture_text}>Upload picture</div>
+						<div className={styles.picture_container}>
+							<div>
+								<div className={styles.upload_picture_container}>
+									<div className={styles.upload_picture_text}>Upload picture</div>
 
-								<div className={styles.upload_controller}>
-									<UploadController
-										control={control}
-										errors={errors}
-										name="profile_picture_url"
-									/>
+									<div className={styles.upload_controller}>
+										<UploadController
+											control={control}
+											errors={errors}
+											name="profile_picture_url"
+										/>
+									</div>
 								</div>
+
 							</div>
 
-							<div className={styles.file_upload_container}>
-								<div className={styles.delete_icon}>
-									<IcMDelete
-										height={18}
-										width={20}
-										className="icon"
-										onClick={onDeleteButton}
-									/>
+							{picture || watchProfilePicture ? (
+								<img
+									src={watchProfilePicture?.finalUrl || picture}
+									alt="loading"
+									className={styles.avatar_container}
+								/>
+							) : (
+								<div className={styles.avatar_container}>
+									<Avatar name={name} />
 								</div>
+							)}
+						</div>
+					</div>
+				</Modal.Body>
 
-								<div
-									className={styles.upload_picture_text}
-									role="presentation"
+				<Modal.Footer>
+					<div className={styles.footer}>
+						<div className={styles.file_upload_container}>
+							<div className={styles.delete_icon}>
+								<IcMDelete
+									height={18}
+									width={20}
+									className="icon"
 									onClick={onDeleteButton}
-								>
-									Remove Picture
-								</div>
+								/>
+							</div>
+
+							<div
+								role="presentation"
+								onClick={onDeleteButton}
+							>
+								Remove Picture
 							</div>
 						</div>
+						<div className={styles.button_container}>
+							<Button
+								className="secondary"
+								onClick={onOuterClick}
+								style={{ background: '#FFFFFF', color: '#393F70' }}
+							>
+								CANCEL
+							</Button>
+							<Button
+								onClick={handleSubmit(onSubmit)}
+								className="primary sm"
+								type="submit"
+								disable={loading}
+							>
+								SAVE
+							</Button>
+						</div>
 
-						{picture || watchProfilePicture ? (
-							<img
-								src={watchProfilePicture?.finalUrl || picture}
-								alt="loading"
-								className={styles.avatar_container}
-							/>
-						) : (
-							<div className={styles.avatar_container}>
-								<Avatar name={name} />
-							</div>
-						)}
 					</div>
 
-					<div className={styles.button_container}>
-						<Button
-							className="secondary"
-							onClick={onOuterClick}
-							style={{ background: '#FFFFFF', color: '#393F70' }}
-						>
-							CANCEL
-						</Button>
-						<Button
-							onClick={handleSubmit(onSubmit)}
-							className="primary sm"
-							type="submit"
-							disable={loading}
-						>
-							SAVE
-						</Button>
-					</div>
-				</div>
+				</Modal.Footer>
+
 			</Modal>
 
 		</div>

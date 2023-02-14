@@ -1,4 +1,3 @@
-// import { Flex } from '@cogoport/front/components';
 import { IcCFtick, IcMCall, IcMEmail } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -19,14 +18,10 @@ function PersonDetails({
 
 	const {
 		email,
-		// name,
 		mobile_number,
 		mobile_country_code,
-		// office_location,
 		preferred_languages,
 	} = detailsData || {};
-
-	// const { name: cityName } = office_location || {};
 
 	const onClickVerifyMobileNoButton = () => {
 		setShowMobileVerificationModal(true);

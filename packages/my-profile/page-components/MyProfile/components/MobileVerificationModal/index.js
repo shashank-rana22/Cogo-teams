@@ -1,7 +1,8 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 
 import MobileVerification from './MobileVerification';
+import useMobileNoVerification from './MobileVerification/useMobileNoVerification';
 
 function MobileNoVerificationModal({
 	selectedUser = {},
@@ -18,6 +19,19 @@ function MobileNoVerificationModal({
 		setShowMobileVerificationModal(false);
 	};
 
+	const {
+		controls = [],
+		onSubmit = () => {},
+		showEnterOtpComponent = false,
+		otpNumber = '',
+		setOtpNumber = () => {},
+		sendOtpNumber = () => {},
+		verifyOtpNumber = () => {},
+		actualControl,
+		handleSubmit = () => {},
+		loading = false,
+	} = useMobileNoVerification({ selectedUser, type: showMobileVerificationModal });
+
 	return (
 		<Modal
 			className="primary sm"
@@ -27,11 +41,45 @@ function MobileNoVerificationModal({
 			width={isMobile ? 'auto' : 400}
 			position={isMobile ? 'bottom' : ''}
 		>
-			<MobileVerification
-				setSelectedUser={setSelectedUser}
-				selectedUser={selectedUser}
-				type={showMobileVerificationModal}
-			/>
+			<Modal.Header title="Mobile Number Verification" />
+			<Modal.Body>
+				{' '}
+				<MobileVerification
+					controls={controls}
+					setOtpNumber={setOtpNumber}
+					sendOtpNumber={sendOtpNumber}
+					actualControl={actualControl}
+					handleSubmit={handleSubmit}
+					onSubmit={onSubmit}
+					showEnterOtpComponent={showEnterOtpComponent}
+				/>
+
+			</Modal.Body>
+			<Modal.Footer>
+				{!showEnterOtpComponent && (
+					<Button
+						type="submit"
+						size="lg"
+						onClick={handleSubmit(onSubmit)}
+						disabled={loading}
+					>
+						Get OTP
+					</Button>
+				)}
+
+				{showEnterOtpComponent && (
+					// eslint-disable-next-line jsx-a11y/no-static-element-interactions
+					<Button
+						type="submit"
+						size="lg"
+						onClick={verifyOtpNumber}
+						disabled={loading || otpNumber?.length !== 4}
+					>
+						Submit
+					</Button>
+				)}
+			</Modal.Footer>
+
 		</Modal>
 	);
 }

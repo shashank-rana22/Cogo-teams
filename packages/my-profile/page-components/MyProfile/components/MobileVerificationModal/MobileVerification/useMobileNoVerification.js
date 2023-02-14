@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-// import { useForm } from '@cogoport/forms';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
@@ -18,7 +17,6 @@ const controls = [
 ];
 
 const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
-	// const [errors, setErrors] = useState({});
 	const [showEnterOtpComponent, setShowEnterOtpComponent] = useState(false);
 	const [otpNumber, setOtpNumber] = useState('');
 
@@ -45,7 +43,6 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}), [controls, selectedUser]);
 
-	// const formProps = useForm(newControls);
 	const { handleSubmit, formState: { errors }, control: actualControl, getValues, setValue } = useForm();
 
 	useEffect(() => {
@@ -100,13 +97,10 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 
 	return {
 		controls: newControls,
-		// formProps,
 		onSubmit,
-		// onErrors,
 		showEnterOtpComponent,
 		otpNumber,
 		setOtpNumber,
-		// verifyMobileNumberAPI,
 		sendOtpNumber,
 		verifyOtpNumber,
 		actualControl,
