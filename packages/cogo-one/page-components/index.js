@@ -29,7 +29,8 @@ function CogoOne() {
 	});
 
 	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState('active');
+	const [toggleStatus, setToggleStatus] = useState(false);
+	console.log('toggleStatus', toggleStatus);
 	const [activeCard, setActiveCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);

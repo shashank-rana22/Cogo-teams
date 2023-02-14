@@ -1,6 +1,8 @@
-import { Pill, Carousel } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
+import { IcCCogoCoin } from '@cogoport/icons-react';
 
 import OrgAgentDetails from './OrgAgentDetails';
+import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
 function OrganizationDetails() {
@@ -38,14 +40,16 @@ function OrganizationDetails() {
 			<OrgAgentDetails />
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
 			<div className={styles.points}>
+				<div className={styles.cogo_icon}>
+					<IcCCogoCoin width={20} height={20} />
+				</div>
+
 				<div className={styles.cogopoints}>Cogopoints : </div>
 				<div className={styles.value}>9,00,000</div>
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
-			<div className={styles.promotion}>
-				<Carousel size="sm" showDots showArrow={false}>
-					<div className={styles.promo_image} />
-				</Carousel>
+			<div className={styles.promotion_cards}>
+				<PromocodeThumbnail />
 			</div>
 		</div>
 
