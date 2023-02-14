@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.title {
+	font-weight: 500;
+	font-size: 14px;
+	color: #4F4F4F;
+}
+
+.wrapper {
+	padding-top: 22px;
+}
+
+.label {
+	margin-bottom: 5px;
+}
+
+.date_wrapper {
+	padding-top: 36px;
+}
