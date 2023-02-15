@@ -23,6 +23,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'check_access_request_eligibility',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -882,6 +887,11 @@ const partner = {
 		},
 		{
 			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'check_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1756,6 +1766,11 @@ const partner = {
 		},
 		{
 			api          : 'create_organization_advanced_verification',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'check_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
