@@ -1,6 +1,7 @@
 import { dynamic } from '@cogoport/next';
 import React from 'react';
 
+import Stats from './Stats';
 import styles from './styles.module.css';
 
 const { main_container, stats_view_container, map_view_container } = styles;
