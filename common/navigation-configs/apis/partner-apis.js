@@ -4454,24 +4454,44 @@ const partner = {
 	],
 	convenience_rate: [
 		{
-			api          : 'update_convenience_rate',
+			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'partner',
 		},
 		{
-			api          : 'create_convenience_rate',
+			api          : 'list_organizations',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'organization',
 		},
 		{
-			api          : 'list_convenience_rates',
+			api          : 'create_convenience_rate_configuration',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'convenience_rate',
 		},
 		{
-			api          : 'list_conditions',
+			api          : 'update_convenience_rate_configuration',
 			access_type  : 'private',
-			service_name : 'condition',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'list_convenience_rate_configurations',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'create_convenience_rate_custom_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'update_convenience_rate_custom_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'get_convenience_rate_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
 		},
 	],
 	payment_modes_and_methods: [
@@ -6869,6 +6889,42 @@ const partner = {
 			feature     : 'payrun',
 		},
 		{
+			api         : 'post_purchase_treasury_req_fund_allocation',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_treasury_live_status',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'get_purchase_treasury_report',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'get_purchase_treasury_report_details',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'post_purchase_treasury_allocate_fund',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'put_purchase_treasury_reject_fund_req',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
 			api          : 'get_channel_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -7067,6 +7123,54 @@ const partner = {
 	reports: [
 		{
 			api         : 'get_muneem_reports_profitability',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_purchase_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_sales_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_customers_on_sage_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_supplier_sage_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_organization_mapping_id_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_platform_sales_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_platform_purchase_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sales_report_for_reconciliation',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_partial_or_unpaid_bills',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_ap_bills_auditor',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_ar_invoices_auditor',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_finance_ap_dashboard_on_finance_accepted',
 			access_type : 'private',
 		},
 	],
