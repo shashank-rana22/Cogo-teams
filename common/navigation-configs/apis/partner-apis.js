@@ -9787,6 +9787,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_organization_cogofx_approvals',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'update_organization_approval',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -9808,6 +9813,11 @@ const partner = {
 		},
 		{
 			api          : 'get_invoice_currency_pair_conversions',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_approval_stats',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
