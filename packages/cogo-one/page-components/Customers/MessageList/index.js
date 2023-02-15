@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
@@ -19,13 +20,16 @@ function MessageList({
 	setFilterVisible,
 	reset,
 }) {
+	const loading = false;
+
+	const isMsgListEmpty = isEmpty(messagesList);
 	useEffect(() => {
-		if (!isEmpty(messagesList)) {
+		if (!isMsgListEmpty) {
 			setActiveMessageCard(messagesList?.[0]);
 		}
-	}, []);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isMsgListEmpty]);
 
-	const loading = false;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -103,9 +107,25 @@ function MessageList({
 										</div>
 
 									</div>
-									<div className={styles.content}>
-										{item.last_message}
+
+									<div className={styles.content_div}>
+										<div className={styles.content}>
+											{item.last_message}
+										</div>
+
+										{item.new_message_count > 0 && (
+											<div className={styles.new_message_count}>
+												{item.new_message_count > 100 ? '99+' : (
+													<>
+														{item.new_message_count}
+													</>
+												) }
+
+											</div>
+										)}
+
 									</div>
+
 								</div>
 							</div>
 						);

@@ -21,15 +21,10 @@ function Customers({
 	setActiveTab = () => {},
 	setToggleStatus = () => {},
 	toggleStatus,
-	inactiveReasons,
-	setInactiveReasons = () => {},
-	setInactiveDate = () => {},
-	inactiveDate,
-	setInactiveTime = () => {},
-	inactiveTime,
 	voiceList = [],
 	messagesList = [],
 	voiceListLoading,
+	unReadChatsCount,
 }) {
 	return (
 		<div className={styles.container}>
@@ -54,7 +49,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Message" />
+					<TabPanel name="message" title="Message" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
@@ -86,12 +81,6 @@ function Customers({
 				<InactiveModal
 					toggleStatus={toggleStatus}
 					setToggleStatus={setToggleStatus}
-					inactiveReasons={inactiveReasons}
-					setInactiveReasons={setInactiveReasons}
-					setInactiveDate={setInactiveDate}
-					inactiveDate={inactiveDate}
-					setInactiveTime={setInactiveTime}
-					inactiveTime={inactiveTime}
 				/>
 			)}
 		</div>

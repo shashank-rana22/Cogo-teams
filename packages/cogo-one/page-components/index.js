@@ -21,9 +21,6 @@ function CogoOne() {
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
-	const [inactiveReasons, setInactiveReasons] = useState('');
-	const [inactiveDate, setInactiveDate] = useState('');
-	const [inactiveTime, setInactiveTime] = useState('');
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -39,7 +36,8 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
-	const { messagesList = [] } = listData;
+	console.log('listData', listData);
+	const { messagesList = [], unReadChatsCount } = listData;
 
 	const {
 		loading,
@@ -68,15 +66,10 @@ function CogoOne() {
 				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				inactiveReasons={inactiveReasons}
-				setInactiveReasons={setInactiveReasons}
-				setInactiveDate={setInactiveDate}
-				inactiveDate={inactiveDate}
-				setInactiveTime={setInactiveTime}
-				inactiveTime={inactiveTime}
 				voiceList={list}
 				messagesList={messagesList}
 				voiceListLoading={loading}
+				unReadChatsCount={unReadChatsCount}
 			/>
 			<Conversations />
 			<ProfileDetails />
