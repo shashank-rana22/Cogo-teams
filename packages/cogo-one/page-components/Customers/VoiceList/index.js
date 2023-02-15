@@ -69,6 +69,7 @@ function VoiceList({
 									<div className={styles.user_details}>
 										<div className={styles.user_name}>
 											{startCase(user_data?.name)}
+											{' '}
 										</div>
 										<div className={styles.organisation}>
 											Organisation
