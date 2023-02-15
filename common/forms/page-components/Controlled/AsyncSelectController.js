@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 
-import AsyncSelect from '../SmartComponents/AsyncSelect';
+import AsyncSelect from '../Business/AsyncSelect';
 
 function AsyncSelectController(props) {
 	const {
