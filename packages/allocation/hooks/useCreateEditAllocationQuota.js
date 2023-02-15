@@ -52,11 +52,14 @@ const useCreateEditAllocationQuota = (props) => {
 		defaultValues: prefillValues,
 	});
 
-	const apiName = isUpdatable ? 'update_allocation_quota' : 'create_allocation_quota';
+	const apiName = isUpdatable ? 'quota_attributes' : 'quota';
+
+	const authkey = isUpdatable ? 'post_allocation_quota_attributes' : 'post_allocation_quota';
 
 	const api = useRequest({
 		url    : `/${apiName}`,
 		method : 'post',
+		authkey,
 	}, { manual: true });
 
 	const [{ loading }, trigger] = api;

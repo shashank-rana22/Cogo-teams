@@ -17,8 +17,9 @@ const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, l
 	});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_allocation_detail',
-		mathod : 'POST',
+		url     : '/detail_stakeholder',
+		mathod  : 'POST',
+		authkey : 'post_allocation_detail_stakeholder',
 	}, { manual: true });
 
 	const onSave = async (values = {}) => {

@@ -18,8 +18,9 @@ const useUpdateAllocationPreferences = ({ item = {}, setShow = () => {}, listRef
 	const [radioValue, setRadioValue] = useState();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/bulk_update_allocation_preferences',
-		method : 'POST',
+		url     : '/preference_bulk_status',
+		method  : 'POST',
+		authkey : 'post_allocation_preference_bulk_status',
 	}, { manual: true });
 
 	const onUpdatePreferences = async () => {

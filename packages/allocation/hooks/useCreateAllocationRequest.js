@@ -38,8 +38,9 @@ const useCreateAllocationRequest = (props) => {
 	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type }) || [];
 
 	const api = useRequest({
-		url    : '/create_allocation_request',
-		method : 'post',
+		url     : '/request',
+		method  : 'post',
+		authkey : 'post_allocation_request',
 	}, { manual: true });
 
 	const [{ loading }, trigger] = api;

@@ -9,8 +9,9 @@ const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList =
 	const controls = getCreateRelationsControls();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_allocation_relation',
-		method : 'POST',
+		url     : '/relation',
+		method  : 'POST',
+		authkey : 'post_allocation_relation',
 	});
 
 	const formProps = useForm({

@@ -15,8 +15,9 @@ const useCreateConfigurations = ({
 	const [segment, setSegment] = useState();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_allocation_configuration',
-		method : 'POST',
+		url     : '/configuration',
+		method  : 'POST',
+		authkey : 'post_allocation_configuration',
 	});
 
 	const controls = getCreateConfigurationsControls({ item, setSegment });

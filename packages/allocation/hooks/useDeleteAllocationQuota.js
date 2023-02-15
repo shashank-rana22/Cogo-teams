@@ -6,8 +6,9 @@ const useDeleteAllocationQuota = (props) => {
 	const { id, onCloseModal, refetch } = props;
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_allocation_quota',
-		method : 'POST',
+		url     : '/quota_attributes',
+		method  : 'POST',
+		authkey : 'post_allocation_quota_attributes',
 	});
 
 	const onDelete = async () => {

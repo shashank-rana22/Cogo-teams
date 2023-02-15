@@ -14,8 +14,9 @@ const useListAllocationPreferences = ({ item = {} }) => {
 	});
 
 	const [{ data, loading }] = useRequest({
-		url    : '/list_allocation_configuration_mutual_exclusions',
-		method : 'get',
+		url     : '/configuration_mutual_exclusions',
+		method  : 'get',
+		authkey : 'get_allocation_configuration_mutual_exclusions',
 		params,
 	}, { manual: false });
 

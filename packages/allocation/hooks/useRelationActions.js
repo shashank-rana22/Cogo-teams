@@ -21,13 +21,17 @@ const useRelationActions = ({
 	checkedRowsId = [],
 	fetchList = () => {},
 }) => {
-	const apiName =		confirmModalState.type === 'approve_all'
-		? 'bulk_approve_allocation_relations'
-		: 'update_allocation_relation';
+	const apiName =	confirmModalState.type === 'approve_all'
+		? 'relation_bulk_approve'
+		: 'relation_status';
+
+	const authkey = confirmModalState.type === 'approve_all'
+		? 'post_allocation_relation_bulk_approve' : 'post_allocation_relation_status';
 
 	const UpdateAllocationRelationsAPI = useRequest({
 		url    : `/${apiName}`,
 		method : 'post',
+		authkey,
 	}, { manual: true });
 
 	const [{ loading }, trigger] = UpdateAllocationRelationsAPI;

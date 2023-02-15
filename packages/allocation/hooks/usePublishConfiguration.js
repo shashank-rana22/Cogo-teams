@@ -11,8 +11,9 @@ const usePublishConfiguration = ({
 	setShow = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/publish_allocation_configuration',
-		method : 'POST',
+		url     : '/configuration_status',
+		method  : 'POST',
+		authkey : 'post_allocation_configuration_status',
 	});
 
 	const formProps = useForm({

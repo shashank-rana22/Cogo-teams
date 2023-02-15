@@ -24,8 +24,9 @@ const useListAllocationRequests = () => {
 	});
 
 	const apiData = useRequest({
-		url    : '/list_allocation_requests',
-		method : 'get',
+		url     : '/requests',
+		method  : 'get',
+		authkey : 'get_allocation_requests',
 		params,
 	}, { manual: false });
 

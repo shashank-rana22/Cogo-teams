@@ -9,8 +9,9 @@ const useUpdateRequestStatus = (props) => {
 	const [requestStatusItem, setRequestStatusItem] = useState({});
 
 	const api = useRequest({
-		url    : '/update_allocation_request',
-		method : 'POST',
+		url     : '/request_status',
+		method  : 'POST',
+		authkey : 'post_allocation_request_status',
 	});
 
 	const [{ loading }, trigger] = api;

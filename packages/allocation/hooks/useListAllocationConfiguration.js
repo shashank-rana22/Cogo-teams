@@ -14,8 +14,9 @@ const useListAllocationConfigurations = () => {
 	});
 
 	const [{ loading, data }, refetch] = useRequest({
-		url    : '/list_allocation_configurations',
-		method : 'get',
+		url     : '/configurations',
+		method  : 'get',
+		authkey : 'get_allocation_configurations',
 		params,
 	}, { manual: false });
 

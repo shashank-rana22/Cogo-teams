@@ -19,8 +19,9 @@ const useListAllocationQuotas = () => {
 	});
 
 	const api = useRequest({
-		url    : '/list_allocation_quotas',
-		method : 'get',
+		url     : '/quotas',
+		method  : 'get',
+		authkey : 'get_allocation_quotas',
 		params,
 	}, { manual: false });
 

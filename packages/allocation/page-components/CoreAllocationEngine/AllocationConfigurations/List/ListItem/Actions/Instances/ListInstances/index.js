@@ -1,13 +1,11 @@
 import {
-	Button,
-	Popover,
-	ButtonIcon, DateRangepicker, Legend, Pill, Table, Pagination,
+	DateRangepicker, Legend, Pill, Table, Pagination,
 } from '@cogoport/components';
-import { IcMDelete } from '@cogoport/icons-react';
+// import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
-import useDeleteAllocationInstance from '../../../../../../../../hooks/useDeleteAllocationInstance';
+// import useDeleteAllocationInstance from '../../../../../../../../hooks/useDeleteAllocationInstance';
 import useListAllocationInstances from '../../../../../../../../hooks/useListAllocationInstances';
 
 import styles from './styles.module.css';
@@ -36,15 +34,15 @@ function ListInstances({ item }) {
 		getNextPage,
 		dateRange,
 		setDateRange,
-		listInstancesRefetch,
+		// listInstancesRefetch,
 	} =	 useListAllocationInstances({ item });
 
-	const {
-		onInstanceDelete,
-		loadingInstanceDelete,
-		instanceId,
-		setInstanceId,
-	} = useDeleteAllocationInstance({ listInstancesRefetch });
+	// const {
+	// 	onInstanceDelete,
+	// 	loadingInstanceDelete,
+	// 	instanceId,
+	// 	setInstanceId,
+	// } = useDeleteAllocationInstance({ listInstancesRefetch });
 
 	const { push } = useRouter();
 
@@ -109,48 +107,48 @@ function ListInstances({ item }) {
 					]}
 				/>
 			),
-			action: (
-				<Popover
-					interactive
-					placement="left"
-					visible={instanceId === listItem.id}
-					onClickOutside={() => setInstanceId(false)}
-					render={(
-						<div className={styles.popover_container}>
-							<div className={styles.popover_heading}>
-								Are you sure you want to stop this instance?
-							</div>
-							<div className={styles.popover_button_container}>
-								<Button
-									size="md"
-									themeType="tertiary"
-									style={{ marginRight: '8px' }}
-									disabled={loadingInstanceDelete}
-									onClick={() => setInstanceId(null)}
-								>
-									No
-								</Button>
-								<Button
-									size="md"
-									themeType="accent"
-									onClick={(event) => onInstanceDelete(event, listItem.id)}
-									disabled={loadingInstanceDelete}
-								>
-									Stop
-								</Button>
-							</div>
-						</div>
-					)}
-				>
-					<ButtonIcon
-						size="lg"
-						icon={<IcMDelete />}
-						themeType="primary"
-						onClick={() => setInstanceId(listItem.id)}
-						disabled={listItem.status !== 'active'}
-					/>
-				</Popover>
-			),
+			// action: (
+			// 	<Popover
+			// 		interactive
+			// 		placement="left"
+			// 		visible={instanceId === listItem.id}
+			// 		onClickOutside={() => setInstanceId(false)}
+			// 		render={(
+			// 			<div className={styles.popover_container}>
+			// 				<div className={styles.popover_heading}>
+			// 					Are you sure you want to stop this instance?
+			// 				</div>
+			// 				<div className={styles.popover_button_container}>
+			// 					<Button
+			// 						size="md"
+			// 						themeType="tertiary"
+			// 						style={{ marginRight: '8px' }}
+			// 						disabled={loadingInstanceDelete}
+			// 						onClick={() => setInstanceId(null)}
+			// 					>
+			// 						No
+			// 					</Button>
+			// 					<Button
+			// 						size="md"
+			// 						themeType="accent"
+			// 						onClick={(event) => onInstanceDelete(event, listItem.id)}
+			// 						disabled={loadingInstanceDelete}
+			// 					>
+			// 						Stop
+			// 					</Button>
+			// 				</div>
+			// 			</div>
+			// 		)}
+			// 	>
+			// 		<ButtonIcon
+			// 			size="lg"
+			// 			icon={<IcMDelete />}
+			// 			themeType="primary"
+			// 			onClick={() => setInstanceId(listItem.id)}
+			// 			disabled={listItem.status !== 'active'}
+			// 		/>
+			// 	</Popover>
+			// ),
 		};
 
 		const dataToPush = {};

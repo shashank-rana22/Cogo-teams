@@ -8,8 +8,9 @@ const useUpdateConfiguration = ({
 	listRefetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_allocation_configuration',
-		method : 'POST',
+		url     : '/configuration_attributes',
+		method  : 'POST',
+		authkey : 'post_allocation_configuration_attributes',
 	});
 
 	const onDelete = async () => {

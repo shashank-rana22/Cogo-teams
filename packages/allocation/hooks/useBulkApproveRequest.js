@@ -6,8 +6,9 @@ const useBulkApproveRequest = (props) => {
 	const { refetch, onCloseModal, checkedRowsId } = props;
 
 	const api = useRequest({
-		url    : '/bulk_approve_allocation_request',
-		method : 'POST',
+		url     : '/request_bulk_approve',
+		method  : 'POST',
+		authkey : 'post_allocation_request_bulk_approve',
 	});
 
 	const [{ loading }, trigger] = api;

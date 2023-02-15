@@ -28,8 +28,9 @@ const useListAllocationInstances = ({ item = {} }) => {
 	}, [dateRange]);
 
 	const [{ data, loading }, refetch] = useRequest({
-		url    : '/list_allocation_instances',
-		method : 'get',
+		url     : '/instances',
+		method  : 'get',
+		authkey : 'get_allocation_instances',
 		params,
 	}, { manual: false });
 

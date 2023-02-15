@@ -33,8 +33,9 @@ const useAllocationRelations = () => {
 	const [searchValue, setSearchValue] = useState(params.filters?.q);
 
 	const [{ loading, data: apiData }, refetch] = useRequest({
-		url    : '/list_allocation_relations',
-		method : 'get',
+		url     : '/relations',
+		method  : 'get',
+		authkey : 'get_allocation_relations',
 		params,
 	}, { manual: false });
 

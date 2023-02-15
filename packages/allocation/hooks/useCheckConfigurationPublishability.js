@@ -8,8 +8,9 @@ const useCheckConfigurationPublishability = ({
 	setShow = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/check_allocation_configuration_publishability',
-		method : 'POST',
+		url     : '/configuration_check_publishability',
+		method  : 'POST',
+		authkey : 'post_allocation_configuration_check_publishability',
 	});
 
 	const onCheckPublish = async () => {

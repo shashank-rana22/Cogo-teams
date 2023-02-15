@@ -25,8 +25,9 @@ const useListAllocationDetails = () => {
 	});
 
 	const [{ loading, data }, refetch] = useRequest({
-		url    : '/list_allocation_details',
-		method : 'get',
+		url     : '/details',
+		method  : 'get',
+		authkey : 'get_allocation_details',
 		params,
 	}, { manual: false });
 

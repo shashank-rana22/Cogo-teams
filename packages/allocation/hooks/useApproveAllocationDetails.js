@@ -11,8 +11,9 @@ const useApproveAllocationDetails = ({ setShowApprove, listRefetch }) => {
 	const { instance_id = '' } = query;
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/approve_allocation_details',
-		method : 'POST',
+		url     : '/details_status',
+		method  : 'POST',
+		authkey : 'post_allocation_details_status',
 	}, { manual: true });
 
 	const onApproveDetails = async () => {
