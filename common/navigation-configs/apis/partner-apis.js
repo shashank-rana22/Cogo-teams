@@ -2239,6 +2239,11 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'get_organization_branch_hierarchy',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'send_verification_otp',
 			access_type  : 'private',
 			service_name : 'user',
@@ -3100,6 +3105,11 @@ const partner = {
 		},
 		{
 			api          : 'get_air_freight_incoterms',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
+		{
+			api          : 'create_spot_search_contract',
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
@@ -4061,6 +4071,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'rate_density',
 		},
+		{
+			api              : 'list_rfq_searches',
+			access_type      : 'private',
+			feature          : 'rfq',
+			defaultparameter : 'supply_dashboard:allowed',
+		},
 	],
 	operations_dashboard: [
 		{
@@ -4133,6 +4149,36 @@ const partner = {
 			api          : 'create_incentive_report',
 			access_type  : 'private',
 			service_name : 'incentive',
+		},
+		{
+			api          : 'list_contract_lcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_air_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_bulk_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'get_contract_plan_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contracts',
+			access_type  : 'private',
+			service_name : 'contract',
 		},
 	],
 	discount: [
@@ -9924,6 +9970,43 @@ const partner = {
 			api          : 'get_exchange_rate_approval_stats',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
+		},
+	],
+	contracts: [
+		{
+			api          : 'get_contract_projected_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contracts',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_service',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_shipments_avg_price',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_contract_port_pair_projected_stats',
+			access_type  : 'private',
+			service_name : 'contract',
 		},
 	],
 };
