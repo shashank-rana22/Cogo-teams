@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import React from 'react';
 
 import { getElementController } from '../../../../utils/get-element-controller';
@@ -7,7 +8,8 @@ import styles from './styles.module.css';
 
 function FormComponent({
 	controls = [],
-	// handleSubmit = () => {},
+	handleSubmit = () => {},
+	onSubmit = () => {},
 	control,
 	errors = {},
 }) {
@@ -43,6 +45,13 @@ function FormComponent({
 					</div>
 				);
 			})}
+
+			<Button
+				className="primary"
+				onClick={handleSubmit(onSubmit)}
+			>
+				save
+			</Button>
 
 		</div>
 	);

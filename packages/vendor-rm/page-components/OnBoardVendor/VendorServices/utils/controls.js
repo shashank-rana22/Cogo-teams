@@ -4,13 +4,13 @@ const controls = [
 		label      : 'Office Details',
 		type       : 'fieldArray',
 		buttonText : 'Add',
+		// noDeleteButtonTill : 1,
 		controls   : [
 			{
 				name        : 'category',
 				label       : 'Select Category',
 				type        : 'select',
 				placeholder : 'Select a Category',
-				span        : '30%',
 				rules       : { required: 'Category is required' },
 			},
 			{
@@ -18,7 +18,6 @@ const controls = [
 				label       : 'Select Sub-category',
 				type        : 'select',
 				placeholder : 'Select a sub-category',
-				span        : '30%',
 				rules       : { required: 'Sub-category is required' },
 			},
 			{
@@ -26,10 +25,17 @@ const controls = [
 				label       : 'Select Cogoport Office',
 				type        : 'select',
 				placeholder : 'Select Location',
-				span        : '30%',
 				rules       : { required: 'Office Location is required' },
 			},
 		],
+	},
+	{
+		name        : 'additional_remark',
+		label       : '',
+		type        : 'text',
+		placeholder : 'Enter additional Remarks...',
+		span        : '100%',
+		style       : { width: '100%', height: '80px', marginTop: '16px' },
 	},
 
 ];

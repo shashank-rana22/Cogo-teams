@@ -1,10 +1,11 @@
 .main_body {
     padding: 0px 16px 16px 16px;
+    /* width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: flex-end; */
 }
 
 .form_body {

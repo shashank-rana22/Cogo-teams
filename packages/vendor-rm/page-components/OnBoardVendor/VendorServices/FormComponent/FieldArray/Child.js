@@ -20,7 +20,9 @@ function Child({
 		<div className={styles.content}>
 			{controls.map((controlItem) => {
 				const Element = getElementController(controlItem.type);
+
 				if (!Element) return null;
+
 				return (
 					<div className={styles.list}>
 						<h4>{controlItem.label}</h4>

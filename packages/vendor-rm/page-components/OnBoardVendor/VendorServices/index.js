@@ -13,6 +13,7 @@ function VendorServices({
 		handleSubmit = () => {},
 		control,
 		errors = {},
+		onSubmit = () => {},
 	} = useVendorServices();
 
 	return (
@@ -25,6 +26,7 @@ function VendorServices({
 			<FormComponent
 				controls={controls}
 				handleSubmit={handleSubmit}
+				onSubmit={onSubmit}
 				control={control}
 				errors={errors}
 			/>
