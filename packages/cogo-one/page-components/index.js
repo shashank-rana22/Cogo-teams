@@ -3,6 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
+import { Controller } from 'react-hook-form';
 
 import { firebaseConfig } from '../configurations/firebase-config';
 import useListChats from '../hooks/useListChats';
