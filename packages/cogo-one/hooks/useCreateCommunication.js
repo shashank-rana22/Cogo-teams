@@ -2,11 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useCreateCommunicationLog = ({ setInputValue, setDate, setTime }) => {
-	const { partnerId, userId, id } = useSelector(({ profile }) => ({
-		id        : profile?.id,
-		userId    : profile?.user?.id,
-		partnerId : profile.partner || {},
+function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListLogApi = () => {} }) {
+	const { partnerId } = useSelector(({ profile }) => ({
+		partnerId: profile.partner || {},
 	}));
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_organization_communication_log',
@@ -16,12 +14,12 @@ const useCreateCommunicationLog = ({ setInputValue, setDate, setTime }) => {
 	const createLogApi = async ({ inputValue, date, time }) => {
 		const payload = {
 			communication_type       : 'meeting',
-			agent_id                 : id,
-			user_id                  : userId,
-			title                    : inputValue,
+			agent_id                 : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+			user_id                  : 'cba50126-efbc-4caa-8383-b616dec9d44b',
+			title                    : inputValue?.title,
 			reminder_date            : date,
-			// communication_response   : val?.response,
-			// organization_id          : orgId,
+			communication_summary    : inputValue?.description,
+			organization_id          : 'bbde20db-d8b8-4be7-8307-367666847041',
 			partner_id               : partnerId?.id,
 			communication_start_time : time?.start_time,
 			communication_end_time   : time?.end_time,
@@ -30,8 +28,9 @@ const useCreateCommunicationLog = ({ setInputValue, setDate, setTime }) => {
 			await trigger({
 				data: payload,
 			});
+			fetchListLogApi();
 			Toast.success('Successfully Saved');
-			setInputValue('');
+			setInputValue({});
 			setDate('');
 			setTime({});
 		} catch (error) {
@@ -42,5 +41,5 @@ const useCreateCommunicationLog = ({ setInputValue, setDate, setTime }) => {
 		createLogApi,
 		loading,
 	};
-};
+}
 export default useCreateCommunicationLog;

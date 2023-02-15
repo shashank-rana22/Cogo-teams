@@ -53,31 +53,34 @@
 	padding: 8px 12px;
 	background: #FFFFFF;
 	border-radius: 6px;	
-}
+	position: relative;
+	min-height: 80px;
 
-.note_title {
-	font-weight: 600;
-	font-size: 14px;
-	color: #221F20;
-}
-
-.note_description {
-	font-size: 12px;
-	color: #221F20;
+	:global {
+		.ui_buttonicon_container {
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
 }
 
 .footer {
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-	margin-top: 18px;
+	margin-top: 10px;
 }
 
 .note_time {
 	font-size: 10px;
 	color: #4F4F4F;
 }
-
+.created_by {
+	font-size: 10px;
+	color: #4F4F4F;
+	margin-left: 4px;
+}
 .note_footer {
 	padding: 5px;
 	display: flex;
@@ -95,4 +98,14 @@
 	border-radius: 6px;
 	padding: 0 6px;
 	cursor: pointer;
+}
+
+.content {
+	display: flex;
+	width: 95%;
+	word-break: break-word;
+    text-overflow: ellipsis;
+    white-space: normal;
+	cursor: pointer;
+	min-height: 40px;
 }

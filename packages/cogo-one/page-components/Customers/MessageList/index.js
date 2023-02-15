@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { format, isEmpty, startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { format, startCase } from '@cogoport/utils';
+import React from 'react';
 
 import UserAvatar from '../../../common/UserAvatar';
 import FilterComponents from '../FilterComponents';
@@ -12,24 +12,14 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessageCard,
+	setActiveMessage,
 	activeMessageCard,
 	setSearchValue,
 	filterVisible,
 	searchValue,
 	setFilterVisible,
-	reset,
 }) {
 	const loading = false;
-
-	const isMsgListEmpty = isEmpty(messagesList);
-	useEffect(() => {
-		if (!isMsgListEmpty) {
-			setActiveMessageCard(messagesList?.[0]);
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isMsgListEmpty]);
-
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -41,7 +31,6 @@ function MessageList({
 						placeholder="Search here..."
 						value={searchValue}
 						onChange={(val) => setSearchValue(val)}
-						style={{ width: 200 }}
 					/>
 
 				</div>
@@ -49,19 +38,17 @@ function MessageList({
 				<div className={styles.filter_icon}>
 					<Popover
 						placement="left"
-						caret={false}
 						render={(
 							<FilterComponents
 								setFilterVisible={setFilterVisible}
 								filterVisible={filterVisible}
-						// fields={fields}
-								reset={reset}
 							/>
 						)}
 						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
 					>
-						{/* <div className={styles.filter_dot} /> */}
-						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
+						<div className={styles.filter_dot} />
+						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible((prev) => !prev)} />
 					</Popover>
 
 				</div>
@@ -79,7 +66,7 @@ function MessageList({
 						                ${styles.card_Container} 
 						                ${checkActiveCard ? styles.active_card : ''} 
 						                `}
-								onClick={() => setActiveMessageCard(item)}
+								onClick={() => setActiveMessage(item)}
 							>
 								<div className={styles.card}>
 

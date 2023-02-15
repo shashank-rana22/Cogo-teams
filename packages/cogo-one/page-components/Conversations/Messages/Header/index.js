@@ -1,9 +1,9 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 
-import AssigneeAvatar from '../../../common/AssigneeAvatar';
-import UserAvatar from '../../../common/UserAvatar';
-import { TAGS_COLORS } from '../../../constants';
+import AssigneeAvatar from '../../../../common/AssigneeAvatar';
+import UserAvatar from '../../../../common/UserAvatar';
+import { TAGS_COLORS } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -87,7 +87,7 @@ function Header({ setOpenModal = () => {} }) {
 						<div className={styles.phone_number}>+91XXXXXX0980</div>
 					</div>
 				</div>
-				<Button themeType="primary" size="md">Mark as Closed</Button>
+				<Button themeType="primary" size="md">Mark as</Button>
 			</div>
 		</div>
 	);

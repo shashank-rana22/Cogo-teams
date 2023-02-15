@@ -3,16 +3,16 @@ import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 
 // import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../hooks/useGetUser';
+import useOutgoingCall from '../../../hooks/useOutgoingCall';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 
-function AgentDetails({ activeSelect }) {
-	// console.log('activeCard', activeCard);
-	const { userData, loading } = useGetUser({ activeSelect });
-	// console.log('userData', userData);
-	// const loading = true;
-	const { mobile_country_code, mobile_number, name, email, mobile_verified, whatsapp_verified } = userData || {};
+function AgentDetails({ activeMessageCard }) {
+	const { userData, loading } = useGetUser({ activeMessageCard });
+	const { makeCallApi = () => {}, callLoading } = useOutgoingCall();
+
+	const { mobile_number_eformat, name, email, mobile_verified, whatsapp_verified } = userData || {};
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
@@ -27,17 +27,18 @@ function AgentDetails({ activeSelect }) {
 			prefixIcon : <IcCWhatsapp />,
 		},
 	];
+
+	const handleClick = async () => {
+		await makeCallApi();
+	};
 	return (
 		<>
 			<div className={styles.title}>Profile</div>
 			<div className={styles.content}>
-				{/* <UserAvatar type=" " /> */}
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
 					alt="img"
 					disabled={false}
-					// className="avatar_icon"
-					// size="60px"
 				/>
 				<div className={styles.details}>
 					{loading ? (
@@ -47,11 +48,9 @@ function AgentDetails({ activeSelect }) {
 						</>
 					) : (
 						<>
-
 							<div className={styles.name}>{name || 'NA'}</div>
 							<div className={styles.name}>{email || '-'}</div>
 						</>
-
 					)}
 				</div>
 			</div>
@@ -70,14 +69,19 @@ function AgentDetails({ activeSelect }) {
 				))}
 			</div>
 			<div className={styles.number_div}>
-				<IcMCall className={styles.call_icon} />
+				{/* <img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
+					alt="hang-Up"
+					className={styles.call_icon}
+				/> */}
+				<IcMCall className={styles.call_icon} onClick={handleClick} />
 				{loading ? (
 					<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
 				) : (
 					<div className={styles.number}>
-						{mobile_country_code}
+						{mobile_number_eformat?.slice(0, 2)}
 						{' '}
-						{mobile_number}
+						{mobile_number_eformat?.slice(2)}
 					</div>
 				)}
 			</div>

@@ -4,16 +4,18 @@ import {
 	onSnapshot,
 	orderBy,
 	where,
+	updateDoc, doc,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
+import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import global from '../constants/IDS_CONSTANTS';
 
 const useListChats = ({
 	firestore,
 	user_role_ids, userId,
 }) => {
-	const [lastData, setLastData] = useState({ prevLength: 0, hasMoreData: true });
+	const [activeMessageCard, setActiveMessageCard] = useState({});
 
 	const [listData, setListData] = useState({
 		messagesList     : [],
@@ -76,22 +78,25 @@ const useListChats = ({
 		}
 
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
-			const docLength = querySnapshot.docs.length;
-			setLastData((p) => ({ ...p, docLength, hasMoreData: p.docLength < docLength }));
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
 			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const canScroll = scrollHeight - (clientHeight + scrollTop) > 0;
-		if (lastData.hasMoreData && canScroll) {
-			// setPagination((p) => p + 1);
+	const setActiveMessage = async (val) => {
+		const { channel_type, id } = val || {};
+		setActiveMessageCard(val);
+		if (channel_type) {
+			const messageDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}`,
+			);
+			await updateDoc(messageDoc, { new_message_count: 0 });
 		}
 	};
 	return {
-		listData, handleScroll,
+		listData, setActiveMessage, activeMessageCard,
 	};
 };
 

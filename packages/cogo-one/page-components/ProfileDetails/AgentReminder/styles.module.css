@@ -12,6 +12,16 @@
 
 .wrapper {
 	padding-top: 22px;
+
+	:global {
+		.ui_input_container.ui_x-NGo {
+			height: 120px !important;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control.ui_HZPDt {
+			font-size: 12px !important;
+		}
+	}
 }
 
 .label {
@@ -19,7 +29,7 @@
 }
 
 .date_wrapper {
-	padding-top: 36px;
+	padding-top: 16px;
 }
 
 .time_title {

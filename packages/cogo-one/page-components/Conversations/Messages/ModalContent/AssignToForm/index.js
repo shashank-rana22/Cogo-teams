@@ -1,6 +1,6 @@
 import { useForm, RadioGroupController, SelectController, InputController } from '@cogoport/forms';
 
-import controls from '../../../../configurations/assign-form-controls';
+import controls from '../../../../../configurations/assign-form-controls';
 
 import styles from './styles.module.css';
 
