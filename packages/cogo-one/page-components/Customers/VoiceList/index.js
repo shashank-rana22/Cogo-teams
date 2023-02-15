@@ -1,138 +1,49 @@
 import { cl } from '@cogoport/components';
-import React from 'react';
+import { startCase, format, differenceInDays, isEmpty } from '@cogoport/utils';
+import React, { useEffect } from 'react';
 
 import { VOICE_ICON_MAPPING } from '../../../constants';
+import LoadingState from '../LoadingState';
 
 import styles from './styles.module.css';
 
-function VoiceList({ activeCard, setActiveCard }) {
-	const dummyData = [
-		{
-			id           : 1,
-			name         : 'John Wick',
-			organisation : 1,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'missed',
-			image        : 'https://www.w3schools.com/howto/img_avatar.png',
+function VoiceList({
+	voiceList,
+	setActiveVoiceCard = () => {},
+	activeVoiceCard,
+	voiceListLoading,
+}) {
+	const callStatus = (item) => {
+		let status = '';
+		const { call_status = '', call_type = '' } = item || {};
+		if (call_status === 'answered' && call_type === 'outgoing') {
+			status = 'outgoing';
+		} else if (call_status === 'answered' && call_type === 'incoming') {
+			status = 'incoming';
+		} else {
+			status = call_status;
+		}
+		return status;
+	};
 
-		},
-		{
-			id           : 2,
-			name         : 'John Wick',
-			organisation : 10,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'wed',
-			source       : 'disconnected',
-			image        : '',
+	useEffect(() => {
+		if (!isEmpty(voiceList)) {
+			setActiveVoiceCard(voiceList?.[0]);
+		}
+	}, []);
 
-		},
-		{
-			id           : 3,
-			name         : 'John Wick',
-			organisation : 2,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'outgoing',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
+	if (voiceListLoading) {
+		return <LoadingState />;
+	}
 
-		},
-		{
-			id           : 4,
-			name         : 'John Wick',
-			organisation : 7,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'incomming',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-		{
-			id           : 1,
-			name         : 'John Wick',
-			organisation : 1,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'missed',
-			image        : 'https://www.w3schools.com/howto/img_avatar.png',
-
-		},
-		{
-			id           : 2,
-			name         : 'John Wick',
-			organisation : 10,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'wed',
-			source       : 'disconnected',
-			image        : '',
-
-		},
-		{
-			id           : 3,
-			name         : 'John Wick',
-			organisation : 2,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'outgoing',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-		{
-			id           : 4,
-			name         : 'John Wick',
-			organisation : 7,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'incomming',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-		{
-			id           : 3,
-			name         : 'John Wick',
-			organisation : 2,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'outgoing',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-		{
-			id           : 4,
-			name         : 'John Wick',
-			organisation : 7,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'incomming',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-		{
-			id           : 3,
-			name         : 'John Wick',
-			organisation : 2,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'outgoing',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-		{
-			id           : 4,
-			name         : 'John Wick',
-			organisation : 7,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'incomming',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-
-		},
-	];
 	return (
 		<div className={styles.list_container}>
 
-			{(dummyData || []).map((item) => {
-				const checkActiveCard = activeCard?.id === item?.id;
+			{(voiceList || []).map((item) => {
+				const { user_data = {} } = item || {};
+				const checkActiveCard = activeVoiceCard?.id === item?.id;
+				const daysDifference = differenceInDays(new Date(), new Date(item.start_time_of_call));
+
 				return (
 					<div
 						role="presentation"
@@ -140,20 +51,20 @@ function VoiceList({ activeCard, setActiveCard }) {
 				${styles.card_Container}
 				${checkActiveCard ? styles.active_card : ''}
 				 `}
-						onClick={() => setActiveCard(item)}
+						onClick={() => setActiveVoiceCard(item)}
 					>
 						<div className={styles.card}>
 
 							<div className={styles.user_information}>
 								<div className={styles.avatar_Container}>
 									<img
-										src={VOICE_ICON_MAPPING[item.source]}
+										src={VOICE_ICON_MAPPING[callStatus(item)]}
 										className={styles.avatar}
 										alt=""
 									/>
 									<div className={styles.user_details}>
 										<div className={styles.user_name}>
-											{item.name}
+											{startCase(user_data?.name)}
 										</div>
 										<div className={styles.organisation}>
 											Organisation
@@ -165,16 +76,22 @@ function VoiceList({ activeCard, setActiveCard }) {
 
 								<div className={styles.user_activity}>
 									<div className={styles.activity_duration}>
-										Friday
+										{daysDifference > 7 ? (
+											<>
+												{format(item.start_time_of_call, 'dd/mm/yy')}
+											</>
+										) : (
+											<>
+												{format(item.start_time_of_call, 'EEE')}
+											</>
+										)}
+
 									</div>
 									<div className={styles.activity_duration}>
-										11.23 pm
+										{format(item.start_time_of_call, 'HH:mm a')}
 									</div>
 								</div>
 
-							</div>
-							<div className={styles.content}>
-								{item.content}
 							</div>
 						</div>
 					</div>
