@@ -36,7 +36,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -535,7 +535,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'requests',
+			api          : 'get_allocation_requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
@@ -984,7 +984,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1627,6 +1627,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'mark_user_as_verified',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
 			api          : 'send_verification_otp',
 			access_type  : 'private',
 			service_name : 'user',
@@ -1659,7 +1664,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -4846,7 +4851,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'requests',
+			api          : 'get_allocation_requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
