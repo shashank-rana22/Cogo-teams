@@ -5,6 +5,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 
+import control from '../configurations/filter-controls';
 import { firebaseConfig } from '../configurations/firebase-config';
 import useListChats from '../hooks/useListChats';
 
@@ -35,8 +36,14 @@ function CogoOne() {
 	const [activeCard, setActiveCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
+	const [inactiveReasons, setInactiveReasons] = useState('');
+	console.log('inactiveReasons', inactiveReasons);
+	const [inactiveDate, setInactiveDate] = useState('');
+	const [inactiveTime, setInactiveTime] = useState('');
+	console.log('inactiveTime', inactiveTime);
+	console.log('inactiveDate', inactiveDate);
 
-	const { reset, watch } = useForm();
+	const { reset, watch, control } = useForm();
 
 	const filterData = watch();
 
@@ -54,6 +61,12 @@ function CogoOne() {
 				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
+				inactiveReasons={inactiveReasons}
+				setInactiveReasons={setInactiveReasons}
+				setInactiveDate={setInactiveDate}
+				inactiveDate={inactiveDate}
+				setInactiveTime={setInactiveTime}
+				inactiveTime={inactiveTime}
 			/>
 			<Conversations />
 			<ProfileDetails />

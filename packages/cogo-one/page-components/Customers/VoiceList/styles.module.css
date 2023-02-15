@@ -70,6 +70,7 @@ font-size: 20px;
 
 .card_Container{
 	padding:10px 12px;	
+	border-bottom: 1px solid #E0E0E0;
 }
 
 .active_card{
@@ -114,6 +115,11 @@ flex-direction: column;
 display: flex;
 }
 
+.avatar{
+width: 20px;
+height: 20px;
+}
+
 .content{
 	margin-top: 3px;
 	font-size: 12px;
@@ -125,7 +131,7 @@ display: flex;
 
 .list_container{
 	overflow-x: auto;
-	height: 70vh;
+	height: 75vh;
 }
 
 .list_container::-webkit-scrollbar {
