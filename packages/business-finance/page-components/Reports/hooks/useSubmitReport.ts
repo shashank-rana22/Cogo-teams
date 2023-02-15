@@ -10,10 +10,11 @@ interface DateInterface {
 interface Props {
 	reportType?:string,
 	dateRange?: DateInterface,
+	accountType?:string,
 }
 
 const useSubmitReport = (value:Props) => {
-	const { dateRange, reportType } = value || {};
+	const { dateRange, reportType, accountType } = value || {};
 	const [{ loading }, trigger] = useRequestBf({
 		url     : `/muneem/reports/${reportType}`,
 		method  : 'GET',
@@ -27,8 +28,9 @@ const useSubmitReport = (value:Props) => {
 		try {
 			const response = await trigger({
 				params: {
-					start_date : format(startDate, 'yyyy-MM-dd', {}, false) || undefined,
-					end_date   : format(endDate, 'yyyy-MM-dd', {}, false) || undefined,
+					start_date   : format(startDate, 'yyyy-MM-dd', {}, false) || undefined,
+					end_date     : format(endDate, 'yyyy-MM-dd', {}, false) || undefined,
+					account_type : accountType || undefined,
 				},
 			});
 

@@ -1,20 +1,28 @@
 import { SingleDateRange, Button, Select } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { REPORT_TYPE_OPTIONS } from './constants';
+import { REPORT_TYPE_OPTIONS, ACCOUNT_TYPE_OPTIONS } from './constants';
 import useSubmitReport from './hooks/useSubmitReport';
 import styles from './styles.module.css';
 
 function Reports() {
 	const [value, setValue] = useState({
-		reportType : null,
-		dateRange  : null,
+		reportType  : null,
+		dateRange   : null,
+		accountType : null,
 	});
 
 	const { api, loading } = useSubmitReport(value);
 
-	const onChange = (e:string) => {
-		setValue((p) => ({ ...p, reportType: e }));
+	const onChange = (e:string, val:string) => {
+		setValue((p) => ({ ...p, [val]: e }));
+	};
+
+	const isDissabledForAccountType = () => {
+		if (value.reportType !== 'sage-organization-mapping-id-report') {
+			return false;
+		}
+		return !value.accountType;
 	};
 
 	return (
@@ -26,12 +34,25 @@ function Reports() {
 					<div className={styles.input}>
 						<Select
 							value={value.reportType}
-							onChange={(e:string) => onChange(e)}
+							onChange={(e:string) => onChange(e, 'reportType')}
 							placeholder="Select Report Type"
 							options={REPORT_TYPE_OPTIONS}
 						/>
 					</div>
 				</div>
+				{value.reportType === 'sage-organization-mapping-id-report' &&	(
+					<div className={styles.accountType}>
+						<div className={styles.title}>Select Account Type*</div>
+						<div>
+							<Select
+								value={value.accountType}
+								onChange={(e:string) => onChange(e, 'accountType')}
+								placeholder="Select Account Type"
+								options={ACCOUNT_TYPE_OPTIONS}
+							/>
+						</div>
+					</div>
+				)}
 				<div>
 					<div className={styles.title}>Select Date Range*</div>
 					<div className={styles.date}>
@@ -44,12 +65,12 @@ function Reports() {
 						/>
 					</div>
 				</div>
-
 				<div className={styles.button}>
 					<Button
 						className={styles.button_class}
 						disabled={loading
-							|| !value.reportType || !value.dateRange?.startDate || !value.dateRange?.endDate}
+							|| !value.reportType || !value.dateRange?.startDate || !value.dateRange?.endDate
+							|| isDissabledForAccountType()}
 						onClick={() => api()}
 						size="md"
 					>
