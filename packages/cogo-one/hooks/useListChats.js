@@ -4,7 +4,6 @@ import {
 	onSnapshot,
 	orderBy,
 	where,
-	limit,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
@@ -14,8 +13,6 @@ const useListChats = ({
 	firestore,
 	user_role_ids, userId,
 }) => {
-	const [pagination, setPagination] = useState(1);
-
 	const [lastData, setLastData] = useState({ prevLength: 0, hasMoreData: true });
 
 	const [listData, setListData] = useState({
@@ -67,14 +64,14 @@ const useListChats = ({
 			omniChannelQuery = query(
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
-				limit((pagination || 1) * 20),
+
 			);
 		} else {
 			omniChannelQuery = query(
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
 				where('agent_id', '==', userId),
-				limit((pagination || 1) * 20),
+
 			);
 		}
 
@@ -85,12 +82,12 @@ const useListChats = ({
 			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pagination]);
+	}, []);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
 		const canScroll = scrollHeight - (clientHeight + scrollTop) > 0;
 		if (lastData.hasMoreData && canScroll) {
-			setPagination((p) => p + 1);
+			// setPagination((p) => p + 1);
 		}
 	};
 	return {

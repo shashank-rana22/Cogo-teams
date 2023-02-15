@@ -1,10 +1,8 @@
-import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
 
-import control from '../configurations/filter-controls';
 import { firebaseConfig } from '../configurations/firebase-config';
 import useGetVoiceCallList from '../hooks/useGetVoiceCallList';
 import useListChats from '../hooks/useListChats';
@@ -42,13 +40,9 @@ function CogoOne() {
 	const {
 		loading,
 		data = {},
-		setPagination = () => {},
+		handleScroll = () => {},
 	} = useGetVoiceCallList({ activeTab });
 	const { list = [] } = data;
-
-	const { reset, watch, control } = useForm();
-
-	const filterData = watch();
 
 	return (
 		<div className={styles.layout_container}>
@@ -63,16 +57,15 @@ function CogoOne() {
 				filterVisible={filterVisible}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
 				voiceList={list}
 				messagesList={messagesList}
 				voiceListLoading={loading}
-				unReadChatsCount={unReadChatsCount}
+				handleScroll={handleScroll}
 			/>
 			<Conversations />
-			<ProfileDetails />
+			<ProfileDetails activeCard={activeMessageCard} />
 		</div>
 	);
 }

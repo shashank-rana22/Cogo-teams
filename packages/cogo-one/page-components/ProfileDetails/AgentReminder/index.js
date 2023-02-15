@@ -3,6 +3,7 @@ import { Button, Timepicker, Input, Datepicker } from '@cogoport/components';
 import { useState } from 'react';
 
 import useCreateCommunicationLog from '../../../hooks/useCreateCommunication';
+import useGetListCommunicationLog from '../../../hooks/useGetListCommunicationLog';
 
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
@@ -18,6 +19,9 @@ function AgentReminder() {
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue, setDate, setTime,
 	});
+
+	const { listData = {} } = useGetListCommunicationLog();
+	// console.log('listData', listData);
 
 	const handleSubmit = async () => {
 		// console.log('dfgjd', inputValue, date, time);
@@ -60,41 +64,50 @@ function AgentReminder() {
 				<div className={styles.time_container}>
 					<div className={styles.start_time}>
 						<div className={styles.time_title}>Start Time</div>
-						<Timepicker
-							name="date"
-							timeIntervals={1}
-							value={time?.start_time}
-							onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
-						/>
+						<div className={styles.wrap_start}>
+							<Timepicker
+								name="date"
+								timeIntervals={1}
+								value={time?.start_time}
+								isClearable
+								// suffix={<>hi</>}
+								onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
+							/>
+						</div>
 					</div>
 					<div className={styles.end_time}>
 						<div className={styles.time_title}>End Time</div>
-						<Timepicker
-							name="date"
-							timeIntervals={1}
-							value={time?.end_time}
-							className="input_time"
-							onChange={(a) => setTime((p) => ({ ...p, end_time: a }))}
-						/>
+						<div className={styles.wrap_end}>
+							<Timepicker
+								name="date"
+								timeIntervals={1}
+								value={time?.end_time}
+								className="input_time"
+								onChange={(a) => setTime((p) => ({ ...p, end_time: a }))}
+							/>
+						</div>
 					</div>
 				</div>
 				<div className={styles.button_container}>
 					<div
+						role="presentation"
 						className={styles.reset_button}
 						onClick={handleReset}
 					>
 						Reset
 					</div>
-					<Button
-						size="md"
-						themeType="primary"
-						className="set_button"
-						onClick={handleSubmit}
-						disabled={loading}
-					>
-						Set reminder
+					<div className={styles.set_button}>
+						<Button
+							size="md"
+							themeType="primary"
+							// className=""
+							onClick={handleSubmit}
+							disabled={loading}
+						>
+							Set reminder
 
-					</Button>
+						</Button>
+					</div>
 				</div>
 				<PreviousReminder />
 			</div>

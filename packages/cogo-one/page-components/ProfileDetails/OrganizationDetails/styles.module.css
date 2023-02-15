@@ -1,6 +1,12 @@
 .container {
 	display: flex;
 	flex-direction: column;
+
+	:global {
+		.ui_pill_container {
+			margin: 0 !important;
+		}
+	}
 }
 
 .title {
@@ -17,7 +23,7 @@
 }
 
 .organization_details {
-	width: 90%;
+	width: 80%;
 	display: flex;
 	flex-direction: column;
 }
@@ -77,4 +83,11 @@
 
 .cogo_icon{
 	margin: 6px 10px 0px 0px;
+}
+
+.status{ 
+	display: flex;
+    width: 29%;
+    max-height: 19px;
+    justify-content: flex-end;
 }

@@ -33,13 +33,33 @@
 	justify-content: space-around;
 	padding-top: 26px;
 	width: 100%;
+
+	:global {
+		input {
+			border: none !important;
+			width: 75% !important;
+			border-right: 1px solid #BDBDBD !important;
+		}
+		.react-datepicker__input-container {
+			:focus-visible {
+				outline-color: none;
+    			outline-width: 0;
+			}
+		}
+
+		/* .react-datepicker__close-icon {
+			::after {
+				content: url('https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/alarm-timer.svg')
+			}
+			display: none !important;
+		} */
+	}
 }
 
 .start_time {
 	display: flex;
 	flex-direction: column;
 	width: 50%;
-	border-radius: 4px 0 0 4px;
 }
 .input_time {
 	:hover {
@@ -49,17 +69,32 @@
 .end_time {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+	width: 50%;	
+}
+
+.wrap_start {
+	display: flex;
+	padding: 2px;
+	background-color: #ffff;
+	border-radius: 4px 0 0 4px;
+	border: 1px solid #828282;
+}
+
+.wrap_end {
+	display: flex;
+	padding: 2px;
+	background-color: #ffff;
 	border-radius: 0 4px 4px 0;
-	
+	border: 1px solid #828282;
+	border-left: none;
 }
 
 .button_container {
 	display: flex;
 	width: 100%;
 	align-items: center;
-	justify-content: space-evenly;
-	padding: 21px 0 16px 0;
+	/* justify-content: space-evenly; */
+	padding: 21px 0 16px 65px;
 	border-bottom: 1px solid #E0E0E0;;
 }
 
@@ -72,4 +107,7 @@
 
 .set_button {
 	cursor: pointer;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 }
