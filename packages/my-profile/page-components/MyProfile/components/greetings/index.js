@@ -157,6 +157,7 @@ function Greetings({
 									<div className={styles.upload_picture_text}>Upload picture</div>
 
 									<UploadController
+										{...control}
 										control={control}
 										errors={errors}
 										name="profile_picture_url"

@@ -13,13 +13,12 @@ const getControls = (detailsData) => [
 		accept          : '.png, .jpeg',
 		uploadType      : 'aws',
 		validations     : [{ type: 'required', message: 'Mandatory' }],
-
-		label  : 'Upload profile picture',
-		drag   : true,
-		height : 72,
+		label           : 'Upload profile picture',
+		drag            : true,
+		height          : 72,
 		uploadIcon,
-		value  : detailsData?.picture,
-		rules  : {
+		value           : detailsData?.picture,
+		rules           : {
 			required: true,
 		},
 		span: 12,

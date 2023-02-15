@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -85,7 +84,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 			}
 		} catch (error) {
 			console.log('error', error);
-			Toast.error(getApiErrorString(error.data));
+			Toast.error('something went wrong');
 		}
 	};
 	const sendOtpNumber = ({ timer = {} }) => verifyMobileNumber({ actionType: 'SEND_OTP', timer });

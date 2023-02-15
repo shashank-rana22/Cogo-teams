@@ -1,5 +1,5 @@
 import logout from '@cogoport/authentication/utils/getLogout';
-import { IcMLogout } from '@cogoport/icons-react';
+import { IcMLogout, IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -22,7 +22,7 @@ function ProfileManager({ resetSubnavs }) {
 			title : 'My Profile',
 			name  : 'my_profile',
 			fun   : routerFunction,
-			icon  : IcMLogout,
+			icon  : IcMProfile,
 		},
 	];
 

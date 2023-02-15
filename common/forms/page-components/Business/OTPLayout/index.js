@@ -63,9 +63,9 @@ function OTPLayout({
 					)
 
 					: (
-						<Button
-							type="button"
-							className="primary md text"
+						<div
+							role="presentation"
+							className={styles.resend_text}
 							onClick={() => {
 								sendOtp({ timer });
 
@@ -74,7 +74,7 @@ function OTPLayout({
 							disabled={timer.isTimeRemaining || loading}
 						>
 							Resend OTP?
-						</Button>
+						</div>
 					)}
 
 			</div>
