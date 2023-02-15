@@ -1,10 +1,11 @@
-import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
+import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
+import ControlLayout from '../../../../commons/components/ControlLayout/ControlLayout';
 import { getElementController } from '../../../../utils/get-element-controller';
 import useCreateVendorContact from '../hooks/useCreateVendorContact';
 
 import styles from './styles.module.css';
 
-function FormComponent() {
+function FormComponent({ activeStepper = {} }) {
 	const {
 		fields = [],
 		control,
@@ -21,25 +22,11 @@ function FormComponent() {
 
 				if (!Element) return null;
 
-				return (
-				// eslint-disable-next-line max-len
-				// <div className={styles.form_group} style={style}>
-				// 	<div className={styles.form_label}>{el.label}</div>
-				// 	<div>
-				// 		<Element
-				// 			{...el}
-				// 			key={el.name}
-				// 			control={control}
-				// 			id={`create_vendor_contact_${el.name}_input`}
-				// 		/>
-				// 		<div className={styles.error_message}>
-				// 			{errors?.[el.name]?.message}
-				// 		</div>
-				// 	</div>
-				// </div>
-					<FormLayout element={el} control={control} errors={errors} style={style} />
-				);
+				return (<ControlLayout element={el} control={control} errors={errors} style={style} />);
 			})}
+			<ButtonLayout
+				activeStepper={activeStepper}
+			/>
 		</div>
 	);
 }

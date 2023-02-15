@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable import/no-cycle */
 
 import ContactDetails from '../page-components/OnBoardVendor/ContactDetails';
 import PaymentDetails from '../page-components/OnBoardVendor/PaymentDetails';

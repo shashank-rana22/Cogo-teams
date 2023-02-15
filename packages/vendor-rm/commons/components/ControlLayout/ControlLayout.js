@@ -2,7 +2,7 @@ import { getElementController } from '../../../utils/get-element-controller';
 
 import styles from './styles.module.css';
 
-function FormLayout({ element = {}, control = {}, errors = {}, style = {} }) {
+function ControlLayout({ element = {}, control = {}, errors = {}, style = {} }) {
 	const Element = getElementController(element.type);
 
 	return (
@@ -23,4 +23,4 @@ function FormLayout({ element = {}, control = {}, errors = {}, style = {} }) {
 	);
 }
 
-export default FormLayout;
+export default ControlLayout;
