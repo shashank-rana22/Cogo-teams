@@ -9833,6 +9833,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
+		{
+			api          : 'list_tickets',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 
 	],
 };
