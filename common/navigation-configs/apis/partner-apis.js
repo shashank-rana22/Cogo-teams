@@ -9842,7 +9842,7 @@ const partner = {
 		{
 			api          : 'get_shipments_avg_price',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'unified_dashboard',
 		},
 		{
 			api          : 'get_contract_port_pair_projected_stats',

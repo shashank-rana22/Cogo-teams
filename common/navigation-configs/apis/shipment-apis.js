@@ -943,7 +943,7 @@ const apis = [
 	{
 		api          : 'get_contract_previous_service_providers',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'unified_dashboard',
 		feature      : 'revenue_desk',
 	},
 	{
