@@ -8,7 +8,7 @@ function PromocodeThumbnail() {
 	const colors = ['#e66465', '#ff7675', '#55E6C1'];
 
 	const getCardColor = (index) => colors[index % colors.length];
-	console.log('getCardColor', getCardColor);
+	// console.log('getCardColor', getCardColor);
 
 	// const defaultImage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
 	return (

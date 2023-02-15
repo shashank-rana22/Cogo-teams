@@ -2,6 +2,8 @@ import { Button, Timepicker, Input, Datepicker } from '@cogoport/components';
 // import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useCreateCommunicationLog from '../../../hooks/useCreateCommunication';
+
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
@@ -12,6 +14,25 @@ function AgentReminder() {
 		start_time : '',
 		end_time   : '',
 	});
+
+	const { createLogApi, loading } = useCreateCommunicationLog({
+		setInputValue, setDate, setTime,
+	});
+
+	const handleSubmit = async () => {
+		// console.log('dfgjd', inputValue, date, time);
+		await createLogApi({ inputValue, date, time });
+	};
+
+	const handleReset = () => {
+		setInputValue('');
+		setDate('');
+		setTime({
+			start_time : '',
+			end_time   : '',
+		});
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Set Reminder</div>
@@ -22,7 +43,8 @@ function AgentReminder() {
 					placeholder="Type here..."
 					required
 					value={inputValue}
-					onChange={(e) => setInputValue(e.target?.value)}
+					onChange={(val) => setInputValue(val)}
+					// onChange={(e) => setInputValue(e.target.value)}
 				/>
 			</div>
 			<div className={styles.date_wrapper}>
@@ -57,8 +79,22 @@ function AgentReminder() {
 					</div>
 				</div>
 				<div className={styles.button_container}>
-					<Button size="md" themeType="tertiary">Reset</Button>
-					<Button size="md" themeType="primary">Set reminder</Button>
+					<div
+						className={styles.reset_button}
+						onClick={handleReset}
+					>
+						Reset
+					</div>
+					<Button
+						size="md"
+						themeType="primary"
+						className="set_button"
+						onClick={handleSubmit}
+						disabled={loading}
+					>
+						Set reminder
+
+					</Button>
 				</div>
 				<PreviousReminder />
 			</div>

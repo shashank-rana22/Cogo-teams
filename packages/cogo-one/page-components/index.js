@@ -1,7 +1,12 @@
 import { useForm } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
 
 import control from '../configurations/filter-controls';
+import { firebaseConfig } from '../configurations/firebase-config';
+import useListChats from '../hooks/useListChats';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
@@ -9,10 +14,24 @@ import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
+	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+	const firestore = getFirestore(app);
+
+	const { partner, userId } = useSelector(({ profile }) => ({
+		partner : profile.partner || {},
+		userId  : profile?.user?.id,
+	}));
+
+	const { listData = {} } = useListChats({
+		firestore,
+		userId,
+		user_role_ids: partner?.user_role_ids,
+	});
+
 	const [activeTab, setActiveTab] = useState('message');
-	console.log('activeTab', activeTab);
-	const [toggleStatus, setToggleStatus] = useState(true);
-	console.log('toggleStatus', toggleStatus);
+	const [toggleStatus, setToggleStatus] = useState(false);
+
 	const [activeCard, setActiveCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
@@ -26,11 +45,9 @@ function CogoOne() {
 	const { reset, watch, control } = useForm();
 
 	const filterData = watch();
-	console.log('filterData', filterData);
 
 	return (
 		<div className={styles.layout_container}>
-
 			<Customers
 				setActiveCard={setActiveCard}
 				activeCard={activeCard}
@@ -40,7 +57,6 @@ function CogoOne() {
 				filterVisible={filterVisible}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-					// fields={fields}
 				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}

@@ -17,6 +17,19 @@
 	width: 100%;
 	background: #FFFFFF;
 	height: 158px;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+	:global {
+		.ui_input_container {
+			height: 120px !important;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-size: 12px !important;
+		}
+	}
 }
 
 .editor_header {
@@ -63,4 +76,23 @@
 .note_time {
 	font-size: 10px;
 	color: #4F4F4F;
+}
+
+.note_footer {
+	padding: 5px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	background: #FFFFFF;
+	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 1px 10px -1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.14);
+	border-radius: 2px;
+}
+
+.submit_button {
+	display: flex;
+	align-items: center;
+	border: 1px solid #E0E0E0;
+	border-radius: 6px;
+	padding: 0 6px;
+	cursor: pointer;
 }
