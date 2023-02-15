@@ -1,10 +1,8 @@
-import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
 
-import control from '../configurations/filter-controls';
 import { firebaseConfig } from '../configurations/firebase-config';
 import useListChats from '../hooks/useListChats';
 
@@ -42,10 +40,6 @@ function CogoOne() {
 	console.log('inactiveTime', inactiveTime);
 	console.log('inactiveDate', inactiveDate);
 
-	const { reset, watch, control } = useForm();
-
-	const filterData = watch();
-
 	return (
 		<div className={styles.layout_container}>
 			<Customers
@@ -57,7 +51,6 @@ function CogoOne() {
 				filterVisible={filterVisible}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
 				inactiveReasons={inactiveReasons}

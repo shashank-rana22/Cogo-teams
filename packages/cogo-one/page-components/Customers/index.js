@@ -18,8 +18,6 @@ function Customers({
 	searchValue,
 	setFilterVisible = () => {},
 	filterVisible,
-	// fields,
-	reset,
 	activeTab,
 	setActiveTab = () => {},
 	setToggleStatus = () => {},
@@ -121,6 +119,7 @@ function Customers({
 	}, []);
 
 	const loading = false;
+
 	return (
 		<div className={styles.container}>
 
@@ -173,8 +172,6 @@ function Customers({
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
 									filterVisible={filterVisible}
-									// fields={fields}
-									reset={reset}
 								/>
 							)}
 							visible={filterVisible}
