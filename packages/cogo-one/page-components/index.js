@@ -68,7 +68,7 @@ function CogoOne() {
 				inactiveTime={inactiveTime}
 			/>
 			<Conversations />
-			<ProfileDetails />
+			<ProfileDetails activeCard={activeCard} />
 		</div>
 	);
 }

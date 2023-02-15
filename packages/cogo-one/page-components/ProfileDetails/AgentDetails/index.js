@@ -1,15 +1,18 @@
 import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 
+// import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../hooks/useGetUser';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 
-function AgentDetails() {
-	const { listData, loading } = useGetUser();
+function AgentDetails({ activeSelect }) {
+	// console.log('activeCard', activeCard);
+	const { userData, loading } = useGetUser({ activeSelect });
+	// console.log('userData', userData);
 	// const loading = true;
-	const { mobile_country_code, mobile_number, name, picture, mobile_verified, whatsapp_verified } = listData || {};
+	const { mobile_country_code, mobile_number, name, email, mobile_verified, whatsapp_verified } = userData || {};
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
@@ -28,11 +31,13 @@ function AgentDetails() {
 		<>
 			<div className={styles.title}>Profile</div>
 			<div className={styles.content}>
+				{/* <UserAvatar type=" " /> */}
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
 					alt="img"
 					disabled={false}
-					size="60px"
+					// className="avatar_icon"
+					// size="60px"
 				/>
 				<div className={styles.details}>
 					{loading ? (
@@ -44,7 +49,7 @@ function AgentDetails() {
 						<>
 
 							<div className={styles.name}>{name || 'NA'}</div>
-							<div className={styles.name}>{picture || '-'}</div>
+							<div className={styles.name}>{email || '-'}</div>
 						</>
 
 					)}
