@@ -1,5 +1,5 @@
 import { SingleDateRange, Button, Select } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { REPORT_TYPE_OPTIONS, ACCOUNT_TYPE_OPTIONS } from './constants';
 import useSubmitReport from './hooks/useSubmitReport';
@@ -24,6 +24,12 @@ function Reports() {
 		}
 		return !value.accountType;
 	};
+
+	useEffect(()=>{
+		if(value.reportType !== 'sage-organization-mapping-id-report'){
+			setValue((p)=>({...p, accountType:null}));
+		}
+	},[value.reportType])
 
 	const isSubmitDisabled = loading
 	|| !value.reportType
