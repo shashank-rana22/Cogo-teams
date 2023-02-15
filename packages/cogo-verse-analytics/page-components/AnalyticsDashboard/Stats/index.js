@@ -78,7 +78,7 @@ function Stats() {
 							</div>
 						</div>
 						<div className={styles.leaderboard_content_container}>
-							<span className={styles.leaderboard_content}>Trade enquiry</span>
+							<div className={styles.leaderboard_content}>Trade enquiry</div>
 							<div className={styles.leaderboard_span_container}>
 								<span className={styles.leaderboard_value}>40,000 </span>
 								<span className={styles.leaderboard_static_data}>users</span>

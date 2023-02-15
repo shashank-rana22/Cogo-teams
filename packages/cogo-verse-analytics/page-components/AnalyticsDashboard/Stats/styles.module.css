@@ -1,6 +1,22 @@
+@value --d-bg: #242424;
+@value --d-card: #373737;
+@value --d-hover-font-color: #ffffff;
+@value --d-header-font-color: #828282;
+@value --d-user-active-on-color: #E0E0E0;
+@value --d-user-status-num-color: #E0E0E0;
+@value --d-static-response-time-color: #BDBDBD;
+
+@value --l-card: #ffffff;
+@value --l-bg: #F8F2E7;
+@value --l-hover-font-color: #221F20;
+@value --l-header-font-color: #221F20;
+@value --l-user-active-on-color: #828282;
+@value --l-user-status-num-color: #221F20;
+@value --l-static-response-time-color: #221F20;
+
 .main_container {
     font: Poppins;
-    background: #242424;
+    background: --l-bg;
     padding: 3%;
     width: 800px;
     height: 1000px;
@@ -9,15 +25,15 @@
 .bookings_from_container {
     display: flex;
     justify-content: space-between;
-    color: white;
-    background: #242424;
+    color: --l-header-font-color;
+    background: --l-bg;
     padding: 3%;
     width: 100%;
     height: 26%;
 }
 .bookings_from {
     display: flex;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     padding: 6% 3% 6% 4%;
     width: 50%;
@@ -39,29 +55,31 @@
 .bookings_content_static {
     font-weight: 400px;
     font-size: 12px;
-    color: #828282;
+    color: --l-header-font-color;
 }
 .users_active_on_container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 40%;
-    background: #242424;
+    background: --l-bg;
 } 
 .users_active_on {
     margin: 0;
     padding: 2% 5% 5% 5%;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     width: 100%;
 	height: 47%;
+	color: black;
 }
 .users_active_on_content_container {
     display:flex;
     justify-content: space-between;
+	color: --l-user-active-on-color;
 }
 .active_on {
-    color: #828282;
+    color: --l-header-font-color;
     font-size: 12px;
     margin-bottom: 6%;
 }
@@ -76,30 +94,31 @@
 }
 .tickets_container {
     display: flex;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     padding: 3%;
 	height: 44%;
 }
 .tickets_raised {
-    background: #373737;
+    background: --l-card;
     padding: 0% 10%;
     width: 50%;
     border-style: solid;
-    border-color: #373737;
+    border-color: --l-card;
 }
 .tickets_resolved {
     width: 50%;
-    background: #373737;
+    background: --l-card;
     padding: 0% 10%;
     border-style: solid;
-    border-color: #373737;
-    border-left-color: #828282;
-    border-left-width: 0.1px;
+    border-color: --l-card;
+    border-left-color: #E0E0E0;
+    border-width: 0.1px;
 } 
 .tickets_content_value {
     font-weight: 600;
     font-size: 16px;
+	color: --l-hover-font-color;
 }
 .tickets_content_content {
     font-size: 14px;
@@ -113,14 +132,14 @@
     display: flex;
     justify-content: space-between;
     color: white;
-    background: #242424;
+    background: --l-bg;
     padding: 3%;
     width: 100%;
     height: 26%;
 }
 .intent_leaderboard_container {
     display: flex;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     padding: 1% 2%;
     width: 65%;
@@ -128,7 +147,7 @@
     gap:15%;
 }
 .intent_leaderboard {
-    color: #828282;
+    color: --l-header-font-color;
     font-size: 16px;
 }
 .intent_leaderboard_content_container {
@@ -141,12 +160,9 @@
     padding: 2% 0%;
     color: #BDBDBD;
     border-style: solid;
-    border-color: #373737;
+    border-color: --l-card;
     border-bottom-color: #4F4F4F;
     border-width: 0.1px;
-     :hover{
-        color: #ffffff;
-    }
 }
 .leaderboard_content_container_1 {
     display:flex;
@@ -155,9 +171,12 @@
     font-weight: 400;
     padding: 2% 0%;
     color: #BDBDBD;
-    :hover{
-        color: #ffffff;
-    }
+}
+.leaderboard_content_container:hover {
+	color: --l-hover-font-color;
+}
+.leaderboard_content_container_1:hover {
+	color: --l-hover-font-color;
 }
 .leaderboard_content {
 }
@@ -181,12 +200,12 @@
 }
 .user_status {
     display: flex;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     padding: 3% 8%;
     width: 100%;
     gap: 5%;
-    color: #E0E0E0;
+    /* color: #E0E0E0; */
 }
 .svg {
     /* display: flex;
@@ -201,9 +220,10 @@
 .user_status_number {
     font-size: 16px;
     font-weight: 600;
+	color: --l-user-status-num-color;
 }
 .user_status_name {
-
+	color: --l-user-active-on-color;
 }
 
 
@@ -211,14 +231,14 @@
 	display: flex;
     justify-content: space-between;
     color: white;
-    background: #242424;
+    background: --l-bg;
     padding: 3%;
     width: 100%;
     height: 18%;
 }
 .avg_response_time {
 	display: flex;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     padding: 2% 4%;
     width: 30%;
@@ -228,10 +248,10 @@
 .static_avg_response_time {
 	font-weight: 400;
 	font-size: 13px;
-	color: #BDBDBD;
+	color: --l-static-response-time-color;
 }
 .variable_response_time {
-
+	color: --l-hover-font-color;
 }
 .response_time_value {
 	font-size: 30px;
@@ -246,7 +266,7 @@
 
 .communications_container {
 	display: flex;
-    background: #373737;
+    background: --l-card;
     border-radius: 6px;
     padding: 2% 4%;
     width: 65%;
