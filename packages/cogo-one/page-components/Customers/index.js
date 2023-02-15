@@ -27,7 +27,6 @@ function Customers({
 }) {
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.filters_container}>
 				<div className={styles.title}>
 					CogoOne
@@ -40,7 +39,6 @@ function Customers({
 					value={toggleStatus}
 				/>
 			</div>
-
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={activeTab}

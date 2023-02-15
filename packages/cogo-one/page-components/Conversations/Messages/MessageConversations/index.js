@@ -2,9 +2,9 @@
 import { Popover } from '@cogoport/components';
 import { IcMHappy, IcMAttach, IcMSend, IcMInfo } from '@cogoport/icons-react';
 
-import useGetEmojiList from '../../../hooks/useGetEmojis';
+import useGetEmojiList from '../../../../hooks/useGetEmojis';
 
-import EmojisBody from './EmojisBody';
+// import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
@@ -16,11 +16,11 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 			event.preventDefault();
 		}
 	};
-	const {
-		emojisList = {},
-		setOnClicked = () => { },
-		onClicked = false,
-	} = useGetEmojiList();
+	// const {
+	// 	emojisList = {},
+	// 	setOnClicked = () => { },
+	// 	onClicked = false,
+	// } = useGetEmojiList();
 	return (
 		<div className={styles.styled_div}>
 			<div className={styles.container}>
@@ -53,7 +53,7 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
 						<IcMAttach fill="#828282" />
-						<Popover
+						{/* <Popover
 							placement="top"
 							render={<EmojisBody emojisList={emojisList} />}
 							visible={onClicked}
@@ -63,7 +63,7 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 								fill="#828282"
 								onClick={() => setOnClicked((prev) => !prev)}
 							/>
-						</Popover>
+						</Popover> */}
 					</div>
 					<div>
 						<img

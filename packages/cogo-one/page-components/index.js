@@ -33,7 +33,7 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
-	console.log('listData', listData);
+
 	const { messagesList = [], unReadChatsCount } = listData;
 
 	const {
@@ -65,15 +65,14 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				unReadChatsCount={unReadChatsCount}
 			/>
-			{(activeMessageCard?.id || activeVoiceCard?.Id)
-			&& (
-				<Conversations
-					activeTab={activeTab}
-					activeMessageCard={activeMessageCard}
-					firestore={firestore}
-					activeVoiceCard={activeVoiceCard}
-				/>
-			)}
+
+			<Conversations
+				activeTab={activeTab}
+				activeMessageCard={activeMessageCard}
+				firestore={firestore}
+				activeVoiceCard={activeVoiceCard}
+			/>
+
 			<ProfileDetails activeCard={activeMessageCard} />
 		</div>
 	);
