@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetOrganizationCogopoints = ({ activeSelect }) => {
+const useGetOrganizationCogopoints = ({ activeMessageCard }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_organization_cogopoint_profile',
 		method : 'get',
@@ -11,26 +11,21 @@ const useGetOrganizationCogopoints = ({ activeSelect }) => {
 	const [pointData, setPointData] = useState(null);
 
 	const fetchOrganizationCogopoint = async () => {
-		try {
-			const res = await trigger({
-				params: {
-					organization_id: 'bbde20db-d8b8-4be7-8307-367666847041',
-				},
-			});
-			setPointData(res?.data || {});
-		} catch (error) {
-			Toast.error(error?.message);
-			setPointData({});
-		}
+		const res = await trigger({
+			params: {
+				organization_id: 'bbde20db-d8b8-4be7-8307-367666847041',
+			},
+		});
+		setPointData(res?.data || {});
 	};
 
 	useEffect(() => {
 		fetchOrganizationCogopoint();
-	}, [activeSelect]);
+	}, [activeMessageCard]);
 
 	return {
 		pointData,
-		loading,
+		pointLoading: loading,
 	};
 };
 export default useGetOrganizationCogopoints;

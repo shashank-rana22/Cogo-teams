@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
@@ -97,9 +98,25 @@ function MessageList({
 										</div>
 
 									</div>
-									<div className={styles.content}>
-										{item.last_message}
+
+									<div className={styles.content_div}>
+										<div className={styles.content}>
+											{item.last_message}
+										</div>
+
+										{item.new_message_count > 0 && (
+											<div className={styles.new_message_count}>
+												{item.new_message_count > 100 ? '99+' : (
+													<>
+														{item.new_message_count}
+													</>
+												) }
+
+											</div>
+										)}
+
 									</div>
+
 								</div>
 							</div>
 						);

@@ -9797,6 +9797,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'create_omnichannel_note',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_omnichannel_notes',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_outgoing_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 };
 export default partner;

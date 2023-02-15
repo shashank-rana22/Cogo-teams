@@ -1,53 +1,52 @@
-.container{
-	width: 24%;
-	background:#ffffff;
-	margin-right: 10px;
-	border-radius: 8px;
-	padding:10px;
+.container {
+    width: 24%;
+    background: #ffffff;
+    margin-right: 10px;
+    border-radius: 8px;
+    padding: 10px;
 }
 
-.title{
-	font-weight: 600;
-font-size: 20px;
+.title {
+    font-weight: 600;
+    font-size: 20px;
 }
 
-.filters_container{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 15px;	
+.filters_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
 
-	:global{
-        .ui_toggle_container.ui_ps_size_md .ui_switch{
+    :global {
+        .ui_toggle_container.ui_ps_size_md .ui_switch {
             right: 51px;
-        }   
-        .ui_toggle_container.ui_toggle_inside .ui_inner::before{
+        }
+        .ui_toggle_container.ui_toggle_inside .ui_inner::before {
             content: "Active";
             display: flex;
             align-items: center;
             font-size: 12px;
-			background-color:#EE3425;
-        }   
-        .ui_toggle_container.ui_toggle_inside .ui_inner::after{
+            background-color: #ee3425;
+        }
+        .ui_toggle_container.ui_toggle_inside .ui_inner::after {
             content: "Inactive";
             display: flex;
             align-items: center;
             float: right;
             justify-content: end;
             font-size: 12px;
-			color: #ffffff;
-			background-color:#F8AEA8;
-        }   
-        .ui_toggle_container.ui_ps_size_md .ui_toggle_switch{
+            color: #ffffff;
+            background-color: #f8aea8;
+        }
+        .ui_toggle_container.ui_ps_size_md .ui_toggle_switch {
             width: 75px;
         }
-        input[type="checkbox"]:checked + .ui_label_radius  .ui_switch{
-                right: 0px;
+        input[type="checkbox"]:checked + .ui_label_radius .ui_switch {
+            right: 0px;
         }
     }
 }
 
- .tabs{
-	margin:0px -10px 15px -10px;
-} 
-
+.tabs {
+    margin: 0px -10px 15px -10px;
+}

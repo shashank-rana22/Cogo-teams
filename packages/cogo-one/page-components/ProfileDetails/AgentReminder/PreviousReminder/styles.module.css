@@ -34,6 +34,7 @@
 	color: #221F20;
 	font-size: 14px;
 	text-align: center;
+	text-transform: capitalize;
 }
 
 .task {
@@ -46,4 +47,12 @@
 	color: #4F4F4F;
 	font-size: 10px;
 	text-align: center;
+}
+
+.loader_div {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding: 80px;
 }

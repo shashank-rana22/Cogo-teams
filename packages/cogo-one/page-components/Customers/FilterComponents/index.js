@@ -2,14 +2,10 @@ import { Button } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
-import RadioController from '../../../common/RadioController';
-
 import styles from './styles.module.css';
 
 function FilterComponents({
-	setFilterVisible = () => {},
-	reset,
-	// fields,
+	setFilterVisible = () => { },
 }) {
 	return (
 		<div className={styles.container}>
