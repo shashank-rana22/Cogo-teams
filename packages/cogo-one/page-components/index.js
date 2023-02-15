@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import control from '../configurations/filter-controls';
 import { firebaseConfig } from '../configurations/firebase-config';
+import useGetVoiceCallList from '../hooks/useGetVoiceCallList';
 import useListChats from '../hooks/useListChats';
 
 import Conversations from './Conversations';
@@ -14,6 +15,16 @@ import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
+	const [activeTab, setActiveTab] = useState('message');
+	const [toggleStatus, setToggleStatus] = useState(false);
+	const [activeMessageCard, setActiveMessageCard] = useState({});
+	const [activeVoiceCard, setActiveVoiceCard] = useState({});
+	const [searchValue, setSearchValue] = useState('');
+	const [filterVisible, setFilterVisible] = useState(false);
+	const [inactiveReasons, setInactiveReasons] = useState('');
+	const [inactiveDate, setInactiveDate] = useState('');
+	const [inactiveTime, setInactiveTime] = useState('');
+
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
@@ -28,19 +39,14 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
+	const { messagesList = [] } = listData;
 
-	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState(false);
-
-	const [activeCard, setActiveCard] = useState({});
-	const [searchValue, setSearchValue] = useState('');
-	const [filterVisible, setFilterVisible] = useState(false);
-	const [inactiveReasons, setInactiveReasons] = useState('');
-	console.log('inactiveReasons', inactiveReasons);
-	const [inactiveDate, setInactiveDate] = useState('');
-	const [inactiveTime, setInactiveTime] = useState('');
-	console.log('inactiveTime', inactiveTime);
-	console.log('inactiveDate', inactiveDate);
+	const {
+		loading,
+		data = {},
+		setPagination = () => {},
+	} = useGetVoiceCallList({ activeTab });
+	const { list = [] } = data;
 
 	const { reset, watch, control } = useForm();
 
@@ -49,8 +55,10 @@ function CogoOne() {
 	return (
 		<div className={styles.layout_container}>
 			<Customers
-				setActiveCard={setActiveCard}
-				activeCard={activeCard}
+				setActiveMessageCard={setActiveMessageCard}
+				activeMessageCard={activeMessageCard}
+				setActiveVoiceCard={setActiveVoiceCard}
+				activeVoiceCard={activeVoiceCard}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
 				setFilterVisible={setFilterVisible}
@@ -66,6 +74,9 @@ function CogoOne() {
 				inactiveDate={inactiveDate}
 				setInactiveTime={setInactiveTime}
 				inactiveTime={inactiveTime}
+				voiceList={list}
+				messagesList={messagesList}
+				voiceListLoading={loading}
 			/>
 			<Conversations />
 			<ProfileDetails />
