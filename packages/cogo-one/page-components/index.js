@@ -80,7 +80,7 @@ function CogoOne() {
 				handleScroll={handleScroll}
 			/>
 			<Conversations />
-			<ProfileDetails />
+			<ProfileDetails activeCard={activeCard} />
 		</div>
 	);
 }

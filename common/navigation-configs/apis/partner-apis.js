@@ -9773,6 +9773,26 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_organization_communication_logs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_cogopoint_profile',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_promocodes',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
 			api          : 'list_user_call_details',
 			access_type  : 'private',
 			service_name : 'voice_call',

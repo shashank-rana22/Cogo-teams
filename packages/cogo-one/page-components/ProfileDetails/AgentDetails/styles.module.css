@@ -8,18 +8,28 @@
 .content {
 	display: flex;
 	width: 100%;
+
+	:global {
+		.ui_avatar_container {
+			width: 18% !important;
+			height: 50px !important;
+			padding: 4px 6px !important;
+		}
+	}
 }
 
 .details {
 	display: flex;
 	flex-direction: column;
-	margin-left: 18px;
-	width: 90%;
+	/* margin-left: 18px; */
+	width: 77%;
 }
 
 .name {
-	font-size: 16px;
-	color: #4F4F4F;
+	font-size: 15px;
+    display: flex;
+    color: #4F4F4F;
+    width: 100%;
 }
 
 .conversation_title {

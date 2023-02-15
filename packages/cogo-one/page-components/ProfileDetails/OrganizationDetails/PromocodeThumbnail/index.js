@@ -4,7 +4,8 @@ import React from 'react';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
-function PromocodeThumbnail() {
+function PromocodeThumbnail({ promoData }) {
+	const { list = [] } = promoData || {};
 	const colors = ['#e66465', '#ff7675', '#55E6C1'];
 
 	const getCardColor = (index) => colors[index % colors.length];
@@ -13,7 +14,7 @@ function PromocodeThumbnail() {
 	// const defaultImage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
 	return (
 		<div className={styles.thumbnail_container}>
-			{[...Array(6)].map((_, index) => (
+			{(list || []).map((item, index) => (
 				<div
 					className={styles.container}
 					style={{ backgroundColor: getCardColor(index) }}
@@ -63,7 +64,7 @@ function PromocodeThumbnail() {
 					<div className={styles.holes_lower} />
 					<div className={styles.promoCode}>
 						<div className={styles.promocode_name}>
-							123def
+							{item?.promocode}
 						</div>
 					</div>
 				</div>
