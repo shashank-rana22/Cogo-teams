@@ -1444,7 +1444,7 @@ const saas = {
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_check_sanctioned',
+			api         : 'post_saas_insurance_checkout',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
@@ -1496,10 +1496,6 @@ const saas = {
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
-		},
-		{
-			api         : 'get_location_from_postal_code',
-			access_type : 'private',
 		},
 		{
 			api          : 'list_locations',
