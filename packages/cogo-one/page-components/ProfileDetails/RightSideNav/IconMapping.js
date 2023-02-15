@@ -3,13 +3,14 @@ import { IcMProfile, IcACustomerCentre } from '@cogoport/icons-react';
 const IconMapping = [
 	{
 		name : 'profile',
-		icon : <IcMProfile />,
+		icon : <IcMProfile width={20} height={20} />,
 	},
 	{
 		name : 'organization',
 		icon : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/organ-svg.svg"
 			alt="organization"
+			style={{ width: '20px', heigh: '20px' }}
 		/>,
 	},
 	{
@@ -30,7 +31,7 @@ const IconMapping = [
 		name : 'notes',
 		icon : <img
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note.svg"
-			alt="motes"
+			alt="notes"
 		/>,
 	},
 	{
@@ -42,7 +43,7 @@ const IconMapping = [
 	},
 	{
 		name : 'customer_insights',
-		icon : <IcACustomerCentre />,
+		icon : <IcACustomerCentre width={25} height={25} />,
 	},
 ];
 export default IconMapping;

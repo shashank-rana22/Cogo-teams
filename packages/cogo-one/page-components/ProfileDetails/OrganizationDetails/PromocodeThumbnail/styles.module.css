@@ -1,13 +1,6 @@
 .thumbnail_container{
-display: flex;
-}
-
-.loader_div {
 	display: flex;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	padding: 32px;
+	padding-left: 8px;
 }
 
 .container{
