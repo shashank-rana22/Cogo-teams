@@ -4671,6 +4671,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
+		{
+			api          : 'bulk_import_sailing_schedules',
+			access_type  : 'private',
+			service_name : 'sailing_schedule',
+		},
 	],
 	air_port_pair: [
 		{
