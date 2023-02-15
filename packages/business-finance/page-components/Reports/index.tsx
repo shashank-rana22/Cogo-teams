@@ -25,11 +25,11 @@ function Reports() {
 		return !value.accountType;
 	};
 
-	useEffect(()=>{
-		if(value.reportType !== 'sage-organization-mapping-id-report'){
-			setValue((p)=>({...p, accountType:null}));
+	useEffect(() => {
+		if (value.reportType !== 'sage-organization-mapping-id-report') {
+			setValue((p) => ({ ...p, accountType: null }));
 		}
-	},[value.reportType])
+	}, [value.reportType]);
 
 	const isSubmitDisabled = loading
 	|| !value.reportType
