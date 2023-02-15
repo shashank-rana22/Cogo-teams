@@ -1,8 +1,12 @@
-import React from 'react';
-import styles from './styles.module.css';
+/* eslint-disable max-len */
+import React, { useState } from 'react';
+
 import { dummy } from './dummy';
+import styles from './styles.module.css';
 
 function Stats() {
+	const [avgResponseTime, setAvgResponseTime] = useState(2.4);
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.bookings_from_container}>
@@ -62,10 +66,6 @@ function Stats() {
 				</div>
 			</div>
 
-
-
-
-
 			<div className={styles.leaderboard_container}>
 				<div className={styles.intent_leaderboard_container}>
 					<div className={styles.intent_leaderboard}>Intent Leaderboard</div>
@@ -93,20 +93,42 @@ function Stats() {
 						</div>
 					</div>
 				</div>
-				<div className={styles.user_status_container}>{ dummy.map((item)=>{
-						return (
-							<div className={styles.user_status}>
-								<div className={styles.svg}>
-									<img src = {item.src} />
-								</div>
-								<div className={styles.svg_content}>
-									<span className={styles.user_status_number}>{item.number}</span>
-									<br />
-									<span className={styles.user_status_name}>{item.name}</span>
-								</div>
+				<div className={styles.user_status_container}>
+					{ dummy.map((item) => (
+						<div className={styles.user_status}>
+							<div className={styles.svg}>
+								<img src={item.src} alt="user status" />
 							</div>
-						)
-					})}</div>
+							<div className={styles.svg_content}>
+								<span className={styles.user_status_number}>{item.number}</span>
+								<br />
+								<span className={styles.user_status_name}>{item.name}</span>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+			<div className={styles.response_time_and_communications}>
+				<div className={styles.avg_response_time}>
+					<div className={styles.static_avg_response_time}>
+						Average Customer Response Time
+					</div>
+					<div className={styles.variable_response_time}>
+						<span className={styles.response_time_value}>
+							{avgResponseTime}
+							{' '}
+						</span>
+						<span className={styles.response_time_unit}>min</span>
+						<span className={styles.arrow_img}>
+							{avgResponseTime < 3
+								? <img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/decreasing_arrow.png" alt="decreased" />
+								: <img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg" alt="increased" />}
+						</span>
+					</div>
+				</div>
+				<div className={styles.communications_container}>
+					fdgsfd
+				</div>
 			</div>
 		</div>
 	);

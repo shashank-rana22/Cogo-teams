@@ -19,7 +19,7 @@
     display: flex;
     background: #373737;
     border-radius: 6px;
-    padding: 6% 4%;
+    padding: 6% 3% 6% 4%;
     width: 50%;
     flex-direction: column;
     justify-content: space-between;
@@ -54,6 +54,7 @@
     background: #373737;
     border-radius: 6px;
     width: 100%;
+	height: 47%;
 }
 .users_active_on_content_container {
     display:flex;
@@ -78,6 +79,7 @@
     background: #373737;
     border-radius: 6px;
     padding: 3%;
+	height: 44%;
 }
 .tickets_raised {
     background: #373737;
@@ -202,4 +204,52 @@
 }
 .user_status_name {
 
+}
+
+
+.response_time_and_communications {
+	display: flex;
+    justify-content: space-between;
+    color: white;
+    background: #242424;
+    padding: 3%;
+    width: 100%;
+    height: 18%;
+}
+.avg_response_time {
+	display: flex;
+    background: #373737;
+    border-radius: 6px;
+    padding: 2% 4%;
+    width: 30%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.static_avg_response_time {
+	font-weight: 400;
+	font-size: 13px;
+	color: #BDBDBD;
+}
+.variable_response_time {
+
+}
+.response_time_value {
+	font-size: 30px;
+	font-weight: 600;
+}
+.response_time_unit {
+	font-size: 20px;
+}
+.arrow_img {
+	margin-left: 15%;
+}
+
+.communications_container {
+	display: flex;
+    background: #373737;
+    border-radius: 6px;
+    padding: 2% 4%;
+    width: 65%;
+    flex-direction: column;
+    justify-content: space-between;
 }
