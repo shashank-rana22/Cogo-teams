@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function MessageConversations(
 	{
 		messagesData = [],
-		draftMessage = {},
+		draftMessage = '',
 		setDraftMessages = () => {},
 		id = '',
 		sendChatMessage,
@@ -26,7 +26,6 @@ function MessageConversations(
 
 	const noMessages = isEmpty(messagesData);
 	const checkMessage = isEmpty(draftMessage);
-	console.log('messagesData', messagesData);
 
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
@@ -52,7 +51,9 @@ function MessageConversations(
 	};
 
 	useEffect(() => {
-		if (!noMessages) { scrollToBottom(); }
+		if (!noMessages) {
+			scrollToBottom();
+		}
 	}, [id, noMessages, checkMessage]);
 
 	const {
@@ -90,7 +91,7 @@ function MessageConversations(
 					rows={2}
 					placeholder="Type your message..."
 					className={styles.text_area}
-					value={draftMessage}
+					value={draftMessage || ''}
 					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e.target.value }))}
 					onKeyPress={(e) => handleKeyPress(e)}
 				/>
