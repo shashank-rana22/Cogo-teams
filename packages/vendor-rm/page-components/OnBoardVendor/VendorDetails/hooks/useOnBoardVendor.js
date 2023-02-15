@@ -3,46 +3,20 @@ import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
+import { merge } from '@cogoport/utils';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
 import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({ setActiveStepper = () => {} }) {
-	const countryOptions = useGetAsyncOptions({
+	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
-		...asyncFieldsLocations(),
-	});
+	}));
 
-	const cityOptions = useGetAsyncOptions({
+	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['city'] } },
-		...asyncFieldsLocations(),
-	});
-
-	// import SERVICABLE_COUNTRY_IDS from '@cogoport/forms/config/servicableCountries';
-
-	// const countrywiseOptions = {
-	// 	[SERVICABLE_COUNTRY_IDS.IN]: [
-	// 		{
-	// 			label : 'PAN',
-	// 			value : 'pan',
-	// 		},
-	// 		{
-	// 			label : 'GST',
-	// 			value : 'gstin',
-	// 		},
-	// 	],
-	// 	[SERVICABLE_COUNTRY_IDS.VN]: [
-	// 		{
-	// 			label : 'ECN',
-	// 			value : 'ecn',
-	// 		},
-	// 		{
-	// 			label : 'Tax',
-	// 			value : 'tax',
-	// 		},
-	// 	],
-	// };
+	}));
 
 	const fields = getControls({
 		countryOptions,

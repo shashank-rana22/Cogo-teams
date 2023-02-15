@@ -5,6 +5,8 @@ import styles from './styles.module.css';
 function ControlLayout({ element = {}, control = {}, errors = {}, style = {} }) {
 	const Element = getElementController(element.type);
 
+	if (!Element) return null;
+
 	return (
 		<div className={styles.form_group} style={style}>
 			<div className={styles.form_label}>{element.label}</div>
