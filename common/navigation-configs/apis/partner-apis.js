@@ -6739,13 +6739,13 @@ const partner = {
 			feature     : 'treasury',
 		},
 		{
-			api         : 'get_purchase_treasury_get_report',
+			api         : 'get_purchase_treasury_report',
 			access_type : 'private',
 			module      : 'treasury',
 			feature     : 'treasury',
 		},
 		{
-			api         : 'get_purchase_treasury_get_report_details',
+			api         : 'get_purchase_treasury_report_details',
 			access_type : 'private',
 			module      : 'treasury',
 			feature     : 'treasury',
