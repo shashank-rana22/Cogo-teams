@@ -1,6 +1,11 @@
 .container{
-	width: 48%;
+	width: 100%;
 	margin-right: 10px;
 	border-radius: 8px;
 	background: #fff;
+}
+
+.message_container{
+	background: #F9F9F9;
+	
 }

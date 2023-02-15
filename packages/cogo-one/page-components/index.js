@@ -15,7 +15,6 @@ import styles from './styles.module.css';
 function CogoOne() {
 	const [activeTab, setActiveTab] = useState('message');
 	const [toggleStatus, setToggleStatus] = useState(false);
-	const [activeMessageCard, setActiveMessageCard] = useState({});
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
@@ -29,12 +28,12 @@ function CogoOne() {
 		userId  : profile?.user?.id,
 	}));
 
-	const { listData = {} } = useListChats({
+	const { listData = {}, setActiveMessage, activeMessageCard } = useListChats({
 		firestore,
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
-	console.log('listData', listData);
+
 	const { messagesList = [], unReadChatsCount } = listData;
 
 	const {
@@ -42,12 +41,13 @@ function CogoOne() {
 		data = {},
 		handleScroll = () => {},
 	} = useGetVoiceCallList({ activeTab });
+
 	const { list = [] } = data;
 
 	return (
 		<div className={styles.layout_container}>
 			<Customers
-				setActiveMessageCard={setActiveMessageCard}
+				setActiveMessage={setActiveMessage}
 				activeMessageCard={activeMessageCard}
 				setActiveVoiceCard={setActiveVoiceCard}
 				activeVoiceCard={activeVoiceCard}
@@ -65,8 +65,15 @@ function CogoOne() {
 				handleScroll={handleScroll}
 				unReadChatsCount={unReadChatsCount}
 			/>
-			<Conversations />
-			<ProfileDetails activeMessageCard={activeMessageCard} />
+
+			<Conversations
+				activeTab={activeTab}
+				activeMessageCard={activeMessageCard}
+				firestore={firestore}
+				activeVoiceCard={activeVoiceCard}
+			/>
+
+			<ProfileDetails activeCard={activeMessageCard} />
 		</div>
 	);
 }

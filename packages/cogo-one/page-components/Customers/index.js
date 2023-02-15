@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
-	setActiveMessageCard = () => {},
+	setActiveMessage = () => {},
 	activeMessageCard,
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
@@ -27,7 +27,6 @@ function Customers({
 }) {
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.filters_container}>
 				<div className={styles.title}>
 					CogoOne
@@ -40,7 +39,6 @@ function Customers({
 					value={toggleStatus}
 				/>
 			</div>
-
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={activeTab}
@@ -57,7 +55,7 @@ function Customers({
 			{activeTab === 'message' && (
 				<MessageList
 					messagesList={messagesList}
-					setActiveMessageCard={setActiveMessageCard}
+					setActiveMessage={setActiveMessage}
 					activeMessageCard={activeMessageCard}
 					setSearchValue={setSearchValue}
 					searchValue={searchValue}

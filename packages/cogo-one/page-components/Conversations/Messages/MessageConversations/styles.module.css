@@ -1,6 +1,10 @@
 .container{
 	padding:10px;
 	height:60vh ;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 .text_area{
 	resize: none;

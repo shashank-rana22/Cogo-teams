@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessageCard,
+	setActiveMessage,
 	activeMessageCard,
 	setSearchValue,
 	filterVisible,
@@ -21,15 +21,6 @@ function MessageList({
 	reset,
 }) {
 	const loading = false;
-
-	const isMsgListEmpty = isEmpty(messagesList);
-	useEffect(() => {
-		if (!isMsgListEmpty) {
-			setActiveMessageCard(messagesList?.[0]);
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isMsgListEmpty]);
-
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -79,7 +70,7 @@ function MessageList({
 						                ${styles.card_Container} 
 						                ${checkActiveCard ? styles.active_card : ''} 
 						                `}
-								onClick={() => setActiveMessageCard(item)}
+								onClick={() => setActiveMessage(item)}
 							>
 								<div className={styles.card}>
 
