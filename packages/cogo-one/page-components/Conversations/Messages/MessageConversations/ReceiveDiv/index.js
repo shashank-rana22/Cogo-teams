@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 function ReceiveDiv({ eachMessage = {} }) {
-	const { name = '', time = '', message = '' } =	eachMessage || {};
+	const { name = '', time = '', response:{ message = '' } = {} } =	eachMessage || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.name}>

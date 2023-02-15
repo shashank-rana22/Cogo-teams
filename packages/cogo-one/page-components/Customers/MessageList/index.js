@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessageCard,
+	setActiveMessage,
 	activeMessageCard,
 	setSearchValue,
 	filterVisible,
@@ -19,12 +19,6 @@ function MessageList({
 	setFilterVisible,
 	reset,
 }) {
-	useEffect(() => {
-		if (!isEmpty(messagesList)) {
-			setActiveMessageCard(messagesList?.[0]);
-		}
-	}, []);
-
 	const loading = false;
 	return (
 		<>
@@ -75,7 +69,7 @@ function MessageList({
 						                ${styles.card_Container} 
 						                ${checkActiveCard ? styles.active_card : ''} 
 						                `}
-								onClick={() => setActiveMessageCard(item)}
+								onClick={() => setActiveMessage(item)}
 							>
 								<div className={styles.card}>
 

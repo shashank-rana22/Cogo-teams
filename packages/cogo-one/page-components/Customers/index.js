@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
-	setActiveMessageCard = () => {},
+	setActiveMessage = () => {},
 	activeMessageCard,
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
@@ -64,7 +64,7 @@ function Customers({
 			{activeTab === 'message' && (
 				<MessageList
 					messagesList={messagesList}
-					setActiveMessageCard={setActiveMessageCard}
+					setActiveMessage={setActiveMessage}
 					activeMessageCard={activeMessageCard}
 					setSearchValue={setSearchValue}
 					searchValue={searchValue}

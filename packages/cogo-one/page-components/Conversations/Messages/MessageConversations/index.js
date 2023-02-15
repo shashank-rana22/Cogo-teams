@@ -5,24 +5,19 @@ import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 
-function MessageConversations() {
+function MessageConversations({ messagesData = [], messages = {}, setMessages = () => {}, id = '' }) {
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
-	const messages = [{
-		name              : 'John Wick',
-		time              : '11:19',
-		message           : 'hi',
-		conversation_type : 'receive',
-	}, {
-		name              : 'John Wick',
-		time              : '11:19',
-		message           : 'Hello, I am calling to take confirmation ofmy shipment details',
-		conversation_type : 'sent',
-	}];
+	const handleKeyPress = (event) => {
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault();
+		}
+	};
 	return (
 		<div className={styles.styled_div}>
 			<div className={styles.container}>
-				{(messages || []).map((eachMessage) => (eachMessage?.conversation_type !== 'sent' ? <ReceiveDiv eachMessage={eachMessage} /> : <SentDiv eachMessage={eachMessage} />))}
+				{(messagesData || []).map((eachMessage) => (eachMessage?.conversation_type !== 'received' ? <ReceiveDiv eachMessage={eachMessage} /> : <SentDiv eachMessage={eachMessage} />))}
 			</div>
+
 			<div className={styles.text_area_div}>
 				<div className={styles.suggestions_div}>
 					<div className={styles.flex}>
@@ -31,7 +26,16 @@ function MessageConversations() {
 					</div>
 					<IcMInfo fill="#221F20" height="20px" width="20px" />
 				</div>
-				<textarea rows={2} placeholder="Type your message..." className={styles.text_area} />
+
+				<textarea
+					rows={2}
+					placeholder="Type your message..."
+					className={styles.text_area}
+					value={messages[id]}
+					onChange={(e) => setMessages((p) => ({ ...p, [id]: e.target.value }))}
+					onKeyPress={(e) => handleKeyPress(e)}
+				/>
+
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
 						<IcMAttach fill="#828282" />
