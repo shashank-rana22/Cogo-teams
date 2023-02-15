@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FIRESTORE_PATH } from '../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../constants/MODAL_COMPONENT_MAPPING';
 import useGetMessages from '../../../hooks/useGetMessages';
+import useSendChat from '../../../hooks/useSendChat';
 
 import Header from './Header';
 import MessageConversations from './MessageConversations';
@@ -12,20 +13,20 @@ import styles from './styles.module.css';
 
 function Messages({ activeMessageCard = {}, firestore }) {
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
-	const [messages, setMessages] = useState({});
+	const [draftMessages, setDraftMessages] = useState({});
 	const messageRef = useRef(null);
 
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
 	let activeChatCollection;
 
-	if (activeMessageCard?.channel_type) {
+	if (channel_type) {
 		activeChatCollection = collection(
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
 		);
 	}
-
+	const { sendChatMessage } = useSendChat({ firestore, channel_type, id, draftMessages, setDraftMessages });
 	const {
 		getNextData,
 		getFirebaseData,
@@ -64,8 +65,8 @@ function Messages({ activeMessageCard = {}, firestore }) {
 				<div className={styles.message_container} onScroll={handleScroll} ref={messageRef}>
 					<MessageConversations
 						messagesData={messagesData}
-						setMessages={setMessages}
-						messages={messages}
+						draftMessages={draftMessages}
+						setDraftMessages={setDraftMessages}
 						id={id}
 					/>
 				</div>

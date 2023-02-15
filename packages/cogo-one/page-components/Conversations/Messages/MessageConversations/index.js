@@ -9,7 +9,7 @@ import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 
-function MessageConversations({ messagesData = [], messages = {}, setMessages = () => {}, id = '' }) {
+function MessageConversations({ messagesData = [], draftMessages = {}, setDraftMessages = () => {}, id = '' }) {
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
@@ -46,8 +46,8 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 					rows={2}
 					placeholder="Type your message..."
 					className={styles.text_area}
-					value={messages[id]}
-					onChange={(e) => setMessages((p) => ({ ...p, [id]: e.target.value }))}
+					value={draftMessages[id]}
+					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e.target.value }))}
 					onKeyPress={(e) => handleKeyPress(e)}
 				/>
 
