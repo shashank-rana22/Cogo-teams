@@ -5,7 +5,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		label       : 'Country of Registration',
 		type        : 'select',
 		placeholder : 'Select a Country',
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '30%', width: '360px' },
 		condition   : {
 			type: [
 				'city',
@@ -23,16 +23,17 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		rules: { required: 'Country is required' },
 	},
 	{
-		name        : 'tax_number_type',
+		name        : 'registration_number_type',
 		label       : 'Tax Number',
 		type        : 'select',
 		placeholder : 'Select',
 		style       : { flexBasis: '8%', marginRight: '2px' },
 		condition   : { type: ['country'] },
-		rules       : { required: 'Tax Number is Required' },
+		rules       : { required: 'Tax Number Type is Required' },
+		// options     : countrywiseOptions,
 	},
 	{
-		name        : 'tax_number',
+		name        : 'registration_number',
 		type        : 'text',
 		style       : { flexBasis: '22%', marginTop: '10px' },
 		condition   : { type: ['country'] },
@@ -40,15 +41,15 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		rules       : { required: 'Document No is required' },
 	},
 	{
-		name        : 'name',
+		name        : 'business_name',
 		label       : 'Name of the Organization',
 		type        : 'text',
 		style       : { flexBasis: '33%', marginRight: '0px' },
 		placeholder : 'Type here',
-		rules       : { required: 'Role Short Name is required' },
+		rules       : { required: 'Name of the Organization is required' },
 	},
 	{
-		name            : 'tax_proof_url',
+		name            : 'registration_proof_url',
 		showLabel       : false,
 		label           : 'Upload Tax Document Proof (Pan/GST Certificate)',
 		style           : { flexBasis: '100%', marginRight: '0px' },
@@ -59,6 +60,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		onlyURLOnChange : true,
 		accept          : 'image/*',
 		uploadType      : 'aws',
+		rules           : { required: 'Tax Document is required' },
 	},
 	{
 		name        : 'company_type',
@@ -113,6 +115,6 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 				'railway_terminal',
 			],
 		},
-		rules: { message: 'City is Required' },
+		rules: { required: 'City is Required' },
 	},
 ];

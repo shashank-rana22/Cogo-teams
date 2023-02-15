@@ -1,11 +1,11 @@
 import FormComponent from './FormComponent';
 import Header from './Header';
 
-function VendorDetails() {
+function VendorDetails({ activeStepper = {}, setActiveStepper = () => {} }) {
 	return (
 		<div>
 			<Header />
-			<FormComponent />
+			<FormComponent activeStepper={activeStepper} setActiveStepper={setActiveStepper} />
 		</div>
 	);
 }

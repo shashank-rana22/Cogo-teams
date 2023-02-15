@@ -26,3 +26,8 @@
 	justify-content: center;
 	margin-top: 40px;
 }
+
+.form_container {
+  padding: 20px;
+  background-color: white;
+}
