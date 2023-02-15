@@ -1,0 +1,189 @@
+
+
+/* Main Container ------------------------------------------------------------------- */
+
+.main_container{
+
+    border:solid 1px rgb(119, 158, 255);
+    height: 100%;
+    
+}
+
+/* Top Content ------------------------------------------------------------------- */
+
+.top_content{
+    background:#f9f5ec;
+    display: flex;
+    justify-content: flex-end;
+
+    
+}
+
+.select_container{
+    padding: 16px;
+    width: 250px;
+}
+
+.date_range_container{
+    padding: 16px;
+    width: fit-content;
+    
+  input {
+    border: solid 1px #E0E0E0 !important;  
+    height:38px !important;
+
+    }
+    
+}
+
+/* Circle Frame ------------------------------------------------------------------- */
+
+.circle_content{
+    border: solid 1px #baba00;  
+    width:100%;
+    height:75% ;
+    display: block;
+
+}
+
+.circle_frame {
+    width:500px;
+    height:500px;
+    border-radius:51%;
+    margin: auto;
+    border:dashed 1px #CFBC93;
+    padding:20px;
+    
+ }
+
+ .circle {
+    position: absolute;
+    background:rgb(255, 255, 255);
+    border-radius:51%;
+    min-height: 50px;
+    min-width: 50px;
+    box-shadow: 0px 4px 16px rgba(98, 127, 172, 0.2);
+    border: solid 1px #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    
+
+ }
+ .stat_value {
+   color: #221F20;
+   font-weight: 600;
+ }
+ .stat_label{
+   color: #828282;
+
+ }
+
+/* Circles ------------------------------------------------------------------- */
+
+
+.new_users {
+    width:120px;
+    height:120px;
+    margin-top: 0px;
+    margin-left:-60px;
+
+    .stat_value {
+      font-size: 24px;
+    }
+    .stat_label{
+      font-size: 14px;
+    }
+    
+ }
+ .recurring_users{
+    width:100px;
+    height:100px;
+    margin-top: 95px;
+    margin-left:-95px;
+    .stat_value {
+      font-size: 20px;
+    }
+    .stat_label{
+      font-size: 12px;
+    }
+
+ }
+ .transacting_users{
+    width:90px;
+    height:90px;
+    margin-top: 185px;
+    margin-left:-95px;
+    .stat_value {
+      font-size: 18px;
+    }
+    .stat_label{
+      font-size: 11px;
+    }
+
+ }
+
+ .churned_users{
+    width:75px;
+    height:75px;
+    margin-top: 265px;
+    margin-left:-75px;
+    .stat_value {
+      font-size: 16px;
+    }
+    .stat_label{
+      font-size: 10px;
+    }
+ }
+
+ .new_registration{
+    width:75px;
+    height:75px;
+    margin-top: 385px;
+    margin-left: 390px;
+    .stat_value {
+      font-size: 16px;
+    }
+    .stat_label{
+      font-size: 10px;
+    }
+
+ }
+ .rates{
+    width:90px;
+    height:90px;
+    margin-top: 325px;
+    margin-left: 430px;
+    .stat_value {
+      font-size: 18px;
+    }
+    .stat_label{
+      font-size: 11px;
+    }
+ }
+ .bookings{
+    width:100px;
+    height:100px;
+    margin-top: 240px;
+    margin-left: 450px;
+    .stat_value {
+      font-size: 20px;
+    }
+    .stat_label{
+      font-size: 12px;
+    }
+ }
+
+ .circle_clicked{
+    border: solid 3px #CFBC93;
+
+ }
+
+
+
+/* GLobe  ------------------------------------------------------------------- */
+
+.globe_container{}

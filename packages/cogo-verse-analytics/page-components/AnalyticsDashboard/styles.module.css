@@ -1,0 +1,25 @@
+.main_container{
+
+    width:100%;
+    height:95vh;
+
+    display:flex;
+    flex-direction:row;
+
+}
+.stats_view_container{
+    border:solid 1px #00ff00;
+
+    height:100%;
+
+    flex-basis:50%;
+    
+}
+.map_view_container{
+    border:solid 1px #00ccff;
+
+    height:100%;
+
+    flex-basis:50%;
+
+}
