@@ -1,47 +1,39 @@
-import { Tooltip } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function QuestionsBox({ question_detail = {} }) {
-	const { question = '', weight = '', remark = '' } = question_detail || {};
+	const { question = '', tags = ['a', 'bcvc', 'csdee'], remark = '' } = question_detail || {};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.question_section}>
-				<p>Question</p>
-
+			<div className={styles.question_texts}>
 				<div className={styles.question}>
 					<Tooltip
 						theme="light"
 						placement="top-start"
 						animation="shift-away"
-						content={question}
+						content={startCase(question)}
 					>
-						<div className={styles.question}>{question}</div>
+						<div className={styles.question}>{startCase(question)}</div>
 					</Tooltip>
 				</div>
-			</div>
 
-			<div className={styles.remark}>
-				<p>Remark</p>
-
-				<div className={styles.question}>
+				<div className={styles.remark}>
 					<Tooltip
 						theme="light"
-						placement="top-start"
+						placement="bottom-start"
 						animation="shift-away"
-						content={remark}
+						content={startCase(remark)}
 					>
-						<div className={styles.question}>{remark}</div>
+						<div className={styles.question}>{startCase(remark)}</div>
 					</Tooltip>
 				</div>
 			</div>
 
-			<div className={styles.weightage}>
-				<p>Weightage</p>
-
-				<div className={styles.question}>
-					{weight}
-				</div>
+			<div className={styles.question_tags}>
+				{tags.map((tag) => <Pill color="blue">{tag}</Pill>)}
 			</div>
 		</div>
 	);

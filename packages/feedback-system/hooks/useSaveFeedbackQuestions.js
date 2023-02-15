@@ -1,7 +1,12 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
+import { useGetCreateQuestionsControls } from '../utils/createQuestionControls';
+
 const useSaveFeedbackQuestions = () => {
+	const formProps = useForm();
+
 	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
 		url    : 'update_feedback_question',
@@ -10,11 +15,9 @@ const useSaveFeedbackQuestions = () => {
 	const onSaveFeedbackQuestions = async ({
 		questions = [],
 		feedback_question_id = '',
-		setChangeQuestions = () => {},
-		setQuestions = () => {},
+		setQuestionActionList = () => {},
+		setRefetchList = () => {},
 		reset = () => {},
-		setShowForm = () => {},
-		setShowbutton = () => {},
 	}) => {
 		try {
 			await trigger({
@@ -25,17 +28,9 @@ const useSaveFeedbackQuestions = () => {
 				},
 			});
 
-			setQuestions((pv) => pv.map((item) => {
-				if (item.feedback_question_id === feedback_question_id) {
-					return { ...questions, feedback_question_id, status: 'active' };
-				}
-				return { ...item };
-			}));
-
-			setChangeQuestions((pv) => ({ ...pv, edit: undefined }));
+			setQuestionActionList((pv) => ({ ...pv, edit: undefined }));
+			setRefetchList(true);
 			reset();
-			setShowForm(false);
-			setShowbutton(true);
 
 			Toast.success('Question Updated Successfully');
 		} catch (e) {
@@ -43,9 +38,13 @@ const useSaveFeedbackQuestions = () => {
 		}
 	};
 
+	const controls = useGetCreateQuestionsControls();
+
 	return {
 		onSaveFeedbackQuestions,
 		loading,
+		controls,
+		formProps,
 	};
 };
 

@@ -2,7 +2,7 @@ import { Pagination, Placeholder } from '@cogoport/components';
 
 import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
-import Questions from '../../../../common/Questions';
+import Questions from '../../../../common/QuestionsItem';
 import RoleSelect from '../../../../common/RoleSelect';
 
 import styles from './styles.module.css';

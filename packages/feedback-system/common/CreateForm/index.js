@@ -13,14 +13,14 @@ function CreateForm({
 	onSubmit = () => {},
 	onCancel = () => {},
 }) {
-	const { handleSubmit = () => {}, control, formState: { errors } } = formProps;
+	const { handleSubmit = () => {}, control, formState: { errors }, reset } = formProps;
 
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
+			className={styles.container}
 		>
-
-			<section className={styles.form_container}>
+			<section className={styles.form_content}>
 				{controls.map((controlItem) => {
 					const el = { ...controlItem };
 					const Element = getElementController(el.type);
@@ -35,7 +35,6 @@ function CreateForm({
 									{...el}
 									key={el.name}
 									control={control}
-									id={`rnp_role_list_create_role_form_${el.name}_input`}
 								/>
 
 								<div className={styles.error_message}>
@@ -52,7 +51,10 @@ function CreateForm({
 					size="md"
 					style={{ marginRight: 10 }}
 					themeType="secondary"
-					onClick={() => onCancel()}
+					onClick={() => {
+						reset();
+						onCancel();
+					}}
 				>
 					Cancel
 				</Button>

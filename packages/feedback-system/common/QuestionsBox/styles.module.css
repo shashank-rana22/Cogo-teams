@@ -1,49 +1,36 @@
 .container {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	padding: 8px;
 	margin: 4px;
 }
 
-.question_section {
-	flex: 5;
+.question_texts {
+	flex: 0.7;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 8px;
+}
 
-	p {
-		font-size: 12px;
-		font-weight: bold;
-	}
+.question {
+	display: flex;
 }
 
 .remark {
-	flex: 4;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 8px;
-
-	p {
-		font-size: 12px;
-		font-weight: bold;
-	}
 }
 
-.weightage {
-	flex: 2;
+.question_tags {
+	flex: 0.3;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 8px;
+	flex-wrap: wrap;
 
-	p {
-		font-size: 12px;
-		font-weight: bold;
-	}
+	max-height: 100%;
+	max-width: 100%;
+	overflow-y: hidden;
+
 }
 
 .question {

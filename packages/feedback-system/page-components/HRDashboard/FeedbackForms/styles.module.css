@@ -1,0 +1,95 @@
+.container {
+}
+
+.go_back_container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.redirect_container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .text {
+        font-size: 18px;
+		font-weight: bold;
+		margin: 0px;
+    }
+}
+
+.header {
+    display: flex;
+}
+
+.form_container {
+    display: flex;
+    padding: 16px 0px;
+
+    background-color: #ffffff;
+    border-radius: 8px;
+
+    box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.department_status {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.accordion {
+    padding: 8px;
+    margin: 8px 8px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.open_accordion {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.department {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .label {
+        margin: 0px;
+    }
+}
+
+.roles {
+    margin: 0 8px 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: #fdfbf6;
+
+    :hover {
+        background-color: beige;
+    }
+}
+
+.role {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+
+    align-items: center;
+
+    :global {
+        .ui_pill_container {
+            background-color: #efefef;
+        }
+
+        .ui_pill_text {
+            background-color: #efefef;
+        }
+    }
+} 
+
+.form_section {
+    max-height: 100%;
+    overflow: scroll;
+}

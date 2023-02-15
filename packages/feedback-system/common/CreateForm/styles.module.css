@@ -1,7 +1,9 @@
-.form_container {
+.container {
+}
+
+.form_content {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: 1rem;
 }
 
 .form_group {
@@ -9,10 +11,10 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
-	padding: 8px;
+	padding: 8px 0px;
 
 	span {
-		padding: 4px;
+		padding: 4px 0px;
 		font-weight: bold;
 	}
 }
@@ -25,7 +27,7 @@
 .button_container{
 	display: flex;
 	justify-content: flex-end;
-	padding: 16px 8px 8px;
+	padding-top: 16px;
 }
 
 .error_message {

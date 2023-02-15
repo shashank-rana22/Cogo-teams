@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import CreateForm from '../../../../common/CreateForm';
 import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
-import Questions from '../../../../common/Questions';
+import Questions from '../../../../common/QuestionsItem';
 import RoleSelect from '../../../../common/RoleSelect';
 import useAddFeedbackQuestion from '../../../../hooks/useAddFeedbackQuestion';
 import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';

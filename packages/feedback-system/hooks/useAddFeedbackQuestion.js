@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
-import { controls } from '../utils/createQuestionControls';
+import { useGetCreateQuestionsControls } from '../utils/createQuestionControls';
 
-const useAddFeedbackQuestion = ({ params }) => {
+const useAddFeedbackQuestion = ({ setAddAnother = () => {} }) => {
 	const formProps = useForm();
 
 	const [{ loading: apiLoading = false }, trigger] = useRequest({
@@ -12,19 +12,21 @@ const useAddFeedbackQuestion = ({ params }) => {
 		url    : 'create_feedback_question',
 	}, { manual: true });
 
+	const controls = useGetCreateQuestionsControls();
+
 	const onAddFeedbackQuestion = async ({
-		questions = [],
-		reset = () => {},
-		setShowForm = () => {},
-		setShowbutton = () => {},
+		values = {},
 		setRefetchList = () => {},
+		reset = () => {},
 	}) => {
 		try {
 			await trigger({
 				params: {
-					...questions,
-					department : params.filters.department,
-					work_scope : params.filters.work_scope,
+					...values,
+					department : 'hi',
+					work_scope : 'hi',
+					weight     : '5',
+					remark     : 'hii',
 				},
 			});
 
@@ -32,9 +34,8 @@ const useAddFeedbackQuestion = ({ params }) => {
 
 			setRefetchList(true);
 
-			reset();
-			setShowForm(false);
-			setShowbutton(true);
+			setAddAnother(true);
+			reset(values);
 
 			return null;
 		} catch (e) {

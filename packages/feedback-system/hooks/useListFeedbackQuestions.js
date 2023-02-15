@@ -4,20 +4,17 @@ import { useEffect, useState } from 'react';
 const useListFeedbackQuestions = ({
 	status = '',
 	userId = '',
+	formId = '',
 	searchValue = '',
-	department = '',
-	work_scope = '',
 	showQuestion = false,
 }) => {
 	const [params, setParams] = useState({
 		filters: {
-			user_id    : userId || undefined,
-			status,
-			department : department || undefined,
-			work_scope : work_scope || undefined,
+			user_id : userId || undefined,
+			status  : status || undefined,
+			form_id : formId || undefined,
 		},
-		page       : 1,
-		page_limit : 3,
+		page: 1,
 	});
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({

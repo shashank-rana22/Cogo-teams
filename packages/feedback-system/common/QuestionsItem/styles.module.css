@@ -3,7 +3,6 @@
 	align-items: center;
 	justify-content: center;
 	margin: 8px 0px;
-	height: 52px;
 
 	background: #f7f5fc;
 	border: 2px solid #f1efff;
@@ -15,12 +14,12 @@
 }
 
 .question_container {
-	width: 95%;
+	width: 85%;
 }
 
 .icon_container {
 	display: flex;
-	width: 5%;
+	width: 10%;
 	align-items: center;
 	justify-content: flex-end;
 	margin: 4px;
