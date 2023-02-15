@@ -1,6 +1,7 @@
 import { Pagination, Table } from '@cogoport/components';
 import React from 'react';
 
+import EmptyState from '../common/EmptyState';
 import { TableProps } from '../interface';
 
 import styles from './style.module.css';
@@ -18,6 +19,9 @@ function StyledTable({
 				loading={loading}
 				{...rest}
 			/>
+
+			{data.length === 0 && <EmptyState />}
+
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"

@@ -1,10 +1,12 @@
-import { Modal, Button } from '@cogoport/components';
+import { Textarea, Modal, Button } from '@cogoport/components';
 import { useState } from 'react';
+
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import MatchModal from './MatchModal';
 import styles from './styles.module.css';
 
-function SettlementModal({ settlementData, id, refetch, isEditable = true }) {
+function SettlementModal({ settlementData, id, refetch, row, isEditable = true }) {
 	const [show, setShow] = useState(false);
 
 	const {
@@ -13,6 +15,11 @@ function SettlementModal({ settlementData, id, refetch, isEditable = true }) {
 		settlementDate,
 		supportingDocUrl,
 	} = settlementData || {};
+
+	const [value, setValue] = useState({
+		date    : settlementDate || '',
+		remarks : '',
+	});
 
 	return (
 		<div>
@@ -45,7 +52,10 @@ function SettlementModal({ settlementData, id, refetch, isEditable = true }) {
 						/>
 
 						<Modal.Body>
+							{!isEditable && <ApproveAndReject row={row} />}
 							<MatchModal
+								value={value}
+								setValue={setValue}
 								checkedData={list}
 								incidentMappingId={incidentMappingId}
 								settlementDate={settlementDate}
@@ -54,6 +64,20 @@ function SettlementModal({ settlementData, id, refetch, isEditable = true }) {
 								refetch={refetch}
 								isEditable={isEditable}
 							/>
+							{isEditable && (
+								<>
+									<div className={styles.remarks}>Remarks*</div>
+									<div className={styles.textarea}>
+										<Textarea
+											name="remark"
+											size="md"
+											placeholder="Enter Remark Here..."
+											onChange={(v: string) => setValue((prev) => ({ ...prev, text: v }))}
+											style={{ width: '700', height: '100px', marginBottom: '12px' }}
+										/>
+									</div>
+								</>
+							) }
 
 						</Modal.Body>
 
@@ -64,7 +88,7 @@ function SettlementModal({ settlementData, id, refetch, isEditable = true }) {
 										size="md"
 										themeType="secondary"
 										style={{ marginRight: '8px' }}
-										// disabled={!(remark.length) || loading}
+										disabled={!(value?.remarks.length)}
 										onClick={() => {
 											// onReject();
 										}}
@@ -75,9 +99,9 @@ function SettlementModal({ settlementData, id, refetch, isEditable = true }) {
 									<Button
 										size="md"
 										style={{ marginRight: '8px' }}
-										// disabled={!(remark.length) || loading}
+										disabled={!(value?.remarks.length)}
 										onClick={() => {
-											// onApprove();
+											// onApprove('settle');
 										}}
 									>
 										Settle

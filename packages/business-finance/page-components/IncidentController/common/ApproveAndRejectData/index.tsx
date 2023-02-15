@@ -19,14 +19,9 @@ function ApproveAndReject({ row }:any) {
 
 				<div className={styles.remark_flex}>
 					<div className={styles.approve}>{status === 'APPROVED' ? 'Approved by - ' : 'Rejected by - '}</div>
-					{updatedBy?.name || '-'}
+					{startCase(updatedBy?.name || '-')}
 				</div>
 			</div>
-			{/* <div className={status === 'APPROVED' ? styles.approve_border : styles.reject_border} /> */}
-			{/* <div className={styles.remark_flex}>
-				Remarks -
-				<div>{remark || '-'}</div>
-			</div> */}
 		</div>
 	);
 }

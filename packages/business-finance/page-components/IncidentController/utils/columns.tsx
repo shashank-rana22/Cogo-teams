@@ -5,7 +5,7 @@ import BankDetails from '../Modals/BankDetails';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
-// import SettlementModal from '../Modals/SettlementModal';
+import SettlementModal from '../Modals/SettlementModal';
 import TDSModal from '../Modals/TDSModal';
 
 import { TooltipInterface } from './interface';
@@ -176,7 +176,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					tdsRequest,
 					bankRequest,
 					organization,
-					// settlementRequest,
+					settlementRequest,
 					journalVoucherRequest,
 					interCompanyJournalVoucherRequest,
 				} = row.data || {};
@@ -194,14 +194,15 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 								row={row}
 							/>
 						)}
-						{/* {requestType === 'SETTLEMENT_APPROVAL' && (
+						{requestType === 'SETTLEMENT_APPROVAL' && (
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
+								row={row}
 								refetch={getIncidentData}
 								isEditable={false}
 							/>
-						)} */}
+						)}
 						{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
 							<JvModal
 								journalVoucherRequest={journalVoucherRequest}

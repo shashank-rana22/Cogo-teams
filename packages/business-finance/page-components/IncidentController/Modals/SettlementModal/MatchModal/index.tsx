@@ -1,4 +1,4 @@
-import { Button, SingleDateRange } from '@cogoport/components';
+import { Datepicker, Button } from '@cogoport/components';
 import { IcMDownload, IcMRadioLoader, IcMRefresh } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
@@ -11,6 +11,8 @@ import ListData from './ListData';
 import styles from './styles.module.css';
 
 function MatchModal({
+	value,
+	setValue,
 	checkedData,
 	incidentMappingId,
 	settlementDate,
@@ -20,7 +22,6 @@ function MatchModal({
 	refetch,
 	isEditable,
 }:MatchModalInterface) {
-	const [value, setValue] = useState({ date: '' });
 	const [checkResetButton, setCheckResetButton] = useState(false);
 
 	const {
@@ -51,16 +52,18 @@ function MatchModal({
 		setChangeData(checkedData);
 		setCheckResetButton(!checkResetButton);
 	};
+
 	return (
 		<div>
 			<div className={styles.flex}>
-				<div className={styles.flex}>
+				<div className={styles.flex_settle}>
 					Settlement Date
 					<div className={styles.date_range}>
-						<SingleDateRange
+						<Datepicker
 							placeholder="Enter Date"
-							dateFormat="MM/dd/yyyy"
+							dateFormat="dd/MM/yyyy"
 							name="date"
+							disable={!isEditable}
 							value={value?.date}
 							onChange={(item: string) => setValue((prev) => ({ ...prev, date: item }))}
 							style={{ width: '100px', height: '29px' }}

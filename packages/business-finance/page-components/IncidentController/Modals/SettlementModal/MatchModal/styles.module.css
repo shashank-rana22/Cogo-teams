@@ -3,21 +3,27 @@
   justify-content: space-between;
   align-items: center;
 }
+.flex_settle {
+  display: flex;
+  margin-left: 14px;
+  justify-content: space-between;
+  align-items: center;
+}
 .date_range {
   margin-left: 8px;
   :global {
     .react-datepicker__input-container {
       input {
-        font-size: 10px;
+        font-size: 12px;
         height: 30px;
-        width: 145px;
+        width: 120px;
       }
       .react-datepicker-ignore-onclickoutside {
         height: 30px;
-        width: 145px;
+        width: 120px;
       }
       .react-datepicker__close-icon {
-        right: -44px;
+        right: -18px;
         padding: 0px;
       }
     }

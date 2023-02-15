@@ -149,6 +149,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
+								row={row}
 								refetch={getIncidentData}
 							/>
 						)}
