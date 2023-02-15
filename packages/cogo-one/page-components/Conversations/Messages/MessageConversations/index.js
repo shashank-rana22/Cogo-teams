@@ -24,6 +24,7 @@ function MessageConversations(
 	const messageRef = useRef(null);
 
 	const noMessages = isEmpty(messagesData);
+	console.log('messagesData', messagesData);
 
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
