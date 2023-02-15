@@ -1616,6 +1616,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'mark_user_as_verified',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	supply_crm: [
 		{
