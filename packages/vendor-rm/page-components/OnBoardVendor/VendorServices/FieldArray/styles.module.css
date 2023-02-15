@@ -1,0 +1,45 @@
+.error {
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.form {
+	padding: 10px;
+	overflow: scroll;
+}
+
+.form::-webkit-scrollbar {
+	display: none;
+}
+
+.content {
+	display: flex;
+	align-items: flex-start;
+	gap: 20px;
+	/* margin: 10px 20px; */
+}
+
+.list {
+	flex: 1;
+	margin: 10px 0;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.form_label {
+    text-align: start;
+    margin-bottom: 4px;
+}
+
+.form_error_message {
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.button {
+	/* display: flex;
+	justify-content: baseline; */
+	margin: 45px 0px 0px 0px;
+}

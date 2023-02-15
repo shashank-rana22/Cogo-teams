@@ -1,45 +1,12 @@
-import { getElementController } from '../../../utils/get-element-controller';
+// eslint-disable-next-line import/no-cycle
+import FormComponent from './FormComponent';
+import Header from './Header';
 
-import useOnBoardVendor from './hooks/useOnBoardVendor';
-import styles from './styles.module.css';
-
-function VendorDetails() {
-	const {
-		controls = [],
-		control,
-		errors,
-	} =	useOnBoardVendor();
-
+function VendorDetails({ activeStepper = {}, setActiveStepper = () => {} }) {
 	return (
-		<div className={styles.form_container}>
-			{controls.map((controlItem) => {
-				const el = { ...controlItem };
-
-				const span = el.span;
-
-				console.log(span, 'span');
-
-				const Element = getElementController(el.type);
-
-				if (!Element) return null;
-
-				return (
-					<div className={styles.form_group} style={{display: 'flex',flexDirection: 'column',flexBasis: span}}>
-						<div className={styles.form_label}>{el.label}</div>
-						<div>
-							<Element
-								{...el}
-								key={el.name}
-								control={control}
-								id={`onboard_vendor_form_${el.name}_input`}
-							/>
-							<div className={styles.error_message}>
-								{errors?.[el.name]?.message}
-							</div>
-						</div>
-					</div>
-				);
-			})}
+		<div>
+			<Header />
+			<FormComponent activeStepper={activeStepper} setActiveStepper={setActiveStepper} />
 		</div>
 	);
 }

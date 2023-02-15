@@ -5,13 +5,14 @@ import { useState, useCallback } from 'react';
 
 import TABS_MAPPING from '../../constants/tabs';
 
-import StepperForm from './StepperForm';
 import styles from './styles.module.css';
 
 function OnBoardVendor() {
 	const router = useRouter();
 
 	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[0]);
+
+	const Element = activeStepper?.component;
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const onBack = useCallback(() => router.push('/vendors-list'), []);
@@ -34,7 +35,12 @@ function OnBoardVendor() {
 					style={{ background: '#FFFFFF', padding: '2px', margin: '-15px' }}
 				/>
 			</div>
-			<StepperForm activeStepper={activeStepper} setActiveStepper={setActiveStepper} />
+			<div className={styles.form_container}>
+				<Element
+					activeStepper={activeStepper}
+					setActiveStepper={setActiveStepper}
+				/>
+			</div>
 		</div>
 	);
 }
