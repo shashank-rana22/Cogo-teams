@@ -15,10 +15,12 @@ interface Props {
 
 const useSubmitReport = (value:Props) => {
 	const { dateRange, reportType, accountType } = value || {};
+	const apiKey = reportType?.replaceAll("-","_");
+	
 	const [{ loading }, trigger] = useRequestBf({
 		url     : `/muneem/reports/${reportType}`,
 		method  : 'GET',
-		authKey : `get_muneem_reports_${reportType}`,
+		authKey : `get_muneem_reports_${apiKey}`,
 
 	}, { manual: true });
 
