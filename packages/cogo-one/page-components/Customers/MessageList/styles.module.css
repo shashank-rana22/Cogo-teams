@@ -102,10 +102,10 @@ flex-direction: column;
 .user_name{
 	font-size: 14px;
 	font-weight: 600;
-	/* text-overflow: ellipsis;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	max-width: 90%; */
+	max-width: 150px;
 }
 
 .organisation{

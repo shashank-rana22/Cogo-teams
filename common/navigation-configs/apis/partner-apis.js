@@ -9797,6 +9797,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'update_agent_work_preference',
+			access_type  : 'private',
+			service_name : 'agent_work',
+		},
 	],
 };
 export default partner;

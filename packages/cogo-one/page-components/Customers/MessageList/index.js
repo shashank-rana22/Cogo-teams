@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import UserAvatar from '../../../common/UserAvatar';
@@ -60,7 +60,7 @@ function MessageList({
 						)}
 						visible={filterVisible}
 					>
-						<div className={styles.filter_dot} />
+						{/* <div className={styles.filter_dot} /> */}
 						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
 					</Popover>
 
@@ -91,7 +91,8 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<div className={styles.user_name}>
-													{item.name}
+													{startCase(item.name)}
+
 												</div>
 												<div className={styles.organisation}>
 													{item?.organization_name}
