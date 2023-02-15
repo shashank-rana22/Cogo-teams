@@ -347,6 +347,7 @@ const navigationMappingAdmin = {
 			...apis.ftl_freight,
 			...apis.ltl_freight,
 			...apis.trailer_freight,
+			...apis.rail_freight,
 		],
 		options: [
 			{
@@ -1728,7 +1729,7 @@ const navigationMappingAdmin = {
 				title         : 'Configurations',
 				href          : '/allocation/configurations',
 				as            : '/allocation/configurations',
-				main_apis     : ['configurations'],
+				main_apis     : ['get_allocation_configurations'],
 				possible_apis : apis.allocation,
 			},
 			{
@@ -1736,7 +1737,7 @@ const navigationMappingAdmin = {
 				title         : 'Relations',
 				href          : '/allocation/relations',
 				as            : '/allocation/relations',
-				main_apis     : ['relations'],
+				main_apis     : ['get_allocation_relations'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1745,7 +1746,7 @@ const navigationMappingAdmin = {
 				title         : 'Requests',
 				href          : '/allocation/requests',
 				as            : '/allocation/requests',
-				main_apis     : ['requests'],
+				main_apis     : ['get_allocation_requests'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1754,7 +1755,7 @@ const navigationMappingAdmin = {
 				title         : 'Quotas',
 				href          : '/allocation/quotas',
 				as            : '/allocation/quotas',
-				main_apis     : ['quotas'],
+				main_apis     : ['get_allocation_quotas'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1771,6 +1772,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+
+	enrichment: {
+		key           : 'enrichment',
+		title         : 'Enrichment',
+		href          : '/enrichment',
+		as            : '/enrichment',
+		main_apis     : ['/list_lead_organizations_enrichment'],
+		possible_apis : apis.enrichment,
+		module_type   : 'dashboards',
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
