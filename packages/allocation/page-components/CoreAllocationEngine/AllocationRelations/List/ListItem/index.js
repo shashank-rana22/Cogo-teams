@@ -12,6 +12,7 @@ const COLUMNS_MAPPING = [
 		label    : 'Business Name',
 		getValue : (item) => {
 			const businessName = getByKey(item, 'organization.business_name', '___');
+
 			return (
 				<Tooltip content={startCase(businessName.toLowerCase())} placement="bottom">
 					<div className={styles.text}>{startCase(businessName.toLowerCase()) || '-'}</div>
@@ -96,6 +97,7 @@ const COLUMNS_MAPPING = [
 					{getByKey(item, 'expiry_date')
 						? format(getByKey(item, 'expiry_date'), 'dd MMM yyyy') : '___'}
 				</div>
+
 				<div className={styles.expiry_time}>
 					{getByKey(item, 'expiry_date')
 						? format(getByKey(item, 'expiry_date'), 'hh:mm aaa') : '___'}
@@ -110,6 +112,7 @@ const COLUMNS_MAPPING = [
 		label    : 'Relation Type',
 		getValue : (item) => (
 			<Pill size="sm" color={item.relation_type === 'remove' ? 'red' : 'green'}>
+
 				{item.relation_type ? startCase(item.relation_type) : '-'}
 			</Pill>
 		),
@@ -188,6 +191,7 @@ function ListItem({
 					)}
 					onClickOutside={() => setShowActions(false)}
 				>
+
 					<div className={styles.svg_container}>
 						<IcMOverflowDot height={16} width={16} onClick={() => setShowActions(!showActions)} />
 					</div>
