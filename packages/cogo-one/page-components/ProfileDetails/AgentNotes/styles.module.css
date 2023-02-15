@@ -54,6 +54,7 @@
 	background: #FFFFFF;
 	border-radius: 6px;	
 	position: relative;
+	min-height: 80px;
 
 	:global {
 		.ui_buttonicon_container {
@@ -68,14 +69,18 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-	margin-top: 18px;
+	margin-top: 10px;
 }
 
 .note_time {
 	font-size: 10px;
 	color: #4F4F4F;
 }
-
+.created_by {
+	font-size: 10px;
+	color: #4F4F4F;
+	margin-left: 4px;
+}
 .note_footer {
 	padding: 5px;
 	display: flex;
@@ -92,13 +97,15 @@
 	border: 1px solid #E0E0E0;
 	border-radius: 6px;
 	padding: 0 6px;
-	/* cursor: ${(disabled) => disabled ? 'not-allowed' : 'pointer'}; */
 	cursor: pointer;
 }
 
 .content {
 	display: flex;
 	width: 95%;
-	white-space: wrap;
+	word-break: break-word;
+    text-overflow: ellipsis;
+    white-space: normal;
 	cursor: pointer;
+	min-height: 40px;
 }

@@ -69,12 +69,12 @@ function AgentDetails({ activeMessageCard }) {
 				))}
 			</div>
 			<div className={styles.number_div}>
-				<img
+				{/* <img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
 					alt="hang-Up"
 					className={styles.call_icon}
-				/>
-				{/* <IcMCall className={styles.call_icon} onClick={handleClick} /> */}
+				/> */}
+				<IcMCall className={styles.call_icon} onClick={handleClick} />
 				{loading ? (
 					<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
 				) : (

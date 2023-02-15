@@ -25,7 +25,7 @@ function useGetListNotes({ activeMessageCard, active }) {
 	};
 	useEffect(() => {
 		fetchListNotes();
-	}, [activeMessageCard]);
+	}, [activeMessageCard, active]);
 
 	return {
 		listLoading : loading,
