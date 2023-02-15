@@ -44,7 +44,7 @@ function CogoOne() {
 	const {
 		loading,
 		data = {},
-		setPagination = () => {},
+		handleScroll = () => {},
 	} = useGetVoiceCallList({ activeTab });
 	const { list = [] } = data;
 
@@ -77,6 +77,7 @@ function CogoOne() {
 				voiceList={list}
 				messagesList={messagesList}
 				voiceListLoading={loading}
+				handleScroll={handleScroll}
 			/>
 			<Conversations />
 			<ProfileDetails />

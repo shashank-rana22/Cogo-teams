@@ -12,6 +12,7 @@ function VoiceList({
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
 	voiceListLoading,
+	handleScroll = () => {},
 }) {
 	const callStatus = (item) => {
 		let status = '';
@@ -32,12 +33,15 @@ function VoiceList({
 		}
 	}, []);
 
-	if (voiceListLoading) {
-		return <LoadingState />;
-	}
+	// if (voiceListLoading) {
+	// 	return <LoadingState />;
+	// }
 
 	return (
-		<div className={styles.list_container}>
+		<div
+			className={styles.list_container}
+			onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+		>
 
 			{(voiceList || []).map((item) => {
 				const { user_data = {} } = item || {};
@@ -97,6 +101,7 @@ function VoiceList({
 					</div>
 				);
 			})}
+			{voiceListLoading && <LoadingState />}
 		</div>
 
 	);

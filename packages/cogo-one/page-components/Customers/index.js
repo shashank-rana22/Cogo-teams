@@ -30,6 +30,7 @@ function Customers({
 	voiceList = [],
 	messagesList = [],
 	voiceListLoading,
+	handleScroll = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -79,6 +80,7 @@ function Customers({
 					activeVoiceCard={activeVoiceCard}
 					voiceList={voiceList}
 					voiceListLoading={voiceListLoading}
+					handleScroll={handleScroll}
 				/>
 			)}
 

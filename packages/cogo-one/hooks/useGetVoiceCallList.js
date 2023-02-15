@@ -1,35 +1,51 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useGetVoiceCallList = ({ activeTab }) => {
 	const checkActiveTab = activeTab === 'voice';
-	const [{ loading, data }, trigger] = useRequest({
+	const [listData, setListData] = useState({
+		list  : [],
+		total : 0,
+	});
+
+	const [pagination, setPagination] = useState(1);
+
+	const [{ loading }, trigger] = useRequest({
 		url    : '/list_user_call_details',
 		method : 'get',
 	}, { manual: true });
 
-	const [pagination, setPagination] = useState(1);
-
 	const voiceCallList = async () => {
 		try {
-			await trigger({
-				page: pagination,
+			const res = await trigger({
+				params: { page: pagination },
 			});
-		} catch (error) {
-			Toast.error(getApiErrorString(error?.error));
+			if (res.data) {
+				const { list = [], ...paginationData } = res?.data || {};
+				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+			}
+		} catch (e) {
+			console.log('e', e);
 		}
 	};
 
+	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
+		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
+		const hasMoreData = pagination < listData?.total;
+
+		if (reachBottom && hasMoreData && !loading) {
+			setPagination((p) => p + 1);
+		}
+	};
 	useEffect(() => {
 		voiceCallList();
-	}, [checkActiveTab]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [checkActiveTab, pagination]);
 
 	return {
 		loading,
-		data,
-		setPagination,
+		data: listData,
+		handleScroll,
 	};
 };
 export default useGetVoiceCallList;
