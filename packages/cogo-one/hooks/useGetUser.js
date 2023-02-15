@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+// import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetUser = () => {
-	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
+const useGetUser = ({ activeSelect }) => {
+	// const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_user',
 		method : 'get',
@@ -14,7 +14,7 @@ const useGetUser = () => {
 		try {
 			await trigger({
 				params: {
-					id: userId,
+					id: 'cba50126-efbc-4caa-8383-b616dec9d44b',
 				},
 			});
 		} catch (error) {
@@ -23,12 +23,11 @@ const useGetUser = () => {
 	};
 	useEffect(() => {
 		fetchUser();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [activeSelect]);
 
 	return {
 		loading,
-		listData: data?.data,
+		userData: data?.data,
 	};
 };
 export default useGetUser;

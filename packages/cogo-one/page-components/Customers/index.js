@@ -1,19 +1,16 @@
-import { cl, Input, Popover, Tabs, TabPanel, Toggle } from '@cogoport/components';
-import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import React from 'react';
 
-import UserAvatar from '../../common/UserAvatar';
-
-import FilterComponents from './FilterComponents';
 import InactiveModal from './InactiveModal';
-import LoadingState from './LoadingState';
+import MessageList from './MessageList';
 import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
-	setActiveCard = () => {},
-	activeCard,
+	setActiveMessageCard = () => {},
+	activeMessageCard,
+	setActiveVoiceCard = () => {},
+	activeVoiceCard,
 	setSearchValue = () => {},
 	searchValue,
 	setFilterVisible = () => {},
@@ -28,98 +25,11 @@ function Customers({
 	inactiveDate,
 	setInactiveTime = () => {},
 	inactiveTime,
+	voiceList = [],
+	messagesList = [],
+	voiceListLoading,
+	handleScroll = () => {},
 }) {
-	const dummyData = [
-		{
-			id           : 1,
-			name         : 'John Wick',
-			organisation : 1,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'whatsapp',
-			image        : 'https://www.w3schools.com/howto/img_avatar.png',
-			content      : 'My name is cogoassist, Cogoport where we will show',
-		},
-		{
-			id           : 2,
-			name         : 'John Wick',
-			organisation : 10,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'wed',
-			source       : 'whatsapp',
-			image        : '',
-			content      : 'My name is cogoassist, Cogoport where we will show Cogoport where we will show',
-		},
-		{
-			id           : 3,
-			name         : 'John Wick',
-			organisation : 2,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'facebook',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-			content      : 'My name is cogoassist, Cogoport where we will show....',
-		},
-		{
-			id           : 4,
-			name         : 'John Wick',
-			organisation : 7,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'facebook',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-			content      : 'My name is cogoassist, Cogoport where we will show Cogoport where we will show',
-		},
-		{
-			id           : 1,
-			name         : 'John Wick',
-			organisation : 1,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'whatsapp',
-			image        : 'https://www.w3schools.com/howto/img_avatar.png',
-			content      : 'My name is cogoassist, Cogoport where we will show',
-		},
-		{
-			id           : 2,
-			name         : 'John Wick',
-			organisation : 10,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'wed',
-			source       : 'whatsapp',
-			image        : '',
-			content      : 'My name is cogoassist, Cogoport where we will show Cogoport where we will show',
-		},
-		{
-			id           : 3,
-			name         : 'John Wick',
-			organisation : 2,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'facebook',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-			content      : 'My name is cogoassist, Cogoport where we will show....',
-		},
-		{
-			id           : 4,
-			name         : 'John Wick',
-			organisation : 7,
-			pills        : ['Medium', 'Pre Shipment', 'Escalated', 'Medium', 'Medium', 'Medium'],
-			status       : 'tues',
-			source       : 'facebook',
-			image        : 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png',
-			content      : 'My name is cogoassist, Cogoport where we will show Cogoport where we will show',
-		},
-	];
-
-	useEffect(() => {
-		if (!isEmpty(dummyData)) {
-			setActiveCard(dummyData?.[0]);
-		}
-	}, []);
-
-	const loading = false;
-
 	return (
 		<div className={styles.container}>
 
@@ -150,97 +60,24 @@ function Customers({
 			</div>
 
 			{activeTab === 'message' && (
-				<div className={styles.filters_container}>
-					<div className={styles.source_types}>
-
-						<Input
-							size="sm"
-							prefix={<IcMSearchlight width={18} height={18} />}
-							placeholder="Search here..."
-							value={searchValue}
-							onChange={(val) => setSearchValue(val)}
-							style={{ width: 200 }}
-						/>
-
-					</div>
-
-					<div className={styles.filter_icon}>
-						<Popover
-							placement="left"
-							caret={false}
-							render={(
-								<FilterComponents
-									setFilterVisible={setFilterVisible}
-									filterVisible={filterVisible}
-								/>
-							)}
-							visible={filterVisible}
-						>
-							<div className={styles.filter_dot} />
-							<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
-						</Popover>
-
-					</div>
-				</div>
-			)}
-
-			{activeTab === 'message' && (
-				<div>
-					{loading ? <LoadingState /> : (
-						<div className={styles.list_container}>
-
-							{(dummyData || []).map((item) => {
-								const checkActiveCard = activeCard?.id === item?.id;
-								return (
-									<div
-										role="presentation"
-										className={cl`
-						${styles.card_Container} 
-						${checkActiveCard ? styles.active_card : ''} 
-						 `}
-										onClick={() => setActiveCard(item)}
-									>
-										<div className={styles.card}>
-
-											<div className={styles.user_information}>
-												<div className={styles.avatar_Container}>
-													<UserAvatar type={item.source} imageSource={item.image} />
-													<div className={styles.user_details}>
-														<div className={styles.user_name}>
-															{item.name}
-														</div>
-														<div className={styles.organisation}>
-															Organisation
-															{' '}
-															{item.organisation}
-														</div>
-													</div>
-												</div>
-
-												<div className={styles.user_activity}>
-													<div className={styles.pills_card}>Small</div>
-													<div className={styles.activity_duration}>
-														{item.status}
-													</div>
-												</div>
-
-											</div>
-											<div className={styles.content}>
-												{item.content}
-											</div>
-										</div>
-									</div>
-								);
-							})}
-						</div>
-					)}
-				</div>
+				<MessageList
+					messagesList={messagesList}
+					setActiveMessageCard={setActiveMessageCard}
+					activeMessageCard={activeMessageCard}
+					setSearchValue={setSearchValue}
+					searchValue={searchValue}
+					filterVisible={filterVisible}
+					setFilterVisible={setFilterVisible}
+				/>
 			)}
 
 			{activeTab === 'voice' && (
 				<VoiceList
-					setActiveCard={setActiveCard}
-					activeCard={activeCard}
+					setActiveVoiceCard={setActiveVoiceCard}
+					activeVoiceCard={activeVoiceCard}
+					voiceList={voiceList}
+					voiceListLoading={voiceListLoading}
+					handleScroll={handleScroll}
 				/>
 			)}
 

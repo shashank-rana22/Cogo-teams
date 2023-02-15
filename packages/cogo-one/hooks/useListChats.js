@@ -3,7 +3,7 @@ import {
 	query,
 	onSnapshot,
 	orderBy,
-	// where,
+	where,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
@@ -11,8 +11,10 @@ import global from '../constants/IDS_CONSTANTS';
 
 const useListChats = ({
 	firestore,
-	user_role_ids,
+	user_role_ids, userId,
 }) => {
+	const [lastData, setLastData] = useState({ prevLength: 0, hasMoreData: true });
+
 	const [listData, setListData] = useState({
 		messagesList     : [],
 		newMessagesCount : 0,
@@ -59,22 +61,37 @@ const useListChats = ({
 			|| user_role_ids.includes(global.SUPERADMIN_ID)
 			|| user_role_ids.includes(global.TRADE_EXPERT_TEAM_LEAD_LONG_TAIL_ID)
 		) {
-			omniChannelQuery = query(omniChannelCollection, orderBy('updated_at', 'desc'));
+			omniChannelQuery = query(
+				omniChannelCollection,
+				orderBy('updated_at', 'desc'),
+
+			);
 		} else {
 			omniChannelQuery = query(
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
+				where('agent_id', '==', userId),
+
 			);
 		}
 
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
+			const docLength = querySnapshot.docs.length;
+			setLastData((p) => ({ ...p, docLength, hasMoreData: p.docLength < docLength }));
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
 			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
+		const canScroll = scrollHeight - (clientHeight + scrollTop) > 0;
+		if (lastData.hasMoreData && canScroll) {
+			// setPagination((p) => p + 1);
+		}
+	};
 	return {
-		listData,
+		listData, handleScroll,
 	};
 };
 

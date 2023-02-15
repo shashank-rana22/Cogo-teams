@@ -1,0 +1,150 @@
+.container{
+	width: 24%;
+	background:#ffffff;
+	margin-right: 10px;
+	border-radius: 8px;
+	padding:10px;
+}
+.title{
+	font-weight: 600;
+font-size: 20px;
+}
+
+.filters_container{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;	
+
+	:global{
+        .ui_toggle_container.ui_ps_size_md .ui_switch{
+            right: 51px;
+        }   
+        .ui_toggle_container.ui_toggle_inside .ui_inner::before{
+            content: "Active";
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+			background-color:#EE3425;
+        }   
+        .ui_toggle_container.ui_toggle_inside .ui_inner::after{
+            content: "Inactive";
+            display: flex;
+            align-items: center;
+            float: right;
+            justify-content: end;
+            font-size: 12px;
+			color: #ffffff;
+			background-color:#F8AEA8;
+        }   
+        .ui_toggle_container.ui_ps_size_md .ui_toggle_switch{
+            width: 75px;
+        }
+        input[type="checkbox"]:checked + .ui_label_radius  .ui_switch{
+                right: 0px;
+        }
+    }
+}
+
+
+.filter_icon{
+	cursor: pointer;
+}
+
+.filter_dot{
+	height: 8px;
+	width: 8px;
+	border: 1px solid #ffffff;
+	border-radius: 100%;
+	background: rgb(3, 74, 253);
+	position: absolute;
+	top: 2px;
+	right: 20px;
+}
+
+.source_types{
+	display: flex;
+	align-items: center;
+}
+
+
+.card_Container{
+	padding:10px 12px;	
+}
+
+.active_card{
+background: #FDFBF6;
+}
+
+.card{
+cursor: pointer;
+padding:8px;
+}
+
+.user_information{
+	display: flex;
+	justify-content: space-between;
+}
+
+.activity_duration{
+	color: #4F4F4F;
+	font-weight: 500;
+	font-size: 10px;
+	margin-top: 2px;
+}
+
+.user_details{
+margin-left: 10px;
+display: flex;
+flex-direction: column;
+}
+
+.user_name{
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.organisation{
+	margin-top: 2px;
+	color: #828282;
+	font-size: 10px;
+}
+
+.avatar_Container{
+display: flex;
+}
+
+.content{
+	margin-top: 3px;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.list_container{
+	overflow-y: auto;
+	height: 70vh;
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
+}
+
+.tabs{
+	margin:0px -10px 15px -10px;
+}
+
+.user_activity{
+display: flex;
+align-items: end;
+flex-direction: column;
+}
+
+.pills_card{
+	font-size: 10px;
+	background: #F8AEA8;
+	border-radius: 6px;
+	padding: 1px 5px;
+}
