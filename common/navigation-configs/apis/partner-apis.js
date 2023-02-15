@@ -9808,6 +9808,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'update_omnichannel_note',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_outgoing_call',
 			access_type  : 'private',
 			service_name : 'voice_call',

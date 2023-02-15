@@ -1,34 +1,42 @@
 import { Toggle, Textarea, ButtonIcon } from '@cogoport/components';
 import { IcMTick, IcMDelete } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import dummyNotesData from '../../../configurations/dummyNotesData';
 import useCreateOmniNote from '../../../hooks/useCreateOmniNote';
 import useGetListNotes from '../../../hooks/useGetListNotes';
+import useUpdateNote from '../../../hooks/useUpdateNote';
 
 import styles from './styles.module.css';
 
 function AgentNotes({ activeMessageCard }) {
 	const [noteValue, setNoteValue] = useState('');
-	console.log('noteValue', noteValue);
 	const [editNote, setEditNote] = useState(false);
 	const [active, setActive] = useState(false);
+	const [updateId, setUpdateId] = useState();
 	const { noteData, fetchListNotes } = useGetListNotes({ activeMessageCard, active });
-	console.log('noteData', noteData);
+	const { list = [] } = noteData || {};
 	const { omniChannelNote = () => {} } = useCreateOmniNote({ editNote, fetchListNotes });
+	const { updateNote } = useUpdateNote({ fetchListNotes, editNote });
 
 	const handleSubmit = async () => {
-		await omniChannelNote(noteValue);
+		if (editNote) {
+			await updateNote({ noteValue, type: 'update', updateId });
+		} else {
+			await omniChannelNote({ noteValue });
+		}
 		setNoteValue('');
 	};
 
-	const handleClick = () => {
+	const handleClick = async (i) => {
+		const { notes_data, id } = i || {};
 		setEditNote(true);
-		setEditNote(false);
+		setNoteValue(notes_data);
+		setUpdateId(id);
 	};
 
-	const handleDelete = async () => {
-		await omniChannelNote();
+	const handleDelete = async (val) => {
+		await updateNote({ val, type: 'delete' });
 	};
 	return (
 		<div className={styles.container}>
@@ -62,16 +70,22 @@ function AgentNotes({ activeMessageCard }) {
 					onChange={() => setActive((p) => !p)}
 				/>
 			</div>
-			{(dummyNotesData || []).map((item) => {
-				const { description, time } = item;
+			{(list || []).map((item) => {
+				const { notes_data, agent_data, updated_at, id } = item;
+				const { name = '' } = agent_data || {};
 				return (
 					<div className={styles.notes_container}>
-						<div className={styles.content} onClick={handleClick} role="presentation">
-							{description}
+						<div className={styles.content} onClick={() => handleClick(item)} role="presentation">
+							{(notes_data || []).map((i) => (i || 'sioghfknrfbjergbukejrgieurjergbkejrbfrbfejkrj'))}
 						</div>
-						<ButtonIcon size="sm" icon={<IcMDelete onClick={handleDelete} />} themeType="primary" />
+						<ButtonIcon
+							size="sm"
+							icon={<IcMDelete onClick={() => handleDelete(id)} />}
+							themeType="primary"
+						/>
 						<div className={styles.footer}>
-							<div className={styles.note_time}>{time}</div>
+							<div className={styles.note_time}>{format(updated_at, 'HH:mm a dd MMM')}</div>
+							<div className={styles.created_by}>{name}</div>
 						</div>
 					</div>
 				);

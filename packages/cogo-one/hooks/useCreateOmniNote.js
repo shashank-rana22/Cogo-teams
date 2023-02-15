@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 
 function useCreateOmniNote({ editNote, fetchListNotes }) {
 	const [{ loading }, trigger] = useRequest({
@@ -8,7 +7,7 @@ function useCreateOmniNote({ editNote, fetchListNotes }) {
 		method : 'post',
 	}, { manual: true });
 
-	const omniChannelNote = async ({ noteValue = '' }) => {
+	const omniChannelNote = async ({ noteValue }) => {
 		try {
 			await trigger({
 				data: {
