@@ -1,0 +1,19 @@
+.footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+}
+
+.label {
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.container {
+	display: flex;
+}
+
+.remarks {
+	margin-left: 4px;
+	text-decoration: underline;
+}
