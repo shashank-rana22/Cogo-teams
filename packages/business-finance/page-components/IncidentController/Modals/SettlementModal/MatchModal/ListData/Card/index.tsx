@@ -1,8 +1,9 @@
-import { Tooltip } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMEdit, IcMGrid } from '@cogoport/icons-react';
 
 import EditInput from './EditInput';
+import EditInputAllocation from './EditInputAllocation';
 import NostroInput from './NostroInput';
 import styles from './styles.module.css';
 
@@ -45,11 +46,14 @@ function Card({
 		'Knocked Off'        : '#CDF7D4',
 		'Partially Utilized' : '#D9EAFD',
 	};
+
 	return (
 		<>
 			<div className={styles.ribbon} style={{ background: statusColor[item.status] }}>{status}</div>
-			<div><IcMGrid /></div>
-			<div>
+
+			<div className={styles.item_icon}><IcMGrid /></div>
+
+			<div className={styles.item}>
 				<Tooltip
 					content={(
 						<div>
@@ -61,7 +65,8 @@ function Card({
 					<div className={styles.wrapper}>{documentValue}</div>
 				</Tooltip>
 			</div>
-			<div>
+
+			<div className={styles.item}>
 				{documentAmount?.length > 10 ? (
 					<Tooltip
 						content={(
@@ -76,9 +81,9 @@ function Card({
 				) : <div>{getFormattedPrice(documentAmount, currency)}</div>}
 			</div>
 
-			<div>{exchangeRate}</div>
+			<div className={styles.item_exchange}>{exchangeRate}</div>
 
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', alignItems: 'center', width: '10%' }}>
 				<EditInput
 					itemData={item}
 					setEditedValue={setEditedValue}
@@ -89,19 +94,22 @@ function Card({
 				/>
 
 				{!checkEdit && !tdsEditable && isEditable && (
-					<div
-						role="presentation"
+					<Button
+						className={styles.edit_Icon}
 						onClick={() => {
 							setEditeAble(item, true, false);
 							setRestEdit(!restEdit);
 						}}
 					>
-						<IcMEdit />
-					</div>
+						<IcMEdit
+							width="15px"
+							height="15px"
+						/>
+					</Button>
 				)}
 			</div>
 
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', alignItems: 'center', width: '10%' }}>
 				<NostroInput
 					itemData={item}
 					setEditedNostro={setEditedNostro}
@@ -112,16 +120,90 @@ function Card({
 				/>
 
 				{!checkEdit && !nostroButton && !nostroEditable && isEditable && (
-					<div
-						role="presentation"
+					<Button
+						className={styles.edit_Icon}
 						onClick={() => {
-							setEditeAble(item, true, false);
+							setEditeAble(item, false, false, true);
 							setRestEdit(!restEdit);
 						}}
 					>
-						<IcMEdit />
-					</div>
+						<IcMEdit
+							width="15px"
+							height="15px"
+						/>
+					</Button>
 				)}
+			</div>
+
+			<div className={styles.item}>
+				{settledTds?.length > 10 ? (
+					<Tooltip
+						content={(
+							<div>
+								{settledTds}
+							</div>
+						)}
+						placement="top"
+					>
+						<div className={styles.wrapper}>{getFormattedPrice(settledTds, currency)}</div>
+					</Tooltip>
+				) : <div>{getFormattedPrice(settledTds, currency)}</div>}
+			</div>
+
+			<div className={styles.item}>
+				{balanceAmount?.length > 10 ? (
+					<Tooltip
+						content={(
+							<div>
+								{balanceAmount}
+							</div>
+						)}
+						placement="top"
+					>
+						<div className={styles.wrapper}>{getFormattedPrice(balanceAmount, currency)}</div>
+					</Tooltip>
+				) : <div>{getFormattedPrice(balanceAmount, currency)}</div>}
+			</div>
+
+			<div style={{ display: 'flex', alignItems: 'center', width: '10%' }}>
+				<EditInputAllocation
+					itemData={item}
+					handleCrossClick={handleCrossClick}
+					setAllocationValue={setAllocationValue}
+					setRestEdit={setRestEdit}
+					restEdit={restEdit}
+					types={type}
+				/>
+
+				{!allocationEditable && isEditable && (
+					<Button
+						className={styles.edit_Icon}
+						onClick={() => {
+							setEditeAble(item, false, true);
+							setRestEdit(!restEdit);
+						}}
+					>
+						<IcMEdit
+							width="15px"
+							height="15px"
+						/>
+					</Button>
+				)}
+			</div>
+
+			<div className={styles.item}>
+				{balanceAfterAllocation?.length > 10 ? (
+					<Tooltip
+						content={(
+							<div>
+								{balanceAfterAllocation}
+							</div>
+						)}
+						placement="top"
+					>
+						<div className={styles.wrapper}>{getFormattedPrice(balanceAfterAllocation, currency)}</div>
+					</Tooltip>
+				) : <div>{getFormattedPrice(balanceAfterAllocation, currency)}</div>}
 			</div>
 
 		</>

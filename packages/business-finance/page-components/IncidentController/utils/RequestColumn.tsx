@@ -29,7 +29,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			id       : 'incident_id',
 			Cell     : ({ row: { original } }) => {
 				const { referenceId = {} } = original || {};
-				return <span className={styles.incident_id}>{ referenceId }</span>;
+				return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
 			},
 		},
 		{
@@ -81,7 +81,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			Cell     : ({ row: { original } }) => {
 				const { createdBy = {} } = original || {};
 				const { name = '' } = createdBy || {};
-				return <span>{name}</span>;
+				return <span>{name || '-'}</span>;
 			},
 		},
 		{
@@ -203,9 +203,18 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				return (
 					urgencyTag &&	(
 						<div>
-							<div className={urgencyTag === 'r' ? styles.ribbon_red : styles.ribbon_orange}>
-								Urgent
-							</div>
+							{urgencyTag === 'RED' && (
+								<div className={urgencyTag === 'RED' && styles.ribbon_red}>
+									Urgent
+								</div>
+							)}
+							{
+								urgencyTag === 'ORANGE' && (
+									<div className={urgencyTag === 'ORANGE' && styles.ribbon_orange}>
+										Urgent
+									</div>
+								)
+							}
 						</div>
 					)
 				);

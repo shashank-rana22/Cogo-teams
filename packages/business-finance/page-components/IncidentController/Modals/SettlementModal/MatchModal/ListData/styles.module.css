@@ -10,5 +10,15 @@
   font-size: 12px;
   gap: 30px;
   cursor: pointer;
-  position: relative;
+  width: 100% !important;
+}
+.main {
+  margin-top: -20px;
+  z-index: -9999;
+  :global {
+    .react-grid-layout {
+      position: relative;
+      transition: height 200ms ease;
+    }
+  }
 }

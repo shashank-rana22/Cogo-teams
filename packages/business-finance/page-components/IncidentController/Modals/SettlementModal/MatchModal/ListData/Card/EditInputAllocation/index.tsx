@@ -1,35 +1,31 @@
-import { Button, Input, Tooltip } from '@cogoport/components';
+import { Button, Tooltip, Input } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-function EditInput({
+function EditInputAllocation({
 	itemData,
 	handleCrossClick,
-	setEditedValue,
+	setAllocationValue,
 	setRestEdit,
 	restEdit,
 	types,
 }) {
 	const {
-		tds = 0,
-		afterTdsAmount = 0,
 		currency = 'INR',
-		tdsEditable = false,
-		documentAmount = 0,
-		currentBalance = 0,
-		constBalanceAmount = 0,
-		nostroChangeAmount = 0,
-		settledTds = 0,
+		settledAmount = 0,
+		allocationAmountValue = 0,
+		balanceAmount = 0,
+		allocationEditable = false,
 	} = itemData;
 
-	const [changedValue, setChangedValue] = useState(tds);
+	const [changedValue, setChangedValue] = useState(allocationAmountValue || 0);
 
-	const checkAmound = (+documentAmount * 10) / 100;
+	const amountCheck = types === 'history' ? balanceAmount + settledAmount : +balanceAmount;
 
-	const maxValue = +changedValue + settledTds > +checkAmound;
+	const maxValue = +changedValue > +amountCheck;
 
 	const lessValue = Number.parseInt(changedValue, 10) < 0;
 
@@ -39,50 +35,49 @@ function EditInput({
 
 	const formatted = (field, curr) => getFormattedPrice(field, curr) || '';
 
-	const changedValueAmountAfterTDS = () => documentAmount - changedValue || afterTdsAmount;
-
-	const changeValueBalanceAmount = () => {
-		const value = types === 'history' ? +constBalanceAmount : +currentBalance;
-		return value - (+changedValue + nostroChangeAmount) || value;
+	const changedBalanceAfterAllocation = () => {
+		const totalAmount =			types === 'history' ? balanceAmount + settledAmount : +balanceAmount;
+		return totalAmount - changedValue || 0;
 	};
 
 	if (lessValue) {
-		errorMessege = 'TDS cannot be less than 0';
+		errorMessege = 'Allocation cannot be less than 0';
 	} else if (maxValue) {
-		errorMessege = 'TDS plus Settled TDS cannot be greater than 10 % of  Doc. Amount';
+		errorMessege =			types === 'history'
+			? 'Allocation cannot be greater than Balance Amount + Settled Amount'
+			: 'Allocation cannot be greater than Balance Amount';
 	} else {
-		errorMessege = formatted(tds, currency);
+		errorMessege = formatted(allocationAmountValue, currency);
 	}
 
 	const content = () => (
 		<div>
-			{!isError && <div className={styles.text_styles}>Actual TDS Value</div>}
+			{!isError && <div className={styles.text_styles}>Actual Allocation Value</div>}
 			<div className={styles.input_container} style={{ color: isError ? 'red' : 'black' }}>{errorMessege}</div>
 		</div>
 	);
 
 	useEffect(() => {
 		if (itemData) {
-			setChangedValue(tds);
+			setChangedValue(allocationAmountValue);
 		}
-	}, [tds, itemData]);
+	}, [itemData, allocationAmountValue]);
 
 	const handleOnChangeTdsInput = (value) => {
 		setChangedValue(value);
 	};
 
 	const Submit = () => {
-		setEditedValue(
+		setAllocationValue(
 			itemData,
 			+changedValue,
-			+changedValueAmountAfterTDS(),
-			+changeValueBalanceAmount(),
+			+changedBalanceAfterAllocation(),
+			false,
 		);
 	};
-
 	return (
 		<div>
-			{tdsEditable ? (
+			{allocationEditable ? (
 				<div className={styles.flex}>
 					<Input
 						style={{ borderColor: isError ? 'red' : 'black', width: 65 }}
@@ -108,7 +103,7 @@ function EditInput({
 						<Button
 							className={styles.edit_icon}
 							onClick={() => {
-								handleCrossClick(itemData, 'tds');
+								handleCrossClick(itemData, 'allocation');
 								setRestEdit(!restEdit);
 							}}
 						>
@@ -153,4 +148,4 @@ function EditInput({
 		</div>
 	);
 }
-export default EditInput;
+export default EditInputAllocation;

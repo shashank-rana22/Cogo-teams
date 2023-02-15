@@ -1,4 +1,4 @@
-import { Input, Tooltip } from '@cogoport/components';
+import { Button, Input, Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -55,8 +55,7 @@ function NostroInput({
 			</div>
 		</div>
 	);
-	const handleOnChangeNostroInput = (e) => {
-		const { value } = e.target;
+	const handleOnChangeNostroInput = (value) => {
 		setChangedValue(value);
 	};
 	const Submit = () => {
@@ -70,31 +69,50 @@ function NostroInput({
 					<Input
 						style={{ borderColor: isError ? 'red' : 'black', width: 65 }}
 						value={changedValue}
-						onChange={handleOnChangeNostroInput}
+						onChange={(value) => { handleOnChangeNostroInput(value); }}
 					/>
 					<div
-						style={{ display: 'flex', marginTop: '8px', marginLeft: '5px' }}
+						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
 					>
 						<Tooltip
 							content={content()}
 						>
-							<div>
-								<IcCError />
-							</div>
+							<Button
+								className={styles.edit_icon}
+							>
+								<IcCError
+									width="15px"
+									height="15px"
+								/>
+							</Button>
 						</Tooltip>
-						<IcMUndo
+
+						<Button
+							className={styles.edit_icon}
 							onClick={() => {
 								handleCrossClick(itemData, 'tds');
 								setRestEdit(!restEdit);
 							}}
-						/>
+						>
+							<IcMUndo
+								width="15px"
+								height="15px"
+							/>
+						</Button>
+
 						{!isError && (
-							<IcMTick
+							<Button
+								className={styles.edit_icon}
 								onClick={() => {
 									Submit();
 									setRestEdit(!restEdit);
 								}}
-							/>
+							>
+								<IcMTick
+									width="20px"
+									height="20px"
+								/>
+							</Button>
 						)}
 					</div>
 				</div>

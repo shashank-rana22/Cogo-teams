@@ -24,7 +24,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 		searchQuery : '',
 	});
 	const {
-		search, category, date, page, urgency,
+		search, category, date, page, urgency, pageLimit,
 		...rest
 	} = filters || {};
 
@@ -55,11 +55,12 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 					...rest,
 					status          : activeTab.toUpperCase(),
 					isStatsRequired : true,
-					urgencyTag      : urgency === 'urgent' && 'a',
+					urgencyTag      : urgency === 'urgent' ? 'ALL' : undefined,
 					role            : isSettlementExecutive ? 'SETTLEMENT_EXECUTIVE' : undefined,
 					q               : query !== '' ? query : undefined,
 					type            : category,
-					page,
+					pageIndex       : page,
+					pageSize        : pageLimit,
 					createdFrom     : startDate
 						? format(startDate, 'yyyy-MM-dd', {}, false)
 						: undefined,

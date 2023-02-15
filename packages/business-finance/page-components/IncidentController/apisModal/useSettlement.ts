@@ -120,7 +120,6 @@ const useSettlement = ({
 			if (index !== -1) {
 				newList[index] = {
 					...itemData,
-					// tdsValue: value,
 					tds                   : value,
 					afterTdsAmount        : setAmount,
 					balanceAmount         : setBalance,
@@ -202,7 +201,6 @@ const useSettlement = ({
 	};
 
 	const setEditeAble = (itemData, value, setEdit = false, setNost = false) => {
-		console.log(value, 'value');
 		setChangeData((p) => {
 			const newValue = p;
 
@@ -267,7 +265,6 @@ const useSettlement = ({
 			refetch();
 		} catch (error) {
 			Toast.error(error?.data?.message);
-			// showErrorsInToast(error?.error);
 		}
 	};
 

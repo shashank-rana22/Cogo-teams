@@ -13,10 +13,12 @@
 .edit_icon {
   height: 20px;
   width: 20px;
+  margin-left: 4px;
+  position: relative;
+  right: 12px;
   z-index: 999999;
   background: transparent !important;
   color: #333 !important;
   padding: 0px !important;
   min-width: 10px !important;
-  margin-left: 4px;
 }

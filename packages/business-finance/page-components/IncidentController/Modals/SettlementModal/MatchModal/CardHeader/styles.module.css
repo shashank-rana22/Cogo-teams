@@ -1,15 +1,22 @@
 .container {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   text-align: center;
   background-color: #f8f2e7;
   border-radius: 8px;
-  margin: 16px 0px;
+  margin: 16px 0px 16px 10px;
   padding: 16px;
   font-size: 12px;
-  gap: 30px;
+  width: 100%;
   :first-child {
-    padding: 0px 0px 0px 30px;
+    padding: 0px 0px 0px 35px;
   }
+  :nth-child(4) {
+    width: 7% !important;
+  }
+}
+
+.item {
+  width: 14%;
 }

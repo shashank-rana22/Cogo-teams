@@ -28,18 +28,13 @@ function MatchModal({
 		handleCrossClick,
 		setEditeAble,
 		setAllocationValue,
-		submitMatch,
 		changeData,
 		setChangeData,
-		setCheckedIdData,
 		checkMatching,
-		// filterDate,
 		checkLoading,
 		loading,
-		// approveCheck,
 		setEditedNostro,
 		nostroButton,
-		setReject,
 	} = useSettlement({
 		checkedData,
 		refetch,
@@ -122,10 +117,8 @@ function MatchModal({
 					handleCrossClick={handleCrossClick}
 					setEditeAble={setEditeAble}
 					setAllocationValue={setAllocationValue}
-					submitMatch={submitMatch}
 					setChangeData={setChangeData}
 					changeData={changeData || []}
-					setCheckedIdData={setCheckedIdData}
 					setEditedNostro={setEditedNostro}
 					type={type}
 					nostroButton={nostroButton}

@@ -4,7 +4,7 @@ function CardHeader() {
 	const HeaderData = [
 		{ id: '1', label: 'Document No.' },
 		{ id: '2', label: 'Doc Amount.' },
-		{ id: '3', label: 'Exchange Rate' },
+		{ id: '3', label: 'Exc. Rate' },
 		{ id: '4', label: 'TDS' },
 		{ id: '5', label: 'Nostro' },
 		{ id: '6', label: 'Settled TDS' },
@@ -14,7 +14,12 @@ function CardHeader() {
 	];
 	return (
 		<div className={styles.container}>
-			{HeaderData.map((item) => <div>{item?.label}</div>)}
+			{HeaderData.map((item) => (
+				<div className={styles.item}>
+					{item?.label}
+				</div>
+
+			))}
 		</div>
 	);
 }
