@@ -23,6 +23,7 @@ function Customers({
 	messagesList = [],
 	voiceListLoading,
 	handleScroll = () => {},
+	unReadChatsCount,
 }) {
 	return (
 		<div className={styles.container}>

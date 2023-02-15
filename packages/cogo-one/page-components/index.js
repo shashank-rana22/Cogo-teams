@@ -63,6 +63,7 @@ function CogoOne() {
 				messagesList={messagesList}
 				voiceListLoading={loading}
 				handleScroll={handleScroll}
+				unReadChatsCount={unReadChatsCount}
 			/>
 			<Conversations />
 			<ProfileDetails activeCard={activeMessageCard} />
