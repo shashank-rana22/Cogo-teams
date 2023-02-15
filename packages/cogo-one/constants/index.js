@@ -27,8 +27,8 @@ export const ASSIGNE_COLORS = {
 };
 
 export const VOICE_ICON_MAPPING = {
-	missed       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
-	not_answered : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
-	outgoing     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
-	incoming     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+	missed        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+	not_connected : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
+	outgoing      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
+	incoming      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
 };

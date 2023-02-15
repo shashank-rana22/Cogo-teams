@@ -1,6 +1,8 @@
 import { Tabs, TabPanel, Input, Popover } from '@cogoport/components';
-import { IcMFdollar, IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFdollar, IcMDoubleFilter, IcMSearchlight, IcMCampaignTool } from '@cogoport/icons-react';
 import { useState } from 'react';
+
+import ActivityCard from '../../../common/ActivityCard';
 
 import Filters from './Filters';
 import styles from './styles.module.css';
@@ -24,7 +26,7 @@ function UserActivities() {
 						title={<IcMFdollar width={20} height={20} />}
 					/>
 					<TabPanel name="platform" title={<IcMFdollar width={20} height={20} />} />
-					<TabPanel name="communication" title={<IcMFdollar width={20} height={20} />} />
+					<TabPanel name="communication" title={<IcMCampaignTool width={20} height={20} />} />
 				</Tabs>
 			</div>
 			<div className={styles.title}>Transactional Activity</div>
@@ -57,6 +59,7 @@ function UserActivities() {
 
 				</div>
 			</div>
+			<ActivityCard />
 		</div>
 	);
 }
