@@ -1,4 +1,4 @@
-import { Pill, Placeholder } from '@cogoport/components';
+import { Pill, Placeholder, Loader } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 
 import getListPromoCode from '../../../hooks/useGetListPromocode';
@@ -21,45 +21,61 @@ function OrganizationDetails({ activeMessageCard }) {
 
 	const { total_redeemable } = pointData || {};
 
-	// if (orgLoading) {
-	// 	return <LoadingState />;
-	// }
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Organisation Details</div>
-			<div className={styles.content}>
-				<div className={styles.organization_details}>
-					<div className={styles.name}>
-						{short_name}
+			{orgLoading ? (
+				<>
+					<div className={styles.content}>
+						<div className={styles.organization_details}>
+							<Placeholder width="220px" height="25px" />
+							<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
+						</div>
+						<div className={styles.status}>
+							<Placeholder width="60px" height="15px" />
+						</div>
 					</div>
-					<div className={styles.location}>{display_name}</div>
-				</div>
-				<div className={styles.status}>
-					<Pill
-						key="Verified"
-						size="sm"
-						color="#DDEBC0"
-					>
-						{kyc_status === 'verified' ? 'KYC Verified' : 'Not Verified'}
-					</Pill>
-				</div>
-			</div>
-			<div className={styles.name}>
-				ID:
-				{' '}
-				{serial_id}
-			</div>
-			<div>
-				<Pill
-					key="Importer/Exporter"
-					size="sm"
-					color="#FFF7BF"
-				>
-					{account_type === 'importer_exporter' ? 'Importer/Exporter' : ''}
-				</Pill>
-			</div>
-			<div className={styles.agent_title}>Agent Details (2)</div>
+					<div className={styles.name}>
+						<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80px" height="15px" margin="10px 0 0 0 " />
+					</div>
+				</>
+			) : (
+				<>
+					<div className={styles.content}>
+						<div className={styles.organization_details}>
+							<div className={styles.name}>
+								{short_name}
+							</div>
+							<div className={styles.location}>{display_name}</div>
+						</div>
+						<div className={styles.status}>
+							<Pill
+								key="Verified"
+								size="sm"
+								color="#DDEBC0"
+							>
+								{kyc_status === 'verified' ? 'KYC Verified' : 'Not Verified'}
+							</Pill>
+						</div>
+					</div>
+					<div className={styles.name}>
+						ID:
+						{' '}
+						{serial_id}
+					</div>
+					<div>
+						<Pill
+							key="Importer/Exporter"
+							size="sm"
+							color="#FFF7BF"
+						>
+							{account_type === 'importer_exporter' ? 'Importer/Exporter' : ''}
+						</Pill>
+					</div>
+				</>
+			)}
+			<div className={styles.agent_title}>Agent Details</div>
 			<div className={styles.agent_div}>
 				<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
 			</div>
@@ -78,9 +94,15 @@ function OrganizationDetails({ activeMessageCard }) {
 				)}
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
-			<div className={styles.promotion_cards}>
-				<PromocodeThumbnail promoData={promoData} promoLoading={promoLoading} />
-			</div>
+			{promoLoading ? (
+				<div className={styles.loader_div}>
+					<Loader themeType="primary" />
+				</div>
+			) : (
+				<div className={styles.promotion_cards}>
+					<PromocodeThumbnail promoData={promoData} />
+				</div>
+			)}
 		</div>
 
 	);

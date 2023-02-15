@@ -1,10 +1,11 @@
 import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../constants/MODAL_COMPONENT_MAPPING';
 import useGetMessages from '../../../hooks/useGetMessages';
+import useSendChat from '../../../hooks/useSendChat';
 
 import Header from './Header';
 import MessageConversations from './MessageConversations';
@@ -12,47 +13,41 @@ import styles from './styles.module.css';
 
 function Messages({ activeMessageCard = {}, firestore }) {
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
+	const [draftMessages, setDraftMessages] = useState({});
+
 	const [messages, setMessages] = useState({});
-	const messageRef = useRef(null);
 
 	const { id = '', channel_type = '' } = activeMessageCard || {};
 
 	let activeChatCollection;
 
-	if (activeMessageCard?.channel_type) {
+	if (channel_type) {
 		activeChatCollection = collection(
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
 		);
 	}
 
+	const { sendChatMessage } = useSendChat({
+		firestore,
+		channel_type,
+		id,
+		draftMessages,
+		setDraftMessages,
+		activeChatCollection,
+	});
+
 	const {
-		getNextData,
-		getFirebaseData,
+		getNextData = () => {},
+		getFirebaseData = () => {},
 		lastPage,
 		messagesData,
 	} = useGetMessages({ firestore, activeChatCollection });
 
-	const scrollBottom = () => {
-		setTimeout(() => {
-			messageRef?.current?.scrollTo({
-				top      : (messageRef?.current?.scrollHeight || 0) + 10,
-				behavior : 'smooth',
-			});
-		}, 100);
-	};
-
 	useEffect(() => {
 		getFirebaseData();
-		scrollBottom();
-	}, [activeMessageCard?.id, messageRef]);
+	}, [id]);
 
-	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop === 0;
-		if (!lastPage && bottom) {
-			getNextData();
-		}
-	};
 	const ActiveModalComp = MODAL_COMPONENT_MAPPING[openModal?.type] || null;
 
 	const closeModal = () => (setOpenModal({ type: null, data: {} }));
@@ -61,12 +56,17 @@ function Messages({ activeMessageCard = {}, firestore }) {
 		<>
 			<div className={styles.container}>
 				<Header setOpenModal={setOpenModal} />
-				<div className={styles.message_container} onScroll={handleScroll} ref={messageRef}>
+				<div className={styles.message_container}>
 					<MessageConversations
+						id={id}
 						messagesData={messagesData}
+						draftMessages={draftMessages}
+						setDraftMessages={setDraftMessages}
+						sendChatMessage={sendChatMessage}
 						setMessages={setMessages}
 						messages={messages}
-						id={id}
+						getNextData={getNextData}
+						lastPage={lastPage}
 					/>
 				</div>
 			</div>

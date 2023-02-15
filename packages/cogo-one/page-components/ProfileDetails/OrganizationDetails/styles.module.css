@@ -91,3 +91,11 @@
     max-height: 19px;
     justify-content: flex-end;
 }
+
+.loader_div {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding: 32px;
+}

@@ -14,6 +14,7 @@ function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListL
 	const createLogApi = async ({ inputValue, date, time }) => {
 		const payload = {
 			communication_type       : 'meeting',
+			is_reminder              : 'true',
 			agent_id                 : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 			user_id                  : 'cba50126-efbc-4caa-8383-b616dec9d44b',
 			title                    : inputValue?.title,

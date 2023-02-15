@@ -21,9 +21,5 @@
 	display: flex;
 	padding: 8px;
 	margin-bottom: 20px;
-	svg,img{
-		width: 20px;
-		height: 20px;
-		fill:#000000;
-	}
+	cursor: pointer;
 }

@@ -15,7 +15,7 @@ function OrgAgentDetails({ agent, orgLoading }) {
 			) : (
 				<>
 					<div className={styles.content}>
-						<div className={styles.agent_type}>Sales agent : </div>
+						<div className={styles.agent_type}>Name : </div>
 						<div className={styles.name}>{name}</div>
 					</div>
 					<div className={styles.content}>

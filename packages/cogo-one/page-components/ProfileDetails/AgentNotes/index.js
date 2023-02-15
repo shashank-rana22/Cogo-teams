@@ -1,6 +1,6 @@
-import { Toggle, Textarea, ButtonIcon } from '@cogoport/components';
+import { Toast, Toggle, Textarea, ButtonIcon } from '@cogoport/components';
 import { IcMTick, IcMDelete } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateOmniNote from '../../../hooks/useCreateOmniNote';
@@ -20,10 +20,14 @@ function AgentNotes({ activeMessageCard }) {
 	const { updateNote } = useUpdateNote({ fetchListNotes, editNote });
 
 	const handleSubmit = async () => {
-		if (editNote) {
-			await updateNote({ noteValue, type: 'update', updateId });
+		if (!isEmpty(noteValue)) {
+			if (editNote) {
+				await updateNote({ noteValue, type: 'update', updateId });
+			} else {
+				await omniChannelNote({ noteValue });
+			}
 		} else {
-			await omniChannelNote({ noteValue });
+			Toast.error('Enter description');
 		}
 		setNoteValue('');
 	};

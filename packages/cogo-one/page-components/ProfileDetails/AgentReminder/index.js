@@ -15,6 +15,7 @@ function AgentReminder({ activeMessageCard }) {
 		description : '',
 	});
 	const [date, setDate] = useState('');
+	// console.log('date', date);
 	const [time, setTime] = useState({
 		start_time : '',
 		end_time   : '',
@@ -29,10 +30,8 @@ function AgentReminder({ activeMessageCard }) {
 		setInputValue, setDate, setTime, fetchListLogApi,
 	});
 
-	console.log('listData', listData);
-
 	const handleSubmit = async () => {
-		if (!isEmpty(inputValue) || !isEmpty(date) || !isEmpty(time)) {
+		if (!isEmpty(inputValue) && !isEmpty(date) && !isEmpty(time)) {
 			await createLogApi({ inputValue, date, time });
 		} else {
 			Toast.error('Enter details');
@@ -83,7 +82,6 @@ function AgentReminder({ activeMessageCard }) {
 								timeIntervals={1}
 								value={time?.start_time}
 								isClearable
-								// suffix={<>hi</>}
 								onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
 							/>
 						</div>

@@ -18,7 +18,7 @@ function useOutgoingCall() {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.data);
+			Toast.error(error?.response?.data?.message[0]);
 		}
 	};
 
