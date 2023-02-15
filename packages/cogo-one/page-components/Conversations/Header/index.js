@@ -7,7 +7,7 @@ import { TAGS_COLORS } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ setOpenModal = () => {} }) {
 	const tagslist = ['!! Priority', 'Pre Shipment', 'Pre Shipment'];
 	const assignes = [
 		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: false },
@@ -68,7 +68,15 @@ function Header() {
 						Escalate
 					</Button>
 					{(assignes || []).map((eachAssigne) => <AssigneeAvatar data={eachAssigne} />)}
-					<Button themeType="secondary" size="md" className={styles.styled_button}>Assign</Button>
+					<Button
+						themeType="secondary"
+						size="md"
+						className={styles.styled_button}
+						onClick={() => setOpenModal({ type: 'assign', data: {} })}
+					>
+						Assign
+
+					</Button>
 				</div>
 			</div>
 			<div className={styles.flex_space_between}>
