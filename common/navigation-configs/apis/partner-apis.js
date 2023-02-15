@@ -36,7 +36,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -535,7 +535,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_allocation_requests',
+			api          : 'get_allocation_requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
@@ -568,6 +568,16 @@ const partner = {
 			api          : 'update_organization',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 	],
 	terms_and_conditons: [
@@ -974,7 +984,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1601,7 +1611,7 @@ const partner = {
 			service_name : 'voice_call',
 		},
 		{
-			api          : 'create_allocation_relation',
+			api          : 'relation',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1615,6 +1625,21 @@ const partner = {
 			api          : 'list_organization_approvals',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'mark_user_as_verified',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 	],
 	supply_crm: [
@@ -1639,7 +1664,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -2213,6 +2238,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	support_crm: [
 		{
@@ -2553,6 +2588,16 @@ const partner = {
 			api          : 'get_organization_communication_reminder_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 	],
 	finance_crm: [
@@ -4806,7 +4851,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_allocation_requests',
+			api          : 'get_allocation_requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},

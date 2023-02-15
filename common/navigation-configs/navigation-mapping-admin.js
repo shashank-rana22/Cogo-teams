@@ -349,6 +349,7 @@ const navigationMappingAdmin = {
 			...apis.ftl_freight,
 			...apis.ltl_freight,
 			...apis.trailer_freight,
+			...apis.rail_freight,
 		],
 		options: [
 			{
@@ -1748,10 +1749,10 @@ const navigationMappingAdmin = {
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
 		main_apis   : [
-			'list_allocation_configurations',
-			'list_allocation_relations',
-			'list_allocation_requests',
-			'list_allocation_quotas',
+			'get_allocation_configurations',
+			'get_allocation_relations',
+			'get_allocation_requests',
+			'get_allocation_quotas',
 		],
 		options: [
 			{
@@ -1773,6 +1774,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+
+	enrichment: {
+		key           : 'enrichment',
+		title         : 'Enrichment',
+		href          : '/enrichment',
+		as            : '/enrichment',
+		main_apis     : ['/list_lead_organizations_enrichment'],
+		possible_apis : apis.enrichment,
+		module_type   : 'dashboards',
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
