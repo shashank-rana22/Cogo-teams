@@ -79,7 +79,7 @@ function CogoOne() {
 				voiceListLoading={loading}
 			/>
 			<Conversations />
-			<ProfileDetails activeCard={activeCard} />
+			<ProfileDetails activeMessageCard={activeMessageCard} />
 		</div>
 	);
 }

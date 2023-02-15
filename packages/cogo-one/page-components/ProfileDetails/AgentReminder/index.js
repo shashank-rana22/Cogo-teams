@@ -1,4 +1,5 @@
-import { Button, Timepicker, Input, Datepicker } from '@cogoport/components';
+import { Toast, Button, Timepicker, Input, Datepicker, Textarea } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 // import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -8,28 +9,41 @@ import useGetListCommunicationLog from '../../../hooks/useGetListCommunicationLo
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
-function AgentReminder() {
-	const [inputValue, setInputValue] = useState('');
+function AgentReminder({ activeMessageCard }) {
+	const [inputValue, setInputValue] = useState({
+		title       : '',
+		description : '',
+	});
 	const [date, setDate] = useState('');
 	const [time, setTime] = useState({
 		start_time : '',
 		end_time   : '',
 	});
 
+	const {
+		listData = {},
+		fetchListLogApi = () => {},
+		listLoading,
+	} = useGetListCommunicationLog({ activeMessageCard });
 	const { createLogApi, loading } = useCreateCommunicationLog({
-		setInputValue, setDate, setTime,
+		setInputValue, setDate, setTime, fetchListLogApi,
 	});
 
-	const { listData = {} } = useGetListCommunicationLog();
-	// console.log('listData', listData);
+	console.log('listData', listData);
 
 	const handleSubmit = async () => {
-		// console.log('dfgjd', inputValue, date, time);
-		await createLogApi({ inputValue, date, time });
+		if (!isEmpty(inputValue) || !isEmpty(date) || !isEmpty(time)) {
+			await createLogApi({ inputValue, date, time });
+		} else {
+			Toast.error('Enter details');
+		}
 	};
 
 	const handleReset = () => {
-		setInputValue('');
+		setInputValue({
+			title       : '',
+			description : '',
+		});
 		setDate('');
 		setTime({
 			start_time : '',
@@ -46,9 +60,8 @@ function AgentReminder() {
 					size="md"
 					placeholder="Type here..."
 					required
-					value={inputValue}
-					onChange={(val) => setInputValue(val)}
-					// onChange={(e) => setInputValue(e.target.value)}
+					value={inputValue?.title}
+					onChange={(val) => setInputValue((q) => ({ ...q, title: val }))}
 				/>
 			</div>
 			<div className={styles.date_wrapper}>
@@ -88,6 +101,17 @@ function AgentReminder() {
 						</div>
 					</div>
 				</div>
+				<div className={styles.wrapper}>
+					<div className={styles.label}>Summary</div>
+					<Textarea
+						name="a5"
+						size="md"
+						placeholder="Description"
+						value={inputValue?.description}
+						onChange={(val) => setInputValue((q) => ({ ...q, description: val }))}
+					/>
+				</div>
+
 				<div className={styles.button_container}>
 					<div
 						role="presentation"
@@ -100,16 +124,14 @@ function AgentReminder() {
 						<Button
 							size="md"
 							themeType="primary"
-							// className=""
 							onClick={handleSubmit}
 							disabled={loading}
 						>
 							Set reminder
-
 						</Button>
 					</div>
 				</div>
-				<PreviousReminder />
+				<PreviousReminder listData={listData} listLoading={listLoading} />
 			</div>
 		</div>
 	);

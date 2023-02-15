@@ -1,23 +1,29 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Placeholder } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 
 import getListPromoCode from '../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../hooks/useGetOrganizationCogopoints';
 
+// import LoadingState from './LoaderState';
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeSelect }) {
-	const { organizationData = {} } = useGetOrganization({ activeSelect });
-	const { pointData } = useGetOrganizationCogopoints({ activeSelect });
-	const { promoData } = getListPromoCode({ activeSelect });
+function OrganizationDetails({ activeMessageCard }) {
+	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard });
+	// const orgLoading = true;
+	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard });
+	const { promoData, promoLoading } = getListPromoCode({ activeMessageCard });
 
 	const { agent, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
+
+	// if (orgLoading) {
+	// 	return <LoadingState />;
+	// }
 
 	return (
 		<div className={styles.container}>
@@ -55,7 +61,7 @@ function OrganizationDetails({ activeSelect }) {
 			</div>
 			<div className={styles.agent_title}>Agent Details (2)</div>
 			<div className={styles.agent_div}>
-				<OrgAgentDetails agent={agent} />
+				<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
 			</div>
 
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
@@ -65,11 +71,15 @@ function OrganizationDetails({ activeSelect }) {
 				</div>
 
 				<div className={styles.cogopoints}>Cogopoints : </div>
-				<div className={styles.value}>{total_redeemable}</div>
+				{pointLoading ? (
+					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
+				) : (
+					<div className={styles.value}>{total_redeemable}</div>
+				)}
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
 			<div className={styles.promotion_cards}>
-				<PromocodeThumbnail promoData={promoData} />
+				<PromocodeThumbnail promoData={promoData} promoLoading={promoLoading} />
 			</div>
 		</div>
 
