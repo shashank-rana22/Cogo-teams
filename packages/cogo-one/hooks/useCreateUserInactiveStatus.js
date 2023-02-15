@@ -8,12 +8,15 @@ const useCreateUserInactiveStatus = () => {
 	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_user_call_details',
+		url    : '/update_agent_work_preference',
 		method : 'post',
 	}, { manual: true });
 
 	const userStatus = async (data = {}) => {
 		const { inactive_status = '', inactive_date = {}, inactive_time = {} } = data;
+		// console.log('inactive_status', inactive_status);
+		// console.log('inactive_time', inactive_time);
+		// console.log('inactive_date', inactive_date);
 		const checkReasons = inactive_status === 'on_break' || inactive_status === 'on_lunch';
 		const checkDate = isEmpty(inactive_date?.startDate) && isEmpty(inactive_date?.endDate);
 
@@ -26,7 +29,12 @@ const useCreateUserInactiveStatus = () => {
 				Toast.error('please select inactive date');
 			}
 			await trigger({
-
+				data: {
+					agent_id       : userId,
+					status         : inactive_status,
+					validity_start : inactive_date?.startDate,
+					validity_end   : inactive_date?.endDate,
+				},
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.error));

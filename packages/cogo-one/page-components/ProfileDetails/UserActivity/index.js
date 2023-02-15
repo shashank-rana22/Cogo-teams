@@ -1,24 +1,62 @@
-import { Select } from '@cogoport/components';
+import { Tabs, TabPanel, Input, Popover } from '@cogoport/components';
+import { IcMFdollar, IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import userActivitiesType from '../../../configurations/userActivitiesType';
-
+import Filters from './Filters';
 import styles from './styles.module.css';
 
 function UserActivities() {
-	const [activityType, setActivityType] = useState('');
+	const [activeTab, setActiveTab] = useState('transactional');
+	const [searchValue, setSearchValue] = useState('');
+	const [filterVisible, setFilterVisible] = useState(false);
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>User Activity</div>
-			<div className={styles.wrapper}>
-				<Select
-					value={activityType}
-					onChange={setActivityType}
-					placeholder="Select activity type"
-					options={userActivitiesType}
-				/>
-			</div>
 
+			<div className={styles.tabs}>
+				<Tabs
+					activeTab={activeTab}
+					fullWidth
+					themeType="secondary"
+					onChange={setActiveTab}
+				>
+					<TabPanel
+						name="transactional"
+						title={<IcMFdollar width={20} height={20} />}
+					/>
+					<TabPanel name="platform" title={<IcMFdollar width={20} height={20} />} />
+					<TabPanel name="communication" title={<IcMFdollar width={20} height={20} />} />
+				</Tabs>
+			</div>
+			<div className={styles.title}>Transactional Activity</div>
+			<div className={styles.filters_container}>
+				<div className={styles.source_types}>
+
+					<Input
+						size="sm"
+						prefix={<IcMSearchlight width={18} height={18} />}
+						placeholder="Search here..."
+						value={searchValue}
+						onChange={(val) => setSearchValue(val)}
+						style={{ width: 200 }}
+					/>
+
+				</div>
+
+				<div className={styles.filter_icon}>
+					<Popover
+						placement="left"
+						caret={false}
+						render={(
+							<Filters />
+						)}
+						visible={filterVisible}
+					>
+						{/* <div className={styles.filter_dot} /> */}
+						<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+					</Popover>
+
+				</div>
+			</div>
 		</div>
 	);
 }

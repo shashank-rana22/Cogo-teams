@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { format, startCase } from '@cogoport/utils';
+import React from 'react';
 
 import UserAvatar from '../../../common/UserAvatar';
 import FilterComponents from '../FilterComponents';
@@ -18,7 +18,6 @@ function MessageList({
 	filterVisible,
 	searchValue,
 	setFilterVisible,
-	reset,
 }) {
 	const loading = false;
 	return (
@@ -32,7 +31,6 @@ function MessageList({
 						placeholder="Search here..."
 						value={searchValue}
 						onChange={(val) => setSearchValue(val)}
-						style={{ width: 200 }}
 					/>
 
 				</div>
@@ -40,19 +38,17 @@ function MessageList({
 				<div className={styles.filter_icon}>
 					<Popover
 						placement="left"
-						caret={false}
 						render={(
 							<FilterComponents
 								setFilterVisible={setFilterVisible}
 								filterVisible={filterVisible}
-						// fields={fields}
-								reset={reset}
 							/>
 						)}
 						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
 					>
-						<div className={styles.filter_dot} />
-						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
+						{/* <div className={styles.filter_dot} /> */}
+						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible((prev) => !prev)} />
 					</Popover>
 
 				</div>
@@ -82,7 +78,8 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<div className={styles.user_name}>
-													{item.name}
+													{startCase(item.name)}
+
 												</div>
 												<div className={styles.organisation}>
 													{item?.organization_name}

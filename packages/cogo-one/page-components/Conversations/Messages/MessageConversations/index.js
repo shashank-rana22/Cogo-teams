@@ -1,30 +1,72 @@
 /* eslint-disable max-len */
 import { Popover } from '@cogoport/components';
 import { IcMHappy, IcMAttach, IcMSend, IcMInfo } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useRef, useEffect } from 'react';
 
 import useGetEmojiList from '../../../../hooks/useGetEmojis';
 
-// import EmojisBody from './EmojisBody';
+import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 
-function MessageConversations({ messagesData = [], messages = {}, setMessages = () => {}, id = '' }) {
+function MessageConversations(
+	{
+		messagesData = [],
+		draftMessages = {}, setDraftMessages = () => {},
+		id = '',
+		sendChatMessage,
+		lastPage,
+		getNextData,
+	},
+) {
+	const messageRef = useRef(null);
+
+	const noMessages = isEmpty(messagesData);
+
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
+			sendChatMessage();
 		}
 	};
-	// const {
-	// 	emojisList = {},
-	// 	setOnClicked = () => { },
-	// 	onClicked = false,
-	// } = useGetEmojiList();
+
+	const handleScroll = (e) => {
+		const bottom = e.target.scrollTop === 0;
+		if (!lastPage && bottom) {
+			getNextData();
+		}
+	};
+
+	const scrollToBottom = () => {
+		setTimeout(messageRef.current?.scrollIntoView({
+			behavior : 'auto',
+			block    : 'nearest',
+			inline   : 'start',
+		}), 700);
+	};
+
+	useEffect(() => {
+		if (!noMessages) { scrollToBottom(); }
+	}, [id, noMessages]);
+
+	const {
+		emojisList = {},
+		setOnClicked = () => { },
+		onClicked = false,
+	} = useGetEmojiList();
+
 	return (
 		<div className={styles.styled_div}>
-			<div className={styles.container}>
-				{(messagesData || []).map((eachMessage) => (eachMessage?.conversation_type !== 'received' ? <ReceiveDiv eachMessage={eachMessage} /> : <SentDiv eachMessage={eachMessage} />))}
+			<div className={styles.container} onScroll={handleScroll}>
+				{(messagesData || []).map((eachMessage) => (
+					eachMessage?.conversation_type !== 'received'
+						? <ReceiveDiv eachMessage={eachMessage} />
+						: <SentDiv eachMessage={eachMessage} />
+				))}
+				<div ref={messageRef} />
 			</div>
 
 			<div className={styles.text_area_div}>
@@ -45,15 +87,15 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 					rows={2}
 					placeholder="Type your message..."
 					className={styles.text_area}
-					value={messages[id]}
-					onChange={(e) => setMessages((p) => ({ ...p, [id]: e.target.value }))}
+					value={draftMessages[id]}
+					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e.target.value }))}
 					onKeyPress={(e) => handleKeyPress(e)}
 				/>
 
 				<div className={styles.flex_space_between}>
 					<div className={styles.flex}>
 						<IcMAttach fill="#828282" />
-						{/* <Popover
+						<Popover
 							placement="top"
 							render={<EmojisBody emojisList={emojisList} />}
 							visible={onClicked}
@@ -63,7 +105,7 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 								fill="#828282"
 								onClick={() => setOnClicked((prev) => !prev)}
 							/>
-						</Popover> */}
+						</Popover>
 					</div>
 					<div>
 						<img
