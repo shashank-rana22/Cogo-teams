@@ -1,0 +1,38 @@
+.container {
+	:global {
+		.ui_modal_body_container{
+			border-top: none;
+		}
+
+ .ui_modal_dialog .ui_ps_size_sm {
+			width: 120px !important;
+		}
+		
+	}
+}
+
+.group_radio{
+display: flex;
+flex-direction: column;
+}
+
+.actions{
+	margin: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.refresh_icon{
+	margin:5px 10px 0px 0px;
+}
+.refresh_action{
+	display: flex;
+	align-items: center;
+	
+}
+
+.date_range{
+	display: flex;
+	justify-content: center;
+}

@@ -1,7 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-// import control from '../configurations/filter-controls';
+import control from '../configurations/filter-controls';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
@@ -10,20 +10,27 @@ import styles from './styles.module.css';
 
 function CogoOne() {
 	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState(false);
+	console.log('activeTab', activeTab);
+	const [toggleStatus, setToggleStatus] = useState(true);
 	console.log('toggleStatus', toggleStatus);
 	const [activeCard, setActiveCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
+	const [inactiveReasons, setInactiveReasons] = useState('');
+	console.log('inactiveReasons', inactiveReasons);
+	const [inactiveDate, setInactiveDate] = useState('');
+	const [inactiveTime, setInactiveTime] = useState('');
+	console.log('inactiveTime', inactiveTime);
+	console.log('inactiveDate', inactiveDate);
 
-	const { reset, watch } = useForm();
+	const { reset, watch, control } = useForm();
 
 	const filterData = watch();
 	console.log('filterData', filterData);
 
 	return (
 		<div className={styles.layout_container}>
-			{/* <Tabs activeTab={activeTab} setActiveTab={setActiveTab} /> */}
+
 			<Customers
 				setActiveCard={setActiveCard}
 				activeCard={activeCard}
@@ -37,6 +44,12 @@ function CogoOne() {
 				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
+				inactiveReasons={inactiveReasons}
+				setInactiveReasons={setInactiveReasons}
+				setInactiveDate={setInactiveDate}
+				inactiveDate={inactiveDate}
+				setInactiveTime={setInactiveTime}
+				inactiveTime={inactiveTime}
 			/>
 			<Conversations />
 			<ProfileDetails />

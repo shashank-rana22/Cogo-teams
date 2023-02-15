@@ -50,6 +50,15 @@ function FilterComponents({
 				</div>
 			</div>
 
+			<div className={styles.filter_container}>
+				<div className={styles.label}>
+					Escalation
+				</div>
+				<div className={styles.filters_types}>
+					hello
+				</div>
+			</div>
+
 			<div className={styles.actions}>
 				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
 				<Button size="md" themeType="accent">Apply</Button>

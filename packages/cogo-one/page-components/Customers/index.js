@@ -6,8 +6,10 @@ import React, { useEffect } from 'react';
 import UserAvatar from '../../common/UserAvatar';
 
 import FilterComponents from './FilterComponents';
+import InactiveModal from './InactiveModal';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import VoiceList from './VoiceList';
 
 function Customers({
 	setActiveCard = () => {},
@@ -22,6 +24,12 @@ function Customers({
 	setActiveTab = () => {},
 	setToggleStatus = () => {},
 	toggleStatus,
+	inactiveReasons,
+	setInactiveReasons = () => {},
+	setInactiveDate = () => {},
+	inactiveDate,
+	setInactiveTime = () => {},
+	inactiveTime,
 }) {
 	const dummyData = [
 		{
@@ -142,90 +150,115 @@ function Customers({
 				</Tabs>
 			</div>
 
-			<div className={styles.filters_container}>
-				<div className={styles.source_types}>
+			{activeTab === 'message' && (
+				<div className={styles.filters_container}>
+					<div className={styles.source_types}>
 
-					<Input
-						size="sm"
-						prefix={<IcMSearchlight width={18} height={18} />}
-						placeholder="Search here..."
-						value={searchValue}
-						onChange={(val) => setSearchValue(val)}
-						style={{ width: 200 }}
-					/>
+						<Input
+							size="sm"
+							prefix={<IcMSearchlight width={18} height={18} />}
+							placeholder="Search here..."
+							value={searchValue}
+							onChange={(val) => setSearchValue(val)}
+							style={{ width: 200 }}
+						/>
 
-				</div>
+					</div>
 
-				<div className={styles.filter_icon}>
-					<Popover
-						placement="left"
-						caret={false}
-						render={(
-							<FilterComponents
-								setFilterVisible={setFilterVisible}
-								filterVisible={filterVisible}
-								// fields={fields}
-								reset={reset}
-							/>
-						)}
-						visible={filterVisible}
-					>
-						{/* <div className={styles.filter_dot} /> */}
-						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
-					</Popover>
+					<div className={styles.filter_icon}>
+						<Popover
+							placement="left"
+							caret={false}
+							render={(
+								<FilterComponents
+									setFilterVisible={setFilterVisible}
+									filterVisible={filterVisible}
+									// fields={fields}
+									reset={reset}
+								/>
+							)}
+							visible={filterVisible}
+						>
+							<div className={styles.filter_dot} />
+							<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
+						</Popover>
 
-				</div>
-			</div>
-
-			{loading ? <LoadingState /> : (
-				<div className={styles.list_container}>
-
-					{(dummyData || []).map((item) => {
-						const checkActiveCard = activeCard?.id === item?.id;
-						return (
-							<div
-								role="presentation"
-								className={cl`
-			                    ${styles.card_Container} 
-			                    ${checkActiveCard ? styles.active_card : ''} 
-		                     	`}
-								onClick={() => setActiveCard(item)}
-							>
-								<div className={styles.card}>
-
-									<div className={styles.user_information}>
-										<div className={styles.avatar_Container}>
-											<UserAvatar type={item.source} imageSource={item.image} />
-											<div className={styles.user_details}>
-												<div className={styles.user_name}>
-													{item.name}
-												</div>
-												<div className={styles.organisation}>
-													Organisation
-													{' '}
-													{item.organisation}
-												</div>
-											</div>
-										</div>
-
-										<div className={styles.user_activity}>
-											<div className={styles.pills_card}>Small</div>
-											<div className={styles.activity_duration}>
-												{item.status}
-											</div>
-										</div>
-
-									</div>
-									<div className={styles.content}>
-										{item.content}
-									</div>
-								</div>
-							</div>
-						);
-					})}
+					</div>
 				</div>
 			)}
 
+			{activeTab === 'message' && (
+				<div>
+					{loading ? <LoadingState /> : (
+						<div className={styles.list_container}>
+
+							{(dummyData || []).map((item) => {
+								const checkActiveCard = activeCard?.id === item?.id;
+								return (
+									<div
+										role="presentation"
+										className={cl`
+						${styles.card_Container} 
+						${checkActiveCard ? styles.active_card : ''} 
+						 `}
+										onClick={() => setActiveCard(item)}
+									>
+										<div className={styles.card}>
+
+											<div className={styles.user_information}>
+												<div className={styles.avatar_Container}>
+													<UserAvatar type={item.source} imageSource={item.image} />
+													<div className={styles.user_details}>
+														<div className={styles.user_name}>
+															{item.name}
+														</div>
+														<div className={styles.organisation}>
+															Organisation
+															{' '}
+															{item.organisation}
+														</div>
+													</div>
+												</div>
+
+												<div className={styles.user_activity}>
+													<div className={styles.pills_card}>Small</div>
+													<div className={styles.activity_duration}>
+														{item.status}
+													</div>
+												</div>
+
+											</div>
+											<div className={styles.content}>
+												{item.content}
+											</div>
+										</div>
+									</div>
+								);
+							})}
+						</div>
+					)}
+				</div>
+			)}
+
+			{activeTab === 'voice' && (
+				<VoiceList
+					setActiveCard={setActiveCard}
+					activeCard={activeCard}
+				/>
+			)}
+
+			{toggleStatus && (
+				<InactiveModal
+					toggleStatus={toggleStatus}
+					setToggleStatus={setToggleStatus}
+					inactiveReasons={inactiveReasons}
+					setInactiveReasons={setInactiveReasons}
+					setInactiveDate={setInactiveDate}
+					inactiveDate={inactiveDate}
+					setInactiveTime={setInactiveTime}
+					inactiveTime={inactiveTime}
+				/>
+			)}
 		</div>
 	);
 }
