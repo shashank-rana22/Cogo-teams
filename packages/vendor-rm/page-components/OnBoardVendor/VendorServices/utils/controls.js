@@ -1,31 +1,58 @@
 const controls = [
 	{
-		name       : 'office_details',
-		label      : 'Office Details',
-		type       : 'fieldArray',
-		buttonText : 'Add',
+		name          : 'office_details',
+		label         : 'Office Details',
+		type          : 'fieldArray',
+		buttonText    : 'Add',
 		// noDeleteButtonTill : 1,
-		controls   : [
+		showLabelOnce : true,
+		controls      : [
 			{
 				name        : 'category',
 				label       : 'Select Category',
 				type        : 'select',
 				placeholder : 'Select a Category',
-				rules       : { required: 'Category is required' },
+				options     : [
+					{
+						label : 'category1',
+						value : 'category1',
+					},
+					{
+						label : 'category2',
+						value : 'category2',
+					},
+				],
+				rules: { required: 'Category is required' },
 			},
 			{
 				name        : 'sub_category',
 				label       : 'Select Sub-category',
 				type        : 'select',
 				placeholder : 'Select a sub-category',
-				rules       : { required: 'Sub-category is required' },
+				options     : [
+					{
+						label : 'sub category',
+						value : 'sub_category',
+					},
+				],
+				rules: { required: 'Sub-category is required' },
 			},
 			{
-				name        : 'cogoport-office',
+				name        : 'cogoport_office',
 				label       : 'Select Cogoport Office',
-				type        : 'select',
+				type        : 'multiSelect',
 				placeholder : 'Select Location',
-				rules       : { required: 'Office Location is required' },
+				options     : [
+					{
+						label : 'mumbai',
+						value : 'mumbai',
+					},
+					{
+						label : 'Noida',
+						value : 'noida',
+					},
+				],
+				rules: { required: 'Office Location is required' },
 			},
 		],
 	},
