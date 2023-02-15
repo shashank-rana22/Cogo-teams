@@ -569,6 +569,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1616,6 +1626,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'mark_user_as_verified',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	supply_crm: [
 		{
@@ -2213,6 +2238,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	support_crm: [
 		{
@@ -2553,6 +2588,16 @@ const partner = {
 			api          : 'get_organization_communication_reminder_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 	],
 	finance_crm: [
