@@ -26,7 +26,16 @@ function Messages({ activeMessageCard = {}, firestore }) {
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
 		);
 	}
-	const { sendChatMessage } = useSendChat({ firestore, channel_type, id, draftMessages, setDraftMessages });
+
+	const { sendChatMessage } = useSendChat({
+		firestore,
+		channel_type,
+		id,
+		draftMessages,
+		setDraftMessages,
+		activeChatCollection,
+	});
+
 	const {
 		getNextData,
 		getFirebaseData,
@@ -68,6 +77,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						draftMessages={draftMessages}
 						setDraftMessages={setDraftMessages}
 						id={id}
+						sendChatMessage={sendChatMessage}
 					/>
 				</div>
 			</div>

@@ -1,5 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import { collection, doc, addDoc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, addDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
@@ -10,20 +10,17 @@ const useSendChat = ({
 	// messageFireBaseDoc,
 	// files,
 	// setFlag,
+	activeChatCollection,
 	draftMessages,
 	// activeChat,
 	// getUser,
 	firestore,
-	activeMessage,
+	channel_type,
+	id,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
 	}));
-	const { id = '', channel_type = '' } = activeMessage || {};
-	const messageFireBase = collection(
-		firestore,
-		`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
-	);
 
 	const messageFireBaseDoc = doc(
 		firestore,
@@ -52,7 +49,7 @@ const useSendChat = ({
 				// 		? fileDetails.url
 				// 		: '',
 			};
-			await addDoc(messageFireBase, adminChat);
+			await addDoc(activeChatCollection, adminChat);
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;
 			await updateDoc(messageFireBaseDoc, {

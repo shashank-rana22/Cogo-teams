@@ -9,11 +9,12 @@ import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 
-function MessageConversations({ messagesData = [], draftMessages = {}, setDraftMessages = () => {}, id = '' }) {
+function MessageConversations({ messagesData = [], draftMessages = {}, setDraftMessages = () => {}, id = '', sendChatMessage }) {
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
+			sendChatMessage();
 		}
 	};
 	const {
