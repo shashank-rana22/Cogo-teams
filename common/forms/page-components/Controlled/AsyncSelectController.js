@@ -4,7 +4,7 @@ import AsyncSelect from '../SmartComponents/AsyncSelect';
 
 function AsyncSelectController(props) {
 	const {
-		name, control, rules, value, ...rest
+		name, control, rules, ...rest
 	} = props;
 
 	return (
@@ -12,11 +12,11 @@ function AsyncSelectController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, value: newValue } }) => (
+			render={({ field: { onChange, value } }) => (
 				<AsyncSelect
 					{...rest}
 					onChange={onChange}
-					value={newValue || value}
+					value={value}
 				/>
 			)}
 		/>
