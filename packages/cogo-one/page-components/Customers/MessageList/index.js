@@ -47,7 +47,7 @@ function MessageList({
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						<div className={styles.filter_dot} />
+						{/* <div className={styles.filter_dot} /> */}
 						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible((prev) => !prev)} />
 					</Popover>
 
