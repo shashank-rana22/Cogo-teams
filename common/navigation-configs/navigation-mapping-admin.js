@@ -349,6 +349,7 @@ const navigationMappingAdmin = {
 			...apis.ftl_freight,
 			...apis.ltl_freight,
 			...apis.trailer_freight,
+			...apis.rail_freight,
 		],
 		options: [
 			{
@@ -874,6 +875,15 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
+			{
+				key           : 'business_finance-reports',
+				title         : 'Reports',
+				href          : '/v2/business-finance/reports',
+				as            : '/v2/business-finance/reports',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.reports,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1218,7 +1228,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1228,7 +1237,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1238,7 +1246,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1316,7 +1323,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
@@ -1362,7 +1368,7 @@ const navigationMappingAdmin = {
 				href          : '/last-mile',
 				as            : '/last-mile',
 				type          : 'link',
-				main_apis     : ['list_document_desk_shipments'],
+				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk],
 			},
 		],
@@ -1748,7 +1754,7 @@ const navigationMappingAdmin = {
 				title         : 'Configurations',
 				href          : '/allocation/configurations',
 				as            : '/allocation/configurations',
-				main_apis     : ['list_allocation_configurations'],
+				main_apis     : ['get_allocation_configurations'],
 				possible_apis : apis.allocation,
 			},
 			{
@@ -1756,7 +1762,7 @@ const navigationMappingAdmin = {
 				title         : 'Relations',
 				href          : '/allocation/relations',
 				as            : '/allocation/relations',
-				main_apis     : ['list_allocation_relations'],
+				main_apis     : ['get_allocation_relations'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1765,7 +1771,7 @@ const navigationMappingAdmin = {
 				title         : 'Requests',
 				href          : '/allocation/requests',
 				as            : '/allocation/requests',
-				main_apis     : ['list_allocation_requests'],
+				main_apis     : ['get_allocation_requests'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1774,7 +1780,7 @@ const navigationMappingAdmin = {
 				title         : 'Quotas',
 				href          : '/allocation/quotas',
 				as            : '/allocation/quotas',
-				main_apis     : ['list_allocation_quotas'],
+				main_apis     : ['get_allocation_quotas'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1791,6 +1797,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+
+	enrichment: {
+		key           : 'enrichment',
+		title         : 'Enrichment',
+		href          : '/enrichment',
+		as            : '/enrichment',
+		main_apis     : ['/list_lead_organizations_enrichment'],
+		possible_apis : apis.enrichment,
+		module_type   : 'dashboards',
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',

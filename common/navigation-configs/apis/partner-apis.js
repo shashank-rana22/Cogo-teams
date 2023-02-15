@@ -18,6 +18,11 @@ const partner = {
 			service_name : 'credit',
 		},
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -31,7 +36,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -530,7 +535,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_allocation_requests',
+			api          : 'get_allocation_requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
@@ -563,6 +568,16 @@ const partner = {
 			api          : 'update_organization',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 	],
 	terms_and_conditons: [
@@ -866,6 +881,11 @@ const partner = {
 			service_name : 'credit',
 		},
 		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_organization_commodity_segmentation_stats',
 			access_type  : 'parivate',
 			service_name : 'organization',
@@ -964,7 +984,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1591,7 +1611,7 @@ const partner = {
 			service_name : 'voice_call',
 		},
 		{
-			api          : 'create_allocation_relation',
+			api          : 'relation',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -1606,8 +1626,28 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'mark_user_as_verified',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	supply_crm: [
+		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
@@ -1624,7 +1664,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'create_allocation_request',
+			api          : 'post_allocation_request',
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
@@ -2198,6 +2238,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	support_crm: [
 		{
@@ -2247,6 +2297,36 @@ const partner = {
 		},
 	],
 	onboarding_crm: [
+		{
+			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'verify_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_party_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'update_channel_partner',
 			access_type  : 'private',
@@ -2508,6 +2588,16 @@ const partner = {
 			api          : 'get_organization_communication_reminder_stats',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_verification_otp',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'verify_otp',
+			access_type  : 'private',
+			service_name : 'user',
 		},
 	],
 	finance_crm: [
@@ -4761,7 +4851,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_allocation_requests',
+			api          : 'get_allocation_requests',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
@@ -6619,6 +6709,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'get_purchase_bills_bill_state',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'put_purchase_payrun_bill',
 			access_type : 'private',
 			module      : 'payrun',
@@ -6955,6 +7051,12 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
+	reports: [
+		{
+			api         : 'get_muneem_reports_profitability',
 			access_type : 'private',
 		},
 	],
@@ -9076,6 +9178,11 @@ const partner = {
 			api          : 'list_air_freight_rates',
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'get_air_freight_rate_audit',
