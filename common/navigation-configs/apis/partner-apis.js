@@ -9680,6 +9680,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_organization_cogofx_approvals',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'update_organization_approval',
 			access_type  : 'private',
 			service_name : 'organization',
