@@ -7023,6 +7023,54 @@ const partner = {
 			api         : 'get_muneem_reports_profitability',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_muneem_reports_sage_purchase_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_sales_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_customers_on_sage_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_supplier_sage_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_organization_mapping_id_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_platform_sales_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_platform_purchase_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sales_report_for_reconciliation',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_partial_or_unpaid_bills',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_ap_bills_auditor',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_ar_invoices_auditor',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_finance_ap_dashboard_on_finance_accepted',
+			access_type : 'private',
+		},
 	],
 	settlement: [
 		{
