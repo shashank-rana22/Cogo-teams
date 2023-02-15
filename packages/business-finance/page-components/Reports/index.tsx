@@ -67,7 +67,7 @@ function Reports() {
 				</div>
 				<div className={styles.button}>
 					<Button
-						className={styles.button_class}
+						className={styles.buttonClass}
 						disabled={loading
 							|| !value.reportType
 							|| !value.dateRange?.startDate

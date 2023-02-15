@@ -5,7 +5,7 @@
 
 .input {
 	width: 200px;
-	margin: 0px 20px 24px 0px;
+	margin: 0 20px 24px 0;
 }
 
 .date {
@@ -24,11 +24,12 @@
 	margin-left: 20px;
 }
 
-.button_class {
+.buttonClass {
 	padding: 18px !important;
 	font-size: 14px !important;
 }
-.accountType{
-	margin-right: 20px;
+
+.accountType {
 	width: 200px;
+	margin-right: 20px;
 }
