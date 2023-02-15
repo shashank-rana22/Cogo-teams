@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function JournalVoucher({ itemData }) {
+function JournalVoucher({ itemData, setRemarks, onSave }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
-	const { data } = itemData || {};
+	const { data, userNotes } = itemData || {};
 	const { journalVoucherRequest } = data || {};
 	const {
 		entityCode, tradePartyName, type, category, accMode, currency, amount,
@@ -116,12 +116,21 @@ function JournalVoucher({ itemData }) {
 							name="remarks"
 							className={styles.text_area}
 							size="lg"
+							onChange={(values) => setRemarks(values)}
 							placeholder="Enter here..."
+							defaultValue={userNotes}
 						/>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { setShowTdsModal(false); }}>OK</Button>
+					<Button onClick={() => {
+						setShowTdsModal(false);
+						onSave();
+					}}
+					>
+						Save
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

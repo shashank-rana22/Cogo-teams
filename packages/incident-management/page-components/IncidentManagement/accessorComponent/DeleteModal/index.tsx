@@ -2,20 +2,44 @@ import { Textarea, Button, Modal } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useDeleteAccept from '../../hooks/useDeleteAccept';
+
 import styles from './styles.module.css';
 
-function DeleteModal() {
+function DeleteModal({ itemData, reftech }) {
+	const { id, userIncidentStatus, status } = itemData || {};
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [remarks, setRemarks] = useState(null);
+	const { onDeleteAccept } = useDeleteAccept({ id, userIncidentStatus, remarks, reftech });
 	return (
 		<div>
 			<div className={styles.buttonStyle}>
-				<IcMDelete color=" #ED3726" height={20} width={20} onClick={() => { setShowDeleteModal(true); }} />
+				{status === 'REJECTED' ? (
+					<Button
+						themeType="secondary"
+						onClick={() => { setShowDeleteModal(true); }}
+					>
+						Accept
+					</Button>
+				)
+					: (
+						<IcMDelete
+							color=" #ED3726"
+							height={20}
+							width={20}
+							onClick={() => { setShowDeleteModal(true); }}
+						/>
+					)}
 			</div>
 			<Modal show={showDeleteModal} size="md" onClose={() => setShowDeleteModal(false)}>
-				<Modal.Header className={styles.header} title="Delete Request" />
+				{status === 'REJECTED' ? <Modal.Header className={styles.header} title="Accept Request" />
+					: <Modal.Header className={styles.header} title="Delete Request" />}
+
 				<Modal.Body>
 					<section>
-						The Original request and all details related to it will be deleted
+						The Original request and all details related to it will be
+						{status === 'REJECTED' ? ' Accepted' : ' deleted'}
+
 					</section>
 					<div className={styles.remarks_style}>
 						Remarks*
@@ -24,6 +48,7 @@ function DeleteModal() {
 							className={styles.text_area}
 							size="lg"
 							placeholder="Enter Remarks here..."
+							onChange={(values) => setRemarks(values)}
 						/>
 					</div>
 				</Modal.Body>
@@ -38,8 +63,13 @@ function DeleteModal() {
 					</Button>
 					<Button
 						size="md"
+						onClick={() => {
+							onDeleteAccept();
+							setShowDeleteModal(false);
+						}}
 					>
-						Delete
+						{status === 'REJECTED' ? 'Accepet' : 'Delete'}
+
 					</Button>
 				</Modal.Footer>
 			</Modal>

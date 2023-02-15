@@ -7,14 +7,13 @@ import ViewRequested from '../accessorComponent/ViewRequested';
 import SortData from './SortData.tsx';
 import styles from './styles.module.css';
 
-const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => [
+const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
 			<div>
 				<div className={styles.referenceId}>
-					#
 					{getByKey(row, 'referenceId') as string}
 				</div>
 			</div>
@@ -56,7 +55,7 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => 
 		),
 	},
 	{
-		Header   : <div>Approved By & ON</div>,
+		Header   : <div>APPROVED BY & ON</div>,
 		id       : 'updatedAt',
 		accessor : (row) => (
 			<div>
@@ -87,7 +86,7 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => 
 		id       : 'view',
 		accessor : (row) => (
 			<div>
-				<ViewRequested itemData={row} />
+				<ViewRequested itemData={row} name="" reftech={reftech} />
 			</div>
 
 		),

@@ -18,6 +18,7 @@ function SortData({ isSortActive, setIsSortActive, setGlobalFilters }) {
 
 		}));
 	};
+
 	return (
 		<div className={styles.container}>
 			REQUEST DATE
@@ -25,8 +26,8 @@ function SortData({ isSortActive, setIsSortActive, setGlobalFilters }) {
 				{isSortActive
 					? <IcMArrowRotateUp color="#F68B21" onClick={ascending} />
 					: <IcMArrowRotateUp color="#D3D3D3" onClick={ascending} />}
-				{isSortActive ? <IcMArrowRotateDown color="#F68B21" onClick={descending} />
-					: 	<IcMArrowRotateDown color="#D3D3D3" onClick={descending} /> }
+				{isSortActive ? <IcMArrowRotateDown color="#D3D3D3" onClick={descending} />
+					: 	<IcMArrowRotateDown color="#F68B21" onClick={descending} /> }
 
 			</div>
 		</div>

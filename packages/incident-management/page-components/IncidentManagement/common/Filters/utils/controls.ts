@@ -59,13 +59,6 @@ export const filterControls = (activeTab) => {
 			],
 		},
 		{
-			name        : 'Date',
-			placeholder : 'Select Date',
-			type        : 'datepicker',
-			size        : 'lg',
-
-		},
-		{
 			name        : 'status',
 			placeholder : 'Status',
 			size        : 'lg',
@@ -73,6 +66,13 @@ export const filterControls = (activeTab) => {
 			caret       : true,
 			isClearable : true,
 			options     : optionVal,
+		},
+		{
+			name        : 'Date',
+			placeholder : 'Select Date',
+			type        : 'datepicker',
+			size        : 'lg',
+
 		},
 	];
 };

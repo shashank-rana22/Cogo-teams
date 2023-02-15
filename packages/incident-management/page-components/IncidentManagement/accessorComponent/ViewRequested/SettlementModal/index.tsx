@@ -5,9 +5,9 @@ import getModalColumns from '../getModalColumn';
 
 import styles from './styles.module.css';
 
-function SettlementModal({ itemData }) {
+function SettlementModal({ itemData, setRemarks, onSave }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
-	const { type, data } = itemData || {};
+	const { type, data, userNotes } = itemData || {};
 	const { settlementRequest } = data || {};
 	const { list = [] } = settlementRequest || {};
 	const columns = getModalColumns(type);
@@ -48,12 +48,21 @@ function SettlementModal({ itemData }) {
 							name="remarks"
 							className={styles.text_area}
 							size="lg"
+							onChange={(values) => setRemarks(values)}
 							placeholder="Enter here..."
+							defaultValue={userNotes}
 						/>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { setShowTdsModal(false); }}>OK</Button>
+					<Button onClick={() => {
+						setShowTdsModal(false);
+						onSave();
+					}}
+					>
+						Save
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

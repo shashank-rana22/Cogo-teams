@@ -1,20 +1,32 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function TdsDeviationModal({ itemData }) {
+function TdsDeviationModal({
+	itemData, setRemarks, onSave, onRaiseAgain,
+	setSelectedFile,
+	selectedFile,
+	name,
+}) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
-	const { status, data } = itemData || {};
+	const { status, data, userIncidentStatus, userNotes, updatedBy, updatedAt, remark:rejectedRemark } = itemData || {};
+	const { name:updatedByName } = updatedBy || {};
 	const { tdsRequest } = data || {};
+	const { fileName, finalUrl } = selectedFile || {};
 	const {
 		currentTdsRate, currentTdsStyle, requestedTdsRate, requestedTdsStyle,
 		validFrom, validTo, remark, documentUrls,
 	} = tdsRequest || {};
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>View</Button>
+			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>
+				{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
+					&& name === 'Raise Again' ? 'Raised Again' : 'View'}
+
+			</Button>
 			<Modal size="lg" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
 				<Modal.Header title="Tds Deviation" />
 				<Modal.Body>
@@ -44,7 +56,13 @@ function TdsDeviationModal({ itemData }) {
 											)}
 									</div>
 									<div>
-										Approved By : jaiprkash kushwaha at 11:24 on 12 feb 2023
+										Approved By :
+										{updatedByName}
+										{' '}
+										At :
+										{ updatedAt}
+										{' '}
+										{}
 									</div>
 								</div>
 								<div className={status === 'APPROVED' ? styles.hr : styles.rejected_hr} />
@@ -53,7 +71,7 @@ function TdsDeviationModal({ itemData }) {
 										Remarks :
 									</div>
 									<div>
-										Remarks here if any...
+										{rejectedRemark}
 									</div>
 								</div>
 							</div>
@@ -155,11 +173,52 @@ function TdsDeviationModal({ itemData }) {
 							className={styles.text_area}
 							size="lg"
 							placeholder="Enter here..."
+							onChange={(values) => setRemarks(values)}
+							defaultValue={userNotes}
+
 						/>
 					</div>
+					<div className={styles.rate_conatiner}>
+						{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
+					&& name === 'Raise Again'
+					&& (
+						<FileUploader
+							value={finalUrl}
+							docName={fileName}
+							fileName={fileName}
+							onChange={setSelectedFile}
+							showProgress
+							draggable
+							multiple
+							fileLink={finalUrl}
+							multipleUploadDesc="Upload Invoice"
+						/>
+					)}
+					</div>
+
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { setShowTdsModal(false); }}>OK</Button>
+					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION' && name === 'Raise Again'
+						? (
+							<Button
+								onClick={() => {
+									onRaiseAgain();
+									setShowTdsModal(false);
+								}}
+							>
+								Raised Again
+							</Button>
+						)
+						:					(
+							<Button onClick={() => {
+								setShowTdsModal(false);
+								onSave();
+							}}
+							>
+								Save
+
+							</Button>
+						)}
 				</Modal.Footer>
 			</Modal>
 		</div>

@@ -8,14 +8,13 @@ import ViewRequested from '../accessorComponent/ViewRequested';
 import SortData from './SortData.tsx';
 import styles from './styles.module.css';
 
-const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => [
+const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
 			<div>
 				<div className={styles.referenceId}>
-					#
 					{getByKey(row, 'referenceId') as string}
 				</div>
 			</div>
@@ -72,7 +71,7 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) =>
 		id       : 'view',
 		accessor : (row) => (
 			<div>
-				<ViewRequested itemData={row} />
+				<ViewRequested itemData={row} name="" reftech={reftech} />
 			</div>
 
 		),
@@ -84,9 +83,9 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) =>
 		// accessor : (row) => (
 		// 	<Remarks itemData={row} />
 		// ),
-		accessor: () => (
+		accessor: (row) => (
 			<div>
-				<DeleteModal />
+				<DeleteModal itemData={row} reftech={reftech} />
 			</div>
 		),
 	},

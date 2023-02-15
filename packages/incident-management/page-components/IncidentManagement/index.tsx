@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import Headers from './Headers';
@@ -9,11 +10,13 @@ import StyledTable from './Table';
 import getColumns from './utils/getColumns';
 
 function IncidentManagement() {
-	const [activeTab, setActiveTab] = useState('requested');
+	const { query, push } = useRouter();
+	const { activeIncidentTab } = query;
+	const [activeTab, setActiveTab] = useState<string>(activeIncidentTab || 'requested');
 	const [isSortActive, setIsSortActive] = useState(null);
-	const { globalFilters, setGlobalFilters, data, loading } = useGetIncidentMangement({ activeTab });
+	const { globalFilters, setGlobalFilters, data, loading, reftech } = useGetIncidentMangement({ activeTab });
 
-	const columns = getColumns(activeTab, isSortActive, setIsSortActive, setGlobalFilters);
+	const columns = getColumns(activeTab, isSortActive, setIsSortActive, setGlobalFilters, reftech);
 
 	const { list = [], paginationData } = data || {};
 	const { pageIndex, pageSize, total } = paginationData || {};
@@ -25,7 +28,7 @@ function IncidentManagement() {
 				Incident Management - My Incidents
 			</div>
 
-			<Headers activeTab={activeTab} setActiveTab={setActiveTab} data={data} />
+			<Headers activeTab={activeTab} setActiveTab={setActiveTab} data={data} push={push} />
 
 			<SelectFilter globalFilters={globalFilters} setGlobalFilters={setGlobalFilters} activeTab={activeTab} />
 			<div className={styles.list_container}>

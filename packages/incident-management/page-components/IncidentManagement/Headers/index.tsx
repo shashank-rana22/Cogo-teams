@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+// import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -7,6 +8,7 @@ interface ItemProps {
 	activeTab:string,
 	setActiveTab:Function,
 	data:StashProps,
+	push: (a: string, b: string) => void,
 }
 interface StashProps {
 	statsData:Props,
@@ -16,9 +18,16 @@ interface Props {
 	REJECTED:number,
 	APPROVED:number,
 }
-function Headers({ activeTab, setActiveTab, data }:ItemProps) {
+function Headers({ activeTab, setActiveTab, data, push }:ItemProps) {
 	const { statsData } = data || {};
 	const { REQUESTED, REJECTED, APPROVED } = statsData || {};
+	const handleTabChange = (v) => {
+		setActiveTab(v);
+		push(
+			'/incident-management/[activeIncidentTab]',
+			`/incident-management/${v}`,
+		);
+	};
 	return (
 		<div>
 			<div className={styles.container}>
@@ -26,18 +35,11 @@ function Headers({ activeTab, setActiveTab, data }:ItemProps) {
 					activeTab={activeTab}
 					fullWidth
 					themeType="primary"
-					onChange={setActiveTab}
+					onChange={handleTabChange}
 				>
-					<TabPanel name="requested" title="Requested" badge={REQUESTED}>
-						{/* <div>Requested</div> */}
-					</TabPanel>
-
-					<TabPanel name="approved" title="Approved" badge={APPROVED}>
-						{/* <div>Approved</div> */}
-					</TabPanel>
-					<TabPanel name="rejected" title="Rejected" badge={REJECTED}>
-						{/* <div>Rejected</div> */}
-					</TabPanel>
+					<TabPanel name="requested" title="Requested" badge={REQUESTED} />
+					<TabPanel name="approved" title="Approved" badge={APPROVED} />
+					<TabPanel name="rejected" title="Rejected" badge={REJECTED} />
 				</Tabs>
 			</div>
 		</div>

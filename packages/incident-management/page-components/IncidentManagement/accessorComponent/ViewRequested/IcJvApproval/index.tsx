@@ -2,6 +2,7 @@
 /* eslint-disable import/no-cycle */
 import { Table } from '@cogoport/components';
 import { Textarea, Modal, Button } from '@cogoport/components';
+import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import React, { useState } from 'react';
 
 // import StyledTable from '../../../Table';
@@ -9,11 +10,11 @@ import getModalColumns from '../getModalColumn';
 
 import styles from './styles.module.css';
 
-function IcJvApproval({ itemData }) {
+function IcJvApproval({ itemData, setRemarks, onSave }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
-	const { type, data } = itemData || {};
+	const { type, data, userNotes } = itemData || {};
 	const { interCompanyJournalVoucherRequest } = data || {};
-	const { list = [] } = interCompanyJournalVoucherRequest || {};
+	const { list = [], remark, totalCredit, totalDebit, currency } = interCompanyJournalVoucherRequest || {};
 	const columns = getModalColumns(type);
 	return (
 		<div>
@@ -28,7 +29,7 @@ function IcJvApproval({ itemData }) {
 							</div>
 
 							<div className={styles.amount_value}>
-								INR 2000
+								<div>{getPrice(totalDebit as number, currency || 'INR' as string)}</div>
 							</div>
 
 						</div>
@@ -38,7 +39,7 @@ function IcJvApproval({ itemData }) {
 							</div>
 
 							<div className={styles.amount_value}>
-								INR 2000
+								<div>{getPrice(totalCredit as number, currency || 'INR' as string)}</div>
 							</div>
 
 						</div>
@@ -52,7 +53,7 @@ function IcJvApproval({ itemData }) {
 							Remark -
 						</div>
 						<div className={styles.value}>
-							{itemData?.data?.bankRequest?.remark}
+							{remark}
 						</div>
 					</div>
 
@@ -62,12 +63,22 @@ function IcJvApproval({ itemData }) {
 							name="remarks"
 							className={styles.text_area}
 							size="lg"
+							onChange={(values) => setRemarks(values)}
 							placeholder="Enter here..."
+							defaultValue={userNotes}
+
 						/>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { setShowTdsModal(false); }}>OK</Button>
+					<Button onClick={() => {
+						setShowTdsModal(false);
+						onSave();
+					}}
+					>
+						Save
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

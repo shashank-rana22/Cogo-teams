@@ -1,0 +1,9 @@
+.container{
+    color: #F68B21;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.clickable{
+    cursor: pointer;
+    text-decoration: underline;
+}

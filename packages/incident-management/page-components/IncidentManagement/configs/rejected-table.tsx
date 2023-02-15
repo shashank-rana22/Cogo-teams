@@ -1,6 +1,7 @@
 import { getByKey, startCase } from '@cogoport/utils';
 
 import ActionRejected from '../accessorComponent/ActionRejected';
+import ClickableIncidentId from '../accessorComponent/ClickableIncidentId';
 import CompanyName from '../accessorComponent/CompanyName';
 import Remarks from '../accessorComponent/Remarks';
 import StatusName from '../accessorComponent/StatusName';
@@ -8,17 +9,17 @@ import StatusName from '../accessorComponent/StatusName';
 import SortData from './SortData.tsx';
 import styles from './styles.module.css';
 
-const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => [
+const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
-			<div>
-				<div className={styles.referenceId}>
-					#
-					{getByKey(row, 'referenceId') as string}
-				</div>
-			</div>
+
+			<ClickableIncidentId itemData={row} />
+			// <div className={styles.referenceId}>
+			// 	{getByKey(row, 'referenceId') as string}
+			// </div>
+
 		),
 	},
 	{
@@ -50,7 +51,7 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => 
 		accessor : (row) => (
 			<div>
 				<div>
-					{startCase(getByKey(row, 'updatedBy') as string)}
+					{startCase(getByKey(row, 'updatedBy.name') as string)}
 				</div>
 				<div>
 					{/* {format(getByKey(row, 'updatedAt') as Date, 'dd MMM yy', {}, false)} */}
@@ -103,7 +104,7 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters }) => 
 		id       : 'action',
 		accessor : (row) => (
 			<div>
-				<ActionRejected itemData={row} />
+				<ActionRejected itemData={row} reftech={reftech} />
 			</div>
 		),
 

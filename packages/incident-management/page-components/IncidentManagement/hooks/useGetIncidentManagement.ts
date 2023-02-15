@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
@@ -15,6 +16,7 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+	const { query: queryData } = useRouter();
 
 	const [
 		{ data, loading },
@@ -31,10 +33,15 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 	const { user: { id:userId = '' } } = UserData;
 
 	const [globalFilters, setGlobalFilters] = useState({
-		pageIndex: 1,
+		pageIndex    : 1,
+		search       : undefined,
+		type         : undefined,
+		request_type : undefined,
+		Date         : undefined,
+		status       : undefined,
 
 	});
-	const { search, type, request_type, Date, status, ...rest } = globalFilters;
+	const { search, type, request_type:requestType, Date, status, ...rest } = globalFilters;
 
 	const { startDate, endDate } = Date || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -44,8 +51,9 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 	}, [search]);
 
 	let activeStatus = [];
-
-	if (activeTab === 'requested') {
+	if (queryData.userIncidentStatus) {
+		activeStatus = ['REQUESTED'];
+	} else if (activeTab === 'requested') {
 		activeStatus = ['REQUESTED', 'DELETED'];
 	} else if (activeTab === 'approved') {
 		activeStatus = ['APPROVED'];
@@ -61,16 +69,15 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 					flag               : 'USER',
 					userIncidentStatus : status || activeStatus,
 					isStatsRequired    : true,
-					performedBy        : userId,
+					performedBy        : queryData.performedBy || userId,
+					newIncidentId      : queryData.newIncidentId || undefined,
 					pageIndex          : globalFilters.pageIndex,
 					q                  : query !== '' ? query : undefined,
-					type               : request_type,
+					type               : requestType,
 					createdFrom        : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
 						: undefined,
 					createdTo: endDate
 						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
-					// userIncidentStatus: status || undefined,
-
 				},
 			});
 		} catch (err) {
@@ -82,13 +89,14 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 
 	useEffect(() => {
 		reftech();
-	}, [JSON.stringify(rest), activeTab, query, request_type, Date, status]);
+	}, [JSON.stringify(rest), activeTab, query, requestType, Date, status]);
 
 	return {
 		data,
 		loading,
 		globalFilters,
 		setGlobalFilters,
+		reftech,
 	};
 };
 export default useGetIncidentMangement;

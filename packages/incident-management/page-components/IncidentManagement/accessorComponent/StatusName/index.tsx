@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -10,13 +11,13 @@ function StatusName({ itemData }) {
 			{userIncidentStatus === 'DELETED' || userIncidentStatus === 'RAISED_AGAIN'
 				? (
 					<Pill color="#FEF199">
-						{userIncidentStatus}
+						{startCase(userIncidentStatus)}
 					</Pill>
 				)
 
 				: (
 					<Pill color="#CFEAED">
-						{userIncidentStatus}
+						{startCase(userIncidentStatus)}
 					</Pill>
 				)}
 		</div>

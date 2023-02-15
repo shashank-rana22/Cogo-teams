@@ -9,7 +9,8 @@
 .value{
     font-size: 12px;
     color: #333333;
-    margin-left: 1px;
+    margin-left: 0px;
+    display: flex;
 }
 .rate_conatiner{
     display: flex;
@@ -74,6 +75,7 @@
     padding-right: 50px;
 }
 .link{
+    padding-right: 10px;
     font-size: 12px;
     font-weight: 500;
     text-decoration: underline;

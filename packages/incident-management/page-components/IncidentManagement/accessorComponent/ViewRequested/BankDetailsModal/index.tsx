@@ -1,14 +1,25 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function BankDatailsModal({ itemData }) {
+function BankDatailsModal({
+	itemData, setRemarks, onSave, onRaiseAgain,
+	setSelectedFile, selectedFile, name,
+}) {
+	const { status, userIncidentStatus, userNotes } = itemData || {};
+	const { fileName, finalUrl } = selectedFile || {};
 	const [showTdsModal, setShowTdsModal] = useState(false);
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>View</Button>
+
+			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>
+				{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
+					&& name === 'Raise Again' ? 'Raised Again' : 'View'}
+
+			</Button>
 			<Modal size="lg" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
 				<Modal.Header title="Bank Account Add/Edit" />
 				<div className={styles.rate_conatiner}>
@@ -109,11 +120,53 @@ function BankDatailsModal({ itemData }) {
 							className={styles.text_area}
 							size="lg"
 							placeholder="Enter here..."
+							onChange={(values) => setRemarks(values)}
+							defaultValue={userNotes}
 						/>
 					</div>
+
+					<div className={styles.rate_conatiner}>
+						{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
+					&& name === 'Raise Again'
+					&& (
+						<FileUploader
+							value={finalUrl}
+							docName={fileName}
+							fileName={fileName}
+							onChange={setSelectedFile}
+							showProgress
+							draggable
+							multiple
+							fileLink={finalUrl}
+							multipleUploadDesc="Upload Invoice"
+						/>
+					)}
+					</div>
+
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { setShowTdsModal(false); }}>OK</Button>
+					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION' && name === 'Raise Again'
+						? (
+							<Button
+								onClick={() => {
+									onRaiseAgain();
+									setShowTdsModal(false);
+								}}
+								className={styles.raise_button}
+							>
+								Raise Again
+							</Button>
+						)
+						: (
+							<Button onClick={() => {
+								onSave();
+								setShowTdsModal(false);
+							}}
+							>
+								Save
+
+							</Button>
+						)}
 				</Modal.Footer>
 			</Modal>
 		</div>

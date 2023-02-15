@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function RequestCN({ itemData }) {
+function RequestCN({ itemData, setRemarks, onSave }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
-	const { data } = itemData || {};
+	const { data, userNotes } = itemData || {};
 	const { creditNoteRequest } = data || {};
 	const { documentUrls, invoiceNumber, jobNumber, remark, creditNoteType } = creditNoteRequest || {};
 	return (
@@ -80,12 +80,22 @@ function RequestCN({ itemData }) {
 							name="remarks"
 							className={styles.text_area}
 							size="lg"
+							onChange={(values) => setRemarks(values)}
 							placeholder="Enter here..."
+							defaultValue={userNotes}
+
 						/>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => { setShowTdsModal(false); }}>OK</Button>
+					<Button onClick={() => {
+						setShowTdsModal(false);
+						onSave();
+					}}
+					>
+						Save
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>
