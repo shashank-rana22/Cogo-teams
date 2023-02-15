@@ -89,6 +89,12 @@ const app_contract_management = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api          : 'get_contract_service_shipment_data',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default app_contract_management;
