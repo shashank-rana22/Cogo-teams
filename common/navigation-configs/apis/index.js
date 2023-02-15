@@ -1,4 +1,5 @@
 import allocation from './allocation-apis';
+import app_contract_management from './app-manage-contract-apis';
 import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
 import bl_do from './bl-do-apis';
@@ -104,6 +105,7 @@ const apis = {
 	bl_do_collection_release,
 	kam_desk,
 	document_desk,
+	app_contract_management,
 	...saas,
 	...common_apis,
 	...partner,

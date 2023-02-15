@@ -1728,7 +1728,7 @@ const navigationMappingAdmin = {
 				title         : 'Configurations',
 				href          : '/allocation/configurations',
 				as            : '/allocation/configurations',
-				main_apis     : ['list_allocation_configurations'],
+				main_apis     : ['configurations'],
 				possible_apis : apis.allocation,
 			},
 			{
@@ -1736,7 +1736,7 @@ const navigationMappingAdmin = {
 				title         : 'Relations',
 				href          : '/allocation/relations',
 				as            : '/allocation/relations',
-				main_apis     : ['list_allocation_relations'],
+				main_apis     : ['relations'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1745,7 +1745,7 @@ const navigationMappingAdmin = {
 				title         : 'Requests',
 				href          : '/allocation/requests',
 				as            : '/allocation/requests',
-				main_apis     : ['list_allocation_requests'],
+				main_apis     : ['requests'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1754,7 +1754,7 @@ const navigationMappingAdmin = {
 				title         : 'Quotas',
 				href          : '/allocation/quotas',
 				as            : '/allocation/quotas',
-				main_apis     : ['list_allocation_quotas'],
+				main_apis     : ['quotas'],
 				possible_apis : apis.allocation,
 
 			},
