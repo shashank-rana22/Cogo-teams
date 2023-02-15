@@ -14,8 +14,8 @@ function Reports() {
 
 	const { api, loading } = useSubmitReport(value);
 
-	const onChange = (e:string, val:string) => {
-		setValue((p) => ({ ...p, [val]: e }));
+	const onChange = (val:string, name:string) => {
+		setValue((p) => ({ ...p, [name]: val }));
 	};
 
 	const isDisabledForAccountType = () => {
@@ -24,6 +24,12 @@ function Reports() {
 		}
 		return !value.accountType;
 	};
+
+	const isSubmitDisabled = loading
+	|| !value.reportType
+	|| !value.dateRange?.startDate
+	|| !value.dateRange?.endDate
+	|| isDisabledForAccountType();
 
 	return (
 		<div>
@@ -34,7 +40,7 @@ function Reports() {
 					<div className={styles.input}>
 						<Select
 							value={value.reportType}
-							onChange={(e:string) => onChange(e, 'reportType')}
+							onChange={(val:string) => onChange(val, 'reportType')}
 							placeholder="Select Report Type"
 							options={REPORT_TYPE_OPTIONS}
 						/>
@@ -46,7 +52,7 @@ function Reports() {
 						<div>
 							<Select
 								value={value.accountType}
-								onChange={(e:string) => onChange(e, 'accountType')}
+								onChange={(val:string) => onChange(val, 'accountType')}
 								placeholder="Select Account Type"
 								options={ACCOUNT_TYPE_OPTIONS}
 							/>
@@ -68,11 +74,7 @@ function Reports() {
 				<div className={styles.button}>
 					<Button
 						className={styles.button_class}
-						disabled={loading
-							|| !value.reportType
-							|| !value.dateRange?.startDate
-							|| !value.dateRange?.endDate
-							|| isDisabledForAccountType()}
+						disabled={isSubmitDisabled}
 						onClick={() => api()}
 						size="md"
 					>
