@@ -20,6 +20,17 @@ const keyAsyncFieldsParamsMapping = {
 	segments           : asyncFieldsCampaignSegments,
 };
 
+/* Key features of AsyncSelect -->
+	* Do not have to write same functions to get async options
+	* Provide functions to modify options and get selected options object
+
+	props -->
+	* initialCall, asyncKey
+
+	* If asyncKey is not present according to the need it can be added in keyAsyncFieldsParamsMapping
+	* And mention the endpoint in utils/getAsyncFields
+*/
+
 function AsyncSelect(props) {
 	const {
 		params,
