@@ -3,7 +3,6 @@ import { useSelector } from '@cogoport/store';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { Controller } from 'react-hook-form';
 
 import control from '../configurations/filter-controls';
 import { firebaseConfig } from '../configurations/firebase-config';
@@ -29,6 +28,7 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
+	console.log('listData', listData);
 
 	const [activeTab, setActiveTab] = useState('message');
 	const [toggleStatus, setToggleStatus] = useState(false);

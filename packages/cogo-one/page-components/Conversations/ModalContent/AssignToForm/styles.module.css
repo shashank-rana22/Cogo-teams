@@ -1,5 +1,6 @@
 .container{
-	padding:10px;
+	padding:10px 30px;
+	min-height: 400px;
 }
 .heading{
 	font-family: Poppins;
@@ -7,4 +8,8 @@
 	font-weight: 500;
 	text-align: left;
 
+}
+.controller_div{
+	padding:10px 0;
+	max-width: 400px;
 }

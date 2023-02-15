@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function Conversations() {
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const ActiveModalComp = MODAL_COMPONENT_MAPPING[openModal?.type] || null;
+	const closeModal = () => { setOpenModal({ type: null, data: {} }); };
 	return (
 		<>
 			<div className={styles.container}>
@@ -17,7 +18,7 @@ function Conversations() {
 				<div className={styles.message_container}><MessageConversations /></div>
 			</div>
 			{openModal?.type && ActiveModalComp && (
-				<Modal size="md" show>
+				<Modal size="md" show onClose={closeModal} onOuterClick={closeModal} isClosable>
 					<ActiveModalComp />
 				</Modal>
 			)}
