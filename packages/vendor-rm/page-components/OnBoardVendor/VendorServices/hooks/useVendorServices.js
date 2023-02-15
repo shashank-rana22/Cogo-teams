@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import controls from '../utils/controls';
 
 function useVendorServices() {
-	const { handleSubmit, control, setValue, formState: { errors } } = useForm();
+	const { handleSubmit, control, setValue, formState: { errors }, ...rest } = useForm();
 
 	const onSubmit = (data) => {
 		console.log('data:: ', data);
@@ -16,6 +16,7 @@ function useVendorServices() {
 		setValue,
 		errors,
 		onSubmit,
+		...rest,
 	};
 }
 

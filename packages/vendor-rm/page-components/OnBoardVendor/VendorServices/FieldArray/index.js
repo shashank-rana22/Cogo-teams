@@ -1,8 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import Child from './Child';
+import Child from './child';
 import styles from './styles.module.css';
 
 function FieldArray({
@@ -14,6 +15,7 @@ function FieldArray({
 	buttonText,
 	showButtons = true,
 	disabled = false,
+	showLabelOnce = false,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -25,6 +27,10 @@ function FieldArray({
 	controls.forEach((controlItem) => {
 		childEmptyValues[controlItem.name] = controlItem.value || '';
 	});
+
+	if (isEmpty(fields)) {
+		fields.push({});
+	}
 
 	return (
 		<div className={styles.container}>
@@ -41,11 +47,12 @@ function FieldArray({
 					error={error?.[index]}
 					showElements={showElements?.[index]}
 					disabled={disabled}
+					showLabelOnce={showLabelOnce}
 				/>
 			))}
 
 			{showButtons && !disabled ? (
-				<Button themeType="secondary" onClick={() => append(childEmptyValues)}>
+				<Button themeType="accent" onClick={() => append(childEmptyValues)}>
 					+
 					{' '}
 					{buttonText}

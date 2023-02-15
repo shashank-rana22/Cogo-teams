@@ -1,9 +1,9 @@
-import { Button } from '@cogoport/components';
 import React from 'react';
 
 import { getElementController } from '../../../../utils/get-element-controller';
+import FieldArray from '../FieldArray';
 
-import FieldArray from './FieldArray';
+// import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
 function FormComponent({
@@ -13,16 +13,20 @@ function FormComponent({
 	control,
 	errors = {},
 }) {
+	console.log('errors:: ', errors);
 	return (
-		<div className={styles.main_body}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.main_body}>
 			{controls.map((controlItem) => {
-				const field = { ...controlItem };
-
-				const { span, name, label, ...rest } = field;
+				const { span, name, label, ...rest } = controlItem;
 
 				if (rest.type === 'fieldArray') {
 					return (
-						<FieldArray {...rest} control={control} name={name} />
+						<FieldArray
+							{...controlItem}
+							control={control}
+							name={controlItem.name}
+							error={errors?.[controlItem.name]}
+						/>
 					);
 				}
 
@@ -34,26 +38,18 @@ function FormComponent({
 						<div>
 							<Element
 								key={name}
-								{...field}
+								{...controlItem}
 								control={control}
 								id={`onboard_vendor_form_${name}_input`}
 							/>
 						</div>
 						<div className={styles.form_error_message}>
-							{errors?.[field.name]?.message}
+							{errors?.[controlItem.name]?.message}
 						</div>
 					</div>
 				);
 			})}
-
-			<Button
-				className="primary"
-				onClick={handleSubmit(onSubmit)}
-			>
-				save
-			</Button>
-
-		</div>
+		</form>
 	);
 }
 
