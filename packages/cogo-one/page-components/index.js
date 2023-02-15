@@ -1,10 +1,8 @@
-import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
 
-import control from '../configurations/filter-controls';
 import { firebaseConfig } from '../configurations/firebase-config';
 import useGetVoiceCallList from '../hooks/useGetVoiceCallList';
 import useListChats from '../hooks/useListChats';
@@ -21,9 +19,6 @@ function CogoOne() {
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
-	const [inactiveReasons, setInactiveReasons] = useState('');
-	const [inactiveDate, setInactiveDate] = useState('');
-	const [inactiveTime, setInactiveTime] = useState('');
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -39,18 +34,15 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
-	const { messagesList = [] } = listData;
+	console.log('listData', listData);
+	const { messagesList = [], unReadChatsCount } = listData;
 
 	const {
 		loading,
 		data = {},
-		setPagination = () => {},
+		handleScroll = () => {},
 	} = useGetVoiceCallList({ activeTab });
 	const { list = [] } = data;
-
-	const { reset, watch, control } = useForm();
-
-	const filterData = watch();
 
 	return (
 		<div className={styles.layout_container}>
@@ -65,18 +57,13 @@ function CogoOne() {
 				filterVisible={filterVisible}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				reset={reset}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				inactiveReasons={inactiveReasons}
-				setInactiveReasons={setInactiveReasons}
-				setInactiveDate={setInactiveDate}
-				inactiveDate={inactiveDate}
-				setInactiveTime={setInactiveTime}
-				inactiveTime={inactiveTime}
 				voiceList={list}
 				messagesList={messagesList}
 				voiceListLoading={loading}
+				handleScroll={handleScroll}
+				unReadChatsCount={unReadChatsCount}
 			/>
 			<Conversations />
 			<ProfileDetails activeMessageCard={activeMessageCard} />

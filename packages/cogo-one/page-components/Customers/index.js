@@ -15,21 +15,15 @@ function Customers({
 	searchValue,
 	setFilterVisible = () => {},
 	filterVisible,
-	// fields,
-	reset,
 	activeTab,
 	setActiveTab = () => {},
 	setToggleStatus = () => {},
 	toggleStatus,
-	inactiveReasons,
-	setInactiveReasons = () => {},
-	setInactiveDate = () => {},
-	inactiveDate,
-	setInactiveTime = () => {},
-	inactiveTime,
 	voiceList = [],
 	messagesList = [],
 	voiceListLoading,
+	handleScroll = () => {},
+	unReadChatsCount,
 }) {
 	return (
 		<div className={styles.container}>
@@ -54,7 +48,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Message" />
+					<TabPanel name="message" title="Message" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
@@ -69,7 +63,6 @@ function Customers({
 					searchValue={searchValue}
 					filterVisible={filterVisible}
 					setFilterVisible={setFilterVisible}
-					reset={reset}
 				/>
 			)}
 
@@ -79,6 +72,7 @@ function Customers({
 					activeVoiceCard={activeVoiceCard}
 					voiceList={voiceList}
 					voiceListLoading={voiceListLoading}
+					handleScroll={handleScroll}
 				/>
 			)}
 
@@ -86,12 +80,6 @@ function Customers({
 				<InactiveModal
 					toggleStatus={toggleStatus}
 					setToggleStatus={setToggleStatus}
-					inactiveReasons={inactiveReasons}
-					setInactiveReasons={setInactiveReasons}
-					setInactiveDate={setInactiveDate}
-					inactiveDate={inactiveDate}
-					setInactiveTime={setInactiveTime}
-					inactiveTime={inactiveTime}
 				/>
 			)}
 		</div>
