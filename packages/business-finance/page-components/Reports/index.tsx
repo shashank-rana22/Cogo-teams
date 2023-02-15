@@ -18,7 +18,7 @@ function Reports() {
 		setValue((p) => ({ ...p, [val]: e }));
 	};
 
-	const isDissabledForAccountType = () => {
+	const isDisabledForAccountType = () => {
 		if (value.reportType !== 'sage-organization-mapping-id-report') {
 			return false;
 		}
@@ -69,8 +69,10 @@ function Reports() {
 					<Button
 						className={styles.button_class}
 						disabled={loading
-							|| !value.reportType || !value.dateRange?.startDate || !value.dateRange?.endDate
-							|| isDissabledForAccountType()}
+							|| !value.reportType
+							|| !value.dateRange?.startDate
+							|| !value.dateRange?.endDate
+							|| isDisabledForAccountType()}
 						onClick={() => api()}
 						size="md"
 					>
