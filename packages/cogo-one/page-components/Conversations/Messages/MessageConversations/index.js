@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import { Popover } from '@cogoport/components';
 import { IcMHappy, IcMAttach, IcMSend, IcMInfo } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useRef, useEffect } from 'react';
 
 import useGetEmojiList from '../../../../hooks/useGetEmojis';
 
@@ -9,13 +11,42 @@ import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 
-function MessageConversations({ messagesData = [], messages = {}, setMessages = () => {}, id = '' }) {
+function MessageConversations({
+	messagesData = [],
+	messages = {},
+	setMessages = () => { },
+	id = '',
+	lastPage,
+	getNextData = () => {},
+}) {
+	const messageRef = useRef(null);
+	const noMessages = isEmpty(messagesData);
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
 		}
 	};
+
+	const handleScroll = (e) => {
+		const bottom = e.target.scrollTop === 0;
+		if (!lastPage && bottom) {
+			getNextData();
+		}
+	};
+
+	const scrollToBottom = () => {
+		setTimeout(messageRef.current?.scrollIntoView({
+			behavior : 'auto',
+			block    : 'nearest',
+			inline   : 'start',
+		}), 700);
+	};
+
+	useEffect(() => {
+		if (!noMessages) { scrollToBottom(); }
+	}, [id, noMessages]);
+
 	const {
 		emojisList = {},
 		setOnClicked = () => { },
@@ -24,8 +55,13 @@ function MessageConversations({ messagesData = [], messages = {}, setMessages = 
 
 	return (
 		<div className={styles.styled_div}>
-			<div className={styles.container}>
-				{(messagesData || []).map((eachMessage) => (eachMessage?.conversation_type !== 'received' ? <ReceiveDiv eachMessage={eachMessage} /> : <SentDiv eachMessage={eachMessage} />))}
+			<div className={styles.container} onScroll={handleScroll}>
+				{(messagesData || []).map((eachMessage) => (
+					eachMessage?.conversation_type !== 'received'
+						? <ReceiveDiv eachMessage={eachMessage} />
+						: <SentDiv eachMessage={eachMessage} />
+				))}
+				<div ref={messageRef} />
 			</div>
 
 			<div className={styles.text_area_div}>
