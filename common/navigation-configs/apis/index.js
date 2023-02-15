@@ -9,8 +9,11 @@ import common_apis from './common-apis';
 import consolidated_invoices from './consolidated-invoices';
 import contract_rates from './contract-rates-apis';
 import document_walet from './doc-walet';
+import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
+import enrichment from './enrichment';
 import feedback from './feedback-apis';
+import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
 import login_apis from './login_apis';
@@ -96,12 +99,15 @@ const apis = {
 	kam_payments_dashboard,
 	allocation,
 	bl_do_collection_release,
+	kam_desk,
+	document_desk,
 	...saas,
 	...common_apis,
 	...partner,
 	...tools,
 	...consolidated_invoices,
 	login_apis,
-
+	enrichment,
 };
+
 export default apis;
