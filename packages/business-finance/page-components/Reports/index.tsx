@@ -41,7 +41,7 @@ function Reports() {
 					</div>
 				</div>
 				{value.reportType === 'sage-organization-mapping-id-report' &&	(
-					<div className={styles.accountType}>
+					<div className={styles.account_type}>
 						<div className={styles.title}>Select Account Type*</div>
 						<div>
 							<Select
@@ -67,7 +67,7 @@ function Reports() {
 				</div>
 				<div className={styles.button}>
 					<Button
-						className={styles.buttonClass}
+						className={styles.button_class}
 						disabled={loading
 							|| !value.reportType
 							|| !value.dateRange?.startDate
