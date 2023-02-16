@@ -75,7 +75,11 @@ function CogoOne() {
 				activeVoiceCard={activeVoiceCard}
 			/>
 
-			<ProfileDetails activeCard={activeMessageCard} />
+			<ProfileDetails
+				activeMessageCard={activeMessageCard}
+				activeTab={activeTab}
+				activeVoiceCard={activeVoiceCard}
+			/>
 		</div>
 	);
 }

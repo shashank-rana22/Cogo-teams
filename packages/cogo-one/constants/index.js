@@ -1,20 +1,20 @@
 import { IcCWhatsapp, IcCFacebook, IcCInstagram } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
-	whatsapp  : <IcCWhatsapp width={22} height={22} />,
-	facebook  : <IcCFacebook width={22} height={22} />,
-	instagram : <IcCInstagram width={22} height={22} />,
+	whatsapp  : <IcCWhatsapp width={20} height={20} />,
+	facebook  : <IcCFacebook width={20} height={20} />,
+	instagram : <IcCInstagram width={20} height={20} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""
-		width="18px"
-		height="18px"
+		width="16px"
+		height="16px"
 	/>,
 	chatbot: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg"
 		alt=""
-		width="18px"
-		height="18px"
+		width="16px"
+		height="16px"
 	/>,
 
 };
@@ -31,4 +31,10 @@ export const VOICE_ICON_MAPPING = {
 	not_connected : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
 	outgoing      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
 	incoming      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+};
+
+export const USER_ACTIVITY_MAPPING = {
+	platform      : 'Platform Activity',
+	communication : 'Communication Activity',
+	transactional : 'Transactional Activity',
 };

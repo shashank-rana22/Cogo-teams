@@ -1,115 +1,118 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .title {
-    font-weight: 500;
-    font-size: 14px;
-    color: #4f4f4f;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .wrapper {
-    padding-top: 22px;
+	padding-top: 22px;
 
-    :global {
-        .ui_input_container.ui_x-NGo {
-            height: 120px !important;
-        }
+	:global {
+		.ui_input_container.ui_x-NGo {
+			height: 120px !important;
+		}
 
-        .ui_input_container.ui_ps_size_md .ui_input_control.ui_HZPDt {
-            font-size: 12px !important;
-            font-family: "Poppins", "sans-serif";
-        }
-    }
+		.ui_input_container.ui_ps_size_md .ui_input_control.ui_HZPDt {
+			font-family: Poppins, sans-serif;
+			font-size: 12px !important;
+		}
+	}
 }
 
 .label {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .date_wrapper {
-    padding-top: 16px;
+	padding-top: 16px;
 }
 
 .time_title {
-    font-size: 12px;
-    color: #4f4f4f;
+	font-size: 12px;
+	color: #4f4f4f;
 }
 
 .time_container {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 26px;
-    width: 100%;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	padding-top: 26px;
 
-    :global {
-        input {
-            border: none !important;
-            width: 75% !important;
-            border-right: 1px solid #bdbdbd !important;
-        }
-        .react-datepicker__input-container {
-            :focus-visible {
-                outline-color: none;
-                outline-width: 0;
-            }
-        }
-    }
+	:global {
+		input {
+			width: 75% !important;
+			border: none !important;
+			border-right: 1px solid #bdbdbd !important;
+		}
+
+		.react-datepicker__input-container {
+			:focus-visible {
+				outline-width: 0;
+				outline-color: none;
+			}
+		}
+	}
 }
 
 .start_time {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
+
 .input_time {
-    :hover {
-        border: 0px solid #f68b21;
-    }
+	:hover {
+		border: 0 solid #f68b21;
+	}
 }
+
 .end_time {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
 
 .wrap_start {
-    display: flex;
-    padding: 2px;
-    background-color: #ffff;
-    border-radius: 4px 0 0 4px;
-    border: 1px solid #828282;
+	display: flex;
+	padding: 2px;
+	background-color: #ffff;
+	border: 1px solid #828282;
+	border-radius: 4px 0 0 4px;
 }
 
 .wrap_end {
-    display: flex;
-    padding: 2px;
-    background-color: #ffff;
-    border-radius: 0 4px 4px 0;
-    border: 1px solid #828282;
-    border-left: none;
+	display: flex;
+	padding: 2px;
+	background-color: #ffff;
+	border: 1px solid #828282;
+	border-left: none;
+	border-radius: 0 4px 4px 0;
 }
 
 .button_container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding: 21px 0 16px 65px;
-    border-bottom: 1px solid #e0e0e0;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 21px 0 16px 65px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .reset_button {
-    font-size: 12px;
-    font-weight: 600;
-    color: #221f20;
-    cursor: pointer;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+	cursor: pointer;
 }
 
 .set_button {
-    cursor: pointer;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	cursor: pointer;
 }
