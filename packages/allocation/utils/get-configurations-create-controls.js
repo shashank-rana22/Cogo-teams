@@ -94,7 +94,6 @@ const getCreateConfigurationsControls = ({
 			},
 			isClearable: true,
 		},
-
 		{
 			name        : 'locking_criterion',
 			label       : 'Locking Criterion',
