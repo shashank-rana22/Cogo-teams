@@ -1,23 +1,13 @@
+/* eslint-disable max-len */
+
 import { Select, DateRangepicker, cl } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
 import { circleStats } from '../../../configurations/circle-stats';
+import { CONVERSATIONS } from '../../../configurations/primary-stats';
 
 import styles from './styles.module.css';
-
-const {
-	main_container,
-	globe_container,
-	select_container,
-	date_range_container,
-	top_content,
-	circle_content,
-	circle_frame,
-	circle,
-	stat_value,
-	stat_label,
-} = styles;
 
 const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
@@ -36,9 +26,9 @@ function MapView() {
 	const maxDate = new Date();
 
 	return (
-		<div className={main_container}>
-			<div className={top_content}>
-				<div className={select_container}>
+		<div className={styles.main_container}>
+			<div className={styles.top_content}>
+				<div className={styles.select_container}>
 					<Select
 						value={country}
 						onChange={onChange}
@@ -51,7 +41,7 @@ function MapView() {
 						onSearch={onSearch}
 					/>
 				</div>
-				<div className={date_range_container}>
+				<div className={styles.date_range_container}>
 					<DateRangepicker
 						id="select_date_range"
 						name="date"
@@ -63,18 +53,18 @@ function MapView() {
 					/>
 				</div>
 			</div>
-			<div className={circle_content}>
-				<div className={circle_frame}>
+			<div className={styles.circle_content}>
+				<div className={styles.circle_frame}>
 					{
 					circleStats.map(
 						(stat) => {
 							const { type, value, label } = stat;
 							return (
-								<div className={cl`${circle} ${styles[type]}`}>
-									<div className={stat_value}>
+								<div className={cl`${styles.circle} ${styles[type]}`}>
+									<div className={styles.stat_value}>
 										{value}
 									</div>
-									<div className={stat_label}>
+									<div className={styles.stat_label}>
 										{label}
 									</div>
 								</div>
@@ -85,6 +75,35 @@ function MapView() {
 
 				</div>
 			</div>
+			<div className={styles.footer_stats}>
+				<div className={styles.avg_response_time}>
+					<div className={styles.response_time_title}>
+						Average Customer Response Time
+					</div>
+					<div className={styles.response_time}>
+						<div className={styles.time}>
+							<span>20</span>
+							{' '}
+							min
+						</div>
+
+						<div className={styles.arrow_img}>
+
+							{1 < 3
+								? <img width="35px" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg" alt="decreased" />
+								: <img width="35px" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg" alt="increased" />}
+
+						</div>
+					</div>
+
+				</div>
+
+				<div className={styles.communication_stats}>
+					<div className={styles.left_stats}>k</div>
+
+				</div>
+			</div>
+
 			{/* The Globe */}
 			{/* <div className={globe_container}><TheGlobe /></div> */}
 

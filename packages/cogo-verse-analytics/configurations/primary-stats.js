@@ -28,3 +28,21 @@ export const PRIMARY_STATS = [
 		icon        : <IcMMoney fill="#ABCD62" width="25px" height="25px" />,
 	},
 ];
+
+export const CONVERSATIONS = [
+	{
+		value   : 240,
+		title   : 'Total Communications',
+		icon_bg : '#BDBDBD',
+	},
+	{
+		value   : 220,
+		title   : 'System Initiated conversations',
+		icon_bg : '#ABCD62',
+	},
+	{
+		value   : 20,
+		title   : 'Customer Initiated conversations',
+		icon_bg : '#DDEBC0',
+	},
+];
