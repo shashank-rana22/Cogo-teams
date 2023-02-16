@@ -3,23 +3,27 @@ import { getByKey, startCase } from '@cogoport/utils';
 import ActionRejected from '../accessorComponent/ActionRejected';
 import ClickableIncidentId from '../accessorComponent/ClickableIncidentId';
 import CompanyName from '../accessorComponent/CompanyName';
+import DateName from '../accessorComponent/DateName';
 import Remarks from '../accessorComponent/Remarks';
 import StatusName from '../accessorComponent/StatusName';
 
 import SortData from './SortData.tsx';
 import styles from './styles.module.css';
 
-const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }) => [
+interface PropsType {
+	isSortActive:string;
+	setIsSortActive:Function;
+	setGlobalFilters:Function;
+	reftech:Function;
+	setActiveTab:Function;
+}
+
+const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech, setActiveTab }:PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
-
-			<ClickableIncidentId itemData={row} />
-			// <div className={styles.referenceId}>
-			// 	{getByKey(row, 'referenceId') as string}
-			// </div>
-
+			<ClickableIncidentId itemData={row} setActiveTab={setActiveTab} />
 		),
 	},
 	{
@@ -28,9 +32,6 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		accessor : (row) => (
 			<div>
 				<CompanyName itemdata={row} />
-				{/* <div>
-					{getByKey(row, 'data.organization.businessName') as string}
-				</div> */}
 			</div>
 		),
 	},
@@ -50,16 +51,9 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		id       : 'rejectedBy',
 		accessor : (row) => (
 			<div>
-				<div>
-					{startCase(getByKey(row, 'updatedBy.name') as string)}
-				</div>
-				<div>
-					{/* {format(getByKey(row, 'updatedAt') as Date, 'dd MMM yy', {}, false)} */}
-					{getByKey(row, 'updatedAt') as string}
-				</div>
+				<DateName itemData={row} />
 			</div>
 		),
-
 	},
 	{
 		Header:
@@ -71,7 +65,6 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 			<div>
 				<div>
 					{getByKey(row, 'createdAt') as string}
-					{/* {format(getByKey(row, 'createdAt') as Date, 'dd MMM yy', {}, false)} */}
 				</div>
 			</div>
 		),
@@ -82,7 +75,6 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		accessor : (row) => (
 			<div>
 				<Remarks itemData={row} />
-				{/* {getByKey(row, 'remark') as string} */}
 			</div>
 		),
 	},
@@ -93,7 +85,6 @@ const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 			<div>
 				<div>
 					<StatusName itemData={row} />
-					{/* {startCase(getByKey(row, 'userIncidentStatus') as string)} */}
 				</div>
 			</div>
 		),

@@ -113,18 +113,20 @@ function BankDatailsModal({
 							)))}
 						</div>
 					</div>
-					<div className={styles.remarks_style}>
-						Notes (only visible to self)
-						<Textarea
-							name="remarks"
-							className={styles.text_area}
-							size="lg"
-							placeholder="Enter here..."
-							onChange={(values) => setRemarks(values)}
-							defaultValue={userNotes}
-						/>
-					</div>
-
+					{name !== 'Raise Again'
+					&& (
+						<div className={styles.remarks_style}>
+							Notes (only visible to self)
+							<Textarea
+								name="remarks"
+								className={styles.text_area}
+								size="lg"
+								placeholder="Enter here..."
+								onChange={(values) => setRemarks(values)}
+								defaultValue={userNotes}
+							/>
+						</div>
+					)}
 					<div className={styles.rate_conatiner}>
 						{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
 					&& name === 'Raise Again'

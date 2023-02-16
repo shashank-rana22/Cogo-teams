@@ -16,7 +16,7 @@ function IncidentManagement() {
 	const [isSortActive, setIsSortActive] = useState(null);
 	const { globalFilters, setGlobalFilters, data, loading, reftech } = useGetIncidentMangement({ activeTab });
 
-	const columns = getColumns(activeTab, isSortActive, setIsSortActive, setGlobalFilters, reftech);
+	const columns = getColumns(activeTab, setActiveTab, isSortActive, setIsSortActive, setGlobalFilters, reftech);
 
 	const { list = [], paginationData } = data || {};
 	const { pageIndex, pageSize, total } = paginationData || {};

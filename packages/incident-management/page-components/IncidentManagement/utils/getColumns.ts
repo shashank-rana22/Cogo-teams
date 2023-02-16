@@ -4,6 +4,7 @@ import requestedColumn from '../configs/requested-table';
 
 const getColumns = (
 	activeTab: string,
+	setActiveTab:Function,
 	isSortActive:string,
 	setIsSortActive:Function,
 	setGlobalFilters:Function,
@@ -16,7 +17,7 @@ const getColumns = (
 		return approvedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech });
 	}
 	if (activeTab === 'rejected') {
-		return rejectedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech });
+		return rejectedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech, setActiveTab });
 	}
 	return null;
 };

@@ -4,7 +4,17 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ClickableIncidentId({ itemData }) {
+interface ItemProps {
+	userIncidentStatus:string;
+	referenceId:string;
+	id:string;
+}
+interface PropsType {
+	setActiveTab:Function;
+	itemData:ItemProps;
+}
+
+function ClickableIncidentId({ itemData, setActiveTab }:PropsType) {
 	const { userIncidentStatus, referenceId, id } = itemData || {};
 	const { push } = useRouter();
 	const {
@@ -15,7 +25,7 @@ function ClickableIncidentId({ itemData }) {
 
 	const { user: { id:userId = '' } } = UserData;
 
-	const handleTabChange = () => {
+	const handleTabChange1 = () => {
 		push(
 			// eslint-disable-next-line max-len
 			`/incident-management/[activeIncidentTab]?newIncidentId=${id}&userIncidentStatus=REQUESTED&performedBy=${userId}`,
@@ -24,6 +34,9 @@ function ClickableIncidentId({ itemData }) {
 		setTimeout(() => {
 			window.location.reload();
 		}, 500);
+	};
+	const handleTabChange = () => {
+		setActiveTab('requested');
 	};
 	return (
 		<div className={styles.container}>

@@ -1,13 +1,21 @@
 import { getByKey, startCase } from '@cogoport/utils';
 
 import CompanyName from '../accessorComponent/CompanyName';
+import DateName from '../accessorComponent/DateName';
 import Remarks from '../accessorComponent/Remarks';
 import ViewRequested from '../accessorComponent/ViewRequested';
 
 import SortData from './SortData.tsx';
 import styles from './styles.module.css';
 
-const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }) => [
+interface PropsType {
+	isSortActive:string;
+	setIsSortActive:Function;
+	setGlobalFilters:Function;
+	reftech:Function;
+}
+
+const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }:PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
@@ -49,7 +57,6 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 			<div>
 				<div>
 					{getByKey(row, 'createdAt') as string}
-					{/* {format(getByKey(row, 'createdAt') as Date, 'dd-MM-yyyy', {}, false)} */}
 				</div>
 			</div>
 		),
@@ -59,13 +66,7 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		id       : 'updatedAt',
 		accessor : (row) => (
 			<div>
-				<div>
-					{startCase(getByKey(row, 'updatedBy') as string)}
-				</div>
-				<div>
-					{getByKey(row, 'updatedAt') as string}
-					{/* {format(getByKey(row, 'updatedAt') as Date, 'dd-MM-yyyy', {}, false)} */}
-				</div>
+				<DateName itemData={row} />
 			</div>
 		),
 	},
@@ -76,7 +77,6 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		accessor : (row) => (
 			<div>
 				<Remarks itemData={row} />
-				{/* {getByKey(row, 'remark') as string} */}
 			</div>
 		),
 	},

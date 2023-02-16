@@ -49,7 +49,6 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reft
 		accessor : (row) => (
 			<div>
 				{getByKey(row, 'createdAt') as string}
-				{/* {format(getByKey(row, 'createdAt') as Date, 'dd MMM yyyy', {}, false)} */}
 			</div>
 
 		),
@@ -80,9 +79,6 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reft
 		Header : '',
 		id     : 'delete',
 
-		// accessor : (row) => (
-		// 	<Remarks itemData={row} />
-		// ),
 		accessor: (row) => (
 			<div>
 				<DeleteModal itemData={row} reftech={reftech} />

@@ -1,3 +1,7 @@
 .container{
     margin-left: -15px;
+    display: flex;
+}
+.iconStyle{
+    margin-top:6px;
 }
