@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
-const useCreateUserInactiveStatus = () => {
+function useCreateUserInactiveStatus() {
 	const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 
 	const [{ loading }, trigger] = useRequest({
@@ -20,20 +20,27 @@ const useCreateUserInactiveStatus = () => {
 		// const checkReasons = inactive_status === 'on_break' || inactive_status === 'on_lunch';
 		// const checkDate = isEmpty(inactive_date?.startDate) && isEmpty(inactive_date?.endDate);
 		try {
-			if (isEmpty(startDate) && isEmpty(endDate)) {
+			if (startDate === '' && endDate === '') {
 				Toast.error('Please select start and end time');
 			} else {
 				await trigger({
 					data: {
 						agent_id       : userId,
 						status         : inactiveReason,
-						validity_start : startDate,
-						validity_end   : endDate,
+						validity_start : format(
+							startDate,
+							'yyyy-MM-dd HH:mm:ss',
+						),
+						validity_end: format(
+							endDate,
+							'yyyy-MM-dd HH:mm:ss',
+						),
 					},
 				});
 			}
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.error));
+			console.log('error', error);
+			Toast.error(getApiErrorString(error?.message));
 		}
 	};
 
@@ -41,5 +48,5 @@ const useCreateUserInactiveStatus = () => {
 		loading,
 		userStatus,
 	};
-};
+}
 export default useCreateUserInactiveStatus;

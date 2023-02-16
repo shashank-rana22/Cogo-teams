@@ -10102,11 +10102,16 @@ const partner = {
 			service_name : 'voice_call',
 		},
 		{
-
 			api          : 'get_omnichannel_activity_logs',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_agent_work_preference',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+
 	],
 };
 export default partner;

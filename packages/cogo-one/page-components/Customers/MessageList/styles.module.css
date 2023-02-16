@@ -156,7 +156,7 @@
 
 .list_container {
     overflow-y: auto;
-    height: 70vh;
+    height: calc(100% - 155px);
 }
 
 .list_container::-webkit-scrollbar {
@@ -178,4 +178,8 @@
     background: #f8aea8;
     border-radius: 6px;
     padding: 1px 5px;
+}
+
+.tags_conatiner {
+    height: 20px;
 }

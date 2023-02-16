@@ -27,8 +27,11 @@ function Customers({
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
-				<div className={styles.title}>
-					CogoOne
+				<div className={styles.logo}>
+					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg" alt="" />
+					<div className={styles.title}>
+						CogoOne
+					</div>
 				</div>
 				<Toggle
 					name="a1"
@@ -73,12 +76,12 @@ function Customers({
 				/>
 			)}
 
-			{toggleStatus && (
+			{/* {toggleStatus && (
 				<InactiveModal
 					toggleStatus={toggleStatus}
 					setToggleStatus={setToggleStatus}
 				/>
-			)}
+			)} */}
 		</div>
 	);
 }

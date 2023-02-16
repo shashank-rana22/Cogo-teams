@@ -10,11 +10,11 @@ import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeMessageCard }) {
-	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard });
+function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
+	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard, activeVoiceCard, activeTab });
 	// const orgLoading = true;
-	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard });
-	const { promoData, promoLoading } = useGetListPromotions({ activeMessageCard });
+	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard, activeVoiceCard, activeTab });
+	const { promoData, promoLoading } = useGetListPromotions({ activeMessageCard, activeVoiceCard });
 
 	const { agent, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};

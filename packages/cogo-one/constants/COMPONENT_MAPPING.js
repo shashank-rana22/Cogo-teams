@@ -15,4 +15,5 @@ const COMPONENT_MAPPING = {
 	quick_actions     : QuickActions,
 	customer_insights : CustomerInsight,
 };
+
 export default COMPONENT_MAPPING;

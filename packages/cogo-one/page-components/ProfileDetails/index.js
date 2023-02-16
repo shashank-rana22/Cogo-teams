@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 	const [activeSelect, setActiveSelect] = useState('profile');
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
+
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>

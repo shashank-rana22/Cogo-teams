@@ -1,6 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -19,21 +17,17 @@ function useListSuggestions() {
 	});
 
 	const fetchListLogApi = async () => {
-		try {
-			const res = await trigger({
-				params: {
-					page    : pagination,
-					filters : {
-						q: !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
-					},
+		const res = await trigger({
+			params: {
+				page    : pagination,
+				filters : {
+					q: !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
 				},
-			});
-			if (res?.data) {
-				const { list = [], ...paginationData } = res?.data || {};
-				setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
-			}
-		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			},
+		});
+		if (res?.data) {
+			const { list = [], ...paginationData } = res?.data || {};
+			setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 		}
 	};
 

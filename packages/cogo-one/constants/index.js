@@ -39,3 +39,5 @@ export const USER_ACTIVITY_MAPPING = {
 	communication : 'Communication Activity',
 	transactional : 'Transactional Activity',
 };
+
+export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';

@@ -1,10 +1,9 @@
 import { Button, cl } from '@cogoport/components';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import AssigneeAvatar from '../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../common/UserAvatar';
-import hideDetails from '../../../utils/hideDetails';
+import hideDetails from '../../../../utils/hideDetails';
 
 import { showContent, TagsPopOver } from './HeaderFuncs';
 import styles from './styles.module.css';

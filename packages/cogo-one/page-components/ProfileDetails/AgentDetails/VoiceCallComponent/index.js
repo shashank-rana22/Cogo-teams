@@ -1,7 +1,8 @@
-import { IcMCall } from '@cogoport/icons-react';
+import { Modal } from '@cogoport/components';
+import { IcMCall, IcMProfile } from '@cogoport/icons-react';
 // import { setStoreState as setProfileStoreState } from '@cogoport/request';
 // import { useDispatch, useSelector } from '@cogoport/store';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 // import useHangUpCall from '../../../../hooks/useHangUpCall';
 // import useOutgoingCall from '../../../../hooks/useOutgoingCall';
@@ -16,11 +17,16 @@ function VoiceCallComponent({
 	// status,
 	// callLoading,
 }) {
+	const [showCallModal, setShowCallModal] = useState(false);
 	// const [counter, setCounter] = useState(0);
 	// const dispatch = useDispatch();
 	// const { profileData } = useSelector(({ profile }) => ({
 	// 	profileData: profile,
 	// }));
+
+	const handleCall = () => {
+		setShowCallModal(true);
+	};
 
 	// const handleClick = () => {
 	// 	dispatch(
@@ -113,17 +119,18 @@ function VoiceCallComponent({
 	// 	setSwapUi(false);
 	// };
 	return (
-		<div className={styles.container}>
-			{/* {!swapUi && !callLoading ? ( */}
-			<div className={styles.number_div}>
-				<IcMCall className={styles.call_icon} />
-				<div className={styles.number}>
-					{mobile_number_eformat?.slice(0, 2)}
-					{' '}
-					{mobile_number_eformat?.slice(2)}
+		<>
+			<div className={styles.container}>
+				{/* {!swapUi && !callLoading ? ( */}
+				<div className={styles.number_div}>
+					<IcMCall className={styles.call_icon} onClick={handleCall} />
+					<div className={styles.number}>
+						{mobile_number_eformat?.slice(0, 2)}
+						{' '}
+						{mobile_number_eformat?.slice(2)}
+					</div>
 				</div>
-			</div>
-			{/* ) : (
+				{/* ) : (
 				<div className={styles.status_div}>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
@@ -143,7 +150,34 @@ function VoiceCallComponent({
 				</div>
 			)} */}
 
-		</div>
+			</div>
+			{showCallModal && (
+				<Modal size="sm" show={showCallModal} onClose={() => setShowCallModal(false)} placement="top">
+					<Modal.Header title="Voice call" />
+					<Modal.Body>
+						<div className={styles.content}>
+							<div className={styles.avatar}>
+								<IcMProfile width={40} height={40} />
+							</div>
+							<div className={styles.org_name}>
+								Shri Hari Shipping Service
+							</div>
+							<div className={styles.number}>
+								+91 987654345678
+							</div>
+							<div className={styles.hang_up}>
+								<img
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
+									alt="hang-Up"
+									style={{ width: '50px', height: '50px' }}
+									role="presentation"
+								/>
+							</div>
+						</div>
+					</Modal.Body>
+				</Modal>
+			)}
+		</>
 
 	);
 }
