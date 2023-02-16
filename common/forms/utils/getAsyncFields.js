@@ -41,6 +41,40 @@ function asyncFieldsPartner() {
 		},
 	};
 }
+function asyncFieldsOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organizations',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+
+function asyncFieldsOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_users',
+		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncFieldsOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_operators',
+		initialCall : false,
+	};
+}
 
 function asyncFieldsPartnerRoles() {
 	return {
@@ -51,7 +85,18 @@ function asyncFieldsPartnerRoles() {
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
 		},
 	};
 }
-export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsPartnerRoles };
+
+export {
+	asyncFieldsLocations,
+	asyncFieldsLocations2,
+	asyncFieldsPartner,
+	asyncFieldsPartnerRoles,
+	asyncFieldsOrganization,
+	asyncFieldsOrganizationUsers,
+	asyncFieldsOperators,
+};

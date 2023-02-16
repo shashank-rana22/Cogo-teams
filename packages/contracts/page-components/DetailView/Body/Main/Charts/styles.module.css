@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.heading {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: #221f20;
+  margin-bottom: 4px;
+}
+
+.chart {
+  min-height: 420px;
+  background: #ffffff;
+  border-radius: 4px;
+  max-width: 700px;
+}
+
+.head_profit {
+  display: flex;
+  gap: 78px;
+  padding: 16px;
+  margin-left: 10px;
+}
+
+.mini_container {
+  display: flex;
+  gap: 38px;
+  background-color: #ffffff;
+}
+.details {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  color: #000000;
+}
+
+.service_provider {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #ffffff;
+  padding: 12px 24px 12px 24px;
+  max-width: 700px;
+}
+.label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #7b7f8e;
+  min-height: 60px;
+}
+.value {
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 32px;
+  color: #333333;
+}
+.graph_heading {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  color: #221f20;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+.box{
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.revenue{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 16px;
+  max-width: 700px;
+}
+.revenue_stats{
+  display: flex;
+  gap: 70px;
+  margin-left: 6px;
+  margin-bottom: 30px;
+}
+
+.projected_revenue{
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-left: 24px;
+  padding-bottom: 16px;
+}
+.revenue_value{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.value_heading {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #7b7f8e;
+  max-width: 150px;
+  min-height: 60px;
+}
+
+.value {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+}
