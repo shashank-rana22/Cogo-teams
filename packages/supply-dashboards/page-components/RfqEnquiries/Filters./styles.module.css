@@ -1,0 +1,41 @@
+.heading {
+	padding-left: 16px;
+	margin: 10px 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.filter {
+	padding: 1px;
+}
+
+.line {
+	height: 0;
+	margin-bottom: 4px;
+	border: 1px solid #ffeddd;
+}
+
+.input {
+	margin: 8px 16px;
+
+	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+	:global {
+		input::placeholder {
+			font-size: 12px;
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+
+		.ui_input_suffix {
+			padding-right: 4px;
+			padding-left: 4px;
+		}
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
