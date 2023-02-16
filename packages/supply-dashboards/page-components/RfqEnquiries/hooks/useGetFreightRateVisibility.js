@@ -78,7 +78,7 @@ const useGetFreightRateVisibility = ({ requiredValues, serviceType, service }) =
 			});
 			return res;
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 		}
 		return null;
 	};
