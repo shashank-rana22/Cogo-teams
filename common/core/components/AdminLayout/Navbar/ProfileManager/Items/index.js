@@ -17,6 +17,11 @@ function Items({ item, resetSubnavs }) {
 
 	useEffect(() => { setShowSubNav(false); setOpenPopover(false); }, [resetSubnavs]);
 
+	const redirect = () => {
+		// eslint-disable-next-line no-undef
+		window.location.href = '/v2/login?source=add_account';
+	};
+
 	const {
 		data = [],
 		refetch = () => {},
@@ -108,7 +113,7 @@ function Items({ item, resetSubnavs }) {
 
 			{showSubNav && (
 				<div className={styles.button_container}>
-					<Button size="lg" themeType="accent">Add Account</Button>
+					<Button size="lg" themeType="accent" onClick={redirect}>Add Account</Button>
 				</div>
 			)}
 		</>
