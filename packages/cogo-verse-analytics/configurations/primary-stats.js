@@ -44,49 +44,28 @@ export const INTENT_LEADERBOARD = [
 		value       : 4000,
 		title       : 'Shipment booking',
 		description : 'users',
-	}, {
-		value       : 240000,
-		title       : 'Normal conversation',
-		description : 'users',
-	},
-	{
-		value       : 40000,
-		title       : 'Trade enquiry',
-		description : 'users',
 	},
 	{
 		value       : 4000,
 		title       : 'Shipment booking',
 		description : 'users',
 	},
+];
+
+export const USER_STATUS = [
 	{
-		value       : 240000,
-		title       : 'Normal conversation',
-		description : 'users',
+		value : 20,
+		title : 'Happy users',
+		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
 	},
 	{
-		value       : 40000,
-		title       : 'Trade enquiry',
-		description : 'users',
+		value : 20,
+		title : 'Neutral users',
+		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg',
 	},
 	{
-		value       : 4000,
-		title       : 'Shipment booking',
-		description : 'users',
-	},
-	{
-		value       : 240000,
-		title       : 'Normal conversation',
-		description : 'users',
-	},
-	{
-		value       : 40000,
-		title       : 'Trade enquiry',
-		description : 'users',
-	},
-	{
-		value       : 4000,
-		title       : 'Shipment booking',
-		description : 'users',
+		value : 20,
+		title : 'Angry users',
+		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg',
 	},
 ];
