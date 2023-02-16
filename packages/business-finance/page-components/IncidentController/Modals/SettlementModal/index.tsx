@@ -17,7 +17,7 @@ function SettlementModal({ settlementData, id, refetch, row, isEditable = true }
 	} = settlementData || {};
 
 	const [value, setValue] = useState({
-		date    : settlementDate || '',
+		date    : settlementDate,
 		remarks : '',
 	});
 
@@ -43,12 +43,12 @@ function SettlementModal({ settlementData, id, refetch, row, isEditable = true }
 							setShow(false);
 						}}
 					>
-						<Modal.Header title={(
+						<Modal.Header title={`${(
 							<div className={styles.flex}>
 								Settlement
 								<div className={styles.drag}>( Drag and drop to set the matching hierarchy )</div>
 							</div>
-						)}
+						)}`}
 						/>
 
 						<Modal.Body>

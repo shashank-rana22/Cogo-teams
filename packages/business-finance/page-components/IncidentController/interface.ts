@@ -44,7 +44,7 @@ export interface IncidentDataInterface {
 }
 
 export interface MatchModalInterface {
-	value?:{ date?:string, remarks?:string }
+	value?:{ date?:Date, remarks?:string }
 	setValue: React.Dispatch<React.SetStateAction<{ date: string; }>>
 	setShow: React.Dispatch<React.SetStateAction<boolean>>
 	checkedData?:Array<object>
