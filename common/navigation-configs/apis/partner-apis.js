@@ -9829,6 +9829,16 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_auth_roles',
 			access_type  : 'private',
 			service_name : 'auth',
