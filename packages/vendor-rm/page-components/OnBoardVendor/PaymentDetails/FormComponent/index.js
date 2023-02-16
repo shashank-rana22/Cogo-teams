@@ -4,7 +4,11 @@ import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayo
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../hooks/useVendorBankDetail';
 
-function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
+function FormComponent({
+	activeStepper = {},
+	setActiveStepper = () => {},
+	setVendorInformation = () => {},
+}) {
 	const {
 		controls = [],
 		control,
@@ -12,7 +16,7 @@ function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
 		handleSubmit,
 		loading,
 		onSubmit,
-	} =	useVendorBankDetail({ setActiveStepper });
+	} =	useVendorBankDetail({ setActiveStepper, setVendorInformation });
 
 	return (
 		<div>

@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import TABS_MAPPING from '../../../../constants/tabs';
 import { controls } from '../utils/controls';
 
-function useVendorBankDetail({ setActiveStepper = () => {} }) {
+function useVendorBankDetail({ setActiveStepper = () => {}, setVendorInformation = () => {} }) {
 	const formProps = useForm();
 
 	const {
@@ -31,7 +31,7 @@ function useVendorBankDetail({ setActiveStepper = () => {} }) {
 	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
 		url    : '/create_vendor_bank_detail',
 		method : 'post',
-	}, { manual: false });
+	}, { manual: true });
 
 	const regex = /^[A-Za-z]{4}\d{7}$/;
 
@@ -61,8 +61,16 @@ function useVendorBankDetail({ setActiveStepper = () => {} }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ifscCode]);
 
-	const onSubmit = async (step) => {
+	const onSubmit = async ({ data, step }) => {
 		const values = getValues();
+
+		setVendorInformation((pv) => {
+			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			return {
+				...pv,
+				[key]: data,
+			};
+		});
 
 		try {
 			const response = await triggerCreateVendorBankDetail({
@@ -71,12 +79,12 @@ function useVendorBankDetail({ setActiveStepper = () => {} }) {
 					bank_document_url : values.bank_document_url.finalUrl,
 					vendor_id         : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
 				},
-			 	});
+			});
 
-			 if (response?.data) {
+			if (response?.data) {
 				Toast.success('Vendor Bank Detail added successfully');
 				setActiveStepper(TABS_MAPPING[step]);
-			 }
+			}
 		} catch (err) {
 			// Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
 		}

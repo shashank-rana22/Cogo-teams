@@ -10,8 +10,7 @@ import styles from './styles.module.css';
 function OnBoardVendor() {
 	const router = useRouter();
 
-	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[3]);
-
+	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[1]);
 	const [vendorInformation, setVendorInformation] = useState({});
 
 	console.log('vendorInformation:: ', vendorInformation);
@@ -43,6 +42,7 @@ function OnBoardVendor() {
 				<Element
 					activeStepper={activeStepper}
 					setActiveStepper={setActiveStepper}
+					vendorInformation={vendorInformation}
 					setVendorInformation={setVendorInformation}
 				/>
 			</div>

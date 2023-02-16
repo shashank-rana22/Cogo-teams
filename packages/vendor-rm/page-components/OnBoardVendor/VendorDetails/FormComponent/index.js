@@ -3,7 +3,11 @@ import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayo
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useOnBoardVendor from '../hooks/useOnBoardVendor';
 
-function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
+function FormComponent({
+	activeStepper = {},
+	setActiveStepper = () => {},
+	setVendorInformation = () => {},
+}) {
 	const {
 		fields = [],
 		control,
@@ -11,7 +15,10 @@ function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
 		handleSubmit,
 		loading,
 		createVendor,
-	} =	useOnBoardVendor({ setActiveStepper });
+	} =	useOnBoardVendor({
+		setActiveStepper,
+		setVendorInformation,
+	});
 	return (
 		<div>
 			<FormLayout
