@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
-import { getCookie } from '@cogoport/request/helpers/getCookieFromCtx';
 import { useSelector, useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { getCookie } from 'cookies-next';
 import { useState, useEffect } from 'react';
 
 const useGetUserSessionMappings = () => {
@@ -27,6 +27,7 @@ const useGetUserSessionMappings = () => {
 	const listApi = async () => {
 		try {
 			const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
+
 			const payload = {
 				parent_user_session_id: cogo_admin_auth_token,
 			};

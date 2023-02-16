@@ -3,6 +3,8 @@ import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/i
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
+
 import Items from './Items';
 import styles from './styles.module.css';
 
@@ -12,6 +14,9 @@ function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover }
 	const routerFunction = () => {
 		router.push('/my-profile');
 	};
+
+	const { logoutOfAllAccounts = () => {} } = useRemoveUserSessions();
+
 	const profileComponents = [
 
 		{
@@ -39,6 +44,7 @@ function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover }
 		{
 			title : 'Logout of ALL accounts',
 			name  : 'logout_all_accounts',
+			fun   : logoutOfAllAccounts,
 			icon  : IcMLogout,
 		},
 

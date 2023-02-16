@@ -14,6 +14,11 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
+	const redirect = () => {
+		// eslint-disable-next-line no-undef
+		window.location.href = '/v2/login?source=add_account';
+	};
+
 	const { picture = '', name = '' } = user_data;
 
 	const handlePopover = () => {
@@ -78,7 +83,7 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 
 			{showSubNav && (
 				<div className={styles.button_container}>
-					<Button size="lg" themeType="accent">Add Account</Button>
+					<Button size="lg" themeType="accent" onClick={redirect}>Add Account</Button>
 				</div>
 			)}
 		</>
