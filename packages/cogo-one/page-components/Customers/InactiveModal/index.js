@@ -21,7 +21,7 @@ function InactiveModal({
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [inactiveReason, setInactiveReason] = useState('');
-	console.log('inactiveReason', inactiveReason);
+
 	const {
 		loading,
 		userStatus = () => {},
@@ -32,7 +32,7 @@ function InactiveModal({
 	const REASONS = [
 		{
 			label : 'On Break',
-			value : 'on_break',
+			value : 'break',
 		},
 	];
 
@@ -145,7 +145,7 @@ function InactiveModal({
 						disabled={emptyStateCheck}
 						size="md"
 						themeType="accent"
-						onClick={handleSubmit()}
+						onClick={() => handleSubmit()}
 					>
 						Apply
 

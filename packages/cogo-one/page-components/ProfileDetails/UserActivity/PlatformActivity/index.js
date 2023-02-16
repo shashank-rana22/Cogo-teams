@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function PlatformActivity() {
+function PlatformActivity({ platform = {} }) {
 	return (
 		<div className={styles.container}>
 			{[...Array(6)].map(() => (
