@@ -27,7 +27,6 @@ function SentDiv({
 					,
 					<span className={styles.time_stamp}>{date}</span>
 				</div>
-
 				<div className={cl`${styles.receive_message_container} ${session_type === 'admin' ? styles.admin_message_container : ''}`}>
 					{['text', 'template'].includes(message_type)
 						? <div dangerouslySetInnerHTML={{ __html: message }} />
