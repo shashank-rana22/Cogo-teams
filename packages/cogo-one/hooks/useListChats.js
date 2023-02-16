@@ -16,7 +16,6 @@ const useListChats = ({
 	user_role_ids, userId,
 }) => {
 	const [activeMessageCard, setActiveMessageCard] = useState({});
-	console.log('activeMessageCard', activeMessageCard);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({
@@ -31,21 +30,16 @@ const useListChats = ({
 		let count = 0;
 		const resultList = [];
 		list?.forEach((item) => {
+			const { created_at, updated_at, sent_updated_at, ...rest } = item.data() || {};
+
 			const userData = {
-				id                : item.id,
-				name              : item.data().user_name,
-				user_type         : item.data().user_type,
-				created_at        : item.data().created_at || Date.now(),
-				updated_at        : item.data().updated_at || Date.now(),
-				user_id           : item.data().user_id || '',
-				new_message_count : item.data().new_message_count || 0,
-				last_message      : item.data().last_message || '',
-				channel_type      : item.data().channel_type || '',
-				organization_id   : item.data().organization_id || '',
-				sent_updated_at   : item.data().sent_updated_at || Date.now(),
-				agent_name        : item.data().agent_name,
-				agent_id          : item.data().agent_id,
+				id              : item?.id,
+				created_at      : item.data().created_at || Date.now(),
+				updated_at      : item.data().updated_at || Date.now(),
+				sent_updated_at : item.data().sent_updated_at || Date.now(),
+				...rest,
 			};
+
 			chats += (item.data().new_message_count || 0) > 0 ? 1 : 0;
 			count += item.data().new_message_count || 0;
 			resultList.push(userData);
