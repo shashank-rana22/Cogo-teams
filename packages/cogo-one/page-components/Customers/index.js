@@ -76,12 +76,12 @@ function Customers({
 				/>
 			)}
 
-			{/* {toggleStatus && (
+			{toggleStatus && (
 				<InactiveModal
 					toggleStatus={toggleStatus}
 					setToggleStatus={setToggleStatus}
 				/>
-			)} */}
+			)}
 		</div>
 	);
 }

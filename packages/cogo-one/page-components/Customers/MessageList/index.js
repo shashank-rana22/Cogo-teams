@@ -22,6 +22,7 @@ function MessageList({
 	setAppliedFilters = () => { },
 	appliedFilters,
 }) {
+	console.log('messagesList', messagesList);
 	const loading = false;
 
 	if (isEmpty(messagesList)) {
