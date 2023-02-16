@@ -1,10 +1,10 @@
-const storeQuestionData = ({ department = 'a', work_scope = 'b', checkList }) => {
-	const storeKey = `${department}_${work_scope}`;
+const storeQuestionData = ({ department = 'a', designation = 'b', checkList = [], weighList = [], stage = '' }) => {
+	const storeKey = `${department}_${designation}`;
 	const currentState = JSON.parse(window.localStorage.getItem('checkList'));
 	// eslint-disable-next-line no-undef
 	window.localStorage.setItem('checkList', JSON.stringify({
 		...currentState,
-		[storeKey]: checkList,
+		[storeKey]: { checkList, weighList, stage },
 	}));
 };
 

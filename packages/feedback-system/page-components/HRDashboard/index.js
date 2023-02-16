@@ -14,6 +14,7 @@ import { deptControls as departmentControls } from '../../utils/departmentContro
 import { getControls } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
+import UploadModalBody from './UploadModal';
 
 const DEPARTMENT_MAPPING = {
 	technology : 'tech_role',
@@ -191,7 +192,12 @@ function HRDashboard() {
 						onClickOutside={() => setOpenUploadModal(false)}
 					>
 						<Modal.Header title="Upload CSV" />
-						<Modal.Body><Upload /></Modal.Body>
+						<div className={styles.upload_modal}>
+							<Modal.Body>
+								<UploadModalBody setOpenUploadModal={setOpenUploadModal} />
+							</Modal.Body>
+						</div>
+
 					</Modal>
 				)}
 			</div>

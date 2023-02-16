@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function QuestionsBox({ question_detail = {} }) {
+function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 	const { question = '', tags = ['a', 'bcvc', 'csdee'], remark = '' } = question_detail || {};
 
 	return (
@@ -32,9 +32,11 @@ function QuestionsBox({ question_detail = {} }) {
 				</div>
 			</div>
 
-			<div className={styles.question_tags}>
-				{tags.map((tag) => <Pill color="blue">{tag}</Pill>)}
-			</div>
+			{questionStatus !== 'add_weightage' && (
+				<div className={styles.question_tags}>
+					{tags.map((tag) => <Pill color="blue">{tag}</Pill>)}
+				</div>
+			)}
 		</div>
 	);
 }

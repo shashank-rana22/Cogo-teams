@@ -97,3 +97,11 @@
 		width: 160px;
 	}
 }
+
+.upload_modal {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+		}
+	}
+}

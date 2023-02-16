@@ -1,14 +1,14 @@
 import { useRequest } from '@cogoport/request';
 
 const useListForms = ({ formsParams = {} }) => {
-	const [{ data: formsData = {}, loading = false }] = useRequest({
-		url    : 'list_forms',
+	const [{ data, loading = false }] = useRequest({
+		url    : 'list-forms/',
 		method : 'get',
-		params : { filters: { ...formsParams } },
-	});
+		params : { Filters: { ...formsParams } },
+	}, { manual: false });
 
 	return {
-		formsData, loading,
+		data, loading,
 	};
 };
 

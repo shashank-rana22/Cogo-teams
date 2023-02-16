@@ -1,4 +1,5 @@
 import { Toast, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import CreateForm from '../../../../common/CreateForm';
 import QuestionsItem from '../../../../common/QuestionsItem';
@@ -10,6 +11,7 @@ function Questions({
 	questions = [], setRefetchList = () => {},
 	questionActionList = [],
 	setQuestionActionList = () => {},
+	questionStatus = '',
 }) {
 	const {
 		formProps = {}, onSaveFeedbackQuestions, loading: saveLoading = false,
@@ -54,6 +56,8 @@ function Questions({
 		reset();
 	};
 
+	const totalQuestions = questions.length;
+
 	const renderEditModal = () => {
 		const fill_question = questions.find((edit_question) => edit_question.id
 		=== questionActionList.edit);
@@ -89,15 +93,19 @@ function Questions({
 
 	return (
 		<div className={styles.list_container}>
-			{(questions || []).map((question) => {
+			{(questions || []).map((question, index) => {
 				const { id = '' } = question || {};
+				const isChecked = !isEmpty(questionActionList.checked?.find((que) => que.id === id));
 
 				return (
 					<QuestionsItem
 						item={question}
+						index={index}
 						feedbackQuestionId={id}
 						setQuestionActionList={setQuestionActionList}
-						isChecked={questionActionList.checked?.includes(question)}
+						isChecked={isChecked}
+						questionStatus={questionStatus}
+						totalCount={totalQuestions}
 					/>
 				);
 			})}
