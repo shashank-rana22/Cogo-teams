@@ -1409,12 +1409,12 @@ const saas = {
 		},
 		{
 			api          : 'list_coupons',
-			access_type  : 'public',
+			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
 			api          : 'update_saas_checkout',
-			access_type  : 'public',
+			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
 	],
