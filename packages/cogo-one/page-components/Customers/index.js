@@ -19,10 +19,7 @@ function Customers({
 	setActiveTab = () => {},
 	setToggleStatus = () => {},
 	toggleStatus,
-	voiceList = [],
 	messagesList = [],
-	voiceListLoading,
-	handleScroll = () => {},
 	unReadChatsCount,
 }) {
 	return (
@@ -68,9 +65,7 @@ function Customers({
 				<VoiceList
 					setActiveVoiceCard={setActiveVoiceCard}
 					activeVoiceCard={activeVoiceCard}
-					voiceList={voiceList}
-					voiceListLoading={voiceListLoading}
-					handleScroll={handleScroll}
+					activeTab={activeTab}
 				/>
 			)}
 

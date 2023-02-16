@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import UserAvatar from '../../../common/UserAvatar';
@@ -20,6 +20,17 @@ function MessageList({
 	setFilterVisible,
 }) {
 	const loading = false;
+
+	if (isEmpty(messagesList)) {
+		return (
+			<div className={styles.list_container}>
+				<div className={styles.empty_state}>
+					No Messages Yet..
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -78,7 +89,15 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<div className={styles.user_name}>
-													{startCase(item.name)}
+													{isEmpty(item?.name) ? (
+														<>
+															{item.user_id}
+														</>
+													) : (
+														<>
+															{startCase(item.name)}
+														</>
+													)}
 
 												</div>
 												<div className={styles.organisation}>
