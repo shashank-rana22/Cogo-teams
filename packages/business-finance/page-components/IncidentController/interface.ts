@@ -8,10 +8,6 @@ export type FilterProps = {
 	date?:{ startDate?:Date, endDate?:Date }
 	urgency?:string
 };
-interface Date {
-	startDate?:object
-	endDate?:object
-}
 
 export interface TableProps {
 	id?: string;
