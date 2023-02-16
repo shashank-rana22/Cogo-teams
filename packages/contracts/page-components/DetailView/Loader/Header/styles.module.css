@@ -1,0 +1,15 @@
+
+.heading{
+    display: flex;
+    gap: 10px;;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.contract{
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 32px;
+    margin-bottom: 12px;
+    color: #000000;
+}

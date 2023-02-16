@@ -1,0 +1,11 @@
+.heading{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #221F20;
+    margin: 16px;
+}
+.container{
+    width: 100%;
+    background: #f9f5ec;
+}
