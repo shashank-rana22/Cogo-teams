@@ -31,8 +31,13 @@
     }
 }
 
-.empty_container {
-	align-items: center;
-	justify-content: center;
-	padding: 80px 0;
+.empty_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    height: 35vh;
 }

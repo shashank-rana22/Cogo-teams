@@ -1,20 +1,21 @@
-.empty_state_container {
-	display: flex;
-	justify-content: center;
+.container{
+    display: flex;
+    justify-content: center;
 	align-items: center;
-	height: 200px;
+    background: #ffffff;
+    height: max-content;
+}
 
-	margin: 16px 0;
-	background: #fff;
-	border: 2px solid #f6f5fe;
+.row {
+    display: flex;
+    flex-direction: row;
+}
 
-	h4 {
-		font-size: 20px;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 26px;
-		color: #000;
-		text-align: center;
-		margin: 0px;
-	}
+.column{
+    flex-direction: column;
+}
+
+.text{
+    font-size: 16px;
+    color: #BDBDBD;
 }

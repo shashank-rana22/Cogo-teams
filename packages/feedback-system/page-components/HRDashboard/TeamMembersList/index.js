@@ -1,4 +1,5 @@
 import { Accordion, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 
@@ -14,8 +15,18 @@ function TeamMembersList({
 	total_count,
 	loading = false,
 }) {
-	if (list?.length === 0 && !loading) {
-		return <EmptyState />;
+	if (isEmpty(list) && !loading) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No Feedbacks Found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+			</div>
+		);
 	}
 	return (
 		<div className={styles.table_container}>

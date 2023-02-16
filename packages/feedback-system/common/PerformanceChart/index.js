@@ -1,5 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { Select, Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useGetFeedbackPerformanceStats from '../../hooks/useGetFeedbackPerformanceStats';
@@ -15,7 +16,7 @@ function PerformanceChart({ user_id = '' }) {
 		performanceStatsData = {},
 		loading,
 		performanceFilter,
-		setPerformanceFilter = () => {},
+		setPerformanceFilter = () => { },
 	} = useGetFeedbackPerformanceStats({ user_id });
 
 	const lineData1 = [];
@@ -58,7 +59,17 @@ function PerformanceChart({ user_id = '' }) {
 			</div>
 			{loading && showLoading()}
 
-			{lineData1?.length === 0 && !loading && <EmptyState />}
+			{isEmpty(lineData1) && !loading && (
+				<div className={styles.empty_container}>
+					<EmptyState
+						height={140}
+						width={220}
+						emptyText="Performance Stats Not Found"
+						textSize="12px"
+						flexDirection="column"
+					/>
+				</div>
+			)}
 
 			{!loading && lineData1?.length > 0 && (
 				<div style={{ height: '300px' }}>
