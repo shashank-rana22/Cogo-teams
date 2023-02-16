@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 
-import { PRIMARY_STATS } from '../../../configurations/primary-stats';
+import { INTENT_LEADERBOARD, PRIMARY_STATS } from '../../../configurations/primary-stats';
 
 import { dummy } from './dummy';
 import styles from './styles.module.css';
@@ -80,6 +80,28 @@ function Stats() {
 					</div>
 				</div> */}
 
+			<div className={styles.leaderboard_stats}>
+				<div className={styles.leaderboard_header}>Intent Leaderboard</div>
+				<div className={styles.leaderboard_content}>
+					{INTENT_LEADERBOARD.map((stat) => {
+						const { value, title, description } = stat;
+
+						return (
+							<div className={styles.leaderboard_values}>
+								<div className={styles.leaderboard_title}>
+									{title}
+								</div>
+								<div className={styles.leaderboard_description}>
+									<span>{value}</span>
+									{' '}
+									{description}
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+
 			{/* <div className={styles.users_active_on_container}>
 					<div className={styles.users_active_on}>
 						<div className={styles.active_on}>Users Active on</div>
@@ -113,7 +135,7 @@ function Stats() {
 				</div> */}
 			{/* </div> */}
 
-			<div className={styles.leaderboard_container}>
+			{/* <div className={styles.leaderboard_container}>
 				<div className={styles.intent_leaderboard_container}>
 					<div className={styles.intent_leaderboard}>Intent Leaderboard</div>
 					<div className={styles.intent_leaderboard_content_container}>
@@ -154,7 +176,7 @@ function Stats() {
 						</div>
 					))}
 				</div>
-			</div>
+			</div> */}
 			{/* <div className={styles.response_time_and_communications}>
 				<div className={styles.avg_response_time}>
 					<div className={styles.static_avg_response_time}>

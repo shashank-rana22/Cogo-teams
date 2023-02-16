@@ -94,9 +94,47 @@
     background: #ffffff;
 }
 
+/* Intent Leaderboard Stats------------------------------------------- */
+
+.leaderboard_stats {
+    border: solid 1px rgb(114, 78, 78);
+	/* flex-basis: 55%; */
+    background: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+	max-height: 200px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+	overflow-y: scroll;
+}
+
+.leaderboard_header {
+	color: #221F20;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 150%;
+}
+.leaderboard_content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	
+	gap: 13px;
+}
+.leaderboard_values {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: solid 1px;
+	padding: 10px 0px;
+}
+.leaderboard_description {
+
+}
+
 /* ----------------------------------------------------- */
 
-.bookings_from_container {
+
+
+/* .bookings_from_container {
     display: flex;
     justify-content: space-between;
     color: --l-header-font-color;
@@ -262,7 +300,7 @@
 }
 .leaderboard_static_data {
     
-}
+} */
 
 
 

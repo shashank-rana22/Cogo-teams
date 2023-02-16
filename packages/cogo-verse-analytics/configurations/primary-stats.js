@@ -28,3 +28,65 @@ export const PRIMARY_STATS = [
 		icon        : <IcMMoney fill="#ABCD62" width="25px" height="25px" />,
 	},
 ];
+
+export const INTENT_LEADERBOARD = [
+	{
+		value       : 240000,
+		title       : 'Normal conversation',
+		description : 'users',
+	},
+	{
+		value       : 40000,
+		title       : 'Trade enquiry',
+		description : 'users',
+	},
+	{
+		value       : 4000,
+		title       : 'Shipment booking',
+		description : 'users',
+	}, {
+		value       : 240000,
+		title       : 'Normal conversation',
+		description : 'users',
+	},
+	{
+		value       : 40000,
+		title       : 'Trade enquiry',
+		description : 'users',
+	},
+	{
+		value       : 4000,
+		title       : 'Shipment booking',
+		description : 'users',
+	},
+	{
+		value       : 240000,
+		title       : 'Normal conversation',
+		description : 'users',
+	},
+	{
+		value       : 40000,
+		title       : 'Trade enquiry',
+		description : 'users',
+	},
+	{
+		value       : 4000,
+		title       : 'Shipment booking',
+		description : 'users',
+	},
+	{
+		value       : 240000,
+		title       : 'Normal conversation',
+		description : 'users',
+	},
+	{
+		value       : 40000,
+		title       : 'Trade enquiry',
+		description : 'users',
+	},
+	{
+		value       : 4000,
+		title       : 'Shipment booking',
+		description : 'users',
+	},
+];
