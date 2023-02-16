@@ -18,17 +18,24 @@
 
 .form_columns {
 	display: flex;
-    justify-content: center;
+}
+
+.col_item {
+    flex: 1;
 }
 
 .row_item {
-    flex: 2; 
-    height: 64px;
+    flex: 1; 
+    height: 48px;
     margin-right: 4px;
 
     display: flex;
     align-items: center;
 } 
+
+.row_labels {
+    width: 100%;
+}
 
 .row_container{
     display: flex;

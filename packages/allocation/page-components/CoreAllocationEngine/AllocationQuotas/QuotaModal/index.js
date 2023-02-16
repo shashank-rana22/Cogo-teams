@@ -169,14 +169,14 @@ function QuotaModal(props) {
 						<section className={styles.form_container}>
 							<div className={styles.form_columns}>
 								{segmentation.map((columnName) => (
-									<div key={columnName} style={{ flex: 1 }}>
+									<div key={columnName} className={styles.col_item}>
 										{columnName}
 									</div>
 								))}
 							</div>
 
 							<div style={{ display: 'flex' }}>
-								<div>
+								<div className={styles.row_labels}>
 									{lifecycle_stage.map((rowName) => (
 										<div key={rowName} className={styles.row_item}>
 											{rowName}
@@ -196,6 +196,7 @@ function QuotaModal(props) {
 											<div className={styles.control_container}>
 												<Element
 													{...el}
+													size="sm"
 													key={el.name}
 													control={control}
 													id={`${el.name}_input`}
