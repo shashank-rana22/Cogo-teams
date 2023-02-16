@@ -67,6 +67,7 @@ const useListChats = ({
 			omniChannelQuery = query(
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
+				// where('session_type', '!=', 'bot'),
 
 			);
 		} else {
@@ -74,6 +75,7 @@ const useListChats = ({
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
 				where('agent_id', '==', userId),
+				// where('session_type', '!=', 'bot'),
 
 			);
 		}

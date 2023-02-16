@@ -10085,6 +10085,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'list_chat_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 };
 export default partner;

@@ -50,7 +50,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 
 	const {
 		comp:ActiveModalComp = null,
-		title:{ img = null, name = '' } = {},
+		title:{ img = null, name = '' } = {}, modalSize = 'md',
 	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
 	const closeModal = () => (setOpenModal({ type: null, data: {} }));
@@ -76,7 +76,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 			</div>
 			{openModal?.type && ActiveModalComp && (
 				<Modal
-					size="md"
+					size={modalSize}
 					show
 					onClose={closeModal}
 					placement="center"
