@@ -48,7 +48,10 @@ function Messages({ activeMessageCard = {}, firestore }) {
 		getFirebaseData();
 	}, [id]);
 
-	const ActiveModalComp = MODAL_COMPONENT_MAPPING[openModal?.type] || null;
+	const {
+		comp:ActiveModalComp = null,
+		title:{ img = null, name = '' } = {},
+	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
 	const closeModal = () => (setOpenModal({ type: null, data: {} }));
 
@@ -67,11 +70,25 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						messages={messages}
 						getNextData={getNextData}
 						lastPage={lastPage}
+						setOpenModal={setOpenModal}
 					/>
 				</div>
 			</div>
 			{openModal?.type && ActiveModalComp && (
-				<Modal size="md" show onClose={closeModal} onOuterClick={closeModal} isClosable>
+				<Modal
+					size="md"
+					show
+					onClose={closeModal}
+					placement="center"
+					className={styles.styled_ui_modal_container}
+				>
+					<Modal.Header title={(
+						<div className={styles.modal_header_title}>
+							{img && <img src={img} alt="logo" />}
+							<div className={styles.modal_title}>{name}</div>
+						</div>
+					)}
+					/>
 					<ActiveModalComp />
 				</Modal>
 			)}

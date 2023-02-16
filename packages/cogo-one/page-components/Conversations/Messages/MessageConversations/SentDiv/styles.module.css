@@ -31,6 +31,7 @@
     margin-top: 5px;
     background-color: #acdadf;
     border-radius: 6px 0 6px 6px;
+	word-break: break-word;
 }
 
 .styled_img {

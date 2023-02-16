@@ -20,6 +20,7 @@ function MessageConversations(
 		sendChatMessage,
 		lastPage,
 		getNextData,
+		setOpenModal,
 	},
 ) {
 	const messageRef = useRef(null);
@@ -61,7 +62,14 @@ function MessageConversations(
 		setOnClicked = () => { },
 		onClicked = false,
 	} = useGetEmojiList();
-
+	const openInstantMessages = () => {
+		setOpenModal({
+			type : 'instant_messages',
+			data : {
+				updateMessage: (val) => setDraftMessages((p) => ({ ...p, [id]: val })),
+			},
+		});
+	};
 	return (
 		<div className={styles.styled_div}>
 			<div className={styles.container} onScroll={handleScroll}>
@@ -113,10 +121,12 @@ function MessageConversations(
 					</div>
 					<div>
 						<img
+							role="presentation"
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Vector%20(5).svg"
 							alt="img"
+							onClick={openInstantMessages}
 						/>
-						<IcMSend fill="#EE3425" />
+						<IcMSend fill="#EE3425" onClick={sendChatMessage} />
 					</div>
 				</div>
 			</div>

@@ -29,4 +29,5 @@
 	border-radius:0 6px 6px 6px;
 	max-width: 320px;
 	width: fit-content;
+	word-break: break-word;
 }

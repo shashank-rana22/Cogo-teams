@@ -60,13 +60,6 @@ function Header({ setOpenModal = () => {} }) {
 					{showContent(tagslist, 'right')}
 				</div>
 				<div className={styles.flex}>
-					<Button
-						themeType="secondary"
-						size="md"
-						className={cl`${styles.styled_button} ${styles.margin}`}
-					>
-						Escalate
-					</Button>
 					{(assignes || []).map((eachAssigne) => <AssigneeAvatar data={eachAssigne} />)}
 					<Button
 						themeType="secondary"
