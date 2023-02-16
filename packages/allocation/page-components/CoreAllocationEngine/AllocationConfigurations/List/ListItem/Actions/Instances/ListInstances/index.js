@@ -16,7 +16,7 @@ const LIST_COLUMNS_MAPPING = {
 	updated_at   : 'UPDATED AT',
 	execution_at : 'EXECUTION AT',
 	status       : 'STATUS',
-	action       : 'ACTION',
+	// action       : 'ACTION',
 };
 
 const STATUS_COLOR_MAPPING = {
