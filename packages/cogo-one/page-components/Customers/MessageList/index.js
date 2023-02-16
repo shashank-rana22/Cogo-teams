@@ -22,6 +22,7 @@ function MessageList({
 	setAppliedFilters = () => { },
 	appliedFilters,
 }) {
+	console.log('messagesList', messagesList);
 	const loading = false;
 
 	if (isEmpty(messagesList)) {
@@ -65,9 +66,12 @@ function MessageList({
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible((prev) => !prev)} />
+						<IcMDoubleFilter
+							onClick={() => setFilterVisible((prev) => !prev)}
+							className={styles.filter_icon}
+						/>
 					</Popover>
-
+					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
 				</div>
 			</div>
 			{loading ? <LoadingState /> : (
@@ -82,7 +86,7 @@ function MessageList({
 								key={item?.id}
 								role="presentation"
 								className={cl`
-						                ${styles.card_Container} 
+						                ${styles.card_container} 
 						                ${checkActiveCard ? styles.active_card : ''} 
 						                `}
 								onClick={() => setActiveMessage(item)}

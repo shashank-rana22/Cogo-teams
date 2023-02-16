@@ -68,12 +68,17 @@
     width: calc(100% - 40px);
 }
 
-.card_Container {
+.card_container {
     padding: 10px 12px;
+    border-radius: 4px;
+}
+
+.card_container:hover {
+    background: #fbf7ec;
 }
 
 .active_card {
-    background: #fdfbf6;
+    background: #fbf7ec;
 }
 
 .card {
@@ -182,4 +187,19 @@
 
 .tags_conatiner {
     height: 20px;
+}
+
+.filter_icon {
+    height: 25px;
+    width: 25px;
+}
+
+.filters_applied {
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background: #ee3425;
+    position: relative;
+    top: -33px;
+    left: 18px;
 }

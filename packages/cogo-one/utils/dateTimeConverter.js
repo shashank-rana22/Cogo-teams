@@ -5,7 +5,10 @@ const dateTimeConverter = (t, updated_at) => {
 	let renderTime;
 	let rendershortform;
 
-	if (elasptime < 60000) {
+	if (elasptime < 20000) {
+		renderTime = 'now';
+		rendershortform = 'now';
+	} else if (elasptime < 60000) {
 		renderTime = `${Math.floor(elasptime / 1000)} s ago`;
 		rendershortform = 'now';
 	} else if (elasptime < 3600000) {
