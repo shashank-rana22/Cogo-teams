@@ -4,17 +4,22 @@ import React from 'react';
 
 import { INTENT_LEADERBOARD, PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
 
-import Charts from './chart';
+import Charts from './LineChart';
 import styles from './styles.module.css';
 
 function Stats() {
+
 	return (
 		<div className={styles.main_container}>
+		{/* Header --------------------------------------------------------------------------- */}
+
 			<div className={styles.cogoverse_header}>
 				Welcome to the
 				{' '}
 				<span>CogoVerse!</span>
 			</div>
+
+		{/* Primary Stats --------------------------------------------------------------------------- */}
 
 			<div className={styles.primary_stats}>
 
@@ -92,12 +97,19 @@ function Stats() {
 
 			</div>
 
-			<div className={styles.line_chart}>
+		{/* Line Chart --------------------------------------------------------------------------- */}
+
+			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>
 					<span className={styles.chart_heading_content}>Responsive Time Analysis</span>
 				</div>
+				<div className={styles.the_chart}>
 				<Charts />
+				</div>
+				
 			</div>
+
+		{/* Leaderboard --------------------------------------------------------------------------- */}
 
 			<div className={styles.user_leaderboard}>
 
@@ -113,7 +125,7 @@ function Stats() {
 									<div className={styles.leaderboard_title}>
 										{title}
 									</div>
-									<div className={styles.leaderboard_description}>
+									<div >
 										<span className={styles.leaderboard_description_number}>{value}</span>
 										{' '}
 										{description}

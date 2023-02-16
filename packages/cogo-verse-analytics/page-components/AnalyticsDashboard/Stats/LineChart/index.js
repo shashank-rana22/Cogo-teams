@@ -1,18 +1,29 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { ResponsiveLine } from '@nivo/line';
+import { format } from '@cogoport/utils';
 
-import { CHART_DATA } from '../../../configurations/chart-data';
+import { CHART_DATA } from '../../../../configurations/chart-data';
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+import styles from './styles.module.css';
+
+
 function Charts() {
+	const colors=['#5B4A99', '#BDBDBD'];
+
+	const formattedDate = (date) => format(date, 'dd MMM');
+
+	const formattedTime = (time) => {
+		if(time>=60){
+			return `${Number(time/60).toFixed(1)} hrs`
+		}
+		return `${time} min`
+	}
+	
+
 	return (
 		<ResponsiveLine
 			data={CHART_DATA}
-			margin={{ top: 10, right: 20, bottom: 50, left: 65 }}
+			margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
 			xScale={{ type: 'point' }}
 			yScale={{
         	type    : 'linear',
@@ -25,23 +36,40 @@ function Charts() {
 			curve="natural"
 			axisTop={null}
 			axisRight={null}
+			colors={colors}
 			axisBottom={{
         	orient         : 'bottom',
         	tickSize       : 0,
-        	tickPadding    : 20,
+        	tickPadding    : 25,
+			tickValues	   : 7,
         	tickRotation   : 0,
         	legend         : '',
-        	legendOffset   : 36,
+        	legendOffset   : 45,
         	legendPosition : 'middle',
+			format: (v) => formattedDate(v),
 			}}
 			axisLeft={{
         	orient         : 'left',
         	tickSize       : 0,
-        	tickPadding    : 20,
+			tickValues	   : 5,
+        	tickPadding    : 15,
         	tickRotation   : 0,
         	legend         : '',
         	legendOffset   : -40,
         	legendPosition : 'middle',
+			format: (v) => formattedTime(v),
+			}}
+			tooltip={({ point = {} }) => {
+
+				const{borderColor,data}=point;
+			
+				return(<div className={styles.tool_tip}>
+					<span style={{background:borderColor}} />
+				<strong>
+					{formattedDate(data.x)} : {formattedTime(data.y)}
+				</strong>
+				</div>);
+					
 			}}
 			enableGridX={false}
 			enablePoints={false}

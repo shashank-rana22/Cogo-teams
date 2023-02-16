@@ -2,10 +2,9 @@
 
     width:100%;
     height:95vh;
-
     display:flex;
     flex-direction:row;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 
 }
 .stats_view_container{

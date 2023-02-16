@@ -27,7 +27,7 @@
     span{
         font-weight: 600;
     }
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 /* ----------------------------------------------------- */
@@ -167,11 +167,16 @@
 
 /* Line Chart------------------------------------------- */
 
-.line_chart {
-	height: 240px;
+.line_chart_container {
+	height: 230px;
 	background: #ffffff;
-	padding: 10px;
+	padding: 8px ;
 	border-radius: 8px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 .chart_heading {
 	padding: 10px 0px 0px 15px;
@@ -180,6 +185,9 @@
 	color: #221F20;
     font-weight: 600;
     font-size: 15px;
+}
+.the_chart{
+    height: 170px;
 }
 
 
@@ -196,6 +204,7 @@
 	display: flex;
 	justify-content:space-between;
 	width: 100%;
+    height: 210px;
 
 }
 
@@ -203,7 +212,7 @@
 .leaderboard_stats {
 	flex-basis: 70%;
     background: #ffffff;
-    padding: 10px;
+    padding: 5px 10px ;
     border-radius: 8px;
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
@@ -216,7 +225,7 @@
 	margin-bottom: 10px;
 }
 .leaderboard_content {
-	height: 160px;
+	height: 145px;
 	overflow-y: scroll;
 	padding: 0 25px 0 15px;
 	display: flex;
@@ -233,14 +242,14 @@
 	width:100%;
 	display: flex;
 	justify-content: space-between;
-	border-bottom: solid 0.1px;
-	padding: 15px 0px;
-	color: #BDBDBD;
+	border-bottom: solid 0.1px #e0e0e0;
+	padding: 12px 0px;
+	color: #828282;
 	font-weight: 400;
 	font-size: 16px;
 	&:hover {
 		color: #221F20;
-		border-bottom-color: #BDBDBD;
+
 	}
 }
 .leaderboard_description_number {
@@ -296,3 +305,4 @@
 
 
 /* ----------------------------------------------------- */
+
