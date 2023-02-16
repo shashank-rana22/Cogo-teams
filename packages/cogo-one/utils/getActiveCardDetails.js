@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-const getActiveCardDetails = (data) => {
+const getActiveCardDetails = (data = {}) => {
 	const {
 		channel_type = '',
 		user_details = {},

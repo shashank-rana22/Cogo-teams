@@ -23,6 +23,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		loading,
 		data = {},
 		fetchListLogsApi = () => {},
+		handleScroll = () => {},
 	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard });
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -97,11 +98,13 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 				</div>
 			</div>
 
-			{loading ? <LoadingState activityTab={activityTab} /> : (
-				<>
-					{ACTIVITY_COMPONENT_CALLING[activityTab]}
-				</>
-			)}
+			<div
+				className={styles.list_container}
+				onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+			>
+				{ACTIVITY_COMPONENT_CALLING[activityTab]}
+			</div>
+			{loading && <LoadingState activityTab={activityTab} />}
 
 		</div>
 	);
