@@ -1,4 +1,4 @@
-import { Datepicker, Button } from '@cogoport/components';
+import { Textarea, Datepicker, Button } from '@cogoport/components';
 import { IcMDownload, IcMRadioLoader, IcMRefresh } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 
 function MatchModal({
 	value,
+	setShow,
 	setValue,
 	checkedData,
 	incidentMappingId,
@@ -30,6 +31,9 @@ function MatchModal({
 		setEditeAble,
 		setAllocationValue,
 		changeData,
+		submitMatch,
+		loadingData,
+		setReject,
 		setChangeData,
 		checkMatching,
 		checkLoading,
@@ -51,6 +55,19 @@ function MatchModal({
 	const checkReact = () => {
 		setChangeData(checkedData);
 		setCheckResetButton(!checkResetButton);
+	};
+
+	const onApprove = (item:string) => {
+		const { date } = value;
+		const setDate = format(
+			date || settlementDate,
+			'yyyy-mm-dd 00:00:00',
+			{},
+			false,
+		);
+		return item === 'settle'
+			? submitMatch(changeData, setShow, setDate, value)
+			: setReject(value, setShow);
 	};
 
 	return (
@@ -128,6 +145,50 @@ function MatchModal({
 					isEditable={isEditable}
 				/>
 			</div>
+
+			{isEditable && (
+				<>
+					<div className={styles.remarks}>Remarks*</div>
+					<div className={styles.textarea}>
+						<Textarea
+							name="remark"
+							size="md"
+							placeholder="Enter Remark Here..."
+							onChange={(v: string) => setValue((prev) => ({ ...prev, remarks: v }))}
+							style={{ width: '700', height: '100px', marginBottom: '12px' }}
+						/>
+					</div>
+				</>
+			) }
+
+			{isEditable && (
+
+				<div className={styles.button}>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: '8px' }}
+						disabled={!(value?.remarks.length) || loadingData}
+						onClick={() => {
+							onApprove('reject');
+						}}
+					>
+						Reject
+					</Button>
+
+					<Button
+						size="md"
+						style={{ marginRight: '8px' }}
+						disabled={!(value?.remarks.length) || loadingData}
+						onClick={() => {
+							onApprove('settle');
+						}}
+					>
+						Settle
+					</Button>
+				</div>
+
+			)}
 
 		</div>
 	);

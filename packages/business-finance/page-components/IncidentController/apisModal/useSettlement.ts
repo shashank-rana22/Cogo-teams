@@ -5,12 +5,10 @@ import { useEffect, useState } from 'react';
 
 const useSettlement = ({
 	checkedData,
-	// refetch = () => {},
 	type = '',
 	id,
 	incidentMappingId,
 	refetch,
-	setCheckedRows = () => {},
 	checkResetButton,
 	supportingDocUrl,
 }) => {
@@ -79,6 +77,8 @@ const useSettlement = ({
 	const api = type === 'history' ? editMatchTrigger : createMatchTrigger;
 
 	const loading = createMatchLoading || editMatchLoading;
+
+	const loadingData = editCheckLoading || rejectLoading;
 
 	const [changeData, setChangeData] = useState(checkedData || []);
 
@@ -220,7 +220,7 @@ const useSettlement = ({
 			return newList;
 		});
 	};
-	const submitMatch = async (value, setShow, setCheckMatc, newDate, item) => {
+	const submitMatch = async (value, setShow, newDate, item) => {
 		const { remarks = undefined } = item;
 
 		try {
@@ -241,13 +241,10 @@ const useSettlement = ({
 			if (response?.hasError) return;
 			setShow(false);
 			refetch();
-			setCheckedRows({});
-			setCheckMatc(false);
 
 			Toast.success('Settle successfully');
 		} catch (error) {
 			Toast.error(error?.data?.message);
-			setCheckMatc(false);
 		}
 	};
 	const setReject = async (item, setShow) => {
@@ -305,7 +302,6 @@ const useSettlement = ({
 			Toast.success('Dry Run Successful');
 		} catch (error) {
 			Toast.error(error?.data?.message);
-			// showErrorsInToast(error?.error);
 		}
 	};
 	return {
@@ -320,6 +316,7 @@ const useSettlement = ({
 		setEditedNostro,
 		checkMatching,
 		checkLoading,
+		loadingData,
 		loading,
 		approveCheck,
 		nostroButton,

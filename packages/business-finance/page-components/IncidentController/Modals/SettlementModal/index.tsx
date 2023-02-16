@@ -1,4 +1,4 @@
-import { Textarea, Modal, Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import ApproveAndReject from '../../common/ApproveAndRejectData';
@@ -55,6 +55,7 @@ function SettlementModal({ settlementData, id, refetch, row, isEditable = true }
 							{!isEditable && <ApproveAndReject row={row} />}
 							<MatchModal
 								value={value}
+								setShow={setShow}
 								setValue={setValue}
 								checkedData={list}
 								incidentMappingId={incidentMappingId}
@@ -64,51 +65,9 @@ function SettlementModal({ settlementData, id, refetch, row, isEditable = true }
 								refetch={refetch}
 								isEditable={isEditable}
 							/>
-							{isEditable && (
-								<>
-									<div className={styles.remarks}>Remarks*</div>
-									<div className={styles.textarea}>
-										<Textarea
-											name="remark"
-											size="md"
-											placeholder="Enter Remark Here..."
-											onChange={(v: string) => setValue((prev) => ({ ...prev, text: v }))}
-											style={{ width: '700', height: '100px', marginBottom: '12px' }}
-										/>
-									</div>
-								</>
-							) }
 
 						</Modal.Body>
 
-						{isEditable && (
-							<Modal.Footer>
-								<div className={styles.button}>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ marginRight: '8px' }}
-										disabled={!(value?.remarks.length)}
-										onClick={() => {
-											// onReject();
-										}}
-									>
-										Reject
-									</Button>
-
-									<Button
-										size="md"
-										style={{ marginRight: '8px' }}
-										disabled={!(value?.remarks.length)}
-										onClick={() => {
-											// onApprove('settle');
-										}}
-									>
-										Settle
-									</Button>
-								</div>
-							</Modal.Footer>
-						)}
 					</Modal>
 				)
 			}
