@@ -42,6 +42,8 @@ function BankDetails({
 		radioMethod     : methodOfVerification || '',
 	});
 
+	console.log({ bankData, value }, 'djfhbdjl');
+
 	const { useOnActionBank:OnAction, loading } = useGetBankData({
 		bankData,
 		setShowBankModal,
@@ -54,17 +56,15 @@ function BankDetails({
 		{
 			label : 'Approve',
 			value : 'true',
-			name  : 'approve',
 		},
 		{
 			label : 'Reject',
 			value : 'false',
-			name  : 'reject',
 		}];
 
 	const optionsManual = [
-		{ label: 'Penny Testing', value: 'PENNY', name: 'PENNY' },
-		{ label: 'Manual Verification', value: 'MANUAL', name: 'MANUAL' },
+		{ label: 'Penny Testing', value: 'PENNY' },
+		{ label: 'Manual Verification', value: 'MANUAL' },
 	];
 
 	const onApprove = () => {
