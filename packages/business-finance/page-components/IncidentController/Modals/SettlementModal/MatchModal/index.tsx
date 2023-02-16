@@ -32,7 +32,6 @@ function MatchModal({
 		setAllocationValue,
 		changeData,
 		submitMatch,
-		loadingData,
 		setReject,
 		setChangeData,
 		checkMatching,
@@ -168,7 +167,7 @@ function MatchModal({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '8px' }}
-						disabled={!(value?.remarks.length) || loadingData}
+						disabled={!(value?.remarks.length) || loading}
 						onClick={() => {
 							onApprove('reject');
 						}}
@@ -179,7 +178,7 @@ function MatchModal({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={!(value?.remarks.length) || loadingData}
+						disabled={!(value?.remarks.length) || loading}
 						onClick={() => {
 							onApprove('settle');
 						}}
