@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import UserAvatar from '../../../common/UserAvatar';
+import dateTimeConverter from '../../../utils/dateTimeConverter';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
 
@@ -107,9 +108,14 @@ function MessageList({
 										</div>
 
 										<div className={styles.user_activity}>
-											<div className={styles.pills_card}>Small</div>
+											<div className={styles.tags_conatiner}>
+												{/* <div className={styles.pills_card}>Small</div> */}
+											</div>
 											<div className={styles.activity_duration}>
-												{format(lastActive, 'hh:mm a')}
+												{dateTimeConverter(
+													Date.now() - Number(lastActive),
+													Number(lastActive),
+												)?.renderTime}
 											</div>
 										</div>
 

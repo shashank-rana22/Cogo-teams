@@ -4,6 +4,7 @@ import {
 	orderBy,
 	limit,
 	startAfter,
+	updateDoc,
 } from 'firebase/firestore';
 import { useState } from 'react';
 

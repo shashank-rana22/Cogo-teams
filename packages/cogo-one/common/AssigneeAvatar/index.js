@@ -1,12 +1,11 @@
-import { cl } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 
 import { ASSIGNE_COLORS } from '../../constants';
 
 import styles from './styles.module.css';
 
-function AssigneeAvatar({ data = {} }) {
-	const { name = '', email = '', isActive = '' } = data || {};
-	const { background = '', shadowColor = '', color = '' } = ASSIGNE_COLORS[isActive ? 'active' : 'disabled'];
+function AssigneeAvatar({ name = '', type = '' }) {
+	const { background = '', shadowColor = '', color = '' } = ASSIGNE_COLORS[type] || {};
 	const getInitials = () => {
 		if (name) {
 			const fullName = name.split(' ');
@@ -19,14 +18,14 @@ function AssigneeAvatar({ data = {} }) {
 		return '';
 	};
 	return (
-		<div
-			className={cl`${styles.relative_div} ${isActive ? styles.margin_right : ''}`}
-		>
-			<div className={styles.container} style={{ background: shadowColor }}>
-				<div className={styles.name_container} style={{ color, background }}>{getInitials()}</div>
+		<Tooltip content={name} placement="bottom">
+			<div className={styles.relative_div}>
+				<div className={styles.container} style={{ background: shadowColor }}>
+					<div className={styles.name_container} style={{ color, background }}>{getInitials()}</div>
+				</div>
+				{type === 'disabled' && <div className={styles.arrow_right} />}
 			</div>
-			{!isActive && <div className={styles.arrow_right} />}
-		</div>
+		</Tooltip>
 	);
 }
 export default AssigneeAvatar;

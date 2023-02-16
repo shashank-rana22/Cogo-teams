@@ -22,7 +22,6 @@ function CogoOne() {
 	const [filterVisible, setFilterVisible] = useState(false);
 
 	const {
-		loading,
 		data,
 	} = useAgentWorkPrefernce();
 	console.log('data', data);
@@ -77,26 +76,28 @@ function CogoOne() {
 				setAppliedFilters={setAppliedFilters}
 			/>
 
-			{(!isEmpty(activeMessageCard) || !isEmpty(activeVoiceCard)) ? (
-				<>
-					<Conversations
-						activeTab={activeTab}
-						activeMessageCard={activeMessageCard}
-						firestore={firestore}
-						activeVoiceCard={activeVoiceCard}
-					/>
+			<div className={styles.chat_details_continer}>
+				{(!isEmpty(activeMessageCard) || !isEmpty(activeVoiceCard)) ? (
+					<>
+						<Conversations
+							activeTab={activeTab}
+							activeMessageCard={activeMessageCard}
+							firestore={firestore}
+							activeVoiceCard={activeVoiceCard}
+						/>
 
-					<ProfileDetails
-						activeMessageCard={activeMessageCard}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
+						<ProfileDetails
+							activeMessageCard={activeMessageCard}
+							activeTab={activeTab}
+							activeVoiceCard={activeVoiceCard}
+						/>
+					</>
+				) : (
+					<EmptyChatPage
+						displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
 					/>
-				</>
-			) : (
-				<EmptyChatPage
-					displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
-				/>
-			)}
+				)}
+			</div>
 		</div>
 	);
 }

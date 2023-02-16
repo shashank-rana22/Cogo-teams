@@ -16,6 +16,7 @@ const useListChats = ({
 	user_role_ids, userId,
 }) => {
 	const [activeMessageCard, setActiveMessageCard] = useState({});
+	console.log('activeMessageCard', activeMessageCard);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({

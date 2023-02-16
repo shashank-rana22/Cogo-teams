@@ -1,47 +1,98 @@
-.flex_space_between{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding-top: 15px;
-
-}
-.container{
-	padding:0 15px 5px 15px;
-	box-shadow: 0px 4px 16px 0px #627FAC33;
-}
-.flex{
-	display: flex;
-	align-items: center;
-}
-.name{
-	font-size: 16px;
-	line-height: 24px;
-	color: #4F4F4F;
-	text-align: left;
-}
-.phone_number{
-	font-size: 12px;
-	color:#828282;
-	text-align: left;
-
+.flex_space_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
 }
 
-.tags{
-	background: #F3FAFA;
-	font-size: 10px;
-	line-height: 15px;
-	color:#221F20;
-	border-radius:6px;
-	margin:0 5px;
-	padding:5px;
+.container {
+    padding: 0 15px 5px 15px;
+    box-shadow: 0px 4px 16px 0px #627fac33;
 }
-.margin{
-	margin:5px;
+
+.flex {
+    display: flex;
+    align-items: center;
+    svg {
+        cursor: pointer;
+    }
 }
-.more_tags{
-	margin:0 5px;
+
+.name {
+    font-size: 16px;
+    line-height: 24px;
+    color: #4f4f4f;
+    text-align: left;
 }
-.styled_button{
-	height:27px !important;
-	
+
+.phone_number {
+    font-size: 12px;
+    color: #828282;
+    text-align: left;
+}
+
+.container {
+    padding: 0 15px 5px 15px;
+    box-shadow: 0px 4px 16px 0px #627fac33;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-size: 16px;
+    line-height: 24px;
+    color: #4f4f4f;
+    text-align: left;
+}
+
+.phone_number {
+    font-size: 12px;
+    color: #828282;
+    text-align: left;
+}
+
+.tags {
+    background: #f3fafa;
+    font-size: 10px;
+    line-height: 15px;
+    color: #221f20;
+    border-radius: 6px;
+    margin: 0 5px;
+    padding: 5px;
+}
+
+.margin {
+    margin: 5px;
+}
+
+.more_tags {
+    margin: 0 5px;
+}
+
+.styled_button {
+    height: 27px !important;
+}
+
+.styled_button {
+    height: 27px !important;
+}
+
+.active_agent {
+    position: relative;
+    margin-right: 10px;
+    z-index: 3;
+}
+
+.spectator_div {
+    position: absolute;
+    margin-top: -30px;
+    left: 20px;
+    z-index: -1;
+}
+
+.margin_right {
+    margin-right: 30px;
 }

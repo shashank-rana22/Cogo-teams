@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function ConversationContainer() {
 	return (
-		<>
+		<div className={styles.contacts_container}>
 			{ConservationControls.map((item, index) => {
 				const { icon, name, organization, duration } = item;
 				const itemKey = `${snakeCase(name)}_${index}`;
@@ -23,7 +23,7 @@ function ConversationContainer() {
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 }
 export default ConversationContainer;
