@@ -1,4 +1,4 @@
-import { IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete, IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -11,14 +11,23 @@ function MappedUser({
 	refetch = () => {},
 	// profileData,
 	// userMappings,
-	// sessionId,
-	// setSessionId = () => {},
-	// showActions,
-	// setShowActions = () => {},
+	sessionId,
+	setSessionId = () => {},
+	showActions,
+	setShowActions = () => {},
 	// timeLeft,
 	// checkIfSessionExpiring,
 }) {
 	const profile_name = user?.user_data?.name?.split(' ');
+
+	const handleShow = (val) => {
+		if (val?.user_session_id === sessionId) {
+			setShowActions(!showActions);
+		} else {
+			setShowActions(true);
+			setSessionId(val?.user_session_id);
+		}
+	};
 
 	const { removeProfile = () => {} } = useGetAllActions({
 		user,
@@ -26,8 +35,21 @@ function MappedUser({
 	});
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} onClick={() => handleShow(user)} role="presentation">
 			<div className={styles.active_profile}>
+				{
+					sessionId === user?.user_session_id
+						? (
+							<div>
+								<IcMFtick
+									fill="#ABCD62"
+									height="30px"
+									width="30px"
+									style={{ marginTop: '4px' }}
+								/>
+							</div>
+						) : <div className={styles.circle} />
+				}
 				<div className={styles.profile_container}>
 					<div className={styles.profile_pic}>
 						{user?.user_data?.picture ? (
@@ -48,14 +70,14 @@ function MappedUser({
 						<div className={styles.profile_email}>{user?.user_data?.email}</div>
 					</div>
 				</div>
-				<div
-					className={styles.icon_container}
-					id={user?.user_session_id}
-					onClick={removeProfile}
-					role="presentation"
-				>
-					<IcMDelete fontWeight={700} />
-				</div>
+			</div>
+			<div
+				className={styles.icon_container}
+				id={user?.user_session_id}
+				onClick={removeProfile}
+				role="presentation"
+			>
+				<IcMDelete fontWeight={700} />
 			</div>
 		</div>
 	);

@@ -1,13 +1,10 @@
 .container {
-	width: 280px;
+	width: fit-content;
 	padding-top: 5px;
 	cursor: pointer;
-
-	:hover {
-		background: #f6f5fe;
-		transition: 0.5s;
-		border-radius: 4px;
-	}
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .active_profile {
@@ -15,15 +12,15 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 5px;
+	margin: 0px 10px 5px 5px;
 }
 
 .profile_pic {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #303b67;
-	color: #ffffff;
+	background: #FCDC00;
+	color: #333333;
 	border-radius: 4px;
 	width: 40px;
 	height: 40px;
@@ -68,7 +65,8 @@
 }
 
 .icon_container {
-	margin-right: 5px;
+	margin-right: 10px;
+	padding: 14px 5px;
 }
 
 .profile_container {
@@ -82,3 +80,11 @@
 	margin: 5px 0px 0px 0px;
 }
 
+.circle {
+	height: 20px;
+	width: 20px;
+	border: 1px solid #333333;
+	border-radius: 100%;
+	background: #ffffff;
+	margin: 0px 5px;
+}

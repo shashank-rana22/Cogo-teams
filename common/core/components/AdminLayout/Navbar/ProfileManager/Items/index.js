@@ -7,8 +7,9 @@ import styles from './styles.module.css';
 
 function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 	const [showSubNav, setShowSubNav] = useState(false);
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile?.user || {},
+	const { user_data, userSessionMappings } = useSelector(({ profile }) => ({
+		user_data           : profile?.user || {},
+		userSessionMappings : profile?.user_session_mappings || [],
 	}));
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,33 +53,41 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 		<>
 			<div className={styles.container}>
 				{singleNav}
-				{item.map((singleOption) => (
-					<div
-						className={styles.accordion}
-						aria-expanded={showSubNav}
-						onClick={() => {
-							if (singleOption?.fun) {
-								singleOption.fun();
-							}
-							if (singleOption.href) {
-							// eslint-disable-next-line no-undef
-								window.open(singleOption.href, '_blank');
-							}
-							if (singleOption?.name === 'switch_account') {
-								handlePopover();
-							}
-						}}
-						key={singleOption.title}
-						aria-hidden
-					>
-						<div className={styles.active_item}>
-							{singleOption.icon()}
-							<span>
-								{singleOption.title}
-							</span>
-						</div>
-					</div>
-				))}
+				{
+					(item || []).map((singleOption) => {
+						if (singleOption.name === 'switch_account' && userSessionMappings?.length <= 1) {
+							return null;
+						}
+
+						return (
+							<div
+								className={styles.accordion}
+								aria-expanded={showSubNav}
+								onClick={() => {
+									if (singleOption?.fun) {
+										singleOption.fun();
+									}
+									if (singleOption.href) {
+										// eslint-disable-next-line no-undef
+										window.open(singleOption.href, '_blank');
+									}
+									if (singleOption?.name === 'switch_account') {
+										handlePopover();
+									}
+								}}
+								key={singleOption.title}
+								aria-hidden
+							>
+								<div className={styles.active_item}>
+									{singleOption.icon()}
+									<span>
+										{singleOption.title}
+									</span>
+								</div>
+							</div>
+						);
+					})
+				}
 			</div>
 
 			{showSubNav && (

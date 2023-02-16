@@ -1,7 +1,11 @@
 .container {
     position: absolute;
     top: 23%;
-    left: 102%;
+    left: 104%;
     background: #ffffff;
     z-index: -2;
+}
+
+.button_container {
+    margin: 10px;   
 }

@@ -22,7 +22,7 @@ const useGetUserSessionMappings = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	}, { manual: false });
+	}, { manual: true });
 
 	const listApi = async () => {
 		try {

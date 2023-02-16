@@ -12,8 +12,8 @@ const handleHelpNewTab = () => {
 	window.open('https://www.cogoport.com/contact-us', '_blank');
 };
 
-const handleSwitchProfile = (user_data) => {
-	setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_data?.user_session_id, 2000, {});
+const handleSwitchProfile = (user_session_id) => {
+	setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_session_id, 2000, {});
 	window.location.href = '/';
 	toast.success('Switching Profile');
 };
