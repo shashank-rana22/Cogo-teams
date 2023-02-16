@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 const useGetVoiceCallList = ({ activeTab }) => {
 	const checkActiveTab = activeTab === 'voice';
+
 	const [listData, setListData] = useState({
 		list  : [],
 		total : 0,

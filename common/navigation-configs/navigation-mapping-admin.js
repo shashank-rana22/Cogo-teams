@@ -1823,9 +1823,17 @@ const navigationMappingAdmin = {
 		module_type   : 'crm',
 	},
 	cogo_one: {
-		key           : 'cogo_one',
-		title         : 'Cogo One',
-		href          : '/v2/cogo-one',
+		key   : 'cogo_one',
+		title : 'Cogo One',
+		href  : '/v2/cogo-one',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				alt="cogo-one-logo"
+				width={18}
+				height={18}
+			/>
+		),
 		as            : '/v2/cogo-one',
 		type          : 'link',
 		main_apis     : [],

@@ -9,6 +9,12 @@
 .title {
     font-weight: 600;
     font-size: 20px;
+	margin-left: 5px;
+}
+
+.logo{
+	display: flex;
+	align-items: center;
 }
 
 .filters_container {
@@ -22,14 +28,14 @@
             right: 51px;
         }
         .ui_toggle_container.ui_toggle_inside .ui_inner::before {
-            content: "Active";
+            content: "Online";
             display: flex;
             align-items: center;
             font-size: 12px;
             background-color: #ee3425;
         }
         .ui_toggle_container.ui_toggle_inside .ui_inner::after {
-            content: "Inactive";
+            content: "Offline";
             display: flex;
             align-items: center;
             float: right;

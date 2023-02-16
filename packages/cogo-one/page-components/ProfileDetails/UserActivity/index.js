@@ -24,6 +24,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		data = {},
 		fetchListLogsApi = () => {},
 	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard });
+
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 	const handleFilters = () => {
 		fetchListLogsApi(filters);
