@@ -16,6 +16,7 @@ const useListChats = ({
 	user_role_ids, userId,
 }) => {
 	const [activeMessageCard, setActiveMessageCard] = useState({});
+
 	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({
@@ -31,7 +32,6 @@ const useListChats = ({
 		const resultList = [];
 		list?.forEach((item) => {
 			const { created_at, updated_at, sent_updated_at, ...rest } = item.data() || {};
-
 			const userData = {
 				id              : item?.id,
 				created_at      : item.data().created_at || Date.now(),
@@ -61,16 +61,18 @@ const useListChats = ({
 		) {
 			omniChannelQuery = query(
 				omniChannelCollection,
+				orderBy('session_type', 'desc'),
 				orderBy('updated_at', 'desc'),
-				// where('session_type', '!=', 'bot'),
+				// where('session_type', '==', 'admin'),
 
 			);
 		} else {
 			omniChannelQuery = query(
 				omniChannelCollection,
+				orderBy('session_type', 'desc'),
 				orderBy('updated_at', 'desc'),
 				where('agent_id', '==', userId),
-				// where('session_type', '!=', 'bot'),
+				where('session_type', '==', 'admin'),
 
 			);
 		}
