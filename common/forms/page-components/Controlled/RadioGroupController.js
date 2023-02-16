@@ -1,5 +1,4 @@
 import { RadioGroup } from '@cogoport/components';
-import React from 'react';
 import { Controller } from 'react-hook-form';
 
 function RadioGroupController(props) {
