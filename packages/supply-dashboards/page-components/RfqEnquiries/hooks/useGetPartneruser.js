@@ -19,7 +19,7 @@ const useGetPartnerUser = ({ user_id }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 

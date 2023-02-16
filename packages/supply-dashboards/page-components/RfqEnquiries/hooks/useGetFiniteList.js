@@ -34,8 +34,8 @@ const useGetFiniteList = (hook) => {
 				}));
 				setLoading(false);
 			})
-			.catch((e) => {
-				console.log(e);
+			.catch(() => {
+				// console.log(e);
 				setList(() => ({
 					data         : [],
 					total        : 0,
