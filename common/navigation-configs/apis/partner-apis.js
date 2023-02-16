@@ -9767,17 +9767,5 @@ const partner = {
 			service_name : 'exchange_rate',
 		},
 	],
-	vendor_rm: [
-		{
-			api          : 'get_bank_details',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_vendor_bank_detail',
-			access_type  : 'private',
-			service_name : 'vendor',
-		},
-	],
 };
 export default partner;

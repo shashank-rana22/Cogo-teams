@@ -1,7 +1,7 @@
 import FormComponent from './FormComponent';
 import Header from './Header';
 
-function PaymentDetails(activeStepper = {}, setActiveStepper = () => {}) {
+function PaymentDetails({ activeStepper = {}, setActiveStepper = () => {} }) {
 	return (
 		<div>
 			<Header />
