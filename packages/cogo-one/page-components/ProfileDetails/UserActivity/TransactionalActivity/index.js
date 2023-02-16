@@ -4,7 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TransactionalActivity() {
+function TransactionalActivity({ transactional = {} }) {
+	console.log('transactional', transactional);
 	return (
 		<div className={styles.container}>
 			{[...Array(6)].map(() => (

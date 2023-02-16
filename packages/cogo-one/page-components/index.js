@@ -4,6 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../configurations/firebase-config';
+import useAgentWorkPrefernce from '../hooks/useAgentWorkPrefernce';
 import useListChats from '../hooks/useListChats';
 
 import Conversations from './Conversations';
@@ -18,6 +19,11 @@ function CogoOne() {
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 
+	const {
+		loading,
+		data,
+	} = useAgentWorkPrefernce();
+	console.log('data', data);
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);

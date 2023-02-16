@@ -1,5 +1,4 @@
 import { Avatar } from '@cogoport/components';
-import { IcMPortArrow } from '@cogoport/icons-react';
 import React from 'react';
 
 import { SOURCE_ICON_MAPPING } from '../../../../constants';
@@ -7,7 +6,7 @@ import { SOURCE_ICON_MAPPING } from '../../../../constants';
 import styles from './styles.module.css';
 
 const type = 'email';
-function CommunicationActivity() {
+function CommunicationActivity({ communication }) {
 	return (
 		<div className={styles.container}>
 			{[...Array(6)].map(() => (
