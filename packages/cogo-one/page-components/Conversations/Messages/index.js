@@ -1,5 +1,5 @@
 import { Modal } from '@cogoport/components';
-import { collection } from 'firebase/firestore';
+import { collection, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../../../configurations/firebase-config';
@@ -12,28 +12,37 @@ import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
 function Messages({ activeMessageCard = {}, firestore }) {
+	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [messages, setMessages] = useState({});
 
-	const { id = '', channel_type = '' } = activeMessageCard || {};
+	const {
+		id = '', channel_type = '',
+		...rest
+	} = activeMessageCard || {};
 
 	let activeChatCollection;
-
+	let activeChatDataCollection;
 	if (channel_type) {
 		activeChatCollection = collection(
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
 		);
+		activeChatDataCollection = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
 	}
 
-	const { sendChatMessage } = useSendChat({
+	const { sendChatMessage, updatetags } = useSendChat({
 		firestore,
 		channel_type,
 		id,
 		draftMessages,
 		setDraftMessages,
 		activeChatCollection,
+		activeChatDataCollection,
 	});
 
 	const {
@@ -61,6 +70,10 @@ function Messages({ activeMessageCard = {}, firestore }) {
 				<Header
 					setOpenModal={setOpenModal}
 					activeMessageCard={activeMessageCard}
+					restData={rest}
+					updatetags={updatetags}
+					setheaderTags={setheaderTags}
+					headertags={headertags}
 				/>
 				<div className={styles.message_container}>
 					<MessageConversations

@@ -17,6 +17,7 @@ const useSendChat = ({
 	firestore,
 	channel_type,
 	id,
+	activeChatDataCollection,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
@@ -61,8 +62,13 @@ const useSendChat = ({
 			// setFlag(true);
 		}
 	};
-
-	return { sendChatMessage };
+	const updatetags = async (val) => {
+		await updateDoc(activeChatDataCollection, {
+			chat_tags  : val,
+			updated_at : Date.now(),
+		});
+	};
+	return { sendChatMessage, updatetags };
 };
 
 export default useSendChat;

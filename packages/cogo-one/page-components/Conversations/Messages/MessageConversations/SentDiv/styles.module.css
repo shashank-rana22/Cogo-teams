@@ -30,6 +30,7 @@
     line-height: 21px;
     color: #615f5f;
     margin-top: 5px;
+	width: fit-content;
     background-color: #acdadf;
     border-radius: 6px 0 6px 6px;
     word-break: break-word;
@@ -37,6 +38,7 @@
 
 .admin_message_container {
     background-color: #fffce6;
+	
 }
 
 .styled_img {

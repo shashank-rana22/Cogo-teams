@@ -22,8 +22,9 @@ export const SOURCE_ICON_MAPPING = {
 export const TAGS_COLORS = ['#FEF3E9', '#F3FAFA'];
 
 export const ASSIGNE_COLORS = {
-	disabled : { background: '#BDBDBD', shadowColor: '#E0E0E0', color: '#ffffff' },
-	active   : { background: '#C4DC91', shadowColor: '#DDEBC0', color: '#221F20' },
+	disabled  : { background: '#BDBDBD', shadowColor: '#E0E0E0', color: '#ffffff' },
+	active    : { background: '#C4DC91', shadowColor: '#DDEBC0', color: '#221F20' },
+	spectator : { background: '#F9AE64', shadowColor: '#FBD1A6', color: '#221F20' },
 };
 
 export const VOICE_ICON_MAPPING = {

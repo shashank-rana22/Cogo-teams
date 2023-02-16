@@ -21,7 +21,7 @@ const useGetUser = ({ activeMessageCard }) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			console.log('error', error);
 		}
 	};
 	useEffect(() => {

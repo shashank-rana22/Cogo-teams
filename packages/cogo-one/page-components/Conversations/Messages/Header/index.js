@@ -1,72 +1,69 @@
-import { Button, Tooltip, cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import AssigneeAvatar from '../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../common/UserAvatar';
-import { TAGS_COLORS } from '../../../../constants';
 import hideDetails from '../../../utils/hideDetails';
 
+import { showContent, TagsPopOver } from './HeaderFuncs';
 import styles from './styles.module.css';
 
 function Header({
 	setOpenModal = () => {},
 	activeMessageCard = {},
+	restData = {},
+	updatetags = () => {},
+	setheaderTags = () => {},
+	headertags = '',
 }) {
+	const {
+		chat_tags = [],
+		spectator_data = [],
+		previous_agent_data = [],
+		agent_name = '',
+	} = restData || {};
 	const { name = 'Unknown User', mobile_number = '+919876543210' } = activeMessageCard;
-	const tagslist = ['!! Priority', 'Pre Shipment', 'Pre Shipment'];
-	const assignes = [
-		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: false },
-		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: false },
-		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: true },
-	];
 
-	const showContent = (list = [], showMorePlacement = 'right') => {
-		const MAX_SHOW_LENGTH = 3;
-		const showMoreList = (list || []).length > MAX_SHOW_LENGTH;
-		const lessList = (list || []).slice(0, MAX_SHOW_LENGTH);
-		const moreList = (list || []).slice(MAX_SHOW_LENGTH);
-
-		const toolTipContent = (
-			<div>
-				{(moreList || []).map((item) => (<div className={cl`${styles.tags} ${styles.margin}`}>{item}</div>))}
-			</div>
-		);
-
-		const toolTipComp = (
-			<Tooltip content={toolTipContent} theme="light" placement="bottom">
-				<div className={styles.more_tags}>
-					+
-					{moreList?.length}
-				</div>
-			</Tooltip>
-		);
-
-		return (
-			<div className={styles.flex}>
-				{showMoreList && showMorePlacement !== 'right' && toolTipComp}
-				{(lessList || []).map((item, index) => (
-					<div
-						className={styles.tags}
-						style={{ background: TAGS_COLORS[index] }}
-					>
-						{item}
-					</div>
-				))}
-				{showMoreList && showMorePlacement === 'right' && toolTipComp}
-			</div>
-		);
-	};
+	const [firstSpectator = null] = spectator_data || [];
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
 				<div className={styles.flex}>
-					<IcMPlusInCircle />
-					{showContent(tagslist, 'right')}
+					<TagsPopOver
+						prevtags={chat_tags}
+						headertags={headertags}
+						setheaderTags={setheaderTags}
+						updatetags={updatetags}
+					/>
+					{showContent(chat_tags, 'right')}
 				</div>
 				<div className={styles.flex}>
-					{(assignes || []).map((eachAssigne) => <AssigneeAvatar data={eachAssigne} />)}
+					{!isEmpty(previous_agent_data)
+					&& (previous_agent_data || [])
+						.map(({ name:prevAssignedName = '' }) => (
+							<AssigneeAvatar
+								name={prevAssignedName}
+								type="disabled"
+								key={prevAssignedName}
+							/>
+						))}
+					{agent_name
+					&& (
+						<div className={cl`${styles.active_agent} ${firstSpectator ? styles.margin_right : ''}`}>
+							<AssigneeAvatar name={agent_name} type="active" key={agent_name} />
+							{firstSpectator && (
+								<div className={styles.spectator_div}>
+									<AssigneeAvatar
+										name={firstSpectator?.name}
+										type="spectator"
+										key={firstSpectator?.name}
+									/>
+								</div>
+							)}
+						</div>
+					)}
 					<Button
 						themeType="secondary"
 						size="md"
