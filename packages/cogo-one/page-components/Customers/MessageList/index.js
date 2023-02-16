@@ -12,13 +12,16 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessage,
+	setActiveMessage = () => { },
 	activeMessageCard,
-	setSearchValue,
+	setSearchValue = () => { },
 	filterVisible,
 	searchValue,
-	setFilterVisible,
+	setFilterVisible = () => { },
+	setAppliedFilters = () => { },
+	appliedFilters,
 }) {
+	console.log('appliedFilters', appliedFilters);
 	const loading = false;
 
 	if (isEmpty(messagesList)) {
@@ -50,15 +53,18 @@ function MessageList({
 					<Popover
 						placement="left"
 						render={(
-							<FilterComponents
-								setFilterVisible={setFilterVisible}
-								filterVisible={filterVisible}
-							/>
+							filterVisible && (
+								<FilterComponents
+									setFilterVisible={setFilterVisible}
+									filterVisible={filterVisible}
+									appliedFilters={appliedFilters}
+									setAppliedFilters={setAppliedFilters}
+								/>
+							)
 						)}
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						{/* <div className={styles.filter_dot} /> */}
 						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible((prev) => !prev)} />
 					</Popover>
 
@@ -126,7 +132,7 @@ function MessageList({
 													<>
 														{item.new_message_count}
 													</>
-												) }
+												)}
 
 											</div>
 										)}

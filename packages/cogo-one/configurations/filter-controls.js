@@ -4,6 +4,7 @@ const controls = [
 		name      : 'status',
 		type      : 'radio',
 		className : 'status_field_controller',
+		value     : '',
 		options   : [
 			{
 				label : 'Unread',
@@ -25,6 +26,7 @@ const controls = [
 		type      : 'checkboxgroup',
 		className : 'channels_field_controller',
 		multiple  : true,
+		value     : [],
 		options   : [
 			{ label: 'Whatsapp', value: 'whatsapp' },
 			{ label: 'Facebook', value: 'facebook' },
@@ -35,6 +37,7 @@ const controls = [
 		label     : 'Tags',
 		name      : 'tags',
 		type      : 'radio',
+		value     : '',
 		className : 'tags_field_controller',
 		options   : [
 			{
@@ -55,6 +58,7 @@ const controls = [
 		label     : 'Escalation',
 		name      : 'escalation',
 		type      : 'radio',
+		value     : '',
 		className : 'escalation_field_controller',
 		options   : [
 			{

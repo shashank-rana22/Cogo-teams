@@ -27,7 +27,13 @@ function CogoOne() {
 		userId  : profile?.user?.id,
 	}));
 
-	const { listData = {}, setActiveMessage, activeMessageCard } = useListChats({
+	const {
+		listData = {},
+		setActiveMessage = () => {},
+		activeMessageCard,
+		setAppliedFilters = () => {},
+		appliedFilters,
+	} = useListChats({
 		firestore,
 		userId,
 		user_role_ids: partner?.user_role_ids,
@@ -38,7 +44,7 @@ function CogoOne() {
 	useEffect(() => {
 		setActiveVoiceCard({});
 		setActiveMessage({});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return (
@@ -58,6 +64,8 @@ function CogoOne() {
 				toggleStatus={toggleStatus}
 				messagesList={messagesList}
 				unReadChatsCount={unReadChatsCount}
+				appliedFilters={appliedFilters}
+				setAppliedFilters={setAppliedFilters}
 			/>
 
 			<Conversations

@@ -1,6 +1,7 @@
 .container {
     width: 180px;
-    height: 600px;
+    padding: 15px 0px;
+    max-height: 550px;
     overflow-y: scroll;
 }
 
@@ -12,10 +13,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .title {
     font-size: 16px;
+
 }
 
 .styled_icon {
@@ -23,14 +26,13 @@
 }
 
 .filter_container {
-    margin-top: 18px;
     display: flex;
     flex-direction: column;
 }
 
 .actions {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
