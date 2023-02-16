@@ -9,7 +9,7 @@ import useGetListCommunicationLog from '../../../hooks/useGetListCommunicationLo
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
-function AgentReminder({ activeMessageCard }) {
+function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
 	const [inputValue, setInputValue] = useState({
 		title       : '',
 		description : '',
@@ -20,15 +20,20 @@ function AgentReminder({ activeMessageCard }) {
 		start_time : '',
 		end_time   : '',
 	});
-	console.log('time', time);
 
 	const {
 		listData = {},
 		fetchListLogApi = () => {},
 		listLoading,
-	} = useGetListCommunicationLog({ activeMessageCard });
+	} = useGetListCommunicationLog({ activeMessageCard, activeTab, activeVoiceCard });
 	const { createLogApi, loading } = useCreateCommunicationLog({
-		setInputValue, setDate, setTime, fetchListLogApi,
+		setInputValue,
+		setDate,
+		setTime,
+		fetchListLogApi,
+		activeMessageCard,
+		activeTab,
+		activeVoiceCard,
 	});
 
 	const handleSubmit = async () => {

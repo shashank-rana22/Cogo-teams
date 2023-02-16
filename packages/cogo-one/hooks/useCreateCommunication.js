@@ -2,7 +2,16 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListLogApi = () => {} }) {
+function useCreateCommunicationLog({
+	setInputValue,
+	setDate, setTime,
+	fetchListLogApi = () => {},
+	activeMessageCard,
+	activeTab,
+	activeVoiceCard,
+}) {
+	const { organization_id, agent_id, user_id } = activeVoiceCard || {};
+	const { organization_id: OrgId, agent_id: AgentId, user_id: UserId } = activeMessageCard || {};
 	const { partnerId } = useSelector(({ profile }) => ({
 		partnerId: profile.partner || {},
 	}));
@@ -12,19 +21,37 @@ function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListL
 	}, { manual: true });
 
 	const createLogApi = async ({ inputValue, date, time }) => {
-		const payload = {
-			communication_type       : 'meeting',
-			is_reminder              : 'true',
-			agent_id                 : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-			user_id                  : 'cba50126-efbc-4caa-8383-b616dec9d44b',
-			title                    : inputValue?.title,
-			reminder_date            : date,
-			communication_summary    : inputValue?.description,
-			organization_id          : 'bbde20db-d8b8-4be7-8307-367666847041',
-			partner_id               : partnerId?.id,
-			communication_start_time : time?.start_time,
-			communication_end_time   : time?.end_time,
-		};
+		let payload;
+		if (activeTab === 'voice') {
+			payload = {
+				communication_type       : 'meeting',
+				is_reminder              : 'true',
+				agent_id,
+				user_id,
+				title                    : inputValue?.title,
+				reminder_date            : date,
+				communication_summary    : inputValue?.description,
+				organization_id,
+				partner_id               : partnerId?.id,
+				communication_start_time : time?.start_time,
+				communication_end_time   : time?.end_time,
+			};
+		} else {
+			payload = {
+				communication_type       : 'meeting',
+				is_reminder              : 'true',
+				agent_id                 : AgentId,
+				user_id                  : UserId,
+				title                    : inputValue?.title,
+				reminder_date            : date,
+				communication_summary    : inputValue?.description,
+				organization_id          : OrgId,
+				partner_id               : partnerId?.id,
+				communication_start_time : time?.start_time,
+				communication_end_time   : time?.end_time,
+			};
+		}
+
 		try {
 			await trigger({
 				data: payload,

@@ -1,10 +1,11 @@
-import { Toast } from '@cogoport/components';
+// import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetUser = ({ activeMessageCard }) => {
-	// const { user_id } = activeMessageCard || {};
+const useGetUser = ({ activeMessageCard, activeTab, activeVoiceCard }) => {
+	const { user_id } = activeVoiceCard || {};
+	const { user_id: MessageUserId } = activeMessageCard || {};
 	// const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_user',
@@ -12,15 +13,21 @@ const useGetUser = ({ activeMessageCard }) => {
 	}, { manual: true });
 
 	const fetchUser = async () => {
+		let id;
+		if (activeTab === 'voice') {
+			id = user_id;
+		} else {
+			id = MessageUserId;
+		}
 		await trigger({
 			params: {
-				id: 'cba50126-efbc-4caa-8383-b616dec9d44b',
+				id,
 			},
 		});
 	};
 	useEffect(() => {
 		fetchUser();
-	}, [activeMessageCard]);
+	}, [activeMessageCard, activeVoiceCard]);
 
 	return {
 		loading,

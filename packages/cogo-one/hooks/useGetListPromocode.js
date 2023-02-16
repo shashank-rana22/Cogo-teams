@@ -2,13 +2,21 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const getListPromotions = ({ activeMessageCard }) => {
+const getListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
+	const { organization_id } = activeVoiceCard || {};
+	const { organization_id: MessageOrgId } = activeMessageCard || {};
 	// const [pagination, setPagination] = useState({ page: 1 });
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_promotions',
 		method : 'get',
 	}, { manual: true });
 	const fetchListPromoCode = async () => {
+		let id;
+		if (activeTab === 'voice') {
+			id = organization_id;
+		} else {
+			id = MessageOrgId;
+		}
 		await trigger({
 			params: {
 				promocodes_required : true,
@@ -17,7 +25,7 @@ const getListPromotions = ({ activeMessageCard }) => {
 					status           : 'published',
 					consumption_mode : 'manual',
 					category         : 'marketing',
-					organization_id  : 'bbde20db-d8b8-4be7-8307-367666847041',
+					organization_id  : id,
 				},
 				// page: pagination?.page,
 			},
@@ -26,7 +34,7 @@ const getListPromotions = ({ activeMessageCard }) => {
 
 	useEffect(() => {
 		fetchListPromoCode();
-	}, [activeMessageCard]);
+	}, [activeMessageCard, activeVoiceCard]);
 
 	return {
 		promoData    : data,
