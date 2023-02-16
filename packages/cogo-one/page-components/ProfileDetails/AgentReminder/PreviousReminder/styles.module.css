@@ -1,58 +1,58 @@
 .container {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 20px;
 }
 
 .title {
-	font-weight: 500;
-	font-size: 14px;
-	color: #4F4F4F;
-	margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #4f4f4f;
+    margin-bottom: 12px;
 }
 
 .content {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	background: #FFFFFF;
-	border-radius: 6px;
-	padding: 8px 9px 10px 12px;
-	margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 8px 9px 10px 12px;
+    margin-bottom: 12px;
 }
 
 .top {
-	display: flex;
-	width: 100%;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .purpose {
-	font-weight: 600;
-	color: #221F20;
-	font-size: 14px;
-	text-align: center;
-	text-transform: capitalize;
+    font-weight: 600;
+    color: #221f20;
+    font-size: 14px;
+    text-align: center;
+    text-transform: capitalize;
 }
 
 .task {
-	color: #221F20;
-	font-size: 12px;
-	text-align: center;
+    color: #221f20;
+    font-size: 12px;
+    text-align: center;
 }
 
 .time {
-	color: #4F4F4F;
-	font-size: 10px;
-	text-align: center;
+    color: #4f4f4f;
+    font-size: 10px;
+    text-align: center;
 }
 
 .loader_div {
-	display: flex;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	padding: 80px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
 }
