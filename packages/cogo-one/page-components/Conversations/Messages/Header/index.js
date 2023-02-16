@@ -1,11 +1,12 @@
 import { Button, cl } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../common/UserAvatar';
 import hideDetails from '../../../../utils/hideDetails';
 
-import { showContent, TagsPopOver } from './HeaderFuncs';
+import { ShowContent, TagsPopOver } from './HeaderFuncs';
 import styles from './styles.module.css';
 
 function Header({
@@ -16,6 +17,7 @@ function Header({
 	setheaderTags = () => {},
 	headertags = '',
 }) {
+	const [isVisible, setIsVisible] = useState(false);
 	const {
 		chat_tags = [],
 		spectator_data = [],
@@ -25,7 +27,7 @@ function Header({
 	const { name = 'Unknown User', mobile_number = '+919876543210' } = activeMessageCard;
 
 	const [firstSpectator = null] = spectator_data || [];
-
+	// const
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -35,8 +37,10 @@ function Header({
 						headertags={headertags}
 						setheaderTags={setheaderTags}
 						updatetags={updatetags}
+						isVisible={isVisible}
+						setIsVisible={setIsVisible}
 					/>
-					{showContent(chat_tags, 'right')}
+					<ShowContent list={chat_tags} showMorePlacement="right" />
 				</div>
 				<div className={styles.flex}>
 					{!isEmpty(previous_agent_data)
