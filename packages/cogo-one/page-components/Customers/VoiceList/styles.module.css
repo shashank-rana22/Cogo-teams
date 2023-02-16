@@ -30,13 +30,32 @@
     flex-direction: column;
 }
 
-.user_name {
-    font-size: 14px;
-    font-weight: 600;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 180px;
+.empty_container{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.empty_state{
+	font-size: 16px;
+	color: #828282;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 35vh;
+}
+
+.call_icon{
+margin:6px 9px 0px 0px;
+}
+
+.user_name{
+	font-size: 14px;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 170px;
 }
 
 .organisation {

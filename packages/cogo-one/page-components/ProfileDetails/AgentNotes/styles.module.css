@@ -1,117 +1,133 @@
 .container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .title {
-    font-weight: 500;
-    font-size: 14px;
-    color: #4f4f4f;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .note_editor {
-    margin-top: 16px;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 4px;
-    width: 100%;
-    background: #ffffff;
-    height: 158px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 158px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 
-    :global {
-        .ui_input_container {
-            height: 120px !important;
-        }
+	:global {
+		.ui_input_container {
+			height: 120px !important;
+		}
 
-        .ui_input_container.ui_ps_size_md .ui_input_control {
-            font-size: 12px !important;
-            font-family: "Poppins", "sans-serif";
-        }
-    }
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-family: Poppins, sans-serif;
+			font-size: 12px !important;
+		}
+	}
 }
 
 .editor_header {
-    background: #cfbc93;
-    width: 100%;
-    height: 10px;
-    border-radius: 4px 4px 0 0;
+	width: 100%;
+	height: 10px;
+	background: #cfbc93;
+	border-radius: 4px 4px 0 0;
 }
 
 .toggle_div {
-    display: flex;
-    width: 100%;
-    margin-top: 24px;
+	display: flex;
+	width: 100%;
+	margin-top: 24px;
 }
 
 .notes_container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 12px;
-    padding: 8px 12px;
-    background: #ffffff;
-    border-radius: 6px;
-    position: relative;
-    min-height: 80px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 100px;
+	padding: 8px 12px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 6px;
 
-    :global {
-        .ui_buttonicon_container {
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-    }
+	:global {
+		.ui_buttonicon_container {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	}
 }
 
 .footer {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin-top: 10px;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin-top: 10px;
 }
 
 .note_time {
-    font-size: 10px;
-    color: #4f4f4f;
+	font-size: 10px;
+	color: #4f4f4f;
 }
+
 .created_by {
-    font-size: 10px;
-    color: #4f4f4f;
-    margin-left: 4px;
+	margin-left: 4px;
+	font-size: 10px;
+	color: #4f4f4f;
 }
+
 .note_footer {
-    padding: 5px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background: #ffffff;
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-        0px 1px 10px -1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.14);
-    border-radius: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 5px;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow:
+		0 2px 4px -1px rgb(0 0 0 / 20%),
+		0 1px 10px -1px rgb(0 0 0 / 12%),
+		0 4px 4px rgb(0 0 0 / 14%);
 }
 
 .submit_button {
-    display: flex;
-    align-items: center;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    padding: 0 6px;
-    cursor: pointer;
-    &:hover {
-        background: #fffce6;
-        border: 1px solid #fde74d;
-    }
+	display: flex;
+	align-items: center;
+	padding: 0 6px;
+	cursor: pointer;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+
+	&:hover {
+		background: #fffce6;
+		border: 1px solid #fde74d;
+	}
 }
 
 .content {
-    display: flex;
-    width: 95%;
-    word-break: break-word;
-    text-overflow: ellipsis;
-    white-space: normal;
-    cursor: pointer;
-    min-height: 40px;
+	display: flex;
+	width: 95%;
+	min-height: 40px;
+	overflow-y: scroll;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	word-break: break-word;
+	white-space: normal;
+	cursor: pointer;
+}
+
+.wrap {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-height: 250px;
+	max-height: 400px;
+	overflow-y: scroll;
 }
