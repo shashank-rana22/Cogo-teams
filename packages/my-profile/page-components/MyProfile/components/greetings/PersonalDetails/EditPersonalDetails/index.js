@@ -32,7 +32,7 @@ function EditPersonalDetails({
 
 					return (
 						<div className={styles.layout_container}>
-							<div className={styles.label_value_container}>
+							<div>
 								<div className={styles.label}>{label}</div>
 
 								<div className={styles.value}>

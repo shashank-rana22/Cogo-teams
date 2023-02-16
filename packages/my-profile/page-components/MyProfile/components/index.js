@@ -99,6 +99,7 @@ function MyProfile() {
 				onOuterClick={() => setChangepasswordModal(false)}
 			>
 				<Modal.Header title="Update Password" />
+
 				<ChangePassword
 					control={control}
 					errors={errors}
