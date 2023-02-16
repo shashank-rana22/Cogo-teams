@@ -1,19 +1,52 @@
 .container {
 	:global {
-		.ui_modal_body_container{
-			border-top: none;
-		}
-
- .ui_modal_dialog .ui_ps_size_sm {
-			width: 120px !important;
-		}
-		
+	.ui_modal_dialog.ui_ps_size_sm{
+		width: 350px !important;
 	}
+}
 }
 
 .group_radio{
 display: flex;
 flex-direction: column;
+}
+
+.start_time {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin-left: 10px;
+}
+
+.time_title {
+	
+	font-size: 12px;
+	color: #4F4F4F;
+}
+
+.time_container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.wrap_start {
+	display: flex;
+	padding: 1px;
+	background-color: #ffff;
+	border-radius: 4px 0 0 4px;
+}
+
+.wrap_end {
+	display: flex;
+	padding: 1px;
+	background-color: #ffff;
+	border-radius: 0 4px 4px 0;
+}
+
+.end_time {
+	display: flex;
+	flex-direction: column;
+	width: 50%;	
 }
 
 .actions{
@@ -26,6 +59,7 @@ flex-direction: column;
 .refresh_icon{
 	margin:5px 10px 0px 0px;
 }
+
 .refresh_action{
 	display: flex;
 	align-items: center;

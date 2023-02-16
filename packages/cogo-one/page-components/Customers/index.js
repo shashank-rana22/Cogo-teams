@@ -19,11 +19,10 @@ function Customers({
 	setActiveTab = () => {},
 	setToggleStatus = () => {},
 	toggleStatus,
-	voiceList = [],
 	messagesList = [],
-	voiceListLoading,
-	handleScroll = () => {},
 	unReadChatsCount,
+	setAppliedFilters = () => {},
+	appliedFilters = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -61,6 +60,8 @@ function Customers({
 					searchValue={searchValue}
 					filterVisible={filterVisible}
 					setFilterVisible={setFilterVisible}
+					setAppliedFilters={setAppliedFilters}
+					appliedFilters={appliedFilters}
 				/>
 			)}
 
@@ -68,9 +69,7 @@ function Customers({
 				<VoiceList
 					setActiveVoiceCard={setActiveVoiceCard}
 					activeVoiceCard={activeVoiceCard}
-					voiceList={voiceList}
-					voiceListLoading={voiceListLoading}
-					handleScroll={handleScroll}
+					activeTab={activeTab}
 				/>
 			)}
 
