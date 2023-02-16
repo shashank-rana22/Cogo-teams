@@ -69,7 +69,7 @@ function useVendorBankDetail({ setActiveStepper = () => {} }) {
 				data: {
 					...values,
 					bank_document_url : values.bank_document_url.finalUrl,
-					vendor_id         : 'e7c29f98-3322-49ca-8363-77647e90c54c',
+					vendor_id         : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
 				},
 			 	});
 
