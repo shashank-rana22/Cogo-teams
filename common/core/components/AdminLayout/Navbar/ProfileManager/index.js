@@ -6,7 +6,7 @@ import React from 'react';
 import Items from './Items';
 import styles from './styles.module.css';
 
-function ProfileManager({ resetSubnavs }) {
+function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 	const router = useRouter();
 
 	const routerFunction = () => {
@@ -46,7 +46,12 @@ function ProfileManager({ resetSubnavs }) {
 
 	return (
 		<ul className={styles.list_container}>
-			<Items item={profileComponents} resetSubnavs={resetSubnavs} />
+			<Items
+				item={profileComponents}
+				resetSubnavs={resetSubnavs}
+				setOpenPopover={setOpenPopover}
+				openPopover={openPopover}
+			/>
 		</ul>
 	);
 }

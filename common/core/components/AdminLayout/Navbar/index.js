@@ -6,10 +6,12 @@ import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
 import formatUserBasedNavView from '../../../helpers/formatUserBasedNavView';
 import { sortNavs } from '../../../helpers/sortItems';
+import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
+import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
 
 function Navbar({
@@ -27,9 +29,17 @@ function Navbar({
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
+	const {
+		data,
+		refetch = () => {},
+		checkIfSessionExpiring,
+		timeLeft,
+	} = useGetUserSessionMappings();
+
 	const showPin = userBasedNavView === nav;
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
+	const [openPopover, setOpenPopover] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -70,7 +80,11 @@ function Navbar({
 						/>
 					</div>
 
-					<ProfileManager resetSubnavs={resetSubnavs} />
+					<ProfileManager
+						resetSubnavs={resetSubnavs}
+						setOpenPopover={setOpenPopover}
+						openPopover={openPopover}
+					/>
 
 					<div className={styles.search_container}>
 						<Input
@@ -125,6 +139,17 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
+			{
+				openPopover
+					? (
+						<SwitchAccounts
+							userMappings={data}
+							refetch={refetch}
+							checkIfSessionExpiring={checkIfSessionExpiring}
+							timeLeft={timeLeft}
+						/>
+					) : null
+			}
 		</div>
 
 	);

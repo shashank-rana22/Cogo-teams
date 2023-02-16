@@ -22,11 +22,11 @@ const useGetUserSessionMappings = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_user_session_mappings',
 		method : 'get',
-	}, { manual: true });
+	}, { manual: false });
 
 	const listApi = async () => {
 		try {
-			const cogo_admin_auth_token = getCookie('cogo-admin-auth-token');
+			const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
 			const payload = {
 				parent_user_session_id: cogo_admin_auth_token,
 			};

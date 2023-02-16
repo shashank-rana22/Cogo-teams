@@ -312,6 +312,24 @@ importers:
       '@cogoport/utils': 1.2.2
       react: 18.2.0
 
+  packages/my-profile:
+    specifiers:
+      '@cogoport/components': ^1.0.296
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.53
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.309_tjjfbzrrgezq2qg342kvjgfsxe
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.57_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      react: 18.2.0
+
   packages/supply-dashboards:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -335,24 +353,6 @@ importers:
       '@cogoport/utils': 1.2.2
       react: 18.2.0
       react-hook-form: 7.43.1_react@18.2.0
-
-  packages/my-profile:
-    specifiers:
-      '@cogoport/components': ^1.0.296
-      '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/icons-react': ^1.0.53
-      '@cogoport/request': workspace:^0.1.0
-      '@cogoport/store': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.2
-      react: 18.2.0
-    dependencies:
-      '@cogoport/components': 1.0.301_tjjfbzrrgezq2qg342kvjgfsxe
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.57_react@18.2.0
-      '@cogoport/request': link:../../common/request
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.2
-      react: 18.2.0
 
 packages:
 

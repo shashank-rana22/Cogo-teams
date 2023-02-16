@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import MappedUser from './MappedUser';
 import styles from './styles.module.css';
 
-function SwitchAccounts({ userMappings = [], refetch = () => {}, checkIfSessionExpiring, timeLeft }) {
+function SwitchAccounts({ userMappings = [], refetch = () => {}, timeLeft, checkIfSessionExpiring }) {
 	const [showActions, setShowActions] = useState(false);
 	const [sessionId, setSessionId] = useState('');
 

@@ -1,12 +1,14 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import useGetAllActions from '../../../../../hooks/useGetAllActions';
 
 import styles from './styles.module.css';
 
 function MappedUser({
 	user = {},
-	// refetch = () => {},
+	refetch = () => {},
 	// profileData,
 	// userMappings,
 	// sessionId,
@@ -17,6 +19,11 @@ function MappedUser({
 	// checkIfSessionExpiring,
 }) {
 	const profile_name = user?.user_data?.name?.split(' ');
+
+	const { removeProfile = () => {} } = useGetAllActions({
+		user,
+		refetch,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -44,8 +51,10 @@ function MappedUser({
 				<div
 					className={styles.icon_container}
 					id={user?.user_session_id}
+					onClick={removeProfile}
+					role="presentation"
 				>
-					<IcMArrowDown fontWeight={700} />
+					<IcMDelete fontWeight={700} />
 				</div>
 			</div>
 		</div>
