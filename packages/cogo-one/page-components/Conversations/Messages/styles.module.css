@@ -9,3 +9,23 @@
 	background: #F9F9F9;
 	
 }
+.modal_header_title{
+	display: flex;
+	img{
+		height: 18px;
+		width: 18px;
+	}
+}
+.modal_title{
+	font-size: 14px;
+	font-weight: 600;
+	color:#221F20;
+	margin-left: 5px;
+}
+.styled_ui_modal_container{
+	:global{
+		.ui_modal_header_container{
+			padding: 10px !important;
+		}
+	}
+}

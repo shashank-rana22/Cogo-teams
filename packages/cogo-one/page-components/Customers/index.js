@@ -21,6 +21,8 @@ function Customers({
 	toggleStatus,
 	messagesList = [],
 	unReadChatsCount,
+	setAppliedFilters = () => {},
+	appliedFilters = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -58,6 +60,8 @@ function Customers({
 					searchValue={searchValue}
 					filterVisible={filterVisible}
 					setFilterVisible={setFilterVisible}
+					setAppliedFilters={setAppliedFilters}
+					appliedFilters={appliedFilters}
 				/>
 			)}
 

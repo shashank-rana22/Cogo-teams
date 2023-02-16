@@ -1,16 +1,18 @@
 import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
+import { snakeCase } from '@cogoport/utils';
 
 // import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../hooks/useGetUser';
-import useOutgoingCall from '../../../hooks/useOutgoingCall';
+import VoiceCallComponent from '../../VoiceCallComponent';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 
 function AgentDetails({ activeMessageCard }) {
+	// const [swapUi, setSwapUi] = useState(false);
+	// console.log('swapUi', swapUi);
 	const { userData, loading } = useGetUser({ activeMessageCard });
-	const { makeCallApi = () => {}, callLoading } = useOutgoingCall();
 
 	const { mobile_number_eformat, name, email, mobile_verified, whatsapp_verified } = userData || {};
 	const VERIFICATION_STATUS = [
@@ -28,9 +30,6 @@ function AgentDetails({ activeMessageCard }) {
 		},
 	];
 
-	const handleClick = async () => {
-		await makeCallApi();
-	};
 	return (
 		<>
 			<div className={styles.title}>Profile</div>
@@ -55,36 +54,33 @@ function AgentDetails({ activeMessageCard }) {
 				</div>
 			</div>
 			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item) => (
-					<div>
-						<Pill
-							key={item.label}
-							prefix={item.prefixIcon}
-							size="md"
-							color={item.color}
-						>
-							<div className={styles.pill_name}>{item.label}</div>
-						</Pill>
-					</div>
-				))}
+				{VERIFICATION_STATUS.map((item, index) => {
+					const itemKey = `${snakeCase(item.label)}_${index}`;
+
+					return (
+						<div key={itemKey}>
+							<Pill
+								key={item.label}
+								prefix={item.prefixIcon}
+								size="md"
+								color={item.color}
+							>
+								<div className={styles.pill_name}>{item.label}</div>
+							</Pill>
+						</div>
+					);
+				})}
 			</div>
-			<div className={styles.number_div}>
-				{/* <img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
-					alt="hang-Up"
-					className={styles.call_icon}
-				/> */}
-				<IcMCall className={styles.call_icon} onClick={handleClick} />
-				{loading ? (
-					<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
-				) : (
-					<div className={styles.number}>
-						{mobile_number_eformat?.slice(0, 2)}
-						{' '}
-						{mobile_number_eformat?.slice(2)}
-					</div>
-				)}
-			</div>
+			{loading ? (
+				<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
+			) : (
+				<VoiceCallComponent
+					// swapUi={swapUi}
+					// setSwapUi={setSwapUi}
+					mobile_number_eformat={mobile_number_eformat}
+				/>
+
+			)}
 			<div className={styles.conversation_title}>Other Channels (03)</div>
 			<ConversationContainer />
 		</>

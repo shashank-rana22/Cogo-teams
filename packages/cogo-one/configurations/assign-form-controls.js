@@ -1,18 +1,5 @@
 const controls = {
-	assign_to: {
-		name    : 'assign_to',
-		type    : 'radio_group',
-		options : [
-			{
-				label : 'Assign user',
-				value : 'user',
-			},
-			{
-				label : 'Assign based on condition',
-				value : 'condition',
-			},
-		],
-	},
+
 	assign_user: {
 		name        : 'assign_user',
 		type        : 'input',
@@ -40,6 +27,22 @@ const controls = {
 	condition_value: {
 		name : 'condition_value',
 		type : 'input',
+	},
+	allow_user: {
+		name    : 'allow_user',
+		type    : 'radio group',
+		options : [
+			{
+				label : 'Observe',
+				value : 'observe',
+			},
+			{
+				label : 'Observe and chat',
+				value : 'observe_and_chat',
+			},
+
+		],
+
 	},
 };
 export default controls;

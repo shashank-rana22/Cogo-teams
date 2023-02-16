@@ -14,7 +14,6 @@ import styles from './styles.module.css';
 function Messages({ activeMessageCard = {}, firestore }) {
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
-
 	const [messages, setMessages] = useState({});
 
 	const { id = '', channel_type = '' } = activeMessageCard || {};
@@ -46,19 +45,25 @@ function Messages({ activeMessageCard = {}, firestore }) {
 
 	useEffect(() => {
 		getFirebaseData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
-	const ActiveModalComp = MODAL_COMPONENT_MAPPING[openModal?.type] || null;
+	const {
+		comp:ActiveModalComp = null,
+		title:{ img = null, name = '' } = {}, modalSize = 'md',
+	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
 	const closeModal = () => (setOpenModal({ type: null, data: {} }));
 
 	return (
 		<>
 			<div className={styles.container}>
-				<Header setOpenModal={setOpenModal} />
+				<Header
+					setOpenModal={setOpenModal}
+					activeMessageCard={activeMessageCard}
+				/>
 				<div className={styles.message_container}>
 					<MessageConversations
-						id={id}
 						messagesData={messagesData}
 						draftMessage={draftMessages[id]}
 						setDraftMessages={setDraftMessages}
@@ -67,11 +72,26 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						messages={messages}
 						getNextData={getNextData}
 						lastPage={lastPage}
+						setOpenModal={setOpenModal}
+						activeMessageCard={activeMessageCard}
 					/>
 				</div>
 			</div>
 			{openModal?.type && ActiveModalComp && (
-				<Modal size="md" show onClose={closeModal} onOuterClick={closeModal} isClosable>
+				<Modal
+					size={modalSize}
+					show
+					onClose={closeModal}
+					placement="center"
+					className={styles.styled_ui_modal_container}
+				>
+					<Modal.Header title={(
+						<div className={styles.modal_header_title}>
+							{img && <img src={img} alt="logo" />}
+							<div className={styles.modal_title}>{name}</div>
+						</div>
+					)}
+					/>
 					<ActiveModalComp />
 				</Modal>
 			)}

@@ -1,23 +1,23 @@
-/* eslint-disable import/no-unresolved */
-import { Radio } from '@cogoport/components';
+import { CheckboxGroup } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function RadioController(props) {
+function CheckboxGroupController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
 
 	return (
 		<Controller
-			key={rest.id}
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Radio
+				<CheckboxGroup
 					{...rest}
-					key={rest.id}
+					key={name}
+					id={name}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
@@ -27,4 +27,4 @@ function RadioController(props) {
 		/>
 	);
 }
-export default RadioController;
+export default CheckboxGroupController;

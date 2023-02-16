@@ -12,12 +12,14 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessage,
+	setActiveMessage = () => { },
 	activeMessageCard,
-	setSearchValue,
+	setSearchValue = () => { },
 	filterVisible,
 	searchValue,
-	setFilterVisible,
+	setFilterVisible = () => { },
+	setAppliedFilters = () => { },
+	appliedFilters,
 }) {
 	const loading = false;
 
@@ -48,17 +50,20 @@ function MessageList({
 
 				<div className={styles.filter_icon}>
 					<Popover
-						placement="left"
+						placement="right"
 						render={(
-							<FilterComponents
-								setFilterVisible={setFilterVisible}
-								filterVisible={filterVisible}
-							/>
+							filterVisible && (
+								<FilterComponents
+									setFilterVisible={setFilterVisible}
+									filterVisible={filterVisible}
+									appliedFilters={appliedFilters}
+									setAppliedFilters={setAppliedFilters}
+								/>
+							)
 						)}
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						{/* <div className={styles.filter_dot} /> */}
 						<IcMDoubleFilter width={25} height={25} onClick={() => setFilterVisible((prev) => !prev)} />
 					</Popover>
 
@@ -70,8 +75,10 @@ function MessageList({
 					{(messagesList || []).map((item) => {
 						const lastActive = new Date(item.sent_updated_at);
 						const checkActiveCard = activeMessageCard?.id === item?.id;
+
 						return (
 							<div
+								key={item?.id}
 								role="presentation"
 								className={cl`
 						                ${styles.card_Container} 
@@ -89,16 +96,9 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<div className={styles.user_name}>
-													{isEmpty(item?.name) ? (
-														<>
-															{item.user_id}
-														</>
-													) : (
-														<>
-															{startCase(item.name)}
-														</>
-													)}
-
+													{isEmpty(item?.name)
+														? item.user_id
+														: startCase(item.name)}
 												</div>
 												<div className={styles.organisation}>
 													{item?.organization_name}
@@ -123,10 +123,8 @@ function MessageList({
 										{item.new_message_count > 0 && (
 											<div className={styles.new_message_count}>
 												{item.new_message_count > 100 ? '99+' : (
-													<>
-														{item.new_message_count}
-													</>
-												) }
+													item.new_message_count
+												)}
 
 											</div>
 										)}
