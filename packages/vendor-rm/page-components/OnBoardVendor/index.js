@@ -43,6 +43,7 @@ function OnBoardVendor() {
 				<Element
 					activeStepper={activeStepper}
 					setActiveStepper={setActiveStepper}
+					vendorInformation={vendorInformation}
 					setVendorInformation={setVendorInformation}
 				/>
 			</div>

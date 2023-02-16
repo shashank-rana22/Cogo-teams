@@ -41,7 +41,7 @@ function useVendorServices({
 			const payload = {
 				performed_by_id   : '',
 				performed_by_type : '',
-				vendor_id         : '',
+				vendor_id         : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
 				services          : formattedServices,
 			};
 
@@ -54,7 +54,7 @@ function useVendorServices({
 		}
 	};
 
-	const onBack = (step) => {
+	const handleBackLink = (step) => {
 		setActiveStepper(TABS_MAPPING[step]);
 	};
 
@@ -66,7 +66,7 @@ function useVendorServices({
 		errors,
 		onSubmit,
 		loading,
-		onBack,
+		handleBackLink,
 		...rest,
 	};
 }

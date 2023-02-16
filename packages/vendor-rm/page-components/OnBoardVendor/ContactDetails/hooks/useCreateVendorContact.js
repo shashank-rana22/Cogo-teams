@@ -1,12 +1,17 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+// import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
-import { getControls } from '../utils/getControls';
+import getControls from '../utils/getControls';
 
-function useCreateVendorContact({ setActiveStepper = () => {} }) {
+function useCreateVendorContact({
+	setActiveStepper = () => {},
+	// vendorInformation = {},
+	setVendorInformation = () => {},
+}) {
 	const fields = getControls();
 
 	const {
@@ -14,6 +19,7 @@ function useCreateVendorContact({ setActiveStepper = () => {} }) {
 		formState: { errors },
 		handleSubmit,
 		getValues,
+		// setValue,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
@@ -21,13 +27,21 @@ function useCreateVendorContact({ setActiveStepper = () => {} }) {
 		method : 'post',
 	}, { manual: true });
 
-	const createVendorContact = async (step) => {
+	const createVendorContact = async ({ data, step }) => {
 		const formattedValues = getValues();
+
+		setVendorInformation((pv) => {
+			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			return {
+				...pv,
+				[key]: data,
+			};
+		});
 
 		const payload = {
 			...formattedValues,
 			vendor_poc_proof      : formattedValues?.contact_proof_url?.finalUrl,
-			vendor_id             : 'e7c29f98-3322-49ca-8363-77647e90c54c',
+			vendor_id             : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
 			mobile_country_code   : formattedValues?.mobile_number?.country_code,
 			mobile_number         : formattedValues?.mobile_number?.number,
 			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,
