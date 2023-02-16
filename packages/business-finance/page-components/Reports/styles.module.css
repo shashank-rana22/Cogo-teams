@@ -1,0 +1,35 @@
+.title {
+	margin: 8px 0;
+	font-size: 16px;
+}
+
+.input {
+	width: 200px;
+	margin: 0 20px 24px 0;
+}
+
+.date {
+	width: 200px;
+	margin-bottom: 24px;
+}
+
+.flex {
+	display: flex;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.button_class {
+	padding: 18px !important;
+	font-size: 14px !important;
+}
+
+.account_type {
+	width: 200px;
+	margin-right: 20px;
+}

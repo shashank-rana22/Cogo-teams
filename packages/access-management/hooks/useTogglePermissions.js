@@ -160,14 +160,15 @@ const useTogglePermissions = (props) => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		setNavigationRefs(initilaFormValues);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [newApiPermissions]);
+	}, [show, JSON.stringify(apiGroup), JSON.stringify(newApiPermissions)]);
 
 	useEffect(() => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		const isAnyApiSelected = isAnyApiSelectedFunc(initilaFormValues);
 		setValue(isAnyApiSelected ? 'yes' : 'no');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [show]);
+
 	return {
 		handleApiStatus,
 		newApiPermissions,
