@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function OnBoardVendor() {
 	const router = useRouter();
 
-	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[1]);
+	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[0]);
 
 	const Element = activeStepper?.component;
 

@@ -9773,6 +9773,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_vendor_bank_detail',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
 	],
 };
 export default partner;

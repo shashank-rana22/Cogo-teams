@@ -10,12 +10,12 @@ function ButtonLayout(
 		onSubmit = () => {},
 	},
 ) {
-	const { step = 0 } = activeStepper || {};
+	const { step } = activeStepper || {};
 
 	return (
 		<div className={styles.button_container}>
 			<Button size="lg" themeType="tertiary" style={{ marginRight: '60px' }} disabled={loading}>Cancel</Button>
-			{activeStepper?.step <= 4
+			{step <= 4
 				? (
 					<Button
 						size="lg"
@@ -23,7 +23,7 @@ function ButtonLayout(
 						onClick={handleSubmit(() => onSubmit(step))}
 						disabled={loading}
 					>
-						Procced
+						Proceed
 					</Button>
 				)
 				: <Button size="lg" themeType="accent" disabled={loading}>Submit</Button>}

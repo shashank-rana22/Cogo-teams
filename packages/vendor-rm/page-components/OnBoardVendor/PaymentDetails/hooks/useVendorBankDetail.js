@@ -5,9 +5,11 @@ import useRequest from '@cogoport/request/hooks/useRequest';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+// eslint-disable-next-line import/no-cycle
+import TABS_MAPPING from '../../../../constants/tabs';
 import { controls } from '../utils/controls';
 
-function useVendorBankDetail() {
+function useVendorBankDetail({ setActiveStepper = () => {} }) {
 	const formProps = useForm();
 
 	const {
@@ -15,30 +17,42 @@ function useVendorBankDetail() {
 		formState: { errors },
 		watch,
 		setValue,
+		handleSubmit,
+		getValues,
 	} = formProps;
 
 	const ifscCode = watch('ifsc_code');
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
 		method : 'get',
-	}, { manual: true });
+	}, { manual: false });
+
+	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
+		url    : '/create_vendor_bank_detail',
+		method : 'post',
+	}, { manual: false });
 
 	const regex = /^[A-Za-z]{4}\d{7}$/;
 
 	const setIfscCode = async () => {
 		if (ifscCode?.match(regex)) {
 			try {
-				const sessionData = await trigger({
+				const sessionData = await triggerGetBankDetails({
 					params: { ifsc_code: ifscCode },
 				});
 				const { data = {} } = sessionData || {};
-				const { branch = '' } = data || {};
+				const { branch = '', bank = '' } = data || {};
 				setValue('branch_name', branch);
+				setValue('bank_name', bank);
 			} catch (error) {
 				setValue('branch_name', '');
+				setValue('bank_name', '');
 				Toast.error(getApiErrorString(error.response.data));
 			}
+		} else {
+			setValue('branch_name', '');
+			setValue('bank_name', '');
 		}
 	};
 
@@ -46,6 +60,27 @@ function useVendorBankDetail() {
 		setIfscCode();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ifscCode]);
+
+	const onSubmit = async (step) => {
+		const values = getValues();
+
+		try {
+			const response = await triggerCreateVendorBankDetail({
+				data: {
+					...values,
+					bank_document_url : values.bank_document_url.finalUrl,
+					vendor_id         : 'e7c29f98-3322-49ca-8363-77647e90c54c',
+				},
+			 	});
+
+			 if (response?.data) {
+				Toast.success('Vendor Bank Detail added successfully');
+				setActiveStepper(TABS_MAPPING[step]);
+			 }
+		} catch (err) {
+			// Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
+		}
+	};
 
 	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		initialCall: false, params: { filters: { type: ['pincode'] } },
@@ -62,10 +97,12 @@ function useVendorBankDetail() {
 	});
 
 	return {
-		controls: newControls,
+		controls : newControls,
 		control,
 		errors,
-		loading,
+		loading  : getBankDetailsLoading || createVendorBankDetailLoading,
+		handleSubmit,
+		onSubmit,
 	};
 }
 
