@@ -1,9 +1,9 @@
 import React from 'react';
 
+import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import { getElementController } from '../../../../utils/get-element-controller';
-import FieldArray from '../FieldArray';
 
-// import FieldArray from './FieldArray';
+import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
 function FormComponent({
@@ -12,8 +12,8 @@ function FormComponent({
 	onSubmit = () => {},
 	control,
 	errors = {},
+	activeStepper = {},
 }) {
-	console.log('errors:: ', errors);
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.main_body}>
 			{controls.map((controlItem) => {
@@ -49,6 +49,12 @@ function FormComponent({
 					</div>
 				);
 			})}
+
+			<ButtonLayout
+				activeStepper={activeStepper}
+				handleSubmit={handleSubmit}
+				onSubmit={onSubmit}
+			/>
 		</form>
 	);
 }

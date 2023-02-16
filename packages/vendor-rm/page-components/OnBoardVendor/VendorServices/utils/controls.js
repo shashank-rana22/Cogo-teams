@@ -38,7 +38,7 @@ const controls = [
 				rules: { required: 'Sub-category is required' },
 			},
 			{
-				name        : 'cogoport_office',
+				name        : 'cogoport_office_id',
 				label       : 'Select Cogoport Office',
 				type        : 'multiSelect',
 				placeholder : 'Select Location',

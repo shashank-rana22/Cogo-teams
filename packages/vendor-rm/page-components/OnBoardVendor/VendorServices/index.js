@@ -1,12 +1,12 @@
 import FormComponent from './FormComponent';
 import Header from './Header';
+// eslint-disable-next-line import/no-cycle
 import useVendorServices from './hooks/useVendorServices';
 import styles from './styles.module.css';
 
 function VendorServices({
 	activeStepper = {},
 	setActiveStepper = () => {},
-	onBack = () => {},
 }) {
 	const {
 		controls = [],
@@ -14,7 +14,9 @@ function VendorServices({
 		control,
 		errors = {},
 		onSubmit = () => {},
-	} = useVendorServices();
+		loading = false,
+		onBack = () => {},
+	} = useVendorServices({ setActiveStepper });
 
 	return (
 		<div className={styles.container}>
@@ -29,6 +31,8 @@ function VendorServices({
 				onSubmit={onSubmit}
 				control={control}
 				errors={errors}
+				loading={loading}
+				activeStepper={activeStepper}
 			/>
 		</div>
 	);

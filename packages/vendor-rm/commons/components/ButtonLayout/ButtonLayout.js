@@ -20,8 +20,9 @@ function ButtonLayout(
 					<Button
 						size="lg"
 						themeType="accent"
-						onClick={handleSubmit(() => onSubmit(step))}
+						onClick={handleSubmit((data) => onSubmit({ data, step }))}
 						disabled={loading}
+
 					>
 						Proceed
 					</Button>
