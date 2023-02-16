@@ -28,7 +28,6 @@ import {
  * @param {Object} Object: { options: [] => Async Options }
  * @returns {Array} Modified Async Options
  * getModifiedOptions
- * !Note: don't use setState inside getModifiedOptions
  */
 const keyAsyncFieldsParamsMapping = {
 	organizations      : asyncFieldsOrganizations,
