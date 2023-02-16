@@ -23,6 +23,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'check_access_request_eligibility',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'generate_mobile_verification_link',
 			access_type : 'private',
 		},
@@ -882,6 +887,11 @@ const partner = {
 		},
 		{
 			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'check_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1760,6 +1770,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'check_access_request_eligibility',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			feature      : 'supply_crm',
 			api          : 'get_service_provider_lifecycle_stats',
 			access_type  : 'private',
@@ -2237,6 +2252,11 @@ const partner = {
 			api          : 'create_channel_partner_persona',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_organization_branch_hierarchy',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'send_verification_otp',
@@ -3100,6 +3120,11 @@ const partner = {
 		},
 		{
 			api          : 'get_air_freight_incoterms',
+			access_type  : 'private',
+			service_name : 'spot_search',
+		},
+		{
+			api          : 'create_spot_search_contract',
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
@@ -4061,6 +4086,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'rate_density',
 		},
+		{
+			api              : 'list_rfq_searches',
+			access_type      : 'private',
+			feature          : 'rfq',
+			defaultparameter : 'supply_dashboard:allowed',
+		},
 	],
 	operations_dashboard: [
 		{
@@ -4133,6 +4164,36 @@ const partner = {
 			api          : 'create_incentive_report',
 			access_type  : 'private',
 			service_name : 'incentive',
+		},
+		{
+			api          : 'list_contract_lcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_air_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_bulk_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_plan_sheet_upload',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'get_contract_plan_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contracts',
+			access_type  : 'private',
+			service_name : 'contract',
 		},
 	],
 	discount: [
@@ -4408,24 +4469,44 @@ const partner = {
 	],
 	convenience_rate: [
 		{
-			api          : 'update_convenience_rate',
+			api          : 'list_cogo_entities',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'partner',
 		},
 		{
-			api          : 'create_convenience_rate',
+			api          : 'list_organizations',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'organization',
 		},
 		{
-			api          : 'list_convenience_rates',
+			api          : 'create_convenience_rate_configuration',
 			access_type  : 'private',
-			service_name : 'convenience',
+			service_name : 'convenience_rate',
 		},
 		{
-			api          : 'list_conditions',
+			api          : 'update_convenience_rate_configuration',
 			access_type  : 'private',
-			service_name : 'condition',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'list_convenience_rate_configurations',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'create_convenience_rate_custom_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'update_convenience_rate_custom_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
+		},
+		{
+			api          : 'get_convenience_rate_configuration',
+			access_type  : 'private',
+			service_name : 'convenience_rate',
 		},
 	],
 	payment_modes_and_methods: [
@@ -6823,6 +6904,42 @@ const partner = {
 			feature     : 'payrun',
 		},
 		{
+			api         : 'post_purchase_treasury_req_fund_allocation',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_treasury_live_status',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'get_purchase_treasury_report',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'get_purchase_treasury_report_details',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'post_purchase_treasury_allocate_fund',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
+			api         : 'put_purchase_treasury_reject_fund_req',
+			access_type : 'private',
+			module      : 'treasury',
+			feature     : 'treasury',
+		},
+		{
 			api          : 'get_channel_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -7021,6 +7138,54 @@ const partner = {
 	reports: [
 		{
 			api         : 'get_muneem_reports_profitability',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_purchase_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_sales_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_customers_on_sage_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_supplier_sage_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sage_organization_mapping_id_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_platform_sales_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_platform_purchase_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_sales_report_for_reconciliation',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_partial_or_unpaid_bills',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_ap_bills_auditor',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_ar_invoices_auditor',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_muneem_reports_finance_ap_dashboard_on_finance_accepted',
 			access_type : 'private',
 		},
 	],
@@ -9787,6 +9952,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'list_organization_cogofx_approvals',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'update_organization_approval',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -9810,6 +9980,48 @@ const partner = {
 			api          : 'get_invoice_currency_pair_conversions',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
+		},
+		{
+			api          : 'get_exchange_rate_approval_stats',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+	],
+	contracts: [
+		{
+			api          : 'get_contract_projected_stats',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contracts',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'update_contract_service',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_shipments_avg_price',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_contract_port_pair_projected_stats',
+			access_type  : 'private',
+			service_name : 'contract',
 		},
 	],
 };
