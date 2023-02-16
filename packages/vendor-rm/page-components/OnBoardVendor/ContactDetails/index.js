@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import FormComponent from './FormComponent';
 import Header from './Header';
+import useCreateVendorContact from './hooks/useCreateVendorContact';
 
 function ContactDetails({
 	activeStepper = {},
@@ -8,14 +9,36 @@ function ContactDetails({
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
+	const {
+		fields = [],
+		control,
+		errors,
+		createVendorContact,
+		loading,
+		handleSubmit,
+		handleBackLink,
+	} =	useCreateVendorContact({
+		setActiveStepper,
+		vendorInformation,
+		setVendorInformation,
+	});
+
 	return (
 		<div>
-			<Header />
+			<Header
+				activeStepper={activeStepper}
+				onBack={handleBackLink}
+			/>
+
 			<FormComponent
 				activeStepper={activeStepper}
 				setActiveStepper={setActiveStepper}
-				vendorInformation={vendorInformation}
-				setVendorInformation={setVendorInformation}
+				fields={fields}
+				control={control}
+				errors={errors}
+				createVendorContact={createVendorContact}
+				loading={loading}
+				handleSubmit={handleSubmit}
 			/>
 		</div>
 	);

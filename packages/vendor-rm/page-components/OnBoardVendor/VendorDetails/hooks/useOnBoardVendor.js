@@ -4,6 +4,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
@@ -11,6 +12,7 @@ import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -31,6 +33,7 @@ function useOnBoardVendor({
 		formState: { errors },
 		handleSubmit,
 		getValues,
+		setValue,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
@@ -65,6 +68,16 @@ function useOnBoardVendor({
 			Toast.error('Something went wrong');
 		}
 	};
+
+	useEffect(() => {
+		fields.forEach((field) => {
+			if (field.type === 'file') {
+				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]?.finalUrl);
+			} else {
+				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
+			}
+		});
+	}, []);
 
 	return {
 		fields,

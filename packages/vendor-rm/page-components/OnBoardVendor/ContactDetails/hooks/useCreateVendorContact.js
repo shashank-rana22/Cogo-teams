@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
@@ -9,7 +9,7 @@ import getControls from '../utils/getControls';
 
 function useCreateVendorContact({
 	setActiveStepper = () => {},
-	// vendorInformation = {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const fields = getControls();
@@ -19,7 +19,7 @@ function useCreateVendorContact({
 		formState: { errors },
 		handleSubmit,
 		getValues,
-		// setValue,
+		setValue,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
@@ -60,6 +60,20 @@ function useCreateVendorContact({
 		}
 	};
 
+	useEffect(() => {
+		fields.forEach((field) => {
+			if (field.type === 'file') {
+				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]?.finalUrl);
+			} else {
+				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]);
+			}
+		});
+	}, []);
+
+	const handleBackLink = (step) => {
+		setActiveStepper(TABS_MAPPING[step]);
+	};
+
 	return {
 		fields,
 		control,
@@ -68,6 +82,7 @@ function useCreateVendorContact({
 		handleSubmit,
 		loading,
 		setActiveStepper,
+		handleBackLink,
 	};
 }
 

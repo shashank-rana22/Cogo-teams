@@ -1,24 +1,30 @@
 /* eslint-disable import/no-cycle */
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
-import useOnBoardVendor from '../hooks/useOnBoardVendor';
+// import useOnBoardVendor from '../hooks/useOnBoardVendor';
 
 function FormComponent({
 	activeStepper = {},
-	setActiveStepper = () => {},
-	setVendorInformation = () => {},
+	// setActiveStepper = () => {},
+	// setVendorInformation = () => {},
+	fields = [],
+	control,
+	errors,
+	handleSubmit,
+	loading,
+	createVendor,
 }) {
-	const {
-		fields = [],
-		control,
-		errors,
-		handleSubmit,
-		loading,
-		createVendor,
-	} =	useOnBoardVendor({
-		setActiveStepper,
-		setVendorInformation,
-	});
+	// const {
+	// 	fields = [],
+	// 	control,
+	// 	errors,
+	// 	handleSubmit,
+	// 	loading,
+	// 	createVendor,
+	// } =	useOnBoardVendor({
+	// 	setActiveStepper,
+	// 	setVendorInformation,
+	// });
 	return (
 		<div>
 			<FormLayout
