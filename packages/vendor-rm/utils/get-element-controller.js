@@ -3,6 +3,7 @@ import {
 	MultiselectController,
 	SelectController,
 	UploadController,
+	MobileNumberController,
 } from '@cogoport/forms';
 
 export const getElementController = (type = 'text') => {
@@ -18,6 +19,9 @@ export const getElementController = (type = 'text') => {
 
 		case 'file':
 			return UploadController;
+
+		case 'mobile-number-select':
+			return MobileNumberController;
 
 		default:
 			return null;
