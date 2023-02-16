@@ -16,7 +16,7 @@ const useListChats = ({
 	user_role_ids, userId,
 }) => {
 	const [activeMessageCard, setActiveMessageCard] = useState({});
-
+	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({
@@ -51,6 +51,7 @@ const useListChats = ({
 	};
 
 	useEffect(() => {
+		setLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
 		let omniChannelQuery;
 		if (
@@ -61,18 +62,18 @@ const useListChats = ({
 		) {
 			omniChannelQuery = query(
 				omniChannelCollection,
-				orderBy('session_type', 'desc'),
+				// orderBy('session_type', 'desc'),
 				orderBy('updated_at', 'desc'),
-				where('session_type', '==', 'admin'),
+				// where('session_type', '==', 'admin'),
 
 			);
 		} else {
 			omniChannelQuery = query(
 				omniChannelCollection,
-				orderBy('session_type', 'desc'),
+				// orderBy('session_type', 'desc'),
 				orderBy('updated_at', 'desc'),
 				where('agent_id', '==', userId),
-				where('session_type', '==', 'admin'),
+				// where('session_type', '==', 'admin'),
 
 			);
 		}
@@ -81,6 +82,7 @@ const useListChats = ({
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
 			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
 		});
+		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -96,7 +98,12 @@ const useListChats = ({
 		}
 	};
 	return {
-		listData, setActiveMessage, activeMessageCard, setAppliedFilters, appliedFilters,
+		listData,
+		setActiveMessage,
+		activeMessageCard,
+		setAppliedFilters,
+		appliedFilters,
+		loading,
 	};
 };
 

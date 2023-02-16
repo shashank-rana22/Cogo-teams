@@ -24,7 +24,7 @@ function CogoOne() {
 	const {
 		data,
 	} = useAgentWorkPrefernce();
-	console.log('data', data);
+
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
@@ -47,6 +47,7 @@ function CogoOne() {
 	});
 
 	const { messagesList = [], unReadChatsCount } = listData;
+	console.log('messagesList', messagesList);
 
 	useEffect(() => {
 		setActiveVoiceCard({});
@@ -84,7 +85,6 @@ function CogoOne() {
 							firestore={firestore}
 							activeVoiceCard={activeVoiceCard}
 						/>
-
 						<ProfileDetails
 							activeMessageCard={activeMessageCard}
 							activeTab={activeTab}
