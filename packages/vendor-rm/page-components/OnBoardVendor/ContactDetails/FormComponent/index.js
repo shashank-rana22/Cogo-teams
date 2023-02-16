@@ -3,7 +3,12 @@ import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayo
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useCreateVendorContact from '../hooks/useCreateVendorContact';
 
-function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
+function FormComponent({
+	activeStepper = {},
+	setActiveStepper = () => {},
+	vendorInformation = {},
+	setVendorInformation = () => {},
+}) {
 	const {
 		fields = [],
 		control,
@@ -11,7 +16,11 @@ function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
 		createVendorContact,
 		loading,
 		handleSubmit,
-	} =	useCreateVendorContact({ setActiveStepper });
+	} =	useCreateVendorContact({
+		setActiveStepper,
+		vendorInformation,
+		setVendorInformation,
+	});
 	return (
 		<div>
 			<FormLayout

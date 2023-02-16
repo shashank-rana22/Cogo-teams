@@ -10,6 +10,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		rules       : { required: 'Country is required' },
 	},
 	{
+		// ...countryOptions,
 		name        : 'registration_number_type',
 		label       : 'Tax Number',
 		type        : 'select',

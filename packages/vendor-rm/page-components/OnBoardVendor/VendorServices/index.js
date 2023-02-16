@@ -16,7 +16,7 @@ function VendorServices({
 		errors = {},
 		onSubmit = () => {},
 		loading = false,
-		onBack = () => {},
+		handleBackLink = () => {},
 	} = useVendorServices({
 		setActiveStepper,
 		setVendorInformation,
@@ -26,8 +26,7 @@ function VendorServices({
 		<div className={styles.container}>
 			<Header
 				activeStepper={activeStepper}
-				setActiveStepper={setActiveStepper}
-				onBack={onBack}
+				onBack={handleBackLink}
 			/>
 			<FormComponent
 				controls={controls}

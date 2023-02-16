@@ -9,7 +9,10 @@ import { merge } from '@cogoport/utils';
 import TABS_MAPPING from '../../../../constants/tabs';
 import { getControls } from '../utils/getControls';
 
-function useOnBoardVendor({ setActiveStepper = () => {} }) {
+function useOnBoardVendor({
+	setActiveStepper = () => {},
+	setVendorInformation = () => {},
+}) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
@@ -35,8 +38,16 @@ function useOnBoardVendor({ setActiveStepper = () => {} }) {
 		method : 'post',
 	}, { manual: true });
 
-	const createVendor = async (step) => {
+	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
+
+		setVendorInformation((pv) => {
+			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			return {
+				...pv,
+				[key]: data,
+			};
+		});
 
 		const payload = {
 			...formattedValues,
