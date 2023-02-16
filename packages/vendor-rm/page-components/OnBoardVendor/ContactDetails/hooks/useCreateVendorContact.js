@@ -28,10 +28,10 @@ function useCreateVendorContact({ setActiveStepper = () => {} }) {
 			...formattedValues,
 			vendor_poc_proof      : formattedValues?.contact_proof_url?.finalUrl,
 			vendor_id             : 'e7c29f98-3322-49ca-8363-77647e90c54c',
-			mobile_country_code   : '+91',
-			mobile_number         : '976543210',
-			whatsapp_country_code : '+91',
-			whatsapp_number       : '976543210',
+			mobile_country_code   : formattedValues?.mobile_number?.country_code,
+			mobile_number         : formattedValues?.mobile_number?.number,
+			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,
+			whatsapp_number       : formattedValues?.whatsapp_number?.number,
 		};
 
 		try {
