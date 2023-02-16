@@ -13,13 +13,10 @@ function useOutgoingStatusCall({ callId }) {
 		try {
 			const res = await trigger({
 				data: {
-					call_record_id: callId,
+					call_record_id: callId?.call_record_id,
 				},
 			});
 			setStatus(res.data);
-			if (res.data === 'completed') {
-				setStatus('');
-			}
 		} catch (error) {
 			Toast.error(error);
 		}

@@ -34,6 +34,8 @@
     background-color: #acdadf;
     border-radius: 6px 0 6px 6px;
     word-break: break-word;
+	float: right;
+
 }
 
 .admin_message_container {
