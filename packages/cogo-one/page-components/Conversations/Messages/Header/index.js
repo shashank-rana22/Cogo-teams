@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import AssigneeAvatar from '../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../common/UserAvatar';
 import { TAGS_COLORS } from '../../../../constants';
-import hideDetails from '../../../utils/hideDetails';
+import hideDetails from '../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
