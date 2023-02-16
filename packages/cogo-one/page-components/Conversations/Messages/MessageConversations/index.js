@@ -11,22 +11,20 @@ import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 
-function MessageConversations(
-	{
-		messagesData = [],
-		draftMessage = '',
-		setDraftMessages = () => {},
-		id = '',
-		sendChatMessage,
-		lastPage,
-		getNextData,
-		setOpenModal,
-	},
-) {
+function MessageConversations({
+	messagesData = [],
+	draftMessage = '',
+	setDraftMessages = () => {},
+	sendChatMessage,
+	lastPage,
+	getNextData,
+	setOpenModal,
+	activeMessageCard,
+}) {
 	const messageRef = useRef(null);
-
 	const noMessages = isEmpty(messagesData);
 	const checkMessage = isEmpty(draftMessage);
+	const { id = '' } = activeMessageCard;
 
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
@@ -62,6 +60,7 @@ function MessageConversations(
 		setOnClicked = () => { },
 		onClicked = false,
 	} = useGetEmojiList();
+
 	const openInstantMessages = () => {
 		setOpenModal({
 			type : 'instant_messages',
@@ -70,13 +69,14 @@ function MessageConversations(
 			},
 		});
 	};
+
 	return (
 		<div className={styles.styled_div}>
 			<div className={styles.container} onScroll={handleScroll}>
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received'
-						? <ReceiveDiv eachMessage={eachMessage} />
-						: <SentDiv eachMessage={eachMessage} />
+						? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
+						: <SentDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
 				))}
 				<div ref={messageRef} />
 			</div>

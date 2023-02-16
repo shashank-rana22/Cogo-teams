@@ -22,7 +22,6 @@ function Item(props) {
 		type,
 		control,
 		label,
-		className,
 	} = props || {};
 
 	const Element = getElementController(type);
@@ -36,7 +35,7 @@ function Item(props) {
 				<Element
 					{...props}
 					control={control}
-					className={styles[className]}
+					className={styles.field_controller}
 				/>
 			</div>
 		</div>

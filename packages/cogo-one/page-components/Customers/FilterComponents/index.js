@@ -72,15 +72,17 @@ function FilterComponents({
 							>
 								Clear All
 							</Button>
-						) : null }
+						) : null}
 				</div>
 			</div>
 
 			{filterControls.map((field) => (
-				<div className={styles.filter_container}>
+				<div className={styles.filter_container} key={field.name}>
 					<Item
 						{...field}
 						control={control}
+						value={formValues[field.name]}
+						setValue={setValue}
 						error={errors[field.name]}
 					/>
 				</div>

@@ -28,25 +28,7 @@
     }
 }
 
-.status_field_controller {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;  
-}
-
-.channels_field_controller {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-}
-
-.tags_field_controller {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-}
-
-.escalation_field_controller {
+.field_controller {
     display: flex;
     flex-direction: column;
     padding: 0px;
