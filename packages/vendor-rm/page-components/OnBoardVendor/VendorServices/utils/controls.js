@@ -1,4 +1,7 @@
-const controls = [
+import categoryOptions from './category-options';
+import subCategoryOptions from './sub-category-options';
+
+const getControls = () => [
 	{
 		name          : 'office_details',
 		label         : 'Office Details',
@@ -12,30 +15,16 @@ const controls = [
 				label       : 'Select Category',
 				type        : 'select',
 				placeholder : 'Select a Category',
-				options     : [
-					{
-						label : 'category1',
-						value : 'category1',
-					},
-					{
-						label : 'category2',
-						value : 'category2',
-					},
-				],
-				rules: { required: 'Category is required' },
+				options     : categoryOptions,
+				rules       : { required: 'Category is required' },
 			},
 			{
 				name        : 'sub_category',
 				label       : 'Select Sub-category',
 				type        : 'select',
 				placeholder : 'Select a sub-category',
-				options     : [
-					{
-						label : 'sub category',
-						value : 'sub_category',
-					},
-				],
-				rules: { required: 'Sub-category is required' },
+				options     : subCategoryOptions,
+				rules       : { required: 'Sub-category is required' },
 			},
 			{
 				name        : 'cogoport_office_id',
@@ -80,4 +69,4 @@ const controls = [
 
 ];
 
-export default controls;
+export default getControls;
