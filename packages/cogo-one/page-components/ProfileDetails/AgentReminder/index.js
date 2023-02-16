@@ -31,7 +31,7 @@ function AgentReminder({ activeMessageCard }) {
 	});
 
 	const handleSubmit = async () => {
-		if (!isEmpty(inputValue) && !isEmpty(date) && !isEmpty(time)) {
+		if (!isEmpty(inputValue) || !isEmpty(date) || !isEmpty(time)) {
 			await createLogApi({ inputValue, date, time });
 		} else {
 			Toast.error('Enter details');

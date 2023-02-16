@@ -10051,7 +10051,7 @@ const partner = {
 			service_name : 'cogopoint',
 		},
 		{
-			api          : 'list_promocodes',
+			api          : 'list_promotions',
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
