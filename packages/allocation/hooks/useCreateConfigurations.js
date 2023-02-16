@@ -20,7 +20,7 @@ const useCreateConfigurations = ({
 		authkey : 'post_allocation_configuration',
 	});
 
-	const controls = getCreateConfigurationsControls({ item, setSegment });
+	const controls = getCreateConfigurationsControls({ setSegment });
 
 	const formProps = useForm({
 		defaultValues: {
@@ -49,12 +49,6 @@ const useCreateConfigurations = ({
 	const roleIds = watch('role_ids');
 	const watchServiceType = watch('service_type');
 
-	// useEffect(() => {
-	// 	console.log('Here');
-	// 	setValue('user_ids', []);
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [roleIds]);
-
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
@@ -66,16 +60,6 @@ const useCreateConfigurations = ({
 				},
 			};
 		}
-
-		// if (newControl.name === 'role_ids') {
-		// 	newControl = {
-		// 		...newControl,
-		// 		handleChange: () => {
-		// 			console.log('Here');
-		// 			setValue('user_ids', []);
-		// 		},
-		// 	};
-		// }
 
 		if (newControl.name === 'user_ids') {
 			if (roleIds) {

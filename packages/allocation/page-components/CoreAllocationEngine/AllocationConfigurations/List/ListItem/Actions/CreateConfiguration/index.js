@@ -36,11 +36,11 @@ function CreateConfiguration({
 		<>
 			<Modal.Header title={`${viewType === 'create' ? 'Create' : 'Edit'} Configuration`} />
 
-			<Modal.Body>
-				<Form controls={controls} formProps={formProps} />
-			</Modal.Body>
-
 			<form onSubmit={handleSubmit(onSubmit)}>
+				<Modal.Body>
+					<Form controls={controls} formProps={formProps} />
+				</Modal.Body>
+
 				<Modal.Footer>
 					<div className={styles.button_container}>
 						<Button
