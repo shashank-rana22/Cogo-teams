@@ -11,6 +11,25 @@ import {
 	asyncFieldsPartnerUsers,
 } from '../../../utils/getAsyncFields';
 
+/**
+ * to get async options, first check desired endpoint is present or not,
+ * 1. if present
+ * 		1. get the endpoint function "key" from "keyAsyncFieldsParamsMapping" obj
+ * 		2. pass that function "key" as value in "asyncKey" property in control
+ * 2. if not present
+ * 		1. add function in "common/utils/getAsyncFields" file and export it,
+ * 		2. import that function from "utils/getAsyncFields",
+ * 		3. add a new "key" in "keyAsyncFieldsParamsMapping" obj with value as
+ * 			function reference, note. do not call the function
+ * 		4. then follow 1.1 and 1.2 steps
+ *
+ * if you want to modify the options, pass "getModifiedOptions" function in control,
+ * @method
+ * @param {Object} Object: { options: [] => Async Options }
+ * @returns {Array} Modified Async Options
+ * getModifiedOptions
+ * !Note: don't use setState inside getModifiedOptions
+ */
 const keyAsyncFieldsParamsMapping = {
 	organizations      : asyncFieldsOrganizations,
 	organization_users : asyncFieldsOrganizationUser,
@@ -19,17 +38,6 @@ const keyAsyncFieldsParamsMapping = {
 	partner_roles      : asyncFieldsPartnerRoles,
 	segments           : asyncFieldsCampaignSegments,
 };
-
-/* Key features of AsyncSelect -->
-	* Do not have to write same functions to get async options
-	* Provide functions to modify options and get selected options object
-
-	props -->
-	* initialCall, asyncKey
-
-	* If asyncKey is not present according to the need it can be added in keyAsyncFieldsParamsMapping
-	* And mention the endpoint in utils/getAsyncFields
-*/
 
 function AsyncSelect(props) {
 	const {
