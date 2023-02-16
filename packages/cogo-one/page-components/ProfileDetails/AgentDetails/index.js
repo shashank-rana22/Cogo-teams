@@ -4,15 +4,15 @@ import { snakeCase } from '@cogoport/utils';
 
 // import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../hooks/useGetUser';
-import VoiceCallComponent from '../../VoiceCallComponent';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
+import VoiceCallComponent from './VoiceCallComponent';
 
-function AgentDetails({ activeMessageCard }) {
+function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 	// const [swapUi, setSwapUi] = useState(false);
 	// console.log('swapUi', swapUi);
-	const { userData, loading } = useGetUser({ activeMessageCard });
+	const { userData, loading } = useGetUser({ activeMessageCard, activeTab, activeVoiceCard });
 
 	const { mobile_number_eformat, name, email, mobile_verified, whatsapp_verified } = userData || {};
 	const VERIFICATION_STATUS = [

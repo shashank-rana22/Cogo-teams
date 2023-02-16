@@ -156,7 +156,7 @@
 
 .list_container {
     overflow-y: auto;
-    height: 70vh;
+    height: calc(100% - 155px);
 }
 
 .list_container::-webkit-scrollbar {

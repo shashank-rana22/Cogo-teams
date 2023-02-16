@@ -1,0 +1,30 @@
+.container {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    border-radius: 7px;
+}
+
+.empty_chat_image {
+    height: 350px;
+    width: 350px;
+}
+
+.header {
+    font-size: 20px;
+    color: #221f20;
+}
+
+.sub_header {
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.description {
+    font-size: 16px;
+    color: #828282;
+    margin-top: 7px;
+}
