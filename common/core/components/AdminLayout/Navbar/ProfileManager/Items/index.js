@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Button } from '@cogoport/components';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useState } from 'react';
@@ -55,52 +55,64 @@ function Items({ item, resetSubnavs }) {
 	);
 
 	return (
-		<div className={styles.container}>
-			{singleNav}
-			{item.map((singleOption) => (
-
-				<div
-					className={styles.accordion}
-					aria-expanded={showSubNav}
-					onClick={() => {
-						if (singleOption?.fun) {
-							singleOption.fun();
-						}
-						if (singleOption?.name === 'switch_account') {
-							handlePopover();
-						}
-					}}
-					key={singleOption.title}
-					aria-hidden
-				>
-					<Popover
-						placement="bottom"
-						trigger="click"
-						caret={false}
-						render={(
-							<SwitchAccounts
-								checkIfSessionExpiring={checkIfSessionExpiring}
-								timeLeft={timeLeft}
-								userMappings={data}
-								loading={loading}
-								refetch={refetch}
-							/>
-						)}
-						visible={openPopover && singleOption.name === 'switch_account'}
-						theme="light"
-						interactive
-						animation="shift-away"
+		<>
+			<div className={styles.container}>
+				{singleNav}
+				{item.map((singleOption) => (
+					<div
+						className={styles.accordion}
+						aria-expanded={showSubNav}
+						onClick={() => {
+							if (singleOption?.fun) {
+								singleOption.fun();
+							}
+							if (singleOption.href) {
+							// eslint-disable-next-line no-undef
+								window.open(singleOption.href, '_blank');
+							}
+							if (singleOption?.name === 'switch_account') {
+								handlePopover();
+							}
+						}}
+						key={singleOption.title}
+						aria-hidden
 					>
-						<div className={styles.active_item}>
-							{singleOption.icon()}
-							<span>
-								{singleOption.title}
-							</span>
-						</div>
-					</Popover>
+						<Popover
+							placement="bottom"
+							trigger="click"
+							caret={false}
+							render={(
+								<SwitchAccounts
+									checkIfSessionExpiring={checkIfSessionExpiring}
+									timeLeft={timeLeft}
+									userMappings={data}
+									loading={loading}
+									refetch={refetch}
+								/>
+							)}
+							visible={openPopover && singleOption.name === 'switch_account'}
+							theme="light"
+							interactive
+							animation="shift-away"
+						>
+							<div className={styles.active_item}>
+								{singleOption.icon()}
+								<span>
+									{singleOption.title}
+								</span>
+							</div>
+						</Popover>
+					</div>
+				))}
+			</div>
+
+			{showSubNav && (
+				<div className={styles.button_container}>
+					<Button size="lg" themeType="accent">Add Account</Button>
 				</div>
-			))}
-		</div>
+			)}
+		</>
+
 	);
 }
 
