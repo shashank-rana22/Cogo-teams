@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import CargoHandoverAtOrigin from './components/CargoHandoverAtOrigin';
 import CompletedTasks from './components/CompletedTasks';
 import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
 import UpdateOriginCustom from './components/UpdateOriginCustom';
+import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
 
 const tabs = [
@@ -41,6 +42,12 @@ function Air() {
 		setSubActiveTab(view);
 	};
 
+	const { data, listAPi } = useListShipmentPendingTasks();
+
+	useEffect(() => {
+		if (subActiveTab === 'cargo_handover_at_origin_date') { listAPi(); }
+	}, [subActiveTab]);
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -66,7 +73,7 @@ function Air() {
 					))}
 				</div>
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} />}
+			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} data={data} />}
 		</div>
 	);
 }

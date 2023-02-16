@@ -6,6 +6,7 @@ export { default as MultiselectController } from './page-components/Controlled/M
 export { default as PillsController } from './page-components/Controlled/PillsController';
 export { default as DatepickerController } from './page-components/Controlled/DatepickerController';
 export { default as InputController } from './page-components/Controlled/InputController';
+export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
 export { default as UploadController } from './page-components/Controlled/UploadController';
 
 export { default as useInterval } from './hooks/useInterval';

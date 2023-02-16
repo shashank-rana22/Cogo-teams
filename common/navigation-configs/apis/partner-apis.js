@@ -9761,5 +9761,17 @@ const partner = {
 			service_name : 'exchange_rate',
 		},
 	],
+	ground_ops: [
+		{
+			api          : 'list_shipment_pending_tasks',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+	],
 };
 export default partner;
