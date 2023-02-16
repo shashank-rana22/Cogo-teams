@@ -4,6 +4,7 @@ import React from 'react';
 
 import { INTENT_LEADERBOARD, PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
 
+import Charts from './chart';
 import styles from './styles.module.css';
 
 function Stats() {
@@ -89,6 +90,13 @@ function Stats() {
 					</div>
 				</div>
 
+			</div>
+
+			<div className={styles.line_chart}>
+				<div className={styles.chart_heading}>
+					<span className={styles.chart_heading_content}>Responsive Time Analysis</span>
+				</div>
+				<Charts />
 			</div>
 
 			<div className={styles.user_leaderboard}>

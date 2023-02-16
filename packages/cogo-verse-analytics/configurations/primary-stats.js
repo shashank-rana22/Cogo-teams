@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import IcMBookingManagement from '@cogoport/icons-react/dist/es/IcMBookingManagement';
 import IcMMoney from '@cogoport/icons-react/dist/es/IcMMoney';
 import IcMUsersManageAccounts from '@cogoport/icons-react/dist/es/IcMUsersManageAccounts';

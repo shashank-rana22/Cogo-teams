@@ -167,6 +167,32 @@
     color: #828282;
 }
 
+
+/* Line Chart------------------------------------------- */
+
+.line_chart {
+	height: 240px;
+	background: #ffffff;
+	padding: 10px;
+	border-radius: 8px;
+}
+.chart_heading {
+	padding: 10px 0px 0px 15px;
+}
+.chart_heading_content {
+	color: #221F20;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
 /* Intent Leaderboard Stats------------------------------------------- */
 
 .user_leaderboard {
