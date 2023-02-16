@@ -1,14 +1,15 @@
-import logout from '@cogoport/authentication/utils/getLogout';
+// import logout from '@cogoport/authentication/utils/getLogout';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
 
 import Items from './Items';
 import styles from './styles.module.css';
 
-function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover }) {
+function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover, refetch = () => {} }) {
 	const router = useRouter();
 
 	const routerFunction = () => {
@@ -16,6 +17,8 @@ function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover }
 	};
 
 	const { logoutOfAllAccounts = () => {} } = useRemoveUserSessions();
+
+	const { removeProfile = () => {} } = useGetAllActions({ refetch, profile: 'default' });
 
 	const profileComponents = [
 
@@ -38,7 +41,7 @@ function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover }
 		},
 		{
 			title : 'Logout',
-			fun   : logout,
+			fun   : removeProfile,
 			icon  : IcMLogout,
 		},
 		{

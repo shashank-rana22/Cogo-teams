@@ -7,8 +7,9 @@ import styles from './styles.module.css';
 
 function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 	const [showSubNav, setShowSubNav] = useState(false);
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile?.user || {},
+	const { user_data, userSessionMappings } = useSelector(({ profile }) => ({
+		user_data           : profile?.user || {},
+		userSessionMappings : profile?.user_session_mappings,
 	}));
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,12 +72,15 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 						key={singleOption.title}
 						aria-hidden
 					>
-						<div className={styles.active_item}>
-							{singleOption.icon()}
-							<span>
-								{singleOption.title}
-							</span>
-						</div>
+						{ !(singleOption?.name === 'logout_all_accounts' && (userSessionMappings || []).length < 2) && (
+							<div className={styles.active_item}>
+								{singleOption.icon()}
+								<span>
+									{singleOption.title}
+								</span>
+							</div>
+						) }
+
 					</div>
 				))}
 			</div>
