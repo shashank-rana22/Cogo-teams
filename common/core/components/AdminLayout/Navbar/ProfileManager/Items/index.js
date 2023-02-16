@@ -1,18 +1,35 @@
+import { Popover } from '@cogoport/components';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useState } from 'react';
+
+import useGetUserSessionMappings from '../../../../../hooks/useGetUserSessionMappings';
+import SwitchAccounts from '../SwitchAccounts';
 
 import styles from './styles.module.css';
 
 function Items({ item, resetSubnavs }) {
 	const [showSubNav, setShowSubNav] = useState(false);
+	const [openPopover, setOpenPopover] = useState(false);
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile?.user || {},
 	}));
 
-	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
+	useEffect(() => { setShowSubNav(false); setOpenPopover(false); }, [resetSubnavs]);
+
+	const {
+		data = [],
+		refetch = () => {},
+		loading,
+		checkIfSessionExpiring,
+		timeLeft,
+	} = useGetUserSessionMappings();
 
 	const { picture = '', name = '' } = user_data;
+
+	const handlePopover = () => {
+		setOpenPopover(!openPopover);
+	};
 
 	const singleNav = (
 		<div
@@ -36,27 +53,51 @@ function Items({ item, resetSubnavs }) {
 			/>
 		</div>
 	);
+
 	return (
 		<div className={styles.container}>
 			{singleNav}
 			{item.map((singleOption) => (
+
 				<div
 					className={styles.accordion}
 					aria-expanded={showSubNav}
 					onClick={() => {
-						if (singleOption.fun) {
+						if (singleOption?.fun) {
 							singleOption.fun();
+						}
+						if (singleOption?.name === 'switch_account') {
+							handlePopover();
 						}
 					}}
 					key={singleOption.title}
 					aria-hidden
 				>
-					<div className={styles.active_item}>
-						{singleOption.icon()}
-						<span>
-							{singleOption.title}
-						</span>
-					</div>
+					<Popover
+						placement="bottom"
+						trigger="click"
+						caret={false}
+						render={(
+							<SwitchAccounts
+								checkIfSessionExpiring={checkIfSessionExpiring}
+								timeLeft={timeLeft}
+								userMappings={data}
+								loading={loading}
+								refetch={refetch}
+							/>
+						)}
+						visible={openPopover && singleOption.name === 'switch_account'}
+						theme="light"
+						interactive
+						animation="shift-away"
+					>
+						<div className={styles.active_item}>
+							{singleOption.icon()}
+							<span>
+								{singleOption.title}
+							</span>
+						</div>
+					</Popover>
 				</div>
 			))}
 		</div>
