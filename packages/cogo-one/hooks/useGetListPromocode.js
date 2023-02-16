@@ -1,7 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetListPromotions({ activeMessageCard }) {
+const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
+	const { organization_id } = activeVoiceCard || {};
+	const { organization_id: MessageOrgId } = activeMessageCard || {};
 	// const [pagination, setPagination] = useState({ page: 1 });
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_promotions',
@@ -9,6 +11,12 @@ function useGetListPromotions({ activeMessageCard }) {
 	}, { manual: true });
 
 	const fetchListPromoCode = async () => {
+		let id;
+		if (activeTab === 'voice') {
+			id = organization_id;
+		} else {
+			id = MessageOrgId;
+		}
 		await trigger({
 			params: {
 				promocodes_required : true,
@@ -17,7 +25,7 @@ function useGetListPromotions({ activeMessageCard }) {
 					status           : 'published',
 					consumption_mode : 'manual',
 					category         : 'marketing',
-					organization_id  : 'bbde20db-d8b8-4be7-8307-367666847041',
+					organization_id  : id,
 				},
 				// page: pagination?.page,
 			},
@@ -27,12 +35,12 @@ function useGetListPromotions({ activeMessageCard }) {
 	useEffect(() => {
 		fetchListPromoCode();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard]);
+	}, [activeMessageCard, activeVoiceCard]);
 
 	return {
 		promoData    : data,
 		promoLoading : loading,
 	};
-}
+};
 
 export default useGetListPromotions;
