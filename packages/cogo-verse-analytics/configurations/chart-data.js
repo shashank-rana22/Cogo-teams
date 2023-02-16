@@ -18,7 +18,7 @@ export const CHART_DATA = [
 			},
 			{
 		  x : 'train',
-		  y : 234,
+		  y : 2340000,
 			},
 			{
 		  x : 'subway',
