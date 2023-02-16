@@ -1,0 +1,12 @@
+.table_container {
+	padding: 0;
+	margin-top: 16px;
+	overflow-x: scroll;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

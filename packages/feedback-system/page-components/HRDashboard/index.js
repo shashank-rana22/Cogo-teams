@@ -7,19 +7,93 @@ import React, { useState, useEffect } from 'react';
 import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
-import UserTableData from '../../common/userTableData';
+// import UserTableData from '../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import { deptControls as departmentControls } from '../../utils/departmentControls';
 import { getControls } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
+import TeamMembersList from './TeamMembersList';
 
 const DEPARTMENT_MAPPING = {
 	technology : 'tech_role',
 	finance    : 'finance_role',
 	business   : 'business_role',
 };
+
+const dummyListData = [
+	{
+		user_name         : 'Harry Potter',
+		employee_id       : 'COGO5196',
+		team_size         : 3,
+		feedbacks_pending : 29,
+		latest_kpi        : 1,
+		details           : [{
+			user_name         : 'Hermione Granger',
+			employee_id       : 'COGO5666',
+			team_size         : 1,
+			feedbacks_pending : 20,
+			latest_kpi        : 4,
+		},
+		{
+			user_name         : 'Neville Longbottom',
+			employee_id       : 'COGO5116',
+			team_size         : 1,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+		},
+		{
+			user_name         : 'Ron Weasley',
+			employee_id       : 'COGO5016',
+			team_size         : 1,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+		}],
+	},
+	{
+		user_name         : 'Cute Person',
+		employee_id       : 'COGO5896',
+		team_size         : 3,
+		feedbacks_pending : 23,
+		latest_kpi        : 4,
+		details           : [{
+			user_name         : 'Nice Person',
+			employee_id       : 'COGO5896',
+			team_size         : 3,
+			feedbacks_pending : 23,
+			latest_kpi        : 4,
+		},
+		{
+			user_name         : 'Also Person',
+			employee_id       : 'COGO5116',
+			team_size         : 7,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+		}],
+	},
+	{
+		user_name         : 'Draco Malfoy',
+		employee_id       : 'COGO5196',
+		team_size         : 3,
+		feedbacks_pending : 29,
+		latest_kpi        : 2,
+		details           : [{
+			user_name         : 'Pansy Parkinson',
+			employee_id       : 'COGO3166',
+			team_size         : 1,
+			feedbacks_pending : 18,
+			latest_kpi        : 3,
+		},
+		{
+			user_name         : 'Crabbe Goyle',
+			employee_id       : 'COGO5116',
+			team_size         : 1,
+			feedbacks_pending : 3,
+			latest_kpi        : 2,
+		}],
+	},
+];
 
 function HRDashboard() {
 	const Router = useRouter();
@@ -77,6 +151,7 @@ function HRDashboard() {
 				performed_by_id: manager || undefined,
 			},
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [manager]);
 
 	return (
@@ -171,7 +246,7 @@ function HRDashboard() {
 					</div>
 				</div>
 
-				<div className={styles.table_section}>
+				{/* <div className={styles.table_section}>
 					<UserTableData
 						columns={columns}
 						list={list}
@@ -179,6 +254,17 @@ function HRDashboard() {
 						page_limit={page_limit}
 						total_count={total_count}
 						pagination={params.page}
+						setPagination={setPage}
+					/>
+				</div> */}
+
+				<div className={styles.table_section}>
+					<TeamMembersList
+						list={dummyListData}
+						loading={false}
+						page_limit={3}
+						total_count={3}
+						pagination={1}
 						setPagination={setPage}
 					/>
 				</div>
