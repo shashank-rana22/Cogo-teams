@@ -2,15 +2,24 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
 import controls from '../utils/controls';
+import getFormattedServices from '../utils/getFormattedServices';
 
 function useVendorServices({
 	setActiveStepper = () => {},
+	setVendorInformation = () => {},
 }) {
 	const { handleSubmit, control, setValue, formState: { errors }, ...rest } = useForm();
+
+	const {
+		general : { query = {} },
+	} = useSelector((state) => state);
+
+	const { partner_id = '' } = query;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_vendor_services',
@@ -18,19 +27,16 @@ function useVendorServices({
 	}, { manual: true });
 
 	const onSubmit = async ({ data, step }) => {
+		setVendorInformation((pv) => {
+			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			return {
+				...pv,
+				[key]: data,
+			};
+		});
+
 		try {
-			const { office_details = [] } = data || {};
-
-			const formattedServices = office_details.map((item) => {
-				const obj = {
-					category           : item?.category,
-					sub_category       : item?.sub_category,
-					cogoport_office_id : item?.cogoport_office_id,
-					cogo_entity_id     : '',
-				};
-
-				return obj;
-			});
+			const { formattedServices = [] } = getFormattedServices({ data, partner_id });
 
 			const payload = {
 				performed_by_id   : '',

@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 function VendorServices({
 	activeStepper = {},
 	setActiveStepper = () => {},
+	setVendorInformation = () => {},
 }) {
 	const {
 		controls = [],
@@ -16,7 +17,10 @@ function VendorServices({
 		onSubmit = () => {},
 		loading = false,
 		onBack = () => {},
-	} = useVendorServices({ setActiveStepper });
+	} = useVendorServices({
+		setActiveStepper,
+		setVendorInformation,
+	});
 
 	return (
 		<div className={styles.container}>
