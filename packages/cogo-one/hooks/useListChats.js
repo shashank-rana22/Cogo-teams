@@ -63,7 +63,7 @@ const useListChats = ({
 				omniChannelCollection,
 				orderBy('session_type', 'desc'),
 				orderBy('updated_at', 'desc'),
-				// where('session_type', '==', 'admin'),
+				where('session_type', '==', 'admin'),
 
 			);
 		} else {
