@@ -36,10 +36,13 @@ function useOnBoardVendor({ setActiveStepper = () => {} }) {
 	}, { manual: true });
 
 	const createVendor = async (step) => {
-		console.log(step);
 		const formattedValues = getValues();
 
-		const payload = { ...formattedValues };
+		const payload = {
+			...formattedValues,
+			registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
+		};
+
 		try {
 			const res = await trigger({ data: { ...payload } });
 

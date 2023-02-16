@@ -1836,14 +1836,15 @@ const navigationMappingAdmin = {
 		module_type   : 'crm',
 	},
 	vendor_rm: {
-		key         : 'vendor_rm',
-		title       : 'VRM',
-		icon        : IcMSettings,
-		href        : '/v2/vendors-list',
-		as          : '/v2/vendors-list',
-		type        : 'link',
-		main_apis   : [],
-		module_type : 'crm',
+		key           : 'vendor_rm',
+		title         : 'VRM',
+		icon          : IcMSettings,
+		href          : '/v2/vendors-list',
+		as            : '/v2/vendors-list',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.vendor_rm_apis,
+		module_type   : 'crm',
 	},
 };
 
