@@ -75,11 +75,11 @@ const useCreateEditAllocationQuota = (props) => {
 			...(radioValue === 'user' && {
 				user_id: roleTypeId,
 			}),
+			quota_attributes: getFormattedValues(formValues),
 		};
 
 		const payload = {
-			quota_attributes: getFormattedValues(formValues),
-			...(isUpdatable ? { id } : propsForCreation),
+			...(isUpdatable ? { id, ...(getFormattedValues(formValues) || {}) } : propsForCreation),
 		};
 
 		try {
