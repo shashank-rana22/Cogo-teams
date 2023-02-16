@@ -1,5 +1,3 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 // import { useSelector } from '@cogoport/store';
@@ -20,12 +18,12 @@ const useGetUser = ({ activeMessageCard }) => {
 					id: 'cba50126-efbc-4caa-8383-b616dec9d44b',
 				},
 			});
-		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+		} catch (e) {
+			console.log(e);
 		}
 	};
 	useEffect(() => {
-		if (isEmpty(activeMessageCard)) { fetchUser(); }
+		if (!isEmpty(activeMessageCard)) { fetchUser(); }
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isEmpty(activeMessageCard)]);
 

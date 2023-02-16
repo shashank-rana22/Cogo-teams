@@ -1,5 +1,3 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -18,16 +16,12 @@ const useGetVoiceCallList = ({ activeTab }) => {
 	}, { manual: true });
 
 	const voiceCallList = async () => {
-		try {
-			const res = await trigger({
-				params: { page: pagination },
-			});
-			if (res.data) {
-				const { list = [], ...paginationData } = res?.data || {};
-				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
-			}
-		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+		const res = await trigger({
+			params: { page: pagination },
+		});
+		if (res.data) {
+			const { list = [], ...paginationData } = res?.data || {};
+			setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 		}
 	};
 
