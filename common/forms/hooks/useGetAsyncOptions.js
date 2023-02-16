@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
+import { useEffect, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
@@ -11,6 +12,7 @@ function useGetAsyncOptions({
 	params = {},
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
+	const [storeoptions, setstoreoptions] = useState([]);
 
 	const [{ data, loading }] = useRequest({
 		url    : endpoint,
@@ -23,6 +25,11 @@ function useGetAsyncOptions({
 		url    : endpoint,
 		method : 'GET',
 	}, { manual: true });
+	useEffect(() => {
+		storeoptions.push(...options);
+		setstoreoptions(storeoptions);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [options]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);
@@ -33,16 +40,20 @@ function useGetAsyncOptions({
 			let unorderedHydratedValue = [];
 			const toBeFetched = [];
 			value.forEach((v) => {
-				const singleHydratedValue = options.find((o) => o?.[valueKey] === v);
+				const singleHydratedValue = storeoptions.find((o) => o?.[valueKey] === v);
 				if (singleHydratedValue) {
 					unorderedHydratedValue.push(singleHydratedValue);
 				} else {
 					toBeFetched.push(v);
 				}
 			});
-			const res = await triggerSingle({
-				params: merge(params, { filters: { [valueKey]: toBeFetched } }),
-			});
+			let res;
+			if (toBeFetched.length) {
+				res = await triggerSingle({
+					params: merge(params, { filters: { [valueKey]: toBeFetched } }),
+				});
+				storeoptions.push(...res?.data?.list || []);
+			}
 			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.list || []);
 
 			const hydratedValue = value.map((v) => {
