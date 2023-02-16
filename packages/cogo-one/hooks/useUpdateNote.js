@@ -21,6 +21,7 @@ function useUpdateNote({ fetchListNotes = () => {} }) {
 				id          : val,
 			};
 		}
+
 		try {
 			await trigger({
 				data: payload,
@@ -31,9 +32,11 @@ function useUpdateNote({ fetchListNotes = () => {} }) {
 			Toast.error(error?.message);
 		}
 	};
+
 	return {
 		updateNote,
 		loading,
 	};
 }
+
 export default useUpdateNote;

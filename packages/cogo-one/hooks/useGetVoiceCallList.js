@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -24,8 +26,8 @@ const useGetVoiceCallList = ({ activeTab }) => {
 				const { list = [], ...paginationData } = res?.data || {};
 				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 			}
-		} catch (e) {
-			console.log('e', e);
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.data));
 		}
 	};
 
