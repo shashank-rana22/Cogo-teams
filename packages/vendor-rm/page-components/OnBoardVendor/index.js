@@ -12,6 +12,10 @@ function OnBoardVendor() {
 
 	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[3]);
 
+	const [vendorInformation, setVendorInformation] = useState({});
+
+	console.log('vendorInformation:: ', vendorInformation);
+
 	const Element = activeStepper?.component;
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,6 +43,7 @@ function OnBoardVendor() {
 				<Element
 					activeStepper={activeStepper}
 					setActiveStepper={setActiveStepper}
+					setVendorInformation={setVendorInformation}
 				/>
 			</div>
 		</div>
