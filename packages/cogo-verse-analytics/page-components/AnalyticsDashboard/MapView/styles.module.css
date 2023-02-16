@@ -291,12 +291,32 @@
 
 .com_stat_value{
   font-weight: 600;
-  width:40px;
+  /* width:40px; */
   margin-right: 10px;
   font-size: 16px;
-;  
-}
+  display: inline-block;
+  position: relative;
+  color: #242424;
+  
+  &::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	background-color: #000;
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+  }
 
+
+  &:hover::after {
+	transform: scaleX(1);
+  transform-origin: bottom left;
+  }
+}
 .pie_chart{
   height: 110px;
   flex-basis: 30%;
