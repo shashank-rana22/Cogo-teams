@@ -8,10 +8,7 @@
 
 }
 .stats_view_container{
-    border:solid 1px #00ff00;
-
     height:100%;
-
     flex-basis:50%;
     
 }

@@ -15,12 +15,86 @@
 @value --l-static-response-time-color: #221F20;
 
 .main_container {
-    font: Poppins;
+
     background: --l-bg;
-    padding: 3%;
-    width: 800px;
-    height: 1000px;
+    height: 100%;
+    border: solid 1px #fff000;
 }
+
+/* ----------------------------------------------------- */
+
+.primary_stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px rgb(114, 78, 78);
+
+}
+
+/* Primary Left ----------------------------------------------------- */
+
+.primary_left{
+    flex-basis: 55%;
+    background: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+
+}
+
+.primary_left_stat{   
+    flex-basis: 75%;
+    height: 100%;
+}
+.left_stat_content{
+   margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.primary_stat_title{
+    font-size: 18px;
+    font-weight: 600;
+}
+.primary_stat_description{
+    margin-top: 5px;
+    color: #828282;
+    font-size: 14px;
+
+}
+.primary_left_icon{
+   width: 40px;
+   height: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 200px;
+
+}
+
+/* Primary Right ----------------------------------------------------- */
+
+.primary_right{
+    border: solid 1px #ffb6a2;
+    flex-basis: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.active_users{
+    border: solid 1px #c12a00;
+    background: #ffffff;
+
+}
+.ticket_details{
+    border: solid 1px #c12a00;
+    background: #ffffff;
+}
+
+/* ----------------------------------------------------- */
 
 .bookings_from_container {
     display: flex;

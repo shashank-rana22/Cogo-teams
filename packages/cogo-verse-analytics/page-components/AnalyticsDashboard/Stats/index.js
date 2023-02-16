@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 
+import { PRIMARY_STATS } from '../../../configurations/primary-stats';
+
 import { dummy } from './dummy';
 import styles from './styles.module.css';
 
@@ -9,8 +11,52 @@ function Stats() {
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.bookings_from_container}>
-				<div className={styles.bookings_from}>
+
+			<div className={styles.primary_stats}>
+
+				<div className={styles.primary_left}>
+					{PRIMARY_STATS.map((stat) => {
+						const { value, title, users, icon, icon_bg, description } = stat;
+
+						return (
+							<div className={styles.left_stat_content}>
+								<div className={styles.primary_left_stat}>
+
+									<div className={styles.primary_stat_title}>
+										<span>{value}</span>
+										{' '}
+										{title}
+									</div>
+									<div className={styles.primary_stat_description}>
+										From
+										{' '}
+										<span>{users}</span>
+										{' '}
+										{description}
+									</div>
+								</div>
+								<div className={styles.primary_left_icon} style={{ background: icon_bg }}>
+									{icon}
+								</div>
+							</div>
+						);
+					})}
+
+				</div>
+
+				<div className={styles.primary_right}>
+					<div className={styles.active_users}>
+						ki
+					</div>
+					<div className={styles.ticket_details}>
+						ki
+					</div>
+				</div>
+
+			</div>
+
+			{/* <div className={styles.bookings_from_container}> */}
+			{/* <div className={styles.bookings_from}>
 					<div className={styles.bookings_content}>
 						<span className={styles.bookings_content_value}>10 </span>
 						<span className={styles.bookings_content_content}>bookings </span>
@@ -32,8 +78,9 @@ function Stats() {
 						<span className={styles.bookings_content_value}>200 </span>
 						<span className={styles.bookings_content_content}>new users </span>
 					</div>
-				</div>
-				<div className={styles.users_active_on_container}>
+				</div> */}
+
+			{/* <div className={styles.users_active_on_container}>
 					<div className={styles.users_active_on}>
 						<div className={styles.active_on}>Users Active on</div>
 						<div className={styles.active_on_content}>
@@ -63,8 +110,8 @@ function Stats() {
 							<span className={styles.tickets_content_content}>Tickets resolved</span>
 						</div>
 					</div>
-				</div>
-			</div>
+				</div> */}
+			{/* </div> */}
 
 			<div className={styles.leaderboard_container}>
 				<div className={styles.intent_leaderboard_container}>
@@ -108,7 +155,7 @@ function Stats() {
 					))}
 				</div>
 			</div>
-			<div className={styles.response_time_and_communications}>
+			{/* <div className={styles.response_time_and_communications}>
 				<div className={styles.avg_response_time}>
 					<div className={styles.static_avg_response_time}>
 						Average Customer Response Time
@@ -129,7 +176,7 @@ function Stats() {
 				<div className={styles.communications_container}>
 					fdgsfd
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
