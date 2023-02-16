@@ -3,13 +3,15 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { SERVICE_MAPPING } from '../../../../constants';
+
 import styles from './styles.module.css';
 
 function TransactionalActivity({ transactional = {} }) {
 	const { list = [] } = transactional;
 
 	return (
-		<div className={styles.container}>
+		<div>
 			{(list || []).map((item) => {
 				const {
 					created_at = '', serial_id, milestone_activity = [], origin_port = {},

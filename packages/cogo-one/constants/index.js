@@ -41,3 +41,11 @@ export const USER_ACTIVITY_MAPPING = {
 };
 
 export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';
+
+export const SERVICE_MAPPING = {
+	fcl_freight : 'fcl_freight_services',
+	lcl_freight : 'lcl_freight_services',
+	air_freight : 'air_freight_services',
+	ftl_freight : 'ftl_freight_services',
+	ltl_freight : 'ltl_freight_services',
+};

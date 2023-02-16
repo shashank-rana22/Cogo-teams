@@ -6,6 +6,7 @@ import React from 'react';
 
 import UserAvatar from '../../../common/UserAvatar';
 import dateTimeConverter from '../../../utils/dateTimeConverter';
+import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
 
@@ -78,6 +79,12 @@ function MessageList({
 				<div className={styles.list_container}>
 
 					{(messagesList || []).map((item) => {
+						const userData = getActiveCardDetails(item);
+						const {
+							user_name = '',
+							organization_name = '',
+						} = userData || {};
+
 						const lastActive = new Date(item.sent_updated_at);
 						const checkActiveCard = activeMessageCard?.id === item?.id;
 
@@ -101,12 +108,10 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<div className={styles.user_name}>
-													{isEmpty(item?.name)
-														? item.user_id
-														: startCase(item.name)}
+													{startCase(user_name)}
 												</div>
 												<div className={styles.organisation}>
-													{item?.organization_name}
+													{startCase(organization_name)}
 												</div>
 											</div>
 										</div>

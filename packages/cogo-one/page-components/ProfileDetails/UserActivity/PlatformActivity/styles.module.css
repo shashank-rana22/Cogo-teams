@@ -1,104 +1,103 @@
-.container{
-	margin-top: 10px;
+.container {
+	height: 75vh;
+	margin-top: 20px;
 	overflow-y: auto;
-    height: 75vh;
 }
+
 .container::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
-.main_card{
-	border-left: 1px solid #BDBDBD;
+.main_card {
 	padding: 8px;
-	margin: -5px 0px -5px 5px;
-	
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
 }
 
-.activity_date{
+.activity_date {
 	display: flex;
 	align-items: center;
-
 }
 
-.dot{
+.dot {
 	width: 10px;
 	height: 10px;
+	background: #bdbdbd;
 	border-radius: 50%;
-	background: #BDBDBD;
 }
 
-.durations{
-	color: #828282;
-	font-size: 10px;
+.durations {
 	margin-left: 5px;
-}
-
-.card{
-	margin: 5px 10px;
-	box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 6px;
-	padding: 8px;
-	border-left: 2px solid #C26D1A;
-	background: #ffffff;
-}
-
-.activity_type{
 	font-size: 10px;
-	background: #F8AEA8;
-border-radius: 6px;
-width: fit-content;
-padding: 2px 6px;
+	color: #828282;
 }
 
-.booking_details{
+.card {
+	padding: 8px;
+	margin: 5px 10px;
+	background: #fff;
+	border-left: 2px solid #c26d1a;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.activity_type {
+	width: fit-content;
+	padding: 2px 6px;
+	font-size: 10px;
+	background: #f8aea8;
+	border-radius: 6px;
+}
+
+.booking_details {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin:6px 0px ;
+	margin: 6px 0;
 }
 
-.title{
+.title {
+	font-size: 14px;
 	font-weight: 500;
-    font-size: 14px;
 }
 
-.booking_id{
-	color: #4F4F4F;
-	font-size: 10px;  
+.booking_id {
+	font-size: 10px;
+	color: #4f4f4f;
 }
 
-.port_pair{
+.port_pair {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 10px 0px;
+	margin: 10px 0;
 }
 
-.port{
-display: flex;
-flex-direction: column;
+.port {
+	display: flex;
+	flex-direction: column;
 }
 
-.country{
+.country {
 	font-size: 11px;
 }
 
-.port_details{
+.port_details {
 	display: flex;
 	align-items: center;
 }
 
-.port_name{
+.port_name {
+	max-width: 50px;
+	overflow: hidden;
+	font-size: 11px;
 	font-weight: 500;
-    font-size: 11px;
 	text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 50px;
+	white-space: nowrap;
 }
 
-.port_code{
+.port_code {
+	margin-left: 2px;
 	font-size: 11px;
-color: #BDBDBD;
-margin-left: 2px;
+	color: #bdbdbd;
 }
