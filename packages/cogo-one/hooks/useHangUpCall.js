@@ -6,9 +6,10 @@ function useHangUpCall({
 	setCallId = () => {},
 	setStatus = () => {},
 	setInCall = () => {},
+	setShowCallModal = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_outgoing_call',
+		url    : '/hang_up_outgoing_call',
 		method : 'post',
 	}, { manual: true });
 
@@ -17,12 +18,13 @@ function useHangUpCall({
 		try {
 			await trigger({
 				data: {
-					call_record_id: callId,
+					call_record_id: callId?.call_record_id,
 				},
 			});
 			setCallId('');
 			setStatus('');
 			setInCall(false);
+			setShowCallModal(false);
 		} catch (error) {
 			Toast.error(error);
 		}
