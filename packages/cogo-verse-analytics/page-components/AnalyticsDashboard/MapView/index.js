@@ -3,9 +3,9 @@
 import { Select, DateRangepicker, cl } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
-
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
+import CommunicationPieChart from './PieChart';
 
 import styles from './styles.module.css';
 
@@ -55,6 +55,7 @@ function MapView() {
 			</div>
 			<div className={styles.circle_content}>
 				<div className={styles.circle_frame}>
+				<div className={styles.globe_container}><TheGlobe /></div>
 					{
 					circleStats.map(
 						(stat) => {
@@ -99,13 +100,32 @@ function MapView() {
 				</div>
 
 				<div className={styles.communication_stats}>
-					<div className={styles.left_stats}>k</div>
+					<div className={styles.left_stats}>
+						{
+							CONVERSATIONS.map((stat)=>{
+								console.log('stat',stat);
+								const{value,title,icon_bg} = stat;
+								return(
+									<div className={styles.the_stat}>
+									<div className={styles.stat_circle} style={{background:icon_bg}}/>
+									<div className={styles.com_stat_value}>{value}</div>
+									<div className={styles.stat_description}>{title}</div>
+								</div>
+								)
+							})
+						}
+						
+						</div>
+
+					<div className={styles.pie_chart}>
+						<CommunicationPieChart/>
+					</div>
 
 				</div>
 			</div>
 
 			{/* The Globe */}
-			{/* <div className={globe_container}><TheGlobe /></div> */}
+			
 
 		</div>
 

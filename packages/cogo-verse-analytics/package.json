@@ -6,6 +6,7 @@
   "main": "./index.js",
   "types": "./index.js",
   "dependencies": {
+    "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.301",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.57",
@@ -13,10 +14,10 @@
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/utils": "^1.2.2",
-    "globe.gl": "^2.27.1",
+    "globe.gl": "^2.26.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-globe.gl": "^2.23.1",
+    "react-globe.gl": "^2.22.10",
     "prop-types": "^15.8",
     "react-kapsule": "^2.2"
   }

@@ -37,12 +37,12 @@ export const CONVERSATIONS = [
 	},
 	{
 		value   : 220,
-		title   : 'System Initiated conversations',
+		title   : 'System Initiated Conversations',
 		icon_bg : '#ABCD62',
 	},
 	{
 		value   : 20,
-		title   : 'Customer Initiated conversations',
+		title   : 'Customer Initiated Conversations',
 		icon_bg : '#DDEBC0',
 	}];
 

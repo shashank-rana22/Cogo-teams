@@ -21,8 +21,8 @@ function TheGLobe() {
 		<div className={styles.globe_container}>
 
 			<Globe
-				width="500px"
-				height="500px"
+				width={480}
+				height={480}
 				ref={globeGL}
 				waitForGlobeReady
 				backgroundColor={GLOBE_COLORS[colorMode].bg}

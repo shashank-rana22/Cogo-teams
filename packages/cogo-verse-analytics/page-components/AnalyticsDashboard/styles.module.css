@@ -5,6 +5,7 @@
 
     display:flex;
     flex-direction:row;
+    padding-bottom: 15px;
 
 }
 .stats_view_container{
@@ -13,7 +14,7 @@
     
 }
 .map_view_container{
-    border:solid 1px #00ccff;
+
 
     height:100%;
 

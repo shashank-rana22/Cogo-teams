@@ -15,10 +15,7 @@
 @value --l-static-response-time-color: #221F20;
 
 .main_container {
-
-    background: --l-bg;
     height: 100%;
-    border: solid 1px #fff000;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

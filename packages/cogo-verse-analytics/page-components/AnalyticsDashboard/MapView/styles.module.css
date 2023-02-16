@@ -3,8 +3,6 @@
 /* Main Container ------------------------------------------------------------------- */
 
 .main_container{
-
-    border:solid 1px rgb(119, 158, 255);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -19,16 +17,15 @@
     display: flex;
     justify-content: flex-end;
 
-    
 }
 
 .select_container{
-    padding: 16px;
+    padding: 5px 16px 2px 16px;
     width: 250px;
 }
 
 .date_range_container{
-    padding: 16px;
+    padding: 5px 16px 2px 16px;
     width: fit-content;
     
   input {
@@ -42,7 +39,6 @@
 /* Circle Frame ------------------------------------------------------------------- */
 
 .circle_content{
-    border: solid 1px #baba00;  
     width:100%;
     display: block;
 
@@ -83,6 +79,21 @@
    color: #828282;
 
  }
+
+
+
+ /* Globe  ------------------------------------------------------------------- */
+
+.globe_container{
+  position: absolute;
+  margin-top: -10px;
+  margin-left:-10px ;
+  canvas{
+    /* border:dashed 1px #CFBC93; */
+    border-radius: 500px;
+  }
+
+}
 
 /* Circles ------------------------------------------------------------------- */
 
@@ -183,6 +194,7 @@
     border: solid 3px #CFBC93;
 
  }
+ 
 
 
 
@@ -198,7 +210,7 @@
 .avg_response_time{
   height: 150px;
   background: #ffffff;
-  flex-basis: 30%;
+  flex-basis: 28%;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
@@ -237,13 +249,56 @@
 /* Communication Stats  ------------------------------------------------------------------- */
 
 .communication_stats{
-  flex-basis: 66%;
+  flex-basis: 68%;
   border-radius: 8px;
   background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+  padding: 20px 15px;
+
 }
 
-/* Globe  ------------------------------------------------------------------- */
+.left_stats{
+  flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
-.globe_container{
+.the_stat{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
 }
+
+.stat_circle{
+  border-radius: 500px;
+  width: 18px;
+  height: 18px; 
+  margin-right: 10px;
+}
+
+.stat_description{
+  font-size: 12px;
+  color: #828282;
+
+}
+
+.com_stat_value{
+  font-weight: 600;
+  width:40px;
+  margin-right: 10px;
+  font-size: 16px;
+;  
+}
+
+.pie_chart{
+  height: 110px;
+  flex-basis: 30%;
+}
+
