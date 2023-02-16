@@ -10085,6 +10085,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'check_outgoing_call_status',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'hang_up_outgoing_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 };
 export default partner;
