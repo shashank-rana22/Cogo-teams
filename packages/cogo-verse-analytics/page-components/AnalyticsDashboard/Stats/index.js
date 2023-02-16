@@ -79,7 +79,10 @@ function Stats() {
 								20
 							</div>
 							<div className={styles.ticket_label}>
-								Tickets Raised
+								Tickets
+							</div>
+							<div className={styles.ticket_label}>
+								Raised
 							</div>
 						</div>
 						<div className={styles.vertical_line} />
@@ -89,7 +92,10 @@ function Stats() {
 								15
 							</div>
 							<div className={styles.ticket_label}>
-								Tickets Resolved
+								Tickets
+							</div>
+							<div className={styles.ticket_label}>
+								Resolved
 							</div>
 						</div>
 					</div>
@@ -145,9 +151,8 @@ function Stats() {
 							<div className={styles.user_status_content}>
 								<div className={styles.user_status_icon}><img src={src} alt={title} /></div>
 								<div className={styles.user_status_right}>
-									<span className={styles.user_status_num}>{value}</span>
-									{' '}
-									{title}
+									<div className={styles.user_status_num}>{value}</div>
+									<div className={styles.user_status_text}>{title}</div>
 								</div>
 							</div>
 						);
