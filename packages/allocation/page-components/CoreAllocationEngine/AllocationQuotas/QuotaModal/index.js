@@ -1,10 +1,10 @@
 import { Modal, Button, RadioGroup } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import AsyncSelect from '../../../../common/Form/components/AsyncSelect';
-import { getFieldController } from '../../../../common/Form/Controlled';
+import { getFieldController } from '../../../../common/Form/getFieldController';
 import useCreateEditAllocationQuota from '../../../../hooks/useCreateEditAllocationQuota';
 import useDeleteAllocationQuota from '../../../../hooks/useDeleteAllocationQuota';
 import controls from '../../../../utils/get-quotas-table-controls';

@@ -1,15 +1,14 @@
 import {
+	AsyncSelectController,
 	ChipsController,
 	DatepickerController,
 	DateRangePickerController,
+	DayFrequencyController,
 	InputController,
 	MultiselectController,
 	RadioGroupController,
 	SelectController,
 } from '@cogoport/forms';
-
-import AsyncSelectController from './AsyncSelectController';
-import DayFrequencyController from './DayFrequencyController';
 
 const controlTypeControllerMapping = {
 	text               : InputController,
