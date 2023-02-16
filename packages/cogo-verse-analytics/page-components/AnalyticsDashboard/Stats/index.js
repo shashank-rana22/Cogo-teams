@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
+import { cl } from '@cogoport/components';
 import React from 'react';
 
-import { PRIMARY_STATS } from '../../../configurations/primary-stats';
+import { INTENT_LEADERBOARD, PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
 
 import styles from './styles.module.css';
 
@@ -86,6 +87,51 @@ function Stats() {
 							</div>
 						</div>
 					</div>
+				</div>
+
+			</div>
+
+			<div className={styles.user_leaderboard}>
+
+				{/* INTENT LEADERBOARD */}
+				<div className={styles.leaderboard_stats}>
+					<div className={styles.leaderboard_header}>Intent Leaderboard</div>
+					<div className={INTENT_LEADERBOARD.length > 3 ? cl`${styles.leaderboard_content} ${styles.inner_shadow}` : styles.leaderboard_content}>
+						{INTENT_LEADERBOARD.map((stat) => {
+							const { value, title, description } = stat;
+
+							return (
+								<div className={styles.leaderboard_values}>
+									<div className={styles.leaderboard_title}>
+										{title}
+									</div>
+									<div className={styles.leaderboard_description}>
+										<span className={styles.leaderboard_description_number}>{value}</span>
+										{' '}
+										{description}
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+
+				{/* USER STATUS */}
+				<div className={styles.user_status}>
+					{USER_STATUS.map((stat) => {
+						const { value, title, src } = stat;
+
+						return (
+							<div className={styles.user_status_content}>
+								<div className={styles.user_status_icon}><img src={src} alt={title} /></div>
+								<div className={styles.user_status_right}>
+									<span className={styles.user_status_num}>{value}</span>
+									{' '}
+									{title}
+								</div>
+							</div>
+						);
+					})}
 				</div>
 
 			</div>
