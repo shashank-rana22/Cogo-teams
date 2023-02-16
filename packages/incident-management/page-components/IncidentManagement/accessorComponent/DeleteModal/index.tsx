@@ -41,16 +41,19 @@ function DeleteModal({ itemData, reftech }) {
 						{status === 'REJECTED' ? ' Accepted' : ' deleted'}
 
 					</section>
-					<div className={styles.remarks_style}>
-						Remarks*
-						<Textarea
-							name="remarks"
-							className={styles.text_area}
-							size="lg"
-							placeholder="Enter Remarks here..."
-							onChange={(values) => setRemarks(values)}
-						/>
-					</div>
+					{status !== 'REJECTED'
+					&& (
+						<div className={styles.remarks_style}>
+							Remarks*
+							<Textarea
+								name="remarks"
+								className={styles.text_area}
+								size="lg"
+								placeholder="Enter Remarks here..."
+								onChange={(values) => setRemarks(values)}
+							/>
+						</div>
+					)}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button

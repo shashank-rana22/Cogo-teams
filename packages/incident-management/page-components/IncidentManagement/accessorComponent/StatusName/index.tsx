@@ -15,7 +15,7 @@ function StatusName({ itemData }) {
 		}
 		if (status === 'REQUESTED') {
 			return (
-				`RAISED AGAIN ${referenceIncidentId}`
+				`RAISED AGAIN: ${referenceIncidentId}`
 			);
 		}
 		return null;
@@ -40,7 +40,7 @@ function StatusName({ itemData }) {
 						<IcMInfo
 							height={15}
 							width={15}
-							color="red"
+							color="#EE3425"
 						/>
 					</Tooltip>
 				</div>
