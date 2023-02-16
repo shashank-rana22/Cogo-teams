@@ -282,11 +282,11 @@ importers:
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
-      globe.gl: ^2.27.1
+      globe.gl: ^2.26.12
       prop-types: ^15.8
       react: 18.2.0
       react-dom: 18.2.0
-      react-globe.gl: ^2.23.1
+      react-globe.gl: ^2.22.10
       react-kapsule: ^2.2
     dependencies:
       '@cogoport/charts': 1.0.1_v2m5e27vhdewzwhryxwfaorcca
