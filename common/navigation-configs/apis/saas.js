@@ -1412,6 +1412,11 @@ const saas = {
 			access_type  : 'public',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'update_saas_checkout',
+			access_type  : 'public',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
