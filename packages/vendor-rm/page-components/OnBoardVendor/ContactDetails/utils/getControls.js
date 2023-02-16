@@ -1,6 +1,6 @@
 export const getControls = () => [
 	{
-		name        : 'contact_name',
+		name        : 'name',
 		label       : 'Name of the Contact',
 		type        : 'text',
 		style       : { flexBasis: '30%' },
@@ -8,7 +8,7 @@ export const getControls = () => [
 		rules       : { required: 'Contact Name is required' },
 	},
 	{
-		name        : 'contact_email',
+		name        : 'email',
 		label       : 'Email of the Contact',
 		type        : 'text',
 		style       : { flexBasis: '30%' },
@@ -16,12 +16,17 @@ export const getControls = () => [
 		rules       : { required: 'Email of the Contact is required' },
 	},
 	{
-		name        : 'contact_email',
-		label       : 'Email of the Contact',
-		type        : 'text',
-		style       : { flexBasis: '30%' },
-		placeholder : 'Type here',
-		rules       : { required: 'Email of the Contact is required' },
+		name            : 'contact_proof_url',
+		showLabel       : false,
+		label           : 'Upload Vendor Document Proof (Pan/Aadhar Card)',
+		style           : { flexBasis: '100%', marginRight: '0px' },
+		type            : 'file',
+		themeType       : 'secondary',
+		drag            : true,
+		uploadIcon      : 'ic-upload',
+		onlyURLOnChange : true,
+		uploadType      : 'aws',
+		rules           : { required: 'Tax Document is required' },
 	},
 	{
 		name        : 'company_role',

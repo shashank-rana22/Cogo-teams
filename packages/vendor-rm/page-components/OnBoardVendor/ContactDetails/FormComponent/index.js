@@ -1,26 +1,30 @@
+/* eslint-disable import/no-cycle */
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
-import ControlLayout from '../../../../commons/components/ControlLayout/ControlLayout';
+import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useCreateVendorContact from '../hooks/useCreateVendorContact';
 
-import styles from './styles.module.css';
-
-function FormComponent({ activeStepper = {} }) {
+function FormComponent({ activeStepper = {}, setActiveStepper = () => {} }) {
 	const {
 		fields = [],
 		control,
 		errors,
-	} =	useCreateVendorContact();
+		createVendorContact,
+		loading,
+		handleSubmit,
+	} =	useCreateVendorContact({ setActiveStepper });
 	return (
-		<div className={styles.form_container}>
-			{fields.map((controlItem) => {
-				const el = { ...controlItem };
-
-				const { style } = controlItem;
-
-				return (<ControlLayout element={el} control={control} errors={errors} style={style} />);
-			})}
+		<div>
+			<FormLayout
+				fields={fields}
+				errors={errors}
+				control={control}
+			/>
 			<ButtonLayout
 				activeStepper={activeStepper}
+				loading={loading}
+				setActiveStepper={setActiveStepper}
+				handleSubmit={handleSubmit}
+				onSubmit={createVendorContact}
 			/>
 		</div>
 	);

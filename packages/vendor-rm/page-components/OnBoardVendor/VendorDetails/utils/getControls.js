@@ -16,7 +16,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		placeholder : 'Select',
 		style       : { flexBasis: '8%', marginRight: '2px' },
 		condition   : { type: ['country'] },
-		rules       : { required: 'Tax Number Type is Required' },
+		// rules       : { required: 'Tax Number Type is Required' },
 		// options     : countrywiseOptions,
 	},
 	{

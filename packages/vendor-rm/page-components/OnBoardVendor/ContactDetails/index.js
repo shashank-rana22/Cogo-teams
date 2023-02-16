@@ -1,11 +1,15 @@
+/* eslint-disable import/no-cycle */
 import FormComponent from './FormComponent';
 import Header from './Header';
 
-function ContactDetails() {
+function ContactDetails({ activeStepper = {}, setActiveStepper = () => {} }) {
 	return (
 		<div>
 			<Header />
-			<FormComponent />
+			<FormComponent
+				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
+			/>
 		</div>
 	);
 }

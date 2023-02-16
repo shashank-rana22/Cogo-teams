@@ -1843,7 +1843,7 @@ const navigationMappingAdmin = {
 		as            : '/v2/vendors-list',
 		type          : 'link',
 		main_apis     : [],
-		possible_apis : apis.vendor_rm,
+		possible_apis : apis.vendor_rm_apis,
 		module_type   : 'crm',
 	},
 };
