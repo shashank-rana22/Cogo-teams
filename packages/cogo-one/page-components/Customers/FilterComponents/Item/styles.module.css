@@ -1,0 +1,39 @@
+.label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #4f4f4f;
+}
+
+.filters_types {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.status_field_controller {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+
+    .ui_radio_container {
+        padding: 0px;
+    }
+}
+
+.channels_field_controller {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}
+
+.tags_field_controller {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}
+
+.escalation_field_controller {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}

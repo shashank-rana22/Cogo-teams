@@ -1,12 +1,35 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
+import filterControls from '../../../configurations/filter-controls';
+
+import Item from './Item';
 import styles from './styles.module.css';
+
+function getDefaultValues({ filters }) {
+	let defaultValues = {};
+
+	filterControls.forEach((item) => {
+		defaultValues = {
+			...defaultValues,
+			[item.name]: filters[item.name] || '',
+		};
+	});
+
+	return defaultValues;
+}
 
 function FilterComponents({
 	setFilterVisible = () => { },
+	filters = {},
 }) {
+	const defaultValues = getDefaultValues({ filters });
+	const {
+		control, formState: { errors },
+	} = useForm({ defaultValues });
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -19,41 +42,15 @@ function FilterComponents({
 				</div>
 			</div>
 
-			<div className={styles.filter_container}>
-				<div className={styles.label}>
-					{/* <RadioController control={fields} /> */}
+			{filterControls.map((field) => (
+				<div className={styles.filter_container}>
+					<Item
+						{...field}
+						control={control}
+						error={errors[field.name]}
+					/>
 				</div>
-				<div className={styles.filters_types}>
-					hello
-				</div>
-			</div>
-
-			<div className={styles.filter_container}>
-				<div className={styles.label}>
-					Tags
-				</div>
-				<div className={styles.filters_types}>
-					hello
-				</div>
-			</div>
-
-			<div className={styles.filter_container}>
-				<div className={styles.label}>
-					Priority
-				</div>
-				<div className={styles.filters_types}>
-					hello
-				</div>
-			</div>
-
-			<div className={styles.filter_container}>
-				<div className={styles.label}>
-					Escalation
-				</div>
-				<div className={styles.filters_types}>
-					hello
-				</div>
-			</div>
+			))}
 
 			<div className={styles.actions}>
 				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
