@@ -20,3 +20,10 @@
       color: #cb6464;
       letter-spacing: 0.02em;
   }
+
+  .button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 20px 40px 20px 20px;
+  }
