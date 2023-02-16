@@ -1,7 +1,7 @@
 import { Pill, Placeholder, Loader } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 
-import getListPromoCode from '../../../hooks/useGetListPromocode';
+import getListPromotions from '../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../hooks/useGetOrganizationCogopoints';
 
@@ -14,7 +14,7 @@ function OrganizationDetails({ activeMessageCard }) {
 	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard });
 	// const orgLoading = true;
 	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard });
-	const { promoData, promoLoading } = getListPromoCode({ activeMessageCard });
+	const { promoData, promoLoading } = getListPromotions({ activeMessageCard });
 
 	const { agent, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};

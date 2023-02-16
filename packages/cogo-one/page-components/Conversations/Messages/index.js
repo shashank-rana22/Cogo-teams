@@ -60,7 +60,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 					<MessageConversations
 						id={id}
 						messagesData={messagesData}
-						draftMessages={draftMessages}
+						draftMessage={draftMessages[id]}
 						setDraftMessages={setDraftMessages}
 						sendChatMessage={sendChatMessage}
 						setMessages={setMessages}

@@ -31,9 +31,15 @@ function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListL
 			});
 			fetchListLogApi();
 			Toast.success('Successfully Saved');
-			setInputValue({});
+			setInputValue({
+				title       : '',
+				description : '',
+			});
 			setDate('');
-			setTime({});
+			setTime({
+				start_time : '',
+				end_time   : '',
+			});
 		} catch (error) {
 			Toast.error(error);
 		}
