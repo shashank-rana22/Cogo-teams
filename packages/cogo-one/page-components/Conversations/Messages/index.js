@@ -14,7 +14,6 @@ import styles from './styles.module.css';
 function Messages({ activeMessageCard = {}, firestore }) {
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
-
 	const [messages, setMessages] = useState({});
 
 	const { id = '', channel_type = '' } = activeMessageCard || {};
@@ -46,6 +45,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 
 	useEffect(() => {
 		getFirebaseData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
 	const {
@@ -58,10 +58,12 @@ function Messages({ activeMessageCard = {}, firestore }) {
 	return (
 		<>
 			<div className={styles.container}>
-				<Header setOpenModal={setOpenModal} />
+				<Header
+					setOpenModal={setOpenModal}
+					activeMessageCard={activeMessageCard}
+				/>
 				<div className={styles.message_container}>
 					<MessageConversations
-						id={id}
 						messagesData={messagesData}
 						draftMessage={draftMessages[id]}
 						setDraftMessages={setDraftMessages}
@@ -71,6 +73,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						getNextData={getNextData}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
+						activeMessageCard={activeMessageCard}
 					/>
 				</div>
 			</div>

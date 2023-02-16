@@ -68,6 +68,7 @@ function VoiceList({
 
 					return (
 						<div
+							key={item?.id}
 							role="presentation"
 							className={cl`
 				${styles.card_Container}
@@ -128,7 +129,7 @@ function VoiceList({
 						</div>
 					);
 				})}
-				{loading && <LoadingState /> }
+				{loading && <LoadingState />}
 			</div>
 
 			{/* {!isEmpty(list) && (

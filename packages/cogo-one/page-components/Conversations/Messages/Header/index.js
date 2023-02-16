@@ -1,25 +1,30 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import AssigneeAvatar from '../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../common/UserAvatar';
 import { TAGS_COLORS } from '../../../../constants';
+import hideDetails from '../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
-function Header({ setOpenModal = () => {} }) {
+function Header({
+	setOpenModal = () => {},
+	activeMessageCard = {},
+}) {
+	const { name = 'Unknown User', mobile_number = '+919876543210' } = activeMessageCard;
 	const tagslist = ['!! Priority', 'Pre Shipment', 'Pre Shipment'];
 	const assignes = [
 		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: false },
 		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: false },
 		{ name: 'rahul danampally', email: 's', isAllowed: true, isActive: true },
 	];
+
 	const showContent = (list = [], showMorePlacement = 'right') => {
 		const MAX_SHOW_LENGTH = 3;
 		const showMoreList = (list || []).length > MAX_SHOW_LENGTH;
-
 		const lessList = (list || []).slice(0, MAX_SHOW_LENGTH);
-
 		const moreList = (list || []).slice(MAX_SHOW_LENGTH);
 
 		const toolTipContent = (
@@ -39,7 +44,7 @@ function Header({ setOpenModal = () => {} }) {
 
 		return (
 			<div className={styles.flex}>
-				{ showMoreList && showMorePlacement !== 'right' && toolTipComp}
+				{showMoreList && showMorePlacement !== 'right' && toolTipComp}
 				{(lessList || []).map((item, index) => (
 					<div
 						className={styles.tags}
@@ -52,6 +57,7 @@ function Header({ setOpenModal = () => {} }) {
 			</div>
 		);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -76,8 +82,10 @@ function Header({ setOpenModal = () => {} }) {
 				<div className={styles.flex}>
 					<UserAvatar type="whatsapp" />
 					<div>
-						<div className={styles.name}>John Wick</div>
-						<div className={styles.phone_number}>+91XXXXXX0980</div>
+						<div className={styles.name}>{startCase(name)}</div>
+						<div className={styles.phone_number}>
+							{hideDetails({ data: mobile_number, type: 'number' })}
+						</div>
 					</div>
 				</div>
 				<Button themeType="primary" size="md">Mark as</Button>
@@ -85,4 +93,5 @@ function Header({ setOpenModal = () => {} }) {
 		</div>
 	);
 }
+
 export default Header;

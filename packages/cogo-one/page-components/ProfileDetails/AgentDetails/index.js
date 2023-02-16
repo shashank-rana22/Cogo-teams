@@ -1,5 +1,6 @@
 import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
+import { snakeCase } from '@cogoport/utils';
 
 // import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../hooks/useGetUser';
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 
 function AgentDetails({ activeMessageCard }) {
 	const { userData, loading } = useGetUser({ activeMessageCard });
-	const { makeCallApi = () => {}, callLoading } = useOutgoingCall();
+	const { makeCallApi = () => {} } = useOutgoingCall();
 
 	const { mobile_number_eformat, name, email, mobile_verified, whatsapp_verified } = userData || {};
 	const VERIFICATION_STATUS = [
@@ -55,18 +56,22 @@ function AgentDetails({ activeMessageCard }) {
 				</div>
 			</div>
 			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item) => (
-					<div>
-						<Pill
-							key={item.label}
-							prefix={item.prefixIcon}
-							size="md"
-							color={item.color}
-						>
-							<div className={styles.pill_name}>{item.label}</div>
-						</Pill>
-					</div>
-				))}
+				{VERIFICATION_STATUS.map((item, index) => {
+					const itemKey = `${snakeCase(item.label)}_${index}`;
+
+					return (
+						<div key={itemKey}>
+							<Pill
+								key={item.label}
+								prefix={item.prefixIcon}
+								size="md"
+								color={item.color}
+							>
+								<div className={styles.pill_name}>{item.label}</div>
+							</Pill>
+						</div>
+					);
+				})}
 			</div>
 			<div className={styles.number_div}>
 				{/* <img

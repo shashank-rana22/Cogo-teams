@@ -21,7 +21,6 @@ function MessageList({
 	setAppliedFilters = () => { },
 	appliedFilters,
 }) {
-	console.log('appliedFilters', appliedFilters);
 	const loading = false;
 
 	if (isEmpty(messagesList)) {
@@ -51,7 +50,7 @@ function MessageList({
 
 				<div className={styles.filter_icon}>
 					<Popover
-						placement="left"
+						placement="right"
 						render={(
 							filterVisible && (
 								<FilterComponents
@@ -76,8 +75,10 @@ function MessageList({
 					{(messagesList || []).map((item) => {
 						const lastActive = new Date(item.sent_updated_at);
 						const checkActiveCard = activeMessageCard?.id === item?.id;
+
 						return (
 							<div
+								key={item?.id}
 								role="presentation"
 								className={cl`
 						                ${styles.card_Container} 
@@ -95,16 +96,9 @@ function MessageList({
 											/>
 											<div className={styles.user_details}>
 												<div className={styles.user_name}>
-													{isEmpty(item?.name) ? (
-														<>
-															{item.user_id}
-														</>
-													) : (
-														<>
-															{startCase(item.name)}
-														</>
-													)}
-
+													{isEmpty(item?.name)
+														? item.user_id
+														: startCase(item.name)}
 												</div>
 												<div className={styles.organisation}>
 													{item?.organization_name}
@@ -129,9 +123,7 @@ function MessageList({
 										{item.new_message_count > 0 && (
 											<div className={styles.new_message_count}>
 												{item.new_message_count > 100 ? '99+' : (
-													<>
-														{item.new_message_count}
-													</>
+													item.new_message_count
 												)}
 
 											</div>
