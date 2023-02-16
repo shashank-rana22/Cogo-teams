@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -8,10 +10,9 @@ function useListSuggestions() {
 		url    : '/list_chat_suggestions',
 		method : 'get',
 	}, { manual: true });
+
 	const [qfilter, setQfilter] = useState('');
-
 	const [pagination, setPagination] = useState(1);
-
 	const [infiniteList, setInfiniteList] = useState({
 		list  : [],
 		total : 0,
@@ -31,10 +32,11 @@ function useListSuggestions() {
 				const { list = [], ...paginationData } = res?.data || {};
 				setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 			}
-		} catch (e) {
-			console.log('e', e);
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.data));
 		}
 	};
+
 	useEffect(() => {
 		setPagination(1);
 		fetchListLogApi();
@@ -46,15 +48,15 @@ function useListSuggestions() {
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
-
 		const hasMoreData = pagination < infiniteList?.total;
-
 		if (reachBottom && hasMoreData && !loading) {
 			setPagination((p) => p + 1);
 		}
 	};
+
 	return {
 		setQfilter, handleScroll, qfilter, infiniteList, loading,
 	};
 }
+
 export default useListSuggestions;

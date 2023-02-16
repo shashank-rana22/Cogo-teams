@@ -2,7 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListLogApi = () => {} }) {
+function useCreateCommunicationLog({
+	setInputValue,
+	setDate,
+	setTime,
+	fetchListLogApi = () => {},
+}) {
 	const { partnerId } = useSelector(({ profile }) => ({
 		partnerId: profile.partner || {},
 	}));
@@ -49,4 +54,5 @@ function useCreateCommunicationLog({ setInputValue, setDate, setTime, fetchListL
 		loading,
 	};
 }
+
 export default useCreateCommunicationLog;

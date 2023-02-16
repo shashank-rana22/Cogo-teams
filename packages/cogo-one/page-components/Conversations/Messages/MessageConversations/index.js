@@ -25,6 +25,12 @@ function MessageConversations({
 	const noMessages = isEmpty(messagesData);
 	const checkMessage = isEmpty(draftMessage);
 	const { id = '' } = activeMessageCard;
+	const {
+		emojisList = {},
+		setOnClicked = () => { },
+		onClicked = false,
+		emojiListFetch = () => {},
+	} = useGetEmojiList({ activeMessageCard });
 
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
@@ -55,11 +61,8 @@ function MessageConversations({
 		}
 	}, [id, noMessages, checkMessage]);
 
-	const {
-		emojisList = {},
-		setOnClicked = () => { },
-		onClicked = false,
-	} = useGetEmojiList();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => { emojiListFetch(); }, []);
 
 	const openInstantMessages = () => {
 		setOpenModal({
