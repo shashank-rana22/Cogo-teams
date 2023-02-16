@@ -35,6 +35,7 @@ const dummyListData = [
 			team_size         : 1,
 			feedbacks_pending : 20,
 			latest_kpi        : 4,
+			score             : 16,
 		},
 		{
 			user_name         : 'Neville Longbottom',
@@ -42,6 +43,7 @@ const dummyListData = [
 			team_size         : 1,
 			feedbacks_pending : 21,
 			latest_kpi        : 3,
+			score             : 12,
 		},
 		{
 			user_name         : 'Ron Weasley',
@@ -49,6 +51,7 @@ const dummyListData = [
 			team_size         : 1,
 			feedbacks_pending : 21,
 			latest_kpi        : 3,
+			score             : 16,
 		}],
 	},
 	{
@@ -63,6 +66,7 @@ const dummyListData = [
 			team_size         : 3,
 			feedbacks_pending : 23,
 			latest_kpi        : 4,
+			score             : 16,
 		},
 		{
 			user_name         : 'Also Person',
@@ -70,6 +74,7 @@ const dummyListData = [
 			team_size         : 7,
 			feedbacks_pending : 21,
 			latest_kpi        : 3,
+			score             : 11,
 		}],
 	},
 	{
@@ -84,6 +89,7 @@ const dummyListData = [
 			team_size         : 1,
 			feedbacks_pending : 18,
 			latest_kpi        : 3,
+			score             : 16,
 		},
 		{
 			user_name         : 'Crabbe Goyle',
@@ -91,6 +97,7 @@ const dummyListData = [
 			team_size         : 1,
 			feedbacks_pending : 3,
 			latest_kpi        : 2,
+			score             : 15,
 		}],
 	},
 ];
@@ -156,6 +163,36 @@ function HRDashboard() {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.top_most_container}>
+				<h1>
+					HR Dashboard
+				</h1>
+				<div className={styles.question_button_container}>
+					<Button
+						size="lg"
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => {}}
+					>
+						<IcMNotifications style={{ marginRight: '4px' }} />
+						Send Notification
+					</Button>
+					<Button
+						size="lg"
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => {
+						// upload();
+							setOpenUploadModal(true);
+						}}
+					>
+						<IcMUpload style={{ marginRight: '4px' }} />
+						Upload CSV
+					</Button>
+
+					<Button size="lg" themeType="accent" onClick={() => routeToFeedbackForms()}>Create New Form</Button>
+				</div>
+			</div>
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
 
@@ -181,6 +218,10 @@ function HRDashboard() {
 							control={managerControl}
 							style={{ marginRight: '8px' }}
 						/>
+						<Select
+							placeholder="Select Month"
+							style={{ marginRight: '8px' }}
+						/>
 					</div>
 
 					<Input
@@ -193,22 +234,6 @@ function HRDashboard() {
 					/>
 				</div>
 
-				<div className={styles.question_button_container}>
-					<Button
-						size="lg"
-						themeType="secondary"
-						style={{ marginRight: '16px' }}
-						onClick={() => {
-							// upload();
-							setOpenUploadModal(true);
-						}}
-					>
-						<IcMUpload style={{ marginRight: '4px' }} />
-						Upload CSV
-					</Button>
-
-					<Button size="lg" themeType="accent" onClick={() => routeToFeedbackForms()}>Forms</Button>
-				</div>
 			</div>
 
 			<div>
@@ -228,10 +253,6 @@ function HRDashboard() {
 					</p>
 
 					<div className={styles.list_actions}>
-						<Button themeType="accent" size="md" style={{ marginRight: '8px' }}>
-							<IcMNotifications style={{ marginRight: '4px' }} />
-							Notify
-						</Button>
 
 						<Button
 							size="md"
