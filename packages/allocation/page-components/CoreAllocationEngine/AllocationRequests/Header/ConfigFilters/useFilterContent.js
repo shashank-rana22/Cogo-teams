@@ -45,7 +45,7 @@ const useFilterContent = ({ params, setParams }) => {
 				...pv,
 				filters: {
 					...pv.filters,
-					assignment_type: undefined,
+					stakeholder_type: undefined,
 				},
 			}));
 		}
