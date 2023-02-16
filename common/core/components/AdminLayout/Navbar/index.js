@@ -84,6 +84,7 @@ function Navbar({
 						resetSubnavs={resetSubnavs}
 						setOpenPopover={setOpenPopover}
 						openPopover={openPopover}
+						refetch={refetch}
 					/>
 
 					<div className={styles.search_container}>

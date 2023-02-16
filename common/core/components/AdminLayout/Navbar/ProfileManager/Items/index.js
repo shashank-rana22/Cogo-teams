@@ -78,12 +78,16 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 								key={singleOption.title}
 								aria-hidden
 							>
-								<div className={styles.active_item}>
-									{singleOption.icon()}
-									<span>
-										{singleOption.title}
-									</span>
-								</div>
+								{!(singleOption?.name === 'logout_all_accounts'
+								&& (userSessionMappings || []).length < 2) && (
+									<div className={styles.active_item}>
+										{singleOption.icon()}
+										<span>
+											{singleOption.title}
+										</span>
+									</div>
+								) }
+
 							</div>
 						);
 					})
