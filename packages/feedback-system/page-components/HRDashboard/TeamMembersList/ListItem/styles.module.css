@@ -1,0 +1,17 @@
+.list_item_container {
+	display: flex;
+	
+}
+
+.search {
+	width: 30%;
+	padding-right :12px;
+}
+
+.inner_list {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}

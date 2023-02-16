@@ -1,4 +1,4 @@
-import { Upload, Modal, Select, Input, Button } from '@cogoport/components';
+import { Modal, Select, Input, Button } from '@cogoport/components';
 import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMDownload, IcMNotifications, IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -7,13 +7,14 @@ import React, { useState, useEffect } from 'react';
 import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
-import UserTableData from '../../common/userTableData';
+// import UserTableData from '../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import { deptControls as departmentControls } from '../../utils/departmentControls';
 import { getControls } from '../../utils/filterControls';
 
 import styles from './styles.module.css';
+import TeamMembersList from './TeamMembersList';
 import UploadModalBody from './UploadModal';
 
 const DEPARTMENT_MAPPING = {
@@ -21,6 +22,86 @@ const DEPARTMENT_MAPPING = {
 	finance    : 'finance_role',
 	business   : 'business_role',
 };
+
+const dummyListData = [
+	{
+		user_name         : 'Harry Potter',
+		employee_id       : 'COGO5196',
+		team_size         : 3,
+		feedbacks_pending : 29,
+		latest_kpi        : 1,
+		details           : [{
+			user_name         : 'Hermione Granger',
+			employee_id       : 'COGO5666',
+			team_size         : 1,
+			feedbacks_pending : 20,
+			latest_kpi        : 4,
+			score             : 16,
+		},
+		{
+			user_name         : 'Neville Longbottom',
+			employee_id       : 'COGO5116',
+			team_size         : 1,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+			score             : 12,
+		},
+		{
+			user_name         : 'Ron Weasley',
+			employee_id       : 'COGO5016',
+			team_size         : 1,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+			score             : 16,
+		}],
+	},
+	{
+		user_name         : 'Cute Person',
+		employee_id       : 'COGO5896',
+		team_size         : 3,
+		feedbacks_pending : 23,
+		latest_kpi        : 4,
+		details           : [{
+			user_name         : 'Nice Person',
+			employee_id       : 'COGO5896',
+			team_size         : 3,
+			feedbacks_pending : 23,
+			latest_kpi        : 4,
+			score             : 16,
+		},
+		{
+			user_name         : 'Also Person',
+			employee_id       : 'COGO5116',
+			team_size         : 7,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+			score             : 11,
+		}],
+	},
+	{
+		user_name         : 'Draco Malfoy',
+		employee_id       : 'COGO5196',
+		team_size         : 3,
+		feedbacks_pending : 29,
+		latest_kpi        : 2,
+		details           : [{
+			user_name         : 'Pansy Parkinson',
+			employee_id       : 'COGO3166',
+			team_size         : 1,
+			feedbacks_pending : 18,
+			latest_kpi        : 3,
+			score             : 16,
+		},
+		{
+			user_name         : 'Crabbe Goyle',
+			employee_id       : 'COGO5116',
+			team_size         : 1,
+			feedbacks_pending : 3,
+			latest_kpi        : 2,
+			score             : 15,
+		}],
+	},
+];
 
 function HRDashboard() {
 	const Router = useRouter();
@@ -78,10 +159,41 @@ function HRDashboard() {
 				performed_by_id: manager || undefined,
 			},
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [manager]);
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.top_most_container}>
+				<h1>
+					HR Dashboard
+				</h1>
+				<div className={styles.question_button_container}>
+					<Button
+						size="lg"
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => {}}
+					>
+						<IcMNotifications style={{ marginRight: '4px' }} />
+						Send Notification
+					</Button>
+					<Button
+						size="lg"
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => {
+						// upload();
+							setOpenUploadModal(true);
+						}}
+					>
+						<IcMUpload style={{ marginRight: '4px' }} />
+						Upload CSV
+					</Button>
+
+					<Button size="lg" themeType="accent" onClick={() => routeToFeedbackForms()}>Create New Form</Button>
+				</div>
+			</div>
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
 
@@ -107,6 +219,10 @@ function HRDashboard() {
 							control={managerControl}
 							style={{ marginRight: '8px' }}
 						/>
+						<Select
+							placeholder="Select Month"
+							style={{ marginRight: '8px' }}
+						/>
 					</div>
 
 					<Input
@@ -119,22 +235,6 @@ function HRDashboard() {
 					/>
 				</div>
 
-				<div className={styles.question_button_container}>
-					<Button
-						size="lg"
-						themeType="secondary"
-						style={{ marginRight: '16px' }}
-						onClick={() => {
-							// upload();
-							setOpenUploadModal(true);
-						}}
-					>
-						<IcMUpload style={{ marginRight: '4px' }} />
-						Upload CSV
-					</Button>
-
-					<Button size="lg" themeType="accent" onClick={() => routeToFeedbackForms()}>Forms</Button>
-				</div>
 			</div>
 
 			<div>
@@ -154,10 +254,6 @@ function HRDashboard() {
 					</p>
 
 					<div className={styles.list_actions}>
-						<Button themeType="accent" size="md" style={{ marginRight: '8px' }}>
-							<IcMNotifications style={{ marginRight: '4px' }} />
-							Notify
-						</Button>
 
 						<Button
 							size="md"
@@ -172,7 +268,7 @@ function HRDashboard() {
 					</div>
 				</div>
 
-				<div className={styles.table_section}>
+				{/* <div className={styles.table_section}>
 					<UserTableData
 						columns={columns}
 						list={list}
@@ -180,6 +276,17 @@ function HRDashboard() {
 						page_limit={page_limit}
 						total_count={total_count}
 						pagination={params.page}
+						setPagination={setPage}
+					/>
+				</div> */}
+
+				<div className={styles.table_section}>
+					<TeamMembersList
+						list={dummyListData}
+						loading={false}
+						page_limit={3}
+						total_count={3}
+						pagination={1}
 						setPagination={setPage}
 					/>
 				</div>
