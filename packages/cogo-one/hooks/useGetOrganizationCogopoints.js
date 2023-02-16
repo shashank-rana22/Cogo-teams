@@ -1,4 +1,3 @@
-// import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -30,6 +29,7 @@ const useGetOrganizationCogopoints = ({ activeMessageCard, activeVoiceCard, acti
 
 	useEffect(() => {
 		fetchOrganizationCogopoint();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeMessageCard, activeVoiceCard]);
 
 	return {

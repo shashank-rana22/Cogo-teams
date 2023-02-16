@@ -23,8 +23,10 @@ function useGetListNotes({ activeMessageCard, active }) {
 			params: payload,
 		});
 	};
+
 	useEffect(() => {
 		fetchListNotes();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeMessageCard, active]);
 
 	return {

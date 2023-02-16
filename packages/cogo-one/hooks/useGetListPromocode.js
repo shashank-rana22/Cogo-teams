@@ -1,8 +1,7 @@
-// import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const getListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
+const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
 	const { organization_id } = activeVoiceCard || {};
 	const { organization_id: MessageOrgId } = activeMessageCard || {};
 	// const [pagination, setPagination] = useState({ page: 1 });
@@ -10,6 +9,7 @@ const getListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) =>
 		url    : '/list_promotions',
 		method : 'get',
 	}, { manual: true });
+
 	const fetchListPromoCode = async () => {
 		let id;
 		if (activeTab === 'voice') {
@@ -34,6 +34,7 @@ const getListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) =>
 
 	useEffect(() => {
 		fetchListPromoCode();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeMessageCard, activeVoiceCard]);
 
 	return {
@@ -42,4 +43,4 @@ const getListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) =>
 	};
 };
 
-export default getListPromotions;
+export default useGetListPromotions;

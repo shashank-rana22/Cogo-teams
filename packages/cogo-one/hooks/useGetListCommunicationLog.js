@@ -27,6 +27,7 @@ function useGetListCommunicationLog({ activeMessageCard, activeTab, activeVoiceC
 	};
 	useEffect(() => {
 		fetchListLogApi();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeMessageCard, activeVoiceCard]);
 
 	return {

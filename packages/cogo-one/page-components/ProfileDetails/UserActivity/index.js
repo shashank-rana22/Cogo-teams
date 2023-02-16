@@ -14,29 +14,25 @@ import styles from './styles.module.css';
 import TransactionalActivity from './TransactionalActivity';
 
 function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
-	console.log('activeTab', activeTab);
-	console.log('activeVoiceCard', activeVoiceCard);
-	console.log('activeMessageCard', activeMessageCard);
-
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
 
-	const ACTIVITY_COMPONENT_CALLING = {
-		platform      : <PlatformActivity />,
-		communication : <CommunicationActivity />,
-		transactional : <TransactionalActivity />,
-	};
-
 	const {
 		loading,
 		data = {},
 		fetchListLogsApi = () => {},
-	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab });
-
+	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard });
+	const { communication = {}, platform = {}, transactional = {} } = data || {};
 	const handleFilters = () => {
 		fetchListLogsApi(filters);
+	};
+
+	const ACTIVITY_COMPONENT_CALLING = {
+		platform      : <PlatformActivity platform={platform} />,
+		communication : <CommunicationActivity communication={communication} />,
+		transactional : <TransactionalActivity transactional={transactional} />,
 	};
 
 	useEffect(() => {

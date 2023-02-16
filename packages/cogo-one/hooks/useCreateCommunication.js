@@ -76,4 +76,5 @@ function useCreateCommunicationLog({
 		loading,
 	};
 }
+
 export default useCreateCommunicationLog;

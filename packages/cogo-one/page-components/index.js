@@ -1,13 +1,16 @@
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../configurations/firebase-config';
+import useAgentWorkPrefernce from '../hooks/useAgentWorkPrefernce';
 import useListChats from '../hooks/useListChats';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
+import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
@@ -18,6 +21,11 @@ function CogoOne() {
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 
+	const {
+		loading,
+		data,
+	} = useAgentWorkPrefernce();
+	console.log('data', data);
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
@@ -38,6 +46,7 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
+	console.log('activeMessageCard', activeMessageCard, activeVoiceCard);
 
 	const { messagesList = [], unReadChatsCount } = listData;
 
@@ -68,18 +77,26 @@ function CogoOne() {
 				setAppliedFilters={setAppliedFilters}
 			/>
 
-			<Conversations
-				activeTab={activeTab}
-				activeMessageCard={activeMessageCard}
-				firestore={firestore}
-				activeVoiceCard={activeVoiceCard}
-			/>
+			{(!isEmpty(activeMessageCard) || !isEmpty(activeVoiceCard)) ? (
+				<>
+					<Conversations
+						activeTab={activeTab}
+						activeMessageCard={activeMessageCard}
+						firestore={firestore}
+						activeVoiceCard={activeVoiceCard}
+					/>
 
-			<ProfileDetails
-				activeMessageCard={activeMessageCard}
-				activeTab={activeTab}
-				activeVoiceCard={activeVoiceCard}
-			/>
+					<ProfileDetails
+						activeMessageCard={activeMessageCard}
+						activeTab={activeTab}
+						activeVoiceCard={activeVoiceCard}
+					/>
+				</>
+			) : (
+				<EmptyChatPage
+					displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
+				/>
+			)}
 		</div>
 	);
 }
