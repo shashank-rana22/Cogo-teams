@@ -74,7 +74,7 @@ const getCreateConfigurationsControls = ({
 			placeholder       : 'Type segment here...',
 			type              : 'asyncSelect',
 			asyncKey          : 'segments',
-			labelKey          : 'name',
+			labelKey          : 'label',
 			valueKey          : 'id',
 			initialCall       : false,
 			getSelectedOption : (obj) => {
@@ -82,7 +82,7 @@ const getCreateConfigurationsControls = ({
 			},
 			getModifiedOptions: ({ options }) => options.map((option) => ({
 				...option,
-				name: startCase(option.name),
+				label: startCase(option.name),
 			})),
 			params: {
 				segment_type         : 'global',
