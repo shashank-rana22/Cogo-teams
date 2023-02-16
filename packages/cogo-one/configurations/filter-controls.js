@@ -1,9 +1,11 @@
 const controls = [
 	{
-		name    : 'status',
-		span    : 4,
-		type    : 'radio',
-		options : [
+		label     : '',
+		name      : 'status',
+		type      : 'radio',
+		className : 'status_field_controller',
+		value     : '',
+		options   : [
 			{
 				label : 'Unread',
 				value : 'unread',
@@ -19,22 +21,25 @@ const controls = [
 		],
 	},
 	{
-		name    : 'channels',
-		type    : 'checkbox',
-		span    : 4,
-		options : [
+		label     : 'Channels',
+		name      : 'channels',
+		type      : 'checkboxgroup',
+		className : 'channels_field_controller',
+		multiple  : true,
+		value     : [],
+		options   : [
 			{ label: 'Whatsapp', value: 'whatsapp' },
 			{ label: 'Facebook', value: 'facebook' },
 			{ label: 'Instagram', value: 'instagram' },
 			{ label: 'Mail', value: 'mail' }],
-		className : 'custom-checkbox',
-		multiple  : true,
 	},
 	{
-		name    : 'tags',
-		span    : 4,
-		type    : 'radio',
-		options : [
+		label     : 'Tags',
+		name      : 'tags',
+		type      : 'radio',
+		value     : '',
+		className : 'tags_field_controller',
+		options   : [
 			{
 				label : 'Preshipped',
 				value : 'preshipped',
@@ -50,29 +55,12 @@ const controls = [
 		],
 	},
 	{
-		name    : 'priority',
-		span    : 4,
-		type    : 'radio',
-		options : [
-			{
-				label : 'High !!!',
-				value : 'high',
-			},
-			{
-				label : 'Medium !!',
-				value : 'medium',
-			},
-			{
-				label : 'Low !',
-				value : 'low',
-			},
-		],
-	},
-	{
-		name    : 'escalation',
-		span    : 4,
-		type    : 'radio',
-		options : [
+		label     : 'Escalation',
+		name      : 'escalation',
+		type      : 'radio',
+		value     : '',
+		className : 'escalation_field_controller',
+		options   : [
 			{
 				label : 'Warning',
 				value : 'warning',

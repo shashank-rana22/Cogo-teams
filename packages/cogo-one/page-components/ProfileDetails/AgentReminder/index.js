@@ -20,6 +20,7 @@ function AgentReminder({ activeMessageCard }) {
 		start_time : '',
 		end_time   : '',
 	});
+	console.log('time', time);
 
 	const {
 		listData = {},

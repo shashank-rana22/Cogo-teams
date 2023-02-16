@@ -16,6 +16,7 @@ const useListChats = ({
 	user_role_ids, userId,
 }) => {
 	const [activeMessageCard, setActiveMessageCard] = useState({});
+	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({
 		messagesList     : [],
@@ -66,6 +67,7 @@ const useListChats = ({
 			omniChannelQuery = query(
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
+				// where('session_type', '!=', 'bot'),
 
 			);
 		} else {
@@ -73,6 +75,7 @@ const useListChats = ({
 				omniChannelCollection,
 				orderBy('updated_at', 'desc'),
 				where('agent_id', '==', userId),
+				// where('session_type', '!=', 'bot'),
 
 			);
 		}
@@ -96,7 +99,7 @@ const useListChats = ({
 		}
 	};
 	return {
-		listData, setActiveMessage, activeMessageCard,
+		listData, setActiveMessage, activeMessageCard, setAppliedFilters, appliedFilters,
 	};
 };
 

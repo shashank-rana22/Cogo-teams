@@ -62,24 +62,6 @@ const useSendChat = ({
 		}
 	};
 
-	// const { sendMessagesInfo, sendAPI } = useSendSupportChatMessages(
-	// 	sendChatMessage,
-	// 	getUser,
-	// );
-
-	// const sendWhatsappMessage = () => {
-	// 	const newMessage = chatMessage?.[activeChat] || '';
-	// 	if (differenceInDays(Date.now(), getUser.sent_updated_at) < 1) {
-	// 		if (!isEmpty(newMessage?.trim()) && !sendAPI.loading) {
-	// 			sendMessagesInfo('whatsapp', newMessage, getUser.user_id);
-	// 		}
-	// 	} else {
-	// 		toast.error(
-	// 			'Messages can only be sent within 24 hours of the last message sent by the user',
-	// 		);
-	// 	}
-	// };
-
 	return { sendChatMessage };
 };
 

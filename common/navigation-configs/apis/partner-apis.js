@@ -10086,6 +10086,12 @@ const partner = {
 			service_name : 'voice_call',
 		},
 		{
+			api          : 'list_chat_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+
 			api          : 'check_outgoing_call_status',
 			access_type  : 'private',
 			service_name : 'voice_call',

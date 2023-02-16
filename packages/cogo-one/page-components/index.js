@@ -1,10 +1,9 @@
 import { useSelector } from '@cogoport/store';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../configurations/firebase-config';
-import useGetVoiceCallList from '../hooks/useGetVoiceCallList';
 import useListChats from '../hooks/useListChats';
 
 import Conversations from './Conversations';
@@ -28,7 +27,13 @@ function CogoOne() {
 		userId  : profile?.user?.id,
 	}));
 
-	const { listData = {}, setActiveMessage, activeMessageCard } = useListChats({
+	const {
+		listData = {},
+		setActiveMessage = () => {},
+		activeMessageCard,
+		setAppliedFilters = () => {},
+		appliedFilters,
+	} = useListChats({
 		firestore,
 		userId,
 		user_role_ids: partner?.user_role_ids,
@@ -36,13 +41,11 @@ function CogoOne() {
 
 	const { messagesList = [], unReadChatsCount } = listData;
 
-	const {
-		loading,
-		data = {},
-		handleScroll = () => {},
-	} = useGetVoiceCallList({ activeTab });
-
-	const { list = [] } = data;
+	useEffect(() => {
+		setActiveVoiceCard({});
+		setActiveMessage({});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeTab]);
 
 	return (
 		<div className={styles.layout_container}>
@@ -59,11 +62,10 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				voiceList={list}
 				messagesList={messagesList}
-				voiceListLoading={loading}
-				handleScroll={handleScroll}
 				unReadChatsCount={unReadChatsCount}
+				appliedFilters={appliedFilters}
+				setAppliedFilters={setAppliedFilters}
 			/>
 
 			<Conversations

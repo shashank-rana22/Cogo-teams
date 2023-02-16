@@ -1,6 +1,6 @@
 import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
-// import { useState } from 'react';
+import { snakeCase } from '@cogoport/utils';
 
 // import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../hooks/useGetUser';
@@ -54,18 +54,22 @@ function AgentDetails({ activeMessageCard }) {
 				</div>
 			</div>
 			<div className={styles.verification_pills}>
-				{VERIFICATION_STATUS.map((item) => (
-					<div>
-						<Pill
-							key={item.label}
-							prefix={item.prefixIcon}
-							size="md"
-							color={item.color}
-						>
-							<div className={styles.pill_name}>{item.label}</div>
-						</Pill>
-					</div>
-				))}
+				{VERIFICATION_STATUS.map((item, index) => {
+					const itemKey = `${snakeCase(item.label)}_${index}`;
+
+					return (
+						<div key={itemKey}>
+							<Pill
+								key={item.label}
+								prefix={item.prefixIcon}
+								size="md"
+								color={item.color}
+							>
+								<div className={styles.pill_name}>{item.label}</div>
+							</Pill>
+						</div>
+					);
+				})}
 			</div>
 			{loading ? (
 				<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />

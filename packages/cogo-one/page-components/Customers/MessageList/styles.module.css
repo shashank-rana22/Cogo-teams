@@ -99,13 +99,13 @@
     flex-direction: column;
 }
 
-.user_name{
-	font-size: 14px;
-	font-weight: 600;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	max-width: 150px;
+.user_name {
+    font-size: 14px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
 }
 
 .organisation {
@@ -143,6 +143,15 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 90%;
+}
+
+.empty_state {
+    font-size: 16px;
+    color: #828282;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35vh;
 }
 
 .list_container {
