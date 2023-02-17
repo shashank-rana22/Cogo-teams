@@ -6,7 +6,13 @@ import React, { useState } from 'react';
 import MappedUser from './MappedUser';
 import styles from './styles.module.css';
 
-function SwitchAccounts({ userMappings = [], refetch = () => {}, loading, timeLeft, checkIfSessionExpiring }) {
+function SwitchAccounts({
+	userMappings = [],
+	refetch = () => {},
+	loading, timeLeft,
+	checkIfSessionExpiring,
+	setOpenPopover = () => {},
+}) {
 	const {
 		profile,
 	} = useSelector((state) => state);
@@ -21,12 +27,18 @@ function SwitchAccounts({ userMappings = [], refetch = () => {}, loading, timeLe
 		Toast.success('Switching Profile');
 	};
 
+	if (userMappings?.length < 2) {
+		return null;
+	}
+
 	return (
 		<div className={styles.container}>
 			{(userMappings || []).map((user) => {
 				if (user?.user_id === profile?.user?.id) {
 					return null;
-				} return (
+				}
+
+				return (
 					<MappedUser
 						loading={loading}
 						timeLeft={timeLeft}
@@ -35,6 +47,7 @@ function SwitchAccounts({ userMappings = [], refetch = () => {}, loading, timeLe
 						profileData={profile}
 						refetch={refetch}
 						user={user}
+						setOpenPopover={setOpenPopover}
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						sessionId={sessionId}
 						setSessionId={setSessionId}

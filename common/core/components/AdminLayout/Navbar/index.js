@@ -152,13 +152,16 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
-			<div onMouseLeave={() => setResetSubnavs(false)}>
+			<div
+				onMouseLeave={() => setResetSubnavs(false)}
+			>
 				{
 					openPopover
 						&& (
 							<SwitchAccounts
 								userMappings={data}
 								refetch={refetch}
+								setOpenPopover={setOpenPopover}
 								loading={loading}
 								checkIfSessionExpiring={checkIfSessionExpiring}
 								timeLeft={timeLeft}

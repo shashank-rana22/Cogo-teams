@@ -7,7 +7,8 @@ import { getCookie, setCookie } from '@cogoport/utils';
 const useGetAllActions = ({
 	user = {},
 	refetch = () => {},
-	profile = 'non-default',
+	profile = '',
+	setOpenPopover = () => {},
 }) => {
 	const {
 		profile: profileData = {},
@@ -103,6 +104,8 @@ const useGetAllActions = ({
 						refetch();
 						toast.success('User logged out successfully!');
 					}
+
+					setOpenPopover(false);
 				}
 			}
 		} catch (error) {

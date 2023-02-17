@@ -14,6 +14,7 @@ function MappedUser({
 	showActions,
 	setShowActions = () => {},
 	loading,
+	setOpenPopover = () => {},
 	checkIfSessionExpiring,
 	timeLeft,
 }) {
@@ -22,6 +23,8 @@ function MappedUser({
 	const { removeProfile = () => {} } = useGetAllActions({
 		user,
 		refetch,
+		profile: 'non-default',
+		setOpenPopover,
 	});
 
 	const handleShow = (val) => {
@@ -43,14 +46,16 @@ function MappedUser({
 	return (
 		<div
 			className={styles.container}
-			onClick={() => handleShow(user)}
 			style={{
 				pointerEvents : loadingState ? 'none' : '',
 				opacity       : loadingState ? '0.2' : 1,
 			}}
-			role="presentation"
 		>
-			<div className={styles.active_profile}>
+			<div
+				className={styles.active_profile}
+				onClick={() => handleShow(user)}
+				role="presentation"
+			>
 				{
 					sessionId === user?.user_session_id
 						? (
