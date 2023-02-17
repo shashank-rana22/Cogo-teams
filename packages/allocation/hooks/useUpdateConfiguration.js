@@ -1,13 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 const useUpdateConfiguration = ({
 	item = {},
 	setShow = () => {},
 	listRefetch = () => {},
 }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/configuration_attributes',
 		method  : 'POST',
 		authkey : 'post_allocation_configuration_attributes',

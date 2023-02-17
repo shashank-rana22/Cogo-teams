@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 import getUpdateDetailsControls from '../utils/get-details-update-controls';
 
@@ -16,7 +16,7 @@ const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, l
 		defaultValues,
 	});
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/detail_stakeholder',
 		mathod  : 'POST',
 		authkey : 'post_allocation_detail_stakeholder',

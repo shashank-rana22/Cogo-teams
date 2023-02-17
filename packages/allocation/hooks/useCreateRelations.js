@@ -1,14 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 import getCreateRelationsControls from '../utils/get-create-relation-controls';
 
 const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList = () => {} }) => {
 	const controls = getCreateRelationsControls();
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/relation',
 		method  : 'POST',
 		authkey : 'post_allocation_relation',

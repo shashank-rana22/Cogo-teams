@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useListAllocationConfigurations = () => {
@@ -13,7 +13,7 @@ const useListAllocationConfigurations = () => {
 		},
 	});
 
-	const [{ loading, data }, refetch] = useRequest({
+	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/configurations',
 		method  : 'get',
 		authkey : 'get_allocation_configurations',

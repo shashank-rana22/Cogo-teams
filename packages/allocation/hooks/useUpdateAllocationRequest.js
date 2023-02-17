@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useUpdateRequestStatus = (props) => {
@@ -8,7 +8,7 @@ const useUpdateRequestStatus = (props) => {
 
 	const [requestStatusItem, setRequestStatusItem] = useState({});
 
-	const api = useRequest({
+	const api = useAllocationRequest({
 		url     : '/request_status',
 		method  : 'POST',
 		authkey : 'post_allocation_request_status',

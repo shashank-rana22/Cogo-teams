@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 import controls from '../utils/get-configuration-publish-controls';
 
@@ -10,7 +10,7 @@ const usePublishConfiguration = ({
 	listRefetch = () => {},
 	setShow = () => {},
 }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/configuration_status',
 		method  : 'POST',
 		authkey : 'post_allocation_configuration_status',

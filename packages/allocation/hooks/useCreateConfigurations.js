@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import getCreateConfigurationsControls from '../utils/get-configurations-create-controls';
@@ -20,7 +20,7 @@ const useCreateConfigurations = ({
 	const authkey = viewType === 'create'
 		? 'post_allocation_configuration' : 'post_allocation_configuration_attributes';
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url    : `${apiName}`,
 		method : 'POST',
 		authkey,

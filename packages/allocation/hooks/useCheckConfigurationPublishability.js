@@ -1,13 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 const useCheckConfigurationPublishability = ({
 	item = {},
 	listRefetch = () => {},
 	setShow = () => {},
 }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/configuration_check_publishability',
 		method  : 'POST',
 		authkey : 'post_allocation_configuration_check_publishability',

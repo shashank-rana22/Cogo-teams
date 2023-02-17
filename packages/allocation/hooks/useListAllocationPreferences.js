@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useListAllocationPreferences = ({ item = {} }) => {
@@ -13,7 +13,7 @@ const useListAllocationPreferences = ({ item = {} }) => {
 		},
 	});
 
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/configuration_mutual_exclusions',
 		method  : 'get',
 		authkey : 'get_allocation_configuration_mutual_exclusions',

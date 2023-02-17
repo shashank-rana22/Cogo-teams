@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 const TOAST_MESSAGE_MAPPING = {
 	approve     : 'Request Approved',
@@ -29,7 +29,7 @@ const useRelationActions = ({
 	const authkey = confirmModalState.type === 'approve_all'
 		? 'post_allocation_relation_bulk_approve' : 'post_allocation_relation_status';
 
-	const UpdateAllocationRelationsAPI = useRequest({
+	const UpdateAllocationRelationsAPI = useAllocationRequest({
 		url    : `/${apiName}`,
 		method : 'post',
 		authkey,
