@@ -1,41 +1,40 @@
 .pagination_container {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .table {
-    tr {
-        height: 60px;
-    }
+	tr {
+		height: 60px;
+	}
 }
 
 .legend {
-    margin: 0px;
+	margin: 0;
 
-    :global(.ui_legend_item){
-        margin: 0px;
-    }
+	:global(.ui_legend_item) {
+		margin: 0;
+	}
 }
 
 .daterange_container {
-    margin-bottom: 12px;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-bottom: 12px;
 }
 
 .popover_container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .popover_heading {
-    margin-bottom: 12px;
-    word-break: initial;
+	margin-bottom: 12px;
+	word-break: initial;
 }
 
 .popover_button_container {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
