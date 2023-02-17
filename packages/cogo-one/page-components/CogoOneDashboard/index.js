@@ -1,7 +1,11 @@
+import Header from './Header';
+import TimeSpent from './TimeSpent';
+
 function CogoOneDashboard() {
 	return (
 		<div>
-			CogoOneDashboard
+			<Header />
+			<TimeSpent />
 		</div>
 	);
 }

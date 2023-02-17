@@ -1852,7 +1852,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'cogo_one-cogo_one_dashboard',
-				title         : 'Cogo-one Dashboard',
+				title         : 'Dashboard',
 				href          : '/v2/cogo-one/cogo-one-dashboard',
 				as            : '/v2/cogo-one/cogo-one-dashboard',
 				type          : 'link',

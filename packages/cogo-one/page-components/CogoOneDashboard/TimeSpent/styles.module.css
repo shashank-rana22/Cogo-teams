@@ -1,0 +1,6 @@
+.time_spent_container {
+	display: flex;
+	justify-content: flex-end;
+	background: #fff;
+	border-radius: 6px;
+}

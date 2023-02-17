@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	display: flex;
+	flex-direction: row;
+}
+
+.heading .heading_name {
+	padding-left: 5px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
+}
