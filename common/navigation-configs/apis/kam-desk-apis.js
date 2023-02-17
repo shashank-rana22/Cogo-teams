@@ -246,6 +246,11 @@ const apis = [
 		api         : 'get_sales_invoice_shipment_list',
 		access_type : 'private',
 	},
+	{
+		api          : 'list_kam_desk_surface_shipments',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
