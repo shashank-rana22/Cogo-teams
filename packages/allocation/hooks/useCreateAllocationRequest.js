@@ -10,7 +10,7 @@ import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
 import getStakeholderTypeOptions from '../utils/stakeholder-options';
 
 const useCreateAllocationRequest = (props) => {
-	const { onCloseModal, refetch } = props;
+	const { onCloseModal, refetch, params } = props;
 
 	const {
 		profile: {
@@ -22,7 +22,7 @@ const useCreateAllocationRequest = (props) => {
 
 	const formProps = useForm({
 		defaultValues: {
-			service_type: 'organization',
+			service_type: params.filters?.service_type || 'organization',
 		},
 	});
 	const { watch, setValue } = formProps;
