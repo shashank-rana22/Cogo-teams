@@ -44,6 +44,7 @@ function CogoOne() {
 		activeMessageCard,
 		setAppliedFilters = () => {},
 		appliedFilters,
+		loading,
 	} = useListChats({
 		firestore,
 		userId,
@@ -51,7 +52,6 @@ function CogoOne() {
 	});
 
 	const { messagesList = [], unReadChatsCount } = listData;
-	console.log('messagesList', messagesList);
 
 	useEffect(() => {
 		setActiveVoiceCard({});
@@ -80,6 +80,7 @@ function CogoOne() {
 				setAppliedFilters={setAppliedFilters}
 				status={status}
 				workPrefernce={workPrefernce}
+				MessageLoading={loading}
 			/>
 
 			<div className={styles.chat_details_continer}>

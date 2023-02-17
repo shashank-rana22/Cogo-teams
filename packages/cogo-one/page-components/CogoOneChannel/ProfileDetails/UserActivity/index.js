@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Tabs, TabPanel, Input, Popover } from '@cogoport/components';
 import { IcMFdollar, IcMDoubleFilter, IcMSearchlight, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
+import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import CommunicationActivity from './CommunicationActivity';
 import Filters from './Filters';
@@ -18,6 +20,11 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
+
+	const userData = getActiveCardDetails(activeMessageCard);
+	const { user_id: userVoiceId = '' } = activeVoiceCard || {};
+	const { user_id: userMessageId = '' } = userData || {};
+	const user_id = activeTab === 'message' ? userMessageId : userVoiceId;
 
 	const {
 		loading,
@@ -41,9 +48,16 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		setFilters([]);
 	}, [activityTab]);
 
+	if (isEmpty(user_id)) {
+		return (
+			<div className={styles.empty_state}>
+				No Data Found...
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={activityTab}
@@ -105,7 +119,6 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 				{ACTIVITY_COMPONENT_CALLING[activityTab]}
 			</div>
 			{loading && <LoadingState activityTab={activityTab} />}
-
 		</div>
 	);
 }
