@@ -10178,6 +10178,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 
 	],
 };

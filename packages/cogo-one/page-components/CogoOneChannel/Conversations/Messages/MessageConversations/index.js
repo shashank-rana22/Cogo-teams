@@ -49,6 +49,7 @@ function MessageConversations({
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
+			console.log('Enter', 'Enter');
 			event.preventDefault();
 			sendChatMessage();
 		}
@@ -98,8 +99,8 @@ function MessageConversations({
 	return (
 		<div className={styles.styled_div}>
 			<div className={cl`${styles.container} ${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.chat_container}`} onScroll={handleScroll}>
-				{(messagesData || []).map((eachMessage) => (
-					<div>
+				{(messagesData || []).map((eachMessage, index) => (
+					<div className={cl`${index === 0 ? styles.first_div : ''}`}>
 						{eachMessage?.conversation_type !== 'received'
 							? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
 							: <SentDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />}

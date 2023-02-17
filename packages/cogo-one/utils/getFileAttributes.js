@@ -4,6 +4,7 @@ const fileIconMapping = {
 	doc : <IcMDocument height={22} width={22} />,
 	pdf : <IcMPdf height={22} width={22} />,
 	img : <IcMImage height={22} width={25} />,
+
 };
 
 function getFileAttributes({ fileName = '', finalUrl }) {
