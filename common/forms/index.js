@@ -14,7 +14,7 @@ export { default as CheckboxGroupController } from './page-components/Controlled
 export { default as PillsController } from './page-components/Controlled/PillsController';
 export { default as DayFrequencyController } from './page-components/Controlled/DayFrequencyController';
 export { default as AsyncSelectController } from './page-components/Controlled/AsyncSelectController';
-
+export { default as TextareaController } from './page-components/Controlled/TextareaController';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
 export { default as useDebounceQuery } from './hooks/useDebounceQuery';
