@@ -81,8 +81,13 @@ function MessageConversations({
 		setOpenModal({
 			type : 'instant_messages',
 			data : {
-				updateMessage: (val) => setDraftMessages((p) => ({ ...p, [id]: val })),
+				updateMessage: (val) => {
+					console.log('val', val);
+					setDraftMessages((p) => ({ ...p, [id]: val }));
+					setOpenModal({ type: null, data: {} });
+				},
 			},
+
 		});
 	};
 

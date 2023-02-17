@@ -9,9 +9,7 @@ import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactive
 import styles from './styles.module.css';
 
 function InactiveModal({
-	toggleStatus,
-	setToggleStatus,
-	workPrefernce,
+	workPrefernce, setOpenModal,
 }) {
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
@@ -20,7 +18,7 @@ function InactiveModal({
 	const {
 		loading,
 		userStatus = () => {},
-	} = useCreateUserInactiveStatus({ workPrefernce });
+	} = useCreateUserInactiveStatus({ workPrefernce, setOpenModal, type: 'hello' });
 
 	const REASONS = [
 		{
@@ -36,7 +34,7 @@ function InactiveModal({
 	};
 
 	const handleClose = () => {
-		setToggleStatus(false);
+		setOpenModal(false);
 		setStartDate('');
 		setEndDate('');
 	};
@@ -49,7 +47,7 @@ function InactiveModal({
 
 	return (
 		<div className={styles.container}>
-			<Modal size="sm" show={toggleStatus} onClose={handleClose} placement="top">
+			<Modal size="sm" show onClose={handleClose} placement="top">
 				<Modal.Header title="Inactive Status till" />
 
 				<RadioGroup options={REASONS} onChange={setInactiveReason} value={inactiveReason} />

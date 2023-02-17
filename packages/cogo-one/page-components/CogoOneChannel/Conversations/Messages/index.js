@@ -117,7 +117,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						)}
 						/>
 					)}
-					<ActiveModalComp />
+					<ActiveModalComp data={openModal?.data || {}} />
 				</Modal>
 			)}
 		</>

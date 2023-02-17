@@ -10173,6 +10173,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_suggestion',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 
 	],
 };
