@@ -15,15 +15,19 @@ import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function CogoOne() {
+	const {
+		agentStatus = {},
+		workPrefernce = () => {},
+	} = useAgentWorkPrefernce();
+	const { status = '' } = agentStatus;
+
+	const userStatus = status === 'active';
+
 	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState(false);
+	const [toggleStatus, setToggleStatus] = useState(userStatus);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
-
-	const {
-		data,
-	} = useAgentWorkPrefernce();
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -74,6 +78,8 @@ function CogoOne() {
 				unReadChatsCount={unReadChatsCount}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
+				status={status}
+				workPrefernce={workPrefernce}
 			/>
 
 			<div className={styles.chat_details_continer}>

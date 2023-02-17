@@ -23,6 +23,8 @@ function Customers({
 	unReadChatsCount,
 	setAppliedFilters = () => {},
 	appliedFilters = {},
+	status = '',
+	workPrefernce = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -34,7 +36,7 @@ function Customers({
 					</div>
 				</div>
 				<Toggle
-					name="a1"
+					name="online"
 					size="md"
 					showOnOff
 					onChange={() => setToggleStatus((p) => !p)}
@@ -80,6 +82,7 @@ function Customers({
 				<InactiveModal
 					toggleStatus={toggleStatus}
 					setToggleStatus={setToggleStatus}
+					workPrefernce={workPrefernce}
 				/>
 			)}
 		</div>

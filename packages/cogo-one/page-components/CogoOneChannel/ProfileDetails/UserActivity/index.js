@@ -24,7 +24,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		data = {},
 		fetchListLogsApi = () => {},
 		handleScroll = () => {},
-	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard });
+	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard, activeTab });
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 	const handleFilters = () => {
@@ -104,7 +104,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 			>
 				{ACTIVITY_COMPONENT_CALLING[activityTab]}
 			</div>
-			{loading && <LoadingState activityTab={activityTab} />}
+			{!loading && <LoadingState activityTab={activityTab} />}
 
 		</div>
 	);

@@ -8,6 +8,7 @@ const useGetOmnichannelActivityLogs = ({
 	activityTab = '',
 	searchValue = '',
 	activeVoiceCard = {},
+	activeTab,
 }) => {
 	const { user_id:userVoiceId = '' } = activeVoiceCard;
 	const userData = getActiveCardDetails(activeMessageCard);
@@ -28,7 +29,7 @@ const useGetOmnichannelActivityLogs = ({
 	const fetchActivityLogs = async (filters = []) => {
 		const res = await trigger({
 			params: {
-				user_id : activityTab === 'message' ? userMessageId : userVoiceId,
+				user_id : activeTab === 'message' ? userMessageId : userVoiceId,
 				// activity_type : activityTab,
 				page    : pagination,
 			},

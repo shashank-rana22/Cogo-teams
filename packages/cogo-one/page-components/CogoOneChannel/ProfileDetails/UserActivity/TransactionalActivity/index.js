@@ -90,7 +90,9 @@ function TransactionalActivity({ transactional = {} }) {
 					</>
 				);
 			})}
-
+			<div className={styles.activity_date}>
+				<div className={styles.dot} />
+			</div>
 		</div>
 	);
 }

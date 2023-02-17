@@ -61,7 +61,9 @@ function CommunicationActivity({ communication = {} }) {
 					</>
 				);
 			})}
-
+			<div className={styles.activity_date}>
+				<div className={styles.dot} />
+			</div>
 		</div>
 	);
 }
