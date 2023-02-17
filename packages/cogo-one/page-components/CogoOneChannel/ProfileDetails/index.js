@@ -25,7 +25,13 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				)}
 
 			</div>
-			<RightSideNav activeSelect={activeSelect} setActiveSelect={setActiveSelect} />
+
+			<RightSideNav
+				activeMessageCard={activeMessageCard}
+				activeVoiceCard={activeVoiceCard}
+				activeSelect={activeSelect}
+				setActiveSelect={setActiveSelect}
+			/>
 		</div>
 	);
 }
