@@ -11,7 +11,7 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore }) {
+function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
@@ -92,6 +92,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
 						activeMessageCard={roomData}
+						suggestions={suggestions}
 					/>
 				</div>
 			</div>

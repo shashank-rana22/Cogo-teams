@@ -6,7 +6,9 @@ import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
+import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
 import useListChats from '../../hooks/useListChats';
+import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
 import Conversations from './Conversations';
 import Customers from './Customers';
@@ -17,19 +19,18 @@ import styles from './styles.module.css';
 function CogoOne() {
 	const {
 		agentStatus = {},
-		workPrefernce = () => {},
+		fetchworkPrefernce = () => {},
 	} = useAgentWorkPrefernce();
 
-	const { status = '' } = agentStatus;
-
-	const userStatus = status === 'active';
+	const { status = '' } = agentStatus || {};
 
 	const [activeTab, setActiveTab] = useState('message');
-	const [toggleStatus, setToggleStatus] = useState(userStatus);
+	const [toggleStatus, setToggleStatus] = useState(false);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
+	const { suggestions = [] } = useListChatSuggestions();
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -39,6 +40,10 @@ function CogoOne() {
 		partner : profile.partner || {},
 		userId  : profile?.user?.id,
 	}));
+	const {
+		loading:statusLoading,
+		updateUserStatus = () => {},
+	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
 	const {
 		listData = {},
@@ -62,9 +67,9 @@ function CogoOne() {
 	}, [activeTab]);
 
 	useEffect(() => {
-		setToggleStatus(userStatus);
+		setToggleStatus(status === 'active');
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [toggleStatus]);
+	}, [JSON.stringify(agentStatus)]);
 
 	return (
 		<div className={styles.layout_container}>
@@ -85,10 +90,12 @@ function CogoOne() {
 				unReadChatsCount={unReadChatsCount}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
-				workPrefernce={workPrefernce}
+				fetchworkPrefernce={fetchworkPrefernce}
 				messagesLoading={loading}
 				setOpenModal={setOpenModal}
 				openModal={openModal}
+				updateUserStatus={updateUserStatus}
+				statusLoading={statusLoading}
 			/>
 
 			<div className={styles.chat_details_continer}>
@@ -99,6 +106,7 @@ function CogoOne() {
 							activeMessageCard={activeMessageCard}
 							firestore={firestore}
 							activeVoiceCard={activeVoiceCard}
+							suggestions={suggestions}
 						/>
 						<ProfileDetails
 							activeMessageCard={activeMessageCard}
