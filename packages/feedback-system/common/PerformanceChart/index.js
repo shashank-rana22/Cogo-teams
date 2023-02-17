@@ -201,7 +201,6 @@ function PerformanceChart({ user_id = '' }) {
 								legendPosition : 'middle',
 							}}
 							enableGridX={false}
-							enableGridY={false}
 							pointSize={7}
 							// pointColor={{ theme: 'background' }}
 							pointBorderWidth={7}
