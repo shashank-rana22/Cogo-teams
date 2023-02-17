@@ -1,25 +1,23 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Tabs, TabPanel, Popover } from '@cogoport/components';
 import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
+import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
-import CommunicationActivity from './CommunicationActivity';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
-import PlatformActivity from './PlatformActivity';
 import styles from './styles.module.css';
-import TransactionalActivity from './TransactionalActivity';
 
 function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const [activityTab, setActivityTab] = useState('transactional');
-	// const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
+
+	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING[activityTab] || null;
 
 	const userData = getActiveCardDetails(activeMessageCard);
 	const { user_id: userVoiceId = '' } = activeVoiceCard || {};
@@ -30,19 +28,12 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		loading,
 		data = {},
 		fetchActivityLogs = () => {},
-		handleScroll = () => {},
 	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
-
+	console.log('data', data);
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
 	const handleFilters = () => {
 		fetchActivityLogs(filters);
-	};
-
-	const ACTIVITY_COMPONENT_CALLING = {
-		platform      : <PlatformActivity platform={platform} />,
-		communication : <CommunicationActivity communication={communication} />,
-		transactional : <TransactionalActivity transactional={transactional} />,
 	};
 
 	useEffect(() => {
@@ -98,25 +89,28 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 
 							<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
 						</Popover>
-						{/* {!isEmpty(appliedFilters) && <div className={styles.filters_applied} />} */}
-						<div className={styles.filters_applied} />
+						{!isEmpty(filters) && <div className={styles.filters_applied} />}
 					</div>
 				)}
 
 			</div>
 
-			{loading ? (
+			{/* {loading ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
 				<div
 					className={styles.list_container}
-					onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+					// onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
 				>
-					{ACTIVITY_COMPONENT_CALLING[activityTab]}
+
+					{ActiveComp && (
+						<ActiveComp communication={communication} platform={platform} transactional={transactional} />
+					)}
 				</div>
-			)}
+			)} */}
 
 		</div>
+
 	);
 }
 export default UserActivities;

@@ -16,46 +16,29 @@ const useGetOmnichannelActivityLogs = ({
 
 	const { user_id: userMessageId = '' } = userData || {};
 
-	const [listData, setListData] = useState({
-		list  : [],
-		total : 0,
-	});
 	const [pagination, setPagination] = useState(1);
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_activity_logs',
 		method : 'get',
 	}, { manual: true });
 
 	const fetchActivityLogs = async (filters = []) => {
-		try {
-			const res = await trigger({
-				params: {
-					user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
-					activity_type : activityTab,
-					page          : pagination,
-					c_filters:
-					!isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
-					t_filters: !isEmpty(filters) && activityTab === 'transactional',
+		let values = {};
 
-				},
-			});
+		filters.forEach((item) => { values = { ...values, [item]: true }; });
 
-			if (res.data) {
-				const { list = [], ...paginationData } = res?.data || {};
-				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
-			}
-		} catch (e) {
-			console.log('e', e);
-		}
-	};
+		await trigger({
+			params: {
+				user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
+				// activity_type : activityTab,
+				activity_type : 'transactional',
+				page          : pagination,
+				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
+				t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? values : undefined,
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
-		const hasMoreData = pagination < listData?.total;
-		if (reachBottom && hasMoreData && !loading) {
-			setPagination((p) => p + 1);
-		}
+			},
+		});
 	};
 
 	useEffect(() => {
@@ -64,10 +47,11 @@ const useGetOmnichannelActivityLogs = ({
 	}, [activeMessageCard, activityTab, activeVoiceCard, pagination]);
 
 	return {
-		data: listData,
-		handleScroll,
+		data,
 		loading,
 		fetchActivityLogs,
+		setPagination,
 	};
 };
+
 export default useGetOmnichannelActivityLogs;
