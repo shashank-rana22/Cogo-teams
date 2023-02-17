@@ -1,19 +1,18 @@
-import { Modal, Select, Input, Button } from '@cogoport/components';
-import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
-import { IcMDownload, IcMNotifications, IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
+import { Modal, Select, Button } from '@cogoport/components';
+import { SelectController, useForm } from '@cogoport/forms';
+import { IcMNotifications, IcMUpload } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
-import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
 
-// import UserTableData from '../../common/userTableData';
-import useDownloadCsvFeedbacks from '../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import { deptControls as departmentControls } from '../../utils/departmentControls';
 import { getControls } from '../../utils/filterControls';
+import getMonthControls from '../../utils/monthControls';
 
+import NotifyModal from './NotifyModal';
 import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
 import UploadModalBody from './UploadModal';
@@ -111,53 +110,41 @@ function HRDashboard() {
 		Router.push('/feedback-system/hr-dashboard/feedback-forms');
 	};
 
-	const [searchValue, setSearchValue] = useState('');
 	const [openUploadModal, setOpenUploadModal] = useState(false);
-
-	const { query = '', debounceQuery } = useDebounceQuery();
+	const [notifyModal, setNotifyModal] = useState(false);
 
 	const [selectedBucket, setSelectedBucket] = useState('');
 
-	const columns = useGetColumns({});
-	const { getUserListCsv } = useDownloadCsvFeedbacks({});
+	const { params, setParams, feedbackData, loading, setPage } = useListUserFeedbacks({});
 
-	const { params, setParams, feedbackData, loading, setPage } = useListUserFeedbacks({ searchValue: query });
+	const monthControls = getMonthControls(params.filters.created_at_year);
 
 	const { watch, control: managerControl = {} } = useForm();
-	const manager = watch('performed_by_id');
+	const manager = watch('manager_id');
 
-	const { list = [], page_limit, total_count } = feedbackData || {};
+	const { list = [] } = feedbackData || {};
 
 	const deptControls = departmentControls.find((control) => control.name === 'department');
-	const setDept = (val) => { setParams({ ...params, filters: { ...(params.filters || {}), department: val } }); };
 
 	const roleControls = params.filters?.department ? departmentControls.find((control) => control.name
 	=== DEPARTMENT_MAPPING[params.filters?.department]) : {};
 
-	const setRole = (val) => {
-		setParams({
-			...params,
-			filters: {
-				...(params.filters || {}),
-				work_scope: val,
-			},
-		});
+	const setFilter = (val, type) => {
+		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
 	};
 
-	const managerControls = getControls().find((control) => control.name === 'performed_by_id');
+	const managerControls = getControls().find((control) => control.name === 'manager_id');
 
-	const download = () => {
-		getUserListCsv();
+	const redirectToFeedbackManagement = () => {
+		Router.push('/feedback-system/hr-dashboard/feedback-management');
 	};
-
-	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	useEffect(() => {
 		setParams({
 			...params,
 			filters: {
 				...(params.filters || {}),
-				performed_by_id: manager || undefined,
+				manager_id: manager || undefined,
 			},
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,7 +161,7 @@ function HRDashboard() {
 						size="lg"
 						themeType="secondary"
 						style={{ marginRight: '16px' }}
-						onClick={() => {}}
+						onClick={() => setNotifyModal(true)}
 					>
 						<IcMNotifications style={{ marginRight: '4px' }} />
 						Send Notification
@@ -195,20 +182,21 @@ function HRDashboard() {
 					<Button size="lg" themeType="accent" onClick={() => routeToFeedbackForms()}>Create New Form</Button>
 				</div>
 			</div>
+
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
 
 					<div className={styles.department_select}>
 						<Select
 							value={params.filters?.department}
-							onChange={setDept}
+							onChange={(val) => setFilter(val, 'department')}
 							options={deptControls.options}
 							placeholder="Department..."
 							style={{ marginRight: '8px' }}
 						/>
 						<Select
-							value={params.filters?.work_scope}
-							onChange={setRole}
+							value={params.filters?.designation}
+							onChange={(val) => setFilter(val, 'designation')}
 							options={roleControls.options}
 							disabled={!params.filters?.department}
 							placeholder="Role..."
@@ -220,20 +208,24 @@ function HRDashboard() {
 							control={managerControl}
 							style={{ marginRight: '8px' }}
 						/>
+
 						<Select
+							value={params.filters?.created_at_year}
+							onChange={(val) => setFilter(val, 'created_at_year')}
+							placeholder="Select Year"
+							style={{ marginRight: '8px' }}
+							options={monthControls.created_at_year.options}
+						/>
+
+						<Select
+							value={params.filters?.created_at_month}
+							onChange={(val) => setFilter(val, 'created_at_month')}
+							disabled={!params.filters?.created_at_year}
 							placeholder="Select Month"
 							style={{ marginRight: '8px' }}
+							options={monthControls.created_at_month.options}
 						/>
 					</div>
-
-					<Input
-						size="md"
-						value={searchValue}
-						onChange={setSearchValue}
-						placeholder="Search User..."
-						prefix={<IcMSearchlight />}
-						type="text"
-					/>
 				</div>
 
 			</div>
@@ -260,26 +252,13 @@ function HRDashboard() {
 							size="md"
 							themeType="secondary"
 							onClick={() => {
-								download();
+								redirectToFeedbackManagement();
 							}}
 						>
-							<IcMDownload style={{ marginRight: '4px' }} />
-							Download CSV
+							View and Download all Feedbacks
 						</Button>
 					</div>
 				</div>
-
-				{/* <div className={styles.table_section}>
-					<UserTableData
-						columns={columns}
-						list={list}
-						loading={loading}
-						page_limit={page_limit}
-						total_count={total_count}
-						pagination={params.page}
-						setPagination={setPage}
-					/>
-				</div> */}
 
 				<div className={styles.table_section}>
 					<TeamMembersList
@@ -303,6 +282,23 @@ function HRDashboard() {
 						<div className={styles.upload_modal}>
 							<Modal.Body>
 								<UploadModalBody setOpenUploadModal={setOpenUploadModal} />
+							</Modal.Body>
+						</div>
+
+					</Modal>
+				)}
+
+				{notifyModal
+				&& (
+					<Modal
+						show={notifyModal}
+						onClose={() => setNotifyModal(false)}
+						onClickOutside={() => setNotifyModal(false)}
+					>
+						<Modal.Header title="Notify Managers" />
+						<div className={styles.upload_modal}>
+							<Modal.Body>
+								<NotifyModal setNotifyModal={setNotifyModal} />
 							</Modal.Body>
 						</div>
 

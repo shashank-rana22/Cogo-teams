@@ -1,14 +1,30 @@
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useState } from 'react';
 
 const useListForms = ({ formsParams = {} }) => {
-	const [{ data, loading = false }] = useRequest({
-		url    : 'list-forms/',
+	const [pagination, setPagination] = useState(1);
+
+	const [{ data, loading = false }, trigger] = useRequest({
+		url    : 'list-forms',
 		method : 'get',
-		params : { Filters: { ...formsParams } },
-	}, { manual: false });
+	}, { manual: true });
+
+	const getFormList = async () => {
+		await trigger({ params: { ...formsParams, page: pagination || 1, page_limit: 10 } });
+	};
+
+	useEffect(() => {
+		if (!isEmpty(formsParams)) {
+			getFormList();
+		}
+	}, [formsParams, pagination]);
 
 	return {
-		data, loading,
+		data,
+		loading,
+		pagination,
+		setPagination,
 	};
 };
 

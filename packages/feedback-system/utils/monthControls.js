@@ -1,8 +1,24 @@
-const getMonthControls = () => {
+const monthOptions = [
+	{ label: 'January', value: 1 },
+	{ label: 'February', value: 2 },
+	{ label: 'March', value: 3 },
+	{ label: 'April', value: 4 },
+	{ label: 'May', value: 5 },
+	{ label: 'June', value: 6 },
+	{ label: 'July', value: 7 },
+	{ label: 'August', value: 8 },
+	{ label: 'September', value: 9 },
+	{ label: 'October', value: 10 },
+	{ label: 'November', value: 11 },
+	{ label: 'December', value: 12 },
+];
+
+const getMonthControls = (selectedYear) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
+	const month = currentDate.getMonth();
 
-	return {
+	const control = {
 		created_at_month: {
 			name           : 'created_at_month',
 			label          : 'Select Month',
@@ -10,21 +26,8 @@ const getMonthControls = () => {
 			defaultOptions : true,
 			isClearable    : true,
 			placeholder    : 'Month',
-			options        : [
-				{ label: 'January', value: 1 },
-				{ label: 'February', value: 2 },
-				{ label: 'March', value: 3 },
-				{ label: 'April', value: 4 },
-				{ label: 'May', value: 5 },
-				{ label: 'June', value: 6 },
-				{ label: 'July', value: 7 },
-				{ label: 'August', value: 8 },
-				{ label: 'September', value: 9 },
-				{ label: 'October', value: 10 },
-				{ label: 'November', value: 11 },
-				{ label: 'December', value: 12 },
-			],
-			span: 6,
+			options        : monthOptions,
+			span           : 6,
 		},
 		created_at_year: {
 			name           : 'created_at_year',
@@ -58,6 +61,12 @@ const getMonthControls = () => {
 			span: 6,
 		},
 	};
+
+	if (selectedYear === year) {
+		control.created_at_month.options = monthOptions.filter((newMonth) => newMonth.value <= month);
+	}
+
+	return control;
 };
 
 export default getMonthControls;

@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pagination, Pill, Button } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import useListForms from '../../../../utils/useListForms';
@@ -18,7 +18,8 @@ function Forms({
 		setOpenCreateForm(true);
 		setFormStage('add_questions');
 	};
-	const { formsData = {}, loading = false } = useListForms({ formsParams });
+
+	const { formsData = {}, loading = false, pagination, setPagination } = useListForms({ formsParams });
 
 	const { designation } = formsParams;
 
@@ -56,6 +57,46 @@ function Forms({
 			dept       : 'tech',
 			role       : 'role1',
 			status     : 'inactive',
+			created_at : new Date(),
+			last_used  : new Date(),
+		},
+		{
+			id         : 4,
+			month      : 'apr',
+			year       : '2022',
+			dept       : 'tech',
+			role       : 'role1',
+			status     : 'active',
+			created_at : new Date(),
+			last_used  : new Date(),
+		},
+		{
+			id         : 5,
+			month      : 'apr',
+			year       : '2022',
+			dept       : 'tech',
+			role       : 'role1',
+			status     : 'active',
+			created_at : new Date(),
+			last_used  : new Date(),
+		},
+		{
+			id         : 4,
+			month      : 'apr',
+			year       : '2022',
+			dept       : 'tech',
+			role       : 'role1',
+			status     : 'active',
+			created_at : new Date(),
+			last_used  : new Date(),
+		},
+		{
+			id         : 5,
+			month      : 'apr',
+			year       : '2022',
+			dept       : 'tech',
+			role       : 'role1',
+			status     : 'active',
 			created_at : new Date(),
 			last_used  : new Date(),
 		},
@@ -140,7 +181,6 @@ function Forms({
 							</div>
 
 							<div className={styles.action}>
-								{/* <p className={styles.label}>Form Name</p> */}
 								<div className={styles.value}>
 									<Button themeType="secondary" onClick={() => openOldForm(id)}>Use</Button>
 								</div>
@@ -151,6 +191,15 @@ function Forms({
 
 			</div>
 
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="number"
+					currentPage={pagination}
+					totalItems={30}
+					pageSize={10}
+					onPageChange={setPagination}
+				/>
+			</div>
 		</div>
 	)
 

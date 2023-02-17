@@ -6,6 +6,9 @@
 
 .form_header {
     /* display: flex; */
+    position: sticky;
+    top: 8px;
+    right: 0px;
     align-self: flex-end;
     margin-right: 16px;
 }
@@ -19,7 +22,7 @@
 }
 
 .forms {
-    flex: 0.7;
+    flex: 1;
     display: flex;
     flex-direction: column;
 
@@ -68,10 +71,17 @@
     }
 }
 
-/* .role {
-    padding: 12px;
-} */
-
 .label {
     margin: 0px;       
+}
+
+.pagination_container {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 16px 0px ;
 }
