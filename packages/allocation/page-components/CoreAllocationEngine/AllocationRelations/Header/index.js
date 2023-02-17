@@ -9,7 +9,7 @@ function Header({
 	setShowCreateRelationModal = () => {},
 	setParams = () => {},
 	params,
-	loading,
+	disabled,
 	setActiveTab = () => {},
 	searchValue,
 	setSearchValue = () => {},
@@ -42,7 +42,6 @@ function Header({
 					offLabel="Active"
 					onLabel="Pending"
 					onChange={(event) => onChangeToggle(event)}
-					disabled={loading}
 				/>
 
 			</div>
@@ -55,7 +54,7 @@ function Header({
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
-						disabled={loading}
+						disabled={disabled}
 					/>
 				</div>
 
@@ -63,7 +62,7 @@ function Header({
 					<ConfigFilters
 						params={params}
 						setParams={setParams}
-						disabled={loading}
+						disabled={disabled}
 					/>
 				</div>
 
@@ -71,7 +70,6 @@ function Header({
 					size="md"
 					themeType="accent"
 					style={{ marginLeft: '8px' }}
-					disabled={loading}
 					onClick={() => setShowCreateRelationModal(true)}
 				>
 					CREATE RELATION

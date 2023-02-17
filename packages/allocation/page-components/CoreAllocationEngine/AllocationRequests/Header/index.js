@@ -38,7 +38,6 @@ function Header(props) {
 					size="md"
 					offLabel="Organization"
 					onLabel="Partner"
-					disabled={disabled}
 					value={toggleValue}
 					onChange={(e) => onChangeParams({
 						filters:
@@ -70,7 +69,6 @@ function Header(props) {
 					<Button
 						size="md"
 						themeType="accent"
-						disabled={disabled}
 						onClick={onClickCreateReqBtn}
 					>
 						CREATE REQUEST

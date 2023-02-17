@@ -7,7 +7,7 @@ import useDetailsFilterContent from './useDetailsFilterContent';
 
 const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
-function DetailFilters({ params, setParams }) {
+function DetailFilters({ params, setParams, disabled }) {
 	const {
 		controls,
 		formProps,
@@ -32,6 +32,7 @@ function DetailFilters({ params, setParams }) {
 				size="md"
 				themeType="secondary"
 				onClick={() => setShowFilters(!showFilters)}
+				disabled={disabled}
 			>
 				FILTER
 
