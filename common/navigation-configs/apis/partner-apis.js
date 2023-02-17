@@ -10063,7 +10063,7 @@ const partner = {
 		{
 			api          : 'update_agent_work_preference',
 			access_type  : 'private',
-			service_name : 'agent_work',
+			service_name : 'communication',
 		},
 		{
 			api          : 'create_omnichannel_note',

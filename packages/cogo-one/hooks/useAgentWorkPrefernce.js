@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 function useAgentWorkPrefernce() {
-	const [{ loading, data }, trigger] = useRequest({
+	const [{ loading, data: agentStatus }, trigger] = useRequest({
 		url    : '/get_agent_work_preference',
 		method : 'get',
 	}, { manual: true });
@@ -25,7 +25,8 @@ function useAgentWorkPrefernce() {
 
 	return {
 		loading,
-		data,
+		agentStatus,
+		workPrefernce,
 	};
 }
 export default useAgentWorkPrefernce;
