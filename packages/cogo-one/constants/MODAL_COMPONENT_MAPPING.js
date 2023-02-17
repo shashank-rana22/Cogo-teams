@@ -1,5 +1,5 @@
-import AssignToForm from '../page-components/Conversations/Messages/ModalContent/AssignToForm';
-import InstantMessages from '../page-components/Conversations/Messages/ModalContent/InstantMessages';
+import AssignToForm from '../page-components/CogoOneChannel/Conversations/Messages/ModalContent/AssignToForm';
+import InstantMessages from '../page-components/CogoOneChannel/Conversations/Messages/ModalContent/InstantMessages';
 
 const MODAL_COMPONENT_MAPPING = {
 	assign           : { comp: AssignToForm, title: { name: 'Assign' }, modalSize: 'md' },
