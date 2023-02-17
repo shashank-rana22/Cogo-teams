@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 
 function useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal }) {
 	const [{ loading }, trigger] = useRequest({

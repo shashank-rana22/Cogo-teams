@@ -28,33 +28,31 @@ const useGetOmnichannelActivityLogs = ({
 	}, { manual: true });
 
 	const fetchActivityLogs = async (filters = []) => {
-		console.log('filters', filters);
+		try {
+			const res = await trigger({
+				params: {
+					user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
+					activity_type : activityTab,
+					page          : pagination,
+					c_filters:
+					!isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
+					t_filters: !isEmpty(filters) && activityTab === 'transactional',
 
-		// const communicationFilters = {
+				},
+			});
 
-		// };
-
-		const res = await trigger({
-			params: {
-				user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
-				activity_type : activityTab,
-				page          : pagination,
-				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
-				t_filters     : !isEmpty(filters) && activityTab === 'transactional',
-
-			},
-		});
-
-		if (res.data) {
-			const { list = [], ...paginationData } = res?.data || {};
-			setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+			if (res.data) {
+				const { list = [], ...paginationData } = res?.data || {};
+				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+			}
+		} catch (e) {
+			console.log('e', e);
 		}
 	};
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
 		const hasMoreData = pagination < listData?.total;
-
 		if (reachBottom && hasMoreData && !loading) {
 			setPagination((p) => p + 1);
 		}

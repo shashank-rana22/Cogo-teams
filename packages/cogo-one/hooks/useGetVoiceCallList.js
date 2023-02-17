@@ -17,12 +17,16 @@ const useGetVoiceCallList = ({ activeTab }) => {
 	}, { manual: true });
 
 	const voiceCallList = async () => {
-		const res = await trigger({
-			params: { page: pagination },
-		});
-		if (res.data) {
-			const { list = [], ...paginationData } = res?.data || {};
-			setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+		try {
+			const res = await trigger({
+				params: { page: pagination },
+			});
+			if (res.data) {
+				const { list = [], ...paginationData } = res?.data || {};
+				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+			}
+		} catch (e) {
+			console.log('e', e);
 		}
 	};
 

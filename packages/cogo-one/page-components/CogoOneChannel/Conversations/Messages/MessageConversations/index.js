@@ -99,9 +99,12 @@ function MessageConversations({
 		<div className={styles.styled_div}>
 			<div className={cl`${styles.container} ${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.chat_container}`} onScroll={handleScroll}>
 				{(messagesData || []).map((eachMessage) => (
-					eachMessage?.conversation_type !== 'received'
-						? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
-						: <SentDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
+					<div>
+						{eachMessage?.conversation_type !== 'received'
+							? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
+							: <SentDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />}
+
+					</div>
 				))}
 				<div ref={messageRef} />
 			</div>
@@ -137,7 +140,6 @@ function MessageConversations({
 			</div>
 
 			<div className={styles.text_area_div}>
-
 				{!isEmpty(suggestions) && (
 					<div className={styles.suggestions_div}>
 						<div className={styles.flex}>
@@ -153,9 +155,8 @@ function MessageConversations({
 						<IcMInfo fill="#221F20" height="20px" width="20px" />
 					</div>
 				)}
-
 				<textarea
-					rows={2}
+					rows={4}
 					placeholder="Type your message..."
 					className={styles.text_area}
 					value={draftMessage || ''}
