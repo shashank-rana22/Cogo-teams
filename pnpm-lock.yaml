@@ -48,6 +48,7 @@ importers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/cogo-one': workspace:0.1.0
       '@cogoport/components': ^1.0.313
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
@@ -72,6 +73,7 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/cogo-one': link:../packages/cogo-one
       '@cogoport/components': 1.0.313_3lsay7tntxf2ei2og2ktju5z3e
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
