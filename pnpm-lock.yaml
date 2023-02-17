@@ -48,6 +48,7 @@ importers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/cogo-academy': workspace:0.1.0
       '@cogoport/components': ^1.0.313
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
@@ -72,6 +73,7 @@ importers:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/cogo-academy': link:../packages/cogo-academy
       '@cogoport/components': 1.0.313_3lsay7tntxf2ei2og2ktju5z3e
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
@@ -265,6 +267,32 @@ importers:
       react: 18.2.0
     devDependencies:
       '@types/react': 18.0.28
+
+  packages/cogo-academy:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.313
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.57
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      axios: ^1.3.3
+      axios-hooks: ^4.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/components': 1.0.313_tjjfbzrrgezq2qg342kvjgfsxe
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.57_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.2
+      axios: 1.3.3
+      axios-hooks: 4.0.0_axios@1.3.3+react@18.2.0
+      react: 18.2.0
 
   packages/contracts:
     specifiers:

@@ -1,0 +1,1 @@
+export { default } from '@cogoport/cogo-academy/page-components/CreateFAQ';
