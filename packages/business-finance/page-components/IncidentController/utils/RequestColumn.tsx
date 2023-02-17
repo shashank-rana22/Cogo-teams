@@ -200,18 +200,18 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			Header   : '',
 			id       : 'ribbon',
 			accessor : (row:any) => {
-				const { urgencyTag } = row;
+				const { deadlineTag } = row;
 				return (
-					urgencyTag &&	(
+					deadlineTag &&	(
 						<div>
-							{urgencyTag === 'RED' && (
-								<div className={urgencyTag === 'RED' && styles.ribbon_red}>
+							{deadlineTag === 'RED' && (
+								<div className={deadlineTag === 'RED' && styles.ribbon_red}>
 									Urgent
 								</div>
 							)}
 							{
-								urgencyTag === 'ORANGE' && (
-									<div className={urgencyTag === 'ORANGE' && styles.ribbon_orange}>
+								deadlineTag === 'ORANGE' && (
+									<div className={deadlineTag === 'ORANGE' && styles.ribbon_orange}>
 										Urgent
 									</div>
 								)
