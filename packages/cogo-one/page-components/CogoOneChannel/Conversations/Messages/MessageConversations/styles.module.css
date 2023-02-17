@@ -1,16 +1,15 @@
 .container {
     padding: 10px;
-    height: calc(100% - 145px);
+    height: calc(100% - 179px);
     overflow-y: scroll;
     transition: height 0.5s;
-
     &::-webkit-scrollbar {
         display: none;
     }
 }
 
 .chat_container {
-    height: calc(100% - 179px);
+    height: calc(100% - 214px);
     transition: height 0.5s;
 }
 
@@ -22,7 +21,6 @@
     padding: 10px;
     border: none;
     outline: none;
-
     &:focus {
         outline: none !important;
     }
