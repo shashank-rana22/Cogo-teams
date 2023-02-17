@@ -1,75 +1,118 @@
 .container {
-	padding: 16px;
 }
 
-.header_section {
+.stats_container {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	.header_text {
-		font-size: 18px;
-		font-weight: bold;
-		color: #393f70;
-	}
-}
-
-.pagination_container {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.redirect_container {
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-
-	.redirect_text {
-		font-size: 18px;
-		font-weight: bold;
-		margin: 0px;
-	}
-}
-
-.stats_section {
-	display: flex;
-	padding-top: 16px;
 
 	@media(max-width: 768px){
 		flex-direction: column;
 	}
 }
 
-.list_section {	
+.question_button_container {
+	display: flex;
+	justify-content: flex-start;
 }
 
-.list_header {
+.redirect_container {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	padding: 8px 0;
-	margin-top: 16px;
+	justify-content: center;
+	color: #393f70;
+	cursor: pointer;
 
-	.list_header_text {
+	p {
 		font-size: 18px;
 		font-weight: bold;
-		color: "#393f70";
 		margin: 0px;
 	}
 }
 
-.list_header_filters {
+.table_section {
+	margin-top: 16px;
+	background: #FAF5EC;
+	border-radius: 8px;
+}
+
+.list_header {
 	display: flex;
-	justify-content: flex-end;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 0 0px;
+	margin-top: 16px;
+
+	.list_title {
+		font-size: 18px; 
+		font-weight: bold;
+		color: #393f70;
+		margin: 0px;
+	}
+
+	.list_actions {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.info_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.top_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 16px 0;
+}
+
+.filter_container {
+	margin-right: 14px;
+
+	& .tippy-box .tippy-content {
+		max-height: 100%;
+	}
+}
+
+.filter-control-label {
+	margin-top: 16px;
+	font-weight: 500;
+}
+
+.bussiness_module_filter_header {
+	margin-bottom: 8px;
+}
+
+.filters {
+	display: flex;
 	align-items: center;
 }
 
+.department_select {
+	display: flex;
+	justify-content: flex-start;
 
-.month_container {
-	margin-right: 16px;
-
-	:global(.ui_select_container) {
+	:global(.ui_select_display_container) {
 		width: 160px;
-		height: 38px;
 	}
+}
+
+.top_most_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 4px 0;
+}
+
+.upload_modal {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+		}
+	}
+}
+
+.search{
+	padding:10px;
 }
