@@ -32,13 +32,15 @@ const useListAllocationDetails = () => {
 	}, { manual: false });
 
 	useEffect(() => {
-		setParams((prevParams) => ({
-			...prevParams,
-			filters: {
-				...prevParams.filters,
-				q: searchQuery || undefined,
-			},
-		}));
+		if (searchQuery) {
+			setParams((prevParams) => ({
+				...prevParams,
+				filters: {
+					...prevParams.filters,
+					q: searchQuery || undefined,
+				},
+			}));
+		}
 	}, [searchQuery]);
 
 	const getNextPage = (newPage) => {

@@ -41,8 +41,6 @@ const useCreateEditAllocationQuota = (props) => {
 		setRoleTypeId,
 	} = props;
 
-	// Todo based on action props can be sent from outside filtered
-
 	const { quota_attributes: quotaAttributes = {}, id } = quotaItem;
 
 	const prefillValues = getPrefillValues(quotaAttributes);
