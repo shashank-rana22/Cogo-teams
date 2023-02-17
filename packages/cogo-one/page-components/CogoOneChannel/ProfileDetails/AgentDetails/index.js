@@ -75,8 +75,6 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
 			) : (
 				<VoiceCallComponent
-					// swapUi={swapUi}
-					// setSwapUi={setSwapUi}
 					mobile_number_eformat={mobile_number_eformat}
 				/>
 

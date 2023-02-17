@@ -3,7 +3,11 @@
 	border-left: 1px solid #BDBDBD;
 	padding: 8px;
 	margin: -5px 0px -5px 5px;
-	
+
+}
+
+.main_card:last-child {
+	border-left: none;
 }
 
 .activity_date{

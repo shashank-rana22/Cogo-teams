@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -70,7 +69,9 @@ function MessageList({
 					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
 				</div>
 			</div>
+
 			{messagesLoading ? <LoadingState /> : (
+
 				<div className={styles.list_container}>
 
 					{(messagesList || []).map((item) => {
@@ -88,9 +89,9 @@ function MessageList({
 								key={item?.id}
 								role="presentation"
 								className={cl`
-						                ${styles.card_container} 
-						                ${checkActiveCard ? styles.active_card : ''} 
-						                `}
+												${styles.card_container} 
+												${checkActiveCard ? styles.active_card : ''} 
+												`}
 								onClick={() => setActiveMessage(item)}
 							>
 								<div className={styles.card}>
@@ -146,8 +147,8 @@ function MessageList({
 						);
 					})}
 				</div>
-			)}
 
+			)}
 		</>
 	);
 }

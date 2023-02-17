@@ -1,9 +1,9 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { SERVICE_MAPPING } from '../../../../../constants';
+import { KEYS_MAPPING } from '../../../../../constants/KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -13,13 +13,17 @@ function TransactionalActivity({ transactional = {} }) {
 	return (
 		<div>
 			{(list || []).map((item) => {
-				const services = item?.services;
-				console.log('services', services);
+				const services = item?.shipment_type;
+				const { name:{ origin = '', destination = '' } } = KEYS_MAPPING[services];
 
 				const {
-					created_at = '', serial_id, milestone_activity = [], origin_port = {},
-					destination_port = {},
+					created_at = '', serial_id, milestone_activity = [],
 				} = item || {};
+
+				const origin_port = item[origin] || {};
+
+				const destination_port = item[destination] || {};
+
 				const bookingStatus = milestone_activity.pop();
 
 				return (
@@ -59,9 +63,14 @@ function TransactionalActivity({ transactional = {} }) {
 											</Tooltip>
 
 											<div className={styles.port_codes}>
-												(
-												{origin_port?.port_code}
-												)
+												{!isEmpty(origin_port?.port_code) && (
+													<>
+														(
+														{origin_port?.port_code}
+														)
+													</>
+												)}
+
 											</div>
 										</div>
 										<div className={styles.country}>

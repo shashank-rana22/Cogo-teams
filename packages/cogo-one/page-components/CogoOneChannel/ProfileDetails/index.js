@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-useless-fragment */
+
 import { useState } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
@@ -12,6 +14,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>
+
 				{ActiveComp && (
 					<ActiveComp
 						activeMessageCard={activeMessageCard}
@@ -20,6 +23,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 						activeVoiceCard={activeVoiceCard}
 					/>
 				)}
+
 			</div>
 			<RightSideNav activeSelect={activeSelect} setActiveSelect={setActiveSelect} />
 		</div>
