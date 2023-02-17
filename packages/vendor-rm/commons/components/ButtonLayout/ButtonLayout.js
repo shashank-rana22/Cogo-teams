@@ -17,7 +17,19 @@ function ButtonLayout(
 
 	return (
 		<div className={styles.button_container}>
-			<Button size="lg" themeType="tertiary" style={{ marginRight: '60px' }} disabled={loading}>Cancel</Button>
+			{
+				step === 1 ? null : (
+					<Button
+						size="lg"
+						themeType="tertiary"
+						style={{ marginRight: '60px' }}
+						disabled={loading}
+					>
+						Cancel
+					</Button>
+				)
+			}
+
 			{step <= 4
 				? (
 					<Button

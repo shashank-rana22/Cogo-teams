@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
@@ -5,11 +6,15 @@ import useRequest from '@cogoport/request/hooks/useRequest';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import TABS_MAPPING from '../../../../constants/tabs';
+// import TABS_MAPPING from '../../../../constants/tabs';
+import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import { controls } from '../utils/controls';
 
-function useVendorBankDetail({ setActiveStepper = () => {}, setVendorInformation = () => {} }) {
+function useVendorBankDetail({
+	setActiveStepper = () => {},
+	vendorInformation = {},
+	setVendorInformation = () => {},
+}) {
 	const formProps = useForm();
 
 	const {
@@ -26,7 +31,7 @@ function useVendorBankDetail({ setActiveStepper = () => {}, setVendorInformation
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
 		method : 'get',
-	}, { manual: false });
+	}, { manual: true });
 
 	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
 		url    : '/create_vendor_bank_detail',
@@ -65,7 +70,7 @@ function useVendorBankDetail({ setActiveStepper = () => {}, setVendorInformation
 		const values = getValues();
 
 		setVendorInformation((pv) => {
-			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
 			return {
 				...pv,
 				[key]: data,
@@ -77,13 +82,13 @@ function useVendorBankDetail({ setActiveStepper = () => {}, setVendorInformation
 				data: {
 					...values,
 					bank_document_url : values.bank_document_url.finalUrl,
-					vendor_id         : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
+					vendor_id         : vendorInformation?.vendor_details?.id,
 				},
 			});
 
 			if (response?.data) {
 				Toast.success('Vendor Bank Detail added successfully');
-				setActiveStepper(TABS_MAPPING[step]);
+				setActiveStepper('verification');
 			}
 		} catch (err) {
 			// Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');

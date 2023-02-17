@@ -4,20 +4,20 @@ function getFormattedServices({ data, partner_id = '' }) {
 	const formattedServices = [];
 
 	office_details.forEach((item) => {
-		let obj = {
-			category       : item?.category,
-			sub_category   : item?.sub_category,
-			cogo_entity_id : partner_id,
+		const {
+			category = '',
+			sub_category = '',
+			cogoport_office_id = '',
+		} = item || {};
+
+		const obj = {
+			category,
+			sub_category,
+			cogo_entity_id: partner_id,
+			cogoport_office_id,
 		};
 
-		(item?.cogoport_office_id || []).forEach((office_id) => {
-			obj = {
-				...obj,
-				cogoport_office_id: office_id,
-			};
-
-			formattedServices.push(obj);
-		});
+		formattedServices.push(obj);
 	});
 
 	return {

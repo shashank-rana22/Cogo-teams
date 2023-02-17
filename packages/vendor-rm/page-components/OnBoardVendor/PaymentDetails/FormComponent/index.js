@@ -7,6 +7,7 @@ import useVendorBankDetail from '../hooks/useVendorBankDetail';
 function FormComponent({
 	activeStepper = {},
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const {
@@ -16,7 +17,11 @@ function FormComponent({
 		handleSubmit,
 		loading,
 		onSubmit,
-	} =	useVendorBankDetail({ setActiveStepper, setVendorInformation });
+	} =	useVendorBankDetail({
+		setActiveStepper,
+		vendorInformation,
+		setVendorInformation,
+	});
 
 	return (
 		<div>

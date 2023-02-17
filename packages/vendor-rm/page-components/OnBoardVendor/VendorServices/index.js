@@ -1,12 +1,13 @@
+/* eslint-disable import/no-cycle */
 import FormComponent from './FormComponent';
 import Header from './Header';
-// eslint-disable-next-line import/no-cycle
 import useVendorServices from './hooks/useVendorServices';
 import styles from './styles.module.css';
 
 function VendorServices({
 	activeStepper = {},
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const {
@@ -21,6 +22,7 @@ function VendorServices({
 		setValue,
 	} = useVendorServices({
 		setActiveStepper,
+		vendorInformation,
 		setVendorInformation,
 	});
 
