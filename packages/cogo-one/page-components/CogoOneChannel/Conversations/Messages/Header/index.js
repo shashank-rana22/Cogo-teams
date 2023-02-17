@@ -88,7 +88,14 @@ function Header({
 						</div>
 					</div>
 				</div>
-				<Button themeType="primary" size="md">Mark as</Button>
+				<Button
+					themeType="primary"
+					size="md"
+					onClick={() => setOpenModal({ type: 'mark_as_closed', data: {} })}
+				>
+					Mark as
+
+				</Button>
 			</div>
 		</div>
 	);

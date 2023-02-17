@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import getActiveCardDetails from '../utils/getActiveCardDetails';
@@ -28,8 +29,11 @@ const useGetOmnichannelActivityLogs = ({
 
 	const fetchActivityLogs = async (filters = []) => {
 		const res = await trigger({
+			// filters: {
+			// 	q: !isEmpty(searchValue) ? searchValue : undefined,
+			// },
 			params: {
-				// user_id : activeTab === 'message' ? userMessageId : userVoiceId,
+				// user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
 				user_id : '38a3ce88-d1e4-4a55-b431-12aa334a0be1',
 				// activity_type : activityTab,
 				page    : pagination,

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { cl, Input, Popover } from '@cogoport/components';
 import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -22,11 +21,9 @@ function MessageList({
 	setFilterVisible = () => { },
 	setAppliedFilters = () => { },
 	appliedFilters,
+	messagesLoading = false,
 }) {
-	console.log('messagesList', messagesList);
-	const loading = false;
-
-	if (isEmpty(messagesList)) {
+	if (isEmpty(messagesList) && !messagesLoading) {
 		return (
 			<div className={styles.list_container}>
 				<div className={styles.empty_state}>
@@ -40,7 +37,6 @@ function MessageList({
 		<>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
-
 					<Input
 						size="sm"
 						prefix={<IcMSearchlight width={18} height={18} />}
@@ -48,9 +44,7 @@ function MessageList({
 						value={searchValue}
 						onChange={(val) => setSearchValue(val)}
 					/>
-
 				</div>
-
 				<div className={styles.filter_icon}>
 					<Popover
 						placement="right"
@@ -75,84 +69,87 @@ function MessageList({
 					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
 				</div>
 			</div>
-			{loading ? <LoadingState /> : (
+
+			{messagesLoading ? <LoadingState /> : (
 				<div className={styles.list_container}>
 
-					{(messagesList || []).map((item) => {
-						const userData = getActiveCardDetails(item);
-						const {
-							user_name = '',
-							organization_name = '',
-						} = userData || {};
+					<div className={styles.list_container}>
 
-						const lastActive = new Date(item.sent_updated_at);
-						const checkActiveCard = activeMessageCard?.id === item?.id;
+						{(messagesList || []).map((item) => {
+							const userData = getActiveCardDetails(item);
+							const {
+								user_name = '',
+								organization_name = '',
+							} = userData || {};
 
-						return (
-							<div
-								key={item?.id}
-								role="presentation"
-								className={cl`
-						                ${styles.card_container} 
-						                ${checkActiveCard ? styles.active_card : ''} 
-						                `}
-								onClick={() => setActiveMessage(item)}
-							>
-								<div className={styles.card}>
+							const lastActive = new Date(item.sent_updated_at);
+							const checkActiveCard = activeMessageCard?.id === item?.id;
 
-									<div className={styles.user_information}>
-										<div className={styles.avatar_Container}>
-											<UserAvatar
-												type={item.channel_type}
-												imageSource={item.image}
-											/>
-											<div className={styles.user_details}>
-												<div className={styles.user_name}>
-													{startCase(user_name)}
-												</div>
-												<div className={styles.organisation}>
-													{startCase(organization_name)}
+							return (
+								<div
+									key={item?.id}
+									role="presentation"
+									className={cl`
+												${styles.card_container} 
+												${checkActiveCard ? styles.active_card : ''} 
+												`}
+									onClick={() => setActiveMessage(item)}
+								>
+									<div className={styles.card}>
+
+										<div className={styles.user_information}>
+											<div className={styles.avatar_Container}>
+												<UserAvatar
+													type={item.channel_type}
+													imageSource={item.image}
+												/>
+												<div className={styles.user_details}>
+													<div className={styles.user_name}>
+														{startCase(user_name)}
+													</div>
+													<div className={styles.organisation}>
+														{startCase(organization_name)}
+													</div>
 												</div>
 											</div>
+
+											<div className={styles.user_activity}>
+												<div className={styles.tags_conatiner}>
+													{/* <div className={styles.pills_card}>Small</div> */}
+												</div>
+												<div className={styles.activity_duration}>
+													{dateTimeConverter(
+														Date.now() - Number(lastActive),
+														Number(lastActive),
+													)?.renderTime}
+												</div>
+											</div>
+
 										</div>
 
-										<div className={styles.user_activity}>
-											<div className={styles.tags_conatiner}>
-												{/* <div className={styles.pills_card}>Small</div> */}
+										<div className={styles.content_div}>
+											<div className={styles.content}>
+												{item.last_message}
 											</div>
-											<div className={styles.activity_duration}>
-												{dateTimeConverter(
-													Date.now() - Number(lastActive),
-													Number(lastActive),
-												)?.renderTime}
-											</div>
+
+											{item.new_message_count > 0 && (
+												<div className={styles.new_message_count}>
+													{item.new_message_count > 100 ? '99+' : (
+														item.new_message_count
+													)}
+
+												</div>
+											)}
+
 										</div>
 
 									</div>
-
-									<div className={styles.content_div}>
-										<div className={styles.content}>
-											{item.last_message}
-										</div>
-
-										{item.new_message_count > 0 && (
-											<div className={styles.new_message_count}>
-												{item.new_message_count > 100 ? '99+' : (
-													item.new_message_count
-												)}
-
-											</div>
-										)}
-
-									</div>
-
 								</div>
-							</div>
-						);
-					})}
+							);
+						})}
+					</div>
 				</div>
 			)}
-
 		</>
 	);
 }
