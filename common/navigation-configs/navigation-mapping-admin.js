@@ -5,6 +5,7 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
+	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
@@ -1260,7 +1261,7 @@ const navigationMappingAdmin = {
 				as            : '/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : apis.shipment,
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
 
 			},
 			{
@@ -1791,6 +1792,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.document_walet,
 		icon          : IcMDocument,
 		main_apis     : [],
+		module_type   : 'dashboards',
+	},
+	cost_booking: {
+		key           : 'cost_booking',
+		title         : 'FF Cost Booking',
+		href          : '/cost-booking',
+		as            : '/cost-booking',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cost_booking,
+		icon          : IcMBooking,
 		module_type   : 'dashboards',
 	},
 	platform_configuration: {
