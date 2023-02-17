@@ -49,7 +49,7 @@ function MappedUser({
 		|| updateLoading
 		|| switchLoading;
 
-	if (loadingState) {
+	if (deleteLoading || updateLoading || switchLoading) {
 		return <Loader />;
 	}
 
