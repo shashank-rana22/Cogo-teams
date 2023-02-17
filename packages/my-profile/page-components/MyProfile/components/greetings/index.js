@@ -21,6 +21,7 @@ function Greetings({
 		name = '',
 		picture = '',
 		lowest_geo_location = {},
+		status = '',
 	} = detailsData || {};
 
 	const {
@@ -89,51 +90,56 @@ function Greetings({
 					,
 					{' '}
 					<div className={styles.location_name}>{locationName}</div>
+					<div className={styles.pills_container}>
+						{startCase(status)}
+					</div>
 					<div className={styles.head}>
+
 						<IcMEdit
 							size={1.8}
 							onClick={() => setEditNameModal(true)}
-							style={{ cursor: 'pointer', marginTop: '4px' }}
+							style={{ cursor: 'pointer' }}
 						/>
 
-						<Modal
-							show={editNameModal}
-							onClose={() => setEditNameModal(false)}
-							onOuterClick={onOuterClick}
-							size="md"
-						>
-							<Modal.Header title="Edit Details" />
-
-							<Modal.Body>
-								<EditPersonalDetails
-									control={control}
-									errors={errors}
-									detailsData={detailsData}
-								/>
-							</Modal.Body>
-							<Modal.Footer>
-								<>
-									<Button
-										disabled={apiLoading}
-										themeType="tertiary"
-										className="secondary sm"
-										onClick={onClickCancel}
-									>
-										CANCEL
-									</Button>
-									<Button
-										className="primary sm"
-										disabled={apiLoading}
-										onClick={handleSubmit(onCreate)}
-									>
-										UPDATE
-									</Button>
-								</>
-							</Modal.Footer>
-						</Modal>
 					</div>
 				</div>
 			</div>
+
+			<Modal
+				show={editNameModal}
+				onClose={() => setEditNameModal(false)}
+				onOuterClick={onOuterClick}
+				size="md"
+			>
+				<Modal.Header title="Edit Details" />
+
+				<Modal.Body>
+					<EditPersonalDetails
+						control={control}
+						errors={errors}
+						detailsData={detailsData}
+					/>
+				</Modal.Body>
+				<Modal.Footer>
+					<>
+						<Button
+							disabled={apiLoading}
+							themeType="tertiary"
+							className="secondary sm"
+							onClick={onClickCancel}
+						>
+							CANCEL
+						</Button>
+						<Button
+							className="primary sm"
+							disabled={apiLoading}
+							onClick={handleSubmit(onCreate)}
+						>
+							UPDATE
+						</Button>
+					</>
+				</Modal.Footer>
+			</Modal>
 
 			<PersonDetails
 				detailsData={detailsData}

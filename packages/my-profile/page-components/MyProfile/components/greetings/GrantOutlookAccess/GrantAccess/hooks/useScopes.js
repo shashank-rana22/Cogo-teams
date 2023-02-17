@@ -5,10 +5,10 @@ import { useEffect } from 'react';
  * Single utility hook to get outlook scopes
  */
 
-const useScopes = () => {
+const useScopes = ({ showAccessUrl, scopes }) => {
 	const [getScopesApi, triggerGetMail] = usePublicRequest(
 		{
-			url    : `${process.env.COGO_LENS_URL}/outlook_scopes`,
+			url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/outlook_scopes`,
 			method : 'GET',
 		},
 		{ manual: true },
@@ -22,7 +22,7 @@ const useScopes = () => {
 		try {
 			await triggerGetMail();
 		} catch (err) {
-			console.log(err);
+			console.log('err ::', err);
 		}
 	};
 
@@ -32,9 +32,11 @@ const useScopes = () => {
 	}));
 
 	useEffect(() => {
-		getScopes();
+		if (showAccessUrl) {
+			getScopes();
+		}
 		// eslint-disable-next-line
-	}, []);
+	}, [showAccessUrl,scopes]);
 
 	return {
 		getScopesApi,

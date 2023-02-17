@@ -1,47 +1,31 @@
 .header_text {
-	font-size: 16px;
-	font-weight: 600;
-	color: #6fa5ab;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6fa5ab;
 }
 
 .card_container {
-	padding: 12px;
+  padding: 12px;
 }
 
 .label_text {
-	padding: 4px 0;
-	font-size: 14px;
-	font-weight: 400;
-	color: #828282;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #828282;
 }
 
 .value_text {
-	font-size: 14px;
-	font-weight: 600;
-	color: #221f20;
-}
-
-.label_value_container {
+  font-size: 14px;
+  font-weight: 600;
+  color: #221f20;
 }
 
 .elements {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header_container {
-	display: flex;
-}
-
-.pills_container {
-	display: flex;
-	align-items: center;
-	height: 20px;
-	padding: 0 6px;
-	margin-top: 3px;
-	margin-left: 14px;
-	font-size: 10px;
-	color: #221f20;
-	background: #ddebc0;
-	border-radius: 4px;
+  display: flex;
 }
