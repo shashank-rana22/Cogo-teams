@@ -3,8 +3,8 @@ import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import ConfigurationDetails from '../ConfigurationDetails';
 
+import ConfigurationDetails from './ConfigurationDetails';
 import styles from './styles.module.css';
 import UpdateStakeholderDetails from './UpdateStakeholderDetails';
 

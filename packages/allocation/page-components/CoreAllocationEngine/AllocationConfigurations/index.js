@@ -1,5 +1,4 @@
 import { Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 
 import useListAllocationConfigurations from '../../../hooks/useListAllocationConfiguration';
 
@@ -27,7 +26,7 @@ function Configurations() {
 				params={params}
 				setParams={setParams}
 				setShowCreateConfig={setShowCreateConfig}
-				disabled={loading || isEmpty(list)}
+				disabled={loading}
 			/>
 
 			<List

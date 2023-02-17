@@ -29,6 +29,7 @@ function Header(props) {
 				<Breadcrumb.Item
 					label={<a href={`/v2/${locale}/${partner_id}/allocation/core-engine/`}>Core Engine</a>}
 				/>
+
 				<Breadcrumb.Item label="Allocation Details" />
 			</Breadcrumb>
 

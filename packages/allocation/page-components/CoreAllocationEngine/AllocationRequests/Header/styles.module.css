@@ -1,57 +1,56 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 
-    flex-wrap: wrap;
-
-    :global(.ui_toggle_container){
-        padding: 0px;
-    }
+	:global(.ui_toggle_container) {
+		padding: 0;
+	}
 }
 
 .filter_container {
-    display: flex;
+	display: flex;
 }
 
 .filter_container > button:last-child {
-    margin-left: 8px;
+	margin-left: 8px;
 }
 
 .filter_dot {
-    height: 8px;
-	width: 8px;
-	border: 1px solid #ffffff;
-	border-radius: 100%;
-	background: #EE3425;
 	position: relative;
-	bottom: 4px;
 	right: 4px;
+	bottom: 4px;
+	width: 8px;
+	height: 8px;
+	background: #ee3425;
+	border: 1px solid #fff;
+	border-radius: 100%;
 }
 
 .search_container {
-    display: flex;
-    margin-right: 8px;
-	
-	:global(.ui_input_container){
+	display: flex;
+	margin-right: 8px;
+
+	:global(.ui_input_container) {
 		width: 300px;
 	}
 }
 
-.bulk_update_container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.bulk_update_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.selection_text{
-    display: flex;
-    font-size: 12px;
-    color: #4F4F4F;
-    align-items: center;
+.selection_text {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	color: #4f4f4f;
 }
 
-.text{
-    margin-right: 8px;
+.text {
+	margin-right: 8px;
 }

@@ -1,26 +1,24 @@
 .action_container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .workflow_cta {
-    padding: 8px;
 	width: 150px;
-    border-bottom: 1px solid #F8AEA8;
+	padding: 8px;
+	border-bottom: 1px solid #f8aea8;
 
-    &:hover {
+	&:hover {
 		font-weight: 600;
-        background: #FFFCE6;
+		background: #fffce6;
 	}
 }
 
 .cta_text {
-    display: flex;
+	position: relative;
+	display: flex;
+	width: fit-content;
 	margin-left: 8px;
 	font-size: 12px;
-
-	width: fit-content;
 	cursor: pointer;
-
-	position: relative;
 }

@@ -36,7 +36,7 @@ const columnsMapping = [
 	{
 		key      : 'stakeholder_type',
 		label    : 'Stakeholder Type',
-		getValue : (data) => startCase(getByKey(data, 'stakeholder_type', '___')),
+		getValue : (data) => startCase(getByKey(data, 'stakeholder_type') || '___'),
 		flex     : 1.5,
 	},
 	{
@@ -44,7 +44,7 @@ const columnsMapping = [
 		label    : 'Requested Agent',
 		getValue : (data) => (
 			<div>
-				{getByKey(data, 'user.name', '___')}
+				{getByKey(data, 'user.name', '')}
 				{' '}
 				<div className={styles.email_id}>{getByKey(data, 'user.email') || '___'}</div>
 			</div>
@@ -54,7 +54,7 @@ const columnsMapping = [
 	{
 		key      : 'created_by',
 		label    : 'Requested By',
-		getValue : (data) => getByKey(data, 'created_by.name', '___'),
+		getValue : (data) => getByKey(data, 'created_by.name') || '___',
 		flex     : 1.5,
 	},
 	{
@@ -63,7 +63,7 @@ const columnsMapping = [
 		getValue : (data) => (
 			<Tooltip content={getByKey(data, 'reason', '___')} placement="top">
 				<span className={styles.reason}>
-					{getByKey(data, 'reason', '___')}
+					{getByKey(data, 'reason') || '___'}
 				</span>
 			</Tooltip>
 		),

@@ -31,7 +31,7 @@ function AllocationQuotas() {
 				onClickCreateQuota={() => setQuotaItem(true)}
 				params={params}
 				setParams={setParams}
-				disabled={listLoading || isEmpty(data?.list)}
+				disabled={listLoading}
 				toggleRoleType={toggleRoleType}
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}

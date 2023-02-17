@@ -19,6 +19,7 @@ function Header(props) {
 				size="md"
 				themeType="accent"
 				onClick={() => setShowCreateConfig(true)}
+				disabled={disabled}
 			>
 				CREATE CONFIG
 

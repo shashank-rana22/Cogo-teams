@@ -31,6 +31,7 @@ function Header(props) {
 							quota_type: e?.target?.checked ? 'user' : 'role',
 						},
 				}))}
+				disabled={disabled}
 			/>
 
 			<div className={styles.filters_container}>
@@ -49,6 +50,7 @@ function Header(props) {
 					size="md"
 					themeType="accent"
 					onClick={onClickCreateQuota}
+					disabled={disabled}
 				>
 					CREATE QUOTA
 				</Button>

@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import useListAllocationDetails from '../../../hooks/useListAllocationDetails';
 
 import Header from './Header';
@@ -36,7 +34,7 @@ function Details() {
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				instanceStatus={instanceStatus}
-				disabled={loading || isEmpty(list)}
+				disabled={loading}
 			/>
 
 			<List

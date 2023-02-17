@@ -1,5 +1,5 @@
 .container {
-	margin: 16px 0px;
+	margin: 16px 0;
 }
 
 .modal_container {
@@ -7,4 +7,3 @@
 		width: 300px !important;
 	}
 }
-

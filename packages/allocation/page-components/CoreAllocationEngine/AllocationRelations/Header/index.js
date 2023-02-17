@@ -34,7 +34,6 @@ function Header({
 
 	return (
 		<div className={styles.header_container}>
-
 			<div className={styles.toggle_container}>
 				<Toggle
 					name="relation_status"
@@ -42,6 +41,7 @@ function Header({
 					offLabel="Active"
 					onLabel="Pending"
 					onChange={(event) => onChangeToggle(event)}
+					disabled={disabled}
 				/>
 
 			</div>
@@ -58,19 +58,18 @@ function Header({
 					/>
 				</div>
 
-				<div>
-					<ConfigFilters
-						params={params}
-						setParams={setParams}
-						disabled={disabled}
-					/>
-				</div>
+				<ConfigFilters
+					params={params}
+					setParams={setParams}
+					disabled={disabled}
+				/>
 
 				<Button
 					size="md"
 					themeType="accent"
 					style={{ marginLeft: '8px' }}
 					onClick={() => setShowCreateRelationModal(true)}
+					disabled={disabled}
 				>
 					CREATE RELATION
 				</Button>
