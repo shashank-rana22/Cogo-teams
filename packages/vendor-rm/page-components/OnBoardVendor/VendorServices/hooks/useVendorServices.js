@@ -1,16 +1,18 @@
+/* eslint-disable import/no-cycle */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-// eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
+import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import getControls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
 
 function useVendorServices({
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const {
@@ -37,7 +39,7 @@ function useVendorServices({
 
 	const onSubmit = async ({ data, step }) => {
 		setVendorInformation((pv) => {
-			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
 			return {
 				...pv,
 				[key]: data,
@@ -50,14 +52,14 @@ function useVendorServices({
 			const payload = {
 				performed_by_id   : '',
 				performed_by_type : '',
-				vendor_id         : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
+				vendor_id         : vendorInformation?.vendor_details?.id,
 				services          : formattedServices,
 			};
 
 			await trigger({ data: payload });
 
 			Toast.success('Services added successfully');
-			setActiveStepper(TABS_MAPPING[step]);
+			setActiveStepper('payment_details');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
 		}

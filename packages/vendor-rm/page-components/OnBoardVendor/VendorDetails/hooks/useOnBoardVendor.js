@@ -6,16 +6,14 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
-import TABS_MAPPING from '../../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
+// import TABS_MAPPING from '../../../../constants/tabs';
 import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({
 	setActiveStepper = () => {},
-	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const router = useRouter();
@@ -38,8 +36,6 @@ function useOnBoardVendor({
 		formState: { errors },
 		handleSubmit,
 		getValues,
-		setValue,
-		watch,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
@@ -49,8 +45,6 @@ function useOnBoardVendor({
 
 	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
-
-		console.log(formattedValues, 'data');
 
 		setVendorInformation((pv) => {
 			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);

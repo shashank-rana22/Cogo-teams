@@ -1,10 +1,11 @@
+/* eslint-disable import/no-cycle */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-// eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
+import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import getControls from '../utils/getControls';
 
 function useCreateVendorContact({
@@ -22,8 +23,6 @@ function useCreateVendorContact({
 		setValue,
 	} = useForm();
 
-	console.log(errors, 'errors');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_vendor_poc',
 		method : 'post',
@@ -33,7 +32,7 @@ function useCreateVendorContact({
 		const formattedValues = getValues();
 
 		setVendorInformation((pv) => {
-			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
 			return {
 				...pv,
 				[key]: data,
@@ -42,6 +41,7 @@ function useCreateVendorContact({
 
 		const payload = {
 			...formattedValues,
+			vendor_id             : vendorInformation?.vendor_details?.id,
 			vendor_poc_proof      : formattedValues?.contact_proof_url?.finalUrl,
 			mobile_country_code   : formattedValues?.mobile_number?.country_code,
 			mobile_number         : formattedValues?.mobile_number?.number,
@@ -54,7 +54,7 @@ function useCreateVendorContact({
 
 			if (res?.data) {
 				Toast.success('Vendor Contact Created Successfully');
-				setActiveStepper(TABS_MAPPING[step]);
+				setActiveStepper('vendor_services');
 			}
 		} catch (error) {
 			Toast.error('Something went wrong');

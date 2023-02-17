@@ -5,6 +5,7 @@ import Header from './Header';
 function PaymentDetails({
 	activeStepper = {},
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	return (
@@ -13,6 +14,7 @@ function PaymentDetails({
 			<FormComponent
 				activeStepper={activeStepper}
 				setActiveStepper={setActiveStepper}
+				vendorInformation={vendorInformation}
 				setVendorInformation={setVendorInformation}
 			/>
 		</div>

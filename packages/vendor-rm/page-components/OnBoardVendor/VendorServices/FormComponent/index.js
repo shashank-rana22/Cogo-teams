@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
@@ -13,6 +14,7 @@ function FormComponent({
 	control,
 	errors = {},
 	activeStepper = {},
+	setActiveStepper = () => {},
 	watch = () => {},
 	setValue = () => {},
 }) {
@@ -56,6 +58,7 @@ function FormComponent({
 
 			<ButtonLayout
 				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
 			/>

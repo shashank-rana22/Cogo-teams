@@ -40,11 +40,7 @@ function OnBoardVendor() {
 
 	const [activeStepper, setActiveStepper] = useState('payment_details');
 
-	console.log(activeStepper, 'activeStepper');
-
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
-
-	// const Element = component;
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const onBack = useCallback(() => router.push('/vendors-list'), []);
