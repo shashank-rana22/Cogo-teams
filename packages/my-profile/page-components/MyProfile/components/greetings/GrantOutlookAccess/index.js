@@ -8,6 +8,7 @@ function GrantOutlookAccess() {
 	const email = useSelector((state) => state?.profile?.user?.email);
 
 	const [showAccessUrl, setAccessUrl] = useState(false);
+
 	return (
 		<div>
 			<Button
@@ -15,7 +16,7 @@ function GrantOutlookAccess() {
 				style={{ marginLeft: 10 }}
 				onClick={() => setAccessUrl(true)}
 			>
-				Allow Mails
+				ALLOW MAILS
 			</Button>
 			<Modal
 				show={showAccessUrl}
@@ -23,7 +24,11 @@ function GrantOutlookAccess() {
 				className="primary md"
 				styles={{ dialog: { overflow: 'visible' } }}
 			>
-				<GrantAccess email={email} />
+
+				<GrantAccess
+					email={email}
+					showAccessUrl={showAccessUrl}
+				/>
 			</Modal>
 		</div>
 	);

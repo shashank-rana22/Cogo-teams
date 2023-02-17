@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import ChangePassword from './ChangePassword';
 import useChangePassword from './ChangePassword/useChangePassword';
 import Details from './Details';
+import GrantOutlookAccess from './greetings/GrantOutlookAccess';
 import Header from './Header';
 import Organization from './Organization';
 import styles from './styles.module.css';
@@ -61,7 +62,7 @@ function MyProfile() {
 					>
 						CHANGE PASSWORD
 					</Button>
-					{/* <GrantOutlookAccess /> */}
+					<GrantOutlookAccess />
 				</div>
 			</div>
 

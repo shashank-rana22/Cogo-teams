@@ -1,5 +1,4 @@
 import { usePublicRequest } from '@cogoport/request';
-import { useEffect } from 'react';
 
 /**
  * Single utility hook to get authorization Url
@@ -8,7 +7,7 @@ import { useEffect } from 'react';
 const useGetAutorizationUrl = () => {
 	const [authorizationUrlApi, triggerAuthorizationUrl] = usePublicRequest(
 		{
-			url    : `${process.env.COGO_LENS_URL}/outlook_authorization_url`,
+			url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/outlook_authorization_url`,
 			method : 'GET',
 		},
 		{ manual: true },
@@ -18,14 +17,9 @@ const useGetAutorizationUrl = () => {
 	 *
 	 * @param {String} id Id of mail
 	 */
-	const getAuthorizationUrl = () => triggerAuthorizationUrl({
-		params: { scopes: {} },
+	const getAuthorizationUrl = ({ scopes = [], redirect_url }) => triggerAuthorizationUrl({
+		params: { scopes: JSON.stringify(scopes), redirect_url },
 	});
-
-	useEffect(() => {
-		getAuthorizationUrl();
-		// eslint-disable-next-line
-	}, []);
 
 	return {
 		authorizationUrlApi,

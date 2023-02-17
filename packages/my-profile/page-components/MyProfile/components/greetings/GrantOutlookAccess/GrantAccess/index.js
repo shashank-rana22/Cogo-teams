@@ -1,4 +1,4 @@
-import { Select, Button, Toast } from '@cogoport/components';
+import { MultiSelect, Button, Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
@@ -7,13 +7,14 @@ import useLocalStorage from './hooks/useLocalStorage';
 import useScopes from './hooks/useScopes';
 import styles from './styles.module.css';
 
-function GrantAccess({ email = '' }) {
+function GrantAccess({ email = '', showAccessUrl = false }) {
 	const [scopes, setScopes] = useState([]);
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
-	const { scopeOptions } = useScopes();
-	const { getAuthorizationUrl } = useGetAutorizationUrl();
+
+	const { scopeOptions } = useScopes({ showAccessUrl, scopes });
+	const { getAuthorizationUrl = () => {} } = useGetAutorizationUrl();
 	const { setItems } = useLocalStorage();
 
 	useEffect(() => {
@@ -25,14 +26,14 @@ function GrantAccess({ email = '' }) {
 
 	const handleRedirect = async () => {
 		try {
-			const redirect_url = `${process.env.PARTNER_URL}/generate-outlook-token`;
-			const res = await getAuthorizationUrl({ scopes, redirect_url });
+			const redirect_url = `${process.env.NEXT_PUBLIC_PARTNER_URL}/generate-outlook-token`;
+
+			const res = await getAuthorizationUrl({ scopes: scopes || [], redirect_url });
 			const url = res?.data;
 			setItems({ email, scopes, partner_id: query.partner_id });
 			// eslint-disable-next-line no-undef
 			window.open(url, '_blank');
 		} catch (err) {
-			console.log(err);
 			Toast.error('Errors in getting url');
 		}
 	};
@@ -50,7 +51,7 @@ function GrantAccess({ email = '' }) {
 				seamless experience)
 			</p>
 
-			<Select
+			<MultiSelect
 				options={scopeOptions}
 				onChange={setScopes}
 				value={scopes}

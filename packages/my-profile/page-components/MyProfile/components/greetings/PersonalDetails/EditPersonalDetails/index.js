@@ -43,7 +43,7 @@ function EditPersonalDetails({
 										rules={rules}
 									/>
 
-									{errors.name && (
+									{errors[name] && (
 										<div className={styles.error_text}>
 											{errors.name.message}
 										</div>
