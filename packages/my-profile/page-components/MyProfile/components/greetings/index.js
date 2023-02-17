@@ -125,13 +125,14 @@ function Greetings({
 						<Button
 							disabled={apiLoading}
 							themeType="tertiary"
-							className="secondary sm"
 							onClick={onClickCancel}
+							style={{ marginRight: '6px' }}
+
 						>
 							CANCEL
 						</Button>
 						<Button
-							className="primary sm"
+							themeType="primary"
 							disabled={apiLoading}
 							onClick={handleSubmit(onCreate)}
 						>
