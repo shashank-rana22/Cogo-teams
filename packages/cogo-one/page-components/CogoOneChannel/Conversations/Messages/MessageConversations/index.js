@@ -24,6 +24,8 @@ function MessageConversations({
 	getNextData,
 	setOpenModal,
 	activeMessageCard,
+	uploading,
+	setUploading,
 }) {
 	const messageRef = useRef(null);
 	const noMessages = isEmpty(messagesData);
@@ -68,6 +70,10 @@ function MessageConversations({
 		}
 	}, [id, noMessages, checkMessage]);
 
+	const handleProgress = (val) => {
+		setUploading((prev) => ({ ...prev, [id]: val }));
+	};
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { emojiListFetch(); }, []);
 
@@ -82,7 +88,7 @@ function MessageConversations({
 
 	return (
 		<div className={styles.styled_div}>
-			<div className={cl`${styles.container} ${!isEmpty(draftUploadedFile) && styles.chat_container}`} onScroll={handleScroll}>
+			<div className={cl`${styles.container} ${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.chat_container}`} onScroll={handleScroll}>
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received'
 						? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
@@ -91,7 +97,7 @@ function MessageConversations({
 				<div ref={messageRef} />
 			</div>
 
-			<div className={cl`${styles.nofile_container} ${!isEmpty(draftUploadedFile) && styles.upload_file_container}`}>
+			<div className={cl`${styles.nofile_container} ${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.upload_file_container}`}>
 				{!isEmpty(draftUploadedFile) && (
 					<>
 						<div className={styles.files_view}>
@@ -113,6 +119,11 @@ function MessageConversations({
 							/>
 						</div>
 					</>
+				)}
+				{uploading?.[id] && (
+					<div className={styles.uploading}>
+						uploading.....
+					</div>
 				)}
 			</div>
 
@@ -142,15 +153,15 @@ function MessageConversations({
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
 						<FileUploader
-							onChange={(val) => {
-								if (val) {
-									setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }));
-								}
-							}}
+							disabled={uploading?.[id]}
+							handleProgress={handleProgress}
 							showProgress={false}
 							draggable
 							className="file_uploader"
 							uploadIcon={<IcMAttach className={styles.upload_icon} />}
+							onChange={(val) => {
+								setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }));
+							}}
 						/>
 						<Popover
 							placement="top"
