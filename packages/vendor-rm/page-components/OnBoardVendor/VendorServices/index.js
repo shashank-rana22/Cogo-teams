@@ -40,6 +40,7 @@ function VendorServices({
 				errors={errors}
 				loading={loading}
 				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
 				watch={watch}
 				setValue={setValue}
 			/>

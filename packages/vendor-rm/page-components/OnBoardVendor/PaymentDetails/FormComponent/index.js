@@ -32,6 +32,7 @@ function FormComponent({
 			/>
 			<ButtonLayout
 				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
 				loading={loading}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
