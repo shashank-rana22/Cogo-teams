@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -70,7 +71,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 				},
 			});
 		} catch (err) {
-			console.log(err, 'err');
+			Toast.error(err);
 		}
 	};
 

@@ -1,9 +1,10 @@
 .flex {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+	display: flex;
+	gap: 4px;
+	align-items: center;
 }
+
 .drag {
-  font-size: 12px;
-  font-weight: 400;
+	font-size: 12px;
+	font-weight: 400;
 }

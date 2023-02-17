@@ -42,8 +42,6 @@ function BankDetails({
 		radioMethod     : methodOfVerification || '',
 	});
 
-	console.log({ bankData, value }, 'djfhbdjl');
-
 	const { useOnActionBank:OnAction, loading } = useGetBankData({
 		bankData,
 		setShowBankModal,
