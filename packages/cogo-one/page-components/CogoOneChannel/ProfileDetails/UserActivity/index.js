@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { Tabs, TabPanel, Input, Popover } from '@cogoport/components';
-import { IcMFdollar, IcMDoubleFilter, IcMSearchlight, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
+import { Tabs, TabPanel, Popover } from '@cogoport/components';
+import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -17,7 +17,7 @@ import TransactionalActivity from './TransactionalActivity';
 
 function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const [activityTab, setActivityTab] = useState('transactional');
-	const [searchValue, setSearchValue] = useState('');
+	// const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
 
@@ -29,13 +29,14 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const {
 		loading,
 		data = {},
-		fetchListLogsApi = () => {},
+		fetchActivityLogs = () => {},
 		handleScroll = () => {},
-	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard, activeTab });
+	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
+
 	const handleFilters = () => {
-		fetchListLogsApi(filters);
+		fetchActivityLogs(filters);
 	};
 
 	const ACTIVITY_COMPONENT_CALLING = {
@@ -77,40 +78,31 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 				{USER_ACTIVITY_MAPPING[activityTab]}
 			</div>
 			<div className={styles.filters_container}>
-				<div className={styles.source_types}>
+				<div className={styles.source_types} />
+				{activityTab !== 'platform' && (
+					<div className={styles.filter_icon}>
+						<Popover
+							placement="left"
+							render={(
+								<Filters
+									setFilterVisible={setFilterVisible}
+									activityTab={activityTab}
+									filters={filters}
+									setFilters={setFilters}
+									handleFilters={handleFilters}
+								/>
+							)}
+							visible={filterVisible}
+							onClickOutside={() => setFilterVisible(false)}
+						>
 
-					<Input
-						size="sm"
-						prefix={<IcMSearchlight width={18} height={18} />}
-						placeholder="Search here..."
-						value={searchValue}
-						onChange={(val) => setSearchValue(val)}
-						style={{ width: 200 }}
-					/>
+							<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+						</Popover>
+						{/* {!isEmpty(appliedFilters) && <div className={styles.filters_applied} />} */}
+						<div className={styles.filters_applied} />
+					</div>
+				)}
 
-				</div>
-
-				<div className={styles.filter_icon}>
-					<Popover
-						placement="left"
-						render={(
-							<Filters
-								setFilterVisible={setFilterVisible}
-								activityTab={activityTab}
-								filters={filters}
-								setFilters={setFilters}
-								handleFilters={handleFilters}
-							/>
-						)}
-						visible={filterVisible}
-						onClickOutside={() => setFilterVisible(false)}
-					>
-
-						<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
-					</Popover>
-					{/* {!isEmpty(appliedFilters) && <div className={styles.filters_applied} />} */}
-					<div className={styles.filters_applied} />
-				</div>
 			</div>
 
 			{loading ? (

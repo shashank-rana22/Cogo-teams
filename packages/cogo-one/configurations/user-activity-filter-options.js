@@ -14,21 +14,6 @@ function filterOptions() {
 		},
 	];
 
-	const platformFilters = [
-		{
-			label : 'Checkout',
-			value : 'checkout',
-		},
-		{
-			label : 'Login',
-			value : 'login',
-		},
-		{
-			label : 'Search',
-			value : 'search',
-		},
-	];
-
 	const communicationFilters = [
 		{
 			label : 'Whatsapp',
@@ -49,7 +34,6 @@ function filterOptions() {
 	];
 
 	const FILTERS_MAPPING = {
-		platform      : platformFilters,
 		communication : communicationFilters,
 		transactional : transactionalFilters,
 	};
