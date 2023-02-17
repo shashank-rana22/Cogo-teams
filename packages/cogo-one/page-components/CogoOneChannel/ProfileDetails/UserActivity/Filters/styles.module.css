@@ -50,3 +50,6 @@ flex-direction: column;
 	flex-direction: column;
 	align-items: start;
 }
+.refresh_icon{
+	margin:5px 10px 0px 0px;
+}

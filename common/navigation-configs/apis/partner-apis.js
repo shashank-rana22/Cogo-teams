@@ -881,6 +881,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'create_event',
+			access_type  : 'private',
+			service_name : 'event',
+		},
+		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',
@@ -1650,6 +1655,11 @@ const partner = {
 			api          : 'verify_otp',
 			access_type  : 'private',
 			service_name : 'user',
+		},
+		{
+			api          : 'create_event',
+			access_type  : 'private',
+			service_name : 'event',
 		},
 	],
 	supply_crm: [
@@ -9775,6 +9785,7 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+
 	],
 	omni_channel: [
 		{
@@ -10184,7 +10195,13 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'create_communication',
+			api: 'create_communication',
+
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_omnichannel_customer_insights',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

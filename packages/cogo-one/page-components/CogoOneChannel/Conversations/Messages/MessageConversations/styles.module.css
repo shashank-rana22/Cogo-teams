@@ -1,16 +1,27 @@
 .container {
     padding: 10px;
-    height: calc(100% - 179px);
     overflow-y: scroll;
-    transition: height 0.5s;
+    transition: height 0.3s;
+
     &::-webkit-scrollbar {
         display: none;
     }
 }
 
-.chat_container {
+.file_present_suggestions {
     height: calc(100% - 214px);
-    transition: height 0.5s;
+}
+
+.file_present_nosuggestions {
+    height: calc(100% - 177px);
+}
+
+.suggestions_exist {
+    height: calc(100% - 179px);
+}
+
+.no_suggestions {
+    height: calc(100% - 142px);
 }
 
 .text_area {
@@ -35,9 +46,9 @@
     background: #fff;
     width: 100%;
     border-radius: 4px;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .flex_space_between {
@@ -66,10 +77,10 @@
     border-radius: 6px;
     margin: 0 5px;
     padding: 5px;
-	max-width: 150px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	user-select: none;
+    max-width: 150px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
     cursor: pointer;
 }
 
@@ -84,7 +95,7 @@
     align-items: center;
     padding: 5px 0px;
     border-bottom: 1px solid #fbd1a6;
-	min-height: 30px;
+    min-height: 30px;
 }
 
 .styled_div {
@@ -123,7 +134,7 @@
 
 .nofile_container {
     height: 0px;
-    transition: height 0.5s;
+    transition: height 0.3s;
 }
 
 .upload_file_container {
@@ -133,7 +144,7 @@
     width: 100%;
     padding: 0px 10px;
     align-items: flex-end;
-    transition: height 0.1s;
+    transition: height 0.3s;
 }
 
 .files_view {
@@ -177,8 +188,7 @@
 .uploading {
     width: 100%;
     border-bottom: 1px solid #fbd1a6;
-
 }
-.first_div{
-	 margin-top: auto;
+.first_div {
+    margin-top: auto;
 }

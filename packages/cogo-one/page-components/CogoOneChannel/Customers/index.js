@@ -17,7 +17,6 @@ function Customers({
 	filterVisible,
 	activeTab,
 	setActiveTab = () => {},
-	setToggleStatus = () => {},
 	toggleStatus,
 	messagesList = [],
 	unReadChatsCount,

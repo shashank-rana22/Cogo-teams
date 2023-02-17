@@ -4,15 +4,22 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 
 import styles from './styles.module.css';
 
-function VoiceCallComponent({ mobile_number_eformat, name, noUserId }) {
+function VoiceCallComponent({
+	userMobile,
+	orgId,
+	agentId,
+	countryCode,
+	userId,
+	userName,
+	emptyState,
+}) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
 	}));
 
-	const countryCode = mobile_number_eformat?.slice(0, 2);
-	const number = mobile_number_eformat?.slice(2);
-	// const { name, organization_id, user_id } = user_details || {};
+	const code = userMobile?.slice(0, 3);
+	const number = userMobile?.slice(3);
 
 	const handleCall = async () => {
 		dispatch(
@@ -25,13 +32,13 @@ function VoiceCallComponent({ mobile_number_eformat, name, noUserId }) {
 					endCall             : false,
 					showFeedbackModal   : false,
 					startTime           : new Date(),
-					// orgId               : organization_id,
-					// userId              : user_id,
-					mobile_number       : number,
+					orgId,
+					userId,
+					mobile_number       : userMobile,
 					mobile_country_code : countryCode,
-					// agentId,
-					name,
-					noUserId,
+					agentId,
+					name                : userName,
+					emptyState,
 
 				},
 			}),
@@ -44,7 +51,7 @@ function VoiceCallComponent({ mobile_number_eformat, name, noUserId }) {
 				<div className={styles.number_div}>
 					<IcMCall className={styles.call_icon} onClick={handleCall} />
 					<div className={styles.show_number}>
-						{countryCode}
+						{code}
 						{' '}
 						{number}
 					</div>
