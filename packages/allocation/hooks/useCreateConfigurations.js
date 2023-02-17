@@ -40,11 +40,7 @@ const useCreateConfigurations = ({
 		},
 	});
 
-	const {
-		reset,
-		watch,
-		// setValue,
-	} = formProps;
+	const { reset, watch } = formProps;
 
 	const roleIds = watch('role_ids');
 	const watchServiceType = watch('service_type');

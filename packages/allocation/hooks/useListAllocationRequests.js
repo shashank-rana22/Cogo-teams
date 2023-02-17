@@ -135,6 +135,7 @@ const useListAllocationRequests = () => {
 		onChangeCheckbox,
 		onSelectAll,
 		bulkMode,
+		setBulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
 		selectAll,

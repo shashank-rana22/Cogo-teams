@@ -58,7 +58,6 @@ function List({
 
 	return (
 		<div>
-
 			{activeTab === 'pending' ? (
 				<BulkUpdateMode
 					list={list}

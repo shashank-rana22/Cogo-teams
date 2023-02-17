@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useBulkApproveRequest = (props) => {
-	const { refetch, onCloseModal, checkedRowsId } = props;
+	const { onCloseModal, checkedRowsId, onResettingBulkMode } = props;
 
 	const api = useRequest({
 		url     : '/request_bulk_approve',
@@ -23,9 +23,9 @@ const useBulkApproveRequest = (props) => {
 				data: payload,
 			});
 
-			refetch();
-
 			onCloseModal();
+
+			onResettingBulkMode();
 
 			Toast.success('Request has been initiated successfully. Please check after sometime');
 		} catch (error) {

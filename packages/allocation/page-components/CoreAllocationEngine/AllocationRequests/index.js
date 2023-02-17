@@ -26,7 +26,11 @@ function Requests() {
 		onChangeParams,
 		searchValue,
 		setSearchValue,
+		bulkMode,
+		setBulkMode,
 		checkedRowsId,
+		setCheckedRowsId,
+		onChangeCheckbox,
 		...restProps
 	} = useListAllocationRequests();
 
@@ -34,15 +38,17 @@ function Requests() {
 		<section className={styles.container}>
 			<Header
 				onClickCreateReqBtn={() => setShowModal(true)}
-				loading={listLoading}
+				disabled={listLoading || isEmpty(data?.list)}
 				onChangeParams={onChangeParams}
 				// Either setParams or onChangeParams
 				params={params}
 				setParams={setParams}
+				bulkMode={bulkMode}
 				setShowModal={setShowModal}
 				checkedRowsId={checkedRowsId}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				onChangeCheckbox={onChangeCheckbox}
 				{...restProps}
 			/>
 
@@ -51,8 +57,9 @@ function Requests() {
 				loading={listLoading}
 				onChangeParams={onChangeParams}
 				fetchList={refetch}
+				bulkMode={bulkMode}
 				checkedRowsId={checkedRowsId}
-				{...restProps}
+				setCheckedRowsId={setCheckedRowsId}
 			/>
 
 			{showModal && (
@@ -67,10 +74,9 @@ function Requests() {
 					{!isEmpty(checkedRowsId)
 						? (
 							<BulkUpdateConfirmation
-								refetch={refetch}
 								onCloseModal={onCloseModal}
 								checkedRowsId={checkedRowsId}
-
+								onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
 							/>
 						) : (
 							<CreateRequestModalContent

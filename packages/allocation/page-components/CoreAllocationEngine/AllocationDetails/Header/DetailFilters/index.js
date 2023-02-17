@@ -5,6 +5,8 @@ import Filters from '../../../../../common/Filters';
 
 import useDetailsFilterContent from './useDetailsFilterContent';
 
+const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
+
 function DetailFilters({ params, setParams }) {
 	const {
 		controls,
@@ -32,12 +34,19 @@ function DetailFilters({ params, setParams }) {
 				onClick={() => setShowFilters(!showFilters)}
 			>
 				FILTER
-				{filtersApplied ? (
-					// TODO ==> Use Conditional Wrapper
-					<Badge color="red" size="md" text="">
+
+				<ConditionalWrapper
+					condition={filtersApplied}
+					wrapper={(children) => (
+						<Badge color="red" size="md" text="">
+							{children}
+						</Badge>
+					)}
+				>
+					<div>
 						<IcMFilter style={{ marginLeft: '4px' }} />
-					</Badge>
-				) : <IcMFilter style={{ marginLeft: '4px' }} />}
+					</div>
+				</ConditionalWrapper>
 
 			</Button>
 		</Filters>
