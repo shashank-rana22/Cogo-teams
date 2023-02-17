@@ -165,7 +165,6 @@
     padding: 12px 18px;
     border-radius: 8px;
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
-
 }
 
 
@@ -177,19 +176,48 @@
     align-items: flex-start;
     padding: 0 5px;
 	/* border-left: solid 1px black; */
+	margin-left: 10px;
 
 }
 .ticket_value{
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
+
+	display: inline-block;
+	position: relative;
+	color: #242424;
+	
+	&::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 1px;
+		bottom: 0;
+		left: 0;
+		background-color: #000;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+	}
+
+
+	&:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
 }
 .ticket_label{
     font-size: 14px;
     color: #828282;
 }
 
-
+.vertical_line {
+	width: 1px;
+	background: #E0E0E0;
+	height: 90%;
+	margin: 0px 10px;
+}
 /* Line Chart------------------------------------------- */
 
 .line_chart_container {
@@ -298,6 +326,26 @@
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+
+	overflow: hidden;
+	&:before {
+		content: '';
+		position: relative;
+		height: 350%;
+		width: 10px;
+		background: #ffffe1;
+		box-shadow: 0 0 10px #fff;
+		opacity: 0.8px;
+		top: -95px;
+		transition-duration: 0s;
+		transform: rotate(35deg) translateX(-15px);
+	}
+
+	&:hover:before {
+		transition: 0.6s;
+		transform: rotate(35deg) translate(200px, 8px);
+	} 
+
 }
 .user_status_icon {
 	width: 40px;
@@ -331,8 +379,9 @@
 		width: 100%;
 		transform: scaleX(0);
 		height: 1px;
-		bottom: 0;
+		bottom: 4px;
 		left: 0;
+		/* top: -1px; */
 		background-color: #000;
 		transform-origin: bottom right;
 		transition: transform 0.25s ease-out;
