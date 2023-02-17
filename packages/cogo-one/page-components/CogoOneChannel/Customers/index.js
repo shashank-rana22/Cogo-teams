@@ -23,9 +23,10 @@ function Customers({
 	unReadChatsCount,
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	status = '',
 	workPrefernce = () => {},
 	messagesLoading = false,
+	setOpenModal = () => {},
+	openModal = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -40,9 +41,15 @@ function Customers({
 					name="online"
 					size="md"
 					showOnOff
-					onChange={() => setToggleStatus((p) => !p)}
+					onChange={() => setToggleStatus((p) => {
+						if (p) {
+							setOpenModal(true);
+						}
+						return !p;
+					})}
 					value={toggleStatus}
 				/>
+
 			</div>
 			<div className={styles.tabs}>
 				<Tabs
@@ -80,11 +87,11 @@ function Customers({
 				/>
 			)}
 
-			{toggleStatus && (
+			{openModal && (
 				<InactiveModal
-					toggleStatus={toggleStatus}
-					setToggleStatus={setToggleStatus}
 					workPrefernce={workPrefernce}
+					setOpenModal={setOpenModal}
+
 				/>
 			)}
 		</div>

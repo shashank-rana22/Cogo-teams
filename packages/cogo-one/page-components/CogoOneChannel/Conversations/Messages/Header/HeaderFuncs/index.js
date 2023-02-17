@@ -1,6 +1,6 @@
 import { Tooltip, cl, Popover, Select, Button } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
 
 import tagsOptions from '../../../../../../configurations/tags-options';
 import { TAGS_COLORS } from '../../../../../../constants';
@@ -15,7 +15,14 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 
 	const toolTipContent = (
 		<div>
-			{(moreList || []).map((item) => (<div className={cl`${styles.tags} ${styles.margin}`}>{item}</div>))}
+			{(moreList || []).map((item) => (
+				<div
+					className={cl`${styles.tags} ${styles.margin}`}
+					key={snakeCase(item)}
+				>
+					{item}
+				</div>
+			))}
 		</div>
 	);
 
@@ -35,6 +42,7 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 				<div
 					className={styles.tags}
 					style={{ background: TAGS_COLORS[index] }}
+					key={snakeCase(item)}
 				>
 					{item}
 				</div>

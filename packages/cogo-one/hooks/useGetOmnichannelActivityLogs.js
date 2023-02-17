@@ -7,11 +7,11 @@ import getActiveCardDetails from '../utils/getActiveCardDetails';
 const useGetOmnichannelActivityLogs = ({
 	activeMessageCard = {},
 	activityTab = '',
-	searchValue = '',
 	activeVoiceCard = {},
 	activeTab,
 }) => {
 	const { user_id:userVoiceId = '' } = activeVoiceCard;
+
 	const userData = getActiveCardDetails(activeMessageCard);
 
 	const { user_id: userMessageId = '' } = userData || {};
@@ -28,15 +28,20 @@ const useGetOmnichannelActivityLogs = ({
 	}, { manual: true });
 
 	const fetchActivityLogs = async (filters = []) => {
+		console.log('filters', filters);
+
+		// const communicationFilters = {
+
+		// };
+
 		const res = await trigger({
-			// filters: {
-			// 	q: !isEmpty(searchValue) ? searchValue : undefined,
-			// },
 			params: {
-				// user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
-				user_id : '38a3ce88-d1e4-4a55-b431-12aa334a0be1',
-				// activity_type : activityTab,
-				page    : pagination,
+				user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
+				activity_type : activityTab,
+				page          : pagination,
+				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
+				t_filters     : !isEmpty(filters) && activityTab === 'transactional',
+
 			},
 		});
 
@@ -58,7 +63,7 @@ const useGetOmnichannelActivityLogs = ({
 	useEffect(() => {
 		fetchActivityLogs();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activityTab, activeVoiceCard, searchValue, pagination]);
+	}, [activeMessageCard, activityTab, activeVoiceCard, pagination]);
 
 	return {
 		data: listData,
