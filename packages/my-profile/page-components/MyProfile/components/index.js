@@ -47,7 +47,7 @@ function MyProfile() {
 	const { password = '' } = getValues();
 
 	return (
-		<>
+		<div className={styles.main_container_wrapper}>
 			<div className={styles.greeting_container}>
 				<div className={styles.main_heading}>
 					<span className={styles.span}>Welcome!</span>
@@ -126,7 +126,7 @@ function MyProfile() {
 
 				</Modal.Footer>
 			</Modal>
-		</>
+		</div>
 
 	);
 }
