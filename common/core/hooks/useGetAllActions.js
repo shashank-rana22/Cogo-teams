@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { getCookie, setCookie } from '@cogoport/utils';
@@ -81,7 +82,7 @@ const useGetAllActions = ({
 						setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, response?.data?.parent_token);
 						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, response?.data?.parent_token);
 						window.location.href = '/';
-						toast.success('User logged out successfully! Redirecting...');
+						Toast.success('User logged out successfully! Redirecting...');
 					}
 
 					if (
@@ -91,7 +92,7 @@ const useGetAllActions = ({
 						setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', -1);
 						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', -1);
 						window.location.href = '/v2/login';
-						toast.success(
+						Toast.success(
 							'User logged out successfully! Redirecting to Login Page',
 						);
 					}
@@ -102,7 +103,7 @@ const useGetAllActions = ({
 					) {
 						setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, response?.data?.parent_token);
 						refetch();
-						toast.success('User logged out successfully!');
+						Toast.success('User logged out successfully!');
 					}
 
 					setOpenPopover(false);

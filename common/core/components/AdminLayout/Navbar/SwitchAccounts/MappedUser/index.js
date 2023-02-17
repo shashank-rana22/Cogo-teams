@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 
 import useGetAllActions from '../../../../../hooks/useGetAllActions';
 
+import Loader from './Loader';
 import styles from './styles.module.css';
 
 function MappedUser({
@@ -20,7 +21,7 @@ function MappedUser({
 }) {
 	const profile_name = user?.user_data?.name?.split(' ');
 
-	const { removeProfile = () => {} } = useGetAllActions({
+	const { removeProfile = () => {}, deleteLoading, updateLoading, switchLoading } = useGetAllActions({
 		user,
 		refetch,
 		profile: 'non-default',
@@ -41,7 +42,16 @@ function MappedUser({
 
 	const lessThan30Seconds = Number(timeLeft) >= Number(expire_time / 1000 - 30);
 
-	const loadingState = loading || lessThan30Seconds || checkIfSessionExpiring;
+	const loadingState = loading
+		|| lessThan30Seconds
+		|| checkIfSessionExpiring
+		|| deleteLoading
+		|| updateLoading
+		|| switchLoading;
+
+	if (loadingState) {
+		return <Loader />;
+	}
 
 	return (
 		<div

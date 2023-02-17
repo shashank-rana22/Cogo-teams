@@ -9,7 +9,8 @@ import styles from './styles.module.css';
 function SwitchAccounts({
 	userMappings = [],
 	refetch = () => {},
-	loading, timeLeft,
+	loading,
+	timeLeft,
 	checkIfSessionExpiring,
 	setOpenPopover = () => {},
 }) {
@@ -60,7 +61,7 @@ function SwitchAccounts({
 				<Button
 					style={{ width: '100%' }}
 					themeType="accent"
-					disabled={!sessionId || checkIfSessionExpiring}
+					disabled={!sessionId || checkIfSessionExpiring || loading}
 					onClick={() => handleSwitchProfile(sessionId)}
 				>
 					Switch Account
