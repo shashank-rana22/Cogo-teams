@@ -1,5 +1,4 @@
 import categoryOptions from './category-options';
-import subCategoryOptions from './sub-category-options';
 
 const getControls = () => [
 	{
@@ -23,13 +22,12 @@ const getControls = () => [
 				label       : 'Select Sub-category',
 				type        : 'select',
 				placeholder : 'Select a sub-category',
-				options     : subCategoryOptions,
 				rules       : { required: 'Sub-category is required' },
 			},
 			{
 				name        : 'cogoport_office_id',
 				label       : 'Select Cogoport Office',
-				type        : 'multiSelect',
+				type        : 'select',
 				placeholder : 'Select Location',
 				options     : [
 					{ label: 'Delhi', value: 'd1cd0599-7d89-4219-878e-dc0cbf579948' },

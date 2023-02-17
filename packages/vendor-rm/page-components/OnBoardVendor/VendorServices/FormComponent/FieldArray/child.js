@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import React from 'react';
 
 import { getElementController } from '../../../../../utils/get-element-controller';
+import useGetModifiedControls from '../../hooks/useGetModifiedControls';
 
 import styles from './styles.module.css';
 
@@ -15,11 +16,14 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	disabled = false,
+	office_details = [],
+	// setValue = () => {},
 }) {
+	const { newControls } = useGetModifiedControls({ office_details, index, controls });
+
 	return (
 		<div className={styles.content}>
-
-			{controls.map((controlItem) => {
+			{(newControls || []).map((controlItem) => {
 				const Element = getElementController(controlItem.type);
 				if (!Element) return null;
 				return (
@@ -54,7 +58,6 @@ function Child({
 					</Button>
 				</div>
 			) : null}
-
 		</div>
 	);
 }

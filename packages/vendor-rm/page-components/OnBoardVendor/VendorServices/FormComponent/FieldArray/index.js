@@ -16,6 +16,8 @@ function FieldArray({
 	showButtons = true,
 	disabled = false,
 	showLabelOnce = false,
+	watch = () => {},
+	setValue = () => {},
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -48,6 +50,9 @@ function FieldArray({
 					showElements={showElements?.[index]}
 					disabled={disabled}
 					showLabelOnce={showLabelOnce}
+					office_details={watch().office_details}
+					setValue={setValue}
+					watch={watch}
 				/>
 			))}
 

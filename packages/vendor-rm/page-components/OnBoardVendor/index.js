@@ -29,7 +29,7 @@ function OnBoardVendor() {
 		}
 	}, [vendor_id, trigger]);
 
-	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[0]);
+	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[2]);
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
