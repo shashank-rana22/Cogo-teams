@@ -27,7 +27,7 @@ const useListAllocationInstances = ({ item = {} }) => {
 		}
 	}, [dateRange]);
 
-	const [{ data, loading }, refetch] = useRequest({
+	const [{ data, loading }] = useRequest({
 		url     : '/instances',
 		method  : 'get',
 		authkey : 'get_allocation_instances',
@@ -44,13 +44,12 @@ const useListAllocationInstances = ({ item = {} }) => {
 	const { list = [], ...paginationData } = data || {};
 
 	return {
-		listLoading          : loading,
+		listLoading: loading,
 		list,
 		paginationData,
 		getNextPage,
 		dateRange,
 		setDateRange,
-		listInstancesRefetch : refetch,
 	};
 };
 

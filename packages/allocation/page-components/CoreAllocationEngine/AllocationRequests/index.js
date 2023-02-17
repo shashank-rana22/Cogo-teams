@@ -90,6 +90,7 @@ function Requests() {
 							<CreateRequestModalContent
 								refetch={refetch}
 								onCloseModal={onCloseModal}
+								params={params}
 							/>
 						)}
 				</Modal>

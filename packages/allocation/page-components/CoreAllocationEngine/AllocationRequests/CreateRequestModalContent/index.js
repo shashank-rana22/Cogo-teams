@@ -4,14 +4,14 @@ import Form from '../../../../common/Form';
 import useCreateAllocationRequest from '../../../../hooks/useCreateAllocationRequest';
 
 function CreateUpdateModal(props) {
-	const { refetch, onCloseModal } = props;
+	const { refetch, onCloseModal, params } = props;
 
 	const {
 		onSave,
 		loading: loadingOnSave,
 		formProps,
 		controls,
-	} = useCreateAllocationRequest({ onCloseModal, refetch });
+	} = useCreateAllocationRequest({ onCloseModal, refetch, params });
 
 	const { handleSubmit } = formProps;
 
