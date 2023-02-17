@@ -285,6 +285,7 @@
 .legend_field {
 	display:flex;
 	align-items:center;
+	padding-right: 25px;
 }
 .legend_icon_1 {
 	margin: 5px;
