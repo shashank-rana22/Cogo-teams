@@ -74,7 +74,7 @@ const getCreateConfigurationsControls = ({
 			placeholder       : 'Type segment here...',
 			type              : 'asyncSelect',
 			asyncKey          : 'segments',
-			labelKey          : 'label',
+			labelKey          : 'name',
 			valueKey          : 'id',
 			initialCall       : false,
 			getSelectedOption : (obj) => {
