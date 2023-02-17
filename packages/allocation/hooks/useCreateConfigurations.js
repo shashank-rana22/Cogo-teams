@@ -14,10 +14,16 @@ const useCreateConfigurations = ({
 }) => {
 	const [segment, setSegment] = useState();
 
+	const apiName = viewType === 'create'
+		? 'configuration' : 'configuration_attributes';
+
+	const authkey = viewType === 'create'
+		? 'post_allocation_configuration' : 'post_allocation_configuration_attributes';
+
 	const [{ loading }, trigger] = useRequest({
-		url     : '/configuration',
-		method  : 'POST',
-		authkey : 'post_allocation_configuration',
+		url    : `${apiName}`,
+		method : 'POST',
+		authkey,
 	});
 
 	const controls = getCreateConfigurationsControls({ setSegment });
@@ -48,14 +54,14 @@ const useCreateConfigurations = ({
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
-		if (viewType === 'edit') {
-			newControl = {
-				...newControl,
-				rules: {
-					required: false,
-				},
-			};
-		}
+		// if (viewType === 'edit') {
+		// 	newControl = {
+		// 		...newControl,
+		// 		rules: {
+		// 			required: false,
+		// 		},
+		// 	};
+		// }
 
 		if (newControl.name === 'user_ids') {
 			if (roleIds) {
@@ -97,23 +103,29 @@ const useCreateConfigurations = ({
 		return 1;
 	};
 
-	const onCreate = async (values = {}) => {
-		try {
-			const scheduleData = { ...values.schedule_data };
-			const payload = {
-				...values,
-				configuration_type   : 'custom',
-				status               : 'draft',
-				schedule_type        : scheduleData.schedule_type,
-				days                 : getDays(scheduleData),
-				is_lead_user_segment : values.service_type === 'lead_organization',
+	const onSubmit = async (values = {}) => {
+		const scheduleData = { ...values.schedule_data };
 
-				...(values.user_ids?.length === 0 && {
-					user_ids: undefined,
-				}),
-				segment_type: segment,
+		const propsForCreation = {
+			...values,
+			configuration_type   : 'custom',
+			status               : 'draft',
+			schedule_type        : scheduleData.schedule_type,
+			days                 : getDays(scheduleData),
+			is_lead_user_segment : values.service_type === 'lead_organization',
+
+			...(values.user_ids?.length === 0 && {
+				user_ids: undefined,
+			}),
+			segment_type: segment,
+		};
+
+		delete propsForCreation.schedule_data;
+
+		try {
+			const payload = {
+				...(viewType === 'create' ? propsForCreation : { ...propsForCreation, id: item.id }),
 			};
-			delete payload.schedule_data;
 
 			await trigger({
 				data: payload,
@@ -125,16 +137,16 @@ const useCreateConfigurations = ({
 
 			listRefetch();
 
-			Toast.success('Configuration created successfully');
+			Toast.success(`Configuration ${viewType}ed successfully`);
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 
 	return {
-		controls      : mutatedControls,
-		onCreate,
-		loadingCreate : loading,
+		controls: mutatedControls,
+		onSubmit,
+		loading,
 		formProps,
 	};
 };

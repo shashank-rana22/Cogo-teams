@@ -2,7 +2,6 @@ import { Button, Modal } from '@cogoport/components';
 
 import Form from '../../../../../../../common/Form';
 import useCreateConfigurations from '../../../../../../../hooks/useCreateConfigurations';
-import useUpdateConfiguration from '../../../../../../../hooks/useUpdateConfiguration';
 
 import styles from './styles.module.css';
 
@@ -14,8 +13,8 @@ function CreateConfiguration({
 }) {
 	const {
 		controls,
-		onCreate,
-		loadingCreate = false,
+		onSubmit,
+		loading = false,
 		formProps,
 	} = useCreateConfigurations({
 		viewType,
@@ -24,13 +23,7 @@ function CreateConfiguration({
 		listRefetch,
 	});
 
-	const {
-		onEdit, loadingUpdate,
-	} = useUpdateConfiguration({ item, listRefetch, setShow });
-
 	const { handleSubmit } = formProps;
-
-	const onSubmit = viewType === 'create' ? onCreate : onEdit;
 
 	return (
 		<>
@@ -48,7 +41,7 @@ function CreateConfiguration({
 							size="md"
 							themeType="secondary"
 							onClick={() => setShow(false)}
-							disabled={loadingCreate || loadingUpdate}
+							disabled={loading}
 							style={{ marginRight: '10px' }}
 						>
 							CANCEL
@@ -58,7 +51,7 @@ function CreateConfiguration({
 							type="submit"
 							size="md"
 							themeType="primary"
-							disabled={loadingCreate || loadingUpdate}
+							disabled={loading}
 						>
 							{`${viewType === 'create' ? 'Create' : 'Update'}`}
 						</Button>

@@ -31,32 +31,32 @@ const useUpdateConfiguration = ({
 		}
 	};
 
-	const onEdit = async (values) => {
-		try {
-			const payload = {
-				...values,
-				id                 : item.id,
-				configuration_type : 'custom',
-				status             : 'draft',
-			};
+	// const onEdit = async (values) => {
+	// 	try {
+	// 		const payload = {
+	// 			...values,
+	// 			id                 : item.id,
+	// 			configuration_type : 'custom',
+	// 			status             : 'draft',
+	// 		};
 
-			await trigger({
-				data: payload,
-			});
+	// 		await trigger({
+	// 			data: payload,
+	// 		});
 
-			listRefetch();
+	// 		listRefetch();
 
-			setShow(false);
+	// 		setShow(false);
 
-			Toast.success('Configuration updated successfully!');
-		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
-		}
-	};
+	// 		Toast.success('Configuration updated successfully!');
+	// 	} catch (error) {
+	// 		Toast.error(getApiErrorString(error.response?.data));
+	// 	}
+	// };
 
 	return {
 		onDelete,
-		onEdit,
+		// onEdit,
 		loadingUpdate: loading,
 	};
 };
