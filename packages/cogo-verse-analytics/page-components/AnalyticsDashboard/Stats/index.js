@@ -8,10 +8,9 @@ import Charts from './LineChart';
 import styles from './styles.module.css';
 
 function Stats() {
-
 	return (
 		<div className={styles.main_container}>
-		{/* Header --------------------------------------------------------------------------- */}
+			{/* Header --------------------------------------------------------------------------- */}
 
 			<div className={styles.cogoverse_header}>
 				Welcome to the
@@ -19,7 +18,7 @@ function Stats() {
 				<span>CogoVerse!</span>
 			</div>
 
-		{/* Primary Stats --------------------------------------------------------------------------- */}
+			{/* Primary Stats --------------------------------------------------------------------------- */}
 
 			<div className={styles.primary_stats}>
 
@@ -103,19 +102,29 @@ function Stats() {
 
 			</div>
 
-		{/* Line Chart --------------------------------------------------------------------------- */}
+			{/* Line Chart --------------------------------------------------------------------------- */}
 
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>
-					<span className={styles.chart_heading_content}>Responsive Time Analysis</span>
+					<div className={styles.chart_heading_content}>Responsive Time Analysis</div>
+					<div className={styles.legend_container}>
+						<div className={styles.legend_field}>
+							<div className={styles.legend_icon_1} />
+							<div className={styles.legend_content}>CogoAssist</div>
+						</div>
+						<div className={styles.legend_field}>
+							<div className={styles.legend_icon_2} />
+							<div className={styles.legend_content}>Customer support</div>
+						</div>
+					</div>
 				</div>
 				<div className={styles.the_chart}>
-				<Charts />
+					<Charts />
 				</div>
-				
+
 			</div>
 
-		{/* Leaderboard --------------------------------------------------------------------------- */}
+			{/* Leaderboard --------------------------------------------------------------------------- */}
 
 			<div className={styles.user_leaderboard}>
 
@@ -131,7 +140,7 @@ function Stats() {
 									<div className={styles.leaderboard_title}>
 										{title}
 									</div>
-									<div >
+									<div>
 										<span className={styles.leaderboard_description_number}>{value}</span>
 										{' '}
 										{description}
