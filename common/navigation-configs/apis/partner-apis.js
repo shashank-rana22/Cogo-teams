@@ -23,7 +23,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -891,7 +891,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1770,7 +1770,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},

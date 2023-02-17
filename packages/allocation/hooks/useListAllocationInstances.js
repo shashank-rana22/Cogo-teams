@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -27,7 +27,7 @@ const useListAllocationInstances = ({ item = {} }) => {
 		}
 	}, [dateRange]);
 
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/instances',
 		method  : 'get',
 		authkey : 'get_allocation_instances',

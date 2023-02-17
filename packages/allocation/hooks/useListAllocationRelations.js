@@ -1,5 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useAllocationRelations = () => {
@@ -33,7 +33,7 @@ const useAllocationRelations = () => {
 
 	const [searchValue, setSearchValue] = useState(params.filters?.q);
 
-	const [{ loading, data: apiData }, refetch] = useRequest({
+	const [{ loading, data: apiData }, refetch] = useAllocationRequest({
 		url     : '/relations',
 		method  : 'get',
 		authkey : 'get_allocation_relations',

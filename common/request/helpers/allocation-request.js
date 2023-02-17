@@ -17,18 +17,25 @@ const customSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
+const allocationRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
-request.interceptors.request.use((oldConfig) => {
-	const newConfig = { ...oldConfig };
+allocationRequest.interceptors.request.use((oldConfig) => {
+	const { authkey = '', ...newConfig } = oldConfig;
+
+	//! Delete this before merge || only for temporary testing
+	newConfig.data = {
+		...newConfig.data,
+		performed_by_id   : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+		performed_by_type : 'agent',
+	};
 
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
-	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
+	const authorizationparameters = getAuthorizationParams(store, authkey || newConfig.url);
 
 	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
 
-	const serviceName = microServices[apiPath];
+	const serviceName = microServices[authkey || apiPath];
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${apiPath}`;
@@ -45,4 +52,4 @@ request.interceptors.request.use((oldConfig) => {
 	};
 });
 
-export { request };
+export { allocationRequest };

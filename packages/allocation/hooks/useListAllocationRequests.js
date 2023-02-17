@@ -1,5 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -23,7 +23,7 @@ const useListAllocationRequests = () => {
 		},
 	});
 
-	const apiData = useRequest({
+	const apiData = useAllocationRequest({
 		url     : '/requests',
 		method  : 'get',
 		authkey : 'get_allocation_requests',

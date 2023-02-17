@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
@@ -37,7 +37,7 @@ const useCreateAllocationRequest = (props) => {
 
 	const stakeholderTypeOptions = getStakeholderTypeOptions({ service_type }) || [];
 
-	const api = useRequest({
+	const api = useAllocationRequest({
 		url     : '/request',
 		method  : 'post',
 		authkey : 'post_allocation_request',

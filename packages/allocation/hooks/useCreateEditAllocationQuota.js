@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const getFormattedValues = (formValues) => {
@@ -53,7 +53,7 @@ const useCreateEditAllocationQuota = (props) => {
 
 	const authkey = isUpdatable ? 'post_allocation_quota_attributes' : 'post_allocation_quota';
 
-	const api = useRequest({
+	const api = useAllocationRequest({
 		url    : `/${apiName}`,
 		method : 'post',
 		authkey,

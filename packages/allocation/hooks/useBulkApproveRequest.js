@@ -1,11 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 const useBulkApproveRequest = (props) => {
 	const { onCloseModal, checkedRowsId, onResettingBulkMode } = props;
 
-	const api = useRequest({
+	const api = useAllocationRequest({
 		url     : '/request_bulk_approve',
 		method  : 'POST',
 		authkey : 'post_allocation_request_bulk_approve',

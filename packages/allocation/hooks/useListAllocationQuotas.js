@@ -1,5 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListAllocationQuotas = () => {
@@ -18,7 +18,7 @@ const useListAllocationQuotas = () => {
 		},
 	});
 
-	const api = useRequest({
+	const api = useAllocationRequest({
 		url     : '/quotas',
 		method  : 'get',
 		authkey : 'get_allocation_quotas',

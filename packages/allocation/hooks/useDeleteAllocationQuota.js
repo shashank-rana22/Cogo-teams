@@ -1,11 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 const useDeleteAllocationQuota = (props) => {
 	const { id, onCloseModal, refetch } = props;
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/quota_attributes',
 		method  : 'POST',
 		authkey : 'post_allocation_quota_attributes',

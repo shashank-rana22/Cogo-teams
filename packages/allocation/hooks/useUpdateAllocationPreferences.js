@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const CONFIGURATION_OPTIONS = [
@@ -17,7 +17,7 @@ const CONFIGURATION_OPTIONS = [
 const useUpdateAllocationPreferences = ({ item = {}, setShow = () => {}, listRefetch = () => {} }) => {
 	const [radioValue, setRadioValue] = useState();
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/preference_bulk_status',
 		method  : 'POST',
 		authkey : 'post_allocation_preference_bulk_status',
