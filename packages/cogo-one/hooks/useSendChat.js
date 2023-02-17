@@ -32,9 +32,12 @@ const useSendChat = ({
 
 	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id] || '';
-		const { finalUrl, fileType } = getFileAttributes({
+		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
 		});
+
+		setDraftMessages((p) => ({ ...p, [id]: '' }));
+		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
 
 		if (newMessage || finalUrl) {
 			const adminChat = {
@@ -43,8 +46,8 @@ const useSendChat = ({
 				created_at        : Date.now(),
 				send_by           : user_name,
 				session_type      : 'admin',
-				// imgUrl            : fileType === 'image' ? finalUrl : '',
-				// pdfUrl            : fileType !== 'image' ? finalUrl : '',
+				imgUrl            : fileType === 'image' ? finalUrl : '',
+				pdfUrl            : fileType !== 'image' ? finalUrl : '',
 			};
 			await addDoc(activeChatCollection, adminChat);
 			const doc1 = await getDoc(messageFireBaseDoc);
@@ -55,8 +58,6 @@ const useSendChat = ({
 				updated_at             : Date.now(),
 				new_message_count_user : old_count + 1,
 			});
-			setDraftMessages((p) => ({ ...p, [id]: '' }));
-			setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
 			setTimeout(() => {
 				if (channel_type === 'whatsapp') {
 					const {
