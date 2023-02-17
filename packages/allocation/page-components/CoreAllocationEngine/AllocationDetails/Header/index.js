@@ -16,6 +16,7 @@ function Header({
 	searchValue,
 	setSearchValue,
 	listRefetch,
+	instanceStatus,
 }) {
 	const [showApprove, setShowApprove] = useState(false);
 
@@ -46,6 +47,7 @@ function Header({
 					themeType="accent"
 					style={{ marginLeft: '8px' }}
 					onClick={() => setShowApprove(true)}
+					disabled={instanceStatus === 'completed'}
 				>
 					Approve
 				</Button>

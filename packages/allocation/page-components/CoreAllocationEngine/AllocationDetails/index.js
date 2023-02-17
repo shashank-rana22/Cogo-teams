@@ -19,6 +19,7 @@ function Details() {
 		searchValue,
 		setSearchValue,
 		configurationDetails,
+		instanceStatus,
 	} = useListAllocationDetails();
 
 	return (
@@ -32,6 +33,7 @@ function Details() {
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				instanceStatus={instanceStatus}
 			/>
 
 			<List

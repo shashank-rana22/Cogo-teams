@@ -55,6 +55,8 @@ const useListAllocationDetails = () => {
 		...paginationData
 	} = data || {};
 
+	const { status: instanceStatus = '' } = allocation_instance;
+
 	const configurationDetails = {
 		...allocation_configuration,
 		...allocation_instance,
@@ -75,6 +77,7 @@ const useListAllocationDetails = () => {
 		searchValue,
 		setSearchValue,
 		configurationDetails,
+		instanceStatus,
 	};
 };
 
