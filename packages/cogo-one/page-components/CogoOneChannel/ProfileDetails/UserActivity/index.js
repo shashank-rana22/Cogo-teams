@@ -105,20 +105,25 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						{/* <div className={styles.filter_dot} /> */}
+
 						<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
 					</Popover>
-
+					{/* {!isEmpty(appliedFilters) && <div className={styles.filters_applied} />} */}
+					<div className={styles.filters_applied} />
 				</div>
 			</div>
 
-			<div
-				className={styles.list_container}
-				onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
-			>
-				{ACTIVITY_COMPONENT_CALLING[activityTab]}
-			</div>
-			{loading && <LoadingState activityTab={activityTab} />}
+			{loading ? (
+				<LoadingState activityTab={activityTab} />
+			) : (
+				<div
+					className={styles.list_container}
+					onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+				>
+					{ACTIVITY_COMPONENT_CALLING[activityTab]}
+				</div>
+			)}
+
 		</div>
 	);
 }

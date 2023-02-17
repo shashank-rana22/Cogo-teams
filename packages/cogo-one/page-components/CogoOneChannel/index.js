@@ -19,6 +19,7 @@ function CogoOne() {
 		agentStatus = {},
 		workPrefernce = () => {},
 	} = useAgentWorkPrefernce();
+
 	const { status = '' } = agentStatus;
 
 	const userStatus = status === 'active';
@@ -28,6 +29,7 @@ function CogoOne() {
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
@@ -59,6 +61,11 @@ function CogoOne() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
+	useEffect(() => {
+		setToggleStatus(userStatus);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [toggleStatus]);
+
 	return (
 		<div className={styles.layout_container}>
 			<Customers
@@ -78,9 +85,10 @@ function CogoOne() {
 				unReadChatsCount={unReadChatsCount}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
-				status={status}
 				workPrefernce={workPrefernce}
 				messagesLoading={loading}
+				setOpenModal={setOpenModal}
+				openModal={openModal}
 			/>
 
 			<div className={styles.chat_details_continer}>

@@ -65,3 +65,12 @@
     justify-content: center;
     margin-top: 40vh;
 }
+.filters_applied {
+    height: 5px;
+    width: 5px;
+    border-radius: 5px;
+    background: #ee3425;
+    position: relative;
+    top: -28px;
+    left: 15px;
+}

@@ -7,7 +7,6 @@ import LoginComponent from './LoginComponent';
 import styles from './styles.module.css';
 
 function PlatformActivity({ platform = {} }) {
-	console.log('platform', platform);
 	const { login = {}, spot_searches = {} } = platform || {};
 	const { list = [] } = spot_searches || {};
 	return (

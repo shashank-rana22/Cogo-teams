@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 
-function useCreateUserInactiveStatus({ workPrefernce }) {
+function useCreateUserInactiveStatus({ workPrefernce, setOpenModal }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_agent_work_preference',
 		method : 'post',
@@ -28,6 +28,7 @@ function useCreateUserInactiveStatus({ workPrefernce }) {
 					},
 				});
 			}
+			setOpenModal(false);
 			Toast.success(getApiErrorString('succesfully updated your status'));
 			workPrefernce();
 		} catch (error) {
