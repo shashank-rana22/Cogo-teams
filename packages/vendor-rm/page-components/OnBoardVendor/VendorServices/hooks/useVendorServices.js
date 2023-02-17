@@ -6,14 +6,23 @@ import { useSelector } from '@cogoport/store';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
-import controls from '../utils/controls';
+import getControls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
 
 function useVendorServices({
 	setActiveStepper = () => {},
 	setVendorInformation = () => {},
 }) {
-	const { handleSubmit, control, setValue, formState: { errors }, ...rest } = useForm();
+	const {
+		handleSubmit,
+		control,
+		setValue,
+		formState: { errors },
+		watch,
+		...rest
+	} = useForm();
+
+	const controls = getControls();
 
 	const {
 		general : { query = {} },
@@ -67,6 +76,7 @@ function useVendorServices({
 		onSubmit,
 		loading,
 		handleBackLink,
+		watch,
 		...rest,
 	};
 }
