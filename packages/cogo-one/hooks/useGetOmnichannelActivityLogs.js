@@ -29,7 +29,8 @@ const useGetOmnichannelActivityLogs = ({
 	const fetchActivityLogs = async (filters = []) => {
 		const res = await trigger({
 			params: {
-				user_id : activeTab === 'message' ? userMessageId : userVoiceId,
+				// user_id : activeTab === 'message' ? userMessageId : userVoiceId,
+				user_id : '38a3ce88-d1e4-4a55-b431-12aa334a0be1',
 				// activity_type : activityTab,
 				page    : pagination,
 			},

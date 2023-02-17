@@ -104,7 +104,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 			>
 				{ACTIVITY_COMPONENT_CALLING[activityTab]}
 			</div>
-			{!loading && <LoadingState activityTab={activityTab} />}
+			{loading && <LoadingState activityTab={activityTab} />}
 
 		</div>
 	);

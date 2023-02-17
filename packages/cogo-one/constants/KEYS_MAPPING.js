@@ -19,14 +19,14 @@ export const KEYS_MAPPING = {
 	},
 	ltl_freight: {
 		name: {
-			origin      : 'origin_location',
-			destination : 'destination_location',
+			origin      : 'pickup',
+			destination : 'drop',
 		},
 	},
 	ftl_freight: {
 		name: {
-			origin      : 'origin_location',
-			destination : 'destination_location',
+			origin      : 'pickup',
+			destination : 'drop',
 		},
 	},
 };

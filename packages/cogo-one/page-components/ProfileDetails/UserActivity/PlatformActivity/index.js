@@ -73,9 +73,6 @@ function PlatformActivity({ platform = {} }) {
 					</>
 				);
 			})}
-			<div className={styles.activity_date}>
-				<div className={styles.dot} />
-			</div>
 		</div>
 	);
 }

@@ -49,7 +49,7 @@ function CommunicationActivity({ communication = {} }) {
 									</div>
 									<div className={styles.user_avatar}>
 										<Avatar
-											src="https://www.w3schools.com/howto/img_avatar.png"
+											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
 											alt="img"
 											disabled={false}
 											size="35px"
@@ -61,9 +61,6 @@ function CommunicationActivity({ communication = {} }) {
 					</>
 				);
 			})}
-			<div className={styles.activity_date}>
-				<div className={styles.dot} />
-			</div>
 		</div>
 	);
 }

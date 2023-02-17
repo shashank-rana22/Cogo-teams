@@ -14,6 +14,9 @@ function TransactionalActivity({ transactional = {} }) {
 	return (
 		<div>
 			{(list || []).map((item) => {
+				const services = item?.services;
+				console.log('services', services);
+
 				const {
 					created_at = '', serial_id, milestone_activity = [], origin_port = {},
 					destination_port = {},
@@ -86,14 +89,10 @@ function TransactionalActivity({ transactional = {} }) {
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</>
 				);
 			})}
-			<div className={styles.activity_date}>
-				<div className={styles.dot} />
-			</div>
 		</div>
 	);
 }
