@@ -58,7 +58,7 @@ export const controls = [
 		showLabel       : false,
 		label           : 'Upload Cancelled Cheque or Passbook front page',
 		type            : 'file',
-		style           : { flexBasis: '100%', marginBottom: '36px' },
+		style           : { flexBasis: '100%' },
 		themeType       : 'secondary',
 		drag            : true,
 		uploadIcon      : 'ic-upload',

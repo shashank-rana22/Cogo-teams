@@ -6,6 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { useState, useCallback, useEffect } from 'react';
 
 import TABS_MAPPING from '../../constants/tabs';
+import COMPONENT_MAPPING from '../../utils/component-mapping';
 
 import styles from './styles.module.css';
 
@@ -16,26 +17,32 @@ function OnBoardVendor() {
 
 	const { vendor_id } = query;
 
-	console.log(query, '[query');
-
 	const [{ loading: vendorLoading = false }, trigger] = useRequest({
 		url    : 'get_vendor',
 		method : 'GET',
 	}, { manual: true });
 
-	useEffect(() => {
-		if (vendor_id) {
-			trigger({ params: { id: vendor_id } });
-		}
-	}, [vendor_id, trigger]);
-
-	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[0]);
-
 	const [vendorInformation, setVendorInformation] = useState({});
 
-	console.log('vendorInformation:: ', vendorInformation);
+	const getVendor = useCallback(async () => {
+		const res = await trigger({ params: { id: vendor_id } });
 
-	const Element = activeStepper?.component;
+		setVendorInformation(res.data);
+	}, [vendor_id, trigger]);
+
+	useEffect(() => {
+		if (vendor_id) {
+			getVendor();
+		}
+	}, [vendor_id, getVendor]);
+
+	const [activeStepper, setActiveStepper] = useState('vendor_details');
+
+	console.log(activeStepper, 'activeStepper');
+
+	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
+
+	// const Element = component;
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const onBack = useCallback(() => router.push('/vendors-list'), []);
@@ -51,7 +58,8 @@ function OnBoardVendor() {
 			<div className={styles.header}>Add New Vendor</div>
 			<div className={styles.tab_container}>
 				<Stepper
-					active={activeStepper?.key}
+					active={activeStepper}
+					setActive={setActiveStepper}
 					items={TABS_MAPPING}
 					shadowed
 					arrowed
@@ -59,7 +67,8 @@ function OnBoardVendor() {
 				/>
 			</div>
 			<div className={styles.form_container}>
-				<Element
+				<ActiveComponent
+					getVendor={getVendor}
 					activeStepper={activeStepper}
 					setActiveStepper={setActiveStepper}
 					vendorInformation={vendorInformation}

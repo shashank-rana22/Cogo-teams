@@ -22,6 +22,8 @@ function useCreateVendorContact({
 		setValue,
 	} = useForm();
 
+	console.log(errors, 'errors');
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_vendor_poc',
 		method : 'post',
@@ -41,7 +43,6 @@ function useCreateVendorContact({
 		const payload = {
 			...formattedValues,
 			vendor_poc_proof      : formattedValues?.contact_proof_url?.finalUrl,
-			vendor_id             : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
 			mobile_country_code   : formattedValues?.mobile_number?.country_code,
 			mobile_number         : formattedValues?.mobile_number?.number,
 			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,

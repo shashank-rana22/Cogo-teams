@@ -1,5 +1,8 @@
 import { Button } from '@cogoport/components';
 
+// eslint-disable-next-line import/no-cycle
+import COMPONENT_MAPPING from '../../../utils/component-mapping';
+
 import styles from './styles.module.css';
 
 function ButtonLayout(
@@ -10,7 +13,7 @@ function ButtonLayout(
 		onSubmit = () => {},
 	},
 ) {
-	const { step } = activeStepper || {};
+	const { step } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
 	return (
 		<div className={styles.button_container}>

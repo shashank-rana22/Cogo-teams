@@ -1,13 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import TABS_MAPPING from '../../../../constants/tabs';
+import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({
@@ -15,6 +18,8 @@ function useOnBoardVendor({
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
+	const router = useRouter();
+
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
@@ -34,6 +39,7 @@ function useOnBoardVendor({
 		handleSubmit,
 		getValues,
 		setValue,
+		watch,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
@@ -44,10 +50,11 @@ function useOnBoardVendor({
 	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
 
-		console.log(step, 'step');
+		console.log(formattedValues, 'data');
 
 		setVendorInformation((pv) => {
-			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
+			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+			console.log('key:: ', key);
 			return {
 				...pv,
 				[key]: data,
@@ -62,24 +69,31 @@ function useOnBoardVendor({
 		try {
 			const res = await trigger({ data: { ...payload } });
 
-			console.log(res, 'res');
+			const href = '/onboard-vendor/[vendor_id]';
+
+			const as = `/onboard-vendor/${res.data.id}`;
+
+			console.log(href, as);
+
+			router.push(href, as);
 
 			Toast.success('Vendor created successfully');
-			setActiveStepper(TABS_MAPPING[step]);
+			setActiveStepper('contact_details');
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error(getApiErrorString(error.data));
 		}
 	};
 
-	useEffect(() => {
-		fields.forEach((field) => {
-			if (field.type === 'file') {
-				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]?.finalUrl);
-			} else {
-				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	// if (vendorInformation)
+	// 	fields.forEach((field) => {
+	// 		if (field.type === 'file') {
+	// 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]?.finalUrl);
+	// 		} else {
+	// 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
+	// 		}
+	// 	});
+	// }, []);
 
 	return {
 		fields,
