@@ -9,9 +9,10 @@ import styles from './styles.module.css';
 function FileUploader(props) {
 	const {
 		onChange,
-		showProgress,
+		showProgress = true,
 		multiple,
 		docName,
+		uploadIcon = null,
 		...rest
 	} = props;
 
@@ -100,11 +101,11 @@ function FileUploader(props) {
 				onChange={handleChange}
 				loading={loading}
 				multipleUploadDesc="Upload files"
-				uploadIcon={<IcMUpload height={40} width={40} />}
+				uploadIcon={uploadIcon || <IcMUpload height={40} width={40} />}
 				fileData={urlStore}
 			/>
 
-			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
+			{showProgress && loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
 				<div className={styles.progress_container}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}

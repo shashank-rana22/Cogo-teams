@@ -2,9 +2,16 @@
     padding: 10px;
     height: calc(100% - 145px);
     overflow-y: scroll;
+    transition: height 0.5s;
+
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+.chat_container {
+    height: calc(100% - 179px);
+    transition: height 0.5s;
 }
 
 .text_area {
@@ -82,7 +89,6 @@
     display: flex;
     align-items: center;
     height: fit-content;
-    
 
     :global {
         .file_uploader {
@@ -96,10 +102,68 @@
         .ui_upload_droparea_heading {
             display: none;
         }
-
         .ui_upload_droparea_subheading {
             display: none;
         }
-
+        .ui_upload_filesuccess_container {
+            display: none;
+        }
     }
+}
+
+.upload_icon {
+    fill: #000;
+}
+
+.nofile_container {
+    height: 0px;
+    transition: height 0.5s;
+}
+
+.upload_file_container {
+    height: 34px;
+    background: #fff;
+    display: flex;
+    width: 100%;
+    padding: 0px 10px;
+    align-items: flex-end;
+    transition: height 0.5s;
+}
+
+.files_view {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #fbd1a6;
+}
+
+.file_name_container {
+    text-align: end;
+    font-size: 15px;
+    max-width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.file_icon_container {
+    display: flex;
+    margin-right: 3px;
+
+    svg {
+        fill: #828282;
+    }
+}
+
+.delete_icon {
+    height: 22px;
+    width: 22px;
+    fill: #828282;
+    cursor: pointer;
+}
+
+.delete_icon_container {
+    border-bottom: 1px solid #fbd1a6;
 }
