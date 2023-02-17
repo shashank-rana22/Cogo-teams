@@ -77,3 +77,29 @@
 .styled_div {
     height: 100%;
 }
+
+.icon_tools {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    
+
+    :global {
+        .file_uploader {
+            height: fit-content;
+        }
+        .ui_upload_droparea_container {
+            min-height: 0px;
+            border: unset;
+            margin-bottom: unset;
+        }
+        .ui_upload_droparea_heading {
+            display: none;
+        }
+
+        .ui_upload_droparea_subheading {
+            display: none;
+        }
+
+    }
+}

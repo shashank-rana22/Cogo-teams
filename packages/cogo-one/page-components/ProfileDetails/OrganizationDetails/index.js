@@ -1,5 +1,4 @@
 import { Pill, Placeholder, Loader } from '@cogoport/components';
-import { IcCCogoCoin } from '@cogoport/icons-react';
 
 import useGetListPromotions from '../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../hooks/useGetOrganization';
@@ -83,7 +82,11 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
 			<div className={styles.points}>
 				<div className={styles.cogo_icon}>
-					<IcCCogoCoin width={20} height={20} />
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+						alt="coin"
+						className={styles.cogocoins_icon}
+					/>
 				</div>
 
 				<div className={styles.cogopoints}>Cogopoints : </div>

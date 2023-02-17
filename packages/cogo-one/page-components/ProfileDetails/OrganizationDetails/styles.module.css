@@ -1,101 +1,106 @@
 .container {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-	:global {
-		.ui_pill_container {
-			margin: 0 !important;
-		}
-	}
+    :global {
+        .ui_pill_container {
+            margin: 0 !important;
+        }
+    }
 }
 
 .title {
-	font-weight: 600;
+    font-weight: 600;
     font-size: 14px;
-	color: #4F4F4F;
-	margin-bottom: 18px;
+    color: #4f4f4f;
+    margin-bottom: 18px;
 }
 
 .content {
-	display: flex;
-	width: 100%;
-	margin-bottom: 10px;
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .organization_details {
-	width: 80%;
-	display: flex;
-	flex-direction: column;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
 }
 
 .name {
-	font-weight: 500;
-	font-size: 14px;
-	color: #221F20;
+    font-weight: 600;
+    font-size: 14px;
+    color: #221f20;
 }
 
 .location {
-	font-weight: 500;
-	font-size: 14px;
-	color: #828282;
+    font-weight: 600;
+    font-size: 14px;
+    color: #828282;
 }
 
 .agent_title {
-	font-weight: 500;
-	font-size: 12px;
-	color: #221F20;
-	margin-top: 20px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #221f20;
+    margin-top: 20px;
 }
 
 .points {
-	box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
-	border-radius: 8px;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	background: #FFFFFF;
-	margin-top: 12px;
-	padding: 8px 30px 8px 35px;
+    box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #ffffff;
+    margin-top: 12px;
+    padding: 8px 30px 8px 35px;
 }
 
 .cogopoints {
-	color: #FF7A71;
-	font-weight: 600;
-	font-size: 14px;
+    color: #ff7a71;
+    font-weight: 600;
+    font-size: 14px;
 }
 .value {
-	padding-left: 8px;
-	color: #FF7A71;
-	font-weight: 600;
-	font-size: 14px;
+    padding-left: 8px;
+    color: #ff7a71;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .promotion_cards {
-	margin-top: 10px;
-	width: 100%;
-	overflow-y: auto;
-	box-shadow: -10px 0px 10px rgba(100, 100, 111, 0.2) inset;
-} 
+    margin-top: 10px;
+    width: 100%;
+    overflow-y: auto;
+    box-shadow: -10px 0px 10px rgba(100, 100, 111, 0.2) inset;
+}
 
 .promotion_cards::-webkit-scrollbar {
-	display: none;
+    display: none;
 }
 
-.cogo_icon{
-	margin: 6px 10px 0px 0px;
+.cogo_icon {
+    margin: 6px 10px 0px 0px;
 }
 
-.status{ 
-	display: flex;
+.status {
+    display: flex;
     width: 29%;
     max-height: 19px;
     justify-content: flex-end;
 }
 
 .loader_div {
-	display: flex;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	padding: 32px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+}
+
+.cogocoins_icon {
+    height: 20px;
+    width: 20px;
 }

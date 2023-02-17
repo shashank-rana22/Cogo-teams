@@ -15,12 +15,15 @@ function Messages({ activeMessageCard = {}, firestore }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
+	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [messages, setMessages] = useState({});
 	const [roomData, setRoomData] = useState(activeMessageCard || {});
 
 	useEffect(() => {
 		setRoomData(activeMessageCard);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(activeMessageCard)]);
+
 	const {
 		id = '', channel_type = '',
 		...rest
@@ -76,11 +79,13 @@ function Messages({ activeMessageCard = {}, firestore }) {
 					setheaderTags={setheaderTags}
 					headertags={headertags}
 				/>
-				<div className={styles.message_container}>
+				<div className={styles.message_container} key={id}>
 					<MessageConversations
 						messagesData={messagesData}
-						draftMessage={draftMessages[id]}
+						draftMessage={draftMessages?.[id]}
+						draftUploadedFile={draftUploadedFiles?.[id]}
 						setDraftMessages={setDraftMessages}
+						setDraftUploadedFiles={setDraftUploadedFiles}
 						sendChatMessage={sendChatMessage}
 						setMessages={setMessages}
 						messages={messages}

@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { Popover } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMHappy, IcMAttach, IcMSend, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
@@ -17,6 +18,8 @@ function MessageConversations({
 	setDraftMessages = () => {},
 	sendChatMessage,
 	lastPage,
+	draftUploadedFile = {},
+	setDraftUploadedFiles = () => {},
 	getNextData,
 	setOpenModal,
 	activeMessageCard,
@@ -31,6 +34,7 @@ function MessageConversations({
 		onClicked = false,
 		emojiListFetch = () => {},
 	} = useGetEmojiList({ activeMessageCard });
+	const { fileName = '', finalUrl = '' } = draftUploadedFile;
 
 	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
@@ -108,12 +112,22 @@ function MessageConversations({
 				/>
 
 				<div className={styles.flex_space_between}>
-					<div className={styles.flex}>
+					<div className={styles.icon_tools}>
+						{/* <FileUploader
+							value={finalUrl}
+							onChange={(val) => setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }))}
+							showProgres={false}
+							draggable
+							multipleUploadDesc="Upload Invoice"
+							className="file_uploader"
+							uploadIcon={<IcMAttach fill="#828282" />}
+						/> */}
 						<IcMAttach fill="#828282" />
 						<Popover
 							placement="top"
 							render={<EmojisBody emojisList={emojisList} />}
 							visible={onClicked}
+							maxWidth={355}
 							onClickOutside={() => setOnClicked(false)}
 						>
 							<IcMHappy
