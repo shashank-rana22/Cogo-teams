@@ -1,10 +1,10 @@
-import AgentDetails from '../page-components/ProfileDetails/AgentDetails';
-import AgentNotes from '../page-components/ProfileDetails/AgentNotes';
-import AgentReminder from '../page-components/ProfileDetails/AgentReminder';
-import CustomerInsight from '../page-components/ProfileDetails/CustomerInsight';
-import OrganizationDetails from '../page-components/ProfileDetails/OrganizationDetails';
-import QuickActions from '../page-components/ProfileDetails/QuickActions';
-import UserActivities from '../page-components/ProfileDetails/UserActivity';
+import AgentDetails from '../page-components/CogoOneChannel/ProfileDetails/AgentDetails';
+import AgentNotes from '../page-components/CogoOneChannel/ProfileDetails/AgentNotes';
+import AgentReminder from '../page-components/CogoOneChannel/ProfileDetails/AgentReminder';
+import CustomerInsight from '../page-components/CogoOneChannel/ProfileDetails/CustomerInsight';
+import OrganizationDetails from '../page-components/CogoOneChannel/ProfileDetails/OrganizationDetails';
+import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/QuickActions';
+import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
 
 const COMPONENT_MAPPING = {
 	profile           : AgentDetails,

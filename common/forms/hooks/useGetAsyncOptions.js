@@ -74,7 +74,7 @@ function useGetAsyncOptions({
 			});
 			return res?.data?.list?.[0] || null;
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 			return {};
 		}
 	};

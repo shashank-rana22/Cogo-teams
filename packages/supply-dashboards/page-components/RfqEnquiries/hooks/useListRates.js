@@ -34,7 +34,7 @@ const useGetRates = ({ service }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 	const fetchRevertedData = async () => {
@@ -49,7 +49,7 @@ const useGetRates = ({ service }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 

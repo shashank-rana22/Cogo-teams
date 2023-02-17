@@ -5,6 +5,7 @@ import {
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
+	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
@@ -1260,7 +1261,7 @@ const navigationMappingAdmin = {
 				as            : '/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : apis.shipment,
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
 
 			},
 			{
@@ -1793,6 +1794,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+	cost_booking: {
+		key           : 'cost_booking',
+		title         : 'FF Cost Booking',
+		href          : '/cost-booking',
+		as            : '/cost-booking',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cost_booking,
+		icon          : IcMBooking,
+		module_type   : 'dashboards',
+	},
 	platform_configuration: {
 		key       : 'platform_configuration',
 		title     : 'Platform configuration',
@@ -1823,10 +1835,11 @@ const navigationMappingAdmin = {
 		module_type   : 'crm',
 	},
 	cogo_one: {
-		key   : 'cogo_one',
-		title : 'Cogo One',
-		href  : '/v2/cogo-one',
-		icon  : () => (
+		key       : 'cogo_one',
+		title     : 'Cogo One',
+		// href      : '/v2/cogo-one',
+		isSubNavs : true,
+		icon      : () => (
 			<img
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
 				alt="cogo-one-logo"
@@ -1834,11 +1847,32 @@ const navigationMappingAdmin = {
 				height={18}
 			/>
 		),
-		as            : '/v2/cogo-one',
-		type          : 'link',
+		// as            : '/v2/cogo-one',
+		// type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.cogo_one,
-		module_type   : 'dashboards',
+		// module_type   : 'dashboards',
+		options       : [
+			{
+				key           : 'cogo_one-cogo_one_channel',
+				title         : 'Cogo-one Channel',
+				href          : '/v2/cogo-one/cogo-one-channel',
+				as            : '/v2/cogo-one/cogo-one-channel',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one,
+			},
+			{
+				key           : 'cogo_one-cogo_one_dashboard',
+				title         : 'Cogo-one Dashboard',
+				href          : '/v2/cogo-one/cogo-one-dashboard',
+				as            : '/v2/cogo-one/cogo-one-dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one,
+			},
+		],
+		module_type: 'dashboards',
 	},
 	home: {
 		key   : 'home',
