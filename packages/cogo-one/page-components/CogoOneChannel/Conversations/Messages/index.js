@@ -1,5 +1,5 @@
 import { Modal } from '@cogoport/components';
-import { collection, doc } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
@@ -11,12 +11,13 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore }) {
+function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [messages, setMessages] = useState({});
+	const [uploading, setUploading] = useState({});
 	const [roomData, setRoomData] = useState(activeMessageCard || {});
 
 	useEffect(() => {
@@ -45,7 +46,8 @@ function Messages({ activeMessageCard = {}, firestore }) {
 		draftMessages,
 		setDraftMessages,
 		activeChatCollection,
-
+		draftUploadedFiles,
+		setDraftUploadedFiles,
 		setRoomData,
 	});
 
@@ -82,6 +84,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
 						messagesData={messagesData}
+						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
 						draftUploadedFile={draftUploadedFiles?.[id]}
 						setDraftMessages={setDraftMessages}
@@ -93,6 +96,8 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
 						activeMessageCard={roomData}
+						suggestions={suggestions}
+						setUploading={setUploading}
 					/>
 				</div>
 			</div>
@@ -113,7 +118,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						)}
 						/>
 					)}
-					<ActiveModalComp />
+					<ActiveModalComp data={openModal?.data || {}} />
 				</Modal>
 			)}
 		</>

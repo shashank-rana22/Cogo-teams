@@ -13,13 +13,13 @@ const IconMapping = [
 			style={{ width: '20px', heigh: '20px' }}
 		/>,
 	},
-	{
-		name : 'user_activity',
-		icon : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user actrivity.svg"
-			alt="activities"
-		/>,
-	},
+	// {
+	// 	name : 'user_activity',
+	// 	icon : <img
+	// 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/user actrivity.svg"
+	// 		alt="activities"
+	// 	/>,
+	// },
 	{
 		name : 'reminder',
 		icon : <img

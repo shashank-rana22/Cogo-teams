@@ -1,5 +1,5 @@
 import { Button, CheckboxGroup } from '@cogoport/components';
-import { IcMCross } from '@cogoport/icons-react';
+import { IcMCross, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -15,7 +15,9 @@ function Filters({
 	handleFilters = () => {},
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
-	const emptyCheck = isEmpty();
+
+	const emptyCheck = isEmpty(filters);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -36,7 +38,13 @@ function Filters({
 			/>
 
 			<div className={styles.actions}>
-				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
+				<Button size="md" themeType="tertiary" onClick={() => setFilters([])}>
+					<div className={styles.refresh_icon}>
+						<IcMRefresh width={16} height={16} />
+					</div>
+					Reset Status
+
+				</Button>
 				<Button size="md" themeType="accent" onClick={handleFilters()} disabled={emptyCheck}>Apply</Button>
 			</div>
 		</div>

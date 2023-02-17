@@ -1,25 +1,23 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import { Tabs, TabPanel, Input, Popover } from '@cogoport/components';
-import { IcMFdollar, IcMDoubleFilter, IcMSearchlight, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
+import { Tabs, TabPanel, Popover } from '@cogoport/components';
+import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
+import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
-import CommunicationActivity from './CommunicationActivity';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
-import PlatformActivity from './PlatformActivity';
 import styles from './styles.module.css';
-import TransactionalActivity from './TransactionalActivity';
 
 function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const [activityTab, setActivityTab] = useState('transactional');
-	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
+
+	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING[activityTab] || null;
 
 	const userData = getActiveCardDetails(activeMessageCard);
 	const { user_id: userVoiceId = '' } = activeVoiceCard || {};
@@ -29,19 +27,13 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const {
 		loading,
 		data = {},
-		fetchListLogsApi = () => {},
-		handleScroll = () => {},
-	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, searchValue, activeVoiceCard, activeTab });
-
+		fetchActivityLogs = () => {},
+	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
+	console.log('data', data);
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
-	const handleFilters = () => {
-		fetchListLogsApi(filters);
-	};
 
-	const ACTIVITY_COMPONENT_CALLING = {
-		platform      : <PlatformActivity platform={platform} />,
-		communication : <CommunicationActivity communication={communication} />,
-		transactional : <TransactionalActivity transactional={transactional} />,
+	const handleFilters = () => {
+		fetchActivityLogs(filters);
 	};
 
 	useEffect(() => {
@@ -77,49 +69,48 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 				{USER_ACTIVITY_MAPPING[activityTab]}
 			</div>
 			<div className={styles.filters_container}>
-				<div className={styles.source_types}>
+				<div className={styles.source_types} />
+				{activityTab !== 'platform' && (
+					<div className={styles.filter_icon}>
+						<Popover
+							placement="left"
+							render={(
+								<Filters
+									setFilterVisible={setFilterVisible}
+									activityTab={activityTab}
+									filters={filters}
+									setFilters={setFilters}
+									handleFilters={handleFilters}
+								/>
+							)}
+							visible={filterVisible}
+							onClickOutside={() => setFilterVisible(false)}
+						>
 
-					<Input
-						size="sm"
-						prefix={<IcMSearchlight width={18} height={18} />}
-						placeholder="Search here..."
-						value={searchValue}
-						onChange={(val) => setSearchValue(val)}
-						style={{ width: 200 }}
-					/>
+							<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+						</Popover>
+						{!isEmpty(filters) && <div className={styles.filters_applied} />}
+					</div>
+				)}
 
-				</div>
-
-				<div className={styles.filter_icon}>
-					<Popover
-						placement="left"
-						render={(
-							<Filters
-								setFilterVisible={setFilterVisible}
-								activityTab={activityTab}
-								filters={filters}
-								setFilters={setFilters}
-								handleFilters={handleFilters}
-							/>
-						)}
-						visible={filterVisible}
-						onClickOutside={() => setFilterVisible(false)}
-					>
-						{/* <div className={styles.filter_dot} /> */}
-						<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
-					</Popover>
-
-				</div>
 			</div>
 
-			<div
-				className={styles.list_container}
-				onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
-			>
-				{ACTIVITY_COMPONENT_CALLING[activityTab]}
-			</div>
-			{loading && <LoadingState activityTab={activityTab} />}
+			{/* {loading ? (
+				<LoadingState activityTab={activityTab} />
+			) : (
+				<div
+					className={styles.list_container}
+					// onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+				>
+
+					{ActiveComp && (
+						<ActiveComp communication={communication} platform={platform} transactional={transactional} />
+					)}
+				</div>
+			)} */}
+
 		</div>
+
 	);
 }
 export default UserActivities;

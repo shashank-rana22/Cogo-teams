@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { KEYS_MAPPING } from '../../../../../constants/KEYS_MAPPING';
+import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ function TransactionalActivity({ transactional = {} }) {
 		<div>
 			{(list || []).map((item) => {
 				const services = item?.shipment_type;
-				const { name:{ origin = '', destination = '' } } = KEYS_MAPPING[services];
+				const { name:{ origin = '', destination = '' } } = TRANSACTIONAL_KEYS_MAPPING[services];
 
 				const {
 					created_at = '', serial_id, milestone_activity = [],
@@ -86,9 +86,13 @@ function TransactionalActivity({ transactional = {} }) {
 												</div>
 											</Tooltip>
 											<div className={styles.port_codes}>
-												(
-												{destination_port?.port_code}
-												)
+												{!isEmpty(destination_port?.port_code) && (
+													<>
+														(
+														{destination_port?.port_code}
+														)
+													</>
+												)}
 											</div>
 										</div>
 										<div className={styles.country}>

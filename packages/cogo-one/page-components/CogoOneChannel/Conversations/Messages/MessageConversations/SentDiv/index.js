@@ -7,6 +7,11 @@ import styles from './styles.module.css';
 function SentDiv({
 	eachMessage = {},
 }) {
+	const LOGO_URL = {
+		admin : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg',
+		bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
+	};
+
 	const {
 		message_type = 'text',
 		created_at = '',
@@ -34,7 +39,7 @@ function SentDiv({
 				</div>
 			</div>
 			<img
-				src="https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg"
+				src={LOGO_URL[session_type || 'bot']}
 				alt="KAM"
 			/>
 		</div>

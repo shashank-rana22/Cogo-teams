@@ -11,13 +11,17 @@ import styles from './styles.module.css';
 
 function AgentNotes({ activeMessageCard }) {
 	const [noteValue, setNoteValue] = useState('');
+
 	const [editNote, setEditNote] = useState(false);
+
 	const [active, setActive] = useState(false);
+
 	const [updateId, setUpdateId] = useState();
+
 	const { noteData, fetchListNotes } = useGetListNotes({ activeMessageCard, active });
 	const { list = [] } = noteData || {};
 	const { omniChannelNote = () => {} } = useCreateOmniNote({ editNote, fetchListNotes });
-	const { updateNote } = useUpdateNote({ fetchListNotes, editNote });
+	const { updateNote } = useUpdateNote({ fetchListNotes, editNote, setEditNote });
 
 	const handleSubmit = async () => {
 		if (!isEmpty(noteValue)) {

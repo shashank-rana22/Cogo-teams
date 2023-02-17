@@ -1,20 +1,35 @@
 import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
-import { snakeCase } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
 
-// import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../../hooks/useGetUser';
+import FormatData from '../../../../utils/formatData';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	// const [swapUi, setSwapUi] = useState(false);
-	// console.log('swapUi', swapUi);
-	const { userData, loading } = useGetUser({ activeMessageCard, activeTab, activeVoiceCard });
+	const { user_details = {} } = activeMessageCard || {};
+	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
-	const { mobile_number_eformat, name, email, mobile_verified, whatsapp_verified } = userData || {};
+	const {
+		userId,
+		userMail,
+		userMobile,
+		userName,
+		orgId,
+		agentId,
+		countryCode,
+	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
+
+	const { userData, loading } = useGetUser({ userId });
+
+	const {
+		mobile_verified,
+		whatsapp_verified,
+	} = userData || {};
+
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
@@ -47,8 +62,12 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 						</>
 					) : (
 						<>
-							<div className={styles.name}>{name || 'NA'}</div>
-							<div className={styles.name}>{email || '-'}</div>
+							<div className={styles.name}>
+								{userName || 'unknown user'}
+							</div>
+							<div className={styles.name}>
+								{userMail || '-'}
+							</div>
 						</>
 					)}
 				</div>
@@ -75,7 +94,13 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
 			) : (
 				<VoiceCallComponent
-					mobile_number_eformat={mobile_number_eformat}
+					userMobile={userMobile}
+					orgId={orgId}
+					agentId={agentId}
+					countryCode={countryCode}
+					userId={userId}
+					userName={userName}
+					emptyState={emptyState}
 				/>
 
 			)}

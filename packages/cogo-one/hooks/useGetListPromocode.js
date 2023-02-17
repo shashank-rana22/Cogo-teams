@@ -1,9 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
+import getActiveCardDetails from '../utils/getActiveCardDetails';
+
 const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
 	const { organization_id } = activeVoiceCard || {};
-	const { organization_id: MessageOrgId } = activeMessageCard || {};
+	const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
 	// const [pagination, setPagination] = useState({ page: 1 });
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_promotions',
@@ -15,7 +17,7 @@ const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab })
 		if (activeTab === 'voice') {
 			id = organization_id;
 		} else {
-			id = MessageOrgId;
+			id = orgId;
 		}
 		await trigger({
 			params: {
@@ -33,7 +35,9 @@ const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab })
 	};
 
 	useEffect(() => {
-		fetchListPromoCode();
+		if (user_id !== null) {
+			fetchListPromoCode();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeMessageCard, activeVoiceCard]);
 

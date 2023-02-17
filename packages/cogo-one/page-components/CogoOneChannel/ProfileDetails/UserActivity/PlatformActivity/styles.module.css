@@ -14,6 +14,10 @@
 	border-left: 1px solid #bdbdbd;
 }
 
+.main_card:last-child {
+	border-left: none;
+}
+
 .activity_date {
 	display: flex;
 	align-items: center;
@@ -96,7 +100,7 @@
 	white-space: nowrap;
 }
 
-.port_code {
+.port_codes{
 	margin-left: 2px;
 	font-size: 11px;
 	color: #bdbdbd;

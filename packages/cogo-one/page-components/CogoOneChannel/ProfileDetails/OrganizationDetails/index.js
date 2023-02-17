@@ -3,6 +3,7 @@ import { Pill, Placeholder, Loader } from '@cogoport/components';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
+import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 // import LoadingState from './LoaderState';
 import OrgAgentDetails from './OrgAgentDetails';
@@ -10,15 +11,26 @@ import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
 function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
+	const { user_id } = getActiveCardDetails(activeMessageCard);
+
 	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard, activeVoiceCard, activeTab });
-	// const orgLoading = true;
+
 	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard, activeVoiceCard, activeTab });
+
 	const { promoData, promoLoading } = useGetListPromotions({ activeMessageCard, activeVoiceCard });
 
 	const { agent, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
+
+	if (user_id === null) {
+		return (
+			<div className={styles.empty_container}>
+				No Data Found...
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

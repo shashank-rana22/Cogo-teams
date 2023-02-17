@@ -2,30 +2,15 @@ function filterOptions() {
 	const transactionalFilters = [
 		{
 			label : 'Booking',
-			value : 'booking',
+			value : 'upload_bn_task',
 		},
 		{
 			label : 'Vessel',
-			value : 'vessel',
+			value : 'containers_gated_in',
 		},
 		{
 			label : 'Booking note',
-			value : 'booking_note',
-		},
-	];
-
-	const platformFilters = [
-		{
-			label : 'Checkout',
-			value : 'checkout',
-		},
-		{
-			label : 'Login',
-			value : 'login',
-		},
-		{
-			label : 'Search',
-			value : 'search',
+			value : 'booking_note_uploaded',
 		},
 	];
 
@@ -49,7 +34,6 @@ function filterOptions() {
 	];
 
 	const FILTERS_MAPPING = {
-		platform      : platformFilters,
 		communication : communicationFilters,
 		transactional : transactionalFilters,
 	};

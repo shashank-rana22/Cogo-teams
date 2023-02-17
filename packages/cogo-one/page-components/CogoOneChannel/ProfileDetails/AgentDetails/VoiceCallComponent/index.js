@@ -4,11 +4,22 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 
 import styles from './styles.module.css';
 
-function VoiceCallComponent({ mobile_number_eformat }) {
+function VoiceCallComponent({
+	userMobile,
+	orgId,
+	agentId,
+	countryCode,
+	userId,
+	userName,
+	emptyState,
+}) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
 	}));
+
+	const code = userMobile?.slice(0, 3);
+	const number = userMobile?.slice(3);
 
 	const handleCall = async () => {
 		dispatch(
@@ -16,11 +27,19 @@ function VoiceCallComponent({ mobile_number_eformat }) {
 				...profileData,
 				voice_call: {
 					...profileData.voice_call,
-					showCallModal     : true,
-					inCall            : true,
-					endCall           : false,
-					showFeedbackModal : false,
-					startTime         : new Date(),
+					showCallModal       : true,
+					inCall              : true,
+					endCall             : false,
+					showFeedbackModal   : false,
+					startTime           : new Date(),
+					orgId,
+					userId,
+					mobile_number       : userMobile,
+					mobile_country_code : countryCode,
+					agentId,
+					name                : userName,
+					emptyState,
+
 				},
 			}),
 		);
@@ -32,9 +51,9 @@ function VoiceCallComponent({ mobile_number_eformat }) {
 				<div className={styles.number_div}>
 					<IcMCall className={styles.call_icon} onClick={handleCall} />
 					<div className={styles.show_number}>
-						{mobile_number_eformat?.slice(0, 2)}
+						{code}
 						{' '}
-						{mobile_number_eformat?.slice(2)}
+						{number}
 					</div>
 				</div>
 			</div>

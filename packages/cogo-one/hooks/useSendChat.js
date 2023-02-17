@@ -2,6 +2,7 @@ import { useSelector } from '@cogoport/store';
 import { doc, addDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import getFileAttributes from '../utils/getFileAttributes';
 
 const useSendChat = ({
 	setDraftMessages,
@@ -16,6 +17,8 @@ const useSendChat = ({
 	// getUser,
 	firestore,
 	channel_type,
+	draftUploadedFiles,
+	setDraftUploadedFiles,
 	id,
 	setRoomData,
 }) => {
@@ -29,12 +32,11 @@ const useSendChat = ({
 	);
 	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id] || '';
-		// const fileDetails = files?.[activeChat] || null;
+		const { finalUrl, fileType } = getFileAttributes({ ...draftUploadedFiles?.[id] });
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
-		// setFiles({ ...files, [activeChat]: undefined });
+		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
 		if (
-			newMessage !== ''
-		// || fileDetails
+			newMessage !== '' || finalUrl !== ''
 		) {
 			const adminChat = {
 				conversation_type : 'received',
@@ -42,14 +44,8 @@ const useSendChat = ({
 				created_at        : Date.now(),
 				send_by           : user_name,
 				session_type      : 'admin',
-				// imgUrl:
-				// 	fileDetails && fileDetails?.name.match(/\.(jpg|jpeg|png|gif|svg)$/i)
-				// 		? fileDetails.url
-				// 		: '',
-				// pdfUrl:
-				// 	fileDetails && fileDetails?.name?.includes('pdf')
-				// 		? fileDetails.url
-				// 		: '',
+				imgUrl            : fileType === 'image' ? finalUrl : '',
+				pdfUrl            : fileType !== 'image' ? finalUrl : '',
 			};
 			await addDoc(activeChatCollection, adminChat);
 			const doc1 = await getDoc(messageFireBaseDoc);

@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
-import { Popover } from '@cogoport/components';
+import { cl, Popover } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import { IcMHappy, IcMAttach, IcMSend, IcMInfo } from '@cogoport/icons-react';
+import { IcMHappy, IcMAttach, IcMSend, IcMInfo, IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
+import getFileAttributes from '../../../../../utils/getFileAttributes';
 
 import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
@@ -23,20 +24,26 @@ function MessageConversations({
 	getNextData,
 	setOpenModal,
 	activeMessageCard,
+	suggestions = [],
+	uploading,
+	setUploading,
 }) {
 	const messageRef = useRef(null);
 	const noMessages = isEmpty(messagesData);
 	const checkMessage = isEmpty(draftMessage);
 	const { id = '' } = activeMessageCard;
+
 	const {
 		emojisList = {},
-		setOnClicked = () => { },
+		setOnClicked = () => {},
 		onClicked = false,
 		emojiListFetch = () => {},
 	} = useGetEmojiList({ activeMessageCard });
+
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
 
-	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
+	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
+
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
@@ -65,6 +72,10 @@ function MessageConversations({
 		}
 	}, [id, noMessages, checkMessage]);
 
+	const handleProgress = (val) => {
+		setUploading((prev) => ({ ...prev, [id]: val }));
+	};
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { emojiListFetch(); }, []);
 
@@ -72,38 +83,90 @@ function MessageConversations({
 		setOpenModal({
 			type : 'instant_messages',
 			data : {
-				updateMessage: (val) => setDraftMessages((p) => ({ ...p, [id]: val })),
+				updateMessage: (val) => {
+					setDraftMessages((p) => ({ ...p, [id]: val }));
+					setOpenModal({ type: null, data: {} });
+				},
 			},
+
 		});
+	};
+
+	const chatViewConditon = () => {
+		if ((!isEmpty(draftUploadedFile) || uploading?.[id]) && !isEmpty(suggestions)) {
+			return 'file_present_suggestions';
+		} if (!isEmpty(draftUploadedFile) || uploading?.[id]) {
+			return 'file_present_nosuggestions';
+		} if (!isEmpty(suggestions)) {
+			return 'suggestions_exist';
+		}
+		return 'no_suggestions';
 	};
 
 	return (
 		<div className={styles.styled_div}>
-			<div className={styles.container} onScroll={handleScroll}>
+			<div className={cl`${styles.container} ${styles[chatViewConditon()]}`} onScroll={handleScroll}>
 				{(messagesData || []).map((eachMessage) => (
-					eachMessage?.conversation_type !== 'received'
-						? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
-						: <SentDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
+					<div>
+						{eachMessage?.conversation_type !== 'received'
+							? <ReceiveDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />
+							: <SentDiv eachMessage={eachMessage} activeMessageCard={activeMessageCard} />}
+
+					</div>
 				))}
 				<div ref={messageRef} />
 			</div>
 
-			<div className={styles.text_area_div}>
-				<div className={styles.suggestions_div}>
-					<div className={styles.flex}>
-						<div className={styles.suggestions_text}>
-							Suggestions:
-						</div>
-						{(suggestions || []).map((eachSuggestion) => (
-							<div className={styles.tag_div}>
-								{eachSuggestion}
+			<div className={cl`${styles.nofile_container} 
+				${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.upload_file_container}`}
+			>
+				{!isEmpty(draftUploadedFile) && !uploading?.[id] && (
+					<>
+						<div className={styles.files_view}>
+							<div className={styles.file_icon_container}>{fileIcon}</div>
+							<div
+								role="presentation"
+								className={styles.file_name_container}
+								// eslint-disable-next-line no-undef
+								onClick={() => { window.open(finalUrl, '_blank', 'noreferrer'); }}
+							>
+								{uploadedFileName}
+
 							</div>
-						))}
+						</div>
+						<div className={styles.delete_icon_container}>
+							<IcMDelete
+								className={styles.delete_icon}
+								onClick={() => setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }))}
+							/>
+						</div>
+					</>
+				)}
+				{uploading?.[id] && (
+					<div className={styles.uploading}>
+						uploading.....
 					</div>
-					<IcMInfo fill="#221F20" height="20px" width="20px" />
-				</div>
+				)}
+			</div>
+
+			<div className={styles.text_area_div}>
+				{!isEmpty(suggestions) && (
+					<div className={styles.suggestions_div}>
+						<div className={styles.flex}>
+							<div className={styles.suggestions_text}>
+								Suggestions:
+							</div>
+							{(suggestions || []).map((eachSuggestion) => (
+								<div className={styles.tag_div}>
+									{eachSuggestion}
+								</div>
+							))}
+						</div>
+						<IcMInfo fill="#221F20" height="20px" width="20px" />
+					</div>
+				)}
 				<textarea
-					rows={2}
+					rows={4}
 					placeholder="Type your message..."
 					className={styles.text_area}
 					value={draftMessage || ''}
@@ -113,16 +176,18 @@ function MessageConversations({
 
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
-						{/* <FileUploader
-							value={finalUrl}
-							onChange={(val) => setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }))}
-							showProgres={false}
+						<FileUploader
+							defaultValue={!isEmpty(draftUploadedFile) ? [draftUploadedFile] : []}
+							disabled={uploading?.[id]}
+							handleProgress={handleProgress}
+							showProgress={false}
 							draggable
-							multipleUploadDesc="Upload Invoice"
 							className="file_uploader"
-							uploadIcon={<IcMAttach fill="#828282" />}
-						/> */}
-						<IcMAttach fill="#828282" />
+							uploadIcon={<IcMAttach className={styles.upload_icon} />}
+							onChange={(val) => {
+								setDraftUploadedFiles((prev) => ({ ...prev, [id]: val }));
+							}}
+						/>
 						<Popover
 							placement="top"
 							render={<EmojisBody emojisList={emojisList} />}
@@ -150,4 +215,5 @@ function MessageConversations({
 		</div>
 	);
 }
+
 export default MessageConversations;

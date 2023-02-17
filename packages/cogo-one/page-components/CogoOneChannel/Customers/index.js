@@ -17,16 +17,25 @@ function Customers({
 	filterVisible,
 	activeTab,
 	setActiveTab = () => {},
-	setToggleStatus = () => {},
 	toggleStatus,
 	messagesList = [],
 	unReadChatsCount,
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	status = '',
-	workPrefernce = () => {},
+	fetchworkPrefernce = () => {},
 	messagesLoading = false,
+	setOpenModal = () => {},
+	openModal = false,
+	updateUserStatus = () => {},
+	statusLoading = false,
 }) {
+	const onChangeToggle = () => {
+		if (toggleStatus) {
+			setOpenModal(true);
+		} else {
+			updateUserStatus({ status: 'active' });
+		}
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -40,8 +49,9 @@ function Customers({
 					name="online"
 					size="md"
 					showOnOff
-					onChange={() => setToggleStatus((p) => !p)}
-					value={toggleStatus}
+					onChange={() => onChangeToggle()}
+					checked={toggleStatus}
+					loading={statusLoading}
 				/>
 			</div>
 			<div className={styles.tabs}>
@@ -80,11 +90,13 @@ function Customers({
 				/>
 			)}
 
-			{toggleStatus && (
+			{openModal && (
 				<InactiveModal
-					toggleStatus={toggleStatus}
-					setToggleStatus={setToggleStatus}
-					workPrefernce={workPrefernce}
+					fetchworkPrefernce={fetchworkPrefernce}
+					setOpenModal={setOpenModal}
+					loading={statusLoading}
+					updateUserStatus={updateUserStatus}
+
 				/>
 			)}
 		</div>

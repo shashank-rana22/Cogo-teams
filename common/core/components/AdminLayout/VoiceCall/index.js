@@ -2,6 +2,7 @@ import { Modal } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import FeedbackModal from './FeedBackModal';
@@ -14,10 +15,21 @@ function VoiceCall() {
 	const dispatch = useDispatch();
 	const [counter, setCounter] = useState(0);
 	const profileData = useSelector(({ profile }) => profile);
-	const inCall = profileData?.voice_call?.inCall || false;
-	const endCall = profileData?.voice_call?.endCall || false;
-	const showCallModal = profileData?.voice_call?.showCallModal || false;
-	const showFeedbackModal = profileData?.voice_call?.showFeedbackModal || false;
+	const voiceCall = profileData?.voice_call;
+	const {
+		inCall,
+		endCall,
+		showCallModal,
+		// showFeedbackModal,
+		orgId,
+		userId,
+		name,
+		mobile_number,
+		// mobile_country_code,
+	} = voiceCall || {};
+
+	const code = mobile_number?.slice(0, 3);
+	const number = mobile_number?.slice(3);
 
 	const {
 		makeCallApi = () => {},
@@ -25,7 +37,7 @@ function VoiceCall() {
 		callId,
 		callStatus,
 		setCallId = () => {},
-	} = useOutgoingCall();
+	} = useOutgoingCall({ number });
 
 	const {
 		callStatusApi = () => {},
@@ -49,10 +61,11 @@ function VoiceCall() {
 					...profileData,
 					voice_call: {
 						...profileData?.voice_call,
-						endCall       : true,
-						showCallModal : false,
-						inCall        : false,
-						endTime       : new Date(),
+						endCall           : true,
+						showCallModal     : false,
+						inCall            : false,
+						endTime           : new Date(),
+						showFeedbackModal : true,
 					},
 				}),
 			);
@@ -130,10 +143,12 @@ function VoiceCall() {
 								<IcMProfile width={40} height={40} />
 							</div>
 							<div className={styles.org_name}>
-								Shri Hari Shipping Service
+								{name || 'Unknown User'}
 							</div>
 							<div className={styles.number}>
-								+91 987654345678
+								{code}
+								{' '}
+								{number}
 							</div>
 							<div className={styles.status_div}>{status || 'Connecting...'}</div>
 							<div className={styles.timer}>{durationTime()}</div>
@@ -150,7 +165,10 @@ function VoiceCall() {
 					</Modal.Body>
 				</Modal>
 			)}
-			{showFeedbackModal && <FeedbackModal />}
+			{!isEmpty(orgId) && !isEmpty(userId) && (
+				<FeedbackModal />
+			)}
+
 		</div>
 
 	);

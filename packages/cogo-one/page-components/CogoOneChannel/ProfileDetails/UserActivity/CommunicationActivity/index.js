@@ -7,7 +7,6 @@ import { SOURCE_ICON_MAPPING } from '../../../../../constants';
 import styles from './styles.module.css';
 
 function CommunicationActivity({ communication = {} }) {
-	console.log('communication', communication);
 	const { list = [] } = communication;
 
 	return (

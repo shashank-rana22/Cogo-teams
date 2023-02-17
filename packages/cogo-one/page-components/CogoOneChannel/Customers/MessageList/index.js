@@ -71,84 +71,83 @@ function MessageList({
 			</div>
 
 			{messagesLoading ? <LoadingState /> : (
+
 				<div className={styles.list_container}>
 
-					<div className={styles.list_container}>
+					{(messagesList || []).map((item) => {
+						const userData = getActiveCardDetails(item);
+						const {
+							user_name = '',
+							organization_name = '',
+						} = userData || {};
 
-						{(messagesList || []).map((item) => {
-							const userData = getActiveCardDetails(item);
-							const {
-								user_name = '',
-								organization_name = '',
-							} = userData || {};
+						const lastActive = new Date(item.sent_updated_at);
+						const checkActiveCard = activeMessageCard?.id === item?.id;
 
-							const lastActive = new Date(item.sent_updated_at);
-							const checkActiveCard = activeMessageCard?.id === item?.id;
-
-							return (
-								<div
-									key={item?.id}
-									role="presentation"
-									className={cl`
+						return (
+							<div
+								key={item?.id}
+								role="presentation"
+								className={cl`
 												${styles.card_container} 
 												${checkActiveCard ? styles.active_card : ''} 
 												`}
-									onClick={() => setActiveMessage(item)}
-								>
-									<div className={styles.card}>
+								onClick={() => setActiveMessage(item)}
+							>
+								<div className={styles.card}>
 
-										<div className={styles.user_information}>
-											<div className={styles.avatar_Container}>
-												<UserAvatar
-													type={item.channel_type}
-													imageSource={item.image}
-												/>
-												<div className={styles.user_details}>
-													<div className={styles.user_name}>
-														{startCase(user_name)}
-													</div>
-													<div className={styles.organisation}>
-														{startCase(organization_name)}
-													</div>
+									<div className={styles.user_information}>
+										<div className={styles.avatar_Container}>
+											<UserAvatar
+												type={item.channel_type}
+												imageSource={item.image}
+											/>
+											<div className={styles.user_details}>
+												<div className={styles.user_name}>
+													{startCase(user_name)}
+												</div>
+												<div className={styles.organisation}>
+													{startCase(organization_name)}
 												</div>
 											</div>
-
-											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner}>
-													{/* <div className={styles.pills_card}>Small</div> */}
-												</div>
-												<div className={styles.activity_duration}>
-													{dateTimeConverter(
-														Date.now() - Number(lastActive),
-														Number(lastActive),
-													)?.renderTime}
-												</div>
-											</div>
-
 										</div>
 
-										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
+										<div className={styles.user_activity}>
+											<div className={styles.tags_conatiner}>
+												{/* <div className={styles.pills_card}>Small</div> */}
 											</div>
-
-											{item.new_message_count > 0 && (
-												<div className={styles.new_message_count}>
-													{item.new_message_count > 100 ? '99+' : (
-														item.new_message_count
-													)}
-
-												</div>
-											)}
-
+											<div className={styles.activity_duration}>
+												{dateTimeConverter(
+													Date.now() - Number(lastActive),
+													Number(lastActive),
+												)?.renderTime}
+											</div>
 										</div>
 
 									</div>
+
+									<div className={styles.content_div}>
+										<div className={styles.content}>
+											{item.last_message}
+										</div>
+
+										{item.new_message_count > 0 && (
+											<div className={styles.new_message_count}>
+												{item.new_message_count > 100 ? '99+' : (
+													item.new_message_count
+												)}
+
+											</div>
+										)}
+
+									</div>
+
 								</div>
-							);
-						})}
-					</div>
+							</div>
+						);
+					})}
 				</div>
+
 			)}
 		</>
 	);
