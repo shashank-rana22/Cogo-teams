@@ -3,17 +3,11 @@ import {
 	IcADocumentTemplates,
 	IcACrossBorder,
 	IcALocation,
-	IcAFaqs,
 	IcADiscoverRates,
 	IcAWhitePapers,
 } from '@cogoport/icons-react';
 
 const ACTION_ICON_MAPPING = [
-	{
-		name  : 'spot_search',
-		icon  : <IcAFaqs width={28} height={28} />,
-		title : 'Spot Search',
-	},
 	{
 		name  : 'shipment_tracking',
 		icon  : <IcALocation width={28} height={28} />,

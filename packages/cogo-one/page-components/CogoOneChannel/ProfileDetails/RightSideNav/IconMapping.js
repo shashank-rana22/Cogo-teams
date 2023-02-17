@@ -1,4 +1,4 @@
-import { IcMProfile, IcACustomerCentre } from '@cogoport/icons-react';
+import { IcMProfile, IcACustomerCentre, IcMSearchdark } from '@cogoport/icons-react';
 
 const IconMapping = [
 	{
@@ -40,6 +40,10 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
 			alt="actions"
 		/>,
+	},
+	{
+		name : 'spot_search',
+		icon : <IcMSearchdark width={16} height={16} />,
 	},
 	{
 		name : 'customer_insights',

@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
+import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useSendChat from '../../../../hooks/useSendChat';
+import useSendWhatsappMessage from '../../../../hooks/useSendWhatsappMessage';
+import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
 import MessageConversations from './MessageConversations';
@@ -19,12 +22,12 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const [messages, setMessages] = useState({});
 	const [uploading, setUploading] = useState({});
 	const [roomData, setRoomData] = useState(activeMessageCard || {});
-
+	const { createWhatsappCommunication, loading:createCommunicationLoading } = useSendWhatsappMessage();
 	useEffect(() => {
 		setRoomData(activeMessageCard);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(activeMessageCard)]);
-
+	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 	const {
 		id = '', channel_type = '',
 		...rest
@@ -39,7 +42,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		);
 	}
 
-	const { sendChatMessage, updatetags } = useSendChat({
+	const { sendChatMessage, updatetags, messageFireBaseDoc } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -49,8 +52,12 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		draftUploadedFiles,
 		setDraftUploadedFiles,
 		setRoomData,
+		createWhatsappCommunication,
+		createCommunicationLoading,
+		formattedData,
 	});
 
+	const { assignChat = () => {} } = useAssignChat({ messageFireBaseDoc, setRoomData });
 	const {
 		getNextData = () => {},
 		getFirebaseData = () => {},
@@ -75,11 +82,12 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 			<div className={styles.container}>
 				<Header
 					setOpenModal={setOpenModal}
-					activeMessageCard={roomData}
 					restData={rest}
 					updatetags={updatetags}
 					setheaderTags={setheaderTags}
 					headertags={headertags}
+					assignChat={assignChat}
+					formattedData={formattedData}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
