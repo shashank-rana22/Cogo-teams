@@ -24,24 +24,29 @@ function MessageConversations({
 	getNextData,
 	setOpenModal,
 	activeMessageCard,
+	suggestions = [],
 	uploading,
 	setUploading,
 }) {
 	const messageRef = useRef(null);
+
 	const noMessages = isEmpty(messagesData);
+
 	const checkMessage = isEmpty(draftMessage);
+
 	const { id = '' } = activeMessageCard;
+
 	const {
 		emojisList = {},
 		setOnClicked = () => {},
 		onClicked = false,
 		emojiListFetch = () => {},
 	} = useGetEmojiList({ activeMessageCard });
+
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
 
-	const suggestions = ['Hello, Goodmorning Sir!', 'Hi, how may I help you?', 'Thank- you'];
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
@@ -82,7 +87,6 @@ function MessageConversations({
 			type : 'instant_messages',
 			data : {
 				updateMessage: (val) => {
-					console.log('val', val);
 					setDraftMessages((p) => ({ ...p, [id]: val }));
 					setOpenModal({ type: null, data: {} });
 				},
@@ -133,19 +137,23 @@ function MessageConversations({
 			</div>
 
 			<div className={styles.text_area_div}>
-				<div className={styles.suggestions_div}>
-					<div className={styles.flex}>
-						<div className={styles.suggestions_text}>
-							Suggestions:
-						</div>
-						{(suggestions || []).map((eachSuggestion) => (
-							<div className={styles.tag_div}>
-								{eachSuggestion}
+
+				{!isEmpty(suggestions) && (
+					<div className={styles.suggestions_div}>
+						<div className={styles.flex}>
+							<div className={styles.suggestions_text}>
+								Suggestions:
 							</div>
-						))}
+							{(suggestions || []).map((eachSuggestion) => (
+								<div className={styles.tag_div}>
+									{eachSuggestion}
+								</div>
+							))}
+						</div>
+						<IcMInfo fill="#221F20" height="20px" width="20px" />
 					</div>
-					<IcMInfo fill="#221F20" height="20px" width="20px" />
-				</div>
+				)}
+
 				<textarea
 					rows={2}
 					placeholder="Type your message..."

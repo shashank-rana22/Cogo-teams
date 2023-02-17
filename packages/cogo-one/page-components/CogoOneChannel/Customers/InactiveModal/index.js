@@ -1,24 +1,21 @@
 import { Modal, Button, Datepicker, RadioGroup } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // import controls from '../../../configurations/inactive-reasons-form-controls';
-import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactiveStatus';
+// import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactiveStatus';
 
 import styles from './styles.module.css';
 
 function InactiveModal({
-	workPrefernce, setOpenModal,
+	updateUserStatus,
+	setOpenModal,
+	loading,
 }) {
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [inactiveReason, setInactiveReason] = useState('');
-
-	const {
-		loading,
-		userStatus = () => {},
-	} = useCreateUserInactiveStatus({ workPrefernce, setOpenModal, type: 'hello' });
 
 	const REASONS = [
 		{
@@ -40,7 +37,18 @@ function InactiveModal({
 	};
 
 	const handleSubmit = () => {
-		userStatus({ inactiveReason, endDate, startDate });
+		const data = {
+			status         : inactiveReason,
+			validity_start : format(
+				startDate,
+				'yyyy-MM-dd HH:mm:ss',
+			),
+			validity_end: format(
+				endDate,
+				'yyyy-MM-dd HH:mm:ss',
+			),
+		};
+		updateUserStatus(data);
 	};
 
 	const emptyStateCheck = isEmpty(inactiveReason);

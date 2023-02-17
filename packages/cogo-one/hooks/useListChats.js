@@ -62,7 +62,7 @@ const useListChats = ({
 		) {
 			omniChannelQuery = query(
 				omniChannelCollection,
-				// orderBy('session_type', 'desc'),
+				// orderBy('session_type', 'asc'),
 				orderBy('updated_at', 'desc'),
 				// where('session_type', '==', 'admin'),
 
@@ -70,7 +70,7 @@ const useListChats = ({
 		} else {
 			omniChannelQuery = query(
 				omniChannelCollection,
-				// orderBy('session_type', 'desc'),
+				// orderBy('session_type', 'asc'),
 				orderBy('updated_at', 'desc'),
 				where('agent_id', '==', userId),
 				// where('session_type', '==', 'admin'),
@@ -89,7 +89,7 @@ const useListChats = ({
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
 		setActiveMessageCard(val);
-		if (channel_type) {
+		if (channel_type && id) {
 			const messageDoc = doc(
 				firestore,
 				`${FIRESTORE_PATH[channel_type]}/${id}`,
