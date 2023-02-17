@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 function EmptyState({
 	height = 125,
 	width = 225,
-	emptyText = 'No Data Found',
+	emptyText = 'Data not found',
 	flexDirection = 'row',
 	textSize = '16px',
 }) {
@@ -18,7 +18,6 @@ function EmptyState({
 			/>
 
 			<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
-
 		</div>
 
 	);

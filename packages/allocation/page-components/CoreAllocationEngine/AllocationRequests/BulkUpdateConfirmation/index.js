@@ -32,7 +32,6 @@ function BulkUpdateConfirmation(props) {
 				>
 					Yes, I do
 				</Button>
-
 			</Modal.Footer>
 		</>
 	);

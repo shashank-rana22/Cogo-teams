@@ -3,18 +3,19 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function SearchInput({
-	value = '',
-	placeholder = '',
-	size = 'lg',
-	setGlobalSearch = () => {},
-	debounceQuery,
-	disabled,
-	...rest
-}) {
+function SearchInput(props) {
+	const {
+		value = '',
+		placeholder = '',
+		size = 'lg',
+		setGlobalSearch = () => {},
+		debounceQuery,
+		disabled,
+		...rest
+	} = props;
+
 	const handleGlobalSearch = (val) => {
 		setGlobalSearch(val);
-
 		debounceQuery(val);
 	};
 

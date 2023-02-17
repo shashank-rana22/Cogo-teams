@@ -8,12 +8,11 @@ const getFormattedValues = (formValues) => {
 	const quotaAttributes = {};
 
 	Object.keys(formValues).forEach((keyName) => {
-		// ! ask to remove redundant things from backend
-		// const inputValue = formValues[keyName];
+		const inputValue = formValues[keyName];
 
-		// if (inputValue) {
-		// 	quotaAttributes[keyName] = Number(inputValue);
-		// }
+		if (inputValue) {
+			quotaAttributes[keyName] = Number(inputValue);
+		}
 
 		quotaAttributes[keyName] = Number(formValues[keyName] || '');
 	});

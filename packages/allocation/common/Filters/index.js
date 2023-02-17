@@ -3,19 +3,31 @@ import { Button, Popover } from '@cogoport/components';
 import FilterContent from './FiltersContent';
 import styles from './styles.module.css';
 
-function Filters({
-	children = null,
-	open = false,
-	setOpen = () => {},
-	name = 'APPLY',
-	heading = 'Search',
-	placement = 'bottom',
-	reset = () => {},
-	applyFilters = () => {},
-	controls = [],
-	formProps = {},
-	onClickOutside = () => {},
-}) {
+function Filters(props) {
+	const {
+		children = null,
+		open = false,
+		setOpen = () => {},
+		name = 'APPLY',
+		heading = 'Search',
+		placement = 'bottom',
+		reset = () => {},
+		applyFilters = () => {},
+		controls = [],
+		formProps = {},
+		onClickOutside = () => {},
+	} = props;
+
+	const onApplyingFilters = () => {
+		applyFilters();
+		setOpen(false);
+	};
+
+	const onResettingFilters = () => {
+		reset();
+		setOpen(false);
+	};
+
 	return (
 		<div className={styles.popover_container}>
 			<Popover
@@ -27,10 +39,9 @@ function Filters({
 					<FilterContent
 						heading={heading}
 						controls={controls}
-						reset={reset}
-						applyFilters={applyFilters}
-						setOpen={setOpen}
 						formProps={formProps}
+						onApplyingFilters={onApplyingFilters}
+						onResettingFilters={onResettingFilters}
 					/>
 				) : null}
 			>

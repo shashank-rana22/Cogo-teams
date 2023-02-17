@@ -1,7 +1,6 @@
 .popover_container {
     :global(.ui_popover_container) {
         width: 500px;
-        /* max-height: 380px; */
     }
 
     :global(.tippy-content){
@@ -47,6 +46,5 @@
 
 .label {
     color:#BDBDBD;
-    font-size: 14px;
     line-height: 24px;
 }

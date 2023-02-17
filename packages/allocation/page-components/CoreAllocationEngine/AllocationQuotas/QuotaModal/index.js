@@ -150,7 +150,6 @@ function QuotaModal(props) {
 										onChange={(roleId) => setRoleTypeId(roleId)}
 										value={roleTypeId}
 										placeholder="Select Role"
-										// Todo check for vietnam
 										params={{
 											permissions_data_required : false,
 											filters                   : {
@@ -163,8 +162,6 @@ function QuotaModal(props) {
 								)}
 							</div>
 						) : null}
-
-						{/* // Todo <div>Role/User :</div> */}
 
 						<section className={styles.form_container}>
 							<div className={styles.form_columns}>

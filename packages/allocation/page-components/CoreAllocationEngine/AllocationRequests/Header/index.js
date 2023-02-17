@@ -85,6 +85,7 @@ function Header(props) {
 						value="bulkMode"
 						style={{ paddingLeft: '0px' }}
 						onChange={(e) => onChangeCheckbox(e)}
+						disabled={loading}
 					/>
 
 					<Button
@@ -131,6 +132,7 @@ function Header(props) {
 				)}
 
 				<Chips
+					key={bulkMode}
 					selectedItems={selectAll}
 					items={[{
 						children : 'Select All',

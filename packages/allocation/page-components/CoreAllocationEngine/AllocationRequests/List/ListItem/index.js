@@ -10,14 +10,15 @@ const columnsMapping = [
 	{
 		key      : 'id',
 		label    : 'Serial Id',
-		getValue : (data) => <Badge color="blue" size="lg" text={getByKey(data, 'service.serial_id', '___')} />,
-		flex     : 1,
+		getValue : (data) => (getByKey(data, 'service.serial_id')
+			? <Badge color="blue" size="lg" text={getByKey(data, 'service.serial_id')} /> : '___'),
+		flex: 1,
 	},
 	{
 		key      : 'service_type',
 		label    : 'Organization',
 		getValue : (data) => (
-			getByKey(data, 'service.business_name', '___')
+			getByKey(data, 'service.business_name') || '___'
 		),
 		flex: 1.5,
 	},
@@ -26,8 +27,8 @@ const columnsMapping = [
 		label    : 'User',
 		getValue : (data) => (
 			<div>
-				{getByKey(data, 'service_user.name', '___')}
-				<div className={styles.email_id}>{getByKey(data, 'service_user.email', '___')}</div>
+				{getByKey(data, 'service_user.name')}
+				<div className={styles.email_id}>{getByKey(data, 'service_user.email') || '___'}</div>
 			</div>
 		),
 		flex: 2,
@@ -45,7 +46,7 @@ const columnsMapping = [
 			<div>
 				{getByKey(data, 'user.name', '___')}
 				{' '}
-				<div className={styles.email_id}>{getByKey(data, 'user.email', '___')}</div>
+				<div className={styles.email_id}>{getByKey(data, 'user.email') || '___'}</div>
 			</div>
 		),
 		flex: 2,

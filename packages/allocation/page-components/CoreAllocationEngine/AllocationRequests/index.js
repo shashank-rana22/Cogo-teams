@@ -26,7 +26,11 @@ function Requests() {
 		onChangeParams,
 		searchValue,
 		setSearchValue,
+		bulkMode,
+		setBulkMode,
 		checkedRowsId,
+		setCheckedRowsId,
+		onChangeCheckbox,
 		...restProps
 	} = useListAllocationRequests();
 
@@ -39,6 +43,7 @@ function Requests() {
 				// Either setParams or onChangeParams
 				params={params}
 				setParams={setParams}
+				bulkMode={bulkMode}
 				setShowModal={setShowModal}
 				checkedRowsId={checkedRowsId}
 				searchValue={searchValue}
@@ -51,8 +56,9 @@ function Requests() {
 				loading={listLoading}
 				onChangeParams={onChangeParams}
 				fetchList={refetch}
+				bulkMode={bulkMode}
 				checkedRowsId={checkedRowsId}
-				{...restProps}
+				setCheckedRowsId={setCheckedRowsId}
 			/>
 
 			{showModal && (
@@ -67,10 +73,18 @@ function Requests() {
 					{!isEmpty(checkedRowsId)
 						? (
 							<BulkUpdateConfirmation
-								refetch={refetch}
+								key={listLoading}
 								onCloseModal={onCloseModal}
 								checkedRowsId={checkedRowsId}
-
+								onResettingBulkMode={() => {
+									setParams((pv) => ({
+										...pv,
+										filters: {
+											...(pv.filters || {}),
+											id: undefined,
+										},
+									}));
+								}}
 							/>
 						) : (
 							<CreateRequestModalContent
