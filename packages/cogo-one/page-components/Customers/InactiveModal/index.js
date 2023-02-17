@@ -1,10 +1,8 @@
 import { Modal, Button, Datepicker, RadioGroup } from '@cogoport/components';
-// import { useForm, RadioGroupController, DateRangePickerController, TimepickerController } from '@cogoport/forms';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import controls from '../../../configurations/inactive-reasons-form-controls';
 import useCreateUserInactiveStatus from '../../../hooks/useCreateUserInactiveStatus';
 
 import styles from './styles.module.css';
@@ -12,12 +10,8 @@ import styles from './styles.module.css';
 function InactiveModal({
 	toggleStatus,
 	setToggleStatus,
+	workPrefernce,
 }) {
-	// const { handleSubmit, control, watch, reset } = useForm();
-
-	// const { inactive_status, inactive_date, inactive_time } = controls;
-
-	// const watchType = watch() || '';
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [inactiveReason, setInactiveReason] = useState('');
@@ -25,9 +19,7 @@ function InactiveModal({
 	const {
 		loading,
 		userStatus = () => {},
-	} = useCreateUserInactiveStatus();
-
-	// console.log('watchType', watchType);
+	} = useCreateUserInactiveStatus({ workPrefernce });
 
 	const REASONS = [
 		{
@@ -52,7 +44,6 @@ function InactiveModal({
 		userStatus({ inactiveReason, endDate, startDate });
 	};
 
-	// const checkStatus = watchType?.inactive_status === 'on_lunch' || watchType?.inactive_status === 'on_break';
 	const emptyStateCheck = isEmpty(inactiveReason);
 
 	return (
@@ -60,23 +51,8 @@ function InactiveModal({
 			<Modal size="sm" show={toggleStatus} onClose={handleClose} placement="top">
 				<Modal.Header title="Inactive Status till" />
 
-				{/* <RadioGroupController
-					control={control}
-					{...inactive_status}
-					id={inactive_status.name}
-					className={styles.group_radio}
-
-				/> */}
 				<RadioGroup options={REASONS} onChange={setInactiveReason} value={inactiveReason} />
 
-				{/* <Datepicker
-					placeholder="Enter Date"
-					showTimeSelect
-					dateFormat="MM/dd/yyyy HH:mm"
-					name="date"
-					onChange={setDate}
-					value={date}
-				/> */}
 				{!isEmpty(inactiveReason) && (
 					<div className={styles.time_container}>
 						<div className={styles.start_time}>
@@ -108,25 +84,6 @@ function InactiveModal({
 						</div>
 					</div>
 				)}
-
-				{/* <div className={styles.date_range}>
-					{watchType?.inactive_status === 'on_leave' && (
-						<DateRangePickerController
-							control={control}
-							{...inactive_date}
-							id={inactive_date.name}
-						/>
-					)}
-
-					{checkStatus && (
-						<TimepickerController
-							control={control}
-							{...inactive_time}
-							id={inactive_time.name}
-						/>
-					)}
-
-				</div> */}
 
 				<div className={styles.actions}>
 					<Button

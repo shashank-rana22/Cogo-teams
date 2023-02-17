@@ -4,6 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { SERVICE_MAPPING } from '../../../../constants';
+import KEYS_MAPPING from '../../../../constants/KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -90,7 +91,9 @@ function TransactionalActivity({ transactional = {} }) {
 					</>
 				);
 			})}
-
+			<div className={styles.activity_date}>
+				<div className={styles.dot} />
+			</div>
 		</div>
 	);
 }

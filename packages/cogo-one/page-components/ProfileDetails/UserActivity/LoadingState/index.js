@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function LoadingState({ activityTab }) {
 	return (
-		<div className={styles.container}>
+		<div className={styles.list_container}>
 			{[...Array(5)].map(() => (
 				<>
 					<div className={styles.activity_date}>
@@ -54,7 +54,9 @@ function LoadingState({ activityTab }) {
 
 				</>
 			))}
-
+			<div className={styles.activity_date}>
+				<div className={styles.dot} />
+			</div>
 		</div>
 	);
 }
