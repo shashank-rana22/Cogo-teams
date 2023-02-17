@@ -10,6 +10,7 @@ import cogoLens from './cogo-lens';
 import common_apis from './common-apis';
 import consolidated_invoices from './consolidated-invoices';
 import contract_rates from './contract-rates-apis';
+import cost_booking_desk from './cost-booking-desk-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
@@ -106,6 +107,7 @@ const apis = {
 	bl_do_collection_release,
 	kam_desk,
 	document_desk,
+	cost_booking_desk,
 	app_contract_management,
 	...saas,
 	...common_apis,

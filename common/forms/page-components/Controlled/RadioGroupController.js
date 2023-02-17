@@ -1,5 +1,4 @@
 import { RadioGroup } from '@cogoport/components';
-import React from 'react';
 import { Controller } from 'react-hook-form';
 
 function RadioGroupController(props) {
@@ -20,7 +19,6 @@ function RadioGroupController(props) {
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
-					data-test-value={value}
 				/>
 			)}
 		/>

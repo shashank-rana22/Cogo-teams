@@ -1,6 +1,6 @@
 .input {
+	max-width: 240px;
 	margin: 8px 16px;
-    max-width: 240px;
 	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 	:global {
 		input::placeholder {
@@ -15,7 +15,8 @@
 		}
 	}
 }
-.head{
-    display: flex;
-    justify-content: space-between;
+
+.head {
+	display: flex;
+	justify-content: space-between;
 }

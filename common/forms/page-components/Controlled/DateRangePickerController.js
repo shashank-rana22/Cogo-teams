@@ -20,7 +20,6 @@ function DateRangePickerController(props) {
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
-					data-test-value={value}
 				/>
 			)}
 		/>
