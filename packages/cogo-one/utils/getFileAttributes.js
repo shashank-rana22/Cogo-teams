@@ -6,7 +6,7 @@ const fileIconMapping = {
 	img : <IcMImage height={22} width={25} />,
 };
 
-function getFileAttributes({ fileName }) {
+function getFileAttributes({ fileName = '', finalUrl }) {
 	const splitFileName = fileName.split('.');
 	let fileExtension = '';
 	let uploadedFileName = '';
@@ -32,7 +32,7 @@ function getFileAttributes({ fileName }) {
 		fileType = 'doc';
 	}
 
-	return { uploadedFileName, fileIcon, fileType };
+	return { uploadedFileName, fileIcon, fileType, finalUrl };
 }
 
 export default getFileAttributes;

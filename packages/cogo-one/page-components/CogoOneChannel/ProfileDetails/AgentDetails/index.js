@@ -4,17 +4,35 @@ import { snakeCase } from '@cogoport/utils';
 
 // import UserAvatar from '../../../common/UserAvatar';
 import useGetUser from '../../../../hooks/useGetUser';
+import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	// const [swapUi, setSwapUi] = useState(false);
-	// console.log('swapUi', swapUi);
+	const { user_id: userId } = activeVoiceCard || {};
+	const { user_id } = getActiveCardDetails(activeMessageCard);
+	const { user_id: mobileNumber } = activeMessageCard || {};
+
+	const { user_data = {} } = activeVoiceCard || {};
+	const { email: businessMail, name: businessName } = user_data || {};
 	const { userData, loading } = useGetUser({ activeMessageCard, activeTab, activeVoiceCard });
 
-	const { mobile_number_eformat, name, email, mobile_verified, whatsapp_verified } = userData || {};
+	const {
+		mobile_number_eformat,
+		name,
+		email,
+		mobile_verified,
+		whatsapp_verified,
+		user_details,
+		// agent_id,
+		id,
+	} = userData || {};
+
+	const USER_ID = userId || user_id;
+	const NUMBER = USER_ID === null ? mobileNumber : mobile_number_eformat;
+
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
@@ -47,8 +65,14 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 						</>
 					) : (
 						<>
-							<div className={styles.name}>{name || 'NA'}</div>
-							<div className={styles.name}>{email || '-'}</div>
+							<div className={styles.name}>
+								{activeTab === 'message' && (user_id !== null ? name : 'unknown User')}
+								{activeTab === 'voice' && businessName}
+							</div>
+							<div className={styles.name}>
+								{activeTab === 'message' && (user_id !== null ? email : '-')}
+								{activeTab === 'voice' && businessMail}
+							</div>
 						</>
 					)}
 				</div>
@@ -75,7 +99,11 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
 			) : (
 				<VoiceCallComponent
-					mobile_number_eformat={mobile_number_eformat}
+					mobile_number_eformat={NUMBER}
+					name={name}
+					// user_details={user_details}
+					// agentId={agent_id}
+					noUserId={activeTab === 'message' ? user_id : id}
 				/>
 
 			)}

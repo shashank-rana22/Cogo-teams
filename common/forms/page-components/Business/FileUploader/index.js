@@ -13,11 +13,12 @@ function FileUploader(props) {
 		multiple,
 		docName,
 		uploadIcon = null,
+		handleProgress,
 		...rest
 	} = props;
 
 	const [fileName, setFileName] = useState(null); // remove
-	const [loading, setLoading] = useState(true); // remove
+	const [loading, setLoading] = useState(false); // remove
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
 
@@ -27,7 +28,13 @@ function FileUploader(props) {
 		} else {
 			onChange(urlStore[0]);
 		}
-	}, [multiple, urlStore, onChange]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [urlStore]);
+
+	useEffect(() => {
+		handleProgress(loading);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({

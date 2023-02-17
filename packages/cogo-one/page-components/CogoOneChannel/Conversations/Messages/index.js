@@ -17,6 +17,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [messages, setMessages] = useState({});
+	const [uploading, setUploading] = useState({});
 	const [roomData, setRoomData] = useState(activeMessageCard || {});
 
 	useEffect(() => {
@@ -45,6 +46,8 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		draftMessages,
 		setDraftMessages,
 		activeChatCollection,
+		draftUploadedFiles,
+		setDraftUploadedFiles,
 		setRoomData,
 	});
 
@@ -81,6 +84,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
 						messagesData={messagesData}
+						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
 						draftUploadedFile={draftUploadedFiles?.[id]}
 						setDraftMessages={setDraftMessages}
@@ -93,6 +97,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 						setOpenModal={setOpenModal}
 						activeMessageCard={roomData}
 						suggestions={suggestions}
+						setUploading={setUploading}
 					/>
 				</div>
 			</div>

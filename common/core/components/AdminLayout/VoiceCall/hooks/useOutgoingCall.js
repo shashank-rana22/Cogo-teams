@@ -6,6 +6,14 @@ import { useState } from 'react';
 // import { useSelector } from '@cogoport/store';
 
 function useOutgoingCall() {
+	const {
+		user_data,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	const { user: { id: agent_id = '' } } = user_data;
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_outgoing_call',
 		method : 'post',
@@ -15,15 +23,36 @@ function useOutgoingCall() {
 	const [callStatus, setCallStatus] = useState('');
 	const dispatch = useDispatch();
 	const profileData = useSelector(({ profile }) => profile);
+	const voiceCall = profileData?.voice_call;
 
 	const makeCallApi = async () => {
+		const {
+			orgId,
+			userId,
+			mobile_number,
+			mobile_country_code,
+			// agentId,
+			noUserId,
+		} = voiceCall || {};
+		let payload;
+		if (noUserId) {
+			payload = {
+				destination_number: {
+					mobile_country_code,
+					mobile_number,
+				},
+				agent_id,
+			};
+		} else {
+			payload = {
+				agent_id,
+				organization_id : orgId,
+				user_id         : userId,
+			};
+		}
 		try {
 			const res = await trigger({
-				data: {
-					agent_id        : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-					organization_id : 'bbde20db-d8b8-4be7-8307-367666847041',
-					user_id         : 'cba50126-efbc-4caa-8383-b616dec9d44b',
-				},
+				data: payload,
 			});
 			setCallId(res?.data);
 			setCallStatus(res?.status);

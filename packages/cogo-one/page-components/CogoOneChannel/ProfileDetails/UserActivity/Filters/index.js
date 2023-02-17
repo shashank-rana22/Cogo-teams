@@ -15,7 +15,9 @@ function Filters({
 	handleFilters = () => {},
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
-	const emptyCheck = isEmpty();
+
+	const emptyCheck = isEmpty(filters);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

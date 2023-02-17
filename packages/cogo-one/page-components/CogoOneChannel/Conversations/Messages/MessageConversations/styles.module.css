@@ -175,3 +175,9 @@
 .delete_icon_container {
     border-bottom: 1px solid #fbd1a6;
 }
+
+.uploading {
+    width: 100%;
+    border-bottom: 1px solid #fbd1a6;
+
+}

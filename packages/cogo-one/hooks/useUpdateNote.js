@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useUpdateNote({ fetchListNotes = () => {} }) {
+function useUpdateNote({ fetchListNotes = () => {}, setEditNote = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_omnichannel_note',
 		method : 'post',
@@ -28,6 +28,7 @@ function useUpdateNote({ fetchListNotes = () => {} }) {
 			});
 			Toast.success('Update Successful');
 			fetchListNotes();
+			setEditNote(false);
 		} catch (error) {
 			Toast.error(error?.message);
 		}
