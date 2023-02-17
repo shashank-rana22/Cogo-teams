@@ -1,7 +1,8 @@
-import { cl, Modal, Textarea, Button } from '@cogoport/components';
+import { Toast, cl, Modal, Textarea, Button } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
@@ -54,18 +55,22 @@ function FeedbackModal() {
 	};
 
 	const handleSubmit = async () => {
-		await communicationLogApi();
-		dispatch(
-			setProfileState({
-				...profileData,
-				voice_call: {
-					...profileData.voice_call,
-					showFeedbackModal : false,
-					inCall            : false,
-					endCall           : false,
-				},
-			}),
-		);
+		if (!isEmpty(selectPill) && !isEmpty(inputValue)) {
+			await communicationLogApi();
+			dispatch(
+				setProfileState({
+					...profileData,
+					voice_call: {
+						...profileData.voice_call,
+						showFeedbackModal : false,
+						inCall            : false,
+						endCall           : false,
+					},
+				}),
+			);
+		} else {
+			Toast.error('Enter details');
+		}
 	};
 
 	return (

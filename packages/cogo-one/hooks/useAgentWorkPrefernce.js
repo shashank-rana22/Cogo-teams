@@ -7,18 +7,18 @@ function useAgentWorkPrefernce() {
 		method : 'get',
 	}, { manual: true });
 
-	const workPrefernce = async () => {
+	const fetchworkPrefernce = async () => {
 		await trigger();
 	};
 
 	useEffect(() => {
-		workPrefernce();
+		fetchworkPrefernce();
 	}, []);
 
 	return {
 		loading,
 		agentStatus,
-		workPrefernce,
+		fetchworkPrefernce,
 	};
 }
 export default useAgentWorkPrefernce;

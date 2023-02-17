@@ -1,9 +1,10 @@
+import Header from './Header';
 import styles from './styles.module.css';
 
 function VoiceCall({ activeVoiceCard = {} }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.message_container}>hi</div>
+			<Header />
 		</div>
 
 	);

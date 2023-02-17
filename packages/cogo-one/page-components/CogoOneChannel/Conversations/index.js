@@ -7,12 +7,13 @@ function Conversations({
 	activeMessageCard = {},
 	firestore,
 	activeVoiceCard,
+	suggestions = [],
 
 }) {
 	return (
 		<div className={styles.container}>
 			{activeTab === 'message'
-				? <Messages activeMessageCard={activeMessageCard} firestore={firestore} />
+				? <Messages activeMessageCard={activeMessageCard} firestore={firestore} suggestions={suggestions} />
 				: <VoiceCall activeVoiceCard={activeVoiceCard} /> }
 		</div>
 	);

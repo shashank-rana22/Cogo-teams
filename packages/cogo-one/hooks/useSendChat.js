@@ -36,8 +36,7 @@ const useSendChat = ({
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
 		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
 		if (
-			newMessage !== ''
-		// || fileDetails
+			newMessage !== '' || finalUrl !== ''
 		) {
 			const adminChat = {
 				conversation_type : 'received',

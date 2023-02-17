@@ -1,16 +1,15 @@
 .container {
     padding: 10px;
-    height: calc(100% - 145px);
+    height: calc(100% - 179px);
     overflow-y: scroll;
     transition: height 0.5s;
-
     &::-webkit-scrollbar {
         display: none;
     }
 }
 
 .chat_container {
-    height: calc(100% - 179px);
+    height: calc(100% - 214px);
     transition: height 0.5s;
 }
 
@@ -22,7 +21,6 @@
     padding: 10px;
     border: none;
     outline: none;
-
     &:focus {
         outline: none !important;
     }
@@ -37,6 +35,9 @@
     background: #fff;
     width: 100%;
     border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 }
 
 .flex_space_between {
@@ -65,7 +66,11 @@
     border-radius: 6px;
     margin: 0 5px;
     padding: 5px;
-    font-family: Poppins;
+	max-width: 150px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	user-select: none;
+    cursor: pointer;
 }
 
 .suggestions_text {
@@ -79,6 +84,7 @@
     align-items: center;
     padding: 5px 0px;
     border-bottom: 1px solid #fbd1a6;
+	min-height: 30px;
 }
 
 .styled_div {
@@ -127,7 +133,7 @@
     width: 100%;
     padding: 0px 10px;
     align-items: flex-end;
-    transition: height 0.5s;
+    transition: height 0.1s;
 }
 
 .files_view {
@@ -172,4 +178,7 @@
     width: 100%;
     border-bottom: 1px solid #fbd1a6;
 
+}
+.first_div{
+	 margin-top: auto;
 }
