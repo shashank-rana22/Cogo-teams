@@ -4,7 +4,9 @@ import ACTION_ICON_MAPPING from '../../../../constants/ACTION_ICON_MAPPING';
 
 import styles from './styles.module.css';
 
-function QuickActions() {
+function QuickActions({ activeMessageCard, activeTab, activeVoiceCard }) {
+	console.log('activeVoiceCard', activeVoiceCard);
+	console.log('activeMessageCard', activeMessageCard);
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Recently used Quick actions</div>

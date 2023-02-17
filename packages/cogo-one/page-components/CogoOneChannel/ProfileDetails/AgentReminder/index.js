@@ -1,21 +1,22 @@
 import { Toast, Button, Timepicker, Input, Datepicker, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-// import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useCreateCommunicationLog from '../../../../hooks/useCreateCommunication';
 import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicationLog';
+import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
 function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
+	const { user_id } = getActiveCardDetails(activeMessageCard);
+
 	const [inputValue, setInputValue] = useState({
 		title       : '',
 		description : '',
 	});
 	const [date, setDate] = useState('');
-	// console.log('date', date);
 	const [time, setTime] = useState({
 		start_time : '',
 		end_time   : '',
@@ -55,6 +56,12 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
 			end_time   : '',
 		});
 	};
+
+	if (isEmpty(user_id)) {
+		return (
+			<div className={styles.empty_container}>No Data Found...</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

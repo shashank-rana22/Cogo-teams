@@ -7,16 +7,18 @@ function useGetListNotes({ activeMessageCard, active }) {
 		method : 'get',
 	}, { manual: true });
 
+	const { agent_id, id } = activeMessageCard || {};
+
 	const fetchListNotes = async () => {
 		let payload;
 		if (active) {
 			payload = {
-				channel_chat_id : '2T85TebJo8ohRBtEJXf0',
-				agent_id        : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+				channel_chat_id: id,
+				agent_id,
 			};
 		} else {
 			payload = {
-				channel_chat_id: '2T85TebJo8ohRBtEJXf0',
+				channel_chat_id: id,
 			};
 		}
 		await trigger({
