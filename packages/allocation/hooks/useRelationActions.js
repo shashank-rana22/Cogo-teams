@@ -19,6 +19,7 @@ const useRelationActions = ({
 	confirmModalState = {},
 	setConfirmModalState = () => {},
 	checkedRowsId = [],
+	setBulkMode = () => {},
 	fetchList = () => {},
 }) => {
 	const apiName =	confirmModalState.type === 'approve_all'
@@ -54,6 +55,10 @@ const useRelationActions = ({
 				showConfirmationModal : false,
 				relationData          : {},
 			}));
+
+			if (confirmModalState.type === 'approve_all') {
+				setBulkMode(false);
+			}
 
 			Toast.success(`${TOAST_MESSAGE_MAPPING[confirmModalState.type]} successfully! Please wait 
 			for the changes to be reflected`);

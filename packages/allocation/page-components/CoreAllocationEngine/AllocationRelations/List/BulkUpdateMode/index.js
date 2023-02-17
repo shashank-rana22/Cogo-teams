@@ -98,7 +98,7 @@ function BulkUpdateMode({
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Checkbox
 						label="Bulk update mode"
-						value="bulkMode"
+						checked={bulkMode}
 						style={{ paddingLeft: '0px' }}
 						onChange={(e) => onChangeCheckbox(e)}
 					/>
@@ -145,15 +145,18 @@ function BulkUpdateMode({
 
 					</div>
 
-					<Button
-						size="md"
-						themeType="linkUi"
-						onClick={() => onClearSelection()}
-						style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
-					>
-						clear selection
+					<div className={styles.clear_selection_button_container}>
+						<Button
+							size="md"
+							themeType="linkUi"
+							onClick={() => onClearSelection()}
+							style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
+						>
+							clear selection
 
-					</Button>
+						</Button>
+					</div>
+
 				</div>
 			)}
 			<div>

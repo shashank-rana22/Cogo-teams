@@ -88,6 +88,7 @@ function List({
 						setConfirmModalState={setConfirmModalState}
 						fetchList={fetchList}
 						checkedRowsId={checkedRowsId}
+						setBulkMode={setBulkMode}
 					/>
 				</Modal>
 			)}

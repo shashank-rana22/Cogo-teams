@@ -9,6 +9,7 @@ function UserActions({
 	confirmModalState,
 	setConfirmModalState = () => {},
 	checkedRowsId,
+	setBulkMode = () => {},
 	fetchList = () => {},
 }) {
 	const requestType = confirmModalState.type;
@@ -38,6 +39,7 @@ function UserActions({
 		loadingUpdateRelations = false,
 	} = useRelationActions({
 		confirmModalState,
+		setBulkMode,
 		setConfirmModalState,
 		checkedRowsId,
 		fetchList,
