@@ -1,4 +1,4 @@
-import { Button, Toast, Pill } from '@cogoport/components';
+import { Accordion, Button, Toast, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -109,21 +109,24 @@ function FeedbackForms() {
 			<div className={styles.form_container}>
 				<div className={styles.department_status} style={{ flex: '0.3' }}>
 					{Object.keys(departmentRoleMapping).map((dept) => (
-						<div key={dept}>
-							<div
-								className={`
-								${styles.accordion} 
-								${openAccordion[dept] ? styles.open_accordion : ''}`}
-								role="button"
-								tabIndex={0}
-								onClick={() => setOpenAccordion({ [dept]: !openAccordion[dept] })}
-							>
-								<div className={styles.department}>
+						<Accordion
+							key={dept}
+							type="form"
+							title={(
+								<div
+									className={styles.department}
+									role="button"
+									tabIndex={0}
+									onClick={() => setOpenAccordion({ ...openAccordion, [dept]: !openAccordion[dept] })}
+								>
 									<p className={styles.label}>{startCase(dept)}</p>
 									<Pill color="red">Pending</Pill>
 								</div>
-
-							</div>
+							)}
+							className={`
+								${styles.accordion} 
+								${openAccordion[dept] ? styles.open_accordion : ''}`}
+						>
 							{openAccordion[dept]
 						&& 							(
 							<div className={styles.roles}>
@@ -143,7 +146,8 @@ function FeedbackForms() {
 								))}
 							</div>
 						)}
-						</div>
+
+						</Accordion>
 
 					))}
 				</div>

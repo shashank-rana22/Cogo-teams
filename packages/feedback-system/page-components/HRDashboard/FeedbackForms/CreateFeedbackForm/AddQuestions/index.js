@@ -39,12 +39,14 @@ function AddQuestions({
 	const tags = watch('tags');
 
 	useEffect(() => {
-		setQuestionActionList({
-			...questionActionList,
-			weigh   : checkedQuestions,
-			checked : checkedQuestions,
-			allList : questions,
-		});
+		if (!isEmpty(data)) {
+			setQuestionActionList({
+				...questionActionList,
+				weigh   : checkedQuestions,
+				checked : checkedQuestions,
+				allList : questions,
+			});
+		}
 	}, [data]);
 
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
@@ -60,7 +62,7 @@ function AddQuestions({
 
 	return (
 		<>
-			{questionActionList.allList?.length === 0
+			{isEmpty(questionActionList.allList)
 				? <EmptyState setOpenNewQuestionModal={setOpenNewQuestionModal} /> : (
 					<div className={styles.add_question_container}>
 						<div className={styles.header}>

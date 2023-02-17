@@ -1,5 +1,6 @@
 import { Table, Input, Button } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { getByKey } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -14,11 +15,22 @@ const LIST_COLUMNS_MAPPING = {
 };
 
 function ListItem({ item }) {
+	const Router = useRouter();
+
 	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
 		Header   : <div key={key}>{value}</div>,
 		accessor : key,
 		id       : key,
 	}));
+
+	const routeToUserDetails = (id) => {
+		if (id) {
+			Router.push(
+				'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
+				`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
+			);
+		}
+	};
 
 	const data = item.details.map((listItem) => {
 		const filteredData = {
@@ -35,7 +47,17 @@ function ListItem({ item }) {
 				<div>{getByKey(listItem, 'score', '___')}</div>
 			),
 			details: (
-				<span>View Details</span>
+				<Button
+					themeType="link"
+					className={styles.details}
+					onClick={(e) => {
+						e.stopPropogation();
+						routeToUserDetails(listItem.id);
+					}}
+				>
+					View details
+
+				</Button>
 			),
 
 		};
@@ -59,7 +81,6 @@ function ListItem({ item }) {
 				>
 					Download CSV
 				</Button>
-				{' '}
 
 			</section>
 			<Table data={data} columns={columns} />

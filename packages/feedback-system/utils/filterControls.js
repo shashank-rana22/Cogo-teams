@@ -21,8 +21,8 @@ export const getControls = () => {
 		{
 			...partnerOptions,
 			label          : 'Manager Name',
-			name           : 'performed_by_id',
-			placeholder    : 'Search..',
+			name           : 'manager_id',
+			placeholder    : 'Manager',
 			type           : 'select',
 			defaultOptions : true,
 			isClearable    : true,

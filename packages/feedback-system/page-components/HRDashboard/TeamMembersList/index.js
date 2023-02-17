@@ -1,4 +1,5 @@
-import { Accordion, Pagination } from '@cogoport/components';
+import { Button, Accordion, Pagination } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
@@ -15,6 +16,8 @@ function TeamMembersList({
 	total_count,
 	loading = false,
 }) {
+	const Router = useRouter();
+
 	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
@@ -51,6 +54,15 @@ function TeamMembersList({
 
 	];
 
+	const routeToManagerDetails = (id) => {
+		if (id) {
+			Router.push(
+				'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
+				`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
+			);
+		}
+	};
+
 	const titleSection = (i) =>	(
 		<div className={styles.accordion_item_container}>
 			<div className={styles.user_info}>
@@ -72,7 +84,17 @@ function TeamMembersList({
 
 					);
 				})}
-				<span className={styles.details}>View details</span>
+				<Button
+					themeType="link"
+					className={styles.details}
+					onClick={(e) => {
+						e.stopPropagation();
+						routeToManagerDetails(i.id);
+					}}
+				>
+					View details
+
+				</Button>
 			</div>
 
 		</div>
@@ -87,15 +109,14 @@ function TeamMembersList({
 				</Accordion>
 			))}
 
-			{total_count > 10 && (
+			{total_count > 2 && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						className="md"
-						pageRange={3}
-						pageLimit={page_limit || 10}
-						total={total_count || 0}
-						pagination={pagination}
-						setPagination={setPagination}
+						type="number"
+						currentPage={pagination}
+						totalItems={total_count || 0}
+						pageSize={page_limit || 10}
+						onPageChange={setPagination}
 					/>
 				</div>
 			)}
