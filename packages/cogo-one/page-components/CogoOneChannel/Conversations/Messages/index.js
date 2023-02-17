@@ -45,7 +45,6 @@ function Messages({ activeMessageCard = {}, firestore }) {
 		draftMessages,
 		setDraftMessages,
 		activeChatCollection,
-
 		setRoomData,
 	});
 
@@ -113,7 +112,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						)}
 						/>
 					)}
-					<ActiveModalComp />
+					<ActiveModalComp data={openModal?.data || {}} />
 				</Modal>
 			)}
 		</>
