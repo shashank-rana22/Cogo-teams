@@ -41,6 +41,8 @@ function useOnBoardVendor({
 	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
 
+		console.log(step, 'step');
+
 		setVendorInformation((pv) => {
 			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
 			return {
@@ -57,10 +59,10 @@ function useOnBoardVendor({
 		try {
 			const res = await trigger({ data: { ...payload } });
 
-			if (res?.data) {
-				Toast.success('Vendor created successfully');
-				setActiveStepper(TABS_MAPPING[step]);
-			}
+			console.log(res, 'res');
+
+			Toast.success('Vendor created successfully');
+			setActiveStepper(TABS_MAPPING[step]);
 		} catch (error) {
 			Toast.error('Something went wrong');
 		}

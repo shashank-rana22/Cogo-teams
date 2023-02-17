@@ -10,6 +10,7 @@ function VendorDetails({
 	return (
 		<div>
 			<Header />
+
 			<FormComponent
 				activeStepper={activeStepper}
 				setActiveStepper={setActiveStepper}

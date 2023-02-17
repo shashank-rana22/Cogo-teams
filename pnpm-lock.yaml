@@ -284,7 +284,7 @@ importers:
 
   packages/vendor-rm:
     specifiers:
-      '@cogoport/components': ^1.0.301
+      '@cogoport/components': ^1.0.315
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.57
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -294,7 +294,7 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.309_tjjfbzrrgezq2qg342kvjgfsxe
+      '@cogoport/components': 1.0.315_tjjfbzrrgezq2qg342kvjgfsxe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.57_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -1615,6 +1615,35 @@ packages:
 
   /@cogoport/components/1.0.309_tjjfbzrrgezq2qg342kvjgfsxe:
     resolution: {integrity: sha512-dhQ7Q+UmRxo9fcs1Sp+wI89fK1wLpcGnrdPEoQ953ZAzn/no2bmvzCTipoUzpvihCRrzxkRwDQa5aDPMSsEpKA==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.57_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      axios: 1.3.2
+      axios-hooks: 4.0.0_axios@1.3.2+react@18.2.0
+      date-fns: 2.29.3
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
+      react-hook-form: 7.43.1_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.315_tjjfbzrrgezq2qg342kvjgfsxe:
+    resolution: {integrity: sha512-MXgyybnfEZDwxgvF1hB5FmsI4oEa7cBBlCOswdlRCXUMJ9XBJFHTSZ9U8hb+d07U5bgw+7CeGa2Adm0OOCzlDg==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0

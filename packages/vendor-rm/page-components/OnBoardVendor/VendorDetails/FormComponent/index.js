@@ -19,6 +19,7 @@ function FormComponent({
 		setActiveStepper,
 		setVendorInformation,
 	});
+
 	return (
 		<div>
 			<FormLayout

@@ -1,7 +1,9 @@
 import { Button, Stepper } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState, useCallback } from 'react';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { useState, useCallback, useEffect } from 'react';
 
 import TABS_MAPPING from '../../constants/tabs';
 
@@ -9,6 +11,23 @@ import styles from './styles.module.css';
 
 function OnBoardVendor() {
 	const router = useRouter();
+
+	const { general: { query } } = useSelector((state) => state);
+
+	const { vendor_id } = query;
+
+	console.log(query, '[query');
+
+	const [{ loading: vendorLoading = false }, trigger] = useRequest({
+		url    : 'get_vendor',
+		method : 'GET',
+	}, { manual: true });
+
+	useEffect(() => {
+		if (vendor_id) {
+			trigger({ params: { id: vendor_id } });
+		}
+	}, [vendor_id, trigger]);
 
 	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[0]);
 
