@@ -1,0 +1,31 @@
+.heading {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	max-width: 200px;
+	padding: 0 8px 0 0;
+	margin-bottom: 12px;
+	cursor: pointer;
+	border-radius: 6px;
+
+	&:hover {
+		svg {
+			color: #ed3726;
+		}
+	}
+}
+
+.contract {
+	margin-bottom: 12px;
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 32px;
+	color: #000;
+}
+
+.head {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #000;
+}
