@@ -38,7 +38,6 @@ export const controls = [
 	{
 		name        : 'bank_name',
 		label       : 'Bank Name',
-		disabled    : true,
 		style       : { flexBasis: '30%', width: '360px' },
 		placeholder : 'Name of the Bank',
 		rules       : { required: 'Bank Name is required' },
@@ -47,7 +46,6 @@ export const controls = [
 	{
 		name        : 'branch_name',
 		label       : 'Branch Name',
-		disabled    : true,
 		style       : { flexBasis: '30%', width: '360px' },
 		placeholder : 'Type here to search',
 		rules       : { required: 'Branch Name is required' },

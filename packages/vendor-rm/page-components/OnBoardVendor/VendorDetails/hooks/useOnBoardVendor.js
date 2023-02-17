@@ -54,10 +54,10 @@ function useOnBoardVendor({
 
 		setVendorInformation((pv) => {
 			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-			console.log('key:: ', key);
+
 			return {
 				...pv,
-				[key]: data,
+				[key]: { ...data, document_url: formattedValues?.document_url?.finalUrl },
 			};
 		});
 
@@ -73,8 +73,6 @@ function useOnBoardVendor({
 
 			const as = `/onboard-vendor/${res.data.id}`;
 
-			console.log(href, as);
-
 			router.push(href, as);
 
 			Toast.success('Vendor created successfully');
@@ -84,16 +82,12 @@ function useOnBoardVendor({
 		}
 	};
 
-	// useEffect(() => {
-	// 	// if (vendorInformation)
-	// 	fields.forEach((field) => {
-	// 		if (field.type === 'file') {
-	// 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]?.finalUrl);
-	// 		} else {
-	// 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
-	// 		}
-	// 	});
-	// }, []);
+	useEffect(() => {
+		fields.forEach((field) => {
+			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
+		});
+		setValue('document_url', vendorInformation?.vendor_details?.document_url);
+	}, [fields, vendorInformation]);
 
 	return {
 		fields,

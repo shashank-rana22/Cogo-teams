@@ -36,7 +36,9 @@ function OnBoardVendor() {
 		}
 	}, [vendor_id, getVendor]);
 
-	const [activeStepper, setActiveStepper] = useState('vendor_details');
+	console.log(vendorInformation, 'vendorInformation');
+
+	const [activeStepper, setActiveStepper] = useState('payment_details');
 
 	console.log(activeStepper, 'activeStepper');
 
