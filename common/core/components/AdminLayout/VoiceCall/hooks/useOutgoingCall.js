@@ -35,7 +35,7 @@ function useOutgoingCall() {
 			noUserId,
 		} = voiceCall || {};
 		let payload;
-		if (noUserId) {
+		if (noUserId === null) {
 			payload = {
 				destination_number: {
 					mobile_country_code,
