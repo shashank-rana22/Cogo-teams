@@ -24,18 +24,21 @@ const useGetOmnichannelActivityLogs = ({
 	}, { manual: true });
 
 	const fetchActivityLogs = async (filters = []) => {
-		let values = {};
+		// let values = {};
 
-		filters.forEach((item) => { values = { ...values, [item]: true }; });
+		// filters.forEach((item) => { values = { ...values, [item]: true }; });
 
 		await trigger({
 			params: {
+				// user_id       : '38a3ce88-d1e4-4a55-b431-12aa334a0be1',
 				user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
-				// activity_type : activityTab,
-				activity_type : 'transactional',
+				activity_type : activityTab,
+				// activity_type : 'transactional',
 				page          : pagination,
 				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
-				t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? values : undefined,
+				t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? {
+					serial_id: filters.toString(),
+				} : undefined,
 
 			},
 		});
@@ -50,6 +53,7 @@ const useGetOmnichannelActivityLogs = ({
 		data,
 		loading,
 		fetchActivityLogs,
+		pagination,
 		setPagination,
 	};
 };
