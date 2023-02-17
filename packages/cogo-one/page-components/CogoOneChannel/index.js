@@ -80,7 +80,7 @@ function CogoOne() {
 				setAppliedFilters={setAppliedFilters}
 				status={status}
 				workPrefernce={workPrefernce}
-				MessageLoading={loading}
+				messagesLoading={loading}
 			/>
 
 			<div className={styles.chat_details_continer}>

@@ -25,7 +25,7 @@ function Customers({
 	appliedFilters = {},
 	status = '',
 	workPrefernce = () => {},
-	MessageLoading,
+	messagesLoading = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -68,7 +68,7 @@ function Customers({
 					setFilterVisible={setFilterVisible}
 					setAppliedFilters={setAppliedFilters}
 					appliedFilters={appliedFilters}
-					MessageLoading={MessageLoading}
+					messagesLoading={messagesLoading}
 				/>
 			)}
 

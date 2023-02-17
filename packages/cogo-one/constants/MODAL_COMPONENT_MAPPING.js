@@ -1,5 +1,6 @@
 import AssignToForm from '../page-components/CogoOneChannel/Conversations/Messages/ModalContent/AssignToForm';
 import InstantMessages from '../page-components/CogoOneChannel/Conversations/Messages/ModalContent/InstantMessages';
+import MarkAsClosed from '../page-components/CogoOneChannel/Conversations/Messages/ModalContent/MarkAsClosed';
 
 const MODAL_COMPONENT_MAPPING = {
 	assign           : { comp: AssignToForm, title: { name: 'Assign' }, modalSize: 'md' },
@@ -13,5 +14,6 @@ const MODAL_COMPONENT_MAPPING = {
 		modalSize: 'xs',
 
 	},
+	mark_as_closed: { comp: MarkAsClosed, title: { name: null }, modalSize: 'md' },
 };
 export default MODAL_COMPONENT_MAPPING;
