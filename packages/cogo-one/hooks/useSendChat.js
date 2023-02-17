@@ -17,7 +17,7 @@ const useSendChat = ({
 	firestore,
 	channel_type,
 	id,
-	activeChatDataCollection,
+	setRoomData,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
@@ -32,7 +32,8 @@ const useSendChat = ({
 		// const fileDetails = files?.[activeChat] || null;
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
 		// setFiles({ ...files, [activeChat]: undefined });
-		if (newMessage !== ''
+		if (
+			newMessage !== ''
 		// || fileDetails
 		) {
 			const adminChat = {
@@ -63,10 +64,13 @@ const useSendChat = ({
 		}
 	};
 	const updatetags = async (val) => {
-		await updateDoc(activeChatDataCollection, {
+		await updateDoc(messageFireBaseDoc, {
 			chat_tags  : val,
 			updated_at : Date.now(),
 		});
+		const updatedDoc = await getDoc(messageFireBaseDoc);
+		const updatedDocData = updatedDoc.data();
+		setRoomData({ ...(updatedDocData || {}), id: updatedDoc?.id });
 	};
 	return { sendChatMessage, updatetags };
 };

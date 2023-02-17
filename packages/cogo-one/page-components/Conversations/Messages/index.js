@@ -16,22 +16,22 @@ function Messages({ activeMessageCard = {}, firestore }) {
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [messages, setMessages] = useState({});
+	const [roomData, setRoomData] = useState(activeMessageCard || {});
 
+	useEffect(() => {
+		setRoomData(activeMessageCard);
+	}, [JSON.stringify(activeMessageCard)]);
 	const {
 		id = '', channel_type = '',
 		...rest
-	} = activeMessageCard || {};
+	} = roomData || {};
 
 	let activeChatCollection;
-	let activeChatDataCollection;
+
 	if (channel_type) {
 		activeChatCollection = collection(
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
-		);
-		activeChatDataCollection = doc(
-			firestore,
-			`${FIRESTORE_PATH[channel_type]}/${id}`,
 		);
 	}
 
@@ -42,7 +42,8 @@ function Messages({ activeMessageCard = {}, firestore }) {
 		draftMessages,
 		setDraftMessages,
 		activeChatCollection,
-		activeChatDataCollection,
+
+		setRoomData,
 	});
 
 	const {
@@ -69,7 +70,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 			<div className={styles.container}>
 				<Header
 					setOpenModal={setOpenModal}
-					activeMessageCard={activeMessageCard}
+					activeMessageCard={roomData}
 					restData={rest}
 					updatetags={updatetags}
 					setheaderTags={setheaderTags}
@@ -86,7 +87,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 						getNextData={getNextData}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
-						activeMessageCard={activeMessageCard}
+						activeMessageCard={roomData}
 					/>
 				</div>
 			</div>

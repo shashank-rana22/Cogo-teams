@@ -51,6 +51,7 @@ function CogoOne() {
 	});
 
 	const { messagesList = [], unReadChatsCount } = listData;
+	console.log('messagesList', messagesList);
 
 	useEffect(() => {
 		setActiveVoiceCard({});
@@ -90,7 +91,6 @@ function CogoOne() {
 							firestore={firestore}
 							activeVoiceCard={activeVoiceCard}
 						/>
-
 						<ProfileDetails
 							activeMessageCard={activeMessageCard}
 							activeTab={activeTab}

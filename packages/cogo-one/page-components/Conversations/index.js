@@ -2,12 +2,13 @@ import Messages from './Messages';
 import styles from './styles.module.css';
 import VoiceCall from './VoiceCall';
 
-function Conversations({ activeTab = '', activeMessageCard = {}, firestore, activeVoiceCard }) {
-	if (!activeMessageCard?.id && !activeVoiceCard?.Id) {
-		return (
-			<div className={styles.container} />
-		);
-	}
+function Conversations({
+	activeTab = '',
+	activeMessageCard = {},
+	firestore,
+	activeVoiceCard,
+
+}) {
 	return (
 		<div className={styles.container}>
 			{activeTab === 'message'
