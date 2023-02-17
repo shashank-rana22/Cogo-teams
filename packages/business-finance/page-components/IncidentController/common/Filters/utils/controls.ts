@@ -43,11 +43,12 @@ export const requestControls = (isSettlementExecutive = false) => {
 			],
 		},
 		{
-			name        : 'date',
-			placeholder : 'Select Date',
-			type        : 'dateRangePicker',
-			caret       : true,
-			isClearable : true,
+			name                  : 'date',
+			placeholder           : 'Select Date',
+			type                  : 'dateRangePicker',
+			isPreviousDaysAllowed : true,
+			caret                 : true,
+			isClearable           : true,
 		},
 	];
 };
