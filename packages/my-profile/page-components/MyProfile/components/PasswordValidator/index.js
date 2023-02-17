@@ -1,5 +1,3 @@
-import DotIconSvg from './icons/dot.svg';
-import TickIconSvg from './icons/tick.svg';
 import styles from './styles.module.css';
 
 const VALID_PASSWORD_MAPPINGS = {
@@ -41,7 +39,17 @@ function PasswordValidator({ password = '' }) {
 					return (
 						<div className={`item item--${key}}`} style={{ display: 'flex', alignItems: 'center' }}>
 							<div className={`icon icon--${isValid ? 'tick' : 'dot'}`}>
-								{isValid ? <TickIconSvg /> : <DotIconSvg />}
+								{isValid ? (
+									<img
+										alt="tick"
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick.svg"
+									/>
+								) : (
+									<img
+										alt="dot"
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg"
+									/>
+								)}
 							</div>
 
 							<div className="message">{message}</div>

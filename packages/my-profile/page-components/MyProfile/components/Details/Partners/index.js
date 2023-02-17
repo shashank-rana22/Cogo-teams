@@ -1,5 +1,3 @@
-import { startCase } from '@cogoport/utils';
-
 import styles from './styles.module.css';
 
 function Partners({ detailsData }) {
@@ -7,7 +5,6 @@ function Partners({ detailsData }) {
 		partner = {},
 		roles_data = [],
 		manager_data = {},
-		status = '',
 	} = detailsData || {};
 
 	return (
@@ -15,10 +12,6 @@ function Partners({ detailsData }) {
 
 			<div className={styles.header_container}>
 				<div className={styles.header_text}>Partners</div>
-
-				<div className={styles.pills_container}>
-					{startCase(status)}
-				</div>
 
 			</div>
 
