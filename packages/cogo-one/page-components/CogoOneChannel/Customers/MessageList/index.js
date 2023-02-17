@@ -22,11 +22,9 @@ function MessageList({
 	setFilterVisible = () => { },
 	setAppliedFilters = () => { },
 	appliedFilters,
+	messagesLoading = false,
 }) {
-	console.log('messagesList', messagesList);
-	const loading = false;
-
-	if (isEmpty(messagesList)) {
+	if (isEmpty(messagesList) && !messagesLoading) {
 		return (
 			<div className={styles.list_container}>
 				<div className={styles.empty_state}>
@@ -40,7 +38,6 @@ function MessageList({
 		<>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
-
 					<Input
 						size="sm"
 						prefix={<IcMSearchlight width={18} height={18} />}
@@ -48,9 +45,7 @@ function MessageList({
 						value={searchValue}
 						onChange={(val) => setSearchValue(val)}
 					/>
-
 				</div>
-
 				<div className={styles.filter_icon}>
 					<Popover
 						placement="right"
@@ -75,7 +70,7 @@ function MessageList({
 					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
 				</div>
 			</div>
-			{loading ? <LoadingState /> : (
+			{messagesLoading ? <LoadingState /> : (
 				<div className={styles.list_container}>
 
 					{(messagesList || []).map((item) => {

@@ -63,7 +63,7 @@ function Messages({ activeMessageCard = {}, firestore }) {
 
 	const {
 		comp:ActiveModalComp = null,
-		title:{ img = null, name = '' } = {}, modalSize = 'md',
+		title:{ img = null, name = null } = {}, modalSize = 'md',
 	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
 	const closeModal = () => (setOpenModal({ type: null, data: {} }));
@@ -104,13 +104,15 @@ function Messages({ activeMessageCard = {}, firestore }) {
 					placement="center"
 					className={styles.styled_ui_modal_container}
 				>
-					<Modal.Header title={(
-						<div className={styles.modal_header_title}>
-							{img && <img src={img} alt="logo" />}
-							<div className={styles.modal_title}>{name}</div>
-						</div>
+					{name && (
+						<Modal.Header title={(
+							<div className={styles.modal_header_title}>
+								{img && <img src={img} alt="logo" />}
+								<div className={styles.modal_title}>{name}</div>
+							</div>
+						)}
+						/>
 					)}
-					/>
 					<ActiveModalComp />
 				</Modal>
 			)}
