@@ -202,7 +202,6 @@ function PerformanceChart({ user_id = '' }) {
 							}}
 							enableGridX={false}
 							pointSize={7}
-							// pointColor={{ theme: 'background' }}
 							pointBorderWidth={7}
 							pointLabelYOffset={-12}
 							areaOpacity={0.25}
