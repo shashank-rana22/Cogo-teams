@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
+
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import { deptControls as departmentControls } from '../../utils/departmentControls';
 import { getControls } from '../../utils/filterControls';
@@ -233,11 +234,11 @@ function HRDashboard() {
 				<div className={styles.stats_container}>
 					<PerformanceChart />
 
-					<TeamStats
+					{/* <TeamStats
 						selectedBucket={selectedBucket}
 						setParams={setParams}
 						setSelectedBucket={setSelectedBucket}
-					/>
+					/> */}
 				</div>
 
 				<div className={styles.list_header}>

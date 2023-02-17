@@ -4,10 +4,34 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useGetFeedbackPerformanceStats from '../../hooks/useGetFeedbackPerformanceStats';
+import TeamPieChart from '../TeamPieChart';
 
 import EmptyState from './EmptyState';
 import { getMonthControls } from './getMonthControls';
 import styles from './styles.module.css';
+
+const PieData = [
+	{
+		id    : 'java',
+		label : 'java',
+		value : 195,
+	},
+	{
+		id    : 'erlang',
+		label : 'erlang',
+		value : 419,
+	},
+	{
+		id    : 'go',
+		label : 'go',
+		value : 71,
+	},
+	{
+		id    : 'solidity',
+		label : 'solidity',
+		value : 31,
+	},
+];
 
 function PerformanceChart({ user_id = '' }) {
 	const { placeholder, options } = getMonthControls;
@@ -19,7 +43,8 @@ function PerformanceChart({ user_id = '' }) {
 		setPerformanceFilter = () => { },
 	} = useGetFeedbackPerformanceStats({ user_id });
 
-	const lineData1 = [];
+	const lineData1 = ['_',
+	];
 
 	Object.keys(performanceStatsData).map((key) => {
 		const { month = '', rating = '' } = performanceStatsData[key] || {};
@@ -30,16 +55,75 @@ function PerformanceChart({ user_id = '' }) {
 
 	const newlineData = [
 		{
-			id    : 'KPI',
-			color : 'hsl(81, 70%, 50%)',
-			data  : lineData1,
+			id   : 'japan',
+			data : [
+				{
+					x : 'Jan',
+					y : 3,
+				},
+				{
+					x : 'Feb',
+					y : 3,
+				},
+				{
+					x : 'Mar',
+					y : 2,
+				},
+				{
+					x : 'Apr',
+					y : 3,
+				},
+				{
+					x : 'May',
+					y : 3,
+				},
+				{
+					x : 'Jun',
+					y : 2,
+				},
+				{
+					x : 'Jul',
+					y : 3,
+				},
+				{
+					x : 'Aug',
+					y : 3,
+				},
+				{
+					x : 'Sep',
+					y : 2,
+				},
+				{
+					x : 'Oct',
+					y : 3,
+				},
+				{
+					x : 'Nov',
+					y : 3,
+				},
+				{
+					x : 'Dec',
+					y : 2,
+				},
+			],
 		},
+
 	];
 
 	const showLoading = () => (
-		<div style={{ margin: '16px' }}>
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
-			<Placeholder style={{ marginBottom: '16px' }} width="100%" height="80px" />
+		<div style={{ margin: '16px', display: 'flex', flexDirection: 'row' }}>
+
+			<div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
+				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
+			</div>
+
+			{/* <Placeholder
+				style={{ marginBottom: '16px', borderRadius: '50%/50%', marginRight: '3%' }}
+				width="25%"
+				height="160px"
+			/>
+			<Placeholder style={{ marginBottom: '16px', borderRadius: '50%/50%' }} width="25%" height="160px" /> */}
 		</div>
 	);
 
@@ -71,84 +155,97 @@ function PerformanceChart({ user_id = '' }) {
 				</div>
 			)}
 
-			{!loading && lineData1?.length > 0 && (
-				<div style={{ height: '300px' }}>
-					<ResponsiveLine
-						data={newlineData}
-						margin={{
-							top    : 20,
-							right  : 120,
-							bottom : 90,
-							left   : 60,
-						}}
-						xScale={{
-							type    : 'point',
-							stacked : true,
-							min     : 0,
-							max     : 5,
-						}}
-						yScale={{
-							type    : 'linear',
-							min     : 'auto',
-							max     : 'auto',
-							stacked : true,
-							reverse : false,
-						}}
-						yFormat=" >-.2f"
-						axisTop={null}
-						axisRight={null}
-						axisBottom={{
-							orient         : 'bottom',
-							tickSize       : 5,
-							tickPadding    : 5,
-							tickRotation   : 0,
-							legend         : 'Month',
-							legendOffset   : 36,
-							legendPosition : 'middle',
-						}}
-						axisLeft={{
-							orient         : 'left',
-							tickValues     : [1, 2, 3, 4, 5],
-							tickSize       : 5,
-							tickPadding    : 5,
-							tickRotation   : 0,
-							legend         : 'Rating',
-							legendOffset   : -40,
-							legendPosition : 'middle',
-						}}
-						pointSize={10}
-						pointColor={{ theme: 'background' }}
-						pointBorderWidth={2}
-						pointBorderColor={{ from: 'serieColor' }}
-						pointLabelYOffset={-12}
-						useMesh
-						legends={[
-							{
-								anchor            : 'bottom-right',
-								direction         : 'column',
-								justify           : false,
-								translateX        : 100,
-								translateY        : 0,
-								itemsSpacing      : 0,
-								itemDirection     : 'left-to-right',
-								itemWidth         : 80,
-								itemHeight        : 20,
-								itemOpacity       : 0.75,
-								symbolSize        : 12,
-								symbolShape       : 'circle',
-								symbolBorderColor : 'rgba(0, 0, 0, .5)',
-								effects           : [
-									{
-										on    : 'hover',
-										style : {
-											itemBackground : 'rgba(0, 0, 0, .03)',
-											itemOpacity    : 1,
+			{!loading && lineData1?.length > 0
+			&& (
+				<div className={styles.chart_section}>
+					<div className={styles.line_graph}>
+						<ResponsiveLine
+							data={newlineData}
+							margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+							xScale={{
+								type    : 'point',
+								stacked : true,
+								min     : 0,
+								max     : 12,
+							}}
+							yScale={{
+								type     : 'linear',
+								tickSize : 5,
+								min      : 0,
+								max      : 5,
+								reverse  : false,
+								stacked  : false,
+							}}
+							yFormat=" >-.2f"
+							curve="linear"
+							lineWidth={3}
+							axisTop={null}
+							axisRight={null}
+							axisBottom={{
+								orient         : 'bottom',
+								tickSize       : 5,
+								tickPadding    : 5,
+								tickRotation   : 0,
+								legend         : 'Months',
+								legendOffset   : 36,
+								legendPosition : 'middle',
+							}}
+							axisLeft={{
+								orient         : 'left',
+								tickValues     : 5,
+								tickSize       : 5,
+								tickPadding    : 5,
+								tickRotation   : 0,
+								legend         : 'KPI',
+								legendOffset   : -40,
+								legendPosition : 'middle',
+							}}
+							enableGridX={false}
+							pointSize={7}
+							// pointColor={{ theme: 'background' }}
+							pointBorderWidth={7}
+							pointLabelYOffset={-12}
+							areaOpacity={0.25}
+							enableCrosshair={false}
+							crosshairType="top-left"
+							useMesh
+							colors={['#F2E3C3', '#F9AE64', '#828282']}
+							colorBy="index"
+							legends={[
+								{
+									anchor        : 'top-right',
+									direction     : 'row',
+									justify       : false,
+									translateX    : 0,
+									translateY    : 0,
+									itemWidth     : 100,
+									itemHeight    : 20,
+									itemsSpacing  : 4,
+									symbolSize    : 20,
+									symbolShape   : 'circle',
+									itemDirection : 'left-to-right',
+									itemTextColor : '#777',
+									effects       : [
+										{
+											on    : 'hover',
+											style : {
+												itemBackground : 'rgba(0, 0, 0, .03)',
+												itemOpacity    : 1,
+											},
 										},
-									},
-								],
-							},
-						]}
-					/>
+									],
+								},
+							]}
+						/>
+
+					</div>
+
+					<div className={styles.pie_chart}>
+						<TeamPieChart data={PieData} />
+					</div>
+					<div className={styles.pie_chart}>
+						<TeamPieChart data={PieData} />
+					</div>
 				</div>
 			)}
 		</div>
