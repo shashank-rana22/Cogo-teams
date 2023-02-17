@@ -1,4 +1,4 @@
-import { dynamic } from '@cogoport/next';
+
 import React, { useState, useEffect, useRef } from 'react';
 
 import Points from '../../../../configurations/countries_points.json';
@@ -8,7 +8,11 @@ import styles from './styles.module.css';
 
 function TheGLobe() {
 	const [countries, setCountries] = useState({ features: [] });
-	const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
+
+	let Globe = () => null
+	if (typeof window !== 'undefined') Globe = require('react-globe.gl').default
+
+
 
 	useEffect(() => {
 		setCountries(Points);
@@ -16,6 +20,19 @@ function TheGLobe() {
 
 	const globeGL = useRef();
 	const colorMode = 'light';
+
+	const globeMethods = globeGL?.current;
+
+	// Auto-rotate
+	globeMethods?.controls().autoRotate = true;
+	globeMethods?.controls().autoRotateSpeed = 0.35;
+
+	//Camera
+	console.log('camera',globeMethods?.camera());
+	globeMethods?.camera().zoom=1.2;
+	
+
+
 
 	return (
 		<div className={styles.globe_container}>

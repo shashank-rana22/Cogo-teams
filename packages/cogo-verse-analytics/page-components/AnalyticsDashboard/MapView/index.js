@@ -20,9 +20,9 @@ function MapView() {
 		setCountry(val);
 	};
 	const onSearch = () => {};
-	const options = [{ display_name: 'India', country: 'india' },
-		{ display_name: 'Thailand', country: 'thailand' },
-		{ display_name: 'Italy', country: 'italy' }];
+	const options = [{ display_name: 'India', country: 'india',lat: 28.7,long: 77.1 },
+		{ display_name: 'Thailand', country: 'thailand', lat: 13.7,long: 100.5 },
+		{ display_name: 'Italy', country: 'italy', lat: 41.9,long: 12.4 }];
 
 	const maxDate = new Date();
 
@@ -104,7 +104,6 @@ function MapView() {
 					<div className={styles.left_stats}>
 						{
 							CONVERSATIONS.map((stat) => {
-								console.log('stat', stat);
 								const { value, title, icon_bg } = stat;
 								return (
 									<div className={styles.the_stat}>
