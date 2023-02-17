@@ -7,18 +7,17 @@ function Header(props) {
 	const {
 		params,
 		setParams,
-		loading,
+		disabled,
 		setShowCreateConfig,
 	} = props;
 
 	return (
 		<div className={styles.header_container}>
-			<ConfigFilters params={params} setParams={setParams} disabled={loading} />
+			<ConfigFilters params={params} setParams={setParams} disabled={disabled} />
 
 			<Button
 				size="md"
 				themeType="accent"
-				disabled={loading}
 				onClick={() => setShowCreateConfig(true)}
 			>
 				CREATE CONFIG

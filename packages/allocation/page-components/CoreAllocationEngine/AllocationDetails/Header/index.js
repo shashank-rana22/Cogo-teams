@@ -7,17 +7,20 @@ import ApproveDetails from './ApproveDetails';
 import DetailFilters from './DetailFilters';
 import styles from './styles.module.css';
 
-function Header({
-	params,
-	setParams,
-	partner_id,
-	locale,
-	debounceQuery,
-	searchValue,
-	setSearchValue,
-	listRefetch,
-	instanceStatus,
-}) {
+function Header(props) {
+	const {
+		params,
+		setParams,
+		disabled,
+		partner_id,
+		locale,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
+		listRefetch,
+		instanceStatus,
+	} = props;
+
 	const [showApprove, setShowApprove] = useState(false);
 
 	return (
@@ -36,10 +39,15 @@ function Header({
 					setGlobalSearch={setSearchValue}
 					debounceQuery={debounceQuery}
 					value={searchValue}
+					disabled={disabled}
 				/>
 			</div>
 
-			<DetailFilters params={params} setParams={setParams} />
+			<DetailFilters
+				params={params}
+				setParams={setParams}
+				disabled={disabled}
+			/>
 
 			<div>
 				<Button
@@ -47,7 +55,7 @@ function Header({
 					themeType="accent"
 					style={{ marginLeft: '8px' }}
 					onClick={() => setShowApprove(true)}
-					disabled={instanceStatus === 'completed'}
+					disabled={instanceStatus === 'completed' || disabled}
 				>
 					Approve
 				</Button>

@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import useListAllocationQuotas from '../../../hooks/useListAllocationQuotas';
 
@@ -30,7 +31,7 @@ function AllocationQuotas() {
 				onClickCreateQuota={() => setQuotaItem(true)}
 				params={params}
 				setParams={setParams}
-				loading={listLoading}
+				disabled={listLoading || isEmpty(data?.list)}
 				toggleRoleType={toggleRoleType}
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}

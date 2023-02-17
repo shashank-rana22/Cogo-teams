@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		loading,
+		disabled,
 		setParams,
 		toggleRoleType,
 		onClickCreateQuota,
@@ -22,7 +22,6 @@ function Header(props) {
 				size="md"
 				offLabel="Role"
 				onLabel="User"
-				disabled={loading}
 				value={toggleRoleType}
 				onChange={(e) => setParams((pv) => ({
 					...pv,
@@ -42,14 +41,13 @@ function Header(props) {
 						setGlobalSearch={setSearchValue}
 						debounceQuery={debounceQuery}
 						value={searchValue}
-						disabled={loading}
+						disabled={disabled}
 					/>
 				</div>
 
 				<Button
 					size="md"
 					themeType="accent"
-					disabled={loading}
 					onClick={onClickCreateQuota}
 				>
 					CREATE QUOTA

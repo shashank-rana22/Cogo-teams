@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import useAllocationRelations from '../../../hooks/useListAllocationRelations';
 
 import CreateRelationModal from './CreateRelationModal';
@@ -36,7 +38,7 @@ function Relations() {
 				setShowCreateRelationModal={setShowCreateRelationModal}
 				setParams={setParams}
 				params={params}
-				loading={loading}
+				disabled={loading || isEmpty(list)}
 				setActiveTab={setActiveTab}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
