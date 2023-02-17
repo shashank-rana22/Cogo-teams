@@ -11,6 +11,9 @@ import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
+	console.log('activeVoiceCard', activeVoiceCard);
+	console.log('activeTab', activeTab);
+	console.log('activeMessageCard', activeMessageCard);
 	const { user_id: userId } = activeVoiceCard || {};
 	const { user_id } = getActiveCardDetails(activeMessageCard);
 	const { user_id: mobileNumber } = activeMessageCard || {};
@@ -103,7 +106,7 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 					name={name}
 					// user_details={user_details}
 					// agentId={agent_id}
-					noUserId={activeTab === 'message' ? user_id : id}
+					noUserId={USER_ID}
 				/>
 
 			)}
