@@ -8,7 +8,6 @@
 	border-radius: 8px;
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 
-
 	&.orange {
 		background: #fdf4f3;
 		border: 1px solid #ee3425;
@@ -19,7 +18,6 @@
 		align-items: flex-start;
 	}
 }
-
 
 .name_container {
 	display: flex;

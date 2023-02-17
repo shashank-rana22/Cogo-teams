@@ -96,7 +96,7 @@ const columnsMapping = [
 				<Tooltip content={renderToolTip} placement="bottom">
 					<div className={styles.overflow_flex}>
 						<div className={styles.roles_container}>
-							{startCase((users, '[0].name', '___'))}
+							{startCase(getByKey(users, '[0].name', '___'))}
 						</div>
 						{totalUsers > 1 && (
 							<strong>
