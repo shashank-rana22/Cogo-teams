@@ -27,7 +27,6 @@ function asyncFieldsLocations() {
 		},
 	};
 }
-
 function asyncFieldsPartner() {
 	return {
 		labelKey    : 'business_name',
