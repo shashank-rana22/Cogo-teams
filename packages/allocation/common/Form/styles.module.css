@@ -8,6 +8,10 @@
 	gap: 16px;
 	align-items: center;
 	justify-content: space-between;
+
+	:global(.ui_radiogroup_container){
+		padding: 0px;
+	}
 }
 
 .form_group:not(:first-child) { margin: 16px 0; }
