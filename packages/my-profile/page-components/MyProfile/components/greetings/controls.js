@@ -4,6 +4,8 @@ import options from './utils/languageOptions';
 
 const uploadIcon = () => <IcMUpload height={20} width={20} />;
 
+const EMAIL = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+
 const getControls = (detailsData) => [
 
 	{
@@ -38,11 +40,17 @@ const getControls = (detailsData) => [
 	{
 		name        : 'email',
 		label       : 'Email',
-		type        : 'text',
+		type        : 'email',
 		span        : 12,
 		placeholder : 'Enter name',
 		value       : detailsData?.email,
-		rules       : { required: 'Required' },
+		rules       : {
+			required : 'Required',
+			pattern  : {
+				value   : EMAIL,
+				message : 'Please provide us your valid email address',
+			},
+		},
 	},
 
 	{
