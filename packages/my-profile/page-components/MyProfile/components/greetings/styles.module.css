@@ -130,6 +130,10 @@
   margin-right: 12px;
   background: #fff;
   border-radius: 12px;
+
+  @media (max-width: 768px) {
+    margin-right: 0px;
+  }
 }
 
 .empty_background {

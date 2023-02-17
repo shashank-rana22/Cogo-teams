@@ -32,7 +32,7 @@ function Services({ detailsData }) {
 				</div>
 
 				<div className={styles.location_container}>
-					<div className={styles.label_text}>Reporting Zone</div>
+					<div className={styles.label_text_reporting}>Reporting Zone</div>
 					<div className={styles.value_text}>
 						{zone?.name || '-'}
 					</div>

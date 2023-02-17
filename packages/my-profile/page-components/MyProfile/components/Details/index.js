@@ -19,7 +19,7 @@ function Details({
 					<Services detailsData={detailsData} />
 				</div>
 
-				<div className={styles.card_details}>
+				<div className={styles.tagged_card_details}>
 					<TaggedAgent detailsData={detailsData} />
 				</div>
 
