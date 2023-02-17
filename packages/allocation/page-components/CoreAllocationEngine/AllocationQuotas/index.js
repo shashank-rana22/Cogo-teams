@@ -1,5 +1,4 @@
 import { Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 
 import useListAllocationQuotas from '../../../hooks/useListAllocationQuotas';
 

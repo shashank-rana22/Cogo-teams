@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import useAllocationRelations from '../../../hooks/useListAllocationRelations';
 
 import CreateRelationModal from './CreateRelationModal';

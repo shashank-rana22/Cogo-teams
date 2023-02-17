@@ -46,6 +46,7 @@ function Header(props) {
 						service_type : e?.target?.checked ? 'partner' : 'organization',
 					},
 					})}
+					disabled={disabled}
 				/>
 
 				<div className={styles.filter_container}>
@@ -70,6 +71,7 @@ function Header(props) {
 						size="md"
 						themeType="accent"
 						onClick={onClickCreateReqBtn}
+						disabled={disabled}
 					>
 						CREATE REQUEST
 					</Button>

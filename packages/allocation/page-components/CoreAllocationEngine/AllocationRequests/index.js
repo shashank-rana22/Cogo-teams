@@ -38,9 +38,8 @@ function Requests() {
 		<section className={styles.container}>
 			<Header
 				onClickCreateReqBtn={() => setShowModal(true)}
-				disabled={listLoading || isEmpty(data?.list)}
+				disabled={listLoading}
 				onChangeParams={onChangeParams}
-				// Either setParams or onChangeParams
 				params={params}
 				setParams={setParams}
 				bulkMode={bulkMode}
