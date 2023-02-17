@@ -3,17 +3,8 @@ import { useRequest } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
-// import { useSelector } from '@cogoport/store';
 
-function useOutgoingCall() {
-	const {
-		user_data,
-	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
-
-	const { user: { id: agent_id = '' } } = user_data;
-
+function useOutgoingCall({ number }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_outgoing_call',
 		method : 'post',
@@ -29,23 +20,22 @@ function useOutgoingCall() {
 		const {
 			orgId,
 			userId,
-			mobile_number,
 			mobile_country_code,
-			// agentId,
-			noUserId,
+			agentId,
+			emptyState,
 		} = voiceCall || {};
 		let payload;
-		if (noUserId === null) {
+		if (emptyState) {
 			payload = {
 				destination_number: {
 					mobile_country_code,
-					mobile_number,
+					mobile_number: number,
 				},
-				agent_id,
+				agent_id: agentId,
 			};
 		} else {
 			payload = {
-				agent_id,
+				agent_id        : agentId,
 				organization_id : orgId,
 				user_id         : userId,
 			};

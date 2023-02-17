@@ -18,7 +18,7 @@ const useGetVoiceCallList = ({ activeTab }) => {
 
 	const voiceCallList = async () => {
 		const res = await trigger({
-			params: { page: pagination },
+			params: { page: pagination, source: 'omnichannel' },
 		});
 		if (res.data) {
 			const { list = [], ...paginationData } = res?.data || {};
