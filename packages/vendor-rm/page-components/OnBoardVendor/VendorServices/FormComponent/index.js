@@ -13,6 +13,8 @@ function FormComponent({
 	control,
 	errors = {},
 	activeStepper = {},
+	watch = () => {},
+	setValue = () => {},
 }) {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.main_body}>
@@ -26,6 +28,8 @@ function FormComponent({
 							control={control}
 							name={controlItem.name}
 							error={errors?.[controlItem.name]}
+							watch={watch}
+							setValue={setValue}
 						/>
 					);
 				}

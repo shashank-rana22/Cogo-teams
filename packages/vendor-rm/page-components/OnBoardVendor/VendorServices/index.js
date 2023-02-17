@@ -17,6 +17,8 @@ function VendorServices({
 		onSubmit = () => {},
 		loading = false,
 		handleBackLink = () => {},
+		watch = () => {},
+		setValue,
 	} = useVendorServices({
 		setActiveStepper,
 		setVendorInformation,
@@ -36,6 +38,8 @@ function VendorServices({
 				errors={errors}
 				loading={loading}
 				activeStepper={activeStepper}
+				watch={watch}
+				setValue={setValue}
 			/>
 		</div>
 	);
