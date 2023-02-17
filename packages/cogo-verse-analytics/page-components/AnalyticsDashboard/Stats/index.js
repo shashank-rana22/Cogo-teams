@@ -14,8 +14,8 @@ function Stats() {
 
 			<div className={styles.cogoverse_header}>
 				Welcome to the
-				{' '}
-				<span>CogoVerse!</span>
+
+				<div className={cl`${styles.cogoverse}`}>CogoVerse Analytics!</div>
 			</div>
 
 			{/* Primary Stats --------------------------------------------------------------------------- */}
