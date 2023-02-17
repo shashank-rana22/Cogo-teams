@@ -30,6 +30,7 @@ function Requests() {
 		setBulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
+		onChangeCheckbox,
 		...restProps
 	} = useListAllocationRequests();
 
@@ -37,7 +38,7 @@ function Requests() {
 		<section className={styles.container}>
 			<Header
 				onClickCreateReqBtn={() => setShowModal(true)}
-				loading={listLoading}
+				disabled={listLoading || isEmpty(data?.list)}
 				onChangeParams={onChangeParams}
 				// Either setParams or onChangeParams
 				params={params}
@@ -47,6 +48,7 @@ function Requests() {
 				checkedRowsId={checkedRowsId}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				onChangeCheckbox={onChangeCheckbox}
 				{...restProps}
 			/>
 
@@ -72,18 +74,9 @@ function Requests() {
 					{!isEmpty(checkedRowsId)
 						? (
 							<BulkUpdateConfirmation
-								key={listLoading}
 								onCloseModal={onCloseModal}
 								checkedRowsId={checkedRowsId}
-								onResettingBulkMode={() => {
-									setParams((pv) => ({
-										...pv,
-										filters: {
-											...(pv.filters || {}),
-											id: undefined,
-										},
-									}));
-								}}
+								onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
 							/>
 						) : (
 							<CreateRequestModalContent

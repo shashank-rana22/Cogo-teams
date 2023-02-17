@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function Header(props) {
 	const {
 		onClickCreateReqBtn,
-		loading,
+		disabled,
 		params,
 		setParams,
 		onChangeParams,
@@ -38,7 +38,7 @@ function Header(props) {
 					size="md"
 					offLabel="Organization"
 					onLabel="Partner"
-					disabled={loading}
+					disabled={disabled}
 					value={toggleValue}
 					onChange={(e) => onChangeParams({
 						filters:
@@ -57,20 +57,20 @@ function Header(props) {
 							setGlobalSearch={setSearchValue}
 							debounceQuery={debounceQuery}
 							value={searchValue}
-							disabled={loading}
+							disabled={disabled}
 						/>
 					</div>
 
 					<ConfigFilters
 						params={params}
 						setParams={setParams}
-						disabled={loading}
+						disabled={disabled}
 					/>
 
 					<Button
 						size="md"
 						themeType="accent"
-						disabled={loading}
+						disabled={disabled}
 						onClick={onClickCreateReqBtn}
 					>
 						CREATE REQUEST
@@ -82,10 +82,10 @@ function Header(props) {
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Checkbox
 						label="Bulk update mode"
-						value="bulkMode"
+						checked={bulkMode}
 						style={{ paddingLeft: '0px' }}
 						onChange={(e) => onChangeCheckbox(e)}
-						disabled={loading}
+						disabled={disabled}
 					/>
 
 					<Button
