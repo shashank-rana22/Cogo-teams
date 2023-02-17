@@ -3,6 +3,8 @@ import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useState } from 'react';
 
+import SwitchAccounts from '../../SwitchAccounts';
+
 import styles from './styles.module.css';
 
 const SESSION_DISABLED = ['logout', 'logout_all_accounts'];
@@ -14,6 +16,7 @@ function Items({
 	timeLeft,
 	loading,
 	openPopover,
+	refetch = () => {},
 	checkIfSessionExpiring,
 }) {
 	const [showSubNav, setShowSubNav] = useState(false);
@@ -79,9 +82,9 @@ function Items({
 				{singleNav}
 				{
 					(item || []).map((singleOption) => {
-						const disable_check = SESSION_DISABLED.includes(singleOption.name);
+						const disable_check = SESSION_DISABLED.includes(singleOption?.name);
 
-						if (singleOption.name === 'switch_account' && userSessionMappings?.length <= 1) {
+						if (singleOption?.name === 'switch_account' && userSessionMappings?.length <= 1) {
 							return null;
 						}
 
@@ -89,18 +92,6 @@ function Items({
 							<div
 								className={styles.accordion}
 								aria-expanded={showSubNav}
-								onClick={() => {
-									if (singleOption?.fun) {
-										singleOption.fun();
-									}
-									if (singleOption.href) {
-										// eslint-disable-next-line no-undef
-										window.open(singleOption.href, '_blank');
-									}
-									if (singleOption?.name === 'switch_account') {
-										handlePopover();
-									}
-								}}
 								key={singleOption.title}
 								style={{
 									pointerEvents : disable_check && loadingState ? 'none' : '',
@@ -110,13 +101,43 @@ function Items({
 							>
 								{!(singleOption?.name === 'logout_all_accounts'
 								&& (userSessionMappings || []).length < 2) && (
-									<div className={styles.active_item}>
+									<div
+										className={styles.active_item}
+										onClick={() => {
+											if (singleOption?.fun) {
+												singleOption.fun();
+											}
+											if (singleOption.href) {
+												// eslint-disable-next-line no-undef
+												window.open(singleOption.href, '_blank');
+											}
+											if (singleOption?.name === 'switch_account') {
+												handlePopover();
+											}
+										}}
+										aria-hidden
+									>
 										{singleOption.icon()}
 										<span>
 											{singleOption.title}
 										</span>
 									</div>
 								) }
+								{
+									openPopover
+									&& singleOption?.name === 'switch_account' && (
+										<div>
+											<SwitchAccounts
+												userMappings={userSessionMappings}
+												refetch={refetch}
+												setOpenPopover={setOpenPopover}
+												loading={loading}
+												checkIfSessionExpiring={checkIfSessionExpiring}
+												timeLeft={timeLeft}
+											/>
+										</div>
+									)
+								}
 							</div>
 						);
 					})
@@ -126,7 +147,8 @@ function Items({
 			{showSubNav && (
 				<div className={styles.button_container}>
 					<Button
-						size="lg"
+						size="md"
+						style={{ width: '100%', marginTop: 10 }}
 						themeType="accent"
 						onClick={redirect}
 						disabled={loadingState}

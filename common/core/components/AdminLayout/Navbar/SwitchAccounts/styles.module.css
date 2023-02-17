@@ -5,8 +5,16 @@
     background: #ffffff;
     z-index: -1;
     transition: 0.5s;
+
+    @media (max-width: 576px) {
+        position: static;
+    }
 }
 
 .button_container {
-    margin: 10px;   
+    margin: 10px; 
+    
+    @media (max-width: 576px) {
+        padding-bottom: 10px;
+    }   
 }

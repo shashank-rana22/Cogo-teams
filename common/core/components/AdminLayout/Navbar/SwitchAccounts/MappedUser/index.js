@@ -67,7 +67,16 @@ function MappedUser({
 									style={{ marginTop: '4px' }}
 								/>
 							</div>
-						) : <div className={styles.circle} />
+						) : (
+							<div>
+								<IcMFtick
+									fill="#bdbdbd"
+									height="30px"
+									width="30px"
+									style={{ marginTop: '4px' }}
+								/>
+							</div>
+						)
 				}
 				<div className={styles.profile_container}>
 					<div className={styles.profile_pic}>

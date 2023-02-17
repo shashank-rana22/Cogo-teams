@@ -69,6 +69,7 @@ function ProfileManager({
 				resetSubnavs={resetSubnavs}
 				timeLeft={timeLeft}
 				loading={loading}
+				refetch={refetch}
 				setOpenPopover={setOpenPopover}
 				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}

@@ -13,6 +13,10 @@
 	justify-content: space-between;
 	align-items: center;
 	margin: 0px 10px 5px 5px;
+	
+	@media (max-width: 576px) {
+        width: 200px;
+    }
 }
 
 .profile_pic {
@@ -51,6 +55,13 @@
 	font-weight: 500;
 	color: #303b67;
 	margin: 0px 10px 0px 10px;
+
+	@media (max-width: 576px) {
+		width: 100px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}  
 }
 
 .profile_email {
@@ -62,6 +73,13 @@
 	white-space: nowrap;
 	overflow: hidden;
 	width: 165px;
+
+	@media (max-width: 576px) {
+		width: 100px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}  
 }
 
 .icon_container {
@@ -81,8 +99,8 @@
 }
 
 .circle {
-	height: 20px;
-	width: 20px;
+	height: 2vh;
+	width: 10vw;
 	border: 1px solid #333333;
 	border-radius: 100%;
 	background: #ffffff;
