@@ -10178,6 +10178,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_omnichannel_customer_insights',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 
 	],
 };

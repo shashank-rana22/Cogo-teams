@@ -4,32 +4,39 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+
 }
 
 .container::-webkit-scrollbar {
     display: none;
 }
 
+.organisation_div{
+	margin-top: 10px;
+	border: 1px solid #E0E0E0;
+	padding: 10px;
+}
+
 .wrap {
     width: 100%;
     display: flex;
     align-items: center;
+	justify-content: space-between;
+
+	:global{
+		.ui_select_display_container{
+			height: 30px !important;
+			width: 120px !important;
+		}
+	}
 }
 
-.text {
-    font-size: 12px;
-    color: #828282;
-
-    span {
-        color: #221f20;
-    }
-}
 
 .stats_div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 24px;
+    margin-top: 20px;
 }
 
 .top {
@@ -55,7 +62,7 @@
 .booking_div {
     display: flex;
     flex-direction: column;
-    margin-top: 38px;
+    margin-top: 10px;
 }
 
 .comm_tex {
