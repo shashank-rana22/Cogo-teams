@@ -38,13 +38,12 @@ function ListInstances({ item }) {
 	const { push } = useRouter();
 
 	const onRowClick = (listItem) => {
-		const status = getByKey(listItem, 'status', undefined);
-		const selectedInstanceId = getByKey(listItem, 'serial_id', undefined);
+		const { status, id } = listItem;
 
 		if (['pending_approval', 'completed'].includes(status)) {
 			push(
 				'/allocation/core-engine/details/[instance_id]',
-				`/allocation/core-engine/details/${selectedInstanceId}`,
+				`/allocation/core-engine/details/${id}`,
 			);
 		}
 	};
