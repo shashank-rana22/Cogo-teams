@@ -1,5 +1,6 @@
 export const TEXTURES = {
-	light : { one: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/2af450feb7319ca00b3dcafc744bbb98/GL_TEXTURE.jpg', two: '' },
+	light : { one: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/2af450feb7319ca00b3dcafc744bbb98/GL_TEXTURE.jpg', 
+	two: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/ae1afe4bbf78770d127d65b006c2051c/mp_text_5.jpg' },
 	dark  : { one: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dark-earth.jpg' },
 
 };

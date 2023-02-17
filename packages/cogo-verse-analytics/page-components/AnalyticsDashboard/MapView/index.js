@@ -17,12 +17,13 @@ function MapView() {
 	const [date, setDate] = useState('');
 
 	const onChange = (val) => {
+		console.log("val", val);
 		setCountry(val);
 	};
 	const onSearch = () => {};
-	const options = [{ display_name: 'India', country: 'india',lat: 28.7,long: 77.1 },
-		{ display_name: 'Thailand', country: 'thailand', lat: 13.7,long: 100.5 },
-		{ display_name: 'Italy', country: 'italy', lat: 41.9,long: 12.4 }];
+	const options = [{ display_name: 'India', country: 'india',lat: 28.7,lng: 77.1 },
+		{ display_name: 'Thailand', country: 'thailand', lat: 13.7,lng: 100.5 },
+		{ display_name: 'Italy', country: 'italy', lat: 41.9,lng: 12.4 }];
 
 	const maxDate = new Date();
 
@@ -31,8 +32,8 @@ function MapView() {
 			<div className={styles.top_content}>
 				<div className={styles.select_container}>
 					<Select
-						value={country}
-						onChange={onChange}
+						value={country?.country}
+						onChange={(_,obj)=>onChange(obj)}
 						placeholder="Select Country"
 						options={options}
 						id="select_country"
@@ -56,7 +57,7 @@ function MapView() {
 			</div>
 			<div className={styles.circle_content}>
 				<div className={styles.circle_frame}>
-					<div className={styles.globe_container}><TheGlobe /></div>
+					<div className={styles.globe_container}><TheGlobe country={country}/></div>
 					{
 					circleStats.map(
 						(stat) => {
@@ -77,6 +78,8 @@ function MapView() {
 
 				</div>
 			</div>
+			
+		{/* Footer ------------------------------------------------------- */}
 			<div className={styles.footer_stats}>
 				<div className={styles.avg_response_time}>
 					<div className={styles.response_time_title}>
@@ -124,7 +127,7 @@ function MapView() {
 				</div>
 			</div>
 
-			{/* The Globe */}
+
 
 		</div>
 
