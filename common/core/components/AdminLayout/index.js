@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import VoiceCall from './VoiceCall';
 
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
@@ -61,6 +62,7 @@ function AdminLayout({
 					mobileShow={showMobileNavbar}
 				/>
 			) : null}
+			<VoiceCall />
 		</div>
 	);
 }
