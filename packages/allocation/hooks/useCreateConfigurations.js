@@ -54,15 +54,6 @@ const useCreateConfigurations = ({
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
-		// if (viewType === 'edit') {
-		// 	newControl = {
-		// 		...newControl,
-		// 		rules: {
-		// 			required: false,
-		// 		},
-		// 	};
-		// }
-
 		if (newControl.name === 'user_ids') {
 			if (roleIds) {
 				newControl = {

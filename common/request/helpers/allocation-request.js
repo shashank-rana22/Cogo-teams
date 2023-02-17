@@ -22,13 +22,6 @@ const allocationRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_B
 allocationRequest.interceptors.request.use((oldConfig) => {
 	const { authkey = '', ...newConfig } = oldConfig;
 
-	//! Delete this before merge || only for temporary testing
-	newConfig.data = {
-		...newConfig.data,
-		performed_by_id   : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-		performed_by_type : 'agent',
-	};
-
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
 	const authorizationparameters = getAuthorizationParams(store, authkey || newConfig.url);

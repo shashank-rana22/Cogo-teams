@@ -69,19 +69,6 @@ const columnsMapping = [
 		),
 		flex: 1.5,
 	},
-	// {
-	// 	key      : 'action',
-	// 	getValue : () => (
-	// 		<div
-	// 			className={styles.svg_container}
-	// 			onClick={() => {}}
-	// 			role="presentation"
-	// 		>
-	// 			<IcMOverflowDot height={16} width={16} />
-	// 		</div>
-	// 	),
-	// 	flex: 0,
-	// },
 ];
 
 function ListItem(props) {

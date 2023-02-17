@@ -3,7 +3,6 @@
 	flex-direction: column;
 	padding: 16px;
 	margin: 16px 0;
-	cursor: pointer;
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
@@ -11,6 +10,10 @@
 	&.orange {
 		background: #fdf4f3;
 		border: 1px solid #ee3425;
+	}
+
+	&.selected{
+		cursor: pointer;
 	}
 
 	@media (min-width: 768px) {
@@ -31,7 +34,7 @@
 
 .reason_text {
 	display: block;
-	max-width: 200px;
+	max-width: 150px;
 	overflow: hidden;
 	color: #221f20;
 	text-overflow: ellipsis;

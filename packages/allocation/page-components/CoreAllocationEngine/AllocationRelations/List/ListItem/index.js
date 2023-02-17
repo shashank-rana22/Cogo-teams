@@ -71,7 +71,7 @@ const COLUMNS_MAPPING = [
 				<div className={styles.reason_text}>{getByKey(item, 'reason', '___')}</div>
 			</Tooltip>
 		),
-		flex : 1.5,
+		flex : 1.0,
 		tab  : ['active', 'pending'],
 	},
 	{
@@ -155,7 +155,7 @@ function ListItem({
 
 	return (
 		<div
-			className={`${styles.list_item_container} ${isSelected ? styles.orange : null}`}
+			className={`${styles.list_item_container} ${isSelected && styles.orange} ${bulkMode && styles.selected}`}
 			role="presentation"
 			onClick={() => onCardClick(item)}
 		>
