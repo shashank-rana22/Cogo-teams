@@ -268,7 +268,7 @@ importers:
 
   packages/cogo-one:
     specifiers:
-      '@cogoport/components': ^1.0.309
+      '@cogoport/components': ^1.0.313
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.57
       '@cogoport/next': workspace:0.1.0
@@ -278,7 +278,7 @@ importers:
       firebase: ^9.17.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.311_tjjfbzrrgezq2qg342kvjgfsxe
+      '@cogoport/components': 1.0.313_tjjfbzrrgezq2qg342kvjgfsxe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.57_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -3787,18 +3787,6 @@ packages:
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-calendar/3.9.0:
-    resolution: {integrity: sha512-KpAu1MKAGFw5hNwlDnWsHWqI9i/igAB+8jH97YV7QpC2v7rlwNEU5i6VMFb73lGRacuejM/Zd2LklnEzkFV3XA==}
-    dependencies:
-      '@types/react': 18.0.28
-    dev: false
-
-  /@types/react-dom/18.0.10:
-    resolution: {integrity: sha512-E42GW/JA4Qv15wQdqJq8DL4JhNpB3prJgjgapN3qJT9K2zO5IIAQh4VXvCEDupoqAwnz0cY4RlXeC/ajX5SFHg==}
-    dependencies:
-      '@types/react': 18.0.28
-    dev: false
-
   /@types/react/18.0.28:
     resolution: {integrity: sha512-RD0ivG1kEztNBdoAK7lekI9M+azSnitIn85h4iOiaLjaTrMjzslhaqCGaI4IyCJ1RljWiLCEu4jyrLLgqxBTew==}
     dependencies:
@@ -3946,10 +3934,6 @@ packages:
       '@typescript-eslint/types': 5.52.0
       eslint-visitor-keys: 3.3.0
     dev: true
-
-  /@wojtekmaj/date-utils/1.1.2:
-    resolution: {integrity: sha512-06PQad/6pyYDjInBW2ih4Oy30EAg0mtXTCz+b/fGwzN2JB2X2Zsa4QtHl4I8M+IaCKN8bwj61OW3XAWxh+D9hA==}
-    dev: false
 
   /accept-language/3.0.18:
     resolution: {integrity: sha512-sUofgqBPzgfcF20sPoBYGQ1IhQLt2LSkxTnlQSuLF3n5gPEqd5AimbvOvHEi0T1kLMiGVqPWzI5a9OteBRth3A==}
@@ -4302,6 +4286,14 @@ packages:
 
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
+    dev: false
+
+  /cliui/7.0.4:
+    resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
+    dependencies:
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      wrap-ansi: 7.0.0
     dev: false
 
   /color-convert/1.9.3:
@@ -4664,10 +4656,6 @@ packages:
   /dequal/2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
-    dev: false
-
-  /detect-element-overflow/1.3.1:
-    resolution: {integrity: sha512-E29Axx3pyotgg3j5HUbusTTarjPUHsC02p7fZ3/cnUufyK0kx5RzRA9waBvrKFWGc/LWiRj3pD9Y3y+mymMYiQ==}
     dev: false
 
   /dir-glob/3.0.1:
@@ -5392,12 +5380,6 @@ packages:
       get-intrinsic: 1.2.0
     dev: true
 
-  /get-user-locale/1.5.1:
-    resolution: {integrity: sha512-WiNpoFRcHn1qxP9VabQljzGwkAQDrcpqUtaP0rNBEkFxJdh4f3tik6MfZsMYZc+UgQJdGCxWEjL9wnCUlRQXag==}
-    dependencies:
-      lodash.memoize: 4.1.2
-    dev: false
-
   /git-precommit-checks/3.1.0:
     resolution: {integrity: sha512-l3gCICC/Sgpe+WhhImzX3qx05L7nXpyXZa+lomR0OWcqHxYdKKNf1q0hp9/BaY42Kn5JP45G68Z6C9tDgp/tOg==}
     engines: {node: '>=v10.0.0'}
@@ -6035,10 +6017,6 @@ packages:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
 
-  /lodash.memoize/4.1.2:
-    resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
-    dev: false
-
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
@@ -6092,10 +6070,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.14
-    dev: false
-
-  /make-event-props/1.4.2:
-    resolution: {integrity: sha512-ZOHqRpLn2htnMd9zqhE+wticVr31PdwrJXHcvEEdKgrfjCOuSDn8urG9SDzEIqzP1ayp1uTdDJcOiTlJhqWpEQ==}
     dev: false
 
   /map-obj/1.0.1:
@@ -7121,37 +7095,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /react-calendar/4.0.0_react@18.2.0:
-    resolution: {integrity: sha512-y9Q5Oo3Mq869KExbOCP3aJ3hEnRZKZ0TqUa9QU1wJGgDZFrW1qTaWp5v52oZpmxTTrpAMTUcUGaC0QJcO1f8Nw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@wojtekmaj/date-utils': 1.1.2
-      clsx: 1.2.1
-      get-user-locale: 1.5.1
-      prop-types: 15.8.1
-      react: 18.2.0
-    dev: false
-
-  /react-date-picker/9.2.0_react@18.2.0:
-    resolution: {integrity: sha512-kAE7HFLq1ic4pS0Pk9SyPTjejIfjTyPov04a2eZzLxfZh8ss8EPaaaX7bBUP4RUCkbxHpR0P4UHloD0/fFDCZw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@types/react-calendar': 3.9.0
-      '@wojtekmaj/date-utils': 1.1.2
-      clsx: 1.2.1
-      get-user-locale: 1.5.1
-      make-event-props: 1.4.2
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-calendar: 4.0.0_react@18.2.0
-      react-fit: 1.5.0_react@18.2.0
-      update-input-width: 1.3.1
-    dev: false
-
   /react-date-range/1.4.0_r6j3756ioqf5pjc2u22wj25rla:
     resolution: {integrity: sha512-+9t0HyClbCqw1IhYbpWecjsiaftCeRN5cdhsi9v06YdimwyMR2yYHWcgVn3URwtN/txhqKpEZB6UX1fHpvK76w==}
     peerDependencies:
@@ -7174,20 +7117,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
-
-  /react-fit/1.5.0_react@18.2.0:
-    resolution: {integrity: sha512-U9RxtM55RrNlGZp76r3QPWwSZ74r8NUOvwxwNOk+0vLlu/oJwP+6vjCkaOTw1hf8SzY0tmI07HwDdW/2CXYeLQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@types/react': 18.0.28
-      '@types/react-dom': 18.0.10
-      detect-element-overflow: 1.3.1
-      prop-types: 15.8.1
-      react: 18.2.0
-      tiny-warning: 1.0.3
     dev: false
 
   /react-hook-form/7.43.1_react@18.2.0:
@@ -7484,6 +7413,10 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
     dev: true
+
+  /safe-buffer/5.2.1:
+    resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+    dev: false
 
   /safe-regex-test/1.0.0:
     resolution: {integrity: sha512-JBUUzyOgEwXQY1NuPtvcj/qcBDbDmEvWufhlnXZIm75DEHp+afM1r1ujJpJsV/gSM4t59tpDyPi1sd6ZaPFfsA==}
@@ -7862,10 +7795,6 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
-  /tiny-warning/1.0.3:
-    resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==}
-    dev: false
-
   /tippy.js/6.3.7:
     resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
     dependencies:
@@ -8074,10 +8003,6 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /update-input-width/1.3.1:
-    resolution: {integrity: sha512-hV2DGiSn7FKerjIXaI3s0EG/AnmAeoRTV5cvpsFcygzUzKreYj5qSu7rVihzUOEXF/MP2mjJpUzwi14sZdp0nw==}
-    dev: false
-
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
@@ -8150,7 +8075,7 @@ packages:
     engines: {node: '>=0.8.0'}
     dependencies:
       http-parser-js: 0.5.8
-      safe-buffer: 5.1.2
+      safe-buffer: 5.2.1
       websocket-extensions: 0.1.4
     dev: false
 
