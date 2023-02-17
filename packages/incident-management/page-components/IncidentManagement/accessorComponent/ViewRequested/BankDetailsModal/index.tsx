@@ -1,26 +1,30 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
 function BankDatailsModal({
 	itemData, setRemarks, onSave, onRaiseAgain,
-	setSelectedFile, selectedFile, name,
+	setSelectedFile, selectedFile, name, showModal, setShowModal,
+	loadingOnSave,
+	loadingOnRaise,
 }) {
 	const { status, userIncidentStatus, userNotes } = itemData || {};
 	const { fileName, finalUrl } = selectedFile || {};
-	const [showTdsModal, setShowTdsModal] = useState(false);
+	const { data } = itemData || {};
+	const { organization } = data || {};
+	const { businessName, tradePartyType, category_types:categoryTypes } = organization || {};
 	return (
 		<div>
 
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>
+			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
 				{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
-					&& name === 'Raise Again' ? 'Raised Again' : 'View'}
+					&& name === 'Raise Again' ? 'Raise Again' : 'View'}
 
 			</Button>
-			<Modal size="lg" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
+			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Bank Account Add/Edit" />
 				<div className={styles.rate_conatiner}>
 					<div className={styles.name_container}>
@@ -28,7 +32,7 @@ function BankDatailsModal({
 							Organizaion Name
 						</div>
 						<div className={styles.label}>
-							{itemData?.data?.organization?.businessName}
+							{businessName}
 						</div>
 					</div>
 					<div className={styles.name_container}>
@@ -36,7 +40,18 @@ function BankDatailsModal({
 							Organizaion Type
 						</div>
 						<div className={styles.type_value}>
-							{startCase(itemData?.data?.organization?.tradePartyType)}
+							{startCase(tradePartyType)}
+						</div>
+					</div>
+					<div className={styles.name_container}>
+						<div className={styles.value}>
+							Category Type
+						</div>
+						<div className={styles.category_flex}>
+							{categoryTypes?.map((itm, index) => {
+								if (index !== categoryTypes.length - 1) return `${itm},`;
+								return `${itm}`;
+							})}
 						</div>
 					</div>
 				</div>
@@ -138,7 +153,6 @@ function BankDatailsModal({
 							onChange={setSelectedFile}
 							showProgress
 							draggable
-							multiple
 							fileLink={finalUrl}
 							multipleUploadDesc="Upload Invoice"
 						/>
@@ -150,9 +164,9 @@ function BankDatailsModal({
 					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION' && name === 'Raise Again'
 						? (
 							<Button
+								disabled={finalUrl === undefined || loadingOnRaise}
 								onClick={() => {
 									onRaiseAgain();
-									setShowTdsModal(false);
 								}}
 								className={styles.raise_button}
 							>
@@ -160,10 +174,11 @@ function BankDatailsModal({
 							</Button>
 						)
 						: (
-							<Button onClick={() => {
-								onSave();
-								setShowTdsModal(false);
-							}}
+							<Button
+								disabled={loadingOnSave}
+								onClick={() => {
+									onSave();
+								}}
 							>
 								Save
 

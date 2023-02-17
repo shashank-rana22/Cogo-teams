@@ -1,20 +1,21 @@
 import { Table, Textarea, Modal, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import getModalColumns from '../getModalColumn';
 
 import styles from './styles.module.css';
 
-function SettlementModal({ itemData, setRemarks, onSave }) {
-	const [showTdsModal, setShowTdsModal] = useState(false);
+function SettlementModal({
+	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
+}) {
 	const { type, data, userNotes } = itemData || {};
 	const { settlementRequest } = data || {};
 	const { list = [] } = settlementRequest || {};
 	const columns = getModalColumns(type);
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>View</Button>
-			<Modal size="xl" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
+			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			<Modal size="xl" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Settlement" />
 				<Modal.Body>
 					<Table data={list} columns={columns} />
@@ -55,10 +56,11 @@ function SettlementModal({ itemData, setRemarks, onSave }) {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => {
-						setShowTdsModal(false);
-						onSave();
-					}}
+					<Button
+						disabled={loadingOnSave}
+						onClick={() => {
+							onSave();
+						}}
 					>
 						Save
 

@@ -17,7 +17,7 @@ const useDeleteAccept = ({ userIncidentStatus, id, remarks, reftech }) => {
 		{
 			url     : '/incident-management/incident/user-incident-status',
 			method  : 'PATCH',
-			authkey : 'patch_incident_management_status',
+			authkey : 'patch_incident_management_incident_user_incident_status',
 		},
 		{ manual: true },
 	);
@@ -35,13 +35,14 @@ const useDeleteAccept = ({ userIncidentStatus, id, remarks, reftech }) => {
 					userIncidentStatus : status,
 					id,
 					remarks,
-					performedBy        : userId,
+					createdBy          : userId,
 				},
 			});
+			Toast.success(status);
 			reftech();
 		} catch (err) {
 			if (!loading) {
-				Toast.error('Failed to get incident');
+				Toast.error(err?.response?.data?.message || 'Something went Wrong');
 			}
 		}
 	};
@@ -49,6 +50,7 @@ const useDeleteAccept = ({ userIncidentStatus, id, remarks, reftech }) => {
 	return {
 		onDeleteAccept,
 		data,
+		loadingOndelete: loading,
 	};
 };
 export default useDeleteAccept;

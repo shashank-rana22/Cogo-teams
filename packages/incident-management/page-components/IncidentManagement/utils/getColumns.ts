@@ -9,6 +9,7 @@ const getColumns = (
 	setIsSortActive:Function,
 	setGlobalFilters:Function,
 	reftech:Function,
+	setPayload:Function,
 ) => {
 	if (activeTab === 'requested') {
 		return requestedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech });
@@ -17,7 +18,7 @@ const getColumns = (
 		return approvedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech });
 	}
 	if (activeTab === 'rejected') {
-		return rejectedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech, setActiveTab });
+		return rejectedColumn({ isSortActive, setIsSortActive, setGlobalFilters, reftech, setActiveTab, setPayload });
 	}
 	return null;
 };

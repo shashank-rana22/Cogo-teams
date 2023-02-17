@@ -29,3 +29,10 @@
 		margin-bottom: 16px;
 	}
 }
+.clear_filter{
+	margin-right: 10px;
+	margin-top: 6px;
+}
+.filter_container{
+	display: flex;
+}

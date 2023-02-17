@@ -8,14 +8,16 @@ interface ItemProps {
 	userIncidentStatus:string;
 	referenceId:string;
 	id:string;
+	linkedIncidentId:string;
 }
 interface PropsType {
-	setActiveTab:Function;
 	itemData:ItemProps;
+	setActiveTab:Function;
+	setPayload:Function;
 }
 
-function ClickableIncidentId({ itemData, setActiveTab }:PropsType) {
-	const { userIncidentStatus, referenceId, id } = itemData || {};
+function ClickableIncidentId({ itemData, setActiveTab, setPayload }:PropsType) {
+	const { userIncidentStatus, referenceId, linkedIncidentId } = itemData || {};
 	const { push } = useRouter();
 	const {
 		user_data:UserData,
@@ -25,18 +27,10 @@ function ClickableIncidentId({ itemData, setActiveTab }:PropsType) {
 
 	const { user: { id:userId = '' } } = UserData;
 
-	const handleTabChange1 = () => {
-		push(
-			// eslint-disable-next-line max-len
-			`/incident-management/[activeIncidentTab]?newIncidentId=${id}&userIncidentStatus=REQUESTED&performedBy=${userId}`,
-			`/incident-management/requested?newIncidentId=${id}&userIncidentStatus="REQUESTED"&performedBy=${userId}`,
-		);
-		setTimeout(() => {
-			window.location.reload();
-		}, 500);
-	};
 	const handleTabChange = () => {
 		setActiveTab('requested');
+		setPayload(['raisedPayload', linkedIncidentId, userId]);
+		push('/incident-management/requested');
 	};
 	return (
 		<div className={styles.container}>

@@ -3,23 +3,23 @@
 import { Table } from '@cogoport/components';
 import { Textarea, Modal, Button } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
-import React, { useState } from 'react';
+import React from 'react';
 
-// import StyledTable from '../../../Table';
 import getModalColumns from '../getModalColumn';
 
 import styles from './styles.module.css';
 
-function IcJvApproval({ itemData, setRemarks, onSave }) {
-	const [showTdsModal, setShowTdsModal] = useState(false);
+function IcJvApproval({
+	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
+}) {
 	const { type, data, userNotes } = itemData || {};
 	const { interCompanyJournalVoucherRequest } = data || {};
 	const { list = [], remark, totalCredit, totalDebit, currency } = interCompanyJournalVoucherRequest || {};
 	const columns = getModalColumns(type);
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>View</Button>
-			<Modal size="xl" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
+			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			<Modal size="xl" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Inter Company - Journal Voucher" />
 				<Modal.Body>
 					<div className={styles.rate_conatiner}>
@@ -71,10 +71,11 @@ function IcJvApproval({ itemData, setRemarks, onSave }) {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => {
-						setShowTdsModal(false);
-						onSave();
-					}}
+					<Button
+						disabled={loadingOnSave}
+						onClick={() => {
+							onSave();
+						}}
 					>
 						Save
 

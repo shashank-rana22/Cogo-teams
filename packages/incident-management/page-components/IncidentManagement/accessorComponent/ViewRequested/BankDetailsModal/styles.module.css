@@ -59,3 +59,7 @@
     border: none;
     align-items: center;
 }
+.category_flex{
+    display: flex;
+    flex-direction: row;
+}

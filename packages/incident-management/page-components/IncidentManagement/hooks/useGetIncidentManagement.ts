@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
-import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
@@ -9,14 +8,14 @@ import { useEffect, useState } from 'react';
 
 interface ItemProps {
 	activeTab:string,
+	payload:string,
 }
-const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
+const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { query: queryData } = useRouter();
 
 	const [
 		{ data, loading },
@@ -51,8 +50,8 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 	}, [search]);
 
 	let activeStatus = [];
-	if (queryData.userIncidentStatus) {
-		activeStatus = ['REQUESTED'];
+	if (payload?.[0] === 'raisedPayload') {
+		activeStatus = ['REQUESTED', 'DELETED'];
 	} else if (activeTab === 'requested') {
 		activeStatus = ['REQUESTED', 'DELETED'];
 	} else if (activeTab === 'approved') {
@@ -66,11 +65,11 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 			await trigger({
 				params: {
 					...rest,
-					flag               : 'USER',
+					sourceDashboard    : 'USER',
 					userIncidentStatus : status || activeStatus,
 					isStatsRequired    : true,
-					performedBy        : queryData.performedBy || userId,
-					newIncidentId      : queryData.newIncidentId || undefined,
+					createdBy          : payload?.[0] === 'raisedPayload' ? payload?.[2] : userId,
+					id                 : payload?.[0] === 'raisedPayload' ? payload?.[1] : undefined,
 					pageIndex          : globalFilters.pageIndex,
 					q                  : query !== '' ? query : undefined,
 					type               : requestType,
@@ -82,7 +81,7 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 			});
 		} catch (err) {
 			if (!loading) {
-				Toast.error('Failed to get incident');
+				Toast.error(err?.response?.data?.message || 'Something went Wrong');
 			}
 		}
 	};
@@ -91,12 +90,38 @@ const useGetIncidentMangement = ({ activeTab }:ItemProps) => {
 		reftech();
 	}, [JSON.stringify(rest), activeTab, query, requestType, Date, status]);
 
+	const filtervalue = Object.values(globalFilters);
+
+	const filterClear = filtervalue.filter((item) => {
+		if (Array.isArray(item) && item.length === 0) {
+			return false;
+		}
+		return item !== undefined && item !== '';
+	});
+
+	const clearFilters = () => {
+		setGlobalFilters({
+			pageIndex    : 1,
+			search       : undefined,
+			type         : undefined,
+			request_type : undefined,
+			Date         : undefined,
+			status       : undefined,
+		});
+	};
+
+	useEffect(() => {
+		clearFilters();
+	}, [activeTab]);
+
 	return {
 		data,
 		loading,
 		globalFilters,
 		setGlobalFilters,
 		reftech,
+		filterClear,
+		clearFilters,
 	};
 };
 export default useGetIncidentMangement;

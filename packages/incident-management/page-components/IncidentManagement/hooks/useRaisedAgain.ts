@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useRaisedAgain = ({ id, FileUrl, reftech }) => {
+const useRaisedAgain = ({ id, FileUrl, reftech, setShowModal }) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
@@ -17,7 +17,7 @@ const useRaisedAgain = ({ id, FileUrl, reftech }) => {
 		{
 			url     : '/incident-management/incident/raise-again',
 			method  : 'POST',
-			authkey : 'get_incident_management_raise_again',
+			authkey : 'post_incident_management_incident_raise_again',
 		},
 		{ manual: true },
 	);
@@ -27,14 +27,16 @@ const useRaisedAgain = ({ id, FileUrl, reftech }) => {
 			await trigger({
 				data: {
 					documentUrls : FileUrl,
-					performedBy  : userId,
+					createdBy    : userId,
 					id,
 				},
 			});
+			Toast.success('Raised');
 			reftech();
-		} catch (err) {
+			setShowModal(false);
+		} catch (e) {
 			if (!loading) {
-				Toast.error('Failed to get incident');
+				Toast.error(e?.response?.data?.message || 'Something went Wrong');
 			}
 		}
 	};
@@ -42,6 +44,7 @@ const useRaisedAgain = ({ id, FileUrl, reftech }) => {
 	return {
 		onRaiseAgain,
 		data,
+		loadingOnRaise: loading,
 	};
 };
 export default useRaisedAgain;

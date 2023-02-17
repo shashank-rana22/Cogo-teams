@@ -6,16 +6,16 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function StatusName({ itemData }) {
-	const { userIncidentStatus, status, referenceIncidentId } = itemData || {};
+	const { userIncidentStatus, status, linkedReferenceId } = itemData || {};
 	function TooltipContent() {
 		if (status === 'REJECTED' && userIncidentStatus === 'RAISED_AGAIN') {
 			return (
-				`NEW INCIDENT ID: ${referenceIncidentId}`
+				`NEW INCIDENT ID: ${linkedReferenceId}`
 			);
 		}
 		if (status === 'REQUESTED') {
 			return (
-				`RAISED AGAIN: ${referenceIncidentId}`
+				`RAISED AGAIN: ${linkedReferenceId}`
 			);
 		}
 		return null;
@@ -34,7 +34,7 @@ function StatusName({ itemData }) {
 						{startCase(userIncidentStatus)}
 					</Pill>
 				)}
-			{referenceIncidentId && (userIncidentStatus === 'REQUESTED' || userIncidentStatus === 'RAISED_AGAIN') ? (
+			{linkedReferenceId && (userIncidentStatus === 'REQUESTED' || userIncidentStatus === 'RAISED_AGAIN') ? (
 				<div className={styles.iconStyle}>
 					<Tooltip content={TooltipContent()} placement="top" interactive>
 						<IcMInfo

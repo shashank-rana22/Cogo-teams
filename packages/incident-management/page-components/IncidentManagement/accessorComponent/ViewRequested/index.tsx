@@ -12,23 +12,17 @@ import TdsDeviationModal from './TdsDeviationModal';
 
 function ViewRequested({ itemData, name, reftech }) {
 	const [remarks, setRemarks] = useState('');
-	const { type, id, data } = itemData || {};
-	const { bankRequest, tdsRequest } = data || {};
-	const { documentUrls } = bankRequest || tdsRequest || {};
-	const { onSave } = useSave({ remarks, id, reftech });
-	const [selectedFile, setSelectedFile] = useState([]);
-	const FileUrl = [];
-	if (selectedFile) {
-		selectedFile.map((item) => (
-			FileUrl.push(item.finalUrl)
-		));
-	}
-	if (documentUrls) {
-		documentUrls.map((item) => (
-			FileUrl.push(item)
-		));
-	}
-	const { onRaiseAgain } = useRaisedAgain({ FileUrl, id, reftech });
+	const { type, id } = itemData || {};
+
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [showModal, setShowModal] = useState(false);
+	const { onSave, loadingOnSave } = useSave({ remarks, id, reftech, setShowModal });
+	const { onRaiseAgain, loadingOnRaise } = useRaisedAgain({
+		FileUrl: selectedFile?.finalUrl,
+		id,
+		reftech,
+		setShowModal,
+	});
 
 	if (type === 'BANK_DETAIL_APPROVAL') {
 		return (
@@ -40,6 +34,10 @@ function ViewRequested({ itemData, name, reftech }) {
 				setSelectedFile={setSelectedFile}
 				selectedFile={selectedFile}
 				name={name}
+				showModal={showModal}
+				setShowModal={setShowModal}
+				loadingOnSave={loadingOnSave}
+				loadingOnRaise={loadingOnRaise}
 			/>
 		);
 	}
@@ -53,27 +51,59 @@ function ViewRequested({ itemData, name, reftech }) {
 				setSelectedFile={setSelectedFile}
 				selectedFile={selectedFile}
 				name={name}
+				showModal={showModal}
+				setShowModal={setShowModal}
+				loadingOnSave={loadingOnSave}
+				loadingOnRaise={loadingOnRaise}
 			/>
 		);
 	}
 	if (type === 'ISSUE_CREDIT_NOTE') {
 		return (
-			<RequestCN itemData={itemData} setRemarks={setRemarks} onSave={onSave} />
+			<RequestCN
+				itemData={itemData}
+				setRemarks={setRemarks}
+				onSave={onSave}
+				showModal={showModal}
+				setShowModal={setShowModal}
+				loadingOnSave={loadingOnSave}
+			/>
 		);
 	}
 	if (type === 'JOURNAL_VOUCHER_APPROVAL') {
 		return (
-			<JournalVoucher itemData={itemData} setRemarks={setRemarks} onSave={onSave} />
+			<JournalVoucher
+				itemData={itemData}
+				setRemarks={setRemarks}
+				onSave={onSave}
+				showModal={showModal}
+				setShowModal={setShowModal}
+				loadingOnSave={loadingOnSave}
+			/>
 		);
 	}
 	if (type === 'SETTLEMENT_APPROVAL') {
 		return (
-			<SettlementModal itemData={itemData} setRemarks={setRemarks} onSave={onSave} />
+			<SettlementModal
+				itemData={itemData}
+				setRemarks={setRemarks}
+				onSave={onSave}
+				showModal={showModal}
+				setShowModal={setShowModal}
+				loadingOnSave={loadingOnSave}
+			/>
 		);
 	}
 	if (type === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL') {
 		return (
-			<IcJvApproval itemData={itemData} setRemarks={setRemarks} onSave={onSave} />
+			<IcJvApproval
+				itemData={itemData}
+				setRemarks={setRemarks}
+				onSave={onSave}
+				showModal={showModal}
+				setShowModal={setShowModal}
+				loadingOnSave={loadingOnSave}
+			/>
 		);
 	}
 	return null;

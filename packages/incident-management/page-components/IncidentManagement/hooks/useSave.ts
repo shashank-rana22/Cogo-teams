@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const useSave = ({ remarks, id, reftech }) => {
+const useSave = ({ remarks, id, reftech, setShowModal }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -9,7 +9,7 @@ const useSave = ({ remarks, id, reftech }) => {
 		{
 			url     : '/incident-management/incident/edit-notes',
 			method  : 'PATCH',
-			authkey : 'get_incident_management_edit_notes',
+			authkey : 'patch_incident_management_incident_edit_notes',
 		},
 		{ manual: true },
 	);
@@ -22,10 +22,12 @@ const useSave = ({ remarks, id, reftech }) => {
 					id,
 				},
 			});
+			Toast.success('Saved');
 			reftech();
-		} catch (err) {
+			setShowModal(false);
+		} catch (e) {
 			if (!loading) {
-				Toast.error('Failed to get incident');
+				Toast.error(e?.response?.data?.message || 'Something went Wrong');
 			}
 		}
 	};
@@ -33,6 +35,7 @@ const useSave = ({ remarks, id, reftech }) => {
 	return {
 		onSave,
 		data,
+		loadingOnSave: loading,
 	};
 };
 export default useSave;

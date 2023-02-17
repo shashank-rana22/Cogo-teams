@@ -1,18 +1,19 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-function RequestCN({ itemData, setRemarks, onSave }) {
-	const [showTdsModal, setShowTdsModal] = useState(false);
+function RequestCN({
+	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
+}) {
 	const { data, userNotes } = itemData || {};
 	const { creditNoteRequest } = data || {};
 	const { documentUrls, invoiceNumber, jobNumber, remark, creditNoteType } = creditNoteRequest || {};
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>View</Button>
-			<Modal size="lg" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
+			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Request CN" />
 				<Modal.Body>
 					<div className={styles.rate_conatiner}>
@@ -88,10 +89,11 @@ function RequestCN({ itemData, setRemarks, onSave }) {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => {
-						setShowTdsModal(false);
-						onSave();
-					}}
+					<Button
+						disabled={loadingOnSave}
+						onClick={() => {
+							onSave();
+						}}
 					>
 						Save
 

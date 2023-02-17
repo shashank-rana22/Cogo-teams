@@ -1,4 +1,4 @@
-import { Textarea, Button, Modal } from '@cogoport/components';
+import { ButtonIcon, Textarea, Button, Modal } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -10,12 +10,13 @@ function DeleteModal({ itemData, reftech }) {
 	const { id, userIncidentStatus, status } = itemData || {};
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [remarks, setRemarks] = useState(null);
-	const { onDeleteAccept } = useDeleteAccept({ id, userIncidentStatus, remarks, reftech });
+	const { onDeleteAccept, loadingOndelete } = useDeleteAccept({ id, userIncidentStatus, remarks, reftech });
 	return (
 		<div>
 			<div className={styles.buttonStyle}>
 				{status === 'REJECTED' ? (
 					<Button
+						disabled={userIncidentStatus === 'ACCEPTED' || userIncidentStatus === 'RAISED_AGAIN'}
 						themeType="secondary"
 						onClick={() => { setShowDeleteModal(true); }}
 					>
@@ -23,12 +24,21 @@ function DeleteModal({ itemData, reftech }) {
 					</Button>
 				)
 					: (
-						<IcMDelete
-							color=" #ED3726"
-							height={20}
-							width={20}
+						<ButtonIcon
+							size="xl"
 							onClick={() => { setShowDeleteModal(true); }}
+							disabled={userIncidentStatus === 'DELETED'}
+							icon={(
+								<IcMDelete
+									color=" #ED3726"
+									height={20}
+									width={20}
+
+								/>
+							)}
+							themeType="primary"
 						/>
+
 					)}
 			</div>
 			<Modal show={showDeleteModal} size="md" onClose={() => setShowDeleteModal(false)}>
@@ -66,12 +76,13 @@ function DeleteModal({ itemData, reftech }) {
 					</Button>
 					<Button
 						size="md"
+						disabled={loadingOndelete}
 						onClick={() => {
 							onDeleteAccept();
-							setShowDeleteModal(false);
+							// setShowDeleteModal(false);
 						}}
 					>
-						{status === 'REJECTED' ? 'Accepet' : 'Delete'}
+						{status === 'REJECTED' ? 'Accept' : 'Delete'}
 
 					</Button>
 				</Modal.Footer>

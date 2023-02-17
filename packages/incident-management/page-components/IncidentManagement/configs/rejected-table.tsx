@@ -16,14 +16,18 @@ interface PropsType {
 	setGlobalFilters:Function;
 	reftech:Function;
 	setActiveTab:Function;
+	setPayload:Function;
 }
 
-const rejectedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech, setActiveTab }:PropsType) => [
+const rejectedColumn = ({
+	isSortActive, setIsSortActive,
+	setGlobalFilters, reftech, setActiveTab, setPayload,
+}:PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
-			<ClickableIncidentId itemData={row} setActiveTab={setActiveTab} />
+			<ClickableIncidentId itemData={row} setActiveTab={setActiveTab} setPayload={setPayload} />
 		),
 	},
 	{

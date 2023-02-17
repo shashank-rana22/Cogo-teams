@@ -1,17 +1,16 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
 function TdsDeviationModal({
 	itemData, setRemarks, onSave, onRaiseAgain,
-	setSelectedFile,
-	selectedFile,
-	name,
+	setSelectedFile, selectedFile, name, showModal, setShowModal,
+	loadingOnSave,
+	loadingOnRaise,
 }) {
-	const [showTdsModal, setShowTdsModal] = useState(false);
 	const { status, data, userIncidentStatus, userNotes, updatedBy, updatedAt, remark:rejectedRemark } = itemData || {};
 	const { name:updatedByName } = updatedBy || {};
 	const { tdsRequest } = data || {};
@@ -22,12 +21,12 @@ function TdsDeviationModal({
 	} = tdsRequest || {};
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowTdsModal(true); }}>
+			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
 				{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
-					&& name === 'Raise Again' ? 'Raised Again' : 'View'}
+					&& name === 'Raise Again' ? 'Raise Again' : 'View'}
 
 			</Button>
-			<Modal size="lg" show={showTdsModal} onClose={() => { setShowTdsModal(false); }}>
+			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Tds Deviation" />
 				<Modal.Body>
 					{status === 'APPROVED' || status === 'REJECTED'
@@ -56,7 +55,8 @@ function TdsDeviationModal({
 											)}
 									</div>
 									<div>
-										Approved By :
+										{status === 'APPROVED'
+											? 'Approved By :' : 'Rejected By :'}
 										{updatedByName}
 										{' '}
 										At :
@@ -166,18 +166,20 @@ function TdsDeviationModal({
 							)))}
 						</div>
 					</div>
-					<div className={styles.remarks_style}>
-						Notes (only visible to self)
-						<Textarea
-							name="remarks"
-							className={styles.text_area}
-							size="lg"
-							placeholder="Enter here..."
-							onChange={(values) => setRemarks(values)}
-							defaultValue={userNotes}
-
-						/>
-					</div>
+					{name !== 'Raise Again'
+					&& (
+						<div className={styles.remarks_style}>
+							Notes (only visible to self)
+							<Textarea
+								name="remarks"
+								className={styles.text_area}
+								size="lg"
+								placeholder="Enter here..."
+								onChange={(values) => setRemarks(values)}
+								defaultValue={userNotes}
+							/>
+						</div>
+					)}
 					<div className={styles.rate_conatiner}>
 						{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
 					&& name === 'Raise Again'
@@ -189,7 +191,6 @@ function TdsDeviationModal({
 							onChange={setSelectedFile}
 							showProgress
 							draggable
-							multiple
 							fileLink={finalUrl}
 							multipleUploadDesc="Upload Invoice"
 						/>
@@ -201,19 +202,20 @@ function TdsDeviationModal({
 					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION' && name === 'Raise Again'
 						? (
 							<Button
+								disabled={finalUrl === undefined || loadingOnRaise}
 								onClick={() => {
 									onRaiseAgain();
-									setShowTdsModal(false);
 								}}
 							>
-								Raised Again
+								Raise Again
 							</Button>
 						)
 						:					(
-							<Button onClick={() => {
-								setShowTdsModal(false);
-								onSave();
-							}}
+							<Button
+								disabled={loadingOnSave}
+								onClick={() => {
+									onSave();
+								}}
 							>
 								Save
 
