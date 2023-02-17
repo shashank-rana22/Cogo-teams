@@ -40,3 +40,21 @@
     border-radius: 5px;
     background: #FFFFFF;
 }
+
+.chart_section {
+	display: flex;
+	flex-direction: row;
+	height: 240px;
+	width: 100%;
+	margin-top: 16px;
+}
+
+.line_graph {
+	width: 50%;
+	height: 100%;
+}
+
+.pie_chart {
+	width: 25%;
+	height: 100%;
+}

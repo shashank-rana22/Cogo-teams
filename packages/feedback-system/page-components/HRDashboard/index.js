@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
+
 // import UserTableData from '../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
@@ -241,11 +242,11 @@ function HRDashboard() {
 				<div className={styles.stats_container}>
 					<PerformanceChart />
 
-					<TeamStats
+					{/* <TeamStats
 						selectedBucket={selectedBucket}
 						setParams={setParams}
 						setSelectedBucket={setSelectedBucket}
-					/>
+					/> */}
 				</div>
 
 				<div className={styles.list_header}>
