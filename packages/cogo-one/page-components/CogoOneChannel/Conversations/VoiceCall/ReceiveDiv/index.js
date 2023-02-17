@@ -12,7 +12,6 @@ function ReceiveDiv() {
 		<div className={styles.container}>
 			<div className={styles.name}>
 				{/* {name} */}
-				,
 				<span className={styles.time_stamp}>
 					{/* {date} */}
 				</span>

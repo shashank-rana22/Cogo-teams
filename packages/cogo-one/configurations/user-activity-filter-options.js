@@ -1,17 +1,22 @@
 function filterOptions() {
 	const transactionalFilters = [
 		{
-			label : 'Booking',
-			value : 'upload_bn_task',
+			label : 'Enter Serial ID',
+			value : 'serial_id',
+			type  : 'input',
 		},
-		{
-			label : 'Vessel',
-			value : 'containers_gated_in',
-		},
-		{
-			label : 'Booking note',
-			value : 'booking_note_uploaded',
-		},
+		// {
+		// 	label : 'Booking',
+		// 	value : 'upload_bn_task',
+		// },
+		// {
+		// 	label : 'Vessel',
+		// 	value : 'containers_gated_in',
+		// },
+		// {
+		// 	label : 'Booking note',
+		// 	value : 'booking_note_uploaded',
+		// },
 	];
 
 	const communicationFilters = [
