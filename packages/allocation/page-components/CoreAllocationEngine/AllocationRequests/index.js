@@ -30,7 +30,6 @@ function Requests() {
 		setBulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
-		onChangeCheckbox,
 		...restProps
 	} = useListAllocationRequests();
 
