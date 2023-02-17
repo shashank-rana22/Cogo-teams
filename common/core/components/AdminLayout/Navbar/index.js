@@ -32,8 +32,9 @@ function Navbar({
 	const {
 		data,
 		refetch = () => {},
-		checkIfSessionExpiring,
 		timeLeft,
+		loading,
+		checkIfSessionExpiring,
 	} = useGetUserSessionMappings();
 
 	const showPin = userBasedNavView === nav;
@@ -61,6 +62,14 @@ function Navbar({
 		[],
 	);
 
+	const handleLeave = () => {
+		if (openPopover) {
+			setResetSubnavs(true);
+		} else {
+			setResetSubnavs(false);
+		}
+	};
+
 	return (
 		<div
 			style={style}
@@ -68,7 +77,7 @@ function Navbar({
 		>
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
-				onMouseLeave={() => setResetSubnavs(false)}
+				onMouseLeave={handleLeave}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
 				<div className={styles.inner_container}>
@@ -83,7 +92,10 @@ function Navbar({
 					<ProfileManager
 						resetSubnavs={resetSubnavs}
 						setOpenPopover={setOpenPopover}
+						checkIfSessionExpiring={checkIfSessionExpiring}
+						loading={loading}
 						openPopover={openPopover}
+						timeLeft={timeLeft}
 						refetch={refetch}
 					/>
 
@@ -140,17 +152,20 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
-			{
-				openPopover
-					? (
-						<SwitchAccounts
-							userMappings={data}
-							refetch={refetch}
-							checkIfSessionExpiring={checkIfSessionExpiring}
-							timeLeft={timeLeft}
-						/>
-					) : null
-			}
+			<div onMouseLeave={() => setResetSubnavs(false)}>
+				{
+					openPopover
+						&& (
+							<SwitchAccounts
+								userMappings={data}
+								refetch={refetch}
+								loading={loading}
+								checkIfSessionExpiring={checkIfSessionExpiring}
+								timeLeft={timeLeft}
+							/>
+						)
+				}
+			</div>
 		</div>
 
 	);

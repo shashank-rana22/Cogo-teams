@@ -4,20 +4,6 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { getCookie, setCookie } from '@cogoport/utils';
 
-const redirectMyProfile = (router) => {
-	router.push('/my-profile');
-};
-
-const handleHelpNewTab = () => {
-	window.open('https://www.cogoport.com/contact-us', '_blank');
-};
-
-const handleSwitchProfile = (user_session_id) => {
-	setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, user_session_id, 2000, {});
-	window.location.href = '/';
-	toast.success('Switching Profile');
-};
-
 const useGetAllActions = ({
 	user = {},
 	refetch = () => {},
@@ -125,9 +111,6 @@ const useGetAllActions = ({
 	};
 
 	return {
-		handleSwitchProfile,
-		redirectMyProfile,
-		handleHelpNewTab,
 		removeProfile,
 		deleteLoading : deleteUserSessionsLoading,
 		switchLoading : switchUserSessionLoading,

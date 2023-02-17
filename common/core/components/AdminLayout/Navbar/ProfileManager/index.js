@@ -9,7 +9,15 @@ import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
 import Items from './Items';
 import styles from './styles.module.css';
 
-function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover, refetch = () => {} }) {
+function ProfileManager({
+	resetSubnavs,
+	setOpenPopover = () => {},
+	openPopover,
+	timeLeft,
+	refetch = () => {},
+	loading,
+	checkIfSessionExpiring,
+}) {
 	const router = useRouter();
 
 	const routerFunction = () => {
@@ -41,6 +49,7 @@ function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover, 
 		},
 		{
 			title : 'Logout',
+			name  : 'logout',
 			fun   : removeProfile,
 			icon  : IcMLogout,
 		},
@@ -58,7 +67,10 @@ function ProfileManager({ resetSubnavs, setOpenPopover = () => {}, openPopover, 
 			<Items
 				item={profileComponents}
 				resetSubnavs={resetSubnavs}
+				timeLeft={timeLeft}
+				loading={loading}
 				setOpenPopover={setOpenPopover}
+				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}
 			/>
 		</ul>

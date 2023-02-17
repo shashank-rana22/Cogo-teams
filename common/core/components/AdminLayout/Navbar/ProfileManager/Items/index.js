@@ -5,7 +5,17 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
+const SESSION_DISABLED = ['logout', 'logout_all_accounts'];
+
+function Items({
+	item,
+	resetSubnavs,
+	setOpenPopover = () => {},
+	timeLeft,
+	loading,
+	openPopover,
+	checkIfSessionExpiring,
+}) {
 	const [showSubNav, setShowSubNav] = useState(false);
 	const { user_data, userSessionMappings } = useSelector(({ profile }) => ({
 		user_data           : profile?.user || {},
@@ -13,7 +23,7 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 	}));
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
+	useEffect(() => { setShowSubNav(false); setOpenPopover(false); }, [resetSubnavs]);
 
 	const redirect = () => {
 		// eslint-disable-next-line no-undef
@@ -25,6 +35,20 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 	const handlePopover = () => {
 		setOpenPopover(!openPopover);
 	};
+
+	let activeUser = {};
+	(userSessionMappings || []).forEach((user) => {
+		if (user_data?.id === user?.user_id) {
+			activeUser = user;
+		}
+	});
+
+	const { expire_at = '' } = activeUser || {};
+	const expire_time = new Date(expire_at).getTime();
+
+	const lessThan30Seconds = Number(timeLeft) >= Number(expire_time / 1000 - 30);
+
+	const loadingState = checkIfSessionExpiring || lessThan30Seconds || loading;
 
 	const singleNav = (
 		<div
@@ -55,6 +79,8 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 				{singleNav}
 				{
 					(item || []).map((singleOption) => {
+						const disable_check = SESSION_DISABLED.includes(singleOption.name);
+
 						if (singleOption.name === 'switch_account' && userSessionMappings?.length <= 1) {
 							return null;
 						}
@@ -76,6 +102,10 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 									}
 								}}
 								key={singleOption.title}
+								style={{
+									pointerEvents : disable_check && loadingState ? 'none' : '',
+									opacity       : disable_check && loadingState ? '0.2' : 1,
+								}}
 								aria-hidden
 							>
 								{!(singleOption?.name === 'logout_all_accounts'
@@ -87,7 +117,6 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 										</span>
 									</div>
 								) }
-
 							</div>
 						);
 					})
@@ -96,7 +125,14 @@ function Items({ item, resetSubnavs, setOpenPopover = () => {}, openPopover }) {
 
 			{showSubNav && (
 				<div className={styles.button_container}>
-					<Button size="lg" themeType="accent" onClick={redirect}>Add Account</Button>
+					<Button
+						size="lg"
+						themeType="accent"
+						onClick={redirect}
+						disabled={loadingState}
+					>
+						Add Account
+					</Button>
 				</div>
 			)}
 		</>

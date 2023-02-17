@@ -1,6 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IcMDelete, IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import useGetAllActions from '../../../../../hooks/useGetAllActions';
 
@@ -9,16 +9,20 @@ import styles from './styles.module.css';
 function MappedUser({
 	user = {},
 	refetch = () => {},
-	// profileData,
-	// userMappings,
 	sessionId,
 	setSessionId = () => {},
 	showActions,
 	setShowActions = () => {},
-	// timeLeft,
-	// checkIfSessionExpiring,
+	loading,
+	checkIfSessionExpiring,
+	timeLeft,
 }) {
 	const profile_name = user?.user_data?.name?.split(' ');
+
+	const { removeProfile = () => {} } = useGetAllActions({
+		user,
+		refetch,
+	});
 
 	const handleShow = (val) => {
 		if (val?.user_session_id === sessionId) {
@@ -29,13 +33,23 @@ function MappedUser({
 		}
 	};
 
-	const { removeProfile = () => {} } = useGetAllActions({
-		user,
-		refetch,
-	});
+	const { expire_at = '' } = user || {};
+	const expire_time = new Date(expire_at).getTime();
+
+	const lessThan30Seconds = Number(timeLeft) >= Number(expire_time / 1000 - 30);
+
+	const loadingState = loading || lessThan30Seconds || checkIfSessionExpiring;
 
 	return (
-		<div className={styles.container} onClick={() => handleShow(user)} role="presentation">
+		<div
+			className={styles.container}
+			onClick={() => handleShow(user)}
+			style={{
+				pointerEvents : loadingState ? 'none' : '',
+				opacity       : loadingState ? '0.2' : 1,
+			}}
+			role="presentation"
+		>
 			<div className={styles.active_profile}>
 				{
 					sessionId === user?.user_session_id
@@ -77,7 +91,9 @@ function MappedUser({
 				onClick={removeProfile}
 				role="presentation"
 			>
-				<IcMDelete fontWeight={700} />
+				<IcMDelete
+					fontWeight={700}
+				/>
 			</div>
 		</div>
 	);

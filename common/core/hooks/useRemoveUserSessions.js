@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { setCookie, getCookie } from 'cookies-next';
+import { getCookie, setCookie } from '@cogoport/utils';
 
 const useRemoveUserSessions = () => {
 	const {
@@ -15,7 +15,7 @@ const useRemoveUserSessions = () => {
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/remove_user_sessions',
 		method : 'delete',
-	}, { manual: false });
+	}, { manual: true });
 
 	const logoutOfAllAccounts = async () => {
 		try {

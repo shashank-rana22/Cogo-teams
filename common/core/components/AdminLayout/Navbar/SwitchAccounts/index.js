@@ -1,12 +1,12 @@
 import { Button, Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { setCookie } from 'cookies-next';
+import { setCookie } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import MappedUser from './MappedUser';
 import styles from './styles.module.css';
 
-function SwitchAccounts({ userMappings = [], refetch = () => {}, timeLeft, checkIfSessionExpiring }) {
+function SwitchAccounts({ userMappings = [], refetch = () => {}, loading, timeLeft, checkIfSessionExpiring }) {
 	const {
 		profile,
 	} = useSelector((state) => state);
@@ -28,17 +28,18 @@ function SwitchAccounts({ userMappings = [], refetch = () => {}, timeLeft, check
 					return null;
 				} return (
 					<MappedUser
+						loading={loading}
+						timeLeft={timeLeft}
 						key={user?.user_id}
 						userMappings={userMappings}
 						profileData={profile}
 						refetch={refetch}
 						user={user}
+						checkIfSessionExpiring={checkIfSessionExpiring}
 						sessionId={sessionId}
 						setSessionId={setSessionId}
 						setShowActions={setShowActions}
 						showActions={showActions}
-						timeLeft={timeLeft}
-						checkIfSessionExpiring={checkIfSessionExpiring}
 					/>
 				);
 			})}
@@ -46,6 +47,7 @@ function SwitchAccounts({ userMappings = [], refetch = () => {}, timeLeft, check
 				<Button
 					style={{ width: '100%' }}
 					themeType="accent"
+					disabled={!sessionId || checkIfSessionExpiring}
 					onClick={() => handleSwitchProfile(sessionId)}
 				>
 					Switch Account
