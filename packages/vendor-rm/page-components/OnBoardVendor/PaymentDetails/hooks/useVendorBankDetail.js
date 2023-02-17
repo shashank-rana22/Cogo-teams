@@ -109,6 +109,16 @@ function useVendorBankDetail({
 		return { ...newControl };
 	});
 
+	useEffect(() => {
+		controls.forEach((field) => {
+			if (field.type === 'file') {
+				setValue(`${field.name}`, vendorInformation?.payment_details?.[field.name]?.finalUrl);
+			} else {
+				setValue(`${field.name}`, vendorInformation?.payment_details?.[field.name]);
+			}
+		});
+	}, []);
+
 	return {
 		controls : newControls,
 		control,

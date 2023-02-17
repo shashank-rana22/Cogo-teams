@@ -6,6 +6,7 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
@@ -14,6 +15,7 @@ import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const router = useRouter();
@@ -36,6 +38,7 @@ function useOnBoardVendor({
 		formState: { errors },
 		handleSubmit,
 		getValues,
+		setValue,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
@@ -81,7 +84,7 @@ function useOnBoardVendor({
 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
 		setValue('document_url', vendorInformation?.vendor_details?.document_url);
-	}, [fields, vendorInformation]);
+	}, [fields, setValue, vendorInformation]);
 
 	return {
 		fields,
