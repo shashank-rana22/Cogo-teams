@@ -78,7 +78,6 @@ const useCreateAllocationRequest = (props) => {
 		}
 	};
 
-	// Todo use useMemo
 	const controlNames = SERVICE_TYPE_MAPPING[service_type] || [];
 
 	const filteredControls = controls.filter((control) => controlNames.includes(control.name)).map((control) => {

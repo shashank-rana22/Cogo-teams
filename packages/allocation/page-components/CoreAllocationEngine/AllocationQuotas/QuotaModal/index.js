@@ -83,9 +83,6 @@ function QuotaModal(props) {
 		refetch,
 	});
 
-	// Todo roleTypeId
-	// Todo  3 mappings 2 same for create and edit and 1 for delete
-
 	if (action === 'delete') {
 		return (
 			<>

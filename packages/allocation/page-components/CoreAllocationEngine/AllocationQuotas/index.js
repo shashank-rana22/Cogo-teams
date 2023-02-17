@@ -45,7 +45,6 @@ function AllocationQuotas() {
 				toggleRoleType={toggleRoleType}
 				setQuotaItem={setQuotaItem}
 			/>
-			{/* Todo isUpdatable can be called */}
 
 			{quotaItem && (
 				<Modal
