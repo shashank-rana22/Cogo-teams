@@ -7,14 +7,15 @@ function TeamPieChart({ data }) {
 				data={data}
 				innerRadius={0.5}
 				padAngle={0.7}
-				cornerRadius={3}
+				// cornerRadius={}
 				activeOuterRadiusOffset={8}
-				borderWidth={1}
+				// borderWidth={1}
 				enableArcLinkLabels={false}
+				enableArcLabels={false}
 				colors={['#F2E3C3', '#F9AE64', '#828282', '#FDE74D']}
 				colorBy="index"
 				margin={{ top: 10, right: 20, bottom: 80, left: 20 }}
-				theme="background"
+				// theme="background"
 				legends={[
 					{
 						anchor        : 'left',

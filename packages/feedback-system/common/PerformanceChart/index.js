@@ -59,52 +59,55 @@ function PerformanceChart({ user_id = '' }) {
 			data : [
 				{
 					x : 'Jan',
-					y : 10,
+					y : 3,
 				},
 				{
 					x : 'Feb',
-					y : 101,
+					y : 3,
 				},
 				{
 					x : 'Mar',
-					y : 231,
+					y : 2,
+				},
+				{
+					x : 'Apr',
+					y : 3,
+				},
+				{
+					x : 'May',
+					y : 3,
+				},
+				{
+					x : 'Jun',
+					y : 2,
+				},
+				{
+					x : 'Jul',
+					y : 3,
+				},
+				{
+					x : 'Aug',
+					y : 3,
+				},
+				{
+					x : 'Sep',
+					y : 2,
+				},
+				{
+					x : 'Oct',
+					y : 3,
+				},
+				{
+					x : 'Nov',
+					y : 3,
+				},
+				{
+					x : 'Dec',
+					y : 2,
 				},
 			],
 		},
-		{
-			id   : 'russia',
-			data : [
-				{
-					x : 'Jan',
-					y : 198,
-				},
-				{
-					x : 'Feb',
-					y : 24,
-				},
-				{
-					x : 'Mar',
-					y : 231,
-				},
-			],
-		},
-		{
-			id   : 'us',
-			data : [
-				{
-					x : 'Jan',
-					y : 30,
-				},
-				{
-					x : 'Feb',
-					y : 120,
-				},
-				{
-					x : 'Mar',
-					y : 201,
-				},
-			],
-		},
+
 	];
 
 	const showLoading = () => (
@@ -163,17 +166,19 @@ function PerformanceChart({ user_id = '' }) {
 								type    : 'point',
 								stacked : true,
 								min     : 0,
-								max     : 5,
+								max     : 12,
 							}}
 							yScale={{
-								type    : 'linear',
-								min     : 'auto',
-								max     : 'auto',
-								stacked : true,
-								reverse : false,
+								type     : 'linear',
+								tickSize : 5,
+								min      : 0,
+								max      : 5,
+								reverse  : false,
+								stacked  : false,
 							}}
 							yFormat=" >-.2f"
-							curve="natural"
+							curve="linear"
+							lineWidth={3}
 							axisTop={null}
 							axisRight={null}
 							axisBottom={{
@@ -187,24 +192,25 @@ function PerformanceChart({ user_id = '' }) {
 							}}
 							axisLeft={{
 								orient         : 'left',
+								tickValues     : 5,
 								tickSize       : 5,
 								tickPadding    : 5,
 								tickRotation   : 0,
-								legend         : 'Hours',
+								legend         : 'KPI',
 								legendOffset   : -40,
 								legendPosition : 'middle',
 							}}
 							enableGridX={false}
 							enableGridY={false}
-							enablePoints={false}
-							pointColor={{ theme: 'background' }}
-							pointBorderWidth={2}
+							pointSize={7}
+							// pointColor={{ theme: 'background' }}
+							pointBorderWidth={7}
 							pointLabelYOffset={-12}
 							areaOpacity={0.25}
 							enableCrosshair={false}
 							crosshairType="top-left"
 							useMesh
-							colors={['#F2E3C3', '#F9AE64', '#828282', '#FDE74D']}
+							colors={['#F2E3C3', '#F9AE64', '#828282']}
 							colorBy="index"
 							legends={[
 								{
