@@ -34,6 +34,15 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.url = `/${serviceName}/${apiPath}`;
 	}
 
+	// if (serviceName === 'user_feedback') {
+	// 	newConfig.baseURL = 'https://8f72-103-143-39-118.in.ngrok.io/';
+
+	// 	newConfig.url = `/${apiPath}`;
+	// 	// newConfig.headers['Access-Control-Request-Methods'] = "{'GET','OPTIONS'}";
+	// 	// newConfig.headers['Access-Control-Allow-Origin'] = '*';
+
+	// 	console.log('newConfig', newConfig);
+	// }
 	return {
 		...newConfig,
 		paramsSerializer : { serialize: customSerializer },

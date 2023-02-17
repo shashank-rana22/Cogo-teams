@@ -64,13 +64,18 @@ const feedback_system = [
 		access_type : 'private',
 	},
 	{
-		api          : 'list_feedback_questions',
+		api          : 'list_questions',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'update_feedback_question',
+		api          : 'update_question',
 		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
+		api          : 'list-forms',
+		access_type  : 'public',
 		service_name : 'user_feedback',
 	},
 	{

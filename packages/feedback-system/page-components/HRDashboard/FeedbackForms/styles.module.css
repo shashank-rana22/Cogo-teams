@@ -89,7 +89,12 @@
     }
 } 
 
+.selected_designation {
+    background-color: antiquewhite;
+}
+
 .form_section {
     max-height: 100%;
     overflow: scroll;
 }
+

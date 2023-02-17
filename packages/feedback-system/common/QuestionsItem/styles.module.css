@@ -9,12 +9,22 @@
 	border-radius: 8px;
 }
 
+.order_container {
+	transform: rotate(90deg) scale(70%);
+	width: 5%;
+}
+
 .checkbox_container {
 	width: 5%;
 }
 
 .question_container {
 	width: 85%;
+}
+
+.weightage {
+	margin: 4px;
+	padding: 8px;
 }
 
 .icon_container {

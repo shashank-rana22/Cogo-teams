@@ -1,26 +1,32 @@
 import { Pill, Button } from '@cogoport/components';
-import { format } from '@cogoport/utils';
-import { useState } from 'react';
+import { format, isEmpty } from '@cogoport/utils';
 
 import useListForms from '../../../../utils/useListForms';
-import CreateFeedbackForm from '../CreateFeedbackForm';
 
+import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function Forms({
 	formsParams = {},
-	openCreateForm = false, setOpenCreateForm = () => {},
+	setOpenCreateForm = () => {},
+	openCreateForm = false,
+	setFormStage = () => {},
+	setFormId = () => {},
 }) {
-	const [formId, setFormId] = useState('');
-
 	const openOldForm = (Id) => {
 		setFormId(Id);
+		setOpenCreateForm(true);
+		setFormStage('add_questions');
 	};
-
 	const { formsData = {}, loading = false } = useListForms({ formsParams });
+
+	const { designation } = formsParams;
+
 	// const {formList = []} = formsData;
 
-	const renderOldForm = () => <CreateFeedbackForm formId={formId} setFormId={setFormId} />;
+	if (isEmpty(Object.values(formsParams).filter((i) => i))) {
+		return <div className={styles.no_role}>Please select designation to show forms...</div>;
+	}
 
 	const formList = [
 		{
@@ -75,74 +81,79 @@ function Forms({
 		},
 	];
 
-	return (
+	const showForm = () => {
+		setOpenCreateForm(true);
+		setFormStage('add_questions');
+	};
+
+	return (isEmpty(formList) ? <EmptyState setFormStage={setFormStage} setOpenCreateForm={setOpenCreateForm} /> : (
 		<div className={styles.container}>
-			{!openCreateForm && !formId && (
-				<div className={styles.header}>
-					<Button themeType="accent" onClick={() => setOpenCreateForm(true)}>Create New</Button>
+			{!openCreateForm && !!designation && (
+				<div className={styles.form_header}>
+					<Button themeType="accent" onClick={() => showForm()}>Create New</Button>
 				</div>
 			)}
 
-			{formId ? renderOldForm() : (
-				<div className={styles.forms}>
-					{formList.map((form) => {
-						const {
-							id = '', month = '', year = '', dept = '', role = '', status = '', created_at = '',
-							last_used = '',
-						} = form;
+			<div className={styles.forms}>
+				{formList.map((form) => {
+					const {
+						id = '', month = '', year = '', dept = '', role = '', status = '', created_at = '',
+						last_used = '',
+					} = form;
 
-						return (
-							<div className={styles.form} key={id}>
-								<div className={styles.form_name}>
-									<p className={styles.label}>Form Name</p>
-									<div className={styles.value}>
-										{dept}
-										_
-										{role}
-										_
-										{month}
-										_
-										{year}
-									</div>
-								</div>
-
-								<div className={styles.published}>
-									<p className={styles.label}>Published On</p>
-									<div className={styles.value}>
-										{format(created_at, 'MMM yyyy')}
-									</div>
-								</div>
-
-								<div className={styles.last_used}>
-									<p className={styles.label}>Last Used</p>
-									<div className={styles.value}>
-										{format(last_used, 'MMM yyyy')}
-									</div>
-								</div>
-
-								<div className={styles.status}>
-									<p className={styles.label}>Status</p>
-									<div className={styles.value}>
-										<Pill color={status === 'active' ? 'green' : 'red'}>
-											{status}
-										</Pill>
-									</div>
-								</div>
-
-								<div className={styles.action}>
-									{/* <p className={styles.label}>Form Name</p> */}
-									<div className={styles.value}>
-										<Button themeType="secondary" onClick={() => openOldForm(id)}>Use</Button>
-									</div>
+					return (
+						<div className={styles.form} key={id}>
+							<div className={styles.form_name}>
+								<p className={styles.label}>Form Name</p>
+								<div className={styles.value}>
+									{dept}
+									_
+									{role}
+									_
+									{month}
+									_
+									{year}
 								</div>
 							</div>
-						);
-					}) }
 
-				</div>
-			)}
+							<div className={styles.published}>
+								<p className={styles.label}>Published On</p>
+								<div className={styles.value}>
+									{format(created_at, 'MMM yyyy')}
+								</div>
+							</div>
+
+							<div className={styles.last_used}>
+								<p className={styles.label}>Last Used</p>
+								<div className={styles.value}>
+									{format(last_used, 'MMM yyyy')}
+								</div>
+							</div>
+
+							<div className={styles.status}>
+								<p className={styles.label}>Status</p>
+								<div className={styles.value}>
+									<Pill color={status === 'active' ? 'green' : 'red'}>
+										{status}
+									</Pill>
+								</div>
+							</div>
+
+							<div className={styles.action}>
+								{/* <p className={styles.label}>Form Name</p> */}
+								<div className={styles.value}>
+									<Button themeType="secondary" onClick={() => openOldForm(id)}>Use</Button>
+								</div>
+							</div>
+						</div>
+					);
+				}) }
+
+			</div>
 
 		</div>
+	)
+
 	);
 }
 

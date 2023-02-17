@@ -9,22 +9,41 @@ import AddQuestions from './AddQuestions';
 import SubmitForm from './SubmitForm';
 
 function CreateFeedbackForm({
-	formId = '', setFormId = () => {}, department = 'a', work_scope = 'b',
+	formId = '', setFormId = () => {}, department, designation,
 	setOpenCreateForm = () => {},
+	formStage = '',
+	setFormStage = () => {},
 }) {
-	const [formStage, setFormStage] = useState('add_questions');
 	const [questionActionList, setQuestionActionList] = useState({});
 
-	const proceedForm = (stage) => {
-		setFormStage(stage);
-		storeQuestionData({ department, work_scope, checkList: stage === 'cancel' ? [] : questionActionList.checked });
+	const saveForm = (newStage) => {
+		storeQuestionData({
+			department,
+			designation,
+			checkList : questionActionList.checked,
+			weighList : questionActionList.weigh,
+			stage     : newStage,
+		});
+	};
+
+	const proceedForm = (newStage) => {
+		setFormStage(newStage);
+
+		storeQuestionData({
+			department,
+			designation,
+			checkList : newStage === 'cancel' ? [] : questionActionList.checked,
+			weighList : newStage === 'cancel' ? [] : questionActionList.weigh,
+			stage     : newStage === 'cancel' ? undefined : newStage,
+		});
 	};
 
 	useEffect(() => {
-		setQuestionActionList({ ...questionActionList, checked: fetchLocalCheckList(department, work_scope) });
-	}, [work_scope]);
+		const { checkList = [], weighList = [], stage = '' } = fetchLocalCheckList(department, designation);
+		setQuestionActionList({ ...questionActionList, checked: checkList, weigh: weighList });
+		setFormStage(stage || 'add_questions');
+	}, []);
 
-	console.log('questionActionList', questionActionList);
 	const renderFormStage = () => {
 		if (formStage === 'add_questions') {
 			return (
@@ -33,6 +52,7 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
+					saveForm={saveForm}
 				/>
 			);
 		}
@@ -52,9 +72,10 @@ function CreateFeedbackForm({
 			}
 			return (
 				<SubmitForm
-					checkedList={questionActionList.checked}
+					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
+					saveForm={saveForm}
 				/>
 			);
 		}
@@ -70,10 +91,11 @@ function CreateFeedbackForm({
 			setOpenCreateForm(false);
 		}
 
-		return '';
+		setFormId('');
+		setOpenCreateForm(false);
 	};
 
-	return renderFormStage({ stage: formStage, setStage: setFormStage });
+	return renderFormStage();
 }
 
 export default CreateFeedbackForm;

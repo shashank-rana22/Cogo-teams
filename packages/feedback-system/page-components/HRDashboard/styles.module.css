@@ -104,3 +104,11 @@
 	justify-content: space-between;
 	margin: 4px 0;
 }
+
+.upload_modal {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+		}
+	}
+}
