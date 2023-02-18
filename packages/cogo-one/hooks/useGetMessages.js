@@ -45,7 +45,7 @@ const useGetMessages = ({ activeChatCollection }) => {
 			setMessagesData([...messagesData]);
 		});
 	};
-	return { getNextData, getFirebaseData, lastPage, messagesData, loading };
+	return { getNextData, getFirebaseData, lastPage, messagesData };
 };
 
 export default useGetMessages;
