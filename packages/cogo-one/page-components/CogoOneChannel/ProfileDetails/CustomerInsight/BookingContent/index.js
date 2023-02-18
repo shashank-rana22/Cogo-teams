@@ -1,64 +1,126 @@
-import { Pill } from '@cogoport/components';
-import { IcCCountryIndia, IcMFcl, IcMPort } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMPort } from '@cogoport/icons-react';
+import { startCase, isEmpty, format } from '@cogoport/utils';
+
+import { SERVICE, SERVICE_ICON_MAPPING } from '../../../../../constants';
+import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
-function BookingContent() {
+function BookingContent({ last_shipment_data = {}, trade_type = '', shipping_line = {}, created_at = '' }) {
+	const services = last_shipment_data?.shipment_type;
+
+	const { name:{ origin = '', destination = '' } } = TRANSACTIONAL_KEYS_MAPPING[services];
+
+	const origin_port = last_shipment_data[origin] || {};
+
+	const destination_port = last_shipment_data[destination] || {};
+
+	function toolTip(country, name) {
+		return (
+			<div className={styles.tooltip_content}>
+				{startCase(country)}
+				,
+				{' '}
+				{startCase(name)}
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.left}>
-					<IcCCountryIndia width={20} height={20} />
-					<div className={styles.title}>Cosco Shipping</div>
+
+					<div className={styles.title}>
+						{shipping_line?.business_name}
+						{' '}
+
+					</div>
 				</div>
 				<div className={styles.right}>
-					<Pill
-						key="Import"
-						size="sm"
-						color="#C4DC91"
-					>
-						Import
-					</Pill>
+
+					<div className={styles.category_type}>
+						{startCase(trade_type)}
+					</div>
 				</div>
 			</div>
 			<div className={styles.body}>
 				<div className={styles.type}>
-					<IcMFcl width={20} height={20} fill="#221F20" />
-					<div className={styles.type_name}>FCL</div>
+
+					{SERVICE_ICON_MAPPING[last_shipment_data?.shipment_type]}
+					<div className={styles.type_name}>{SERVICE[last_shipment_data?.shipment_type]}</div>
 				</div>
 				<div className={styles.details}>
 					<div className={styles.port}>
-						<div className={styles.origin}>
-							India,
-							{' '}
-							<span>(INNSA)</span>
-							,
-							{' '}
-							<div className={styles.name}>Jawaharlal Nehru</div>
-						</div>
+
+						<Tooltip content={toolTip(origin_port?.country?.name, origin_port?.name)} placement="bottom">
+							<div className={styles.origin}>
+								{startCase(origin_port?.country?.name)}
+								,
+								{' '}
+								{!isEmpty(origin_port?.port_code) && (
+									<span>
+										(
+										{origin_port?.port_code}
+										)
+									</span>
+								)}
+								,
+								{' '}
+								<div className={styles.port_name}>
+									{startCase(origin_port?.name)}
+								</div>
+							</div>
+						</Tooltip>
+
 					</div>
 					<IcMPort width={20} height={20} fill="#ACDADF" />
+
 					<div className={styles.port}>
-						<div className={styles.origin}>
-							China,
-							{' '}
-							<span>(CNSHA)</span>
-							,
-							{' '}
-							<div className={styles.name}>Shanghai</div>
-						</div>
+
+						<Tooltip
+							content={toolTip(
+								destination_port?.country?.name,
+								destination_port?.name,
+							)}
+							placement="bottom"
+						>
+							<div className={styles.origin}>
+								{startCase(destination_port?.country?.name)}
+								,
+								{' '}
+								{!isEmpty(destination_port?.port_code) && (
+									<span>
+										(
+										{destination_port?.port_code}
+										)
+									</span>
+								)}
+								,
+								{' '}
+								<div className={styles.port_name}>
+									{startCase(destination_port?.name)}
+								</div>
+							</div>
+						</Tooltip>
+
 					</div>
 				</div>
 			</div>
 			<div className={styles.footer}>
-				<div className={styles.quantities}>2 Ctr</div>
+				{/* <div className={styles.quantities}>2 Ctr</div>
 				<div className={styles.quantities}>40 ft </div>
 				<div className={styles.quantities}>
 					Std
 					<span>Gen</span>
 				</div>
-				<div className={styles.quantities}>26 MT</div>
+				<div className={styles.quantities}>26 MT</div> */}
+				Booked On :
+				{' '}
+				{format(created_at, 'dd MMM YYYY')}
+				{}
 			</div>
+
 		</div>
 	);
 }

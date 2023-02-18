@@ -30,6 +30,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		fetchActivityLogs = () => {},
 	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
 	console.log('data', data);
+
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
 	const handleFilters = () => {
