@@ -2,6 +2,8 @@
 import { cl } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
+import CustomFileDiv from '../CustomFileDiv';
+
 import styles from './styles.module.css';
 
 function SentDiv({
@@ -12,8 +14,9 @@ function SentDiv({
 		bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
 	};
 	const MESSAGE_MAPPING = {
-		text  : ['text', 'template'],
-		media : ['image', 'video'],
+		text    : ['text', 'template'],
+		media   : ['image', 'video'],
+		contact : ['contact'],
 
 	};
 	const {
@@ -22,20 +25,30 @@ function SentDiv({
 		response: { message = '', btns = [] } = {},
 		send_by = 'kam',
 		session_type = 'bot',
+		imageURL = '',
+		pdfURL = '',
+
 	} = eachMessage;
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
-	// const renderMessage = () => {
-	// 	if (MESSAGE_MAPPING.text.includes(message_type)) {
-	// 		return <div dangerouslySetInnerHTML={{ __html: message }} />;
-	// 	}
-	// 	if(['text', 'template'].includes(message_type))
-	// };
+	const renderMessage = () => {
+		if (MESSAGE_MAPPING.text.includes(message_type)) {
+			return <div dangerouslySetInnerHTML={{ __html: message }} />;
+		}
+
+		if (MESSAGE_MAPPING.media.includes(message_type)) {
+			return <obj data={imageURL} width="300" height="200" />;
+		}
+		if (message_type === 'document') {
+			return <CustomFileDiv pdfURL={pdfURL} />;
+		}
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.message_div}>
 				<div className={styles.name}>
 					Replied by
+					{' '}
 					{session_type === 'admin' ? send_by : 'bot'}
 					,
 					<span className={styles.time_stamp}>{date}</span>

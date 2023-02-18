@@ -30,7 +30,7 @@ const useSendChat = ({
 		);
 	}
 
-	const sendChatMessage = async () => {
+	const sendChatMessage = async (scrollBottom = () => {}) => {
 		const newMessage = draftMessages?.[id] || '';
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
@@ -50,6 +50,7 @@ const useSendChat = ({
 				pdfUrl            : fileType !== 'image' ? finalUrl : '',
 			};
 			await addDoc(activeChatCollection, adminChat);
+			scrollBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;
 			await updateDoc(messageFireBaseDoc, {
@@ -99,8 +100,45 @@ const useSendChat = ({
 		const updatedDocData = updatedDoc.data();
 		setRoomData({ ...(updatedDocData || {}), id: updatedDoc?.id });
 	};
+	const sentQuickSuggestions = async (val, scrollBottom) => {
+		const adminChat = {
+			conversation_type : 'received',
+			response          : { message: val },
+			created_at        : Date.now(),
+			send_by           : user_name,
+			session_type      : 'admin',
 
-	return { sendChatMessage, updatetags, messageFireBaseDoc };
+		};
+		await addDoc(activeChatCollection, adminChat);
+		scrollBottom();
+		const doc1 = await getDoc(messageFireBaseDoc);
+		const old_count = doc1.data().new_message_count_user;
+		await updateDoc(messageFireBaseDoc, {
+			new_message_count      : 0,
+			last_message           : val,
+			updated_at             : Date.now(),
+			new_message_count_user : old_count + 1,
+		});
+		setTimeout(() => {
+			if (channel_type === 'whatsapp') {
+				const {
+					user_id = null,
+					organization_id = null,
+					mobile_number = '',
+				} = formattedData || {};
+				createWhatsappCommunication({
+					recipient        : mobile_number,
+					user_id,
+					organization_id,
+					message_metadata : {
+						message_type : 'text',
+						message      : val,
+					},
+				});
+			}
+		}, 200);
+	};
+	return { sendChatMessage, updatetags, messageFireBaseDoc, sentQuickSuggestions };
 };
 
 export default useSendChat;
