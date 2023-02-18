@@ -29,10 +29,12 @@
 		margin-bottom: 16px;
 	}
 }
-.clear_filter{
-	margin-right: 10px;
+
+.clear_filter {
 	margin-top: 6px;
+	margin-right: 10px;
 }
-.filter_container{
+
+.filter_container {
 	display: flex;
 }

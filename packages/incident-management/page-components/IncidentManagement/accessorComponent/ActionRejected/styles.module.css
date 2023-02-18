@@ -1,21 +1,21 @@
-.main_container{
-    display: flex;
-    flex-direction: column;
-    margin: 8px;
-    width: max-content;
+.main_container {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	margin: 8px;
 }
-.container{
-    display: flex;
-    font-size: 12px;
-	cursor: pointer;
-	width: 100%;
-}
-.hr{
-    height: 1px;
-	width: 100%;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	background: #EDD7A9;
-  
 
+.container {
+	display: flex;
+	width: 100%;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.hr {
+	width: 100%;
+	height: 1px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: #edd7a9;
 }

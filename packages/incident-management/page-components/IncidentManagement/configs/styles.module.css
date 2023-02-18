@@ -1,8 +1,9 @@
-.referenceId{
-    color: #F68B21;
-    font-weight: 600;
-    margin-left: 10px;
+.referenceId {
+	margin-left: 10px;
+	font-weight: 600;
+	color: #f68b21;
 }
-.request_type{
-    margin-left: -10px;
+
+.request_type {
+	margin-left: -10px;
 }

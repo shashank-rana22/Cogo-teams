@@ -1,18 +1,19 @@
-.buttonStyle{
-    cursor: pointer;
-}
-.header{
-    color: #EE3425;
+.buttonStyle {
+	cursor: pointer;
 }
 
-.text_area{
-    height: 10px;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    min-height: 80px;
+.header {
+	color: #ee3425;
 }
 
-.remarks_style{
-    margin-top: 20px;
-    font-weight: 500;
+.text_area {
+	height: 10px;
+	min-height: 80px;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.remarks_style {
+	margin-top: 20px;
+	font-weight: 500;
 }

@@ -1,70 +1,79 @@
-.name_container{
-    display: flex;
-}
-.label{
-    font-size: 12px;
-    color: #333333;
-    font-weight: 600;
-}
-.value{
-    font-size: 12px;
-    color: #333333;
-    margin-left: 1px;
+.name_container {
+	display: flex;
 }
 
-.amount_value{
-    color: #F68B21;
-    font-weight: 600;
-    font-size: 15px;
-}
-.rate_conatiner{
-    display: flex;
-    padding-top: 16px;
-    padding-bottom: 16px;
-}
-.current{
-    background: #FFFFFF;
-    border: 1px solid #C2C2C2;
-    border-radius: 4px;
-    padding: 15px;
-    margin-right: 30px;
-    min-width: 170px;
-}
-.requested{
-    background: #FFFFFF;
-    border: 1px solid #C2C2C2;
-    border-radius: 4px; 
-    padding: 15px;
-    min-width: 170px;
+.label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
 }
 
-.rate_label{
-    font-weight: 500;
-    font-size: 14px;
-    color: #828282;
+.value {
+	margin-left: 1px;
+	font-size: 12px;
+	color: #333;
 }
 
-.rate_value{
-    font-weight: 600;
-    font-size: 15px;
-    color: #333333;
+.amount_value {
+	font-size: 15px;
+	font-weight: 600;
+	color: #f68b21;
 }
-.subcontainer{
-    padding-right: 50px;
+
+.rate_conatiner {
+	display: flex;
+	padding-top: 16px;
+	padding-bottom: 16px;
 }
-.link{
-    font-size: 12px;
-    font-weight: 500;
-    text-decoration: underline;
-    cursor: pointer;
+
+.current {
+	min-width: 170px;
+	padding: 15px;
+	margin-right: 30px;
+	background: #fff;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
 }
-.text_area{
-    height: 10px;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    min-height: 80px;
+
+.requested {
+	min-width: 170px;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
 }
-.remarks_style{
-    font-weight: 500;
-    font-size: 12px;
+
+.rate_label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.rate_value {
+	font-size: 15px;
+	font-weight: 600;
+	color: #333;
+}
+
+.subcontainer {
+	padding-right: 50px;
+}
+
+.link {
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.text_area {
+	height: 10px;
+	min-height: 80px;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.remarks_style {
+	font-size: 12px;
+	font-weight: 500;
 }

@@ -1,17 +1,18 @@
-.headerText{
-    font-weight: 600;
-    font-size: 25px;
-    color: #221F20;
+.headerText {
+	font-size: 25px;
+	font-weight: 600;
+	color: #221f20;
 }
 
-.list_container{
-    padding-top: 20px;
+.list_container {
+	padding-top: 20px;
 }
+
 .pagination_container {
 	display: flex;
-    background-color: #ffff;
 	justify-content: flex-end;
-    padding-bottom: 50px;
+	padding-bottom: 50px;
+	background-color: #ffff;
 
 	@media (max-width: 768px) {
 		position: absolute;

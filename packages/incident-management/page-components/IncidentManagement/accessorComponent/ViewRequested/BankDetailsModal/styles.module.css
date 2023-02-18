@@ -1,65 +1,77 @@
-.name_container{
-    margin-left: 20px;
-    margin-top: -15px;
-    justify-content: space-between;
+.name_container {
+	justify-content: space-between;
+	margin-top: -15px;
+	margin-left: 20px;
 }
-.label{
-    font-size: 12px;
-    color: #333333;
-    font-weight: 600;
-    margin-top: 2px;
-    margin-left: 3px;
+
+.label {
+	margin-top: 2px;
+	margin-left: 3px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
 }
-.type_value{
-    color: #F68B21;
-    font-weight: 600;
-    font-size: 12px;
+
+.type_value {
+	font-size: 12px;
+	font-weight: 600;
+	color: #f68b21;
 }
-.value{
-    color: #333333;
-    margin-left: 2px;
-    display: flex;
+
+.value {
+	display: flex;
+	margin-left: 2px;
+	color: #333;
 }
-.rate_conatiner{
-    display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
+
+.rate_conatiner {
+	display: flex;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
-.bank_details{
-    padding: 0px;
+
+.bank_details {
+	padding: 0;
 }
-.subcontainer{
-    padding-right: 50px;
+
+.subcontainer {
+	padding-right: 50px;
 }
-.link{
-    font-size: 12px;
-    font-weight: 500;
-    text-decoration: underline;
-    cursor: pointer;
-    padding-right: 10px;
+
+.link {
+	padding-right: 10px;
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: underline;
+	cursor: pointer;
 }
-.text_area{
-    height: 10px;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    min-height: 80px;
+
+.text_area {
+	height: 10px;
+	min-height: 80px;
+	border: 1px solid #333;
+	border-radius: 4px;
 }
-.remarks_style{
-    font-weight: 500;
-    font-size: 12px;
+
+.remarks_style {
+	font-size: 12px;
+	font-weight: 500;
 }
-.hr{
-    height: 1px;
+
+.hr {
 	width: 100%;
-	margin-bottom: 10px;
+	height: 1px;
 	margin-top: 10px;
-	background: #D9D9D9;
+	margin-bottom: 10px;
+	background: #d9d9d9;
 }
-.raise_button{
-    border: none;
-    align-items: center;
+
+.raise_button {
+	align-items: center;
+	border: none;
 }
-.category_flex{
-    display: flex;
-    flex-direction: row;
+
+.category_flex {
+	display: flex;
+	flex-direction: row;
 }
