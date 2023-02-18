@@ -3,6 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
 
 import styles from './styles.module.css';
@@ -13,9 +14,9 @@ function TransactionalActivity({ transactional = {}, pagination, setPagination =
 
 	if (isEmpty(list)) {
 		return (
-			<div className={styles.empty_state}>
-				No Data Found...
-			</div>
+		// <div className={styles.empty_state}>
+			<EmptyState />
+		// </div>
 		);
 	}
 

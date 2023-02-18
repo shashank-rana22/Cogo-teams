@@ -1,5 +1,6 @@
 import { Pill, Placeholder, Loader } from '@cogoport/components';
 
+import EmptyState from '../../../../common/EmptyState';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -26,9 +27,7 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 
 	if (user_id === null) {
 		return (
-			<div className={styles.empty_container}>
-				No Data Found...
-			</div>
+			<EmptyState />
 		);
 	}
 

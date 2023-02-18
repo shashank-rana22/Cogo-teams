@@ -1,7 +1,8 @@
 import { Avatar, Pagination } from '@cogoport/components';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import { SOURCE_ICON_MAPPING } from '../../../../../constants';
 
 import styles from './styles.module.css';
@@ -11,9 +12,9 @@ function CommunicationActivity({ communication = {}, pagination, setPagination =
 
 	if (isEmpty(list)) {
 		return (
-			<div className={styles.empty_state}>
-				No Data Found...
-			</div>
+		// <div className={styles.empty_state}>
+			<EmptyState />
+		// </div>
 		);
 	}
 

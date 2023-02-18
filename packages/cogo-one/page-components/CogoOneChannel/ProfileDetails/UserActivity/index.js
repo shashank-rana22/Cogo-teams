@@ -3,6 +3,7 @@ import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogop
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
@@ -51,9 +52,9 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 
 	if (isEmpty(user_id)) {
 		return (
-			<div className={styles.empty_state}>
-				No Data Found...
-			</div>
+		// <div className={styles.empty_state}>
+			<EmptyState />
+		// </div>
 		);
 	}
 

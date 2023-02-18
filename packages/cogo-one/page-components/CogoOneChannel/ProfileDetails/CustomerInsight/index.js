@@ -4,6 +4,7 @@ import { IcMPort } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import SERVICE_TYPE_OPTIONS from '../../../../configurations/service-type-options';
 import useGetOmnichannelCustomerInsights from '../../../../hooks/useGetOmnichannelCustomerInsights';
 
@@ -21,17 +22,6 @@ function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard }) {
 
 	const { shipment_and_spot_search_stats = {}, total_messages } = data || {};
 
-	const emptyState = () => (
-		<div className={styles.empty_state}>
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg"
-				alt=""
-				width="200px"
-				height="200px"
-			/>
-		</div>
-	);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrap}>
@@ -48,7 +38,7 @@ function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard }) {
 			<div className={styles.organisation_container}>
 				{loading ? (<LoadingState />) : (
 					<>
-						{isEmpty(shipment_and_spot_search_stats) ? emptyState() : (
+						{isEmpty(shipment_and_spot_search_stats) ? <EmptyState /> : (
 
 							<>
 								{Object.keys(shipment_and_spot_search_stats).map((key) => {
@@ -77,7 +67,7 @@ function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard }) {
 									return (
 										<>
 											{last_shipment_data === null && isEmpty(list) ? (
-												emptyState()
+												<EmptyState />
 											) : (
 
 												<div className={styles.organisation_div}>
