@@ -34,7 +34,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	} = roomData || {};
 
 	let activeChatCollection;
-	console.log('channel_type', channel_type);
 
 	if (channel_type) {
 		activeChatCollection = collection(
@@ -89,6 +88,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 					headertags={headertags}
 					assignChat={assignChat}
 					formattedData={formattedData}
+					roomData={roomData}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
