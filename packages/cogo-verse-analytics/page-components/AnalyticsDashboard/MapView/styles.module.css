@@ -18,8 +18,23 @@
     justify-content: flex-end;
     :global{
       .ui_select_display_container{
-        height: 38px !important;
+        height: 37px !important;
         border-radius: 6px;
+      }
+
+      .ui_select_options_container{
+        z-index: 1000;
+      }
+      .react-datepicker-popper{
+        z-index: 1000;
+      }
+      .react-datepicker__input-container{
+        input{
+          font-family: 'Poppins', sans-serif;
+        }
+      }
+      .ui_select_input_placeholder{
+        color: #828282;
       }
       
     }
@@ -49,6 +64,16 @@
 .circle_content{
     width:100%;
     display: block;
+    z-index: 900;
+
+    :global{
+      .ui_group_button_main_container{
+        width: fit-content !important;
+      }
+      .ui_group_button_container{
+       width: 25px !important;
+      }
+    }
 
 }
 
@@ -59,6 +84,7 @@
     margin: auto;
     border:dashed 1px #CFBC93;
     padding:20px;
+    z-index: 900;
     
  }
 
@@ -76,6 +102,7 @@
     align-items: center;
     text-align: center;
     padding: 10px;
+    z-index: 900;
     
 
  }
@@ -99,6 +126,34 @@
   canvas{
     /* border:dashed 1px #CFBC93; */
     border-radius: 500px;
+  }
+
+}
+
+.globe_controls{
+  position: absolute;
+  z-index: 900;
+  margin-top: 400px;
+  margin-left: 50px;
+  border-radius: 6px;
+  /* box-shadow: 0px 1px 3px rgba(8, 12, 40, 0.1), 0px 1px 2px rgba(8, 12, 40, 0.06); */
+
+  :global{
+    .ui_buttonicon_container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid 1px #e0e0e0;
+    }
+    .tippy-content{
+      padding: 2px;
+      font-size: 10px;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
   }
 
 }

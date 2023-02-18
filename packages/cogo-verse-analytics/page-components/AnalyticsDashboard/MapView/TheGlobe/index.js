@@ -21,11 +21,11 @@ function TheGLobe({ country = {} }) {
 
 	if (!isEmpty(globeGL.current)) {
 		globeGL.current.controls().autoRotate = true;
-		globeGL.current.controls().autoRotateSpeed = 0.3;
+		globeGL.current.controls().autoRotateSpeed = 0.5;
 		globeGL.current.renderer().alpha = true;
 
-		globeGL.current.controls().maxDistance = globeGL.current.getGlobeRadius() * 3.5;
-		globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2;
+		globeGL.current.controls().maxDistance = globeGL.current.getGlobeRadius() * 4;
+		globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2.25;
 	}
 
 	// experiments
@@ -40,7 +40,7 @@ function TheGLobe({ country = {} }) {
 
 	const startRotation = () => {
 		if (!isEmpty(globeGL.current)) {
-			globeGL.current.controls().autoRotateSpeed = 0.3;
+			globeGL.current.controls().autoRotateSpeed = 0.5;
 		}
 	};
 	const stopRotation = () => {
@@ -57,7 +57,8 @@ function TheGLobe({ country = {} }) {
 	// Handling Rotate and point of view
 
 	const CountryLocation = { lat: country_lat, lng: country_lng };
-	const defaultMapCenter = { lat: 0, lng: 0 };
+	// eslint-disable-next-line no-unsafe-optional-chaining
+	const defaultMapCenter = { lat: 0, lng: 0, altitude: 2 };
 	const pointRotationSpeed = 100;
 
 	useEffect(() => {
@@ -70,6 +71,11 @@ function TheGLobe({ country = {} }) {
 
 		startRotation();
 	}, [country]);
+
+	const markerSvg = `<svg viewBox="-4 0 36 36">
+    <path fill="currentColor" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"></path>
+    <circle fill="#8F7700" cx="14" cy="14" r="7"></circle>
+  </svg>`;
 
 	return (
 		<div className={styles.globe_container}>
@@ -85,19 +91,35 @@ function TheGLobe({ country = {} }) {
 				atmosphereAltitude={0.1}
 				globeImageUrl={TEXTURES[colorMode].two}
 				// Hexbin
-				hexBinPointsData={pointBinData}
-				hexAltitude={0.015}
-				hexBinResolution={3}
-				hexTopColor={() => 'rgba(114, 120, 173, 1)'}
-				hexSideColor={() => 'rgba(206, 209, 237, 1)'}
-				hexBinMerge
-				enablePointerInteraction
+				// hexBinPointsData={pointBinData}
+				// hexAltitude={0.010}
+				// hexBinResolution={3}
+				// hexTopColor={() => 'rgba(114, 120, 173, 1)'}
+				// hexSideColor={() => 'rgba(206, 209, 237, 1)'}
+				// hexBinMerge
+				// enablePointerInteraction
 				// Rings
-				ringsData={pointBinData}
-				ringColor={() => 'rgba(171, 176, 222, 0.65)'}
-				ringMaxRadius={4}
-				ringPropagationSpeed={3}
-				ringRepeatPeriod={400}
+				// ringsData={pointBinData}
+				// ringColor={() => 'rgba(114, 120, 173, 1)'}
+				// ringMaxRadius={4}
+				// ringPropagationSpeed={2}
+				// ringRepeatPeriod={600}
+				// html
+				htmlElementsData={pointBinData}
+				htmlElement={(d) => {
+					// console.log('d', d);
+					// eslint-disable-next-line no-undef
+					const el = document?.createElement('div');
+					el.innerHTML = markerSvg;
+					el.style.color = '#FCDC00';
+					el.style.width = '10px';
+					el.style['pointer-events'] = 'auto';
+					el.style['z-index'] = '1 !important';
+					el.style.cursor = 'pointer';
+
+					el.onclick = () => console.info(d);
+					return el;
+				}}
 
 			/>
 

@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 
-import { Select, DateRangepicker, cl } from '@cogoport/components';
+import { Select, DateRangepicker, cl, ButtonIcon, Tooltip } from '@cogoport/components';
+import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -74,6 +75,11 @@ function MapView() {
 						},
 					)
 					}
+					<div className={styles.globe_controls}>
+						<Tooltip content="Reset Globe's Position" placement="bottom">
+							<ButtonIcon size="md" icon={<IcMRefresh />} themeType="primary" />
+						</Tooltip>
+					</div>
 
 				</div>
 			</div>
