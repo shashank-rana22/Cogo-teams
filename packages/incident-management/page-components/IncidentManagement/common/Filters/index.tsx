@@ -24,7 +24,7 @@ function Filters({
 		<section className={styles.container} id="filters">
 			<div className={styles.select_container}>
 				{filterControls(activeTab).map((control) => {
-					const Element = getElements(control.type);
+					const Element: any = getElements(control.type);
 					return (
 						<Element
 							key={control.name}
