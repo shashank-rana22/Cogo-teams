@@ -30,7 +30,7 @@ const useSendChat = ({
 		);
 	}
 
-	const sendChatMessage = async (scrollBottom) => {
+	const sendChatMessage = async (scrollBottom = () => {}) => {
 		const newMessage = draftMessages?.[id] || '';
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
