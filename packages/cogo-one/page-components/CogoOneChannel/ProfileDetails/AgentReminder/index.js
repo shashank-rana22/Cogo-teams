@@ -4,13 +4,15 @@ import { useState } from 'react';
 
 import useCreateCommunicationLog from '../../../../hooks/useCreateCommunication';
 import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicationLog';
-import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
+import FormatData from '../../../../utils/formatData';
 
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
 function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
-	const { user_id } = getActiveCardDetails(activeMessageCard);
+	const {
+		orgId = '',
+	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
 
 	const [inputValue, setInputValue] = useState({
 		title       : '',
@@ -26,7 +28,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
 		listData = {},
 		fetchListLogApi = () => {},
 		listLoading,
-	} = useGetListCommunicationLog({ activeMessageCard, activeTab, activeVoiceCard });
+	} = useGetListCommunicationLog({ activeMessageCard, activeVoiceCard });
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue,
 		setDate,
@@ -57,7 +59,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
 		});
 	};
 
-	if (isEmpty(user_id)) {
+	if (orgId === '') {
 		return (
 			<div className={styles.empty_container}>No Data Found...</div>
 		);

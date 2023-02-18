@@ -13,7 +13,7 @@ const useGetMessages = ({ activeChatCollection }) => {
 	const [lastDoc, setLastDoc] = useState(null);
 	const [lastPage, setLastPage] = useState(false);
 	const [loading, setLoading] = useState(false);
-	console.log('loading', loading);
+	// console.log('loading', loading);
 	const getFirebaseData = () => {
 		const chatCollectionQuery = query(
 			activeChatCollection,
