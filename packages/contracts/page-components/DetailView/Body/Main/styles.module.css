@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 64%;
+	margin: 16px;
+	margin-left: 10px;
+}
+
+.heading {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: 60px;
+}
+
+.port_pair {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin-left: 6px;
+}
+
+.pills {
+	display: flex;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 4px;
+}
+
+.stats {
+	display: flex;
+	gap: 82px;
+	padding-left: 18px;
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+	margin-right: 32px;
+}

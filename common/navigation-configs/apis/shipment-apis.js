@@ -829,6 +829,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_exchange_rate_deviation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'get_shipment_data_for_invoice',
 		access_type  : 'private',
 		service_name : 'sage',
@@ -934,6 +939,12 @@ const apis = [
 		api         : 'list_lcl_customs_rates',
 		access_type : 'private',
 		feature     : 'revenue_desk',
+	},
+	{
+		api          : 'get_contract_previous_service_providers',
+		access_type  : 'private',
+		service_name : 'unified_dashboard',
+		feature      : 'revenue_desk',
 	},
 	{
 		api         : 'update_shipment_flash_booking_rate',
@@ -1252,6 +1263,11 @@ const apis = [
 	},
 	{
 		api          : 'list_document_desk_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_lastmile_desk_shipments',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},

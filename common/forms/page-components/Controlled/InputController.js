@@ -9,14 +9,15 @@ function InputController(props) {
 
 	return (
 		<Controller
-			key={rest.id}
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<Input
 					{...rest}
-					key={rest.id}
+					id={name}
+					key={name}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
