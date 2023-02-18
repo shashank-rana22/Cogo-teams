@@ -7,6 +7,7 @@
 		.ui_table_container {
 			border: none;
 		}
+
 		.ui_table_head_cell {
 			border-bottom: 1px solid #f68b21;
 		}
@@ -18,7 +19,6 @@
 		.ui_table_body_cell {
 			padding: 12px 20px;
 		}
-		
 	}
 
 	@media (max-width: 1010px) {
