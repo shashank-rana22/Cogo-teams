@@ -13,7 +13,7 @@ function SentDiv({ eachList = {} }) {
 		start_time_of_call = '',
 		end_time_of_call,
 	} = eachList || {};
-	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+	const date = format(new Date(created_at), 'dd MMM YYYY');
 
 	const name = agent_data?.name;
 

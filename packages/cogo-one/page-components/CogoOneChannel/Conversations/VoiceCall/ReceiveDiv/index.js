@@ -14,7 +14,7 @@ function ReceiveDiv({ eachList = {} }) {
 		start_time_of_call = '',
 		end_time_of_call,
 	} = eachList || {};
-	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+	const date = format(new Date(created_at), 'dd MMM YYYY');
 	let name = user_number;
 	if (user_id) {
 		name = user_data?.name;

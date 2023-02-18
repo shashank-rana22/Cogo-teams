@@ -15,8 +15,8 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 			compStyles: { borderTopRightRadius: '0px', background: '#FFFCE6' },
 		},
 	};
-	const endTime = start_time_of_call?.split(' ')?.[1];
-	const startTime = end_time_of_call?.split(' ')?.[1];
+	const startTime = start_time_of_call?.split(' ')?.[1];
+	const endTime = end_time_of_call?.split(' ')?.[1];
 	const { start = '', end = '', compStyles = {} } = ICON_MAPPING[type] || {};
 	return (
 		<div>
