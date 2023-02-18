@@ -3,6 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import { PLATFORM_KEYS_MAPPING } from '../../../../../constants/PLATFORM_KEYS_MAPPING';
 
 import LoginComponent from './LoginComponent';
@@ -15,9 +16,9 @@ function PlatformActivity({ platform = {}, pagination, setPagination = () => {} 
 
 	if (isEmpty(list)) {
 		return (
-			<div className={styles.empty_state}>
-				No Data Found...
-			</div>
+		// <div className={styles.empty_state}>
+			<EmptyState />
+		// </div>
 		);
 	}
 	return (

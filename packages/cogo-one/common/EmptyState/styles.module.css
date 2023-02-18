@@ -1,0 +1,6 @@
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 28vh;
+}
