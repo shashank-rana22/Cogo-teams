@@ -1,34 +1,20 @@
-.container {
-	padding: 16px 0px;
-
-	.name {
-		font-weight: bold;
-		padding: 24px 0;
-		margin: 0;
-		border-bottom: 1px solid #828282;
-	}
-}
-
-.details_container {
-	padding: 16px 0;
-}
-
-.text_container {
+.user_info_container {
 	display: flex;
-	padding: 8px;
+	align-items: center;
+	height: 100%;
+}
 
-	.details {
-		width: 100px;
-		font-weight: 500;
-		color: #464646;
-		margin: 0px;
-	}
+.info_box_1 {
+	flex: 0.4;
+	padding-left: 20px;
+}
 
-	.data {
-		min-width: 144px;
-		font-weight: 500;
-		margin: 0px;
-	}
+.info_box_2 {
+	flex: 0.6;
+}
+
+.name {
+	font-weight: bold;
 }
 
 

@@ -56,9 +56,7 @@ function FeedbackFormModal({
 				<Button
 					size="sm"
 					themeType="accent"
-					onClick={() => {
-						setAddFeedback(true);
-					}}
+					onClick={() => 	setAddFeedback(true)}
 				>
 					{isEmpty(newFeedbackId) ? (
 						<>
@@ -74,28 +72,31 @@ function FeedbackFormModal({
 				</Button>
 			</div>
 
-			<Modal
-				show={addFeedback}
-				onClose={() => onCloseFunction()}
-				size="lg"
-				onOuterClick={() => onCloseFunction()}
-			>
-				<Modal.Header title="Feedback Form" />
+			{addFeedback && (
+				<Modal
+					show={addFeedback}
+					onClose={() => onCloseFunction()}
+					size="xl"
+					onClickOutside={() => onCloseFunction()}
+				>
+					<Modal.Header title="Feedback Form" />
 
-				<Modal.Body>
-					<FeedBackForm
-						userId={userId}
-						rating={rating}
-						comment={comment}
-						newFeedbackId={newFeedbackId}
-						setNewFeedbackId={setNewFeedbackId}
-						setComment={setComment}
-						showForm={addFeedback}
-						setShowForm={setAddFeedback}
-						setRating={setRating}
-					/>
-				</Modal.Body>
-			</Modal>
+					<Modal.Body style={{ padding: '0px' }}>
+						<FeedBackForm
+							userId={userId}
+							rating={rating}
+							comment={comment}
+							newFeedbackId={newFeedbackId}
+							setNewFeedbackId={setNewFeedbackId}
+							setComment={setComment}
+							showForm={addFeedback}
+							setShowForm={setAddFeedback}
+							setRating={setRating}
+						/>
+					</Modal.Body>
+				</Modal>
+			)}
+
 		</div>
 	);
 }

@@ -1,15 +1,15 @@
-import { Input } from '@cogoport/components';
+import { Select, Input } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
-import Filters from '../../../common/Filters';
 import UserTableData from '../../../common/userTableData';
 import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
-import getUserFilterControls from '../../../utils/getUserFilterControls';
+import getFeedBackControls from '../../../utils/getFeedbackControls';
 
 import styles from './styles.module.css';
 
@@ -24,8 +24,6 @@ function FeedbackManagement() {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const filterControls = getUserFilterControls();
-
 	const {
 		params,
 		setParams,
@@ -38,19 +36,25 @@ function FeedbackManagement() {
 		searchValue: query,
 	});
 
+	const { list: newTeamList = [], designations = [], total_count = '' } = feedbackData || {};
+
+	const feedbackControls = getFeedBackControls(designations);
+
+	const setFilter = (val, type) => {
+		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
+	};
+
 	const feedbackManagementColumns = useGetColumns({
 		getUserFeedbackList,
 		source: 'manager_feedback',
 	});
 
-	const { list: newTeamList = [], total_count = '', page_limit } = feedbackData || {};
-
-	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [searchValue]);
+	// useEffect(() => {
+	// 	debounceQuery(searchValue);
+	// }, [searchValue]);
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${isEmpty([newTeamList]) ? styles.empty_container : ''}`}>
 			<div className={styles.redirect_container}>
 				<div
 					className={styles.redirect_header}
@@ -74,31 +78,43 @@ function FeedbackManagement() {
 				</p>
 
 				<div className={styles.header_filters}>
-					<div style={{ marginRight: '16px' }}>
-						<Input
-							size="md"
-							value={searchValue}
-							onChange={setSearchValue}
-							placeholder="Search Member.."
-							prefix={<IcMSearchlight />}
-							type="text"
-						/>
-					</div>
-					<div>
-						<Filters controls={filterControls} params={params} setParams={setParams} />
-					</div>
+					<Select
+						value={params.filters?.designation}
+						onChange={(val) => setFilter(val, 'created_at_year')}
+						placeholder={feedbackControls.designation.placeholder}
+						style={{ marginRight: '8px' }}
+						options={feedbackControls.designation.options}
+					/>
+					<Select
+						value={params.filters?.created_at_year}
+						onChange={(val) => setFilter(val, 'created_at_year')}
+						placeholder={feedbackControls.status.placeholder}
+						style={{ marginRight: '8px' }}
+						options={feedbackControls.status.options}
+					/>
+					<Input
+						size="md"
+						value={searchValue}
+						onChange={setSearchValue}
+						placeholder="Search User..."
+						prefix={<IcMSearchlight />}
+						type="text"
+					/>
 				</div>
 			</div>
 
-			<UserTableData
-				columns={feedbackManagementColumns}
-				list={newTeamList}
-				loading={loading}
-				pagination={params.page}
-				setPagination={setPage}
-				total_count={total_count}
-				page_limit={page_limit}
-			/>
+			<div style={{ flex: '1' }}>
+				<UserTableData
+					columns={feedbackManagementColumns}
+					list={newTeamList}
+					loading={loading}
+					pagination={params.page}
+					setPagination={setPage}
+					total_count={total_count}
+					page_limit={params.page_limit}
+				/>
+			</div>
+
 		</div>
 	);
 }
