@@ -1,12 +1,15 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-import getActiveCardDetails from '../utils/getActiveCardDetails';
+import FormatData from '../utils/formatData';
 
 const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
-	const { organization_id } = activeVoiceCard || {};
-	const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
-
+	// const { organization_id } = activeVoiceCard || {};
+	// const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
+	const {
+		orgId = '',
+	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
+	console.log('orgId', orgId);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_organization',
 		method : 'get',
@@ -15,23 +18,23 @@ const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) =
 	const [organizationData, setOrganizationData] = useState(null);
 
 	const fetchOrganization = async () => {
-		let id;
-		if (activeTab === 'voice') {
-			id = organization_id;
-		} else {
-			id = orgId;
-		}
+		// let id = '';
+		// if (activeTab === 'voice') {
+		// 	id = orgId;
+		// } else {
+		// 	id = orgId;
+		// }
 		const res = await trigger({
 			params: {
-				id,
-				user_data_required: true,
+				id                 : orgId,
+				user_data_required : true,
 			},
 		});
 		setOrganizationData(res?.data?.data || {});
 	};
 
 	useEffect(() => {
-		if (user_id !== null) {
+		if (orgId !== '') {
 			fetchOrganization();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

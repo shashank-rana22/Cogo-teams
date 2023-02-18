@@ -1,31 +1,41 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Pill, Placeholder, Loader } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
-import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
+import FormatData from '../../../../utils/formatData';
+// import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 // import LoadingState from './LoaderState';
+
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
 function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	const { user_id } = getActiveCardDetails(activeMessageCard);
+	// const { user_id } = getActiveCardDetails(activeMessageCard);
+	const {
+		orgId = '',
+	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
 
 	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard, activeVoiceCard, activeTab });
 
-	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard, activeVoiceCard, activeTab });
+	const {
+		pointData = {},
+		pointLoading,
+	} = 	useGetOrganizationCogopoints({ activeMessageCard, activeVoiceCard, activeTab });
 
-	const { promoData, promoLoading } = useGetListPromotions({ activeMessageCard, activeVoiceCard });
-
-	const { agent, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
+	const { promoData = {}, promoLoading } = useGetListPromotions({ activeMessageCard, activeVoiceCard });
+	const { list = [] } = promoData || {};
+	const { agent = {}, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
 
-	if (user_id === null) {
+	if (orgId === '') {
 		return (
 			<EmptyState />
 		);
@@ -113,9 +123,23 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 					<Loader themeType="primary" />
 				</div>
 			) : (
-				<div className={styles.promotion_cards}>
-					<PromocodeThumbnail promoData={promoData} />
-				</div>
+				<>
+					{isEmpty(list) ? (
+						<div className={styles.promotion_cards_empty_state}>
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg"
+								alt="promocode"
+								width="200px"
+								height="200px"
+							/>
+						</div>
+					) : (
+						<div className={styles.promotion_cards}>
+							<PromocodeThumbnail list={list} />
+						</div>
+					)}
+				</>
+
 			)}
 		</div>
 
