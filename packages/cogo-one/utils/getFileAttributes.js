@@ -1,4 +1,4 @@
-import { IcMDocument, IcMPdf, IcMImage } from '@cogoport/icons-react';
+import { IcMDocument, IcMImage } from '@cogoport/icons-react';
 
 const fileIconMapping = {
 	document: <IcMDocument height={22} width={22} />,
