@@ -11,6 +11,7 @@ import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 	console.log('activeVoiceCard', activeVoiceCard);
+	console.log('activeVoiceCard', activeVoiceCard);
 	console.log('activeMessageCard', activeMessageCard);
 	const { user_details = {} } = activeMessageCard || {};
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
@@ -106,8 +107,8 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				/>
 
 			)}
-			<div className={styles.conversation_title}>Other Channels (03)</div>
-			<ConversationContainer />
+			<div className={styles.conversation_title}>Other Channels</div>
+			<ConversationContainer userData={userData} userId={userId} />
 		</>
 	);
 }

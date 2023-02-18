@@ -42,3 +42,11 @@
 	color: #221f20;
 	border-left: 2px solid #221f20;
 }
+
+.disable {
+	width: 18px;
+	height: 18px;
+	margin-right: 22px;
+	cursor: not-allowed;
+	fill: #abcd62;
+}
