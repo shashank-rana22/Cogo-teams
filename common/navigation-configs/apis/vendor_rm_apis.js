@@ -35,6 +35,12 @@ const apis = [
 		feature      : 'vendor',
 		service_name : 'vendor',
 	},
+	{
+		api          : 'list_vendors',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
 ];
 
 export default apis;

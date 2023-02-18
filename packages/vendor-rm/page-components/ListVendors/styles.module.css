@@ -24,3 +24,52 @@
 	font-weight: 500;
 	line-height: 24px;
 }
+
+.pending_from_user{
+	color:#ed3726;
+	display: flex;
+	align-items: center;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.verified{
+	color: #67C676;
+
+}
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.group{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.filter_container {
+	border: 1px solid #000000;
+	height: 32px;
+	margin: auto 16px;
+	background-color: #ffffff;
+	display: flex;
+	border-radius: 4px;
+	padding: 6px 12px;
+	cursor: pointer;
+}
+
+.text {
+	font-weight: 600;
+}
+
+.dot {
+	border: 3px solid #000000;
+	height: 3px;
+	background: #000000;
+	border-radius: 100%;
+	margin-left: 4px;
+}

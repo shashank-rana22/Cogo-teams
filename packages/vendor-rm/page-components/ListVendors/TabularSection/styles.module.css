@@ -1,0 +1,35 @@
+
+
+.table_container {
+	padding: unset !important;
+
+	:global {
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				font-size: 14px;
+				color: black;
+                padding-bottom: 10px; 
+                border-bottom: 1px solid #F68B21;
+                margin-bottom: 10px;
+              
+                ;
+			}
+		}
+
+		.ui_table_body_container {
+			background-color: white;
+
+			.ui_table_body_row {
+               :hover{
+                background-color:#ffffff;
+               }
+				.ui_table_body_cell {
+                    font-size: 12px;
+					padding-block: 20px;
+					color: #221f20;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
