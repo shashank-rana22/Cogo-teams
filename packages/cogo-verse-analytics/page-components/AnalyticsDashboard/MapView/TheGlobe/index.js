@@ -23,6 +23,9 @@ function TheGLobe({ country = {} }) {
 		globeGL.current.controls().autoRotate = true;
 		globeGL.current.controls().autoRotateSpeed = 0.3;
 		globeGL.current.renderer().alpha = true;
+
+		globeGL.current.controls().maxDistance = globeGL.current.getGlobeRadius() * 3.5;
+		globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2;
 	}
 
 	// experiments
@@ -68,8 +71,6 @@ function TheGLobe({ country = {} }) {
 		startRotation();
 	}, [country]);
 
-	console.log('globeGL?.current', globeGL?.current?.camera());
-
 	return (
 		<div className={styles.globe_container}>
 			<Globe
@@ -83,6 +84,7 @@ function TheGLobe({ country = {} }) {
 				showAtmosphere
 				atmosphereAltitude={0.1}
 				globeImageUrl={TEXTURES[colorMode].two}
+				// Hexbin
 				hexBinPointsData={pointBinData}
 				hexAltitude={0.015}
 				hexBinResolution={3}
@@ -90,11 +92,11 @@ function TheGLobe({ country = {} }) {
 				hexSideColor={() => 'rgba(206, 209, 237, 1)'}
 				hexBinMerge
 				enablePointerInteraction
-				// rings
+				// Rings
 				ringsData={pointBinData}
-				ringColor={() => 'rgba(171, 176, 222, 0.6)'}
+				ringColor={() => 'rgba(171, 176, 222, 0.65)'}
 				ringMaxRadius={4}
-				ringPropagationSpeed={3.5}
+				ringPropagationSpeed={3}
 				ringRepeatPeriod={400}
 
 			/>

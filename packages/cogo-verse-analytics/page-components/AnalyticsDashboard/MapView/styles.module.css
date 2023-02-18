@@ -16,12 +16,20 @@
     background:#f9f5ec;
     display: flex;
     justify-content: flex-end;
+    :global{
+      .ui_select_display_container{
+        height: 38px !important;
+        border-radius: 6px;
+      }
+      
+    }
 
 }
 
 .select_container{
-    padding: 5px 16px 2px 16px;
-    width: 250px;
+    padding: 5px 0px 2px 16px;
+    width: 225px;
+    
 }
 
 .date_range_container{
