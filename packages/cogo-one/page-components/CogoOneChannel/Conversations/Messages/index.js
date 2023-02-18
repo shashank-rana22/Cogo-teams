@@ -88,6 +88,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 					headertags={headertags}
 					assignChat={assignChat}
 					formattedData={formattedData}
+					roomData={roomData}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

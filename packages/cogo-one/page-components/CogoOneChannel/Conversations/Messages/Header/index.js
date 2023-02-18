@@ -16,6 +16,7 @@ function Header({
 	updatetags = () => {},
 	setheaderTags = () => {},
 	headertags = '',
+	roomData = {},
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -92,7 +93,15 @@ function Header({
 				<Button
 					themeType="primary"
 					size="md"
-					onClick={() => setOpenModal({ type: 'mark_as_closed', data: {} })}
+					onClick={() => setOpenModal({
+						type : 'mark_as_closed',
+						data : {
+							messageData : roomData,
+							onClose     : () => {
+								setOpenModal({ type: null, data: {} });
+							},
+						},
+					})}
 				>
 					Mark as
 
