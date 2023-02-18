@@ -18,18 +18,20 @@ function ReceiveDiv({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.name}>
-				{name}
-				,
-				<span className={styles.time_stamp}>
-					{date}
-				</span>
-			</div>
+			<div>
+				<div className={styles.name}>
+					{name}
+					,
+					<span className={styles.time_stamp}>
+						{date}
+					</span>
+				</div>
 
-			<div className={styles.receive_message_container}>
-				{['text', 'template'].includes(message_type)
-					? <div dangerouslySetInnerHTML={{ __html: message }} />
-					: 'Media' }
+				<div className={styles.receive_message_container}>
+					{['text', 'template'].includes(message_type)
+						? <div dangerouslySetInnerHTML={{ __html: message }} />
+						: 'Media' }
+				</div>
 			</div>
 		</div>
 	);
