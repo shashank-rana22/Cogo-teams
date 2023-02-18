@@ -36,6 +36,7 @@ function SentDiv({
 			<div className={styles.message_div}>
 				<div className={styles.name}>
 					Replied by
+					{' '}
 					{session_type === 'admin' ? send_by : 'bot'}
 					,
 					<span className={styles.time_stamp}>{date}</span>

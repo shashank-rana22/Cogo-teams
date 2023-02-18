@@ -34,16 +34,15 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	} = roomData || {};
 
 	let activeChatCollection;
-	console.log('channel_type', channel_type);
 
-	if (channel_type) {
+	if (channel_type && id) {
 		activeChatCollection = collection(
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
 		);
 	}
 
-	const { sendChatMessage, updatetags, messageFireBaseDoc } = useSendChat({
+	const { sendChatMessage, updatetags, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -107,6 +106,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 						activeMessageCard={roomData}
 						suggestions={suggestions}
 						setUploading={setUploading}
+						sentQuickSuggestions={sentQuickSuggestions}
 					/>
 				</div>
 			</div>
