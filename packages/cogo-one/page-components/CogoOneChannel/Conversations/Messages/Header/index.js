@@ -12,11 +12,12 @@ import styles from './styles.module.css';
 function Header({
 	setOpenModal = () => {},
 	formattedData = {},
-	restData = {},
-	updatetags = () => {},
 	setheaderTags = () => {},
 	headertags = '',
 	roomData = {},
+	updateChat = () => {},
+	loading = false,
+
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
@@ -24,12 +25,11 @@ function Header({
 		spectator_data = [],
 		previous_agent_data = [],
 		agent_name = '',
-	} = restData || {};
+	} = roomData || {};
 	const { user_name = '', business_name = '', mobile_number = '' } = formattedData || {};
-	// const { name = 'Unknown User', mobile_number = '+919876543210' } = activeMessageCard;
 
 	const [firstSpectator = null] = spectator_data || [];
-	// const
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -38,9 +38,10 @@ function Header({
 						prevtags={chat_tags}
 						headertags={headertags}
 						setheaderTags={setheaderTags}
-						updatetags={updatetags}
 						isVisible={isVisible}
 						setIsVisible={setIsVisible}
+						updateChat={updateChat}
+						loading={loading}
 					/>
 					<ShowContent list={chat_tags} showMorePlacement="right" />
 				</div>
@@ -96,10 +97,8 @@ function Header({
 					onClick={() => setOpenModal({
 						type : 'mark_as_closed',
 						data : {
-							messageData : roomData,
-							onClose     : () => {
-								setOpenModal({ type: null, data: {} });
-							},
+							updateChat,
+							loading,
 						},
 					})}
 				>

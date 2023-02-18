@@ -56,9 +56,9 @@ export function TagsPopOver({
 	prevtags = [],
 	setheaderTags = () => {},
 	headertags = '',
-	updatetags = () => {},
 	isVisible,
 	setIsVisible = () => {},
+	updateChat = () => {},
 }) {
 	const filteredOptions = tagsOptions.filter(({ value }) => !prevtags.includes(value));
 	const resetFunc = () => setheaderTags('');
@@ -78,7 +78,7 @@ export function TagsPopOver({
 					size="sm"
 					themeType="accent"
 					onClick={() => {
-						updatetags([headertags, ...(prevtags || [])]);
+						updateChat({ tags: [headertags, ...(prevtags || [])] });
 						setIsVisible(false);
 						resetFunc();
 					}}

@@ -13,8 +13,6 @@ const useSendChat = ({
 	draftUploadedFiles,
 	setDraftUploadedFiles,
 	id,
-	setRoomData,
-	// createCommunicationLoading,
 	createWhatsappCommunication,
 	formattedData,
 }) => {
@@ -46,8 +44,8 @@ const useSendChat = ({
 				created_at        : Date.now(),
 				send_by           : user_name,
 				session_type      : 'admin',
-				imgUrl            : fileType === 'image' ? finalUrl : '',
-				pdfUrl            : fileType !== 'image' ? finalUrl : '',
+				media_url         : finalUrl,
+
 			};
 			await addDoc(activeChatCollection, adminChat);
 			scrollBottom();
@@ -91,15 +89,7 @@ const useSendChat = ({
 			}, 200);
 		}
 	};
-	const updatetags = async (val) => {
-		await updateDoc(messageFireBaseDoc, {
-			chat_tags  : val,
-			updated_at : Date.now(),
-		});
-		const updatedDoc = await getDoc(messageFireBaseDoc);
-		const updatedDocData = updatedDoc.data();
-		setRoomData({ ...(updatedDocData || {}), id: updatedDoc?.id });
-	};
+
 	const sentQuickSuggestions = async (val, scrollBottom) => {
 		const adminChat = {
 			conversation_type : 'received',
@@ -138,7 +128,7 @@ const useSendChat = ({
 			}
 		}, 200);
 	};
-	return { sendChatMessage, updatetags, messageFireBaseDoc, sentQuickSuggestions };
+	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };
 };
 
 export default useSendChat;
