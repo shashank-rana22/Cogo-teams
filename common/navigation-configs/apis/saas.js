@@ -1135,6 +1135,24 @@ const saas = {
 			module      : 'Quotation',
 			feature     : 'Quotation',
 		},
+		{
+			api         : 'put_saas_product_update_hscode',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'put_saas_quote_update_duties',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
 	],
 	app_saas_cogopoint: [
 		{
@@ -1529,7 +1547,7 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_organization_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
 		},
@@ -1638,12 +1656,6 @@ const saas = {
 			feature     : 'product',
 		},
 		{
-			api         : 'put_saas_product',
-			access_type : 'private',
-			module      : 'product',
-			feature     : 'product',
-		},
-		{
 			api         : 'post_saas_product_bulk_product_upload',
 			access_type : 'private',
 			module      : 'product',
@@ -1651,18 +1663,18 @@ const saas = {
 		},
 		{
 			api         : 'get_saas_product_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'product',
 			feature     : 'product',
 		},
 		{
 			api         : 'get_saas_error_export',
-			access_type : 'private',
+			access_type : 'public',
 			module      : 'product',
 			feature     : 'product',
 		},
 		{
-			api         : 'post_saas_product_bulk_product_upload',
+			api         : 'post_saas_product_bulk_products_upload',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
@@ -1813,6 +1825,12 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
 	],
 	app_saas_trader_eligibilty_check: [
 		{
@@ -1860,6 +1878,13 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+
 	],
 	app_saas_order_history: [
 		{
