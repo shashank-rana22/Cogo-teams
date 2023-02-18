@@ -14,10 +14,6 @@ const controls = [
 				label : 'All',
 				value : 'all',
 			},
-			{
-				label : 'Closed',
-				value : 'closed',
-			},
 		],
 	},
 	{
@@ -29,9 +25,8 @@ const controls = [
 		value     : [],
 		options   : [
 			{ label: 'Whatsapp', value: 'whatsapp' },
-			{ label: 'Facebook', value: 'facebook' },
-			{ label: 'Instagram', value: 'instagram' },
-			{ label: 'Mail', value: 'mail' }],
+			{ label: 'Chat Bot', value: 'chatbot' },
+		],
 	},
 	{
 		label     : 'Tags',

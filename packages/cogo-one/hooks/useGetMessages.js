@@ -4,7 +4,6 @@ import {
 	orderBy,
 	limit,
 	startAfter,
-	updateDoc,
 } from 'firebase/firestore';
 import { useState } from 'react';
 
@@ -12,8 +11,7 @@ const useGetMessages = ({ activeChatCollection }) => {
 	const [messagesData, setMessagesData] = useState([]);
 	const [lastDoc, setLastDoc] = useState(null);
 	const [lastPage, setLastPage] = useState(false);
-	const [loading, setLoading] = useState(false);
-	console.log('loading', loading);
+
 	const getFirebaseData = () => {
 		const chatCollectionQuery = query(
 			activeChatCollection,
@@ -32,7 +30,6 @@ const useGetMessages = ({ activeChatCollection }) => {
 	};
 
 	const getNextData = () => {
-		setLoading(true);
 		const chatCollectionQuery = query(
 			activeChatCollection,
 			orderBy('created_at', 'desc'),
@@ -47,7 +44,6 @@ const useGetMessages = ({ activeChatCollection }) => {
 			});
 			setMessagesData([...messagesData]);
 		});
-		// setLoading(false);
 	};
 	return { getNextData, getFirebaseData, lastPage, messagesData };
 };

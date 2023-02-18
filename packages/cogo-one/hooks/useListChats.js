@@ -1,19 +1,15 @@
 import {
 	collectionGroup,
-	query,
 	onSnapshot,
-	orderBy,
-	where,
 	updateDoc, doc,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
-import global from '../constants/IDS_CONSTANTS';
+import getFireStoreQuery from '../helpers/getFireStoreQuery';
 
 const useListChats = ({
-	firestore,
-	user_role_ids, userId,
+	firestore, userRoleIds, userId,
 }) => {
 	const [activeMessageCard, setActiveMessageCard] = useState({});
 	const [loading, setLoading] = useState(false);
@@ -53,30 +49,7 @@ const useListChats = ({
 	useEffect(() => {
 		setLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
-		let omniChannelQuery;
-		if (
-			user_role_ids.includes(global.TECH_SUPERADMIN_ID)
-			|| user_role_ids.includes(global.ADMIN_ID)
-			|| user_role_ids.includes(global.SUPERADMIN_ID)
-			|| user_role_ids.includes(global.TRADE_EXPERT_TEAM_LEAD_LONG_TAIL_ID)
-		) {
-			omniChannelQuery = query(
-				omniChannelCollection,
-				// orderBy('session_type', 'asc'),
-				orderBy('updated_at', 'desc'),
-				// where('session_type', '==', 'admin'),
-
-			);
-		} else {
-			omniChannelQuery = query(
-				omniChannelCollection,
-				// orderBy('session_type', 'asc'),
-				orderBy('updated_at', 'desc'),
-				where('agent_id', '==', userId),
-				// where('session_type', '==', 'admin'),
-
-			);
-		}
+		const omniChannelQuery = getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, appliedFilters });
 
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
@@ -84,7 +57,7 @@ const useListChats = ({
 		});
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [appliedFilters]);
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};

@@ -27,20 +27,18 @@ function CogoOne() {
 	const [activeTab, setActiveTab] = useState('message');
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
-	console.log('activeVoiceCard', activeVoiceCard);
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-
 	const firestore = getFirestore(app);
-
-	const { partner, userId } = useSelector(({ profile }) => ({
-		partner : profile.partner || {},
-		userId  : profile?.user?.id,
+	const { userRoleIds, userId } = useSelector(({ profile }) => ({
+		userRoleIds : profile.partner?.user_role_ids || [],
+		userId      : profile?.user?.id,
 	}));
+
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -54,11 +52,8 @@ function CogoOne() {
 		appliedFilters,
 		loading,
 	} = useListChats({
-		firestore,
-		userId,
-		user_role_ids: partner?.user_role_ids,
+		firestore, userRoleIds, userId,
 	});
-	console.log('activeMessageCard', activeMessageCard);
 
 	const { messagesList = [], unReadChatsCount } = listData;
 

@@ -14,7 +14,6 @@ const useSendChat = ({
 	setDraftUploadedFiles,
 	id,
 	setRoomData,
-	// createCommunicationLoading,
 	createWhatsappCommunication,
 	formattedData,
 }) => {
@@ -49,7 +48,9 @@ const useSendChat = ({
 				imgUrl            : fileType === 'image' ? finalUrl : '',
 				pdfUrl            : fileType !== 'image' ? finalUrl : '',
 			};
+
 			await addDoc(activeChatCollection, adminChat);
+
 			scrollBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;

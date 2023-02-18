@@ -23,10 +23,12 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const [uploading, setUploading] = useState({});
 	const [roomData, setRoomData] = useState(activeMessageCard || {});
 	const { createWhatsappCommunication, loading:createCommunicationLoading } = useSendWhatsappMessage();
+
 	useEffect(() => {
 		setRoomData(activeMessageCard);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(activeMessageCard)]);
+
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 	const {
 		id = '', channel_type = '',
