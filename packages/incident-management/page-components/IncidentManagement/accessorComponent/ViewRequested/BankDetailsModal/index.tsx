@@ -14,7 +14,8 @@ function BankDatailsModal({
 	const { status, userIncidentStatus, userNotes } = itemData || {};
 	const { fileName, finalUrl } = selectedFile || {};
 	const { data } = itemData || {};
-	const { organization } = data || {};
+	const { organization, bankRequest } = data || {};
+	const { bankHolderName, accountNumber, ifscCode, remark, bankName, branchName, documentUrls } = bankRequest || {};
 	const { businessName, tradePartyType, category_types:categoryTypes } = organization || {};
 	return (
 		<div>
@@ -62,7 +63,7 @@ function BankDatailsModal({
 								Bank Holder Name
 							</div>
 							<div className={styles.label}>
-								{itemData?.data?.bankRequest?.bankHolderName}
+								{bankHolderName}
 							</div>
 						</div>
 
@@ -73,7 +74,7 @@ function BankDatailsModal({
 								Account Number
 							</div>
 							<div className={styles.label}>
-								{itemData?.data?.bankRequest?.accountNumber}
+								{accountNumber}
 							</div>
 						</div>
 
@@ -84,10 +85,10 @@ function BankDatailsModal({
 								Bank & Branch Name
 							</div>
 							<div className={styles.label}>
-								{itemData?.data?.bankRequest?.bankName}
+								{bankName}
 							</div>
 							<div className={styles.label}>
-								{itemData?.data?.bankRequest?.branchName}
+								{branchName}
 							</div>
 						</div>
 
@@ -98,7 +99,7 @@ function BankDatailsModal({
 								IFSC Code
 							</div>
 							<div className={styles.label}>
-								{itemData?.data?.bankRequest?.ifscCode}
+								{ifscCode}
 							</div>
 						</div>
 
@@ -109,7 +110,7 @@ function BankDatailsModal({
 							Remark -
 						</div>
 						<div className={styles.label}>
-							{itemData?.data?.bankRequest?.remark}
+							{remark}
 						</div>
 					</div>
 					<div className={styles.rate_conatiner}>
@@ -117,7 +118,7 @@ function BankDatailsModal({
 							Document -
 						</div>
 						<div className={styles.value}>
-							{itemData?.data?.bankRequest?.documentUrls?.map((url:string) => (url !== '' ? (
+							{documentUrls?.map((url:string) => (url !== '' ? (
 								<div className={styles.link}>
 									<a href={url} target="_blank" rel="noreferrer">
 										document.pdf

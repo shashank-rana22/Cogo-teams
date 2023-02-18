@@ -10,7 +10,7 @@ function SettlementModal({
 }) {
 	const { type, data, userNotes } = itemData || {};
 	const { settlementRequest } = data || {};
-	const { list = [] } = settlementRequest || {};
+	const { list = [], supportingDocUrl, remark } = settlementRequest || {};
 	const columns = getModalColumns(type);
 	return (
 		<div>
@@ -24,7 +24,7 @@ function SettlementModal({
 							Remark -
 						</div>
 						<div className={styles.value}>
-							Some remark from other side
+							{remark}
 						</div>
 					</div>
 					<div className={styles.rate_conatiner}>
@@ -32,7 +32,7 @@ function SettlementModal({
 							Document -
 						</div>
 						<div className={styles.value}>
-							{itemData?.data?.bankRequest?.documentUrls?.map((url:string) => (url !== '' ? (
+							{supportingDocUrl?.map((url:string) => (url !== '' ? (
 								<div className={styles.link}>
 									<a href={url} target="_blank" rel="noreferrer">
 										document.pdf
