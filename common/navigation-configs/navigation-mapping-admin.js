@@ -878,8 +878,8 @@ const navigationMappingAdmin = {
 	incident_management: {
 		key           : 'incident_management',
 		title         : 'Incident Management',
-		href          : '/incident-management/[activeIncidentTab]',
-		as            : '/incident-management/requested',
+		href          : '/v2/incident-management/[activeIncidentTab]',
+		as            : '/v2/incident-management/requested',
 		type          : 'link',
 		icon          : IcMFinance,
 		possible_apis : [],
