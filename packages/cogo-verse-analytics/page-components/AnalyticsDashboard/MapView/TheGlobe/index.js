@@ -6,7 +6,8 @@ import { TEXTURES, GLOBE_COLORS } from '../../../../constants/globe-properties';
 
 import styles from './styles.module.css';
 
-function TheGLobe({ country = {} }) {
+function TheGLobe({ country = {}, circleTab = '' }) {
+	console.log('circleTab', circleTab);
 	const { lat:country_lat = 0, lng:country_lng = 0 } = country || {};
 
 	let Globe = () => {};
@@ -23,7 +24,6 @@ function TheGLobe({ country = {} }) {
 		globeGL.current.controls().autoRotate = true;
 		globeGL.current.controls().autoRotateSpeed = 0.5;
 		globeGL.current.renderer().alpha = true;
-
 		globeGL.current.controls().maxDistance = globeGL.current.getGlobeRadius() * 4;
 		globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2.25;
 	}
@@ -114,7 +114,6 @@ function TheGLobe({ country = {} }) {
 					el.style.color = '#FCDC00';
 					el.style.width = '10px';
 					el.style['pointer-events'] = 'auto';
-					el.style['z-index'] = '1 !important';
 					el.style.cursor = 'pointer';
 
 					el.onclick = () => console.info(d);

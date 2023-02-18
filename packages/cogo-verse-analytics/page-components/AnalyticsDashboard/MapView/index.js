@@ -15,6 +15,8 @@ const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
 function MapView() {
 	const [country, setCountry] = useState('');
+	const [circleTab, setCircleTab] = useState('new_users');
+
 	const [date, setDate] = useState('');
 
 	const onChange = (val) => {
@@ -57,13 +59,18 @@ function MapView() {
 			</div>
 			<div className={styles.circle_content}>
 				<div className={styles.circle_frame}>
-					<div className={styles.globe_container}><TheGlobe country={country} /></div>
+					<div className={styles.globe_container}><TheGlobe country={country} circleTab={circleTab} /></div>
 					{
 					circleStats.map(
 						(stat) => {
 							const { type, value, label } = stat;
 							return (
-								<div className={cl`${styles.circle} ${styles[type]}`}>
+								<div
+									onClick={() => setCircleTab(type)}
+									className={cl`${styles.circle} ${styles[type]} 
+									${circleTab === type && styles.circle_clicked}`}
+
+								>
 									<div className={styles.stat_value}>
 										{value}
 									</div>
