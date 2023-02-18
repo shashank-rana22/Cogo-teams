@@ -7,16 +7,18 @@ function useUpdateAssignedChat({ messageData, onClose = () => {} }) {
 		method : 'post',
 	}, { manual: true });
 
-	const { channel_type, id, user_details } = messageData || {};
+	const { channel_type, id, user_details, user_id : whatsappNumber } = messageData || {};
 	const { user_id } = user_details || {};
 	const updateChat = async ({ selectPill, inputValue }) => {
 		try {
 			await trigger({
 				data: {
-					channel           : channel_type,
-					channel_chat_id   : id,
-					feedback          : inputValue,
-					feedback_category : selectPill,
+					channel                 : channel_type,
+					channel_chat_id         : id,
+					feedback                : inputValue,
+					status                  : 'close_conversation',
+					feedback_category       : selectPill,
+					whatsapp_number_eformat : channel_type === 'whatsapp' ? whatsappNumber : undefined,
 					user_id,
 				},
 			});
