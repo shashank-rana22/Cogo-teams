@@ -9,9 +9,6 @@ const useGetOmnichannelCustomerInsights = ({
 
 }) => {
 	console.log('activeMessageCard', activeMessageCard);
-	const { user_id:userVoiceId = '' } = activeVoiceCard;
-
-	// const { user_id: userMessageId = '' } = userData || {};
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_customer_insights',
@@ -21,8 +18,8 @@ const useGetOmnichannelCustomerInsights = ({
 	const fetchOmnichannelCustomerInsights = async () => {
 		await trigger({
 			params: {
-				// user_id : activeTab === 'message' ? activeMessageCard?.user_id : userVoiceId,
-				user_id : 'a3fa1dad-6ec7-4456-b47f-29a7d0a27541',
+				user_id : activeTab === 'message' ? activeMessageCard?.user_id : activeVoiceCard?.user_id,
+				// user_id : '2d8ff7d8-7d08-43b8-947e-5fc7da7fa8dc',
 				service : serviceType,
 				channel : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
 			},

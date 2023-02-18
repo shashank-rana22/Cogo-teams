@@ -31,6 +31,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		fetchActivityLogs = () => {},
 		setPagination = () => {},
 	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
+	console.log('data', data);
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
