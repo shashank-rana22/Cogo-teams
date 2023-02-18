@@ -1,23 +1,45 @@
+.prime_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
 .sub_container {
 	display: flex;
-	flex: 6;
 	justify-content: space-between;
+	width: 100%;
 	margin-top: 10px;
 }
 
 .left_sub_container {
 	display: flex;
-	flex: 4.5;
 	flex-direction: column;
-	margin-right: 5px;
-	background: grey;
+	width: 70%;
 }
 
 .right_sub_container {
 	display: flex;
-	flex: 1.5;
 	flex-direction: column;
+	justify-content: space-between;
+	width: 28%;
 	padding: 2px;
-	margin-left: 5px;
-	background: yellow;
+}
+
+.satisfaction_intent_served_box {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.statistics {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.two_characterisctics_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
