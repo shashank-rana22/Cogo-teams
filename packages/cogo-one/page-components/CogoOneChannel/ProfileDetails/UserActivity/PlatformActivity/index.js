@@ -22,98 +22,101 @@ function PlatformActivity({ platform = {}, pagination, setPagination = () => {} 
 		);
 	}
 	return (
-		<div className={styles.container}>
-			<LoginComponent login={login} />
-			<OrganizationVerification organization={organization} />
-			{(list || []).map((item) => {
-				const services = item?.service_type;
+		<>
+			<div className={styles.container}>
+				<LoginComponent login={login} />
+				<OrganizationVerification organization={organization} />
+				{(list || []).map((item) => {
+					const services = item?.service_type;
 
-				const { name:{ origin = '', destination = '' } } = PLATFORM_KEYS_MAPPING[services];
+					const { name:{ origin = '', destination = '' } } = PLATFORM_KEYS_MAPPING[services];
 
-				const origin_port = item[origin] || {};
+					const origin_port = item[origin] || {};
 
-				const destination_port = item[destination] || {};
+					const destination_port = item[destination] || {};
 
-				const { created_at, serial_id } = item || {};
+					const { created_at, serial_id } = item || {};
 
-				const countryName = (val) => val?.split(',').slice(-1)[0];
+					const countryName = (val) => val?.split(',').slice(-1)[0];
 
-				return (
-					<>
-						<div className={styles.activity_date}>
-							<div className={styles.dot} />
-							<div className={styles.durations}>
-								{format(created_at, 'HH:mm a dd MMM')}
-							</div>
-						</div>
-						<div className={styles.main_card}>
-							<div className={styles.card}>
-								<Pill size="md" color="#f8aea8">Platform</Pill>
-								<div className={styles.booking_details}>
-									<div className={styles.title}>
-										Shipment Status
-									</div>
-									<div className={styles.booking_id}>
-										ID:
-										<span>{serial_id}</span>
-									</div>
+					return (
+						<>
+							<div className={styles.activity_date}>
+								<div className={styles.dot} />
+								<div className={styles.durations}>
+									{format(created_at, 'HH:mm a dd MMM')}
 								</div>
-								<div className={styles.port_pair}>
-									<div className={styles.port}>
-										<div className={styles.port_details}>
+							</div>
+							<div className={styles.main_card}>
+								<div className={styles.card}>
+									<Pill size="md" color="#f8aea8">Platform</Pill>
+									<div className={styles.booking_details}>
+										<div className={styles.title}>
+											Shipment Status
+										</div>
+										<div className={styles.booking_id}>
+											ID:
+											<span>{serial_id}</span>
+										</div>
+									</div>
+									<div className={styles.port_pair}>
+										<div className={styles.port}>
+											<div className={styles.port_details}>
 
-											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
-												<div className={styles.port_name}>
-													{startCase(origin_port?.name)}
+												<Tooltip content={startCase(origin_port?.name)} placement="bottom">
+													<div className={styles.port_name}>
+														{startCase(origin_port?.name)}
+													</div>
+												</Tooltip>
+
+												<div className={styles.port_codes}>
+													{!isEmpty(origin_port?.port_code) && (
+														<>
+															(
+															{origin_port?.port_code}
+															)
+														</>
+													)}
+
 												</div>
-											</Tooltip>
-
-											<div className={styles.port_codes}>
-												{!isEmpty(origin_port?.port_code) && (
-													<>
-														(
-														{origin_port?.port_code}
-														)
-													</>
-												)}
-
+											</div>
+											<div className={styles.country}>
+												{startCase(countryName(origin_port?.display_name))}
 											</div>
 										</div>
-										<div className={styles.country}>
-											{startCase(countryName(origin_port?.display_name))}
-										</div>
-									</div>
-									<IcMPortArrow width={22} height={22} />
-									<div className={styles.port}>
-										<div className={styles.port_details}>
-											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
-												<div className={styles.port_name}>
-													{startCase(destination_port?.name)}
+										<IcMPortArrow width={22} height={22} />
+										<div className={styles.port}>
+											<div className={styles.port_details}>
+												<Tooltip content={startCase(origin_port?.name)} placement="bottom">
+													<div className={styles.port_name}>
+														{startCase(destination_port?.name)}
+													</div>
+												</Tooltip>
+												<div className={styles.port_codes}>
+													{!isEmpty(destination_port?.port_code) && (
+														<>
+															(
+															{destination_port?.port_code}
+															)
+														</>
+													)}
 												</div>
-											</Tooltip>
-											<div className={styles.port_codes}>
-												{!isEmpty(destination_port?.port_code) && (
-													<>
-														(
-														{destination_port?.port_code}
-														)
-													</>
-												)}
+											</div>
+											<div className={styles.country}>
+												{startCase(countryName(origin_port?.display_name))}
 											</div>
 										</div>
-										<div className={styles.country}>
-											{startCase(countryName(origin_port?.display_name))}
-										</div>
 									</div>
+
 								</div>
 
 							</div>
 
-						</div>
+						</>
+					);
+				})}
 
-					</>
-				);
-			})}
+			</div>
 			<div className={styles.pagination}>
 				<Pagination
 					type="page"
@@ -123,7 +126,7 @@ function PlatformActivity({ platform = {}, pagination, setPagination = () => {} 
 					onPageChange={(val) => setPagination(val)}
 				/>
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -71,3 +71,8 @@ export const SERVICE_ICON_MAPPING = {
 	ftl_freight : <IcMFftl />,
 	ltl_freight : <IcMFltl />,
 };
+// export const ACTIVITY_TAB_MAPPING = {
+// 	transactional,
+// 	communication,
+// 	platform,
+// };

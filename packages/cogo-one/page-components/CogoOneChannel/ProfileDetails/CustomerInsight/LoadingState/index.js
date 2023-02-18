@@ -47,7 +47,7 @@ function LoadingState() {
 					</div>
 					<div className={styles.comm_tex}>Port pairs most booked on</div>
 					<div className={styles.port_div}>
-						{[...Array(3)].map(() => (
+						{[...Array(2)].map(() => (
 
 							<div className={styles.div_top}>
 

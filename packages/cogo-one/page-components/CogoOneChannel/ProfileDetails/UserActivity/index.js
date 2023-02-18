@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
+import { Tabs, TabPanel, Popover } from '@cogoport/components';
 import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -31,10 +31,11 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		pagination,
 		fetchActivityLogs = () => {},
 		setPagination = () => {},
-	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
-	console.log('data', data);
+	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab, setFilterVisible });
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
+
+	const { list = [] } = data?.[activityTab] || {};
 
 	const handleFilters = () => {
 		fetchActivityLogs(filters);
@@ -48,13 +49,12 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	useEffect(() => {
 		setFilters([]);
 		setPagination(1);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activityTab]);
 
-	if (isEmpty(user_id)) {
+	if (isEmpty(user_id) || isEmpty(list)) {
 		return (
-		// <div className={styles.empty_state}>
 			<EmptyState />
-		// </div>
 		);
 	}
 
