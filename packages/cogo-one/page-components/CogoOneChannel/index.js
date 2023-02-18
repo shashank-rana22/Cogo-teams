@@ -33,13 +33,12 @@ function CogoOne() {
 	const { suggestions = [] } = useListChatSuggestions();
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-
 	const firestore = getFirestore(app);
-
-	const { partner, userId } = useSelector(({ profile }) => ({
-		partner : profile.partner || {},
-		userId  : profile?.user?.id,
+	const { userRoleIds, userId } = useSelector(({ profile }) => ({
+		userRoleIds : profile.partner?.user_role_ids || [],
+		userId      : profile?.user?.id,
 	}));
+
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -53,9 +52,7 @@ function CogoOne() {
 		appliedFilters,
 		loading,
 	} = useListChats({
-		firestore,
-		userId,
-		user_role_ids: partner?.user_role_ids,
+		firestore, userRoleIds, userId,
 	});
 
 	const { messagesList = [], unReadChatsCount } = listData;

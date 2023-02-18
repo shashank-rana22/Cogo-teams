@@ -8,31 +8,33 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 	let orgId = '';
 	let userId = '';
 	let agentId = '';
+	let channelType = '';
 
 	if (activeTab === 'voice') {
-		const { user_data, user_number, organization_id, agent_id } = activeVoiceCard || {};
+		const { user_data, user_number, organization_id, agent_id, channel_type } = activeVoiceCard || {};
 		const { email = '', id = '', mobile_country_code = '', name = '' } = user_data || {};
 		userName = name;
 		userMail = email;
 		countryCode = mobile_country_code;
-		userMobile = isEmpty(user_data) ? user_number : `${mobile_country_code} ${user_number}`;
+		userMobile = `+91${user_number}`;
 		orgId = organization_id !== null ? organization_id : '';
 		userId = id;
 		agentId = agent_id;
+		channelType = channel_type;
 	} else {
-		const { user_details, user_id: num, agent_id, user_name, channel_type } = activeMessageCard || {};
+		const { user_details, user_name, channel_type, mobile_no, channel_type: channel } = activeMessageCard || {};
 
-		userMobile = channel_type === 'whatsapp' ? `+${num}` : '';
+		userMobile = channel_type === 'whatsapp' ? `+${mobile_no}` : '';
 		if (isEmpty(user_details)) {
-			agentId = agent_id;
 			userName = user_name;
+			channelType = channel;
 		} else {
-			const { user_id, name, email, organization_id } = user_details || {};
+			const { name, email, organization_id, user_id } = user_details || {};
 			userId = user_id;
 			userName = name;
 			userMail = email;
 			orgId = organization_id;
-			agentId = agent_id;
+			channelType = channel;
 		}
 	}
 
@@ -44,6 +46,7 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 		orgId,
 		agentId,
 		countryCode,
+		channelType,
 	};
 }
 export default FormatData;

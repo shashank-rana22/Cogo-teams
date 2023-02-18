@@ -51,7 +51,6 @@ function useListSuggestions() {
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
-		console.log('reachBottom', reachBottom);
 		const hasMoreData = pagination < infiniteList?.total;
 		if (reachBottom && hasMoreData && !loading) {
 			setPagination((p) => p + 1);

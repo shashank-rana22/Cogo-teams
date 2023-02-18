@@ -47,7 +47,9 @@ const useSendChat = ({
 				media_url         : finalUrl,
 
 			};
+
 			await addDoc(activeChatCollection, adminChat);
+
 			scrollBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;

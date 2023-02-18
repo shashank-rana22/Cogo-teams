@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function VoiceCallComponent({
 	userMobile,
 	orgId,
-	agentId,
 	countryCode,
 	userId,
 	userName,
@@ -39,7 +38,7 @@ function VoiceCallComponent({
 						userId,
 						mobile_number       : userMobile,
 						mobile_country_code : countryCode,
-						agentId,
+						agentId             : profileData?.user?.id,
 						name                : userName,
 						emptyState,
 
@@ -54,14 +53,17 @@ function VoiceCallComponent({
 			<div className={styles.container}>
 				<div className={styles.number_div}>
 					<IcMCall
-						className={cl`${isEmpty(userMobile) ? styles.disable : styles.call_icon}`}
+						className={cl`${
+							(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
 						onClick={handleCall}
 					/>
-					<div className={styles.show_number}>
-						{code}
-						{' '}
-						{number}
-					</div>
+					{(userMobile !== '+undefined') && (
+						<div className={styles.show_number}>
+							{code}
+							{' '}
+							{number}
+						</div>
+					)}
 				</div>
 			</div>
 
