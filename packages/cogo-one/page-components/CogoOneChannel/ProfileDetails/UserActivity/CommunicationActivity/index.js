@@ -1,13 +1,21 @@
-import { Avatar } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import { Avatar, Pagination } from '@cogoport/components';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { SOURCE_ICON_MAPPING } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-function CommunicationActivity({ communication = {} }) {
-	const { list = [] } = communication;
+function CommunicationActivity({ communication = {}, pagination, setPagination = () => {} }) {
+	const { list = [], total_count } = communication;
+
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.empty_state}>
+				No Data Found...
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -18,7 +26,7 @@ function CommunicationActivity({ communication = {} }) {
 						<div className={styles.activity_date}>
 							<div className={styles.dot} />
 							<div className={styles.durations}>
-								5:00pm, Sept 24
+								{format(created_at, 'HH:mm a dd MMM')}
 							</div>
 						</div>
 						<div className={styles.main_card}>
@@ -60,6 +68,15 @@ function CommunicationActivity({ communication = {} }) {
 					</>
 				);
 			})}
+			<div className={styles.pagination}>
+				<Pagination
+					type="page"
+					currentPage={pagination}
+					totalItems={total_count}
+					pageSize={10}
+					onPageChange={(val) => setPagination(val)}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -100,8 +100,23 @@
 	white-space: nowrap;
 }
 
-.port_codes{
+.port_codes {
 	margin-left: 2px;
 	font-size: 11px;
 	color: #bdbdbd;
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 40vh;
+	font-size: 16px;
+	color: #828282;
+}
+
+.pagination {
+	position: absolute;
+	right: 0;
+	bottom: -8px;
 }

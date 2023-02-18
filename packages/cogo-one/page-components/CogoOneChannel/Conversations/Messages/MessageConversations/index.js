@@ -29,11 +29,8 @@ function MessageConversations({
 	setUploading,
 }) {
 	const messageRef = useRef(null);
-
 	const noMessages = isEmpty(messagesData);
-
 	const checkMessage = isEmpty(draftMessage);
-
 	const { id = '' } = activeMessageCard;
 
 	const {
@@ -49,6 +46,7 @@ function MessageConversations({
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
+			console.log('Enter', 'Enter');
 			event.preventDefault();
 			sendChatMessage();
 		}
@@ -95,9 +93,20 @@ function MessageConversations({
 		});
 	};
 
+	const chatViewConditon = () => {
+		if ((!isEmpty(draftUploadedFile) || uploading?.[id]) && !isEmpty(suggestions)) {
+			return 'file_present_suggestions';
+		} if (!isEmpty(draftUploadedFile) || uploading?.[id]) {
+			return 'file_present_nosuggestions';
+		} if (!isEmpty(suggestions)) {
+			return 'suggestions_exist';
+		}
+		return 'no_suggestions';
+	};
+
 	return (
 		<div className={styles.styled_div}>
-			<div className={cl`${styles.container} ${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.chat_container}`} onScroll={handleScroll}>
+			<div className={cl`${styles.container} ${styles[chatViewConditon()]}`} onScroll={handleScroll}>
 				{(messagesData || []).map((eachMessage) => (
 					<div>
 						{eachMessage?.conversation_type !== 'received'
@@ -109,8 +118,10 @@ function MessageConversations({
 				<div ref={messageRef} />
 			</div>
 
-			<div className={cl`${styles.nofile_container} ${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.upload_file_container}`}>
-				{!isEmpty(draftUploadedFile) && (
+			<div className={cl`${styles.nofile_container} 
+				${(!isEmpty(draftUploadedFile) || uploading?.[id]) && styles.upload_file_container}`}
+			>
+				{!isEmpty(draftUploadedFile) && !uploading?.[id] && (
 					<>
 						<div className={styles.files_view}>
 							<div className={styles.file_icon_container}>{fileIcon}</div>
@@ -167,6 +178,7 @@ function MessageConversations({
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
 						<FileUploader
+							defaultValue={!isEmpty(draftUploadedFile) ? [draftUploadedFile] : []}
 							disabled={uploading?.[id]}
 							handleProgress={handleProgress}
 							showProgress={false}
@@ -204,4 +216,5 @@ function MessageConversations({
 		</div>
 	);
 }
+
 export default MessageConversations;

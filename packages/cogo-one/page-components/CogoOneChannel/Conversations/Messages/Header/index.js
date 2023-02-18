@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function Header({
 	setOpenModal = () => {},
-	activeMessageCard = {},
+	formattedData = {},
 	restData = {},
 	updatetags = () => {},
 	setheaderTags = () => {},
@@ -24,7 +24,8 @@ function Header({
 		previous_agent_data = [],
 		agent_name = '',
 	} = restData || {};
-	const { name = 'Unknown User', mobile_number = '+919876543210' } = activeMessageCard;
+	const { user_name = '', business_name = '', mobile_number = '' } = formattedData || {};
+	// const { name = 'Unknown User', mobile_number = '+919876543210' } = activeMessageCard;
 
 	const [firstSpectator = null] = spectator_data || [];
 	// const
@@ -82,9 +83,9 @@ function Header({
 				<div className={styles.flex}>
 					<UserAvatar type="whatsapp" />
 					<div>
-						<div className={styles.name}>{startCase(name)}</div>
+						<div className={styles.name}>{startCase(user_name)}</div>
 						<div className={styles.phone_number}>
-							{hideDetails({ data: mobile_number, type: 'number' })}
+							{mobile_number ? hideDetails({ data: mobile_number, type: 'number' }) : business_name}
 						</div>
 					</div>
 				</div>

@@ -22,7 +22,11 @@ const getActiveCardDetails = (data = {}) => {
 	const { business_name, name, organization_id:detailsOrgId, user_id:detailsUserId } = user_details || {};
 
 	return {
-		organization_name: business_name, user_name: name, organization_id: detailsOrgId, user_id: detailsUserId,
+		organization_name : business_name,
+		user_name         : name,
+		organization_id   : detailsOrgId,
+		user_id           : detailsUserId,
+		mobile_number     : user_id,
 	};
 };
 export default getActiveCardDetails;

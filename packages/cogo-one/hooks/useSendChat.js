@@ -6,38 +6,40 @@ import getFileAttributes from '../utils/getFileAttributes';
 
 const useSendChat = ({
 	setDraftMessages,
-	// setFiles,
-	// messageFireBase,
-	// messageFireBaseDoc,
-	// files,
-	// setFlag,
 	activeChatCollection,
 	draftMessages,
-	// activeChat,
-	// getUser,
 	firestore,
 	channel_type,
 	draftUploadedFiles,
 	setDraftUploadedFiles,
 	id,
 	setRoomData,
+	// createCommunicationLoading,
+	createWhatsappCommunication,
+	formattedData,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
 	}));
 
-	const messageFireBaseDoc = doc(
-		firestore,
-		`${FIRESTORE_PATH[channel_type]}/${id}`,
-	);
+	let messageFireBaseDoc;
+	if (id && channel_type) {
+		messageFireBaseDoc = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
+	}
+
 	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id] || '';
-		const { finalUrl, fileType } = getFileAttributes({ ...draftUploadedFiles?.[id] });
+		const { finalUrl = '', fileType = '' } = getFileAttributes({
+			...draftUploadedFiles?.[id],
+		});
+
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
 		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
-		if (
-			newMessage !== '' || finalUrl !== ''
-		) {
+
+		if (newMessage || finalUrl) {
 			const adminChat = {
 				conversation_type : 'received',
 				response          : { message: newMessage },
@@ -56,7 +58,36 @@ const useSendChat = ({
 				updated_at             : Date.now(),
 				new_message_count_user : old_count + 1,
 			});
-			// setFlag(true);
+			setTimeout(() => {
+				if (channel_type === 'whatsapp') {
+					const {
+						user_id = null,
+						organization_id = null,
+						mobile_number = '',
+					} = formattedData || {};
+					let message_metadata;
+					if (finalUrl) {
+						message_metadata = {
+							message_type : finalUrl,
+							caption      : newMessage,
+							media_url    : finalUrl,
+						};
+					} else {
+						message_metadata = {
+							message_type : 'text',
+							message      : newMessage,
+						};
+					}
+
+					createWhatsappCommunication({
+						recipient : mobile_number,
+						message   : newMessage,
+						user_id,
+						organization_id,
+						message_metadata,
+					});
+				}
+			}, 200);
 		}
 	};
 	const updatetags = async (val) => {
@@ -68,7 +99,8 @@ const useSendChat = ({
 		const updatedDocData = updatedDoc.data();
 		setRoomData({ ...(updatedDocData || {}), id: updatedDoc?.id });
 	};
-	return { sendChatMessage, updatetags };
+
+	return { sendChatMessage, updatetags, messageFireBaseDoc };
 };
 
 export default useSendChat;

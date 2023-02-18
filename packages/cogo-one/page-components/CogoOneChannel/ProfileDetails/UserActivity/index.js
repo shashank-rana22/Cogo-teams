@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Popover } from '@cogoport/components';
+import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
 import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -27,7 +27,9 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	const {
 		loading,
 		data = {},
+		pagination,
 		fetchActivityLogs = () => {},
+		setPagination = () => {},
 	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab });
 	console.log('data', data);
 
@@ -37,8 +39,14 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		fetchActivityLogs(filters);
 	};
 
+	const handleReset = () => {
+		setFilters([]);
+		fetchActivityLogs();
+	};
+
 	useEffect(() => {
 		setFilters([]);
+		setPagination(1);
 	}, [activityTab]);
 
 	if (isEmpty(user_id)) {
@@ -82,6 +90,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 									filters={filters}
 									setFilters={setFilters}
 									handleFilters={handleFilters}
+									handleReset={handleReset}
 								/>
 							)}
 							visible={filterVisible}
@@ -95,21 +104,24 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 				)}
 
 			</div>
-
-			{/* {loading ? (
+			{loading ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
 				<div
 					className={styles.list_container}
-					// onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
 				>
 
 					{ActiveComp && (
-						<ActiveComp communication={communication} platform={platform} transactional={transactional} />
+						<ActiveComp
+							communication={communication}
+							platform={platform}
+							pagination={pagination}
+							transactional={transactional}
+							setPagination={setPagination}
+						/>
 					)}
 				</div>
-			)} */}
-
+			)}
 		</div>
 
 	);

@@ -1,4 +1,4 @@
-import { Tooltip, Pill } from '@cogoport/components';
+import { Tooltip, Pill, Pagination } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -6,14 +6,24 @@ import React from 'react';
 import { PLATFORM_KEYS_MAPPING } from '../../../../../constants/PLATFORM_KEYS_MAPPING';
 
 import LoginComponent from './LoginComponent';
+import OrganizationVerification from './OrganizationVerification';
 import styles from './styles.module.css';
 
-function PlatformActivity({ platform = {} }) {
-	const { login = {}, spot_searches = {} } = platform || {};
-	const { list = [] } = spot_searches || {};
+function PlatformActivity({ platform = {}, pagination, setPagination = () => {} }) {
+	const { login = {}, spot_searches = {}, organization = {} } = platform || {};
+	const { list = [], total_count } = spot_searches || {};
+
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.empty_state}>
+				No Data Found...
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
 			<LoginComponent login={login} />
+			<OrganizationVerification organization={organization} />
 			{(list || []).map((item) => {
 				const services = item?.service_type;
 
@@ -103,6 +113,15 @@ function PlatformActivity({ platform = {} }) {
 					</>
 				);
 			})}
+			<div className={styles.pagination}>
+				<Pagination
+					type="page"
+					currentPage={pagination}
+					totalItems={total_count}
+					pageSize={10}
+					onPageChange={(val) => setPagination(val)}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pagination } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -7,8 +7,17 @@ import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTION
 
 import styles from './styles.module.css';
 
-function TransactionalActivity({ transactional = {} }) {
-	const { list = [] } = transactional;
+function TransactionalActivity({ transactional = {}, pagination, setPagination = () => {} }) {
+	// console.log('sdfdfgddf', transactional);
+	const { list = [], total_count } = transactional;
+
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.empty_state}>
+				No Data Found...
+			</div>
+		);
+	}
 
 	return (
 		<div>
@@ -21,13 +30,15 @@ function TransactionalActivity({ transactional = {} }) {
 				} = item || {};
 
 				const origin_port = item[origin] || {};
+				// console.log('origin_port', origin_port);
 
 				const destination_port = item[destination] || {};
+				// console.log('destination_port', destination_port);
 
 				const bookingStatus = milestone_activity.pop();
+				// console.log('bookingStatus', milestone_activity, bookingStatus?.milestone);
 
 				return (
-
 					<>
 						<div className={styles.activity_date}>
 							<div className={styles.dot} />
@@ -61,16 +72,11 @@ function TransactionalActivity({ transactional = {} }) {
 													{startCase(origin_port?.name)}
 												</div>
 											</Tooltip>
-
 											<div className={styles.port_codes}>
 												{!isEmpty(origin_port?.port_code) && (
-													<>
-														(
-														{origin_port?.port_code}
-														)
-													</>
-												)}
+													<div>{origin_port?.port_code}</div>
 
+												)}
 											</div>
 										</div>
 										<div className={styles.country}>
@@ -87,11 +93,7 @@ function TransactionalActivity({ transactional = {} }) {
 											</Tooltip>
 											<div className={styles.port_codes}>
 												{!isEmpty(destination_port?.port_code) && (
-													<>
-														(
-														{destination_port?.port_code}
-														)
-													</>
+													<div>{destination_port?.port_code}</div>
 												)}
 											</div>
 										</div>
@@ -105,6 +107,15 @@ function TransactionalActivity({ transactional = {} }) {
 					</>
 				);
 			})}
+			<div className={styles.pagination}>
+				<Pagination
+					type="page"
+					currentPage={pagination}
+					totalItems={total_count}
+					pageSize={10}
+					onPageChange={(val) => setPagination(val)}
+				/>
+			</div>
 		</div>
 	);
 }

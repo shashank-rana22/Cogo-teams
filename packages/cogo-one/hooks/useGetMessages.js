@@ -18,7 +18,6 @@ const useGetMessages = ({ activeChatCollection }) => {
 			orderBy('created_at', 'desc'),
 			limit(10),
 		);
-
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			const result = [];
 			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
