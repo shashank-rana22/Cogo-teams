@@ -3,16 +3,12 @@ import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useUpdateAssignedChat from '../../../../../../hooks/useUpdateAssignedChat';
-
 import styles from './styles.module.css';
 
 function MarkAsClosed({ data = {} }) {
-	const { messageData, onClose } = data || {};
+	const { updateChat = () => {}, loading = false } = data || {};
 	const [selectPill, setSelectPill] = useState('');
 	const [inputValue, setInputValue] = useState('');
-
-	const { updateChat = () => {}, loading } = useUpdateAssignedChat({ messageData, onClose });
 
 	const DEFAULT_PILLS_ITEMS = [
 		{
@@ -47,8 +43,13 @@ function MarkAsClosed({ data = {} }) {
 
 	const handleSubmit = async () => {
 		if (!isEmpty(selectPill) && !isEmpty(inputValue)) {
-			await updateChat({ selectPill, inputValue });
-			onClose();
+			const data = {
+				feedback          : inputValue,
+				status            : 'close_conversation',
+				feedback_category : selectPill,
+			};
+
+			await updateChat(data);
 		} else {
 			Toast.error('Enter details');
 		}

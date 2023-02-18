@@ -8,6 +8,7 @@ import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendWhatsappMessage from '../../../../hooks/useSendWhatsappMessage';
+import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
@@ -16,13 +17,18 @@ import styles from './styles.module.css';
 
 function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const [headertags, setheaderTags] = useState();
+
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
+
 	const [draftMessages, setDraftMessages] = useState({});
+
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
+
 	const [messages, setMessages] = useState({});
+
 	const [uploading, setUploading] = useState({});
+
 	const [roomData, setRoomData] = useState(activeMessageCard || {});
-	const { createWhatsappCommunication, loading:createCommunicationLoading } = useSendWhatsappMessage();
 
 	useEffect(() => {
 		setRoomData(activeMessageCard);
@@ -30,10 +36,15 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	}, [JSON.stringify(activeMessageCard)]);
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+
 	const {
 		id = '', channel_type = '',
-		...rest
 	} = roomData || {};
+
+	const {
+		createWhatsappCommunication,
+		loading:createCommunicationLoading,
+	} = useSendWhatsappMessage();
 
 	let activeChatCollection;
 
@@ -44,7 +55,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		);
 	}
 
-	const { sendChatMessage, updatetags, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
+	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -72,25 +83,33 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
+	const closeModal = () => (setOpenModal({ type: null, data: {} }));
+	const {
+		updateChat,
+		loading,
+	} = useUpdateAssignedChat({
+		roomData,
+		onClose: closeModal,
+		messageFireBaseDoc,
+		setRoomData,
+	});
 	const {
 		comp:ActiveModalComp = null,
 		title:{ img = null, name = null } = {}, modalSize = 'md',
 	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
-
-	const closeModal = () => (setOpenModal({ type: null, data: {} }));
 
 	return (
 		<>
 			<div className={styles.container}>
 				<Header
 					setOpenModal={setOpenModal}
-					restData={rest}
-					updatetags={updatetags}
 					setheaderTags={setheaderTags}
 					headertags={headertags}
 					assignChat={assignChat}
 					formattedData={formattedData}
 					roomData={roomData}
+					updateChat={updateChat}
+					loading={loading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

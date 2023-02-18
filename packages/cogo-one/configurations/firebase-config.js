@@ -8,9 +8,9 @@ export const firebaseConfig = {
 	appId             : process.env.FIREBASE_APP_ID,
 };
 
-const firestoreChatbotPath = '/chanels_test/chatbot/rooms';
+const firestoreChatbotPath = '/customer_chat/chatbot/rooms';
 
-const firestoreWhatsappPath = '/customer_chat/all/rooms';
+const firestoreWhatsappPath = '/customer_chat/whatsapp/rooms';
 
 export const FIRESTORE_PATH = {
 	whatsapp : firestoreWhatsappPath,

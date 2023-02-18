@@ -3,6 +3,8 @@ import { getFormattedPrice } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { SERVICE } from '../../../../../constants';
+
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
@@ -27,6 +29,7 @@ function PromocodeThumbnail({ list = [] }) {
 							src={isEmpty(thumbnail_image) ? defaultImage : thumbnail_image}
 							alt="promotion"
 						/>
+
 						<div className={styles.promocode_description}>
 							<div className={styles.promodiscount}>
 								{promotion_discounts?.[0]?.unit !== 'percentage'
@@ -40,20 +43,13 @@ function PromocodeThumbnail({ list = [] }) {
 										'en-Us',
 									)}`
 									: `${promotion_discounts?.[0]?.value} %`}
+								{' '}
+								Off On
+								{' '}
+								{SERVICE[promotion_discounts?.[0]?.service_type
+								]}
 							</div>
-							<div className={styles.promodiscount}>
-								{promotion_discounts?.[0]?.unit !== 'percentage'
-						|| promotion_discounts?.[0]?.unit !== 'by_unit_percentage'
-									? `${getFormattedPrice(
-										promotion_discounts?.[0]?.value || 0,
-										promotion_discounts?.[0]?.amount_currency || 'INR',
-										{
-											currencyDisplay: 'code',
-										},
-										'en-Us',
-									)}`
-									: `${promotion_discounts?.[0]?.value} %`}
-							</div>
+
 						</div>
 						<div className={styles.tooltip_div}>
 							<Tooltip

@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import FormatData from '../utils/formatData';
+
 function useCreateCommunicationLog({
 	setInputValue,
 	setDate, setTime,
@@ -10,10 +12,13 @@ function useCreateCommunicationLog({
 	activeTab,
 	activeVoiceCard,
 }) {
-	const { organization_id, agent_id, user_id } = activeVoiceCard || {};
-	const { organization_id: OrgId, agent_id: AgentId, user_id: UserId } = activeMessageCard || {};
-	const { partnerId } = useSelector(({ profile }) => ({
-		partnerId: profile.partner || {},
+	const {
+		orgId = '',
+		userId = '',
+	} = FormatData({ activeMessageCard, activeVoiceCard });
+	const { partnerId, agentID } = useSelector(({ profile }) => ({
+		partnerId : profile.partner?.id || {},
+		agentID   : profile?.user?.id || {},
 	}));
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_organization_communication_log',
@@ -26,13 +31,13 @@ function useCreateCommunicationLog({
 			payload = {
 				communication_type       : 'meeting',
 				is_reminder              : 'true',
-				agent_id,
-				user_id,
+				agent_id                 : agentID,
+				user_id                  : userId,
 				title                    : inputValue?.title,
 				reminder_date            : date,
 				communication_summary    : inputValue?.description,
-				organization_id,
-				partner_id               : partnerId?.id,
+				organization_id          : orgId,
+				partner_id               : partnerId,
 				communication_start_time : time?.start_time,
 				communication_end_time   : time?.end_time,
 			};
@@ -40,13 +45,13 @@ function useCreateCommunicationLog({
 			payload = {
 				communication_type       : 'meeting',
 				is_reminder              : 'true',
-				agent_id                 : AgentId,
-				user_id                  : UserId,
+				agent_id                 : agentID,
+				user_id                  : userId,
 				title                    : inputValue?.title,
 				reminder_date            : date,
 				communication_summary    : inputValue?.description,
-				organization_id          : OrgId,
-				partner_id               : partnerId?.id,
+				organization_id          : orgId,
+				partner_id               : partnerId,
 				communication_start_time : time?.start_time,
 				communication_end_time   : time?.end_time,
 			};
