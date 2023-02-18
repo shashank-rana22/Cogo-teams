@@ -11,7 +11,7 @@ function CompanyName({ itemdata }) {
 	return (
 		<div className={styles.container}>
 			{businessName?.length > varlength ? (
-				<Tooltip interactive theme="light" placement="top" content={businessName}>
+				<Tooltip interactive placement="top" content={businessName}>
 					<div>{`${businessName.substring(0, varlength)}...`}</div>
 				</Tooltip>
 			) : (

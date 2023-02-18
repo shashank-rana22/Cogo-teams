@@ -8,7 +8,7 @@ function Remarks({ itemData }) {
 	return (
 		<div className={styles.container}>
 			{remark?.length > varlength ? (
-				<Tooltip interactive theme="light" placement="top" content={remark}>
+				<Tooltip interactive placement="top" content={remark}>
 					<div>{`${remark.substring(0, varlength)}...`}</div>
 				</Tooltip>
 			) : (
