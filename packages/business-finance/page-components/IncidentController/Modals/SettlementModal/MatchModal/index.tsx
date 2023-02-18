@@ -81,7 +81,7 @@ function MatchModal({
 							name="date"
 							disable={!isEditable}
 							value={value?.date}
-							onChange={(item: string) => setValue((prev) => ({ ...prev, date: item }))}
+							onChange={(item: any) => setValue((prev) => ({ ...prev, date: item }))}
 							style={{ width: '100px', height: '29px' }}
 						/>
 					</div>

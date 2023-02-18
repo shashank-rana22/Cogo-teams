@@ -50,7 +50,6 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 
 				return list ? (
 					<Tooltip
-						theme="light"
 						content={(list || [{}]).map((item:TooltipInterface) => (
 							<div className={styles.trade_party_name}>
 								<div>{toTitleCase(item?.div || '-')}</div>
@@ -63,7 +62,6 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					<div>
 
 						<Tooltip
-							theme="light"
 							content={bankTradePartyName || tdsTradePartyName ? (
 								<div>
 									{(organization?.tradePartyType === 'SELF'
@@ -161,7 +159,6 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				const { remark = '' } = original || {};
 				return (
 					<Tooltip
-						theme="light"
 						content={<div className={styles.tooltip}>{remark}</div>}
 					>
 						<div className={styles.remark}>{remark}</div>

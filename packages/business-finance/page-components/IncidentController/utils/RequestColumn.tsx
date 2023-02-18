@@ -49,7 +49,6 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 
 				return list ? (
 					<Tooltip
-						theme="light"
 						content={(list || [{}]).map((item:TooltipInterface) => (
 							<div className={styles.trade_party_name}>
 								<div>{toTitleCase(item?.div || '-')}</div>
