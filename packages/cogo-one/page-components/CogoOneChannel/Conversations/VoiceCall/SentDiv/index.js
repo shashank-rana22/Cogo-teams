@@ -6,19 +6,31 @@ import CallHistory from '../CallHistory';
 
 import styles from './styles.module.css';
 
-function SentDiv() {
-	// const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+function SentDiv({ eachList = {} }) {
+	const {
+		created_at,
+		agent_data = {},
+		start_time_of_call = '',
+		end_time_of_call,
+	} = eachList || {};
+	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+
+	const name = agent_data?.name;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.message_div}>
 				<div className={styles.name}>
-					by agent name
+					by
+					{' '}
+					{name}
+					{' '}
+
 					,
-					{/* <span className={styles.time_stamp}>{date}</span> */}
+					<span className={styles.time_stamp}>{date}</span>
 				</div>
 				<div className={styles.styled_div}>
-					<CallHistory type="agent" />
+					<CallHistory type="agent" end_time_of_call={end_time_of_call} start_time_of_call={start_time_of_call} />
 				</div>
 			</div>
 			<img

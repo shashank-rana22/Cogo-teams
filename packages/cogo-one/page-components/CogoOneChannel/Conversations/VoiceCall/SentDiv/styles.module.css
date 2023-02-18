@@ -20,6 +20,7 @@
     align-items: flex-start;
     height: fit-content;
     justify-content: flex-end;
+	padding-right: 10px;
 }
 
 

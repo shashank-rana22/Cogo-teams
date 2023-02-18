@@ -1,4 +1,11 @@
-import { IcCWhatsapp, IcCFacebook, IcCInstagram } from '@cogoport/icons-react';
+import {
+	IcCWhatsapp, IcCFacebook, IcCInstagram,
+	IcCLcl,
+	IcCFcl,
+	IcCAir,
+	IcMFftl,
+	IcMFltl,
+} from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={20} height={20} />,
@@ -47,3 +54,20 @@ export const USER_ACTIVITY_MAPPING = {
 };
 
 export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';
+
+export const SERVICE = {
+	fcl_freight     : 'FCL',
+	lcl_freight     : 'LCL',
+	ftl_freight     : 'FTL',
+	ltl_freight     : 'LTL',
+	air_freight     : 'AIR',
+	haulage_freight : 'HAU',
+};
+
+export const SERVICE_ICON_MAPPING = {
+	fcl_freight : <IcCFcl width={18} height={18} />,
+	lcl_freight : <IcCLcl />,
+	air_freight : <IcCAir />,
+	ftl_freight : <IcMFftl />,
+	ltl_freight : <IcMFltl />,
+};

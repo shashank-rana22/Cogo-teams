@@ -1,9 +1,9 @@
-import { IcMDocument, IcMPdf, IcMImage } from '@cogoport/icons-react';
+import { IcMDocument, IcMImage } from '@cogoport/icons-react';
 
 const fileIconMapping = {
-	doc : <IcMDocument height={22} width={22} />,
-	pdf : <IcMPdf height={22} width={22} />,
-	img : <IcMImage height={22} width={25} />,
+	document: <IcMDocument height={22} width={22} />,
+
+	img: <IcMImage height={22} width={25} />,
 
 };
 
@@ -18,19 +18,19 @@ function getFileAttributes({ fileName = '', finalUrl }) {
 		fileExtension = splitFileName.pop();
 		uploadedFileName = splitFileName.join('');
 	} else {
-		fileExtension = 'doc';
+		fileExtension = 'document';
 		uploadedFileName = fileName;
 	}
 
 	if (['jpeg', 'jpg', 'png', 'svg'].includes(fileExtension)) {
 		fileIcon = fileIconMapping.img;
 		fileType = 'image';
-	} else if (['pdf'].includes(fileExtension)) {
+	} else if (['mp4', 'aac'].includes(fileExtension)) {
 		fileIcon = fileIconMapping.pdf;
-		fileType = 'pdf';
+		fileType = 'audio';
 	} else {
 		fileIcon = fileIconMapping.doc;
-		fileType = 'doc';
+		fileType = 'document';
 	}
 
 	return { uploadedFileName, fileIcon, fileType, finalUrl };
