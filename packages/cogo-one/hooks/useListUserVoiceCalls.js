@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetVoiceCallList = () => {
+const useListUserVoiceCalls = (filters = {}) => {
 	const [listData, setListData] = useState({
 		list  : [],
 		total : 0,
@@ -17,7 +17,10 @@ const useGetVoiceCallList = () => {
 	const voiceCallList = async () => {
 		try {
 			const res = await trigger({
-				params: { page: pagination, source: 'omnichannel' },
+				params: {
+					page    : pagination,
+					filters : { ...filters },
+				},
 			});
 			if (res.data) {
 				const { list = [], ...paginationData } = res?.data || {};
@@ -28,10 +31,9 @@ const useGetVoiceCallList = () => {
 		}
 	};
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
+	const handleScroll = (scrollTop) => {
+		const reachBottom = scrollTop === 0;
 		const hasMoreData = pagination < listData?.total;
-
 		if (reachBottom && hasMoreData && !loading) {
 			setPagination((p) => p + 1);
 		}
@@ -40,11 +42,16 @@ const useGetVoiceCallList = () => {
 		voiceCallList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pagination]);
+	useEffect(() => {
+		setPagination(1);
 
+		voiceCallList();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(filters)]);
 	return {
 		loading,
-		data: listData,
+		listData,
 		handleScroll,
 	};
 };
-export default useGetVoiceCallList;
+export default useListUserVoiceCalls;

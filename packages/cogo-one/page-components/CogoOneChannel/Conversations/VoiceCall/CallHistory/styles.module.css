@@ -8,13 +8,13 @@
 	text-align: left;
 	color: #615F5F;
 	border-radius: 6px;
-}
-
-.flex{
 	display: flex;
 	padding: 10px;
 	margin-bottom: 10px;
+	align-items: center;
 }
+
+
 .padding{
 	padding:0 10px 0 20px
 }

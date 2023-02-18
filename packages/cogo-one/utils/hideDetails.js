@@ -3,7 +3,7 @@ function hideDetails({
 	type = 'number',
 }) {
 	let finalString = data;
-	if (type === 'number' && data.length > 2) {
+	if (type === 'number' && data?.length > 2) {
 		finalString = `${data.substring(0, 3)}****${data.substring(
 			data.length - 2,
 			data.length,
