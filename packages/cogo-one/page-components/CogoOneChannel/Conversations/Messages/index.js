@@ -15,7 +15,7 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
+function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '' }) {
 	const [headertags, setheaderTags] = useState();
 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -38,9 +38,12 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
 	const {
-		id = '', channel_type = '',
+		id = '', channel_type = '', support_agent_id = [],
+		spectators_data = [],
 	} = roomData || {};
-
+	const hasPermissionToEdit = userId === support_agent_id;
+	const filteredSpectators = (spectators_data || []).filter(({ id:spectatorId }) => spectatorId !== support_agent_id);
+	const activeAgentName = (spectators_data || []).find((val) => val.id === support_agent_id)?.name;
 	const {
 		sendMessage,
 		loading:createCommunicationLoading,
@@ -115,6 +118,9 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 					loading={loading}
 					closeModal={closeModal}
 					assignLoading={assignLoading}
+					activeAgentName={activeAgentName}
+					hasPermissionToEdit={hasPermissionToEdit}
+					filteredSpectators={filteredSpectators}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

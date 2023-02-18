@@ -79,6 +79,7 @@ function CogoOne() {
 						firestore={firestore}
 						activeVoiceCard={activeVoiceCard}
 						suggestions={suggestions}
+						userId={userId}
 					/>
 					<ProfileDetails
 						activeMessageCard={activeMessageCard}
