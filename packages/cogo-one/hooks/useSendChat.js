@@ -13,7 +13,7 @@ const useSendChat = ({
 	draftUploadedFiles,
 	setDraftUploadedFiles,
 	id,
-	createWhatsappCommunication,
+	sendMessage,
 	formattedData,
 }) => {
 	const { user_name } = useSelector(({ profile }) => ({
@@ -58,35 +58,33 @@ const useSendChat = ({
 				new_message_count_user : old_count + 1,
 			});
 			setTimeout(() => {
-				if (channel_type === 'whatsapp') {
-					const {
-						user_id = null,
-						organization_id = null,
-						mobile_number = '',
-					} = formattedData || {};
-					let message_metadata;
-					if (finalUrl) {
-						message_metadata = {
-							message_type : fileType,
-							caption      : newMessage,
-							media_url    : finalUrl,
-						};
-					} else {
-						message_metadata = {
-							message_type : 'text',
-							message      : newMessage,
-						};
-					}
-
-					createWhatsappCommunication({
-						recipient : mobile_number,
-						message   : newMessage,
-						user_id,
-						organization_id,
-						message_metadata,
-					});
+				const {
+					user_id = null,
+					organization_id = null,
+					mobile_number = '',
+				} = formattedData || {};
+				let message_metadata;
+				if (finalUrl) {
+					message_metadata = {
+						message_type : fileType,
+						caption      : newMessage,
+						media_url    : finalUrl,
+					};
+				} else {
+					message_metadata = {
+						message_type : 'text',
+						text         : newMessage,
+					};
 				}
-			}, 200);
+
+				sendMessage({
+					recipient : mobile_number,
+					message   : newMessage,
+					user_id,
+					organization_id,
+					message_metadata,
+				});
+			}, 300);
 		}
 	};
 
@@ -116,7 +114,7 @@ const useSendChat = ({
 					organization_id = null,
 					mobile_number = '',
 				} = formattedData || {};
-				createWhatsappCommunication({
+				sendMessage({
 					recipient        : mobile_number,
 					user_id,
 					organization_id,

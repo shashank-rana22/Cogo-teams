@@ -17,6 +17,9 @@ function Header({
 	roomData = {},
 	updateChat = () => {},
 	loading = false,
+	closeModal = () => {},
+	assignLoading = false,
+	assignChat = () => {},
 
 }) {
 	const [isVisible, setIsVisible] = useState(false);
@@ -74,7 +77,14 @@ function Header({
 						themeType="secondary"
 						size="md"
 						className={styles.styled_button}
-						onClick={() => setOpenModal({ type: 'assign', data: {} })}
+						onClick={() => setOpenModal({
+							type : 'assign',
+							data : {
+								closeModal,
+								assignLoading,
+								assignChat,
+							},
+						})}
 					>
 						Assign
 

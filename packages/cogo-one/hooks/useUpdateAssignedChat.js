@@ -8,30 +8,17 @@ function useUpdateAssignedChat({ roomData = {}, onClose = () => {}, messageFireB
 		method : 'post',
 	}, { manual: true });
 
-	const { channel_type, id, user_details, user_id = null, lead_user_id = null } = roomData || {};
-	let payload;
-
-	if (channel_type === 'whatsapp') {
-		payload = {
-			user_id                 : user_details?.user_id || undefined,
-			lead_user_id            : (!(user_details?.user_id) && lead_user_id) ? lead_user_id : undefined,
-			whatsapp_number_eformat : user_id,
-		};
-	} else {
-		payload = {
-			user_id      : user_id || undefined,
-			lead_user_id : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
-
-		};
-	}
+	const { channel_type, id, user_id = null, mobile_no = '', lead_user_id = null } = roomData || {};
 
 	const updateChat = async (data) => {
 		try {
 			await trigger({
 				data: {
-					channel         : channel_type,
-					channel_chat_id : id,
-					...payload,
+					channel                 : channel_type,
+					channel_chat_id         : id,
+					user_id                 : user_id || undefined,
+					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+					whatsapp_number_eformat : channel_type === 'whatsapp' ? mobile_no : undefined,
 					...data,
 				},
 			});

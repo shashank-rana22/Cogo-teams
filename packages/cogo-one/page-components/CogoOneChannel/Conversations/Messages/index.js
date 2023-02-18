@@ -7,7 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useSendChat from '../../../../hooks/useSendChat';
-import useSendWhatsappMessage from '../../../../hooks/useSendWhatsappMessage';
+import useSendMessage from '../../../../hooks/useSendMessage';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
@@ -42,9 +42,9 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	} = roomData || {};
 
 	const {
-		createWhatsappCommunication,
+		sendMessage,
 		loading:createCommunicationLoading,
-	} = useSendWhatsappMessage();
+	} = useSendMessage({ channel_type });
 
 	let activeChatCollection;
 
@@ -65,12 +65,15 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		draftUploadedFiles,
 		setDraftUploadedFiles,
 		setRoomData,
-		createWhatsappCommunication,
+		sendMessage,
 		createCommunicationLoading,
 		formattedData,
 	});
-
-	const { assignChat = () => {} } = useAssignChat({ messageFireBaseDoc, setRoomData });
+	const closeModal = () => (setOpenModal({ type: null, data: {} }));
+	const {
+		assignChat = () => {},
+		loading:assignLoading,
+	} = useAssignChat({ messageFireBaseDoc, setRoomData, closeModal, roomData });
 	const {
 		getNextData = () => {},
 		getFirebaseData = () => {},
@@ -83,7 +86,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
-	const closeModal = () => (setOpenModal({ type: null, data: {} }));
 	const {
 		updateChat,
 		loading,
@@ -93,6 +95,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		messageFireBaseDoc,
 		setRoomData,
 	});
+
 	const {
 		comp:ActiveModalComp = null,
 		title:{ img = null, name = null } = {}, modalSize = 'md',
@@ -110,6 +113,8 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 					roomData={roomData}
 					updateChat={updateChat}
 					loading={loading}
+					closeModal={closeModal}
+					assignLoading={assignLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
