@@ -14,7 +14,7 @@ function useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal }) {
 				data: { ...data },
 			});
 			setOpenModal(false);
-			Toast.success(getApiErrorString('succesfully updated your status'));
+			Toast.success('succesfully updated your status');
 			fetchworkPrefernce();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

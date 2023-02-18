@@ -108,7 +108,7 @@ function VoiceList({
 									<div className={styles.activity_duration}>
 										{daysDifference > 7 ? (
 											<>
-												{format(item.start_time_of_call, 'dd/mm/yy')}
+												{format(item.start_time_of_call, 'dd/MM/yy')}
 											</>
 										) : (
 											<>

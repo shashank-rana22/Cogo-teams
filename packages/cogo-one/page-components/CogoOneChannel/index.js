@@ -58,7 +58,6 @@ function CogoOne() {
 		userId,
 		user_role_ids: partner?.user_role_ids,
 	});
-	console.log('activeMessageCard', activeMessageCard);
 
 	const { messagesList = [], unReadChatsCount } = listData;
 
