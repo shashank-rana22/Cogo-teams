@@ -7130,6 +7130,24 @@ const partner = {
 			feature     : 'Bpr',
 		},
 	],
+	incident_controller: [
+		{
+			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_approve',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
+		},
+	],
 	vietnam_account_receivables: [
 		{
 			api         : 'get_sales_invoice_list',
