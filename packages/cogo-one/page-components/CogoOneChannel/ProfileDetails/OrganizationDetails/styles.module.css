@@ -82,6 +82,12 @@
 	display: none;
 }
 
+.promotion_cards_empty_state{
+	margin-top: 25px;
+display: flex;
+justify-content: center;
+}
+
 .cogo_icon {
 	margin: 6px 10px 0 0;
 }

@@ -16,7 +16,7 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 		userMail = email;
 		countryCode = mobile_country_code;
 		userMobile = isEmpty(user_data) ? user_number : `${mobile_country_code} ${user_number}`;
-		orgId = organization_id;
+		orgId = organization_id !== null ? organization_id : '';
 		userId = id;
 		agentId = agent_id;
 	} else {

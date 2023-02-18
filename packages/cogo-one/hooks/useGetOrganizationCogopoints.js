@@ -1,11 +1,16 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-import getActiveCardDetails from '../utils/getActiveCardDetails';
+import FormatData from '../utils/formatData';
+// import getActiveCardDetails from '../utils/getActiveCardDetails';
 
 const useGetOrganizationCogopoints = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
-	const { organization_id } = activeVoiceCard || {};
-	const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
+	// const { organization_id } = activeVoiceCard || {};
+	// const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
+
+	const {
+		orgId = '',
+	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_organization_cogopoint_profile',
@@ -15,22 +20,16 @@ const useGetOrganizationCogopoints = ({ activeMessageCard, activeVoiceCard, acti
 	const [pointData, setPointData] = useState(null);
 
 	const fetchOrganizationCogopoint = async () => {
-		let id;
-		if (activeTab === 'voice') {
-			id = organization_id;
-		} else {
-			id = orgId;
-		}
 		const res = await trigger({
 			params: {
-				organization_id: id,
+				organization_id: orgId,
 			},
 		});
 		setPointData(res?.data || {});
 	};
 
 	useEffect(() => {
-		if (user_id !== null) {
+		if (orgId !== '') {
 			fetchOrganizationCogopoint();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -8,8 +8,6 @@ const useGetOmnichannelCustomerInsights = ({
 	serviceType = '',
 
 }) => {
-	console.log('activeMessageCard', activeMessageCard);
-
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_customer_insights',
 		method : 'get',

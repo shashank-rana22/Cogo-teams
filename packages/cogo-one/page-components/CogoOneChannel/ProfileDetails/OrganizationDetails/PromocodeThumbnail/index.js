@@ -6,8 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
-function PromocodeThumbnail({ promoData }) {
-	const { list = [] } = promoData || {};
+function PromocodeThumbnail({ list = [] }) {
 	const colors = ['#e66465', '#ff7675', '#55E6C1'];
 
 	const getCardColor = (index) => colors[index % colors.length];
