@@ -9,6 +9,7 @@ const useGetOmnichannelActivityLogs = ({
 	activityTab = '',
 	activeVoiceCard = {},
 	activeTab,
+	setFilterVisible,
 }) => {
 	const { user_id:userVoiceId = '' } = activeVoiceCard;
 
@@ -30,10 +31,9 @@ const useGetOmnichannelActivityLogs = ({
 
 		await trigger({
 			params: {
-				// user_id       : '38a3ce88-d1e4-4a55-b431-12aa334a0be1',
+
 				user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
 				activity_type : activityTab,
-				// activity_type : 'transactional',
 				page          : pagination,
 				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
 				t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? {
@@ -42,6 +42,7 @@ const useGetOmnichannelActivityLogs = ({
 
 			},
 		});
+		setFilterVisible(false);
 	};
 
 	useEffect(() => {

@@ -58,15 +58,6 @@
 	border-radius: 100%;
 }
 
-.empty_state {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 40vh;
-	font-size: 16px;
-	color: #828282;
-}
-
 .filters_applied {
 	position: relative;
 	top: -28px;
