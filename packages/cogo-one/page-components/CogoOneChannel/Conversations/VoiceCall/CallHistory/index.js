@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function CallHistory({ type = 'user' }) {
+function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call = '' }) {
 	const ICON_MAPPING = {
 		user: {
 
@@ -15,28 +15,30 @@ function CallHistory({ type = 'user' }) {
 			compStyles: { borderTopRightRadius: '0px', background: '#FFFCE6' },
 		},
 	};
+	const endTime = start_time_of_call?.split(' ')?.[1];
+	const startTime = end_time_of_call?.split(' ')?.[1];
 	const { start = '', end = '', compStyles = {} } = ICON_MAPPING[type] || {};
 	return (
 		<div>
-			<div className={styles.flex} style={compStyles}>
+			<div className={styles.started} style={compStyles}>
 				<img src={start} alt="logo" />
 				<div className={styles.padding}>
 					<div>
 						Audio call started
 					</div>
 					<div>
-						11:19
+						{startTime}
 					</div>
 				</div>
 			</div>
-			<div className={styles.flex} style={compStyles}>
+			<div className={styles.started} style={compStyles}>
 				<img src={end} alt="logo" />
 				<div className={styles.padding}>
 					<div>
 						Audio call ended
 					</div>
 					<div>
-						11:19
+						{endTime}
 					</div>
 				</div>
 			</div>

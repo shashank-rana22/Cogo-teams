@@ -34,6 +34,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	} = roomData || {};
 
 	let activeChatCollection;
+	console.log('channel_type', channel_type);
 
 	if (channel_type) {
 		activeChatCollection = collection(

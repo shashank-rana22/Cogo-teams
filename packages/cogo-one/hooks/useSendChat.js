@@ -68,7 +68,7 @@ const useSendChat = ({
 					let message_metadata;
 					if (finalUrl) {
 						message_metadata = {
-							message_type : finalUrl,
+							message_type : fileType,
 							caption      : newMessage,
 							media_url    : finalUrl,
 						};

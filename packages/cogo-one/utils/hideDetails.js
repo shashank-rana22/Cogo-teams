@@ -3,7 +3,7 @@ function hideDetails({
 	type = 'number',
 }) {
 	let finalString = data;
-	if (type === 'number' && data.length > 2) {
+	if (type === 'number' && data?.length > 2) {
 		finalString = `${data.substring(0, 3)}****${data.substring(
 			data.length - 2,
 			data.length,
@@ -11,7 +11,7 @@ function hideDetails({
 	}
 
 	if (type === 'mail') {
-		const strings = data.split('@');
+		const strings = data?.split('@');
 		finalString = `${strings[0].substring(0, 3)}****@${
 			strings[strings.length - 1]
 		}`;

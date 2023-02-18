@@ -71,6 +71,33 @@ function CogoOne() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(agentStatus)]);
 
+	const renderComponent = () => {
+		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
+			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))) {
+			return (
+				<>
+					<Conversations
+						activeTab={activeTab}
+						activeMessageCard={activeMessageCard}
+						firestore={firestore}
+						activeVoiceCard={activeVoiceCard}
+						suggestions={suggestions}
+					/>
+					<ProfileDetails
+						activeMessageCard={activeMessageCard}
+						activeTab={activeTab}
+						activeVoiceCard={activeVoiceCard}
+					/>
+				</>
+			);
+		}
+		return (
+			<EmptyChatPage
+				displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
+			/>
+		);
+	};
+
 	return (
 		<div className={styles.layout_container}>
 			<Customers
@@ -99,26 +126,7 @@ function CogoOne() {
 			/>
 
 			<div className={styles.chat_details_continer}>
-				{(!isEmpty(activeMessageCard) || !isEmpty(activeVoiceCard)) ? (
-					<>
-						<Conversations
-							activeTab={activeTab}
-							activeMessageCard={activeMessageCard}
-							firestore={firestore}
-							activeVoiceCard={activeVoiceCard}
-							suggestions={suggestions}
-						/>
-						<ProfileDetails
-							activeMessageCard={activeMessageCard}
-							activeTab={activeTab}
-							activeVoiceCard={activeVoiceCard}
-						/>
-					</>
-				) : (
-					<EmptyChatPage
-						displayMessage={activeTab === 'message' ? 'chat' : 'call log'}
-					/>
-				)}
+				{renderComponent()}
 			</div>
 		</div>
 	);
