@@ -35,7 +35,7 @@ function StatusName({ itemData }) {
 					</Pill>
 				)}
 			{linkedReferenceId && (userIncidentStatus === 'REQUESTED' || userIncidentStatus === 'RAISED_AGAIN') ? (
-				<div className={styles.iconStyle}>
+				<div className={styles.icon_style}>
 					<Tooltip content={TooltipContent()} placement="top" interactive>
 						<IcMInfo
 							height={15}

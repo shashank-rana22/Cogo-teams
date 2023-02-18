@@ -13,7 +13,7 @@ function DeleteModal({ itemData, reftech }) {
 	const { onDeleteAccept, loadingOndelete } = useDeleteAccept({ id, userIncidentStatus, remarks, reftech });
 	return (
 		<div>
-			<div className={styles.buttonStyle}>
+			<div className={styles.button_style}>
 				{status === 'REJECTED' ? (
 					<Button
 						disabled={userIncidentStatus === 'ACCEPTED' || userIncidentStatus === 'RAISED_AGAIN'}

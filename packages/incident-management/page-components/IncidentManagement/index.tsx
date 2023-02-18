@@ -38,7 +38,7 @@ function IncidentManagement() {
 	return (
 		<div>
 
-			<div className={styles.headerText}>
+			<div className={styles.header_text}>
 				Incident Management - My Incidents
 			</div>
 

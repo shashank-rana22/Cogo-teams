@@ -1,31 +1,7 @@
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { getByKey, startCase } from '@cogoport/utils';
 
-// import styles from './styles.module.css';
-
 const SettlementColumn = [
-	// {
-	// 	Header   : <div>Org. Name</div>,
-	// 	id       : 'org_name',
-	// 	accessor : (row) => (
-	// 		<div>
-	// 			<div className={styles.referenceId}>
-	// 				{getByKey(row, 'jvNum') as string}
-	// 			</div>
-	// 		</div>
-	// 	),
-	// },
-	// {
-	// 	Header   : <div>Date</div>,
-	// 	id       : 'date',
-	// 	accessor : (row) => (
-	// 		<div>
-	// 			<div>
-	// 				{getByKey(row, 'entityCode') as string}
-	// 			</div>
-	// 		</div>
-	// 	),
-	// },
 	{
 		Header   : <div>Doc. No.</div>,
 		id       : 'business_partner',

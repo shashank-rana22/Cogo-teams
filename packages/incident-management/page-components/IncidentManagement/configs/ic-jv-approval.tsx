@@ -9,7 +9,7 @@ const IcJvApproval = [
 		id       : 'jv_number',
 		accessor : (row) => (
 			<div>
-				<div className={styles.referenceId}>
+				<div className={styles.reference_id}>
 					{getByKey(row, 'jvNum') as string}
 				</div>
 			</div>

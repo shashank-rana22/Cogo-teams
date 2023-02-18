@@ -21,7 +21,7 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		id       : 'referenceId',
 		accessor : (row) => (
 			<div>
-				<div className={styles.referenceId}>
+				<div className={styles.reference_id}>
 					{getByKey(row, 'referenceId') as string}
 				</div>
 			</div>
