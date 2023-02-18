@@ -22,7 +22,7 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 	} else {
 		const { user_details, user_id: num, agent_id, user_name, channel_type } = activeMessageCard || {};
 
-		userMobile = channel_type === 'whatsapp' ? `+${num}` : '-';
+		userMobile = channel_type === 'whatsapp' ? `+${num}` : '';
 		if (isEmpty(user_details)) {
 			agentId = agent_id;
 			userName = user_name;
