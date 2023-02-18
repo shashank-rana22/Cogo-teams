@@ -53,6 +53,7 @@ const useListChats = ({
 	useEffect(() => {
 		setLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
+
 		let omniChannelQuery;
 		if (
 			user_role_ids.includes(global.TECH_SUPERADMIN_ID)
@@ -63,17 +64,17 @@ const useListChats = ({
 			omniChannelQuery = query(
 				omniChannelCollection,
 				// orderBy('session_type', 'asc'),
-				orderBy('updated_at', 'desc'),
 				// where('session_type', '==', 'admin'),
+				orderBy('updated_at', 'desc'),
 
 			);
 		} else {
 			omniChannelQuery = query(
 				omniChannelCollection,
 				// orderBy('session_type', 'asc'),
-				orderBy('updated_at', 'desc'),
+				where('session_type', '==', 'admin'),
 				where('agent_id', '==', userId),
-				// where('session_type', '==', 'admin'),
+				orderBy('updated_at', 'desc'),
 
 			);
 		}

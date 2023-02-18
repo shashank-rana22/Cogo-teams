@@ -27,7 +27,6 @@ function CogoOne() {
 	const [activeTab, setActiveTab] = useState('message');
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
-	console.log('activeVoiceCard', activeVoiceCard);
 	const [searchValue, setSearchValue] = useState('');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
