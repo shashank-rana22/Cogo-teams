@@ -50,7 +50,7 @@ function Header({
 				<div className={styles.flex}>
 					{!isEmpty(filteredSpectators)
 					&& (filteredSpectators || [])
-						.map(({ name:prevAssignedName = '' }) => (
+						.map(({ agent_name:prevAssignedName = '' }) => (
 							<AssigneeAvatar
 								name={prevAssignedName}
 								type="disabled"

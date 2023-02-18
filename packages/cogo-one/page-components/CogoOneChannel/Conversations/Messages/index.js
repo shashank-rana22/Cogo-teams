@@ -42,8 +42,9 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		spectators_data = [],
 	} = roomData || {};
 	const hasPermissionToEdit = userId === support_agent_id;
-	const filteredSpectators = (spectators_data || []).filter(({ id:spectatorId }) => spectatorId !== support_agent_id);
-	const activeAgentName = (spectators_data || []).find((val) => val.id === support_agent_id)?.name;
+	const filteredSpectators = (spectators_data || [])
+		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
+	const activeAgentName = (spectators_data || []).find((val) => val.agent_id === support_agent_id)?.name;
 	const {
 		sendMessage,
 		loading:createCommunicationLoading,

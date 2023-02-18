@@ -25,11 +25,10 @@ function AssignToForm({ data = {} }) {
 		onboarding_kyc : 'Enter Pan No',
 	};
 	const [isAssignUser, setIsAssignUser] = useState(true);
-	const { handleSubmit, control, watch, reset, formState:{ errors } } = useForm();
+	const { handleSubmit, control, watch, reset, formState:{ errors } } = useForm({ allow_user: 'observe' });
 	const { assign_user, assign_condition, condition_value, allow_user } = controls;
 	const watchCondtion = watch('assign_condition') || null;
 	const createSubmit = (val) => {
-		console.log('val', val);
 		let payload;
 		if (isAssignUser) {
 			payload = {
