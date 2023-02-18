@@ -7,26 +7,146 @@ import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
 import UserTableData from '../../common/userTableData';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
+import getUserFilterControls from '../../utils/getUserFilterControls';
 import getMonthControls from '../../utils/monthControls';
 
+import NotifyModal from './NotifyModal';
 import styles from './styles.module.css';
+import TeamMembersList from './TeamMembersList';
+import UploadModalBody from './UploadModal';
+
+// const dummyListData = [];
+const dummyListData = [
+	{
+		month                 : 'March',
+		year                  : 2023,
+		feedbacks_given       : 36,
+		below_avg_performance : 12,
+		avg_performance       : 12,
+		above_avg_performance : 12,
+		details               : [],
+		// details               : [{
+		// 	user_name         : 'Hermione Granger',
+		// 	employee_id       : 'COGO5666',
+		// 	team_size         : 1,
+		// 	feedbacks_pending : 20,
+		// 	latest_kpi        : 4,
+		// 	score             : 16,
+		// },
+		// {
+		// 	user_name         : 'Neville Longbottom',
+		// 	employee_id       : 'COGO5116',
+		// 	team_size         : 1,
+		// 	feedbacks_pending : 21,
+		// 	latest_kpi        : 3,
+		// 	score             : 12,
+		// },
+		// {
+		// 	user_name         : 'Ron Weasley',
+		// 	employee_id       : 'COGO5016',
+		// 	team_size         : 1,
+		// 	feedbacks_pending : 21,
+		// 	latest_kpi        : 3,
+		// 	score             : 16,
+		// }],
+	},
+	{
+		month                 : 'February',
+		year                  : 2023,
+		feedbacks_given       : 36,
+		below_avg_performance : 12,
+		avg_performance       : 12,
+		above_avg_performance : 12,
+		details               : [{
+			user_name         : 'Nice Person',
+			employee_id       : 'COGO5896',
+			team_size         : 3,
+			feedbacks_pending : 23,
+			latest_kpi        : 4,
+			score             : 16,
+		},
+		{
+			user_name         : 'Also Person',
+			employee_id       : 'COGO5116',
+			team_size         : 7,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+			score             : 11,
+		}],
+	},
+	{
+		month                 : 'January',
+		year                  : 2023,
+		feedbacks_given       : 36,
+		below_avg_performance : 12,
+		avg_performance       : 12,
+		above_avg_performance : 12,
+		details               : [{
+			user_name         : 'Pansy Parkinson',
+			employee_id       : 'COGO3166',
+			team_size         : 1,
+			feedbacks_pending : 18,
+			latest_kpi        : 3,
+			score             : 16,
+		},
+		{
+			user_name         : 'Crabbe Goyle',
+			employee_id       : 'COGO5116',
+			team_size         : 1,
+			feedbacks_pending : 3,
+			latest_kpi        : 2,
+			score             : 15,
+		}],
+	},
+	{
+		month                 : 'December',
+		year                  : 2022,
+		feedbacks_given       : 36,
+		below_avg_performance : 12,
+		avg_performance       : 12,
+		above_avg_performance : 12,
+		details               : [{
+			user_name         : 'Hermione Granger',
+			employee_id       : 'COGO5666',
+			team_size         : 1,
+			feedbacks_pending : 20,
+			latest_kpi        : 4,
+			score             : 16,
+		},
+		{
+			user_name         : 'Neville Longbottom',
+			employee_id       : 'COGO5116',
+			team_size         : 1,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+			score             : 12,
+		},
+		{
+			user_name         : 'Ron Weasley',
+			employee_id       : 'COGO5016',
+			team_size         : 1,
+			feedbacks_pending : 21,
+			latest_kpi        : 3,
+			score             : 16,
+		}],
+	},
+];
 
 function ManagerDashboard() {
 	const [selectedBucket, setSelectedBucket] = useState('');
-
-	const feedbackColumns = useGetColumns({ source: 'manager_dashboard' });
 
 	const { params, setParams, data, loading, setPage } = useListUserFeedbacks({});
 
 	const monthControls = getMonthControls(params.filters.created_at_year);
 
-	const setFilter = (val, type) => {
-		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
-	};
+	const { params, setParams, data, loading, setPage } = useListUserFeedbacks({
+		searchValue: query,
+	});
 
 	const { list: newTeamList, page_limit, total_count } = data || {};
 
 	const Router = useRouter();
+
 	const handleClick = () => {
 		Router.push('/feedback-system/manager-dashboard/feedback-management');
 	};
@@ -86,15 +206,16 @@ function ManagerDashboard() {
 					</p>
 				</div>
 
-				<UserTableData
-					columns={feedbackColumns}
-					list={newTeamList}
-					loading={loading}
-					page_limit={page_limit}
-					total_count={total_count}
-					pagination={params.page}
-					setPagination={setPage}
-				/>
+				<div className={styles.table_section}>
+					<TeamMembersList
+						list={dummyListData}
+						loading={false}
+						page_limit={3}
+						total_count={3}
+						pagination={1}
+						setPagination={setPage}
+					/>
+				</div>
 			</div>
 		</div>
 	);

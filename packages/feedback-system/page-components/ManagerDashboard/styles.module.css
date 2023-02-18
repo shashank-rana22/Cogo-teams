@@ -8,8 +8,6 @@
 
 .page_actions {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
 
 	:global(.ui_select_container) {
 		width: 160px;
@@ -23,46 +21,53 @@
 	align-items: center;
 }
 
-.pagination_container {
+.filters {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.question_button_container {
+	display: flex;
+	justify-content: flex-start;
 }
 
 .redirect_container {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	color: #393f70;
 	cursor: pointer;
 
-	.redirect_text {
+	p {
 		font-size: 18px;
 		font-weight: bold;
 		margin: 0px;
 	}
 }
 
-.stats_section {
-	display: flex;
-	padding-top: 16px;
-
-	@media(max-width: 768px){
-		flex-direction: column;
-	}
-}
-
-.list_section {	
+.table_section {
+	margin-top: 16px;
+	background: #FAF5EC;
+	border-radius: 8px;
 }
 
 .list_header {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	padding: 8px 0;
+	justify-content: space-between;
+	padding: 16px 0 0px;
 	margin-top: 16px;
 
-	.list_header_text {
-		font-size: 18px;
+	.list_title {
+		font-size: 18px; 
 		font-weight: bold;
-		color: "#393f70";
+		color: #393f70;
 		margin: 0px;
+	}
+
+	.list_actions {
+		display: flex;
+		align-items: center;
 	}
 }
