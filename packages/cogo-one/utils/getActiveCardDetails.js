@@ -11,6 +11,7 @@ const getActiveCardDetails = (data = {}) => {
 		mobile_no = '',
 		lead_user_id = '',
 	} = data || {};
+	console.log('mobile_no', mobile_no);
 	if (channel_type === 'chatbot') {
 		return {
 			user_id,
@@ -18,14 +19,16 @@ const getActiveCardDetails = (data = {}) => {
 			organization_id,
 			organization_name,
 			lead_user_id,
+			channel_type,
 		};
 	}
 	if (isEmpty(Object.keys(user_details || {}))) {
 		return {
 			user_name,
-			mobile_number : mobile_no,
+			mobile_no,
 			lead_user_id,
-			user_id       : null,
+			user_id: null,
+			channel_type,
 		};
 	}
 	const {
@@ -41,8 +44,9 @@ const getActiveCardDetails = (data = {}) => {
 		user_name         : name,
 		organization_id   : detailsOrgId,
 		user_id           : detailsUserId,
-		mobile_number     : mobile_no,
+		mobile_no,
 		lead_user_id      : detailsLeadUserId,
+		channel_type,
 	};
 };
 export default getActiveCardDetails;
