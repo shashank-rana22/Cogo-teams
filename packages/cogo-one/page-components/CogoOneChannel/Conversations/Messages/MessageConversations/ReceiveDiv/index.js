@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import { format } from '@cogoport/utils';
 
+import MessageBody from '../MessageBody';
+
 import styles from './styles.module.css';
 
 function ReceiveDiv({
@@ -10,7 +12,7 @@ function ReceiveDiv({
 	const {
 		message_type = 'text',
 		created_at = '',
-		response: { message = '' } = {},
+		response = {},
 	} = eachMessage;
 	const { name = 'Unknown User' } = activeMessageCard;
 
@@ -28,9 +30,10 @@ function ReceiveDiv({
 				</div>
 
 				<div className={styles.receive_message_container}>
-					{['text', 'template'].includes(message_type)
-						? <div dangerouslySetInnerHTML={{ __html: message }} />
-						: 'Media' }
+					<MessageBody
+						response={response}
+						message_type={message_type}
+					/>
 				</div>
 			</div>
 		</div>

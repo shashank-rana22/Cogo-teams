@@ -29,17 +29,14 @@
     line-height: 21px;
     color: #615f5f;
     margin-top: 5px;
-	width: fit-content;
+    width: fit-content;
     background-color: #acdadf;
     border-radius: 6px 0 6px 6px;
     word-break: break-word;
-
-
 }
 
 .admin_message_container {
     background-color: #fffce6;
-	
 }
 
 .styled_img {
@@ -50,26 +47,32 @@
 .message_div {
     margin-right: 8px;
 }
-.btn{
-	text-decoration: underline;
-	color:#6892FE;
-	padding:3px;
-	margin:0 5px 5px 5px;
-	border-radius: 4px;
-	width: fit-content;
-	word-break: break-word;
-	border:1px solid #CDDBFF;
-	font-size: 10px;
-}
-.btns_container{
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	margin-top: 10px;
 
-
+.btn {
+    text-decoration: underline;
+    color: #6892fe;
+    padding: 3px;
+    margin: 0 5px 5px 5px;
+    border-radius: 4px;
+    width: fit-content;
+    word-break: break-word;
+    border: 1px solid #cddbff;
+    font-size: 10px;
 }
-.styled_div{
-	float: right;
-	max-width: 320px;
+
+.btns_container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.styled_div {
+    float: right;
+    max-width: 320px;
+}
+
+.user_logo {
+    height: 30px;
+    width: 30px;
 }

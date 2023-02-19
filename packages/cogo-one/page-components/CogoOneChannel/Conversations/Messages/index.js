@@ -17,21 +17,19 @@ import styles from './styles.module.css';
 
 function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '' }) {
 	const [headertags, setheaderTags] = useState();
-
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
-
 	const [draftMessages, setDraftMessages] = useState({});
-
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
-
 	const [messages, setMessages] = useState({});
-
 	const [uploading, setUploading] = useState({});
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
+	let activeChatCollection;
 	const {
-		id = '', channel_type = '', support_agent_id = [],
+		id = '',
+		channel_type = '',
+		support_agent_id = [],
 		spectators_data = [],
 	} = activeMessageCard || {};
 
@@ -40,14 +38,13 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const filteredSpectators = (spectators_data || [])
 		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
 
-	const activeAgentName = (spectators_data || []).find((val) => val.agent_id === support_agent_id)?.name;
+	const activeAgentName = (spectators_data || [])
+		.find((val) => val.agent_id === support_agent_id)?.name;
 
 	const {
 		sendMessage,
 		loading:createCommunicationLoading,
 	} = useSendMessage({ channel_type });
-
-	let activeChatCollection;
 
 	if (channel_type && id) {
 		activeChatCollection = collection(
@@ -76,17 +73,13 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		assignChat = () => {},
 		loading:assignLoading,
 	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard });
+
 	const {
 		getNextData = () => {},
-		getFirebaseData = () => {},
 		lastPage,
+		loadingMessages,
 		messagesData,
-	} = useGetMessages({ firestore, activeChatCollection });
-
-	useEffect(() => {
-		getFirebaseData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [id]);
+	} = useGetMessages({ activeChatCollection, id });
 
 	const {
 		updateChat,
@@ -97,8 +90,9 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	});
 
 	const {
-		comp:ActiveModalComp = null,
-		title:{ img = null, name = null } = {}, modalSize = 'md',
+		comp: ActiveModalComp = null,
+		title: { img = null, name = null } = {},
+		modalSize = 'md',
 	} = MODAL_COMPONENT_MAPPING[openModal?.type] || {};
 
 	return (
@@ -131,12 +125,14 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						setMessages={setMessages}
 						messages={messages}
 						getNextData={getNextData}
+						loadingMessages={loadingMessages}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
 						activeMessageCard={activeMessageCard}
 						suggestions={suggestions}
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
+						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 				</div>
 			</div>
