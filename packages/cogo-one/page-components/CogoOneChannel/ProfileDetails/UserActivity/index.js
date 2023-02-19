@@ -7,7 +7,6 @@ import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
-import FormatData from '../../../../utils/formatData';
 
 import Filters from './Filters';
 import LoadingState from './LoadingState';
