@@ -60,7 +60,6 @@ function VoiceCallComponent({
 					{!isEmpty(userMobile) && (
 						<div className={styles.show_number}>
 							{code}
-							{' '}
 							{number}
 						</div>
 					)}

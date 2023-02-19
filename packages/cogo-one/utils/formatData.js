@@ -28,7 +28,7 @@ function FormatData({
 		userId = id;
 		channelType = channel_type;
 	} else {
-		const { user_details, channel_type } = activeMessageCard || {};
+		const { user_details = null, channel_type } = activeMessageCard || {};
 
 		if (isEmpty(user_details) && channel_type === 'whatsapp') {
 			const { user_id, user_name, mobile_no } = activeMessageCard || {};

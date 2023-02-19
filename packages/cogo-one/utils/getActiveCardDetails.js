@@ -11,7 +11,7 @@ const getActiveCardDetails = (data = {}) => {
 		mobile_no = '',
 		lead_user_id = '',
 	} = data || {};
-	console.log('mobile_no', mobile_no);
+
 	if (channel_type === 'chatbot') {
 		return {
 			user_id,

@@ -54,12 +54,12 @@ const useSendChat = ({
 			await addDoc(activeChatCollection, adminChat);
 			scrollToBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
-			const old_count = doc1.data().new_message_count_user;
+			const old_count = doc1.data().new_user_message_count;
 			await updateDoc(messageFireBaseDoc, {
 				new_message_count      : 0,
 				last_message           : newMessage,
 				updated_at             : Date.now(),
-				new_message_count_user : old_count + 1,
+				new_user_message_count : old_count + 1,
 			});
 			setTimeout(() => {
 				const {
@@ -107,12 +107,12 @@ const useSendChat = ({
 		await addDoc(activeChatCollection, adminChat);
 		scrollBottom();
 		const doc1 = await getDoc(messageFireBaseDoc);
-		const old_count = doc1.data().new_message_count_user;
+		const old_count = doc1.data().new_user_message_count;
 		await updateDoc(messageFireBaseDoc, {
 			new_message_count      : 0,
 			last_message           : val,
 			updated_at             : Date.now(),
-			new_message_count_user : old_count + 1,
+			new_user_message_count : old_count + 1,
 		});
 		setTimeout(() => {
 			const {

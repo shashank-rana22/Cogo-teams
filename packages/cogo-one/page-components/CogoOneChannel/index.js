@@ -66,7 +66,6 @@ function CogoOne() {
 	useEffect(() => {
 		setActiveVoiceCard({});
 		setActiveCardId('');
-		// setActiveMessage({});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 

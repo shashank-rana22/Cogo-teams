@@ -81,7 +81,7 @@ function MessageConversations({
 
 	const handleScroll = (e) => {
 		const bottom = e.target.scrollTop === 0;
-		if (bottom && !lastPage) {
+		if (bottom && !lastPage && !loadingPrevMessages) {
 			getNextData();
 		}
 	};
