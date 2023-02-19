@@ -35,7 +35,7 @@ function MessageConversations({
 	loadingMessages,
 	sentQuickSuggestions = () => { },
 }) {
-	const messageRef = useRef(null);
+	const messageRef = useRef();
 	const { id = '' } = activeMessageCard;
 
 	const {
@@ -51,23 +51,21 @@ function MessageConversations({
 
 	const scrollToBottom = () => {
 		setTimeout(() => {
-			messageRef.current?.scrollIntoView({
-				behavior : 'auto',
-				block    : 'nearest',
-				inline   : 'start',
+			messageRef.current?.scrollTo({
+				top      : messageRef.current.scrollHeight,
+				behavior : 'smooth',
 			});
-		}, 300);
+		}, 200);
 	};
 
 	useEffect(() => {
 		scrollToBottom();
 	}, [loadingMessages, id]);
-	console.log('loadingMessages', loadingMessages);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
-			sendChatMessage();
+			sendChatMessage(scrollToBottom);
 			scrollToBottom();
 		}
 	};
@@ -121,8 +119,10 @@ function MessageConversations({
 	return (
 		<div className={styles.styled_div}>
 			<div
+				key={id}
 				className={cl`${styles.container} ${styles[chatViewConditon()]}`}
 				onScroll={handleScroll}
+				ref={messageRef}
 			>
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received' ? (
@@ -137,9 +137,6 @@ function MessageConversations({
 						/>
 					)
 				))}
-				<div
-					ref={messageRef}
-				/>
 			</div>
 			<div
 				className={cl`${styles.nofile_container} 
@@ -252,7 +249,7 @@ function MessageConversations({
 							alt="img"
 							onClick={openInstantMessages}
 						/>
-						<IcMSend fill="#EE3425" onClick={sendChatMessage} />
+						<IcMSend fill="#EE3425" onClick={() => sendChatMessage(scrollToBottom)} />
 					</div>
 				</div>
 			</div>

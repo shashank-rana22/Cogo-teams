@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';

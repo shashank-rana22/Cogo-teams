@@ -10,8 +10,6 @@ import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	console.log('activeVoiceCard', activeVoiceCard);
-	console.log('activeMessageCard', activeMessageCard);
 	const { user_details = {} } = activeMessageCard || {};
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
 

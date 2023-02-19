@@ -28,7 +28,7 @@ const useSendChat = ({
 		);
 	}
 
-	const sendChatMessage = async () => {
+	const sendChatMessage = async (scrollToBottom) => {
 		const newMessage = draftMessages?.[id] || '';
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
@@ -52,7 +52,7 @@ const useSendChat = ({
 			};
 
 			await addDoc(activeChatCollection, adminChat);
-
+			scrollToBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;
 			await updateDoc(messageFireBaseDoc, {
@@ -129,6 +129,7 @@ const useSendChat = ({
 			});
 		}, 200);
 	};
+
 	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };
 };
 
