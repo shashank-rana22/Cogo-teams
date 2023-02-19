@@ -33,7 +33,10 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		support_agent_id = [],
 		spectators_data = [],
 	} = activeMessageCard || {};
-
+	const {
+		sendCommunicationTemplate,
+		loading:communicationLoading,
+	} = useSendCommunicationTemplate({ formattedData });
 	const hasPermissionToEdit = userId === support_agent_id;
 
 	const filteredSpectators = (spectators_data || [])
@@ -115,6 +118,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					activeAgentName={activeAgentName}
 					hasPermissionToEdit={hasPermissionToEdit}
 					filteredSpectators={filteredSpectators}
+
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -136,6 +140,8 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
 						hasPermissionToEdit={hasPermissionToEdit}
+						sendCommunicationTemplate={sendCommunicationTemplate}
+						communicationLoading={communicationLoading}
 					/>
 				</div>
 			</div>

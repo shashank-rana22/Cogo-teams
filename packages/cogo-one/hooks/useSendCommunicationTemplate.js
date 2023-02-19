@@ -2,7 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useSendCommunicationTemplate({ recipient, user_first_name }) {
+function useSendCommunicationTemplate({ formattedData = {} }) {
+	const { mobile_no = '', user_name = 'user' } = formattedData || {};
 	const { agentID } = useSelector(({ profile }) => ({
 		agentID: profile?.user?.id || {},
 	}));
@@ -20,9 +21,9 @@ function useSendCommunicationTemplate({ recipient, user_first_name }) {
 					service       : 'Campaign',
 					service_id    : agentID,
 					template_name,
-					recipient,
+					recipient     : mobile_no,
 					source        : 'cogoverse',
-					variables     : { user_first_name },
+					variables     : { user_first_name: user_name },
 				},
 			});
 		} catch (error) {

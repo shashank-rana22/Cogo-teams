@@ -34,7 +34,9 @@ function MessageConversations({
 	setUploading,
 	hasPermissionToEdit = false,
 	loadingMessages,
-	sentQuickSuggestions = () => { },
+	sentQuickSuggestions = () => {},
+	sendCommunicationTemplate = () => {},
+	communicationLoading = false,
 }) {
 	const messageRef = useRef();
 	const { id = '' } = activeMessageCard;
@@ -97,6 +99,8 @@ function MessageConversations({
 					setDraftMessages((p) => ({ ...p, [id]: val }));
 					setOpenModal({ type: null, data: {} });
 				},
+				sendCommunicationTemplate,
+				communicationLoading,
 			},
 		});
 	};
