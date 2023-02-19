@@ -38,7 +38,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		sendCommunicationTemplate,
 		loading:communicationLoading,
-	} = useSendCommunicationTemplate({ formattedData });
+	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
 	const hasPermissionToEdit = userId === support_agent_id;
 
 	const filteredSpectators = (spectators_data || [])

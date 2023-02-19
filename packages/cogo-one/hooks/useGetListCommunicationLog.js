@@ -1,12 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import FormatData from '../utils/formatData';
-
-function useGetListCommunicationLog({ activeMessageCard, activeVoiceCard }) {
-	const {
-		orgId = '',
-	} = FormatData({ activeMessageCard, activeVoiceCard });
+function useGetListCommunicationLog({ organizationId = null }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_communication_logs',
 		method : 'get',
@@ -17,17 +12,17 @@ function useGetListCommunicationLog({ activeMessageCard, activeVoiceCard }) {
 			params: {
 				filters: {
 					communication_type : 'meeting',
-					organization_id    : orgId,
+					organization_id    : organizationId,
 				},
 			},
 		});
 	};
 	useEffect(() => {
-		if (orgId !== '') {
+		if (!organizationId) {
 			fetchListLogApi();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activeVoiceCard]);
+	}, [organizationId]);
 
 	return {
 		listLoading : loading,

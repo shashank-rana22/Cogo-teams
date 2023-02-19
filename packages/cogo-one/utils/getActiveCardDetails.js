@@ -10,6 +10,7 @@ const getActiveCardDetails = (data = {}) => {
 		organization_name = '',
 		mobile_no = '',
 		lead_user_id = '',
+		user_email = '',
 	} = data || {};
 
 	if (channel_type === 'chatbot') {
@@ -21,6 +22,7 @@ const getActiveCardDetails = (data = {}) => {
 			lead_user_id,
 			channel_type,
 			mobile_no,
+			email: user_email,
 		};
 	}
 	if (isEmpty(Object.keys(user_details || {}))) {
