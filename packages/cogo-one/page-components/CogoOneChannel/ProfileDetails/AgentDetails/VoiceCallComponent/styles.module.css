@@ -1,52 +1,52 @@
 .wrapper {
-	display: flex;
+    display: flex;
 
-	:global {
-		.ui_modal_body_container {
-			border-top: none !important;
-			border-bottom: none !important;
-		}
-	}
+    :global {
+        .ui_modal_body_container {
+            border-top: none !important;
+            border-bottom: none !important;
+        }
+    }
 }
 
 .container {
-	display: flex;
-	width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .number_div {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	height: 35px;
-	padding: 8px 20px;
-	margin-top: 16px;
-	background: #fff;
-	border-radius: 6px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    padding: 8px 20px;
+    margin-top: 16px;
+    background: #fff;
+    border-radius: 6px;
 }
 
 .call_icon {
-	width: 18px;
-	height: 18px;
-	margin-right: 22px;
-	cursor: pointer;
-	fill: #abcd62;
+    width: 18px;
+    height: 18px;
+    margin-right: 22px;
+    cursor: pointer;
+    fill: #abcd62;
 }
 
 .show_number {
-	display: flex;
-	align-items: center;
-	padding-left: 16px;
-	font-size: 12px;
-	font-weight: 600;
-	color: #221f20;
-	border-left: 2px solid #221f20;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #221f20;
+    border-left: 2px solid #221f20;
 }
 
 .disable {
-	width: 18px;
-	height: 18px;
-	margin-right: 22px;
-	cursor: not-allowed;
-	fill: #abcd62;
+    width: 18px;
+    height: 18px;
+    margin-right: 22px;
+    cursor: not-allowed;
+    fill: #abcd62;
 }

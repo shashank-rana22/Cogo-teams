@@ -1,7 +1,7 @@
 .object_styles {
-    max-height: 200px;
+    max-height: 250px;
     max-width: 300px;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .clickable_object {

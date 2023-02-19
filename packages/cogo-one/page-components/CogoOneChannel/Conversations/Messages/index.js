@@ -25,6 +25,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const [uploading, setUploading] = useState({});
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+	console.log('activeMessageCard', activeMessageCard);
 
 	let activeChatCollection;
 	const {

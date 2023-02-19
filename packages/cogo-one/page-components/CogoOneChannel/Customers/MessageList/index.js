@@ -72,9 +72,7 @@ function MessageList({
 			</div>
 
 			{messagesLoading ? <LoadingState /> : (
-
 				<div className={styles.list_container}>
-
 					{(messagesList || []).map((item) => {
 						const userData = getActiveCardDetails(item);
 						const {

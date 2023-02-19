@@ -7,12 +7,9 @@ function FormatData({
 }) {
 	let userName = '';
 	let userMail = '';
-	// let roomId = '';
-	// let countryCode = '';
 	let userMobile = '';
 	let orgId = '';
 	let userId = '';
-	// let agentId = '';
 	let channelType = '';
 	let leadUserId = '';
 	let businessName = '';
@@ -22,7 +19,6 @@ function FormatData({
 		const { email = '', id = '', name = '' } = user_data || {};
 		userName = name;
 		userMail = email;
-		// roomId = roomID;
 		userMobile = user_number === null ? '' : `91${user_number}`;
 		orgId = organization_id !== null ? organization_id : '';
 		userId = id;
@@ -30,14 +26,8 @@ function FormatData({
 	} else {
 		const { user_details = null, channel_type } = activeMessageCard || {};
 
-		if (isEmpty(user_details) && channel_type === 'whatsapp') {
-			const { user_id, user_name, mobile_no } = activeMessageCard || {};
-			userId = user_id;
-			userName = user_name;
-			userMobile = mobile_no;
-			// roomId = id;
-		} else if (!isEmpty(user_details) && channel_type === 'whatsapp') {
-			const { user_name, mobile_no } = activeMessageCard || {};
+		const { user_name, mobile_no } = activeMessageCard || {};
+		if (!isEmpty(user_details) && channel_type === 'whatsapp') {
 			const { business_name, email, organization_id, user_id } = user_details || {};
 			userName = user_name;
 			userMobile = mobile_no;
@@ -45,13 +35,17 @@ function FormatData({
 			userMail = email;
 			orgId = organization_id;
 			userId = user_id;
-			// roomId = id;
 		} else {
-			const { lead_user_id, organization_id, user_name } = activeMessageCard || {};
-			leadUserId = lead_user_id;
-			orgId = organization_id;
+			const { lead_user_id, organization_id, user_id } = activeMessageCard || {};
+			userId = user_id;
 			userName = user_name;
-			// roomId = id;
+
+			if (isEmpty(user_details) && channel_type === 'whatsapp') {
+				userMobile = mobile_no;
+			} else {
+				leadUserId = lead_user_id;
+				orgId = organization_id;
+			}
 		}
 	}
 
@@ -64,7 +58,6 @@ function FormatData({
 		leadUserId,
 		businessName,
 		channelType,
-		// roomId,
 	};
 }
 export default FormatData;
