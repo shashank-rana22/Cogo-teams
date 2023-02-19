@@ -153,3 +153,9 @@
 .disable {
     cursor: not-allowed;
 }
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
