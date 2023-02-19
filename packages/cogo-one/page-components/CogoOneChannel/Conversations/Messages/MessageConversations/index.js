@@ -194,7 +194,7 @@ function MessageConversations({
 								<div
 									className={styles.tag_div}
 									role="presentation"
-									onClick={() => sentQuickSuggestions(eachSuggestion, scrollBottom)}
+									onClick={() => sentQuickSuggestions(eachSuggestion, scrollToBottom)}
 								>
 									{eachSuggestion}
 								</div>
