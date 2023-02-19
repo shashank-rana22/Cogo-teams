@@ -16,10 +16,12 @@ function useCreateCommunicationLog({
 		orgId = '',
 		userId = '',
 	} = FormatData({ activeMessageCard, activeVoiceCard });
+
 	const { partnerId, agentID } = useSelector(({ profile }) => ({
 		partnerId : profile.partner?.id || {},
 		agentID   : profile?.user?.id || {},
 	}));
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_organization_communication_log',
 		method : 'post',

@@ -2,15 +2,12 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import FormatData from '../utils/formatData';
-
 const useGetOmnichannelActivityLogs = ({
-	activeMessageCard = {},
 	activityTab = '',
-	activeVoiceCard = {},
-	activeTab,
 	setFilterVisible,
 	customerId,
+	user_id = null,
+	lead_user_id = null,
 }) => {
 	const [pagination, setPagination] = useState(1);
 
@@ -19,21 +16,12 @@ const useGetOmnichannelActivityLogs = ({
 		method : 'get',
 	}, { manual: true });
 
-	const { userId = '', leadUserId = '' } = FormatData({
-		activeMessageCard,
-		activeVoiceCard,
-		activeTab,
-	});
-
-	const emptyCheck = isEmpty(userId) && isEmpty(leadUserId);
-
 	const fetchActivityLogs = async (filters = []) => {
-		const lead_user_id = !isEmpty(leadUserId) ? leadUserId : undefined;
 		try {
 			await trigger({
 				params: {
-					user_id       : !isEmpty(userId) ? userId : undefined,
-					lead_user_id  : isEmpty(userId) ? lead_user_id : undefined,
+					user_id       : user_id || undefined,
+					lead_user_id  : !user_id ? lead_user_id : undefined,
 					activity_type : activityTab,
 					page          : pagination,
 					c_filters:
@@ -53,14 +41,8 @@ const useGetOmnichannelActivityLogs = ({
 	};
 
 	useEffect(() => {
-		if (activeTab === 'message') {
-			if (!emptyCheck) {
-				fetchActivityLogs();
-			}
-		} else if (activeTab === 'voice') {
-			if (!isEmpty(userId)) {
-				fetchActivityLogs();
-			}
+		if (user_id || lead_user_id) {
+			fetchActivityLogs();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activityTab, customerId, pagination]);

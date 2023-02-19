@@ -13,18 +13,18 @@ import Filters from './Filters';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, customerId }) {
+function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, customerId, FormattedMessageData }) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
 
-	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING[activityTab] || null;
+	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null } = FormattedMessageData || {};
 
-	const { userId = '', leadUserId = '' } = FormatData({
-		activeMessageCard,
-		activeVoiceCard,
-		activeTab,
-	});
+	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
+
+	const user_id = activeTab === 'message' ? messageUserId : voiceCallUserId;
+	const lead_user_id = activeTab === 'message' ? messageLeadUserId : null;
+	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING[activityTab] || null;
 
 	const {
 		loading = false,
@@ -33,12 +33,12 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 		fetchActivityLogs = () => {},
 		setPagination = () => {},
 	} = useGetOmnichannelActivityLogs({
-		activeMessageCard,
-		activityTab,
 		activeVoiceCard,
 		activeTab,
 		setFilterVisible,
 		customerId,
+		user_id,
+		lead_user_id,
 	});
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -72,9 +72,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activityTab]);
 
-	const idCheck = isEmpty(userId) && isEmpty(leadUserId);
-
-	const emptyCheck = idCheck || isEmpty(list);
+	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
 
 	function ShowData() {
 		return emptyCheck ? <EmptyState /> : (
@@ -147,7 +145,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 
 			)}
 
-			{!idCheck && !loading && (
+			{!loading && (
 				<div className={styles.pagination}>
 					<Pagination
 						type="page"
