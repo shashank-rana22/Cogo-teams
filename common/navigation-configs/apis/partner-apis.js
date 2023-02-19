@@ -10210,6 +10210,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_communication_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_communication_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 
 	],
 };

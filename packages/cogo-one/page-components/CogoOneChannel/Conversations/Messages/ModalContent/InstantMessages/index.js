@@ -1,130 +1,45 @@
-import { Input, Modal, Button, Placeholder } from '@cogoport/components';
-import { useForm, TextareaController, InputController } from '@cogoport/forms';
-import { IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import controls from '../../../../../../configurations/create-instant-reply';
-import useCreateSuggestions from '../../../../../../hooks/useCreateSuggestions';
-import useListSuggestions from '../../../../../../hooks/useListSuggestions';
-
+import InstantReplies from './InstantReplies';
 import styles from './styles.module.css';
+import Templates from './Templates';
 
-function InstantReplies({ data = {} }) {
-	const { updateMessage = () => {} } = data || {};
-	const { title, content } = controls;
+function InstantRepliesModal({ data = {} }) {
+	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
-	const { control, handleSubmit, formState:{ errors }, reset } = useForm();
-	const {
-		setQfilter,
-		handleScroll,
-		qfilter,
-		infiniteList:{ list = [] },
-		loading, refetch,
-	} = useListSuggestions();
 
-	const { createSuggestion, loading:CreateLoading } = useCreateSuggestions({
-		reset: () => {
-			reset({ title: '', content: '' });
-		},
-		refetch,
-	});
-
-	const loader = () => (
-		[...Array(6)].map(() => (
-			<div className={styles.loader_div}>
-				<Placeholder height="10px" width="100px" margin="0 0 10px 0" />
-				<Placeholder height="30px" width="200px" margin="0 0 10px 0" />
-			</div>
-		))
-	);
 	return (
-		<div className={styles.main_container}>
-			<div className={styles.messages_container}>
-				<div className={styles.container}>
-					<Input
-						value={qfilter}
-						onChange={(e) => setQfilter(e)}
-						placeholder="Search saved replies here..."
-						prefix={<IcMSearchlight />}
+		<div className={styles.container}>
+			<Tabs
+				// tabIcon={<IcMProfile />}
+				activeTab={activeTab}
+				themeType="primary"
+				onChange={setActiveTab}
+				size="sm"
+			>
+				<TabPanel name="quick_reply" title="Quick Reply">
+					<InstantReplies
+						data={data}
+						activeTab={activeTab}
+						openCreateReply={openCreateReply}
+						setOpenCreateReply={setOpenCreateReply}
+						setActiveTab={setActiveTab}
 					/>
-					<div
-						className={styles.message_container}
-						onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
-					>
-						{(list || []).map(({ title:messageTitle = '', content:messageContent = '' }) => (
-							<div
-								role="presentation"
-								className={styles.each_message}
-								onClick={() => updateMessage(messageContent)}
-							>
-								<div className={styles.title}>
-									{messageTitle}
-								</div>
-								<div className={styles.message}>
-									{messageContent}
-								</div>
-							</div>
-						))}
-						{loading && loader()}
-						{isEmpty(list) && !loading && <div className={styles.empty_div}>No Quick Messages</div>}
-					</div>
-				</div>
-				<div className={styles.footer}>
-					<Button
-						themeType="accent"
-						size="md"
-						onClick={() => setOpenCreateReply(true)}
-					>
-						+ Create Reply
+				</TabPanel>
 
-					</Button>
-				</div>
-			</div>
-			{openCreateReply && (
-				<div className={styles.create_container}>
-					<div>
-						<div className={styles.label}>
-							Name
-						</div>
-						<InputController control={control} {...title} id="title" />
-						{errors?.title && <div className={styles.error_text}>This is Required</div>}
-						<div className={styles.text_area_container}>
-							<div className={styles.label}>
-								Content
-							</div>
-							<TextareaController
-								control={control}
-								{...content}
-								id="content"
-							/>
-							{errors?.content && <div className={styles.error_text}>This is Required</div>}
-						</div>
+				<TabPanel name="template" title="Template">
+					<Templates
+						data={data}
+						activeTab={activeTab}
+						openCreateReply={openCreateReply}
+						setOpenCreateReply={setOpenCreateReply}
+						setActiveTab={setActiveTab}
+					/>
+				</TabPanel>
+			</Tabs>
 
-					</div>
-					<div className={styles.create_footer}>
-						<Button
-							themeType="tertiary"
-							size="md"
-							className={styles.button_styles}
-							onClick={() => setOpenCreateReply(false)}
-						>
-							cancel
-
-						</Button>
-						<Button
-							themeType="accent"
-							size="md"
-							onClick={handleSubmit(createSuggestion)}
-							loading={CreateLoading}
-						>
-							Create
-
-						</Button>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 }
-export default InstantReplies;
+export default InstantRepliesModal;
