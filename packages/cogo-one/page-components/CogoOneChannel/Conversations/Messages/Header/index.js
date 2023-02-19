@@ -29,7 +29,7 @@ function Header({
 	const {
 		chat_tags = [],
 	} = activeMessageCard || {};
-	const { user_name = '', business_name = '', mobile_number = '' } = formattedData || {};
+	const { user_name = '', business_name = '', mobile_no = '' } = formattedData || {};
 
 	return (
 		<div className={styles.container}>
@@ -88,7 +88,7 @@ function Header({
 					<div>
 						<div className={styles.name}>{startCase(user_name)}</div>
 						<div className={styles.phone_number}>
-							{mobile_number ? hideDetails({ data: mobile_number, type: 'number' }) : business_name}
+							{mobile_no ? hideDetails({ data: mobile_no, type: 'number' }) : business_name}
 						</div>
 					</div>
 				</div>

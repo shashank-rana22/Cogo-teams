@@ -65,7 +65,7 @@ const useSendChat = ({
 				const {
 					user_id = null,
 					organization_id = null,
-					mobile_number = '',
+					mobile_no = '',
 					lead_user_id = null,
 				} = formattedData || {};
 				let message_metadata;
@@ -83,7 +83,7 @@ const useSendChat = ({
 				}
 
 				sendMessage({
-					recipient : mobile_number,
+					recipient : mobile_no,
 					message   : newMessage,
 					user_id,
 					organization_id,
@@ -118,11 +118,11 @@ const useSendChat = ({
 			const {
 				user_id = null,
 				organization_id = null,
-				mobile_number = '',
+				mobile_no = '',
 				lead_user_id = null,
 			} = formattedData || {};
 			sendMessage({
-				recipient        : mobile_number,
+				recipient        : mobile_no,
 				user_id,
 				organization_id,
 				lead_user_id,

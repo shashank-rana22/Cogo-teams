@@ -172,10 +172,7 @@ function MessageConversations({
 						<div className={styles.delete_icon_container}>
 							<IcMDelete
 								className={styles.delete_icon}
-								onClick={() => setDraftUploadedFiles((p) => ({
-                                		...p,
-                                		[id]: undefined,
-                                	}))}
+								onClick={() => setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }))}
 							/>
 						</div>
 					</>
@@ -245,7 +242,7 @@ function MessageConversations({
                                 	? [draftUploadedFile]
                                 	: []
                             }
-								disabled={uploading?.[id] || hasPermissionToEdit}
+								disabled={uploading?.[id]}
 								handleProgress={handleProgress}
 								showProgress={false}
 								draggable
