@@ -39,6 +39,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 		customerId,
 		user_id,
 		lead_user_id,
+		activityTab,
 	});
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
