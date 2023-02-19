@@ -27,6 +27,7 @@ function Templates({
 	const { sendCommunicationTemplate, communicationLoading } = data || {};
 	const [showPreview, setShowPreview] = useState(false);
 	const [previewData, setPreviewData] = useState();
+	const [templateName, setTemplateName] = useState('');
 	const { title, content = '' } = controls;
 
 	const {
@@ -52,11 +53,17 @@ function Templates({
 		refetch,
 	});
 
-	const handleSelect = (val, status) => {
+	const handleSelect = (val, status, name) => {
+		console.log('name', name);
 		if (!previewData && status === 'approved') {
 			setShowPreview(true);
 			setPreviewData(val);
+			setTemplateName(name);
 		}
+	};
+
+	const handleClick = () => {
+		sendCommunicationTemplate(templateName);
 	};
 
 	function CreateReactComponent() {
@@ -101,11 +108,12 @@ function Templates({
 								description: messageContent = '',
 								whatsapp_approval_status,
 								html_template,
+								name: templateName,
 							}) => (
 								<div
 									role="presentation"
 									className={cl`${!openCreateReply ? styles.each_message : styles.disable}`}
-									onClick={() => handleSelect(html_template, whatsapp_approval_status)}
+									onClick={() => handleSelect(html_template, whatsapp_approval_status, templateName)}
 									style={{
 										cursor: previewData || whatsapp_approval_status !== 'approved'
 											? 'not-allowed' : 'pointer',
@@ -190,14 +198,34 @@ function Templates({
 			)}
 
 			{showPreview && (
-				<div className={styles.preview}>
-					<div className={styles.whatsapp}>
-						<div className={styles.back_icon}>
-							<IcMArrowBack height={14} width={14} />
+				<div className={styles.wrapper}>
+					<div className={styles.preview}>
+						<div className={styles.whatsapp}>
+							{/* <div className={styles.back_icon}>
+								<IcMArrowBack height={14} width={14} />
+							</div> */}
+							<div className={styles.overflow_div}>
+								<div className={styles.preview_div}>{CreateReactComponent()}</div>
+							</div>
 						</div>
-						<div className={styles.overflow_div}>
-							<div className={styles.preview_div}>{CreateReactComponent()}</div>
-						</div>
+					</div>
+					<div className={styles.create_footer}>
+						<Button
+							themeType="tertiary"
+							size="md"
+							className={styles.button_styles}
+							onClick={() => setOpenCreateReply(false)}
+						>
+							Cancel
+						</Button>
+						<Button
+							themeType="accent"
+							size="md"
+							onClick={handleClick}
+							loading={communicationLoading}
+						>
+							Submit
+						</Button>
 					</div>
 				</div>
 			)}
