@@ -63,7 +63,6 @@ function MessageConversations({
 	useEffect(() => {
 		scrollToBottom();
 	}, [loadingMessages, id]);
-	console.log('loadingMessages', loadingMessages);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
@@ -123,7 +122,7 @@ function MessageConversations({
 		<div className={styles.styled_div}>
 			<div
 				className={cl`${styles.container} ${
-                	styles[chatViewConditon()]
+					styles[chatViewConditon()]
 				}`}
 				onScroll={handleScroll}
 			>

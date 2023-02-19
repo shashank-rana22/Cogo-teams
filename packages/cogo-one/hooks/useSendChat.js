@@ -66,6 +66,7 @@ const useSendChat = ({
 					user_id = null,
 					organization_id = null,
 					mobile_number = '',
+					lead_user_id = null,
 				} = formattedData || {};
 				let message_metadata;
 				if (finalUrl) {
@@ -87,6 +88,7 @@ const useSendChat = ({
 					user_id,
 					organization_id,
 					message_metadata,
+					lead_user_id,
 				});
 			}, 300);
 		}
@@ -117,11 +119,13 @@ const useSendChat = ({
 				user_id = null,
 				organization_id = null,
 				mobile_number = '',
+				lead_user_id = null,
 			} = formattedData || {};
 			sendMessage({
 				recipient        : mobile_number,
 				user_id,
 				organization_id,
+				lead_user_id,
 				message_metadata : {
 					message_type : 'text',
 					message      : val,
