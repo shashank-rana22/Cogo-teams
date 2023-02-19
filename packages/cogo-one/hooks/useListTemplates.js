@@ -3,9 +3,9 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-function useListSuggestions({ activeTab }) {
+function useListTemplate({ activeTab }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_chat_suggestions',
+		url    : '/list_communication_templates',
 		method : 'get',
 	}, { manual: true });
 
@@ -16,15 +16,16 @@ function useListSuggestions({ activeTab }) {
 		total : 0,
 	});
 
-	const fetchListLogApi = async () => {
+	const fetchListTemplate = async () => {
 		try {
 			const res = await trigger({
 				params: {
 					page                     : pagination,
 					pagination_data_required : true,
 					filters                  : {
-						q               : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
-						suggestion_type : 'quick_reply',
+						q    : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
+						type : 'whatsapp',
+						tags : ['quick_reply'],
 					},
 				},
 			});
@@ -32,6 +33,7 @@ function useListSuggestions({ activeTab }) {
 				const { list = [], ...paginationData } = res?.data || {};
 				setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 			}
+			// setActiveTab('');
 		} catch (e) {
 			console.log('e', e);
 		}
@@ -39,14 +41,14 @@ function useListSuggestions({ activeTab }) {
 	const refetch = () => {
 		setPagination(1);
 		setInfiniteList((p) => ({ ...p, list: [] }));
-		fetchListLogApi();
+		fetchListTemplate();
 	};
 	useEffect(() => {
 		refetch();
 	}, [qfilter, activeTab]);
 
 	useEffect(() => {
-		fetchListLogApi();
+		fetchListTemplate();
 	}, [pagination, activeTab]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
@@ -62,4 +64,4 @@ function useListSuggestions({ activeTab }) {
 	};
 }
 
-export default useListSuggestions;
+export default useListTemplate;

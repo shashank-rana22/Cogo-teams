@@ -1,19 +1,23 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useSendWhatsappMessage = () => {
+const useSendMessage = ({ channel_type = '' }) => {
 	const {
 		user_data:{ user:{ id } },
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+	const API_MAPPING = {
+		whatsapp : 'create_communication',
+		chatbot  : 'create_communication_platform_chat',
+	};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_communication',
+		url    : `/${API_MAPPING[channel_type]}`,
 		method : 'post',
 	}, { manual: true });
 
-	const createWhatsappCommunication = async ({ recipient, message_metadata, user_id, organization_id }) => {
+	const sendMessage = async ({ recipient, message_metadata, user_id, organization_id }) => {
 		await trigger({
 			data: {
 				type       : 'whatsapp',
@@ -29,8 +33,8 @@ const useSendWhatsappMessage = () => {
 		});
 	};
 	return {
-		createWhatsappCommunication,
+		sendMessage,
 		loading,
 	};
 };
-export default useSendWhatsappMessage;
+export default useSendMessage;

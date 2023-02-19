@@ -7,7 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useSendChat from '../../../../hooks/useSendChat';
-import useSendWhatsappMessage from '../../../../hooks/useSendWhatsappMessage';
+import useSendMessage from '../../../../hooks/useSendMessage';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
@@ -15,7 +15,7 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
+function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '' }) {
 	const [headertags, setheaderTags] = useState();
 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -38,13 +38,17 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
 	const {
-		id = '', channel_type = '',
+		id = '', channel_type = '', support_agent_id = [],
+		spectators_data = [],
 	} = roomData || {};
-
+	const hasPermissionToEdit = userId === support_agent_id;
+	const filteredSpectators = (spectators_data || [])
+		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
+	const activeAgentName = (spectators_data || []).find((val) => val.agent_id === support_agent_id)?.name;
 	const {
-		createWhatsappCommunication,
+		sendMessage,
 		loading:createCommunicationLoading,
-	} = useSendWhatsappMessage();
+	} = useSendMessage({ channel_type });
 
 	let activeChatCollection;
 
@@ -65,12 +69,15 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		draftUploadedFiles,
 		setDraftUploadedFiles,
 		setRoomData,
-		createWhatsappCommunication,
+		sendMessage,
 		createCommunicationLoading,
 		formattedData,
 	});
-
-	const { assignChat = () => {} } = useAssignChat({ messageFireBaseDoc, setRoomData });
+	const closeModal = () => (setOpenModal({ type: null, data: {} }));
+	const {
+		assignChat = () => {},
+		loading:assignLoading,
+	} = useAssignChat({ messageFireBaseDoc, setRoomData, closeModal, roomData });
 	const {
 		getNextData = () => {},
 		getFirebaseData = () => {},
@@ -83,7 +90,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
-	const closeModal = () => (setOpenModal({ type: null, data: {} }));
 	const {
 		updateChat,
 		loading,
@@ -93,6 +99,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 		messageFireBaseDoc,
 		setRoomData,
 	});
+
 	const {
 		comp:ActiveModalComp = null,
 		title:{ img = null, name = null } = {}, modalSize = 'md',
@@ -110,6 +117,11 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [] }) {
 					roomData={roomData}
 					updateChat={updateChat}
 					loading={loading}
+					closeModal={closeModal}
+					assignLoading={assignLoading}
+					activeAgentName={activeAgentName}
+					hasPermissionToEdit={hasPermissionToEdit}
+					filteredSpectators={filteredSpectators}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

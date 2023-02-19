@@ -1,32 +1,31 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetListCommunicationLog({ activeMessageCard, activeTab, activeVoiceCard }) {
-	const { organization_id } = activeVoiceCard || {};
-	const { organization_id: MessageOrgId } = activeMessageCard || {};
+import FormatData from '../utils/formatData';
+
+function useGetListCommunicationLog({ activeMessageCard, activeVoiceCard }) {
+	const {
+		orgId = '',
+	} = FormatData({ activeMessageCard, activeVoiceCard });
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_communication_logs',
 		method : 'get',
 	}, { manual: true });
 
 	const fetchListLogApi = async () => {
-		let id;
-		if (activeTab === 'voice') {
-			id = organization_id;
-		} else {
-			id = MessageOrgId;
-		}
 		await trigger({
 			params: {
 				filters: {
 					communication_type : 'meeting',
-					organization_id    : id,
+					organization_id    : orgId,
 				},
 			},
 		});
 	};
 	useEffect(() => {
-		fetchListLogApi();
+		if (orgId !== '') {
+			fetchListLogApi();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeMessageCard, activeVoiceCard]);
 

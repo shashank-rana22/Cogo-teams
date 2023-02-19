@@ -9,7 +9,7 @@ const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) =
 	const {
 		orgId = '',
 	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
-	console.log('orgId', orgId);
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_organization',
 		method : 'get',
