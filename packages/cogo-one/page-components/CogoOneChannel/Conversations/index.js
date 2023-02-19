@@ -7,8 +7,8 @@ function Conversations({
 	activeMessageCard = {},
 	firestore,
 	activeVoiceCard,
-	suggestions = [], userId,
-
+	suggestions = [],
+	userId,
 }) {
 	return (
 		<div className={styles.container}>

@@ -27,7 +27,7 @@ function getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, applied
 		firestoreQuery = query(
 			omniChannelCollection,
 			...queryFilters,
-			// where('session_type', '==', 'admin'),
+			where('session_type', '==', 'admin'),
 			orderBy('updated_at', 'desc'),
 
 		);
@@ -35,8 +35,8 @@ function getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, applied
 		firestoreQuery = query(
 			omniChannelCollection,
 			...queryFilters,
-			where('agent_id', '==', userId),
-			// where('session_type', '==', 'admin'),
+			where('spectators_ids', 'array_contains', userId),
+			where('session_type', '==', 'admin'),
 			orderBy('updated_at', 'desc'),
 
 		);

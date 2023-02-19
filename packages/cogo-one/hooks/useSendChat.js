@@ -50,7 +50,6 @@ const useSendChat = ({
 				session_type : 'admin',
 
 			};
-			console.log('adminChat', adminChat);
 
 			await addDoc(activeChatCollection, adminChat);
 
@@ -96,6 +95,7 @@ const useSendChat = ({
 	const sentQuickSuggestions = async (val, scrollBottom) => {
 		const adminChat = {
 			conversation_type : 'received',
+			message_type      : 'text',
 			response          : { message: val },
 			created_at        : Date.now(),
 			send_by           : user_name,
@@ -113,22 +113,20 @@ const useSendChat = ({
 			new_message_count_user : old_count + 1,
 		});
 		setTimeout(() => {
-			if (channel_type === 'whatsapp') {
-				const {
-					user_id = null,
-					organization_id = null,
-					mobile_number = '',
-				} = formattedData || {};
-				sendMessage({
-					recipient        : mobile_number,
-					user_id,
-					organization_id,
-					message_metadata : {
-						message_type : 'text',
-						message      : val,
-					},
-				});
-			}
+			const {
+				user_id = null,
+				organization_id = null,
+				mobile_number = '',
+			} = formattedData || {};
+			sendMessage({
+				recipient        : mobile_number,
+				user_id,
+				organization_id,
+				message_metadata : {
+					message_type : 'text',
+					message      : val,
+				},
+			});
 		}, 200);
 	};
 	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };

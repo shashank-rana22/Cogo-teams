@@ -12,7 +12,7 @@ import getFireStoreQuery from '../helpers/getFireStoreQuery';
 const useListChats = ({
 	firestore, userRoleIds, userId,
 }) => {
-	const [activeMessageCard, setActiveMessageCard] = useState({});
+	const [activeCardId, setActiveCardId] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
@@ -22,6 +22,7 @@ const useListChats = ({
 		unReadChatsCount : 0,
 
 	});
+	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId) || {};
 
 	const dataFormatter = (list) => {
 		let chats = 0;
@@ -61,7 +62,7 @@ const useListChats = ({
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
-		setActiveMessageCard(val);
+		setActiveCardId(id);
 		if (channel_type && id) {
 			const messageDoc = doc(
 				firestore,
@@ -78,6 +79,9 @@ const useListChats = ({
 		setAppliedFilters,
 		appliedFilters,
 		loading,
+		activeCardId,
+		setActiveCardId,
+
 	};
 };
 
