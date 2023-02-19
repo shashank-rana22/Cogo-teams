@@ -32,7 +32,6 @@ function MobileVerification({
 				<MobileNumberController
 					{...controls[0]}
 					control={actualControl}
-					disabled
 					name="mobileNumber"
 				/>
 

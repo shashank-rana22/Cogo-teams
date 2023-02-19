@@ -39,7 +39,6 @@ function PersonDetails({
 
 	const onClickVerifyMobileNoButton = () => {
 		setShowMobileVerificationModal(true);
-		onSubmit();
 	};
 
 	return (

@@ -33,7 +33,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 							selectedUser.mobile_country_code
 							|| control?.value?.country_code
 							|| '+91',
-					number: selectedUser.mobile_number || control?.value?.number || 1,
+					number: selectedUser.mobile_number || control?.value?.number || '',
 				},
 			};
 		}
@@ -42,7 +42,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}), [controls, selectedUser]);
 
-	const { handleSubmit, formState: { errors }, control: actualControl, setValue } = useForm();
+	const { handleSubmit, formState: { errors }, control: actualControl, getValues, setValue } = useForm();
 
 	useEffect(() => {
 		setValue(
@@ -57,10 +57,12 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 
 	const verifyMobileNumber = async ({ actionType = {}, ...restProps }) => {
 		try {
+			const values = getValues();
+
 			let payload = {
 				id                  : selectedUser.user_id,
-				mobile_country_code : selectedUser?.mobile_country_code,
-				mobile_number       : selectedUser?.mobile_number,
+				mobile_country_code : values?.mobileNumber?.country_code,
+				mobile_number       : values?.mobileNumber?.number,
 			};
 
 			if (actionType === 'VERIFY_OTP') {
@@ -83,10 +85,10 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 				window.location.reload();
 			}
 		} catch (error) {
-			console.log('error', error);
-			Toast.error('something went wrong');
+			Toast.error('Something went wrong');
 		}
 	};
+
 	const sendOtpNumber = ({ timer = {} }) => verifyMobileNumber({ actionType: 'SEND_OTP', timer });
 
 	const verifyOtpNumber = () => verifyMobileNumber({ actionType: 'VERIFY_OTP' });

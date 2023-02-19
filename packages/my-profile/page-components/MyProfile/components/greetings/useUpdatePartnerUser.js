@@ -49,15 +49,6 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 
 	useEffect(() => {
 		setValue('name', detailsData?.name);
-		setValue('email', detailsData?.email);
-		setValue('preferred_languages', detailsData?.preferred_languages);
-		setValue(
-			'mobileNumber',
-			{
-				number       : detailsData?.mobile_number,
-				country_code : detailsData?.mobile_country_code,
-			},
-		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [detailsData]);
 

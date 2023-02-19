@@ -53,6 +53,17 @@ function MobileNoVerificationModal({
 
 			</Modal.Body>
 			<Modal.Footer>
+				{!showEnterOtpComponent && (
+					<Button
+						type="submit"
+						size="lg"
+						disabled={loading}
+						onClick={handleSubmit(onSubmit)}
+					>
+						Get OTP
+					</Button>
+				)}
+
 				{showEnterOtpComponent && (
 				// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 					<Button

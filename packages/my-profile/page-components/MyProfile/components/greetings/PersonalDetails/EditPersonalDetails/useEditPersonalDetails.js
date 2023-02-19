@@ -13,18 +13,12 @@ const useEditPersonalDetails = ({
 	}, { manual: false });
 
 	const onCreate = async (values = {}) => {
-		const { email, mobileNumber, name, preferred_languages } = values || {};
-
-		const { country_code, number } = mobileNumber || {};
+		const { name } = values || {};
 
 		try {
 			const payload = {
-				id                  : partner_user_id,
+				id: partner_user_id,
 				name,
-				email,
-				preferred_languages,
-				mobile_number       : number,
-				mobile_country_code : country_code,
 
 			};
 
@@ -38,9 +32,9 @@ const useEditPersonalDetails = ({
 
 			setShowModal(false);
 			setEditNameModal(false);
-			Toast.success('Personal Details updated successfully!');
+			Toast.success('Name updated successfully!');
 		} catch (e) {
-			Toast.error('Mobile number is invalid');
+			console.log(e);
 		}
 	};
 

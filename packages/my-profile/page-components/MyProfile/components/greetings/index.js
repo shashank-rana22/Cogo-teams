@@ -3,7 +3,6 @@ import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-// import GrantOutlookAccess from './GrantOutlookAccess';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEditPersonalDetails';
@@ -111,7 +110,7 @@ function Greetings({
 				onOuterClick={onOuterClick}
 				size="md"
 			>
-				<Modal.Header title="Edit Details" />
+				<Modal.Header title="Edit Name" />
 
 				<Modal.Body>
 					<EditPersonalDetails
