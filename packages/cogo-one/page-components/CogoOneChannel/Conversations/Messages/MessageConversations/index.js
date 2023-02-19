@@ -34,6 +34,7 @@ function MessageConversations({
 	setUploading,
 	hasPermissionToEdit = false,
 	loadingMessages,
+	loadingPrevMessages,
 	sentQuickSuggestions = () => { },
 }) {
 	const messageRef = useRef();
@@ -117,6 +118,14 @@ function MessageConversations({
 		return 'no_suggestions';
 	};
 
+	const loader = (
+		<div className={styles.loader}>
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
+				alt="load"
+			/>
+		</div>
+	);
 	return (
 		<div className={styles.styled_div}>
 			<div
@@ -125,6 +134,8 @@ function MessageConversations({
 				onScroll={handleScroll}
 				ref={messageRef}
 			>
+
+				{loadingPrevMessages && loader}
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received' ? (
 						<ReceiveDiv

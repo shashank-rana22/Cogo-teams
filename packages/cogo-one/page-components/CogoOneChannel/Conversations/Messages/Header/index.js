@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -47,7 +47,7 @@ function Header({
 					/>
 					<ShowContent list={chat_tags} showMorePlacement="right" />
 				</div>
-				<div className={styles.flex}>
+				<div className={cl`${styles.flex} ${!hasPermissionToEdit ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
 					&& (filteredSpectators || [])
 						.map(({ agent_name:prevAssignedName = '' }) => (

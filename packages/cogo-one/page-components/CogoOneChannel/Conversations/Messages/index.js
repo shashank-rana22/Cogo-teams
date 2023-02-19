@@ -39,7 +39,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
 
 	const activeAgentName = (spectators_data || [])
-		.find((val) => val.agent_id === support_agent_id)?.name;
+		.find((val) => val.agent_id === support_agent_id)?.agent_name;
 
 	const {
 		sendMessage,
@@ -135,6 +135,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
 						hasPermissionToEdit={hasPermissionToEdit}
+						loadingPrevMessages={loadingPrevMessages}
 					/>
 				</div>
 			</div>
