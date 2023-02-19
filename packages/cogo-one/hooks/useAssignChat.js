@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { getDoc } from 'firebase/firestore';
 
-function useAssignChat({ messageFireBaseDoc, setRoomData, roomData = {}, closeModal = () => {} }) {
-	const { channel_type, id, user_id = null, lead_user_id = null, organization_id = null } = roomData || {};
+function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formattedData = {} }) {
+	const { user_id, lead_user_id, organization_id, mobile_no } = formattedData || {};
+	const { channel_type, id } = activeMessageCard || {};
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
 		method : 'post',
@@ -13,20 +13,16 @@ function useAssignChat({ messageFireBaseDoc, setRoomData, roomData = {}, closeMo
 		try {
 			await trigger({
 				data: {
-					channel         : channel_type,
-					channel_chat_id : id,
-					user_id         : user_id || undefined,
-					lead_user_id    : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+					channel                 : channel_type,
+					channel_chat_id         : id,
+					user_id                 : user_id || undefined,
+					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+					whatsapp_number_eformat : mobile_no,
 					organization_id,
 					...payload,
 				},
 			});
 			closeModal();
-			setTimeout(async () => {
-				const updatedDoc = await getDoc(messageFireBaseDoc);
-				const updatedDocData = updatedDoc.data();
-				setRoomData({ ...(updatedDocData || {}), id: updatedDoc?.id });
-			}, 300);
 			Toast.success('Successfully Assigned');
 		} catch (error) {
 			Toast.error(error?.message);

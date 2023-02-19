@@ -9,7 +9,7 @@ import useUpdateNote from '../../../../hooks/useUpdateNote';
 
 import styles from './styles.module.css';
 
-function AgentNotes({ activeMessageCard }) {
+function AgentNotes({ activeMessageCard, activeTab, activeVoiceCard }) {
 	const [noteValue, setNoteValue] = useState('');
 
 	const [editNote, setEditNote] = useState(false);
@@ -18,9 +18,16 @@ function AgentNotes({ activeMessageCard }) {
 
 	const [updateId, setUpdateId] = useState();
 
-	const { noteData, fetchListNotes } = useGetListNotes({ activeMessageCard, active });
+	const { noteData, fetchListNotes } = useGetListNotes({ active, activeMessageCard, activeTab, activeVoiceCard });
 	const { list = [] } = noteData || {};
-	const { omniChannelNote = () => {} } = useCreateOmniNote({ editNote, fetchListNotes });
+
+	const { omniChannelNote = () => {} } = useCreateOmniNote({
+		editNote,
+		fetchListNotes,
+		activeMessageCard,
+		activeTab,
+		activeVoiceCard,
+	});
 	const { updateNote } = useUpdateNote({ fetchListNotes, editNote, setEditNote });
 
 	const handleSubmit = async () => {

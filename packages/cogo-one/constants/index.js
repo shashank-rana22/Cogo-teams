@@ -71,6 +71,12 @@ export const SERVICE_ICON_MAPPING = {
 	ftl_freight : <IcMFftl />,
 	ltl_freight : <IcMFltl />,
 };
+
+export const LOGO_URL = {
+	admin : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg',
+	bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
+};
+
 // export const ACTIVITY_TAB_MAPPING = {
 // 	transactional,
 // 	communication,

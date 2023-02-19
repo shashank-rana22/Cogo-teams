@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -14,7 +14,6 @@ function Header({
 	formattedData = {},
 	setheaderTags = () => {},
 	headertags = '',
-	roomData = {},
 	updateChat = () => {},
 	loading = false,
 	closeModal = () => {},
@@ -23,13 +22,14 @@ function Header({
 	activeAgentName = '',
 	hasPermissionToEdit = false,
 	filteredSpectators = [],
+	activeMessageCard,
 
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
 		chat_tags = [],
-	} = roomData || {};
-	const { user_name = '', business_name = '', mobile_number = '' } = formattedData || {};
+	} = activeMessageCard || {};
+	const { user_name = '', business_name = '', mobile_no = '' } = formattedData || {};
 
 	return (
 		<div className={styles.container}>
@@ -47,7 +47,7 @@ function Header({
 					/>
 					<ShowContent list={chat_tags} showMorePlacement="right" />
 				</div>
-				<div className={styles.flex}>
+				<div className={cl`${styles.flex} ${!hasPermissionToEdit ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
 					&& (filteredSpectators || [])
 						.map(({ agent_name:prevAssignedName = '' }) => (
@@ -66,6 +66,7 @@ function Header({
 					<Button
 						themeType="secondary"
 						size="md"
+						disabled={!hasPermissionToEdit}
 						className={styles.styled_button}
 						onClick={() => setOpenModal({
 							type : 'assign',
@@ -87,13 +88,14 @@ function Header({
 					<div>
 						<div className={styles.name}>{startCase(user_name)}</div>
 						<div className={styles.phone_number}>
-							{mobile_number ? hideDetails({ data: mobile_number, type: 'number' }) : business_name}
+							{mobile_no ? hideDetails({ data: mobile_no, type: 'number' }) : business_name}
 						</div>
 					</div>
 				</div>
 				<Button
 					themeType="primary"
 					size="md"
+					disabled={!hasPermissionToEdit}
 					onClick={() => setOpenModal({
 						type : 'mark_as_closed',
 						data : {

@@ -14,8 +14,6 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessage = () => { },
-	activeMessageCard,
 	setSearchValue = () => { },
 	filterVisible,
 	searchValue,
@@ -23,6 +21,8 @@ function MessageList({
 	setAppliedFilters = () => { },
 	appliedFilters,
 	messagesLoading = false,
+	activeCardId = '',
+	setActiveMessage,
 }) {
 	if (isEmpty(messagesList) && !messagesLoading) {
 		return (
@@ -83,7 +83,7 @@ function MessageList({
 						} = userData || {};
 
 						const lastActive = new Date(item.sent_updated_at);
-						const checkActiveCard = activeMessageCard?.id === item?.id;
+						const checkActiveCard = activeCardId === item?.id;
 
 						const show = getShowChat({ item, appliedFilters, searchValue });
 						return (

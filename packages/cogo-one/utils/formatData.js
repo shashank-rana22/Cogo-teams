@@ -1,8 +1,13 @@
 import { isEmpty } from '@cogoport/utils';
 
-function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
+function FormatData({
+	activeMessageCard = {},
+	activeTab = 'message',
+	activeVoiceCard = {},
+}) {
 	let userName = '';
 	let userMail = '';
+	// let roomId = '';
 	// let countryCode = '';
 	let userMobile = '';
 	let orgId = '';
@@ -17,18 +22,20 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 		const { email = '', id = '', name = '' } = user_data || {};
 		userName = name;
 		userMail = email;
-		// countryCode = mobile_country_code;
+		// roomId = roomID;
 		userMobile = user_number === null ? '' : `91${user_number}`;
 		orgId = organization_id !== null ? organization_id : '';
 		userId = id;
 		channelType = channel_type;
 	} else {
-		const { user_details, channel_type } = activeMessageCard || {};
+		const { user_details = null, channel_type } = activeMessageCard || {};
 
 		if (isEmpty(user_details) && channel_type === 'whatsapp') {
-			const { user_id, user_name } = activeMessageCard || {};
+			const { user_id, user_name, mobile_no } = activeMessageCard || {};
 			userId = user_id;
 			userName = user_name;
+			userMobile = mobile_no;
+			// roomId = id;
 		} else if (!isEmpty(user_details) && channel_type === 'whatsapp') {
 			const { user_name, mobile_no } = activeMessageCard || {};
 			const { business_name, email, organization_id, user_id } = user_details || {};
@@ -38,11 +45,13 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 			userMail = email;
 			orgId = organization_id;
 			userId = user_id;
+			// roomId = id;
 		} else {
 			const { lead_user_id, organization_id, user_name } = activeMessageCard || {};
 			leadUserId = lead_user_id;
 			orgId = organization_id;
 			userName = user_name;
+			// roomId = id;
 		}
 	}
 
@@ -55,6 +64,7 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 		leadUserId,
 		businessName,
 		channelType,
+		// roomId,
 	};
 }
 export default FormatData;

@@ -5,11 +5,13 @@ import {
 	limit,
 	startAfter,
 } from 'firebase/firestore';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const useGetMessages = ({ activeChatCollection }) => {
+const useGetMessages = ({ activeChatCollection, id }) => {
 	const [messagesData, setMessagesData] = useState([]);
 	const [lastDoc, setLastDoc] = useState(null);
+	const [loadingMessages, setLoadingMessages] = useState(false);
+	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 	const [lastPage, setLastPage] = useState(false);
 
 	const getFirebaseData = () => {
@@ -18,6 +20,8 @@ const useGetMessages = ({ activeChatCollection }) => {
 			orderBy('created_at', 'desc'),
 			limit(10),
 		);
+		setLoadingMessages(true);
+
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			const result = [];
 			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
@@ -26,6 +30,7 @@ const useGetMessages = ({ activeChatCollection }) => {
 				result.unshift(mes.data());
 			});
 			setMessagesData(result);
+			setLoadingMessages(false);
 		});
 	};
 
@@ -36,6 +41,8 @@ const useGetMessages = ({ activeChatCollection }) => {
 			startAfter(lastDoc),
 			limit(10),
 		);
+		setLoadingPrevMessages(true);
+
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
 			setLastPage(querySnapshot.docs.length < 10);
@@ -43,9 +50,23 @@ const useGetMessages = ({ activeChatCollection }) => {
 				messagesData.unshift(mes.data());
 			});
 			setMessagesData([...messagesData]);
+			setLoadingPrevMessages(false);
 		});
 	};
-	return { getNextData, getFirebaseData, lastPage, messagesData };
+
+	useEffect(() => {
+		getFirebaseData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id]);
+
+	return {
+		getNextData,
+		getFirebaseData,
+		lastPage,
+		messagesData,
+		loadingMessages,
+		loadingPrevMessages,
+	};
 };
 
 export default useGetMessages;

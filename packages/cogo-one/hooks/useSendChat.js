@@ -52,20 +52,21 @@ const useSendChat = ({
 			};
 
 			await addDoc(activeChatCollection, adminChat);
-
+			// scrollToBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
-			const old_count = doc1.data().new_message_count_user;
+			const old_count = doc1.data().new_user_message_count;
 			await updateDoc(messageFireBaseDoc, {
 				new_message_count      : 0,
 				last_message           : newMessage,
 				updated_at             : Date.now(),
-				new_message_count_user : old_count + 1,
+				new_user_message_count : old_count + 1,
 			});
 			setTimeout(() => {
 				const {
 					user_id = null,
 					organization_id = null,
-					mobile_number = '',
+					mobile_no = '',
+					lead_user_id = null,
 				} = formattedData || {};
 				let message_metadata;
 				if (finalUrl) {
@@ -82,11 +83,12 @@ const useSendChat = ({
 				}
 
 				sendMessage({
-					recipient : mobile_number,
+					recipient : mobile_no,
 					message   : newMessage,
 					user_id,
 					organization_id,
 					message_metadata,
+					lead_user_id,
 				});
 			}, 300);
 		}
@@ -95,6 +97,7 @@ const useSendChat = ({
 	const sentQuickSuggestions = async (val, scrollBottom) => {
 		const adminChat = {
 			conversation_type : 'received',
+			message_type      : 'text',
 			response          : { message: val },
 			created_at        : Date.now(),
 			send_by           : user_name,
@@ -104,32 +107,33 @@ const useSendChat = ({
 		await addDoc(activeChatCollection, adminChat);
 		scrollBottom();
 		const doc1 = await getDoc(messageFireBaseDoc);
-		const old_count = doc1.data().new_message_count_user;
+		const old_count = doc1.data().new_user_message_count;
 		await updateDoc(messageFireBaseDoc, {
 			new_message_count      : 0,
 			last_message           : val,
 			updated_at             : Date.now(),
-			new_message_count_user : old_count + 1,
+			new_user_message_count : old_count + 1,
 		});
 		setTimeout(() => {
-			if (channel_type === 'whatsapp') {
-				const {
-					user_id = null,
-					organization_id = null,
-					mobile_number = '',
-				} = formattedData || {};
-				sendMessage({
-					recipient        : mobile_number,
-					user_id,
-					organization_id,
-					message_metadata : {
-						message_type : 'text',
-						message      : val,
-					},
-				});
-			}
+			const {
+				user_id = null,
+				organization_id = null,
+				mobile_no = '',
+				lead_user_id = null,
+			} = formattedData || {};
+			sendMessage({
+				recipient        : mobile_no,
+				user_id,
+				organization_id,
+				lead_user_id,
+				message_metadata : {
+					message_type : 'text',
+					message      : val,
+				},
+			});
 		}, 200);
 	};
+
 	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };
 };
 

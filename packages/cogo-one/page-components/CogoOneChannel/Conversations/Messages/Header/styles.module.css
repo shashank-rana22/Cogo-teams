@@ -96,3 +96,13 @@
 .margin_right {
     margin-right: 30px;
 }
+.disabled_button {
+    :global {
+        .ui_button_container:hover {
+            border: none !important;
+        }
+		.ui_button_container:disabled{
+			border: none !important;
+		}
+    }
+}

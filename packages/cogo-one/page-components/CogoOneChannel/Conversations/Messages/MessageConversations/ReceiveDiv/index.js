@@ -1,6 +1,9 @@
 /* eslint-disable max-len */
 import { format } from '@cogoport/utils';
 
+import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
+import MessageBody from '../MessageBody';
+
 import styles from './styles.module.css';
 
 function ReceiveDiv({
@@ -10,9 +13,9 @@ function ReceiveDiv({
 	const {
 		message_type = 'text',
 		created_at = '',
-		response: { message = '' } = {},
+		response = {},
 	} = eachMessage;
-	const { name = 'Unknown User' } = activeMessageCard;
+	const { user_name = 'Unknown User' } = getActiveCardDetails(activeMessageCard);
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 
@@ -20,7 +23,7 @@ function ReceiveDiv({
 		<div className={styles.container}>
 			<div>
 				<div className={styles.name}>
-					{name}
+					{user_name}
 					,
 					<span className={styles.time_stamp}>
 						{date}
@@ -28,9 +31,10 @@ function ReceiveDiv({
 				</div>
 
 				<div className={styles.receive_message_container}>
-					{['text', 'template'].includes(message_type)
-						? <div dangerouslySetInnerHTML={{ __html: message }} />
-						: 'Media' }
+					<MessageBody
+						response={response}
+						message_type={message_type}
+					/>
 				</div>
 			</div>
 		</div>

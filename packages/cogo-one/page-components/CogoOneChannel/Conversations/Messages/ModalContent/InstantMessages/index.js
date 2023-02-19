@@ -15,7 +15,10 @@ function InstantRepliesModal({ data = {} }) {
 				// tabIcon={<IcMProfile />}
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={setActiveTab}
+				onChange={(val) => {
+					setActiveTab(val);
+					setOpenCreateReply(false);
+				}}
 				size="sm"
 			>
 				<TabPanel name="quick_reply" title="Quick Reply">
