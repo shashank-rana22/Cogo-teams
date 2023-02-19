@@ -32,8 +32,9 @@ function MessageConversations({
 	suggestions = [],
 	uploading,
 	setUploading,
-	sentQuickSuggestions = () => {},
 	hasPermissionToEdit = false,
+	loadingMessages,
+	sentQuickSuggestions = () => { },
 }) {
 	const messageRef = useRef(null);
 	const { id = '' } = activeMessageCard;
@@ -61,7 +62,8 @@ function MessageConversations({
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [id]);
+	}, [loadingMessages, id]);
+	console.log('loadingMessages', loadingMessages);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
@@ -126,19 +128,17 @@ function MessageConversations({
 				onScroll={handleScroll}
 			>
 				{(messagesData || []).map((eachMessage) => (
-					<div>
-						{eachMessage?.conversation_type !== 'received' ? (
-							<ReceiveDiv
-								eachMessage={eachMessage}
-								activeMessageCard={activeMessageCard}
-							/>
-						) : (
-							<SentDiv
-								eachMessage={eachMessage}
-								activeMessageCard={activeMessageCard}
-							/>
-						)}
-					</div>
+					eachMessage?.conversation_type !== 'received' ? (
+						<ReceiveDiv
+							eachMessage={eachMessage}
+							activeMessageCard={activeMessageCard}
+						/>
+					) : (
+						<SentDiv
+							eachMessage={eachMessage}
+							activeMessageCard={activeMessageCard}
+						/>
+					)
 				))}
 				<div ref={messageRef} />
 			</div>
@@ -158,13 +158,13 @@ function MessageConversations({
 							<div
 								role="presentation"
 								className={styles.file_name_container}
-                                // eslint-disable-next-line no-undef
 								onClick={() => {
-                                	window.open(
-                                		finalUrl,
-                                		'_blank',
-                                		'noreferrer',
-                                	);
+									// eslint-disable-next-line no-undef
+									window.open(
+										finalUrl,
+										'_blank',
+										'noreferrer',
+									);
 								}}
 							>
 								{uploadedFileName}
