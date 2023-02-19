@@ -1,7 +1,7 @@
 import { Button, Toast } from '@cogoport/components';
 import { IcCFtick, IcMError } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
@@ -39,7 +39,8 @@ const useVendorList = () => {
 		GetVendorList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
-	
+
+	const formatDate = (date) => format(date, 'dd MMM yy | hh:mm a');
 
 	const columns = [
 		{
@@ -104,7 +105,7 @@ const useVendorList = () => {
 
 			accessor: ({ created_at = '' }) => (
 				<section>
-					{created_at}
+					{formatDate(created_at)}
 				</section>
 			),
 		},

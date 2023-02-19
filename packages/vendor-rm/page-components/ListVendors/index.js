@@ -10,9 +10,9 @@ import TabularSection from './TabularSection';
 
 function ListVendors() {
 	const {
-		loading,
+		// loading,
 		data = {},
-		GetVendorList = () => {},
+		// GetVendorList = () => {},
 		params = {},
 		setParams = () => {},
 		columns,
@@ -20,11 +20,12 @@ function ListVendors() {
 		setShowFilter,
 	} = useVendorList();
 
+	const { total_count, page_limit:pageLimit } = data || {};
+	const router = useRouter();
+
 	if (data.total_count === 0) {
 		return <EmptyPage />;
 	}
-	const { total_count, page_limit:pageLimit } = data || {};
-	const router = useRouter();
 
 	return (
 		<>

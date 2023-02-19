@@ -1,6 +1,8 @@
 import { Input, Select, Button } from '@cogoport/components';
 import { useState } from 'react';
-import CATEGORY_OPTIONS from '../../../page-components/OnBoardVendor/VendorServices/utils/category-options';
+
+import CATEGORY_OPTIONS from '../../OnBoardVendor/VendorServices/utils/category-options';
+import subCategoryOptions from '../../OnBoardVendor/VendorServices/utils/sub-category-options';
 
 import styles from './styles.module.css';
 
@@ -54,17 +56,17 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 					value={filters?.sub_category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, sub_category: value }))}
 					placeholder="Choose Sub Category..."
-					options={CATEGORY_OPTIONS}
+					options={subCategoryOptions[filters?.category] || []}
 				/>
 			</div>
 
 			<div className={styles.button_container}>
 				<Button
 					type="button"
-                    themeType='secondary'
+					themeType="secondary"
 					onClick={() => {
-                        setShowFilter(false); 
-                    }}
+						setShowFilter(false);
+					}}
 					className="secondary sm"
 				>
 					Close
