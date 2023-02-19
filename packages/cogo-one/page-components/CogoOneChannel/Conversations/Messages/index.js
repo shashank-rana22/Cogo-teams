@@ -137,6 +137,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						suggestions={suggestions}
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
+						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 				</div>
 			</div>
