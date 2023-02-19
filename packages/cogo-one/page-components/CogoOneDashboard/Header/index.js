@@ -19,7 +19,7 @@ function Header({ activeTab, setActiveTab }) {
 			</div>
 			<Tabs
 				activeTab={activeTab}
-				themeType="primary"
+				themeType="tertiary"
 				onChange={setActiveTab}
 			>
 				<TabPanel name="day" title="Day" />
