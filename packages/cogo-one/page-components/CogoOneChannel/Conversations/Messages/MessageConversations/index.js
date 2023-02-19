@@ -65,7 +65,8 @@ function MessageConversations({
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
-			sendChatMessage(scrollToBottom);
+			sendChatMessage();
+			scrollToBottom();
 		}
 	};
 

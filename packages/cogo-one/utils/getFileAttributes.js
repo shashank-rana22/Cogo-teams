@@ -28,6 +28,9 @@ function getFileAttributes({ fileName = '', finalUrl }) {
 	} else if (['mp3', 'aac'].includes(fileExtension)) {
 		fileIcon = fileIconMapping.pdf;
 		fileType = 'audio';
+	} else if (['mp4', 'gif'].includes(fileExtension)) {
+		fileIcon = fileIconMapping.img;
+		fileType = 'video';
 	} else {
 		fileIcon = fileIconMapping.doc;
 		fileType = 'document';
