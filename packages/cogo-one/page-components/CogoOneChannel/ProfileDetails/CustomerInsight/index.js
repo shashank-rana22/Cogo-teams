@@ -50,7 +50,6 @@ function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard, custom
 	useEffect(() => {
 		setServiceType('fcl_freight');
 	}, [customerId]);
-	console.log('data', shipment_and_spot_search_stats);
 
 	return (
 		<div className={styles.container} key={customerId}>

@@ -10,6 +10,7 @@ const useGetOmnichannelActivityLogs = ({
 	activeVoiceCard = {},
 	activeTab,
 	setFilterVisible,
+	customerId,
 }) => {
 	const [pagination, setPagination] = useState(1);
 
@@ -28,20 +29,24 @@ const useGetOmnichannelActivityLogs = ({
 
 	const fetchActivityLogs = async (filters = []) => {
 		const lead_user_id = !isEmpty(leadUserId) ? leadUserId : undefined;
+		try {
+			await trigger({
+				params: {
+					user_id       : !isEmpty(userId) ? userId : undefined,
+					lead_user_id  : isEmpty(userId) ? lead_user_id : undefined,
+					activity_type : activityTab,
+					page          : pagination,
+					c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
+					t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? {
+						serial_id: filters.toString(),
+					} : undefined,
 
-		await trigger({
-			params: {
-				user_id       : !isEmpty(userId) ? userId : undefined,
-				lead_user_id  : isEmpty(userId) ? lead_user_id : undefined,
-				activity_type : activityTab,
-				page          : pagination,
-				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
-				t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? {
-					serial_id: filters.toString(),
-				} : undefined,
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
 
-			},
-		});
 		setFilterVisible(false);
 	};
 
@@ -56,7 +61,7 @@ const useGetOmnichannelActivityLogs = ({
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard?.id, activityTab, activeVoiceCard, pagination]);
+	}, [activityTab, customerId, pagination]);
 
 	return {
 		data,

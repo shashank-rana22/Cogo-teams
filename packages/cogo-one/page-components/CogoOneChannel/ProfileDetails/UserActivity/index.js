@@ -14,7 +14,7 @@ import Filters from './Filters';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
+function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, customerId }) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
@@ -33,7 +33,14 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		pagination,
 		fetchActivityLogs = () => {},
 		setPagination = () => {},
-	} = useGetOmnichannelActivityLogs({ activeMessageCard, activityTab, activeVoiceCard, activeTab, setFilterVisible });
+	} = useGetOmnichannelActivityLogs({
+		activeMessageCard,
+		activityTab,
+		activeVoiceCard,
+		activeTab,
+		setFilterVisible,
+		customerId,
+	});
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
@@ -46,6 +53,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 		list = data?.[activityTab]?.spot_searches?.list || [];
 		total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
 	}
+
 	const handleFilters = () => {
 		fetchActivityLogs(filters);
 	};
