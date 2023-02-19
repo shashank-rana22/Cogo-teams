@@ -20,7 +20,10 @@ function PlatformActivity({ platform = {} }) {
 			{(list || []).map((item) => {
 				const services = item?.service_type;
 
-				const { origin = '', destination = '' } = PLATFORM_KEYS_MAPPING[services];
+				const {
+					origin = 'origin_location',
+					destination = 'destination_location',
+				} = PLATFORM_KEYS_MAPPING[services] || {};
 
 				const origin_port = item[origin] || {};
 

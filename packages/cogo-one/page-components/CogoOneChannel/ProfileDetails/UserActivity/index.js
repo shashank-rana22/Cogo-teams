@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
 import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -77,6 +76,22 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 
 	const emptyCheck = idCheck || isEmpty(list);
 
+	function ShowData() {
+		return emptyCheck ? <EmptyState /> : (
+			<div
+				className={styles.list_container}
+			>
+				{ActiveComp && (
+					<ActiveComp
+						communication={communication}
+						platform={platform}
+						transactional={transactional}
+					/>
+				)}
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs}>
@@ -128,43 +143,23 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 			{loading ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
-				<>
-					{emptyCheck ? <EmptyState /> : (
-						<div
-							className={styles.list_container}
-						>
-
-							{ActiveComp && (
-								<ActiveComp
-									communication={communication}
-									platform={platform}
-									transactional={transactional}
-								/>
-							)}
-						</div>
-					)}
-				</>
+				<ShowData />
 
 			)}
 
-			{!idCheck && (
-				<>
-					{!loading && (
-						<div className={styles.pagination}>
-							<Pagination
-								type="page"
-								currentPage={pagination}
-								totalItems={total_count}
-								pageSize={10}
-								onPageChange={(val) => setPagination(val)}
-							/>
-						</div>
-					)}
-				</>
+			{!idCheck && !loading && (
+				<div className={styles.pagination}>
+					<Pagination
+						type="page"
+						currentPage={pagination}
+						totalItems={total_count}
+						pageSize={10}
+						onPageChange={(val) => setPagination(val)}
+					/>
+				</div>
 			)}
-
 		</div>
-
 	);
 }
+
 export default UserActivities;

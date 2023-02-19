@@ -36,8 +36,10 @@ const useGetOmnichannelActivityLogs = ({
 					lead_user_id  : isEmpty(userId) ? lead_user_id : undefined,
 					activity_type : activityTab,
 					page          : pagination,
-					c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
-					t_filters     : !isEmpty(filters) && activityTab === 'transactional' ? {
+					c_filters:
+					!isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
+
+					t_filters: !isEmpty(filters) && activityTab === 'transactional' ? {
 						serial_id: filters.toString(),
 					} : undefined,
 

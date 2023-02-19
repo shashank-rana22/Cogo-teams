@@ -1,9 +1,8 @@
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-const useGetUser = ({ userId, leadUserId }) => {
-	const apiName =	!isEmpty(userId) ? 'get_user' : 'get_lead_user';
+const useGetUser = ({ leadUserId, userId, customerId }) => {
+	const apiName =	 userId ? 'get_user' : 'get_lead_user';
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `${apiName}`,
@@ -13,7 +12,7 @@ const useGetUser = ({ userId, leadUserId }) => {
 	const fetchUser = async () => {
 		await trigger({
 			params: {
-				id: !isEmpty(userId) ? userId : leadUserId,
+				id: userId || leadUserId,
 			},
 		});
 	};
@@ -22,7 +21,7 @@ const useGetUser = ({ userId, leadUserId }) => {
 			fetchUser();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userId, leadUserId]);
+	}, [leadUserId, userId, customerId]);
 
 	return {
 		loading,

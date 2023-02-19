@@ -43,13 +43,13 @@ function MarkAsClosed({ data = {} }) {
 
 	const handleSubmit = async () => {
 		if (!isEmpty(selectPill) && !isEmpty(inputValue)) {
-			const data = {
+			const payload = {
 				feedback          : inputValue,
 				status            : 'close_conversation',
 				feedback_category : selectPill,
 			};
 
-			await updateChat(data);
+			await updateChat(payload);
 		} else {
 			Toast.error('Enter details');
 		}
@@ -62,10 +62,8 @@ function MarkAsClosed({ data = {} }) {
 
 	return (
 		<div className={styles.feed_div}>
-
 			<Modal.Body>
 				<div className={styles.feed_content}>
-					<div className={styles.feed_title}>Feedback</div>
 					<div className={styles.feed_head}>Reason for contact ?</div>
 					<div className={styles.pill_div}>
 						{DEFAULT_PILLS_ITEMS.map((item) => {
