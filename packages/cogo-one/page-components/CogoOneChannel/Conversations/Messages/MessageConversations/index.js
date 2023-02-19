@@ -38,6 +38,7 @@ function MessageConversations({
 	sentQuickSuggestions = () => {},
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
+	lastPage = false,
 }) {
 	const messageRef = useRef();
 	const { id = '' } = activeMessageCard;
@@ -80,7 +81,7 @@ function MessageConversations({
 
 	const handleScroll = (e) => {
 		const bottom = e.target.scrollTop === 0;
-		if (bottom) {
+		if (bottom && !lastPage) {
 			getNextData();
 		}
 	};

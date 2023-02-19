@@ -143,6 +143,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						loadingPrevMessages={loadingPrevMessages}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
+
 					/>
 				</div>
 			</div>
