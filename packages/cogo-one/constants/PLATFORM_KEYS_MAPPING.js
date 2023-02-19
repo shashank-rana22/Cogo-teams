@@ -29,4 +29,10 @@ export const PLATFORM_KEYS_MAPPING = {
 		destination : 'destination_location',
 
 	},
+	trailer_freight: {
+
+		origin      : 'origin_airport',
+		destination : 'destination_airport',
+
+	},
 };
