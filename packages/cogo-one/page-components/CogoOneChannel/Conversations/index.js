@@ -9,7 +9,6 @@ function Conversations({
 	activeVoiceCard,
 	suggestions = [],
 	userId,
-
 }) {
 	return (
 		<div className={styles.container}>

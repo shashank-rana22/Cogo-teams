@@ -1,14 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { getDoc } from 'firebase/firestore';
 
-function useUpdateAssignedChat({ roomData = {}, onClose = () => {}, messageFireBaseDoc, setRoomData }) {
+function useUpdateAssignedChat({ activeMessageCard = {}, onClose = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_assigned_chat',
 		method : 'post',
 	}, { manual: true });
 
-	const { channel_type, id, user_id = null, mobile_no = '', lead_user_id = null } = roomData || {};
+	const { channel_type, id, user_id = null, mobile_no = '', lead_user_id = null } = activeMessageCard || {};
 
 	const updateChat = async (data) => {
 		try {
@@ -24,11 +23,6 @@ function useUpdateAssignedChat({ roomData = {}, onClose = () => {}, messageFireB
 			});
 			Toast.success('updated sucessfully');
 			onClose();
-			setTimeout(async () => {
-				const updatedDoc = await getDoc(messageFireBaseDoc);
-				const updatedDocData = updatedDoc.data();
-				setRoomData({ ...(updatedDocData || {}), id: updatedDoc?.id });
-			}, 300);
 		} catch (error) {
 			Toast.error(error?.message);
 		}

@@ -8,7 +8,7 @@ import VoiceList from './VoiceList';
 
 function Customers({
 	setActiveMessage = () => {},
-	activeMessageCard,
+	// activeMessageCard,
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
 	setSearchValue = () => {},
@@ -28,6 +28,7 @@ function Customers({
 	openModal = false,
 	updateUserStatus = () => {},
 	statusLoading = false,
+	activeCardId = '',
 }) {
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -71,7 +72,6 @@ function Customers({
 				<MessageList
 					messagesList={messagesList}
 					setActiveMessage={setActiveMessage}
-					activeMessageCard={activeMessageCard}
 					setSearchValue={setSearchValue}
 					searchValue={searchValue}
 					filterVisible={filterVisible}
@@ -79,6 +79,7 @@ function Customers({
 					setAppliedFilters={setAppliedFilters}
 					appliedFilters={appliedFilters}
 					messagesLoading={messagesLoading}
+					activeCardId={activeCardId}
 				/>
 			)}
 

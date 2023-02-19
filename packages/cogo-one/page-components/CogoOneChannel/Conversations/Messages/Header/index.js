@@ -14,7 +14,6 @@ function Header({
 	formattedData = {},
 	setheaderTags = () => {},
 	headertags = '',
-	roomData = {},
 	updateChat = () => {},
 	loading = false,
 	closeModal = () => {},
@@ -23,12 +22,13 @@ function Header({
 	activeAgentName = '',
 	hasPermissionToEdit = false,
 	filteredSpectators = [],
+	activeMessageCard,
 
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {
 		chat_tags = [],
-	} = roomData || {};
+	} = activeMessageCard || {};
 	const { user_name = '', business_name = '', mobile_number = '' } = formattedData || {};
 
 	return (

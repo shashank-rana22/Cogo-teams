@@ -22,21 +22,16 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [messages, setMessages] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [roomData, setRoomData] = useState(activeMessageCard || {});
+
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+
 	let activeChatCollection;
-
-	useEffect(() => {
-		setRoomData(activeMessageCard);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(activeMessageCard)]);
-
 	const {
 		id = '',
 		channel_type = '',
 		support_agent_id = [],
 		spectators_data = [],
-	} = roomData || {};
+	} = activeMessageCard || {};
 
 	const hasPermissionToEdit = userId === support_agent_id;
 
@@ -67,7 +62,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		activeChatCollection,
 		draftUploadedFiles,
 		setDraftUploadedFiles,
-		setRoomData,
 		sendMessage,
 		createCommunicationLoading,
 		formattedData,
@@ -78,7 +72,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		assignChat = () => {},
 		loading:assignLoading,
-	} = useAssignChat({ messageFireBaseDoc, setRoomData, closeModal, roomData });
+	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard });
 
 	const {
 		getNextData = () => {},
@@ -91,10 +85,8 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		updateChat,
 		loading,
 	} = useUpdateAssignedChat({
-		roomData,
 		onClose: closeModal,
-		messageFireBaseDoc,
-		setRoomData,
+		activeMessageCard,
 	});
 
 	const {
@@ -112,9 +104,9 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					headertags={headertags}
 					assignChat={assignChat}
 					formattedData={formattedData}
-					roomData={roomData}
 					updateChat={updateChat}
 					loading={loading}
+					activeMessageCard={activeMessageCard}
 					closeModal={closeModal}
 					assignLoading={assignLoading}
 					activeAgentName={activeAgentName}
@@ -136,7 +128,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						loadingMessages={loadingMessages}
 						lastPage={lastPage}
 						setOpenModal={setOpenModal}
-						activeMessageCard={roomData}
+						activeMessageCard={activeMessageCard}
 						suggestions={suggestions}
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
