@@ -33,6 +33,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeSelect={activeSelect}
+				activeTab={activeTab}
 				setActiveSelect={setActiveSelect}
 			/>
 		</div>
