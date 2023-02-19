@@ -10,6 +10,8 @@ import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
+	console.log('activeVoiceCard', activeVoiceCard);
+	console.log('activeMessageCard', activeMessageCard);
 	const { user_details = {} } = activeMessageCard || {};
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
@@ -19,11 +21,12 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 		userMobile,
 		userName,
 		orgId,
-		agentId,
-		countryCode,
+		// agentId,
+		// countryCode,
+		leadUserId,
 	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
 
-	const { userData, loading } = useGetUser({ userId });
+	const { userData, loading } = useGetUser({ userId, leadUserId });
 
 	const {
 		mobile_verified,
@@ -65,7 +68,7 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 							<div className={styles.name}>
 								{userName || 'unknown user'}
 							</div>
-							<div className={styles.name}>
+							<div className={styles.email}>
 								{userMail || '-'}
 							</div>
 						</>
@@ -96,8 +99,8 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				<VoiceCallComponent
 					userMobile={userMobile}
 					orgId={orgId}
-					agentId={agentId}
-					countryCode={countryCode}
+					// agentId={agentId}
+					// countryCode={countryCode}
 					userId={userId}
 					userName={userName}
 					emptyState={emptyState}

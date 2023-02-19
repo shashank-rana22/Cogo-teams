@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function VoiceCallComponent({
 	userMobile,
 	orgId,
-	countryCode,
+	// countryCode,
 	userId,
 	userName,
 	emptyState,
@@ -19,8 +19,8 @@ function VoiceCallComponent({
 		profileData: profile,
 	}));
 
-	const code = userMobile?.slice(0, 3);
-	const number = userMobile?.slice(3);
+	const code = userMobile?.slice(0, 2);
+	const number = userMobile?.slice(2);
 
 	const handleCall = async () => {
 		if (!isEmpty(userMobile)) {
@@ -36,8 +36,8 @@ function VoiceCallComponent({
 						startTime           : new Date(),
 						orgId,
 						userId,
-						mobile_number       : userMobile,
-						mobile_country_code : countryCode,
+						mobile_number       : number,
+						mobile_country_code : `+${code}`,
 						agentId             : profileData?.user?.id,
 						name                : userName,
 						emptyState,
@@ -57,7 +57,7 @@ function VoiceCallComponent({
 							(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
 						onClick={handleCall}
 					/>
-					{(userMobile !== '+undefined') && (
+					{!isEmpty(userMobile) && (
 						<div className={styles.show_number}>
 							{code}
 							{' '}
