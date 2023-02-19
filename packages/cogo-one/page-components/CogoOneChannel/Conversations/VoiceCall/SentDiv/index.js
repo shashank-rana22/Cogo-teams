@@ -25,7 +25,6 @@ function SentDiv({ eachList = {} }) {
 					{' '}
 					{name}
 					{' '}
-
 					,
 					<span className={styles.time_stamp}>{date}</span>
 				</div>

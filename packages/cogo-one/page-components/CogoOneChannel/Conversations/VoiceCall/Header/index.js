@@ -10,6 +10,7 @@ function Header({
 }) {
 	const { user_data, user_number = '' } = activeVoiceCard || {};
 	const name = user_data?.name || '';
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>

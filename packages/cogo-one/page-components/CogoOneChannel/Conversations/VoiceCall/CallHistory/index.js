@@ -18,6 +18,7 @@ function CallHistory({ type = 'user', end_time_of_call = '', start_time_of_call 
 	const startTime = start_time_of_call?.split(' ')?.[1];
 	const endTime = end_time_of_call?.split(' ')?.[1];
 	const { start = '', end = '', compStyles = {} } = ICON_MAPPING[type] || {};
+
 	return (
 		<div>
 			<div className={styles.started} style={compStyles}>
