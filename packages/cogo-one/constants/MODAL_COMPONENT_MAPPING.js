@@ -14,6 +14,6 @@ const MODAL_COMPONENT_MAPPING = {
 		modalSize: 'xs',
 
 	},
-	mark_as_closed: { comp: MarkAsClosed, title: { name: null }, modalSize: 'xs' },
+	mark_as_closed: { comp: MarkAsClosed, title: { name: 'feedback' }, modalSize: 'xs' },
 };
 export default MODAL_COMPONENT_MAPPING;

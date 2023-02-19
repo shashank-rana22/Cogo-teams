@@ -1,15 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-import FormatData from '../utils/formatData';
-
-const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
-	// const { organization_id } = activeVoiceCard || {};
-	// const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
-	const {
-		orgId = '',
-	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
-
+const useGetOrganization = ({ organizationId = '' }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_organization',
 		method : 'get',
@@ -18,15 +10,9 @@ const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) =
 	const [organizationData, setOrganizationData] = useState(null);
 
 	const fetchOrganization = async () => {
-		// let id = '';
-		// if (activeTab === 'voice') {
-		// 	id = orgId;
-		// } else {
-		// 	id = orgId;
-		// }
 		const res = await trigger({
 			params: {
-				id                 : orgId,
+				id                 : organizationId,
 				user_data_required : true,
 			},
 		});
@@ -34,11 +20,11 @@ const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) =
 	};
 
 	useEffect(() => {
-		if (orgId !== '') {
+		if (organizationId) {
 			fetchOrganization();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activeVoiceCard]);
+	}, [organizationId]);
 
 	return {
 		organizationData,

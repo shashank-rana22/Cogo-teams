@@ -6,36 +6,32 @@ import EmptyState from '../../../../common/EmptyState';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
-import FormatData from '../../../../utils/formatData';
-// import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
-
-// import LoadingState from './LoaderState';
 
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	// const { user_id } = getActiveCardDetails(activeMessageCard);
-	const {
-		orgId = '',
-	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
+function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMessageData = {} }) {
+	const { organization_id:messageOrgId = '' } = FormattedMessageData || {};
+	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
-	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard, activeVoiceCard, activeTab });
+	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
+
+	const { organizationData = {}, orgLoading } = useGetOrganization({ organizationId });
 
 	const {
 		pointData = {},
 		pointLoading,
-	} = 	useGetOrganizationCogopoints({ activeMessageCard, activeVoiceCard, activeTab });
+	} = useGetOrganizationCogopoints({ organizationId });
 
-	const { promoData = {}, promoLoading } = useGetListPromotions({ activeMessageCard, activeVoiceCard });
+	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
 	const { agent = {}, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
 
-	if (orgId === '') {
+	if (organizationId) {
 		return (
 			<EmptyState />
 		);

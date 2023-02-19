@@ -20,6 +20,7 @@ const getActiveCardDetails = (data = {}) => {
 			organization_name,
 			lead_user_id,
 			channel_type,
+			mobile_no,
 		};
 	}
 	if (isEmpty(Object.keys(user_details || {}))) {
@@ -36,7 +37,7 @@ const getActiveCardDetails = (data = {}) => {
 		name,
 		organization_id: detailsOrgId,
 		user_id: detailsUserId,
-		lead_user_id: detailsLeadUserId = null,
+		email,
 	} = user_details || {};
 
 	return {
@@ -45,8 +46,9 @@ const getActiveCardDetails = (data = {}) => {
 		organization_id   : detailsOrgId,
 		user_id           : detailsUserId,
 		mobile_no,
-		lead_user_id      : detailsLeadUserId,
+		lead_user_id,
 		channel_type,
+		email,
 	};
 };
 export default getActiveCardDetails;

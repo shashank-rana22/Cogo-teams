@@ -21,7 +21,6 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 			limit(10),
 		);
 		setLoadingMessages(true);
-
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			const result = [];
 			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
@@ -55,6 +54,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	};
 
 	useEffect(() => {
+		setMessagesData([]);
 		getFirebaseData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);

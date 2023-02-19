@@ -106,7 +106,7 @@ function AssignToForm({ data = {} }) {
 			</div>
 			<div className={styles.button_container}>
 				<Button size="md" themeType="tertiary" onClick={reset}>
-					cancel
+					reset
 				</Button>
 				<Button size="md" themeType="accent" loading={assignLoading} onClick={handleSubmit(createSubmit)}>
 					Assign

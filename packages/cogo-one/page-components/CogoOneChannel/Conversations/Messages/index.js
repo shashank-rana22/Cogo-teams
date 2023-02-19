@@ -27,6 +27,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
 	let activeChatCollection;
+
 	const {
 		id = '',
 		channel_type = '',
