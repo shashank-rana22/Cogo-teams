@@ -66,6 +66,7 @@ function Header({
 					<Button
 						themeType="secondary"
 						size="md"
+						disabled={!hasPermissionToEdit}
 						className={styles.styled_button}
 						onClick={() => setOpenModal({
 							type : 'assign',
@@ -94,6 +95,7 @@ function Header({
 				<Button
 					themeType="primary"
 					size="md"
+					disabled={!hasPermissionToEdit}
 					onClick={() => setOpenModal({
 						type : 'mark_as_closed',
 						data : {

@@ -22,16 +22,17 @@ import styles from './styles.module.css';
 function MessageConversations({
 	messagesData = [],
 	draftMessage = '',
-	setDraftMessages = () => { },
+	setDraftMessages = () => {},
 	sendChatMessage,
 	draftUploadedFile = {},
-	setDraftUploadedFiles = () => { },
+	setDraftUploadedFiles = () => {},
 	getNextData,
 	setOpenModal,
 	activeMessageCard,
 	suggestions = [],
 	uploading,
 	setUploading,
+	hasPermissionToEdit = false,
 	loadingMessages,
 	sentQuickSuggestions = () => { },
 }) {
@@ -40,9 +41,9 @@ function MessageConversations({
 
 	const {
 		emojisList = {},
-		setOnClicked = () => { },
+		setOnClicked = () => {},
 		onClicked = false,
-		emojiListFetch = () => { },
+		emojiListFetch = () => {},
 	} = useGetEmojiList({ activeMessageCard });
 
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
@@ -52,7 +53,7 @@ function MessageConversations({
 	const scrollToBottom = () => {
 		setTimeout(() => {
 			messageRef.current?.scrollTo({
-				top      : messageRef.current.scrollHeight,
+				top   	  : messageRef.current.scrollHeight,
 				behavior : 'smooth',
 			});
 		}, 200);
@@ -63,7 +64,7 @@ function MessageConversations({
 	}, [loadingMessages, id]);
 
 	const handleKeyPress = (event) => {
-		if (event.key === 'Enter' && !event.shiftKey) {
+		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
 			sendChatMessage(scrollToBottom);
 			scrollToBottom();
@@ -140,7 +141,8 @@ function MessageConversations({
 			</div>
 			<div
 				className={cl`${styles.nofile_container} 
-				${(!isEmpty(draftUploadedFile) || uploading?.[id])
+				${
+					(!isEmpty(draftUploadedFile) || uploading?.[id])
 					&& styles.upload_file_container
 				}`}
 			>
@@ -181,7 +183,11 @@ function MessageConversations({
 				)}
 			</div>
 
-			<div className={styles.text_area_div}>
+			<div
+				className={cl`${styles.text_area_div} ${
+					hasPermissionToEdit ? '' : styles.opacity
+				}`}
+			>
 				{!isEmpty(suggestions) && (
 					<div className={styles.suggestions_div}>
 						<div className={styles.flex}>
@@ -192,7 +198,14 @@ function MessageConversations({
 								<div
 									className={styles.tag_div}
 									role="presentation"
-									onClick={() => sentQuickSuggestions(eachSuggestion, scrollToBottom)}
+									onClick={() => {
+										if (hasPermissionToEdit) {
+											sentQuickSuggestions(
+												eachSuggestion,
+												scrollToBottom,
+											);
+										}
+									}}
 								>
 									{eachSuggestion}
 								</div>
@@ -203,42 +216,90 @@ function MessageConversations({
 				)}
 				<textarea
 					rows={4}
-					placeholder="Type your message..."
+					placeholder={
+						hasPermissionToEdit
+							? 'Type your message...'
+							: 'You do not have typing controls as you are observing this chat'
+					}
 					className={styles.text_area}
 					value={draftMessage || ''}
-					onChange={(e) => setDraftMessages((p) => ({ ...p, [id]: e.target.value }))}
+					onChange={(e) => setDraftMessages((p) => ({
+						...p,
+						[id]: e.target.value,
+					}))}
+					disabled={!hasPermissionToEdit}
+					style={{
+						cursor: !hasPermissionToEdit ? 'not-allowed' : 'text',
+					}}
 					onKeyPress={(e) => handleKeyPress(e)}
 				/>
 
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
-						<FileUploader
-							defaultValue={!isEmpty(draftUploadedFile) ? [draftUploadedFile] : []}
-							disabled={uploading?.[id]}
-							handleProgress={handleProgress}
-							showProgress={false}
-							draggable
-							className="file_uploader"
-							uploadIcon={
-								<IcMAttach className={styles.upload_icon} />
+						{hasPermissionToEdit && (
+							<FileUploader
+								defaultValue={
+								!isEmpty(draftUploadedFile)
+									? [draftUploadedFile]
+									: []
 							}
-							onChange={(val) => {
-								setDraftUploadedFiles((prev) => ({
-									...prev,
-									[id]: val,
-								}));
-							}}
-						/>
+								disabled={uploading?.[id] || hasPermissionToEdit}
+								handleProgress={handleProgress}
+								showProgress={false}
+								draggable
+								className="file_uploader"
+								uploadIcon={(
+									<IcMAttach
+										className={styles.upload_icon}
+										style={{
+											cursor: !hasPermissionToEdit
+												? 'not-allowed'
+												: 'pointer',
+										}}
+									/>
+								)}
+								onChange={(val) => {
+									setDraftUploadedFiles((prev) => ({
+										...prev,
+										[id]: val,
+									}));
+								}}
+							/>
+						)}
+
 						<Popover
 							placement="top"
-							render={<EmojisBody emojisList={emojisList} />}
+							render={(
+								<EmojisBody
+									emojisList={emojisList}
+									updateMessage={(val) => setDraftMessages((p) => ({
+										...p,
+										[id]: !p?.[id]
+											? val
+											: p?.[id]?.concat(val),
+									}))}
+								/>
+							)}
 							visible={onClicked}
 							maxWidth={355}
-							onClickOutside={() => setOnClicked(false)}
+							onClickOutside={() => {
+								if (hasPermissionToEdit) {
+									setOnClicked(false);
+								}
+							}}
 						>
 							<IcMHappy
 								fill="#828282"
-								onClick={() => setOnClicked((prev) => !prev)}
+								onClick={() => {
+									if (hasPermissionToEdit) {
+										setOnClicked((p) => !p);
+									}
+								}}
+								style={{
+									cursor: !hasPermissionToEdit
+										? 'not-allowed'
+										: 'pointer',
+								}}
 							/>
 						</Popover>
 					</div>
@@ -247,9 +308,30 @@ function MessageConversations({
 							role="presentation"
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Vector%20(5).svg"
 							alt="img"
-							onClick={openInstantMessages}
+							onClick={() => {
+								if (hasPermissionToEdit) {
+									openInstantMessages();
+								}
+							}}
+							style={{
+								cursor: !hasPermissionToEdit
+									? 'not-allowed'
+									: 'pointer',
+							}}
 						/>
-						<IcMSend fill="#EE3425" onClick={() => sendChatMessage(scrollToBottom)} />
+						<IcMSend
+							fill="#EE3425"
+							onClick={() => {
+								if (hasPermissionToEdit) {
+									sendChatMessage();
+								}
+							}}
+							style={{
+								cursor: !hasPermissionToEdit
+									? 'not-allowed'
+									: 'pointer',
+							}}
+						/>
 					</div>
 				</div>
 			</div>

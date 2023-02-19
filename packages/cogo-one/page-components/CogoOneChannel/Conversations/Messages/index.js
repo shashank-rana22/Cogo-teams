@@ -72,7 +72,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		assignChat = () => {},
 		loading:assignLoading,
-	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard });
+	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard, formattedData });
 
 	const {
 		getNextData = () => {},
@@ -87,6 +87,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	} = useUpdateAssignedChat({
 		onClose: closeModal,
 		activeMessageCard,
+		formattedData,
 	});
 
 	const {
@@ -132,6 +133,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						suggestions={suggestions}
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
+						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 				</div>
 			</div>

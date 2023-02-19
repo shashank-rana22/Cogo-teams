@@ -1,12 +1,13 @@
 import { isEmpty } from '@cogoport/utils';
 
 function FormatData({
-	activeMessageCard,
+	activeMessageCard = {},
 	activeTab = 'message',
-	activeVoiceCard,
+	activeVoiceCard = {},
 }) {
 	let userName = '';
 	let userMail = '';
+	// let roomId = '';
 	// let countryCode = '';
 	let userMobile = '';
 	let orgId = '';
@@ -21,7 +22,7 @@ function FormatData({
 		const { email = '', id = '', name = '' } = user_data || {};
 		userName = name;
 		userMail = email;
-		// countryCode = mobile_country_code;
+		// roomId = roomID;
 		userMobile = user_number === null ? '' : `91${user_number}`;
 		orgId = organization_id !== null ? organization_id : '';
 		userId = id;
@@ -33,6 +34,7 @@ function FormatData({
 			const { user_id, user_name } = activeMessageCard || {};
 			userId = user_id;
 			userName = user_name;
+			// roomId = id;
 		} else if (!isEmpty(user_details) && channel_type === 'whatsapp') {
 			const { user_name, mobile_no } = activeMessageCard || {};
 			const { business_name, email, organization_id, user_id } = user_details || {};
@@ -42,11 +44,13 @@ function FormatData({
 			userMail = email;
 			orgId = organization_id;
 			userId = user_id;
+			// roomId = id;
 		} else {
 			const { lead_user_id, organization_id, user_name } = activeMessageCard || {};
 			leadUserId = lead_user_id;
 			orgId = organization_id;
 			userName = user_name;
+			// roomId = id;
 		}
 	}
 
@@ -59,6 +63,7 @@ function FormatData({
 		leadUserId,
 		businessName,
 		channelType,
+		// roomId,
 	};
 }
 export default FormatData;

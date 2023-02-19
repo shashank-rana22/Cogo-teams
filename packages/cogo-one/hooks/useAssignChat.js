@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useAssignChat({ closeModal = () => {}, activeMessageCard = {} }) {
-	const { channel_type, id, user_id = null, lead_user_id = null, organization_id = null } = activeMessageCard || {};
+function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formattedData = {} }) {
+	const { user_id, lead_user_id, organization_id, mobile_no } = formattedData || {};
+	const { channel_type, id } = activeMessageCard || {};
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
 		method : 'post',
@@ -12,10 +13,11 @@ function useAssignChat({ closeModal = () => {}, activeMessageCard = {} }) {
 		try {
 			await trigger({
 				data: {
-					channel         : channel_type,
-					channel_chat_id : id,
-					user_id         : user_id || undefined,
-					lead_user_id    : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+					channel                 : channel_type,
+					channel_chat_id         : id,
+					user_id                 : user_id || undefined,
+					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+					whatsapp_number_eformat : mobile_no,
 					organization_id,
 					...payload,
 				},
