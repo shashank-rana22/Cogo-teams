@@ -7,7 +7,8 @@ function Conversations({
 	activeMessageCard = {},
 	firestore,
 	activeVoiceCard,
-	suggestions = [], userId,
+	suggestions = [],
+	userId,
 
 }) {
 	return (
@@ -25,4 +26,5 @@ function Conversations({
 		</div>
 	);
 }
+
 export default Conversations;

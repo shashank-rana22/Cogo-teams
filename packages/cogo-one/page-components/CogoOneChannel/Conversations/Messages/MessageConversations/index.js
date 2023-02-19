@@ -32,6 +32,7 @@ function MessageConversations({
 	suggestions = [],
 	uploading,
 	setUploading,
+	loadingMessages,
 	sentQuickSuggestions = () => { },
 }) {
 	const messageRef = useRef(null);
@@ -60,7 +61,8 @@ function MessageConversations({
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [id]);
+	}, [loadingMessages, id]);
+	console.log('loadingMessages', loadingMessages);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
@@ -123,19 +125,17 @@ function MessageConversations({
 				onScroll={handleScroll}
 			>
 				{(messagesData || []).map((eachMessage) => (
-					<div>
-						{eachMessage?.conversation_type !== 'received' ? (
-							<ReceiveDiv
-								eachMessage={eachMessage}
-								activeMessageCard={activeMessageCard}
-							/>
-						) : (
-							<SentDiv
-								eachMessage={eachMessage}
-								activeMessageCard={activeMessageCard}
-							/>
-						)}
-					</div>
+					eachMessage?.conversation_type !== 'received' ? (
+						<ReceiveDiv
+							eachMessage={eachMessage}
+							activeMessageCard={activeMessageCard}
+						/>
+					) : (
+						<SentDiv
+							eachMessage={eachMessage}
+							activeMessageCard={activeMessageCard}
+						/>
+					)
 				))}
 				<div
 					ref={messageRef}
@@ -156,8 +156,8 @@ function MessageConversations({
 							<div
 								role="presentation"
 								className={styles.file_name_container}
-								// eslint-disable-next-line no-undef
 								onClick={() => {
+									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',

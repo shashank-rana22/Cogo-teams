@@ -50,7 +50,6 @@ const useSendChat = ({
 				session_type : 'admin',
 
 			};
-			console.log('adminChat', adminChat);
 
 			await addDoc(activeChatCollection, adminChat);
 
