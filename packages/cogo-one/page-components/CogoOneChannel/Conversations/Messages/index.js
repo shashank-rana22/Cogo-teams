@@ -7,6 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useSendChat from '../../../../hooks/useSendChat';
+import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useSendMessage from '../../../../hooks/useSendMessage';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
