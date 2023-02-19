@@ -13,7 +13,7 @@ function FormatData({ activeMessageCard, activeTab, activeVoiceCard }) {
 	let businessName = '';
 
 	if (activeTab === 'voice') {
-		const { user_data, user_number, organization_id, channel_type } = activeVoiceCard || {};
+		const { user_data = {}, user_number = '', organization_id = '', channel_type = '' } = activeVoiceCard || {};
 		const { email = '', id = '', name = '' } = user_data || {};
 		userName = name;
 		userMail = email;

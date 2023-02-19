@@ -38,13 +38,11 @@
 	margin: 0 10px 0 0;
 }
 
-.source_types {
-	display: flex;
-	align-items: center;
-}
+
 
 .filter_icon {
 	cursor: pointer;
+	margin-top: 10px;
 }
 
 .filter_dot {
@@ -66,4 +64,9 @@
 	height: 5px;
 	background: #ee3425;
 	border-radius: 5px;
+}
+.pagination {
+	position: absolute;
+	right: 0;
+	bottom: -8px;
 }

@@ -8,6 +8,7 @@ import RightSideNav from './RightSideNav';
 import styles from './styles.module.css';
 
 function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
+	const customerId = activeTab === 'messages' ? activeMessageCard?.id : activeVoiceCard?.id;
 	const [activeSelect, setActiveSelect] = useState('profile');
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 
@@ -17,6 +18,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 
 				{ActiveComp && (
 					<ActiveComp
+						customerId={customerId}
 						activeMessageCard={activeMessageCard}
 						activeSelect={activeSelect}
 						activeTab={activeTab}

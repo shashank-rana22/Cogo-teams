@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import getActiveCardDetails from '../utils/getActiveCardDetails';
+import FormatData from '../utils/formatData';
 
 const useGetOmnichannelActivityLogs = ({
 	activeMessageCard = {},
@@ -11,12 +11,6 @@ const useGetOmnichannelActivityLogs = ({
 	activeTab,
 	setFilterVisible,
 }) => {
-	const { user_id:userVoiceId = '' } = activeVoiceCard;
-
-	const userData = getActiveCardDetails(activeMessageCard);
-
-	const { user_id: userMessageId = '' } = userData || {};
-
 	const [pagination, setPagination] = useState(1);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -24,15 +18,21 @@ const useGetOmnichannelActivityLogs = ({
 		method : 'get',
 	}, { manual: true });
 
-	const fetchActivityLogs = async (filters = []) => {
-		// let values = {};
+	const { userId = '', leadUserId = '' } = FormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
 
-		// filters.forEach((item) => { values = { ...values, [item]: true }; });
+	const emptyCheck = isEmpty(userId) && isEmpty(leadUserId);
+
+	const fetchActivityLogs = async (filters = []) => {
+		const lead_user_id = !isEmpty(leadUserId) ? leadUserId : undefined;
 
 		await trigger({
 			params: {
-
-				user_id       : activeTab === 'message' ? userMessageId : userVoiceId,
+				user_id       : !isEmpty(userId) ? userId : undefined,
+				lead_user_id  : isEmpty(userId) ? lead_user_id : undefined,
 				activity_type : activityTab,
 				page          : pagination,
 				c_filters     : !isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
@@ -46,9 +46,17 @@ const useGetOmnichannelActivityLogs = ({
 	};
 
 	useEffect(() => {
-		fetchActivityLogs();
+		if (activeTab === 'message') {
+			if (!emptyCheck) {
+				fetchActivityLogs();
+			}
+		} else if (activeTab === 'voice') {
+			if (!isEmpty(userId)) {
+				fetchActivityLogs();
+			}
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activityTab, activeVoiceCard, pagination]);
+	}, [activeMessageCard?.id, activityTab, activeVoiceCard, pagination]);
 
 	return {
 		data,

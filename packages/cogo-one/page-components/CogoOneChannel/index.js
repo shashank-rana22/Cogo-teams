@@ -54,7 +54,6 @@ function CogoOne() {
 	} = useListChats({
 		firestore, userRoleIds, userId,
 	});
-
 	const { messagesList = [], unReadChatsCount } = listData;
 
 	useEffect(() => {

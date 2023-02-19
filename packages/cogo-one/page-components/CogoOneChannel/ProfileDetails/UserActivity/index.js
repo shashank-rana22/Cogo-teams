@@ -1,4 +1,5 @@
-import { Tabs, TabPanel, Popover } from '@cogoport/components';
+/* eslint-disable react/jsx-no-useless-fragment */
+import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
 import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -7,7 +8,7 @@ import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import USER_ACTIVITY_COMPONENT_MAPPING from '../../../../constants/USER_ACTIVITY_MAPPING';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
-import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
+import FormatData from '../../../../utils/formatData';
 
 import Filters from './Filters';
 import LoadingState from './LoadingState';
@@ -20,13 +21,14 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 
 	const ActiveComp = USER_ACTIVITY_COMPONENT_MAPPING[activityTab] || null;
 
-	const userData = getActiveCardDetails(activeMessageCard);
-	const { user_id: userVoiceId = '' } = activeVoiceCard || {};
-	const { user_id: userMessageId = '' } = userData || {};
-	const user_id = activeTab === 'message' ? userMessageId : userVoiceId;
+	const { userId = '', leadUserId = '' } = FormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
 
 	const {
-		loading,
+		loading = false,
 		data = {},
 		pagination,
 		fetchActivityLogs = () => {},
@@ -35,8 +37,15 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
-	const { list = [] } = data?.[activityTab] || {};
-
+	let list = [];
+	let total_count;
+	if (activityTab === 'communication' || activityTab === 'transactional') {
+		list = data?.[activityTab]?.list || [];
+		total_count = data?.[activityTab]?.total_count || '0';
+	} else {
+		list = data?.[activityTab]?.spot_searches?.list || [];
+		total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
+	}
 	const handleFilters = () => {
 		fetchActivityLogs(filters);
 	};
@@ -47,16 +56,18 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 	};
 
 	useEffect(() => {
+		setActivityTab('transactional');
+	}, [activeVoiceCard, activeMessageCard]);
+
+	useEffect(() => {
 		setFilters([]);
 		setPagination(1);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activityTab]);
 
-	if (isEmpty(user_id) || isEmpty(list)) {
-		return (
-			<EmptyState />
-		);
-	}
+	const idCheck = isEmpty(userId) && isEmpty(leadUserId);
+
+	const emptyCheck = idCheck || isEmpty(list);
 
 	return (
 		<div className={styles.container}>
@@ -75,11 +86,12 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 					<TabPanel name="communication" title={<IcMCampaignTool width={20} height={20} />} />
 				</Tabs>
 			</div>
-			<div className={styles.title}>
-				{USER_ACTIVITY_MAPPING[activityTab]}
-			</div>
+
 			<div className={styles.filters_container}>
-				<div className={styles.source_types} />
+				<div className={styles.title}>
+					{USER_ACTIVITY_MAPPING[activityTab]}
+				</div>
+
 				{activityTab !== 'platform' && (
 					<div className={styles.filter_icon}>
 						<Popover
@@ -108,21 +120,41 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard }) {
 			{loading ? (
 				<LoadingState activityTab={activityTab} />
 			) : (
-				<div
-					className={styles.list_container}
-				>
+				<>
+					{emptyCheck ? <EmptyState /> : (
+						<div
+							className={styles.list_container}
+						>
 
-					{ActiveComp && (
-						<ActiveComp
-							communication={communication}
-							platform={platform}
-							pagination={pagination}
-							transactional={transactional}
-							setPagination={setPagination}
-						/>
+							{ActiveComp && (
+								<ActiveComp
+									communication={communication}
+									platform={platform}
+									transactional={transactional}
+								/>
+							)}
+						</div>
 					)}
-				</div>
+				</>
+
 			)}
+
+			{!idCheck && (
+				<>
+					{!loading && (
+						<div className={styles.pagination}>
+							<Pagination
+								type="page"
+								currentPage={pagination}
+								totalItems={total_count}
+								pageSize={10}
+								onPageChange={(val) => setPagination(val)}
+							/>
+						</div>
+					)}
+				</>
+			)}
+
 		</div>
 
 	);

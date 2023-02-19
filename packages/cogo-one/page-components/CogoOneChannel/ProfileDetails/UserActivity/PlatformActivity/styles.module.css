@@ -105,17 +105,4 @@
 	color: #bdbdbd;
 }
 
-.empty_state {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 40vh;
-	font-size: 16px;
-	color: #828282;
-}
 
-.pagination {
-	position: absolute;
-	right: 0;
-	bottom: -8px;
-}

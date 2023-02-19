@@ -116,9 +116,7 @@ function MessageList({
 											</div>
 
 											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner}>
-													{/* <div className={styles.pills_card}>Small</div> */}
-												</div>
+												<div className={styles.tags_conatiner} />
 												<div className={styles.activity_duration}>
 													{dateTimeConverter(
 														Date.now() - Number(lastActive),

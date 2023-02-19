@@ -60,10 +60,23 @@ function VoiceList({
 		>
 
 			{(list || []).map((item) => {
-				const { user_data = {}, user_number = '' } = item || {};
+				const { user_data = null, user_number = '', organization_data = null } = item || {};
 				const checkActiveCard = activeVoiceCard?.id === item?.id;
 				const daysDifference = differenceInDays(new Date(), new Date(item.start_time_of_call));
-				const checkUserData = Object.keys(item || {}).includes('user_data');
+				// const checkUserData = Object.keys(item || {}).includes('user_data');
+				const checkUserData = !isEmpty(Object.keys(user_data || {}));
+
+				const showUserData = checkUserData ? (
+					<>
+						{startCase(user_data?.name)}
+						{' '}
+					</>
+				) : (
+					<>
+						{' '}
+						{user_number}
+					</>
+				);
 
 				return (
 					<div
@@ -85,21 +98,16 @@ function VoiceList({
 									/>
 									<div className={styles.user_details}>
 										<div className={styles.user_name}>
-											{checkUserData && !isEmpty(user_data) ? (
-												<>
-													{startCase(user_data?.name)}
-												</>
-											) : (
-												<>
-													{user_number}
-												</>
-											)}
-
+											{showUserData}
+											{isEmpty(user_number) && '-'}
 										</div>
 										<div className={styles.organisation}>
-											Organisation
-											{' '}
-											{item.organisation}
+
+											{isEmpty(organization_data) ? '-' : (
+												<>
+													{startCase(organization_data?.short_name)}
+												</>
+											)}
 										</div>
 									</div>
 								</div>
