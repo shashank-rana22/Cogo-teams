@@ -14,19 +14,16 @@ function SentDiv({
 		bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
 	};
 	const MESSAGE_MAPPING = {
-		text    : ['text', 'template'],
+		text    : ['text', 'template', 'interactive'],
 		media   : ['image', 'video'],
 		contact : ['contact'],
-
 	};
 	const {
 		message_type = 'text',
 		created_at = '',
-		response: { message = '', btns = [] } = {},
+		response: { message = '', btns = [], media_url = '' } = {},
 		send_by = 'kam',
 		session_type = 'bot',
-		imageURL = '',
-		pdfURL = '',
 
 	} = eachMessage;
 
@@ -37,11 +34,12 @@ function SentDiv({
 		}
 
 		if (MESSAGE_MAPPING.media.includes(message_type)) {
-			return <obj data={imageURL} width="300" height="200" />;
+			return <obj data={media_url} />;
 		}
 		if (message_type === 'document') {
-			return <CustomFileDiv pdfURL={pdfURL} />;
+			return <CustomFileDiv pdfURL={media_url} />;
 		}
+		return <div dangerouslySetInnerHTML={{ __html: message }} />;
 	};
 	return (
 		<div className={styles.container}>
@@ -55,9 +53,7 @@ function SentDiv({
 				</div>
 				<div className={styles.styled_div}>
 					<div className={cl`${styles.receive_message_container} ${session_type === 'admin' ? styles.admin_message_container : ''}`}>
-						{['text', 'template'].includes(message_type)
-							? <div dangerouslySetInnerHTML={{ __html: message }} />
-							: 'Media' }
+						{renderMessage()}
 					</div>
 
 					{!isEmpty(btns)

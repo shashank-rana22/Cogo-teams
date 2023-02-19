@@ -1,7 +1,8 @@
 import {
 	collectionGroup,
 	onSnapshot,
-	updateDoc, doc,
+	updateDoc,
+	doc,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
@@ -50,7 +51,6 @@ const useListChats = ({
 		setLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
 		const omniChannelQuery = getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, appliedFilters });
-
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
 			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
@@ -70,6 +70,7 @@ const useListChats = ({
 			await updateDoc(messageDoc, { new_message_count: 0 });
 		}
 	};
+
 	return {
 		listData,
 		setActiveMessage,

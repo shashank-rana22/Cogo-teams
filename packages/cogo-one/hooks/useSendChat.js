@@ -28,7 +28,7 @@ const useSendChat = ({
 		);
 	}
 
-	const sendChatMessage = async (scrollBottom = () => {}) => {
+	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id] || '';
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
@@ -40,17 +40,20 @@ const useSendChat = ({
 		if (newMessage || finalUrl) {
 			const adminChat = {
 				conversation_type : 'received',
-				response          : { message: newMessage },
-				created_at        : Date.now(),
-				send_by           : user_name,
-				session_type      : 'admin',
-				media_url         : finalUrl,
+				message_type      : finalUrl ? fileType : 'text',
+				response          : {
+					message   : newMessage,
+					media_url : finalUrl,
+				},
+				created_at   : Date.now(),
+				send_by      : user_name,
+				session_type : 'admin',
 
 			};
+			console.log('adminChat', adminChat);
 
 			await addDoc(activeChatCollection, adminChat);
 
-			scrollBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;
 			await updateDoc(messageFireBaseDoc, {
