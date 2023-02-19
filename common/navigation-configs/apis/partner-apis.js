@@ -10235,6 +10235,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_lead_user',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 
 	],
 };
