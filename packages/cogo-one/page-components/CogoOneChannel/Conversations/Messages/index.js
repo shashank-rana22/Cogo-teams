@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { collection } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
@@ -73,13 +73,14 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		assignChat = () => {},
 		loading:assignLoading,
-	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard });
+	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard, formattedData });
 
 	const {
 		getNextData = () => {},
 		lastPage,
 		loadingMessages,
 		messagesData,
+		loadingPrevMessages,
 	} = useGetMessages({ activeChatCollection, id });
 
 	const {
@@ -88,6 +89,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	} = useUpdateAssignedChat({
 		onClose: closeModal,
 		activeMessageCard,
+		formattedData,
 	});
 
 	const {

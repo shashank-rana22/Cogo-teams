@@ -28,7 +28,7 @@ const useSendChat = ({
 		);
 	}
 
-	const sendChatMessage = async () => {
+	const sendChatMessage = async (scrollToBottom) => {
 		const newMessage = draftMessages?.[id] || '';
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
@@ -52,7 +52,7 @@ const useSendChat = ({
 			};
 
 			await addDoc(activeChatCollection, adminChat);
-
+			scrollToBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_message_count_user;
 			await updateDoc(messageFireBaseDoc, {
@@ -65,7 +65,8 @@ const useSendChat = ({
 				const {
 					user_id = null,
 					organization_id = null,
-					mobile_number = '',
+					mobile_no = '',
+					lead_user_id = null,
 				} = formattedData || {};
 				let message_metadata;
 				if (finalUrl) {
@@ -82,11 +83,12 @@ const useSendChat = ({
 				}
 
 				sendMessage({
-					recipient : mobile_number,
+					recipient : mobile_no,
 					message   : newMessage,
 					user_id,
 					organization_id,
 					message_metadata,
+					lead_user_id,
 				});
 			}, 300);
 		}
@@ -116,12 +118,14 @@ const useSendChat = ({
 			const {
 				user_id = null,
 				organization_id = null,
-				mobile_number = '',
+				mobile_no = '',
+				lead_user_id = null,
 			} = formattedData || {};
 			sendMessage({
-				recipient        : mobile_number,
+				recipient        : mobile_no,
 				user_id,
 				organization_id,
+				lead_user_id,
 				message_metadata : {
 					message_type : 'text',
 					message      : val,
@@ -129,6 +133,7 @@ const useSendChat = ({
 			});
 		}, 200);
 	};
+
 	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };
 };
 

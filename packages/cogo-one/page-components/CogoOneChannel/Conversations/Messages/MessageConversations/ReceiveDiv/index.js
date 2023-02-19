@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { format } from '@cogoport/utils';
 
+import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 import MessageBody from '../MessageBody';
 
 import styles from './styles.module.css';
@@ -14,7 +15,7 @@ function ReceiveDiv({
 		created_at = '',
 		response = {},
 	} = eachMessage;
-	const { name = 'Unknown User' } = activeMessageCard;
+	const { user_name = 'Unknown User' } = getActiveCardDetails(activeMessageCard);
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 
@@ -22,7 +23,7 @@ function ReceiveDiv({
 		<div className={styles.container}>
 			<div>
 				<div className={styles.name}>
-					{name}
+					{user_name}
 					,
 					<span className={styles.time_stamp}>
 						{date}

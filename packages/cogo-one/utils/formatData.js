@@ -1,6 +1,10 @@
 import { isEmpty } from '@cogoport/utils';
 
-function FormatData({ activeMessageCard = {}, activeTab, activeVoiceCard = {} }) {
+function FormatData({
+	activeMessageCard = {},
+	activeTab = 'message',
+	activeVoiceCard = {},
+}) {
 	let userName = '';
 	let userMail = '';
 	// let roomId = '';
