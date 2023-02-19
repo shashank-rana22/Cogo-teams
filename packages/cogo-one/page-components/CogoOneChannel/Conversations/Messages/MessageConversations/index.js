@@ -70,7 +70,7 @@ function MessageConversations({
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
-			sendChatMessage(scrollToBottom);
+			sendChatMessage();
 			scrollToBottom();
 		}
 	};
@@ -337,6 +337,7 @@ function MessageConversations({
 							onClick={() => {
 								if (hasPermissionToEdit) {
 									sendChatMessage();
+									scrollToBottom();
 								}
 							}}
 							style={{
