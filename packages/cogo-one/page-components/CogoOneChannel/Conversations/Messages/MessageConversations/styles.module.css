@@ -206,3 +206,14 @@
 .opacity{
 	opacity: 0.5;
 }
+.loader{
+	display: flex;
+	width: 100%;
+	height: fit-content;
+	justify-content: center;
+	align-items: center;
+	img{
+		height: 20px;
+		width: 20px;
+	}
+}

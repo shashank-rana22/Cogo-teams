@@ -34,7 +34,11 @@ function MessageConversations({
 	setUploading,
 	hasPermissionToEdit = false,
 	loadingMessages,
-	sentQuickSuggestions = () => { },
+	loadingPrevMessages,
+	sentQuickSuggestions = () => {},
+	sendCommunicationTemplate = () => {},
+	communicationLoading = false,
+	lastPage = false,
 }) {
 	const messageRef = useRef();
 	const { id = '' } = activeMessageCard;
@@ -77,7 +81,7 @@ function MessageConversations({
 
 	const handleScroll = (e) => {
 		const bottom = e.target.scrollTop === 0;
-		if (bottom) {
+		if (bottom && !lastPage) {
 			getNextData();
 		}
 	};
@@ -97,6 +101,8 @@ function MessageConversations({
 					setDraftMessages((p) => ({ ...p, [id]: val }));
 					setOpenModal({ type: null, data: {} });
 				},
+				sendCommunicationTemplate,
+				communicationLoading,
 			},
 		});
 	};
@@ -117,6 +123,14 @@ function MessageConversations({
 		return 'no_suggestions';
 	};
 
+	const loader = (
+		<div className={styles.loader}>
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
+				alt="load"
+			/>
+		</div>
+	);
 	return (
 		<div className={styles.styled_div}>
 			<div
@@ -125,6 +139,8 @@ function MessageConversations({
 				onScroll={handleScroll}
 				ref={messageRef}
 			>
+
+				{loadingPrevMessages && loader}
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received' ? (
 						<ReceiveDiv

@@ -7,6 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useSendChat from '../../../../hooks/useSendChat';
+import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useSendMessage from '../../../../hooks/useSendMessage';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
@@ -32,14 +33,17 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		support_agent_id = [],
 		spectators_data = [],
 	} = activeMessageCard || {};
-
+	const {
+		sendCommunicationTemplate,
+		loading:communicationLoading,
+	} = useSendCommunicationTemplate({ formattedData });
 	const hasPermissionToEdit = userId === support_agent_id;
 
 	const filteredSpectators = (spectators_data || [])
 		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
 
 	const activeAgentName = (spectators_data || [])
-		.find((val) => val.agent_id === support_agent_id)?.name;
+		.find((val) => val.agent_id === support_agent_id)?.agent_name;
 
 	const {
 		sendMessage,
@@ -114,6 +118,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					activeAgentName={activeAgentName}
 					hasPermissionToEdit={hasPermissionToEdit}
 					filteredSpectators={filteredSpectators}
+
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -135,6 +140,10 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						setUploading={setUploading}
 						sentQuickSuggestions={sentQuickSuggestions}
 						hasPermissionToEdit={hasPermissionToEdit}
+						loadingPrevMessages={loadingPrevMessages}
+						sendCommunicationTemplate={sendCommunicationTemplate}
+						communicationLoading={communicationLoading}
+
 					/>
 				</div>
 			</div>
