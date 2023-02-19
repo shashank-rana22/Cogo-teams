@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Pill, Placeholder, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
@@ -34,6 +33,23 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 	if (organizationId) {
 		return (
 			<EmptyState />
+		);
+	}
+
+	function ListPromos() {
+		return isEmpty(list) ? (
+			<div className={styles.promotion_cards_empty_state}>
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg"
+					alt="promocode"
+					width="200px"
+					height="200px"
+				/>
+			</div>
+		) : (
+			<div className={styles.promotion_cards}>
+				<PromocodeThumbnail list={list} />
+			</div>
 		);
 	}
 
@@ -119,22 +135,7 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 					<Loader themeType="primary" />
 				</div>
 			) : (
-				<>
-					{isEmpty(list) ? (
-						<div className={styles.promotion_cards_empty_state}>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg"
-								alt="promocode"
-								width="200px"
-								height="200px"
-							/>
-						</div>
-					) : (
-						<div className={styles.promotion_cards}>
-							<PromocodeThumbnail list={list} />
-						</div>
-					)}
-				</>
+				<ListPromos />
 
 			)}
 		</div>

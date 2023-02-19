@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { cl } from '@cogoport/components';
 import { IcMCall } from '@cogoport/icons-react';
 import { startCase, format, differenceInDays, isEmpty } from '@cogoport/utils';
@@ -67,15 +66,9 @@ function VoiceList({
 				const checkUserData = !isEmpty(Object.keys(user_data || {}));
 
 				const showUserData = checkUserData ? (
-					<>
-						{startCase(user_data?.name)}
-						{' '}
-					</>
+					startCase(user_data?.name)
 				) : (
-					<>
-						{' '}
-						{user_number}
-					</>
+					user_number
 				);
 
 				return (
@@ -83,8 +76,8 @@ function VoiceList({
 						key={item?.id}
 						role="presentation"
 						className={cl`
-				${styles.card_Container}
-				${checkActiveCard ? styles.active_card : ''}
+							${styles.card_Container}
+							${checkActiveCard ? styles.active_card : ''}
 				 `}
 						onClick={() => setActiveVoiceCard(item)}
 					>
@@ -104,9 +97,7 @@ function VoiceList({
 										<div className={styles.organisation}>
 
 											{isEmpty(organization_data) ? '-' : (
-												<>
-													{startCase(organization_data?.short_name)}
-												</>
+												startCase(organization_data?.short_name)
 											)}
 										</div>
 									</div>
@@ -115,13 +106,9 @@ function VoiceList({
 								<div className={styles.user_activity}>
 									<div className={styles.activity_duration}>
 										{daysDifference > 7 ? (
-											<>
-												{format(item.start_time_of_call, 'dd/MM/yy')}
-											</>
+											format(item.start_time_of_call, 'dd/MM/yy')
 										) : (
-											<>
-												{format(item.start_time_of_call, 'EEE')}
-											</>
+											format(item.start_time_of_call, 'EEE')
 										)}
 
 									</div>
@@ -129,15 +116,14 @@ function VoiceList({
 										{format(item.start_time_of_call, 'HH:mm a')}
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 				);
 			})}
+
 			{loading && <LoadingState />}
 		</div>
-
 	);
 }
 
