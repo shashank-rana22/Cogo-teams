@@ -11,6 +11,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	const [messagesData, setMessagesData] = useState([]);
 	const [lastDoc, setLastDoc] = useState(null);
 	const [loadingMessages, setLoadingMessages] = useState(false);
+	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 	const [lastPage, setLastPage] = useState(false);
 
 	const getFirebaseData = () => {
@@ -40,6 +41,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 			startAfter(lastDoc),
 			limit(10),
 		);
+		setLoadingPrevMessages(true);
 
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
@@ -48,6 +50,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 				messagesData.unshift(mes.data());
 			});
 			setMessagesData([...messagesData]);
+			setLoadingPrevMessages(false);
 		});
 	};
 
@@ -62,6 +65,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 		lastPage,
 		messagesData,
 		loadingMessages,
+		loadingPrevMessages,
 	};
 };
 

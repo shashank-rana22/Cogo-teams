@@ -79,6 +79,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		lastPage,
 		loadingMessages,
 		messagesData,
+		loadingPrevMessages,
 	} = useGetMessages({ activeChatCollection, id });
 
 	const {
