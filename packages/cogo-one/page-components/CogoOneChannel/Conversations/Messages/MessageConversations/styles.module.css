@@ -1,8 +1,8 @@
 .container {
-	padding: 10px;
+	padding: 10px 10px 20px 10px;
 	overflow-y: scroll;
 	transition: height 0.3s;
-
+	
 	&::-webkit-scrollbar {
 		display: none;
 	}
@@ -202,6 +202,4 @@
 	border-bottom: 1px solid #fbd1a6;
 }
 
-.first_div {
-	margin-top: auto;
-}
+

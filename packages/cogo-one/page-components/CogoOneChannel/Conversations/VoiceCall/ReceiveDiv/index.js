@@ -19,6 +19,7 @@ function ReceiveDiv({ eachList = {} }) {
 	if (user_id) {
 		name = user_data?.name;
 	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.name}>

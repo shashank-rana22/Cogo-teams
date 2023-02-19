@@ -59,9 +59,15 @@ export function TagsPopOver({
 	isVisible,
 	setIsVisible = () => {},
 	updateChat = () => {},
+	hasPermissionToEdit = false,
 }) {
-	const filteredOptions = tagsOptions.filter(({ value }) => !prevtags.includes(value));
-	const resetFunc = () => setheaderTags('');
+	const filteredOptions = tagsOptions.filter(
+		({ value }) => !prevtags.includes(value),
+	);
+	const resetFunc = () => {
+		setheaderTags('');
+		setIsVisible(false);
+	};
 	const popOverContent = (
 		<div>
 			<div className={styles.input_container}>
@@ -73,7 +79,9 @@ export function TagsPopOver({
 				/>
 			</div>
 			<div className={styles.buttons_container}>
-				<Button size="sm" themeType="tertiary" onClick={resetFunc}>reset</Button>
+				<Button size="sm" themeType="tertiary" onClick={resetFunc}>
+					reset
+				</Button>
 				<Button
 					size="sm"
 					themeType="accent"
@@ -84,12 +92,11 @@ export function TagsPopOver({
 					}}
 				>
 					submit
-
 				</Button>
 			</div>
 		</div>
 	);
-	if (isEmpty(filteredOptions)) {
+	if (isEmpty(filteredOptions) || !hasPermissionToEdit) {
 		return null;
 	}
 	return (

@@ -22,67 +22,69 @@ import styles from './styles.module.css';
 function MessageConversations({
 	messagesData = [],
 	draftMessage = '',
-	setDraftMessages = () => {},
+	setDraftMessages = () => { },
 	sendChatMessage,
-	lastPage,
 	draftUploadedFile = {},
-	setDraftUploadedFiles = () => {},
+	setDraftUploadedFiles = () => { },
 	getNextData,
 	setOpenModal,
 	activeMessageCard,
 	suggestions = [],
 	uploading,
 	setUploading,
-	sentQuickSuggestions = () => {},
+	sentQuickSuggestions = () => { },
 }) {
 	const messageRef = useRef(null);
 	const { id = '' } = activeMessageCard;
 
 	const {
 		emojisList = {},
-		setOnClicked = () => {},
+		setOnClicked = () => { },
 		onClicked = false,
-		emojiListFetch = () => {},
+		emojiListFetch = () => { },
 	} = useGetEmojiList({ activeMessageCard });
 
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
 
-	const scrollBottom = () => {
+	const scrollToBottom = () => {
 		setTimeout(() => {
-			messageRef?.current?.scrollTo({
-				top      : (messageRef?.current.scrollHeight || 0) + 10,
-				behavior : 'smooth',
+			messageRef.current?.scrollIntoView({
+				behavior : 'auto',
+				block    : 'nearest',
+				inline   : 'start',
 			});
-		}, 200);
+		}, 300);
 	};
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [id]);
 
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter' && !event.shiftKey) {
 			event.preventDefault();
-			sendChatMessage(scrollBottom);
+			sendChatMessage(scrollToBottom);
 		}
 	};
-
-	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop < 30;
-		if (!lastPage && bottom) {
-			getNextData();
-		}
-	};
-
-	useEffect(() => {
-		scrollBottom();
-	}, [id, messageRef]);
 
 	const handleProgress = (val) => {
 		setUploading((prev) => ({ ...prev, [id]: val }));
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const handleScroll = (e) => {
+		const bottom = e.target.scrollTop === 0;
+		if (bottom) {
+			getNextData();
+		}
+	};
+
 	useEffect(() => {
-		emojiListFetch();
+		if (id) {
+			emojiListFetch();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const openInstantMessages = () => {
@@ -100,7 +102,7 @@ function MessageConversations({
 	const chatViewConditon = () => {
 		if (
 			(!isEmpty(draftUploadedFile) || uploading?.[id])
-            && !isEmpty(suggestions)
+			&& !isEmpty(suggestions)
 		) {
 			return 'file_present_suggestions';
 		}
@@ -118,7 +120,6 @@ function MessageConversations({
 			<div
 				className={cl`${styles.container} ${styles[chatViewConditon()]}`}
 				onScroll={handleScroll}
-				ref={messageRef}
 			>
 				{(messagesData || []).map((eachMessage) => (
 					<div>
@@ -135,12 +136,14 @@ function MessageConversations({
 						)}
 					</div>
 				))}
+				<div
+					ref={messageRef}
+				/>
 			</div>
 			<div
 				className={cl`${styles.nofile_container} 
-				${
-                    (!isEmpty(draftUploadedFile) || uploading?.[id])
-                    && styles.upload_file_container
+				${(!isEmpty(draftUploadedFile) || uploading?.[id])
+					&& styles.upload_file_container
 				}`}
 			>
 				{!isEmpty(draftUploadedFile) && !uploading?.[id] && (
@@ -152,13 +155,13 @@ function MessageConversations({
 							<div
 								role="presentation"
 								className={styles.file_name_container}
-                                // eslint-disable-next-line no-undef
+								// eslint-disable-next-line no-undef
 								onClick={() => {
-                                	window.open(
-                                		finalUrl,
-                                		'_blank',
-                                		'noreferrer',
-                                	);
+									window.open(
+										finalUrl,
+										'_blank',
+										'noreferrer',
+									);
 								}}
 							>
 								{uploadedFileName}
@@ -168,9 +171,9 @@ function MessageConversations({
 							<IcMDelete
 								className={styles.delete_icon}
 								onClick={() => setDraftUploadedFiles((p) => ({
-                                		...p,
-                                		[id]: undefined,
-                                	}))}
+									...p,
+									[id]: undefined,
+								}))}
 							/>
 						</div>
 					</>
@@ -191,7 +194,7 @@ function MessageConversations({
 								<div
 									className={styles.tag_div}
 									role="presentation"
-									onClick={() => sentQuickSuggestions(eachSuggestion, scrollBottom)}
+									onClick={() => sentQuickSuggestions(eachSuggestion, scrollToBottom)}
 								>
 									{eachSuggestion}
 								</div>
@@ -220,12 +223,12 @@ function MessageConversations({
 							className="file_uploader"
 							uploadIcon={
 								<IcMAttach className={styles.upload_icon} />
-                            }
+							}
 							onChange={(val) => {
-                            	setDraftUploadedFiles((prev) => ({
-                            		...prev,
-                            		[id]: val,
-                            	}));
+								setDraftUploadedFiles((prev) => ({
+									...prev,
+									[id]: val,
+								}));
 							}}
 						/>
 						<Popover

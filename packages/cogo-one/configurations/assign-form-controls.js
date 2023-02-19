@@ -2,7 +2,7 @@ const controls = {
 
 	assign_user: {
 		name        : 'assign_user',
-		type        : 'input',
+		type        : 'select',
 		placeholder : 'Enter name to assign',
 	},
 	assign_condition: {
@@ -18,15 +18,18 @@ const controls = {
 				label : 'Invoice',
 				value : 'invoice',
 			},
-			{
-				label : 'Onboarding KYC',
-				value : 'onboarding_kyc',
-			},
 		],
+		rules: {
+			required: true,
+		},
 	},
 	condition_value: {
-		name : 'condition_value',
-		type : 'input',
+		name  : 'condition_value',
+		type  : 'input',
+		rules : {
+			required : true,
+			validate : (val) => (val?.trim()?.length <= 0 ? 'This cannot be Empty' : true),
+		},
 	},
 	allow_user: {
 		name    : 'allow_user',

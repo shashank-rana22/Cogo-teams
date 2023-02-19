@@ -10211,6 +10211,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'list_chat_agents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_communication_templates',
 			access_type  : 'private',
 			service_name : 'communication',
