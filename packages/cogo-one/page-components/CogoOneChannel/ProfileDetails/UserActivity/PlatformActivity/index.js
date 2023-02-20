@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { PLATFORM_KEYS_MAPPING } from '../../../../../constants/PLATFORM_KEYS_MAPPING';
+import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
 
 import LoginComponent from './LoginComponent';
 import OrganizationVerification from './OrganizationVerification';
@@ -23,7 +23,7 @@ function PlatformActivity({ platform = {} }) {
 				const {
 					origin = 'origin_location',
 					destination = 'destination_location',
-				} = PLATFORM_KEYS_MAPPING[services] || {};
+				} = TRANSACTIONAL_KEYS_MAPPING[services] || {};
 
 				const origin_port = item[origin] || {};
 

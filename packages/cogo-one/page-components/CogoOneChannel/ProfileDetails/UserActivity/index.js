@@ -64,7 +64,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 
 	useEffect(() => {
 		setActivityTab('transactional');
-	}, [activeVoiceCard, activeMessageCard]);
+	}, [customerId]);
 
 	useEffect(() => {
 		setFilters([]);
