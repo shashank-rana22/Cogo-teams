@@ -30,8 +30,8 @@ const getControls = (detailsData = {}) => [
 		rules       : {
 			required  : 'Please enter name',
 			maxLength : {
-				value   : 30,
-				message : 'max length is 30',
+				value   : 40,
+				message : 'max length is 40',
 			},
 		},
 	},
