@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Select, DateRangepicker, cl, ButtonIcon, Tooltip, Pill } from '@cogoport/components';
-import { useGetAsyncOptions } from '@cogoport/forms';
+import { Placeholder } from '@cogoport/components';
+import { useGetAsyncOptions, getFormattedPrice } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
@@ -13,6 +14,7 @@ import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
 import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
+import { strToKMBT } from '../../../utils/strToKMBT';
 
 import CommunicationPieChart from './PieChart';
 import styles from './styles.module.css';
@@ -67,6 +69,7 @@ function MapView({
 
 	const startDate = format(date?.startDate, 'dd MMM yyyy');
 	const endDate = format(date?.endDate, 'dd MMM yyyy');
+	const avgResponseTimeValue = 70;
 
 	return (
 		<div className={styles.main_container}>
@@ -160,6 +163,7 @@ function MapView({
 					circleStats.map(
 						(stat) => {
 							const { type, value, label } = stat;
+
 							return (
 								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 								<div
@@ -169,7 +173,8 @@ function MapView({
 
 								>
 									<div className={styles.stat_value}>
-										{value}
+										{ !globeLoading ? strToKMBT(value) : 	<Placeholder className={styles.placeholder_element} height="18px" width="30px" margin="0px 0px 5px 0px" />}
+
 									</div>
 									<div className={styles.stat_label}>
 										{label}
@@ -196,9 +201,9 @@ function MapView({
 					</div>
 					<div className={styles.response_time}>
 						<div className={styles.time}>
-							<span>20</span>
+							<span>{avgResponseTimeValue < 60 ? avgResponseTimeValue : (Number(avgResponseTimeValue) / 60).toFixed(1)}</span>
 							{' '}
-							min
+							{avgResponseTimeValue < 60 ? 'min' : 'hrs'}
 						</div>
 
 						<div className={styles.arrow_img}>
@@ -220,7 +225,7 @@ function MapView({
 								return (
 									<div className={styles.the_stat}>
 										<div className={styles.stat_circle} style={{ background: icon_bg }} />
-										<div className={styles.com_stat_value}>{value}</div>
+										<div className={styles.com_stat_value}>{strToKMBT(value)}</div>
 										<div className={styles.stat_description}>{title}</div>
 									</div>
 								);

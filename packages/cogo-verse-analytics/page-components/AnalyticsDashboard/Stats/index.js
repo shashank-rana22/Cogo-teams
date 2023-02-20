@@ -1,9 +1,11 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import React from 'react';
 
 import { INTENT_LEADERBOARD, PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
 import useGetCogoverseDashboard from '../../../hooks/useGetCogoverseDashboard';
+import { strToKMBT } from '../../../utils/strToKMBT';
 
 import Charts from './LineChart';
 import styles from './styles.module.css';
@@ -13,6 +15,14 @@ function Stats({ country = '' }) {
 
 	const { list = {}, loading = false } = useGetCogoverseDashboard({ country });
 	console.log('list', list);
+
+	const getAmount = (value) => {
+		const amount = getFormattedPrice(value, 'INR');
+		return ((amount.substring(4)).split('.'))[0];
+	};
+
+	const cogoverse_ai = 2000;
+	const customer_support = 20000;
 
 	return (
 		<div className={styles.main_container}>
@@ -37,7 +47,7 @@ function Stats({ country = '' }) {
 								<div className={styles.primary_left_stat}>
 
 									<div className={styles.primary_stat_title}>
-										<div className={styles.primary_stat_value}>{value}</div>
+										<div className={styles.primary_stat_value}>{strToKMBT(value)}</div>
 										{' '}
 										{title}
 									</div>
@@ -65,7 +75,7 @@ function Stats({ country = '' }) {
 								CogoVerse AI
 							</div>
 							<div className={styles.right_stat_value}>
-								2K
+								{strToKMBT(cogoverse_ai)}
 							</div>
 						</div>
 						<div className={styles.right_stat_content}>
@@ -73,7 +83,7 @@ function Stats({ country = '' }) {
 								Customer Support
 							</div>
 							<div className={styles.right_stat_value}>
-								20K
+								{strToKMBT(customer_support)}
 							</div>
 						</div>
 					</div>
@@ -147,7 +157,7 @@ function Stats({ country = '' }) {
 										{title}
 									</div>
 									<div>
-										<span className={styles.leaderboard_description_number}>{value}</span>
+										<span className={styles.leaderboard_description_number}>{getAmount(value)}</span>
 										{' '}
 										{description}
 									</div>
@@ -166,7 +176,7 @@ function Stats({ country = '' }) {
 							<div className={styles.user_status_content}>
 								<div className={styles.user_status_icon}><img src={src} alt={title} /></div>
 								<div className={styles.user_status_right}>
-									<div className={styles.user_status_num}>{value}</div>
+									<div className={styles.user_status_num}>{strToKMBT(value)}</div>
 									<div className={styles.user_status_text}>{title}</div>
 								</div>
 							</div>
