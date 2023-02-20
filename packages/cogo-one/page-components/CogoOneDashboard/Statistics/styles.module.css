@@ -1,0 +1,74 @@
+.statistics {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	margin: 10px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 28px;
+	color: #4f4f4f;
+}
+
+.time_durations_section {
+	display: flex;
+	padding-top: 10px;
+}
+
+.time_durations {
+	width: fit-content;
+	padding: 7px 8px;
+	margin-right: 3px;
+	background: rgb(224 224 224 / 40%);
+	border-radius: 6px;
+}
+
+.time_durations_header {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	color: #221f20;
+}
+
+.time_durations_text {
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 20px;
+	color: #828282;
+}
+
+.socoal_icons_and_data_list {
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+}
+
+.socoal_icons_and_data {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 30px;
+}
+
+.social_icons_and_its_name {
+	display: flex;
+}
+
+.social_name {
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	color: #475569;
+}
+
+.customer_nos {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 20px;
+	color: #828282;
+	text-align: right;
+}

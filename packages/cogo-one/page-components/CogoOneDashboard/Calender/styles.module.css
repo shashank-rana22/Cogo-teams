@@ -1,0 +1,19 @@
+
+.card{
+	width: 50px;
+	height: 52px;
+	background: #FFFFFF;
+	color: #221F20;
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.date{
+	font-size: 16px;
+}
+
+.day{
+	font-size: 12px;
+}
