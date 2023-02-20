@@ -76,6 +76,21 @@ function asyncFieldsOperators() {
 	};
 }
 
+function asyncFieldsPartnerUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_partner_users',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 function asyncFieldsPartnerRoles() {
 	return {
 		labelKey    : 'name',
@@ -91,11 +106,54 @@ function asyncFieldsPartnerRoles() {
 	};
 }
 
+function asyncFieldsOrganizations() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organizations',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+function asyncFieldsOrganizationUser() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_users',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+function asyncFieldsCampaignSegments() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_segments',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
+	asyncFieldsPartnerUsers,
+	asyncFieldsOrganizations,
+	asyncFieldsOrganizationUser,
+	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
