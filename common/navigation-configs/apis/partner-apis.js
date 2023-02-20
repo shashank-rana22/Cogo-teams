@@ -10245,6 +10245,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'lead',
 		},
+		{
+			api          : 'list_assigned_chat_tags',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 
 	],
 };

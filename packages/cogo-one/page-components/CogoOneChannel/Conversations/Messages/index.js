@@ -6,6 +6,7 @@ import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
+import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useSendMessage from '../../../../hooks/useSendMessage';
@@ -22,7 +23,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-
+	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
 	let activeChatCollection;
@@ -120,6 +121,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					activeAgentName={activeAgentName}
 					hasPermissionToEdit={hasPermissionToEdit}
 					filteredSpectators={filteredSpectators}
+					tagOptions={tagOptions}
 
 				/>
 				<div className={styles.message_container} key={id}>
