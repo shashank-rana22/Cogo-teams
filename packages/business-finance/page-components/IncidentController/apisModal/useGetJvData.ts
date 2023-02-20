@@ -56,7 +56,7 @@ const useGetJvData = ({ refetch, setShowJVModal, journalVoucherRequest, id, rema
 			setShowJVModal(false);
 			refetch();
 		} catch (e) {
-			Toast.error(e?.error?.message);
+			Toast.error(e?.response?.data?.message);
 		}
 	};
 	return {

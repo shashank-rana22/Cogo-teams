@@ -65,7 +65,7 @@ const useGetTdsData = ({
 					Toast.error(message);
 				}
 			} catch (e) {
-				Toast.error(e?.error?.message);
+				Toast.error(e?.response?.data?.message);
 			}
 		} else {
 			Toast.error('Please select the Credit Note category');

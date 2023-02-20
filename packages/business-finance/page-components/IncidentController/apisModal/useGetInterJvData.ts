@@ -42,7 +42,7 @@ const useGetInterJvData = ({
 			setShowICJvModal(false);
 			refetch();
 		} catch (e) {
-			Toast.error(e?.error?.message);
+			Toast.error(e?.response?.data?.message);
 		}
 	};
 

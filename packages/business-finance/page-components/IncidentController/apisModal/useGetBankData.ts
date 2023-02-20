@@ -98,7 +98,7 @@ const useGetBankData = ({
 				Toast.error(message);
 			}
 		} catch (e) {
-			Toast.error(e?.error?.message);
+			Toast.error(e?.response?.data?.message);
 		}
 	};
 

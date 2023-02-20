@@ -13,6 +13,7 @@ const useSettlement = ({
 	supportingDocUrl,
 }) => {
 	const [
+
 		{ loading:createMatchLoading },
 		createMatchTrigger,
 	] = useRequestBf(
@@ -244,7 +245,7 @@ const useSettlement = ({
 
 			Toast.success('Settle successfully');
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 	const setReject = async (item, setShow) => {
@@ -261,7 +262,7 @@ const useSettlement = ({
 			setShow(false);
 			refetch();
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 
@@ -301,7 +302,7 @@ const useSettlement = ({
 			);
 			Toast.success('Dry Run Successful');
 		} catch (error) {
-			Toast.error(error?.data?.message);
+			Toast.error(error?.response?.data?.message);
 		}
 	};
 	return {
