@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -29,19 +31,23 @@ const useSendMessage = ({ channel_type = '' }) => {
 		organization_id,
 		lead_user_id,
 	}) => {
-		await trigger({
-			data: {
-				type       : 'whatsapp',
-				recipient,
-				message_metadata,
-				user_id,
-				organization_id,
-				service    : 'user',
-				service_id : id,
-				source     : 'CogoVerse',
-				lead_user_id,
-			},
-		});
+		try {
+			await trigger({
+				data: {
+					type       : 'whatsapp',
+					recipient,
+					message_metadata,
+					user_id,
+					organization_id,
+					service    : 'user',
+					service_id : id,
+					source     : 'CogoVerse',
+					lead_user_id,
+				},
+			});
+		} catch (err) {
+			Toast.error(getApiErrorString(err));
+		}
 	};
 	return {
 		sendMessage,

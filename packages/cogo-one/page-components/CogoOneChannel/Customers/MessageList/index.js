@@ -96,7 +96,6 @@ function MessageList({
 									onClick={() => setActiveMessage(item)}
 								>
 									<div className={styles.card}>
-
 										<div className={styles.user_information}>
 											<div className={styles.avatar_Container}>
 												<UserAvatar
@@ -122,7 +121,6 @@ function MessageList({
 													)?.renderTime}
 												</div>
 											</div>
-
 										</div>
 
 										<div className={styles.content_div}>
@@ -138,16 +136,13 @@ function MessageList({
 
 												</div>
 											)}
-
 										</div>
-
 									</div>
 								</div>
 							)
 						);
 					})}
 				</div>
-
 			)}
 		</>
 	);
