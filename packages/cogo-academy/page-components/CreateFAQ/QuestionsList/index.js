@@ -17,6 +17,7 @@ function QuestionsList() {
 			<Tabs
 				activeTab={questionList}
 				themeType="primary"
+				fullWidth
 				onChange={setQuestionList}
 			>
 				<TabPanel name="added_questions" title="Added Questions" badge={113}>

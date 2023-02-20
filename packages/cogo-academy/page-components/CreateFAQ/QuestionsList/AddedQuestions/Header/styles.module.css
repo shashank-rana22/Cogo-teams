@@ -1,0 +1,27 @@
+.container {
+    margin-top: 20px;
+    display: flex;
+    
+}
+
+.search {
+    width: 100%;
+    margin-right: 16px;
+}
+
+.filters {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    background: #ffffff;
+    padding: 0 16px;
+    cursor: pointer;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+
+    &:hover {
+		border: 1px solid #f68a21;
+	}
+}
