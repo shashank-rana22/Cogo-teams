@@ -53,22 +53,22 @@ function useOnBoardVendor({
 	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
 
-		setVendorInformation((pv) => {
-			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-
-			return {
-				...pv,
-				[key]: { ...data, document_url: formattedValues?.document_url?.finalUrl },
-			};
-		});
-
 		const payload = {
 			...formattedValues,
 			registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
 		};
 
 		try {
-			const	res = await trigger({ data: { ...payload } });
+			const res = await trigger({ data: { ...payload } });
+
+			setVendorInformation((pv) => {
+				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+
+				return {
+					...pv,
+					[key]: { ...data, document_url: formattedValues?.document_url?.finalUrl },
+				};
+			});
 
 			if (!isUpdateAction) {
 				const href = '/onboard-vendor/[vendor_id]';
@@ -90,7 +90,8 @@ function useOnBoardVendor({
 		});
 
 		setValue('document_url', vendorInformation?.vendor_details?.document_url);
-	}, [fields, setValue, vendorInformation]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendorInformation]);
 
 	return {
 		fields,

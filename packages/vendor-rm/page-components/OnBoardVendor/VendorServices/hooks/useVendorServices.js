@@ -44,14 +44,6 @@ function useVendorServices({
 	}, { manual: true });
 
 	const onSubmit = async ({ data, step }) => {
-		setVendorInformation((pv) => {
-			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-			return {
-				...pv,
-				[key]: data,
-			};
-		});
-
 		try {
 			const { formattedServices = [] } = getFormattedServices({ data, partner_id });
 
@@ -61,6 +53,14 @@ function useVendorServices({
 			};
 
 			await trigger({ data: payload });
+
+			setVendorInformation((pv) => {
+				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+				return {
+					...pv,
+					[key]: data,
+				};
+			});
 
 			Toast.success(`Services ${isUpdateAction ? 'updated' : 'added'} successfully`);
 

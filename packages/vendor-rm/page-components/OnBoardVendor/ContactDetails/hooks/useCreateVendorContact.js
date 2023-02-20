@@ -40,14 +40,6 @@ function useCreateVendorContact({
 	const createVendorContact = async ({ data, step }) => {
 		const formattedValues = getValues();
 
-		setVendorInformation((pv) => {
-			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-			return {
-				...pv,
-				[key]: data,
-			};
-		});
-
 		const payload = {
 			...formattedValues,
 			vendor_id,
@@ -60,6 +52,14 @@ function useCreateVendorContact({
 
 		try {
 			const res = await trigger({ data: { ...payload } });
+
+			setVendorInformation((pv) => {
+				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+				return {
+					...pv,
+					[key]: data,
+				};
+			});
 
 			if (res?.data) {
 				Toast.success(`Contact ${isUpdateAction ? 'updated' : 'created'} Successfully`);
@@ -89,8 +89,8 @@ function useCreateVendorContact({
 			} else {
 				setValue(
 					`${field.name}`,
-					contact_details?.[field.name]
-					|| mapping[field.name],
+					mapping[field.name]
+					|| contact_details?.[field.name],
 				);
 			}
 		});
