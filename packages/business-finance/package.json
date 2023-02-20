@@ -7,7 +7,7 @@
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "@cogoport/components": "^1.0.313",
+    "@cogoport/components": "^1.0.317",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.57",
     "@cogoport/next": "workspace:0.1.0",
