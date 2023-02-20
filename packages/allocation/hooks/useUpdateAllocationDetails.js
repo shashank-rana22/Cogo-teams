@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-import getUpdateDetailsControls from '../utils/get-details-update-controls';
+import getUpdateDetailsControls from '../configurations/get-details-update-controls';
 
 const useUpdateAllocationDetails = ({ stakeholderDetail, setStakeholderDetail, listRefetch }) => {
 	const controls = getUpdateDetailsControls(stakeholderDetail);

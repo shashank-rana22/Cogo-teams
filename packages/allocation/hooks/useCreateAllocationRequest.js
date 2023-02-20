@@ -5,9 +5,9 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-import controls from '../utils/get-requests-create-controls';
-import SERVICE_TYPE_MAPPING from '../utils/service-type-details';
-import getStakeholderTypeOptions from '../utils/stakeholder-options';
+import controls from '../configurations/get-requests-create-controls';
+import SERVICE_TYPE_MAPPING from '../configurations/service-type-details';
+import getStakeholderTypeOptions from '../configurations/stakeholder-options';
 
 const useCreateAllocationRequest = (props) => {
 	const { onCloseModal, refetch, params } = props;

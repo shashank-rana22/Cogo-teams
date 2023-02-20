@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-import getCreateRelationsControls from '../utils/get-create-relation-controls';
+import getCreateRelationsControls from '../configurations/get-create-relation-controls';
 
 const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList = () => {} }) => {
 	const controls = getCreateRelationsControls();
