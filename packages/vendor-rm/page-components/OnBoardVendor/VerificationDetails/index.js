@@ -1,16 +1,24 @@
+import { useEffect } from 'react';
+
 // eslint-disable-next-line import/no-cycle
 import ButtonLayout from '../../../commons/components/ButtonLayout/ButtonLayout';
 
-// import DisplayDetails from './DisplayDetails';
+import DisplayDetails from './DisplayDetails';
 import Header from './Header';
 import styles from './styles.module.css';
-import Success from './Success';
+// import Success from './Success';
 
 function VerificationDetails({
-	// vendorInformation = {},
+	vendorInformation = {},
 	activeStepper,
 	setActiveStepper = () => {},
+	getVendor = () => {},
+	getVendorLoading = false,
 }) {
+	useEffect(() => {
+		getVendor();
+	}, []);
+
 	return (
 		<>
 			<Header />
@@ -26,9 +34,9 @@ function VerificationDetails({
 				/>
 			</div>
 
-			{/* <DisplayDetails vendorInformation={vendorInformation} /> */}
+			<DisplayDetails vendorInformation={vendorInformation} loading={getVendorLoading} />
 
-			<Success />
+			{/* <Success /> */}
 		</>
 	);
 }
