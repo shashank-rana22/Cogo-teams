@@ -23,7 +23,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -891,7 +891,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1770,7 +1770,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -4789,6 +4789,11 @@ const partner = {
 		},
 		{
 			api          : 'update_sailing_schedule_port_pair_coverage',
+			access_type  : 'private',
+			service_name : 'sailing_schedule',
+		},
+		{
+			api          : 'bulk_import_sailing_schedules',
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
@@ -10036,14 +10041,76 @@ const partner = {
 			service_name : 'location',
 		},
 		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+	],
+	cost_booking: [
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_operators',
+			api          : 'list_shipment_air_csr_sheets',
 			access_type  : 'private',
-			service_name : 'operator',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_air_csr_sheet',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_air_csr_ocr_data',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_air_csr_sheet',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_air_freight_consolidated_invoice',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_shipment_air_csr_ocr_data',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'list_shipment_air_freight_consolidated_invoices',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_air_freight_consolidated_invoice',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_bulk_shipment_air_freight_consolidated_invoice',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };
