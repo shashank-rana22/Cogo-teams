@@ -11,7 +11,7 @@ export interface Props {
 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
 	headerStyles?: React.CSSProperties;
 	showHeaderCheckbox?:boolean;
-	renderHeaderCheckbox?:()=>(ReactNode | '');
+	renderHeaderCheckbox?: () => (ReactNode | '');
 }
 
 function Header({
@@ -35,7 +35,10 @@ function Header({
 			{fields.map((field) => (
 				<div
 					className={`${styles.col} ${field.className || ''}`}
-					style={{ '--span': field.span || 1 } as React.CSSProperties}
+					style={{
+						'--span' : field.span || 1,
+						width    : `${((field.span || 1) * (100 / 12))}px`,
+					} as React.CSSProperties}
 				>
 					{field.label}
 					{field.sorting && (
