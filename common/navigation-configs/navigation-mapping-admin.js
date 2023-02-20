@@ -1360,6 +1360,14 @@ const navigationMappingAdmin = {
 		possible_apis : [...apis.terms_and_conditons],
 		module_type   : 'dashboards',
 	},
+	operations_mails: {
+		key         : 'operations_mails',
+		title       : 'Operations Mails',
+		href        : '/operations-mails',
+		as          : '/operations-mails',
+		type        : 'link',
+		module_type : 'crm',
+	},
 	prm: {
 		key       : 'prm',
 		title     : 'PRM',
@@ -1748,6 +1756,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,
+		module_type   : 'dashboards',
+	},
+
+	airline_booking_plugin: {
+		key           : 'airline_booking_plugin',
+		title         : 'Airline Booking Plugin',
+		href          : '/airline-booking-plugin',
+		as            : '/airline-booking-plugin',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.airline_booking_plugin,
 		module_type   : 'dashboards',
 	},
 
