@@ -1,0 +1,18 @@
+.container {
+    margin-top: 32px;
+    width: 100%;
+
+    :global {
+        .ui_tabs_container {
+            width: 100%;
+        }
+        
+        .ui_tab_list_container {
+            width: 100%;
+        }
+        
+        .ui_tab_container {
+            width: 100%;
+        }
+	}
+}

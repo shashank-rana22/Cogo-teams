@@ -20,12 +20,13 @@ function Header() {
 					Configuration
 				</Button>
 				<Button style={{ marginLeft: 8 }}>
-					Upload in bulk
+					Upload in Bulk
+				</Button>
+				<Button style={{ marginLeft: 8 }}>
+					Add Another Question
 				</Button>
 			</div>
-
 		</div>
-
 	);
 }
 

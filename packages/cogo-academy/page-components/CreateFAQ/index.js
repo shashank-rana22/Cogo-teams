@@ -1,10 +1,14 @@
 import React from 'react';
 
 import Header from './Header';
+import QuestionsList from './QuestionsList';
 
 function CreateFAQ() {
 	return (
-		<Header />
+		<div>
+			<Header />
+			<QuestionsList />
+		</div>
 	);
 }
 
