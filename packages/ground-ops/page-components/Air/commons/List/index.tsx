@@ -48,10 +48,10 @@ function List({
 		<section>
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
-				{finalData.length <= 0 ? <EmptyState />
+				{!loading && finalData.length <= 0 ? <EmptyState />
 					: <div className="card-list-data">{handleRender()}</div>}
 				{
-					loading && <Loader style={{ textAlign: 'center' }} />
+					loading && <div className={styles.loader}><Loader /></div>
 				}
 				{!loading && finalData.length > 0 ? (
 					<div className={styles.pagination}>

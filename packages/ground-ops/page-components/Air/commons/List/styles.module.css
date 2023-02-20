@@ -173,3 +173,9 @@
 	max-height: 600px;
 	overflow: auto;
 }
+
+.loader {
+	width: 100%;
+	text-align: center;
+	margin-top: 4%;
+}
