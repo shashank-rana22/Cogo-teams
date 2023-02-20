@@ -46,12 +46,12 @@ function Templates({
 		loading,
 		refetch,
 	} = useListTemplate({ activeTab });
-	console.log('dflkdflnfdkbf', openCreateReply);
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
 		reset: () => {
 			reset({ title: '', content: '' });
 		},
 		refetch,
+		setOpenCreateReply,
 	});
 
 	const handleSelect = (val, status, name, Id) => {
@@ -59,7 +59,12 @@ function Templates({
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
-			setActiveCard(Id);
+			setActiveCard((prev) => {
+				if (prev !== Id) {
+					return Id;
+				}
+				return '';
+			});
 		}
 	};
 
@@ -214,14 +219,14 @@ function Templates({
 						</div>
 					</div>
 					<div className={styles.create_footer}>
-						{/* <Button
+						<Button
 							themeType="tertiary"
 							size="md"
 							className={styles.button_styles}
-							onClick={() => setOpenCreateReply(!openCreateReply)}
+							onClick={() => { setShowPreview(false); setActiveCard(''); setPreviewData(''); }}
 						>
 							Cancel
-						</Button> */}
+						</Button>
 						<Button
 							themeType="accent"
 							size="md"

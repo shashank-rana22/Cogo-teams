@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useCreateCommunicationTemplate({ reset = () => {}, refetch = () => {} }) {
+function useCreateCommunicationTemplate({ reset = () => {}, refetch = () => {}, setOpenCreateReply = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_communication_template',
 		method : 'post',
@@ -31,6 +31,7 @@ function useCreateCommunicationTemplate({ reset = () => {}, refetch = () => {} }
 			});
 			reset({});
 			refetch();
+			setOpenCreateReply(false);
 			Toast.success('Successfully Created');
 		} catch (error) {
 			Toast.error(error?.message);
