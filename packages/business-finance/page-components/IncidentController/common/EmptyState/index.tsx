@@ -2,8 +2,18 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const NoDataImage = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg';
+
 function EmptyState() {
-	return <div className={styles.container}>No Data Found</div>;
+	return (
+		<div className={styles.container}>
+			<img
+				className={styles.img_height}
+				src={NoDataImage}
+				alt="No Data"
+			/>
+		</div>
+	);
 }
 
 export default EmptyState;

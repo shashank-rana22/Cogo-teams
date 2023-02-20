@@ -59,16 +59,31 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					</Tooltip>
 				) : (
 					<div>
-						{bankTradePartyName || tdsTradePartyName ? (
-							<div>
-								{(organization?.tradePartyType === 'SELF'
-									? organization?.businessName : organization?.tradePartyName)
+
+						<Tooltip
+							content={bankTradePartyName || tdsTradePartyName ? (
+								<div>
+									{(organization?.tradePartyType === 'SELF'
+										? organization?.businessName : organization?.tradePartyName)
 									|| toTitleCase(organization?.businessName || '-')}
 
-							</div>
-						) : (
-							<div>{toTitleCase(organization?.businessName || '-')}</div>
-						)}
+								</div>
+							) : (
+								<div>{toTitleCase(organization?.businessName || '-')}</div>
+							)}
+						>
+							{bankTradePartyName || tdsTradePartyName ? (
+								<div className={styles.wrapper}>
+									{(organization?.tradePartyType === 'SELF'
+										? organization?.businessName : organization?.tradePartyName)
+									|| toTitleCase(organization?.businessName || '-')}
+
+								</div>
+							) : (
+								<div className={styles.wrapper}>{toTitleCase(organization?.businessName || '-')}</div>
+							)}
+						</Tooltip>
+
 					</div>
 				);
 			},

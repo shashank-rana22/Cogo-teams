@@ -1,6 +1,6 @@
 import { columns } from './columns';
 import { ColumnInterface } from './interface';
-import { requestColumn } from './requestColumn';
+import { requestColumn } from './RequestColumn';
 
 const getColumns = ({
 	activeTab, setIsAscendingActive, setFilters,

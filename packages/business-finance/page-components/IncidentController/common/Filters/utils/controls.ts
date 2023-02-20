@@ -87,11 +87,12 @@ export const remainControls = (isSettlementExecutive = false) => {
 			options     : optionsVal,
 		},
 		{
-			name        : 'date',
-			placeholder : 'Select Date',
-			type        : 'dateRangePicker',
-			caret       : true,
-			isClearable : true,
+			name                  : 'date',
+			placeholder           : 'Select Date',
+			type                  : 'dateRangePicker',
+			caret                 : true,
+			isPreviousDaysAllowed : true,
+			isClearable           : true,
 		},
 	];
 };

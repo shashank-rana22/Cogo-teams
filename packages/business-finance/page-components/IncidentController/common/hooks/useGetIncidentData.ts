@@ -47,6 +47,18 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
+	const clearFilters = () => {
+		setFilters({
+			page      : 1,
+			pageLimit : 10,
+			urgency   : undefined,
+		});
+	};
+
+	useEffect(() => {
+		clearFilters();
+	}, [activeTab]);
+
 	const getIncidentData = async () => {
 		const { startDate, endDate } = date || {};
 
