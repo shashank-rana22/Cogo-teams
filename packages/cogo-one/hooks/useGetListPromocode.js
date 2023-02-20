@@ -1,17 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import FormatData from '../utils/formatData';
-// import getActiveCardDetails from '../utils/getActiveCardDetails';
-
-const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
-	// const { organization_id } = activeVoiceCard || {};
-	// const { organization_id: orgId, user_id } = getActiveCardDetails(activeMessageCard);
-	const {
-		orgId = '',
-	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
-
-	// const [pagination, setPagination] = useState({ page: 1 });
+const useGetListPromotions = ({ organizationId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_promotions',
 		method : 'get',
@@ -26,19 +16,19 @@ const useGetListPromotions = ({ activeMessageCard, activeVoiceCard, activeTab })
 					status           : 'published',
 					consumption_mode : 'manual',
 					category         : 'marketing',
-					organization_id  : orgId,
+					organization_id  : organizationId,
 				},
-				// page: pagination?.page,
+
 			},
 		});
 	};
 
 	useEffect(() => {
-		if (orgId !== '') {
+		if (organizationId) {
 			fetchListPromoCode();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activeVoiceCard]);
+	}, [organizationId]);
 
 	return {
 		promoData    : data,

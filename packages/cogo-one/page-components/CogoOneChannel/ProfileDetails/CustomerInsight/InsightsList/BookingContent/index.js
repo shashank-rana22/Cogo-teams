@@ -2,8 +2,8 @@ import { Tooltip } from '@cogoport/components';
 import { IcMPort } from '@cogoport/icons-react';
 import { startCase, isEmpty, format } from '@cogoport/utils';
 
-import { SERVICE, SERVICE_ICON_MAPPING } from '../../../../../constants';
-import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
+import { SERVICE, SERVICE_ICON_MAPPING } from '../../../../../../constants';
+import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
 
 import styles from './styles.module.css';
 

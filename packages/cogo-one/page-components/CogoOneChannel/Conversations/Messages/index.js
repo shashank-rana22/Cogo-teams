@@ -25,8 +25,10 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const [uploading, setUploading] = useState({});
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+	console.log('activeMessageCard', activeMessageCard);
 
 	let activeChatCollection;
+
 	const {
 		id = '',
 		channel_type = '',
@@ -36,7 +38,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		sendCommunicationTemplate,
 		loading:communicationLoading,
-	} = useSendCommunicationTemplate({ formattedData });
+	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
 	const hasPermissionToEdit = userId === support_agent_id;
 
 	const filteredSpectators = (spectators_data || [])

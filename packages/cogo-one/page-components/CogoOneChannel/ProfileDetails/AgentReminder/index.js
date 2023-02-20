@@ -4,16 +4,14 @@ import { useState } from 'react';
 
 import useCreateCommunicationLog from '../../../../hooks/useCreateCommunication';
 import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicationLog';
-import FormatData from '../../../../utils/formatData';
 
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
-function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
-	const {
-		orgId = '',
-	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
-
+function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, FormattedMessageData }) {
+	const { organization_id:messageOrgId = null } = FormattedMessageData || {};
+	const { organization_id:voiceOrgId = null } = activeVoiceCard || {};
+	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 	const [inputValue, setInputValue] = useState({
 		title       : '',
 		description : '',
@@ -28,7 +26,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
 		listData = {},
 		fetchListLogApi = () => {},
 		listLoading,
-	} = useGetListCommunicationLog({ activeMessageCard, activeVoiceCard });
+	} = useGetListCommunicationLog({ organizationId });
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue,
 		setDate,
@@ -59,7 +57,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard }) {
 		});
 	};
 
-	if (orgId === '') {
+	if (!organizationId) {
 		return (
 			<div className={styles.empty_container}>No Data Found...</div>
 		);

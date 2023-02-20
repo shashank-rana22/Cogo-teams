@@ -29,7 +29,7 @@ function Header({
 	const {
 		chat_tags = [],
 	} = activeMessageCard || {};
-	const { user_name = '', business_name = '', mobile_no = '' } = formattedData || {};
+	const { user_name = '', business_name = '', mobile_no = '', channel_type } = formattedData || {};
 
 	return (
 		<div className={styles.container}>
@@ -84,7 +84,7 @@ function Header({
 			</div>
 			<div className={styles.flex_space_between}>
 				<div className={styles.flex}>
-					<UserAvatar type="whatsapp" />
+					<UserAvatar type={channel_type} />
 					<div>
 						<div className={styles.name}>{startCase(user_name)}</div>
 						<div className={styles.phone_number}>
@@ -105,7 +105,6 @@ function Header({
 					})}
 				>
 					Mark as
-
 				</Button>
 			</div>
 		</div>

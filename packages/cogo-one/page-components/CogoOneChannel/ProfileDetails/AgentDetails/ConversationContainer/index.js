@@ -18,7 +18,7 @@ function ConversationContainer({ userData, userId }) {
 			<div className={styles.contacts_container}>
 				<div className={styles.container}>
 					<div className={styles.details}>
-						<div className={styles.icon_type}><IcCWhatsapp width={20} height={20} /></div>
+						<div className={styles.icon_type}><IcCWhatsapp width={23} height={23} /></div>
 						<div className={styles.header}>
 							<div className={styles.name}>{name}</div>
 						</div>
@@ -29,7 +29,7 @@ function ConversationContainer({ userData, userId }) {
 			<div className={styles.contacts_container}>
 				<div className={styles.container}>
 					<div className={styles.details}>
-						<div className={styles.icon_type}><IcMEmail width={20} height={20} fill="#E09B3D" /></div>
+						<div className={styles.icon_type}><IcMEmail width={23} height={23} fill="#E09B3D" /></div>
 						<div className={styles.header}>
 							<div className={styles.name}>{name}</div>
 						</div>

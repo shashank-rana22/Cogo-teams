@@ -9,12 +9,12 @@
 .title {
     font-weight: 600;
     font-size: 20px;
-	margin-left: 5px;
+    margin-left: 5px;
 }
 
-.logo{
-	display: flex;
-	align-items: center;
+.logo {
+    display: flex;
+    align-items: center;
 }
 
 .filters_container {

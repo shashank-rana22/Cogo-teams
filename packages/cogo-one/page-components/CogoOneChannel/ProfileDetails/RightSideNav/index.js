@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { snakeCase } from '@cogoport/utils';
 
 import IconMapping from './IconMapping';
@@ -10,21 +10,18 @@ function RightSideNav({
 	setActiveSelect,
 	activeMessageCard,
 	activeVoiceCard,
+	activeTab,
 }) {
-	const { organization_id } = activeVoiceCard || {};
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
-	const { organization_id: org_id } = activeMessageCard || {};
+	const org_id = activeTab === 'message' ? activeMessageCard?.organization_id : activeVoiceCard?.organization_id;
 
-	const ORG_ID = organization_id || org_id || '272a2072-7009-4df9-b852-185bfa49a541';
-
-	const { push } = useRouter();
+	const ORG_ID = org_id || '272a2072-7009-4df9-b852-185bfa49a541';
 
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
-			push(
-				'/details/demand/[organization_id]?source=communication',
-				`/details/demand/${ORG_ID}?source=communication`,
-			);
+			// eslint-disable-next-line no-undef
+			window.location.href = `/${partnerId}/details/demand/${ORG_ID}?source=communication`;
 		} else {
 			setActiveSelect(val);
 		}

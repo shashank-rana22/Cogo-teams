@@ -22,8 +22,6 @@ const useGetOmnichannelCustomerInsights = ({
 		activeTab,
 	});
 
-	const emptyCheck = isEmpty(userId) && isEmpty(userMobile);
-
 	const fetchOmnichannelCustomerInsights = async () => {
 		try {
 			await trigger({
@@ -39,11 +37,12 @@ const useGetOmnichannelCustomerInsights = ({
 	};
 
 	useEffect(() => {
-		if (!emptyCheck) {
+		if (!(isEmpty(userId)) || !(isEmpty(userMobile))) {
 			fetchOmnichannelCustomerInsights();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [customerId, serviceType]);
+	console.log('customerId', customerId);
 
 	return {
 		data,

@@ -3,33 +3,59 @@ import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
 import useGetUser from '../../../../hooks/useGetUser';
-import FormatData from '../../../../utils/formatData';
 
 import ConversationContainer from './ConversationContainer';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
-function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	const { user_details = {} } = activeMessageCard || {};
+function AgentDetails({
+	activeMessageCard,
+	activeTab,
+	activeVoiceCard,
+	FormattedMessageData = {},
+	customerId = '',
+}) {
+	const { user_details = null } = activeMessageCard || {};
+	const {
+		user_id,
+		lead_user_id,
+		email,
+		user_name: messageName,
+		mobile_no,
+		organization_id,
+	} = FormattedMessageData || {};
+
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
 	const {
-		userId,
-		userMail,
-		userMobile,
-		userName,
-		orgId,
-		// agentId,
-		// countryCode,
-		leadUserId,
-	} = FormatData({ activeMessageCard, activeTab, activeVoiceCard });
+		user_data = {},
+		user_number = '',
+		organization_id: voiceOrgId = '',
+	} = activeVoiceCard || {};
 
-	const { userData, loading } = useGetUser({ userId, leadUserId });
+	const DATA_MAPPING = {
+		voice: {
+			userId        : user_data?.id,
+			name          : user_data?.name,
+			userEmail     : user_data?.email,
+			mobile_number : user_number,
+			orgId         : voiceOrgId,
+			leadUserId    : null,
+		},
+		message: {
+			userId        : user_id,
+			name          : messageName,
+			userEmail     : email,
+			mobile_number : mobile_no,
+			orgId         : organization_id,
+			leadUserId    : lead_user_id,
+		},
+	};
+	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
 
-	const {
-		mobile_verified,
-		whatsapp_verified,
-	} = userData || {};
+	const { userData, loading } = useGetUser({ userId, leadUserId, customerId });
+
+	const { mobile_verified, whatsapp_verified } = userData || {};
 
 	const VERIFICATION_STATUS = [
 		{
@@ -58,17 +84,23 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				<div className={styles.details}>
 					{loading ? (
 						<>
-							<Placeholder height="13px" width="120px" margin="0px 0px 10px 0px" />
-							<Placeholder height="13px" width="120px" margin="0px 0px 0px 0px" />
+							<Placeholder
+								height="13px"
+								width="120px"
+								margin="0px 0px 10px 0px"
+							/>
+							<Placeholder
+								height="13px"
+								width="120px"
+								margin="0px 0px 0px 0px"
+							/>
 						</>
 					) : (
 						<>
 							<div className={styles.name}>
-								{userName || 'unknown user'}
+								{name || 'unknown user'}
 							</div>
-							<div className={styles.email}>
-								{userMail || '-'}
-							</div>
+							<div className={styles.email}>{userEmail || '-'}</div>
 						</>
 					)}
 				</div>
@@ -76,7 +108,6 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 			<div className={styles.verification_pills}>
 				{VERIFICATION_STATUS.map((item, index) => {
 					const itemKey = `${snakeCase(item.label)}_${index}`;
-
 					return (
 						<div key={itemKey}>
 							<Pill
@@ -85,25 +116,30 @@ function AgentDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 								size="md"
 								color={item.color}
 							>
-								<div className={styles.pill_name}>{item.label}</div>
+								<div className={styles.pill_name}>
+									{item.label}
+								</div>
 							</Pill>
 						</div>
 					);
 				})}
 			</div>
 			{loading ? (
-				<Placeholder height="13px" width="220px" margin="0px 0px 0px 0px" />
+				<Placeholder
+					height="13px"
+					width="220px"
+					margin="0px 0px 0px 0px"
+				/>
 			) : (
 				<VoiceCallComponent
-					userMobile={userMobile}
+					userMobile={mobile_number}
 					orgId={orgId}
-					// agentId={agentId}
-					// countryCode={countryCode}
+                    // agentId={agentId}
+                    // countryCode={countryCode}
 					userId={userId}
-					userName={userName}
+					userName={name}
 					emptyState={emptyState}
 				/>
-
 			)}
 			<div className={styles.conversation_title}>Other Channels</div>
 			<ConversationContainer userData={userData} userId={userId} />
