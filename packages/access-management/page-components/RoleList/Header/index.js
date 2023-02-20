@@ -20,7 +20,7 @@ function Header({
 				/>
 
 				<Chips
-					selectedItems={[stakeHolderType]}
+					selectedItems={stakeHolderType}
 					items={[
 						{ children: 'All Roles', key: 'all' },
 						{ children: 'Cogoport', key: 'cogoport' },
