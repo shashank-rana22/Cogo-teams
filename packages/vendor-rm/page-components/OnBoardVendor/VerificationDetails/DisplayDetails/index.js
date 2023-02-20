@@ -1,5 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../EmptyState';
 import LoadingState from '../LoadingState';
 
 import PaymentDetails from './PaymentDetails';
@@ -32,6 +34,12 @@ function DisplayDetails({
 	if (loading) {
 		return (
 			<LoadingState />
+		);
+	}
+
+	if (isEmpty(vendorInformation)) {
+		return (
+			<EmptyState />
 		);
 	}
 
