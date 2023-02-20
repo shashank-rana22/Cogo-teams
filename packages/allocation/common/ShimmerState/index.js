@@ -12,7 +12,6 @@ function ShimmerState() {
 						<Placeholder height="12px" width="100px" margin="0px" />
 					</div>
 				))}
-
 			</div>
 		))
 	);

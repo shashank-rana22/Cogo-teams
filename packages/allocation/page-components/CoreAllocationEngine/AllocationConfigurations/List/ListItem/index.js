@@ -1,4 +1,4 @@
-import { Badge, Modal, Popover, Pill, Tooltip } from '@cogoport/components';
+import { Button, Badge, Modal, Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -90,7 +90,7 @@ const columnsMapping = [
 			const renderToolTip = (
 				<div className={styles.tooltip_container}>
 					{users.map((user) => (
-						<Pill size="md" color="orange">
+						<Pill key={user.name} size="md" color="orange">
 							{startCase(user.name)}
 						</Pill>
 					))}
@@ -270,6 +270,10 @@ function ListItem({ item, listRefetch }) {
 					<div className={styles.svg_container}>
 						<IcMOverflowDot height={16} width={16} onClick={() => setShowActions(!showActions)} />
 					</div>
+
+					<Button className={styles.svg_container_mobile_view} onClick={() => setShowActions(!showActions)}>
+						Actions
+					</Button>
 				</Popover>
 			</div>
 

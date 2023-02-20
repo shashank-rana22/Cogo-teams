@@ -24,7 +24,7 @@ const useCreateConfigurations = ({
 		url    : `${apiName}`,
 		method : 'POST',
 		authkey,
-	});
+	}, { manual: true });
 
 	const controls = getCreateConfigurationsControls({ setSegment });
 
