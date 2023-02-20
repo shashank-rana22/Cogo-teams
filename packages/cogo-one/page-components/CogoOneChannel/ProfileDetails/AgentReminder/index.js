@@ -1,4 +1,4 @@
-import { Toast, Button, Timepicker, Input, Datepicker, Textarea } from '@cogoport/components';
+import { Toast, Button, Input, Datepicker, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -17,10 +17,6 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 		description : '',
 	});
 	const [date, setDate] = useState('');
-	const [time, setTime] = useState({
-		start_time : '',
-		end_time   : '',
-	});
 
 	const {
 		listData = {},
@@ -30,7 +26,6 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue,
 		setDate,
-		setTime,
 		fetchListLogApi,
 		activeMessageCard,
 		activeTab,
@@ -38,8 +33,8 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 	});
 
 	const handleSubmit = async () => {
-		if (!isEmpty(inputValue) || !isEmpty(date) || !isEmpty(time)) {
-			await createLogApi({ inputValue, date, time });
+		if (!isEmpty(inputValue) || !isEmpty(date)) {
+			await createLogApi({ inputValue, date });
 		} else {
 			Toast.error('Enter details');
 		}
@@ -84,38 +79,12 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 				<div className={styles.label}>Select a date</div>
 				<Datepicker
 					placeholder="Enter Date"
-					dateFormat="MM/dd/yyyy"
-					showTimeSelect={false}
+					dateFormat="MM/dd/yyyy HH:mm a"
+					showTimeSelect
 					name="date"
 					onChange={setDate}
 					value={date}
 				/>
-				<div className={styles.time_container}>
-					<div className={styles.start_time}>
-						<div className={styles.time_title}>Start Time</div>
-						<div className={styles.wrap_start}>
-							<Timepicker
-								name="date"
-								timeIntervals={1}
-								value={time?.start_time}
-								isClearable
-								onChange={(a) => setTime((p) => ({ ...p, start_time: a }))}
-							/>
-						</div>
-					</div>
-					<div className={styles.end_time}>
-						<div className={styles.time_title}>End Time</div>
-						<div className={styles.wrap_end}>
-							<Timepicker
-								name="date"
-								timeIntervals={1}
-								value={time?.end_time}
-								className="input_time"
-								onChange={(a) => setTime((p) => ({ ...p, end_time: a }))}
-							/>
-						</div>
-					</div>
-				</div>
 				<div className={styles.wrapper}>
 					<div className={styles.label}>Summary</div>
 					<Textarea

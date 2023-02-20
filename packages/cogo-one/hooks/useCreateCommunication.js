@@ -6,7 +6,7 @@ import FormatData from '../utils/formatData';
 
 function useCreateCommunicationLog({
 	setInputValue,
-	setDate, setTime,
+	setDate,
 	fetchListLogApi = () => {},
 	activeMessageCard,
 	activeTab,
@@ -27,35 +27,31 @@ function useCreateCommunicationLog({
 		method : 'post',
 	}, { manual: true });
 
-	const createLogApi = async ({ inputValue, date, time }) => {
+	const createLogApi = async ({ inputValue, date }) => {
 		let payload;
 		if (activeTab === 'voice') {
 			payload = {
-				communication_type       : 'meeting',
-				is_reminder              : 'true',
-				agent_id                 : agentID,
-				user_id                  : userId,
-				title                    : inputValue?.title,
-				reminder_date            : date,
-				communication_summary    : inputValue?.description,
-				organization_id          : orgId,
-				partner_id               : partnerId,
-				communication_start_time : time?.start_time,
-				communication_end_time   : time?.end_time,
+				communication_type    : 'meeting',
+				is_reminder           : 'true',
+				agent_id              : agentID,
+				user_id               : userId,
+				title                 : inputValue?.title,
+				reminder_date         : date,
+				communication_summary : inputValue?.description,
+				organization_id       : orgId,
+				partner_id            : partnerId,
 			};
 		} else {
 			payload = {
-				communication_type       : 'meeting',
-				is_reminder              : 'true',
-				agent_id                 : agentID,
-				user_id                  : userId,
-				title                    : inputValue?.title,
-				reminder_date            : date,
-				communication_summary    : inputValue?.description,
-				organization_id          : orgId,
-				partner_id               : partnerId,
-				communication_start_time : time?.start_time,
-				communication_end_time   : time?.end_time,
+				communication_type    : 'meeting',
+				is_reminder           : 'true',
+				agent_id              : agentID,
+				user_id               : userId,
+				title                 : inputValue?.title,
+				reminder_date         : date,
+				communication_summary : inputValue?.description,
+				organization_id       : orgId,
+				partner_id            : partnerId,
 			};
 		}
 
@@ -70,10 +66,6 @@ function useCreateCommunicationLog({
 				description : '',
 			});
 			setDate('');
-			setTime({
-				start_time : '',
-				end_time   : '',
-			});
 		} catch (error) {
 			Toast.error(error);
 		}
