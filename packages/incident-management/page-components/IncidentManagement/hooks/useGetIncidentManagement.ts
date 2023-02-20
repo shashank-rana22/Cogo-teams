@@ -102,10 +102,10 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	const clearFilters = () => {
 		setGlobalFilters({
 			pageIndex    : 1,
-			search       : undefined,
-			type         : undefined,
-			request_type : undefined,
-			Date         : undefined,
+			search,
+			type,
+			request_type : requestType,
+			Date,
 			status       : undefined,
 		});
 	};
