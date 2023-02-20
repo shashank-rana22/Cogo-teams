@@ -9,7 +9,7 @@ import useUpdateNote from '../../../../hooks/useUpdateNote';
 
 import styles from './styles.module.css';
 
-function AgentNotes({ activeMessageCard, activeTab, activeVoiceCard }) {
+function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
 	const [noteValue, setNoteValue] = useState('');
 
 	const [editNote, setEditNote] = useState(false);
@@ -28,7 +28,7 @@ function AgentNotes({ activeMessageCard, activeTab, activeVoiceCard }) {
 		activeTab,
 		activeVoiceCard,
 	});
-	const { updateNote } = useUpdateNote({ fetchListNotes, editNote, setEditNote });
+	const { updateNote } = useUpdateNote({ fetchListNotes, setEditNote });
 
 	const handleSubmit = async () => {
 		if (!isEmpty(noteValue)) {
