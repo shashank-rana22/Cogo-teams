@@ -19,12 +19,18 @@ function BankDatailsModal({
 	const { businessName, tradePartyType, category_types:categoryTypes } = organization || {};
 	return (
 		<div>
-
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
-				{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
+			{status === 'REJECTED' ? (
+				<Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>
+					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
 					&& name === 'Raise Again' ? 'Raise Again' : 'View'}
 
-			</Button>
+				</Button>
+			)
+				: (
+					<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
+						View
+					</Button>
+				)}
 			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Bank Account Add/Edit" />
 				<div className={styles.rate_conatiner}>

@@ -7,7 +7,7 @@ import ViewRequested from '../ViewRequested';
 
 import styles from './styles.module.css';
 
-function ActionRejected({ itemData, reftech }) {
+function ActionRejected({ itemData, refetch }) {
 	const REMARKS = [
 		{ name: 'View', value: 'View' },
 		{ name: 'Accept', value: 'ACCEPT' },
@@ -22,15 +22,16 @@ function ActionRejected({ itemData, reftech }) {
 					<div>
 						<div className={styles.container}>
 							{(name === 'View')
-								? <ViewRequested itemData={itemData} name="View" reftech={reftech} />
+								? <ViewRequested itemData={itemData} name="View" refetch={refetch} />
                             	: null}
-							{name === 'Accept' ? <DeleteModal itemData={itemData} reftech={reftech} /> : null}
+							{name === 'Accept' ? <DeleteModal itemData={itemData} refetch={refetch} /> : null}
 							{(name === 'Raise Again') && (type === 'TDS_APPROVAL' || type === 'BANK_DETAIL_APPROVAL')
 							&& (userIncidentStatus === 'PENDING_ACTION')
-								? <ViewRequested itemData={itemData} name="Raise Again" reftech={reftech} /> : null}
+								? <ViewRequested itemData={itemData} name="Raise Again" refetch={refetch} /> : null}
 						</div>
-						{name !== 'Raise Again'
-						&& <div className={styles.hr} />}
+						{name === 'Raise Again' || (name === 'Accept' && (userIncidentStatus === 'ACCEPTED'
+						|| userIncidentStatus === 'RAISED_AGAIN')) ? null
+							: <div className={styles.hr} />}
 					</div>
 				))}
 			</div>

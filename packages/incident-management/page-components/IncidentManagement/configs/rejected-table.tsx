@@ -14,14 +14,14 @@ interface PropsType {
 	isSortActive:string;
 	setIsSortActive:Function;
 	setGlobalFilters:Function;
-	reftech:Function;
+	refetch:Function;
 	setActiveTab:Function;
 	setPayload:Function;
 }
 
 const rejectedColumn = ({
 	isSortActive, setIsSortActive,
-	setGlobalFilters, reftech, setActiveTab, setPayload,
+	setGlobalFilters, refetch, setActiveTab, setPayload,
 }:PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
@@ -99,7 +99,7 @@ const rejectedColumn = ({
 		id       : 'action',
 		accessor : (row) => (
 			<div>
-				<ActionRejected itemData={row} reftech={reftech} />
+				<ActionRejected itemData={row} refetch={refetch} />
 			</div>
 		),
 

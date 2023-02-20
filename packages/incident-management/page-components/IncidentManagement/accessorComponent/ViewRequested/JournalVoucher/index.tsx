@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function JournalVoucher({
 	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
 }) {
-	const { data, userNotes } = itemData || {};
+	const { data, userNotes, status } = itemData || {};
 	const { journalVoucherRequest } = data || {};
 	const {
 		entityCode, tradePartyName, type, category, accMode, currency, amount,
@@ -15,7 +15,9 @@ function JournalVoucher({
 	} = journalVoucherRequest || {};
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			{status === 'REJECTED'
+				? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
+				: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
 			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Journal Voucher" />
 				<div className={styles.header_conatiner}>

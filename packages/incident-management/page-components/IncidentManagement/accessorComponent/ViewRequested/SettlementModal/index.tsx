@@ -8,13 +8,15 @@ import styles from './styles.module.css';
 function SettlementModal({
 	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
 }) {
-	const { type, data, userNotes } = itemData || {};
+	const { type, data, userNotes, status } = itemData || {};
 	const { settlementRequest } = data || {};
 	const { list = [], supportingDocUrl, remark } = settlementRequest || {};
 	const columns = getModalColumns(type);
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			{status === 'REJECTED'
+				? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
+				: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
 			<Modal size="xl" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Settlement" />
 				<Modal.Body>

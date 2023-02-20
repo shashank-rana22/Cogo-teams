@@ -7,12 +7,14 @@ import styles from './styles.module.css';
 function RequestCN({
 	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
 }) {
-	const { data, userNotes } = itemData || {};
+	const { data, userNotes, status } = itemData || {};
 	const { creditNoteRequest } = data || {};
 	const { documentUrls, invoiceNumber, jobNumber, remark, creditNoteType } = creditNoteRequest || {};
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			{status === 'REJECTED'
+				? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
+				: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
 			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Request CN" />
 				<Modal.Body>

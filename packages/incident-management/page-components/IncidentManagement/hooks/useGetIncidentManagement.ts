@@ -60,7 +60,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED'];
 	}
 
-	const reftech = async () => {
+	const refetch = async () => {
 		try {
 			await trigger({
 				params: {
@@ -87,7 +87,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	};
 
 	useEffect(() => {
-		reftech();
+		refetch();
 	}, [JSON.stringify(rest), activeTab, query, requestType, Date, status]);
 
 	const filtervalue = Object.values(globalFilters);
@@ -119,7 +119,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 		loading,
 		globalFilters,
 		setGlobalFilters,
-		reftech,
+		refetch,
 		filterClear,
 		clearFilters,
 	};
