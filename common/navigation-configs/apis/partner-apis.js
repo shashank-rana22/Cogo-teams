@@ -23,7 +23,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -891,7 +891,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1770,7 +1770,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'check_access_request_eligibility',
+			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -4789,6 +4789,11 @@ const partner = {
 		},
 		{
 			api          : 'update_sailing_schedule_port_pair_coverage',
+			access_type  : 'private',
+			service_name : 'sailing_schedule',
+		},
+		{
+			api          : 'bulk_import_sailing_schedules',
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
@@ -9704,22 +9709,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'list_air_india_awb_numbers',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
 			api          : 'list_awb_inventories',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'create_awb_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'update_awb_plugin_booking_information',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
@@ -9737,6 +9727,38 @@ const partner = {
 			api          : 'get_airwaybill_prefix_from_airline',
 			access_type  : 'private',
 			service_name : 'operator',
+		},
+	],
+	airline_booking_plugin: [
+		{
+			api          : 'list_air_india_awb_numbers',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_awb_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_air_india_awb_number',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_air_india_awb_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 	whatsapp_communication: [
