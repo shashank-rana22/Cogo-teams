@@ -1,4 +1,4 @@
-import { Modal, Popover, Legend, Pill, Tooltip } from '@cogoport/components';
+import { Badge, Modal, Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -13,19 +13,24 @@ import UpdatePreferences from './Actions/UpdatePreferences';
 import styles from './styles.module.css';
 
 const STATUS_COLOR_MAPPING = {
-	active          : 'green',
-	draft           : 'grey',
-	checking        : 'grey',
-	publishable     : 'orange',
-	not_publishable : 'red',
+	active          : '#abcd62',
+	draft           : '#ac55ac',
+	checking        : '#bdbdbd',
+	publishable     : '#f68b21',
+	not_publishable : '#ee3425',
 };
 
 const columnsMapping = [
 	{
 		key      : 'schedule_type',
 		label    : 'Schedule Type',
-		getValue : (item) => startCase(getByKey(item, 'schedule_type', '___')),
-		flex     : 0.9,
+		getValue : (item) => (
+			<div className={styles.schedule_type}>
+				<Badge color={STATUS_COLOR_MAPPING[item.status]} style={{ marginRight: '8px' }} />
+				{startCase(getByKey(item, 'schedule_type', '___'))}
+			</div>
+		),
+		flex: 0.9,
 	},
 	{
 		key      : 'segment_type',
@@ -136,32 +141,32 @@ const columnsMapping = [
 		getValue : (item) => (getByKey(item, 'end_date') ? format(getByKey(item, 'end_date'), 'dd MMM yyyy') : '___'),
 		flex     : 1,
 	},
-	{
-		key      : 'status',
-		label    : 'Status',
-		getValue : (item) => {
-			const status = getByKey(item, 'status', '-');
+	// {
+	// 	key      : 'status',
+	// 	label    : 'Status',
+	// 	getValue : (item) => {
+	// 		const status = getByKey(item, 'status', '-');
 
-			const legendItem = [
-				{
-					label : startCase(status),
-					color : STATUS_COLOR_MAPPING[status],
-					key   : getByKey(item, 'id', '-'),
-				},
-			];
+	// 		const legendItem = [
+	// 			{
+	// 				label : startCase(status),
+	// 				color : STATUS_COLOR_MAPPING[status],
+	// 				key   : getByKey(item, 'id', '-'),
+	// 			},
+	// 		];
 
-			return (
-				<Legend
-					hasBackground={false}
-					direction="horizontal"
-					size="md"
-					style={{ margin: 0 }}
-					items={legendItem}
-				/>
-			);
-		},
-		flex: 1.2,
-	},
+	// 		return (
+	// 			<Legend
+	// 				hasBackground={false}
+	// 				direction="horizontal"
+	// 				size="md"
+	// 				style={{ margin: 0 }}
+	// 				items={legendItem}
+	// 			/>
+	// 		);
+	// 	},
+	// 	flex: 1.2,
+	// },
 ];
 
 const WORKFLOW_MAPPING = {

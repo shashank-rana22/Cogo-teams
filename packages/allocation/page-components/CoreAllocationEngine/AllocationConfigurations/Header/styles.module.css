@@ -1,9 +1,15 @@
 .header_container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+}
+
+.right_container {
+	display: flex;
+	align-items: center;
 	justify-content: flex-end;
 }
 
-.header_container > button:last-child {
+.right_container > button:last-child {
 	margin-left: 8px;
 }
