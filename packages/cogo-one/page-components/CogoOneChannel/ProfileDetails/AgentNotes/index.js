@@ -11,11 +11,8 @@ import styles from './styles.module.css';
 
 function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
 	const [noteValue, setNoteValue] = useState('');
-
 	const [editNote, setEditNote] = useState(false);
-
 	const [active, setActive] = useState(false);
-
 	const [updateId, setUpdateId] = useState();
 
 	const { noteData, fetchListNotes } = useGetListNotes({ active, activeMessageCard, activeTab, activeVoiceCard });
