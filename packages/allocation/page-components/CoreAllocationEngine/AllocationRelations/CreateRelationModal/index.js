@@ -32,7 +32,7 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 					disabled={loading}
 					onClick={handleSubmit(onCreate)}
 				>
-					CREATE RELATION
+					Create
 				</Button>
 			</Modal.Footer>
 		</Modal>

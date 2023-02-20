@@ -73,7 +73,7 @@ function Header(props) {
 						onClick={onClickCreateReqBtn}
 						disabled={disabled}
 					>
-						CREATE REQUEST
+						Create
 					</Button>
 				</div>
 			</div>
@@ -94,7 +94,7 @@ function Header(props) {
 						disabled={!bulkMode || !isBulkUpdateMode}
 						onClick={applyBulkFilter}
 					>
-						APPLY BULK FILTER
+						Apply Bulk Filter
 					</Button>
 				</div>
 
@@ -104,7 +104,7 @@ function Header(props) {
 					disabled={isEmpty(id)}
 					onClick={() => setShowModal(true)}
 				>
-					APPROVE ALL
+					Approve All
 				</Button>
 			</div>
 

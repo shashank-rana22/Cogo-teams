@@ -104,7 +104,7 @@ function ListInstances({ item }) {
 					onClick={() => onRowClick(listItem)}
 					disabled={!['pending_approval', 'completed'].includes(listItem.status)}
 				>
-					VIEW DETAILS
+					View Details
 				</Button>
 			),
 		};

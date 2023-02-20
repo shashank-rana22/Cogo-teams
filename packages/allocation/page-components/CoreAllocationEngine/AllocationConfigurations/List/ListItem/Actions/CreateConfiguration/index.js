@@ -44,7 +44,7 @@ function CreateConfiguration({
 							disabled={loading}
 							style={{ marginRight: '10px' }}
 						>
-							CANCEL
+							Cancel
 						</Button>
 
 						<Button

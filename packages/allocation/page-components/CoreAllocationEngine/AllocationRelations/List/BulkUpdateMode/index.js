@@ -109,9 +109,8 @@ function BulkUpdateMode({
 						onClick={() => applyBulkFilter()}
 					>
 						{' '}
-						APPLY BULK FILTER
+						Apply Bulk Filter
 						{!isEmpty(checkedRowsId) ? ` (${checkedRowsId.length})` : ''}
-
 					</Button>
 				</div>
 
@@ -128,9 +127,8 @@ function BulkUpdateMode({
 					}}
 				>
 					{' '}
-					APPROVE ALL
+					Approve All
 					{!isEmpty(checkedRowsId) ? `(${checkedRowsId.length})` : ''}
-
 				</Button>
 			</div>
 			{(!isEmpty(checkedRowsId) && bulkMode) && (
@@ -153,7 +151,6 @@ function BulkUpdateMode({
 							style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
 						>
 							clear selection
-
 						</Button>
 					</div>
 

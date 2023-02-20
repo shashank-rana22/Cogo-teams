@@ -21,8 +21,7 @@ function Header(props) {
 				onClick={() => setShowCreateConfig(true)}
 				disabled={disabled}
 			>
-				CREATE CONFIG
-
+				Create
 			</Button>
 		</div>
 	);

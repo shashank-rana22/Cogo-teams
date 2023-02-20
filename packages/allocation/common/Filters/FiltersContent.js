@@ -26,7 +26,7 @@ function FilterContent(props) {
 						size="sm"
 						onClick={onResettingFilters}
 					>
-						RESET
+						Reset
 					</Button>
 
 					<Button
@@ -37,7 +37,7 @@ function FilterContent(props) {
 							marginLeft: '10px',
 						}}
 					>
-						SHOW RESULTS
+						Save
 					</Button>
 				</div>
 			</div>

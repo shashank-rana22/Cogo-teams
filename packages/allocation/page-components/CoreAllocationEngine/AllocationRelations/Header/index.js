@@ -71,7 +71,7 @@ function Header({
 					onClick={() => setShowCreateRelationModal(true)}
 					disabled={disabled}
 				>
-					CREATE RELATION
+					Create
 				</Button>
 			</div>
 

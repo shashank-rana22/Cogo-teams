@@ -52,7 +52,7 @@ function Header(props) {
 					onClick={onClickCreateQuota}
 					disabled={disabled}
 				>
-					CREATE QUOTA
+					Create
 				</Button>
 			</div>
 		</div>
