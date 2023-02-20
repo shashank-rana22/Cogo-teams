@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-import controls from '../utils/get-configuration-publish-controls';
+import controls from '../configurations/get-configuration-publish-controls';
 
 const usePublishConfiguration = ({
 	item = {},

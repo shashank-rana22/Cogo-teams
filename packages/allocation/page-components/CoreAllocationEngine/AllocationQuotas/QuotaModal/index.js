@@ -5,9 +5,9 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getFieldController } from '../../../../common/Form/getFieldController';
+import controls from '../../../../configurations/get-quotas-table-controls';
 import useCreateEditAllocationQuota from '../../../../hooks/useCreateEditAllocationQuota';
 import useDeleteAllocationQuota from '../../../../hooks/useDeleteAllocationQuota';
-import controls from '../../../../utils/get-quotas-table-controls';
 
 import styles from './styles.module.css';
 
