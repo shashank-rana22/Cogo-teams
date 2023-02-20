@@ -5,8 +5,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { merge } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -19,10 +18,6 @@ function useOnBoardVendor({
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
-	const { general: { query } } = useSelector((state) => state);
-
-	const { vendor_id } = query;
-
 	const router = useRouter();
 
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -46,13 +41,12 @@ function useOnBoardVendor({
 		setValue,
 	} = useForm();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/create_vendor',
-		method : 'post',
-	}, { manual: true });
+	const { vendor_details } = vendorInformation;
 
-	const [{ loading: updateLoading }, updateTrigger] = useRequest({
-		url    : '/update_vendor',
+	const isUpdateAction = !isEmpty(vendor_details);
+
+	const [{ loading }, trigger] = useRequest({
+		url    : isUpdateAction ? '/update_vendor' : '/create_vendor',
 		method : 'post',
 	}, { manual: true });
 
@@ -74,21 +68,15 @@ function useOnBoardVendor({
 		};
 
 		try {
-			let res = {};
+			const	res = await trigger({ data: { ...payload } });
 
-			if (vendor_id) {
-				res = await updateTrigger({ data: { id: vendor_id, ...payload } });
-
-				Toast.success('Vendor updated successfully');
-			} else {
-				res = await trigger({ data: { ...payload } });
-
+			if (!isUpdateAction) {
 				const href = '/onboard-vendor/[vendor_id]';
 				const as = `/onboard-vendor/${res.data.id}`;
 				router.push(href, as);
-
-				Toast.success('Vendor created successfully');
 			}
+
+			Toast.success(`Vendor ${isUpdateAction ? 'updated' : 'created'} successfully`);
 
 			setActiveStepper('contact_details');
 		} catch (error) {
@@ -100,6 +88,7 @@ function useOnBoardVendor({
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
+
 		setValue('document_url', vendorInformation?.vendor_details?.document_url);
 	}, [fields, setValue, vendorInformation]);
 
