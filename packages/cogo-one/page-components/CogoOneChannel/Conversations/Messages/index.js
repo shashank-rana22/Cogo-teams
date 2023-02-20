@@ -16,7 +16,7 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '' }) {
+function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '', isomniChannelAdmin = false }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
@@ -25,7 +25,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const [uploading, setUploading] = useState({});
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	console.log('activeMessageCard', activeMessageCard);
 
 	let activeChatCollection;
 
@@ -35,11 +34,13 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		support_agent_id = [],
 		spectators_data = [],
 	} = activeMessageCard || {};
+
 	const {
 		sendCommunicationTemplate,
 		loading:communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
-	const hasPermissionToEdit = userId === support_agent_id;
+
+	const hasPermissionToEdit = userId === support_agent_id || isomniChannelAdmin;
 
 	const filteredSpectators = (spectators_data || [])
 		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
