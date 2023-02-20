@@ -74,7 +74,7 @@ function ActionContent({ status, onClickCta }) {
 			{WORKFLOW_CTA_MAPPING[status]}
 
 			<div
-				className={styles.workflow_cta}
+				className={styles.workflow_cta_last}
 				onClick={() => onClickCta('delete')}
 				role="presentation"
 			>

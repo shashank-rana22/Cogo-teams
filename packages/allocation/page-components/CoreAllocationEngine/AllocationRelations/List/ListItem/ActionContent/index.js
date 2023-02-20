@@ -9,7 +9,7 @@ function ActionContent({
 	const WORKFLOW_CTA_MAPPING = {
 		active: (
 			<div
-				className={styles.workflow_cta}
+				className={styles.workflow_cta_last}
 				role="presentation"
 				onClick={() => onClickCta('delete')}
 			>
@@ -17,7 +17,6 @@ function ActionContent({
 					<IcMDelete width={16} height={16} style={{ marginRight: '10px' }} />
 					Delete
 				</div>
-
 			</div>
 		),
 		pending: (
@@ -31,10 +30,10 @@ function ActionContent({
 						<IcMDoubleTick width={16} height={16} style={{ marginRight: '10px' }} />
 						Approve
 					</div>
-
 				</div>
+
 				<div
-					className={styles.workflow_cta}
+					className={styles.workflow_cta_last}
 					role="presentation"
 					onClick={() => onClickCta('reject')}
 				>
@@ -42,7 +41,6 @@ function ActionContent({
 						<IcMCross width={16} height={16} style={{ marginRight: '10px' }} />
 						Reject
 					</div>
-
 				</div>
 			</>
 

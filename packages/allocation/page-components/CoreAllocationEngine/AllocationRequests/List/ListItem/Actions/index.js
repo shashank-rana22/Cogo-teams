@@ -13,13 +13,13 @@ function ActionContent({ onClickCta }) {
 				role="presentation"
 			>
 				<div className={styles.cta_text}>
-					<IcMTick width={20} height={20} style={{ marginRight: '10px' }} />
+					<IcMTick width={20} height={20} style={{ marginRight: '6px' }} />
 					Approve
 				</div>
 			</div>
 
 			<div
-				className={styles.workflow_cta}
+				className={styles.workflow_cta_last}
 				onClick={() => {
 					onClickCta({ status: 'rejected' });
 				}}
