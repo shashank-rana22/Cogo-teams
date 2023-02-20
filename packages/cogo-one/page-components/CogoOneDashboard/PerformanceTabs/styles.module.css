@@ -1,0 +1,45 @@
+.performance_tab_container {
+	display: flex;
+	flex-direction: column;
+	height: 283px;
+	padding: 10px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.performance_tab_lists {
+	display: flex;
+	flex-direction: column;
+	height: 91%;
+	overflow-y: scroll;
+}
+
+.list {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	border-bottom: 1px solid #f8f2e7;
+}
+
+.picture_name_kam_box {
+	display: flex;
+
+	/* padding-right: 3px; */
+
+	/* padding: 3px; */
+
+	/* justify-content: space-around; */
+}
+
+.name {
+	padding-left: 14px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.kam {
+	padding-left: 14px;
+	font-size: 10px;
+	color: #828282;
+}
