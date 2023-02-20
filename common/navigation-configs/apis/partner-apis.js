@@ -6950,6 +6950,33 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
+	incident_management: [
+		{
+			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+			module      : 'incident-management',
+			feature     : 'incident-management',
+		},
+		{
+			api         : 'patch_incident_management_incident_user_incident_status',
+			access_type : 'private',
+			module      : 'incident-management',
+			feature     : 'incident-management',
+		},
+		{
+			api         : 'post_incident_management_incident_raise_again',
+			access_type : 'private',
+			module      : 'incident-management',
+			feature     : 'incident-management',
+		},
+		{
+			api         : 'patch_incident_management_incident_edit_notes',
+			access_type : 'private',
+			module      : 'incident-management',
+			feature     : 'incident-management',
+
+		},
+	],
 	vendor_payment: [
 		{
 			api          : 'list_vendor_payments',
