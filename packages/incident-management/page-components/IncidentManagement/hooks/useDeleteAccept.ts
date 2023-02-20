@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeleteAccept = ({ userIncidentStatus, id, remarks, reftech }) => {
+const useDeleteAccept = ({ userIncidentStatus, id, remarks, refetch }) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
@@ -39,7 +39,7 @@ const useDeleteAccept = ({ userIncidentStatus, id, remarks, reftech }) => {
 				},
 			});
 			Toast.success(status);
-			reftech();
+			refetch();
 		} catch (err) {
 			if (!loading) {
 				Toast.error(err?.response?.data?.message || 'Something went Wrong');

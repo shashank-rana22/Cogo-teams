@@ -16,7 +16,7 @@ function IncidentManagement() {
 	const [activeTab, setActiveTab] = useState<string>(activeIncidentTab || 'requested');
 	const [payload, setPayload] = useState(null);
 	const [isSortActive, setIsSortActive] = useState(null);
-	const { globalFilters, setGlobalFilters, data, loading, reftech } = useGetIncidentMangement({ activeTab, payload });
+	const { globalFilters, setGlobalFilters, data, loading, refetch } = useGetIncidentMangement({ activeTab, payload });
 
 	useEffect(() => {
 		setPayload(null);
@@ -28,7 +28,7 @@ function IncidentManagement() {
 		isSortActive,
 		setIsSortActive,
 		setGlobalFilters,
-		reftech,
+		refetch,
 		setPayload,
 	);
 
@@ -59,7 +59,7 @@ function IncidentManagement() {
 						currentPage={pageIndex}
 						totalItems={total}
 						pageSize={pageSize}
-						onPageChange={(val:any) => setGlobalFilters({ ...globalFilters, pageIndex: val })}
+						onPageChange={(val) => setGlobalFilters({ ...globalFilters, pageIndex: val })}
 					/>
 				</div>
 			)}

@@ -1,5 +1,4 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';

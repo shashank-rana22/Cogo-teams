@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const useSave = ({ remarks, id, reftech, setShowModal }) => {
+const useSave = ({ remarks, id, refetch, setShowModal }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -23,7 +23,7 @@ const useSave = ({ remarks, id, reftech, setShowModal }) => {
 				},
 			});
 			Toast.success('Saved');
-			reftech();
+			refetch();
 			setShowModal(false);
 		} catch (e) {
 			if (!loading) {

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useRaisedAgain = ({ id, FileUrl, reftech, setShowModal }) => {
+const useRaisedAgain = ({ id, FileUrl, refetch, setShowModal }) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
@@ -32,7 +32,7 @@ const useRaisedAgain = ({ id, FileUrl, reftech, setShowModal }) => {
 				},
 			});
 			Toast.success('Raised');
-			reftech();
+			refetch();
 			setShowModal(false);
 		} catch (e) {
 			if (!loading) {

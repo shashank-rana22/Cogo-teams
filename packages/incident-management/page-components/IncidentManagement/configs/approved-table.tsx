@@ -12,10 +12,10 @@ interface PropsType {
 	isSortActive:string;
 	setIsSortActive:Function;
 	setGlobalFilters:Function;
-	reftech:Function;
+	refetch:Function;
 }
 
-const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, reftech }:PropsType) => [
+const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refetch }:PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
@@ -86,7 +86,7 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refte
 		id       : 'view',
 		accessor : (row) => (
 			<div>
-				<ViewRequested itemData={row} name="" reftech={reftech} />
+				<ViewRequested itemData={row} name="" refetch={refetch} />
 			</div>
 
 		),

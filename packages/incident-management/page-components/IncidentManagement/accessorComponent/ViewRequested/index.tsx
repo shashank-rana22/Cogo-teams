@@ -10,17 +10,17 @@ import RequestCN from './RequestCN';
 import SettlementModal from './SettlementModal';
 import TdsDeviationModal from './TdsDeviationModal';
 
-function ViewRequested({ itemData, name, reftech }) {
+function ViewRequested({ itemData, name, refetch }) {
 	const [remarks, setRemarks] = useState('');
 	const { type, id } = itemData || {};
 
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [showModal, setShowModal] = useState(false);
-	const { onSave, loadingOnSave } = useSave({ remarks, id, reftech, setShowModal });
+	const { onSave, loadingOnSave } = useSave({ remarks, id, refetch, setShowModal });
 	const { onRaiseAgain, loadingOnRaise } = useRaisedAgain({
 		FileUrl: selectedFile?.finalUrl,
 		id,
-		reftech,
+		refetch,
 		setShowModal,
 	});
 
