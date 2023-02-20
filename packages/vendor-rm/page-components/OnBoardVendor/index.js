@@ -22,7 +22,7 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState('contact_details');
+	const [activeStepper, setActiveStepper] = useState('vendor_services');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 

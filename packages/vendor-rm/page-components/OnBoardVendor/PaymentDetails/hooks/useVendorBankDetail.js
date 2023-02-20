@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
-import { merge } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 // import TABS_MAPPING from '../../../../constants/tabs';
@@ -28,13 +28,17 @@ function useVendorBankDetail({
 
 	const ifscCode = watch('ifsc_code');
 
+	const { payment_details } = vendorInformation;
+
+	const isUpdateAction = !isEmpty(payment_details);
+
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
 		method : 'get',
 	}, { manual: true });
 
 	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
-		url    : '/create_vendor_bank_detail',
+		url    : isUpdateAction ? '/update_vendor_bank_detail' : '/create_vendor_bank_detail',
 		method : 'post',
 	}, { manual: true });
 
@@ -78,7 +82,7 @@ function useVendorBankDetail({
 		});
 
 		try {
-			const response = await triggerCreateVendorBankDetail({
+			await triggerCreateVendorBankDetail({
 				data: {
 					...values,
 					bank_document_url : values.bank_document_url.finalUrl,
@@ -86,12 +90,10 @@ function useVendorBankDetail({
 				},
 			});
 
-			if (response?.data) {
-				Toast.success('Vendor Bank Detail added successfully');
-				setActiveStepper('verification');
-			}
+			Toast.success(`Bank Details ${isUpdateAction ? 'updated' : 'added'} successfully`);
+			setActiveStepper('verification');
 		} catch (err) {
-			// Toast.error(getApiErrorString(err?.response?.data) || 'Failed to login, please try again...');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to update, please try again...');
 		}
 	};
 
@@ -110,13 +112,11 @@ function useVendorBankDetail({
 	});
 
 	useEffect(() => {
-		const { payment_details = {}, bank_details = [] } = vendorInformation || {};
-
 		controls.forEach((field) => {
 			if (field.type === 'file') {
 				setValue(`${field.name}`, payment_details?.[field.name]?.finalUrl);
 			} else {
-				setValue(`${field.name}`, payment_details?.[field.name] || bank_details[0]?.[field.name]);
+				setValue(`${field.name}`, payment_details?.[field.name]);
 			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
