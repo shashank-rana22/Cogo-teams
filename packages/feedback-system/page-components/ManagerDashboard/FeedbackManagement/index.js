@@ -36,17 +36,12 @@ function FeedbackManagement() {
 		searchValue: query,
 	});
 
-	const { list: newTeamList = [], designations = [], total_count = '' } = feedbackData || {};
-
-	const feedbackControls = getFeedBackControls(designations);
-
-	const setFilter = (val, type) => {
-		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
-	};
+	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month', 'manager'];
 
 	const feedbackManagementColumns = useGetColumns({
 		getUserFeedbackList,
 		source: 'manager_feedback',
+		columnsToShow,
 	});
 
 	useEffect(() => {

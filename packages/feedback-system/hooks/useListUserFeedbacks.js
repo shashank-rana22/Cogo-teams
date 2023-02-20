@@ -13,12 +13,14 @@ const useListUserFeedbacks = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		team_data_required: userId ? true : undefined,
+		// team_data_required: userId ? true : undefined,
+
+		team_data_required: true,
 
 		filters: {
 			performed_by_id         : userId || undefined,
 			created_at_greater_than : userId ? getFirstDay().toLocaleDateString() : undefined,
-			rating_exists           : true,
+			// rating_exists           : true,
 		},
 
 		page: 1,

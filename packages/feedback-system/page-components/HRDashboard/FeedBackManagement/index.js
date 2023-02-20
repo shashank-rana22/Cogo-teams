@@ -2,10 +2,14 @@ import { Button, Upload, Placeholder } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { IcMArrowBack, IcMNotifications } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
+import useGetColumns from '../../../common/Columns';
 import EmptyState from '../../../common/EmptyState';
+import UserTableData from '../../../common/userTableData';
 import useGetManagerFeedbackProgress from '../../../hooks/useGetManagerFeedbackProgress';
+import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 
 import getControls from './manager-controls';
 import ManagersListCard from './ManagersListCard';
@@ -15,13 +19,22 @@ import styles from './styles.module.css';
 function FeedbackManagement() {
 	const Router = useRouter();
 
+	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
+
 	const [showUserId, setShowUserId] = useState('');
 
-	const { data = {}, loading = false, setParams } = useGetManagerFeedbackProgress();
+	// const { data = {}, loading = false, setParams } = useGetManagerFeedbackProgress();
+
+	const { feedbackData = {}, loading = false, setParams } = useListUserFeedbacks({ userId });
+
+	console.log('data', feedbackData);
+
+	const columnsToShow = ['name', 'cogo_id', 'role', 'manager', 'feedback', 'rating', 'month'];
+	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });
 
 	// const { fileValue, setFileValue, loading: uploadFileLoading = false } = useUploadNormalCSV();
 
-	const { list = [] } = data;
+	const { list = [] } = feedbackData;
 
 	const formProps = useForm();
 
@@ -87,18 +100,27 @@ function FeedbackManagement() {
 
 			{loading && showLoading()}
 
-			{list?.length === 0 && !loading && <EmptyState />}
+			{feedbackData?.length === 0 && !loading && <EmptyState />}
 
 			{!loading && (
 				<div>
-					{(list || []).map((item) => (
+					{/* {(list || []).map((item) => (
 						<ManagersListCard
 							key={item?.manager_id}
 							item={item}
 							showUserId={showUserId}
 							setShowUserId={setShowUserId}
 						/>
-					))}
+					))} */}
+					<UserTableData
+						columns={tableColumns}
+						list={list}
+						loading={loading}
+						// page_limit={page_limit}
+						// total_count={total_count}
+						// pagination={params.page}
+						// setPagination={setPage}
+					/>
 				</div>
 			)}
 		</div>

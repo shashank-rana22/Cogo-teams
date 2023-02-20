@@ -136,9 +136,19 @@ const dummyListData = [
 function ManagerDashboard() {
 	const [selectedBucket, setSelectedBucket] = useState('');
 
-	const { params, setParams, data, loading, setPage } = useListUserFeedbacks({});
+	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const monthControls = getMonthControls(params.filters.created_at_year);
+	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month'];
+	const feedbackColumns = useGetColumns({ source: 'manager_dashboard', columnsToShow });
+
+	const monthControls = getMonthControls();
+	const filterControls = getUserFilterControls();
+
+	const { watch: watchDateFilter, control } = useForm();
+
+	const monthFilter = watchDateFilter('created_at_month');
+	const yearFilter = watchDateFilter('created_at_year');
 
 	const { list: newTeamList, page_limit, total_count } = data || {};
 
