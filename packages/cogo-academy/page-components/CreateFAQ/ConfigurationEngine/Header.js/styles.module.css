@@ -1,0 +1,16 @@
+.configuration_text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #221f20;
+}
+
+.header_container {
+  display: flex;
+  justify-content: row;
+}
+
+.back_arrow {
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+}
