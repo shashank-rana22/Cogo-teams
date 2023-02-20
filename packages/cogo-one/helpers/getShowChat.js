@@ -4,7 +4,7 @@ function getShowChat({
 	searchValue = '',
 }) {
 	const { new_message_count = 0, user_name = '' } = item;
-	const searchName = user_name.toLowerCase();
+	const searchName = user_name?.toLowerCase();
 
 	const { status = 'all' } = appliedFilters;
 

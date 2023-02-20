@@ -43,6 +43,11 @@ const common_apis = {
 	],
 	app_dashboard: [
 		{
+			api          : 'assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_store_quota',
 			access_type  : 'private',
 			service_name : 'store',
