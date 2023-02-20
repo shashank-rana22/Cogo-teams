@@ -85,7 +85,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 				window.location.reload();
 			}
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error('Otp is invalid');
 		}
 	};
 
