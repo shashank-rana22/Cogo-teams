@@ -11,7 +11,7 @@ function getShowChat({
 	if (status === 'unread' && Number(new_message_count) === 0) {
 		return false;
 	}
-	return searchName.includes(searchValue);
+	return searchName?.includes(searchValue);
 }
 
 export default getShowChat;
