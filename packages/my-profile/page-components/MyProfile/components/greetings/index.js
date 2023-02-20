@@ -1,4 +1,4 @@
-import { Button, Modal, Avatar } from '@cogoport/components';
+import { Button, Modal, Avatar, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -85,13 +85,15 @@ function Greetings({
 
 			<div>
 				<div className={styles.greeting_text}>
-					<div
-						className={styles.name_wrapper}
 
-					>
-						{startCase(name)}
+					<Tooltip content={name}>
+						<div
+							className={styles.name_wrapper}
+						>
+							{startCase(name)}
 
-					</div>
+						</div>
+					</Tooltip>
 
 					,
 					{' '}
