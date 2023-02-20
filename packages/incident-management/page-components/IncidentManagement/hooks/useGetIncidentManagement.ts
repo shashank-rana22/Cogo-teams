@@ -32,15 +32,17 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	const { user: { id:userId = '' } } = UserData;
 
 	const [globalFilters, setGlobalFilters] = useState({
-		pageIndex    : 1,
-		search       : undefined,
-		type         : undefined,
-		request_type : undefined,
-		Date         : undefined,
-		status       : undefined,
+		pageIndex       : 1,
+		search          : undefined,
+		type            : undefined,
+		request_type    : undefined,
+		Date            : undefined,
+		requestedStatus : undefined,
+		rejectedStatus  : undefined,
 
 	});
-	const { search, type, request_type:requestType, Date, status, ...rest } = globalFilters;
+
+	const { search, type, request_type:requestType, requestedStatus, rejectedStatus, Date, ...rest } = globalFilters;
 
 	const { startDate, endDate } = Date || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -66,7 +68,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 				params: {
 					...rest,
 					sourceDashboard    : 'USER',
-					userIncidentStatus : status || activeStatus,
+					userIncidentStatus : requestedStatus || rejectedStatus || activeStatus,
 					isStatsRequired    : true,
 					createdBy          : payload?.[0] === 'raisedPayload' ? payload?.[2] : userId,
 					id                 : payload?.[0] === 'raisedPayload' ? payload?.[1] : undefined,
@@ -88,7 +90,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(rest), activeTab, query, requestType, Date, status]);
+	}, [JSON.stringify(rest), activeTab, query, requestType, Date, rejectedStatus, requestedStatus]);
 
 	const filtervalue = Object.values(globalFilters);
 
@@ -101,12 +103,13 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 
 	const clearFilters = () => {
 		setGlobalFilters({
-			pageIndex    : 1,
+			pageIndex       : 1,
 			search,
 			type,
-			request_type : requestType,
+			request_type    : requestType,
 			Date,
-			status       : undefined,
+			rejectedStatus  : undefined,
+			requestedStatus : undefined,
 		});
 	};
 
