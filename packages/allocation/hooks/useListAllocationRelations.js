@@ -13,9 +13,6 @@ const useAllocationRelations = () => {
 	});
 
 	const [activeTab, setActiveTab] = useState('active');
-
-	const [bulkMode, setBulkMode] = useState(false);
-
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 	const [showCreateRelationModal, setShowCreateRelationModal] = useState(false);
 
@@ -68,8 +65,6 @@ const useAllocationRelations = () => {
 		showCreateRelationModal,
 		setShowCreateRelationModal,
 		fetchList: refetch,
-		bulkMode,
-		setBulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
 		activeTab,

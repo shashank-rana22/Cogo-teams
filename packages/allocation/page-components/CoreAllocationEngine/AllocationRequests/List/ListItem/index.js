@@ -1,4 +1,4 @@
-import { Badge, Tooltip, Popover } from '@cogoport/components';
+import { Checkbox, Badge, Tooltip, Popover } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -75,7 +75,6 @@ function ListItem(props) {
 	const {
 		data,
 		onClickStatusChange,
-		isSelectable,
 		isSelected,
 		onCardClick,
 	} = props;
@@ -84,14 +83,15 @@ function ListItem(props) {
 
 	return (
 		<div
-			className={
-			`${styles.container}
-			${isSelected && styles.card_selected}
-			${isSelectable && styles.selectable}`
-}
-			role="presentation"
-			onClick={onCardClick}
+			className={styles.container}
 		>
+			<Checkbox
+				label=""
+				checked={isSelected}
+				onChange={onCardClick}
+				className={styles.bulk_select_checkbox}
+			/>
+
 			{columnsMapping.map((columnDetails) => {
 				const { key, flex, label, getValue } = columnDetails;
 

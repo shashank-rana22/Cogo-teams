@@ -1,4 +1,4 @@
-import { Chips, Checkbox, Button, Toggle } from '@cogoport/components';
+import { Checkbox, Button, Toggle } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import SearchInput from '../../../../common/SearchInput';
@@ -18,8 +18,6 @@ function Header(props) {
 		setSearchValue,
 		onClearSelection,
 		applyBulkFilter,
-		onChangeCheckbox,
-		bulkMode,
 		selectAll,
 		onItemChangeInChips,
 		checkedRowsId,
@@ -29,6 +27,8 @@ function Header(props) {
 	const { service_type: toggleValue, id } = params.filters || {};
 
 	const isBulkUpdateMode = !isEmpty(checkedRowsId);
+
+	const selectedItemsForUpdate = isBulkUpdateMode ? checkedRowsId.length : '';
 
 	return (
 		<>
@@ -81,21 +81,44 @@ function Header(props) {
 			<div className={styles.bulk_update_container}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Checkbox
-						label="Bulk update mode"
-						checked={bulkMode}
-						style={{ paddingLeft: '0px' }}
-						onChange={(e) => onChangeCheckbox(e)}
-						disabled={disabled}
+						label="Select All"
+						checked={selectAll}
+						onChange={
+						(e) => onItemChangeInChips(e?.target?.checked)
+}
+						className={styles.select_all_checkbox}
 					/>
 
 					<Button
 						size="sm"
 						themeType="primary"
-						disabled={!bulkMode || !isBulkUpdateMode}
+						disabled={!isBulkUpdateMode}
 						onClick={applyBulkFilter}
 					>
 						Apply Bulk Filter
 					</Button>
+
+					{!isEmpty(checkedRowsId) && (
+						<div className={styles.selection_text}>
+							<div className={styles.text}>
+								{' '}
+								You have selected
+								{' '}
+								{checkedRowsId.length}
+								{' '}
+								row(s)
+							</div>
+
+							<Button
+								size="md"
+								themeType="linkUi"
+								onClick={onClearSelection}
+								style={{ backgroundColor: '#F8F2E7', padding: 0 }}
+							>
+								Clear Selection
+							</Button>
+						</div>
+					)}
 				</div>
 
 				<Button
@@ -104,43 +127,11 @@ function Header(props) {
 					disabled={isEmpty(id)}
 					onClick={() => setShowModal(true)}
 				>
-					Approve All
+					APPROVE ALL
+					{' '}
+					{selectedItemsForUpdate}
 				</Button>
-			</div>
 
-			<div>
-				{(!isEmpty(checkedRowsId) && bulkMode) && (
-					<div className={styles.selection_text}>
-						<div className={styles.text}>
-							{' '}
-							You have selected
-							{' '}
-							{checkedRowsId.length}
-							{' '}
-							row(s)
-						</div>
-
-						<Button
-							size="md"
-							themeType="linkUi"
-							onClick={() => onClearSelection()}
-							style={{ backgroundColor: '#F8F2E7', padding: 0 }}
-						>
-							clear selection
-						</Button>
-					</div>
-				)}
-
-				<Chips
-					key={bulkMode}
-					selectedItems={selectAll}
-					items={[{
-						children : 'Select All',
-						key      : 'select_all',
-						disabled : !bulkMode,
-					}]}
-					onItemChange={onItemChangeInChips}
-				/>
 			</div>
 
 		</>

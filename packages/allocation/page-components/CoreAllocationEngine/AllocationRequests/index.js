@@ -26,8 +26,6 @@ function Requests() {
 		onChangeParams,
 		searchValue,
 		setSearchValue,
-		bulkMode,
-		setBulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
 		onChangeCheckbox,
@@ -42,12 +40,10 @@ function Requests() {
 				onChangeParams={onChangeParams}
 				params={params}
 				setParams={setParams}
-				bulkMode={bulkMode}
 				setShowModal={setShowModal}
 				checkedRowsId={checkedRowsId}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
-				onChangeCheckbox={onChangeCheckbox}
 				{...restProps}
 			/>
 
@@ -56,7 +52,6 @@ function Requests() {
 				loading={listLoading}
 				onChangeParams={onChangeParams}
 				fetchList={refetch}
-				bulkMode={bulkMode}
 				checkedRowsId={checkedRowsId}
 				setCheckedRowsId={setCheckedRowsId}
 			/>

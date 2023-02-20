@@ -1,4 +1,4 @@
-import { Chips, Button, Checkbox } from '@cogoport/components';
+import { Button, Checkbox } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -9,8 +9,6 @@ function BulkUpdateMode({
 	setCheckedRowsId = () => {},
 	confirmModalState,
 	setConfirmModalState = () => {},
-	bulkMode = false,
-	setBulkMode = () => {},
 	params,
 	setParams = () => {},
 	selectAll,
@@ -53,27 +51,6 @@ function BulkUpdateMode({
 		});
 	};
 
-	const onChangeCheckbox = (e) => {
-		if (e.target.checked === false) {
-			setCheckedRowsId([]);
-			setSelectAll('');
-			setConfirmModalState((prev) => ({
-				...prev,
-				showApproveAllButton: e.target.checked,
-			}));
-			if ((!isEmpty(checkedRowsId))) {
-				setParams((p) => ({
-					...p,
-					filters: {
-						...((p || {}).filters || {}),
-						id: undefined,
-					},
-				}));
-			}
-		}
-		setBulkMode(e.target.checked);
-	};
-
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
 
@@ -92,83 +69,77 @@ function BulkUpdateMode({
 		setSelectAll('');
 	};
 
+	const onItemChangeInChips = (val) => {
+		setSelectAll(val);
+		onSelectAll(val);
+	};
+
+	const selectedItemsForUpdate = !isEmpty(checkedRowsId) ? checkedRowsId.length : '';
+
 	return (
-		<>
-			<div className={styles.bulk_update_container}>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Checkbox
-						label="Bulk update mode"
-						checked={bulkMode}
-						style={{ paddingLeft: '0px' }}
-						onChange={(e) => onChangeCheckbox(e)}
-					/>
-					<Button
-						size="sm"
-						themeType="primary"
-						disabled={!bulkMode || isEmpty(checkedRowsId)}
-						onClick={() => applyBulkFilter()}
-					>
-						{' '}
-						Apply Bulk Filter
-						{!isEmpty(checkedRowsId) ? ` (${checkedRowsId.length})` : ''}
-					</Button>
-				</div>
+		<div className={styles.bulk_update_container}>
+			<div style={{ display: 'flex', alignItems: 'center' }}>
+				<Checkbox
+					label="Select All"
+					checked={selectAll}
+					onChange={
+						(e) => onItemChangeInChips(e?.target?.checked)
+}
+					className={styles.select_all_checkbox}
+				/>
 
 				<Button
 					size="sm"
 					themeType="primary"
-					disabled={!confirmModalState.showApproveAllButton}
-					onClick={() => {
-						setConfirmModalState(() => ({
-							type                  : 'approve_all',
-							relationData          : {},
-							showConfirmationModal : true,
-						}));
-					}}
+					disabled={isEmpty(checkedRowsId)}
+					onClick={applyBulkFilter}
 				>
+					Apply bulk filter
 					{' '}
-					Approve All
-					{!isEmpty(checkedRowsId) ? `(${checkedRowsId.length})` : ''}
 				</Button>
-			</div>
-			{(!isEmpty(checkedRowsId) && bulkMode) && (
-				<div className={styles.selection_text}>
-					<div className={styles.text}>
-						{' '}
-						You have selected
-						{' '}
-						{checkedRowsId.length}
-						{' '}
-						row(s)
 
+				{!isEmpty(checkedRowsId) && (
+					<div className={styles.selection_text}>
+						<div className={styles.text}>
+							{' '}
+							You have selected
+							{' '}
+							{checkedRowsId.length}
+							{' '}
+							row(s)
+						</div>
+
+						<div className={styles.clear_selection_button_container}>
+							<Button
+								size="md"
+								themeType="linkUi"
+								onClick={() => onClearSelection()}
+								style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
+							>
+								Clear Selection
+							</Button>
+						</div>
 					</div>
-
-					<div className={styles.clear_selection_button_container}>
-						<Button
-							size="md"
-							themeType="linkUi"
-							onClick={() => onClearSelection()}
-							style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
-						>
-							clear selection
-						</Button>
-					</div>
-
-				</div>
-			)}
-			<div>
-
-				<Chips
-					selectedItems={selectAll}
-					items={[{ children: 'Select All', key: 'select_all', disabled: !bulkMode }]}
-					onItemChange={(val) => {
-						setSelectAll(val);
-						onSelectAll(val);
-					}}
-				/>
-
+				)}
 			</div>
-		</>
+
+			<Button
+				size="sm"
+				themeType="primary"
+				disabled={!confirmModalState.showApproveAllButton}
+				onClick={() => {
+					setConfirmModalState(() => ({
+						type                  : 'approve_all',
+						relationData          : {},
+						showConfirmationModal : true,
+					}));
+				}}
+			>
+				APPROVE ALL
+				{' '}
+				{selectedItemsForUpdate}
+			</Button>
+		</div>
 	);
 }
 

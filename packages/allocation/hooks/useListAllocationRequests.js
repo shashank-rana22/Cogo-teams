@@ -7,8 +7,7 @@ const useListAllocationRequests = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
-	const [bulkMode, setBulkMode] = useState(false);
-	const [selectAll, setSelectAll] = useState('');
+	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 
 	const [params, setParams] = useState({
@@ -97,8 +96,6 @@ const useListAllocationRequests = () => {
 				}));
 			}
 		}
-
-		setBulkMode(e.target.checked);
 	};
 
 	const onClearSelection = () => {
@@ -112,7 +109,7 @@ const useListAllocationRequests = () => {
 			},
 		}));
 
-		setSelectAll('');
+		setSelectAll(false);
 	};
 
 	const onItemChangeInChips = (val) => {
@@ -134,8 +131,6 @@ const useListAllocationRequests = () => {
 		applyBulkFilter,
 		onChangeCheckbox,
 		onSelectAll,
-		bulkMode,
-		setBulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
 		selectAll,

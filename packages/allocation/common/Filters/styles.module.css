@@ -3,7 +3,6 @@
 		width: 500px;
 	}
 
-	/* stylelint-disable-next-line selector-class-pattern */
 	:global(.tippy-content) {
 		box-sizing: border-box;
 		width: 100%;

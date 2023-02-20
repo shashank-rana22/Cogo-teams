@@ -15,8 +15,6 @@ function List({
 	loading,
 	params,
 	setParams = () => {},
-	bulkMode = false,
-	setBulkMode = () => {},
 	checkedRowsId = [],
 	setCheckedRowsId = () => {},
 	activeTab,
@@ -25,10 +23,9 @@ function List({
 	paginationData = {},
 	getNextPage,
 	searchQuery,
-	fetchList = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
-	const [selectAll, setSelectAll] = useState('');
+	const [selectAll, setSelectAll] = useState(false);
 
 	if (loading) {
 		return <ShimmerState />;
@@ -56,6 +53,27 @@ function List({
 		}));
 	};
 
+	const onChangeCheckbox = (e) => {
+		if (!e.target.checked) {
+			setCheckedRowsId([]);
+			setSelectAll('');
+			setConfirmModalState((prev) => ({
+				...prev,
+				showApproveAllButton: e.target.checked,
+			}));
+
+			if ((!isEmpty(checkedRowsId))) {
+				setParams((p) => ({
+					...p,
+					filters: {
+						...((p || {}).filters || {}),
+						id: undefined,
+					},
+				}));
+			}
+		}
+	};
+
 	return (
 		<div>
 			{activeTab === 'pending' ? (
@@ -65,8 +83,6 @@ function List({
 					setCheckedRowsId={setCheckedRowsId}
 					confirmModalState={confirmModalState}
 					setConfirmModalState={setConfirmModalState}
-					bulkMode={bulkMode}
-					setBulkMode={setBulkMode}
 					params={params}
 					setParams={setParams}
 					selectAll={selectAll}
@@ -85,9 +101,8 @@ function List({
 					<UserActions
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
-						fetchList={fetchList}
 						checkedRowsId={checkedRowsId}
-						setBulkMode={setBulkMode}
+						onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
 					/>
 				</Modal>
 			)}
@@ -99,7 +114,6 @@ function List({
 						item={item}
 						checkedRowsId={checkedRowsId}
 						setCheckedRowsId={setCheckedRowsId}
-						bulkMode={bulkMode}
 						activeTab={activeTab}
 						setConfirmModalState={setConfirmModalState}
 					/>

@@ -1,4 +1,4 @@
-import { Popover, Pill, Tooltip } from '@cogoport/components';
+import { Checkbox, Popover, Pill, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -121,26 +121,25 @@ const COLUMNS_MAPPING = [
 	},
 ];
 
-function ListItem({
-	item,
-	checkedRowsId = [],
-	setCheckedRowsId = () => {},
-	bulkMode = false,
-	activeTab,
-	setConfirmModalState = () => {},
-}) {
+function ListItem(props) {
+	const {
+		item,
+		checkedRowsId = [],
+		setCheckedRowsId = () => {},
+		activeTab,
+		setConfirmModalState = () => {},
+	} = props;
+
 	const itemId = `${item?.id}`;
-	const isSelected = bulkMode && checkedRowsId.includes(itemId);
+	const isSelected = checkedRowsId.includes(itemId);
 
 	const [showActions, setShowActions] = useState(false);
 
 	const onCardClick = () => {
-		if (bulkMode) {
-			if (!isSelected) {
-				setCheckedRowsId([...checkedRowsId, itemId]);
-			} else {
-				setCheckedRowsId(checkedRowsId.filter((Id) => Id !== itemId));
-			}
+		if (!isSelected) {
+			setCheckedRowsId([...checkedRowsId, itemId]);
+		} else {
+			setCheckedRowsId(checkedRowsId.filter((Id) => Id !== itemId));
 		}
 	};
 
@@ -153,12 +152,21 @@ function ListItem({
 		}));
 	};
 
+	console.log('activeTab', activeTab);
+
 	return (
 		<div
-			className={`${styles.list_item_container} ${isSelected && styles.orange} ${bulkMode && styles.selected}`}
-			role="presentation"
-			onClick={() => onCardClick(item)}
+			className={styles.list_item_container}
 		>
+			{activeTab === 'pending' && (
+				<Checkbox
+					label=""
+					checked={isSelected}
+					onChange={onCardClick}
+					className={styles.bulk_select_checkbox}
+				/>
+			)}
+
 			{COLUMNS_MAPPING.map((column) => {
 				const { key, label, getValue, flex, tab } = column;
 
