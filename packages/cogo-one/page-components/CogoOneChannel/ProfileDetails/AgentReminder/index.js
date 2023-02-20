@@ -59,7 +59,11 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 
 	if (!organizationId) {
 		return (
-			<div className={styles.empty_container}>No Data Found...</div>
+			<>
+				<div className={styles.title}>Set Reminder</div>
+				<div className={styles.empty_container}>No Data Found...</div>
+
+			</>
 		);
 	}
 

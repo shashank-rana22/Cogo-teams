@@ -54,7 +54,6 @@ function Templates({
 	});
 
 	const handleSelect = (val, status, name) => {
-		console.log('name', name);
 		if (!previewData && status === 'approved') {
 			setShowPreview(true);
 			setPreviewData(val);
@@ -108,12 +107,12 @@ function Templates({
 								description: messageContent = '',
 								whatsapp_approval_status,
 								html_template,
-								name: templateName,
+								name: templateTitle,
 							}) => (
 								<div
 									role="presentation"
 									className={cl`${!openCreateReply ? styles.each_message : styles.disable}`}
-									onClick={() => handleSelect(html_template, whatsapp_approval_status, templateName)}
+									onClick={() => handleSelect(html_template, whatsapp_approval_status, templateTitle)}
 									style={{
 										cursor: previewData || whatsapp_approval_status !== 'approved'
 											? 'not-allowed' : 'pointer',

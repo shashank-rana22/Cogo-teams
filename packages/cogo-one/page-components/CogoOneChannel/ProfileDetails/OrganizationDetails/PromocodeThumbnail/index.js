@@ -9,7 +9,11 @@ import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
 function PromocodeThumbnail({ list = [] }) {
-	const colors = ['#e66465', '#ff7675', '#55E6C1'];
+	const colors = [
+		'rgba(204, 197, 249, 0.8) rgba(195, 216, 254, 0.6)',
+		'rgba(245, 191, 157, 0.7) rgba(239, 135, 152, 0.52)',
+		'rgba(209, 255, 241, 0.8) rgba(108, 188, 227, 0.6)',
+	];
 
 	const getCardColor = (index) => colors[index % colors.length];
 

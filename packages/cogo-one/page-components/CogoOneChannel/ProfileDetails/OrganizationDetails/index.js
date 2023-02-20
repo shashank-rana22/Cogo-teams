@@ -30,9 +30,12 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 
 	const { total_redeemable } = pointData || {};
 
-	if (organizationId) {
+	if (isEmpty(organizationId)) {
 		return (
-			<EmptyState />
+			<div className={styles.container}>
+				<div className={styles.title}>Organisation Details</div>
+				<EmptyState />
+			</div>
 		);
 	}
 
@@ -107,10 +110,16 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 					</div>
 				</>
 			)}
-			<div className={styles.agent_title}>Agent Details</div>
-			<div className={styles.agent_div}>
-				<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
-			</div>
+
+			{!isEmpty(agent) && (
+				<>
+					<div className={styles.agent_title}>Agent Details</div>
+					<div className={styles.agent_div}>
+						<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
+					</div>
+				</>
+
+			)}
 
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
 			<div className={styles.points}>
@@ -126,7 +135,7 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 				{pointLoading ? (
 					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
 				) : (
-					<div className={styles.value}>{total_redeemable}</div>
+					<div className={styles.value}>{total_redeemable || '0'}</div>
 				)}
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>

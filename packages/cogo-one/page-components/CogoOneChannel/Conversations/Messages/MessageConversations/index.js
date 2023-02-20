@@ -41,7 +41,7 @@ function MessageConversations({
 	lastPage = false,
 }) {
 	const messageRef = useRef();
-	const { id = '' } = activeMessageCard;
+	const { id = '', channel_type = '' } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -103,6 +103,7 @@ function MessageConversations({
 				},
 				sendCommunicationTemplate,
 				communicationLoading,
+				channel_type,
 			},
 		});
 	};
