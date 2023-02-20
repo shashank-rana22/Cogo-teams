@@ -81,7 +81,6 @@ function MapView({
 								&& (
 									<TheGlobe
 										country={country}
-										globeLoading={globeLoading}
 										pointsList={pointsList}
 										globeGL={globeGL}
 									/>

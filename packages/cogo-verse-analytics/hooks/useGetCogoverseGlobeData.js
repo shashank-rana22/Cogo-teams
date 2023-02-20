@@ -14,7 +14,7 @@ const useGetCogoverseGlobeData = ({ country = {}, circleTab = '' }) => {
 		params : {
 
 		},
-	});
+	}, { manual: true });
 
 	useEffect(() => {
 		refetch()

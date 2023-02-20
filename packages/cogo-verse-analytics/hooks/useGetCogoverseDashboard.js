@@ -13,7 +13,7 @@ const useGetCogoverseDashboard = ({ country = {} }) => {
 		params : {
 
 		},
-	});
+	}, { manual: true });
 
 	useEffect(() => {
 		refetch()

@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function TheGLobe(
 	{
 		country = {},
-		globeLoading = false,
 		pointsList = {},
 		globeGL = {},
 	},
@@ -27,7 +26,7 @@ function TheGLobe(
 
 	// Globe Methods ------------------------------------------------------------------------------
 
-	if (!isEmpty(globeGL.current)) {
+	if (!isEmpty(globeGL?.current)) {
 		globeGL.current.controls().autoRotate = true;
 		globeGL.current.controls().autoRotateSpeed = 0.5;
 		globeGL.current.renderer().alpha = true;
@@ -36,28 +35,29 @@ function TheGLobe(
 	}
 
 	// experiments
-	// console.log('globeGL?.current?.scene()?.children', globeGL?.current?.scene()?.children, !isEmpty(globeGL?.current?.scene()?.children));
-	// if (!isEmpty(globeGL?.current?.scene()?.children)) {
-	// 	console.log('I came in');
-	// 	globeGL.current.scene().children[2].visible = true;
-	// 	globeGL.current.scene().children[1].intensity = 1.25;
-	// 	globeGL.current.scene().children[2].intensity = 0.25;
-	// }
+	console.log('(globeGL?.current?.scene()?.children', globeGL?.current?.scene()?.children);
+	if (!isEmpty(globeGL?.current?.scene()?.children[2].visible
+	 	&& globeGL?.current?.scene()?.children[1].intensity
+		 && globeGL?.current?.scene()?.children[2].intensity)) {
+		globeGL.current.scene().children[2].visible = true;
+		globeGL.current.scene().children[1].intensity = 1.25;
+		globeGL.current.scene().children[2].intensity = 0.25;
+	}
 
 	// Globe Functions
 
 	const startRotation = () => {
-		if (!isEmpty(globeGL.current)) {
+		if (!isEmpty(globeGL?.current)) {
 			globeGL.current.controls().autoRotateSpeed = 0.5;
 		}
 	};
 	const stopRotation = () => {
-		if (!isEmpty(globeGL.current)) {
+		if (!isEmpty(globeGL?.current)) {
 			globeGL.current.controls().autoRotateSpeed = 0;
 		}
 	};
 	const setLocation = (locationData = {}, rotationSpeed = 0) => {
-		if (!isEmpty(globeGL.current)) {
+		if (!isEmpty(globeGL?.current)) {
 			globeGL.current.pointOfView(locationData, rotationSpeed);
 		}
 	};
