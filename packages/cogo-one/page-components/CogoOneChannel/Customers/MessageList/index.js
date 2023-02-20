@@ -97,7 +97,6 @@ function MessageList({
 									onClick={() => setActiveMessage(item)}
 								>
 									<div className={styles.card}>
-
 										<div className={styles.user_information}>
 											<div className={styles.avatar_Container}>
 												<UserAvatar
@@ -107,7 +106,6 @@ function MessageList({
 												<div className={styles.user_details}>
 													<div className={styles.user_name}>
 														{startCase(user_name)}
-														{' '}
 													</div>
 													<div className={styles.organisation}>
 														{startCase(organization_name)}
@@ -125,9 +123,7 @@ function MessageList({
 												${chat_status === 'escalated' ? styles.escalated : ''}
 												`}
 														>
-
 															{startCase(chat_status)}
-
 														</div>
 
 													)}
@@ -140,7 +136,6 @@ function MessageList({
 													)?.renderTime}
 												</div>
 											</div>
-
 										</div>
 
 										<div className={styles.content_div}>
@@ -156,16 +151,13 @@ function MessageList({
 
 												</div>
 											)}
-
 										</div>
-
 									</div>
 								</div>
 							)
 						);
 					})}
 				</div>
-
 			)}
 		</>
 	);

@@ -8,7 +8,7 @@ function useSendCommunicationTemplate({ formattedData = {}, setOpenModal = () =>
 		agentID: profile?.user?.id || {},
 	}));
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_communniation',
+		url    : '/create_communication',
 		method : 'post',
 	}, { manual: true });
 
@@ -27,6 +27,7 @@ function useSendCommunicationTemplate({ formattedData = {}, setOpenModal = () =>
 				},
 			});
 			setOpenModal(false);
+			Toast.success('Send Successfully');
 		} catch (error) {
 			Toast.error(error);
 		}
