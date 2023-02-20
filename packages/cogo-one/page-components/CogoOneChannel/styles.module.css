@@ -3,7 +3,7 @@
     margin-top: 10px;
     position: relative;
     height: 92vh;
-    width: 98%;
+    width: calc(100% - 14px);
 }
 
 .chat_details_continer {
