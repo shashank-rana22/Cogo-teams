@@ -32,7 +32,7 @@ function useVendorServices({
 		general : { query = {} },
 	} = useSelector((state) => state);
 
-	const { partner_id = '' } = query;
+	const { partner_id = '', vendor_id } = query;
 
 	const { vendor_services } = vendorInformation;
 
@@ -48,8 +48,8 @@ function useVendorServices({
 			const { formattedServices = [] } = getFormattedServices({ data, partner_id });
 
 			const payload = {
-				vendor_id : vendorInformation?.vendor_details?.id,
-				services  : formattedServices,
+				vendor_id,
+				services: formattedServices,
 			};
 
 			await trigger({ data: payload });
