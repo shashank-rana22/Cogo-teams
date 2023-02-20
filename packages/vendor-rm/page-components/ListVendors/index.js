@@ -1,8 +1,6 @@
 import { Popover, Input, Pagination, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import EmptyPage from './EmptyPage';
 import FilterContent from './FilterContent';
