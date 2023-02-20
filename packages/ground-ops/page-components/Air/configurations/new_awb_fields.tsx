@@ -1,9 +1,24 @@
-export const CargoHandedOverAtOrigin = {
+export const NewAWBFields = {
 	fields: [
 		{
-			key   : 'serialId',
-			label : 'SID',
-			span  : 0.8,
+			key    : 'serialId',
+			label  : 'SID',
+			span   : 0.8,
+			render : (item) => (
+				<div className="card-list-item-value">
+					{item.state}
+				</div>
+			),
+		},
+		{
+			key    : 'awbNumber',
+			label  : 'AWB',
+			span   : 1.5,
+			render : (item) => (
+				<div className="card-list-item-value">
+					{item.state}
+				</div>
+			),
 		},
 		{
 			key   : 'customer_name',

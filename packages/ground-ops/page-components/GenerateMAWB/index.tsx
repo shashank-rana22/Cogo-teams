@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
@@ -92,6 +92,25 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 			</div>
 			<div className={styles.file_container}>
 				{(back || viewDoc) && (
+					<Modal show={back || viewDoc} size="lg" className={styles.modal_container}>
+						<Modal.Body style={{ minHeight: '720px' }}>
+							<GenerateMawbDoc
+						// shipment_data={shipment_data}
+								completeTask={completeTask}
+								task={task}
+								viewDoc={viewDoc}
+						// details={details}
+						// setIsAmended={setIsAmended}
+						// isAmended={isAmended}
+								formData={form_data}
+								setBack={setBack}
+								back={back}
+							/>
+						</Modal.Body>
+
+					</Modal>
+				)}
+				{/* {(back || viewDoc) && (
 					<GenerateMawbDoc
 						// shipment_data={shipment_data}
 						completeTask={completeTask}
@@ -105,7 +124,7 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 						back={back}
 						// primary_service={primary_service}
 					/>
-				)}
+				)} */}
 			</div>
 		</div>
 	);

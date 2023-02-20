@@ -1,36 +1,40 @@
+import { Input } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
-import CargoHandoverAtOrigin from './components/CargoHandoverAtOrigin';
+import Filters from '../Filters';
+
 import CompletedTasks from './components/CompletedTasks';
 import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
+import NewAWB from './components/NewAWB';
 import UpdateOriginCustom from './components/UpdateOriginCustom';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
 
 const tabs = [
 	{
-		key   : 'cargo_handover_at_origin_date',
-		label : 'Cargo handover at origin Date',
+		key   : 'new_awb',
+		label : 'New AWB',
 	},
 	{
-		key   : 'update_origin_custom_date',
-		label : 'Update Origin Custom Date',
+		key   : 'approval_pending',
+		label : 'Approval Pending',
 	},
 	{
-		key   : 'generate_final_airway_bill',
-		label : 'Generate Final Airway Bill',
+		key   : 'approved_awb',
+		label : 'Approved AWB',
 	},
 	{
-		key   : 'completed_tasks',
-		label : 'Completed Tasks',
+		key   : 'completed_awb',
+		label : 'Completed AWB',
 	},
 ];
 
 const tabsComponentMapping = {
-	cargo_handover_at_origin_date : CargoHandoverAtOrigin,
-	update_origin_custom_date     : UpdateOriginCustom,
-	generate_final_airway_bill    : GenerateFinalAirwayBill,
-	completed_tasks               : CompletedTasks,
+	new_awb          : NewAWB,
+	approval_pending : UpdateOriginCustom,
+	approved_awb     : GenerateFinalAirwayBill,
+	completed_awb    : CompletedTasks,
 };
 
 function Air() {
@@ -45,7 +49,7 @@ function Air() {
 	const { data, loading, listAPi } = useListShipmentPendingTasks();
 
 	useEffect(() => {
-		if (subActiveTab === 'cargo_handover_at_origin_date') { listAPi(); }
+		if (subActiveTab === 'new_awb') { listAPi(); }
 	}, [subActiveTab]);
 
 	return (
@@ -72,6 +76,16 @@ function Air() {
 						</div>
 					))}
 				</div>
+			</div>
+			<div className={styles.filters_container}>
+				<Input
+					suffix={<IcMSearchlight className="search_icon" />}
+					className={styles.input_search}
+					style={{ width: '260px', height: '26px' }}
+					placeholder="Search by SID or AWB Number"
+					type="text"
+				/>
+				<Filters />
 			</div>
 			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} data={data} loading={loading} />}
 		</div>

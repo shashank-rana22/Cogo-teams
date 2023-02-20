@@ -15,7 +15,7 @@ const mawbControls = () => [
 	},
 	{
 		name        : 'shipper_address',
-		className   : 'primary md',
+		className   : 'textarea',
 		label       : "Shipper's Address:",
 		type        : 'textarea',
 		span        : 12,
@@ -42,7 +42,7 @@ const mawbControls = () => [
 	},
 	{
 		name        : 'consignee_address',
-		className   : 'primary md',
+		className   : 'textarea',
 		label       : "Consignee's Address:",
 		type        : 'textarea',
 		span        : 12,
@@ -76,17 +76,6 @@ const mawbControls = () => [
 		},
 	},
 	{
-		name      : 'accounting_information',
-		type      : 'text',
-		className : 'primary lg',
-		label     : 'Accounting Information:',
-		value     : 'Freight PrePaid',
-		span      : 6,
-		rules     : {
-			require: 'Accounting Information is Required',
-		},
-	},
-	{
 		name      : 'iata_code',
 		type      : 'text',
 		className : 'primary lg',
@@ -95,6 +84,17 @@ const mawbControls = () => [
 		span      : 6,
 		rules     : {
 			require: 'Iata Code is Required',
+		},
+	},
+	{
+		name      : 'accounting_information',
+		type      : 'textarea',
+		className : 'textarea',
+		label     : 'Accounting Information:',
+		value     : 'Freight PrePaid',
+		span      : 6,
+		rules     : {
+			require: 'Accounting Information is Required',
 		},
 	},
 	{

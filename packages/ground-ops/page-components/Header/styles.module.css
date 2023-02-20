@@ -16,28 +16,3 @@
 	border-radius: 8px;
 }
 
-.container .search_icon {
-	width: 20px;
-	height: 20px;
-	margin-top: 5px;
-}
-
-.container .cross_icon {
-	margin-top: 5px;
-	cursor: pointer;
-}
-
-.filters_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 20px 0;
-}
-
-.input_search {
-	height: 32px !important;
-
-	:global(.ui_input_control) {
-		font-size: 12px !important;
-	}
-}

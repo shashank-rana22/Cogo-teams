@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 
 import GenerateMAWB from '../../../GenerateMAWB';
 import List from '../../commons/List';
-import { CargoHandedOverAtOrigin } from '../../configurations/cargo_handedover_at_origin';
+import { NewAWBFields } from '../../configurations/new_awb_fields';
 
-function CargoHandoverAtOrigin({ data, loading }) {
-	const { fields } = CargoHandedOverAtOrigin;
+function NewAWB({ data, loading }) {
+	const { fields } = NewAWBFields;
 	const [generate, setGenerate] = useState(false);
 	const [item, setItem] = useState({});
 	const functions = {
@@ -24,4 +24,4 @@ function CargoHandoverAtOrigin({ data, loading }) {
 	);
 }
 
-export default CargoHandoverAtOrigin;
+export default NewAWB;
