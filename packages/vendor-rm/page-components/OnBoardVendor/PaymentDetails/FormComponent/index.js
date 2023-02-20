@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../hooks/useVendorBankDetail';

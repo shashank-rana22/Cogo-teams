@@ -10,7 +10,7 @@ import TabularSection from './TabularSection';
 
 function ListVendors() {
 	const {
-		// loading,
+		loading,
 		data = {},
 		// GetVendorList = () => {},
 		params = {},
@@ -23,10 +23,6 @@ function ListVendors() {
 	const { total_count, page_limit:pageLimit } = data || {};
 	const router = useRouter();
 
-	if (data.total_count === 0) {
-		return <EmptyPage />;
-	}
-
 	const tagClick = ({ status:tagStatus }) => {
 		setParams((prev) => ({
 			...prev,
@@ -38,6 +34,10 @@ function ListVendors() {
 	};
 
 	const { list = [] } = data;
+
+	if (data.total_count === 0) {
+		return <EmptyPage />;
+	}
 
 	return (
 		<>
@@ -93,6 +93,7 @@ function ListVendors() {
 			</div>
 
 			<TabularSection
+				loading={loading}
 				data={list}
 				columns={columns}
 			/>
