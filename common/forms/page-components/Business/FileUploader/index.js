@@ -30,7 +30,6 @@ function FileUploader(props) {
 			}]);
 		}
 		if (multiple && typeof (fileUrls) !== 'string' && defaultValues !== undefined) {
-			console.log('run');
 			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
 			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
 
