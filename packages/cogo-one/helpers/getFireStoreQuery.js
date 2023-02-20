@@ -4,9 +4,7 @@ import {
 	where,
 } from 'firebase/firestore';
 
-import global from '../constants/IDS_CONSTANTS';
-
-function getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, appliedFilters }) {
+function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isomniChannelAdmin = false }) {
 	let firestoreQuery;
 	let queryFilters = [];
 
@@ -18,12 +16,7 @@ function getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, applied
 		}
 	});
 
-	if (
-		userRoleIds.includes(global.TECH_SUPERADMIN_ID)
-        || userRoleIds.includes(global.ADMIN_ID)
-        || userRoleIds.includes(global.SUPERADMIN_ID)
-        || userRoleIds.includes(global.TRADE_EXPERT_TEAM_LEAD_LONG_TAIL_ID)
-	) {
+	if (isomniChannelAdmin) {
 		firestoreQuery = query(
 			omniChannelCollection,
 			...queryFilters,

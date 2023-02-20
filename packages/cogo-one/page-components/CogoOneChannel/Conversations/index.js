@@ -9,6 +9,7 @@ function Conversations({
 	activeVoiceCard,
 	suggestions = [],
 	userId,
+	isomniChannelAdmin = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -19,6 +20,7 @@ function Conversations({
 						firestore={firestore}
 						suggestions={suggestions}
 						userId={userId}
+						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 				)
 				: <VoiceCall activeVoiceCard={activeVoiceCard} /> }
