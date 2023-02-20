@@ -1360,6 +1360,14 @@ const navigationMappingAdmin = {
 		possible_apis : [...apis.terms_and_conditons],
 		module_type   : 'dashboards',
 	},
+	operations_mails: {
+		key         : 'operations_mails',
+		title       : 'Operations Mails',
+		href        : '/operations-mails',
+		as          : '/operations-mails',
+		type        : 'link',
+		module_type : 'crm',
+	},
 	prm: {
 		key       : 'prm',
 		title     : 'PRM',
