@@ -1,7 +1,11 @@
+import React from 'react';
+
+import Header from './Header';
+
 function CreateFAQ() {
-    return (
-        <div>shivam</div>
-    );
-};
+	return (
+		<Header />
+	);
+}
 
 export default CreateFAQ;
