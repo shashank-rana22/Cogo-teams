@@ -59,7 +59,6 @@ function CogoOne() {
 		activeCardId,
 	} = useListChats({
 		firestore,
-		userRoleIds,
 		userId,
 		isomniChannelAdmin,
 	});

@@ -30,7 +30,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		id = '',
 		channel_type = '',
-		support_agent_id = [],
+		support_agent_id = '',
 		spectators_data = [],
 	} = activeMessageCard || {};
 
