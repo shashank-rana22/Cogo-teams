@@ -27,14 +27,14 @@ const useSendMessage = ({ channel_type = '' }) => {
 	const sendMessage = async ({
 		recipient,
 		message_metadata,
-		user_id,
-		organization_id,
-		lead_user_id,
+		user_id = null,
+		organization_id = null,
+		lead_user_id = null,
 	}) => {
 		try {
 			await trigger({
 				data: {
-					type       : 'whatsapp',
+					type       : channel_type,
 					recipient,
 					message_metadata,
 					user_id,

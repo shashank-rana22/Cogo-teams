@@ -107,8 +107,6 @@ function MessageList({
 												<div className={styles.user_details}>
 													<div className={styles.user_name}>
 														{startCase(user_name)}
-														{' '}
-														hekekejnem
 													</div>
 													<div className={styles.organisation}>
 														{startCase(organization_name)}
