@@ -39,8 +39,13 @@ const ACTION_ICON_MAPPING = [
 		href  : 'quotation-approval',
 	},
 	{
-		name  : 'cogopoints',
-		icon  : <IcCCogoCoin width={28} height={28} />,
+		name : 'cogopoints',
+		icon : <img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+			alt="icon"
+			width="28px"
+			height="28px"
+		/>,
 		title : 'Cogopoints',
 		href  : 'marketing/cogo-points/cogopoint_creation',
 	},

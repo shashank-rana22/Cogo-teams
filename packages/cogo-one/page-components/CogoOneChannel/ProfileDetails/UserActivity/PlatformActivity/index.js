@@ -16,7 +16,11 @@ function PlatformActivity({ platform = {} }) {
 	return (
 		<div className={styles.container}>
 			<LoginComponent login={login} />
-			<OrganizationVerification organization={organization} />
+
+			{!isEmpty(organization) && (
+				<OrganizationVerification organization={organization} />
+			)}
+
 			{(list || []).map((item) => {
 				const services = item?.service_type;
 
