@@ -15,7 +15,7 @@ import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({
 	setActiveStepper = () => {},
-	vendorInformation,
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const router = useRouter();
@@ -88,8 +88,8 @@ function useOnBoardVendor({
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
-		setValue('registration_proof_url', vendorInformation?.vendor_details?.registration_proof_url);
-	}, [fields, vendorInformation]);
+		setValue('document_url', vendorInformation?.vendor_details?.document_url);
+	}, [fields, setValue, vendorInformation]);
 
 	return {
 		fields,

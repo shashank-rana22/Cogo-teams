@@ -4,6 +4,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
 import TABS_MAPPING from '../../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
@@ -64,6 +65,19 @@ function useVendorServices({
 			Toast.error(getApiErrorString(error?.data));
 		}
 	};
+
+	useEffect(() => {
+		const { vendor_services = {}, services: office_details = [] } = vendorInformation || {};
+
+		const prefill_obj = {
+			office_details,
+		};
+
+		controls.forEach((item) => {
+			setValue(`${item.name}`, vendor_services?.[item.name] || prefill_obj[item.name]);
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendorInformation]);
 
 	const handleBackLink = (step) => {
 		setActiveStepper(TABS_MAPPING[step]);

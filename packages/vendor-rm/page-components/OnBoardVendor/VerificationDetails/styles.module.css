@@ -1,0 +1,9 @@
+.button_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text_container {
+    padding-left: 16px;
+}

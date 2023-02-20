@@ -22,6 +22,8 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
+	const [activeStepper, setActiveStepper] = useState('verification');
+
 	const [vendorInformation, setVendorInformation] = useState({});
 
 	const getVendor = useCallback(async () => {
@@ -36,9 +38,7 @@ function OnBoardVendor() {
 		}
 	}, [vendor_id, getVendor]);
 
-	console.log(vendorInformation, 'vendorInformation');
-
-	const [activeStepper, setActiveStepper] = useState('vendor_bank_details');
+	console.log('vendorInformation:: ', vendorInformation);
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
