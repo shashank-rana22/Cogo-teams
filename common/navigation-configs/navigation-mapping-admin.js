@@ -1705,6 +1705,11 @@ const navigationMappingAdmin = {
 				href  : '/supply-tools/detention-demurrage',
 				as    : '/supply-tools/detention-demurrage',
 			},
+			{
+				title : 'Document Charges',
+				href  : '/supply-tools/document-charges',
+				as    : '/supply-tools/document-charges',
+			},
 		],
 		module_type: 'dashboards',
 	},
