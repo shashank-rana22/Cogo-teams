@@ -246,6 +246,11 @@ const apis = [
 		api         : 'get_sales_invoice_shipment_list',
 		access_type : 'private',
 	},
+	{
+		api          : 'update_shipment_currency_conversion',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
