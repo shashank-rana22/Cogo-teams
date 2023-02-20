@@ -9830,7 +9830,7 @@ const partner = {
 			service_name : 'unified_dashboard',
 		},
 		{
-			api          : ' get_cogoverse_globe_data',
+			api          : 'get_cogoverse_globe_data',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},

@@ -1813,7 +1813,7 @@ const navigationMappingAdmin = {
 	},
 	cogo_verse_analytics: {
 		key           : 'cogo_verse_analytics',
-		title         : 'Cogo Verse Analytics',
+		title         : 'CogoVerse ',
 		href          : '/v2/cogo-verse-analytics',
 		as            : '/v2/cogo-verse-analytics',
 		type          : 'link',

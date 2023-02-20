@@ -59,6 +59,40 @@
     
 }
 
+.vertical_line{
+  border-right: 1px solid #e0e0e0;
+	margin: 0px 8px;
+	height: 18px;
+}
+
+.date_container{
+  display: flex;
+	align-items: center;
+}
+.date_filter_wrap{
+  border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	margin-right: 12px;
+
+	background: #ffffff;
+	padding: 6px 8px;
+	font-size: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+
+	svg {
+		width: 14px;
+		height: 14px;
+		margin-left: 4px;
+	}
+
+	&:hover {
+		box-shadow: 2px 2px 4px rgba(56, 59, 68, 0.1);
+	}
+}
+
 /* Circle Frame ------------------------------------------------------------------- */
 
 .circle_content{

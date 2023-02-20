@@ -1,6 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
+import { globeMarker } from '../../../../configurations/globe-marker';
 import { pointBinData } from '../../../../configurations/point-bin-data';
 import { TEXTURES, GLOBE_COLORS } from '../../../../constants/globe-properties';
 
@@ -9,12 +10,16 @@ import styles from './styles.module.css';
 function TheGLobe(
 	{
 		country = {},
-		pointsList = {},
 		globeGL = {},
+		markerData = [],
+		globeLoading = false,
 	},
 ) {
-	console.log('pointsList', pointsList);
+	console.log('globeGL', globeGL);
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
+
+	const markerWidth = markerData?.length > 2000 ? '5px' : '10px';
+	console.log('markerWidth', markerWidth);
 
 	let Globe = () => {};
 	// eslint-disable-next-line global-require
@@ -35,14 +40,14 @@ function TheGLobe(
 	}
 
 	// experiments
-	console.log('(globeGL?.current?.scene()?.children', globeGL?.current?.scene()?.children);
-	if (!isEmpty(globeGL?.current?.scene()?.children[2].visible
-	 	&& globeGL?.current?.scene()?.children[1].intensity
-		 && globeGL?.current?.scene()?.children[2].intensity)) {
-		globeGL.current.scene().children[2].visible = true;
-		globeGL.current.scene().children[1].intensity = 1.25;
-		globeGL.current.scene().children[2].intensity = 0.25;
-	}
+	// console.log('(globeGL?.current?.scene()?.children', globeGL?.current?.scene()?.children);
+	// if (!isEmpty(globeGL?.current?.scene()?.children[2].visible
+	//  	&& globeGL?.current?.scene()?.children[1].intensity
+	// 	 && globeGL?.current?.scene()?.children[2].intensity)) {
+	// 	globeGL.current.scene().children[2].visible = true;
+	// 	globeGL.current.scene().children[1].intensity = 1.25;
+	// 	globeGL.current.scene().children[2].intensity = 0.25;
+	// }
 
 	// Globe Functions
 
@@ -80,13 +85,14 @@ function TheGLobe(
 		startRotation();
 	}, [country]);
 
-	const markerSvg = `<svg viewBox="-4 0 36 36">
-    <path fill="currentColor" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"></path>
-    <circle fill="#8F7700" cx="14" cy="14" r="7"></circle>
-  </svg>`;
+	// 	const markerSvg = `<svg viewBox="-4 0 36 36">
+	//     <path fill="currentColor" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"></path>
+	//     <circle fill="#8F7700" cx="14" cy="14" r="7"></circle>
+	//   </svg>`;
 
 	return (
 		<div className={styles.globe_container}>
+
 			<Globe
 				width={480}
 				height={480}
@@ -99,9 +105,9 @@ function TheGLobe(
 				atmosphereAltitude={0.1}
 				globeImageUrl={TEXTURES[colorMode].two}
 				// Hexbin
-				// hexBinPointsData={pointBinData}
+				// hexBinPointsData={markerData}
 				// hexAltitude={0.010}
-				// hexBinResolution={3}
+				// hexBinResolution={4}
 				// hexTopColor={() => 'rgba(114, 120, 173, 1)'}
 				// hexSideColor={() => 'rgba(206, 209, 237, 1)'}
 				// hexBinMerge
@@ -114,13 +120,14 @@ function TheGLobe(
 				// ringRepeatPeriod={600}
 				// html
 				htmlElementsData={pointBinData}
+				htmlTransitionDuration={2000}
 				htmlElement={(d) => {
 					// console.log('d', d);
 					// eslint-disable-next-line no-undef
 					const el = document?.createElement('div');
-					el.innerHTML = markerSvg;
+					el.innerHTML = globeMarker;
 					el.style.color = '#FCDC00';
-					el.style.width = '10px';
+					el.style.width = '8px';
 					el.style['pointer-events'] = 'auto';
 					el.style.cursor = 'pointer';
 

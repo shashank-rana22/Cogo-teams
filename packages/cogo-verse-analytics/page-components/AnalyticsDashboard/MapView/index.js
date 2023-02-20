@@ -1,14 +1,17 @@
 /* eslint-disable max-len */
-import { Select, DateRangepicker, cl, ButtonIcon, Tooltip } from '@cogoport/components';
+import { Select, DateRangepicker, cl, ButtonIcon, Tooltip, Pill } from '@cogoport/components';
 import { useGetAsyncOptions } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
-import { isEmpty, merge } from '@cogoport/utils';
+import { isEmpty, merge, startCase, format } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
+import DateFilter from '../../../common/DateFilter';
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
+import { imgURL } from '../../../constants/image-urls';
 import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 
 import CommunicationPieChart from './PieChart';
@@ -20,15 +23,28 @@ function MapView({
 	setCountry = () => {},
 	country = {},
 	date = {},
-	setDate = () => {},
+	setDate = {},
 
 }) {
 	const globeGL = useRef();
 
 	const [circleTab, setCircleTab] = useState('new_users');
+	const [range, setRange] = useState('this_month');
+	const [selectDuration, setSelectDuration] = useState('this_month');
+
 	const { options:locationOptions, loading:locationsLoading = false, onSearch = () => {} } = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
 
-	const { pointsList = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab });
+	const { pointsList = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
+	const coordinates = pointsList?.fullResponse?.data?.user_location || [];
+
+	let markerData = {};
+	markerData = coordinates.map((item) => ({
+		lat : item[0],
+		lng : item[1],
+		pop : 500,
+		...markerData,
+	}));
+	console.log('markerData', markerData);
 
 	const onSelectChange = (val) => {
 		setCountry(val);
@@ -42,7 +58,15 @@ function MapView({
 		}
 	};
 
+	const [openCalendar, setOpenCalendar] = useState(false);
+
+	const handleApplyFilters = () => {
+		setDateFilter({ ...date });
+	};
 	const maxDate = new Date();
+
+	const startDate = format(date?.startDate, 'dd MMM yyyy');
+	const endDate = format(date?.endDate, 'dd MMM yyyy');
 
 	return (
 		<div className={styles.main_container}>
@@ -70,6 +94,38 @@ function MapView({
 						isPreviousDaysAllowed
 						maxDate={maxDate}
 					/>
+
+					{/* <DateFilter
+						applyFilters={handleApplyFilters}
+						setOpen={setOpenCalendar}
+						open={openCalendar}
+						type="date-range"
+						date={date}
+						setDate={setDate}
+						range={range}
+						setRange={setRange}
+						setSelectDuration={setSelectDuration}
+					>
+						<div
+							className={styles.date_filter_wrap}
+							id="date_filter_wrap"
+							onClick={() => setOpenCalendar(!openCalendar)}
+						>
+							<div className={styles.date_container}>
+								<Pill />
+								<div className={styles.vertical_line} />
+								<div>
+									{
+								`${startDate} - ${endDate}`
+							}
+
+								</div>
+								<IcMArrowRotateDown />
+							</div>
+						</div>
+
+					</DateFilter> */}
+
 				</div>
 			</div>
 			<div className={styles.circle_content}>
@@ -78,12 +134,23 @@ function MapView({
 						{
 
 							(!globeLoading)
-								&& (
+								? (
 									<TheGlobe
 										country={country}
 										pointsList={pointsList}
 										globeGL={globeGL}
+										markerData={markerData}
+										globeLoading={globeLoading}
 									/>
+								) : (
+									<div>
+										<img
+											src={imgURL.globe_loading_state}
+											alt="Loading Co-ordinates"
+											width="480px"
+											height="480px"
+										/>
+									</div>
 								)
 
 						}
