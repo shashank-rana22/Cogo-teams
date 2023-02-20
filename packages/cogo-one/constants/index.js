@@ -17,7 +17,7 @@ export const SOURCE_ICON_MAPPING = {
 		width="16px"
 		height="16px"
 	/>,
-	chatbot: <img
+	platform_chat: <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg"
 		alt=""
 		width="16px"

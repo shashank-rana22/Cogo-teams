@@ -12,8 +12,8 @@ const useSendMessage = ({ channel_type = '' }) => {
 		user_data: profile || {},
 	}));
 	const API_MAPPING = {
-		whatsapp : 'create_communication',
-		chatbot  : 'create_communication_platform_chat',
+		whatsapp      : 'create_communication',
+		platform_chat : 'create_communication_platform_chat',
 	};
 
 	const [{ loading }, trigger] = useRequest(
