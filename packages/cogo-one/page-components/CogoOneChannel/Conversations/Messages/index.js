@@ -21,7 +21,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
-	const [messages, setMessages] = useState({});
 	const [uploading, setUploading] = useState({});
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
@@ -132,8 +131,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						setDraftMessages={setDraftMessages}
 						setDraftUploadedFiles={setDraftUploadedFiles}
 						sendChatMessage={sendChatMessage}
-						setMessages={setMessages}
-						messages={messages}
 						getNextData={getNextData}
 						loadingMessages={loadingMessages}
 						lastPage={lastPage}
