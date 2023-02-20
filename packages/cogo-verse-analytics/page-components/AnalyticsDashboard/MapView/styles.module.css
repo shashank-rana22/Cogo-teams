@@ -112,6 +112,12 @@
     
 
  }
+
+
+ .placeholder_element {
+	border-radius: 6px;
+ }
+
  .stat_value {
    color: #221F20;
    font-weight: 600;

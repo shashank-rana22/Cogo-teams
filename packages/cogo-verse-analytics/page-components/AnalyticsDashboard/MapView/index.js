@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { Select, DateRangepicker, cl, ButtonIcon, Tooltip } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import { useGetAsyncOptions, getFormattedPrice } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
@@ -107,6 +108,7 @@ function MapView({
 								>
 									<div className={styles.stat_value}>
 										{strToKMBT(value)}
+										<Placeholder className={styles.placeholder_element} height="20px" width="30px" margin="0px 0px 0px 0px" />
 									</div>
 									<div className={styles.stat_label}>
 										{label}
