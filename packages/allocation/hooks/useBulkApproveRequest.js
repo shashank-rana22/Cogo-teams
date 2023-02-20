@@ -9,7 +9,7 @@ const useBulkApproveRequest = (props) => {
 		url     : '/request_bulk_approve',
 		method  : 'POST',
 		authkey : 'post_allocation_request_bulk_approve',
-	});
+	}, { manual: true });
 
 	const [{ loading }, trigger] = api;
 

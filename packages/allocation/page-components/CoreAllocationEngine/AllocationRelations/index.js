@@ -14,8 +14,6 @@ function Relations() {
 		params,
 		setParams = () => {},
 		loading,
-		bulkMode = false,
-		setBulkMode = () => {},
 		checkedRowsId = [],
 		setCheckedRowsId = () => {},
 		activeTab,
@@ -48,8 +46,6 @@ function Relations() {
 				loading={loading}
 				params={params}
 				setParams={setParams}
-				bulkMode={bulkMode}
-				setBulkMode={setBulkMode}
 				checkedRowsId={checkedRowsId}
 				setCheckedRowsId={setCheckedRowsId}
 				activeTab={activeTab}
@@ -59,7 +55,6 @@ function Relations() {
 				paginationData={paginationData}
 				getNextPage={getNextPage}
 				searchQuery={searchQuery}
-				fetchList={fetchList}
 			/>
 
 			{showCreateRelationModal && (

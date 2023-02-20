@@ -9,8 +9,7 @@ function UserActions({
 	confirmModalState,
 	setConfirmModalState = () => {},
 	checkedRowsId,
-	setBulkMode = () => {},
-	fetchList = () => {},
+	onResettingBulkMode,
 }) {
 	const requestType = confirmModalState.type;
 
@@ -28,8 +27,8 @@ function UserActions({
 			body_text : `${startCase(requestType)} this Allocation Relation`,
 		},
 		approve_all: {
-			title     : `Bulk approve ${(checkedRowsId || []).length}  Requests`,
-			body_text : `Approve ${(checkedRowsId || []).length}  Requests ?`,
+			title     : 'Bulk approve Requests',
+			body_text : `Approve ${(checkedRowsId || []).length}  Request(s) `,
 		},
 
 	};
@@ -39,10 +38,9 @@ function UserActions({
 		loadingUpdateRelations = false,
 	} = useRelationActions({
 		confirmModalState,
-		setBulkMode,
 		setConfirmModalState,
 		checkedRowsId,
-		fetchList,
+		onResettingBulkMode,
 	});
 
 	return (
@@ -65,7 +63,7 @@ function UserActions({
 						disabled={loadingUpdateRelations}
 						onClick={handleUpdateRelation}
 					>
-						{startCase(requestType)}
+						Yes, I do
 					</Button>
 				</div>
 			</Modal.Footer>

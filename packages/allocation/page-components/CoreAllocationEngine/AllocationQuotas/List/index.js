@@ -17,8 +17,6 @@ function List(props) {
 	} = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
-	//  delete hook
-
 	if (loading) {
 		return <ShimmerState />;
 	}

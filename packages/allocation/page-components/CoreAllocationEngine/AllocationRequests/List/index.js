@@ -23,7 +23,6 @@ function List(props) {
 		loading,
 		onChangeParams,
 		fetchList,
-		bulkMode,
 		checkedRowsId,
 		setCheckedRowsId,
 	} = props;
@@ -64,7 +63,7 @@ function List(props) {
 		<div>
 			{list.map((item) => {
 				const itemId = item.id;
-				const isSelected = bulkMode && checkedRowsId.includes(itemId);
+				const isSelected = checkedRowsId.includes(itemId);
 
 				return (
 					<ListItem
@@ -78,15 +77,12 @@ function List(props) {
 								allocation_request_id: item.id,
 							});
 						}}
-						isSelectable={bulkMode}
-						isSelected={bulkMode && checkedRowsId.includes(itemId)}
+						isSelected={isSelected}
 						onCardClick={() => {
-							if (bulkMode) {
-								if (!isSelected) {
-									setCheckedRowsId([...checkedRowsId, itemId]);
-								} else {
-									setCheckedRowsId(checkedRowsId.filter((id) => id !== itemId));
-								}
+							if (!isSelected) {
+								setCheckedRowsId([...checkedRowsId, itemId]);
+							} else {
+								setCheckedRowsId(checkedRowsId.filter((id) => id !== itemId));
 							}
 						}}
 					/>

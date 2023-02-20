@@ -34,8 +34,7 @@
 .tab_list {
 	margin: 16px 0;
 
-	@media (max-width: 768px){
+	@media (max-width: 768px) {
 		overflow-x: scroll;
 	}
-
 }

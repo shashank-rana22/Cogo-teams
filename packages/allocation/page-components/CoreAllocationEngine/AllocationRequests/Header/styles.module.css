@@ -42,6 +42,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin: 8px 0;
 }
 
 .selection_text {
@@ -52,5 +53,11 @@
 }
 
 .text {
-	margin-right: 8px;
+	margin: 0 8px;
+	color: #4f4f4f;
+}
+
+.select_all_checkbox {
+	padding: 0;
+	margin-right: 16px;
 }

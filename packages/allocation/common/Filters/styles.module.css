@@ -3,7 +3,6 @@
 		width: 500px;
 	}
 
-
 	:global(.tippy-content) {
 		box-sizing: border-box;
 		width: 100%;
@@ -13,7 +12,7 @@
 		border-radius: 10px;
 	}
 
-	:global(.ui_chips_container){
+	:global(.ui_chips_container) {
 		flex-wrap: wrap;
 	}
 }
