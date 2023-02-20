@@ -85,7 +85,14 @@ function Greetings({
 
 			<div>
 				<div className={styles.greeting_text}>
-					{startCase(name)}
+					<div
+						className={styles.name_wrapper}
+
+					>
+						{startCase(name)}
+
+					</div>
+
 					,
 					{' '}
 					<div className={styles.location_name}>{locationName}</div>

@@ -1,11 +1,14 @@
 import { InputController } from '@cogoport/forms';
 
+import getControls from '../../controls';
+
 import styles from './styles.module.css';
 
 function EditPersonalDetails({
 	control,
 	errors,
 }) {
+	const controls = getControls();
 	return (
 		<div>
 
@@ -13,7 +16,7 @@ function EditPersonalDetails({
 
 			<div className={styles.value}>
 				<InputController
-					{...control}
+					{...controls[1]}
 					control={control}
 					name="name"
 
