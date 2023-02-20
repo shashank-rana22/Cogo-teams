@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { Select, DateRangepicker, cl, ButtonIcon, Tooltip } from '@cogoport/components';
-import { useGetAsyncOptions } from '@cogoport/forms';
+import { useGetAsyncOptions, getFormattedPrice } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
@@ -10,6 +10,7 @@ import React, { useState, useRef } from 'react';
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
 import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
+import { strToKMBT } from '../../../utils/strToKMBT';
 
 import CommunicationPieChart from './PieChart';
 import styles from './styles.module.css';
@@ -43,6 +44,8 @@ function MapView({
 	};
 
 	const maxDate = new Date();
+
+	const avgResponseTimeValue = 70;
 
 	return (
 		<div className={styles.main_container}>
@@ -93,6 +96,7 @@ function MapView({
 					circleStats.map(
 						(stat) => {
 							const { type, value, label } = stat;
+
 							return (
 								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 								<div
@@ -102,7 +106,7 @@ function MapView({
 
 								>
 									<div className={styles.stat_value}>
-										{value}
+										{strToKMBT(value)}
 									</div>
 									<div className={styles.stat_label}>
 										{label}
@@ -129,9 +133,9 @@ function MapView({
 					</div>
 					<div className={styles.response_time}>
 						<div className={styles.time}>
-							<span>20</span>
+							<span>{avgResponseTimeValue < 60 ? avgResponseTimeValue : (Number(avgResponseTimeValue) / 60).toFixed(1)}</span>
 							{' '}
-							min
+							{avgResponseTimeValue < 60 ? 'min' : 'hrs'}
 						</div>
 
 						<div className={styles.arrow_img}>
@@ -153,7 +157,7 @@ function MapView({
 								return (
 									<div className={styles.the_stat}>
 										<div className={styles.stat_circle} style={{ background: icon_bg }} />
-										<div className={styles.com_stat_value}>{value}</div>
+										<div className={styles.com_stat_value}>{strToKMBT(value)}</div>
 										<div className={styles.stat_description}>{title}</div>
 									</div>
 								);

@@ -21,7 +21,7 @@ export const PRIMARY_STATS = [
 		icon        : <IcMBookingManagement fill="#edd789" width="25px" height="25px" />,
 	},
 	{
-		value       : '1.5L',
+		value       : 354376,
 		title       : 'Revenue',
 		description : 'invoice payments',
 		users       : 200,
@@ -32,17 +32,17 @@ export const PRIMARY_STATS = [
 
 export const CONVERSATIONS = [
 	{
-		value   : 240,
+		value   : 240456,
 		title   : 'Total Communications',
 		icon_bg : '#BDBDBD',
 	},
 	{
-		value   : 220,
+		value   : 2202345,
 		title   : 'System Initiated Conversations',
 		icon_bg : '#ABCD62',
 	},
 	{
-		value   : 20,
+		value   : 203456,
 		title   : 'Customer Initiated Conversations',
 		icon_bg : '#DDEBC0',
 	}];
@@ -72,7 +72,7 @@ export const INTENT_LEADERBOARD = [
 
 export const USER_STATUS = [
 	{
-		value : 20,
+		value : 2084235234435,
 		title : 'Happy users',
 		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
 	},
