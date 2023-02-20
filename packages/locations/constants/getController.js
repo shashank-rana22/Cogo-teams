@@ -1,4 +1,4 @@
-import { InputController, ChipsController, SelectController } from '@cogoport/forms';
+import { InputController, PillsController, SelectController } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
 const getElementController = (type = 'text') => {
@@ -12,8 +12,8 @@ const getElementController = (type = 'text') => {
 		case 'file':
 			return UploadController;
 
-		case 'chips':
-			return ChipsController;
+		case 'pills':
+			return PillsController;
 
 		default:
 			return null;
