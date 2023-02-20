@@ -48,21 +48,32 @@ const useCreateAllocationRequest = (props) => {
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
 
+		const {
+			service_type:serviceType,
+			stakeholder_type,
+			reason,
+			organization_id : orgId,
+			partner_id: partnerIdFromForm,
+			organization_user_id,
+			partner_user_id,
+			stakeholder_id,
+		} = formValues || {};
+
 		try {
 			const payload = {
-				service_type     : formValues.service_type,
-				stakeholder_type : formValues.stakeholder_type,
-				reason           : formValues.reason,
+				service_type: serviceType,
+				stakeholder_type,
+				reason,
 				service_id:
-					formValues.service_type === 'organization'
-						? formValues.organization_id
-						: formValues.partner_id,
+				serviceType === 'organization'
+					? orgId
+					: partnerIdFromForm,
 				service_user_id:
-					formValues.service_type === 'organization'
-						? formValues.organization_user_id
-						: formValues.partner_user_id,
-				stakeholder_id : formValues.stakeholder_id,
-				partner_id     : partnerId,
+					serviceType === 'organization'
+						? organization_user_id
+						: partner_user_id,
+				stakeholder_id,
+				partner_id: partnerId,
 			};
 
 			await trigger({ data: payload });
