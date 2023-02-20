@@ -80,6 +80,7 @@ function BankDetails({
 		id,
 		tradePartyName,
 		businessName,
+		category_types:categoryTypes = [''],
 	} = organization || {};
 
 	const checkData = () => {
@@ -124,6 +125,18 @@ function BankDetails({
 							<div className={styles.party_name}>
 								{startCase(tradePartyType) || '-'}
 							</div>
+						</div>
+
+						<div className={styles.name_data}>
+							<div>Category - </div>
+							{categoryTypes ? (
+								<div className={styles.category}>
+									{categoryTypes.map((itm, index) => {
+										if (index !== categoryTypes.length - 1) return `${itm},`;
+										return `${startCase(itm)}`;
+									})}
+								</div>
+							) : '-'}
 						</div>
 
 						<div className={styles.border} />
@@ -261,7 +274,8 @@ function BankDetails({
 								<Button
 									size="md"
 									style={{ marginRight: '8px' }}
-									disabled={!(value?.text.length) || loading}
+									disabled={Object.values(value).includes('false')
+									|| !(value?.text.length) || loading}
 									onClick={() => {
 										onApprove();
 									}}
