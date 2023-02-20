@@ -52,11 +52,15 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 			page      : 1,
 			pageLimit : 10,
 			urgency   : undefined,
+			category,
+			date,
+			search,
 		});
 	};
 
 	useEffect(() => {
 		clearFilters();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	const getIncidentData = async () => {
