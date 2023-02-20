@@ -17,42 +17,42 @@ const columnsMapping = [
 		label    : 'Role',
 		getValue : (data) => (
 			<div>
-				{getByKey(data, 'role.name', '___')}
+				{getByKey(data, 'role.name') || '___'}
 			</div>
 		),
-		flex: 2,
+		flex: 1,
 	},
 	{
 		key      : 'user',
 		label    : 'User',
 		getValue : (data) => (
 			<div>
-				{getByKey(data, 'user.name', '___')}
+				{getByKey(data, 'user.name') || '___'}
 			</div>
 		),
-		flex: 2,
+		flex: 1,
 	},
 	{
 		key      : 'user_email',
 		label    : 'User Email',
-		getValue : (data) => (<div className={styles.email_id}>{getByKey(data, 'user.email', '___')}</div>),
-		flex     : 2,
+		getValue : (data) => (<div className={styles.email_id}>{getByKey(data, 'user.email') || '___'}</div>),
+		flex     : 1,
 	},
 	{
 		key      : 'created_by',
 		label    : 'Created by',
 		getValue : (data) => (
 			<div>
-				{getByKey(data, 'created_by.name', '___')}
+				{getByKey(data, 'created_by.name') || '___'}
 			</div>
 		),
-		flex: 2,
+		flex: 1,
 	},
 	{
 		key      : 'email',
 		label    : 'Email',
-		getValue : (data) => (<div className={styles.email_id}>{getByKey(data, 'created_by.email', '___')}</div>),
-		flex     : 2,
+		getValue : (data) => (<div className={styles.email_id}>{getByKey(data, 'created_by.email') || '___'}</div>),
+		flex     : 1,
 	},
 	{
 		key      : 'created_at',
@@ -67,11 +67,11 @@ const columnsMapping = [
 							{format(getByKey(data, 'created_at'), 'hh:mm aaa')}
 						</div>
 					</div>
-				) : null}
+				) : '___'}
 			</div>
 
 		),
-		flex: 2,
+		flex: 1,
 	},
 ];
 
