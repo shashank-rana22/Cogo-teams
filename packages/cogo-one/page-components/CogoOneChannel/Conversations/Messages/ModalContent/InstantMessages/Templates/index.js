@@ -55,7 +55,7 @@ function Templates({
 	});
 
 	const handleSelect = (val, status, name, Id) => {
-		if (!previewData && status === 'approved') {
+		if (!previewData && status === 'approved' && !openCreateReply) {
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
@@ -128,6 +128,7 @@ function Templates({
 									)}
 									style={{
 										cursor: previewData || whatsapp_approval_status !== 'approved'
+										|| openCreateReply
 											? 'not-allowed' : 'pointer',
 									}}
 								>
