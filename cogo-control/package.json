@@ -12,13 +12,9 @@
     "@cogoport/access-management": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
-<<<<<<< HEAD
     "@cogoport/my-profile": "workspace:0.1.0",
-    "@cogoport/components": "^1.0.309",
-=======
     "@cogoport/components": "^1.0.316",
     "@cogoport/contracts": "workspace:0.1.0",
->>>>>>> 76e7bf7303e6112f5c7b6bad2f2007e9f6312bdc
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.57",
