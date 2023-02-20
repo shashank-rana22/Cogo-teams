@@ -9,6 +9,8 @@ function InstantRepliesModal({ data = {} }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
+	const { channel_type = '' } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<Tabs
@@ -30,16 +32,17 @@ function InstantRepliesModal({ data = {} }) {
 						setActiveTab={setActiveTab}
 					/>
 				</TabPanel>
-
-				<TabPanel name="template" title="Template">
-					<Templates
-						data={data}
-						activeTab={activeTab}
-						openCreateReply={openCreateReply}
-						setOpenCreateReply={setOpenCreateReply}
-						setActiveTab={setActiveTab}
-					/>
-				</TabPanel>
+				{channel_type === 'whatsapp' && (
+					<TabPanel name="template" title="Template">
+						<Templates
+							data={data}
+							activeTab={activeTab}
+							openCreateReply={openCreateReply}
+							setOpenCreateReply={setOpenCreateReply}
+							setActiveTab={setActiveTab}
+						/>
+					</TabPanel>
+				)}
 			</Tabs>
 
 		</div>

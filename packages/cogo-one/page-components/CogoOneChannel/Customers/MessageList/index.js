@@ -74,6 +74,8 @@ function MessageList({
 			{messagesLoading ? <LoadingState /> : (
 				<div className={styles.list_container}>
 					{(messagesList || []).map((item) => {
+						const { chat_tags = [] } = item || {};
+
 						const userData = getActiveCardDetails(item);
 						const {
 							user_name = '',
@@ -105,6 +107,8 @@ function MessageList({
 												<div className={styles.user_details}>
 													<div className={styles.user_name}>
 														{startCase(user_name)}
+														{' '}
+														hekekejnem
 													</div>
 													<div className={styles.organisation}>
 														{startCase(organization_name)}
@@ -113,7 +117,17 @@ function MessageList({
 											</div>
 
 											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner} />
+												<div className={styles.tags_conatiner}>
+													{!isEmpty(chat_tags) && (
+														<div className={styles.tags}>
+
+															{(chat_tags || []).map((tags) => (
+																startCase(tags)
+															))}
+														</div>
+													)}
+												</div>
+
 												<div className={styles.activity_duration}>
 													{dateTimeConverter(
 														Date.now() - Number(lastActive),

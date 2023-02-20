@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 function AgentDetails({
-	activeMessageCard,
+	activeMessageCard = {},
 	activeTab,
-	activeVoiceCard,
+	activeVoiceCard = {},
 	FormattedMessageData = {},
 	customerId = '',
 }) {
@@ -134,8 +134,6 @@ function AgentDetails({
 				<VoiceCallComponent
 					userMobile={mobile_number}
 					orgId={orgId}
-                    // agentId={agentId}
-                    // countryCode={countryCode}
 					userId={userId}
 					userName={name}
 					emptyState={emptyState}
