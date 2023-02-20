@@ -49,8 +49,8 @@ function AllocationQuotas() {
 			{quotaItem && (
 				<Modal
 					show={quotaItem}
-					placement="center"
-					size="lg"
+					placement="top"
+					size={quotaItem.action === 'delete' ? 'sm' : 'lg'}
 					onClose={() => setQuotaItem(null)}
 					closeOnOuterClick={false}
 				>
