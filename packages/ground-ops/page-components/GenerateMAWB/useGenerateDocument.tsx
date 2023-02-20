@@ -2,10 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useGenerateDocument = ({
-	shipment_data = {},
-	task = '',
-	refetch = () => {},
-	clearTask = () => {},
+	shipment_id = {},
+	task = {},
+	// refetch = () => {},
+	// clearTask = () => {},
 }) => {
 	const [{ data = {}, loading:documentLoading }, { trigger:listDocumentsTrigger }] = 	useRequest(
 		'/list_shipment_documents',
@@ -20,7 +20,7 @@ const useGenerateDocument = ({
 	const documentList = data?.list || [];
 	const generateCertificate = async () => {
 		const params = {
-			shipment_id: shipment_data?.id,
+			shipment_id,
 		};
 		try {
 			await listDocumentsTrigger({
@@ -40,8 +40,8 @@ const useGenerateDocument = ({
 			});
 			if (!res?.hasError) {
 				Toast.success('Task Completed Successfully');
-				clearTask();
-				refetch();
+				// clearTask();
+				// refetch();
 			} else {
 				Toast.error('Something went wrong');
 			}

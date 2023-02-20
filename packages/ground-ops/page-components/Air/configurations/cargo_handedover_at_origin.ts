@@ -6,7 +6,7 @@ export const CargoHandedOverAtOrigin = {
 			span  : 0.8,
 		},
 		{
-			key   : 'importerExporterId',
+			key   : 'customer_name',
 			label : 'Customer Name',
 			span  : 2,
 			func  : 'startCase',
@@ -31,7 +31,7 @@ export const CargoHandedOverAtOrigin = {
 			func  : 'startCase',
 		},
 		{
-			key   : 'airlineId',
+			key   : 'airline',
 			label : 'Carrier',
 			span  : 1.5,
 			func  : 'startCase',
@@ -54,5 +54,12 @@ export const CargoHandedOverAtOrigin = {
 			span  : 1.5,
 			func  : 'startCase',
 		},
+		{
+			key   : 'generateDoc',
+			label : 'Generate Document',
+			span  : 1.5,
+			func  : 'handleGenerate',
+		},
+
 	],
 };

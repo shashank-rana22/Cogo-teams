@@ -1,10 +1,10 @@
 import { Loader, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useCallback } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 
 import EmptyState from './EmptyState';
-import GetLocation from './getLocation';
+import GetFinalList from './GetFinalList';
+import GetLocation from './GetFinalList/GetLocation';
 import { FunctionObjects, FieldType, DataType } from './Interfaces';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
@@ -33,40 +33,7 @@ function List({
 } :Props) {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const { list = {}, total_count = 0 } = data;
-	const { shipmentPendingTasks = [], airportIds = [] } = list;
-
-	const { data: airportData = {}, listAirport } = GetLocation({ airportIds });
-
-	const { list: airportList = [] } = airportData;
-
-	const finalData = [];
-	(airportList || []).forEach((item) => {
-		(shipmentPendingTasks || []).map((itm) => {
-			if (item.id === itm.originAirportId) {
-				const pushData = {
-					...itm,
-					origin: item.name,
-				};
-				finalData.push(pushData);
-			}
-			return finalData;
-		});
-	});
-
-	// (airportList || []).forEach((item) => {
-	// 	(shipmentPendingTasks || []).map((itm) => {
-	// 		if (item.id === itm.destinationAirportId) {
-	// 			const pushData = {
-	// 				...itm,
-	// 				destination: item.name,
-	// 			};
-	// 			finalData.push(pushData);
-	// 		}
-	// 		return finalData;
-	// 	});
-	// });
-
-	console.log('final', finalData);
+	const { finalData } = GetFinalList({ list, data, loading });
 
 	const handleRender = () => (finalData || [1, 2, 3, 4, 5]).map((singleitem) => (
 		<ListItem
@@ -77,18 +44,16 @@ function List({
 		/>
 	));
 
-	useEffect(() => {
-		if (!loading) {
-			listAirport();
-		}
-	}, [data]);
-
 	return (
 		<section>
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
-				<div className="card-list-data">{handleRender()}</div>
-				{finalData.length > 0 ? (
+				{finalData.length <= 0 ? <EmptyState />
+					: <div className="card-list-data">{handleRender()}</div>}
+				{
+					loading && <Loader style={{ textAlign: 'center' }} />
+				}
+				{!loading && finalData.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

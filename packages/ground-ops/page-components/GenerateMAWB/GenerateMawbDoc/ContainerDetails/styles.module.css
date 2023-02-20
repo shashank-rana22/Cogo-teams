@@ -1,6 +1,4 @@
-import styled from '@cogoport/front/styled';
-
-export const Flex = styled.div`
+.flex {
 	display: flex;
 	&.flex_font_weight {
 		font-weight: bold;
@@ -130,9 +128,9 @@ export const Flex = styled.div`
 	.core-ui-input-control {
 		font-weight: bold;
 	}
-`;
+}
 
-export const Block = styled.div`
+.block {
 	display: flex;
 	border: 1px #333 solid;
 	&.block_flex_border {
@@ -145,9 +143,9 @@ export const Block = styled.div`
 	&.container_section {
 		min-height: 250px;
 	}
-`;
+}
 
-export const FlexCol = styled.div`
+.flex_col {
 	display: flex;
 	flex-direction: column;
 	&.inner_handling_information {
@@ -185,9 +183,9 @@ export const FlexCol = styled.div`
 	&.block_egi_container_section {
 		flex: 1;
 	}
-`;
+}
 
-export const FlexRow = styled.div`
+.flex_row {
 	display: flex;
 	&.block_e_container_commodity_section {
 		flex: 0.7;
@@ -199,4 +197,4 @@ export const FlexRow = styled.div`
 		flex: 0.07;
 		border-right: 1px solid;
 	}
-`;
+}

@@ -14,6 +14,7 @@
 	  "@cogoport/store": "workspace:0.1.0",
 	  "@cogoport/utils": "^1.2.2",
 	  "react-infinite-scroller": "^1.2.4",
+	  "html2canvas": "^1.4.1",
 	  "use-react-screenshot": "^3.0.0",
 	  "file-saver": "^2.0.5",
 	  "react": "18.2.0"

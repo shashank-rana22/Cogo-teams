@@ -1,6 +1,4 @@
-import styled from '@cogoport/front/styled';
-
-export const Flex = styled.div`
+.flex {
 	display: flex;
 
 	&.common_justify_center {
@@ -128,9 +126,9 @@ export const Flex = styled.div`
 	&.charges_container_end {
 		flex: 0.7;
 	}
-`;
+}
 
-export const BlockCol = styled.div`
+.block_col {
 	display: flex;
 	flex-direction: column;
 	border: 1px #333 solid;
@@ -139,9 +137,9 @@ export const BlockCol = styled.div`
 		flex: 0.8;
 		border-top: 0px;
 	}
-`;
+}
 
-export const FlexCol = styled.div`
+.flex_col {
 	display: flex;
 	flex-direction: column;
 
@@ -154,9 +152,9 @@ export const FlexCol = styled.div`
 	&.common_border_right {
 		border-right: 1px solid;
 	}
-`;
+}
 
-export const FlexRow = styled.div`
+.flex_row {
 	display: flex;
 
 	&.charge_container {
@@ -176,4 +174,4 @@ export const FlexRow = styled.div`
 	&.destination_container {
 		flex: 1;
 	}
-`;
+}

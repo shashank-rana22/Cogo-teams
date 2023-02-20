@@ -43,7 +43,7 @@ const useGetMediaUrl = () => {
 	});
 
 	const getSignature = (params) => {
-		const SIGNATURE_URL = `${process.env.REST_BASE_API_URL}/get_media_upload_url`;
+		const SIGNATURE_URL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/get_media_upload_url`;
 
 		try {
 			const response:any = getRequest(SIGNATURE_URL, params);

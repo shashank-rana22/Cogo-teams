@@ -1162,7 +1162,7 @@ const navigationMappingAdmin = {
 				as            : '/revenue-desk/air',
 				type          : 'link',
 				main_apis     : ['list_shipments'],
-				possible_apis : apis.revenue_desk,
+				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
 
 			},
 			{

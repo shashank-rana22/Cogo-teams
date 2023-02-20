@@ -44,19 +44,17 @@ function CardItem({
 								<div className={styles.tablelabel}>{field.label}</div>
 							)}
 
-							<div className={styles.flex}>
-								{loading ? <Placeholder />
-									: (
-										<div className={styles.flex}>
-											{getValue(
-												singleitem,
-												field,
-												functions,
-												'-',
-											) as ReactNode}
-										</div>
-									)}
-							</div>
+							{loading ? <Placeholder />
+								: (
+									<div className={styles.flex}>
+										{getValue(
+											singleitem,
+											field,
+											functions,
+											'-',
+										) as ReactNode}
+									</div>
+								)}
 
 						</div>
 					);

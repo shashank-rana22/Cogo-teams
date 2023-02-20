@@ -1,10 +1,8 @@
-import styled from '@cogoport/front/styled';
-
-export const Flex = styled.div`
+.flex {
 	display: flex;
-`;
+}
 
-export const Block = styled.div`
+.block {
 	display: flex;
 	border: 1px #333 solid;
 	flex: 1;
@@ -13,29 +11,29 @@ export const Block = styled.div`
 	font-weight: bold;
 	padding-left: 240px;
 	letter-spacing: 0px;
-`;
+}
 
-export const BlockRow = styled.div`
+.block_row {
 	display: flex;
 	border: 1px #333 solid;
-`;
+}
 
-export const BlockCol = styled.div`
+.block_col {
 	display: flex;
 	flex-direction: column;
 	border: 1px #333 solid;
-`;
+}
 
-export const FlexCol = styled.div`
+.flex_col {
 	display: flex;
 	flex-direction: column;
-`;
+}
 
-export const FlexRow = styled.div`
+.flex_row {
 	display: flex;
 
 	&.charge_container {
 		flex: 1;
 		min-height: 288px;
 	}
-`;
+}

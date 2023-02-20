@@ -42,7 +42,7 @@ function Air() {
 		setSubActiveTab(view);
 	};
 
-	const { data, listAPi } = useListShipmentPendingTasks();
+	const { data, loading, listAPi } = useListShipmentPendingTasks();
 
 	useEffect(() => {
 		if (subActiveTab === 'cargo_handover_at_origin_date') { listAPi(); }
@@ -73,7 +73,7 @@ function Air() {
 					))}
 				</div>
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} data={data} />}
+			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} data={data} loading={loading} />}
 		</div>
 	);
 }

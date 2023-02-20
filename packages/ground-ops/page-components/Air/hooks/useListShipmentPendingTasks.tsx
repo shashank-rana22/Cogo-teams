@@ -19,7 +19,7 @@ const useListShipmentPendingTasks = () => {
 					filters: {
 						q: (query || '').trim() || undefined,
 					},
-					assignedStakeholder : 'service_ops1',
+					assignedStakeholder : 'ground_ops',
 					page,
 					sort_type           : 'desc',
 				},

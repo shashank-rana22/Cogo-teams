@@ -10035,6 +10035,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'location',
 		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_operators',
+			access_type  : 'private',
+			service_name : 'operator',
+		},
 	],
 };
 export default partner;

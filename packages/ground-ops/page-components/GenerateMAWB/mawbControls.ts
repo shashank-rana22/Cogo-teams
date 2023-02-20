@@ -9,7 +9,9 @@ const mawbControls = () => [
 		span         : 6,
 		value        : '',
 		maxLength    : 50,
-		rules        : { required: true },
+		rules        : {
+			require: 'Shippers Name is Required',
+		},
 	},
 	{
 		name        : 'shipper_address',
@@ -21,7 +23,7 @@ const mawbControls = () => [
 		row         : 4,
 		placeholder : 'Address...',
 		rules       : {
-			required: true,
+			require: 'Shippers Address is Required',
 		},
 	},
 	{
@@ -34,7 +36,9 @@ const mawbControls = () => [
 		span         : 6,
 		placeholder  : "Consignee's name*",
 		maxLength    : 50,
-		rules        : { required: true },
+		rules        : {
+			require: 'Consignees Name is Required',
+		},
 	},
 	{
 		name        : 'consignee_address',
@@ -46,7 +50,7 @@ const mawbControls = () => [
 		row         : 4,
 		placeholder : 'Address...',
 		rules       : {
-			required: true,
+			require: 'Consignees Address is Required',
 		},
 	},
 	{
@@ -56,7 +60,9 @@ const mawbControls = () => [
 		label       : 'Origin:',
 		placeholder : 'Enter Origin Airport',
 		span        : 6,
-		rules       : { required: true },
+		rules       : {
+			require: 'Origin Airport is Required',
+		},
 	},
 	{
 		name        : 'destination_airport',
@@ -65,7 +71,9 @@ const mawbControls = () => [
 		label       : 'Destination:',
 		placeholder : 'Enter Destination Airport',
 		span        : 6,
-		rules       : { required: true },
+		rules       : {
+			require: 'Destination Airport is Required',
+		},
 	},
 	{
 		name      : 'accounting_information',
@@ -74,7 +82,9 @@ const mawbControls = () => [
 		label     : 'Accounting Information:',
 		value     : 'Freight PrePaid',
 		span      : 6,
-		rules     : { required: true },
+		rules     : {
+			require: 'Accounting Information is Required',
+		},
 	},
 	{
 		name      : 'iata_code',
@@ -83,7 +93,9 @@ const mawbControls = () => [
 		label     : "Agent's Iata Code:*",
 		value     : '14-3-4526/0005',
 		span      : 6,
-		rules     : { required: true },
+		rules     : {
+			require: 'Iata Code is Required',
+		},
 	},
 	{
 		name      : 'declared_value_for_carriage',
@@ -92,7 +104,9 @@ const mawbControls = () => [
 		label     : 'Declared Value for Carriage:',
 		value     : 'NVD',
 		span      : 6,
-		rules     : { required: true },
+		rules     : {
+			require: 'Carriage Value is Required',
+		},
 	},
 	{
 		name        : 'city',
@@ -102,7 +116,9 @@ const mawbControls = () => [
 		label       : 'Issuing Carrier City:*',
 		value       : 'NEW DELHI',
 		placeholder : 'City...',
-		rules       : { required: true },
+		rules       : {
+			require: 'Carrier City is Required',
+		},
 	},
 	{
 		name         : 'value_for_custom',
@@ -114,12 +130,6 @@ const mawbControls = () => [
 		placeholder  : 'Enter Value For Custom',
 	},
 	{
-		name: 'information',
-
-		span         : 12,
-		showOptional : false,
-	},
-	{
 		name         : 'handling_information',
 		type         : 'text',
 		className    : 'primary lg',
@@ -128,7 +138,9 @@ const mawbControls = () => [
 		span         : 6,
 		placeholder  : 'Handling Information...*',
 		maxLength    : 100,
-		rules        : { required: true },
+		rules        : {
+			require: 'Handling Information is Required',
+		},
 	},
 	{
 		name         : 'rate_per_kg',
@@ -138,18 +150,25 @@ const mawbControls = () => [
 		showOptional : false,
 		span         : 6,
 		placeholder  : 'Rate per Kg',
-		rules        : { required: true },
+		rules        : {
+			require: 'Rate is Required',
+		},
 	},
 	{
-		name           : 'currency',
-		placeholder    : 'Select Currency',
-		type           : 'select',
-		span           : 6,
-		label          : 'Currency',
-		optionsListKey : 'currencies',
-		className      : 'primary lg width',
-		rules          : {
-			required: true,
+		name        : 'currency',
+		placeholder : 'Select Currency',
+		type        : 'select',
+		span        : 6,
+		label       : 'Currency',
+		options     : [
+			{ value: 'USD', label: 'USD' },
+			{ value: 'INR', label: 'INR' },
+			{ value: 'EUR', label: 'EUR' },
+			{ value: 'GBP', label: 'GBP' },
+		],
+		className : 'primary lg width',
+		rules     : {
+			require: 'Currency is Required',
 		},
 	},
 	{
@@ -174,7 +193,7 @@ const mawbControls = () => [
 				span        : 2.5,
 				placeholder : 'Enter Code',
 				rules       : {
-					required: true,
+					require: 'Code is Required',
 				},
 			},
 			{
@@ -182,9 +201,8 @@ const mawbControls = () => [
 				placeholder : 'Enter Price',
 				type        : 'number',
 				span        : 2.5,
-				className   : 'primary lg',
 				rules       : {
-					required: true,
+					require: 'Price is Required',
 				},
 			},
 		],
@@ -211,7 +229,7 @@ const mawbControls = () => [
 				span        : 2.5,
 				placeholder : 'Enter Code',
 				rules       : {
-					required: true,
+					require: 'Code is Required',
 				},
 			},
 			{
@@ -221,7 +239,7 @@ const mawbControls = () => [
 				span        : 2.5,
 				className   : 'primary lg',
 				rules       : {
-					required: true,
+					require: 'Price is Required',
 				},
 			},
 		],
@@ -252,7 +270,7 @@ const mawbControls = () => [
 				className   : 'primary lg',
 				span        : 2,
 				rules       : {
-					required : true,
+					require  : 'Length is Required',
 					validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 				},
 			},
@@ -264,7 +282,7 @@ const mawbControls = () => [
 				className   : 'primary lg',
 				span        : 2,
 				rules       : {
-					required : true,
+					require  : 'Width is Required',
 					validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 				},
 			},
@@ -276,7 +294,7 @@ const mawbControls = () => [
 				className   : 'primary lg',
 				span        : 2,
 				rules       : {
-					required : true,
+					require  : 'Height is Required',
 					validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 				},
 			},
@@ -288,7 +306,7 @@ const mawbControls = () => [
 				className   : 'primary lg',
 				span        : 2,
 				rules       : {
-					required : true,
+					require  : 'No of Packages is Required',
 					validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 				},
 			},
@@ -304,7 +322,7 @@ const mawbControls = () => [
 		placeholder : 'Remarks...',
 		rows        : 3,
 		rules       : {
-			required: true,
+			require: 'Remarks is Required',
 		},
 	},
 	{
@@ -317,7 +335,7 @@ const mawbControls = () => [
 		placeholder : 'Commodity...',
 		rows        : 3,
 		rules       : {
-			required: true,
+			require: 'Commodity is Required',
 		},
 	},
 	{
@@ -328,7 +346,9 @@ const mawbControls = () => [
 		value        : 'NEW DELHI',
 		label        : 'At Place:',
 		placeholder  : 'Place',
-		rules        : { required: true },
+		rules        : {
+			require: 'Place is Required',
+		},
 	},
 ];
 

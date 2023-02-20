@@ -1,14 +1,14 @@
 import { Button } from '@cogoport/components';
 import { saveAs } from 'file-saver';
 import React, { createRef, useState } from 'react';
-import styles from 'styles.module.css';
 import { useScreenshot } from 'use-react-screenshot';
 
-// import ChargeDetails from './ChargeDetails';
-// import ContainerDetails from './ContainerDetails';
+import ChargeDetails from './ChargeDetails';
+import ContainerDetails from './ContainerDetails';
 import getFileObject from './getFileObject';
 import ShipmentDetails from './ShipmentDetails';
 import ShipperConsigneeDetails from './ShipperConsigneeDetails';
+import styles from './styles.module.css';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
 import Watermark from './watermark';
@@ -184,7 +184,7 @@ function GenerateMawb({
 						formData={formData}
 						primary_service={primary_service}
 					/>
-					{/* <ContainerDetails
+					<ContainerDetails
 						formData={formData}
 						primary_service={primary_service}
 						chargeable_weight={chargeable_weight}
@@ -195,7 +195,7 @@ function GenerateMawb({
 						fields={formData}
 						primary_service={primary_service}
 						data={data}
-					/> */}
+					/>
 				</div>
 			</div>
 
