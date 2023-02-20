@@ -9,7 +9,7 @@ const useDeleteAllocationQuota = (props) => {
 		url     : '/quota_attributes',
 		method  : 'POST',
 		authkey : 'post_allocation_quota_attributes',
-	});
+	}, { manual: true });
 
 	const onDelete = async () => {
 		try {

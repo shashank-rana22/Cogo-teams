@@ -8,13 +8,11 @@ const getFormattedValues = (formValues) => {
 	const quotaAttributes = {};
 
 	Object.keys(formValues).forEach((keyName) => {
-		const inputValue = formValues[keyName];
+		const inputValue = Number(formValues[keyName] || '');
 
 		if (inputValue) {
-			quotaAttributes[keyName] = Number(inputValue);
+			quotaAttributes[keyName] = inputValue;
 		}
-
-		quotaAttributes[keyName] = Number(formValues[keyName] || '');
 	});
 
 	return quotaAttributes;
@@ -84,7 +82,7 @@ const useCreateEditAllocationQuota = (props) => {
 
 			onCloseModal();
 			refetch();
-			Toast.success('Quota added successfully');
+			Toast.success(`Quota ${isUpdatable ? 'updated' : 'added'} successfully`);
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data)
