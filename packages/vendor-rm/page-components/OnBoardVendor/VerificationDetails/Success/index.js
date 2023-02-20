@@ -40,6 +40,7 @@ function Success() {
 				<div className={styles.button_container}>
 					<Button
 						size="lg"
+						themeType="secondary"
 						style={{ marginRight: '12px' }}
 						role="presentation"
 						onClick={addNewVendor}
