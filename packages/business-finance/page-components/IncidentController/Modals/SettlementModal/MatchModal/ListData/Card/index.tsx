@@ -121,7 +121,7 @@ function Card({
 
 				{!checkEdit && !nostroButton && !nostroEditable && isEditable && (
 					<Button
-						className={styles.edit_Icon}
+						className={styles.edit_icon}
 						onClick={() => {
 							setEditeAble(item, false, false, true);
 							setRestEdit(!restEdit);
@@ -177,7 +177,7 @@ function Card({
 
 				{!allocationEditable && isEditable && (
 					<Button
-						className={styles.edit_Icon}
+						className={styles.edit_icon}
 						onClick={() => {
 							setEditeAble(item, false, true);
 							setRestEdit(!restEdit);
