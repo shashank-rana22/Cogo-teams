@@ -62,14 +62,32 @@ function useCreateVendorContact({
 	};
 
 	useEffect(() => {
+		const { pocs = [], contact_details = {} } = vendorInformation || {};
+
+		const mapping = {
+			mobile_number: {
+				number       : pocs[0]?.mobile_number,
+				country_code : pocs[0]?.mobile_country_code,
+			},
+			whatsapp_number: {
+				number       : pocs[0]?.whatsapp_number,
+				country_code : pocs[0]?.whatsapp_country_code,
+			},
+		};
+
 		fields.forEach((field) => {
 			if (field.type === 'file') {
-				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]?.finalUrl);
+				setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl || pocs[0]?.contact_proof_url);
 			} else {
-				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]);
+				setValue(
+					`${field.name}`,
+					contact_details?.[field.name]
+					|| mapping[field.name]
+					|| pocs[0]?.[field.name],
+				);
 			}
 		});
-	}, []);
+	}, [fields, setValue, vendorInformation]);
 
 	const handleBackLink = (step) => {
 		setActiveStepper(TABS_MAPPING[step]);
