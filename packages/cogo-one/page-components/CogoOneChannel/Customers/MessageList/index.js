@@ -74,8 +74,7 @@ function MessageList({
 			{messagesLoading ? <LoadingState /> : (
 				<div className={styles.list_container}>
 					{(messagesList || []).map((item) => {
-						const { chat_tags = [] } = item || {};
-
+						const { chat_status = '' } = item || {};
 						const userData = getActiveCardDetails(item);
 						const {
 							user_name = '',
@@ -116,13 +115,17 @@ function MessageList({
 
 											<div className={styles.user_activity}>
 												<div className={styles.tags_conatiner}>
-													{!isEmpty(chat_tags) && (
-														<div className={styles.tags}>
-
-															{(chat_tags || []).map((tags) => (
-																startCase(tags)
-															))}
+													{!isEmpty(chat_status) && (
+														<div
+															className={cl`
+												${styles.tags}
+												${chat_status === 'warning' ? styles.warning : ''}
+												${chat_status === 'escalated' ? styles.escalated : ''}
+												`}
+														>
+															{startCase(chat_status)}
 														</div>
+
 													)}
 												</div>
 

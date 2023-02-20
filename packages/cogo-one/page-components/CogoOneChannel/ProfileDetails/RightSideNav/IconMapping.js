@@ -47,7 +47,10 @@ const IconMapping = [
 	},
 	{
 		name : 'customer_insights',
-		icon : <IcACustomerCentre width={25} height={25} />,
+		icon : <img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer Insights.svg"
+			alt="insights"
+		/>,
 	},
 ];
 export default IconMapping;
