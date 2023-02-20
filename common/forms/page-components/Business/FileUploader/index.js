@@ -9,16 +9,36 @@ import styles from './styles.module.css';
 function FileUploader(props) {
 	const {
 		onChange,
+		fileUrls,
 		showProgress,
 		multiple,
 		docName,
 		...rest
 	} = props;
-
 	const [fileName, setFileName] = useState(null); // remove
 	const [loading, setLoading] = useState(true); // remove
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
+
+	useEffect(() => {
+		setLoading(true);
+		if (typeof (fileUrls) === 'string' && !multiple) {
+			setFileName([{ name: fileUrls.split('/').slice(-1).join('') }]);
+			setUrlStore([{
+				fileName : fileUrls.split('/').slice(-1).join(''),
+				finalUrl : fileUrls,
+			}]);
+		}
+		if (multiple && typeof (fileUrls) !== 'string') {
+			const names = fileUrls.map((url) => ({ name: url.split('/').slice(-1).join('') }));
+			const urls = fileUrls.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+
+			setFileName(names);
+			setUrlStore(urls);
+		}
+		setLoading(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [fileUrls.length > 0]);
 
 	useEffect(() => {
 		if (multiple) {
@@ -81,8 +101,19 @@ function FileUploader(props) {
 
 				const allUrls = await Promise.all(promises);
 
-				setUrlStore(allUrls);
-				setFileName(values);
+				if (multiple) {
+					setUrlStore((prev) => {
+						if (prev === null) { return allUrls; }
+						return [...prev, ...allUrls];
+					});
+					setFileName((prev) => {
+						if (prev === null) return values;
+						return [...prev, ...values];
+					});
+				} else {
+					setUrlStore(allUrls);
+					setFileName(values);
+				}
 			}
 		} catch (error) {
 			Toast.error('File Upload failed.......');
