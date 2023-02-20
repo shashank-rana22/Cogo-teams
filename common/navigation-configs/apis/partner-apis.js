@@ -7154,11 +7154,11 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_muneem_reports_customers_on_sage_data',
+			api         : 'get_muneem_reports_sage_customers_data',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_muneem_reports_supplier_sage_data',
+			api         : 'get_muneem_reports_sage_suppliers_data',
 			access_type : 'private',
 		},
 		{
