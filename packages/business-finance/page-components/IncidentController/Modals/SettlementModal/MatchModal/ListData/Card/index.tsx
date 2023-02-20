@@ -95,7 +95,7 @@ function Card({
 
 				{!checkEdit && !tdsEditable && isEditable && (
 					<Button
-						className={styles.edit_Icon}
+						className={styles.edit_icon}
 						onClick={() => {
 							setEditeAble(item, true, false);
 							setRestEdit(!restEdit);
