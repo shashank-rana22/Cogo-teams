@@ -90,11 +90,11 @@ function BulkUpdateMode({
 
 				<Button
 					size="sm"
-					themeType="accent"
+					themeType="primary"
 					disabled={isEmpty(checkedRowsId)}
 					onClick={applyBulkFilter}
 				>
-					APPLY BULK FILTER
+					Apply bulk filter
 					{' '}
 				</Button>
 

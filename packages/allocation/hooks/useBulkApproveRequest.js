@@ -27,7 +27,7 @@ const useBulkApproveRequest = (props) => {
 
 			onResettingBulkMode();
 
-			Toast.success('Request has been initiated successfully. Please check after sometime');
+			Toast.success('Request has been initiated successfully. Please wait for the changes to be reflected');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
