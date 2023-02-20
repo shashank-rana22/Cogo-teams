@@ -12,7 +12,19 @@ const apis = [
 		service_name : 'vendor',
 	},
 	{
+		api          : 'update_vendor',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
 		api          : 'create_vendor_poc',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
+		api          : 'update_vendor_poc',
 		access_type  : 'private',
 		feature      : 'vendor',
 		service_name : 'vendor',
@@ -30,7 +42,19 @@ const apis = [
 		service_name : 'vendor',
 	},
 	{
+		api          : 'update_vendor_bank_detail',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
 		api          : 'create_vendor_services',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
+		api          : 'update_vendor_services',
 		access_type  : 'private',
 		feature      : 'vendor',
 		service_name : 'vendor',

@@ -5,6 +5,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -18,6 +19,10 @@ function useOnBoardVendor({
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
+	const { general: { query } } = useSelector((state) => state);
+
+	const { vendor_id } = query;
+
 	const router = useRouter();
 
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -47,7 +52,7 @@ function useOnBoardVendor({
 	}, { manual: true });
 
 	const [{ loading: updateLoading }, updateTrigger] = useRequest({
-		url    : '/create_vendor',
+		url    : '/update_vendor',
 		method : 'post',
 	}, { manual: true });
 
@@ -69,16 +74,23 @@ function useOnBoardVendor({
 		};
 
 		try {
-			const res = await trigger({ data: { ...payload } });
+			let res = {};
 
-			const href = '/onboard-vendor/[vendor_id]';
+			if (vendor_id) {
+				res = await updateTrigger({ data: { id: vendor_id, ...payload } });
 
-			const as = `/onboard-vendor/${res.data.id}`;
+				Toast.success('Vendor updated successfully');
+			} else {
+				res = await trigger({ data: { ...payload } });
 
-			router.push(href, as);
+				const href = '/onboard-vendor/[vendor_id]';
+				const as = `/onboard-vendor/${res.data.id}`;
+				router.push(href, as);
 
-			Toast.success('Vendor created successfully');
-			setActiveStepper('vendor_pocs');
+				Toast.success('Vendor created successfully');
+			}
+
+			setActiveStepper('contact_details');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

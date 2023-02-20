@@ -13,7 +13,7 @@ const COMPONENT_MAPPING = [
 		step      : 1,
 	},
 	{
-		key       : 'vendor_pocs',
+		key       : 'contact_details',
 		component : ContactDetails,
 		step      : 2,
 	},
@@ -23,7 +23,7 @@ const COMPONENT_MAPPING = [
 		step      : 3,
 	},
 	{
-		key       : 'vendor_bank_details',
+		key       : 'payment_details',
 		component : PaymentDetails,
 		step      : 4,
 	},

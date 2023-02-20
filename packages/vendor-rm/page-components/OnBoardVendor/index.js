@@ -22,14 +22,18 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState('verification');
+	const [activeStepper, setActiveStepper] = useState('contact_details');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
 	const getVendor = useCallback(async () => {
 		const res = await trigger({ params: { id: vendor_id } });
 
-		setVendorInformation(res.data);
+		setVendorInformation({
+			...res.data,
+			contact_details : res.data.pocs[0],
+			payment_details : res.data.bank_details[0],
+		});
 	}, [vendor_id, trigger]);
 
 	useEffect(() => {

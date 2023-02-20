@@ -5,7 +5,7 @@ const TABS_MAPPING = [
 	},
 	{
 		title : 'Contact Details',
-		key   : 'vendor_pocs',
+		key   : 'contact_details',
 	},
 	{
 		title : 'Vendor Services',
@@ -13,7 +13,7 @@ const TABS_MAPPING = [
 	},
 	{
 		title : 'Payment Details',
-		key   : 'vendor_bank_details',
+		key   : 'payment_details',
 	},
 	{
 		title : 'Verification',
