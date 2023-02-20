@@ -22,7 +22,7 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState('payment_details');
+	const [activeStepper, setActiveStepper] = useState('verification');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
