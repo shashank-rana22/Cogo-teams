@@ -15,7 +15,6 @@ import styles from './styles.module.css';
 function AddQuestions({
 	formId = '', proceedForm = () => {}, questionActionList = {},
 	setQuestionActionList = () => {},
-	saveForm = () => {},
 }) {
 	const [addAnother, setAddAnother] = useState(false);
 	const [openNewQuestionModal, setOpenNewQuestionModal] = useState(false);
@@ -38,13 +37,38 @@ function AddQuestions({
 
 	const tags = watch('tags');
 
+	const testCheckQuestions = [
+		{ id: 1, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 2, question: 'abc', tags: ['p'], weightage: 40 },
+		{ id: 3, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 4, question: 'abc', tags: ['p'], weightage: 20 },
+	];
+
+	const testWeighQuestions = [
+		{ id: 1, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 2, question: 'abc', tags: ['p'], weightage: 40 },
+		{ id: 3, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 4, question: 'abc', tags: ['p'], weightage: 20 },
+	];
+
+	const testAllQuestions = [
+		{ id: 1, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 2, question: 'abc', tags: ['p'], weightage: 40 },
+		{ id: 3, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 4, question: 'abc', tags: ['p'], weightage: 20 },
+		{ id: 5, question: 'abc', tags: ['m'] },
+		{ id: 6, question: 'abc', tags: ['m'] },
+		{ id: 7, question: 'abc', tags: ['m'] },
+		{ id: 8, question: 'abc', tags: ['m'] },
+	];
+
 	useEffect(() => {
 		if (!isEmpty(data)) {
 			setQuestionActionList({
 				...questionActionList,
-				weigh   : checkedQuestions,
-				checked : checkedQuestions,
-				allList : questions,
+				weigh   : checkedQuestions || testWeighQuestions,
+				checked : checkedQuestions || testCheckQuestions,
+				allList : questions || testAllQuestions,
 			});
 		}
 	}, [data]);
@@ -62,55 +86,67 @@ function AddQuestions({
 
 	return (
 		<>
-			{isEmpty(questionActionList.allList)
+			{isEmpty(testAllQuestions)
 				? <EmptyState setOpenNewQuestionModal={setOpenNewQuestionModal} /> : (
 					<div className={styles.add_question_container}>
 						<div className={styles.header}>
 							<div className={styles.form_header}>Create Form</div>
-							<div className={styles.new_button}>
-								<Button onClick={() => setOpenNewQuestionModal(true)}>
-									<IcMPlus />
-									New Question
-								</Button>
-							</div>
+
+							<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>
+								<IcMPlus />
+								New Question
+							</Button>
 						</div>
 
-						<div>Select A Question To Add...</div>
+						<div className={styles.body}>
+							<div className={styles.info_text}>Select A Question To Add...</div>
 
-						<div className={styles.filters}>
-							<Controller
-								control={control}
-								name={name}
-								rules={rules}
-								render={({ field: { onChange, onBlur, value } }) => (
-									<CreatableMultiSelect
-										{...rest}
+							<div className={styles.filters_pagination}>
+								<div className={styles.filters}>
+									<Controller
+										control={control}
 										name={name}
-										onChange={onChange}
-										value={value}
-										onBlur={onBlur}
+										rules={rules}
+										render={({ field: { onChange, onBlur, value } }) => (
+											<CreatableMultiSelect
+												{...rest}
+												name={name}
+												onChange={onChange}
+												value={value}
+												onBlur={onBlur}
+											/>
+										)}
+									/>
+									<Input
+										value={searchValue}
+										onChange={setSearchValue}
+										style={{ marginLeft: '8px' }}
+										placeholder="Search Question..."
+									/>
+
+								</div>
+
+								<div className={styles.pagination_container}>
+									<Pagination
+										type="number"
+										currentPage={params.page}
+										totalItems={total_count}
+										pageSize={params.page_limit}
+										onPageChange={setPage}
+									/>
+								</div>
+							</div>
+
+							<div className={styles.questions}>
+								{testAllQuestions.length > 0 && (
+									<Questions
+										questions={testAllQuestions}
+										questionActionList={questionActionList}
+										setQuestionActionList={setQuestionActionList}
 									/>
 								)}
-							/>
-							<Input value={searchValue} onChange={setSearchValue} style={{ marginLeft: '8px' }} />
-						</div>
+							</div>
 
-						{questionActionList.allList?.length > 0 && (
-							<Questions
-								questions={questionActionList.allList}
-								questionActionList={questionActionList}
-								setQuestionActionList={setQuestionActionList}
-							/>
-						)}
-
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="number"
-								currentPage={params.page}
-								totalItems={total_count}
-								pageSize={params.page_limit}
-								onPageChange={setPage}
-							/>
 						</div>
 
 						<div className={styles.footer}>
@@ -124,14 +160,12 @@ function AddQuestions({
 							</Button>
 
 							<Button
-								themeType="secondary"
-								style={{ marginRight: '8px' }}
-								onClick={() => saveForm('add_questions')}
+								themeType="accent"
+								onClick={() => proceedForm('submit_form')}
 							>
-								Save
-							</Button>
+								Add to Form
 
-							<Button themeType="accent" onClick={() => proceedForm('submit_form')}>Add to Form</Button>
+							</Button>
 						</div>
 					</div>
 				)}

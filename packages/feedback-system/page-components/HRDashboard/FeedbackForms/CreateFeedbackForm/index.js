@@ -16,16 +16,6 @@ function CreateFeedbackForm({
 }) {
 	const [questionActionList, setQuestionActionList] = useState({});
 
-	const saveForm = (newStage) => {
-		storeQuestionData({
-			department,
-			designation,
-			checkList : questionActionList.checked,
-			weighList : questionActionList.weigh,
-			stage     : newStage,
-		});
-	};
-
 	const proceedForm = (newStage) => {
 		setFormStage(newStage);
 
@@ -52,7 +42,6 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
-					saveForm={saveForm}
 				/>
 			);
 		}
@@ -60,7 +49,7 @@ function CreateFeedbackForm({
 		if (formStage === 'submit_form') {
 			if (isEmpty(questionActionList.checked)) {
 				Toast.error('Please select at least one question...');
-
+				setFormStage('add_questions');
 				return (
 					<AddQuestions
 						formId={formId}
@@ -75,7 +64,6 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
-					saveForm={saveForm}
 				/>
 			);
 		}
@@ -93,6 +81,8 @@ function CreateFeedbackForm({
 
 		setFormId('');
 		setOpenCreateForm(false);
+
+		return null;
 	};
 
 	return renderFormStage();

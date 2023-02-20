@@ -161,7 +161,7 @@ function PerformanceChart({ user_id = '' }) {
 					<div className={styles.line_graph}>
 						<ResponsiveLine
 							data={newlineData}
-							margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+							margin={{ top: 30, right: 110, bottom: 50, left: 60 }}
 							xScale={{
 								type    : 'point',
 								stacked : true,
@@ -177,7 +177,7 @@ function PerformanceChart({ user_id = '' }) {
 								stacked  : false,
 							}}
 							yFormat=" >-.2f"
-							curve="linear"
+							curve="natural"
 							lineWidth={3}
 							axisTop={null}
 							axisRight={null}
@@ -201,40 +201,37 @@ function PerformanceChart({ user_id = '' }) {
 								legendPosition : 'middle',
 							}}
 							enableGridX={false}
-							pointSize={7}
+							pointSize={5}
 							pointBorderWidth={7}
 							pointLabelYOffset={-12}
 							areaOpacity={0.25}
-							enableCrosshair={false}
-							crosshairType="top-left"
 							useMesh
 							colors={['#F2E3C3', '#F9AE64', '#828282']}
 							colorBy="index"
-							legends={[
-								{
-									anchor        : 'top-right',
-									direction     : 'row',
-									justify       : false,
-									translateX    : 0,
-									translateY    : 0,
-									itemWidth     : 100,
-									itemHeight    : 20,
-									itemsSpacing  : 4,
-									symbolSize    : 20,
-									symbolShape   : 'circle',
-									itemDirection : 'left-to-right',
-									itemTextColor : '#777',
-									effects       : [
-										{
-											on    : 'hover',
-											style : {
-												itemBackground : 'rgba(0, 0, 0, .03)',
-												itemOpacity    : 1,
-											},
-										},
-									],
-								},
-							]}
+							// legends={[
+							// 	{
+							// 		anchor        : 'top-right',
+							// 		direction     : 'row',
+							// 		justify       : false,
+							// 		translateX    : 0,
+							// 		translateY    : -30,
+							// 		itemWidth     : 100,
+							// 		itemHeight    : 20,
+							// 		itemsSpacing  : 4,
+							// 		symbolSize    : 10,
+							// 		itemDirection : 'left-to-right',
+							// 		itemTextColor : '#777',
+							// 		effects       : [
+							// 			{
+							// 				on    : 'hover',
+							// 				style : {
+							// 					itemBackground : 'rgba(0, 0, 0, .03)',
+							// 					itemOpacity    : 1,
+							// 				},
+							// 			},
+							// 		],
+							// 	},
+							// ]}
 						/>
 
 					</div>

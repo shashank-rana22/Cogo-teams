@@ -49,9 +49,9 @@ function FeedbackManagement() {
 		source: 'manager_feedback',
 	});
 
-	// useEffect(() => {
-	// 	debounceQuery(searchValue);
-	// }, [searchValue]);
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [searchValue]);
 
 	return (
 		<div className={`${styles.container} ${isEmpty([newTeamList]) ? styles.empty_container : ''}`}>

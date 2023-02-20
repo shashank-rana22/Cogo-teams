@@ -1,4 +1,16 @@
+.submit_form_container {
+    height: 100%;
+    padding: 0px 16px;
+}
+
+.header {
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .button_container {
+    position: sticky;
+    bottom: 0px;
     display: flex;
     justify-content: flex-end;
 }

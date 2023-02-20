@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty, addDays } from '@cogoport/utils';
+import { isEmpty, addDays, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FeedBackForm from './FeedBackForm';
@@ -15,12 +15,14 @@ const getSaturday = (date) => {
 };
 
 function FeedbackFormModal({
-	userId = '',
-	performanceItem = {},
-	feedbackId = '',
-	feedback = '',
+	item = {},
 	getTeamFeedbackList = () => {},
 }) {
+	const {
+		user_id:userId = '',
+		performance_item: performanceItem = {}, feedback = '', form_id:feedbackId = '',
+	} = item;
+
 	const [addFeedback, setAddFeedback] = useState(false);
 	const [newFeedbackId, setNewFeedbackId] = useState(feedbackId);
 	const [rating, setRating] = useState({ ...performanceItem });
@@ -79,9 +81,18 @@ function FeedbackFormModal({
 					size="xl"
 					onClickOutside={() => onCloseFunction()}
 				>
-					<Modal.Header title="Feedback Form" />
+					<Modal.Header title={(
+						<div className={styles.modal_header}>
+							Feedback Form For :
+							<span>
+								{' '}
+								{startCase(item.name)}
+							</span>
+						</div>
+					)}
+					/>
 
-					<Modal.Body style={{ padding: '0px' }}>
+					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
 						<FeedBackForm
 							userId={userId}
 							rating={rating}

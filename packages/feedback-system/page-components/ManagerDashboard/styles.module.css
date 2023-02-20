@@ -6,9 +6,14 @@
 	font-weight: 700;
 }
 
+.stats_section {
+	margin-top: 16px;
+}
+
 .page_actions {
 	display: flex;
-
+	justify-content: space-between;
+	
 	:global(.ui_select_container) {
 		width: 160px;
 		height: 38px;

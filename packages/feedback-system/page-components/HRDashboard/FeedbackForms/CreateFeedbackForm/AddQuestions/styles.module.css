@@ -1,11 +1,43 @@
 .add_question_container {
-   
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding: 0px 16px;
+
+    .form_header {
+        font-size: 20px;
+        font-weight: 600;
+    }
+}
+
+.body {
+    padding: 0px 16px;
+}
+
+.footer {
+    display: flex;
+    align-items: center; 
+}
+
+.button_container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.info_text {
+    margin-top: 16px;
+}
+
+.filters_pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
 }
 
 .filters {
@@ -29,8 +61,20 @@
         }
     }
 }
+
+.questions {
+    margin-top: 16px;
+}
+
+
 .footer {
+    position: sticky;
+    bottom: 0px;
+
     display: flex;
     justify-content: flex-end;
-    align-items: center; 
+    padding: 16px 16px 0 0;
+
+    border-top: 1px solid #6fa5ab;
+    background-color: #ffffff;
 }

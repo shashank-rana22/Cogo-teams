@@ -34,7 +34,7 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 
 			{questionStatus !== 'add_weightage' && (
 				<div className={styles.question_tags}>
-					{tags.map((tag) => <Pill color="blue">{tag}</Pill>)}
+					{tags.map((tag) => <Pill color="#d9eafd">{tag}</Pill>)}
 				</div>
 			)}
 		</div>

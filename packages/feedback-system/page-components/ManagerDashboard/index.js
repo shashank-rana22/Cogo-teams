@@ -1,4 +1,5 @@
-import { Select, Button } from '@cogoport/components';
+import { Datepicker } from '@cogoport/components';
+import { DateRangepicker, Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -139,13 +140,13 @@ function ManagerDashboard() {
 
 	const monthControls = getMonthControls(params.filters.created_at_year);
 
-	const { params, setParams, data, loading, setPage } = useListUserFeedbacks({
-		searchValue: query,
-	});
-
 	const { list: newTeamList, page_limit, total_count } = data || {};
 
 	const Router = useRouter();
+
+	const setFilter = (val, type) => {
+		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
+	};
 
 	const handleClick = () => {
 		Router.push('/feedback-system/manager-dashboard/feedback-management');
@@ -175,7 +176,6 @@ function ManagerDashboard() {
 						style={{ marginRight: '8px' }}
 						options={monthControls.created_at_month.options}
 					/>
-
 				</div>
 
 				<Button
@@ -191,12 +191,6 @@ function ManagerDashboard() {
 
 			<div className={styles.stats_section}>
 				<PerformanceChart />
-
-				<TeamStats
-					setParams={setParams}
-					selectedBucket={selectedBucket}
-					setSelectedBucket={setSelectedBucket}
-				/>
 			</div>
 
 			<div className={styles.list_section}>

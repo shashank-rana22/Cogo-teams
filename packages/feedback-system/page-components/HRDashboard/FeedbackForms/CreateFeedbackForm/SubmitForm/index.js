@@ -8,11 +8,10 @@ function SubmitForm({
 	questionActionList = {},
 	setQuestionActionList = () => [],
 	proceedForm = () => {},
-	saveForm = () => {},
 }) {
 	return (
-		<div>
-			<div>Create Form</div>
+		<div className={styles.submit_form_container}>
+			<div className={styles.header}>Create Form</div>
 			{questionActionList.weigh?.length > 0 && (
 				<Questions
 					questions={questionActionList.weigh}
@@ -30,14 +29,7 @@ function SubmitForm({
 					Back
 
 				</Button>
-				<Button
-					themeType="secondary"
-					style={{ marginRight: '8px' }}
-					onClick={() => saveForm('submit_form')}
-				>
-					Save
 
-				</Button>
 				<Button
 					themeType="accent"
 					onClick={() => proceedForm('publish')}

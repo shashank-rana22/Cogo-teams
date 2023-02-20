@@ -193,6 +193,7 @@ function HRDashboard() {
 							options={deptControls.options}
 							placeholder="Department..."
 							style={{ marginRight: '8px' }}
+							isClearable={!params.filters?.designation}
 						/>
 						<Select
 							value={params.filters?.designation}
@@ -201,6 +202,7 @@ function HRDashboard() {
 							disabled={!params.filters?.department}
 							placeholder="Role..."
 							style={{ marginRight: '8px' }}
+							isClearable
 						/>
 
 						<SelectController
@@ -215,6 +217,7 @@ function HRDashboard() {
 							placeholder="Select Year"
 							style={{ marginRight: '8px' }}
 							options={monthControls.created_at_year.options}
+							isClearable={!params.filters?.created_at_month}
 						/>
 
 						<Select
@@ -224,6 +227,7 @@ function HRDashboard() {
 							placeholder="Select Month"
 							style={{ marginRight: '8px' }}
 							options={monthControls.created_at_month.options}
+							isClearable
 						/>
 					</div>
 				</div>

@@ -128,7 +128,7 @@ function QuestionsItem({
 							<IcMDelete
 								width={20}
 								height={20}
-								fill="red"
+								fill="#393F70"
 								style={{
 									fontWeight : '100',
 									cursor     : 'pointer',

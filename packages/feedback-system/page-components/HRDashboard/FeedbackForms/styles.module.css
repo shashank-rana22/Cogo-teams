@@ -33,6 +33,7 @@
     margin-top: 16px;
     max-height: 90%;
     /* padding: 16px 0px; */
+    overflow: hidden;
 
     background-color: #ffffff;
     border-radius: 8px;
@@ -118,5 +119,6 @@
 .form_section {
     max-height: 100%;
     overflow: scroll;
+    margin: 16px 0px;
 }
 

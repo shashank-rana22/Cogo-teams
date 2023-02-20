@@ -8,6 +8,17 @@
 	margin: 0px;
 }
 
+.modal_header {
+	font-size: 16px;
+	font-weight: 600;
+
+	span {
+		font-size: 18px;
+		font-weight: bold;
+		color: #7278ad;
+	}
+}
+
 .add_button {
 	display: flex;
 	flex-direction: row;
