@@ -29,8 +29,9 @@ function ActionRejected({ itemData, refetch }) {
 							&& (userIncidentStatus === 'PENDING_ACTION')
 								? <ViewRequested itemData={itemData} name="Raise Again" refetch={refetch} /> : null}
 						</div>
-						{name !== 'Raise Again'
-						&& <div className={styles.hr} />}
+						{name === 'Raise Again' || (name === 'Accept' && (userIncidentStatus === 'ACCEPTED'
+						|| userIncidentStatus === 'RAISED_AGAIN')) ? null
+							: <div className={styles.hr} />}
 					</div>
 				))}
 			</div>

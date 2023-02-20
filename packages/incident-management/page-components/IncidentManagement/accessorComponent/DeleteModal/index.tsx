@@ -17,7 +17,8 @@ function DeleteModal({ itemData, refetch }) {
 				{status === 'REJECTED' ? (
 					<Button
 						disabled={userIncidentStatus === 'ACCEPTED' || userIncidentStatus === 'RAISED_AGAIN'}
-						themeType="secondary"
+						themeType="tertiary"
+						size="sm"
 						onClick={() => { setShowDeleteModal(true); }}
 					>
 						Accept

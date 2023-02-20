@@ -12,13 +12,15 @@ import styles from './styles.module.css';
 function IcJvApproval({
 	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
 }) {
-	const { type, data, userNotes } = itemData || {};
+	const { type, data, status, userNotes } = itemData || {};
 	const { interCompanyJournalVoucherRequest } = data || {};
 	const { list = [], remark, totalCredit, totalDebit, currency } = interCompanyJournalVoucherRequest || {};
 	const columns = getModalColumns(type);
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>
+			{status === 'REJECTED'
+				? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
+				: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
 			<Modal size="xl" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Inter Company - Journal Voucher" />
 				<Modal.Body>

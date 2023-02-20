@@ -21,11 +21,20 @@ function TdsDeviationModal({
 	} = tdsRequest || {};
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
-				{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
+			{status === 'REJECTED'
+				? (
+					<Button size="xs" themeType="tertiary" onClick={() => { setShowModal(true); }}>
+						{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION'
 					&& name === 'Raise Again' ? 'Raise Again' : 'View'}
 
-			</Button>
+					</Button>
+				)
+				:			(
+					<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
+						View
+					</Button>
+				)}
+
 			<Modal size="lg" show={showModal} onClose={() => { setShowModal(false); }}>
 				<Modal.Header title="Tds Deviation" />
 				<Modal.Body>
