@@ -3,7 +3,7 @@
 		width: 500px;
 	}
 
-
+	/* stylelint-disable-next-line selector-class-pattern */
 	:global(.tippy-content) {
 		box-sizing: border-box;
 		width: 100%;
@@ -13,7 +13,7 @@
 		border-radius: 10px;
 	}
 
-	:global(.ui_chips_container){
+	:global(.ui_chips_container) {
 		flex-wrap: wrap;
 	}
 }
@@ -43,5 +43,5 @@
 
 .label {
 	line-height: 24px;
-	color: #bdbdbd;
+	color: #4f4f4f;
 }
