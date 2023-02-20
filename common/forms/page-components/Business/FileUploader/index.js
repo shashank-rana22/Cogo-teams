@@ -122,7 +122,12 @@ function FileUploader(props) {
 		}
 	};
 
-	console.log(fileName);
+	const handleDelete = (values) => {
+		setFileName(values);
+		const files = values.map((item) => item.name);
+		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
+		setUrlStore(newUrls);
+	};
 
 	return (
 		<>
@@ -131,6 +136,7 @@ function FileUploader(props) {
 				value={fileName}
 				multiple={multiple}
 				onChange={handleChange}
+				onClick={handleDelete}
 				loading={loading}
 				multipleUploadDesc="Upload files"
 				uploadIcon={<IcMUpload height={40} width={40} />}
