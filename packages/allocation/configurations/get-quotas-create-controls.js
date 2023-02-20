@@ -41,8 +41,7 @@ const quotasCreateControls = [
 		params      : {
 			permissions_data_required : false,
 			filters                   : {
-				// ! stakeholder_id   : geo.uuid.parent_entity_id,
-				stakeholder_type: 'partner',
+				partner_entity_types: ['cogoport'],
 			},
 		},
 		rules: {

@@ -10,8 +10,7 @@ const controls = [
 		params      : {
 			permissions_data_required : false,
 			filters                   : {
-				stakeholder_id   : '6fd98605-9d5d-479d-9fac-cf905d292b88',
-				stakeholder_type : 'partner',
+				partner_entity_types: ['cogoport'],
 			},
 		},
 		isClearable: true,

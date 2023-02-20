@@ -24,10 +24,6 @@ const controls = [
 		asyncKey       : 'organizations',
 		initialCall    : false,
 		isClearable	   : true,
-		// getModifiedOptions : ({ options }) => options.map((option) => ({
-		// 	...options,
-		// 	business_name: `${option.business_name}`,
-		// })),
 		rules          : { required: 'Organization Name is required' },
 	},
 	{

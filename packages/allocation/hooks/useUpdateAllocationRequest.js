@@ -12,7 +12,7 @@ const useUpdateRequestStatus = (props) => {
 		url     : '/request_status',
 		method  : 'POST',
 		authkey : 'post_allocation_request_status',
-	});
+	}, { manual: true });
 
 	const [{ loading }, trigger] = api;
 
