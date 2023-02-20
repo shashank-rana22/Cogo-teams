@@ -4,6 +4,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import TABS_MAPPING from '../../../../constants/tabs';
@@ -33,8 +34,12 @@ function useVendorServices({
 
 	const { partner_id = '' } = query;
 
+	const { vendor_services } = vendorInformation;
+
+	const isUpdateAction = !isEmpty(vendor_services);
+
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_vendor_services',
+		url    : isUpdateAction ? '/update_vendor_services' : '/create_vendor_services',
 		method : 'POST',
 	}, { manual: true });
 
@@ -51,15 +56,14 @@ function useVendorServices({
 			const { formattedServices = [] } = getFormattedServices({ data, partner_id });
 
 			const payload = {
-				performed_by_id   : '',
-				performed_by_type : '',
-				vendor_id         : vendorInformation?.vendor_details?.id,
-				services          : formattedServices,
+				vendor_id : vendorInformation?.vendor_details?.id,
+				services  : formattedServices,
 			};
 
 			await trigger({ data: payload });
 
-			Toast.success('Services added successfully');
+			Toast.success(`Services ${isUpdateAction ? 'updated' : 'added'} successfully`);
+
 			setActiveStepper('payment_details');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
@@ -67,7 +71,7 @@ function useVendorServices({
 	};
 
 	useEffect(() => {
-		const { vendor_services = {}, services: office_details = [] } = vendorInformation || {};
+		const { services: office_details = [] } = vendorInformation || {};
 
 		const prefill_obj = {
 			office_details,
