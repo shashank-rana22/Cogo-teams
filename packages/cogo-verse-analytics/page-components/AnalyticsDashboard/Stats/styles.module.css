@@ -107,6 +107,29 @@
 }
 .primary_stat_value{
 	margin-right: 5px;
+	display: inline-block;
+	position: relative;
+
+  &::after {
+	  content: '';
+	  position: absolute;
+	  width: 100%;
+	  transform: scaleX(0);
+	  height: 1px;
+	  bottom: 0;
+	  left: 0;
+	  background-color: #000;
+	  transform-origin: bottom right;
+	  transition: transform 0.25s ease-out;
+	}
+	&:hover {
+	  color: #242424;
+	}
+  
+	&:hover::after {
+	  transform: scaleX(1);
+	  transform-origin: bottom left;
+	}
 }
 .primary_stat_description{
     margin-top: 5px;
