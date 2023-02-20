@@ -1,5 +1,10 @@
 .container {
-	margin: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.empty_container {
+	height: calc(100vh - 48px);
 }
 
 .redirect_container {
@@ -28,15 +33,19 @@
 	padding: 8px 0;
 
 	.header_text {
-		font-size: 18px;
-		font-weight: bold;
-		color: #393f70;
+		font-size: 28px;
+		font-weight: 600;
 		margin: 0px;
 	}
+}
 
-	.header_filters {
-		display: flex;
-		align-items: center;
+.header_filters {
+	display: flex;
+	align-items: center;
+
+	:global(.ui_select_display_container) {
+		width: 160px;
+		height: 38px;
 	}
 }
 

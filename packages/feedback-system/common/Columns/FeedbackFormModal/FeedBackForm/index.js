@@ -2,12 +2,12 @@ import {
 	Button,
 	RadioGroup,
 	Placeholder,
-	TextArea,
-	toast,
+	Textarea,
+	Toast,
 	Tooltip,
 } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { IcCStar, IcMArrowDoubleDown, IcMArrowDown, IcMArrowUp, IcMInfo } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
 import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';
@@ -48,7 +48,7 @@ function FeedBackForm({
 
 	const onSubmit = () => {
 		if (Object.values(rating).includes(0) || isEmpty(comment)) {
-			toast.error('Please provide rating for all the parameters');
+			Toast.error('Please provide rating for all the parameters');
 		} else return onSubmitData();
 
 		return null;
@@ -62,19 +62,32 @@ function FeedBackForm({
 		{ label: '', value: '5' },
 	];
 
-	const performanceRating = [
-		'Below Expectations',
-		'Needs Improvement',
-		'Meets Expectations',
-		'Exceeds Expectations',
-		'Outstanding',
-	];
+	const performanceIcons = {
+		below_expectations   : <IcMArrowDoubleDown height={20} width={20} fill="#ee3425" />,
+		needs_improvement    : <IcMArrowDown height={20} width={20} fill="#f68b21" />,
+		meets_expectations   : <div className={styles.constant}>H</div>,
+		exceeds_expectations : <IcMArrowUp height={20} width={20} fill="#abcd62" />,
+		outstanding          : <IcCStar height={20} width={20} fill="#fcdc00" />,
+	};
+
+	const performanceClass = {};
+
+	Object.keys(performanceIcons).forEach((key) => {
+		performanceClass[key] = (
+			<Tooltip
+				placement="top"
+				theme="light"
+				animation="shift-away"
+				content={<div>{startCase(key)}</div>}
+			>
+				{performanceIcons[key]}
+			</Tooltip>
+		);
+	});
 
 	const onChange = (e) => {
 		setComment(e.target.value);
 	};
-
-	const content = (remark) => `${remark}`;
 
 	if (questionsLoading) {
 		return (
@@ -88,68 +101,89 @@ function FeedBackForm({
 		);
 	}
 
-	if (feedbackQuestionList.length === 0 && !questionsLoading) {
-		return <EmptyState />;
-	}
+	// if (feedbackQuestionList.length === 0 && !questionsLoading) {
+	// 	return <EmptyState />;
+	// }
+
+	const questions = [{ id: 1, question: 'where are you now? where are you now? where are you now? where are you now? where are you now? where are you now? where are you now?', remark: 'how are you?', weightage: 20 },
+		{ id: 2, question: 'where are you now?', remark: 'how are you?', weightage: 20 },
+		{ id: 3, question: 'where are you now?', remark: 'how are you?', weightage: 20 },
+		{ id: 4, question: 'where are you now?', remark: 'how are you?', weightage: 20 },
+		{ id: 5, question: 'where are you now?', remark: 'how are you?', weightage: 20 }];
 
 	return (
 		<div className={styles.form_container}>
-			<div className={styles.heading}>
-				<div className={styles.header}>
-					<div className={styles.side_heading}>Questions</div>
 
-					{performanceRating.map((key) => <div className={styles.rating}>{key}</div>)}
+			<div className={styles.header}>
+				<div className={`${styles.side_heading} ${styles.column}`}>Questions</div>
+
+				<div className={styles.rating_classes}>
+					{Object.keys(performanceClass).map((key) => (
+						<div className={styles.class}>
+							{performanceClass[key]}
+						</div>
+					))}
 				</div>
 			</div>
 
-			{(feedbackQuestionList || []).map((key) => {
-				const { question, remark } = key || {};
+			{(questions || []).map((key) => {
+				const { id, question, remark } = key || {};
 				return (
-					<div className={styles.controls}>
-						<div className={styles.side_heading}>
-							<div className={styles.question_container}>{question}</div>
+					<div
+						className={styles.controls}
+					>
+						<div className={styles.question_rating}>
+							<div className={styles.side_heading}>
+								<div className={styles.question_container}>{startCase(question)}</div>
 
-							<Tooltip
-								placement="top"
-								theme="light"
-								animation="shift-away"
-								render={content(remark)}
-							>
-								<div
-									role="button"
-									tabIndex={0}
-									style={{ paddingTop: '5px', paddingLeft: '5px' }}
+								<Tooltip
+									placement="top"
+									theme="light"
+									animation="shift-away"
+									content={<div>{remark}</div>}
 								>
 									<IcMInfo
 										fill="#393f70"
 										width={16}
 										height={16}
-										type="button"
 									/>
-								</div>
-							</Tooltip>
+								</Tooltip>
+							</div>
+
+							<div className={styles.radio_group}>
+								<RadioGroup
+									options={options}
+									value={rating[id]?.rating}
+									onChange={(item) => {
+										setRating({ ...rating, [id]: { ...(rating[id]), rating: item } });
+									}}
+								/>
+							</div>
 						</div>
 
-						<RadioGroup
-							className="primary md"
-							options={options}
-							value={rating[question]}
-							onChange={(item) => {
-								setRating({ ...rating, [question]: item });
-							}}
-						/>
+						<div className={styles.question_feedback}>
+							<Textarea
+								value={rating[id]?.reason}
+								onChange={(val) => {
+									setRating({ ...rating, [id]: { ...(rating[id]), reason: val } });
+								}}
+								placeholder="Convey the reason for feedback..."
+								style={{ height: '60px' }}
+							/>
+						</div>
 					</div>
 				);
 			})}
 
-			<div className={styles.feedback_content}>
+			<div className={styles.feedback_comment}>
 				<div className={styles.comment}>Your Feedback</div>
 
-				<TextArea
-					themeType="large"
+				<Textarea
+					size="lg"
 					value={comment}
-					placeholder="Type your feedback here ..."
+					placeholder="Specify the overall feedback."
 					onChange={onChange}
+					style={{ height: '80px' }}
 				/>
 			</div>
 
@@ -162,6 +196,7 @@ function FeedBackForm({
 						setRating({});
 						setComment('');
 					}}
+					style={{ marginRight: '8px' }}
 				>
 					Reset
 				</Button>
@@ -170,9 +205,7 @@ function FeedBackForm({
 					size="md"
 					themeType="accent"
 					loading={loading}
-					onClick={() => {
-						onSubmit();
-					}}
+					onClick={onSubmit}
 				>
 					Submit
 				</Button>

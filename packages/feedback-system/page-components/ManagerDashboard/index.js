@@ -1,16 +1,12 @@
-import { Modal, Button, Input, Select } from '@cogoport/components';
-import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useGetColumns from '../../common/Columns';
-import Filters from '../../common/Filters';
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
 import UserTableData from '../../common/userTableData';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
-import { getControls } from '../../utils/filterControls';
 import getUserFilterControls from '../../utils/getUserFilterControls';
 import getMonthControls from '../../utils/monthControls';
 
@@ -137,9 +133,6 @@ const dummyListData = [
 ];
 
 function ManagerDashboard() {
-	const [openUploadModal, setOpenUploadModal] = useState(false);
-	const [notifyModal, setNotifyModal] = useState(false);
-
 	const [selectedBucket, setSelectedBucket] = useState('');
 
 	const [searchValue, setSearchValue] = useState('');
@@ -163,78 +156,63 @@ function ManagerDashboard() {
 	const { list: newTeamList, page_limit, total_count } = data || {};
 
 	const Router = useRouter();
-	const redirectToFeedbackManagement = () => {
+
+	const handleClick = () => {
 		Router.push('/feedback-system/manager-dashboard/feedback-management');
 	};
 
-	useEffect(() => setParams((pv) => ({
-		...pv,
-		filters: {
-			...(pv.filters || {}),
-			created_at_month : monthFilter || undefined,
-			created_at_year  : yearFilter || undefined,
-		},
-	})), [monthFilter, yearFilter]);
-
-	useEffect(() => debounceQuery(searchValue), [searchValue]);
-
 	return (
 		<div className={styles.container}>
-			<div className={styles.top_most_container}>
-				<h1>
-					Manager Dashboard
-				</h1>
-			</div>
+			<p className={styles.header_text}>
+				Manager Dashboard
+			</p>
 
-			<div className={styles.top_container}>
+			<div className={styles.page_actions}>
 				<div className={styles.filters}>
-					<div className={styles.month_container}>
-						<SelectController {...monthControls.created_at_month} control={control} />
-					</div>
+					<Select
+						value={params.filters?.created_at_year}
+						onChange={(val) => setFilter(val, 'created_at_year')}
+						placeholder="Select Year"
+						style={{ marginRight: '8px' }}
+						options={monthControls.created_at_year.options}
+					/>
 
-					<div className={styles.month_container}>
-						<SelectController {...monthControls.created_at_year} control={control} />
-					</div>
+					<Select
+						value={params.filters?.created_at_month}
+						onChange={(val) => setFilter(val, 'created_at_month')}
+						disabled={!params.filters?.created_at_year}
+						placeholder="Select Month"
+						style={{ marginRight: '8px' }}
+						options={monthControls.created_at_month.options}
+					/>
 
-					<div><Filters controls={filterControls} params={params} setParams={setParams} /></div>
-
-					<div style={{ marginRight: '16px' }}>
-						<Input
-							size="md"
-							value={searchValue}
-							onChange={setSearchValue}
-							placeholder="Search User.."
-							suffix={<IcMSearchlight />}
-							type="text"
-							style={{ padding: '10px' }}
-						/>
-					</div>
 				</div>
 
 				<Button
-					size="lg"
 					themeType="accent"
-					onClick={() => redirectToFeedbackManagement()}
+					size="lg"
+					onClick={() => {
+						handleClick();
+					}}
 				>
 					Submit Feedback
 				</Button>
-
 			</div>
 
-			<div>
-				<div className={styles.stats_container}>
-					<PerformanceChart />
+			<div className={styles.stats_section}>
+				<PerformanceChart />
 
-					<TeamStats
-						selectedBucket={selectedBucket}
-						setParams={setParams}
-						setSelectedBucket={setSelectedBucket}
-					/>
-				</div>
+				<TeamStats
+					setParams={setParams}
+					selectedBucket={selectedBucket}
+					setSelectedBucket={setSelectedBucket}
+				/>
+			</div>
 
+			<div className={styles.list_section}>
 				<div className={styles.list_header}>
-					<p className={styles.list_title}>
-						Feedback List
+					<p className={styles.list_header_text}>
+						Team Members Feedback List
 					</p>
 				</div>
 
@@ -248,40 +226,6 @@ function ManagerDashboard() {
 						setPagination={setPage}
 					/>
 				</div>
-
-				{openUploadModal
-					&& (
-						<Modal
-							show={openUploadModal}
-							onClose={() => setOpenUploadModal(false)}
-							onClickOutside={() => setOpenUploadModal(false)}
-						>
-							<Modal.Header title="Upload CSV" />
-							<div className={styles.upload_modal}>
-								<Modal.Body>
-									<UploadModalBody setOpenUploadModal={setOpenUploadModal} />
-								</Modal.Body>
-							</div>
-
-						</Modal>
-					)}
-
-				{notifyModal
-					&& (
-						<Modal
-							show={notifyModal}
-							onClose={() => setNotifyModal(false)}
-							onClickOutside={() => setNotifyModal(false)}
-						>
-							<Modal.Header title="Notify Managers" />
-							<div className={styles.upload_modal}>
-								<Modal.Body>
-									<NotifyModal setNotifyModal={setNotifyModal} />
-								</Modal.Body>
-							</div>
-
-						</Modal>
-					)}
 			</div>
 		</div>
 	);

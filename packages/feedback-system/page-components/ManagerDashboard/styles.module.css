@@ -1,12 +1,30 @@
 .container {
 }
 
-.stats_container {
+.header_text {
+	font-size: 28px;
+	font-weight: 700;
+}
+
+.page_actions {
 	display: flex;
 
-	@media(max-width: 768px){
-		flex-direction: column;
+	:global(.ui_select_container) {
+		width: 160px;
+		height: 38px;
 	}
+}
+
+.filters {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.filters {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .question_button_container {
@@ -52,67 +70,4 @@
 		display: flex;
 		align-items: center;
 	}
-}
-
-.info_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.top_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 16px 0;
-}
-
-.filter_container {
-	margin-right: 14px;
-
-	& .tippy-box .tippy-content {
-		max-height: 100%;
-	}
-}
-
-.filter-control-label {
-	margin-top: 16px;
-	font-weight: 500;
-}
-
-.bussiness_module_filter_header {
-	margin-bottom: 8px;
-}
-
-.filters {
-	display: flex;
-	align-items: center;
-}
-
-.department_select {
-	display: flex;
-	justify-content: flex-start;
-
-	:global(.ui_select_display_container) {
-		width: 160px;
-	}
-}
-
-.top_most_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 4px 0;
-}
-
-.upload_modal {
-	:global {
-		.ui_modal_body_container {
-			max-height: fit-content;
-		}
-	}
-}
-
-.search{
-	padding:10px;
 }

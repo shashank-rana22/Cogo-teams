@@ -41,6 +41,7 @@ const useListUserFeedbacks = ({
 
 	const setPage = (p) => { setParams({ ...params, page: p }); };
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { getUserFeedbackList(); }, [params]);
 
 	useEffect(() => {
@@ -50,6 +51,7 @@ const useListUserFeedbacks = ({
 		{ ...(params.filters || {}), q: searchValue || undefined },
 			page: 1,
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
 
 	return {

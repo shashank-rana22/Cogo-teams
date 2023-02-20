@@ -1,10 +1,11 @@
 import { Placeholder } from '@cogoport/components';
+import { IcMCall, IcMEmail } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function UserDetails({ userData = {}, loading = false }) {
-	const { name, email, mobile_number, department, manager } = userData || {};
+	const { name, email, mobile_number, role } = userData || {};
 
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>
@@ -12,53 +13,33 @@ function UserDetails({ userData = {}, loading = false }) {
 		</div>
 	);
 
-	const showLoading1 = () => (
-		<div style={{ margin: '16px' }}>
-			<Placeholder margin="0px 0px 16px" width="60%" height="20px" />
-			<Placeholder margin="0px 0px 16px" width="50%" height="20px" />
-			<Placeholder margin="0px 0px 16px" width="60%" height="20px" />
-			<Placeholder margin="0px 0px 16px" width="50%" height="20px" />
-		</div>
-	);
-
 	return (
-		<div className={styles.container}>
-			{loading ? showLoading()
-				: (
-					<p className={styles.name}>
-						{startCase(name)}
-					</p>
-				)}
-
-			<div className={styles.details_container}>
-				{loading && showLoading1()}
-
-				{!loading && (
-					<>
-						<div className={styles.text_container}>
-							<p className={styles.details}>E-mail</p>
-
-							<p className={styles.data}>{email}</p>
+		<div className={styles.user_info_container}>
+			{loading ? showLoading() : (
+				<>
+					<div className={styles.info_box_1}>
+						<div className={styles.name}>
+							{startCase(name) || '---'}
 						</div>
-						<div className={styles.text_container}>
-							<p className={styles.details}>Mo. No.</p>
-
-							<p className={styles.data}>{mobile_number}</p>
+						<div className={styles.role}>
+							{startCase(role) || '---'}
 						</div>
-						<div className={styles.text_container}>
-							<p className={styles.details}>Department</p>
-
-							<p className={styles.data}>{startCase(department)}</p>
+					</div>
+					<div className={styles.info_box_2}>
+						<div className={styles.mobile_number}>
+							<IcMCall style={{ marginRight: '8px' }} />
+							{mobile_number || '---'}
 						</div>
-
-						<div className={styles.text_container}>
-							<p className={styles.details}>Manager</p>
-							<p className={styles.data}>{startCase(manager?.name)}</p>
+						<div className={styles.email}>
+							<IcMEmail style={{ marginRight: '8px' }} />
+							{email || '---'}
 						</div>
-					</>
-				)}
-			</div>
+					</div>
+				</>
+			)}
+
 		</div>
+
 	);
 }
 
