@@ -88,7 +88,7 @@ function QuotaModal(props) {
 			<>
 				<Modal.Header title="Delete Quota" />
 
-				<Modal.Body>Do you want to delete this quota?</Modal.Body>
+				<Modal.Body>Are you sure you want to delete this quota?</Modal.Body>
 
 				<Modal.Footer>
 					<Button
@@ -98,7 +98,7 @@ function QuotaModal(props) {
 						loading={loadingDelete}
 						onClick={onDelete}
 					>
-						Delete
+						Yes
 					</Button>
 				</Modal.Footer>
 			</>

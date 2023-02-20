@@ -25,7 +25,7 @@ function DeleteConfiguration({
 					disabled={loadingUpdate}
 					onClick={onDelete}
 				>
-					Delete
+					Yes
 				</Button>
 			</Modal.Footer>
 		</>
