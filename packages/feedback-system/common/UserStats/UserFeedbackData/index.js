@@ -34,7 +34,9 @@ function UserFeedbackData({ userId = '' }) {
 		},
 	})), [monthFilter, yearFilter, ratingFilter]);
 
-	const columns = useGetColumns({});
+	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month'];
+
+	const columns = useGetColumns({ columnsToShow });
 
 	return (
 		<>

@@ -24,7 +24,8 @@ function ManagersListCard({
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const columns = useGetColumns({ source: 'hr_feedback' });
+	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month'];
+	const columns = useGetColumns({ source: 'hr_feedback', columnsToShow });
 
 	const {
 		name = '',

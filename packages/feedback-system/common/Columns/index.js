@@ -26,7 +26,7 @@ const redirectPathSourceMapping = {
 	},
 };
 
-const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard' }) => {
+const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [] }) => {
 	const Router = useRouter();
 	const handleClick = (user_id) => {
 		const { forwardPath, returnPath = '/feedback-system/user-dashboard' } = redirectPathSourceMapping[source];
@@ -45,8 +45,8 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		return 'average';
 	};
 
-	const columnsToShow = [{
-		Header   : <div className={styles.head}>Name</div>,
+	const columns = [{
+		Header   : <div className={styles.head}>Reportee Name</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div
@@ -63,6 +63,16 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		),
 		id  : 'name',
 		key : 'name',
+	},
+	{
+		Header   : <div className={styles.head}> ID</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<div>{startCase(item?.cogo_id) || '-'}</div>
+			</div>
+		),
+		id  : 'cogo_id',
+		key : 'cogo_id',
 	},
 
 	{
@@ -106,40 +116,52 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		),
 		id  : 'month',
 		key : 'month',
-	}];
+	},
+	{
+		Header   : <div className={styles.head}>Feedback Form</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<FeedbackFormModal
+					userId={item?.user_id}
+					performanceItem={item?.performance_item}
+					feedback={item?.feedback}
+					feedbackId={item?.id}
+					getTeamFeedbackList={getTeamFeedbackList}
+				/>
+			</div>
+		),
+		id  : 'add-kpi',
+		key : 'add-kpi',
+	},
+	{
+		Header   : <div className={styles.head}>Manager</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<div>{item?.manager}</div>
+			</div>
+		),
+		id  : 'manager',
+		key : 'manager',
+	},
+	];
 
-	if (source === 'hr_dashboard') {
-		columnsToShow.push({
-			Header   : <div className={styles.head}>Manager</div>,
-			accessor : (item) => (
-				<div className={styles.head_content}>
-					<div>{item?.manager}</div>
-				</div>
-			),
-			id  : 'manager',
-			key : 'manager',
-		});
-	}
+	// if (source === 'hr_dashboard') {
+	// 	columnsToShow.push();
+	// }
 
-	if (source === 'manager_feedback') {
-		columnsToShow.push({
-			Header   : <div className={styles.head}>Feedback Form</div>,
-			accessor : (item) => (
-				<div className={styles.head_content}>
-					<FeedbackFormModal
-						userId={item?.user_id}
-						performanceItem={item?.performance_item}
-						feedback={item?.feedback}
-						feedbackId={item?.id}
-						getTeamFeedbackList={getTeamFeedbackList}
-					/>
-				</div>
-			),
-			id  : 'add-kpi',
-			key : 'add-kpi',
-		});
-	}
-	return useMemo(() => columnsToShow, []);
+	// if (source === 'manager_feedback') {
+	// 	columnsToShow.push();
+	// }
+
+	const finalColumns = [];
+
+	columnsToShow.forEach((item) => {
+		const column = columns.find((col) => col.id === item);
+		finalColumns.push(column);
+	});
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	return useMemo(() => finalColumns, []);
 };
 
 export default useGetColumns;

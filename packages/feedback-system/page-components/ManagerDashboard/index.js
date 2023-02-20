@@ -145,7 +145,8 @@ function ManagerDashboard() {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const feedbackColumns = useGetColumns({ source: 'manager_dashboard' });
+	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month'];
+	const feedbackColumns = useGetColumns({ source: 'manager_dashboard', columnsToShow });
 
 	const monthControls = getMonthControls();
 	const filterControls = getUserFilterControls();

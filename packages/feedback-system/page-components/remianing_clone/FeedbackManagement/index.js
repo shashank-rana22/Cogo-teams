@@ -38,9 +38,11 @@ function FeedbackManagement() {
 		searchValue: query,
 	});
 
+	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month', 'manager'];
 	const feedbackManagementColumns = useGetColumns({
 		getUserFeedbackList,
 		source: 'manager_feedback',
+		columnsToShow,
 	});
 
 	const { list: newTeamList = [], total_count = '', page_limit } = feedbackData || {};
