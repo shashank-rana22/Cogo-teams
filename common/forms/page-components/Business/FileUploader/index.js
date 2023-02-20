@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function FileUploader(props) {
 	const {
 		onChange,
-		fileUrls,
+		value:fileUrls,
 		showProgress,
 		multiple,
 		docName,
@@ -138,7 +138,7 @@ function FileUploader(props) {
 				onChange={handleChange}
 				onClick={handleDelete}
 				loading={loading}
-				multipleUploadDesc="Upload files"
+				uploadDesc="Upload files"
 				uploadIcon={<IcMUpload height={40} width={40} />}
 				fileData={urlStore}
 			/>
