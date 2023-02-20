@@ -5,6 +5,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -18,6 +19,10 @@ function useOnBoardVendor({
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
+	const { general: { query } } = useSelector((state) => state);
+
+	const { vendor_id } = query;
+
 	const router = useRouter();
 
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -59,7 +64,7 @@ function useOnBoardVendor({
 		};
 
 		try {
-			const res = await trigger({ data: { ...payload } });
+			const res = await trigger({ data: { id: vendor_id, ...payload } });
 
 			setVendorInformation((pv) => {
 				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
