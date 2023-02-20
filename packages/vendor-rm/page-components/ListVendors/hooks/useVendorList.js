@@ -18,6 +18,7 @@ const useVendorList = () => {
 		page                     : 1,
 		pagination_data_required : true,
 	});
+
 	const [showFilter, setShowFilter] = useState(false);
 
 	const [{ data, loading }, trigger] = useRequest({

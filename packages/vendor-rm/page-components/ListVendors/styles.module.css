@@ -49,6 +49,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	align-items: center;
 }
 
 .filter_container {
@@ -62,9 +63,7 @@
 	cursor: pointer;
 }
 
-.text {
-	font-weight: 600;
-}
+
 
 .dot {
 	border: 3px solid #000000;
@@ -72,4 +71,41 @@
 	background: #000000;
 	border-radius: 100%;
 	margin-left: 4px;
+}
+
+.title {
+	width: 300px;
+}
+
+.kyc {
+	display: flex;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border: 1px solid #000000;
+	border-radius:8px;
+	padding: 24px;
+	width: 224px;
+	background-color: #ffffff;
+	margin-right: 22px;
+	margin-bottom: 22px;
+	height: 90px;
+	cursor: pointer;
+	
+
+
+}
+.box:hover {
+	background-color: #fde74d;;
+  }
+
+.label {
+	font-weight: 800;
+}
+
+.value {
+	color: red;
 }

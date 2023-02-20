@@ -1,6 +1,8 @@
 import { Popover, Input, Pagination, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyPage from './EmptyPage';
 import FilterContent from './FilterContent';
@@ -27,9 +29,36 @@ function ListVendors() {
 		return <EmptyPage />;
 	}
 
+	const tagClick = ({ status:tagStatus }) => {
+		setParams((prev) => ({
+			...prev,
+			filters: {
+				status     : 'active',
+				kyc_status : tagStatus,
+			},
+		}));
+	};
+
+	const { list = [] } = data;
+
 	return (
 		<>
+			<div className={styles.kyc}>
+				<div
+					role="presentation"
+					className={styles.box}
+					onClick={() => { tagClick({ status: 'pending_from_user' }); }}
+				>
+					<div className={styles.label}>Pending Vendors</div>
+					<div className={styles.value}>1222</div>
+				</div>
+				<div role="presentation" className={styles.box} onClick={() => { tagClick({ status: 'verified' }); }}>
+					<div className={styles.label}>Verified Vendors</div>
+					<div className={styles.value}>1222</div>
+				</div>
+			</div>
 			<div className={styles.group}>
+				<h3 className={styles.title}>All Vendors</h3>
 				<Popover
 					theme="light"
 					placement="bottom"
@@ -66,7 +95,7 @@ function ListVendors() {
 			</div>
 
 			<TabularSection
-				data={data}
+				data={list}
 				columns={columns}
 			/>
 

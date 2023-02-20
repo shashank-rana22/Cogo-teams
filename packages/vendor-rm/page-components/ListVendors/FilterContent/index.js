@@ -2,7 +2,6 @@ import { Input, Select, Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import CATEGORY_OPTIONS from '../../OnBoardVendor/VendorServices/utils/category-options';
-import subCategoryOptions from '../../OnBoardVendor/VendorServices/utils/sub-category-options';
 
 import styles from './styles.module.css';
 
@@ -16,10 +15,9 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 
 				<Button
 					type="button"
-					className="primary sm text"
 					onClick={() => {
 						setParams({ filters: { status: 'active' } });
-						setFilters({});
+						setFilters({ status: 'active' });
 						setShowFilter(false);
 					}}
 				>
@@ -41,7 +39,6 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 			<div className={styles.select_container}>
 				<div className={styles.label}>Data Type</div>
 				<Select
-					className="primary sm"
 					value={filters?.category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, category: value }))}
 					placeholder="Choose Category..."
@@ -52,11 +49,10 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 			<div className={styles.select_container}>
 				<div className={styles.label}>Model Attribute</div>
 				<Select
-					className="primary sm"
 					value={filters?.sub_category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, sub_category: value }))}
 					placeholder="Choose Sub Category..."
-					options={subCategoryOptions[filters?.category] || []}
+					options={CATEGORY_OPTIONS}
 				/>
 			</div>
 
@@ -81,7 +77,6 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 						}));
 						setShowFilter(false);
 					}}
-					className="primary sm filter_button"
 				>
 					Apply
 				</Button>
