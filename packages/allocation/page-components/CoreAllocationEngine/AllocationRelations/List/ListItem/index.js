@@ -152,8 +152,6 @@ function ListItem(props) {
 		}));
 	};
 
-	console.log('activeTab', activeTab);
-
 	return (
 		<div
 			className={styles.list_item_container}
