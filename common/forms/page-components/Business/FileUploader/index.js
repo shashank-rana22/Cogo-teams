@@ -22,14 +22,14 @@ function FileUploader(props) {
 
 	useEffect(() => {
 		setLoading(true);
-		if (typeof (fileUrls) === 'string' && !multiple) {
+		if (typeof (fileUrls) === 'string' && !multiple && fileUrls !== undefined) {
 			setFileName([{ name: fileUrls.split('/').slice(-1).join('') }]);
 			setUrlStore([{
 				fileName : fileUrls.split('/').slice(-1).join(''),
 				finalUrl : fileUrls,
 			}]);
 		}
-		if (multiple && typeof (fileUrls) !== 'string') {
+		if (multiple && typeof (fileUrls) !== 'string' && fileUrls !== undefined) {
 			const names = fileUrls.map((url) => ({ name: url.split('/').slice(-1).join('') }));
 			const urls = fileUrls.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
 
@@ -38,7 +38,7 @@ function FileUploader(props) {
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fileUrls.length > 0]);
+	}, [fileUrls?.length > 0]);
 
 	useEffect(() => {
 		if (multiple) {
@@ -121,6 +121,8 @@ function FileUploader(props) {
 			setLoading(false);
 		}
 	};
+
+	console.log(fileName);
 
 	return (
 		<>
