@@ -67,10 +67,17 @@ function useVendorServices({
 	};
 
 	useEffect(() => {
+		const { vendor_services = {}, services: office_details = [] } = vendorInformation || {};
+
+		const prefill_obj = {
+			office_details,
+		};
+
 		controls.forEach((item) => {
-			setValue(`${item.name}`, vendorInformation?.vendor_services?.[item.name]);
+			setValue(`${item.name}`, vendor_services?.[item.name] || prefill_obj[item.name]);
 		});
-	}, []);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendorInformation]);
 
 	const handleBackLink = (step) => {
 		setActiveStepper(TABS_MAPPING[step]);

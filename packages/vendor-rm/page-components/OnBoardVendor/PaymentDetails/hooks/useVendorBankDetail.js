@@ -110,14 +110,17 @@ function useVendorBankDetail({
 	});
 
 	useEffect(() => {
+		const { payment_details = {}, bank_details = [] } = vendorInformation || {};
+
 		controls.forEach((field) => {
 			if (field.type === 'file') {
-				setValue(`${field.name}`, vendorInformation?.payment_details?.[field.name]?.finalUrl);
+				setValue(`${field.name}`, payment_details?.[field.name]?.finalUrl);
 			} else {
-				setValue(`${field.name}`, vendorInformation?.payment_details?.[field.name]);
+				setValue(`${field.name}`, payment_details?.[field.name] || bank_details[0]?.[field.name]);
 			}
 		});
-	}, []);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendorInformation]);
 
 	return {
 		controls : newControls,

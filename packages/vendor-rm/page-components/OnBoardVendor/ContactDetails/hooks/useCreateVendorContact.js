@@ -87,7 +87,8 @@ function useCreateVendorContact({
 				);
 			}
 		});
-	}, [fields, setValue, vendorInformation]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendorInformation]);
 
 	const handleBackLink = (step) => {
 		setActiveStepper(TABS_MAPPING[step]);
