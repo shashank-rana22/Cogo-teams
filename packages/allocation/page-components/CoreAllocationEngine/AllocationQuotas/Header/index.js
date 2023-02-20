@@ -48,11 +48,11 @@ function Header(props) {
 
 				<Button
 					size="md"
-					themeType="accent"
+					themeType="primary"
 					onClick={onClickCreateQuota}
 					disabled={disabled}
 				>
-					CREATE QUOTA
+					Create
 				</Button>
 			</div>
 		</div>

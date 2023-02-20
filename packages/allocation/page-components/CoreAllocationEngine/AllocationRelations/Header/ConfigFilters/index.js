@@ -29,7 +29,7 @@ function ConfigFilters(props) {
 				onClick={() => setShowFilters(!showFilters)}
 				disabled={disabled}
 			>
-				FILTER
+				Filter
 
 				<IcMFilter style={{ marginLeft: '4px' }} />
 

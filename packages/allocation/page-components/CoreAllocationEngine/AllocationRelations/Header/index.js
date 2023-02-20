@@ -66,12 +66,12 @@ function Header({
 
 				<Button
 					size="md"
-					themeType="accent"
+					themeType="primary"
 					style={{ marginLeft: '8px' }}
 					onClick={() => setShowCreateRelationModal(true)}
 					disabled={disabled}
 				>
-					CREATE RELATION
+					Create
 				</Button>
 			</div>
 

@@ -34,7 +34,7 @@ function DetailFilters({ params, setParams, disabled }) {
 				onClick={() => setShowFilters(!showFilters)}
 				disabled={disabled}
 			>
-				FILTER
+				Filter
 
 				<ConditionalWrapper
 					condition={filtersApplied}

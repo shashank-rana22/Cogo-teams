@@ -17,12 +17,11 @@ function Header(props) {
 
 			<Button
 				size="md"
-				themeType="accent"
+				themeType="primary"
 				onClick={() => setShowCreateConfig(true)}
 				disabled={disabled}
 			>
-				CREATE CONFIG
-
+				Create
 			</Button>
 		</div>
 	);

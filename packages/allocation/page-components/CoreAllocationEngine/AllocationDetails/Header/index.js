@@ -53,7 +53,7 @@ function Header(props) {
 			<div>
 				<Button
 					size="md"
-					themeType="accent"
+					themeType="primary"
 					style={{ marginLeft: '8px' }}
 					onClick={() => setShowApprove(true)}
 					disabled={instanceStatus === 'completed' || disabled}

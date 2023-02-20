@@ -30,7 +30,20 @@ function CreateUpdateModal(props) {
 				<Modal.Footer>
 					<Button
 						size="md"
+						type="button"
+						themeType="tertiary"
+						loading={loadingOnSave}
+						id="cancel_request_btn"
+						onClick={onCloseModal}
+						style={{ marginRight: '10px' }}
+					>
+						Cancel
+					</Button>
+
+					<Button
+						size="md"
 						type="submit"
+						themeType="primary"
 						loading={loadingOnSave}
 						id="save_request_btn"
 					>

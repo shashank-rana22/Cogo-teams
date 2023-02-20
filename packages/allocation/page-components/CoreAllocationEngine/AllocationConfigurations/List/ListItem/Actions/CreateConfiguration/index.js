@@ -39,12 +39,12 @@ function CreateConfiguration({
 						<Button
 							type="button"
 							size="md"
-							themeType="secondary"
+							themeType="tertiary"
 							onClick={() => setShow(false)}
 							disabled={loading}
 							style={{ marginRight: '10px' }}
 						>
-							CANCEL
+							Cancel
 						</Button>
 
 						<Button
@@ -53,7 +53,7 @@ function CreateConfiguration({
 							themeType="primary"
 							disabled={loading}
 						>
-							{`${viewType === 'create' ? 'Create' : 'Update'}`}
+							Save
 						</Button>
 					</div>
 				</Modal.Footer>

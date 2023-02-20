@@ -35,7 +35,7 @@ function RequestFilters(props) {
 				disabled={disabled}
 				onClick={() => setShowFilters(!showFilters)}
 			>
-				FILTER
+				Filter
 
 				<IcMFilter style={{ marginLeft: '4px' }} />
 

@@ -69,11 +69,11 @@ function Header(props) {
 
 					<Button
 						size="md"
-						themeType="accent"
+						themeType="primary"
 						onClick={onClickCreateReqBtn}
 						disabled={disabled}
 					>
-						CREATE REQUEST
+						Create
 					</Button>
 				</div>
 			</div>
@@ -91,11 +91,11 @@ function Header(props) {
 
 					<Button
 						size="sm"
-						themeType="accent"
+						themeType="primary"
 						disabled={!isBulkUpdateMode}
 						onClick={applyBulkFilter}
 					>
-						APPLY BULK FILTER
+						Apply Bulk Filter
 					</Button>
 
 					{!isEmpty(checkedRowsId) && (

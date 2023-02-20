@@ -24,7 +24,16 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 			</Modal.Body>
 
 			<Modal.Footer>
-
+				<Button
+					type="button"
+					size="md"
+					themeType="tertiary"
+					disabled={loading}
+					onClick={() => setShowCreateRelationModal(false)}
+					style={{ marginRight: '10px' }}
+				>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					size="md"
@@ -32,7 +41,7 @@ function CreateRelationModal({ showCreateRelationModal = false, setShowCreateRel
 					disabled={loading}
 					onClick={handleSubmit(onCreate)}
 				>
-					CREATE RELATION
+					Save
 				</Button>
 			</Modal.Footer>
 		</Modal>

@@ -8,7 +8,7 @@ function Filters(props) {
 		children = null,
 		open = false,
 		setOpen = () => {},
-		name = 'APPLY',
+		name = 'Apply',
 		heading = 'Search',
 		placement = 'bottom',
 		reset = () => {},
