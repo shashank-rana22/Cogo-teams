@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function FileUploader(props) {
 	const {
 		onChange,
-		value:fileUrls,
+		defaultValues,
 		showProgress,
 		multiple,
 		docName,
@@ -22,23 +22,24 @@ function FileUploader(props) {
 
 	useEffect(() => {
 		setLoading(true);
-		if (typeof (fileUrls) === 'string' && !multiple && fileUrls !== undefined) {
-			setFileName([{ name: fileUrls.split('/').slice(-1).join('') }]);
+		if (typeof (fileUrls) === 'string' && !multiple && defaultValues !== undefined) {
+			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
 			setUrlStore([{
-				fileName : fileUrls.split('/').slice(-1).join(''),
-				finalUrl : fileUrls,
+				fileName : defaultValues.split('/').slice(-1).join(''),
+				finalUrl : defaultValues,
 			}]);
 		}
-		if (multiple && typeof (fileUrls) !== 'string' && fileUrls !== undefined) {
-			const names = fileUrls.map((url) => ({ name: url.split('/').slice(-1).join('') }));
-			const urls = fileUrls.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+		if (multiple && typeof (fileUrls) !== 'string' && defaultValues !== undefined) {
+			console.log('run');
+			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
+			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
 
 			setFileName(names);
 			setUrlStore(urls);
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fileUrls?.length > 0]);
+	}, [defaultValues?.length > 0]);
 
 	useEffect(() => {
 		if (multiple) {
