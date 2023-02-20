@@ -1,20 +1,27 @@
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 import { pointBinData } from '../../../../configurations/point-bin-data';
 import { TEXTURES, GLOBE_COLORS } from '../../../../constants/globe-properties';
 
 import styles from './styles.module.css';
 
-function TheGLobe({ country = {}, circleTab = '' }) {
-	console.log('circleTab', circleTab);
-	const { lat:country_lat = 0, lng:country_lng = 0 } = country || {};
+function TheGLobe(
+	{
+		country = {},
+		globeLoading = false,
+		pointsList = {},
+		globeGL = {},
+	},
+) {
+	console.log('pointsList', pointsList);
+	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
 
 	let Globe = () => {};
 	// eslint-disable-next-line global-require
 	if (typeof window !== 'undefined') Globe = require('react-globe.gl').default;
 
-	const globeGL = useRef(null);
+	// console.log('globeGL scene', globeGL?.current?.scene());
 
 	const colorMode = 'light';
 
@@ -29,12 +36,13 @@ function TheGLobe({ country = {}, circleTab = '' }) {
 	}
 
 	// experiments
-	if (!isEmpty(globeGL.current)) {
-		const scene = globeGL.current.scene();
-		scene.children[2].visible = true;
-		scene.children[1].intensity = 1.25;
-		scene.children[2].intensity = 0.25;
-	}
+	// console.log('globeGL?.current?.scene()?.children', globeGL?.current?.scene()?.children, !isEmpty(globeGL?.current?.scene()?.children));
+	// if (!isEmpty(globeGL?.current?.scene()?.children)) {
+	// 	console.log('I came in');
+	// 	globeGL.current.scene().children[2].visible = true;
+	// 	globeGL.current.scene().children[1].intensity = 1.25;
+	// 	globeGL.current.scene().children[2].intensity = 0.25;
+	// }
 
 	// Globe Functions
 

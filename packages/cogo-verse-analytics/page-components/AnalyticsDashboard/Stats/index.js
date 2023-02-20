@@ -3,11 +3,17 @@ import { cl } from '@cogoport/components';
 import React from 'react';
 
 import { INTENT_LEADERBOARD, PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
+import useGetCogoverseDashboard from '../../../hooks/useGetCogoverseDashboard';
 
 import Charts from './LineChart';
 import styles from './styles.module.css';
 
-function Stats() {
+function Stats({ country = '' }) {
+	console.log('country', country);
+
+	const { list = {}, loading = false } = useGetCogoverseDashboard({ country });
+	console.log('list', list);
+
 	return (
 		<div className={styles.main_container}>
 			{/* Header --------------------------------------------------------------------------- */}
@@ -31,7 +37,7 @@ function Stats() {
 								<div className={styles.primary_left_stat}>
 
 									<div className={styles.primary_stat_title}>
-										<span>{value}</span>
+										<div className={styles.primary_stat_value}>{value}</div>
 										{' '}
 										{title}
 									</div>

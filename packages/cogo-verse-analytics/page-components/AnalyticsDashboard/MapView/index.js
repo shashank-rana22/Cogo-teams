@@ -1,31 +1,46 @@
 /* eslint-disable max-len */
-
 import { Select, DateRangepicker, cl, ButtonIcon, Tooltip } from '@cogoport/components';
+import { useGetAsyncOptions } from '@cogoport/forms';
+import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
-import React, { useState } from 'react';
+import { isEmpty, merge } from '@cogoport/utils';
+import React, { useState, useRef } from 'react';
 
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
+import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 
 import CommunicationPieChart from './PieChart';
 import styles from './styles.module.css';
 
 const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
-function MapView() {
-	const [country, setCountry] = useState('');
+function MapView({
+	setCountry = () => {},
+	country = {},
+	date = {},
+	setDate = () => {},
+
+}) {
+	const globeGL = useRef();
+
 	const [circleTab, setCircleTab] = useState('new_users');
+	const { options:locationOptions, loading:locationsLoading = false, onSearch = () => {} } = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
 
-	const [date, setDate] = useState('');
+	const { pointsList = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab });
 
-	const onChange = (val) => {
+	const onSelectChange = (val) => {
 		setCountry(val);
 	};
-	const onSearch = () => {};
-	const options = [{ display_name: 'India', country: 'india', lat: 28.7, lng: 77.1 },
-		{ display_name: 'Thailand', country: 'thailand', lat: 13.7, lng: 100.5 },
-		{ display_name: 'Italy', country: 'italy', lat: 41.9, lng: 12.4 }];
+
+	const resetGlobePosition = () => {
+		const defaultMapCenter = { lat: 0, lng: 0, altitude: 2 };
+		const pointRotationSpeed = 100;
+		if (!isEmpty(globeGL.current)) {
+			globeGL.current.pointOfView(defaultMapCenter, pointRotationSpeed);
+		}
+	};
 
 	const maxDate = new Date();
 
@@ -34,15 +49,15 @@ function MapView() {
 			<div className={styles.top_content}>
 				<div className={styles.select_container}>
 					<Select
-						value={country?.country}
-						onChange={(_, obj) => onChange(obj)}
+						value={country?.display_name}
+						onChange={(_, obj) => onSelectChange(obj)}
 						placeholder="Select Country"
-						options={options}
+						options={locationOptions}
 						id="select_country"
 						labelKey="display_name"
-						valueKey="country"
 						isClearable
 						onSearch={onSearch}
+						loading={locationsLoading}
 					/>
 				</div>
 				<div className={styles.date_range_container}>
@@ -59,12 +74,28 @@ function MapView() {
 			</div>
 			<div className={styles.circle_content}>
 				<div className={styles.circle_frame}>
-					<div className={styles.globe_container}><TheGlobe country={country} circleTab={circleTab} /></div>
+					<div className={styles.globe_container}>
+						{
+
+							(!globeLoading)
+								&& (
+									<TheGlobe
+										country={country}
+										globeLoading={globeLoading}
+										pointsList={pointsList}
+										globeGL={globeGL}
+									/>
+								)
+
+						}
+
+					</div>
 					{
 					circleStats.map(
 						(stat) => {
 							const { type, value, label } = stat;
 							return (
+								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 								<div
 									onClick={() => setCircleTab(type)}
 									className={cl`${styles.circle} ${styles[type]} 
@@ -84,7 +115,7 @@ function MapView() {
 					}
 					<div className={styles.globe_controls}>
 						<Tooltip content="Reset Globe's Position" placement="bottom">
-							<ButtonIcon size="md" icon={<IcMRefresh />} themeType="primary" />
+							<ButtonIcon size="md" type="reset" onClick={resetGlobePosition} icon={<IcMRefresh />} themeType="primary" />
 						</Tooltip>
 					</div>
 
