@@ -2,7 +2,7 @@ import { Tooltip, cl, Popover, Select, Button } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
-import tagsOptions from '../../../../../../configurations/tags-options';
+// import tagsOptions from '../../../../../../configurations/tags-options';
 import { TAGS_COLORS } from '../../../../../../constants';
 
 import styles from './styles.module.css';
@@ -60,8 +60,10 @@ export function TagsPopOver({
 	setIsVisible = () => {},
 	updateChat = () => {},
 	hasPermissionToEdit = false,
+	tagOptions = [],
 }) {
-	const filteredOptions = tagsOptions.filter(
+	console.log('tagOptions:', tagOptions);
+	const filteredOptions = tagOptions.filter(
 		({ value }) => !prevtags.includes(value),
 	);
 	const resetFunc = () => {
