@@ -1,10 +1,13 @@
-import { Modal, Button, Datepicker, RadioGroup } from '@cogoport/components';
+import { Modal, Button, RadioGroup } from '@cogoport/components';
+import {
+	useForm,
+	InputController,
+} from '@cogoport/forms';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { isEmpty, format } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import controls from '../../../configurations/inactive-reasons-form-controls';
-// import useCreateUserInactiveStatus from '../../../../hooks/useCreateUserInactiveStatus';
+import controls from '../../../../configurations/user-status-controls';
 
 import styles from './styles.module.css';
 
@@ -13,9 +16,11 @@ function InactiveModal({
 	setOpenModal,
 	loading,
 }) {
-	const [startDate, setStartDate] = useState('');
-	const [endDate, setEndDate] = useState('');
+	const { days = '', hours = '', minutes = '' } = controls;
+
 	const [inactiveReason, setInactiveReason] = useState('');
+
+	const { handleSubmit, control, reset } = useForm();
 
 	const REASONS = [
 		{
@@ -26,97 +31,72 @@ function InactiveModal({
 
 	const resetReasons = () => {
 		setInactiveReason('');
-		setStartDate('');
-		setEndDate('');
+		reset({ days: '', hours: '', minutes: '' });
 	};
 
 	const handleClose = () => {
 		setOpenModal(false);
-		setStartDate('');
-		setEndDate('');
+		reset({ days: '', hours: '', minutes: '' });
 	};
 
-	const handleSubmit = () => {
-		const data = {
-			status         : inactiveReason,
-			validity_start : format(
-				startDate,
-				'yyyy-MM-dd HH:mm:ss',
-			),
-			validity_end: format(
-				endDate,
-				'yyyy-MM-dd HH:mm:ss',
-			),
-		};
-		updateUserStatus(data);
+	const createSubmit = (val) => {
+		updateUserStatus({ val, inactiveReason, reset });
 	};
-
 	const emptyStateCheck = isEmpty(inactiveReason);
 
 	return (
-		<div className={styles.container}>
-			<Modal size="sm" show onClose={handleClose} placement="top">
-				<Modal.Header title="Inactive Status till" />
 
-				<RadioGroup options={REASONS} onChange={setInactiveReason} value={inactiveReason} />
+		<Modal size="sm" show onClose={handleClose} placement="top" className={styles.styled_modal}>
+			<Modal.Header title="Inactive Status till" />
 
-				{!isEmpty(inactiveReason) && (
-					<div className={styles.time_container}>
-						<div className={styles.start_time}>
-							<div className={styles.time_title}>Start Date and Time</div>
-							<div className={styles.wrap_start}>
-								<Datepicker
-									placeholder="Enter Date"
-									showTimeSelect
-									dateFormat="MM/dd/yyyy HH:mm"
-									name="date"
-									onChange={setStartDate}
-									value={startDate}
-								/>
-							</div>
-						</div>
+			<RadioGroup options={REASONS} onChange={setInactiveReason} value={inactiveReason} />
+			<div className={styles.time_title}>
+				Duration
+			</div>
+			<div className={styles.duration_div}>
+				<InputController
+					{...days}
+					id={days?.name}
+					control={control}
+				/>
+				<InputController
+					{...hours}
+					control={control}
+					id={hours?.name}
+				/>
+				<InputController
+					{...minutes}
+					control={control}
+					id={minutes?.name}
+				/>
+			</div>
 
-						<div className={styles.end_time}>
-							<div className={styles.time_title}>End Date and Time</div>
-							<div className={styles.wrap_end}>
-								<Datepicker
-									placeholder="Enter Date"
-									showTimeSelect
-									dateFormat="MM/dd/yyyy HH:mm"
-									name="date"
-									onChange={setEndDate}
-									value={endDate}
-								/>
-							</div>
-						</div>
+			<div className={styles.actions}>
+				<Button
+					size="md"
+					themeType="tertiary"
+					onClick={resetReasons}
+					className={styles.refresh_action}
+				>
+					<div className={styles.refresh_icon}>
+						<IcMRefresh width={16} height={16} />
 					</div>
-				)}
+					Reset Status
+				</Button>
+				<Button
+					loading={loading}
+					disabled={emptyStateCheck}
+					size="md"
+					themeType="accent"
+					onClick={handleSubmit(createSubmit)}
+					className={styles.last_button}
+				>
+					Apply
 
-				<div className={styles.actions}>
-					<Button
-						size="md"
-						themeType="tertiary"
-						onClick={resetReasons}
-						className={styles.refresh_action}
-					>
-						<div className={styles.refresh_icon}>
-							<IcMRefresh width={16} height={16} />
-						</div>
-						Reset Status
-					</Button>
-					<Button
-						loading={loading}
-						disabled={emptyStateCheck}
-						size="md"
-						themeType="accent"
-						onClick={() => handleSubmit()}
-					>
-						Apply
+				</Button>
+			</div>
+		</Modal>
 
-					</Button>
-				</div>
-			</Modal>
-		</div>
 	);
 }
 

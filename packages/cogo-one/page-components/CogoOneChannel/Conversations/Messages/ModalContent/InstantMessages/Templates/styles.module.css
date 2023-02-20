@@ -122,9 +122,9 @@
 }
 
 .whatsapp {
-	width: 265px;
-	height: 520px;
-	background-image: url(https://cogoport-testing.sgp1.digitaloceanspaces.com/b28511c12a6ae361f7e5f4662cda4653/Group%201000010443.svg);
+	width: 241px;
+	height: 498px;
+	background-image: url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile.svg);
 }
 
 .back_icon {
@@ -135,11 +135,16 @@
 
 .overflow_div {
 	position: absolute;
-	top: 110px;
-	left: 50px;
+	top: 85px;
+	left: 28px;
 	max-height: 380px;
 	overflow-y: scroll;
 	font-size: 12px;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 1px rgb(98 127 172 / 20%);
+
+	/* transform: matrix(-1, 0, 0, 1, 0, 0); */
 }
 
 .preview_div {
