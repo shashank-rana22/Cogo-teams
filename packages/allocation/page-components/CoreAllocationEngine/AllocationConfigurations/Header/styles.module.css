@@ -2,6 +2,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	:global(.ui_legend_container) {
+		margin: 0;
+	}
 }
 
 .right_container {
