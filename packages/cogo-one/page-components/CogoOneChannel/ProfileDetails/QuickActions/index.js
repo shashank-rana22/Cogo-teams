@@ -15,8 +15,10 @@ function QuickActions() {
 				<div
 					className={styles.recent_icon}
 					role="presentation"
-					// eslint-disable-next-line no-undef
-					onClick={() => { window.location.href = `/${partnerId}/invoice-approvals`; }}
+					onClick={() => {
+						// eslint-disable-next-line no-undef
+						window.open(`/${partnerId}/invoice-approvals`, '_blank');
+					}}
 				>
 					<IcAWhitePapers width={50} height={50} />
 					<div className={styles.name}>Invoicing</div>
@@ -30,8 +32,10 @@ function QuickActions() {
 							key={item.name}
 							className={styles.recent_icon}
 							role="presentation"
-							// eslint-disable-next-line no-undef
-							onClick={() => { window.location.href = `/${partnerId}/${item?.href}`; }}
+							onClick={() => {
+								// eslint-disable-next-line no-undef
+								window.open(`/${partnerId}/${item?.href}`, '_blank');
+							}}
 						>
 							<div className={styles.icon}>{item?.icon}</div>
 							<div className={styles.name}>{item?.title}</div>

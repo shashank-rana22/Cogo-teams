@@ -8,11 +8,11 @@ export const firebaseConfig = {
 	appId             : process.env.FIREBASE_APP_ID,
 };
 
-const firestoreChatbotPath = '/customer_chat/chatbot/rooms';
+const firestoreChatbotPath = '/customer_chat/platform_chat/rooms';
 
 const firestoreWhatsappPath = '/customer_chat/whatsapp/rooms';
 
 export const FIRESTORE_PATH = {
-	whatsapp : firestoreWhatsappPath,
-	chatbot  : firestoreChatbotPath,
+	whatsapp      : firestoreWhatsappPath,
+	platform_chat : firestoreChatbotPath,
 };
