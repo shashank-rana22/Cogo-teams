@@ -73,14 +73,6 @@ function useVendorBankDetail({
 	const onSubmit = async ({ data, step }) => {
 		const values = getValues();
 
-		setVendorInformation((pv) => {
-			const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-			return {
-				...pv,
-				[key]: data,
-			};
-		});
-
 		try {
 			await triggerCreateVendorBankDetail({
 				data: {
@@ -88,6 +80,14 @@ function useVendorBankDetail({
 					bank_document_url : values.bank_document_url.finalUrl,
 					vendor_id         : vendorInformation?.vendor_details?.id,
 				},
+			});
+
+			setVendorInformation((pv) => {
+				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+				return {
+					...pv,
+					[key]: data,
+				};
 			});
 
 			Toast.success(`Bank Details ${isUpdateAction ? 'updated' : 'added'} successfully`);
