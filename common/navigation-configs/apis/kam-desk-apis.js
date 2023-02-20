@@ -251,6 +251,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'add_shipment_invoice_combination_remarks',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
