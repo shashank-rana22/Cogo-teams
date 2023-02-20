@@ -69,7 +69,7 @@ function Header(props) {
 
 					<Button
 						size="md"
-						themeType="accent"
+						themeType="primary"
 						onClick={onClickCreateReqBtn}
 						disabled={disabled}
 					>
@@ -90,7 +90,7 @@ function Header(props) {
 
 					<Button
 						size="sm"
-						themeType="accent"
+						themeType="primary"
 						disabled={!bulkMode || !isBulkUpdateMode}
 						onClick={applyBulkFilter}
 					>

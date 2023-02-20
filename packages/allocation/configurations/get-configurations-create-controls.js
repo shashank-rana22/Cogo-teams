@@ -111,7 +111,7 @@ const getCreateConfigurationsControls = ({
 		{
 			name        : 'locking_period',
 			label       : 'Locking Period (Days)',
-			placeholder : 'Enter Days',
+			placeholder : 'Enter Number of Days',
 			type        : 'number',
 			rules       : {
 				required: 'Locking Period is Required',
@@ -120,7 +120,7 @@ const getCreateConfigurationsControls = ({
 		{
 			name        : 'cooling_period',
 			label       : 'Cooling Period (Days)',
-			placeholder : 'Enter Days',
+			placeholder : 'Enter Number of Days',
 			type        : 'number',
 			rules       : {
 				required: 'Cooling Period is Required',

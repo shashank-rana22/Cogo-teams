@@ -207,6 +207,18 @@ function QuotaModal(props) {
 				<Modal.Footer>
 					<Button
 						size="md"
+						type="button"
+						themeType="tertiary"
+						disabled={isUpdatable ? false : !roleTypeId}
+						loading={loadingOnSave}
+						id="cancel_quota_btn"
+						onClick={onCloseModal}
+						style={{ marginRight: '10px' }}
+					>
+						Cancel
+					</Button>
+					<Button
+						size="md"
 						type="submit"
 						disabled={isUpdatable ? false : !roleTypeId}
 						loading={loadingOnSave}

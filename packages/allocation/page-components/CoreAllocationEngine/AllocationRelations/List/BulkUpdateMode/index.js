@@ -104,7 +104,7 @@ function BulkUpdateMode({
 					/>
 					<Button
 						size="sm"
-						themeType="accent"
+						themeType="primary"
 						disabled={!bulkMode || isEmpty(checkedRowsId)}
 						onClick={() => applyBulkFilter()}
 					>

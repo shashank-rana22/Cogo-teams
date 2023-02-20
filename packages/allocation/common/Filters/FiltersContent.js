@@ -30,7 +30,7 @@ function FilterContent(props) {
 					</Button>
 
 					<Button
-						themeType="accent"
+						themeType="primary"
 						size="sm"
 						onClick={onApplyingFilters}
 						style={{
