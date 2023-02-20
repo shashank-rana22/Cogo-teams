@@ -22,7 +22,7 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState(TABS_MAPPING[0]);
+	const [activeStepper, setActiveStepper] = useState('vendor_details');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
@@ -40,7 +40,7 @@ function OnBoardVendor() {
 
 	console.log('vendorInformation:: ', vendorInformation);
 
-	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper.key);
+	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const onBack = useCallback(() => router.push('/vendors-list'), []);

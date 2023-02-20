@@ -14,7 +14,7 @@ function ButtonLayout(
 		onSubmit = () => {},
 	},
 ) {
-	const { step } = COMPONENT_MAPPING.find((item) => item.key === activeStepper.key);
+	const { step } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
 	const onClickCancelButton = () => {
 		setActiveStepper(COMPONENT_MAPPING[step - 2].key);

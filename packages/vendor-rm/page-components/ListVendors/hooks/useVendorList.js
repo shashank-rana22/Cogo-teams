@@ -40,7 +40,7 @@ const useVendorList = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
 
-	const formatDate = (date) => format(date, 'dd MMM yy | hh:mm a');
+	const formatDate = (date) => format(date, 'dd MMM yyyy');
 
 	const columns = [
 		{
