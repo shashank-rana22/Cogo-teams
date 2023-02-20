@@ -2,7 +2,7 @@ import { IcMUpload } from '@cogoport/icons-react';
 
 const uploadIcon = () => <IcMUpload height={20} width={20} />;
 
-const getControls = (detailsData) => [
+const getControls = (detailsData = {}) => [
 
 	{
 		name            : 'profile_picture_url',
@@ -17,20 +17,23 @@ const getControls = (detailsData) => [
 		uploadIcon,
 		value           : detailsData?.picture,
 		rules           : {
-			required: true,
+			required: 'Profile Picture is required',
 		},
-		span: 12,
 	},
-
 	{
 		name        : 'name',
 		label       : 'Name',
 		type        : 'text',
-		span        : 6,
 		placeholder : 'Enter name',
 		size        : 'md',
 		value       : detailsData?.name,
-		rules       : { required: 'Required' },
+		rules       : {
+			required  : 'Please enter name',
+			maxLength : {
+				value   : 30,
+				message : 'max length is 30',
+			},
+		},
 	},
 
 ];
