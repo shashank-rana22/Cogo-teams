@@ -59,7 +59,7 @@ function useVendorServices({
 			await trigger({ data: payload });
 
 			Toast.success('Services added successfully');
-			setActiveStepper('payment_details');
+			setActiveStepper('vendor_bank_details');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
 		}

@@ -64,9 +64,9 @@ function useCreateVendorContact({
 	useEffect(() => {
 		fields.forEach((field) => {
 			if (field.type === 'file') {
-				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]?.finalUrl);
+				setValue(`${field.name}`, vendorInformation?.vendor_pocs?.[field.name]?.finalUrl);
 			} else {
-				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]);
+				setValue(`${field.name}`, vendorInformation?.vendor_pocs?.[field.name]);
 			}
 		});
 	}, []);

@@ -6,6 +6,7 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
@@ -14,6 +15,7 @@ import { getControls } from '../utils/getControls';
 
 function useOnBoardVendor({
 	setActiveStepper = () => {},
+	vendorInformation,
 	setVendorInformation = () => {},
 }) {
 	const router = useRouter();
@@ -36,9 +38,15 @@ function useOnBoardVendor({
 		formState: { errors },
 		handleSubmit,
 		getValues,
+		setValue,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
+		url    : '/create_vendor',
+		method : 'post',
+	}, { manual: true });
+
+	const [{ loading: updateLoading }, updateTrigger] = useRequest({
 		url    : '/create_vendor',
 		method : 'post',
 	}, { manual: true });
@@ -70,9 +78,9 @@ function useOnBoardVendor({
 			router.push(href, as);
 
 			Toast.success('Vendor created successfully');
-			setActiveStepper('contact_details');
+			setActiveStepper('vendor_pocs');
 		} catch (error) {
-			Toast.error(getApiErrorString(error.data));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
@@ -80,7 +88,7 @@ function useOnBoardVendor({
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
-		setValue('document_url', vendorInformation?.vendor_details?.document_url);
+		setValue('registration_proof_url', vendorInformation?.vendor_details?.registration_proof_url);
 	}, [fields, vendorInformation]);
 
 	return {

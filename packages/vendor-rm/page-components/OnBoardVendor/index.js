@@ -38,7 +38,7 @@ function OnBoardVendor() {
 
 	console.log(vendorInformation, 'vendorInformation');
 
-	const [activeStepper, setActiveStepper] = useState('payment_details');
+	const [activeStepper, setActiveStepper] = useState('vendor_bank_details');
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
