@@ -23,6 +23,7 @@ function Header({
 	hasPermissionToEdit = false,
 	filteredSpectators = [],
 	activeMessageCard,
+	tagOptions = [],
 
 }) {
 	const [isVisible, setIsVisible] = useState(false);
@@ -43,6 +44,7 @@ function Header({
 						setIsVisible={setIsVisible}
 						updateChat={updateChat}
 						loading={loading}
+						tagOptions={tagOptions}
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 					<ShowContent list={chat_tags} showMorePlacement="right" />
