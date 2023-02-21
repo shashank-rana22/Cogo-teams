@@ -48,6 +48,11 @@ const common_apis = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'create_communication_platform_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_store_quota',
 			access_type  : 'private',
 			service_name : 'store',

@@ -56,7 +56,7 @@ margin-left: 20px;
 }
 
 .actions {
-    margin: 20px 0px 20px 10px;
+    margin: 10px 0px 20px 10px;
     display: flex;
 
 }
@@ -78,7 +78,15 @@ margin-left: 20px;
 .last_button{
 	margin-left: 80px;
 }
+
 .styled_modal{
 	width: 350px !important;
 	
+}
+
+.form_error{
+margin-left: 20px;
+margin-top: 5px;
+font-size: 10px;
+color:red;
 }
