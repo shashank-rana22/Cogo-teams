@@ -1,0 +1,83 @@
+
+
+.content {
+    border: 1px solid rgb(128, 123, 123);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+    
+.contentparent {
+    height: 0px;
+    overflow: hidden;
+    transition: height ease 0.9s;
+}
+
+    
+.contentshow {
+    height: 200px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	font-size: 16px;
+
+	@media (min-width: 768px) {
+		font-size: 1.25rem;
+	}
+}
+.relatedquestion{
+	
+margin-top: 20%;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 1000;
+font-size: 15px;
+/* or 25px */
+
+color: #000000;
+
+opacity: 0.5;
+}
+
+.subtitle {
+	font-size: 14px;
+	font-weight: 1000;
+	margin-right: 1%;
+	margin-bottom: 1.5%;
+}
+
+.sidetext{
+	font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 15px;
+margin-bottom: 0.25%;
+margin-right: 5%;
+/* identical to box height */
+
+color: #221F20;
+
+opacity: 0.6;
+}
+.heading_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 60rem;
+	margin-bottom: 0.5%;
+	
+
+	@media (max-width: 768px) {
+		flex-flow: column wrap;
+		align-items: flex-start;
+
+		:global(.ui_chips_container) {
+			flex-wrap: wrap;
+			width: 100%;
+			margin-top: 20px;
+		}
+	}
+}

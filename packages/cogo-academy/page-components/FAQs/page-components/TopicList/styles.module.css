@@ -1,0 +1,10 @@
+.gridcontainer {
+    display: grid;
+    grid-template-columns: 20rem 100rem;
+    grid-template-row: auto;
+    
+    gap: 3rem;
+    background-color:;
+    padding: 10px;
+  }
+  
