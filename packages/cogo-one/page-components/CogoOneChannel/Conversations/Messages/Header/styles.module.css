@@ -10,6 +10,10 @@
     box-shadow: 0px 4px 16px 0px #627fac33;
 }
 
+.down_arrow{
+	margin-left: 5px;
+}
+
 .flex {
     display: flex;
     align-items: center;

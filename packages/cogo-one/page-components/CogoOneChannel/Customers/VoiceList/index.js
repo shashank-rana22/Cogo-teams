@@ -4,6 +4,7 @@ import { startCase, format, differenceInDays, isEmpty } from '@cogoport/utils';
 
 import { VOICE_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
+import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import LoadingState from '../LoadingState';
 
 import styles from './styles.module.css';
@@ -59,10 +60,11 @@ function VoiceList({
 		>
 
 			{(list || []).map((item) => {
-				const { user_data = null, user_number = '', organization_data = null } = item || {};
+				const {
+					user_data = null, user_number = '', organization_data = null,
+					start_time_of_call = '',
+				} = item || {};
 				const checkActiveCard = activeVoiceCard?.id === item?.id;
-				const daysDifference = differenceInDays(new Date(), new Date(item.start_time_of_call));
-				// const checkUserData = Object.keys(item || {}).includes('user_data');
 				const checkUserData = !isEmpty(Object.keys(user_data || {}));
 
 				const showUserData = checkUserData ? (
@@ -70,6 +72,7 @@ function VoiceList({
 				) : (
 					user_number
 				);
+				const lastActive = new Date(start_time_of_call);
 
 				return (
 					<div
@@ -105,15 +108,14 @@ function VoiceList({
 
 								<div className={styles.user_activity}>
 									<div className={styles.activity_duration}>
-										{daysDifference > 7 ? (
-											format(item.start_time_of_call, 'dd/MM/yy')
-										) : (
-											format(item.start_time_of_call, 'EEE')
-										)}
+										{dateTimeConverter(
+											Date.now() - Number(lastActive),
+											Number(lastActive),
+										)?.renderTime}
 
 									</div>
 									<div className={styles.activity_duration}>
-										{format(item.start_time_of_call, 'HH:mm a')}
+										{format(start_time_of_call, 'HH:mm a')}
 									</div>
 								</div>
 							</div>
