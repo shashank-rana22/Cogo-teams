@@ -34,7 +34,13 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 			</div>
 		</Tooltip>
 	);
-
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.tags_text}>
+				Add tags to categorise chats
+			</div>
+		);
+	}
 	return (
 		<div className={styles.flex}>
 			{showMoreList && showMorePlacement !== 'right' && toolTipComp}
@@ -62,7 +68,6 @@ export function TagsPopOver({
 	hasPermissionToEdit = false,
 	tagOptions = [],
 }) {
-	console.log('tagOptions:', tagOptions);
 	const filteredOptions = tagOptions.filter(
 		({ value }) => !prevtags.includes(value),
 	);
@@ -109,7 +114,9 @@ export function TagsPopOver({
 			onClickOutside={resetFunc}
 			visible={isVisible}
 		>
-			<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} />
+			<div className={styles.flex}>
+				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} />
+			</div>
 		</Popover>
 	);
 }

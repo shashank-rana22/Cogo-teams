@@ -70,11 +70,12 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 				<div className={styles.label}>Select a date</div>
 				<Datepicker
 					placeholder="Enter Date"
-					dateFormat="MM/dd/yyyy HH:mm a"
+					dateFormat="MM/dd/yyyy hh:mm a"
 					showTimeSelect
 					name="date"
 					onChange={setDate}
 					value={date}
+					use12hourformat={false}
 				/>
 				<div className={styles.wrapper}>
 					<div className={styles.label}>Summary</div>
