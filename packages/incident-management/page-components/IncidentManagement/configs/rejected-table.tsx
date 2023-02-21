@@ -17,25 +17,17 @@ interface PropsType {
 	refetch:Function;
 	setActiveTab:Function;
 	setPayload:Function;
-	activeTab:string
-	listData:Array<object>,
 }
 
 const rejectedColumn = ({
-	isSortActive, setIsSortActive, activeTab,
-	setGlobalFilters, refetch, setActiveTab, setPayload, listData,
+	isSortActive, setIsSortActive,
+	setGlobalFilters, refetch, setActiveTab, setPayload,
 }:PropsType) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
-			<ClickableIncidentId
-				itemData={row}
-				listData={listData}
-				setActiveTab={setActiveTab}
-				activeTab={activeTab}
-				setPayload={setPayload}
-			/>
+			<ClickableIncidentId itemData={row} setActiveTab={setActiveTab} setPayload={setPayload} />
 		),
 	},
 	{

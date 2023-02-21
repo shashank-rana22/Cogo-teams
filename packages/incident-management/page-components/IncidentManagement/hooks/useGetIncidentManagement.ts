@@ -8,11 +8,7 @@ import { useEffect, useState } from 'react';
 
 interface ItemProps {
 	activeTab:string,
-	payload:{
-		raisedPayload:string
-		id:string
-		user:string
-	},
+	payload:string
 }
 const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	const {
@@ -74,8 +70,8 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 					sourceDashboard    : 'USER',
 					userIncidentStatus : requestedStatus || rejectedStatus || activeStatus,
 					isStatsRequired    : true,
-					createdBy          : payload?.raisedPayload === 'raisedPayload' ? payload?.user : userId,
-					id                 : payload?.raisedPayload === 'raisedPayload' ? payload?.id : undefined,
+					createdBy          : payload?.[0] === 'raisedPayload' ? payload?.[2] : userId,
+					id                 : payload?.[0] === 'raisedPayload' ? payload?.[1] : undefined,
 					pageIndex          : globalFilters.pageIndex,
 					q                  : query !== '' ? query : undefined,
 					type               : requestType,
@@ -94,7 +90,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(rest), activeTab, query, requestType, Date, rejectedStatus, payload?.id, requestedStatus]);
+	}, [JSON.stringify(rest), activeTab, query, requestType, Date, rejectedStatus, requestedStatus]);
 
 	const filtervalue = Object.values(globalFilters);
 

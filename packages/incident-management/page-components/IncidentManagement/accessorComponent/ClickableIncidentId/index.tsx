@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -14,11 +14,9 @@ interface PropsType {
 	itemData:ItemProps;
 	setActiveTab:Function;
 	setPayload:Function;
-	activeTab:string
-	listData:any
 }
 
-function ClickableIncidentId({ itemData, listData, activeTab, setActiveTab, setPayload }:PropsType) {
+function ClickableIncidentId({ itemData, setActiveTab, setPayload }:PropsType) {
 	const { userIncidentStatus, referenceId, linkedIncidentId } = itemData || {};
 	const { push } = useRouter();
 	const {
@@ -29,18 +27,11 @@ function ClickableIncidentId({ itemData, listData, activeTab, setActiveTab, setP
 
 	const { user: { id:userId = '' } } = UserData;
 
-	useEffect(() => {
-		if (listData?.[0]?.status === 'approved') {
-			setActiveTab('approved');
-		} else if (listData?.[0]?.status === 'REQUESTED') {
-			setActiveTab('requested');
-		}
-	}, [listData]);
-
 	const handleTabChange = () => {
-		setPayload({ raisedPayload: 'raisedPayload', id: linkedIncidentId, user: userId });
+		setActiveTab('requested');
+		setPayload(['raisedPayload', linkedIncidentId, userId]);
+		push('/incident-management/requested');
 	};
-
 	return (
 		<div className={styles.container}>
 
