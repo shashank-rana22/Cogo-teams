@@ -29,6 +29,7 @@ function EmptyState({
 	const handleSubmit = async () => {
 		await leadUserProfile({ profileValue });
 		setShowAddNumber(false);
+		setProfilevalue({});
 	};
 
 	const renderEmpty = () => {

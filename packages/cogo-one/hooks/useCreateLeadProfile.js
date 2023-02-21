@@ -15,11 +15,11 @@ function useCreateLeadProfile() {
 					name,
 					mobile_country_code : '+91',
 					mobile_number       : number,
-					profile_data        : {
+					profile_data        : [{
 						channel_type         : 'platform_channel',
 						channel_account_type : name,
 						channel_accountid    : number,
-					},
+					}],
 				},
 			});
 			Toast.success('Successfully Created');
