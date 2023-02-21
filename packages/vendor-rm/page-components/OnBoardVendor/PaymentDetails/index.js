@@ -11,6 +11,7 @@ function PaymentDetails({
 	return (
 		<div>
 			<Header />
+
 			<FormComponent
 				activeStepper={activeStepper}
 				setActiveStepper={setActiveStepper}

@@ -25,8 +25,6 @@ function useOnBoardVendor({
 
 	const router = useRouter();
 
-	console.log(vendorInformation, 'vendorInformation');
-
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
