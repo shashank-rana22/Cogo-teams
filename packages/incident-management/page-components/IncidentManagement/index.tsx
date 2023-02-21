@@ -50,7 +50,7 @@ function IncidentManagement() {
 		<div>
 
 			<div className={styles.header_text}>
-				Incident Management - My Incidents
+				My Incidents
 			</div>
 
 			<Headers

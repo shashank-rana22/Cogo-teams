@@ -97,7 +97,7 @@ function IncidentController() {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.header_style}>
-					Incident Controller
+					Incident Management
 				</div>
 			</div>
 			<div className={styles.tabs_container}>

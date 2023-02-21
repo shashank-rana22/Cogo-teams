@@ -4,7 +4,7 @@ const businessFinance = {
 		isMainNav  : true,
 	},
 
-	'/[partner_id]/business-finance/incident-controller/[activeTab]': {
+	'/[partner_id]/business-finance/incident-management/[activeTab]': {
 		navigation: 'business_finance-incident_controller',
 	},
 
