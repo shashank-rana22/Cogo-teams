@@ -24,11 +24,14 @@ function GrantOutlookAccess() {
 				className="primary md"
 				styles={{ dialog: { overflow: 'visible' } }}
 			>
+				<Modal.Header title="Allow Mails" />
+				<Modal.Body>
+					<GrantAccess
+						email={email}
+						showAccessUrl={showAccessUrl}
+					/>
+				</Modal.Body>
 
-				<GrantAccess
-					email={email}
-					showAccessUrl={showAccessUrl}
-				/>
 			</Modal>
 		</div>
 	);

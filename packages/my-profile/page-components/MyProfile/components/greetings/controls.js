@@ -15,7 +15,7 @@ const getControls = (detailsData = {}) => [
 		drag            : true,
 		height          : 72,
 		uploadIcon,
-		value           : detailsData?.picture,
+		defaultValue    : detailsData?.picture,
 		rules           : {
 			required: 'Profile Picture is required',
 		},

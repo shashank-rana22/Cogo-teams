@@ -3,6 +3,7 @@ import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+// import getControls from './controls';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEditPersonalDetails';
@@ -22,6 +23,8 @@ function Greetings({
 		lowest_geo_location = {},
 		status = '',
 	} = detailsData || {};
+
+	// const controls = getControls({ detailsData });
 
 	const {
 		onOuterClick,
@@ -48,6 +51,9 @@ function Greetings({
 		setEditNameModal,
 		partner_user_id,
 	});
+	// const onChange = () => watchProfilePicture;
+
+	// console.log('onChange', onChange());
 
 	return (
 		<div className={styles.main_container}>
@@ -172,11 +178,15 @@ function Greetings({
 									<div className={styles.upload_picture_text}>Upload picture</div>
 
 									<UploadController
-										{...control}
+										// {...controls[0]}
 										control={control}
 										errors={errors}
 										name="profile_picture_url"
 										accept=".png, .jpeg"
+										// multiple
+										// onChange={onChange}
+										// defaultValues={['https://cogoport-testing.sgp1.
+										// ssdigitaloceanspaces.com/54f0728a338442c5f2f87654ff43577e/coupon.png']}
 
 									/>
 								</div>
