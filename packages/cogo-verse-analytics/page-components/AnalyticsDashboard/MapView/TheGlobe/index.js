@@ -15,17 +15,11 @@ function TheGLobe(
 		globeLoading = false,
 	},
 ) {
-	console.log('globeGL', globeGL);
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
-
-	const markerWidth = markerData?.length > 2000 ? '5px' : '10px';
-	console.log('markerWidth', markerWidth);
 
 	let Globe = () => {};
 	// eslint-disable-next-line global-require
 	if (typeof window !== 'undefined') Globe = require('react-globe.gl').default;
-
-	// console.log('globeGL scene', globeGL?.current?.scene());
 
 	const colorMode = 'light';
 
@@ -36,7 +30,7 @@ function TheGLobe(
 		globeGL.current.controls().autoRotateSpeed = 0.5;
 		globeGL.current.renderer().alpha = true;
 		globeGL.current.controls().maxDistance = globeGL.current.getGlobeRadius() * 4;
-		globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2.25;
+		globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2.35;
 	}
 
 	// experiments
@@ -127,7 +121,7 @@ function TheGLobe(
 					const el = document?.createElement('div');
 					el.innerHTML = globeMarker;
 					el.style.color = '#FCDC00';
-					el.style.width = '8px';
+					el.style.width = '10px';
 					el.style['pointer-events'] = 'auto';
 					el.style.cursor = 'pointer';
 

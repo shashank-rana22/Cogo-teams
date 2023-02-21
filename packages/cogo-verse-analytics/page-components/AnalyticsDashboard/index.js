@@ -2,6 +2,8 @@ import { dynamic } from '@cogoport/next';
 import { startOfMonth } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useGetUsersStats from '../../hooks/useGetUsersStats';
+
 import Stats from './Stats';
 import styles from './styles.module.css';
 
@@ -15,6 +17,8 @@ function AnalyticsDashboard() {
 		startDate : startOfMonth(new Date()),
 		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
 	});
+	const { userStats = {} } = useGetUsersStats();
+
 	return (
 		<div className={main_container}>
 			<div className={stats_view_container}>

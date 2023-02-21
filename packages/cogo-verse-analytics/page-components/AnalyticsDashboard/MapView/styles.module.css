@@ -178,6 +178,10 @@
   }
 
 }
+.loading_image{
+  position: absolute;
+  z-index: 10;
+}
 
 .globe_controls{
   position: absolute;
@@ -204,6 +208,14 @@
     }
     
   }
+
+}
+
+.loading_state_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
 
 }
 
@@ -394,6 +406,7 @@
   align-items: center;
 
 }
+
 
 /* Communication Stats  ------------------------------------------------------------------- */
 

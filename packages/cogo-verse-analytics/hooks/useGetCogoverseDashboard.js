@@ -2,7 +2,6 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useGetCogoverseDashboard = ({ country = {} }) => {
-	console.log('country', country);
 	const [list, setList] = useState({
 		fullResponse: {},
 	});

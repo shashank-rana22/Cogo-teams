@@ -1,9 +1,16 @@
 /* eslint-disable max-len */
-import { Select, DateRangepicker, cl, ButtonIcon, Tooltip, Pill } from '@cogoport/components';
-import { Placeholder } from '@cogoport/components';
+import {
+	Select,
+	DateRangepicker,
+	cl,
+	ButtonIcon,
+	Tooltip,
+	Pill,
+	Placeholder,
+} from '@cogoport/components';
 import { useGetAsyncOptions, getFormattedPrice } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMHourglass } from '@cogoport/icons-react';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge, startCase, format } from '@cogoport/utils';
@@ -46,7 +53,6 @@ function MapView({
 		pop : 500,
 		...markerData,
 	}));
-	console.log('markerData', markerData);
 
 	const onSelectChange = (val) => {
 		setCountry(val);
@@ -138,6 +144,7 @@ function MapView({
 
 							(!globeLoading)
 								? (
+
 									<TheGlobe
 										country={country}
 										pointsList={pointsList}
@@ -145,14 +152,17 @@ function MapView({
 										markerData={markerData}
 										globeLoading={globeLoading}
 									/>
+
 								) : (
-									<div>
+									<div className={styles.loading_state_container}>
 										<img
 											src={imgURL.globe_loading_state}
 											alt="Loading Co-ordinates"
-											width="480px"
-											height="480px"
+											width="460px"
+											height="460px"
+											className={styles.loading_image}
 										/>
+										<Placeholder type="circle" radius="480px" margin="0px 0px 0px 0px" />
 									</div>
 								)
 
@@ -207,11 +217,7 @@ function MapView({
 						</div>
 
 						<div className={styles.arrow_img}>
-
-							{1 < 3
-								? <img width="35px" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg" alt="decreased" />
-								: <img width="35px" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/increasing_arrow.svg" alt="increased" />}
-
+							<IcMHourglass width="30px" height="30px" fill="#C4DC91" />
 						</div>
 					</div>
 

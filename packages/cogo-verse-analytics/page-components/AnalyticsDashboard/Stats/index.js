@@ -11,10 +11,7 @@ import Charts from './LineChart';
 import styles from './styles.module.css';
 
 function Stats({ country = '' }) {
-	console.log('country', country);
-
 	const { list = {}, loading = false } = useGetCogoverseDashboard({ country });
-	console.log('list', list);
 
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');

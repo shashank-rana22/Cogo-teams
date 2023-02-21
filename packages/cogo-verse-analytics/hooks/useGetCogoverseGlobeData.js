@@ -5,7 +5,6 @@ const useGetCogoverseGlobeData = ({ country = {}, circleTab = '', date = {} }) =
 	const [pointsList, setPointsList] = useState({
 		fullResponse: {},
 	});
-
 	const [{ error, loading }, refetch] = useRequest({
 		url    : '/get_cogoverse_globe_data',
 		method : 'GET',
