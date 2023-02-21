@@ -1,8 +1,8 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
 import React from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
+import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
 
 function Header({ searchInput, setSearchInput }) {
@@ -17,10 +17,8 @@ function Header({ searchInput, setSearchInput }) {
 				/>
 			</div>
 
-			<div className={styles.filters}>
-				Filter by tags
-				{' '}
-				<IcMArrowDown width={16} height={16} />
+			<div className={styles.filter_popover}>
+				<FilterPopover />
 			</div>
 		</div>
 	);
