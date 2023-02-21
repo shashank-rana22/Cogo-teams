@@ -21,7 +21,8 @@ function RightSideNav({
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
 			// eslint-disable-next-line no-undef
-			window.open(`/${partnerId}/details/demand/${ORG_ID}?source=communication`, '_blank');
+			window.open(`/${partnerId}/details/demand/${ORG_ID}?source=communication`, '_blank'); // For Sales CRM
+			// window.open(`/${partnerId}/prm/${CHANNEL_PARTNER_ID}?source=communication`, '_blank');  // For PRM
 		} else {
 			setActiveSelect(val);
 		}
