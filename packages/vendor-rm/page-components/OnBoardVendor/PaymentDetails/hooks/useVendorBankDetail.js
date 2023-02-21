@@ -3,6 +3,7 @@ import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import useRequest from '@cogoport/request/hooks/useRequest';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -31,6 +32,12 @@ function useVendorBankDetail({
 	const { payment_details } = vendorInformation;
 
 	const isUpdateAction = !isEmpty(payment_details);
+
+	const {
+		general : { query = {} },
+	} = useSelector((state) => state);
+
+	const { vendor_id } = query;
 
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
@@ -77,8 +84,8 @@ function useVendorBankDetail({
 			await triggerCreateVendorBankDetail({
 				data: {
 					...values,
-					bank_document_url : values.bank_document_url.finalUrl,
-					vendor_id         : vendorInformation?.vendor_details?.id,
+					bank_document_url: values.bank_document_url.finalUrl,
+					vendor_id,
 				},
 			});
 

@@ -48,6 +48,7 @@ function useCreateVendorContact({
 			mobile_number         : formattedValues?.mobile_number?.number,
 			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,
 			whatsapp_number       : formattedValues?.whatsapp_number?.number,
+			poc_role              : formattedValues?.company_role,
 		};
 
 		try {

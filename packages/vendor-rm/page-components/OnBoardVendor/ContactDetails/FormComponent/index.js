@@ -1,13 +1,14 @@
 /* eslint-disable import/no-cycle */
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
-// import useCreateVendorContact from '../hooks/useCreateVendorContact';
+
+const ButtonContainerStyle = {
+	margin: '20px',
+};
 
 function FormComponent({
 	activeStepper = {},
 	setActiveStepper = () => {},
-	// vendorInformation = {},
-	// setVendorInformation = () => {},
 	fields = [],
 	control,
 	errors,
@@ -15,18 +16,6 @@ function FormComponent({
 	loading,
 	handleSubmit,
 }) {
-	// const {
-	// 	fields = [],
-	// 	control,
-	// 	errors,
-	// 	createVendorContact,
-	// 	loading,
-	// 	handleSubmit,
-	// } =	useCreateVendorContact({
-	// 	setActiveStepper,
-	// 	vendorInformation,
-	// 	setVendorInformation,
-	// });
 	return (
 		<div>
 			<FormLayout
@@ -40,6 +29,7 @@ function FormComponent({
 				setActiveStepper={setActiveStepper}
 				handleSubmit={handleSubmit}
 				onSubmit={createVendorContact}
+				style={ButtonContainerStyle}
 			/>
 		</div>
 	);

@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
-
 // eslint-disable-next-line import/no-cycle
 import ButtonLayout from '../../../commons/components/ButtonLayout/ButtonLayout';
 
 import DisplayDetails from './DisplayDetails';
 import Header from './Header';
+import useKyc from './hooks/useKyc';
 import styles from './styles.module.css';
 // import Success from './Success';
 
@@ -15,9 +14,9 @@ function VerificationDetails({
 	getVendor = () => {},
 	getVendorLoading = false,
 }) {
-	useEffect(() => {
-		getVendor();
-	}, []);
+	const { response = {} } = useKyc({ getVendor });
+
+	console.log('response:: ', response);
 
 	return (
 		<>

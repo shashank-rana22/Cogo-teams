@@ -68,7 +68,7 @@ const useVendorList = () => {
 			id       : 'c',
 			accessor : ({ business_name = '' }) => (
 				<section>
-					{business_name}
+					{startCase(business_name)}
 				</section>
 			),
 		},
