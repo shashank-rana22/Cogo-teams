@@ -4,19 +4,40 @@ import React, { useState } from 'react';
 
 import AllInvoices from './All_Invoices/index';
 import Dashboard from './Dashboard';
+import Rejected from './Rejected';
 import styles from './styles.module.css';
 
 function CoeFinance() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
+	const getRoute = (tab:string) => {
+		if (tab === 'all_invoices') {
+			return [
+				'/business-finance/coe-finance/[active_tab]/purchase-view',
+				`/business-finance/coe-finance/${tab}/purchase-view`,
+			];
+		}
+		if (tab === 'rejected') {
+			return [
+				'/business-finance/coe-finance/[active_tab]/finance_rejected',
+				`/business-finance/coe-finance/${tab}/finance_rejected`,
+			];
+		}
+		if (tab === 'dashboard') {
+			return [
+				'/business-finance/coe-finance/[active_tab]',
+				`/business-finance/coe-finance/${tab}`,
+			];
+		}
+		return [
+		];
+	};
+
 	const handleChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
-			tab === 'all_invoices' ? '/business-finance/coe-finance/[active_tab]/purchase-view '
-				: '/business-finance/coe-finance/[active_tab]',
-			tab === 'all_invoices' ? `/business-finance/coe-finance/${tab}/purchase-view`
-				: `/business-finance/coe-finance/${tab}`,
+			getRoute(tab),
 		);
 	};
 
@@ -47,7 +68,7 @@ function CoeFinance() {
 					</TabPanel>
 
 					<TabPanel name="rejected" title="Rejected">
-						<div>Rejected</div>
+						<Rejected />
 					</TabPanel>
 				</Tabs>
 			</div>
