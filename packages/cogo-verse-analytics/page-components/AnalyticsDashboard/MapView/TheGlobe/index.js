@@ -108,7 +108,7 @@ function TheGLobe(
 				// ringPropagationSpeed={2}
 				// ringRepeatPeriod={600}
 				// html
-				htmlElementsData={pointBinData}
+				htmlElementsData={markerData}
 				htmlTransitionDuration={2000}
 				htmlElement={(d) => {
 					// console.log('d', d);

@@ -1,12 +1,11 @@
-import { getAnalytics } from 'firebase/analytics';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import {
 	query,
 	where,
 	getCountFromServer,
-	collectionGroup, getFirestore,
+	collectionGroup, getFirestore, orderBy,
 } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { firebaseConfig } from '../configurations/firebase-configs';
 
@@ -15,18 +14,18 @@ function useGetUsersStats() {
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
-	const analytics = getAnalytics(app);
-	console.log('analytics', analytics);
 
 	const getUserSats = async () => {
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
 		const countKamChats = query(
 			omniChannelCollection,
 			where('session_type', '==', 'admin'),
+			orderBy('updated_at', 'desc'),
 		);
 		const countBotChats = query(
 			omniChannelCollection,
 			where('session_type', '==', 'bot'),
+			orderBy('updated_at', 'desc'),
 		);
 		const ActiveBotChats = await getCountFromServer(countBotChats);
 		const ActiveKamChats = await getCountFromServer(countKamChats);
@@ -36,13 +35,10 @@ function useGetUsersStats() {
 		});
 	};
 
-	useEffect(() => {
-		getUserSats();
-	}, []);
-
-	return (
-		userStats
-	);
+	return {
+		getUserSats,
+		userStats,
+	};
 }
 
 export default useGetUsersStats;

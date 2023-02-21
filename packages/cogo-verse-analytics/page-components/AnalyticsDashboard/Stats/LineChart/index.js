@@ -2,11 +2,18 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
-import { CHART_DATA } from '../../../../configurations/chart-data';
+import chartData from '../../../../configurations/chart-data';
 
 import styles from './styles.module.css';
 
-function Charts() {
+function Charts({ props = {} }) {
+	const {
+		platFormChatData = {},
+		chatLoading = false,
+	} = props || {};
+
+	const GraphData = chartData({ platFormChatData }) || [];
+
 	const colors = ['#5B4A99', '#BDBDBD'];
 
 	const formattedDate = (date) => format(date, 'dd MMM');
@@ -20,15 +27,15 @@ function Charts() {
 
 	return (
 		<ResponsiveLine
-			data={CHART_DATA}
+			data={GraphData}
 			margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
 			xScale={{ type: 'point' }}
 			yScale={{
-        	type    : 'linear',
-        	min     : 'auto',
-        	max     : 'auto',
-        	stacked : true,
-        	reverse : false,
+            	type    : 'linear',
+            	min     : 'auto',
+            	max     : 'auto',
+            	stacked : true,
+            	reverse : false,
 			}}
 			yFormat=" >-.2f"
 			curve="natural"
@@ -36,41 +43,42 @@ function Charts() {
 			axisRight={null}
 			colors={colors}
 			axisBottom={{
-        	orient         : 'bottom',
-        	tickSize       : 0,
-        	tickPadding    : 25,
-				tickValues 	   : 7,
-        	tickRotation   : 0,
-        	legend         : '',
-        	legendOffset   : 45,
-        	legendPosition : 'middle',
-				format         : (v) => formattedDate(v),
+            	orient         : 'bottom',
+            	tickSize       : 0,
+            	tickPadding    : 25,
+            	tickValues     : 8,
+            	tickRotation   : 0,
+            	legend         : '',
+            	legendOffset   : 45,
+            	legendPosition : 'middle',
+            	format         : (v) => formattedDate(v),
 			}}
 			axisLeft={{
-        	orient         : 'left',
-        	tickSize       : 0,
-				tickValues 	   : 5,
-        	tickPadding    : 15,
-        	tickRotation   : 0,
-        	legend         : '',
-        	legendOffset   : -40,
-        	legendPosition : 'middle',
-				format         : (v) => formattedTime(v),
+            	orient         : 'left',
+            	tickSize       : 0,
+            	tickValues     : 5,
+            	tickPadding    : 15,
+            	tickRotation   : 0,
+            	legend         : '',
+            	legendOffset   : -40,
+            	legendPosition : 'middle',
+            	format         : (v) => formattedTime(v),
 			}}
 			tooltip={({ point = {} }) => {
-				const { borderColor, data } = point;
+            	const { borderColor, data } = point;
 
-				return (
-					<div className={styles.tool_tip}>
-						<span style={{ background: borderColor }} />
-						<strong>
-							{formattedDate(data.x)}
-							{' '}
-							:
-							{formattedTime(data.y)}
-						</strong>
-					</div>
-				);
+            	return (
+	<div className={styles.tool_tip}>
+		<span style={{ background: borderColor }} />
+		<strong>
+			{formattedDate(data.x)}
+			{' '}
+			:
+			{' '}
+			{formattedTime(data.y)}
+		</strong>
+	</div>
+            	);
 			}}
 			enableGridX={false}
 			enablePoints={false}

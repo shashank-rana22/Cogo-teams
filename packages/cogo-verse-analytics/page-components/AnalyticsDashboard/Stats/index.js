@@ -3,7 +3,7 @@ import { cl } from '@cogoport/components';
 import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { PRIMARY_STATS, USER_STATUS, INTENT_LEADERBOARD } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
@@ -13,11 +13,17 @@ import { strToKMBT } from '../../../utils/strToKMBT';
 import Charts from './LineChart';
 import styles from './styles.module.css';
 
-function Stats({ props = {} }) {
-	const { userStats = {} } = useGetUsersStats();
-	console.log('userStats', userStats);
+function Stats(props = {}) {
+	const { userStats = {}, getUserSats } = useGetUsersStats();
 
-	const { statsData = {}, statsLoading = false } = props || {};
+	useEffect(() => {
+		getUserSats();
+	}, []);
+
+	const {
+		statsData = {},
+		statsLoading = false,
+	} = props || {};
 
 	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
 
@@ -26,17 +32,15 @@ function Stats({ props = {} }) {
 		return ((amount.substring(4)).split('.'))[0];
 	};
 
-	const cogoverse_ai = 2000;
-	const customer_support = 20000;
-
 	return (
 		<div className={styles.main_container}>
 			{/* Header --------------------------------------------------------------------------- */}
 
 			<div className={styles.cogoverse_header}>
-				Welcome to the
+				{/* Welcome to the */}
+				<img src={imgURL.cogoverse_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
 
-				<div className={cl`${styles.cogoverse}`}>CogoVerse Analytics!</div>
+				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics!</div>
 			</div>
 
 			{/* Primary Stats --------------------------------------------------------------------------- */}
@@ -96,8 +100,9 @@ function Stats({ props = {} }) {
 								CogoVerse AI
 							</div>
 							<div className={styles.right_stat_value}>
-								{strToKMBT(cogoverse_ai)}
-								{/* <Placeholder className={styles.placeholder_element} height="15px" width="30px" /> */}
+								{!statsLoading
+									? strToKMBT(userStats?.ai_chats) : <Placeholder className={styles.placeholder_element} height="15px" width="30px" />}
+
 							</div>
 						</div>
 						<div className={styles.right_stat_content}>
@@ -105,8 +110,9 @@ function Stats({ props = {} }) {
 								Customer Support
 							</div>
 							<div className={styles.right_stat_value}>
-								{strToKMBT(customer_support)}
-								{/* <Placeholder className={styles.placeholder_element} height="15px" width="30px" /> */}
+								{!statsLoading ? strToKMBT(userStats?.kam_chats)
+									: <Placeholder className={styles.placeholder_element} height="15px" width="30px" />}
+
 							</div>
 						</div>
 					</div>
@@ -167,7 +173,7 @@ function Stats({ props = {} }) {
 					</div>
 				</div>
 				<div className={styles.the_chart}>
-					<Charts />
+					<Charts {...props} />
 				</div>
 
 			</div>

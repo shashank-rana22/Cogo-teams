@@ -2,7 +2,6 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useGetCogoverseGlobeData = ({ country = {}, circleTab = '', date = {} }) => {
-	console.log('country', country);
 	const [globeData, setGlobeData] = useState({
 		fullResponse: {},
 	});

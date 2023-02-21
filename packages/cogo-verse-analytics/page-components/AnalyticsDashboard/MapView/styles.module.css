@@ -156,6 +156,7 @@
 
  .placeholder_element {
 	border-radius: 4px;
+  
 
  }
 
@@ -484,5 +485,12 @@
 .pie_chart{
   height: 110px;
   flex-basis: 30%;
+}
+
+.no_data_found{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

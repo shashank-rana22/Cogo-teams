@@ -37,6 +37,8 @@ function MapView({ props = {} }) {
 		country = {},
 		date = {},
 		setDate = {},
+		chatLoading = false,
+		platFormChatData = {},
 	} = props || {};
 
 	const [circleTab, setCircleTab] = useState('new_users');
@@ -50,10 +52,8 @@ function MapView({ props = {} }) {
 
 	const { user_location = [], stats:globeStats = {} } = globeData?.fullResponse?.data || {};
 
-	const coordinates = user_location || [];
-
 	let markerData = {};
-	markerData = coordinates.map((item) => ({
+	markerData = user_location.map((item) => ({
 		lat : item[0],
 		lng : item[1],
 		pop : 500,
@@ -81,7 +81,7 @@ function MapView({ props = {} }) {
 
 	const startDate = format(date?.startDate, 'dd MMM yyyy');
 	const endDate = format(date?.endDate, 'dd MMM yyyy');
-	const avgResponseTimeValue = 70;
+	const averageResponseTime = Number(platFormChatData?.average_cutomer_response_time) || 0;
 
 	// const [showComponent, setShowComponent] = useState(false);
 	// useEffect(() => {
@@ -171,7 +171,7 @@ function MapView({ props = {} }) {
 
 								>
 									<div className={styles.stat_value}>
-										{ !globeLoading ? strToKMBT(globeStats[valueKey] || 0) || 0 : 	<Placeholder className={styles.placeholder_element} height="18px" width="30px" margin="0px 0px 5px 0px" />}
+										{!globeLoading ? strToKMBT(globeStats[valueKey] || 0) || 0 : 	<Placeholder className={styles.placeholder_element} height="18px" width="30px" margin="0px 0px 5px 0px" />}
 
 									</div>
 									<div className={styles.stat_label}>
@@ -200,18 +200,18 @@ function MapView({ props = {} }) {
 					<div className={styles.response_time}>
 						<div className={styles.time}>
 							{
-								statsLoading
+								chatLoading
 									? <Placeholder className={styles.placeholder_element} height="40px" width="75px" />
 									: (
 										<>
 											<span>
-												{avgResponseTimeValue < 60
-													? avgResponseTimeValue
+												{averageResponseTime < 60
+													? averageResponseTime
 
-													:	(Number(avgResponseTimeValue) / 60).toFixed(1)}
+													:	(averageResponseTime / 60).toFixed(1)}
 											</span>
 											{' '}
-											{avgResponseTimeValue < 60
+											{averageResponseTime < 60
 												? 'min'
 
 												:	'hrs'}
@@ -252,7 +252,14 @@ function MapView({ props = {} }) {
 					</div>
 
 					<div className={styles.pie_chart}>
-						<CommunicationPieChart conversation_data={conversation_data} />
+						{Object.values(conversation_data).some((i) => i > 0)
+							? <CommunicationPieChart conversation_data={conversation_data} />
+							: 							(
+								<div className={styles.no_data_found}>
+									<img src={imgURL.empty_2} alt="no data" width="100px" />
+								</div>
+							)}
+
 					</div>
 
 				</div>

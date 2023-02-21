@@ -1,81 +1,29 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-export const CHART_DATA = [
-	{
-	  id    : 'cogo_assist',
-	  color : 'hsla(253, 35%, 45%, 1)',
-	  data  : [
-			{
-		  x : '2023-02-16 19:55:33 +0530',
-		  y : 0,
-			},
-			{
-		  x : '2023-02-17 19:55:33 +0530',
-		  y : 220,
-			},
-			{
-		  x : '2023-02-18 19:55:33 +0530',
-		  y : 62,
-			},
-			{
-		  x : '2023-02-19 19:55:33 +0530',
-		  y : 1440,
-			},
-			{
-		  x : '2023-02-20 19:55:33 +0530',
-		  y : 189,
-			},
-			{
-		  x : '2023-02-21 19:55:33 +0530',
-		  y : 25,
-			},
-			{
-		  x : '2023-02-22 19:55:33 +0530',
-		  y : 127,
-			},
-			{
-				x : '2023-02-23 19:55:33 +0530',
-				y : 129,
-				  },
-	  ],
-	},
-	{
-	  id    : 'customer_support',
-	  color : 'hsla(0, 0%, 88%, 1)',
-	  data  : [
-			{
-		  x : '2023-02-16 19:55:33 +0530',
-		  y : 84,
-			},
-			{
-		  x : '2023-02-17 19:55:33 +0530',
-		  y : 129,
-			},
-			{
-		  x : '2023-02-18 19:55:33 +0530',
-		  y : 294,
-			},
-			{
-		  x : '2023-02-19 19:55:33 +0530',
-		  y : 234,
-			},
-			{
-		  x : '2023-02-20 19:55:33 +0530',
-		  y : 194,
-			},
-			{
-		  x : '2023-02-21 19:55:33 +0530',
-		  y : 68,
-			},
-			{
-		  x : '2023-02-22 19:55:33 +0530',
-		  y : 135,
-			},
-			{
-				x : '2023-02-23 19:55:33 +0530',
-				y : 169,
-				  },
-	  ],
-	},
-	
 
-];
+const chartData = ({ platFormChatData = {} }) => {
+	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
+
+	const botDataKeys = Object.keys(bot_data);
+	const platformChatKeys = Object.keys(customer_support_data);
+
+	const botData = botDataKeys.map((key) => ({ x: key, y: bot_data[key] }));
+	const platFormData = platformChatKeys.map((key) => ({ x: key, y: customer_support_data[key] }));
+
+	return [
+
+		{
+			id    : 'cogo_assist',
+	  color : 'hsla(253, 35%, 45%, 1)',
+	  data  : botData || [],
+
+		},
+		{
+			id    : 'cogo_assist',
+	  color : 'hsla(0, 0%, 88%, 1)',
+	  data  : platFormData || [],
+
+		},
+	];
+};
+
+export default chartData;

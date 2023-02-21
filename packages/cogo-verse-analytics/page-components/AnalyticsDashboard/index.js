@@ -19,13 +19,16 @@ function AnalyticsDashboard() {
 
 	const { list = {}, statsLoading = false } = useGetCogoverseDashboard({ country, date });
 	const { chatData = {}, chatLoading = false } = useGetCogoverseChatData({ country, date });
-	console.log('chatData', chatData);
+
+	const platFormChatData = chatData?.fullResponse?.data || {};
 
 	const statsData = list?.fullResponse?.data || {};
 
 	const props = {
 		statsData,
 		statsLoading,
+		platFormChatData,
+		chatLoading,
 		setCountry,
 		date,
 		setDate,
