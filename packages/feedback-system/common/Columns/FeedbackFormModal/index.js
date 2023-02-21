@@ -33,7 +33,7 @@ function FeedbackFormModal({
 		department, designation,
 	});
 
-	const { questions = [] } = formData || {};
+	const { form_questions = [], form_id = '' } = formData;
 
 	const [addFeedback, setAddFeedback] = useState(false);
 	const [newFeedbackId, setNewFeedbackId] = useState(feedbackId);
@@ -70,7 +70,7 @@ function FeedbackFormModal({
 				<Button
 					size="sm"
 					themeType="accent"
-					disabled={isEmpty(questions)}
+					disabled={isEmpty(form_questions)}
 					onClick={() => 	setAddFeedback(true)}
 				>
 					{isEmpty(newFeedbackId) ? (
@@ -108,6 +108,9 @@ function FeedbackFormModal({
 					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
 						<FeedBackForm
 							item={item}
+							questions={form_questions}
+							formId={form_id}
+							questionsLoading={questionsLoading}
 							userId={userId}
 							rating={rating}
 							comment={comment}

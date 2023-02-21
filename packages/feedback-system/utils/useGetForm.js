@@ -1,10 +1,10 @@
 import { useRequest } from '@cogoport/request';
 
 const useGetForm = ({ department, designation }) => {
-	const [{ data: formData = {}, loading }] = useRequest({
+	const [{ data: formData = {}, loading = false }] = useRequest({
 		url    : 'get-form',
 		method : 'get',
-		params : { department, designation },
+		params : { Department: department, Designation: designation },
 	}, { manual: false });
 
 	return { formData, loading };

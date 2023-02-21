@@ -1,53 +1,40 @@
-import { Button, Upload, Placeholder } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
-import { IcMArrowBack, IcMNotifications } from '@cogoport/icons-react';
+import { Input, Placeholder } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import EmptyState from '../../../common/EmptyState';
+import Filters from '../../../common/Filters';
 import UserTableData from '../../../common/userTableData';
-import useGetManagerFeedbackProgress from '../../../hooks/useGetManagerFeedbackProgress';
 import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 
-import getControls from './manager-controls';
-import ManagersListCard from './ManagersListCard';
 import styles from './styles.module.css';
-// import useUploadNormalCSV from './useUploadNormalCSV';
 
 function FeedbackManagement() {
 	const Router = useRouter();
 
+	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
+
 	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
 
-	const [showUserId, setShowUserId] = useState('');
+	const {
+		feedbackData = {}, loading = false, params,
+		setParams, setPage,
+	} = useListUserFeedbacks({ userId, searchValue: query });
 
-	// const { data = {}, loading = false, setParams } = useGetManagerFeedbackProgress();
-
-	const { feedbackData = {}, loading = false, setParams } = useListUserFeedbacks({ userId });
-
-	console.log('data', feedbackData);
-
-	const columnsToShow = ['name', 'cogo_id', 'role', 'manager', 'feedback', 'rating', 'month'];
+	const columnsToShow = ['name', 'cogo_id', 'designation', 'manager', 'score', 'month', 'user_details'];
 	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });
 
-	// const { fileValue, setFileValue, loading: uploadFileLoading = false } = useUploadNormalCSV();
-
-	const { list = [] } = feedbackData;
-
-	const formProps = useForm();
-
-	const {
-		control,
-		watch,
-	} = formProps;
-
-	const manager = watch('manager_id');
+	const { list = [], pagination_data = {} } = feedbackData;
+	const { total_count } = pagination_data;
 
 	useEffect(() => {
-		setParams((pv) => ({ ...pv, manager_id: manager || undefined }));
-	}, [manager]);
+		debounceQuery(searchValue);
+	}, [searchValue]);
 
 	const handleClick = () => {
 		Router.push('/feedback-system/hr-dashboard');
@@ -86,9 +73,18 @@ function FeedbackManagement() {
 						All Managers List
 					</p>
 				</div>
+			</div>
 
-				{/* <Upload value={fileValue} onChange={setFileValue} loading={uploadFileLoading} /> */}
-				<SelectController {...getControls()} control={control} formProps={formProps} />
+			<div className={styles.top_container}>
+				<div className={styles.filters}>
+
+					<div className={styles.department_select}>
+						<Filters setParams={setParams} params={params} />
+
+						<Input value={searchValue} onChange={setSearchValue} placeholder="Search User..." />
+					</div>
+				</div>
+
 			</div>
 
 			{loading && showLoading()}
@@ -97,22 +93,14 @@ function FeedbackManagement() {
 
 			{!loading && (
 				<div>
-					{/* {(list || []).map((item) => (
-						<ManagersListCard
-							key={item?.manager_id}
-							item={item}
-							showUserId={showUserId}
-							setShowUserId={setShowUserId}
-						/>
-					))} */}
 					<UserTableData
 						columns={tableColumns}
 						list={list}
 						loading={loading}
-						// page_limit={page_limit}
-						// total_count={total_count}
-						// pagination={params.page}
-						// setPagination={setPage}
+						page_limit={params.page_limit}
+						total_count={total_count}
+						pagination={params.page}
+						setPagination={setPage}
 					/>
 				</div>
 			)}

@@ -68,8 +68,10 @@
 
 
 .footer {
-    position: sticky;
+    position: absolute;
     bottom: 0px;
+    right: 0px;
+    width: 100%;
 
     display: flex;
     justify-content: flex-end;

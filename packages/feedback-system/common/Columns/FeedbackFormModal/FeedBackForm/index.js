@@ -16,6 +16,9 @@ import styles from './styles.module.css';
 
 function FeedBackForm({
 	showForm = 'false',
+	questions = [],
+	formId,
+	questionsLoading = false,
 	setShowForm = () => {},
 	rating,
 	comment,
@@ -28,6 +31,7 @@ function FeedBackForm({
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
 		rating,
 		comment,
+		formId,
 		userId,
 		newFeedbackId,
 		setNewFeedbackId,
@@ -74,7 +78,7 @@ function FeedBackForm({
 	});
 
 	const onChange = (e) => {
-		setComment(e.target.value);
+		setComment(e);
 	};
 
 	if (questionsLoading) {
@@ -93,12 +97,6 @@ function FeedBackForm({
 	// 	return <EmptyState />;
 	// }
 
-	const questions = [{ id: 1, question: 'where are you now? where are you now? where are you now? where are you now? where are you now? where are you now? where are you now?', remark: 'how are you?', weightage: 20 },
-		{ id: 2, question: 'where are you now?', remark: 'how are you?', weightage: 20 },
-		{ id: 3, question: 'where are you now?', remark: 'how are you?', weightage: 20 },
-		{ id: 4, question: 'where are you now?', remark: 'how are you?', weightage: 20 },
-		{ id: 5, question: 'where are you now?', remark: 'how are you?', weightage: 20 }];
-
 	return (
 		<div className={styles.form_container}>
 
@@ -115,7 +113,7 @@ function FeedBackForm({
 			</div>
 
 			{(questions || []).map((key) => {
-				const { id, question, remark } = key || {};
+				const { id, question, description = '' } = key || {};
 				return (
 					<div
 						className={styles.controls}
@@ -128,7 +126,7 @@ function FeedBackForm({
 									placement="top"
 									theme="light"
 									animation="shift-away"
-									content={<div>{remark}</div>}
+									content={<div>{description}</div>}
 								>
 									<IcMInfo
 										fill="#393f70"
@@ -153,7 +151,7 @@ function FeedBackForm({
 							<Textarea
 								value={rating[id]?.reason}
 								onChange={(val) => {
-									setRating({ ...rating, [id]: { ...(rating[id]), reason: val } });
+									setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
 								}}
 								placeholder="Convey the reason for feedback..."
 								style={{ height: '60px' }}

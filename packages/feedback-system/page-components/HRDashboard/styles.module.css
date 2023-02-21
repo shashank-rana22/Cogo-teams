@@ -75,27 +75,9 @@
 	}
 }
 
-.filter-control-label {
-	margin-top: 16px;
-	font-weight: 500;
-}
-
-.bussiness_module_filter_header {
-	margin-bottom: 8px;
-}
-
 .filters {
 	display: flex;
 	align-items: center;
-}
-
-.department_select {
-	display: flex;
-	justify-content: flex-start;
-
-	:global(.ui_select_display_container) {
-		width: 160px;
-	}
 }
 
 .top_most_container {

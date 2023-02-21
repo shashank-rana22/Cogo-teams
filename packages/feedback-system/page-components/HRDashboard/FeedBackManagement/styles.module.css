@@ -23,6 +23,27 @@
     }
 }
 
+.top_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 16px 0;
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+}
+
+.department_select {
+	display: flex;
+	justify-content: flex-start;
+
+	:global(.ui_select_display_container) {
+		width: 160px;
+	}
+}
+
 .heading {
     display: flex;
     justify-content: flex-start;

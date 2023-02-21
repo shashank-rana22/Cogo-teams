@@ -6,6 +6,7 @@ const useCreateUserFeedback = ({
 	rating,
 	comment,
 	userId,
+	formId,
 	newFeedbackId,
 	setNewFeedbackId = () => {},
 	setShowForm = () => {},
@@ -23,12 +24,20 @@ const useCreateUserFeedback = ({
 	}, { manual: true });
 
 	const onSubmitData = async () => {
+		const form_responses = [];
+		Object.keys(rating).forEach((id) => {
+			const { feedback, rating: question_rating = '' } = rating[id];
+
+			form_responses.push({ question_id: id, rating: question_rating, feedback });
+		});
+
 		try {
 			const response = await trigger({
-				params: {
-					...(isFeedbackIdEmpty ? { user_id: userId } : { id: newFeedbackId }),
-					performance_item : rating,
-					feedback         : comment,
+				data: {
+					user_id        : userId,
+					form_id        : formId,
+					form_responses,
+					final_feedback : comment,
 				},
 			});
 

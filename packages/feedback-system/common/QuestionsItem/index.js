@@ -92,51 +92,39 @@ function QuestionsItem({
 				<QuestionsBox question_detail={item} questionStatus={questionStatus} />
 			</div>
 
-			{questionStatus === 'add_weightage' ? (
-				<div className={styles.weightage}>
-					<p className={styles.label}>Weightage</p>
-					<Input
-						value={item.weightage}
-						onChange={(val) => setQuestionWeightage(val)}
-						type="number"
-						placeholder="Set Weightage.."
-					/>
-				</div>
-			) : (
-				<div className={styles.icon_container}>
-					<Button disabled themeType="tertiary" onClick={() => editItem(item)}>
-						<IcMEdit
-							width={20}
-							height={20}
-							fill="#393F70"
-							style={{
-								fontWeight : '100',
-								cursor     : 'pointer',
-								margin     : '0 16px',
-							}}
+			{questionStatus === 'add_weightage' && (
+				<>
+					<div className={styles.weightage}>
+						<p className={styles.label}>Weightage</p>
+						<Input
+							value={item.weightage}
+							onChange={(val) => setQuestionWeightage(val)}
+							type="number"
+							placeholder="Set Weightage.."
 						/>
+					</div>
+					<div className={styles.icon_container}>
 
-					</Button>
-
-					<Tooltip
-						theme="light"
-						placement="bottom-end"
-						animation="shift-away"
-						content="Deleting this, will delete the current question"
-					>
-						<Button disabled themeType="tertiary" onClick={() => deleteItem(item)}>
-							<IcMDelete
-								width={20}
-								height={20}
-								fill="#393F70"
-								style={{
-									fontWeight : '100',
-									cursor     : 'pointer',
-								}}
-							/>
-						</Button>
-					</Tooltip>
-				</div>
+						<Tooltip
+							theme="light"
+							placement="bottom-end"
+							animation="shift-away"
+							content="Deleting this, will delete the current question"
+						>
+							<Button disabled themeType="tertiary" onClick={() => deleteItem(item)}>
+								<IcMDelete
+									width={20}
+									height={20}
+									fill="#393F70"
+									style={{
+										fontWeight : '100',
+										cursor     : 'pointer',
+									}}
+								/>
+							</Button>
+						</Tooltip>
+					</div>
+				</>
 			)}
 
 		</div>
