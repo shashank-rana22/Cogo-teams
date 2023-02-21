@@ -1,6 +1,5 @@
 import { Toast, cl, Modal, Textarea, Button } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
-import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -9,12 +8,9 @@ import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
 
 import styles from './styles.module.css';
 
-function FeedbackModal() {
+function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 	const [selectPill, setSelectPill] = useState('');
 	const [inputValue, setInputValue] = useState('');
-	const dispatch = useDispatch();
-	const profileData = useSelector(({ profile }) => profile);
-	const showFeedbackModal = profileData?.voice_call?.showFeedbackModal || false;
 
 	const { communicationLogApi, loading } = useCreateCommunicationLog({
 		selectPill,
@@ -22,6 +18,7 @@ function FeedbackModal() {
 		setSelectPill,
 		inputValue,
 	});
+
 	const DEFAULT_PILLS_ITEMS = [
 		{
 			label : 'Introductory',
@@ -44,6 +41,7 @@ function FeedbackModal() {
 			value : 'other',
 		},
 	];
+
 	const handleSelect = (val) => {
 		setSelectPill((prev) => {
 			if (prev !== val) {
@@ -86,7 +84,8 @@ function FeedbackModal() {
 								return (
 									<div
 										role="presentation"
-										className={cl`${styles.pills} ${(selectPill === value) ? styles.active_pill : ''}`}
+										className={cl`${styles.pills} ${(selectPill === value)
+											? styles.active_pill : ''}`}
 										onClick={() => handleSelect(value)}
 									>
 										{(selectPill === value) && <IcMTick width={20} height={20} />}
@@ -106,7 +105,6 @@ function FeedbackModal() {
 							/>
 						</div>
 						<div className={styles.button_container}>
-							<Button size="md" themeType="tertiary">Cancel</Button>
 							<Button
 								size="md"
 								themeType="accent"
@@ -114,7 +112,6 @@ function FeedbackModal() {
 								onClick={handleSubmit}
 							>
 								Submit
-
 							</Button>
 						</div>
 					</div>
