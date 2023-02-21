@@ -32,6 +32,7 @@ function useOutgoingStatusCall({ callId }) {
 							endCall           : true,
 							inCall            : false,
 							showCallModal     : false,
+							minimizeModal     : false,
 							showFeedbackModal : false,
 							endTime           : new Date(),
 						},
