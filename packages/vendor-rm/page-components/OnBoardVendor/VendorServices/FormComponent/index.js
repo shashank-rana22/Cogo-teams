@@ -7,6 +7,10 @@ import { getElementController } from '../../../../utils/get-element-controller';
 import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
+const ButtonContainerStyle = {
+	margin: '40px 0px 40px 0px',
+};
+
 function FormComponent({
 	controls = [],
 	handleSubmit = () => {},
@@ -61,6 +65,7 @@ function FormComponent({
 				setActiveStepper={setActiveStepper}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
+				style={ButtonContainerStyle}
 			/>
 		</form>
 	);

@@ -56,15 +56,6 @@ const getControls = () => [
 			},
 		],
 	},
-	{
-		name        : 'additional_remark',
-		label       : '',
-		type        : 'text',
-		placeholder : 'Enter additional Remarks...',
-		span        : '100%',
-		style       : { width: '100%', height: '80px', marginTop: '16px' },
-	},
-
 ];
 
 export default getControls;

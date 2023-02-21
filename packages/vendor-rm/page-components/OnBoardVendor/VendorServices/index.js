@@ -32,6 +32,7 @@ function VendorServices({
 				activeStepper={activeStepper}
 				onBack={handleBackLink}
 			/>
+
 			<FormComponent
 				controls={controls}
 				handleSubmit={handleSubmit}

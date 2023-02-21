@@ -1,7 +1,6 @@
 import styles from './styles.module.css';
 
-function Header({
-}) {
+function Header() {
 	return (
 		<div className={styles.header}>
 			<div className={styles.title}>

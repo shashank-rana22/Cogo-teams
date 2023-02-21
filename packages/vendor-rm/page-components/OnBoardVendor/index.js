@@ -17,12 +17,12 @@ function OnBoardVendor() {
 
 	const { vendor_id } = query;
 
-	const [{ loading: vendorLoading = false }, trigger] = useRequest({
+	const [{ loading: getVendorLoading = false }, trigger] = useRequest({
 		url    : 'get_vendor',
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState('contact_details');
+	const [activeStepper, setActiveStepper] = useState('vendor_details');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
@@ -71,6 +71,7 @@ function OnBoardVendor() {
 			<div className={styles.form_container}>
 				<ActiveComponent
 					getVendor={getVendor}
+					getVendorLoading={getVendorLoading}
 					activeStepper={activeStepper}
 					setActiveStepper={setActiveStepper}
 					vendorInformation={vendorInformation}

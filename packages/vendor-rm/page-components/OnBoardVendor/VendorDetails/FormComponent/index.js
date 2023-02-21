@@ -3,10 +3,12 @@ import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayo
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 // import useOnBoardVendor from '../hooks/useOnBoardVendor';
 
+const ButtonContainerStyle = {
+	margin: '20px',
+};
+
 function FormComponent({
 	activeStepper = {},
-	// setActiveStepper = () => {},
-	// setVendorInformation = () => {},
 	fields = [],
 	control,
 	errors,
@@ -14,17 +16,6 @@ function FormComponent({
 	loading,
 	createVendor,
 }) {
-	// const {
-	// 	fields = [],
-	// 	control,
-	// 	errors,
-	// 	handleSubmit,
-	// 	loading,
-	// 	createVendor,
-	// } =	useOnBoardVendor({
-	// 	setActiveStepper,
-	// 	setVendorInformation,
-	// });
 	return (
 		<div>
 			<FormLayout
@@ -37,6 +28,7 @@ function FormComponent({
 				loading={loading}
 				handleSubmit={handleSubmit}
 				onSubmit={createVendor}
+				style={ButtonContainerStyle}
 			/>
 		</div>
 	);
