@@ -3,8 +3,6 @@ import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, addDays, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetForm from '../../../utils/useGetForm';
-
 import FeedBackForm from './FeedBackForm';
 import styles from './styles.module.css';
 
@@ -17,26 +15,17 @@ const getSaturday = (date) => {
 };
 
 function FeedbackFormModal({
+	action = '',
 	item = {},
 	getTeamFeedbackList = () => {},
 }) {
 	const {
 		user_id:userId = '',
-		performance_item: performanceItem = {}, feedback = '', form_id:feedbackId = '',
-		department, designation,
+		performance_item: performanceItem = {}, feedback = '',
+		feedback_data = {},
 	} = item;
 
-	const {
-		formData = {},
-		loading: questionsLoading = false,
-	} = useGetForm({
-		department, designation,
-	});
-
-	const { form_questions = [], form_id = '' } = formData;
-
 	const [addFeedback, setAddFeedback] = useState(false);
-	const [newFeedbackId, setNewFeedbackId] = useState(feedbackId);
 	const [rating, setRating] = useState({ ...performanceItem });
 	const [comment, setComment] = useState(feedback);
 
@@ -67,24 +56,35 @@ function FeedbackFormModal({
 	return (
 		<div className={styles.feedback_button}>
 			<div className={styles.add_button}>
-				<Button
-					size="sm"
-					themeType="accent"
-					disabled={isEmpty(form_questions)}
-					onClick={() => 	setAddFeedback(true)}
-				>
-					{isEmpty(newFeedbackId) ? (
-						<>
-							<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
-							ADD
-						</>
-					) : (
-						<>
-							<IcMEdit style={{ marginRight: '4px' }} width={14} height={14} />
-							EDIT
-						</>
-					)}
-				</Button>
+				{action === 'show' ? (
+					<Button
+						size="sm"
+						themeType="link"
+						onClick={() => 	setAddFeedback(true)}
+					>
+						View Details
+					</Button>
+				) : (
+					<Button
+						size="sm"
+						themeType="accent"
+						disabled={!isEmpty(feedback_data)}
+						onClick={() => 	setAddFeedback(true)}
+					>
+						{isEmpty(feedback_data) ? (
+							<>
+								<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
+								ADD
+							</>
+						) : (
+							<>
+								<IcMEdit style={{ marginRight: '4px' }} width={14} height={14} />
+								EDIT
+							</>
+						)}
+					</Button>
+				)}
+
 			</div>
 
 			{addFeedback && (
@@ -107,15 +107,11 @@ function FeedbackFormModal({
 
 					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
 						<FeedBackForm
+							action={action}
 							item={item}
-							questions={form_questions}
-							formId={form_id}
-							questionsLoading={questionsLoading}
 							userId={userId}
 							rating={rating}
 							comment={comment}
-							newFeedbackId={newFeedbackId}
-							setNewFeedbackId={setNewFeedbackId}
 							setComment={setComment}
 							showForm={addFeedback}
 							setShowForm={setAddFeedback}

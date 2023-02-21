@@ -14,4 +14,10 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 8px;
+
+	:global {
+		.ui_select_display_container {
+			width: 120px;
+		}
+	}
 }

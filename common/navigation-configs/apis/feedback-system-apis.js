@@ -74,6 +74,11 @@ const feedback_system = [
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
+	{
+		api          : 'get-month-stats',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
 	// {
 	// 	api          : 'get_feedback_performance_stats',
 	// 	access_type  : 'private',

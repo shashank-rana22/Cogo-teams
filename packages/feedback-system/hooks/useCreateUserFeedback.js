@@ -1,25 +1,18 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { useSelector } from '@cogoport/store';
 
 const useCreateUserFeedback = ({
 	rating,
 	comment,
 	userId,
 	formId,
-	newFeedbackId,
-	setNewFeedbackId = () => {},
 	setShowForm = () => {},
 }) => {
-	const isFeedbackIdEmpty = isEmpty(newFeedbackId);
-
-	const apiMaipping = {
-		true  : 'create-form-responses',
-		false : 'update-form-response',
-	};
+	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
-		url    : `/${apiMaipping[isFeedbackIdEmpty]}`,
+		url    : 'create-form-responses',
 		method : 'post',
 	}, { manual: true });
 
@@ -28,28 +21,25 @@ const useCreateUserFeedback = ({
 		Object.keys(rating).forEach((id) => {
 			const { feedback, rating: question_rating = '' } = rating[id];
 
-			form_responses.push({ question_id: id, rating: question_rating, feedback });
+			form_responses.push({ question_id: id, rating: Number(question_rating), feedback });
 		});
 
 		try {
-			const response = await trigger({
+			await trigger({
 				data: {
-					user_id        : userId,
-					form_id        : formId,
+					user_id           : userId,
+					form_id           : formId,
 					form_responses,
-					final_feedback : comment,
+					final_feedback    : comment,
+					performed_by_id   : manager_id,
+					performed_by_type : 'agent',
 				},
 			});
 
-			setNewFeedbackId(response?.data?.object_id || response?.data?.id);
 			setShowForm(false);
 
-			if (isFeedbackIdEmpty) {
-				Toast.success('Feedback Created Successfully');
-				return;
-			}
-
-			Toast.success('Feedback Updated Successfully');
+			Toast.success('Feedback Created Successfully');
+			return;
 		} catch (e) {
 			console.log(e.toString());
 		}

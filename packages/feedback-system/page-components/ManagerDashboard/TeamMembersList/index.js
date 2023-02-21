@@ -8,7 +8,6 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function TeamMembersList({
-	// columns,
 	list = [],
 	pagination,
 	page_limit,
@@ -16,8 +15,6 @@ function TeamMembersList({
 	total_count,
 	loading = false,
 }) {
-	const Router = useRouter();
-
 	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
@@ -34,41 +31,27 @@ function TeamMembersList({
 
 	const columnsMapping = [
 		{
-			key: 'feedbacks_given',
-			label: 'Feedbacks Given',
-			value: '36',
-			flex: 1.7,
+			key   : 'feedbacks_given',
+			label : 'Feedbacks Given',
+			flex  : 1.7,
 		},
 		{
-			key: 'below_avg_performance',
-			label: 'Below Average Performance',
-			value: '12',
-			flex: 2.2,
+			key   : 'below_avg_performance',
+			label : 'Below Average Performance',
+			flex  : 2.2,
 		},
 		{
-			key: 'avg_performance',
-			label: 'Average Performance',
-			value: '12',
-			flex: 2,
+			key   : 'avg_performance',
+			label : 'Average Performance',
+			flex  : 2,
 		},
 		{
-			key: 'above_avg_performance',
-			label: 'Above Average Performance',
-			value: '12',
-			flex: 2.2,
+			key   : 'above_avg_performance',
+			label : 'Above Average Performance',
+			flex  : 2.2,
 		},
 
 	];
-
-	// // router route for the manager feedback....
-	// const routeToManagerDetails = (id) => {
-	// 	if (id) {
-	// 		Router.push(
-	// 			'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
-	// 			`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
-	// 		);
-	// 	}
-	// };
 
 	const titleSection = (i) => (
 		<div className={styles.accordion_item_container}>
@@ -81,23 +64,16 @@ function TeamMembersList({
 
 			</div>
 			<div className={styles.column_map}>
-				{i.details.length > 0
-					? (columnsMapping.map((colDetails) => {
-						const { key, label, value, flex } = colDetails;
-						return (
-							<div key={key} style={{ flex }}>
-								{label ? <div className={styles.label}>{label}</div> : null}
+				{columnsMapping.map((colDetails) => {
+					const { key, label, flex } = colDetails;
+					return (
+						<div key={key} style={{ flex }}>
+							{label ? <div className={styles.label}>{label}</div> : null}
 
-								<div className={styles.value}>{value}</div>
-							</div>
-						);
-					}))
-
-					: (
-						<div className={styles.details_pending}>
-							<div className={styles.details_pending_text}>Pending</div>
+							<div className={styles.value}>{i[key]}</div>
 						</div>
-					)}
+					);
+				})}
 			</div>
 
 		</div>

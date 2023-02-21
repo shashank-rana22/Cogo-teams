@@ -1,92 +1,83 @@
-import { Table, Input, Button } from '@cogoport/components';
+import { Select, Table, Input } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { getByKey } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
+
+import useGetColumns from '../../../../common/Columns';
+import useListUserFeedbacks from '../../../../hooks/useListUserFeedbacks';
+import { deptControls as departmentControls } from '../../../../utils/departmentControls';
 
 import styles from './styles.module.css';
 
-const LIST_COLUMNS_MAPPING = {
-
-	user_name   : 'NAME',
-	employee_id : 'ID',
-	latest_kpi  : 'KPI',
-	details     : '',
+const DEPARTMENT_MAPPING = {
+	technology : 'tech_role',
+	finance    : 'finance_role',
+	business   : 'business_role',
 };
 
 function ListItem({ item }) {
-	const Router = useRouter();
+	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery;
 
-	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
-		Header   : <div key={key}>{value}</div>,
-		accessor : key,
-		id       : key,
-	}));
+	const columnsToShow = ['name', 'cogo_id', 'score', 'view_form'];
+	const memberColumns = useGetColumns({ columnsToShow });
 
-	const routeToUserDetails = (id) => {
-		if (id) {
-			Router.push(
-				'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
-				`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
-			);
-		}
+	const { month = '', year = '' } = item;
+
+	const { data: tableData = {}, loading = false, setParams, params } = useListUserFeedbacks({
+		month,
+		year,
+		searchValue: query,
+	});
+
+	const deptControls = departmentControls.find((control) => control.name === 'department');
+
+	const roleControls = params.filters?.department ? departmentControls.find((control) => control.name
+	=== DEPARTMENT_MAPPING[params.filters?.department]) : {};
+
+	const setFilter = (val, type) => {
+		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
 	};
 
-	const data = item.details.map((listItem) => {
-		const filteredData = {
-			user_name: (
-				<div>{getByKey(listItem, 'user_name', '___')}</div>
-			),
-			id: (
-				<div>{getByKey(listItem, 'employee_id', '___')}</div>
-			),
-			kpi: (
-				<div>{getByKey(listItem, 'latest_kpi', '___')}</div>
-			),
-			score: (
-				<div>{getByKey(listItem, 'score', '___')}</div>
-			),
-			details: (
-				<div
-					style={{ display: 'flex', justifyContent: 'flex-end' }}
-				>
-					<Button
-						themeType="link"
-						className={styles.details}
-						onClick={(e) => {
-							e.stopPropogation();
-							routeToUserDetails(listItem.id);
-						}}
-					>
-						View details
-
-					</Button>
-				</div>
-			),
-
-		};
-
-		const dataToPush = {};
-
-		Object.keys(LIST_COLUMNS_MAPPING).forEach((dataKey) => {
-			dataToPush[dataKey] = filteredData[dataKey] || listItem[dataKey] || '___';
-		});
-		return dataToPush;
-	});
+	useEffect(() => {
+		debounceQuery(searchValue);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchValue]);
 
 	return (
 		<div className={styles.overall_baselist}>
 			<section className={styles.inner_list}>
-				<Input size="sm" suffix={<IcMSearchlight />} placeholder="Search" className={styles.search} />
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => {}}
-				>
-					Download CSV
-				</Button>
+				<Select
+					size="sm"
+					value={params.filters?.department}
+					onChange={(val) => setFilter(val, 'department')}
+					options={deptControls.options}
+					placeholder="Department..."
+					style={{ marginRight: '8px' }}
+					isClearable={!params.filters?.designation}
+				/>
 
+				<Select
+					size="sm"
+					value={params.filters?.designation}
+					onChange={(val) => setFilter(val, 'designation')}
+					options={roleControls.options}
+					disabled={!params.filters?.department}
+					placeholder="Role..."
+					style={{ marginRight: '8px' }}
+					isClearable
+				/>
+
+				<Input
+					size="sm"
+					value={searchValue}
+					onChange={setSearchValue}
+					suffix={<IcMSearchlight />}
+					placeholder="Search"
+					className={styles.search}
+				/>
 			</section>
-			<Table data={data} columns={columns} />
+			<Table data={tableData} columns={memberColumns} loading={loading} />
 		</div>
 	);
 }

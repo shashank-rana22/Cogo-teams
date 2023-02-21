@@ -18,6 +18,7 @@ const useListForms = ({ formsParams = {} }) => {
 		if (!isEmpty(formsParams)) {
 			getFormList();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formsParams, pagination]);
 
 	return {
