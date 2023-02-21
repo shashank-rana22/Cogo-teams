@@ -137,6 +137,8 @@ function MapView({
 
 				</div>
 			</div>
+			{/* Circle Content ------------------------------------------------------- */}
+
 			<div className={styles.circle_content}>
 				<div className={styles.circle_frame}>
 					<div className={styles.globe_container}>

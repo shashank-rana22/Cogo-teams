@@ -1,3 +1,4 @@
+import { getAnalytics } from 'firebase/analytics';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import {
 	query,
@@ -11,9 +12,12 @@ import { firebaseConfig } from '../configurations/firebase-configs';
 
 function useGetUsersStats() {
 	const [userStats, setUserStats] = useState({ ai_chats: 0, kam_chats: 0 });
+	console.log('qwertyu', userStats);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
+	const analytics = getAnalytics(app);
+	console.log('analytics', analytics);
 
 	const getUserSats = async () => {
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
