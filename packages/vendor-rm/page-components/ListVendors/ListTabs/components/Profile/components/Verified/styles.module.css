@@ -1,0 +1,27 @@
+.main{
+border-radius: 8px;
+height: 90px;
+margin: 1rem 0 0 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 4px;
+}
+
+.icon{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.dis{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 29px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    text-align: center;
+}

@@ -1,8 +1,9 @@
 // import React from 'react';
-import EmptyPage from './EmptyPage';
+// import EmptyPage from './EmptyPage';
+import ListTabs from './ListTabs';
 
 function ListVendors() {
-	return <EmptyPage />;
+	return <ListTabs />;
 }
 
 export default ListVendors;
