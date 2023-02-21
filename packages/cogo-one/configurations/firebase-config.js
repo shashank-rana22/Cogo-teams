@@ -1,12 +1,11 @@
 export const firebaseConfig = {
-	apiKey            : 'AIzaSyAtpMPDzLTdMqTmqn1LR53btB6swuSxaeE',
-	authDomain        : 'cogo-bot-messages.firebaseapp.com',
-	databaseURL       : 'https://cogo-bot-messages-default-rtdb.firebaseio.com',
-	projectId         : 'cogo-bot-messages',
-	storageBucket     : 'cogo-bot-messages.appspot.com',
-	messagingSenderId : '654045685170',
-	appId             : '1:654045685170:web:dfb6cbf1fae8f1618970ab',
-	measurementId     : 'G-Y0CLFL5KDZ',
+	apiKey            : process.env.FIREBASE_API_KEY,
+	authDomain        : process.env.FIREBASE_AUTH_DOMAIN,
+	databaseURL       : process.env.FIREBASE_DATABASE_URL,
+	projectId         : process.env.FIREBASE_PROJECT_ID,
+	storageBucket     : process.env.FIREBASE_STORAGE_BUCKET,
+	messagingSenderId : process.env.FIREBASE_SENDER_ID,
+	appId             : process.env.FIREBASE_APP_ID,
 };
 
 const firestoreChatbotPath = '/customer_chat/platform_chat/rooms';
