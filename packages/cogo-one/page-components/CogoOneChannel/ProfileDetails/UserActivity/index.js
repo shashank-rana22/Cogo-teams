@@ -75,7 +75,11 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
 
 	function ShowData() {
-		return emptyCheck ? <EmptyState /> : (
+		return emptyCheck ? (
+			<div className={styles.empty}>
+				<EmptyState type="activities" />
+			</div>
+		) : (
 			<div
 				className={styles.list_container}
 			>

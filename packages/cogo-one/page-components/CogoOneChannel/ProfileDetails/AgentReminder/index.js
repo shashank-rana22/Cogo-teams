@@ -2,6 +2,7 @@ import { Toast, Button, Input, Datepicker, Textarea } from '@cogoport/components
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import useCreateCommunicationLog from '../../../../hooks/useCreateCommunication';
 import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicationLog';
 
@@ -46,20 +47,10 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 			description : '',
 		});
 		setDate('');
-		setTime({
-			start_time : '',
-			end_time   : '',
-		});
 	};
 
 	if (!organizationId) {
-		return (
-			<>
-				<div className={styles.title}>Set Reminder</div>
-				<div className={styles.empty_container}>No Data Found...</div>
-
-			</>
-		);
+		return <EmptyState type="reminder" />;
 	}
 
 	return (
