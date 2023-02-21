@@ -75,8 +75,8 @@ function IncidentController() {
 	const onChange = (view:string) => {
 		setActiveTab(view);
 		push(
-			'/business-finance/incident-controller/[activeTab]',
-			`/business-finance/incident-controller/${view}` as never as null,
+			'/business-finance/incident-management/[activeTab]',
+			`/business-finance/incident-management${view}` as never as null,
 		);
 	};
 

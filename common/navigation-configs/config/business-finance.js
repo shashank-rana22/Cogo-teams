@@ -5,7 +5,7 @@ const businessFinance = {
 	},
 
 	'/[partner_id]/business-finance/incident-management/[activeTab]': {
-		navigation: 'business_finance-incident_controller',
+		navigation: 'business_finance-incident_management',
 	},
 
 	'/[partner_id]/business-finance/reports': {
