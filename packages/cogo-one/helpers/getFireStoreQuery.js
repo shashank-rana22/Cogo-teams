@@ -5,7 +5,6 @@ import {
 } from 'firebase/firestore';
 
 function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isomniChannelAdmin = false }) {
-	console.log('appliedFilters:', appliedFilters);
 	let firestoreQuery;
 	let queryFilters = [];
 

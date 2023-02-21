@@ -17,13 +17,13 @@ function AdminLayout({
 
 	const {
 		user_data,
-		// voice_call,
+		voice_call,
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
 
 	const { user: { id: user_id = '' }, partner: { id: partner_id = '', partner_user_id = '' } } = user_data;
-	// const { inCall = false } = voice_call || {};
+	const { inCall = false } = voice_call || {};
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys });
@@ -61,6 +61,7 @@ function AdminLayout({
 					partner_user_id={partner_user_id}
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
+					inCall={inCall}
 				/>
 			) : null}
 			<VoiceCall />

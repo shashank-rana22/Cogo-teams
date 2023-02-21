@@ -1,5 +1,5 @@
 import { Modal } from '@cogoport/components';
-import { IcMProfile } from '@cogoport/icons-react';
+import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
@@ -9,6 +9,7 @@ import FeedbackModal from './FeedBackModal';
 import useHangUpCall from './hooks/useHangUpCall';
 import useOutgoingCall from './hooks/useOutgoingCall';
 import useOutgoingStatusCall from './hooks/useOutgoingStatusCall';
+// import MinimizeCallModal from './MinimizeModal';
 import styles from './styles.module.css';
 
 function VoiceCall() {
@@ -26,6 +27,7 @@ function VoiceCall() {
 		name,
 		mobile_number,
 		// mobile_country_code,
+		// minimizeModal = false
 	} = voiceCall || {};
 
 	const code = mobile_number?.slice(0, 3);
@@ -136,8 +138,28 @@ function VoiceCall() {
 	return (
 		<div className={styles.wrapper}>
 			{showCallModal && (
-				<Modal show={showCallModal} size="sm">
+				<Modal
+					show={showCallModal}
+					size="sm"
+				>
 					<Modal.Body>
+						<IcMMinus
+							width={10}
+							height={10}
+							cursor="pointer"
+							onClick={() => {
+								dispatch(
+									setProfileState({
+										...profileData,
+										voice_call: {
+											...profileData?.voice_call,
+											showCallModal : false,
+											minimizeModal : true,
+										},
+									}),
+								);
+							}}
+						/>
 						<div className={styles.content}>
 							<div className={styles.avatar}>
 								<IcMProfile width={40} height={40} />
@@ -168,7 +190,14 @@ function VoiceCall() {
 			{!isEmpty(orgId) && !isEmpty(userId) && (
 				<FeedbackModal />
 			)}
-
+			{/* {minimizeModal && (
+				<MinimizeCallModal
+					status={status}
+					callLoading={callLoading}
+					handleClick={handleEnd}
+					durationTime={durationTime}
+				/>
+			)} */}
 		</div>
 
 	);

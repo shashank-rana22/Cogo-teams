@@ -1,5 +1,4 @@
 import {
-	IcCCogoCoin,
 	IcADocumentTemplates,
 	IcACrossBorder,
 	IcALocation,
@@ -9,22 +8,25 @@ import {
 
 const ACTION_ICON_MAPPING = [
 	{
-		name  : 'shipment_tracking',
-		icon  : <IcALocation width={28} height={28} />,
-		title : 'Shipment Tracking',
-		href  : 'saas/tracking-job',
+		name        : 'shipment_tracking',
+		icon        : <IcALocation width={28} height={28} />,
+		title       : 'Shipment Tracking',
+		href        : 'saas/tracking-job',
+		redirecting : 'shipments',
 	},
 	{
 		name  : 'schedule_air_ocean',
 		icon  : <IcACrossBorder width={28} height={28} />,
 		title : 'Schedule Air/Ocean',
 		href  : 'saas/air-schedules',
+
 	},
 	{
 		name  : 'outstanding_invoices',
 		icon  : <IcADiscoverRates width={28} height={28} />,
 		title : 'Outstanding Invoices',
 		href  : 'outstanding',
+
 	},
 	{
 		name  : 'invoicing',
@@ -33,10 +35,11 @@ const ACTION_ICON_MAPPING = [
 		href  : 'invoice-approvals',
 	},
 	{
-		name  : 'quotation',
-		icon  : <IcADocumentTemplates width={28} height={28} />,
-		title : 'Quotation',
-		href  : 'quotation-approval',
+		name        : 'quotation',
+		icon        : <IcADocumentTemplates width={28} height={28} />,
+		title       : 'Quotation',
+		href        : 'quotation-approval',
+		redirecting : 'quotations',
 	},
 	{
 		name : 'cogopoints',
@@ -46,8 +49,9 @@ const ACTION_ICON_MAPPING = [
 			width="28px"
 			height="28px"
 		/>,
-		title : 'Cogopoints',
-		href  : 'marketing/cogo-points/cogopoint_creation',
+		title       : 'Cogopoints',
+		href        : 'marketing/cogo-points/cogopoint_creation',
+		redirecting : 'cogopoints',
 	},
 ];
 
