@@ -1,5 +1,4 @@
-import { Button, cl } from '@cogoport/components';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -7,7 +6,7 @@ import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../../common/UserAvatar';
 import hideDetails from '../../../../../utils/hideDetails';
 
-import { ShowContent, TagsPopOver } from './HeaderFuncs';
+import { ShowContent, TagsPopOver, Assignes } from './HeaderFuncs';
 import styles from './styles.module.css';
 
 function Header({
@@ -52,14 +51,7 @@ function Header({
 				</div>
 				<div className={cl`${styles.flex} ${!hasPermissionToEdit ? styles.disabled_button : ''}`}>
 					{!isEmpty(filteredSpectators)
-					&& (filteredSpectators || [])
-						.map(({ agent_name:prevAssignedName = '' }) => (
-							<AssigneeAvatar
-								name={prevAssignedName}
-								type="disabled"
-								key={prevAssignedName}
-							/>
-						))}
+					&& <Assignes filteredSpectators={filteredSpectators} />}
 					{activeAgentName
 					&& (
 						<div className={styles.active_agent}>
