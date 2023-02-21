@@ -31,7 +31,7 @@ function UserTableData({
 					<Pagination
 						type="table"
 						currentPage={pagination}
-						totalItems={1000}
+						totalItems={total_count}
 						pageSize={page_limit}
 						onPageChange={setPagination}
 					/>

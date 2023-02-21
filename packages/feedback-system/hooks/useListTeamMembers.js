@@ -1,30 +1,19 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const getFirstDay = () => {
-	const date = new Date();
-	const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-
-	return firstDay;
-};
-
-const useListUserFeedbacks = ({
+const useListTeamMembers = ({
 	userId = '',
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		filters: {
-			performed_by_id         : userId || undefined,
-			created_at_greater_than : userId ? getFirstDay().toLocaleDateString() : undefined,
-			// rating_exists           : true,
-		},
-
-		page: 1,
+		ManagerID  : userId || undefined,
+		page       : 1,
+		page_limit : 20,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list-user-feedbacks',
+		url    : 'list-team-members',
 	}, { manual: true });
 
 	const getUserFeedbackList = () => {
@@ -60,4 +49,4 @@ const useListUserFeedbacks = ({
 	};
 };
 
-export default useListUserFeedbacks;
+export default useListTeamMembers;

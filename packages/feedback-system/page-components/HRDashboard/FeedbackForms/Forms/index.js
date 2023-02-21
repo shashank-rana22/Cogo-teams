@@ -1,5 +1,5 @@
 import { Pagination, Pill, Button } from '@cogoport/components';
-import { format, isEmpty } from '@cogoport/utils';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 
 import useListForms from '../../../../utils/useListForms';
 
@@ -21,106 +21,15 @@ function Forms({
 
 	const { formsData = {}, loading = false, pagination, setPagination } = useListForms({ formsParams });
 
-	const { designation } = formsParams;
+	const { department = '', designation = '' } = formsParams;
 
-	// const {formList = []} = formsData;
+	const { list: formList = [], pagination_data: paginationData = {} } = formsData;
+
+	const { total_count = '' } = paginationData;
 
 	if (isEmpty(Object.values(formsParams).filter((i) => i))) {
 		return <div className={styles.no_role}>Please select designation to show forms...</div>;
 	}
-
-	const formList = [
-		{
-			id         : 1,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 2,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 3,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'inactive',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 4,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 5,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 4,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 5,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 4,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-		{
-			id         : 5,
-			month      : 'apr',
-			year       : '2022',
-			dept       : 'tech',
-			role       : 'role1',
-			status     : 'active',
-			created_at : new Date(),
-			last_used  : new Date(),
-		},
-	];
 
 	const showForm = () => {
 		setOpenCreateForm(true);
@@ -129,34 +38,21 @@ function Forms({
 
 	return (isEmpty(formList) ? <EmptyState setFormStage={setFormStage} setOpenCreateForm={setOpenCreateForm} /> : (
 		<div className={styles.container}>
-			{!openCreateForm && !!designation && (
-				<div className={styles.form_header}>
+			<div className={styles.form_header}>
+				<div className={styles.form_cat}>{`${startCase(department)}: ${startCase(designation)}`}</div>
+				{!openCreateForm && !!designation && (
 					<Button themeType="accent" onClick={() => showForm()}>Create New</Button>
-				</div>
-			)}
+				)}
+			</div>
 
 			<div className={styles.forms}>
 				{formList.map((form) => {
 					const {
-						id = '', month = '', year = '', dept = '', role = '', status = '', created_at = '',
-						last_used = '',
+						id = '', status = '', created_at = '', 'Questions Count': question_count = '',
 					} = form;
 
 					return (
 						<div className={styles.form} key={id}>
-							<div className={styles.form_name}>
-								<p className={styles.label}>Form Name</p>
-								<div className={styles.value}>
-									{dept}
-									_
-									{role}
-									_
-									{month}
-									_
-									{year}
-								</div>
-							</div>
-
 							<div className={styles.published}>
 								<p className={styles.label}>Published On</p>
 								<div className={styles.value}>
@@ -164,12 +60,17 @@ function Forms({
 								</div>
 							</div>
 
-							<div className={styles.last_used}>
+							<div className={styles.form_name}>
+								<p className={styles.label}>Questions</p>
+								<div className={styles.value}>{question_count || '---'}</div>
+							</div>
+
+							{/* <div className={styles.last_used}>
 								<p className={styles.label}>Last Used</p>
 								<div className={styles.value}>
 									{format(last_used, 'MMM yyyy')}
 								</div>
-							</div>
+							</div> */}
 
 							<div className={styles.status}>
 								<p className={styles.label}>Status</p>
@@ -195,7 +96,7 @@ function Forms({
 				<Pagination
 					type="number"
 					currentPage={pagination}
-					totalItems={30}
+					totalItems={total_count}
 					pageSize={10}
 					onPageChange={setPagination}
 				/>

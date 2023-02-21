@@ -30,27 +30,24 @@ request.interceptors.request.use((oldConfig) => {
 
 	const serviceName = microServices[apiPath];
 
-	if (serviceName) {
-		newConfig.url = `/${serviceName}/${apiPath}`;
+	newConfig.headers = {
+		authorizationscope : 'partner',
+		authorization      : `Bearer: ${token}`,
+		authorizationparameters,
+	};
+
+	if (serviceName === 'user_feedback') {
+		newConfig.baseURL = 'https://iris-matrix3.dev.cogoport.io';
+
+		newConfig.url = `/${apiPath}`;
+		newConfig.headers.authorizationscope = undefined;
+		newConfig.headers.authorization = undefined;
+		newConfig.headers.authorizationparameters = undefined;
 	}
 
-	// if (serviceName === 'user_feedback') {
-	// 	newConfig.baseURL = 'https://8f72-103-143-39-118.in.ngrok.io/';
-
-	// 	newConfig.url = `/${apiPath}`;
-	// 	// newConfig.headers['Access-Control-Request-Methods'] = "{'GET','OPTIONS'}";
-	// 	// newConfig.headers['Access-Control-Allow-Origin'] = '*';
-
-	// 	console.log('newConfig', newConfig);
-	// }
 	return {
 		...newConfig,
-		paramsSerializer : { serialize: customSerializer },
-		headers          : {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
-			authorizationparameters,
-		},
+		paramsSerializer: { serialize: customSerializer },
 	};
 });
 

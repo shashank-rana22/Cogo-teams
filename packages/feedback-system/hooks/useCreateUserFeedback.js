@@ -13,8 +13,8 @@ const useCreateUserFeedback = ({
 	const isFeedbackIdEmpty = isEmpty(newFeedbackId);
 
 	const apiMaipping = {
-		true  : 'create_user_feedback',
-		false : 'update_user_feedbacks',
+		true  : 'create-form-responses',
+		false : 'update-form-response',
 	};
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({

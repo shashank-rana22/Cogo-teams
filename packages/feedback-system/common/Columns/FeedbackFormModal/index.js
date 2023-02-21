@@ -3,6 +3,8 @@ import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, addDays, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useGetForm from '../../../utils/useGetForm';
+
 import FeedBackForm from './FeedBackForm';
 import styles from './styles.module.css';
 
@@ -21,7 +23,17 @@ function FeedbackFormModal({
 	const {
 		user_id:userId = '',
 		performance_item: performanceItem = {}, feedback = '', form_id:feedbackId = '',
+		department, designation,
 	} = item;
+
+	const {
+		formData = {},
+		loading: questionsLoading = false,
+	} = useGetForm({
+		department, designation,
+	});
+
+	const { questions = [] } = formData || {};
 
 	const [addFeedback, setAddFeedback] = useState(false);
 	const [newFeedbackId, setNewFeedbackId] = useState(feedbackId);
@@ -58,6 +70,7 @@ function FeedbackFormModal({
 				<Button
 					size="sm"
 					themeType="accent"
+					disabled={isEmpty(questions)}
 					onClick={() => 	setAddFeedback(true)}
 				>
 					{isEmpty(newFeedbackId) ? (
@@ -94,6 +107,7 @@ function FeedbackFormModal({
 
 					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
 						<FeedBackForm
+							item={item}
 							userId={userId}
 							rating={rating}
 							comment={comment}

@@ -65,7 +65,7 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		key : 'name',
 	},
 	{
-		Header   : <div className={styles.head}> ID</div>,
+		Header   : <div className={styles.head}>ID</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div>{startCase(item?.cogo_id) || '-'}</div>
@@ -79,7 +79,7 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		Header   : <div className={styles.head}>Role</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{startCase(item?.work_scope) || '-'}</div>
+				<div>{startCase(item?.designation) || '-'}</div>
 			</div>
 		),
 		id  : 'role',
@@ -122,10 +122,7 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<FeedbackFormModal
-					userId={item?.user_id}
-					performanceItem={item?.performance_item}
-					feedback={item?.feedback}
-					feedbackId={item?.id}
+					item={item}
 					getTeamFeedbackList={getTeamFeedbackList}
 				/>
 			</div>

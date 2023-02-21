@@ -7,11 +7,11 @@ function CreateQuestions({
 	setOpenNewQuestionModal = () => {}, setRefetchList = () => {},
 	addAnother = false, setAddAnother = () => {},
 }) {
-	const { formProps, onAddFeedbackQuestion, controls } = useAddFeedbackQuestion({ setAddAnother });
+	const { formProps, onAddFeedbackQuestion, controls } = useAddFeedbackQuestion({});
 	const { reset } = formProps;
 
 	const createNewQuestion = (values) => {
-		onAddFeedbackQuestion({ values, setRefetchList, reset });
+		onAddFeedbackQuestion({ values, setRefetchList, reset, setAddAnother });
 	};
 
 	return (

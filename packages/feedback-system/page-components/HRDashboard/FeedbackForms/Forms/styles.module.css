@@ -4,8 +4,15 @@
 }
 
 .form_header {
-    align-self: flex-end;
-    margin-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 16px;
+
+    .form_cat{
+        font-size: 18px;
+        font-weight: 600;
+    }
 }
 
 .no_role {
@@ -41,11 +48,11 @@
     box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 
     .form_name {
-        flex: 0.4;
+        flex: 0.25;
     }
 
     .published {
-        flex: 0.2;
+        flex: 0.25;
     }
 
     .last_used {
@@ -53,7 +60,7 @@
     }
 
     .status {
-        flex: 0.1;
+        flex: 0.25;
 
         :global(.ui_pill_container){
             margin: 0px;
@@ -61,7 +68,7 @@
     }
 
     .action {
-        flex: 0.1;
+        flex: 0.25;
         display: flex;
         justify-content: flex-end;
     }
@@ -72,9 +79,8 @@
 }
 
 .pagination_container {
-    position: sticky;
+    position: absolute;
     bottom: 0;
-    z-index: 1;
     width: 100%;
     display: flex;
     justify-content: center;

@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/userTableData';
-import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
+import useListTeamMembers from '../../../hooks/useListTeamMembers';
 import getFeedBackControls from '../../../utils/getFeedbackControls';
 
 import styles from './styles.module.css';
@@ -31,12 +31,21 @@ function FeedbackManagement() {
 		loading,
 		getUserFeedbackList = () => {},
 		setPage,
-	} = useListUserFeedbacks({
+	} = useListTeamMembers({
 		userId,
 		searchValue: query,
 	});
 
-	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month', 'manager'];
+	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
+
+	const { total_count = '' } = pagination_data;
+	const feedbackControls = getFeedBackControls([]);
+
+	const setFilter = (val, type) => {
+		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
+	};
+
+	const columnsToShow = ['name', 'cogo_id', 'role', 'month', 'add-kpi'];
 
 	const feedbackManagementColumns = useGetColumns({
 		getUserFeedbackList,
@@ -49,7 +58,7 @@ function FeedbackManagement() {
 	}, [searchValue]);
 
 	return (
-		<div className={`${styles.container} ${isEmpty([newTeamList]) ? styles.empty_container : ''}`}>
+		<div className={`${styles.container}`}>
 			<div className={styles.redirect_container}>
 				<div
 					className={styles.redirect_header}
@@ -74,11 +83,22 @@ function FeedbackManagement() {
 
 				<div className={styles.header_filters}>
 					<Select
+						value={params.filters?.department}
+						onChange={(val) => setFilter(val, 'department')}
+						placeholder={feedbackControls.department.placeholder}
+						style={{ marginRight: '8px' }}
+						options={feedbackControls.department.options}
+						isClearable={!params.filters?.designation}
+					/>
+
+					<Select
 						value={params.filters?.designation}
-						onChange={(val) => setFilter(val, 'created_at_year')}
+						onChange={(val) => setFilter(val, 'designation')}
+						disabled={!params.filters?.department}
 						placeholder={feedbackControls.designation.placeholder}
 						style={{ marginRight: '8px' }}
 						options={feedbackControls.designation.options}
+						isClearable
 					/>
 					<Select
 						value={params.filters?.created_at_year}

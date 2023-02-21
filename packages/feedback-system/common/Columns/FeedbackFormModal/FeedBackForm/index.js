@@ -10,7 +10,6 @@ import { IcCStar, IcMArrowDoubleDown, IcMArrowDown, IcMArrowUp, IcMInfo } from '
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
-import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';
 import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
@@ -26,17 +25,6 @@ function FeedBackForm({
 	setRating = () => {},
 	userId = '',
 }) {
-	const {
-		feedbackData = {},
-		loading: questionsLoading = false,
-	} = useListFeedbackQuestions({
-		userId,
-		status       : 'active',
-		showQuestion : showForm,
-	});
-
-	const { list: feedbackQuestionList = [] } = feedbackData || {};
-
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
 		rating,
 		comment,
@@ -154,8 +142,8 @@ function FeedBackForm({
 								<RadioGroup
 									options={options}
 									value={rating[id]?.rating}
-									onChange={(item) => {
-										setRating({ ...rating, [id]: { ...(rating[id]), rating: item } });
+									onChange={(val) => {
+										setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
 									}}
 								/>
 							</div>

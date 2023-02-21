@@ -28,47 +28,24 @@ function AddQuestions({
 		formId,
 	});
 	const {
-		allList: questions = [], checkList: checkedQuestions = [],
-		total_count = '',
+		list: questions = [], form_questions: checkedQuestions = [],
+		pagination_data = {},
 	} = data || {};
+
+	const { total_count = '' } = pagination_data;
 
 	const { name, rules, ...rest } = getTagControls();
 	const { control, watch } = useForm();
 
 	const tags = watch('tags');
 
-	const testCheckQuestions = [
-		{ id: 1, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 2, question: 'abc', tags: ['p'], weightage: 40 },
-		{ id: 3, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 4, question: 'abc', tags: ['p'], weightage: 20 },
-	];
-
-	const testWeighQuestions = [
-		{ id: 1, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 2, question: 'abc', tags: ['p'], weightage: 40 },
-		{ id: 3, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 4, question: 'abc', tags: ['p'], weightage: 20 },
-	];
-
-	const testAllQuestions = [
-		{ id: 1, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 2, question: 'abc', tags: ['p'], weightage: 40 },
-		{ id: 3, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 4, question: 'abc', tags: ['p'], weightage: 20 },
-		{ id: 5, question: 'abc', tags: ['m'] },
-		{ id: 6, question: 'abc', tags: ['m'] },
-		{ id: 7, question: 'abc', tags: ['m'] },
-		{ id: 8, question: 'abc', tags: ['m'] },
-	];
-
 	useEffect(() => {
 		if (!isEmpty(data)) {
 			setQuestionActionList({
 				...questionActionList,
-				weigh   : checkedQuestions || testWeighQuestions,
-				checked : checkedQuestions || testCheckQuestions,
-				allList : questions || testAllQuestions,
+				allList: questions,
+
+				checked: questionActionList.checked || checkedQuestions,
 			});
 		}
 	}, [data]);
@@ -86,7 +63,7 @@ function AddQuestions({
 
 	return (
 		<>
-			{isEmpty(testAllQuestions)
+			{isEmpty(questionActionList?.allList)
 				? <EmptyState setOpenNewQuestionModal={setOpenNewQuestionModal} /> : (
 					<div className={styles.add_question_container}>
 						<div className={styles.header}>
@@ -138,9 +115,9 @@ function AddQuestions({
 							</div>
 
 							<div className={styles.questions}>
-								{testAllQuestions.length > 0 && (
+								{questionActionList?.allList.length > 0 && (
 									<Questions
-										questions={testAllQuestions}
+										questions={questionActionList?.allList}
 										questionActionList={questionActionList}
 										setQuestionActionList={setQuestionActionList}
 									/>
@@ -190,6 +167,7 @@ function AddQuestions({
 								setOpenNewQuestionModal={setOpenNewQuestionModal}
 								addAnother={addAnother}
 								setAddAnother={setAddAnother}
+								setRefetchList={setRefetchList}
 							/>
 						</Modal.Body>
 					</div>

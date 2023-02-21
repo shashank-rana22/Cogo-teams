@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 const useUpdateFeedbackQuestions = () => {
 	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
-		url    : 'update_feedback_question',
+		url    : 'update-question',
 	}, { manual: true });
 
 	const onUpdateFeedback = async ({

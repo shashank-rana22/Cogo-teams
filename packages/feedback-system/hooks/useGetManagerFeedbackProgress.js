@@ -5,7 +5,7 @@ const useGetManagerFeedbackProgress = () => {
 	const [params, setParams] = useState({ filters: {}, page: 1, page_limit: 20 });
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
-		url    : 'get_manager_feedback_progress',
+		url    : 'list-managers',
 		method : 'get',
 	}, { manual: false });
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 const useListForms = ({ formsParams = {} }) => {
 	const [pagination, setPagination] = useState(1);
 
-	const [{ data, loading = false }, trigger] = useRequest({
+	const [{ data:formsData = {}, loading = false }, trigger] = useRequest({
 		url    : 'list-forms',
 		method : 'get',
 	}, { manual: true });
@@ -21,7 +21,7 @@ const useListForms = ({ formsParams = {} }) => {
 	}, [formsParams, pagination]);
 
 	return {
-		data,
+		formsData,
 		loading,
 		pagination,
 		setPagination,

@@ -106,6 +106,7 @@ function Questions({
 						isChecked={isChecked}
 						questionStatus={questionStatus}
 						totalCount={totalQuestions}
+						key={id}
 					/>
 				);
 			})}

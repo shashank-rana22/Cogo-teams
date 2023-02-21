@@ -6,6 +6,16 @@ const getFeedBackControls = (designations) => {
 	const designationOptions = getDesignations(designations);
 
 	const control = {
+		department: {
+			name           : 'department',
+			label          : 'Department',
+			type           : 'select',
+			defaultOptions : true,
+			isClearable    : true,
+			placeholder    : 'Department',
+			options        : designationOptions,
+			span           : 6,
+		},
 		designation: {
 			name           : 'designation',
 			label          : 'Designation',

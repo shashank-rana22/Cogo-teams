@@ -34,21 +34,18 @@ function TeamMembersList({
 
 	const columnsMapping = [
 		{
-			key   : 'team_size',
+			key   : 'count',
 			label : 'Team Size',
-			value : '20000',
 			flex  : 2.5,
 		},
 		{
-			key   : 'feedbacks_pending',
+			key   : 'pending',
 			label : 'Feedbacks Pending',
-			value : '1200',
 			flex  : 1.9,
 		},
 		{
 			key   : 'latest_kpi',
 			label : 'Latest KPI',
-			value : '200',
 			flex  : 1.7,
 		},
 
@@ -69,17 +66,17 @@ function TeamMembersList({
 				<h3 style={{ color: '#ED3726' }}>{i.user_name}</h3>
 
 				Employee Id: &nbsp;
-				<b>{i.employee_id}</b>
+				<b>{i.cogo_id}</b>
 
 			</div>
 			<div className={styles.column_map}>
 				{columnsMapping.map((colDetails) => {
-					const { key, label, value, flex } = colDetails;
+					const { key, label, flex } = colDetails;
 					return (
 						<div key={key} style={{ flex }}>
 							{label ? <div className={styles.label}>{label}</div> : null}
 
-							<div className={styles.value}>{value}</div>
+							<div className={styles.value}>{i[key]}</div>
 						</div>
 
 					);
@@ -89,7 +86,7 @@ function TeamMembersList({
 					className={styles.details}
 					onClick={(e) => {
 						e.stopPropagation();
-						routeToManagerDetails(i.id);
+						routeToManagerDetails(i.manager_id);
 					}}
 				>
 					View details

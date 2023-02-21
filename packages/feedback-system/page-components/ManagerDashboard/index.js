@@ -1,20 +1,16 @@
-import { Datepicker } from '@cogoport/components';
-import { DateRangepicker, Select, Button } from '@cogoport/components';
+import { Input, Select, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
 import TeamStats from '../../common/TeamStats';
-import UserTableData from '../../common/userTableData';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
-import getUserFilterControls from '../../utils/getUserFilterControls';
 import getMonthControls from '../../utils/monthControls';
 
-import NotifyModal from './NotifyModal';
 import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
-import UploadModalBody from './UploadModal';
 
 // const dummyListData = [];
 const dummyListData = [
@@ -134,23 +130,18 @@ const dummyListData = [
 ];
 
 function ManagerDashboard() {
-	const [selectedBucket, setSelectedBucket] = useState('');
+	// const [selectedBucket, setSelectedBucket] = useState('');
 
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
+	const { data, params, setParams, setPage } = useListUserFeedbacks({ searchValue: query });
+
 	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month'];
 	const feedbackColumns = useGetColumns({ source: 'manager_dashboard', columnsToShow });
+	const { list: newTeamList, page_limit, total_count } = data || {};
 
 	const monthControls = getMonthControls();
-	const filterControls = getUserFilterControls();
-
-	const { watch: watchDateFilter, control } = useForm();
-
-	const monthFilter = watchDateFilter('created_at_month');
-	const yearFilter = watchDateFilter('created_at_year');
-
-	const { list: newTeamList, page_limit, total_count } = data || {};
 
 	const Router = useRouter();
 
@@ -161,6 +152,8 @@ function ManagerDashboard() {
 	const handleClick = () => {
 		Router.push('/feedback-system/manager-dashboard/feedback-management');
 	};
+
+	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	return (
 		<div className={styles.container}>
@@ -186,6 +179,8 @@ function ManagerDashboard() {
 						style={{ marginRight: '8px' }}
 						options={monthControls.created_at_month.options}
 					/>
+
+					<Input value={searchValue} onChange={setSearchValue} placeholder="Search User.." />
 				</div>
 
 				<Button

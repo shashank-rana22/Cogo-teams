@@ -9,13 +9,7 @@ import fetchLocalCheckList from '../../../utils/fetchLocalCheckList';
 import CreateFeedbackForm from './CreateFeedbackForm';
 import Forms from './Forms';
 import styles from './styles.module.css';
-
-const departmentRoleMapping = {
-	technology : ['p', 'q', 'r'],
-	finance    : ['a', 'b', 'c'],
-	design     : ['x', 'y', 'z'],
-	marketing  : ['e', 'f', 'g'],
-};
+import useListDepartments from './useListDepartments';
 
 const getFormResubmission = (department = '', designation = '') => {
 	let lastFormStatus;
@@ -63,8 +57,13 @@ function FeedbackForms() {
 		Router.push('/feedback-system/hr-dashboard');
 	};
 
+	const { data = [], loading = false } = useListDepartments();
+
+	const { list: departments = [] } = data;
+
 	useEffect(() => {
 		const newDesignationFormStatus = getFormResubmission(department, designation);
+		setFormId('');
 
 		const {
 			stage: newFormStage = '', department: newFormDepartment = '',
@@ -108,7 +107,7 @@ function FeedbackForms() {
 
 			<div className={styles.form_container}>
 				<div className={styles.department_status} style={{ flex: '0.3' }}>
-					{Object.keys(departmentRoleMapping).map((dept) => (
+					{(departments || []).map((dept) => (
 						<Accordion
 							key={dept}
 							type="form"
@@ -117,9 +116,11 @@ function FeedbackForms() {
 									className={styles.department}
 									role="button"
 									tabIndex={0}
-									onClick={() => setOpenAccordion({ ...openAccordion, [dept]: !openAccordion[dept] })}
+									onClick={() => setOpenAccordion(
+										{ ...openAccordion, [dept?.department]: !openAccordion[dept?.department] },
+									)}
 								>
-									<p className={styles.label}>{startCase(dept)}</p>
+									<p className={styles.label}>{startCase(dept?.department)}</p>
 									<Pill color="red">Pending</Pill>
 								</div>
 							)}
@@ -127,21 +128,29 @@ function FeedbackForms() {
 								${styles.accordion} 
 								${openAccordion[dept] ? styles.open_accordion : ''}`}
 						>
-							{openAccordion[dept]
+							{openAccordion[dept?.department]
 						&& 							(
 							<div className={styles.roles}>
-								{departmentRoleMapping[dept].map((role) => (
+								{(dept?.designations || []).map((role) => (
 									<div
 										className={`${styles.role} 
-										${role === designation ? styles.selected_designation : ''}`}
+										${role?.designation === designation ? styles.selected_designation : ''}`}
 										role="button"
 										tabIndex={0}
-										onClick={() => setFormsParams({ department: dept, designation: role })}
+										onClick={() => setFormsParams({
+											department  : dept?.department,
+											designation : role?.designation,
+										})}
 									>
 										<p className={styles.label}>
-											{startCase(role)}
+											{startCase(role?.designation)}
 										</p>
-										<Pill color="red">Pending</Pill>
+										<Pill
+											color={role?.status === 'active' ? 'green' : 'red'}
+										>
+											{startCase(role?.status)}
+
+										</Pill>
 									</div>
 								))}
 							</div>

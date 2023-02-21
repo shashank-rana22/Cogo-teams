@@ -2,14 +2,14 @@ import { useGetAsyncOptions } from '@cogoport/forms';
 
 export const useGetCreateQuestionsControls = () => {
 	const tagOptions = useGetAsyncOptions({
-		endpoint    : 'list_question_tags',
+		endpoint    : 'list-tags',
 		initialCall : false,
 		params      : {
 			filters: {
 			},
 		},
-		valueKey : 'user_id',
-		labelKey : 'name',
+		valueKey : 'tag',
+		labelKey : 'tag',
 	});
 
 	return [

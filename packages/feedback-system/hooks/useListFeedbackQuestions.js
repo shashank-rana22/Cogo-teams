@@ -6,8 +6,9 @@ const useListFeedbackQuestions = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		filters: {
-			form_id: formId || undefined,
+
+		FormID  : formId || undefined,
+		filters : {
 		},
 		page       : 1,
 		page_limit : 20,
@@ -15,7 +16,7 @@ const useListFeedbackQuestions = ({
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_feedback_questions',
+		url    : 'list-questions',
 	}, { manual: true });
 
 	const getQuestionList = async () => {

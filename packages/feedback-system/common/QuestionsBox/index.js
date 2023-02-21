@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
-	const { question = '', tags = ['a', 'bcvc', 'csdee'], remark = '' } = question_detail || {};
+	const { question = '', tags = ['a', 'bcvc', 'csdee'], description = '' } = question_detail || {};
 
 	return (
 		<div className={styles.container}>
@@ -25,16 +25,16 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						theme="light"
 						placement="bottom-start"
 						animation="shift-away"
-						content={startCase(remark)}
+						content={startCase(description)}
 					>
-						<div className={styles.question}>{startCase(remark)}</div>
+						<div className={styles.question}>{startCase(description)}</div>
 					</Tooltip>
 				</div>
 			</div>
 
 			{questionStatus !== 'add_weightage' && (
 				<div className={styles.question_tags}>
-					{tags.map((tag) => <Pill color="#d9eafd">{tag}</Pill>)}
+					{(tags || []).map((tag) => <Pill color="#d9eafd">{tag}</Pill>)}
 				</div>
 			)}
 		</div>

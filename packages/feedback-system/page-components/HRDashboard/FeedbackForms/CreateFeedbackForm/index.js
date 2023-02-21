@@ -22,17 +22,17 @@ function CreateFeedbackForm({
 		storeQuestionData({
 			department,
 			designation,
-			checkList : newStage === 'cancel' ? [] : questionActionList.checked,
-			weighList : newStage === 'cancel' ? [] : questionActionList.weigh,
-			stage     : newStage === 'cancel' ? undefined : newStage,
+			checkList : ['cancel', 'publish'].includes(newStage) ? [] : questionActionList.checked,
+			stage     : ['cancel', 'publish'].includes(newStage) ? undefined : newStage,
 		});
 	};
+	console.log('questionActionList', questionActionList.checked);
 
 	useEffect(() => {
-		const { checkList = [], weighList = [], stage = '' } = fetchLocalCheckList(department, designation);
-		setQuestionActionList({ ...questionActionList, checked: checkList, weigh: weighList });
+		const { checkList = [], stage = '' } = fetchLocalCheckList(department, designation);
+		setQuestionActionList({ ...questionActionList, checked: checkList });
 		setFormStage(stage || 'add_questions');
-	}, []);
+	}, [designation]);
 
 	const renderFormStage = () => {
 		if (formStage === 'add_questions') {
@@ -64,21 +64,11 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
+					department={department}
+					designation={designation}
 				/>
 			);
 		}
-
-		if (formStage === 'cancel') {
-			setFormId('');
-			setOpenCreateForm(false);
-		}
-
-		if (formStage === 'publish') {
-			// onCreateFeedbackForm({ formQuestions: questionActionList.checked, department, work_scope });
-			setFormId('');
-			setOpenCreateForm(false);
-		}
-
 		setFormId('');
 		setOpenCreateForm(false);
 

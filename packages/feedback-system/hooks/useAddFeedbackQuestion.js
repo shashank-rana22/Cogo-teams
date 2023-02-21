@@ -4,12 +4,12 @@ import { useRequest } from '@cogoport/request';
 
 import { useGetCreateQuestionsControls } from '../utils/createQuestionControls';
 
-const useAddFeedbackQuestion = ({ setAddAnother = () => {} }) => {
+const useAddFeedbackQuestion = ({}) => {
 	const formProps = useForm();
 
 	const [{ loading: apiLoading = false }, trigger] = useRequest({
 		method : 'post',
-		url    : 'create_feedback_question',
+		url    : 'create-question',
 	}, { manual: true });
 
 	const controls = useGetCreateQuestionsControls();
@@ -18,15 +18,12 @@ const useAddFeedbackQuestion = ({ setAddAnother = () => {} }) => {
 		values = {},
 		setRefetchList = () => {},
 		reset = () => {},
+		setAddAnother = () => {},
 	}) => {
 		try {
 			await trigger({
-				params: {
+				data: {
 					...values,
-					department : 'hi',
-					work_scope : 'hi',
-					weight     : '5',
-					remark     : 'hii',
 				},
 			});
 

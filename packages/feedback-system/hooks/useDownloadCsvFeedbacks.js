@@ -6,7 +6,7 @@ const useDownloadCsvFeedbacks = ({ userId = '', key = '' }) => {
 
 	const [{ data = {} }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_user_feedbacks',
+		url    : 'list-user-feedbacks',
 	}, { manual: true });
 
 	const getUserListCsv = async () => {
