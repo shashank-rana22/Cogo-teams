@@ -8,7 +8,7 @@ import { TAGS_COLORS } from '../../../../../../constants';
 import styles from './styles.module.css';
 
 export function ShowContent({ list = [], showMorePlacement = 'right' }) {
-	const MAX_SHOW_LENGTH = 3;
+	const MAX_SHOW_LENGTH = 2;
 	const showMoreList = (list || []).length > MAX_SHOW_LENGTH;
 	const lessList = (list || []).slice(0, MAX_SHOW_LENGTH);
 	const moreList = (list || []).slice(MAX_SHOW_LENGTH);

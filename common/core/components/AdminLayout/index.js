@@ -24,6 +24,7 @@ function AdminLayout({
 
 	const { user: { id: user_id = '' }, partner: { id: partner_id = '', partner_user_id = '' } } = user_data;
 	const { inCall = false } = voice_call || {};
+	console.log('inCall:', inCall);
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys });
