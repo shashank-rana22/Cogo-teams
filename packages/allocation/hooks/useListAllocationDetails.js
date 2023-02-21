@@ -32,7 +32,6 @@ const useListAllocationDetails = () => {
 	}, { manual: false });
 
 	useEffect(() => {
-		if (searchQuery) {
 			setParams((prevParams) => ({
 				...prevParams,
 				filters: {
@@ -40,7 +39,6 @@ const useListAllocationDetails = () => {
 					q: searchQuery || undefined,
 				},
 			}));
-		}
 	}, [searchQuery]);
 
 	const getNextPage = (newPage) => {

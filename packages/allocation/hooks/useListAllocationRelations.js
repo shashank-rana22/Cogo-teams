@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 const useAllocationRelations = () => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
+	const [searchValue, setSearchValue] = useState();
 	const [confirmModalState, setConfirmModalState] = useState({
 		type                  : '',
 		relationData          : {},
@@ -27,8 +28,6 @@ const useAllocationRelations = () => {
 		},
 		data_required: true,
 	});
-
-	const [searchValue, setSearchValue] = useState(params.filters?.q);
 
 	const [{ loading, data: apiData }, refetch] = useAllocationRequest({
 		url     : '/relations',
