@@ -659,6 +659,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'delete_freight_trend_subscription',
+			access_type  : 'private',
+			service_name : 'freight_trend',
+		},
 	],
 	app_saas_cpq_products: [
 		{
