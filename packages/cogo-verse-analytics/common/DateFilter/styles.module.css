@@ -1,0 +1,180 @@
+
+.container{
+	.custom-select-input-select-value {
+		font-size: 12px;
+		color: #000000;
+	}
+
+	.custom-select-input-subcontainer {
+		height: 30px;
+		border: solid 1px #e0e0e0;
+		cursor: text;
+		box-shadow: none;
+		:focus {
+			border: 1px solid black;
+			box-shadow: none;
+		}
+		:focus-within {
+			border: 1px solid black;
+			box-shadow: none;
+		}
+		:hover {
+			border: 1px solid black;
+			box-shadow: none;
+		}
+
+		.size-md {
+			height: 26px !important;
+		}
+
+		.core-ui-input-root {
+			border: none;
+			padding: 0px;
+		}
+	}
+
+	.custom-select-input-chip {
+		padding: 0px 6px;
+	}
+	.custom-select-input-chip-button {
+		height: 20px;
+		width: 20px;
+	}
+	.custom-select-input-chip-icon {
+		height: 20px;
+		width: 20px;
+	}
+
+}
+
+
+.date_container{
+	.cogo-datepicker.pika-single {
+		flex-direction: column !important;
+		padding: 0px !important;
+	}
+
+	.cogo-datepicker .pika-lendar {
+		margin-right: 0px !important;
+	}
+
+	.cogo-datepicker .pika-title {
+		margin-bottom: 0px !important;
+	}
+
+	.core-ui-radio-label {
+		opacity: 1;
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	.core-ui-radio-root {
+		padding: 8px;
+		width: 100%;
+
+		&:hover {
+			background: #f9f9f9;
+		}
+	}
+}
+
+
+.filter_box{
+	.tippy-content {
+		background: #ffffff;
+		border: 1px solid #bdbdbd;
+		box-sizing: border-box;
+		border-radius: 10px;
+		/* width: ${({ width }) => width || '760px'}; */
+		height: fit-content;
+		padding: 0px;
+
+		@media (max-width: 760px) {
+			width: 100%;
+		}
+	}
+	.tippy-box {
+		border-radius: 10px;
+	}
+
+	&.scroll .tippy-content {
+		overflow-y: auto;
+	}
+
+	&.date .tippy-content {
+		/* width: ${({ width }) => width || '500px'}; */
+	}
+}
+
+
+.button{
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 18px;
+	border-top: 1px solid #e0e0e0;
+
+	#apply-button {
+		margin-left: 5px;
+	}
+	#cancel-button {
+		margin-right: 5px;
+	}
+}
+
+
+
+.heading{
+    margin: 0px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+	padding: 16px 0px 12px 24px;
+	border-bottom: 1px solid #e0e0e0;
+}
+	
+
+.label{
+	margin: 0px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 6px;
+	margin-top: 16px;
+}
+
+
+
+.item{
+    padding: 0px 4px;
+}
+	
+
+.controls{
+	display: flex;
+
+}
+
+
+.line{
+    border-bottom: 1px solid #e0e0e0;
+	margin-top: 12px;
+
+}
+
+
+.label_heading{
+	font-weight: 700;
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: -4px;
+}
+
+
+
+.pick_container{
+    display: block;
+	padding: 14px 22px 14px 18px;
+	border-left: 1px solid #e0e0e0;
+}
+	
+
