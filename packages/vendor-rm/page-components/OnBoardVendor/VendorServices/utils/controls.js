@@ -2,19 +2,20 @@ import categoryOptions from './category-options';
 
 const getControls = () => [
 	{
-		name          : 'office_details',
-		label         : 'Office Details',
-		type          : 'fieldArray',
-		buttonText    : 'Add',
-		// noDeleteButtonTill : 1,
-		showLabelOnce : true,
-		controls      : [
+		name               : 'office_details',
+		label              : 'Office Details',
+		type               : 'fieldArray',
+		buttonText         : 'Add',
+		noDeleteButtonTill : 1,
+		showLabelOnce      : true,
+		controls           : [
 			{
 				name        : 'category',
 				label       : 'Select Category',
 				type        : 'select',
 				placeholder : 'Select a Category',
 				options     : categoryOptions,
+				style       : { flexBasis: '30%' },
 				rules       : { required: 'Category is required' },
 			},
 			{
@@ -22,6 +23,7 @@ const getControls = () => [
 				label       : 'Select Sub-category',
 				type        : 'select',
 				placeholder : 'Select a sub-category',
+				style       : { flexBasis: '30%' },
 				rules       : { required: 'Sub-category is required' },
 			},
 			{
@@ -29,6 +31,7 @@ const getControls = () => [
 				label       : 'Select Cogoport Office',
 				type        : 'select',
 				placeholder : 'Select Location',
+				style       : { flexBasis: '30%' },
 				options     : [
 					{ label: 'Delhi', value: 'd1cd0599-7d89-4219-878e-dc0cbf579948' },
 					{ label: 'Coimbatore', value: '61fe95e4-b00a-48f2-b0c6-a58174b7f9dd' },

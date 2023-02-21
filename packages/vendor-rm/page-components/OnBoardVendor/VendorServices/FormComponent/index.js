@@ -25,7 +25,7 @@ function FormComponent({
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.main_body}>
 			{controls.map((controlItem) => {
-				const { span, name, label, ...rest } = controlItem;
+				const { span, name, label, noDeleteButtonTill, ...rest } = controlItem;
 
 				if (rest.type === 'fieldArray') {
 					return (
@@ -36,6 +36,7 @@ function FormComponent({
 							error={errors?.[controlItem.name]}
 							watch={watch}
 							setValue={setValue}
+							noDeleteButtonTill={noDeleteButtonTill}
 						/>
 					);
 				}

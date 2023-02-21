@@ -16,6 +16,7 @@ function FieldArray({
 	showButtons = true,
 	disabled = false,
 	showLabelOnce = false,
+	noDeleteButtonTill,
 	watch = () => {},
 	setValue = () => {},
 	...rest
@@ -50,6 +51,7 @@ function FieldArray({
 					showElements={showElements?.[index]}
 					disabled={disabled}
 					showLabelOnce={showLabelOnce}
+					noDeleteButtonTill={noDeleteButtonTill}
 					office_details={watch().office_details}
 					setValue={setValue}
 					watch={watch}

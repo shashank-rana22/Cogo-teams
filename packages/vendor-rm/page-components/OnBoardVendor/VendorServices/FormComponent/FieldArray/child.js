@@ -23,15 +23,20 @@ function Child({
 
 	return (
 		<div className={styles.content}>
+
 			{(newControls || []).map((controlItem) => {
 				const Element = getElementController(controlItem.type);
+
 				if (!Element) return null;
+
 				return (
 					<div className={styles.list}>
+
 						<div className={styles.form_label}>
 							<h4>{controlItem.label}</h4>
 						</div>
-						<div>
+
+						<div className={styles.form_element}>
 							<Element
 								{...controlItem}
 								width="100%"
@@ -40,9 +45,11 @@ function Child({
 								id={`create_form_${controlItem.name}_field`}
 							/>
 						</div>
+
 						<div className={styles.form_error_message}>
 							{error?.[controlItem.name]?.message}
 						</div>
+
 					</div>
 				);
 			})}
