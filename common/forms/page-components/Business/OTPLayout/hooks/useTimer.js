@@ -29,6 +29,7 @@ const useTimer = ({ durationInSeconds = 0 }) => {
 	const start = useCallback(() => {
 		setSeconds((previousState) => (previousState === 0 ? durationInSeconds : previousState));
 		setIsActive(true);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const pause = useCallback(() => {
@@ -38,11 +39,13 @@ const useTimer = ({ durationInSeconds = 0 }) => {
 	const restart = useCallback(() => {
 		setSeconds(durationInSeconds);
 		setIsActive(true);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const reset = useCallback(() => {
 		setSeconds(durationInSeconds);
 		setIsActive(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const getRemainingTime = (duration) => {

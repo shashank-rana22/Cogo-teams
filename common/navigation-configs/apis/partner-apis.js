@@ -9760,24 +9760,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
-
-	],
-	airline_booking_plugin: [
-		{
-			api          : 'list_air_india_awb_numbers',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'update_awb_plugin_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'create_awb_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
 		{
 			api          : 'create_air_india_awb_number',
 			access_type  : 'private',
