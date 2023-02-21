@@ -1,5 +1,5 @@
 import { cl, Input, Popover } from '@cogoport/components';
-import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -72,7 +72,7 @@ function MessageList({
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						<IcMDoubleFilter
+						<IcMFilter
 							onClick={() => setFilterVisible((prev) => !prev)}
 							className={styles.filter_icon}
 						/>
