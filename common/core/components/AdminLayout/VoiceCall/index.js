@@ -28,7 +28,6 @@ function VoiceCall() {
 		minimizeModal = false,
 		showFeedbackModal = false,
 	} = voiceCall || {};
-	console.log('showFeedbackModal:', showFeedbackModal);
 
 	// const minimizeModal = true;
 
