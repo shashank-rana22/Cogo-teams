@@ -23,7 +23,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
-	min-width: 500px;
+
+	/* min-width: 00px; */
 }
 
 .pills {

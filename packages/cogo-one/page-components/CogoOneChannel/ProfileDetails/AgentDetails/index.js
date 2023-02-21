@@ -16,7 +16,7 @@ function AgentDetails({
 	FormattedMessageData = {},
 	customerId = '',
 }) {
-	const { user_details = null } = activeMessageCard || {};
+	const { user_details = null, user_type } = activeMessageCard || {};
 	const {
 		user_id,
 		lead_user_id,
@@ -73,8 +73,8 @@ function AgentDetails({
 		},
 	];
 
-	return (!isEmpty(userId) && !isEmpty(leadUserId)) ? (
-		<EmptyState type="profile" />
+	return (isEmpty(userId) && isEmpty(leadUserId)) && isEmpty(mobile_no) ? (
+		<EmptyState type="profile" user_type={user_type} />
 	) : (
 		<>
 			<div className={styles.title}>Profile</div>
@@ -140,10 +140,15 @@ function AgentDetails({
 					userId={userId}
 					userName={name}
 					emptyState={emptyState}
+					activeTab={activeTab}
 				/>
 			)}
-			<div className={styles.conversation_title}>Other Channels</div>
-			<ConversationContainer userData={userData} userId={userId} />
+			{!isEmpty(mobile_no) && (
+				<>
+					<div className={styles.conversation_title}>Other Channels</div>
+					<ConversationContainer userData={userData} userId={userId} />
+				</>
+			)}
 		</>
 	);
 }
