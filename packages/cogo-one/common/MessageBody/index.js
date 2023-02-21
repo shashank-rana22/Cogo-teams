@@ -45,7 +45,6 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 	}
 	if (message_type === 'contacts') {
 		const { name:{ formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
-		console.log('message:', message?.phones);
 		return (
 			<div className={styles.contact_card}>
 				<div className={styles.name}>

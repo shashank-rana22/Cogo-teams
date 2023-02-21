@@ -14,9 +14,9 @@
 	justify-content: center;
 	width: 88%;
 	margin-top: 24px;
+	margin-top: 20px;
 	color: #828282;
 	text-align: center;
-	margin-top: 20px;
 }
 
 .button_div {
@@ -41,7 +41,7 @@
 	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
-	margin-left: 12px;
+	margin-left: 15px;
 }
 
 .name {
@@ -51,7 +51,22 @@
 }
 
 .type {
+	font-size: 14px;
 	text-transform: capitalize;
+}
+
+.avatar {
+	display: flex;
+
+	/* width: 10%; */
+	padding-top: 4px;
+
+	:global {
+		.ui_avatar_container {
+			width: 55px !important;
+			height: 55px !important;
+		}
+	}
 }
 
 .phone_number {
