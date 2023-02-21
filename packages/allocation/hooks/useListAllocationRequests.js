@@ -31,7 +31,7 @@ const useListAllocationRequests = () => {
 		filters       : {
 			status       : 'pending',
 			service_type : 'organization',
-			q: searchQuery || undefined,
+			q            : searchQuery || undefined,
 		},
 	});
 
@@ -52,14 +52,13 @@ const useListAllocationRequests = () => {
 	}, []);
 
 	useEffect(() => {
-			setParams((pv) => ({
-				...pv,
-				filters: {
-					...pv.filters,
-					q: searchQuery || undefined,
-				},
-			}));
-		
+		setParams((pv) => ({
+			...pv,
+			filters: {
+				...pv.filters,
+				q: searchQuery || undefined,
+			},
+		}));
 	}, [searchQuery]);
 
 	const applyBulkFilter = async () => {

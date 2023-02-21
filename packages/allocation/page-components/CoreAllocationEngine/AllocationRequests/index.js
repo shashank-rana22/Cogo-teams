@@ -1,6 +1,5 @@
 import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useListAllocationRequests from '../../../hooks/useListAllocationRequests';
 
