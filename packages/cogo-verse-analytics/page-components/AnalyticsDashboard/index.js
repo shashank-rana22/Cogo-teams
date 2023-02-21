@@ -2,6 +2,7 @@ import { dynamic } from '@cogoport/next';
 import { startOfMonth } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useGetCogoverseChatData from '../../hooks/useGetCogoverseChatData';
 import useGetCogoverseDashboard from '../../hooks/useGetCogoverseDashboard';
 
 import Stats from './Stats';
@@ -16,7 +17,10 @@ function AnalyticsDashboard() {
 		endDate   : new Date(),
 	});
 
-	const { list = {}, statsLoading = false } = useGetCogoverseDashboard({ country });
+	const { list = {}, statsLoading = false } = useGetCogoverseDashboard({ country, date });
+	const { chatData = {}, chatLoading = false } = useGetCogoverseChatData({ country, date });
+	console.log('chatData', chatData);
+
 	const statsData = list?.fullResponse?.data || {};
 
 	const props = {

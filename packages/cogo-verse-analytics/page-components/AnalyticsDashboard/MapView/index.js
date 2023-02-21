@@ -156,6 +156,7 @@ function MapView({ props = {} }) {
 						}
 
 					</div>
+
 					{
 					circleStats.map(
 						(stat) => {
@@ -198,23 +199,27 @@ function MapView({ props = {} }) {
 					</div>
 					<div className={styles.response_time}>
 						<div className={styles.time}>
-							<Placeholder className={styles.placeholder_element} height="40px" width="75px" />
-							{/* <span>
-								{avgResponseTimeValue < 60
-									? avgResponseTimeValue
-									// ? <Placeholder height="20px" width="30px" />
-									// :
-									:	(Number(avgResponseTimeValue) / 60).toFixed(1)
-									// <Placeholder height="20px" width="30px" />
-								}
-							</span>
-							{' '}
-							{avgResponseTimeValue < 60
-								? 'min'
-							// ? <Placeholder className={styles.placeholder_element} height="20px" width="30px" />
-								:	'hrs'
-									// : <Placeholder className={styles.placeholder_element} height="20px" width="30px" />
-								} */}
+							{
+								statsLoading
+									? <Placeholder className={styles.placeholder_element} height="40px" width="75px" />
+									: (
+										<>
+											<span>
+												{avgResponseTimeValue < 60
+													? avgResponseTimeValue
+
+													:	(Number(avgResponseTimeValue) / 60).toFixed(1)}
+											</span>
+											{' '}
+											{avgResponseTimeValue < 60
+												? 'min'
+
+												:	'hrs'}
+
+										</>
+									)
+							}
+
 						</div>
 
 						<div className={styles.arrow_img}>
@@ -232,9 +237,11 @@ function MapView({ props = {} }) {
 								return (
 									<div className={styles.the_stat}>
 										<div className={styles.stat_circle} style={{ background: icon_bg }} />
-										<div className={styles.com_stat_value}>{strToKMBT(conversation_data[valueKey] || '0')}</div>
-
-										<Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+										<div className={styles.com_stat_value}>
+											{!statsLoading
+												? strToKMBT(conversation_data[valueKey] || '0')
+												: <Placeholder className={styles.placeholder_element} height="20px" width="30px" />}
+										</div>
 
 										<div className={styles.stat_description}>{title}</div>
 									</div>

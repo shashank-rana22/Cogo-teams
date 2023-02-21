@@ -5,7 +5,8 @@ import { getFormattedPrice } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
+import { PRIMARY_STATS, USER_STATUS, INTENT_LEADERBOARD } from '../../../configurations/primary-stats';
+import { imgURL } from '../../../constants/image-urls';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 import { strToKMBT } from '../../../utils/strToKMBT';
 
@@ -19,7 +20,6 @@ function Stats({ props = {} }) {
 	const { statsData = {}, statsLoading = false } = props || {};
 
 	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
-	const leaderboardKeys = Object.keys(intentLeaderboardStats);
 
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
@@ -56,9 +56,12 @@ function Stats({ props = {} }) {
 								<div className={styles.primary_left_stat}>
 
 									<div className={styles.primary_stat_title}>
-										<div className={styles.primary_stat_value}>{strToKMBT(statValue[valueKey] || '0')}</div>
+										<div className={styles.primary_stat_value}>
 
-										<Placeholder className={styles.placeholder_element} height="20px" width="25px" />
+											{!statsLoading
+												? strToKMBT(statValue[valueKey] || '0')
+												: <Placeholder className={styles.placeholder_element} height="20px" width="25px" />}
+										</div>
 
 										{' '}
 										{title}
@@ -66,9 +69,12 @@ function Stats({ props = {} }) {
 									<div className={styles.primary_stat_description}>
 										From
 										{' '}
-										<span>{statValue[descKey] || '0'}</span>
+										<span>
+											{ !statsLoading
+												? statValue[descKey] || '0'
+												: <Placeholder className={styles.placeholder_element} height="15px" width="20px" />}
 
-										<Placeholder className={styles.placeholder_element} height="15px" width="20px" />
+										</span>
 
 										{' '}
 										{description}
@@ -90,8 +96,8 @@ function Stats({ props = {} }) {
 								CogoVerse AI
 							</div>
 							<div className={styles.right_stat_value}>
-								{/* {strToKMBT(cogoverse_ai)} */}
-								<Placeholder className={styles.placeholder_element} height="15px" width="30px" />
+								{strToKMBT(cogoverse_ai)}
+								{/* <Placeholder className={styles.placeholder_element} height="15px" width="30px" /> */}
 							</div>
 						</div>
 						<div className={styles.right_stat_content}>
@@ -99,8 +105,8 @@ function Stats({ props = {} }) {
 								Customer Support
 							</div>
 							<div className={styles.right_stat_value}>
-								{/* {strToKMBT(customer_support)} */}
-								<Placeholder className={styles.placeholder_element} height="15px" width="30px" />
+								{strToKMBT(customer_support)}
+								{/* <Placeholder className={styles.placeholder_element} height="15px" width="30px" /> */}
 							</div>
 						</div>
 					</div>
@@ -108,8 +114,11 @@ function Stats({ props = {} }) {
 						<div className={styles.ticket_details}>
 
 							<div className={styles.ticket_value}>
-								{/* 20 */}
-								<Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+								{!statsLoading
+
+									? 20
+									: <Placeholder className={styles.placeholder_element} height="20px" width="30px" />}
+
 							</div>
 							<div className={styles.ticket_label}>
 								Tickets
@@ -122,8 +131,12 @@ function Stats({ props = {} }) {
 						<div className={styles.ticket_details}>
 
 							<div className={styles.ticket_value}>
-								{/* 15 */}
-								<Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+								{
+								!statsLoading
+									? 15
+									: <Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+							}
+
 							</div>
 							<div className={styles.ticket_label}>
 								Tickets
@@ -164,24 +177,42 @@ function Stats({ props = {} }) {
 			<div className={styles.user_leaderboard}>
 
 				{/* INTENT LEADERBOARD */}
-				<div className={styles.leaderboard_stats}>
-					<div className={styles.leaderboard_header}>Intent Leaderboard</div>
 
-					<div className={leaderboardKeys.length > 3 ? cl`${styles.leaderboard_content} ${styles.inner_shadow}` : styles.leaderboard_content}>
-						{leaderboardKeys.map((key) => (
-							<div className={styles.leaderboard_values}>
-								<div className={styles.leaderboard_title}>
-									{startCase(key)}
+				<div className={styles.leaderboard_stats}>
+					{' '}
+					<div className={styles.leaderboard_header}>Intent Leaderboard</div>
+					{' '}
+					<div className={INTENT_LEADERBOARD.length > 3 ? cl`${styles.leaderboard_content} ${styles.inner_shadow}` : styles.leaderboard_content}>
+						{' '}
+						{INTENT_LEADERBOARD.map((stat) => {
+							const { valueKey, title, description } = stat;
+							return (
+								<div className={styles.leaderboard_values}>
+
+									<div className={styles.leaderboard_title}>
+
+										{title}
+									</div>
+
+									<div className={styles.leaderboard_numbers}>
+
+										<span className={styles.leaderboard_description_number}>
+
+											{!statsLoading
+												? getAmount(intentLeaderboardStats[valueKey])
+												: <Placeholder className={styles.placeholder_element} height="20px" width="30px" />}
+
+										</span>
+
+										{description}
+									</div>
+
 								</div>
-								<div>
-									<span className={styles.leaderboard_description_number}>{getAmount(intentLeaderboardStats[key])}</span>
-									{' '}
-									users
-									<Placeholder className={styles.placeholder_element} height="20px" width="30px" />
-								</div>
-							</div>
-						))}
+							);
+						})}
 					</div>
+					{' '}
+
 				</div>
 
 				{/* USER STATUS */}
@@ -194,8 +225,12 @@ function Stats({ props = {} }) {
 								<div className={styles.user_status_icon}><img src={src} alt={title} /></div>
 								<div className={styles.user_status_right}>
 									<div className={styles.user_status_num}>
-										{/* {strToKMBT(value)} */}
-										<Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+										{
+										!statsLoading
+											? strToKMBT(value)
+											: <Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+									}
+
 									</div>
 									<div className={styles.user_status_text}>{title}</div>
 								</div>

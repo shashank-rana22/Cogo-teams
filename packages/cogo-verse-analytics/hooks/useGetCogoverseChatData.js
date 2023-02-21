@@ -1,13 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
-	const [list, setList] = useState({
+const useGetCogoverseChatData = ({ country = {}, date = {} }) => {
+	const [chatData, setChatData] = useState({
 		fullResponse: {},
 	});
 
 	const [{ error, loading }, trigger, refetch] = useRequest({
-		url    : '/get_cogoverse_dashboard',
+		url    : '/get_cogoverse_platform_chat_data',
 		method : 'GET',
 		params : {
 			mobile_country_code : country?.mobile_country_code || undefined,
@@ -20,12 +20,12 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 	useEffect(() => {
 		trigger()
 			.then((res) => {
-				setList(() => ({
+				setChatData(() => ({
 					fullResponse: res.data,
 				}));
 			})
 			.catch(() => {
-				setList(() => ({
+				setChatData(() => ({
 
 					fullResponse : {},
 					reverted     : 0,
@@ -35,11 +35,11 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 	}, [date]);
 
 	return {
-		statsLoading: loading,
-		list,
+		chatLoading: loading,
+		chatData,
 		error,
 		refetch,
 	};
 };
 
-export default useGetCogoverseDashboard;
+export default useGetCogoverseChatData;
