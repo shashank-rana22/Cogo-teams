@@ -9,14 +9,10 @@ const getFirstDay = () => {
 };
 
 const useListUserFeedbacks = ({
-	userId = '',
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
 		filters: {
-			performed_by_id         : userId || undefined,
-			created_at_greater_than : userId ? getFirstDay().toLocaleDateString() : undefined,
-			// rating_exists           : true,
 		},
 
 		page: 1,

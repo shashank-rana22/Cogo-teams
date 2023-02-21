@@ -1,4 +1,5 @@
 import { Table, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../EmptyState';
 
@@ -13,7 +14,7 @@ function UserTableData({
 	total_count,
 	loading = false,
 }) {
-	if (list?.length === 0 && !loading) {
+	if (isEmpty(list) && !loading) {
 		return <EmptyState width="40%" height="50%" emptyText="No feedbacks found. Kindly check the filters." />;
 	}
 

@@ -3,7 +3,6 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
@@ -45,7 +44,7 @@ function FeedbackManagement() {
 		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
 	};
 
-	const columnsToShow = ['name', 'cogo_id', 'role', 'month', 'add-kpi'];
+	const columnsToShow = ['name', 'cogo_id', 'designation', 'month', 'add-kpi'];
 
 	const feedbackManagementColumns = useGetColumns({
 		getUserFeedbackList,

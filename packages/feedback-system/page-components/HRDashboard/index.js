@@ -1,27 +1,16 @@
-import { Modal, Select, Button } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
+import { Modal, Button } from '@cogoport/components';
 import { IcMNotifications, IcMUpload } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
+import Filters from '../../common/Filters';
 import PerformanceChart from '../../common/PerformanceChart';
-import TeamStats from '../../common/TeamStats';
 import useListManagers from '../../hooks/useListManagers';
-import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
-import { deptControls as departmentControls } from '../../utils/departmentControls';
-import { getControls } from '../../utils/filterControls';
-import getMonthControls from '../../utils/monthControls';
 
 import NotifyModal from './NotifyModal';
 import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
 import UploadModalBody from './UploadModal';
-
-const DEPARTMENT_MAPPING = {
-	technology : 'tech_role',
-	finance    : 'finance_role',
-	business   : 'business_role',
-};
 
 function HRDashboard() {
 	const Router = useRouter();
@@ -35,40 +24,13 @@ function HRDashboard() {
 
 	const { params, setParams, feedbackData, loading, setPage } = useListManagers({});
 
-	const monthControls = getMonthControls(params.filters.created_at_year);
-
-	const { watch, control: managerControl = {} } = useForm();
-	const manager = watch('manager_id');
-
 	const { list = [], pagination_data = {} } = feedbackData || {};
 
 	const { total_count = '' } = pagination_data;
 
-	const deptControls = departmentControls.find((control) => control.name === 'department');
-
-	const roleControls = params.filters?.department ? departmentControls.find((control) => control.name
-	=== DEPARTMENT_MAPPING[params.filters?.department]) : {};
-
-	const setFilter = (val, type) => {
-		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
-	};
-
-	const managerControls = getControls().find((control) => control.name === 'manager_id');
-
 	const redirectToFeedbackManagement = () => {
 		Router.push('/feedback-system/hr-dashboard/feedback-management');
 	};
-
-	useEffect(() => {
-		setParams({
-			...params,
-			filters: {
-				...(params.filters || {}),
-				manager_id: manager || undefined,
-			},
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [manager]);
 
 	return (
 		<div className={styles.container}>
@@ -105,51 +67,7 @@ function HRDashboard() {
 
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
-
-					<div className={styles.department_select}>
-						<Select
-							value={params.filters?.department}
-							onChange={(val) => setFilter(val, 'department')}
-							options={deptControls.options}
-							placeholder="Department..."
-							style={{ marginRight: '8px' }}
-							isClearable={!params.filters?.designation}
-						/>
-						<Select
-							value={params.filters?.designation}
-							onChange={(val) => setFilter(val, 'designation')}
-							options={roleControls.options}
-							disabled={!params.filters?.department}
-							placeholder="Role..."
-							style={{ marginRight: '8px' }}
-							isClearable
-						/>
-
-						<SelectController
-							{...managerControls}
-							control={managerControl}
-							style={{ marginRight: '8px' }}
-						/>
-
-						<Select
-							value={params.filters?.created_at_year}
-							onChange={(val) => setFilter(val, 'created_at_year')}
-							placeholder="Select Year"
-							style={{ marginRight: '8px' }}
-							options={monthControls.created_at_year.options}
-							isClearable={!params.filters?.created_at_month}
-						/>
-
-						<Select
-							value={params.filters?.created_at_month}
-							onChange={(val) => setFilter(val, 'created_at_month')}
-							disabled={!params.filters?.created_at_year}
-							placeholder="Select Month"
-							style={{ marginRight: '8px' }}
-							options={monthControls.created_at_month.options}
-							isClearable
-						/>
-					</div>
+					<Filters setParams={setParams} params={params} />
 				</div>
 
 			</div>

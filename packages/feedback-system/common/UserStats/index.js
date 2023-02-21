@@ -40,11 +40,11 @@ function UserStats() {
 
 			<div className={styles.stats_container}>
 				<div className={styles.header}>
-					<div className={styles.performance_chart}>
-						<PerformanceChart userId={userId} />
-					</div>
-
 					<div className={styles.user_profile}><UserProfile userId={userId} /></div>
+				</div>
+
+				<div className={styles.performance_chart}>
+					<PerformanceChart userId={userId} />
 				</div>
 
 				<UserFeedbackData userId={userId} />
