@@ -1413,7 +1413,7 @@ const saas = {
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
-			api          : 'list_organization_address',
+			api          : 'list_organization_addresses',
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
