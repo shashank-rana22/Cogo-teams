@@ -134,12 +134,12 @@ function PerformanceChart({ user_id = '' }) {
 					Performance Chart
 				</p>
 
-				<Select
+				{/* <Select
 					placeholder={placeholder}
 					options={options}
 					value={performanceFilter}
 					onChange={setPerformanceFilter}
-				/>
+				/> */}
 			</div>
 			{loading && showLoading()}
 
