@@ -11,17 +11,8 @@ function Header({
 	onClickCreateQuota,
 	debounceQuery,
 	searchValue,
-	setSearchValue = () => {},}) {
-	// const {
-	// 	disabled,
-	// 	setParams,
-	// 	toggleRoleType,
-	// 	onClickCreateQuota,
-	// 	debounceQuery,
-	// 	searchValue,
-	// 	setSearchValue,
-	// } = props;
-
+	setSearchValue = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			<Toggle

@@ -18,8 +18,6 @@ const usePublishConfiguration = ({
 
 	const formProps = useForm({
 		defaultValues: {
-			// start_date : null,
-			// end_date   : null,
 			active_date_range: null,
 		},
 	});

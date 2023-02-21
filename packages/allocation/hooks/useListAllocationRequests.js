@@ -31,7 +31,7 @@ const useListAllocationRequests = () => {
 		filters       : {
 			status       : 'pending',
 			service_type : 'organization',
-			q: searchQuery || undefined,
+			q            : searchQuery || undefined,
 		},
 	});
 
@@ -52,15 +52,29 @@ const useListAllocationRequests = () => {
 	}, []);
 
 	useEffect(() => {
-			setParams((pv) => ({
-				...pv,
-				filters: {
-					...pv.filters,
-					q: searchQuery || undefined,
-				},
-			}));
-		
+		setParams((pv) => ({
+			...pv,
+			filters: {
+				...pv.filters,
+				q: searchQuery || undefined,
+			},
+		}));
 	}, [searchQuery]);
+
+	useEffect(() => {
+		onChangeParams({ page: 1 });
+		setSelectAll(false);
+		setCheckedRowsId([]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params?.filters?.service_type]);
+
+	useEffect(() => {
+		if (selectAll) {
+			setSelectAll(false);
+			setCheckedRowsId([]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.page]);
 
 	const applyBulkFilter = async () => {
 		setParams({
