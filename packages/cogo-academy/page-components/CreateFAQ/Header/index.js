@@ -19,9 +19,11 @@ function Header() {
 				<Button themeType="secondary" onClick={onClickConfiguration}>
 					Configuration
 				</Button>
+
 				<Button style={{ marginLeft: 8 }}>
 					Upload in Bulk
 				</Button>
+
 				<Button style={{ marginLeft: 8 }}>
 					Add Another Question
 				</Button>

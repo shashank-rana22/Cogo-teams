@@ -1,10 +1,13 @@
 import Header from './Header';
 import TagsTable from './TagsTable';
 
-function TagComponent() {
+function TagComponent({ configurationPage, setConfigurationPage }) {
 	return (
 		<div>
-			<Header />
+			<Header
+				configurationPage={configurationPage}
+				setConfigurationPage={setConfigurationPage}
+			/>
 			<TagsTable />
 
 		</div>

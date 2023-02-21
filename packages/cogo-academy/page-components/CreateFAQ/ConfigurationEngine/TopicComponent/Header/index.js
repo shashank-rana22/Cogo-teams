@@ -6,22 +6,22 @@ import styles from './styles.module.css';
 function Header({ setConfigurationPage = () => {} }) {
 	const router = useRouter();
 
-	const onClickAddTag = () => {
+	const onClickAddTopic = () => {
 		router.push(
-			'/learning/faq/create/configuration?create=tag',
-			'/learning/faq/create/configuration?create=tag',
+			'/learning/faq/create/configuration?create=topic',
+			'/learning/faq/create/configuration?create=topic',
 		);
-		setConfigurationPage('tag');
+		setConfigurationPage('topic');
 	};
 
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.buttonContainer}>
-				<div className={styles.tag}>Tag</div>
+				<div className={styles.topic}>Topic</div>
 
 				<div>
-					<Button onClick={onClickAddTag}>Add Tag</Button>
+					<Button onClick={onClickAddTopic}>Add Topic</Button>
 				</div>
 			</div>
 
