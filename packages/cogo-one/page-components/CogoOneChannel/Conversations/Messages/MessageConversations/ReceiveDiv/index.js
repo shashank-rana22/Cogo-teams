@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { cl } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import MessageBody from '../../../../../../common/MessageBody';
@@ -30,7 +31,7 @@ function ReceiveDiv({
 					</span>
 				</div>
 
-				<div className={styles.receive_message_container}>
+				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>
 					<MessageBody
 						response={response}
 						message_type={message_type}

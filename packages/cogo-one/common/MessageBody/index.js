@@ -1,3 +1,5 @@
+import { IcMUserAllocations } from '@cogoport/icons-react';
+
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 
 import CustomFileDiv from './CustomFileDiv';
@@ -47,10 +49,13 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		const { name:{ formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
 		return (
 			<div className={styles.contact_card}>
-				<div className={styles.name}>
-					{formatted_name}
+				<IcMUserAllocations height="30px" width="30px" fill="#7278AD" style={{ marginRight: '10px' }} />
+				<div>
+					<div className={styles.contact_name}>
+						{formatted_name}
+					</div>
+					{(phones || []).map(({ phone = '' }) => <div className={styles.mobile_no}>{phone}</div>)}
 				</div>
-				{(phones || []).map(({ phone = '' }) => <div className={styles.mob_no}>{phone}</div>)}
 			</div>
 		);
 	}
