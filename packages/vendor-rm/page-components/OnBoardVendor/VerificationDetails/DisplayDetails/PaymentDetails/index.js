@@ -1,5 +1,8 @@
+import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import getShortFileName from '../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
@@ -10,13 +13,40 @@ const filedsToShow = {
 	ifsc_code           : 'IFSC Code',
 	bank_name           : 'Bank Name',
 	branch_name         : 'Branch Name',
-	bank_document_id    : 'Cancelled Cheque/Passbook',
+	bank_document_url   : 'Cancelled Cheque/Passbook',
 	address             : 'Billing Address',
 };
+
+const DO_NOT_STARTCASE = ['bank_document_url', 'address'];
 
 function PaymentDetails({
 	detail,
 }) {
+	const getDisplayValue = ({ fieldName }) => {
+		const val = detail?.[0]?.[fieldName];
+
+		if (fieldName === 'bank_document_url') {
+			const shortName = getShortFileName({ url: val });
+			return (
+				<a
+					className={styles.icon_container}
+					href={val}
+					target="_blank"
+					rel="noreferrer"
+				>
+					{shortName}
+					<IcMDownload className={styles.icon} />
+				</a>
+			);
+		}
+
+		if (DO_NOT_STARTCASE.includes(fieldName)) {
+			return val;
+		}
+
+		return startCase(val);
+	};
+
 	return (
 		<div
 			className={styles.container}
@@ -25,28 +55,25 @@ function PaymentDetails({
 				Payment Details
 			</div>
 			<div className={styles.body}>
-				{
-					// (detail || []).map((item) => (
-					<div className={styles.single_record}>
-						{
-								Object.keys(filedsToShow).map((wantedField) => {
-									const val = detail?.[0]?.[wantedField];
-									return (
-										// eslint-disable-next-line max-len
-										<div style={{ display: 'flex', flexDirection: 'column', flexBasis: `${wantedField === 'address' ? '75%' : '25%'}` }}>
-											<div className={styles.label}>
-												{filedsToShow[wantedField]}
-											</div>
-											<div className={styles.value}>
-												{startCase(val)}
-											</div>
-										</div>
-									);
-								})
-							}
-					</div>
-					// ))
-				}
+				<div className={styles.single_record}>
+					{
+						Object.keys(filedsToShow).map((fieldName) => (
+							<div style={{
+								display       : 'flex',
+								flexDirection : 'column',
+								flexBasis     : `${fieldName === 'address' ? '75%' : '25%'}`,
+							}}
+							>
+								<div className={styles.label}>
+									{filedsToShow[fieldName]}
+								</div>
+								<div className={styles.value}>
+									{getDisplayValue({ fieldName })}
+								</div>
+							</div>
+						))
+					}
+				</div>
 			</div>
 		</div>
 	);
