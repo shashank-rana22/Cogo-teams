@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
-import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
+import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -135,7 +135,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 							onClickOutside={() => setFilterVisible(false)}
 						>
 
-							<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+							<IcMFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
 						</Popover>
 						{!isEmpty(filters) && <div className={styles.filters_applied} />}
 					</div>

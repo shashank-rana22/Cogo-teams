@@ -12,7 +12,7 @@ const useGetUser = ({ leadUserId, userId, customerId }) => {
 	const fetchUser = async () => {
 		await trigger({
 			params: {
-				id: userId || leadUserId,
+				id: leadUserId || userId,
 			},
 		});
 	};
