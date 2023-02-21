@@ -14,7 +14,7 @@ import { IcMArrowRotateDown, IcMHourglass } from '@cogoport/icons-react';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge, startCase, format } from '@cogoport/utils';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import DateFilter from '../../../common/DateFilter';
 import { circleStats } from '../../../configurations/circle-stats';
@@ -76,6 +76,14 @@ function MapView({
 	const startDate = format(date?.startDate, 'dd MMM yyyy');
 	const endDate = format(date?.endDate, 'dd MMM yyyy');
 	const avgResponseTimeValue = 70;
+
+	// const [showComponent, setShowComponent] = useState(false);
+	// useEffect(() => {
+	// 	const timer = setTimeout(() => {
+	// 		setShowComponent(true);
+	// 	}, 5000);
+	// 	return () => clearTimeout(timer);
+	// }, []);
 
 	return (
 		<div className={styles.main_container}>
@@ -155,7 +163,9 @@ function MapView({
 										globeLoading={globeLoading}
 									/>
 
-								) : (
+								)
+								// showComponent &&
+								: (
 									<div className={styles.loading_state_container}>
 										<img
 											src={imgURL.globe_loading_state}
@@ -213,9 +223,23 @@ function MapView({
 					</div>
 					<div className={styles.response_time}>
 						<div className={styles.time}>
-							<span>{avgResponseTimeValue < 60 ? avgResponseTimeValue : (Number(avgResponseTimeValue) / 60).toFixed(1)}</span>
+							<Placeholder className={styles.placeholder_element} height="40px" width="75px" />
+							{/* <span>
+								{avgResponseTimeValue < 60
+									? avgResponseTimeValue
+									// ? <Placeholder height="20px" width="30px" />
+									// :
+									:	(Number(avgResponseTimeValue) / 60).toFixed(1)
+									// <Placeholder height="20px" width="30px" />
+								}
+							</span>
 							{' '}
-							{avgResponseTimeValue < 60 ? 'min' : 'hrs'}
+							{avgResponseTimeValue < 60
+								? 'min'
+							// ? <Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+								:	'hrs'
+									// : <Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+								} */}
 						</div>
 
 						<div className={styles.arrow_img}>
@@ -233,7 +257,10 @@ function MapView({
 								return (
 									<div className={styles.the_stat}>
 										<div className={styles.stat_circle} style={{ background: icon_bg }} />
-										<div className={styles.com_stat_value}>{strToKMBT(value)}</div>
+										<div className={styles.com_stat_value}>
+											{/* {strToKMBT(value)} */}
+											<Placeholder className={styles.placeholder_element} height="20px" width="30px" />
+										</div>
 										<div className={styles.stat_description}>{title}</div>
 									</div>
 								);
