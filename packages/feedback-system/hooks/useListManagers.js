@@ -11,23 +11,15 @@ const useListManagers = ({
 		page_limit : 20,
 	});
 
-	const [{ data: feedbackData = {}, loading = false }, trigger] = useRequest({
+	const [{ data: feedbackData = {}, loading = false }] = useRequest({
 		method : 'get',
 		url    : 'list-managers',
-	}, { manual: true });
-
-	const getUserFeedbackList = () => {
-		try {
-			trigger({ params });
-		} catch (e) {
-			console.log(e.toString());
-		}
-	};
+		params,
+	}, { manual: false });
 
 	const setPage = (p) => { setParams({ ...params, page: p }); };
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { getUserFeedbackList(); }, [params]);
 
 	useEffect(() => {
 		setParams({
@@ -44,7 +36,6 @@ const useListManagers = ({
 		setParams,
 		feedbackData,
 		loading,
-		getUserFeedbackList,
 		setPage,
 	};
 };

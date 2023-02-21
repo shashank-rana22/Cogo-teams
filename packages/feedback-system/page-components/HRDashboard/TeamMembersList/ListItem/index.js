@@ -1,9 +1,12 @@
 import { Table, Input, Button } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { getByKey } from '@cogoport/utils';
+import { getByKey, isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
+import useManagerListItem from './useManagerListItem';
 
 const LIST_COLUMNS_MAPPING = {
 
@@ -16,6 +19,8 @@ const LIST_COLUMNS_MAPPING = {
 
 function ListItem({ item }) {
 	const Router = useRouter();
+
+	const { data: { list = [] } = {}, loading } = useManagerListItem({ item });
 
 	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
 		Header   : <div key={key}>{value}</div>,
@@ -32,7 +37,7 @@ function ListItem({ item }) {
 		}
 	};
 
-	const data = item.details.map((listItem) => {
+	const data = (list || []).map((listItem) => {
 		const filteredData = {
 			user_name: (
 				<div>{getByKey(listItem, 'user_name', '___')}</div>
@@ -78,12 +83,21 @@ function ListItem({ item }) {
 					size="md"
 					themeType="secondary"
 					onClick={() => {}}
+					disabled={isEmpty(list)}
 				>
 					Download CSV
 				</Button>
 
 			</section>
-			<Table data={data} columns={columns} />
+			{(isEmpty(list) && !loading) ? (
+				<EmptyState
+					height={100}
+					width={140}
+					emptyText="No team members found"
+					textSize="18px"
+				/>
+			) : <Table data={data} columns={columns} loading={loading} /> }
+
 		</div>
 	);
 }

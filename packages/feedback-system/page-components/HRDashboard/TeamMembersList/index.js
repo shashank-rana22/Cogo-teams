@@ -39,7 +39,7 @@ function TeamMembersList({
 			flex  : 2.5,
 		},
 		{
-			key   : 'pending',
+			key   : 'pending_count',
 			label : 'Feedbacks Pending',
 			flex  : 1.9,
 		},
@@ -63,7 +63,7 @@ function TeamMembersList({
 	const titleSection = (i) =>	(
 		<div className={styles.accordion_item_container}>
 			<div className={styles.user_info}>
-				<h3 style={{ color: '#ED3726' }}>{i.user_name}</h3>
+				<h3 style={{ color: '#ED3726' }}>{i.name}</h3>
 
 				Employee Id: &nbsp;
 				<b>{i.cogo_id}</b>
@@ -101,8 +101,8 @@ function TeamMembersList({
 		<div className={styles.table_container}>
 
 			{list.map((item) => (
-				<Accordion id={item.user_name} title={titleSection(item)}>
-					<ListItem item={item} />
+				<Accordion id={item.cogo_id} title={titleSection(item)}>
+					<ListItem item={item} id={item.cogo_id} />
 				</Accordion>
 			))}
 
