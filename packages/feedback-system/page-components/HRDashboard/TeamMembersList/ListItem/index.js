@@ -1,7 +1,8 @@
-import { Table, Input, Button } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Table, Input, Button, Modal } from '@cogoport/components';
+import { IcMSearchlight, IcMInformation } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getByKey, isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
@@ -18,6 +19,12 @@ const LIST_COLUMNS_MAPPING = {
 };
 
 function ListItem({ item }) {
+	const [openDetails, setopenDetails] = useState(false);
+
+	const toggleModal = () => {
+		setopenDetails(!openDetails);
+	};
+
 	const Router = useRouter();
 
 	const { data: { list = [] } = {}, loading } = useManagerListItem({ item });
@@ -28,36 +35,26 @@ function ListItem({ item }) {
 		id       : key,
 	}));
 
-	const routeToUserDetails = (id) => {
-		if (id) {
-			Router.push(
-				'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
-				`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
-			);
-		}
-	};
-
 	const data = (list || []).map((listItem) => {
 		const filteredData = {
 			user_name: (
-				<div>{getByKey(listItem, 'name', '___')}</div>
+				<div>{getByKey(listItem, 'user_name', '---')}</div>
 			),
 			employee_id: (
-				<div>{getByKey(listItem, 'cogo_id', '___')}</div>
+				<div>{getByKey(listItem, 'employee_id', '---')}</div>
 			),
-			rating: (
-				<div>{getByKey(listItem, 'rating', '___')}</div>
+			latest_kpi: (
+				<div>{getByKey(listItem, 'latest_kpi', '---')}</div>
 			),
 			score: (
-				<div>{getByKey(listItem, 'score', '___')}</div>
+				<div>{getByKey(listItem, 'score', '---')}</div>
 			),
 			details: (
 				<Button
 					themeType="link"
 					className={styles.details}
 					onClick={(e) => {
-						e.stopPropogation();
-						routeToUserDetails(listItem.id);
+						toggleModal();
 					}}
 				>
 					View details
@@ -98,6 +95,29 @@ function ListItem({ item }) {
 				/>
 			) : <Table data={data} columns={columns} loading={loading} /> }
 
+			<div className={styles.details_modal}>
+				<Modal size="md" show={openDetails} onClose={toggleModal}>
+					<Modal.Header title="View Feedback" />
+					<Modal.Body>
+						<div className={styles.modal_sub_header}>
+							Product Knowledge
+							<IcMInformation />
+						</div>
+						<div style={{ paddingBottom: '14px', color: '#4F4F4F' }}>Feedback</div>
+						<div style={{ paddingBottom: '10px' }}>
+							et consectetur adipisicing elit. Quis, assumenda.
+							Hic ipsam doloremque assumenda et soluta expedita
+							consequuntur, voluptates tenetur rem obcaecati
+							sapiente aliquam animi voluptas. Pariatur eaque aut sunt?
+							Lorem ipsum, dolor sit amet consectetur
+							adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda
+							et soluta expedita consequuntur,
+							voluptates tenetur rem obcaecati sapiente aliquam animi voluptas.
+							Pariatur eaque aut sunt?
+						</div>
+					</Modal.Body>
+				</Modal>
+			</div>
 		</div>
 	);
 }

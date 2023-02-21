@@ -29,7 +29,7 @@ function ManagerDashboard() {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<p className={styles.header_text}>
 				Manager Dashboard
 			</p>
