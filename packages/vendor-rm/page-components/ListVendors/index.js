@@ -12,7 +12,6 @@ function ListVendors() {
 	const {
 		loading,
 		data = {},
-		// GetVendorList = () => {},
 		params = {},
 		setParams = () => {},
 		columns,
