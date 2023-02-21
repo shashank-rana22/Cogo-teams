@@ -3,6 +3,10 @@ import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayo
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../hooks/useVendorBankDetail';
 
+const ButtonContainerStyle = {
+	margin: '20px 60px 20px 20px',
+};
+
 function FormComponent({
 	activeStepper = {},
 	setActiveStepper = () => {},
@@ -36,6 +40,7 @@ function FormComponent({
 				loading={loading}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
+				style={ButtonContainerStyle}
 			/>
 		</div>
 	);

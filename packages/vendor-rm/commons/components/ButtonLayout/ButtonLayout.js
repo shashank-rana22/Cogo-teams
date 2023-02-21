@@ -5,27 +5,30 @@ import COMPONENT_MAPPING from '../../../utils/component-mapping';
 
 import styles from './styles.module.css';
 
-function ButtonLayout(
-	{
-		activeStepper = {},
-		setActiveStepper = () => {},
-		loading = false,
-		handleSubmit = () => {},
-		onSubmit = () => {},
-	},
-) {
+function ButtonLayout({
+	activeStepper = {},
+	setActiveStepper = () => {},
+	loading = false,
+	handleSubmit = () => {},
+	onSubmit = () => {},
+	style = {},
+}) {
 	const { step } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
+
+	const showCancelButton = step !== 1;
+
+	const showProceedButton = step <= 4;
 
 	const onClickCancelButton = () => {
 		setActiveStepper(COMPONENT_MAPPING[step - 2].key);
 	};
 
 	return (
-		<div className={styles.button_container}>
+		<div className={styles.button_container} style={style}>
 			{
-				step === 1 ? null : (
+				showCancelButton && (
 					<Button
-						size="lg"
+						size="md"
 						themeType="secondary"
 						style={{ marginRight: '60px' }}
 						disabled={loading}
@@ -36,18 +39,26 @@ function ButtonLayout(
 				)
 			}
 
-			{step <= 4
-				? (
+			{
+				showProceedButton ? (
 					<Button
-						size="lg"
+						size="md"
 						themeType="accent"
 						onClick={handleSubmit((data) => onSubmit({ data, step }))}
-						// disabled={loading}
+						disabled={loading}
 					>
 						Proceed
 					</Button>
+				)	: 	(
+					<Button
+						size="md"
+						themeType="accent"
+						role="presentation"
+					>
+						Submit
+					</Button>
 				)
-				: <Button size="lg" themeType="accent" disabled={loading}>Submit</Button>}
+			}
 		</div>
 	);
 }
