@@ -1,3 +1,30 @@
 .container {
     margin-top: 20px;
 }
+
+.tableHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.question {
+    white-space: initial;
+}
+
+.topics {
+	margin-right: 4;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tags {
+	margin-right: 4;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.buttonContainer {
+    display: flex;
+    margin: 8px 0;
+}
