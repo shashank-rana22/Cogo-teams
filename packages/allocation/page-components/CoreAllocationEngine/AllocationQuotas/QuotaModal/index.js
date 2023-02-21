@@ -1,6 +1,5 @@
 import { Modal, Button, RadioGroup } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -45,14 +44,6 @@ function QuotaModal(props) {
 		onCloseModal,
 		refetch,
 	} = props;
-
-	const {
-		profile: {
-			partner: {
-				id: partnerId = '',
-			},
-		},
-	} = useSelector((rdxState) => rdxState);
 
 	const [radioValue, setRadioValue] = useState('role');
 	const [roleTypeId, setRoleTypeId] = useState('');
@@ -150,9 +141,8 @@ function QuotaModal(props) {
 										params={{
 											permissions_data_required : false,
 											filters                   : {
-												status           : 'active',
-												stakeholder_id   : partnerId,
-												stakeholder_type : 'partner',
+												status               : 'active',
+												partner_entity_types : ['cogoport'],
 											},
 										}}
 									/>
@@ -217,6 +207,7 @@ function QuotaModal(props) {
 					>
 						Cancel
 					</Button>
+
 					<Button
 						size="md"
 						type="submit"

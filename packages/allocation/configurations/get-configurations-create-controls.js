@@ -1,5 +1,3 @@
-import { startCase } from '@cogoport/utils';
-
 const getCreateConfigurationsControls = ({
 	setSegment = () => {},
 }) => {
@@ -27,8 +25,7 @@ const getCreateConfigurationsControls = ({
 			params      : {
 				permissions_data_required : false,
 				filters                   : {
-					stakeholder_id   : '6fd98605-9d5d-479d-9fac-cf905d292b88',
-					stakeholder_type : 'partner',
+					partner_entity_types: ['cogoport'],
 				},
 			},
 			rules: {
@@ -80,10 +77,6 @@ const getCreateConfigurationsControls = ({
 			getSelectedOption : (obj) => {
 				setSegment(obj?.name);
 			},
-			getModifiedOptions: ({ options }) => options.map((option) => ({
-				...option,
-				label: startCase(option.name),
-			})),
 			params: {
 				segment_type         : 'global',
 				status               : 'active',

@@ -20,6 +20,9 @@ function Details() {
 		setSearchValue,
 		configurationDetails,
 		instanceStatus,
+		columns,
+		stakeholderDetail,
+		setStakeholderDetail,
 	} = useListAllocationDetails();
 
 	return (
@@ -44,6 +47,9 @@ function Details() {
 				getNextaPage={getNextPage}
 				configurationDetails={configurationDetails}
 				listRefetch={listRefetch}
+				columns={columns}
+				stakeholderDetail={stakeholderDetail}
+				setStakeholderDetail={setStakeholderDetail}
 			/>
 		</section>
 	);

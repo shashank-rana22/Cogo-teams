@@ -1,4 +1,4 @@
-import { Checkbox, Button, Toggle } from '@cogoport/components';
+import { Button, Toggle } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import SearchInput from '../../../../common/SearchInput';
@@ -18,10 +18,9 @@ function Header(props) {
 		setSearchValue,
 		onClearSelection,
 		applyBulkFilter,
-		selectAll,
-		onItemChangeInChips,
 		checkedRowsId,
 		setShowModal,
+		isCreateDisabled,
 	} = props;
 
 	const { service_type: toggleValue, id } = params.filters || {};
@@ -29,7 +28,6 @@ function Header(props) {
 	const isBulkUpdateMode = !isEmpty(checkedRowsId);
 
 	const selectedItemsForUpdate = isBulkUpdateMode ? checkedRowsId.length : '';
-
 	return (
 		<>
 			<div className={styles.container}>
@@ -71,7 +69,7 @@ function Header(props) {
 						size="md"
 						themeType="primary"
 						onClick={onClickCreateReqBtn}
-						disabled={disabled}
+						disabled={disabled || isCreateDisabled}
 					>
 						Create
 					</Button>
@@ -80,18 +78,9 @@ function Header(props) {
 
 			<div className={styles.bulk_update_container}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<Checkbox
-						label="Select All"
-						checked={selectAll}
-						onChange={
-						(e) => onItemChangeInChips(e?.target?.checked)
-}
-						className={styles.select_all_checkbox}
-					/>
-
 					<Button
 						size="sm"
-						themeType="primary"
+						themeType="secondary"
 						disabled={!isBulkUpdateMode}
 						onClick={applyBulkFilter}
 					>
@@ -123,7 +112,7 @@ function Header(props) {
 
 				<Button
 					size="sm"
-					themeType="primary"
+					themeType="secondary"
 					disabled={isEmpty(id)}
 					onClick={() => setShowModal(true)}
 				>

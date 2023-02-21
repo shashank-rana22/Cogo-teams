@@ -22,6 +22,7 @@ const useListAllocationQuotas = () => {
 		filters   : {
 			status     : 'active',
 			quota_type : 'role',
+			q          : searchQuery || undefined,
 		},
 	});
 
@@ -42,15 +43,13 @@ const useListAllocationQuotas = () => {
 	};
 
 	useEffect(() => {
-		if (searchQuery) {
-			setParams((prevParams) => ({
-				...prevParams,
-				filters: {
-					...prevParams.filters,
-					q: searchQuery || undefined,
-				},
-			}));
-		}
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
 	}, [searchQuery]);
 
 	const columns = [

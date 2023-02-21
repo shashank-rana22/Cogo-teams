@@ -41,7 +41,7 @@ function List(props) {
 				<Table
 					className={styles.table}
 					columns={columns}
-					data={list}
+					data={list || []}
 					loading={loading}
 				/>
 			</div>

@@ -1,7 +1,12 @@
+import { Checkbox, Popover, Tooltip, Badge } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
+
+import Actions from '../page-components/CoreAllocationEngine/AllocationRequests/List/Actions';
+import styles from '../page-components/CoreAllocationEngine/styles.module.css';
 
 const useListAllocationRequests = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -9,6 +14,13 @@ const useListAllocationRequests = () => {
 	const [searchValue, setSearchValue] = useState('');
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
+	const [popoverId, setPopoverId] = useState(null);
+	const [requestStatusItem, setRequestStatusItem] = useState({});
+	const [showModal, setShowModal] = useState(false);
+
+	const onCloseModal = () => {
+		setShowModal(false);
+	};
 
 	const [params, setParams] = useState({
 		sort_by       : 'created_at',
@@ -19,6 +31,7 @@ const useListAllocationRequests = () => {
 		filters       : {
 			status       : 'pending',
 			service_type : 'organization',
+			q            : searchQuery || undefined,
 		},
 	});
 
@@ -39,16 +52,29 @@ const useListAllocationRequests = () => {
 	}, []);
 
 	useEffect(() => {
-		if (searchQuery) {
-			setParams((pv) => ({
-				...pv,
-				filters: {
-					...pv.filters,
-					q: searchQuery || undefined,
-				},
-			}));
-		}
+		setParams((pv) => ({
+			...pv,
+			filters: {
+				...pv.filters,
+				q: searchQuery || undefined,
+			},
+		}));
 	}, [searchQuery]);
+
+	useEffect(() => {
+		onChangeParams({ page: 1 });
+		setSelectAll(false);
+		setCheckedRowsId([]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params?.filters?.service_type]);
+
+	useEffect(() => {
+		if (selectAll) {
+			setSelectAll(false);
+			setCheckedRowsId([]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.page]);
 
 	const applyBulkFilter = async () => {
 		setParams({
@@ -117,8 +143,131 @@ const useListAllocationRequests = () => {
 		onSelectAll(val);
 	};
 
+	const columns = [
+		{
+			id     : 'checkbox',
+			key    : 'checkbox',
+			Header : <Checkbox
+				label=""
+				checked={selectAll}
+				onChange={
+			(e) => onItemChangeInChips(e?.target?.checked)
+}
+				className={styles.select_all_checkbox}
+			/>,
+			accessor: ({ id }) => {
+				const isSelected = checkedRowsId.includes(id);
+
+				return (
+					<Checkbox
+						label=""
+						checked={isSelected}
+						onChange={() => {
+							if (!isSelected) {
+								setCheckedRowsId([...checkedRowsId, id]);
+							} else {
+								setCheckedRowsId(checkedRowsId.filter((rowId) => rowId !== id));
+							}
+						}}
+						className={styles.bulk_select_checkbox}
+					/>
+				);
+			},
+		},
+		{
+			key      : 'id',
+			Header   : 'Serial Id',
+			accessor : ({ service }) => (service?.serial_id
+				? <Badge color="blue" size="lg" text={service.serial_id} /> : '___'),
+		},
+		{
+			key      : 'service_type',
+			Header   : 'Organization',
+			accessor : ({ service }) => service?.business_name || '___',
+		},
+		{
+			key      : 'service_user',
+			Header   : 'User',
+			accessor : ({ service_user }) => (
+				<div>
+					{service_user?.name}
+					<div className={styles.email_id}>{service_user?.email || '___'}</div>
+				</div>
+			),
+		},
+		{
+			key      : 'stakeholder_type',
+			Header   : 'Stakeholder Type',
+			accessor : ({ stakeholder_type }) => startCase(stakeholder_type || '___'),
+		},
+		{
+			key      : 'requested_agent',
+			Header   : 'Requested Agent',
+			accessor : ({ user }) => (
+				<div>
+					{user?.name}
+					{' '}
+					<div className={styles.email_id}>{user?.email || '___'}</div>
+				</div>
+			),
+		},
+		{
+			key      : 'created_by',
+			Header   : 'Requested By',
+			accessor : ({ created_by }) => created_by?.name || '___',
+		},
+		{
+			key      : 'reason',
+			Header   : 'Reason',
+			accessor : ({ reason }) => (
+				<Tooltip content={reason} placement="top">
+					<span className={styles.reason}>
+						{reason || '___'}
+					</span>
+				</Tooltip>
+			),
+		},
+		{
+			key      : 'action',
+			Header   : 'Action',
+			accessor : (item) => {
+				const { id } = item;
+
+				return (
+					<div className={styles.content_container}>
+						<Popover
+							visible={popoverId === id}
+							placement="left"
+							interactive
+							render={(
+								<Actions onClickCta={({ status }) => {
+									setRequestStatusItem({
+										status,
+										allocation_request_id: item.id,
+									});
+									setPopoverId(null);
+								}}
+								/>
+							)}
+							onClickOutside={() => setPopoverId(null)}
+						>
+							<div
+								className={styles.svg_container}
+								onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
+								role="presentation"
+							>
+								<IcMOverflowDot height={16} width={16} />
+							</div>
+						</Popover>
+					</div>
+				);
+			},
+		},
+	];
+
 	return {
 		data,
+		columns,
 		loading,
 		refetch,
 		params,
@@ -131,10 +280,15 @@ const useListAllocationRequests = () => {
 		applyBulkFilter,
 		onChangeCheckbox,
 		onSelectAll,
+		selectAll,
 		checkedRowsId,
 		setCheckedRowsId,
-		selectAll,
 		onItemChangeInChips,
+		showModal,
+		setShowModal,
+		onCloseModal,
+		requestStatusItem,
+		setRequestStatusItem,
 	};
 };
 

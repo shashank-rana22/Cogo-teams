@@ -4,17 +4,15 @@ import SearchInput from '../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 
-function Header(props) {
-	const {
-		disabled,
-		setParams,
-		toggleRoleType,
-		onClickCreateQuota,
-		debounceQuery,
-		searchValue,
-		setSearchValue,
-	} = props;
-
+function Header({
+	disabled,
+	setParams = () => {},
+	toggleRoleType,
+	onClickCreateQuota,
+	debounceQuery,
+	searchValue,
+	setSearchValue = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			<Toggle
