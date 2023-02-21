@@ -34,7 +34,7 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 		return (
 			<div className={styles.container}>
 				<div className={styles.title}>Organisation Details</div>
-				<EmptyState />
+				<EmptyState type="organization" />
 			</div>
 		);
 	}

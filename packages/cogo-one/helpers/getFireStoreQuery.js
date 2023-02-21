@@ -5,6 +5,7 @@ import {
 } from 'firebase/firestore';
 
 function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isomniChannelAdmin = false }) {
+	console.log('appliedFilters:', appliedFilters);
 	let firestoreQuery;
 	let queryFilters = [];
 
@@ -13,6 +14,10 @@ function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isom
 			queryFilters = [...queryFilters, where('chat_tags', 'array-contains', appliedFilters[item])];
 		} else if (item === 'channels') {
 			queryFilters = [...queryFilters, where('channel_type', 'in', appliedFilters[item])];
+		} else if (item === 'status' && appliedFilters[item] === 'unread') {
+			queryFilters = [...queryFilters, where('new_message_count', '>', 0), orderBy('new_message_count', 'desc')];
+		} else if (item === 'escalation') {
+			queryFilters = [...queryFilters, where('chat_status', '==', appliedFilters[item])];
 		}
 	});
 
@@ -22,7 +27,6 @@ function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isom
 			...queryFilters,
 			where('session_type', '==', 'admin'),
 			orderBy('updated_at', 'desc'),
-
 		);
 	} else {
 		firestoreQuery = query(
@@ -31,9 +35,9 @@ function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isom
 			where('spectators_ids', 'array_contains', userId),
 			where('session_type', '==', 'admin'),
 			orderBy('updated_at', 'desc'),
-
 		);
 	}
+
 	return (
 		firestoreQuery
 	);

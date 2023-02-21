@@ -2,6 +2,7 @@ import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
+import EmptyState from '../../../../common/EmptyState';
 import useGetUser from '../../../../hooks/useGetUser';
 
 import ConversationContainer from './ConversationContainer';
@@ -72,7 +73,9 @@ function AgentDetails({
 		},
 	];
 
-	return (
+	return (!isEmpty(userId) && !isEmpty(leadUserId)) ? (
+		<EmptyState type="profile" />
+	) : (
 		<>
 			<div className={styles.title}>Profile</div>
 			<div className={styles.content}>

@@ -10250,6 +10250,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 
 	],
 };

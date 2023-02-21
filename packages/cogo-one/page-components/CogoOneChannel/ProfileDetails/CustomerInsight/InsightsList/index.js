@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messages }) {
 	return (
 		checkEmpty
-			? <EmptyState /> : (
+			? <EmptyState type="insights" /> : (
 				<>
 					{Object.keys(shipment_and_spot_search_stats).map((key) => {
 						const {

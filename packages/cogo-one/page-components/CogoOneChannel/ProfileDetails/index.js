@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
+import useListOrganizations from '../../../hooks/useListOrganizations';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
 import RightSideNav from './RightSideNav';
@@ -14,6 +15,9 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 	const [activeSelect, setActiveSelect] = useState('profile');
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	const FormattedMessageData = getActiveCardDetails(activeMessageCard) || {};
+	const orgId = activeTab === 'message' ? FormattedMessageData?.organization_id : activeVoiceCard?.organization_id;
+
+	const { data } = useListOrganizations({ orgId });
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>

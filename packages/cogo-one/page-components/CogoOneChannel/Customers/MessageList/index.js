@@ -4,7 +4,6 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
-import getShowChat from '../../../../helpers/getShowChat';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -32,6 +31,17 @@ function MessageList({
 				</div>
 			</div>
 		);
+	}
+
+	function getShowChat({
+		item = {},
+	}) {
+		const { user_name = '' } = item;
+		if (searchValue) {
+			const searchName = user_name?.toLowerCase();
+			return searchName?.includes(searchValue);
+		}
+		return true;
 	}
 
 	return (
