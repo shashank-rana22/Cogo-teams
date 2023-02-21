@@ -1,6 +1,6 @@
 import businessFinance from './config/business-finance';
 import contracts from './config/contracts';
-import incidentManagement from './config/incident-management';
+import myIncident from './config/my_incident';
 import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
 
@@ -9,7 +9,7 @@ const routeConfig = {
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
-	...incidentManagement,
+	...myIncident,
 };
 
 export default routeConfig;

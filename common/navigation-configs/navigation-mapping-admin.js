@@ -840,11 +840,11 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_cogo_entities'],
 		module_type   : 'crm',
 	},
-	incident_management: {
-		key           : 'incident_management',
-		title         : 'Incident Management',
-		href          : '/v2/incident-management/[activeIncidentTab]',
-		as            : '/v2/incident-management/requested',
+	my_incident: {
+		key           : 'my_incident',
+		title         : 'My Incidents',
+		href          : '/v2/my_incident/[activeIncidentTab]',
+		as            : '/v2/my_incident/requested',
 		type          : 'link',
 		icon          : IcMFinance,
 		possible_apis : [],

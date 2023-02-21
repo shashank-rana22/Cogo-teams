@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 import StyledTable from './Table';
 import { COLUMNS_MAPPING } from './utils/getColumns';
 
-function IncidentManagement() {
+function MyIncident() {
 	const { query, push } = useRouter();
 	const { activeIncidentTab } = query;
 	const [activeTab, setActiveTab] = useState<string>(activeIncidentTab || 'requested');
@@ -76,4 +76,4 @@ function IncidentManagement() {
 		</div>
 	);
 }
-export default IncidentManagement;
+export default MyIncident;
