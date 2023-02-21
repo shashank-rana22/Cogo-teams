@@ -28,7 +28,7 @@ function CardItem({
 					isMobile ? styles.is_mobile : ''
 				}`}
 			>
-				{fields.map((field) => {
+				{fields.map((field:any) => {
 					const itemStyle = field.styles || {};
 					return (
 						<div
@@ -47,12 +47,12 @@ function CardItem({
 							{loading ? <Placeholder />
 								: (
 									<div className={styles.flex}>
-										{getValue(
+										{field.render ? field.render(singleitem) : getValue(
 											singleitem,
 											field,
 											functions,
 											'-',
-										) as ReactNode}
+										) as ReactNode }
 									</div>
 								)}
 
