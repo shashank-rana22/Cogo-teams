@@ -43,9 +43,10 @@ function QuotaModal(props) {
 		quotaItem,
 		onCloseModal,
 		refetch,
+		toggleRoleType,
 	} = props;
 
-	const [radioValue, setRadioValue] = useState('role');
+	const [radioValue, setRadioValue] = useState(toggleRoleType);
 	const [roleTypeId, setRoleTypeId] = useState('');
 
 	const { quota_attributes, type = '' } = quotaItem;
