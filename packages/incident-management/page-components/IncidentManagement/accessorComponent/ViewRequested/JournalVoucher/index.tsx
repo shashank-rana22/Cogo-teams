@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function JournalVoucher({
-	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
+	itemData, setRemarks, remarks, onSave, showModal, setShowModal, loadingOnSave,
 }) {
 	const { data, userNotes, status } = itemData || {};
 	const { journalVoucherRequest } = data || {};
@@ -127,7 +127,7 @@ function JournalVoucher({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						disabled={loadingOnSave}
+						disabled={!(remarks.length > 0) || loadingOnSave}
 						onClick={() => {
 							onSave();
 						}}

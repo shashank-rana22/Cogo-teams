@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function BankDatailsModal({
-	itemData, setRemarks, onSave, onRaiseAgain,
+	itemData, setRemarks, remarks, onSave, onRaiseAgain,
 	setSelectedFile, selectedFile, name, showModal, setShowModal,
 	loadingOnSave,
 	loadingOnRaise,
@@ -182,7 +182,7 @@ function BankDatailsModal({
 						)
 						: (
 							<Button
-								disabled={loadingOnSave}
+								disabled={!(remarks.length > 0) || loadingOnSave}
 								onClick={() => {
 									onSave();
 								}}

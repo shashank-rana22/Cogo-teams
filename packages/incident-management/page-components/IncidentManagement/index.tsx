@@ -16,11 +16,24 @@ function IncidentManagement() {
 	const [activeTab, setActiveTab] = useState<string>(activeIncidentTab || 'requested');
 	const [payload, setPayload] = useState(null);
 	const [isSortActive, setIsSortActive] = useState(null);
-	const { globalFilters, setGlobalFilters, data, loading, refetch } = useGetIncidentMangement({ activeTab, payload });
+	const [listData, setListData] = useState(null);
+	const { globalFilters, setGlobalFilters, data, loading, refetch } = 	useGetIncidentMangement({
+		activeTab,
+		payload,
+	});
+
+	const { list = [], paginationData } = data || {};
+	const { pageIndex, pageSize, total } = paginationData || {};
 
 	useEffect(() => {
 		setPayload(null);
 	}, [activeTab]);
+
+	useEffect(() => {
+		if (list.length === 1) {
+			setListData(list);
+		}
+	}, [list]);
 
 	const columns = getColumns(
 		activeTab,
@@ -30,10 +43,8 @@ function IncidentManagement() {
 		setGlobalFilters,
 		refetch,
 		setPayload,
+		listData,
 	);
-
-	const { list = [], paginationData } = data || {};
-	const { pageIndex, pageSize, total } = paginationData || {};
 
 	return (
 		<div>
@@ -42,7 +53,12 @@ function IncidentManagement() {
 				Incident Management - My Incidents
 			</div>
 
-			<Headers activeTab={activeTab} setActiveTab={setActiveTab} data={data} push={push} />
+			<Headers
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				data={data}
+				push={push}
+			/>
 
 			<SelectFilter globalFilters={globalFilters} setGlobalFilters={setGlobalFilters} activeTab={activeTab} />
 

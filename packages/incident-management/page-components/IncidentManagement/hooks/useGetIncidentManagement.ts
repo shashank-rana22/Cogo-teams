@@ -8,7 +8,11 @@ import { useEffect, useState } from 'react';
 
 interface ItemProps {
 	activeTab:string,
-	payload:string,
+	payload:{
+		raisedPayload:string
+		id:string
+		user:string
+	},
 }
 const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	const {
@@ -51,16 +55,16 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 		debounceQuery(search);
 	}, [search]);
 
-	let activeStatus = [];
-	if (payload?.[0] === 'raisedPayload') {
-		activeStatus = ['REQUESTED', 'DELETED'];
-	} else if (activeTab === 'requested') {
-		activeStatus = ['REQUESTED', 'DELETED'];
-	} else if (activeTab === 'approved') {
-		activeStatus = ['APPROVED'];
-	} else if (activeTab === 'rejected') {
-		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED'];
-	}
+	// let activeStatus = [];
+	// if (payload?.[0] === 'raisedPayload') {
+	// 	activeStatus = ['REQUESTED', 'DELETED'];
+	// } else if (activeTab === 'requested') {
+	// 	activeStatus = ['REQUESTED', 'DELETED'];
+	// } else if (activeTab === 'approved') {
+	// 	activeStatus = ['APPROVED'];
+	// } else if (activeTab === 'rejected') {
+	// 	activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED'];
+	// }
 
 	const refetch = async () => {
 		try {
@@ -68,10 +72,10 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 				params: {
 					...rest,
 					sourceDashboard    : 'USER',
-					userIncidentStatus : requestedStatus || rejectedStatus || activeStatus,
+					userIncidentStatus : requestedStatus || rejectedStatus || undefined,
 					isStatsRequired    : true,
-					createdBy          : payload?.[0] === 'raisedPayload' ? payload?.[2] : userId,
-					id                 : payload?.[0] === 'raisedPayload' ? payload?.[1] : undefined,
+					createdBy          : payload?.raisedPayload === 'raisedPayload' ? payload?.user : userId,
+					id                 : payload?.raisedPayload === 'raisedPayload' ? payload?.id : undefined,
 					pageIndex          : globalFilters.pageIndex,
 					q                  : query !== '' ? query : undefined,
 					type               : requestType,
@@ -90,7 +94,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(rest), activeTab, query, requestType, Date, rejectedStatus, requestedStatus]);
+	}, [JSON.stringify(rest), activeTab, query, requestType, Date, rejectedStatus, payload?.id, requestedStatus]);
 
 	const filtervalue = Object.values(globalFilters);
 

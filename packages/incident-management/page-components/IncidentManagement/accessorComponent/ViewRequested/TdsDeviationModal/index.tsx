@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function TdsDeviationModal({
-	itemData, setRemarks, onSave, onRaiseAgain,
+	itemData, setRemarks,	remarks, onSave, onRaiseAgain,
 	setSelectedFile, selectedFile, name, showModal, setShowModal,
 	loadingOnSave,
 	loadingOnRaise,
@@ -19,6 +19,8 @@ function TdsDeviationModal({
 		currentTdsRate, currentTdsStyle, requestedTdsRate, requestedTdsStyle,
 		validFrom, validTo, remark, documentUrls,
 	} = tdsRequest || {};
+
+	console.log(remarks, 'remarks');
 	return (
 		<div>
 			{status === 'REJECTED'
@@ -221,7 +223,7 @@ function TdsDeviationModal({
 						)
 						:					(
 							<Button
-								disabled={loadingOnSave}
+								disabled={!(remarks.length > 0) || loadingOnSave}
 								onClick={() => {
 									onSave();
 								}}

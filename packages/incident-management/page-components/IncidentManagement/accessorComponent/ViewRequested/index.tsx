@@ -29,6 +29,7 @@ function ViewRequested({ itemData, name, refetch }) {
 			<BankDatailsModal
 				itemData={itemData}
 				setRemarks={setRemarks}
+				remarks={remarks}
 				onSave={onSave}
 				onRaiseAgain={onRaiseAgain}
 				setSelectedFile={setSelectedFile}
@@ -47,6 +48,7 @@ function ViewRequested({ itemData, name, refetch }) {
 				itemData={itemData}
 				setRemarks={setRemarks}
 				onSave={onSave}
+				remarks={remarks}
 				onRaiseAgain={onRaiseAgain}
 				setSelectedFile={setSelectedFile}
 				selectedFile={selectedFile}
@@ -63,6 +65,7 @@ function ViewRequested({ itemData, name, refetch }) {
 			<RequestCN
 				itemData={itemData}
 				setRemarks={setRemarks}
+				remarks={remarks}
 				onSave={onSave}
 				showModal={showModal}
 				setShowModal={setShowModal}
@@ -76,6 +79,7 @@ function ViewRequested({ itemData, name, refetch }) {
 				itemData={itemData}
 				setRemarks={setRemarks}
 				onSave={onSave}
+				remarks={remarks}
 				showModal={showModal}
 				setShowModal={setShowModal}
 				loadingOnSave={loadingOnSave}
@@ -88,6 +92,7 @@ function ViewRequested({ itemData, name, refetch }) {
 				itemData={itemData}
 				setRemarks={setRemarks}
 				onSave={onSave}
+				remarks={remarks}
 				showModal={showModal}
 				setShowModal={setShowModal}
 				loadingOnSave={loadingOnSave}
@@ -99,6 +104,7 @@ function ViewRequested({ itemData, name, refetch }) {
 			<IcJvApproval
 				itemData={itemData}
 				setRemarks={setRemarks}
+				remarks={remarks}
 				onSave={onSave}
 				showModal={showModal}
 				setShowModal={setShowModal}

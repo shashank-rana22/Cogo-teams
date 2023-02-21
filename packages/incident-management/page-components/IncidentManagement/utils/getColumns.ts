@@ -10,6 +10,7 @@ const getColumns = (
 	setGlobalFilters:Function,
 	refetch:Function,
 	setPayload:Function,
+	listData:Array<object>,
 ) => {
 	if (activeTab === 'requested') {
 		return requestedColumn({ isSortActive, setIsSortActive, setGlobalFilters, refetch });
@@ -18,7 +19,16 @@ const getColumns = (
 		return approvedColumn({ isSortActive, setIsSortActive, setGlobalFilters, refetch });
 	}
 	if (activeTab === 'rejected') {
-		return rejectedColumn({ isSortActive, setIsSortActive, setGlobalFilters, refetch, setActiveTab, setPayload });
+		return rejectedColumn({
+			isSortActive,
+			setIsSortActive,
+			setGlobalFilters,
+			refetch,
+			setActiveTab,
+			activeTab,
+			setPayload,
+			listData,
+		});
 	}
 	return null;
 };

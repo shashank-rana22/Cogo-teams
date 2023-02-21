@@ -6,7 +6,7 @@ import getModalColumns from '../getModalColumn';
 import styles from './styles.module.css';
 
 function SettlementModal({
-	itemData, setRemarks, onSave, showModal, setShowModal, loadingOnSave,
+	itemData, setRemarks, remarks, onSave, showModal, setShowModal, loadingOnSave,
 }) {
 	const { type, data, userNotes, status } = itemData || {};
 	const { settlementRequest } = data || {};
@@ -59,7 +59,7 @@ function SettlementModal({
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
-						disabled={loadingOnSave}
+						disabled={!(remarks.length > 0) || loadingOnSave}
 						onClick={() => {
 							onSave();
 						}}
