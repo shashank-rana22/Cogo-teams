@@ -1,10 +1,11 @@
 import {
-	IcMAccountSettings,
 	IcMSettings,
+	IcMAccountSettings,
 	IcMLocation,
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
+	IcMBooking,
 	IcMBookingManagement,
 	IcMProductCodeMapping,
 	IcMUsersManageAccounts,
@@ -28,13 +29,11 @@ import {
 	IcMTechops,
 	IcMServices,
 	IcMMarginManagement,
-	IcMRfq,
 	IcMRateSheets,
 	IcMQuotations,
 	IcMPromotions,
 	IcMPrm,
 	IcMMoney,
-	IcMContractRates,
 	IcMPortManagement,
 	IcMProfile,
 	IcMMarketing,
@@ -350,6 +349,7 @@ const navigationMappingAdmin = {
 			...apis.ftl_freight,
 			...apis.ltl_freight,
 			...apis.trailer_freight,
+			...apis.rail_freight,
 		],
 		options: [
 			{
@@ -746,33 +746,11 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_organization_trade_party_details'],
 		module_type   : 'crm',
 	},
-	rfq: {
-		key           : 'rfq',
-		title         : 'RFQ',
-		href          : '/rfq/dashboard',
-		as            : '/rfq/dashboard',
-		type          : 'link',
-		icon          : IcMRfq,
-		possible_apis : apis.rfq,
-		main_apis     : ['list_rfqs'],
-		module_type   : 'dashboards',
-	},
-	contract_rates: {
-		key           : 'contract_rates',
-		title         : 'Contract Rates',
-		href          : '/contract-rates',
-		as            : '/contract-rates',
-		type          : 'link',
-		icon          : IcMContractRates,
-		possible_apis : [...apis.contract_rates, ...apis.shipment],
-		main_apis     : ['list_contracts', 'list_organizations'],
-		module_type   : 'dashboards',
-	},
 	tech_ops: {
 		key           : 'tech_ops',
 		title         : 'TechOps',
-		href          : '/tech-ops',
-		as            : '/tech-ops',
+		href          : '/tech-ops/locals',
+		as            : '/tech-ops/locals',
 		type          : 'link',
 		icon          : IcMTechops,
 		possible_apis : apis.tech_ops,
@@ -803,6 +781,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
+			},
+			{
+				key           : 'business_finance-reports',
+				title         : 'Reports',
+				href          : '/v2/business-finance/reports',
+				as            : '/v2/business-finance/reports',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.reports,
 			},
 		],
 		module_type: 'dashboards',
@@ -1013,7 +1000,6 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_events'],
 		module_type   : 'dashboards',
 	},
-
 	coe: {
 		key         : 'coe',
 		title       : 'Center of Excellence [COE]',
@@ -1148,7 +1134,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1158,7 +1143,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1168,7 +1152,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1208,7 +1191,7 @@ const navigationMappingAdmin = {
 				as            : '/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : apis.shipment,
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
 
 			},
 			{
@@ -1246,7 +1229,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
@@ -1292,7 +1274,7 @@ const navigationMappingAdmin = {
 				href          : '/last-mile',
 				as            : '/last-mile',
 				type          : 'link',
-				main_apis     : ['list_document_desk_shipments'],
+				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk],
 			},
 		],
@@ -1307,6 +1289,14 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_terms_and_conditions'],
 		possible_apis : [...apis.terms_and_conditons],
 		module_type   : 'dashboards',
+	},
+	operations_mails: {
+		key         : 'operations_mails',
+		title       : 'Operations Mails',
+		href        : '/operations-mails',
+		as          : '/operations-mails',
+		type        : 'link',
+		module_type : 'crm',
 	},
 	prm: {
 		key       : 'prm',
@@ -1678,7 +1668,7 @@ const navigationMappingAdmin = {
 				title         : 'Configurations',
 				href          : '/allocation/configurations',
 				as            : '/allocation/configurations',
-				main_apis     : ['list_allocation_configurations'],
+				main_apis     : ['get_allocation_configurations'],
 				possible_apis : apis.allocation,
 			},
 			{
@@ -1686,7 +1676,7 @@ const navigationMappingAdmin = {
 				title         : 'Relations',
 				href          : '/allocation/relations',
 				as            : '/allocation/relations',
-				main_apis     : ['list_allocation_relations'],
+				main_apis     : ['get_allocation_relations'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1695,7 +1685,7 @@ const navigationMappingAdmin = {
 				title         : 'Requests',
 				href          : '/allocation/requests',
 				as            : '/allocation/requests',
-				main_apis     : ['list_allocation_requests'],
+				main_apis     : ['get_allocation_requests'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1704,7 +1694,7 @@ const navigationMappingAdmin = {
 				title         : 'Quotas',
 				href          : '/allocation/quotas',
 				as            : '/allocation/quotas',
-				main_apis     : ['list_allocation_quotas'],
+				main_apis     : ['get_allocation_quotas'],
 				possible_apis : apis.allocation,
 
 			},
@@ -1721,6 +1711,28 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+
+	airline_booking_plugin: {
+		key           : 'airline_booking_plugin',
+		title         : 'Airline Booking Plugin',
+		href          : '/airline-booking-plugin',
+		as            : '/airline-booking-plugin',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.airline_booking_plugin,
+		module_type   : 'dashboards',
+	},
+
+	enrichment: {
+		key           : 'enrichment',
+		title         : 'Enrichment',
+		href          : '/enrichment',
+		as            : '/enrichment',
+		main_apis     : ['/list_lead_organizations_enrichment'],
+		possible_apis : apis.enrichment,
+		module_type   : 'dashboards',
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
@@ -1729,6 +1741,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.document_walet,
 		icon          : IcMDocument,
 		main_apis     : [],
+		module_type   : 'dashboards',
+	},
+	cost_booking: {
+		key           : 'cost_booking',
+		title         : 'FF Cost Booking',
+		href          : '/cost-booking',
+		as            : '/cost-booking',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cost_booking,
+		icon          : IcMBooking,
 		module_type   : 'dashboards',
 	},
 	platform_configuration: {
@@ -1759,6 +1782,58 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
 		module_typ    : 'crm',
+	},
+	home: {
+		key   : 'home',
+		title : 'Home',
+		href  : '/home',
+		as    : '/home',
+		icon  : IcMSettings,
+	},
+	manage_rfq: {
+		key           : 'manage_rfq',
+		title         : 'Manage RFQ',
+		href          : '/manage-rfq',
+		as            : '/manage-rfq',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.manage_rfq,
+		module_type   : 'dashboards',
+	},
+	contract_rates: {
+		key       : 'contract_rates',
+		title     : 'Contract Rates',
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'contract_rates-international_contracts',
+				title         : 'Overseas Contract',
+				href          : '/contract-rates/dashboard/active',
+				as            : '/contract-rates/dashboard/active',
+				type          : 'link',
+				main_apis     : ['list_contracts'],
+				possible_apis : [...apis.contract_rates, ...apis.shipment],
+			},
+			{
+				key           : 'contract_rates-domestic_contracts',
+				title         : 'Domestic Contracts',
+				href          : '/contract-rates',
+				as            : '/contract-rates',
+				type          : 'link',
+				main_apis     : ['list_contracts'],
+				possible_apis : [...apis.contract_rates, ...apis.shipment],
+			},
+		],
+		module_type: 'dashboards',
+	},
+	contracts: {
+		key           : 'contracts',
+		title         : 'Contracts Revenue Desk',
+		href          : '/v2/contracts',
+		as            : '/v2/contracts',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.contracts,
 	},
 };
 

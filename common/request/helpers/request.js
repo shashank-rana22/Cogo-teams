@@ -10,7 +10,7 @@ import { getCookie } from './getCookieFromCtx';
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
 		arrayFormat   : 'brackets',
-		serializeDate : (date) => format(date),
+		serializeDate : (date) => format(date, 'isoUtcDateTime'),
 	});
 	return paramsStringify;
 };

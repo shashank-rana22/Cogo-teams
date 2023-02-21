@@ -37,7 +37,8 @@ function CoeFinance() {
 	const handleChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
-			getRoute(tab),
+			getRoute(tab)[0],
+			getRoute(tab)[1],
 		);
 	};
 
