@@ -792,8 +792,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-incident_controller',
 				title         : 'Incident Controller',
-				href          : '/business-finance/incident-controller/[activeTab]',
-				as            : '/business-finance/incident-controller/requested',
+				href          : '/v2/business-finance/incident-controller/[activeTab]',
+				as            : '/v2/business-finance/incident-controller/requested',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.incident_controller,
