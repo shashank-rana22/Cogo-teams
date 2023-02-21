@@ -3,10 +3,6 @@
 }
 
 .table_container {
-	/* tr {
-		height: 60px;
-	} */
-
 	@media (max-width: 768px) {
 		overflow-x: scroll;
 	}
@@ -105,23 +101,15 @@
 }
 
 .table {
-	padding: 0;
+	margin: 16px 0;
+	background-color: #fff;
+	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
 
-	:global {
-		.ui_table_head_row {
-			.ui_table_head_cell {
-				color: black;
-			}
-		}
+	tr {
+		height: 60px;
+	}
 
-		.ui_table_body_container {
-			.ui_table_body_row {
-				.ui_table_body_cell {
-					padding-block: 20px;
-					color: #221f20;
-					background-color: white;
-				}
-			}
-		}
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
 	}
 }
