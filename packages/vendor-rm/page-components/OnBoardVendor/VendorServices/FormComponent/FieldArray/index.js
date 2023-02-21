@@ -59,7 +59,12 @@ function FieldArray({
 			))}
 
 			{showButtons && !disabled ? (
-				<Button themeType="accent" onClick={() => append(childEmptyValues)}>
+				<Button
+					size="lg"
+					role="presentation"
+					themeType="accent"
+					onClick={() => append(childEmptyValues)}
+				>
 					+
 					{' '}
 					{buttonText}

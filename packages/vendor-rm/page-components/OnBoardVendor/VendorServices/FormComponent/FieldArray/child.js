@@ -24,39 +24,44 @@ function Child({
 	return (
 		<div className={styles.content}>
 
-			{(newControls || []).map((controlItem) => {
-				const Element = getElementController(controlItem.type);
+			<div className={styles.element_container}>
 
-				if (!Element) return null;
+				{(newControls || []).map((controlItem) => {
+					const Element = getElementController(controlItem.type);
 
-				return (
-					<div className={styles.list}>
+					if (!Element) return null;
 
-						<div className={styles.form_label}>
-							<h4>{controlItem.label}</h4>
+					return (
+						<div className={styles.list}>
+
+							<div className={styles.form_label}>
+								<h4>{controlItem.label}</h4>
+							</div>
+
+							<div className={styles.form_element}>
+								<Element
+									{...controlItem}
+									width="100%"
+									control={control}
+									name={`${name}[${index}].${controlItem.name}`}
+									id={`create_form_${controlItem.name}_field`}
+								/>
+							</div>
+
+							<div className={styles.form_error_message}>
+								{error?.[controlItem.name]?.message}
+							</div>
+
 						</div>
+					);
+				})}
 
-						<div className={styles.form_element}>
-							<Element
-								{...controlItem}
-								width="100%"
-								control={control}
-								name={`${name}[${index}].${controlItem.name}`}
-								id={`create_form_${controlItem.name}_field`}
-							/>
-						</div>
-
-						<div className={styles.form_error_message}>
-							{error?.[controlItem.name]?.message}
-						</div>
-
-					</div>
-				);
-			})}
+			</div>
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<div className={styles.button}>
 					<Button
+						size="lg"
 						themeType="accent"
 						className={`form-fieldArray-${name}-remove`}
 						onClick={() => remove(index, 1)}
