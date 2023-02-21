@@ -1,7 +1,7 @@
-import { Button, Toast } from '@cogoport/components';
+import { Tooltip, Button, Toast } from '@cogoport/components';
 import { IcCFtick, IcMError } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { format, startCase } from '@cogoport/utils';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
@@ -10,6 +10,57 @@ const ICON_MAPPING = {
 	pending_from_user : <IcMError />,
 	verified          : <IcCFtick />,
 };
+
+const renderToolTipContent = (unique_services) => (
+	<div>
+		{
+					(unique_services || []).map((item, index) => {
+						if (index === 0) {
+							return null;
+						}
+						return <div>{startCase(item)}</div>;
+					})
+				}
+	</div>
+);
+
+const renderUniqueServices = ({ services, type }) => {
+	if (isEmpty(services)) return null;
+
+	const unique_services = [];
+
+	(services || []).forEach((item) => {
+		if (type === 'category') {
+			if (!unique_services.includes(item?.category)) {
+				unique_services.push(item?.category);
+			}
+		} else if (!unique_services.includes(item?.sub_category)) {
+			unique_services.push(item?.sub_category);
+		}
+	});
+
+	const length = unique_services?.length;
+
+	return (
+		<div>
+			{startCase(unique_services?.[0])}
+			<Tooltip
+				content={renderToolTipContent(unique_services)}
+				placement="left"
+			>
+				{length - 1 > 0 ? (
+					<div>
+						+
+						{length - 1}
+						{' '}
+						more
+					</div>
+				) : null}
+			</Tooltip>
+		</div>
+	);
+};
+
 const useVendorList = () => {
 	const [params, setParams] = useState({
 		filters: {
@@ -86,7 +137,7 @@ const useVendorList = () => {
 			id       : 'e',
 			accessor : ({ services = [] }) => (
 				<section>
-					{services[0]?.category}
+					{renderUniqueServices({ services, type: 'category' })}
 				</section>
 			),
 		},
@@ -96,7 +147,7 @@ const useVendorList = () => {
 
 			accessor: ({ services = [] }) => (
 				<section>
-					{services[0]?.sub_category}
+					{renderUniqueServices({ services, type: 'sub_category' })}
 				</section>
 			),
 		},
@@ -127,7 +178,6 @@ const useVendorList = () => {
 	return {
 		loading,
 		data,
-		GetVendorList,
 		params,
 		setParams,
 		columns,

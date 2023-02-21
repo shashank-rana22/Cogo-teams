@@ -28,8 +28,8 @@ function ButtonLayout({
 			{showCancelButton && (
 				<Button
 					size="lg"
-					themeType="tertiary"
-					style={{ marginRight: 20 }}
+					themeType="secondary"
+					style={{ marginRight: '60px' }}
 					disabled={loading}
 					onClick={onClickCancelButton}
 				>
@@ -48,9 +48,11 @@ function ButtonLayout({
 				</Button>
 			)	: 	(
 				<Button
-					size="md"
+					size="lg"
 					themeType="accent"
 					role="presentation"
+					onClick={onSubmit}
+					disabled={loading}
 				>
 					Submit
 				</Button>

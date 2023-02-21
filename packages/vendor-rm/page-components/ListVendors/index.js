@@ -12,7 +12,6 @@ function ListVendors() {
 	const {
 		loading,
 		data = {},
-		// GetVendorList = () => {},
 		params = {},
 		setParams = () => {},
 		columns,
@@ -87,9 +86,16 @@ function ListVendors() {
 					placeholder="Start type content name to search..."
 				/>
 
-				<Button role="presentation" onClick={() => router.push('/onboard-vendor')}>
-					ADD NEW VENDOR
-				</Button>
+				<div className={styles.button_container}>
+					<Button
+						size="lg"
+						role="presentation"
+						onClick={() => router.push('/onboard-vendor')}
+						themeType="accent"
+					>
+						ADD NEW VENDOR
+					</Button>
+				</div>
 			</div>
 
 			<TabularSection
