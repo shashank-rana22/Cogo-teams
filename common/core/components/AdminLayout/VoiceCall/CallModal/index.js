@@ -10,8 +10,10 @@ function CallModal({
 	profileData = {},
 	showCallModal,
 	name = '',
-	code = '',
-	number = '',
+	mobile_number = '',
+	mobile_country_code = '',
+	// code = '',
+	// number = '',
 	status = '',
 	handleEnd = () => {},
 	durationTime = () => {},
@@ -48,9 +50,9 @@ function CallModal({
 						{name || 'Unknown User'}
 					</div>
 					<div className={styles.number}>
-						{code}
+						{mobile_country_code}
 						{' '}
-						{number}
+						{mobile_number}
 					</div>
 					<div className={styles.status_div}>{status || 'Connecting...'}</div>
 					<div className={styles.timer}>{durationTime()}</div>
