@@ -33,6 +33,9 @@ const PieData = [
 	},
 ];
 
+const PieData1 = ['-'];
+const lineData1 = ['-'];
+
 function PerformanceChart({ user_id = '' }) {
 	const { placeholder, options } = getMonthControls;
 
@@ -42,9 +45,6 @@ function PerformanceChart({ user_id = '' }) {
 		performanceFilter,
 		setPerformanceFilter = () => { },
 	} = useGetFeedbackPerformanceStats({ user_id });
-
-	const lineData1 = ['_',
-	];
 
 	Object.keys(performanceStatsData).map((key) => {
 		const { month = '', rating = '' } = performanceStatsData[key] || {};
@@ -143,21 +143,8 @@ function PerformanceChart({ user_id = '' }) {
 			</div>
 			{loading && showLoading()}
 
-			{isEmpty(lineData1) && !loading && (
-				<div className={styles.empty_container}>
-					<EmptyState
-						height={140}
-						width={220}
-						emptyText="Performance Stats Not Found"
-						textSize="12px"
-						flexDirection="column"
-					/>
-				</div>
-			)}
-
-			{!loading && lineData1?.length > 0
-			&& (
-				<div className={styles.chart_section}>
+			<div className={styles.chart_section}>
+				{(!loading && lineData1?.length) > 0 ? (
 					<div className={styles.line_graph}>
 						<ResponsiveLine
 							data={newlineData}
@@ -208,42 +195,38 @@ function PerformanceChart({ user_id = '' }) {
 							useMesh
 							colors={['#F2E3C3', '#F9AE64', '#828282']}
 							colorBy="index"
-							// legends={[
-							// 	{
-							// 		anchor        : 'top-right',
-							// 		direction     : 'row',
-							// 		justify       : false,
-							// 		translateX    : 0,
-							// 		translateY    : -30,
-							// 		itemWidth     : 100,
-							// 		itemHeight    : 20,
-							// 		itemsSpacing  : 4,
-							// 		symbolSize    : 10,
-							// 		itemDirection : 'left-to-right',
-							// 		itemTextColor : '#777',
-							// 		effects       : [
-							// 			{
-							// 				on    : 'hover',
-							// 				style : {
-							// 					itemBackground : 'rgba(0, 0, 0, .03)',
-							// 					itemOpacity    : 1,
-							// 				},
-							// 			},
-							// 		],
-							// 	},
-							// ]}
 						/>
-
 					</div>
+
+				) : (
+					<div className={styles.empty_container}>
+						<EmptyState
+							height={140}
+							width={180}
+							emptyText="Performance Stats Not Found"
+							textSize="12px"
+							flexDirection="column"
+						/>
+					</div>
+				)}
+
+				{(!loading && PieData1?.length > 0) ? (
 
 					<div className={styles.pie_chart}>
 						<TeamPieChart data={PieData} />
 					</div>
-					<div className={styles.pie_chart}>
-						<TeamPieChart data={PieData} />
+				) : (
+					<div className={styles.empty_container}>
+						<EmptyState
+							height={140}
+							width={180}
+							emptyText="Pie Stats Not Found"
+							textSize="12px"
+							flexDirection="column"
+						/>
 					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</div>
 	);
 }

@@ -15,7 +15,7 @@ function TeamPieChart({ data }) {
 				margin={{ top: 10, right: 20, bottom: 80, left: 20 }}
 				legends={[
 					{
-						anchor        : 'left',
+						anchor        : 'bottom-left',
 						direction     : 'column',
 						justify       : false,
 						translateX    : 0,
