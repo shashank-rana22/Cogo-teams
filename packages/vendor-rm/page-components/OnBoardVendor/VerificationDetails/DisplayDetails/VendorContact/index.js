@@ -1,8 +1,12 @@
+/* eslint-disable max-len */
 import React from 'react';
+
+import formatArrayValues from '../../../../../commons/utils/formatArrayValues';
+import workScopes from '../../../../../commons/utils/work-scopes.json';
 
 import styles from './styles.module.css';
 
-const filedsToShow = {
+const fieldsToShow = {
 	name          : 'Name of the contact',
 	email         : 'Email ID',
 	mobile_number : 'Mobile Number',
@@ -20,6 +24,12 @@ function VendorContact({
 			return `${mobile_country_code} ${mobile_number}`;
 		}
 
+		if (fieldName === 'poc_role') {
+			const formattedValues = val.map((value) => workScopes.find((work_scope) => work_scope.value === value).label);
+
+			return formatArrayValues(formattedValues, false);
+		}
+
 		return val;
 	};
 
@@ -34,11 +44,11 @@ function VendorContact({
 			<div className={styles.body}>
 				<div className={styles.single_record}>
 					{
-						Object.keys(filedsToShow).map((fieldName) => (
+						Object.keys(fieldsToShow).map((fieldName) => (
 							<div style={{ display: 'flex', flexDirection: 'column', flexBasis: '25%' }}>
 
 								<div className={styles.label}>
-									{filedsToShow[fieldName]}
+									{fieldsToShow[fieldName]}
 								</div>
 
 								<div className={styles.value}>

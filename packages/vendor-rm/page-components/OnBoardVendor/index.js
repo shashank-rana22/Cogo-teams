@@ -42,8 +42,6 @@ function OnBoardVendor() {
 		}
 	}, [vendor_id, getVendor]);
 
-	console.log('vendorInformation:: ', vendorInformation);
-
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
