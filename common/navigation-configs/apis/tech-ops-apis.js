@@ -238,7 +238,7 @@ const apis = [
 		service_name : 'contract',
 	},
 	{
-		api          : 'get_fcl_freight_document_charge',
+		api          : 'get_fcl_freight_rate',
 		access_type  : 'private',
 		feature      : 'tech_ops',
 		service_name : 'fcl_freight_rate',
