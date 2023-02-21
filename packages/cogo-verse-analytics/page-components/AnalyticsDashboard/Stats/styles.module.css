@@ -322,6 +322,15 @@
 .the_chart{
     height: 170px;
 }
+
+.chart_empty{
+	height:100%;
+	padding: 20px 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .legend_container {
 }
 .legend_field {

@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 
 import { PRIMARY_STATS, USER_STATUS, INTENT_LEADERBOARD } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
+import { CHART_ICON } from '../../../constants/monitoring';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 import { strToKMBT } from '../../../utils/strToKMBT';
 
@@ -161,19 +162,34 @@ function Stats(props = {}) {
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>
 					<div className={styles.chart_heading_content}>Responsive Time Analysis</div>
-					<div className={styles.legend_container}>
-						<div className={styles.legend_field}>
-							<div className={styles.legend_icon_1} />
-							<div className={styles.legend_content}>CogoAssist</div>
-						</div>
-						<div className={styles.legend_field}>
-							<div className={styles.legend_icon_2} />
-							<div className={styles.legend_content}>Customer support</div>
-						</div>
-					</div>
+					{
+						!statsLoading && (
+							<div className={styles.legend_container}>
+								<div className={styles.legend_field}>
+									<div className={styles.legend_icon_1} />
+									<div className={styles.legend_content}>CogoAssist</div>
+								</div>
+								<div className={styles.legend_field}>
+									<div className={styles.legend_icon_2} />
+									<div className={styles.legend_content}>Customer support</div>
+								</div>
+							</div>
+						)
+					}
+
 				</div>
 				<div className={styles.the_chart}>
-					<Charts {...props} />
+					{
+						!statsLoading ? <Charts {...props} />
+							: (
+								<div className={styles.chart_empty}>
+									<Placeholder height="100px" className={styles.placeholder_element}>
+										{CHART_ICON}
+									</Placeholder>
+								</div>
+							)
+					}
+
 				</div>
 
 			</div>
