@@ -39,12 +39,5 @@
 .icon_container {
     display: flex;
     align-items: center;
-    color: #F68B21;
-}
-
-.icon {
-    margin-left: 4px;
-    border-radius: 50%;
-    border: 1px solid gray; 
-    color: gray;
+    color: #F68B21 !important;
 }

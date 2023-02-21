@@ -1,6 +1,4 @@
-import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-// import { saveAs } from 'file-saver';
 import React from 'react';
 
 import getShortFileName from '../utils/getShortFileName';
@@ -34,7 +32,7 @@ function VendorDetails({
 					rel="noreferrer"
 				>
 					{shortName}
-					<IcMDownload className={styles.icon} />
+					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg" alt="" />
 				</a>
 			);
 		}

@@ -33,7 +33,7 @@ function ButtonLayout({
 					disabled={loading}
 					onClick={onClickCancelButton}
 				>
-					Cancel
+					Back
 				</Button>
 			)}
 
