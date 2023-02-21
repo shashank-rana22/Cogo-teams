@@ -11,6 +11,7 @@ const getActiveCardDetails = (data = {}) => {
 		mobile_no = '',
 		lead_user_id = '',
 		user_email = '',
+		user_type = '',
 	} = data || {};
 
 	if (channel_type === 'platform_chat') {
@@ -22,6 +23,7 @@ const getActiveCardDetails = (data = {}) => {
 			lead_user_id,
 			channel_type,
 			mobile_no,
+			user_type,
 			email: user_email,
 		};
 	}
@@ -32,8 +34,10 @@ const getActiveCardDetails = (data = {}) => {
 			lead_user_id,
 			user_id: null,
 			channel_type,
+			user_type,
 		};
 	}
+
 	const {
 		business_name,
 		name,
@@ -51,6 +55,7 @@ const getActiveCardDetails = (data = {}) => {
 		lead_user_id,
 		channel_type,
 		email,
+		user_type,
 	};
 };
 export default getActiveCardDetails;
