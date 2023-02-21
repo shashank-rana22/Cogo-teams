@@ -63,6 +63,7 @@ function useOutgoingCall({ number }) {
 						voice_call: {
 							...profileData?.voice_call,
 							showCallModal     : false,
+							minimizeModal     : false,
 							inCall            : false,
 							endCall           : false,
 							call_id           : res.data?.call_record_id,
@@ -79,6 +80,7 @@ function useOutgoingCall({ number }) {
 					voice_call: {
 						...profileData?.voice_call,
 						showCallModal     : false,
+						minimizeModal     : false,
 						inCall            : false,
 						endCall           : false,
 						showFeedbackModal : false,
