@@ -74,7 +74,7 @@ function UserStats() {
 						<div className={styles.month_container}>
 							<div>
 								<SelectController
-									{...monthControls.created_at_month}
+									{...monthControls.month}
 									control={control}
 									formProps={formProps}
 								/>
@@ -83,7 +83,7 @@ function UserStats() {
 						<div className={styles.month_container}>
 							<div>
 								<SelectController
-									{...monthControls.created_at_year}
+									{...monthControls.year}
 									control={control}
 									formProps={formProps}
 								/>
@@ -100,7 +100,6 @@ function UserStats() {
 						</div>
 					</div>
 				</div>
-
 
 				<div className={styles.performance_chart}>
 					<PerformanceChart userId={userId} />
