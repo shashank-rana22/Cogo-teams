@@ -40,8 +40,17 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 				router.push(replaceHref, replaceAs);
 			}
 		} else if (process.env.NODE_ENV === 'production') {
-			// eslint-disable-next-line no-undef
-			window.location.href = `/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`;
+			if (inCall) {
+				// eslint-disable-next-line no-undef
+				window.open(
+					`/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`,
+					'_blank',
+					'noreferrer',
+				);
+			} else {
+				// eslint-disable-next-line no-undef
+				window.location.href = `/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`;
+			}
 		} else if (inCall) {
 			// eslint-disable-next-line no-undef
 			window.open(
