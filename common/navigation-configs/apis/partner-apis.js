@@ -9839,6 +9839,18 @@ const partner = {
 			service_name : 'communication',
 		},
 	],
+	cogo_verse_analytics: [
+		{
+			api          : 'get_cogoverse_dashboard',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+		{
+			api          : 'get_cogoverse_globe_data',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+	],
 	constants: [
 		{
 			api          : 'create_platform_config_constant',
