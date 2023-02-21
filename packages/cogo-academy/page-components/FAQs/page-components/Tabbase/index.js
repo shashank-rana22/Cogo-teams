@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
 import { React, useState } from 'react';
+import AllFAQs from '../AllFAQs';
 
 // eslint-disable-next-line import/no-cycle
 import Dashboard from '../Dashboard';
@@ -18,7 +19,7 @@ function Tabbase() {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="All FAQs" title="All FAQs" badge={5}>
-					<div><Dashboard Tabtitle="All FAQs" /></div>
+					<div><AllFAQs /></div>
 				</TabPanel>
 
 				<TabPanel name="Trending" title="Trending" badge={5}>

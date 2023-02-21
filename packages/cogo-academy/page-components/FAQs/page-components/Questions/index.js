@@ -22,6 +22,7 @@ function Questions() {
 
 			<div onClick={toggle}>
 				<QuestionsCollapse />
+				
 			</div>
 			{open && (
 				<>
