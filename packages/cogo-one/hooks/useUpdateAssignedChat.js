@@ -6,7 +6,13 @@ function useUpdateAssignedChat({ activeMessageCard = {}, onClose = () => {}, for
 		url    : '/update_assigned_chat',
 		method : 'post',
 	}, { manual: true });
-	const { user_id = null, mobile_no = '', lead_user_id = null, organization_id = null } = formattedData || {};
+	const {
+		user_id = null,
+		mobile_no = '',
+		lead_user_id = null,
+		 organization_id = null,
+		sender = null,
+	} = formattedData || {};
 	const { channel_type, id } = activeMessageCard || {};
 
 	const updateChat = async (data) => {
@@ -19,6 +25,7 @@ function useUpdateAssignedChat({ activeMessageCard = {}, onClose = () => {}, for
 					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
 					whatsapp_number_eformat : channel_type === 'whatsapp' ? mobile_no : undefined,
 					organization_id,
+					sender,
 					...data,
 				},
 			});

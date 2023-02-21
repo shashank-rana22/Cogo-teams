@@ -107,8 +107,7 @@ function Header({
 						},
 					})}
 				>
-					Mark as
-					<IcMArrowRotateDown className={styles.down_arrow} />
+					Mark as Closed
 				</Button>
 			</div>
 		</div>

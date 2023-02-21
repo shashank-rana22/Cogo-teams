@@ -8,8 +8,10 @@ function MinimizeModal({
 	dispatch,
 	profileData = {},
 	name = '',
-	code = '',
-	number = '',
+	// code = '',
+	// number = '',
+	mobile_number = '',
+	mobile_country_code = '',
 	status = '',
 	handleEnd = () => { },
 	durationTime = () => { },
@@ -51,7 +53,7 @@ function MinimizeModal({
 					);
 				}}
 			>
-				<div className={styles.min_number}>{name || `${code} ${number}`}</div>
+				<div className={styles.min_number}>{name || `${mobile_country_code} ${mobile_number}`}</div>
 				<div className={styles.status_container}>
 					<div className={styles.min_duration}>{status || 'Connecting...'}</div>
 					{ ' '}

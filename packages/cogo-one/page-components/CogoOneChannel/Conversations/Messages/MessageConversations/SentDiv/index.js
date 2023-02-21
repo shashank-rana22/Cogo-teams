@@ -2,8 +2,8 @@
 import { cl } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
+import MessageBody from '../../../../../../common/MessageBody';
 import { LOGO_URL } from '../../../../../../constants';
-import MessageBody from '../MessageBody';
 
 import styles from './styles.module.css';
 

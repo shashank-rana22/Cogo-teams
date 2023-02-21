@@ -30,6 +30,8 @@
 	:global {
 		.ui_input_container {
 			height: 120px !important;
+			padding: 5px 0 0 10px;
+			border: none !important;
 		}
 
 		.ui_input_container.ui_ps_size_md .ui_input_control {
@@ -133,4 +135,12 @@
 	max-height: 250px;
 	max-height: 400px;
 	overflow-y: scroll;
+}
+
+.loder_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-top: 40px;
 }

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 
+import NumberHide from '../../../../../utils/NumberHide';
+
 import styles from './styles.module.css';
 
 function VoiceCallComponent({
@@ -12,14 +14,22 @@ function VoiceCallComponent({
 	userId,
 	userName,
 	emptyState,
+	activeTab,
 }) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
 	}));
 
-	const code = userMobile?.slice(0, 2);
-	const number = userMobile?.slice(2);
+	let code;
+	let number;
+	if (activeTab === 'message') {
+		code = userMobile?.slice(0, 2);
+		number = userMobile?.slice(2);
+	} else {
+		code = '91';
+		number = userMobile;
+	}
 
 	const handleCall = async () => {
 		if (!isEmpty(userMobile)) {
@@ -61,7 +71,7 @@ function VoiceCallComponent({
 							+
 							{code}
 							{' '}
-							{number}
+							{NumberHide(number)}
 						</div>
 					) : (
 						<div className={styles.show_number}>Number not found</div>
