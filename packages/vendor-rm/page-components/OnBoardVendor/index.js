@@ -33,6 +33,9 @@ function OnBoardVendor() {
 			...res.data,
 			contact_details : res.data.pocs[0],
 			payment_details : res.data.bank_details[0],
+			vendor_services : {
+				office_details: res.data.services,
+			},
 		});
 	}, [vendor_id, trigger]);
 

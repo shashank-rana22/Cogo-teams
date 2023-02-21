@@ -20,7 +20,8 @@ function VendorContact({
 		const val = detail?.[0]?.[fieldName];
 
 		if (fieldName === 'mobile_number') {
-			const { mobile_number = '', mobile_country_code = '' } = detail[0];
+			// eslint-disable-next-line no-unsafe-optional-chaining
+			const { mobile_number = '', mobile_country_code = '' } = detail?.[0];
 			return `${mobile_country_code} ${mobile_number}`;
 		}
 
