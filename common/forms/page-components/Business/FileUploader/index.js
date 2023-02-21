@@ -22,14 +22,14 @@ function FileUploader(props) {
 
 	useEffect(() => {
 		setLoading(true);
-		if (typeof (fileUrls) === 'string' && !multiple && defaultValues !== undefined) {
+		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
 			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
 			setUrlStore([{
 				fileName : defaultValues.split('/').slice(-1).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
-		if (multiple && typeof (fileUrls) !== 'string' && defaultValues !== undefined) {
+		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
 			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
 			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
 
