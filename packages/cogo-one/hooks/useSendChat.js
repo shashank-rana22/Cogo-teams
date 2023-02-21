@@ -72,7 +72,7 @@ const useSendChat = ({
 				if (finalUrl) {
 					message_metadata = {
 						message_type : fileType,
-						caption      : newMessage,
+						text         : newMessage,
 						media_url    : finalUrl,
 					};
 				} else {
@@ -128,7 +128,7 @@ const useSendChat = ({
 				lead_user_id,
 				message_metadata : {
 					message_type : 'text',
-					message      : val,
+					text         : val,
 				},
 			});
 		}, 200);
