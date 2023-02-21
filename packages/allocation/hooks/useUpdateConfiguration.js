@@ -31,32 +31,8 @@ const useUpdateConfiguration = ({
 		}
 	};
 
-	// const onEdit = async (values) => {
-	// 	try {
-	// 		const payload = {
-	// 			...values,
-	// 			id                 : item.id,
-	// 			configuration_type : 'custom',
-	// 			status             : 'draft',
-	// 		};
-
-	// 		await trigger({
-	// 			data: payload,
-	// 		});
-
-	// 		listRefetch();
-
-	// 		setShow(false);
-
-	// 		Toast.success('Configuration updated successfully!');
-	// 	} catch (error) {
-	// 		Toast.error(getApiErrorString(error.response?.data));
-	// 	}
-	// };
-
 	return {
 		onDelete,
-		// onEdit,
 		loadingUpdate: loading,
 	};
 };
