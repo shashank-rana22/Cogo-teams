@@ -34,7 +34,7 @@ const getControls = () => [
 	{
 		name        : 'company_role',
 		label       : 'Role in Company',
-		type        : 'select',
+		type        : 'multiSelect',
 		placeholder : 'Select a role type',
 		style       : { flexBasis: '35%' },
 		rules       : { required: 'Company Type is required' },
