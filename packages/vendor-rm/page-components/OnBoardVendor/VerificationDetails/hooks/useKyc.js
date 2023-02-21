@@ -1,9 +1,18 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 function useKyc({
 	getVendor = () => {},
 }) {
+	const {
+		general: {
+			query,
+		},
+	} = useSelector((state) => state);
+
+	const { vendor_id } = query;
+
 	const [showSuccessScreen, setShowSuccessScreen] = useState(false);
 
 	useEffect(() => {
@@ -12,17 +21,18 @@ function useKyc({
 	}, []);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_vendor_kyc',
+		url    : '/update_vendor',
 		method : 'POST',
 	}, { manual: true });
 
-	const onSubmit = () => {
+	const onSubmit = async () => {
+		await trigger({ data: { id: vendor_id, kyc_status: 'pending' } });
+
 		setShowSuccessScreen(true);
 	};
 
 	return {
 		loading,
-		trigger,
 		onSubmit,
 		showSuccessScreen,
 	};
