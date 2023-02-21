@@ -18,6 +18,7 @@ function QuestionsList(Tab) {
 			</h1>
 			<br />
 			<div className={styles.border}><Questions /></div>
+			<div className={styles.border}><Questions /></div>
 
 		</div>
 	);

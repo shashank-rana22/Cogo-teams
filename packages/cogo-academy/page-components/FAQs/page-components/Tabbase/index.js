@@ -6,7 +6,7 @@ import { React, useState } from 'react';
 import Dashboard from '../Dashboard';
 
 function Tabbase() {
-	const [activeTab, setActiveTab] = useState('Recently Added');
+	const [activeTab, setActiveTab] = useState('All FAQs');
 	return (
 
 		<div style={{ margin: 20 }}>
@@ -17,8 +17,8 @@ function Tabbase() {
 				themeType="primary"
 				onChange={setActiveTab}
 			>
-				<TabPanel name="Recently Added" title="Recently Added" badge={3}>
-					<div><Dashboard Tabtitle="Recently Added" /></div>
+				<TabPanel name="All FAQs" title="All FAQs" badge={5}>
+					<div><Dashboard Tabtitle="All FAQs" /></div>
 				</TabPanel>
 
 				<TabPanel name="Trending" title="Trending" badge={5}>
@@ -28,9 +28,7 @@ function Tabbase() {
 					<div><Dashboard Tabtitle="Most Read" /></div>
 				</TabPanel>
 
-				<TabPanel name="All FAQs" title="All FAQs" badge={5}>
-					<div><Dashboard Tabtitle="All FAQs" /></div>
-				</TabPanel>
+				
 			</Tabs>
 		</div>
 	);

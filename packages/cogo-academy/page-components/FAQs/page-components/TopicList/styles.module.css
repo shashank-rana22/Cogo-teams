@@ -1,14 +1,21 @@
 .gridcontainer {
     display: grid;
     grid-template-columns: 20rem 100rem;
-    grid-template-row: auto;
+    
     
     gap: 3rem;
  
     padding: 10px;
   }
   .subtitle {
-    font-size: 14px;
+    font-size: 8px;
     font-weight: 1000;
+   text-align: left;
   }
-  
+  .tabstyle {
+    gap: 3rem;
+    padding: 10px;
+    box-sizing: border-box;
+margin-bottom: 1rem;
+
+  }

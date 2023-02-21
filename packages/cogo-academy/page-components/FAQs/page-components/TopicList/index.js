@@ -1,4 +1,5 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Card, Tabs, TabPanel } from '@cogoport/components';
+import { IcMProfile } from '@cogoport/icons-react';
 import { React, useState } from 'react';
 
 import QuestionsList from '../QuestionsList';
@@ -6,74 +7,90 @@ import QuestionsList from '../QuestionsList';
 import styles from './styles.module.css';
 
 function TopicList(Tab) {
-	const topics = ['discover_rates', 'shipment', 'checkout', 'discover_rates2',
-		'shipment2', 'checkout2', 'discover_rates3', 'shipment3', 'checkout3'];
-	const data = [
+	const topics = [
 		{
-			question : 'How long will it take to receive B/L after payment?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Discover_rates',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'What are the payment terms?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Shipment',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'How long will it take to receive B/L after payment?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Checkout',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'When will I receive Booking Note?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Spot_search',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'How long will it take to receive B/L after payment?',
-			topics   : ['discover_rates', 'shipment', 'checkout', 'discover_rates',
-				'shipment', 'checkout', 'discover_rates', 'shipment', 'checkout'],
-			tags: ['spot_search', 'trade_party', 'trade_party', 'spot_search', 'trade_party'],
+			Title       : 'Third_party',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'What is the process of shipment booking?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Discover',
+			description : 'How long will it take to receive B/L after payment?',
+		},
+
+		{
+			Title       : 'Prices',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'What are Incoterms?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Location',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'How long will it take to receive B/L after payment?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'Local_rates',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'How long will it take to receive B/L after payment?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'AirLines',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 		{
-			question : 'When will I receive Booking Note?',
-			topics   : ['discover_rates', 'shipment', 'checkout'],
-			tags     : ['spot_search', 'trade_party'],
+			Title       : 'OnBoarding',
+			description : 'How long will it take to receive B/L after payment?',
 		},
 	];
+
 	const [activeTab, setActiveTab] = useState('');
+	let COUNT = 0;
+	const truncate = (input) => (input?.length > 30 ? `${input.substring(0, 25)}...` : input);
 	return (
 
 		<div className={styles.gridcontainer}>
 
-			<div style={{ margin: 20 }}>
+			<div style={{ margin: 5 }}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary-vertical"
 					onChange={setActiveTab}
 				>
 					{topics?.map((singleOption) => (
-						<TabPanel name={singleOption} title={singleOption}>
+
+						<TabPanel
+							name={singleOption.Title}
+							title={(
+								<div>
+									<div className={styles.subtitle}>
+										Topic:
+										{++COUNT}
+
+									</div>
+									<b>
+										{singleOption.Title}
+										:
+										{' '}
+									</b>
+									{' '}
+
+									{/* <p className={styles.subtitle}>{truncate(singleOption.description)}</p> */}
+
+								</div>
+							)}
+						>
 							{/* <div>This is local search</div> */}
 						</TabPanel>
 
