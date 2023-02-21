@@ -222,7 +222,7 @@
   justify-content: center;
   align-items: center;
   transition: 0.3s;
-
+	/* transition: 10s; */
 }
 
 /* Circles ------------------------------------------------------------------- */
@@ -365,37 +365,39 @@
 }
 .time{
   font-size: 18px;
-
   span{
-      font-size: 28px;
-      font-weight: 600;
+	font-size: 28px;
+	font-weight: 600;
 
-	  display: inline-block;
-		position: relative;
+	display: inline-block;
+	  position: relative;
 
-		&::after {
-		content: '';
-		position: absolute;
-		width: 100%;
-		transform: scaleX(0);
-		height: 1px;
-		bottom: 0;
-		left: 0;
-		top: 35px;
-		background-color: #000;
-		transform-origin: bottom right;
-		transition: transform 0.25s ease-out;
-		}
-		&:hover {
-		color: #242424;
-		}
+	  &::after {
+	  content: '';
+	  position: absolute;
+	  width: 100%;
+	  transform: scaleX(0);
+	  height: 1px;
+	  bottom: 0;
+	  left: 0;
+	  top: 35px;
+	  background-color: #000;
+	  transform-origin: bottom right;
+	  transition: transform 0.25s ease-out;
+	  }
+	  &:hover {
+	  color: #242424;
+	  }
 
-		&:hover::after {
-		transform: scaleX(1);
-		transform-origin: bottom left;
-		}
-  }
+	  &:hover::after {
+	  transform: scaleX(1);
+	  transform-origin: bottom left;
+	  }
 }
+
+  
+}
+
 
 .arrow_img{
   display: flex;
