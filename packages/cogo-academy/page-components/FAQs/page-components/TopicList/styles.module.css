@@ -4,7 +4,11 @@
     grid-template-row: auto;
     
     gap: 3rem;
-    background-color:;
+ 
     padding: 10px;
+  }
+  .subtitle {
+    font-size: 14px;
+    font-weight: 1000;
   }
   
