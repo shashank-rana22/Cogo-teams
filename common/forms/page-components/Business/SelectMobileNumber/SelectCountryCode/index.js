@@ -1,8 +1,7 @@
-/* eslint-disable import/no-relative-packages */
 import { Select } from '@cogoport/components';
+// eslint-disable-next-line import/no-unresolved
+import countries from 'cogo-admin/.data-store/constants/countries.json';
 import React from 'react';
-
-import countries from '../../../../../../.data-store/constants/countries.json';
 
 function SelectCountryCode(props) {
 	const { value } = props;
