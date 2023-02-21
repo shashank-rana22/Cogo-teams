@@ -59,17 +59,15 @@ function BookingContent({ last_shipment_data = {}, trade_type = '', shipping_lin
 								,
 								{' '}
 								{!isEmpty(origin_port?.port_code) && (
-									<span>
+									<>
 										(
 										{origin_port?.port_code}
 										)
-									</span>
+									</>
 								)}
 								,
 								{' '}
-								<div className={styles.port_name}>
-									{startCase(origin_port?.name)}
-								</div>
+								{startCase(origin_port?.name)}
 							</div>
 						</Tooltip>
 
@@ -90,17 +88,17 @@ function BookingContent({ last_shipment_data = {}, trade_type = '', shipping_lin
 								,
 								{' '}
 								{!isEmpty(destination_port?.port_code) && (
-									<span>
+									<>
 										(
 										{destination_port?.port_code}
 										)
-									</span>
+									</>
 								)}
 								,
 								{' '}
-								<div className={styles.port_name}>
-									{startCase(destination_port?.name)}
-								</div>
+
+								{startCase(destination_port?.name)}
+
 							</div>
 						</Tooltip>
 

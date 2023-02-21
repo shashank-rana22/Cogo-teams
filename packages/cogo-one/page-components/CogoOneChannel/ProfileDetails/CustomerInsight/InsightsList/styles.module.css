@@ -88,7 +88,7 @@
     box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
     border-radius: 12px;
     padding: 15px 10px 10px 18px;
-    height: 200px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -100,30 +100,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .origin {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
+	font-weight: 500;
     font-size: 12px;
     color: #221f20;
-    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+	text-overflow: ellipsis;
     max-width: 180px;
-}
-
-.destination {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 12px;
-    color: #221f20;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 250px;
+ 
 }
 
 .name {
@@ -161,23 +149,7 @@
     align-items: center;
 }
 
-.port_name {
-    font-weight: 500;
-    font-size: 12px;
-    color: #4f4f4f;
-    margin-left: 4px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 200px;
-}
 
-.origin_port_name {
-    font-weight: 500;
-    font-size: 12px;
-    color: #4f4f4f;
-    margin-left: 4px;
-}
 .bookings_count {
     display: flex;
     align-items: center;

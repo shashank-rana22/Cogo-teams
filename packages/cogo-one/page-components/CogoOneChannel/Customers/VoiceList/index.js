@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMCall } from '@cogoport/icons-react';
-import { startCase, format, differenceInDays, isEmpty } from '@cogoport/utils';
+import { startCase, format, isEmpty } from '@cogoport/utils';
 
 import { VOICE_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
@@ -108,10 +108,14 @@ function VoiceList({
 
 								<div className={styles.user_activity}>
 									<div className={styles.activity_duration}>
-										{dateTimeConverter(
-											Date.now() - Number(lastActive),
-											Number(lastActive),
-										)?.renderTime}
+										{!isEmpty(start_time_of_call) && (
+											<div>
+												{dateTimeConverter(
+													Date.now() - Number(lastActive),
+													Number(lastActive),
+												)?.renderTime}
+											</div>
+								        )}
 
 									</div>
 									<div className={styles.activity_duration}>

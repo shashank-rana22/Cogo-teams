@@ -96,6 +96,7 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 												{(list || []).map((item) => (
 													<div className={styles.div_top}>
 														<div className={styles.origin_container}>
+
 															<Tooltip
 																content={toolTip(item)}
 																placement="bottom"
@@ -103,11 +104,11 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 																<div className={styles.origin}>
 																	{startCase(item?.origin_country_name)}
 																	,
-																	<div className={styles.origin_port_name}>
-																		{startCase(item?.origin_port_name)}
-																	</div>
+																	{startCase(item?.origin_port_name)}
+
 																</div>
 															</Tooltip>
+
 															<Tooltip
 																content="Shipments Count"
 																placement="bottom"
@@ -122,12 +123,10 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 															content={toolTip(item)}
 															placement="bottom"
 														>
-															<div className={styles.destination}>
+															<div className={styles.origin}>
 																{startCase(item?.destination_country_name)}
 																,
-																<div className={styles.port_name}>
-																	{startCase(item?.destination_port_name)}
-																</div>
+																{startCase(item?.destination_port_name)}
 															</div>
 														</Tooltip>
 													</div>

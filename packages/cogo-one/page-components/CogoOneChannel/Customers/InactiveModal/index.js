@@ -1,7 +1,7 @@
-import { Modal, Button, Select, Datepicker, Timepicker } from '@cogoport/components';
+import { Modal, Button, Select, Datepicker } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, addHours, format } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { OFFLINE_STATUS_OPTIONS } from '../../../../constants';
 
@@ -15,27 +15,31 @@ function InactiveModal({
 }) {
 	const [offlineStatus, setOfflineStatus] = useState('');
 	const [date, setDate] = useState('');
-	const [ofTime, setOfTime] = useState();
-	console.log('ofTime:', ofTime);
-	console.log(
-		'hello',
-		format(date, 'yyyy-MM-dd'),
-		format(ofTime, 'HH:mm:ss'),
-	);
-	const customEndTime = format(date, 'yyyy-MM-dd').concat(format(ofTime, 'HH:mm:ss'));
+	// const [ofTime, setOfTime] = useState(new Date().getTime());
+	// console.log('ofTime:', ofTime);
+	// const customEndTime = 'fghjk';
+	// const customEndTime = date.setHours(
+	// 	// ofTime.getHours(),
+	// 	// ofTime.getMinutes(),
+	// 	// ofTime.getSeconds(),
+	// );
+
 	const resetReasons = () => {
 		setOfflineStatus('');
 		setDate('');
-		setOfTime('');
 	};
 
 	const handleClose = () => {
 		setOpenModal(false);
 	};
 
+	useEffect(() => {
+		setDate('');
+	}, [offlineStatus]);
+
 	const emptyStateCheck = isEmpty(offlineStatus);
 	const customEmptyCheck = date === '';
-	// const customEmptyCheck = date === '' || isEmpty(time);
+	// const customEmptyCheck = date === '' && ofTime === null;
 
 	const checks = offlineStatus !== 'custom' ? emptyStateCheck : customEmptyCheck;
 
@@ -70,9 +74,9 @@ function InactiveModal({
 			} = getWeekDates();
 			validity_start = startDate;
 			validity_end = endDate;
-		} else if (offlineStatus === 'custom') {
+		} else {
 			validity_start = new Date();
-			validity_end = customEndTime;
+			validity_end = date;
 		}
 
 		const data = {
@@ -81,7 +85,11 @@ function InactiveModal({
 				validity_start,
 				'yyyy-MM-dd HH:mm:ss',
 			),
-			validity_end: offlineStatus === 'custom' ? customEndTime : format(
+			// validity_end: offlineStatus === 'custom' ? customEndTime : format(
+			// 	validity_end,
+			// 	'yyyy-MM-dd HH:mm:ss',
+			// ),
+			validity_end: format(
 				validity_end,
 				'yyyy-MM-dd HH:mm:ss',
 			),
@@ -114,14 +122,20 @@ function InactiveModal({
 							placeholder="Select date"
 							dateFormat="MM/dd/yyyy HH:mm"
 							name="date"
+							showTimeSelect
 							onChange={setDate}
 							value={date}
 						/>
 
-						<div className={styles.time_title}>
+						{/* <div className={styles.time_title}>
 							Time
 						</div>
-						<Timepicker onChange={setOfTime} value={ofTime} />
+						<Timepicker
+							onChange={(val) => {
+						    console.log('val:', val);
+							}}
+							value={ofTime}
+						/> */}
 					</>
 				)}
 
