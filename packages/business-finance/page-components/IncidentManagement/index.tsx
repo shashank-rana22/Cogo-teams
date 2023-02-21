@@ -28,9 +28,9 @@ const tabsKeyComponentMapping = {
 	rejected  : TabComponent,
 };
 
-function IncidentController() {
+function IncidentManagement() {
 	const { query, push } = useRouter();
-	const [activeTab, setActiveTab] = useState<string>(() => query.view || tabs[0].key);
+	const [activeTab, setActiveTab] = useState<string>(query.view || tabs[0].key);
 	const {
 		incidentData,
 		setFilters,
@@ -76,7 +76,7 @@ function IncidentController() {
 		setActiveTab(view);
 		push(
 			'/business-finance/incident-management/[activeTab]',
-			`/business-finance/incident-management${view}` as never as null,
+			`/business-finance/incident-management/${view}`,
 		);
 	};
 
@@ -126,4 +126,4 @@ function IncidentController() {
 		</div>
 	);
 }
-export default IncidentController;
+export default IncidentManagement;
