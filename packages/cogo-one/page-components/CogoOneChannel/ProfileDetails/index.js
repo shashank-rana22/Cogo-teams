@@ -17,7 +17,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 	const FormattedMessageData = getActiveCardDetails(activeMessageCard) || {};
 	const orgId = activeTab === 'message' ? FormattedMessageData?.organization_id : activeVoiceCard?.organization_id;
 
-	const { data } = useListOrganizations({ orgId });
+	const { openNewTab, loading, ORG_PAGE_URL = '' } = useListOrganizations({ orgId });
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>
@@ -29,6 +29,9 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 						activeTab={activeTab}
 						activeVoiceCard={activeVoiceCard}
 						FormattedMessageData={FormattedMessageData}
+						loading={loading}
+						openNewTab={openNewTab}
+						ORG_PAGE_URL={ORG_PAGE_URL}
 					/>
 				)}
 			</div>
@@ -39,6 +42,8 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 				activeSelect={activeSelect}
 				activeTab={activeTab}
 				setActiveSelect={setActiveSelect}
+				openNewTab={openNewTab}
+				loading={loading}
 			/>
 		</div>
 	);

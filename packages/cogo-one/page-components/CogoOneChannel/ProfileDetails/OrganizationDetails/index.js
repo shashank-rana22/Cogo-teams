@@ -10,7 +10,7 @@ import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMessageData = {} }) {
+function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMessageData = {}, ORG_PAGE_URL = '' }) {
 	const { organization_id:messageOrgId = '' } = FormattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
@@ -94,7 +94,12 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 							</Pill>
 						</div>
 					</div>
-					<div className={styles.name}>
+					<div
+						role="presentation"
+						className={styles.name}
+						// eslint-disable-next-line no-undef
+						onClick={() => window.open(ORG_PAGE_URL, '_blank')}
+					>
 						ID:
 						{' '}
 						{serial_id}
