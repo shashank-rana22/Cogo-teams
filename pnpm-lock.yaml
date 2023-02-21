@@ -270,6 +270,7 @@ importers:
 
   packages/cogo-one:
     specifiers:
+      '@cogoport/charts': ^1.0.1
       '@cogoport/components': ^1.0.309
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.57
@@ -280,6 +281,7 @@ importers:
       firebase: ^9.17.1
       react: 18.2.0
     dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
       '@cogoport/components': 1.0.311_tjjfbzrrgezq2qg342kvjgfsxe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.57_react@18.2.0
