@@ -5,7 +5,7 @@ import UserTableData from '../../userTableData';
 import styles from './styles.module.css';
 
 function UserFeedbackData({ userId = '' }) {
-	const { params, setParams, feedbackData, loading, setPage } = useListUserFeedbacks({
+	const { params, feedbackData, loading, setPage } = useListUserFeedbacks({
 		userId,
 	});
 

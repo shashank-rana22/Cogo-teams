@@ -1,13 +1,11 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { Select, Placeholder } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import useGetFeedbackPerformanceStats from '../../hooks/useGetFeedbackPerformanceStats';
 import TeamPieChart from '../TeamPieChart';
 
 import EmptyState from './EmptyState';
-import { getMonthControls } from './getMonthControls';
 import styles from './styles.module.css';
 
 const PieData = [
@@ -37,13 +35,9 @@ const PieData1 = ['-'];
 const lineData1 = ['-'];
 
 function PerformanceChart({ user_id = '' }) {
-	const { placeholder, options } = getMonthControls;
-
 	const {
 		performanceStatsData = {},
 		loading,
-		performanceFilter,
-		setPerformanceFilter = () => { },
 	} = useGetFeedbackPerformanceStats({ user_id });
 
 	Object.keys(performanceStatsData).map((key) => {

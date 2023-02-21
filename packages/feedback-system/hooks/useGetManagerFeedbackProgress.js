@@ -1,25 +1,14 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const useGetManagerFeedbackProgress = () => {
 	const [params, setParams] = useState({ filters: {}, page: 1, page_limit: 20 });
 
-	const [{ data = {}, loading = false }, trigger] = useRequest({
+	const [{ data = {}, loading = false }] = useRequest({
 		url    : 'list-managers',
 		method : 'get',
+		params,
 	}, { manual: false });
-
-	const getManagers = () => {
-		try {
-			trigger({ params });
-		} catch (e) {
-			console.log(e.toString());
-		}
-	};
-
-	useEffect(() => {
-		getManagers();
-	}, [params]);
 
 	return {
 		data,

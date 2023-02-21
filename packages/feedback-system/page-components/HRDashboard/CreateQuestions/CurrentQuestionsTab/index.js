@@ -140,6 +140,7 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 		</div>
 	);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => deleteQuestion(changeQuestions.delete?.feedback_question_id), [changeQuestions.delete]);
 
 	useEffect(() => {
@@ -147,6 +148,7 @@ function CurrentQuestionsTab({ showQuestion = false }) {
 			setPage(1);
 		}
 		setRefetchList(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [refetchList]);
 
 	return (

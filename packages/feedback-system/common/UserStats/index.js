@@ -48,6 +48,7 @@ function UserStats() {
 			created_at_year  : yearFilter || undefined,
 			rating           : ratingFilter || undefined,
 		},
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	})), [monthFilter, yearFilter, ratingFilter]);
 
 	return (

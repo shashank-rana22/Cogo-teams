@@ -34,6 +34,7 @@ function FeedbackManagement() {
 
 	useEffect(() => {
 		debounceQuery(searchValue);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
 
 	const handleClick = () => {

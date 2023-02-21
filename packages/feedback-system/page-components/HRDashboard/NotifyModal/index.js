@@ -4,16 +4,15 @@ import styles from './styles.module.css';
 import useNotifyManagers from './useNotifyManagers';
 
 function NotifyModal({ setNotifyModal = () => {} }) {
-	const { getNotifiableManagersData = () => {}, notify = () => {} } = useNotifyManagers;
+	const { notify = () => {} } = useNotifyManagers;
 
-	// const { data: notifyData = {}, loading = false } = getNotifiableManagersData();
-
-	const manager_cnt = 20;
 	const notifyManagers = () => {
 		try {
-			notify();
+			const { data = {} } = notify();
+			const { manager_count = '20' } = data;
+
 			setNotifyModal(false);
-			Toast.success(`${manager_cnt} Managers Notified...`);
+			Toast.success(`${manager_count} Managers Notified...`);
 		} catch (e) {
 			Toast.error(e.toString());
 		}

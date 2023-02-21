@@ -1,18 +1,18 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty, addDays, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FeedBackForm from './FeedBackForm';
 import styles from './styles.module.css';
 
-const getSaturday = (date) => {
-	date.setDate(1);
-	while (date.getDay() !== 6) {
-		date.setDate(date.getDate() + 1);
-	}
-	return date;
-};
+// const getSaturday = (date) => {
+// 	date.setDate(1);
+// 	while (date.getDay() !== 6) {
+// 		date.setDate(date.getDate() + 1);
+// 	}
+// 	return date;
+// };
 
 function FeedbackFormModal({
 	action = '',
@@ -34,11 +34,11 @@ function FeedbackFormModal({
 		getTeamFeedbackList();
 	};
 
-	const currentDate = new Date();
+	// const currentDate = new Date();
 
-	const firstSaturday = getSaturday(currentDate);
+	// const firstSaturday = getSaturday(currentDate);
 
-	const timeAfterTwoDays = addDays(firstSaturday, 2);
+	// const timeAfterTwoDays = addDays(firstSaturday, 2);
 
 	// if (!(currentDate > firstSaturday && currentDate < timeAfterTwoDays)) {
 	// 	return (

@@ -6,27 +6,14 @@ const useNotifyManagers = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const getNotifiableManagersAPI = useRequest({
-		url    : 'list_feedback_managers',
-		method : 'get',
-	}, { manual: true });
-
 	const notify = async () => {
-		const [trigger, { loading = false }] = notifyAPI;
+		const [trigger, { loading = false, data = {} }] = notifyAPI;
 		await trigger({ data: { notify_managers: true } });
 
-		return { loading };
+		return { loading, data };
 	};
 
-	const getNotifiableManagersData = async () => {
-		const [trigger, { loading = false, data = {} }] = getNotifiableManagersAPI;
-
-		await trigger({ params: { get_notification_data: true } });
-
-		return { data, loading };
-	};
-
-	return { getNotifiableManagersData, notify };
+	return { notify };
 };
 
 export default useNotifyManagers;

@@ -7,8 +7,8 @@ import DepartmentSelect from '../../../../common/DepartmentSelect';
 import EmptyState from '../../../../common/EmptyState';
 import Questions from '../../../../common/QuestionsItem';
 import RoleSelect from '../../../../common/RoleSelect';
-import useUpdatefeedbackQuestion from '../../../../hooks/useBulkUpdateFeedbackQuestions';
 import useListFeedbackQuestions from '../../../../hooks/useListFeedbackQuestions';
+import useUpdatefeedbackQuestion from '../../../../hooks/useUpdateFeedbackQuestions';
 
 import styles from './styles.module.css';
 
@@ -56,6 +56,7 @@ function PreviousQuestionsTab({ setActiveTab = () => {}, showQuestion = false })
 		});
 	}, [IsCheckedAll]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	const showLoading = () => (

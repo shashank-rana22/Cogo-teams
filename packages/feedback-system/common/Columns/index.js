@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 
 import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackModal from './FeedbackPopOver';
-import FeedbackPopOver from './FeedbackPopOver';
 import styles from './styles.module.css';
 
 const redirectPathSourceMapping = {

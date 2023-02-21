@@ -1,4 +1,4 @@
-import { Placeholder, Loader, Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
+import { Placeholder, Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
 import { Controller, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -51,10 +51,13 @@ function AddQuestions({
 				checked: questionActionList.checked || checkedQuestions,
 			});
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => setParams({ ...params, filters: { ...(params.filters || {}), tags: tags || undefined } }), [tags]);
 
 	useEffect(() => {
@@ -62,6 +65,7 @@ function AddQuestions({
 			refetchQuestions({ params });
 		}
 		setRefetchList(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [refetchList]);
 
 	if (loading) {

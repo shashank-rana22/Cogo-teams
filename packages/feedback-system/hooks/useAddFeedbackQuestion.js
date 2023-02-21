@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 import { useGetCreateQuestionsControls } from '../utils/createQuestionControls';
 
-const useAddFeedbackQuestion = ({}) => {
+const useAddFeedbackQuestion = () => {
 	const formProps = useForm();
 
 	const [{ loading: apiLoading = false }, trigger] = useRequest({
@@ -38,7 +38,7 @@ const useAddFeedbackQuestion = ({}) => {
 		} catch (e) {
 			Toast.error(e?.data?.question);
 		}
-		return null;
+		return '';
 	};
 
 	return {

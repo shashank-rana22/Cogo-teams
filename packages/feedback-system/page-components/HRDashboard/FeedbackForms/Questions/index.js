@@ -1,9 +1,6 @@
-import { Toast, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import CreateForm from '../../../../common/CreateForm';
 import QuestionsItem from '../../../../common/QuestionsItem';
-import useSaveFeedbackQuestions from '../../../../hooks/useSaveFeedbackQuestions';
 
 import styles from './styles.module.css';
 

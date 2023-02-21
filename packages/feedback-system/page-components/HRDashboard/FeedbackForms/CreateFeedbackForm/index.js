@@ -26,12 +26,12 @@ function CreateFeedbackForm({
 			stage     : ['cancel', 'publish'].includes(newStage) ? undefined : newStage,
 		});
 	};
-	console.log('questionActionList', questionActionList.checked);
 
 	useEffect(() => {
 		const { checkList = [], stage = '' } = fetchLocalCheckList(department, designation);
 		setQuestionActionList({ ...questionActionList, checked: checkList });
 		setFormStage(stage || 'add_questions');
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [designation]);
 
 	const renderFormStage = () => {

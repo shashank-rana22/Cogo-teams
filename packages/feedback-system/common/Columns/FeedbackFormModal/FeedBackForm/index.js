@@ -18,7 +18,6 @@ import styles from './styles.module.css';
 function FeedBackForm({
 	action = '',
 	item,
-	showForm = 'false',
 	setShowForm = () => {},
 	rating,
 	comment,
