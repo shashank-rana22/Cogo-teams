@@ -27,7 +27,7 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						animation="shift-away"
 						content={startCase(description)}
 					>
-						<div className={styles.question}>{startCase(description)}</div>
+						<div className={styles.remark}>{startCase(description)}</div>
 					</Tooltip>
 				</div>
 			</div>

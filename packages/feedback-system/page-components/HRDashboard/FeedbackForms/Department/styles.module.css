@@ -1,0 +1,50 @@
+.accordion {
+    padding: 8px;
+    margin: 8px 8px 0;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.department {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .label {
+        font-weight: bold;
+        margin: 0px;
+    }
+}
+
+.roles {
+    margin: 0px 4px;
+
+    .role:not(:last-child){
+        border-bottom: 1px solid #efefef;
+    }
+
+    :hover {
+        background-color: #f8f2e7;
+    }
+}
+
+.role {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 0px;
+
+    :global {
+        .ui_pill_container {
+            /* background-color: #efefef; */
+        }
+
+        .ui_pill_text {
+            /* background-color: #efefef; */
+        }
+    }
+} 
+
+.selected_designation {
+    background-color: antiquewhite;
+}

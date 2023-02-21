@@ -19,8 +19,8 @@ const getMonthControls = (selectedYear) => {
 	const month = currentDate.getMonth();
 
 	const control = {
-		created_at_month: {
-			name           : 'created_at_month',
+		month: {
+			name           : 'month',
 			label          : 'Select Month',
 			type           : 'select',
 			defaultOptions : true,
@@ -29,8 +29,8 @@ const getMonthControls = (selectedYear) => {
 			options        : monthOptions,
 			span           : 6,
 		},
-		created_at_year: {
-			name           : 'created_at_year',
+		year: {
+			name           : 'year',
 			label          : 'Select Year',
 			type           : 'select',
 			defaultOptions : true,

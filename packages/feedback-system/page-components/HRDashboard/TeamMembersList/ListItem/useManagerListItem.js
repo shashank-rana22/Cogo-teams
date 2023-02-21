@@ -11,9 +11,9 @@ const useManagerListItem = ({ item }) => {
 		url    : 'list-user-feedbacks',
 		params : {
 			filters: {
-				manager_id : item.manager_id || '',
-				month      : months[d.getMonth()],
-				year       : d.getFullYear(),
+				ManagerID : item.manager_id || '',
+				month     : months[d.getMonth()],
+				year      : d.getFullYear(),
 			},
 		},
 	}, { manual: false });

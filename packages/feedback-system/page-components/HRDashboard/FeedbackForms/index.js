@@ -1,12 +1,12 @@
-import { Accordion, Button, Toast, Pill } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import fetchLocalCheckList from '../../../utils/fetchLocalCheckList';
 
 import CreateFeedbackForm from './CreateFeedbackForm';
+import Department from './Department';
 import Forms from './Forms';
 import styles from './styles.module.css';
 import useListDepartments from './useListDepartments';
@@ -108,56 +108,13 @@ function FeedbackForms() {
 			<div className={styles.form_container}>
 				<div className={styles.department_status} style={{ flex: '0.3' }}>
 					{(departments || []).map((dept) => (
-						<Accordion
-							key={dept}
-							type="form"
-							title={(
-								<div
-									className={styles.department}
-									role="button"
-									tabIndex={0}
-									onClick={() => setOpenAccordion(
-										{ ...openAccordion, [dept?.department]: !openAccordion[dept?.department] },
-									)}
-								>
-									<p className={styles.label}>{startCase(dept?.department)}</p>
-									<Pill color="red">Pending</Pill>
-								</div>
-							)}
-							className={`
-								${styles.accordion} 
-								${openAccordion[dept] ? styles.open_accordion : ''}`}
-						>
-							{openAccordion[dept?.department]
-						&& 							(
-							<div className={styles.roles}>
-								{(dept?.designations || []).map((role) => (
-									<div
-										className={`${styles.role} 
-										${role?.designation === designation ? styles.selected_designation : ''}`}
-										role="button"
-										tabIndex={0}
-										onClick={() => setFormsParams({
-											department  : dept?.department,
-											designation : role?.designation,
-										})}
-									>
-										<p className={styles.label}>
-											{startCase(role?.designation)}
-										</p>
-										<Pill
-											color={role?.status === 'active' ? 'green' : 'red'}
-										>
-											{startCase(role?.status)}
-
-										</Pill>
-									</div>
-								))}
-							</div>
-						)}
-
-						</Accordion>
-
+						<Department
+							department={dept}
+							setFormsParams={setFormsParams}
+							designation={designation}
+							openAccordion={openAccordion}
+							setOpenAccordion={setOpenAccordion}
+						/>
 					))}
 				</div>
 

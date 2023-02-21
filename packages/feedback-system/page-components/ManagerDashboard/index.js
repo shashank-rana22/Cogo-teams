@@ -1,7 +1,6 @@
 import { Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
-import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
 import useGetMonthStats from '../../hooks/useGetMonthStats';
 import getMonthControls from '../../utils/monthControls';
@@ -16,9 +15,6 @@ function ManagerDashboard() {
 
 	const { list = [], pagination_data = {} } = data;
 	const { total_count = '' } = pagination_data;
-
-	const columnsToShow = ['name', 'designation', 'rating', 'feedback', 'month'];
-	const feedbackColumns = useGetColumns({ source: 'manager_dashboard', columnsToShow });
 
 	const monthControls = getMonthControls();
 
@@ -84,7 +80,7 @@ function ManagerDashboard() {
 				<div className={styles.table_section}>
 					<TeamMembersList
 						list={list}
-						loading={false}
+						loading={loading}
 						page_limit={params.page_limit}
 						total_count={total_count}
 						pagination={params.page}

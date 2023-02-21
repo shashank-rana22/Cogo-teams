@@ -3,6 +3,7 @@ import { SelectController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import { deptControls as departmentControls } from '../../utils/departmentControls';
+import useGetControls from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
 
 import styles from './styles.module.css';
@@ -19,7 +20,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 	const roleControls = params.filters?.department ? departmentControls.find((control) => control.name
 	=== DEPARTMENT_MAPPING[params.filters?.department]) : {};
 
-	const managerControls = getControls().find((control) => control.name === 'manager_id');
+	const managerControls = useGetControls().find((control) => control.name === 'manager_id');
 	const monthControls = getMonthControls(params.filters.created_at_year);
 
 	const { watch, control: managerControl = {} } = useForm();
@@ -34,7 +35,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 			...params,
 			filters: {
 				...(params.filters || {}),
-				manager_id: manager || undefined,
+				ManagerID: manager || undefined,
 			},
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps

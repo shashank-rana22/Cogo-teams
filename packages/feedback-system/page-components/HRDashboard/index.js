@@ -22,7 +22,7 @@ function HRDashboard() {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [notifyModal, setNotifyModal] = useState(false);
 
-	const { params, setParams, feedbackData, loading, setPage } = useListManagers({});
+	const { params, setParams, feedbackData, loading = false, setPage } = useListManagers({});
 
 	const { list = [], pagination_data = {} } = feedbackData || {};
 
@@ -99,7 +99,7 @@ function HRDashboard() {
 				<div className={styles.table_section}>
 					<TeamMembersList
 						list={list}
-						loading={false}
+						loading={loading}
 						page_limit={params.page_limit}
 						total_count={total_count}
 						pagination={params.page}

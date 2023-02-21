@@ -1,8 +1,7 @@
 import { Toast, Button, Upload } from '@cogoport/components';
-import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
-import { useRequest, request, publicRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { IcMUpload } from '@cogoport/icons-react';
+import { request, publicRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 

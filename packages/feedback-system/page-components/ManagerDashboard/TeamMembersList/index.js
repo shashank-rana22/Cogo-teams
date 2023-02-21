@@ -1,5 +1,4 @@
-import { Button, Accordion, Pagination } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { Accordion, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';

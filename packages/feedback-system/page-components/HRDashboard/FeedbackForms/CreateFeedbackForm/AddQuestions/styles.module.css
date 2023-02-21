@@ -15,7 +15,7 @@
 }
 
 .body {
-    padding: 0px 16px;
+    padding: 16px 16px 0;
 }
 
 .footer {
@@ -30,7 +30,6 @@
 }
 
 .info_text {
-    margin-top: 16px;
 }
 
 .filters_pagination {
@@ -79,4 +78,9 @@
 
     border-top: 1px solid #6fa5ab;
     background-color: #ffffff;
+}
+
+
+.loading {
+   
 }

@@ -22,7 +22,7 @@ function FeedbackFormModal({
 	const {
 		user_id:userId = '',
 		performance_item: performanceItem = {}, feedback = '',
-		feedback_data = {},
+		feedback_id = '',
 	} = item;
 
 	const [addFeedback, setAddFeedback] = useState(false);
@@ -68,10 +68,10 @@ function FeedbackFormModal({
 					<Button
 						size="sm"
 						themeType="accent"
-						disabled={!isEmpty(feedback_data)}
+						disabled={!isEmpty(feedback_id)}
 						onClick={() => 	setAddFeedback(true)}
 					>
-						{isEmpty(feedback_data) ? (
+						{isEmpty(feedback_id) ? (
 							<>
 								<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
 								ADD

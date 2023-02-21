@@ -44,7 +44,7 @@ function TeamMembersList({
 			flex  : 1.9,
 		},
 		{
-			key   : 'latest_kpi',
+			key   : 'current_kpi',
 			label : 'Latest KPI',
 			flex  : 1.7,
 		},

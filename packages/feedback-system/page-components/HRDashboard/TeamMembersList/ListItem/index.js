@@ -40,13 +40,13 @@ function ListItem({ item }) {
 	const data = (list || []).map((listItem) => {
 		const filteredData = {
 			user_name: (
-				<div>{getByKey(listItem, 'user_name', '___')}</div>
+				<div>{getByKey(listItem, 'name', '___')}</div>
 			),
 			employee_id: (
-				<div>{getByKey(listItem, 'employee_id', '___')}</div>
+				<div>{getByKey(listItem, 'cogo_id', '___')}</div>
 			),
-			latest_kpi: (
-				<div>{getByKey(listItem, 'latest_kpi', '___')}</div>
+			rating: (
+				<div>{getByKey(listItem, 'rating', '___')}</div>
 			),
 			score: (
 				<div>{getByKey(listItem, 'score', '___')}</div>

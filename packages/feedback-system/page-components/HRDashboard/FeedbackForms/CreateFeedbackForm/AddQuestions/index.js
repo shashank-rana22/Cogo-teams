@@ -1,4 +1,4 @@
-import { Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
+import { Placeholder, Loader, Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
 import { Controller, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -23,7 +23,10 @@ function AddQuestions({
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const { data = {}, params, setParams, getQuestionList, setPage } = useListFeedbackQuestions({
+	const {
+		data = {}, loading = false, params, setParams, trigger: refetchQuestions = () => {},
+		setPage,
+	} = useListFeedbackQuestions({
 		searchValue: query,
 		formId,
 	});
@@ -56,10 +59,48 @@ function AddQuestions({
 
 	useEffect(() => {
 		if (refetchList) {
-			getQuestionList();
+			refetchQuestions({ params });
 		}
 		setRefetchList(false);
 	}, [refetchList]);
+
+	if (loading) {
+		return (
+			<div className={styles.add_question_container}>
+				<div className={styles.header}>
+					<Placeholder height="24px" width="160px" />
+					<Placeholder height="24px" width="80px" />
+				</div>
+				<div className={styles.body}>
+					<Placeholder height="18px" width="200px" />
+					<div className={styles.filters_pagination}>
+						<div className={styles.filters}>
+							<Placeholder height="24px" width="120px" />
+							<Placeholder height="24px" width="200px" margin="0 0 0 8px" />
+						</div>
+						<div className={styles.pagination_container}>
+							<Placeholder height="24px" width="60px" />
+						</div>
+					</div>
+
+					<div className={styles.questions}>
+						{Array(6).fill('').map((index) => (
+							<Placeholder
+								height="80px"
+								margin="0 0 8px 0"
+								key={index}
+							/>
+						))}
+					</div>
+				</div>
+				<div className={styles.footer}>
+
+					<Placeholder height="24px" width="60px" />
+					<Placeholder height="24px" width="80px" margin="0 0 0 8px" />
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<>

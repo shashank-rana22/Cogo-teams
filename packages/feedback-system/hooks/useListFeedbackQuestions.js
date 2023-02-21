@@ -6,7 +6,6 @@ const useListFeedbackQuestions = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-
 		FormID  : formId || undefined,
 		filters : {
 		},
@@ -17,15 +16,8 @@ const useListFeedbackQuestions = ({
 	const [{ data = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list-questions',
-	}, { manual: true });
-
-	const getQuestionList = async () => {
-		try {
-			await trigger({ params });
-		} catch (e) {
-			console.log(e.toString());
-		}
-	};
+		params,
+	}, { manual: false });
 
 	const setPage = (p) => { setParams({ ...params, page: p }); };
 
@@ -33,12 +25,10 @@ const useListFeedbackQuestions = ({
 		setParams({ ...params, filters: { ...(params.filters || {}), q: searchValue || undefined }, page: 1 });
 	}, [searchValue]);
 
-	useEffect(() => getQuestionList, [params]);
-
 	return {
 		loading,
+		trigger,
 		data,
-		getQuestionList,
 		params,
 		setParams,
 		setPage,

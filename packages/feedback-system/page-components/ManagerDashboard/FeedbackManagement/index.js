@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/userTableData';
-import useListTeamMembers from '../../../hooks/useListTeamMembers';
+import useListReportees from '../../../hooks/useListReportees';
 import getFeedBackControls from '../../../utils/getFeedbackControls';
 
 import styles from './styles.module.css';
@@ -28,9 +28,8 @@ function FeedbackManagement() {
 		setParams,
 		feedbackData,
 		loading = false,
-		getUserFeedbackList = () => {},
 		setPage,
-	} = useListTeamMembers({
+	} = useListReportees({
 		userId,
 		searchValue: query,
 	});
@@ -47,13 +46,13 @@ function FeedbackManagement() {
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'month', 'add-kpi'];
 
 	const feedbackManagementColumns = useGetColumns({
-		getUserFeedbackList,
 		source: 'manager_feedback',
 		columnsToShow,
 	});
 
 	useEffect(() => {
 		debounceQuery(searchValue);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
 
 	return (
