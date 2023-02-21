@@ -54,6 +54,8 @@ function ButtonLayout({
 						size="md"
 						themeType="accent"
 						role="presentation"
+						onClick={onSubmit}
+						disabled={loading}
 					>
 						Submit
 					</Button>
