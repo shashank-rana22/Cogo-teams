@@ -35,7 +35,7 @@ function ListVendors() {
 
 	const { list = [] } = data;
 
-	if (data.total_count === 0) {
+	if (data.total_count === 0 && Object.keys(params?.filters).length === 1) {
 		return <EmptyPage />;
 	}
 
@@ -82,7 +82,7 @@ function ListVendors() {
 					value={params.filters?.q}
 					onChange={(value) => setParams((pv) => ({
 						...pv,
-						filters: { ...pv.filters, q: value },
+						filters: { ...pv.filters, q: value || undefined },
 					}))}
 					placeholder="Start type content name to search..."
 				/>
