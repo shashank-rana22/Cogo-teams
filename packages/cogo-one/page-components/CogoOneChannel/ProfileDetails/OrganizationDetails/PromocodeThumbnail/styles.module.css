@@ -8,13 +8,6 @@
 	width: 170px;
 	padding-bottom: 10px;
 	margin: 10px 15px 0 0;
-
-	/* background:
-		linear-gradient(
-			90deg,
-			rgb(204 197 249 / 80%) -4.34%,
-			rgb(195 216 254 / 60%) 105.7%
-		); */
 	border-radius: 4px;
 	box-shadow: 0 1px 6px rgb(179 213 251 / 45%);
 }
@@ -47,6 +40,7 @@
 .tooltip_div {
 	display: flex;
 	justify-content: center;
+
 }
 
 .terms_conditions {

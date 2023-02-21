@@ -57,6 +57,7 @@ function PromocodeThumbnail({ list = [] }) {
 						</div>
 						<div className={styles.tooltip_div}>
 							<Tooltip
+								interactive
 								content={(
 									<TermsAndConditions
 										termsAndConditions={terms_and_conditions}
