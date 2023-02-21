@@ -2,7 +2,7 @@ import { dynamic } from '@cogoport/next';
 import { startOfMonth } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useGetUsersStats from '../../hooks/useGetUsersStats';
+import useGetCogoverseDashboard from '../../hooks/useGetCogoverseDashboard';
 
 import Stats from './Stats';
 import styles from './styles.module.css';
@@ -10,23 +10,30 @@ import styles from './styles.module.css';
 const MapView = dynamic(() => import('./MapView'), { ssr: false });
 
 function AnalyticsDashboard() {
-	// const parentDiv = document?.getElementsByClassName('styles_children_container');
-	// console.log('parentDiv', parentDiv);
-
 	const [country, setCountry] = useState({});
 	const [date, setDate] = useState({
 		startDate : startOfMonth(new Date()),
-		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+		endDate   : new Date(),
 	});
-	const { userStats = {} } = useGetUsersStats();
+
+	const { list = {}, statsLoading = false } = useGetCogoverseDashboard({ country });
+	const statsData = list?.fullResponse?.data || {};
+
+	const props = {
+		statsData,
+		statsLoading,
+		setCountry,
+		date,
+		setDate,
+	};
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.stats_view_container}>
-				<Stats country={country} />
+				<Stats props={props} />
 			</div>
 			<div className={styles.map_view_container}>
-				<MapView setCountry={setCountry} country={country} date={date} setDate={setDate} />
+				<MapView props={props} />
 			</div>
 
 		</div>

@@ -16,7 +16,6 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, merge, startCase, format } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
-import DateFilter from '../../../common/DateFilter';
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
@@ -28,23 +27,30 @@ import styles from './styles.module.css';
 
 const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
-function MapView({
-	setCountry = () => {},
-	country = {},
-	date = {},
-	setDate = {},
-
-}) {
+function MapView({ props = {} }) {
 	const globeGL = useRef();
 
+	const {
+		statsData = {},
+		statsLoading = false,
+		setCountry = () => {},
+		country = {},
+		date = {},
+		setDate = {},
+	} = props || {};
+
 	const [circleTab, setCircleTab] = useState('new_users');
-	const [range, setRange] = useState('this_month');
-	const [selectDuration, setSelectDuration] = useState('this_month');
+	// const [range, setRange] = useState('this_month');
+	// const [selectDuration, setSelectDuration] = useState('this_month');
+	const { conversation_data = {} } = statsData || {};
 
 	const { options:locationOptions, loading:locationsLoading = false, onSearch = () => {} } = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
 
-	const { pointsList = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
-	const coordinates = pointsList?.fullResponse?.data?.user_location || [];
+	const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
+
+	const { user_location = [], stats:globeStats = {} } = globeData?.fullResponse?.data || {};
+
+	const coordinates = user_location || [];
 
 	let markerData = {};
 	markerData = coordinates.map((item) => ({
@@ -104,37 +110,6 @@ function MapView({
 						maxDate={maxDate}
 					/>
 
-					{/* <DateFilter
-						applyFilters={handleApplyFilters}
-						setOpen={setOpenCalendar}
-						open={openCalendar}
-						type="date-range"
-						date={date}
-						setDate={setDate}
-						range={range}
-						setRange={setRange}
-						setSelectDuration={setSelectDuration}
-					>
-						<div
-							className={styles.date_filter_wrap}
-							id="date_filter_wrap"
-							onClick={() => setOpenCalendar(!openCalendar)}
-						>
-							<div className={styles.date_container}>
-								<Pill />
-								<div className={styles.vertical_line} />
-								<div>
-									{
-								`${startDate} - ${endDate}`
-							}
-
-								</div>
-								<IcMArrowRotateDown />
-							</div>
-						</div>
-
-					</DateFilter> */}
-
 				</div>
 			</div>
 			{/* Circle Content ------------------------------------------------------- */}
@@ -149,10 +124,10 @@ function MapView({
 
 									<TheGlobe
 										country={country}
-										pointsList={pointsList}
 										globeGL={globeGL}
 										markerData={markerData}
 										globeLoading={globeLoading}
+
 									/>
 
 								) : (
@@ -174,7 +149,7 @@ function MapView({
 					{
 					circleStats.map(
 						(stat) => {
-							const { type, value, label } = stat;
+							const { type, valueKey, label } = stat;
 
 							return (
 								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -185,7 +160,7 @@ function MapView({
 
 								>
 									<div className={styles.stat_value}>
-										{ !globeLoading ? strToKMBT(value) : 	<Placeholder className={styles.placeholder_element} height="18px" width="30px" margin="0px 0px 5px 0px" />}
+										{ !globeLoading ? strToKMBT(globeStats[valueKey] || 0) || 0 : 	<Placeholder className={styles.placeholder_element} height="18px" width="30px" margin="0px 0px 5px 0px" />}
 
 									</div>
 									<div className={styles.stat_label}>
@@ -229,11 +204,11 @@ function MapView({
 					<div className={styles.left_stats}>
 						{
 							CONVERSATIONS.map((stat) => {
-								const { value, title, icon_bg } = stat;
+								const { valueKey, title, icon_bg } = stat;
 								return (
 									<div className={styles.the_stat}>
 										<div className={styles.stat_circle} style={{ background: icon_bg }} />
-										<div className={styles.com_stat_value}>{strToKMBT(value)}</div>
+										<div className={styles.com_stat_value}>{strToKMBT(conversation_data[valueKey] || '0')}</div>
 										<div className={styles.stat_description}>{title}</div>
 									</div>
 								);
@@ -243,7 +218,7 @@ function MapView({
 					</div>
 
 					<div className={styles.pie_chart}>
-						<CommunicationPieChart />
+						<CommunicationPieChart conversation_data={conversation_data} />
 					</div>
 
 				</div>

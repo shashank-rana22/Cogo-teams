@@ -1,17 +1,24 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { INTENT_LEADERBOARD, PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
-import useGetCogoverseDashboard from '../../../hooks/useGetCogoverseDashboard';
+import { PRIMARY_STATS, USER_STATUS } from '../../../configurations/primary-stats';
+import useGetUsersStats from '../../../hooks/useGetUsersStats';
 import { strToKMBT } from '../../../utils/strToKMBT';
 
 import Charts from './LineChart';
 import styles from './styles.module.css';
 
-function Stats({ country = '' }) {
-	const { list = {}, loading = false } = useGetCogoverseDashboard({ country });
+function Stats({ props = {} }) {
+	const { userStats = {} } = useGetUsersStats();
+	console.log('userStats', userStats);
+
+	const { statsData = {}, statsLoading = false } = props || {};
+
+	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
+	const leaderboardKeys = Object.keys(intentLeaderboardStats);
 
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
@@ -37,21 +44,25 @@ function Stats({ country = '' }) {
 
 				<div className={styles.primary_left}>
 					{PRIMARY_STATS.map((stat) => {
-						const { value, title, users, icon, icon_bg, description } = stat;
+						const {
+							parentKey, valueKey, descKey, title, icon, icon_bg, description,
+						} = stat;
+
+						const statValue = statsData[parentKey] || {};
 
 						return (
 							<div className={styles.left_stat_content}>
 								<div className={styles.primary_left_stat}>
 
 									<div className={styles.primary_stat_title}>
-										<div className={styles.primary_stat_value}>{strToKMBT(value)}</div>
+										<div className={styles.primary_stat_value}>{strToKMBT(statValue[valueKey] || '0')}</div>
 										{' '}
 										{title}
 									</div>
 									<div className={styles.primary_stat_description}>
 										From
 										{' '}
-										<span>{users}</span>
+										<span>{statValue[descKey] || '0'}</span>
 										{' '}
 										{description}
 									</div>
@@ -144,23 +155,20 @@ function Stats({ country = '' }) {
 				{/* INTENT LEADERBOARD */}
 				<div className={styles.leaderboard_stats}>
 					<div className={styles.leaderboard_header}>Intent Leaderboard</div>
-					<div className={INTENT_LEADERBOARD.length > 3 ? cl`${styles.leaderboard_content} ${styles.inner_shadow}` : styles.leaderboard_content}>
-						{INTENT_LEADERBOARD.map((stat) => {
-							const { value, title, description } = stat;
 
-							return (
-								<div className={styles.leaderboard_values}>
-									<div className={styles.leaderboard_title}>
-										{title}
-									</div>
-									<div>
-										<span className={styles.leaderboard_description_number}>{getAmount(value)}</span>
-										{' '}
-										{description}
-									</div>
+					<div className={leaderboardKeys.length > 3 ? cl`${styles.leaderboard_content} ${styles.inner_shadow}` : styles.leaderboard_content}>
+						{leaderboardKeys.map((key) => (
+							<div className={styles.leaderboard_values}>
+								<div className={styles.leaderboard_title}>
+									{startCase(key)}
 								</div>
-							);
-						})}
+								<div>
+									<span className={styles.leaderboard_description_number}>{getAmount(intentLeaderboardStats[key])}</span>
+									{' '}
+									users
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 

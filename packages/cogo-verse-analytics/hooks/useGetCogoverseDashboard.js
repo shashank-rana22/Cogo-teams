@@ -32,7 +32,7 @@ const useGetCogoverseDashboard = ({ country = {} }) => {
 	}, []);
 
 	return {
-		loading,
+		statsLoading: loading,
 		list,
 		error,
 		refetch,

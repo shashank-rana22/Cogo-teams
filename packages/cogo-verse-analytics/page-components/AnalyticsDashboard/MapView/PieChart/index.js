@@ -1,13 +1,16 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import React from 'react';
 
-import { PieChartData } from '../../../../configurations/total-communications-data';
+import PieChartData from '../../../../configurations/total-communications-data';
 
-function CommunicationPieChart() {
+function CommunicationPieChart({ conversation_data = {} }) {
 	const colors = ['#BDBDBD', '#ABCD62', '#DDEBC0'];
+
+	const chartData = PieChartData({ conversation_data });
+
 	return (
 		<ResponsivePie
-			data={PieChartData || []}
+			data={chartData || []}
 			margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 			valueFormat=" >-"
 			innerRadius={0.7}

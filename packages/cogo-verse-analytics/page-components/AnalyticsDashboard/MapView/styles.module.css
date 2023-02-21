@@ -155,7 +155,7 @@
 
 
  .placeholder_element {
-	border-radius: 6px;
+	border-radius: 4px;
 
  }
 
@@ -242,44 +242,32 @@
     }
     
  }
- .recurring_users{
-    width:100px;
-    height:100px;
-    margin-top: 95px;
-    margin-left:-95px;
-    .stat_value {
-      font-size: 18px;
-    }
-    .stat_label{
-      font-size: 12px;
-    }
 
- }
  .transacting_users{
-    width:90px;
-    height:90px;
-    margin-top: 185px;
-    margin-left:-95px;
-    .stat_value {
-      font-size: 16px;
-    }
-    .stat_label{
-      font-size: 11px;
-    }
+  width:100px;
+  height:100px;
+  margin-top: 95px;
+  margin-left:-95px;
+  .stat_value {
+    font-size: 18px;
+  }
+  .stat_label{
+    font-size: 12px;
+  }
 
  }
 
  .churned_users{
-    width:75px;
-    height:75px;
-    margin-top: 265px;
-    margin-left:-75px;
-    .stat_value {
-      font-size: 14px;
-    }
-    .stat_label{
-      font-size: 10px;
-    }
+  width:90px;
+  height:90px;
+  margin-top: 185px;
+  margin-left:-95px;
+  .stat_value {
+    font-size: 16px;
+  }
+  .stat_label{
+    font-size: 11px;
+  }
  }
 
  .new_registration{

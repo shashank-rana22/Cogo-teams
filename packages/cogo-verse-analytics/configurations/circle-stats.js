@@ -1,10 +1,9 @@
 export const circleStats = [
-	{ type: 'new_users', value: '240', label: 'New Users' },
-	{ type: 'recurring_users', value: '400', label: 'Recurring Users' },
-	{ type: 'transacting_users', value: '2000', label: 'Transacting Users' },
-	{ type: 'churned_users', value: '20', label: 'Churned Users' },
-	{ type: 'bookings', value: '400', label: 'Bookings' },
-	{ type: 'rates', value: '2000', label: 'Rates' },
-	{ type: 'new_registration', value: '20', label: 'New-Reg' },
+	{ type: 'new_users', valueKey: 'new_users', label: 'New Users' },
+	{ type: 'transacting_users', valueKey: 'transacting_users', label: 'Transacting Users' },
+	{ type: 'churned_users', valueKey: 'churned_users', label: 'Churned Users' },
+	{ type: 'bookings', valueKey: 'booking', label: 'Bookings' },
+	{ type: 'rates', valueKey: 'rate_enquiries', label: 'Rates' },
+	{ type: 'new_registration', valueKey: 'new_registration', label: 'New-Reg' },
 
 ];

@@ -13,6 +13,7 @@ function TheGLobe(
 		globeGL = {},
 		markerData = [],
 		globeLoading = false,
+
 	},
 ) {
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
@@ -34,9 +35,9 @@ function TheGLobe(
 	}
 
 	// experiments
-	if (!isEmpty(globeGL?.current?.scene()?.children[2].visible
-	 	&& !isEmpty(globeGL?.current?.scene()?.children[1].intensity)
-		 && !isEmpty(globeGL?.current?.scene()?.children[2].intensity))) {
+	if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
+	 	&& !isEmpty(globeGL?.current?.scene()?.children[1]?.intensity)
+		 && !isEmpty(globeGL?.current?.scene()?.children[2]?.intensity))) {
 		globeGL.current.scene().children[2].visible = true;
 		globeGL.current.scene().children[1].intensity = 1.25;
 		globeGL.current.scene().children[2].intensity = 0.25;

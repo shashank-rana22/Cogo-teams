@@ -2,40 +2,40 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useGetCogoverseGlobeData = ({ country = {}, circleTab = '', date = {} }) => {
-	const [pointsList, setPointsList] = useState({
+	console.log('country', country);
+	const [globeData, setGlobeData] = useState({
 		fullResponse: {},
 	});
-	const [{ error, loading }, refetch] = useRequest({
+	const [{ error, loading }, trigger, refetch] = useRequest({
 		url    : '/get_cogoverse_globe_data',
 		method : 'GET',
 		params : {
-			mobile_country_code : country?.mobile_country_code || '',
-			start_date          : date?.startDate || '',
-			end_date            : date?.endDate || '',
+			mobile_country_code : country?.mobile_country_code || undefined,
+			start_date          : date?.startDate || undefined,
+			end_date            : date?.endDate || undefined,
 			event               : circleTab || '',
 		},
 	}, { manual: true });
 
 	useEffect(() => {
-		refetch()
+		trigger()
 			.then((res) => {
-				setPointsList(() => ({
+				setGlobeData(() => ({
 					fullResponse: res.data,
 				}));
 			})
 			.catch(() => {
-				setPointsList(() => ({
-
+				setGlobeData(() => ({
 					fullResponse : {},
 					reverted     : 0,
 				}));
 			});
 		// eslint-disable-next-line
-	}, [date,circleTab,country]);
+	}, [circleTab,date]);
 
 	return {
 		globeLoading  : loading,
-		pointsList,
+		globeData,
 		error,
 		refetchPoints : refetch,
 	};

@@ -12,7 +12,6 @@ import { firebaseConfig } from '../configurations/firebase-configs';
 
 function useGetUsersStats() {
 	const [userStats, setUserStats] = useState({ ai_chats: 0, kam_chats: 0 });
-	console.log('qwertyu', userStats);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);

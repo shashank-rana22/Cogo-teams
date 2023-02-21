@@ -5,26 +5,29 @@ import IcMUsersManageAccounts from '@cogoport/icons-react/dist/es/IcMUsersManage
 
 export const PRIMARY_STATS = [
 	{
-		value       : 10,
+		valueKey    : 'kyc_verified',
+		descKey     : 'new_users',
 		title       : 'KYC Verified',
+		parentKey   : 'new_users_and_kyc_verified',
 		description : 'new users',
-		users       : 200,
 		icon_bg     : '#f3fafa',
 		icon        : <IcMUsersManageAccounts fill="#acdadf" width="25px" height="25px" />,
 	},
 	{
-		value       : 10,
+		valueKey    : 'bookings',
+		descKey     : 'rate_enquiries',
 		title       : 'Bookings',
+		parentKey   : 'booking_and_rate_enquiries',
 		description : 'rate inquiries',
-		users       : 200,
 		icon_bg     : '#fdfbf6',
 		icon        : <IcMBookingManagement fill="#edd789" width="25px" height="25px" />,
 	},
 	{
-		value       : 354376,
+		valueKey    : 'total_revenue',
+		descKey     : 'invoice_payments',
 		title       : 'Revenue',
+		parentKey   : 'invoice_payment_and_revenue',
 		description : 'invoice payments',
-		users       : 200,
 		icon_bg     : '#f7faef',
 		icon        : <IcMMoney fill="#ABCD62" width="25px" height="25px" />,
 	},
@@ -32,42 +35,44 @@ export const PRIMARY_STATS = [
 
 export const CONVERSATIONS = [
 	{
-		value   : 240456,
-		title   : 'Total Communications',
-		icon_bg : '#BDBDBD',
+		valueKey : 'total_conversation',
+		value    : 240456,
+		title    : 'Total Communications',
+		icon_bg  : '#BDBDBD',
 	},
 	{
-		value   : 2202345,
-		title   : 'System Initiated Conversations',
-		icon_bg : '#ABCD62',
+		valueKey : 'system_initiated_conversation',
+		value    : 2202345,
+		title    : 'System Initiated Conversations',
+		icon_bg  : '#ABCD62',
 	},
 	{
-		value   : 203456,
-		title   : 'Customer Initiated Conversations',
-		icon_bg : '#DDEBC0',
+		valueKey : 'customer_initiated_conversation',
+		value    : 203456,
+		title    : 'Customer Initiated Conversations',
+		icon_bg  : '#DDEBC0',
 	}];
 
 export const INTENT_LEADERBOARD = [
 	{
+		valueKey    : 'normal_conversation',
 		value       : 240000,
 		title       : 'Normal conversation',
 		description : 'users',
 	},
 	{
+		valueKey    : 'trade_enquiry',
 		value       : 40000,
 		title       : 'Trade enquiry',
 		description : 'users',
 	},
 	{
+		valueKey    : 'shipment_booking',
 		value       : 4000,
 		title       : 'Shipment booking',
 		description : 'users',
 	},
-	{
-		value       : 4000,
-		title       : 'Shipment booking',
-		description : 'users',
-	},
+
 ];
 
 export const USER_STATUS = [
