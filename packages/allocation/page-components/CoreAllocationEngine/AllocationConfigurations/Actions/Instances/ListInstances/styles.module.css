@@ -1,3 +1,7 @@
+.container {
+	overflow: scroll;
+}
+
 .pagination_container {
 	display: flex;
 	justify-content: flex-end;

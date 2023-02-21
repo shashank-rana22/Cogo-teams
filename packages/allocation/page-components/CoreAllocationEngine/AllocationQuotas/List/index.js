@@ -35,13 +35,15 @@ function List(props) {
 	));
 
 	return (
-		<div className={styles.list_container}>
-			<Table
-				className={styles.table}
-				columns={filteredColumns}
-				data={list || []}
-				loading={loading}
-			/>
+		<section>
+			<div className={styles.table_container}>
+				<Table
+					className={styles.table}
+					columns={filteredColumns}
+					data={list || []}
+					loading={loading}
+				/>
+			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination
@@ -52,8 +54,7 @@ function List(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
-		</div>
-
+		</section>
 	);
 }
 
