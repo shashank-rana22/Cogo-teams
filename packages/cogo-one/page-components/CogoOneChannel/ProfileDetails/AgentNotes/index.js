@@ -3,6 +3,7 @@ import { IcMTick, IcMDelete } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import useCreateOmniNote from '../../../../hooks/useCreateOmniNote';
 import useGetListNotes from '../../../../hooks/useGetListNotes';
 import useUpdateNote from '../../../../hooks/useUpdateNote';
@@ -53,6 +54,10 @@ function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = 
 	const handleDelete = async (val) => {
 		await updateNote({ val, type: 'delete' });
 	};
+
+	if (isEmpty(list)) {
+		return <EmptyState type="notes" />;
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Notes</div>
