@@ -37,13 +37,16 @@ const useListOrganizations = ({ orgId = null }) => {
 
 	let ORG_PAGE_URL = '';
 	const openNewTab = (activeTab) => {
+		const { crm = undefined, prm = undefined } = activeTab || {};
 		if (isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}`;
+			// eslint-disable-next-line no-undef
+			window.open(`${ORG_PAGE_URL}?omniChannelActiveTab=${prm}`, '_blank');
 		} else {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORG_ID}`;
+			// eslint-disable-next-line no-undef
+			window.open(`${ORG_PAGE_URL}?omniChannelActiveTab=${crm}`, '_blank');
 		}
-		// eslint-disable-next-line no-undef
-		window.open(`${ORG_PAGE_URL}?omniChannelActiveTab=${activeTab}`, '_blank');
 	};
 
 	return {
