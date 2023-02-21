@@ -7,3 +7,6 @@ declare module '@cogoport/layout';
 declare module '@cogoport/components';
 declare module '@cogoport/next';
 declare module '@cogoport/business-finance/page-components/TranslateAr';
+declare module '@cogoport/business-finance/page-components/COEFinance';
+declare module '@cogoport/business-finance/page-components/COEFinance/Costsheet';
+declare module '@cogoport/business-finance/page-components/COEFinance/All_Invoices/ViewInvoices';
