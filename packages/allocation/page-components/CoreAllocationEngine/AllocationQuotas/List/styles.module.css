@@ -17,3 +17,25 @@
 	background: #fff;
 	border-radius: 10px;
 }
+
+.table {
+	padding: 0;
+
+	:global {
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				color: black;
+			}
+		}
+
+		.ui_table_body_container {
+			.ui_table_body_row {
+				.ui_table_body_cell {
+					padding-block: 20px;
+					color: #221f20;
+					background-color: white;
+				}
+			}
+		}
+	}
+}

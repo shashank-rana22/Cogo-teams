@@ -12,7 +12,7 @@ const useCreateRelations = ({ setShowCreateRelationModal = () => {}, fetchList =
 		url     : '/relation',
 		method  : 'POST',
 		authkey : 'post_allocation_relation',
-	});
+	}, { manual: true });
 
 	const formProps = useForm({
 		defaultValues: {

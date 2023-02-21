@@ -57,7 +57,7 @@ function QuotaModal(props) {
 	const [radioValue, setRadioValue] = useState('role');
 	const [roleTypeId, setRoleTypeId] = useState('');
 
-	const { quota_attributes, action = '' } = quotaItem;
+	const { quota_attributes, type = '' } = quotaItem;
 
 	const isUpdatable = !isEmpty(quota_attributes);
 
@@ -83,7 +83,7 @@ function QuotaModal(props) {
 		refetch,
 	});
 
-	if (action === 'delete') {
+	if (type === 'delete') {
 		return (
 			<>
 				<Modal.Header title="Delete Quota" />
