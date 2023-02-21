@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';

@@ -28,6 +28,7 @@ const useOrganizationRMMapping = ({ personDetails = {}, detailsLoading }) => {
 				user               : res?.data?.user,
 			});
 		} catch (err) {
+			// eslint-disable-next-line no-console
 			console.log('err', err);
 		}
 	};

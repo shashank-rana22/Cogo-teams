@@ -22,6 +22,7 @@ const useScopes = ({ showAccessUrl, scopes }) => {
 		try {
 			await triggerGetMail();
 		} catch (err) {
+			// eslint-disable-next-line no-console
 			console.log('err ::', err);
 		}
 	};

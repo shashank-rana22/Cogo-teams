@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
