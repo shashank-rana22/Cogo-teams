@@ -7,8 +7,8 @@ function NotifyModal({ setNotifyModal = () => {} }) {
 	const { getNotifiableManagersData = () => {}, notify = () => {} } = useNotifyManagers;
 
 	// const { data: notifyData = {}, loading = false } = getNotifiableManagersData();
-	
-	var manager_cnt = 20;
+
+	const manager_cnt = 20;
 	const notifyManagers = () => {
 		try {
 			notify();

@@ -4,6 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import FeedbackFormModal from './FeedbackFormModal';
+import FeedbackModal from './FeedbackPopOver';
 import FeedbackPopOver from './FeedbackPopOver';
 import styles from './styles.module.css';
 
@@ -114,9 +115,9 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		key : 'score',
 	},
 	{
-		Header   : <div className={styles.head}>Feedback</div>,
+		Header   : <div className={styles.head} />,
 		accessor : (item) => (
-			<FeedbackPopOver feedback={item?.feedback} />
+			<FeedbackModal feedback={item?.feedback} />
 		),
 		id  : 'feedback',
 		key : 'feedback',

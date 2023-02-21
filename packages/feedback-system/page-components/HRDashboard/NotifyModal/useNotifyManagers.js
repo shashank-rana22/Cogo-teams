@@ -22,7 +22,6 @@ const useNotifyManagers = () => {
 		const [trigger, { loading = false, data = {} }] = getNotifiableManagersAPI;
 
 		await trigger({ params: { get_notification_data: true } });
-		console.log('here', data);
 
 		return { data, loading };
 	};

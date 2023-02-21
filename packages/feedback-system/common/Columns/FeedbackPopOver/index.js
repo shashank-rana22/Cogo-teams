@@ -7,10 +7,6 @@ import styles from './styles.module.css';
 function FeedbackModal({ feedback = '' }) {
 	const [show, setShow] = useState(false);
 
-	const onOuterClick = () => {
-		setShow(false);
-	};
-
 	return (
 		<>
 			<div className={styles.feedback_button}>
@@ -20,26 +16,23 @@ function FeedbackModal({ feedback = '' }) {
 					disabled={isEmpty(feedback)}
 					onClick={() => setShow(true)}
 				>
-					Feedback
+					View Feedback
 				</Button>
 			</div>
 
-			<Modal
-				show={show}
-				onClose={() => setShow(false)}
-				size="sm"
-				onOuterClick={onOuterClick}
-			>
-				<div className={styles.feedback}>
-					<Modal.Header title="Feedback" />
-
-					<Modal.Body>
-						<div className={styles.text_content}>
-							<div className={styles.title}>{feedback}</div>
-						</div>
-					</Modal.Body>
+			{show && (
+				<div className={styles.details_modal}>
+					<Modal size="md" show={show} onClose={() => setShow(false)} onClickOutside={() => setShow(false)}>
+						<Modal.Header title="View Feedback" />
+						<Modal.Body>
+							<div style={{ paddingBottom: '14px', color: '#4f4f4f' }}>Feedback</div>
+							<div>
+								{feedback}
+							</div>
+						</Modal.Body>
+					</Modal>
 				</div>
-			</Modal>
+			)}
 		</>
 	);
 }

@@ -21,7 +21,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 	=== DEPARTMENT_MAPPING[params.filters?.department]) : {};
 
 	const managerControls = useGetControls().find((control) => control.name === 'manager_id');
-	const monthControls = getMonthControls(params.filters.created_at_year);
+	const monthControls = getMonthControls(params.filters.year);
 
 	const { watch, control: managerControl = {} } = useForm();
 	const manager = watch('manager_id');

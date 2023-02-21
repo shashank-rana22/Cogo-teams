@@ -1,6 +1,5 @@
 import { Table, Input, Button, Modal } from '@cogoport/components';
 import { IcMSearchlight, IcMInformation } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { getByKey, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -24,8 +23,6 @@ function ListItem({ item }) {
 	const toggleModal = () => {
 		setopenDetails(!openDetails);
 	};
-
-	const Router = useRouter();
 
 	const { data: { list = [] } = {}, loading } = useManagerListItem({ item });
 
@@ -53,7 +50,7 @@ function ListItem({ item }) {
 				<Button
 					themeType="link"
 					className={styles.details}
-					onClick={(e) => {
+					onClick={() => {
 						toggleModal();
 					}}
 				>

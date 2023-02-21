@@ -26,7 +26,7 @@ function FeedbackManagement() {
 		setParams, setPage,
 	} = useListUserFeedbacks({ userId, searchValue: query });
 
-	const columnsToShow = ['name', 'cogo_id', 'designation', 'manager', 'score', 'month', 'user_details'];
+	const columnsToShow = ['name', 'cogo_id', 'designation', 'manager', 'score', 'month', 'feedback'];
 	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });
 
 	const { list = [], pagination_data = {} } = feedbackData;

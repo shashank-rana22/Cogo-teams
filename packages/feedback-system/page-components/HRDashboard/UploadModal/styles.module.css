@@ -7,10 +7,28 @@
 .upload_info {
 	width: 100%;
 	margin-top: 8px;
+}
 
-	.label {
-		margin-bottom: 8px;
+.upload_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 8px 0px;
+}
+
+.info_tool {
+	display: flex;
+	align-items: center;
+
+	:hover {
+		color: #849e4c;
 	}
+	
+}
+
+.tooltip_text {
+	text-align: justify;
+	/* text-justify: inter-word; */
 }
 
 .submit {

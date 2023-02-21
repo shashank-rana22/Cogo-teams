@@ -1,5 +1,5 @@
-import { Toast, Button, Upload } from '@cogoport/components';
-import { IcMUpload } from '@cogoport/icons-react';
+import { Tooltip, Toast, Button, Upload } from '@cogoport/components';
+import { IcMInfo, IcMUpload } from '@cogoport/icons-react';
 import { request, publicRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -74,10 +74,25 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 		}
 	};
 
+	const getToolTip = (text) => <div className={styles.tooltip_text}>{text}</div>;
+
 	return (
 		<div className={styles.upload_container}>
 			<div className={styles.upload_info}>
-				<div className={styles.label}>Upload Onboarding CSV</div>
+				<div className={styles.upload_header}>
+					<div className={styles.label}>Upload Onboarding CSV</div>
+					<Tooltip
+						theme="light"
+						placement="top-end"
+						animation="shift-away"
+						content={getToolTip('Get Sample Onboarding csv')}
+					>
+						<div className={styles.info_tool} role="button" onClick={() => {}} tabIndex={0}>
+							<IcMInfo width={20} height={20} />
+						</div>
+					</Tooltip>
+				</div>
+
 				<Upload
 					value={files.onboardingCSV}
 					onChange={(values) => handleChange(values, 'onboardingCSV')}
@@ -89,7 +104,20 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 				/>
 			</div>
 			<div className={styles.upload_info}>
-				<div className={styles.label}>Upload Normalization CSV</div>
+				<div className={styles.upload_header}>
+					<div className={styles.label}>Upload Normalization CSV</div>
+					<Tooltip
+						theme="light"
+						placement="top-end"
+						animation="shift-away"
+						content={getToolTip('Get Sample Normalization csv')}
+					>
+						<div className={styles.info_tool} role="button" onClick={() => {}} tabIndex={0}>
+							<IcMInfo width={20} height={20} />
+						</div>
+					</Tooltip>
+				</div>
+
 				<Upload
 					value={files.normalizationCSV}
 					onChange={(values) => handleChange(values, 'normalizationCSV')}

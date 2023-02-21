@@ -63,7 +63,7 @@ const getMonthControls = (selectedYear) => {
 	};
 
 	if (selectedYear === year) {
-		control.created_at_month.options = monthOptions.filter((newMonth) => newMonth.value <= month);
+		control.month.options = monthOptions.filter((newMonth) => newMonth.value <= month);
 	}
 
 	return control;
