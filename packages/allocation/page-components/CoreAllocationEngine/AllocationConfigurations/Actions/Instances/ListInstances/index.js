@@ -5,6 +5,7 @@ import {
 import { useRouter } from '@cogoport/next';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
+import INSTANCES_STATUS_COLOR_MAPPING from '../../../../../../constants/instances-status-color-mapping';
 import useListAllocationInstances from '../../../../../../hooks/useListAllocationInstances';
 
 import styles from './styles.module.css';
@@ -16,13 +17,6 @@ const LIST_COLUMNS_MAPPING = {
 	execution_at : 'EXECUTION AT',
 	status       : 'STATUS',
 	action       : 'ACTION',
-};
-
-const STATUS_COLOR_MAPPING = {
-	pending_approval : 'orange',
-	active           : 'grey',
-	stopped          : 'red',
-	completed        : 'green',
 };
 
 function ListInstances({ item }) {
@@ -91,7 +85,7 @@ function ListInstances({ item }) {
 					items={[
 						{
 							label : startCase(getByKey(listItem, 'status', '___')),
-							color : STATUS_COLOR_MAPPING[getByKey(listItem, 'status', '___')],
+							color : INSTANCES_STATUS_COLOR_MAPPING[getByKey(listItem, 'status', '___')],
 							key   : getByKey(listItem, 'status', '___'),
 						},
 					]}
