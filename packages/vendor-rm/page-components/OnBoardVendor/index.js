@@ -1,4 +1,4 @@
-import { Button, Stepper } from '@cogoport/components';
+import { Stepper } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -49,10 +49,8 @@ function OnBoardVendor() {
 
 	return (
 		<div>
-			<div className={styles.back_container}>
-				<Button size="sm" themeType="secondary" onClick={onBack}>
-					<IcMArrowBack fill="#221F20" style={{ marginRight: 4 }} />
-				</Button>
+			<div role="presentation" onClick={onBack} className={styles.back_container}>
+				<IcMArrowBack fill="#221F20" width={20} height={16} />
 				<div className={styles.back_text}>Back to Vendor Relationship Management</div>
 			</div>
 			<div className={styles.header}>Add New Vendor</div>
