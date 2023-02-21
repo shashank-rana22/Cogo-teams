@@ -1,5 +1,5 @@
 import { Button, Pagination, Input, Tooltip, Checkbox } from '@cogoport/components';
-import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { cloneDeep } from '@cogoport/utils';
 
 import QuestionsBox from '../QuestionsBox';
@@ -31,12 +31,11 @@ function QuestionsItem({
 		});
 	};
 
-	const deleteItem = (questionItem) => {
-		setQuestionActionList((pv) => ({ ...pv, delete: questionItem }));
-	};
-
-	const editItem = (questionItem) => {
-		setQuestionActionList((pv) => ({ ...pv, edit: questionItem }));
+	const undoAdd = (questionItem) => {
+		setQuestionActionList((pv) => {
+			const newChecked = pv.checked.filter((que) => que.id !== questionItem.id);
+			return { ...pv, checked: newChecked };
+		});
 	};
 
 	const setQuestionWeightage = (weight) => {
@@ -109,9 +108,9 @@ function QuestionsItem({
 							theme="light"
 							placement="bottom-end"
 							animation="shift-away"
-							content="Deleting this, will delete the current question"
+							content="This will remove the question from this form.."
 						>
-							<Button disabled themeType="tertiary" onClick={() => deleteItem(item)}>
+							<Button themeType="tertiary" onClick={() => undoAdd(item)}>
 								<IcMDelete
 									width={20}
 									height={20}

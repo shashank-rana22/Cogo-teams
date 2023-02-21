@@ -137,10 +137,20 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 			<div className={styles.head_content}>
 				<FeedbackFormModal
 					item={item}
-					userId={item?.user_id}
-					performanceItem={item?.performance_item}
-					feedback={item?.feedback}
-					feedbackId={item?.id}
+					getTeamFeedbackList={getTeamFeedbackList}
+				/>
+			</div>
+		),
+		id  : 'add-kpi',
+		key : 'add-kpi',
+	},
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<FeedbackFormModal
+					action="show"
+					item={item}
 					getTeamFeedbackList={getTeamFeedbackList}
 				/>
 			</div>

@@ -3,7 +3,6 @@ import { SelectController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import { deptControls as departmentControls } from '../../utils/departmentControls';
-import { getControls } from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
 
 import styles from './styles.module.css';
@@ -69,21 +68,21 @@ function Filters({ params = {}, setParams = () => {} }) {
 			/>
 
 			<Select
-				value={params.filters?.created_at_year}
-				onChange={(val) => setFilter(val, 'created_at_year')}
+				value={params.filters?.year}
+				onChange={(val) => setFilter(val, 'year')}
 				placeholder="Select Year"
 				style={{ marginRight: '8px' }}
-				options={monthControls.created_at_year.options}
-				isClearable={!params.filters?.created_at_month}
+				options={monthControls.year.options}
+				isClearable={!params.filters?.month}
 			/>
 
 			<Select
-				value={params.filters?.created_at_month}
-				onChange={(val) => setFilter(val, 'created_at_month')}
-				disabled={!params.filters?.created_at_year}
+				value={params.filters?.month}
+				onChange={(val) => setFilter(val, 'month')}
+				disabled={!params.filters?.year}
 				placeholder="Select Month"
 				style={{ marginRight: '8px' }}
-				options={monthControls.created_at_month.options}
+				options={monthControls.month.options}
 				isClearable
 			/>
 		</div>

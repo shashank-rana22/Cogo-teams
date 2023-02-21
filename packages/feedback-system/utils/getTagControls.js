@@ -1,6 +1,6 @@
 import { useGetAsyncOptions } from '@cogoport/forms';
 
-const getTagControls = () => {
+const useGetTagControls = () => {
 	const tagOptions = useGetAsyncOptions({
 		endpoint    : 'list_question_tags',
 		initialCall : false,
@@ -25,4 +25,4 @@ const getTagControls = () => {
 	};
 };
 
-export default getTagControls;
+export default useGetTagControls;

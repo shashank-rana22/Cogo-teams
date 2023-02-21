@@ -27,7 +27,7 @@ function FeedbackManagement() {
 		params,
 		setParams,
 		feedbackData,
-		loading,
+		loading = false,
 		getUserFeedbackList = () => {},
 		setPage,
 	} = useListTeamMembers({

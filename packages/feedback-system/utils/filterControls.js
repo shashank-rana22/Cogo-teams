@@ -1,6 +1,6 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 
-export const getControls = () => {
+const useGetControls = () => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 
@@ -84,3 +84,5 @@ export const getControls = () => {
 		},
 	];
 };
+
+export default useGetControls;
