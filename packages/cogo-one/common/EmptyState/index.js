@@ -38,12 +38,13 @@ function EmptyState({
 					<div className={styles.container}>
 						<div className={styles.header}>Profile</div>
 						<div className={styles.profile_div}>
-							<Avatar
-								src="https://www.w3schools.com/howto/img_avatar.png"
-								alt="img"
-								disabled={false}
-								size="65px"
-							/>
+							<div className={styles.avatar}>
+								<Avatar
+									src="https://www.w3schools.com/howto/img_avatar.png"
+									alt="img"
+									disabled={false}
+								/>
+							</div>
 							<div className={styles.details}>
 								<div className={styles.name}>Anonymous User</div>
 								<div className={styles.type}>{user_type.replace('_', ' ')}</div>

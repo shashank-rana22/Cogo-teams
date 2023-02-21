@@ -26,7 +26,7 @@ function CommunicationActivity({ communication = {} }) {
 		parseData = JSON.parse(showDetails);
 	}
 
-	const { message_type = '', text = '', media_url = '', message: value = '' } = parseData || {};
+	const { message_type = '', text = '', media_url = '', message = '' } = parseData || {};
 
 	const onCloseModal = () => {
 		setShowDetails();
@@ -98,17 +98,14 @@ function CommunicationActivity({ communication = {} }) {
 				<Modal
 					show={showModal}
 					placement="top"
-					size="md"
+					size="sm"
 					closeOnOuterClick
 					onClose={onCloseModal}
 				>
 					<Modal.Header title={title} />
 					<Modal.Body>
-						{title === null ? <MessageBody message_type={message_type} response={{ message: text, media_url, value }} /> : <HTMLPreview html={showDetails} />}
+						{title === null ? <MessageBody message_type={message_type} response={{ message: message || text, media_url }} /> : <HTMLPreview html={showDetails} />}
 					</Modal.Body>
-					<Modal.Footer>
-						<Button onClick={() => setShowModal(false)} size="md" themeType="primary">close</Button>
-					</Modal.Footer>
 				</Modal>
 
 			)}
