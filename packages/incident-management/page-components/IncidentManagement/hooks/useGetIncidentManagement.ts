@@ -51,7 +51,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 
 	let activeStatus = [];
 	if (payload?.[0] === 'raisedPayload') {
-		activeStatus = ['REQUESTED', 'DELETED'];
+		activeStatus = undefined;
 	} else if (activeTab === 'requested') {
 		activeStatus = ['REQUESTED', 'DELETED'];
 	} else if (activeTab === 'approved') {

@@ -8,7 +8,7 @@ import useGetIncidentMangement from './hooks/useGetIncidentManagement';
 import SelectFilter from './SelectFilters';
 import styles from './styles.module.css';
 import StyledTable from './Table';
-import getColumns from './utils/getColumns';
+import { COLUMNS_MAPPING } from './utils/getColumns';
 
 function IncidentManagement() {
 	const { query, push } = useRouter();
@@ -16,21 +16,25 @@ function IncidentManagement() {
 	const [activeTab, setActiveTab] = useState<string>(activeIncidentTab || 'requested');
 	const [payload, setPayload] = useState(null);
 	const [isSortActive, setIsSortActive] = useState(null);
-	const { globalFilters, setGlobalFilters, data, loading, refetch } = useGetIncidentMangement({ activeTab, payload });
+	const { globalFilters, setGlobalFilters, data, loading, refetch } = useGetIncidentMangement({
+		activeTab,
+		payload,
+	});
 
 	useEffect(() => {
 		setPayload(null);
 	}, [activeTab]);
 
-	const columns = getColumns(
-		activeTab,
-		setActiveTab,
-		isSortActive,
-		setIsSortActive,
-		setGlobalFilters,
-		refetch,
-		setPayload,
-	);
+	const columns = COLUMNS_MAPPING(
+		{
+			setActiveTab,
+			isSortActive,
+			setIsSortActive,
+			setGlobalFilters,
+			refetch,
+			setPayload,
+		},
+	)[activeTab];
 
 	const { list = [], paginationData } = data || {};
 	const { pageIndex, pageSize, total } = paginationData || {};

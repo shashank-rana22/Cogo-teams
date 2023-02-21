@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getElements } from '../../utils/getElements';
+import { ELEMENTS_MAPPING } from '../../utils/getElements';
 import { FilterProps } from '../interfaces';
 import SearchInput from '../SearchInput';
 
@@ -24,7 +24,8 @@ function Filters({
 		<section className={styles.container} id="filters">
 			<div className={styles.select_container}>
 				{filterControls(activeTab).map((control) => {
-					const Element: any = getElements(control.type);
+					// const Element: any = getElements(control.type);
+					const Element:any = ELEMENTS_MAPPING[control.type];
 					return (
 						<Element
 							key={control.name}
