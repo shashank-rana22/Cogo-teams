@@ -82,13 +82,13 @@ export const channelStats = [
 export const analyticStats = [
 	{
 		key          : 'incoming_call',
-		icon         : <img src={incomingcallIcon} alt="a" style={{ fill: '#ABCD62' }} />,
+		icon         : <img src={incomingcallIcon} alt="a" style={{ width: '12px', height: '12px' }} />,
 		channel      : 'Incoming Calls',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'outgoing_call',
-		icon         : <img src={outgoingcallIcon} alt="b" style={{ fill: '#F68B21' }} />,
+		icon         : <img src={outgoingcallIcon} alt="b" style={{ width: '12px', height: '12px' }} />,
 		channel      : 'Outgoing Calls',
 		customer_nos : '100 customers',
 	},

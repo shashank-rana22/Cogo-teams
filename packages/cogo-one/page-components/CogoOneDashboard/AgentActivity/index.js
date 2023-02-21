@@ -10,8 +10,9 @@ function AgentActivity() {
 	return (
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
-			<div className={styles.activity_name}>Agent Activity</div>
+
 			<div className={styles.main_container}>
+				<div className={styles.activity_name}>Your Agents</div>
 				<div className={styles.main_container_upperpart}>
 
 					{agentActivityStatus.map((item) => {
@@ -51,11 +52,11 @@ function AgentActivity() {
 									</div>
 									<div className={styles.profile_box_right_down}>
 										<div className={styles.icon_plus_nos}>
-											<div><IcMProfile /></div>
+											<div><IcMProfile fill="#BDBDBD" /></div>
 											<div className={styles.contact_nos}>{contact_nos}</div>
 										</div>
 										<div className={styles.icon_plus_time}>
-											<div><IcMTimer /></div>
+											<div><IcMTimer fill="#BDBDBD" /></div>
 											<div className={styles.duration}>{duration}</div>
 										</div>
 									</div>
