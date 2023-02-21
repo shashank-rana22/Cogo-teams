@@ -104,7 +104,8 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 										{item?.label || '-'}
 									</div>
 									<div className={styles.date_value}>
-										{startCase(item?.value) || '-'}
+										{ item?.label === 'Amount' || item?.label === 'Exchange Rate'
+											? item?.value : startCase(item?.value)}
 									</div>
 								</div>
 							))}
