@@ -2,19 +2,21 @@ const control = {
 	days: {
 		name        : 'days',
 		type        : 'input',
-		placeholder : 'Day',
+		placeholder : 'Days',
 	},
 
 	hours: {
 		name        : 'hours',
 		type        : 'input',
-		placeholder : 'Hour',
+		placeholder : 'Hours',
+
 	},
 
 	minutes: {
 		name        : 'minutes',
 		type        : 'input',
-		placeholder : 'Minute',
+		placeholder : 'Minutes',
+
 	},
 
 };
