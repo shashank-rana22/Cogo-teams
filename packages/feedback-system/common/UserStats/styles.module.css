@@ -1,60 +1,55 @@
-.container {
-    height: 100%;
-
-    .header {
-        font-size: 28px;
-        font-weight: 600;
-        margin: 0px;
-    }
+.header {
+	display: flex;
+	margin: 0;
+	font-size: 28px;
+	font-weight: 600;
 }
+
+.container {
+	height: 100%;
+}
+
 .redirect_container {
-    display: flex;
-	justify-content: flex-start;
+	display: flex;
 	align-items: center;
-	font-weight: 500;
+	justify-content: flex-start;
 	font-size: 16px;
+	font-weight: 500;
 	color: #393f70;
 	cursor: pointer;
 }
 
 .stats_container {
-    height: 100%;
-}
-
-.header {
-    display: flex;
+	height: 100%;
 }
 
 .performance_chart {
-    flex: 6;
+	flex: 6;
 	margin-top: 16px;
 }
 
 .user_profile {
-    flex: 6;
-    padding-left: 16px 0;
+	flex: 6;
+	padding-left: 16px 0;
 }
 
 .header_filters {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	margin-top: 15px;
+
 	.list_header {
-		color: "#393f70";
+		margin: 0;
 		font-size: 18px;
 		font-weight: 500;
-		margin: 0;
+		color: "#393f70";
 	}
 }
 
 .filter_container {
 	display: flex;
 	align-items: center;
-	
-	.month_container:not(:last-child) {
-		margin-right: 8px;
-	}
 }
 
 .month_container {
@@ -62,4 +57,8 @@
 		width: 160px;
 		height: 38px;
 	}
+}
+
+.month_container:not(:last-child) {
+	margin-right: 8px;
 }

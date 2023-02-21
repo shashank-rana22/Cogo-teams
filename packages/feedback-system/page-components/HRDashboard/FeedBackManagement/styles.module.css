@@ -1,26 +1,20 @@
-.container {
-	:global(.core-ui-select__control) {
-		width: 200px;
-	}
-}
-
 .redirect_container {
-    display: flex;
+	display: flex;
 	align-items: center;
 }
 
 .go_back_container {
-    display: flex;
-	justify-content: flex-start;
+	display: flex;
 	align-items: center;
-	font-weight: 500;
+	justify-content: flex-start;
 	font-size: 16px;
+	font-weight: 500;
 	color: #393f70;
 	cursor: pointer;
 
-    p {
-        margin: 0px;
-    }
+	p {
+		margin: 0;
+	}
 }
 
 .top_container {
@@ -45,40 +39,38 @@
 }
 
 .heading {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 
-    .header_text {
-        margin: 0;
-        font-weight: bold;
-        color: #393f70;
-        font-size: 16px;
-    }
-    
+	.header_text {
+		margin: 0;
+		font-size: 16px;
+		font-weight: bold;
+		color: #393f70;
+	}
 }
 
-
 .select_container {
-    margin-left: 16px;
+	margin-left: 16px;
 
-    p {
-        font-size: 18px;
-    }
+	p {
+		font-size: 18px;
+	}
 }
 
 .list_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 8px;
 
-    .abc{
-        font-size: 18px;
-        font-weight: bold;
-    }
+	.abc {
+		font-size: 18px;
+		font-weight: bold;
+	}
 
-    :global(.ui_select_display_container){
-        width: 180px;
-    }
+	:global(.ui_select_display_container) {
+		width: 180px;
+	}
 }

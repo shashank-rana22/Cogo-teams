@@ -1,50 +1,50 @@
 .accordion {
-    padding: 8px;
-    margin: 8px 8px 0;
-    border-radius: 8px;
-    background-color: #ffffff;
+	padding: 8px;
+	margin: 8px 8px 0;
+	background-color: #fff;
+	border-radius: 8px;
 }
 
 .department {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-    .label {
-        font-weight: bold;
-        margin: 0px;
-    }
+	.label {
+		margin: 0;
+		font-weight: bold;
+	}
 }
 
 .roles {
-    margin: 0px 4px;
+	margin: 0 4px;
 
-    .role:not(:last-child){
-        border-bottom: 1px solid #efefef;
-    }
-
-    :hover {
-        background-color: #f8f2e7;
-    }
+	:hover {
+		background-color: #f8f2e7;
+	}
 }
 
 .role {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 8px 0px;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 8px 0;
 
-    :global {
-        .ui_pill_container {
-            /* background-color: #efefef; */
-        }
+	:global {
+		.ui_pill_container {
+			/* background-color: #efefef; */
+		}
 
-        .ui_pill_text {
-            /* background-color: #efefef; */
-        }
-    }
-} 
+		.ui_pill_text {
+			/* background-color: #efefef; */
+		}
+	}
+}
+
+.role:not(:last-child) {
+	border-bottom: 1px solid #efefef;
+}
 
 .selected_designation {
-    background-color: antiquewhite;
+	background-color: antiquewhite;
 }

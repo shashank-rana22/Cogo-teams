@@ -1,22 +1,20 @@
 .submit_form_container {
-    height: 100%;
-    padding: 0px 16px;
+	height: 100%;
+	padding: 0 16px;
 }
 
 .header {
-    font-size: 20px;
-    font-weight: 600;
+	font-size: 20px;
+	font-weight: 600;
 }
 
 .button_container {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    padding: 16px 16px 0px;
-    
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-
-    border-top: 1px solid #6fa5ab;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 16px 16px 0;
+	border-top: 1px solid #6fa5ab;
 }

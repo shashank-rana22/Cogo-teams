@@ -1,89 +1,86 @@
 .container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .form_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 16px;
 
-    .form_cat{
-        font-size: 18px;
-        font-weight: 600;
-    }
+	.form_cat {
+		font-size: 18px;
+		font-weight: 600;
+	}
 }
 
 .no_role {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
 
 .forms {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    margin-top: 16px;
-
-    .form:not(:last-child) {
-        margin-bottom: 16px;
-    }
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	margin-top: 16px;
 }
 
 .form {
-    display: flex;
-    align-items: center;
-    height: 80px;
-    margin: 0px 16px;
-    padding: 0px 16px;
+	display: flex;
+	align-items: center;
+	height: 80px;
+	padding: 0 16px;
+	margin: 0 16px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 
-    background-color: #ffffff;
-    border-radius: 8px;
+	.form_name {
+		flex: 0.25;
+	}
 
-    box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	.published {
+		flex: 0.25;
+	}
 
-    .form_name {
-        flex: 0.25;
-    }
+	.last_used {
+		flex: 0.2;
+	}
 
-    .published {
-        flex: 0.25;
-    }
+	.status {
+		flex: 0.25;
 
-    .last_used {
-        flex: 0.2;
-    }
+		:global(.ui_pill_container) {
+			margin: 0;
+		}
+	}
 
-    .status {
-        flex: 0.25;
+	.action {
+		display: flex;
+		flex: 0.25;
+		justify-content: flex-end;
+	}
+}
 
-        :global(.ui_pill_container){
-            margin: 0px;
-        }
-    }
-
-    .action {
-        flex: 0.25;
-        display: flex;
-        justify-content: flex-end;
-    }
+.form:not(:last-child) {
+	margin-bottom: 16px;
 }
 
 .label {
-    margin: 0px;       
+	margin: 0;
 }
 
 .pagination_container {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    padding-top: 16px;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding-top: 16px;
+	background-color: #fff;
 }

@@ -1,74 +1,69 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 48px);
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 48px);
 }
 
 .go_back_container {
-    display: flex;
-    justify-content: flex-start;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .redirect_container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 
-    .text {
-        font-size: 14px;
+	.text {
+		margin: 0;
+		font-size: 14px;
 		font-weight: bold;
-		margin: 0px;
-    }
+	}
 }
 
 .header {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 16px;
+	margin-top: 16px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .form_container {
-    flex:1;
-    display: flex;
-    margin-top: 16px;
-    max-height: 90%;
-    /* padding: 16px 0px; */
-    overflow: hidden;
+	display: flex;
+	flex: 1;
+	max-height: 90%;
+	margin-top: 16px;
 
-    background-color: #ffffff;
-    border-radius: 8px;
-
-    box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	/* padding: 16px 0px; */
+	overflow: hidden;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .department_status {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    max-height: 100%;
-    overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	max-height: 100%;
+	overflow-y: scroll;
+	background-color: #f3fafa;
+	border-right: 1px solid #6fa5ab;
+	border-radius: 8px;
 
-    border-radius: 8px;
+	:global {
+		.ui_accordion_title {
+			width: 100%;
+		}
 
-    border-right: 1px solid #6fa5ab;
-
-    background-color: #f3fafa;
-
-    :global {
-        .ui_accordion_title {
-            width: 100%;
-        }
-
-        .ui_accordion_header {
-            background: #ffffff;
-        }
-    }
+		.ui_accordion_header {
+			background: #fff;
+		}
+	}
 }
 
 .form_section {
-    position: relative;
-    max-height: 100%;
-    overflow: scroll;
-    margin: 16px 0px;
+	position: relative;
+	max-height: 100%;
+	margin: 16px 0;
+	overflow: scroll;
 }
-

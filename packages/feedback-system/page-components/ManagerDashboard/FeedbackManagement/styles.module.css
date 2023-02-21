@@ -9,8 +9,8 @@
 
 .redirect_container {
 	display: flex;
-	justify-content: flex-start;
 	align-items: center;
+	justify-content: flex-start;
 }
 
 .redirect_header {
@@ -18,24 +18,24 @@
 	align-items: center;
 
 	.redirect_text {
+		margin: 0;
 		font-size: 16px;
 		font-weight: 500;
 		color: #393f70;
 		cursor: pointer;
-		margin: 0px;
 	}
 }
 
 .header {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	padding: 8px 0;
 
 	.header_text {
+		margin: 0;
 		font-size: 28px;
 		font-weight: 600;
-		margin: 0px;
 	}
 }
 
@@ -52,16 +52,4 @@
 .filter_container {
 	display: flex;
 	align-items: center;
-
-	& .tippy-box .tippy-content {
-		max-height: 100%;
-	}
-	.filter-control-label {
-		margin-top: 16px;
-		font-weight: 500;
-	}
-	.bussiness_module_filter_header {
-		margin-bottom: 8px;
-	}
 }
-

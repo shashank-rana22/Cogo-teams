@@ -1,11 +1,10 @@
 .list_item_container {
 	display: flex;
-	
 }
 
 .search {
 	width: 30%;
-	padding-right :12px;
+	padding-right: 12px;
 }
 
 .inner_list {
@@ -16,10 +15,10 @@
 	margin-bottom: 8px;
 }
 
-.modal_sub_header{
-	padding-bottom:14px;
-	color:#333333;
-	display:flex;
-	align-items:center;
-	gap:8px;
+.modal_sub_header {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	padding-bottom: 14px;
+	color: #333;
 }

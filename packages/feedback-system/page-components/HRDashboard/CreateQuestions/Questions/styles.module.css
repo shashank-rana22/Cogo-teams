@@ -8,11 +8,11 @@
 
 .icon_container {
 	display: flex;
-	width: 5%;
 	align-items: center;
 	justify-content: flex-end;
-	margin: 4px;
+	width: 5%;
 	padding: 8px;
+	margin: 4px;
 }
 
 .question_details_container {

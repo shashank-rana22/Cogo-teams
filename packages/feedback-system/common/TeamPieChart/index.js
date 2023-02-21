@@ -1,8 +1,10 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 
+import styles from './styles.module.css';
+
 function TeamPieChart({ data }) {
 	return (
-		<div style={{ height: '100%' }}>
+		<div className={styles.pie_container}>
 			<ResponsivePie
 				data={data}
 				innerRadius={0}

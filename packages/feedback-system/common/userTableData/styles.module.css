@@ -3,9 +3,10 @@
 	margin-top: 16px;
 	overflow-x: scroll;
 	border-radius: 8px;
+
 	/* background: black; */
 
-	:global{
+	:global {
 		.ui_table_head_container {
 			height: 60px;
 		}
@@ -15,7 +16,8 @@
 		}
 	}
 }
-.table{
+
+.table {
 	/* padding:0 15px 5px 15px; */
 	background: #fff;
 }
@@ -25,20 +27,20 @@
 	justify-content: flex-end;
 }
 
-.details_button{
-	background:#fff;
-	text-decoration:underline;
-	font-weight:600;
-	font-size:11px;
-	border:0;
+.details_button {
+	font-size: 11px;
+	font-weight: 600;
+	text-decoration: underline;
+	background: #fff;
+	border: 0;
 }
 
-.empty_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px;
-    margin-top: 8px;
-    border-radius: 5px;
-    background: #FFFFFF;
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px;
+	margin-top: 8px;
+	background: #fff;
+	border-radius: 5px;
 }

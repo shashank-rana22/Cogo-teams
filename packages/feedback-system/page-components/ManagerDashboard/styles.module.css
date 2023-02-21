@@ -10,7 +10,7 @@
 .page_actions {
 	display: flex;
 	justify-content: space-between;
-	
+
 	:global(.ui_select_container) {
 		width: 160px;
 		height: 38px;
@@ -19,14 +19,8 @@
 
 .filters {
 	display: flex;
-	justify-content: flex-start;
 	align-items: center;
-}
-
-.filters {
-	display: flex;
 	justify-content: flex-start;
-	align-items: center;
 }
 
 .question_button_container {
@@ -42,15 +36,15 @@
 	cursor: pointer;
 
 	p {
+		margin: 0;
 		font-size: 18px;
 		font-weight: bold;
-		margin: 0px;
 	}
 }
 
 .table_section {
 	margin-top: 16px;
-	background: #FAF5EC;
+	background: #faf5ec;
 	border-radius: 8px;
 }
 
@@ -58,14 +52,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 0 0px;
+	padding: 16px 0 0;
 	margin-top: 16px;
 
 	.list_title {
-		font-size: 18px; 
+		margin: 0;
+		font-size: 18px;
 		font-weight: bold;
 		color: #393f70;
-		margin: 0px;
 	}
 
 	.list_actions {

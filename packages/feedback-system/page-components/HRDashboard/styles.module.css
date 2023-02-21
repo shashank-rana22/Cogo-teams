@@ -1,7 +1,7 @@
 .stats_container {
 	display: flex;
 
-	@media(max-width: 768px){
+	@media (max-width: 768px) {
 		flex-direction: column;
 	}
 }
@@ -19,15 +19,15 @@
 	cursor: pointer;
 
 	p {
+		margin: 0;
 		font-size: 18px;
 		font-weight: bold;
-		margin: 0px;
 	}
 }
 
 .table_section {
 	margin-top: 16px;
-	background: #FAF5EC;
+	background: #faf5ec;
 	border-radius: 8px;
 }
 
@@ -35,14 +35,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 0 0px;
+	padding: 16px 0 0;
 	margin-top: 16px;
 
 	.list_title {
-		font-size: 18px; 
+		margin: 0;
+		font-size: 18px;
 		font-weight: bold;
 		color: #393f70;
-		margin: 0px;
 	}
 
 	.list_actions {
@@ -66,10 +66,6 @@
 
 .filter_container {
 	margin-right: 14px;
-
-	& .tippy-box .tippy-content {
-		max-height: 100%;
-	}
 }
 
 .filters {

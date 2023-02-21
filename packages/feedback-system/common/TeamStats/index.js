@@ -147,7 +147,7 @@ function TeamStats({
 				<div
 					key={tile.name}
 					className={cl`${styles.tile_container} ${selectedBucket === tile.name
-						? styles.bucket_container__selected
+						? styles.bucket_container_selected
 						: null}`}
 					role="button"
 					tabIndex={0}
