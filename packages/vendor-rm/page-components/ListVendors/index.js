@@ -48,11 +48,11 @@ function ListVendors() {
 					className={styles.box}
 					onClick={() => { tagClick({ status: 'pending_from_user' }); }}
 				>
-					<div className={styles.label}>Pending Vendors</div>
+					<div className={styles.label}>Verified Vendors</div>
 					<div className={styles.value}>1222</div>
 				</div>
 				<div role="presentation" className={styles.box} onClick={() => { tagClick({ status: 'verified' }); }}>
-					<div className={styles.label}>Verified Vendors</div>
+					<div className={styles.label}>Awaiting Verification</div>
 					<div className={styles.value}>1222</div>
 				</div>
 			</div>

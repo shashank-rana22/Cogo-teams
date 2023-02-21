@@ -1,4 +1,4 @@
-import { Tooltip, Button, Toast } from '@cogoport/components';
+import { Tooltip, Button } from '@cogoport/components';
 import { IcCFcrossInCircle, IcCFtick, IcMError } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { format, isEmpty, startCase } from '@cogoport/utils';
@@ -76,7 +76,7 @@ const useVendorList = () => {
 		url    : '/list_vendors',
 	}, { manual: true });
 
-	const GetVendorList = async () => {
+	const getVendorList = async () => {
 		try {
 			await trigger({
 				params,
@@ -87,7 +87,7 @@ const useVendorList = () => {
 	};
 
 	useEffect(() => {
-		GetVendorList();
+		getVendorList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
 
