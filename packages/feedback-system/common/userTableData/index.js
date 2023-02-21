@@ -1,6 +1,5 @@
-import { Table, Pagination, Modal, Button } from '@cogoport/components';
+import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import EmptyState from '../EmptyState';
 
