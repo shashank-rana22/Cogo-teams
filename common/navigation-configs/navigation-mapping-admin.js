@@ -1782,6 +1782,17 @@ const navigationMappingAdmin = {
 		module_type   : 'dashboards',
 	},
 
+	airline_booking_plugin: {
+		key           : 'airline_booking_plugin',
+		title         : 'Airline Booking Plugin',
+		href          : '/airline-booking-plugin',
+		as            : '/airline-booking-plugin',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.airline_booking_plugin,
+		module_type   : 'dashboards',
+	},
+
 	enrichment: {
 		key           : 'enrichment',
 		title         : 'Enrichment',

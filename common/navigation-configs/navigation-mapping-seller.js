@@ -182,6 +182,20 @@ const navigationMappingSeller = {
 				main_apis     : [],
 				possible_apis : app_apis.saas_schedules,
 			},
+			{
+				key       : 'saas_tools-freight_rate_trend',
+				title     : 'Freight Rate Trend',
+				href      : '/saas/freight-rate-trend',
+				as        : '/saas/freight-rate-trend',
+				type      : 'link',
+				icon      : 'nav-freight-trend',
+				line      : true,
+				main_apis : [
+					'list_freight_trend_subscriptions',
+					'list_freight_trend_rates',
+				],
+				possible_apis: app_apis.saas_freight_rate_trend,
+			},
 		],
 	},
 	saas_finance: {
