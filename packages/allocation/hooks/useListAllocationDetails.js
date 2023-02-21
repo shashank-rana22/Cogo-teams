@@ -114,10 +114,10 @@ const useListAllocationDetails = () => {
 			accessor : ({ old_stakeholder = {} }) => (
 				<div>
 					<div>
-						{startCase((old_stakeholder.name || '___')).toLowerCase()}
+						{startCase(old_stakeholder.name || '___')}
 					</div>
 					<div className={styles.stakeholder_type}>
-						{startCase((old_stakeholder.name || '___')).toLowerCase()}
+						{startCase(old_stakeholder.name || '___')}
 					</div>
 				</div>
 			),
@@ -127,10 +127,10 @@ const useListAllocationDetails = () => {
 			accessor : ({ stakeholder = {} }) => (
 				<div>
 					<div>
-						{startCase((stakeholder.name || '___')).toLowerCase()}
+						{startCase(stakeholder.name || '___')}
 					</div>
 					<div className={styles.stakeholder_type}>
-						{startCase((stakeholder.name || '___')).toLowerCase()}
+						{startCase(stakeholder.name || '___')}
 					</div>
 				</div>
 			),

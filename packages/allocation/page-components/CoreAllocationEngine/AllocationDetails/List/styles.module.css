@@ -14,7 +14,7 @@
 .table {
 	margin: 16px 0;
 	background-color: #fff;
-	box-shadow: 0 0 16px rgb(44 62 80 / 20%);
+	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
 
 	tr {
 		height: 60px;
