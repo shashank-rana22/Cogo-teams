@@ -1,6 +1,6 @@
 const MESSAGE_MAPPING = {
 	text    : ['text', 'template', 'interactive'],
-	media   : ['image', 'video'],
+	media   : ['image', 'video', 'audio'],
 	contact : ['contact'],
 };
 

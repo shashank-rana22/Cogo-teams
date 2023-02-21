@@ -8,3 +8,16 @@
     display: block;
     cursor: pointer;
 }
+.contact_card{
+	min-height: 40px;
+	width: 200px;
+	border-radius: 4px;
+	background: #fff;
+	text-align: left;
+}
+.name{
+	font-size: 10px;
+}
+.mob_no{
+	font-size: 10px;
+}
