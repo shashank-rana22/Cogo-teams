@@ -1,5 +1,4 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-
 import { ResponsiveLine } from '@cogoport/charts/line';
 import React from 'react';
 
@@ -12,7 +11,7 @@ function LineChart() {
 		<div className={styles.main_container}>
 			<ResponsiveLine
 				data={DateChartDummyData}
-				margin={{ top: 140, right: 50, bottom: 50, left: 60 }}
+				margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
 				xScale={{ type: 'point' }}
 				yFormat=" >-.2f"
 				axisTop={null}
@@ -29,6 +28,7 @@ function LineChart() {
 				axisLeft={{
 					orient         : 'left',
 					tickSize       : 5,
+					tickValues     : 5,
 					tickPadding    : 5,
 					tickRotation   : 0,
 					// legend         : 'count',
@@ -49,7 +49,7 @@ function LineChart() {
 						direction         : 'row',
 						justify           : false,
 						translateX        : -650,
-						translateY        : -200,
+						translateY        : -150,
 						itemsSpacing      : 0,
 						itemDirection     : 'left-to-right',
 						itemWidth         : 80,

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formattedData = {} }) {
-	const { user_id, lead_user_id, organization_id, mobile_no } = formattedData || {};
+	const { user_id, lead_user_id, organization_id, mobile_no, sender = null } = formattedData || {};
 	const { channel_type, id } = activeMessageCard || {};
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
@@ -19,7 +19,9 @@ function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formatte
 					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
 					whatsapp_number_eformat : mobile_no,
 					organization_id,
+					sender,
 					...payload,
+
 				},
 			});
 			closeModal();

@@ -34,6 +34,7 @@ function useHangUpCall({
 							endCall           : false,
 							inCall            : false,
 							showCallModal     : false,
+							minimizeModal     : false,
 							showFeedbackModal : true,
 						},
 					}),

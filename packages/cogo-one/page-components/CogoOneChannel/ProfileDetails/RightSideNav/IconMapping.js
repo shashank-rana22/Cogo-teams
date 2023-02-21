@@ -1,4 +1,4 @@
-import { IcMProfile, IcACustomerCentre, IcMSearchdark } from '@cogoport/icons-react';
+import { IcMProfile, IcMSearchdark } from '@cogoport/icons-react';
 
 const IconMapping = [
 	{

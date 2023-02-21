@@ -8,60 +8,38 @@ import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../conf
 import styles from './styles.module.css';
 
 function PerformanceTab() {
-	const [activeTab, setActiveTab] = useState('local_rates');
+	const [activeTab, setActiveTab] = useState('best_performance');
+	const data = activeTab === 'best_performance' ? bestPerformanceTabsData : worstPerformanceTabsData;
 	return (
 	// eslint-disable-next-line react/jsx-no-useless-fragment
-		<>
-			<div style={{ margin: '20px 0px' }}>
-				<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
-					<TabPanel name="best_performance" title="Best Performance">
-						<div className={styles.performance_tab_container}>
-							<div className={styles.performance_tab_lists}>
-								{bestPerformanceTabsData.map((item) => {
+
+		<div>
+			<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
+				<TabPanel name="best_performance" title="Best Performance" />
+				<TabPanel name="worst_performance" title="Worst Performance" />
+			</Tabs>
+			<div className={styles.performance_tab_container}>
+				<div className={styles.performance_tab_lists}>
+					{(data || []).map((item) => {
                 	            const { picture, name } = item;
-									return (
-										<div className={styles.list}>
-											<div className={styles.picture_name_kam_box}>
-												<div className={styles.picture}>{picture}</div>
-												<div className={styles.name}>{name}</div>
-												<div className={styles.kam}>kam</div>
-											</div>
-											<div className={styles.notification_nos}>
-												{' '}
+						return (
+							<div className={styles.list}>
+								<div className={styles.picture_name_kam_box}>
+									<div className={styles.picture}>{picture}</div>
+									<div className={styles.name}>{name}</div>
+									<div className={styles.kam}>kam</div>
+								</div>
+								<div className={styles.notification_nos}>
+									{' '}
 
-											</div>
-										</div>
-									);
-	   				})}
+								</div>
 							</div>
-						</div>
-					</TabPanel>
-
-					<TabPanel name="worst_performance" title="Worst Performance">
-						<div className={styles.performance_tab_container}>
-							<div className={styles.performance_tab_lists}>
-								{worstPerformanceTabsData.map((item) => {
-                	            const { picture, name } = item;
-									return (
-										<div className={styles.list}>
-											<div className={styles.picture_name_kam_box}>
-												<div className={styles.picture}>{picture}</div>
-												<div className={styles.name}>{name}</div>
-												<div className={styles.kam}>kam</div>
-											</div>
-											<div className={styles.notification_nos}>
-												{' '}
-
-											</div>
-										</div>
-									);
+						);
 	   				})}
-							</div>
-						</div>
-					</TabPanel>
-				</Tabs>
+				</div>
 			</div>
-		</>
+		</div>
+
 	);
 }
 
