@@ -77,8 +77,25 @@ export const LOGO_URL = {
 	bot   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
 };
 
-// export const ACTIVITY_TAB_MAPPING = {
-// 	transactional,
-// 	communication,
-// 	platform,
-// };
+export const OFFLINE_STATUS_OPTIONS = [
+	{
+		label : '1 hour',
+		value : '1_hour',
+	},
+	{
+		label : '4 hours',
+		value : '4_hour',
+	},
+	{
+		label : 'Today',
+		value : 'today',
+	},
+	{
+		label : 'This week',
+		value : 'this_week',
+	},
+	{
+		label : 'Custom',
+		value : 'custom',
+	},
+];

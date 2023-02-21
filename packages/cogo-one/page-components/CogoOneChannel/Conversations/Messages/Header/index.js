@@ -1,4 +1,5 @@
 import { Button, cl } from '@cogoport/components';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -96,7 +97,7 @@ function Header({
 				</div>
 				<Button
 					themeType="primary"
-					size="md"
+					size="sm"
 					disabled={!hasPermissionToEdit}
 					onClick={() => setOpenModal({
 						type : 'mark_as_closed',
@@ -107,6 +108,7 @@ function Header({
 					})}
 				>
 					Mark as
+					<IcMArrowRotateDown className={styles.down_arrow} />
 				</Button>
 			</div>
 		</div>

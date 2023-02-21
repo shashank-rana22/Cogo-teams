@@ -1,13 +1,9 @@
-import { Modal, Button, RadioGroup } from '@cogoport/components';
-import {
-	useForm,
-	InputController,
-} from '@cogoport/forms';
+import { Modal, Button, Select, Datepicker, Timepicker } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { isEmpty, addHours, format } from '@cogoport/utils';
+import React, { useState } from 'react';
 
-import controls from '../../../../configurations/user-status-controls';
+import { OFFLINE_STATUS_OPTIONS } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -17,106 +13,143 @@ function InactiveModal({
 	loading,
 
 }) {
-	const { days = '', hours = '', minutes = '' } = controls;
-	const [formError, setFormError] = useState('');
-	const [inactiveReason, setInactiveReason] = useState('');
-
-	const { handleSubmit, control, reset } = useForm();
-
-	const REASONS = [
-		{
-			label : 'On Break',
-			value : 'break',
-		},
-	];
-
+	const [offlineStatus, setOfflineStatus] = useState('');
+	const [date, setDate] = useState('');
+	const [ofTime, setOfTime] = useState();
+	console.log('ofTime:', ofTime);
+	console.log(
+		'hello',
+		format(date, 'yyyy-MM-dd'),
+		format(ofTime, 'HH:mm:ss'),
+	);
+	const customEndTime = format(date, 'yyyy-MM-dd').concat(format(ofTime, 'HH:mm:ss'));
 	const resetReasons = () => {
-		setInactiveReason('');
-		reset({ days: '', hours: '', minutes: '' });
+		setOfflineStatus('');
+		setDate('');
+		setOfTime('');
 	};
 
 	const handleClose = () => {
 		setOpenModal(false);
-		reset({ days: '', hours: '', minutes: '' });
 	};
 
-	const createSubmit = (val) => {
-		const duration = Number(val?.days || 0) * 1440 + Number(val?.hours || 0) * 60 + Number(val?.minutes || 0);
+	const emptyStateCheck = isEmpty(offlineStatus);
+	const customEmptyCheck = date === '';
+	// const customEmptyCheck = date === '' || isEmpty(time);
+
+	const checks = offlineStatus !== 'custom' ? emptyStateCheck : customEmptyCheck;
+
+	function getWeekDates() {
+		const d = new Date();
+		const day = d.getDay();
+		const startdiff = d.getDate() - day + (day === 0 ? -6 : 1);
+		const enddiff = d.getDate() + 7 - day + (day === 0 ? -6 : 1);
+		return {
+			startDate : new Date(new Date(d.setDate(startdiff)).setHours(0, 0, 0, 0)),
+			endDate   : new Date(new Date(d.setDate(enddiff)).setHours(23, 59, 59, 59)),
+		};
+	}
+
+	const createSubmit = () => {
+		let validity_start = '';
+		let validity_end = '';
+
+		if (offlineStatus === '1_hour') {
+			validity_start = new Date();
+			validity_end = addHours(new Date(), 1);
+		} else if (offlineStatus === '4_hour') {
+			validity_start = new Date();
+			validity_end = addHours(new Date(), 4);
+		} else if (offlineStatus === 'today') {
+			validity_start = new Date((new Date()).setHours(0, 0, 0, 0));
+			validity_end = new Date((new Date()).setHours(23, 59, 59, 999));
+		} else if (offlineStatus === 'this_week') {
+			const {
+				startDate,
+				endDate,
+			} = getWeekDates();
+			validity_start = startDate;
+			validity_end = endDate;
+		} else if (offlineStatus === 'custom') {
+			validity_start = new Date();
+			validity_end = customEndTime;
+		}
 
 		const data = {
-			status: inactiveReason,
-			duration,
+			status         : 'break',
+			validity_start : format(
+				validity_start,
+				'yyyy-MM-dd HH:mm:ss',
+			),
+			validity_end: offlineStatus === 'custom' ? customEndTime : format(
+				validity_end,
+				'yyyy-MM-dd HH:mm:ss',
+			),
 		};
-		if (isEmpty(val?.days) && isEmpty(val?.hours) && isEmpty(val?.minutes)) {
-			setFormError('Please select duration');
-		} else if (val?.minutes < 0 || val?.minutes > 59) {
-			setFormError('Minutes should range between 0 to 59');
-		} else if (val?.hours > 24) {
-			setFormError('Hours should be lessthen or equal 24');
-		} else {
-			updateUserStatus(data);
-		}
+
+		updateUserStatus(data);
 	};
 
-	const emptyStateCheck = isEmpty(inactiveReason);
-
 	return (
-
-		<Modal size="sm" show onClose={handleClose} placement="top" className={styles.styled_modal}>
-			<Modal.Header title="Inactive Status till" />
-
-			<RadioGroup options={REASONS} onChange={setInactiveReason} value={inactiveReason} />
-
-			<div className={styles.time_title}>
-				Duration
-			</div>
+		<Modal size="sm" show onClose={handleClose} placement="top">
+			<Modal.Header title="Offline Status" />
 
 			<div className={styles.duration_div}>
-				<InputController
-					{...days}
-					id={days?.name}
-					control={control}
-				/>
-				<InputController
-					{...hours}
-					control={control}
-					id={hours?.name}
-				/>
-				<InputController
-					{...minutes}
-					control={control}
-					id={minutes?.name}
-				/>
-			</div>
-			{!isEmpty(formError) && (
-				<div className={styles.form_error}>
-					{formError}
+				<div className={styles.time_title}>
+					Set offline status till
 				</div>
-			)}
-			<div className={styles.actions}>
-				<Button
-					size="md"
-					themeType="tertiary"
-					onClick={resetReasons}
-					className={styles.refresh_action}
-				>
-					<div className={styles.refresh_icon}>
-						<IcMRefresh width={16} height={16} />
-					</div>
-					Reset Status
-				</Button>
-				<Button
-					loading={loading}
-					disabled={emptyStateCheck}
-					size="md"
-					themeType="accent"
-					onClick={handleSubmit(createSubmit)}
-					className={styles.last_button}
-				>
-					Apply
 
-				</Button>
+				<Select
+					value={offlineStatus}
+					onChange={setOfflineStatus}
+					placeholder="Select here..."
+					options={OFFLINE_STATUS_OPTIONS}
+				/>
+				{offlineStatus === 'custom' && (
+					<>
+						<div className={styles.time_title}>
+							Date
+						</div>
+						<Datepicker
+							placeholder="Select date"
+							dateFormat="MM/dd/yyyy HH:mm"
+							name="date"
+							onChange={setDate}
+							value={date}
+						/>
+
+						<div className={styles.time_title}>
+							Time
+						</div>
+						<Timepicker onChange={setOfTime} value={ofTime} />
+					</>
+				)}
+
+				<div className={styles.actions}>
+					<Button
+						size="md"
+						themeType="tertiary"
+						onClick={resetReasons}
+					>
+						<div className={styles.refresh_icon}>
+							<IcMRefresh width={16} height={16} />
+						</div>
+						Reset Status
+					</Button>
+					<Button
+						loading={loading}
+						disabled={checks}
+						size="md"
+						themeType="accent"
+						onClick={createSubmit}
+						className={styles.last_button}
+					>
+						Apply
+
+					</Button>
+				</div>
 			</div>
+
 		</Modal>
 
 	);
