@@ -1,8 +1,11 @@
-.notify_modal_body {
-
-}
-
 .notify_card {
     display: flex;
     padding: 8px;
+}
+
+.button_container{
+    margin-top:20px;
+    display:flex;
+    width:100%;
+    justify-content:flex-end;
 }

@@ -1,7 +1,8 @@
-import { Table, Input, Button } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Table, Input, Button, Modal } from '@cogoport/components';
+import { IcMSearchlight, IcMInformation } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getByKey } from '@cogoport/utils';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,12 @@ const LIST_COLUMNS_MAPPING = {
 };
 
 function ListItem({ item }) {
+	const [openDetails, setopenDetails] = useState(false);
+
+	const toggleModal = () => {
+		setopenDetails(!openDetails);
+	};
+
 	const Router = useRouter();
 
 	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
@@ -52,6 +59,7 @@ function ListItem({ item }) {
 					className={styles.details}
 					onClick={(e) => {
 						e.stopPropogation();
+						toggleModal();
 						routeToUserDetails(listItem.id);
 					}}
 				>
@@ -84,6 +92,30 @@ function ListItem({ item }) {
 
 			</section>
 			<Table data={data} columns={columns} />
+
+			<div className={styles.details_modal}>
+				<Modal size="md" show={openDetails} onClose={toggleModal}>
+					<Modal.Header title="View Feedback" />
+					<Modal.Body>
+						<div style={{ paddingBottom: '10px', color: '#333333', gap: '10px' }}>
+							Product Knowledge
+							<IcMInformation />
+						</div>
+						<div style={{ paddingBottom: '10px', color: '#4F4F4F' }}>Feedback</div>
+						<div>
+							et consectetur adipisicing elit. Quis, assumenda.
+							Hic ipsam doloremque assumenda et soluta expedita
+							consequuntur, voluptates tenetur rem obcaecati
+							sapiente aliquam animi voluptas. Pariatur eaque aut sunt?
+							Lorem ipsum, dolor sit amet consectetur
+							adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda
+							et soluta expedita consequuntur,
+							voluptates tenetur rem obcaecati sapiente aliquam animi voluptas.
+							Pariatur eaque aut sunt?
+						</div>
+					</Modal.Body>
+				</Modal>
+			</div>
 		</div>
 	);
 }

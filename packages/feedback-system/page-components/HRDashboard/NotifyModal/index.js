@@ -6,34 +6,24 @@ import useNotifyManagers from './useNotifyManagers';
 function NotifyModal({ setNotifyModal = () => {} }) {
 	const { getNotifiableManagersData = () => {}, notify = () => {} } = useNotifyManagers;
 
-	// const { data: notifyData = {}, loading = false } = getNotifiableManagersData();
-
+	const { data: notifyData = {}, loading = false } = getNotifiableManagersData();
+	
+	var manager_cnt = 20;
 	const notifyManagers = () => {
 		try {
 			notify();
 			setNotifyModal(false);
-			Toast.success('20 Managers Notifed...');
+			Toast.success(`${manager_cnt} Managers Notified...`);
 		} catch (e) {
 			Toast.error(e.toString());
 		}
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.notify_header}>Are you sure you wish to send notifications to the following?</div>
 
-			<div className={styles.notify_card}>
-				<div style={{ flex: 1 }}>
-					<p className={styles.label}>Total Managers Notified:</p>
-					<div className={styles.value}>{20}</div>
-				</div>
-				<div style={{ flex: 1 }}>
-					<p className={styles.label}>Total Feedbacks Pending:</p>
-					<div className={styles.value}>{50}</div>
-				</div>
-			</div>
-
-			<div>
+			<div className={styles.button_container}>
 				<Button themeType="tertiary" onClick={() => setNotifyModal(false)}>Cancel</Button>
 				<Button themeType="accent" onClick={() => notifyManagers()}>Notify</Button>
 			</div>

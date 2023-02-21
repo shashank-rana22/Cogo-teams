@@ -2,8 +2,8 @@
 	padding: 0;
 	margin-top: 16px;
 	overflow-x: scroll;
-	background: #fff;
 	border-radius: 8px;
+	/* background: black; */
 
 	:global{
 		.ui_table_head_container {
@@ -15,8 +15,22 @@
 		}
 	}
 }
+.table{
+	/* padding:0 15px 5px 15px; */
+	background: #fff;
+}
 
 .pagination_container {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.column{
+}
+
+.details_button{
+	background:#fff;
+	text-decoration:underline;
+	font-weight:600;
+	border:0;
 }
