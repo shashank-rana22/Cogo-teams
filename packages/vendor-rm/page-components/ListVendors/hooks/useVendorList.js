@@ -1,5 +1,5 @@
 import { Tooltip, Button, Toast } from '@cogoport/components';
-import { IcCFtick, IcMError } from '@cogoport/icons-react';
+import { IcCFcrossInCircle, IcCFtick, IcMError } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -7,20 +7,19 @@ import { useState, useEffect } from 'react';
 import styles from '../styles.module.css';
 
 const ICON_MAPPING = {
-	pending_from_user : <IcMError />,
-	verified          : <IcCFtick />,
+	pending  : <IcMError width={16} height={16} />,
+	verified : <IcCFtick width={16} height={16} />,
+	rejected : <IcCFcrossInCircle width={16} height={16} />,
 };
 
 const renderToolTipContent = (unique_services) => (
 	<div>
-		{
-					(unique_services || []).map((item, index) => {
-						if (index === 0) {
-							return null;
-						}
-						return <div>{startCase(item)}</div>;
-					})
-				}
+		{(unique_services || []).map((item, index) => {
+			if (index === 0) {
+				return null;
+			}
+			return <div>{startCase(item)}</div>;
+		})}
 	</div>
 );
 
@@ -49,7 +48,7 @@ const renderUniqueServices = ({ services, type }) => {
 				placement="left"
 			>
 				{length - 1 > 0 ? (
-					<div>
+					<div className={styles.underline}>
 						+
 						{length - 1}
 						{' '}
@@ -98,9 +97,10 @@ const useVendorList = () => {
 		{
 			Header   : 'VENDOR ID',
 			id       : 'a',
-			accessor : ({ id = '' }) => (
-				<section>
-					#646464
+			accessor : ({ serial_id = '' }) => (
+				<section className={styles.bold}>
+					#
+					{serial_id}
 				</section>
 			),
 		},
@@ -118,7 +118,7 @@ const useVendorList = () => {
 			Header   : 'NAME',
 			id       : 'c',
 			accessor : ({ business_name = '' }) => (
-				<section>
+				<section className={styles.bold}>
 					{startCase(business_name)}
 				</section>
 			),
@@ -127,7 +127,7 @@ const useVendorList = () => {
 			Header   : 'PAN/GST',
 			id       : 'd',
 			accessor : ({ registration_number = '' }) => (
-				<section>
+				<section className={styles.bold}>
 					{registration_number}
 				</section>
 			),
@@ -136,7 +136,7 @@ const useVendorList = () => {
 			Header   : 'CATEGORY',
 			id       : 'e',
 			accessor : ({ services = [] }) => (
-				<section>
+				<section className={styles.bold}>
 					{renderUniqueServices({ services, type: 'category' })}
 				</section>
 			),
@@ -146,7 +146,7 @@ const useVendorList = () => {
 			id     : 'f',
 
 			accessor: ({ services = [] }) => (
-				<section>
+				<section className={styles.bold}>
 					{renderUniqueServices({ services, type: 'sub_category' })}
 				</section>
 			),
@@ -156,7 +156,7 @@ const useVendorList = () => {
 			id     : 'g',
 
 			accessor: ({ created_at = '' }) => (
-				<section>
+				<section className={styles.bold}>
 					{formatDate(created_at)}
 				</section>
 			),
@@ -165,9 +165,8 @@ const useVendorList = () => {
 			Header   : '',
 			id       : 'jh',
 			accessor : () => (
-				<section>
+				<section className={styles.bold}>
 					<Button size="md" themeType="secondary" onClick={() => console.log('poiuytrewq')}>
-
 						VIEW MORE
 					</Button>
 				</section>

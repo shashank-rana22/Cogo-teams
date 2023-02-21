@@ -38,7 +38,7 @@
 }
 
 .icon_container {
-    display: flex;
-    align-items: center;
-    color: #F68B21 !important;
+	display: flex;
+	align-items: center;
+	color: #f68b21 !important;
 }

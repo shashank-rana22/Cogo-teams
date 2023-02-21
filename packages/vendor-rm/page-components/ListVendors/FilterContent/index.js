@@ -37,7 +37,7 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 			</div>
 
 			<div className={styles.select_container}>
-				<div className={styles.label}>Data Type</div>
+				<div className={styles.label}>Category</div>
 				<Select
 					value={filters?.category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, category: value }))}
@@ -47,7 +47,7 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 			</div>
 
 			<div className={styles.select_container}>
-				<div className={styles.label}>Model Attribute</div>
+				<div className={styles.label}>Sub-Category</div>
 				<Select
 					value={filters?.sub_category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, sub_category: value }))}

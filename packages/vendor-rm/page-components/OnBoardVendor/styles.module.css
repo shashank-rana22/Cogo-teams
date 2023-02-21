@@ -1,8 +1,8 @@
 .back_container {
 	display: flex;
 	align-items: center;
-	cursor: pointer;
 	width: fit-content;
+	cursor: pointer;
 }
 
 .back_text {

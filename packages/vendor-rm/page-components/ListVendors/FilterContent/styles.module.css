@@ -1,13 +1,21 @@
 .container {
 	display: flex;
 	flex-direction: column;
+
+	/* :global {
+		.tippy-box .ui_popover_container{
+			.tippy-content {
+				width: 100% !important;
+			}
+		}
+
+	} */
 }
 
 .header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 15px;
 }
 
 .button_container {
@@ -22,4 +30,8 @@
 	margin-bottom: 4px;
 	margin-left: 8px;
 	font-size: 15px;
+}
+
+.select_container {
+	margin-top: 16px;
 }

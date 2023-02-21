@@ -44,10 +44,10 @@
 	color: #cb6464;
 }
 
-.element_container { 
+.element_container {
 	display: flex;
 	flex-direction: row;
-	width: 90.5% 
+	width: 90.5%;
 }
 
 .button {

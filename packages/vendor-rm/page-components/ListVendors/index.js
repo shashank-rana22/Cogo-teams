@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 
 import EmptyPage from './EmptyPage';
 import FilterContent from './FilterContent';
+import Header from './Header';
 import useVendorList from './hooks/useVendorList';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
@@ -40,6 +41,7 @@ function ListVendors() {
 
 	return (
 		<>
+			<Header />
 			<div className={styles.kyc}>
 				<div
 					role="presentation"
@@ -54,48 +56,58 @@ function ListVendors() {
 					<div className={styles.value}>1222</div>
 				</div>
 			</div>
-			<div className={styles.group}>
-				<h3 className={styles.title}>All Vendors</h3>
-				<Popover
-					theme="light"
-					placement="bottom"
-					visible={showFilter}
-					content={(
-						<FilterContent
-							setParams={setParams}
-							setShowFilter={setShowFilter}
-						/>
-					)}
-					interactive
-				>
-					<div
-						role="presentation"
-						className={styles.filter_container}
-						onClick={() => setShowFilter(!showFilter)}
-					>
-						<p className={styles.text}>Filter</p>
-						<IcMFilter style={{ margin: '2px 2px 2px 4px' }} />
-					</div>
-				</Popover>
-				<Input
-					value={params.filters?.q}
-					onChange={(value) => setParams((pv) => ({
-						...pv,
-						filters: { ...pv.filters, q: value || undefined },
-					}))}
-					placeholder="Start type content name to search..."
-				/>
 
-				<div className={styles.button_container}>
-					<Button
-						size="lg"
-						role="presentation"
-						onClick={() => router.push('/onboard-vendor')}
-						themeType="accent"
-					>
-						ADD NEW VENDOR
-					</Button>
+			<div className={styles.group}>
+				<div className={styles.heading}>
+					<h3 className={styles.title}>All Vendors</h3>
 				</div>
+				<div className={styles.actions_container}>
+					<Popover
+						theme="light"
+						placement="bottom"
+						visible={showFilter}
+						content={(
+							<FilterContent
+								setParams={setParams}
+								setShowFilter={setShowFilter}
+							/>
+
+						)}
+						interactive
+					>
+						<div
+							role="presentation"
+							className={styles.filter_container}
+							onClick={() => setShowFilter(!showFilter)}
+						>
+							<p className={styles.text}>Filter</p>
+							<IcMFilter style={{ margin: '2px 2px 2px 4px' }} />
+						</div>
+					</Popover>
+					<div className={styles.input_wrapper}>
+						<Input
+							size="md"
+							value={params.filters?.q}
+							onChange={(value) => setParams((pv) => ({
+								...pv,
+								filters: { ...pv.filters, q: value || undefined },
+							}))}
+							placeholder="Start type content name to search..."
+						/>
+					</div>
+
+					<div className={styles.button_container}>
+						<Button
+							size="lg"
+							role="presentation"
+							onClick={() => router.push('/onboard-vendor')}
+							themeType="accent"
+						>
+							Add New Vendor
+						</Button>
+					</div>
+				</div>
+
 			</div>
 
 			<TabularSection
