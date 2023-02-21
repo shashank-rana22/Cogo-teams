@@ -1,27 +1,22 @@
-import { Pagination } from '@cogoport/components';
+import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
-import ShimmerState from '../../../../common/ShimmerState';
+import ROLE_TYPE_LIST_MAPPING from '../../../../constants/role-type-list-mapping-quotas';
 
-import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
 	const {
 		data,
+		columns,
 		toggleRoleType,
 		loading,
 		getNextPage,
-		setQuotaItem,
 	} = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
-	if (loading) {
-		return <ShimmerState />;
-	}
-
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -35,27 +30,18 @@ function List(props) {
 		);
 	}
 
-	// const showStatusConfirmationModal = !isEmpty(deleteQuotaId);
-
-	// const onCloseModal = () => {
-	// 	setRequestStatusItem({});
-	// };
+	const filteredColumns = columns.filter((listItem) => (
+		ROLE_TYPE_LIST_MAPPING[toggleRoleType]?.includes(listItem.key)
+	));
 
 	return (
 		<div className={styles.list_container}>
-			{list.map((item) => (
-				<ListItem
-					id="request_list"
-					key={item.id}
-					data={item}
-					toggleRoleType={toggleRoleType}
-					onClickActionItem={(action) => setQuotaItem({
-						...(action === 'edit' && item),
-						id: item.id,
-						action,
-					})}
-				/>
-			))}
+			<Table
+				className={styles.table}
+				columns={filteredColumns}
+				data={list || []}
+				loading={loading}
+			/>
 
 			<div className={styles.pagination_container}>
 				<Pagination

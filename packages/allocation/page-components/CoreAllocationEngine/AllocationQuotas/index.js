@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function AllocationQuotas() {
 	const {
 		data,
+		columns,
 		loading:listLoading,
 		params,
 		setParams,
@@ -39,18 +40,18 @@ function AllocationQuotas() {
 
 			<List
 				data={data}
+				columns={columns}
 				loading={listLoading}
 				getNextPage={getNextPage}
 				fetchList={refetch}
 				toggleRoleType={toggleRoleType}
-				setQuotaItem={setQuotaItem}
 			/>
 
 			{quotaItem && (
 				<Modal
 					show={quotaItem}
 					placement="top"
-					size={quotaItem.action === 'delete' ? 'sm' : 'lg'}
+					size={quotaItem.type === 'delete' ? 'sm' : 'lg'}
 					onClose={() => setQuotaItem(null)}
 					closeOnOuterClick={false}
 				>
