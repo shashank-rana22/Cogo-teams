@@ -4,15 +4,15 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function BulkUpdateMode({
-	list,
+	// list,
 	checkedRowsId = [],
 	setCheckedRowsId = () => {},
 	confirmModalState,
 	setConfirmModalState = () => {},
 	params,
 	setParams = () => {},
-	selectAll,
-	setSelectAll = () => {},
+	// selectAll,
+	// setSelectAll = () => {},
 	searchQuery,
 }) {
 	const applyBulkFilter = async () => {
@@ -31,25 +31,25 @@ function BulkUpdateMode({
 		});
 	};
 
-	const onSelectAll = (val) => {
-		const listIds = list.map(({ id }) => id);
+	// const onSelectAll = (val) => {
+	// 	const listIds = list.map(({ id }) => id);
 
-		setCheckedRowsId((previousIds) => {
-			let newCheckedRowsIds = previousIds;
+	// 	setCheckedRowsId((previousIds) => {
+	// 		let newCheckedRowsIds = previousIds;
 
-			if (val) {
-				listIds.forEach((listId) => {
-					if (!previousIds.includes(listId)) {
-						newCheckedRowsIds.push(listId);
-					}
-				});
-			} else {
-				newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
-			}
+	// 		if (val) {
+	// 			listIds.forEach((listId) => {
+	// 				if (!previousIds.includes(listId)) {
+	// 					newCheckedRowsIds.push(listId);
+	// 				}
+	// 			});
+	// 		} else {
+	// 			newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
+	// 		}
 
-			return newCheckedRowsIds;
-		});
-	};
+	// 		return newCheckedRowsIds;
+	// 	});
+	// };
 
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
@@ -66,12 +66,7 @@ function BulkUpdateMode({
 			},
 		}));
 
-		setSelectAll('');
-	};
-
-	const onItemChangeInChips = (val) => {
-		setSelectAll(val);
-		onSelectAll(val);
+		// setSelectAll('');
 	};
 
 	const selectedItemsForUpdate = !isEmpty(checkedRowsId) ? checkedRowsId.length : '';
@@ -79,14 +74,6 @@ function BulkUpdateMode({
 	return (
 		<div className={styles.bulk_update_container}>
 			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<Checkbox
-					label="Select All"
-					checked={selectAll}
-					onChange={
-						(e) => onItemChangeInChips(e?.target?.checked)
-}
-					className={styles.select_all_checkbox}
-				/>
 
 				<Button
 					size="sm"

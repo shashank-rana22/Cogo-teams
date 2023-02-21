@@ -9,7 +9,7 @@ function UserActions({
 	confirmModalState,
 	setConfirmModalState = () => {},
 	checkedRowsId,
-	onResettingBulkMode,
+	// onResettingBulkMode,
 }) {
 	const requestType = confirmModalState.type;
 
@@ -40,7 +40,7 @@ function UserActions({
 		confirmModalState,
 		setConfirmModalState,
 		checkedRowsId,
-		onResettingBulkMode,
+		// onResettingBulkMode,
 	});
 
 	return (

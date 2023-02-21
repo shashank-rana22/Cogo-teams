@@ -197,7 +197,6 @@ function ListItem(props) {
 					)}
 					onClickOutside={() => setShowActions(false)}
 				>
-
 					<div className={styles.svg_container}>
 						<IcMOverflowDot height={16} width={16} onClick={() => setShowActions(!showActions)} />
 					</div>
