@@ -10,8 +10,12 @@ function FilterPopover() {
 	const [showFilter, setShowFilter] = useState(false);
 
 	return (
-		<Popover placement="bottom" trigger="click" caret={false} render={<FilterContent />}>
-
+		<Popover
+			caret={false}
+			trigger="click"
+			placement="bottom"
+			render={<FilterContent />}
+		>
 			<div
 				role="presentation"
 				className={styles.filters}
@@ -19,11 +23,12 @@ function FilterPopover() {
 					setShowFilter(!showFilter);
 				}}
 			>
-				<div>Filter By </div>
-
-				<div>
-					<IcMArrowDown width={16} height={16} className={` ${styles.caret_arrow} ${showFilter && styles.caret_active}`} />
-				</div>
+				<div>Filter By</div>
+				<IcMArrowDown
+					width={16}
+					height={16}
+					className={` ${styles.caret_arrow} ${showFilter && styles.caret_active}`}
+				/>
 			</div>
 
 		</Popover>

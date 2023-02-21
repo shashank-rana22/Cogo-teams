@@ -1,7 +1,6 @@
 .container {
     margin-top: 20px;
     display: flex;
-    
 }
 
 .search {
@@ -9,7 +8,17 @@
     margin-right: 16px;
 }
 
+.filter_popover {
+    width: 20%;
 
-.filter_popover{
-    width:20%;
+    :global {
+		.ui_popover_container {
+			margin-top: -8px;
+		}
+	}
+}
+
+.tabGroup {
+    width: fit-content;
+    margin-top: 12px;
 }
