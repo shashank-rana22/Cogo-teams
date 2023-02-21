@@ -5,7 +5,7 @@ import {
 import { useRouter } from '@cogoport/next';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
-import useListAllocationInstances from '../../../../../../../../hooks/useListAllocationInstances';
+import useListAllocationInstances from '../../../../../../hooks/useListAllocationInstances';
 
 import styles from './styles.module.css';
 
@@ -119,7 +119,7 @@ function ListInstances({ item }) {
 	});
 
 	return (
-		<div>
+		<section>
 			<div className={styles.daterange_container}>
 				<DateRangepicker
 					value={dateRange}
@@ -134,7 +134,6 @@ function ListInstances({ item }) {
 				columns={columns}
 				data={data}
 				loading={listLoading}
-				// onRowClick={onRowClick}
 			/>
 
 			<div className={styles.pagination_container}>
@@ -146,7 +145,7 @@ function ListInstances({ item }) {
 					onPageChange={getNextPage}
 				/>
 			</div>
-		</div>
+		</section>
 	);
 }
 

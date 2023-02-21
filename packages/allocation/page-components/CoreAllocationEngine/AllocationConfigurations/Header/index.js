@@ -16,6 +16,7 @@ function Header(props) {
 	return (
 		<div className={styles.header_container}>
 			<Legend
+				className={styles.legends}
 				direction="horizontal"
 				size="md"
 				items={legendItems}

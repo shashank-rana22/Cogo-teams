@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 
-import Form from '../../../../../../../common/Form';
-import useCreateConfigurations from '../../../../../../../hooks/useCreateConfigurations';
+import Form from '../../../../../common/Form';
+import useCreateConfigurations from '../../../../../hooks/useCreateConfigurations';
 
 import styles from './styles.module.css';
 

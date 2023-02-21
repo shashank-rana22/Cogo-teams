@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 
-import useCheckConfigurationPublishability from '../../../../../../../hooks/useCheckConfigurationPublishability';
+import useCheckConfigurationPublishability from '../../../../../hooks/useCheckConfigurationPublishability';
 
 function CheckConfigurationPublishablity({
 	item = {},

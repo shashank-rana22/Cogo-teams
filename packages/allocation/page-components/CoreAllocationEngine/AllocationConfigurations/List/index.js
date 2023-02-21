@@ -1,20 +1,25 @@
-import { Pagination } from '@cogoport/components';
+import { Modal, Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
-import ShimmerState from '../../../../common/ShimmerState';
+import CONFIGURATIONS_WORKFLOW_MAPPING from '../../../../constants/configurations-workflow-mapping';
 
-import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { list, loading, paginationData, getNextPage, listRefetch } = props;
+	const {
+		list,
+		loading,
+		listRefetch,
+		paginationData,
+		getNextPage,
+		columns,
+		listItem,
+		workflowName,
+		setWorkflowName,
+	} = props;
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
-
-	if (loading) {
-		return <ShimmerState />;
-	}
 
 	if (isEmpty(list)) {
 		return (
@@ -31,10 +36,15 @@ function List(props) {
 	}
 
 	return (
-		<div className={styles.list_container}>
-			{list.map((item) => (
-				<ListItem key={item.id} item={item} listRefetch={listRefetch} />
-			))}
+		<section className={styles.list_container}>
+			<div className={styles.table_container}>
+				<Table
+					className={styles.table}
+					columns={columns}
+					data={list}
+					loading={loading}
+				/>
+			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination
@@ -45,7 +55,20 @@ function List(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
-		</div>
+
+			{workflowName && (
+				<Modal
+					size={CONFIGURATIONS_WORKFLOW_MAPPING[workflowName]?.size}
+					show={!!workflowName}
+					onClose={() => setWorkflowName(null)}
+					placement="top"
+					closeOnOuterClick={false}
+				>
+					{CONFIGURATIONS_WORKFLOW_MAPPING[workflowName]
+						?.render({ item: listItem, listRefetch, setWorkflowName })}
+				</Modal>
+			)}
+		</section>
 	);
 }
 
