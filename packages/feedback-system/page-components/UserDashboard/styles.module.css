@@ -7,7 +7,9 @@
         margin: 0px;
     }
 }
-
+.user_profile{
+    padding:10px 0;
+}
 .stats_container {
     display: flex;
     padding-top: 16px;
@@ -15,4 +17,34 @@
 
 .performance_chart {
     flex: 6;
+}
+
+.header_filters {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* margin-top: 5px; */
+	padding-bottom:20px;
+	.list_header {
+		color: "#393f70";
+		font-size: 18px;
+		font-weight: 500;
+		margin: 0;
+	}
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	
+	.month_container:not(:last-child) {
+		margin-right: 8px;
+	}
+}
+
+.month_container {
+	:global(.ui_select_display_container) {
+		width: 160px;
+		height: 38px;
+	}
 }

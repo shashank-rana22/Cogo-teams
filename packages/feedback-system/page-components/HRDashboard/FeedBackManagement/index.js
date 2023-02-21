@@ -85,13 +85,6 @@ function FeedbackManagement() {
 					<p className={styles.header_text}>
 						All Managers List
 					</p>
-
-					<div className={styles.notify}>
-						<Button themeType="accent" size="md">
-							<IcMNotifications style={{ marginRight: '4px' }} />
-							Notify
-						</Button>
-					</div>
 				</div>
 
 				{/* <Upload value={fileValue} onChange={setFileValue} loading={uploadFileLoading} /> */}

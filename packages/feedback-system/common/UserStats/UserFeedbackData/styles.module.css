@@ -3,7 +3,7 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 24px;
-
+	padding-bottom:5px;
 	.list_header {
 		color: "#393f70";
 		font-size: 18px;
