@@ -97,6 +97,7 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 					<div
 						role="presentation"
 						className={styles.name}
+						style={{ cursor: 'pointer' }}
 						// eslint-disable-next-line no-undef
 						onClick={() => window.open(ORG_PAGE_URL, '_blank')}
 					>

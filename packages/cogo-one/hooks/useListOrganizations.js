@@ -6,6 +6,7 @@ const useListOrganizations = ({ orgId = null }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const [{ data, loading }, trigger] = useRequest(
+
 		{
 			url    : '/list_organizations',
 			method : 'get',
@@ -27,12 +28,16 @@ const useListOrganizations = ({ orgId = null }) => {
 		}
 	}, [orgId]);
 
-	const { tags = [], partner_id:channelPartnerID = null } = data || {};
+	const { list = [] } = data || {};
+	const { tags = [], partner_id:channelPartnerID = null } = list?.[0] || {};
+
+	const isChannelPartner = tags?.includes('partner') || false;
 
 	const ORG_ID = orgId || '272a2072-7009-4df9-b852-185bfa49a541';
+
 	let ORG_PAGE_URL = '';
 	const openNewTab = (activeTab) => {
-		if (tags?.includes('partner')) {
+		if (isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}`;
 		} else {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORG_ID}`;

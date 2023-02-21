@@ -12,6 +12,7 @@ const getActiveCardDetails = (data = {}) => {
 		lead_user_id = '',
 		user_email = '',
 		user_type = '',
+		sender = null,
 	} = data || {};
 
 	if (channel_type === 'platform_chat') {
@@ -24,6 +25,7 @@ const getActiveCardDetails = (data = {}) => {
 			channel_type,
 			mobile_no,
 			user_type,
+			sender,
 			email: user_email,
 		};
 	}
