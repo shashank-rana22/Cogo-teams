@@ -13,7 +13,7 @@ function TransactionalActivity({ transactional = {} }) {
 
 	if (isEmpty(list)) {
 		return (
-			<EmptyState />
+			<EmptyState type="activities" />
 		);
 	}
 

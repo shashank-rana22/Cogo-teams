@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { format } from '@cogoport/utils';
 
+import MessageBody from '../../../../../../common/MessageBody';
 import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
-import MessageBody from '../MessageBody';
 
 import styles from './styles.module.css';
 

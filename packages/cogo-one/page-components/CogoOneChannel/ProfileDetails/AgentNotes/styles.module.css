@@ -134,3 +134,11 @@
 	max-height: 400px;
 	overflow-y: scroll;
 }
+
+.loder_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-top: 40px;
+}

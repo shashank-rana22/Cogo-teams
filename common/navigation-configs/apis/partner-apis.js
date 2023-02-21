@@ -10267,6 +10267,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'create_lead_user_profile',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
 
 	],
 };

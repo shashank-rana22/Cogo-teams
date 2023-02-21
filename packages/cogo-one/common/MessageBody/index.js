@@ -1,4 +1,4 @@
-import MESSAGE_MAPPING from '../../../../../../constants/MESSAGE_MAPPING';
+import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 
 import CustomFileDiv from './CustomFileDiv';
 import styles from './styles.module.css';

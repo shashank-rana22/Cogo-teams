@@ -19,7 +19,7 @@ function FormatData({
 		const { email = '', id = '', name = '' } = user_data || {};
 		userName = name;
 		userMail = email;
-		userMobile = user_number === null ? '' : `91${user_number}`;
+		userMobile = user_number === null ? '' : `+91 ${user_number}`;
 		orgId = organization_id !== null ? organization_id : '';
 		userId = id;
 		channelType = channel_type;
@@ -48,6 +48,7 @@ function FormatData({
 			}
 		}
 	}
+	console.log(userMobile, 'userMobilenjghf');
 
 	return {
 		userId,

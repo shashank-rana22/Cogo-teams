@@ -1,0 +1,11 @@
+.object_styles {
+	max-width: 300px;
+	max-height: 250px;
+
+	/* pointer-events: none; */
+}
+
+.clickable_object {
+	display: block;
+	cursor: pointer;
+}
