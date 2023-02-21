@@ -5,7 +5,7 @@ import DisplayDetails from './DisplayDetails';
 import Header from './Header';
 import useKyc from './hooks/useKyc';
 import styles from './styles.module.css';
-// import Success from './Success';
+import Success from './Success';
 
 function VerificationDetails({
 	vendorInformation = {},
@@ -14,29 +14,40 @@ function VerificationDetails({
 	getVendor = () => {},
 	getVendorLoading = false,
 }) {
-	const { response = {} } = useKyc({ getVendor });
-
-	console.log('response:: ', response);
+	const {
+		onSubmit = () => {},
+		showSuccessScreen = false,
+		loading = false,
+	} = useKyc({ getVendor });
 
 	return (
-		<>
-			<Header />
+		<div>
+			{
+				showSuccessScreen ? (
+					<Success />
+				) : (
+					<>
+						<Header />
 
-			<div className={styles.button_container}>
-				<div className={styles.text_container}>
-					Submit the following details for verification?
-				</div>
+						<div className={styles.button_container}>
+							<div className={styles.text_container}>
+								Submit the following details for verification?
+							</div>
 
-				<ButtonLayout
-					activeStepper={activeStepper}
-					setActiveStepper={setActiveStepper}
-				/>
-			</div>
+							<ButtonLayout
+								activeStepper={activeStepper}
+								setActiveStepper={setActiveStepper}
+								onSubmit={onSubmit}
+								loading={loading}
+							/>
+						</div>
 
-			<DisplayDetails vendorInformation={vendorInformation} loading={getVendorLoading} />
+						<DisplayDetails vendorInformation={vendorInformation} loading={getVendorLoading} />
+					</>
+				)
+			}
 
-			{/* <Success /> */}
-		</>
+		</div>
 	);
 }
 

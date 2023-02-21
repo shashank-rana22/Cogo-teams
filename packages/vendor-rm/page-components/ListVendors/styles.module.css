@@ -109,3 +109,10 @@
 .value {
 	color: red;
 }
+
+.button_container {
+	display: flex;
+	flex-basis: 25%;
+	align-items: center;
+	justify-content: flex-end;
+}
