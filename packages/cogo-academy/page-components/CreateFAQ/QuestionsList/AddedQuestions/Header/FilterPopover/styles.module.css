@@ -1,0 +1,30 @@
+.flex_items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.caret_arrow {
+    transition: 0.3s;
+
+    &.caret_active {
+        transform: rotate(180deg);
+        transition: 0.3s;
+    }
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: #ffffff;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+
+    &:hover {
+		border: 1px solid #f68a21;
+	}
+}

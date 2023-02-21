@@ -1,26 +1,24 @@
 .container {
     margin-top: 20px;
     display: flex;
-    
 }
 
 .search {
-    width: 100%;
+    width: 80%;
     margin-right: 16px;
 }
 
-.filters {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.filter_popover {
     width: 20%;
-    background: #ffffff;
-    padding: 0 16px;
-    cursor: pointer;
-    border: 1px solid #d3d3d3;
-    border-radius: 4px;
 
-    &:hover {
-		border: 1px solid #f68a21;
+    :global {
+		.ui_popover_container {
+			margin-top: -8px;
+		}
 	}
+}
+
+.tabGroup {
+    width: fit-content;
+    margin-top: 12px;
 }
