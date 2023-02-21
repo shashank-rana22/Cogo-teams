@@ -1,4 +1,4 @@
-import { Modal, Pagination } from '@cogoport/components';
+import { Modal, Pagination, Table, Tooltip, Pill } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -13,6 +13,7 @@ function List({
 	list,
 	loading,
 	params,
+	columns,
 	setParams = () => {},
 	checkedRowsId = [],
 	setCheckedRowsId = () => {},
@@ -26,7 +27,13 @@ function List({
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState(false);
 
-	if (isEmpty(list) && !loading) {
+	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
+
+	// if (loading) {
+	// 	return <ShimmerState />;
+	// }
+
+	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -48,26 +55,26 @@ function List({
 		}));
 	};
 
-	const onChangeCheckbox = (e) => {
-		if (!e.target.checked) {
-			setCheckedRowsId([]);
-			setSelectAll('');
-			setConfirmModalState((prev) => ({
-				...prev,
-				showApproveAllButton: e.target.checked,
-			}));
+	// const onChangeCheckbox = (e) => {
+	// 	if (!e.target.checked) {
+	// 		setCheckedRowsId([]);
+	// 		setSelectAll('');
+	// 		setConfirmModalState((prev) => ({
+	// 			...prev,
+	// 			showApproveAllButton: e.target.checked,
+	// 		}));
 
-			if ((!isEmpty(checkedRowsId))) {
-				setParams((p) => ({
-					...p,
-					filters: {
-						...((p || {}).filters || {}),
-						id: undefined,
-					},
-				}));
-			}
-		}
-	};
+	// 		if ((!isEmpty(checkedRowsId))) {
+	// 			setParams((p) => ({
+	// 				...p,
+	// 				filters: {
+	// 					...((p || {}).filters || {}),
+	// 					id: undefined,
+	// 				},
+	// 			}));
+	// 		}
+	// 	}
+	// };
 
 	return (
 		<div>
@@ -86,6 +93,32 @@ function List({
 				/>
 			) : null}
 
+			<div className={styles.list_container}>
+				{/* {list.map((item) => (
+					<ListItem
+						key={item.id}
+						item={item}
+						checkedRowsId={checkedRowsId}
+						setCheckedRowsId={setCheckedRowsId}
+						activeTab={activeTab}
+						setConfirmModalState={setConfirmModalState}
+					/>
+				))} */}
+				<div className={styles.table_container}>
+					<Table className={styles.request_table} data={list} columns={modifiedColumns} loading={loading} />
+				</div>
+			</div>
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={getNextPage}
+				/>
+			</div>
+
 			{confirmModalState.showConfirmationModal && (
 				<Modal
 					show={confirmModalState.showConfirmationModal}
@@ -97,35 +130,10 @@ function List({
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
 						checkedRowsId={checkedRowsId}
-						onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
+						// onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
 					/>
 				</Modal>
 			)}
-
-			<div className={styles.list_container}>
-				{list.map((item) => (
-					<ListItem
-						key={item.id}
-						item={item}
-						checkedRowsId={checkedRowsId}
-						setCheckedRowsId={setCheckedRowsId}
-						activeTab={activeTab}
-						setConfirmModalState={setConfirmModalState}
-					/>
-				))}
-
-			</div>
-
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={getNextPage}
-				/>
-
-			</div>
 		</div>
 
 	);

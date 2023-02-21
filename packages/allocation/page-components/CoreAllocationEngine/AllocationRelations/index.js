@@ -26,6 +26,7 @@ function Relations() {
 		searchValue = '',
 		debounceQuery,
 		searchQuery,
+		columns,
 	} = useAllocationRelations();
 
 	return (
@@ -46,6 +47,7 @@ function Relations() {
 				loading={loading}
 				params={params}
 				setParams={setParams}
+				columns={columns}
 				checkedRowsId={checkedRowsId}
 				setCheckedRowsId={setCheckedRowsId}
 				activeTab={activeTab}
