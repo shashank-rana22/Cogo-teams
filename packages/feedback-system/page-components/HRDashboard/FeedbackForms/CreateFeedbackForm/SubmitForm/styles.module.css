@@ -9,8 +9,14 @@
 }
 
 .button_container {
-    position: sticky;
+    position: absolute;
     bottom: 0px;
+    right: 0px;
+    padding: 16px 16px 0px;
+    
+    width: 100%;
     display: flex;
     justify-content: flex-end;
+
+    border-top: 1px solid #6fa5ab;
 }

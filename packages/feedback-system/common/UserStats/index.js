@@ -101,6 +101,7 @@ function UserStats() {
 					</div>
 				</div>
 
+
 				<div className={styles.performance_chart}>
 					<PerformanceChart userId={userId} />
 				</div>

@@ -1,10 +1,13 @@
 import { Table, Input, Button, Modal } from '@cogoport/components';
 import { IcMSearchlight, IcMInformation } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { getByKey } from '@cogoport/utils';
+import { getByKey, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
+
 import styles from './styles.module.css';
+import useManagerListItem from './useManagerListItem';
 
 const LIST_COLUMNS_MAPPING = {
 
@@ -24,6 +27,8 @@ function ListItem({ item }) {
 
 	const Router = useRouter();
 
+	const { data: { list = [] } = {}, loading } = useManagerListItem({ item });
+
 	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
 		Header   : <div key={key}>{value}</div>,
 		accessor : key,
@@ -39,28 +44,26 @@ function ListItem({ item }) {
 		}
 	};
 
-	const data = item.details.map((listItem) => {
+	const data = (list || []).map((listItem) => {
 		const filteredData = {
 			user_name: (
-				<div>{getByKey(listItem, 'user_name', '___')}</div>
+				<div>{getByKey(listItem, 'user_name', '---')}</div>
 			),
 			employee_id: (
-				<div>{getByKey(listItem, 'employee_id', '___')}</div>
+				<div>{getByKey(listItem, 'employee_id', '---')}</div>
 			),
 			latest_kpi: (
-				<div>{getByKey(listItem, 'latest_kpi', '___')}</div>
+				<div>{getByKey(listItem, 'latest_kpi', '---')}</div>
 			),
 			score: (
-				<div>{getByKey(listItem, 'score', '___')}</div>
+				<div>{getByKey(listItem, 'score', '---')}</div>
 			),
 			details: (
 				<Button
 					themeType="link"
 					className={styles.details}
 					onClick={(e) => {
-						e.stopPropogation();
 						toggleModal();
-						routeToUserDetails(listItem.id);
 					}}
 				>
 					View details
@@ -86,23 +89,32 @@ function ListItem({ item }) {
 					size="md"
 					themeType="secondary"
 					onClick={() => {}}
+					disabled={isEmpty(list)}
 				>
 					Download CSV
 				</Button>
 
 			</section>
-			<Table data={data} columns={columns} />
+			{(isEmpty(list) && !loading) ? (
+				<EmptyState
+					height={100}
+					width={140}
+					emptyText="No team members found"
+					textSize="18px"
+				/>
+			) : <Table data={data} columns={columns} loading={loading} /> }
+
 
 			<div className={styles.details_modal}>
 				<Modal size="md" show={openDetails} onClose={toggleModal}>
 					<Modal.Header title="View Feedback" />
-					<Modal.Body>
-						<div style={{ paddingBottom: '10px', color: '#333333', gap: '10px' }}>
+					<Modal.Body >
+						<div className={styles.modal_sub_header}>
 							Product Knowledge
 							<IcMInformation />
 						</div>
-						<div style={{ paddingBottom: '10px', color: '#4F4F4F' }}>Feedback</div>
-						<div>
+						<div style={{ paddingBottom: '14px', color: '#4F4F4F' }}>Feedback</div>
+						<div style={{paddingBottom:'10px'}}>
 							et consectetur adipisicing elit. Quis, assumenda.
 							Hic ipsam doloremque assumenda et soluta expedita
 							consequuntur, voluptates tenetur rem obcaecati

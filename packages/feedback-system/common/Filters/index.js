@@ -1,46 +1,92 @@
-import { Button, Popover } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { Select } from '@cogoport/components';
+import { SelectController, useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
-import CreateForm from '../CreateForm';
+import { deptControls as departmentControls } from '../../utils/departmentControls';
+import { getControls } from '../../utils/filterControls';
+import getMonthControls from '../../utils/monthControls';
 
-import useFilters from './useFilters';
+import styles from './styles.module.css';
 
-function Filters({ controls = [], params = {}, setParams = () => {} }) {
-	const [showFilters, setShowFilters] = useState(false);
+const DEPARTMENT_MAPPING = {
+	technology : 'tech_role',
+	finance    : 'finance_role',
+	business   : 'business_role',
+};
 
-	const { formProps, onSubmit, onCancel } =	useFilters({ params, setParams, setShowFilters });
+function Filters({ params = {}, setParams = () => {} }) {
+	const deptControls = departmentControls.find((control) => control.name === 'department');
 
-	const content = () => (
-		<CreateForm
-			type="filter"
-			formProps={formProps}
-			controls={controls}
-			onSubmit={onSubmit}
-			onCancel={onCancel}
-		/>
-	);
+	const roleControls = params.filters?.department ? departmentControls.find((control) => control.name
+	=== DEPARTMENT_MAPPING[params.filters?.department]) : {};
+
+	const managerControls = getControls().find((control) => control.name === 'manager_id');
+	const monthControls = getMonthControls(params.filters.created_at_year);
+
+	const { watch, control: managerControl = {} } = useForm();
+	const manager = watch('manager_id');
+
+	const setFilter = (val, type) => {
+		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
+	};
+
+	useEffect(() => {
+		setParams({
+			...params,
+			filters: {
+				...(params.filters || {}),
+				manager_id: manager || undefined,
+			},
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [manager]);
 
 	return (
-		<Popover
-			visible={showFilters}
-			theme="light"
-			placement="bottom-start"
-			render={content()}
-			animation="shift-away"
-			interactive
-			caret={false}
-			onClickOutside={() => { setShowFilters(false); }}
-		>
-			<Button
-				size="lg"
-				themeType="secondary"
-				onClick={() => setShowFilters(!showFilters)}
-			>
-				<IcMFilter style={{ marginRight: '4px' }} />
-				Filters
-			</Button>
-		</Popover>
+
+		<div className={styles.department_select}>
+			<Select
+				value={params.filters?.department}
+				onChange={(val) => setFilter(val, 'department')}
+				options={deptControls.options}
+				placeholder="Department..."
+				style={{ marginRight: '8px' }}
+				isClearable={!params.filters?.designation}
+			/>
+			<Select
+				value={params.filters?.designation}
+				onChange={(val) => setFilter(val, 'designation')}
+				options={roleControls.options}
+				disabled={!params.filters?.department}
+				placeholder="Role..."
+				style={{ marginRight: '8px' }}
+				isClearable
+			/>
+
+			<SelectController
+				{...managerControls}
+				control={managerControl}
+				style={{ marginRight: '8px' }}
+			/>
+
+			<Select
+				value={params.filters?.created_at_year}
+				onChange={(val) => setFilter(val, 'created_at_year')}
+				placeholder="Select Year"
+				style={{ marginRight: '8px' }}
+				options={monthControls.created_at_year.options}
+				isClearable={!params.filters?.created_at_month}
+			/>
+
+			<Select
+				value={params.filters?.created_at_month}
+				onChange={(val) => setFilter(val, 'created_at_month')}
+				disabled={!params.filters?.created_at_year}
+				placeholder="Select Month"
+				style={{ marginRight: '8px' }}
+				options={monthControls.created_at_month.options}
+				isClearable
+			/>
+		</div>
 	);
 }
 

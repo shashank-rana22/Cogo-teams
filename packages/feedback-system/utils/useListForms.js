@@ -11,7 +11,7 @@ const useListForms = ({ formsParams = {} }) => {
 	}, { manual: true });
 
 	const getFormList = async () => {
-		await trigger({ params: { ...formsParams, page: pagination || 1, page_limit: 10 } });
+		await trigger({ params: { filters: { ...formsParams }, page: pagination || 1, page_limit: 10 } });
 	};
 
 	useEffect(() => {

@@ -6,7 +6,7 @@ import useNotifyManagers from './useNotifyManagers';
 function NotifyModal({ setNotifyModal = () => {} }) {
 	const { getNotifiableManagersData = () => {}, notify = () => {} } = useNotifyManagers;
 
-	const { data: notifyData = {}, loading = false } = getNotifiableManagersData();
+	// const { data: notifyData = {}, loading = false } = getNotifiableManagersData();
 	
 	var manager_cnt = 20;
 	const notifyManagers = () => {

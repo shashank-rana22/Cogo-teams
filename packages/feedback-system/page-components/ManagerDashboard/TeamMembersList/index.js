@@ -1,4 +1,4 @@
-import { Button, Accordion, Pagination } from '@cogoport/components';
+import { Accordion, Pagination } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -34,28 +34,28 @@ function TeamMembersList({
 
 	const columnsMapping = [
 		{
-			key   : 'feedbacks_given',
-			label : 'Feedbacks Given',
-			value : '36',
-			flex  : 1.7,
+			key: 'feedbacks_given',
+			label: 'Feedbacks Given',
+			value: '36',
+			flex: 1.7,
 		},
 		{
-			key   : 'below_avg_performance',
-			label : 'Below Average Performance',
-			value : '12',
-			flex  : 2.2,
+			key: 'below_avg_performance',
+			label: 'Below Average Performance',
+			value: '12',
+			flex: 2.2,
 		},
 		{
-			key   : 'avg_performance',
-			label : 'Average Performance',
-			value : '12',
-			flex  : 2,
+			key: 'avg_performance',
+			label: 'Average Performance',
+			value: '12',
+			flex: 2,
 		},
 		{
-			key   : 'above_avg_performance',
-			label : 'Above Average Performance',
-			value : '12',
-			flex  : 2.2,
+			key: 'above_avg_performance',
+			label: 'Above Average Performance',
+			value: '12',
+			flex: 2.2,
 		},
 
 	];
@@ -81,7 +81,7 @@ function TeamMembersList({
 
 			</div>
 			<div className={styles.column_map}>
-				{ i.details.length > 0
+				{i.details.length > 0
 					? (columnsMapping.map((colDetails) => {
 						const { key, label, value, flex } = colDetails;
 						return (

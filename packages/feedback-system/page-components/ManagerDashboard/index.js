@@ -5,14 +5,13 @@ import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../common/Columns';
 import PerformanceChart from '../../common/PerformanceChart';
-import TeamStats from '../../common/TeamStats';
+// import TeamStats from '../../common/TeamStats';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import getMonthControls from '../../utils/monthControls';
 
 import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
 
-// const dummyListData = [];
 const dummyListData = [
 	{
 		month                 : 'March',
@@ -156,7 +155,7 @@ function ManagerDashboard() {
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<p className={styles.header_text}>
 				Manager Dashboard
 			</p>
