@@ -89,12 +89,21 @@ function MessageList({
 						const {
 							user_name = '',
 							organization_name = '',
+							user_type = '',
 						} = userData || {};
 
 						const lastActive = new Date(item.updated_at);
 						const checkActiveCard = activeCardId === item?.id;
 
+						const showOrganization = () => {
+							if (['public_website', 'public_cp'].includes(user_type)) {
+								return startCase(user_type);
+							}
+							return startCase(organization_name);
+						};
+
 						const show = getShowChat({ item, appliedFilters, searchValue });
+
 						return (
 							show && (
 								<div
@@ -118,7 +127,7 @@ function MessageList({
 														{startCase(user_name)}
 													</div>
 													<div className={styles.organisation}>
-														{startCase(organization_name)}
+														{showOrganization()}
 													</div>
 												</div>
 											</div>

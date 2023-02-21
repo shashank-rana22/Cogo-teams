@@ -2,10 +2,6 @@
     padding: 10px 10px 20px 10px;
     overflow-y: scroll;
     transition: height 0.3s;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 .file_present_suggestions {
@@ -81,7 +77,7 @@
     max-width: 150px;
     padding: 5px;
     margin: 0 5px;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 15px;
     color: #221f20;
     text-overflow: ellipsis;

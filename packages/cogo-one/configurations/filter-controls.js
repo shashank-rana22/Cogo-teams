@@ -25,7 +25,7 @@ const controls = [
 		value     : [],
 		options   : [
 			{ label: 'Whatsapp', value: 'whatsapp' },
-			{ label: 'Chat Bot', value: 'platform_chat' },
+			{ label: 'Platform Chat', value: 'platform_chat' },
 		],
 	},
 	{

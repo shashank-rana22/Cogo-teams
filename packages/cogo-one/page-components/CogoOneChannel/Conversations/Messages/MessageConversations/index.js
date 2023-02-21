@@ -140,7 +140,6 @@ function MessageConversations({
 				onScroll={handleScroll}
 				ref={messageRef}
 			>
-
 				{loadingPrevMessages && loader}
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received' ? (
@@ -156,6 +155,7 @@ function MessageConversations({
 					)
 				))}
 			</div>
+
 			<div
 				className={cl`${styles.nofile_container} 
 				${
@@ -286,6 +286,7 @@ function MessageConversations({
 							render={(
 								<EmojisBody
 									emojisList={emojisList}
+									setOnClicked={setOnClicked}
 									updateMessage={(val) => setDraftMessages((p) => ({
 										...p,
 										[id]: !p?.[id]
