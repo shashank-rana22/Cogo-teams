@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function VoiceCallComponent({
 	userMobile,
 	orgId,
-	// countryCode,
 	userId,
 	userName,
 	emptyState,
@@ -57,11 +56,15 @@ function VoiceCallComponent({
 							(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
 						onClick={handleCall}
 					/>
-					{!isEmpty(userMobile) && (
+					{!isEmpty(userMobile) ? (
 						<div className={styles.show_number}>
+							+
 							{code}
+							{' '}
 							{number}
 						</div>
+					) : (
+						<div className={styles.show_number}>Number not found</div>
 					)}
 				</div>
 			</div>

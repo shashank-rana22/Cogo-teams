@@ -10,7 +10,7 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
 
 const useListChats = ({
-	firestore, userRoleIds, userId,
+	firestore, userId, isomniChannelAdmin,
 }) => {
 	const [activeCardId, setActiveCardId] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -51,7 +51,12 @@ const useListChats = ({
 	useEffect(() => {
 		setLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
-		const omniChannelQuery = getFireStoreQuery({ omniChannelCollection, userRoleIds, userId, appliedFilters });
+		const omniChannelQuery = getFireStoreQuery({
+			omniChannelCollection,
+			isomniChannelAdmin,
+			userId,
+			appliedFilters,
+		});
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
 			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });

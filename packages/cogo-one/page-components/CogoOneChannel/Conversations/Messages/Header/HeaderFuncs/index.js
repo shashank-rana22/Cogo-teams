@@ -2,7 +2,7 @@ import { Tooltip, cl, Popover, Select, Button } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 
-import tagsOptions from '../../../../../../configurations/tags-options';
+// import tagsOptions from '../../../../../../configurations/tags-options';
 import { TAGS_COLORS } from '../../../../../../constants';
 
 import styles from './styles.module.css';
@@ -34,7 +34,13 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 			</div>
 		</Tooltip>
 	);
-
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.tags_text}>
+				Add tags to categorise chats
+			</div>
+		);
+	}
 	return (
 		<div className={styles.flex}>
 			{showMoreList && showMorePlacement !== 'right' && toolTipComp}
@@ -60,8 +66,9 @@ export function TagsPopOver({
 	setIsVisible = () => {},
 	updateChat = () => {},
 	hasPermissionToEdit = false,
+	tagOptions = [],
 }) {
-	const filteredOptions = tagsOptions.filter(
+	const filteredOptions = tagOptions.filter(
 		({ value }) => !prevtags.includes(value),
 	);
 	const resetFunc = () => {
@@ -107,7 +114,9 @@ export function TagsPopOver({
 			onClickOutside={resetFunc}
 			visible={isVisible}
 		>
-			<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} />
+			<div className={styles.flex}>
+				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} />
+			</div>
 		</Popover>
 	);
 }

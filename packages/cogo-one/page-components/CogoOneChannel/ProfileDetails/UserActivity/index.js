@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, Popover, Pagination } from '@cogoport/components';
-import { IcMFdollar, IcMDoubleFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
+import { IcMFdollar, IcMFilter, IcMCampaignTool, IcMDesktop } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -64,7 +64,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 
 	useEffect(() => {
 		setActivityTab('transactional');
-	}, [activeVoiceCard, activeMessageCard]);
+	}, [customerId]);
 
 	useEffect(() => {
 		setFilters([]);
@@ -75,7 +75,11 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 	const emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
 
 	function ShowData() {
-		return emptyCheck ? <EmptyState /> : (
+		return emptyCheck ? (
+			<div className={styles.empty}>
+				<EmptyState type="activities" />
+			</div>
+		) : (
 			<div
 				className={styles.list_container}
 			>
@@ -131,7 +135,7 @@ function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, custome
 							onClickOutside={() => setFilterVisible(false)}
 						>
 
-							<IcMDoubleFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
+							<IcMFilter width={20} height={20} onClick={() => setFilterVisible(!filterVisible)} />
 						</Popover>
 						{!isEmpty(filters) && <div className={styles.filters_applied} />}
 					</div>

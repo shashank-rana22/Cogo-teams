@@ -26,9 +26,10 @@ const useGetOmnichannelCustomerInsights = ({
 		try {
 			await trigger({
 				params: {
-					user_id : isEmpty(userId) ? userMobile : userId,
-					service : serviceType,
-					channel : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
+					user_id     : !isEmpty(userId) ? userId : undefined,
+					user_number : isEmpty(userId) ? userMobile : undefined,
+					service     : serviceType,
+					channel     : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
 				},
 			});
 		} catch (error) {
@@ -42,7 +43,6 @@ const useGetOmnichannelCustomerInsights = ({
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [customerId, serviceType]);
-	console.log('customerId', customerId);
 
 	return {
 		data,

@@ -13,7 +13,7 @@ const getActiveCardDetails = (data = {}) => {
 		user_email = '',
 	} = data || {};
 
-	if (channel_type === 'chatbot') {
+	if (channel_type === 'platform_chat') {
 		return {
 			user_id,
 			user_name,

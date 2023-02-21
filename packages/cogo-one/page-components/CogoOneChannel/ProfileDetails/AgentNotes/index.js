@@ -3,19 +3,17 @@ import { IcMTick, IcMDelete } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import useCreateOmniNote from '../../../../hooks/useCreateOmniNote';
 import useGetListNotes from '../../../../hooks/useGetListNotes';
 import useUpdateNote from '../../../../hooks/useUpdateNote';
 
 import styles from './styles.module.css';
 
-function AgentNotes({ activeMessageCard, activeTab, activeVoiceCard }) {
+function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
 	const [noteValue, setNoteValue] = useState('');
-
 	const [editNote, setEditNote] = useState(false);
-
 	const [active, setActive] = useState(false);
-
 	const [updateId, setUpdateId] = useState();
 
 	const { noteData, fetchListNotes } = useGetListNotes({ active, activeMessageCard, activeTab, activeVoiceCard });
@@ -28,7 +26,7 @@ function AgentNotes({ activeMessageCard, activeTab, activeVoiceCard }) {
 		activeTab,
 		activeVoiceCard,
 	});
-	const { updateNote } = useUpdateNote({ fetchListNotes, editNote, setEditNote });
+	const { updateNote } = useUpdateNote({ fetchListNotes, setEditNote });
 
 	const handleSubmit = async () => {
 		if (!isEmpty(noteValue)) {
@@ -53,6 +51,10 @@ function AgentNotes({ activeMessageCard, activeTab, activeVoiceCard }) {
 	const handleDelete = async (val) => {
 		await updateNote({ val, type: 'delete' });
 	};
+
+	if (isEmpty(list)) {
+		return <EmptyState type="notes" />;
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Notes</div>

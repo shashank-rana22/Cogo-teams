@@ -18,7 +18,7 @@ function useGetListCommunicationLog({ organizationId = null }) {
 		});
 	};
 	useEffect(() => {
-		if (!organizationId) {
+		if (organizationId) {
 			fetchListLogApi();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

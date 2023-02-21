@@ -11,7 +11,9 @@ function useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal }) {
 	const updateUserStatus = async (data) => {
 		try {
 			await trigger({
-				data: { ...data },
+				data: {
+					...data,
+				},
 			});
 			setOpenModal(false);
 			Toast.success('succesfully updated your status');

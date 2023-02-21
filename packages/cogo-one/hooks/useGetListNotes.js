@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-function useGetListNotes({ active, activeMessageCard, activeTab, activeVoiceCard }) {
+function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
 	const { profile } = useSelector((state) => state);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_omnichannel_notes',

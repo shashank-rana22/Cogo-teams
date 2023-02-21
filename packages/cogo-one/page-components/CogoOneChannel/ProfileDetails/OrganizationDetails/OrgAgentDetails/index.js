@@ -16,11 +16,11 @@ function OrgAgentDetails({ agent, orgLoading }) {
 				<>
 					<div className={styles.content}>
 						<div className={styles.agent_type}>Name : </div>
-						<div className={styles.name}>{name}</div>
+						<div className={styles.name}>{name || 'NA'}</div>
 					</div>
 					<div className={styles.content}>
 						<div className={styles.type}>Email : </div>
-						<div className={styles.name}>{email}</div>
+						<div className={styles.name}>{email || '-'}</div>
 					</div>
 					<div className={styles.content}>
 						<div className={styles.type}>Mobile No : </div>
@@ -28,7 +28,7 @@ function OrgAgentDetails({ agent, orgLoading }) {
 							{mobile_country_code}
 							{' '}
 							{' '}
-							{mobile_number}
+							{mobile_number || '-'}
 						</div>
 					</div>
 				</>

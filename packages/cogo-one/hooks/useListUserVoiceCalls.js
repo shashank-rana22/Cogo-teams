@@ -43,11 +43,15 @@ const useListUserVoiceCalls = (filters = {}) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pagination]);
 	useEffect(() => {
+		setListData({
+			list  : [],
+			total : 0,
+		});
 		setPagination(1);
-
 		voiceCallList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters)]);
+
 	return {
 		loading,
 		listData,

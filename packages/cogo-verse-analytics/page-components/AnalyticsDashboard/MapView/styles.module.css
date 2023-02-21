@@ -1,0 +1,495 @@
+
+
+/* Main Container ------------------------------------------------------------------- */
+
+.main_container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;   
+    background: #f9f5ec;
+    
+}
+
+/* Top Content ------------------------------------------------------------------- */
+
+.top_content{
+    background:#f9f5ec;
+    display: flex;
+    justify-content: flex-end;
+
+    :global{
+      .ui_select_display_container{
+        height: 37px !important;
+        border-radius: 6px;
+      }
+
+      .ui_select_options_container{
+        z-index: 1000;
+      }
+      .react-datepicker-popper{
+        z-index: 1000;
+      }
+      .react-datepicker__input-container{
+        input{
+          font-family: 'Poppins', sans-serif;
+        }
+      }
+      .ui_select_input_placeholder{
+        color: #828282;
+      }
+      
+    }
+
+}
+
+.select_container{
+    padding: 5px 0px 2px 16px;
+    width: 225px;
+    
+}
+
+.date_range_container{
+    padding: 5px 16px 2px 16px;
+    width: fit-content;
+    
+  input {
+    border: solid 1px #E0E0E0 !important;  
+    height:38px !important;
+
+    }
+    
+}
+
+.vertical_line{
+  border-right: 1px solid #e0e0e0;
+	margin: 0px 8px;
+	height: 18px;
+}
+
+.date_container{
+  display: flex;
+	align-items: center;
+}
+.date_filter_wrap{
+  border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	margin-right: 12px;
+
+	background: #ffffff;
+	padding: 6px 8px;
+	font-size: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+
+	svg {
+		width: 14px;
+		height: 14px;
+		margin-left: 4px;
+	}
+
+	&:hover {
+		box-shadow: 2px 2px 4px rgba(56, 59, 68, 0.1);
+	}
+}
+
+/* Circle Frame ------------------------------------------------------------------- */
+
+.circle_content{
+    width:100%;
+    display: block;
+    z-index: 900;
+    padding: 8px 0;
+    background: #f9f5ec;
+
+
+
+    :global{
+      .ui_group_button_main_container{
+        width: fit-content !important;
+      }
+      .ui_group_button_container{
+       width: 25px !important;
+      }
+    }
+
+}
+
+.circle_frame {
+    width:500px;
+    height:500px;
+    border-radius:51%;
+    margin: auto;
+    border:dashed 1px #CFBC93;
+    padding:20px;
+    z-index: 900;
+    
+ }
+
+ .circle {
+    position: absolute;
+    background:rgb(255, 255, 255);
+    border-radius:51%;
+    min-height: 50px;
+    min-width: 50px;
+    box-shadow: 0px 4px 16px rgba(98, 127, 172, 0.2);
+    border: solid 1px #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    z-index: 900;
+    cursor: pointer;
+    transition: 0.2s;
+
+	&:hover {
+		border: solid 1px #CFBC93;
+	}
+    
+
+ }
+
+
+ .placeholder_element {
+	border-radius: 6px;
+
+ }
+
+ .stat_value {
+   color: #221F20;
+   font-weight: 600;
+ }
+ .stat_label{
+   color: #828282;
+
+ }
+
+ 
+
+
+
+ /* Globe  ------------------------------------------------------------------- */
+
+.globe_container{
+  position: absolute;
+  margin-top: -10px;
+  margin-left:-10px ;
+  canvas{
+    /* border:dashed 1px #CFBC93; */
+    border-radius: 500px;
+  }
+
+}
+.loading_image{
+  position: absolute;
+  z-index: 10;
+}
+
+.globe_controls{
+  position: absolute;
+  z-index: 900;
+  margin-top: 400px;
+  margin-left: 50px;
+  border-radius: 6px;
+
+
+  :global{
+    .ui_buttonicon_container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid 1px #e0e0e0;
+    }
+    .tippy-content{
+      padding: 2px;
+      font-size: 10px;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+  }
+
+}
+
+.loading_state_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+
+}
+
+/* Circles ------------------------------------------------------------------- */
+
+
+.new_users {
+    width:120px;
+    height:120px;
+    margin-top: 0px;
+    margin-left:-60px;
+
+    .stat_value {
+      font-size: 24px;
+    }
+    .stat_label{
+      font-size: 14px;
+    }
+    
+ }
+ .recurring_users{
+    width:100px;
+    height:100px;
+    margin-top: 95px;
+    margin-left:-95px;
+    .stat_value {
+      font-size: 18px;
+    }
+    .stat_label{
+      font-size: 12px;
+    }
+
+ }
+ .transacting_users{
+    width:90px;
+    height:90px;
+    margin-top: 185px;
+    margin-left:-95px;
+    .stat_value {
+      font-size: 16px;
+    }
+    .stat_label{
+      font-size: 11px;
+    }
+
+ }
+
+ .churned_users{
+    width:75px;
+    height:75px;
+    margin-top: 265px;
+    margin-left:-75px;
+    .stat_value {
+      font-size: 14px;
+    }
+    .stat_label{
+      font-size: 10px;
+    }
+ }
+
+ .new_registration{
+    width:75px;
+    height:75px;
+    margin-top: 385px;
+    margin-left: 390px;
+    .stat_value {
+      font-size: 14px;
+    }
+    .stat_label{
+      font-size: 10px;
+    }
+
+ }
+ .rates{
+    width:90px;
+    height:90px;
+    margin-top: 325px;
+    margin-left: 430px;
+    .stat_value {
+      font-size: 16px;
+    }
+    .stat_label{
+      font-size: 11px;
+    }
+ }
+ .bookings{
+    width:100px;
+    height:100px;
+    margin-top: 240px;
+    margin-left: 450px;
+    .stat_value {
+      font-size: 18px;
+    }
+    .stat_label{
+      font-size: 12px;
+    }
+ }
+
+ .circle_clicked{
+    transition: 0.2s;
+    border: solid 2px #CFBC93;
+    box-shadow: 0px 1px 3px rgba(207, 188, 147, 0.1), 0px 1px 2px rgba(207, 188, 147, 0.06);
+    z-index: 950;
+
+	&:hover {
+		border: solid 2px #CFBC93;
+	}
+
+ }
+ 
+
+
+
+/* Footer Stats  ------------------------------------------------------------------- */
+
+.footer_stats{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 8px;
+  background: #f9f5ec;
+
+
+}
+
+.avg_response_time{
+  height: 150px;
+  background: #ffffff;
+  flex-basis: 29%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+}
+
+.response_time_title{
+  font-size: 14px;
+}
+
+.response_time{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+
+	
+
+}
+.time{
+  font-size: 18px;
+
+  span{
+      font-size: 28px;
+      font-weight: 600;
+
+	  display: inline-block;
+		position: relative;
+
+		&::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 1px;
+		bottom: 0;
+		left: 0;
+		top: 35px;
+		background-color: #000;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+		}
+		&:hover {
+		color: #242424;
+		}
+
+		&:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
+		}
+  }
+}
+
+.arrow_img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+/* Communication Stats  ------------------------------------------------------------------- */
+
+.communication_stats{
+  flex-basis: 68%;
+  border-radius: 8px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+  padding: 20px 15px;
+
+}
+
+.left_stats{
+  flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.the_stat{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.stat_circle{
+  border-radius: 500px;
+  width: 18px;
+  height: 18px; 
+  margin-right: 10px;
+}
+
+.stat_description{
+  font-size: 12px;
+  color: #828282;
+
+}
+
+.com_stat_value{
+  font-weight: 600;
+  /* width:40px; */
+  margin-right: 10px;
+  font-size: 16px;
+  display: inline-block;
+  position: relative;
+  color: #242424;
+  
+  &::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	background-color: #000;
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+  }
+
+
+  &:hover::after {
+	transform: scaleX(1);
+  	transform-origin: bottom left;
+  }
+}
+.pie_chart{
+  height: 110px;
+  flex-basis: 30%;
+}
+

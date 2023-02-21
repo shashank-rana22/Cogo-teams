@@ -7,7 +7,7 @@ import {
 	Pill,
 } from '@cogoport/components';
 import { useForm, TextareaController, InputController } from '@cogoport/forms';
-import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -28,6 +28,7 @@ function Templates({
 	const [showPreview, setShowPreview] = useState(false);
 	const [previewData, setPreviewData] = useState();
 	const [templateName, setTemplateName] = useState('');
+	const [activeCard, setActiveCard] = useState('');
 	const { title, content = '' } = controls;
 
 	const {
@@ -45,20 +46,25 @@ function Templates({
 		loading,
 		refetch,
 	} = useListTemplate({ activeTab });
-
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
 		reset: () => {
 			reset({ title: '', content: '' });
 		},
 		refetch,
+		setOpenCreateReply,
 	});
 
-	const handleSelect = (val, status, name) => {
-		console.log('name', name);
-		if (!previewData && status === 'approved') {
+	const handleSelect = (val, status, name, Id) => {
+		if (!previewData && status === 'approved' && !openCreateReply) {
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
+			setActiveCard((prev) => {
+				if (prev !== Id) {
+					return Id;
+				}
+				return '';
+			});
 		}
 	};
 
@@ -108,14 +114,21 @@ function Templates({
 								description: messageContent = '',
 								whatsapp_approval_status,
 								html_template,
-								name: templateName,
+								name: templateTitle,
+								id,
 							}) => (
 								<div
 									role="presentation"
-									className={cl`${!openCreateReply ? styles.each_message : styles.disable}`}
-									onClick={() => handleSelect(html_template, whatsapp_approval_status, templateName)}
+									className={cl`${activeCard === id ? styles.active : styles.each_message}`}
+									onClick={() => handleSelect(
+										html_template,
+										whatsapp_approval_status,
+										templateTitle,
+										id,
+									)}
 									style={{
 										cursor: previewData || whatsapp_approval_status !== 'approved'
+										|| openCreateReply
 											? 'not-allowed' : 'pointer',
 									}}
 								>
@@ -181,9 +194,9 @@ function Templates({
 							themeType="tertiary"
 							size="md"
 							className={styles.button_styles}
-							onClick={() => setOpenCreateReply(false)}
+							onClick={() => setOpenCreateReply(!openCreateReply)}
 						>
-							cancel
+							Cancel
 						</Button>
 						<Button
 							themeType="accent"
@@ -198,12 +211,9 @@ function Templates({
 			)}
 
 			{showPreview && (
-				<div className={styles.wrapper}>
+				<div className={styles.create_container}>
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
-							{/* <div className={styles.back_icon}>
-								<IcMArrowBack height={14} width={14} />
-							</div> */}
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>{CreateReactComponent()}</div>
 							</div>
@@ -214,7 +224,7 @@ function Templates({
 							themeType="tertiary"
 							size="md"
 							className={styles.button_styles}
-							onClick={() => setOpenCreateReply(false)}
+							onClick={() => { setShowPreview(false); setActiveCard(''); setPreviewData(''); }}
 						>
 							Cancel
 						</Button>
@@ -222,9 +232,9 @@ function Templates({
 							themeType="accent"
 							size="md"
 							onClick={handleClick}
-							loading={communicationLoading}
+							disabled={communicationLoading}
 						>
-							Submit
+							Send
 						</Button>
 					</div>
 				</div>

@@ -1,10 +1,9 @@
 import { cl, Input, Popover } from '@cogoport/components';
-import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
-import getShowChat from '../../../../helpers/getShowChat';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -32,6 +31,17 @@ function MessageList({
 				</div>
 			</div>
 		);
+	}
+
+	function getShowChat({
+		item = {},
+	}) {
+		const { user_name = '' } = item;
+		if (searchValue) {
+			const searchName = user_name?.toLowerCase();
+			return searchName?.includes(searchValue);
+		}
+		return true;
 	}
 
 	return (
@@ -62,7 +72,7 @@ function MessageList({
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>
-						<IcMDoubleFilter
+						<IcMFilter
 							onClick={() => setFilterVisible((prev) => !prev)}
 							className={styles.filter_icon}
 						/>
@@ -74,6 +84,7 @@ function MessageList({
 			{messagesLoading ? <LoadingState /> : (
 				<div className={styles.list_container}>
 					{(messagesList || []).map((item) => {
+						const { chat_status = '' } = item || {};
 						const userData = getActiveCardDetails(item);
 						const {
 							user_name = '',
@@ -96,7 +107,6 @@ function MessageList({
 									onClick={() => setActiveMessage(item)}
 								>
 									<div className={styles.card}>
-
 										<div className={styles.user_information}>
 											<div className={styles.avatar_Container}>
 												<UserAvatar
@@ -114,7 +124,21 @@ function MessageList({
 											</div>
 
 											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner} />
+												<div className={styles.tags_conatiner}>
+													{!isEmpty(chat_status) && (
+														<div
+															className={cl`
+												${styles.tags}
+												${chat_status === 'warning' ? styles.warning : ''}
+												${chat_status === 'escalated' ? styles.escalated : ''}
+												`}
+														>
+															{startCase(chat_status)}
+														</div>
+
+													)}
+												</div>
+
 												<div className={styles.activity_duration}>
 													{dateTimeConverter(
 														Date.now() - Number(lastActive),
@@ -122,7 +146,6 @@ function MessageList({
 													)?.renderTime}
 												</div>
 											</div>
-
 										</div>
 
 										<div className={styles.content_div}>
@@ -138,16 +161,13 @@ function MessageList({
 
 												</div>
 											)}
-
 										</div>
-
 									</div>
 								</div>
 							)
 						);
 					})}
 				</div>
-
 			)}
 		</>
 	);

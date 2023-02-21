@@ -10,6 +10,8 @@
 .name_container{
 	font-size: 10px;
 	font-weight: 500;
+	min-height: 10px;
+	min-width: 10px;
 	text-transform: uppercase;
 	display: flex;
 	align-items: center;

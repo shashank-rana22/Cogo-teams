@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messages }) {
 	return (
 		checkEmpty
-			? <EmptyState /> : (
+			? <EmptyState type="insights" /> : (
 				<>
 					{Object.keys(shipment_and_spot_search_stats).map((key) => {
 						const {
@@ -58,7 +58,8 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 											</div>
 										</div>
 									</div>
-									{!isEmpty(list) && (
+
+									{!isEmpty(last_shipment_data) && (
 										<div className={styles.booking_div}>
 											<div className={styles.last_booking}>
 												Last Booking :
@@ -77,6 +78,7 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 											/>
 										</div>
 									)}
+
 									<div className={styles.comm_tex}>Commodity</div>
 									<div>
 										<Pill
@@ -87,48 +89,52 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 											{commodity}
 										</Pill>
 									</div>
-									<div className={styles.comm_tex}>Port pairs most booked on</div>
-									<div className={styles.port_div}>
-										{(list || []).map((item) => (
-											<div className={styles.div_top}>
-												<div className={styles.origin_container}>
-													<Tooltip
-														content={toolTip(item)}
-														placement="bottom"
-													>
-														<div className={styles.origin}>
-															{startCase(item?.origin_country_name)}
-															,
-															<div className={styles.origin_port_name}>
-																{startCase(item?.origin_port_name)}
+									{!isEmpty(list) && (
+										<>
+											<div className={styles.comm_tex}>Port pairs most booked on</div>
+											<div className={styles.port_div}>
+												{(list || []).map((item) => (
+													<div className={styles.div_top}>
+														<div className={styles.origin_container}>
+															<Tooltip
+																content={toolTip(item)}
+																placement="bottom"
+															>
+																<div className={styles.origin}>
+																	{startCase(item?.origin_country_name)}
+																	,
+																	<div className={styles.origin_port_name}>
+																		{startCase(item?.origin_port_name)}
+																	</div>
+																</div>
+															</Tooltip>
+															<Tooltip
+																content="Shipments Count"
+																placement="bottom"
+															>
+																<div className={styles.shipment_count}>
+																	{item?.shipments_count}
+																</div>
+															</Tooltip>
+														</div>
+														<IcMPort width={15} height={15} fill="#ACDADF" />
+														<Tooltip
+															content={toolTip(item)}
+															placement="bottom"
+														>
+															<div className={styles.destination}>
+																{startCase(item?.destination_country_name)}
+																,
+																<div className={styles.port_name}>
+																	{startCase(item?.destination_port_name)}
+																</div>
 															</div>
-														</div>
-													</Tooltip>
-													<Tooltip
-														content="Shipments Count"
-														placement="bottom"
-													>
-														<div className={styles.shipment_count}>
-															{item?.shipments_count}
-														</div>
-													</Tooltip>
-												</div>
-												<IcMPort width={15} height={15} fill="#ACDADF" />
-												<Tooltip
-													content={toolTip(item)}
-													placement="bottom"
-												>
-													<div className={styles.destination}>
-														{startCase(item?.destination_country_name)}
-														,
-														<div className={styles.port_name}>
-															{startCase(item?.destination_port_name)}
-														</div>
+														</Tooltip>
 													</div>
-												</Tooltip>
+												))}
 											</div>
-										))}
-									</div>
+										</>
+									)}
 								</div>
 							)
 

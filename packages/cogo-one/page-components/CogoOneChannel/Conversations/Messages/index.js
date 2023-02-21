@@ -6,6 +6,7 @@ import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
+import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useSendMessage from '../../../../hooks/useSendMessage';
@@ -16,30 +17,30 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '' }) {
+function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '', isomniChannelAdmin = false }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
-	const [messages, setMessages] = useState({});
 	const [uploading, setUploading] = useState({});
-
+	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	console.log('activeMessageCard', activeMessageCard);
 
 	let activeChatCollection;
 
 	const {
 		id = '',
 		channel_type = '',
-		support_agent_id = [],
+		support_agent_id = '',
 		spectators_data = [],
 	} = activeMessageCard || {};
+
 	const {
 		sendCommunicationTemplate,
 		loading:communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
-	const hasPermissionToEdit = userId === support_agent_id;
+
+	const hasPermissionToEdit = userId === support_agent_id || isomniChannelAdmin;
 
 	const filteredSpectators = (spectators_data || [])
 		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
@@ -120,6 +121,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					activeAgentName={activeAgentName}
 					hasPermissionToEdit={hasPermissionToEdit}
 					filteredSpectators={filteredSpectators}
+					tagOptions={tagOptions}
 
 				/>
 				<div className={styles.message_container} key={id}>
@@ -131,8 +133,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						setDraftMessages={setDraftMessages}
 						setDraftUploadedFiles={setDraftUploadedFiles}
 						sendChatMessage={sendChatMessage}
-						setMessages={setMessages}
-						messages={messages}
 						getNextData={getNextData}
 						loadingMessages={loadingMessages}
 						lastPage={lastPage}

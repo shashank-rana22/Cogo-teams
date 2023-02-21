@@ -5,6 +5,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
+import hasPermission from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
 import useListChats from '../../hooks/useListChats';
@@ -41,6 +42,7 @@ function CogoOne() {
 		userId      : profile?.user?.id,
 	}));
 
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -57,8 +59,8 @@ function CogoOne() {
 		activeCardId,
 	} = useListChats({
 		firestore,
-		userRoleIds,
 		userId,
+		isomniChannelAdmin,
 	});
 	const { messagesList = [], unReadChatsCount } = listData;
 
@@ -85,6 +87,7 @@ function CogoOne() {
 						activeVoiceCard={activeVoiceCard}
 						suggestions={suggestions}
 						userId={userId}
+						isomniChannelAdmin={isomniChannelAdmin}
 					/>
 					<ProfileDetails
 						activeMessageCard={activeMessageCard}
