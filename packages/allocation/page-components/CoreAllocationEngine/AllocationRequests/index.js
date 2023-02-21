@@ -11,14 +11,9 @@ import List from './List';
 import styles from './styles.module.css';
 
 function Requests() {
-	const [showModal, setShowModal] = useState(false);
-
-	const onCloseModal = () => {
-		setShowModal(false);
-	};
-
 	const {
 		data,
+		columns,
 		loading: listLoading,
 		refetch,
 		params,
@@ -29,6 +24,11 @@ function Requests() {
 		checkedRowsId,
 		setCheckedRowsId,
 		onChangeCheckbox,
+		requestStatusItem,
+		setRequestStatusItem,
+		showModal,
+		setShowModal,
+		onCloseModal,
 		...restProps
 	} = useListAllocationRequests();
 
@@ -44,16 +44,18 @@ function Requests() {
 				checkedRowsId={checkedRowsId}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				isCreateDisabled={!isEmpty(checkedRowsId)}
 				{...restProps}
 			/>
 
 			<List
 				data={data}
+				columns={columns}
 				loading={listLoading}
 				onChangeParams={onChangeParams}
 				fetchList={refetch}
-				checkedRowsId={checkedRowsId}
-				setCheckedRowsId={setCheckedRowsId}
+				requestStatusItem={requestStatusItem}
+				setRequestStatusItem={setRequestStatusItem}
 			/>
 
 			{showModal && (

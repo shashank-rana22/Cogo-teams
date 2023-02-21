@@ -18,3 +18,25 @@
 	background: #fff;
 	border-radius: 10px;
 }
+
+.table_container {
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+}
+
+.table {
+	margin: 16px 0;
+	background-color: #fff;
+	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
+
+	tr {
+		height: 60px;
+	}
+
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
+	}
+}
+
+

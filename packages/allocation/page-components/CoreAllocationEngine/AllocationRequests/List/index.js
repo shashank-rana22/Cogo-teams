@@ -1,11 +1,9 @@
-import { Button, Modal, Pagination } from '@cogoport/components';
+import { Table, Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
-import ShimmerState from '../../../../common/ShimmerState';
 import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest';
 
-import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 const STATUS_MAPPING = {
@@ -20,26 +18,21 @@ const STATUS_MAPPING = {
 function List(props) {
 	const {
 		data,
+		columns,
 		loading,
 		onChangeParams,
 		fetchList,
-		checkedRowsId,
-		setCheckedRowsId,
+		requestStatusItem,
+		setRequestStatusItem,
 	} = props;
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
 	const {
 		onStatusUpdate,
 		loadingUpdate,
-		requestStatusItem,
-		setRequestStatusItem,
-	} = useUpdateRequestStatus({ fetchList });
+	} = useUpdateRequestStatus({ fetchList, setRequestStatusItem, requestStatusItem });
 
-	if (loading) {
-		return <ShimmerState />;
-	}
-
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -61,33 +54,14 @@ function List(props) {
 
 	return (
 		<div>
-			{list.map((item) => {
-				const itemId = item.id;
-				const isSelected = checkedRowsId.includes(itemId);
-
-				return (
-					<ListItem
-						id="request_list"
-						key={itemId}
-						data={item}
-						showModal={showStatusConfirmationModal}
-						onClickStatusChange={({ status }) => {
-							setRequestStatusItem({
-								status,
-								allocation_request_id: item.id,
-							});
-						}}
-						isSelected={isSelected}
-						onCardClick={() => {
-							if (!isSelected) {
-								setCheckedRowsId([...checkedRowsId, itemId]);
-							} else {
-								setCheckedRowsId(checkedRowsId.filter((id) => id !== itemId));
-							}
-						}}
-					/>
-				);
-			})}
+			<div className={styles.table_container}>
+				<Table
+					className={styles.table}
+					columns={columns}
+					data={list || []}
+					loading={loading}
+				/>
+			</div>
 
 			<div className={styles.pagination_container}>
 				<Pagination

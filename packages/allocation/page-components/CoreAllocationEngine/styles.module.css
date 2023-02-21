@@ -73,3 +73,12 @@
 		word-break: break-word;
 	}
 }
+
+.reason {
+	display: block;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+

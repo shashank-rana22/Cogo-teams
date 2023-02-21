@@ -3,7 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import ShimmerState from '../../../../common/ShimmerState';
 
 import BulkUpdateMode from './BulkUpdateMode';
 import ListItem from './ListItem';
@@ -27,11 +26,7 @@ function List({
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 	const [selectAll, setSelectAll] = useState(false);
 
-	if (loading) {
-		return <ShimmerState />;
-	}
-
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
