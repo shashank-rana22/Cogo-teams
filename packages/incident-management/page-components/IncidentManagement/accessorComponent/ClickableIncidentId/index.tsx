@@ -30,9 +30,9 @@ function ClickableIncidentId({ itemData, listData, activeTab, setActiveTab, setP
 	const { user: { id:userId = '' } } = UserData;
 
 	useEffect(() => {
-		if (listData?.[0]?.status === 'approved') {
+		if (listData?.[0]?.userIncidentStatus === 'ACCEPTED') {
 			setActiveTab('approved');
-		} else if (listData?.[0]?.status === 'REQUESTED') {
+		} else if (listData?.[0]?.userIncidentStatus === 'REQUESTED') {
 			setActiveTab('requested');
 		}
 	}, [listData]);

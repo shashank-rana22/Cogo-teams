@@ -55,16 +55,16 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 		debounceQuery(search);
 	}, [search]);
 
-	// let activeStatus = [];
-	// if (payload?.[0] === 'raisedPayload') {
-	// 	activeStatus = ['REQUESTED', 'DELETED'];
-	// } else if (activeTab === 'requested') {
-	// 	activeStatus = ['REQUESTED', 'DELETED'];
-	// } else if (activeTab === 'approved') {
-	// 	activeStatus = ['APPROVED'];
-	// } else if (activeTab === 'rejected') {
-	// 	activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED'];
-	// }
+	let activeStatus = [];
+	if (payload?.raisedPayload === 'raisedPayload') {
+		activeStatus = undefined;
+	} else if (activeTab === 'requested') {
+		activeStatus = ['REQUESTED', 'DELETED'];
+	} else if (activeTab === 'approved') {
+		activeStatus = ['APPROVED'];
+	} else if (activeTab === 'rejected') {
+		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED'];
+	}
 
 	const refetch = async () => {
 		try {
@@ -72,7 +72,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 				params: {
 					...rest,
 					sourceDashboard    : 'USER',
-					userIncidentStatus : requestedStatus || rejectedStatus || undefined,
+					userIncidentStatus : requestedStatus || rejectedStatus || activeStatus,
 					isStatsRequired    : true,
 					createdBy          : payload?.raisedPayload === 'raisedPayload' ? payload?.user : userId,
 					id                 : payload?.raisedPayload === 'raisedPayload' ? payload?.id : undefined,
