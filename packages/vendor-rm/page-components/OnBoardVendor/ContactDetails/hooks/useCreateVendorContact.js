@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
-import getControls from '../utils/getControls';
+import controls from '../utils/controls';
 
 function useCreateVendorContact({
 	setActiveStepper = () => {},
@@ -19,8 +19,6 @@ function useCreateVendorContact({
 	const { vendor_id } = query;
 
 	const { contact_details = {} } = vendorInformation || {};
-
-	const fields = getControls();
 
 	const {
 		control,
@@ -48,7 +46,6 @@ function useCreateVendorContact({
 			mobile_number         : formattedValues?.mobile_number?.number,
 			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,
 			whatsapp_number       : formattedValues?.whatsapp_number?.number,
-			poc_role              : formattedValues?.company_role,
 		};
 
 		try {
@@ -84,7 +81,7 @@ function useCreateVendorContact({
 			},
 		};
 
-		fields.forEach((field) => {
+		controls.forEach((field) => {
 			if (field.type === 'file') {
 				setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl);
 			} else {
@@ -99,7 +96,7 @@ function useCreateVendorContact({
 	}, [vendorInformation]);
 
 	return {
-		fields,
+		fields: controls,
 		control,
 		errors,
 		createVendorContact,

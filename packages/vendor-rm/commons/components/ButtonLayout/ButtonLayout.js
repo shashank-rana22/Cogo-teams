@@ -25,40 +25,36 @@ function ButtonLayout({
 
 	return (
 		<div className={styles.button_container} style={style}>
-			{
-				showCancelButton && (
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '60px' }}
-						disabled={loading}
-						onClick={onClickCancelButton}
-					>
-						Cancel
-					</Button>
-				)
-			}
+			{showCancelButton && (
+				<Button
+					size="lg"
+					themeType="tertiary"
+					style={{ marginRight: 20 }}
+					disabled={loading}
+					onClick={onClickCancelButton}
+				>
+					Cancel
+				</Button>
+			)}
 
-			{
-				showProceedButton ? (
-					<Button
-						size="md"
-						themeType="accent"
-						onClick={handleSubmit((data) => onSubmit({ data, step }))}
-						disabled={loading}
-					>
-						Proceed
-					</Button>
-				)	: 	(
-					<Button
-						size="md"
-						themeType="accent"
-						role="presentation"
-					>
-						Submit
-					</Button>
-				)
-			}
+			{showProceedButton ? (
+				<Button
+					size="lg"
+					themeType="accent"
+					onClick={handleSubmit((data) => onSubmit({ data, step }))}
+					disabled={loading}
+				>
+					Proceed
+				</Button>
+			)	: 	(
+				<Button
+					size="md"
+					themeType="accent"
+					role="presentation"
+				>
+					Submit
+				</Button>
+			)}
 		</div>
 	);
 }

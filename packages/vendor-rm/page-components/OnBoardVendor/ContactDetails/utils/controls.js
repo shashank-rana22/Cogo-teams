@@ -1,4 +1,4 @@
-const getControls = () => [
+const controls = [
 	{
 		name        : 'name',
 		label       : 'Name of the Contact',
@@ -32,7 +32,7 @@ const getControls = () => [
 		rules       : { required: 'Whatsapp Number is required' },
 	},
 	{
-		name        : 'company_role',
+		name        : 'poc_role',
 		label       : 'Role in Company',
 		type        : 'multiSelect',
 		placeholder : 'Select a role type',
@@ -89,4 +89,4 @@ const getControls = () => [
 	},
 ];
 
-export default getControls;
+export default controls;
