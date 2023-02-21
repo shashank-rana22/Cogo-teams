@@ -42,6 +42,7 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(values)]);
 
 	useEffect(() => {
@@ -49,6 +50,7 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 			element.setAttribute('maxlength', 1);
 			element.setAttribute('inputmode', 'numeric');
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(values)]);
 
 	const handleChange = (index) => (event) => {
@@ -73,7 +75,12 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		resetOtp,
 	});
 
-	useImperativeHandle(ref, imperativeHandles, []);
+	useImperativeHandle(
+		ref,
+		imperativeHandles,
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[],
+	);
 
 	return {
 		values,

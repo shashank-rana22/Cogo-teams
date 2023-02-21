@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import React, { useEffect, useRef } from 'react';
 
 import OtpInput from './components/OtpInput';
@@ -18,7 +17,11 @@ function OTPLayout({
 
 	const timer = useTimer({ durationInSeconds: resendOtpTimerDuration });
 
-	useEffect(() => timer.start(), []);
+	useEffect(
+		() => timer.start(),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[],
+	);
 
 	const handleChange = (value) => {
 		setOtpValue(value.length === otpLength ? `${value}` : '');
