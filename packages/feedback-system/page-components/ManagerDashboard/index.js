@@ -37,20 +37,20 @@ function ManagerDashboard() {
 			<div className={styles.page_actions}>
 				<div className={styles.filters}>
 					<Select
-						value={params.filters?.created_at_year}
+						value={params.filters?.year}
 						onChange={(val) => setFilter(val, 'created_at_year')}
 						placeholder="Select Year"
 						style={{ marginRight: '8px' }}
-						options={monthControls.created_at_year.options}
+						options={monthControls.year.options}
 					/>
 
 					<Select
-						value={params.filters?.created_at_month}
+						value={params.filters?.month}
 						onChange={(val) => setFilter(val, 'created_at_month')}
 						disabled={!params.filters?.created_at_year}
 						placeholder="Select Month"
 						style={{ marginRight: '8px' }}
-						options={monthControls.created_at_month.options}
+						options={monthControls.month.options}
 					/>
 
 				</div>
