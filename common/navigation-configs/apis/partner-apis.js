@@ -9834,6 +9834,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
+		{
+			api          : 'get_cogoverse_platform_chat_data',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
+
 	],
 	constants: [
 		{
