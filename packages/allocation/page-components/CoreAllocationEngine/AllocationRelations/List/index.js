@@ -68,8 +68,12 @@ function List({
 
 			<div className={styles.list_container}>
 				<div className={styles.table_container}>
-
-					<Table className={styles.request_table} data={list} columns={modifiedColumns} loading={loading} />
+					<Table
+						className={styles.request_table}
+						data={list}
+						columns={modifiedColumns}
+						loading={loading}
+					/>
 				</div>
 			</div>
 

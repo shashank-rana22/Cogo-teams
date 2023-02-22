@@ -142,7 +142,7 @@ const useAllocationRelations = () => {
 			accessor : ({ organization = '' }) => (
 				<Tooltip content={startCase(organization.business_name.toLowerCase())} placement="bottom">
 					<div className={styles.tooltip_text}>
-						{startCase(organization.business_name.toLowerCase()) || '-'}
+						{startCase(organization.business_name.toLowerCase()) || '___'}
 					</div>
 				</Tooltip>
 			),
@@ -209,7 +209,7 @@ const useAllocationRelations = () => {
 			accessor : ({ relation_type = '' }) => (
 				<Pill size="sm" color={relation_type === 'remove' ? 'red' : 'green'}>
 
-					{relation_type ? startCase(relation_type) : '-'}
+					{relation_type ? startCase(relation_type) : '___'}
 				</Pill>
 			),
 			showInTabs: ['active', 'pending'],

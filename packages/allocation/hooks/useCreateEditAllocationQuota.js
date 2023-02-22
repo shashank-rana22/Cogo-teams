@@ -51,13 +51,11 @@ const useCreateEditAllocationQuota = (props) => {
 
 	const authkey = isUpdatable ? 'post_allocation_quota_attributes' : 'post_allocation_quota';
 
-	const api = useAllocationRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url    : `/${apiName}`,
 		method : 'post',
 		authkey,
 	}, { manual: true });
-
-	const [{ loading }, trigger] = api;
 
 	const onSave = async (formValues, e) => {
 		e.preventDefault();
@@ -73,15 +71,17 @@ const useCreateEditAllocationQuota = (props) => {
 			quota_attributes: getFormattedValues(formValues),
 		};
 
-		const payload = {
-			...(isUpdatable ? { id, ...(getFormattedValues(formValues) || {}) } : propsForCreation),
-		};
-
 		try {
+			const payload = {
+				...(isUpdatable ? { id, ...(getFormattedValues(formValues) || {}) } : propsForCreation),
+			};
+
 			await trigger({ data: payload });
 
 			onCloseModal();
+
 			refetch();
+
 			Toast.success(`Quota ${isUpdatable ? 'updated' : 'added'} successfully`);
 		} catch (err) {
 			Toast.error(
