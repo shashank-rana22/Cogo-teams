@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import useCreateForm from '../../../../../hooks/useCreateForm';
 import Questions from '../../Questions';
@@ -33,14 +34,22 @@ function SubmitForm({
 
 	return (
 		<div className={styles.submit_form_container}>
-			<div className={styles.header}>Create Form</div>
-			{questionActionList.weigh?.length > 0 && (
-				<Questions
-					questions={questionActionList.checked}
-					setQuestionActionList={setQuestionActionList}
-					questionStatus="add_weightage"
-				/>
-			)}
+			<div className={styles.header}>
+				Create Form :
+				{' '}
+				<span>
+					{startCase(department)}
+					{' > '}
+				</span>
+
+				<span1>{startCase(designation)}</span1>
+			</div>
+
+			<Questions
+				questions={questionActionList.checked}
+				setQuestionActionList={setQuestionActionList}
+				questionStatus="add_weightage"
+			/>
 
 			<div className={styles.button_container}>
 				<Button

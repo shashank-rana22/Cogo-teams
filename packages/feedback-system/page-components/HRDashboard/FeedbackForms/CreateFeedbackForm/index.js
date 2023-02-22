@@ -42,6 +42,8 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
+					department={department}
+					designation={designation}
 				/>
 			);
 		}
@@ -56,6 +58,8 @@ function CreateFeedbackForm({
 						questionActionList={questionActionList}
 						setQuestionActionList={setQuestionActionList}
 						proceedForm={proceedForm}
+						department={department}
+						designation={designation}
 					/>
 				);
 			}

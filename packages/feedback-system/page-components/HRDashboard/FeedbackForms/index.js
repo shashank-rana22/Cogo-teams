@@ -1,4 +1,4 @@
-import { Toast, Placeholder } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
@@ -14,11 +14,9 @@ import useListDepartments from './useListDepartments';
 const getFormResubmission = (department = '', designation = '') => {
 	let lastFormStatus;
 
-	if (department && designation) {
+	if (designation) {
 		lastFormStatus = fetchLocalCheckList(department, designation);
 		if (lastFormStatus?.stage) {
-			Toast.default('Form Resubmission');
-
 			return { department, designation, stage: lastFormStatus.stage };
 		}
 		return {};
@@ -29,8 +27,6 @@ const getFormResubmission = (department = '', designation = '') => {
 	const lastForm = Object.keys(localForms)?.[Object.keys(localForms).length - 1] || '';
 	lastFormStatus = localForms[lastForm];
 	if (lastFormStatus?.stage) {
-		Toast.default('Form Resubmission');
-
 		return {
 			department  : lastForm.split('_')[0],
 			designation : lastForm.split('_')[1],
@@ -82,8 +78,10 @@ function FeedbackForms() {
 			}
 			setOpenCreateForm(true);
 			setFormStage(newFormStage);
+
 			return;
 		}
+
 		setOpenCreateForm(false);
 	}, [designation]);
 

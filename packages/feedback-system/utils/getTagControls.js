@@ -2,7 +2,7 @@ import { useGetAsyncOptions } from '@cogoport/forms';
 
 const useGetTagControls = () => {
 	const tagOptions = useGetAsyncOptions({
-		endpoint    : 'list_question_tags',
+		endpoint    : 'list-tags',
 		initialCall : false,
 		params      : {
 			filters: {

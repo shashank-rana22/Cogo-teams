@@ -1,4 +1,4 @@
-import { Input, Placeholder } from '@cogoport/components';
+import { Button, Input, Placeholder } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -9,6 +9,7 @@ import useGetColumns from '../../../common/Columns';
 import EmptyState from '../../../common/EmptyState';
 import Filters from '../../../common/Filters';
 import UserTableData from '../../../common/userTableData';
+import useDownloadCsvFeedbacks from '../../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 
 import styles from './styles.module.css';
@@ -18,6 +19,8 @@ function FeedbackManagement() {
 
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
+
+	const { getUserListCsv } = useDownloadCsvFeedbacks({});
 
 	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
 
@@ -43,14 +46,20 @@ function FeedbackManagement() {
 
 	const showLoading = () => (
 		<div style={{ margin: '16px' }}>
-			<Placeholder margin="0px 0px 16px" width="100%" height="80px" />
-			<Placeholder margin="0px 0px 16px" width="100%" height="80px" />
-			<Placeholder margin="0px 0px 16px" width="100%" height="80px" />
-			<Placeholder margin="0px 0px 16px" width="100%" height="80px" />
-			<Placeholder margin="0px 0px 16px" width="100%" height="80px" />
-			<Placeholder margin="0px 0px 16px" width="100%" height="80px" />
+			{Array(6).fill('').map((index) => (
+				<Placeholder
+					margin="0px 0px 16px"
+					width="100%"
+					height="80px"
+					keky={index}
+				/>
+			))}
 		</div>
 	);
+
+	const downloadCSV = () => {
+		getUserListCsv();
+	};
 
 	return (
 		<div className={styles.container}>
@@ -68,12 +77,11 @@ function FeedbackManagement() {
 				</div>
 			</div>
 
-			<div className={styles.list_header}>
-				<div className={styles.heading}>
-					<p className={styles.header_text}>
-						All Managers List
-					</p>
-				</div>
+			<div className={styles.heading}>
+				<p className={styles.header_text}>
+					All Managers List
+				</p>
+				<Button size="lg" onClick={() => downloadCSV()}>Download CSV</Button>
 			</div>
 
 			<div className={styles.top_container}>

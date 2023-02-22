@@ -11,7 +11,7 @@ function UserFeedbackData({ userId = '' }) {
 
 	const { list: FeedbackList, page_limit, total_count } = feedbackData || {};
 
-	const columnsToShow = ['name', 'role', 'rating', 'feedback', 'month'];
+	const columnsToShow = ['name', 'designation', 'rating', 'feedback', 'month'];
 
 	const columns = useGetColumns({ columnsToShow });
 
@@ -19,7 +19,6 @@ function UserFeedbackData({ userId = '' }) {
 		<>
 			<div className={styles.header}>
 				<p className={styles.list_header}>Feedback List</p>
-
 			</div>
 
 			<UserTableData
