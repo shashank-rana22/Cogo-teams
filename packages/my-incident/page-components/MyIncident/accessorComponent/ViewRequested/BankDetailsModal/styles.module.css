@@ -39,13 +39,13 @@
 }
 
 .link {
+	width: 675px;
 	padding-right: 10px;
 	font-size: 12px;
 	font-weight: 500;
 	text-decoration: underline;
-	cursor: pointer;
-	width:675px;
 	word-break: break-all;
+	cursor: pointer;
 }
 
 .text_area {
