@@ -15,6 +15,19 @@
 	margin: auto;
 }
 
+.picture_container {
+	display: flex;
+	justify-content: space-between;
+
+	.img {
+		width: 150px;
+		height: 150px;
+		margin-right: 20px;
+		border: 4px solid #8089cc;
+		border-radius: 50%;
+	}
+}
+
 .image_container {
 	display: flex;
 	justify-content: center;
@@ -38,10 +51,6 @@
 	flex-direction: row;
 	justify-content: flex-end;
 	width: 100%;
-
-	.core-ui-button-root {
-		margin-left: 12px;
-	}
 }
 
 .file_upload_container {
@@ -101,27 +110,12 @@
 		.ui_avatar_container {
 			padding: 0 !important;
 		}
-	}
 
-	:global {
-		.ui_w3vLx {
+		.ui_avatar_text {
 			color: #6fa5ab;
 			background: #cfeaee !important;
 			border: 4px solid #addadf;
 		}
-	}
-}
-
-.picture_container {
-	display: flex;
-	justify-content: space-between;
-
-	.img {
-		width: 150px;
-		height: 150px;
-		margin-right: 20px;
-		border: 4px solid #8089cc;
-		border-radius: 50%;
 	}
 }
 
