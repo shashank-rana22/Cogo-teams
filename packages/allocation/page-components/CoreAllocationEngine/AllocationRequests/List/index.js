@@ -2,18 +2,10 @@ import { Table, Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import STATUS_MAPPING from '../../../../constants/requests-status-mapping';
 import useUpdateRequestStatus from '../../../../hooks/useUpdateAllocationRequest';
 
 import styles from './styles.module.css';
-
-const STATUS_MAPPING = {
-	approved: {
-		label: 'Approve',
-	},
-	rejected: {
-		label: 'Reject',
-	},
-};
 
 function List(props) {
 	const {
