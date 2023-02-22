@@ -1,4 +1,4 @@
-import { Button, cl, Tooltip } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -24,6 +24,7 @@ function Header({
 	filteredSpectators = [],
 	activeMessageCard,
 	tagOptions = [],
+	support_agent_id = null,
 
 }) {
 	const [isVisible, setIsVisible] = useState(false);
@@ -69,6 +70,7 @@ function Header({
 								closeModal,
 								assignLoading,
 								assignChat,
+								support_agent_id,
 							},
 						})}
 					>
