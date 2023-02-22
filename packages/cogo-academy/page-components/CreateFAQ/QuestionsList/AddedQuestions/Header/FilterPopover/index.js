@@ -1,13 +1,12 @@
-/* eslint-disable max-len */
 import { Popover } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
+import useFilterPopover from './useFilterPopover';
 
 function FilterPopover() {
-	const [showFilter, setShowFilter] = useState(false);
+	const { showFilter, setShowFilter } = useFilterPopover();
 
 	return (
 		<Popover
@@ -24,13 +23,13 @@ function FilterPopover() {
 				}}
 			>
 				<div>Filter By</div>
+
 				<IcMArrowDown
 					width={16}
 					height={16}
 					className={` ${styles.caret_arrow} ${showFilter && styles.caret_active}`}
 				/>
 			</div>
-
 		</Popover>
 	);
 }
