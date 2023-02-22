@@ -132,7 +132,6 @@ function MapView(props = {}) {
 									/>
 
 								)
-								// showComponent &&
 								: (
 									<div className={styles.loading_state_container}>
 										<img

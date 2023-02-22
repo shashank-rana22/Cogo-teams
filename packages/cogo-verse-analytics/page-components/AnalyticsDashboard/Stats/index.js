@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
-import { cl } from '@cogoport/components';
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import chartData from '../../../configurations/chart-data';

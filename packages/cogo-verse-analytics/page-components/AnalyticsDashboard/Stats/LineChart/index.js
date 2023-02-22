@@ -92,6 +92,7 @@ function Charts({ GraphData = [], hideChart = false }) {
 					<div className={styles.horizontal_line} />
 					<div className={styles.horizontal_line} />
 					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
 
 					{/* <img src={imgURL.empty_3} alt="no data" width="135px" className={styles.empty_img} /> */}
 				</div>
