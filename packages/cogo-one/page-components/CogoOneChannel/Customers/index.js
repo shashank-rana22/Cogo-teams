@@ -29,6 +29,7 @@ function Customers({
 	updateUserStatus = () => {},
 	statusLoading = false,
 	activeCardId = '',
+	isomniChannelAdmin = false,
 }) {
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -46,14 +47,16 @@ function Customers({
 						CogoOne
 					</div>
 				</div>
-				<Toggle
-					name="online"
-					size="md"
-					showOnOff
-					onChange={() => onChangeToggle()}
-					checked={toggleStatus}
-					loading={statusLoading}
-				/>
+				{!isomniChannelAdmin && (
+					<Toggle
+						name="online"
+						size="md"
+						showOnOff
+						onChange={() => onChangeToggle()}
+						checked={toggleStatus}
+						loading={statusLoading}
+					/>
+				)}
 			</div>
 			<div className={styles.tabs}>
 				<Tabs
