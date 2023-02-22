@@ -48,7 +48,6 @@ function FormatData({
 			}
 		}
 	}
-	console.log(userMobile, 'userMobilenjghf');
 
 	return {
 		userId,
