@@ -16,8 +16,6 @@ function ManagerDashboard() {
 	const { list = [], pagination_data = {} } = data;
 	const { total_count = '' } = pagination_data;
 
-	console.log('list::', list);
-
 	const monthControls = getMonthControls(params?.Year);
 
 	const Router = useRouter();
