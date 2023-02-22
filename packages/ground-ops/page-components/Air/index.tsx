@@ -50,6 +50,8 @@ function Air({ setGenerate, setItem }) {
 
 	useEffect(() => {
 		if (activeTab === 'new_awb') { listAPi(); }
+		if (activeTab === 'approval_pending') { listAPi(true); }
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
