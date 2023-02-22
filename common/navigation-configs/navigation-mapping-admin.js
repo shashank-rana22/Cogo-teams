@@ -847,7 +847,7 @@ const navigationMappingAdmin = {
 		as            : '/v2/my-incident/requested',
 		type          : 'link',
 		icon          : IcMFinance,
-		possible_apis : [],
+		possible_apis : apis.my_incident,
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
