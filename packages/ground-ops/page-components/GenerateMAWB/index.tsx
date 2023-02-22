@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Stepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
@@ -12,9 +12,17 @@ import mawbControls from './mawbControls';
 import styles from './styles.module.css';
 import useGenerateDocument from './useGenerateDocument';
 
+const items = [
+	{ title: 'Basic Details', key: 'basic' },
+	{ title: 'Package & Charges Detail', key: 'package' },
+	{ title: 'Handling Details', key: 'handling' },
+];
+
 function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 	const [back, setBack] = useState(false);
 	const { control, watch, handleSubmit, formState: { errors } } = useForm();
+
+	const [activeKey, setActiveKey] = useState('basic');
 
 	const {
 		documentList,
@@ -33,8 +41,10 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 	const fields = mawbControls();
 
 	const onSubmit = () => {
-		generateCertificate();
-		setBack(true);
+		// generateCertificate();
+		// setBack(true);
+
+		setActiveKey('package');
 	};
 
 	const formValues = watch();
@@ -44,24 +54,71 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.heading}>Generate MAWB</div>
-			<div className={styles.form_container}>
-				<Layout fields={fields} control={control} errors={errors} />
-				<div className={styles.button_div}>
-					{!back ? (
-						<Button
-							onClick={handleSubmit(onSubmit)}
-							disabled={documentLoading || generateLoading}
-						>
-							{documentLoading || generateLoading
-								? 'Generating'
-								: 'Generate Master Airway Bill'}
-						</Button>
-					) : null}
-				</div>
 
+			<Stepper
+				active={activeKey}
+				setActive={setActiveKey}
+				items={items}
+				// arrowed
+			/>
+			<div className={styles.form_container}>
+
+				{activeKey === 'basic'
+				&& (
+					<>
+						<Layout fields={fields?.basic} control={control} errors={errors} />
+						<div className={styles.button_div}>
+							{!back ? (
+								<Button
+									onClick={handleSubmit(onSubmit)}
+									disabled={documentLoading || generateLoading}
+								>
+									Next
+								</Button>
+							) : null}
+						</div>
+					</>
+				)}
+
+				{activeKey === 'package'
+				&& (
+					<>
+						<Layout fields={fields?.package} control={control} errors={errors} />
+						<div className={styles.button_div}>
+							{!back ? (
+								<Button
+									onClick={handleSubmit(onSubmit)}
+									disabled={documentLoading || generateLoading}
+								>
+									Next
+								</Button>
+							) : null}
+						</div>
+					</>
+				)}
+
+				{activeKey === 'handling'
+				&& (
+					<>
+						<Layout fields={fields?.handling} control={control} errors={errors} />
+						<div className={styles.button_div}>
+							{!back ? (
+								<Button
+									onClick={handleSubmit(onSubmit)}
+									disabled={documentLoading || generateLoading}
+								>
+									{documentLoading || generateLoading
+										? 'Generating'
+										: 'Generate Master Airway Bill'}
+								</Button>
+							) : null}
+						</div>
+					</>
+				)}
 			</div>
+
 			<div className={styles.file_container}>
 				{(back || viewDoc) && (
 					<Modal show={back || viewDoc} size="lg" className={styles.modal_container}>
