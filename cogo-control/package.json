@@ -15,7 +15,6 @@
     "@cogoport/cogo-one": "workspace:0.1.0",
     "@cogoport/components": "^1.0.324",
     "@cogoport/contracts": "workspace:0.1.0",
-    "@cogoport/cogo-verse-analytics": "workspace:0.1.0",
     "@cogoport/core": "workspace:0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.57",

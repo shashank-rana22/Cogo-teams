@@ -40,12 +40,14 @@ const useListOrganizations = ({ orgId = null }) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 		if (isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}`;
+			const CRM_ROUTE_PAGE = crm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${prm}` : ORG_PAGE_URL;
 			// eslint-disable-next-line no-undef
-			window.open(`${ORG_PAGE_URL}?omniChannelActiveTab=${prm}`, '_blank');
+			window.open(CRM_ROUTE_PAGE, '_blank');
 		} else {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORG_ID}`;
+			const PRM_ROUTE_PAGE = prm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${prm}` : ORG_PAGE_URL;
 			// eslint-disable-next-line no-undef
-			window.open(`${ORG_PAGE_URL}?omniChannelActiveTab=${crm}`, '_blank');
+			window.open(PRM_ROUTE_PAGE, '_blank');
 		}
 	};
 
