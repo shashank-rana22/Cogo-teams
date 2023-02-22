@@ -30,24 +30,22 @@ function UserStats() {
 
 	const monthControls = getMonthControls();
 
-	const formProps =	useForm();
+	const formProps = useForm();
 	const { watch: watchDateFilter, control } = formProps;
 
-	const { setParams } = useListUserFeedbacks({
+	const { setParams, params } = useListUserFeedbacks({
 		userId,
 	});
-	const monthFilter = watchDateFilter('created_at_month');
-	const yearFilter = watchDateFilter('created_at_year');
+	const monthFilter = watchDateFilter('month');
+	const yearFilter = watchDateFilter('year');
 	const ratingFilter = watchDateFilter('rating');
 
 	useEffect(() => setParams((pv) => ({
 		...pv,
-		filters: {
-			...(pv.filters),
-			created_at_month : monthFilter || undefined,
-			created_at_year  : yearFilter || undefined,
-			rating           : ratingFilter || undefined,
-		},
+		Month  : monthFilter || undefined,
+		Year   : yearFilter || undefined,
+		Rating : ratingFilter || undefined,
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	})), [monthFilter, yearFilter, ratingFilter]);
 
@@ -103,7 +101,7 @@ function UserStats() {
 				</div>
 
 				<div className={styles.performance_chart}>
-					<PerformanceChart userId={userId} />
+					<PerformanceChart userId={userId} params={params} />
 				</div>
 
 				<UserFeedbackData userId={userId} />

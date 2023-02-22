@@ -30,7 +30,7 @@ function UserDashboard() {
 
 	const userId = user_id || user.id;
 
-	const { setParams } = useListUserFeedbacks({
+	const { setParams, params } = useListUserFeedbacks({
 		userId,
 	});
 
@@ -80,7 +80,7 @@ function UserDashboard() {
 			</div>
 
 			<div className={styles.performance_chart}>
-				<PerformanceChart userId={userId} />
+				<PerformanceChart userId={userId} params={params} />
 			</div>
 
 			<UserFeedbackData userId={userId} />

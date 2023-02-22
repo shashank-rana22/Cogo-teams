@@ -8,8 +8,9 @@ import TeamPieChart from '../TeamPieChart';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-function PerformanceChart({ params = {}, userId = '' }) {
+function PerformanceChart({ params = {}, userId = ''}) {
 	const { Month = '', Year = '', ManagerID = '' } = params;
+
 	const {
 		performanceStatsList = [],
 		loading,
@@ -134,7 +135,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 					)}
 
 					<div className={styles.pie_chart}>
-						<TeamPieChart userId={userId} month={Month} year={Year}/>
+						<TeamPieChart userId={userId} month={Month} year={Year} />
 					</div>
 
 				</div>
