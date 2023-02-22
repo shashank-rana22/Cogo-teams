@@ -61,11 +61,13 @@ function Greetings({
 					onClick={() => setShowModal(true)}
 				>
 					{picture ? (
-						<img
-							src={picture}
-							alt="loading"
-							className={styles.avatar_container}
-						/>
+						<div className={styles.image_container}>
+							<img
+								src={picture}
+								alt="loading"
+								className={styles.avatar_container}
+							/>
+						</div>
 					) : (
 						<div className={styles.avatar_container}>
 							<Avatar personName={name} size="140px" />
@@ -184,11 +186,13 @@ function Greetings({
 							</div>
 
 							{picture || watchProfilePicture ? (
-								<img
-									src={watchProfilePicture?.finalUrl || picture}
-									alt="loading"
-									className={styles.avatar_container}
-								/>
+								<div className={styles.image_container}>
+									<img
+										src={watchProfilePicture?.finalUrl || picture}
+										alt="loading"
+										className={styles.avatar_container}
+									/>
+								</div>
 							) : (
 								<div className={styles.avatar_container}>
 									<Avatar personName={name} size="140px" />
