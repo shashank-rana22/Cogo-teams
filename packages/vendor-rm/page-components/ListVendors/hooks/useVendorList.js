@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import styles from '../styles.module.css';
 
 const ICON_MAPPING = {
-	pending_from_user : <IcMError />,
-	verified          : <IcCFtick />,
+	pending  : <IcMError />,
+	verified : <IcCFtick />,
 };
 
 const renderToolTipContent = (unique_services) => (

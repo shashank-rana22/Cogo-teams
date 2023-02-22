@@ -25,7 +25,7 @@
 	line-height: 24px;
 }
 
-.pending_from_user{
+.pending{
 	color:#ed3726;
 	display: flex;
 	align-items: center;
