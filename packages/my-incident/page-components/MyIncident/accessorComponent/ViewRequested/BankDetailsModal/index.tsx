@@ -44,7 +44,7 @@ function BankDatailsModal({
 					</div>
 					<div className={styles.name_container}>
 						<div className={styles.value}>
-							Organizaion Type
+							Trade Party Type
 						</div>
 						<div className={styles.type_value}>
 							{startCase(tradePartyType)}
