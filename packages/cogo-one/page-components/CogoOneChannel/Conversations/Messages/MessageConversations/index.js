@@ -252,11 +252,9 @@ function MessageConversations({
 					<div className={styles.icon_tools}>
 						{hasPermissionToEdit && (
 							<FileUploader
-								defaultValue={
-								!isEmpty(draftUploadedFile)
+								defaultValues={!isEmpty(draftUploadedFile)
 									? [draftUploadedFile]
-									: []
-							}
+									: ['']}
 								disabled={uploading?.[id]}
 								handleProgress={handleProgress}
 								showProgress={false}

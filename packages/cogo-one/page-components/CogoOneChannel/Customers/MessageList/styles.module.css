@@ -78,14 +78,14 @@
 }
 
 .card_container:hover {
-	background: #FDFBF6;
+	background: #fdfbf6;
 }
 
 .active_card {
 	background: #fbf7ec;
 }
 
-.active_card:hover{
+.active_card:hover {
 	background: #fbf7ec;
 }
 

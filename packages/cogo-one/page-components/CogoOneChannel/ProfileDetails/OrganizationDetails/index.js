@@ -158,10 +158,8 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 				</div>
 			) : (
 				<ListPromos />
-
 			)}
 		</div>
-
 	);
 }
 export default OrganizationDetails;
