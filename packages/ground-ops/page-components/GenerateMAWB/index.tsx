@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Button, Modal, Stepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Layout from '../Air/commons/Layout';
 
@@ -16,11 +16,13 @@ const items = [
 	{ title: 'Handling Details', key: 'handling' },
 ];
 
-function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
+function GenerateMAWB({ 	item = {}, task = {}, viewDoc = false }) {
 	const [back, setBack] = useState(false);
-	const { control, watch, handleSubmit, formState: { errors } } = useForm();
+	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const [activeKey, setActiveKey] = useState('basic');
+
+	const shipment_id = item?.shipment_id;
 
 	const {
 		documentList,
@@ -49,6 +51,12 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 		...formValues,
 	};
 
+	useEffect(() => {
+		fields[activeKey].forEach((c) => {
+			setValue(c.name, item[c.name]);
+		});
+	}, []);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Generate MAWB</div>
@@ -57,7 +65,6 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 				active={activeKey}
 				setActive={setActiveKey}
 				items={items}
-				// arrowed
 			/>
 			<div className={styles.form_container}>
 

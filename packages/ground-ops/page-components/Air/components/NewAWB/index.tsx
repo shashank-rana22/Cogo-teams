@@ -34,7 +34,7 @@ function NewAWB({ data, loading }) {
 		<>
 			{!generate && <List fields={fields} data={data} loading={loading} functions={functions} />}
 
-			{generate && <GenerateMAWB shipment_id={item.shipmentId} task={item} />}
+			{generate && <GenerateMAWB item={item} task={item} />}
 		</>
 	);
 }

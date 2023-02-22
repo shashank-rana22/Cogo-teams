@@ -55,7 +55,7 @@ const mawbControls = () => ({
 			},
 		},
 		{
-			name        : 'origin_airport',
+			name        : 'origin',
 			type        : 'text',
 			className   : 'primary lg',
 			label       : 'Origin',
@@ -66,7 +66,7 @@ const mawbControls = () => ({
 			},
 		},
 		{
-			name        : 'destination_airport',
+			name        : 'destination',
 			type        : 'text',
 			className   : 'primary lg',
 			label       : 'Destination',
@@ -77,7 +77,7 @@ const mawbControls = () => ({
 			},
 		},
 		{
-			name        : 'carrier',
+			name        : 'airline',
 			type        : 'text',
 			className   : 'primary lg',
 			label       : 'By Carrier',
@@ -89,12 +89,16 @@ const mawbControls = () => ({
 		},
 		{
 			name        : 'freight',
-			type        : 'text',
+			type        : 'select',
 			className   : 'primary lg',
-			label       : 'Freight',
-			placeholder : 'Enter Freight',
-			span        : 5,
-			rules       : {
+			label       : 'Shipment Type',
+			placeholder : 'Shipment Type',
+			options     : [
+				{ value: 'prepaid', label: 'Prepaid' },
+				{ value: 'collect', label: 'Collect' },
+			],
+			span  : 5,
+			rules : {
 				require: 'Freight is Required',
 			},
 		},
@@ -152,6 +156,7 @@ const mawbControls = () => ({
 					],
 					className : 'primary lg',
 					span      : 2,
+					value     : 'q',
 					rules     : {
 						require: 'Class is Required',
 					},
