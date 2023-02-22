@@ -146,6 +146,7 @@ const useAllocationRelations = () => {
 			Header : <Checkbox
 				checked={selectAll}
 				onChange={(event) => onChangeTableHeadCheckbox(event)}
+				disabled={loading}
 			/>,
 			accessor: ({ id = '' }) => (
 				<Checkbox
@@ -172,10 +173,24 @@ const useAllocationRelations = () => {
 			Header   : 'User',
 			accessor : ({ user_id = '' }) => (
 				<div className={styles.name_container}>
-					<div className={styles.tooltip_text}>{startCase((user_id.name || '').toLowerCase())}</div>
+					<div className={styles.tooltip_text}>{startCase((user_id.name || '___').toLowerCase())}</div>
 
 					<div className={`${styles.lower_label} ${styles.email_id}`}>
-						{(user_id.email || '').toLowerCase()}
+						{(user_id.email || '___').toLowerCase()}
+					</div>
+				</div>
+			),
+			showInTabs: ['active', 'pending'],
+		},
+		{
+			id       : 'stakeholder',
+			Header   : 'Stakeholder',
+			accessor : ({ stakeholder_id = '', stakeholder_type = '' }) => (
+				<div className={styles.name_container}>
+					<div className={styles.tooltip_text}>{startCase((stakeholder_id.name || '___').toLowerCase())}</div>
+
+					<div className={`${styles.lower_label} ${styles.email_id}`}>
+						{startCase(stakeholder_type || '___')}
 					</div>
 				</div>
 			),
@@ -261,7 +276,10 @@ const useAllocationRelations = () => {
 						onClickOutside={() => setShowActions(null)}
 					>
 
-						<div className={styles.svg_container}>
+						<div
+							className={styles.svg_container}
+							style={checkedRowsId.includes(id) ? { pointerEvents: 'none' } : {}}
+						>
 							<IcMOverflowDot
 								height={16}
 								width={16}

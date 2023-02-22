@@ -86,3 +86,10 @@
 		font-size: 14px;
 	}
 }
+
+.svg_container {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+	cursor: pointer;
+}

@@ -241,7 +241,10 @@ const useListAllocationRequests = () => {
 							)}
 							onClickOutside={() => setPopoverId(null)}
 						>
-							<div className={styles.svg_container}>
+							<div
+								className={styles.svg_container}
+								style={checkedRowsId.includes(id) ? { pointerEvents: 'none' } : {}}
+							>
 								<IcMOverflowDot
 									height={16}
 									width={16}

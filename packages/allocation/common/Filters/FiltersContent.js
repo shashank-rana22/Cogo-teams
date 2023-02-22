@@ -37,7 +37,7 @@ function FilterContent(props) {
 							marginLeft: '10px',
 						}}
 					>
-						Save
+						Apply
 					</Button>
 				</div>
 			</div>
