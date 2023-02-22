@@ -127,7 +127,8 @@ function BankDatailsModal({
 							{documentUrls?.map((url:string) => (url !== '' ? (
 								<div className={styles.link}>
 									<a href={url} target="_blank" rel="noreferrer">
-										document.pdf
+										{url.split('/')[4] || '-'}
+
 									</a>
 								</div>
 							) : (
