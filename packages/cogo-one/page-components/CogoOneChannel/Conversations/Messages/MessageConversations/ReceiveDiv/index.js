@@ -3,7 +3,7 @@ import { cl } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import MessageBody from '../../../../../../common/MessageBody';
-import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
+// import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
