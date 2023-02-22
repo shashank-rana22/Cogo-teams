@@ -166,7 +166,7 @@ function EmptyState({
 							<SelectMobileNumber
 								value={profileValue}
 								onChange={(val) => setProfilevalue(val)}
-								numberKey="number"
+								inputType="number"
 							/>
 						</div>
 					</Modal.Body>
