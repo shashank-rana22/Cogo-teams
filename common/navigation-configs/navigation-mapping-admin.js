@@ -1725,6 +1725,8 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
+		showInNav     : false,
+
 	},
 	allocations: {
 		key         : 'allocations',
@@ -1779,6 +1781,17 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,
+		module_type   : 'dashboards',
+	},
+
+	airline_booking_plugin: {
+		key           : 'airline_booking_plugin',
+		title         : 'Airline Booking Plugin',
+		href          : '/airline-booking-plugin',
+		as            : '/airline-booking-plugin',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.airline_booking_plugin,
 		module_type   : 'dashboards',
 	},
 
