@@ -96,3 +96,6 @@
 	padding: 5px;
 
 }
+.overflow_div{
+	overflow-y: scroll;
+}

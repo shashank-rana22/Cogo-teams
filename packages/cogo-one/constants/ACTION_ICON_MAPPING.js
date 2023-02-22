@@ -1,8 +1,6 @@
 import {
 	IcADocumentTemplates,
-	IcACrossBorder,
 	IcALocation,
-	IcADiscoverRates,
 	IcAWhitePapers,
 } from '@cogoport/icons-react';
 
@@ -15,27 +13,11 @@ const ACTION_ICON_MAPPING = [
 		redirecting : { prm: 'shipments', crm: 'shipments' },
 	},
 	{
-		name        : 'schedule_air_ocean',
-		icon        : <IcACrossBorder width={28} height={28} />,
-		title       : 'Schedule Air/Ocean',
-		href        : 'saas/air-schedules',
-		redirecting : { prm: undefined, crm: undefined },
-
-	},
-	{
-		name        : 'outstanding_invoices',
-		icon        : <IcADiscoverRates width={28} height={28} />,
-		title       : 'Outstanding Invoices',
-		href        : 'outstanding',
-		redirecting : { prm: undefined, crm: undefined },
-
-	},
-	{
 		name        : 'invoicing',
 		icon        : <IcAWhitePapers width={28} height={28} />,
 		title       : 'Invoicing',
 		href        : 'invoice-approvals',
-		redirecting : { prm: undefined, crm: undefined },
+		redirecting : { prm: 'finance', crm: 'finance' },
 	},
 	{
 		name        : 'quotation',

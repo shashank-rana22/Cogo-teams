@@ -39,7 +39,6 @@ const useListOrganizations = ({ orgId = null }) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 		if (isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}`;
-
 			const PRM_ROUTE_PAGE = prm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${prm}` : ORG_PAGE_URL;
 			window.open(PRM_ROUTE_PAGE, '_blank');
 		} else {
