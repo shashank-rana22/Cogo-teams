@@ -22,6 +22,7 @@
 .button_container {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     margin: 8px 0;
 }
 

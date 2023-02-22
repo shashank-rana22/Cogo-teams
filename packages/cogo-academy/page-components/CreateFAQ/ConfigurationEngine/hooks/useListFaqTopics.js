@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 
 function useListFaqTopics() {
 	const [topicCurrentPage, setTopicCurrentPage] = useState(1);
+	const [activeTopic, setActiveTopic] = useState('active');
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
@@ -11,7 +13,7 @@ function useListFaqTopics() {
 	const fetchFaqTag = async () => {
 		try {
 			await trigger({
-				data: { page: topicCurrentPage },
+				data: { page: topicCurrentPage, status: activeTopic },
 			});
 		} catch (err) {
 			// console.log(err);
@@ -19,9 +21,9 @@ function useListFaqTopics() {
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTag(); }, []);
+	useEffect(() => { fetchFaqTag(); }, [activeTopic]);
 
-	return { fetchFaqTag, data, loading, topicCurrentPage, setTopicCurrentPage };
+	return { fetchFaqTag, data, loading, activeTopic, setActiveTopic, topicCurrentPage, setTopicCurrentPage };
 }
 
 export default useListFaqTopics;

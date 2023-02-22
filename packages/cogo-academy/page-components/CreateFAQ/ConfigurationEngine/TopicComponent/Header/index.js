@@ -6,10 +6,9 @@ import SearchInput from '../../../../../commons/SearchInput';
 
 import styles from './styles.module.css';
 
-function Header({ setConfigurationPage = () => {} }) {
+function Header({ activeTopic, setConfigurationPage = () => {}, setActiveTopic = () => {} }) {
 	const router = useRouter();
 	const [searchTopicsInput, setSearchTopicssInput] = useState('');
-	const [activeTab, setActiveTab] = useState('active');
 
 	const onClickAddTopic = () => {
 		router.push(
@@ -29,9 +28,9 @@ function Header({ setConfigurationPage = () => {} }) {
 				<div className={styles.flex_items}>
 					<div className={styles.tabs_container}>
 						<Tabs
-							activeTab={activeTab}
+							activeTab={activeTopic}
 							themeType="tertiary"
-							onChange={setActiveTab}
+							onChange={setActiveTopic}
 						>
 							<TabPanel name="active" title="Active">
 								{/* <div>Active</div> */}
