@@ -21,7 +21,7 @@ function List(props) {
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
