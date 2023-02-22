@@ -5,31 +5,26 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function TeamPieChart({ userId = '', data = {} }) {
+function TeamPieChart({ userId = '' }) {
 	const {
 		loading,
 		userData,
 	} = useGetPieChartStats({ userId });
 
-	console.log('userData', userData);
-
 	const chart_data = [
 		{
 			id    : 'above_average',
 			label : 'Above Average',
-			// value : userData.above_average,
 			value : 23,
 		},
 		{
 			id    : 'average',
 			label : 'Average',
-			// value : userData.average,
 			value : 13,
 		},
 		{
 			id    : 'below_average',
 			label : 'Below Average',
-			// value : userData.below_average,
 			value : 3,
 		},
 	];
@@ -41,7 +36,6 @@ function TeamPieChart({ userId = '', data = {} }) {
 			)
 				? (
 					<ResponsivePie
-					// data={data}
 						data={chart_data}
 						innerRadius={0}
 						padAngle={0.7}
