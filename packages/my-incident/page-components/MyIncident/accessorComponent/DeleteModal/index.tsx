@@ -14,14 +14,15 @@ function DeleteModal({ itemData, refetch }) {
 	return (
 		<div>
 			<div className={styles.button_style}>
-				{status === 'REJECTED' ? (
+				{status === 'REJECTED' || status === 'DELETED' ? (
 					<Button
-						disabled={userIncidentStatus === 'ACCEPTED' || userIncidentStatus === 'RAISED_AGAIN'}
+						disabled={userIncidentStatus === 'ACCEPTED' || userIncidentStatus === 'RAISED_AGAIN'
+						|| userIncidentStatus === 'DELETED'}
 						themeType="tertiary"
 						size="sm"
 						onClick={() => { setShowDeleteModal(true); }}
 					>
-						Accept
+						Close Incident
 					</Button>
 				)
 					: (

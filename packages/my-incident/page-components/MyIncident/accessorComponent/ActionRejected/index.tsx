@@ -24,13 +24,14 @@ function ActionRejected({ itemData, refetch }) {
 							{(name === 'View')
 								? <ViewRequested itemData={itemData} name="View" refetch={refetch} />
                             	: null}
-							{name === 'Accept' ? <DeleteModal itemData={itemData} refetch={refetch} /> : null}
+							{name === 'Accept' && userIncidentStatus !== 'DELETED'
+								? <DeleteModal itemData={itemData} refetch={refetch} /> : null}
 							{(name === 'Raise Again') && (type === 'TDS_APPROVAL' || type === 'BANK_DETAIL_APPROVAL')
 							&& (userIncidentStatus === 'PENDING_ACTION')
 								? <ViewRequested itemData={itemData} name="Raise Again" refetch={refetch} /> : null}
 						</div>
-						{name === 'Raise Again' || (name === 'Accept' && (userIncidentStatus === 'ACCEPTED'
-						|| userIncidentStatus === 'RAISED_AGAIN')) ? null
+						{name === 'Raise Again' || (name === 'Accept' && (userIncidentStatus === 'CLOSED'
+						|| userIncidentStatus === 'RAISED_AGAIN' || userIncidentStatus === 'DELETED')) ? null
 							: <div className={styles.hr} />}
 					</div>
 				))}

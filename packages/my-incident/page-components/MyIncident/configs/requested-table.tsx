@@ -1,4 +1,4 @@
-import { getByKey, startCase } from '@cogoport/utils';
+import { format, getByKey, startCase } from '@cogoport/utils';
 
 import CompanyName from '../accessorComponent/CompanyName';
 import DeleteModal from '../accessorComponent/DeleteModal';
@@ -46,12 +46,16 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 		<SortData isSortActive={isSortActive} setIsSortActive={setIsSortActive} setGlobalFilters={setGlobalFilters} />
 	</div>,
 		id       : 'createdAt',
-		accessor : (row) => (
-			<div>
-				{getByKey(row, 'createdAt') as string}
-			</div>
+		accessor : (row) => {
+			const { createdAt } = row;
+			return (
+				<div>
+					{format(createdAt, 'dd MMM YYYY', {}, false)}
+					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+				</div>
+			);
+		},
 
-		),
 	},
 	{
 		Header   : <div>STATUS</div>,
@@ -84,6 +88,31 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 				<DeleteModal itemData={row} refetch={refetch} />
 			</div>
 		),
+	},
+	{
+		Header   : '',
+		id       : 'ribbon',
+		accessor : (row) => {
+			const { deadlineTag } = row;
+			return (
+				deadlineTag &&	(
+					<div>
+						{deadlineTag === 'RED' && (
+							<div className={deadlineTag === 'RED' && styles.ribbon_red}>
+								Urgent
+							</div>
+						)}
+						{
+								deadlineTag === 'ORANGE' && (
+									<div className={deadlineTag === 'ORANGE' && styles.ribbon_orange}>
+										Urgent
+									</div>
+								)
+							}
+					</div>
+				)
+			);
+		},
 	},
 ];
 export default requestedColumn;

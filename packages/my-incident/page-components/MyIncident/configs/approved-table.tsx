@@ -1,4 +1,4 @@
-import { getByKey, startCase } from '@cogoport/utils';
+import { format, getByKey, startCase } from '@cogoport/utils';
 
 import CompanyName from '../accessorComponent/CompanyName';
 import DateName from '../accessorComponent/DateName';
@@ -53,13 +53,15 @@ const approvedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refet
 		<SortData isSortActive={isSortActive} setIsSortActive={setIsSortActive} setGlobalFilters={setGlobalFilters} />
 	</div>,
 		id       : 'createdAt',
-		accessor : (row) => (
-			<div>
+		accessor : (row) => {
+			const { createdAt } = row;
+			return (
 				<div>
-					{getByKey(row, 'createdAt') as string}
+					{format(createdAt, 'dd MMM YYYY', {}, false)}
+					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
 				</div>
-			</div>
-		),
+			);
+		},
 	},
 	{
 		Header   : <div>APPROVED BY & ON</div>,

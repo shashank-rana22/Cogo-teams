@@ -55,11 +55,11 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 	if (payload?.[0] === 'raisedPayload') {
 		activeStatus = undefined;
 	} else if (activeTab === 'requested') {
-		activeStatus = ['REQUESTED', 'DELETED'];
+		activeStatus = ['REQUESTED'];
 	} else if (activeTab === 'approved') {
 		activeStatus = ['APPROVED'];
 	} else if (activeTab === 'rejected') {
-		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED'];
+		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'ACCEPTED', 'DELETED'];
 	}
 
 	const refetch = async () => {

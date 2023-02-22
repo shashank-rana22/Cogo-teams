@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 
 import BankDetails from '../Modals/BankDetails';
 import ICJVModal from '../Modals/ICJV_Modal';
@@ -123,8 +123,16 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				/>
 			</div>
 		),
-		accessor : 'createdAt',
-		id       : 'request_date',
+		accessor: (row) => {
+			const { createdAt } = row;
+			return (
+				<div>
+					{format(createdAt, 'dd MMM YYYY', {}, false)}
+					<div>{format(createdAt, 'hh:mm a', {}, false)}</div>
+				</div>
+			);
+		},
+		id: 'request_date',
 	},
 	{
 		Header   : activeTab === 'approved' ? 'APPROVED BY & ON' : 'REJECTED BY & ON',
