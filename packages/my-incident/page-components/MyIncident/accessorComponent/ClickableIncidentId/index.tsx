@@ -30,7 +30,7 @@ function ClickableIncidentId({ itemData, setActiveTab, setPayload }:PropsType) {
 	const handleTabChange = () => {
 		setActiveTab('requested');
 		setPayload(['raisedPayload', linkedIncidentId, userId]);
-		push('/incident-management/requested');
+		push('/my-incident/requested');
 	};
 	return (
 		<div className={styles.container}>
