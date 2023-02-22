@@ -13,7 +13,11 @@ const useAllocationRelations = () => {
 
 	const [activeTab, setActiveTab] = useState('active');
 
+	const [listItem, setListItem] = useState({});
+
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
+
+	console.log('checkedRowsId', checkedRowsId);
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
@@ -225,14 +229,20 @@ const useAllocationRelations = () => {
 								onClickCta={onClickCta}
 							/>
 						)}
-						onClickOutside={() => setShowActions(null)}
+						onClickOutside={() => {
+							setShowActions(null);
+							setListItem({});
+						}}
 					>
 
 						<div className={styles.svg_container}>
 							<IcMOverflowDot
 								height={16}
 								width={16}
-								onClick={() => setShowActions(() => (showActions === id ? null : id))}
+								onClick={() => {
+									setShowActions(() => (showActions === id ? null : id));
+									setListItem(() => (showActions === id ? {} : item));
+								}}
 							/>
 						</div>
 					</Popover>
