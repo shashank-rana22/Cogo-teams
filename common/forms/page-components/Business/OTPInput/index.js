@@ -4,7 +4,7 @@ import OtpInput from './components/OtpInput';
 import useTimer from './hooks/useTimer';
 import styles from './styles.module.css';
 
-function OTPLayout({
+function OTPInput({
 	otpLength,
 	setOtpValue = () => {},
 	loading = false,
@@ -85,4 +85,4 @@ function OTPLayout({
 	);
 }
 
-export default OTPLayout;
+export default OTPInput;

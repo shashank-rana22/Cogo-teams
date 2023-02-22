@@ -1,4 +1,4 @@
-import Greetings from '../greetings';
+import Greetings from '../GreetingsHeader';
 
 function Header({
 	detailsData,

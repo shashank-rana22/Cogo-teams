@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { MobileNumberController } from '@cogoport/forms';
-import OTPLayout from '@cogoport/forms/page-components/Business/OTPLayout';
+import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -37,12 +37,12 @@ function MobileVerification({
 
 				{showEnterOtpComponent && (
 					<div className={styles.otp_container}>
-						<OTPLayout
+						<OTPInput
 							otpLength={OTP_LENGTH}
 							setOtpValue={setOtpNumber}
 							loading={false}
 							sendOtp={(obj) => sendOtpNumber({ ...obj })}
-							placeholder=" "
+							placeholder=""
 						/>
 					</div>
 				)}

@@ -1,4 +1,4 @@
-import displayServiceMapping from '../../utils/short-display-names.json';
+import displayServiceMapping from '../../../../constants/short-display-names';
 
 import styles from './styles.module.css';
 
