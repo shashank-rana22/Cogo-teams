@@ -53,8 +53,7 @@ function BulkUpdateMode({
 
 	return (
 		<div className={styles.bulk_update_container}>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-
+			<div className={styles.left_container}>
 				<Button
 					size="sm"
 					themeType="secondary"
@@ -81,7 +80,6 @@ function BulkUpdateMode({
 								size="md"
 								themeType="linkUi"
 								onClick={() => onClearSelection()}
-								style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
 							>
 								Clear Selection
 							</Button>

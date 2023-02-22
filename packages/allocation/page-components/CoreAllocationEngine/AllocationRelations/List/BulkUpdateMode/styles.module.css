@@ -21,3 +21,8 @@
 	padding: 0;
 	margin-right: 16px;
 }
+
+.left_container {
+	display: flex;
+	align-items: center;
+}
