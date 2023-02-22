@@ -144,7 +144,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.flex_reverse}>
 					<div>{name}</div>
-					<div>{updatedAt}</div>
+					{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
 				</div>
 			);
 		},

@@ -1,6 +1,7 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -70,7 +71,7 @@ function TdsDeviationModal({
 										{updatedByName}
 										{' '}
 										At :
-										{ updatedAt}
+										{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
 										{' '}
 										{}
 									</div>

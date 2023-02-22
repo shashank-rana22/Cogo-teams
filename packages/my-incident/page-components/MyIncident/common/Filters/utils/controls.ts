@@ -18,20 +18,20 @@ export const filterControls = (activeTab) => {
 						{ value: 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL', label: 'IC JV Approval' },
 					],
 				},
-				// {
-				// 	name        : 'requestedStatus',
-				// 	placeholder : 'Status',
-				// 	size        : 'lg',
-				// 	type        : 'select',
-				// 	caret       : true,
-				// 	isClearable : true,
-				// 	options     : [
+				{
+					name        : 'urgency',
+					placeholder : 'Urgent',
+					size        : 'lg',
+					type        : 'select',
+					caret       : true,
+					isClearable : true,
+					options     : [
 
-				// 		{ value: 'REQUESTED', label: 'Requested' },
-				// 		{ value: 'DELETED', label: 'Deleted' },
+						{ value: 'all', label: 'All' },
+						{ value: 'urgent', label: 'Urgent' },
 
-				// 	],
-				// },
+					],
+				},
 				{
 					name        : 'Date',
 					placeholder : 'Select Date',
