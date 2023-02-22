@@ -9,26 +9,20 @@ import styles from './styles.module.css';
 
 function ReceiveDiv({
 	eachMessage = {},
-	activeMessageCard = {},
 }) {
 	const {
 		message_type = 'text',
 		created_at = '',
 		response = {},
 	} = eachMessage;
-	const { user_name = 'Unknown User' } = getActiveCardDetails(activeMessageCard);
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 
 	return (
 		<div className={styles.container}>
 			<div>
-				<div className={styles.name}>
-					{user_name}
-					,
-					<span className={styles.time_stamp}>
-						{date}
-					</span>
+				<div className={styles.time_stamp}>
+					{date}
 				</div>
 
 				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>
