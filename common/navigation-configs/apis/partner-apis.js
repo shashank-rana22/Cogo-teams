@@ -7154,11 +7154,11 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_muneem_reports_customers_on_sage_data',
+			api         : 'get_muneem_reports_sage_customers_data',
 			access_type : 'private',
 		},
 		{
-			api         : 'get_muneem_reports_supplier_sage_data',
+			api         : 'get_muneem_reports_sage_suppliers_data',
 			access_type : 'private',
 		},
 		{
@@ -9727,6 +9727,21 @@ const partner = {
 			api          : 'get_airwaybill_prefix_from_airline',
 			access_type  : 'private',
 			service_name : 'operator',
+		},
+		{
+			api          : 'create_air_india_awb_number',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_air_india_awb_status',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 	airline_booking_plugin: [
