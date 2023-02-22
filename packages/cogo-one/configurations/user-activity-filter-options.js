@@ -24,7 +24,7 @@ function filterOptions() {
 		},
 		{
 			label : 'Mail',
-			value : 'mail',
+			value : 'email',
 		},
 	];
 

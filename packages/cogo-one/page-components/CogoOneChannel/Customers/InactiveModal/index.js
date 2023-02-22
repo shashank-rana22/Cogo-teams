@@ -1,4 +1,4 @@
-import { Modal, Button, Select, Datepicker } from '@cogoport/components';
+import { Modal, Button, Select, Datepicker, Timepicker } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty, addHours, format } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -14,19 +14,19 @@ function InactiveModal({
 
 }) {
 	const [offlineStatus, setOfflineStatus] = useState('');
-	const [date, setDate] = useState('');
-	// const [ofTime, setOfTime] = useState(new Date().getTime());
-	// console.log('ofTime:', ofTime);
-	// const customEndTime = 'fghjk';
-	// const customEndTime = date.setHours(
-	// 	// ofTime.getHours(),
-	// 	// ofTime.getMinutes(),
-	// 	// ofTime.getSeconds(),
-	// );
+	const [date, setDate] = useState(new Date());
+	const [ofTime, setOfTime] = useState(new Date());
+
+	const customEndTime = date.setHours(
+		ofTime.getHours(),
+		ofTime.getMinutes(),
+		ofTime.getSeconds(),
+	);
 
 	const resetReasons = () => {
 		setOfflineStatus('');
-		setDate('');
+		setDate(new Date());
+		setOfTime(new Date());
 	};
 
 	const handleClose = () => {
@@ -34,12 +34,12 @@ function InactiveModal({
 	};
 
 	useEffect(() => {
-		setDate('');
+		setDate(new Date());
+		setOfTime(new Date());
 	}, [offlineStatus]);
 
 	const emptyStateCheck = isEmpty(offlineStatus);
 	const customEmptyCheck = date === '';
-	// const customEmptyCheck = date === '' && ofTime === null;
 
 	const checks = offlineStatus !== 'custom' ? emptyStateCheck : customEmptyCheck;
 
@@ -76,7 +76,7 @@ function InactiveModal({
 			validity_end = endDate;
 		} else {
 			validity_start = new Date();
-			validity_end = date;
+			validity_end = customEndTime;
 		}
 
 		const data = {
@@ -122,20 +122,19 @@ function InactiveModal({
 							placeholder="Select date"
 							dateFormat="MM/dd/yyyy HH:mm"
 							name="date"
-							showTimeSelect
+							// showTimeSelect
 							onChange={setDate}
 							value={date}
 						/>
 
-						{/* <div className={styles.time_title}>
+						<div className={styles.time_title}>
 							Time
 						</div>
+
 						<Timepicker
-							onChange={(val) => {
-						    console.log('val:', val);
-							}}
+							onChange={setOfTime}
 							value={ofTime}
-						/> */}
+						/>
 					</>
 				)}
 
