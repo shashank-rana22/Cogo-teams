@@ -45,7 +45,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 		{
 			name                  : 'date',
 			placeholder           : 'Select Date',
-			type                  : 'dateRangePicker',
+			type                  : 'singleDateRange',
 			isPreviousDaysAllowed : true,
 			caret                 : true,
 			isClearable           : true,
@@ -89,7 +89,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 		{
 			name                  : 'date',
 			placeholder           : 'Select Date',
-			type                  : 'dateRangePicker',
+			type                  : 'singleDateRange',
 			caret                 : true,
 			isPreviousDaysAllowed : true,
 			isClearable           : true,
