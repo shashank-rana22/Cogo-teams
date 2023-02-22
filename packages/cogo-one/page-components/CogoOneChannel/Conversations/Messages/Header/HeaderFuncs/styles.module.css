@@ -1,98 +1,93 @@
 .flex_space_between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 15px;
 }
 
 .container {
-    padding: 0 15px 5px 15px;
-    box-shadow: 0px 4px 16px 0px #627fac33;
+	padding: 0 15px 5px;
+	box-shadow: 0 4px 16px 0 #627fac33;
 }
 
 .flex {
-    display: flex;
-    align-items: center;
-    svg {
-        cursor: pointer;
-    }
-}
+	display: flex;
+	align-items: center;
 
-.name {
-    font-size: 16px;
-    line-height: 24px;
-    color: #4f4f4f;
-    text-align: left;
+	svg {
+		cursor: pointer;
+	}
 }
 
 .phone_number {
-    font-size: 12px;
-    color: #828282;
-    text-align: left;
+	font-size: 12px;
+	color: #828282;
+	text-align: left;
 }
 
 .tags {
-    background: #f3fafa;
-    font-size: 10px;
-    line-height: 15px;
-    color: #221f20;
-    border-radius: 6px;
-    margin: 0 5px;
-    padding: 5px;
+	padding: 5px;
+	margin: 0 5px;
+	font-size: 10px;
+	line-height: 15px;
+	color: #221f20;
+	background: #f3fafa;
+	border-radius: 6px;
 }
 
 .margin {
-    margin: 5px;
+	margin: 5px;
 }
 
 .more_tags {
-    margin: 0 5px;
+	margin: 0 5px;
 	font-size: 10px;
 }
 
 .styled_button {
-    height: 27px !important;
+	height: 27px !important;
 }
 
 .active_agent {
-    position: relative;
-    margin-right: 10px;
-    z-index: 3;
+	position: relative;
+	z-index: 3;
+	margin-right: 10px;
 }
 
 .spectator_div {
-    position: absolute;
-    margin-top: -30px;
-    left: 20px;
-    z-index: -1;
+	position: absolute;
+	left: 20px;
+	z-index: -1;
+	margin-top: -30px;
 }
 
 .margin_right {
-    margin-right: 30px;
+	margin-right: 30px;
 }
 
 .buttons_container {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .input_container {
-    min-width: 200px;
-    padding-bottom: 20px;
+	min-width: 200px;
+	padding-bottom: 20px;
 }
-.tags_text { 
-	color: #828282;
+
+.tags_text {
+	padding-left: 5px;
 	font-family: Poppins;
 	font-size: 12px;
 	font-weight: 400;
 	line-height: 18px;
-	letter-spacing: 0em;
+	color: #828282;
 	text-align: left;
-	padding-left: 5px;
+	letter-spacing: 0;
 }
-.name{
-	font-size: 12px;
-	color:#221F20;
-	padding: 5px;
 
+.name {
+	padding: 5px;
+	font-size: 12px;
+	color: #221f20;
 }
