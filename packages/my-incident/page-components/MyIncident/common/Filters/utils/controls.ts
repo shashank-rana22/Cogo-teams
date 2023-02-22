@@ -20,7 +20,7 @@ export const filterControls = (activeTab) => {
 				},
 				{
 					name        : 'urgency',
-					placeholder : 'Urgent',
+					placeholder : 'Urgency',
 					size        : 'lg',
 					type        : 'select',
 					caret       : true,

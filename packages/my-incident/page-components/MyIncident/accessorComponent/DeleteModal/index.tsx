@@ -16,7 +16,7 @@ function DeleteModal({ itemData, refetch }) {
 			<div className={styles.button_style}>
 				{status === 'REJECTED' || status === 'DELETED' ? (
 					<Button
-						disabled={userIncidentStatus === 'ACCEPTED' || userIncidentStatus === 'RAISED_AGAIN'
+						disabled={userIncidentStatus === 'CLOSED' || userIncidentStatus === 'RAISED_AGAIN'
 						|| userIncidentStatus === 'DELETED'}
 						themeType="tertiary"
 						size="sm"
