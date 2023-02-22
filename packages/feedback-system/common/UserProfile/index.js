@@ -82,7 +82,7 @@ function UserProfile({ userId = '' }) {
 			</div>
 
 			<div className={styles.kpi}>
-				{ loading ? showLoading() : renderKPI(userData.kpi)}
+				{ loading ? showLoading() : renderKPI(userData.rating)}
 
 			</div>
 		</div>

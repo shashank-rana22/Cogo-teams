@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 const useListUserFeedbacks = ({
 	searchValue = '',
 	month = '', year = '',
+	userId = '',
 }) => {
 	const [params, setParams] = useState({
-		Month : month || undefined,
-		Year  : year || undefined,
-		Page  : 1,
+		UserID : userId || undefined,
+		Month  : month || undefined,
+		Year   : year || undefined,
+		Page   : 1,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }] = useRequest({
