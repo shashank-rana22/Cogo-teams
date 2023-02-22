@@ -42,6 +42,8 @@ function FeedbackForms() {
 	const [openAccordion, setOpenAccordion] = useState({});
 	const [formId, setFormId] = useState('');
 
+	const [refetchedLists, setRefetchedLists] = useState(false);
+
 	const [openCreateForm, setOpenCreateForm] = useState(false);
 	const [formStage, setFormStage] = useState('add_questions');
 
@@ -53,7 +55,7 @@ function FeedbackForms() {
 		Router.push('/feedback-system/hr-dashboard');
 	};
 
-	const { data = [], loading = true } = useListDepartments();
+	const { data = [], loading = true, getListDepartments } = useListDepartments();
 
 	const { list: departments = [] } = data;
 
@@ -85,6 +87,7 @@ function FeedbackForms() {
 		setOpenCreateForm(false);
 	}, [designation]);
 
+	useEffect(() => { if (refetchedLists) { getListDepartments(); } setRefetchedLists(false); }, [refetchedLists]);
 	return (
 		<div className={styles.container}>
 			<div className={styles.go_back_container}>
@@ -142,6 +145,7 @@ function FeedbackForms() {
 								designation={designation}
 								formStage={formStage}
 								setFormStage={setFormStage}
+								setRefetchedLists={setRefetchedLists}
 							/>
 						)
 						: (

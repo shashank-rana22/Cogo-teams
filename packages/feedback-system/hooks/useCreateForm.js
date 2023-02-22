@@ -10,10 +10,12 @@ const useCreateForm = () => {
 	const onCreateForm = async ({
 		form_questions, department, designation,
 		proceedForm = () => {},
+		setRefetchedLists = () => {},
 	}) => {
 		try {
 			await trigger({ data: { form_questions, department, designation } });
 			proceedForm('publish');
+			setRefetchedLists(true);
 		} catch (e) {
 			Toast.error(e.toString());
 		}

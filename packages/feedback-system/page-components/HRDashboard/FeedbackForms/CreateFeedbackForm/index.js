@@ -13,6 +13,7 @@ function CreateFeedbackForm({
 	setOpenCreateForm = () => {},
 	formStage = '',
 	setFormStage = () => {},
+	setRefetchedLists,
 }) {
 	const [questionActionList, setQuestionActionList] = useState({});
 
@@ -70,6 +71,7 @@ function CreateFeedbackForm({
 					proceedForm={proceedForm}
 					department={department}
 					designation={designation}
+					setRefetchedLists={setRefetchedLists}
 				/>
 			);
 		}

@@ -12,11 +12,12 @@ function SubmitForm({
 	proceedForm = () => {},
 	department,
 	designation,
+	setRefetchedLists,
 }) {
 	const { onCreateForm, createFormLoading = false } = useCreateForm();
 
 	const createForm = () => {
-		const newQuestionFormat = questionActionList.weigh?.map((que, index) => {
+		const newQuestionFormat = questionActionList.checked?.map((que, index) => {
 			const { id: question_id = '', weightage = '' } = que;
 
 			const weight = Number(weightage);
@@ -29,6 +30,7 @@ function SubmitForm({
 			department,
 			designation,
 			proceedForm,
+			setRefetchedLists,
 		});
 	};
 
