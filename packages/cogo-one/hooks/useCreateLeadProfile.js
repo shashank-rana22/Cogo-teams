@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-function useCreateLeadProfile() {
+function useCreateLeadProfile({ setShowError }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user_profile',
 		method : 'post',
@@ -27,6 +27,7 @@ function useCreateLeadProfile() {
 			});
 			setLeadId(res?.data?.lead_user_id);
 			Toast.success('Successfully Created');
+			setShowError(false);
 		} catch (error) {
 			Toast.error(error?.message);
 		}
