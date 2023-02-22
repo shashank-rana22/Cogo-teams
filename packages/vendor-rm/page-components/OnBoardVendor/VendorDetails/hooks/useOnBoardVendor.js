@@ -180,7 +180,8 @@ function useOnBoardVendor({
 
 		const payload = {
 			...formattedValues,
-			registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
+			registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
+			registration_number    : formattedValues?.registrationNumber,
 		};
 
 		try {
