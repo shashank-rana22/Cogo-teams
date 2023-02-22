@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react';
 
-import { redFlagsData } from '../../../configurations/dummyRedfagsData';
+import { redFlagsData } from '../../../../configurations/dummyRedfagsData';
 
 import styles from './styles.module.css';
 
@@ -10,13 +10,13 @@ function RedFlags() {
 	// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
 			<div className={styles.redflags_container}>
-				<div className={styles.heading}>Red flags</div>
+				<div className={styles.heading}>Escalations</div>
 
 				<div className={styles.redflags_lists}>
 					{redFlagsData.map((item) => {
           	            const { picture, name, notification_nos } = item;
           	            return (
-	                <div className={styles.list}>
+	                <div className={styles.escalations_list}>
 		                <div className={styles.picture_name_kam_box}>
 			                <div className={styles.picture}>{picture}</div>
 			                <div className={styles.name}>{name}</div>

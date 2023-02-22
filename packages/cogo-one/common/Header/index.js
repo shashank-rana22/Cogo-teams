@@ -1,7 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React from 'react';
 
-import { cogoOneLogo } from '../constants';
+import { cogoOneLogo } from '../../page-components/CogoOneDashboard/constants';
 
 import styles from './styles.module.css';
 

@@ -4,13 +4,9 @@
 	align-items: center;
 	width: 45%;
 	padding: 10px;
+	margin: 0 6px 12px;
 	background-color: #fff;
 	border-radius: 6px;
-
-	&:last-child {
-		width: 52%;
-		margin-right: 0;
-	}
 }
 
 .small_data_box {

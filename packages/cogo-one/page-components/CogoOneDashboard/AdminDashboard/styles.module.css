@@ -1,0 +1,37 @@
+.prime_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.left_sub_container {
+	display: flex;
+	flex-direction: column;
+	width: 74%;
+}
+
+.right_sub_container {
+	display: flex;
+	flex-direction: column;
+	width: 26%;
+	padding: 2px;
+}
+
+.statistics {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.four_characterisctics_container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}

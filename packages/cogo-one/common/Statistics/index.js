@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-import { STATS } from '../../../configurations/dummyStatisticsData';
+import { STATS } from '../../configurations/dummyStatisticsData';
 
 import styles from './styles.module.css';
 

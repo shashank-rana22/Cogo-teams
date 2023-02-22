@@ -2,7 +2,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import React from 'react';
 
-import { DateChartDummyData } from '../../../configurations/dummyDateData';
+import { DateChartDummyData } from '../../configurations/dummyDateData';
 
 import styles from './styles.module.css';
 
@@ -49,7 +49,7 @@ function LineChart() {
 						direction         : 'row',
 						justify           : false,
 						translateX        : -650,
-						translateY        : -190,
+						translateY        : -210,
 						itemsSpacing      : 0,
 						itemDirection     : 'left-to-right',
 						itemWidth         : 80,

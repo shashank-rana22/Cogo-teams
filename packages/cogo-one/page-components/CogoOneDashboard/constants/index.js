@@ -11,7 +11,7 @@ export const angryIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/orig
 export const mailIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg';
 export const platformChatIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg';
 
-export const missedcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg';
+export const missedcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png';
 export const incomingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png';
 export const outgoingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png';
 export const agentAvatar = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg';

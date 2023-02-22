@@ -1,44 +1,48 @@
-.redflags_container {
+/* .main_box.tab_custom_style.ui_tabs_container {
+	border-radius: 6px 6px 0 0 !important;
+} */
+
+.performance_tab_container {
 	display: flex;
 	flex-direction: column;
-	height: 27%;
-
-	/* height: 283px; */
+	width: 98%;
+	height: 300px;
 	padding: 10px;
+	margin-bottom: 12px;
 	background: #fff;
 	border-radius: 6px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
-.heading {
-	font-size: 14px;
-	font-weight: 600;
-	color: #4f4f4f;
-}
-
-.redflags_lists {
+.performance_tab_lists {
 	display: flex;
 	flex-direction: column;
-
-	/* height: 43%; */
 	overflow-y: scroll;
 }
 
-.list {
+.performance_list {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	padding: 5px;
 	margin-top: 10px;
 	border-bottom: 1px solid #f8f2e7;
 }
 
 .picture_name_kam_box {
 	display: flex;
-	align-items: center;
 }
 
 .picture {
-	height: 85%;
+	width: 30px;
+	height: 30px;
 	padding: 5px;
+
+	img {
+		width: 18px;
+		height: 18px;
+	}
+
 	background: rgb(224 224 224 / 40%);
 	border-radius: 3.9px;
 }
@@ -54,16 +58,4 @@
 	padding-left: 14px;
 	font-size: 10px;
 	color: #828282;
-}
-
-.notification_nos {
-	width: fit-content;
-	padding: 3px 9px;
-	margin-right: 10px;
-	font-size: 10px;
-	font-weight: 600;
-	color: #fff;
-	background: #ee3425;
-	border-radius: 7px;
-	block-size: fit-content;
 }

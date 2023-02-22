@@ -3,7 +3,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/named
-import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../configurations/dummyPerformanceTabsData';
+import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
 
 import styles from './styles.module.css';
 
@@ -13,8 +13,8 @@ function PerformanceTab() {
 	return (
 	// eslint-disable-next-line react/jsx-no-useless-fragment
 
-		<div>
-			<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
+		<div className={styles.main_box}>
+			<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab} className={styles.tab_custom_style}>
 				<TabPanel name="best_performance" title="Best Performance" />
 				<TabPanel name="worst_performance" title="Worst Performance" />
 			</Tabs>
@@ -23,7 +23,7 @@ function PerformanceTab() {
 					{(data || []).map((item) => {
                 	            const { picture, name } = item;
 						return (
-							<div className={styles.list}>
+							<div className={styles.performance_list}>
 								<div className={styles.picture_name_kam_box}>
 									<div className={styles.picture}>{picture}</div>
 									<div className={styles.name}>{name}</div>

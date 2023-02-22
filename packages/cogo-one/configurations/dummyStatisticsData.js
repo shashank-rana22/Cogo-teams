@@ -54,25 +54,25 @@ export const callAnalyticsData = [
 export const channelStats = [
 	{
 		key          : 'whatsapp',
-		icon         : <IcCWhatsapp />,
+		icon         : <IcCWhatsapp width="16px" height="16px" />,
 		channel      : 'Whats App',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'facebook',
-		icon         : <IcCFacebook />,
+		icon         : <IcCFacebook width="16px" height="16px" />,
 		channel      : 'Facebook',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'mail',
-		icon         : <img src={mailIcon} alt="" />,
+		icon         : <img src={mailIcon} alt="" style={{ width: '16px', height: '16px' }} />,
 		channel      : 'Mail',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'platform_chat',
-		icon         : <img src={platformChatIcon} alt="" />,
+		icon         : <img src={platformChatIcon} alt="" style={{ width: '16px', height: '16px' }} />,
 		channel      : 'Platform Chat',
 		customer_nos : '100 customers',
 	},
@@ -82,19 +82,19 @@ export const channelStats = [
 export const analyticStats = [
 	{
 		key          : 'incoming_call',
-		icon         : <img src={incomingcallIcon} alt="a" style={{ width: '12px', height: '12px' }} />,
+		icon         : <img src={incomingcallIcon} alt="a" style={{ width: '16px', height: '16px' }} />,
 		channel      : 'Incoming Calls',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'outgoing_call',
-		icon         : <img src={outgoingcallIcon} alt="b" style={{ width: '12px', height: '12px' }} />,
+		icon         : <img src={outgoingcallIcon} alt="b" style={{ width: '16px', height: '16px' }} />,
 		channel      : 'Outgoing Calls',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'missed_call',
-		icon         : <img src={missedcallIcon} alt="c" />,
+		icon         : <img src={missedcallIcon} alt="c" style={{ width: '16px', height: '16px' }} />,
 		channel      : 'Missed Calls',
 		customer_nos : '100 customers',
 	},

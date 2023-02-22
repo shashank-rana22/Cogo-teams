@@ -1,8 +1,8 @@
 import { IcMProfile, IcMTimer } from '@cogoport/icons-react';
 import React from 'react';
 
-import { agentActivityStatus } from '../../../configurations/dummyAgentActivityStatusData';
-import { busyAgentsData } from '../../../configurations/dummyBusyAgentProfileData';
+import { agentActivityStatus } from '../../../../configurations/dummyAgentActivityStatusData';
+import { busyAgentsData } from '../../../../configurations/dummyBusyAgentProfileData';
 
 import styles from './styles.module.css';
 

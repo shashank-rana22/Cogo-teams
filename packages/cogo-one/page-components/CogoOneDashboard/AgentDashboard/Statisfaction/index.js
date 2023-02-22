@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { happyIcon, neutralIcon, angryIcon } from '../constants';
+import { happyIcon, neutralIcon, angryIcon } from '../../constants';
 
 import styles from './styles.module.css';
 
