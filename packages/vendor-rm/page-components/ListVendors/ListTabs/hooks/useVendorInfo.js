@@ -1,8 +1,15 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 const useVendorInfo = () => {
 	const [data, setData] = useState({});
+
+	const {
+		general: { query },
+	} = useSelector((state) => state);
+
+	const { vendor_id = '' } = query;
 
 	const [{ loading: getVendorLoading }, trigger] = useRequest(
 		{
@@ -15,7 +22,7 @@ const useVendorInfo = () => {
 	const VendorInfo = async () => {
 		try {
 			const params = {
-				id: 'af64d717-04b6-4b3c-b440-27dc690ee8b9',
+				id: vendor_id,
 			};
 
 			const response = await trigger({

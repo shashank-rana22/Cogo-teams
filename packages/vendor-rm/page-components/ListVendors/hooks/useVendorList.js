@@ -1,5 +1,6 @@
 import { Tooltip, Button } from '@cogoport/components';
 import { IcCFcrossInCircle, IcCFtick, IcMError } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -71,6 +72,8 @@ const useVendorList = () => {
 
 	const [showFilter, setShowFilter] = useState(false);
 
+	const router = useRouter();
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_vendors',
@@ -92,6 +95,12 @@ const useVendorList = () => {
 	}, [params]);
 
 	const formatDate = (date) => format(date, 'dd MMM yyyy');
+
+	const handleViewMore = (id) => {
+		const href = '/vendors/[vendor_id]';
+		const as = `/vendors/${id}`;
+		router.push(href, as);
+	};
 
 	const columns = [
 		{
@@ -164,9 +173,13 @@ const useVendorList = () => {
 		{
 			Header   : '',
 			id       : 'jh',
-			accessor : () => (
+			accessor : ({ id = '' }) => (
 				<section className={styles.bold}>
-					<Button size="md" themeType="secondary" onClick={() => console.log('poiuytrewq')}>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => handleViewMore(id)}
+					>
 						VIEW MORE
 					</Button>
 				</section>

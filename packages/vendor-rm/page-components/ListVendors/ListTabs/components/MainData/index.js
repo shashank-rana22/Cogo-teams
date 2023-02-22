@@ -40,7 +40,7 @@ function MainData({ data = {} }) {
 				})} */}
 
 				<TabPanel name="local_rates" title="Services & Users">
-					<div><ServicesUsers /></div>
+					<div><ServicesUsers data={data} /></div>
 				</TabPanel>
 
 				<TabPanel name="suggested_rates" title="Profile">
