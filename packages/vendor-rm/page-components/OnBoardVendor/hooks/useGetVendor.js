@@ -8,7 +8,7 @@ import TABS_MAPPING from '../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../utils/component-mapping';
 
 function useGetVendor() {
-	const [activeStepper, setActiveStepper] = useState('vendor_details');
+	const [activeStepper, setActiveStepper] = useState('verification');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
@@ -24,6 +24,16 @@ function useGetVendor() {
 		url    : 'get_vendor',
 		method : 'GET',
 	}, { manual: true });
+
+	useEffect(() => {
+		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
+
+		const emptyVendorInformationTab = componentKeys.find((key) => !vendorInformation[key]
+		|| isEmpty(vendorInformation[key])) || 'vendor_details';
+
+		setActiveStepper(emptyVendorInformationTab);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [getVendorLoading]);
 
 	const getVendor = useCallback(async () => {
 		const res = await trigger({ params: { id: vendor_id } });
