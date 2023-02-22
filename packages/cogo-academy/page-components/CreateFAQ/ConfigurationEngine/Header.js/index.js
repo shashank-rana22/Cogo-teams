@@ -12,15 +12,18 @@ function Header() {
 
 	return (
 		<div>
-			<div className={styles.header_container}>
+			<div className={styles.back_container}>
 				<div className={styles.back_arrow} role="presentation" onClick={onClickBackIcon}>
 					<IcMArrowBack width={20} height={20} />
 				</div>
 
-				<div className={styles.configuration_text}>
-					Configuration Engine
+				<div>
+					Back to FAQs
 				</div>
+			</div>
 
+			<div className={styles.configuration_text}>
+				Configuration Engine
 			</div>
 
 		</div>

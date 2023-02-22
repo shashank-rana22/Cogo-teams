@@ -19,12 +19,17 @@
 	flex-wrap: wrap;
 }
 
-.buttonContainer {
+.button_container {
     display: flex;
+    align-items: center;
     margin: 8px 0;
 }
 
 .pagination_container{
     display: flex;
     justify-content: flex-end;
+}
+
+.delete_button{
+    margin-right:8px;
 }
