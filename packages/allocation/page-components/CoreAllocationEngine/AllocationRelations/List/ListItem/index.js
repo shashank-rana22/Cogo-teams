@@ -112,7 +112,6 @@ const COLUMNS_MAPPING = [
 		label    : 'Relation Type',
 		getValue : (item) => (
 			<Pill size="sm" color={item.relation_type === 'remove' ? 'red' : 'green'}>
-
 				{item.relation_type ? startCase(item.relation_type) : '-'}
 			</Pill>
 		),
