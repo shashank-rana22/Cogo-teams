@@ -14,7 +14,7 @@ function Department({ department, openAccordion, setOpenAccordion, setFormsParam
 					role="button"
 					tabIndex={0}
 				>
-					<p className={styles.label}>{startCase(department?.department)}</p>
+					<p className={styles.department_label}>{startCase(department?.department)}</p>
 					<Pill color="red">Pending</Pill>
 				</div>
 			)}
@@ -34,7 +34,7 @@ function Department({ department, openAccordion, setOpenAccordion, setFormsParam
 							designation : role?.designation,
 						})}
 					>
-						<p className={styles.label}>
+						<p className={styles.role_label}>
 							{startCase(role?.designation)}
 						</p>
 						<Pill

@@ -49,7 +49,7 @@ function AddQuestions({
 				...questionActionList,
 				allList: questions,
 
-				checked: questionActionList.checked || checkedQuestions,
+				checked: isEmpty(questionActionList.checked) ? checkedQuestions : questionActionList.checked,
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 
 const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 	const [{ loading = false, data = {} }, trigger] = useRequest({
-		url    : 'create_communication',
+		url    : 'notify-managers',
 		method : 'post',
 	}, { manual: true });
 

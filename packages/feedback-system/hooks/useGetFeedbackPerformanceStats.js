@@ -1,19 +1,22 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetFeedbackPerformanceStats = ({ user_id = '' }) => {
+const useGetFeedbackPerformanceStats = ({ user_id = '', Month = '', Year = '', ManagerID = '' }) => {
 	const [performanceFilter, setPerformanceFilter] = useState(90);
 
-	const [{ data: performanceStatsData = {}, loading = false }] = useRequest({
+	const [{ data: performanceStatsList = [], loading = false }] = useRequest({
 		method : 'get',
-		url    : 'get_feedback_performance_stats',
+		url    : 'get-average-ratings',
 		params : {
-			filters: { last_n_days: performanceFilter || 30, user_id: user_id || undefined },
+			Month         : Month || undefined,
+			Year          : Year || undefined,
+			UserID        : user_id || undefined,
+			PerformedByID : ManagerID || undefined,
 		},
 	}, { manual: false });
 
 	return {
-		performanceStatsData,
+		performanceStatsList,
 		loading,
 		performanceFilter,
 		setPerformanceFilter,

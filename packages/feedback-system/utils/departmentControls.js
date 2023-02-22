@@ -1,84 +1,57 @@
-export const deptControls = [
-	{
-		name        : 'department',
-		placeholder : 'Department...',
-		label       : 'Department',
-		type        : 'select',
-		span        : 5,
-		isClearable : true,
-		options     : [
-			{ label: 'Technology', value: 'technology' },
-			{ label: 'Finance', value: 'finance' },
-			{ label: 'Business', value: 'business' },
-		],
-		style : { marginLeft: '1px', marginRight: '1px' },
-		rules : { required: 'Required' },
-	},
-	{
-		name        : 'tech_role',
-		placeholder : 'Role...',
-		label       : 'Technology Role',
-		type        : 'select',
-		span        : 5,
-		isClearable : true,
-		options     : [
-			{
-				label : 'Associate Software Engineer',
-				value : 'Associate Software Engineer',
-			},
-			{ label: 'Software Engineer', value: 'Software Engineer' },
+import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
 
-			{ label: 'SDE 2', value: 'SDE 2' },
-		],
-		style : { marginLeft: '1px', marginRight: '1px' },
-		rules : { required: 'Required' },
-	},
-	{
-		name        : 'finance_role',
-		placeholder : 'Role...',
-		label       : 'Finance Role',
-		type        : 'select',
-		span        : 5,
-		isClearable : true,
-		options     : [
-			{
-				label : 'Finance 1',
-				value : 'finance1',
-			},
-			{
-				label : 'Finance 2',
-				value : 'finance2',
-			},
-			{
-				label : 'Finance 3',
-				value : 'finance3',
-			},
-		],
-		style : { marginLeft: '1px', marginRight: '1px' },
-		rules : { required: 'Required' },
-	},
-	{
-		name        : 'business_role',
-		placeholder : 'Role...',
-		label       : 'Business Role',
-		type        : 'select',
-		span        : 5,
-		isClearable : true,
-		options     : [
-			{
-				label : 'Business 1',
-				value : 'business_1',
-			},
-			{
-				label : 'Business 2',
-				value : 'business_2',
-			},
-			{
-				label : 'Business 3',
-				value : 'business_3',
-			},
-		],
-		style : { marginLeft: '1px', marginRight: '1px' },
-		rules : { required: 'Required' },
-	},
-];
+const getDepartmentControls = ({ Department = '', Designation = '' }) => {
+	const designationOptions = useGetCustomAsyncOptions({
+		endpoint    : 'get-department-mappings',
+		initialCall : false,
+		params      : {
+			Department,
+		},
+		valueKey  : 'designation',
+		labelKey  : 'designation',
+		filterKey : 'Qdesignation',
+
+	});
+
+	return [
+		{
+			name        : 'department',
+			placeholder : 'Department...',
+			label       : 'Department',
+			type        : 'select',
+			span        : 5,
+			isClearable : !Designation,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			rules       : { required: 'Required' },
+			options     : [
+				{ label: 'Technology', value: 'Technology' },
+				{ label: 'Trucking', value: 'Trucking' },
+				{ label: 'Multi-modal / Trucking', value: 'Multi-modal / Trucking' },
+				{ label: 'Marketing', value: 'Marketing' },
+				{ label: 'Design', value: 'Design' },
+				{ label: 'Finance', value: 'Finance' },
+				{ label: 'Business Development', value: 'Business Development' },
+				{ label: '', value: '' },
+				{ label: 'Product', value: 'Product' },
+				{ label: 'Experience (COE)', value: 'Experince (COE)' },
+				{ label: 'Supply', value: 'Supply' },
+				{ label: 'Channel Partner (Business)', value: 'Channel Partner (Business)' },
+				{ label: 'Human Resources', value: 'Human Resources' },
+			],
+		},
+		{
+			...designationOptions,
+			name        : 'designation',
+			placeholder : 'Designation...',
+			label       : 'Designation',
+			type        : 'select',
+			span        : 5,
+			disabled    : !Department,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			rules       : { required: 'Required' },
+			isClearable : true,
+		},
+	];
+};
+
+export default getDepartmentControls;

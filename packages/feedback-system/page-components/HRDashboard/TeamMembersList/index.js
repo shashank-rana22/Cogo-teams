@@ -44,7 +44,7 @@ function TeamMembersList({
 			flex  : 1.9,
 		},
 		{
-			key   : 'current_kpi',
+			key   : 'rating',
 			label : 'Latest KPI',
 			flex  : 1.7,
 		},
@@ -100,13 +100,13 @@ function TeamMembersList({
 	return (
 		<div className={styles.table_container}>
 
-			{list.map((item) => (
+			{!loading && list.map((item) => (
 				<Accordion id={item.cogo_id} title={titleSection(item)}>
 					<ListItem item={item} id={item.cogo_id} />
 				</Accordion>
 			))}
 
-			{total_count > 2 && (
+			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="number"

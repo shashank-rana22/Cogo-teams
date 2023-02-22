@@ -100,8 +100,6 @@ function FeedbackManagement() {
 
 			{loading && showLoading()}
 
-			{isEmpty(list) && !loading && <EmptyState />}
-
 			{!loading && (
 				<div>
 					<UserTableData

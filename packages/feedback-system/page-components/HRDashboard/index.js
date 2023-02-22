@@ -74,7 +74,7 @@ function HRDashboard() {
 
 			<div>
 				<div className={styles.stats_container}>
-					<PerformanceChart />
+					<PerformanceChart params={params} />
 				</div>
 
 				<div className={styles.list_header}>

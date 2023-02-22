@@ -31,78 +31,22 @@ const PieData = [
 	},
 ];
 
-const PieData1 = ['-'];
-const lineData1 = ['-'];
-
-function PerformanceChart({ user_id = '' }) {
+function PerformanceChart({ params = {}, user_id = '' }) {
+	const { Month = '', Year = '', ManagerID = '' } = params;
 	const {
-		performanceStatsData = {},
+		performanceStatsList = [],
 		loading,
-	} = useGetFeedbackPerformanceStats({ user_id });
+	} = useGetFeedbackPerformanceStats({ user_id, Month, Year, ManagerID });
 
-	Object.keys(performanceStatsData).map((key) => {
-		const { month = '', rating = '' } = performanceStatsData[key] || {};
-		lineData1.push({ x: month, y: rating });
+	const PieData1 = [];
+	const lineChartlist = [];
 
-		return null;
+	(performanceStatsList || []).forEach((stat) => {
+		const { month = '', rating = '' } = stat || {};
+		lineChartlist.push({ x: month, y: rating });
 	});
 
-	const newlineData = [
-		{
-			id   : 'japan',
-			data : [
-				{
-					x : 'Jan',
-					y : 3,
-				},
-				{
-					x : 'Feb',
-					y : 3,
-				},
-				{
-					x : 'Mar',
-					y : 2,
-				},
-				{
-					x : 'Apr',
-					y : 3,
-				},
-				{
-					x : 'May',
-					y : 3,
-				},
-				{
-					x : 'Jun',
-					y : 2,
-				},
-				{
-					x : 'Jul',
-					y : 3,
-				},
-				{
-					x : 'Aug',
-					y : 3,
-				},
-				{
-					x : 'Sep',
-					y : 2,
-				},
-				{
-					x : 'Oct',
-					y : 3,
-				},
-				{
-					x : 'Nov',
-					y : 3,
-				},
-				{
-					x : 'Dec',
-					y : 2,
-				},
-			],
-		},
-
-	];
+	const lineChartData = [{ id: 'x', data: lineChartlist }];
 
 	const showLoading = () => (
 		<div style={{ margin: '16px', display: 'flex', flexDirection: 'row' }}>
@@ -149,10 +93,10 @@ function PerformanceChart({ user_id = '' }) {
 
 			{loading ? showLoading() : (
 				<div className={styles.chart_section}>
-					{(!loading && lineData1?.length) > 0 ? (
+					{(!loading && lineChartlist?.length) > 0 ? (
 						<div className={styles.line_graph}>
 							<ResponsiveLine
-								data={newlineData}
+								data={lineChartData}
 								margin={{ top: 30, right: 110, bottom: 50, left: 60 }}
 								xScale={{
 									type    : 'point',
@@ -193,10 +137,10 @@ function PerformanceChart({ user_id = '' }) {
 									legendPosition : 'middle',
 								}}
 								enableGridX={false}
-								pointSize={5}
+								pointSize={8}
 								pointBorderWidth={7}
 								pointLabelYOffset={-12}
-								areaOpacity={0.25}
+								areaOpacity={0.5}
 								useMesh
 								colors={['#F2E3C3', '#F9AE64', '#828282']}
 								colorBy="index"

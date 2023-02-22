@@ -5,6 +5,16 @@ const feedback_system = [
 		service_name : 'user_feedback',
 	},
 	{
+		api          : 'get-department-mappings',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
+		api          : 'get-average-ratings',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
 		api          : 'list-user-feedbacks',
 		access_type  : 'private',
 		service_name : 'user_feedback',
