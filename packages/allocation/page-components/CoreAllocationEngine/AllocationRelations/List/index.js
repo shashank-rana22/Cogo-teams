@@ -28,7 +28,7 @@ function List({
 
 	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
 
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
