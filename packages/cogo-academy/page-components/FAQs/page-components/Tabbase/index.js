@@ -1,10 +1,10 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
 import { React, useState } from 'react';
-import AllFAQs from '../AllFAQs';
 
-// eslint-disable-next-line import/no-cycle
 import Dashboard from '../Dashboard';
+import MostReadFAQs from '../MostReadFAQs';
+import TrendingFAQs from '../TrendingFAQs';
 
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('All FAQs');
@@ -19,17 +19,16 @@ function Tabbase() {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="All FAQs" title="All FAQs" badge={5}>
-					<div><AllFAQs /></div>
+					<Dashboard tabTitle="All FAQs" />
 				</TabPanel>
 
 				<TabPanel name="Trending" title="Trending" badge={5}>
-					<div><Dashboard Tabtitle="Trending" /></div>
-				</TabPanel>
-				<TabPanel name="Most Read" title="Most Read" badge={3}>
-					<div><Dashboard Tabtitle="Most Read" /></div>
+					<TrendingFAQs />
 				</TabPanel>
 
-				
+				<TabPanel name="Most Read" title="Most Read" badge={3}>
+					<MostReadFAQs />
+				</TabPanel>
 			</Tabs>
 		</div>
 	);

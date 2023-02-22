@@ -16,7 +16,6 @@ function useCreateFaqTag() {
 
 		try {
 			const res = await trigger({
-
 				data: {
 					name,
 					display_name: 'RFQ',

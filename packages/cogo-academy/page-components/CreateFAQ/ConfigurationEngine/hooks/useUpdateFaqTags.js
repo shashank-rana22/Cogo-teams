@@ -2,17 +2,17 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-import useGetFaqTopic from './useGetFaqTopic';
+import useGetFaqTag from './useGetFaqTag';
 
-function useUpdateFaqTopic({ id }) {
-	const { fetchFaqTopic = () => {} } = useGetFaqTopic();
+function useUpdateFaqTags({ id }) {
+	const { fetchFaqTag = () => {} } = useGetFaqTag();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_faq_topic',
+		url    : '/update_faq_tag',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateFaqTopic = async (values) => {
+	const updateFaqTag = async (values) => {
 		const { name, description } = values || {};
 		try {
 			const res = await trigger({
@@ -25,14 +25,14 @@ function useUpdateFaqTopic({ id }) {
 			});
 
 			if (res?.data) {
-				fetchFaqTopic(res?.data.id);
-				Toast.success('Topic Updated sucessfully');
+				fetchFaqTag(res?.data.id);
+				Toast.success('Tag Updated sucessfully');
 			}
 		} catch (err) {
 			Toast.error('Something went wrong');
 		}
 	};
 
-	return { updateFaqTopic, updateFaqTopicLoading: loading };
+	return { updateFaqTag, updateFaqTagLoading: loading };
 }
-export default useUpdateFaqTopic;
+export default useUpdateFaqTags;

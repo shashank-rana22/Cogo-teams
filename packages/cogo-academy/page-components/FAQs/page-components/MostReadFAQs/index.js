@@ -6,7 +6,7 @@ import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 
-function AllFAQs() {
+function MostReadFAQs() {
 	return (
 		<div>
 			<br />
@@ -19,8 +19,7 @@ function AllFAQs() {
 			<PopularTags />
 			<br />
 			<h1 className={styles.title}>
-
-				All FAQs
+				Most Read FAQs
 			</h1>
 			<div className={styles.border}><Questions /></div>
 			<div className={styles.border}><Questions /></div>
@@ -29,4 +28,4 @@ function AllFAQs() {
 	);
 }
 
-export default AllFAQs;
+export default MostReadFAQs;

@@ -1,22 +1,20 @@
-import { useForm } from '@cogoport/forms';
-import React, { useState } from 'react';
-
 import CreateForm from './CreateComponent';
 import Header from './Header.js';
-import useCreateFaqTag from './hooks/useCreateFaqTag';
-import useCreateFaqTopic from './hooks/useCreateFaqTopic';
+import useConfigurationEngine from './hooks/useConfigurationEngine';
 import styles from './styles.module.css';
 import TagComponent from './TagComponent';
 import TopicComponent from './TopicComponent';
 
 function ConfigurationEngine() {
-	const [configurationPage, setConfigurationPage] = useState('dashboard');
-
-	const { onClickSaveButton } = useCreateFaqTopic();
-
-	const { onClickSaveButton:onClickTagSaveButton } = useCreateFaqTag();
-
-	const { control, handleSubmit, formState: { errors } } = useForm();
+	const {
+		configurationPage = '',
+		setConfigurationPage = () => {},
+		onClickSaveButton = () => {},
+		control,
+		handleSubmit = () => {},
+		errors = {},
+		onClickTagSaveButton = () => {},
+	} = useConfigurationEngine();
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +24,7 @@ function ConfigurationEngine() {
 						<Header />
 						<TagComponent
 							configurationPage={configurationPage}
-							setConfigurationPage={setConfigurationPage}
+							setConfigurationPage={configurationPage}
 						/>
 						<TopicComponent
 							configurationPage={configurationPage}
