@@ -63,7 +63,7 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 				<>
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
-							<Placeholder width="220px" height="25px" />
+							<Placeholder width="220px" height="30px" />
 							<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
 						</div>
 						<div className={styles.status}>
@@ -73,6 +73,13 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 					<div className={styles.name}>
 						<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
 						<Placeholder width="80px" height="15px" margin="10px 0 0 0 " />
+					</div>
+					<div className={styles.agent_title}>Agent Details</div>
+
+					<div className={styles.agent_loading_state}>
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
 					</div>
 				</>
 			) : (

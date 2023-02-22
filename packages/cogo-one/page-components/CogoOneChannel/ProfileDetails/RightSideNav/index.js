@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import { snakeCase } from '@cogoport/utils';
 
 import IconMapping from './IconMapping';
@@ -21,7 +21,7 @@ function RightSideNav({
 	return (
 		<div className={styles.right_container}>
 			{IconMapping.map((item) => {
-				const { icon, name } = item;
+				const { icon, name, content } = item;
 				return (
 					<div
 						key={snakeCase(name)}
@@ -29,7 +29,10 @@ function RightSideNav({
 						role="presentation"
 						onClick={() => handleClick(name)}
 					>
-						{icon}
+						<Tooltip content={content} placement="left">
+							<div>{icon}</div>
+						</Tooltip>
+
 					</div>
 				);
 			})}
