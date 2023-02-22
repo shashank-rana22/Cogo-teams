@@ -27,7 +27,7 @@ import styles from './styles.module.css';
 
 const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
-function MapView({ props = {} }) {
+function MapView(props = {}) {
 	const globeGL = useRef();
 
 	const {
@@ -50,7 +50,7 @@ function MapView({ props = {} }) {
 
 	const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
 
-	const { user_location = [], stats:globeStats = {} } = globeData?.fullResponse?.data || {};
+	const { user_location = [], stats:globeStats = {} } = globeData?.data || {};
 
 	let markerData = {};
 	markerData = user_location.map((item) => ({
@@ -72,36 +72,29 @@ function MapView({ props = {} }) {
 		}
 	};
 
-	const [openCalendar, setOpenCalendar] = useState(false);
+	// const [openCalendar, setOpenCalendar] = useState(false);
 
-	const handleApplyFilters = () => {
-		setDateFilter({ ...date });
-	};
+	// const handleApplyFilters = () => {
+	// 	setDateFilter({ ...date });
+	// };
 	const maxDate = new Date();
 
-	const startDate = format(date?.startDate, 'dd MMM yyyy');
-	const endDate = format(date?.endDate, 'dd MMM yyyy');
+	// const startDate = format(date?.startDate, 'dd MMM yyyy');
+	// const endDate = format(date?.endDate, 'dd MMM yyyy');
 	const averageResponseTime = Number(platFormChatData?.average_cutomer_response_time) || 0;
-
-	// const [showComponent, setShowComponent] = useState(false);
-	// useEffect(() => {
-	// 	const timer = setTimeout(() => {
-	// 		setShowComponent(true);
-	// 	}, 5000);
-	// 	return () => clearTimeout(timer);
-	// }, []);
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.top_content}>
 				<div className={styles.select_container}>
 					<Select
-						value={country?.display_name}
+						value={country?.mobile_country_code}
 						onChange={(_, obj) => onSelectChange(obj)}
 						placeholder="Select Country"
 						options={locationOptions}
 						id="select_country"
 						labelKey="display_name"
+						valueKey="mobile_country_code"
 						isClearable
 						onSearch={onSearch}
 						loading={locationsLoading}

@@ -2,9 +2,10 @@
 import { cl } from '@cogoport/components';
 import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
+import chartData from '../../../configurations/chart-data';
 import { PRIMARY_STATS, USER_STATUS, INTENT_LEADERBOARD } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
 import { CHART_ICON } from '../../../constants/monitoring';
@@ -24,6 +25,8 @@ function Stats(props = {}) {
 	const {
 		statsData = {},
 		statsLoading = false,
+		chatLoading = false,
+		platFormChatData = {},
 	} = props || {};
 
 	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
@@ -32,6 +35,11 @@ function Stats(props = {}) {
 		const amount = getFormattedPrice(value, 'INR');
 		return ((amount.substring(4)).split('.'))[0];
 	};
+	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
+
+	const GraphData = chartData({ platFormChatData }) || [];
+
+	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
 
 	return (
 		<div className={styles.main_container}>
@@ -163,7 +171,7 @@ function Stats(props = {}) {
 				<div className={styles.chart_heading}>
 					<div className={styles.chart_heading_content}>Responsive Time Analysis</div>
 					{
-						!statsLoading && (
+						!chatLoading && !hideChart && (
 							<div className={styles.legend_container}>
 								<div className={styles.legend_field}>
 									<div className={styles.legend_icon_1} />
@@ -180,7 +188,7 @@ function Stats(props = {}) {
 				</div>
 				<div className={styles.the_chart}>
 					{
-						!statsLoading ? <Charts {...props} />
+						!chatLoading ? <Charts GraphData={GraphData} hideChart={hideChart} />
 							: (
 								<div className={styles.chart_empty}>
 									<Placeholder height="100px" className={styles.placeholder_element}>

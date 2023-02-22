@@ -17,12 +17,13 @@ function AnalyticsDashboard() {
 		endDate   : new Date(),
 	});
 
-	const { list = {}, statsLoading = false } = useGetCogoverseDashboard({ country, date });
+	const { stats = {}, statsLoading = false } = useGetCogoverseDashboard({ country, date });
+
 	const { chatData = {}, chatLoading = false } = useGetCogoverseChatData({ country, date });
 
-	const platFormChatData = chatData?.fullResponse?.data || {};
+	const platFormChatData = chatData?.data || {};
 
-	const statsData = list?.fullResponse?.data || {};
+	const statsData = stats?.data || {};
 
 	const props = {
 		statsData,
@@ -32,15 +33,16 @@ function AnalyticsDashboard() {
 		setCountry,
 		date,
 		setDate,
+		country,
 	};
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.stats_view_container}>
-				<Stats props={props} />
+				<Stats {...props} />
 			</div>
 			<div className={styles.map_view_container}>
-				<MapView props={props} />
+				<MapView {...props} />
 			</div>
 
 		</div>
