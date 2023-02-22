@@ -1,14 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
-function useCreateLeadProfile() {
+function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user_profile',
 		method : 'post',
 	}, { manual: true });
-
-	const [leadId, setLeadId] = useState('');
 
 	const leadUserProfile = async ({ profileValue }) => {
 		const { country_code = '', number = '', name = '' } = profileValue || {};
@@ -25,8 +22,16 @@ function useCreateLeadProfile() {
 					}],
 				},
 			});
-			setLeadId(res?.data?.lead_user_id);
+			if (res?.data?.lead_user_id) {
+				const data = {
+					lead_user_id : res?.data?.lead_user_id,
+					mobile_no    : `${country_code?.slice(1)}${number}`,
+					user_name    : name,
+				};
+				updateLeaduser(data);
+			}
 			Toast.success('Successfully Created');
+			setShowError(false);
 		} catch (error) {
 			Toast.error(error?.message);
 		}
@@ -34,7 +39,7 @@ function useCreateLeadProfile() {
 	return {
 		leadUserProfile,
 		loading,
-		leadId,
+
 	};
 }
 export default useCreateLeadProfile;

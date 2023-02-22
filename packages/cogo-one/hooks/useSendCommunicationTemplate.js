@@ -22,7 +22,7 @@ function useSendCommunicationTemplate({ formattedData = {}, setOpenModal = () =>
 					service_id    : agentID,
 					template_name,
 					recipient     : mobile_no,
-					source        : 'CogoOne',
+					source        : 'CogoOne:AdminPlatform',
 					variables     : { user_first_name: user_name.split(' ')[0] },
 				},
 			});
