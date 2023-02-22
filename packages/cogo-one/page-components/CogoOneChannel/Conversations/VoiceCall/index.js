@@ -27,9 +27,11 @@ function VoiceCall({ activeVoiceCard = {} }) {
 		user_number : !user_id ? user_number : undefined,
 	});
 	useEffect(() => {
-		scrollBottom();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [messageRef, JSON.stringify(activeVoiceCard)]);
+		if (!loading) {
+			scrollBottom();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [messageRef, JSON.stringify(activeVoiceCard), loading]);
 	const loader = (
 		<div className={styles.loader}>
 			<img
@@ -49,13 +51,11 @@ function VoiceCall({ activeVoiceCard = {} }) {
 				onScroll={(e) => handleScroll(e.target.scrollTop)}
 				ref={messageRef}
 			>
-				{([...list] || [])
-					.reverse()
-					.map((eachList) => (eachList?.call_type === 'incoming' ? (
-						<ReceiveDiv eachList={eachList} />
-					) : (
-						<SentDiv eachList={eachList} />
-					)))}
+				{([...list] || []).reverse().map((eachList) => (eachList?.call_type === 'incoming' ? (
+					<ReceiveDiv eachList={eachList} />
+				) : (
+					<SentDiv eachList={eachList} />
+				)))}
 			</div>
 		</>
 	);

@@ -1,20 +1,12 @@
-import { Loader } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 // import EmptyState from '../../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-function PreviousReminder({ listData = {}, listLoading }) {
+function PreviousReminder({ listData = {} }) {
 	const { list = [] } = listData || {};
 
-	if (listLoading) {
-		return (
-			<div className={styles.loader_div}>
-				<Loader themeType="primary" />
-			</div>
-		);
-	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Previous Reminders</div>

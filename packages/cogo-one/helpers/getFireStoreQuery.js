@@ -25,15 +25,15 @@ function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isom
 			omniChannelCollection,
 			...queryFilters,
 			where('session_type', '==', 'admin'),
-			orderBy('updated_at', 'desc'),
+			orderBy('new_message_sent_at', 'desc'),
 		);
 	} else {
 		firestoreQuery = query(
 			omniChannelCollection,
 			...queryFilters,
-			where('spectators_ids', 'array_contains', userId),
 			where('session_type', '==', 'admin'),
-			orderBy('updated_at', 'desc'),
+			where('spectators_ids', 'array_contains', userId),
+			orderBy('new_message_sent_at', 'desc'),
 		);
 	}
 

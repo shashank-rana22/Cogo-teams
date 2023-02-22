@@ -49,6 +49,7 @@
 
 .feed_text_area {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	margin: 6px 0;
 
@@ -68,4 +69,21 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 8px;
+}
+
+.styled_ui_modal_dialog {
+	border: none !important;
+
+	:global {
+		.ui_modal_body_container {
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+	}
+}
+
+.error_message {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #ee3425;
 }

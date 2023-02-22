@@ -52,7 +52,6 @@ const useSendChat = ({
 			};
 
 			await addDoc(activeChatCollection, adminChat);
-			// scrollToBottom();
 			const doc1 = await getDoc(messageFireBaseDoc);
 			const old_count = doc1.data().new_user_message_count;
 			await updateDoc(messageFireBaseDoc, {
@@ -67,6 +66,7 @@ const useSendChat = ({
 					organization_id = null,
 					mobile_no = '',
 					lead_user_id = null,
+					sender = null,
 				} = formattedData || {};
 				let message_metadata;
 				if (finalUrl) {
@@ -83,7 +83,7 @@ const useSendChat = ({
 				}
 
 				sendMessage({
-					recipient : mobile_no,
+					recipient : mobile_no || sender,
 					message   : newMessage,
 					user_id,
 					organization_id,
@@ -120,9 +120,10 @@ const useSendChat = ({
 				organization_id = null,
 				mobile_no = '',
 				lead_user_id = null,
+				sender = null,
 			} = formattedData || {};
 			sendMessage({
-				recipient        : mobile_no,
+				recipient        : mobile_no || sender,
 				user_id,
 				organization_id,
 				lead_user_id,

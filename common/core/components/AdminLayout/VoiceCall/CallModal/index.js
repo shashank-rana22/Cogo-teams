@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, cl } from '@cogoport/components';
 import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React from 'react';
@@ -17,6 +17,7 @@ function CallModal({
 	status = '',
 	handleEnd = () => {},
 	durationTime = () => {},
+	callLoading,
 }) {
 	return (
 		<Modal
@@ -63,6 +64,7 @@ function CallModal({
 							style={{ width: '50px', height: '50px' }}
 							role="presentation"
 							onClick={handleEnd}
+							className={cl`${callLoading ? styles.disable : ''}`}
 						/>
 					</div>
 				</div>
