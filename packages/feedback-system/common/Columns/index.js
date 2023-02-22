@@ -105,7 +105,7 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div className={cl`styles.${ratingClass(item?.score)}`}>
-					{item?.rating || '-'}
+					{item?.score || '-'}
 				</div>
 				{' '}
 			</div>
@@ -162,7 +162,7 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 		Header   : <div className={styles.head}>Manager</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{item?.manager}</div>
+				<div>{item?.manager_name}</div>
 			</div>
 		),
 		id  : 'manager',

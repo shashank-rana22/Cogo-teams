@@ -6,11 +6,9 @@ const useListUserFeedbacks = ({
 	month = '', year = '',
 }) => {
 	const [params, setParams] = useState({
-		filters: {
-			month : month || undefined,
-			year  : year || undefined,
-		},
-		page: 1,
+		Month : month || undefined,
+		Year  : year || undefined,
+		Page  : 1,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }] = useRequest({
@@ -19,14 +17,12 @@ const useListUserFeedbacks = ({
 		params,
 	}, { manual: false });
 
-	const setPage = (p) => { setParams({ ...params, page: p }); };
+	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
 		setParams({
 			...params,
-			filters:
-		{ ...(params.filters || {}), q: searchValue || undefined },
-			page: 1,
+			Page: 1,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
