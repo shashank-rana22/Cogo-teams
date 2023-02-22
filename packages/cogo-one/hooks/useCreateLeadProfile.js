@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useCreateLeadProfile({ updateLeaduser }) {
+function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user_profile',
 		method : 'post',
@@ -31,6 +31,7 @@ function useCreateLeadProfile({ updateLeaduser }) {
 				updateLeaduser(data);
 			}
 			Toast.success('Successfully Created');
+			setShowError(false);
 		} catch (error) {
 			Toast.error(error?.message);
 		}

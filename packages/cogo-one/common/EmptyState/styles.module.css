@@ -4,8 +4,8 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	margin-top: 24vh;
 	padding: 0 40px;
+	margin-top: 24vh;
 }
 
 .title {
@@ -47,7 +47,7 @@
 
 .type {
 	font-size: 14px;
-	color:#4F4F4F;
+	color: #4f4f4f;
 }
 
 .avatar {
@@ -60,46 +60,4 @@
 			height: 55px !important;
 		}
 	}
-}
-
-.styled_ui_modal_dialog {
-	border: none !important;
-
-	:global {
-		.ui_modal_body_container {
-			padding: 0 16px !important;
-			border-top: none !important;
-			border-bottom: none !important;
-		}
-
-		.ui_modal_footer_container {
-			box-shadow: none !important;
-		}
-
-		.ui_input_control {
-			font-size: 12px !important;
-		}
-
-		.ui_modal_footer_container {
-			padding: 8px 16px 15px 0 !important;
-		}
-
-		.styles_row_container__FNFTc {
-			justify-content: space-between !important;
-		}
-	}
-}
-
-.wrapper {
-	margin-bottom: 10px;
-}
-
-.styled_label {
-	margin-bottom: 4px;
-	font-size: 12px;
-}
-.name{
-	font-size: 16px;
-	text-align: left;
-	color:#4F4F4F;
 }

@@ -1,0 +1,45 @@
+.styled_ui_modal_dialog {
+	border: none !important;
+
+	:global {
+		.ui_modal_body_container {
+			padding: 0 16px !important;
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+
+		.ui_modal_footer_container {
+			box-shadow: none !important;
+		}
+
+		.ui_input_control {
+			font-size: 12px !important;
+		}
+
+		.ui_modal_footer_container {
+			padding: 8px 16px 15px 0 !important;
+		}
+
+		.styles_row_container__FNFTc {
+			justify-content: space-between !important;
+		}
+	}
+}
+
+.wrapper {
+	margin-bottom: 10px;
+}
+
+.styled_label {
+	margin-bottom: 4px;
+	font-size: 12px;
+}
+
+.error_text {
+	font-size: 12px;
+	color: #ee3425;
+}
+
+.error_div {
+	min-height: 30px;
+}
