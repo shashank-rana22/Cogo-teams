@@ -13,10 +13,14 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 8px;
+}
+
+.selects {
+	display: flex;
 
 	:global {
 		.ui_select_display_container {
-			width: 120px;
+			width: 160px;
 		}
 	}
 }

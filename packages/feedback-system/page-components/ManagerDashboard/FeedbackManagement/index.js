@@ -9,9 +9,22 @@ import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/userTableData';
 import useListReportees from '../../../hooks/useListReportees';
 import getDepartmentControls from '../../../utils/departmentControls';
-import getFeedBackControls from '../../../utils/getFeedbackControls';
 
 import styles from './styles.module.css';
+
+const feedbackControls = {
+	name           : 'status',
+	label          : 'Select Status',
+	type           : 'select',
+	defaultOptions : true,
+	isClearable    : true,
+	placeholder    : 'Status',
+	options        : [
+		{ label: 'Pending', value: 'pending' },
+		{ label: 'Submitted', value: 'successful' },
+	],
+	span: 6,
+};
 
 function FeedbackManagement() {
 	const Router = useRouter();
@@ -38,7 +51,6 @@ function FeedbackManagement() {
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
 
 	const { total_count = '' } = pagination_data;
-	const feedbackControls = getFeedBackControls([]);
 
 	const setFilter = (val, type) => {
 		setParams({ ...params, [type]: val });
@@ -110,9 +122,10 @@ function FeedbackManagement() {
 					<Select
 						value={params.FeedbackStatus}
 						onChange={(val) => setFilter(val, 'FeedbackStatus')}
-						placeholder={feedbackControls.status.placeholder}
+						placeholder={feedbackControls.placeholder}
 						style={{ marginRight: '8px' }}
-						options={feedbackControls.status.options}
+						options={feedbackControls.options}
+						isClearable
 					/>
 					<Input
 						size="md"

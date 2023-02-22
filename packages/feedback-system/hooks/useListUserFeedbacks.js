@@ -24,7 +24,8 @@ const useListUserFeedbacks = ({
 	useEffect(() => {
 		setParams({
 			...params,
-			Page: 1,
+			Page : 1,
+			Q    : searchValue || undefined,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);

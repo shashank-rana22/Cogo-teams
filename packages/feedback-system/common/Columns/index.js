@@ -166,8 +166,8 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 				/>
 			</div>
 		),
-		id  : 'add-kpi',
-		key : 'add-kpi',
+		id  : 'view_form',
+		key : 'view_form',
 	},
 	{
 		Header   : <div className={styles.head}>Manager</div>,
