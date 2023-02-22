@@ -15,7 +15,13 @@ const controls = [
 		type        : 'text',
 		style       : { flexBasis: '30%' },
 		placeholder : 'Type here',
-		rules       : { required: 'Email of the Contact is required' },
+		rules       : {
+			required : 'Email of the Contact is required',
+			pattern  : {
+				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+				message : 'Email is invalid',
+			},
+		},
 	},
 	{
 		name        : 'mobile_number',

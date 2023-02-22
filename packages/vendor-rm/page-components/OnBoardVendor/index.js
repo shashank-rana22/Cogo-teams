@@ -3,6 +3,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useCallback, useEffect } from 'react';
 
 import TABS_MAPPING from '../../constants/tabs';
@@ -22,9 +23,18 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState('vendor_services');
-
 	const [vendorInformation, setVendorInformation] = useState({});
+
+	const [activeStepper, setActiveStepper] = useState('verification');
+
+	useEffect(() => {
+		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
+
+		const emptyVendorInformationTab = componentKeys.find((key) => !vendorInformation[key]
+		|| isEmpty(vendorInformation[key])) || 'vendor_details';
+
+		setActiveStepper(emptyVendorInformationTab);
+	}, [vendorInformation]);
 
 	const getVendor = useCallback(async () => {
 		const res = await trigger({ params: { id: vendor_id } });

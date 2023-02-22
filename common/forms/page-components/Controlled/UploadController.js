@@ -19,6 +19,7 @@ function UploadController(props) {
 					{...rest}
 					key={name}
 					id={name}
+					defaultValues={value}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
