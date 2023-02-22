@@ -1,3 +1,4 @@
+import allocations from './config/allocations';
 import businessFinance from './config/business-finance';
 import contracts from './config/contracts';
 import myIncident from './config/my-incident';
@@ -7,6 +8,7 @@ import supplyDashboard from './config/supply-dashboards';
 
 const routeConfig = {
 	...rolesAndPermissions,
+	...allocations,
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
