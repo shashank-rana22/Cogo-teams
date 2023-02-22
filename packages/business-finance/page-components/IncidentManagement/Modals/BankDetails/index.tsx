@@ -124,7 +124,7 @@ function BankDetails({
 								<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
 								<div>
 									<RadioGroup
-										options={options}
+										options={options(isEditable)}
 										onChange={(item: string) => setValue((prev) => ({ ...prev, radioName: item }))}
 										value={value?.radioName}
 									/>
@@ -136,7 +136,7 @@ function BankDetails({
 								<div className={styles.font_name}>{accountNumber || '-'}</div>
 								<div>
 									<RadioGroup
-										options={options}
+										options={options(isEditable)}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioNumber: item,
@@ -159,7 +159,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={options}
+										options={options(isEditable)}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioBranchName: item,
@@ -177,7 +177,7 @@ function BankDetails({
 								</div>
 								<div>
 									<RadioGroup
-										options={options}
+										options={options(isEditable)}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioIFSC: item,
@@ -191,7 +191,7 @@ function BankDetails({
 								<div className={styles.font_name}>Method of Verification</div>
 								<div>
 									<RadioGroup
-										options={optionsManual}
+										options={optionsManual(isEditable)}
 										onChange={(item: string) => setValue((prev) => ({
 											...prev,
 											radioMethod: item,

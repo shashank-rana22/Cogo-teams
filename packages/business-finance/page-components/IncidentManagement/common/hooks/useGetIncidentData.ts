@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { FilterProps } from '../../interface';
+import { FilterProps } from '../interface';
 
 interface Tab {
 	activeTab?:string

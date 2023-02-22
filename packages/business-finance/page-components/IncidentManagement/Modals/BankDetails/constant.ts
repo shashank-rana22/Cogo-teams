@@ -1,16 +1,18 @@
-export const options = [
+export const options = (isEditable:boolean) => [
 	{
-		label : 'Approve',
-		value : 'true',
-		name  : '',
+		label    : 'Approve',
+		value    : 'true',
+		name     : '',
+		disabled : !isEditable,
 	},
 	{
-		label : 'Reject',
-		value : 'false',
-		name  : '',
+		label    : 'Reject',
+		value    : 'false',
+		name     : '',
+		disabled : !isEditable,
 	}];
 
-export const optionsManual = [
-	{ label: 'Penny Testing', value: 'PENNY', name: '' },
-	{ label: 'Manual Verification', value: 'MANUAL', name: '' },
+export const optionsManual = (isEditable:boolean) => [
+	{ label: 'Penny Testing', value: 'PENNY', name: '', disabled: !isEditable },
+	{ label: 'Manual Verification', value: 'MANUAL', name: '', disabled: !isEditable },
 ];

@@ -90,7 +90,7 @@ function EditInput({
 						onChange={(value) => { handleOnChangeTdsInput(value); }}
 					/>
 					<div
-						style={{ display: 'flex', marginTop: '6px', marginLeft: '8px' }}
+						className={styles.tooltip}
 					>
 						<Tooltip
 							content={content()}

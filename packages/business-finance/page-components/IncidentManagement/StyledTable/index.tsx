@@ -2,7 +2,7 @@ import { Pagination, Table } from '@cogoport/components';
 import React from 'react';
 
 import EmptyState from '../common/EmptyState';
-import { TableProps } from '../interface';
+import { TableProps } from '../common/interface';
 
 import styles from './style.module.css';
 
@@ -28,7 +28,7 @@ function StyledTable({
 					currentPage={page}
 					totalItems={total}
 					pageSize={pageSize}
-					onPageChange={(val:any) => setFilters({ ...filters, page: val })}
+					onPageChange={(val:number) => setFilters({ ...filters, page: val })}
 				/>
 			</div>
 		</div>
