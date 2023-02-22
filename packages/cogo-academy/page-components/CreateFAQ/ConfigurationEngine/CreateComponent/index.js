@@ -13,10 +13,9 @@ function CreateForm({
 	onClickSaveButton,
 	handleSubmit,
 	control,
-	errors,
+	// errors,
 }) {
 	const router = useRouter();
-	console.log('errors', errors);
 
 	const onClickBackIcon = () => {
 		setConfigurationPage('dashboard');
@@ -74,10 +73,22 @@ function CreateForm({
 			</div>
 
 			<div className={styles.btn_row}>
-				<div><Button size="md" themeType="secondary" onClick={onClickBackIcon}>Cancel</Button></div>
+				<div>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={onClickBackIcon}
+					>
+						Cancel
+					</Button>
+				</div>
 
 				<div className={styles.save_btn}>
-					<Button size="md" themeType="primary" onClick={handleSubmit(onClickSaveButton)}>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={handleSubmit(onClickSaveButton)}
+					>
 						Save
 					</Button>
 				</div>
