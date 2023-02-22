@@ -1,14 +1,14 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
 
 import styles from './styles.module.css';
 
-function Top() {
+function Top({ setShowForm = () => {}, showForm }) {
 	return (
 		<div className={styles.top}>
 			Services & Users
 			<div className={styles.btn}>
-				<Button size="md" themeType="secondary">Add Service</Button>
+				<Button size="md" themeType="secondary" onClick={() => { setShowForm(!showForm); }}>Add Service</Button>
+
 				<Button size="md" themeType="accent">Add POC</Button>
 			</div>
 		</div>
