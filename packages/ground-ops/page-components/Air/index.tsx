@@ -37,7 +37,7 @@ const tabsComponentMapping = {
 	completed_awb    : CompletedTasks,
 };
 
-function Air() {
+function Air({ setGenerate, setItem }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
@@ -50,6 +50,7 @@ function Air() {
 
 	useEffect(() => {
 		if (activeTab === 'new_awb') { listAPi(); }
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return (
@@ -87,7 +88,15 @@ function Air() {
 				/>
 				<Filters />
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={activeTab} data={data} loading={loading} />}
+			{ActiveTabComponent && (
+				<ActiveTabComponent
+					key={activeTab}
+					data={data}
+					loading={loading}
+					setGenerate={setGenerate}
+					setItem={setItem}
+				/>
+			)}
 		</div>
 	);
 }

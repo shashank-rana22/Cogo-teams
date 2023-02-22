@@ -1,17 +1,11 @@
 import { Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import React from 'react';
 
-import GenerateMAWB from '../../../GenerateMAWB';
 import List from '../../commons/List';
 import { NewAWBFields } from '../../configurations/new_awb_fields';
 
-function NewAWB({ data, loading }) {
-	const router = useRouter();
+function NewAWB({ data, loading, setGenerate, setItem }) {
 	const { fields } = NewAWBFields;
-	const [generate, setGenerate] = useState(false);
-	const [item, setItem] = useState({});
-
 	const handleGenerateMAWB = (singleItem) => {
 		setGenerate(true);
 		setItem(singleItem);
@@ -25,17 +19,17 @@ function NewAWB({ data, loading }) {
 				onClick={() => { handleGenerateMAWB(singleItem); }}
 			>
 				Generate
-
 			</Button>
 		),
-
 	};
-	return (
-		<>
-			{!generate && <List fields={fields} data={data} loading={loading} functions={functions} />}
 
-			{generate && <GenerateMAWB item={item} task={item} />}
-		</>
+	return (
+		<List
+			fields={fields}
+			data={data}
+			loading={loading}
+			functions={functions}
+		/>
 	);
 }
 
