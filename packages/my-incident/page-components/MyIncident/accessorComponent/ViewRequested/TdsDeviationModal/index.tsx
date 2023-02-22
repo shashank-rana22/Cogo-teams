@@ -89,7 +89,7 @@ function TdsDeviationModal({
 						: null}
 					<div className={styles.name_container}>
 						<div className={styles.label}>
-							Organizaion Name -
+							Organization Name -
 						</div>
 						<div className={styles.value}>
 							{itemData?.data?.organization?.businessName}

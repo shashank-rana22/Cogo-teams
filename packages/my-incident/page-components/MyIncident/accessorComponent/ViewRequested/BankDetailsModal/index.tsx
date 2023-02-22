@@ -36,7 +36,7 @@ function BankDatailsModal({
 				<div className={styles.rate_conatiner}>
 					<div className={styles.name_container}>
 						<div className={styles.value}>
-							Organizaion Name
+							Organization Name
 						</div>
 						<div className={styles.label}>
 							{businessName}
