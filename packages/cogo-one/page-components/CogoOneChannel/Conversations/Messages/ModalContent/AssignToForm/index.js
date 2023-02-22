@@ -63,6 +63,7 @@ function AssignToForm({ data = {} }) {
 						control={control}
 						{...assign_user}
 						{...listAgentsOptions}
+						isClearable
 					/>
 					{errors?.assign_user && <div className={styles.error_text}>This is Required</div>}
 				</div>

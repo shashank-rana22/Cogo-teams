@@ -43,6 +43,7 @@ function CogoOne() {
 	}));
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
