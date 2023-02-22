@@ -493,6 +493,13 @@
   height: 110px;
   flex-basis: 30%;
 }
+.loading_pie_chart{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .no_data_found{
   height: 100%;

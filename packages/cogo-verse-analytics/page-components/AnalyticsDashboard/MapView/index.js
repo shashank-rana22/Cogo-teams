@@ -5,20 +5,20 @@ import {
 	cl,
 	ButtonIcon,
 	Tooltip,
-	Pill,
 	Placeholder,
 } from '@cogoport/components';
-import { useGetAsyncOptions, getFormattedPrice } from '@cogoport/forms';
+import { useGetAsyncOptions } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { IcMArrowRotateDown, IcMHourglass } from '@cogoport/icons-react';
+import { IcMHourglass } from '@cogoport/icons-react';
 import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
 import { dynamic } from '@cogoport/next';
-import { isEmpty, merge, startCase, format } from '@cogoport/utils';
-import React, { useState, useRef, useEffect } from 'react';
+import { isEmpty, merge } from '@cogoport/utils';
+import React, { useState, useRef } from 'react';
 
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
+import { PIE_ICON } from '../../../constants/monitoring';
 import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 import { strToKMBT } from '../../../utils/strToKMBT';
 
@@ -29,6 +29,7 @@ const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
 function MapView(props = {}) {
 	const globeGL = useRef();
+	console.log('globeGL out:', globeGL);
 
 	const {
 		statsData = {},
@@ -42,8 +43,6 @@ function MapView(props = {}) {
 	} = props || {};
 
 	const [circleTab, setCircleTab] = useState('new_users');
-	// const [range, setRange] = useState('this_month');
-	// const [selectDuration, setSelectDuration] = useState('this_month');
 	const { conversation_data = {} } = statsData || {};
 
 	const { options:locationOptions, loading:locationsLoading = false, onSearch = () => {} } = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
@@ -68,19 +67,13 @@ function MapView(props = {}) {
 		const defaultMapCenter = { lat: 0, lng: 0, altitude: 2 };
 		const pointRotationSpeed = 100;
 		if (!isEmpty(globeGL.current)) {
+			console.log('globeGL.current:', globeGL.current);
 			globeGL.current.pointOfView(defaultMapCenter, pointRotationSpeed);
 		}
 	};
 
-	// const [openCalendar, setOpenCalendar] = useState(false);
-
-	// const handleApplyFilters = () => {
-	// 	setDateFilter({ ...date });
-	// };
 	const maxDate = new Date();
 
-	// const startDate = format(date?.startDate, 'dd MMM yyyy');
-	// const endDate = format(date?.endDate, 'dd MMM yyyy');
 	const averageResponseTime = Number(platFormChatData?.average_cutomer_response_time) || 0;
 
 	return (
@@ -128,6 +121,7 @@ function MapView(props = {}) {
 										globeGL={globeGL}
 										markerData={markerData}
 										globeLoading={globeLoading}
+										resetGlobePosition={resetGlobePosition}
 
 									/>
 
@@ -244,13 +238,18 @@ function MapView(props = {}) {
 					</div>
 
 					<div className={styles.pie_chart}>
-						{Object.values(conversation_data).some((i) => i > 0)
-							? <CommunicationPieChart conversation_data={conversation_data} />
-							: 							(
-								<div className={styles.no_data_found}>
-									<img src={imgURL.empty_2} alt="no data" width="100px" />
-								</div>
-							)}
+						{
+							!statsLoading
+								? <CommunicationPieChart conversation_data={conversation_data} />
+								: (
+									<div className={styles.loading_pie_chart}>
+										<Placeholder className={styles.placeholder_element} height="70%" width="70%">
+											{PIE_ICON}
+										</Placeholder>
+									</div>
+								)
+
+						}
 
 					</div>
 

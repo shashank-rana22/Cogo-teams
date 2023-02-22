@@ -24,7 +24,7 @@ const useGetCogoverseGlobeData = ({ country = {}, circleTab = '', date = {} }) =
 				},
 			});
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			// Toast.error(getApiErrorString(err));
 		}
 	};
 

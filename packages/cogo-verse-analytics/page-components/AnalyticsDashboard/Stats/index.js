@@ -30,24 +30,22 @@ function Stats(props = {}) {
 
 	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
 
+	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
+	const GraphData = chartData({ platFormChatData }) || [];
+	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
+
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
 		return ((amount.substring(4)).split('.'))[0];
 	};
-	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
-
-	const GraphData = chartData({ platFormChatData }) || [];
-
-	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
 
 	return (
 		<div className={styles.main_container}>
 			{/* Header --------------------------------------------------------------------------- */}
 
 			<div className={styles.cogoverse_header}>
-				{/* Welcome to the */}
-				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
 
+				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
 				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics!</div>
 			</div>
 
@@ -171,7 +169,7 @@ function Stats(props = {}) {
 					<div className={styles.chart_heading_content}>Responsive Time Analysis</div>
 					{
 						!chatLoading && !hideChart && (
-							<div className={styles.legend_container}>
+							<div>
 								<div className={styles.legend_field}>
 									<div className={styles.legend_icon_1} />
 									<div className={styles.legend_content}>CogoAssist</div>

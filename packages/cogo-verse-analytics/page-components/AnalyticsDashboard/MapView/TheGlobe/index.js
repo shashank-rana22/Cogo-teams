@@ -2,7 +2,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import { globeMarker } from '../../../../configurations/globe-marker';
-import { pointBinData } from '../../../../configurations/point-bin-data';
+// import { pointBinData } from '../../../../configurations/point-bin-data';
 import { TEXTURES, GLOBE_COLORS } from '../../../../constants/globe-properties';
 
 import styles from './styles.module.css';
@@ -16,6 +16,7 @@ function TheGLobe(
 
 	},
 ) {
+	console.log('globeGL in:', globeGL);
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
 
 	let Globe = () => {};
@@ -62,9 +63,7 @@ function TheGLobe(
 	};
 
 	// Handling Rotate and point of view
-
 	const CountryLocation = { lat: country_lat, lng: country_lng };
-	// eslint-disable-next-line no-unsafe-optional-chaining
 	const defaultMapCenter = { lat: 0, lng: 0, altitude: 2 };
 	const pointRotationSpeed = 100;
 
@@ -101,12 +100,6 @@ function TheGLobe(
 				// hexSideColor={() => 'rgba(206, 209, 237, 1)'}
 				// hexBinMerge
 				// enablePointerInteraction
-				// Rings
-				// ringsData={pointBinData}
-				// ringColor={() => 'rgba(114, 120, 173, 1)'}
-				// ringMaxRadius={4}
-				// ringPropagationSpeed={2}
-				// ringRepeatPeriod={600}
 				// html
 				htmlElementsData={markerData}
 				htmlTransitionDuration={2000}

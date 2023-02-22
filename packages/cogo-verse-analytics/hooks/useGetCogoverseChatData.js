@@ -23,7 +23,7 @@ const useGetCogoverseChatData = ({ country = {}, date = {} }) => {
 				},
 			});
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			// Toast.error(getApiErrorString(err));
 		}
 	};
 
