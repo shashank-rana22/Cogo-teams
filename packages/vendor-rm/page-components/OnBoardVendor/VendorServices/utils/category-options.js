@@ -13,11 +13,15 @@ const categoryOptions = [
 	},
 	{
 		label : 'Internet and communication ',
-		value : 'internet_and_communication',
+		value : 'internet_and_communications',
 	},
 	{
 		label : 'Professional Services Expenses',
 		value : 'professional_services_expenses',
+	},
+	{
+		label : 'Miscellaneous Expenses',
+		value : 'miscellaneous_expenses',
 	},
 ];
 

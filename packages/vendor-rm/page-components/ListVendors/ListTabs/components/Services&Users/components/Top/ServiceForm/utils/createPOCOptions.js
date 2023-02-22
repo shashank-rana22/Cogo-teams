@@ -1,5 +1,14 @@
-function createPOCOptions({ pocs = [] }) {
-	const pocOptions = [];
+function createPOCOptions({
+	pocs = [],
+}) {
+	const pocOptions = (pocs || []).map((poc) => {
+		const obj = {
+			label : poc?.name,
+			value : poc?.id,
+		};
+
+		return obj;
+	});
 
 	return {
 		pocOptions,

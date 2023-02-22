@@ -27,14 +27,13 @@ function useCreateVendorServicePOC({
 	const { errors } = formState;
 
 	const watchCategory = watch('category');
-
-	console.log('getVendorData:: ', getVendorData);
+	const watchPOC = watch('poc_id');
 
 	const { pocs = [] } = getVendorData || {};
 
-	const pocOptions = createPOCOptions({ pocs });
+	const { pocOptions = {} } = createPOCOptions({ pocs, watchPOC });
 
-	const controls = getControls({ watchCategory });
+	const controls = getControls({ watchCategory, pocOptions });
 
 	const [{ loading: createVendorServicePocLoading }, triggerCreateVendorServicePoc] = useRequest({
 		url    : '/create_vendor_service_poc',
@@ -42,15 +41,19 @@ function useCreateVendorServicePOC({
 	}, { manual: true });
 
 	const onSubmit = async (data) => {
-		console.log('data:: ', data);
-
 		try {
+			const { poc_role = [] } = (pocs || []).find((poc) => poc.id === watchPOC);
+
 			const payload = {
 				...data,
-				cogo_entity_id: partner_id,
+				cogo_entity_id : partner_id,
+				vendor_id      : getVendorData?.vendor_details?.id,
+				poc_role,
 			};
 
 			await triggerCreateVendorServicePoc({ data: payload });
+
+			setShowForm('');
 
 			Toast.success('Service POC added successfully');
 		} catch (error) {

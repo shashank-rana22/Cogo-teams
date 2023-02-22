@@ -1,7 +1,7 @@
 import categoryOptions from './category-options';
 import subCategoryOptions from './sub-category-options';
 
-const getControls = ({ watchCategory }) => [
+const getControls = ({ watchCategory = '', pocOptions }) => [
 	{
 		name        : 'category',
 		label       : 'Select Category',
@@ -52,11 +52,11 @@ const getControls = ({ watchCategory }) => [
 		rules : { required: 'Office Location is required' },
 	},
 	{
-		name        : 'poc',
+		name        : 'poc_id',
 		label       : 'Select POC',
 		type        : 'select',
 		placeholder : 'Select a POC',
-		options     : [],
+		options     : pocOptions,
 		style       : { flexBasis: '33%' },
 		rules       : { required: 'POC is required' },
 	},
