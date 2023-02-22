@@ -6,8 +6,8 @@ import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
-import { toTitleCase } from './constant';
 import styles from './styles.module.css';
+import { toTitleCase } from './utils';
 
 function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);

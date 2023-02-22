@@ -7,12 +7,12 @@ import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
 import TDSModal from '../Modals/TDSModal';
+import { TooltipInterface } from '../utils/interface';
 
-import { TooltipInterface } from './interface';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData }) => {
+export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab }) => {
 	const toTitleCase = (str:string) => {
 		const titleCase = str
 			.toLowerCase()
@@ -22,6 +22,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 
 		return titleCase;
 	};
+
 	return [
 		{
 			Header   : 'INCIDENT ID',
@@ -29,7 +30,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			id       : 'incident_id',
 			Cell     : ({ row: { original } }) => {
 				const { referenceId = {} } = original || {};
-				return <span className={styles.incident_id}>{ referenceId || '-' }</span>;
+				return <span className={styles.incident_id}>{ referenceId }</span>;
 			},
 		},
 		{
@@ -95,7 +96,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			Cell     : ({ row: { original } }) => {
 				const { createdBy = {} } = original || {};
 				const { name = '' } = createdBy || {};
-				return <span>{name || '-'}</span>;
+				return <span>{name}</span>;
 			},
 		},
 		{
@@ -107,7 +108,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				return (
 					<span>
 						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+							: toTitleCase(requestType.replace(/_/g, ' '))}
 					</span>
 				);
 			},
@@ -136,8 +137,38 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			id       : 'request_date',
 		},
 		{
-			accessor: (row) => {
-				const { data } = row || {};
+			Header   : activeTab === 'approved' ? 'APPROVED BY & ON' : 'REJECTED BY & ON',
+			accessor : 'updatedBy',
+			id       : 'username',
+			Cell     : ({ row: { original } }) => {
+				const { updatedBy = {}, updatedAt } = original || {};
+				const { name = '' } = updatedBy || {};
+				return (
+					<div className={styles.flex_reverse}>
+						<div>{name}</div>
+						<div>{updatedAt}</div>
+					</div>
+				);
+			},
+		},
+		{
+			Header   : 'REMARK',
+			accessor : 'remark',
+			id       : 'remark',
+			Cell     : ({ row: { original } }) => {
+				const { remark = '' } = original || {};
+				return (
+					<Tooltip
+						content={<div className={styles.tooltip}>{remark}</div>}
+					>
+						<div className={styles.remark}>{remark}</div>
+					</Tooltip>
+				);
+			},
+		},
+
+		{
+			accessor: (row:any) => {
 				const {
 					tdsRequest,
 					bankRequest,
@@ -145,95 +176,86 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					settlementRequest,
 					journalVoucherRequest,
 					interCompanyJournalVoucherRequest,
-				} = data || {};
+				} = row.data || {};
 
-				const { type, id } = row || {};
+				const { type: requestType, id, remark, status } = row || {};
 
 				return (
 					<>
-						{type === 'TDS_APPROVAL' && (
+						{requestType === 'TDS_APPROVAL' && (
 							<TDSModal
 								tdsData={tdsRequest}
 								id={id}
 								refetch={getIncidentData}
+								isEditable={false}
 								row={row}
 							/>
 						)}
-						{type === 'SETTLEMENT_APPROVAL' && (
+						{requestType === 'SETTLEMENT_APPROVAL' && (
 							<SettlementModal
 								settlementData={settlementRequest}
 								id={id}
 								row={row}
 								refetch={getIncidentData}
+								isEditable={false}
 							/>
 						)}
-						{type === 'BANK_DETAIL_APPROVAL' && (
-							<BankDetails
-								bankData={bankRequest}
-								bankId={id}
-								organization={organization}
-								refetch={getIncidentData}
-								row={row}
-							/>
-						)}
-						{type === 'ISSUE_CREDIT_NOTE' && (
-							<RequestCN row={row} refetch={getIncidentData} id={id} />
-						)}
-
-						{type === 'CONSOLIDATED_CREDIT_NOTE' && (
-							<RequestCN row={row} refetch={getIncidentData} id={id} />
-						)}
-
-						{type === 'JOURNAL_VOUCHER_APPROVAL' && (
+						{requestType === 'JOURNAL_VOUCHER_APPROVAL' && (
 							<JvModal
 								journalVoucherRequest={journalVoucherRequest}
 								id={id}
-								refetch={getIncidentData}
 								row={row}
+								refetch={getIncidentData}
+								isEditable={false}
 							/>
 						)}
-
-						{type === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
+						{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' && (
 							<ICJVModal
 								interCompanyJournalVoucherRequest={
 								interCompanyJournalVoucherRequest
 								}
 								row={row}
 								refetch={getIncidentData}
+								isEditable={false}
 								id={id}
+							/>
+						)}
+						{requestType === 'BANK_DETAIL_APPROVAL' && (
+							<BankDetails
+								bankData={bankRequest}
+								bankId={id}
+								row={row}
+								organization={organization}
+								refetch={getIncidentData}
+								isEditable={false}
+								remark={remark}
+							/>
+						)}
+
+						{requestType === 'ISSUE_CREDIT_NOTE' && (
+							<RequestCN
+								row={row}
+								refetch={getIncidentData}
+								id={id}
+								isEditable={false}
+								status={status}
+							/>
+						)}
+
+						{requestType === 'CONSOLIDATED_CREDIT_NOTE' && (
+							<RequestCN
+								row={row}
+								refetch={getIncidentData}
+								id={id}
+								isEditable={false}
+								status={status}
 							/>
 						)}
 
 					</>
 				);
 			},
-			id: 'action',
-		},
-
-		{
-			Header   : '',
-			id       : 'ribbon',
-			accessor : (row:any) => {
-				const { deadlineTag } = row;
-				return (
-					deadlineTag &&	(
-						<div>
-							{deadlineTag === 'RED' && (
-								<div className={deadlineTag === 'RED' && styles.ribbon_red}>
-									Urgent
-								</div>
-							)}
-							{
-								deadlineTag === 'ORANGE' && (
-									<div className={deadlineTag === 'ORANGE' && styles.ribbon_orange}>
-										Urgent
-									</div>
-								)
-							}
-						</div>
-					)
-				);
-			},
+			id: 'actionColumn',
 		},
 	];
 };
