@@ -8,37 +8,38 @@ import TeamPieChart from '../TeamPieChart';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-const PieData = [
-	{
-		id    : 'java',
-		label : 'java',
-		value : 195,
-	},
-	{
-		id    : 'erlang',
-		label : 'erlang',
-		value : 419,
-	},
-	{
-		id    : 'go',
-		label : 'go',
-		value : 71,
-	},
-	{
-		id    : 'solidity',
-		label : 'solidity',
-		value : 31,
-	},
-];
+const PieData = [];
+// const PieData = [
+// {
+// 	id    : 'java',
+// 	label : 'java',
+// 	value : 195,
+// },
+// 	{
+// 		id    : 'erlang',
+// 		label : 'erlang',
+// 		value : 419,
+// 	},
+// 	{
+// 		id    : 'go',
+// 		label : 'go',
+// 		value : 71,
+// 	},
+// 	{
+// 		id    : 'solidity',
+// 		label : 'solidity',
+// 		value : 31,
+// 	},
+// ];
 
 const PieData1 = ['-'];
 const lineData1 = ['-'];
 
-function PerformanceChart({ user_id = '' }) {
+function PerformanceChart({ userId = '' }) {
 	const {
 		performanceStatsData = {},
 		loading,
-	} = useGetFeedbackPerformanceStats({ user_id });
+	} = useGetFeedbackPerformanceStats({ userId });
 
 	Object.keys(performanceStatsData).map((key) => {
 		const { month = '', rating = '' } = performanceStatsData[key] || {};
@@ -222,12 +223,12 @@ function PerformanceChart({ user_id = '' }) {
 						</div>
 					)}
 
-					{(!loading && PieData1?.length > 0) ? (
+					{/* {(!loading && PieData1?.length > 0) ? ( */}
 
-						<div className={styles.pie_chart}>
-							<TeamPieChart data={PieData} />
-						</div>
-					) : (
+					<div className={styles.pie_chart}>
+						<TeamPieChart userId={userId} data={PieData} />
+					</div>
+					{/* ) : (
 						<div className={styles.empty_container}>
 							<EmptyState
 								height={140}
@@ -237,94 +238,9 @@ function PerformanceChart({ user_id = '' }) {
 								flexDirection="column"
 							/>
 						</div>
-					)}
+					)} */}
 				</div>
 			)}
-
-			{/* <div className={styles.chart_section}>
-				{(!loading && lineData1?.length) > 0 ? (
-					<div className={styles.line_graph}>
-						<ResponsiveLine
-							data={newlineData}
-							margin={{ top: 30, right: 110, bottom: 50, left: 60 }}
-							xScale={{
-								type    : 'point',
-								stacked : true,
-								min     : 0,
-								max     : 12,
-							}}
-							yScale={{
-								type     : 'linear',
-								tickSize : 5,
-								min      : 0,
-								max      : 5,
-								reverse  : false,
-								stacked  : false,
-							}}
-							yFormat=" >-.2f"
-							curve="natural"
-							lineWidth={3}
-							axisTop={null}
-							axisRight={null}
-							axisBottom={{
-								orient         : 'bottom',
-								tickSize       : 5,
-								tickPadding    : 5,
-								tickRotation   : 0,
-								legend         : 'Months',
-								legendOffset   : 36,
-								legendPosition : 'middle',
-							}}
-							axisLeft={{
-								orient         : 'left',
-								tickValues     : 5,
-								tickSize       : 5,
-								tickPadding    : 5,
-								tickRotation   : 0,
-								legend         : 'KPI',
-								legendOffset   : -40,
-								legendPosition : 'middle',
-							}}
-							enableGridX={false}
-							pointSize={5}
-							pointBorderWidth={7}
-							pointLabelYOffset={-12}
-							areaOpacity={0.25}
-							useMesh
-							colors={['#F2E3C3', '#F9AE64', '#828282']}
-							colorBy="index"
-						/>
-					</div>
-
-				) : (
-					<div className={styles.empty_container}>
-						<EmptyState
-							height={140}
-							width={180}
-							emptyText="Performance Stats Not Found"
-							textSize="12px"
-							flexDirection="column"
-						/>
-					</div>
-				)}
-
-				{(!loading && PieData1?.length > 0) ? (
-
-					<div className={styles.pie_chart}>
-						<TeamPieChart data={PieData} />
-					</div>
-				) : (
-					<div className={styles.empty_container}>
-						<EmptyState
-							height={140}
-							width={180}
-							emptyText="Pie Stats Not Found"
-							textSize="12px"
-							flexDirection="column"
-						/>
-					</div>
-				)}
-			</div> */}
 		</div>
 	);
 }

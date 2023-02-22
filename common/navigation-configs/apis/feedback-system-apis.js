@@ -98,6 +98,10 @@ const feedback_system = [
 		api          : 'create_communication',
 		access_type  : 'private',
 		service_name : 'communication',
+	}, {
+		api          : 'get-performance-stats',
+		access_type  : 'private',
+		service_name : 'user_feedback',
 	},
 	// {
 	// 	api          : 'get_feedback_performance_stats',
