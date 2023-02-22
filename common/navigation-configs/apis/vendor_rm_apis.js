@@ -29,6 +29,12 @@ const apis = [
 		feature      : 'vendor',
 		service_name : 'vendor',
 	},
+	{
+		api         : 'get_purchase_bills_list',
+		access_type : 'private',
+		feature     : 'vendor',
+		// service_name : 'vendor',
+ 	},
 ];
 
 export default apis;

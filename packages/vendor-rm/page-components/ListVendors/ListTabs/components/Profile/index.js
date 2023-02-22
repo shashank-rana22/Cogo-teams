@@ -6,11 +6,11 @@ import Verified from './components/Verified';
 import styles from './styles.module.css';
 // import styles from './styles.module.css';
 
-export function Profile({ data = {} }) {
+function Profile({ data = {} }) {
 	return (
 		<div className={styles.padd}>
 			<div className={styles.main}>
-				<Top1 />
+				<Top1 vendor_details={data?.vendor_details} />
 				<Verified data={data} />
 				<VendorInfo data={data} />
 
@@ -18,3 +18,5 @@ export function Profile({ data = {} }) {
 		</div>
 	);
 }
+
+export default Profile;
