@@ -1,10 +1,10 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import Configurations from './AllocationConfigurations';
-import Quotas from './AllocationQuotas';
-import Relations from './AllocationRelations';
-import Requests from './AllocationRequests';
+import Configurations from './components/AllocationConfigurations';
+import Quotas from './components/AllocationQuotas';
+import Relations from './components/AllocationRelations';
+import Requests from './components/AllocationRequests';
 import styles from './styles.module.css';
 
 const TAB_PANEL_MAPPING = {
