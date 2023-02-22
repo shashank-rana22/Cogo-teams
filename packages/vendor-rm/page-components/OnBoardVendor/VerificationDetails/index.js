@@ -22,30 +22,28 @@ function VerificationDetails({
 
 	return (
 		<div>
-			{
-				showSuccessScreen ? (
-					<Success />
-				) : (
-					<>
-						<Header />
+			{showSuccessScreen ? (
+				<Success />
+			) : (
+				<>
+					<Header />
 
-						<div className={styles.button_container}>
-							<div className={styles.text_container}>
-								Submit the following details for verification?
-							</div>
-
-							<ButtonLayout
-								activeStepper={activeStepper}
-								setActiveStepper={setActiveStepper}
-								onSubmit={onSubmit}
-								loading={loading}
-							/>
+					<div className={styles.button_container}>
+						<div className={styles.text_container}>
+							Submit the following details for verification?
 						</div>
 
-						<DisplayDetails vendorInformation={vendorInformation} loading={getVendorLoading} />
-					</>
-				)
-			}
+						<ButtonLayout
+							activeStepper={activeStepper}
+							setActiveStepper={setActiveStepper}
+							onSubmit={onSubmit}
+							loading={loading}
+						/>
+					</div>
+
+					<DisplayDetails vendorInformation={vendorInformation} loading={getVendorLoading} />
+				</>
+			)}
 
 		</div>
 	);

@@ -81,12 +81,14 @@ function useVendorBankDetail({
 		const values = getValues();
 
 		try {
+			const payload = {
+				...values,
+				bank_document_url: values.bank_document_url.finalUrl,
+				vendor_id,
+			};
+
 			await triggerCreateVendorBankDetail({
-				data: {
-					...values,
-					bank_document_url: values.bank_document_url.finalUrl,
-					vendor_id,
-				},
+				data: payload,
 			});
 
 			setVendorInformation((pv) => {

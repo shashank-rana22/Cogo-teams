@@ -1,4 +1,3 @@
-import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -35,7 +34,7 @@ function PaymentDetails({
 					rel="noreferrer"
 				>
 					{shortName}
-					<IcMDownload className={styles.icon} />
+					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg" alt="" />
 				</a>
 			);
 		}

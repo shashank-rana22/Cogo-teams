@@ -8,7 +8,7 @@ import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
 const ButtonContainerStyle = {
-	margin: '40px 0px 40px 0px',
+	margin: '20px',
 };
 
 function FormComponent({
@@ -23,9 +23,12 @@ function FormComponent({
 	setValue = () => {},
 }) {
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className={styles.main_body}>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className={styles.main_body}
+		>
 			{controls.map((controlItem) => {
-				const { span, name, label, ...rest } = controlItem;
+				const { span, name, label, noDeleteButtonTill, ...rest } = controlItem;
 
 				if (rest.type === 'fieldArray') {
 					return (
@@ -36,6 +39,7 @@ function FormComponent({
 							error={errors?.[controlItem.name]}
 							watch={watch}
 							setValue={setValue}
+							noDeleteButtonTill={noDeleteButtonTill}
 						/>
 					);
 				}

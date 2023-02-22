@@ -93,8 +93,6 @@ function useOnBoardVendor({
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
-
-		setValue('document_url', vendorInformation?.vendor_details?.document_url);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [vendorInformation]);
 

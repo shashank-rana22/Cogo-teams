@@ -1,4 +1,4 @@
-import { Button, Stepper } from '@cogoport/components';
+import { Stepper } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -22,7 +22,7 @@ function OnBoardVendor() {
 		method : 'GET',
 	}, { manual: true });
 
-	const [activeStepper, setActiveStepper] = useState('verification');
+	const [activeStepper, setActiveStepper] = useState('vendor_services');
 
 	const [vendorInformation, setVendorInformation] = useState({});
 
@@ -33,6 +33,9 @@ function OnBoardVendor() {
 			...res.data,
 			contact_details : res.data.pocs[0],
 			payment_details : res.data.bank_details[0],
+			vendor_services : {
+				office_details: res.data.services,
+			},
 		});
 	}, [vendor_id, trigger]);
 
@@ -42,8 +45,6 @@ function OnBoardVendor() {
 		}
 	}, [vendor_id, getVendor]);
 
-	console.log('vendorInformation:: ', vendorInformation);
-
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,10 +52,8 @@ function OnBoardVendor() {
 
 	return (
 		<div>
-			<div className={styles.back_container}>
-				<Button size="sm" themeType="secondary" onClick={onBack}>
-					<IcMArrowBack fill="#221F20" style={{ marginRight: 4 }} />
-				</Button>
+			<div role="presentation" onClick={onBack} className={styles.back_container}>
+				<IcMArrowBack fill="#221F20" width={20} height={16} />
 				<div className={styles.back_text}>Back to Vendor Relationship Management</div>
 			</div>
 			<div className={styles.header}>Add New Vendor</div>

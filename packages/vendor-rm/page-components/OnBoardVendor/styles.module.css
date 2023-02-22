@@ -1,9 +1,12 @@
 .back_container {
 	display: flex;
+	align-items: center;
+	width: fit-content;
+	cursor: pointer;
 }
 
 .back_text {
-	margin: 2px 0 0 10px;
+	margin-left: 10px;
 	font-family: Poppins;
 	font-size: 14px;
 	font-style: normal;
@@ -28,6 +31,6 @@
 }
 
 .form_container {
-  padding: 20px;
-  background-color: white;
+	padding: 20px;
+	background-color: white;
 }
