@@ -1,11 +1,10 @@
-import { Modal, Pagination, Table, Tooltip, Pill } from '@cogoport/components';
+import { Modal, Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
 import BulkUpdateMode from './BulkUpdateMode';
-import ListItem from './ListItem';
 import styles from './styles.module.css';
 import UserActions from './UserActions';
 
@@ -28,10 +27,6 @@ function List({
 	const [selectAll, setSelectAll] = useState(false);
 
 	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
-
-	// if (loading) {
-	// 	return <ShimmerState />;
-	// }
 
 	if (isEmpty(list)) {
 		return (
@@ -94,16 +89,6 @@ function List({
 			) : null}
 
 			<div className={styles.list_container}>
-				{/* {list.map((item) => (
-					<ListItem
-						key={item.id}
-						item={item}
-						checkedRowsId={checkedRowsId}
-						setCheckedRowsId={setCheckedRowsId}
-						activeTab={activeTab}
-						setConfirmModalState={setConfirmModalState}
-					/>
-				))} */}
 				<div className={styles.table_container}>
 					<Table className={styles.request_table} data={list} columns={modifiedColumns} loading={loading} />
 				</div>
