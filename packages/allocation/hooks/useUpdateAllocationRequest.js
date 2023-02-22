@@ -5,13 +5,11 @@ import { useAllocationRequest } from '@cogoport/request';
 const useUpdateRequestStatus = (props) => {
 	const { fetchList, requestStatusItem, setRequestStatusItem } = props;
 
-	const api = useAllocationRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/request_status',
 		method  : 'POST',
 		authkey : 'post_allocation_request_status',
 	}, { manual: true });
-
-	const [{ loading }, trigger] = api;
 
 	const onStatusUpdate = async () => {
 		try {

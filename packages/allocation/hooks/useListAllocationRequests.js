@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../page-components/CoreAllocationEngine/AllocationRequests/List/Actions';
 import styles from '../page-components/CoreAllocationEngine/styles.module.css';
@@ -35,27 +35,45 @@ const useListAllocationRequests = () => {
 		},
 	});
 
-	const apiData = useAllocationRequest({
+	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/requests',
 		method  : 'get',
 		authkey : 'get_allocation_requests',
 		params,
 	}, { manual: false });
 
-	const [{ loading, data }, refetch] = apiData;
+	const { list = [] } = data || {};
+
+	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
+
+	const selectAllHelper = (listArgument = []) => {
+		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
+		if (isRowsChecked !== selectAll) {
+			setSelectAll(isRowsChecked);
+		}
+	};
+
+	useEffect(() => {
+		if (isEmpty(currentPageListIds)) {
+			return;
+		}
+
+		selectAllHelper(checkedRowsId);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentPageListIds]);
 
 	const onChangeParams = useCallback((values = {}) => {
-		setParams((pv) => ({
-			...pv,
+		setParams((previousParams) => ({
+			...previousParams,
 			...values,
 		}));
 	}, []);
 
 	useEffect(() => {
-		setParams((pv) => ({
-			...pv,
+		setParams((previousParams) => ({
+			...previousParams,
 			filters: {
-				...pv.filters,
+				...previousParams.filters,
 				q: searchQuery || undefined,
 			},
 		}));
@@ -67,14 +85,6 @@ const useListAllocationRequests = () => {
 		setCheckedRowsId([]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params?.filters?.service_type]);
-
-	useEffect(() => {
-		if (selectAll) {
-			setSelectAll(false);
-			setCheckedRowsId([]);
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params.page]);
 
 	const applyBulkFilter = async () => {
 		setParams({
@@ -88,49 +98,15 @@ const useListAllocationRequests = () => {
 		});
 	};
 
-	const onSelectAll = (val) => {
-		const listIds = (data.list || []).map(({ id }) => id);
-
-		setCheckedRowsId((previousIds) => {
-			let newCheckedRowsIds = previousIds;
-
-			if (val) {
-				listIds.forEach((listId) => {
-					if (!previousIds.includes(listId)) {
-						newCheckedRowsIds.push(listId);
-					}
-				});
-			} else {
-				newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
-			}
-
-			return newCheckedRowsIds;
-		});
-	};
-
-	const onChangeCheckbox = (e) => {
-		if (!e.target.checked) {
-			setCheckedRowsId([]);
-			setSelectAll('');
-			if (!isEmpty(checkedRowsId)) {
-				setParams((pv) => ({
-					...pv,
-					filters: {
-						...(pv.filters || {}),
-						id: undefined,
-					},
-				}));
-			}
-		}
-	};
-
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
 
-		setParams((pv) => ({
-			...pv,
-			filters: {
-				...(pv.filters || {}),
+		setParams((previousParams) => ({
+			...previousParams,
+			page    : 1,
+			filters : {
+				...(previousParams.filters || {}),
+
 				id: undefined,
 			},
 		}));
@@ -138,9 +114,36 @@ const useListAllocationRequests = () => {
 		setSelectAll(false);
 	};
 
-	const onItemChangeInChips = (val) => {
-		setSelectAll(val);
-		onSelectAll(val);
+	const onChangeBodyCheckbox = (event, id) => {
+		setCheckedRowsId((previousIds) => {
+			let newCheckedIds = [];
+
+			if (event.target.checked) {
+				newCheckedIds = [...previousIds, id];
+			} else {
+				newCheckedIds = previousIds.filter((selectedId) => selectedId !== id);
+			}
+
+			selectAllHelper(newCheckedIds);
+
+			return newCheckedIds;
+		});
+	};
+
+	const onChangeTableHeadCheckbox = (event) => {
+		setCheckedRowsId((previousIds) => {
+			let newCheckedRowsIds = [...previousIds];
+
+			if (event.target.checked) {
+				newCheckedRowsIds = [...newCheckedRowsIds, ...currentPageListIds];
+			} else {
+				newCheckedRowsIds = previousIds.filter((id) => !currentPageListIds.includes(id));
+			}
+
+			setSelectAll(event.target.checked);
+
+			return [...new Set(newCheckedRowsIds)];
+		});
 	};
 
 	const columns = [
@@ -148,31 +151,18 @@ const useListAllocationRequests = () => {
 			id     : 'checkbox',
 			key    : 'checkbox',
 			Header : <Checkbox
-				label=""
 				checked={selectAll}
-				onChange={
-			(e) => onItemChangeInChips(e?.target?.checked)
-}
+				onChange={(event) => onChangeTableHeadCheckbox(event)}
 				className={styles.select_all_checkbox}
+				disabled={loading}
 			/>,
-			accessor: ({ id }) => {
-				const isSelected = checkedRowsId.includes(id);
+			accessor: ({ id = '' }) => (
+				<Checkbox
+					checked={checkedRowsId.includes(id)}
+					onChange={(event) => onChangeBodyCheckbox(event, id)}
+				/>
 
-				return (
-					<Checkbox
-						label=""
-						checked={isSelected}
-						onChange={() => {
-							if (!isSelected) {
-								setCheckedRowsId([...checkedRowsId, id]);
-							} else {
-								setCheckedRowsId(checkedRowsId.filter((rowId) => rowId !== id));
-							}
-						}}
-						className={styles.bulk_select_checkbox}
-					/>
-				);
-			},
+			),
 		},
 		{
 			key      : 'id',
@@ -190,7 +180,7 @@ const useListAllocationRequests = () => {
 			Header   : 'User',
 			accessor : ({ service_user }) => (
 				<div>
-					{service_user?.name}
+					{startCase(service_user?.name || '___')}
 					<div className={styles.email_id}>{service_user?.email || '___'}</div>
 				</div>
 			),
@@ -205,7 +195,7 @@ const useListAllocationRequests = () => {
 			Header   : 'Requested Agent',
 			accessor : ({ user }) => (
 				<div>
-					{user?.name}
+					{user?.name || '___'}
 					{' '}
 					<div className={styles.email_id}>{user?.email || '___'}</div>
 				</div>
@@ -214,7 +204,7 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'created_by',
 			Header   : 'Requested By',
-			accessor : ({ created_by }) => created_by?.name || '___',
+			accessor : ({ created_by }) => startCase(created_by?.name || '___'),
 		},
 		{
 			key      : 'reason',
@@ -251,12 +241,12 @@ const useListAllocationRequests = () => {
 							)}
 							onClickOutside={() => setPopoverId(null)}
 						>
-							<div
-								className={styles.svg_container}
-								onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
-								role="presentation"
-							>
-								<IcMOverflowDot height={16} width={16} />
+							<div className={styles.svg_container}>
+								<IcMOverflowDot
+									height={16}
+									width={16}
+									onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
+								/>
 							</div>
 						</Popover>
 					</div>
@@ -278,12 +268,9 @@ const useListAllocationRequests = () => {
 		setSearchValue,
 		onClearSelection,
 		applyBulkFilter,
-		onChangeCheckbox,
-		onSelectAll,
 		selectAll,
 		checkedRowsId,
 		setCheckedRowsId,
-		onItemChangeInChips,
 		showModal,
 		setShowModal,
 		onCloseModal,

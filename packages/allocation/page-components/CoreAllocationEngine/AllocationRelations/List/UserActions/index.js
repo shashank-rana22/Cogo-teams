@@ -9,7 +9,7 @@ function UserActions({
 	confirmModalState,
 	setConfirmModalState = () => {},
 	checkedRowsId,
-	// onResettingBulkMode,
+	onClearSelection = () => {},
 }) {
 	const requestType = confirmModalState.type;
 
@@ -40,7 +40,7 @@ function UserActions({
 		confirmModalState,
 		setConfirmModalState,
 		checkedRowsId,
-		// onResettingBulkMode,
+		onClearSelection,
 	});
 
 	return (
@@ -63,7 +63,7 @@ function UserActions({
 						disabled={loadingUpdateRelations}
 						onClick={handleUpdateRelation}
 					>
-						Yes, I do
+						Yes
 					</Button>
 				</div>
 			</Modal.Footer>

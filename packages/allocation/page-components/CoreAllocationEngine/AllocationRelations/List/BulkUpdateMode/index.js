@@ -1,25 +1,23 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function BulkUpdateMode({
-	// list,
 	checkedRowsId = [],
-	setCheckedRowsId = () => {},
 	confirmModalState,
 	setConfirmModalState = () => {},
 	params,
 	setParams = () => {},
-	// selectAll,
-	// setSelectAll = () => {},
 	searchQuery,
+	onClearSelection = () => {},
 }) {
 	const applyBulkFilter = async () => {
 		setConfirmModalState((prev) => ({
 			...prev,
 			showApproveAllButton: true,
 		}));
+
 		setParams({
 			...params,
 			page    : 1,
@@ -31,53 +29,14 @@ function BulkUpdateMode({
 		});
 	};
 
-	// const onSelectAll = (val) => {
-	// 	const listIds = list.map(({ id }) => id);
-
-	// 	setCheckedRowsId((previousIds) => {
-	// 		let newCheckedRowsIds = previousIds;
-
-	// 		if (val) {
-	// 			listIds.forEach((listId) => {
-	// 				if (!previousIds.includes(listId)) {
-	// 					newCheckedRowsIds.push(listId);
-	// 				}
-	// 			});
-	// 		} else {
-	// 			newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
-	// 		}
-
-	// 		return newCheckedRowsIds;
-	// 	});
-	// };
-
-	const onClearSelection = () => {
-		setCheckedRowsId([]);
-
-		setConfirmModalState((prev) => ({
-			...prev,
-			showApproveAllButton: false,
-		}));
-		setParams((previousParams) => ({
-			...(previousParams || {}),
-			filters: {
-				...((previousParams || {}).filters || {}),
-				id: undefined,
-			},
-		}));
-
-		// setSelectAll('');
-	};
-
 	const selectedItemsForUpdate = !isEmpty(checkedRowsId) ? checkedRowsId.length : '';
 
 	return (
 		<div className={styles.bulk_update_container}>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-
+			<div className={styles.left_container}>
 				<Button
 					size="sm"
-					themeType="primary"
+					themeType="secondary"
 					disabled={isEmpty(checkedRowsId)}
 					onClick={applyBulkFilter}
 				>
@@ -98,10 +57,9 @@ function BulkUpdateMode({
 
 						<div className={styles.clear_selection_button_container}>
 							<Button
-								size="md"
+								size="sm"
 								themeType="linkUi"
 								onClick={() => onClearSelection()}
-								style={{ backgroundColor: '#F8F2E7', padding: '0px', color: '' }}
 							>
 								Clear Selection
 							</Button>
@@ -112,7 +70,7 @@ function BulkUpdateMode({
 
 			<Button
 				size="sm"
-				themeType="primary"
+				themeType="secondary"
 				disabled={!confirmModalState.showApproveAllButton}
 				onClick={() => {
 					setConfirmModalState(() => ({

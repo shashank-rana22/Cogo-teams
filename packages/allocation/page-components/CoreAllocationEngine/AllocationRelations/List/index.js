@@ -1,11 +1,10 @@
-import { Modal, Pagination, Table, Tooltip, Pill } from '@cogoport/components';
+import { Modal, Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
 import BulkUpdateMode from './BulkUpdateMode';
-import ListItem from './ListItem';
 import styles from './styles.module.css';
 import UserActions from './UserActions';
 
@@ -16,24 +15,19 @@ function List({
 	columns,
 	setParams = () => {},
 	checkedRowsId = [],
-	setCheckedRowsId = () => {},
 	activeTab,
 	confirmModalState,
 	setConfirmModalState = () => {},
 	paginationData = {},
-	getNextPage,
 	searchQuery,
+	getNextPage = () => {},
+	onClearSelection = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
-	const [selectAll, setSelectAll] = useState(false);
 
 	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
 
-	// if (loading) {
-	// 	return <ShimmerState />;
-	// }
-
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -55,57 +49,29 @@ function List({
 		}));
 	};
 
-	// const onChangeCheckbox = (e) => {
-	// 	if (!e.target.checked) {
-	// 		setCheckedRowsId([]);
-	// 		setSelectAll('');
-	// 		setConfirmModalState((prev) => ({
-	// 			...prev,
-	// 			showApproveAllButton: e.target.checked,
-	// 		}));
-
-	// 		if ((!isEmpty(checkedRowsId))) {
-	// 			setParams((p) => ({
-	// 				...p,
-	// 				filters: {
-	// 					...((p || {}).filters || {}),
-	// 					id: undefined,
-	// 				},
-	// 			}));
-	// 		}
-	// 	}
-	// };
-
 	return (
 		<div>
 			{activeTab === 'pending' ? (
 				<BulkUpdateMode
 					list={list}
 					checkedRowsId={checkedRowsId}
-					setCheckedRowsId={setCheckedRowsId}
 					confirmModalState={confirmModalState}
 					setConfirmModalState={setConfirmModalState}
 					params={params}
 					setParams={setParams}
-					selectAll={selectAll}
-					setSelectAll={setSelectAll}
 					searchQuery={searchQuery}
+					onClearSelection={onClearSelection}
 				/>
 			) : null}
 
 			<div className={styles.list_container}>
-				{/* {list.map((item) => (
-					<ListItem
-						key={item.id}
-						item={item}
-						checkedRowsId={checkedRowsId}
-						setCheckedRowsId={setCheckedRowsId}
-						activeTab={activeTab}
-						setConfirmModalState={setConfirmModalState}
-					/>
-				))} */}
 				<div className={styles.table_container}>
-					<Table className={styles.request_table} data={list} columns={modifiedColumns} loading={loading} />
+					<Table
+						className={styles.request_table}
+						data={list}
+						columns={modifiedColumns}
+						loading={loading}
+					/>
 				</div>
 			</div>
 
@@ -130,7 +96,7 @@ function List({
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
 						checkedRowsId={checkedRowsId}
-						// onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
+						onClearSelection={onClearSelection}
 					/>
 				</Modal>
 			)}

@@ -26,6 +26,7 @@ function Requests() {
 		requestStatusItem,
 		setRequestStatusItem,
 		showModal,
+		onClearSelection,
 		setShowModal,
 		onCloseModal,
 		...restProps
@@ -43,6 +44,7 @@ function Requests() {
 				checkedRowsId={checkedRowsId}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				onClearSelection={onClearSelection}
 				isCreateDisabled={!isEmpty(checkedRowsId)}
 				{...restProps}
 			/>
@@ -71,7 +73,7 @@ function Requests() {
 							<BulkUpdateConfirmation
 								onCloseModal={onCloseModal}
 								checkedRowsId={checkedRowsId}
-								onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
+								onClearSelection={onClearSelection}
 							/>
 						) : (
 							<CreateRequestModalContent

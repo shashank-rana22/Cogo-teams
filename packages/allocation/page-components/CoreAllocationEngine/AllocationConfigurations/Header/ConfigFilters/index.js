@@ -1,10 +1,11 @@
-import { Button } from '@cogoport/components';
+import { Badge, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
 import Filters from '../../../../../common/Filters';
 
-import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
+
+const ConditionalWrapper = ({ condition, wrapper, children }) => (condition ? wrapper(children) : children);
 
 function ConfigFilters({
 	params,
@@ -33,9 +34,18 @@ function ConfigFilters({
 			>
 				Filter
 
-				<IcMFilter style={{ marginLeft: '4px' }} />
-
-				{filtersApplied ? <div className={styles.filter_dot} /> : null}
+				<ConditionalWrapper
+					condition={filtersApplied}
+					wrapper={(children) => (
+						<Badge color="red" size="md" text="">
+							{children}
+						</Badge>
+					)}
+				>
+					<div>
+						<IcMFilter style={{ marginLeft: '4px' }} />
+					</div>
+				</ConditionalWrapper>
 			</Button>
 		</Filters>
 	);
