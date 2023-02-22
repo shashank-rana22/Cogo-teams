@@ -3966,7 +3966,7 @@ const partner = {
 			api          : 'get_expertise_locations_for_rate',
 			access_type  : 'private',
 			service_name : 'locations',
-			feature      : 'rates_density',
+			feature      : 'rate_density',
 		},
 		{
 			api          : 'create_air_freight_rate_surcharge',
@@ -9423,7 +9423,7 @@ const partner = {
 			api          : 'list_location_clusters',
 			access_type  : 'private',
 			service_name : 'locations',
-			feature      : 'fcl_sfreight_rate_extensions',
+			feature      : 'fcl_freight_rate_extensions',
 		},
 		{
 			api          : 'list_commodity_clusters',
