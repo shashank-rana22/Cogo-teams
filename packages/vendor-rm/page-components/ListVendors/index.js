@@ -26,8 +26,6 @@ function ListVendors() {
 		data: dataStats,
 	} = useVendorStats();
 
-	console.log('x', dataStats);
-
 	const { total_count, page_limit:pageLimit } = data || {};
 	const router = useRouter();
 

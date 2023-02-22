@@ -4,6 +4,7 @@ import { useState } from 'react';
 import CATEGORY_OPTIONS from '../../OnBoardVendor/VendorServices/utils/category-options';
 
 import styles from './styles.module.css';
+import filterSubCategoryOptions from './utils/filter-sub-category-options';
 
 function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 	const [filters, setFilters] = useState({ status: 'active' });
@@ -52,7 +53,7 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 					value={filters?.sub_category || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, sub_category: value }))}
 					placeholder="Choose Sub Category..."
-					options={CATEGORY_OPTIONS}
+					options={filterSubCategoryOptions}
 				/>
 			</div>
 
