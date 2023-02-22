@@ -1,0 +1,47 @@
+.approve_container {
+	padding: 10px 16px;
+	margin: 12px 0;
+	color: #6cc077;
+	border: 1px solid #6cc077;
+	border-radius: 8px;
+}
+
+.reject_container {
+	padding: 10px 16px;
+	margin: 12px 0;
+	color: #ed3726;
+	border: 1px solid #ed3726;
+	border-radius: 8px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.approve_border {
+	width: 100%;
+	margin: 8px 0;
+	border: 0.5px solid #6cc077;
+}
+
+.reject_border {
+	width: 100%;
+	margin: 8px 0;
+	border: 0.5px solid #ed3726;
+}
+
+.icon {
+	margin-top: 6px;
+	margin-right: 8px;
+}
+
+.remark_flex {
+	display: flex;
+	align-items: center;
+}
+
+.approve {
+	margin-right: 2px;
+}
