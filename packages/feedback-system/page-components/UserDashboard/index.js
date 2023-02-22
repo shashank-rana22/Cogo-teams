@@ -45,7 +45,7 @@ function UserDashboard() {
 	return (
 		<div className={styles.container}>
 			<p className={styles.header}>User Dashboard</p>
-			<div className={styles.user_profile}><UserProfile profileData={user} /></div>
+			<div className={styles.user_profile}><UserProfile userId={userId} /></div>
 
 			<div className={styles.header_filters}>
 				<div className={styles.filter_container}>

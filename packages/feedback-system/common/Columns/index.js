@@ -76,6 +76,17 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 	},
 
 	{
+		Header   : <div className={styles.head}>Department</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<div>{startCase(item?.department) || '-'}</div>
+			</div>
+		),
+		id  : 'department',
+		key : 'department',
+	},
+
+	{
 		Header   : <div className={styles.head}>Designation</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>

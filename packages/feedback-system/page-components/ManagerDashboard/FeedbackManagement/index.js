@@ -1,5 +1,5 @@
 import { Select, Input } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
+import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/userTableData';
 import useListReportees from '../../../hooks/useListReportees';
+import getDepartmentControls from '../../../utils/departmentControls';
 import getFeedBackControls from '../../../utils/getFeedbackControls';
 
 import styles from './styles.module.css';
@@ -43,12 +44,30 @@ function FeedbackManagement() {
 		setParams({ ...params, [type]: val });
 	};
 
-	const columnsToShow = ['name', 'cogo_id', 'designation', 'month', 'add-kpi'];
+	const columnsToShow = ['name', 'cogo_id', 'designation', 'department', 'month', 'add-kpi'];
 
 	const feedbackManagementColumns = useGetColumns({
 		source: 'manager_feedback',
 		columnsToShow,
 	});
+
+	const { Department = '', Designation = '' } = params;
+
+	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
+
+	const { watch, control } = useForm();
+	const department = watch('department');
+	const designation = watch('designation');
+
+	useEffect(() => {
+		setParams({
+			...params,
+			Department  : department || undefined,
+			Designation : designation || undefined,
+			Page        : 1,
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [department, designation]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -80,24 +99,14 @@ function FeedbackManagement() {
 				</p>
 
 				<div className={styles.header_filters}>
-					<Select
-						value={params.department}
-						onChange={(val) => setFilter(val, 'Department')}
-						placeholder={feedbackControls.department.placeholder}
-						style={{ marginRight: '8px' }}
-						options={feedbackControls.department.options}
-						isClearable={!params.filters?.designation}
-					/>
-
-					<Select
-						value={params.designation}
-						onChange={(val) => setFilter(val, 'Designation')}
-						disabled={!params.filters?.department}
-						placeholder={feedbackControls.designation.placeholder}
-						style={{ marginRight: '8px' }}
-						options={feedbackControls.designation.options}
-						isClearable
-					/>
+					{departmentDesignationControls.map((cntrl) => (
+						<SelectController
+							{...cntrl}
+							control={control}
+							style={{ marginRight: '8px' }}
+							key={cntrl.name}
+						/>
+					))}
 					<Select
 						value={params.FeedbackStatus}
 						onChange={(val) => setFilter(val, 'FeedbackStatus')}
@@ -121,10 +130,10 @@ function FeedbackManagement() {
 					columns={feedbackManagementColumns}
 					list={newTeamList}
 					loading={loading}
-					pagination={params.page}
+					pagination={params.Page}
 					setPagination={setPage}
 					total_count={total_count}
-					page_limit={params.page_limit}
+					page_limit={params.PageLimit}
 				/>
 			</div>
 

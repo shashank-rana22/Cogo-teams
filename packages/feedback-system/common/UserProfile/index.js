@@ -58,7 +58,7 @@ const colorScheme = (rating) => {
 		case '5':
 			return '#ddebc0';
 		default:
-			return '#fff';
+			return '#B3D5FB';
 	}
 };
 

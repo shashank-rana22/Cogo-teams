@@ -15,19 +15,16 @@ function TeamPieChart({ userId = '', month = '', year = '' }) {
 		{
 			id    : 'above_average',
 			label : 'Above Average',
-			// value : userData.above_average,
 			value : 23,
 		},
 		{
 			id    : 'average',
 			label : 'Average',
-			// value : userData.average,
 			value : 13,
 		},
 		{
 			id    : 'below_average',
 			label : 'Below Average',
-			// value : userData.below_average,
 			value : 3,
 		},
 	];
