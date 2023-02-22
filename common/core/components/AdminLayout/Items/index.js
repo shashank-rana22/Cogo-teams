@@ -7,7 +7,7 @@ import styles from '../Navbar/styles.module.css';
 
 import useAddRemovePin from './useAddRemovePin';
 
-function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin }) {
+function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin, inCall = false }) {
 	const router = useRouter();
 	const { query, asPath } = router;
 
@@ -29,10 +29,35 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 		} else if (itemdata?.href?.includes('/v2')) {
 			const replaceHref = itemdata?.href?.replace('/v2', '');
 			const replaceAs = itemdata?.as?.replace('/v2', '');
-			router.push(replaceHref, replaceAs);
+			if (inCall) {
+				// eslint-disable-next-line no-undef
+				window.open(
+					`/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`,
+					'_blank',
+					'noreferrer',
+				);
+			} else {
+				router.push(replaceHref, replaceAs);
+			}
 		} else if (process.env.NODE_ENV === 'production') {
+			if (inCall) {
+				// eslint-disable-next-line no-undef
+				window.open(
+					`/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`,
+					'_blank',
+					'noreferrer',
+				);
+			} else {
+				// eslint-disable-next-line no-undef
+				window.location.href = `/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`;
+			}
+		} else if (inCall) {
 			// eslint-disable-next-line no-undef
-			window.location.href = `/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`;
+			window.open(
+				`/${query.partner_id || splitAspath}${itemdata.as || itemdata.href}`,
+				'_blank',
+				'noreferrer',
+			);
 		} else {
 			router.push(itemdata.href, itemdata.as);
 		}

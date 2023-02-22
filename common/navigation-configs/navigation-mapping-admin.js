@@ -1866,6 +1866,43 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	cogo_one: {
+		key   : 'cogo_one',
+		title : 'Cogo One',
+
+		isSubNavs : true,
+		icon      : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				alt="cogo-one-logo"
+				width={18}
+				height={18}
+			/>
+		),
+		main_apis     : [],
+		possible_apis : apis.cogo_one,
+		options       : [
+			{
+				key           : 'cogo_one-omni_channel',
+				title         : 'Omni Channel',
+				href          : '/v2/cogo-one/omni-channel',
+				as            : '/v2/cogo-one/omni-channel',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one,
+			},
+			{
+				key           : 'cogo_one-dashboard',
+				title         : 'Dashboard',
+				href          : '/v2/cogo-one/dashboard',
+				as            : '/v2/cogo-one/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_one,
+			},
+		],
+		module_type: 'dashboards',
+	},
 	home: {
 		key   : 'home',
 		title : 'Home',

@@ -1,4 +1,5 @@
 import businessFinance from './config/business-finance';
+import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import myProfile from './config/my-profile';
@@ -10,8 +11,9 @@ const routeConfig = {
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
-	...myProfile,
 	...cogoVerseAnalytics,
+	...cogoOne,
+	...myProfile,
 };
 
 export default routeConfig;

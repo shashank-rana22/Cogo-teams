@@ -1,0 +1,82 @@
+
+.group_radio {
+    display: flex;
+    flex-direction: column;
+}
+
+.start_time {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 10px;
+}
+
+.time_title {
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+.duration_div{
+margin: 10px 20px;
+
+}
+
+.time_container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.wrap_start {
+    display: flex;
+    padding: 1px;
+    background-color: #ffff;
+    border-radius: 4px 0 0 4px;
+}
+
+.wrap_end {
+    display: flex;
+    padding: 1px;
+    background-color: #ffff;
+    border-radius: 0 4px 4px 0;
+}
+
+.end_time {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.actions {
+   
+    display: flex;
+	align-items: center;
+	margin-top: 20px;
+	justify-content: space-between;
+
+}
+
+.refresh_icon {
+    margin: 5px 10px 0px 0px;
+}
+
+.refresh_action {
+    display: flex;
+    align-items: center;
+}
+
+.date_range {
+    display: flex;
+    justify-content: center;
+}
+
+.last_button{
+	margin-left: 80px;
+	width: 130px;
+}
+
+.form_error{
+margin-left: 20px;
+margin-top: 5px;
+font-size: 10px;
+color:red;
+}

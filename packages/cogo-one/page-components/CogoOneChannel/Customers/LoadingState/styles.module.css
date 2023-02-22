@@ -1,0 +1,40 @@
+.card_Container {
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    margin-top: 10px;
+}
+
+.card {
+    cursor: pointer;
+    padding: 8px;
+}
+
+.user_information {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user_details {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar_Container {
+    display: flex;
+}
+
+.list_container {
+    overflow-y: auto;
+    height: 75vh;
+}
+
+.list_container::-webkit-scrollbar {
+    display: none;
+}
+
+.user_activity {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}

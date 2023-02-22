@@ -1,0 +1,94 @@
+.card_Container {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.active_card {
+    background: #fdfbf6;
+}
+
+.card {
+    cursor: pointer;
+    padding: 8px;
+}
+
+.user_information {
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity_duration {
+    color: #4f4f4f;
+    font-weight: 500;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.user_details {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.empty_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty_state {
+    font-size: 16px;
+    color: #828282;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35vh;
+}
+
+.call_icon {
+    margin: 6px 9px 0px 0px;
+}
+
+.user_name {
+    font-size: 14px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100px;
+}
+
+.organisation {
+    margin-top: 2px;
+    color: #828282;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 160px;
+}
+
+.avatar_Container {
+    display: flex;
+}
+
+.avatar {
+    width: 15px;
+    height: 15px;
+    margin-top: 10px;
+}
+
+.list_container {
+    overflow-y: auto;
+    height: 75vh;
+}
+
+.list_container::-webkit-scrollbar {
+    display: none;
+}
+
+.user_activity {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}

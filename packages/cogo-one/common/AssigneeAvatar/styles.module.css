@@ -1,0 +1,37 @@
+.container{
+	height: 25px;
+	width: 25px;
+	border-radius: 5px;
+	background: #E0E0E0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.name_container{
+	font-size: 10px;
+	font-weight: 500;
+	min-height: 10px;
+	min-width: 10px;
+	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	background: #BDBDBD;
+	border-radius: 5px;
+	padding: 1px 2px;
+	
+}
+.arrow_right{
+	width: 0; 
+	height: 0; 
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-left: 6px solid #E0E0E0;
+}
+.relative_div{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: fit-content;
+}
