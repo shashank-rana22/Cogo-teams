@@ -5,7 +5,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
-import ActionContent from '../page-components/CoreAllocationEngine/AllocationRelations/List/ListItem/ActionContent';
+import ActionContent from '../page-components/CoreAllocationEngine/AllocationRelations/List/ActionContent';
 import styles from '../page-components/CoreAllocationEngine/AllocationRelations/List/styles.module.css';
 
 const useAllocationRelations = () => {
@@ -13,8 +13,6 @@ const useAllocationRelations = () => {
 
 	const [activeTab, setActiveTab] = useState('active');
 	const [selectAll, setSelectAll] = useState(false);
-
-	const [listItem, setListItem] = useState({});
 
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 
@@ -33,7 +31,7 @@ const useAllocationRelations = () => {
 	const [params, setParams] = useState({
 		sort_type  : 'desc',
 		sort_by    : 'expiry_date',
-		page_limit : 5,
+		page_limit : 10,
 		page       : 1,
 		filters    : {
 			status : 'active',
@@ -241,20 +239,14 @@ const useAllocationRelations = () => {
 								onClickCta={onClickCta}
 							/>
 						)}
-						onClickOutside={() => {
-							setShowActions(null);
-							setListItem({});
-						}}
+						onClickOutside={() => setShowActions(null)}
 					>
 
 						<div className={styles.svg_container}>
 							<IcMOverflowDot
 								height={16}
 								width={16}
-								onClick={() => {
-									setShowActions(() => (showActions === id ? null : id));
-									setListItem(() => (showActions === id ? {} : item));
-								}}
+								onClick={() => setShowActions(() => (showActions === id ? null : id))}
 							/>
 						</div>
 					</Popover>

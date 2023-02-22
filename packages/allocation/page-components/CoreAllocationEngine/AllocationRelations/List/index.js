@@ -61,7 +61,6 @@ function List({
 					setConfirmModalState={setConfirmModalState}
 					params={params}
 					setParams={setParams}
-					// selectAll={selectAll}
 					setSelectAll={setSelectAll}
 					searchQuery={searchQuery}
 				/>
@@ -95,7 +94,6 @@ function List({
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
 						checkedRowsId={checkedRowsId}
-						// onResettingBulkMode={() => onChangeCheckbox({ target: { checked: false } })}
 					/>
 				</Modal>
 			)}

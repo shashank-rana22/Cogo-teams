@@ -57,7 +57,7 @@ function BulkUpdateMode({
 
 				<Button
 					size="sm"
-					themeType="primary"
+					themeType="secondary"
 					disabled={isEmpty(checkedRowsId)}
 					onClick={applyBulkFilter}
 				>
@@ -92,7 +92,7 @@ function BulkUpdateMode({
 
 			<Button
 				size="sm"
-				themeType="primary"
+				themeType="secondary"
 				disabled={!confirmModalState.showApproveAllButton}
 				onClick={() => {
 					setConfirmModalState(() => ({
