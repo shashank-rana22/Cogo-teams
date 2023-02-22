@@ -30,8 +30,7 @@ function AgentDetails({
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
-		name   : '',
-		number : '',
+		name: '',
 	});
 
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
