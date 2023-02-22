@@ -3,11 +3,11 @@
     width: 100%;
 }
 
-.question {
+.name {
     white-space: initial;
 }
 
-.topics {
+.description {
 	margin-right: 4;
 	display: flex;
 	flex-wrap: wrap;

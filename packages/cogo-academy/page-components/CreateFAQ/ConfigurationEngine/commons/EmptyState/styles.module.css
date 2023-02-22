@@ -1,0 +1,8 @@
+.empty_state_container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:300px;
+    width:100%;
+    background: #fff;
+}

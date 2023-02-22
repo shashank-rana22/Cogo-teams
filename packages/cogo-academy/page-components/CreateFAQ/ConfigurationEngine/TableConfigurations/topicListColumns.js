@@ -8,16 +8,16 @@ const topicListColumns = [
 	{
 		Header   : 'TOPIC NAME',
 		accessor : (items) => (
-			<div className={styles.question}>
-				{startCase(items?.name)}
+			<div className={styles.name}>
+				{startCase(items?.name) || '--'}
 			</div>
 		),
 	},
 	{
 		Header   : 'TOPIC DESCRIPTION',
 		accessor : (items) => (
-			<div className={styles.topics}>
-				{startCase(items?.description)}
+			<div className={styles.description}>
+				{startCase(items?.description) || '--'}
 			</div>
 		),
 	},
@@ -25,7 +25,7 @@ const topicListColumns = [
 		Header   : 'UPDATED BY',
 		accessor : (items) => (
 			<div className={styles.tags}>
-				{items?.display_name}
+				{startCase(items?.display_name) || '--'}
 			</div>
 		),
 	},
@@ -33,7 +33,7 @@ const topicListColumns = [
 		Header   : 'UPDATED AT',
 		accessor : (items) => (
 			<div className={styles.tags}>
-				{format(items.updated_at, 'dd MMM yy')}
+				{format(items.updated_at, 'dd MMM yy') || '--'}
 			</div>
 		),
 	},
@@ -45,7 +45,6 @@ const topicListColumns = [
 					<IcMDelete height={20} width={20} />
 				</div>
 				<Button themeType="secondary" size="sm" style={{ marginRight: 8 }}>EDIT</Button>
-				<Button themeType="primary" size="sm">VIEW</Button>
 			</div>
 		),
 	},

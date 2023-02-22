@@ -1,15 +1,20 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
 import styles from './styles.module.css';
 
-function Header({ setConfigurationPage = () => {} }) {
+function Header(
+	{
+		activeTag,
+		searchTagsInput,
+		setSearchTagsInput = () => {},
+		setConfigurationPage = () => {},
+		setActiveTag = () => {},
+	},
+) {
 	const router = useRouter();
-	const [searchTagsInput, setSearchTagsInput] = useState('');
-	const [activeTab, setActiveTab] = useState('active');
 
 	const onClickAddTag = () => {
 		router.push(
@@ -29,9 +34,9 @@ function Header({ setConfigurationPage = () => {} }) {
 				<div className={styles.flex_items}>
 					<div className={styles.tabs_container}>
 						<Tabs
-							activeTab={activeTab}
+							activeTab={activeTag}
 							themeType="tertiary"
-							onChange={setActiveTab}
+							onChange={setActiveTag}
 						>
 							<TabPanel name="active" title="Active">
 								{/* <div>Active</div> */}
