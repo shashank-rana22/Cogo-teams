@@ -6,6 +6,7 @@ import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
+import { toTitleCase } from './constant';
 import styles from './styles.module.css';
 
 function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
@@ -20,15 +21,6 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		validFrom, validTo, documentUrls, currentTdsStyle, requestedTdsStyle,
 	} = tdsData;
 
-	const toTitleCase = (str:string) => {
-		const titleCase = str
-			.toLowerCase()
-			.split(' ')
-			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-			.join(' ');
-
-		return titleCase;
-	};
 	const getRatePercentageData = [
 		{ label: 'Current Rate', value: currentTdsRate },
 		{ label: 'Requested Rate', value: requestedTdsRate },
@@ -39,6 +31,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		{ id: '3', label: 'Current TDS style', value: currentTdsStyle },
 		{ id: '4', label: 'New TDS style Requested ', value: requestedTdsStyle },
 	];
+
 	const { useOnAction:OnAction, loading } = useGetTdsData({
 		refetch,
 		setShowTdsModal,

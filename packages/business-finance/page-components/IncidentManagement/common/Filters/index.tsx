@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FilterProps } from '../../interface';
+import { FilterProps } from '../interface';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';

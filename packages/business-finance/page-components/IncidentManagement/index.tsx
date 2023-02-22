@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
-import { IncidentDataInterface } from './interface';
+import { IncidentDataInterface } from './common/interface';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
 

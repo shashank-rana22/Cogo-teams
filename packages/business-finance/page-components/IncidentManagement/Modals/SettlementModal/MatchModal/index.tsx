@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useSettlement from '../../../apisModal/useSettlement';
-import { MatchModalInterface } from '../../../interface';
+import { MatchModalInterface } from '../../../common/interface';
 
 import CardHeader from './CardHeader';
 import ListData from './ListData';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Filters from '../common/Filters';
-import { IncidentDataInterface } from '../interface';
+import { IncidentDataInterface } from '../common/interface';
 import StyledTable from '../StyledTable';
 import getColumns from '../utils/getColumns';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FilterProps } from '../interface';
+import { FilterProps } from '../common/interface';
 
 export interface TooltipInterface {
 	div?:string

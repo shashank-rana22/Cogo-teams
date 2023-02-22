@@ -2,6 +2,7 @@ import { Button, Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMEdit, IcMGrid } from '@cogoport/icons-react';
 
+import { statusColor } from './constant';
 import EditInput from './EditInput';
 import EditInputAllocation from './EditInputAllocation';
 import NostroInput from './NostroInput';
@@ -36,16 +37,6 @@ function Card({
 	} = item || {};
 
 	const checkEdit = accountType === 'REC' || accountType === 'PAY';
-
-	const statusColor = {
-		Unpaid               : '#FEF1DF',
-		Unutilized           : '#FEF1DF',
-		Utilized             : '#CDF7D4',
-		'Partially Paid'     : '#D9EAFD',
-		Paid                 : '#CDF7D4',
-		'Knocked Off'        : '#CDF7D4',
-		'Partially Utilized' : '#D9EAFD',
-	};
 
 	return (
 		<>

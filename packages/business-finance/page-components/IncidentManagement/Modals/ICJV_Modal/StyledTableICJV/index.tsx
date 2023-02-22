@@ -1,7 +1,7 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import { TableProps } from '../../../interface';
+import { TableProps } from '../../../common/interface';
 
 import styles from './styles.module.css';
 
