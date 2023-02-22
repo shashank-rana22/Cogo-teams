@@ -8,11 +8,18 @@ function UserDetails({ userData = {}, loading = false }) {
 	const { name, email, mobile_number, role } = userData || {};
 
 	const showLoading = () => (
-		<div style={{ margin: '16px' }}>
-			<Placeholder margin="0px 0px 16px" width="70%" height="30px" />
+		<div style={{
+			width           : '100%',
+			height          : '100%',
+			display         : 'flex',
+			justifyContent  : 'center',
+			alignItems      : 'center',
+			backgroundColor : '#fff',
+		}}
+		>
+			<Placeholder style={{ borderRadius: '10px', padding: 'auto' }} width="96%" height="88px" />
 		</div>
 	);
-
 	return (
 		<div className={styles.user_info_container}>
 			{loading ? showLoading() : (

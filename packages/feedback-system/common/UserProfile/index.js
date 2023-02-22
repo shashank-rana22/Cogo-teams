@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Placeholder, Loader } from '@cogoport/components';
 import { upperCase } from '@cogoport/utils';
 
 import useGetUserDetails from '../../hooks/useGetUserDetails';
@@ -19,7 +19,18 @@ const renderImage = (loading, data) => {
 	const { picture = '', name = '' } = data;
 
 	if (loading) {
-		return <Loader />;
+		return (
+			<div style={{
+				width          : '100%',
+				height         : '100%',
+				display        : 'flex',
+				justifyContent : 'center',
+				alignItems     : 'center',
+			}}
+			>
+				<Loader />
+			</div>
+		);
 	}
 
 	if (picture) { return <img src={picture} alt="loading" className={styles.img} />; }
@@ -37,6 +48,29 @@ const renderKPI = (kpi) => (
 function UserProfile({ userId = '' }) {
 	const { userData = {}, loading = false } = useGetUserDetails({ userId });
 
+	const showLoading = () => (
+		<div
+			style={{
+				width           : '100%',
+				height          : '100%',
+				display         : 'flex',
+				justifyContent  : 'center',
+				alignItems      : 'center',
+				backgroundColor : '#fff',
+			}}
+		>
+			<Placeholder
+				style={{
+					borderRadius : '10px',
+					padding      : 'auto',
+					marginRight  : '24px',
+				}}
+				width="88%"
+				height="88px"
+			/>
+		</div>
+	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.image_container}>
@@ -47,7 +81,10 @@ function UserProfile({ userId = '' }) {
 				<UserDetails userData={userData} loading={loading} />
 			</div>
 
-			<div className={styles.kpi}>{renderKPI(userData.kpi)}</div>
+			<div className={styles.kpi}>
+				{ loading ? showLoading() : renderKPI(userData.kpi)}
+
+			</div>
 		</div>
 	);
 }
