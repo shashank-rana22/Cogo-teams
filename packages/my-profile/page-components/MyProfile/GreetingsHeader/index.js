@@ -230,6 +230,7 @@ function Greetings({
 								className="secondary"
 								onClick={onOuterClick}
 								themeType="tertiary"
+								disabled={loading}
 							>
 								CANCEL
 							</Button>
@@ -237,7 +238,7 @@ function Greetings({
 								onClick={handleSubmit(onSubmit)}
 								className="primary sm"
 								type="submit"
-								disable={loading}
+								loading={loading}
 							>
 								SAVE
 							</Button>
