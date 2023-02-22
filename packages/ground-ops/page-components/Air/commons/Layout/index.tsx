@@ -36,17 +36,21 @@ function Layout({
 			{totalFields.map((field) => (
 				<div className={styles.row}>
 					{field.map((fieldsItem) => {
-						const { type, heading = '', label } = fieldsItem;
+						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
+						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
 						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
-								<div style={{ width: '100%' }}>
+								<div style={{ width: `${flex}%`, padding: '4px' }}>
 									<div className={styles.heading}>
 										{heading}
-										{' '}
-										{label}
-
 									</div>
+									<h4 style={{
+										height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
+									}}
+									>
+										{label}
+									</h4>
 
 									<FieldArray
 										{...fieldsItem}

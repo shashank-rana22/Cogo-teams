@@ -19,7 +19,14 @@ function NewAWB({ data, loading }) {
 
 	const functions = {
 		handleGenerate: (singleItem:any) => (
-			<Button onClick={() => { handleGenerateMAWB(singleItem); }}>Generate</Button>
+			<Button
+				style={{ border: '1px solid #333', padding: '2px 8px', fontSize: 12 }}
+				themeType="secondary"
+				onClick={() => { handleGenerateMAWB(singleItem); }}
+			>
+				Generate
+
+			</Button>
 		),
 
 	};
