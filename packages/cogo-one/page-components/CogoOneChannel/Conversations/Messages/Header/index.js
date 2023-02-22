@@ -5,7 +5,7 @@ import { useState } from 'react';
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../../constants';
-import hideDetails from '../../../../../utils/hideDetails';
+import HideDetails from '../../../../../utils/hideDetails';
 
 import { ShowContent, TagsPopOver, Assignes } from './HeaderFuncs';
 import styles from './styles.module.css';
@@ -39,7 +39,7 @@ function Header({
 		if (user_name.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
-		return mobile_no ? hideDetails({ data: mobile_no, type: 'number' }) : business_name;
+		return mobile_no ? HideDetails({ data: mobile_no, type: 'number' }) : business_name;
 	};
 	return (
 		<div className={styles.container}>
