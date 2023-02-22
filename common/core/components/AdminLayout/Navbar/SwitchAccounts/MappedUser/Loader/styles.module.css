@@ -1,48 +1,48 @@
 .container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	width: fit-content;
 	padding-top: 5px;
 	cursor: pointer;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .active_profile {
-	padding: 5px 5px 5px 5px;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	margin: 0px 10px 5px 5px;
-	
+	justify-content: space-between;
+	padding: 5px;
+	margin: 0 10px 5px 5px;
+
 	@media (max-width: 576px) {
-        width: 200px;
-    }
+		width: 200px;
+	}
 }
 
 .profile_pic {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	background: #FCDC00;
-	color: #333333;
-	border-radius: 4px;
+	justify-content: center;
 	width: 40px;
 	height: 40px;
+	padding: 2px;
+	overflow: hidden;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 12px;
+	color: #333;
 	text-align: center;
 	vertical-align: middle;
-	font-weight: 700;
-	font-size: 15px;
-	line-height: 12px;
-	padding: 2px 2px;
-	overflow: hidden;
+	background: #fcdc00;
+	border-radius: 4px;
 
 	.img {
 		width: 40px;
 		height: 40px;
-		border-radius: 4px;
 		cursor: pointer;
-		object-fit: cover;
+		border-radius: 4px;
 		transition: 0.5s;
+		object-fit: cover;
 
 		&:hover {
 			transition: 0.5s;
@@ -52,39 +52,39 @@
 }
 
 .profile_name {
+	margin: 0 10px;
 	font-weight: 500;
 	color: #303b67;
-	margin: 0px 10px 0px 10px;
 
 	@media (max-width: 576px) {
 		width: 100px;
-		white-space: nowrap;
-		text-overflow: ellipsis;
 		overflow: hidden;
-	}  
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .profile_email {
+	width: 165px;
+	margin: 0 10px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 500;
 	color: #bdbdbd;
-	margin: 0px 10px 0px 10px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
-	width: 165px;
 
 	@media (max-width: 576px) {
 		width: 100px;
-		white-space: nowrap;
-		text-overflow: ellipsis;
 		overflow: hidden;
-	}  
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .icon_container {
-	margin-right: 10px;
 	padding: 14px 5px;
+	margin-right: 10px;
 }
 
 .profile_container {
@@ -94,15 +94,15 @@
 }
 
 .line {
+	margin: 5px 0 0;
 	border: 1px solid #e0e0e0;
-	margin: 5px 0px 0px 0px;
 }
 
 .circle {
-	height: 2vh;
 	width: 10vw;
-	border: 1px solid #333333;
+	height: 2vh;
+	margin: 0 5px;
+	background: #fff;
+	border: 1px solid #333;
 	border-radius: 100%;
-	background: #ffffff;
-	margin: 0px 5px;
 }

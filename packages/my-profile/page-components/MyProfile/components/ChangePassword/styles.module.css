@@ -1,76 +1,76 @@
 .header_text {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 19px;
-  color: #000;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 19px;
+	color: #000;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  padding: 14px 20px;
-  border-top: 1.5px solid #eee;
+	display: flex;
+	flex-direction: column;
+	padding: 14px 20px;
+	border-top: 1.5px solid #eee;
 
-  & .form-item-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 16px;
-  }
+	& .form-item-container {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		margin-bottom: 16px;
+	}
 
-  & .form-item-label {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 12px;
-    font-weight: 400;
-    color: #858484;
-  }
+	& .form-item-label {
+		margin-top: 0;
+		margin-bottom: 0;
+		font-size: 12px;
+		font-weight: 400;
+		color: #858484;
+	}
 
-  & .core-ui-input-root {
-    padding: 12px;
-  }
+	& .core-ui-input-root {
+		padding: 12px;
+	}
 
-  & .core-ui-input-suffix {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+	& .core-ui-input-suffix {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
 
-    & svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
+		& svg {
+			width: 16px;
+			height: 16px;
+		}
+	}
 
-  & .form-lower-label {
-    margin-bottom: unset;
-    line-height: unset;
-  }
+	& .form-lower-label {
+		margin-bottom: unset;
+		line-height: unset;
+	}
 
-  & .err-msz {
-    padding-left: 0;
-  }
+	& .err-msz {
+		padding-left: 0;
+	}
 }
 
 .password_validator {
-  margin-top: 32px;
+	margin-top: 32px;
 
-  :global {
-    .icon {
-      display: flex;
-      align-items: center;
-      padding-right: 8px;
-    }
+	:global {
+		.icon {
+			display: flex;
+			align-items: center;
+			padding-right: 8px;
+		}
 
-    .message {
-      font-size: 12px;
-      color: #808080;
-    }
-  }
+		.message {
+			font-size: 12px;
+			color: #808080;
+		}
+	}
 }
 
 .label {
-  margin-bottom: 8px;
-  font-size: 16px;
+	margin-bottom: 8px;
+	font-size: 16px;
 }

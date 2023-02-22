@@ -151,9 +151,9 @@
 }
 
 .popover {
-	background: #ffffff;
-	border-radius: 1px solid #333333;
 	position: absolute;
-	margin: 20px;
 	top: 20%;
+	margin: 20px;
+	background: #fff;
+	border-radius: 1px solid #333;
 }
