@@ -9,11 +9,13 @@ function FieldArray({
 	name,
 	control,
 	controls,
-	error,
 	showElements,
 	buttonText = 'Add',
 	showButtons = true,
 	disabled = false,
+	register,
+	value,
+	error,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -21,14 +23,11 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = {};
-	controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
-	});
+	const childEmptyValues = { };
 
 	return (
-		<div className={styles.container}>
-			{fields.map((field, index) => (
+		<div className={styles.child}>
+			{(fields || []).map((field, index) => (
 				<Child
 					{...rest}
 					key={field.id}
@@ -38,19 +37,27 @@ function FieldArray({
 					controls={controls}
 					name={name}
 					remove={remove}
-					error={error?.[index]}
 					showElements={showElements?.[index]}
 					disabled={disabled}
+					register={register}
+					error={error?.[index]}
 				/>
 			))}
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				{showButtons && !disabled ? (
+					<Button
+						style={{ margin: '4px' }}
+						size="sm"
+						themeType="secondary"
+						onClick={() => append(childEmptyValues)}
+					>
+						+
+						{' '}
+						{buttonText}
+					</Button>
+				) : null}
+			</div>
 
-			{showButtons && !disabled ? (
-				<Button themeType="secondary" onClick={() => append(childEmptyValues)}>
-					+
-					{' '}
-					{buttonText}
-				</Button>
-			) : null}
 		</div>
 	);
 }

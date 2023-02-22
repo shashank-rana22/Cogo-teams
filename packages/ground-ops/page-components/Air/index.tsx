@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 
 import Filters from '../Filters';
 
+import ApprovalPending from './components/ApprovalPending';
 import CompletedTasks from './components/CompletedTasks';
 import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
 import NewAWB from './components/NewAWB';
-import UpdateOriginCustom from './components/UpdateOriginCustom';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
 
@@ -32,25 +32,25 @@ const tabs = [
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
-	approval_pending : UpdateOriginCustom,
+	approval_pending : ApprovalPending,
 	approved_awb     : GenerateFinalAirwayBill,
 	completed_awb    : CompletedTasks,
 };
 
 function Air() {
-	const [subActiveTab, setSubActiveTab] = useState(tabs[0].key);
+	const [activeTab, setActiveTab] = useState(tabs[0].key);
 
-	const ActiveTabComponent = tabsComponentMapping[subActiveTab] || null;
+	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
 	const onChange = (view) => {
-		setSubActiveTab(view);
+		setActiveTab(view);
 	};
 
 	const { data, loading, listAPi } = useListShipmentPendingTasks();
 
 	useEffect(() => {
-		if (subActiveTab === 'new_awb') { listAPi(); }
-	}, [subActiveTab]);
+		if (activeTab === 'new_awb') { listAPi(); }
+	}, [activeTab]);
 
 	return (
 		<div>
@@ -67,7 +67,7 @@ function Air() {
 						>
 							{' '}
 							<div
-								className={tab.key === subActiveTab ? styles.sub_container_click : styles.sub_container}
+								className={tab.key === activeTab ? styles.sub_container_click : styles.sub_container}
 							>
 								{tab.label}
 
@@ -87,7 +87,7 @@ function Air() {
 				/>
 				<Filters />
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} data={data} loading={loading} />}
+			{ActiveTabComponent && <ActiveTabComponent key={activeTab} data={data} loading={loading} />}
 		</div>
 	);
 }

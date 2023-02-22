@@ -1,4 +1,4 @@
-export const NewAWBFields = {
+export const ApprovalPendingFields = {
 	fields: [
 		{
 			key    : 'serialId',
@@ -53,10 +53,10 @@ export const NewAWBFields = {
 			func  : 'startCase',
 		},
 		{
-			key   : 'generateDoc',
-			label : 'Generate Document',
+			key   : 'status',
+			label : 'Status',
 			span  : 1.5,
-			func  : 'handleGenerate',
+			func  : 'handleStatus',
 		},
 
 	],

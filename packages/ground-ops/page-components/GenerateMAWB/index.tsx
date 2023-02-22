@@ -1,18 +1,26 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Stepper } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-import FieldArray from './FieldArray';
+import Layout from '../Air/commons/Layout';
+
 import GenerateMawbDoc from './GenerateMawbDoc';
-import getElementController from './getController';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
 import useGenerateDocument from './useGenerateDocument';
 
+const items = [
+	{ title: 'Basic Details', key: 'basic' },
+	{ title: 'Package & Charges Detail', key: 'package' },
+	{ title: 'Handling Details', key: 'handling' },
+];
+
 function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 	const [back, setBack] = useState(false);
 	const { control, watch, handleSubmit, formState: { errors } } = useForm();
+
+	const [activeKey, setActiveKey] = useState('basic');
 
 	const {
 		documentList,
@@ -42,43 +50,60 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.heading}>Generate MAWB</div>
-			<div className={styles.form_container}>
-				<div className={styles.flex}>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<div className={styles.content}>
-							{fields.map((field) => {
-								const { ...rest } = field;
 
-								if (rest.type === 'fieldArray') {
-									return (
-										<div className={styles.list}>
-											<h4>{field.label}</h4>
-											<FieldArray {...rest} control={control} />
-										</div>
-									);
-								}
-								const Element = getElementController(rest.type);
-								return (
-									<div className={styles.list}>
-										<h4>{field.label}</h4>
-										<Element
-											width="100%"
-											control={control}
-											{...rest}
-										/>
-										<div className={styles.error}>{errors[field.name]?.message}</div>
-									</div>
-								);
-							})}
+			<Stepper
+				active={activeKey}
+				setActive={setActiveKey}
+				items={items}
+				// arrowed
+			/>
+			<div className={styles.form_container}>
+
+				{activeKey === 'basic'
+				&& (
+					<>
+						<Layout fields={fields?.basic} control={control} errors={errors} />
+						<div className={styles.button_div}>
+							{!back ? (
+								<Button
+									onClick={handleSubmit(() => setActiveKey('package'))}
+									disabled={documentLoading || generateLoading}
+								>
+									Next
+								</Button>
+							) : null}
 						</div>
+					</>
+				)}
+
+				{activeKey === 'package'
+				&& (
+					<>
+						<Layout fields={fields?.package} control={control} errors={errors} />
+						<div className={styles.button_div}>
+							{!back ? (
+								<Button
+									onClick={handleSubmit(() => setActiveKey('handling'))}
+									disabled={documentLoading || generateLoading}
+								>
+									Next
+								</Button>
+							) : null}
+						</div>
+					</>
+				)}
+
+				{activeKey === 'handling'
+				&& (
+					<>
+						<Layout fields={fields?.handling} control={control} errors={errors} />
 						<div className={styles.button_div}>
 							{!back ? (
 								<Button
 									onClick={handleSubmit(onSubmit)}
 									disabled={documentLoading || generateLoading}
-
 								>
 									{documentLoading || generateLoading
 										? 'Generating'
@@ -86,10 +111,10 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 								</Button>
 							) : null}
 						</div>
-					</form>
-				</div>
-
+					</>
+				)}
 			</div>
+
 			<div className={styles.file_container}>
 				{(back || viewDoc) && (
 					<Modal show={back || viewDoc} size="lg" className={styles.modal_container}>
