@@ -1,8 +1,10 @@
 import { Avatar, Pill, Placeholder } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
 
 import ConversationContainer from './ConversationContainer';
@@ -25,6 +27,12 @@ function AgentDetails({
 		mobile_no,
 		organization_id,
 	} = FormattedMessageData || {};
+
+	const [showAddNumber, setShowAddNumber] = useState(false);
+	const [profileValue, setProfilevalue] = useState({
+		name   : '',
+		number : '',
+	});
 
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
@@ -54,7 +62,9 @@ function AgentDetails({
 	};
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
 
-	const { userData, loading } = useGetUser({ userId, leadUserId, customerId });
+	const { leadUserProfile, loading: leadLoading, leadId } = useCreateLeadProfile();
+
+	const { userData, loading } = useGetUser({ userId, id: { leade_user_id: leadUserId || leadId }, customerId });
 
 	const { mobile_verified, whatsapp_verified } = userData || {};
 
@@ -73,8 +83,23 @@ function AgentDetails({
 		},
 	];
 
+	const handleSubmit = async () => {
+		await leadUserProfile({ profileValue });
+		setShowAddNumber(false);
+		setProfilevalue({});
+	};
+
 	return (isEmpty(userId) && isEmpty(leadUserId)) && isEmpty(mobile_no) ? (
-		<EmptyState type="profile" user_type={user_type} />
+		<EmptyState
+			type="profile"
+			user_type={user_type}
+			leadLoading={leadLoading}
+			handleSubmit={handleSubmit}
+			showAddNumber={showAddNumber}
+			setProfilevalue={setProfilevalue}
+			setShowAddNumber={setShowAddNumber}
+			profileValue={profileValue}
+		/>
 	) : (
 		<>
 			<div className={styles.title}>Profile</div>

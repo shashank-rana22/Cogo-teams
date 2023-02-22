@@ -10,14 +10,14 @@ function useCreateOmniNote({ editNote, fetchListNotes, activeMessageCard, active
 	}, { manual: true });
 
 	const { id } = activeMessageCard || {};
-	const { id: roomId } = activeVoiceCard || {};
+	const { user_number } = activeVoiceCard || {};
 
 	const omniChannelNote = async ({ noteValue }) => {
 		try {
 			await trigger({
 				data: {
-					channel         : 'whatsapp',
-					channel_chat_id : activeTab === 'message' ? id : roomId,
+					channel         : activeTab === 'message' ? 'whatsapp' : 'voice_call',
+					channel_chat_id : activeTab === 'message' ? id : user_number,
 					agent_id        : profile?.user?.id,
 					note_id         : editNote ? '' : undefined,
 					notes_data      : [noteValue],

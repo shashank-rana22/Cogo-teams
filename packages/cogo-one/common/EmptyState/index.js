@@ -1,8 +1,8 @@
 import { Avatar, Modal, Button, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
+// import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
 
 import styles from './styles.module.css';
 
@@ -13,24 +13,24 @@ function EmptyState({
 	user_type = '',
 	userId = '',
 	organizationId = '',
+	setProfilevalue = () => {},
+	profileValue = {},
+	setShowAddNumber = () => {},
+	showAddNumber = false,
+	handleSubmit = () => {},
+	leadLoading = false,
 }) {
-	const [showAddNumber, setShowAddNumber] = useState(false);
-	const [profileValue, setProfilevalue] = useState({
-		name   : '',
-		number : '',
-	});
-
 	const handleClick = () => {
 		setShowAddNumber(true);
 	};
 
-	const { leadUserProfile, loading } = useCreateLeadProfile();
+	// const { leadUserProfile, loading } = useCreateLeadProfile();
 
-	const handleSubmit = async () => {
-		await leadUserProfile({ profileValue });
-		setShowAddNumber(false);
-		setProfilevalue({});
-	};
+	// const handleSubmit = async () => {
+	// 	await leadUserProfile({ profileValue });
+	// 	setShowAddNumber(false);
+	// 	setProfilevalue({});
+	// };
 
 	const renderEmpty = () => {
 		switch (type) {
@@ -150,26 +150,42 @@ function EmptyState({
 		<>
 			<div className={styles.empty_state}>{renderEmpty()}</div>
 			{showAddNumber && (
-				<Modal show={showAddNumber} size="sm" onClose={() => setShowAddNumber(false)}>
+				<Modal
+					show={showAddNumber}
+					size="sm"
+					onClose={() => setShowAddNumber(false)}
+					className={styles.styled_ui_modal_dialog}
+				>
 					<Modal.Header title="Profile Details" />
 					<Modal.Body>
-						<div className={styles.phone_number}>Enter Name</div>
-						<Input
-							size="sm"
-							placeholder="Enter name"
-							value={profileValue?.name}
-							onChange={(a) => setProfilevalue((p) => ({ ...p, name: a }))}
-						/>
-						<div className={styles.phone_number}>Enter Phone Number</div>
-						<Input
-							size="sm"
-							placeholder="Enter number"
-							value={profileValue?.number}
-							onChange={(a) => setProfilevalue((p) => ({ ...p, number: a }))}
-						/>
+						<div className={styles.wrapper}>
+							<div className={styles.styled_label}>Enter Name</div>
+							<Input
+								size="sm"
+								placeholder="Enter name"
+								value={profileValue?.name}
+								onChange={(a) => setProfilevalue((p) => ({ ...p, name: a }))}
+							/>
+						</div>
+						<div className={styles.wrapper}>
+							<div className={styles.styled_label}>Enter Phone Number</div>
+							<Input
+								size="sm"
+								placeholder="Enter number"
+								value={profileValue?.number}
+								onChange={(a) => setProfilevalue((p) => ({ ...p, number: a }))}
+							/>
+						</div>
 					</Modal.Body>
 					<Modal.Footer>
-						<Button size="sm" variant="primary" onClick={handleSubmit} disabled={loading}>Submit</Button>
+						<Button
+							size="sm"
+							themeType="accent"
+							onClick={handleSubmit}
+							disabled={leadLoading}
+						>
+							Submit
+						</Button>
 					</Modal.Footer>
 				</Modal>
 			)}

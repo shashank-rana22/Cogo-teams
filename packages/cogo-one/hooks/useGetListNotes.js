@@ -10,13 +10,13 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	}, { manual: true });
 
 	const { id } = activeMessageCard || {};
-	const { id: roomId } = activeVoiceCard || {};
+	const { user_number } = activeVoiceCard || {};
 
 	const fetchListNotes = async () => {
 		await trigger({
 			params: {
 				filters: {
-					channel_chat_id : activeTab === 'message' ? id : roomId,
+					channel_chat_id : activeTab === 'message' ? id : user_number,
 					agent_id        : active ? profile?.user?.id : undefined,
 				},
 			},

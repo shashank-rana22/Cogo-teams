@@ -246,6 +246,26 @@ const apis = [
 		api         : 'get_sales_invoice_shipment_list',
 		access_type : 'private',
 	},
+	{
+		api          : 'list_kam_desk_surface_shipments',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_currency_conversion',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'add_shipment_invoice_combination_remarks',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

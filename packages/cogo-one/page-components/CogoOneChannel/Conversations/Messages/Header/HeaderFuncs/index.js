@@ -1,8 +1,8 @@
 import { Tooltip, cl, Popover, Select, Button } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty, snakeCase } from '@cogoport/utils';
+import { isEmpty, snakeCase, startCase } from '@cogoport/utils';
 
-// import tagsOptions from '../../../../../../configurations/tags-options';
+import AssigneeAvatar from '../../../../../../common/AssigneeAvatar';
 import { TAGS_COLORS } from '../../../../../../constants';
 
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 					className={cl`${styles.tags} ${styles.margin}`}
 					key={snakeCase(item)}
 				>
-					{item}
+					{startCase(item)}
 				</div>
 			))}
 		</div>
@@ -50,7 +50,7 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 					style={{ background: TAGS_COLORS[index] }}
 					key={snakeCase(item)}
 				>
-					{item}
+					{startCase(item)}
 				</div>
 			))}
 			{showMoreList && showMorePlacement === 'right' && toolTipComp}
@@ -118,5 +118,42 @@ export function TagsPopOver({
 				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} />
 			</div>
 		</Popover>
+	);
+}
+
+export function Assignes({ filteredSpectators = [] }) {
+	const MAX_SHOW_LENGTH = 2;
+	const showMoreList = (filteredSpectators || []).length > MAX_SHOW_LENGTH;
+	const lessList = (filteredSpectators || []).slice(0, MAX_SHOW_LENGTH);
+	const moreList = (filteredSpectators || []).slice(MAX_SHOW_LENGTH);
+
+	const toolTipContent = (
+		<div>
+			{(moreList || []).map(({ agent_name:prevAssignedName = '' }) => (
+				<div className={styles.name}>{prevAssignedName}</div>
+			))}
+		</div>
+	);
+
+	const toolTipComp = (
+		<Tooltip content={toolTipContent} theme="light" placement="bottom">
+			<div className={styles.more_tags}>
+				{moreList?.length}
+				+
+			</div>
+		</Tooltip>
+	);
+
+	return (
+		<div className={styles.flex}>
+			{showMoreList && toolTipComp}
+			{(lessList || []).map(({ agent_name:prevAssignedName = '' }) => (
+				<AssigneeAvatar
+					name={prevAssignedName}
+					type="disabled"
+					key={prevAssignedName}
+				/>
+			))}
+		</div>
 	);
 }

@@ -12,7 +12,7 @@ function RightSideNav({
 }) {
 	const handleClick = (val) => {
 		if (val === 'spot_search' && !loading) {
-			openNewTab('searches');
+			openNewTab({ crm: 'searches', prm: 'searches' });
 		} else {
 			setActiveSelect(val);
 		}
