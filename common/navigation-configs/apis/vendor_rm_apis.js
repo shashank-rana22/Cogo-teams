@@ -76,7 +76,7 @@ const apis = [
 		access_type : 'private',
 		feature     : 'vendor',
 		// service_name : 'vendor',
- 	},
+	},
 ];
 
 export default apis;

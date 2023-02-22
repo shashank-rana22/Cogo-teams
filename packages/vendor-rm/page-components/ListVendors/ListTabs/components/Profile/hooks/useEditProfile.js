@@ -2,7 +2,7 @@ import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/for
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import getControls from '../../../../../OnBoardVendor/ContactDetails/utils/getControls';
+import { getControls } from '../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 
 function useEditProfile({ vendor_details = {} }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -23,13 +23,6 @@ function useEditProfile({ vendor_details = {} }) {
 	fields.forEach((field) => {
 		let newFieldItem = { ...field };
 
-		newFieldItem = {
-			...newFieldItem,
-		          style: {
-				flexBasis: '44%',
-			},
-
-		};
 		if (newFieldItem.name === 'registration_proof_url') {
 			newFieldItem = {
 				...newFieldItem,
@@ -39,15 +32,9 @@ function useEditProfile({ vendor_details = {} }) {
 
 			};
 		}
-
-		if (newFieldItem.name === 'registration_number' || newFieldItem.name === 'registration_number_type') {
-			newFieldItem = {
-				...newFieldItem,
-				disabled: true,
-			};
+		if (newFieldItem.name !== 'registration_number') {
+			newFields.push(newFieldItem);
 		}
-
-		newFields.push(newFieldItem);
 	});
 
 	console.log('newFieldsnewFields', newFields);
@@ -64,6 +51,7 @@ function useEditProfile({ vendor_details = {} }) {
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendor_details?.[field.name]);
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
