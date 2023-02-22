@@ -80,7 +80,6 @@ function DeleteModal({ itemData, refetch }) {
 						disabled={loadingOndelete}
 						onClick={() => {
 							onDeleteAccept();
-							// setShowDeleteModal(false);
 						}}
 					>
 						{status === 'REJECTED' ? 'Accept' : 'Delete'}
