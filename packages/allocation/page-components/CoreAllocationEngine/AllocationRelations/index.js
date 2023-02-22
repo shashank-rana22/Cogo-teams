@@ -27,6 +27,7 @@ function Relations() {
 		debounceQuery,
 		searchQuery,
 		columns,
+		setSelectAll = () => {},
 	} = useAllocationRelations();
 
 	return (
@@ -57,6 +58,7 @@ function Relations() {
 				paginationData={paginationData}
 				getNextPage={getNextPage}
 				searchQuery={searchQuery}
+				setSelectAll={setSelectAll}
 			/>
 
 			{showCreateRelationModal && (

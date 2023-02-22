@@ -18,7 +18,8 @@ function Header({
 	const onChangeToggle = (event) => {
 		setParams((previousParams) => ({
 			...previousParams,
-			filters: {
+			page    : 1,
+			filters : {
 				...((previousParams || {}).filters || {}),
 				status: event?.target?.checked ? 'pending' : 'active',
 			},

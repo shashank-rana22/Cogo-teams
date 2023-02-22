@@ -2,8 +2,8 @@ import { Checkbox, Tooltip, Pill, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
-import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { startCase, format, isEmpty } from '@cogoport/utils';
+import { useState, useEffect, useMemo } from 'react';
 
 import ActionContent from '../page-components/CoreAllocationEngine/AllocationRelations/List/ListItem/ActionContent';
 import styles from '../page-components/CoreAllocationEngine/AllocationRelations/List/styles.module.css';
@@ -12,12 +12,11 @@ const useAllocationRelations = () => {
 	const [showActions, setShowActions] = useState(null);
 
 	const [activeTab, setActiveTab] = useState('active');
+	const [selectAll, setSelectAll] = useState(false);
 
 	const [listItem, setListItem] = useState({});
 
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
-
-	console.log('checkedRowsId', checkedRowsId);
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
@@ -50,13 +49,6 @@ const useAllocationRelations = () => {
 		params,
 	}, { manual: false });
 
-	const getNextPage = (newPage) => {
-		setParams((previousParams) => ({
-			...previousParams,
-			page: newPage,
-		}));
-	};
-
 	useEffect(() => {
 		setParams((prevParams) => ({
 			...prevParams,
@@ -69,55 +61,75 @@ const useAllocationRelations = () => {
 
 	const { list = [], ...paginationData } = data || {};
 
-	const onChangeBodyCheckbox = (event, id) => {
-		if (event.target.checked) {
-			setCheckedRowsId([...checkedRowsId, id]);
-		} else {
-			setCheckedRowsId(checkedRowsId.filter((selectedId) => selectedId !== id));
+	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
+
+	const selectAllHelper = (ListArgument = []) => {
+		const isRowsChecked = currentPageListIds.every((id) => ListArgument.includes(id));
+		if (isRowsChecked !== selectAll) {
+			setSelectAll(isRowsChecked);
 		}
 	};
 
-	const onChangeTableHeadCheckbox = (event) => {
-		const currentPageListIds = list.map(({ id }) => id);
+	useEffect(() => {
+		if (isEmpty(currentPageListIds)) {
+			return;
+		}
 
-		setCheckedRowsId((previousIds) => {
-			let newCheckedRowsIds = previousIds;
+		selectAllHelper(checkedRowsId);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentPageListIds]);
 
-			if (event.target.checked) {
-				currentPageListIds.forEach((listId) => {
-					if (!previousIds.includes(listId)) {
-						newCheckedRowsIds.push(listId);
-					}
-				});
-			} else {
-				newCheckedRowsIds = previousIds.filter((previousId) => !currentPageListIds.includes(previousId));
-			}
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => {
+			let newParams = {};
+			newParams = {
+				...previousParams,
+				page: newPage,
+			};
 
-			return newCheckedRowsIds;
+			return newParams;
 		});
 	};
 
-	const isHeaderChecked = () => {
-		let checked = true;
+	const onChangeBodyCheckbox = (event, id) => {
+		setCheckedRowsId((previousIds) => {
+			let newCheckedIds = [];
 
-		const currentPageListIds = list.map(({ id }) => id);
+			if (event.target.checked) {
+				newCheckedIds = [...previousIds, id];
+			} else {
+				newCheckedIds = previousIds.filter((selectedId) => selectedId !== id);
+			}
 
-		currentPageListIds.forEach((selectedId) => {
-			checked = checked && checkedRowsId.include(selectedId);
+			selectAllHelper(newCheckedIds);
+
+			return newCheckedIds;
 		});
+	};
 
-		return checked;
+	const onChangeTableHeadCheckbox = (event) => {
+		setCheckedRowsId((previousIds) => {
+			let newCheckedRowsIds = [...previousIds];
+
+			if (event.target.checked) {
+				newCheckedRowsIds = [...newCheckedRowsIds, ...currentPageListIds];
+			} else {
+				newCheckedRowsIds = previousIds.filter((id) => !currentPageListIds.includes(id));
+			}
+
+			setSelectAll(event.target.checked);
+
+			return [...new Set(newCheckedRowsIds)];
+		});
 	};
 
 	const columns = [
 		{
 			id     : 'check',
-			Header : (
-				<Checkbox
-					checked={isHeaderChecked}
-					onChange={onChangeTableHeadCheckbox}
-				/>
-			),
+			Header : <Checkbox
+				checked={selectAll}
+				onChange={(event) => onChangeTableHeadCheckbox(event)}
+			/>,
 			accessor: ({ id = '' }) => (
 				<Checkbox
 					checked={checkedRowsId.includes(id)}
@@ -273,6 +285,7 @@ const useAllocationRelations = () => {
 		debounceQuery,
 		searchQuery,
 		columns,
+		setSelectAll,
 	};
 };
 

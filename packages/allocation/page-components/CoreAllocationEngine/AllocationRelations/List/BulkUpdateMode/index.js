@@ -1,18 +1,16 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function BulkUpdateMode({
-	// list,
 	checkedRowsId = [],
 	setCheckedRowsId = () => {},
 	confirmModalState,
 	setConfirmModalState = () => {},
 	params,
 	setParams = () => {},
-	// selectAll,
-	// setSelectAll = () => {},
+	setSelectAll = () => {},
 	searchQuery,
 }) {
 	const applyBulkFilter = async () => {
@@ -20,6 +18,7 @@ function BulkUpdateMode({
 			...prev,
 			showApproveAllButton: true,
 		}));
+
 		setParams({
 			...params,
 			page    : 1,
@@ -31,33 +30,16 @@ function BulkUpdateMode({
 		});
 	};
 
-	// const onSelectAll = (val) => {
-	// 	const listIds = list.map(({ id }) => id);
-
-	// 	setCheckedRowsId((previousIds) => {
-	// 		let newCheckedRowsIds = previousIds;
-
-	// 		if (val) {
-	// 			listIds.forEach((listId) => {
-	// 				if (!previousIds.includes(listId)) {
-	// 					newCheckedRowsIds.push(listId);
-	// 				}
-	// 			});
-	// 		} else {
-	// 			newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
-	// 		}
-
-	// 		return newCheckedRowsIds;
-	// 	});
-	// };
-
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
+
+		setSelectAll(false);
 
 		setConfirmModalState((prev) => ({
 			...prev,
 			showApproveAllButton: false,
 		}));
+
 		setParams((previousParams) => ({
 			...(previousParams || {}),
 			filters: {
@@ -65,8 +47,6 @@ function BulkUpdateMode({
 				id: undefined,
 			},
 		}));
-
-		// setSelectAll('');
 	};
 
 	const selectedItemsForUpdate = !isEmpty(checkedRowsId) ? checkedRowsId.length : '';

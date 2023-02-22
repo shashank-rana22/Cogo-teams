@@ -1,6 +1,6 @@
-import { Modal, Pagination, Table, Tooltip, Pill } from '@cogoport/components';
+import { Modal, Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
@@ -21,11 +21,11 @@ function List({
 	confirmModalState,
 	setConfirmModalState = () => {},
 	paginationData = {},
-	getNextPage,
 	searchQuery,
+	setSelectAll = () => {},
+	getNextPage = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
-	const [selectAll, setSelectAll] = useState(false);
 
 	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
 
@@ -55,27 +55,6 @@ function List({
 		}));
 	};
 
-	// const onChangeCheckbox = (e) => {
-	// 	if (!e.target.checked) {
-	// 		setCheckedRowsId([]);
-	// 		setSelectAll('');
-	// 		setConfirmModalState((prev) => ({
-	// 			...prev,
-	// 			showApproveAllButton: e.target.checked,
-	// 		}));
-
-	// 		if ((!isEmpty(checkedRowsId))) {
-	// 			setParams((p) => ({
-	// 				...p,
-	// 				filters: {
-	// 					...((p || {}).filters || {}),
-	// 					id: undefined,
-	// 				},
-	// 			}));
-	// 		}
-	// 	}
-	// };
-
 	return (
 		<div>
 			{activeTab === 'pending' ? (
@@ -87,24 +66,15 @@ function List({
 					setConfirmModalState={setConfirmModalState}
 					params={params}
 					setParams={setParams}
-					selectAll={selectAll}
+					// selectAll={selectAll}
 					setSelectAll={setSelectAll}
 					searchQuery={searchQuery}
 				/>
 			) : null}
 
 			<div className={styles.list_container}>
-				{/* {list.map((item) => (
-					<ListItem
-						key={item.id}
-						item={item}
-						checkedRowsId={checkedRowsId}
-						setCheckedRowsId={setCheckedRowsId}
-						activeTab={activeTab}
-						setConfirmModalState={setConfirmModalState}
-					/>
-				))} */}
 				<div className={styles.table_container}>
+
 					<Table className={styles.request_table} data={list} columns={modifiedColumns} loading={loading} />
 				</div>
 			</div>
