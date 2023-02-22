@@ -391,6 +391,218 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'create_shipment_container_exception',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_task_config',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api         : 'list_shipment_operating_procedures',
+		access_type : 'private',
+	},
+	{
+		api         : 'list_shipment_flash_booking_rates',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_shipment_elligible_booking_document',
+		access_type : 'private',
+	},
+	{
+		api          : 'create_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_operating_instruction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_collection_party',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_trade_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_trade_party_poc',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_shipment_booking_confirmation_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_buy_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_fault_alarm',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_fault_alarm',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_trade_partner',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_stakeholders',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_trade_partners',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_spot_search',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_all_exchange_rates',
+		access_type  : 'private',
+		service_name : 'exchange_rate',
+	},
+	{
+		api          : 'send_invoice_email',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_service_providers',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_sage_ar_outstandings',
+		access_type  : 'private',
+		service_name : 'sage',
+	},
+	{
+		api          : 'get_ftl_freight_rate_cards',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
+	},
+	{
+		api          : 'get_haulage_freight_rate_cards',
+		access_type  : 'private',
+		service_name : 'haulage_freight_rate',
+	},
+	{
+		api          : 'verify_invoice_approval_otp',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_invoice_approval_otp',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_domestic_air_shipment_weightment',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_domestic_air_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_auto_lr_generation_data',
+		access_type  : 'public',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_operating_instruction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_rate_charge_codes',
+		access_type  : 'private',
+		service_name : 'rate_sheet',
+	},
+	{
+		api          : 'generate_do_noc_certificate',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'generate_do_certificate',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_nomination_notification',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_nomination_revert_email_notification',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_organization_document',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_shipment_contract_quotation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_trade_documents',
+		access_type  : 'private',
+		service_name : 'trade',
+	},
+	{
+		api          : 'create_awb_inventory',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_ltl_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_awb_inventories',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 
 ];
 
