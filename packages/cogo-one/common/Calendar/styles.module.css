@@ -1,0 +1,16 @@
+.calendar{
+    display: flex;
+    gap: 10px;
+}
+
+.navBtn{
+    outline: none;
+    border: none;
+    padding: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.inactive{
+    cursor:not-allowed;
+}

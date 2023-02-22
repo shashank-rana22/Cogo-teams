@@ -1,0 +1,34 @@
+.calendar{
+    font-family: 'Poppins';
+    font-style: normal;
+    flex:1;
+    display: flex;
+    gap: 10px;
+}
+
+.dateContainer{
+    flex:1;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    padding: auto;
+    padding-top:5px;
+    height: 50px;
+}
+
+.dayH1{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #828282;
+}
+
+.dayH2{
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 22px;
+    text-align: center;
+    color: #828282;
+
+    white-space: nowrap;
+}
