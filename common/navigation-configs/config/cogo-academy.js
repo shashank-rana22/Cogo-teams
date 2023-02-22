@@ -10,6 +10,10 @@ const cogoAcademy = {
 		navigation : 'cogo_academy',
 		isMainNav  : false,
 	},
+	'/[partner_id]/learning/faq/create/question': {
+		navigation : 'cogo_academy',
+		isMainNav  : false,
+	},
 	'/[partner_id]/learning/faq': {
 		navigation : 'cogo_academy-faq',
 		isMainNav  : true,

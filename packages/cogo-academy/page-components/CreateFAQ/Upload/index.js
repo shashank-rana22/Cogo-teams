@@ -1,5 +1,6 @@
 import { FileSelect, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
@@ -24,10 +25,15 @@ function Upload() {
 	const { general:{ query : { type } } } = useSelector((state) => (state));
 
 	const obj = PAGE_MAPPING[type];
+	const router = useRouter();
+
+	const onClickBackIcon = () => {
+		router.back();
+	};
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.back_div}>
+			<div role="presentation" className={styles.back_div} onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
