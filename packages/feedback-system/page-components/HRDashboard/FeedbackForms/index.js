@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
@@ -52,9 +53,11 @@ function FeedbackForms() {
 		Router.push('/feedback-system/hr-dashboard');
 	};
 
-	const { data = [], loading = false } = useListDepartments();
+	const { data = [], loading = true } = useListDepartments();
 
 	const { list: departments = [] } = data;
+
+	const dummyArray = ['ok', 'ok1', 'harry', 'potter', 'lorem', 'ipsum', 'lorem', 'lorem', 'ipsum'];
 
 	useEffect(() => {
 		const newDesignationFormStatus = getFormResubmission(department, designation);
@@ -104,15 +107,28 @@ function FeedbackForms() {
 
 			<div className={styles.form_container}>
 				<div className={styles.department_status} style={{ flex: '0.3' }}>
-					{(departments || []).map((dept) => (
-						<Department
-							department={dept}
-							setFormsParams={setFormsParams}
-							designation={designation}
-							openAccordion={openAccordion}
-							setOpenAccordion={setOpenAccordion}
-						/>
-					))}
+					{ loading ? (
+						<div
+							className={styles.left_list_div}
+						>
+							{dummyArray.map(() => (
+								<Placeholder
+									width="100%"
+									height="72px"
+									className={styles.loading_left}
+								/>
+							))}
+						</div>
+					)
+						: ((departments || [])).map((dept) => (
+							<Department
+								department={dept}
+								setFormsParams={setFormsParams}
+								designation={designation}
+								openAccordion={openAccordion}
+								setOpenAccordion={setOpenAccordion}
+							/>
+						))}
 				</div>
 
 				<div className={styles.form_section} style={{ flex: '0.7' }}>

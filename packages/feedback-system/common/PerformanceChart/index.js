@@ -112,12 +112,23 @@ function PerformanceChart({ user_id = '' }) {
 				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
 			</div>
 
-			{/* <Placeholder
-				style={{ marginBottom: '16px', borderRadius: '50%/50%', marginRight: '3%' }}
-				width="25%"
-				height="160px"
-			/>
-			<Placeholder style={{ marginBottom: '16px', borderRadius: '50%/50%' }} width="25%" height="160px" /> */}
+			{/* <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+				<Placeholder
+					style={{
+						marginBottom : '16px',
+						borderRadius : '50%',
+						display      : 'flex',
+						// justifyContent : 'center',
+						// alignItems     : 'center',
+						marginLeft   : 'auto',
+						marginRight  : 'auto',
+					}}
+					width="30%"
+					height="160px"
+				/>
+				<Placeholder style={{ marginBottom: '32px' }} width="30%" height="80px" />
+			</div> */}
+
 		</div>
 	);
 
@@ -135,9 +146,95 @@ function PerformanceChart({ user_id = '' }) {
 					onChange={setPerformanceFilter}
 				/> */}
 			</div>
-			{loading && showLoading()}
 
-			<div className={styles.chart_section}>
+			{loading ? showLoading() : (
+				<div className={styles.chart_section}>
+					{(!loading && lineData1?.length) > 0 ? (
+						<div className={styles.line_graph}>
+							<ResponsiveLine
+								data={newlineData}
+								margin={{ top: 30, right: 110, bottom: 50, left: 60 }}
+								xScale={{
+									type    : 'point',
+									stacked : true,
+									min     : 0,
+									max     : 12,
+								}}
+								yScale={{
+									type     : 'linear',
+									tickSize : 5,
+									min      : 0,
+									max      : 5,
+									reverse  : false,
+									stacked  : false,
+								}}
+								yFormat=" >-.2f"
+								curve="natural"
+								lineWidth={3}
+								axisTop={null}
+								axisRight={null}
+								axisBottom={{
+									orient         : 'bottom',
+									tickSize       : 5,
+									tickPadding    : 5,
+									tickRotation   : 0,
+									legend         : 'Months',
+									legendOffset   : 36,
+									legendPosition : 'middle',
+								}}
+								axisLeft={{
+									orient         : 'left',
+									tickValues     : 5,
+									tickSize       : 5,
+									tickPadding    : 5,
+									tickRotation   : 0,
+									legend         : 'KPI',
+									legendOffset   : -40,
+									legendPosition : 'middle',
+								}}
+								enableGridX={false}
+								pointSize={5}
+								pointBorderWidth={7}
+								pointLabelYOffset={-12}
+								areaOpacity={0.25}
+								useMesh
+								colors={['#F2E3C3', '#F9AE64', '#828282']}
+								colorBy="index"
+							/>
+						</div>
+
+					) : (
+						<div className={styles.empty_container}>
+							<EmptyState
+								height={140}
+								width={180}
+								emptyText="Performance Stats Not Found"
+								textSize="12px"
+								flexDirection="column"
+							/>
+						</div>
+					)}
+
+					{(!loading && PieData1?.length > 0) ? (
+
+						<div className={styles.pie_chart}>
+							<TeamPieChart data={PieData} />
+						</div>
+					) : (
+						<div className={styles.empty_container}>
+							<EmptyState
+								height={140}
+								width={180}
+								emptyText="Pie Stats Not Found"
+								textSize="12px"
+								flexDirection="column"
+							/>
+						</div>
+					)}
+				</div>
+			)}
+
+			{/* <div className={styles.chart_section}>
 				{(!loading && lineData1?.length) > 0 ? (
 					<div className={styles.line_graph}>
 						<ResponsiveLine
@@ -220,7 +317,7 @@ function PerformanceChart({ user_id = '' }) {
 						/>
 					</div>
 				)}
-			</div>
+			</div> */}
 		</div>
 	);
 }
