@@ -5,7 +5,9 @@ import { useState } from 'react';
 
 import useGetBankData from '../../apisModal/useGetBankData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
+import ViewButton from '../../common/ViewButton';
 
+import { optionsManual, options } from './constant';
 import styles from './styles.module.css';
 
 function BankDetails({
@@ -50,23 +52,6 @@ function BankDetails({
 		value,
 	});
 
-	const options = [
-		{
-			label : 'Approve',
-			value : 'true',
-			name  : '',
-		},
-		{
-			label : 'Reject',
-			value : 'false',
-			name  : '',
-		}];
-
-	const optionsManual = [
-		{ label: 'Penny Testing', value: 'PENNY', name: '' },
-		{ label: 'Manual Verification', value: 'MANUAL', name: '' },
-	];
-
 	const onApprove = () => {
 		OnAction('APPROVED');
 	};
@@ -90,15 +75,7 @@ function BankDetails({
 	return (
 		<div>
 			<div>
-				<Button
-					style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-					themeType="secondary"
-					onClick={() => {
-						setShowBankModal(true);
-					}}
-				>
-					View
-				</Button>
+				<ViewButton state={setShowBankModal} />
 			</div>
 			{showBankModal && (
 				<Modal

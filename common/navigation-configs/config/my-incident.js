@@ -1,5 +1,5 @@
 const myIncident = {
-	'/[partner_id]/my_incident/[activeIncidentTab]': {
+	'/[partner_id]/my-incident/[activeIncidentTab]': {
 		navigation : 'my_incident',
 		isMainNav  : true,
 	},

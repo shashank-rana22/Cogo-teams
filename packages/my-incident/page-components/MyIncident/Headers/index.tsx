@@ -23,8 +23,8 @@ function Headers({ activeTab, setActiveTab, data, push }:ItemProps) {
 	const handleTabChange = (v) => {
 		setActiveTab(v);
 		push(
-			'/my_incident/[activeIncidentTab]',
-			`/my_incident/${v}`,
+			'/my-incident/[activeIncidentTab]',
+			`/my-incident/${v}`,
 		);
 	};
 	return (

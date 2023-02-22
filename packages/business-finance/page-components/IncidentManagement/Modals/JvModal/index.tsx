@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import useGetJvData from '../../apisModal/useGetJvData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
+import ViewButton from '../../common/ViewButton';
 
 import styles from './styles.module.css';
 
@@ -59,15 +60,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 	return (
 		<div>
 			<div>
-				<Button
-					style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-					themeType="secondary"
-					onClick={() => {
-						setShowJVModal(true);
-					}}
-				>
-					View
-				</Button>
+				<ViewButton state={setShowJVModal} />
 			</div>
 			{showJvModal && (
 				<Modal

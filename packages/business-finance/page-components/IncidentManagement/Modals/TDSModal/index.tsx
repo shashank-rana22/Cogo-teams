@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
+import ViewButton from '../../common/ViewButton';
 
 import styles from './styles.module.css';
 
@@ -55,15 +56,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 	return (
 		<div>
 			<div>
-				<Button
-					style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-					themeType="secondary"
-					onClick={() => {
-						setShowTdsModal(true);
-					}}
-				>
-					View
-				</Button>
+				<ViewButton state={setShowTdsModal} />
 			</div>
 			{showTdsModal && (
 				<Modal

@@ -1,5 +1,5 @@
 {
-  "name": "@cogoport/my_incident",
+  "name": "@cogoport/my-incident",
   "version": "0.1.0",
   "description": "Package for Incident Management",
   "private": true,

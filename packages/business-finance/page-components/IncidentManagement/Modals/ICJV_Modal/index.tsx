@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import useGetInterJvData from '../../apisModal/useGetInterJvData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
+import ViewButton from '../../common/ViewButton';
 
 import controls from './contols';
 import StyledTableICJV from './StyledTableICJV';
@@ -31,15 +32,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 	return (
 		<div>
 			<div>
-				<Button
-					style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-					themeType="secondary"
-					onClick={() => {
-						setShowICJvModal(true);
-					}}
-				>
-					View
-				</Button>
+				<ViewButton state={setShowICJvModal} />
 			</div>
 			{showICJvModal && (
 				<Modal

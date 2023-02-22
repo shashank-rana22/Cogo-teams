@@ -3,4 +3,4 @@ declare module '@cogoport/store';
 declare module '@cogoport/layout';
 declare module '@cogoport/components';
 declare module '@cogoport/next';
-declare module '@cogoport/my_incident/page-components/MyIncident';
+declare module '@cogoport/my-incident/page-components/MyIncident';

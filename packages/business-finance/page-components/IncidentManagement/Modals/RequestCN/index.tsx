@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
+import ViewButton from '../../common/ViewButton';
 
 import { CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS, REVENUE_OPTIONS } from './credit-note-config';
 import styles from './style.module.css';
@@ -163,15 +164,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	return (
 		<div>
 			<div>
-				<Button
-					style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-					themeType="secondary"
-					onClick={() => {
-						setShowTdsModal(true);
-					}}
-				>
-					View
-				</Button>
+				<ViewButton state={setShowTdsModal} />
 			</div>
 			{showTdsModal && (
 				<Modal

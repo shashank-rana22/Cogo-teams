@@ -1,7 +1,8 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import ApproveAndReject from '../../common/ApproveAndRejectData';
+import ViewButton from '../../common/ViewButton';
 
 import MatchModal from './MatchModal';
 import styles from './styles.module.css';
@@ -24,15 +25,7 @@ function SettlementModal({ settlementData, id, refetch, row, isEditable = true }
 	return (
 		<div>
 			<div>
-				<Button
-					style={{ height: '30px', fontSize: '12px', width: '70px', fontWeight: '600' }}
-					themeType="secondary"
-					onClick={() => {
-						setShow(true);
-					}}
-				>
-					View
-				</Button>
+				<ViewButton state={setShow} />
 			</div>
 			{
 				show && 			(
