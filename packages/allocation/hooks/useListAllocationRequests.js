@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../page-components/CoreAllocationEngine/AllocationRequests/List/Actions';
 import styles from '../page-components/CoreAllocationEngine/styles.module.css';
@@ -25,7 +25,7 @@ const useListAllocationRequests = () => {
 	const [params, setParams] = useState({
 		sort_by       : 'created_at',
 		sort_type     : 'desc',
-		page_limit    : 10,
+		page_limit    : 5,
 		page          : 1,
 		data_required : true,
 		filters       : {
@@ -43,6 +43,26 @@ const useListAllocationRequests = () => {
 	}, { manual: false });
 
 	const [{ loading, data }, refetch] = apiData;
+
+	const { list = [] } = data || {};
+
+	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
+
+	const selectAllHelper = (listArgument = []) => {
+		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
+		if (isRowsChecked !== selectAll) {
+			setSelectAll(isRowsChecked);
+		}
+	};
+
+	useEffect(() => {
+		if (isEmpty(currentPageListIds)) {
+			return;
+		}
+
+		selectAllHelper(checkedRowsId);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentPageListIds]);
 
 	const onChangeParams = useCallback((values = {}) => {
 		setParams((pv) => ({
@@ -68,14 +88,6 @@ const useListAllocationRequests = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params?.filters?.service_type]);
 
-	useEffect(() => {
-		if (selectAll) {
-			setSelectAll(false);
-			setCheckedRowsId([]);
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params.page]);
-
 	const applyBulkFilter = async () => {
 		setParams({
 			...params,
@@ -88,48 +100,13 @@ const useListAllocationRequests = () => {
 		});
 	};
 
-	const onSelectAll = (val) => {
-		const listIds = (data.list || []).map(({ id }) => id);
-
-		setCheckedRowsId((previousIds) => {
-			let newCheckedRowsIds = previousIds;
-
-			if (val) {
-				listIds.forEach((listId) => {
-					if (!previousIds.includes(listId)) {
-						newCheckedRowsIds.push(listId);
-					}
-				});
-			} else {
-				newCheckedRowsIds = previousIds.filter((previousId) => !listIds.includes(previousId));
-			}
-
-			return newCheckedRowsIds;
-		});
-	};
-
-	const onChangeCheckbox = (e) => {
-		if (!e.target.checked) {
-			setCheckedRowsId([]);
-			setSelectAll('');
-			if (!isEmpty(checkedRowsId)) {
-				setParams((pv) => ({
-					...pv,
-					filters: {
-						...(pv.filters || {}),
-						id: undefined,
-					},
-				}));
-			}
-		}
-	};
-
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
 
 		setParams((pv) => ({
 			...pv,
-			filters: {
+			page    : 1,
+			filters : {
 				...(pv.filters || {}),
 				id: undefined,
 			},
@@ -138,9 +115,36 @@ const useListAllocationRequests = () => {
 		setSelectAll(false);
 	};
 
-	const onItemChangeInChips = (val) => {
-		setSelectAll(val);
-		onSelectAll(val);
+	const onChangeBodyCheckbox = (event, id) => {
+		setCheckedRowsId((previousIds) => {
+			let newCheckedIds = [];
+
+			if (event.target.checked) {
+				newCheckedIds = [...previousIds, id];
+			} else {
+				newCheckedIds = previousIds.filter((selectedId) => selectedId !== id);
+			}
+
+			selectAllHelper(newCheckedIds);
+
+			return newCheckedIds;
+		});
+	};
+
+	const onChangeTableHeadCheckbox = (event) => {
+		setCheckedRowsId((previousIds) => {
+			let newCheckedRowsIds = [...previousIds];
+
+			if (event.target.checked) {
+				newCheckedRowsIds = [...newCheckedRowsIds, ...currentPageListIds];
+			} else {
+				newCheckedRowsIds = previousIds.filter((id) => !currentPageListIds.includes(id));
+			}
+
+			setSelectAll(event.target.checked);
+
+			return [...new Set(newCheckedRowsIds)];
+		});
 	};
 
 	const columns = [
@@ -148,31 +152,18 @@ const useListAllocationRequests = () => {
 			id     : 'checkbox',
 			key    : 'checkbox',
 			Header : <Checkbox
-				label=""
 				checked={selectAll}
-				onChange={
-			(e) => onItemChangeInChips(e?.target?.checked)
-}
+				onChange={(event) => onChangeTableHeadCheckbox(event)}
 				className={styles.select_all_checkbox}
+				disabled={loading}
 			/>,
-			accessor: ({ id }) => {
-				const isSelected = checkedRowsId.includes(id);
+			accessor: ({ id = '' }) => (
+				<Checkbox
+					checked={checkedRowsId.includes(id)}
+					onChange={(event) => onChangeBodyCheckbox(event, id)}
+				/>
 
-				return (
-					<Checkbox
-						label=""
-						checked={isSelected}
-						onChange={() => {
-							if (!isSelected) {
-								setCheckedRowsId([...checkedRowsId, id]);
-							} else {
-								setCheckedRowsId(checkedRowsId.filter((rowId) => rowId !== id));
-							}
-						}}
-						className={styles.bulk_select_checkbox}
-					/>
-				);
-			},
+			),
 		},
 		{
 			key      : 'id',
@@ -278,12 +269,9 @@ const useListAllocationRequests = () => {
 		setSearchValue,
 		onClearSelection,
 		applyBulkFilter,
-		onChangeCheckbox,
-		onSelectAll,
 		selectAll,
 		checkedRowsId,
 		setCheckedRowsId,
-		onItemChangeInChips,
 		showModal,
 		setShowModal,
 		onCloseModal,
