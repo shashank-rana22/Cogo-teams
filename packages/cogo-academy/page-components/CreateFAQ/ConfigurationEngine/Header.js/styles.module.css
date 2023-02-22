@@ -2,7 +2,6 @@
   font-size: 24px;
   font-weight: 600;
   color: #221f20;
-  padding:8px 0;
 }
 
 .back_container{
@@ -20,5 +19,6 @@
   display: flex;
   align-items: center;
   padding-right: 8px;
+  cursor:pointer;
 }
 

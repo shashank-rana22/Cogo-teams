@@ -17,13 +17,9 @@ function Header() {
 					<IcMArrowBack width={20} height={20} />
 				</div>
 
-				<div>
-					Back to FAQs
+				<div className={styles.configuration_text}>
+					Configuration Engine
 				</div>
-			</div>
-
-			<div className={styles.configuration_text}>
-				Configuration Engine
 			</div>
 
 		</div>
