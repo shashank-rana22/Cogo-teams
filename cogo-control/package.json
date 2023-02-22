@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@cogoport/access-management": "workspace:0.1.0",
+    "@cogoport/allocation": "workspace:0.1.0",
+    "@cogoport/my-incident":"workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/business-finance": "workspace:0.1.0",
     "@cogoport/cogo-one": "workspace:0.1.0",
