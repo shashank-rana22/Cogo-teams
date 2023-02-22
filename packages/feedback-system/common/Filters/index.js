@@ -17,24 +17,24 @@ const DEPARTMENT_MAPPING = {
 function Filters({ params = {}, setParams = () => {} }) {
 	const deptControls = departmentControls.find((control) => control.name === 'department');
 
-	const roleControls = params?.Department ? departmentControls.find((control) => control.name
-	=== DEPARTMENT_MAPPING[params?.Department]) : {};
+	const roleControls = params.Department ? departmentControls.find((control) => control.name
+	=== DEPARTMENT_MAPPING[params.Department]) : {};
 
 	const managerControls = useGetControls().find((control) => control.name === 'manager_id');
-	const monthControls = getMonthControls(params?.Year);
+	const monthControls = getMonthControls(params.Year);
 
 	const { watch, control: managerControl = {} } = useForm();
 	const manager = watch('manager_id');
 
 	const setFilter = (val, type) => {
-		setParams({ ...params, [type]: val });
+		setParams({ ...params, [type]: val, Page: 1 });
 	};
 
 	useEffect(() => {
 		setParams({
 			...params,
-			ManagerID: manager || undefined,
-
+			ManagerID : manager || undefined,
+			Page      : 1,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [manager]);
@@ -43,18 +43,18 @@ function Filters({ params = {}, setParams = () => {} }) {
 
 		<div className={styles.department_select}>
 			<Select
-				value={params?.Department}
+				value={params.Department}
 				onChange={(val) => setFilter(val, 'Department')}
 				options={deptControls.options}
 				placeholder="Department..."
 				style={{ marginRight: '8px' }}
-				isClearable={!params?.Designation}
+				isClearable={!params.Designation}
 			/>
 			<Select
-				value={params?.Designation}
+				value={params.Designation}
 				onChange={(val) => setFilter(val, 'Designation')}
 				options={roleControls.options}
-				disabled={!params?.Department}
+				disabled={!params.Department}
 				placeholder="Role..."
 				style={{ marginRight: '8px' }}
 				isClearable
@@ -67,18 +67,18 @@ function Filters({ params = {}, setParams = () => {} }) {
 			/>
 
 			<Select
-				value={params?.Year}
+				value={params.Year}
 				onChange={(val) => setFilter(val, 'Year')}
 				placeholder="Select Year"
 				style={{ marginRight: '8px' }}
 				options={monthControls.year.options}
-				isClearable={!params?.Month}
+				isClearable={!params.Month}
 			/>
 
 			<Select
-				value={params?.Month}
+				value={params.Month}
 				onChange={(val) => setFilter(val, 'Month')}
-				disabled={!params?.Year}
+				disabled={!params.Year}
 				placeholder="Select Month"
 				style={{ marginRight: '8px' }}
 				options={monthControls.month.options}

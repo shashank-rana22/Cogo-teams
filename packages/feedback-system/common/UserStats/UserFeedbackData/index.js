@@ -11,7 +11,7 @@ function UserFeedbackData({ userId = '' }) {
 
 	const { list: FeedbackList, page_limit, total_count } = feedbackData || {};
 
-	const columnsToShow = ['name', 'designation', 'rating', 'feedback', 'month'];
+	const columnsToShow = ['name', 'designation', 'manager', 'rating', 'month', 'feedback'];
 
 	const columns = useGetColumns({ columnsToShow });
 

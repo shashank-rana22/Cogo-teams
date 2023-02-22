@@ -34,7 +34,7 @@ function TeamMembersList({
 
 	const columnsMapping = [
 		{
-			key   : 'count',
+			key   : 'team_count',
 			label : 'Team Size',
 			flex  : 2.5,
 		},

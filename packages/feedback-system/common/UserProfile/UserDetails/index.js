@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function UserDetails({ userData = {}, loading = false }) {
-	const { name, email, mobile_number, role } = userData || {};
+	const { name, email, mobile_number, designation } = userData || {};
 
 	const showLoading = () => (
 		<div style={{
@@ -29,7 +29,7 @@ function UserDetails({ userData = {}, loading = false }) {
 							{startCase(name) || '---'}
 						</div>
 						<div className={styles.role}>
-							{startCase(role) || '---'}
+							{startCase(designation) || '---'}
 						</div>
 					</div>
 					<div className={styles.info_box_2}>

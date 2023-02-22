@@ -20,7 +20,7 @@ function UserTableData({
 
 	return (
 		<div className={styles.table_container}>
-			{isEmpty(list) > 0
+			{!isEmpty(list)
 				? (
 					<Table
 						columns={columns}
