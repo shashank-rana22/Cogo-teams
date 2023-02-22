@@ -1,6 +1,8 @@
 .user_info_container {
 	display: flex;
 	align-items: center;
+	justify-content:space-around;
+	padding:0 50px;
 	height: 100%;
 }
 
