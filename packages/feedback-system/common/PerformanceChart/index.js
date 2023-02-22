@@ -37,7 +37,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 	const {
 		performanceStatsList = [],
 		loading,
-	} = useGetFeedbackPerformanceStats({ user_id, Month, Year, ManagerID });
+	} = useGetFeedbackPerformanceStats({ userId, Month, Year, ManagerID });
 
 	const lineChartlist = [];
 
