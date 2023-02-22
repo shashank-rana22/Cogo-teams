@@ -5,10 +5,10 @@ const useListManagers = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		filters: {
-		},
-		page       : 1,
-		page_limit : 20,
+		// filters: {
+		// },
+		Page      : 1,
+		PageLimit : 20,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }] = useRequest({
@@ -17,16 +17,15 @@ const useListManagers = ({
 		params,
 	}, { manual: false });
 
-	const setPage = (p) => { setParams({ ...params, page: p }); };
+	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		setParams({
 			...params,
-			filters:
-		{ ...(params.filters || {}), q: searchValue || undefined },
-			page: 1,
+			Q    : searchValue || undefined,
+			Page : 1,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);

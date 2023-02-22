@@ -40,7 +40,7 @@ function FeedbackManagement() {
 	const feedbackControls = getFeedBackControls([]);
 
 	const setFilter = (val, type) => {
-		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
+		setParams({ ...params, [type]: val });
 	};
 
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'month', 'add-kpi'];
@@ -81,8 +81,8 @@ function FeedbackManagement() {
 
 				<div className={styles.header_filters}>
 					<Select
-						value={params.filters?.department}
-						onChange={(val) => setFilter(val, 'department')}
+						value={params.department}
+						onChange={(val) => setFilter(val, 'Department')}
 						placeholder={feedbackControls.department.placeholder}
 						style={{ marginRight: '8px' }}
 						options={feedbackControls.department.options}
@@ -90,8 +90,8 @@ function FeedbackManagement() {
 					/>
 
 					<Select
-						value={params.filters?.designation}
-						onChange={(val) => setFilter(val, 'designation')}
+						value={params.designation}
+						onChange={(val) => setFilter(val, 'Designation')}
 						disabled={!params.filters?.department}
 						placeholder={feedbackControls.designation.placeholder}
 						style={{ marginRight: '8px' }}
@@ -99,8 +99,8 @@ function FeedbackManagement() {
 						isClearable
 					/>
 					<Select
-						value={params.filters?.created_at_year}
-						onChange={(val) => setFilter(val, 'created_at_year')}
+						value={params.FeedbackStatus}
+						onChange={(val) => setFilter(val, 'FeedbackStatus')}
 						placeholder={feedbackControls.status.placeholder}
 						style={{ marginRight: '8px' }}
 						options={feedbackControls.status.options}

@@ -6,9 +6,9 @@ const useListReportees = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		ManagerID  : userId || undefined,
-		page       : 1,
-		page_limit : 20,
+		ManagerID : userId || undefined,
+		Page      : 1,
+		PageLimit : 20,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }] = useRequest({
@@ -17,14 +17,13 @@ const useListReportees = ({
 		params,
 	}, { manual: false });
 
-	const setPage = (p) => { setParams({ ...params, page: p }); };
+	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
 		setParams({
 			...params,
-			filters:
-		{ ...(params.filters || {}), q: searchValue || undefined },
-			page: 1,
+			Q    : searchValue || undefined,
+			Page : 1,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
