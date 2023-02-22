@@ -46,6 +46,7 @@ function PopularTags() {
 			<h4>Popular tags in this section:</h4>
 			{DEFAULT_LIST.map((item) => (
 				<Pill
+					// onClick={<AllFAQ />}
 					key={item.label}
 					prefix={item.prefixIcon}
 					size="xl"

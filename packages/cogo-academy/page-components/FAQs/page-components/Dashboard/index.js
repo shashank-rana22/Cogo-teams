@@ -4,19 +4,17 @@ import PopularTags from '../PopularTags';
 import SearchInput from '../SearchInput';
 import TopicList from '../TopicList';
 
-function Dashboard(Tab) {
+function Dashboard({ tabTitle }) {
 	return (
-		<div className="heading-container">
-			<br />
-			<SearchInput
+		<div style={{ marginTop: 12 }}>
+			<SearchInput								// TODOs
 				value=""
 				onChange=""
 				size="md"
 				placeholder="Search for a keyword or a question"
 			/>
 			<PopularTags />
-			<TopicList Tabtitle={Tab.Tabtitle} />
-
+			<TopicList TabTitle={tabTitle} />
 		</div>
 	);
 }
