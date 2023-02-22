@@ -6,8 +6,8 @@ import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
-import { toTitleCase } from './constant';
 import styles from './styles.module.css';
+import { toTitleCase } from './utils';
 
 function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 	const [showTdsModal, setShowTdsModal] = useState(false);
@@ -39,12 +39,6 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 		row,
 		remark,
 	});
-	const onApprove = () => {
-		OnAction('APPROVED');
-	};
-	const onReject = () => {
-		OnAction('REJECTED');
-	};
 
 	return (
 		<div>
@@ -136,7 +130,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
 									onClick={() => {
-										onReject();
+										OnAction('REJECTED');
 									}}
 								>
 									Reject
@@ -147,7 +141,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
 									onClick={() => {
-										onApprove();
+										OnAction('APPROVED');
 									}}
 								>
 									Approve

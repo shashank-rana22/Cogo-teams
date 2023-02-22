@@ -94,7 +94,7 @@ function MatchModal({
 								<Button
 									themeType="secondary"
 									style={{ marginRight: '10px' }}
-									onClick={() => window.open(supportingDocUrl, '_blanck')}
+									onClick={() => window.open(supportingDocUrl, '_blank')}
 								>
 									Supporting Doc
 									<IcMDownload width="20px" />

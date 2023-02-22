@@ -50,13 +50,6 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 		remark,
 	});
 
-	const onApprove = () => {
-		OnAction('APPROVED');
-	};
-	const onReject = () => {
-		OnAction('REJECTED');
-	};
-
 	return (
 		<div>
 			<div>
@@ -133,7 +126,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
 									onClick={() => {
-										onReject();
+										OnAction('REJECTED');
 									}}
 								>
 									Reject
@@ -144,7 +137,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
 									onClick={() => {
-										onApprove();
+										OnAction('APPROVED');
 									}}
 								>
 									Approve

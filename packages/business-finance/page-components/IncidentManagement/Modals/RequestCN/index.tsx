@@ -45,12 +45,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remark,
 		CNCategoryValues,
 	});
-	const onApprove = () => {
-		OnAction('APPROVED');
-	};
-	const onReject = () => {
-		OnAction('REJECTED');
-	};
 
 	const RevenueImpacting =	CNCategoryValues?.CNType === 'REVENUE_IMPACTING'
 	|| creditNoteType === 'REVENUE_IMPACTING';
@@ -290,7 +284,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									style={{ marginRight: '8px' }}
 									disabled={!(remarks.length) || loading}
 									onClick={() => {
-										onReject();
+										OnAction('REJECTED');
 									}}
 								>
 									Reject
@@ -301,7 +295,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									style={{ marginRight: '8px' }}
 									disabled={!(remarks.length) || loading}
 									onClick={() => {
-										onApprove();
+										OnAction('APPROVED');
 									}}
 								>
 									Approve
