@@ -8,32 +8,9 @@ import TeamPieChart from '../TeamPieChart';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-const PieData = [];
-// const PieData = [
-// {
-// 	id    : 'java',
-// 	label : 'java',
-// 	value : 195,
-// },
-// 	{
-// 		id    : 'erlang',
-// 		label : 'erlang',
-// 		value : 419,
-// 	},
-// 	{
-// 		id    : 'go',
-// 		label : 'go',
-// 		value : 71,
-// 	},
-// 	{
-// 		id    : 'solidity',
-// 		label : 'solidity',
-// 		value : 31,
-// 	},
-// ];
-
-function PerformanceChart({ params = {}, userId = '' }) {
+function PerformanceChart({ params = {}, userId = ''}) {
 	const { Month = '', Year = '', ManagerID = '' } = params;
+
 	const {
 		performanceStatsList = [],
 		loading,
@@ -62,8 +39,6 @@ function PerformanceChart({ params = {}, userId = '' }) {
 						marginBottom : '16px',
 						borderRadius : '50%',
 						display      : 'flex',
-						// justifyContent : 'center',
-						// alignItems     : 'center',
 						marginLeft   : 'auto',
 						marginRight  : 'auto',
 					}}
@@ -160,7 +135,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 					)}
 
 					<div className={styles.pie_chart}>
-						<TeamPieChart userId={userId} data={PieData} />
+						<TeamPieChart userId={userId} month={Month} year={Year} />
 					</div>
 
 				</div>

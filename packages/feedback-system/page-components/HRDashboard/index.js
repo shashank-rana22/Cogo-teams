@@ -32,6 +32,7 @@ function HRDashboard() {
 		Router.push('/feedback-system/hr-dashboard/feedback-management');
 	};
 
+	console.log('params', params);
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_most_container}>
