@@ -1844,6 +1844,17 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	cogo_verse_analytics: {
+		key           : 'cogo_verse_analytics',
+		title         : 'CogoVerse ',
+		icon          : () => <img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg" width="18px" />,
+		href          : '/v2/cogo-verse-analytics',
+		as            : '/v2/cogo-verse-analytics',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cogo_verse_analytics,
+		module_type   : 'dashboards',
+	},
 	roles_permissions: {
 		key           : 'roles_permissions',
 		title         : 'Roles and Permissions',
