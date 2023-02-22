@@ -21,8 +21,21 @@ function TrendingFAQs() {
 			<h1 className={styles.title}>
 				Trending FAQs
 			</h1>
-			<div className={styles.border}><Questions /></div>
-			<div className={styles.border}><Questions /></div>
+			<div style={{ margin: '5px 0', width: '100%', height: '467px' }} className={styles.scrollable}>
+				<div className={styles.border}><Questions /></div>
+				<div className={styles.border}>
+					<Questions />
+				</div>
+				<div className={styles.border}><Questions /></div>
+				<div className={styles.border}>
+					<Questions />
+				</div>
+				<div className={styles.border}><Questions /></div>
+				<div className={styles.border}>
+					<Questions />
+				</div>
+
+			</div>
 
 		</div>
 	);

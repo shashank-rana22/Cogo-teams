@@ -13,8 +13,9 @@ function Dashboard({ tabTitle }) {
 				size="md"
 				placeholder="Search for a keyword or a question"
 			/>
+
 			<PopularTags />
-			<TopicList TabTitle={tabTitle} />
+			<TopicList tabTitle={tabTitle} />
 		</div>
 	);
 }

@@ -5,7 +5,7 @@ import Questions from '../Questions';
 import styles from './styles.module.css';
 // import useQuestionList from './useQuestionList';
 
-function QuestionsList(Tab) {
+function QuestionsList({ tabTitle }) {
 	// const {
 	// 	questionList, setQuestionList, searchInput,
 	// 	setSearchInput,
@@ -13,11 +13,23 @@ function QuestionsList(Tab) {
 	return (
 		<div>
 			<h1 className={styles.title}>
-				{Tab.Tabtitle}
+				{tabTitle}
 			</h1>
-			<br />
-			<div className={styles.border}><Questions /></div>
-			<div className={styles.border}><Questions /></div>
+			<div style={{ margin: '5px 0', width: '100%', height: '462px' }} className={styles.scrollable}>
+				<div className={styles.border}><Questions /></div>
+				<div className={styles.border}>
+					<Questions />
+				</div>
+				<div className={styles.border}><Questions /></div>
+				<div className={styles.border}>
+					<Questions />
+				</div>
+				<div className={styles.border}><Questions /></div>
+				<div className={styles.border}>
+					<Questions />
+				</div>
+
+			</div>
 
 		</div>
 	);

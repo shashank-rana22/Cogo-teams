@@ -21,8 +21,8 @@ function Questions() {
 			// style={open ? { height: `${contentRef.current.scrollHeight} px` } : { height: '0px' }} */}
 
 			<div onClick={toggle}>
-				<QuestionsCollapse />
-				
+				<QuestionsCollapse collapse={open} />
+
 			</div>
 			{open && (
 				<>
@@ -38,13 +38,23 @@ function Questions() {
 					</div>
 					<div className={styles.subtitle}>
 						<span>Did you find this information helpful?</span>
-						<Pill size="lg" color="white"><b>Yes</b></Pill>
-						<Pill size="lg" color="white"><b>No</b></Pill>
+						<Pill size="lg" color="white" className={styles.pills}>Yes</Pill>
+						<Pill size="lg" color="white" className={styles.pills}>No</Pill>
 					</div>
 					<div>
-						<span className={styles.relatedquestion}>Related Questions</span><br/>
-						<span className={styles.subtitle} style={{opacity:0.8}}>When should I use EXW?</span><br/>
-						<span className={styles.subtitle} style={{opacity:0.8}}>What are the documents I need to procure for Incoterms?</span>
+						<span className={styles.relatedquestion}>Related Questions</span>
+						<div
+							className={styles.subtitle}
+							style={{ opacity: '0.8', marginTop: '1%' }}
+						>
+							When should I use EXW?
+						</div>
+						<div
+							className={styles.subtitle}
+							style={{ opacity: '0.8', marginTop: '1%' }}
+						>
+							What are the documents I need to procure for Incoterms?
+						</div>
 
 					</div>
 				</>

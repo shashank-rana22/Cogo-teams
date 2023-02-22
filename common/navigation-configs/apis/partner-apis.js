@@ -10117,6 +10117,7 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+
 	],
 };
 

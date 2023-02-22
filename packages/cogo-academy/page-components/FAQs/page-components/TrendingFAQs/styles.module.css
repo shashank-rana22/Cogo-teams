@@ -1,5 +1,12 @@
 .border{
 	border-bottom: 0.1px  solid #7e7a7a;
+	width: 100%;
+	&:hover {
+		
+		box-shadow: 2px 2px 4px #848282;
+		
+		;
+	  }
 }
 
 .title {
@@ -34,3 +41,8 @@
 		}
 	}
 }
+.scrollable{
+    overflow: auto;
+    
+
+  }

@@ -1915,7 +1915,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning/faq',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : [],
+				possible_apis : apis.faq,
 			},
 		],
 		module_type: 'crm',

@@ -1,8 +1,9 @@
 .gridContainer {
     display: grid;
-    grid-template-columns: 20rem 64rem;
+    grid-template-columns: 20rem 64rem ;
     width: 100%;
     padding: 10px;
+    justify-content: space-between;
 
     :global {
       .ui_tabs_container {
@@ -47,5 +48,7 @@
     margin-bottom: 1rem;
   }
   .scrollable{
+    overflow: auto;
+    
 
   }

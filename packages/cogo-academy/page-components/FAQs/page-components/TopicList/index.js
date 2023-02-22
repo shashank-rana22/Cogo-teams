@@ -3,7 +3,7 @@ import { IcMProfile } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { React, useState } from 'react';
 
-import useGetFaqTopic from '../../hooks/useGetFaqTopic';
+import useListFaqTopic from '../../hooks/useListFaqTopic';
 import QuestionsList from '../QuestionsList';
 
 import styles from './styles.module.css';
@@ -56,29 +56,31 @@ const topics = [
 	},
 ];
 
-function TopicList({ TabTitle }) {
-	const { fetchFaqTopic = () => {} } = useGetFaqTopic();
-
-	const [activeTab, setActiveTab] = useState('');
-	const COUNT = 0;
-	const truncate = (input) => (input?.length > 30 ? `${input.substring(0, 25)}...` : input);
+function TopicList({ tabTitle }) {
+	const {
+		refetchTopic = () => {},
+		data,
+		loading = false,
+		activeTab,
+		setActiveTab,
+	} = useListFaqTopic();
 
 	return (
 		<div className={styles.gridContainer}>
-			<div style={{ margin: '5px 0', width: '100%', height: '10px' }}>
+			<div style={{ margin: '5px 0', width: '100%', height: '490px' }} className={styles.scrollable}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary-vertical"
 					onChange={setActiveTab}
-					className={styles.scrollable}
+
 				>
-					{(topics || []).map((singleOption) => (
+					{(data?.list || []).map((singleOption) => (
 						<TabPanel
-							name={singleOption.Title}
+							name={singleOption?.name}
 							title={(
 								<div>
 									<div className={styles.title}>
-										{startCase(singleOption.Title)}
+										{startCase(singleOption?.name)}
 										:
 									</div>
 
@@ -94,7 +96,7 @@ function TopicList({ TabTitle }) {
 				</Tabs>
 			</div>
 
-			<div><QuestionsList TabTitle={TabTitle} /></div>
+			<div>{activeTab ? <QuestionsList tabTitle={activeTab} /> : <QuestionsList tabTitle={tabTitle} />}</div>
 		</div>
 	);
 }
