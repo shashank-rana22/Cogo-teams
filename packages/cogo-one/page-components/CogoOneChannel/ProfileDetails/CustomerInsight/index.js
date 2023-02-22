@@ -11,7 +11,8 @@ import InsightsList from './InsightsList';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard, customerId }) {
+function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard, customerId, formattedMessageData }) {
+	const { sender = null } = formattedMessageData;
 	const [serviceType, setServiceType] = useState('fcl_freight');
 
 	const { userId = '', userMobile = '' } = FormatData({
@@ -25,7 +26,7 @@ function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard, custom
 	const {
 		data = {},
 		loading = false,
-	} = useGetOmnichannelCustomerInsights({ serviceType, activeTab, activeVoiceCard, activeMessageCard, customerId });
+	} = useGetOmnichannelCustomerInsights({ serviceType, activeTab, activeVoiceCard, activeMessageCard, customerId, sender });
 
 	const { shipment_and_spot_search_stats = {}, total_messages } = data || {};
 
