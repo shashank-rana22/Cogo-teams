@@ -4,6 +4,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+	padding: 0 40px;
 	margin-top: 24vh;
 }
 
@@ -41,12 +42,12 @@
 	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
-	margin-left: 15px;
+	margin-left: 10px;
 }
 
 .type {
 	font-size: 14px;
-	text-transform: capitalize;
+	color: #4f4f4f;
 }
 
 .avatar {

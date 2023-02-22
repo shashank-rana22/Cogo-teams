@@ -7,7 +7,7 @@ import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 import RightSideNav from './RightSideNav';
 import styles from './styles.module.css';
 
-function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
+function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateLeaduser }) {
 	const customerId = activeTab === 'message'
 		? activeMessageCard?.id
 		: activeVoiceCard?.id;
@@ -32,6 +32,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
 						loading={loading}
 						openNewTab={openNewTab}
 						ORG_PAGE_URL={ORG_PAGE_URL}
+						updateLeaduser={updateLeaduser}
 					/>
 				)}
 			</div>

@@ -17,6 +17,7 @@ function AgentDetails({
 	activeVoiceCard = {},
 	FormattedMessageData = {},
 	customerId = '',
+	updateLeaduser = () => {},
 }) {
 	const { user_details = null, user_type } = activeMessageCard || {};
 	const {
@@ -62,11 +63,12 @@ function AgentDetails({
 			leadUserId    : lead_user_id,
 		},
 	};
+
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
 
-	const { leadUserProfile, loading: leadLoading, leadId } = useCreateLeadProfile({ setShowError });
+	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError });
 
-	const { userData, loading } = useGetUser({ userId, id: { leade_user_id: leadUserId || leadId }, customerId });
+	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
 
 	const { mobile_verified, whatsapp_verified } = userData || {};
 
@@ -96,21 +98,24 @@ function AgentDetails({
 	};
 
 	return (isEmpty(userId) && isEmpty(leadUserId)) && isEmpty(mobile_no) ? (
-		<EmptyState
-			type="profile"
-			user_type={user_type}
-			leadLoading={leadLoading}
-			handleSubmit={handleSubmit}
-			showAddNumber={showAddNumber}
-			setProfilevalue={setProfilevalue}
-			setShowAddNumber={setShowAddNumber}
-			profileValue={profileValue}
-			showError={showError}
-			setShowError={setShowError}
-		/>
-	) : (
 		<>
 			<div className={styles.title}>Profile</div>
+			<EmptyState
+				type="profile"
+				user_type={user_type}
+				leadLoading={leadLoading}
+				handleSubmit={handleSubmit}
+				showAddNumber={showAddNumber}
+				setProfilevalue={setProfilevalue}
+				setShowAddNumber={setShowAddNumber}
+				profileValue={profileValue}
+				showError={showError}
+				setShowError={setShowError}
+			/>
+		</>
+	) : (
+		<>
+
 			<div className={styles.content}>
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
