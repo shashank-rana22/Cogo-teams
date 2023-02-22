@@ -5,11 +5,11 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function TeamPieChart({ userId = '' }) {
+function TeamPieChart({ userId = '', month = '', year = '' }) {
 	const {
 		loading,
 		userData,
-	} = useGetPieChartStats({ userId });
+	} = useGetPieChartStats({ userId, month, year });
 
 	const chart_data = [
 		{
@@ -32,7 +32,7 @@ function TeamPieChart({ userId = '' }) {
 	return (
 		<div className={styles.pie_container}>
 			{(!loading
-			&& (userData.above_average || userData.average || userData.below_average)
+			// && !(userData.above_average || userData.average || userData.below_average)
 			)
 				? (
 					<ResponsivePie
@@ -42,7 +42,7 @@ function TeamPieChart({ userId = '' }) {
 						activeOuterRadiusOffset={8}
 						enableArcLinkLabels={false}
 						enableArcLabels={false}
-						colors={['#F2E3C3', '#F9AE64', '#828282', '#FDE74D']}
+						colors={['#9BEFA8', '#67C676', '#CDF7D4']}
 						colorBy="index"
 						margin={{ top: 10, right: 20, bottom: 80, left: 20 }}
 						legends={[
