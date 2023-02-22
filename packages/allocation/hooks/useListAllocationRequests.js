@@ -14,14 +14,9 @@ const useListAllocationRequests = () => {
 	const [searchValue, setSearchValue] = useState('');
 	const [selectAll, setSelectAll] = useState(false);
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
-	const [bulkMode, setBulkMode] = useState(false);
 	const [popoverId, setPopoverId] = useState(null);
 	const [requestStatusItem, setRequestStatusItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-
-	useEffect(() => {
-		console.log('bulkMode :: ', bulkMode);
-	}, [bulkMode]);
 
 	const onCloseModal = () => {
 		setShowModal(false);
@@ -30,7 +25,7 @@ const useListAllocationRequests = () => {
 	const [params, setParams] = useState({
 		sort_by       : 'created_at',
 		sort_type     : 'desc',
-		page_limit    : 3,
+		page_limit    : 10,
 		page          : 1,
 		data_required : true,
 		filters       : {
@@ -153,8 +148,11 @@ const useListAllocationRequests = () => {
 			id     : 'checkbox',
 			key    : 'checkbox',
 			Header : <Checkbox
+				label=""
 				checked={selectAll}
-				onChange={(e) => onItemChangeInChips(e?.target?.checked)}
+				onChange={
+			(e) => onItemChangeInChips(e?.target?.checked)
+}
 				className={styles.select_all_checkbox}
 			/>,
 			accessor: ({ id }) => {
@@ -291,7 +289,6 @@ const useListAllocationRequests = () => {
 		onCloseModal,
 		requestStatusItem,
 		setRequestStatusItem,
-		bulkMode,
 	};
 };
 

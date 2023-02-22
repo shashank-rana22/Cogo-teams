@@ -21,7 +21,6 @@ function Header(props) {
 		checkedRowsId,
 		setShowModal,
 		isCreateDisabled,
-		bulkMode,
 	} = props;
 
 	const { service_type: toggleValue, id } = params.filters || {};
@@ -79,16 +78,6 @@ function Header(props) {
 
 			<div className={styles.bulk_update_container}>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<p>Bulkmode</p>
-
-					<Toggle
-						name="a1"
-						size="md"
-						showOnOff
-						disabled={false}
-						value={bulkMode}
-					/>
-
 					<Button
 						size="sm"
 						themeType="secondary"
