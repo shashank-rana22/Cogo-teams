@@ -11,6 +11,10 @@ function Header() {
 		router.push('/learning/faq/create/configuration', '/learning/faq/create/configuration');
 	};
 
+	const onClickUpload = () => {
+		router.push('/learning/faq/create/upload?type=questions', '/learning/faq/create/upload?type=questions');
+	};
+
 	return (
 		<div className={styles.container}>
 			<div>Manage FAQs</div>
@@ -20,7 +24,7 @@ function Header() {
 					Configuration
 				</Button>
 
-				<Button style={{ marginLeft: 8 }}>
+				<Button style={{ marginLeft: 8 }} onClick={onClickUpload}>
 					Upload in Bulk
 				</Button>
 
