@@ -46,7 +46,7 @@ function Air({ setGenerate, setItem }) {
 		setActiveTab(view);
 	};
 
-	const { data, loading, listAPi } = useListShipmentPendingTasks();
+	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks();
 
 	useEffect(() => {
 		if (activeTab === 'new_awb') { listAPi(); }
@@ -80,11 +80,15 @@ function Air({ setGenerate, setItem }) {
 			</div>
 			<div className={styles.filters_container}>
 				<Input
+					value={searchValue}
 					suffix={<IcMSearchlight className="search_icon" />}
 					className={styles.input_search}
 					style={{ width: '260px', height: '26px' }}
 					placeholder="Search by SID or AWB Number"
 					type="text"
+					onChange={(val) => {
+						setSearchValue(val);
+					}}
 				/>
 				<Filters />
 			</div>

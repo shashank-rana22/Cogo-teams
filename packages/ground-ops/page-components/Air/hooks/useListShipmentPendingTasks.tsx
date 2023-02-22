@@ -16,8 +16,9 @@ const useListShipmentPendingTasks = () => {
 		try {
 			await trigger({
 				params: {
-					filters: {
-						q: (query || '').trim() || undefined,
+					q       : (query || '').trim() || undefined,
+					filters : {
+
 					},
 					assignedStakeholder : 'service_ops1',
 					page,
@@ -37,7 +38,7 @@ const useListShipmentPendingTasks = () => {
 	useEffect(() => {
 		listAPi();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [page, query]);
 
 	// useEffect(() => {
 	// 	setFinalList([]);
