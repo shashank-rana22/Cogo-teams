@@ -1,15 +1,32 @@
-import { Select, Datepicker } from '@cogoport/components';
-import React, { useState } from 'react';
+import { Button } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
 function Filters() {
-	const [tradeType, setTradeType] = useState('');
-	const [service, setService] = useState('');
-	const [date, setDate] = useState('');
+	// const [sortBy, setSetSortBy] = useState('');
+	// const [tradeType, setTradeType] = useState('');
+
+	// const [service, setService] = useState('');
+	// const [date, setDate] = useState('');
 
 	return (
 		<div className={styles.container}>
+			{/* <div className={styles.form_item}>
+				<Select
+					value={sortBy}
+					name="sort_by"
+					className={styles.select}
+					placeholder="Sort By"
+					isClearable
+					onChange={setSetSortBy}
+					options={[
+						{ label: 'Date', value: 'date' },
+						{ label: 'AWB', value: 'awb' },
+					]}
+				/>
+			</div>
 			<div className={styles.form_item}>
 				<Select
 					value={tradeType}
@@ -48,6 +65,13 @@ function Filters() {
 					onChange={setDate}
 					value={date}
 				/>
+			</div> */}
+			<div className={styles.form_item}>
+				<Button themeType="secondary" className={styles.filter_svg}>
+					Filter
+					{' '}
+					<IcMFilter />
+				</Button>
 			</div>
 		</div>
 	);

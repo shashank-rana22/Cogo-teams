@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import GenerateHawb from '../../../GenerateHawb';
 import GenerateMAWB from '../../../GenerateMAWB';
 import List from '../../commons/List';
 import { NewAWBFields } from '../../configurations/new_awb_fields';
@@ -25,9 +26,12 @@ function NewAWB({ data, loading }) {
 	};
 	return (
 		<>
+			<Button onClick={() => setGenerate(!generate)}>HAWB</Button>
 			{!generate && <List fields={fields} data={data} loading={loading} functions={functions} />}
 
-			{generate && <GenerateMAWB shipment_id={item.shipmentId} task={item} />}
+			{/* {generate && <GenerateMAWB shipment_id={item.shipmentId} task={item} />} */}
+			{generate && <GenerateHawb shipment_id={item.shipmentId} task={item} />}
+
 		</>
 	);
 }

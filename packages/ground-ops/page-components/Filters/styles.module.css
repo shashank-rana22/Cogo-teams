@@ -20,3 +20,6 @@
         }
     }
 }
+.filter_svg{
+   svg{ margin-left: 20px;}
+}
