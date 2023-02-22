@@ -17,7 +17,7 @@ function VendorContact({
 	detail,
 }) {
 	const getDisplayValue = ({ fieldName }) => {
-		const val = detail?.[0]?.[fieldName];
+		const val = detail?.[0]?.[fieldName] || '';
 
 		if (fieldName === 'mobile_number') {
 			// eslint-disable-next-line no-unsafe-optional-chaining
