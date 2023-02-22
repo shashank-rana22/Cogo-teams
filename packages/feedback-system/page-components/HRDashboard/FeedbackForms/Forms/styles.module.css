@@ -84,3 +84,13 @@
 	padding-top: 16px;
 	background-color: #fff;
 }
+
+.loading_right_form {
+	margin-bottom: 16px;
+	border-radius: 4px;
+}
+
+.right_form_div {
+	margin-top: 8px;
+	padding: 0 16px; 
+}

@@ -1,4 +1,4 @@
-import { Pagination, Pill, Button } from '@cogoport/components';
+import { Pagination, Pill, Button, Placeholder } from '@cogoport/components';
 import { format, isEmpty, startCase } from '@cogoport/utils';
 
 import useListForms from '../../../../utils/useListForms';
@@ -27,6 +27,8 @@ function Forms({
 
 	const { total_count = '' } = paginationData;
 
+	const dummyArray = ['ok', 'ok1', 'harry', 'potter', 'lorem', 'ipsum'];
+
 	if (isEmpty(Object.values(formsParams).filter((i) => i))) {
 		return <div className={styles.no_role}>Please select designation to show forms...</div>;
 	}
@@ -46,7 +48,17 @@ function Forms({
 			</div>
 
 			<div className={styles.forms}>
-				{formList.map((form) => {
+				{ loading ? (
+					<div className={styles.right_form_div}>
+						{dummyArray.map(() => (
+							<Placeholder
+								width="100%"
+								height="80px"
+								className={styles.loading_right_form}
+							/>
+						))}
+					</div>
+				) : formList.map((form) => {
 					const {
 						id = '', status = '', created_at = '', 'Questions Count': question_count = '',
 					} = form;
