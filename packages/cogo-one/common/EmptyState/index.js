@@ -1,8 +1,8 @@
 import { Avatar, Modal, Button, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
+// import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
 
 import styles from './styles.module.css';
 
@@ -13,24 +13,24 @@ function EmptyState({
 	user_type = '',
 	userId = '',
 	organizationId = '',
+	setProfilevalue = () => {},
+	profileValue = {},
+	setShowAddNumber = () => {},
+	showAddNumber = false,
+	handleSubmit = () => {},
+	leadLoading = false,
 }) {
-	const [showAddNumber, setShowAddNumber] = useState(false);
-	const [profileValue, setProfilevalue] = useState({
-		name   : '',
-		number : '',
-	});
-
 	const handleClick = () => {
 		setShowAddNumber(true);
 	};
 
-	const { leadUserProfile, loading } = useCreateLeadProfile();
+	// const { leadUserProfile, loading } = useCreateLeadProfile();
 
-	const handleSubmit = async () => {
-		await leadUserProfile({ profileValue });
-		setShowAddNumber(false);
-		setProfilevalue({});
-	};
+	// const handleSubmit = async () => {
+	// 	await leadUserProfile({ profileValue });
+	// 	setShowAddNumber(false);
+	// 	setProfilevalue({});
+	// };
 
 	const renderEmpty = () => {
 		switch (type) {
@@ -182,7 +182,7 @@ function EmptyState({
 							size="sm"
 							themeType="accent"
 							onClick={handleSubmit}
-							disabled={loading}
+							disabled={leadLoading}
 						>
 							Submit
 						</Button>
