@@ -26,7 +26,7 @@ function CountrywiseTaxSelect({
 	};
 
 	const handleNumberChange = (e) => {
-		onChange({ ...(value || {}), [numberKey]: e.target.value });
+		onChange({ ...(value || {}), [numberKey]: e });
 	};
 
 	const props = {};
@@ -43,9 +43,9 @@ function CountrywiseTaxSelect({
 	};
 
 	return (
-		<div style={width ? { width: '104%' } : {}}>
+		<div style={{ width: '100%', display: 'flex' }}>
 			{Object.values(SERVICABLE_COUNTRY_IDS).includes(countryId) && (
-				<div style={{ paddingRight: 0 }}>
+				<div style={{ paddingRight: 8, width: '33%' }}>
 					<SelectRegistrationType
 						{...rest}
 						{...props}
@@ -61,10 +61,7 @@ function CountrywiseTaxSelect({
 				</div>
 			)}
 
-			<div>
-				{/* // wid= */}
-				{/* {Object.values(SERVICABLE_COUNTRY_IDS).includes(countryId) ? 8 : 12} */}
-
+			<div style={{ width: Object.values(SERVICABLE_COUNTRY_IDS).includes(countryId) ? '67%' : '100%' }}>
 				<Input
 					{...rest}
 					width="100%"

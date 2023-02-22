@@ -12,17 +12,6 @@ function FormLayout({ fields = [], control = {}, errors = {} }) {
 
 				if (!Element) return null;
 
-				// if (element.type === 'fieldArray') {
-				// 	return (
-				// 		<FieldArray
-				// 			{...controlItem}
-				// 			control={control}
-				// 			name={controlItem.name}
-				// 			error={errors?.[controlItem.name]}
-				// 		/>
-				// 	);
-				// }
-
 				return (
 					<div className={styles.form_group} style={element?.style}>
 						<div className={styles.form_label}>{element.label}</div>
