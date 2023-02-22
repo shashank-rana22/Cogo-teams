@@ -22,7 +22,7 @@ const useListFeedbackQuestions = ({
 	const setPage = (p) => { setParams({ ...params, page: p }); };
 
 	useEffect(() => {
-		setParams({ ...params, filters: { ...(params.filters || {}), q: searchValue || undefined }, page: 1 });
+		setParams({ ...params, Filters: { ...(params.Filters || {}), q: searchValue || undefined }, page: 1 });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
 

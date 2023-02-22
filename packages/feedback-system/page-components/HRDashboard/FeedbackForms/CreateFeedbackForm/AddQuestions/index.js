@@ -1,7 +1,7 @@
 import { Placeholder, Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
 import { Controller, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useListFeedbackQuestions from '../../../../../hooks/useListFeedbackQuestions';
@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 function AddQuestions({
 	formId = '', proceedForm = () => {}, questionActionList = {},
 	setQuestionActionList = () => {},
+	department, designation,
 }) {
 	const [addAnother, setAddAnother] = useState(false);
 	const [openNewQuestionModal, setOpenNewQuestionModal] = useState(false);
@@ -58,7 +59,7 @@ function AddQuestions({
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, filters: { ...(params.filters || {}), tags: tags || undefined } }), [tags]);
+	useEffect(() => setParams({ ...params, Filters: { ...(params.Filters || {}), tags: tags || undefined } }), [tags]);
 
 	useEffect(() => {
 		if (refetchList) {
@@ -68,52 +69,35 @@ function AddQuestions({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [refetchList]);
 
-	if (loading) {
-		return (
-			<div className={styles.add_question_container}>
-				<div className={styles.header}>
-					<Placeholder height="24px" width="160px" />
-					<Placeholder height="24px" width="80px" />
-				</div>
-				<div className={styles.body}>
-					<Placeholder height="18px" width="200px" />
-					<div className={styles.filters_pagination}>
-						<div className={styles.filters}>
-							<Placeholder height="24px" width="120px" />
-							<Placeholder height="24px" width="200px" margin="0 0 0 8px" />
-						</div>
-						<div className={styles.pagination_container}>
-							<Placeholder height="24px" width="60px" />
-						</div>
-					</div>
-
-					<div className={styles.questions}>
-						{Array(6).fill('').map((index) => (
-							<Placeholder
-								height="80px"
-								margin="0 0 8px 0"
-								key={index}
-							/>
-						))}
-					</div>
-				</div>
-				<div className={styles.footer}>
-
-					<Placeholder height="24px" width="60px" />
-					<Placeholder height="24px" width="80px" margin="0 0 0 8px" />
-				</div>
-			</div>
-		);
-	}
+	const showLoading = () => (
+		<div className={styles.questions}>
+			{Array(6).fill('').map((index) => (
+				<Placeholder
+					height="80px"
+					margin="0 0 8px 0"
+					key={index}
+				/>
+			))}
+		</div>
+	);
 
 	return (
 		<>
-			{isEmpty(questionActionList?.allList)
+			{isEmpty(questionActionList?.allList) && !loading
 				? <EmptyState setOpenNewQuestionModal={setOpenNewQuestionModal} /> : (
 					<>
 						<div className={styles.add_question_container}>
 							<div className={styles.header}>
-								<div className={styles.form_header}>Create Form</div>
+								<div className={styles.form_header}>
+									Create Form :
+									{' '}
+									<span>
+										{startCase(department)}
+										{' > '}
+									</span>
+
+									<span1>{startCase(designation)}</span1>
+								</div>
 
 								<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>
 									<IcMPlus />
@@ -161,7 +145,7 @@ function AddQuestions({
 								</div>
 
 								<div className={styles.questions}>
-									{questionActionList?.allList.length > 0 && (
+									{loading ? showLoading() : (
 										<Questions
 											questions={questionActionList?.allList}
 											questionActionList={questionActionList}

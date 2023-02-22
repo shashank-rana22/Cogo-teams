@@ -19,15 +19,13 @@ function QuestionsItem({
 		if (!val) {
 			setQuestionActionList((pv) => ({
 				...pv,
-				checked : [...(pv.checked || []), item],
-				weigh   : [...(pv.weigh || []), item],
+				checked: [...(pv.checked || []), item],
 			}));
 			return;
 		}
 		setQuestionActionList((pv) => {
 			const newCheckedList = pv.checked?.filter((question) => question.id !== item.id);
-			const newWeighList = pv.weigh?.filter(((question) => question.id !== item.id));
-			return { ...pv, checked: newCheckedList, weigh: newWeighList };
+			return { ...pv, checked: newCheckedList };
 		});
 	};
 
@@ -42,7 +40,7 @@ function QuestionsItem({
 		setQuestionActionList((pv) => {
 			const newList = [];
 
-			pv.weigh?.forEach((question) => {
+			pv.checked?.forEach((question) => {
 				if (question.id === item.id) {
 					newList.push({ ...question, weightage: weight });
 					return;
@@ -50,17 +48,17 @@ function QuestionsItem({
 				newList.push(question);
 			});
 
-			return { ...pv, weigh: newList };
+			return { ...pv, checked: newList };
 		});
 	};
 
 	const changeOrder = (p) => {
 		setQuestionActionList((pv) => {
-			const weighList = cloneDeep(pv.weigh);
+			const checkedList = cloneDeep(pv.checked);
 
-			[weighList[p - 1], weighList[index]] = [weighList[index], weighList[p - 1]];
+			[checkedList[p - 1], checkedList[index]] = [checkedList[index], checkedList[p - 1]];
 
-			return { ...pv, weigh: weighList };
+			return { ...pv, checked: checkedList };
 		});
 	};
 

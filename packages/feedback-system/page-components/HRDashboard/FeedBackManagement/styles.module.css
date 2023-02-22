@@ -9,7 +9,6 @@
 	justify-content: flex-start;
 	font-size: 16px;
 	font-weight: 500;
-	color: #393f70;
 	cursor: pointer;
 
 	p {
@@ -41,13 +40,14 @@
 .heading {
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-between;
+
+	margin-top: 16px;
 
 	.header_text {
 		margin: 0;
-		font-size: 16px;
-		font-weight: bold;
-		color: #393f70;
+		font-size: 28px;
+		font-weight: 600;
 	}
 }
 
@@ -59,18 +59,3 @@
 	}
 }
 
-.list_header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-top: 8px;
-
-	.abc {
-		font-size: 18px;
-		font-weight: bold;
-	}
-
-	:global(.ui_select_display_container) {
-		width: 180px;
-	}
-}
