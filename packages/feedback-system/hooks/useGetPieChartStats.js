@@ -1,11 +1,16 @@
 import { useRequest } from '@cogoport/request';
 
-const useGetPieChartStats = ({ userId = '' }) => {
+const useGetPieChartStats = ({ userId = '', month = '', year = '' }) => {
+	const Months = ['January', 'February', 'March', 'April',
+		'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 	const params = {
 		PerformedByID : userId || undefined,
-		// Month         : '3',
-		Year          : '2023',
+		Month         : Months[month - 1] || undefined,
+		Year          : year || undefined,
 	};
+
+	// console.log(Months[month - 1]);
 
 	const [{ loading = false, data : userData = {} }] = useRequest({
 		method : 'get',
