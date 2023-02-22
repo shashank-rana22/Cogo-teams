@@ -1,7 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
-import hideDetails from '../../../../../utils/hideDetails';
+import HideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,7 @@ function Header({
 				<div>
 					<div className={styles.name}>{startCase(name || 'unkown_user')}</div>
 					<div className={styles.phone_number}>
-						{hideDetails({ data: user_number, type: 'number' })}
+						{HideDetails({ data: user_number, type: 'number' })}
 					</div>
 				</div>
 			</div>
