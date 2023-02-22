@@ -16,6 +16,7 @@ function AgentDetails({
 	FormattedMessageData = {},
 	customerId = '',
 }) {
+	console.log('activeMessageCard', activeMessageCard);
 	const { user_details = null, user_type } = activeMessageCard || {};
 	const {
 		user_id,
