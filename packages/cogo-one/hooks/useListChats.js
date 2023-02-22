@@ -23,6 +23,7 @@ const useListChats = ({
 
 	});
 	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId) || {};
+	console.log('activeMessageCard:', activeMessageCard);
 
 	const dataFormatter = (list) => {
 		let chats = 0;
@@ -77,6 +78,15 @@ const useListChats = ({
 		}
 	};
 
+	const updateLeaduser = async (data = {}) => {
+		const { channel_type, id } = activeMessageCard || {};
+		const roomCollection = doc(firestore, `${FIRESTORE_PATH[channel_type]}/${id}`);
+		await updateDoc(roomCollection, {
+			updated_at: Date.now(),
+			...data,
+		});
+	};
+
 	return {
 		listData,
 		setActiveMessage,
@@ -86,6 +96,7 @@ const useListChats = ({
 		loading,
 		activeCardId,
 		setActiveCardId,
+		updateLeaduser,
 
 	};
 };

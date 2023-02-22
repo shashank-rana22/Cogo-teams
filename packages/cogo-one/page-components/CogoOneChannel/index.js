@@ -58,6 +58,7 @@ function CogoOne() {
 		loading,
 		setActiveCardId,
 		activeCardId,
+		updateLeaduser,
 	} = useListChats({
 		firestore,
 		userId,
@@ -94,6 +95,9 @@ function CogoOne() {
 						activeMessageCard={activeMessageCard}
 						activeTab={activeTab}
 						activeVoiceCard={activeVoiceCard}
+						firestore={firestore}
+						updateLeaduser={updateLeaduser}
+
 					/>
 				</>
 			);

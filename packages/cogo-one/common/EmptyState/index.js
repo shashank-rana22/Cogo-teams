@@ -1,9 +1,8 @@
 import { Avatar, Modal, Button, Input } from '@cogoport/components';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { isEmpty } from '@cogoport/utils';
-// import { useState } from 'react';
 
-// import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
+import { PLATFORM_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
@@ -29,8 +28,7 @@ function EmptyState({
 		switch (type) {
 			case 'profile':
 				return (
-					<div className={styles.container}>
-						<div className={styles.header}>Profile</div>
+					<>
 						<div className={styles.profile_div}>
 							<div className={styles.avatar}>
 								<Avatar
@@ -41,7 +39,7 @@ function EmptyState({
 							</div>
 							<div className={styles.details}>
 								<div className={styles.name}>Anonymous User</div>
-								<div className={styles.type}>{user_type.replace('_', ' ')}</div>
+								<div className={styles.type}>{PLATFORM_MAPPING[user_type] || ''}</div>
 							</div>
 						</div>
 						<div className={styles.content}>
@@ -54,7 +52,8 @@ function EmptyState({
 								<div>Add phone number</div>
 							</div>
 						</div>
-					</div>
+					</>
+
 				);
 			case 'organization':
 				return (
