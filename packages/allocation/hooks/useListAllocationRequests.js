@@ -45,17 +45,17 @@ const useListAllocationRequests = () => {
 	const [{ loading, data }, refetch] = apiData;
 
 	const onChangeParams = useCallback((values = {}) => {
-		setParams((pv) => ({
-			...pv,
+		setParams((previousParams) => ({
+			...previousParams,
 			...values,
 		}));
 	}, []);
 
 	useEffect(() => {
-		setParams((pv) => ({
-			...pv,
+		setParams((previousParams) => ({
+			...previousParams,
 			filters: {
-				...pv.filters,
+				...previousParams.filters,
 				q: searchQuery || undefined,
 			},
 		}));
@@ -127,10 +127,10 @@ const useListAllocationRequests = () => {
 	const onClearSelection = () => {
 		setCheckedRowsId([]);
 
-		setParams((pv) => ({
-			...pv,
+		setParams((previousParams) => ({
+			...previousParams,
 			filters: {
-				...(pv.filters || {}),
+				...(previousParams.filters || {}),
 				id: undefined,
 			},
 		}));
@@ -190,7 +190,7 @@ const useListAllocationRequests = () => {
 			Header   : 'User',
 			accessor : ({ service_user }) => (
 				<div>
-					{service_user?.name}
+					{startCase(service_user?.name || '___')}
 					<div className={styles.email_id}>{service_user?.email || '___'}</div>
 				</div>
 			),
@@ -205,7 +205,7 @@ const useListAllocationRequests = () => {
 			Header   : 'Requested Agent',
 			accessor : ({ user }) => (
 				<div>
-					{user?.name}
+					{user?.name || '___'}
 					{' '}
 					<div className={styles.email_id}>{user?.email || '___'}</div>
 				</div>
@@ -214,7 +214,7 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'created_by',
 			Header   : 'Requested By',
-			accessor : ({ created_by }) => created_by?.name || '___',
+			accessor : ({ created_by }) => startCase(created_by?.name || '___'),
 		},
 		{
 			key      : 'reason',

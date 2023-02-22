@@ -85,10 +85,10 @@ const useListAllocationQuotas = () => {
 				<div>
 					{created_at	 ? (
 						<div className={styles.created_date}>
-							{format(created_at, 'dd MMM yyyy')}
+							{format(created_at, 'dd MMM yyyy') || '___'}
 
 							<div className={styles.created_time}>
-								{format(created_at, 'hh:mm aaa')}
+								{format(created_at, 'hh:mm aaa') || '___'}
 							</div>
 						</div>
 					) : '___'}
