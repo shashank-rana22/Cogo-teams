@@ -22,7 +22,7 @@ function PaymentDetails({
 	detail,
 }) {
 	const getDisplayValue = ({ fieldName }) => {
-		const val = detail?.[0]?.[fieldName];
+		const val = detail?.[0]?.[fieldName] || '';
 
 		if (fieldName === 'bank_document_url') {
 			const shortName = getShortFileName({ url: val });
