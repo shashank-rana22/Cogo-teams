@@ -10108,10 +10108,11 @@ const partner = {
 			service_name : 'faq',
 		},
 		{
-			api          : 'list_faq_topic',
+			api          : 'list_faq_topics',
 			access_type  : 'private',
 			service_name : 'faq',
 		},
 	],
 };
+
 export default partner;

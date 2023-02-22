@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 
 import useGetFaqTopic from './useGetFaqTopic';
 
@@ -15,13 +16,13 @@ function useCreateFaqTopic() {
 		const { name, description } = values || {};
 		try {
 			const res = await trigger({
-
 				data: {
 					name,
-					display_name: 'RFQ',
+					display_name: startCase(name),
 					description,
 				},
 			});
+
 			if (res?.data) {
 				fetchFaqTopic(res?.data.id);
 				Toast.success('Topic created sucessfully');

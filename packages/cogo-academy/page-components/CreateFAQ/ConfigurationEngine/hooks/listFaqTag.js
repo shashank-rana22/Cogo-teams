@@ -1,18 +1,18 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useListFaqTopics({ status = 'active' }) {
+function useListFaqTags({ status = 'active' }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_faq_topics',
+		url    : '/list_faq_tags',
 	}, { manual: false });
 
-	const fetchListFaqTopic = async () => {
+	const fetchListFaqTags = async () => {
 		try {
 			await trigger({
 				params: {
 					filters: {
-						status,
+						created_at_less_than: '2023-02-21',
 					},
 
 				},
@@ -22,18 +22,18 @@ function useListFaqTopics({ status = 'active' }) {
 		}
 	};
 
-	const listTopics = data?.list?.[0] || {};
+	const listTags = data?.list?.[0] || {};
 
 	useEffect(() => {
-		fetchListFaqTopic();
+		fetchListFaqTags();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	return {
-		fetchListFaqTopic,
+		fetchListFaqTags,
 		loading,
-		listTopics,
+		listTags,
 	};
 }
 
-export default useListFaqTopics;
+export default useListFaqTags;
