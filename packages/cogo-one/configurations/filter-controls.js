@@ -28,27 +28,27 @@ const controls = [
 			{ label: 'Platform Chat', value: 'platform_chat' },
 		],
 	},
-	{
-		label     : 'Tags',
-		name      : 'tags',
-		type      : 'radio',
-		value     : '',
-		className : 'tags_field_controller',
-		options   : [
-			{
-				label : 'Preshipped',
-				value : 'preshipped',
-			},
-			{
-				label : 'Ongoing',
-				value : 'ongoing',
-			},
-			{
-				label : 'Postshipped',
-				value : 'postshipped',
-			},
-		],
-	},
+	// {
+	// 	label     : 'Tags',
+	// 	name      : 'tags',
+	// 	type      : 'radio',
+	// 	value     : '',
+	// 	className : 'tags_field_controller',
+	// 	options   : [
+	// 		{
+	// 			label : 'Preshipped',
+	// 			value : 'preshipped',
+	// 		},
+	// 		{
+	// 			label : 'Ongoing',
+	// 			value : 'ongoing',
+	// 		},
+	// 		{
+	// 			label : 'Postshipped',
+	// 			value : 'postshipped',
+	// 		},
+	// 	],
+	// },
 	{
 		label     : 'Escalation',
 		name      : 'escalation',
