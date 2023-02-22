@@ -2,6 +2,8 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
+import { imgURL } from '../../../../constants/image-urls';
+
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
@@ -17,8 +19,8 @@ function Charts({ GraphData = [], hideChart = false }) {
 	};
 
 	return (
-		<div>
-			{!hideChart && (
+		<div style={{ height: '100%' }}>
+			{!hideChart ? (
 				<ResponsiveLine
 					data={GraphData}
 					margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
@@ -84,6 +86,15 @@ function Charts({ GraphData = [], hideChart = false }) {
 					useMesh
 					legends={[]}
 				/>
+			) : (
+				<div className={styles.empty_state}>
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+
+					{/* <img src={imgURL.empty_3} alt="no data" width="135px" className={styles.empty_img} /> */}
+				</div>
 			)}
 		</div>
 	);
