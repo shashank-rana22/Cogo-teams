@@ -52,14 +52,6 @@ function BankDetails({
 		value,
 	});
 
-	const onApprove = () => {
-		OnAction('APPROVED');
-	};
-
-	const onReject = () => {
-		OnAction('REJECTED');
-	};
-
 	const {
 		tradePartyType,
 		id,
@@ -242,7 +234,7 @@ function BankDetails({
 									style={{ marginRight: '8px' }}
 									disabled={!(value?.text.length) || loading}
 									onClick={() => {
-										onReject();
+										OnAction('REJECTED');
 									}}
 								>
 									Reject
@@ -254,7 +246,7 @@ function BankDetails({
 									disabled={Object.values(value).includes('false')
 									|| !(value?.text.length) || loading}
 									onClick={() => {
-										onApprove();
+										OnAction('APPROVED');
 									}}
 								>
 									Approve

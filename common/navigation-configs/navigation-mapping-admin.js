@@ -1701,6 +1701,8 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
+		showInNav     : false,
+
 	},
 	allocations: {
 		key         : 'allocations',

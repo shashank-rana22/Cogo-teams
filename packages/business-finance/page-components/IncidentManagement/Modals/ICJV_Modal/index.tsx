@@ -23,12 +23,6 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 		remark,
 	});
 
-	const onApprove = () => {
-		OnAction('APPROVED');
-	};
-	const onReject = () => {
-		OnAction('REJECTED');
-	};
 	return (
 		<div>
 			<div>
@@ -98,7 +92,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
 									onClick={() => {
-										onReject();
+										OnAction('REJECTED');
 									}}
 								>
 									Reject
@@ -109,7 +103,7 @@ function ICJVModal({ interCompanyJournalVoucherRequest, refetch, id, isEditable 
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
 									onClick={() => {
-										onApprove();
+										OnAction('APPROVED');
 									}}
 								>
 									Approve
