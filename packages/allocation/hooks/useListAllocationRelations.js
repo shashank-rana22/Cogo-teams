@@ -121,6 +121,25 @@ const useAllocationRelations = () => {
 		});
 	};
 
+	const onClearSelection = () => {
+		setCheckedRowsId([]);
+
+		setSelectAll(false);
+
+		setConfirmModalState((prev) => ({
+			...prev,
+			showApproveAllButton: false,
+		}));
+
+		setParams((previousParams) => ({
+			...(previousParams || {}),
+			filters: {
+				...((previousParams || {}).filters || {}),
+				id: undefined,
+			},
+		}));
+	};
+
 	const columns = [
 		{
 			id     : 'check',
@@ -278,6 +297,7 @@ const useAllocationRelations = () => {
 		searchQuery,
 		columns,
 		setSelectAll,
+		onClearSelection,
 	};
 };
 

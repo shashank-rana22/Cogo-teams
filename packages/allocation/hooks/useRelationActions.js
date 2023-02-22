@@ -19,7 +19,7 @@ const useRelationActions = ({
 	confirmModalState = {},
 	setConfirmModalState = () => {},
 	checkedRowsId = [],
-	// onResettingBulkMode,
+	onClearSelection = () => {},
 }) => {
 	const apiName =	confirmModalState.type === 'approve_all'
 		? 'relation_bulk_approve'
@@ -58,7 +58,7 @@ const useRelationActions = ({
 			Toast.success(`${TOAST_MESSAGE_MAPPING[confirmModalState.type]} successfully! Please wait 
 			for the changes to be reflected`);
 
-			// onResettingBulkMode();
+			onClearSelection();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

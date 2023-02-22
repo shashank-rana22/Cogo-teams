@@ -15,14 +15,13 @@ function List({
 	columns,
 	setParams = () => {},
 	checkedRowsId = [],
-	setCheckedRowsId = () => {},
 	activeTab,
 	confirmModalState,
 	setConfirmModalState = () => {},
 	paginationData = {},
 	searchQuery,
-	setSelectAll = () => {},
 	getNextPage = () => {},
+	onClearSelection = () => {},
 }) {
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
@@ -56,13 +55,12 @@ function List({
 				<BulkUpdateMode
 					list={list}
 					checkedRowsId={checkedRowsId}
-					setCheckedRowsId={setCheckedRowsId}
 					confirmModalState={confirmModalState}
 					setConfirmModalState={setConfirmModalState}
 					params={params}
 					setParams={setParams}
-					setSelectAll={setSelectAll}
 					searchQuery={searchQuery}
+					onClearSelection={onClearSelection}
 				/>
 			) : null}
 
@@ -98,6 +96,7 @@ function List({
 						confirmModalState={confirmModalState}
 						setConfirmModalState={setConfirmModalState}
 						checkedRowsId={checkedRowsId}
+						onClearSelection={onClearSelection}
 					/>
 				</Modal>
 			)}

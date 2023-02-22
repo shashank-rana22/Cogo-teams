@@ -5,13 +5,12 @@ import styles from './styles.module.css';
 
 function BulkUpdateMode({
 	checkedRowsId = [],
-	setCheckedRowsId = () => {},
 	confirmModalState,
 	setConfirmModalState = () => {},
 	params,
 	setParams = () => {},
-	setSelectAll = () => {},
 	searchQuery,
+	onClearSelection = () => {},
 }) {
 	const applyBulkFilter = async () => {
 		setConfirmModalState((prev) => ({
@@ -28,25 +27,6 @@ function BulkUpdateMode({
 				q  : searchQuery || undefined,
 			},
 		});
-	};
-
-	const onClearSelection = () => {
-		setCheckedRowsId([]);
-
-		setSelectAll(false);
-
-		setConfirmModalState((prev) => ({
-			...prev,
-			showApproveAllButton: false,
-		}));
-
-		setParams((previousParams) => ({
-			...(previousParams || {}),
-			filters: {
-				...((previousParams || {}).filters || {}),
-				id: undefined,
-			},
-		}));
 	};
 
 	const selectedItemsForUpdate = !isEmpty(checkedRowsId) ? checkedRowsId.length : '';
@@ -77,7 +57,7 @@ function BulkUpdateMode({
 
 						<div className={styles.clear_selection_button_container}>
 							<Button
-								size="md"
+								size="sm"
 								themeType="linkUi"
 								onClick={() => onClearSelection()}
 							>

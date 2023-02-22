@@ -28,6 +28,7 @@ function Relations() {
 		searchQuery,
 		columns,
 		setSelectAll = () => {},
+		onClearSelection = () => {},
 	} = useAllocationRelations();
 
 	return (
@@ -59,6 +60,7 @@ function Relations() {
 				getNextPage={getNextPage}
 				searchQuery={searchQuery}
 				setSelectAll={setSelectAll}
+				onClearSelection={onClearSelection}
 			/>
 
 			{showCreateRelationModal && (
