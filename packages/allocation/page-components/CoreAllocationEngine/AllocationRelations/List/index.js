@@ -5,7 +5,6 @@ import React from 'react';
 import EmptyState from '../../../../common/EmptyState';
 
 import BulkUpdateMode from './BulkUpdateMode';
-import ListItem from './ListItem';
 import styles from './styles.module.css';
 import UserActions from './UserActions';
 
@@ -28,10 +27,6 @@ function List({
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
 	const modifiedColumns = columns.filter((col) => col.showInTabs.includes(activeTab));
-
-	// if (loading) {
-	// 	return <ShimmerState />;
-	// }
 
 	if (isEmpty(list)) {
 		return (

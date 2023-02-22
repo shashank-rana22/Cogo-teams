@@ -59,6 +59,7 @@ function AllocationQuotas() {
 						quotaItem={quotaItem}
 						onCloseModal={() => setQuotaItem(null)}
 						refetch={refetch}
+						toggleRoleType={toggleRoleType}
 					/>
 				</Modal>
 			)}
