@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-function useListFaqTags() {
+function useListFaqTags({ searchTagsInput = '' }) {
 	const [tagCurrentPage, setTagCurrentPage] = useState(1);
 	const [activeTag, setActiveTag] = useState('active');
 	const [{ data, loading }, trigger] = useRequest({
@@ -12,7 +12,12 @@ function useListFaqTags() {
 	const fetchFaqTag = async () => {
 		try {
 			await trigger({
-				data: { page: tagCurrentPage, status: activeTag },
+				params: {
+					page       : tagCurrentPage,
+					status     : activeTag,
+					page_limit : 5,
+					filters    : { q: searchTagsInput },
+				},
 			});
 		} catch (err) {
 			// console.log(err);
@@ -20,9 +25,17 @@ function useListFaqTags() {
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTag(); }, [activeTag]);
+	useEffect(() => { fetchFaqTag(); }, [activeTag, tagCurrentPage, searchTagsInput]);
 
-	return { fetchFaqTag, data, loading, activeTag, setActiveTag, tagCurrentPage, setTagCurrentPage };
+	return {
+		fetchFaqTag,
+		data,
+		loading,
+		activeTag,
+		setActiveTag,
+		tagCurrentPage,
+		setTagCurrentPage,
+	};
 }
 
 export default useListFaqTags;

@@ -1,14 +1,18 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
 import styles from './styles.module.css';
 
-function Header({ activeTopic, setConfigurationPage = () => {}, setActiveTopic = () => {} }) {
+function Header({
+	activeTopic,
+	searchTopicsInput,
+	setSearchTopicssInput = () => {},
+	setConfigurationPage = () => {},
+	setActiveTopic = () => {},
+}) {
 	const router = useRouter();
-	const [searchTopicsInput, setSearchTopicssInput] = useState('');
 
 	const onClickAddTopic = () => {
 		router.push(

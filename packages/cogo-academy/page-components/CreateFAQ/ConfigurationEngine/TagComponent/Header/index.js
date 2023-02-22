@@ -1,14 +1,20 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
 import styles from './styles.module.css';
 
-function Header({ activeTag, setConfigurationPage = () => {}, setActiveTag = () => {} }) {
+function Header(
+	{
+		activeTag,
+		searchTagsInput,
+		setSearchTagsInput = () => {},
+		setConfigurationPage = () => {},
+		setActiveTag = () => {},
+	},
+) {
 	const router = useRouter();
-	const [searchTagsInput, setSearchTagsInput] = useState('');
 
 	const onClickAddTag = () => {
 		router.push(

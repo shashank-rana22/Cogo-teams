@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-function useListFaqTopics() {
+function useListFaqTopics({ searchTopicsInput = '' }) {
 	const [topicCurrentPage, setTopicCurrentPage] = useState(1);
 	const [activeTopic, setActiveTopic] = useState('active');
 
@@ -10,10 +10,15 @@ function useListFaqTopics() {
 		url    : '/list_faq_topics',
 	}, { manual: true });
 
-	const fetchFaqTag = async () => {
+	const fetchFaqTopic = async () => {
 		try {
 			await trigger({
-				data: { page: topicCurrentPage, status: activeTopic },
+				params: {
+					page       : topicCurrentPage,
+					status     : activeTopic,
+					page_limit : 5,
+					filters    : { q: searchTopicsInput },
+				},
 			});
 		} catch (err) {
 			// console.log(err);
@@ -21,9 +26,17 @@ function useListFaqTopics() {
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTag(); }, [activeTopic]);
+	useEffect(() => { fetchFaqTopic(); }, [activeTopic, topicCurrentPage, searchTopicsInput]);
 
-	return { fetchFaqTag, data, loading, activeTopic, setActiveTopic, topicCurrentPage, setTopicCurrentPage };
+	return {
+		fetchFaqTopic,
+		data,
+		loading,
+		activeTopic,
+		setActiveTopic,
+		topicCurrentPage,
+		setTopicCurrentPage,
+	};
 }
 
 export default useListFaqTopics;

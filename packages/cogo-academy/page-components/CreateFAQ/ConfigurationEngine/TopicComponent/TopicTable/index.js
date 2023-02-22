@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
@@ -8,19 +7,23 @@ import LoadingState from '../../commons/LoadingState';
 
 import styles from './styles.module.css';
 
-function TopicTable({ columns = [], data = [], topicsLoading = false, topicCurrentPage, setTopicCurrentPage = () => {} }) {
+function TopicTable({
+	columns = [],
+	data = [],
+	topicsLoading = false,
+	topicCurrentPage,
+	setTopicCurrentPage = () => {},
+}) {
 	const { list:listTopicData = [], total_count } = data || {};
+
 	if (topicsLoading) {
-		return (
-			<div>
-				<LoadingState />
-			</div>
-		);
+		return <LoadingState />;
 	}
 
-	if (!topicsLoading && isEmpty(listTopicData)) {
-		return (<div><EmptyState /></div>);
+	if (isEmpty(listTopicData)) {
+		return <EmptyState />;
 	}
+
 	return (
 		<div>
 			<div className={styles.table}>

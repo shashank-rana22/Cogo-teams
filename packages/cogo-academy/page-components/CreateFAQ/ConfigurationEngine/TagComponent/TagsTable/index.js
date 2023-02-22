@@ -11,19 +11,11 @@ function TagTable({ columns = [], data = [], tagsLoading = true, tagCurrentPage,
 	const { list:listTagsData = [], total_count } = data || {};
 
 	if (tagsLoading) {
-		return (
-			<div>
-				<LoadingState />
-			</div>
-		);
+		return <LoadingState />;
 	}
 
-	if (!tagsLoading && isEmpty(listTagsData)) {
-		return (
-			<div>
-				<EmptyState />
-			</div>
-		);
+	if (isEmpty(listTagsData)) {
+		return <EmptyState />;
 	}
 
 	return (
