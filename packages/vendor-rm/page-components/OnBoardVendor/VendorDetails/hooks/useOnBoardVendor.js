@@ -181,7 +181,7 @@ function useOnBoardVendor({
 		const payload = {
 			...formattedValues,
 			registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
-			registration_number    : formattedValues?.registrationNumber,
+			registration_number    : formattedValues?.registration_number?.registrationNumber,
 		};
 
 		try {
