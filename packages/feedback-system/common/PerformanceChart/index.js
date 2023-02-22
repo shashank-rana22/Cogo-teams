@@ -56,7 +56,7 @@ function PerformanceChart({ params = {}, user_id = '' }) {
 				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
 			</div>
 
-			{/* <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+			<div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginBottom: '40px' }}>
 				<Placeholder
 					style={{
 						marginBottom : '16px',
@@ -70,8 +70,15 @@ function PerformanceChart({ params = {}, user_id = '' }) {
 					width="30%"
 					height="160px"
 				/>
-				<Placeholder style={{ marginBottom: '32px' }} width="30%" height="80px" />
-			</div> */}
+				<Placeholder
+					style={{
+						marginBottom : '32px',
+						marginLeft   : '20%',
+					}}
+					width="16%"
+					height="40px"
+				/>
+			</div>
 
 		</div>
 	);

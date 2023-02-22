@@ -13,11 +13,11 @@ import styles from './styles.module.css';
 function UserDashboard() {
 	const monthControls = getMonthControls();
 
-	const formProps =	useForm();
+	const formProps = useForm();
 	const { watch: watchDateFilter, control } = formProps;
 
-	const monthFilter = watchDateFilter('created_at_month');
-	const yearFilter = watchDateFilter('created_at_year');
+	const monthFilter = watchDateFilter('month');
+	const yearFilter = watchDateFilter('year');
 	const ratingFilter = watchDateFilter('rating');
 
 	const {
@@ -36,12 +36,9 @@ function UserDashboard() {
 
 	useEffect(() => setParams((pv) => ({
 		...pv,
-		filters: {
-			...(pv.filters),
-			created_at_month : monthFilter || undefined,
-			created_at_year  : yearFilter || undefined,
-			rating           : ratingFilter || undefined,
-		},
+		Month  : monthFilter || undefined,
+		Year   : yearFilter || undefined,
+		Rating : ratingFilter || undefined,
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	})), [monthFilter, yearFilter, ratingFilter]);
 

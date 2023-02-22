@@ -16,12 +16,14 @@ function ManagerDashboard() {
 	const { list = [], pagination_data = {} } = data;
 	const { total_count = '' } = pagination_data;
 
-	const monthControls = getMonthControls();
+	console.log('list::', list);
+
+	const monthControls = getMonthControls(params?.Year);
 
 	const Router = useRouter();
 
 	const setFilter = (val, type) => {
-		setParams({ ...params, filters: { ...(params.filters || {}), [type]: val } });
+		setParams({ ...params, [type]: val || undefined });
 	};
 
 	const handleClick = () => {
@@ -37,20 +39,22 @@ function ManagerDashboard() {
 			<div className={styles.page_actions}>
 				<div className={styles.filters}>
 					<Select
-						value={params.filters?.year}
-						onChange={(val) => setFilter(val, 'created_at_year')}
+						value={params.Year}
+						onChange={(val) => setFilter(val, 'Year')}
 						placeholder="Select Year"
 						style={{ marginRight: '8px' }}
 						options={monthControls.year.options}
+						isClearable={!params.Month}
 					/>
 
 					<Select
-						value={params.filters?.month}
-						onChange={(val) => setFilter(val, 'created_at_month')}
-						disabled={!params.filters?.created_at_year}
+						value={params.Month}
+						onChange={(val) => setFilter(val, 'Month')}
+						disabled={!params.Year}
 						placeholder="Select Month"
 						style={{ marginRight: '8px' }}
 						options={monthControls.month.options}
+						isClearable
 					/>
 
 				</div>

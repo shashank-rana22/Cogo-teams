@@ -15,7 +15,7 @@ const LIST_COLUMNS_MAPPING = {
 	employee_id : 'EMPLOYEE ID',
 	latest_kpi  : 'Current KPI',
 	score       : 'SCORE',
-	details     : 'DETAILS',
+	details     : '',
 };
 
 function ListItem({ item }) {
