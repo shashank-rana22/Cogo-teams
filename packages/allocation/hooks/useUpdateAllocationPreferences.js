@@ -3,17 +3,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const CONFIGURATION_OPTIONS = [
-	{
-		label : 'Old',
-		value : 'old_configuration',
-	},
-	{
-		label : 'New',
-		value : 'new_configuration',
-	},
-];
-
 const useUpdateAllocationPreferences = ({ item = {}, setShow = () => {}, listRefetch = () => {} }) => {
 	const [radioValue, setRadioValue] = useState();
 
@@ -45,7 +34,6 @@ const useUpdateAllocationPreferences = ({ item = {}, setShow = () => {}, listRef
 	};
 
 	return {
-		CONFIGURATION_OPTIONS,
 		radioValue,
 		setRadioValue,
 		loadingUpdatePreferences: loading,

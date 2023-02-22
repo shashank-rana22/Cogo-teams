@@ -25,7 +25,7 @@ const useListAllocationRequests = () => {
 	const [params, setParams] = useState({
 		sort_by       : 'created_at',
 		sort_type     : 'desc',
-		page_limit    : 5,
+		page_limit    : 10,
 		page          : 1,
 		data_required : true,
 		filters       : {

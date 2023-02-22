@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 
+import CONFIGURATION_OPTIONS from '../../../../../constants/configurations-options-mapping';
 import useListAllocationPreferences from '../../../../../hooks/useListAllocationPreferences';
 import useUpdateAllocationPreferences from '../../../../../hooks/useUpdateAllocationPreferences';
 
@@ -11,7 +12,6 @@ function UpdatePreferences({ item = {}, setShow = () => {}, listRefetch = () => 
 	} = useListAllocationPreferences({ item });
 
 	const {
-		CONFIGURATION_OPTIONS,
 		radioValue,
 		setRadioValue,
 		loadingUpdatePreferences,

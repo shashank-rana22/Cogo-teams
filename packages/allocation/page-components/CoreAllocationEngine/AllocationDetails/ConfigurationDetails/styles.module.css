@@ -7,8 +7,6 @@
 	border-radius: 8px;
 	box-shadow: 0 0 16px rgb(44 62 80 / 20%);
 
-	/* align-items: center; */
-
 	@media (max-width: 768px) {
 		flex-direction: column;
 	}
