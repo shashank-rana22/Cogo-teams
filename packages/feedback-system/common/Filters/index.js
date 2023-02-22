@@ -2,29 +2,24 @@ import { Select } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-import { deptControls as departmentControls } from '../../utils/departmentControls';
+import getDepartmentControls from '../../utils/departmentControls';
 import useGetControls from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
 
 import styles from './styles.module.css';
 
-const DEPARTMENT_MAPPING = {
-	technology : 'tech_role',
-	finance    : 'finance_role',
-	business   : 'business_role',
-};
-
 function Filters({ params = {}, setParams = () => {} }) {
-	const deptControls = departmentControls.find((control) => control.name === 'department');
+	const { Department = '', Designation = '' } = params;
 
-	const roleControls = params.Department ? departmentControls.find((control) => control.name
-	=== DEPARTMENT_MAPPING[params.Department]) : {};
+	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
 
 	const managerControls = useGetControls().find((control) => control.name === 'manager_id');
 	const monthControls = getMonthControls(params.Year);
 
-	const { watch, control: managerControl = {} } = useForm();
+	const { watch, control } = useForm();
 	const manager = watch('manager_id');
+	const department = watch('department');
+	const designation = watch('designation');
 
 	const setFilter = (val, type) => {
 		setParams({ ...params, [type]: val, Page: 1 });
@@ -33,36 +28,29 @@ function Filters({ params = {}, setParams = () => {} }) {
 	useEffect(() => {
 		setParams({
 			...params,
-			ManagerID : manager || undefined,
-			Page      : 1,
+			ManagerID   : manager || undefined,
+			Department  : department || undefined,
+			Designation : designation || undefined,
+			Page        : 1,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [manager]);
+	}, [manager, department, designation]);
 
 	return (
 
 		<div className={styles.department_select}>
-			<Select
-				value={params.Department}
-				onChange={(val) => setFilter(val, 'Department')}
-				options={deptControls.options}
-				placeholder="Department..."
-				style={{ marginRight: '8px' }}
-				isClearable={!params.Designation}
-			/>
-			<Select
-				value={params.Designation}
-				onChange={(val) => setFilter(val, 'Designation')}
-				options={roleControls.options}
-				disabled={!params.Department}
-				placeholder="Role..."
-				style={{ marginRight: '8px' }}
-				isClearable
-			/>
+			{departmentDesignationControls.map((cntrl) => (
+				<SelectController
+					{...cntrl}
+					control={control}
+					style={{ marginRight: '8px' }}
+					key={cntrl.name}
+				/>
+			))}
 
 			<SelectController
 				{...managerControls}
-				control={managerControl}
+				control={control}
 				style={{ marginRight: '8px' }}
 			/>
 

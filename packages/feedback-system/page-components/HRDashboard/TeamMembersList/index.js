@@ -44,7 +44,7 @@ function TeamMembersList({
 			flex  : 1.9,
 		},
 		{
-			key   : 'current_kpi',
+			key   : 'rating',
 			label : 'Latest KPI',
 			flex  : 1.7,
 		},
@@ -106,7 +106,7 @@ function TeamMembersList({
 				</Accordion>
 			))}
 
-			{total_count > 2 && (
+			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="number"

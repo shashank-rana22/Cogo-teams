@@ -85,7 +85,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 
 	const downloadOnboardingSample = () => {
 		// eslint-disable-next-line max-len, no-undef
-		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/b633a4b840f422d51aaf1b3c1cd4ddd5/sample_ratings_sheet.csv', '_blank');
+		// window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/b633a4b840f422d51aaf1b3c1cd4ddd5/sample_ratings_sheet.csv', '_blank');
 	};
 
 	const getToolTip = (text) => <div className={styles.tooltip_text}>{text}</div>;

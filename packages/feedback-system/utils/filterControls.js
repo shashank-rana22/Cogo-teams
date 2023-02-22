@@ -9,8 +9,6 @@ const useGetControls = () => {
 		initialCall : false,
 		params      : {
 			filters: {
-				reporting_level      : 0,
-				reporting_manager_id : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
 			},
 		},
 		valueKey : 'user_id',
