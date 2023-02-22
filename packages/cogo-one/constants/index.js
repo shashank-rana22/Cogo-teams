@@ -99,3 +99,8 @@ export const OFFLINE_STATUS_OPTIONS = [
 		value : 'custom',
 	},
 ];
+
+export const PLATFORM_MAPPING = {
+	public_website : 'Website',
+	public_cp      : 'CP Platform',
+};

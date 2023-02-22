@@ -13,10 +13,12 @@ const getActiveCardDetails = (data = {}) => {
 		user_email = '',
 		user_type = '',
 		sender = null,
+		...rest
 	} = data || {};
 
 	if (channel_type === 'platform_chat') {
 		return {
+			...rest,
 			user_id,
 			user_name,
 			organization_id,
@@ -27,10 +29,12 @@ const getActiveCardDetails = (data = {}) => {
 			user_type,
 			sender,
 			email: user_email,
+
 		};
 	}
 	if (isEmpty(Object.keys(user_details || {}))) {
 		return {
+			...rest,
 			user_name,
 			mobile_no,
 			lead_user_id,
@@ -49,6 +53,7 @@ const getActiveCardDetails = (data = {}) => {
 	} = user_details || {};
 
 	return {
+		...rest,
 		organization_name : business_name,
 		user_name         : name,
 		organization_id   : detailsOrgId,

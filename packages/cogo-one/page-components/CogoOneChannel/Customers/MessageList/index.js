@@ -4,6 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
+import { PLATFORM_MAPPING } from '../../../../constants';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -97,7 +98,7 @@ function MessageList({
 
 						const showOrganization = () => {
 							if (['public_website', 'public_cp'].includes(user_type)) {
-								return startCase(user_type);
+								return startCase(PLATFORM_MAPPING[user_type] || '');
 							}
 							return startCase(organization_name);
 						};
