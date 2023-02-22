@@ -49,7 +49,7 @@ function LineChart() {
 						direction         : 'row',
 						justify           : false,
 						translateX        : -650,
-						translateY        : -150,
+						translateY        : -190,
 						itemsSpacing      : 0,
 						itemDirection     : 'left-to-right',
 						itemWidth         : 80,

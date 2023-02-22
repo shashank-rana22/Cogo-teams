@@ -1,6 +1,7 @@
 .intent_served_box {
 	display: flex;
 	flex-direction: column;
+	width: 52%;
 	height: 280px;
 	padding: 13px;
 	background-color: #fff;

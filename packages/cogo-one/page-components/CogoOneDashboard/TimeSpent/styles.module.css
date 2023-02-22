@@ -2,6 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	padding-left: 4px;
+	margin-bottom: 12px;
 	background: #fff;
 	border-radius: 6px;
 }

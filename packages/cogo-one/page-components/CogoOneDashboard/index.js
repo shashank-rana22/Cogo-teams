@@ -1,4 +1,4 @@
-// import { useSelector } from '@cogoport/store';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 // import AgentActivity from './AgentActivity';
@@ -18,6 +18,13 @@ import TimeSpent from './TimeSpent';
 function CogoOneDashboard() {
 	const [activeTab, setActiveTab] = useState('day');
 	// const { user } = useSelector(({ profile }) => profile);
+	const {
+		user_data,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	console.log('user_data', user_data);
 
 	return (
 		<div className={styles.prime_container}>

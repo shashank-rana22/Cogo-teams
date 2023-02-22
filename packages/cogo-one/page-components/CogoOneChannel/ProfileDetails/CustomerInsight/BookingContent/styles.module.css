@@ -1,39 +1,40 @@
 .container {
-	background: #FFFFFF;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
-	border-radius: 12px;
 	padding: 4px;
 	margin-top: 10px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	width: 100%;
 	justify-content: space-between;
-	border-bottom: 1px solid #F2F2F2;;
+	width: 100%;
+	border-bottom: 1px solid #f2f2f2;
 }
 
 .title {
+	margin-left: 8px;
 	font-size: 12px;
 	font-weight: 600;
-	color: #4F4F4F;
+	color: #4f4f4f;
 	text-align: center;
-	margin-left: 8px;
 }
 
 .left {
 	display: flex;
-	width: 84%;
 	align-items: center;
+	width: 84%;
 }
+
 .right {
 	display: flex;
+	align-items: center;
 	justify-content: flex-end;
 	width: 16%;
-	align-items: center;
 }
 
 .body {
@@ -52,9 +53,9 @@
 }
 
 .type_name {
-	color: #221F20;
-	font-weight: 600;
 	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
 }
 
 .details {
@@ -65,42 +66,43 @@
 
 .port {
 	display: flex;
-	width: 100%;
 	align-items: center;
+	width: 100%;
 }
 
 .origin {
 	display: flex;
-	font-weight: 500;
 	font-size: 12px;
-	color: #221F20;
+	font-weight: 500;
+	color: #221f20;
+
 	span {
-		color: #6FA5AB;
 		margin-left: 4px;
+		color: #6fa5ab;
 	}
 }
 
 .name {
-	font-weight: 500;
-	font-size: 12px;
-	color: #4F4F4F;
 	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .footer {
 	display: flex;
 	justify-content: space-evenly;
 	padding: 7px 26px;
-	background: #F5F5F5;
-	border: 1px solid #FDFBF6;
+	background: #f5f5f5;
+	border: 1px solid #fdfbf6;
 }
 
 .quantities {
-	font-size: 12px;
-	color: #221F20;
-	text-align: center;
 	padding-right: 9px;
-	border-right: 1px dashed #CFBC93;
+	font-size: 12px;
+	color: #221f20;
+	text-align: center;
+	border-right: 1px dashed #cfbc93;
 
 	span {
 		margin-left: 10px;
