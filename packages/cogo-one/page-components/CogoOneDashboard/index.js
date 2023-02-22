@@ -2,7 +2,7 @@ import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 // import AgentActivity from './AgentActivity';
-// import Calender from './Calender';
+import Calender from './Calendar';
 import ChatStatistics from './ChatStatistics';
 import Header from './Header';
 import Intelligence from './Intelligence';
@@ -31,7 +31,7 @@ function CogoOneDashboard() {
 			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					{/* <Calender /> */}
+					<Calender />
 					<LineChart />
 					{/* <AgentActivity /> */}
 					<div className={styles.statistics}>
