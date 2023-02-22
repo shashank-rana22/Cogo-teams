@@ -9,7 +9,9 @@
 .message_container {
     background: #f9f9f9;
     height: calc(100% - 104px);
+	
 }
+
 .modal_header_title {
     display: flex;
     img {
@@ -17,6 +19,7 @@
         width: 18px;
     }
 }
+
 .modal_title {
     font-size: 14px;
     font-weight: 600;
