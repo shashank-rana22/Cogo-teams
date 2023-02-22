@@ -1,6 +1,7 @@
 .main_body {
-    padding: 0px 16px 16px 16px;
-    /* width: 100%;
+	padding: 0 16px 16px;
+
+	/* width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -9,20 +10,20 @@
 }
 
 .form_body {
-    display: flex;
+	display: flex;
 }
 
 .form_label {
-    text-align: start;
-    margin-bottom: 4px;
+	margin-bottom: 4px;
+	text-align: start;
 }
 
 .form_error_message {
-    font-size: 0.75rem;
+	font-size: 0.75rem;
 	font-weight: 400;
 	color: #cb6464;
 }
 
 .button_container {
-    display: flex;
+	display: flex;
 }

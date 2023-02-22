@@ -1,21 +1,21 @@
 import categoryOptions from './category-options';
-import subCategoryOptions from './sub-category-options';
 
 const getControls = () => [
 	{
-		name          : 'office_details',
-		label         : 'Office Details',
-		type          : 'fieldArray',
-		buttonText    : 'Add',
-		// noDeleteButtonTill : 1,
-		showLabelOnce : true,
-		controls      : [
+		name               : 'office_details',
+		label              : 'Office Details',
+		type               : 'fieldArray',
+		buttonText         : 'Add',
+		noDeleteButtonTill : 1,
+		showLabelOnce      : true,
+		controls           : [
 			{
 				name        : 'category',
 				label       : 'Select Category',
 				type        : 'select',
 				placeholder : 'Select a Category',
 				options     : categoryOptions,
+				style       : { flexBasis: '30%' },
 				rules       : { required: 'Category is required' },
 			},
 			{
@@ -23,14 +23,15 @@ const getControls = () => [
 				label       : 'Select Sub-category',
 				type        : 'select',
 				placeholder : 'Select a sub-category',
-				options     : subCategoryOptions,
+				style       : { flexBasis: '30%' },
 				rules       : { required: 'Sub-category is required' },
 			},
 			{
 				name        : 'cogoport_office_id',
 				label       : 'Select Cogoport Office',
-				type        : 'multiSelect',
+				type        : 'select',
 				placeholder : 'Select Location',
+				style       : { flexBasis: '30%' },
 				options     : [
 					{ label: 'Delhi', value: 'd1cd0599-7d89-4219-878e-dc0cbf579948' },
 					{ label: 'Coimbatore', value: '61fe95e4-b00a-48f2-b0c6-a58174b7f9dd' },
@@ -58,15 +59,6 @@ const getControls = () => [
 			},
 		],
 	},
-	{
-		name        : 'additional_remark',
-		label       : '',
-		type        : 'text',
-		placeholder : 'Enter additional Remarks...',
-		span        : '100%',
-		style       : { width: '100%', height: '80px', marginTop: '16px' },
-	},
-
 ];
 
 export default getControls;

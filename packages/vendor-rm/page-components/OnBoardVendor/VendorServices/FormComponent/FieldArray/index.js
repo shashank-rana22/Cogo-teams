@@ -16,6 +16,9 @@ function FieldArray({
 	showButtons = true,
 	disabled = false,
 	showLabelOnce = false,
+	noDeleteButtonTill,
+	watch = () => {},
+	setValue = () => {},
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -48,11 +51,20 @@ function FieldArray({
 					showElements={showElements?.[index]}
 					disabled={disabled}
 					showLabelOnce={showLabelOnce}
+					noDeleteButtonTill={noDeleteButtonTill}
+					office_details={watch().office_details}
+					setValue={setValue}
+					watch={watch}
 				/>
 			))}
 
 			{showButtons && !disabled ? (
-				<Button themeType="accent" onClick={() => append(childEmptyValues)}>
+				<Button
+					size="lg"
+					role="presentation"
+					themeType="accent"
+					onClick={() => append(childEmptyValues)}
+				>
 					+
 					{' '}
 					{buttonText}

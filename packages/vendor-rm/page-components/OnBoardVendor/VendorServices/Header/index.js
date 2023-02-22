@@ -13,13 +13,6 @@ function Header({
 			<div className={styles.title}>
 				Vendor Services
 			</div>
-			<div
-				role="presentation"
-				className={styles.back_link}
-				onClick={() => onBack(preveousFormStep)}
-			>
-				Back to Vendor Contact
-			</div>
 		</div>
 	);
 }

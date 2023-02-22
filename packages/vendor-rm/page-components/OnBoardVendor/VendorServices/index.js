@@ -1,12 +1,13 @@
+/* eslint-disable import/no-cycle */
 import FormComponent from './FormComponent';
 import Header from './Header';
-// eslint-disable-next-line import/no-cycle
 import useVendorServices from './hooks/useVendorServices';
 import styles from './styles.module.css';
 
 function VendorServices({
 	activeStepper = {},
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const {
@@ -17,8 +18,11 @@ function VendorServices({
 		onSubmit = () => {},
 		loading = false,
 		handleBackLink = () => {},
+		watch = () => {},
+		setValue,
 	} = useVendorServices({
 		setActiveStepper,
+		vendorInformation,
 		setVendorInformation,
 	});
 
@@ -28,6 +32,7 @@ function VendorServices({
 				activeStepper={activeStepper}
 				onBack={handleBackLink}
 			/>
+
 			<FormComponent
 				controls={controls}
 				handleSubmit={handleSubmit}
@@ -36,6 +41,9 @@ function VendorServices({
 				errors={errors}
 				loading={loading}
 				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
+				watch={watch}
+				setValue={setValue}
 			/>
 		</div>
 	);

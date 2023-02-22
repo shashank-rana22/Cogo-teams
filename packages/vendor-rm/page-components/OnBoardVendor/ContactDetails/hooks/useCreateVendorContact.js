@@ -1,18 +1,24 @@
+/* eslint-disable import/no-cycle */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import TABS_MAPPING from '../../../../constants/tabs';
-import getControls from '../utils/getControls';
+import COMPONENT_MAPPING from '../../../../utils/component-mapping';
+import controls from '../utils/controls';
 
 function useCreateVendorContact({
 	setActiveStepper = () => {},
 	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
-	const fields = getControls();
+	const { general: { query } } = useSelector((state) => state);
+
+	const { vendor_id } = query;
+
+	const { contact_details = {} } = vendorInformation || {};
 
 	const {
 		control,
@@ -22,26 +28,20 @@ function useCreateVendorContact({
 		setValue,
 	} = useForm();
 
+	const isUpdateAction = !isEmpty(contact_details);
+
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_vendor_poc',
+		url    : isUpdateAction ? '/update_vendor_poc' : '/create_vendor_poc',
 		method : 'post',
 	}, { manual: true });
 
 	const createVendorContact = async ({ data, step }) => {
 		const formattedValues = getValues();
 
-		setVendorInformation((pv) => {
-			const { key = '' } = TABS_MAPPING.find((item) => item.step === step);
-			return {
-				...pv,
-				[key]: data,
-			};
-		});
-
 		const payload = {
 			...formattedValues,
+			vendor_id,
 			vendor_poc_proof      : formattedValues?.contact_proof_url?.finalUrl,
-			vendor_id             : '19fd89fa-4b3a-41ae-ba61-c48b166821dd',
 			mobile_country_code   : formattedValues?.mobile_number?.country_code,
 			mobile_number         : formattedValues?.mobile_number?.number,
 			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,
@@ -51,9 +51,18 @@ function useCreateVendorContact({
 		try {
 			const res = await trigger({ data: { ...payload } });
 
+			setVendorInformation((pv) => {
+				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+				return {
+					...pv,
+					[key]: data,
+				};
+			});
+
 			if (res?.data) {
-				Toast.success('Vendor Contact Created Successfully');
-				setActiveStepper(TABS_MAPPING[step]);
+				Toast.success(`Contact ${isUpdateAction ? 'updated' : 'created'} Successfully`);
+
+				setActiveStepper('vendor_services');
 			}
 		} catch (error) {
 			Toast.error('Something went wrong');
@@ -61,28 +70,43 @@ function useCreateVendorContact({
 	};
 
 	useEffect(() => {
-		fields.forEach((field) => {
+		const mapping = {
+			mobile_number: {
+				number: contact_details?.mobile_number?.number
+								|| contact_details?.mobile_number,
+				country_code: contact_details?.mobile_number?.country_code
+								|| contact_details?.mobile_country_code,
+			},
+			whatsapp_number: {
+				number: contact_details?.whatsapp_number?.number
+								|| contact_details?.whatsapp_number,
+				country_code: contact_details?.whatsapp_number?.country_code
+								|| contact_details?.whatsapp_country_code,
+			},
+		};
+
+		controls.forEach((field) => {
 			if (field.type === 'file') {
-				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]?.finalUrl);
+				setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl);
 			} else {
-				setValue(`${field.name}`, vendorInformation?.contact_details?.[field.name]);
+				setValue(
+					`${field.name}`,
+					mapping[field.name]
+					|| contact_details?.[field.name],
+				);
 			}
 		});
-	}, []);
-
-	const handleBackLink = (step) => {
-		setActiveStepper(TABS_MAPPING[step]);
-	};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendorInformation]);
 
 	return {
-		fields,
+		fields: controls,
 		control,
 		errors,
 		createVendorContact,
 		handleSubmit,
 		loading,
 		setActiveStepper,
-		handleBackLink,
 	};
 }
 

@@ -1,5 +1,4 @@
 .header {
-	font-family: Poppins;
 	font-size: 28px;
 	font-style: normal;
 	font-weight: 600;
@@ -13,14 +12,153 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 85%;
 }
 
 .text {
-	margin-bottom: 20px;
-	font-family: Poppins;
+	margin: 0;
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 24px;
+}
+
+.pending {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.verified {
+	display: flex;
+	align-items: center;
+	color: #67c676;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.rejected {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 24px;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	padding: 7px 12px;
+	cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #000;
+	border-radius: 4px;
+}
+
+.dot {
+	height: 3px;
+	margin-left: 4px;
+	background: #000;
+	border: 3px solid #000;
+	border-radius: 100%;
+}
+
+.title {
+	font-weight: 600;
+	color: #221f20;
+}
+
+.kyc {
+	display: flex;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 20%;
+	height: 90px;
+	padding: 24px;
+	margin-right: 22px;
+	margin-bottom: 22px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.box:hover {
+	background-color: #fef199;
+}
+
+.label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.value {
+	font-size: 24px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.button_container {
+	display: flex;
+	width: fit-content;
+}
+
+.heading {
+	display: flex;
+	width: fit-content;
+}
+
+.actions_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+
+	:global {
+		.ui_popover_container {
+			min-width: 370px !important;
+		}
+	}
+}
+
+.input_wrapper {
+	:global {
+		.ui_input_container {
+			width: 366px;
+			margin: 0 12px;
+		}
+	}
+}
+
+.bold {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
+}
+
+.underline {
+	text-decoration-line: underline;
 }

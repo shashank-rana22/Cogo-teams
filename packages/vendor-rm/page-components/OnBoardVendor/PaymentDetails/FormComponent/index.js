@@ -1,12 +1,16 @@
-/* eslint-disable import/no-cycle */
-
+// eslint-disable-next-line import/no-cycle
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
 import FormLayout from '../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../hooks/useVendorBankDetail';
 
+const ButtonContainerStyle = {
+	margin: '20px 60px 20px 20px',
+};
+
 function FormComponent({
 	activeStepper = {},
 	setActiveStepper = () => {},
+	vendorInformation = {},
 	setVendorInformation = () => {},
 }) {
 	const {
@@ -16,7 +20,11 @@ function FormComponent({
 		handleSubmit,
 		loading,
 		onSubmit,
-	} =	useVendorBankDetail({ setActiveStepper, setVendorInformation });
+	} =	useVendorBankDetail({
+		setActiveStepper,
+		vendorInformation,
+		setVendorInformation,
+	});
 
 	return (
 		<div>
@@ -25,11 +33,14 @@ function FormComponent({
 				errors={errors}
 				control={control}
 			/>
+
 			<ButtonLayout
 				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
 				loading={loading}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
+				style={ButtonContainerStyle}
 			/>
 		</div>
 	);

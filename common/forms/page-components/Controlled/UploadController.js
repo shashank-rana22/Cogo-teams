@@ -10,7 +10,7 @@ function UploadController(props) {
 
 	return (
 		<Controller
-			key={rest.id}
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}
@@ -18,6 +18,8 @@ function UploadController(props) {
 				<FileUploader
 					{...rest}
 					key={rest.id}
+					id={name}
+					defaultValues={value}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}

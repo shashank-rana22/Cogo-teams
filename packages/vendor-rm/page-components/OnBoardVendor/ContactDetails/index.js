@@ -16,7 +16,6 @@ function ContactDetails({
 		createVendorContact,
 		loading,
 		handleSubmit,
-		handleBackLink,
 	} =	useCreateVendorContact({
 		setActiveStepper,
 		vendorInformation,
@@ -25,10 +24,7 @@ function ContactDetails({
 
 	return (
 		<div>
-			<Header
-				activeStepper={activeStepper}
-				onBack={handleBackLink}
-			/>
+			<Header />
 
 			<FormComponent
 				activeStepper={activeStepper}

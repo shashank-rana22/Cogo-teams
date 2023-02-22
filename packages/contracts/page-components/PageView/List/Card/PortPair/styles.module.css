@@ -1,0 +1,55 @@
+.upper_body {
+	display: flex;
+	gap: 18px;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 2px;
+	margin-bottom: 8px;
+}
+
+.body {
+	padding: 8px;
+}
+
+.code {
+	font-size: 13px;
+	font-weight: 400;
+	color: #f68b21;
+}
+
+.name {
+	display: flex;
+	align-self: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.country {
+	padding: 1px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.subname {
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 8px 12px;
+	border: 1px solid #f2f2f2;
+	border-radius: 4px;
+}
+
+.service {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	margin-bottom: 10px;
+}

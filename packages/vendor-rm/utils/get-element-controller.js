@@ -4,6 +4,7 @@ import {
 	SelectController,
 	UploadController,
 	MobileNumberController,
+	CountrywiseTaxNumberSelectController,
 } from '@cogoport/forms';
 
 export const getElementController = (type = 'text') => {
@@ -22,6 +23,9 @@ export const getElementController = (type = 'text') => {
 
 		case 'mobile-number-select':
 			return MobileNumberController;
+
+		case 'countrywise-tax-select':
+			return CountrywiseTaxNumberSelectController;
 
 		default:
 			return null;

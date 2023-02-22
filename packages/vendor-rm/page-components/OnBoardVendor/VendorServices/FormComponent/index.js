@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 
 import ButtonLayout from '../../../../commons/components/ButtonLayout/ButtonLayout';
@@ -6,6 +7,10 @@ import { getElementController } from '../../../../utils/get-element-controller';
 import FieldArray from './FieldArray';
 import styles from './styles.module.css';
 
+const ButtonContainerStyle = {
+	margin: '20px',
+};
+
 function FormComponent({
 	controls = [],
 	handleSubmit = () => {},
@@ -13,11 +18,17 @@ function FormComponent({
 	control,
 	errors = {},
 	activeStepper = {},
+	setActiveStepper = () => {},
+	watch = () => {},
+	setValue = () => {},
 }) {
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className={styles.main_body}>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className={styles.main_body}
+		>
 			{controls.map((controlItem) => {
-				const { span, name, label, ...rest } = controlItem;
+				const { span, name, label, noDeleteButtonTill, ...rest } = controlItem;
 
 				if (rest.type === 'fieldArray') {
 					return (
@@ -26,6 +37,9 @@ function FormComponent({
 							control={control}
 							name={controlItem.name}
 							error={errors?.[controlItem.name]}
+							watch={watch}
+							setValue={setValue}
+							noDeleteButtonTill={noDeleteButtonTill}
 						/>
 					);
 				}
@@ -52,8 +66,10 @@ function FormComponent({
 
 			<ButtonLayout
 				activeStepper={activeStepper}
+				setActiveStepper={setActiveStepper}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
+				style={ButtonContainerStyle}
 			/>
 		</form>
 	);
