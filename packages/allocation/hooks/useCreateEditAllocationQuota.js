@@ -10,9 +10,7 @@ const getFormattedValues = (formValues) => {
 	Object.keys(formValues).forEach((keyName) => {
 		const inputValue = Number(formValues[keyName] || '');
 
-		if (inputValue) {
-			quotaAttributes[keyName] = inputValue;
-		}
+		quotaAttributes[keyName] = inputValue;
 	});
 
 	return quotaAttributes;

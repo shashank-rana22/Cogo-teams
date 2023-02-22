@@ -1,0 +1,35 @@
+.header_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.card_container {
+	padding: 12px;
+}
+
+.label_text {
+	padding: 4px 0;
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.value_text {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.elements {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.header_container {
+	display: flex;
+}

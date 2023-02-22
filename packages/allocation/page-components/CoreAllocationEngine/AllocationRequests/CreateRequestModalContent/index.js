@@ -32,7 +32,7 @@ function CreateUpdateModal(props) {
 						size="md"
 						type="button"
 						themeType="tertiary"
-						loading={loadingOnSave}
+						disabled={loadingOnSave}
 						id="cancel_request_btn"
 						onClick={onCloseModal}
 						style={{ marginRight: '10px' }}
