@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -40,7 +42,6 @@ const useListUserVoiceCalls = (filters = {}) => {
 	};
 	useEffect(() => {
 		voiceCallList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pagination]);
 	useEffect(() => {
 		setListData({
@@ -49,7 +50,6 @@ const useListUserVoiceCalls = (filters = {}) => {
 		});
 		setPagination(1);
 		voiceCallList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters)]);
 
 	return {

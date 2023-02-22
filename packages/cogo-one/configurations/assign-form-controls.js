@@ -12,7 +12,7 @@ const controls = {
 		options     : [
 			{
 				label : 'Shipment ID',
-				value : 'shipment_id',
+				value : 'shipment',
 			},
 			{
 				label : 'Invoice',

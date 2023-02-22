@@ -93,7 +93,7 @@ function MessageList({
 							user_type = '',
 						} = userData || {};
 
-						const lastActive = new Date(item.updated_at);
+						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
 
 						const showOrganization = () => {

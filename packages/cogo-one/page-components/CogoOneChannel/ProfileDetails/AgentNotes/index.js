@@ -24,7 +24,8 @@ function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = 
 
 	const {
 		noteData,
-		fetchListNotes, listLoading,
+		fetchListNotes,
+		listLoading,
 	} = useGetListNotes({ active, activeMessageCard, activeTab, activeVoiceCard, customerId });
 	const { list = [] } = noteData || {};
 
@@ -65,83 +66,92 @@ function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = 
 		setShowForm(true);
 	};
 
-	if (isEmpty(list) && !showForm) {
+	if (isEmpty(list) && !showForm && !listLoading) {
 		return <EmptyState type="notes" handleNotes={handleNotes} />;
 	}
 
 	return (
 		(showForm || !isEmpty(list)) && (
-			<div className={styles.container}>
-				<div className={styles.title}>Notes</div>
-				<div className={styles.note_editor}>
-					<div>
-						<div className={styles.editor_header} />
-						<Textarea
-							name="a5"
-							size="md"
-							placeholder="Description"
-							value={noteValue}
-							onChange={(val) => setNoteValue(val)}
-						/>
-					</div>
-					<div className={styles.note_footer}>
-						<div className={styles.submit_button} role="presentation" onClick={handleSubmit}>
-							<IcMTick width={18} height={18} />
-							Save
-						</div>
-					</div>
-				</div>
-				<div className={styles.toggle_div}>
-					<Toggle
-						name="a5"
-						size="sm"
-						disabled={false}
-						offLabel="All Notes"
-						onLabel="My Notes"
-						value={active}
-						onChange={() => setActive((p) => !p)}
+			listLoading ? (
+				<div className={styles.loader_div}>
+					<Loader
+						themeType="primary"
+						style={{ width: '50px', display: 'flex', justifyContent: 'center', alignItem: 'center' }}
 					/>
 				</div>
-				<div className={styles.wrap}>
-					{listLoading ? (
-						<div className={styles.loder_div}>
-							<Loader themeType="primary" />
+			) : (
+				<div className={styles.container}>
+					<div className={styles.title}>Notes</div>
+					<div className={styles.note_editor}>
+						<div>
+							<div className={styles.editor_header} />
+							<Textarea
+								name="a5"
+								size="md"
+								placeholder="Description"
+								value={noteValue}
+								onChange={(val) => setNoteValue(val)}
+							/>
 						</div>
-					)
-						: (
-							<>
-								{(list || []).map((item) => {
-									const { notes_data, agent_data, updated_at, id } = item;
-									const { name = '' } = agent_data || {};
-									return (
-										<div className={styles.notes_container}>
-											<div
-												className={styles.content}
-												onClick={() => handleClick(item)}
-												role="presentation"
-											>
-												{(notes_data || []).map((i) => (i || 'NA'))}
-											</div>
-											<ButtonIcon
-												size="sm"
-												icon={<IcMDelete onClick={() => handleDelete(id)} />}
-												themeType="primary"
-											/>
-											<div className={styles.footer}>
+						<div className={styles.note_footer}>
+							<div className={styles.submit_button} role="presentation" onClick={handleSubmit}>
+								<IcMTick width={18} height={18} />
+								Save
+							</div>
+						</div>
+					</div>
+					<div className={styles.toggle_div}>
+						<Toggle
+							name="a5"
+							size="sm"
+							disabled={false}
+							offLabel="All Notes"
+							onLabel="My Notes"
+							value={active}
+							onChange={() => setActive((p) => !p)}
+						/>
+					</div>
+					<div className={styles.wrap}>
+						{isEmpty(list) ? (
+							<div className={styles.empty_div}>
+								No Data Found...
+							</div>
+						)
+							: (
+								<>
+									{(list || []).map((item) => {
+										const { notes_data, agent_data, updated_at, id } = item;
+										const { name = '' } = agent_data || {};
+										return (
+											<div className={styles.notes_container}>
 												<div
-													className={styles.note_time}
+													className={styles.content}
+													onClick={() => handleClick(item)}
+													role="presentation"
 												>
-													{format(updated_at, 'HH:mm a dd MMM')}
+													{(notes_data || []).map((i) => (i || 'NA'))}
 												</div>
-												<div className={styles.created_by}>{name}</div>
+												<ButtonIcon
+													size="sm"
+													icon={<IcMDelete onClick={() => handleDelete(id)} />}
+													themeType="primary"
+												/>
+												<div className={styles.footer}>
+													<div
+														className={styles.note_time}
+													>
+														{format(updated_at, 'HH:mm a dd MMM')}
+													</div>
+													<div className={styles.created_by}>{name}</div>
+												</div>
 											</div>
-										</div>
-									);
-								})}
-							</>
-						)}
+										);
+									})}
+								</>
+							)}
+					</div>
 				</div>
-			</div>
+			)
 		)
 	);
 }

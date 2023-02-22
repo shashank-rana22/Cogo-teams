@@ -33,7 +33,6 @@ function useListTemplate({ activeTab }) {
 				const { list = [], ...paginationData } = res?.data || {};
 				setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 			}
-			// setActiveTab('');
 		} catch (e) {
 			console.log('e', e);
 		}
