@@ -5,11 +5,6 @@ const useListManagers = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-<<<<<<< HEAD
-		// filters: {
-		// },
-=======
->>>>>>> b91811a484340f193087a18d4ab15f1100432f46
 		Page      : 1,
 		PageLimit : 20,
 	});
