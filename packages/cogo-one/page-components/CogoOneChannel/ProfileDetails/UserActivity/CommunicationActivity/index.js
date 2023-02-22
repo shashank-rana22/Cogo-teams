@@ -101,8 +101,9 @@ function CommunicationActivity({ communication = {} }) {
 					size="sm"
 					closeOnOuterClick
 					onClose={onCloseModal}
+					className={styles.styled_ui_modal_dialog}
 				>
-					<Modal.Header title={title} />
+					<Modal.Header title={title || 'Message'} />
 					<Modal.Body>
 						{title === null ? <MessageBody message_type={message_type} response={{ message: message || text, media_url }} /> : <HTMLPreview html={showDetails} />}
 					</Modal.Body>
