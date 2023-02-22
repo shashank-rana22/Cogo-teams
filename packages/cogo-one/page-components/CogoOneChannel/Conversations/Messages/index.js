@@ -122,6 +122,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					hasPermissionToEdit={hasPermissionToEdit}
 					filteredSpectators={filteredSpectators}
 					tagOptions={tagOptions}
+					support_agent_id={support_agent_id}
 
 				/>
 				<div className={styles.message_container} key={id}>
