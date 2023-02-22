@@ -17,7 +17,7 @@ function InputController(props) {
 				<Input
 					{...rest}
 					id={name}
-					key={`${name}_${value}`}
+					key={name}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
