@@ -13,9 +13,6 @@ function Department({ department, openAccordion, setOpenAccordion, setFormsParam
 					className={styles.department}
 					role="button"
 					tabIndex={0}
-					onClick={() => setOpenAccordion(
-						{ ...openAccordion, [department?.department]: !openAccordion[department?.department] },
-					)}
 				>
 					<p className={styles.label}>{startCase(department?.department)}</p>
 					<Pill color="red">Pending</Pill>
@@ -25,32 +22,30 @@ function Department({ department, openAccordion, setOpenAccordion, setFormsParam
                     ${styles.accordion} 
                     ${openAccordion[department] ? styles.open_accordion : ''}`}
 		>
-			{openAccordion[department?.department] && (
-				<div className={styles.roles}>
-					{(department?.designations || []).map((role) => (
-						<div
-							className={`${styles.role} 
+			<div className={styles.roles}>
+				{(department?.designations || []).map((role) => (
+					<div
+						className={`${styles.role} 
                                         ${role?.designation === designation ? styles.selected_designation : ''}`}
-							role="button"
-							tabIndex={0}
-							onClick={() => setFormsParams({
-								department  : department?.department,
-								designation : role?.designation,
-							})}
+						role="button"
+						tabIndex={0}
+						onClick={() => setFormsParams({
+							department  : department?.department,
+							designation : role?.designation,
+						})}
+					>
+						<p className={styles.label}>
+							{startCase(role?.designation)}
+						</p>
+						<Pill
+							color={role?.status === 'active' ? 'green' : 'red'}
 						>
-							<p className={styles.label}>
-								{startCase(role?.designation)}
-							</p>
-							<Pill
-								color={role?.status === 'active' ? 'green' : 'red'}
-							>
-								{startCase(role?.status)}
+							{startCase(role?.status)}
 
-							</Pill>
-						</div>
-					))}
-				</div>
-			)}
+						</Pill>
+					</div>
+				))}
+			</div>
 
 		</Accordion>
 	);

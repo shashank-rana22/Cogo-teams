@@ -3,6 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
@@ -33,6 +34,7 @@ function FeedbackManagement() {
 	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });
 
 	const { list = [], pagination_data = {} } = feedbackData;
+
 	const { total_count } = pagination_data;
 
 	useEffect(() => {
@@ -79,7 +81,7 @@ function FeedbackManagement() {
 
 			<div className={styles.heading}>
 				<p className={styles.header_text}>
-					All Managers List
+					Feedback List
 				</p>
 				<Button size="lg" onClick={() => downloadCSV()}>Download CSV</Button>
 			</div>
@@ -98,7 +100,7 @@ function FeedbackManagement() {
 
 			{loading && showLoading()}
 
-			{feedbackData?.length === 0 && !loading && <EmptyState />}
+			{isEmpty(list) && !loading && <EmptyState />}
 
 			{!loading && (
 				<div>
@@ -106,9 +108,9 @@ function FeedbackManagement() {
 						columns={tableColumns}
 						list={list}
 						loading={loading}
-						page_limit={params.page_limit}
+						page_limit={params.PageLimit}
 						total_count={total_count}
-						pagination={params.page}
+						pagination={params.Page}
 						setPagination={setPage}
 					/>
 				</div>

@@ -1,14 +1,17 @@
 import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
 const useGetUserDetails = ({ userId = '' }) => {
-	const [{ loading = false, data = {} }] = useRequest({
-		url    : 'list_partner_users',
+	const [{ loading = false, data : userData = {} }, trigger] = useRequest({
+		url    : 'get-user',
 		method : 'get',
-		params : { filters: { user_id: userId, status: 'active' } },
-	}, { manual: false });
+	}, { manual: true });
 
-	const { list = [] } = data;
-	const userData = list[0];
+	const getUserDetails = async () => {
+		await trigger({ params: { UserID: userId } });
+	};
+
+	useEffect(() => getUserDetails, []);
 
 	return {
 		loading,

@@ -1,19 +1,25 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useNotifyManagers = () => {
-	const notifyAPI = useRequest({
-		url    : 'notify_managers',
+const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
+	const [{ loading = false, data = {} }, trigger] = useRequest({
+		url    : 'create_communication',
 		method : 'post',
 	}, { manual: true });
 
 	const notify = async () => {
-		const [trigger, { loading = false, data = {} }] = notifyAPI;
-		await trigger({ data: { notify_managers: true } });
+		try {
+			await trigger({ data: {} });
+			const { manager_count = '20' } = data;
 
-		return { loading, data };
+			setNotifyModal(false);
+			Toast.success(`${manager_count} Managers Notified...`);
+		} catch (e) {
+			Toast.error(e.toString());
+		}
 	};
 
-	return { notify };
+	return { notify, loading, data };
 };
 
 export default useNotifyManagers;

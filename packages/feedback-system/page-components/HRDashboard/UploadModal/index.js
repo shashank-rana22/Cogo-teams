@@ -1,6 +1,6 @@
 import { Tooltip, Toast, Button, Upload } from '@cogoport/components';
 import { IcMInfo, IcMUpload } from '@cogoport/icons-react';
-import { request, publicRequest } from '@cogoport/request';
+import { useRequest, request, publicRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -9,6 +9,11 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	const [files, setFiles] = useState({}); // remove
 	const [loading, setLoading] = useState(true); // remove
 	const [urlStore, setUrlStore] = useState([]);
+
+	const [{ loading : uploadLoading = false }, trigger] = useRequest({
+		url    : 'approve-ratings',
+		method : 'post',
+	}, { manual: true });
 
 	const uploadFile = async (file) => {
 		const { data } = await request({
@@ -59,14 +64,13 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	};
 
 	const uploadCSVs = async () => {
-		try {
-			await request({
-				method : 'get',
-				url    : '/list_feedback_questions',
-				params : { files },
-			});
+		let fileUrl;
+		urlStore.forEach((file) => { fileUrl = file.finalUrl; });
 
-			Toast.success('Files sent for processing. Please check after some time...');
+		try {
+			await trigger({ data: { Url: fileUrl } });
+
+			Toast.success('File sent for processing. Please check after some time...');
 			setFiles({});
 			setOpenUploadModal(false);
 		} catch (e) {
@@ -74,11 +78,21 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 		}
 	};
 
+	const downloadRatingSample = () => {
+		// eslint-disable-next-line max-len, no-undef
+		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/b633a4b840f422d51aaf1b3c1cd4ddd5/sample_ratings_sheet.csv', '_blank');
+	};
+
+	const downloadOnboardingSample = () => {
+		// eslint-disable-next-line max-len, no-undef
+		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/b633a4b840f422d51aaf1b3c1cd4ddd5/sample_ratings_sheet.csv', '_blank');
+	};
+
 	const getToolTip = (text) => <div className={styles.tooltip_text}>{text}</div>;
 
 	return (
 		<div className={styles.upload_container}>
-			<div className={styles.upload_info}>
+			<div className={styles.upload_info} style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}>
 				<div className={styles.upload_header}>
 					<div className={styles.label}>Upload Onboarding CSV</div>
 					<Tooltip
@@ -87,7 +101,12 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 						animation="shift-away"
 						content={getToolTip('Get Sample Onboarding csv')}
 					>
-						<div className={styles.info_tool} role="button" onClick={() => {}} tabIndex={0}>
+						<div
+							className={styles.info_tool}
+							role="button"
+							onClick={() => downloadOnboardingSample()}
+							tabIndex={0}
+						>
 							<IcMInfo width={20} height={20} />
 						</div>
 					</Tooltip>
@@ -101,9 +120,10 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 					loading={loading.onboardingCSV}
 					accept=".csv"
 					style={{ height: 'fit-content' }}
+					disabled={files.normalizationCSV}
 				/>
 			</div>
-			<div className={styles.upload_info}>
+			<div className={styles.upload_info} style={{ background: files.onboardingCSV ? '#e0e0e0' : '' }}>
 				<div className={styles.upload_header}>
 					<div className={styles.label}>Upload Normalization CSV</div>
 					<Tooltip
@@ -112,7 +132,12 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 						animation="shift-away"
 						content={getToolTip('Get Sample Normalization csv')}
 					>
-						<div className={styles.info_tool} role="button" onClick={() => {}} tabIndex={0}>
+						<div
+							className={styles.info_tool}
+							role="button"
+							onClick={() => downloadRatingSample()}
+							tabIndex={0}
+						>
 							<IcMInfo width={20} height={20} />
 						</div>
 					</Tooltip>
@@ -126,11 +151,12 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 					loading={loading.normalizationCSV}
 					accept=".csv"
 					style={{ height: 'fit-content' }}
+					disabled={files.onboardingCSV}
 				/>
 			</div>
 
 			<div className={styles.submit}>
-				<Button onClick={() => uploadCSVs()}>Upload</Button>
+				<Button onClick={() => uploadCSVs()} loading={uploadLoading}>Upload</Button>
 			</div>
 		</div>
 	);

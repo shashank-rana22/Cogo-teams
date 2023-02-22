@@ -7,6 +7,11 @@
 .upload_info {
 	width: 100%;
 	margin-top: 8px;
+	padding: 8px;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+
+	border: 2px solid #cfeaed;
 }
 
 .upload_header {

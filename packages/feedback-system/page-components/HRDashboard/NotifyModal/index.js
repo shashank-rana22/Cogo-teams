@@ -1,21 +1,13 @@
-import { Toast, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 import useNotifyManagers from './useNotifyManagers';
 
 function NotifyModal({ setNotifyModal = () => {} }) {
-	const { notify = () => {} } = useNotifyManagers;
+	const { notify = () => {}, loading = false } = useNotifyManagers({ setNotifyModal });
 
 	const notifyManagers = () => {
-		try {
-			const { data = {} } = notify();
-			const { manager_count = '20' } = data;
-
-			setNotifyModal(false);
-			Toast.success(`${manager_count} Managers Notified...`);
-		} catch (e) {
-			Toast.error(e.toString());
-		}
+		notify();
 	};
 
 	return (
@@ -24,7 +16,7 @@ function NotifyModal({ setNotifyModal = () => {} }) {
 
 			<div className={styles.button_container}>
 				<Button themeType="tertiary" onClick={() => setNotifyModal(false)}>Cancel</Button>
-				<Button themeType="accent" onClick={() => notifyManagers()}>Notify</Button>
+				<Button themeType="accent" onClick={() => notifyManagers()} loading={loading}>Notify</Button>
 			</div>
 		</div>
 	);

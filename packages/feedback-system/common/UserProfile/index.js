@@ -65,9 +65,7 @@ const colorScheme = (rating) => {
 function UserProfile({ userId = '' }) {
 	const { userData = {}, loading = false } = useGetUserDetails({ userId });
 
-	console.log(userData);
-	// const bgColorKpi = colorScheme(userData.KPI_value);
-	const bgColorKpi = colorScheme('3');
+	const bgColorKpi = colorScheme(`${userData.rating}`);
 
 	const showLoading = () => (
 		<div
@@ -102,12 +100,9 @@ function UserProfile({ userId = '' }) {
 				<UserDetails userData={userData} loading={loading} />
 			</div>
 
-			{/* <div className={styles.kpi}>
-				{ loading ? showLoading() : renderKPI(userData.kpi)}
-			</div> */}
-
 			<div className={styles.kpi} style={{ background: bgColorKpi }}>
-				{ loading ? showLoading() : renderKPI(userData.kpi)}
+				{ loading ? showLoading() : renderKPI(userData.rating)}
+
 			</div>
 		</div>
 	);

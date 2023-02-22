@@ -1,5 +1,10 @@
 const feedback_system = [
 	{
+		api          : 'get-user',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
 		api          : 'list-user-feedbacks',
 		access_type  : 'private',
 		service_name : 'user_feedback',
@@ -25,7 +30,7 @@ const feedback_system = [
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'approve-rating',
+		api          : 'approve-ratings',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
@@ -78,6 +83,21 @@ const feedback_system = [
 		api          : 'get-month-stats',
 		access_type  : 'private',
 		service_name : 'user_feedback',
+	},
+	{
+		api          : 'notify-managers',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
+		api          : 'list-reportees',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
+		api          : 'create_communication',
+		access_type  : 'private',
+		service_name : 'communication',
 	},
 	// {
 	// 	api          : 'get_feedback_performance_stats',

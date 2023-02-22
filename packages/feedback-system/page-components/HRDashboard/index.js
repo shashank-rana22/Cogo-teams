@@ -100,9 +100,9 @@ function HRDashboard() {
 					<TeamMembersList
 						list={list}
 						loading={loading}
-						page_limit={params.page_limit}
+						page_limit={params.PageLimit}
 						total_count={total_count}
-						pagination={params.page}
+						pagination={params.Page}
 						setPagination={setPage}
 					/>
 				</div>
