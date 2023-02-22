@@ -24,95 +24,93 @@ function ViewRequested({ itemData, name, refetch }) {
 		setShowModal,
 	});
 
-	if (type === 'BANK_DETAIL_APPROVAL') {
-		return (
-			<BankDatailsModal
-				itemData={itemData}
-				setRemarks={setRemarks}
-				remarks={remarks}
-				onSave={onSave}
-				onRaiseAgain={onRaiseAgain}
-				setSelectedFile={setSelectedFile}
-				selectedFile={selectedFile}
-				name={name}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				loadingOnSave={loadingOnSave}
-				loadingOnRaise={loadingOnRaise}
-			/>
-		);
+	switch (type) {
+		case 'BANK_DETAIL_APPROVAL':
+			return (
+				<BankDatailsModal
+					itemData={itemData}
+					setRemarks={setRemarks}
+					remarks={remarks}
+					onSave={onSave}
+					onRaiseAgain={onRaiseAgain}
+					setSelectedFile={setSelectedFile}
+					selectedFile={selectedFile}
+					name={name}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+					loadingOnRaise={loadingOnRaise}
+				/>
+			);
+
+		case 'TDS_APPROVAL':
+			return (
+				<TdsDeviationModal
+					itemData={itemData}
+					setRemarks={setRemarks}
+					onSave={onSave}
+					remarks={remarks}
+					onRaiseAgain={onRaiseAgain}
+					setSelectedFile={setSelectedFile}
+					selectedFile={selectedFile}
+					name={name}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+					loadingOnRaise={loadingOnRaise}
+				/>
+			);
+		case 'ISSUE_CREDIT_NOTE':
+			return (
+				<RequestCN
+					itemData={itemData}
+					setRemarks={setRemarks}
+					remarks={remarks}
+					onSave={onSave}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+				/>
+			);
+		case 'JOURNAL_VOUCHER_APPROVAL':
+			return (
+				<JournalVoucher
+					itemData={itemData}
+					setRemarks={setRemarks}
+					onSave={onSave}
+					remarks={remarks}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+				/>
+			);
+		case 'SETTLEMENT_APPROVAL':
+			return (
+				<SettlementModal
+					itemData={itemData}
+					setRemarks={setRemarks}
+					onSave={onSave}
+					remarks={remarks}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+				/>
+			);
+		case 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL':
+			return (
+				<IcJvApproval
+					itemData={itemData}
+					setRemarks={setRemarks}
+					remarks={remarks}
+					onSave={onSave}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+				/>
+			);
+		default:
+			return null;
 	}
-	if (type === 'TDS_APPROVAL') {
-		return (
-			<TdsDeviationModal
-				itemData={itemData}
-				setRemarks={setRemarks}
-				onSave={onSave}
-				remarks={remarks}
-				onRaiseAgain={onRaiseAgain}
-				setSelectedFile={setSelectedFile}
-				selectedFile={selectedFile}
-				name={name}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				loadingOnSave={loadingOnSave}
-				loadingOnRaise={loadingOnRaise}
-			/>
-		);
-	}
-	if (type === 'ISSUE_CREDIT_NOTE') {
-		return (
-			<RequestCN
-				itemData={itemData}
-				setRemarks={setRemarks}
-				remarks={remarks}
-				onSave={onSave}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				loadingOnSave={loadingOnSave}
-			/>
-		);
-	}
-	if (type === 'JOURNAL_VOUCHER_APPROVAL') {
-		return (
-			<JournalVoucher
-				itemData={itemData}
-				setRemarks={setRemarks}
-				onSave={onSave}
-				remarks={remarks}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				loadingOnSave={loadingOnSave}
-			/>
-		);
-	}
-	if (type === 'SETTLEMENT_APPROVAL') {
-		return (
-			<SettlementModal
-				itemData={itemData}
-				setRemarks={setRemarks}
-				onSave={onSave}
-				remarks={remarks}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				loadingOnSave={loadingOnSave}
-			/>
-		);
-	}
-	if (type === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL') {
-		return (
-			<IcJvApproval
-				itemData={itemData}
-				setRemarks={setRemarks}
-				remarks={remarks}
-				onSave={onSave}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				loadingOnSave={loadingOnSave}
-			/>
-		);
-	}
-	return null;
 }
 
 export default ViewRequested;
