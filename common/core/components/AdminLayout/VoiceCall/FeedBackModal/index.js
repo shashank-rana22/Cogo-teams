@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 	const [selectPill, setSelectPill] = useState('');
 	const [inputValue, setInputValue] = useState('');
+	const [showError, setShowError] = useState(false);
 
 	const { communicationLogApi, loading } = useCreateCommunicationLog({
 		selectPill,
@@ -33,12 +34,12 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 			value : 'rate_enquiry',
 		},
 		{
-			label : 'Payment recovery',
-			value : 'payment_recovery',
-		},
-		{
 			label : 'Other',
 			value : 'other',
+		},
+		{
+			label : 'Payment recovery',
+			value : 'payment_recovery',
 		},
 	];
 
@@ -67,13 +68,13 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 				}),
 			);
 		} else {
-			Toast.error('Enter details');
+			setShowError(true);
 		}
 	};
 
 	return (
 		<div className={styles.feed_div}>
-			<Modal show={showFeedbackModal} size="sm">
+			<Modal show={showFeedbackModal} size="sm" className={styles.styled_ui_modal_dialog}>
 				<Modal.Body>
 					<div className={styles.feed_content}>
 						<div className={styles.feed_title}>Feedback</div>
@@ -95,6 +96,9 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 								);
 							})}
 						</div>
+						{showError && !selectPill && (
+							<div className={styles.error_message}>Select an option</div>
+						)}
 						<div className={styles.feed_text_area}>
 							<Textarea
 								name="a5"
@@ -103,6 +107,9 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 								value={inputValue}
 								onChange={(val) => setInputValue(val)}
 							/>
+							{showError && inputValue.length === 0 && (
+								<div className={styles.error_message}>Enter description</div>
+							)}
 						</div>
 						<div className={styles.button_container}>
 							<Button
