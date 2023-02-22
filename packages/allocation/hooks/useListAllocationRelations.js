@@ -61,8 +61,8 @@ const useAllocationRelations = () => {
 
 	const currentPageListIds = useMemo(() => list.map(({ id }) => id), [list]);
 
-	const selectAllHelper = (ListArgument = []) => {
-		const isRowsChecked = currentPageListIds.every((id) => ListArgument.includes(id));
+	const selectAllHelper = (listArgument = []) => {
+		const isRowsChecked = currentPageListIds.every((id) => listArgument.includes(id));
 		if (isRowsChecked !== selectAll) {
 			setSelectAll(isRowsChecked);
 		}
