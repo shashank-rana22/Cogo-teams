@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
 import UserAvatar from '../../../../../common/UserAvatar';
+import { PLATFORM_MAPPING } from '../../../../../constants';
 import hideDetails from '../../../../../utils/hideDetails';
 
 import { ShowContent, TagsPopOver, Assignes } from './HeaderFuncs';
@@ -31,8 +32,15 @@ function Header({
 	const {
 		chat_tags = [],
 	} = activeMessageCard || {};
-	const { user_name = '', business_name = '', mobile_no = '', channel_type } = formattedData || {};
 
+	const { user_name = '', business_name = '', mobile_no = '', channel_type, user_type } = formattedData || {};
+
+	const getLowerLabel = () => {
+		if (user_name.includes('anonymous')) {
+			return PLATFORM_MAPPING[user_type] || '';
+		}
+		return mobile_no ? hideDetails({ data: mobile_no, type: 'number' }) : business_name;
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -85,7 +93,7 @@ function Header({
 					<div>
 						<div className={styles.name}>{startCase(user_name)}</div>
 						<div className={styles.phone_number}>
-							{mobile_no ? hideDetails({ data: mobile_no, type: 'number' }) : business_name}
+							{getLowerLabel()}
 						</div>
 					</div>
 				</div>
