@@ -10112,7 +10112,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
-
 	],
 };
 export default partner;

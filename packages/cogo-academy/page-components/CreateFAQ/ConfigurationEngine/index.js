@@ -14,7 +14,7 @@ function ConfigurationEngine() {
 
 	const { onClickSaveButton } = useCreateFaqTopic();
 
-	const { onClickSaveButton:onClickTagSaveButton } = useCreateFaqTag();
+	const { onClickSaveButton: onClickTagSaveButton } = useCreateFaqTag();
 
 	const { control, handleSubmit, formState: { errors } } = useForm();
 
