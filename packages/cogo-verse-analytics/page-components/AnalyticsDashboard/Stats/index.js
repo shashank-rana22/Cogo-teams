@@ -47,7 +47,7 @@ function Stats(props = {}) {
 
 			<div className={styles.cogoverse_header}>
 				{/* Welcome to the */}
-				<img src={imgURL.cogoverse_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
+				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
 
 				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics!</div>
 			</div>
