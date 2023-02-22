@@ -58,6 +58,11 @@ export const ApprovalPendingFields = {
 			span  : 1,
 			func  : 'handleStatus',
 		},
-
+		{
+			key   : 'download',
+			label : '',
+			span  : 1,
+			func  : 'handleDownload',
+		},
 	],
 };
