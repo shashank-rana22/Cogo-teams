@@ -79,10 +79,10 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 					pageIndex       : page,
 					pageSize        : pageLimit,
 					createdFrom     : startDate
-						? format(startDate, 'yyyy-MM-dd', {}, false)
+						? format(startDate, 'yyyy-MM-dd 00:00:00', {}, false)
 						: undefined,
 					createdTo: endDate
-						? format(endDate, 'yyyy-MM-dd', {}, false)
+						? format(endDate, 'yyyy-MM-dd 00:00:00', {}, false)
 						: undefined,
 				},
 			});
