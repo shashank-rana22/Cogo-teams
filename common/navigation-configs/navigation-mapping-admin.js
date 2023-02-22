@@ -1905,6 +1905,14 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.contracts,
 	},
+	crm_feedback_dashboard: {
+		key       : 'crm_feedback_dashboard',
+		title     : 'Feedback Dashboard',
+		href      : '/crm-feedback-dashboard',
+		as        : '/crm-feedback-dashboard',
+		type      : 'link',
+		main_apis : [],
+	},
 };
 
 export default navigationMappingAdmin;
