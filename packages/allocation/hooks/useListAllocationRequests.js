@@ -35,14 +35,12 @@ const useListAllocationRequests = () => {
 		},
 	});
 
-	const apiData = useAllocationRequest({
+	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/requests',
 		method  : 'get',
 		authkey : 'get_allocation_requests',
 		params,
 	}, { manual: false });
-
-	const [{ loading, data }, refetch] = apiData;
 
 	const { list = [] } = data || {};
 
@@ -243,12 +241,12 @@ const useListAllocationRequests = () => {
 							)}
 							onClickOutside={() => setPopoverId(null)}
 						>
-							<div
-								className={styles.svg_container}
-								onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
-								role="presentation"
-							>
-								<IcMOverflowDot height={16} width={16} />
+							<div className={styles.svg_container}>
+								<IcMOverflowDot
+									height={16}
+									width={16}
+									onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
+								/>
 							</div>
 						</Popover>
 					</div>
