@@ -1,20 +1,20 @@
 .container {
-  position: absolute;
-  top: 27.1%;
-  left: 104%;
-  z-index: -1;
-  background: #fff;
-  transition: 0.5s;
+	position: absolute;
+	top: 27.1%;
+	left: 104%;
+	z-index: -1;
+	background: #fff;
+	transition: 0.5s;
 
-  @media (max-width: 576px) {
-    position: static;
-  }
+	@media (max-width: 576px) {
+		position: static;
+	}
 }
 
 .button_container {
-  margin: 10px;
+	margin: 10px;
 
-  @media (max-width: 576px) {
-    padding-bottom: 10px;
-  }
+	@media (max-width: 576px) {
+		padding-bottom: 10px;
+	}
 }
