@@ -1,4 +1,5 @@
 import { Avatar, Modal, Button, Input } from '@cogoport/components';
+import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { isEmpty } from '@cogoport/utils';
 // import { useState } from 'react';
 
@@ -23,14 +24,6 @@ function EmptyState({
 	const handleClick = () => {
 		setShowAddNumber(true);
 	};
-
-	// const { leadUserProfile, loading } = useCreateLeadProfile();
-
-	// const handleSubmit = async () => {
-	// 	await leadUserProfile({ profileValue });
-	// 	setShowAddNumber(false);
-	// 	setProfilevalue({});
-	// };
 
 	const renderEmpty = () => {
 		switch (type) {
@@ -155,6 +148,7 @@ function EmptyState({
 					size="sm"
 					onClose={() => setShowAddNumber(false)}
 					className={styles.styled_ui_modal_dialog}
+					scroll={false}
 				>
 					<Modal.Header title="Profile Details" />
 					<Modal.Body>
@@ -169,11 +163,10 @@ function EmptyState({
 						</div>
 						<div className={styles.wrapper}>
 							<div className={styles.styled_label}>Enter Phone Number</div>
-							<Input
-								size="sm"
-								placeholder="Enter number"
-								value={profileValue?.number}
-								onChange={(a) => setProfilevalue((p) => ({ ...p, number: a }))}
+							<SelectMobileNumber
+								value={profileValue}
+								onChange={(val) => setProfilevalue(val)}
+								inputType="number"
 							/>
 						</div>
 					</Modal.Body>

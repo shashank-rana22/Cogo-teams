@@ -41,7 +41,7 @@ const useSendMessage = ({ channel_type = '' }) => {
 					organization_id,
 					service    : 'user',
 					service_id : id,
-					source     : 'CogoVerse',
+					source     : 'CogoOne:AdminPlatform',
 					lead_user_id,
 				},
 			});

@@ -15,7 +15,7 @@ import controls from '../../../../../../configurations/assign-form-controls';
 import styles from './styles.module.css';
 
 function AssignToForm({ data = {} }) {
-	const { assignLoading, assignChat = () => {} } = data || {};
+	const { assignLoading, assignChat = () => {}, support_agent_id = null } = data || {};
 	const listAgentsOptions = useGetAsyncOptions(
 		merge(asyncFieldsListAgents()),
 	);
@@ -33,7 +33,7 @@ function AssignToForm({ data = {} }) {
 		if (isAssignUser) {
 			payload = {
 				agent_id           : val?.assign_user,
-				is_allowed_to_chat : val?.allow_user === 'observe_and_chat',
+				is_allowed_to_chat : val?.allow_user !== 'observe',
 			};
 		} else {
 			payload = {
@@ -41,7 +41,7 @@ function AssignToForm({ data = {} }) {
 					type : val?.assign_condition,
 					data : val?.condition_value,
 				},
-				is_allowed_to_chat: val?.allow_user === 'observe_and_chat',
+				is_allowed_to_chat: val?.allow_user !== 'observe',
 			};
 		}
 		assignChat(payload);
@@ -63,6 +63,7 @@ function AssignToForm({ data = {} }) {
 						control={control}
 						{...assign_user}
 						{...listAgentsOptions}
+						isClearable
 					/>
 					{errors?.assign_user && <div className={styles.error_text}>This is Required</div>}
 				</div>
@@ -98,20 +99,28 @@ function AssignToForm({ data = {} }) {
 					)}
 				</>
 			)}
-			<div className={styles.allowed_div}>
-				<div className={styles.label}>Allow the user to</div>
-				<div>
-					<RadioGroupController control={control} {...allow_user} />
+			{support_agent_id && (
+				<div className={styles.allowed_div}>
+					<div className={styles.label}>Allow the user to</div>
+					<div>
+						<RadioGroupController control={control} {...allow_user} />
+					</div>
 				</div>
-			</div>
+			)}
 			<div className={styles.button_container}>
 				<Button size="md" themeType="tertiary" onClick={reset}>
 					reset
 				</Button>
-				<Button size="md" themeType="accent" loading={assignLoading} onClick={handleSubmit(createSubmit)}>
+				<Button
+					size="md"
+					themeType="accent"
+					loading={assignLoading}
+					onClick={handleSubmit(createSubmit)}
+				>
 					Assign
 				</Button>
 			</div>
+
 		</div>
 	);
 }
