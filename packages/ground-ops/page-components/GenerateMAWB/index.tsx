@@ -5,9 +5,7 @@ import React, { useState } from 'react';
 
 import Layout from '../Air/commons/Layout';
 
-import FieldArray from './FieldArray';
 import GenerateMawbDoc from './GenerateMawbDoc';
-import getElementController from './getController';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
 import useGenerateDocument from './useGenerateDocument';
@@ -41,10 +39,8 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 	const fields = mawbControls();
 
 	const onSubmit = () => {
-		// generateCertificate();
-		// setBack(true);
-
-		setActiveKey('package');
+		generateCertificate();
+		setBack(true);
 	};
 
 	const formValues = watch();
@@ -72,7 +68,7 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 						<div className={styles.button_div}>
 							{!back ? (
 								<Button
-									onClick={handleSubmit(onSubmit)}
+									onClick={handleSubmit(() => setActiveKey('package'))}
 									disabled={documentLoading || generateLoading}
 								>
 									Next
@@ -89,7 +85,7 @@ function GenerateMAWB({ 	shipment_id = '', task = {}, viewDoc = false }) {
 						<div className={styles.button_div}>
 							{!back ? (
 								<Button
-									onClick={handleSubmit(onSubmit)}
+									onClick={handleSubmit(() => setActiveKey('handling'))}
 									disabled={documentLoading || generateLoading}
 								>
 									Next
