@@ -21,7 +21,8 @@
 	font-weight: 500;
 }
 
-.pending {
+.pending{
+	color:#ed3726;
 	display: flex;
 	align-items: center;
 	color: #ed3726;

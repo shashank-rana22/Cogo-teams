@@ -70,25 +70,13 @@ function useCreateVendorContact({
 	};
 
 	useEffect(() => {
-		const mapping = {
-			mobile_number: {
-				number       : contact_details?.mobile_number,
-				country_code : contact_details?.mobile_country_code,
-			},
-			whatsapp_number: {
-				number       : contact_details?.whatsapp_number,
-				country_code : contact_details?.whatsapp_country_code,
-			},
-		};
-
 		controls.forEach((field) => {
 			if (field.type === 'file') {
 				setValue(`${field.name}`, contact_details?.[field.name]?.finalUrl);
 			} else {
 				setValue(
 					`${field.name}`,
-					mapping[field.name]
-					|| contact_details?.[field.name],
+					contact_details?.[field.name],
 				);
 			}
 		});

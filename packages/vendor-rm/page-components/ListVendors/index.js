@@ -6,6 +6,7 @@ import EmptyPage from './EmptyPage';
 import FilterContent from './FilterContent';
 import Header from './Header';
 import useVendorList from './hooks/useVendorList';
+import useVendorStats from './hooks/useVendorStats';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
 
@@ -19,6 +20,11 @@ function ListVendors() {
 		showFilter,
 		setShowFilter,
 	} = useVendorList();
+
+	const {
+		loadingStats,
+		data: dataStats,
+	} = useVendorStats();
 
 	const { total_count, page_limit:pageLimit } = data || {};
 	const router = useRouter();
@@ -46,14 +52,14 @@ function ListVendors() {
 				<div
 					role="presentation"
 					className={styles.box}
-					onClick={() => { tagClick({ status: 'pending_from_user' }); }}
+					onClick={() => { tagClick({ status: 'pending' }); }}
 				>
-					<div className={styles.label}>Verified Vendors</div>
-					<div className={styles.value}>1222</div>
+					<div className={styles.label}>Pending Vendors</div>
+					<div className={styles.value}>{dataStats?.kyc_pending_count}</div>
 				</div>
 				<div role="presentation" className={styles.box} onClick={() => { tagClick({ status: 'verified' }); }}>
-					<div className={styles.label}>Awaiting Verification</div>
-					<div className={styles.value}>1222</div>
+					<div className={styles.label}>Verified Vendors</div>
+					<div className={styles.value}>{dataStats?.kyc_verified_count}</div>
 				</div>
 			</div>
 
