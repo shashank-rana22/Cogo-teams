@@ -1,0 +1,12 @@
+.filter{
+    margin-top: 12px;
+    display: flex;
+    flex-direction: flex-start;
+    justify-content: space-between;
+    width: 70%;
+    margin-bottom: 12px;
+}
+
+.select{
+    width: 150px;
+}
