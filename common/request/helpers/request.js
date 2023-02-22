@@ -16,14 +16,12 @@ const customSerializer = (params) => {
 };
 
 const customPeeweeSerializer = (params) => {
-	const newParams = {};
-	Object.keys(params).forEach((key) => {
-		if (typeof params[key] === 'object') {
-			newParams[key] = JSON.stringify(params[key]);
-		} else {
-			newParams[key] = params[key];
-		}
-	});
+	const newParams = Object.keys(params).reduce((acc, key) => {
+		acc[key] = typeof params[key] === 'object'
+			? JSON.stringify(params[key])
+			: params[key];
+		return acc;
+	}, {});
 	const paramsStringify = qs.stringify(newParams, {
 		arrayFormat   : 'repeat',
 		serializeDate : (date) => format(date),
