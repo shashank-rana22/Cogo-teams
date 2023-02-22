@@ -1720,8 +1720,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'allocations-core_engine',
 				title         : 'Core Engine',
-				href          : '/allocation/core-engine',
-				as            : '/allocation/core-engine',
+				href          : '/v2/allocation/core-engine',
+				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
 			},
 		],
