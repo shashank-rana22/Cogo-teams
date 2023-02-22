@@ -1,8 +1,10 @@
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useCallback, useEffect } from 'react';
 
+import TABS_MAPPING from '../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../utils/component-mapping';
 
 function useGetVendor() {
@@ -37,6 +39,15 @@ function useGetVendor() {
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trigger, vendor_id]);
+
+	useEffect(() => {
+		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
+
+		const emptyVendorInformationTab = componentKeys.find((key) => !vendorInformation[key]
+		|| isEmpty(vendorInformation[key])) || 'vendor_details';
+
+		setActiveStepper(emptyVendorInformationTab);
+	}, [vendorInformation]);
 
 	useEffect(() => {
 		if (vendor_id) {
