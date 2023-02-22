@@ -110,16 +110,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_organization_billing_addresses',
-		access_type  : 'private',
-		service_name : 'organization',
-	},
-	{
-		api          : 'list_cogo_entities',
-		access_type  : 'private',
-		service_name : 'partner',
-	},
-	{
 		api         : 'create_chat_message',
 		access_type : 'private',
 	},
@@ -228,17 +218,7 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
-		api          : 'list_shipment_documents',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'update_shipment_pending_task',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'get_shipment_quotation',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -271,6 +251,147 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_organization_trade_requirement_draft',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_shipment_audits',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_sage_invoices_v2',
+		access_type  : 'private',
+		service_name : 'sage',
+	},
+	{
+		api          : 'get_sales_invoice_list',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_users',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_pocs',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_organization_invoicing_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_freight_certificate',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_fcl_freight_rate_audits',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'list_air_freight_rate_audits',
+		access_type  : 'private',
+		service_name : 'air_freight_rate',
+	},
+	{
+		api          : 'list_lcl_freight_rate_audits',
+		access_type  : 'private',
+		service_name : 'lcl_freight_rate',
+	},
+	{
+		api          : 'get_purchase_bills_list',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_sales_invoice_shipment_list',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_organizations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_additional_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_organization_billing_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_poc',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_shipment_export_invoice_combination',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_bl_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_document',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_invoice_payment_mode',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_trade_contact',
+		access_type  : 'private',
+		service_name : 'trade',
+	},
+	{
+		api          : 'update_international_air_shipment_booking_parameter',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_cogo_entities',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_organization_documents',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_document',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+
 ];
 
 export default apis;
