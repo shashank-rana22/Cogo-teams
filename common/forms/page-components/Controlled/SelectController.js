@@ -7,9 +7,6 @@ function SelectController(props) {
 		name, control, rules, ...rest
 	} = props;
 
-	console.log('formprops end ::', props);
-	console.log('rules::', rules);
-
 	return (
 		<Controller
 			key={rest.id}
