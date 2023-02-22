@@ -10108,10 +10108,16 @@ const partner = {
 			service_name : 'faq',
 		},
 		{
+			api          : 'list_faq_tags',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
 			api          : 'list_faq_topics',
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+
 	],
 };
 

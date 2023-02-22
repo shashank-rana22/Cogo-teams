@@ -1,0 +1,30 @@
+.container {
+    margin-top: 32px;
+    width: 100%;
+}
+
+.question {
+    white-space: initial;
+}
+
+.topics {
+	margin-right: 4;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tags {
+	margin-right: 4;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.buttonContainer {
+    display: flex;
+    margin: 8px 0;
+}
+
+.pagination_container{
+    display: flex;
+    justify-content: flex-end;
+}
