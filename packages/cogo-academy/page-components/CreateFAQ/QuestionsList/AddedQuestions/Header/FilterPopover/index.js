@@ -6,14 +6,14 @@ import styles from './styles.module.css';
 import useFilterPopover from './useFilterPopover';
 
 function FilterPopover() {
-	const { showFilter, setShowFilter } = useFilterPopover();
+	const { showFilter, setShowFilter, topicOptions, tagOptions } = useFilterPopover();
 
 	return (
 		<Popover
 			caret={false}
 			trigger="click"
 			placement="bottom"
-			render={<FilterContent />}
+			render={<FilterContent topicOptions={topicOptions} tagOptions={tagOptions} />}
 		>
 			<div
 				role="presentation"

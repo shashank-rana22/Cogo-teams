@@ -4,21 +4,7 @@ import { MultiselectController, useForm } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
-export const topicOptions = [
-	{ label: 'Topic 1', value: 'topic1' },
-	{ label: 'Topic 2', value: 'topic2' },
-	{ label: 'Topic 3', value: 'topic3' },
-	{ label: 'Topic 4', value: 'topic4' },
-];
-
-export const tagOptions = [
-	{ label: 'Tag 1', value: 'tag1' },
-	{ label: 'Tag 2', value: 'tag2' },
-	{ label: 'Tag 3', value: 'tag3' },
-	{ label: 'Tag 4', value: 'tag4' },
-];
-
-function FilterContent() {
+function FilterContent({ topicOptions, tagOptions }) {
 	const { control } = useForm();
 
 	return (
