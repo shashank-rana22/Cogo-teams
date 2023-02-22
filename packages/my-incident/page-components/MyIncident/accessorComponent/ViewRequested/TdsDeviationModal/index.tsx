@@ -20,7 +20,6 @@ function TdsDeviationModal({
 		validFrom, validTo, remark, documentUrls,
 	} = tdsRequest || {};
 
-	console.log(remarks, 'remarks');
 	return (
 		<div>
 			{status === 'REJECTED'
