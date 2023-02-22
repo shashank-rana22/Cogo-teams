@@ -1,8 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetUser = ({ leadUserId, userId, customerId }) => {
-	const apiName =	 leadUserId ? 'get_lead_user' : 'get_user';
+const useGetUser = ({ id, userId, customerId }) => {
+	const { leade_user_id } = id || {};
+	const apiName =	 leade_user_id ? 'get_lead_user' : 'get_user';
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `${apiName}`,
@@ -12,16 +13,16 @@ const useGetUser = ({ leadUserId, userId, customerId }) => {
 	const fetchUser = async () => {
 		await trigger({
 			params: {
-				id: leadUserId || userId,
+				id: leade_user_id,
 			},
 		});
 	};
 	useEffect(() => {
-		if (userId || leadUserId) {
+		if (userId || leade_user_id) {
 			fetchUser();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [leadUserId, userId, customerId]);
+	}, [leade_user_id, userId, customerId]);
 
 	return {
 		loading,

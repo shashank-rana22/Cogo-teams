@@ -66,7 +66,7 @@
 
 	:global {
 		.ui_modal_body_container {
-			padding: 0 16px 16px !important;
+			padding: 0 16px !important;
 			border-top: none !important;
 			border-bottom: none !important;
 		}
@@ -80,7 +80,11 @@
 		}
 
 		.ui_modal_footer_container {
-			padding: 8px 16px 15px !important;
+			padding: 8px 16px 15px 0 !important;
+		}
+
+		.styles_row_container__FNFTc {
+			justify-content: space-between !important;
 		}
 	}
 }

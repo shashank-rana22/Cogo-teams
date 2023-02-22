@@ -1,8 +1,9 @@
 import { Avatar, Modal, Button, Input } from '@cogoport/components';
+import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
+// import useCreateLeadProfile from '../../hooks/useCreateLeadProfile';
 
 import styles from './styles.module.css';
 
@@ -13,23 +14,15 @@ function EmptyState({
 	user_type = '',
 	userId = '',
 	organizationId = '',
+	setProfilevalue = () => {},
+	profileValue = {},
+	setShowAddNumber = () => {},
+	showAddNumber = false,
+	handleSubmit = () => {},
+	leadLoading = false,
 }) {
-	const [showAddNumber, setShowAddNumber] = useState(false);
-	const [profileValue, setProfilevalue] = useState({
-		name   : '',
-		number : '',
-	});
-
 	const handleClick = () => {
 		setShowAddNumber(true);
-	};
-
-	const { leadUserProfile, loading } = useCreateLeadProfile();
-
-	const handleSubmit = async () => {
-		await leadUserProfile({ profileValue });
-		setShowAddNumber(false);
-		setProfilevalue({});
 	};
 
 	const renderEmpty = () => {
@@ -155,6 +148,7 @@ function EmptyState({
 					size="sm"
 					onClose={() => setShowAddNumber(false)}
 					className={styles.styled_ui_modal_dialog}
+					scroll={false}
 				>
 					<Modal.Header title="Profile Details" />
 					<Modal.Body>
@@ -169,11 +163,10 @@ function EmptyState({
 						</div>
 						<div className={styles.wrapper}>
 							<div className={styles.styled_label}>Enter Phone Number</div>
-							<Input
-								size="sm"
-								placeholder="Enter number"
-								value={profileValue?.number}
-								onChange={(a) => setProfilevalue((p) => ({ ...p, number: a }))}
+							<SelectMobileNumber
+								value={profileValue}
+								onChange={(val) => setProfilevalue(val)}
+								numberKey="number"
 							/>
 						</div>
 					</Modal.Body>
@@ -182,7 +175,7 @@ function EmptyState({
 							size="sm"
 							themeType="accent"
 							onClick={handleSubmit}
-							disabled={loading}
+							disabled={leadLoading}
 						>
 							Submit
 						</Button>
