@@ -1,11 +1,14 @@
 import {
-	IcMAccountSettings,
 	IcMSettings,
+	IcMAccountSettings,
 	IcMLocation,
 	IcMTracking,
 	IcMAgentManagement,
 	IcMAirport,
+	IcMBooking,
+	IcMBookingManagement,
 	IcMProductCodeMapping,
+	IcMUsersManageAccounts,
 	IcMRateManagement,
 	IcMDemurrage,
 	IcMAir,
@@ -26,13 +29,11 @@ import {
 	IcMTechops,
 	IcMServices,
 	IcMMarginManagement,
-	IcMRfq,
 	IcMRateSheets,
 	IcMQuotations,
 	IcMPromotions,
 	IcMPrm,
 	IcMMoney,
-	IcMContractRates,
 	IcMPortManagement,
 	IcMProfile,
 	IcMMarketing,
@@ -73,6 +74,7 @@ const navigationMappingAdmin = {
 		as            : '/channel-partner-dashboard',
 		type          : 'link',
 		main_apis     : [],
+		icon          : IcMDashboard,
 		possible_apis : [],
 		module_type   : 'dashboards',
 	},
@@ -112,6 +114,7 @@ const navigationMappingAdmin = {
 		href          : '/applications',
 		as            : '/applications',
 		type          : 'link',
+		icon          : IcMPartnersCogoport,
 		possible_apis : apis.partner_application,
 		main_apis     : ['list_partner_applications'],
 		module_type   : 'crm',
@@ -200,6 +203,7 @@ const navigationMappingAdmin = {
 		href          : '/crm/support',
 		as            : '/crm/support',
 		type          : 'link',
+		icon          : IcMCrm,
 		possible_apis : [...apis.support_crm, ...apis.sales],
 		main_apis     : ['list_organizations'],
 		module_type   : 'crm',
@@ -345,6 +349,7 @@ const navigationMappingAdmin = {
 			...apis.ftl_freight,
 			...apis.ltl_freight,
 			...apis.trailer_freight,
+			...apis.rail_freight,
 		],
 		options: [
 			{
@@ -459,6 +464,7 @@ const navigationMappingAdmin = {
 		href          : '/shipment-lsp-management',
 		as            : '/shipment-lsp-management',
 		type          : 'link',
+		icon          : IcMBookingManagement,
 		statsKey      : 'shipments',
 		possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
 		main_apis     : ['list_shipment_services'],
@@ -714,6 +720,7 @@ const navigationMappingAdmin = {
 		href          : '/partner-users',
 		as            : '/partner-users',
 		type          : 'link',
+		icon          : IcMUsersManageAccounts,
 		possible_apis : apis.user,
 		main_apis     : ['list_partner_users'],
 		module_type   : 'crm',
@@ -739,33 +746,11 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_organization_trade_party_details'],
 		module_type   : 'crm',
 	},
-	rfq: {
-		key           : 'rfq',
-		title         : 'RFQ',
-		href          : '/rfq/dashboard',
-		as            : '/rfq/dashboard',
-		type          : 'link',
-		icon          : IcMRfq,
-		possible_apis : apis.rfq,
-		main_apis     : ['list_rfqs'],
-		module_type   : 'dashboards',
-	},
-	contract_rates: {
-		key           : 'contract_rates',
-		title         : 'Contract Rates',
-		href          : '/contract-rates',
-		as            : '/contract-rates',
-		type          : 'link',
-		icon          : IcMContractRates,
-		possible_apis : [...apis.contract_rates, ...apis.shipment],
-		main_apis     : ['list_contracts', 'list_organizations'],
-		module_type   : 'dashboards',
-	},
 	tech_ops: {
 		key           : 'tech_ops',
 		title         : 'TechOps',
-		href          : '/tech-ops',
-		as            : '/tech-ops',
+		href          : '/tech-ops/locals',
+		as            : '/tech-ops/locals',
 		type          : 'link',
 		icon          : IcMTechops,
 		possible_apis : apis.tech_ops,
@@ -778,42 +763,6 @@ const navigationMappingAdmin = {
 		icon      : IcMBusinessFinance,
 		isSubNavs : true,
 		options   : [
-			{
-				key           : 'business_finance-jobs',
-				title         : 'Old Jobs',
-				href          : '/business-finance',
-				as            : '/business-finance',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance,
-			},
-			{
-				key           : 'business_finance-sales_list',
-				title         : 'Old Income',
-				href          : '/business-finance/sales-list',
-				as            : '/business-finance/sales-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance_income,
-			},
-			{
-				key           : 'business_finance-purchase_list',
-				title         : 'Old Expense',
-				href          : '/business-finance/purchase-list',
-				as            : '/business-finance/purchase-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance_expense,
-			},
-			{
-				key           : 'business_finance-vendor_payment',
-				title         : 'Old Vendor Payment',
-				href          : '/business-finance/vendor-list',
-				as            : '/business-finance/vendor-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.vendor_payment,
-			},
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
@@ -842,13 +791,13 @@ const navigationMappingAdmin = {
 				possible_apis : apis.settlement,
 			},
 			{
-				key           : 'business_finance-controller_dashboard',
-				title         : 'Controller Dashboard',
-				href          : '/business-finance/controller-dashboard/[active_tab]',
-				as            : '/business-finance/controller-dashboard/IncidentManagement',
+				key           : 'business_finance-incident_management',
+				title         : 'Incident Management',
+				href          : '/v2/business-finance/incident-management/[activeTab]',
+				as            : '/v2/business-finance/incident-management/requested',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.controller_dashboard,
+				possible_apis : apis.incident_controller,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
@@ -868,6 +817,16 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
+
+			{
+				key           : 'business_finance-reports',
+				title         : 'Reports',
+				href          : '/v2/business-finance/reports',
+				as            : '/v2/business-finance/reports',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.reports,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -881,6 +840,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.finance,
 		main_apis     : ['list_cogo_entities'],
 		module_type   : 'crm',
+	},
+	my_incident: {
+		key           : 'my_incident',
+		title         : 'My Incidents',
+		href          : '/v2/my-incident/[activeIncidentTab]',
+		as            : '/v2/my-incident/requested',
+		type          : 'link',
+		icon          : IcMFinance,
+		possible_apis : apis.my_incident,
+		main_apis     : [],
+		module_type   : 'dashboards',
 	},
 	incentives: {
 		key       : 'incentives',
@@ -1077,7 +1047,6 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_events'],
 		module_type   : 'dashboards',
 	},
-
 	coe: {
 		key         : 'coe',
 		title       : 'Center of Excellence [COE]',
@@ -1113,7 +1082,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.bn_salvage,
-
 			},
 			{
 				key           : 'coe-tasks_dashboard',
@@ -1213,7 +1181,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-customs_revenue_desk',
@@ -1223,7 +1190,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-fcl-cfs_revenue_desk',
@@ -1233,7 +1199,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-haulage_revenue_desk',
@@ -1273,7 +1238,7 @@ const navigationMappingAdmin = {
 				as            : '/cost-booking-desk',
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
-				possible_apis : apis.shipment,
+				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
 
 			},
 			{
@@ -1311,7 +1276,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.kam_payments_dashboard,
-
 			},
 			{
 				key           : 'coe-ltl_operations',
@@ -1333,6 +1297,33 @@ const navigationMappingAdmin = {
 				possible_apis : apis.bl_do_collection_release,
 
 			},
+			{
+				key           : 'coe-kam_desk',
+				title         : 'KAM Desk',
+				href          : '/kam-desk',
+				as            : '/kam-desk',
+				type          : 'link',
+				main_apis     : ['list_kam_desk_shipments'],
+				possible_apis : [...apis.kam_desk, ...apis.search],
+			},
+			{
+				key           : 'coe-document_desk',
+				title         : 'Document Desk',
+				href          : '/document-desk',
+				as            : '/document-desk',
+				type          : 'link',
+				main_apis     : ['list_document_desk_shipments'],
+				possible_apis : [...apis.document_desk],
+			},
+			{
+				key           : 'coe-last_mile',
+				title         : 'Last Mile',
+				href          : '/last-mile',
+				as            : '/last-mile',
+				type          : 'link',
+				main_apis     : ['list_lastmile_desk_shipments'],
+				possible_apis : [...apis.document_desk],
+			},
 		],
 	},
 	terms_and_conditions: {
@@ -1345,6 +1336,14 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_terms_and_conditions'],
 		possible_apis : [...apis.terms_and_conditons],
 		module_type   : 'dashboards',
+	},
+	operations_mails: {
+		key         : 'operations_mails',
+		title       : 'Operations Mails',
+		href        : '/operations-mails',
+		as          : '/operations-mails',
+		type        : 'link',
+		module_type : 'crm',
 	},
 	prm: {
 		key       : 'prm',
@@ -1390,15 +1389,15 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'marketing-marketing_campaigns',
-				title         : 'Campaigns',
-				href          : '/marketing/campaigns',
-				as            : '/marketing/campaigns',
+				key           : 'marketing-marketing_campaign-dashboard',
+				title         : 'Campaign Dashboard',
+				href          : '/marketing/campaign-dashboard',
+				as            : '/marketing/campaign-dashboard',
+				icon          : 'ic-campaign',
 				type          : 'link',
 				main_apis     : [],
+				possible_apis : apis.campaign_dashboard,
 				module_type   : 'crm',
-				possible_apis : apis.campaigns,
-
 			},
 			{
 				key           : 'marketing-marketing_templates',
@@ -1704,6 +1703,8 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
+		showInNav     : false,
+
 	},
 	allocations: {
 		key         : 'allocations',
@@ -1711,45 +1712,22 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		options     : [
+		main_apis   : [
+			'get_allocation_configurations',
+			'get_allocation_relations',
+			'get_allocation_requests',
+			'get_allocation_quotas',
+		],
+		options: [
 			{
-				key           : 'allocations-allocation_configurations',
-				title         : 'Configurations',
-				href          : '/allocation/configurations',
-				as            : '/allocation/configurations',
-				main_apis     : ['list_allocation_configurations'],
-				possible_apis : apis.allocation,
-			},
-			{
-				key           : 'allocations-allocation_relations',
-				title         : 'Relations',
-				href          : '/allocation/relations',
-				as            : '/allocation/relations',
-				main_apis     : ['list_allocation_relations'],
-				possible_apis : apis.allocation,
-
-			},
-			{
-				key           : 'allocations-allocation_requests',
-				title         : 'Requests',
-				href          : '/allocation/requests',
-				as            : '/allocation/requests',
-				main_apis     : ['list_allocation_requests'],
-				possible_apis : apis.allocation,
-
-			},
-			{
-				key           : 'allocations-allocation_quotas',
-				title         : 'Quotas',
-				href          : '/allocation/quotas',
-				as            : '/allocation/quotas',
-				main_apis     : ['list_allocation_quotas'],
-				possible_apis : apis.allocation,
-
+				key           : 'allocations-core_engine',
+				title         : 'Core Engine',
+				href          : '/v2/allocation/core-engine',
+				as            : '/v2/allocation/core-engine',
+				possible_apis : apis.allocation_engine,
 			},
 		],
 	},
-
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
@@ -1760,6 +1738,28 @@ const navigationMappingAdmin = {
 		possible_apis : apis.awb_inventory,
 		module_type   : 'dashboards',
 	},
+
+	airline_booking_plugin: {
+		key           : 'airline_booking_plugin',
+		title         : 'Airline Booking Plugin',
+		href          : '/airline-booking-plugin',
+		as            : '/airline-booking-plugin',
+		main_apis     : [],
+		icon          : IcMInvoiceApprovals,
+		possible_apis : apis.airline_booking_plugin,
+		module_type   : 'dashboards',
+	},
+
+	enrichment: {
+		key           : 'enrichment',
+		title         : 'Enrichment',
+		href          : '/enrichment',
+		as            : '/enrichment',
+		main_apis     : ['/list_lead_organizations_enrichment'],
+		possible_apis : apis.enrichment,
+		module_type   : 'dashboards',
+	},
+
 	document_wallet: {
 		key           : 'document_wallet',
 		title         : 'Document Wallet',
@@ -1768,6 +1768,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.document_walet,
 		icon          : IcMDocument,
 		main_apis     : [],
+		module_type   : 'dashboards',
+	},
+	cost_booking: {
+		key           : 'cost_booking',
+		title         : 'FF Cost Booking',
+		href          : '/cost-booking',
+		as            : '/cost-booking',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cost_booking,
+		icon          : IcMBooking,
 		module_type   : 'dashboards',
 	},
 	platform_configuration: {
@@ -1798,6 +1809,58 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
+	},
+	home: {
+		key   : 'home',
+		title : 'Home',
+		href  : '/home',
+		as    : '/home',
+		icon  : IcMSettings,
+	},
+	manage_rfq: {
+		key           : 'manage_rfq',
+		title         : 'Manage RFQ',
+		href          : '/manage-rfq',
+		as            : '/manage-rfq',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.manage_rfq,
+		module_type   : 'dashboards',
+	},
+	contract_rates: {
+		key       : 'contract_rates',
+		title     : 'Contract Rates',
+		isSubNavs : true,
+		options   : [
+			{
+				key           : 'contract_rates-international_contracts',
+				title         : 'Overseas Contract',
+				href          : '/contract-rates/dashboard/active',
+				as            : '/contract-rates/dashboard/active',
+				type          : 'link',
+				main_apis     : ['list_contracts'],
+				possible_apis : [...apis.contract_rates, ...apis.shipment],
+			},
+			{
+				key           : 'contract_rates-domestic_contracts',
+				title         : 'Domestic Contracts',
+				href          : '/contract-rates',
+				as            : '/contract-rates',
+				type          : 'link',
+				main_apis     : ['list_contracts'],
+				possible_apis : [...apis.contract_rates, ...apis.shipment],
+			},
+		],
+		module_type: 'dashboards',
+	},
+	contracts: {
+		key           : 'contracts',
+		title         : 'Contracts Revenue Desk',
+		href          : '/v2/contracts',
+		as            : '/v2/contracts',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.contracts,
 	},
 };
 
