@@ -24,6 +24,7 @@ function Top({
 					size="md"
 					themeType="accent"
 					role="presentation"
+					style={{ marginLeft: '8px' }}
 					onClick={() => (showForm === 'pocForm' ? setShowForm('') : setShowForm('pocForm'))}
 				>
 					Add POC

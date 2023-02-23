@@ -24,9 +24,8 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 			/>
 			<div className={styles.button_container}>
 				<Button
-					size="lg"
+					size="md"
 					themeType="tertiary"
-					style={{ marginRight: '60px' }}
 					onClick={() => setShowForm('')}
 				>
 					Cancel
@@ -34,7 +33,7 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 				</Button>
 
 				<Button
-					size="lg"
+					size="md"
 					themeType="accent"
 					onClick={handleSubmit(onSubmit)}
 				>
