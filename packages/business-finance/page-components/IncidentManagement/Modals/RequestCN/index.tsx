@@ -1,12 +1,12 @@
 import { Tooltip, Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import { toTitleCase } from '../../utils/titleCase';
 
 import { CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS, REVENUE_OPTIONS } from './credit-note-config';
 import styles from './style.module.css';
@@ -171,7 +171,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						setShowTdsModal(false);
 					}}
 				>
-					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${startCase(businessName)}`} />
+					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
