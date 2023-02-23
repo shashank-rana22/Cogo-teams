@@ -1,0 +1,136 @@
+.name_container {
+	display: flex;
+}
+
+.label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
+}
+
+.value {
+	display: flex;
+	margin-left: 0;
+	font-size: 12px;
+	color: #333;
+}
+
+.rate_conatiner {
+	display: flex;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.approved_container {
+	margin-bottom: 15px;
+	background: #fff;
+	border: 1px solid #6cc077;
+	border-radius: 8px;
+}
+
+.aprroved {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	color: #6cc077;
+}
+
+.icon {
+	margin-right: 10px;
+	margin-bottom: -4px;
+}
+
+.remarks {
+	display: flex;
+	padding: 20px;
+	color: #6cc077;
+}
+
+.hr {
+	width: 96%;
+	height: 1px;
+	margin-left: 15px;
+	background: #6cc077;
+}
+
+.current {
+	min-width: 170px;
+	padding: 15px;
+	margin-right: 30px;
+	background: #fff;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.requested {
+	min-width: 170px;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.rate_label {
+	font-size: 15px;
+	font-weight: 550;
+	color: #333;
+}
+
+.rate_value {
+	font-size: 15px;
+	font-weight: 600;
+	color: #333;
+}
+
+.subcontainer {
+	padding-right: 50px;
+}
+
+.link {
+	width: 675px;
+	padding-right: 10px;
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: underline;
+	word-break: break-all;
+	cursor: pointer;
+}
+
+.text_area {
+	height: 10px;
+	min-height: 80px;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.remarks_style {
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.rejected_container {
+	margin-bottom: 15px;
+	background: #fff;
+	border: 1px solid #ed3726;
+	border-radius: 8px;
+}
+
+.rejected {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	color: #ed3726;
+}
+
+.rejected_hr {
+	width: 96%;
+	height: 1px;
+	margin-left: 15px;
+	background: #ed3726;
+}
+
+.rejected_remarks {
+	display: flex;
+	padding: 20px;
+	color: #ed3726;
+}

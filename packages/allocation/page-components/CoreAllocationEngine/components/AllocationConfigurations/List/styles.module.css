@@ -1,0 +1,115 @@
+.list_container {
+	margin-top: 16px;
+}
+
+.table_container {
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 70vh;
+	padding: 24px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 10px;
+}
+
+.list_item_container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	margin: 16px 0;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+	}
+}
+
+.roles_container {
+	display: flex;
+	display: block;
+	flex-direction: column;
+	width: fit-content;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.label {
+	flex: 1;
+	margin-bottom: 2px;
+	font-size: 12px;
+	color: #4f4f4f;
+	opacity: 0.7;
+}
+
+.value {
+	flex: 1;
+	font-size: 14px;
+	color: #221f20;
+
+	:global(.ui_legend_item) {
+		margin: 0;
+	}
+}
+
+.overflow_flex {
+	display: flex;
+}
+
+.tooltip_container {
+	display: flex;
+	flex-flow: row wrap;
+	width: fit-content;
+}
+
+.svg_container {
+	box-sizing: content-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	cursor: pointer;
+}
+
+.schedule_type {
+	display: flex;
+	align-items: center;
+}
+
+.svg_container_mobile_view {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (min-width: 768px) {
+		display: none;
+	}
+}
+
+.table {
+	margin: 16px 0;
+	background-color: #fff;
+	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
+
+	tr {
+		height: 60px;
+	}
+
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
+	}
+}
