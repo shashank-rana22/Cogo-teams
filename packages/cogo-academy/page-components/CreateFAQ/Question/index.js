@@ -6,18 +6,19 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import BodyTextEditor from './BodyTextEditor';
-import styles from './styles.module.css';
+import Layout from '../../../commons/Layout';
+import createQuestionControls from '../utils/createQuestionControls';
 
-const TAG_OPTIONS = [
-	{ label: 'tag1', value: 'tag1' },
-	{ label: 'tag2', value: 'tag2' },
-	{ label: 'tag3', value: 'tag3' },
-	{ label: 'tag4', value: 'tag4' },
-];
+import BodyTextEditor from './BodyTextEditor';
+import useGetTopicTagList from './hooks/useGetTopicTagList';
+import styles from './styles.module.css';
 
 function CreateFAQ() {
 	const router = useRouter();
+
+	const { topicOptions, tagOptions } = useGetTopicTagList();
+
+	const controls = createQuestionControls();
 
 	const onClickBackIcon = () => {
 		router.back();
@@ -59,6 +60,34 @@ function CreateFAQ() {
 
 				</div>
 
+				<div className={styles.flex_items}>
+
+					<div className={styles.select_container}>
+						<div className={styles.input_label}>
+							Select Tags
+						</div>
+						<MultiselectController
+							name="tags"
+							control={control}
+							options={tagOptions}
+						/>
+
+					</div>
+
+					<div className={styles.select_topic_container}>
+						<div className={styles.input_label}>
+							Select Topcics
+						</div>
+						<MultiselectController
+							name="topics"
+							control={control}
+							options={topicOptions}
+						/>
+
+					</div>
+
+				</div>
+
 				<div className={styles.faq_answer_container}>
 					<div className={styles.input_label}>
 						Answer
@@ -67,17 +96,7 @@ function CreateFAQ() {
 
 				</div>
 
-				<div className={styles.select_container}>
-					<div className={styles.input_label}>
-						Select Tags
-					</div>
-					<MultiselectController
-						name="tags"
-						control={control}
-						options={TAG_OPTIONS}
-					/>
-
-				</div>
+				<Layout fields={controls} control={control} errors={errors} />
 
 				<div className={styles.button_container}>
 

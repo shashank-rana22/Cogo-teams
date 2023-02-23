@@ -21,7 +21,8 @@ function useGetFaq() {
 		}
 	};
 
-	return { fetchFaq, data: data?.[`${update}_detail`], loading };
+
+	return { fetchFaq, data: data?.[`${update}_details`], loading };
 }
 
 export default useGetFaq;

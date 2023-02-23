@@ -4,7 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function topicListColumns({ onClickEditTopic }) {
+function topicListColumns({ onClickEditTopic, onClickDeleteIcon }) {
 	const listColumns = [
 		{
 			Header   : 'TOPIC NAME',
@@ -43,7 +43,7 @@ function topicListColumns({ onClickEditTopic }) {
 			accessor : (item) => (
 				<div className={styles.button_container}>
 					<div className={styles.delete_button}>
-						<IcMDelete height={20} width={20} />
+						<IcMDelete height={20} width={20} onClick={() => onClickDeleteIcon(item)} />
 					</div>
 					<Button
 						themeType="secondary"

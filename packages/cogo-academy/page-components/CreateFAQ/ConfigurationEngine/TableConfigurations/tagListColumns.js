@@ -4,7 +4,7 @@ import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function tagListColumns({ onClickEdit }) {
+function tagListColumns({ onClickEdit, onClickDeleteIcon }) {
 	const listColumns = [
 		{
 			Header   : 'TAG NAME',
@@ -43,7 +43,7 @@ function tagListColumns({ onClickEdit }) {
 			accessor : (item) => (
 				<div className={styles.button_container}>
 					<div className={styles.delete_button}>
-						<IcMDelete height={20} width={20} />
+						<IcMDelete height={20} width={20} onClick={() => onClickDeleteIcon(item)} />
 					</div>
 					<Button
 						themeType="secondary"
@@ -54,7 +54,6 @@ function tagListColumns({ onClickEdit }) {
 						EDIT
 
 					</Button>
-					<Button themeType="primary" size="sm">VIEW</Button>
 				</div>
 			),
 		},

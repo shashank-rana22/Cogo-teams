@@ -1,35 +1,35 @@
 .container {
-    margin-top: 32px;
-    width: 100%;
+  margin-top: 32px;
+  width: 100%;
 }
 
 .name {
-    white-space: initial;
+  white-space: initial;
 }
 
 .description {
-	margin-right: 4;
-	display: flex;
-	flex-wrap: wrap;
+  margin-right: 4;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .tags {
-	margin-right: 4;
-	display: flex;
-	flex-wrap: wrap;
+  margin-right: 4;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .button_container {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
+  display: flex;
+  margin: 8px 0;
 }
 
-.pagination_container{
-    display: flex;
-    justify-content: flex-end;
+.pagination_container {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.delete_button{
-    margin-right:8px;
+.delete_button {
+  margin-right: 8px;
+  cursor: pointer;
 }

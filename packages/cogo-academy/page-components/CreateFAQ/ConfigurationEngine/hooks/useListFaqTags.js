@@ -14,9 +14,8 @@ function useListFaqTags({ searchTagsInput = '' }) {
 			await trigger({
 				params: {
 					page       : tagCurrentPage,
-					status     : activeTag,
 					page_limit : 5,
-					filters    : { q: searchTagsInput },
+					filters    : { q: searchTagsInput, status: activeTag },
 				},
 			});
 		} catch (err) {
