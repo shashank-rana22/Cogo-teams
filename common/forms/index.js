@@ -13,6 +13,7 @@ export { default as RadioGroupController } from './page-components/Controlled/Ra
 export { default as DateRangePickerController } from './page-components/Controlled/DateRangePickerController';
 export { default as DayFrequencyController } from './page-components/Controlled/DayFrequencyController';
 export { default as AsyncSelectController } from './page-components/Controlled/AsyncSelectController';
+export { default as CheckboxController } from './page-components/Controlled/CheckboxController';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';

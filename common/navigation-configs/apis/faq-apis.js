@@ -78,6 +78,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+		{
+			api          : 'create_faq_feedback',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
 	],
 };
 
