@@ -25,7 +25,7 @@ const useDeleteAccept = ({ userIncidentStatus, id, remarks, refetch }) => {
 	if (userIncidentStatus === 'REQUESTED') {
 		status = 'DELETED';
 	} else if (userIncidentStatus === 'PENDING_ACTION') {
-		status = 'ACCEPTED';
+		status = 'CLOSED';
 	}
 
 	const onDeleteAccept = async () => {
