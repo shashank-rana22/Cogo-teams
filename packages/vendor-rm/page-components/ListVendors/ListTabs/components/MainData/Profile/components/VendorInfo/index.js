@@ -9,7 +9,10 @@ import VendorDetailsInfo from './components/VendorDetailsInfo';
 import VendorServices from './components/VendorServices';
 import styles from './styles.module.css';
 
-function VendorInfo({ data = {}, refetchVendorInfo = () => {} }) {
+function VendorInfo({
+	data = {},
+	refetchVendorInfo = () => {},
+}) {
 	const [showAddbankModal, setShowAddbankModal] = useState(false);
 
 	const {
@@ -19,22 +22,31 @@ function VendorInfo({ data = {}, refetchVendorInfo = () => {} }) {
 		onSubmit,
 		loading,
 		controls,
-	} = useVendorBankDetail({ refetchVendorInfo, setShowAddbankModal });
+	} = useVendorBankDetail({
+		refetchVendorInfo,
+		setShowAddbankModal,
+	});
 
 	return (
 		<div className={styles.main}>
-			<span className={styles.heading}>Vendor Details </span>
 
+			<span className={styles.heading}>
+				Vendor Details
+			</span>
 			<VendorDetailsInfo data={data} />
-
 			<hr className={styles.dis} />
 
-			<span className={styles.heading}>Vendor Services</span>
+			<span className={styles.heading}>
+				Vendor Services
+			</span>
 			<VendorServices data={data} />
 			<hr className={styles.dis} />
-			<span className={styles.heading}>Payment Details</span>
 
+			<span className={styles.heading}>
+				Payment Details
+			</span>
 			<PaymentDetails data={data} />
+			<hr className={styles.dis} />
 
 			<Button
 				size="md"

@@ -4,18 +4,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function VendorServices({ data = {} }) {
+function VendorServices({
+	data = {},
+}) {
 	return (
 		<div className={styles.cont}>
-			{data?.services?.map((i) => (
-
+			{(data?.services || []).map((service) => (
 				<>
 					<div className={styles.box_info}>
 						<div className={styles.top}>
 							Service Category
 						</div>
 						<div className={styles.bottom}>
-							{startCase(i.category)}
+							{startCase(service.category)}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -23,7 +24,7 @@ function VendorServices({ data = {} }) {
 							Service Sub-Category
 						</div>
 						<div className={styles.bottom}>
-							{startCase(i.sub_category)}
+							{startCase(service.sub_category)}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -31,8 +32,7 @@ function VendorServices({ data = {} }) {
 							Cogoport Office
 						</div>
 						<div className={styles.bottom}>
-							{/* {item.services[item].} */}
-							Mumbai
+							{service?.cogoport_office?.display_name}
 						</div>
 					</div>
 					<hr className={styles.dis1} />

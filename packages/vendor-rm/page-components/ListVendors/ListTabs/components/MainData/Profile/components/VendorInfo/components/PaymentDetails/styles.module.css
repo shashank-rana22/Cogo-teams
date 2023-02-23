@@ -29,6 +29,7 @@
     line-height: 21px;
     color: #333333;
     width: 250px;
+    cursor: pointer;
 }
 .di{
     display: flex;
