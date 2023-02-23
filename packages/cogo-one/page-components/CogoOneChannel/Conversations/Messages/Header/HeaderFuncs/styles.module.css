@@ -86,10 +86,10 @@
 	letter-spacing: 0;
 }
 
-
-.overflow_div{
+.overflow_div {
 	overflow-y: scroll;
 }
+
 .name {
 	padding: 5px;
 	font-size: 12px;

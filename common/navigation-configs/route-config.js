@@ -14,9 +14,10 @@ const routeConfig = {
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
+	...myIncident,
+	...myProfile,
 	...cogoVerseAnalytics,
 	...cogoOne,
-	...myIncident,
 	...myProfile,
 };
 

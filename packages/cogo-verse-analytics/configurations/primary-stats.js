@@ -6,7 +6,7 @@ import IcMUsersManageAccounts from '@cogoport/icons-react/dist/es/IcMUsersManage
 export const PRIMARY_STATS = [
 	{
 		valueKey    : 'kyc_verified',
-		descKey     : 'new_users',
+		descKey     : 'new_user',
 		title       : 'KYC Verified',
 		parentKey   : 'new_users_and_kyc_verified',
 		description : 'new users',
@@ -36,19 +36,16 @@ export const PRIMARY_STATS = [
 export const CONVERSATIONS = [
 	{
 		valueKey : 'total_conversation',
-		value    : 240456,
 		title    : 'Total Communications',
 		icon_bg  : '#BDBDBD',
 	},
 	{
 		valueKey : 'system_initiated_conversation',
-		value    : 2202345,
 		title    : 'System Initiated Conversations',
 		icon_bg  : '#ABCD62',
 	},
 	{
 		valueKey : 'customer_initiated_conversation',
-		value    : 203456,
 		title    : 'Customer Initiated Conversations',
 		icon_bg  : '#DDEBC0',
 	}];
@@ -56,19 +53,16 @@ export const CONVERSATIONS = [
 export const INTENT_LEADERBOARD = [
 	{
 		valueKey    : 'normal_conversation',
-		value       : 240000,
 		title       : 'Normal conversation',
 		description : 'users',
 	},
 	{
 		valueKey    : 'trade_enquiry',
-		value       : 40000,
 		title       : 'Trade enquiry',
 		description : 'users',
 	},
 	{
 		valueKey    : 'shipment_booking',
-		value       : 4000,
 		title       : 'Shipment booking',
 		description : 'users',
 	},
