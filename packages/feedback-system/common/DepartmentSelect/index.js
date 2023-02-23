@@ -1,7 +1,7 @@
 import { Button, Select } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 
-import { deptControls } from '../../utils/departmentControls';
+import { deptControls } from '../../hooks/useGetDepartmentControls';
 
 import styles from './styles.module.css';
 

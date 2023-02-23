@@ -8,7 +8,7 @@ import TeamPieChart from '../TeamPieChart';
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-function PerformanceChart({ params = {}, userId = ''}) {
+function PerformanceChart({ params = {}, userId = '' }) {
 	const { Month = '', Year = '', ManagerID = '' } = params;
 
 	const {

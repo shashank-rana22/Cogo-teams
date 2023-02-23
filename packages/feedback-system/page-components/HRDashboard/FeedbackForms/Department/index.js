@@ -3,7 +3,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Department({ department, openAccordion, setOpenAccordion, setFormsParams, designation }) {
+function Department({ department, openAccordion, setFormsParams, designation }) {
 	const completionStatus = isEmpty(department.designations.filter((role) => role.status === 'inactive'));
 
 	return (

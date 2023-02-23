@@ -10,22 +10,18 @@ const useDownloadCsvFeedbacks = ({ userId = '', key = '' }) => {
 	}, { manual: true });
 
 	const getUserListCsv = async () => {
-		try {
-			const response = await trigger({
-				params: {
-					download_csv : true,
-					filters      : {
-						...(key === 'users_under_manager' && { performed_by_id: userId }),
-						created_at_greater_than: firstDay.toDateString(),
-					},
+		const response = await trigger({
+			params: {
+				download_csv : true,
+				filters      : {
+					...(key === 'users_under_manager' && { performed_by_id: userId }),
+					created_at_greater_than: firstDay.toDateString(),
 				},
-			});
+			},
+		});
 
-			// eslint-disable-next-line no-undef
-			window.open(response?.data, '_blank');
-		} catch (e) {
-			console.log(e.toString());
-		}
+		// eslint-disable-next-line no-undef
+		window.open(response?.data, '_blank');
 	};
 
 	return {

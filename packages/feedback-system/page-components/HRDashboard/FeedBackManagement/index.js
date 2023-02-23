@@ -3,11 +3,9 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
-import EmptyState from '../../../common/EmptyState';
 import Filters from '../../../common/Filters';
 import UserTableData from '../../../common/userTableData';
 import useDownloadCsvFeedbacks from '../../../hooks/useDownloadCsvFeedbacks';

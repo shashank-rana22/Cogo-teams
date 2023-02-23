@@ -10,8 +10,6 @@ const useGetPieChartStats = ({ userId = '', month = '', year = '' }) => {
 		Year          : year || undefined,
 	};
 
-	console.log(Months[month - 1]);
-
 	const [{ loading = false, data : userData = {} }] = useRequest({
 		method : 'get',
 		url    : 'get-performance-stats',

@@ -1,6 +1,6 @@
 import { Select } from '@cogoport/components';
 
-import { deptControls } from '../../utils/departmentControls';
+import { deptControls } from '../../hooks/useGetDepartmentControls';
 
 import styles from './styles.module.css';
 

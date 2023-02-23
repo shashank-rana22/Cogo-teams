@@ -2,7 +2,7 @@ import { Select } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-import getDepartmentControls from '../../utils/departmentControls';
+import getDepartmentControls from '../../hooks/useGetDepartmentControls';
 import useGetControls from '../../utils/filterControls';
 import getMonthControls from '../../utils/monthControls';
 

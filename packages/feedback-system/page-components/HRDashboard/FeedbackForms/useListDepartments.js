@@ -6,12 +6,12 @@ const useListDepartments = () => {
 		url    : 'list-departments',
 		method : 'get',
 	}, { manual: true });
-	
 
 	const getListDepartments = async () => {
 		await trigger();
 	};
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => getListDepartments, []);
 
 	return { data, loading, getListDepartments };

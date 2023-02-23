@@ -1,6 +1,7 @@
 import { Input, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
