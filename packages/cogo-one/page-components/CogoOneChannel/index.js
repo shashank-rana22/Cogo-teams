@@ -112,6 +112,7 @@ function CogoOne() {
 	return (
 		<div className={styles.layout_container}>
 			<Customers
+				setActiveCardId={setActiveCardId}
 				isomniChannelAdmin={isomniChannelAdmin}
 				setActiveMessage={setActiveMessage}
 				activeMessageCard={activeMessageCard}

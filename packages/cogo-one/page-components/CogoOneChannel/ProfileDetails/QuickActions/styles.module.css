@@ -72,3 +72,7 @@
 	width: 50px;
 	height: 50px;
 }
+
+.icon_disabled {
+	cursor: not-allowed;
+}

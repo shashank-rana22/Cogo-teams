@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
+	setActiveCardId = () => {},
 	setActiveMessage = () => {},
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
@@ -81,6 +82,7 @@ function Customers({
 					appliedFilters={appliedFilters}
 					messagesLoading={messagesLoading}
 					activeCardId={activeCardId}
+					setActiveCardId={setActiveCardId}
 				/>
 			)}
 

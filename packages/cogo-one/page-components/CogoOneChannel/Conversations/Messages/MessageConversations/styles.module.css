@@ -2,8 +2,23 @@
 	padding: 10px 10px 20px;
 	overflow-y: scroll;
 	transition: height 0.3s;
+	
 }
 
+.container::-webkit-scrollbar {
+	width: 0.5em;
+}
+.container::-webkit-scrollbar:hover {
+		width: 1em;
+}
+.container::-webkit-scrollbar-thumb {
+	background-color: #B1B1B1;
+	border-radius: 20px;
+	&:hover {
+		background-color: #7F7F7F;
+	}
+}
+  
 .file_present_suggestions {
 	height: calc(100% - 214px);
 }

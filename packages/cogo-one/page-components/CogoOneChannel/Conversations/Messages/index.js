@@ -17,7 +17,13 @@ import Header from './Header';
 import MessageConversations from './MessageConversations';
 import styles from './styles.module.css';
 
-function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId = '', isomniChannelAdmin = false }) {
+function Messages({
+	activeMessageCard = {},
+	firestore,
+	suggestions = [],
+	userId = '',
+	isomniChannelAdmin = false,
+}) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
@@ -38,16 +44,18 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 
 	const {
 		sendCommunicationTemplate,
-		loading:communicationLoading,
+		loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
 
 	const hasPermissionToEdit = userId === support_agent_id || isomniChannelAdmin;
 
-	const filteredSpectators = (spectators_data || [])
-		.filter(({ agent_id:spectatorId }) => spectatorId !== support_agent_id);
+	const filteredSpectators = (spectators_data || []).filter(
+		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
+	);
 
-	const activeAgentName = (spectators_data || [])
-		.find((val) => val.agent_id === support_agent_id)?.agent_name;
+	const activeAgentName = (spectators_data || []).find(
+		(val) => val.agent_id === support_agent_id,
+	)?.agent_name;
 
 	const {
 		sendMessage,
@@ -75,12 +83,14 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		formattedData,
 	});
 
-	const closeModal = () => (setOpenModal({ type: null, data: {} }));
+	const closeModal = () => setOpenModal({ type: null, data: {} });
 
-	const {
-		assignChat = () => {},
-		loading:assignLoading,
-	} = useAssignChat({ messageFireBaseDoc, closeModal, activeMessageCard, formattedData });
+	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
+		messageFireBaseDoc,
+		closeModal,
+		activeMessageCard,
+		formattedData,
+	});
 
 	const {
 		getNextData = () => {},
@@ -90,10 +100,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		loadingPrevMessages,
 	} = useGetMessages({ activeChatCollection, id });
 
-	const {
-		updateChat,
-		loading,
-	} = useUpdateAssignedChat({
+	const { updateChat, loading } = useUpdateAssignedChat({
 		onClose: closeModal,
 		activeMessageCard,
 		formattedData,
@@ -124,7 +131,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					filteredSpectators={filteredSpectators}
 					tagOptions={tagOptions}
 					support_agent_id={support_agent_id}
-
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -147,7 +153,6 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						loadingPrevMessages={loadingPrevMessages}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
-
 					/>
 				</div>
 			</div>
@@ -160,19 +165,25 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 					className={styles.styled_ui_modal_container}
 				>
 					{name && (
-						<Modal.Header title={(
-							<div className={styles.modal_header_title}>
-								{img && <img src={img} alt="logo" />}
-								<div className={styles.modal_title}>{name}</div>
-							</div>
-						)}
+						<Modal.Header
+							title={(
+								<div className={styles.modal_header_title}>
+									{img && <img src={img} alt="logo" />}
+									<div className={styles.modal_title}>
+										{name}
+									</div>
+								</div>
+							)}
 						/>
 					)}
-					<ActiveModalComp data={openModal?.data || {}} assignLoading={assignLoading} />
+					<ActiveModalComp
+						data={openModal?.data || {}}
+						assignLoading={assignLoading}
+						loading={loading}
+					/>
 				</Modal>
 			)}
 		</>
-
 	);
 }
 

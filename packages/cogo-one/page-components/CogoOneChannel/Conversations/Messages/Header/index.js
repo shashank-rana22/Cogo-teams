@@ -90,7 +90,7 @@ function Header({
 				<div className={styles.flex}>
 					<UserAvatar type={channel_type} />
 					<div>
-						<div className={styles.name}>{startCase(user_name)}</div>
+						<div className={styles.name}>{startCase(user_name) || 'User'}</div>
 						<div className={styles.phone_number}>
 							{getLowerLabel()}
 						</div>
