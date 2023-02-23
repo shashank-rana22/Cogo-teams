@@ -1,6 +1,6 @@
 import { useGetAsyncOptions } from '@cogoport/forms';
 
-const useGetManagerControls = () => {
+const getControls = () => {
 	const partnerOptions = useGetAsyncOptions({
 		endpoint    : 'list_partner_users',
 		initialCall : false,
@@ -26,4 +26,4 @@ const useGetManagerControls = () => {
 	};
 };
 
-export default useGetManagerControls;
+export default getControls;
