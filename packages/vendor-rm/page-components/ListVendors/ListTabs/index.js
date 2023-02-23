@@ -10,12 +10,12 @@ import useVendorInfo from './hooks/useVendorInfo';
 
 function ListTabs() {
 	const {
-		loading,
+		getVendorLoading,
 		data,
 		refetchVendorInfo,
 	} = useVendorInfo();
 
-	if (loading) {
+	if (getVendorLoading) {
 		return null;
 	}
 

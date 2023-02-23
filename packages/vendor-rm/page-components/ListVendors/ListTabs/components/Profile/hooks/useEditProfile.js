@@ -1,10 +1,13 @@
+import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import { getControls } from '../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 
-function useEditProfile({ vendor_details = {} }) {
+function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, setShowEditProfileModal = () => {} }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
@@ -37,8 +40,6 @@ function useEditProfile({ vendor_details = {} }) {
 		}
 	});
 
-	console.log('newFieldsnewFields', newFields);
-
 	const {
 		control,
 		formState: { errors },
@@ -46,6 +47,33 @@ function useEditProfile({ vendor_details = {} }) {
 		getValues,
 		setValue,
 	} = useForm();
+
+	const [{ loading }, trigger] = useRequest({
+		url    : 'update_vendor',
+		method : 'post',
+	}, { manual: true });
+
+	const onSubmit = async () => {
+		const values = getValues();
+
+		try {
+			await trigger({
+				params: {
+					id                     : vendor_details?.id,
+					country_id             : values?.country_id,
+					business_name          : values?.business_name,
+					company_type           : values?.company_type,
+					registration_proof_url : values?.registration_proof_url?.finalUrl,
+					city_id                : values?.city_id,
+				},
+			});
+			setShowEditProfileModal(false);
+			refetchVendorInfo();
+			Toast.success('Updated successfully');
+		} catch (error) {
+			Toast.error(getApiErrorString(error));
+		}
+	};
 
 	useEffect(() => {
 		fields.forEach((field) => {
@@ -58,7 +86,9 @@ function useEditProfile({ vendor_details = {} }) {
 		newFields,
 		control,
 		handleSubmit,
+		onSubmit,
 		errors,
+		loading,
 	};
 }
 

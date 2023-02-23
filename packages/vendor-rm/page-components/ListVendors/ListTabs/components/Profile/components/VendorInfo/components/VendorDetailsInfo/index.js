@@ -33,6 +33,7 @@ function VendorDetailsInfo({ data = {} }) {
 		{ label: 'Type of Company', value: startCase(data?.vendor_details?.company_type) },
 		{ label: 'Company Branch', value: 'Mumbai' },
 	];
+
 	return (
 		<div className={styles.cont}>
 			{obj.map((item) => (
