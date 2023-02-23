@@ -12,6 +12,7 @@ function AddedQuestions({
 	paginationData,
 	data,
 	columns,
+	setFilters,
 	searchInput,
 	setSearchInput,
 	activeList,
@@ -21,6 +22,7 @@ function AddedQuestions({
 	return (
 		<div className={styles.container}>
 			<Header
+				setFilters={setFilters}
 				searchInput={searchInput}
 				setSearchInput={setSearchInput}
 				activeList={activeList}

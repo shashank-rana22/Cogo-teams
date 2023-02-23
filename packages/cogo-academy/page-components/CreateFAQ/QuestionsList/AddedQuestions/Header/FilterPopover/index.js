@@ -5,15 +5,26 @@ import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 import useFilterPopover from './useFilterPopover';
 
-function FilterPopover() {
-	const { showFilter, setShowFilter, topicOptions, tagOptions } = useFilterPopover();
+function FilterPopover({ setFilters }) {
+	const {
+		showFilter, setShowFilter, topicOptions, tagOptions,
+		control, handleSubmit, onSubmit,
+	} = useFilterPopover({ setFilters });
 
 	return (
 		<Popover
 			caret={false}
 			trigger="click"
 			placement="bottom"
-			render={<FilterContent topicOptions={topicOptions} tagOptions={tagOptions} />}
+			render={(
+				<FilterContent
+					topicOptions={topicOptions}
+					tagOptions={tagOptions}
+					control={control}
+					handleSubmit={handleSubmit}
+					onSubmit={onSubmit}
+				/>
+			)}
 		>
 			<div
 				role="presentation"

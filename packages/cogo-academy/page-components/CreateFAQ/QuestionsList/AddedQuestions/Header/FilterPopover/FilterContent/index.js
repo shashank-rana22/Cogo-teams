@@ -1,14 +1,12 @@
 /* eslint-disable max-len */
 import { Button } from '@cogoport/components';
-import { MultiselectController, useForm } from '@cogoport/forms';
+import { MultiselectController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
-function FilterContent({ topicOptions, tagOptions }) {
-	const { control } = useForm();
-
+function FilterContent({ topicOptions, tagOptions, control, handleSubmit, onSubmit }) {
 	return (
-		<div className={styles.filter_container}>
+		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
 			<div>
 				<div className={styles.title}> Filter By Topics</div>
 				<MultiselectController
@@ -16,7 +14,6 @@ function FilterContent({ topicOptions, tagOptions }) {
 					control={control}
 					options={topicOptions}
 				/>
-
 			</div>
 
 			<div>
@@ -27,7 +24,6 @@ function FilterContent({ topicOptions, tagOptions }) {
 					control={control}
 					options={tagOptions}
 				/>
-
 			</div>
 
 			<div className={styles.button_container}>
@@ -35,11 +31,11 @@ function FilterContent({ topicOptions, tagOptions }) {
 					Reset
 				</Button>
 
-				<Button>
+				<Button themeType="primary" type="submit">
 					Apply
 				</Button>
 			</div>
-		</div>
+		</form>
 	);
 }
 

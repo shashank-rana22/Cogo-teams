@@ -1,12 +1,13 @@
 import { Pill, Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const addedQuestionsColumns = ({ activeList }) => [
+const addedQuestionsColumns = ({ activeList, onClickEditButton, deactivateQuestion }) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
@@ -37,12 +38,25 @@ const addedQuestionsColumns = ({ activeList }) => [
 	},
 	{
 		Header   : 'ACTIONS',
-		accessor : () => (
+		accessor : (items) => (
 			<div className={styles.buttonContainer}>
-				{activeList !== 'inactive'
-					? <IcMDelete height={20} width={20} style={{ marginRight: 8 }} />
-					: null}
-				<Button themeType="secondary" size="sm" style={{ marginRight: 8 }}>EDIT</Button>
+				{activeList !== 'inactive' ? (
+					<IcMDelete
+						height={20}
+						width={20}
+						style={{ marginRight: 8 }}
+						onClick={() => deactivateQuestion(items?.id)}
+					/>
+				) : null}
+				<Button
+					themeType="secondary"
+					size="sm"
+					style={{ marginRight: 8 }}
+					onClick={() => onClickEditButton(items?.id)}
+				>
+					EDIT
+
+				</Button>
 				{activeList !== 'inactive'
 					? <Button themeType="primary" size="sm">VIEW</Button>
 					: null}
@@ -92,18 +106,29 @@ const requestedQuestionsColumns = [
 const useQuestionList = () => {
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
+	const [filters, setFilters] = useState({});
 	const [page, setPage] = useState(1);
+
+	const router = useRouter();
 
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_questions',
 	}, { manual: true });
 
+	const [{ error }, updateTrigger] = useRequest({
+		url    : '/update_question_answer_set',
+		method : 'post',
+	}, { manual: true });
+
 	const getQuestionsList = async () => {
 		try {
 			await trigger({
 				params: {
-					filters: {},
+					filters: {
+						...filters,
+						q: searchInput,
+					},
 					page,
 				},
 			});
@@ -115,10 +140,32 @@ const useQuestionList = () => {
 	useEffect(() => {
 		getQuestionsList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [page, filters, searchInput]);
+
+	const deactivateQuestion = async (id) => {
+		try {
+			await updateTrigger(
+				{
+					data: {
+						id,
+						status: 'inactive',
+					},
+				},
+			);
+		} catch {
+			console.log('Error', error);
+		}
+	};
+
+	const onClickEditButton = (id) => {
+		router.push(
+			`/learning/faq/create/question?id=${id}`,
+			`/learning/faq/create/question?id=${id}`,
+		);
+	};
 
 	const columns = activeList !== 'requested'
-		? addedQuestionsColumns({ activeList })
+		? addedQuestionsColumns({ activeList, onClickEditButton, deactivateQuestion })
 		: requestedQuestionsColumns;
 	const { list: data = [], ...paginationData } = questionList || {};
 
@@ -128,6 +175,7 @@ const useQuestionList = () => {
 		paginationData,
 		data,
 		columns,
+		setFilters,
 		searchInput,
 		setSearchInput,
 		activeList,

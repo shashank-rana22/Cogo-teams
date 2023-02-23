@@ -8,7 +8,7 @@ function QuestionsList() {
 	const {
 		data, columns, searchInput,
 		setSearchInput, activeList, setActiveList, questionListLoading,
-		page, setPage, paginationData,
+		page, setPage, paginationData, setFilters,
 	} = useQuestionList();
 
 	return (
@@ -18,6 +18,7 @@ function QuestionsList() {
 				setPage={setPage}
 				paginationData={paginationData}
 				data={data}
+				setFilters={setFilters}
 				columns={columns}
 				searchInput={searchInput}
 				setSearchInput={setSearchInput}

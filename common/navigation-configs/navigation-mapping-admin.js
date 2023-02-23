@@ -51,6 +51,7 @@ import {
 	IcMDashboard,
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
+	IcMFaq,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1898,6 +1899,7 @@ const navigationMappingAdmin = {
 		key       : 'cogo_academy',
 		title     : 'Cogo Academy',
 		isSubNavs : true,
+		icon      : IcMFaq,
 		options   : [
 			{
 				key           : 'cogo_academy-create_faq',

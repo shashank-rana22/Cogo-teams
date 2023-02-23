@@ -6,7 +6,13 @@ import SearchInput from '../../../../../commons/SearchInput';
 import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
 
-function Header({ searchInput, setSearchInput, activeList, setActiveList }) {
+function Header({
+	setFilters,
+	searchInput,
+	setSearchInput,
+	activeList,
+	setActiveList,
+}) {
 	return (
 		<div>
 			<div className={styles.container}>
@@ -20,7 +26,7 @@ function Header({ searchInput, setSearchInput, activeList, setActiveList }) {
 				</div>
 
 				<div className={styles.filter_popover}>
-					<FilterPopover />
+					<FilterPopover setFilters={setFilters} />
 				</div>
 			</div>
 
