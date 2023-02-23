@@ -28,7 +28,6 @@ function BodyTextEditor({ editorValue, setEditorValue }) {
 				zIndex    : 0,
 				position  : 'relative',
 				minHeight : '300px',
-
 			}}
 		/>
 	);

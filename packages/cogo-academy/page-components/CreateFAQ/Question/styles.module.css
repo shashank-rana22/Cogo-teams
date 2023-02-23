@@ -36,3 +36,17 @@
     font-size: 12px;
     color: var(--color-primary-error-red-1);
   }
+
+  .select_container,.select_tag_container{
+    width:100%;
+    margin-right:16px;
+  }
+
+  .select_topic_container{
+    width:100%;
+  }
+
+  .flex_items{
+    display:flex;
+    align-items: center;
+  }
