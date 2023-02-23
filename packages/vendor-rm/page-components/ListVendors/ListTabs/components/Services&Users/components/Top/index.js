@@ -2,15 +2,20 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Top({ setShowForm = () => {} }) {
+function Top({
+	setShowForm = () => {},
+	showForm,
+}) {
 	return (
 		<div className={styles.top}>
 			Services & Users
+
 			<div className={styles.btn}>
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setShowForm('serviceForm')}
+					role="presentation"
+					onClick={() => (showForm === 'serviceForm' ? setShowForm('') : setShowForm('serviceForm'))}
 				>
 					Add Service
 				</Button>
@@ -18,7 +23,8 @@ function Top({ setShowForm = () => {} }) {
 				<Button
 					size="md"
 					themeType="accent"
-					onClick={() => setShowForm('pocForm')}
+					role="presentation"
+					onClick={() => (showForm === 'pocForm' ? setShowForm('') : setShowForm('pocForm'))}
 				>
 					Add POC
 				</Button>
