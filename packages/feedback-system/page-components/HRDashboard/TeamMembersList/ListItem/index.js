@@ -1,6 +1,7 @@
 import { Input, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
@@ -33,7 +34,7 @@ function ListItem({ item }) {
 			<section className={styles.inner_list}>
 				<Input
 					size="sm"
-					suffix={<IcMSearchlight />}
+					prefix={<IcMSearchlight />}
 					placeholder="Search"
 					className={styles.search}
 					value={searchValue}

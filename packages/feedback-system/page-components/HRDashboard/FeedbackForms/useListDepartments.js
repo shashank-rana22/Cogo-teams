@@ -6,7 +6,6 @@ const useListDepartments = () => {
 		url    : 'list-departments',
 		method : 'get',
 	}, { manual: true });
-	
 
 	const getListDepartments = async () => {
 		await trigger();
