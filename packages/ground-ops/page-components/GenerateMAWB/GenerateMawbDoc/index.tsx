@@ -14,7 +14,6 @@ import Watermark from './watermark';
 
 interface Props {
 	taskItem?: any;
-	viewDoc?: boolean;
 	formData?: any;
 	setBack?: any;
 	back?: boolean;
@@ -24,7 +23,6 @@ interface Props {
 
 function GenerateMawb({
 	taskItem = {},
-	viewDoc = false,
 	formData = {},
 	setBack = () => {},
 	back = false,
@@ -148,7 +146,7 @@ function GenerateMawb({
 					opacity : 1,
 				}}
 			>
-				{!viewDoc && <Watermark text="draft" rotateAngle="315deg" />}
+				<Watermark text="draft" rotateAngle="315deg" />
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={formData}
@@ -192,20 +190,18 @@ function GenerateMawb({
 						</Button>
 					</div>
 				) : null}
-				{!viewDoc && (
-					<div style={{ marginRight: '36px' }}>
-						<Button
-							size="md"
-							onClick={() => {
-								setSaveDocument(true);
-								handleSave();
-							}}
-							disabled={loading || saveDocument}
-						>
-							{loading || saveDocument ? 'Saving...' : 'Save'}
-						</Button>
-					</div>
-				)}
+				<div style={{ marginRight: '36px' }}>
+					<Button
+						size="md"
+						onClick={() => {
+							setSaveDocument(true);
+							handleSave();
+						}}
+						disabled={loading || saveDocument}
+					>
+						{loading || saveDocument ? 'Saving...' : 'Save'}
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

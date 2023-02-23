@@ -17,12 +17,11 @@ const items = [
 
 interface Props {
 	item?: any;
-	viewDoc?: boolean;
 	edit?: boolean;
 	setEdit?: any;
 }
 
-function GenerateMAWB({ item = {}, viewDoc = false, edit = false, setEdit = () => {} }:Props) {
+function GenerateMAWB({ item = {}, edit = false, setEdit = () => {} }:Props) {
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
@@ -152,12 +151,11 @@ function GenerateMAWB({ item = {}, viewDoc = false, edit = false, setEdit = () =
 			</div>
 
 			<div className={styles.file_container}>
-				{(back || viewDoc) && (
-					<Modal show={back || viewDoc} size="lg" className={styles.modal_container}>
+				{(back) && (
+					<Modal show={back} onClose={() => setBack(false)} size="lg" className={styles.modal_container}>
 						<Modal.Body style={{ minHeight: '720px' }}>
 							<GenerateMawbDoc
 								taskItem={item}
-								viewDoc={viewDoc}
 								formData={formData}
 								setBack={setBack}
 								back={back}

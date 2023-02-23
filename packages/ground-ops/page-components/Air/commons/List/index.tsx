@@ -16,8 +16,6 @@ interface Props {
 	loading?: boolean;
 	page?: number;
 	setPage?: any;
-	finalList?: any;
-	setFinalList?: any;
 	functions?: FunctionObjects;
 }
 
@@ -27,8 +25,6 @@ function List({
 	loading = false,
 	page,
 	setPage,
-	finalList = [],
-	setFinalList,
 	functions,
 } :Props) {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
