@@ -19,7 +19,7 @@ function useListFaqTopic() {
 		}
 	};
 
-	console.log('data :: ', data);
+	// console.log('data :: ', data);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqTopic(); }, []);

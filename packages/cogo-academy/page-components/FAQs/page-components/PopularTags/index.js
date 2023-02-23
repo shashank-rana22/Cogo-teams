@@ -1,58 +1,32 @@
 import { Pill } from '@cogoport/components';
 import React from 'react';
 
+import useListFaqTag from '../../hooks/useListFaqTag';
+
 function PopularTags() {
-	const DEFAULT_LIST = [
-		{
-			label: 'Invoices',
+	const {
+		refetchTag = () => {},
+		data,
+		loading = false,
+		activeTab,
+		setActiveTab,
+	} = useListFaqTag();
 
-		},	{
-			label: 'Basics',
+	console.log(data);
 
-		}, {
-			label: 'Invoices',
-		}, {
-			label: 'Basics',
-
-		}, {
-			label: 'Invoices',
-		},
-		{
-			label: 'Invoices',
-
-		},	{
-			label: 'Basics',
-
-		}, {
-			label: 'Invoices',
-		}, {
-			label: 'Basics',
-
-		}, {
-			label: 'Invoices',
-		}, {
-			label: 'Invoices',
-		}, {
-			label: 'Basics',
-
-		}, {
-			label: 'Invoices',
-		},
-	];
 	return (
 
 		<div>
 			<br />
 			<h4>Popular tags in this section:</h4>
-			{DEFAULT_LIST.map((item) => (
+			{data?.list.map((item) => (
 				<Pill
 					// onClick={<AllFAQ />}
-					key={item.label}
-					prefix={item.prefixIcon}
+					key={item.name}
 					size="xl"
 					color="white"
 				>
-					{item.label}
+					{item.name}
 				</Pill>
 			))}
 		</div>
