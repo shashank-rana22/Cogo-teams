@@ -64,7 +64,7 @@ function MapView(props = {}) {
 	};
 
 	const resetGlobePosition = () => {
-		const defaultMapCenter = { lat: 0, lng: 78, altitude: 2 };
+		const defaultMapCenter = { lat: 0, lng: 78, altitude: 1.8 };
 		const pointRotationSpeed = 100;
 		if (!isEmpty(globeGL.current)) {
 			globeGL.current.pointOfView(defaultMapCenter, pointRotationSpeed);
@@ -130,8 +130,8 @@ function MapView(props = {}) {
 										<img
 											src={imgURL.globe_loading_state}
 											alt="Loading Co-ordinates"
-											width="460px"
-											height="460px"
+											width="470px"
+											height="470px"
 											className={styles.loading_image}
 										/>
 										<Placeholder type="circle" radius="480px" margin="0px 0px 0px 0px" />
