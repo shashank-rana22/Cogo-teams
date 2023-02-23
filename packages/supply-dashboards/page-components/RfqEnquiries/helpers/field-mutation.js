@@ -30,7 +30,6 @@ const FieldMutation = ({
 		),
 
 	);
-	console.log(data?.spot_negotiation?.data?.validity_start, 'fff');
 
 	const newField = fields.map((control) => {
 		const { name } = control;
