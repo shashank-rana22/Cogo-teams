@@ -33,6 +33,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
+		sender = null,
 	} = activeMessageCard || {};
 
 	const {
@@ -51,7 +52,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 	const {
 		sendMessage,
 		loading:createCommunicationLoading,
-	} = useSendMessage({ channel_type });
+	} = useSendMessage({ channel_type, sender });
 
 	if (channel_type && id) {
 		activeChatCollection = collection(
