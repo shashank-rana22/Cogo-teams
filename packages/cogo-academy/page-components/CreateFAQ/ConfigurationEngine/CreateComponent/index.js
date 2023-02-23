@@ -3,24 +3,47 @@ import { Button } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
+
+import useGetFaq from '../hooks/useGetFaq';
 
 import styles from './styles.module.css';
 
 function CreateForm({
 	viewType = 'topic',
 	setConfigurationPage,
-	onClickSaveButton,
 	handleSubmit,
 	control,
-	// errors,
+	createFaqComponent,
+	setValue = () => {},
 }) {
 	const router = useRouter();
+
+	const { general } = useSelector((state) => state);
+
+	const { update = '', id } = general.query;
 
 	const onClickBackIcon = () => {
 		setConfigurationPage('dashboard');
 		router.back();
 	};
+
+	const { fetchFaq, data, loading } = useGetFaq();
+
+	useEffect(() => {
+		if (update && id) {
+			fetchFaq();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [general.query]);
+
+	useEffect(() => {
+		setValue('name', data?.name);
+		setValue('description', data?.description);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
 
 	return (
 		<div className={styles.container}>
@@ -51,6 +74,7 @@ function CreateForm({
 					type="text"
 					placeholder="Enter Name..."
 					rules={{ required: 'Name is required.' }}
+
 				/>
 			</div>
 
@@ -87,7 +111,7 @@ function CreateForm({
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={handleSubmit(onClickSaveButton)}
+						onClick={handleSubmit(createFaqComponent)}
 					>
 						Save
 					</Button>

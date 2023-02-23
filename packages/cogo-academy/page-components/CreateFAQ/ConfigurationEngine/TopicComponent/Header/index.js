@@ -11,6 +11,7 @@ function Header({
 	setSearchTopicssInput = () => {},
 	setConfigurationPage = () => {},
 	setActiveTopic = () => {},
+	reset,
 }) {
 	const router = useRouter();
 
@@ -20,6 +21,7 @@ function Header({
 			'/learning/faq/create/configuration?create=topic',
 		);
 		setConfigurationPage('topic');
+		reset();
 	};
 
 	return (
