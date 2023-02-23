@@ -9,7 +9,7 @@ const useSave = ({ remarks, id, refetch, setShowModal }) => {
 		{
 			url     : '/incident-management/incident/edit-notes',
 			method  : 'PATCH',
-			authkey : 'patch_incident_management_incident_edit_notes',
+			authKey : 'patch_incident_management_incident_edit_notes',
 		},
 		{ manual: true },
 	);
