@@ -763,42 +763,6 @@ const navigationMappingAdmin = {
 		isSubNavs : true,
 		options   : [
 			{
-				key           : 'business_finance-jobs',
-				title         : 'Old Jobs',
-				href          : '/business-finance',
-				as            : '/business-finance',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance,
-			},
-			{
-				key           : 'business_finance-sales_list',
-				title         : 'Old Income',
-				href          : '/business-finance/sales-list',
-				as            : '/business-finance/sales-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance_income,
-			},
-			{
-				key           : 'business_finance-purchase_list',
-				title         : 'Old Expense',
-				href          : '/business-finance/purchase-list',
-				as            : '/business-finance/purchase-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.business_finance_expense,
-			},
-			{
-				key           : 'business_finance-vendor_payment',
-				title         : 'Old Vendor Payment',
-				href          : '/business-finance/vendor-list',
-				as            : '/business-finance/vendor-list',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.vendor_payment,
-			},
-			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
 				href          : '/business-finance/account-payables/[active_tab]',
@@ -826,13 +790,13 @@ const navigationMappingAdmin = {
 				possible_apis : apis.settlement,
 			},
 			{
-				key           : 'business_finance-controller_dashboard',
-				title         : 'Controller Dashboard',
-				href          : '/business-finance/controller-dashboard/[active_tab]',
-				as            : '/business-finance/controller-dashboard/IncidentManagement',
+				key           : 'business_finance-incident_management',
+				title         : 'Incident Management',
+				href          : '/v2/business-finance/incident-management/[activeTab]',
+				as            : '/v2/business-finance/incident-management/requested',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.controller_dashboard,
+				possible_apis : apis.incident_controller,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
@@ -852,6 +816,7 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.vietnam_account_receivables,
 			},
+
 			{
 				key           : 'business_finance-reports',
 				title         : 'Reports',
@@ -874,6 +839,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.finance,
 		main_apis     : ['list_cogo_entities'],
 		module_type   : 'crm',
+	},
+	my_incident: {
+		key           : 'my_incident',
+		title         : 'My Incidents',
+		href          : '/v2/my-incident/[activeIncidentTab]',
+		as            : '/v2/my-incident/requested',
+		type          : 'link',
+		icon          : IcMFinance,
+		possible_apis : apis.my_incident,
+		main_apis     : [],
+		module_type   : 'dashboards',
 	},
 	incentives: {
 		key       : 'incentives',
@@ -1725,6 +1701,8 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
+		showInNav     : false,
+
 	},
 	allocations: {
 		key         : 'allocations',
@@ -1732,45 +1710,22 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		options     : [
+		main_apis   : [
+			'get_allocation_configurations',
+			'get_allocation_relations',
+			'get_allocation_requests',
+			'get_allocation_quotas',
+		],
+		options: [
 			{
-				key           : 'allocations-allocation_configurations',
-				title         : 'Configurations',
-				href          : '/allocation/configurations',
-				as            : '/allocation/configurations',
-				main_apis     : ['get_allocation_configurations'],
-				possible_apis : apis.allocation,
-			},
-			{
-				key           : 'allocations-allocation_relations',
-				title         : 'Relations',
-				href          : '/allocation/relations',
-				as            : '/allocation/relations',
-				main_apis     : ['get_allocation_relations'],
-				possible_apis : apis.allocation,
-
-			},
-			{
-				key           : 'allocations-allocation_requests',
-				title         : 'Requests',
-				href          : '/allocation/requests',
-				as            : '/allocation/requests',
-				main_apis     : ['get_allocation_requests'],
-				possible_apis : apis.allocation,
-
-			},
-			{
-				key           : 'allocations-allocation_quotas',
-				title         : 'Quotas',
-				href          : '/allocation/quotas',
-				as            : '/allocation/quotas',
-				main_apis     : ['get_allocation_quotas'],
-				possible_apis : apis.allocation,
-
+				key           : 'allocations-core_engine',
+				title         : 'Core Engine',
+				href          : '/v2/allocation/core-engine',
+				as            : '/v2/allocation/core-engine',
+				possible_apis : apis.allocation_engine,
 			},
 		],
 	},
-
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',

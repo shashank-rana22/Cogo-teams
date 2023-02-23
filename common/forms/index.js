@@ -6,6 +6,7 @@ export { default as MultiselectController } from './page-components/Controlled/M
 export { default as ChipsController } from './page-components/Controlled/ChipsController';
 export { default as DatepickerController } from './page-components/Controlled/DatepickerController';
 export { default as InputController } from './page-components/Controlled/InputController';
+export { default as MobileNumberController } from './page-components/Controlled/MobileNumberController';
 export { default as UploadController } from './page-components/Controlled/UploadController';
 export { default as MobileNumberController } from './page-components/Controlled/MobileNumberController';
 export { default as PillsController } from './page-components/Controlled/PillsController';
