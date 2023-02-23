@@ -12,7 +12,12 @@ import useUpdateNote from '../../../../hooks/useUpdateNote';
 import NotesList from './NotesList';
 import styles from './styles.module.css';
 
-function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = {}, customerId }) {
+function AgentNotes({
+	activeMessageCard = {},
+	activeTab = '',
+	activeVoiceCard = {},
+	customerId,
+}) {
 	const [noteValue, setNoteValue] = useState('');
 	const [editNote, setEditNote] = useState(false);
 	const [active, setActive] = useState(false);
@@ -20,14 +25,18 @@ function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = 
 	const [showForm, setShowForm] = useState(false);
 
 	useEffect(() => {
-		if (showForm) { setShowForm(false); }
+		if (showForm) {
+			setShowForm(false);
+		}
 	}, [customerId]);
 
-	const {
-		noteData,
-		fetchListNotes,
-		listLoading,
-	} = useGetListNotes({ active, activeMessageCard, activeTab, activeVoiceCard, customerId });
+	const { noteData, fetchListNotes, listLoading } = useGetListNotes({
+		active,
+		activeMessageCard,
+		activeTab,
+		activeVoiceCard,
+		customerId,
+	});
 	const { list = [] } = noteData || {};
 
 	const { omniChannelNote = () => {}, createLoading } = useCreateOmniNote({
@@ -72,73 +81,64 @@ function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = 
 	}
 
 	return (
-		(showForm || customerId) && (
-			listLoading ? (
-				<div className={styles.loader_div}>
-					<Loader
-						themeType="primary"
-						style={{
-							width          : '50px',
-							display        : 'flex',
-							justifyContent : 'center',
-							alignItem      : 'center',
-						}}
-					/>
-				</div>
-			) : (
-				<div className={styles.container}>
-					<div className={styles.title}>Notes</div>
-					<div className={styles.note_editor}>
-						<div>
-							<div className={styles.editor_header} />
-							<Textarea
-								name="a5"
-								size="md"
-								placeholder="Description"
-								value={noteValue}
-								onChange={(val) => setNoteValue(val)}
-							/>
-						</div>
-						<div className={styles.note_footer}>
-							<Button
-								size="md"
-								themeType="secondary"
-								disabled={createLoading}
-								onClick={handleSubmit}
-							>
-								Save
-							</Button>
-							{/* <div
-								className={`${createLoading ? styles.disale : styles.submit_button}`}
-								role="presentation"
-								onClick={handleSubmit}
-							>
-								<IcMTick width={18} height={18} />
-								Save
-							</div> */}
-						</div>
-					</div>
-					<div className={styles.toggle_div}>
-						<Toggle
-							name="a5"
-							size="sm"
-							disabled={false}
-							offLabel="All Notes"
-							onLabel="My Notes"
-							value={active}
-							onChange={() => setActive((p) => !p)}
-						/>
-					</div>
-					<div className={styles.wrap}>
-						<NotesList
-							list={list}
-							handleClick={handleClick}
-							handleDelete={handleDelete}
-						/>
-					</div>
-				</div>
-			)
-		)
+		(showForm || customerId)
+        && (listLoading ? (
+	<div className={styles.loader_div}>
+		<Loader
+			themeType="primary"
+			style={{
+				width          : '50px',
+				display        : 'flex',
+				justifyContent : 'center',
+				alignItem      : 'center',
+			}}
+		/>
+	</div>
+        ) : (
+	<div className={styles.container}>
+		<div className={styles.title}>Notes</div>
+		<div className={styles.note_editor}>
+			<div>
+				<div className={styles.editor_header} />
+				<Textarea
+					name="a5"
+					size="md"
+					placeholder="Description"
+					value={noteValue}
+					onChange={(val) => setNoteValue(val)}
+				/>
+			</div>
+			<div className={styles.note_footer}>
+				<Button
+					size="md"
+					themeType="secondary"
+					loading={createLoading}
+					onClick={handleSubmit}
+				>
+					Save
+				</Button>
+			</div>
+		</div>
+		<div className={styles.toggle_div}>
+			<Toggle
+				name="a5"
+				size="sm"
+				disabled={false}
+				offLabel="All Notes"
+				onLabel="My Notes"
+				checked={active}
+				onChange={() => setActive((p) => !p)}
+			/>
+		</div>
+		<div className={styles.wrap}>
+			<NotesList
+				list={list}
+				handleClick={handleClick}
+				handleDelete={handleDelete}
+			/>
+		</div>
+	</div>
+        ))
 	);
 }
 export default AgentNotes;

@@ -30,7 +30,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	useEffect(() => {
 		fetchListNotes();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [active, activeMessageCard, activeVoiceCard]);
+	}, [active, id, user_number]);
 
 	return {
 		listLoading : loading,
