@@ -17,7 +17,9 @@ function PromocodeThumbnail({ list = [] }) {
 
 	const getCardColor = (index) => colors[index % colors.length];
 
+	// eslint-disable-next-line max-len
 	const defaultImage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
+
 	return (
 		<div className={styles.thumbnail_container}>
 			{(list || []).map((item, index) => {
@@ -72,7 +74,7 @@ function PromocodeThumbnail({ list = [] }) {
 
 						</div>
 						<div className={styles.holes_lower} />
-						<div className={styles.promoCode}>
+						<div className={styles.promo_code}>
 							<div className={styles.promocode_name}>
 								{codes?.[0]?.promocode}
 							</div>

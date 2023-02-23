@@ -1,28 +1,31 @@
 .container {
-    width: 100%;
-    margin-right: 10px;
-    border-radius: 8px;
-    background: #fff;
+	width: 100%;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .message_container {
-    background: #f9f9f9;
-    height: 80vh;
-    overflow-y: scroll;
+	height: calc(100% - 104px);
+	overflow-y: scroll;
+	background: #f9f9f9;
 }
 
 .message_container::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .loader {
-    display: flex;
-    width: 100%;
-    height: fit-content;
-    justify-content: center;
-    align-items: center;
-    img {
-        height: 10px;
-        width: 10px;
-    }
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: fit-content;
+	background:#f9f5ec;
+
+	img {
+		width: 18px;
+		height: 18px;
+	}
 }

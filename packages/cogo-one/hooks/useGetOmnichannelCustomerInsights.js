@@ -10,6 +10,7 @@ const useGetOmnichannelCustomerInsights = ({
 	activeTab,
 	serviceType = '',
 	customerId,
+	sender,
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_customer_insights',
@@ -26,10 +27,11 @@ const useGetOmnichannelCustomerInsights = ({
 		try {
 			await trigger({
 				params: {
-					user_id     : !isEmpty(userId) ? userId : undefined,
-					user_number : isEmpty(userId) ? userMobile : undefined,
-					service     : serviceType,
-					channel     : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
+					user_id       : !isEmpty(userId) ? userId : undefined,
+					mobile_number : isEmpty(userId) ? userMobile : undefined,
+					service       : serviceType,
+					channel       : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
+					sender,
 				},
 			});
 		} catch (error) {

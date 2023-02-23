@@ -24,25 +24,16 @@ function MessageList({
 	activeCardId = '',
 	setActiveMessage,
 }) {
-	if (isEmpty(messagesList) && !messagesLoading) {
-		return (
-			<div className={styles.list_container}>
-				<div className={styles.empty_state}>
-					No Messages Yet..
-				</div>
-			</div>
-		);
-	}
-
-	function getShowChat({
-		item = {},
-	}) {
-		const { user_name = '' } = item;
+	function getShowChat({ user_name }) {
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
-			return searchName?.includes(searchValue);
+			return searchName?.includes(searchValue?.toLowerCase());
 		}
 		return true;
+	}
+
+	if (messagesLoading) {
+		return <LoadingState />;
 	}
 
 	return (
@@ -82,7 +73,13 @@ function MessageList({
 				</div>
 			</div>
 
-			{messagesLoading ? <LoadingState /> : (
+			{ isEmpty(messagesList) ? (
+				<div className={styles.list_container}>
+					<div className={styles.empty_state}>
+						No Messages Yet..
+					</div>
+				</div>
+			) : (
 				<div className={styles.list_container}>
 					{(messagesList || []).map((item) => {
 						const { chat_status = '' } = item || {};
@@ -103,7 +100,7 @@ function MessageList({
 							return startCase(organization_name);
 						};
 
-						const show = getShowChat({ item, appliedFilters, searchValue });
+						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
 
 						return (
 							show && (
@@ -138,14 +135,13 @@ function MessageList({
 													{!isEmpty(chat_status) && (
 														<div
 															className={cl`
-												${styles.tags}
-												${chat_status === 'warning' ? styles.warning : ''}
-												${chat_status === 'escalated' ? styles.escalated : ''}
-												`}
+																${styles.tags}
+																${chat_status === 'warning' ? styles.warning : ''}
+																${chat_status === 'escalated' ? styles.escalated : ''}
+															`}
 														>
 															{startCase(chat_status)}
 														</div>
-
 													)}
 												</div>
 
@@ -168,7 +164,6 @@ function MessageList({
 													{item.new_message_count > 100 ? '99+' : (
 														item.new_message_count
 													)}
-
 												</div>
 											)}
 										</div>

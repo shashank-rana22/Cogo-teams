@@ -9,6 +9,7 @@
 		}
 
 		.ui_modal_footer_container {
+			padding: 8px 16px 15px 0 !important;
 			box-shadow: none !important;
 		}
 
@@ -16,12 +17,12 @@
 			font-size: 12px !important;
 		}
 
-		.ui_modal_footer_container {
-			padding: 8px 16px 15px 0 !important;
-		}
-
 		.styles_row_container__FNFTc {
 			justify-content: space-between !important;
+		}
+
+		.ui_select_options_container {
+			min-width: 165px;
 		}
 	}
 }

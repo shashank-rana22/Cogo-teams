@@ -1,35 +1,35 @@
 .label {
-    font-weight: 600;
-    font-size: 14px;
-    color: #4f4f4f;
-    margin-bottom: 7px;
+	margin-bottom: 7px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
 }
 
 .element {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .filters_types {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    :global {
-        .ui_radio_container {
-            padding: 3px 0px;
-        }
+	:global {
+		.ui_radio_container {
+			padding: 3px 0;
+		}
 
-        .ui_checkbox_container {
-            padding: 3px 0px;
-        }
+		.ui_checkbox_container {
+			padding: 3px 0;
+		}
 
-        .ui_checkbox_style {
-            margin: 0px 5px 0px 0px;
-        }
-    }
+		.ui_checkbox_style {
+			margin: 0 5px 0 0;
+		}
+	}
 }
 
 .field_controller {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
 }

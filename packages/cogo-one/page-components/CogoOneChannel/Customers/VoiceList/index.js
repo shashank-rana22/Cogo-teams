@@ -10,14 +10,14 @@ import LoadingState from '../LoadingState';
 import styles from './styles.module.css';
 
 function VoiceList({
-	setActiveVoiceCard = () => {},
+	setActiveVoiceCard = () => { },
 	activeVoiceCard,
 	activeTab,
 }) {
 	const {
 		loading,
 		data = {},
-		handleScroll = () => {},
+		handleScroll = () => { },
 	} = useGetVoiceCallList({ activeTab });
 
 	const { list = [] } = data;
@@ -79,14 +79,14 @@ function VoiceList({
 						key={item?.id}
 						role="presentation"
 						className={cl`
-							${styles.card_Container}
+							${styles.card_container}
 							${checkActiveCard ? styles.active_card : ''}
 				 `}
 						onClick={() => setActiveVoiceCard(item)}
 					>
 						<div className={styles.card}>
 							<div className={styles.user_information}>
-								<div className={styles.avatar_Container}>
+								<div className={styles.avatar_container}>
 									<img
 										src={VOICE_ICON_MAPPING[callStatus(item)]}
 										className={styles.avatar}
@@ -115,8 +115,7 @@ function VoiceList({
 													Number(lastActive),
 												)?.renderTime}
 											</div>
-								        )}
-
+										)}
 									</div>
 									<div className={styles.activity_duration}>
 										{format(start_time_of_call, 'HH:mm a')}
