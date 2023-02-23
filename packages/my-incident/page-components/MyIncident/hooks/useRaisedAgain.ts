@@ -17,7 +17,7 @@ const useRaisedAgain = ({ id, FileUrl, refetch, setShowModal }) => {
 		{
 			url     : '/incident-management/incident/raise-again',
 			method  : 'POST',
-			authkey : 'post_incident_management_incident_raise_again',
+			authKey : 'post_incident_management_incident_raise_again',
 		},
 		{ manual: true },
 	);

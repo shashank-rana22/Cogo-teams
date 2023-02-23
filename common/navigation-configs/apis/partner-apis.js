@@ -6964,26 +6964,26 @@ const partner = {
 		{
 			api         : 'get_incident_management_incident_list',
 			access_type : 'private',
-			module      : 'my-incident',
-			feature     : 'my-incident',
+			module      : 'myIncident',
+			feature     : 'myIncident',
 		},
 		{
 			api         : 'patch_incident_management_incident_user_incident_status',
 			access_type : 'private',
-			module      : 'my-incident',
-			feature     : 'my-incident',
+			module      : 'myIncident',
+			feature     : 'myIncident',
 		},
 		{
 			api         : 'post_incident_management_incident_raise_again',
 			access_type : 'private',
-			module      : 'my-incident',
-			feature     : 'my-incident',
+			module      : 'myIncident',
+			feature     : 'myIncident',
 		},
 		{
 			api         : 'patch_incident_management_incident_edit_notes',
 			access_type : 'private',
-			module      : 'my-incident',
-			feature     : 'my-incident',
+			module      : 'myIncident',
+			feature     : 'myIncident',
 
 		},
 	],
@@ -10345,9 +10345,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_lead_user_profile',
+			api          : 'create_platform_chat_user_onboarding',
 			access_type  : 'private',
-			service_name : 'lead',
+			service_name : 'communication',
 		},
 
 	],
