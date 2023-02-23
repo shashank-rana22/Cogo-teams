@@ -47,6 +47,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+		{
+			api          : 'get_question',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
 	],
 };
 

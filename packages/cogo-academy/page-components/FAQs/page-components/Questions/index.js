@@ -1,6 +1,8 @@
 import { IcMDislike, IcMLike } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { React, useState, useRef } from 'react';
 
+import useGetQuestions from '../../hooks/useGetQuestions';
 import QuestionsCollapse from '../QuestionCollapse';
 
 import styles from './styles.module.css';
@@ -8,13 +10,21 @@ import styles from './styles.module.css';
 function Questions({ questions }) {
 	const [open, setOPen] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
-
+	const [id, setId] = useState(questions.id);
+	const {
+		refetchQuestions = () => {},
+		data,
+		loading = false,
+		activeTab,
+		setActiveTab,
+	} = useGetQuestions({ id });
+	console.log('dd:', data?.answers[0]);
 	// const contentRef = useRef();
 	// if (contentRef.current) console.log(contentRef.current.scrollHeight);
 	const toggle = () => {
 		setOPen(!open);
 	};
-	console.log('question', questions);
+	console.log('answers', data);
 	return (
 
 		<div className={styles.contentshow}>
@@ -24,15 +34,20 @@ function Questions({ questions }) {
 			{open && (
 				<>
 					<div className={styles.heading_container}>
-						Incoterms, widely-used terms of sale, are a set of 11 internationally recognized rules
-						which define the responsibilities of sellers and buyers. Incoterms specify who is responsible
-						for paying for and managing the shipment, insurance, documentation, customs clearance, and
-						other logistical activities.
+						{startCase(data?.answers[0])}
 					</div>
 					<div>
-						<span className={styles.sidetext}>1112 people found it useful.</span>
+						<span className={styles.sidetext}>
+							{data?.view_count}
+							{' '}
+							people found it useful.
+						</span>
 						{'    '}
-						<span className={styles.sidetext}>Last updated on: 12/11/23</span>
+						<span className={styles.sidetext}>
+							Last updated on:
+							{' '}
+							{data?.updated_at}
+						</span>
 					</div>
 					<div className={styles.flex_items}>
 						<span className={styles.subtitle}>Did you find this information helpful?</span>
