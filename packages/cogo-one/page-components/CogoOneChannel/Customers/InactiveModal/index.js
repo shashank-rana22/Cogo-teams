@@ -85,10 +85,6 @@ function InactiveModal({
 				validity_start,
 				'yyyy-MM-dd HH:mm:ss',
 			),
-			// validity_end: offlineStatus === 'custom' ? customEndTime : format(
-			// 	validity_end,
-			// 	'yyyy-MM-dd HH:mm:ss',
-			// ),
 			validity_end: format(
 				validity_end,
 				'yyyy-MM-dd HH:mm:ss',
@@ -122,7 +118,6 @@ function InactiveModal({
 							placeholder="Select date"
 							dateFormat="MM/dd/yyyy HH:mm"
 							name="date"
-							// showTimeSelect
 							onChange={setDate}
 							value={date}
 						/>

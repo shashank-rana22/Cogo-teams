@@ -14,8 +14,8 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateL
 
 	const [activeSelect, setActiveSelect] = useState('profile');
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
-	const FormattedMessageData = getActiveCardDetails(activeMessageCard) || {};
-	const orgId = activeTab === 'message' ? FormattedMessageData?.organization_id : activeVoiceCard?.organization_id;
+	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
+	const orgId = activeTab === 'message' ? formattedMessageData?.organization_id : activeVoiceCard?.organization_id;
 
 	const { openNewTab, loading, ORG_PAGE_URL = '' } = useListOrganizations({ orgId });
 	return (
@@ -28,7 +28,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateL
 						activeSelect={activeSelect}
 						activeTab={activeTab}
 						activeVoiceCard={activeVoiceCard}
-						FormattedMessageData={FormattedMessageData}
+						formattedMessageData={formattedMessageData}
 						loading={loading}
 						openNewTab={openNewTab}
 						ORG_PAGE_URL={ORG_PAGE_URL}

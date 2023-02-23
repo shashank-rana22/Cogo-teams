@@ -15,7 +15,7 @@ function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
 	activeVoiceCard = {},
-	FormattedMessageData = {},
+	formattedMessageData = {},
 	customerId = '',
 	updateLeaduser = () => {},
 }) {
@@ -27,7 +27,7 @@ function AgentDetails({
 		user_name: messageName,
 		mobile_no,
 		organization_id,
-	} = FormattedMessageData || {};
+	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
@@ -115,7 +115,7 @@ function AgentDetails({
 		</>
 	) : (
 		<>
-
+			<div className={styles.title}>Profile</div>
 			<div className={styles.content}>
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"

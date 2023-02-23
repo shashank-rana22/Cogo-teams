@@ -24,7 +24,7 @@
 	width: 80px;
 	height: 80px;
 	padding: 12px 8px;
-	margin-top: 12px;
+	margin: 12px 10px 0 10px;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
@@ -56,9 +56,8 @@
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 20px;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: flex-start;
 	width: 100%;
 }
 
