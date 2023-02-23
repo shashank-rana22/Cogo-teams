@@ -1860,6 +1860,7 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.contracts,
 	},
+
 };
 
 export default navigationMappingAdmin;

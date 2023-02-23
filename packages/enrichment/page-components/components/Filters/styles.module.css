@@ -1,0 +1,30 @@
+.filter{
+    display: flex;
+    flex-direction: flex-start;
+    justify-content: space-between;
+    width: 60%;
+    margin-bottom: 12px;
+}
+
+.select{
+    width: 160px;
+    margin-right: 8px;
+}
+
+.search_container {
+	display: flex;
+
+	:global(.ui_input_container) {
+		width: 300px;
+	}
+}
+
+.search_container{
+    :global(.ui_input_suffix){
+        padding-right: 8px;
+    }
+}
+
+.daterange_container {
+    background-color: red;
+}
