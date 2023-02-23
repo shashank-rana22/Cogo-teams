@@ -6,7 +6,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import BodyTextEditor from './components/MyStatefulEditor';
+import BodyTextEditor from './BodyTextEditor';
 import styles from './styles.module.css';
 
 const TAG_OPTIONS = [
