@@ -5,7 +5,6 @@ import {
 	IcMHappy,
 	IcMAttach,
 	IcMSend,
-	IcMInfo,
 	IcMDelete,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -225,7 +224,7 @@ function MessageConversations({
 								</div>
 							))}
 						</div>
-						<IcMInfo fill="#221F20" height="20px" width="20px" />
+
 					</div>
 				)}
 				<textarea
