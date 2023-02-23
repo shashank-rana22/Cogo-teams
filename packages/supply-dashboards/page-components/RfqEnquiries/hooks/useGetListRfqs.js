@@ -15,7 +15,6 @@ const useGetListRfqs = () => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	console.log(ROLE_IDS);
 	const fullAccessIds = [ROLE_IDS.SUPERADMIN_ID, ROLE_IDS.ADMIN_ID];
 	const isFullAccess = user_profile.partner.user_role_ids.filter((id) => fullAccessIds.includes(id)).length;
 
