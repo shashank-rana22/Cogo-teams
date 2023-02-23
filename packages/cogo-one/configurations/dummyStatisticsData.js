@@ -54,13 +54,13 @@ export const callAnalyticsData = [
 export const channelStats = [
 	{
 		key          : 'whatsapp',
-		icon         : <IcCWhatsapp width="16px" height="16px" />,
+		icon         : <IcCWhatsapp width="20px" height="20px" />,
 		channel      : 'Whats App',
 		customer_nos : '100 customers',
 	},
 	{
 		key          : 'facebook',
-		icon         : <IcCFacebook width="16px" height="16px" />,
+		icon         : <IcCFacebook width="20px" height="20px" />,
 		channel      : 'Facebook',
 		customer_nos : '100 customers',
 	},

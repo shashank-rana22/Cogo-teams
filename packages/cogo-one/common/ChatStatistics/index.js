@@ -13,7 +13,7 @@ function ChatStatistics({ isAdminView }) {
 				const { label, number, percentage, isAgent } = item;
 				return (
 					(isAdminView || isAgent) && (
-						<div className={styles.chatstatistics_box}>
+						<div className={`${styles.chatstatistics_box} ${isAdminView ? '' : styles.chatstatistics_box_agent}`}>
 							<div className={styles.text}>{label}</div>
 							<div className={styles.small_data_box}>
 								<div className={styles.numbers}>{number}</div>
