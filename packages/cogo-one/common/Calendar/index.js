@@ -8,9 +8,25 @@ import styles from './styles.module.css';
 function Calendar({ calendarType = 'month' }) {
 	const [pagination, setPagination] = useState(0);
 	const [calendarData, setCalendarData] = useState([]);
+	const [selectedItem, setSelectedItem] = useState('');
 
 	const numberOfDays = 14;
 	const numberOfMonthsForWeeks = 2;
+
+	const FORMAT_TYPE = {
+		day: {
+			label    : 'dd',
+			subLabel : 'MMM yy',
+		},
+		week: {
+			label    : '',
+			subLabel : 'MMM',
+		},
+		month: {
+			label    : 'MMM',
+			subLabel : 'yyyy',
+		},
+	};
 
 	const calcDate = (subtractDays) => {
 		const d = new Date();
@@ -31,7 +47,13 @@ function Calendar({ calendarType = 'month' }) {
 			end = 1;
 		}
 		while (start <= numDays) {
-			newWeeks.push({ start, end, date: new Date(year, month, start), iterator });
+			newWeeks.push({
+				key  : `cal-week-${pagination}-${iterator}`,
+				start,
+				end,
+				date : new Date(year, month, start),
+				iterator,
+			});
 			iterator += 1;
 			start = end + 1;
 			end += 7;
@@ -49,31 +71,17 @@ function Calendar({ calendarType = 'month' }) {
 		return d;
 	};
 
-	const FORMAT_TYPE = {
-		day: {
-			label    : 'dd',
-			subLabel : 'MMM yy',
-		},
-		week: {
-			label    : '',
-			subLabel : 'MMM',
-		},
-		month: {
-			label    : 'MMM',
-			subLabel : 'yyyy',
-		},
-	};
-
 	const processData = (func) => {
 		const newData = [];
 		for (let i = pagination * numberOfDays; i < (pagination + 1) * numberOfDays; i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
-		newData.reverse().forEach((item) => {
+		newData.reverse().forEach((item, iterator) => {
 			data.push({
-				head : format(item, FORMAT_TYPE[calendarType].label),
-				text : format(item, FORMAT_TYPE[calendarType].subLabel),
+				key      : `cal-${calendarType}-${pagination}-${iterator}`,
+				label    : format(item, FORMAT_TYPE[calendarType].label),
+				subLabel : format(item, FORMAT_TYPE[calendarType].subLabel),
 			});
 		});
 		setCalendarData(data);
@@ -91,8 +99,9 @@ function Calendar({ calendarType = 'month' }) {
 			if (todayDate.getTime() >= week.date.getTime()) {
 				data.push(
 					{
-						head : `Week ${week.iterator}`,
-						text : `${format(week.date, 'MMM')} ${week.start} to ${week.end}`,
+						key      : week.key,
+						label    : `Week ${week.iterator}`,
+						subLabel : `${format(week.date, 'MMM')} ${week.start} to ${week.end}`,
 					},
 				);
 			}
@@ -111,7 +120,7 @@ function Calendar({ calendarType = 'month' }) {
 			<button onClick={() => setPagination(pagination + 1)} className={styles.navBtn}>
 				<IcMArrowDoubleLeft />
 			</button>
-			<CalendarEntity calendarData={calendarData} />
+			<CalendarEntity calendarData={calendarData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
 			<button
 				disabled={pagination === 0}
 				onClick={() => setPagination(pagination - 1)}

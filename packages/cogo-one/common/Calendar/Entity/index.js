@@ -1,16 +1,20 @@
 import styles from './styles.module.css';
 
-export function CalendarEntity({ calendarData }) {
+export function CalendarEntity({ selectedItem, setSelectedItem, calendarData }) {
 	return (
 		<div className={styles.calendar}>
 			{
-				calendarData?.map(({ head, text }) => (
-					<div className={styles.dateContainer}>
+				calendarData?.map(({ label, subLabel, key }) => (
+					<div
+						key={key}
+						onClick={() => setSelectedItem(key)}
+						className={`${styles.dateContainer} ${selectedItem === key ? styles.active : ''}`}
+					>
 						<div className={styles.dayH1}>
-							{head}
+							{label}
 						</div>
 						<div className={styles.dayH2}>
-							{text}
+							{subLabel}
 						</div>
 					</div>
 				))
