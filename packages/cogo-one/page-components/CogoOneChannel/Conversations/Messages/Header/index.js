@@ -35,7 +35,7 @@ function Header({
 	const { user_name = '', business_name = '', mobile_no = '', channel_type, user_type } = formattedData || {};
 
 	const getLowerLabel = () => {
-		if (user_name.includes('anonymous')) {
+		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
 		return mobile_no ? HideDetails({ data: mobile_no, type: 'number' }) : business_name;
@@ -90,7 +90,7 @@ function Header({
 				<div className={styles.flex}>
 					<UserAvatar type={channel_type} />
 					<div>
-						<div className={styles.name}>{startCase(user_name)}</div>
+						<div className={styles.name}>{startCase(user_name) || 'User'}</div>
 						<div className={styles.phone_number}>
 							{getLowerLabel()}
 						</div>

@@ -2,7 +2,7 @@ import ACTION_ICON_MAPPING from '../../../../constants/ACTION_ICON_MAPPING';
 
 import styles from './styles.module.css';
 
-function QuickActions({ openNewTab = () => {} }) {
+function QuickActions({ openNewTab = () => {}, orgId }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.bottom}>
