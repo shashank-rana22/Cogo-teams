@@ -113,12 +113,16 @@
 }
 
 .user_name {
-	max-width: 140px;
+	max-width: 100px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 110px;
+	}
 }
 
 .organisation {
@@ -129,6 +133,10 @@
 	color: #828282;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	
+	@media (max-width: 1280px) {
+		max-width: 110px;
+	}
 }
 
 .avatar_Container {
@@ -174,6 +182,10 @@
 .list_container {
 	height: calc(100% - 155px);
 	overflow-y: auto;
+
+	@media (max-width: 1280px) {
+		height: calc(100% - 130px);
+	}
 }
 
 .list_container::-webkit-scrollbar {
