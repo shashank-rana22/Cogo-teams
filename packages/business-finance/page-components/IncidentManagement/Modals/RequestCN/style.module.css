@@ -58,7 +58,7 @@
 
 	:global {
 		.ui_select_options_container {
-			min-height: 180px;
+			min-height: 100px;
 		}
 	}
 }
