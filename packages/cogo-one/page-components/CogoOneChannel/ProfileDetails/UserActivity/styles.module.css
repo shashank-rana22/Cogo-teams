@@ -29,6 +29,17 @@
 
 .tabs {
 	margin: -12px -12px 0;
+	:global{
+		.ui_tab_container{
+
+			padding: 10px 16px !important;
+		}
+		.ui_tabs_list_title{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
 }
 
 .filters_container {

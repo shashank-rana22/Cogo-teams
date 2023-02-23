@@ -37,6 +37,7 @@ function VoiceCall({ activeVoiceCard = {} }) {
 			<img
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/spinner.svg"
 				alt="load"
+
 			/>
 		</div>
 	);
