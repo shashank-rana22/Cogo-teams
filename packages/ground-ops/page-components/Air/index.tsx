@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 import Filters from '../Filters';
 
 import ApprovalPending from './components/ApprovalPending';
-import CompletedTasks from './components/CompletedTasks';
 import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
 import NewAWB from './components/NewAWB';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
@@ -24,17 +23,12 @@ const tabs = [
 		key   : 'approved_awb',
 		label : 'Approved AWB',
 	},
-	{
-		key   : 'completed_awb',
-		label : 'Completed AWB',
-	},
 ];
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
 	approved_awb     : GenerateFinalAirwayBill,
-	completed_awb    : CompletedTasks,
 };
 
 function Air({ setGenerate, setItem }) {
