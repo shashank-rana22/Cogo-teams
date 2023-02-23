@@ -25,7 +25,8 @@ function RightSideNav({
 				return (
 					<div
 						key={snakeCase(name)}
-						className={cl`${styles.icon_div} ${activeSelect === name ? styles.active : ''}`}
+						className={cl`${styles.icon_div} ${activeSelect === name ? styles.active : ''}
+						 ${(loading && (item.name === 'spot_search')) ? styles.icon_div_load : ''}`}
 						role="presentation"
 						onClick={() => handleClick(name)}
 					>
