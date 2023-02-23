@@ -332,7 +332,6 @@ const useUpdateSpotNegotiationRate = ({
 				// console.log(err?.message);
 			}
 		} catch (err) {
-			console.log(err);
 			Toast.error(getApiError(err?.response?.data) || 'Something Went Wrong');
 		}
 	};

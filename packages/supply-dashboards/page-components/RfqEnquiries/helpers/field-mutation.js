@@ -3,7 +3,7 @@ import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsOperators,
 }
 	from '@cogoport/forms/utils/getAsyncFields';
-import { merge, startCase, addDays } from '@cogoport/utils';
+import { merge, startCase } from '@cogoport/utils';
 
 const FieldMutation = ({
 	fields, values, data,
