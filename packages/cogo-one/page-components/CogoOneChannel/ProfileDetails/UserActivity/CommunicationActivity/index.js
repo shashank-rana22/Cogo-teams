@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Button, Modal, Avatar } from '@cogoport/components';
+import { Modal, Avatar } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 

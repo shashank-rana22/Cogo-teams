@@ -117,7 +117,7 @@ function MessageList({
 								>
 									<div className={styles.card}>
 										<div className={styles.user_information}>
-											<div className={styles.avatar_Container}>
+											<div className={styles.avatar_container}>
 												<UserAvatar
 													type={item.channel_type}
 													imageSource={item.image}

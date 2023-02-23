@@ -31,12 +31,12 @@ function RightSideNav({
 					<div
 						key={snakeCase(name)}
 						className={cl`${styles.icon_div} ${
-                        	activeSelect === name ? styles.active : ''
+							activeSelect === name ? styles.active : ''
 						}
 						 ${
-                             disabledSpotSearch && item.name === 'spot_search'
-                             	? styles.icon_div_load
-                             	: ''
+							disabledSpotSearch && item.name === 'spot_search'
+								? styles.icon_div_load
+								: ''
 						}`}
 						role="presentation"
 						onClick={() => handleClick(name)}

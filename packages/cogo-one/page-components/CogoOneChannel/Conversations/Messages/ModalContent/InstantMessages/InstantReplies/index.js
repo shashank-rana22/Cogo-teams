@@ -1,8 +1,7 @@
-import { Input, Modal, Button, Placeholder } from '@cogoport/components';
+import { Input, Button, Placeholder } from '@cogoport/components';
 import { useForm, TextareaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import controls from '../../../../../../../configurations/create-instant-reply';
 import useCreateSuggestions from '../../../../../../../hooks/useCreateSuggestions';
@@ -15,11 +14,9 @@ function InstantReplies({
 	activeTab,
 	openCreateReply,
 	setOpenCreateReply = () => {},
-	// setActiveTab = () => {},
 }) {
 	const { updateMessage = () => {} } = data || {};
 	const { title, content } = controls;
-	// const [openCreateReply, setOpenCreateReply] = useState(false);
 	const { control, handleSubmit, formState:{ errors }, reset } = useForm();
 	const {
 		setQfilter,

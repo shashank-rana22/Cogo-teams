@@ -32,35 +32,29 @@ function CommunicationPieChart({ conversation_data = {} }) {
 						enableArcLabels={false}
 						arcLabelsSkipAngle={10}
 						arcLabelsTextColor={{
-    	from      : colors,
-    	modifiers : [
-    		[
-    			'darker',
-    			2,
-    		],
-    	],
+							from   	  : colors,
+							modifiers : [['darker', 2]],
 						}}
 						defs={[
-    	{
-    		id         : 'dots',
-    		type       : 'patternDots',
-    		background : 'inherit',
-    		color      : 'rgba(255, 255, 255, 0.3)',
-    		size       : 4,
-    		padding    : 1,
-    		stagger    : true,
+							{
+								id         : 'dots',
+								type   	   : 'patternDots',
+								background : 'inherit',
+								color      : 'rgba(255, 255, 255, 0.3)',
+								size       : 4,
+								padding    : 1,
+								stagger    : true,
 							},
-    	{
-    		id         : 'lines',
-    		type       : 'patternLines',
-    		background : 'inherit',
-    		color      : 'rgba(255, 255, 255, 0.3)',
-    		rotation   : -45,
-    		lineWidth  : 6,
-    		spacing    : 10,
+							{
+								id         : 'lines',
+								type       : 'patternLines',
+								background : 'inherit',
+								color      : 'rgba(255, 255, 255, 0.3)',
+								rotation   : -45,
+								lineWidth  : 6,
+								spacing    : 10,
 							},
 						]}
-
 						legends={[]}
 					/>
 				) : (
