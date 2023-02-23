@@ -7,7 +7,13 @@ import LoadingState from '../../commons/LoadingState';
 
 import styles from './styles.module.css';
 
-function TagTable({ columns = [], data = [], tagsLoading = true, tagCurrentPage, setTagCurrentPage = () => {} }) {
+function TagTable({
+	columns = [],
+	data = [],
+	tagsLoading = true,
+	tagCurrentPage,
+	setTagCurrentPage = () => {},
+}) {
 	const { list:listTagsData = [], total_count } = data || {};
 
 	if (tagsLoading) {

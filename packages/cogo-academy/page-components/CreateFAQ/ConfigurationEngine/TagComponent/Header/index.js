@@ -12,6 +12,7 @@ function Header(
 		setSearchTagsInput = () => {},
 		setConfigurationPage = () => {},
 		setActiveTag = () => {},
+		reset,
 	},
 ) {
 	const router = useRouter();
@@ -22,6 +23,7 @@ function Header(
 			'/learning/faq/create/configuration?create=tag',
 		);
 		setConfigurationPage('tag');
+		reset();
 	};
 
 	return (
