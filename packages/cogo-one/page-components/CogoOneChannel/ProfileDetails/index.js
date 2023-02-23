@@ -45,6 +45,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateL
 				setActiveSelect={setActiveSelect}
 				openNewTab={openNewTab}
 				loading={loading}
+				orgId={orgId}
 			/>
 		</div>
 	);
