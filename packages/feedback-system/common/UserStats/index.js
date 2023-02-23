@@ -6,13 +6,14 @@ import { useEffect } from 'react';
 
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import getMonthControls from '../../utils/monthControls';
+import useGetColumns from '../Columns';
 import PerformanceChart from '../PerformanceChart';
-import UserProfile from '../UserProfile';
+import UserTableData from '../UserTableData';
 
 import styles from './styles.module.css';
-import UserFeedbackData from './UserFeedbackData';
+import UserProfile from './UserProfile';
 
-function UserStats() {
+function UserStats({ source = '' }) {
 	const Router = useRouter();
 
 	const {
@@ -28,14 +29,22 @@ function UserStats() {
 		Router.push(`${path}`);
 	};
 
-	const monthControls = getMonthControls();
-
-	const formProps = useForm();
+	const formProps =	useForm();
 	const { watch: watchDateFilter, control } = formProps;
 
-	const { setParams, params } = useListUserFeedbacks({
+	const {
+		feedbackData = {}, loading, params, setParams,
+		setPage,
+	} = useListUserFeedbacks({
 		userId,
 	});
+
+	const { list = [], pagination_data = {} } = feedbackData;
+
+	const { total_count = '' } = pagination_data;
+
+	const monthControls = getMonthControls(params.Year, params.Month);
+
 	const monthFilter = watchDateFilter('month');
 	const yearFilter = watchDateFilter('year');
 	const ratingFilter = watchDateFilter('rating');
@@ -45,23 +54,28 @@ function UserStats() {
 		Month  : monthFilter || undefined,
 		Year   : yearFilter || undefined,
 		Rating : ratingFilter || undefined,
-
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	})), [monthFilter, yearFilter, ratingFilter]);
 
+	const columnsToShow = ['name', 'cogo_id', 'rating', 'month', 'designation', 'department', 'feedback'];
+
+	const columns = useGetColumns({ columnsToShow });
+
 	return (
 		<div className={styles.container}>
-			<div
-				className={styles.redirect_container}
-				role="button"
-				tabIndex={0}
-				onClick={() => {
-					handleClick();
-				}}
-			>
-				<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
-				Go Back
-			</div>
+			{source !== 'user_dashboard' && (
+				<div
+					className={styles.redirect_container}
+					role="button"
+					tabIndex={0}
+					onClick={() => {
+						handleClick();
+					}}
+				>
+					<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
+					Go Back
+				</div>
+			)}
 
 			<div className={styles.stats_container}>
 				<p className={styles.header}>User Dashboard</p>
@@ -70,41 +84,40 @@ function UserStats() {
 
 				<div className={styles.header_filters}>
 					<div className={styles.filter_container}>
-						<div className={styles.month_container}>
-							<div>
+
+						{monthControls.map((cntrl) => (
+							<div
+								className={styles.month_container}
+								key={cntrl.name}
+							>
 								<SelectController
-									{...monthControls.month}
+									{...cntrl}
 									control={control}
 									formProps={formProps}
 								/>
 							</div>
-						</div>
-						<div className={styles.month_container}>
-							<div>
-								<SelectController
-									{...monthControls.year}
-									control={control}
-									formProps={formProps}
-								/>
-							</div>
-						</div>
-						<div className={styles.month_container}>
-							<div>
-								<SelectController
-									{...monthControls.rating}
-									control={control}
-									formProps={formProps}
-								/>
-							</div>
-						</div>
+						))}
+
 					</div>
 				</div>
 
 				<div className={styles.performance_chart}>
-					<PerformanceChart userId={userId} params={params} />
+					<PerformanceChart userId={userId} />
 				</div>
 
-				<UserFeedbackData userId={userId} />
+				<div className={styles.list_header}>
+					Feedback List
+				</div>
+
+				<UserTableData
+					columns={columns}
+					list={list}
+					page_limit={params.PageLimit}
+					total_count={total_count}
+					loading={loading}
+					pagination={params.Page}
+					setPagination={setPage}
+				/>
 			</div>
 		</div>
 	);

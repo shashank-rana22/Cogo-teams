@@ -1,5 +1,6 @@
 import { Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import PerformanceChart from '../../common/PerformanceChart';
 import useGetMonthStats from '../../hooks/useGetMonthStats';
@@ -36,24 +37,22 @@ function ManagerDashboard() {
 
 			<div className={styles.page_actions}>
 				<div className={styles.filters}>
-					<Select
-						value={params.Year}
-						onChange={(val) => setFilter(val, 'Year')}
-						placeholder="Select Year"
-						style={{ marginRight: '8px' }}
-						options={monthControls.year.options}
-						isClearable={!params.Month}
-					/>
-
-					<Select
-						value={params.Month}
-						onChange={(val) => setFilter(val, 'Month')}
-						disabled={!params.Year}
-						placeholder="Select Month"
-						style={{ marginRight: '8px' }}
-						options={monthControls.month.options}
-						isClearable
-					/>
+					{monthControls.map((cntrl) => {
+						const value = startCase(cntrl.name);
+						if (['year', 'month'].includes(cntrl.name)) {
+							return (
+								<Select
+									{...cntrl}
+									value={params[value]}
+									onChange={(val) => setFilter(val, value)}
+									placeholder={`Select ${value}`}
+									style={{ marginRight: '8px' }}
+									options={cntrl.options}
+								/>
+							);
+						}
+						return null;
+					})}
 
 				</div>
 

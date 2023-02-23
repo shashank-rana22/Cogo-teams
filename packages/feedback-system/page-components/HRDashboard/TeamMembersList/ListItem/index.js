@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
-import UserTableData from '../../../../common/userTableData';
+import UserTableData from '../../../../common/UserTableData';
 
 import styles from './styles.module.css';
 import useManagerListItem from './useManagerListItem';

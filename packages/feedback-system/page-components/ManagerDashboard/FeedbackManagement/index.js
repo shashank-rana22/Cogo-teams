@@ -6,7 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
-import UserTableData from '../../../common/userTableData';
+import UserTableData from '../../../common/UserTableData';
 import getDepartmentControls from '../../../hooks/useGetDepartmentControls';
 import useListReportees from '../../../hooks/useListReportees';
 

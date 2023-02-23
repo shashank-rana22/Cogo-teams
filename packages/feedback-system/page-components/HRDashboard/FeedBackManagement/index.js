@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import Filters from '../../../common/Filters';
-import UserTableData from '../../../common/userTableData';
+import UserTableData from '../../../common/UserTableData';
 import useDownloadCsvFeedbacks from '../../../hooks/useDownloadCsvFeedbacks';
 import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 

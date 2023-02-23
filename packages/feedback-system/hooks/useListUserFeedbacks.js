@@ -6,14 +6,16 @@ const useListUserFeedbacks = ({
 	month = '', year = '',
 	userId = '',
 	managerId = '',
+	rating_required = '',
 }) => {
 	const [params, setParams] = useState({
-		ManagerID : managerId || undefined,
-		UserID    : userId || undefined,
-		Month     : month || undefined,
-		Year      : year || undefined,
-		Page      : 1,
-		PageLimit : 10,
+		ManagerID    : managerId || undefined,
+		UserID       : userId || undefined,
+		Month        : month || undefined,
+		Year         : year || undefined,
+		RatingExists : rating_required || undefined,
+		Page         : 1,
+		PageLimit    : 10,
 	});
 
 	const [{ data: feedbackData = {}, loading = false }] = useRequest({

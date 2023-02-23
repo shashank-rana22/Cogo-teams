@@ -1,40 +1,30 @@
 const monthOptions = [
-	{ label: 'January', value: 1 },
-	{ label: 'February', value: 2 },
-	{ label: 'March', value: 3 },
-	{ label: 'April', value: 4 },
-	{ label: 'May', value: 5 },
-	{ label: 'June', value: 6 },
-	{ label: 'July', value: 7 },
-	{ label: 'August', value: 8 },
-	{ label: 'September', value: 9 },
-	{ label: 'October', value: 10 },
-	{ label: 'November', value: 11 },
-	{ label: 'December', value: 12 },
+	{ label: 'January', value: 'January', index: 1 },
+	{ label: 'February', value: 'February', index: 2 },
+	{ label: 'March', value: 'March', index: 3 },
+	{ label: 'April', value: 'April', index: 4 },
+	{ label: 'May', value: 'May', index: 5 },
+	{ label: 'June', value: 'June', index: 6 },
+	{ label: 'July', value: 'July', index: 7 },
+	{ label: 'August', value: 'August', index: 8 },
+	{ label: 'September', value: 'September', index: 9 },
+	{ label: 'October', value: 'October', index: 10 },
+	{ label: 'November', value: 'November', index: 11 },
+	{ label: 'December', value: 'December', index: 12 },
 ];
 
-const getMonthControls = (selectedYear) => {
+const getMonthControls = (selectedYear, selectedMonth) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 	const month = currentDate.getMonth();
 
-	const control = {
-		month: {
-			name           : 'month',
-			label          : 'Select Month',
-			type           : 'select',
-			defaultOptions : true,
-			isClearable    : true,
-			placeholder    : 'Month',
-			options        : monthOptions,
-			span           : 6,
-		},
-		year: {
+	const controls = [
+		{
 			name           : 'year',
 			label          : 'Select Year',
 			type           : 'select',
 			defaultOptions : true,
-			isClearable    : true,
+			isClearable    : !selectedMonth,
 			placeholder    : 'Year',
 			value          : `${year}`,
 			options        : [
@@ -44,7 +34,18 @@ const getMonthControls = (selectedYear) => {
 			],
 			span: 6,
 		},
-		rating: {
+		{
+			name           : 'month',
+			label          : 'Select Month',
+			type           : 'select',
+			defaultOptions : true,
+			isClearable    : true,
+			disabled       : !selectedYear,
+			placeholder    : 'Month',
+			options        : monthOptions,
+			span           : 6,
+		},
+		{
 			name           : 'rating',
 			label          : 'Rating',
 			placeholder    : 'Rating',
@@ -60,13 +61,19 @@ const getMonthControls = (selectedYear) => {
 			],
 			span: 6,
 		},
-	};
+	];
 
-	if (selectedYear === year) {
-		control.month.options = monthOptions.filter((newMonth) => newMonth.value <= month);
-	}
+	const newControls = [];
 
-	return control;
+	controls.forEach((control) => {
+		const updatedControl = control;
+		if (control.name === 'month' && selectedYear === year) {
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
+		}
+		newControls.push(updatedControl);
+	});
+
+	return newControls;
 };
 
 export default getMonthControls;

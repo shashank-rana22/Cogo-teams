@@ -1,7 +1,7 @@
 import { Placeholder, Loader } from '@cogoport/components';
 import { upperCase } from '@cogoport/utils';
 
-import useGetUserDetails from '../../hooks/useGetUserDetails';
+import useGetUserDetails from '../../../hooks/useGetUserDetails';
 
 import styles from './styles.module.css';
 import UserDetails from './UserDetails';

@@ -2,8 +2,7 @@ import { Button, Pagination, Input, Tooltip, Checkbox } from '@cogoport/componen
 import { IcMDelete } from '@cogoport/icons-react';
 import { cloneDeep } from '@cogoport/utils';
 
-import QuestionsBox from '../QuestionsBox';
-
+import QuestionsBox from './QuestionsBox';
 import styles from './styles.module.css';
 
 function QuestionsItem({

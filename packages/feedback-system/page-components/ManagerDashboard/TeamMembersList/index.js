@@ -69,7 +69,7 @@ function TeamMembersList({
 						<div key={key} style={{ flex }}>
 							{label ? <div className={styles.label}>{label}</div> : null}
 
-							<div className={styles.value}>{i.stats[key]}</div>
+							<div className={styles.value}>{i[key] || i.stats[key]}</div>
 						</div>
 					);
 				})}

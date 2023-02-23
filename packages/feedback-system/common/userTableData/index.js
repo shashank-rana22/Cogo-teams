@@ -15,32 +15,24 @@ function UserTableData({
 	loading = false,
 }) {
 	if (isEmpty(list) && !loading) {
-		return <EmptyState width="40%" height="50%" emptyText="No feedbacks found. Kindly check the filters." />;
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState width="40%" height="50%" emptyText="No feedbacks found. Kindly check the filters." />
+			</div>
+		);
 	}
 
 	return (
 		<div className={styles.table_container}>
-			{!isEmpty(list)
-				? (
-					<Table
-						columns={columns}
-						data={list}
-						loading={loading}
-						loadingRowsCount={10}
-						className={styles.table}
-					/>
-				)
-				: 				(
-					<div className={styles.empty_container}>
-						<EmptyState
-							height={280}
-							width={440}
-							emptyText="No Data Found"
-							textSize="24px"
-							flexDirection="column"
-						/>
-					</div>
-				)}
+			{!loading && (
+				<Table
+					columns={columns}
+					data={list}
+					loading={loading}
+					loadingRowsCount={10}
+					className={styles.table}
+				/>
+			)}
 
 			{total_count > 10 && (
 				<div className={styles.pagination_container}>

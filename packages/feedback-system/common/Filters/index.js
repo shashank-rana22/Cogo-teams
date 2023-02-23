@@ -1,5 +1,6 @@
 import { Select } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import getDepartmentControls from '../../hooks/useGetDepartmentControls';
@@ -14,7 +15,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
 
 	const managerControls = useGetControls().find((control) => control.name === 'manager_id');
-	const monthControls = getMonthControls(params.Year);
+	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
 	const manager = watch('manager_id');
@@ -54,24 +55,22 @@ function Filters({ params = {}, setParams = () => {} }) {
 				style={{ marginRight: '8px' }}
 			/>
 
-			<Select
-				value={params.Year}
-				onChange={(val) => setFilter(val, 'Year')}
-				placeholder="Select Year"
-				style={{ marginRight: '8px' }}
-				options={monthControls.year.options}
-				isClearable={!params.Month}
-			/>
-
-			<Select
-				value={params.Month}
-				onChange={(val) => setFilter(val, 'Month')}
-				disabled={!params.Year}
-				placeholder="Select Month"
-				style={{ marginRight: '8px' }}
-				options={monthControls.month.options}
-				isClearable
-			/>
+			{monthControls.map((cntrl) => {
+				const value = startCase(cntrl.name);
+				if (['year', 'month'].includes(cntrl.name)) {
+					return (
+						<Select
+							{...cntrl}
+							value={params[value]}
+							onChange={(val) => setFilter(val, value)}
+							placeholder={`Select ${value}`}
+							style={{ marginRight: '8px' }}
+							options={cntrl.options}
+						/>
+					);
+				}
+				return null;
+			})}
 		</div>
 	);
 }

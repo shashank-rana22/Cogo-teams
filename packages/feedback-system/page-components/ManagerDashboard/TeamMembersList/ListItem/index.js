@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
-import UserTableData from '../../../../common/userTableData';
+import UserTableData from '../../../../common/UserTableData';
 import getDepartmentControls from '../../../../hooks/useGetDepartmentControls';
 import useListUserFeedbacks from '../../../../hooks/useListUserFeedbacks';
 
@@ -17,7 +17,7 @@ function ListItem({ item }) {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const columnsToShow = ['name', 'cogo_id', 'score', 'view_form'];
+	const columnsToShow = ['name', 'cogo_id', 'rating', 'department', 'designation', 'view_form'];
 	const memberColumns = useGetColumns({ columnsToShow });
 
 	const { month = '', year = '' } = item;
@@ -25,8 +25,9 @@ function ListItem({ item }) {
 	const { feedbackData: tableData = {}, loading = false, setParams, params, setPage } = useListUserFeedbacks({
 		month,
 		year,
-		searchValue: query,
+		searchValue     : query,
 		managerId,
+		rating_required : 'yes',
 	});
 
 	const { list = [], pagination_data = {} } = tableData;

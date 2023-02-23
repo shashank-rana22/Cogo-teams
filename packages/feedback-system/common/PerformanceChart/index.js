@@ -82,7 +82,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 								yScale={{
 									type     : 'linear',
 									tickSize : 5,
-									min      : 0,
+									min      : 1,
 									max      : 5,
 									reverse  : false,
 									stacked  : false,
