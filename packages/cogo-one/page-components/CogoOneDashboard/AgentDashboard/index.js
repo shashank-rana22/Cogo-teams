@@ -46,7 +46,7 @@ function AgentDashboard() {
 
 					</div>
 					<div className={styles.two_characterisctics_container}>
-						<ChatStatistics />
+						<ChatStatistics isAdminView={false} />
 					</div>
 
 				</div>

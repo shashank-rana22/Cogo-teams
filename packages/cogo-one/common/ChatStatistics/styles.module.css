@@ -33,10 +33,17 @@
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 21px;
+}
+
+.positive {
+	color: #abcd62;
+}
+
+.negative {
 	color: #f8aea8;
 }
 
-.d_arrow_icon {
+.arrow_icon {
 	padding: 3px;
 	padding-top: 25px;
 }

@@ -42,7 +42,7 @@ function AdminDashboard() {
 					<PerformanceTab />
 
 					<div className={styles.four_characterisctics_container}>
-						<ChatStatistics />
+						<ChatStatistics isAdminView />
 					</div>
 
 				</div>
