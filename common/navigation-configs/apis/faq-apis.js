@@ -1,6 +1,11 @@
 const faq = {
 	create_faq: [
 		{
+			api          : 'list_faq_questions',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
 			api          : 'create_faq_topic',
 			access_type  : 'private',
 			service_name : 'faq',

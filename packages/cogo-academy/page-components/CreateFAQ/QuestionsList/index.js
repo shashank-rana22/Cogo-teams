@@ -7,7 +7,7 @@ import useQuestionList from './useQuestionList';
 function QuestionsList() {
 	const {
 		data, columns, searchInput,
-		setSearchInput, activeList, setActiveList,
+		setSearchInput, activeList, setActiveList, questionListLoading,
 	} = useQuestionList();
 
 	return (
@@ -19,6 +19,7 @@ function QuestionsList() {
 				setSearchInput={setSearchInput}
 				activeList={activeList}
 				setActiveList={setActiveList}
+				questionListLoading={questionListLoading}
 			/>
 		</div>
 	);
