@@ -1,58 +1,96 @@
 /* eslint-disable max-len */
 import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import React from 'react';
+
+import formatArrayValues from '../../../../../commons/utils/formatArrayValues';
 
 import styles from './styles.module.css';
 
+const keysToDisplay = ['vendor_id', 'kyc_status', 'registration_number', 'service_category', 'service_sub_category', 'created_on'];
+
 function Banner({ data = {} }) {
-	const vect = [
-		{ label: 'Vendor ID', value: '#3728900' },
-		{ label: 'KYC Status', value: startCase(data?.vendor_details?.kyc_status) },
-		{ label: 'GST/PAN No.', value: startCase(data?.vendor_details?.registration_number) },
-		{ label: 'Service Category', value: startCase(data?.services?.[0]?.category) },
-		{ label: 'Service Sub-Category', value: startCase(data?.services?.[0]?.sub_category) },
-		{ label: 'Account Created on', value: '28 May 2022' },
-	];
+	const { vendor_details, services } = data;
+
+	const { kyc_status, serial_id, registration_number, created_at } = vendor_details || {};
+
+	const serviceCategories = [...new Set(services.map((service) => service.category))];
+
+	const serviceSubCategories = [...new Set(services.map((service) => service.sub_category))];
 
 	const checkVerified = (value) => {
-		if (value === 'Verified') {
+		if (value === 'verified') {
 			return (
 				<>
 					<IcCFtick />
-					<span style={{ color: 'green' }}>{value}</span>
+					<span style={{ color: '#67C676' }}>{startCase(value)}</span>
 				</>
 			);
 		}
-		if (value === 'Rejected') {
+
+		if (value === 'rejected') {
 			return (
 				<>
 					<IcCFcrossInCircle />
-					<span style={{ color: 'red' }}>{value}</span>
+					<span style={{ color: '#ED3726' }}>{startCase(value)}</span>
 				</>
 			);
 		}
+
 		return (
 			<>
-				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/provisional-icon.svg" alt="pending" />
-				<span style={{ color: 'orange' }}>{value}</span>
+				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg" alt="pending" className={styles.pending_icon} />
+				<span style={{ color: '#F68B21' }}>{startCase(value)}</span>
 			</>
 		);
 	};
 
+	const valuesToDisplay = {
+		vendor_id: {
+			label: 'Vendor ID',
+			value:
+	<div>
+		#
+		{serial_id}
+	</div>,
+		},
+		kyc_status: {
+			label : 'KYC Status',
+			value : checkVerified(kyc_status),
+		},
+		registration_number: {
+			label : 'Registration Number',
+			value : registration_number,
+		},
+		service_category: {
+			label : 'Service Category',
+			value : formatArrayValues(serviceCategories),
+		},
+		service_sub_category: {
+			label : 'Service Sub-Catogory',
+			value : formatArrayValues(serviceSubCategories),
+		},
+		created_on: {
+			label : 'Created on',
+			value : format(created_at, 'dd MMM yyyy'),
+		},
+	};
+
 	return (
-		<div className={styles.box1}>
-			<div className={styles.box1_heading}>
+		<div className={styles.main_container}>
+			<div className={styles.heading}>
 				{data?.vendor_details?.business_name}
 			</div>
-			<div className={styles.box1_data}>
-				{vect.map((item) => (
-					<div className={styles.small_box}>
-						<div className={styles.box1_data_top}>
-							{item.label}
+
+			<div className={styles.content}>
+				{keysToDisplay.map((item) => (
+					<div className={styles.item}>
+						<div className={styles.label}>
+							{valuesToDisplay[item].label}
 						</div>
-						<div className={styles.box1_data_bottom}>
-							{(item.label === 'KYC Status') ? checkVerified(item.value) : item.value }
+
+						<div className={styles.value}>
+							{valuesToDisplay[item].value}
 						</div>
 					</div>
 				))}
