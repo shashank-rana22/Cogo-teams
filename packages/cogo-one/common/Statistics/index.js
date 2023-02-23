@@ -23,7 +23,7 @@ function Statistics({ loading = false }) {
 							calls.data.map((itm) => (
 								<div className={styles.time_durations}>
 									{loading
-										? <Placeholder height="30px" width="100px" />
+										? <Placeholder height="15px" width="60px" />
 										: <div className={styles.time_durations_header}>{itm.duration}</div>}
 
 									<div className={styles.time_durations_text}>{itm.text}</div>
@@ -47,7 +47,7 @@ function Statistics({ loading = false }) {
 									</div>
 
 									{loading
-										? <Placeholder height="30px" width="100px" />
+										? <Placeholder height="15px" width="100px" />
 										: <div className={styles.customer_nos}>{stat.customer_nos}</div>}
 
 								</div>

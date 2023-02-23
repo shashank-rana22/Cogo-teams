@@ -1,0 +1,8 @@
+.loader_box {
+	display: flex;
+	justify-content: space-between;
+}
+
+.left_loader {
+	display: flex;
+}
