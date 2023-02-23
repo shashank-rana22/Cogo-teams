@@ -1,4 +1,4 @@
-import { DateRangepicker, Placeholder } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';

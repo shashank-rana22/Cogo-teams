@@ -1,6 +1,6 @@
 import { Select } from '@cogoport/components';
 
-import { deptControls } from '../../utils/departmentControls';
+import getDepartmentControls from '../../utils/departmentControls';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ const DEPARTMENT_MAPPING = {
 };
 
 function RoleSelect({ value = '', department = 'technology', setValue = () => {}, type = 'select' }) {
-	const roleControl = deptControls.find((control) => control.name
+	const roleControl = getDepartmentControls.find((control) => control.name
     === DEPARTMENT_MAPPING[department]);
 
 	const setDeptFilters = (val) => {

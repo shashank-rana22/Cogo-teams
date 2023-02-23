@@ -1,4 +1,4 @@
-import { Select, Table, Input } from '@cogoport/components';
+import { Table, Input } from '@cogoport/components';
 import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';

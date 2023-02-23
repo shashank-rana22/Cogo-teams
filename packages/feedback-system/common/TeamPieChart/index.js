@@ -30,7 +30,6 @@ function TeamPieChart({ userId = '', month = '', year = '' }) {
 
 	let isEmpty = 0;
 	Object.values(userData).forEach((val) => { isEmpty += val; });
-	console.log('isEmpty', isEmpty);
 
 	return (
 		<div className={styles.pie_container}>

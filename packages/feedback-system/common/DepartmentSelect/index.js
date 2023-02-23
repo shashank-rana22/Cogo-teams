@@ -1,7 +1,7 @@
 import { Button, Select } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 
-import { deptControls } from '../../utils/departmentControls';
+import getDepartmentControls from '../../utils/departmentControls';
 
 import styles from './styles.module.css';
 
@@ -10,7 +10,7 @@ function DepartmentSelect({
 	setValue = () => {},
 	type = 'controller',
 }) {
-	const departmentControl = deptControls.find((control) => control.name === 'department');
+	const departmentControl = getDepartmentControls.find((control) => control.name === 'department');
 
 	const setDeptFilters = (val) => {
 		setValue((pv) => ({ ...pv, filters: { ...(pv.filters), department: val }, page: 1 }));
