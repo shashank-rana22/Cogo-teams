@@ -35,7 +35,7 @@ function SubmitForm({
 	};
 
 	return (
-		<div className={styles.submit_form_container}>
+		<>
 			<div className={styles.header}>
 				Create Form :
 				{' '}
@@ -47,11 +47,13 @@ function SubmitForm({
 				<span1>{startCase(designation)}</span1>
 			</div>
 
-			<Questions
-				questions={questionActionList.checked}
-				setQuestionActionList={setQuestionActionList}
-				questionStatus="add_weightage"
-			/>
+			<div className={styles.question_container}>
+				<Questions
+					questions={questionActionList.checked}
+					setQuestionActionList={setQuestionActionList}
+					questionStatus="add_weightage"
+				/>
+			</div>
 
 			<div className={styles.button_container}>
 				<Button
@@ -71,7 +73,7 @@ function SubmitForm({
 					Submit
 				</Button>
 			</div>
-		</div>
+		</>
 	);
 }
 

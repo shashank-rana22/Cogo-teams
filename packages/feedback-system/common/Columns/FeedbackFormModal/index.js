@@ -1,7 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import useGetForm from '../../../utils/useGetForm';
 
 import FeedBackForm from './FeedBackForm';
 import styles from './styles.module.css';
@@ -18,21 +20,44 @@ function FeedbackFormModal({
 	action = '',
 	item = {},
 	getTeamFeedbackList = () => {},
+	setRefetchReportees = () => {},
 }) {
 	const {
-		user_id:userId = '',
-		performance_item: performanceItem = {}, feedback = '',
+		user_id: userId = '', feedback = '',
 		feedback_id = '',
 	} = item;
 
 	const [addFeedback, setAddFeedback] = useState(false);
-	const [rating, setRating] = useState({ ...performanceItem });
+
+	const {
+		formData = {},
+		loading: questionsLoading = false,
+	} = useGetForm({
+		item, action, addFeedback,
+	});
+
+	const { form_questions = [], form_id = '', form_responses = [] } = formData;
+
+	const [rating, setRating] = useState({});
 	const [comment, setComment] = useState(feedback);
+
+	const questionsToShow = action === 'show' ? form_responses : form_questions;
 
 	const onCloseFunction = () => {
 		setAddFeedback(false);
 		getTeamFeedbackList();
 	};
+
+	useEffect(() => {
+		if (!isEmpty(form_responses)) {
+			const oldResponses = {};
+
+			(form_responses || []).forEach((res) => { oldResponses[res.id] = res.rating; });
+			if (action === 'show') {
+				setRating(oldResponses);
+			}
+		}
+	}, [form_responses]);
 
 	// const currentDate = new Date();
 
@@ -62,7 +87,7 @@ function FeedbackFormModal({
 						themeType="link"
 						onClick={() => 	setAddFeedback(true)}
 					>
-						View Details
+						View Form
 					</Button>
 				) : (
 					<Button
@@ -92,7 +117,6 @@ function FeedbackFormModal({
 					show={addFeedback}
 					onClose={() => onCloseFunction()}
 					size="xl"
-					onClickOutside={() => onCloseFunction()}
 				>
 					<Modal.Header title={(
 						<div className={styles.modal_header}>
@@ -108,14 +132,17 @@ function FeedbackFormModal({
 					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
 						<FeedBackForm
 							action={action}
-							item={item}
 							userId={userId}
+							form_id={form_id}
+							questionsToShow={questionsToShow}
+							questionsLoading={questionsLoading}
 							rating={rating}
 							comment={comment}
 							setComment={setComment}
 							showForm={addFeedback}
 							setShowForm={setAddFeedback}
 							setRating={setRating}
+							setRefetchReportees={setRefetchReportees}
 						/>
 					</Modal.Body>
 				</Modal>

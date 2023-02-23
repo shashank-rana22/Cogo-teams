@@ -35,6 +35,8 @@ function FeedbackManagement() {
 	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
 
 	const [searchValue, setSearchValue] = useState('');
+	const [refetchReportees, setRefetchReportees] = useState(false);
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
@@ -43,6 +45,7 @@ function FeedbackManagement() {
 		feedbackData,
 		loading = false,
 		setPage,
+		fetchReportees,
 	} = useListReportees({
 		userId,
 		searchValue: query,
@@ -59,6 +62,7 @@ function FeedbackManagement() {
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'department', 'month', 'add-kpi'];
 
 	const feedbackManagementColumns = useGetColumns({
+		setRefetchReportees,
 		source: 'manager_feedback',
 		columnsToShow,
 	});
@@ -85,6 +89,14 @@ function FeedbackManagement() {
 		debounceQuery(searchValue);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
+
+	useEffect(() => {
+		if (refetchReportees) {
+			fetchReportees();
+		}
+		setRefetchReportees(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [refetchReportees]);
 
 	return (
 		<div className={`${styles.container}`}>

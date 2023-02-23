@@ -10,40 +10,30 @@ import { IcCStar, IcMArrowDoubleDown, IcMArrowDown, IcMArrowUp, IcMInfo } from '
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
-import useGetForm from '../../../../utils/useGetForm';
 import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
 function FeedBackForm({
 	action = '',
-	item,
 	setShowForm = () => {},
+	questionsToShow = [],
+	form_id = '',
 	rating,
 	comment,
 	setComment = () => {},
 	setRating = () => {},
+	questionsLoading = 'false',
 	userId = '',
+	setRefetchReportees = () => {},
 }) {
-	const { department, designation, month, year } = item;
-
-	const {
-		formData = {},
-		loading: questionsLoading = false,
-	} = useGetForm({
-		department, designation, month, year, action,
-	});
-	const { form_questions = [], form_id = '', feedback_data = {}, form_responses = [] } = formData;
-
-	const questionsToShow = action === 'show' ? form_responses : form_questions;
-	const finalFeedback = action === 'show' ? feedback_data.feedback : comment;
-
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
 		rating,
 		comment,
 		formId: form_id,
 		userId,
 		setShowForm,
+		setRefetchReportees,
 	});
 
 	const onSubmit = () => {
@@ -54,13 +44,11 @@ function FeedBackForm({
 		return null;
 	};
 
-	const options = [
-		{ label: '', value: '1' },
-		{ label: '', value: '2' },
-		{ label: '', value: '3' },
-		{ label: '', value: '4' },
-		{ label: '', value: '5' },
-	];
+	const newOptions = Array(5).fill('').map((_, index) => ({
+		label : '',
+		value : (index + 1),
+		...(action === 'show' ? { disabled: true } : {}),
+	}));
 
 	const performanceIcons = {
 		below_expectations   : <IcMArrowDoubleDown height={20} width={20} fill="#ee3425" />,
@@ -117,10 +105,12 @@ function FeedBackForm({
 			</div>
 
 			{(questionsToShow || []).map((key) => {
-				const { id, question, rating : pastRating = '', description = '', feedback = '' } = key || {};
+				const { id, question, description = '', feedback = '' } = key || {};
+
 				return (
 					<div
 						className={styles.controls}
+						key={id || question}
 					>
 						<div className={styles.question_rating}>
 							<div className={styles.side_heading}>
@@ -142,10 +132,12 @@ function FeedBackForm({
 
 							<div className={styles.radio_group}>
 								<RadioGroup
-									options={options}
-									value={pastRating || rating[id]?.rating}
+									options={newOptions}
+									value={action === 'show' ? rating[id] : rating[id]?.rating}
 									onChange={(val) => {
-										setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
+										if (action !== 'show') {
+											setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
+										}
 									}}
 								/>
 							</div>
@@ -171,7 +163,7 @@ function FeedBackForm({
 
 				<Textarea
 					size="lg"
-					value={finalFeedback}
+					value={comment}
 					disabled={action === 'show'}
 					placeholder="Specify the overall feedback."
 					onChange={setComment}

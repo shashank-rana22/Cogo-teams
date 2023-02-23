@@ -1,86 +1,45 @@
-import { Table, Input, Button, Modal } from '@cogoport/components';
-import { IcMSearchlight, IcMInformation } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { getByKey, isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { Input, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
+import { IcMSearchlight } from '@cogoport/icons-react';
+import { useState, useEffect } from 'react';
 
-import EmptyState from '../../../../common/EmptyState';
+import useGetColumns from '../../../../common/Columns';
+import UserTableData from '../../../../common/userTableData';
 
 import styles from './styles.module.css';
 import useManagerListItem from './useManagerListItem';
 
-const LIST_COLUMNS_MAPPING = {
-
-	user_name   : 'NAME',
-	employee_id : 'EMPLOYEE ID',
-	latest_kpi  : 'Current KPI',
-	score       : 'SCORE',
-	details     : '',
-};
-
 function ListItem({ item }) {
-	const Router = useRouter();
+	const [searchValue, setSearchValue] = useState('');
+	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const { data: { list = [] } = {}, loading } = useManagerListItem({ item });
+	const {
+		data: { list = [], pagination_data = {} } = {},
+		loading, params, setParams, setPage,
+	} = useManagerListItem({ item });
+	const { total_count = '' } = pagination_data;
 
-	const columns = Object.entries(LIST_COLUMNS_MAPPING).map(([key, value]) => ({
-		Header   : <div key={key}>{value}</div>,
-		accessor : key,
-		id       : key,
-	}));
+	const columnsToShow = ['name', 'cogo_id', 'rating', 'score', 'user_details'];
 
-	const routeToUserDetails = (id) => {
-		if (id) {
-			Router.push(
-				'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
-				`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
-			);
-		}
-	};
+	const managerListItemColumns = useGetColumns({ source: 'hr_dashboard', columnsToShow });
 
-	const data = (list || []).map((listItem) => {
-		const filteredData = {
-			user_name: (
-				<div>{getByKey(listItem, 'name', '---')}</div>
-			),
-			employee_id: (
-				<div>{getByKey(listItem, 'cogo_id', '---')}</div>
-			),
-			latest_kpi: (
-				<div>{getByKey(listItem, 'rating', '---')}</div>
-			),
-			score: (
-				<div>{getByKey(listItem, 'score', '---')}</div>
-			),
-			details: (
-				<div className={styles.details}>
-					<div
-						role="button"
-						tabIndex={0}
-						onClick={(e) => {
-							e.stopPropagation();
-							routeToUserDetails(listItem.user_id);
-						}}
-					>
-						View details
-					</div>
-				</div>
-			),
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
-		};
-
-		const dataToPush = {};
-
-		Object.keys(LIST_COLUMNS_MAPPING).forEach((dataKey) => {
-			dataToPush[dataKey] = filteredData[dataKey] || listItem[dataKey] || '___';
-		});
-		return dataToPush;
-	});
+	useEffect(() => setParams({ ...params, Q: query || undefined }));
 
 	return (
 		<div className={styles.overall_baselist}>
 			<section className={styles.inner_list}>
-				<Input size="sm" suffix={<IcMSearchlight />} placeholder="Search" className={styles.search} />
+				<Input
+					size="sm"
+					suffix={<IcMSearchlight />}
+					placeholder="Search"
+					className={styles.search}
+					value={searchValue}
+					onChange={setSearchValue}
+				/>
+
 				<Button
 					size="md"
 					themeType="secondary"
@@ -89,16 +48,17 @@ function ListItem({ item }) {
 				>
 					Download CSV
 				</Button>
-
 			</section>
-			{(isEmpty(list) && !loading) ? (
-				<EmptyState
-					height={100}
-					width={140}
-					emptyText="No team members found"
-					textSize="18px"
-				/>
-			) : <Table data={data} columns={columns} loading={loading} /> }
+
+			<UserTableData
+				list={list}
+				columns={managerListItemColumns}
+				loading={loading}
+				total_count={total_count}
+				page_limit={params.PageLimit}
+				pagination={params.Page}
+				setPagination={setPage}
+			/>
 		</div>
 	);
 }

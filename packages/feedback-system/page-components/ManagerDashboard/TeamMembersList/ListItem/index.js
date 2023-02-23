@@ -1,6 +1,7 @@
 import { Input } from '@cogoport/components';
 import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
@@ -11,6 +12,8 @@ import getDepartmentControls from '../../../../utils/departmentControls';
 import styles from './styles.module.css';
 
 function ListItem({ item }) {
+	const { profile:{ user:{ id: managerId = '' } } } = useSelector((state) => state);
+
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -19,13 +22,15 @@ function ListItem({ item }) {
 
 	const { month = '', year = '' } = item;
 
-	const { data: tableData = {}, loading = false, setParams, params, setPage } = useListUserFeedbacks({
+	const { feedbackData: tableData = {}, loading = false, setParams, params, setPage } = useListUserFeedbacks({
 		month,
 		year,
 		searchValue: query,
+		managerId,
 	});
 
 	const { list = [], pagination_data = {} } = tableData;
+
 	const { total_count = '' } = pagination_data;
 
 	const { Department = '', Designation = '' } = params;

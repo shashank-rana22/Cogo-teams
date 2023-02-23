@@ -59,11 +59,11 @@ function AddQuestions({
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Filters: { ...(params.Filters || {}), tags: tags || undefined } }), [tags]);
+	useEffect(() => setParams({ ...params, Tags: tags || undefined }), [tags]);
 
 	useEffect(() => {
 		if (refetchList) {
-			refetchQuestions({ params });
+			refetchQuestions({ params: { ...params, Page: 1 } });
 		}
 		setRefetchList(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -133,15 +133,18 @@ function AddQuestions({
 
 									</div>
 
-									<div className={styles.pagination_container}>
-										<Pagination
-											type="number"
-											currentPage={params.page}
-											totalItems={total_count}
-											pageSize={params.page_limit}
-											onPageChange={setPage}
-										/>
-									</div>
+									{total_count > params.PageLimit && (
+										<div className={styles.pagination_container}>
+											<Pagination
+												type="number"
+												currentPage={params.Page}
+												totalItems={total_count}
+												pageSize={params.PageLimit}
+												onPageChange={setPage}
+											/>
+										</div>
+									)}
+
 								</div>
 
 								<div className={styles.questions}>

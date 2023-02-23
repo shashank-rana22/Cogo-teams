@@ -6,11 +6,9 @@ const useListFeedbackQuestions = ({
 	searchValue = '',
 }) => {
 	const [params, setParams] = useState({
-		FormID  : formId || undefined,
-		filters : {
-		},
-		page       : 1,
-		page_limit : 20,
+		FormID    : formId || undefined,
+		Page      : 1,
+		PageLimit : 20,
 	});
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
@@ -22,7 +20,7 @@ const useListFeedbackQuestions = ({
 	const setPage = (p) => { setParams({ ...params, page: p }); };
 
 	useEffect(() => {
-		setParams({ ...params, Filters: { ...(params.Filters || {}), q: searchValue || undefined }, page: 1 });
+		setParams({ ...params, Q: searchValue || undefined, page: 1 });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
 

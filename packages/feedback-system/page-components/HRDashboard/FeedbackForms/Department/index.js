@@ -1,9 +1,11 @@
 import { Pill, Accordion } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function Department({ department, openAccordion, setOpenAccordion, setFormsParams, designation }) {
+	const completionStatus = isEmpty(department.designations.filter((role) => role.status === 'inactive'));
+
 	return (
 		<Accordion
 			key={department}
@@ -15,7 +17,13 @@ function Department({ department, openAccordion, setOpenAccordion, setFormsParam
 					tabIndex={0}
 				>
 					<p className={styles.department_label}>{startCase(department?.department)}</p>
-					<Pill color="red">Pending</Pill>
+					{!completionStatus && (
+						<Pill
+							color="red"
+						>
+							Pending
+						</Pill>
+					)}
 				</div>
 			)}
 			className={`

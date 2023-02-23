@@ -1,9 +1,9 @@
 .submit_form_container {
 	height: 100%;
-	padding: 0 16px;
 }
 
 .header {
+	padding: 0 16px;
 	font-size: 20px;
 	font-weight: 600;
 	
@@ -16,6 +16,10 @@
 	}
 }
 
+.question_container {
+	padding: 0 16px;
+}
+
 .button_container {
 	position: absolute;
 	right: 0;
@@ -24,5 +28,6 @@
 	justify-content: flex-end;
 	width: 100%;
 	padding: 16px 16px 0;
+	background: #ffffff;
 	border-top: 1px solid #6fa5ab;
 }

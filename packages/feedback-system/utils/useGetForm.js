@@ -1,15 +1,27 @@
 import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
-const useGetForm = ({ department = '', designation = '', month = '', year = '', user_id = '', action = '' }) => {
+const useGetForm = ({ item = {}, action = '', addFeedback = false }) => {
+	const { month = '', year = '', department = '', designation = '', user_id = '' } = item;
+
 	const url = action === 'show' ? 'get-form-responses' : 'get-form';
 	const params = action === 'show' ? { Month: month, Year: year, UserID: user_id }
 		: { Department: department, Designation: designation };
 
-	const [{ data: formData = {}, loading = false }] = useRequest({
+	const [{ data: formData = {}, loading = false }, trigger] = useRequest({
 		url,
 		method: 'get',
-		params,
-	}, { manual: false });
+	}, { manual: true });
+
+	const getForm = async () => {
+		trigger({ params });
+	};
+
+	useEffect(() => {
+		if (addFeedback) {
+			getForm();
+		}
+	}, [addFeedback]);
 
 	return { formData, loading };
 };
