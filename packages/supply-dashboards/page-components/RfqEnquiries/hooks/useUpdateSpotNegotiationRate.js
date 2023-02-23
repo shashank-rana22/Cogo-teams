@@ -315,7 +315,7 @@ const useUpdateSpotNegotiationRate = ({
 				const newRes = await fetch(
 					{ service_provider_id: value?.service_provider_id, spot_negotiation_id: service?.id },
 				);
-				if (!(newRes?.data?.is_complete)) {
+				if (!newRes?.data?.is_complete && Object.keys(newRes?.data?.completion_messages || {}).length > 0) {
 					let completeMessage = 'Incompletion Reasons :';
 					const message = IncompletionReasons({ completionMessages: newRes?.data?.completion_messages });
 					completeMessage += message;
@@ -323,7 +323,7 @@ const useUpdateSpotNegotiationRate = ({
 				} else {
 					setActiveService(null);
 					setSubmittedEnquiry((prev) => [...prev, `${service?.id}${service?.service}`]);
-					Toast.success('Negotiation Updated');
+					Toast.success('Rate successfully Added, It may take up to 5 minutes to reflect in reverts');
 					if (!data?.is_complete) {
 						setRevertCounts((prev) => ({ ...prev, [selectedCard?.id]: prev[selectedCard.id] + 1 }));
 					}
