@@ -1,0 +1,92 @@
+.container{
+    width:200%;
+}
+
+.cards{
+    display:flex;
+    width:100%;
+    justifyContent:space-between;
+    margin:12px 0;
+    /* background:#fff; */
+}
+.card_container{
+    width:100%;
+    margin:16px 24px 16px 0;
+}
+.card_item{
+    width:100%;
+    /* height:132px; */
+    padding:16px 24px 4px 24px;
+    background:#fff;
+    border-radius:8px;
+}
+
+.card_title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card_content{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    /* padding:10%; */
+}
+/* 
+.card_data_count{
+    display:flex;
+    flex-direction:column;
+    width:50%;
+} */
+
+.card_data_score{
+    /* flex:1.5; */
+    display:flex;
+    flex-direction:column;
+    width:50%;
+    /* background:aqua */
+}
+
+.overview_container{
+    width:100%;
+    /* height:1000px; */
+    border-top:1px solid #BDBDBD;
+    /* background:#fff */
+}
+
+.overview_header{
+    margin-top:32px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.overview_cards{
+    display:flex;
+    width:100%;
+    justifyContent:space-between;
+    margin:12px 0;
+    /* background:#fff; */
+}
+
+.overview_card_title{
+    display:flex;
+    width:100%
+}
+
+.overview_card_content{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+}
+
+.leaderboard_container{
+}
+
+.filters{
+
+}
+
+.list{
+
+}

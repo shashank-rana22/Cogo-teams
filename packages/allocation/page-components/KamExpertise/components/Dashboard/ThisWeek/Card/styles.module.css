@@ -1,0 +1,6 @@
+
+.card_data_count{
+    display:flex;
+    flex-direction:column;
+    width:50%;
+}
