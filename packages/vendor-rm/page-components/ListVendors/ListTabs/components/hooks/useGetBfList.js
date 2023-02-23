@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import styles from '../FinanceDashBoard/styles.module.css';
+import styles from '../MainData/FinanceDashBoard/styles.module.css';
 
 const useGetBfList = ({ organizationId }) => {
 	const [

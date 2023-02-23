@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import FormLayout from '../../../../../../../commons/components/FormLayout/FormLayout';
+import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
 import useEditProfile from '../../hooks/useEditProfile';
 
 import styles from './styles.module.css';

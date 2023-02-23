@@ -1,5 +1,5 @@
-import categoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/category-options';
-import subCategoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
+import categoryOptions from '../../../../../../../../../OnBoardVendor/VendorServices/utils/category-options';
+import subCategoryOptions from '../../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
 
 const controls = [
 	{

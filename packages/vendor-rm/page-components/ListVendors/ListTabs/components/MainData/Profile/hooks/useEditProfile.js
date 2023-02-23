@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { getControls } from '../../../../../OnBoardVendor/VendorDetails/utils/getControls';
+import { getControls } from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 
 function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, setShowEditProfileModal = () => {} }) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {

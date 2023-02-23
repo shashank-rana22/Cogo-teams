@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-named-as-default
 import { Button } from '@cogoport/components';
 
-import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
+import FormLayout from '../../../../../../../../../commons/components/FormLayout/FormLayout';
 
 import useAddServicePoc from './hooks/useAddServicePoc';
 import styles from './styles.module.css';

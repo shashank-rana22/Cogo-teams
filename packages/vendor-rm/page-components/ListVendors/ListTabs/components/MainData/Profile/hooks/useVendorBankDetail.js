@@ -7,7 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { controls } from '../../../../../OnBoardVendor/PaymentDetails/utils/controls';
+import { controls } from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
 
 function useVendorBankDetail({
 	refetchVendorInfo = () => {}, setShowAddbankModal = () => {

@@ -1,17 +1,16 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import useGetBfList from '../hooks/useGetBfList';
+import useGetBfList from '../../hooks/useGetBfList';
 
 import styles from './styles.module.css';
 
 function FinanceDashBoard() {
 	const {
-	    data = [],
+		data = [],
 		columns,
 		loading,
 	} = useGetBfList({ organizationId: '9f148fa6-79a7-4e60-8fab-bc889fc43a13' });
-
 
 	return (
 

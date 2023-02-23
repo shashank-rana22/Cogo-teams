@@ -1,6 +1,6 @@
-import FinanceDashBoard from '../components/FinanceDashBoard';
-import Profile from '../components/Profile';
-import ServicesUsers from '../components/Services&Users';
+import FinanceDashBoard from '../components/MainData/FinanceDashBoard';
+import Profile from '../components/MainData/Profile';
+import ServicesUsers from '../components/MainData/Services&Users';
 
 const TAB_OPTION_MAPPING = {
 	services_and_users: {

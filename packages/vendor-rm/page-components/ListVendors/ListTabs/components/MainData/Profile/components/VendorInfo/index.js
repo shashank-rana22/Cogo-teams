@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import FormLayout from '../../../../../../../commons/components/FormLayout/FormLayout';
+import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../../hooks/useVendorBankDetail';
 
 import PaymentDetails from './components/PaymentDetails';
