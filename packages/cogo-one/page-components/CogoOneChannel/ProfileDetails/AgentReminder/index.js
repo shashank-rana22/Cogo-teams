@@ -10,9 +10,9 @@ import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicatio
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
-function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, FormattedMessageData, customerId }) {
+function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formattedMessageData, customerId }) {
 	const [showReminder, setShowReminder] = useState(false);
-	const { organization_id:messageOrgId = null, user_id: messageUserId = null } = FormattedMessageData || {};
+	const { organization_id:messageOrgId = null, user_id: messageUserId = null } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = null, user_id: voiceUserId = null } = activeVoiceCard || {};
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 	const userId = activeTab === 'message' ? messageUserId : voiceUserId;

@@ -10351,9 +10351,9 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_lead_user_profile',
+			api          : 'create_platform_chat_user_onboarding',
 			access_type  : 'private',
-			service_name : 'lead',
+			service_name : 'communication',
 		},
 
 	],

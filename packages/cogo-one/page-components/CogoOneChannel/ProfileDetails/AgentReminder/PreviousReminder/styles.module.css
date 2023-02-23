@@ -1,67 +1,67 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-top: 15px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding-top: 15px;
 }
 
 .title {
-    margin-bottom: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #4f4f4f;
+	margin-bottom: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 8px 9px 10px 12px;
-    margin-bottom: 12px;
-    background: #fff;
-    border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 8px 9px 10px 12px;
+	margin-bottom: 12px;
+	background: #fff;
+	border-radius: 6px;
 }
 
 .top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .purpose {
-    font-size: 14px;
-    font-weight: 600;
-    color: #221f20;
-    text-align: center;
-    text-transform: capitalize;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+	text-align: center;
+	text-transform: capitalize;
 }
 
 .task {
-    font-size: 12px;
-    color: #221f20;
-    text-align: center;
+	font-size: 12px;
+	color: #221f20;
+	text-align: center;
 }
 
 .time {
-    font-size: 10px;
-    color: #4f4f4f;
-    text-align: center;
+	font-size: 10px;
+	color: #4f4f4f;
+	text-align: center;
 }
 
 .loader_div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 80px;
 }
 
 .wrap {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: 130px;
-    padding: 6px;
-    overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-height: 130px;
+	padding: 6px;
+	overflow-y: scroll;
 }

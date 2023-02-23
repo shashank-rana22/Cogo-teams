@@ -1,26 +1,26 @@
 .name {
-    font-size: 10px;
-    font-weight: 500;
-    text-align: left;
-    color: #000000;
+	font-size: 10px;
+	font-weight: 500;
+	color: #000;
+	text-align: left;
 }
 
 .time_stamp {
-    font-family: Inter;
-    font-size: 10px;
-    font-weight: 500;
-    text-align: left;
-    padding-left: 4px;
+	padding-left: 4px;
+	font-family: Inter;
+	font-size: 10px;
+	font-weight: 500;
+	text-align: left;
 }
 
 .container {
-    width: 100%;
-    margin: 10px;
-    height: fit-content;
-    float: left;
+	float: left;
+	width: 100%;
+	height: fit-content;
+	margin: 10px;
 }
 
 .receive_message_container {
-    width: fit-content;
-    word-break: break-word;
+	width: fit-content;
+	word-break: break-word;
 }

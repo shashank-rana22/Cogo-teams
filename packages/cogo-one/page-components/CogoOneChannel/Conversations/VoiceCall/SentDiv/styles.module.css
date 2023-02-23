@@ -1,57 +1,57 @@
 .name {
-    font-size: 10px;
-    font-weight: 500;
-    text-align: right;
-    color: #000000;
+	font-size: 10px;
+	font-weight: 500;
+	color: #000;
+	text-align: right;
 }
 
 .time_stamp {
-    font-family: Inter;
-    font-size: 10px;
-    font-weight: 500;
-    text-align: left;
-    padding-left: 4px;
+	padding-left: 4px;
+	font-family: Inter;
+	font-size: 10px;
+	font-weight: 500;
+	text-align: left;
 }
 
 .container {
-    width: 100%;
-    margin: 10px 0;
-    display: flex;
-    align-items: flex-start;
-    height: fit-content;
-    justify-content: flex-end;
-    padding-right: 10px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+	width: 100%;
+	height: fit-content;
+	padding-right: 10px;
+	margin: 10px 0;
 }
 
 .styled_img {
-    height: 25px;
-    width: 25px;
+	width: 25px;
+	height: 25px;
 }
 
 .message_div {
-    margin-right: 8px;
+	margin-right: 8px;
 }
 
 .btn {
-    text-decoration: underline;
-    color: #6892fe;
-    padding: 3px;
-    margin: 0 5px 5px 5px;
-    border-radius: 4px;
-    width: fit-content;
-    word-break: break-word;
-    border: 1px solid #cddbff;
-    font-size: 10px;
+	width: fit-content;
+	padding: 3px;
+	margin: 0 5px 5px;
+	font-size: 10px;
+	color: #6892fe;
+	text-decoration: underline;
+	word-break: break-word;
+	border: 1px solid #cddbff;
+	border-radius: 4px;
 }
 
 .btns_container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 10px;
 }
 
 .styled_div {
-    float: right;
-    max-width: 320px;
+	float: right;
+	max-width: 320px;
 }
