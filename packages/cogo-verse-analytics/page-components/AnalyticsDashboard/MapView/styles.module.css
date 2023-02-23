@@ -10,6 +10,16 @@
 
 /* Top Content ------------------------------------------------------------------- */
 
+.date_range_container {
+	width: fit-content;
+	padding: 5px 16px 2px;
+
+	input {
+		height: 38px !important;
+		border: solid 1px #e0e0e0 !important;
+	}
+}
+
 .top_content {
 	display: flex;
 	justify-content: flex-end;
@@ -44,16 +54,6 @@
 .select_container {
 	width: 225px;
 	padding: 5px 0 2px 16px;
-}
-
-.date_range_container {
-	width: fit-content;
-	padding: 5px 16px 2px;
-
-	input {
-		height: 38px !important;
-		border: solid 1px #e0e0e0 !important;
-	}
 }
 
 .vertical_line {

@@ -192,16 +192,11 @@
 	align-items: center;
 	justify-content: center;
 	padding: 3px;
+	padding: 1px 8px;
 	font-size: 10px;
 	color: #bdbdbd;
 	border: 1px solid #bdbdbd;
-	border-radius: 80px;
-}
-
-.origin_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	border-radius: 10px;
 }
 
 .empty_state {
@@ -209,12 +204,6 @@
 	align-items: center;
 	justify-content: center;
 	margin-top: 28vh;
-}
-
-.shipment_count {
-	padding: 1px 8px;
-	border-radius: 10px;
-	border-radius: 1px solid #bdbdbd;
 }
 
 .tooltip_content {

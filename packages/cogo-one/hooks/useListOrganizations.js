@@ -27,6 +27,7 @@ const useListOrganizations = ({ orgId = null }) => {
 		if (orgId) {
 			getOrgDetails();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [orgId]);
 
 	const { list = [] } = data || {};
