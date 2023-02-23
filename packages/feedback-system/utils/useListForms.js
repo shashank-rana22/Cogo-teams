@@ -15,8 +15,8 @@ const useListForms = ({ formsParams = {} }) => {
 			params: {
 				Department  : formsParams.department,
 				Designation : formsParams.designation,
-				page        : pagination || 1,
-				page_limit  : 10,
+				Page        : pagination || 1,
+				PageLimit   : 10,
 			},
 		});
 	};

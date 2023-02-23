@@ -3,9 +3,9 @@ import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import useGetFeedbackPerformanceStats from '../../hooks/useGetFeedbackPerformanceStats';
+import EmptyState from '../EmptyState';
 import TeamPieChart from '../TeamPieChart';
 
-import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function PerformanceChart({ params = {}, userId = '' }) {
@@ -68,7 +68,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 
 			{loading ? showLoading() : (
 				<div className={styles.chart_section}>
-					{(!loading && lineChartlist?.length) > 0 ? (
+					{(!loading && lineChartlist?.length > 0) ? (
 						<div className={styles.line_graph}>
 							<ResponsiveLine
 								data={lineChartData}
