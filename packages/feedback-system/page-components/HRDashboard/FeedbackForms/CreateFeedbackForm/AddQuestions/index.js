@@ -96,7 +96,7 @@ function AddQuestions({
 										{' > '}
 									</span>
 
-									<span1>{startCase(designation)}</span1>
+									<span className={styles.role}>{startCase(designation)}</span>
 								</div>
 
 								<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>

@@ -32,10 +32,9 @@
 
 .question_tags {
 	display: flex;
-	justify-content: flex-end;
-
 	flex: 1;
 	flex-wrap: wrap;
+	justify-content: flex-end;
 	max-width: 100%;
 	max-height: 70%;
 	overflow-y: hidden;

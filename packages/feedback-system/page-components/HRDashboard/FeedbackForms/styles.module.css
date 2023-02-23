@@ -68,13 +68,12 @@
 	overflow: scroll;
 }
 
-
 .loading_left {
 	margin-bottom: 8px;
 }
 
 .left_list_div {
-	border-radius: 4px;
-	margin-top: 12px;
 	padding: 0 8px;
+	margin-top: 12px;
+	border-radius: 4px;
 }

@@ -44,7 +44,7 @@ function SubmitForm({
 					{' > '}
 				</span>
 
-				<span1>{startCase(designation)}</span1>
+				<span className={styles.role}>{startCase(designation)}</span>
 			</div>
 
 			<div className={styles.question_container}>
