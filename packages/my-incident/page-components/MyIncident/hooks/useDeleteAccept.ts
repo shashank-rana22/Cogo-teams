@@ -17,7 +17,7 @@ const useDeleteAccept = ({ userIncidentStatus, id, remarks, refetch }) => {
 		{
 			url     : '/incident-management/incident/user-incident-status',
 			method  : 'PATCH',
-			authkey : 'patch_incident_management_incident_user_incident_status',
+			authKey : 'patch_incident_management_incident_user_incident_status',
 		},
 		{ manual: true },
 	);
