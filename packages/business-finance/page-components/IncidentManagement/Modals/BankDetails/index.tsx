@@ -1,6 +1,7 @@
 import { RadioGroup, Textarea, Modal, Button } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -35,6 +36,13 @@ function BankDetails({
 		methodOfVerification,
 	} = bankData || {};
 	const [showBankModal, setShowBankModal] = useState(false);
+	const {
+		user_data:userData,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	const { partner: { id: partnerId = '' } } = userData;
 
 	const [value, setValue] = useState({
 		text            : '',
@@ -62,7 +70,10 @@ function BankDetails({
 	} = organization || {};
 
 	const checkData = () => {
-		push('/details/supply/[organization_id]', `/details/supply/${id}`);
+		push(
+			`${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/${partnerId}/details/supply/[organization_id]`,
+			`${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/${partnerId}/details/supply/${id}`,
+		);
 	};
 
 	return (
