@@ -10,8 +10,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 // eslint-disable-next-line import/no-relative-packages
 import GLOBAL_CONSTANTS from '../../../../../../common/constants/globals.json';
 import { getControls } from '../utils/getControls';
@@ -27,7 +25,6 @@ const COUNTRY_IDS = {
 function useOnBoardVendor({
 	setActiveStepper = () => {},
 	vendorInformation = {},
-	setVendorInformation = () => {},
 }) {
 	const { general: { query } } = useSelector((state) => state);
 
@@ -175,7 +172,7 @@ function useOnBoardVendor({
 		method : 'post',
 	}, { manual: true });
 
-	const createVendor = async ({ data, step }) => {
+	const createVendor = async () => {
 		const formattedValues = getValues();
 
 		const payload = {
@@ -186,15 +183,6 @@ function useOnBoardVendor({
 
 		try {
 			const res = await triggerApi({ data: { id: vendor_id, ...payload } });
-
-			setVendorInformation((pv) => {
-				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-
-				return {
-					...pv,
-					[key]: { ...data, document_url: formattedValues?.document_url?.finalUrl },
-				};
-			});
 
 			if (!isUpdateAction) {
 				const href = '/onboard-vendor/[vendor_id]';

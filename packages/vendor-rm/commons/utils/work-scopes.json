@@ -24,10 +24,6 @@
 		"value" : "i_work_in_operations"
 	},
 	{
-		"label" : "Logistics Manager",
-		"value" : "i_am_logistics_manager"
-	},
-	{
 		"label" : "Other",
 		"value" : "other"
 	}
