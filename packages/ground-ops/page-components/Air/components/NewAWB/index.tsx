@@ -20,7 +20,14 @@ function NewAWB({ data, loading }) {
 
 	const functions = {
 		handleGenerate: (singleItem:any) => (
-			<Button onClick={() => { handleGenerateMAWB(singleItem); }}>Generate</Button>
+			<Button
+				style={{ border: '1px solid #333', padding: '2px 8px', fontSize: 12 }}
+				themeType="secondary"
+				onClick={() => { handleGenerateMAWB(singleItem); }}
+			>
+				Generate
+
+			</Button>
 		),
 
 	};
@@ -29,9 +36,9 @@ function NewAWB({ data, loading }) {
 			<Button onClick={() => setGenerate(!generate)}>HAWB</Button>
 			{!generate && <List fields={fields} data={data} loading={loading} functions={functions} />}
 
-			{/* {generate && <GenerateMAWB shipment_id={item.shipmentId} task={item} />} */}
 			{generate && <GenerateHawb shipment_id={item.shipmentId} task={item} />}
 
+			{generate && <GenerateMAWB item={item} task={item} />}
 		</>
 	);
 }

@@ -43,7 +43,7 @@ function FieldArray({
 					error={error?.[index]}
 				/>
 			))}
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+			<div>
 				{showButtons && !disabled ? (
 					<Button
 						style={{ margin: '4px' }}

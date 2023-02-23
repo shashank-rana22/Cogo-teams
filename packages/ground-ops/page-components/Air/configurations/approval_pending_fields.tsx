@@ -14,7 +14,7 @@ export const ApprovalPendingFields = {
 		{
 			key   : 'awbNumber',
 			label : 'AWB',
-			span  : 1,
+			span  : 1.2,
 			func  : 'startCase',
 		},
 		{
@@ -55,7 +55,7 @@ export const ApprovalPendingFields = {
 		{
 			key   : 'status',
 			label : 'Status',
-			span  : 1.5,
+			span  : 1,
 			func  : 'handleStatus',
 		},
 

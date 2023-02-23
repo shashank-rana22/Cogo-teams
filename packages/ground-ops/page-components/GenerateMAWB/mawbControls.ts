@@ -6,7 +6,7 @@ const mawbControls = () => ({
 			label        : "Shipper's Name",
 			className    : 'primary lg',
 			showOptional : false,
-			placeholder  : "Shipper's name*",
+			placeholder  : "Enter Shipper's name",
 			span         : 5,
 			value        : '',
 			maxLength    : 50,
@@ -17,12 +17,12 @@ const mawbControls = () => ({
 		{
 			name        : 'shipper_address',
 			className   : 'textarea',
-			label       : "Shipper's Address:",
+			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 150,
 			row         : 4,
-			placeholder : 'Address...',
+			placeholder : 'Enter Address',
 			rules       : {
 				require: 'Shippers Address is Required',
 			},
@@ -35,7 +35,7 @@ const mawbControls = () => ({
 			showOptional : false,
 			value        : '',
 			span         : 5,
-			placeholder  : "Consignee's name*",
+			placeholder  : "Enter Consignee's name",
 			maxLength    : 50,
 			rules        : {
 				require: 'Consignees Name is Required',
@@ -44,21 +44,21 @@ const mawbControls = () => ({
 		{
 			name        : 'consignee_address',
 			className   : 'textarea',
-			label       : "Consignee's Address:",
+			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 150,
 			row         : 4,
-			placeholder : 'Address...',
+			placeholder : 'Enter Address',
 			rules       : {
 				require: 'Consignees Address is Required',
 			},
 		},
 		{
-			name        : 'origin_airport',
+			name        : 'origin',
 			type        : 'text',
 			className   : 'primary lg',
-			label       : 'Origin:',
+			label       : 'Origin',
 			placeholder : 'Enter Origin Airport',
 			span        : 5,
 			rules       : {
@@ -66,18 +66,226 @@ const mawbControls = () => ({
 			},
 		},
 		{
-			name        : 'destination_airport',
+			name        : 'destination',
 			type        : 'text',
 			className   : 'primary lg',
-			label       : 'Destination:',
+			label       : 'Destination',
 			placeholder : 'Enter Destination Airport',
 			span        : 5,
 			rules       : {
 				require: 'Destination Airport is Required',
 			},
 		},
+		{
+			name        : 'airline',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'By Carrier',
+			placeholder : 'Enter Airline',
+			span        : 5,
+			rules       : {
+				require: 'Carrier is Required',
+			},
+		},
+		{
+			name        : 'freight',
+			type        : 'select',
+			className   : 'primary lg',
+			label       : 'Shipment Type',
+			placeholder : 'Shipment Type',
+			options     : [
+				{ value: 'prepaid', label: 'Prepaid' },
+				{ value: 'collect', label: 'Collect' },
+			],
+			span  : 5,
+			rules : {
+				require: 'Freight is Required',
+			},
+		},
 	],
 	package: [
+		{
+			name               : 'package',
+			type               : 'fieldArray',
+			className          : 'primary lg',
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			span               : 12,
+			value              : [
+				{
+					package_count    : '',
+					gross            : '',
+					class            : 'q',
+					chargable_weight : '',
+					rate             : '',
+				},
+			],
+			controls: [
+				{
+					name        : 'package_count',
+					placeholder : 'Package Count',
+					label       : 'Package Count',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2,
+					rules       : {
+						require  : 'Package Count is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'gross',
+					placeholder : 'Gross Weight',
+					label       : 'Gross Weight',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2,
+					rules       : {
+						require  : 'Gross Weight is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'class',
+					placeholder : 'Class',
+					label       : 'Class',
+					type        : 'select',
+					options     : [
+						{ value: 'q', label: 'Q' },
+						{ value: 'a', label: 'A' },
+					],
+					className : 'primary lg',
+					span      : 2,
+					value     : 'q',
+					rules     : {
+						require: 'Class is Required',
+					},
+				},
+				{
+					name        : 'chargable_weight',
+					placeholder : 'Chargable Weight',
+					label       : 'Chargable Weight',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2,
+					rules       : {
+						require  : 'Chargable Weight is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'rate',
+					placeholder : 'Rate',
+					label       : 'Rate',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2,
+					rules       : {
+						require  : 'Rate is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+			],
+		},
+		{
+			name      : 'amount',
+			type      : 'text',
+			className : 'primary lg',
+			label     : 'Amount',
+			value     : '14-3-4525/0005',
+			span      : 5,
+			rules     : {
+				require: 'Amount is Required',
+			},
+		},
+		{
+			name        : 'remark',
+			className   : 'textarea',
+			label       : 'Remarks',
+			type        : 'textarea',
+			span        : 7,
+			maxLength   : 150,
+			placeholder : 'Remarks',
+			rows        : 3,
+			rules       : {
+				require: 'Remarks is Required',
+			},
+		},
+		{
+			name               : 'agent_other_charges',
+			label              : 'Due Agent Charges',
+			className          : 'primary lg',
+			span               : 5,
+			type               : 'fieldArray',
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			value              : [
+				{
+					code  : '',
+					price : '',
+				},
+			],
+			controls: [
+				{
+					name        : 'code',
+					type        : 'text',
+					className   : 'primary lg',
+					span        : 5,
+					placeholder : 'Enter Code',
+					rules       : {
+						require: 'Code is Required',
+					},
+				},
+				{
+					name        : 'price',
+					placeholder : 'Enter Price',
+					type        : 'number',
+					span        : 5,
+					rules       : {
+						require: 'Price is Required',
+					},
+				},
+			],
+		},
+		{
+			name               : 'carrier_other_charges',
+			label              : 'Due Carrier Charges',
+			className          : 'primary lg',
+			span               : 5,
+			type               : 'fieldArray',
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			value              : [
+				{
+					code  : '',
+					price : '',
+				},
+			],
+			controls: [
+				{
+					name        : 'code',
+					type        : 'text',
+					className   : 'primary lg',
+					span        : 5,
+					placeholder : 'Enter Code',
+					rules       : {
+						require: 'Code is Required',
+					},
+				},
+				{
+					name        : 'price',
+					placeholder : 'Enter Price',
+					type        : 'number',
+					span        : 5,
+					className   : 'primary lg',
+					rules       : {
+						require: 'Price is Required',
+					},
+				},
+			],
+		},
+	],
+	handling: [
 		{
 			name      : 'iata_code',
 			type      : 'text',
@@ -99,6 +307,85 @@ const mawbControls = () => ({
 			rules     : {
 				require: 'Accounting Information is Required',
 			},
+		},
+		{
+			name               : 'dimension',
+			label              : 'Dimensions (in cm)',
+			type               : 'fieldArray',
+			className          : 'primary lg',
+			span               : 12,
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			value              : [
+				{
+					length  : '',
+					breadth : '',
+					height  : '',
+					package : '',
+				},
+			],
+			controls: [
+				{
+					name        : 'length',
+					placeholder : 'Length',
+					label       : 'Length',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						require  : 'Length is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'width',
+					placeholder : 'Width',
+					label       : 'Width',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						require  : 'Width is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'height',
+					placeholder : 'Height',
+					label       : 'Height',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						require  : 'Height is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'packages',
+					placeholder : 'No of Packages',
+					label       : 'Number of Packages',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						require  : 'No of Packages is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+			],
+		},
+		{
+			name      : 'volumetric_weight',
+			type      : 'text',
+			className : 'primary lg',
+			label     : 'Volumetric Weight',
+			span      : 5,
+			rules     : {
+				require: 'Volumetric Weight is Required',
+			},
+		},
+		{
 		},
 		{
 			name      : 'declared_value_for_carriage',
@@ -174,147 +461,7 @@ const mawbControls = () => ({
 				require: 'Currency is Required',
 			},
 		},
-		{
-			name               : 'agent_other_charges',
-			label              : 'Other Charges Due Agent',
-			className          : 'primary lg',
-			type               : 'fieldArray',
-			showOptional       : false,
-			showButtons        : true,
-			noDeleteButtonTill : 1,
-			value              : [
-				{
-					code  : '',
-					price : '',
-				},
-			],
-			controls: [
-				{
-					name        : 'code',
-					type        : 'text',
-					className   : 'primary lg',
-					span        : 5,
-					placeholder : 'Enter Code',
-					rules       : {
-						require: 'Code is Required',
-					},
-				},
-				{
-					name        : 'price',
-					placeholder : 'Enter Price',
-					type        : 'number',
-					span        : 5,
-					rules       : {
-						require: 'Price is Required',
-					},
-				},
-			],
-		},
-		{
-			name               : 'carrier_other_charges',
-			label              : 'Other Charges Due Carrier',
-			className          : 'primary lg',
-			type               : 'fieldArray',
-			showOptional       : false,
-			showButtons        : true,
-			noDeleteButtonTill : 1,
-			value              : [
-				{
-					code  : '',
-					price : '',
-				},
-			],
-			controls: [
-				{
-					name        : 'code',
-					type        : 'text',
-					className   : 'primary lg',
-					span        : 2.5,
-					placeholder : 'Enter Code',
-					rules       : {
-						require: 'Code is Required',
-					},
-				},
-				{
-					name        : 'price',
-					placeholder : 'Enter Price',
-					type        : 'number',
-					span        : 2.5,
-					className   : 'primary lg',
-					rules       : {
-						require: 'Price is Required',
-					},
-				},
-			],
-		},
-		{
-			name               : 'dimension',
-			label              : 'Dimensions (in cm)',
-			type               : 'fieldArray',
-			className          : 'primary lg',
-			showOptional       : false,
-			showButtons        : true,
-			noDeleteButtonTill : 1,
-			span               : 4,
-			value              : [
-				{
-					length  : '',
-					breadth : '',
-					height  : '',
-					package : '',
-				},
-			],
-			controls: [
-				{
-					name        : 'length',
-					placeholder : 'Length',
-					label       : 'Length',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						require  : 'Length is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'width',
-					placeholder : 'Width',
-					label       : 'Width',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						require  : 'Width is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'height',
-					placeholder : 'Height',
-					label       : 'Height',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						require  : 'Height is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'packages',
-					placeholder : 'No of Packages',
-					label       : 'Number of Packages',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						require  : 'No of Packages is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-			],
-		},
+
 		{
 			name        : 'remark',
 			className   : 'primary lg',

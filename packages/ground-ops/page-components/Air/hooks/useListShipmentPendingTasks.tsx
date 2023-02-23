@@ -7,18 +7,20 @@ const useListShipmentPendingTasks = () => {
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequest('http://localhost:7002/airbender/pending-tasks/list', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequest('http://192.168.1.198:7002/airbender/pending-tasks/list', { manual: true });
 
-	const listAPi = async () => {
+	const listAPi = async (filter = {}) => {
 		if (searchValue) {
 			setPage(1);
 		}
+
 		try {
 			await trigger({
 				params: {
 					filters: {
 						q: (query || '').trim() || undefined,
 					},
+					...filter,
 					assignedStakeholder : 'service_ops1',
 					page,
 					sort_type           : 'desc',

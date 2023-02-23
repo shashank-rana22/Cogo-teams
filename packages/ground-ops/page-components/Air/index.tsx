@@ -39,6 +39,8 @@ const tabsComponentMapping = {
 
 function Air() {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
+	const [filters, setFilters] = useState({});
+	const [show, setShow] = useState(false);
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
@@ -49,8 +51,9 @@ function Air() {
 	const { data, loading, listAPi } = useListShipmentPendingTasks();
 
 	useEffect(() => {
-		if (activeTab === 'new_awb') { listAPi(); }
-	}, [activeTab]);
+		// if (activeTab === 'new_awb') { listAPi(); }
+		listAPi(filters);
+	}, [activeTab, JSON.stringify(filters)]);
 
 	return (
 		<div>
@@ -85,7 +88,7 @@ function Air() {
 					placeholder="Search by SID or AWB Number"
 					type="text"
 				/>
-				<Filters />
+				<Filters listAPi={listAPi} setFilters={setFilters} />
 			</div>
 			{ActiveTabComponent && <ActiveTabComponent key={activeTab} data={data} loading={loading} />}
 		</div>

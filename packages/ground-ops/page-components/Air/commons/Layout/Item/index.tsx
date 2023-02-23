@@ -21,6 +21,11 @@ function Item(props) {
 		rules,
 		label,
 	});
+
+	if (!type) {
+		return null;
+	}
+
 	const Element = getElementController(type);
 
 	const flex = ((span || 12) / 12) * 100 - 1;

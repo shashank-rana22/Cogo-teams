@@ -1,78 +1,55 @@
-import { Button } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
+import Layout from '../Air/commons/Layout';
+
+import filterControls from './filter-controls';
 import styles from './styles.module.css';
 
-function Filters() {
-	// const [sortBy, setSetSortBy] = useState('');
-	// const [tradeType, setTradeType] = useState('');
+function Filters({ listAPi = () => {}, setFilters = () => {} }) {
+	const [visible, setVisible] = useState(false);
+	const { control, handleSubmit, watch, setValue, formState:{ errors } } = useForm();
+	console.log('watch', watch());
 
-	// const [service, setService] = useState('');
-	// const [date, setDate] = useState('');
+	const onSubmit = (formValues) => {
+		setFilters((prev) => ({ ...prev, ...formValues }));
+	};
+	const popoverContent = () => (
+		<>
+			<Layout fields={filterControls} control={control} errors={errors} register={undefined} />
+			<div className={styles.footer_button}>
+				<Button themeType="secondary" onClick={() => setVisible(false)}>Cancel</Button>
+				<Button onClick={handleSubmit(onSubmit)}>Apply</Button>
 
+			</div>
+
+		</>
+	);
 	return (
 		<div className={styles.container}>
-			{/* <div className={styles.form_item}>
-				<Select
-					value={sortBy}
-					name="sort_by"
-					className={styles.select}
-					placeholder="Sort By"
-					isClearable
-					onChange={setSetSortBy}
-					options={[
-						{ label: 'Date', value: 'date' },
-						{ label: 'AWB', value: 'awb' },
-					]}
-				/>
-			</div>
-			<div className={styles.form_item}>
-				<Select
-					value={tradeType}
-					name="trade_type"
-					className={styles.select}
-					placeholder="Trade Type"
-					isClearable
-					onChange={setTradeType}
-					options={[
-						{ label: 'Import', value: 'import' },
-						{ label: 'Export', value: 'export' },
-					]}
-				/>
-			</div>
-			<div className={styles.form_item}>
-				<Select
-					value={service}
-					name="service"
-					className={styles.select}
-					placeholder="Service"
-					isClearable
-					onChange={setService}
-					options={[
-						{ label: 'FCL', value: 'fcl' },
-						{ label: 'LCL', value: 'lcl' },
-						{ label: 'AIR', value: 'air' },
-					]}
-				/>
-			</div>
-			<div className={styles.form_item}>
-				<Datepicker
-					placeholder="Date"
-					className={styles.date}
-					dateFormat="MM/dd/yyyy"
-					name="date"
-					onChange={setDate}
-					value={date}
-				/>
-			</div> */}
-			<div className={styles.form_item}>
-				<Button themeType="secondary" className={styles.filter_svg}>
-					Filter
+
+			<Popover
+				placement="bottom"
+				render={popoverContent()}
+				onClickOutside={() => setVisible(false)}
+				interactive
+				className={`${styles.filters_popover} ${styles.popover_container}`}
+				visible={visible}
+			>
+				<Button
+					themeType="tertiary"
+					size="lg"
+					className={styles.filter_svg}
+					onClick={() => setVisible((prev) => !prev)}
+				>
+					Filters
 					{' '}
 					<IcMFilter />
 				</Button>
-			</div>
+			</Popover>
+
 		</div>
 	);
 }

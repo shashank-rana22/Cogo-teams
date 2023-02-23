@@ -1,6 +1,7 @@
 import {
-	InputController, PillsController, SelectController, DatepickerController, TextAreaController,
+	InputController, PillsController, SelectController, DatepickerController, TextAreaController, AsyncSelectController,
 } from '@cogoport/forms';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
 const getElementController = (type = 'text') => {
@@ -25,6 +26,8 @@ const getElementController = (type = 'text') => {
 
 		case 'date_picker':
 			return DatepickerController;
+		case 'async-select':
+			return AsyncSelectController;
 
 		default:
 			return null;
