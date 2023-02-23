@@ -83,7 +83,7 @@ function useCreateVendorContact({
 				country_code: contact_details?.whatsapp_number?.country_code
 								|| contact_details?.whatsapp_country_code,
 			},
-			contact_proof_url: contact_details?.contact_proof_url.finalUrl || contact_details?.contact_proof_url,
+			contact_proof_url: contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
 		};
 
 		controls.forEach((field) => {

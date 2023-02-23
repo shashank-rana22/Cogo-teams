@@ -25,7 +25,7 @@ function ServicesUsers({
 					)
 				}
 
-				<CompanyPOC />
+				<CompanyPOC data={data} />
 
 				<ServicePOC />
 			</div>

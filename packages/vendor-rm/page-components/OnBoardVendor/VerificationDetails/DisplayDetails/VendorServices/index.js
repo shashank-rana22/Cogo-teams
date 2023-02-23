@@ -32,7 +32,8 @@ function VendorServices({
 												{filedsToShow[wantedField]}
 											</div>
 											<div className={styles.value}>
-												{startCase(val)}
+												{wantedField === 'cogoport_office_id'
+													? item?.cogoport_office?.display_name : startCase(val)}
 											</div>
 										</div>
 									);

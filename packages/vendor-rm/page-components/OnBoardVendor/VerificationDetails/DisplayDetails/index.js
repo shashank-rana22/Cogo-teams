@@ -16,20 +16,20 @@ const component_mapping = {
 	bank_details   : PaymentDetails,
 };
 
+const display = ({ title, body }) => {
+	const Component = component_mapping[title];
+
+	if (!Component) {
+		return null;
+	}
+
+	return <Component key={title} detail={body} />;
+};
+
 function DisplayDetails({
 	vendorInformation,
 	loading,
 }) {
-	const display = ({ title, body }) => {
-		const Component = component_mapping[title];
-
-		if (!Component) {
-			return null;
-		}
-
-		return <Component detail={body} />;
-	};
-
 	if (loading) {
 		return (
 			<LoadingState />
@@ -44,12 +44,7 @@ function DisplayDetails({
 
 	return (
 		<div className={styles.container}>
-			{/* {
-                Object.keys(vendorInformation).map((title) => display({ title, body: vendorInformation[title] }))
-            } */}
-			{
-				Object.keys(component_mapping).map((title) => display({ title, body: vendorInformation[title] }))
-			}
+			{Object.keys(component_mapping).map((title) => display({ title, body: vendorInformation[title] }))}
 		</div>
 	);
 }
