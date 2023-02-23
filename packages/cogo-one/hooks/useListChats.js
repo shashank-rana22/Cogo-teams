@@ -31,10 +31,8 @@ const useListChats = ({
 		list?.forEach((item) => {
 			const { created_at, updated_at, sent_updated_at, ...rest } = item.data() || {};
 			const userData = {
-				id              : item?.id,
-				created_at      : item.data().created_at || Date.now(),
-				updated_at      : item.data().updated_at || Date.now(),
-				sent_updated_at : item.data().sent_updated_at || Date.now(),
+				id         : item?.id,
+				created_at : item.data().created_at || Date.now(),
 				...rest,
 			};
 

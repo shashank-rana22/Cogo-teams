@@ -29,6 +29,17 @@
 
 .tabs {
 	margin: -12px -12px 0;
+	:global{
+		.ui_tab_container{
+
+			padding: 10px 16px !important;
+		}
+		.ui_tabs_list_title{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
 }
 
 .filters_container {
@@ -67,9 +78,12 @@
 }
 
 .pagination {
-	position: absolute;
-	right: 0;
-	bottom: -8px;
+	z-index: 1;
+	display: flex;
+	justify-content: end;
+	width: 100%;
+	padding-top: 8px;
+	background: #f9f9f9;
 }
 
 .empty {
