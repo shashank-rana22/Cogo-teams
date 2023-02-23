@@ -1,7 +1,8 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function useGetListCommunicationLog({ organizationId = null }) {
+	const [firstLoading, setFirstLoading] = useState(true);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_communication_logs',
 		method : 'get',
@@ -16,6 +17,7 @@ function useGetListCommunicationLog({ organizationId = null }) {
 				},
 			},
 		});
+		setFirstLoading(false);
 	};
 	useEffect(() => {
 		if (organizationId) {
@@ -28,6 +30,7 @@ function useGetListCommunicationLog({ organizationId = null }) {
 		listLoading : loading,
 		listData    : data,
 		fetchListLogApi,
+		firstLoading,
 	};
 }
 export default useGetListCommunicationLog;
