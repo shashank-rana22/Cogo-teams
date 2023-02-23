@@ -24,22 +24,16 @@ function MessageList({
 	activeCardId = '',
 	setActiveMessage,
 }) {
-	if (isEmpty(messagesList) && !messagesLoading) {
-		return (
-			<div className={styles.list_container}>
-				<div className={styles.empty_state}>
-					No Messages Yet..
-				</div>
-			</div>
-		);
-	}
-
 	function getShowChat({ user_name }) {
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
 			return searchName?.includes(searchValue?.toLowerCase());
 		}
 		return true;
+	}
+
+	if (messagesLoading) {
+		return <LoadingState />;
 	}
 
 	return (
@@ -79,103 +73,107 @@ function MessageList({
 				</div>
 			</div>
 
-			{messagesLoading
-				? <LoadingState />
-				: (
-					<div className={styles.list_container}>
-						{(messagesList || []).map((item) => {
-							const { chat_status = '' } = item || {};
-							const userData = getActiveCardDetails(item);
-							const {
-								user_name = '',
-								organization_name = '',
-								user_type = '',
-							} = userData || {};
+			{ isEmpty(messagesList) ? (
+				<div className={styles.list_container}>
+					<div className={styles.empty_state}>
+						No Messages Yet..
+					</div>
+				</div>
+			) : (
+				<div className={styles.list_container}>
+					{(messagesList || []).map((item) => {
+						const { chat_status = '' } = item || {};
+						const userData = getActiveCardDetails(item);
+						const {
+							user_name = '',
+							organization_name = '',
+							user_type = '',
+						} = userData || {};
 
-							const lastActive = new Date(item.new_message_sent_at);
-							const checkActiveCard = activeCardId === item?.id;
+						const lastActive = new Date(item.new_message_sent_at);
+						const checkActiveCard = activeCardId === item?.id;
 
-							const showOrganization = () => {
-								if (['public_website', 'public_cp'].includes(user_type)) {
-									return startCase(PLATFORM_MAPPING[user_type] || '');
-								}
-								return startCase(organization_name);
-							};
+						const showOrganization = () => {
+							if (['public_website', 'public_cp'].includes(user_type)) {
+								return startCase(PLATFORM_MAPPING[user_type] || '');
+							}
+							return startCase(organization_name);
+						};
 
-							const show = getShowChat({ user_name, item, appliedFilters, searchValue });
+						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
 
-							return (
-								show && (
-									<div
-										key={item?.id}
-										role="presentation"
-										className={cl`
+						return (
+							show && (
+								<div
+									key={item?.id}
+									role="presentation"
+									className={cl`
 												${styles.card_container} 
 												${checkActiveCard ? styles.active_card : ''} 
 												`}
-										onClick={() => setActiveMessage(item)}
-									>
-										<div className={styles.card}>
-											<div className={styles.user_information}>
-												<div className={styles.avatar_Container}>
-													<UserAvatar
-														type={item.channel_type}
-														imageSource={item.image}
-													/>
-													<div className={styles.user_details}>
-														<div className={styles.user_name}>
-															{startCase(user_name)}
-														</div>
-														<div className={styles.organisation}>
-															{showOrganization()}
-														</div>
+									onClick={() => setActiveMessage(item)}
+								>
+									<div className={styles.card}>
+										<div className={styles.user_information}>
+											<div className={styles.avatar_Container}>
+												<UserAvatar
+													type={item.channel_type}
+													imageSource={item.image}
+												/>
+												<div className={styles.user_details}>
+													<div className={styles.user_name}>
+														{startCase(user_name)}
+													</div>
+													<div className={styles.organisation}>
+														{showOrganization()}
 													</div>
 												</div>
+											</div>
 
-												<div className={styles.user_activity}>
-													<div className={styles.tags_conatiner}>
-														{!isEmpty(chat_status) && (
-															<div
-																className={cl`
+											<div className={styles.user_activity}>
+												<div className={styles.tags_conatiner}>
+													{!isEmpty(chat_status) && (
+														<div
+															className={cl`
 																${styles.tags}
 																${chat_status === 'warning' ? styles.warning : ''}
 																${chat_status === 'escalated' ? styles.escalated : ''}
 															`}
-															>
-																{startCase(chat_status)}
-															</div>
-														)}
-													</div>
-
-													<div className={styles.activity_duration}>
-														{dateTimeConverter(
-															Date.now() - Number(lastActive),
-															Number(lastActive),
-														)?.renderTime}
-													</div>
-												</div>
-											</div>
-
-											<div className={styles.content_div}>
-												<div className={styles.content}>
-													{item.last_message}
+														>
+															{startCase(chat_status)}
+														</div>
+													)}
 												</div>
 
-												{item.new_message_count > 0 && (
-													<div className={styles.new_message_count}>
-														{item.new_message_count > 100 ? '99+' : (
-															item.new_message_count
-														)}
-													</div>
-												)}
+												<div className={styles.activity_duration}>
+													{dateTimeConverter(
+														Date.now() - Number(lastActive),
+														Number(lastActive),
+													)?.renderTime}
+												</div>
 											</div>
 										</div>
+
+										<div className={styles.content_div}>
+											<div className={styles.content}>
+												{item.last_message}
+											</div>
+
+											{item.new_message_count > 0 && (
+												<div className={styles.new_message_count}>
+													{item.new_message_count > 100 ? '99+' : (
+														item.new_message_count
+													)}
+												</div>
+											)}
+										</div>
 									</div>
-								)
-							);
-						})}
-					</div>
-				)}
+								</div>
+							)
+						);
+					})}
+				</div>
+			)}
 		</>
 	);
 }

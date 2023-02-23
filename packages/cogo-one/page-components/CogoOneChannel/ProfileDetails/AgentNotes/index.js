@@ -30,7 +30,7 @@ function AgentNotes({
 		}
 	}, [customerId]);
 
-	const { noteData, fetchListNotes, listLoading } = useGetListNotes({
+	const { noteData, fetchListNotes, listLoading, firstLoading } = useGetListNotes({
 		active,
 		activeMessageCard,
 		activeTab,
@@ -76,13 +76,13 @@ function AgentNotes({
 		setShowForm(true);
 	};
 
-	if (isEmpty(list) && !showForm && !listLoading) {
+	if (isEmpty(list) && !showForm && !listLoading && !firstLoading) {
 		return <EmptyState type="notes" handleNotes={handleNotes} />;
 	}
 
 	return (
 		(showForm || customerId)
-        && (listLoading ? (
+        && (firstLoading ? (
 	<div className={styles.loader_div}>
 		<Loader
 			themeType="primary"
@@ -123,11 +123,11 @@ function AgentNotes({
 			<Toggle
 				name="a5"
 				size="sm"
-				disabled={false}
 				offLabel="All Notes"
 				onLabel="My Notes"
 				checked={active}
 				onChange={() => setActive((p) => !p)}
+				disabled={listLoading}
 			/>
 		</div>
 		<div className={styles.wrap}>
@@ -135,6 +135,7 @@ function AgentNotes({
 				list={list}
 				handleClick={handleClick}
 				handleDelete={handleDelete}
+				listLoading={listLoading}
 			/>
 		</div>
 	</div>

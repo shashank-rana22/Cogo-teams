@@ -12,7 +12,6 @@ function BankDatailsModal({
 	loadingOnRaise,
 }) {
 	const { status, userIncidentStatus, userNotes } = itemData || {};
-	const { fileName, finalUrl } = selectedFile || {};
 	const { data } = itemData || {};
 	const { organization, bankRequest } = data || {};
 	const { bankHolderName, accountNumber, ifscCode, remark, bankName, branchName, documentUrls } = bankRequest || {};
@@ -155,13 +154,10 @@ function BankDatailsModal({
 					&& name === 'Raise Again'
 					&& (
 						<FileUploader
-							value={finalUrl}
-							docName={fileName}
-							fileName={fileName}
+							value={selectedFile}
 							onChange={setSelectedFile}
 							showProgress
 							draggable
-							fileLink={finalUrl}
 							multipleUploadDesc="Upload Invoice"
 						/>
 					)}
@@ -172,7 +168,7 @@ function BankDatailsModal({
 					{status === 'REJECTED' && userIncidentStatus === 'PENDING_ACTION' && name === 'Raise Again'
 						? (
 							<Button
-								disabled={finalUrl === undefined || loadingOnRaise}
+								disabled={selectedFile === undefined || loadingOnRaise}
 								onClick={() => {
 									onRaiseAgain();
 								}}

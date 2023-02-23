@@ -1,8 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
+	const [firstLoading, setFirstLoading] = useState(true);
 	const { profile } = useSelector((state) => state);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_omnichannel_notes',
@@ -22,6 +23,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 					},
 				},
 			});
+			setFirstLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -36,6 +38,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 		listLoading : loading,
 		noteData    : data,
 		fetchListNotes,
+		firstLoading,
 	};
 }
 export default useGetListNotes;

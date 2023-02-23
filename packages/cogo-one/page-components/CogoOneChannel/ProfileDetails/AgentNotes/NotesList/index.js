@@ -1,4 +1,4 @@
-import { ButtonIcon } from '@cogoport/components';
+import { ButtonIcon, Placeholder } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 
@@ -8,12 +8,32 @@ function NotesList({
 	list = [],
 	handleClick = () => {},
 	handleDelete = () => {},
+	listLoading,
 }) {
-	return (
-		isEmpty(list) ? (
+	if (isEmpty(list)) {
+		return (
 			<div className={styles.empty_div}>
 				No Data Found...
 			</div>
+		);
+	}
+	return (
+		listLoading ? (
+			[(list || []).length].map(() => (
+				<div className={styles.notes_container}>
+					<div className={styles.content}>
+						<Placeholder height="18px" width="130px" />
+					</div>
+					<div className={styles.footer}>
+						<div className={styles.note_time}>
+							<Placeholder height="14px" width="80px" />
+						</div>
+						<div className={styles.created_by}>
+							<Placeholder height="14px" width="30px" />
+						</div>
+					</div>
+				</div>
+			))
 		)
 			: (
 				<>
