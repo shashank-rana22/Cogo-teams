@@ -40,10 +40,15 @@ const useVendorInfo = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return (
+	const refetchVendorInfo = () => {
+		VendorInfo();
+	};
+
+	return {
 		getVendorLoading,
-		data
-	);
+		data: data?.data,
+		refetchVendorInfo,
+	};
 };
 
 export default useVendorInfo;

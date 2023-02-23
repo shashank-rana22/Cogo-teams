@@ -6,22 +6,33 @@ import useEditProfile from '../../hooks/useEditProfile';
 
 import styles from './styles.module.css';
 
-function Top1({ vendor_details = {} }) {
+function Top1({ vendor_details = {}, refetchVendorInfo = () => {} }) {
 	const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
-	const { control, newFields, handleSubmit, errors } = useEditProfile({ vendor_details });
+	const { kyc_status } = vendor_details;
+
+	const {
+		control,
+		newFields,
+		handleSubmit,
+		errors,
+		onSubmit,
+		loading,
+	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal });
 
 	return (
 		<div className={styles.top1}>
 			Profile
-			<Button
-				size="md"
-				themeType="secondary"
-				onClick={() => { setShowEditProfileModal(!showEditProfileModal); }}
-			>
-				Edit Profile
+			{kyc_status !== 'verified' ? (
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={() => { setShowEditProfileModal(!showEditProfileModal); }}
+				>
+					Edit Profile
 
-			</Button>
+				</Button>
+			) : null}
 
 			<Modal
 				show={showEditProfileModal}
@@ -47,9 +58,10 @@ function Top1({ vendor_details = {} }) {
 						Cancel
 					</Button>
 					<Button
+						type="submit"
 						size="md"
-						onClick={handleSubmit}
-						// loading={loading}
+						onClick={handleSubmit(onSubmit)}
+						loading={loading}
 					>
 						submit
 					</Button>

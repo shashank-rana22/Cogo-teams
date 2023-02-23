@@ -9,7 +9,7 @@ function PaymentDetails({ data = {} }) {
 	// eslint-disable-next-line max-len
 	const address = 'Prabhushankar Ramanayak ,Sahil Import Export Private Limited, 6th Floor, A Wing, Ackruti Trade Center, Kondivita, Andheri East,Mumbai - 400069, Maharashtra, India.';
 	return (
-		data.bank_details.map((i) => (
+		(data.bank_details || []).map((i) => (
 			<>
 				<div className={styles.cont}>
 					<div className={styles.box_info}>
