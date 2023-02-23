@@ -169,6 +169,9 @@ const allocation = {
 			service_name : 'allocation',
 		},
 	],
+	kam_expertise: [
+
+	],
 };
 
 export default allocation;

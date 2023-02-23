@@ -7,6 +7,10 @@ const allocations = {
 		navigation : 'allocations-core_engine',
 		isMainNav  : false,
 	},
+	'/[partner_id]/allocation/kam-expertise': {
+		navigation : 'allocations-kam_expertise',
+		isMainNav  : false,
+	},
 };
 
 module.exports = allocations;

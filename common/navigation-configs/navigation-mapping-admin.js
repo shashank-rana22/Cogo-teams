@@ -1724,6 +1724,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
 			},
+			{
+				key           : 'allocations-kam_expertise',
+				title         : 'Kam Expertise',
+				href          : '/v2/allocation/kam-expertise',
+				as            : '/v2/allocation/kam-expertise',
+				possible_apis : apis.kam_expertise,
+			},
 		],
 	},
 	awb_inventory: {
