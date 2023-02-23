@@ -1,6 +1,8 @@
 import { Pill, Button } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { IcMDelete } from '@cogoport/icons-react';
+import { useRequest } from '@cogoport/request';
+import { startCase, format } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -9,13 +11,13 @@ const addedQuestionsColumns = [
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
 			<div className={styles.question}>
-				{items?.question}
+				{items?.question_abstract}
 			</div>
 		),
 	},
 	{
 		Header   : 'TOPICS',
-		accessor : (items) => (items?.topics.length > 0 ? (
+		accessor : (items) => (items?.topics?.length > 0 ? (
 			<div className={styles.topics}>
 				{items.topics.map((topic) => (
 					<Pill size="sm" color="green">{startCase(topic)}</Pill>
@@ -25,7 +27,7 @@ const addedQuestionsColumns = [
 	},
 	{
 		Header   : 'TAGS',
-		accessor : (items) => (items?.tags.length > 0 ? (
+		accessor : (items) => (items?.tags?.length > 0 ? (
 			<div className={styles.tags}>
 				{items.tags.map((tag) => (
 					<Pill size="sm" color="green">{startCase(tag)}</Pill>
@@ -37,6 +39,7 @@ const addedQuestionsColumns = [
 		Header   : 'ACTIONS',
 		accessor : () => (
 			<div className={styles.buttonContainer}>
+				<IcMDelete height={20} width={20} style={{ marginRight: 8 }} />
 				<Button themeType="secondary" size="sm" style={{ marginRight: 8 }}>EDIT</Button>
 				<Button themeType="primary" size="sm">VIEW</Button>
 			</div>
@@ -63,11 +66,14 @@ const requestedQuestionsColumns = [
 	},
 	{
 		Header   : 'CREATED AT',
-		accessor : (items) => (
-			<div>
-				{items?.created_at || Date()}
-			</div>
-		),
+		accessor : (items) => {
+			const formatDate = format(items?.created_at, 'dd MMM yyyy');
+			return (
+				<div>
+					{formatDate}
+				</div>
+			);
+		},
 	},
 	{
 		Header   : 'ACTIONS',
@@ -79,75 +85,35 @@ const requestedQuestionsColumns = [
 	},
 ];
 
-const data = [
-	{
-		question   : 'How long will it take to receive B/L after payment?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Ashul Soni',
-	},
-	{
-		question   : 'What are the payment terms?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Hrishikesh Kulkarni',
-	},
-	{
-		question   : 'How long will it take to receive B/L after payment?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Ashul Soni',
-	},
-	{
-		question   : 'When will I receive Booking Note?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Shivam Singh',
-	},
-	{
-		question : 'How long will it take to receive B/L after payment?',
-		topics   : ['discover_rates', 'shipment', 'checkout', 'discover_rates',
-			'shipment', 'checkout', 'discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party', 'trade_party', 'spot_search', 'trade_party'],
-		created_by : 'Shivam Singh',
-	},
-	{
-		question   : 'What is the process of shipment booking?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Bhaskar Priyadarshi',
-	},
-	{
-		question   : 'What are Incoterms?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Rishi Agarwal',
-	},
-	{
-		question   : 'How long will it take to receive B/L after payment?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Rishi Agarwal',
-	},
-	{
-		question   : 'How long will it take to receive B/L after payment?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Bhaskar Priyadarshi',
-	},
-	{
-		question   : 'When will I receive Booking Note?',
-		topics     : ['discover_rates', 'shipment', 'checkout'],
-		tags       : ['spot_search', 'trade_party'],
-		created_by : 'Hrishikesh Kulkarni',
-	},
-];
-
 const useQuestionList = () => {
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
 
+	const [{ data: questionList, loading }, trigger] = useRequest({
+		method : 'get',
+		url    : '/list_faq_questions',
+	}, { manual: true });
+
+	const getQuestionsList = async () => {
+		try {
+			await trigger({
+				params: {
+					filters: {},
+
+				},
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	useEffect(() => {
+		getQuestionsList();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const columns = activeList !== 'requested' ? addedQuestionsColumns : requestedQuestionsColumns;
+	const { list: data = [] } = questionList || [];
 
 	return {
 		data,
@@ -156,6 +122,7 @@ const useQuestionList = () => {
 		setSearchInput,
 		activeList,
 		setActiveList,
+		questionListLoading: loading,
 	};
 };
 
