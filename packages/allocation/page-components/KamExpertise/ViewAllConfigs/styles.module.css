@@ -23,6 +23,7 @@
 
 .back_text{
     font-size: 16px;
+    cursor: pointer;
 }
 
 .icon_container{

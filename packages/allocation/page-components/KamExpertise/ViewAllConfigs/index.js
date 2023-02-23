@@ -1,5 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import KamExpertiseScoreConfig from './components/KamExpertiseScore';
@@ -20,7 +21,12 @@ const TAB_PANEL_MAPPING = {
 };
 
 function ViewAllConfigs() {
+	const router = useRouter();
 	const [activeConfigTab, setActiveConfigTab] = useState('kam-expertise-score-config');
+
+	const onClickBack = () => {
+		router.push('/allocation/kam-expertise');
+	};
 
 	return (
 		<section className={styles.main_container}>
@@ -31,7 +37,7 @@ function ViewAllConfigs() {
 					<IcMArrowBack width={16} height={16} />
 				</div>
 
-				<div className={styles.back_text}>
+				<div className={styles.back_text} role="presentation" onClick={onClickBack}>
 					Back to Dashboard
 				</div>
 			</div>
