@@ -87,7 +87,21 @@ opacity: 0.6;
 		}
 	}
 }
-.pills {
-	margin-left:1%;
-	font-weight: 1000;
+
+
+.flex_items{
+	display: flex;
+	align-items: center;
+}
+
+.like_container {
+	margin-left:8px;
+	margin-top:4px;
+	cursor:pointer;
+}
+
+.dislike_container{
+	margin-left:8px;
+	margin-top:4px;
+	cursor:pointer;
 }
