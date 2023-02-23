@@ -27,7 +27,7 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 					size="lg"
 					themeType="tertiary"
 					style={{ marginRight: '60px' }}
-					// disabled={loading}
+					onClick={() => setShowForm('')}
 				>
 					Cancel
 
@@ -37,7 +37,6 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 					size="lg"
 					themeType="accent"
 					onClick={handleSubmit(onSubmit)}
-					// disabled={loading}
 				>
 					Save
 				</Button>
