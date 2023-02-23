@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function MarkAsClosed({ data = {} }) {
-	const { updateChat = () => {}, loading = false } = data || {};
+function MarkAsClosed({ data = {}, loading = false }) {
+	const { updateChat = () => {} } = data || {};
 	const [selectPill, setSelectPill] = useState('');
 	const [inputValue, setInputValue] = useState('');
 

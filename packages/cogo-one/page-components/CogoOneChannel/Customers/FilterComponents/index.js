@@ -22,9 +22,10 @@ function getDefaultValues({ filters }) {
 }
 
 function FilterComponents({
-	setFilterVisible = () => { },
-	setAppliedFilters = () => { },
+	setFilterVisible = () => {},
+	setAppliedFilters = () => {},
 	appliedFilters = {},
+	setActiveCardId = () => {},
 }) {
 	const defaultValues = getDefaultValues({ filters: appliedFilters });
 	const {
@@ -49,6 +50,7 @@ function FilterComponents({
 	};
 
 	const handleClick = () => {
+		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
 	};
