@@ -27,7 +27,11 @@ function AgentActivity() {
 					{agentActivityStatus.map((item) => {
 						const { nos, text, icon, key } = item;
 						return (
-							<button className={styles.agent_nos_box} onClick={() => setActiveTab(key)}>
+							<button
+								className={`${styles.agent_nos_box} 
+								${activeTab === key ? styles.agent_active_box : ''}`}
+								onClick={() => setActiveTab(key)}
+							>
 								<div className={styles.agent_nos_box_uppersection}>
 									<div className={styles.agents_nos}>{nos}</div>
 									<div className={styles.corner_icon}>{icon}</div>

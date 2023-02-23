@@ -13,7 +13,7 @@ import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
 import TimeSpent from './TimeSpent';
 
-function AgentDashboard() {
+function AgentDashboard({ calendarType, setCalendarType }) {
 	const [activeTab, setActiveTab] = useState('day');
 	// const { user } = useSelector(({ profile }) => profile);
 	const {
@@ -26,10 +26,15 @@ function AgentDashboard() {
 
 	return (
 		<div className={styles.prime_container}>
-			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Header
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				calendarType={calendarType}
+				setCalendarType={setCalendarType}
+			/>
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					<Calender />
+					<Calender calendarType={calendarType} />
 					<LineChart />
 					<div className={styles.statistics}>
 						<Statistics />

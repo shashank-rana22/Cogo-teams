@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import { STATS } from '../../configurations/dummyStatisticsData';
 
 import styles from './styles.module.css';
 
-function Statistics() {
+function Statistics({ loading = false }) {
 	return (
 		<>
 			{STATS.map((item) => {
@@ -21,7 +22,10 @@ function Statistics() {
 							{
 							calls.data.map((itm) => (
 								<div className={styles.time_durations}>
-									<div className={styles.time_durations_header}>{itm.duration}</div>
+									{loading
+										? <Placeholder height="30px" width="100px" />
+										: <div className={styles.time_durations_header}>{itm.duration}</div>}
+
 									<div className={styles.time_durations_text}>{itm.text}</div>
 								</div>
 							))
@@ -41,7 +45,11 @@ function Statistics() {
 										<div className={styles.social_name}>{ stat.channel}</div>
 
 									</div>
-									<div className={styles.customer_nos}>{stat.customer_nos}</div>
+
+									{loading
+										? <Placeholder height="30px" width="100px" />
+										: <div className={styles.customer_nos}>{stat.customer_nos}</div>}
+
 								</div>
 							))
 						}

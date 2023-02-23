@@ -41,6 +41,10 @@
 	width: 100%;
 }
 
+.agent_active_box {
+	background-color: #fdebe9;
+}
+
 .corner_icon {
 	position: relative;
 	top: 2px;
