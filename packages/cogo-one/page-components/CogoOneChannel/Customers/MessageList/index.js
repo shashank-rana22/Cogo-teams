@@ -40,7 +40,7 @@ function MessageList({
 		const { user_name = '' } = item;
 		if (searchValue) {
 			const searchName = user_name?.toLowerCase();
-			return searchName?.includes(searchValue);
+			return searchName?.includes(searchValue?.toLowerCase());
 		}
 		return true;
 	}
@@ -93,7 +93,7 @@ function MessageList({
 							user_type = '',
 						} = userData || {};
 
-						const lastActive = new Date(item.updated_at);
+						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
 
 						const showOrganization = () => {
@@ -138,9 +138,9 @@ function MessageList({
 													{!isEmpty(chat_status) && (
 														<div
 															className={cl`
-												${styles.tags}
-												${chat_status === 'warning' ? styles.warning : ''}
-												${chat_status === 'escalated' ? styles.escalated : ''}
+															${styles.tags}
+															${chat_status === 'warning' ? styles.warning : ''}
+															${chat_status === 'escalated' ? styles.escalated : ''}
 												`}
 														>
 															{startCase(chat_status)}
@@ -168,7 +168,6 @@ function MessageList({
 													{item.new_message_count > 100 ? '99+' : (
 														item.new_message_count
 													)}
-
 												</div>
 											)}
 										</div>

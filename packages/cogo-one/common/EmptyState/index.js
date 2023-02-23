@@ -1,8 +1,8 @@
-import { Avatar, Modal, Button, Input } from '@cogoport/components';
-import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
+import { Avatar } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import { PLATFORM_MAPPING } from '../../constants';
+import ProfileNumberModal from '../../page-components/CogoOneChannel/ProfileDetails/AgentDetails/ProfileNumberModal';
 
 import styles from './styles.module.css';
 
@@ -19,6 +19,8 @@ function EmptyState({
 	showAddNumber = false,
 	handleSubmit = () => {},
 	leadLoading = false,
+	showError = false,
+	setShowError = () => {},
 }) {
 	const handleClick = () => {
 		setShowAddNumber(true);
@@ -141,47 +143,16 @@ function EmptyState({
 	return (
 		<>
 			<div className={styles.empty_state}>{renderEmpty()}</div>
-			{showAddNumber && (
-				<Modal
-					show={showAddNumber}
-					size="sm"
-					onClose={() => setShowAddNumber(false)}
-					className={styles.styled_ui_modal_dialog}
-					scroll={false}
-				>
-					<Modal.Header title="Profile Details" />
-					<Modal.Body>
-						<div className={styles.wrapper}>
-							<div className={styles.styled_label}>Enter Name</div>
-							<Input
-								size="sm"
-								placeholder="Enter name"
-								value={profileValue?.name}
-								onChange={(a) => setProfilevalue((p) => ({ ...p, name: a }))}
-							/>
-						</div>
-						<div className={styles.wrapper}>
-							<div className={styles.styled_label}>Enter Phone Number</div>
-							<SelectMobileNumber
-								value={profileValue}
-								onChange={(val) => setProfilevalue(val)}
-								inputType="number"
-							/>
-						</div>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							size="sm"
-							themeType="accent"
-							onClick={handleSubmit}
-							disabled={leadLoading}
-						>
-							Submit
-						</Button>
-					</Modal.Footer>
-				</Modal>
-			)}
-
+			<ProfileNumberModal
+				leadLoading={leadLoading}
+				handleSubmit={handleSubmit}
+				showAddNumber={showAddNumber}
+				setProfilevalue={setProfilevalue}
+				setShowAddNumber={setShowAddNumber}
+				profileValue={profileValue}
+				showError={showError}
+				setShowError={setShowError}
+			/>
 		</>
 	);
 }

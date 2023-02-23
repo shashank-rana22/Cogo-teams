@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
@@ -39,12 +40,16 @@ const useListOrganizations = ({ orgId = null }) => {
 		if (isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}`;
 
-			const PRM_ROUTE_PAGE = prm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${prm}&source=communication` : ORG_PAGE_URL;
+			const PRM_ROUTE_PAGE = prm
+				? `${ORG_PAGE_URL}?omniChannelActiveTab=${prm}&source=communication`
+				: ORG_PAGE_URL;
 			// eslint-disable-next-line no-undef
 			window.open(PRM_ROUTE_PAGE, '_blank');
 		} else {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${orgId}`;
-			const CRM_ROUTE_PAGE = crm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${crm}&source=communication` : ORG_PAGE_URL;
+			const CRM_ROUTE_PAGE = crm
+				? `${ORG_PAGE_URL}?omniChannelActiveTab=${crm}&source=communication`
+				: ORG_PAGE_URL;
 			// eslint-disable-next-line no-undef
 			window.open(CRM_ROUTE_PAGE, '_blank');
 		}

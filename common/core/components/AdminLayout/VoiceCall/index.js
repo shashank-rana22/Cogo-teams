@@ -152,6 +152,7 @@ function VoiceCall() {
 					status={status}
 					handleEnd={handleEnd}
 					durationTime={durationTime}
+					callLoading={callLoading}
 				/>
 			)}
 			{!isEmpty(orgId) && !isEmpty(userId) && showFeedbackModal && (

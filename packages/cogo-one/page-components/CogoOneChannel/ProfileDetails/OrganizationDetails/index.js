@@ -10,8 +10,8 @@ import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMessageData = {}, ORG_PAGE_URL = '' }) {
-	const { organization_id:messageOrgId = '' } = FormattedMessageData || {};
+function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, formattedMessageData = {}, ORG_PAGE_URL = '' }) {
+	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
@@ -63,16 +63,23 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 				<>
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
-							<Placeholder width="220px" height="25px" />
-							<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
+							<Placeholder width="220px" height="20px" />
+							{/* <Placeholder width="120px" height="15px" margin="10px 0 0 0 " /> */}
 						</div>
 						<div className={styles.status}>
 							<Placeholder width="60px" height="15px" />
 						</div>
 					</div>
 					<div className={styles.name}>
-						<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
-						<Placeholder width="80px" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="120px" height="30px" margin="10px 0 0 0 " />
+						{/* <Placeholder width="80px" height="15px" margin="10px 0 0 0 " /> */}
+					</div>
+					<div className={styles.agent_title}>Agent Details</div>
+
+					<div className={styles.agent_loading_state}>
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
 					</div>
 				</>
 			) : (
@@ -151,10 +158,8 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 				</div>
 			) : (
 				<ListPromos />
-
 			)}
 		</div>
-
 	);
 }
 export default OrganizationDetails;

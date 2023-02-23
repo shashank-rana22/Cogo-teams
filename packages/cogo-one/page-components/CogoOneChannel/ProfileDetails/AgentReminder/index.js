@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Toast, Button, Input, Datepicker, Textarea } from '@cogoport/components';
+import { Toast, Button, Input, Datepicker, Textarea, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -10,9 +10,9 @@ import useGetListCommunicationLog from '../../../../hooks/useGetListCommunicatio
 import PreviousReminder from './PreviousReminder';
 import styles from './styles.module.css';
 
-function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, FormattedMessageData, customerId }) {
+function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formattedMessageData, customerId }) {
 	const [showReminder, setShowReminder] = useState(false);
-	const { organization_id:messageOrgId = null, user_id: messageUserId = null } = FormattedMessageData || {};
+	const { organization_id:messageOrgId = null, user_id: messageUserId = null } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = null, user_id: voiceUserId = null } = activeVoiceCard || {};
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 	const userId = activeTab === 'message' ? messageUserId : voiceUserId;
@@ -65,7 +65,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 		setShowReminder(true);
 	};
 
-	if (isEmpty(list) && !showReminder) {
+	if (isEmpty(list) && !showReminder && !listLoading) {
 		return (
 			<EmptyState
 				type="reminder"
@@ -78,62 +78,72 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, Formatte
 
 	return (
 		(showReminder || organizationId) && (
-			<div className={styles.container}>
-				<div className={styles.title}>Set Reminder</div>
-				<div className={styles.wrapper}>
-					<div className={styles.label}>Title</div>
-					<Input
-						size="md"
-						placeholder="Type here..."
-						required
-						value={inputValue?.title}
-						onChange={(val) => setInputValue((q) => ({ ...q, title: val }))}
+			listLoading ? (
+				<div className={styles.loader_div}>
+					<Loader
+						themeType="primary"
+						style={{ width: '50px', display: 'flex', justifyContent: 'center', alignItem: 'center' }}
 					/>
 				</div>
-				<div className={styles.date_wrapper}>
-					<div className={styles.label}>Select a date</div>
-					<Datepicker
-						placeholder="Enter Date"
-						dateFormat="MM/dd/yyyy hh:mm a"
-						showTimeSelect
-						name="date"
-						onChange={setDate}
-						value={date}
-						use12hourformat={false}
-					/>
+			) : (
+
+				<div className={styles.container}>
+					<div className={styles.title}>Set Reminder</div>
 					<div className={styles.wrapper}>
-						<div className={styles.label}>Summary</div>
-						<Textarea
-							name="a5"
+						<div className={styles.label}>Title</div>
+						<Input
 							size="md"
-							placeholder="Description"
-							value={inputValue?.description}
-							onChange={(val) => setInputValue((q) => ({ ...q, description: val }))}
+							placeholder="Type here..."
+							required
+							value={inputValue?.title}
+							onChange={(val) => setInputValue((q) => ({ ...q, title: val }))}
 						/>
 					</div>
-
-					<div className={styles.button_container}>
-						<div
-							role="presentation"
-							className={styles.reset_button}
-							onClick={handleReset}
-						>
-							Reset
-						</div>
-						<div className={styles.set_button}>
-							<Button
+					<div className={styles.date_wrapper}>
+						<div className={styles.label}>Select a date</div>
+						<Datepicker
+							placeholder="Enter Date"
+							dateFormat="MM/dd/yyyy hh:mm a"
+							showTimeSelect
+							name="date"
+							onChange={setDate}
+							value={date}
+							use12hourformat={false}
+						/>
+						<div className={styles.wrapper}>
+							<div className={styles.label}>Summary</div>
+							<Textarea
+								name="a5"
 								size="md"
-								themeType="primary"
-								onClick={handleSubmit}
-								disabled={loading}
-							>
-								Set reminder
-							</Button>
+								placeholder="Description"
+								value={inputValue?.description}
+								onChange={(val) => setInputValue((q) => ({ ...q, description: val }))}
+							/>
 						</div>
+
+						<div className={styles.button_container}>
+							<div
+								role="presentation"
+								className={styles.reset_button}
+								onClick={handleReset}
+							>
+								Reset
+							</div>
+							<div className={styles.set_button}>
+								<Button
+									size="md"
+									themeType="primary"
+									onClick={handleSubmit}
+									disabled={loading}
+								>
+									Set reminder
+								</Button>
+							</div>
+						</div>
+						<PreviousReminder listData={listData} />
 					</div>
-					<PreviousReminder listData={listData} listLoading={listLoading} />
 				</div>
-			</div>
+			)
 		)
 	);
 }

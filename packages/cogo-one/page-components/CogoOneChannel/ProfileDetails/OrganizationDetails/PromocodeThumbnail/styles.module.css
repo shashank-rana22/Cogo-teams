@@ -40,7 +40,6 @@
 .tooltip_div {
 	display: flex;
 	justify-content: center;
-
 }
 
 .terms_conditions {
@@ -75,7 +74,7 @@
 	right: -35px;
 }
 
-.promoCode {
+.promo_code {
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -10,7 +10,7 @@ function useUpdateAssignedChat({ activeMessageCard = {}, onClose = () => {}, for
 		user_id = null,
 		mobile_no = '',
 		lead_user_id = null,
-		 organization_id = null,
+		organization_id = null,
 		sender = null,
 	} = formattedData || {};
 	const { channel_type, id } = activeMessageCard || {};

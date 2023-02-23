@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useCreateLeadProfile({ updateLeaduser }) {
+function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_lead_user_profile',
 		method : 'post',
@@ -12,14 +12,10 @@ function useCreateLeadProfile({ updateLeaduser }) {
 		try {
 			const res = await trigger({
 				data: {
-					name,
-					mobile_country_code : country_code,
+					token               : '',
 					mobile_number       : number,
-					profile_data        : [{
-						channel_type         : 'platform_channel',
-						channel_account_type : name,
-						channel_accountid    : number,
-					}],
+					mobile_country_code : country_code,
+					name,
 				},
 			});
 			if (res?.data?.lead_user_id) {
@@ -31,6 +27,7 @@ function useCreateLeadProfile({ updateLeaduser }) {
 				updateLeaduser(data);
 			}
 			Toast.success('Successfully Created');
+			setShowError(false);
 		} catch (error) {
 			Toast.error(error?.message);
 		}

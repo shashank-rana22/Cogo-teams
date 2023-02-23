@@ -1,52 +1,59 @@
 .container {
-    padding: 0 30px;
-    min-height: 400px;
+	min-height: 400px;
+	padding: 0 30px;
 }
+
 .heading {
-    font-size: 16px;
-    font-weight: 600;
-    color: #000000;
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
 }
+
 .controller_div {
-    padding-bottom: 10px;
-    :global {
-        .ui_radio_container {
-            display: block !important;
-            padding: 0 !important;
-        }
-        .ui_radiogroup_container {
-            padding: 0 !important;
-        }
-    }
+	padding-bottom: 10px;
+
+	:global {
+		.ui_radio_container {
+			display: block !important;
+			padding: 0 !important;
+		}
+
+		.ui_radiogroup_container {
+			padding: 0 !important;
+		}
+	}
 }
+
 .styled_controller {
-    padding: 0 20px 10px 20px;
-    max-width: 400px;
+	max-width: 400px;
+	padding: 0 20px 10px;
 }
 
 .label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #221f20;
-    margin-top: 30px;
-    padding: 10px;
-    border-top: 1px solid #e0e0e0;
+	padding: 10px;
+	margin-top: 30px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+	border-top: 1px solid #e0e0e0;
 }
 
 .button_container {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 0 30px 20px 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 0 30px 20px 0;
 }
+
 .allowed_div {
-    min-height: 100px;
+	min-height: 100px;
 }
+
 .error_text {
-    color: #d22b2b;
-    font-size: 11px;
-    font-weight: 600;
+	font-size: 11px;
+	font-weight: 600;
+	color: #d22b2b;
 }

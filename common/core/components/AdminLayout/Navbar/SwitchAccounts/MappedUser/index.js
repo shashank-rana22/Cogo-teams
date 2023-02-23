@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Avatar } from '@cogoport/components';
 import { IcMDelete, IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -19,7 +20,7 @@ function MappedUser({
 	checkIfSessionExpiring,
 	timeLeft,
 }) {
-	const profile_name = user?.user_data?.name?.split(' ');
+	const profile_name = user?.user_data?.name;
 
 	const { removeProfile = () => {}, deleteLoading, updateLoading, switchLoading } = useGetAllActions({
 		user,
@@ -97,10 +98,7 @@ function MappedUser({
 								className="img"
 							/>
 						) : (
-							<span>
-								{profile_name?.[0]?.[0]?.toUpperCase() || null}
-								{profile_name?.[1]?.[0]?.toUpperCase() || null}
-							</span>
+							<Avatar personName={profile_name} />
 						)}
 					</div>
 					<div>

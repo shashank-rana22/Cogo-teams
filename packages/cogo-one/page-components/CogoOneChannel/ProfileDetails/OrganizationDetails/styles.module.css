@@ -121,3 +121,13 @@
 	font-size: 16px;
 	color: #828282;
 }
+
+.agent_loading_state {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 0 9px 22px;
+	margin-top: 12px;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}

@@ -15,7 +15,7 @@ function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
 	activeVoiceCard = {},
-	FormattedMessageData = {},
+	formattedMessageData = {},
 	customerId = '',
 	updateLeaduser = () => {},
 }) {
@@ -27,12 +27,15 @@ function AgentDetails({
 		user_name: messageName,
 		mobile_no,
 		organization_id,
-	} = FormattedMessageData || {};
+	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
-		name: '',
+		name         : '',
+		country_code : '+91',
+		number       : '',
 	});
+	const [showError, setShowError] = useState(false);
 
 	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
@@ -63,7 +66,7 @@ function AgentDetails({
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
 
-	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser });
+	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError });
 
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
 
@@ -85,9 +88,13 @@ function AgentDetails({
 	];
 
 	const handleSubmit = async () => {
-		await leadUserProfile({ profileValue });
-		setShowAddNumber(false);
-		setProfilevalue({});
+		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
+			await leadUserProfile({ profileValue });
+			setShowAddNumber(false);
+			setProfilevalue({});
+		} else {
+			setShowError(true);
+		}
 	};
 
 	return (isEmpty(userId) && isEmpty(leadUserId)) && isEmpty(mobile_no) ? (
@@ -102,11 +109,13 @@ function AgentDetails({
 				setProfilevalue={setProfilevalue}
 				setShowAddNumber={setShowAddNumber}
 				profileValue={profileValue}
+				showError={showError}
+				setShowError={setShowError}
 			/>
 		</>
 	) : (
 		<>
-
+			<div className={styles.title}>Profile</div>
 			<div className={styles.content}>
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
