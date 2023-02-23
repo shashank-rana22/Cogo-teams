@@ -12,11 +12,9 @@ function TheGLobe(
 		country = {},
 		globeGL = {},
 		markerData = [],
-		globeLoading = false,
 
 	},
 ) {
-	console.log('globeGL in:', globeGL);
 	const first_coordinate = markerData[0] || {};
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
 

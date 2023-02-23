@@ -29,7 +29,6 @@ const TheGlobe = dynamic(() => import('./TheGlobe'), { ssr: false });
 
 function MapView(props = {}) {
 	const globeGL = useRef();
-	console.log('globeGL out:', globeGL);
 
 	const {
 		statsData = {},
