@@ -4,8 +4,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-import formatArrayValues from '../../../../../../../../../commons/utils/formatArrayValues';
-import workScopes from '../../../../../../../../../commons/utils/work-scopes.json';
+import formatArrayValues from '../../../../../../../commons/utils/formatArrayValues';
+import workScopes from '../../../../../../../commons/utils/work-scopes.json';
 
 function useGetListVendorPocServices() {
 	const { general: { query } } = useSelector((state) => state);
@@ -71,6 +71,7 @@ function useGetListVendorPocServices() {
 		loading,
 		allServicesAndPocs,
 		getPocRole,
+		refetchServicesPocs: getListVendorPocServices,
 	};
 }
 

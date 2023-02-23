@@ -4,7 +4,8 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import useGetListVendorPocServices from './hooks/useGetListVendorPocServices';
+import useGetListVendorPocServices from '../../hooks/useGetListVendorPocServices';
+
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
