@@ -26,7 +26,7 @@ function Success() {
 				/>
 			</div>
 
-			<div className={styles.body_container}>
+			<div>
 
 				<div className={styles.header}>
 					Vendor details submitted for verification.

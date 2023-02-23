@@ -83,10 +83,6 @@ function useVendorServices({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [vendorInformation]);
 
-	const handleBackLink = (step) => {
-		setActiveStepper(TABS_MAPPING[step]);
-	};
-
 	return {
 		controls,
 		handleSubmit,
@@ -95,7 +91,6 @@ function useVendorServices({
 		errors,
 		onSubmit,
 		loading,
-		handleBackLink,
 		watch,
 		...rest,
 	};

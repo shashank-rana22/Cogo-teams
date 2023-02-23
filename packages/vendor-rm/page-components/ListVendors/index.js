@@ -22,7 +22,6 @@ function ListVendors() {
 	} = useVendorList();
 
 	const {
-		loadingStats,
 		data: dataStats,
 	} = useVendorStats();
 
