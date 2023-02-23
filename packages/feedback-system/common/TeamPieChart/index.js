@@ -43,30 +43,22 @@ function TeamPieChart({ userId = '', month = '', year = '' }) {
 					enableArcLabels={false}
 					colors={['#9BEFA8', '#67C676', '#CDF7D4']}
 					colorBy="index"
-					margin={{ top: 10, right: 20, bottom: 80, left: 20 }}
+					margin={{ top: 10, right: 40, bottom: 80, left: 40 }}
 					legends={[
 						{
 							anchor        : 'bottom-left',
 							direction     : 'column',
 							justify       : false,
-							translateX    : 0,
-							translateY    : 56,
-							itemsSpacing  : 0,
+							translateX    : 60,
+							translateY    : 60,
+							itemsSpacing  : 5,
 							itemWidth     : 100,
 							itemHeight    : 18,
 							itemTextColor : '#999',
 							itemDirection : 'left-to-right',
 							itemOpacity   : 1,
-							symbolSize    : 18,
-							symbolShape   : 'circle',
-							effects       : [
-								{
-									on    : 'hover',
-									style : {
-										itemTextColor: '#000',
-									},
-								},
-							],
+							symbolSize    : 16,
+							symbolShape   : 'square',
 						},
 					]}
 				/>

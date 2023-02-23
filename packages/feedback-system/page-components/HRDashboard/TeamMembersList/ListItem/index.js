@@ -31,6 +31,10 @@ function ListItem({ item }) {
 
 	return (
 		<div className={styles.overall_baselist}>
+			<div className={styles.list_header}>
+				Feedbacks
+			</div>
+
 			<section className={styles.inner_list}>
 				<Input
 					size="sm"

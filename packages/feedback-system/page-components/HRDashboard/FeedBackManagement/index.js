@@ -21,12 +21,10 @@ function FeedbackManagement() {
 
 	const { getUserListCsv } = useDownloadCsvFeedbacks({});
 
-	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
-
 	const {
 		feedbackData = {}, loading = false, params,
 		setParams, setPage,
-	} = useListUserFeedbacks({ userId, searchValue: query });
+	} = useListUserFeedbacks({ searchValue: query });
 
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'manager', 'score', 'month', 'feedback'];
 	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });
@@ -99,17 +97,15 @@ function FeedbackManagement() {
 			{loading && showLoading()}
 
 			{!loading && (
-				<div>
-					<UserTableData
-						columns={tableColumns}
-						list={list}
-						loading={loading}
-						page_limit={params.PageLimit}
-						total_count={total_count}
-						pagination={params.Page}
-						setPagination={setPage}
-					/>
-				</div>
+				<UserTableData
+					columns={tableColumns}
+					list={list}
+					loading={loading}
+					page_limit={params.PageLimit}
+					total_count={total_count}
+					pagination={params.Page}
+					setPagination={setPage}
+				/>
 			)}
 		</div>
 	);

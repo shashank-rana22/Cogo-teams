@@ -2,6 +2,11 @@
 	display: flex;
 }
 
+.list_header {
+	font-size: 16px;
+	font-weight: 600;
+}
+
 .search {
 	width: 30%;
 	padding-right: 12px;
@@ -12,7 +17,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 8px;
+	margin-top: 8px;
 }
 
 .modal_sub_header {

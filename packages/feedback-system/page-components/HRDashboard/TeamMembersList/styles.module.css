@@ -17,6 +17,7 @@
 
 		.ui_accordion_content {
 			background-color: #fff;
+			border-top: 2px solid #bdbdbd;
 		}
 	}
 }

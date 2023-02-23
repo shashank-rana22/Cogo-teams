@@ -86,7 +86,7 @@ function HRDashboard() {
 
 				<div className={styles.list_header}>
 					<p className={styles.list_title}>
-						All Users Feedback List
+						All Managers List
 					</p>
 
 					<div className={styles.list_actions}>

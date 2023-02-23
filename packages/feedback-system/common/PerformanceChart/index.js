@@ -32,29 +32,6 @@ function PerformanceChart({ params = {}, userId = '' }) {
 				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
 				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
 			</div>
-
-			<div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginBottom: '40px' }}>
-				<Placeholder
-					style={{
-						marginBottom : '16px',
-						borderRadius : '50%',
-						display      : 'flex',
-						marginLeft   : 'auto',
-						marginRight  : 'auto',
-					}}
-					width="30%"
-					height="160px"
-				/>
-				<Placeholder
-					style={{
-						marginBottom : '32px',
-						marginLeft   : '20%',
-					}}
-					width="16%"
-					height="40px"
-				/>
-			</div>
-
 		</div>
 	);
 
@@ -72,7 +49,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 						<div className={styles.line_graph}>
 							<ResponsiveLine
 								data={lineChartData}
-								margin={{ top: 30, right: 110, bottom: 50, left: 60 }}
+								margin={{ top: 30, right: 40, bottom: 50, left: 60 }}
 								xScale={{
 									type    : 'point',
 									stacked : true,
