@@ -8,7 +8,7 @@
 
 .select{
     width: 160px;
-    margin-right: 8px;
+    margin-right: 16px;
 }
 
 .search_container {
@@ -25,6 +25,7 @@
     }
 }
 
-.daterange_container {
-    background-color: red;
+.daterange_container{
+    margin-right: 16px;
+
 }

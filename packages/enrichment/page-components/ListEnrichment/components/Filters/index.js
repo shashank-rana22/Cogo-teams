@@ -1,4 +1,4 @@
-import { SingleDateRange, Select } from '@cogoport/components';
+import { DateRangepicker, Select } from '@cogoport/components';
 import { useState } from 'react';
 
 import SearchInput from '../../../common/SearchInput';
@@ -32,25 +32,17 @@ function Filters() {
 			/>
 
 			<div className={styles.daterange_container}>
-				<SingleDateRange
-					placeholder="Enter Date"
-					dateFormat="MM/dd/yyyy"
+				<DateRangepicker
 					name="date"
-					onChange={(val) => setFilterValue({ ...filterValue, date_range: val })}
+					onChange={(val) => setFilterValue({ ...filterValue, organization: val })}
 					value={filterValue.date_range}
 				/>
 			</div>
 
-			<div className={styles.search_container}>
-				<SearchInput
-					size="md"
-					placeholder="Search"
-					// setGlobalSearch={setSearchValue}
-					// debounceQuery={debounceQuery}
-					// value={searchValue}
-					// disabled={disabled}
-				/>
-			</div>
+			<SearchInput
+				size="md"
+				placeholder="Search"
+			/>
 
 		</div>
 	);

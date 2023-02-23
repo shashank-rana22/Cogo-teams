@@ -1,0 +1,15 @@
+.title{
+    color: #221F20;
+    font-size: 28px;
+    font-weight: 600;
+}
+.address{
+   max-width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	
+}
+.link_text{
+    text-decoration: underline;
+    margin-left: 20px;
+}
