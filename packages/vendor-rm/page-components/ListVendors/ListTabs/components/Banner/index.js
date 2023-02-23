@@ -6,7 +6,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Banner({ data = {} }) {
-	// console.log('data::', data);
 	const vect = [
 		{ label: 'Vendor ID', value: '#3728900' },
 		{ label: 'KYC Status', value: startCase(data?.vendor_details?.kyc_status) },

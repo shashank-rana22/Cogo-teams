@@ -2,7 +2,7 @@
     background-color: white;
     padding: unset !important;
     border-radius: 6px;
-    margin: 24px 0 0 24px;
+    margin: 0 0 0 30px;
     :global {
         .ui_table_head_row {
             .ui_table_head_cell {
@@ -45,6 +45,9 @@ opacity: 0.6;
 
 .title{
     font-weight: 600;
-    margin:28px 0 0 24px;
+    margin:0 0 0 20px;
+    padding: 20px 0 0 0;
+    font-size: 16px;
+    line-height: 24px;
 }
 

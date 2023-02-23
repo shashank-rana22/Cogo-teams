@@ -1,14 +1,18 @@
 .main{
     display: flex;
     gap: 3%;
-    margin: 2px;
+    margin: 2rem 0 2rem 0;
    
 
     :global {
         .ui_tab_list_container {
             height: fit-content;
+            .ui_ps_themeType_primary-vertical{
+                width: 230px;
+            }
         }
-       
+        
+        
     }
 }
 
