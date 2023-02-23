@@ -38,13 +38,19 @@ const useListOrganizations = ({ orgId = null }) => {
 	const openNewTab = (activeTab) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 		if (isChannelPartner) {
-			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}`;
+			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}?source=communication`;
 
-			const PRM_ROUTE_PAGE = prm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${prm}` : ORG_PAGE_URL;
+			const PRM_ROUTE_PAGE = prm
+				? `${ORG_PAGE_URL}&omniChannelActiveTab=${prm}`
+				: ORG_PAGE_URL;
+			// eslint-disable-next-line no-undef
 			window.open(PRM_ROUTE_PAGE, '_blank');
 		} else {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${orgId}`;
-			const CRM_ROUTE_PAGE = crm ? `${ORG_PAGE_URL}?omniChannelActiveTab=${crm}` : ORG_PAGE_URL;
+			const CRM_ROUTE_PAGE = crm
+				? `${ORG_PAGE_URL}&omniChannelActiveTab=${crm}&source=communication`
+				: ORG_PAGE_URL;
+			// eslint-disable-next-line no-undef
 			window.open(CRM_ROUTE_PAGE, '_blank');
 		}
 	};

@@ -26,7 +26,6 @@ function Header({
 	activeMessageCard,
 	tagOptions = [],
 	support_agent_id = null,
-
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const {

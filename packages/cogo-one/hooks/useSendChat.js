@@ -57,7 +57,7 @@ const useSendChat = ({
 			await updateDoc(messageFireBaseDoc, {
 				new_message_count      : 0,
 				last_message           : newMessage,
-				updated_at             : Date.now(),
+				new_message_sent_at    : Date.now(),
 				new_user_message_count : old_count + 1,
 			});
 			setTimeout(() => {
@@ -90,7 +90,7 @@ const useSendChat = ({
 					message_metadata,
 					lead_user_id,
 				});
-			}, 300);
+			}, 500);
 		}
 	};
 
@@ -111,7 +111,7 @@ const useSendChat = ({
 		await updateDoc(messageFireBaseDoc, {
 			new_message_count      : 0,
 			last_message           : val,
-			updated_at             : Date.now(),
+			new_message_sent_at    : Date.now(),
 			new_user_message_count : old_count + 1,
 		});
 		setTimeout(() => {
@@ -132,7 +132,7 @@ const useSendChat = ({
 					text         : val,
 				},
 			});
-		}, 200);
+		}, 500);
 	};
 
 	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };

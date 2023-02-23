@@ -14,7 +14,7 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 	const moreList = (list || []).slice(MAX_SHOW_LENGTH);
 
 	const toolTipContent = (
-		<div>
+		<div className={styles.overflow_div}>
 			{(moreList || []).map((item) => (
 				<div
 					className={cl`${styles.tags} ${styles.margin}`}
@@ -27,7 +27,7 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 	);
 
 	const toolTipComp = (
-		<Tooltip content={toolTipContent} theme="light" placement="bottom">
+		<Tooltip content={toolTipContent} theme="light" placement="bottom" interactive>
 			<div className={styles.more_tags}>
 				+
 				{moreList?.length}
@@ -67,12 +67,13 @@ export function TagsPopOver({
 	updateChat = () => {},
 	hasPermissionToEdit = false,
 	tagOptions = [],
+	loading = false,
 }) {
 	const filteredOptions = tagOptions.filter(
 		({ value }) => !prevtags.includes(value),
 	);
 	const resetFunc = () => {
-		setheaderTags('');
+		setheaderTags(null);
 		setIsVisible(false);
 	};
 	const popOverContent = (
@@ -80,7 +81,7 @@ export function TagsPopOver({
 			<div className={styles.input_container}>
 				<Select
 					onChange={(e) => setheaderTags(e)}
-					value={headertags}
+					value={loading ? '' : headertags}
 					options={filteredOptions}
 					placeholder="Select Tags"
 				/>
@@ -92,6 +93,7 @@ export function TagsPopOver({
 				<Button
 					size="sm"
 					themeType="accent"
+					loading={loading}
 					onClick={() => {
 						updateChat({ tags: [headertags, ...(prevtags || [])] });
 						setIsVisible(false);
@@ -115,7 +117,7 @@ export function TagsPopOver({
 			visible={isVisible}
 		>
 			<div className={styles.flex}>
-				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} />
+				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
 			</div>
 		</Popover>
 	);

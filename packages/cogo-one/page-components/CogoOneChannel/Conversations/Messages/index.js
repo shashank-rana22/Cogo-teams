@@ -167,7 +167,7 @@ function Messages({ activeMessageCard = {}, firestore, suggestions = [], userId 
 						)}
 						/>
 					)}
-					<ActiveModalComp data={openModal?.data || {}} />
+					<ActiveModalComp data={openModal?.data || {}} assignLoading={assignLoading} />
 				</Modal>
 			)}
 		</>

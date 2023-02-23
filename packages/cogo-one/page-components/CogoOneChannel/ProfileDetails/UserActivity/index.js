@@ -12,12 +12,12 @@ import Filters from './Filters';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function UserActivities({ activeTab, activeVoiceCard, activeMessageCard, customerId, FormattedMessageData }) {
+function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData }) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState([]);
 
-	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null } = FormattedMessageData || {};
+	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null } = formattedMessageData || {};
 
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 

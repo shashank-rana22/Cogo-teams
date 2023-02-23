@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => {} }) {
+function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => {}, sender = null }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_lead_user_profile',
+		url    : '/create_platform_chat_user_onboarding',
 		method : 'post',
 	}, { manual: true });
 
@@ -12,14 +12,10 @@ function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => 
 		try {
 			const res = await trigger({
 				data: {
-					name,
-					mobile_country_code : country_code,
+					token               : sender,
 					mobile_number       : number,
-					profile_data        : [{
-						channel_type         : 'platform_channel',
-						channel_account_type : name,
-						channel_accountid    : number,
-					}],
+					mobile_country_code : country_code,
+					name,
 				},
 			});
 			if (res?.data?.lead_user_id) {

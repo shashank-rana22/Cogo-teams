@@ -6,11 +6,11 @@ function LoadingState() {
 	return (
 		<div className={styles.list_container}>
 			{[...Array(6)].map(() => (
-				<div className={styles.card_Container}>
+				<div className={styles.card_container}>
 					<div className={styles.card}>
 
 						<div className={styles.user_information}>
-							<div className={styles.avatar_Container}>
+							<div className={styles.avatar_container}>
 								<Placeholder type="circle" radius="40px" />
 								<div className={styles.user_details}>
 									<Placeholder height="15px" width="65px" />
