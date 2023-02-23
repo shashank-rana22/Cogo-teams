@@ -2,18 +2,9 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
-import chartData from '../../../../configurations/chart-data';
-
 import styles from './styles.module.css';
 
-function Charts({ props = {} }) {
-	const {
-		platFormChatData = {},
-		chatLoading = false,
-	} = props || {};
-
-	const GraphData = chartData({ platFormChatData }) || [];
-
+function Charts({ GraphData = [], hideChart = false }) {
 	const colors = ['#5B4A99', '#BDBDBD'];
 
 	const formattedDate = (date) => format(date, 'dd MMM');
@@ -26,23 +17,25 @@ function Charts({ props = {} }) {
 	};
 
 	return (
-		<ResponsiveLine
-			data={GraphData}
-			margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
-			xScale={{ type: 'point' }}
-			yScale={{
+		<div style={{ height: '100%' }}>
+			{!hideChart ? (
+				<ResponsiveLine
+					data={GraphData}
+					margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
+					xScale={{ type: 'point' }}
+					yScale={{
             	type    : 'linear',
             	min     : 'auto',
             	max     : 'auto',
             	stacked : true,
             	reverse : false,
-			}}
-			yFormat=" >-.2f"
-			curve="natural"
-			axisTop={null}
-			axisRight={null}
-			colors={colors}
-			axisBottom={{
+					}}
+					yFormat=" >-.2f"
+					curve="natural"
+					axisTop={null}
+					axisRight={null}
+					colors={colors}
+					axisBottom={{
             	orient         : 'bottom',
             	tickSize       : 0,
             	tickPadding    : 25,
@@ -52,8 +45,8 @@ function Charts({ props = {} }) {
             	legendOffset   : 45,
             	legendPosition : 'middle',
             	format         : (v) => formattedDate(v),
-			}}
-			axisLeft={{
+					}}
+					axisLeft={{
             	orient         : 'left',
             	tickSize       : 0,
             	tickValues     : 5,
@@ -63,8 +56,8 @@ function Charts({ props = {} }) {
             	legendOffset   : -40,
             	legendPosition : 'middle',
             	format         : (v) => formattedTime(v),
-			}}
-			tooltip={({ point = {} }) => {
+					}}
+					tooltip={({ point = {} }) => {
             	const { borderColor, data } = point;
 
             	return (
@@ -79,18 +72,29 @@ function Charts({ props = {} }) {
 		</strong>
 	</div>
             	);
-			}}
-			enableGridX={false}
-			enablePoints={false}
-			pointSize={10}
-			pointColor={{ theme: 'background' }}
-			pointBorderWidth={2}
-			pointBorderColor={{ from: 'serieColor' }}
-			pointLabelYOffset={-12}
-			crosshairType="bottom"
-			useMesh
-			legends={[]}
-		/>
+					}}
+					enableGridX={false}
+					enablePoints={false}
+					pointSize={10}
+					pointColor={{ theme: 'background' }}
+					pointBorderWidth={2}
+					pointBorderColor={{ from: 'serieColor' }}
+					pointLabelYOffset={-12}
+					crosshairType="bottom"
+					useMesh
+					legends={[]}
+				/>
+			) : (
+				<div className={styles.empty_state}>
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+					<div className={styles.horizontal_line} />
+
+				</div>
+			)}
+		</div>
 	);
 }
 

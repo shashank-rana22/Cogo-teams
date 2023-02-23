@@ -1,42 +1,44 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useGetCogoverseGlobeData = ({ country = {}, circleTab = '', date = {} }) => {
-	const [globeData, setGlobeData] = useState({
-		fullResponse: {},
-	});
-	const [{ error, loading }, trigger, refetch] = useRequest({
+	const CountryMobileCode = country?.mobile_country_code || '';
+
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogoverse_globe_data',
 		method : 'GET',
-		params : {
-			mobile_country_code : country?.mobile_country_code || undefined,
-			start_date          : date?.startDate || undefined,
-			end_date            : date?.endDate || undefined,
-			event               : circleTab || '',
-		},
+
 	}, { manual: true });
 
-	useEffect(() => {
-		trigger()
-			.then((res) => {
-				setGlobeData(() => ({
-					fullResponse: res.data,
-				}));
-			})
-			.catch(() => {
-				setGlobeData(() => ({
-					fullResponse : {},
-					reverted     : 0,
-				}));
+	const getCogoverseGlobeData = async () => {
+		try {
+			await trigger({
+				params: {
+					mobile_country_code : CountryMobileCode || undefined,
+					start_date          : date?.startDate || undefined,
+					end_date            : date?.endDate || undefined,
+					event               : circleTab || '',
+
+				},
 			});
+		} catch (err) {
+			// Toast.error(getApiErrorString(err));
+		}
+	};
+
+	useEffect(() => {
+		(async () => {
+			await getCogoverseGlobeData();
+		})();
 		// eslint-disable-next-line
-	}, [circleTab,date]);
+	}, [circleTab,date,CountryMobileCode]);
 
 	return {
-		globeLoading  : loading,
-		globeData,
-		error,
-		refetchPoints : refetch,
+		globeLoading : loading,
+		globeData    : data,
+
 	};
 };
 

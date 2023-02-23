@@ -1,44 +1,43 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useGetCogoverseChatData = ({ country = {}, date = {} }) => {
-	const [chatData, setChatData] = useState({
-		fullResponse: {},
-	});
+	const CountryMobileCode = country?.mobile_country_code || '';
 
-	const [{ error, loading }, trigger, refetch] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogoverse_platform_chat_data',
 		method : 'GET',
-		params : {
-			mobile_country_code : country?.mobile_country_code || undefined,
-			start_date          : date?.startDate || undefined,
-			end_date            : date?.endDate || undefined,
 
-		},
 	}, { manual: true });
 
-	useEffect(() => {
-		trigger()
-			.then((res) => {
-				setChatData(() => ({
-					fullResponse: res.data,
-				}));
-			})
-			.catch(() => {
-				setChatData(() => ({
+	const getCogoverseChatData = async () => {
+		try {
+			await trigger({
+				params: {
+					mobile_country_code : CountryMobileCode || undefined,
+					start_date          : date?.startDate || undefined,
+					end_date            : date?.endDate || undefined,
 
-					fullResponse : {},
-					reverted     : 0,
-				}));
+				},
 			});
+		} catch (err) {
+			// Toast.error(getApiErrorString(err));
+		}
+	};
+
+	useEffect(() => {
+		(async () => {
+			await getCogoverseChatData();
+		})();
 		// eslint-disable-next-line
-	}, [date]);
+	}, [date, CountryMobileCode]);
 
 	return {
-		chatLoading: loading,
-		chatData,
-		error,
-		refetch,
+		chatLoading : loading,
+		chatData    : data,
+
 	};
 };
 

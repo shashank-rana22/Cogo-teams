@@ -6960,6 +6960,33 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
+	my_incident: [
+		{
+			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+		},
+		{
+			api         : 'patch_incident_management_incident_user_incident_status',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+		},
+		{
+			api         : 'post_incident_management_incident_raise_again',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+		},
+		{
+			api         : 'patch_incident_management_incident_edit_notes',
+			access_type : 'private',
+			module      : 'myIncident',
+			feature     : 'myIncident',
+
+		},
+	],
 	vendor_payment: [
 		{
 			api          : 'list_vendor_payments',
@@ -7138,6 +7165,24 @@ const partner = {
 			access_type : 'private',
 			module      : 'Bpr',
 			feature     : 'Bpr',
+		},
+	],
+	incident_controller: [
+		{
+			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_approve',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
 		},
 	],
 	vietnam_account_receivables: [

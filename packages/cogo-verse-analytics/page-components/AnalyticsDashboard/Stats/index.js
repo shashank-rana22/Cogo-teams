@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
-import { cl } from '@cogoport/components';
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
+import chartData from '../../../configurations/chart-data';
 import { PRIMARY_STATS, USER_STATUS, INTENT_LEADERBOARD } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
 import { CHART_ICON } from '../../../constants/monitoring';
@@ -24,9 +24,15 @@ function Stats(props = {}) {
 	const {
 		statsData = {},
 		statsLoading = false,
+		chatLoading = false,
+		platFormChatData = {},
 	} = props || {};
 
 	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
+
+	const { bot_data = {}, customer_support_data = {} } = platFormChatData || {};
+	const GraphData = chartData({ platFormChatData }) || [];
+	const hideChart = isEmpty(bot_data) && isEmpty(customer_support_data);
 
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
@@ -38,9 +44,8 @@ function Stats(props = {}) {
 			{/* Header --------------------------------------------------------------------------- */}
 
 			<div className={styles.cogoverse_header}>
-				{/* Welcome to the */}
-				<img src={imgURL.cogoverse_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
 
+				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
 				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics!</div>
 			</div>
 
@@ -163,8 +168,8 @@ function Stats(props = {}) {
 				<div className={styles.chart_heading}>
 					<div className={styles.chart_heading_content}>Responsive Time Analysis</div>
 					{
-						!statsLoading && (
-							<div className={styles.legend_container}>
+						!chatLoading && !hideChart && (
+							<div>
 								<div className={styles.legend_field}>
 									<div className={styles.legend_icon_1} />
 									<div className={styles.legend_content}>CogoAssist</div>
@@ -180,7 +185,7 @@ function Stats(props = {}) {
 				</div>
 				<div className={styles.the_chart}>
 					{
-						!statsLoading ? <Charts {...props} />
+						!chatLoading ? <Charts GraphData={GraphData} hideChart={hideChart} />
 							: (
 								<div className={styles.chart_empty}>
 									<Placeholder height="100px" className={styles.placeholder_element}>
