@@ -35,108 +35,111 @@ function InsightsList({ checkEmpty, shipment_and_spot_search_stats, total_messag
 								</div>
 							);
 						}
-						const bothEmptyCheck = !isEmpty(last_shipment_data) && !isEmpty(shipment_insights?.list);
+
 						return (
-							bothEmptyCheck && (
-								<div className={styles.organisation_div}>
-									<div className={styles.business_name}>
-										{importer_exporter?.business_name}
-									</div>
-									<div className={styles.stats_div}>
-										<div className={styles.top}>
-											<div className={styles.content}>
-												<div className={styles.text}>Total Bookings</div>
-												<div className={styles.header}>
-													{total_shipments}
-												</div>
+
+							<div className={styles.organisation_div}>
+								<div className={styles.business_name}>
+									{importer_exporter?.business_name}
+								</div>
+								<div className={styles.stats_div}>
+									<div className={styles.top}>
+										<div className={styles.content}>
+											<div className={styles.text}>Total Bookings</div>
+											<div className={styles.header}>
+												{total_shipments}
 											</div>
-											<div className={styles.content}>
-												<div className={styles.text}>Total Communication </div>
-												<div className={styles.header}>
-													{total_messages}
-												</div>
+										</div>
+										<div className={styles.content}>
+											<div className={styles.text}>Total Communication </div>
+											<div className={styles.header}>
+												{total_messages}
 											</div>
 										</div>
 									</div>
+								</div>
 
-									{!isEmpty(last_shipment_data) && (
-										<div className={styles.booking_div}>
-											<div className={styles.last_booking}>
-												Last Booking :
-												<div className={styles.sid_number}>
-													{' '}
-													SID
-													{' '}
-													{serial_id}
-												</div>
+								{!isEmpty(last_shipment_data) && (
+									<div className={styles.booking_div}>
+										<div className={styles.last_booking}>
+											Last Booking :
+											<div className={styles.sid_number}>
+												{' '}
+												SID
+												{' '}
+												{serial_id}
 											</div>
-											<BookingContent
-												last_shipment_data={last_shipment_data}
-												trade_type={trade_type}
-												shipping_line={shipping_line}
-												created_at={created_at}
-											/>
 										</div>
-									)}
-
-									<div className={styles.comm_tex}>Commodity</div>
-									<div>
-										<Pill
-											key="Live animals"
-											size="sm"
-											color="#FBD1A6"
-										>
-											{commodity}
-										</Pill>
+										<BookingContent
+											last_shipment_data={last_shipment_data}
+											trade_type={trade_type}
+											shipping_line={shipping_line}
+											created_at={created_at}
+										/>
 									</div>
-									{!isEmpty(list) && (
-										<>
-											<div className={styles.comm_tex}>Port pairs most booked on</div>
-											<div className={styles.port_div}>
-												{(list || []).map((item) => (
-													<div className={styles.div_top}>
-														<div className={styles.origin_container}>
+								)}
 
-															<Tooltip
-																content={toolTip(item)}
-																placement="bottom"
-															>
-																<div className={styles.origin}>
-																	{startCase(item?.origin_country_name)}
-																	,
-																	{startCase(item?.origin_port_name)}
+								{!isEmpty(commodity) && (
+									<>
+										<div className={styles.comm_tex}>Commodity</div>
+										<div>
+											<Pill
+												key="Live animals"
+												size="sm"
+												color="#FBD1A6"
+											>
+												{startCase(commodity)}
+											</Pill>
+										</div>
+									</>
+								)}
 
-																</div>
-															</Tooltip>
+								{!isEmpty(list) && (
+									<>
+										<div className={styles.comm_tex}>Port pairs most booked on</div>
+										<div className={styles.port_div}>
+											{(list || []).map((item) => (
+												<div className={styles.div_top}>
+													<div className={styles.origin_container}>
 
-															<Tooltip
-																content="Shipments Count"
-																placement="bottom"
-															>
-																<div className={styles.shipment_count}>
-																	{item?.shipments_count}
-																</div>
-															</Tooltip>
-														</div>
-														<IcMPort width={15} height={15} fill="#ACDADF" />
 														<Tooltip
 															content={toolTip(item)}
 															placement="bottom"
 														>
 															<div className={styles.origin}>
-																{startCase(item?.destination_country_name)}
+																{startCase(item?.origin_country_name)}
 																,
-																{startCase(item?.destination_port_name)}
+																{startCase(item?.origin_port_name)}
+
+															</div>
+														</Tooltip>
+
+														<Tooltip
+															content="Shipments Count"
+															placement="bottom"
+														>
+															<div className={styles.shipment_count}>
+																{item?.shipments_count}
 															</div>
 														</Tooltip>
 													</div>
-												))}
-											</div>
-										</>
-									)}
-								</div>
-							)
-
+													<IcMPort width={15} height={15} fill="#ACDADF" />
+													<Tooltip
+														content={toolTip(item)}
+														placement="bottom"
+													>
+														<div className={styles.origin}>
+															{startCase(item?.destination_country_name)}
+															,
+															{startCase(item?.destination_port_name)}
+														</div>
+													</Tooltip>
+												</div>
+											))}
+										</div>
+									</>
+								)}
+							</div>
 						);
 					})}
 				</>
