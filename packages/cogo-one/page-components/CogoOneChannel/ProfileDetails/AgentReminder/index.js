@@ -28,7 +28,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		fetchListLogApi = () => {},
 		listLoading,
 		firstLoading,
-	} = useGetListCommunicationLog({ organizationId });
+	} = useGetListCommunicationLog({ organizationId, userId });
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue,
 		setDate,
@@ -78,8 +78,8 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 	const emptyCheck = !((inputValue?.title) && (inputValue?.description) && date);
 
 	return (
-		(showReminder || organizationId) && (
-			firstLoading ? (
+		(showReminder || organizationId)
+			&& firstLoading ? (
 				<div className={styles.loader_div}>
 					<Loader
 						themeType="primary"
@@ -146,7 +146,6 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 					</div>
 				</div>
 			)
-		)
 	);
 }
 export default AgentReminder;
