@@ -1,8 +1,6 @@
 import categoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/category-options';
 import subCategoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
 
-console.log('x', categoryOptions);
-
 const controls = [
 	{
 		name        : 'name',
@@ -104,7 +102,7 @@ const controls = [
 		type        : 'select',
 		placeholder : 'Select Category',
 		options     : categoryOptions,
-		style       : { flexBasis: '35%' },
+		style       : { flexBasis: '25%' },
 		rules       : { required: 'Category is required' },
 
 	},
@@ -114,7 +112,7 @@ const controls = [
 		type        : 'select',
 		placeholder : 'Select Sub-Category',
 		options     : subCategoryOptions,
-		style       : { flexBasis: '35%' },
+		style       : { flexBasis: '25%' },
 		rules       : { required: 'Sub Category is required' },
 
 	},
@@ -146,7 +144,7 @@ const controls = [
 			{ label: 'Bagdogra', value: 'b906d557-c80f-4819-bfc1-f59d3ebad6ac' },
 			{ label: 'Ho Chi Minh', value: 'edaccd90-ee23-4238-b1c1-e15aa9532366' },
 		],
-		style : { flexBasis: '35%' },
+		style : { flexBasis: '25%' },
 		rules : { required: 'Branch is required' },
 
 	},

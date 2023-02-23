@@ -1,0 +1,25 @@
+
+.container {
+        position: relative;
+        opacity: 0;
+        animation-name: move-down;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+ }
+
+@keyframes move-down {
+        0% {
+            top: -100px;
+            opacity: 0;
+        }
+        100% {
+            top: 0px;
+            opacity: 1;
+        }
+}
+
+.button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
