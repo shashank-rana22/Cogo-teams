@@ -92,6 +92,7 @@ const requestedQuestionsColumns = [
 const useQuestionList = () => {
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
+	const [filters, setFilters] = useState({});
 	const [page, setPage] = useState(1);
 
 	const [{ data: questionList, loading }, trigger] = useRequest({
@@ -103,7 +104,10 @@ const useQuestionList = () => {
 		try {
 			await trigger({
 				params: {
-					filters: {},
+					filters: {
+						...filters,
+						q: searchInput,
+					},
 					page,
 				},
 			});
@@ -115,7 +119,7 @@ const useQuestionList = () => {
 	useEffect(() => {
 		getQuestionsList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [page, filters, searchInput]);
 
 	const columns = activeList !== 'requested'
 		? addedQuestionsColumns({ activeList })
@@ -128,6 +132,7 @@ const useQuestionList = () => {
 		paginationData,
 		data,
 		columns,
+		setFilters,
 		searchInput,
 		setSearchInput,
 		activeList,

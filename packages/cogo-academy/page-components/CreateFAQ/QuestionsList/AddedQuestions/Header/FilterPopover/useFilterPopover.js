@@ -1,7 +1,8 @@
+import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useFilterPopover = () => {
+const useFilterPopover = ({ setFilters }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
 	const [{ data: topicsData }] = useRequest({
@@ -22,25 +23,36 @@ const useFilterPopover = () => {
 		},
 	}, { manual: false });
 
+	const { control, handleSubmit } = useForm();
+
+	const onSubmit = (values) => {
+		setFilters({
+			tag_id   : values?.tag,
+			topic_id : values?.topic,
+		});
+	};
+
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
 
-	const topicOptions = [];
-	const tagOptions = [];
+	const topicOptions = (topicList || []).map((item) => ({
+		label : item?.display_name,
+		value : item?.id,
+	}));
 
-	(topicList || []).forEach((item) => {
-		topicOptions.push({ label: item?.display_name, value: item?.name });
-	});
-
-	(tagList || []).forEach((item) => {
-		tagOptions.push({ label: item?.display_name, value: item?.name });
-	});
+	const tagOptions = (tagList || []).map((item) => ({
+		label : item?.display_name,
+		value : item?.id,
+	}));
 
 	return {
 		showFilter,
 		setShowFilter,
 		topicOptions,
 		tagOptions,
+		control,
+		handleSubmit,
+		onSubmit,
 	};
 };
 
