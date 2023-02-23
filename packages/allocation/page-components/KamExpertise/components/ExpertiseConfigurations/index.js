@@ -48,7 +48,7 @@ function ViewAllConfigs() {
 				</div>
 
 				<div className={styles.tab_list}>
-					<Tabs activeTab={activeConfigTab} themeType="primary" onChange={setActiveConfigTab}>
+					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
 
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;

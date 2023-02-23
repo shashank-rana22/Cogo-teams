@@ -11,8 +11,7 @@ const allocations = {
 		navigation : 'allocations-kam_expertise',
 		isMainNav  : true,
 	},
-	'/[partner_id]/allocation/kam-expertise/view-badges': {
-		// Todo change it
+	'/[partner_id]/allocation/kam-expertise/configurations': {
 		navigation : 'allocations-kam_expertise',
 		isMainNav  : false,
 	},
