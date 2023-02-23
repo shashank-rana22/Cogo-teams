@@ -8,10 +8,6 @@ import TABS_MAPPING from '../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../utils/component-mapping';
 
 function useGetVendor() {
-	const [activeStepper, setActiveStepper] = useState('verification');
-
-	const [vendorInformation, setVendorInformation] = useState({});
-
 	const router = useRouter();
 
 	const {
@@ -20,10 +16,35 @@ function useGetVendor() {
 
 	const { vendor_id } = query;
 
+	const [activeStepper, setActiveStepper] = useState('vendor_details');
+	const [vendorInformation, setVendorInformation] = useState({});
+
 	const [{ loading: getVendorLoading = false }, trigger] = useRequest({
 		url    : 'get_vendor',
 		method : 'GET',
 	}, { manual: true });
+
+	const getVendor = async () => {
+		try {
+			const res = await trigger({ params: { id: vendor_id } });
+
+			setVendorInformation({
+				...res.data,
+				contact_details : res.data.pocs[0],
+				payment_details : res.data.bank_details[0],
+				vendor_services : res.data.services,
+			});
+		} catch (error) {
+			console.log('error :: ', error);
+		}
+	};
+
+	useEffect(() => {
+		if (vendor_id) {
+			getVendor();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
@@ -34,26 +55,6 @@ function useGetVendor() {
 		setActiveStepper(emptyVendorInformationTab);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [getVendorLoading]);
-
-	const getVendor = useCallback(async () => {
-		const res = await trigger({ params: { id: vendor_id } });
-
-		setVendorInformation({
-			...res.data,
-			contact_details : res.data.pocs[0],
-			payment_details : res.data.bank_details[0],
-			vendor_services : res.data.services,
-		});
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, vendor_id]);
-
-	useEffect(() => {
-		if (vendor_id) {
-			getVendor();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [vendor_id]);
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
