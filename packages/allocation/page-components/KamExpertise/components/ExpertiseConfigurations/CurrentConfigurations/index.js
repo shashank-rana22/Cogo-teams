@@ -10,7 +10,7 @@ function CurrentConfigurations() {
 
 			<ConfigurationCard />
 
-			<Button themeType="secondary" style={{ marginTop: '16px' }}>View All Configurations</Button>
+			<Button themeType="secondary">View All Configurations</Button>
 		</div>
 	);
 }

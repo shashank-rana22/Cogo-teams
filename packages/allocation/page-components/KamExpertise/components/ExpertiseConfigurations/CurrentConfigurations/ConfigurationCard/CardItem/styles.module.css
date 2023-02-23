@@ -30,3 +30,7 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.items {
+	font-weight: 500;
+}

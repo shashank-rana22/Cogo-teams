@@ -9,7 +9,7 @@ function CardItem(props) {
 		<div className={styles.card_container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>{event}</div>
-				<div>
+				<div className={styles.items}>
 					{items}
 					&nbsp;Items
 				</div>
