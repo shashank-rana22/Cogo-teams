@@ -27,6 +27,7 @@ function AgentDetails({
 		user_name: messageName,
 		mobile_no,
 		organization_id,
+		sender,
 	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
@@ -66,7 +67,7 @@ function AgentDetails({
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
 
-	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError });
+	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError, sender });
 
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
 
@@ -75,13 +76,13 @@ function AgentDetails({
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
-			color      : 'green',
+			color      : mobile_verified ? 'green' : '#f8aea8',
 			size       : 'sm',
 			prefixIcon : <IcMCall />,
 		},
 		{
 			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
-			color      : 'green',
+			color      : whatsapp_verified ? 'green' : '#f8aea8',
 			size       : 'sm',
 			prefixIcon : <IcCWhatsapp />,
 		},

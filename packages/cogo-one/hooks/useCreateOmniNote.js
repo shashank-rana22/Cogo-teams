@@ -31,7 +31,7 @@ function useCreateOmniNote({ editNote, fetchListNotes, activeMessageCard, active
 	};
 	return {
 		omniChannelNote,
-		loading,
+		createLoading: loading,
 	};
 }
 export default useCreateOmniNote;
