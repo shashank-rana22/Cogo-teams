@@ -8,7 +8,6 @@ import VoiceList from './VoiceList';
 
 function Customers({
 	setActiveMessage = () => {},
-	// activeMessageCard,
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
 	setSearchValue = () => {},
