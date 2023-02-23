@@ -37,7 +37,7 @@ function TopicList({ tabTitle }) {
 									</div>
 
 									<div className={styles.subtitle}>
-										{singleOption.description}
+										{startCase(singleOption.description)}
 									</div>
 								</div>
 							)}

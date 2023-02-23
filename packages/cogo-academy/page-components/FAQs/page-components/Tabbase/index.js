@@ -21,10 +21,10 @@ function Tabbase() {
 				<TabPanel name="All FAQs" title="All FAQs" badge={5}>
 					<Dashboard tabTitle="All FAQs" />
 				</TabPanel>
-
+{/* 
 				<TabPanel name="Trending" title="Trending" badge={5}>
 					<TrendingFAQs />
-				</TabPanel>
+				</TabPanel> */}
 
 				<TabPanel name="Most Read" title="Most Read" badge={3}>
 					<MostReadFAQs />

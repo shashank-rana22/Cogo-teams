@@ -1,12 +1,13 @@
 import { Pill } from '@cogoport/components';
 import { IcMImage, IcMArrowRotateRight, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { React, useState, useRef } from 'react';
 
 import styles from './styles.module.css';
 
 function QuestionsCollapse({ collapse, questions }) {
 	const arrow = collapse;
-	console.log(arrow)
+	console.log(arrow);
 	const DEFAULT_LIST = [
 		{
 			label: 'Invoices',
@@ -22,7 +23,9 @@ function QuestionsCollapse({ collapse, questions }) {
 			// ref={contentRef}
 			// style={open ? { height: `${contentRef.current.scrollHeight} px` } : { height: '0px' }} */}
 			<div className={styles.title}>
-				{questions.question_abstract}
+				{startCase(
+					questions.question_abstract,
+				)}
 				{(arrow) ? <IcMArrowUp /> : <IcMArrowDown />}
 			</div>
 			<Pill prefix={<IcMImage />} size="lg" color="white"><b>2</b></Pill>

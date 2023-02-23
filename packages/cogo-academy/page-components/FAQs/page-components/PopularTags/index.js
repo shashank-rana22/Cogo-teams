@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
@@ -26,7 +27,7 @@ function PopularTags() {
 					size="xl"
 					color="white"
 				>
-					{item.name}
+					{startCase(item.name)}
 				</Pill>
 			))}
 		</div>
