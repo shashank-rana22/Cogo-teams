@@ -3,9 +3,9 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import KamExpertiseScoreConfig from './components/KamExpertiseScore';
-import KamLevel from './components/KamLevel';
 import styles from './styles.module.css';
+import KamExpertiseScoreConfig from './Tabs/KamExpertiseScore';
+import KamLevel from './Tabs/KamLevel';
 
 const TAB_PANEL_MAPPING = {
 	configurations: {
