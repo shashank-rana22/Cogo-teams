@@ -5,11 +5,7 @@ import { useEffect, useState } from 'react';
 function useKyc({
 	getVendor = () => {},
 }) {
-	const {
-		general: {
-			query,
-		},
-	} = useSelector((state) => state);
+	const { general: { query } } = useSelector((state) => state);
 
 	const { vendor_id } = query;
 

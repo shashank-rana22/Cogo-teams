@@ -130,7 +130,7 @@ function useOnBoardVendor({
 										registrationNumber,
 									})
 							) {
-								return `${registrationType.toUpperCase()} is Invalid`;
+								return `${registrationType?.toUpperCase()} is Invalid`;
 							}
 						}
 
@@ -193,23 +193,19 @@ function useOnBoardVendor({
 				const as = `/onboard-vendor/${res.data.id}`;
 
 				router.push(href, as);
-			} else {
-				setVendorInformation((pv) => {
-					const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-
-					return {
-						...pv,
-						[key]: {
-							...data,
-							registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
-							registration_number    : {
-								registrationNumber : formattedValues?.registration_number?.registrationNumber,
-								registrationType   : formattedValues?.registration_number?.registrationType,
-							},
-						},
-					};
-				});
 			}
+			setVendorInformation((pv) => {
+				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+
+				return {
+					...pv,
+					[key]: {
+						...data,
+						registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
+
+					},
+				};
+			});
 
 			Toast.success(`Vendor ${isUpdateAction ? 'updated' : 'created'} successfully`);
 
@@ -223,9 +219,15 @@ function useOnBoardVendor({
 		fields.forEach((field) => {
 			if (field.name === 'registration_number') {
 				setValue(`${field.name}`, {
-					registrationType   : vendorInformation?.vendor_details?.registration_type,
-					registrationNumber : vendorInformation?.vendor_details?.registration_number,
+					registrationNumber:
+					vendorInformation?.vendor_details?.registration_number?.registrationNumber
+					|| vendorInformation?.vendor_details?.registration_number,
+					registrationType: vendorInformation?.vendor_details?.registration_number?.registrationType
+					|| vendorInformation?.vendor_details?.registration_type,
 				});
+			} else if (field.name === 'registration_proof_url') {
+				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]
+				|| vendorInformation?.vendor_details?.[field.name].finalUrl);
 			} else {
 				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 			}

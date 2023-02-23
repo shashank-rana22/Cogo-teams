@@ -5,7 +5,7 @@ import getShortFileName from '../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
-const filedsToShow = {
+const fieldsToShow = {
 	country_id             : 'Country of Registration',
 	registration_number    : 'GST No.',
 	business_name          : 'Organisation Name',
@@ -37,6 +37,11 @@ function VendorDetails({
 			);
 		}
 
+		if (fieldName === 'registration_number') {
+			const value = detail?.registration_number?.registrationNumber || detail?.registration_number;
+			return value;
+		}
+
 		const name_mapping = {
 			country_id : `${startCase(detail?.country?.name)}`,
 			city_id    : `${startCase(detail?.city?.name)}`,
@@ -56,11 +61,11 @@ function VendorDetails({
 			<div className={styles.body}>
 				<div className={styles.single_record}>
 					{
-						Object.keys(filedsToShow).map((fieldName) => (
+						Object.keys(fieldsToShow).map((fieldName) => (
 							<div style={{ display: 'flex', flexDirection: 'column', flexBasis: '25%' }}>
 
 								<div className={styles.label}>
-									{filedsToShow[fieldName]}
+									{fieldsToShow[fieldName]}
 								</div>
 
 								<div className={styles.value}>
