@@ -113,7 +113,7 @@
 }
 
 .user_name {
-	max-width: 100px;
+	max-width: 140px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
@@ -121,7 +121,7 @@
 	white-space: nowrap;
 
 	@media (max-width: 1280px) {
-		max-width: 110px;
+		max-width: 100px;
 	}
 }
 
@@ -133,9 +133,9 @@
 	color: #828282;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	
+
 	@media (max-width: 1280px) {
-		max-width: 110px;
+		max-width: 100px;
 	}
 }
 

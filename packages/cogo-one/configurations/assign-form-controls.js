@@ -4,6 +4,7 @@ const controls = {
 		name        : 'assign_user',
 		type        : 'select',
 		placeholder : 'Enter name to assign',
+		rules       : { required: 'This is required' },
 	},
 	assign_condition: {
 		name        : 'assign_condition',
@@ -19,9 +20,7 @@ const controls = {
 				value : 'invoice',
 			},
 		],
-		rules: {
-			required: true,
-		},
+		rules: { required: 'This is required' },
 	},
 	condition_value: {
 		name  : 'condition_value',

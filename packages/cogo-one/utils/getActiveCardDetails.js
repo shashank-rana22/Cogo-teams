@@ -5,7 +5,7 @@ const getActiveCardDetails = (data = {}) => {
 		channel_type = '',
 		user_details = {},
 		user_id = '',
-		user_name = '',
+		user_name = 'User',
 		organization_id = '',
 		organization_name = '',
 		mobile_no = '',

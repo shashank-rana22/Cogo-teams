@@ -1,4 +1,4 @@
-import { Toast, cl, Modal, Textarea, Button } from '@cogoport/components';
+import { cl, Modal, Textarea, Button } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
@@ -50,7 +50,6 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 			}
 			return '';
 		});
-		// setActivePill(true);
 	};
 
 	const handleSubmit = async () => {

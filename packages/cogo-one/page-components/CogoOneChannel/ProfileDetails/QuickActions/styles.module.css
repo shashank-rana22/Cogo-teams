@@ -29,6 +29,12 @@
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	
+	&:hover{
+		transform: scale(1.1);
+		transition: 1s ease;
+	}
+
 }
 
 .header {
@@ -50,7 +56,6 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding-top: 34px;
 }
 
 .row {
@@ -66,4 +71,8 @@
 	justify-content: center;
 	width: 50px;
 	height: 50px;
+}
+
+.icon_disabled {
+	cursor: not-allowed;
 }
