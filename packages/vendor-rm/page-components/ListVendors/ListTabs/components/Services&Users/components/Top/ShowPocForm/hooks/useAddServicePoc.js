@@ -57,7 +57,8 @@ const useAddServicePoc = ({ setShowForm = () => {}, getVendorData }) => {
 
 		try {
 			const payload = {
-				...data,
+				name                  : data?.name,
+				email                 : data?.email,
 				mobile_country_code   : data?.mobile_number?.country_code,
 				mobile_number         : data?.mobile_number?.number,
 				whatsapp_country_code : data?.whatsapp_number?.country_code,
@@ -65,6 +66,10 @@ const useAddServicePoc = ({ setShowForm = () => {}, getVendorData }) => {
 				vendor_poc_proof      : data?.contact_proof_url?.finalUrl,
 				vendor_id             : getVendorData?.vendor_details?.id,
 				cogo_entity_id        : partner_id,
+				category              : data?.category,
+				sub_category          : data?.sub_category,
+				cogoport_office_id    : data?.cogoport_office_id,
+				poc_role              : data?.poc_role,
 			};
 
 			await trigger({
@@ -75,6 +80,7 @@ const useAddServicePoc = ({ setShowForm = () => {}, getVendorData }) => {
 			setShowForm('');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to create service poc, please try again...');
+			setShowForm('');
 		}
 	};
 
