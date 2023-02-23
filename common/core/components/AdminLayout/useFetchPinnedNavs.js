@@ -8,13 +8,17 @@ const useFetchPinnedNavs = ({ user_id, partner_id, setPinnedNavKeys = () => {} }
 	}, { manual: true });
 
 	const fetchPinnedNavs = async () => {
-		const response = await trigger({ params: { filters: { user_id, partner_id } } });
+		try {
+			const response = await trigger({ params: { filters: { user_id, partner_id } } });
 
-		setPinnedNavKeys(
-			(response.data?.list || [])
-				.map((setting) => setting.setting_config.navigation_preferences)
-				.flat(),
-		);
+			setPinnedNavKeys(
+				(response.data?.list || [])
+					.map((setting) => setting.setting_config.navigation_preferences)
+					.flat(),
+			);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps

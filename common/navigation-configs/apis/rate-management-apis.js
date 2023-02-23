@@ -178,6 +178,11 @@ const rms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
+		api          : 'delete_fcl_customs_rate',
+		access_type  : 'private',
+		service_name : 'fcl_customs_rate',
+	},
+	{
 		api          : 'create_fcl_freight_rate',
 		access_type  : 'private',
 		service_name : 'fcl_freight_rate',
@@ -571,6 +576,16 @@ const rms = [
 		api          : 'get_fcl_freight_rate_extension',
 		access_type  : 'private',
 		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'create_fcl_cfs_rate_bulk_operation',
+		access_type  : 'private',
+		service_name : 'fcl_cfs_rate',
+	},
+	{
+		api          : 'delete_fcl_cfs_rate',
+		access_type  : 'private',
+		service_name : 'fcl_cfs_rate',
 	},
 	{
 		api          : 'list_cogo_entities',

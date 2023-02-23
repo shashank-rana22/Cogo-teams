@@ -5,6 +5,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'list_lastmile_desk_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_shipment_services',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -244,6 +249,16 @@ const apis = [
 	},
 	{
 		api          : 'get_shipment_quotation',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_buy_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

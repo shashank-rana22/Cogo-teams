@@ -659,6 +659,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'delete_freight_trend_subscription',
+			access_type  : 'private',
+			service_name : 'freight_trend',
+		},
 	],
 	app_saas_cpq_products: [
 		{
@@ -1135,6 +1140,24 @@ const saas = {
 			module      : 'Quotation',
 			feature     : 'Quotation',
 		},
+		{
+			api         : 'put_saas_product_update_hscode',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'put_saas_quote_update_duties',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
 	],
 	app_saas_cogopoint: [
 		{
@@ -1527,6 +1550,12 @@ const saas = {
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
 		},
+		{
+			api         : 'get_saas_organization_export',
+			access_type : 'public',
+			module      : 'trade-partner',
+			feature     : 'trade-partner',
+		},
 	],
 	app_saas_product_inventory: [
 		{
@@ -1627,6 +1656,30 @@ const saas = {
 		},
 		{
 			api         : 'put_saas_product',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'post_saas_product_bulk_product_upload',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_export',
+			access_type : 'public',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_error_export',
+			access_type : 'public',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'post_saas_product_bulk_products_upload',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
@@ -1777,6 +1830,12 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
 	],
 	app_saas_trader_eligibilty_check: [
 		{
@@ -1824,6 +1883,13 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+
 	],
 	app_saas_order_history: [
 		{
