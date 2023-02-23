@@ -1,6 +1,7 @@
 import { Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useGetTdsData from '../../apisModal/useGetTdsData';
@@ -21,7 +22,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [shoPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { data = {} } = row || {};
-	const { creditNoteRequest, consolidatedCreditNoteRequest } = data;
+	const { creditNoteRequest, consolidatedCreditNoteRequest, organization } = data;
 	const {
 		invoiceNumber,
 		jobNumber,
@@ -45,6 +46,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remark,
 		CNCategoryValues,
 	});
+
+	const { businessName } = organization || {};
 
 	const RevenueImpacting =	CNCategoryValues?.CNType === 'REVENUE_IMPACTING'
 	|| creditNoteType === 'REVENUE_IMPACTING';
@@ -124,7 +127,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							disabled={!isEditable}
 							onChange={(e:any) => setCNCategoryValues({
 								...CNCategoryValues,
-								remarks: e.target?.value,
+								remarks: e,
 							})}
 							placeholder="Remark here ...."
 						/>
@@ -168,7 +171,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						setShowTdsModal(false);
 					}}
 				>
-					<Modal.Header title={`Request Credit Note - ${creditNoteNumber}`} />
+					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${startCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
 						<div className={styles.flex}>
@@ -189,8 +192,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								</div>
 								<div className={styles.date_value}>
 									<a
-										href={`${process.env.BUSINESS_FINANCE_BASE_URL}
-                                        /sales/invoice/final/${invoiceId}/download/`}
+										href={`${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}/sales/invoice/final/
+										${invoiceId}/download/`}
 										target="_blank"
 										rel="noreferrer"
 									>
