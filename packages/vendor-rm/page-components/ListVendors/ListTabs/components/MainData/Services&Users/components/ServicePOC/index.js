@@ -1,55 +1,89 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
-import { IcMEdit } from '@cogoport/icons-react';
+// import { IcMEdit } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import useGetListVendorPocServices from './hooks/useGetListVendorPocServices';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function ServicePOC() {
-	const obj = 	[
-		{ label: 'Name', value: 'Chandrashekhar Na...' },
-		{ label: 'Email ID', value: 'chandrashekhar@ab...' },
-		{ label: 'Mobile Number', value: '+91 8383929900' },
-		{ label: 'Role in the Company', value: 'Finance Head' },
-	];
+const filedsToShow = {
+	category           : 'Service category',
+	sub_category       : 'Service Sub-Category',
+	cogoport_office_id : 'Cogoport Office',
+};
 
-	const obj1 = 	[
-		{ label: 'Branch:', value: 'Gurgaon' },
-		{ label: 'Service Category:', value: 'Facility Expenses' },
-		{ label: 'Service Sub-category:', value: 'Office Maintenance' },
-	];
+const pocsMapping = {
+	name          : 'Name',
+	email         : 'Email ID',
+	mobile_number : 'Mobile Number',
+	poc_role      : 'Role in the Company',
+};
+
+function ServicePOC() {
+	const {
+		allServicesAndPocs = [],
+		getPocRole = () => {},
+		loading = false,
+	} = useGetListVendorPocServices();
+
+	if (loading) {
+		return (
+			<LoadingState />
+		);
+	}
 
 	return (
 		<div className={styles.main}>
 			<span className={styles.heading}>Service POC </span>
 
-			<div className={styles.head}>
-				{obj1.map((item) => (
-					<div className={styles.fl}>
-						<span className={styles.top}>{item.label}</span>
-						<span className={styles.bottom}>{item.value}</span>
-					</div>
-				)) }
-			</div>
-
-			<div className={styles.cont}>
-				{obj.map((item) => (
-					<div className={styles.box_info}>
-						<div>
-							<div className={styles.top}>
-								{item.label}
-							</div>
-							<div className={styles.bottom}>
-								{item.value}
-							</div>
+			{
+				(allServicesAndPocs || []).map((singleServicePoc) => (
+					<>
+						<div className={styles.head}>
+							{Object.keys(filedsToShow).map((item) => (
+								<div className={styles.fl}>
+									<span className={styles.top}>
+										{filedsToShow[item]}
+										:
+									</span>
+									<span className={styles.bottom}>
+										{item === 'cogoport_office_id'
+											? startCase(singleServicePoc?.cogoport_office?.display_name)
+											: startCase(singleServicePoc?.[item])}
+									</span>
+								</div>
+							)) }
 						</div>
 
-						{item.label === 'Role in the Company' ? <button className={styles.btn}><IcMEdit /></button> : ''}
+						<div className={styles.cont}>
+							{(singleServicePoc?.poc_details || []).map((poc) => (
+								<>
+									{
+										(Object.entries(poc) || []).map((item) => (
+											<div className={styles.box_info}>
+												<div>
+													<div className={styles.top}>
+														{pocsMapping[item[0]]}
+													</div>
+													<div className={styles.bottom}>
+														{item?.[0] === 'poc_role'
+															? getPocRole(item?.[1]) : item?.[1]}
+													</div>
+												</div>
 
-					</div>
-				)) }
+												{/* {item.label === 'Role in the Company' ? <button className{styles.btn}><IcMEdit /></button> : ''} */}
+											</div>
+										))
+										}
+								</>
+							)) }
+						</div>
 
-			</div>
+					</>
+				))
+			}
 
 		</div>
 	);
