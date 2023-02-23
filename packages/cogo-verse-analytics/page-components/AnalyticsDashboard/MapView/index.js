@@ -9,8 +9,7 @@ import {
 } from '@cogoport/components';
 import { useGetAsyncOptions } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { IcMHourglass } from '@cogoport/icons-react';
-import IcMRefresh from '@cogoport/icons-react/src/IcMRefresh';
+import { IcMHourglass, IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
