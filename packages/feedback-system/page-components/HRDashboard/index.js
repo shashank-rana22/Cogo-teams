@@ -52,10 +52,7 @@ function HRDashboard() {
 						size="lg"
 						themeType="secondary"
 						style={{ marginRight: '16px' }}
-						onClick={() => {
-						// upload();
-							setOpenUploadModal(true);
-						}}
+						onClick={() => setOpenUploadModal(true)}
 					>
 						<IcMUpload style={{ marginRight: '4px' }} />
 						Upload CSV

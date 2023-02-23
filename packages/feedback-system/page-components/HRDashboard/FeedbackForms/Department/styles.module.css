@@ -35,16 +35,6 @@
 	.role_label {
 		margin: 0;
 	}
-
-	:global {
-		.ui_pill_container {
-			/* background-color: #efefef; */
-		}
-
-		.ui_pill_text {
-			/* background-color: #efefef; */
-		}
-	}
 }
 
 .role:not(:last-child) {

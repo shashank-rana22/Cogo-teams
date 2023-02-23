@@ -4,7 +4,6 @@
 	overflow-x: scroll;
 	border-radius: 8px;
 
-	/* background: black; */
 
 	:global {
 		.ui_table_head_container {
@@ -18,7 +17,6 @@
 }
 
 .table {
-	/* padding:0 15px 5px 15px; */
 	background: #fff;
 }
 

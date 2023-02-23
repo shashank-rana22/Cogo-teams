@@ -1,7 +1,7 @@
 import { Pagination, Pill, Button, Placeholder } from '@cogoport/components';
 import { format, isEmpty, startCase } from '@cogoport/utils';
 
-import useListForms from '../../../../utils/useListForms';
+import useListForms from '../../../../hooks/useListForms';
 
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';

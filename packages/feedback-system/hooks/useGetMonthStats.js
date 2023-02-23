@@ -6,7 +6,6 @@ const useGetMonthStats = () => {
 	const { profile:{ user:{ id:manager_id = '' } } } = useSelector((state) => state);
 
 	const [params, setParams] = useState({
-		// filters    : {},
 		ManagerID : manager_id,
 		Page      : 1,
 		PageLimit : 20,

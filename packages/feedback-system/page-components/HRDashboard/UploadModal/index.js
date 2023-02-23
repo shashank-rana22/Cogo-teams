@@ -1,4 +1,5 @@
 import { Tooltip, Toast, Button, Upload } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMInfo, IcMUpload } from '@cogoport/icons-react';
 import { useRequest, request, publicRequest } from '@cogoport/request';
 import { useState } from 'react';
@@ -6,8 +7,8 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 function UploadModalBody({ setOpenUploadModal = () => {} }) {
-	const [files, setFiles] = useState({}); // remove
-	const [loading, setLoading] = useState(true); // remove
+	const [files, setFiles] = useState({});
+	const [loading, setLoading] = useState(true);
 	const [urlStore, setUrlStore] = useState([]);
 
 	const [{ loading : uploadLoading = false }, trigger] = useRequest({
@@ -74,7 +75,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 			setFiles({});
 			setOpenUploadModal(false);
 		} catch (e) {
-			Toast.error(e.toString());
+			Toast.error(getApiErrorString(e.data));
 		}
 	};
 

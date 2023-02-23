@@ -73,14 +73,12 @@ function FeedBackForm({
 		);
 	});
 
+	const loadArr = [1, 2, 3, 4, 5];
+
 	if (questionsLoading) {
 		return (
 			<div className={styles.loading_state}>
-				<Placeholder width="100%" height="60px" />
-				<Placeholder width="100%" height="60px" />
-				<Placeholder width="100%" height="60px" />
-				<Placeholder width="100%" height="60px" />
-				<Placeholder width="100%" height="60px" />
+				{loadArr.map((i) => <Placeholder width="100%" height="60px" key={i} />)}
 			</div>
 		);
 	}

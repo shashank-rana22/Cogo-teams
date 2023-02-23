@@ -10,8 +10,6 @@ import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
 
 function ManagerDashboard() {
-	// const [selectedBucket, setSelectedBucket] = useState('');
-
 	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats({ });
 
 	const { list = [], pagination_data = {} } = data;

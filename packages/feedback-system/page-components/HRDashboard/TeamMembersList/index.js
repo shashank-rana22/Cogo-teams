@@ -8,7 +8,6 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function TeamMembersList({
-	// columns,
 	list = [],
 	pagination,
 	page_limit,

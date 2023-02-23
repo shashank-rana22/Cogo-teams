@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 function QuestionsItem({
 	item,
 	index,
-	// feedbackQuestionId = '',
 	setQuestionActionList = () => {},
 	isChecked = false,
 	questionStatus = '',

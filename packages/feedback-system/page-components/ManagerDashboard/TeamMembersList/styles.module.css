@@ -23,7 +23,7 @@
 
 .list_item_container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	margin: 16px 0;
 	background: #fff;
 	border-radius: 8px;
@@ -59,7 +59,6 @@
 
 .accordion_item_container {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
@@ -71,7 +70,6 @@
 
 .column_map {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-evenly;
 	width: 70%;

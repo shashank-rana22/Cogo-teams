@@ -3,7 +3,7 @@ import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useGetForm from '../../../utils/useGetForm';
+import useGetForm from '../../../hooks/useGetForm';
 
 import FeedBackForm from './FeedBackForm';
 import styles from './styles.module.css';

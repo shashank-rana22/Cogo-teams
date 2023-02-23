@@ -68,16 +68,7 @@ function UserProfile({ userId = '' }) {
 	const bgColorKpi = colorScheme(`${userData.rating}`);
 
 	const showLoading = () => (
-		<div
-			style={{
-				width           : '100%',
-				height          : '100%',
-				display         : 'flex',
-				justifyContent  : 'center',
-				alignItems      : 'center',
-				backgroundColor : '#fff',
-			}}
-		>
+		<div className={styles.loading_container}>
 			<Placeholder
 				style={{
 					borderRadius : '10px',

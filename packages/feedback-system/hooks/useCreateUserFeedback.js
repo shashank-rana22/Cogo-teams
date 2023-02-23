@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { getApiError } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -44,7 +44,7 @@ const useCreateUserFeedback = ({
 			setRefetchReportees(true);
 			return;
 		} catch (e) {
-			Toast.error(getApiError(e.data));
+			Toast.error(getApiErrorString(e.data));
 		}
 	};
 
