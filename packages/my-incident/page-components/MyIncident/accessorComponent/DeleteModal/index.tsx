@@ -83,7 +83,7 @@ function DeleteModal({ itemData, refetch }) {
 							onDeleteAccept();
 						}}
 					>
-						{status === 'REJECTED' ? 'Accept' : 'Delete'}
+						{status === 'REJECTED' ? 'Submit' : 'Delete'}
 
 					</Button>
 				</Modal.Footer>
