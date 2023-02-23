@@ -18,7 +18,7 @@ function ViewRequested({ itemData, name, refetch }) {
 	const [showModal, setShowModal] = useState(false);
 	const { onSave, loadingOnSave } = useSave({ remarks, id, refetch, setShowModal });
 	const { onRaiseAgain, loadingOnRaise } = useRaisedAgain({
-		FileUrl: selectedFile?.finalUrl,
+		FileUrl: selectedFile,
 		id,
 		refetch,
 		setShowModal,

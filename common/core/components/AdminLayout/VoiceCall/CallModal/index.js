@@ -12,8 +12,6 @@ function CallModal({
 	name = '',
 	mobile_number = '',
 	mobile_country_code = '',
-	// code = '',
-	// number = '',
 	status = '',
 	handleEnd = () => {},
 	durationTime = () => {},

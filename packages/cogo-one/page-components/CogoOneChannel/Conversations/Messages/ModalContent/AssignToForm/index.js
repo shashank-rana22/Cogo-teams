@@ -14,19 +14,29 @@ import controls from '../../../../../../configurations/assign-form-controls';
 
 import styles from './styles.module.css';
 
-function AssignToForm({ data = {} }) {
-	const { assignLoading, assignChat = () => {}, support_agent_id = null } = data || {};
+function AssignToForm({ data = {}, assignLoading = false }) {
+	const { assignChat = () => {}, support_agent_id = null } = data || {};
+
 	const listAgentsOptions = useGetAsyncOptions(
 		merge(asyncFieldsListAgents()),
 	);
+
 	const PLACEHOLDER_MAPPING = {
 		shipment_id    : 'Select SID',
 		invoice        : 'Enter Invoice No',
 		onboarding_kyc : 'Enter Pan No',
 	};
+
 	const [isAssignUser, setIsAssignUser] = useState(true);
-	const { handleSubmit, control, watch, reset, formState:{ errors } } = useForm({ allow_user: 'observe' });
+
+	const { handleSubmit, control, watch, reset, formState:{ errors } } = useForm({
+		defaultValues: {
+			allow_user: 'observe_and_chat',
+		},
+	});
+
 	const { assign_user, assign_condition, condition_value, allow_user } = controls;
+
 	const watchCondtion = watch('assign_condition') || null;
 	const createSubmit = (val) => {
 		let payload;
@@ -65,7 +75,7 @@ function AssignToForm({ data = {} }) {
 						{...listAgentsOptions}
 						isClearable
 					/>
-					{errors?.assign_user && <div className={styles.error_text}>This is Required</div>}
+					<div className={styles.error_text}>{errors?.assign_user && 'This is Required'}</div>
 				</div>
 			)}
 			<div className={styles.controller_div}>
@@ -94,7 +104,7 @@ function AssignToForm({ data = {} }) {
                                     PLACEHOLDER_MAPPING[watchCondtion] || ''
                                 }
 							/>
-							{errors?.condition_value && <div className={styles.error_text}>This is Required</div>}
+							<div className={styles.error_text}>{errors?.condition_value && ' This is Required'}</div>
 						</div>
 					)}
 				</>

@@ -8,8 +8,6 @@ function MinimizeModal({
 	dispatch,
 	profileData = {},
 	name = '',
-	// code = '',
-	// number = '',
 	mobile_number = '',
 	mobile_country_code = '',
 	status = '',

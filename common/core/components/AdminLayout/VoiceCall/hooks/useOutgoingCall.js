@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
-function useOutgoingCall({ number }) {
+function useOutgoingCall() {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_outgoing_call',
 		method : 'post',
@@ -32,13 +32,15 @@ function useOutgoingCall({ number }) {
 					mobile_country_code,
 					mobile_number,
 				},
-				agent_id: agentId,
+				agent_id : agentId,
+				source   : 'cogo_one',
 			};
 		} else {
 			payload = {
 				agent_id        : agentId,
 				organization_id : orgId,
 				user_id         : userId,
+				source          : 'cogo_one',
 			};
 		}
 		try {

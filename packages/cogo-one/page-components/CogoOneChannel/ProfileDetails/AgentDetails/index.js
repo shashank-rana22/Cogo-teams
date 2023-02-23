@@ -76,13 +76,13 @@ function AgentDetails({
 	const VERIFICATION_STATUS = [
 		{
 			label      : mobile_verified ? 'Verified' : 'Not Verified',
-			color      : 'green',
+			color      : mobile_verified ? 'green' : '#f8aea8',
 			size       : 'sm',
 			prefixIcon : <IcMCall />,
 		},
 		{
 			label      : whatsapp_verified ? 'Verified' : 'Not Verified',
-			color      : 'green',
+			color      : whatsapp_verified ? 'green' : '#f8aea8',
 			size       : 'sm',
 			prefixIcon : <IcCWhatsapp />,
 		},

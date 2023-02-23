@@ -177,3 +177,7 @@
 .tooltip_content {
 	display: flex;
 }
+
+.text {
+	font-size: 12px;
+}
