@@ -7,7 +7,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import TABS_MAPPING from '../../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import getControls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
