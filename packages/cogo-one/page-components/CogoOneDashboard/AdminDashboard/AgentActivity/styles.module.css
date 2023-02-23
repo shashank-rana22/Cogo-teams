@@ -28,7 +28,9 @@
 	width: 12%;
 	padding-left: 8px;
 	margin-right: 6px;
+	cursor: pointer;
 	background: #fff;
+	border: none;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
@@ -36,12 +38,12 @@
 .agent_nos_box_uppersection {
 	display: flex;
 	justify-content: space-between;
+	width: 100%;
 }
 
 .corner_icon {
 	position: relative;
-	top: 7px;
-	right: 7px;
+	top: 2px;
 }
 
 .agents_nos {
@@ -53,6 +55,7 @@
 }
 
 .agents_status_text {
+	padding-top: 6px;
 	padding-bottom: 5px;
 	padding-left: 5px;
 	font-size: 12px;
@@ -100,6 +103,31 @@
 	position: absolute;
 	top: 2px;
 	left: 6px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+
+.active_tab {
+	position: absolute;
+	top: 2px;
+	left: 6px;
+	width: 10px;
+	height: 10px;
+	background: orange;
+	border-radius: 50%;
+}
+
+.busy {
+	background: #fcdc00;
+}
+
+.online {
+	background: #abcd62;
+}
+
+.offline {
+	background: #828282;
 }
 
 .profile_box_right {

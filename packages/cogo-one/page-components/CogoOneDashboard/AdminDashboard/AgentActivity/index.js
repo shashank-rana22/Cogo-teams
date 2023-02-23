@@ -1,5 +1,6 @@
+import { cl } from '@cogoport/components';
 import { IcMProfile, IcMTimer } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { agentActivityStatus } from '../../../../configurations/dummyAgentActivityStatusData';
 import { busyAgentsData } from '../../../../configurations/dummyBusyAgentProfileData';
@@ -7,19 +8,26 @@ import { busyAgentsData } from '../../../../configurations/dummyBusyAgentProfile
 import styles from './styles.module.css';
 
 function AgentActivity() {
+	const [activeTab, setActiveTab] = useState('busy');
+	console.log(activeTab, 'activeTab');
+
+	const tabMapping = {
+		busy    : styles.busy,
+		online  : styles.online,
+		offline : styles.offline,
+	};
+
 	return (
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
-
 			<div className={styles.main_container}>
 				<div className={styles.activity_name}>Your Agents</div>
 				<div className={styles.main_container_upperpart}>
 
 					{agentActivityStatus.map((item) => {
-						const { nos, text, icon } = item;
+						const { nos, text, icon, key } = item;
 						return (
-
-							<div className={styles.agent_nos_box}>
+							<button className={styles.agent_nos_box} onClick={() => setActiveTab(key)}>
 								<div className={styles.agent_nos_box_uppersection}>
 									<div className={styles.agents_nos}>{nos}</div>
 									<div className={styles.corner_icon}>{icon}</div>
@@ -28,7 +36,7 @@ function AgentActivity() {
 								<div className={styles.agents_status_text}>
 									{text}
 								</div>
-							</div>
+							</button>
 
 						);
 					})}
@@ -36,13 +44,13 @@ function AgentActivity() {
 				</div>
 
 				<div className={styles.main_container_lowerpart}>
-
 					{busyAgentsData.map((item) => {
-						const { circle_icon, picture, name, call_status, contact_nos, duration } = item;
+						const { picture, name, call_status, contact_nos, duration } = item;
+
 						return (
 							<div className={styles.profile_box}>
 								<div className={styles.profile_box_left}>
-									<div className={styles.circle_icon}>{circle_icon}</div>
+									<div className={cl`${styles.circle_icon} ${tabMapping[activeTab]}`} />
 									<div className={styles.profile_icon}>{picture}</div>
 								</div>
 								<div className={styles.profile_box_right}>
@@ -64,7 +72,6 @@ function AgentActivity() {
 							</div>
 						);
 					})}
-
 				</div>
 			</div>
 

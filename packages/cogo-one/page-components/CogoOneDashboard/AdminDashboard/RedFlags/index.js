@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react';
+// import { Placeholder } from '@cogoport/components';
 
 import { redFlagsData } from '../../../../configurations/dummyRedfagsData';
 
