@@ -1,6 +1,6 @@
-import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
+import useGetCustomAsyncOptions from './useCustomAsyncOptions';
 
-const getDepartmentControls = ({ Department = '', Designation = '' }) => {
+const useGetDepartmentControls = ({ Department = '', Designation = '' }) => {
 	const designationOptions = useGetCustomAsyncOptions({
 		endpoint    : 'get-department-mappings',
 		initialCall : false,
@@ -10,7 +10,6 @@ const getDepartmentControls = ({ Department = '', Designation = '' }) => {
 		valueKey  : 'designation',
 		labelKey  : 'designation',
 		filterKey : 'Qdesignation',
-
 	});
 
 	return [
@@ -54,4 +53,4 @@ const getDepartmentControls = ({ Department = '', Designation = '' }) => {
 	];
 };
 
-export default getDepartmentControls;
+export default useGetDepartmentControls;

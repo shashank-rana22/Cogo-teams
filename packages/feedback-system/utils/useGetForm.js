@@ -21,6 +21,7 @@ const useGetForm = ({ item = {}, action = '', addFeedback = false }) => {
 		if (addFeedback) {
 			getForm();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [addFeedback]);
 
 	return { formData, loading };

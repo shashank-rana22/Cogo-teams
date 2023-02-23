@@ -11,6 +11,7 @@ const useGetUserDetails = ({ userId = '' }) => {
 		await trigger({ params: { UserID: userId } });
 	};
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => getUserDetails, []);
 
 	return {

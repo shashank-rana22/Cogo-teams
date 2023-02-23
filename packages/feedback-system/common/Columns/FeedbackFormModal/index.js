@@ -57,6 +57,7 @@ function FeedbackFormModal({
 				setRating(oldResponses);
 			}
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [form_responses]);
 
 	// const currentDate = new Date();

@@ -59,7 +59,7 @@ function AddQuestions({
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Tags: tags || undefined }), [tags]);
+	useEffect(() => setParams({ ...params, Tags: (tags || []).join(',') || undefined }), [tags]);
 
 	useEffect(() => {
 		if (refetchList) {
@@ -96,7 +96,7 @@ function AddQuestions({
 										{' > '}
 									</span>
 
-									<span1>{startCase(designation)}</span1>
+									<span className={styles.role}>{startCase(designation)}</span>
 								</div>
 
 								<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>

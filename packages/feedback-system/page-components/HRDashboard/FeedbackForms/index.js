@@ -85,9 +85,12 @@ function FeedbackForms() {
 		}
 
 		setOpenCreateForm(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [designation]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { if (refetchedLists) { getListDepartments(); } setRefetchedLists(false); }, [refetchedLists]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.go_back_container}>

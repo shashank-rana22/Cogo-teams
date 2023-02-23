@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
+	const [sendToAll, setSendToAll] = useState(false);
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		url    : 'notify-managers',
 		method : 'post',
@@ -9,7 +11,7 @@ const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 
 	const notify = async () => {
 		try {
-			await trigger({ data: {} });
+			await trigger({ data: { SendToAll: sendToAll } });
 			const { manager_count = '20' } = data;
 
 			setNotifyModal(false);
@@ -19,7 +21,7 @@ const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 		}
 	};
 
-	return { notify, loading, data };
+	return { notify, loading, data, setSendToAll, sendToAll };
 };
 
 export default useNotifyManagers;

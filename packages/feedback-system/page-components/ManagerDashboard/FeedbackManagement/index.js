@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/userTableData';
+import getDepartmentControls from '../../../hooks/useGetDepartmentControls';
 import useListReportees from '../../../hooks/useListReportees';
-import getDepartmentControls from '../../../utils/departmentControls';
 
 import styles from './styles.module.css';
 

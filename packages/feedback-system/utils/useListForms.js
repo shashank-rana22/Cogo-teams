@@ -12,12 +12,11 @@ const useListForms = ({ formsParams = {} }) => {
 
 	const getFormList = async () => {
 		await trigger({
-			params:
-			{
+			params: {
 				Department  : formsParams.department,
 				Designation : formsParams.designation,
-				page        : pagination || 1,
-				page_limit  : 10,
+				Page        : pagination || 1,
+				PageLimit   : 10,
 			},
 		});
 	};
@@ -26,6 +25,7 @@ const useListForms = ({ formsParams = {} }) => {
 		if (!isEmpty(formsParams)) {
 			getFormList();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formsParams, pagination]);
 
 	return {
