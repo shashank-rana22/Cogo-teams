@@ -64,10 +64,9 @@ function MapView(props = {}) {
 	};
 
 	const resetGlobePosition = () => {
-		const defaultMapCenter = { lat: 0, lng: 0, altitude: 2 };
+		const defaultMapCenter = { lat: 0, lng: 78, altitude: 2 };
 		const pointRotationSpeed = 100;
 		if (!isEmpty(globeGL.current)) {
-			console.log('globeGL.current:', globeGL.current);
 			globeGL.current.pointOfView(defaultMapCenter, pointRotationSpeed);
 		}
 	};

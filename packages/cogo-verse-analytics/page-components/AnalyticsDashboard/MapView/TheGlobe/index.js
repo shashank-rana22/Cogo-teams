@@ -17,7 +17,12 @@ function TheGLobe(
 	},
 ) {
 	console.log('globeGL in:', globeGL);
+	const first_coordinate = markerData[0] || {};
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
+
+	const CountryLocation = { lat: country_lat, lng: country_lng };
+	const defaultMapCenter = { lat: 0, lng: 78, altitude: 2 };
+	const pointRotationSpeed = 100;
 
 	let Globe = () => {};
 	// eslint-disable-next-line global-require
@@ -63,9 +68,8 @@ function TheGLobe(
 	};
 
 	// Handling Rotate and point of view
-	const CountryLocation = { lat: country_lat, lng: country_lng };
-	const defaultMapCenter = { lat: 0, lng: 0, altitude: 2 };
-	const pointRotationSpeed = 100;
+
+	setLocation(first_coordinate, pointRotationSpeed);
 
 	useEffect(() => {
 		if (!isEmpty(country)) {
@@ -103,17 +107,14 @@ function TheGLobe(
 				// html
 				htmlElementsData={markerData}
 				htmlTransitionDuration={2000}
-				htmlElement={(d) => {
-					// console.log('d', d);
+				htmlElement={() => {
 					// eslint-disable-next-line no-undef
 					const el = document?.createElement('div');
 					el.innerHTML = globeMarker;
 					el.style.color = '#FCDC00';
 					el.style.width = '10px';
 					el.style['pointer-events'] = 'auto';
-					el.style.cursor = 'pointer';
-
-					el.onclick = () => console.info(d);
+					el.style.cursor = 'default';
 					return el;
 				}}
 
