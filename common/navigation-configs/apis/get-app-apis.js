@@ -61,5 +61,6 @@ const app_apis = {
 	saas_product_inventory          : apis.app_saas_product_inventory,
 	saas_premium_services           : apis.app_saas_premium_services,
 	saas_order_history              : apis.app_saas_order_history,
+	export_factoting                : apis.export_factoring,
 };
 export default app_apis;
