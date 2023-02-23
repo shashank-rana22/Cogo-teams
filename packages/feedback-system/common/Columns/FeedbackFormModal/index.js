@@ -93,7 +93,7 @@ function FeedbackFormModal({
 				) : (
 					<Button
 						size="sm"
-						themeType="accent"
+						themeType="primary"
 						disabled={!isEmpty(feedback_id)}
 						onClick={() => 	setAddFeedback(true)}
 					>

@@ -11,15 +11,6 @@ import getMonthControls from '../../utils/monthControls';
 import styles from './styles.module.css';
 
 function UserDashboard() {
-	const monthControls = getMonthControls();
-
-	const formProps = useForm();
-	const { watch: watchDateFilter, control } = formProps;
-
-	const monthFilter = watchDateFilter('month');
-	const yearFilter = watchDateFilter('year');
-	const ratingFilter = watchDateFilter('rating');
-
 	const {
 		general,
 		profile,
@@ -33,6 +24,15 @@ function UserDashboard() {
 	const { setParams, params } = useListUserFeedbacks({
 		userId,
 	});
+
+	const monthControls = getMonthControls(params.Year, params.Month);
+
+	const formProps = useForm();
+	const { watch: watchDateFilter, control } = formProps;
+
+	const monthFilter = watchDateFilter('month');
+	const yearFilter = watchDateFilter('year');
+	const ratingFilter = watchDateFilter('rating');
 
 	useEffect(() => setParams((pv) => ({
 		...pv,
@@ -49,10 +49,11 @@ function UserDashboard() {
 
 			<div className={styles.header_filters}>
 				<div className={styles.filter_container}>
+
 					<div className={styles.month_container}>
 						<div>
 							<SelectController
-								{...monthControls.month}
+								{...monthControls.year}
 								control={control}
 								formProps={formProps}
 							/>
@@ -61,7 +62,7 @@ function UserDashboard() {
 					<div className={styles.month_container}>
 						<div>
 							<SelectController
-								{...monthControls.year}
+								{...monthControls.month}
 								control={control}
 								formProps={formProps}
 							/>

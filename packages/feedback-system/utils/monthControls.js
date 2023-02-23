@@ -13,7 +13,7 @@ const monthOptions = [
 	{ label: 'December', value: 12 },
 ];
 
-const getMonthControls = (selectedYear) => {
+const getMonthControls = (selectedYear, selectedMonth) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 	const month = currentDate.getMonth();
@@ -28,13 +28,14 @@ const getMonthControls = (selectedYear) => {
 			placeholder    : 'Month',
 			options        : monthOptions,
 			span           : 6,
+			disabled       : !selectedYear,
 		},
 		year: {
 			name           : 'year',
 			label          : 'Select Year',
 			type           : 'select',
 			defaultOptions : true,
-			isClearable    : true,
+			isClearable    : !selectedMonth,
 			placeholder    : 'Year',
 			value          : `${year}`,
 			options        : [

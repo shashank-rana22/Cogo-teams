@@ -61,7 +61,14 @@ function HRDashboard() {
 						Upload CSV
 					</Button>
 
-					<Button size="lg" themeType="accent" onClick={() => routeToFeedbackForms()}>Create New Form</Button>
+					<Button
+						size="lg"
+						themeType="primary"
+						onClick={() => routeToFeedbackForms()}
+					>
+						Create New Form
+
+					</Button>
 				</div>
 			</div>
 
