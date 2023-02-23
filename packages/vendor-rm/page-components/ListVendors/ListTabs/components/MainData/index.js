@@ -2,19 +2,16 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import TAB_OPTION_MAPPING from '../../utils/tab_options_mapping';
-// import FinanceDashBoard from '../FinanceDashBoard';
-// import useGetBfList from '../hooks/useGetBfList';
-// import Profile from '../Profile';
-// import ServicesUsers from '../Services&Users';
 
 import styles from './styles.module.css';
 
-function MainData({ data = {} }) {
+function MainData({
+	data = {},
+}) {
 	const [activeTab, setActiveTab] = useState('services_and_users');
 	const options = Object.values(TAB_OPTION_MAPPING);
 
 	return (
-
 		<div className={styles.main}>
 
 			<Tabs
@@ -30,26 +27,15 @@ function MainData({ data = {} }) {
 					if (!ContainerComponent) return null;
 
 					return (
-						<TabPanel name={key} title={title}>
-							<ContainerComponent
-								data={data}
-							/>
-
+						<TabPanel
+							name={key}
+							title={title}
+						>
+							<ContainerComponent data={data} />
 						</TabPanel>
 					);
 				})}
 
-				{/* <TabPanel name="local_rates" title="Services & Users">
-					<div><ServicesUsers data={data} /></div>
-				</TabPanel>
-
-				<TabPanel name="suggested_rates" title="Profile">
-					<div><Profile data={data} refetchVendorInfo={refetchVendorInfo} /></div>
-				</TabPanel>
-
-				<TabPanel name="freight_bookings" title="Finance DashBoard &emsp;&emsp; ">
-					<div><FinanceDashBoard /></div>
-				</TabPanel> */}
 			</Tabs>
 
 		</div>

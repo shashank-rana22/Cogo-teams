@@ -10,9 +10,8 @@ import { useEffect } from 'react';
 import { controls } from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
 
 function useVendorBankDetail({
-	refetchVendorInfo = () => {}, setShowAddbankModal = () => {
-
-	},
+	refetchVendorInfo = () => {},
+	setShowAddbankModal = () => {},
 }) {
 	const formProps = useForm();
 

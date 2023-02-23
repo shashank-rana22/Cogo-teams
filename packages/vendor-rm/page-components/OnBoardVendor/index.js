@@ -20,7 +20,11 @@ function OnBoardVendor() {
 
 	return (
 		<div>
-			<div role="presentation" onClick={onBack} className={styles.back_container}>
+			<div
+				role="presentation"
+				onClick={onBack}
+				className={styles.back_container}
+			>
 				<IcMArrowBack fill="#221F20" width={20} height={16} />
 				<div className={styles.back_text}>Back to Vendor Relationship Management</div>
 			</div>

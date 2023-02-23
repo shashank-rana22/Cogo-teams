@@ -5,11 +5,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function PaymentDetails({ data = {} }) {
-	// eslint-disable-next-line max-len
-	const address = 'Prabhushankar Ramanayak ,Sahil Import Export Private Limited, 6th Floor, A Wing, Ackruti Trade Center, Kondivita, Andheri East,Mumbai - 400069, Maharashtra, India.';
+function PaymentDetails({
+	data = {},
+}) {
 	return (
-		(data.bank_details || []).map((i) => (
+		(data.bank_details || []).map((bankDetail) => (
 			<>
 				<div className={styles.cont}>
 					<div className={styles.box_info}>
@@ -17,7 +17,7 @@ function PaymentDetails({ data = {} }) {
 							Account Holder’s Name
 						</div>
 						<div className={styles.bottom}>
-							{startCase(i.account_holder_name)}
+							{startCase(bankDetail.account_holder_name)}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -25,7 +25,7 @@ function PaymentDetails({ data = {} }) {
 							Account No.
 						</div>
 						<div className={styles.bottom}>
-							{i.account_number}
+							{bankDetail.account_number}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -33,7 +33,7 @@ function PaymentDetails({ data = {} }) {
 							Account Type
 						</div>
 						<div className={styles.bottom}>
-							{startCase(i.account_type)}
+							{startCase(bankDetail.account_type)}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -41,7 +41,7 @@ function PaymentDetails({ data = {} }) {
 							IFSC Code
 						</div>
 						<div className={styles.bottom}>
-							{i.ifsc_code}
+							{bankDetail.ifsc_code}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -49,7 +49,7 @@ function PaymentDetails({ data = {} }) {
 							Bank Name
 						</div>
 						<div className={styles.bottom}>
-							{i.bank_name}
+							{bankDetail.bank_name}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -57,7 +57,7 @@ function PaymentDetails({ data = {} }) {
 							Branch Name
 						</div>
 						<div className={styles.bottom}>
-							{i.branch_name}
+							{bankDetail.branch_name}
 						</div>
 					</div>
 					<div className={styles.box_info}>
@@ -66,9 +66,19 @@ function PaymentDetails({ data = {} }) {
 						</div>
 						<div className={styles.bottom}>
 							<div className={styles.di}>
-								<span className={styles.txt} style={{ color: 'orange' }}>{i.account_number}</span>
+								<a
+									href={bankDetail?.bank_document_url}
+									target="_blank"
+									className={styles.txt}
+									style={{
+										color: 'orange',
+									}}
+									rel="noreferrer"
+								>
+									{bankDetail?.bank_document_url}
+								</a>
 								<IcCFtick />
-								<button className={styles.btn}><IcMDownload /></button>
+								<div className={styles.btn}><IcMDownload /></div>
 							</div>
 						</div>
 					</div>
@@ -78,7 +88,7 @@ function PaymentDetails({ data = {} }) {
 						Billing Address
 					</div>
 					<div className={styles.bottom1}>
-						{address}
+						{bankDetail?.address}
 					</div>
 				</div>
 				<hr className={styles.dis1} />
