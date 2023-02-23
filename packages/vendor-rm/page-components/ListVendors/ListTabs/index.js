@@ -12,13 +12,23 @@ function ListTabs() {
 	const {
 		loading,
 		data,
+		refetchVendorInfo,
 	} = useVendorInfo();
+
+	if (loading) {
+		return null;
+	}
+
+	console.log('data after aopi', data);
 
 	return (
 		<>
 			<BackButton />
 			<Banner data={data} />
-			<MainData data={data} />
+			<MainData
+				data={data}
+				refetchVendorInfo={refetchVendorInfo}
+			/>
 		</>
 
 	);
