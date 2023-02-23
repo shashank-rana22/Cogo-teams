@@ -30,22 +30,22 @@ function TeamMembersList({
 
 	const columnsMapping = [
 		{
-			key   : 'feedbacks_given',
+			key   : 'total_feedbacks',
 			label : 'Feedbacks Given',
 			flex  : 1.7,
 		},
 		{
-			key   : 'below_avg_performance',
+			key   : 'BelowAverage',
 			label : 'Below Average Performance',
 			flex  : 2.2,
 		},
 		{
-			key   : 'avg_performance',
+			key   : 'Average',
 			label : 'Average Performance',
 			flex  : 2,
 		},
 		{
-			key   : 'above_avg_performance',
+			key   : 'GoodPerforming',
 			label : 'Above Average Performance',
 			flex  : 2.2,
 		},
@@ -69,7 +69,7 @@ function TeamMembersList({
 						<div key={key} style={{ flex }}>
 							{label ? <div className={styles.label}>{label}</div> : null}
 
-							<div className={styles.value}>{i[key]}</div>
+							<div className={styles.value}>{i.stats[key]}</div>
 						</div>
 					);
 				})}

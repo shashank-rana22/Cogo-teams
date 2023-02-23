@@ -5,7 +5,8 @@ const useListDepartments = () => {
 	const [{ data = {}, loading = false }, trigger] = useRequest({
 		url    : 'list-departments',
 		method : 'get',
-	}, { manual: false });
+	}, { manual: true });
+	
 
 	const getListDepartments = async () => {
 		await trigger();

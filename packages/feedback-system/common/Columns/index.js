@@ -26,7 +26,10 @@ const redirectPathSourceMapping = {
 	},
 };
 
-const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [] }) => {
+const useGetColumns = ({
+	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
+	setRefetchReportees = () => {},
+}) => {
 	const Router = useRouter();
 	const handleClick = (user_id) => {
 		const { forwardPath, returnPath = '/feedback-system/user-dashboard' } = redirectPathSourceMapping[source];
@@ -51,11 +54,6 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 			<div className={styles.head_content}>
 				<div
 					className={styles.container}
-					role="button"
-					tabIndex={0}
-					onClick={() => {
-						handleClick(item?.user_id);
-					}}
 				>
 					{startCase(item?.name)}
 				</div>
@@ -149,6 +147,7 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 				<FeedbackFormModal
 					item={item}
 					getTeamFeedbackList={getTeamFeedbackList}
+					setRefetchReportees={setRefetchReportees}
 				/>
 			</div>
 		),
@@ -166,8 +165,8 @@ const useGetColumns = ({ getTeamFeedbackList = () => {}, source = 'hr_dashboard'
 				/>
 			</div>
 		),
-		id  : 'add-kpi',
-		key : 'add-kpi',
+		id  : 'view_form',
+		key : 'view_form',
 	},
 	{
 		Header   : <div className={styles.head}>Manager</div>,

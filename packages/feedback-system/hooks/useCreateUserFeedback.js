@@ -8,6 +8,7 @@ const useCreateUserFeedback = ({
 	userId,
 	formId,
 	setShowForm = () => {},
+	setRefetchReportees = () => {},
 }) => {
 	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
 
@@ -39,6 +40,7 @@ const useCreateUserFeedback = ({
 			setShowForm(false);
 
 			Toast.success('Feedback Created Successfully');
+			setRefetchReportees(true);
 			return;
 		} catch (e) {
 			console.log(e.toString());

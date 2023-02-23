@@ -9,9 +9,22 @@ import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/userTableData';
 import useListReportees from '../../../hooks/useListReportees';
 import getDepartmentControls from '../../../utils/departmentControls';
-import getFeedBackControls from '../../../utils/getFeedbackControls';
 
 import styles from './styles.module.css';
+
+const feedbackControls = {
+	name           : 'status',
+	label          : 'Select Status',
+	type           : 'select',
+	defaultOptions : true,
+	isClearable    : true,
+	placeholder    : 'Status',
+	options        : [
+		{ label: 'Pending', value: 'pending' },
+		{ label: 'Submitted', value: 'successful' },
+	],
+	span: 6,
+};
 
 function FeedbackManagement() {
 	const Router = useRouter();
@@ -22,6 +35,8 @@ function FeedbackManagement() {
 	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);
 
 	const [searchValue, setSearchValue] = useState('');
+	const [refetchReportees, setRefetchReportees] = useState(false);
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
@@ -30,6 +45,7 @@ function FeedbackManagement() {
 		feedbackData,
 		loading = false,
 		setPage,
+		fetchReportees,
 	} = useListReportees({
 		userId,
 		searchValue: query,
@@ -38,7 +54,6 @@ function FeedbackManagement() {
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
 
 	const { total_count = '' } = pagination_data;
-	const feedbackControls = getFeedBackControls([]);
 
 	const setFilter = (val, type) => {
 		setParams({ ...params, [type]: val });
@@ -47,6 +62,7 @@ function FeedbackManagement() {
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'department', 'month', 'add-kpi'];
 
 	const feedbackManagementColumns = useGetColumns({
+		setRefetchReportees,
 		source: 'manager_feedback',
 		columnsToShow,
 	});
@@ -73,6 +89,14 @@ function FeedbackManagement() {
 		debounceQuery(searchValue);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
+
+	useEffect(() => {
+		if (refetchReportees) {
+			fetchReportees();
+		}
+		setRefetchReportees(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [refetchReportees]);
 
 	return (
 		<div className={`${styles.container}`}>
@@ -110,9 +134,10 @@ function FeedbackManagement() {
 					<Select
 						value={params.FeedbackStatus}
 						onChange={(val) => setFilter(val, 'FeedbackStatus')}
-						placeholder={feedbackControls.status.placeholder}
+						placeholder={feedbackControls.placeholder}
 						style={{ marginRight: '8px' }}
-						options={feedbackControls.status.options}
+						options={feedbackControls.options}
+						isClearable
 					/>
 					<Input
 						size="md"

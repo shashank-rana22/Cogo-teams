@@ -90,6 +90,11 @@ const feedback_system = [
 		service_name : 'user_feedback',
 	},
 	{
+		api          : 'get-form-responses',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
 		api          : 'get-month-stats',
 		access_type  : 'private',
 		service_name : 'user_feedback',

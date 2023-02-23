@@ -1,15 +1,16 @@
-import { useGetAsyncOptions } from '@cogoport/forms';
+import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
 
 const useGetTagControls = () => {
-	const tagOptions = useGetAsyncOptions({
+	const tagOptions = useGetCustomAsyncOptions({
 		endpoint    : 'list-tags',
 		initialCall : false,
 		params      : {
 			filters: {
 			},
 		},
-		valueKey : 'tag',
-		labelKey : 'tag',
+		valueKey  : 'tag',
+		labelKey  : 'tag',
+		filterKey : 'Q',
 	});
 
 	return {

@@ -11,12 +11,15 @@ const useListReportees = ({
 		PageLimit : 20,
 	});
 
-	const [{ data: feedbackData = {}, loading = false }] = useRequest({
+	const [{ data: feedbackData = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list-reportees',
 		params,
 	}, { manual: false });
 
+	const fetchReportees = async () => {
+		await trigger({ params });
+	};
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
@@ -34,6 +37,7 @@ const useListReportees = ({
 		feedbackData,
 		loading,
 		setPage,
+		fetchReportees,
 	};
 };
 
