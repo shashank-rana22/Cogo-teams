@@ -31,7 +31,7 @@ const useVendorInfo = () => {
 
 			setData(response);
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 		}
 	};
 

@@ -2,17 +2,16 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import TAB_OPTION_MAPPING from '../../utils/tab_options_mapping';
-import FinanceDashBoard from '../FinanceDashBoard';
-import Profile from '../Profile';
-import ServicesUsers from '../Services&Users';
+// import FinanceDashBoard from '../FinanceDashBoard';
+// import useGetBfList from '../hooks/useGetBfList';
+// import Profile from '../Profile';
+// import ServicesUsers from '../Services&Users';
 
 import styles from './styles.module.css';
 
-function MainData({ data = {}, refetchVendorInfo = () => {} }) {
-	const [activeTab, setActiveTab] = useState('local_rates');
-	// const options = Object.values(TAB_OPTION_MAPPING);
-
-	console.log('data in main', data);
+function MainData({ data = {} }) {
+	const [activeTab, setActiveTab] = useState('services_and_users');
+	const options = Object.values(TAB_OPTION_MAPPING);
 
 	return (
 
@@ -25,7 +24,7 @@ function MainData({ data = {}, refetchVendorInfo = () => {} }) {
 				className={styles.change}
 
 			>
-				{/* {options?.map((option) => {
+				{options?.map((option) => {
 					const { key = '', title = '', containerComponent: ContainerComponent = null } = option;
 
 					if (!ContainerComponent) return null;
@@ -38,10 +37,10 @@ function MainData({ data = {}, refetchVendorInfo = () => {} }) {
 
 						</TabPanel>
 					);
-				})} */}
+				})}
 
-				<TabPanel name="local_rates" title="Services & Users">
-					<div><ServicesUsers /></div>
+				{/* <TabPanel name="local_rates" title="Services & Users">
+					<div><ServicesUsers data={data} /></div>
 				</TabPanel>
 
 				<TabPanel name="suggested_rates" title="Profile">
@@ -50,7 +49,7 @@ function MainData({ data = {}, refetchVendorInfo = () => {} }) {
 
 				<TabPanel name="freight_bookings" title="Finance DashBoard &emsp;&emsp; ">
 					<div><FinanceDashBoard /></div>
-				</TabPanel>
+				</TabPanel> */}
 			</Tabs>
 
 		</div>

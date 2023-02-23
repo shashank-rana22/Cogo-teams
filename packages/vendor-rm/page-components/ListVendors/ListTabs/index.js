@@ -19,7 +19,6 @@ function ListTabs() {
 		return null;
 	}
 
-	console.log('data after aopi', data);
 
 	return (
 		<>
