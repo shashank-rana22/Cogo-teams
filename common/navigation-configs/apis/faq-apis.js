@@ -37,6 +37,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+		{
+			api          : 'list_faq_questions',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
 	],
 };
 

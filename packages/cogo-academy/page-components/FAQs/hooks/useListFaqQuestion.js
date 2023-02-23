@@ -1,15 +1,15 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListFaqTag() {
+function useListFaqQuestions() {
 	const [activeTab, setActiveTab] = useState('');
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'faq/list_faq_tags',
+		url    : 'faq/list_faq_questions',
 	}, { manual: true });
 
-	const fetchFaqTag = async () => {
+	const fetchFaqQuestions = async () => {
 		try {
 			await trigger({
 				params: { },
@@ -19,13 +19,13 @@ function useListFaqTag() {
 		}
 	};
 
-	// console.log('data :: ', data);
+	console.log('data :: ', data);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTag(); }, []);
+	useEffect(() => { fetchFaqQuestions(); }, []);
 
 	return {
-		refetchTag: fetchFaqTag,
+		refetchQuestions: fetchFaqQuestions,
 		data,
 		loading,
 		activeTab,
@@ -33,4 +33,4 @@ function useListFaqTag() {
 	};
 }
 
-export default useListFaqTag;
+export default useListFaqQuestions;

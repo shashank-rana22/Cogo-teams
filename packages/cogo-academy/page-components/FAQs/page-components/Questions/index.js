@@ -5,7 +5,7 @@ import QuestionsCollapse from '../QuestionCollapse';
 
 import styles from './styles.module.css';
 
-function Questions() {
+function Questions({ questions }) {
 	const [open, setOPen] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 
@@ -14,17 +14,12 @@ function Questions() {
 	const toggle = () => {
 		setOPen(!open);
 	};
-
+	console.log('question', questions);
 	return (
 
 		<div className={styles.contentshow}>
-			{/* // className={styles.contentparent}
-			// ref={contentRef}
-			// style={open ? { height: `${contentRef.current.scrollHeight} px` } : { height: '0px' }} */}
-
 			<div role="presentation" onClick={toggle}>
-				<QuestionsCollapse collapse={open} />
-
+				<QuestionsCollapse collapse={open} questions={questions} />
 			</div>
 			{open && (
 				<>

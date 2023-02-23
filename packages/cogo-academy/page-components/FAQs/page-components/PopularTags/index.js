@@ -12,7 +12,7 @@ function PopularTags() {
 		setActiveTab,
 	} = useListFaqTag();
 
-	console.log(data);
+	// console.log(data);
 
 	return (
 
