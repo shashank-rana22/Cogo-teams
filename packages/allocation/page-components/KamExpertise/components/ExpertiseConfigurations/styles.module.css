@@ -16,34 +16,31 @@
 	}
 }
 
-.back_container{
-    display: flex;
-    align-items: center;
+.back_container {
+	display: flex;
+	align-items: center;
 }
 
-.back_text{
-    font-size: 16px;
-    cursor: pointer;
+.back_text {
+	font-size: 16px;
+	cursor: pointer;
 }
 
-.icon_container{
-    display: flex;
-    margin-right: 8px;
-    align-items: center;
+.icon_container {
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
 }
 
 .heading_container {
-	position: relative;
-	display: inline-block;
-	width: fit-content;
-	margin-bottom: 8px;
-	font-size: 18px;
+	margin-bottom: 24px;
+	font-size: 28px;
 	font-weight: 600;
-	color: #221f20;
+	line-height: 42px;
 
 	@media (min-width: 768px) {
+		margin-top: 12px;
 		font-size: 20px;
-        margin-top: 12px;
 	}
 }
 
