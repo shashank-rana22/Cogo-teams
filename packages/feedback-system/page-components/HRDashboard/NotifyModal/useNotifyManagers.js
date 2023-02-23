@@ -5,7 +5,7 @@ import { useState } from 'react';
 const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 	const [sendToAll, setSendToAll] = useState(false);
 	const [{ loading = false, data = {} }, trigger] = useRequest({
-		url    : 'notify-managers',
+		url    : 'notify_managers',
 		method : 'post',
 	}, { manual: true });
 

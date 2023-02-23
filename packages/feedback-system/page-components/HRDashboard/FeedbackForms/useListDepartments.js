@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const useListDepartments = () => {
 	const [{ data = {}, loading = false }, trigger] = useRequest({
-		url    : 'list-departments',
+		url    : 'list_departments',
 		method : 'get',
 	}, { manual: true });
 

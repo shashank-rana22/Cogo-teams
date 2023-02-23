@@ -1,19 +1,19 @@
 import { useRequest } from '@cogoport/request';
 
-const useGetPieChartStats = ({ userId = '', month = '', year = '' }) => {
-	const Months = ['January', 'February', 'March', 'April',
-		'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const useGetPieChartStats = ({ userId = '', params = {} }) => {
+	const { Month = '', Year = '', ManagerID = '' } = params;
 
-	const params = {
-		PerformedByID : userId || undefined,
-		Month         : Months[month - 1] || undefined,
-		Year          : year || undefined,
+	const newParams = {
+		ManagerID : ManagerID || undefined,
+		UserID    : userId || undefined,
+		Month     : Month || undefined,
+		Year      : Year || undefined,
 	};
 
 	const [{ loading = false, data : userData = {} }] = useRequest({
 		method : 'get',
-		url    : 'get-performance-stats',
-		params,
+		url    : 'get_performance_stats',
+		params : newParams,
 	}, { manual: false });
 
 	return {

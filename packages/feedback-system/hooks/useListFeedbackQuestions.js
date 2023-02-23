@@ -13,7 +13,7 @@ const useListFeedbackQuestions = ({
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list-questions',
+		url    : 'list_questions',
 		params,
 	}, { manual: false });
 

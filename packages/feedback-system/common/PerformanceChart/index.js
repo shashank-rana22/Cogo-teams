@@ -9,12 +9,10 @@ import TeamPieChart from '../TeamPieChart';
 import styles from './styles.module.css';
 
 function PerformanceChart({ params = {}, userId = '' }) {
-	const { Month = '', Year = '', ManagerID = '' } = params;
-
 	const {
 		performanceStatsList = [],
 		loading,
-	} = useGetFeedbackPerformanceStats({ userId, Month, Year, ManagerID });
+	} = useGetFeedbackPerformanceStats({ userId, params });
 
 	const lineChartlist = [];
 
@@ -112,7 +110,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 					)}
 
 					<div className={styles.pie_chart}>
-						<TeamPieChart userId={userId} month={Month} year={Year} />
+						<TeamPieChart userId={userId} params={params} />
 					</div>
 
 				</div>

@@ -13,7 +13,7 @@ const useListReportees = ({
 
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list-reportees',
+		url    : 'list_reportees',
 		params,
 	}, { manual: false });
 

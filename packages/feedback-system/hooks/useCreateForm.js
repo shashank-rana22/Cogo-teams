@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 
 const useCreateForm = () => {
 	const [{ loading:createFormLoading = false }, trigger] = useRequest({
-		url    : 'create-form',
+		url    : 'create_form',
 		method : 'post',
 	}, { manual: true });
 

@@ -9,7 +9,7 @@ const useSaveFeedbackQuestions = () => {
 
 	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
-		url    : 'update-question',
+		url    : 'update_question',
 	}, { manual: true });
 
 	const onSaveFeedbackQuestions = async ({

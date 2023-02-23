@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const useGetUserDetails = ({ userId = '' }) => {
 	const [{ loading = false, data : userData = {} }, trigger] = useRequest({
-		url    : 'get-user',
+		url    : 'get_user',
 		method : 'get',
 	}, { manual: true });
 

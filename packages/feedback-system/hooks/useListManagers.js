@@ -11,7 +11,7 @@ const useListManagers = ({
 
 	const [{ data: feedbackData = {}, loading = false }] = useRequest({
 		method : 'get',
-		url    : 'list-managers',
+		url    : 'list_managers',
 		params,
 	}, { manual: false });
 

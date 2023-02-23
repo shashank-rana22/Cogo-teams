@@ -14,7 +14,7 @@ const useCreateUserFeedback = ({
 	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
-		url    : 'create-form-responses',
+		url    : 'create_form_responses',
 		method : 'post',
 	}, { manual: true });
 

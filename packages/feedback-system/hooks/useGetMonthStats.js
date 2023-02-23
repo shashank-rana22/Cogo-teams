@@ -13,7 +13,7 @@ const useGetMonthStats = () => {
 	});
 
 	const [{ data = {}, loading = false }] = useRequest({
-		url    : 'get-month-stats',
+		url    : 'get_month_stats',
 		method : 'get',
 		params,
 	}, { manual: false });

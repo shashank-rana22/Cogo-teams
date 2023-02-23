@@ -17,7 +17,7 @@ const useManagerListItem = ({ item }) => {
 
 	const [{ data = {}, loading = false }] = useRequest({
 		method : 'get',
-		url    : 'list-user-feedbacks',
+		url    : 'list_user_feedbacks',
 		params,
 	}, { manual: false });
 

@@ -1,111 +1,91 @@
 const feedback_system = [
 	{
-		api          : 'get-user',
+		api          : 'get_user',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'get-department-mappings',
+		api          : 'get_department_mappings',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'get-average-ratings',
+		api          : 'get_average_ratings',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-user-feedbacks',
+		api          : 'list_user_feedbacks',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'update-form-responses',
+		api          : 'create_form_responses',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'create-form-responses',
+		api          : 'create_question',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'get_user_feedback',
+		api          : 'approve_ratings',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'create-question',
+		api          : 'list_managers',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'approve-ratings',
+		api          : 'list_questions',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-managers',
+		api          : 'list_forms',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-team-members',
+		api          : 'list_departments',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-questions',
+		api          : 'create_form',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'update-question',
+		api          : 'list_tags',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-forms',
+		api          : 'get_form',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-departments',
+		api          : 'get_form_responses',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'create-form',
+		api          : 'get_month_stats',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'list-tags',
+		api          : 'notify_managers',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
 	{
-		api          : 'get-form',
-		access_type  : 'private',
-		service_name : 'user_feedback',
-	},
-	{
-		api          : 'get-form-responses',
-		access_type  : 'private',
-		service_name : 'user_feedback',
-	},
-	{
-		api          : 'get-month-stats',
-		access_type  : 'private',
-		service_name : 'user_feedback',
-	},
-	{
-		api          : 'notify-managers',
-		access_type  : 'private',
-		service_name : 'user_feedback',
-	},
-	{
-		api          : 'list-reportees',
+		api          : 'list_reportees',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
@@ -113,21 +93,12 @@ const feedback_system = [
 		api          : 'create_communication',
 		access_type  : 'private',
 		service_name : 'communication',
-	}, {
-		api          : 'get-performance-stats',
+	},
+	{
+		api          : 'get_performance_stats',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
-	// {
-	// 	api          : 'get_feedback_performance_stats',
-	// 	access_type  : 'private',
-	// 	service_name : 'user_feedback',
-	// },
-	// {
-	// 	api          : 'get_feedback_dashboard_stats',
-	// 	access_type  : 'private',
-	// 	service_name : 'user_feedback',
-	// },
 ];
 
 export default feedback_system;

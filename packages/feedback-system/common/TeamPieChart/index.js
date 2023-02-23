@@ -5,10 +5,10 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function TeamPieChart({ userId = '', month = '', year = '' }) {
+function TeamPieChart({ userId = '', params = {} }) {
 	const {
 		userData,
-	} = useGetPieChartStats({ userId, month, year });
+	} = useGetPieChartStats({ userId, params });
 
 	const chart_data = [
 		{

@@ -9,7 +9,7 @@ const useAddFeedbackQuestion = () => {
 
 	const [{ loading: apiLoading = false }, trigger] = useRequest({
 		method : 'post',
-		url    : 'create-question',
+		url    : 'create_question',
 	}, { manual: true });
 
 	const controls = useGetCreateQuestionsControls();
