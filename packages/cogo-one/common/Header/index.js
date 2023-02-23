@@ -5,7 +5,7 @@ import { cogoOneLogo } from '../../page-components/CogoOneDashboard/constants';
 
 import styles from './styles.module.css';
 
-function Header({ activeTab, setActiveTab }) {
+function Header({ setCalendarType, calendarType }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -18,9 +18,9 @@ function Header({ activeTab, setActiveTab }) {
 				<div className={styles.heading_name}>CogoOne Dashboard</div>
 			</div>
 			<Tabs
-				activeTab={activeTab}
+				activeTab={calendarType}
 				themeType="tertiary"
-				onChange={setActiveTab}
+				onChange={setCalendarType}
 			>
 				<TabPanel name="day" title="Day" />
 				<TabPanel name="week" title="Week" />

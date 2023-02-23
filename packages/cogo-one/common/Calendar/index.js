@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
-function Calendar({ calendarType = 'month' }) {
+function Calendar({ calendarType }) {
 	const [pagination, setPagination] = useState(0);
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState('');
@@ -48,10 +48,9 @@ function Calendar({ calendarType = 'month' }) {
 		}
 		while (start <= numDays) {
 			newWeeks.push({
-				key  : `cal-week-${pagination}-${iterator}`,
 				start,
 				end,
-				date : new Date(year, month, start),
+				date: new Date(year, month, start),
 				iterator,
 			});
 			iterator += 1;
@@ -95,11 +94,11 @@ function Calendar({ calendarType = 'month' }) {
 		}
 		const todayDate = new Date();
 		const data = [];
-		newWeeks.reverse().forEach((week) => {
+		newWeeks.reverse().forEach((week, index) => {
 			if (todayDate.getTime() >= week.date.getTime()) {
 				data.push(
 					{
-						key      : week.key,
+						key      : `cal-week-${pagination}-${index}`,
 						label    : `Week ${week.iterator}`,
 						subLabel : `${format(week.date, 'MMM')} ${week.start} to ${week.end}`,
 					},

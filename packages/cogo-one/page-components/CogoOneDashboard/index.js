@@ -1,5 +1,5 @@
 // import { useSelector } from '@cogoport/store';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 import AdminDashboard from './AdminDashboard';
 import AgentDashboard from './AgentDashboard';
@@ -14,11 +14,13 @@ function CogoOneDashboard({ isAdminView = true }) {
 	// 	user_data: profile || {},
 	// }));
 
+	const [calendarType, setCalendarType] = useState('day');
+
 	return (
 		<div className={styles.prime_container}>
 			{isAdminView
-				? <AdminDashboard />
-				: <AgentDashboard />}
+				? <AdminDashboard calendarType={calendarType} setCalendarType={setCalendarType} />
+				: <AgentDashboard calendarType={calendarType} setCalendarType={setCalendarType} />}
 		</div>
 	);
 }
