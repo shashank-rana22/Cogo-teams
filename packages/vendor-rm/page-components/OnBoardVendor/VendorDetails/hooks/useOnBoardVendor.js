@@ -226,8 +226,9 @@ function useOnBoardVendor({
 					registrationType   : vendorInformation?.vendor_details?.registration_type,
 					registrationNumber : vendorInformation?.vendor_details?.registration_number,
 				});
+			} else {
+				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 			}
-			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [vendorInformation]);
