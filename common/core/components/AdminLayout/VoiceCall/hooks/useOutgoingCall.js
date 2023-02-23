@@ -32,13 +32,15 @@ function useOutgoingCall() {
 					mobile_country_code,
 					mobile_number,
 				},
-				agent_id: agentId,
+				agent_id : agentId,
+				source   : 'cogo_one',
 			};
 		} else {
 			payload = {
 				agent_id        : agentId,
 				organization_id : orgId,
 				user_id         : userId,
+				source          : 'cogo_one',
 			};
 		}
 		try {
