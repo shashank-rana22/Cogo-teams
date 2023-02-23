@@ -7,7 +7,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import TABS_MAPPING from '../../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import getControls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
@@ -71,10 +70,10 @@ function useVendorServices({
 	};
 
 	useEffect(() => {
-		const { services: office_details = [] } = vendorInformation || {};
+		const { services = [] } = vendorInformation || {};
 
 		const prefill_obj = {
-			office_details,
+			services,
 		};
 
 		controls.forEach((item) => {
@@ -82,10 +81,6 @@ function useVendorServices({
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [vendorInformation]);
-
-	const handleBackLink = (step) => {
-		setActiveStepper(TABS_MAPPING[step]);
-	};
 
 	return {
 		controls,
@@ -95,7 +90,6 @@ function useVendorServices({
 		errors,
 		onSubmit,
 		loading,
-		handleBackLink,
 		watch,
 		...rest,
 	};

@@ -2,12 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({
-	activeStepper = {},
-	onBack = () => {},
-}) {
-	const preveousFormStep = activeStepper.step - 2;
-
+function Header() {
 	return (
 		<div className={styles.header}>
 			<div className={styles.title}>

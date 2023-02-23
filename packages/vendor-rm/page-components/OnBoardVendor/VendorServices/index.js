@@ -17,7 +17,6 @@ function VendorServices({
 		errors = {},
 		onSubmit = () => {},
 		loading = false,
-		handleBackLink = () => {},
 		watch = () => {},
 		setValue,
 	} = useVendorServices({
@@ -28,10 +27,7 @@ function VendorServices({
 
 	return (
 		<div className={styles.container}>
-			<Header
-				activeStepper={activeStepper}
-				onBack={handleBackLink}
-			/>
+			<Header />
 
 			<FormComponent
 				controls={controls}

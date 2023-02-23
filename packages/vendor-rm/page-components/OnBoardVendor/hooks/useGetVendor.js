@@ -42,28 +42,18 @@ function useGetVendor() {
 			...res.data,
 			contact_details : res.data.pocs[0],
 			payment_details : res.data.bank_details[0],
-			vendor_services : {
-				office_details: res.data.services,
-			},
+			vendor_services : res.data.services,
 		});
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trigger, vendor_id]);
 
 	useEffect(() => {
-		const componentKeys = (TABS_MAPPING || []).map((mapping) => mapping.key);
-
-		const emptyVendorInformationTab = componentKeys.find((key) => !vendorInformation[key]
-		|| isEmpty(vendorInformation[key])) || 'vendor_details';
-
-		setActiveStepper(emptyVendorInformationTab);
-	}, [vendorInformation]);
-
-	useEffect(() => {
 		if (vendor_id) {
 			getVendor();
 		}
-	}, [vendor_id, getVendor]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendor_id]);
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 

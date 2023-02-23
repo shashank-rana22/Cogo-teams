@@ -182,24 +182,33 @@ function useOnBoardVendor({
 			...formattedValues,
 			registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
 			registration_number    : formattedValues?.registration_number?.registrationNumber,
+			registration_type      : formattedValues?.registration_number?.registrationType,
 		};
 
 		try {
 			const res = await triggerApi({ data: { id: vendor_id, ...payload } });
 
-			setVendorInformation((pv) => {
-				const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
-
-				return {
-					...pv,
-					[key]: { ...data, document_url: formattedValues?.document_url?.finalUrl },
-				};
-			});
-
 			if (!isUpdateAction) {
 				const href = '/onboard-vendor/[vendor_id]';
 				const as = `/onboard-vendor/${res.data.id}`;
+
 				router.push(href, as);
+			} else {
+				setVendorInformation((pv) => {
+					const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+
+					return {
+						...pv,
+						[key]: {
+							...data,
+							registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
+							registration_number    : {
+								registrationNumber : formattedValues?.registration_number?.registrationNumber,
+								registrationType   : formattedValues?.registration_number?.registrationType,
+							},
+						},
+					};
+				});
 			}
 
 			Toast.success(`Vendor ${isUpdateAction ? 'updated' : 'created'} successfully`);
@@ -212,7 +221,14 @@ function useOnBoardVendor({
 
 	useEffect(() => {
 		fields.forEach((field) => {
-			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
+			if (field.name === 'registration_number') {
+				setValue(`${field.name}`, {
+					registrationType   : vendorInformation?.vendor_details?.registration_type,
+					registrationNumber : vendorInformation?.vendor_details?.registration_number,
+				});
+			} else {
+				setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
+			}
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [vendorInformation]);

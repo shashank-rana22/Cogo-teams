@@ -19,7 +19,7 @@ function CountrywiseTaxSelect({
 	disable_registration_type = false,
 	...rest
 }) {
-	const { [typeKey]: registration_type = '', [numberKey]: tax_number = '' } =		value || {};
+	const { [typeKey]: registration_type = '', [numberKey]: tax_number = '' } =	value || {};
 
 	const handleTypeChange = (v) => {
 		onChange({ ...(value || {}), [typeKey]: v });

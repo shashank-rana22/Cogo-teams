@@ -44,7 +44,7 @@ const controls = [
 		label       : 'Role in Company',
 		type        : 'multiSelect',
 		placeholder : 'Select a role type',
-		style       : { flexBasis: '35%' },
+		style       : { flexBasis: '30%' },
 		rules       : { required: 'Company Type is required' },
 		options     : workScopes,
 	},
