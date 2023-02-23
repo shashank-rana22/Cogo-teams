@@ -3,10 +3,10 @@ import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsOperators,
 }
 	from '@cogoport/forms/utils/getAsyncFields';
-import { merge, startCase, addDays } from '@cogoport/utils';
+import { merge, startCase } from '@cogoport/utils';
 
 const FieldMutation = ({
-	fields, values, data, service,
+	fields, values, data,
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(
@@ -30,6 +30,7 @@ const FieldMutation = ({
 		),
 
 	);
+	console.log(data?.spot_negotiation?.data?.validity_start, 'fff');
 
 	const newField = fields.map((control) => {
 		const { name } = control;
@@ -45,8 +46,8 @@ const FieldMutation = ({
 		} else if (name === 'validity_start' || name === 'validity_end') {
 			newControl = {
 				...newControl,
-				minDate : addDays(new Date(service?.data?.validity_start), 1),
-				maxDate : new Date(service?.data?.validity_end),
+				minDate : new Date(data?.spot_negotiation?.data?.validity_start),
+				maxDate : new Date(data?.spot_negotiation?.data?.validity_end),
 			};
 		} else if (name === 'departure_dates') {
 			newControl = {

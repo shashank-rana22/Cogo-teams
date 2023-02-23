@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { useForm, getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useRef } from 'react';
@@ -47,11 +47,12 @@ const useUpdateSpotNegotiationRate = ({
 		service  : service.service,
 	});
 
-	const { data:rateSelected } = useGetRates({ service, selectedRate });
+	const { data :rateSelected } = useGetRates({ service, selectedRate });
+
 	const prefillData = useRef();
 
 	const { newField } = FieldMutation({
-		fields, values, service, data,
+		fields, values, data,
 	});
 
 	useEffect(() => {
@@ -331,7 +332,7 @@ const useUpdateSpotNegotiationRate = ({
 				// console.log(err?.message);
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data?.message || 'Something Went Wrong');
+			Toast.error(getApiError(err?.response?.data) || 'Something Went Wrong');
 		}
 	};
 
@@ -346,6 +347,8 @@ const useUpdateSpotNegotiationRate = ({
 		handleData,
 		disableButton,
 		requiredValues : values,
+		setValue,
+		data,
 	};
 };
 export default useUpdateSpotNegotiationRate;
