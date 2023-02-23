@@ -1,8 +1,13 @@
 import React from 'react';
 
+import Header from './Header';
+import styles from './styles.module.css';
+
 function KamExpertiseScoreConfig() {
 	return (
-		<div>KamExpertiseScoreConfig</div>
+		<div className={styles.container}>
+			<Header />
+		</div>
 	);
 }
 
