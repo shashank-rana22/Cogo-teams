@@ -1,5 +1,8 @@
 .flex {
 	display: flex;
+	p {
+		margin-bottom: 0px;
+	}
 	&.flex_font_weight {
 		font-weight: bold;
 	}
@@ -198,3 +201,5 @@
 		border-right: 1px solid;
 	}
 }
+
+

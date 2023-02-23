@@ -18,6 +18,7 @@
 	position: relative;
 	top: 500px;
 	left:calc(50% - 100px);
+	margin-top: -92px;
 	align-items: center;
 	justify-content: center;
 }
@@ -29,4 +30,16 @@
 	font-size: 80px;
 	font-weight: bold;
 	letter-spacing: 4px;
+}
+
+.button_div {
+	display: flex;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	justify-content: flex-end;
+	padding: 8px;
+	width: 100%;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }

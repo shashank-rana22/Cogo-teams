@@ -20,7 +20,7 @@ const useCreateShipmentDocument = ({
 				Toast.success('Document saved successfully');
 			});
 		} catch (error) {
-			Toast.error(error);
+			Toast.error('Failed to save Document');
 		}
 	};
 

@@ -104,15 +104,15 @@ function ContainerDetails({
 								`}
 								>
 									{' '}
-									<p style={{ fontSize: 11 }}>
-										<div style={{ width: '90px' }}>Volume Weight:</div>
+									<p style={{ fontSize: 10 }}>
+										<div style={{ width: '84px' }}>Volume Weight:</div>
 									</p>
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
 									`}
 									>
-										<p style={{ fontSize: 11 }} className="volume_box">
+										<p style={{ fontSize: 10, width: '120px' }} className="volume_box">
 											{`${chargeableWeight} Kgs(Cms)`}
 										</p>
 									</div>

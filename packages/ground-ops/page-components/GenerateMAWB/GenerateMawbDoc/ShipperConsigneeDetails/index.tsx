@@ -28,7 +28,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.mawb_number_subdivision} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{awbNumber}</p>
+						<p style={{ fontSize: 14 }}>{awbNumber.substring(0, 3)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -44,7 +44,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.mawb_number_subdivision_second} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{awbNumber}</p>
+						<p style={{ fontSize: 14 }}>{awbNumber.substring(4, 13)}</p>
 					</div>
 				</div>
 				<div className={cl`

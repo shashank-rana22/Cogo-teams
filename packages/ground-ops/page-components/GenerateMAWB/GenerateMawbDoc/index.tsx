@@ -140,10 +140,11 @@ function GenerateMawb({
 				id="mawb"
 				ref={ref}
 				style={{
-					flex    : '1',
-					width   : '100%',
-					padding : '37.5px',
-					opacity : 1,
+					flex          : '1',
+					width         : '100%',
+					padding       : '12px',
+					paddingBottom : '40px',
+					opacity       : 1,
 				}}
 			>
 				<Watermark text="draft" rotateAngle="315deg" />
@@ -171,11 +172,7 @@ function GenerateMawb({
 			</div>
 
 			<div
-				className={styles.flex}
-				style={{
-					justifyContent : 'flex-end',
-					width          : '100%',
-				}}
+				className={styles.button_div}
 			>
 				{edit || back ? (
 					<div style={{ marginRight: '20px' }}>
