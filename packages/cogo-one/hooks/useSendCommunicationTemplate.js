@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 function useSendCommunicationTemplate({ formattedData = {}, setOpenModal = () => {} }) {
-	const { mobile_no = '', user_name = 'user', lead_user_id = null, user_id = null } = formattedData || {};
+	const { mobile_no = '', user_name = 'user' } = formattedData || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_communication',
