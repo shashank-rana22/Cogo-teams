@@ -159,11 +159,13 @@ function ThisWeek() {
 						</div>
 					</div>
 					<div className={styles.leaderboard_container}>
-						<div className={styles.overview_header}>
-							Leaderboard
-						</div>
-						<div className={styles.filters}>
-							<BadgeFilter />
+						<div className={styles.leaderboard_header}>
+							<div className={styles.overview_header}>
+								Leaderboard
+							</div>
+							<div className={styles.filters}>
+								<BadgeFilter />
+							</div>
 						</div>
 						<div className={styles.list}>
 							<LeaderboardList />
