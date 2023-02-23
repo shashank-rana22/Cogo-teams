@@ -6,22 +6,32 @@ import useEditProfile from '../../hooks/useEditProfile';
 
 import styles from './styles.module.css';
 
-function Heading1({ vendor_details = {} }) {
+function Heading1({
+	vendor_details = {},
+}) {
 	const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
 	const { control, newFields, handleSubmit, errors } = useEditProfile({ vendor_details });
 
+	const { kyc_status = '' } = vendor_details || {};
+
 	return (
 		<div className={styles.top1}>
 			Profile
-			<Button
-				size="md"
-				themeType="secondary"
-				onClick={() => { setShowEditProfileModal(!showEditProfileModal); }}
-			>
-				Edit Profile
 
-			</Button>
+			{
+				kyc_status !== 'verified' && (
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => {
+							setShowEditProfileModal(!showEditProfileModal);
+						}}
+					>
+						Edit Profile
+					</Button>
+				)
+			}
 
 			<Modal
 				show={showEditProfileModal}
@@ -31,8 +41,14 @@ function Heading1({ vendor_details = {} }) {
 			>
 				<Modal.Header title="Edit Profile" />
 				<Modal.Body>
-					<section className={styles.bodyStyle}>
-						<FormLayout control={control} fields={newFields} errors={errors} />
+					<section
+						className={styles.bodyStyle}
+					>
+						<FormLayout
+							control={control}
+							fields={newFields}
+							errors={errors}
+						/>
 					</section>
 				</Modal.Body>
 				<Modal.Footer>

@@ -19,7 +19,6 @@ function ListTabs() {
 		return null;
 	}
 
-
 	return (
 		<>
 			<BackButton />
