@@ -4,7 +4,6 @@
 	overflow-x: scroll;
 	border-radius: 8px;
 
-
 	:global {
 		.ui_table_head_container {
 			height: 60px;
