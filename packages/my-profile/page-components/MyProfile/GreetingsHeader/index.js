@@ -188,7 +188,7 @@ function Greetings({
 							{picture || watchProfilePicture ? (
 								<div className={styles.image_container}>
 									<img
-										src={watchProfilePicture?.finalUrl || picture}
+										src={watchProfilePicture?.fileUrl || picture}
 										alt="loading"
 										className={styles.avatar_container}
 									/>
