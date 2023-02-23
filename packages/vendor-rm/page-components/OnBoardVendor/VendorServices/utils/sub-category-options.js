@@ -2,11 +2,11 @@ const subCategoryOptions = {
 	rent: [
 		{
 			label : 'Office & Guest house',
-			value : 'office_and_guest_house',
+			value : 'office_and_guest_house_rent',
 		},
 		{
 			label : 'Equipment',
-			value : 'equipment',
+			value : 'equipment_on_rent',
 		},
 	],
 	office_maintenance: [
@@ -16,7 +16,7 @@ const subCategoryOptions = {
 		},
 		{
 			label : 'Equipment Repair',
-			value : 'equipment_repair',
+			value : 'equipment_repair_and_maintenance',
 		},
 		{
 			label : 'Equipment purchases',
@@ -30,7 +30,7 @@ const subCategoryOptions = {
 	business_expenses: [
 		{
 			label : 'Software',
-			value : 'software',
+			value : 'software_expense',
 		},
 		{
 			label : 'Salary - Contract',
@@ -42,7 +42,7 @@ const subCategoryOptions = {
 		},
 		{
 			label : 'Lodging & Boarding',
-			value : 'lodging_and_boarding',
+			value : 'lodging_and_boarding_expenses',
 		},
 		{
 			label : 'Electricity charge',
@@ -50,18 +50,18 @@ const subCategoryOptions = {
 		},
 		{
 			label : 'Staff Welfare',
-			value : 'staff_welfare',
+			value : 'staff_welfare_expenses',
 		},
 		{
 			label : 'Travelling',
-			value : 'Travelling',
+			value : 'travelling_expenses',
 		},
 		{
 			label : 'Printing and stationery',
 			value : 'printing_and_stationery',
 		},
 	],
-	internet_and_communication: [
+	internet_and_communications: [
 		{
 			label : 'Telephone & Wifi',
 			value : 'telephone_and_wifi',
@@ -87,6 +87,12 @@ const subCategoryOptions = {
 		{
 			label : 'Security Charges',
 			value : 'security_charges',
+		},
+	],
+	miscellaneous_expenses: [
+		{
+			label : 'Others',
+			value : 'expenses',
 		},
 	],
 };

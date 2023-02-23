@@ -2,10 +2,10 @@ import subCategoryOptions from '../utils/sub-category-options';
 
 function useGetModifiedControls({
 	controls,
-	office_details,
+	services,
 	index,
 }) {
-	const currentCate = office_details[index]?.category;
+	const currentCate = services[index]?.category;
 
 	const newControls = controls.map((item) => {
 		if (item.name !== 'sub_category') {

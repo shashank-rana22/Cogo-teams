@@ -71,10 +71,10 @@ function useVendorServices({
 	};
 
 	useEffect(() => {
-		const { services: office_details = [] } = vendorInformation || {};
+		const { services = [] } = vendorInformation || {};
 
 		const prefill_obj = {
-			office_details,
+			services,
 		};
 
 		controls.forEach((item) => {

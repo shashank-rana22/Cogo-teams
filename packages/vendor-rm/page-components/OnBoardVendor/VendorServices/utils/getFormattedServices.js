@@ -1,9 +1,9 @@
 function getFormattedServices({ data, partner_id = '' }) {
-	const { office_details = [] } = data || {};
+	const { services = [] } = data || {};
 
 	const formattedServices = [];
 
-	office_details.forEach((item) => {
+	services.forEach((item) => {
 		const {
 			category = '',
 			sub_category = '',

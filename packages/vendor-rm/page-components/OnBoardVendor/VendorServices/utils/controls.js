@@ -2,7 +2,7 @@ import categoryOptions from './category-options';
 
 const getControls = () => [
 	{
-		name               : 'office_details',
+		name               : 'services',
 		label              : 'Office Details',
 		type               : 'fieldArray',
 		buttonText         : 'Add',

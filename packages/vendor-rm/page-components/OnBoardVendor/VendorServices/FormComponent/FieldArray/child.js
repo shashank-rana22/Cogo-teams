@@ -16,10 +16,9 @@ function Child({
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	disabled = false,
-	office_details = [],
-	// setValue = () => {},
+	services = [],
 }) {
-	const { newControls } = useGetModifiedControls({ office_details, index, controls });
+	const { newControls } = useGetModifiedControls({ services, index, controls });
 
 	return (
 		<div className={styles.content}>

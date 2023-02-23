@@ -10,6 +10,8 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+// eslint-disable-next-line import/no-cycle
+import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 // eslint-disable-next-line import/no-relative-packages
 import GLOBAL_CONSTANTS from '../../../../../../common/constants/globals.json';
 import { getControls } from '../utils/getControls';
@@ -25,6 +27,7 @@ const COUNTRY_IDS = {
 function useOnBoardVendor({
 	setActiveStepper = () => {},
 	vendorInformation = {},
+	setVendorInformation = () => {},
 }) {
 	const { general: { query } } = useSelector((state) => state);
 
@@ -172,13 +175,14 @@ function useOnBoardVendor({
 		method : 'post',
 	}, { manual: true });
 
-	const createVendor = async () => {
+	const createVendor = async ({ data, step }) => {
 		const formattedValues = getValues();
 
 		const payload = {
 			...formattedValues,
 			registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
 			registration_number    : formattedValues?.registration_number?.registrationNumber,
+			registration_type      : formattedValues?.registration_number?.registrationType,
 		};
 
 		try {
@@ -187,7 +191,24 @@ function useOnBoardVendor({
 			if (!isUpdateAction) {
 				const href = '/onboard-vendor/[vendor_id]';
 				const as = `/onboard-vendor/${res.data.id}`;
+
 				router.push(href, as);
+			} else {
+				setVendorInformation((pv) => {
+					const { key = '' } = COMPONENT_MAPPING.find((item) => item.step === step);
+
+					return {
+						...pv,
+						[key]: {
+							...data,
+							registration_proof_url : formattedValues?.registration_proof_url?.finalUrl,
+							registration_number    : {
+								registrationNumber : formattedValues?.registration_number?.registrationNumber,
+								registrationType   : formattedValues?.registration_number?.registrationType,
+							},
+						},
+					};
+				});
 			}
 
 			Toast.success(`Vendor ${isUpdateAction ? 'updated' : 'created'} successfully`);
@@ -200,6 +221,12 @@ function useOnBoardVendor({
 
 	useEffect(() => {
 		fields.forEach((field) => {
+			if (field.name === 'registration_number') {
+				setValue(`${field.name}`, {
+					registrationType   : vendorInformation?.vendor_details?.registration_type,
+					registrationNumber : vendorInformation?.vendor_details?.registration_number,
+				});
+			}
 			setValue(`${field.name}`, vendorInformation?.vendor_details?.[field.name]);
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps

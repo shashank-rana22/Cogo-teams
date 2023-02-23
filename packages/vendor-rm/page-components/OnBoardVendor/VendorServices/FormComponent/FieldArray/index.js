@@ -52,7 +52,7 @@ function FieldArray({
 					disabled={disabled}
 					showLabelOnce={showLabelOnce}
 					noDeleteButtonTill={noDeleteButtonTill}
-					office_details={watch().office_details}
+					services={watch().services}
 					setValue={setValue}
 					watch={watch}
 				/>
