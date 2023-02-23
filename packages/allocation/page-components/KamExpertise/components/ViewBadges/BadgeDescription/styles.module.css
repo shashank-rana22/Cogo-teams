@@ -1,0 +1,97 @@
+.card {
+	max-width: 700px;
+	margin-top: 7em;
+	font-family: Poppins;
+	line-height: 150%;
+	background-color: white;
+	border-radius: 6px;
+}
+
+.heading {
+	padding-top: 1em;
+	padding-left: 1em;
+	font-size: 16px;
+	font-weight: 500;
+	color: #6fa5ab;
+}
+
+.mainContainer {
+	display: flex;
+	gap: 3em;
+}
+
+.mainBadge {
+	width: 15em;
+	padding: 1.5em;
+	padding-bottom: 0.5em;
+}
+
+.starsContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.matterContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.smallBadge {
+	width: 3em;
+}
+
+.lableValueContainer {
+	display: flex;
+	gap: 2em;
+}
+
+.nextBadge {
+	display: flex;
+	gap: 0.5em;
+	align-items: center;
+}
+
+.lable {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.value {
+	margin: 0%;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.descriptionContainer {
+	padding-right: 1em;
+}
+
+.progressBar {
+	padding: 2em 1em;
+}
+
+.MasteryUnlock {
+	padding: 2em;
+}
+
+.flexContainer {
+	display: flex;
+	gap: 2em;
+	padding: 1em;
+}
+
+.MasterybadgeContainer {
+	justify-content: middle;
+	padding: 0 1em;
+}
+
+.Smallstar {
+	width: 1.8em;
+}
+
+.badge {
+	width: 2em;
+}

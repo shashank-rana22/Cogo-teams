@@ -1,0 +1,35 @@
+.badge_list_container {
+	width: 100%;
+	height: 70vh;
+	padding: 2em;
+	margin-top: 7em;
+	background-color: white;
+	border-radius: 7px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 500;
+	color: #6fa5ab;
+}
+
+.badges_container {
+	display: flex;
+	gap: 1em;
+}
+
+.badge {
+	width: 3em;
+}
+
+.container {
+	padding: 0.5em;
+}
+
+.stars_container {
+	display: flex;
+}
+
+.small_star {
+	width: 1em;
+}
