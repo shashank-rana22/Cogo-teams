@@ -45,11 +45,7 @@
 	}
 
 	.published {
-		flex: 0.25;
-	}
-
-	.last_used {
-		flex: 0.2;
+		flex: 0.4;
 	}
 
 	.status {
@@ -73,6 +69,17 @@
 
 .label {
 	margin: 0;
+	color: #4f4f4f;
+	font-weight: 500;
+}
+
+.value {
+	margin-top: 8px; 
+	span {
+		padding-left: 4px;
+		border-left: 1px solid #bdbdbd;
+		font-weight: bold;
+	}
 }
 
 .pagination_container {
