@@ -72,7 +72,7 @@ function AgentNotes({ activeMessageCard = {}, activeTab = '', activeVoiceCard = 
 	}
 
 	return (
-		(showForm || !isEmpty(list)) && (
+		(showForm || customerId) && (
 			listLoading ? (
 				<div className={styles.loader_div}>
 					<Loader
