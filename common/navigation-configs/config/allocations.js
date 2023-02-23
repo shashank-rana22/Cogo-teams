@@ -9,6 +9,11 @@ const allocations = {
 	},
 	'/[partner_id]/allocation/kam-expertise': {
 		navigation : 'allocations-kam_expertise',
+		isMainNav  : true,
+	},
+	'/[partner_id]/allocation/kam-expertise/view-badges': {
+		// Todo change it
+		navigation : 'allocations-kam_expertise',
 		isMainNav  : false,
 	},
 };
