@@ -342,6 +342,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'list_organization_billing_addresses',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1651,6 +1656,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	supply_crm: [
 		{
@@ -2366,6 +2376,11 @@ const partner = {
 			api          : 'create_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 		{
 			api          : 'list_channel_partner_stakeholders',
@@ -5989,6 +6004,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -6948,6 +6968,11 @@ const partner = {
 			api          : 'get_channel_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 	],
 	my_incident: [
@@ -9606,6 +9631,11 @@ const partner = {
 			api          : 'create_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 	],
 	supply_tools: [
