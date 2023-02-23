@@ -8,11 +8,15 @@ function QuestionsList() {
 	const {
 		data, columns, searchInput,
 		setSearchInput, activeList, setActiveList, questionListLoading,
+		page, setPage, paginationData,
 	} = useQuestionList();
 
 	return (
 		<div className={styles.container}>
 			<AddedQuestions
+				page={page}
+				setPage={setPage}
+				paginationData={paginationData}
 				data={data}
 				columns={columns}
 				searchInput={searchInput}

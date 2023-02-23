@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const addedQuestionsColumns = [
+const addedQuestionsColumns = ({ activeList }) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
@@ -39,9 +39,13 @@ const addedQuestionsColumns = [
 		Header   : 'ACTIONS',
 		accessor : () => (
 			<div className={styles.buttonContainer}>
-				<IcMDelete height={20} width={20} style={{ marginRight: 8 }} />
+				{activeList !== 'inactive'
+					? <IcMDelete height={20} width={20} style={{ marginRight: 8 }} />
+					: null}
 				<Button themeType="secondary" size="sm" style={{ marginRight: 8 }}>EDIT</Button>
-				<Button themeType="primary" size="sm">VIEW</Button>
+				{activeList !== 'inactive'
+					? <Button themeType="primary" size="sm">VIEW</Button>
+					: null}
 			</div>
 		),
 	},
@@ -88,6 +92,7 @@ const requestedQuestionsColumns = [
 const useQuestionList = () => {
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
+	const [page, setPage] = useState(1);
 
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
@@ -99,7 +104,7 @@ const useQuestionList = () => {
 			await trigger({
 				params: {
 					filters: {},
-
+					page,
 				},
 			});
 		} catch (err) {
@@ -110,12 +115,17 @@ const useQuestionList = () => {
 	useEffect(() => {
 		getQuestionsList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [page]);
 
-	const columns = activeList !== 'requested' ? addedQuestionsColumns : requestedQuestionsColumns;
-	const { list: data = [] } = questionList || [];
+	const columns = activeList !== 'requested'
+		? addedQuestionsColumns({ activeList })
+		: requestedQuestionsColumns;
+	const { list: data = [], ...paginationData } = questionList || {};
 
 	return {
+		page,
+		setPage,
+		paginationData,
 		data,
 		columns,
 		searchInput,
