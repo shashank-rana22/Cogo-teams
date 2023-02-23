@@ -5,7 +5,7 @@ import AdminDashboard from './AdminDashboard';
 import AgentDashboard from './AgentDashboard';
 import styles from './styles.module.css';
 
-function CogoOneDashboard({ isManagerView = true }) {
+function CogoOneDashboard({ isAdminView = false }) {
 	// const [activeTab, setActiveTab] = useState('day');
 	// const { user } = useSelector(({ profile }) => profile);
 	// const {
@@ -16,9 +16,9 @@ function CogoOneDashboard({ isManagerView = true }) {
 
 	return (
 		<div className={styles.prime_container}>
-			{isManagerView
-				? <AdminDashboard isManagerView={isManagerView} />
-				: <AgentDashboard isManagerView={isManagerView} />}
+			{isAdminView
+				? <AdminDashboard />
+				: <AgentDashboard />}
 		</div>
 	);
 }

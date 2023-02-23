@@ -7,8 +7,7 @@ export const chatsStatsDummyData = [
 		image      : <img src={dArrow} alt="" />,
 		number     : '8',
 		percentage : -2.2,
-		isAdmin    : true,
-		isAgent    : true,
+		isAgent    : false,
 	},
 	{
 		label      : 'No. of chats assigned further',
@@ -16,7 +15,6 @@ export const chatsStatsDummyData = [
 		image      : <img src={aArrow} alt="" />,
 		number     : '12',
 		percentage : +2.2,
-		isAdmin    : true,
 		isAgent    : true,
 
 	}, {
@@ -25,7 +23,6 @@ export const chatsStatsDummyData = [
 		image      : <img src={dArrow} alt="" />,
 		number     : '8',
 		percentage : -2.2,
-		isAdmin    : true,
 		isAgent    : false,
 	}, {
 		label      : 'No. of escalated chat',
@@ -33,7 +30,6 @@ export const chatsStatsDummyData = [
 		image      : <img src={aArrow} alt="" />,
 		number     : '12',
 		percentage : 2.2,
-		isAdmin    : true,
-		isAgent    : false,
+		isAgent    : true,
 	},
 ];

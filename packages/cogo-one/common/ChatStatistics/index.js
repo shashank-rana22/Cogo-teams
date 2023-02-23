@@ -6,13 +6,13 @@ import { dArrow, aArrow } from '../../page-components/CogoOneDashboard/constants
 
 import styles from './styles.module.css';
 
-function ChatStatistics() {
+function ChatStatistics({ isAdminView }) {
 	return (
 		<>
 			{chatsStatsDummyData.map((item) => {
 				const { label, number, percentage, isAgent } = item;
 				return (
-					isAgent && (
+					(isAdminView || isAgent) && (
 						<div className={styles.chatstatistics_box}>
 							<div className={styles.text}>{label}</div>
 							<div className={styles.small_data_box}>
