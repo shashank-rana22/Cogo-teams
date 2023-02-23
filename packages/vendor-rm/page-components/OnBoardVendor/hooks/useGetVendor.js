@@ -52,7 +52,8 @@ function useGetVendor() {
 		if (vendor_id) {
 			getVendor();
 		}
-	}, [vendor_id, getVendor]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [vendor_id]);
 
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 

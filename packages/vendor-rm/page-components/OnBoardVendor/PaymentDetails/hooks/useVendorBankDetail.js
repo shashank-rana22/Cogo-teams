@@ -122,8 +122,8 @@ function useVendorBankDetail({
 
 	useEffect(() => {
 		controls.forEach((field) => {
-			if (field.type === 'file') {
-				setValue(`${field.name}`, payment_details?.[field.name]?.finalUrl);
+			if (field.name === 'bank_document_url') {
+				setValue(`${field.name}`, payment_details?.[field.name]?.finalUrl || payment_details?.[field.name]);
 			} else {
 				setValue(`${field.name}`, payment_details?.[field.name]);
 			}
