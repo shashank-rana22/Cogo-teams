@@ -39,6 +39,7 @@ function Messages({
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
+		sender = null,
 	} = activeMessageCard || {};
 
 	const {
@@ -56,9 +57,10 @@ function Messages({
 		(val) => val.agent_id === support_agent_id,
 	)?.agent_name;
 
-	const { sendMessage, loading: createCommunicationLoading } = useSendMessage(
-		{ channel_type },
-	);
+	const {
+		sendMessage,
+		loading:createCommunicationLoading,
+	} = useSendMessage({ channel_type, sender });
 
 	if (channel_type && id) {
 		activeChatCollection = collection(
