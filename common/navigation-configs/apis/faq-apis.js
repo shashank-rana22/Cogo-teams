@@ -40,6 +40,17 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_question_answer_set',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
+			api          : 'get_question',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+
 	],
 	faq: [
 		{
@@ -64,6 +75,11 @@ const faq = {
 		},
 		{
 			api          : 'get_question',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
+			api          : 'create_faq_feedback',
 			access_type  : 'private',
 			service_name : 'faq',
 		},

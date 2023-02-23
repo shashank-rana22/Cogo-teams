@@ -1,14 +1,15 @@
 import { Popover } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 import useFilterPopover from './useFilterPopover';
 
-function FilterPopover({ setFilters }) {
+function FilterPopover({ filters, setFilters }) {
 	const {
 		showFilter, setShowFilter, topicOptions, tagOptions,
-		control, handleSubmit, onSubmit,
+		control, handleSubmit, onSubmit, onClickReset,
 	} = useFilterPopover({ setFilters });
 
 	return (
@@ -16,8 +17,11 @@ function FilterPopover({ setFilters }) {
 			caret={false}
 			trigger="click"
 			placement="bottom"
+			visible={showFilter}
+			onClickOutside={() => { setShowFilter(false); }}
 			render={(
 				<FilterContent
+					onClickReset={onClickReset}
 					topicOptions={topicOptions}
 					tagOptions={tagOptions}
 					control={control}
@@ -33,7 +37,10 @@ function FilterPopover({ setFilters }) {
 					setShowFilter(!showFilter);
 				}}
 			>
-				<div>Filter By</div>
+				<div className={styles.filterText}>
+					{!isEmpty(filters) ? <div className={styles.dot} /> : null}
+					Filter By
+				</div>
 
 				<IcMArrowDown
 					width={16}

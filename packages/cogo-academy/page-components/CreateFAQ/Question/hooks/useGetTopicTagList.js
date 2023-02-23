@@ -26,11 +26,11 @@ const useGetTopicTagList = () => {
 	const tagOptions = [];
 
 	(topicList || []).forEach((item) => {
-		topicOptions.push({ label: item?.display_name, value: item?.name });
+		topicOptions.push({ label: item?.display_name, value: item?.id });
 	});
 
 	(tagList || []).forEach((item) => {
-		tagOptions.push({ label: item?.display_name, value: item?.name });
+		tagOptions.push({ label: item?.display_name, value: item?.id });
 	});
 
 	return {

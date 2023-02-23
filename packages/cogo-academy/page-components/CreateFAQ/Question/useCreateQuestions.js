@@ -1,17 +1,21 @@
 import { useForm } from '@cogoport/forms';
-import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import createQuestionControls from '../utils/createQuestionControls';
 
+import useCreateFaqSet from './hooks/useCreateFaqSets';
 import useGetTopicTagList from './hooks/useGetTopicTagList';
 import useListCogoEntity from './hooks/useListCogoEntities';
 
 function useCreateQuestions() {
-	const router = useRouter();
+	const { general } = useSelector((state) => state);
+	const { mode = '' } = general.query || {};
 
 	const [editorValue, setEditorValue] = useState('');
-	const [questionPreview, setQuestionPreview] = useState('create');
+	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
+
+	const { onSubmit } = useCreateFaqSet({ setQuestionPreview, questionPreview, editorValue });
 
 	const { topicOptions, tagOptions } = useGetTopicTagList();
 
@@ -42,14 +46,6 @@ function useCreateQuestions() {
 
 	const controls = createQuestionControls({ watchFunctions, entity_options });
 
-	const onSubmit = () => {
-		router.push(
-			'/learning/faq/create/question?mode=preview',
-			'/learning/faq/create/configuration?mode=preview',
-		);
-		setQuestionPreview('preview');
-	};
-
 	return {
 		editorValue,
 		setEditorValue,
@@ -64,6 +60,7 @@ function useCreateQuestions() {
 		getArray,
 		entity_options,
 		questionPreview,
+		setQuestionPreview,
 	};
 }
 

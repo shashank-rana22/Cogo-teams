@@ -8,6 +8,7 @@ import { useRouter } from '@cogoport/next';
 import Layout from '../../../commons/Layout';
 
 import BodyTextEditor from './BodyTextEditor';
+import PreviewQuestion from './QuestionPreview';
 import styles from './styles.module.css';
 import useCreateQuestions from './useCreateQuestions';
 
@@ -26,11 +27,17 @@ function CreateFAQ() {
 		tagOptions,
 		watch,
 		getArray,
+		questionPreview,
+		setQuestionPreview,
 	} = useCreateQuestions();
 
 	const onClickBackIcon = () => {
 		router.back();
 	};
+
+	if (questionPreview === 'preview') {
+		return (<PreviewQuestion setQuestionPreview={setQuestionPreview} />);
+	}
 
 	return (
 		<div>
@@ -51,7 +58,7 @@ function CreateFAQ() {
 
 					<InputController
 						control={control}
-						name="create_faq"
+						name="question_abstract"
 						type="input"
 						placeholder="Create a question."
 						rules={{ required: 'Question is required.' }}
@@ -73,7 +80,7 @@ function CreateFAQ() {
 						</div>
 
 						<MultiselectController
-							name="tags"
+							name="tag_ids"
 							control={control}
 							options={tagOptions}
 						/>
@@ -86,7 +93,7 @@ function CreateFAQ() {
 						</div>
 
 						<MultiselectController
-							name="topics"
+							name="topic_ids"
 							control={control}
 							options={topicOptions}
 						/>

@@ -4,7 +4,14 @@ import { MultiselectController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
-function FilterContent({ topicOptions, tagOptions, control, handleSubmit, onSubmit }) {
+function FilterContent({
+	topicOptions,
+	tagOptions,
+	control,
+	handleSubmit,
+	onSubmit,
+	onClickReset,
+}) {
 	return (
 		<form className={styles.filter_container} onSubmit={handleSubmit(onSubmit)}>
 			<div>
@@ -27,7 +34,11 @@ function FilterContent({ topicOptions, tagOptions, control, handleSubmit, onSubm
 			</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" style={{ marginRight: '8px' }}>
+				<Button
+					themeType="secondary"
+					style={{ marginRight: '8px' }}
+					onClick={onClickReset}
+				>
 					Reset
 				</Button>
 

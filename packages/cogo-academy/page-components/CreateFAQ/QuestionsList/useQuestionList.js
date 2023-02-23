@@ -164,7 +164,7 @@ const useQuestionList = () => {
 					filters: {
 						...filters,
 						...FILTER_MAPPING[activeList],
-						q: searchInput,
+						q: searchInput || undefined,
 					},
 					page,
 				},
@@ -226,6 +226,7 @@ const useQuestionList = () => {
 		paginationData,
 		data,
 		columns,
+		filters,
 		setFilters,
 		searchInput,
 		setSearchInput,
