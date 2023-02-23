@@ -7,7 +7,19 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const addedQuestionsColumns = ({ activeList, onClickEditButton, deactivateQuestion }) => [
+const FILTER_MAPPING = {
+
+	published : { state: 'published', status: 'active' },
+	draft     : { state: 'draft', status: 'active' },
+	inactive  : { status: 'inactive' },
+	requested : { state: 'requested', status: 'active' },
+};
+
+const addedQuestionsColumns = ({
+	activeList,
+	onClickEditButton,
+	deactivateQuestion,
+}) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
@@ -44,7 +56,7 @@ const addedQuestionsColumns = ({ activeList, onClickEditButton, deactivateQuesti
 					<IcMDelete
 						height={20}
 						width={20}
-						style={{ marginRight: 8 }}
+						style={{ marginRight: 8, cursor: 'pointer' }}
 						onClick={() => deactivateQuestion(items?.id)}
 					/>
 				) : null}
@@ -65,12 +77,12 @@ const addedQuestionsColumns = ({ activeList, onClickEditButton, deactivateQuesti
 	},
 ];
 
-const requestedQuestionsColumns = [
+const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) => [
 	{
 		Header   : 'QUESTIONS',
 		accessor : (items) => (
 			<div className={styles.question}>
-				{items?.question}
+				{items?.question_abstract}
 			</div>
 		),
 	},
@@ -95,9 +107,25 @@ const requestedQuestionsColumns = [
 	},
 	{
 		Header   : 'ACTIONS',
-		accessor : () => (
+		accessor : (items) => (
 			<div className={styles.buttonContainer}>
-				<Button themeType="primary" size="sm" style={{ marginRight: 8 }}>ADD ANSWER</Button>
+
+				<IcMDelete
+					height={20}
+					width={20}
+					style={{ marginRight: 8 }}
+					onClick={() => deactivateQuestion(items?.id)}
+				/>
+
+				<Button
+					themeType="primary"
+					size="sm"
+					style={{ marginRight: 8 }}
+					onClick={() => onClickEditButton(items.id)}
+				>
+					ADD ANSWER
+
+				</Button>
 			</div>
 		),
 	},
@@ -127,6 +155,7 @@ const useQuestionList = () => {
 				params: {
 					filters: {
 						...filters,
+						...FILTER_MAPPING[activeList],
 						q: searchInput,
 					},
 					page,
@@ -140,7 +169,7 @@ const useQuestionList = () => {
 	useEffect(() => {
 		getQuestionsList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, filters, searchInput]);
+	}, [page, filters, searchInput, activeList]);
 
 	const deactivateQuestion = async (id) => {
 		try {
@@ -152,6 +181,8 @@ const useQuestionList = () => {
 					},
 				},
 			);
+
+			getQuestionsList();
 		} catch {
 			console.log('Error', error);
 		}
@@ -165,8 +196,12 @@ const useQuestionList = () => {
 	};
 
 	const columns = activeList !== 'requested'
-		? addedQuestionsColumns({ activeList, onClickEditButton, deactivateQuestion })
-		: requestedQuestionsColumns;
+		? addedQuestionsColumns({
+			activeList,
+			onClickEditButton,
+			deactivateQuestion,
+		})
+		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 	const { list: data = [], ...paginationData } = questionList || {};
 
 	return {
