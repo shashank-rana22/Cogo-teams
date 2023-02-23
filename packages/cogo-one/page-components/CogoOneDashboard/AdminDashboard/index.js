@@ -1,4 +1,4 @@
-import { useSelector } from '@cogoport/store';
+// import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import Calender from '../../../common/Calendar';
@@ -12,23 +12,28 @@ import PerformanceTab from './PerformanceTabs';
 import RedFlags from './RedFlags';
 import styles from './styles.module.css';
 
-function AdminDashboard() {
+function AdminDashboard({ calendarType, setCalendarType }) {
 	const [activeTab, setActiveTab] = useState('day');
 	// const { user } = useSelector(({ profile }) => profile);
-	const {
-		user_data,
-	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
+	// const {
+	// 	user_data,
+	// } = useSelector(({ profile }) => ({
+	// 	user_data: profile || {},
+	// }));
 
-	console.log('user_data', user_data);
+	// console.log('user_data', user_data);
 
 	return (
 		<div className={styles.prime_container}>
-			<Header activeTab={activeTab} setActiveTab={setActiveTab} />
+			<Header
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				calendarType={calendarType}
+				setCalendarType={setCalendarType}
+			/>
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					<Calender />
+					<Calender calendarType={calendarType} />
 					<LineChart />
 					<AgentActivity />
 					<div className={styles.statistics}>
