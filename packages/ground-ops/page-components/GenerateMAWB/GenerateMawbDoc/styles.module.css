@@ -15,8 +15,8 @@
 .watermark_flex {
 	height: 100px;
 	width: 200px;
-	position: absolute;
-	top: calc(50% - 50px);
+	position: relative;
+	top: 500px;
 	left:calc(50% - 100px);
 	align-items: center;
 	justify-content: center;

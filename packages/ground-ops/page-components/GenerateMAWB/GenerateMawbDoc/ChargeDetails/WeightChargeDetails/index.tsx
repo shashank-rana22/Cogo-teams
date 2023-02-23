@@ -3,7 +3,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function WeightChargeDetails({ data = {} }) {
+interface Props {
+	data?:any;
+}
+
+function WeightChargeDetails({ data = {} }:Props) {
 	return (
 		<div className={cl`
 				${styles.block_col} 
@@ -87,7 +91,7 @@ function WeightChargeDetails({ data = {} }) {
 						${styles.common_border_right}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.total_charge?.toFixed(2)}</p>
+						<p style={{ fontSize: 13 }}>{data?.totalCharge?.toFixed(2)}</p>
 					</div>
 					<div style={{ flex: 1 }} />
 				</div>
@@ -242,7 +246,7 @@ function WeightChargeDetails({ data = {} }) {
 						${styles.common_border_right}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.agent_charge?.toFixed(2)}</p>
+						<p style={{ fontSize: 13 }}>{data?.agentCharge?.toFixed(2)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -299,7 +303,7 @@ function WeightChargeDetails({ data = {} }) {
 						${styles.common_border_right}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.carrier_charge?.toFixed(2)}</p>
+						<p style={{ fontSize: 13 }}>{data?.carrierCharge?.toFixed(2)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -369,7 +373,7 @@ function WeightChargeDetails({ data = {} }) {
 						${styles.prepaid_total_value}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.final_charge?.toFixed(2)}</p>
+						<p style={{ fontSize: 13 }}>{data?.finalCharge?.toFixed(2)}</p>
 					</div>
 				</div>
 

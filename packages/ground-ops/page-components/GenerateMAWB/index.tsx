@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Button, Modal, Stepper, Breadcrumb } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
@@ -16,27 +15,26 @@ const items = [
 	{ title: 'Handling Details', key: 'handling' },
 ];
 
-function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
+interface Props {
+	item?: any;
+	viewDoc?: boolean;
+	edit?: boolean;
+	setEdit?: any;
+}
+
+function GenerateMAWB({ item = {}, viewDoc = false, edit = false, setEdit = () => {} }:Props) {
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const shipment_id = item?.shipment_id;
+	const shipmentId = item?.shipment_id;
 
 	const {
-		documentList,
-		pendingTaskLoading,
 		documentLoading,
-		generateLoading,
-		certificateData,
-		completeTask,
 		generateCertificate,
 	} = useGenerateDocument({
-		shipment_id,
-		task,
-		// refetch,
-		// clearTask,
+		shipmentId,
 	});
 	const fields = mawbControls();
 
@@ -46,7 +44,7 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 	};
 
 	const formValues = watch();
-	const form_data = {
+	const formData = {
 		agent_name: null,
 		...formValues,
 	};
@@ -55,6 +53,7 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 		fields[activeKey].forEach((c) => {
 			setValue(c.name, item[c.name]);
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -82,7 +81,7 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 								<div className={styles.button_div}>
 									<Button
 										onClick={handleSubmit(() => setActiveKey('package'))}
-										disabled={documentLoading || generateLoading}
+										disabled={documentLoading}
 										themeType="accent"
 									>
 										NEXT
@@ -102,7 +101,7 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 								<div className={styles.button_div}>
 									<Button
 										onClick={() => setActiveKey('basic')}
-										disabled={documentLoading || generateLoading}
+										disabled={documentLoading}
 										themeType="secondary"
 										style={{ border: '1px solid #333' }}
 									>
@@ -110,7 +109,7 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 									</Button>
 									<Button
 										onClick={handleSubmit(() => setActiveKey('handling'))}
-										disabled={documentLoading || generateLoading}
+										disabled={documentLoading}
 										themeType="accent"
 									>
 										Next
@@ -130,7 +129,7 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 								<div className={styles.button_div}>
 									<Button
 										onClick={() => setActiveKey('package')}
-										disabled={documentLoading || generateLoading}
+										disabled={documentLoading}
 										themeType="secondary"
 										style={{ border: '1px solid #333' }}
 									>
@@ -138,10 +137,10 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 									</Button>
 									<Button
 										onClick={handleSubmit(onSubmit)}
-										disabled={documentLoading || generateLoading}
+										disabled={documentLoading}
 										themeType="accent"
 									>
-										{documentLoading || generateLoading
+										{documentLoading
 											? 'Generating'
 											: 'Generate Master Airway Bill'}
 									</Button>
@@ -157,36 +156,18 @@ function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 					<Modal show={back || viewDoc} size="lg" className={styles.modal_container}>
 						<Modal.Body style={{ minHeight: '720px' }}>
 							<GenerateMawbDoc
-						// shipment_data={shipment_data}
-								completeTask={completeTask}
-								task={task}
+								taskItem={item}
 								viewDoc={viewDoc}
-						// details={details}
-						// setIsAmended={setIsAmended}
-						// isAmended={isAmended}
-								formData={form_data}
+								formData={formData}
 								setBack={setBack}
 								back={back}
+								edit={edit}
+								setEdit={setEdit}
 							/>
 						</Modal.Body>
 
 					</Modal>
 				)}
-				{/* {(back || viewDoc) && (
-					<GenerateMawbDoc
-						// shipment_data={shipment_data}
-						completeTask={completeTask}
-						task={task}
-						viewDoc={viewDoc}
-						// details={details}
-						// setIsAmended={setIsAmended}
-						// isAmended={isAmended}
-						formData={form_data}
-						setBack={setBack}
-						back={back}
-						// primary_service={primary_service}
-					/>
-				)} */}
 			</div>
 		</div>
 	);

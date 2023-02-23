@@ -1,13 +1,20 @@
+/* eslint-disable max-len */
 import { cl } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
 
+interface Props {
+	formData?: any;
+	taskItem?: any;
+	chargeableWeight?: any;
+}
+
 function ContainerDetails({
-	primary_service = {},
 	formData = {},
-	chargeable_weight,
-}) {
+	taskItem = {},
+	chargeableWeight,
+}:Props) {
 	return (
 		<div style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
@@ -84,7 +91,7 @@ function ContainerDetails({
 								${styles.block_a_container_top_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{primary_service?.packages_count}</p>
+								<p style={{ fontSize: 13 }}>{taskItem?.packagesCount}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -106,7 +113,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{`${chargeable_weight} Kgs(Cms)`}
+											{`${chargeableWeight} Kgs(Cms)`}
 										</p>
 									</div>
 								</div>
@@ -120,7 +127,8 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{formData.dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages} `)}
+											{formData.dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages} 
+											`)}
 										</p>
 									</div>
 								</div>
@@ -150,7 +158,7 @@ function ContainerDetails({
 							${styles.block_a_container_bottom_package}
 						`}
 						>
-							<p style={{ fontSize: 13 }}>{primary_service?.packages_count}</p>
+							<p style={{ fontSize: 13 }}>{taskItem?.packagesCount}</p>
 						</div>
 					</div>
 
@@ -188,7 +196,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{primary_service?.weight?.toFixed(2)}</p>
+								<p style={{ fontSize: 13 }}>{taskItem?.weight}</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -203,7 +211,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{primary_service?.weight?.toFixed(2)}</p>
+								<p style={{ fontSize: 13 }}>{taskItem?.weight}</p>
 							</div>
 						</div>
 					</div>
@@ -365,7 +373,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{chargeable_weight}</p>
+								<p style={{ fontSize: 13 }}>{chargeableWeight}</p>
 							</div>
 						</div>
 					</div>
@@ -459,7 +467,7 @@ function ContainerDetails({
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{(chargeable_weight * formData.rate_per_kg).toFixed(2)}
+									{(chargeableWeight * formData.rate_per_kg).toFixed(2)}
 								</p>
 							</div>
 						</div>
@@ -475,7 +483,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								{(chargeable_weight * formData.rate_per_kg).toFixed(2)}
+								{(chargeableWeight * formData.rate_per_kg).toFixed(2)}
 							</div>
 						</div>
 					</div>

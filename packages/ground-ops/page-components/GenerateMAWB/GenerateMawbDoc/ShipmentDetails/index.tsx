@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	formData?: any;
-	primary_service?: any;
+	taskItem?: any;
 }
 
-function ShipmentDetails({ formData = {}, primary_service = {} }:Props) {
+function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 	return (
 		<div style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
@@ -156,7 +156,7 @@ function ShipmentDetails({ formData = {}, primary_service = {} }:Props) {
 					`}
 									>
 										<p style={{ fontSize: 13 }}>
-											{primary_service?.destination_airport?.port_code}
+											{taskItem?.destinationPortCode}
 										</p>
 									</div>
 								</p>
@@ -185,7 +185,7 @@ function ShipmentDetails({ formData = {}, primary_service = {} }:Props) {
 					`}
 											>
 												<p style={{ fontSize: 12 }}>
-													{primary_service.airline?.iata_code}
+													{taskItem.airlineIataCode}
 												</p>
 											</div>
 										</p>

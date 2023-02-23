@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
@@ -17,11 +17,19 @@ function ApprovalPending({ data, loading }) {
 				style={{ fontSize: 12 }}
 				onClick={() => { setShow(true); }}
 			>
-				<IcMDownload />
+				<IcMDownload fill="#8B8B8B" />
 
 			</Button>
 		),
-
+		handleEdit: () => (
+			<Button
+				themeType="linkUi"
+				style={{ fontSize: 12 }}
+				onClick={() => { setShow(true); }}
+			>
+				<IcMEdit fill="#8B8B8B" />
+			</Button>
+		),
 	};
 	return (
 		<>
