@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
-// import COMPONENT_MAPPING from './utils/component-mapping';
 
 function Top({ setShowForm = () => {} }) {
 	return (
