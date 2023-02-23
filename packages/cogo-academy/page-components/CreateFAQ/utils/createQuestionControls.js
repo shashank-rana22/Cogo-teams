@@ -33,6 +33,7 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => [{
 			label       : 'Country Id',
 			type        : 'select',
 			span        : 2,
+			options     : [{ label: 'IN', value: '541d1232-58ce-4d64-83d6-556a42209eb7' }],
 			placeholder : 'Select unit',
 		},
 		{
