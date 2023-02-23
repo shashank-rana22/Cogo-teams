@@ -792,8 +792,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-cogo_book',
 				title         : 'Cogo Book',
-				href          : '/business-finance/cogo-book',
-				as            : '/business-finance/cogo-book',
+				href          : '/business-finance/cogo-book/[active_tab]',
+				as            : '/business-finance/cogo-book/Accruals',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_book,
