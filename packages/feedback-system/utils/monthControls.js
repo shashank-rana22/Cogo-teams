@@ -13,7 +13,7 @@ const monthOptions = [
 	{ label: 'December', value: 'December', index: 12 },
 ];
 
-const getMonthControls = (selectedYear, selectedMonth) => {
+const getMonthControls = (selectedYear, selectedMonth, selectedMonth) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 	const month = currentDate.getMonth();

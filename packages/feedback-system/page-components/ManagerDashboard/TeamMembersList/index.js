@@ -81,8 +81,8 @@ function TeamMembersList({
 	return (
 		<div className={styles.table_container}>
 
-			{!loading && list.map((item) => (
-				<Accordion id={item.month} title={titleSection(item)}>
+			{!loading && list.map((item, i) => (
+				<Accordion key={item.month + { i }} id={item.month} title={titleSection(item)}>
 					<ListItem item={item} />
 				</Accordion>
 			))}

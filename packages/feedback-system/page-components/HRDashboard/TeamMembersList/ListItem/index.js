@@ -34,7 +34,7 @@ function ListItem({ item }) {
 			<section className={styles.inner_list}>
 				<Input
 					size="sm"
-					suffix={<IcMSearchlight />}
+					prefix={<IcMSearchlight />}
 					placeholder="Search"
 					className={styles.search}
 					value={searchValue}

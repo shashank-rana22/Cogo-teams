@@ -66,7 +66,7 @@ function SubmitForm({
 				</Button>
 
 				<Button
-					themeType="accent"
+					themeType="primary"
 					onClick={() => createForm()}
 					loading={createFormLoading}
 				>

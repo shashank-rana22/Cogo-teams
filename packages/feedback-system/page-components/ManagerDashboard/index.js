@@ -57,7 +57,7 @@ function ManagerDashboard() {
 				</div>
 
 				<Button
-					themeType="accent"
+					themeType="primary"
 					size="lg"
 					onClick={() => {
 						handleClick();

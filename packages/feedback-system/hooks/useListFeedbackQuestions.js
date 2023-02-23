@@ -17,10 +17,10 @@ const useListFeedbackQuestions = ({
 		params,
 	}, { manual: false });
 
-	const setPage = (p) => { setParams({ ...params, page: p }); };
+	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
-		setParams({ ...params, Q: searchValue || undefined, page: 1 });
+		setParams({ ...params, Q: searchValue || undefined, Page: 1 });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchValue]);
 
