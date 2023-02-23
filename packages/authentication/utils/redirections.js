@@ -7,7 +7,7 @@ const redirections = (profile) => {
 
 	let navItemToShow = navs[0]?.key !== 'dashboards' ? navs[0] : navs?.[1];
 
-	if (navItemToShow.options?.length > 0) {
+	if (navItemToShow?.options?.length > 0) {
 		// eslint-disable-next-line prefer-destructuring
 		navItemToShow = navItemToShow.options[0];
 	}
