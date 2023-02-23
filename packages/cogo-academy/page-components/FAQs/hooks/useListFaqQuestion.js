@@ -6,7 +6,7 @@ function useListFaqQuestions() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'faq/list_faq_questions',
+		url    : 'list_faq_questions',
 	}, { manual: true });
 
 	const fetchFaqQuestions = async () => {
@@ -18,8 +18,6 @@ function useListFaqQuestions() {
 			console.log('error :: ', error);
 		}
 	};
-
-	console.log('data :: ', data);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqQuestions(); }, []);

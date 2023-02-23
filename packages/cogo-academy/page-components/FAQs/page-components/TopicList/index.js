@@ -8,7 +8,7 @@ import QuestionsList from '../QuestionsList';
 
 import styles from './styles.module.css';
 
-function TopicList({ tabTitle }) {
+function TopicList({ tabTitle, searchState = '' }) {
 	const {
 		refetchTopic = () => {},
 		data,
@@ -48,7 +48,22 @@ function TopicList({ tabTitle }) {
 				</Tabs>
 			</div>
 
-			<div>{activeTab ? <QuestionsList tabTitle={activeTab} /> : <QuestionsList tabTitle={tabTitle} />}</div>
+			<div>
+				{activeTab
+					? (
+						<QuestionsList
+							tabTitle={activeTab}
+							searchState={searchState}
+						/>
+					)
+					: (
+						<QuestionsList
+							tabTitle={tabTitle}
+							searchState={searchState}
+						/>
+					)}
+
+			</div>
 		</div>
 	);
 }

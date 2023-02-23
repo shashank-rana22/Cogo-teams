@@ -43,6 +43,11 @@ const faq = {
 	],
 	faq: [
 		{
+			api          : 'create_question_answer_set',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
 			api          : 'list_faq_topics',
 			access_type  : 'private',
 			service_name : 'faq',
