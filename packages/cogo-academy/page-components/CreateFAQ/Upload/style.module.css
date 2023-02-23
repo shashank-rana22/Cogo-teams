@@ -1,45 +1,46 @@
 .container {
-  padding: 0 30px 0px 30px;
+	padding: 0 30px;
 
-  @media (max-width: 768px) {
-    margin-top: 80px;
-  }
+	@media (max-width: 768px) {
+		margin-top: 80px;
+	}
 }
 
 .back_div {
-  display: flex;
+	display: flex;
 }
 
 .back {
-  font-weight: 400;
-  font-size: 14px;
-  margin-left: 10px;
+	margin-left: 10px;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .add_topic {
-  font-weight: 600;
-  font-size: 24px;
-  margin-top: 12px;
+	margin-top: 12px;
+	font-size: 24px;
+	font-weight: 600;
 }
 
 .upload_faq {
-  color: #6d6d6d;
-  font-weight: 100;
-  font-size: 15px;
+	font-size: 15px;
+	font-weight: 100;
+	color: #6d6d6d;
 }
 
 .btn_row {
-  display: flex;
-  margin-top: 24px;
+	display: flex;
+	margin-top: 24px;
 }
 
 .save_btn {
-  margin-left: 10px;
+	margin-left: 10px;
 }
 
 .container2 {
-  padding: 50px 50px 0px 50px;
+	padding: 50px 50px 0;
 }
+
 .uploader {
-  margin-top: 10px;
+	margin-top: 10px;
 }

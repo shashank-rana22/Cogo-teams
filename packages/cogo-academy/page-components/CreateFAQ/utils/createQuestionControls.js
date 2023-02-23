@@ -1,89 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-const functionSubFunctionMapping = {
-	sales: [
-		{
-			label : 'Customer Success',
-			value : 'customer_success',
-	  },
-	  {
-			label : 'Field Sales',
-			value : 'field_sales',
-	  },
-	  {
-			label : 'Strategic Sales',
-			value : 'strategic_sales',
-	  },
-	  {
-			label : 'CP Sales',
-			value : 'cp_sales',
-	  },
-	  {
-			label : 'Acquisition',
-			value : 'acquisition',
-	  },
-	  {
-			label : 'CP Portfolio',
-			value : 'cp_portfolio',
-	  },
+import SUB_FUNCTION_MAPPING from './subFunctionMappings';
+import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
-	],
-	supply: [
-		{
-			label : 'Shipping Line',
-			value : 'shipping_line',
-	  },
-	  {
-			label : 'Freight Forwarder',
-			value : 'freight_forwarder',
-	  },
-	  {
-			label : 'Transportation',
-			value : 'transportation',
-	  },
-	  {
-			label : 'CFS',
-			value : 'cfs',
-	  },
-	  {
-			label : 'Customs',
-			value : 'customs',
-	  },
-	  {
-			label : 'NVOCC',
-			value : 'nvocc',
-	  },
-	  {
-			label : 'Overseas',
-			value : 'overseas',
-	  },
-	  {
-			label : 'IATA Agents',
-			value : 'iata_agents',
-	  },
-
-	],
-	operations: [
-	  {
-			label : 'Booking Desk',
-			value : 'booking_desk',
-	  },
-	  {
-			label : 'Post Shipment',
-			value : 'post_shipment',
-	  },
-	  {
-			label : 'FinOps',
-			value : 'finops',
-	  },
-
-	],
-	finance: [
-
-	],
-
-};
-
-const createQuestionControls = () => [{
+const createQuestionControls = ({ watchFunctions, entity_options }) => [{
 	type        : 'fieldArray',
 	name        : 'fieldArray',
 	showButtons : true,
@@ -106,6 +25,7 @@ const createQuestionControls = () => [{
 			type        : 'select',
 			span        : 2,
 			label       : 'Cogo Entity',
+			options     : entity_options,
 			placeholder : 'Select Cogo Entity',
 		},
 		{
@@ -133,6 +53,7 @@ const createQuestionControls = () => [{
 			type        : 'select',
 			span        : 2,
 			placeholder : 'Select Work Scopes',
+			options     : WORK_SCOPES_OPTIONS,
 			rules       : { required: 'This is required' },
 		},
 		{
@@ -152,7 +73,7 @@ const createQuestionControls = () => [{
 			label       : 'Sub Functions',
 			type        : 'select',
 			span        : 1,
-			options     : functionSubFunctionMapping.sales,
+				 options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
 		},
 	],

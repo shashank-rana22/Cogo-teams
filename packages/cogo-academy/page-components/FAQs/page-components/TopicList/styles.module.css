@@ -1,54 +1,51 @@
 .gridContainer {
-    display: grid;
-    grid-template-columns: 20rem 64rem ;
-    width: 100%;
-    padding: 10px;
-    justify-content: space-between;
+	display: grid;
+	grid-template-columns: 20rem 64rem;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px;
 
-    :global {
-      .ui_tabs_container {
-       width: 100%;
-       
-      }
+	:global {
+		.ui_tabs_container {
+			width: 100%;
+		}
 
-      .ui_tab_list_container {
-        width: 100% !important;
-      }
+		.ui_tab_list_container {
+			width: 100% !important;
+		}
 
-      .ui_tab_container {
-        min-height: 65px;
-        padding: 12px 6px;
+		.ui_tab_container {
+			min-height: 65px;
+			padding: 12px 6px;
 
-        &:hover {
-          background-color: #fdebe8;
-          color: #ee3425;
-          ;
-        }
-      }
-    }
-  }
-  
-  .title {
-    font-size: 14px;
-    font-weight: 900;
-    text-align: left;
+			&:hover {
+				color: #ee3425;
+				background-color: #fdebe8;
+          
+			}
+		}
+	}
+}
 
-  }
+.title {
+	font-size: 14px;
+	font-weight: 900;
+	text-align: left;
+}
 
-  .subtitle {
-    font-size: 11px;
-   text-align: left;
-   white-space: initial;
-  }
+.subtitle {
+	font-size: 11px;
+	text-align: left;
+	white-space: initial;
+}
 
-  .tabstyle {
-    gap: 3rem;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
-  }
-  .scrollable{
-    overflow: auto;
-    
+.tabstyle {
+	box-sizing: border-box;
+	gap: 3rem;
+	padding: 10px;
+	margin-bottom: 1rem;
+}
 
-  }
+.scrollable {
+	overflow: auto;
+}

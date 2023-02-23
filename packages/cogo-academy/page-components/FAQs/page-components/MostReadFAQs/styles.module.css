@@ -1,4 +1,4 @@
-.border{
+.border {
 	border-bottom: 0.1px  solid #7e7a7a;
 }
 
@@ -34,8 +34,7 @@
 		}
 	}
 }
-.scrollable{
-    overflow: auto;
-    
 
-  }
+.scrollable {
+	overflow: auto;
+}

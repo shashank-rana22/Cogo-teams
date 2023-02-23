@@ -1,12 +1,11 @@
-.border{
-	border-bottom: 0.1px  solid #7e7a7a;
+.border {
 	margin-left: 40px;
+	border-bottom: 0.1px  solid #7e7a7a;
+
 	&:hover {
-		
 		box-shadow: 2px 2px 4px #848282;
 		
-		;
-	  }
+	}
 }
 
 .title {
@@ -14,7 +13,7 @@
 	align-items: center;
 	margin-left: 40px;
 	font-size: 16px;
-	
+
 
 	@media (min-width: 768px) {
 		font-size: 1.05rem;
@@ -29,7 +28,7 @@
 .heading_container {
 	display: flex;
 	align-items: center;
-	
+
 
 	@media (max-width: 768px) {
 		flex-flow: column wrap;
@@ -42,8 +41,7 @@
 		}
 	}
 }
-.scrollable{
-    overflow: auto;
-    
 
-  }
+.scrollable {
+	overflow: auto;
+}

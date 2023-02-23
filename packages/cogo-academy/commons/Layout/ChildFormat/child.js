@@ -1,6 +1,7 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
+import SUB_FUNCTION_MAPPING from '../../../page-components/CreateFAQ/utils/subFunctionMappings';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
@@ -17,7 +18,10 @@ function Child({
 	disabled = false,
 	field,
 	error,
+	getArray = {},
+
 }) {
+	const { functions = '' } = getArray;
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
@@ -57,6 +61,11 @@ function Child({
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}
+
+						if (controlItem.type === 'select' && controlItem.name === 'sub_functions') {
+							extraProps.options = SUB_FUNCTION_MAPPING[functions];
+						}
+
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element) return null;
 						return (

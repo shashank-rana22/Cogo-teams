@@ -45,7 +45,7 @@ function useCreateFaq() {
 
 		let payload = {
 			name,
-			display_name: 'RFQ',
+			display_name: name,
 			description,
 		};
 

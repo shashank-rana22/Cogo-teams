@@ -1,33 +1,35 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable max-len */
 import { Button } from '@cogoport/components';
-import { useForm, InputController, MultiselectController } from '@cogoport/forms';
+import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
 
 import Layout from '../../../commons/Layout';
-import createQuestionControls from '../utils/createQuestionControls';
 
 import BodyTextEditor from './BodyTextEditor';
-import useGetTopicTagList from './hooks/useGetTopicTagList';
 import styles from './styles.module.css';
+import useCreateQuestions from './useCreateQuestions';
 
 function CreateFAQ() {
 	const router = useRouter();
 
-	const { topicOptions, tagOptions } = useGetTopicTagList();
-
-	const controls = createQuestionControls();
+	const {
+		editorValue,
+		setEditorValue,
+		handleSubmit,
+		errors,
+		control,
+		onSubmit,
+		controls,
+		topicOptions,
+		tagOptions,
+		watch,
+		getArray,
+	} = useCreateQuestions();
 
 	const onClickBackIcon = () => {
 		router.back();
-	};
-
-	const { handleSubmit, formState: { errors }, control } = useForm();
-	const [editorValue, setEditorValue] = useState('');
-
-	const onSubmit = () => {
 	};
 
 	return (
@@ -36,15 +38,17 @@ function CreateFAQ() {
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
+
 			<div className={styles.heading_text}>
 				Create A Question
 			</div>
 
-			<form className={styles.form_container} onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
+			<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.input_container}>
 					<div className={styles.input_label}>
 						Name of the Question
 					</div>
+
 					<InputController
 						control={control}
 						name="create_faq"
@@ -52,6 +56,7 @@ function CreateFAQ() {
 						placeholder="Create a question."
 						rules={{ required: 'Question is required.' }}
 					/>
+
 					{errors.create_faq && (
 						<span className={styles.errors}>
 							{errors.create_faq.message}
@@ -66,6 +71,7 @@ function CreateFAQ() {
 						<div className={styles.input_label}>
 							Select Tags
 						</div>
+
 						<MultiselectController
 							name="tags"
 							control={control}
@@ -78,6 +84,7 @@ function CreateFAQ() {
 						<div className={styles.input_label}>
 							Select Topcics
 						</div>
+
 						<MultiselectController
 							name="topics"
 							control={control}
@@ -96,7 +103,7 @@ function CreateFAQ() {
 
 				</div>
 
-				<Layout fields={controls} control={control} errors={errors} />
+				<Layout fields={controls} getArray={getArray} control={control} errors={errors} watch={watch} />
 
 				<div className={styles.button_container}>
 

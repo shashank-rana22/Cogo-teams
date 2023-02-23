@@ -12,15 +12,15 @@
 
 		.ui_table_head_cell {
 			padding: 10px;
-			color: white; 
+			color: white;
 			background-color: #6d6d6d;
 		}
 
 		.ui_table_body_cell {
+			flex-wrap: wrap;
+			max-width: 250px;
 			background: #fff;
 			background-color: #fff;
-			max-width: 250px;
-			flex-wrap: wrap;
 		}
 
 		.ui_table_body_row {

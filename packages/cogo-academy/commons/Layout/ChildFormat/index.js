@@ -18,6 +18,7 @@ function FieldArray({
 	register,
 	value,
 	error,
+	getArray,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -47,6 +48,7 @@ function FieldArray({
 					disabled={disabled}
 					register={register}
 					error={error?.[index]}
+					getArray={getArray[index]}
 				/>
 			))}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
