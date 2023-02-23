@@ -69,16 +69,17 @@
 
 .label {
 	margin: 0;
-	color: #4f4f4f;
 	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .value {
-	margin-top: 8px; 
+	margin-top: 8px;
+
 	span {
 		padding-left: 4px;
-		border-left: 1px solid #bdbdbd;
 		font-weight: bold;
+		border-left: 1px solid #bdbdbd;
 	}
 }
 

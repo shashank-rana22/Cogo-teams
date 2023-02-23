@@ -2,7 +2,6 @@ import { Button, Input, Placeholder } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import useGetColumns from '../../../common/Columns';
