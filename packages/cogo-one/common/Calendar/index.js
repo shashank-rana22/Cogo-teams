@@ -10,6 +10,7 @@ function Calendar() {
 	const [dates, setDates] = useState([]);
 	const [months, setMonths] = useState([]);
 	const [weeks, setWeeks] = useState([]);
+	const [calendarData, setCalendarData] = useState([]);
 
 	const numberOfDays = 14;
 	const numberOfMonthsForWeeks = 2;
@@ -41,7 +42,7 @@ function Calendar() {
 		setMonths(newMonths.reverse());
 	};
 
-	function getWeeksOfMonth(month, year, date) {
+	function getWeeksOfMonth(month, year) {
 		const newWeeks = [];
 		const firstDate = new Date(year, month, 1);
 		const lastDate = new Date(year, month + 1, 0);
