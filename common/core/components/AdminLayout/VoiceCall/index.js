@@ -19,7 +19,6 @@ function VoiceCall() {
 		inCall,
 		endCall,
 		showCallModal,
-		// showFeedbackModal,
 		orgId,
 		userId,
 		name,
@@ -29,18 +28,13 @@ function VoiceCall() {
 		showFeedbackModal = false,
 	} = voiceCall || {};
 
-	// const minimizeModal = true;
-
-	// const code = mobile_number?.slice(0, 3);
-	// const number = mobile_number?.slice(3);
-
 	const {
 		makeCallApi = () => {},
 		callLoading,
 		callId,
 		callStatus,
 		setCallId = () => {},
-	} = useOutgoingCall({ mobile_number, mobile_country_code });
+	} = useOutgoingCall();
 
 	const {
 		callStatusApi = () => {},
@@ -145,8 +139,6 @@ function VoiceCall() {
 					name={name}
 					mobile_number={mobile_number}
 					mobile_country_code={mobile_country_code}
-					// code={code}
-					// number={number}
 					profileData={profileData}
 					showCallModal={showCallModal}
 					status={status}
@@ -167,8 +159,6 @@ function VoiceCall() {
 					name={name}
 					mobile_number={mobile_number}
 					mobile_country_code={mobile_country_code}
-					// code={code}
-					// number={number}
 					profileData={profileData}
 					minimizeModal={minimizeModal}
 					status={status}

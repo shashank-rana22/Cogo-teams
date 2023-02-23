@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
-function useOutgoingCall({ number }) {
+function useOutgoingCall() {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_outgoing_call',
 		method : 'post',
