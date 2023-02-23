@@ -68,7 +68,7 @@ function useGetVendor() {
 	const { component: ActiveComponent } = COMPONENT_MAPPING.find((item) => item.key === activeStepper);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const onBack = useCallback(() => router.push('/vendors-list'), []);
+	const onBack = useCallback(() => router.push('/vendors'), []);
 
 	return {
 		ActiveComponent,

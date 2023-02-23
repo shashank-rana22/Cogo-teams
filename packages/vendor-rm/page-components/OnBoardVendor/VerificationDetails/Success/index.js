@@ -9,7 +9,7 @@ function Success() {
 	const router = useRouter();
 
 	const goToDashboard = () => {
-		router.push('/vendors-list');
+		router.push('/vendors');
 	};
 
 	const addNewVendor = () => {

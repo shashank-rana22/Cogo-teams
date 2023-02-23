@@ -2619,6 +2619,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'list_vendors',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
+		{
+			api          : 'get_vendor',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
+		{
+			api          : 'verify_vendor_kyc',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
 	],
 	finance_crm: [
 		{
