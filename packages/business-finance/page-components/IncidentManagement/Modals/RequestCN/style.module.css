@@ -60,9 +60,7 @@
   gap: 4px;
   align-items: center;
 }
-.tooltip {
-  width: 1000px;
-}
+
 .date_value {
   font-size: 14px;
   font-weight: 600;
