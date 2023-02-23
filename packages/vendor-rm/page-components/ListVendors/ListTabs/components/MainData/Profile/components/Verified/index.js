@@ -66,7 +66,7 @@ function Verified({ data = {} }) {
 			<div
 				className={styles.icon}
 			>
-				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/provisional-icon.svg" alt="pending" />
+				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg" alt="pending" />
 			</div>
 			<div
 				className={styles.dis}

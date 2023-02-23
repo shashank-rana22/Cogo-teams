@@ -79,13 +79,13 @@ const useVendorList = () => {
 		url    : '/list_vendors',
 	}, { manual: true });
 
-	const getVendorList = async () => {
+	const getVendorList = () => {
 		try {
-			await trigger({
+			trigger({
 				params,
 			});
 		} catch (e) {
-			// Toast.error(e.data);
+			console.log(e);
 		}
 	};
 
