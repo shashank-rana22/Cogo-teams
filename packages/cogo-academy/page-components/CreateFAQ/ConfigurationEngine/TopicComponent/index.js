@@ -7,6 +7,7 @@ import topicListColumns from '../TableConfigurations/topicListColumns';
 
 import Header from './Header';
 import TopicTable from './TopicTable';
+import useDeleteTopic from './useDeleteTopic';
 
 function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 	const router = useRouter();
@@ -20,7 +21,10 @@ function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 		setActiveTopic,
 		topicCurrentPage,
 		setTopicCurrentPage,
+		fetchFaqTopic,
 	} = useListFaqTopics({ searchTopicsInput });
+
+	const { onClickDeleteIcon = () => {} } = useDeleteTopic({ fetchFaqTopic });
 
 	const onClickEditTopic = (item) => {
 		setConfigurationPage('topic');
@@ -30,7 +34,7 @@ function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 		);
 	};
 
-	const { listColumns = [] } = topicListColumns({ onClickEditTopic });
+	const { listColumns = [] } = topicListColumns({ onClickEditTopic, onClickDeleteIcon });
 
 	return (
 		<div>

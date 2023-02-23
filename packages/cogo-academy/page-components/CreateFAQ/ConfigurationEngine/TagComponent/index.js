@@ -6,6 +6,7 @@ import tagListColumns from '../TableConfigurations/tagListColumns';
 
 import Header from './Header';
 import TagsTable from './TagsTable';
+import useDeleteTag from './useDeleteTag';
 
 function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 	const [searchTagsInput, setSearchTagsInput] = useState('');
@@ -16,7 +17,10 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 		setActiveTag,
 		tagCurrentPage,
 		setTagCurrentPage,
+		fetchFaqTag,
 	} = useListFaqTags({ searchTagsInput });
+
+	const { onClickDeleteIcon = () => {} } = useDeleteTag({ fetchFaqTag });
 
 	const router = useRouter();
 
@@ -27,7 +31,8 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 			`/learning/faq/create/configuration?update=tag&id=${item.id}`,
 		);
 	};
-	const { listColumns = [] } = tagListColumns({ onClickEdit });
+
+	const { listColumns = [] } = tagListColumns({ onClickEdit, onClickDeleteIcon });
 
 	return (
 		<div>

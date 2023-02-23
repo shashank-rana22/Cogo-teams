@@ -15,9 +15,8 @@ function useListFaqTopics({ searchTopicsInput = '' }) {
 			await trigger({
 				params: {
 					page       : topicCurrentPage,
-					status     : activeTopic,
 					page_limit : 5,
-					filters    : { q: searchTopicsInput },
+					filters    : { q: searchTopicsInput, status: activeTopic },
 				},
 			});
 		} catch (err) {
