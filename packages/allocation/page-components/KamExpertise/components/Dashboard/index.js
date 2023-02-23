@@ -12,19 +12,14 @@ function KamExpertise() {
 				KAM Expertise
 			</section>
 
-			{/* <Button
-				onClick={() => router.push('/allocation/kam-expertise/view-badges')}
-				themeType="primary"
-			>
-				View Badges
-			</Button> */}
-
-			<Button
-				onClick={() => router.push('/allocation/kam-expertise/configurations')}
-				themeType="secondary"
-			>
-				View all configs
-			</Button>
+			<div className={styles.create_button_container}>
+				<Button
+					onClick={() => router.push('/allocation/kam-expertise/configurations')}
+					themeType="primary"
+				>
+					Create Configuration
+				</Button>
+			</div>
 		</section>
 
 	);
