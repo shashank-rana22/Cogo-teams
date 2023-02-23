@@ -3,9 +3,9 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import KamExpertiseScoreConfig from './components/KamExpertiseScore';
-import KamLevel from './components/KamLevel';
 import styles from './styles.module.css';
+import KamExpertiseScoreConfig from './Tabs/KamExpertiseScore';
+import KamLevel from './Tabs/KamLevel';
 
 const TAB_PANEL_MAPPING = {
 	configurations: {
@@ -48,7 +48,7 @@ function ViewAllConfigs() {
 				</div>
 
 				<div className={styles.tab_list}>
-					<Tabs activeTab={activeConfigTab} themeType="primary" onChange={setActiveConfigTab}>
+					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
 
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;
