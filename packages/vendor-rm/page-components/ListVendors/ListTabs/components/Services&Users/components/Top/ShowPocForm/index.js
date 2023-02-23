@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 	const {
+		loading,
 		updatedControls,
 		errors,
 		control,
@@ -26,6 +27,7 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 				<Button
 					size="md"
 					themeType="tertiary"
+					disabled={loading}
 					onClick={() => setShowForm('')}
 				>
 					Cancel
@@ -35,6 +37,7 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 				<Button
 					size="md"
 					themeType="accent"
+					disabled={loading}
 					onClick={handleSubmit(onSubmit)}
 				>
 					Save

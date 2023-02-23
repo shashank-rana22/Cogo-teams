@@ -85,6 +85,7 @@ const useAddServicePoc = ({ setShowForm = () => {}, getVendorData }) => {
 	};
 
 	return {
+		loading,
 		updatedControls,
 		errors,
 		control,
