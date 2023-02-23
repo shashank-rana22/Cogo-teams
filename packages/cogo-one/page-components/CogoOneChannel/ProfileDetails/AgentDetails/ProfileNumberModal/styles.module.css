@@ -20,6 +20,10 @@
 		.styles_row_container__FNFTc {
 			justify-content: space-between !important;
 		}
+
+		.ui_select_options_container {
+			min-width: 165px;
+		}
 	}
 }
 
