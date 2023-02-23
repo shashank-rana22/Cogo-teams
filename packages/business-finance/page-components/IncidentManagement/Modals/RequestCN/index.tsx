@@ -1,6 +1,6 @@
-import { Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
+import { Tooltip, Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -250,18 +250,31 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Remarks -</div>
-							{ remark || '-'}
+							{remark.length > 40 ? (
+								<Tooltip
+									className={styles.tooltip}
+									interactive
+									content={remark || '-'}
+								>
+									<div className={styles.wrapper}>{ remark || '-'}</div>
+								</Tooltip>
+							) : remark || '-'}
 						</div>
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer">
-									{url.split('/')[4] || '-'}
+									<div className={styles.view_flex}>
+										<div className={styles.view}>View Document</div>
+										<IcMEyeopen />
+									</div>
+
 								</a>
 							) : (
 								<div> No document available</div>
 							)))}
+
 						</div>
 						{isEditable && (
 							<>

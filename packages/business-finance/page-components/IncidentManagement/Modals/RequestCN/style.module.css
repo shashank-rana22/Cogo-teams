@@ -19,12 +19,6 @@
 .container {
   width: 200px;
   padding: 8px;
-
-  :global {
-    .ui_select_options_container {
-      min-height: 100px !important;
-    }
-  }
 }
 
 .texts {
@@ -51,13 +45,24 @@
 }
 
 .value_data {
-  margin: 20px 30px 20px 0;
+  margin: 20px 20px 20px 0;
 }
-
+.view {
+  color: green;
+  background-color: transparent;
+  text-decoration: underline;
+}
 .label_value {
   font-size: 12px;
 }
-
+.view_flex {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.tooltip {
+  width: 1000px;
+}
 .date_value {
   font-size: 14px;
   font-weight: 600;
@@ -70,8 +75,8 @@
 
 .document_flex {
   display: flex;
+  gap: 4px;
   align-items: center;
-  text-align: center;
 }
 
 .remarks {
@@ -85,9 +90,21 @@
   align-items: center;
   margin-left: 2px;
 }
+.wrapper {
+  width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
 
 .select_container {
   margin: 4px 0 16px;
+  :global {
+    .ui_select_options_container {
+      max-height: 180px !important;
+    }
+  }
 }
 
 .button_container {
