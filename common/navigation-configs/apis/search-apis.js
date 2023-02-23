@@ -404,5 +404,12 @@ const apis = [
 		feature      : 'search',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'get_spot_search_schedules',
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'spot_search',
+	},
+
 ];
 export default apis;
