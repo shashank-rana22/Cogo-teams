@@ -12,14 +12,10 @@ function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => 
 		try {
 			const res = await trigger({
 				data: {
-					name,
-					mobile_country_code : country_code,
+					token               : '',
 					mobile_number       : number,
-					profile_data        : [{
-						channel_type         : 'platform_channel',
-						channel_account_type : name,
-						channel_accountid    : number,
-					}],
+					mobile_country_code : country_code,
+					name,
 				},
 			});
 			if (res?.data?.lead_user_id) {

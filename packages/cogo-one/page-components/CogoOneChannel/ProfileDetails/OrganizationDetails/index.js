@@ -10,8 +10,8 @@ import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMessageData = {}, ORG_PAGE_URL = '' }) {
-	const { organization_id:messageOrgId = '' } = FormattedMessageData || {};
+function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, formattedMessageData = {}, ORG_PAGE_URL = '' }) {
+	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
@@ -158,10 +158,8 @@ function OrganizationDetails({ activeTab = '', activeVoiceCard = {}, FormattedMe
 				</div>
 			) : (
 				<ListPromos />
-
 			)}
 		</div>
-
 	);
 }
 export default OrganizationDetails;

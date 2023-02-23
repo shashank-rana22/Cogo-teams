@@ -90,7 +90,7 @@ const useSendChat = ({
 					message_metadata,
 					lead_user_id,
 				});
-			}, 300);
+			}, 500);
 		}
 	};
 
@@ -132,7 +132,7 @@ const useSendChat = ({
 					text         : val,
 				},
 			});
-		}, 200);
+		}, 500);
 	};
 
 	return { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions };

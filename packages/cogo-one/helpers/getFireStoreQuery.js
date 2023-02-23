@@ -31,8 +31,8 @@ function getFireStoreQuery({ omniChannelCollection, userId, appliedFilters, isom
 		firestoreQuery = query(
 			omniChannelCollection,
 			...queryFilters,
-			where('spectators_ids', 'array_contains', userId),
 			where('session_type', '==', 'admin'),
+			where('spectators_ids', 'array_contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
 		);
 	}

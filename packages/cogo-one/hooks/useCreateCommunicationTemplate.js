@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 

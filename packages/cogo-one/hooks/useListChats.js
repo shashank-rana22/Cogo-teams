@@ -23,7 +23,6 @@ const useListChats = ({
 
 	});
 	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId) || {};
-	console.log('activeMessageCard:', activeMessageCard);
 
 	const dataFormatter = (list) => {
 		let chats = 0;

@@ -1,221 +1,222 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
 }
 
 .business_name {
-    font-size: 700;
-    font-size: 13px;
+	font-size: 700;
+	font-size: 13px;
 }
 
 .organisation_container {
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
 }
 
 .organisation_container::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .organisation_div {
-    margin-top: 10px;
-    border: 1px solid #e0e0e0;
-    padding: 10px;
+	padding: 10px;
+	margin-top: 10px;
+	border: 1px solid #e0e0e0;
 }
 
 .wrap {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 
-    :global {
-        .ui_select_display_container {
-            height: 30px !important;
-            width: 120px !important;
-        }
-    }
+	:global {
+		.ui_select_display_container {
+			width: 120px !important;
+			height: 30px !important;
+		}
+	}
 }
 
 .stats_div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 20px;
 }
 
 .top {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin-bottom: 20px;
 }
 
 .header {
-    font-weight: 600;
-    font-size: 12px;
-    color: #828282;
+	font-size: 12px;
+	font-weight: 600;
+	color: #828282;
 }
 
 .booking_div {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
 }
 
 .comm_tex {
-    margin-top: 15px;
-    display: flex;
-    font-size: 12px;
-    color: #828282;
+	display: flex;
+	margin-top: 15px;
+	font-size: 12px;
+	color: #828282;
 }
 
 .port_div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 10px;
-    background: #ffffff;
-    box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
-    border-radius: 12px;
-    padding: 15px 10px 10px 18px;
-    height: 200px;
-    overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 200px;
+	padding: 15px 10px 10px 18px;
+	margin-top: 10px;
+	overflow-y: auto;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .port_div::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .origin_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .origin {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 12px;
-    color: #221f20;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 180px;
+	display: flex;
+	align-items: center;
+	max-width: 180px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .destination {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 12px;
-    color: #221f20;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 250px;
+	display: flex;
+	align-items: center;
+	max-width: 250px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .name {
-    font-weight: 500;
-    font-size: 12px;
-    color: #4f4f4f;
-    margin-left: 4px;
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .div_top {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 5px;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 5px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .div_top:last-child {
-    border-bottom: none;
+	border-bottom: none;
 }
 
 .div_footer {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 6px;
+	display: flex;
+	flex-direction: column;
+	padding: 10px 6px;
 }
 
 .sid_number {
-    font-weight: 600;
-    margin-left: 5px;
+	margin-left: 5px;
+	font-weight: 600;
 }
 
 .last_booking {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .port_name {
-    font-weight: 500;
-    font-size: 12px;
-    color: #4f4f4f;
-    margin-left: 4px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 200px;
+	max-width: 200px;
+	margin-left: 4px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .origin_port_name {
-    font-weight: 500;
-    font-size: 12px;
-    color: #4f4f4f;
-    margin-left: 4px;
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
+
 .bookings_count {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 11px;
-    font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 11px;
+	font-weight: 500;
 }
 
 .shipment_count {
-    font-size: 10px;
-    border: 1px solid #bdbdbd;
-    display: flex;
-    align-items: center;
-    color: #bdbdbd;
-    padding: 3px;
-    justify-content: center;
-    border-radius: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 3px;
+	font-size: 10px;
+	color: #bdbdbd;
+	border: 1px solid #bdbdbd;
+	border-radius: 80px;
 }
 
 .origin_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .empty_state {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 28vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 28vh;
 }
 
 .shipment_count {
-    padding: 1px 8px;
-    border-radius: 10px;
-    border-radius: 1px solid #bdbdbd;
+	padding: 1px 8px;
+	border-radius: 10px;
+	border-radius: 1px solid #bdbdbd;
 }
 
 .tooltip_content {
-    display: flex;
+	display: flex;
 }

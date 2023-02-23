@@ -95,7 +95,7 @@ function MarkAsClosed({ data = {} }) {
 						<Button
 							size="md"
 							themeType="accent"
-							disabled={loading}
+							loading={loading}
 							onClick={handleSubmit}
 						>
 							Submit
