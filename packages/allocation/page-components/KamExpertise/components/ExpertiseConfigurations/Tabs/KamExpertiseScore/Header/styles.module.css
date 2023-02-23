@@ -1,25 +1,24 @@
-.container{
-    display: flex;
-    margin-top: 10px;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 10px;
 }
 
-.button_container{
-    display: flex;
+.button_container {
+	display: flex;
 }
 
-.config_basic_details{
-    display: flex;
-    flex-direction: column;
-    width: 25%;
+.config_basic_details {
+	display: flex;
+	flex-direction: column;
+	width: 25%;
 }
 
-.lower_details{
-    display: flex;
-    font-size: 12px;
-    margin-top: 8px;
-    justify-content: space-between;
-
+.lower_details {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+	font-size: 12px;
 }

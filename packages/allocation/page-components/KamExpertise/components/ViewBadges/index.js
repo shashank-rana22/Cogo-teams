@@ -1,5 +1,5 @@
 function ViewBadges() {
-	return 'bvcnm,';
+  return "bvcnm,";
 }
 
 export default ViewBadges;

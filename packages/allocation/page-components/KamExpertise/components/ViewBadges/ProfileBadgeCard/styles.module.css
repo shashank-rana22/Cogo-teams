@@ -1,0 +1,51 @@
+.main_container {
+	padding: 1em;
+	margin-top: 7em;
+	background-color: white;
+	border-radius: 7px;
+}
+
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.lable {
+	font-family: Roboto;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 16px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 500;
+	color: #6fa5ab;
+}
+
+.badges_container {
+	display: flex;
+	gap: 1em;
+}
+
+.badge {
+	width: 3em;
+}
+
+.container {
+	padding: 0.5em;
+}
+
+.stars_container {
+	display: flex;
+}
+
+.small_star {
+	width: 1em;
+}
+
+.view_more {
+	position: relative;
+	left: 85%;
+}
