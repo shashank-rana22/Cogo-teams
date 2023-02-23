@@ -3,6 +3,7 @@
     margin-top: 10px;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
 }
 
 .button_container{
@@ -11,4 +12,14 @@
 
 .config_basic_details{
     display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.lower_details{
+    display: flex;
+    font-size: 12px;
+    margin-top: 8px;
+    justify-content: space-between;
+
 }
