@@ -1,12 +1,15 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+
+import EDIT_CONFIG_CONTROLS_MAPPING from '../../../../../../../constants/edit-config-controls-mapping';
 
 import styles from './styles.module.css';
 
 function CardItem(item) {
 	const { name, controls } = item;
+
+	console.log('controls', controls);
 
 	return (
 		<div className={styles.card_item}>
@@ -20,7 +23,20 @@ function CardItem(item) {
 				</div>
 			</div>
 
-			{/* <div className={styles.controls_container} /> */}
+			<div className={styles.controls_container}>
+				{controls.map((control) => {
+					const { name: controlName, current_value } = control;
+
+					return (
+						<div className={styles.field_container}>
+							<span className={styles.label}>
+								{/* {EDIT_CONFIG_CONTROLS_MAPPING[controlName].label}
+								{' '} */}
+							</span>
+						</div>
+					);
+				})}
+			</div>
 
 		</div>
 	);
