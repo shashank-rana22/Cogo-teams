@@ -1,10 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListFaqQuestions({ searchState = '', topicId = '' }) {
+function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 	const [activeTab, setActiveTab] = useState('');
 
-	console.log('apisearch', topicId);
+	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
@@ -20,7 +20,9 @@ function useListFaqQuestions({ searchState = '', topicId = '' }) {
 						status       : 'active',
 						q            : searchState,
 						faq_topic_id : topicId,
+
 					},
+					sort_by: SORT_MODE,
 				},
 			});
 		} catch (error) {
