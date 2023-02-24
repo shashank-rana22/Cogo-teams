@@ -14,9 +14,9 @@
 .chatstatistics_box_agent {
 	margin: 0;
 
-	&:nth-child(2) {
+	/* &:nth-child(2) {
 		width: 52%;
-	}
+	} */
 }
 
 .small_data_box {
