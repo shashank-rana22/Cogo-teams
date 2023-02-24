@@ -1,5 +1,16 @@
-const getFormattedData = (data) => {
-	const { sellQuotation = {}, buyQuotation = {} } = data || {};
+interface ChargeInterface {
+	serviceType?:string
+}
+interface CommonInterface {
+	serviceCharges?:Array<ChargeInterface>
+}
+interface FormattedInterface {
+	sell_quotation?:CommonInterface
+	buy_quotation?:CommonInterface
+}
+
+const getFormattedData = (data:FormattedInterface) => {
+	const { sell_quotation:sellQuotation = {}, buy_quotation:buyQuotation = {} } = data || {};
 	const sellQuotationData = sellQuotation.serviceCharges
 		?.map((item) => ({ ...item, serviceType: item.serviceType || 'Platform Fees' }));
 	const sellSevices = sellQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];

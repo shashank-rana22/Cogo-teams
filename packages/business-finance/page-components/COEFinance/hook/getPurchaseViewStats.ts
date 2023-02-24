@@ -11,22 +11,21 @@ const usePurchaseViewStats = () => {
 		},
 		{ autoCancel: false },
 	);
-	const getStatsData = async () => {
-		try {
-			await statsTrigger({
-				params: {
-					jobTypeShipment: 'false',
-				},
-			});
-		} catch (err) {
-			Toast.error('stats data not prasent');
-		}
-	};
 
 	useEffect(() => {
+		const getStatsData = async () => {
+			try {
+				await statsTrigger({
+					params: {
+						jobTypeShipment: 'false',
+					},
+				});
+			} catch (err) {
+				Toast.error('stats data not prasent');
+			}
+		};
 		getStatsData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [statsTrigger]);
 
 	return {
 		statsLoading,

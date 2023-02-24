@@ -18,30 +18,28 @@ interface PropsType {
 
 function FormatedDate({ item, field }: PropsType) {
 	const { billDate, dueDate, invoiceDate, createdDate } = item || {};
-	const getBillDate = formatDate(billDate!, 'dd/MMM/yyyy', {}, true);
-	const getDueDate = formatDate(dueDate!, 'dd/MMM/yyyy', {}, true);
-	const getInvoiceDate = formatDate(invoiceDate!, 'dd/MMM/yyyy', {}, true);
+	const getBillDate = formatDate(billDate!, 'dd MMM, yyyy', {}, true);
+	const getDueDate = formatDate(dueDate!, 'dd MMM, yyyy', {}, true);
+	const getInvoiceDate = formatDate(invoiceDate!, 'dd MMM, yyyy', {}, true);
 	const getLastModifiedDate = formatDate(
 		createdDate!,
-		'dd/MMM/yyyy hh:mm:ss',
+		'dd MMM, yyyy hh:mm:ss',
 		{},
 		true,
 	);
 
 	return (
 		<div className={styles.text}>
-			{field.key === 'billDate' && <div>{getBillDate}</div>}
-			{field.key === 'dueDate' && <div>{getDueDate}</div>}
+			{field.key === 'billDate' && <div className={styles.size}>{getBillDate}</div>}
+			{field.key === 'dueDate' && <div className={styles.size}>{getDueDate}</div>}
 			{field.key === 'invoiceDate' && (
-				<div>
-					{' '}
+				<div className={styles.size}>
 					{getInvoiceDate}
 				</div>
 			)}
 			{field.key === 'createdDate' && (
-				<div>
+				<div className={styles.size}>
 					{getLastModifiedDate}
-					{' '}
 				</div>
 			)}
 		</div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
+
 import styled from './styles.module.css';
 
 interface ItemProps {
@@ -7,16 +9,22 @@ interface ItemProps {
 }
 interface Props {
 	item:ItemProps;
+	field: {
+		key: string;
+		topKey: object;
+		bottomKey: object;
+		label: string;
+	};
 }
-function RenderUrgencyTag({ item }:Props) {
+function RenderUrgencyTag({ item, field }:Props) {
 	return (
 		<div>
-			{item?.urgencyTag ? (
+			{item?.urgencyTag && field?.key === 'urgencyTag' ? (
+
 				<div className={styled.urgency}>
-					{' '}
-					{item?.urgencyTag[0]}
-					{' '}
+					{showOverflowingNumber(item?.urgencyTag[0], 8)}
 				</div>
+
 			) : '-'}
 		</div>
 	);

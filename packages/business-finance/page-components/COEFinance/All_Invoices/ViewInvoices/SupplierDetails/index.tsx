@@ -65,7 +65,7 @@ function SupplierDetails({
 		serviceProviderCategory = '',
 		serviceProviderAdditionalDetail,
 		serviceProviderDocuments,
-	} = data;
+	} = data || {};
 	const { kycStatus = '' } = serviceProviderAdditionalDetail || {};
 	const { payables, receivables, ledgerCurrency } = paymentsData || {};
 

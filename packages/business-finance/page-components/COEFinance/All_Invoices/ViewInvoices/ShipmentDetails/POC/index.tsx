@@ -21,7 +21,7 @@ interface Props {
 }
 
 function POCDetails({ itemData }: Props) {
-	const { bill, job } = itemData;
+	const { bill, job } = itemData || {};
 
 	const {
 		loading,

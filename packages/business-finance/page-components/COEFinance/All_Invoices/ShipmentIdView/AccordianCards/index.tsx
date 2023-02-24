@@ -27,7 +27,7 @@ function AccordianCards({
 		urgency_total_price:urgencyTotalPrice, urgency_total_currency:urgencyTotalCurrency,
 		income_count:incomeCount, income_total_price:incomeTotalPrice, income_total_currency:incomeTotalCurrency,
 		credit_expense_count:creditExpanseCount, credit_total_price:creditTotalPrice, quotation_profit:quotationProfit,
-		tentative_profit:tentativeProfit, id,
+		tentative_profit:tentativeProfit, id, is_job_closed:IsJobClose,
 	} = itemData || {};
 	const [amountTab, setAmountTab] = useState('expense');
 	const [dataCard, setDataCard] = useState({
@@ -198,7 +198,8 @@ function AccordianCards({
 										router.push(
 											`/business-finance/coe-finance/cost-sheet?shipmentId=${id}
 										&jobNumber=${dataCard.jobNumber}&jobSource=${dataCard.jobSource}
-										&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}`,
+										&jobType=${dataCard.jobType}&orgId=${dataCard.organizationId}
+										&IsJobClose=${IsJobClose}`,
 										);
 									}}
 								>

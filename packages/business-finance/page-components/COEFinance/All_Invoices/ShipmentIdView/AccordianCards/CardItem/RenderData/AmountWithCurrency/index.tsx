@@ -27,7 +27,7 @@ function AmountWithCurrency({ item, field }: PropsType) {
 
 		<div className={styles.text}>
 			{field.key === 'grandTotal' && (
-				<div>
+				<div className={styles.size}>
 					<text>{showOverflowingNumber(formatAmount, 12)}</text>
 				</div>
 			)}

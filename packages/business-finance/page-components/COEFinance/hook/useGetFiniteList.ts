@@ -21,6 +21,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
 			user_profile: profile,
 		}),
 	);
+
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [initialPath] = useState(pathname);
@@ -48,8 +49,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
 				}));
 				setLoading(false);
 			})
-			.catch((e: any) => {
-				console.log(e);
+			.catch(() => {
 				setList(() => ({
 					data         : [],
 					total        : 0,

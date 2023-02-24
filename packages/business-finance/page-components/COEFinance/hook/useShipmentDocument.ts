@@ -19,8 +19,7 @@ const useShipmentDocument = (shipmentId) => {
 				},
 			},
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [shipmentId]);
+	}, [shipmentId, trigger]);
 
 	return {
 		data,

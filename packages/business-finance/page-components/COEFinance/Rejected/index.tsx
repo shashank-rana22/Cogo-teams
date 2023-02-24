@@ -1,37 +1,40 @@
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import PurchaseInvoice from './PurchaseInvoiceView/index';
-import ShipmentIdView from './ShipmentIdView/index';
+import CommonListData from './CommonListData';
 import styles from './styles.module.css';
 
 const tabs = [
 	{
-		key   : 'purchase-view',
-		label : 'PURCHASE INVOICE VIEW',
+		key   : 'finance_rejected',
+		label : 'Finance Rejected',
 	},
 	{
-		key   : 'shipment-view',
-		label : 'SHIPMENT ID VIEW',
+		key   : 'coe_rejected',
+		label : 'COE Rejected',
 	},
 ];
 
 const tabsKeyComponentMapping = {
-	'purchase-view' : PurchaseInvoice,
-	'shipment-view' : ShipmentIdView,
+	finance_rejected : CommonListData,
+	coe_rejected     : CommonListData,
 };
 
-function AllInvoices() {
+function Rejected() {
 	const { push, query } = useRouter();
 	const [filters, setFilters] = useState({});
 	const [subActiveTab, setSubActiveTab] = useState<string>(() => query.view || tabs[0].key);
 	const tabComponentProps = {
-		'purchase-view': {
+		finance_rejected: {
 			filters,
 			setFilters,
 			subActiveTab,
 		},
-		'shipment-view': {},
+		coe_rejected: {
+			filters,
+			setFilters,
+			subActiveTab,
+		},
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
@@ -39,7 +42,7 @@ function AllInvoices() {
 		setSubActiveTab(view);
 		push(
 			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/all_invoices/${view}` as never as null,
+			`/business-finance/coe-finance/rejected/${view}` as never as null,
 		);
 	};
 
@@ -58,7 +61,6 @@ function AllInvoices() {
 							}}
 							role="presentation"
 						>
-							{' '}
 							<div className={tab.key === subActiveTab
 								? styles.sub_container_click : styles.sub_container}
 							>
@@ -75,4 +77,4 @@ function AllInvoices() {
 		</div>
 	);
 }
-export default AllInvoices;
+export default Rejected;

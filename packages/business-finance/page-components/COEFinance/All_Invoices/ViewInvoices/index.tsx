@@ -20,7 +20,7 @@ function ViewInvoices() {
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
 	const [lineItem, setLineItem] = useState(false);
 	const {
-		list: { fullResponse },
+		data:  fullResponse,
 		refetch: getBillRefetch,
 		accPaymentLoading,
 		paymentsData,

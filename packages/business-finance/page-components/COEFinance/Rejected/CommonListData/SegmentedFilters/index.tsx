@@ -4,11 +4,7 @@ import React from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { GenericObject } from '../../../../commons/Interfaces/index';
-import SegmentedControl from '../../../../commons/SegmentedControl/index';
 import FilterModal from '../../../Components/FilterModal/index';
-import filtersData from '../../../constants/purchase-list-filters';
-import filtersUrgentData from '../../../constants/purchase-list-segments';
-import usePurchaseViewStats from '../../../hook/getPurchaseViewStats';
 
 import controls from './controls';
 import styled from './styles.module.css';
@@ -16,48 +12,20 @@ import styled from './styles.module.css';
 interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
-	currentTab: string;
-	tab:string;
-	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
-	setTab: React.Dispatch<React.SetStateAction<string>>;
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 }
 
 function SegmentedFilters({
-	setCurrentTab,
-	currentTab,
-	tab,
-	setTab,
+
 	setSearchValue,
 	searchValue,
 	filters,
 	setFilters,
 }: SegmentFilterProps) {
-	const { statsData }: any = usePurchaseViewStats();
-
 	return (
 		<div className={styled.main}>
 			<div className={styled.segment}>
-				<div className={styled.filter_data}>
-					<SegmentedControl
-						options={filtersData(statsData)}
-						activeTab={currentTab}
-						setActiveTab={setCurrentTab}
-						color="#ED3726"
-						background="#FFFAEB"
-					/>
-				</div>
-
-				<div className={styled.filter_data_urgent}>
-					<SegmentedControl
-						options={filtersUrgentData(statsData)}
-						activeTab={tab}
-						setActiveTab={setTab}
-						color="#ED3726"
-						background="#FFFAEB"
-					/>
-				</div>
 				<div className={styled.urgency}>
 					<Filter
 						controls={controls}

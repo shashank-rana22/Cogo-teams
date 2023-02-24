@@ -13,11 +13,15 @@
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
-    "@cogoport/utils": "^1.2.3",
+    "@cogoport/utils": "^1.2.2",
+    "@swc/core": "^1.3.24",
+    "number-to-words": "^1.2.4",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-grid-layout": "^1.3.4"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/react": "^18.0.28"
   }
 }

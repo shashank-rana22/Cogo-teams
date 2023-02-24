@@ -1,6 +1,6 @@
 .finance_accepted {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #cdf7d4;
@@ -9,7 +9,7 @@
 
 .initiated {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #fcedbf;
@@ -18,7 +18,7 @@
 
 .accepted {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #cdf7d4;
@@ -27,7 +27,7 @@
 
 .finance_rejected {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #f68b21;
@@ -36,7 +36,7 @@
 
 .void {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #fcedbf;
@@ -45,7 +45,7 @@
 
 .posted {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #cdf7d4;
@@ -54,7 +54,7 @@
 
 .coe_rejected {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #f68b21;
@@ -63,7 +63,7 @@
 
 .draft {
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #333;
 	background: #fcedbf;

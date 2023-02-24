@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import { GenericObject } from '../../../commons/Interfaces/index';
-import List from '../../../commons/List/index';
+import { GenericObject } from '../../../commons/Interfaces';
+import List from '../../../commons/List';
+import { FieldProps } from '../../All_Invoices/PurchaseInvoiceView/interfaces';
+import FieldPair from '../../All_Invoices/PurchaseInvoiceView/RenderData/FiledPair';
+import FormatedDate from '../../All_Invoices/PurchaseInvoiceView/RenderData/FormatedDate';
+import RenderCustomer from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderCustomer/index';
+import RenderRemarks from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderRemarks';
+import RenderStatus from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderStatus';
+import RenderUrgencyTag from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderUrgencyTag';
+import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderViewMoreButton';
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
-import { FieldProps } from './interfaces/index';
-import FieldPair from './RenderData/FiledPair/index';
-import FormatedDate from './RenderData/FormatedDate/index';
-import RenderCustomer from './RenderData/RenderCustomer/index';
-import RenderRemarks from './RenderData/RenderRemarks/index';
-import RenderStatus from './RenderData/RenderStatus/index';
-import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index';
-import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index';
-import SegmentedFilters from './SegmentedFilters/index';
+import SegmentedFilters from './SegmentedFilters';
 
 interface ItemProps {
 	createdDate: Date;
@@ -43,7 +43,7 @@ interface Props {
 	subActiveTab: string;
 }
 
-function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
+function CommonListData({ filters, setFilters, subActiveTab }: Props) {
 	const [sort, setSort] = useState({});
 
 	const {
@@ -51,11 +51,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		loading,
 		setSearchValue,
 		searchValue,
-		currentTab,
-		tab,
-		setTab,
-		setCurrentTab,
-	} = useGetPurchaseViewList({ filters, setFilters, sort });
+	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTab });
 
 	const functions: any = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -76,7 +72,6 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
 	};
-
 	return (
 		<div>
 			<SegmentedFilters
@@ -84,10 +79,6 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
-				tab={tab}
-				setTab={setTab}
-				currentTab={currentTab}
-				setCurrentTab={setCurrentTab}
 			/>
 			<List
 				config={PURCHASE_VIEW_CONFIG}
@@ -108,5 +99,4 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		</div>
 	);
 }
-
-export default PurchaseInvoice;
+export default CommonListData;

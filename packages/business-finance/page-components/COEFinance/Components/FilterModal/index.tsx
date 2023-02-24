@@ -39,13 +39,13 @@ function FilterModal({ filters, setFilters }: Props) {
 	const [currencies, setCurrencies] = useState([{}]);
 
 	useEffect(() => {
-		setFilters({
-			...filters,
+		setFilters((prev) => ({
+			...prev,
 			currency: CURRENCY_DATA.filter((ite) => currencies.includes(ite.id)).map(
 				(ite) => ite.text,
 			),
-		});
-	}, [currencies, filters, setFilters]);
+		}));
+	}, [currencies, setFilters]);
 
 	const handleClose = () => {
 		setFilters({});

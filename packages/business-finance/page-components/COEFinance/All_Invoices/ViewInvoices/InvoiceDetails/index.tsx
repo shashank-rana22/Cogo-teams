@@ -36,7 +36,7 @@ interface Props {
 }
 function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const [remark, setRemark] = useState('');
-	const { bill, remarks = [] } = data;
+	const { bill, remarks = [] } = data || {};
 	const { grandTotal, billCurrency } = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
