@@ -2,7 +2,6 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import { globeMarker } from '../../../../configurations/globe-marker';
-// import { pointBinData } from '../../../../configurations/point-bin-data';
 import { TEXTURES, GLOBE_COLORS } from '../../../../constants/globe-properties';
 
 import styles from './styles.module.css';
@@ -88,23 +87,14 @@ function TheGLobe(
 	const markerSize = () => {
 		if (markerData?.length > 800) {
 			return '5px';
-		} if (markerData?.length > 4000) {
+		} if (markerData?.length > 2000) {
 			return '3px';
 		}
 		return '10px';
 	};
 
-	const markers = markerData?.length > 5000 ? markerData.slice(0, 5000) : markerData;
+	const markers = markerData?.length > 3000 ? markerData.slice(0, 3000) : markerData;
 
-	const hexBinProps = {
-		hexBinPointsData         : markers,
-		hexAltitude              : 0.002,
-		hexBinResolution         : 3,
-		hexTopColor              : () => 'rgba(214, 179, 0, 1)',
-		hexSideColor             : () => 'rgba(252, 220, 0, 1)',
-		hexBinMerge              : true,
-		enablePointerInteraction : true,
-	};
 	const htmlMarkerProps = {
 		htmlElementsData       : markers,
 		htmlTransitionDuration : 2000,
@@ -134,7 +124,6 @@ function TheGLobe(
 				showAtmosphere
 				atmosphereAltitude={0.1}
 				globeImageUrl={TEXTURES[colorMode].two}
-				// {...hexBinProps}
 				{...htmlMarkerProps}
 
 			/>
