@@ -1,6 +1,5 @@
 .calendar{
     display: flex;
-    gap: 10px;
 }
 
 .calendarEntity{
@@ -14,6 +13,7 @@
     cursor: pointer;
     font-size: 18px;
     width: 30px;
+	margin: 10px;
 }
 
 .inactive{
