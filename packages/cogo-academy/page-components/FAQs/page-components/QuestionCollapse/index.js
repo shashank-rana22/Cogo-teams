@@ -19,7 +19,13 @@ function QuestionsCollapse({ collapse, questions }) {
 
 			<div style={{ display: 'flex' }}>
 				<Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill>
-				<Pill prefix={<IcMArrowRotateRight />} size="sm" color="white"><b>{questions.view_count}</b></Pill>
+				<Pill
+					prefix={<IcMArrowRotateRight />}
+					size="sm"
+					color="white"
+				>
+					<b>{questions.view_count}</b>
+				</Pill>
 				{(questions?.faq_tags || []).map((item) => (
 					<Pill
 						key={item.display_name}
