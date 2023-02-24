@@ -17,6 +17,11 @@ function AgentActivity() {
 		offline : styles.offline,
 	};
 
+	const callStatusMapping = {
+		busy    : 'on call',
+		online  : 'online',
+		offline : 'offline',
+	};
 	return (
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
@@ -49,7 +54,7 @@ function AgentActivity() {
 
 				<div className={styles.main_container_lowerpart}>
 					{busyAgentsData.map((item) => {
-						const { picture, name, call_status, contact_nos, duration } = item;
+						const { picture, name, contact_nos, duration } = item;
 
 						return (
 							<div className={styles.profile_box}>
@@ -59,8 +64,8 @@ function AgentActivity() {
 								</div>
 								<div className={styles.profile_box_right}>
 									<div className={styles.profile_box_right_up}>
-										<div className={styles.c}>{name}</div>
-										<div className={styles.call_status}>{call_status}</div>
+										<div className={styles.name}>{name}</div>
+										<div className={styles.call_status}>{callStatusMapping[activeTab]}</div>
 									</div>
 									<div className={styles.profile_box_right_down}>
 										<div className={styles.icon_plus_nos}>

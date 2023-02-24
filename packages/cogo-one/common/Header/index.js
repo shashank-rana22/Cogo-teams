@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, Popover } from '@cogoport/components';
+// import ScopeSelector from '@cogoport/forms/page-components/Business/ScopeSelect';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -26,6 +27,7 @@ function Header({ setCalendarType, calendarType }) {
 
 			<div className={styles.header_right_section}>
 
+				{/* <ScopeSelector /> */}
 				<div className={styles.filter_dot} />
 				<div className={styles.filter_icon}>
 					<Popover

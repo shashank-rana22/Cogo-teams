@@ -5,7 +5,7 @@ import AdminDashboard from './AdminDashboard';
 import AgentDashboard from './AgentDashboard';
 import styles from './styles.module.css';
 
-function CogoOneDashboard({ isAdminView = true }) {
+function CogoOneDashboard({ isAdminView = false }) {
 	// const [activeTab, setActiveTab] = useState('day');
 	// const { user } = useSelector(({ profile }) => profile);
 	// const {
