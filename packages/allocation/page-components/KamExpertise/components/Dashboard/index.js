@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 import ThisMonth from './ThisMonth';
 import ThisQuarter from './ThisQuarter';
 import ThisWeek from './ThisWeek';
-import ThisYear from './ThisYear/ThisYear';
+import ThisYear from './ThisYear';
 
 const TAB_PANEL_MAPPING = {
 	this_week: {
