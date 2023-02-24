@@ -791,7 +791,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'business_finance-cogo_book',
-				title         : 'Cogo Book',
+				title         : 'Cogo Books',
 				href          : '/business-finance/cogo-book/[active_tab]',
 				as            : '/business-finance/cogo-book/Accruals',
 				type          : 'link',
