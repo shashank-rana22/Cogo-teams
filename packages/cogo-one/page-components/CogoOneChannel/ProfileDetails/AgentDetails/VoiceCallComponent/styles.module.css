@@ -18,11 +18,11 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	height: 35px;
-	padding: 8px 20px 8px 4px;
+	padding:2px 3px;
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 6px;
+	
 }
 
 .dialer_icon_div {
@@ -39,9 +39,7 @@
 	padding: 1px;
 	width: 24px;
 	height: 24px;
-	fill: #fff;
-	
-	
+	fill: #fff;	
 }
 
 .call_on_div {

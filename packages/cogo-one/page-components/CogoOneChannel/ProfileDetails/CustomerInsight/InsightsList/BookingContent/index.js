@@ -106,13 +106,6 @@ function BookingContent({ last_shipment_data = {}, trade_type = '', shipping_lin
 				</div>
 			</div>
 			<div className={styles.footer}>
-				{/* <div className={styles.quantities}>2 Ctr</div>
-				<div className={styles.quantities}>40 ft </div>
-				<div className={styles.quantities}>
-					Std
-					<span>Gen</span>
-				</div>
-				<div className={styles.quantities}>26 MT</div> */}
 				Booked On :
 				{' '}
 				{format(created_at, 'dd MMM YYYY')}

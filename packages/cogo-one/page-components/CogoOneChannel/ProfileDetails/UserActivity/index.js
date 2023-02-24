@@ -54,6 +54,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	}
 
 	const handleFilters = () => {
+		setPagination(1);
 		fetchActivityLogs(filters);
 	};
 

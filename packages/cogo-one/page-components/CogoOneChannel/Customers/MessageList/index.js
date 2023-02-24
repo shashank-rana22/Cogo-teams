@@ -1,4 +1,4 @@
-import { cl, Input, Popover } from '@cogoport/components';
+import { cl, Input, Popover, Tooltip } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -30,6 +30,7 @@ function MessageList({
 			const searchName = user_name?.toLowerCase();
 			return searchName?.includes(searchValue?.toLowerCase());
 		}
+
 		return true;
 	}
 
@@ -123,9 +124,12 @@ function MessageList({
 													imageSource={item.image}
 												/>
 												<div className={styles.user_details}>
-													<div className={styles.user_name}>
-														{startCase(user_name)}
-													</div>
+													<Tooltip content={startCase(user_name)} placement="top">
+														<div className={styles.user_name}>
+															{startCase(user_name)}
+														</div>
+													</Tooltip>
+
 													<div className={styles.organisation}>
 														{showOrganization()}
 													</div>
