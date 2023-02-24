@@ -22,6 +22,7 @@
 }
 
 .back_text {
+	margin-bottom: 4px;
 	font-size: 16px;
 	cursor: pointer;
 }
@@ -37,11 +38,6 @@
 	font-size: 28px;
 	font-weight: 600;
 	line-height: 42px;
-
-	@media (min-width: 768px) {
-		margin-top: 12px;
-		font-size: 20px;
-	}
 }
 
 .tab_list {

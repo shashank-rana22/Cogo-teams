@@ -3,10 +3,10 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
-import ThisMonth from './ThisMonth/ThisMonth';
-import ThisQuarter from './ThisQuarter/ThisQuarter';
-import ThisWeek from './ThisWeek/ThisWeek';
-import ThisYear from './ThisYear/ThisYear';
+import ThisMonth from './ThisMonth';
+import ThisQuarter from './ThisQuarter';
+import ThisWeek from './ThisWeek';
+import ThisYear from './ThisYear';
 
 const TAB_PANEL_MAPPING = {
 	this_week: {
