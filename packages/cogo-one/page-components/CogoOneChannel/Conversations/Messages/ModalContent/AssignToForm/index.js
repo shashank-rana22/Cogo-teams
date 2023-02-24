@@ -1,4 +1,4 @@
-import { Radio, Button } from '@cogoport/components';
+import { Radio, Button, cl } from '@cogoport/components';
 import {
 	useForm,
 	RadioGroupController,
@@ -68,12 +68,13 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 				/>
 			</div>
 			{isAssignUser && (
-				<div className={styles.styled_controller}>
+				<div className={cl`${styles.styled_controller} ${styles.error_class}`}>
 					<SelectController
 						control={control}
 						{...assign_user}
 						{...listAgentsOptions}
 						isClearable
+						className={styles.error_class}
 					/>
 					<div className={styles.error_text}>{errors?.assign_user && 'This is Required'}</div>
 				</div>
@@ -103,6 +104,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 								placeholder={
                                     PLACEHOLDER_MAPPING[watchCondtion] || ''
                                 }
+								className={styles.error_class}
 							/>
 							<div className={styles.error_text}>{errors?.condition_value && ' This is Required'}</div>
 						</div>

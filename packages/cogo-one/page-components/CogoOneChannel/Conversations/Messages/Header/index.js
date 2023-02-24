@@ -7,7 +7,9 @@ import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../../constants';
 import HideDetails from '../../../../../utils/hideDetails';
 
-import { ShowContent, TagsPopOver, Assignes } from './HeaderFuncs';
+import Assignes from './Assignes';
+import TagsPopOver from './HeaderFuncs';
+import ShowContent from './ShowContent';
 import styles from './styles.module.css';
 
 function Header({

@@ -13,7 +13,8 @@ function NotesList({
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty_div}>
-				No Data Found...
+				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/notes-empty.svg" alt="" />
+				<div className={styles.title}>No Notes Found</div>
 			</div>
 		);
 	}
