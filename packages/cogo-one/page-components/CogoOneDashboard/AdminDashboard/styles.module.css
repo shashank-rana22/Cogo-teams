@@ -15,9 +15,13 @@
 }
 
 .calender_chart {
-	flex-basis: 72%;
+	width: 75%;
 
 	/* margin-right: 12px; */
+}
+
+.calender_container {
+	width: 100%;
 }
 
 /* second Row */
