@@ -46,28 +46,11 @@
   opacity: 0.9;
 }
 
-.medal_type {
-  padding-right: 16px;
-  border-right: 1px solid #000;
-}
-.score_div {
-  padding-right: 16px;
-  margin-left: 16px;
-}
-.lower_subheader {
-  font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  color: #4f4f4f;
-}
-
-.lower_subheader_value {
-  font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  color: #221f20;
+.verticalLine{
+	width: 1px ;
+	height: "100%";
+	margin: 0px 28px;
+	background-color:  #000;
 }
 
 .card_container {
@@ -85,19 +68,17 @@
 }
 
 .lower_subheader2 {
-  font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
   font-weight: 500;
   color: #4f4f4f;
   display: flex;
   margin-top: 20px;
   align-items: center;
 }
-.IcMInfo {
+.icm_info {
   height: 15px;
   width: 15px;
   color: black;
+  margin-left: 4px;
 }
 
 .last_item {

@@ -8,19 +8,19 @@ function GetCard(props) {
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 			<div className={styles.display_flex}>
-				<div className={styles.medal_type}>
-					<div className={styles.lower_subheader}>Medal</div>
-					<div className={styles.lower_subheader_value}>{medalType}</div>
+				<div>
+					<p style={{ color: '#4f4f4f', marginBottom: 15 }}>Medal</p>
+					<p>{medalType}</p>
 				</div>
-				<div className={styles.score_div}>
-					<div className={styles.lower_subheader}>Score</div>
+				<div className={styles.verticalLine} />
+				<div>
+					<p style={{ color: '#4f4f4f' }}>Score</p>
 					<Input size="sm" placeholder={inputPlaceHolder} />
 				</div>
 			</div>
 			<div className={styles.lower_subheader2}>
 				{`${medalType} Medal`}
-&ensp;
-				<IcMInfo className={styles.IcMInfo} />
+				<IcMInfo className={styles.icm_info} />
 			</div>
 			<div className={styles.file_upload_div}>
 				<FileSelect />
