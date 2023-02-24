@@ -1427,6 +1427,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_insurance: [
 		{
