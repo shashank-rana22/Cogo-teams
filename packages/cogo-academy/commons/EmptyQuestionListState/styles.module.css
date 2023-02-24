@@ -1,0 +1,13 @@
+.nullstate {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .nullstate_heading {
+    font-size: 40px;
+  }
+  
+  .nullstate_btn {
+    margin-top: 80px;
+  }
