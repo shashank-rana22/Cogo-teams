@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
 // import { IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import getOfficeLocation from '../../../../../../../../utils/getOfficeLocation';
@@ -36,6 +36,10 @@ function ServicePOC() {
 		);
 	}
 
+	if (isEmpty(allServicesAndPocs)) {
+		return null;
+	}
+
 	return (
 		<div className={styles.main}>
 			<span className={styles.heading}>Service POC </span>
@@ -43,7 +47,6 @@ function ServicePOC() {
 			{(allServicesAndPocs || []).map((singleServicePoc) => (
 				<>
 					<div className={styles.head}>
-						{console.log(singleServicePoc, 'singleServicePoc')}
 						{Object.keys(filedsToShow).map((item) => (
 							<div className={styles.fl}>
 								<span className={styles.top}>
