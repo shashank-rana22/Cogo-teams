@@ -31,23 +31,43 @@ const CARD_DATA = [
 	},
 ];
 
-function ConfigurationCard() {
+const STATUS_COLOR_MAPPING = {
+	draft : 'yellow',
+	live  : 'green',
+};
+
+const HEADING_MAPPING = {
+	draft: () => (
+		<div className={styles.heading}>
+			Saved Draft
+		</div>
+	),
+	live: (version) => (
+		<div className={styles.heading}>
+			Version&nbsp;
+			{version}
+		</div>
+	),
+};
+
+function ConfigurationCard(props) {
+	const { version, last_edit_by, last_modified, status } = props;
 	return (
 		<div className={styles.card_container}>
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
-					<div className={styles.heading}>Version 3</div>
+					{HEADING_MAPPING[status](version)}
 
-					<Pill size="lg" color="green" style={{ marginRight: '28px' }}>Live</Pill>
+					<Pill size="lg" color={STATUS_COLOR_MAPPING[status]} style={{ marginRight: '28px' }}>{status}</Pill>
 
 					<div style={{ marginRight: '28px' }}>
 						Last Edit by&nbsp;:&nbsp;
-						<strong>CogoParth</strong>
+						<strong>{last_edit_by}</strong>
 					</div>
 
 					<div>
 						Last Modified&nbsp;:&nbsp;
-						<strong>{format(new Date(), 'dd-MM-yyyy')}</strong>
+						<strong>{format(last_modified, 'dd-MM-yyyy')}</strong>
 					</div>
 				</div>
 				<Button themeType="secondary">Edit</Button>

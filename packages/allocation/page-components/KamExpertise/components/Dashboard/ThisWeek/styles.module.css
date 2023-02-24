@@ -1,97 +1,77 @@
-.container{
-    width:200%;
+.container {
+	width: 200%;
 }
 
-.cards{
-    display:flex;
-    width:100%;
-    justifyContent:space-between;
-    margin:12px 0;
-    /* background:#fff; */
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 20px 0;
 }
 
-.card_container{
-    width:100%;
-    margin:16px 24px 16px 0;
-}
-.card_item{
-    width:100%;
-    /* height:132px; */
-    padding:16px 24px 4px 24px;
-    background:#fff;
-    border-radius:8px;
+.card_container {
+	flex-basis: 24%;
 }
 
-.card_title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.card_item {
+	width: 100%;
+	padding: 16px 24px 4px;
+	background: #fff;
+	border-radius: 8px;
 }
 
-.card_content{
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    /* padding:10%; */
-}
-/* 
-.card_data_count{
-    display:flex;
-    flex-direction:column;
-    width:50%;
-} */
-
-.card_data_score{
-    /* flex:1.5; */
-    display:flex;
-    flex-direction:column;
-    width:50%;
-    /* background:aqua */
+.card_title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.overview_container{
-    width:100%;
-    /* height:1000px; */
-    border-top:1px solid #BDBDBD;
-    /* background:#fff */
+.card_content {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 
-.leaderboard_header{
-    display:flex;
-    width:100%;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:16px;
+.card_data_score {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
 
-.overview_header{
-    margin-top:16px;
-    font-size:28px;
-    font-weight:bold;
+.overview_container {
+	width: 100%;
+	padding-top: 20px;
+	border-top: 1px solid #bdbdbd;
 }
 
-.overview_cards{
-    display:flex;
-    width:100%;
-    justifyContent:space-between;
-    margin:12px 0;
-    /* background:#fff; */
+.leaderboard_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0 12px;
 }
 
-.overview_card_title{
-    display:flex;
-    width:100%
+.overview_header {
+	font-size: 22px;
+	font-weight: bold;
 }
 
-.overview_card_content{
-    display:flex;
-    justify-content:space-between;
-    width:100%;
+.overview_cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 12px 0;
 }
 
+.overview_card_title {
+	display: flex;
+}
 
-.filters{
-    /* display:flex;
-    /* justify-content:flex-end; */
-    width:100%; 
+.overview_card_content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filters {
+	width: 100%;
 }

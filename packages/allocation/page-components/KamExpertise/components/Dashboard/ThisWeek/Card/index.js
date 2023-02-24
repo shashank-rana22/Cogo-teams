@@ -31,7 +31,7 @@ function CardContent({ dummy_data, value }) {
 
 	return (
 		<div className={styles.card_data_count}>
-			<span>{title}</span>
+			<span style={{ color: '#4f4f4f' }}>{title}</span>
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<span style={{ fontSize: '24px', fontWeight: 'bold', paddingRight: '10px' }}>{val}</span>
 				<span style={{ display: 'flex' }}>
@@ -42,7 +42,7 @@ function CardContent({ dummy_data, value }) {
 							color: `${dummy_data.has_increased
 								? '#34C759' : '#ED3726'}`,
 							transform: `${dummy_data.has_increased
-								? 'rotate(45deg)' : 'rotate(-45deg)'}`,
+								? 'rotate(135deg)' : 'rotate(-45deg)'}`,
 						}}
 					/>
 					{dummy_data.percentage_change}

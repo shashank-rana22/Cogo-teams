@@ -16,7 +16,7 @@
 
 .expertise_name{
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 32px;
 	display: flex;
 }
@@ -46,6 +46,11 @@
 
 			.ui_accordion_container {
 				margin-bottom: 12px;
+			}
+
+			.ui_accordion_content {
+				background-color: #fff;
+				border-top: 1px solid #bdbdbd;
 			}
 		}
 
