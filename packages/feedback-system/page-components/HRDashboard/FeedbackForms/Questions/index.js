@@ -10,7 +10,7 @@ function Questions({
 	setQuestionActionList = () => {},
 	questionStatus = '',
 }) {
-	const totalQuestions = questions.length;
+	const totalQuestions = (questions || []).length;
 
 	return (
 		<div className={styles.list_container}>

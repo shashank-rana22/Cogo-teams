@@ -6,7 +6,7 @@ const useListForms = ({ formsParams = {} }) => {
 	const [pagination, setPagination] = useState(1);
 
 	const [{ data:formsData = {}, loading = false }, trigger] = useRequest({
-		url    : 'list-forms',
+		url    : 'list_forms',
 		method : 'get',
 	}, { manual: true });
 

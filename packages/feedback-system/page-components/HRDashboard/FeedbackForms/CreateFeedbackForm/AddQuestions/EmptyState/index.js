@@ -8,7 +8,7 @@ function EmptyState({ setOpenNewQuestionModal = () => {} }) {
 			<div>No Questions available yet,. Kindly create new questions to use them in form...</div>
 
 			<Button
-				themeType="accent"
+				themeType="primary"
 				onClick={() => setOpenNewQuestionModal(true)}
 				style={{ marginTop: '8px' }}
 			>

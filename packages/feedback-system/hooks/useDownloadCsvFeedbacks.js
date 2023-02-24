@@ -1,24 +1,13 @@
 import { useRequest } from '@cogoport/request';
 
-const useDownloadCsvFeedbacks = ({ userId = '', key = '' }) => {
-	const date = new Date();
-	const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-
+const useDownloadCsvFeedbacks = ({ params = {} }) => {
 	const [{ data = {} }, trigger] = useRequest({
 		method : 'get',
 		url    : 'download_csv',
 	}, { manual: true });
 
 	const getUserListCsv = async () => {
-		const response = await trigger({
-			params: {
-				download_csv : true,
-				filters      : {
-					...(key === 'users_under_manager' && { performed_by_id: userId }),
-					created_at_greater_than: firstDay.toDateString(),
-				},
-			},
-		});
+		const response = await trigger({ params });
 
 		// eslint-disable-next-line no-undef
 		window.open(response?.data, '_blank');

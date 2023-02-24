@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 const useGetForm = ({ item = {}, action = '', addFeedback = false }) => {
 	const { month = '', year = '', department = '', designation = '', user_id = '' } = item;
 
-	const url = action === 'show' ? 'get-form-responses' : 'get-form';
+	const url = action === 'show' ? 'get_form_responses' : 'get_form';
 	const params = action === 'show' ? { Month: month, Year: year, UserID: user_id }
 		: { Department: department, Designation: designation };
 

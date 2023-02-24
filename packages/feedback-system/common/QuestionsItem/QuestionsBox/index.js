@@ -14,7 +14,7 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						theme="light"
 						placement="top-start"
 						animation="shift-away"
-						content={startCase(question)}
+						content={question}
 					>
 						<div className={styles.question}>{startCase(question)}</div>
 					</Tooltip>
@@ -25,9 +25,9 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						theme="light"
 						placement="bottom-start"
 						animation="shift-away"
-						content={startCase(description)}
+						content={description}
 					>
-						<div className={styles.remark}>{startCase(description)}</div>
+						<div className={styles.remark}>{description}</div>
 					</Tooltip>
 				</div>
 			</div>

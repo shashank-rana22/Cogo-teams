@@ -8,7 +8,7 @@ function EmptyState({ setFormStage = () => {}, setOpenCreateForm = () => {} }) {
 			<div>No Forms available yet,. Kindly create new forms to use them for feedbacks...</div>
 
 			<Button
-				themeType="accent"
+				themeType="primary"
 				onClick={() => {
 					setFormStage('add_questions');
 					setOpenCreateForm(true);

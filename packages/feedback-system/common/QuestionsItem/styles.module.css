@@ -1,7 +1,8 @@
 .container {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
+	width: 100%;
 	padding: 0 8px;
 	margin: 8px 0;
 	border: 2px solid #f1efff;
@@ -10,16 +11,10 @@
 }
 
 .order_container {
-	width: 5%;
 	transform: rotate(90deg) scale(70%);
 }
 
-.checkbox_container {
-	width: 5%;
-}
-
 .question_container {
-	width: 95%;
 	height: 80px;
 }
 
@@ -32,7 +27,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 10%;
 	padding: 8px;
 	margin: 4px;
 }

@@ -35,7 +35,7 @@ function SubmitForm({
 	};
 
 	return (
-		<>
+		<div className={styles.submit_form_container}>
 			<div className={styles.header}>
 				Create Form :
 				{' '}
@@ -73,7 +73,7 @@ function SubmitForm({
 					Submit
 				</Button>
 			</div>
-		</>
+		</div>
 	);
 }
 

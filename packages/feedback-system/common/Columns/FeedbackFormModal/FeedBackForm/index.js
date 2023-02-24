@@ -10,9 +10,17 @@ import { IcCStar, IcMArrowDoubleDown, IcMArrowDown, IcMArrowUp, IcMInfo } from '
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
-import EmptyState from '../EmptyState';
+import EmptyState from '../../../EmptyState';
 
 import styles from './styles.module.css';
+
+const performanceIcons = {
+	below_expectations   : <IcMArrowDoubleDown height={20} width={20} fill="#ee3425" />,
+	needs_improvement    : <IcMArrowDown height={20} width={20} fill="#f68b21" />,
+	meets_expectations   : <div className={styles.constant}>H</div>,
+	exceeds_expectations : <IcMArrowUp height={20} width={20} fill="#abcd62" />,
+	outstanding          : <IcCStar height={20} width={20} fill="#fcdc00" />,
+};
 
 function FeedBackForm({
 	action = '',
@@ -23,7 +31,7 @@ function FeedBackForm({
 	comment,
 	setComment = () => {},
 	setRating = () => {},
-	questionsLoading = 'false',
+	questionsLoading = false,
 	userId = '',
 	setRefetchReportees = () => {},
 }) {
@@ -39,9 +47,9 @@ function FeedBackForm({
 	const onSubmit = () => {
 		if (Object.values(rating).includes(0) || isEmpty(comment)) {
 			Toast.error('Please provide rating for all the parameters');
-		} else return onSubmitData();
-
-		return null;
+			return;
+		}
+		onSubmitData();
 	};
 
 	const newOptions = Array(5).fill('').map((_, index) => ({
@@ -49,14 +57,6 @@ function FeedBackForm({
 		value : (index + 1),
 		...(action === 'show' ? { disabled: true } : {}),
 	}));
-
-	const performanceIcons = {
-		below_expectations   : <IcMArrowDoubleDown height={20} width={20} fill="#ee3425" />,
-		needs_improvement    : <IcMArrowDown height={20} width={20} fill="#f68b21" />,
-		meets_expectations   : <div className={styles.constant}>H</div>,
-		exceeds_expectations : <IcMArrowUp height={20} width={20} fill="#abcd62" />,
-		outstanding          : <IcCStar height={20} width={20} fill="#fcdc00" />,
-	};
 
 	const performanceClass = {};
 
@@ -83,8 +83,16 @@ function FeedBackForm({
 		);
 	}
 
-	if (isEmpty(questionsToShow) && !questionsLoading) {
-		return <EmptyState />;
+	if (isEmpty([]) && !questionsLoading) {
+		return (
+			<EmptyState
+				height="60%"
+				width="50%"
+				emptyText="No form for this role yet..."
+				flexDirection="row"
+				textSize="16px"
+			/>
+		);
 	}
 
 	return (
@@ -185,7 +193,7 @@ function FeedBackForm({
 
 				<Button
 					size="md"
-					themeType="accent"
+					themeType="primary"
 					disabled={action === 'show'}
 					loading={loading}
 					onClick={onSubmit}

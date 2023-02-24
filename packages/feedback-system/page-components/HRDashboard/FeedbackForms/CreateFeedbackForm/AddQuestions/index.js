@@ -81,85 +81,86 @@ function AddQuestions({
 		</div>
 	);
 
+	const areFiltersApplied = params.Tags || params.Q;
+
 	return (
 		<>
-			{isEmpty(questionActionList?.allList) && !loading
+			{isEmpty(questionActionList?.allList) && !areFiltersApplied && !loading
 				? <EmptyState setOpenNewQuestionModal={setOpenNewQuestionModal} /> : (
-					<>
-						<div className={styles.add_question_container}>
-							<div className={styles.header}>
-								<div className={styles.form_header}>
-									Create Form :
-									{' '}
-									<span>
-										{startCase(department)}
-										{' > '}
-									</span>
 
-									<span className={styles.role}>{startCase(designation)}</span>
-								</div>
+					<div className={styles.add_question_container}>
+						<div className={styles.header}>
+							<div className={styles.form_header}>
+								Create Form :
+								{' '}
+								<span>
+									{startCase(department)}
+									{' > '}
+								</span>
 
-								<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>
-									<IcMPlus />
-									New Question
-								</Button>
+								<span className={styles.role}>{startCase(designation)}</span>
 							</div>
 
-							<div className={styles.body}>
-								<div className={styles.info_text}>Select A Question To Add...</div>
+							<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>
+								<IcMPlus />
+								New Question
+							</Button>
+						</div>
 
-								<div className={styles.filters_pagination}>
-									<div className={styles.filters}>
-										<Controller
-											control={control}
-											name={name}
-											rules={rules}
-											render={({ field: { onChange, onBlur, value } }) => (
-												<CreatableMultiSelect
-													{...rest}
-													name={name}
-													onChange={onChange}
-													value={value}
-													onBlur={onBlur}
-												/>
-											)}
-										/>
-										<Input
-											value={searchValue}
-											onChange={setSearchValue}
-											style={{ marginLeft: '8px' }}
-											placeholder="Search Question..."
-										/>
+						<div className={styles.body}>
+							<div className={styles.info_text}>Select A Question To Add...</div>
 
-									</div>
-
-									{total_count > params.PageLimit && (
-										<div className={styles.pagination_container}>
-											<Pagination
-												type="number"
-												currentPage={params.Page}
-												totalItems={total_count}
-												pageSize={params.PageLimit}
-												onPageChange={setPage}
+							<div className={styles.filters_pagination}>
+								<div className={styles.filters}>
+									<Controller
+										control={control}
+										name={name}
+										rules={rules}
+										render={({ field: { onChange, onBlur, value } }) => (
+											<CreatableMultiSelect
+												{...rest}
+												name={name}
+												onChange={onChange}
+												value={value}
+												onBlur={onBlur}
 											/>
-										</div>
-									)}
+										)}
+									/>
+									<Input
+										value={searchValue}
+										onChange={setSearchValue}
+										style={{ marginLeft: '8px' }}
+										placeholder="Search Question..."
+									/>
 
 								</div>
 
-								<div className={styles.questions}>
-									{loading ? showLoading() : (
-										<Questions
-											questions={questionActionList?.allList}
-											questionActionList={questionActionList}
-											setQuestionActionList={setQuestionActionList}
+								{total_count > params.PageLimit && (
+									<div className={styles.pagination_container}>
+										<Pagination
+											type="number"
+											currentPage={params.Page}
+											totalItems={total_count}
+											pageSize={params.PageLimit}
+											onPageChange={setPage}
 										/>
-									)}
-								</div>
+									</div>
+								)}
 
+							</div>
+
+							<div className={styles.questions}>
+								{loading ? showLoading() : (
+									<Questions
+										questions={questionActionList?.allList}
+										questionActionList={questionActionList}
+										setQuestionActionList={setQuestionActionList}
+									/>
+								)}
 							</div>
 
 						</div>
+
 						<div className={styles.footer}>
 							<Button
 								themeType="tertiary"
@@ -171,15 +172,14 @@ function AddQuestions({
 							</Button>
 
 							<Button
-								themeType="accent"
+								themeType="primary"
 								onClick={() => proceedForm('submit_form')}
 							>
 								Add to Form
 
 							</Button>
 						</div>
-
-					</>
+					</div>
 
 				)}
 

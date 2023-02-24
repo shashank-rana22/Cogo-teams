@@ -30,7 +30,7 @@ export const useGetCreateQuestionsControls = () => {
 			type        : 'text_area',
 			style       : { marginLeft: '1px', marginRight: '1px' },
 			span        : 10,
-			rules       : { required: 'Please provide the remark...' },
+			rules       : { required: false },
 		},
 		{
 			...tagOptions,

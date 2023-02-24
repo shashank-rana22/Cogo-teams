@@ -19,7 +19,7 @@ function Department({ department, openAccordion, setFormsParams, designation }) 
 					<p className={styles.department_label}>{startCase(department?.department)}</p>
 					{!completionStatus && (
 						<Pill
-							color="red"
+							color="#fef199"
 						>
 							Pending
 						</Pill>
@@ -45,12 +45,14 @@ function Department({ department, openAccordion, setFormsParams, designation }) 
 						<p className={styles.role_label}>
 							{startCase(role?.designation)}
 						</p>
-						<Pill
-							color={role?.status === 'active' ? 'green' : 'red'}
-						>
-							{startCase(role?.status)}
 
-						</Pill>
+						{role.status === 'inactive' && (
+							<Pill
+								color="#fef199"
+							>
+								Pending
+							</Pill>
+						)}
 					</div>
 				))}
 			</div>

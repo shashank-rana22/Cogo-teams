@@ -62,7 +62,7 @@ function CreateForm({
 					size="md"
 					type="submit"
 					loading={loading}
-					themeType="accent"
+					themeType="primary"
 				>
 					{startCase(type)}
 				</Button>

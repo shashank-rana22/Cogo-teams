@@ -18,12 +18,12 @@ function FeedbackManagement() {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const { getUserListCsv } = useDownloadCsvFeedbacks({});
-
 	const {
 		feedbackData = {}, loading = false, params,
 		setParams, setPage,
 	} = useListUserFeedbacks({ searchValue: query });
+
+	const { getUserListCsv } = useDownloadCsvFeedbacks({ params });
 
 	const columnsToShow = ['name', 'cogo_id', 'designation', 'manager', 'score', 'month', 'feedback'];
 	const tableColumns = useGetColumns({ source: 'hr_feedback', columnsToShow });

@@ -23,8 +23,8 @@ function CreateFeedbackForm({
 		storeQuestionData({
 			department,
 			designation,
-			checkList : ['cancel', 'publish'].includes(newStage) ? [] : questionActionList.checked,
-			stage     : ['cancel', 'publish'].includes(newStage) ? undefined : newStage,
+			checkList : ['', 'publish'].includes(newStage) ? [] : questionActionList.checked,
+			stage     : ['', 'publish'].includes(newStage) ? undefined : newStage,
 		});
 	};
 

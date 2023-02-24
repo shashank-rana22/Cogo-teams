@@ -63,7 +63,7 @@ function QuestionsItem({
 	return (
 		<div className={styles.container}>
 			{questionStatus === 'add_weightage' ? (
-				<div className={styles.order_container}>
+				<div className={styles.order_container} style={{ width: '5%' }}>
 					<Pagination
 						type="compact"
 						currentPage={index + 1}
@@ -73,7 +73,7 @@ function QuestionsItem({
 					/>
 				</div>
 			) : (
-				<div className={styles.checkbox_container}>
+				<div className={styles.checkbox_container} style={{ width: '5%' }}>
 					<Checkbox
 						checked={isChecked}
 						onChange={() => {
@@ -83,13 +83,16 @@ function QuestionsItem({
 				</div>
 			) }
 
-			<div className={styles.question_container}>
+			<div
+				className={styles.question_container}
+				style={{ width: questionStatus === 'add_weightage' ? '60%' : '95%' }}
+			>
 				<QuestionsBox question_detail={item} questionStatus={questionStatus} />
 			</div>
 
 			{questionStatus === 'add_weightage' && (
 				<>
-					<div className={styles.weightage}>
+					<div className={styles.weightage} style={{ width: '25%' }}>
 						<p className={styles.label}>Weightage</p>
 						<Input
 							value={item.weightage}
@@ -98,7 +101,7 @@ function QuestionsItem({
 							placeholder="Set Weightage.."
 						/>
 					</div>
-					<div className={styles.icon_container}>
+					<div className={styles.icon_container} style={{ width: '10%' }}>
 
 						<Tooltip
 							theme="light"

@@ -71,7 +71,7 @@ function ManagerDashboard() {
 
 			<div className={styles.list_section}>
 				<div className={styles.list_header}>
-					<p className={styles.list_header_text}>
+					<p className={styles.list_title}>
 						Team Members Feedback List
 					</p>
 				</div>

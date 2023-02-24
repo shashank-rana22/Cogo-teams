@@ -99,6 +99,11 @@ const feedback_system = [
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},
+	{
+		api          : 'download_csv',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
 ];
 
 export default feedback_system;

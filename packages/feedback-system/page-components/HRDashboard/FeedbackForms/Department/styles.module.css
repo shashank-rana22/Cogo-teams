@@ -12,16 +12,13 @@
 
 	.department_label {
 		margin: 0;
-		font-weight: bold;
+		font-size: 14px;
+		font-weight: 700;
 	}
 }
 
 .roles {
 	margin: 0 4px;
-
-	:hover {
-		background-color: #f8f2e7;
-	}
 }
 
 .role {
@@ -29,11 +26,19 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 8px;
+	height: 50px;
+	padding: 0 8px;
 	cursor: pointer;
 
 	.role_label {
+		flex: 1;
 		margin: 0;
+	}
+
+	:global {
+		.ui_pill_container {
+			cursor: pointer;
+		}
 	}
 }
 
@@ -41,6 +46,11 @@
 	border-bottom: 1px solid #efefef;
 }
 
+.role:hover {
+	background-color: #f8f2e7;
+	border-bottom: 1px solid #edd7a9;
+}
+
 .selected_designation {
-	background-color: antiquewhite;
+	background-color: #f8f2e7;
 }

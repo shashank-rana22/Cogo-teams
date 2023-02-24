@@ -29,7 +29,7 @@ function NotifyModal({ setNotifyModal = () => {} }) {
 
 			<div className={styles.button_container}>
 				<Button themeType="tertiary" onClick={() => setNotifyModal(false)}>Cancel</Button>
-				<Button themeType="accent" onClick={() => notifyManagers()} loading={loading}>Notify</Button>
+				<Button themeType="primary" onClick={() => notifyManagers()} loading={loading}>Notify</Button>
 			</div>
 		</div>
 	);

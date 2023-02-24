@@ -44,7 +44,7 @@ function Forms({
 				<div className={styles.form_header}>
 					<div className={styles.form_cat}>{`${startCase(department)}: ${startCase(designation)}`}</div>
 					{!openCreateForm && !!designation && (
-						<Button themeType="accent" onClick={() => showForm()}>Create New</Button>
+						<Button themeType="primary" onClick={() => showForm()}>Create New</Button>
 					)}
 				</div>
 
