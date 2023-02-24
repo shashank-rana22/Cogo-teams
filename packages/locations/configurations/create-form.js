@@ -289,7 +289,7 @@ const fields = [
 		type            : 'file',
 		themeType       : 'secondary',
 		drag            : true,
-		multiple      		: true,
+		multiple       	: true,
 		uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
 		accept          : 'image/*',
