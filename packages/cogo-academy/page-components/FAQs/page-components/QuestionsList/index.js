@@ -43,7 +43,6 @@ function QuestionsList({ tabTitle, searchState = '' }) {
 								Ask your Question
 							</Button>
 						</div>
-
 					</div>
 				) : data?.list.map((question) => (
 					<div className={styles.border}><Questions questions={question} /></div>
@@ -51,7 +50,6 @@ function QuestionsList({ tabTitle, searchState = '' }) {
 			</div>
 
 			<div style={{ padding: '20px' }}>
-
 				<Modal size="md" show={show} onClose={() => setShow(false)} placement="top">
 					<Modal.Header title="Request your question here" />
 					<Modal.Body>
@@ -75,7 +73,6 @@ function QuestionsList({ tabTitle, searchState = '' }) {
 					</Modal.Footer>
 				</Modal>
 			</div>
-
 		</div>
 	);
 }
