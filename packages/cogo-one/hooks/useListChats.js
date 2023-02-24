@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import {
 	collectionGroup,
 	onSnapshot,
@@ -9,20 +10,31 @@ import { useState, useEffect } from 'react';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
 
-const useListChats = ({
-	firestore, userId, isomniChannelAdmin,
-}) => {
+const useListChats = ({ firestore, userId, isomniChannelAdmin }) => {
+	const {
+		query: { assigned_chat = '' },
+	} = useRouter();
+	const [firstLoading, setFirstLoading] = useState(true);
 	const [activeCardId, setActiveCardId] = useState('');
+
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
+
+	useEffect(() => {
+		if (assigned_chat) {
+			setActiveCardId(assigned_chat);
+			setFirstLoading(false);
+		}
+	}, [assigned_chat]);
 
 	const [listData, setListData] = useState({
 		messagesList     : [],
 		newMessagesCount : 0,
 		unReadChatsCount : 0,
-
 	});
-	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId) || {};
+
+	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId)
+        || {};
 
 	const dataFormatter = (list) => {
 		let chats = 0;
@@ -42,7 +54,9 @@ const useListChats = ({
 		});
 
 		return {
-			chats, count, resultList,
+			chats,
+			count,
+			resultList,
 		};
 	};
 
@@ -57,10 +71,14 @@ const useListChats = ({
 		});
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
-			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
+			setListData({
+				messagesList     : resultList,
+				newMessagesCount : count,
+				unReadChatsCount : chats,
+			});
 		});
 		setLoading(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [appliedFilters]);
 
 	const setActiveMessage = async (val) => {
@@ -77,7 +95,10 @@ const useListChats = ({
 
 	const updateLeaduser = async (data = {}) => {
 		const { channel_type, id } = activeMessageCard || {};
-		const roomCollection = doc(firestore, `${FIRESTORE_PATH[channel_type]}/${id}`);
+		const roomCollection = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
 		await updateDoc(roomCollection, {
 			updated_at: Date.now(),
 			...data,
@@ -94,7 +115,7 @@ const useListChats = ({
 		activeCardId,
 		setActiveCardId,
 		updateLeaduser,
-
+		firstLoading,
 	};
 };
 
