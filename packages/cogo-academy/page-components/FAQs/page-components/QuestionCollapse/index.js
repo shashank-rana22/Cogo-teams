@@ -14,7 +14,12 @@ function QuestionsCollapse({ collapse, questions }) {
 				{startCase(
 					questions.question_abstract,
 				)}
-				{(arrow) ? <IcMArrowUp /> : <IcMArrowDown />}
+
+				<IcMArrowDown
+					width={16}
+					height={16}
+					className={` ${styles.caret_arrow} ${arrow && styles.caret_active}`}
+				/>
 			</div>
 
 			<div style={{ display: 'flex' }}>

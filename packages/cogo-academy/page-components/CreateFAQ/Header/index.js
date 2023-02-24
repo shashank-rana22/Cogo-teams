@@ -8,15 +8,24 @@ function Header() {
 	const router = useRouter();
 
 	const onClickConfiguration = () => {
-		router.push('/learning/faq/create/configuration', '/learning/faq/create/configuration');
+		router.push(
+			'/learning/faq/create/configuration',
+			'/learning/faq/create/configuration',
+		);
 	};
 
 	const onClickUpload = () => {
-		router.push('/learning/faq/create/upload?type=questions', '/learning/faq/create/upload?type=questions');
+		router.push(
+			'/learning/faq/create/upload?type=questions',
+			'/learning/faq/create/upload?type=questions',
+		);
 	};
 
 	const onClickQuestion = () => {
-		router.push('/learning/faq/create/question', '/learning/faq/create/question');
+		router.push(
+			'/learning/faq/create/question',
+			'/learning/faq/create/question',
+		);
 	};
 
 	return (
