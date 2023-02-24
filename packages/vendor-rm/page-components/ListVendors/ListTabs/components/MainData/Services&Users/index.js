@@ -19,11 +19,9 @@ function ServicesUsers({
 			<div className={styles.main}>
 				<Top showForm={showForm} setShowForm={setShowForm} />
 
-				{
-					Component && (
-						<Component setShowForm={setShowForm} getVendorData={data} />
-					)
-				}
+				{Component && (
+					<Component setShowForm={setShowForm} getVendorData={data} />
+				)}
 
 				<CompanyPOC data={data} />
 

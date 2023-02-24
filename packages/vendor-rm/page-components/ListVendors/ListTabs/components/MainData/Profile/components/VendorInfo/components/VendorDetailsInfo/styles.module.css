@@ -32,12 +32,13 @@
 	color: #333;
 }
 
-.di {
+.download {
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 }
 
-.txt {
+.link {
 	display: inline-block;
 	width: 160px;
 	overflow: hidden;

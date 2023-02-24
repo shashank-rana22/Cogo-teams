@@ -8,10 +8,11 @@ import getPocRole from '../../utils/getPocRole';
 import styles from './styles.module.css';
 
 const labelMapping = {
-	name          : 'Name',
-	email         : 'Email ID',
-	mobile_number : 'Mobile Number',
-	poc_role      : 'Role in the Company',
+	name           : 'Name',
+	email          : 'Email ID',
+	mobile_number  : 'Mobile Number',
+	poc_role       : 'Role in the Company',
+	document_proof : 'Document Proof',
 };
 
 function CompanyPOC({
@@ -23,6 +24,26 @@ function CompanyPOC({
 			email         : poc?.email,
 			mobile_number : `${poc?.mobile_country_code} ${poc?.mobile_number}`,
 			poc_role      : poc?.poc_role,
+			document_proof:
+	<div className={styles.download}>
+		<a
+			href={poc.contact_proof_url}
+			target="_blank"
+			className={styles.link}
+			style={{
+				color: '#F68B21',
+			}}
+			rel="noreferrer"
+		>
+			{poc.contact_proof_url}
+		</a>
+		<div>
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
+				alt="icon"
+			/>
+		</div>
+	</div>,
 		};
 		return obj;
 	})[0];
@@ -33,10 +54,10 @@ function CompanyPOC({
 				Company POC
 			</span>
 
-			<div className={styles.cont}>
+			<div className={styles.content}>
 				<div className={styles.box_info}>
 					{Object.keys(details).map((poc) => (
-						<div>
+						<div className={styles.label_value_container}>
 							<div className={styles.top}>
 								{labelMapping[poc]}
 							</div>

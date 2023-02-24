@@ -19,11 +19,11 @@ function VendorDetailsInfo({
 	const checkVerified = (title, value) => {
 		if (title === 'GST Certificate') {
 			return (
-				<div className={styles.di}>
+				<div className={styles.download}>
 					<a
 						href={value}
 						target="_blank"
-						className={styles.txt}
+						className={styles.link}
 						style={{
 							color: '#F68B21',
 						}}
@@ -31,12 +31,12 @@ function VendorDetailsInfo({
 					>
 						{value}
 					</a>
-					<button className={styles.btn}>
+					<div>
 						<img
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
 							alt="icon"
 						/>
-					</button>
+					</div>
 				</div>
 			);
 		}
@@ -60,19 +60,17 @@ function VendorDetailsInfo({
 
 	return (
 		<div className={styles.cont}>
-			{
-				details.map((item) => (
-					<div className={styles.box_info}>
-						<div className={styles.top}>
-							{item.label}
-						</div>
-						<div className={styles.bottom}>
-							{(item.label === 'GST Certificate')
-								? checkVerified(item.label, item.value) : item.value }
-						</div>
+			{details.map((item) => (
+				<div className={styles.box_info}>
+					<div className={styles.top}>
+						{item.label}
 					</div>
-				))
-			}
+					<div className={styles.bottom}>
+						{(item.label === 'GST Certificate')
+							? checkVerified(item.label, item.value) : item.value }
+					</div>
+				</div>
+			))}
 		</div>
 	);
 }
