@@ -44,3 +44,9 @@
 	display: flex;
 	justify-content: flex-end;
   } 
+  .spinner {
+	width: 100%;
+	margin-top: 300px;
+	display: flex;
+	justify-content: center;
+  }

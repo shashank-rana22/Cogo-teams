@@ -2,6 +2,7 @@ import { Input, Modal, Button, Pagination } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import Spinner from '../../../../commons/Spinner';
 import useListFaqQuestions from '../../hooks/useListFaqQuestion';
 import Questions from '../Questions';
 import useCreateQuestionSet from '../QuestionsList/hooks/useCreateQuestionRequest';
@@ -24,6 +25,20 @@ function MostReadFAQs() {
 		activeTab,
 		setActiveTab,
 	} = useListFaqQuestions({ searchState, sort });
+
+	if (loading) {
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					outerBorderColor="#FFF"
+					spinBorderColor="#000"
+					borderWidth="7px"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div>
