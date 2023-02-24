@@ -14,7 +14,6 @@ function EventListItem() {
 						#001
 					</div>
 					<div className={styles.top_right_div}>
-
 						<p>Last Modified : 31/September/2023</p>
 						<p>Last Modified By : Ankur Verma</p>
 						<IcMEdit />

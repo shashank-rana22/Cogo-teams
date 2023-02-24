@@ -4,3 +4,72 @@
 	font-weight: 600;
 	color: #221f20;
 }
+
+.form_container{
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+.modified_data{
+   font-size: 12px;
+   display: flex;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+
+    color: #333333;  
+      margin-bottom: 16px;
+}
+
+.modified_date{
+    display: flex;
+    margin-right: 16px;
+}
+
+.add_rule_container{
+    flex: 1;
+}
+
+.account_attributes{
+    flex: 4;
+
+    padding: 16px;
+    background: #E2E2E2;
+    opacity: 0.8;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.add_rule_text{
+    font-weight: 600;
+    font-size: 18px;
+
+    margin: 16px 0px;
+
+    color: #4f4f4f;
+}
+
+
+.form_container {
+	margin-top: 16px;
+}
+
+.form_group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form_group:not(:first-child) { margin: 16px 0; }
+
+.label {
+	flex: 1;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}
+
