@@ -1,6 +1,9 @@
 .calendar{
     display: flex;
-    gap: 10px;
+}
+
+.calendarEntity{
+    width: calc(100% - 30px);
 }
 
 .navBtn{
@@ -9,6 +12,8 @@
     padding: none;
     cursor: pointer;
     font-size: 18px;
+    width: 30px;
+	margin: 10px;
 }
 
 .inactive{
