@@ -1,0 +1,21 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.filter_container {
+	display: flex;
+}
+
+.search_bar {
+	width: fit-content;
+}
+
+.all_events {
+	margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #221f20;
+}

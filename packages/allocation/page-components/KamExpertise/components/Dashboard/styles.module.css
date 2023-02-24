@@ -27,3 +27,8 @@
 	justify-content: center;
 	height: 80vh;
 }
+
+.tab_list {
+	width: 50%;
+	background: #f8f5ec;
+}

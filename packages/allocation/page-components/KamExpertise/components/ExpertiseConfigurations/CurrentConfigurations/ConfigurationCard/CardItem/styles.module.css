@@ -1,0 +1,36 @@
+.card_container {
+	flex-basis: 24%;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.header {
+	margin-bottom: 24px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+}
+
+.label {
+	line-height: 20px;
+	color: #828282;
+}
+
+.value {
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 32px;
+}
+
+.bottom_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.items {
+	font-weight: 500;
+}

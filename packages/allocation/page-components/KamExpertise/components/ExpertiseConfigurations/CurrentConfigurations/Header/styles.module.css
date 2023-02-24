@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 32px;
+}
+
+.heading {
+	margin-bottom: 8px;
+	font-size: 18px;
+	line-height: 36px;
+}
+
+.sub_container {
+	display: flex;
+}
+
+.left_text {
+	margin-right: 36px;
+}
