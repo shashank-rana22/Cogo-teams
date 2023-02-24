@@ -30,7 +30,7 @@ function ContainerDetails({
 							${styles.vol_weight_box}
 						`}
 						>
-							{formData.handling_information}
+							{formData?.handling_information}
 						</div>
 					</div>
 					<div className={cl`
@@ -120,7 +120,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{formData.dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages} `)}
+											{formData.dimension.map((item) => `${item?.length}x${item?.width}x${item?.height}/${item?.packages} `)}
 										</p>
 									</div>
 								</div>
@@ -136,7 +136,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 12 }} className="volume_box">
-											<div className="remark_box">{formData.remark}</div>
+											<div className="remark_box">{formData?.remark}</div>
 										</p>
 									</div>
 								</div>
@@ -411,7 +411,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{formData.rate_per_kg}</p>
+								<p style={{ fontSize: 13 }}>{formData?.rate_per_kg}</p>
 							</div>
 						</div>
 					</div>
@@ -459,7 +459,7 @@ function ContainerDetails({
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{(chargeable_weight * formData.rate_per_kg).toFixed(2)}
+									{(chargeable_weight * formData?.rate_per_kg)?.toFixed(2)}
 								</p>
 							</div>
 						</div>
@@ -475,7 +475,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								{(chargeable_weight * formData.rate_per_kg).toFixed(2)}
+								{(chargeable_weight * formData?.rate_per_kg)?.toFixed(2)}
 							</div>
 						</div>
 					</div>
@@ -524,7 +524,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_empty_bottom}
 							`}
 						>
-							<div style={{ paddingLeft: '4px' }}>{formData.commodity}</div>
+							<div style={{ paddingLeft: '4px' }}>{formData?.commodity}</div>
 						</div>
 					</div>
 				</div>

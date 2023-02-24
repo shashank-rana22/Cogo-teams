@@ -7,18 +7,23 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = 		useRequest('http://localhost:7002/airbender/pending-tasks/list', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequest(
+		'http://192.168.1.80:7002/airbender/pending-tasks/list',
+		{ manual: true },
+	);
 
-	const listAPi = async () => {
+	const listAPi = async ({ filter = {} }) => {
 		if (searchValue) {
 			setPage(1);
 		}
+
 		try {
 			await trigger({
 				params: {
 					q       : (query || '').trim() || undefined,
 					filters : {
 					},
+					...filter,
 					isDocDataRequired   : activeTab === 'approval_pending' ? true : undefined,
 					status              : activeTab === 'approval_pending' ? 'completed' : undefined,
 					assignedStakeholder : 'ground_ops',
@@ -37,7 +42,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	}, [searchValue]);
 
 	useEffect(() => {
-		listAPi();
+		listAPi({});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, query]);
 

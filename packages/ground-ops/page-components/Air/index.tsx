@@ -33,6 +33,7 @@ const tabsComponentMapping = {
 
 function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
+	const [filters, setFilters] = useState({});
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
@@ -43,11 +44,10 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks({ activeTab });
 
 	useEffect(() => {
-		if (activeTab === 'new_awb') { listAPi(); }
-		if (activeTab === 'approval_pending') { listAPi(); }
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
+		// if (activeTab === 'new_awb') { listAPi(); }
+		if (activeTab === 'new_awb') { listAPi({ filter: filters }); }
+		if (activeTab === 'approval_pending') { listAPi({ filter: filters }); }
+	}, [activeTab, JSON.stringify(filters)]);
 
 	return (
 		<div>
@@ -86,7 +86,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 						setSearchValue(val);
 					}}
 				/>
-				<Filters />
+				<Filters setFilters={setFilters} filters={filters} />
 			</div>
 			{ActiveTabComponent && (
 				<ActiveTabComponent

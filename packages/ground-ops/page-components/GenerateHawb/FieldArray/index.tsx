@@ -21,11 +21,6 @@ function FieldArray({
 		name,
 	});
 
-	console.log('fields', name);
-
-	console.log('controls', controls);
-	console.log('control', control);
-
 	const childEmptyValues = {};
 	controls.forEach((controlItem) => {
 		childEmptyValues[controlItem.name] = controlItem.value || '';

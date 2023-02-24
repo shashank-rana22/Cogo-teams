@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import List from '../../commons/List';
@@ -19,6 +20,8 @@ function NewAWB({ data, loading, setGenerate, setItem }) {
 				onClick={() => { handleGenerateMAWB(singleItem); }}
 			>
 				Generate
+				{' '}
+				{startCase(singleItem.blCategory)}
 			</Button>
 		),
 	};
@@ -30,6 +33,7 @@ function NewAWB({ data, loading, setGenerate, setItem }) {
 			loading={loading}
 			functions={functions}
 		/>
+
 	);
 }
 
