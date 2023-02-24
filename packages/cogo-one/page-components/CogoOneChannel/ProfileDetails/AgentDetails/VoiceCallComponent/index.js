@@ -61,17 +61,22 @@ function VoiceCallComponent({
 		<div className={styles.wrapper}>
 			<div className={styles.container}>
 				<div className={styles.number_div}>
-					<IcMCall
-						className={cl`${
-							(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
-						onClick={handleCall}
-					/>
+					<div className={styles.dialer_icon_div}>
+						<IcMCall
+							className={cl`${
+								(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
+							onClick={handleCall}
+						/>
+					</div>
 					{!isEmpty(userMobile) ? (
-						<div className={styles.show_number}>
-							+
-							{code}
-							{' '}
-							{NumberHide(number)}
+						<div className={styles.call_on_div}>
+							<div className={styles.call_on}>Call on</div>
+							<div className={styles.show_number}>
+								+
+								{code}
+								{' '}
+								{NumberHide(number)}
+							</div>
 						</div>
 					) : (
 						<div className={styles.show_number}>Number not found</div>
