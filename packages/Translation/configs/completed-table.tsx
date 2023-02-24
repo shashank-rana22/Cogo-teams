@@ -1,6 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
 import CreateRoleModal from '../page-components/CreateForm';
+import ToolTipWrapper from '../page-components/ListComponents/ToolTipWrapper';
 
 import styles from './styles.module.css';
 
@@ -17,7 +18,11 @@ const completedColumn = (refetch) => [
 	},
 	{
 		Header   : 'Original Text',
-		accessor : ({ text }) => (<div className={styles.name}>{text}</div>),
+		accessor : ({ text }) => (
+			<div className={styles.name}>
+				<ToolTipWrapper text={text} />
+			</div>
+		),
 	},
 	{
 		Header   : 'Target Language',
@@ -27,7 +32,7 @@ const completedColumn = (refetch) => [
 		Header   : 'Translated Text',
 		accessor : ({ translatedText }) => (
 			<div className={styles.name}>
-				{translatedText}
+				<ToolTipWrapper text={translatedText} />
 			</div>
 		),
 	},

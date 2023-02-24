@@ -10,7 +10,7 @@ interface Props {
 	controls: ControlItem[];
 }
 
-function CreateRole({
+function CreateRequest({
 	formProps,
 	controls = [],
 }: Props) {
@@ -24,4 +24,4 @@ function CreateRole({
 	);
 }
 
-export default CreateRole;
+export default CreateRequest;

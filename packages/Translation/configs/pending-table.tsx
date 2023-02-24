@@ -1,5 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
+import ToolTipWrapper from '../page-components/ListComponents/ToolTipWrapper';
+
 import styles from './styles.module.css';
 
 const requestedColumns = () => [
@@ -15,7 +17,7 @@ const requestedColumns = () => [
 	},
 	{
 		Header   : 'Original Text',
-		accessor : ({ text }) => (<div className={styles.name}>{text}</div>),
+		accessor : ({ text }) => (<ToolTipWrapper text={text} />),
 	},
 	{
 		Header   : 'Target Language',

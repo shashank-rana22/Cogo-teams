@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import { SingleData } from '../../common/interfaces';
 import useCreateRequest from '../../hooks/useCreateForm';
 
-import CreateRole from './CreateRole';
-import styles from './CreateRole/styles.module.css';
+import CreateRequest from './CreateRequest';
 import Heading from './Header';
+import styles from './styles.module.css';
 
 interface Props {
 	status?: string;
@@ -17,7 +17,7 @@ interface Props {
 
 }
 
-function CreateRoleModal({ status, refetch, row, showEdit }: Props) {
+function CreateRequestModal({ status, refetch, row, showEdit }: Props) {
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 
 	const {
@@ -46,11 +46,11 @@ function CreateRoleModal({ status, refetch, row, showEdit }: Props) {
 					)}
 				/>
 				<form
-					id="rnp_role_list_create_role_form"
+					id="create_form"
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<Modal.Body>
-						<CreateRole
+						<CreateRequest
 							formProps={formProps}
 							controls={controls}
 						/>
@@ -98,4 +98,4 @@ function CreateRoleModal({ status, refetch, row, showEdit }: Props) {
 	);
 }
 
-export default CreateRoleModal;
+export default CreateRequestModal;
