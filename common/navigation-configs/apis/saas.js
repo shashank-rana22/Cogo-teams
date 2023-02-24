@@ -1412,6 +1412,16 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'update_saas_checkout',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
