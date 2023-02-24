@@ -1,9 +1,9 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Badge } from '@cogoport/components';
 import { useForm, InputController, CheckboxController } from '@cogoport/forms';
-import { IcCDislike, IcCLike } from '@cogoport/icons-react';
+import { IcMLike, IcCDislike } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
-import { React, useState } from 'react';
+import format, { startCase } from '@cogoport/utils';
+import { React, useState, useRef } from 'react';
 
 import useGetQuestions from '../../hooks/useGetQuestions';
 import QuestionsCollapse from '../QuestionCollapse';
@@ -15,13 +15,10 @@ function Questions({ questions }) {
 	const [isLiked, setIsLiked] = useState(false);
 	const [id, setId] = useState(questions.id);
 	const {
-		refetchQuestions = () => {},
 		data,
-		loading = false,
-		activeTab,
-		setActiveTab,
 	} = useGetQuestions({ id });
 	const [show, setShow] = useState(false);
+	console.log('dd:', data?.answers[0]?.answer);
 	// const contentRef = useRef();
 	// if (contentRef.current) console.log(contentRef.current.scrollHeight);
 	const { handleSubmit, formState: { errors }, control } = useForm();
@@ -38,6 +35,8 @@ function Questions({ questions }) {
 	const toggle = () => {
 		setOPen(!open);
 	};
+	console.log('answers', data);
+	const formatDate = data?.updated_at;
 
 	const onClickLikeButton = async () => {
 		try {
@@ -85,11 +84,11 @@ function Questions({ questions }) {
 			{open && (
 				<>
 					<div className={styles.heading_container}>
-						{startCase(data?.answers[0])}
+						{startCase(data?.answers[0]?.answer)}
 					</div>
 					<div>
 						<span className={styles.sidetext}>
-							{data?.view_count}
+							{data?.answers[0]?.upvote_count}
 							{' '}
 							people found it useful.
 						</span>
@@ -97,7 +96,7 @@ function Questions({ questions }) {
 						<span className={styles.sidetext}>
 							Last updated on:
 							{' '}
-							{data?.updated_at}
+							{formatDate}
 						</span>
 					</div>
 					<div className={styles.flex_items}>
@@ -109,7 +108,9 @@ function Questions({ questions }) {
 								onClickLikeButton();
 							}}
 						>
-							<IcCLike fill={isLiked === 'liked' ? 'red' : '#f8f5ec'} />
+							<Badge placement="left" color="green" size="md" text={data?.answers[0]?.upvote_count}>
+								<IcMLike fill={isLiked ? '#9BEFA8' : '#000000'} />
+							</Badge>
 
 						</div>
 
