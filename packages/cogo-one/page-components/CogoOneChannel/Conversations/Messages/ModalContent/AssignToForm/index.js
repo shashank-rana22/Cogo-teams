@@ -68,13 +68,13 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 				/>
 			</div>
 			{isAssignUser && (
-				<div className={cl`${styles.styled_controller} ${styles.error_class}`}>
+				<div className={styles.styled_controller}>
 					<SelectController
 						control={control}
 						{...assign_user}
 						{...listAgentsOptions}
 						isClearable
-						className={styles.error_class}
+						className={errors?.assign_user && styles.error_class}
 					/>
 					<div className={styles.error_text}>{errors?.assign_user && 'This is Required'}</div>
 				</div>

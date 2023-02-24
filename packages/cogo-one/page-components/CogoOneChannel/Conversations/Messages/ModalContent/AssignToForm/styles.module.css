@@ -60,11 +60,17 @@
 }
 
 .error_class {
-	.ui_select_display_container:hover {
-		border: 1px solid blue !important;
-	}
+	:global {
+		.ui_select_display_container {
+			border: 1px solid  #d22b2b;
+		}
 
-	.ui_select_display_container:focus {
-		border: 1px solid blue !important;
+		.ui_select_display_container:hover {
+			border: 1px solid  #d22b2b !important;
+		}
+
+		.ui_select_display_container:focus-within {
+			box-shadow: 1px solid  #d22b2b !important;
+		}
 	}
 }
