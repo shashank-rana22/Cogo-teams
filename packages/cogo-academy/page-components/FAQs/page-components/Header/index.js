@@ -4,10 +4,7 @@ import styles from './styles.module.css';
 
 function Header() {
 	return (
-		<div className="heading-container">
-			<h1 className={styles.title}>FAQs</h1>
-
-		</div>
+		<div className={styles.title}>FAQs</div>
 	);
 }
 

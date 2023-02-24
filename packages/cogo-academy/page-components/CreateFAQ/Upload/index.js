@@ -41,7 +41,7 @@ function Upload() {
 				<div className={styles.add_topic}>
 					Upload
 					{' '}
-					{startCase(obj.display_name)}
+					{startCase(obj?.display_name)}
 					{' '}
 					In Bulk
 				</div>

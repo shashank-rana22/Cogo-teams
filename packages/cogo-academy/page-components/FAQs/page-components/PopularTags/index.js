@@ -4,6 +4,8 @@ import React from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
 
+import styles from './styles.module.css';
+
 function PopularTags() {
 	const {
 		refetchTag = () => {},
@@ -13,18 +15,15 @@ function PopularTags() {
 		setActiveTab,
 	} = useListFaqTag();
 
-	// console.log(data);
-
 	return (
-
-		<div>
+		<div style={{ marginBottom: 12 }}>
 			<br />
 			<h4>Popular tags in this section:</h4>
 			{data?.list.map((item) => (
 				<Pill
-					// onClick={<AllFAQ />}
+					className={styles.tag_decoration}
 					key={item.name}
-					size="xl"
+					size="sm"
 					color="white"
 				>
 					{startCase(item.name)}

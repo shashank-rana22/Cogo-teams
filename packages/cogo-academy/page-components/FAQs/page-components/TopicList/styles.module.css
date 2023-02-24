@@ -1,10 +1,4 @@
-.gridContainer {
-	display: grid;
-	grid-template-columns: 20rem 64rem;
-	justify-content: space-between;
-	width: 100%;
-	padding: 10px;
-
+.grid_container {
 	:global {
 		.ui_tabs_container {
 			width: 100%;

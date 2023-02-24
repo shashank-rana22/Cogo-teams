@@ -30,6 +30,8 @@ const useFilterPopover = ({ setFilters }) => {
 			tag_id   : values?.tag,
 			topic_id : values?.topic,
 		});
+
+		setShowFilter(false);
 	};
 
 	const { list: topicList = [] } = topicsData || {};
@@ -45,6 +47,11 @@ const useFilterPopover = ({ setFilters }) => {
 		value : item?.id,
 	}));
 
+	const onClickReset = () => {
+		setFilters({});
+		setShowFilter(false);
+	};
+
 	return {
 		showFilter,
 		setShowFilter,
@@ -53,6 +60,7 @@ const useFilterPopover = ({ setFilters }) => {
 		control,
 		handleSubmit,
 		onSubmit,
+		onClickReset,
 	};
 };
 
