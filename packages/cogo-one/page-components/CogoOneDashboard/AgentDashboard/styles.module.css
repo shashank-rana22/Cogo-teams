@@ -41,10 +41,6 @@
 }
 
 .two_characterisctics_container {
-	/* display: flex;
-	justify-content: space-between;
-	width: 100%;
-	margin-bottom: 12px; */
 	display: grid;
 	grid-template-rows: auto;
 	grid-template-columns: 45fr 52fr;

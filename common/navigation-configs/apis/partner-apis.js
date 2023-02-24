@@ -10111,7 +10111,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
+		{
+			api          : 'get_cogo_one_dashboard',
+			access_type  : 'private',
+			service_name : 'unified_dashboard',
+		},
 	],
 };
 export default partner;

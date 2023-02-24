@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 import AdminDashboard from './AdminDashboard';
 import AgentDashboard from './AgentDashboard';
+import useGetCogoOneDashboard from './hooks/useGetCogoOneDashboard';
 import styles from './styles.module.css';
 
-function CogoOneDashboard({ isAdminView = false }) {
+function CogoOneDashboard({ isAdminView = true }) {
 	// const [activeTab, setActiveTab] = useState('day');
 	// const { user } = useSelector(({ profile }) => profile);
 	// const {
@@ -15,6 +16,8 @@ function CogoOneDashboard({ isAdminView = false }) {
 	// }));
 
 	const [calendarType, setCalendarType] = useState('day');
+	const { listData } = useGetCogoOneDashboard();
+	console.log(listData, 'listData');
 
 	return (
 		<div className={styles.prime_container}>
