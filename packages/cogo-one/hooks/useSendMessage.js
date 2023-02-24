@@ -17,7 +17,7 @@ const useSendMessage = ({ channel_type = '', sender = null }) => {
 			url    : `/${API_MAPPING[channel_type]}`,
 			method : 'post',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const sendMessage = async ({
