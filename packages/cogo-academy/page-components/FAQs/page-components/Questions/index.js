@@ -14,11 +14,14 @@ function Questions({ questions }) {
 	const [open, setOPen] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 	const [id, setId] = useState(questions.id);
+	const [show, setShow] = useState(false);
+
 	const {
 		data,
 	} = useGetQuestions({ id });
-	const [show, setShow] = useState(false);
+
 	const { handleSubmit, formState: { errors }, control } = useForm();
+
 	const [{ loading: feedbackLoading }, trigger] = useRequest({
 		url    : '/create_faq_feedback',
 		method : 'POST',
