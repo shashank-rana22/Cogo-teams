@@ -7,7 +7,7 @@ import useGetQuestion from '../hooks/useGetQuestion';
 
 import styles from './styles.module.css';
 
-function PreviewQuestion({ setQuestionPreview }) {
+function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const router = useRouter();
 
 	const { fetchQuestion, query, data } = useGetQuestion();
@@ -94,9 +94,9 @@ function PreviewQuestion({ setQuestionPreview }) {
 					themeType="primary"
 					size="md"
 					className={styles.publish_button}
+					onClick={() => onClickPublish({ data })}
 				>
 					Publish
-
 				</Button>
 				<div className={styles.goback_button} role="presentation" onClick={onclickBack}>
 					Go Back & Edit

@@ -15,7 +15,10 @@ function useCreateQuestions() {
 	const [editorValue, setEditorValue] = useState('');
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
 
-	const { onSubmit } = useCreateFaqSet({ setQuestionPreview, questionPreview, editorValue });
+	const {
+		onSubmit,
+		onClickPublish,
+	} = useCreateFaqSet({ setQuestionPreview, questionPreview, editorValue });
 
 	const { topicOptions, tagOptions } = useGetTopicTagList();
 
@@ -61,6 +64,7 @@ function useCreateQuestions() {
 		entity_options,
 		questionPreview,
 		setQuestionPreview,
+		onClickPublish,
 	};
 }
 

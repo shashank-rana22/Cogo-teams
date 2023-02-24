@@ -19,8 +19,6 @@ function useGetFaqsAnswers({ id }) {
 		}
 	};
 
-	console.log('answerdata :: ', data);
-
 	useEffect(() => {
 		fetchFaqAnswers();
 	// eslint-disable-next-line react-hooks/exhaustive-deps

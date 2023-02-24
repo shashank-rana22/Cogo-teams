@@ -1,5 +1,4 @@
 import { Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
@@ -15,11 +14,8 @@ function PopularTags() {
 		setActiveTab,
 	} = useListFaqTag();
 
-	// console.log(data);
-
 	return (
-
-		<div>
+		<div style={{ marginBottom: 12 }}>
 			<br />
 			<h4>Popular tags in this section:</h4>
 			{data?.list.map((item) => (
@@ -27,8 +23,8 @@ function PopularTags() {
 					className={styles.tag_decoration}
 					// onClick={<AllFAQ />}
 					key={item.name}
-					size="xl"
-
+					size="sm"
+					color="white"
 				>
 					{item.name}
 				</Pill>

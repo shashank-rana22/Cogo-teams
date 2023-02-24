@@ -2,8 +2,8 @@ import { Modal, Button, Badge } from '@cogoport/components';
 import { useForm, InputController, CheckboxController } from '@cogoport/forms';
 import { IcMLike, IcCDislike } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import format, { startCase } from '@cogoport/utils';
-import { React, useState, useRef } from 'react';
+import { startCase } from '@cogoport/utils';
+import { React, useState } from 'react';
 
 import useGetQuestions from '../../hooks/useGetQuestions';
 import QuestionsCollapse from '../QuestionCollapse';
@@ -18,9 +18,6 @@ function Questions({ questions }) {
 		data,
 	} = useGetQuestions({ id });
 	const [show, setShow] = useState(false);
-	console.log('dd:', data?.answers[0]?.answer);
-	// const contentRef = useRef();
-	// if (contentRef.current) console.log(contentRef.current.scrollHeight);
 	const { handleSubmit, formState: { errors }, control } = useForm();
 	const [{ loading: feedbackLoading }, trigger] = useRequest({
 		url    : '/create_faq_feedback',
@@ -35,7 +32,6 @@ function Questions({ questions }) {
 	const toggle = () => {
 		setOPen(!open);
 	};
-	console.log('answers', data);
 	const formatDate = data?.updated_at;
 
 	const onClickLikeButton = async () => {

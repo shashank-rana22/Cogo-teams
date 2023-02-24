@@ -12,7 +12,12 @@ function useListFaqQuestions() {
 	const fetchFaqQuestions = async () => {
 		try {
 			await trigger({
-				params: { },
+				params: {
+					filters: {
+						state  : 'published',
+						status : 'active',
+					},
+				},
 			});
 		} catch (error) {
 			console.log('error :: ', error);

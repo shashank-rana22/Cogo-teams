@@ -8,7 +8,7 @@ function useGetQuestions({ id }) {
 		method : 'get',
 		url    : 'faq/get_question',
 	}, { manual: true });
-	console.log('ID:', id);
+
 	const fetchQuestions = async () => {
 		try {
 			await trigger({
@@ -18,8 +18,6 @@ function useGetQuestions({ id }) {
 			console.log('error :: ', error);
 		}
 	};
-
-	console.log('answerdata :: ', data);
 
 	useEffect(() => {
 		fetchQuestions();
