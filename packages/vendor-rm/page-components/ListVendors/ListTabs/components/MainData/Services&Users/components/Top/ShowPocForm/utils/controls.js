@@ -1,4 +1,5 @@
 import officeLocations from '../../../../../../../../../../utils/office-locations.json';
+import workScopes from '../../../../../../../../../../utils/work-scopes.json';
 import categoryOptions from '../../../../../../../../../OnBoardVendor/VendorServices/utils/category-options';
 import subCategoryOptions from '../../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
 
@@ -7,7 +8,7 @@ const controls = [
 		name        : 'name',
 		label       : 'Name',
 		type        : 'text',
-		style       : { flexBasis: '25%' },
+		style       : { flexBasis: '30%' },
 		placeholder : 'Enter Name',
 		rules       : { required: 'Contact Name is required' },
 	},
@@ -15,7 +16,7 @@ const controls = [
 		name        : 'email',
 		label       : 'Contact Email ID',
 		type        : 'text',
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '32%' },
 		placeholder : 'Type here..',
 		rules       : {
 			required : 'Email of the Contact is required',
@@ -29,7 +30,7 @@ const controls = [
 		name        : 'mobile_number',
 		label       : 'Contact Number',
 		type        : 'mobile-number-select',
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '30%', marginRight: '0px' },
 		placeholder : 'Type here',
 		rules       : { required: 'Contact Number is required' },
 	},
@@ -46,43 +47,9 @@ const controls = [
 		label       : 'Role in Company',
 		type        : 'multiSelect',
 		placeholder : 'Select a role type',
-		style       : { flexBasis: '35%' },
+		style       : { flexBasis: '32%', marginRight: '0px' },
 		rules       : { required: 'Company Type is required' },
-		options:
-				[
-					{
-						label : 'Partner/Owner/Director',
-						value : 'i_am_owner',
-					},
-					{
-						label : 'Finance Head',
-						value : 'i_am_finance_head',
-					},
-					{
-						label : 'Finance Team Member',
-						value : 'i_work_in_finance',
-					},
-					{
-						label : 'Marketing/Sales',
-						value : 'i_work_in_marketing_and_sales',
-					},
-					{
-						label : 'Procurement',
-						value : 'i_work_in_procurement',
-					},
-					{
-						label : 'Operations',
-						value : 'i_work_in_operations',
-					},
-					{
-						label : 'Logistics Manager',
-						value : 'i_am_logistics_manager',
-					},
-					{
-						label : 'Other',
-						value : 'other',
-					},
-				],
+		options     : workScopes,
 	},
 	{
 		name            : 'contact_proof_url',
@@ -103,7 +70,7 @@ const controls = [
 		type        : 'select',
 		placeholder : 'Select Category',
 		options     : categoryOptions,
-		style       : { flexBasis: '25%' },
+		style       : { flexBasis: '30%' },
 		rules       : { required: 'Category is required' },
 
 	},
@@ -113,7 +80,7 @@ const controls = [
 		type        : 'select',
 		placeholder : 'Select Sub-Category',
 		options     : subCategoryOptions,
-		style       : { flexBasis: '25%' },
+		style       : { flexBasis: '30%' },
 		rules       : { required: 'Sub Category is required' },
 
 	},
@@ -122,8 +89,8 @@ const controls = [
 		label       : 'Select Branch',
 		type        : 'select',
 		placeholder : 'Select a city',
-		options   		: officeLocations,
-		style       : { flexBasis: '25%' },
+		options    	: officeLocations,
+		style       : { flexBasis: '32%', marginRight: '0px' },
 		rules       : { required: 'Branch is required' },
 	},
 

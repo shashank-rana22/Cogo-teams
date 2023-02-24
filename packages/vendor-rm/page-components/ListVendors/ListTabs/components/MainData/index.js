@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function MainData({
 	data = {},
+	refetchVendorInfo = () => {},
 }) {
 	const [activeTab, setActiveTab] = useState('services_and_users');
 	const options = Object.values(TAB_OPTION_MAPPING);
@@ -31,7 +32,7 @@ function MainData({
 							name={key}
 							title={title}
 						>
-							<ContainerComponent data={data} />
+							<ContainerComponent data={data} refetchVendorInfo={refetchVendorInfo} />
 						</TabPanel>
 					);
 				})}

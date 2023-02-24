@@ -8,10 +8,17 @@ import styles from './styles.module.css';
 
 function Heading1({
 	vendor_details = {},
+	refetchVendorInfo = () => {},
 }) {
 	const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
-	const { control, newFields, handleSubmit, errors, onSubmit } = useEditProfile({ vendor_details });
+	const {
+		control,
+		newFields,
+		handleSubmit,
+		errors,
+		onSubmit,
+	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal });
 
 	const { kyc_status = '' } = vendor_details || {};
 
@@ -65,10 +72,11 @@ function Heading1({
 
 					<Button
 						size="md"
+						type="submit"
 						onClick={handleSubmit(onSubmit)}
 						// loading={loading}
 					>
-						submit
+						Submit
 					</Button>
 				</Modal.Footer>
 			</Modal>

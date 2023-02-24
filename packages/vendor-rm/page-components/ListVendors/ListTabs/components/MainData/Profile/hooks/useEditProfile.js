@@ -58,7 +58,7 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 
 		try {
 			await trigger({
-				params: {
+				data: {
 					id                     : vendor_details?.id,
 					country_id             : values?.country_id,
 					business_name          : values?.business_name,

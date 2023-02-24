@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -25,7 +25,7 @@ const useGetBfList = ({ organizationId }) => {
 				},
 			});
 		} catch (e) {
-			Toast.error(e?.message);
+			// Toast.error(e?.message);
 		}
 	};
 
