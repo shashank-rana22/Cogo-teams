@@ -8,5 +8,10 @@
 }
 
 .search {
-	width: 16%;
+	width: 180px;
+}
+
+.select_container {
+	width: 180px;
+	margin-right: 8px;
 }

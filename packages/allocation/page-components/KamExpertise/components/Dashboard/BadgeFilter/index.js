@@ -14,15 +14,16 @@ function BadgeFilter() {
 
 	return (
 		<div className={styles.container}>
-			<div style={{ padding: 16, width: 'fit-content' }}>
+			<div className={styles.select_container}>
 				<Select
-					size="sm"
+					size="md"
 					// value={value}
 					// onChange={setValue(value)}
 					placeholder="Select Badge"
 					options={options}
 				/>
 			</div>
+
 			<div className={styles.search}>
 				<Input
 					size="md"

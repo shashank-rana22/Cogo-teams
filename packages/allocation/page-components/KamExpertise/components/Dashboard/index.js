@@ -45,7 +45,7 @@ function KamExpertise() {
 				<Tabs
 					activeTab={activeTab}
 					fullWidth
-					themeType="primary"
+					themeType="secondary"
 					onChange={setActiveTab}
 					className={styles.tabs}
 				>
