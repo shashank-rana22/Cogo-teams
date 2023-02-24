@@ -29,7 +29,12 @@ const useSendChat = ({
 			`${FIRESTORE_PATH[channel_type]}/${id}`,
 		);
 	}
-
+	const isGreaterThan24hours = (newMessageSentAt) => {
+		const lastMessageTime = new Date(newMessageSentAt);
+		const currentTime = new Date();
+		const hoursDifference = Math.abs(currentTime - lastMessageTime) / 36e5;
+		return hoursDifference >= 24 && channel_type === 'whatsapp';
+	};
 	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id]?.trim() || '';
 
@@ -41,7 +46,11 @@ const useSendChat = ({
 
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
 		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
-
+		const document = await getDoc(messageFireBaseDoc);
+		if (isGreaterThan24hours(document?.data()?.new_message_sent_at)) {
+			Toast.error('Message cannot be sent after 24 hours.Try sending a Template Instead');
+			return;
+		}
 		if (!isEmpty(newMessage?.trim()) || finalUrl) {
 			const adminChat = {
 				conversation_type : 'received',
@@ -57,8 +66,7 @@ const useSendChat = ({
 			};
 
 			await addDoc(activeChatCollection, adminChat);
-			const doc1 = await getDoc(messageFireBaseDoc);
-			const old_count = doc1.data().new_user_message_count;
+			const old_count = document.data().new_user_message_count;
 			await updateDoc(messageFireBaseDoc, {
 				new_message_count      : 0,
 				last_message           : newMessage,
