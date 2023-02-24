@@ -9,6 +9,13 @@
 	}
 }
 
+.pagination {
+	margin-top: 12px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+  } 
+
 .border {
 	border-bottom: 0.1px solid #7e7a7a;
 	margin-left: 40px;

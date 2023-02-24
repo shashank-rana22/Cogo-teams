@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMImage, IcMArrowRotateRight, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { IcMArrowRotateRight, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -14,11 +14,16 @@ function QuestionsCollapse({ collapse, questions }) {
 				{startCase(
 					questions.question_abstract,
 				)}
-				{(arrow) ? <IcMArrowUp /> : <IcMArrowDown />}
+
+				<IcMArrowDown
+					width={16}
+					height={16}
+					className={` ${styles.caret_arrow} ${arrow && styles.caret_active}`}
+				/>
 			</div>
 
 			<div style={{ display: 'flex' }}>
-				<Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill>
+				{/* <Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill> */}
 				<Pill
 					prefix={<IcMArrowRotateRight />}
 					size="sm"

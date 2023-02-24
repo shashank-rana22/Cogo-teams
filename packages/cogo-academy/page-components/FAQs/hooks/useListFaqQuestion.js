@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 	const [activeTab, setActiveTab] = useState('');
-
+	const [page, setPage] = useState(1);
 	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
 
 	const [{ data, loading }, trigger] = useRequest({
@@ -23,6 +23,7 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 
 					},
 					sort_by: SORT_MODE,
+					page,
 				},
 			});
 		} catch (error) {
@@ -30,10 +31,19 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 		}
 	};
 
-	useEffect(() => { fetchFaqQuestions(); }, [searchState, topicId]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => { fetchFaqQuestions(); }, [page, searchState, topicId]);
+	const { page_limit, total_count } = data || {};
+
+	const paginationData = { page_limit, total_count };
+
+	console.log('page_limit :: ', page_limit);
 
 	return {
 		refetchQuestions: fetchFaqQuestions,
+		page,
+		setPage,
+		paginationData,
 		data,
 		loading,
 		activeTab,

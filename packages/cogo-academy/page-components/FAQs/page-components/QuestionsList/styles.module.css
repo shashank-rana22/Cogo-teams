@@ -59,7 +59,7 @@
 
 .spinner {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
 }
@@ -69,3 +69,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.pagination {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+} 
