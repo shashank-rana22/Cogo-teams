@@ -17,7 +17,7 @@ function GenerateHawb({
 	shipment_data = {},
 	completeTask = () => {},
 	task = {},
-	details = {},
+	// details = {},
 	viewDoc = false,
 	setIsAmended = () => {},
 	isAmended,
@@ -46,7 +46,7 @@ function GenerateHawb({
 
 	// eslint-disable-next-line no-unused-vars
 	const [image, takeScreenShot] = useScreenshot();
-	const serial_id = shipment_data?.serial_id || '';
+	const serial_id = task?.serialId || '';
 
 	const { handleUpload } = useGetMediaUrl();
 	const { upload, loading } = useCreateShipmentDocument({
@@ -84,34 +84,34 @@ function GenerateHawb({
 		const { file } = getFileObject(newImage, 'hawb.pdf');
 		const res = await handleUpload('hawb.pdf', file);
 		const payload = {
-			shipment_id         : task?.shipment_id,
-			uploaded_by_org_id  : task?.organization_id,
-			performed_by_org_id : task?.organization_id,
+			shipment_id         : task?.shipmentId,
+			uploaded_by_org_id  : task?.serviceProviderId,
+			performed_by_org_id : task?.serviceProviderId,
 			document_type       : 'draft_airway_bill',
-			id                  : details?.id,
-			service_id          : task?.service_id,
-			service_type        : task?.service_type,
+			id                  : task?.id,
+			service_id          : task?.serviceId,
+			service_type        : 'air_freight_service',
 			data                : {
 				...filtered_data,
 				status          : 'generated',
-				document_number : shipment_data?.booking_reference_number,
-				service_id      : shipment_data?.service_id,
-				service_type    : shipment_data?.service_type,
+				document_number : task?.awbNumber,
+				service_id      : task?.serviceId,
+				service_type    : 'air_freight_service',
 			},
 			document_url: res || undefined,
 			file_name:
-				`Draft_Airway_Bill_For_Shipment_${serial_id}_${new Date().getTime()}`
+				`Draft_House_Airway_Bill_For_Shipment_${serial_id}_${new Date().getTime()}`
 				|| undefined,
 			documents: [
 				{
 					file_name:
-						`Draft_Airway_Bill_For_Shipment_${serial_id}_${new Date().getTime()}`
+						`Draft_House_Airway_Bill_For_Shipment_${serial_id}_${new Date().getTime()}`
 						|| undefined,
 					document_url : res || undefined,
 					data         : {
-						document_number : shipment_data?.booking_reference_number,
-						service_id      : shipment_data?.service_id,
-						service_type    : shipment_data?.service_type,
+						document_number : task?.awbNumber,
+						service_id      : task?.serviceId,
+						service_type    : 'air_freight_service',
 						...filtered_data,
 						status          : 'generated',
 					},

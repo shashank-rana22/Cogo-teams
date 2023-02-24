@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Button, Modal, Stepper } from '@cogoport/components';
+import { Button, Modal, Stepper, Breadcrumb } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 
@@ -16,7 +16,7 @@ const items = [
 	{ title: 'Handling Details', key: 'handling' },
 ];
 
-function GenerateMAWB({ 	item = {}, task = {}, viewDoc = false }) {
+function GenerateMAWB({ item = {}, task = {}, viewDoc = false }) {
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
@@ -59,27 +59,37 @@ function GenerateMAWB({ 	item = {}, task = {}, viewDoc = false }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Generate MAWB</div>
-
-			<Stepper
-				active={activeKey}
-				setActive={setActiveKey}
-				items={items}
-			/>
+			<div className={styles.heading}>Add Export Details</div>
+			<Breadcrumb>
+				<Breadcrumb.Item label={<a href="ground-ops">Ground Ops Dashboard</a>} />
+				<Breadcrumb.Item label="Add Export Details" />
+			</Breadcrumb>
 			<div className={styles.form_container}>
+
+				<div style={{ display: 'flex' }}>
+					<Stepper
+						active={activeKey}
+						setActive={setActiveKey}
+						items={items}
+					/>
+				</div>
 
 				{activeKey === 'basic'
 				&& (
 					<>
 						<Layout fields={fields?.basic} control={control} errors={errors} />
-						<div className={styles.button_div}>
+						<div className={styles.button_container}>
+
 							{!back ? (
-								<Button
-									onClick={handleSubmit(() => setActiveKey('package'))}
-									disabled={documentLoading || generateLoading}
-								>
-									Next
-								</Button>
+								<div className={styles.button_div}>
+									<Button
+										onClick={handleSubmit(() => setActiveKey('package'))}
+										disabled={documentLoading || generateLoading}
+										themeType="accent"
+									>
+										NEXT
+									</Button>
+								</div>
 							) : null}
 						</div>
 					</>
@@ -89,14 +99,25 @@ function GenerateMAWB({ 	item = {}, task = {}, viewDoc = false }) {
 				&& (
 					<>
 						<Layout fields={fields?.package} control={control} errors={errors} />
-						<div className={styles.button_div}>
+						<div className={styles.button_container}>
 							{!back ? (
-								<Button
-									onClick={handleSubmit(() => setActiveKey('handling'))}
-									disabled={documentLoading || generateLoading}
-								>
-									Next
-								</Button>
+								<div className={styles.button_div}>
+									<Button
+										onClick={() => setActiveKey('basic')}
+										disabled={documentLoading || generateLoading}
+										themeType="secondary"
+										style={{ border: '1px solid #333' }}
+									>
+										BACK
+									</Button>
+									<Button
+										onClick={handleSubmit(() => setActiveKey('handling'))}
+										disabled={documentLoading || generateLoading}
+										themeType="accent"
+									>
+										Next
+									</Button>
+								</div>
 							) : null}
 						</div>
 					</>
@@ -106,16 +127,27 @@ function GenerateMAWB({ 	item = {}, task = {}, viewDoc = false }) {
 				&& (
 					<>
 						<Layout fields={fields?.handling} control={control} errors={errors} />
-						<div className={styles.button_div}>
+						<div className={styles.button_container}>
 							{!back ? (
-								<Button
-									onClick={handleSubmit(onSubmit)}
-									disabled={documentLoading || generateLoading}
-								>
-									{documentLoading || generateLoading
-										? 'Generating'
-										: 'Generate Master Airway Bill'}
-								</Button>
+								<div className={styles.button_div}>
+									<Button
+										onClick={() => setActiveKey('package')}
+										disabled={documentLoading || generateLoading}
+										themeType="secondary"
+										style={{ border: '1px solid #333' }}
+									>
+										BACK
+									</Button>
+									<Button
+										onClick={handleSubmit(onSubmit)}
+										disabled={documentLoading || generateLoading}
+										themeType="accent"
+									>
+										{documentLoading || generateLoading
+											? 'Generating'
+											: 'Generate Master Airway Bill'}
+									</Button>
+								</div>
 							) : null}
 						</div>
 					</>

@@ -8,28 +8,33 @@ import Layout from '../Air/commons/Layout';
 import filterControls from './filter-controls';
 import styles from './styles.module.css';
 
-function Filters({ listAPi = () => {}, setFilters = () => {} }) {
+function Filters({ setFilters = () => {}, filters = {} }) {
 	const [visible, setVisible] = useState(false);
-	const { control, handleSubmit, watch, setValue, formState:{ errors } } = useForm();
+	const { control, handleSubmit, reset, watch, setValue, formState:{ errors } } = useForm();
 	console.log('watch', watch());
 
-	const onSubmit = (formValues) => {
+	const onSubmit = (formValues: any) => {
 		setFilters((prev) => ({ ...prev, ...formValues }));
+	};
+	const handleClear = () => {
+		Object.keys(filters).forEach((key) => {
+			setValue(key, undefined);
+		});
+		reset();
+		setFilters({});
+		setVisible(false);
 	};
 	const popoverContent = () => (
 		<>
 			<Layout fields={filterControls} control={control} errors={errors} register={undefined} />
 			<div className={styles.footer_button}>
-				<Button themeType="secondary" onClick={() => setVisible(false)}>Cancel</Button>
+				<Button themeType="secondary" onClick={() => handleClear()}>Clear</Button>
 				<Button onClick={handleSubmit(onSubmit)}>Apply</Button>
-
 			</div>
-
 		</>
 	);
 	return (
 		<div className={styles.container}>
-
 			<Popover
 				placement="bottom"
 				render={popoverContent()}
@@ -42,7 +47,7 @@ function Filters({ listAPi = () => {}, setFilters = () => {} }) {
 					themeType="tertiary"
 					size="lg"
 					className={styles.filter_svg}
-					onClick={() => setVisible((prev) => !prev)}
+					onClick={() => setVisible((prev: any) => !prev)}
 				>
 					Filters
 					{' '}

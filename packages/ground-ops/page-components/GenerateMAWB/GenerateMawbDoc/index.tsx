@@ -26,6 +26,8 @@ function GenerateMawb({
 	back = false,
 	primary_service,
 }) {
+	console.log('task', task);
+
 	const [show, setShow] = useState(false);
 	const filtered_data = { ...formData };
 
@@ -46,7 +48,7 @@ function GenerateMawb({
 
 	// eslint-disable-next-line no-unused-vars
 	const [image, takeScreenShot] = useScreenshot();
-	const serial_id = shipment_data?.serial_id || '';
+	const serial_id = task?.serialId || '';
 
 	const { handleUpload } = useGetMediaUrl();
 	const { upload, loading } = useCreateShipmentDocument({
@@ -84,19 +86,19 @@ function GenerateMawb({
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('mawb.pdf', file);
 		const payload = {
-			shipment_id         : task?.shipment_id,
-			uploaded_by_org_id  : task?.organization_id,
-			performed_by_org_id : task?.organization_id,
+			shipment_id         : task?.shipmentId,
+			uploaded_by_org_id  : task?.serviceProviderId,
+			performed_by_org_id : task?.serviceProviderId,
 			document_type       : 'draft_airway_bill',
-			id                  : details?.id,
-			service_id          : task?.service_id,
-			service_type        : task?.service_type,
+			id                  : task?.id,
+			service_id          : task?.serviceId,
+			service_type        : 'air_freight_service',
 			data                : {
 				...filtered_data,
 				status          : 'generated',
-				document_number : shipment_data?.booking_reference_number,
-				service_id      : shipment_data?.service_id,
-				service_type    : shipment_data?.service_type,
+				document_number : task?.awbNumber,
+				service_id      : task?.serviceId,
+				service_type    : 'air_freight_service',
 			},
 			document_url: res || undefined,
 			file_name:
@@ -109,9 +111,9 @@ function GenerateMawb({
 						|| undefined,
 					document_url : res || undefined,
 					data         : {
-						document_number : shipment_data?.booking_reference_number,
-						service_id      : shipment_data?.service_id,
-						service_type    : shipment_data?.service_type,
+						document_number : task?.awbNumber,
+						service_id      : task?.serviceId,
+						service_type    : 'air_freight_service',
 						...filtered_data,
 						status          : 'generated',
 					},

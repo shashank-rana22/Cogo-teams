@@ -1,25 +1,32 @@
 import { Button } from '@cogoport/components';
+import { IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import GenerateMAWB from '../../../GenerateMAWB';
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
 
+import DownloadModal from './DownloadModal';
+
 function ApprovalPending({ data, loading }) {
 	const { fields } = ApprovalPendingFields;
-	const [generate, setGenerate] = useState(false);
-	const [item, setItem] = useState({});
+	const [show, setShow] = useState(false);
 	const functions = {
-		handleGenerate: (singleItem:any) => (
-			<Button onClick={() => { setGenerate(true); setItem(singleItem); }}>Generate</Button>
+		handleDownload: () => (
+			<Button
+				themeType="linkUi"
+				style={{ fontSize: 12 }}
+				onClick={() => { setShow(true); }}
+			>
+				<IcMDownload />
+
+			</Button>
 		),
 
 	};
 	return (
 		<>
-			{!generate && <List fields={fields} data={data} loading={loading} functions={functions} />}
-
-			{generate && <GenerateMAWB shipment_id={item.shipmentId} task={item} />}
+			<List fields={fields} data={data} loading={loading} functions={functions} />
+			{show && <DownloadModal show={show} setShow={setShow} />}
 		</>
 	);
 }

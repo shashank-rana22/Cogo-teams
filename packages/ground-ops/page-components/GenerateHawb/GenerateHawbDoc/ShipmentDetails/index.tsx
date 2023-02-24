@@ -123,7 +123,7 @@ function ShipmentDetails({ formData = {}, primary_service = {} }:Props) {
 						${styles.flex_font_bold}
 					`}
 							>
-								<p style={{ fontSize: 12.5 }}>{formData?.origin_airport}</p>
+								<p style={{ fontSize: 12.5 }}>{formData?.origin}</p>
 							</div>
 						</p>
 					</div>
@@ -274,7 +274,7 @@ function ShipmentDetails({ formData = {}, primary_service = {} }:Props) {
 						${styles.flex_justify_center}
 					`}
 								>
-									<p style={{ fontSize: 14 }}>{formData?.destination_airport}</p>
+									<p style={{ fontSize: 14 }}>{formData?.destination}</p>
 								</div>
 							</p>
 						</div>

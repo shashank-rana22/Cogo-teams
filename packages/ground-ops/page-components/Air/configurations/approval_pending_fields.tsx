@@ -53,11 +53,20 @@ export const ApprovalPendingFields = {
 			func  : 'startCase',
 		},
 		{
-			key   : 'status',
-			label : 'Status',
-			span  : 1,
-			func  : 'handleStatus',
+			key    : 'status',
+			label  : 'Status',
+			span   : 1,
+			render : (item) => (
+				<div style={{ textTransform: 'uppercase' }}>
+					{item.documentState ? 'Approve' : 'Amend'}
+				</div>
+			),
 		},
-
+		{
+			key   : 'download',
+			label : '',
+			span  : 1,
+			func  : 'handleDownload',
+		},
 	],
 };

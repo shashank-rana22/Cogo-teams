@@ -7,9 +7,12 @@ const useListShipmentPendingTasks = () => {
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequest('http://192.168.1.198:7002/airbender/pending-tasks/list', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequest(
+		'http://192.168.1.80:7002/airbender/pending-tasks/list',
+		{ manual: true },
+	);
 
-	const listAPi = async (filter = {}) => {
+	const listAPi = async ({ filter = {}, isDocDataRequired = undefined }) => {
 		if (searchValue) {
 			setPage(1);
 		}
@@ -17,11 +20,12 @@ const useListShipmentPendingTasks = () => {
 		try {
 			await trigger({
 				params: {
-					filters: {
-						q: (query || '').trim() || undefined,
+					q       : (query || '').trim() || undefined,
+					filters : {
 					},
 					...filter,
-					assignedStakeholder : 'service_ops1',
+					assignedStakeholder : 'ground_ops',
+					isDocDataRequired   : isDocDataRequired || undefined,
 					page,
 					sort_type           : 'desc',
 				},
@@ -37,9 +41,9 @@ const useListShipmentPendingTasks = () => {
 	}, [searchValue]);
 
 	useEffect(() => {
-		listAPi();
+		listAPi({});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [page, query]);
 
 	// useEffect(() => {
 	// 	setFinalList([]);

@@ -37,10 +37,9 @@ const tabsComponentMapping = {
 	completed_awb    : CompletedTasks,
 };
 
-function Air() {
+function Air({ setGenerate, setItem }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
 	const [filters, setFilters] = useState({});
-	const [show, setShow] = useState(false);
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
@@ -48,11 +47,12 @@ function Air() {
 		setActiveTab(view);
 	};
 
-	const { data, loading, listAPi } = useListShipmentPendingTasks();
+	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks();
 
 	useEffect(() => {
 		// if (activeTab === 'new_awb') { listAPi(); }
-		listAPi(filters);
+		if (activeTab === 'new_awb') { listAPi({ filter: filters }); }
+		if (activeTab === 'approval_pending') { listAPi({ filter: filters, isDocDataRequired: true }); }
 	}, [activeTab, JSON.stringify(filters)]);
 
 	return (
@@ -82,15 +82,27 @@ function Air() {
 			</div>
 			<div className={styles.filters_container}>
 				<Input
+					value={searchValue}
 					suffix={<IcMSearchlight className="search_icon" />}
 					className={styles.input_search}
 					style={{ width: '260px', height: '26px' }}
 					placeholder="Search by SID or AWB Number"
 					type="text"
+					onChange={(val) => {
+						setSearchValue(val);
+					}}
 				/>
-				<Filters listAPi={listAPi} setFilters={setFilters} />
+				<Filters setFilters={setFilters} filters={filters} />
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={activeTab} data={data} loading={loading} />}
+			{ActiveTabComponent && (
+				<ActiveTabComponent
+					key={activeTab}
+					data={data}
+					loading={loading}
+					setGenerate={setGenerate}
+					setItem={setItem}
+				/>
+			)}
 		</div>
 	);
 }
