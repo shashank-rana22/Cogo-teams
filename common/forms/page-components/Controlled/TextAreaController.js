@@ -1,8 +1,8 @@
-import { Select } from '@cogoport/components';
+import { Textarea } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function SelectController(props) {
+function TextAreaController(props) {
 	const {
 		name, control, rules, value, ...rest
 	} = props;
@@ -14,18 +14,17 @@ function SelectController(props) {
 			name={name}
 			defaultValue={value}
 			rules={rules}
-			render={({ field: { onChange, onBlur, value : newValue } }) => (
-				<Select
-					{...rest}
-					key={name}
+			render={({ field: { onChange, onBlur, value: newValue } }) => (
+				<Textarea
 					id={name}
+					key={name}
 					onChange={onChange}
-					value={newValue}
+					value={newValue || ''}
 					onBlur={onBlur}
-					data-test-value={value}
+					{...rest}
 				/>
 			)}
 		/>
 	);
 }
-export default SelectController;
+export default TextAreaController;
