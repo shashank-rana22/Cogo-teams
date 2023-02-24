@@ -50,7 +50,6 @@ function MessageConversations({
 	} = useGetEmojiList({ activeMessageCard });
 
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
-	console.log('draftUploadedFile:', draftUploadedFile);
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
 
@@ -341,7 +340,7 @@ function MessageConversations({
 								}
 							}}
 							style={{
-								cursor: !hasPermissionToEdit
+								cursor: !hasPermissionToEdit || isEmpty(draftMessage?.trim())
 									? 'not-allowed'
 									: 'pointer',
 							}}
