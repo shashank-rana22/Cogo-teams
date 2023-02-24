@@ -6,14 +6,14 @@ import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
 function Calendar({ calendarType }) {
-	const [firstRender, setFirstRender] = useState(0);
 	const [pagination, setPagination] = useState(0);
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState('');
-	const [clickDir, setClickDir] = useState(0);
+	const [scroll, setScroll] = useState('');
+	const [resetDiv, setResetDiv] = useState(true);
 
 	const calendarRef = useRef();
-	const numberOfDays = 14;
+	const numberOfDays = 30;
 	const numberOfMonthsForWeeks = 2;
 
 	const FORMAT_TYPE = {
@@ -112,38 +112,42 @@ function Calendar({ calendarType }) {
 	};
 
 	useEffect(() => {
-		if (firstRender && (clickDir === 1))calendarRef.current.style = 'transform:translate(10px,0);transition: 0.2s;';
-		else if (firstRender && (clickDir === 2))calendarRef.current.style = 'transform:translate(-10px,0);transition: 0.2s;';
-		setTimeout(() => {
-			if (calendarType === 'day') processData(calcDate);
-			else if (calendarType === 'month') processData(calcMonth);
-			else loadWeeks();
-		}, 2000);
+		if (calendarType === 'day') processData(calcDate);
+		else if (calendarType === 'month') processData(calcMonth);
+		else loadWeeks();
 	}, [calendarType, pagination]);
 
 	useEffect(() => {
-		if (firstRender && (clickDir === 1))calendarRef.current.style = 'transform:translate(-10px,0);transition: 0.2s;';
-		else if (firstRender && (clickDir === 2))calendarRef.current.style = 'transform:translate(10px,0);transition: 0.2s;';
-		if (calendarData.length > 0) {
-			setTimeout(() => {
-				if (firstRender)calendarRef.current.style = 'transform:translate(0px,0);transition: 0.2s;';
-				setFirstRender(1);
-			}, 2000);
-		}
-	}, [calendarData]);
+		setResetDiv(true);
+		setResetDiv(false);
+	}, [setCalendarData]);
 
 	return (
 		<div className={styles.calendar}>
-			<button onClick={() => { setPagination(pagination + 1); setClickDir(1); }} className={styles.navBtn}>
+			<button
+				onClick={() => setScroll('right')}
+				className={styles.navBtn}
+				disabled={scroll === 'right'}
+			>
 				<IcMArrowDoubleLeft />
 			</button>
 			<div ref={calendarRef} className={styles.calendarEntity}>
-				<CalendarEntity calendarData={calendarData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+				<CalendarEntity
+					calendarData={calendarData}
+					selectedItem={selectedItem}
+					setSelectedItem={setSelectedItem}
+					scroll={scroll}
+					setScroll={setScroll}
+					resetDiv={resetDiv}
+				/>
 			</div>
 			<button
-				disabled={pagination === 0}
-				onClick={() => { setPagination(pagination - 1); setClickDir(2); }}
-				className={`${styles.navBtn} ${(pagination === 0) ? styles.inactive : ''}`}
+				disabled={scroll === 'left'
+				// || pagination === 0
+			}
+				onClick={() => { setScroll('left'); }}
+				className={`${styles.navBtn} 
+				`}
 			>
 				<IcMArrowDoubleRight />
 			</button>

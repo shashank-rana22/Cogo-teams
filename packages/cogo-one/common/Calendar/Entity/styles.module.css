@@ -5,6 +5,9 @@
     flex:1;
     display: flex;
     gap: 10px;
+
+    width: 300%;
+    transform: translateX(-33.3%);
 }
 
 .dateContainer{
