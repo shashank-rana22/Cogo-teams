@@ -4,6 +4,7 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { DEFAULT_PILLS_ITEMS } from '../constant';
 import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
 
 import styles from './styles.module.css';
@@ -19,29 +20,6 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 		setSelectPill,
 		inputValue,
 	});
-
-	const DEFAULT_PILLS_ITEMS = [
-		{
-			label : 'Introductory',
-			value : 'introductory',
-		},
-		{
-			label : 'Sales',
-			value : 'sales',
-		},
-		{
-			label : 'Rate enquiry',
-			value : 'rate_enquiry',
-		},
-		{
-			label : 'Other',
-			value : 'other',
-		},
-		{
-			label : 'Payment recovery',
-			value : 'payment_recovery',
-		},
-	];
 
 	const handleSelect = (val) => {
 		setSelectPill((prev) => {
@@ -79,21 +57,18 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 						<div className={styles.feed_title}>Feedback</div>
 						<div className={styles.feed_head}>Reason for contact ?</div>
 						<div className={styles.pill_div}>
-							{DEFAULT_PILLS_ITEMS.map((item) => {
-								const { label, value } = item;
-								return (
-									<div
-										role="presentation"
-										className={cl`${styles.pills} ${(selectPill === value)
-											? styles.active_pill : ''}`}
-										onClick={() => handleSelect(value)}
-									>
-										{(selectPill === value) && <IcMTick width={20} height={20} />}
-										{label}
-									</div>
+							{DEFAULT_PILLS_ITEMS.map(({ label, value }) => (
+								<div
+									role="presentation"
+									className={cl`${styles.pills} ${(selectPill === value)
+										? styles.active_pill : ''}`}
+									onClick={() => handleSelect(value)}
+								>
+									{(selectPill === value) && <IcMTick width={20} height={20} />}
+									{label}
+								</div>
 
-								);
-							})}
+							))}
 						</div>
 						{showError && !selectPill && (
 							<div className={styles.error_message}>Select an option</div>
