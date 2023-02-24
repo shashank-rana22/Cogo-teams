@@ -1,4 +1,4 @@
-import workScopes from '../../../../commons/utils/work-scopes.json';
+import workScopes from '../../../../utils/work-scopes.json';
 
 const controls = [
 	{

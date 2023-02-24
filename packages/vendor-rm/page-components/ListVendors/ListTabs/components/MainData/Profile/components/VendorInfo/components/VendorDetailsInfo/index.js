@@ -14,7 +14,10 @@ function VendorDetailsInfo({
 		business_name,
 		registration_proof_url,
 		company_type,
+		city,
 	} = data?.vendor_details || {};
+
+	const { name } = city || {};
 
 	const checkVerified = (title, value) => {
 		if (title === 'GST Certificate') {
@@ -51,11 +54,11 @@ function VendorDetailsInfo({
 
 	const details = [
 		{ label: 'Country of Registration', value: country?.name },
-		{ label: 'GST No.', value: startCase(registration_number) },
-		{ label: 'Organisation Name', value: startCase(business_name) },
+		{ label: 'GST No.', value: registration_number },
+		{ label: 'Organisation Name', value: business_name },
 		{ label: 'GST Certificate', value: registration_proof_url },
 		{ label: 'Type of Company', value: startCase(company_type) },
-		{ label: 'Company Branch', value: 'Mumbai' },
+		{ label: 'Company Branch', value: name },
 	];
 
 	return (

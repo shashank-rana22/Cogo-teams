@@ -3,7 +3,7 @@ import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import formatArrayValues from '../../../../../commons/utils/formatArrayValues';
+import formatArrayValues from '../../../../../utils/formatArrayValues';
 
 import styles from './styles.module.css';
 

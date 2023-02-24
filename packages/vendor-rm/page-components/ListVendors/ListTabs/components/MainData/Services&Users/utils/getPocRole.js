@@ -1,5 +1,5 @@
-import formatArrayValues from '../../../../../../../commons/utils/formatArrayValues';
-import workScopes from '../../../../../../../commons/utils/work-scopes.json';
+import formatArrayValues from '../../../../../../../utils/formatArrayValues';
+import workScopes from '../../../../../../../utils/work-scopes.json';
 
 const getPocRole = (arr) => {
 	const scopeArr = arr.map((val) => {

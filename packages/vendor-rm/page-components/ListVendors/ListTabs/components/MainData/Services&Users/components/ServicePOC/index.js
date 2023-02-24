@@ -4,6 +4,7 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import getOfficeLocation from '../../../../../../../../utils/getOfficeLocation';
 import useGetListVendorPocServices from '../../hooks/useGetListVendorPocServices';
 import getPocRole from '../../utils/getPocRole';
 
@@ -42,6 +43,7 @@ function ServicePOC() {
 			{(allServicesAndPocs || []).map((singleServicePoc) => (
 				<>
 					<div className={styles.head}>
+						{console.log(singleServicePoc, 'singleServicePoc')}
 						{Object.keys(filedsToShow).map((item) => (
 							<div className={styles.fl}>
 								<span className={styles.top}>
@@ -50,7 +52,7 @@ function ServicePOC() {
 								</span>
 								<span className={styles.bottom}>
 									{item === 'cogoport_office_id'
-										? startCase(singleServicePoc?.cogoport_office?.display_name)
+										? getOfficeLocation(singleServicePoc?.cogoport_office_id)
 										: startCase(singleServicePoc?.[item])}
 								</span>
 							</div>

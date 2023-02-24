@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-import formatArrayValues from '../../../../../commons/utils/formatArrayValues';
-import workScopes from '../../../../../commons/utils/work-scopes.json';
+import formatArrayValues from '../../../../../utils/formatArrayValues';
+import workScopes from '../../../../../utils/work-scopes.json';
 
 import styles from './styles.module.css';
 
