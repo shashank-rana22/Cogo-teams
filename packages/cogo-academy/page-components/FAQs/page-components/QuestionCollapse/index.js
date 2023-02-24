@@ -40,6 +40,7 @@ function QuestionsCollapse({ collapse, questions }) {
 				))}
 			</div>
 		</div>
-
 	);
-} export default QuestionsCollapse;
+}
+
+export default QuestionsCollapse;
