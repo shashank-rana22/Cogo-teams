@@ -6,8 +6,8 @@ function Spinner({
 	borderWidth = '4px',
 	outerBorderColor = '#FEF1DF',
 	spinBorderColor = '#FBD69F',
-	width = '100px',
-	height = '100px',
+	width = '60px',
+	height = '60px',
 }) {
 	return (
 		<div
