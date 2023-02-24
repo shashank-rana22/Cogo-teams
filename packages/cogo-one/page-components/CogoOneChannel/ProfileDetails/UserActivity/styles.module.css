@@ -8,6 +8,7 @@
 
 .list_container {
 	height: 75vh;
+	padding-bottom: 14px;
 	margin-top: 10px;
 	overflow-y: auto;
 }
