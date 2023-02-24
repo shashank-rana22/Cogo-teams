@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import EditExpertiseParamsCard from './EditExpertiseParamsCard';
 
 const expertiseParametersControls = {
 	customer_expertise: {
@@ -99,9 +101,14 @@ const expertiseParametersControls = {
 };
 
 function ExpertiseParameters({ expertiseData }) {
-	console.log('expertiseData', expertiseData);
+	const [editMode, setEditMode] = useState(true);
+
 	return (
-		<div>ExpertiseParameters</div>
+		<div>
+			{editMode && (<EditExpertiseParamsCard setEditMode={setEditMode} expertiseData={expertiseData} />)}
+
+		</div>
+
 	);
 }
 
