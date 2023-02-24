@@ -3164,6 +3164,13 @@ const partner = {
 			service_name : 'spot_search',
 		},
 	],
+	announcements: [
+		{
+			api          : 'list_faq_audiences',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+	],
 	okam_dashboard: [
 		{
 			api          : 'list_organizations',

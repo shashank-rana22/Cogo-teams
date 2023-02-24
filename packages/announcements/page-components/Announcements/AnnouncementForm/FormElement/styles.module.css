@@ -1,0 +1,62 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	margin-bottom: 24px;
+
+	:global {
+		.ui_input_container {
+			padding: 0;
+			border: none;
+		}
+
+		.ui_input_control {
+			padding: 4px 8px;
+			font-size: 12px !important;
+			border: 1px solid #dedede;
+			border-radius: 4px;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 12px !important;
+		}
+
+		.ui_select_input_control,
+		.ui_checkbox_container {
+			padding: 0 !important;
+			font-size: 12px !important;
+		}
+
+		.custom-select-input-subcontainer {
+			border: 1px solid #e0e0e0;
+
+			&:hover {
+				border: 1px solid #e74c3c;
+			}
+		}
+
+		.custom-select-input-select-placeholder {
+			font-size: 12px !important;
+		}
+
+		.custom-select-input-select-value {
+			font-size: 12px;
+		}
+
+		.ui_chips_container {
+			flex-wrap: wrap;
+			gap: 14px;
+			margin-top: 6px;
+		}
+
+		.ui_chip_container {
+			min-width: 40px;
+		}
+	}
+}
+
+.label {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 14px;
+	color: #4f4f4f;
+}

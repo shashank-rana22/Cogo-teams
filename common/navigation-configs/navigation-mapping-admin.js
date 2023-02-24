@@ -733,6 +733,18 @@ const navigationMappingAdmin = {
 		main_apis     : ['list_partner_users'],
 		module_type   : 'crm',
 	},
+	announcements: {
+		key           : 'announcements',
+		title         : 'Announcements',
+		href          : '/announcements',
+		as            : '/announcements',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : [
+			...apis.announcements,
+		],
+		module_type: 'dashboards',
+	},
 	faqs: {
 		key           : 'faqs',
 		title         : 'FAQs',

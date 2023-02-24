@@ -41,6 +41,18 @@ function asyncFieldsPartner() {
 		},
 	};
 }
+function asyncFieldsAudiences() {
+	return {
+		labelKey    : 'audience',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_audiences',
+		initialCall : true,
+		params      : {
+			page_limit               : 5,
+			pagination_data_required : true,
+		},
+	};
+}
 function asyncFieldsOrganization() {
 	return {
 		labelKey    : 'business_name',
@@ -178,6 +190,7 @@ export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
 	asyncFieldsPartner,
+	asyncFieldsAudiences,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
