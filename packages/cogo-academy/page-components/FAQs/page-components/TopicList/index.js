@@ -19,7 +19,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 
 	return (
 		<div className={styles.grid_container}>
-			<div style={{ margin: '5px 0', width: '100%', height: '490px' }} className={styles.scrollable}>
+			<div style={{ margin: '5px 0', width: '100%', height: '490px', flex: 1 }} className={styles.scrollable}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary-vertical"
@@ -41,14 +41,12 @@ function TopicList({ tabTitle, searchState = '' }) {
 									</div>
 								</div>
 							)}
-						>
-							{/* <div>This is local search</div> */}
-						</TabPanel>
+						/>
 					))}
 				</Tabs>
 			</div>
 
-			<div>
+			<div style={{ flex: 3.5 }}>
 				{activeTab
 					? (
 						<QuestionsList
