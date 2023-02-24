@@ -18,8 +18,16 @@ function TopicList({ tabTitle, searchState = '' }) {
 	} = useListFaqTopic();
 
 	return (
-		<div className={styles.grid_container}>
-			<div style={{ margin: '5px 0', width: '100%', height: '490px', flex: 1 }} className={styles.scrollable}>
+		<div className={styles.grid_container} style={{ display: 'flex' }}>
+			<div
+				style={{
+					margin : '5px 0',
+					width  : '100%',
+					height : '490px',
+					flex   : 1,
+				}}
+				className={styles.scrollable}
+			>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary-vertical"

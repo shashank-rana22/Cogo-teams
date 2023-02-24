@@ -1,6 +1,4 @@
 .grid_container {
-	display: flex;
-
 	:global {
 		.ui_tabs_container {
 			width: 100%;
