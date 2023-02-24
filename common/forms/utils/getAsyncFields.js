@@ -41,6 +41,55 @@ function asyncFieldsPartner() {
 		},
 	};
 }
+function asyncFieldsOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organizations',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+
+function asyncFieldsOrganizationUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_users',
+		initialCall : false,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncFieldsOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_operators',
+		initialCall : false,
+	};
+}
+
+function asyncFieldsPartnerUsers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_partner_users',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
 
 function asyncFieldsPartnerRoles() {
 	return {
@@ -51,7 +100,61 @@ function asyncFieldsPartnerRoles() {
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
 		},
 	};
 }
-export { asyncFieldsLocations, asyncFieldsLocations2, asyncFieldsPartner, asyncFieldsPartnerRoles };
+
+function asyncFieldsOrganizations() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organizations',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+function asyncFieldsOrganizationUser() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_users',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+function asyncFieldsCampaignSegments() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_segments',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 100,
+		},
+	};
+}
+
+export {
+	asyncFieldsLocations,
+	asyncFieldsLocations2,
+	asyncFieldsPartner,
+	asyncFieldsPartnerRoles,
+	asyncFieldsPartnerUsers,
+	asyncFieldsOrganizations,
+	asyncFieldsOrganizationUser,
+	asyncFieldsCampaignSegments,
+	asyncFieldsOrganization,
+	asyncFieldsOrganizationUsers,
+	asyncFieldsOperators,
+};

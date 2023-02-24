@@ -22,7 +22,7 @@
 }
 
 .accordion[aria-expanded="true"] {
-	max-height: 100px;
+	min-height: fit-content;
 	margin-top: 10px;
 	overflow: hidden;
 	transition: max-height 0.4s;
@@ -41,6 +41,7 @@
 		width: 30px;
 		height: 30px;
 		border-radius: 12px;
+		object-fit: cover;
 	}
 }
 
@@ -100,8 +101,8 @@
 
 .active_item:hover {
 	background-color: #fef199;
-	border-bottom-right-radius: 6px;
-	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
 }
 
 .inner_container {
@@ -148,4 +149,12 @@
 .container {
 	background: #fffce6;
 	border-radius: 11px;
+}
+
+.popover {
+	position: absolute;
+	top: 20%;
+	margin: 20px;
+	background: #fff;
+	border-radius: 1px solid #333;
 }

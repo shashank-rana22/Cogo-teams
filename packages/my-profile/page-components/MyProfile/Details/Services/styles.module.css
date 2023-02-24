@@ -1,0 +1,71 @@
+.card_container {
+	padding: 12px;
+}
+
+.label_text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.value_text {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.header_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.pills_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.service_tag {
+	width: fit-content;
+	padding: 2px 5px;
+	margin: 4px 14px 6px 0;
+	font-size: 12px;
+	color: #333;
+	background: #fef3e9;
+	border-radius: 6px;
+}
+
+.empty_text {
+	display: flex;
+	align-items: flex-end;
+	font-size: 14px;
+	color: #bdbdbd;
+}
+
+.combined_container {
+	display: flex;
+	margin-top: 10px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin-bottom: 4px;
+	}
+}
+
+.location_container {
+	flex: 1;
+}
+
+.services {
+	margin-top: 16px;
+}
+
+.label_text_reporting {
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+
+	@media (max-width: 768px) {
+		margin-top: 8px;
+	}
+}
