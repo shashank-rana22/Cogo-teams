@@ -1,0 +1,20 @@
+.container {
+    height: 100px;
+    display: flex;
+}
+
+.left_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_container {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.button {
+    margin: 0 4px;
+}

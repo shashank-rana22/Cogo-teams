@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 // import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+import Header from './Header';
 import styles from './styles.module.css';
 import ThisMonth from './ThisMonth';
 import ThisQuarter from './ThisQuarter';
@@ -40,6 +41,10 @@ function KamExpertise() {
 			<section className={styles.heading_container}>
 				KAM Expertise
 			</section>
+
+			<div>
+				<Header />
+			</div>
 
 			<div className={styles.tab_list}>
 				<Tabs
