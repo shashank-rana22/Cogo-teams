@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { doc, addDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -29,13 +31,18 @@ const useSendChat = ({
 	}
 
 	const sendChatMessage = async () => {
-		const newMessage = draftMessages?.[id] || '';
+		const newMessage = draftMessages?.[id]?.trim() || '';
+
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
 			...draftUploadedFiles?.[id],
 		});
 
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
 		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
+
+		if (isEmpty(newMessage?.trim())) {
+			return;
+		}
 
 		if (newMessage || finalUrl) {
 			const adminChat = {

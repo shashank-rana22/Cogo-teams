@@ -58,3 +58,13 @@
 	font-weight: 600;
 	color: #d22b2b;
 }
+
+.error_class {
+	.ui_select_display_container:hover {
+		border: 1px solid blue !important;
+	}
+
+	.ui_select_display_container:focus {
+		border: 1px solid blue !important;
+	}
+}
