@@ -9,6 +9,7 @@
     margin:12px 0;
     /* background:#fff; */
 }
+
 .card_container{
     width:100%;
     margin:16px 24px 16px 0;
@@ -88,15 +89,9 @@
     width:100%;
 }
 
-.leaderboard_container{
-}
 
 .filters{
     /* display:flex;
     /* justify-content:flex-end; */
     width:100%; 
-}
-
-.list{
-
 }

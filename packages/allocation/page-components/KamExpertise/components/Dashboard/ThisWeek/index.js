@@ -1,11 +1,11 @@
-import { Card } from '@cogoport/components';
+import { Card, Tooltip } from '@cogoport/components';
 import { IcMArrowNext, IcMInfo, IcMAgentManagement, IcAHelpingHand011 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import BadgeFilter from '../BadgeFilter/BadgeFilter';
+import BadgeFilter from '../BadgeFilter';
 
-import CardContent from './Card/CardContent';
-import LeaderboardList from './LeaderboardList/LeaderboardList';
+import CardContent from './Card';
+import LeaderboardList from './LeaderboardList';
 import styles from './styles.module.css';
 
 function ThisWeek() {
@@ -69,6 +69,8 @@ function ThisWeek() {
 
 	const [cardData, setCardData] = useState();
 
+	// const [visible, setVisible] = useState(false);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.cards}>
@@ -112,16 +114,27 @@ function ThisWeek() {
 							overview_data.map((data) => (
 								<div className={styles.card_container}>
 									<Card
+										key={data.title}
 										themetype="primary"
 										disabled={false}
 										className={styles.card_item}
 									>
 										<Card.Title title={(
 											<div className={styles.overview_card_title}>
-												<span style={{}}>{data.icon}</span>
+												<span>{data.icon}</span>
 												<span style={{ padding: '0 10px' }}><h3>{data.title}</h3></span>
-												<span style={{ paddingTop: '4px' }}>
-													<IcMInfo width={16} height={16} />
+												<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
+													<Tooltip
+														// visible={visible}
+														content={<div>hjhjjh</div>}
+														placement="right"
+														// caret
+													>
+														<IcMInfo
+															width={16}
+															height={16}
+														/>
+													</Tooltip>
 												</span>
 											</div>
 										)}
