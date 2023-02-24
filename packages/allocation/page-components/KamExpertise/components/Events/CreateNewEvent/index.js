@@ -1,11 +1,16 @@
-import Form from '../../../../../common/Form';
+import { Button } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
+
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateNewEvent from '../../../hooks/useCreateNewEvent';
 
 import styles from './styles.module.css';
 
 function CreateNewEvent() {
-	const { controls, formProps } = useCreateNewEvent();
+	const {
+		getAddRuleControls,
+		getAttributeRuleControls, formProps,
+	} = useCreateNewEvent();
 
 	const {
 		control, formState: { errors },
@@ -27,14 +32,14 @@ function CreateNewEvent() {
 					</div>
 				</div>
 
-				<div style={{ display: 'flex' }}>
+				<div className={styles.rule_and_attribute}>
 					<div className={styles.add_rule_container}>
 						<div className={styles.add_rule_text}>
 							Add Rule
 						</div>
 
-						<section className={styles.form_container}>
-							{controls.map((controlItem) => {
+						<section className={styles.rule_form_container}>
+							{getAddRuleControls.map((controlItem) => {
 								const el = { ...controlItem };
 
 								const Element = getFieldController(el.type);
@@ -45,17 +50,18 @@ function CreateNewEvent() {
 									<div className={styles.form_group}>
 										<span className={styles.label}>{el.label}</span>
 
-										<Element
-											{...el}
-											key={el.name}
-											control={control}
-											id={`${el.name}_input`}
-										/>
+										<div className={styles.input_group}>
+											<Element
+												{...el}
+												key={el.name}
+												control={control}
+												id={`${el.name}_input`}
+											/>
+										</div>
 
 										<div className={styles.error_message}>
 											{errors?.[el.name]?.message}
 										</div>
-
 									</div>
 								);
 							})}
@@ -63,11 +69,66 @@ function CreateNewEvent() {
 					</div>
 
 					<div className={styles.account_attributes}>
-						Account Attribute
-					</div>
+						<div className={styles.account_attribute_text}>
+							Account Attribute
+							{' '}
+							<IcMInfo />
+						</div>
 
+						<section className={styles.row_container}>
+							{getAttributeRuleControls.map((controlItem, index) => {
+								const el = { ...controlItem };
+
+								const Element = getFieldController(el.type);
+
+								if (!Element) return null;
+
+								return (
+									<div className={styles.attribute_form_group}>
+										<span className={styles.label}>{el.label}</span>
+
+										<div
+											className={`${styles.input_group} 
+										${index < 3 ? styles.margin_bottom : ''}`}
+										>
+											<Element
+												{...el}
+												key={el.name}
+												control={control}
+												id={`${el.name}_input`}
+											/>
+										</div>
+
+										<div className={styles.error_message}>
+											{errors?.[el.name]?.message}
+										</div>
+									</div>
+								);
+							})}
+						</section>
+					</div>
+				</div>
+
+				<div className={styles.btn_container}>
+					<Button
+						size="md"
+						type="button"
+						themeType="tertiary"
+				// onClick={onCloseModal}
+						style={{ marginRight: '10px' }}
+					>
+						Cancel
+					</Button>
+
+					<Button
+						size="md"
+						type="submit"
+					>
+						Save
+					</Button>
 				</div>
 			</div>
+
 		</div>
 	);
 }

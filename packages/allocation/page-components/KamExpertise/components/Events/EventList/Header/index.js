@@ -38,7 +38,7 @@ function Header(props) {
 						size="md"
 						placeholder="Search"
                         // setGlobalSearch={setSearchValue}
-				        // debounceQuery={debounceQuery}
+					    // debounceQuery={debounceQuery}
 				        // value={searchValue}
 				        // disabled={disabled}
 						className={styles.search_bar}
