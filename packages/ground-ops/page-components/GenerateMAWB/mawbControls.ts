@@ -289,8 +289,7 @@ const mawbControls = () => ({
 			name      : 'iataCode',
 			type      : 'text',
 			className : 'primary lg',
-			label     : "Agent's Iata Code:*",
-			value     : '14-3-4525/0005',
+			label     : "Agent's Iata Code",
 			span      : 5,
 			rules     : {
 				required: 'Iata Code is Required',
@@ -391,7 +390,6 @@ const mawbControls = () => ({
 			type      : 'text',
 			className : 'primary lg',
 			label     : 'Declared Value for Carriage:',
-			value     : 'NVD',
 			span      : 5,
 			rules     : {
 				required: 'Carriage Value is Required',
@@ -402,9 +400,8 @@ const mawbControls = () => ({
 			type        : 'text',
 			className   : 'primary lg',
 			span        : 5,
-			label       : 'Issuing Carrier City:*',
-			value       : 'NEW DELHI',
-			placeholder : 'City...',
+			label       : 'Issuing Carrier City',
+			placeholder : 'City',
 			rules       : {
 				required: 'Carrier City is Required',
 			},
@@ -491,8 +488,7 @@ const mawbControls = () => ({
 			name        : 'place',
 			type        : 'text',
 			className   : 'primary lg',
-			value       : 'NEW DELHI',
-			label       : 'At Place:',
+			label       : 'At Place',
 			placeholder : 'Place',
 			rules       : {
 				required: 'Place is Required',

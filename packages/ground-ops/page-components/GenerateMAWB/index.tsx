@@ -59,10 +59,13 @@ function GenerateMAWB({ viewDoc = false, setViewDoc = () => {}, item = {}, edit 
 	];
 
 	useEffect(() => {
-		finalFields.forEach((c) => {
+		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
-
+		setValue('iataCode', '14-3-4525/0005');
+		setValue('declaredValueForCarriage', 'NVD');
+		setValue('city', 'NEW DELHI');
+		setValue('place', 'NEW DELHI');
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

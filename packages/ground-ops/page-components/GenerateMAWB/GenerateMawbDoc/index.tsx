@@ -91,7 +91,7 @@ function GenerateMawb({
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : 'draft_airway_bill',
-			id                  : taskItem?.id,
+			id                  : taskItem?.documentId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
 			pending_task_id     : taskItem?.id,
