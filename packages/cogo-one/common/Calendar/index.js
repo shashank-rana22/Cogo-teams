@@ -14,7 +14,7 @@ function Calendar({ calendarType }) {
 
 	const calendarRef = useRef();
 	const numberOfDays = 10;
-	const numberOfMonthsForWeeks = 3;
+	const numberOfMonthsForWeeks = 2;
 
 	const FORMAT_TYPE = {
 		day: {
@@ -91,7 +91,9 @@ function Calendar({ calendarType }) {
 
 	const loadWeeks = () => {
 		let newWeeks = [];
-		for (let i = pagination * numberOfMonthsForWeeks; i < (pagination + 1) * numberOfMonthsForWeeks; i += 1) {
+		for (let i = pagination * numberOfMonthsForWeeks;
+			i < (pagination * numberOfMonthsForWeeks + (3 * numberOfMonthsForWeeks));
+			i += 1) {
 			const newDate = calcMonth(i);
 			newWeeks = [...newWeeks, ...getWeeksOfMonth(newDate.getMonth(), newDate.getFullYear(), newDate)];
 		}

@@ -4,19 +4,23 @@
     font-style: normal;
     flex:1;
     display: flex;
-    gap: 10px;
+    /* gap: 10px; */
+    justify-content: space-evenly;
 
     width: 300%;
     transform: translateX(-33.3%);
 }
 
 .dateContainer{
-    flex:1;
+    /* flex:1; */
+    padding: 0 25px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 6px;
     padding: auto;
     padding-top:5px;
     height: 50px;
+
+    width:fit-content;
 }
 
 .dayH1{

@@ -12,6 +12,7 @@ export function CalendarEntity({
 	pagination,
 	setPagination,
 }) {
+	const animationTime = 1;
 	const [position, setPosition] = useState(-33.3);
 
 	const calendarRef = useRef();
@@ -20,19 +21,19 @@ export function CalendarEntity({
 		setTimeout(() => {
 			setScroll('');
 			setPagination(pagination + shift);
-		}, 1500);
+		}, (animationTime * 1000) + 400);
 	}
 
 	useEffect(() => {
 		if (scroll === 'right') {
 			calendarRef.current.style = `transform: translateX(${position + 33.3}%);
-			transition: 1.5s;`;
+			transition: ${animationTime}s;`;
 			setPosition(position + 33.3);
 			GetNewData(1);
 		}
 		if (scroll === 'left') {
 			calendarRef.current.style = `transform: translateX(${position - 33.3}%);
-			transition: 1.5s;`;
+			transition: ${animationTime}s;`;
 			setPosition(position - 33.3);
 			GetNewData(-1);
 		}
