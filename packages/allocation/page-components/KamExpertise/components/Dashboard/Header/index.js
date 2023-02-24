@@ -23,10 +23,10 @@ function index() {
 				</div>
 			</div>
 			<div className={styles.button_container}>
-				<Button size="lg" themeType="secondary" className={styles.button}>View Badges</Button>
-				<Button size="lg" themeType="secondary" className={styles.button}>View Events</Button>
-				<Button size="lg" themeType="secondary" className={styles.button}>View All Configs</Button>
-				<Button size="lg" themeType="primary" className={styles.button}>Configure Now</Button>
+				<Button size="md" themeType="secondary" className={styles.button}>View Badges</Button>
+				<Button size="md" themeType="secondary" className={styles.button}>View Events</Button>
+				<Button size="md" themeType="secondary" className={styles.button}>View All Configs</Button>
+				<Button size="md" themeType="primary" className={styles.button}>Configure Now</Button>
 			</div>
 		</div>
 	);
