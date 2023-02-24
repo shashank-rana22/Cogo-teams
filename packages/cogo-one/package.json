@@ -1,6 +1,6 @@
 {
   "name": "@cogoport/cogo-one",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Package for Cogo One",
   "private": true,
   "main": "./index.js",
