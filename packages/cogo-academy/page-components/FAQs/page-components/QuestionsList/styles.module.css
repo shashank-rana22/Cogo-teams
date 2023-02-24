@@ -63,3 +63,9 @@
   display: flex;
   justify-content: center;
 }
+
+.empty_state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

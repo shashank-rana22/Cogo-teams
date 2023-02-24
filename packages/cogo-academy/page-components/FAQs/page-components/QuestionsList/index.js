@@ -40,7 +40,6 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 				searchquestion={searchquestion}
 				setSearchquestion={setSearchquestion}
 				searchState={searchState}
-
 			/>
 		);
 	}
