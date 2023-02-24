@@ -10,9 +10,17 @@ import QuestionsCollapse from '../QuestionCollapse';
 
 import styles from './styles.module.css';
 
+const FEEDBACK_MAPPING = {
+	true  : 'liked',
+	false : 'disliked',
+};
+
 function Questions({ questions }) {
 	const [open, setOpen] = useState(false);
-	const [isLiked, setIsLiked] = useState('');
+
+	const is_positive = false;
+
+	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
 	const [show, setShow] = useState(false);
 
 	const { data: answerData } = useGetQuestions({ id: questions.id });
