@@ -15,6 +15,18 @@
 	padding: 0 4px;
 }
 
+.view {
+	color: green;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.view_flex {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
 .rates_data {
 	display: flex;
 	flex-direction: column;
@@ -53,6 +65,7 @@
 
 .document_flex {
 	display: flex;
+	gap: 8px;
 	align-items: center;
 	text-align: center;
 }
