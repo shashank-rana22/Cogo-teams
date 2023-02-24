@@ -33,6 +33,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateL
 						openNewTab={openNewTab}
 						ORG_PAGE_URL={ORG_PAGE_URL}
 						updateLeaduser={updateLeaduser}
+						orgId={orgId}
 					/>
 				)}
 			</div>

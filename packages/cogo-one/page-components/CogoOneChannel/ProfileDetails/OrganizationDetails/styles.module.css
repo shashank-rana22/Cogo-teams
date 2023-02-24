@@ -26,6 +26,8 @@
 	display: flex;
 	flex-direction: column;
 	width: 80%;
+	text-overflow: ellipsis;
+	word-break: break-all;
 }
 
 .name {
@@ -97,6 +99,10 @@
 	justify-content: flex-end;
 	width: 29%;
 	max-height: 19px;
+
+	@media (max-width: 1280px) {
+		width: 31%;
+	}
 }
 
 .loader_div {
