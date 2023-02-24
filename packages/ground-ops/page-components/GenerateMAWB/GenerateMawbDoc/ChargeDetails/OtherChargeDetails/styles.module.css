@@ -102,18 +102,18 @@
 
 .block {
 	display: flex;
-	border: 1px #333 solid;
+	border: 1px #8B8B8B solid;
 }
 
 .block_row {
 	display: flex;
-	border: 1px #333 solid;
+	border: 1px #8B8B8B solid;
 }
 
 .block_col {
 	display: flex;
 	flex-direction: column;
-	border: 1px #333 solid;
+	border: 1px #8B8B8B solid;
 
 	&.other_charge_container {
 		flex: 1.2;

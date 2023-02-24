@@ -141,7 +141,7 @@
 
 .block {
 	display: flex;
-	border: 1px #333 solid;
+	border: 1px #8B8B8B solid;
 	&.block_flex_border {
 		flex: 1;
 		border-top: 0px;

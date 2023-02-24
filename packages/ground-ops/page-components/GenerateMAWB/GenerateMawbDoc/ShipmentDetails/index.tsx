@@ -407,62 +407,63 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</p>
 						</div>
 						<div className={cl`
-						${styles.block_col} 
-						${styles.blockcol_in_flex}
-						${styles.blockcol_border}
-					`}
+							${styles.block_col} 
+							${styles.blockcol_in_flex}
+							${styles.blockcol_border}
+						`}
 						>
 							<div className={cl`
-						${styles.flex_row} 
-						${styles.referrence_optional_flight_date_top}
-					`}
+								${styles.flex_row} 
+								${styles.referrence_optional_flight_date_top}
+							`}
 							>
 								<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right}
-						${styles.requested_flight_date_top_left}
-					`}
+									${styles.flex} 
+									${styles.flex_border_right}
+									${styles.requested_flight_date_top_left}
+								`}
 								/>
 								<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_right}
-						${styles.flex_in_flex}
-						${styles.flex_border_solid}
-					`}
+									${styles.flex} 
+									${styles.flex_border_right}
+									${styles.flex_in_flex}
+									${styles.flex_border_solid}
+								`}
 								>
 									<div className={cl`
-					${styles.flex} 
-					${styles.requested_flight_date_text}
-				`}
+										${styles.flex} 
+										${styles.requested_flight_date_text}
+									`}
 									>
 										<p style={{ fontSize: 9 }}>Requested Flight/Date</p>
 									</div>
 								</div>
 								<div className={cl`
-					${styles.flex} 
-					${styles.requested_flight_date_top_right}
-				`}
+									${styles.flex} 
+									${styles.requested_flight_date_top_right}
+								`}
+								/>
+							</div>
+							<div className={cl`
+									${styles.flex_row} 
+									${styles.requested_wtval_other}
+								`}
+							>
+								<div className={cl`
+										${styles.flex}
+										${styles.flex_border_right}
+										${styles.flex_in_flex}
+									`}
 								/>
 								<div className={cl`
-					${styles.flex_row} 
-					${styles.requested_wtval_other}
-				`}
-								>
-									<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.flex_in_flex}
-				`}
-									/>
-									<div className={cl`
-					${styles.flex} 
-					${styles.flex_in_flex}
-				`}
-									/>
+										${styles.flex} 
+										${styles.flex_in_flex}
+									`}
+								/>
 
-								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 
