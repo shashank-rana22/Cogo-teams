@@ -7,7 +7,6 @@ import React, { useEffect } from 'react';
 import chartData from '../../../configurations/chart-data';
 import { PRIMARY_STATS, USER_STATUS, INTENT_LEADERBOARD } from '../../../configurations/primary-stats';
 import { imgURL } from '../../../constants/image-urls';
-import { CHART_ICON } from '../../../constants/monitoring';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 import { strToKMBT } from '../../../utils/strToKMBT';
 
@@ -19,6 +18,7 @@ function Stats(props = {}) {
 
 	useEffect(() => {
 		getUserSats();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const {
@@ -188,9 +188,18 @@ function Stats(props = {}) {
 						!chatLoading ? <Charts GraphData={GraphData} hideChart={hideChart} />
 							: (
 								<div className={styles.chart_empty}>
-									<Placeholder height="100px" className={styles.placeholder_element}>
-										{CHART_ICON}
-									</Placeholder>
+									<Placeholder height="1px" margin="10px 0px" />
+									<Placeholder height="1px" margin="10px 0px" />
+									<Placeholder height="1px" margin="10px 0px" />
+									<Placeholder height="1px" margin="10px 0px" />
+									<Placeholder height="1px" margin="10px 0px" />
+
+									<object
+										data={imgURL.empty_bot}
+										type="image/svg+xml"
+										aria-label="Loading Chart..."
+										className={styles.empty_bot_svg}
+									/>
 								</div>
 							)
 					}

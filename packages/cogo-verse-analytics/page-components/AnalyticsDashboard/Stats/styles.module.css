@@ -291,11 +291,17 @@
 }
 
 .chart_empty {
+	position: relative;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
 	height: 100%;
 	padding: 20px 15px;
+}
+
+.empty_bot_svg {
+	position: absolute;
 }
 
 .legend_field {

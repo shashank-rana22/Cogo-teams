@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -23,7 +22,7 @@ const useGetCogoverseChatData = ({ country = {}, date = {} }) => {
 				},
 			});
 		} catch (err) {
-			// Toast.error(getApiErrorString(err));
+			Toast.error(err?.message);
 		}
 	};
 

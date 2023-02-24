@@ -1,10 +1,11 @@
 export const strToKMBT = (val) => {
+	let newVal = val;
 	let cnt = 0;
-	while (val > 999) {
-		val /= 1000;
+	while (newVal > 999) {
+		newVal /= 1000;
 		cnt += 1;
 	}
-	let num = Number(val).toFixed(2);
+	let num = Number(newVal).toFixed(2);
 	if (num - Math.floor(num) === 0) {
 		num = Math.floor(num);
 	}
@@ -17,5 +18,5 @@ export const strToKMBT = (val) => {
 	} if (cnt > 3) {
 		return (`${num}T`);
 	}
-	return `${val}`;
+	return `${newVal}`;
 };

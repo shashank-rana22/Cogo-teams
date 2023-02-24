@@ -70,6 +70,7 @@ function MapView(props = {}) {
 			globeGL.current.scene().children[1].intensity = 1.25;
 			globeGL.current.scene().children[2].intensity = 0.25;
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [globeGL?.current, CountryMobileCode, date, circleTab]);
 
 	const resetGlobePosition = () => {
@@ -110,6 +111,7 @@ function MapView(props = {}) {
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						maxDate={maxDate}
+						disable={statsLoading || globeLoading || chatLoading}
 					/>
 
 				</div>

@@ -16,6 +16,7 @@ function TheGLobe(
 
 	},
 ) {
+	const globeRef = globeGL;
 	const first_coordinate = markerData[0] || {};
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
 
@@ -33,40 +34,42 @@ function TheGLobe(
 	// Globe Methods ------------------------------------------------------------------------------
 
 	useEffect(() => {
-		if (!isEmpty(globeGL?.current)) {
-			globeGL.current.controls().autoRotate = true;
-			globeGL.current.controls().autoRotateSpeed = 0.5;
-			globeGL.current.renderer().alpha = true;
-			globeGL.current.controls().maxDistance = globeGL.current.getGlobeRadius() * 4;
-			globeGL.current.controls().minDistance = globeGL.current.getGlobeRadius() * 2.35;
+		if (!isEmpty(globeRef?.current)) {
+			globeRef.current.controls().autoRotate = true;
+			globeRef.current.controls().autoRotateSpeed = 0.5;
+			globeRef.current.renderer().alpha = true;
+			globeRef.current.controls().maxDistance = globeRef.current.getGlobeRadius() * 4;
+			globeRef.current.controls().minDistance = globeRef.current.getGlobeRadius() * 2.35;
 		}
-	}, [globeGL?.current]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [globeRef?.current]);
 
 	useEffect(() => {
 		// experiments
-		if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
-			&& !isEmpty(globeGL?.current?.scene()?.children[1]?.intensity)
-			&& !isEmpty(globeGL?.current?.scene()?.children[2]?.intensity))) {
-			globeGL.current.scene().children[1].intensity = 1.25;
-			globeGL.current.scene().children[2].intensity = 0.25;
+		if (!isEmpty(globeRef?.current?.scene()?.children[2]?.visible
+			&& !isEmpty(globeRef?.current?.scene()?.children[1]?.intensity)
+			&& !isEmpty(globeRef?.current?.scene()?.children[2]?.intensity))) {
+			globeRef.current.scene().children[1].intensity = 1.25;
+			globeRef.current.scene().children[2].intensity = 0.25;
 		}
-	}, [globeGL?.current, CountryMobileCode, circleTab, date]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [globeRef?.current, CountryMobileCode, circleTab, date]);
 
 	// Globe Functions
 
 	const startRotation = () => {
-		if (!isEmpty(globeGL?.current)) {
-			globeGL.current.controls().autoRotateSpeed = 0.5;
+		if (!isEmpty(globeRef?.current)) {
+			globeRef.current.controls().autoRotateSpeed = 0.5;
 		}
 	};
 	const stopRotation = () => {
-		if (!isEmpty(globeGL?.current)) {
-			globeGL.current.controls().autoRotateSpeed = 0;
+		if (!isEmpty(globeRef?.current)) {
+			globeRef.current.controls().autoRotateSpeed = 0;
 		}
 	};
 	const setLocation = (locationData = {}, rotationSpeed = 0) => {
-		if (!isEmpty(globeGL?.current)) {
-			globeGL.current.pointOfView(locationData, rotationSpeed);
+		if (!isEmpty(globeRef?.current)) {
+			globeRef.current.pointOfView(locationData, rotationSpeed);
 		}
 	};
 
@@ -82,6 +85,7 @@ function TheGLobe(
 			setLocation(defaultMapCenter, pointRotationSpeed);
 			startRotation();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [CountryMobileCode]);
 
 	const markerSize = () => {
@@ -116,7 +120,7 @@ function TheGLobe(
 			<Globe
 				width={480}
 				height={480}
-				ref={globeGL}
+				ref={globeRef}
 				waitForGlobeReady
 				backgroundColor={GLOBE_COLORS[colorMode].bg}
 				atmosphereColor={GLOBE_COLORS[colorMode].atmos}
