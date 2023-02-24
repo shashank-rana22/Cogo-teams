@@ -1,8 +1,8 @@
 import { Modal, Button, Badge } from '@cogoport/components';
 import { useForm, InputController, CheckboxController } from '@cogoport/forms';
-import { IcMLike, IcCDislike } from '@cogoport/icons-react';
+import { IcCLike, IcCDislike } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import { React, useState } from 'react';
 
 import useGetQuestions from '../../hooks/useGetQuestions';
@@ -11,14 +11,11 @@ import QuestionsCollapse from '../QuestionCollapse';
 import styles from './styles.module.css';
 
 function Questions({ questions }) {
-	const [open, setOPen] = useState(false);
+	const [open, setOpen] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
-	const [id, setId] = useState(questions.id);
 	const [show, setShow] = useState(false);
 
-	const {
-		data,
-	} = useGetQuestions({ id });
+	const { data: answerData } = useGetQuestions({ id: questions.id });
 
 	const { handleSubmit, formState: { errors }, control } = useForm();
 
@@ -28,20 +25,20 @@ function Questions({ questions }) {
 	});
 
 	const onClose = () => {
-		setShow(false);
 		setIsLiked('');
+		setShow(false);
 	};
 
 	const toggle = () => {
-		setOPen(!open);
+		setOpen(!open);
 	};
-	const formatDate = data?.updated_at;
 
-	const onClickLikeButton = async () => {
+	const onClickLikeButton = async ({ id }) => {
 		try {
 			const payload = {
-				faq_answer_id : '',
+				faq_answer_id : id,
 				is_positive   : true,
+				status        : 'active',
 			};
 
 			await trigger({
@@ -64,11 +61,14 @@ function Questions({ questions }) {
 			}
 			await trigger({
 				data: {
-					faq_answer_id : '',
+					faq_answer_id : answerData?.answers[0]?.id,
 					is_positive   : false,
 					remark,
+					status        : 'active',
 				},
 			});
+
+			setShow(false);
 		} catch (error) {
 			console.log('error :: ', error);
 		}
@@ -82,11 +82,11 @@ function Questions({ questions }) {
 			{open && (
 				<>
 					<div className={styles.heading_container}>
-						{startCase(data?.answers[0]?.answer)}
+						{startCase(answerData?.answers[0]?.answer)}
 					</div>
 					<div>
 						<span className={styles.sidetext}>
-							{data?.answers[0]?.upvote_count}
+							{answerData?.answers[0]?.upvote_count}
 							{' '}
 							people found it useful.
 						</span>
@@ -94,7 +94,7 @@ function Questions({ questions }) {
 						<span className={styles.sidetext}>
 							Last updated on:
 							{' '}
-							{formatDate}
+							{format(answerData?.updated_at, 'dd MMM yyyy')}
 						</span>
 					</div>
 					<div className={styles.flex_items}>
@@ -103,11 +103,11 @@ function Questions({ questions }) {
 							role="presentation"
 							className={styles.like_container}
 							onClick={() => {
-								onClickLikeButton();
+								onClickLikeButton({ id: answerData?.answers[0]?.id });
 							}}
 						>
-							<Badge placement="left" color="green" size="md" text={data?.answers[0]?.upvote_count}>
-								<IcMLike fill={isLiked ? '#9BEFA8' : '#000000'} />
+							<Badge placement="left" color="green" size="md" text={answerData?.answers[0]?.upvote_count}>
+								<IcCLike fill={isLiked ? 'black' : '#f8f5ec'} />
 							</Badge>
 
 						</div>
