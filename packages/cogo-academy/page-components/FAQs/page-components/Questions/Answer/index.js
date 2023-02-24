@@ -1,8 +1,9 @@
+/* eslint-disable react/no-danger */
 import { Modal, Button, Badge } from '@cogoport/components';
 import { InputController, CheckboxController, useForm } from '@cogoport/forms';
 import { IcCLike, IcCDislike } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { format, startCase } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../../../../commons/Spinner';
@@ -98,7 +99,7 @@ function Answer({ questions = {} }) {
 	return (
 		<>
 			<div className={styles.heading_container}>
-				{startCase(answerData?.answers[0]?.answer)}
+				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[0]?.answer }} />
 			</div>
 			<div>
 				<span className={styles.sidetext}>
