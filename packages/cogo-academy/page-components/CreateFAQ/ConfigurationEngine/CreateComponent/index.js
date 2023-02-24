@@ -109,27 +109,31 @@ function CreateForm({
 				/>
 			</div>
 
-			<div className={styles.btn_row}>
-				<div>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={onClickBackIcon}
-					>
-						Cancel
-					</Button>
-				</div>
+			{!displayBackButton
+			&& (
+				<div className={styles.btn_row}>
+					<div>
+						<Button
+							size="md"
+							themeType="secondary"
+							onClick={onClickBackIcon}
+						>
+							Cancel
+						</Button>
+					</div>
 
-				<div className={styles.save_btn}>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={handleSubmit(createFaqComponent)}
-					>
-						Save
-					</Button>
+					<div className={styles.save_btn}>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={handleSubmit(createFaqComponent)}
+						>
+							Save
+						</Button>
+					</div>
 				</div>
-			</div>
+			)}
+
 		</div>
 	);
 }

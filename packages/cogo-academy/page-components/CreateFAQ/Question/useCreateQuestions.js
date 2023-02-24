@@ -34,6 +34,7 @@ function useCreateQuestions() {
 		formState: { errors },
 		control,
 		watch, getValues,
+		setValue,
 	} = useForm();
 
 	const watchFunctions = watch();
@@ -75,6 +76,7 @@ function useCreateQuestions() {
 		topicOptions,
 		tagOptions,
 		watch,
+		setValue,
 		getArray,
 		entity_options,
 		questionPreview,

@@ -4,12 +4,14 @@ import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useEffect } from 'react';
 
 import Layout from '../../../commons/Layout';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
 
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
+import useGetQuestion from './hooks/useGetQuestion';
 import PreviewQuestion from './QuestionPreview';
 import styles from './styles.module.css';
 import useCreateQuestions from './useCreateQuestions';
@@ -32,6 +34,7 @@ function CreateFAQ() {
 		tagOptions,
 		watch,
 		getArray,
+		setValue:setQuestionValue,
 		questionPreview,
 		setQuestionPreview,
 		onClickPublish,
@@ -50,6 +53,33 @@ function CreateFAQ() {
 		handleCreateTag,
 		handleCreateTopic,
 	} = useCreateNewTagOrTopic();
+
+	const { fetchQuestion, query, data, loading } = useGetQuestion();
+
+	const { question_abstract, faq_tags = [], faq_topics = [] } = data || {};
+
+	useEffect(() => {
+		fetchQuestion();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [query.id]);
+
+	const filterTags = [];
+	(faq_tags || []).forEach((item) => {
+		filterTags.push(item?.id);
+	});
+
+	const filterTopics = [];
+	(faq_topics || []).forEach((item) => {
+		filterTopics.push(item?.id);
+	});
+
+	useEffect(() => {
+		setQuestionValue('question_abstract', question_abstract);
+		setQuestionValue('tag_ids', filterTags);
+		setQuestionValue('topic_ids', filterTopics);
+		// setEditorValue()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
 
 	const router = useRouter();
 
@@ -88,7 +118,9 @@ function CreateFAQ() {
 						name="question_abstract"
 						type="input"
 						placeholder="Create a question."
+						key={question_abstract}
 						rules={{ required: 'Question is required.' }}
+						// value={question_abstract || ''}
 					/>
 
 					{errors.create_faq && (
@@ -116,6 +148,7 @@ function CreateFAQ() {
 						<MultiselectController
 							name="tag_ids"
 							control={control}
+							value={filterTags}
 							options={tagOptions}
 						/>
 
