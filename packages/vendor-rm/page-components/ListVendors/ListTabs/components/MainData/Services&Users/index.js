@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function ServicesUsers({
 	data = {},
+	refetchVendorInfo = () => {},
 }) {
 	const [showForm, setShowForm] = useState('');
 
@@ -23,7 +24,7 @@ function ServicesUsers({
 					<Component setShowForm={setShowForm} getVendorData={data} />
 				)}
 
-				<CompanyPOC data={data} />
+				<CompanyPOC data={data} refetchVendorInfo={refetchVendorInfo} />
 
 				<ServicePOC />
 			</div>

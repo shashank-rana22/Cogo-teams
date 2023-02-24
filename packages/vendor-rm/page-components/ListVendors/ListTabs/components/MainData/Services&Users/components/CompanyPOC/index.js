@@ -3,7 +3,7 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
-import workScope from '../../../../../../../../utils/work-scopes.json';
+import getPocRole from '../../utils/getPocRole';
 
 import useEditPoc from './hooks/useEditPoc';
 import styles from './styles.module.css';
@@ -18,6 +18,7 @@ const labelMapping = {
 
 function CompanyPOC({
 	data,
+	refetchVendorInfo = () => {},
 }) {
 	const details = (data?.pocs || []).map((poc) => {
 		const obj = {
@@ -25,6 +26,7 @@ function CompanyPOC({
 			email         : poc?.email,
 			mobile_number : `${poc?.mobile_country_code} ${poc?.mobile_number}`,
 			poc_role      : poc?.poc_role,
+
 			document_proof:
 	<div className={styles.download}>
 		<a
@@ -45,49 +47,43 @@ function CompanyPOC({
 			/>
 		</div>
 	</div>,
+			is_primary: poc?.is_primary,
 		};
 		return obj;
-	})[0];
+	}).find((poc_detail) => poc_detail.is_primary === true);
 
 	const [showEditPocModal, setShowEditPocModal] = useState(false);
 
-	const { control, controls, handleSubmit, errors, onSubmit } = useEditPoc({ data, setShowEditPocModal });
-
-	const getRoleLabel = (val) => {
-		const scopeObj = workScope.find((scope) => scope.value === val);
-		return scopeObj.label;
-	};
+	const {
+		control,
+		controls,
+		handleSubmit,
+		errors,
+		onSubmit,
+	} = useEditPoc({ data, setShowEditPocModal, refetchVendorInfo });
 
 	return (
 		<div className={styles.main}>
 			<span className={styles.heading}>
 				Company POC
 			</span>
-			<div className={styles.cont}>
-				{details.map((item) => (
-					<>
-						<div className={styles.box_info}>
-							{
-							Object.keys(item).map((poc) => (
-								<div>
-									<div className={styles.top}>
-										{labelMapping[poc]}
-									</div>
-									<div className={styles.bottom}>
-										{poc === 'poc_role' ? getRoleLabel(item[poc]) : item[poc]}
-									</div>
-								</div>
-							))
-						}
+
+			<div className={styles.content}>
+				<div className={styles.box_info}>
+					{Object.keys(details || []).map((poc) => (
+						<div className={styles.label_value_container}>
+							<div className={styles.top}>
+								{labelMapping[poc]}
+							</div>
+							<div className={styles.bottom}>
+								{poc === 'poc_role' ? getPocRole(details[poc]) : details[poc]}
+							</div>
 						</div>
-						<Button size="md" themeType="secondary" onClick={() => setShowEditPocModal(!showEditPocModal)}>
-							<IcMEdit style={{ marginRight: 5 }} />
-						</Button>
-					</>
-				)) }
-				<Button size="md" themeType="secondary" onClick={() => setShowEditPocModal(!showEditPocModal)}>
-					<IcMEdit style={{ marginRight: 5 }} />
-				</Button>
+					))}
+					<Button size="md" themeType="secondary" onClick={() => setShowEditPocModal(!showEditPocModal)}>
+						<IcMEdit style={{ marginRight: 5 }} />
+					</Button>
+				</div>
 			</div>
 			<Modal
 				show={showEditPocModal}
