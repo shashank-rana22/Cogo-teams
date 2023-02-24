@@ -10,6 +10,9 @@ import styles from './styles.module.css';
 function GroundOps() {
 	const [generate, setGenerate] = useState(false);
 	const [item, setItem] = useState({});
+	const [viewDoc, setViewDoc] = useState(false);
+	const [edit, setEdit] = useState(false);
+
 	return (
 		<div className={styles.container}>
 			<Button onClick={() => setGenerate(!generate)}>HAWB</Button>
@@ -18,14 +21,30 @@ function GroundOps() {
 				<>
 					<Header />
 					<div style={{ marginTop: 20 }}>
-						<Air setGenerate={setGenerate} setItem={setItem} />
+						<Air setGenerate={setGenerate} setItem={setItem} setViewDoc={setViewDoc} setEdit={setEdit} />
 					</div>
 				</>
 			)}
-			{generate && item.blCategory === 'hawb'
-			&& <GenerateMAWB item={item} task={item} />}
-			{generate && item.blCategory === 'mawb'
-			&& <GenerateHAWB item={item} task={item} />}
+			{(generate || viewDoc) && item.blCategory === 'mawb'
+			&& (
+				<GenerateMAWB
+					viewDoc={viewDoc}
+					setViewDoc={setViewDoc}
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
+				/>
+			)}
+			{(generate || viewDoc) && item.blCategory === 'hawb'
+			&& (
+				<GenerateHAWB
+					viewDoc={viewDoc}
+					setViewDoc={setViewDoc}
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
+				/>
+			)}
 		</div>
 	);
 }

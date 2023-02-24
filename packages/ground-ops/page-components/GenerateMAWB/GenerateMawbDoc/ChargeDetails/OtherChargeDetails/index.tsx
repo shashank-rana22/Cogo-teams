@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { cl } from '@cogoport/components';
 import React from 'react';
 
@@ -18,11 +19,15 @@ function formatDate(date) {
 	});
 }
 
+interface Props {
+	taskItem?: any;
+	formData?: any;
+}
+
 function OtherChargeDetails({
-	fields = {},
-	shipment_data = {},
-	primary_service = {},
-}) {
+	taskItem = {},
+	formData = {},
+}:Props) {
 	return (
 		<div className={cl`
 				${styles.block_col} 
@@ -48,10 +53,10 @@ function OtherChargeDetails({
 						>
 							<p style={{ fontSize: 13 }}>
 								<div style={{ height: '30%' }}>
-									{fields.agent_other_charges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
+									{formData.agentOtherCharges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
 								</div>
 								<br />
-								{fields.carrier_other_charges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
+								{formData.carrierOtherCharges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
 							</p>
 						</div>
 					</p>
@@ -88,7 +93,7 @@ function OtherChargeDetails({
 				>
 					<p style={{ fontSize: 14 }}>
 						{' '}
-						{shipment_data?.booking_party_details?.company_name}
+						{taskItem?.customer_name}
 					</p>
 				</div>
 				<div className={cl`
@@ -135,7 +140,7 @@ function OtherChargeDetails({
 						`}
 							style={{ pointerEvents: 'none' }}
 						>
-							{fields.place}
+							{formData.place}
 						</div>
 					</div>
 					<div className={cl`
@@ -211,7 +216,7 @@ function OtherChargeDetails({
 							`}
 					>
 						<p style={{ fontSize: 14 }}>
-							{primary_service?.master_airway_bill_number}
+							{taskItem?.awbNumber}
 						</p>
 					</div>
 				</div>

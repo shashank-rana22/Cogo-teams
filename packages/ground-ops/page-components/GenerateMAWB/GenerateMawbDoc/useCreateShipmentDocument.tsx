@@ -2,11 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useCreateShipmentDocument = ({
-	completeTask = () => {},
-	isAmended = false,
+	edit = false,
 }) => {
 	let api = 'create_shipment_document';
-	if (isAmended) api = 'update_shipment_document';
+	if (edit) api = 'update_shipment_document';
 
 	const [{ loading }, trigger] = useRequest({
 		url    : `${api}`,
@@ -20,9 +19,8 @@ const useCreateShipmentDocument = ({
 			}).then(() => {
 				Toast.success('Document saved successfully');
 			});
-			completeTask();
 		} catch (error) {
-			Toast.error(error);
+			Toast.error('Failed to save Document');
 		}
 	};
 

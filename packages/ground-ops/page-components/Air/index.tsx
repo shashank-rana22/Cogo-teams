@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 import Filters from '../Filters';
 
 import ApprovalPending from './components/ApprovalPending';
-import CompletedTasks from './components/CompletedTasks';
 import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
 import NewAWB from './components/NewAWB';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
@@ -24,20 +23,15 @@ const tabs = [
 		key   : 'approved_awb',
 		label : 'Approved AWB',
 	},
-	{
-		key   : 'completed_awb',
-		label : 'Completed AWB',
-	},
 ];
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
 	approved_awb     : GenerateFinalAirwayBill,
-	completed_awb    : CompletedTasks,
 };
 
-function Air({ setGenerate, setItem }) {
+function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
 	const [filters, setFilters] = useState({});
 
@@ -47,12 +41,12 @@ function Air({ setGenerate, setItem }) {
 		setActiveTab(view);
 	};
 
-	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks();
+	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks({ activeTab });
 
 	useEffect(() => {
 		// if (activeTab === 'new_awb') { listAPi(); }
 		if (activeTab === 'new_awb') { listAPi({ filter: filters }); }
-		if (activeTab === 'approval_pending') { listAPi({ filter: filters, isDocDataRequired: true }); }
+		if (activeTab === 'approval_pending') { listAPi({ filter: filters }); }
 	}, [activeTab, JSON.stringify(filters)]);
 
 	return (
@@ -101,6 +95,8 @@ function Air({ setGenerate, setItem }) {
 					loading={loading}
 					setGenerate={setGenerate}
 					setItem={setItem}
+					setViewDoc={setViewDoc}
+					setEdit={setEdit}
 				/>
 			)}
 		</div>

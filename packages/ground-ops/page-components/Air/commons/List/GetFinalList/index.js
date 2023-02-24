@@ -40,7 +40,8 @@ const GetFinalList = ({ list, data, loading }) => {
 			if (item.id === itm.originAirportId) {
 				const pushData = {
 					...itm,
-					origin: item.name,
+					origin         : item.name,
+					originPortCode : item.port_code,
 				};
 				originData.push(pushData);
 			}
@@ -54,7 +55,8 @@ const GetFinalList = ({ list, data, loading }) => {
 			if (item.id === itm.destinationAirportId) {
 				const pushData = {
 					...itm,
-					destination: item.name,
+					destination         : item.name,
+					destinationPortCode : item.port_code,
 				};
 				destinationData.push(pushData);
 			}
@@ -82,7 +84,8 @@ const GetFinalList = ({ list, data, loading }) => {
 			if (item.id === itm.airlineId) {
 				const pushData = {
 					...itm,
-					airline: item.business_name,
+					airline         : item.business_name,
+					airlineIataCode : item.iata_code,
 				};
 				airlineData.push(pushData);
 			}

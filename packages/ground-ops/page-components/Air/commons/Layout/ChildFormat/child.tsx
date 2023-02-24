@@ -53,7 +53,7 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps = {};
+						const extraProps:any = {};
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}

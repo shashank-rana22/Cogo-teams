@@ -13,25 +13,39 @@ import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
 import Watermark from './watermark';
 
+interface Props {
+	taskItem?: any;
+	formData?: any;
+	setBack?: any;
+	back?: boolean;
+	edit?: boolean;
+	setEdit?: any;
+	viewDoc?: boolean;
+}
+
+function camelToUnderscore(key) {
+	const result = key.replace(/([A-Z])/g, ' $1');
+	return result.split(' ').join('_').toLowerCase();
+}
+
 function GenerateMawb({
-	shipment_data = {},
-	completeTask = () => {},
-	task = {},
-	details = {},
-	viewDoc = false,
-	setIsAmended = () => {},
-	isAmended,
+	taskItem = {},
 	formData = {},
 	setBack = () => {},
 	back = false,
-	primary_service,
-}) {
-	console.log('task', task);
+	edit = false,
+	setEdit = () => {},
+	viewDoc = false,
+}:Props) {
+	const filteredFormData = { ...formData };
 
-	const [show, setShow] = useState(false);
-	const filtered_data = { ...formData };
+	const filteredData = {};
 
-	const footer_values = [
+	Object.keys(filteredFormData).forEach((control) => {
+		filteredData[camelToUnderscore(control)] = filteredFormData[control];
+	});
+
+	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',
 		'COPY 11(EXTRA COPY FOR CARRIER)',
 		'COPY 10(EXTRA COPY FOR CARRIER)',
@@ -46,39 +60,26 @@ function GenerateMawb({
 		'ORIGINAL 1 (FOR ISSUING CARRIER)',
 	];
 
-	// eslint-disable-next-line no-unused-vars
-	const [image, takeScreenShot] = useScreenshot();
-	const serial_id = task?.serialId || '';
+	const [, takeScreenShot] = useScreenshot();
+
+	const serialId = taskItem?.serialId || '';
 
 	const { handleUpload } = useGetMediaUrl();
 	const { upload, loading } = useCreateShipmentDocument({
-		completeTask,
-		isAmended,
+		edit,
 	});
 
-	const getImage = (item) => {
-		document.getElementById('footer').innerHTML = `${item}`;
-		return takeScreenShot(document.getElementById('mawb'));
-	};
 	const ref = createRef(null);
 
 	const [saveDocument, setSaveDocument] = useState(false);
 
 	const handleClick = () => {
-		if (isAmended) {
-			setIsAmended(false);
+		if (edit) {
+			setEdit(false);
 		}
 		if (back) {
 			setBack(!back);
 		}
-	};
-
-	const handleView = async () => {
-		const a = footer_values.map((item) => async () => {
-			const newImage = await getImage(item);
-			saveAs(newImage, item);
-		});
-		await a.map((i) => i());
 	};
 
 	const handleSave = async () => {
@@ -86,35 +87,36 @@ function GenerateMawb({
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('mawb.pdf', file);
 		const payload = {
-			shipment_id         : task?.shipmentId,
-			uploaded_by_org_id  : task?.serviceProviderId,
-			performed_by_org_id : task?.serviceProviderId,
+			shipment_id         : taskItem?.shipmentId,
+			uploaded_by_org_id  : taskItem?.serviceProviderId,
+			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : 'draft_airway_bill',
-			id                  : task?.id,
-			service_id          : task?.serviceId,
+			id                  : taskItem?.id,
+			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
+			pending_task_id     : taskItem?.id,
 			data                : {
-				...filtered_data,
+				...filteredData,
 				status          : 'generated',
-				document_number : task?.awbNumber,
-				service_id      : task?.serviceId,
+				document_number : taskItem?.awbNumber,
+				service_id      : taskItem?.serviceId,
 				service_type    : 'air_freight_service',
 			},
 			document_url: res || undefined,
 			file_name:
-				`Draft_Airway_Bill_For_Shipment_${serial_id}_${new Date().getTime()}`
+				`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
 				|| undefined,
 			documents: [
 				{
 					file_name:
-						`Draft_Airway_Bill_For_Shipment_${serial_id}_${new Date().getTime()}`
+						`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
 						|| undefined,
 					document_url : res || undefined,
 					data         : {
-						document_number : task?.awbNumber,
-						service_id      : task?.serviceId,
+						document_number : taskItem?.awbNumber,
+						service_id      : taskItem?.serviceId,
 						service_type    : 'air_freight_service',
-						...filtered_data,
+						...filteredData,
 						status          : 'generated',
 					},
 				},
@@ -124,47 +126,64 @@ function GenerateMawb({
 		upload({ payload });
 		setSaveDocument(false);
 	};
-	const chargeable_weight = Math.max(
-		primary_service?.weight,
-		primary_service?.volume * 166.67,
-	).toFixed(2);
-	let agent_charge = 0;
-	formData.agent_other_charges.forEach((item) => {
-		agent_charge += Number(item.price);
-	});
-	let carrier_charge = 0;
-	formData.carrier_other_charges.forEach((item) => {
-		carrier_charge += Number(item.price);
-	});
-	const data = {
-		total_charge: chargeable_weight * formData.rate_per_kg,
-		agent_charge,
-		carrier_charge,
-		final_charge:
-			chargeable_weight * formData.rate_per_kg + agent_charge + carrier_charge,
+
+	const getImage = (item) => {
+		document.getElementById('footer').innerHTML = `${item}`;
+		return takeScreenShot(document.getElementById('mawb'));
 	};
 
-	const isEligible = shipment_data?.stakeholder_types?.some((ele) => ['superadmin', 'service_ops2'].includes(ele));
+	const handleView = async () => {
+		const a = footerValues.map((item) => async () => {
+			const newImage = await getImage(item);
+			saveAs(newImage, item);
+		});
+		await a.map((i) => i());
+	};
+
+	const chargeableWeight:any = Math.max(
+		taskItem?.weight,
+		// eslint-disable-next-line no-unsafe-optional-chaining
+		taskItem?.volume * 166.67,
+	).toFixed(2);
+	let agentCharge = 0;
+	formData.agentOtherCharges.forEach((item) => {
+		agentCharge += Number(item.price);
+	});
+	let carrierCharge = 0;
+	formData.carrierOtherCharges.forEach((item) => {
+		carrierCharge += Number(item.price);
+	});
+	const data = {
+		totalCharge: chargeableWeight * formData.ratePerKg,
+		agentCharge,
+		carrierCharge,
+		finalCharge:
+		chargeableWeight * formData.ratePerKg + agentCharge + carrierCharge,
+	};
 
 	return (
 		<div className={styles.flex_col}>
-			{viewDoc && (
-				<div className={styles.button_container}>
-					{isEligible && (
+
+			{viewDoc
+			&& (
+				<div
+					className={styles.download_button_div}
+				>
+					<div style={{ marginRight: '36px' }}>
 						<Button
 							className="primary md"
 							onClick={() => {
 								setSaveDocument(true);
-								setShow(true);
 								handleView();
 							}}
 							disabled={saveDocument}
 						>
 							{saveDocument ? 'Downloading...' : 'Download All 12 Copies'}
 						</Button>
-					)}
+					</div>
 				</div>
 			)}
+
 			<div
 				className={styles.flex_col}
 				id="mawb"
@@ -172,56 +191,52 @@ function GenerateMawb({
 				style={{
 					flex    : '1',
 					width   : '100%',
-					padding : '37.5px',
-					opacity : show ? 0.5 : 1,
+					padding : '40px 12px',
+					opacity : 1,
 				}}
 			>
 				{!viewDoc && <Watermark text="draft" rotateAngle="315deg" />}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={formData}
-						primary_service={primary_service}
+						taskItem={taskItem}
 					/>
 					<ShipmentDetails
 						formData={formData}
-						primary_service={primary_service}
+						taskItem={taskItem}
 					/>
 					<ContainerDetails
 						formData={formData}
-						primary_service={primary_service}
-						chargeable_weight={chargeable_weight}
+						taskItem={taskItem}
+						chargeableWeight={chargeableWeight}
 					/>
 					<ChargeDetails
-						shipment_data={shipment_data}
-						footer_values={footer_values}
-						fields={formData}
-						primary_service={primary_service}
+						taskItem={taskItem}
+						footerValues={footerValues}
+						formData={formData}
 						data={data}
 					/>
 				</div>
 			</div>
 
-			<div
-				className={styles.flex}
-				style={{
-					justifyContent : 'flex-end',
-					width          : '100%',
-				}}
-			>
-				{isAmended || back ? (
-					<div style={{ marginRight: '20px' }}>
-						<Button
-							size="md"
-							onClick={() => {
-								handleClick();
-							}}
-							disabled={loading || saveDocument}
-						>
-							Edit
-						</Button>
-					</div>
-				) : null}
-				{!viewDoc && (
+			{!viewDoc
+			&& (
+				<div
+					className={styles.button_div}
+				>
+					{edit || back ? (
+						<div style={{ marginRight: '20px' }}>
+							<Button
+								size="md"
+								onClick={() => {
+									handleClick();
+								}}
+								disabled={loading || saveDocument}
+							>
+								Edit
+							</Button>
+						</div>
+					) : null}
 					<div style={{ marginRight: '36px' }}>
 						<Button
 							size="md"
@@ -234,9 +249,10 @@ function GenerateMawb({
 							{loading || saveDocument ? 'Saving...' : 'Save'}
 						</Button>
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
+
 	);
 }
 

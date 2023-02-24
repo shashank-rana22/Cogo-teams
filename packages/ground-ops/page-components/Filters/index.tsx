@@ -11,7 +11,6 @@ import styles from './styles.module.css';
 function Filters({ setFilters = () => {}, filters = {} }) {
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, watch, setValue, formState:{ errors } } = useForm();
-	console.log('watch', watch());
 
 	const onSubmit = (formValues: any) => {
 		setFilters((prev) => ({ ...prev, ...formValues }));

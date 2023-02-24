@@ -2,7 +2,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useListShipmentPendingTasks = () => {
+const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -12,7 +12,7 @@ const useListShipmentPendingTasks = () => {
 		{ manual: true },
 	);
 
-	const listAPi = async ({ filter = {}, isDocDataRequired = undefined }) => {
+	const listAPi = async ({ filter = {} }) => {
 		if (searchValue) {
 			setPage(1);
 		}
@@ -24,8 +24,9 @@ const useListShipmentPendingTasks = () => {
 					filters : {
 					},
 					...filter,
+					isDocDataRequired   : activeTab === 'approval_pending' ? true : undefined,
+					status              : activeTab === 'approval_pending' ? 'completed' : undefined,
 					assignedStakeholder : 'ground_ops',
-					isDocDataRequired   : isDocDataRequired || undefined,
 					page,
 					sort_type           : 'desc',
 				},
@@ -44,13 +45,6 @@ const useListShipmentPendingTasks = () => {
 		listAPi({});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, query]);
-
-	// useEffect(() => {
-	// 	setFinalList([]);
-	// 	setPage(1);
-	// 	getLocationData();
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [searchValue]);
 
 	return {
 		data,

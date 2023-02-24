@@ -13,7 +13,6 @@ function FieldArray({
 	buttonText = 'Add',
 	showButtons = true,
 	disabled = false,
-	register,
 	value,
 	error,
 	...rest
@@ -37,9 +36,7 @@ function FieldArray({
 					controls={controls}
 					name={name}
 					remove={remove}
-					showElements={showElements?.[index]}
 					disabled={disabled}
-					register={register}
 					error={error?.[index]}
 				/>
 			))}

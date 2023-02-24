@@ -16,7 +16,7 @@ const items = [
 	{ title: 'Handling Details', key: 'handling' },
 ];
 
-function GenerateHAWB({ item = {}, task = {}, viewDoc = false }) {
+function GenerateHAWB({ item = {}, task = {}, viewDoc = false, setViewDoc, edit, setEdit }) {
 	const [back, setBack] = useState(false);
 	// const [openedHawbModal, setOpenHawbModal] = useState(1);
 	// const [hawbDetails, setHawbDetails] = useState({ 0: item });

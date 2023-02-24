@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { cl } from '@cogoport/components';
 import React from 'react';
 
@@ -6,13 +5,13 @@ import styles from './styles.module.css';
 
 interface Props {
 	formData?: any;
-	primary_service?: any;
+	taskItem?: any;
 }
 
-function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) {
-	const { master_airway_bill_number = '' } = primary_service;
+function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
+	const { awbNumber = '' } = taskItem;
 	return (
-		<div style={{ pointerEvents: 'none' }}>
+		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={cl`
 				${styles.flex} 
 				${styles.mawb_number} 
@@ -29,7 +28,7 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 						${styles.mawb_number_subdivision} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{master_airway_bill_number?.substring(0, 3)}</p>
+						<p style={{ fontSize: 14 }}>{awbNumber.substring(0, 3)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -37,7 +36,7 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 						${styles.mawb_number_subdivision_portcode} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{primary_service?.origin_airport?.port_code}</p>
+						<p style={{ fontSize: 14 }}>{taskItem?.originPortCode}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -45,7 +44,7 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 						${styles.mawb_number_subdivision_second} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{master_airway_bill_number?.substring(4, 13)}</p>
+						<p style={{ fontSize: 14 }}>{awbNumber.substring(4, 13)}</p>
 					</div>
 				</div>
 				<div className={cl`
@@ -54,7 +53,7 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p style={{ fontSize: 14 }}>{master_airway_bill_number}</p>
+					<p style={{ fontSize: 14 }}>{awbNumber}</p>
 				</div>
 			</div>
 			<div className={styles.flex}>
@@ -87,11 +86,15 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={styles.styled_text_area}>
+							<div className={cl`
+							${styles.styled_text_area} 
+							${styles.font_style} 
+						`}
+							>
 
-								{formData.shipper_name}
+								{formData.shipperName}
 								<br />
-								{formData.shipper_address}
+								{formData.shipperAddress}
 							</div>
 						</div>
 					</div>
@@ -116,7 +119,7 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 						${styles.airway_bill} 
 					`}
 					>
-						<p style={{ fontSize: 14.5 }}>Air Waybill</p>
+						<p className={styles.font_style} style={{ fontSize: 14.5 }}>Air Waybill</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -134,7 +137,7 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 					`}
 					>
 
-						<p style={{ fontSize: 14.5 }}>{primary_service?.airline?.business_name}</p>
+						<p className={styles.font_style} style={{ fontSize: 14.5 }}>{taskItem?.airline}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -179,10 +182,14 @@ function ShipperConsigneeDetails({ formData = {}, primary_service = {} }:Props) 
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={styles.styled_text_area}>
-								{formData.consignee_name}
+							<div className={cl`
+							${styles.styled_text_area} 
+							${styles.font_style} 
+						`}
+							>
+								{formData.consigneeName}
 								<br />
-								{formData.consignee_address}
+								{formData.consigneeAddress}
 							</div>
 						</div>
 					</div>
