@@ -35,19 +35,6 @@ function useOnBoardVendor({
 
 	const router = useRouter();
 
-	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['country'] } },
-	}));
-
-	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['city'] } },
-	}));
-
-	const fields = getControls({
-		countryOptions,
-		cityOptions,
-	});
-
 	const {
 		control,
 		formState: { errors },
@@ -60,6 +47,21 @@ function useOnBoardVendor({
 	} = useForm();
 
 	const watchForm = watch();
+
+	const { country_id } = watchForm;
+
+	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['country'] } },
+	}));
+
+	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		initialCall: false, params: { filters: { type: ['city'], country_id } },
+	}));
+
+	const fields = getControls({
+		countryOptions,
+		cityOptions,
+	});
 
 	const {
 		onBlurTaxPanGstinControl,
