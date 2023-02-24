@@ -5,36 +5,34 @@ import { useSelector } from '@cogoport/store';
 
 import useCreateFaqPayload from './useCreateFaqPayload';
 
-function useCreateFaqSet({ setQuestionPreview, editorValue }) {
+function useUpdateFaqSet({ setQuestionPreview, editorValue }) {
 	const router = useRouter();
+
 	const {
 		general,
 	} = useSelector((state) => state);
 
-	const { id: questionId } = general.query || {};
-
-	const apiName = questionId ? '/update_question_answer_set' : '/create_question_answer_set';
+	const { id } = general.query || {};
 
 	const [{ loading = false }, trigger] = useRequest({
-		url    : apiName,
+		url    : '/update_question_answer_set',
 		method : 'POST',
 	}, { manual: true });
 
-	const onSubmit = async (values) => {
+	const onSubmitUpdatedForm = async (values) => {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const { payload } = useCreateFaqPayload({ values, editorValue });
 
 		try {
 			const res = await trigger({
-				data: payload,
+				data: { ...payload, id },
 			});
 
 			if (res?.data) {
-				const id = res?.data?.id;
-
-				Toast.success('question created sucessfully');
+				Toast.success('question updated sucessfully');
 
 				const href = `/learning/faq/create/question?mode=preview&id=${id}`;
+
 				router.push(href, href);
 
 				setQuestionPreview('preview');
@@ -44,34 +42,11 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 		}
 	};
 
-	const onClickPublish = async ({ data }) => {
-		const payload = {
-			id     : data?.id,
-			state  : 'published',
-			status : 'active',
-		};
-
-		try {
-			const res = await trigger({
-				data: payload,
-			});
-
-			if (res?.data) {
-				Toast.success('questions Published sucessfully');
-
-				const href = '/learning/faq/create';
-				router.push(href, href);
-			}
-		} catch (err) {
-			console.log('err', err);
-		}
-	};
-
 	return {
-		onSubmit,
+		onSubmitUpdatedForm,
 		loading,
-		onClickPublish,
+
 	};
 }
 
-export default useCreateFaqSet;
+export default useUpdateFaqSet;

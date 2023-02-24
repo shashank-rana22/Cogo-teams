@@ -10,7 +10,6 @@ function FieldArray({
 	name,
 	control,
 	controls,
-	showElements,
 	buttonText,
 	showButtons = true,
 	disabled = false,
@@ -19,6 +18,7 @@ function FieldArray({
 	value,
 	error,
 	getArray,
+	watch,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({
@@ -44,7 +44,6 @@ function FieldArray({
 					controls={controls}
 					name={name}
 					remove={remove}
-					showElements={showElements?.[index]}
 					disabled={disabled}
 					register={register}
 					error={error?.[index]}

@@ -19,7 +19,6 @@ function Child({
 	field,
 	error,
 	getArray = {},
-
 }) {
 	const { functions = '' } = getArray;
 	let rowWiseFields = [];
@@ -45,12 +44,36 @@ function Child({
 		totalFields.push(rowWiseFields);
 	}
 
+	let showElement = {};
+	Object.keys(getArray).map((a) => {
+		showElement[a] = true;
+		if (getArray?.platform === 'admin') {
+			showElement = {
+				...showElement,
+				work_scopes: false,
+			};
+		}
+		if (['partner', 'app'].includes(getArray?.platform)) {
+			showElement = {
+				...showElement,
+				functions     : false,
+				sub_functions : false,
+			};
+		}
+		return showElement;
+	});
+
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			{totalFields.map((fields) => (
 				<div className={styles.row}>
 					{fields.map((controlItem) => {
+						const show = (!(controlItem.name in showElement) || showElement[controlItem.name]);
 						const Element = getElementController(controlItem.type);
+
+						if (!show || !Element) {
+							return null;
+						}
 
 						const errorOriginal = getErrorMessage({
 							error : error?.[controlItem.name],

@@ -5,7 +5,7 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control, fields, showElements = {}, register, errors, getArray = [],
+	control, fields, showElements = {}, register, errors, getArray = [], watch,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -51,7 +51,9 @@ function Layout({
 										error={errors[fieldsItem.name]}
 										control={control}
 										register={register}
-										showElements={showElements}
+										showElements={fieldsItem.name}
+										watch={watch}
+
 									/>
 
 								</div>

@@ -198,15 +198,15 @@ const useQuestionList = () => {
 
 	const onClickEditButton = (id) => {
 		router.push(
-			`/learning/faq/create/question?id=${id}`,
-			`/learning/faq/create/question?id=${id}`,
+			`/learning/faq/create/question?mode=create&id=${id}`,
+			`/learning/faq/create/question?mode=create&id=${id}`,
 		);
 	};
 
 	const onClickViewButton = (id) => {
 		router.push(
-			`/learning/faq/create/create?mode=preview&id=${id}`,
-			`/learning/faq/create/create?mode=preview&id=${id}`,
+			`/learning/faq/create/question?mode=preview&id=${id}`,
+			`/learning/faq/create/question?mode=preview&id=${id}`,
 		);
 	};
 

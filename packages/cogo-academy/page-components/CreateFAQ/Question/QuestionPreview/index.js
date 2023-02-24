@@ -17,6 +17,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		answers = [],
 		faq_topics = [],
 		faq_tags = [],
+		id = '',
 	} = data || {};
 
 	const tags = [];
@@ -41,7 +42,8 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	}, [query]);
 
 	const onclickBack = () => {
-		router.back();
+		const href = `/learning/faq/create/question?mode=create&id=${id}`;
+		router.push(href, href);
 		setQuestionPreview('create');
 	};
 
@@ -98,7 +100,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				>
 					Publish
 				</Button>
-				<div className={styles.goback_button} role="presentation" onClick={onclickBack}>
+				<div className={styles.goback_button} role="presentation" onClick={() => onclickBack(id)}>
 					Go Back & Edit
 				</div>
 			</div>

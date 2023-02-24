@@ -85,7 +85,5 @@ const SUB_FUNCTION_MAPPING = {
 	],
 
 };
-	// return { SUB_FUNCTION_MAPPING };
-// }
 
 export default SUB_FUNCTION_MAPPING;

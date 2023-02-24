@@ -8,6 +8,7 @@ import { useRouter } from '@cogoport/next';
 import Layout from '../../../commons/Layout';
 
 import BodyTextEditor from './BodyTextEditor';
+import useGetQuestion from './hooks/useGetQuestion';
 import PreviewQuestion from './QuestionPreview';
 import styles from './styles.module.css';
 import useCreateQuestions from './useCreateQuestions';
@@ -30,7 +31,10 @@ function CreateFAQ() {
 		questionPreview,
 		setQuestionPreview,
 		onClickPublish,
+		showElements = {},
 	} = useCreateQuestions();
+
+	const { data } = useGetQuestion();
 
 	const onClickBackIcon = () => {
 		router.back();
@@ -116,13 +120,21 @@ function CreateFAQ() {
 
 				</div>
 
-				<Layout fields={controls} getArray={getArray} control={control} errors={errors} watch={watch} />
+				<Layout
+					fields={controls}
+					getArray={getArray}
+					control={control}
+					errors={errors}
+					watch={watch}
+					showElements={showElements}
+				/>
 
 				<div className={styles.button_container}>
 
 					<Button themeType="tertiary" style={{ marginRight: '12px' }}>
 						Cancel
 					</Button>
+
 					<Button type="submit">
 						Preview & Publish
 					</Button>

@@ -7,28 +7,43 @@ import createQuestionControls from '../utils/createQuestionControls';
 import useCreateFaqSet from './hooks/useCreateFaqSets';
 import useGetTopicTagList from './hooks/useGetTopicTagList';
 import useListCogoEntity from './hooks/useListCogoEntities';
+import useUpdateFaqSet from './hooks/useUpdateFaqSets';
 
 function useCreateQuestions() {
 	const { general } = useSelector((state) => state);
-	const { mode = '' } = general.query || {};
+	const { mode = '', id :questionId = '' } = general.query || {};
 
 	const [editorValue, setEditorValue] = useState('');
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
 
 	const {
-		onSubmit,
+		onSubmit:onSubmitCreateForm,
 		onClickPublish,
 	} = useCreateFaqSet({ setQuestionPreview, questionPreview, editorValue });
 
+	const { onSubmitUpdatedForm } = useUpdateFaqSet({ setQuestionPreview, editorValue });
+
+	const onSubmit = (mode === 'create' && questionId)
+		? onSubmitUpdatedForm
+		: onSubmitCreateForm;
+
 	const { topicOptions, tagOptions } = useGetTopicTagList();
 
-	const { handleSubmit, formState: { errors }, control, watch, getValues } = useForm();
+	const {
+		handleSubmit,
+		formState: { errors },
+		control,
+		watch, getValues,
+	} = useForm();
 
 	const watchFunctions = watch();
 
 	const getArray = getValues('fieldArray');
 
-	const { listCogoEntities, entity_data } = useListCogoEntity();
+	const {
+		listCogoEntities,
+		entity_data,
+	} = useListCogoEntity();
 
 	useEffect(() => {
 		listCogoEntities();
