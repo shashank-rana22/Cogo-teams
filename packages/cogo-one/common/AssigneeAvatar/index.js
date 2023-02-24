@@ -9,7 +9,7 @@ function AssigneeAvatar({ name = '', type = '' }) {
 	const getInitials = () => {
 		if (name) {
 			const avtarName = name.split(' ').map((n) => n[0]).join('');
-			return avtarName;
+			return avtarName.slice(0, 2);
 		}
 
 		return '';
