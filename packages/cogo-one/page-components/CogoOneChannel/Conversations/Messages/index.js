@@ -99,7 +99,6 @@ function Messages({
 		messagesData,
 		loadingPrevMessages,
 	} = useGetMessages({ activeChatCollection, id });
-	console.log('messagesData:', messagesData);
 
 	const { updateChat, loading } = useUpdateAssignedChat({
 		onClose: closeModal,

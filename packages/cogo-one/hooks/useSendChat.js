@@ -33,18 +33,16 @@ const useSendChat = ({
 	const sendChatMessage = async () => {
 		const newMessage = draftMessages?.[id]?.trim() || '';
 
+		const urlArray = decodeURI(draftUploadedFiles?.[id])?.split('/');
+		const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
 		const { finalUrl = '', fileType = '' } = getFileAttributes({
-			...draftUploadedFiles?.[id],
+			finalUrl: draftUploadedFiles?.[id], fileName,
 		});
 
 		setDraftMessages((p) => ({ ...p, [id]: '' }));
 		setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
 
-		if (isEmpty(newMessage?.trim())) {
-			return;
-		}
-
-		if (newMessage || finalUrl) {
+		if (!isEmpty(newMessage?.trim()) || finalUrl) {
 			const adminChat = {
 				conversation_type : 'received',
 				message_type      : finalUrl ? fileType : 'text',
