@@ -1,21 +1,18 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useGetOrganizationCogopoints = ({ organizationId = '' }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_organization_cogopoint_profile',
 		method : 'get',
 	}, { manual: true });
 
-	const [pointData, setPointData] = useState(null);
-
 	const fetchOrganizationCogopoint = async () => {
-		const res = await trigger({
+		await trigger({
 			params: {
 				organization_id: organizationId,
 			},
 		});
-		setPointData(res?.data || {});
 	};
 
 	useEffect(() => {
@@ -26,8 +23,8 @@ const useGetOrganizationCogopoints = ({ organizationId = '' }) => {
 	}, [organizationId]);
 
 	return {
-		pointData,
-		pointLoading: loading,
+		pointData    : data,
+		pointLoading : loading,
 	};
 };
 export default useGetOrganizationCogopoints;
