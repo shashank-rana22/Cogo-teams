@@ -16,12 +16,13 @@
 }
 
 .label {
-	line-height: 20px;
+	font-size: 12px;
+	line-height: 14px;
 	color: #828282;
 }
 
 .value {
-	font-size: 20px;
+	font-size: 14px;
 	font-weight: 500;
 	line-height: 32px;
 }
