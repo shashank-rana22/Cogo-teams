@@ -18,7 +18,7 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 		activeTab,
 		setActiveTab,
 	// eslint-disable-next-line react-hooks/rules-of-hooks
-	} = useListFaqQuestions({ topicId });
+	} = useListFaqQuestions({ topicId, });
 
 	if (loading) {
 		return (

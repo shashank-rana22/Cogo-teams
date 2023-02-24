@@ -13,13 +13,14 @@ function MostReadFAQs() {
 	// const [show, setShow] = useState(false);
 
 	const [searchState, setSearchState] = useState('');
+	const sort = true;
 	const {
 		refetchQuestions = () => {},
 		data,
 		loading = false,
 		activeTab,
 		setActiveTab,
-	} = useListFaqQuestions();
+	} = useListFaqQuestions({ searchState, sort });
 
 	return (
 		<div>
