@@ -1,0 +1,27 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	display: flex;
+	gap: 30px;
+	align-items: center;
+	justify-content: space-between;
+	width: 100% !important;
+	padding: 16px;
+	margin: 16px 0;
+	font-size: 12px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.main {
+	z-index: -9999;
+	margin-top: -20px;
+
+	:global {
+		.react-grid-layout {
+			position: relative;
+			transition: height 200ms ease;
+		}
+	}
+}

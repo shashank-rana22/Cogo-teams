@@ -20,7 +20,7 @@ const useFclFreightRateForecasting = ({ data = {} }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 

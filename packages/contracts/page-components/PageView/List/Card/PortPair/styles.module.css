@@ -1,11 +1,10 @@
-
 .upper_body {
 	display: flex;
+	gap: 18px;
 	align-items: center;
 	justify-content: space-between;
+	padding-right: 2px;
 	margin-bottom: 8px;
-    gap: 18px;
-    padding-right: 2px;
 }
 
 .body {
@@ -40,16 +39,17 @@
 	white-space: nowrap;
 }
 
-.container{
+.container {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid #F2F2F2;
-	border-radius: 4px;
 	padding: 8px 12px;
+	border: 1px solid #f2f2f2;
+	border-radius: 4px;
 }
-.service{
+
+.service {
 	display: flex;
-	align-items: center;
 	gap: 6px;
+	align-items: center;
 	margin-bottom: 10px;
 }

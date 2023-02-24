@@ -1,5 +1,5 @@
-.line{
-    border: 0.5px solid #D6DBEB;
-    background-color: #D6DBEB;
-    height: 40px;
+.line {
+	height: 40px;
+	background-color: #d6dbeb;
+	border: 0.5px solid #d6dbeb;
 }
