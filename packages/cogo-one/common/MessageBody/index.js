@@ -44,6 +44,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						className={styles.object_styles}
 					/>
 				</div>
+
 				<ShowMessage />
 			</>
 		);
@@ -58,9 +59,10 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 	}
 	if (message_type === 'contacts') {
 		const { name:{ formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
+
 		return (
 			<div className={styles.contact_card}>
-				<IcMUserAllocations className={styles.allocation} />
+				<IcMUserAllocations height="30px" width="30px" fill="#7278AD" className={styles.user_allocation} />
 				<div>
 					<div className={styles.contact_name}>
 						{formatted_name}

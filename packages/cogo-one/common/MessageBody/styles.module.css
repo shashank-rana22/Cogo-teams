@@ -33,9 +33,6 @@
 	text-align: left;
 }
 
-.allocation {
-	width: 30px;
-	height: 30px;
-	margin-right: 10px;
-	fill: "#7278AD";
+.user_allocation{
+	margin-right:10px;
 }
