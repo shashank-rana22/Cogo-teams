@@ -74,7 +74,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 
 						</div>
 					</div>
-				) : <SearchFound />}
+				) : <SearchFound searchState={searchState} />}
 		</div>
 	);
 }
