@@ -10,7 +10,7 @@ const getControls = ({ watchCategory = '', pocOptions }) => [
 		type        : 'select',
 		placeholder : 'Select a Category',
 		options     : categoryOptions,
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '31%', marginRight: '20px' },
 		rules       : { required: 'Category is required' },
 	},
 	{
@@ -19,7 +19,7 @@ const getControls = ({ watchCategory = '', pocOptions }) => [
 		type        : 'select',
 		placeholder : 'Select a sub-category',
 		options     : subCategoryOptions[watchCategory],
-		style       : { flexBasis: '32%' },
+		style       : { flexBasis: '31%', marginRight: '20px' },
 		rules       : { required: 'Sub Category is required' },
 	},
 	{
@@ -28,7 +28,7 @@ const getControls = ({ watchCategory = '', pocOptions }) => [
 		type        : 'select',
 		placeholder : 'Select Location',
 		options     : officeLocations,
-		style       : { flexBasis: '30%', marginRight: 0 },
+		style       : { flexBasis: '31%', marginRight: '20px' },
 		rules       : { required: 'Office Location is required' },
 	},
 	{
@@ -37,7 +37,7 @@ const getControls = ({ watchCategory = '', pocOptions }) => [
 		type        : 'select',
 		placeholder : 'Select a POC',
 		options     : pocOptions,
-		style       : { flexBasis: '30%' },
+		style       : { flexBasis: '31%', marginRight: '20px' },
 		rules       : { required: 'POC is required' },
 	},
 ];

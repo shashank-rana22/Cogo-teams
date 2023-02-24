@@ -2,7 +2,11 @@ import { getElementController } from '../../../utils/get-element-controller';
 
 import styles from './styles.module.css';
 
-function FormLayout({ fields = [], control = {}, errors = {} }) {
+function FormLayout({
+	fields = [],
+	control = {},
+	errors = {},
+}) {
 	return (
 		<div className={styles.form_container}>
 			{fields.map((controlItem) => {
