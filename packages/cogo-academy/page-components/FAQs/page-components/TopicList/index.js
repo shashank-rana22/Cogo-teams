@@ -14,7 +14,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 		refetchTopic = () => {},
 		data,
 		loading = false,
-		activeTab,
+		activeTab = 'All Topics',
 		setActiveTab,
 	} = useListFaqTopic();
 
@@ -41,6 +41,21 @@ function TopicList({ tabTitle, searchState = '' }) {
 								themeType="primary-vertical"
 								onChange={setActiveTab}
 							>
+								<TabPanel
+									name="All Topics"
+									title={(
+										<div>
+											<div className={styles.title}>
+												{startCase('All Topics')}
+												:
+											</div>
+
+											<div className={styles.subtitle}>
+												{startCase('Click here to see all Questions')}
+											</div>
+										</div>
+									)}
+								/>
 								{(data?.list || []).map((singleOption) => (
 									<TabPanel
 										name={singleOption}

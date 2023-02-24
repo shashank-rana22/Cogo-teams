@@ -69,3 +69,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.pagination {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+} 

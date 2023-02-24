@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -11,10 +12,13 @@ import styles from './styles.module.css';
 function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 	const {
 		refetchQuestions = () => {},
+		page,
+		setPage,
 		data,
 		loading = false,
 		activeTab,
 		setActiveTab,
+		paginationData,
 	// eslint-disable-next-line react-hooks/rules-of-hooks
 	} = useListFaqQuestions({ topicId });
 
@@ -48,7 +52,16 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 						<Questions questions={question} />
 					</div>
 				))}
+			</div>
 
+			<div className={styles.pagination}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={paginationData?.total_count}
+					pageSize={paginationData?.page_limit}
+					onPageChange={setPage}
+				/>
 			</div>
 		</div>
 	);

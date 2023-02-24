@@ -1,4 +1,4 @@
-import { Input, Modal, Button } from '@cogoport/components';
+import { Input, Modal, Button, Pagination } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -15,6 +15,9 @@ function MostReadFAQs() {
 	const [searchState, setSearchState] = useState('');
 	const sort = true;
 	const {
+		page,
+		setPage = () => {},
+		paginationData,
 		refetchQuestions = () => {},
 		data,
 		loading = false,
@@ -39,6 +42,15 @@ function MostReadFAQs() {
 			{data?.list.map((question) => (
 				<div className={styles.border}><Questions questions={question} /></div>
 			))}
+			<div className={styles.pagination}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={paginationData?.total_count}
+					pageSize={paginationData?.page_limit}
+					onPageChange={setPage}
+				/>
+			</div>
 		</div>
 	);
 }
