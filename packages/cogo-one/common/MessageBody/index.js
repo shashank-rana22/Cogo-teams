@@ -60,7 +60,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		const { name:{ formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
 		return (
 			<div className={styles.contact_card}>
-				<IcMUserAllocations height="30px" width="30px" fill="#7278AD" style={{ marginRight: '10px' }} />
+				<IcMUserAllocations className={styles.allocation} />
 				<div>
 					<div className={styles.contact_name}>
 						{formatted_name}
