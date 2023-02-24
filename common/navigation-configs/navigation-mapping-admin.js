@@ -772,6 +772,8 @@ const navigationMappingAdmin = {
 				icon          : IcMProductCodeMapping,
 				main_apis     : ['list_shipments'],
 				possible_apis : [...business_finance.coeFinance],
+			},
+			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
 				href          : '/business-finance/account-payables/[active_tab]',
