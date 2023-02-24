@@ -4,13 +4,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-// import useGetListVendorPocServices from '../../../../hooks/useGetListVendorPocServices';
 import getControls from '../utils/controls';
 import createPOCOptions from '../utils/createPOCOptions';
 
 function useCreateVendorServicePOC({
 	setShowForm = () => {},
 	getVendorData = {},
+	refetchServicesPocs = () => {},
 }) {
 	const {
 		general : { query = {} },
@@ -36,8 +36,6 @@ function useCreateVendorServicePOC({
 
 	const controls = getControls({ watchCategory, pocOptions });
 
-	// const { refetchServicesPocs = () => {} } = useGetListVendorPocServices();
-
 	const [{ loading: createVendorServicePocLoading }, triggerCreateVendorServicePoc] = useRequest({
 		url    : '/create_vendor_service_poc',
 		method : 'POST',
@@ -56,7 +54,7 @@ function useCreateVendorServicePOC({
 
 			await triggerCreateVendorServicePoc({ data: payload });
 
-			// refetchServicesPocs();
+			refetchServicesPocs();
 
 			setShowForm('');
 			Toast.success('Service POC added successfully');

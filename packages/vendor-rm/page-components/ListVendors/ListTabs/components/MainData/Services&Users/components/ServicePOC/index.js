@@ -5,7 +5,6 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import getOfficeLocation from '../../../../../../../../utils/getOfficeLocation';
-import useGetListVendorPocServices from '../../hooks/useGetListVendorPocServices';
 import getPocRole from '../../utils/getPocRole';
 
 import LoadingState from './LoadingState';
@@ -24,12 +23,10 @@ const pocsMapping = {
 	poc_role      : 'Role in the Company',
 };
 
-function ServicePOC() {
-	const {
-		allServicesAndPocs = [],
-		loading = false,
-	} = useGetListVendorPocServices();
-
+function ServicePOC({
+	allServicesAndPocs = [],
+	loading = false,
+}) {
 	if (loading) {
 		return (
 			<LoadingState />

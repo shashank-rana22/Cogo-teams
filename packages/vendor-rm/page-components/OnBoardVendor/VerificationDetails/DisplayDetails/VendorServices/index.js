@@ -1,6 +1,8 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import getOfficeLocation from '../../../../../utils/getOfficeLocation';
+
 import styles from './styles.module.css';
 
 const filedsToShow = {
@@ -13,9 +15,7 @@ function VendorServices({
 	detail,
 }) {
 	return (
-		<div
-			className={styles.container}
-		>
+		<div className={styles.container}>
 			<div className={styles.title}>
 				Vendor Services
 			</div>
@@ -33,7 +33,7 @@ function VendorServices({
 											</div>
 											<div className={styles.value}>
 												{wantedField === 'cogoport_office_id'
-													? item?.cogoport_office?.display_name : startCase(val)}
+													? getOfficeLocation(val) : startCase(val)}
 											</div>
 										</div>
 									);
