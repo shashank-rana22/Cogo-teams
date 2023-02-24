@@ -58,7 +58,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<form className={styles.container} onSubmit={handleSubmit(createSubmit)}>
 			<div className={styles.controller_div}>
 				<Radio
 					name="assign_user"
@@ -127,13 +127,13 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 					size="md"
 					themeType="accent"
 					loading={assignLoading}
-					onClick={handleSubmit(createSubmit)}
+					type="submit"
 				>
 					Assign
 				</Button>
 			</div>
 
-		</div>
+		</form>
 	);
 }
 export default AssignToForm;

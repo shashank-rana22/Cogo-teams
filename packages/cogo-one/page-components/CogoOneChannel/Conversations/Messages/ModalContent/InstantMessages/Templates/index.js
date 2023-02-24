@@ -1,10 +1,4 @@
-import {
-	cl,
-	Input,
-	Button,
-	Placeholder,
-	Pill,
-} from '@cogoport/components';
+import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
 import { useForm, TextareaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -46,11 +40,11 @@ function Templates({
 		refetch,
 	} = useListTemplate({ activeTab });
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
-		reset: () => {
-			reset({ title: '', content: '' });
-		},
-		refetch,
-		setOpenCreateReply,
+        	reset: () => {
+        		reset({ title: '', content: '' });
+        	},
+        	refetch,
+        	setOpenCreateReply,
 	});
 
 	const handleSelect = (val, status, name, Id) => {
@@ -118,7 +112,11 @@ function Templates({
 							}) => (
 								<div
 									role="presentation"
-									className={cl`${activeCard === id ? styles.active : styles.each_message}`}
+									className={cl`${
+										activeCard === id
+											? styles.active
+											: styles.each_message
+									}`}
 									onClick={() => handleSelect(
 										html_template,
 										whatsapp_approval_status,
@@ -126,13 +124,19 @@ function Templates({
 										id,
 									)}
 									style={{
-										cursor: previewData || whatsapp_approval_status !== 'approved'
-										|| openCreateReply
-											? 'not-allowed' : 'pointer',
+										cursor:
+                                            previewData
+                                            || whatsapp_approval_status
+                                                !== 'approved'
+                                            || openCreateReply
+                                            	? 'not-allowed'
+                                            	: 'pointer',
 									}}
 								>
 									<div className={styles.wrap}>
-										<div className={styles.title}>{messageTitle}</div>
+										<div className={styles.title}>
+											{messageTitle}
+										</div>
 										<div>
 											{whatsapp_approval_status === 'approved' && (
 												<Pill size="md" color="green">
@@ -151,13 +155,17 @@ function Templates({
 											)}
 										</div>
 									</div>
-									<div className={styles.message}>{messageContent}</div>
+									<div className={styles.message}>
+										{messageContent}
+									</div>
 								</div>
-							),
+                        	),
 						)}
 						{loading && loader()}
 						{isEmpty(list) && !loading && (
-							<div className={styles.empty_div}>No Templates Found</div>
+							<div className={styles.empty_div}>
+								No Templates Found
+							</div>
 						)}
 					</div>
 				</div>
@@ -176,15 +184,27 @@ function Templates({
 				<div className={styles.create_container}>
 					<div>
 						<div className={styles.label}>Name</div>
-						<InputController control={control} {...title} id="title" />
+						<InputController
+							control={control}
+							{...title}
+							id="title"
+						/>
 						{errors?.title && (
-							<div className={styles.error_text}>This is Required</div>
+							<div className={styles.error_text}>
+								This is Required
+							</div>
 						)}
 						<div className={styles.text_area_container}>
 							<div className={styles.label}>Content</div>
-							<TextareaController control={control} {...content} id="content" />
+							<TextareaController
+								control={control}
+								{...content}
+								id="content"
+							/>
 							{errors?.content && (
-								<div className={styles.error_text}>This is Required</div>
+								<div className={styles.error_text}>
+									This is Required
+								</div>
 							)}
 						</div>
 					</div>
@@ -214,7 +234,9 @@ function Templates({
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
-								<div className={styles.preview_div}>{CreateReactComponent()}</div>
+								<div className={styles.preview_div}>
+									{CreateReactComponent()}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -223,7 +245,11 @@ function Templates({
 							themeType="tertiary"
 							size="md"
 							className={styles.button_styles}
-							onClick={() => { setShowPreview(false); setActiveCard(''); setPreviewData(''); }}
+							onClick={() => {
+								setShowPreview(false);
+								setActiveCard('');
+								setPreviewData('');
+							}}
 						>
 							Cancel
 						</Button>
