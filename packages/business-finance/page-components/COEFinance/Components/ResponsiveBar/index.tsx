@@ -8,83 +8,98 @@ import React from 'react';
 // you'll often use just a few of them.
 function MyResponsiveBar({ data }) {
 	return (
-		<ResponsiveBar
-			data={data}
-			keys={['invoices']}
-			indexBy="day"
-			margin={{ top: 50, right: 30, bottom: 50, left: 60 }}
-			padding={0.3}
-			enableGridY={false}
-			valueScale={{ type: 'linear' }}
-			indexScale={{ type: 'band', round: true }}
-			colors="#FCEDBF"
-			borderColor={{
-				from      : 'color',
-				modifiers : [
-					[
-						'darker',
-						1.6,
+		<>
+			<div>lkfnkl</div>
+			<ResponsiveBar
+				data={data}
+				keys={['Approved', 'Rejected']}
+				indexBy="day"
+				margin={{ top: 40, right: 30, bottom: 50, left: 60 }}
+				padding={0.62}
+				enableGridY
+				valueScale={{ type: 'linear' }}
+				indexScale={{ type: 'band', round: true }}
+				colors={['#ACDADF', '#F37166']}
+				layout="vertical"
+				groupMode="grouped"
+				borderColor={{
+					from      : 'color',
+					modifiers : [
+						[
+							'darker',
+							1.6,
+						],
 					],
-				],
-			}}
-			axisTop={null}
-			axisRight={null}
-			axisBottom={{
-				tickSize       : 0,
-				tickPadding    : 5,
-				tickRotation   : 0,
-				legend         : 'Invoices',
-				legendPosition : 'middle',
-				legendOffset   : 32,
-			}}
-			axisLeft={{
-				tickSize       : 0,
-				tickPadding    : 5,
-				tickRotation   : 0,
-				legend         : 'count',
-				legendPosition : 'middle',
-				legendOffset   : -40,
-			}}
-			labelSkipWidth={12}
-			labelSkipHeight={12}
-			labelTextColor={{
-				from      : 'color',
-				modifiers : [
-					[
-						'darker',
-						1.6,
+				}}
+				axisTop={null}
+				innerPadding={8}
+				axisRight={null}
+				minValue={0}
+				axisBottom={{
+					tickSize     : 0,
+					tickPadding  : 10,
+					tickRotation : 0,
+				}}
+				axisLeft={{
+					tickSize     : 0,
+					tickPadding  : 8,
+					tickRotation : 0,
+				}}
+				labelSkipWidth={12}
+				labelSkipHeight={12}
+				labelTextColor={{
+					from      : 'color',
+					modifiers : [
+						[
+							'darker',
+							1,
+						],
 					],
-				],
-			}}
-			legends={[
-				{
-					dataFrom      : 'keys',
-					anchor        : 'bottom-right',
-					direction     : 'column',
-					justify       : false,
-					translateX    : 40,
-					translateY    : -280,
-					itemsSpacing  : 2,
-					itemWidth     : 100,
-					itemHeight    : 20,
-					itemDirection : 'left-to-right',
-					itemOpacity   : 0.85,
-					symbolSize    : 20,
-					effects       : [
-						{
-							on    : 'hover',
-							style : {
-								itemOpacity: 1,
-							},
+				}}
+				fill={[
+					{
+						match: {
+							id: 'fries',
 						},
-					],
-				},
-			]}
-			role="application"
-			ariaLabel="Nbar chart"
-			// eslint-disable-next-line react/jsx-no-bind
-			barAriaLabel={function (e) { return `${e.id}: ${e.formattedValue} in country: ${e.indexValue}`; }}
-		/>
+						id: 'dots',
+					},
+					{
+						match: {
+							id: 'sandwich',
+						},
+						id: 'lines',
+					},
+				]}
+				legends={[
+					{
+						dataFrom      : 'keys',
+						anchor        : 'bottom-right',
+						direction     : 'row',
+						justify       : false,
+						translateX    : 20,
+						translateY    : -280,
+						itemsSpacing  : 50,
+						itemWidth     : 100,
+						itemHeight    : 20,
+						itemDirection : 'left-to-right',
+						itemOpacity   : 0.85,
+						symbolShape   : 'circle',
+						symbolSize    : 20,
+						effects       : [
+							{
+								on    : 'hover',
+								style : {
+									itemOpacity: 0.7,
+								},
+							},
+						],
+					},
+				]}
+				role="application"
+				animate
+			/>
+
+		</>
 	);
 }
 export default MyResponsiveBar;

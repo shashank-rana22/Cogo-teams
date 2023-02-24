@@ -78,6 +78,36 @@
   align-items: center;
   padding: 6px;
   padding-right: 18px;
+
+  :global {
+    .react-datepicker__input-container {
+      width: 200px;
+
+      .react-datepicker-ignore-onclickoutside {
+        height: 40px;
+      }
+
+      button {
+        background: none !important;
+      }
+    }
+  }
+}
+
+.filter {
+  :global {
+    .react-datepicker__input-container {
+      width: 200px;
+
+      .react-datepicker-ignore-onclickoutside {
+        height: 40px;
+      }
+
+      button {
+        background: none !important;
+      }
+    }
+  }
 }
 .report {
   cursor: pointer;
@@ -87,4 +117,9 @@
 .header_report {
   font-size: 16px;
   font-weight: 600;
+}
+.button_flex {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
