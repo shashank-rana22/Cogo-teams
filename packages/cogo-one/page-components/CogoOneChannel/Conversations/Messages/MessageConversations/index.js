@@ -39,7 +39,6 @@ function MessageConversations({
 	communicationLoading = false,
 	lastPage = false,
 }) {
-	console.log('finalUrl:', finalUrl);
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
 
