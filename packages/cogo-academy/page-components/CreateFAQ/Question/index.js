@@ -29,6 +29,7 @@ function CreateFAQ() {
 		getArray,
 		questionPreview,
 		setQuestionPreview,
+		onClickPublish,
 	} = useCreateQuestions();
 
 	const onClickBackIcon = () => {
@@ -36,7 +37,12 @@ function CreateFAQ() {
 	};
 
 	if (questionPreview === 'preview') {
-		return (<PreviewQuestion setQuestionPreview={setQuestionPreview} />);
+		return (
+			<PreviewQuestion
+				onClickPublish={onClickPublish}
+				setQuestionPreview={setQuestionPreview}
+			/>
+		);
 	}
 
 	return (
