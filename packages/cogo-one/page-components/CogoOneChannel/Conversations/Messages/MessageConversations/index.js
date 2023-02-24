@@ -50,6 +50,7 @@ function MessageConversations({
 	} = useGetEmojiList({ activeMessageCard });
 
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
+	console.log('draftUploadedFile:', draftUploadedFile);
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
 
@@ -270,6 +271,7 @@ function MessageConversations({
 									/>
 								)}
 								onChange={(val) => {
+									console.log('val:', val);
 									setDraftUploadedFiles((prev) => ({
 										...prev,
 										[id]: val,
@@ -277,7 +279,6 @@ function MessageConversations({
 								}}
 							/>
 						)}
-
 						<Popover
 							placement="top"
 							render={(

@@ -21,17 +21,17 @@ importers:
       postcss-preset-env: ^8.0.1
       react-dom: 18.2.0
       react-grid-layout: ^1.3.4
-      react-i18next: ^12.1.5
+      react-i18next: ^12.2.0
       stylelint: ^14.16.1
       turbo: ^1.8.2
     dependencies:
       '@sentry/nextjs': 7.38.0
       accept-language: 3.0.18
       i18next: 22.4.10
-      next-i18next: 13.1.5_r4345fzbqeiabmbjtkoshfh4au
+      next-i18next: 13.1.5_johky4hpydmc34raojpzuxlpqy
       react-dom: 18.2.0
       react-grid-layout: 1.3.4_react-dom@18.2.0
-      react-i18next: 12.1.5_pmu7klu5prsdg5sxir3ehgxr7y
+      react-i18next: 12.2.0_pmu7klu5prsdg5sxir3ehgxr7y
     devDependencies:
       '@cogoport/eslint-config': 1.1.0_eslint@8.34.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
@@ -318,6 +318,7 @@ importers:
       firebase: ^9.17.1
       react: 18.2.0
       stylelint: ^14.16.1
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
       '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
@@ -330,6 +331,7 @@ importers:
       firebase: 9.17.1
       react: 18.2.0
       stylelint: 14.16.1
+      uuid: 9.0.0
 
   packages/contracts:
     specifiers:
@@ -6403,7 +6405,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-i18next/13.1.5_r4345fzbqeiabmbjtkoshfh4au:
+  /next-i18next/13.1.5_johky4hpydmc34raojpzuxlpqy:
     resolution: {integrity: sha512-gULKQNQmFYIW6C45cb5ZOHa+sw8XUkibFHTqRqrcfbAa1fcBCh3TgX1KtzA0vzeh9R93BkkvFhm+FuhO3kR9jQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -6418,7 +6420,7 @@ packages:
       hoist-non-react-statics: 3.3.2
       i18next: 22.4.10
       i18next-fs-backend: 2.1.1
-      react-i18next: 12.1.5_pmu7klu5prsdg5sxir3ehgxr7y
+      react-i18next: 12.2.0_pmu7klu5prsdg5sxir3ehgxr7y
     dev: false
 
   /next/12.3.1_biqbaboplfbrettd7655fr4n2y:
@@ -7389,8 +7391,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-i18next/12.1.5_pmu7klu5prsdg5sxir3ehgxr7y:
-    resolution: {integrity: sha512-7PQAv6DA0TcStG96fle+8RfTwxVbHVlZZJPoEszwUNvDuWpGldJmNWa3ZPesEsZQZGF6GkzwvEh6p57qpFD2gQ==}
+  /react-i18next/12.2.0_pmu7klu5prsdg5sxir3ehgxr7y:
+    resolution: {integrity: sha512-5XeVgSygaGfyFmDd2WcXvINRw2WEC1XviW1LXY/xLOEMzsCFRwKqfnHN+hUjla8ZipbVJR27GCMSuTr0BhBBBQ==}
     peerDependencies:
       i18next: '>= 19.0.0'
       react: '>= 16.8.0'
@@ -8335,6 +8337,11 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
     dev: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
