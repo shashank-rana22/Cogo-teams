@@ -54,7 +54,7 @@ function VendorDetailsInfo({
 
 	const details = [
 		{ label: 'Country of Registration', value: country?.name },
-		{ label: 'GST No.', value: registration_number },
+		{ label: 'Registration No.', value: registration_number },
 		{ label: 'Organisation Name', value: business_name },
 		{ label: 'GST Certificate', value: registration_proof_url },
 		{ label: 'Type of Company', value: startCase(company_type) },
