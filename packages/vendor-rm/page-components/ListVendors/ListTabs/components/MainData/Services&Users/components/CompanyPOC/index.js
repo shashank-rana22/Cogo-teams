@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
 // import { IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import getPocRole from '../../utils/getPocRole';
@@ -48,6 +49,10 @@ function CompanyPOC({
 		return obj;
 	})[0];
 
+	if (isEmpty(details)) {
+		return null;
+	}
+
 	return (
 		<div className={styles.main}>
 			<span className={styles.heading}>
@@ -56,7 +61,7 @@ function CompanyPOC({
 
 			<div className={styles.content}>
 				<div className={styles.box_info}>
-					{Object.keys(details).map((poc) => (
+					{Object.keys(details || []).map((poc) => (
 						<div className={styles.label_value_container}>
 							<div className={styles.top}>
 								{labelMapping[poc]}
