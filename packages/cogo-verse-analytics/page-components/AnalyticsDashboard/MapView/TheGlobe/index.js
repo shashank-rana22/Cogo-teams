@@ -12,6 +12,8 @@ function TheGLobe(
 		country = {},
 		globeGL = {},
 		markerData = [],
+		circleTab = '',
+		date = {},
 
 	},
 ) {
@@ -46,11 +48,10 @@ function TheGLobe(
 		if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
 			&& !isEmpty(globeGL?.current?.scene()?.children[1]?.intensity)
 			&& !isEmpty(globeGL?.current?.scene()?.children[2]?.intensity))) {
-			globeGL.current.scene().children[2].visible = true;
 			globeGL.current.scene().children[1].intensity = 1.25;
 			globeGL.current.scene().children[2].intensity = 0.25;
 		}
-	}, [globeGL?.current, CountryMobileCode]);
+	}, [globeGL?.current, CountryMobileCode, circleTab, date]);
 
 	// Globe Functions
 
@@ -84,6 +85,41 @@ function TheGLobe(
 		}
 	}, [CountryMobileCode]);
 
+	const markerSize = () => {
+		if (markerData?.length > 800) {
+			return '5px';
+		} if (markerData?.length > 4000) {
+			return '3px';
+		}
+		return '10px';
+	};
+
+	const markers = markerData?.length > 5000 ? markerData.slice(0, 5000) : markerData;
+
+	const hexBinProps = {
+		hexBinPointsData         : markers,
+		hexAltitude              : 0.002,
+		hexBinResolution         : 3,
+		hexTopColor              : () => 'rgba(214, 179, 0, 1)',
+		hexSideColor             : () => 'rgba(252, 220, 0, 1)',
+		hexBinMerge              : true,
+		enablePointerInteraction : true,
+	};
+	const htmlMarkerProps = {
+		htmlElementsData       : markers,
+		htmlTransitionDuration : 2000,
+		htmlElement            : () => {
+			// eslint-disable-next-line no-undef
+			const el = document?.createElement('div');
+			el.innerHTML = globeMarker;
+			el.style.color = 'rgba(252, 220, 0, 1)';
+			el.style.width = markerSize();
+			el.style['pointer-events'] = 'auto';
+			el.style.cursor = 'default';
+			return el;
+		},
+	};
+
 	return (
 		<div className={styles.globe_container}>
 
@@ -98,27 +134,8 @@ function TheGLobe(
 				showAtmosphere
 				atmosphereAltitude={0.1}
 				globeImageUrl={TEXTURES[colorMode].two}
-				// Hexbin
-				// hexBinPointsData={markerData}
-				// hexAltitude={0.010}
-				// hexBinResolution={4}
-				// hexTopColor={() => 'rgba(114, 120, 173, 1)'}
-				// hexSideColor={() => 'rgba(206, 209, 237, 1)'}
-				// hexBinMerge
-				// enablePointerInteraction
-				// html
-				htmlElementsData={markerData}
-				htmlTransitionDuration={2000}
-				htmlElement={() => {
-					// eslint-disable-next-line no-undef
-					const el = document?.createElement('div');
-					el.innerHTML = globeMarker;
-					el.style.color = '#FCDC00';
-					el.style.width = '10px';
-					el.style['pointer-events'] = 'auto';
-					el.style.cursor = 'default';
-					return el;
-				}}
+				// {...hexBinProps}
+				{...htmlMarkerProps}
 
 			/>
 
