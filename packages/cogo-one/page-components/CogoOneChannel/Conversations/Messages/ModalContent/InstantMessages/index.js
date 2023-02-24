@@ -11,10 +11,24 @@ function InstantRepliesModal({ data = {} }) {
 
 	const { channel_type = '' } = data || {};
 
+	if (channel_type === 'platform_chat') {
+		return (
+			<div className={styles.container}>
+				<InstantReplies
+					data={data}
+					activeTab={activeTab}
+					openCreateReply={openCreateReply}
+					setOpenCreateReply={setOpenCreateReply}
+					setActiveTab={setActiveTab}
+				/>
+			</div>
+
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<Tabs
-				// tabIcon={<IcMProfile />}
 				activeTab={activeTab}
 				themeType="primary"
 				onChange={(val) => {
@@ -32,19 +46,17 @@ function InstantRepliesModal({ data = {} }) {
 						setActiveTab={setActiveTab}
 					/>
 				</TabPanel>
-				{channel_type === 'whatsapp' && (
-					<TabPanel name="template" title="Template">
-						<Templates
-							data={data}
-							activeTab={activeTab}
-							openCreateReply={openCreateReply}
-							setOpenCreateReply={setOpenCreateReply}
-							setActiveTab={setActiveTab}
-						/>
-					</TabPanel>
-				)}
-			</Tabs>
+				<TabPanel name="template" title="Template">
+					<Templates
+						data={data}
+						activeTab={activeTab}
+						openCreateReply={openCreateReply}
+						setOpenCreateReply={setOpenCreateReply}
+						setActiveTab={setActiveTab}
+					/>
+				</TabPanel>
 
+			</Tabs>
 		</div>
 	);
 }

@@ -340,7 +340,7 @@ function MessageConversations({
 								}
 							}}
 							style={{
-								cursor: !hasPermissionToEdit
+								cursor: !hasPermissionToEdit || isEmpty(draftMessage?.trim())
 									? 'not-allowed'
 									: 'pointer',
 							}}
