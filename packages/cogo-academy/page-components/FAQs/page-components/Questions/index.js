@@ -3,7 +3,7 @@ import { useForm, InputController, CheckboxController } from '@cogoport/forms';
 import { IcCLike, IcCDislike } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { format, startCase } from '@cogoport/utils';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import useGetQuestions from '../../hooks/useGetQuestions';
 import QuestionsCollapse from '../QuestionCollapse';
@@ -15,15 +15,19 @@ const FEEDBACK_MAPPING = {
 	false : 'disliked',
 };
 
-function Questions({ questions }) {
+function Questions({ questions = {} }) {
 	const [open, setOpen] = useState(false);
-
-	const is_positive = false;
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
 	const [show, setShow] = useState(false);
 
-	const { data: answerData } = useGetQuestions({ id: questions.id });
+	const { data: answerData, loading } = useGetQuestions({ id: questions.id });
+	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+
+	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
+
+	useEffect(() => {
+		setIsLiked(FEEDBACK_MAPPING[is_positive]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
 
 	const { handleSubmit, formState: { errors }, control } = useForm();
 
