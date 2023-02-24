@@ -26,11 +26,11 @@ function CardDetails({ type = '' }) {
 		defaultValues: {},
 	});
 
-	const { control, handleSubmit, reset } = formProps;
+	const { control, handleSubmit } = formProps;
 
-	useEffect(() => {
-		reset();
-	}, [type]);
+	// useEffect(() => {
+	// 	reset();
+	// }, [type]);
 
 	const onSave = (formValues, e) => {
 		e.preventDefault();

@@ -44,13 +44,13 @@ function DeleteModal({ itemData, refetch }) {
 					)}
 			</div>
 			<Modal show={showDeleteModal} size="md" onClose={() => setShowDeleteModal(false)}>
-				{status === 'REJECTED' ? <Modal.Header className={styles.header} title="Accept Request" />
+				{status === 'REJECTED' ? <Modal.Header className={styles.header} title="Close Request" />
 					: <Modal.Header className={styles.header} title="Delete Request" />}
 
 				<Modal.Body>
 					<section>
 						The Original request and all details related to it will be
-						{status === 'REJECTED' ? ' Accepted' : ' deleted'}
+						{status === 'REJECTED' ? ' Closed' : ' deleted'}
 
 					</section>
 					{status !== 'REJECTED'
@@ -83,7 +83,7 @@ function DeleteModal({ itemData, refetch }) {
 							onDeleteAccept();
 						}}
 					>
-						{status === 'REJECTED' ? 'Accept' : 'Delete'}
+						{status === 'REJECTED' ? 'Submit' : 'Delete'}
 
 					</Button>
 				</Modal.Footer>
