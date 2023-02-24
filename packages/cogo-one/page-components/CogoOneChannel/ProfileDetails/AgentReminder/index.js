@@ -64,7 +64,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		setShowReminder(true);
 	};
 
-	if (isEmpty(list) && !showReminder && !listLoading && !firstLoading) {
+	if (isEmpty(list) && !showReminder && !listLoading && !firstLoading && !organizationId) {
 		return (
 			<EmptyState
 				type="reminder"
