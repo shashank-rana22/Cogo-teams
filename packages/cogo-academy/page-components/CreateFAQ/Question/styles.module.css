@@ -19,6 +19,18 @@
 	font-weight: 600;
 }
 
+.label_container {
+	display: flex;
+	align-items: center;
+}
+
+.create_tag_label {
+	margin-left: 8px;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .form_container {
 	width: 75%;
 }
