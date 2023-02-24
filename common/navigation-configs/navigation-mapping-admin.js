@@ -172,6 +172,7 @@ const navigationMappingAdmin = {
 			...apis.app_pay_later,
 			...apis.feedback,
 			...apis.checkout_promotions,
+			...apis.export_factoring,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -772,6 +773,8 @@ const navigationMappingAdmin = {
 				icon          : IcMProductCodeMapping,
 				main_apis     : ['list_shipments'],
 				possible_apis : [...business_finance.coeFinance],
+			},
+			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
 				href          : '/business-finance/account-payables/[active_tab]',
@@ -1385,6 +1388,7 @@ const navigationMappingAdmin = {
 			...apis.feedback,
 			...apis.cogopoints,
 			...apis.checkout_promotions,
+			...apis.export_factoring,
 		],
 		module_type: 'crm',
 	},
