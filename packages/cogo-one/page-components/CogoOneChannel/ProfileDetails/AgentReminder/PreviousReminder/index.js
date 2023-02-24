@@ -44,10 +44,10 @@ function PreviousReminder({ listData = {}, listLoading }) {
 							<div className={styles.content}>
 								<div className={styles.top}>
 									<div className={styles.purpose}>{title}</div>
-									<div className={styles.time}>{format(reminder_date, 'dd MMM')}</div>
-								</div>
-								<div className={styles.top}>
 									<div className={styles.task}>{communication_summary || '-'}</div>
+								</div>
+								<div className={styles.right}>
+									<div className={styles.time}>{format(reminder_date, 'dd MMM')}</div>
 									<div className={styles.time}>{format(reminder_date, 'HH:mm a')}</div>
 								</div>
 							</div>
