@@ -35,7 +35,7 @@ function ServiceForm({
 				<Button
 					size="md"
 					role="presentation"
-					themeType="secondary"
+					themeType="tertiary"
 					onClick={handleCancel}
 				>
 					Cancel
