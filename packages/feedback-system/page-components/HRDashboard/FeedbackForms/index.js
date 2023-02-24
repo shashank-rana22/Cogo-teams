@@ -67,14 +67,15 @@ function FeedbackForms() {
 
 		const {
 			stage: newFormStage = '', department: newFormDepartment = '',
-			designation: newFormDesignation = '',
+			designation: newFormDesignation = '', bulkDesignations = [],
 		} = newDesignationFormStatus;
 
 		if (newFormStage) {
 			if (!designation) {
 				setFormsParams({
-					department  : newFormDepartment || '',
-					designation : newFormDesignation || '',
+					department       : newFormDepartment || '',
+					designation      : newFormDesignation || '',
+					bulkDesignations : bulkDesignations || [],
 				});
 				setOpenAccordion({ [newFormDepartment]: true });
 			}
@@ -149,6 +150,8 @@ function FeedbackForms() {
 								formStage={formStage}
 								setFormStage={setFormStage}
 								setRefetchedLists={setRefetchedLists}
+								formsParams={formsParams}
+								setFormsParams={setFormsParams}
 							/>
 						)
 						: (

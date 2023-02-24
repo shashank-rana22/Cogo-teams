@@ -10,10 +10,11 @@ function SubmitForm({
 	questionActionList = {},
 	setQuestionActionList = () => [],
 	proceedForm = () => {},
-	department,
-	designation,
+	formsParams = {},
 	setRefetchedLists,
 }) {
+	const { department = '', designation = '', bulkDesignations = [] } = formsParams;
+
 	const { onCreateForm, createFormLoading = false } = useCreateForm();
 
 	const createForm = () => {
@@ -28,7 +29,7 @@ function SubmitForm({
 		onCreateForm({
 			form_questions: newQuestionFormat,
 			department,
-			designation,
+			bulkDesignations,
 			proceedForm,
 			setRefetchedLists,
 		});

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import useListFeedbackQuestions from '../../../../../hooks/useListFeedbackQuestions';
 import getTagControls from '../../../../../utils/getTagControls';
+import BulkDesignation from '../../BulkDesignation';
 import Questions from '../../Questions';
 
 import CreateQuestions from './CreateQuestions';
@@ -15,12 +16,16 @@ import styles from './styles.module.css';
 function AddQuestions({
 	formId = '', proceedForm = () => {}, questionActionList = {},
 	setQuestionActionList = () => {},
-	department, designation,
+	formsParams = {},
+	setFormsParams = () => {},
 }) {
+	const { department, designation } = formsParams;
 	const [addAnother, setAddAnother] = useState(false);
 	const [openNewQuestionModal, setOpenNewQuestionModal] = useState(false);
 	const [refetchList, setRefetchList] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
+	const [bulkDesignations, setBulkDesignations] = useState([designation]);
+	const [openBulkDesignation, setOpenBulkDesignation] = useState(false);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -82,6 +87,11 @@ function AddQuestions({
 	);
 
 	const areFiltersApplied = params.Tags || params.Q;
+	const currentDesignation = bulkDesignations.length > 1 ? '...' : bulkDesignations[0] || department;
+
+	useEffect(() => {
+		setFormsParams((pv) => ({ ...pv, bulkDesignations }));
+	}, [bulkDesignations]);
 
 	return (
 		<>
@@ -93,12 +103,19 @@ function AddQuestions({
 							<div className={styles.form_header}>
 								Create Form :
 								{' '}
-								<span>
+								<div className={styles.dep}>
 									{startCase(department)}
 									{' > '}
-								</span>
+								</div>
 
-								<span className={styles.role}>{startCase(designation)}</span>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.role}
+									onClick={() => setOpenBulkDesignation(true)}
+								>
+									{currentDesignation}
+								</div>
 							</div>
 
 							<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>
@@ -186,10 +203,6 @@ function AddQuestions({
 			{openNewQuestionModal && (
 				<Modal
 					show={openNewQuestionModal}
-					onClickOutside={() => {
-						setAddAnother(false);
-						setOpenNewQuestionModal(false);
-					}}
 					onClose={() => {
 						setAddAnother(false);
 						setOpenNewQuestionModal(false);
@@ -207,6 +220,27 @@ function AddQuestions({
 							/>
 						</Modal.Body>
 					</div>
+				</Modal>
+			)}
+
+			{openBulkDesignation && (
+				<Modal
+					show={openBulkDesignation}
+					onClose={() => {
+						setOpenBulkDesignation(false);
+					}}
+				>
+					<Modal.Header title="Bulk Create for Designations" />
+
+					<Modal.Body style={{ padding: '0px' }}>
+						<BulkDesignation
+							setOpenBulkDesignation={setOpenBulkDesignation}
+							setBulkDesignations={setBulkDesignations}
+							department={department}
+							designation={designation}
+							bulkDesignations={bulkDesignations}
+						/>
+					</Modal.Body>
 				</Modal>
 			)}
 		</>

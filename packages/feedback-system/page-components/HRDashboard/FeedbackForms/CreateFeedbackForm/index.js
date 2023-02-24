@@ -9,12 +9,16 @@ import AddQuestions from './AddQuestions';
 import SubmitForm from './SubmitForm';
 
 function CreateFeedbackForm({
-	formId = '', setFormId = () => {}, department, designation,
+	formId = '', setFormId = () => {},
 	setOpenCreateForm = () => {},
 	formStage = '',
 	setFormStage = () => {},
 	setRefetchedLists,
+	formsParams = {},
+	setFormsParams = () => {},
 }) {
+	const { department = '', designation = '', bulkDesignations = [] } = formsParams;
+
 	const [questionActionList, setQuestionActionList] = useState({});
 
 	const proceedForm = (newStage) => {
@@ -23,6 +27,7 @@ function CreateFeedbackForm({
 		storeQuestionData({
 			department,
 			designation,
+			bulkDesignations,
 			checkList : ['', 'publish'].includes(newStage) ? [] : questionActionList.checked,
 			stage     : ['', 'publish'].includes(newStage) ? undefined : newStage,
 		});
@@ -43,8 +48,8 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
-					department={department}
-					designation={designation}
+					formsParams={formsParams}
+					setFormsParams={setFormsParams}
 				/>
 			);
 		}
@@ -59,8 +64,8 @@ function CreateFeedbackForm({
 						questionActionList={questionActionList}
 						setQuestionActionList={setQuestionActionList}
 						proceedForm={proceedForm}
-						department={department}
-						designation={designation}
+						formsParams={formsParams}
+						setFormsParams={setFormsParams}
 					/>
 				);
 			}
@@ -69,8 +74,7 @@ function CreateFeedbackForm({
 					questionActionList={questionActionList}
 					setQuestionActionList={setQuestionActionList}
 					proceedForm={proceedForm}
-					department={department}
-					designation={designation}
+					formsParams={formsParams}
 					setRefetchedLists={setRefetchedLists}
 				/>
 			);

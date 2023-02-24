@@ -9,12 +9,12 @@ const useCreateForm = () => {
 	}, { manual: true });
 
 	const onCreateForm = async ({
-		form_questions, department, designation,
+		form_questions, department, bulkDesignations = [],
 		proceedForm = () => {},
 		setRefetchedLists = () => {},
 	}) => {
 		try {
-			await trigger({ data: { form_questions, department, designation } });
+			await trigger({ data: { form_questions, department, designations: bulkDesignations } });
 			proceedForm('publish');
 			setRefetchedLists(true);
 		} catch (e) {
