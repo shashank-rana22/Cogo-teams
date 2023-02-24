@@ -1,7 +1,6 @@
-import { Card, Tabs, TabPanel } from '@cogoport/components';
-import { IcMProfile } from '@cogoport/icons-react';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import { React, useState } from 'react';
+import { React } from 'react';
 
 import useListFaqTopic from '../../hooks/useListFaqTopic';
 import QuestionsList from '../QuestionsList';

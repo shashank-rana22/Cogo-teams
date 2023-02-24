@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function Questions({ questions }) {
 	const [open, setOpen] = useState(false);
-	const [isLiked, setIsLiked] = useState(false);
+	const [isLiked, setIsLiked] = useState('');
 	const [show, setShow] = useState(false);
 
 	const { data: answerData } = useGetQuestions({ id: questions.id });
@@ -44,6 +44,7 @@ function Questions({ questions }) {
 			await trigger({
 				data: payload,
 			});
+
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 		} catch (error) {
 			console.log('error :: ', error);
@@ -107,7 +108,7 @@ function Questions({ questions }) {
 							}}
 						>
 							<Badge placement="left" color="green" size="md" text={answerData?.answers[0]?.upvote_count}>
-								<IcCLike fill={isLiked ? 'black' : '#f8f5ec'} />
+								<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
 							</Badge>
 
 						</div>
