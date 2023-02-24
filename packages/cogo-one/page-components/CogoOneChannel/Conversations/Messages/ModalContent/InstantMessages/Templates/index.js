@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import controls from '../../../../../../../configurations/create-instant-reply';
+import { statusMapping, statusColorMapping } from '../../../../../../../constants/index';
 import useCreateCommunicationTemplate from '../../../../../../../hooks/useCreateCommunicationTemplate';
 import useListTemplate from '../../../../../../../hooks/useListTemplates';
 
@@ -14,7 +15,6 @@ function Templates({
 	activeTab,
 	openCreateReply,
 	setOpenCreateReply = () => {},
-	// setActiveTab = () => {},
 	data = {},
 }) {
 	const { sendCommunicationTemplate, communicationLoading } = data || {};
@@ -40,11 +40,11 @@ function Templates({
 		refetch,
 	} = useListTemplate({ activeTab });
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
-        	reset: () => {
-        		reset({ title: '', content: '' });
-        	},
-        	refetch,
-        	setOpenCreateReply,
+		reset: () => {
+			reset({ title: '', content: '' });
+		},
+		refetch,
+		setOpenCreateReply,
 	});
 
 	const handleSelect = (val, status, name, Id) => {
@@ -83,6 +83,7 @@ function Templates({
 			<Placeholder height="30px" width="200px" margin="0 0 10px 0" />
 		</div>
 	));
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
@@ -138,21 +139,9 @@ function Templates({
 											{messageTitle}
 										</div>
 										<div>
-											{whatsapp_approval_status === 'approved' && (
-												<Pill size="md" color="green">
-													Approved
-												</Pill>
-											)}
-											{whatsapp_approval_status === 'rejected' && (
-												<Pill size="md" color="red">
-													Rejected
-												</Pill>
-											)}
-											{whatsapp_approval_status === null && (
-												<Pill size="md" color="orange">
-													Pending
-												</Pill>
-											)}
+											<Pill size="md" color={statusColorMapping[whatsapp_approval_status]}>
+												{statusMapping[whatsapp_approval_status]}
+											</Pill>
 										</div>
 									</div>
 									<div className={styles.message}>

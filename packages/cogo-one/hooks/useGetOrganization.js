@@ -1,22 +1,19 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useGetOrganization = ({ organizationId = '' }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_organization',
 		method : 'get',
 	}, { manual: true });
 
-	const [organizationData, setOrganizationData] = useState(null);
-
 	const fetchOrganization = async () => {
-		const res = await trigger({
+		await trigger({
 			params: {
 				id                 : organizationId,
 				user_data_required : true,
 			},
 		});
-		setOrganizationData(res?.data?.data || {});
 	};
 
 	useEffect(() => {
@@ -27,8 +24,8 @@ const useGetOrganization = ({ organizationId = '' }) => {
 	}, [organizationId]);
 
 	return {
-		organizationData,
-		orgLoading: loading,
+		organizationData : data?.data,
+		orgLoading       : loading,
 	};
 };
 export default useGetOrganization;

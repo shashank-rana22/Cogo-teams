@@ -118,11 +118,14 @@ function AgentDetails({
 		<>
 			<div className={styles.title}>Profile</div>
 			<div className={styles.content}>
+
 				<Avatar
 					src="https://www.w3schools.com/howto/img_avatar.png"
 					alt="img"
 					disabled={false}
+					className={styles.user_div}
 				/>
+
 				<div className={styles.details}>
 					{loading ? (
 						<>

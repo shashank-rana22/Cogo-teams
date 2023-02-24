@@ -3,6 +3,8 @@ import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React from 'react';
 
+import { NumberHide } from '../constant';
+
 import styles from './styles.module.css';
 
 function CallModal({
@@ -51,7 +53,7 @@ function CallModal({
 					<div className={styles.number}>
 						{mobile_country_code}
 						{' '}
-						{mobile_number}
+						{NumberHide(mobile_number)}
 					</div>
 					<div className={styles.status_div}>{status || 'Connecting...'}</div>
 					<div className={styles.timer}>{durationTime()}</div>
