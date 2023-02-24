@@ -16,7 +16,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 		activeTab,
 		setActiveTab,
 	} = useListFaqTopic();
-
+console.log('active' ,activeTab)
 	return (
 		<div>
 			{!searchState
@@ -38,7 +38,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 							>
 								{(data?.list || []).map((singleOption) => (
 									<TabPanel
-										name={singleOption?.name}
+										name={singleOption}
 										title={(
 											<div>
 												<div className={styles.title}>
@@ -60,14 +60,16 @@ function TopicList({ tabTitle, searchState = '' }) {
 							{activeTab
 								? (
 									<QuestionsList
-										tabTitle={activeTab}
+										tabTitle={activeTab.name}
 										searchState={searchState}
+										topicId={activeTab.id}
 									/>
 								)
 								: (
 									<QuestionsList
 										tabTitle={tabTitle}
 										searchState={searchState}
+										// topicId={}
 									/>
 								)}
 

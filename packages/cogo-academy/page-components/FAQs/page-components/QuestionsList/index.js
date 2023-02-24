@@ -8,15 +8,17 @@ import Questions from '../Questions';
 
 import styles from './styles.module.css';
 
-function QuestionsList({ tabTitle, searchState = '' }) {
+function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 	const [searchquestion, setSearchquestion] = useState(searchState);
+
 	const {
 		refetchQuestions = () => {},
 		data,
 		loading = false,
 		activeTab,
 		setActiveTab,
-	} = useListFaqQuestions();
+	// eslint-disable-next-line react-hooks/rules-of-hooks
+	} = useListFaqQuestions({ topicId });
 
 	if (loading) {
 		return (
@@ -32,7 +34,7 @@ function QuestionsList({ tabTitle, searchState = '' }) {
 		);
 	}
 
-	if (isEmpty(data)) {
+	if (isEmpty(data?.list)) {
 		return (
 			<EmptyQuestionListState
 				searchquestion={searchquestion}
