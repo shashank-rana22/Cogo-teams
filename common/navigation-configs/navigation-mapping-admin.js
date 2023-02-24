@@ -171,6 +171,7 @@ const navigationMappingAdmin = {
 			...apis.app_pay_later,
 			...apis.feedback,
 			...apis.checkout_promotions,
+			...apis.export_factoring,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -790,6 +791,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.settlement,
 			},
 			{
+				key           : 'business_finance-cogo_book',
+				title         : 'Cogo Books',
+				href          : '/business-finance/cogo-book/[active_tab]',
+				as            : '/business-finance/cogo-book/Accruals',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_book,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
@@ -1303,7 +1313,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk],
+				possible_apis : [...apis.kam_desk, ...apis.search],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1367,6 +1377,7 @@ const navigationMappingAdmin = {
 			...apis.feedback,
 			...apis.cogopoints,
 			...apis.checkout_promotions,
+			...apis.export_factoring,
 		],
 		module_type: 'crm',
 	},
