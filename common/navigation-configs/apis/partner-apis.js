@@ -6575,6 +6575,117 @@ const partner = {
 			service_name : 'organization',
 		},
 	],
+	cogo_book: [
+		{
+			api         : 'get_incident_management_incident_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'patch_incident_management_incident_by_id',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api         : 'post_payments_journal_voucher_approve',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_payments_journal_voucher_reject',
+			access_type : 'private',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_trade_party_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'post_payments_settlement_settle',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'post_payments_settlement_check',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'post_payments_settlement_edit',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'post_payments_settlemet_reject',
+			access_type : 'private',
+			module      : 'match',
+			feature     : 'match',
+		},
+		{
+			api         : 'get_pnl_accrual_archive_declared_list',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_archive_actual_list',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_archive_shipment_list',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_shipments',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'post_pnl_accrual_add_to_selected',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'get_pnl_accrual_view_selected',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'patch_pnl_accrual_archive',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'put_pnl_accrual_freeze_period',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+		{
+			api         : 'delete_pnl_accrual_archive',
+			access_type : 'private',
+			module      : 'accruals',
+			feature     : 'accruals',
+		},
+	],
 	account_payables: [
 		{
 			api         : 'create_organization_document',
@@ -7489,117 +7600,7 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
-	controller_dashboard: [
-		{
-			api         : 'get_incident_management_incident_list',
-			access_type : 'private',
-		},
-		{
-			api         : 'patch_incident_management_incident_by_id',
-			access_type : 'private',
-		},
-		{
-			api          : 'list_cogo_entities',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-		{
-			api         : 'post_payments_journal_voucher_approve',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_payments_journal_voucher_reject',
-			access_type : 'private',
-		},
-		{
-			api          : 'list_organization_trade_parties',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'list_organization_trade_party_details',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api         : 'post_payments_settlement_settle',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'post_payments_settlement_check',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'post_payments_settlement_edit',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'post_payments_settlemet_reject',
-			access_type : 'private',
-			module      : 'match',
-			feature     : 'match',
-		},
-		{
-			api         : 'get_pnl_accrual_archive_declared_list',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_archive_actual_list',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_archive_shipment_list',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_shipments',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'post_pnl_accrual_add_to_selected',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'get_pnl_accrual_view_selected',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'patch_pnl_accrual_archive',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'put_pnl_accrual_freeze_period',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-		{
-			api         : 'delete_pnl_accrual_archive',
-			access_type : 'private',
-			module      : 'accruals',
-			feature     : 'accruals',
-		},
-	],
+
 	campaigns: [
 		{
 			api          : 'get_campaign_nodes_result',

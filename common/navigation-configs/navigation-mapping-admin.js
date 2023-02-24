@@ -790,6 +790,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.settlement,
 			},
 			{
+				key           : 'business_finance-cogo_book',
+				title         : 'Cogo Books',
+				href          : '/business-finance/cogo-book/[active_tab]',
+				as            : '/business-finance/cogo-book/Accruals',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cogo_book,
+			},
+			{
 				key           : 'business_finance-incident_management',
 				title         : 'Incident Management',
 				href          : '/v2/business-finance/incident-management/[activeTab]',
