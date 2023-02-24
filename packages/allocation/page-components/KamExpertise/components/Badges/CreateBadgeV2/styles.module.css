@@ -1,0 +1,112 @@
+.container {
+  padding: 25px;
+  margin-top: 16px;
+  background: #fff;
+}
+
+.fields_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.fields_container > p:last-child {
+  margin-left: 16px;
+}
+
+.text_styles {
+  font-size: 12px;
+  color: #333333;
+}
+
+.display_flex {
+  display: flex;
+}
+
+.text_styles2 {
+  font-size: 12px;
+  color: #221f20;
+  opacity: 0.6;
+}
+.content_container {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.top_border {
+  margin-top: 28px;
+}
+
+.lower_background {
+  padding: 10px;
+  margin-top: 28px;
+  background: #e2e2e2;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+.medal_type {
+  padding-right: 16px;
+  border-right: 1px solid #000;
+}
+.score_div {
+  padding-right: 16px;
+  margin-left: 16px;
+}
+.lower_subheader {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  color: #4f4f4f;
+}
+
+.lower_subheader_value {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  color: #221f20;
+}
+
+.card_container {
+  flex: 1;
+  padding: 0 16px;
+  margin-top: 20px;
+  border-right: 1px solid #000000;
+}
+
+.file_upload_div {
+  display: "block";
+  align-items: "center";
+  margin-bottom: "16px";
+  margin-top: 20px;
+}
+
+.lower_subheader2 {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  color: #4f4f4f;
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+.IcMInfo {
+  height: 15px;
+  width: 15px;
+  color: black;
+}
+
+.last_item {
+  border-right: none;
+}
+
+.btncls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 24px;
+}

@@ -1,4 +1,5 @@
 import CreateBadge from './CreateBadge';
+import CreateBadgeV2 from './CreateBadgeV2';
 import ViewBadges from './ViewBadges';
 
 function Badges() {
@@ -7,6 +8,8 @@ function Badges() {
 			<CreateBadge />
 
 			<ViewBadges />
+
+			<CreateBadgeV2 />
 		</div>
 	);
 }
