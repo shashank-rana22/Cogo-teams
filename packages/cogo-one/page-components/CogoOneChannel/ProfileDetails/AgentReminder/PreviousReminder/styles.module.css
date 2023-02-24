@@ -14,7 +14,6 @@
 
 .content {
 	display: flex;
-	flex-direction: column;
 	width: 100%;
 	padding: 8px 9px 10px 12px;
 	margin-bottom: 12px;
@@ -24,11 +23,18 @@
 
 .top {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 80%;
 }
-
+.right{
+	min-width: 20%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	justify-content: space-between;
+}
 .purpose {
 	font-size: 14px;
 	font-weight: 600;
@@ -40,13 +46,15 @@
 .task {
 	font-size: 12px;
 	color: #221f20;
-	text-align: center;
+	text-align: left;
+	word-break: break-word;
 }
 
 .time {
 	font-size: 10px;
 	color: #4f4f4f;
 	text-align: center;
+	white-space: nowrap;
 }
 
 .loader_div {
@@ -61,7 +69,15 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	max-height: 130px;
+	max-height: 280px;
 	padding: 6px;
 	overflow-y: scroll;
+}
+
+.empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 200px;
 }

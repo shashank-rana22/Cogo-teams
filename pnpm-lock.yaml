@@ -21,17 +21,17 @@ importers:
       postcss-preset-env: ^8.0.1
       react-dom: 18.2.0
       react-grid-layout: ^1.3.4
-      react-i18next: ^12.1.5
+      react-i18next: ^12.2.0
       stylelint: ^14.16.1
       turbo: ^1.8.2
     dependencies:
       '@sentry/nextjs': 7.38.0
       accept-language: 3.0.18
       i18next: 22.4.10
-      next-i18next: 13.1.5_r4345fzbqeiabmbjtkoshfh4au
+      next-i18next: 13.1.5_johky4hpydmc34raojpzuxlpqy
       react-dom: 18.2.0
       react-grid-layout: 1.3.4_react-dom@18.2.0
-      react-i18next: 12.1.5_pmu7klu5prsdg5sxir3ehgxr7y
+      react-i18next: 12.2.0_pmu7klu5prsdg5sxir3ehgxr7y
     devDependencies:
       '@cogoport/eslint-config': 1.1.0_eslint@8.34.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
@@ -55,7 +55,7 @@ importers:
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/cogo-one': workspace:0.1.0
       '@cogoport/cogo-verse-analytics': workspace:0.1.0
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/contracts': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
@@ -84,7 +84,7 @@ importers:
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/cogo-one': link:../packages/cogo-one
       '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
-      '@cogoport/components': 1.0.330_cyxdlkncyjzqtklzwrmvnywxma
+      '@cogoport/components': 1.0.335_cyxdlkncyjzqtklzwrmvnywxma
       '@cogoport/contracts': link:../packages/contracts
       '@cogoport/core': link:../common/core
       '@cogoport/forms': link:../common/forms
@@ -113,7 +113,7 @@ importers:
   common/core:
     specifiers:
       '@cogoport/authentication': workspace:0.1.0
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
@@ -127,7 +127,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/navigation-configs': link:../navigation-configs
       '@cogoport/next': link:../next
@@ -142,14 +142,14 @@ importers:
 
   common/forms:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.3
       react: 18.2.0
       react-hook-form: ^7.43.2
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/request': link:../request
       '@cogoport/utils': 1.2.3
@@ -216,7 +216,7 @@ importers:
 
   packages/access-management:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -226,7 +226,7 @@ importers:
       '@cogoport/utils': ^1.2.3
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -238,7 +238,7 @@ importers:
 
   packages/allocation:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -248,7 +248,7 @@ importers:
       '@cogoport/utils': ^1.2.3
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -260,7 +260,7 @@ importers:
 
   packages/authentication:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -271,7 +271,7 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
@@ -284,7 +284,7 @@ importers:
 
   packages/business-finance:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
@@ -295,7 +295,7 @@ importers:
       react: 18.2.0
       react-grid-layout: ^1.3.4
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -310,7 +310,7 @@ importers:
   packages/cogo-one:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.325
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
@@ -320,9 +320,10 @@ importers:
       firebase: ^9.17.1
       react: 18.2.0
       stylelint: ^14.16.1
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -332,11 +333,12 @@ importers:
       firebase: 9.17.1
       react: 18.2.0
       stylelint: 14.16.1
+      uuid: 9.0.0
 
   packages/cogo-verse-analytics:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.325
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
@@ -352,7 +354,7 @@ importers:
       react-kapsule: ^2.2
     dependencies:
       '@cogoport/charts': 1.0.1_v2m5e27vhdewzwhryxwfaorcca
-      '@cogoport/components': 1.0.330_cyxdlkncyjzqtklzwrmvnywxma
+      '@cogoport/components': 1.0.335_cyxdlkncyjzqtklzwrmvnywxma
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
@@ -370,7 +372,7 @@ importers:
   packages/contracts:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
@@ -382,7 +384,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -395,7 +397,7 @@ importers:
 
   packages/locations:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/request': workspace:^0.1.0
@@ -403,7 +405,7 @@ importers:
       '@cogoport/utils': ^1.2.3
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/request': link:../../common/request
@@ -413,7 +415,7 @@ importers:
 
   packages/my-incident:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
@@ -423,7 +425,7 @@ importers:
       '@types/react': ^18.0.28
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/next': link:../../common/next
@@ -436,7 +438,7 @@ importers:
 
   packages/my-profile:
     specifiers:
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/request': workspace:^0.1.0
@@ -444,7 +446,7 @@ importers:
       '@cogoport/utils': ^1.2.3
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/request': link:../../common/request
@@ -455,7 +457,7 @@ importers:
   packages/supply-dashboards:
     specifiers:
       '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.330
+      '@cogoport/components': ^1.0.335
       '@cogoport/constants': workspace:0.1.0
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.58
@@ -467,7 +469,7 @@ importers:
       react-hook-form: ^7.43.2
     dependencies:
       '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.335_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
@@ -1804,8 +1806,8 @@ packages:
       - react-dom
     dev: false
 
-  /@cogoport/components/1.0.330_4o7yor53awafeuvdjrs2cbhz3i:
-    resolution: {integrity: sha512-KqQhxZuRzKNL/h3TRYMCcaSAJVai/rv/Kc/XOhaniAIDjSR80HFb12xES/ywC2p3bHMMPiMP/fSkFofGY4hE8Q==}
+  /@cogoport/components/1.0.335_4o7yor53awafeuvdjrs2cbhz3i:
+    resolution: {integrity: sha512-G9+ZpAxwsIjgO7+4DENOBiOLdtVPtqdgniluoOyFuMdS9RH8jqKGicraXhj5c/vc4jE+6l49JVqkP3XfMdbEFA==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -1836,8 +1838,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.330_cyxdlkncyjzqtklzwrmvnywxma:
-    resolution: {integrity: sha512-KqQhxZuRzKNL/h3TRYMCcaSAJVai/rv/Kc/XOhaniAIDjSR80HFb12xES/ywC2p3bHMMPiMP/fSkFofGY4hE8Q==}
+  /@cogoport/components/1.0.335_cyxdlkncyjzqtklzwrmvnywxma:
+    resolution: {integrity: sha512-G9+ZpAxwsIjgO7+4DENOBiOLdtVPtqdgniluoOyFuMdS9RH8jqKGicraXhj5c/vc4jE+6l49JVqkP3XfMdbEFA==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -6975,7 +6977,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-i18next/13.1.5_r4345fzbqeiabmbjtkoshfh4au:
+  /next-i18next/13.1.5_johky4hpydmc34raojpzuxlpqy:
     resolution: {integrity: sha512-gULKQNQmFYIW6C45cb5ZOHa+sw8XUkibFHTqRqrcfbAa1fcBCh3TgX1KtzA0vzeh9R93BkkvFhm+FuhO3kR9jQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -6990,7 +6992,7 @@ packages:
       hoist-non-react-statics: 3.3.2
       i18next: 22.4.10
       i18next-fs-backend: 2.1.1
-      react-i18next: 12.1.5_pmu7klu5prsdg5sxir3ehgxr7y
+      react-i18next: 12.2.0_pmu7klu5prsdg5sxir3ehgxr7y
     dev: false
 
   /next/12.3.1_biqbaboplfbrettd7655fr4n2y:
@@ -7980,8 +7982,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-i18next/12.1.5_pmu7klu5prsdg5sxir3ehgxr7y:
-    resolution: {integrity: sha512-7PQAv6DA0TcStG96fle+8RfTwxVbHVlZZJPoEszwUNvDuWpGldJmNWa3ZPesEsZQZGF6GkzwvEh6p57qpFD2gQ==}
+  /react-i18next/12.2.0_pmu7klu5prsdg5sxir3ehgxr7y:
+    resolution: {integrity: sha512-5XeVgSygaGfyFmDd2WcXvINRw2WEC1XviW1LXY/xLOEMzsCFRwKqfnHN+hUjla8ZipbVJR27GCMSuTr0BhBBBQ==}
     peerDependencies:
       i18next: '>= 19.0.0'
       react: '>= 16.8.0'
@@ -9025,6 +9027,11 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
     dev: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}

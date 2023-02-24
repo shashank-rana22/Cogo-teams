@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
-	const [firstLoading, setFirstLoading] = useState(true);
+	const [firstLoading, setFirstLoading] = useState(false);
 	const { profile } = useSelector((state) => state);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_omnichannel_notes',
@@ -30,6 +30,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	};
 
 	useEffect(() => {
+		setFirstLoading(true);
 		fetchListNotes();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active, id, user_number]);

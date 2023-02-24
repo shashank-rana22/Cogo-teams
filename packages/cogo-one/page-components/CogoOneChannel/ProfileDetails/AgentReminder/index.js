@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Toast, Button, Input, Datepicker, Textarea, Loader } from '@cogoport/components';
+import { Button, Input, Datepicker, Textarea, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -27,7 +27,8 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		listData = {},
 		fetchListLogApi = () => {},
 		listLoading,
-	} = useGetListCommunicationLog({ organizationId });
+		firstLoading,
+	} = useGetListCommunicationLog({ organizationId, userId });
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue,
 		setDate,
@@ -40,10 +41,8 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 	const { list = [] } = listData || {};
 
 	const handleSubmit = async () => {
-		if (!isEmpty(inputValue) || !isEmpty(date)) {
+		if (((inputValue?.title) && (inputValue?.description) && date)) {
 			await createLogApi({ inputValue, date });
-		} else {
-			Toast.error('Enter details');
 		}
 	};
 
@@ -65,7 +64,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		setShowReminder(true);
 	};
 
-	if (isEmpty(list) && !showReminder && !listLoading) {
+	if (isEmpty(list) && !showReminder && !listLoading && !firstLoading && !organizationId) {
 		return (
 			<EmptyState
 				type="reminder"
@@ -76,9 +75,11 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		);
 	}
 
+	const emptyCheck = !((inputValue?.title) && (inputValue?.description) && date);
+
 	return (
-		(showReminder || organizationId) && (
-			listLoading ? (
+		(showReminder || organizationId)
+			&& firstLoading ? (
 				<div className={styles.loader_div}>
 					<Loader
 						themeType="primary"
@@ -109,6 +110,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 							onChange={setDate}
 							value={date}
 							use12hourformat={false}
+							placement="left"
 						/>
 						<div className={styles.wrapper}>
 							<div className={styles.label}>Summary</div>
@@ -134,17 +136,17 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 									size="md"
 									themeType="primary"
 									onClick={handleSubmit}
-									disabled={loading}
+									disabled={emptyCheck}
+									loading={loading}
 								>
 									Set reminder
 								</Button>
 							</div>
 						</div>
-						<PreviousReminder listData={listData} />
+						<PreviousReminder listData={listData} listLoading={listLoading} />
 					</div>
 				</div>
 			)
-		)
 	);
 }
 export default AgentReminder;
