@@ -1800,6 +1800,7 @@ const navigationMappingAdmin = {
 	cogo_verse_analytics: {
 		key           : 'cogo_verse_analytics',
 		title         : 'CogoVerse ',
+		// eslint-disable-next-line max-len, jsx-a11y/alt-text
 		icon          : () => <img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg" width="18px" />,
 		href          : '/v2/cogo-verse-analytics',
 		as            : '/v2/cogo-verse-analytics',
