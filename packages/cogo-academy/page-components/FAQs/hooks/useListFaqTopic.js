@@ -12,14 +12,18 @@ function useListFaqTopic() {
 	const fetchFaqTopic = async () => {
 		try {
 			await trigger({
-				params: { },
+				params: {
+					filters: {
+						status: 'active',
+					},
+					page_limit               : 100000,
+					pagination_data_required : false,
+				},
 			});
 		} catch (error) {
 			console.log('error :: ', error);
 		}
 	};
-
-	// console.log('data :: ', data);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqTopic(); }, []);
