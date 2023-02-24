@@ -3,12 +3,17 @@
     gap: 10px;
 }
 
+.calendarEntity{
+    width: calc(100% - 30px);
+}
+
 .navBtn{
     outline: none;
     border: none;
     padding: none;
     cursor: pointer;
     font-size: 18px;
+    width: 30px;
 }
 
 .inactive{

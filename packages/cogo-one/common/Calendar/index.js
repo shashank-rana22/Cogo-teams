@@ -1,15 +1,17 @@
 import { IcMArrowDoubleLeft, IcMArrowDoubleRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
 function Calendar({ calendarType }) {
+	const [firstRender, setFirstRender] = useState(0);
 	const [pagination, setPagination] = useState(0);
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState('');
 
+	const calendarRef = useRef();
 	const numberOfDays = 14;
 	const numberOfMonthsForWeeks = 2;
 
@@ -109,17 +111,32 @@ function Calendar({ calendarType }) {
 	};
 
 	useEffect(() => {
-		if (calendarType === 'day') processData(calcDate);
-		else if (calendarType === 'month') processData(calcMonth);
-		else loadWeeks();
+		if (firstRender)calendarRef.current.style = 'transform:translate(10px,0);transition: 0.2s;';
+		setTimeout(() => {
+			if (calendarType === 'day') processData(calcDate);
+			else if (calendarType === 'month') processData(calcMonth);
+			else loadWeeks();
+		}, 50);
 	}, [calendarType, pagination]);
+
+	useEffect(() => {
+		if (firstRender)calendarRef.current.style = 'transform:translate(-10px,0);';
+		if (calendarData.length > 0) {
+			setTimeout(() => {
+				if (firstRender)calendarRef.current.style = 'transform:translate(0px,0);transition: 0.2s;';
+				setFirstRender(1);
+			}, 50);
+		}
+	}, [calendarData]);
 
 	return (
 		<div className={styles.calendar}>
 			<button onClick={() => setPagination(pagination + 1)} className={styles.navBtn}>
 				<IcMArrowDoubleLeft />
 			</button>
-			<CalendarEntity calendarData={calendarData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+			<div ref={calendarRef} className={styles.calendarEntity}>
+				<CalendarEntity calendarData={calendarData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+			</div>
 			<button
 				disabled={pagination === 0}
 				onClick={() => setPagination(pagination - 1)}
