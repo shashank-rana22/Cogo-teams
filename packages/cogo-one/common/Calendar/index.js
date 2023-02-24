@@ -6,15 +6,15 @@ import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
 function Calendar({ calendarType }) {
-	const [pagination, setPagination] = useState(0);
+	const [pagination, setPagination] = useState(-1);
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState('');
 	const [scroll, setScroll] = useState('');
-	const [resetDiv, setResetDiv] = useState(true);
+	const [resetDiv, setResetDiv] = useState(false);
 
 	const calendarRef = useRef();
-	const numberOfDays = 30;
-	const numberOfMonthsForWeeks = 2;
+	const numberOfDays = 10;
+	const numberOfMonthsForWeeks = 3;
 
 	const FORMAT_TYPE = {
 		day: {
@@ -75,7 +75,7 @@ function Calendar({ calendarType }) {
 
 	const processData = (func) => {
 		const newData = [];
-		for (let i = pagination * numberOfDays; i < (pagination + 1) * numberOfDays; i += 1) {
+		for (let i = pagination * numberOfDays; i < ((pagination * numberOfDays) + (3 * numberOfDays)); i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
@@ -118,14 +118,17 @@ function Calendar({ calendarType }) {
 	}, [calendarType, pagination]);
 
 	useEffect(() => {
+		console.log('calendarData: ', calendarData);
 		setResetDiv(true);
-		setResetDiv(false);
-	}, [setCalendarData]);
+		setTimeout(() => {
+			setResetDiv(false);
+		}, 100);
+	}, [calendarData]);
 
 	return (
 		<div className={styles.calendar}>
 			<button
-				onClick={() => setScroll('right')}
+				onClick={() => { setScroll('right'); }}
 				className={styles.navBtn}
 				disabled={scroll === 'right'}
 			>
@@ -139,12 +142,12 @@ function Calendar({ calendarType }) {
 					scroll={scroll}
 					setScroll={setScroll}
 					resetDiv={resetDiv}
+					pagination={pagination}
+					setPagination={setPagination}
 				/>
 			</div>
 			<button
-				disabled={scroll === 'left'
-				// || pagination === 0
-			}
+				disabled={scroll === 'left' || pagination === -1}
 				onClick={() => { setScroll('left'); }}
 				className={`${styles.navBtn} 
 				`}
