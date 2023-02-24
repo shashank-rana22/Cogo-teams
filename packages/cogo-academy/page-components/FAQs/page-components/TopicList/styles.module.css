@@ -1,4 +1,4 @@
-.gridContainer {
+.grid_container {
 	display: grid;
 	grid-template-columns: 20rem 64rem;
 	justify-content: space-between;

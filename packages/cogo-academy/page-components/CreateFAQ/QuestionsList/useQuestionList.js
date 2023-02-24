@@ -19,6 +19,7 @@ const addedQuestionsColumns = ({
 	activeList,
 	onClickEditButton,
 	deactivateQuestion,
+	onClickViewButton = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -69,8 +70,16 @@ const addedQuestionsColumns = ({
 					EDIT
 
 				</Button>
-				{activeList !== 'inactive'
-					? <Button themeType="primary" size="sm">VIEW</Button>
+				{!['inactive', 'draft'].includes(activeList)
+					? (
+						<Button
+							themeType="primary"
+							size="sm"
+							onClick={() => onClickViewButton(items?.id)}
+						>
+							VIEW
+						</Button>
+					)
 					: null}
 			</div>
 		),
@@ -136,7 +145,6 @@ const useQuestionList = () => {
 	const [activeList, setActiveList] = useState('published');
 	const [filters, setFilters] = useState({});
 	const [page, setPage] = useState(1);
-
 	const router = useRouter();
 
 	const [{ data: questionList, loading }, trigger] = useRequest({
@@ -195,11 +203,19 @@ const useQuestionList = () => {
 		);
 	};
 
+	const onClickViewButton = (id) => {
+		router.push(
+			`/learning/faq/create/create?mode=preview&id=${id}`,
+			`/learning/faq/create/create?mode=preview&id=${id}`,
+		);
+	};
+
 	const columns = activeList !== 'requested'
 		? addedQuestionsColumns({
 			activeList,
 			onClickEditButton,
 			deactivateQuestion,
+			onClickViewButton,
 		})
 		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
 	const { list: data = [], ...paginationData } = questionList || {};
@@ -217,6 +233,7 @@ const useQuestionList = () => {
 		activeList,
 		setActiveList,
 		questionListLoading: loading,
+		onClickViewButton,
 	};
 };
 
