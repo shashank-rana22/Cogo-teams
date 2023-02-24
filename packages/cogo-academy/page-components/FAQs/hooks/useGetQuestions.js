@@ -1,14 +1,12 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function useGetQuestions({ id }) {
-	const [activeTab, setActiveTab] = useState('');
-
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'faq/get_question',
+		url    : '/get_question',
 	}, { manual: true });
-	console.log('ID:', id);
+
 	const fetchQuestions = async () => {
 		try {
 			await trigger({
@@ -19,8 +17,6 @@ function useGetQuestions({ id }) {
 		}
 	};
 
-	console.log('answerdata :: ', data);
-
 	useEffect(() => {
 		fetchQuestions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,8 +26,6 @@ function useGetQuestions({ id }) {
 		refetchQuestions: fetchQuestions,
 		data,
 		loading,
-		activeTab,
-		setActiveTab,
 	};
 }
 

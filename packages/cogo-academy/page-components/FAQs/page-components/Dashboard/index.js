@@ -6,7 +6,7 @@ import TopicList from '../TopicList';
 
 function Dashboard({ tabTitle }) {
 	const [searchState, setSearchState] = useState('');
-
+	console.log(searchState);
 	return (
 		<div style={{ marginTop: 12 }}>
 			<SearchInput								// TODOs

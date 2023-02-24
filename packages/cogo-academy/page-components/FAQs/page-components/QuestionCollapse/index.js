@@ -7,14 +7,6 @@ import styles from './styles.module.css';
 
 function QuestionsCollapse({ collapse, questions }) {
 	const arrow = collapse;
-	const DEFAULT_LIST = [
-		{
-			label: 'Invoices',
-
-		},	{
-			label: 'Basics',
-
-		}];
 
 	return (
 		<div className={styles.container}>
@@ -27,19 +19,26 @@ function QuestionsCollapse({ collapse, questions }) {
 
 			<div style={{ display: 'flex' }}>
 				<Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill>
-				<Pill prefix={<IcMArrowRotateRight />} size="sm" color="white"><b>{questions.view_count}</b></Pill>
-				{DEFAULT_LIST.map((item) => (
+				<Pill
+					prefix={<IcMArrowRotateRight />}
+					size="sm"
+					color="white"
+				>
+					<b>{questions.view_count}</b>
+				</Pill>
+				{(questions?.faq_tags || []).map((item) => (
 					<Pill
-						key={item.label}
-						prefix={item.prefixIcon}
+						className={styles.questions_tag}
+						key={item.display_name}
 						size="sm"
 						color="white"
 					>
-						{item.label}
+						{item.display_name}
 					</Pill>
 				))}
 			</div>
 		</div>
-
 	);
-} export default QuestionsCollapse;
+}
+
+export default QuestionsCollapse;

@@ -5,7 +5,7 @@ const useCreateQuestionSet = () => {
 	const [{ loading: createQuestionLoading = false }, trigger] = useRequest({
 		url    : 'create_question_answer_set',
 		method : 'POST',
-	}, { manual: false });
+	}, { manual: true });
 
 	const createQuestionSet = async ({ searchState = '', setShow }) => {
 		if (!searchState) {

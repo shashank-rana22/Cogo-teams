@@ -1,21 +1,25 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable max-len */
-import { Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import Layout from '../../../commons/Layout';
+import CreateForm from '../ConfigurationEngine/CreateComponent';
 
 import BodyTextEditor from './BodyTextEditor';
-import useGetQuestion from './hooks/useGetQuestion';
+import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
 import PreviewQuestion from './QuestionPreview';
 import styles from './styles.module.css';
 import useCreateQuestions from './useCreateQuestions';
 
-function CreateFAQ() {
-	const router = useRouter();
+const style = {
+	width   : '100%',
+	padding : '12px',
+};
 
+function CreateFAQ() {
 	const {
 		editorValue,
 		setEditorValue,
@@ -34,7 +38,20 @@ function CreateFAQ() {
 		showElements = {},
 	} = useCreateQuestions();
 
-	const { data } = useGetQuestion();
+	const {
+		setConfigurationPage,
+		handleSubmit: handleCreate,
+		control: createFormControl,
+		createFaqComponent,
+		setValue = () => {},
+		show,
+		setShow,
+		queryValue,
+		handleCreateTag,
+		handleCreateTopic,
+	} = useCreateNewTagOrTopic();
+
+	const router = useRouter();
 
 	const onClickBackIcon = () => {
 		router.back();
@@ -85,10 +102,17 @@ function CreateFAQ() {
 				<div className={styles.flex_items}>
 
 					<div className={styles.select_container}>
-						<div className={styles.input_label}>
-							Select Tags
+						<div className={styles.label_container}>
+							<div className={styles.input_label}>
+								Select Tags or
+							</div>
+							<div
+								className={styles.create_tag_label}
+								onClick={handleCreateTag}
+							>
+								Create New Tag
+							</div>
 						</div>
-
 						<MultiselectController
 							name="tag_ids"
 							control={control}
@@ -98,8 +122,17 @@ function CreateFAQ() {
 					</div>
 
 					<div className={styles.select_topic_container}>
-						<div className={styles.input_label}>
-							Select Topcics
+
+						<div className={styles.label_container}>
+							<div className={styles.input_label}>
+								Select Topics or
+							</div>
+							<div
+								className={styles.create_tag_label}
+								onClick={handleCreateTopic}
+							>
+								Create New Topic
+							</div>
 						</div>
 
 						<MultiselectController
@@ -111,6 +144,8 @@ function CreateFAQ() {
 					</div>
 
 				</div>
+
+				<div />
 
 				<div className={styles.faq_answer_container}>
 					<div className={styles.input_label}>
@@ -141,6 +176,36 @@ function CreateFAQ() {
 				</div>
 
 			</form>
+
+			<Modal
+				size="md"
+				show={show}
+				onClose={() => setShow(false)}
+				closeOnOuterClick={false}
+				showCloseIcon
+			>
+				<Modal.Header title="Request your question here" />
+				<Modal.Body>
+					<div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+						<CreateForm
+							viewType={queryValue}
+							setConfigurationPage={setConfigurationPage}
+							handleSubmit={handleCreate}
+							control={createFormControl}
+							createFaqComponent={createFaqComponent}
+							setValue={setValue}
+							style={style}
+							setShow={setShow}
+							displayBackButton="No"
+						/>
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={handleCreate(createFaqComponent)}>
+						Submit
+					</Button>
+				</Modal.Footer>
+			</Modal>
 
 		</div>
 	);

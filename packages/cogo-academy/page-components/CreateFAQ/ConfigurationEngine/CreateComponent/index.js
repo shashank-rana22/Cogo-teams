@@ -18,6 +18,9 @@ function CreateForm({
 	control,
 	createFaqComponent,
 	setValue = () => {},
+	style = {},
+	setShow = () => {},
+	displayBackButton,
 }) {
 	const router = useRouter();
 
@@ -26,6 +29,10 @@ function CreateForm({
 	const { update = '', id } = general.query;
 
 	const onClickBackIcon = () => {
+		if (displayBackButton) {
+			setShow(false);
+			return;
+		}
 		setConfigurationPage('dashboard');
 		router.back();
 	};
@@ -46,11 +53,17 @@ function CreateForm({
 	}, [loading]);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
-				<IcMArrowBack width={20} height={20} />
-				<div className={styles.back}>Back to Dashboard</div>
-			</div>
+		<div className={styles.container} style={style}>
+
+			{
+				!displayBackButton
+						&& (
+							<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
+								<IcMArrowBack width={20} height={20} />
+								<div className={styles.back}>Back to Dashboard</div>
+							</div>
+						)
+			}
 
 			<div>
 				<div className={styles.add_topic}>

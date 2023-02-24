@@ -12,14 +12,18 @@ function useListFaqTag() {
 	const fetchFaqTag = async () => {
 		try {
 			await trigger({
-				params: { },
+				params: {
+					filters: {
+						status: 'active',
+					},
+					page_limit               : 15,
+					pagination_data_required : false,
+				},
 			});
 		} catch (error) {
 			console.log('error :: ', error);
 		}
 	};
-
-	// console.log('data :: ', data);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqTag(); }, []);

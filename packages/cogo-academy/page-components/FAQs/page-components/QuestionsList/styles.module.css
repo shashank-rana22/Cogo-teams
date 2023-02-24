@@ -56,3 +56,16 @@
 .nullstate_btn {
   margin-top: 80px;
 }
+
+.spinner {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.empty_state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
