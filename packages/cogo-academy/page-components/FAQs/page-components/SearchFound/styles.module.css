@@ -9,6 +9,15 @@
 	}
 }
 
+.border {
+	border-bottom: 0.1px solid #7e7a7a;
+	margin-left: 40px;
+  
+	&:hover {
+	  box-shadow: 2px 2px 4px #848282;
+	}
+  }
+
 .subtitle {
 	font-size: 14px;
 	font-weight: 400;

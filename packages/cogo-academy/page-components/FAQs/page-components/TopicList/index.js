@@ -1,7 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
+import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
 import useListFaqTopic from '../../hooks/useListFaqTopic';
 import QuestionsList from '../QuestionsList';
 import SearchFound from '../SearchFound';
@@ -16,7 +17,11 @@ function TopicList({ tabTitle, searchState = '' }) {
 		activeTab,
 		setActiveTab,
 	} = useListFaqTopic();
-console.log('active' ,activeTab)
+
+	if (isEmpty(data?.list)) {
+		return <EmptyQuestionListState searchState={searchState} />;
+	}
+
 	return (
 		<div>
 			{!searchState

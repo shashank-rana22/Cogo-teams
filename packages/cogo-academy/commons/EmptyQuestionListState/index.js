@@ -9,6 +9,10 @@ import styles from './styles.module.css';
 function EmptyQuestionListState({ searchState = '' }) {
 	const [searchquestion, setSearchquestion] = useState(searchState);
 
+	useEffect(() => {
+		setSearchquestion(searchState);
+	}, [searchState]);
+
 	const [show, setShow] = useState(false);
 
 	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet();
