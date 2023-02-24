@@ -24,7 +24,7 @@ function AdminLayout({
 	const {
 		user: { id: user_id = '' },
 		partner: { id: partner_id = '', partner_user_id = '' },
-	 	voice_call = {},
+		voice_call = {},
 	} = user_data;
 
 	const { inCall = false } = voice_call || {};

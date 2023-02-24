@@ -1,19 +1,19 @@
-
-.card{
-	width: 50px;
-	height: 52px;
-	background: #FFFFFF;
-	color: #221F20;
-	border-radius: 6px;
+.card {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 52px;
+	color: #221f20;
+	background: #fff;
+	border-radius: 6px;
 }
-.date{
+
+.date {
 	font-size: 16px;
 }
 
-.day{
+.day {
 	font-size: 12px;
 }

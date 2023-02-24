@@ -51,10 +51,6 @@
 	}
 }
 
-.filter_icon {
-	cursor: pointer;
-}
-
 .filter_dot {
 	position: absolute;
 	top: 2px;
@@ -113,7 +109,7 @@
 }
 
 .user_name {
-	max-width: 100px;
+	max-width: 140px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
@@ -121,7 +117,7 @@
 	white-space: nowrap;
 
 	@media (max-width: 1280px) {
-		max-width: 110px;
+		max-width: 100px;
 	}
 }
 
@@ -133,13 +129,13 @@
 	color: #828282;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	
+
 	@media (max-width: 1280px) {
-		max-width: 110px;
+		max-width: 100px;
 	}
 }
 
-.avatar_Container {
+.avatar_container {
 	display: flex;
 }
 
@@ -216,6 +212,7 @@
 .filter_icon {
 	width: 25px;
 	height: 25px;
+	cursor: pointer;
 }
 
 .filters_applied {

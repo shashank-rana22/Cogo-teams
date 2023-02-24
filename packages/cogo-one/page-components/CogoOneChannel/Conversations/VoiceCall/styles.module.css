@@ -16,13 +16,13 @@
 }
 
 .loader {
-	margin-top: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
 	height: fit-content;
-	background:#f9f5ec;
+	margin-top: 10px;
+	background: #f9f5ec;
 
 	img {
 		width: 18px;

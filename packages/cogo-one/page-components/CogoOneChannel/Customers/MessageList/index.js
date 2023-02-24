@@ -23,6 +23,7 @@ function MessageList({
 	messagesLoading = false,
 	activeCardId = '',
 	setActiveMessage,
+	setActiveCardId = () => {},
 }) {
 	function getShowChat({ user_name }) {
 		if (searchValue) {
@@ -58,6 +59,7 @@ function MessageList({
 									filterVisible={filterVisible}
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
+									setActiveCardId={setActiveCardId}
 								/>
 							)
 						)}
@@ -115,7 +117,7 @@ function MessageList({
 								>
 									<div className={styles.card}>
 										<div className={styles.user_information}>
-											<div className={styles.avatar_Container}>
+											<div className={styles.avatar_container}>
 												<UserAvatar
 													type={item.channel_type}
 													imageSource={item.image}

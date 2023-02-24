@@ -124,7 +124,7 @@
 .whatsapp {
 	width: 241px;
 	height: 498px;
-	background-image: url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile.svg);
+	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile.svg");
 }
 
 .back_icon {

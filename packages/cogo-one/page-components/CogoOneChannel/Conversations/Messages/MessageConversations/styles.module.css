@@ -4,6 +4,23 @@
 	transition: height 0.3s;
 }
 
+.container::-webkit-scrollbar {
+	width: 0.5em;
+}
+
+.container::-webkit-scrollbar:hover {
+	width: 1em;
+}
+
+.container::-webkit-scrollbar-thumb {
+	background-color: #b1b1b1;
+	border-radius: 20px;
+
+	&:hover {
+		background-color: #7f7f7f;
+	}
+}
+
 .file_present_suggestions {
 	height: calc(100% - 214px);
 }
@@ -113,11 +130,12 @@
 
 	:global {
 		.file_uploader {
-			height: fit-content;
+			height: fit-content !important;
 		}
 
 		.ui_upload_droparea_container {
-			min-height: 0;
+			min-height: 0 !important;
+			padding: unset !important;
 			margin-bottom: unset;
 			border: unset;
 		}

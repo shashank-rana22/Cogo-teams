@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function LoadingState() {
 	return (
 		<>
-			{[...Array(2)].map(() => (
+			{[...Array(1)].map(() => (
 				<div className={styles.organisation_div}>
 					<Placeholder height="15px" width="200px" />
 

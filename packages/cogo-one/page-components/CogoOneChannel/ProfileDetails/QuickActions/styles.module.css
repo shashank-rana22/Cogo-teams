@@ -24,11 +24,16 @@
 	width: 80px;
 	height: 80px;
 	padding: 12px 8px;
-	margin: 12px 10px 0 10px;
+	margin: 12px 10px 0;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+
+	&:hover {
+		transition: 1s ease;
+		transform: scale(1.1);
+	}
 }
 
 .header {
@@ -50,7 +55,6 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding-top: 34px;
 }
 
 .row {
@@ -66,4 +70,8 @@
 	justify-content: center;
 	width: 50px;
 	height: 50px;
+}
+
+.icon_disabled {
+	cursor: not-allowed;
 }

@@ -8,11 +8,10 @@ import {
 import { useState, useEffect } from 'react';
 
 const useGetMessages = ({ activeChatCollection, id }) => {
-	const [messagesData, setMessagesData] = useState([]);
-	const [lastDoc, setLastDoc] = useState(null);
+	const [messagesState, setMessagesState] = useState({});
+
 	const [loadingMessages, setLoadingMessages] = useState(false);
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
-	const [lastPage, setLastPage] = useState(false);
 
 	const getFirebaseData = () => {
 		const chatCollectionQuery = query(
@@ -23,12 +22,12 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 		setLoadingMessages(true);
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			const result = [];
-			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
-			setLastPage(querySnapshot.docs.length < 10);
+			const lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+			const islastPage = querySnapshot.docs.length < 10;
 			querySnapshot.forEach((mes) => {
 				result.unshift(mes.data());
 			});
-			setMessagesData(result);
+			setMessagesState((p) => ({ ...p, [id]: { messagesData: result, lastDocument, islastPage } }));
 			setLoadingMessages(false);
 		});
 	};
@@ -37,24 +36,24 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 		const chatCollectionQuery = query(
 			activeChatCollection,
 			orderBy('created_at', 'desc'),
-			startAfter(lastDoc),
+			startAfter(messagesState?.[id]?.lastDocument),
 			limit(10),
 		);
 		setLoadingPrevMessages(true);
-
 		onSnapshot(chatCollectionQuery, (querySnapshot) => {
-			setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
-			setLastPage(querySnapshot.docs.length < 10);
+			const lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+			const islastPage = querySnapshot.docs.length < 10;
+			const userMessageData = messagesState?.[id]?.messagesData || [];
 			querySnapshot.forEach((mes) => {
-				messagesData.unshift(mes.data());
+				userMessageData.unshift(mes.data());
 			});
-			setMessagesData([...messagesData]);
+
+			setMessagesState((p) => ({ ...p, [id]: { messagesData: userMessageData, lastDocument, islastPage } }));
 			setLoadingPrevMessages(false);
 		});
 	};
 
 	useEffect(() => {
-		setMessagesData([]);
 		getFirebaseData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
@@ -62,10 +61,11 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	return {
 		getNextData,
 		getFirebaseData,
-		lastPage,
-		messagesData,
+		lastPage     : messagesState?.[id]?.islastPage,
+		messagesData : messagesState?.[id]?.messagesData,
 		loadingMessages,
 		loadingPrevMessages,
+		messagesState,
 	};
 };
 
