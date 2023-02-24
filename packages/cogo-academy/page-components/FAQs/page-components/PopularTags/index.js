@@ -4,6 +4,8 @@ import React from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
 
+import styles from './styles.module.css';
+
 function PopularTags() {
 	const {
 		refetchTag = () => {},
@@ -22,12 +24,13 @@ function PopularTags() {
 			<h4>Popular tags in this section:</h4>
 			{data?.list.map((item) => (
 				<Pill
+					className={styles.tag_decoration}
 					// onClick={<AllFAQ />}
 					key={item.name}
 					size="xl"
-					color="white"
+
 				>
-					{startCase(item.name)}
+					{item.name}
 				</Pill>
 			))}
 		</div>
