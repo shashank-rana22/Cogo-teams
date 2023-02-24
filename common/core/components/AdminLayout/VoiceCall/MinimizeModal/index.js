@@ -72,7 +72,7 @@ function MinimizeModal({
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/end-icon.svg"
 						alt="end-icon"
-						style={{ cursor: 'pointer', width: '25px', height: '25px', marginTop: '5px' }}
+						className={styles.end_icon}
 					/>
 				</div>
 			)}
