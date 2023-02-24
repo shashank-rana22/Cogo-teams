@@ -9,18 +9,14 @@ function useListChatSuggestions() {
 	}, { manual: true });
 
 	const fetchListLogApi = async () => {
-		try {
-			await trigger({
-				params: {
+		await trigger({
+			params: {
 
-					filters: {
-						suggestion_type: 'suggestion',
-					},
+				filters: {
+					suggestion_type: 'suggestion',
 				},
-			});
-		} catch (e) {
-			console.log('e', e);
-		}
+			},
+		});
 	};
 	useEffect(() => {
 		fetchListLogApi();

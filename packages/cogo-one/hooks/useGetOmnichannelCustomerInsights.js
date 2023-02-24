@@ -24,19 +24,15 @@ const useGetOmnichannelCustomerInsights = ({
 	});
 
 	const fetchOmnichannelCustomerInsights = async () => {
-		try {
-			await trigger({
-				params: {
-					user_id       : !isEmpty(userId) ? userId : undefined,
-					mobile_number : isEmpty(userId) ? userMobile : undefined,
-					service       : serviceType,
-					channel       : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
-					sender,
-				},
-			});
-		} catch (error) {
-			console.log(error);
-		}
+		await trigger({
+			params: {
+				user_id       : !isEmpty(userId) ? userId : undefined,
+				mobile_number : isEmpty(userId) ? userMobile : undefined,
+				service       : serviceType,
+				channel       : activeTab === 'message' ? activeMessageCard?.channel_type : 'voice',
+				sender,
+			},
+		});
 	};
 
 	useEffect(() => {
