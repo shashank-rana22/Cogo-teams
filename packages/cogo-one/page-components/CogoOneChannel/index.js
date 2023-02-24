@@ -100,6 +100,7 @@ function CogoOne() {
 						activeVoiceCard={activeVoiceCard}
 						firestore={firestore}
 						updateLeaduser={updateLeaduser}
+						activeCardId={activeCardId}
 
 					/>
 				</>
