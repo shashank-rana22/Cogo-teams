@@ -28,6 +28,7 @@ function QuestionsCollapse({ collapse, questions }) {
 				</Pill>
 				{(questions?.faq_tags || []).map((item) => (
 					<Pill
+						className={styles.questions_tag}
 						key={item.display_name}
 						size="sm"
 						color="white"
