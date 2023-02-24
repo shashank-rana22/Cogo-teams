@@ -25,7 +25,7 @@ function useOutgoingCall() {
 			emptyState,
 			mobile_number,
 		} = voiceCall || {};
-		let payload;
+		let payload = {};
 		if (emptyState) {
 			payload = {
 				destination_number: {

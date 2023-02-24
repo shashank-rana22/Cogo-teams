@@ -48,3 +48,10 @@
     font-size: 16px;
     color: #393f70;
 }
+
+.end_icon{
+	cursor: 'pointer';
+	width: '25px';
+	height: '25px';
+	margin-top: '5px'
+}

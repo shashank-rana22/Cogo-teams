@@ -1,9 +1,6 @@
-import { Avatar } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-
-import { PLATFORM_MAPPING } from '../../constants';
 import ProfileNumberModal from '../../page-components/CogoOneChannel/ProfileDetails/AgentDetails/ProfileNumberModal';
 
+import RenderEmpty from './RenderEmpty';
 import styles from './styles.module.css';
 
 function EmptyState({
@@ -26,123 +23,19 @@ function EmptyState({
 		setShowAddNumber(true);
 	};
 
-	const renderEmpty = () => {
-		switch (type) {
-			case 'profile':
-				return (
-					<>
-						<div className={styles.profile_div}>
-							<div className={styles.avatar}>
-								<Avatar
-									src="https://www.w3schools.com/howto/img_avatar.png"
-									alt="img"
-									disabled={false}
-								/>
-							</div>
-							<div className={styles.details}>
-								<div className={styles.name}>Anonymous User</div>
-								<div className={styles.type}>{PLATFORM_MAPPING[user_type] || ''}</div>
-							</div>
-						</div>
-						<div className={styles.content}>
-							<div className={styles.title}>You don&apos;t have profile details for this user</div>
-							<div
-								className={styles.button_div}
-								onClick={handleClick}
-								role="presentation"
-							>
-								<div>Add phone number</div>
-							</div>
-						</div>
-					</>
-
-				);
-			case 'organization':
-				return (
-					<div className={styles.content}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/org-empty.svg"
-							alt=""
-							width="100px"
-							height="100px"
-						/>
-						<div className={styles.title}>No organisation details found</div>
-					</div>
-				);
-			case 'activities':
-				return (
-					<div className={styles.content}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/activities-empty.svg"
-							alt=""
-							width="100px"
-							height="100px"
-						/>
-						<div className={styles.title}>
-							You have no activities right now.
-							Come back later
-						</div>
-					</div>
-				);
-			case 'reminder':
-				return (
-					<div className={styles.content}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/reminder-empty.svg"
-							alt=""
-							width="100px"
-							height="100px"
-						/>
-						<div className={styles.title}>No previous reminder found</div>
-						{!isEmpty(organizationId) && !isEmpty(userId) && (
-							<div
-								className={styles.button_div}
-								onClick={handleReminder}
-								role="presentation"
-							>
-								<div>Set Reminder</div>
-							</div>
-						)}
-					</div>
-				);
-			case 'notes':
-				return (
-					<div className={styles.content}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/notes-empty.svg"
-							alt=""
-							width="100px"
-							height="100px"
-						/>
-						<div className={styles.title}>No previous notes found</div>
-						<div
-							className={styles.button_div}
-							onClick={handleNotes}
-							role="presentation"
-						>
-							<div>Add Notes</div>
-						</div>
-					</div>
-				);
-			case 'insights':
-				return (
-					<div className={styles.content}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/insights.svg"
-							alt=""
-							width="100px"
-							height="100px"
-						/>
-						<div className={styles.title}>No customer insights found</div>
-					</div>
-				);
-			default:
-				return null;
-		}
-	};
 	return (
 		<>
-			<div className={styles.empty_state}>{renderEmpty()}</div>
+			<div className={styles.empty_state}>
+				<RenderEmpty
+					type={type}
+					handleNotes={handleNotes}
+					handleReminder={handleReminder}
+					user_type={user_type}
+					userId={userId}
+					organizationId={organizationId}
+					handleClick={handleClick}
+				/>
+			</div>
 			<ProfileNumberModal
 				leadLoading={leadLoading}
 				handleSubmit={handleSubmit}
