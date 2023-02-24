@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -10,7 +11,7 @@ const apiData = [
 
 ];
 
-function Intelligence() {
+function Intelligence({ loading = true }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.improvement}>Improvements:</div>
@@ -19,7 +20,10 @@ function Intelligence() {
 				apiData.map((item) => (
 					<div className={styles.improvement_text_box}>
 						<div><div className={styles.dot} /></div>
-						<div className={styles.improvement_text}>{[item]}</div>
+						{loading
+							? <Placeholder height="40px" width="320px" />
+							: <div className={styles.improvement_text}>{[item]}</div>}
+
 					</div>
 				))
 			}
