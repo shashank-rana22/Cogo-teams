@@ -1,5 +1,6 @@
 import { IcMUserAllocations } from '@cogoport/icons-react';
 
+import { URL_MATCH_REGEX } from '../../constants';
 import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 
 import CustomFileDiv from './CustomFileDiv';
@@ -7,9 +8,18 @@ import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '' } = response;
+	const URLRegex = new RegExp(URL_MATCH_REGEX);
+
+	const renderText = (txt) => txt
+		?.split(' ')
+		?.map((part) => (URLRegex.test(part) ? (
+			`<a href=${part} target="_blank">${part} </a>`
+		) : `${part} `));
 
 	function ShowMessage() {
-		return <div dangerouslySetInnerHTML={{ __html: message }} />;
+		return (
+			<div dangerouslySetInnerHTML={{ __html: renderText(message) }} />
+		);
 	}
 
 	if (MESSAGE_MAPPING.media.includes(message_type)) {
