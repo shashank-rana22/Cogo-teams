@@ -24,24 +24,3 @@
 	width: 30%;
 	padding: 2px;
 }
-
-.satisfaction_intent_served_box {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	width: 100%;
-	margin-bottom: 12px;
-}
-
-.statistics {
-	display: flex;
-	justify-content: space-evenly;
-	width: 100%;
-}
-
-.two_characterisctics_container {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	margin-bottom: 12px;
-}

@@ -11,7 +11,7 @@ const apiData = [
 
 ];
 
-function Intelligence({ loading = true }) {
+function Intelligence({ loading = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.improvement}>Improvements:</div>
