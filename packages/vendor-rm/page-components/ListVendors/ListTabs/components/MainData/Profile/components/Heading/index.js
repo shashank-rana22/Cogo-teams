@@ -8,10 +8,17 @@ import styles from './styles.module.css';
 
 function Heading1({
 	vendor_details = {},
+	refetchVendorInfo = () => {},
 }) {
 	const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
-	const { control, newFields, handleSubmit, errors } = useEditProfile({ vendor_details });
+	const {
+		control,
+		newFields,
+		handleSubmit,
+		errors,
+		onSubmit,
+	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal });
 
 	const { kyc_status = '' } = vendor_details || {};
 
@@ -19,19 +26,17 @@ function Heading1({
 		<div className={styles.top1}>
 			Profile
 
-			{
-				kyc_status !== 'verified' && (
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => {
-							setShowEditProfileModal(!showEditProfileModal);
-						}}
-					>
-						Edit Profile
-					</Button>
-				)
-			}
+			{kyc_status !== 'verified' && (
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={() => {
+						setShowEditProfileModal(!showEditProfileModal);
+					}}
+				>
+					Edit Profile
+				</Button>
+			)}
 
 			<Modal
 				show={showEditProfileModal}
@@ -40,6 +45,7 @@ function Heading1({
 				className={styles.modal_container}
 			>
 				<Modal.Header title="Edit Profile" />
+
 				<Modal.Body>
 					<section
 						className={styles.bodyStyle}
@@ -51,6 +57,7 @@ function Heading1({
 						/>
 					</section>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button
 						size="md"
@@ -62,12 +69,14 @@ function Heading1({
 					>
 						Cancel
 					</Button>
+
 					<Button
 						size="md"
-						onClick={handleSubmit}
+						type="submit"
+						onClick={handleSubmit(onSubmit)}
 						// loading={loading}
 					>
-						submit
+						Submit
 					</Button>
 				</Modal.Footer>
 			</Modal>

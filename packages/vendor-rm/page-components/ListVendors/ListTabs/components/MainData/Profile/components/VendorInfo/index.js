@@ -66,11 +66,13 @@ function VendorInfo({
 				className={styles.modal_container}
 			>
 				<Modal.Header title="Edit Profile" />
+
 				<Modal.Body>
 					<section className={styles.bodyStyle}>
 						<FormLayout control={control} fields={controls} errors={errors} />
 					</section>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button
 						size="md"
@@ -82,13 +84,14 @@ function VendorInfo({
 					>
 						Cancel
 					</Button>
+
 					<Button
 						type="submit"
 						size="md"
 						onClick={handleSubmit(onSubmit)}
 						loading={loading}
 					>
-						submit
+						Submit
 					</Button>
 				</Modal.Footer>
 			</Modal>

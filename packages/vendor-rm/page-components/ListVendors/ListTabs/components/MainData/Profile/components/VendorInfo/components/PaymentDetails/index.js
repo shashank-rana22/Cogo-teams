@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import { IcCFtick, IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -71,14 +69,20 @@ function PaymentDetails({
 									target="_blank"
 									className={styles.txt}
 									style={{
-										color: 'orange',
+										color: '#F68B21',
 									}}
 									rel="noreferrer"
 								>
 									{bankDetail?.bank_document_url}
 								</a>
-								<IcCFtick />
-								<div className={styles.btn}><IcMDownload /></div>
+								<div className={styles.btn}>
+									<img
+										// eslint-disable-next-line max-len
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
+										alt="icon-download"
+									/>
+
+								</div>
 							</div>
 						</div>
 					</div>

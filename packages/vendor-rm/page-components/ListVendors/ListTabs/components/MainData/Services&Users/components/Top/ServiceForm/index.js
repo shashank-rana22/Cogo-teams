@@ -1,7 +1,8 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import FormComponent from './FormComponent';
+import FormLayout from '../../../../../../../../../commons/components/FormLayout/FormLayout';
+
 import useCreateVendorServicePOC from './hooks/useCreateVendorServicePOC';
 import styles from './styles.module.css';
 
@@ -24,20 +25,17 @@ function ServiceForm({
 
 	return (
 		<div className={styles.container}>
-
-			<div>
-				<FormComponent
-					controls={controls}
-					errors={errors}
-					control={control}
-				/>
-			</div>
+			<FormLayout
+				fields={controls}
+				errors={errors}
+				control={control}
+			/>
 
 			<div className={styles.button_container}>
 				<Button
 					size="md"
 					role="presentation"
-					themeType="secondary"
+					themeType="tertiary"
 					onClick={handleCancel}
 				>
 					Cancel

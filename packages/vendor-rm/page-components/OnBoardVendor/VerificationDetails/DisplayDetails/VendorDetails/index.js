@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const fieldsToShow = {
 	country_id             : 'Country of Registration',
-	registration_number    : 'GST No.',
+	registration_number    : 'Registration No.',
 	business_name          : 'Organisation Name',
 	registration_proof_url : 'GST Certificate',
 	company_type           : 'Type of Company',

@@ -12,7 +12,7 @@ function Profile({
 	return (
 		<div className={styles.padd}>
 			<div className={styles.main}>
-				<Heading vendor_details={data?.vendor_details} />
+				<Heading vendor_details={data?.vendor_details} refetchVendorInfo={refetchVendorInfo} />
 				<Verified data={data} />
 				<VendorInfo data={data} refetchVendorInfo={refetchVendorInfo} />
 			</div>

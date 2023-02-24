@@ -24,7 +24,7 @@ function Verified({ data = {} }) {
 				<div
 					className={styles.dis}
 					style={{
-						color: 'green',
+						color: '#67c676',
 					}}
 				>
 					{value}
@@ -38,7 +38,7 @@ function Verified({ data = {} }) {
 				className={styles.main}
 				style={{
 					background : '#fdcfcf',
-					border     : '1px solid red',
+					border     : '1px solid #ED3726',
 				}}
 			>
 				<div
@@ -48,7 +48,7 @@ function Verified({ data = {} }) {
 				</div>
 				<div
 					className={styles.dis}
-					style={{ color: 'red' }}
+					style={{ color: '#ED3726' }}
 				>
 					{value}
 				</div>
@@ -60,7 +60,7 @@ function Verified({ data = {} }) {
 			className={styles.main}
 			style={{
 				background : '#fdd9b5',
-				border     : '1px solid orange',
+				border     : '1px solid #F68B21',
 			}}
 		>
 			<div
@@ -71,7 +71,7 @@ function Verified({ data = {} }) {
 			<div
 				className={styles.dis}
 				style={{
-					color: 'orange',
+					color: '#F68B21',
 				}}
 			>
 				{value}

@@ -1,19 +1,18 @@
 .main_container {
-	margin-top: 20px;
-	background: #FFFFFF;
-	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.07);
-	border-radius: 8px;
 	padding: 20px;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 7%);
 }
 
 .heading {
-	font-family: 'Poppins';
+	margin-bottom: 2rem;
+	font-size: 21px;
 	font-style: normal;
 	font-weight: 600;
-	font-size: 21px;
 	line-height: 32px;
-	color: #333333;
-	margin-bottom: 2rem;
+	color: #333;
 }
 
 .content {
@@ -23,12 +22,11 @@
 }
 
 .label {
-	font-family: 'Poppins';
+	font-size: 12px;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 12px;
 	line-height: 18px;
-	color: #333333;
+	color: #333;
 	opacity: 0.7;
 }
 
@@ -39,15 +37,14 @@
 }
 
 .value {
-	font-family: 'Poppins';
+	display: flex;
+	gap: 2px;
+	align-items: center;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
-	font-size: 14px;
 	line-height: 21px;
-	color: #333333;
-	display: flex;
-	align-items: center;
-	gap: 2px;
+	color: #333;
 }
 
 .item {
@@ -55,7 +52,7 @@
 	margin-right: 12px;
 }
 
-@media (max-width: 400px){
+@media (max-width: 400px) {
 	.content {
 		flex-direction: column;
 	}

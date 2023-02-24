@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { getElementController } from '../../../../../../../../../../utils/get-element-controller';
-
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 
 function FormComponent({
 	controls = [],

@@ -1,11 +1,6 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
-
-import formatArrayValues from '../../../../../../../commons/utils/formatArrayValues';
-import workScopes from '../../../../../../../commons/utils/work-scopes.json';
 
 function useGetListVendorPocServices() {
 	const { general: { query } } = useSelector((state) => state);
@@ -25,12 +20,13 @@ function useGetListVendorPocServices() {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			// Toast.error(getApiErrorString(error?.data));
 		}
 	};
 
 	useEffect(() => {
 		getListVendorPocServices();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const { services_pocs = [] } = data || {};
@@ -58,19 +54,9 @@ function useGetListVendorPocServices() {
 		return finalData;
 	});
 
-	const getPocRole = (arr) => {
-		const scopeArr = arr.map((val) => {
-			const obj = workScopes.find((scope) => scope.value === val);
-			return obj.label;
-		});
-
-		return formatArrayValues(scopeArr, false);
-	};
-
 	return {
 		loading,
 		allServicesAndPocs,
-		getPocRole,
 		refetchServicesPocs: getListVendorPocServices,
 	};
 }

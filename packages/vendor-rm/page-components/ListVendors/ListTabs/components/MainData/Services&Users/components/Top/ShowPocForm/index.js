@@ -28,10 +28,10 @@ function ShowPocForm({ setShowForm = () => {}, getVendorData }) {
 					size="md"
 					themeType="tertiary"
 					disabled={loading}
+					style={{ marginRight: 12 }}
 					onClick={() => setShowForm('')}
 				>
 					Cancel
-
 				</Button>
 
 				<Button

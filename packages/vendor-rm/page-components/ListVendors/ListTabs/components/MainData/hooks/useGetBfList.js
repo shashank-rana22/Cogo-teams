@@ -1,15 +1,19 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import styles from '../FinanceDashBoard/styles.module.css';
 
-const useGetBfList = ({ organizationId }) => {
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+const useGetBfList = () => {
+	const {
+		general : { query = {} },
+	} = useSelector((state) => state);
+
+	const { vendor_id } = query;
+
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url    : '/purchase/bills/list',
 			method : 'get',
@@ -21,11 +25,11 @@ const useGetBfList = ({ organizationId }) => {
 		try {
 			trigger({
 				params: {
-					organizationId,
+					organizationId: vendor_id,
 				},
 			});
 		} catch (e) {
-			Toast.error(e?.message);
+			// Toast.error(e?.message);
 		}
 	};
 

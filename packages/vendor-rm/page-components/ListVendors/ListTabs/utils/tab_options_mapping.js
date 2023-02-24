@@ -5,7 +5,7 @@ import ServicesUsers from '../components/MainData/Services&Users';
 const TAB_OPTION_MAPPING = {
 	services_and_users: {
 		key                : 'services_and_users',
-		title              : 'Services and users',
+		title              : 'Services and Users',
 		containerComponent : ServicesUsers,
 	},
 	profile: {
