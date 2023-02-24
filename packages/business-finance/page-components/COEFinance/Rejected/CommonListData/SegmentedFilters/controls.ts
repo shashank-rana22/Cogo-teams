@@ -3,7 +3,6 @@ const controls = [
 		name        : 'urgencyTag',
 		type        : 'multiSelect',
 		placeholder : 'Select Urgency',
-		theme       : 'admin',
 		span        : 6,
 		isClearable : true,
 
