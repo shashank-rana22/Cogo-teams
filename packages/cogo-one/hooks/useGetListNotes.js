@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
-	const [firstLoading, setFirstLoading] = useState(true);
+	const [firstLoading, setFirstLoading] = useState(false);
 	const { profile } = useSelector((state) => state);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_omnichannel_notes',
@@ -14,6 +14,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	const { user_number } = activeVoiceCard || {};
 
 	const fetchListNotes = async () => {
+		setFirstLoading(true);
 		try {
 			await trigger({
 				params: {

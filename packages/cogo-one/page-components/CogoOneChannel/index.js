@@ -58,6 +58,7 @@ function CogoOne() {
 		loading,
 		setActiveCardId,
 		activeCardId,
+		firstLoading,
 		updateLeaduser,
 	} = useListChats({
 		firestore,
@@ -67,8 +68,10 @@ function CogoOne() {
 	const { messagesList = [], unReadChatsCount } = listData;
 
 	useEffect(() => {
-		setActiveVoiceCard({});
-		setActiveCardId('');
+		if (!firstLoading) {
+			setActiveVoiceCard({});
+			setActiveCardId('');
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 

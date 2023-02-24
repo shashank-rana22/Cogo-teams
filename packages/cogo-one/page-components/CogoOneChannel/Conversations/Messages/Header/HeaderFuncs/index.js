@@ -1,6 +1,7 @@
 import { Tooltip, cl, Popover, Select, Button } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, snakeCase, startCase } from '@cogoport/utils';
+import { v1 as uuid } from 'uuid';
 
 import AssigneeAvatar from '../../../../../../common/AssigneeAvatar';
 import { TAGS_COLORS } from '../../../../../../constants';
@@ -41,6 +42,7 @@ export function ShowContent({ list = [], showMorePlacement = 'right' }) {
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.flex}>
 			{showMoreList && showMorePlacement !== 'right' && toolTipComp}
@@ -76,10 +78,12 @@ export function TagsPopOver({
 		setheaderTags(null);
 		setIsVisible(false);
 	};
+
 	const popOverContent = (
 		<div>
 			<div className={styles.input_container}>
 				<Select
+					key={uuid()}
 					onChange={(e) => setheaderTags(e)}
 					value={loading ? '' : headertags}
 					options={filteredOptions}
