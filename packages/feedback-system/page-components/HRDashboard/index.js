@@ -13,10 +13,10 @@ import TeamMembersList from './TeamMembersList';
 import UploadModalBody from './UploadModal';
 
 function HRDashboard() {
-	const Router = useRouter();
+	const router = useRouter();
 
 	const routeToFeedbackForms = () => {
-		Router.push('/feedback-system/hr-dashboard/feedback-forms');
+		router.push('/feedback-system/hr-dashboard/feedback-forms');
 	};
 
 	const [openUploadModal, setOpenUploadModal] = useState(false);
@@ -29,7 +29,7 @@ function HRDashboard() {
 	const { total_count = '' } = pagination_data;
 
 	const redirectToFeedbackManagement = () => {
-		Router.push('/feedback-system/hr-dashboard/feedback-management');
+		router.push('/feedback-system/hr-dashboard/feedback-management');
 	};
 
 	return (

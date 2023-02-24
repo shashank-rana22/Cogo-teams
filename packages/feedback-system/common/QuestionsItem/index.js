@@ -114,10 +114,7 @@ function QuestionsItem({
 									width={20}
 									height={20}
 									fill="#393F70"
-									style={{
-										fontWeight : '100',
-										cursor     : 'pointer',
-									}}
+									style={{ cursor: 'pointer' }}
 								/>
 							</Button>
 						</Tooltip>

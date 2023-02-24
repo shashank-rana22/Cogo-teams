@@ -3,7 +3,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Department({ department, openAccordion, setFormsParams, designation }) {
+function Department({ department, setFormsParams, designation }) {
 	const completionStatus = isEmpty(department.designations.filter((role) => role.status === 'inactive'));
 
 	return (
@@ -26,9 +26,7 @@ function Department({ department, openAccordion, setFormsParams, designation }) 
 					)}
 				</div>
 			)}
-			className={`
-                    ${styles.accordion} 
-                    ${openAccordion[department] ? styles.open_accordion : ''}`}
+			className={styles.accordion}
 		>
 			<div className={styles.roles}>
 				{(department?.designations || []).map((role) => (

@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
+import columnsMapping from '../../../constants/columns-mapping-card';
 
 import ListItem from './ListItem';
 import styles from './styles.module.css';
@@ -15,7 +16,7 @@ function TeamMembersList({
 	total_count,
 	loading = false,
 }) {
-	const Router = useRouter();
+	const router = useRouter();
 
 	if (isEmpty(list) && !loading) {
 		return (
@@ -30,29 +31,11 @@ function TeamMembersList({
 			</div>
 		);
 	}
-
-	const columnsMapping = [
-		{
-			key   : 'team_count',
-			label : 'Team Size',
-			flex  : 2.5,
-		},
-		{
-			key   : 'pending_count',
-			label : 'Feedbacks Pending',
-			flex  : 1.9,
-		},
-		{
-			key   : 'rating',
-			label : 'Latest KPI',
-			flex  : 1.7,
-		},
-
-	];
+	const columns = columnsMapping({ columnsToShow: ['team_count', 'pending_count', 'rating'] });
 
 	const routeToManagerDetails = (id) => {
 		if (id) {
-			Router.push(
+			router.push(
 				'/feedback-system/hr-dashboard/feedback-management/[user_id]?path=/feedback-system/hr-dashboard',
 				`/feedback-system/hr-dashboard/feedback-management/${id}?path=/feedback-system/hr-dashboard`,
 			);
@@ -64,12 +47,12 @@ function TeamMembersList({
 			<div className={styles.user_info}>
 				<h3 style={{ color: '#ED3726' }}>{i.name}</h3>
 
-				Employee Id: &nbsp;
+				Employee Id:
+				{' '}
 				<b>{i.cogo_id}</b>
-
 			</div>
 			<div className={styles.column_map}>
-				{columnsMapping.map((colDetails) => {
+				{columns.map((colDetails) => {
 					const { key, label, flex } = colDetails;
 					return (
 						<div key={key} style={{ flex }}>

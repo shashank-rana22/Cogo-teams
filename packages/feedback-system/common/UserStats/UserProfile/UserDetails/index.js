@@ -8,15 +8,7 @@ function UserDetails({ userData = {}, loading = false }) {
 	const { name, email, mobile_number, designation } = userData || {};
 
 	const showLoading = () => (
-		<div style={{
-			width           : '100%',
-			height          : '100%',
-			display         : 'flex',
-			justifyContent  : 'center',
-			alignItems      : 'center',
-			backgroundColor : '#fff',
-		}}
-		>
+		<div className={styles.loading}>
 			<Placeholder style={{ borderRadius: '10px', padding: 'auto' }} width="96%" height="88px" />
 		</div>
 	);

@@ -12,7 +12,7 @@
 
 	span {
 		padding: 4px 0;
-		font-weight: bold;
+		font-weight: 700;
 	}
 }
 
@@ -28,8 +28,8 @@
 }
 
 .error_message {
-	font-size: 0.75rem;
+	font-size: 8px;
 	font-weight: 400;
 	color: #cb6464;
-	letter-spacing: 0.02em;
+	letter-spacing: 4px;
 }

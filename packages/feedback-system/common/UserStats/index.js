@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import UserProfile from './UserProfile';
 
 function UserStats({ source = '' }) {
-	const Router = useRouter();
+	const router = useRouter();
 
 	const {
 		general: {
@@ -26,7 +26,7 @@ function UserStats({ source = '' }) {
 	const userId = user_id || user.id;
 
 	const handleClick = () => {
-		Router.push(`${path}`);
+		router.push(`${path}`);
 	};
 
 	const formProps =	useForm();

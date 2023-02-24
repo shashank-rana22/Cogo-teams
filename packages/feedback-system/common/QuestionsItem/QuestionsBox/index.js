@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
-	const { question = '', tags = ['a', 'bcvc', 'csdee'], description = '' } = question_detail || {};
+	const { question = '', tags = [], description = '' } = question_detail;
 
 	return (
 		<div className={styles.container}>

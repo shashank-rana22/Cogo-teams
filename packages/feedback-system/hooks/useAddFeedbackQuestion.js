@@ -39,7 +39,7 @@ const useAddFeedbackQuestion = () => {
 		} catch (e) {
 			Toast.error(getApiErrorString(e.data));
 		}
-		return '';
+		return null;
 	};
 
 	return {

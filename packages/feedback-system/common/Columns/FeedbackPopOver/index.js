@@ -25,7 +25,7 @@ function FeedbackModal({ feedback = '' }) {
 					<Modal size="md" show={show} onClose={() => setShow(false)} onClickOutside={() => setShow(false)}>
 						<Modal.Header title="View Feedback" />
 						<Modal.Body>
-							<div style={{ paddingBottom: '14px', color: '#4f4f4f' }}>Feedback</div>
+							<div style={{ marginBottom: '14px', color: '#4f4f4f' }}>Feedback</div>
 							<div>
 								{feedback}
 							</div>

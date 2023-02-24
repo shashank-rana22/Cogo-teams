@@ -6,21 +6,14 @@ import {
 	Toast,
 	Tooltip,
 } from '@cogoport/components';
-import { IcCStar, IcMArrowDoubleDown, IcMArrowDown, IcMArrowUp, IcMInfo } from '@cogoport/icons-react';
+import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import performanceIcons from '../../../../constants/performance-icon-mappings';
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
 import EmptyState from '../../../EmptyState';
 
 import styles from './styles.module.css';
-
-const performanceIcons = {
-	below_expectations   : <IcMArrowDoubleDown height={20} width={20} fill="#ee3425" />,
-	needs_improvement    : <IcMArrowDown height={20} width={20} fill="#f68b21" />,
-	meets_expectations   : <div className={styles.constant}>H</div>,
-	exceeds_expectations : <IcMArrowUp height={20} width={20} fill="#abcd62" />,
-	outstanding          : <IcCStar height={20} width={20} fill="#fcdc00" />,
-};
 
 function FeedBackForm({
 	action = '',
@@ -83,7 +76,7 @@ function FeedBackForm({
 		);
 	}
 
-	if (isEmpty([]) && !questionsLoading) {
+	if (isEmpty(questionsToShow)) {
 		return (
 			<EmptyState
 				height="60%"

@@ -17,14 +17,14 @@ function ManagerDashboard() {
 
 	const monthControls = getMonthControls(params?.Year);
 
-	const Router = useRouter();
+	const router = useRouter();
 
 	const setFilter = (val, type) => {
 		setParams({ ...params, [type]: val || undefined });
 	};
 
 	const handleClick = () => {
-		Router.push('/feedback-system/manager-dashboard/feedback-management');
+		router.push('/feedback-system/manager-dashboard/feedback-management');
 	};
 
 	return (

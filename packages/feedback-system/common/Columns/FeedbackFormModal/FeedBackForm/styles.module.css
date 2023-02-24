@@ -50,7 +50,7 @@
 	margin-bottom: 16px;
 	font-size: 16px;
 	font-weight: 500;
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #221f20;
 }
 
 .header {
@@ -102,7 +102,7 @@
 	.comment {
 		margin-bottom: 8px;
 		font-size: 16px;
-		font-weight: bold;
+		font-weight: 700;
 	}
 }
 
@@ -123,12 +123,6 @@
 	:global(.ui_placeholder_skeleton_loader:not(:last-child)) {
 		margin-bottom: 16px;
 	}
-}
-
-.constant {
-	font-size: 20px;
-	font-weight: bold;
-	color: #88cad1;
 }
 
 .button_container {

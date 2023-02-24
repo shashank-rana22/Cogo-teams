@@ -1,10 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useManagerListItem = ({ item }) => {
-	const months = ['January', 'February', 'March', 'April',
-		'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = ['January', 'February', 'March', 'April',
+	'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+const useManagerListItem = ({ item }) => {
 	const d = new Date();
 
 	const [params, setParams] = useState({

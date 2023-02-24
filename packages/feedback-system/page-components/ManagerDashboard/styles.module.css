@@ -32,13 +32,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #393f70;
 	cursor: pointer;
 
 	p {
 		margin: 0;
 		font-size: 18px;
-		font-weight: bold;
+		font-weight: 700;
 	}
 }
 
@@ -58,7 +57,7 @@
 	.list_title {
 		margin: 0;
 		font-size: 18px;
-		font-weight: bold;
+		font-weight: 700;
 	}
 
 	.list_actions {

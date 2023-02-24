@@ -9,27 +9,14 @@ import useGetColumns from '../../../common/Columns';
 import UserTableData from '../../../common/UserTableData';
 import getDepartmentControls from '../../../hooks/useGetDepartmentControls';
 import useListReportees from '../../../hooks/useListReportees';
+import feedbackControls from '../../../utils/feedback-controls';
 
 import styles from './styles.module.css';
 
-const feedbackControls = {
-	name           : 'status',
-	label          : 'Select Status',
-	type           : 'select',
-	defaultOptions : true,
-	isClearable    : true,
-	placeholder    : 'Status',
-	options        : [
-		{ label: 'Pending', value: 'pending' },
-		{ label: 'Submitted', value: 'successful' },
-	],
-	span: 6,
-};
-
 function FeedbackManagement() {
-	const Router = useRouter();
+	const router = useRouter();
 	const handleClick = () => {
-		Router.push('/feedback-system/manager-dashboard');
+		router.push('/feedback-system/manager-dashboard');
 	};
 
 	const { profile: { user : { id: userId = '' } } } = useSelector((state) => state);

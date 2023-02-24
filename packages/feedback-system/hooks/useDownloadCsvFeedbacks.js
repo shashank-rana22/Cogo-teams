@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 
 const useDownloadCsvFeedbacks = ({ params = {} }) => {
-	const [{ data = {} }, trigger] = useRequest({
+	const [{ data = {}, loading = false }, trigger] = useRequest({
 		method : 'get',
 		url    : 'download_csv',
 	}, { manual: true });
@@ -15,6 +15,7 @@ const useDownloadCsvFeedbacks = ({ params = {} }) => {
 
 	return {
 		url: data,
+		loading,
 		getUserListCsv,
 	};
 };

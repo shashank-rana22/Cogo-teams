@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function TeamPieChart({ userId = '', params = {} }) {
 	const {
-		userData,
+		userData = {},
 	} = useGetPieChartStats({ userId, params });
 
 	const chart_data = [

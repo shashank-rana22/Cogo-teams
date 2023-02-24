@@ -1,11 +1,11 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import useGetFeedbackPerformanceStats from '../../hooks/useGetFeedbackPerformanceStats';
 import EmptyState from '../EmptyState';
 import TeamPieChart from '../TeamPieChart';
 
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function PerformanceChart({ params = {}, userId = '' }) {
@@ -23,16 +23,6 @@ function PerformanceChart({ params = {}, userId = '' }) {
 
 	const lineChartData = [{ id: 'x', data: lineChartlist }];
 
-	const showLoading = () => (
-		<div style={{ margin: '16px', display: 'flex', flexDirection: 'row' }}>
-
-			<div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
-				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
-				<Placeholder style={{ marginBottom: '16px' }} width="80%" height="80px" />
-			</div>
-		</div>
-	);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -41,7 +31,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 				</p>
 			</div>
 
-			{loading ? showLoading() : (
+			{loading ? <LoadingState /> : (
 				<div className={styles.chart_section}>
 					{(!loading && lineChartlist?.length > 0) ? (
 						<div className={styles.line_graph}>
@@ -101,7 +91,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 						<div className={styles.empty_container}>
 							<EmptyState
 								height={140}
-								width={180}
+								width={220}
 								emptyText="Performance Stats Not Found"
 								textSize="12px"
 								flexDirection="column"

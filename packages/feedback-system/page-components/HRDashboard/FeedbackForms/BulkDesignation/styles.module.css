@@ -1,65 +1,64 @@
 .bulk_modal {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 0px 0px;
+	display: flex;
+	flex-direction: column;
+	padding: 16px 0 0;
 }
 
 .header {
-    font-size: 16px;
-    font-weight: 600;
-    padding: 0px 16px;
+	padding: 0 16px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .designation_card {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    margin-bottom: 12px;
-    border-radius: 4px;
+	display: flex;
+	align-items: center;
+	padding: 8px;
+	margin-bottom: 12px;
+	border-radius: 4px;
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 
-    :global {
-        .ui_checkbox_container {
-            width: 5%;
-        }
-    }
+	:global {
+		.ui_checkbox_container {
+			width: 5%;
+		}
+	}
 }
 
 .filter {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 16px;
 
-    :global {
-        .ui_input_container {
-            width: 50%;
-        }
-    }
+	:global {
+		.ui_input_container {
+			width: 50%;
+		}
+	}
 }
 
 .label {
-    width: 95%;
-    margin-left: 16px;
-    font-size: 14px;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	width: 95%;
+	margin-left: 16px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .designations {
-    padding: 0px 16px;
-    padding-top: 12px;
-    flex:1;
+	flex: 1;
+	padding: 0 16px;
+	padding-top: 12px;
 }
 
 .button_container {
-    position: sticky;
-    bottom: 0;
-    display: flex;
-    padding: 16px 16px;
-    background: #ffffff;
-    border-top: 1px solid #bdbdbd;
-    justify-content: flex-end;
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+	background: #fff;
+	border-top: 1px solid #bdbdbd;
 }
-

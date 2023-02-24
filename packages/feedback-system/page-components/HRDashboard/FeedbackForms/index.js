@@ -1,93 +1,35 @@
 import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import fetchLocalCheckList from '../../../utils/fetchLocalCheckList';
+import useListDepartments from '../../../hooks/useListDepartments';
 
 import CreateFeedbackForm from './CreateFeedbackForm';
 import Department from './Department';
 import Forms from './Forms';
 import styles from './styles.module.css';
-import useListDepartments from './useListDepartments';
+import useGetFormsPage from './useGetFormsPage';
 
-const getFormResubmission = (department = '', designation = '') => {
-	let lastFormStatus;
-
-	if (designation) {
-		lastFormStatus = fetchLocalCheckList(department, designation);
-		if (lastFormStatus?.stage) {
-			return { department, designation, stage: lastFormStatus.stage };
-		}
-		return {};
-	}
-
-	const localForms = fetchLocalCheckList();
-
-	const lastForm = Object.keys(localForms)?.[Object.keys(localForms).length - 1] || '';
-	lastFormStatus = localForms[lastForm];
-	if (lastFormStatus?.stage) {
-		return {
-			department  : lastForm.split('_')[0],
-			designation : lastForm.split('_')[1],
-			stage       : lastFormStatus.stage,
-		};
-	}
-	return {};
-};
+const loadArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function FeedbackForms() {
-	const Router = useRouter();
+	const router = useRouter();
 
-	const [openAccordion, setOpenAccordion] = useState({});
-	const [formId, setFormId] = useState('');
-
-	const [refetchedLists, setRefetchedLists] = useState(false);
-
-	const [openCreateForm, setOpenCreateForm] = useState(false);
-	const [formStage, setFormStage] = useState('add_questions');
-
-	const [formsParams, setFormsParams] = useState({});
+	const {
+		formsParams, setFormsParams, formId, setFormId, refetchedLists, setRefetchedLists, openCreateForm,
+		setOpenCreateForm, formStage, setFormStage,
+	} = useGetFormsPage();
 
 	const { department, designation } = formsParams;
-
-	const routeToHRDashboard = () => {
-		Router.push('/feedback-system/hr-dashboard');
-	};
 
 	const { data = [], loading = true, getListDepartments } = useListDepartments();
 
 	const { list: departments = [] } = data;
 
-	const dummyArray = ['ok', 'ok1', 'harry', 'potter', 'lorem', 'ipsum', 'lorem', 'lorem', 'ipsum'];
-
-	useEffect(() => {
-		const newDesignationFormStatus = getFormResubmission(department, designation);
-		setFormId('');
-
-		const {
-			stage: newFormStage = '', department: newFormDepartment = '',
-			designation: newFormDesignation = '', bulkDesignations = [],
-		} = newDesignationFormStatus;
-
-		if (newFormStage) {
-			if (!designation) {
-				setFormsParams({
-					department       : newFormDepartment || '',
-					designation      : newFormDesignation || '',
-					bulkDesignations : bulkDesignations || [],
-				});
-				setOpenAccordion({ [newFormDepartment]: true });
-			}
-			setOpenCreateForm(true);
-			setFormStage(newFormStage);
-
-			return;
-		}
-
-		setOpenCreateForm(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [designation]);
+	const routeToHRDashboard = () => {
+		router.push('/feedback-system/hr-dashboard');
+	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { if (refetchedLists) { getListDepartments(); } setRefetchedLists(false); }, [refetchedLists]);
@@ -118,8 +60,9 @@ function FeedbackForms() {
 						<div
 							className={styles.left_list_div}
 						>
-							{dummyArray.map(() => (
+							{loadArr.map((i) => (
 								<Placeholder
+									key={i}
 									width="100%"
 									height="72px"
 									className={styles.loading_left}
@@ -132,8 +75,6 @@ function FeedbackForms() {
 								department={dept}
 								setFormsParams={setFormsParams}
 								designation={designation}
-								openAccordion={openAccordion}
-								setOpenAccordion={setOpenAccordion}
 							/>
 						))}
 				</div>

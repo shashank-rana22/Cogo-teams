@@ -14,7 +14,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
 
-	const managerControls = useGetControls().find((control) => control.name === 'manager_id');
+	const managerControls = useGetControls({ name: 'manager_id' });
 	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
@@ -61,6 +61,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 					return (
 						<Select
 							{...cntrl}
+							key={cntrl.name}
 							value={params[value]}
 							onChange={(val) => setFilter(val, value)}
 							placeholder={`Select ${value}`}

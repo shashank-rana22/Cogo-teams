@@ -98,7 +98,7 @@
 .details_pending_text {
 	padding: 2px 6px;
 	font-size: 10px;
-	font-weight: lighter;
+	font-weight: 200;
 	background: #fbe39f;
 	border-radius: 5px;
 }

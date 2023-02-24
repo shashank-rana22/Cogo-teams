@@ -2,6 +2,7 @@ import { Accordion, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
+import columnsMapping from '../../../constants/columns-mapping-card';
 
 import ListItem from './ListItem';
 import styles from './styles.module.css';
@@ -27,43 +28,20 @@ function TeamMembersList({
 			</div>
 		);
 	}
-
-	const columnsMapping = [
-		{
-			key   : 'total_feedbacks',
-			label : 'Feedbacks Given',
-			flex  : 1.7,
-		},
-		{
-			key   : 'BelowAverage',
-			label : 'Below Average Performance',
-			flex  : 2.2,
-		},
-		{
-			key   : 'Average',
-			label : 'Average Performance',
-			flex  : 2,
-		},
-		{
-			key   : 'GoodPerforming',
-			label : 'Above Average Performance',
-			flex  : 2.2,
-		},
-
-	];
+	const columns = columnsMapping({ columnsToShow: ['total_feedbacks', 'BelowAverage', 'Average', 'GoodPerforming'] });
 
 	const titleSection = (i) => (
 		<div className={styles.accordion_item_container}>
 			<div className={styles.user_info}>
 				<h3>
 					{i.month}
-					&nbsp;
+					{' '}
 					{i.year}
 				</h3>
 
 			</div>
 			<div className={styles.column_map}>
-				{columnsMapping.map((colDetails) => {
+				{columns.map((colDetails) => {
 					const { key, label, flex } = colDetails;
 					return (
 						<div key={key} style={{ flex }}>

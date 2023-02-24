@@ -3,39 +3,22 @@ import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
+import redirectPathSourceMapping from '../../constants/redirect-source-mapping';
+
 import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackModal from './FeedbackPopOver';
 import styles from './styles.module.css';
-
-const redirectPathSourceMapping = {
-	hr_dashboard: {
-		forwardPath : '/feedback-system/hr-dashboard/feedback-management',
-		returnPath  : '/feedback-system/hr-dashboard',
-	},
-	hr_feedback: {
-		forwardPath : '/feedback-system/hr-dashboard/feedback-management',
-		returnPath  : '/feedback-system/hr-dashboard/feedback-management',
-	},
-	manager_dashboard: {
-		forwardPath : '/feedback-system/manager-dashboard/feedback-management',
-		returnPath  : '/feedback-system/manager-dashboard',
-	},
-	manager_feedback: {
-		forwardPath : '/feedback-system/manager-dashboard/feedback-management',
-		returnPath  : '/feedback-system/manager-dashboard/feedback-management',
-	},
-};
 
 const useGetColumns = ({
 	getTeamFeedbackList = () => {}, source = 'hr_dashboard', columnsToShow = [],
 	setRefetchReportees = () => {},
 }) => {
-	const Router = useRouter();
+	const router = useRouter();
 	const handleClick = (user_id) => {
 		const { forwardPath, returnPath = '/feedback-system/user-dashboard' } = redirectPathSourceMapping[source];
 
 		if (forwardPath) {
-			Router.push(
+			router.push(
 				`${forwardPath}/[user_id]?path=${returnPath}`,
 				`${forwardPath}/${user_id}?path=${returnPath}`,
 			);

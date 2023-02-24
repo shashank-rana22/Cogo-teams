@@ -1,4 +1,4 @@
-import { Button, Input, Placeholder } from '@cogoport/components';
+import { Button, Input } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -13,7 +13,7 @@ import useListUserFeedbacks from '../../../hooks/useListUserFeedbacks';
 import styles from './styles.module.css';
 
 function FeedbackManagement() {
-	const Router = useRouter();
+	const router = useRouter();
 
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -38,24 +38,7 @@ function FeedbackManagement() {
 	}, [searchValue]);
 
 	const handleClick = () => {
-		Router.push('/feedback-system/hr-dashboard');
-	};
-
-	const showLoading = () => (
-		<div style={{ margin: '16px' }}>
-			{Array(6).fill('').map((index) => (
-				<Placeholder
-					margin="0px 0px 16px"
-					width="100%"
-					height="80px"
-					keky={index}
-				/>
-			))}
-		</div>
-	);
-
-	const downloadCSV = () => {
-		getUserListCsv();
+		router.push('/feedback-system/hr-dashboard');
 	};
 
 	return (
@@ -78,7 +61,7 @@ function FeedbackManagement() {
 				<p className={styles.header_text}>
 					Feedback List
 				</p>
-				<Button size="lg" onClick={() => downloadCSV()}>Download CSV</Button>
+				<Button size="lg" onClick={() => getUserListCsv()}>Download CSV</Button>
 			</div>
 
 			<div className={styles.top_container}>
@@ -93,19 +76,15 @@ function FeedbackManagement() {
 
 			</div>
 
-			{loading && showLoading()}
-
-			{!loading && (
-				<UserTableData
-					columns={tableColumns}
-					list={list}
-					loading={loading}
-					page_limit={params.PageLimit}
-					total_count={total_count}
-					pagination={params.Page}
-					setPagination={setPage}
-				/>
-			)}
+			<UserTableData
+				columns={tableColumns}
+				list={list}
+				loading={loading}
+				page_limit={params.PageLimit}
+				total_count={total_count}
+				pagination={params.Page}
+				setPagination={setPage}
+			/>
 		</div>
 	);
 }

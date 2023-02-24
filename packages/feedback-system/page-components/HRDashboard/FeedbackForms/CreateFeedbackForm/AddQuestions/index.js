@@ -39,7 +39,7 @@ function AddQuestions({
 	const {
 		list: questions = [], form_questions: checkedQuestions = [],
 		pagination_data = {},
-	} = data || {};
+	} = data;
 
 	const { total_count = '' } = pagination_data;
 
@@ -91,6 +91,7 @@ function AddQuestions({
 
 	useEffect(() => {
 		setFormsParams((pv) => ({ ...pv, bulkDesignations }));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [bulkDesignations]);
 
 	return (

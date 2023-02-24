@@ -19,14 +19,6 @@
 	margin-top: 8px;
 }
 
-.modal_sub_header {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	padding-bottom: 14px;
-	color: #333;
-}
-
 .details {
 	display: flex;
 	justify-content: flex-start;

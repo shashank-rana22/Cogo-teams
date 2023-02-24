@@ -1,6 +1,7 @@
 import { Placeholder, Loader } from '@cogoport/components';
 import { upperCase } from '@cogoport/utils';
 
+import kpiColorMapping from '../../../constants/kpi-color-mapping';
 import useGetUserDetails from '../../../hooks/useGetUserDetails';
 
 import styles from './styles.module.css';
@@ -38,22 +39,7 @@ const renderKPI = (kpi) => (
 	</div>
 );
 
-const colorScheme = (rating) => {
-	switch (rating) {
-		case '1':
-			return '#F3B4B4';
-		case '2':
-			return '#FBE39F';
-		case '3':
-			return '#B3D5FB';
-		case '4':
-			return '#6fa5ab';
-		case '5':
-			return '#ddebc0';
-		default:
-			return '#B3D5FB';
-	}
-};
+const colorScheme = (rating) => kpiColorMapping[rating?.toString()] || '#B3D5FB';
 
 function UserProfile({ userId = '' }) {
 	const { userData = {}, loading = false } = useGetUserDetails({ userId });
@@ -68,6 +54,7 @@ function UserProfile({ userId = '' }) {
 					padding      : 'auto',
 					marginRight  : '24px',
 				}}
+				margin="0 24px 0 0"
 				width="88%"
 				height="88px"
 			/>

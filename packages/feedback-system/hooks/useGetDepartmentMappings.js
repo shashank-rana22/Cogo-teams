@@ -5,6 +5,7 @@ const useGetDepartmentMappings = ({ department, searchValue = '' }) => {
 	const [params, setParams] = useState({
 		Department   : department || undefined,
 		Qdesignation : searchValue || undefined,
+		PageLimit    : 1000,
 	});
 
 	const [{ data = {}, loading = false }] = useRequest({

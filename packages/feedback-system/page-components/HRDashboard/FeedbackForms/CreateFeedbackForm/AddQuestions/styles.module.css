@@ -12,10 +12,10 @@
 }
 
 .form_header {
-	font-size: 20px;
-	font-weight: 600;
 	display: flex;
 	align-items: flex-end;
+	font-size: 20px;
+	font-weight: 600;
 
 	.dep {
 		margin-left: 4px;
@@ -24,13 +24,13 @@
 
 	.role {
 		min-width: 30px;
-		text-align: center;
-		margin-left: 4px;
 		padding: 2px;
+		margin-left: 4px;
 		font-size: 16px;
-		border-radius: 4px;
+		text-align: center;
 		cursor: pointer;
 		background: #fef199;
+		border-radius: 4px;
 	}
 }
 

@@ -6,10 +6,6 @@ import useNotifyManagers from './useNotifyManagers';
 function NotifyModal({ setNotifyModal = () => {} }) {
 	const { notify = () => {}, loading = false, setSendToAll, sendToAll } = useNotifyManagers({ setNotifyModal });
 
-	const notifyManagers = () => {
-		notify();
-	};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.notify_header}>Are you sure you wish to send notifications to the following?</div>
@@ -29,7 +25,7 @@ function NotifyModal({ setNotifyModal = () => {} }) {
 
 			<div className={styles.button_container}>
 				<Button themeType="tertiary" onClick={() => setNotifyModal(false)}>Cancel</Button>
-				<Button themeType="primary" onClick={() => notifyManagers()} loading={loading}>Notify</Button>
+				<Button themeType="primary" onClick={() => notify()} loading={loading}>Notify</Button>
 			</div>
 		</div>
 	);

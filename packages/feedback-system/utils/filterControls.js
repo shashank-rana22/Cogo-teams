@@ -1,6 +1,6 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 
-const useGetControls = () => {
+const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 
@@ -15,7 +15,7 @@ const useGetControls = () => {
 		labelKey : 'name',
 	});
 
-	return [
+	const control = [
 		{
 			...partnerOptions,
 			label          : 'Manager Name',
@@ -25,7 +25,6 @@ const useGetControls = () => {
 			defaultOptions : true,
 			isClearable    : true,
 			span           : 5.5,
-			validations    : [{ type: 'required', message: 'Required' }],
 		},
 		{
 			name           : 'rating',
@@ -81,6 +80,8 @@ const useGetControls = () => {
 			span: 5,
 		},
 	];
+
+	return control.find((cntrl) => cntrl.name === name);
 };
 
 export default useGetControls;

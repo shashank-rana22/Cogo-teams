@@ -17,7 +17,7 @@ function BulkDesignation({
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [searchValue, setSearchValue] = useState('');
 
-	const { data = {}, loading = false } = useGetDepartmentMappings({ department, searchValue: query });
+	const { data = {} } = useGetDepartmentMappings({ department, searchValue: query });
 	const { list = [] } = data;
 
 	const newList = (list || []).filter((des) => {
@@ -54,6 +54,7 @@ function BulkDesignation({
 		setCheckedDesignations(bulkDesignations);
 	};
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
 
 	return (

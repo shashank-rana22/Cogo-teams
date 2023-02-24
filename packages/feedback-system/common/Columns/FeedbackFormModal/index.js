@@ -1,5 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
-import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -86,7 +86,7 @@ function FeedbackFormModal({
 					<Button
 						size="sm"
 						themeType="link"
-						onClick={() => 	setAddFeedback(true)}
+						onClick={() => setAddFeedback(true)}
 					>
 						View Form
 					</Button>
@@ -97,17 +97,10 @@ function FeedbackFormModal({
 						disabled={!isEmpty(feedback_id)}
 						onClick={() => 	setAddFeedback(true)}
 					>
-						{isEmpty(feedback_id) ? (
-							<>
-								<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
-								ADD
-							</>
-						) : (
-							<>
-								<IcMEdit style={{ marginRight: '4px' }} width={14} height={14} />
-								EDIT
-							</>
-						)}
+						<>
+							<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
+							ADD
+						</>
 					</Button>
 				)}
 

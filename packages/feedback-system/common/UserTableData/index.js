@@ -24,15 +24,13 @@ function UserTableData({
 
 	return (
 		<div className={styles.table_container}>
-			{!loading && (
-				<Table
-					columns={columns}
-					data={list}
-					loading={loading}
-					loadingRowsCount={10}
-					className={styles.table}
-				/>
-			)}
+			<Table
+				columns={columns}
+				data={list}
+				loading={loading}
+				loadingRowsCount={10}
+				className={styles.table}
+			/>
 
 			{total_count > 10 && (
 				<div className={styles.pagination_container}>

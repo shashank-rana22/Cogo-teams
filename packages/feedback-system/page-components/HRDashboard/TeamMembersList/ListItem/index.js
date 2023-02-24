@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
 import UserTableData from '../../../../common/UserTableData';
+import useDownloadCsvFeedbacks from '../../../../hooks/useDownloadCsvFeedbacks';
 
 import styles from './styles.module.css';
 import useManagerListItem from './useManagerListItem';
@@ -18,7 +19,10 @@ function ListItem({ item }) {
 		data: { list = [], pagination_data = {} } = {},
 		loading, params, setParams, setPage,
 	} = useManagerListItem({ item });
+
 	const { total_count = '' } = pagination_data;
+
+	const { getUserListCsv = () => {}, loading: downloadLoading = false } = useDownloadCsvFeedbacks({ params });
 
 	const columnsToShow = ['name', 'cogo_id', 'rating', 'score', 'user_details'];
 
@@ -48,8 +52,9 @@ function ListItem({ item }) {
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => {}}
+					onClick={() => getUserListCsv()}
 					disabled={isEmpty(list)}
+					loading={downloadLoading}
 				>
 					Download CSV
 				</Button>
