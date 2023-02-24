@@ -137,6 +137,10 @@
 		flex: 0.8;
 		border-top: 0px;
 	}
+
+	p {
+		margin-bottom: 0;
+	}
 }
 
 .flex_col {

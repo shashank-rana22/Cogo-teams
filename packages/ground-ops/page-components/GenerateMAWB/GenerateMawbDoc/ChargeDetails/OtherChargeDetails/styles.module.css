@@ -126,6 +126,10 @@
 		border-right: 0px;
 		border-bottom: 0px;
 	}
+	
+	p {
+		margin-bottom: 0;
+	}
 }
 
 .flex_col {

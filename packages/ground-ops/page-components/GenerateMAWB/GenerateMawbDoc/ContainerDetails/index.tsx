@@ -16,7 +16,7 @@ function ContainerDetails({
 	chargeableWeight,
 }:Props) {
 	return (
-		<div style={{ pointerEvents: 'none' }}>
+		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
 				<div className={cl`
 						${styles.block} 

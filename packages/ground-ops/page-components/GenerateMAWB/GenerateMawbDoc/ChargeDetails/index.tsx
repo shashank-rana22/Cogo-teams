@@ -19,7 +19,7 @@ function ChargeDetails({
 	data = {},
 }:Props) {
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={cl`
 				${styles.flex_row} 
 				${styles.charge_container} 

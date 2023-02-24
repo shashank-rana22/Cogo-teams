@@ -10,7 +10,7 @@ interface Props {
 
 function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 	return (
-		<div style={{ pointerEvents: 'none' }}>
+		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
 				<div className={cl`
 					${styles.block_col} 
@@ -103,6 +103,122 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					</div>
 				</div>
 			</div>
+
+			{/* <div className={styles.flex}>
+				<div className={cl`
+					${styles.block_col}
+					${styles.blockcol_in_flex}
+				`}
+				>
+					<div className={cl`
+					${styles.block}
+					${styles.departure_airport}
+				`}
+					>
+						<p style={{ fontSize: 10 }}>
+							Airport of Departure (Addr. of First Carrier) and Requested
+							Routing
+							<div className={cl`
+						${styles.flex}
+						${styles.flex_font_bold}
+					`}
+							>
+								<p
+									className={styles.font_style}
+									style={{ fontSize: 14 }}
+								>
+									{formData?.origin}
+
+								</p>
+							</div>
+						</p>
+					</div>
+				</div>
+				<div className={cl`
+					${styles.block_col}
+					${styles.blockcol_in_flex}
+				`}
+				>
+					<div className={cl`
+							${styles.block_col}
+							${styles.blockcol_border}
+							${styles.referrence_optional}
+						`}
+					>
+						<div className={cl`
+								${styles.flex_row}
+								${styles.referrence_optional_flight_date_top}
+							`}
+						>
+							<div className={cl`
+									${styles.flex}
+									${styles.flex_border_right}
+									${styles.flex_in_flex}
+								`}
+							>
+								<div className={cl`
+					${styles.flex}
+					${styles.flex_padding_left}
+				`}
+								>
+									<p style={{ fontSize: 9 }}>Reference Number</p>
+								</div>
+							</div>
+							<div className={cl`
+					${styles.flex}
+					${styles.flex_border_right}
+					${styles.flex_in_flex}
+					${styles.flex_border_solid}
+				`}
+							>
+								<div className={cl`
+					${styles.flex}
+					${styles.optional_shipping_text}
+				`}
+								/>
+								<p style={{ fontSize: 8 }}>Optional Shipping Information</p>
+							</div>
+							<div className={cl`
+					${styles.flex}
+					${styles.flex_in_flex}
+				`}
+							>
+								<p style={{ fontSize: 9 }} />
+							</div>
+						</div>
+						<div className={cl`
+					${styles.flex_row}
+					${styles.referrence_optional_bottom}
+				`}
+						>
+							<div className={cl`
+					${styles.flex}
+					${styles.flex_border_right}
+					${styles.flex_in_flex_c}
+				`}
+							>
+								<p style={{ fontSize: 9 }} />
+							</div>
+							<div className={cl`
+					${styles.flex}
+					${styles.flex_border_right}
+					${styles.referrence_optional_bottom_middle}
+				`}
+							>
+								<p style={{ fontSize: 9 }} />
+							</div>
+							<div className={cl`
+					${styles.flex}
+					${styles.flex_in_flex_c}
+				`}
+							>
+								<p style={{ fontSize: 9 }} />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> */}
+
 			<div className={styles.flex}>
 				<div className={cl`
 					${styles.block_col} 
@@ -123,7 +239,13 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_font_bold}
 					`}
 							>
-								<p style={{ fontSize: 12.5 }}>{formData?.origin}</p>
+								<p
+									className={styles.font_style}
+									style={{ fontSize: 14 }}
+								>
+									{formData?.origin}
+
+								</p>
 							</div>
 						</p>
 					</div>
@@ -274,7 +396,13 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_justify_center}
 					`}
 								>
-									<p style={{ fontSize: 14 }}>{formData?.destination}</p>
+									<p
+										className={styles.font_style}
+										style={{ fontSize: 14 }}
+									>
+										{formData?.destination}
+
+									</p>
 								</div>
 							</p>
 						</div>
@@ -651,7 +779,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						>
 							<div className={styles.flex_col}>
 								<p style={{ fontSize: 8.3 }}>Declared Value for Customs</p>
-								{formData.value_for_custom}
+								{formData.valueForCustom}
 							</div>
 						</div>
 					</div>

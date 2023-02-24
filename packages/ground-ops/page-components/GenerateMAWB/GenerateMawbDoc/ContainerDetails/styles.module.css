@@ -133,6 +133,12 @@
 	}
 }
 
+.container {
+	p {
+		margin-bottom: 0;
+	}
+}
+
 .block {
 	display: flex;
 	border: 1px #333 solid;

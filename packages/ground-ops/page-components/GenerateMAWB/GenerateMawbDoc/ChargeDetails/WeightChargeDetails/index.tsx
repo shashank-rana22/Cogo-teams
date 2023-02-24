@@ -460,7 +460,10 @@ function WeightChargeDetails({ data = {} }:Props) {
 							${styles.flex} 
 							${styles.conversion_end}
 						`}
-					/>
+					>
+						<p> </p>
+
+					</div>
 				</div>
 				<div className={cl`
 					${styles.flex_col}

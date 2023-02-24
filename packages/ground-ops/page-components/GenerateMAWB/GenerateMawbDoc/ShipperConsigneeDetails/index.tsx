@@ -11,7 +11,7 @@ interface Props {
 function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 	const { awbNumber = '' } = taskItem;
 	return (
-		<div style={{ pointerEvents: 'none' }}>
+		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={cl`
 				${styles.flex} 
 				${styles.mawb_number} 
@@ -86,7 +86,11 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={styles.styled_text_area}>
+							<div className={cl`
+							${styles.styled_text_area} 
+							${styles.font_style} 
+						`}
+							>
 
 								{formData.shipperName}
 								<br />
@@ -115,7 +119,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.airway_bill} 
 					`}
 					>
-						<p style={{ fontSize: 14.5 }}>Air Waybill</p>
+						<p className={styles.font_style} style={{ fontSize: 14.5 }}>Air Waybill</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -133,7 +137,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 					>
 
-						<p style={{ fontSize: 14.5 }}>{taskItem?.airline}</p>
+						<p className={styles.font_style} style={{ fontSize: 14.5 }}>{taskItem?.airline}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -178,10 +182,14 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={styles.styled_text_area}>
-								{formData.consignee_name}
+							<div className={cl`
+							${styles.styled_text_area} 
+							${styles.font_style} 
+						`}
+							>
+								{formData.consigneeName}
 								<br />
-								{formData.consignee_address}
+								{formData.consigneeAddress}
 							</div>
 						</div>
 					</div>
