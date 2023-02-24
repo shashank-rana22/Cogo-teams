@@ -7,6 +7,7 @@ const enrichment = {
 	'[partner_id]/enrichment/[organization_id]': {
 		navigation : 'enrichment',
 		isMainNav  : false,
+		layoutType : 'no_header',
 	},
 };
 

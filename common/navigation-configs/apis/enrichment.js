@@ -6,6 +6,12 @@ const enrichment = [
 		service_name : 'lead',
 
 	},
+	{
+		api          : 'get_allocation_feedback_requests',
+		access_type  : 'private',
+		feature      : 'allocation',
+		service_name : 'allocation',
+	},
 
 	{
 		api          : 'create_lead_organization_enrichment_response',

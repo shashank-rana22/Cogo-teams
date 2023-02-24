@@ -1,4 +1,6 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 // import { format } from '@cogoport/utils/';
@@ -10,6 +12,22 @@ const useListEnrichment = () => {
 		addressData : '',
 	});
 
+	const [params, setParams] = useState({
+		sort_type : 'desc',
+		sort_by   : 'created_at',
+		page      : 1,
+		filters   : {},
+	});
+
+	const [{ loading, data }, refetch] = useAllocationRequest({
+		url     : '/feedback_requests',
+		method  : 'get',
+		authkey : 'get_allocation_feedback_requests',
+		params,
+	}, { manual: false });
+
+	const router = useRouter();
+
 	const handleViewMoreClick = (e, address) => {
 		e.preventDefault();
 
@@ -20,6 +38,10 @@ const useListEnrichment = () => {
 				addressData : address,
 			}
 		));
+	};
+
+	const handleUploadClick = (organization_id) => {
+		router.push('/enrichment/[organization_id]', `/enrichment/${organization_id}`);
 	};
 	const columns = [
 		{
@@ -97,21 +119,27 @@ const useListEnrichment = () => {
 		{
 			Header   : <div>SUBMIT ENRICHED DATE</div>,
 			id       : 'f',
-			accessor : () => (
+			accessor : ({ id }) => (
 				<section>
-					<Button themeType="secondary" size="sm">Upload</Button>
+					<Button themeType="secondary" size="sm" onClick={() => handleUploadClick(id)}>Upload</Button>
 
 				</section>
 			),
 		},
 	];
 
+	const { list = [], ...paginationData } = data || {};
+
 	return {
 		columns,
 		addressModal,
 		setAddressModal,
-		// data,
-		// loading,
+		list,
+		paginationData,
+		refetch,
+		loading,
+		setParams,
+
 	};
 };
 

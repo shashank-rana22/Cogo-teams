@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Pagination, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import AddressModal from './components/AddressModal';
@@ -13,9 +13,17 @@ function ListEnrichment() {
 	const [activeTab, setActiveTab] = useState('enrichment_requests');
 
 	const {
-		columns,
+		// list,
+		// params,
+		// setParams,
+		// loading,
+		// listRefetch,
+		// paginationData,
+		// getNextPage,
+		columns = [],
+		// listItem,
 		addressModal,
-		setAddressModal,
+		setAddressModal = () => {},
 	} = useListEnrichment();
 
 	return (
@@ -30,6 +38,8 @@ function ListEnrichment() {
 			{/* <Statistics /> */}
 
 			<EnrichmentTable columns={columns} />
+
+			<Pagination />
 
 			<Modal
 				size="sm"
