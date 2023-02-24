@@ -1,9 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListFaqQuestions(searchState = '') {
+function useListFaqQuestions({ searchState = '', topicId = '' }) {
 	const [activeTab, setActiveTab] = useState('');
-	console.log('apisearch', searchState);
+
+	console.log('apisearch', topicId);
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_faq_questions',
@@ -14,19 +16,19 @@ function useListFaqQuestions(searchState = '') {
 			await trigger({
 				params: {
 					filters: {
-						state  : 'published',
-						status : 'active',
-						q      : searchState,
+						state        : 'published',
+						status       : 'active',
+						q            : searchState,
+						faq_topic_id : topicId,
 					},
 				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			// console.log('error :: ', error);
 		}
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqQuestions(); }, [searchState]);
+	useEffect(() => { fetchFaqQuestions(); }, [searchState, topicId]);
 
 	return {
 		refetchQuestions: fetchFaqQuestions,

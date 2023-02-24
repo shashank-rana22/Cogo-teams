@@ -8,19 +8,26 @@ import Questions from '../Questions';
 import useCreateQuestionSet from './hooks/useCreateQuestionRequest';
 import styles from './styles.module.css';
 
-function QuestionsList({ tabTitle, searchState = '' }) {
+function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 	const [show, setShow] = useState(false);
 
+	console.log('topicidRAW', topicId);
+
+	const [topicid, setTopicid] = useState(topicId);
 	const [searchquestion, setSearchquestion] = useState(searchState);
+
+	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet();
+
 	const {
 		refetchQuestions = () => {},
 		data,
 		loading = false,
 		activeTab,
 		setActiveTab,
-	} = useListFaqQuestions();
+	// eslint-disable-next-line react-hooks/rules-of-hooks
+	} = useListFaqQuestions({ topicId });
 
-	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet();
+	console.log('topicIDSTATE', topicid);
 
 	useEffect(() => {
 		setSearchquestion(searchState);
