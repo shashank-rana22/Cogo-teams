@@ -18,7 +18,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 	} = useListFaqTopic();
 
 	return (
-		<div className={styles.gridContainer}>
+		<div className={styles.grid_container}>
 			<div style={{ margin: '5px 0', width: '100%', height: '490px' }} className={styles.scrollable}>
 				<Tabs
 					activeTab={activeTab}
