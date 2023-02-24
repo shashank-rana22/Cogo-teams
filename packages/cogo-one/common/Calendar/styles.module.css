@@ -1,19 +1,25 @@
 .calendar{
     display: flex;
+    align-items: center;
 }
 
 .calendarEntity{
-    width: calc(100% - 30px);
+    width: calc(100% - 33px);
+    overflow: hidden;
 }
 
 .navBtn{
     outline: none;
-    border: none;
     padding: none;
+    border:none;
     cursor: pointer;
     font-size: 18px;
-    width: 30px;
+    height:100%;
+    width: 33px;
 	margin: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .inactive{
