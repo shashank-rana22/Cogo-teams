@@ -23,7 +23,7 @@ function MessageConversations({
 	draftMessage = '',
 	setDraftMessages = () => {},
 	sendChatMessage,
-	draftUploadedFile = {},
+	draftUploadedFile : finalUrl = '',
 	setDraftUploadedFiles = () => {},
 	getNextData,
 	setOpenModal,
@@ -39,6 +39,7 @@ function MessageConversations({
 	communicationLoading = false,
 	lastPage = false,
 }) {
+	console.log('finalUrl:', finalUrl);
 	const messageRef = useRef();
 	const { id = '', channel_type = '' } = activeMessageCard;
 
@@ -49,9 +50,10 @@ function MessageConversations({
 		emojiListFetch = () => {},
 	} = useGetEmojiList({ activeMessageCard });
 
-	const { fileName = '', finalUrl = '' } = draftUploadedFile;
+	const urlArray = decodeURI(finalUrl)?.split('/');
+	const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
 
-	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
+	const { uploadedFileName, fileIcon } = getFileAttributes({ finalUrl, fileName });
 
 	const scrollToBottom = () => {
 		setTimeout(() => {
@@ -109,12 +111,12 @@ function MessageConversations({
 
 	const chatViewConditon = () => {
 		if (
-			(!isEmpty(draftUploadedFile) || uploading?.[id])
+			((finalUrl) || uploading?.[id])
 			&& !isEmpty(suggestions)
 		) {
 			return 'file_present_suggestions';
 		}
-		if (!isEmpty(draftUploadedFile) || uploading?.[id]) {
+		if ((finalUrl) || uploading?.[id]) {
 			return 'file_present_nosuggestions';
 		}
 		if (!isEmpty(suggestions)) {
@@ -131,6 +133,7 @@ function MessageConversations({
 			/>
 		</div>
 	);
+
 	return (
 		<div className={styles.styled_div}>
 			<div
@@ -158,11 +161,11 @@ function MessageConversations({
 			<div
 				className={cl`${styles.nofile_container} 
 				${
-					(!isEmpty(draftUploadedFile) || uploading?.[id])
+					((finalUrl) || uploading?.[id])
 					&& styles.upload_file_container
 				}`}
 			>
-				{!isEmpty(draftUploadedFile) && !uploading?.[id] && (
+				{(finalUrl) && !uploading?.[id] && (
 					<>
 						<div className={styles.files_view}>
 							<div className={styles.file_icon_container}>
@@ -251,9 +254,6 @@ function MessageConversations({
 					<div className={styles.icon_tools}>
 						{hasPermissionToEdit && (
 							<FileUploader
-								defaultValues={!isEmpty(draftUploadedFile)
-									? [draftUploadedFile]
-									: ['']}
 								disabled={uploading?.[id]}
 								handleProgress={handleProgress}
 								showProgress={false}
@@ -270,7 +270,6 @@ function MessageConversations({
 									/>
 								)}
 								onChange={(val) => {
-									console.log('val:', val);
 									setDraftUploadedFiles((prev) => ({
 										...prev,
 										[id]: val,
@@ -340,7 +339,7 @@ function MessageConversations({
 								}
 							}}
 							style={{
-								cursor: !hasPermissionToEdit || isEmpty(draftMessage?.trim())
+								cursor: !hasPermissionToEdit || !(isEmpty(draftMessage?.trim()) || !finalUrl)
 									? 'not-allowed'
 									: 'pointer',
 							}}

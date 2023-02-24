@@ -6,7 +6,6 @@
 .clickable_object {
 	display: block;
 	cursor: pointer;
-	pointer-events: none;
 }
 
 .contact_card {
@@ -34,6 +33,6 @@
 	text-align: left;
 }
 
-.user_allocation{
-	margin-right:10px;
+.user_allocation {
+	margin-right: 10px;
 }

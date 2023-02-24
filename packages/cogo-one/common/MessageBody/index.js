@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '' } = response;
 	const URLRegex = new RegExp(URL_MATCH_REGEX);
-
+	const fileExtension = media_url.split('.').pop();
 	const renderText = (txt = '') => (
 		(txt.split(' ') || [])
 			.map((part) => (URLRegex.test(part) ? (
@@ -40,7 +40,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 				>
 					{message_type === 'image' && (
 						<img
-							data={media_url}
+							src={media_url}
 							alt={message_type}
 							className={styles.object_styles}
 						/>
@@ -48,17 +48,18 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					{message_type === 'audio' && (
 						<audio
 							controls
-							data={media_url}
-							alt={message_type}
 							className={styles.object_styles}
-						/>
+						>
+							<source src={media_url} type={`audio/${fileExtension}`} />
+						</audio>
 					)}
 					{message_type === 'video' && (
-						<img
-							data={media_url}
-							alt={message_type}
+						<video
+							controls
 							className={styles.object_styles}
-						/>
+						>
+							<source src={media_url} type={`video/${fileExtension}`} />
+						</video>
 					)}
 				</div>
 
