@@ -44,7 +44,6 @@ function Questions({ questions }) {
 			await trigger({
 				data: payload,
 			});
-
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 		} catch (error) {
 			console.log('error :: ', error);
