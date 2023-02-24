@@ -12,7 +12,7 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { IcMHourglass, IcMRefresh } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, merge } from '@cogoport/utils';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { circleStats } from '../../../configurations/circle-stats';
 import { CONVERSATIONS } from '../../../configurations/primary-stats';
@@ -48,6 +48,7 @@ function MapView(props = {}) {
 	const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
 
 	const { user_location = [], stats:globeStats = {} } = globeData?.data || {};
+	const CountryMobileCode = country?.mobile_country_code || '';
 
 	let markerData = {};
 	markerData = user_location.map((item) => ({
@@ -60,6 +61,16 @@ function MapView(props = {}) {
 	const onSelectChange = (val) => {
 		setCountry(val);
 	};
+
+	useEffect(() => {
+		// experiments
+		if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
+			&& !isEmpty(globeGL?.current?.scene()?.children[1]?.intensity)
+			&& !isEmpty(globeGL?.current?.scene()?.children[2]?.intensity))) {
+			globeGL.current.scene().children[1].intensity = 1.25;
+			globeGL.current.scene().children[2].intensity = 0.25;
+		}
+	}, [globeGL?.current, CountryMobileCode, date, circleTab]);
 
 	const resetGlobePosition = () => {
 		const defaultMapCenter = { lat: 0, lng: 78, altitude: 1.8 };
@@ -119,6 +130,8 @@ function MapView(props = {}) {
 										markerData={markerData}
 										globeLoading={globeLoading}
 										resetGlobePosition={resetGlobePosition}
+										circleTab={circleTab}
+										date={date}
 
 									/>
 
