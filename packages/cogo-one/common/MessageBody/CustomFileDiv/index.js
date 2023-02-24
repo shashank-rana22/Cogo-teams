@@ -3,7 +3,9 @@ import styles from './styles.module.css';
 function CustomFileDiv({ mediaUrl = '' }) {
 	const urlArray = decodeURI(mediaUrl)?.split('/');
 	const fileNameFromUrl = urlArray[(urlArray?.length || 0) - 1] || '';
-	const [fileName = '', extension = ''] = fileNameFromUrl.split('.') || [];
+	const fileArray = fileNameFromUrl.split('.') || [];
+	const extension = fileArray.pop();
+	const fileName = fileArray.join('.');
 
 	return (
 		<div
