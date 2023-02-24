@@ -3,7 +3,7 @@
 // import { IcMEdit } from '@cogoport/icons-react';
 import React from 'react';
 
-import workScope from '../../../../../../../../commons/utils/work-scopes.json';
+import getPocRole from '../../utils/getPocRole';
 
 import styles from './styles.module.css';
 
@@ -22,39 +22,31 @@ function CompanyPOC({
 			name          : poc?.name,
 			email         : poc?.email,
 			mobile_number : `${poc?.mobile_country_code} ${poc?.mobile_number}`,
-			poc_role      : poc?.poc_role[0],
+			poc_role      : poc?.poc_role,
 		};
 		return obj;
-	});
-
-	const getRoleLabel = (val) => {
-		const scopeObj = workScope.find((scope) => scope.value === val);
-		return scopeObj.label;
-	};
+	})[0];
 
 	return (
 		<div className={styles.main}>
 			<span className={styles.heading}>
 				Company POC
 			</span>
-			<div className={styles.cont}>
-				{details.map((item) => (
-					<div className={styles.box_info}>
-						{
-							Object.keys(item).map((poc) => (
-								<div>
-									<div className={styles.top}>
-										{labelMapping[poc]}
-									</div>
-									<div className={styles.bottom}>
-										{poc === 'poc_role' ? getRoleLabel(item[poc]) : item[poc]}
-									</div>
-								</div>
-							))
-						}
-					</div>
-				)) }
 
+			<div className={styles.cont}>
+				<div className={styles.box_info}>
+					{Object.keys(details).map((poc) => (
+						<div>
+							<div className={styles.top}>
+								{labelMapping[poc]}
+							</div>
+
+							<div className={styles.bottom}>
+								{poc === 'poc_role' ? getPocRole(details[poc]) : details[poc]}
+							</div>
+						</div>
+					))}
+				</div>
 			</div>
 
 			<hr className={styles.dis} />

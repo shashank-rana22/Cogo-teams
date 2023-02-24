@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { IcCFtick, IcCFcrossInCircle, IcMDownload } from '@cogoport/icons-react';
+import { IcCFcrossInCircle, IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -20,9 +20,23 @@ function VendorDetailsInfo({
 		if (title === 'GST Certificate') {
 			return (
 				<div className={styles.di}>
-					<span className={styles.txt} style={{ color: 'orange' }}>{value}</span>
-					<IcCFtick />
-					<button className={styles.btn}><IcMDownload /></button>
+					<a
+						href={value}
+						target="_blank"
+						className={styles.txt}
+						style={{
+							color: '#F68B21',
+						}}
+						rel="noreferrer"
+					>
+						{value}
+					</a>
+					<button className={styles.btn}>
+						<img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
+							alt="icon"
+						/>
+					</button>
 				</div>
 			);
 		}

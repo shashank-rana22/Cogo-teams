@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import useGetListVendorPocServices from '../../hooks/useGetListVendorPocServices';
+import getPocRole from '../../utils/getPocRole';
 
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
@@ -25,7 +26,6 @@ const pocsMapping = {
 function ServicePOC() {
 	const {
 		allServicesAndPocs = [],
-		getPocRole = () => {},
 		loading = false,
 	} = useGetListVendorPocServices();
 
@@ -61,23 +61,20 @@ function ServicePOC() {
 						<div className={styles.cont}>
 							{(singleServicePoc?.poc_details || []).map((poc) => (
 								<>
-									{
-										(Object.entries(poc) || []).map((item) => (
-											<div className={styles.box_info}>
-												<div>
-													<div className={styles.top}>
-														{pocsMapping[item[0]]}
-													</div>
-													<div className={styles.bottom}>
-														{item?.[0] === 'poc_role'
-															? getPocRole(item?.[1]) : item?.[1]}
-													</div>
+									{(Object.entries(poc) || []).map((item) => (
+										<div className={styles.box_info}>
+											<div>
+												<div className={styles.top}>
+													{pocsMapping[item[0]]}
 												</div>
 
-												{/* {item.label === 'Role in the Company' ? <button className{styles.btn}><IcMEdit /></button> : ''} */}
+												<div className={styles.bottom}>
+													{item?.[0] === 'poc_role'
+														? getPocRole(item?.[1]) : item?.[1]}
+												</div>
 											</div>
-										))
-										}
+										</div>
+									))}
 								</>
 							)) }
 						</div>

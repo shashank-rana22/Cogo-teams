@@ -1,19 +1,18 @@
-
-.btn{
+.btn {
 	all: unset;
-  	cursor: pointer;
-  	display: flex;
+	display: flex;
 	flex-direction: row;
-	align-items: center;
 	gap: 10px;
+	align-items: center;
+	cursor: pointer;
 }
+
 .backer {
-	font-family: 'Poppins';
+	height: 21px;
+	font-family: Poppins;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 14px;
 	line-height: 21px;
-	color: #221F20;
-	height: 21px;
-
+	color: #221f20;
 }

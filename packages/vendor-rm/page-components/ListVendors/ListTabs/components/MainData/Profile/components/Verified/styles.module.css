@@ -1,27 +1,26 @@
-.main{
-border-radius: 8px;
-height: 90px;
-margin: 1rem 0 0 0;
-
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 4px;
+.main {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	justify-content: center;
+	height: 90px;
+	margin: 1rem 0 0;
+	border-radius: 8px;
 }
 
-.icon{
-    display: flex;
-    text-align: center;
-    justify-content: center;
+.icon {
+	display: flex;
+	justify-content: center;
+	text-align: center;
 }
-.dis{
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 29px;
-    text-align: center;
-    letter-spacing: 0.04em;
-    text-transform: capitalize;
-    text-align: center;
+
+.dis {
+	font-family: Poppins;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 29px;
+	text-align: center;
+	text-transform: capitalize;
+	letter-spacing: 0.04em;
 }
