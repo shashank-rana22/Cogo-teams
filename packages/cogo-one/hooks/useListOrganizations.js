@@ -41,7 +41,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	const openNewTab = (activeTab) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 		const linkSuffix = activeTab === 'message'
-			? `source=communication&assigned_chat=${activeCardId}` : 'source=communication';
+			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
 		if (isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}?${linkSuffix}`;
 			const PRM_ROUTE_PAGE = prm
