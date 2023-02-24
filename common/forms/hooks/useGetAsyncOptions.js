@@ -21,6 +21,8 @@ function useGetAsyncOptions({
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || [];
 
+	const optionValues = options.map((item) => item[valueKey]);
+
 	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
 		url    : endpoint,
 		method : 'GET',
@@ -29,7 +31,7 @@ function useGetAsyncOptions({
 		storeoptions.push(...options);
 		setstoreoptions(storeoptions);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [options]);
+	}, [JSON.stringify(optionValues)]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);
@@ -68,10 +70,15 @@ function useGetAsyncOptions({
 
 		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
 
-		const res = await triggerSingle({
-			params: merge(params, { filters: { [valueKey]: value } }),
-		});
-		return res?.data?.list?.[0] || null;
+		try {
+			const res = await triggerSingle({
+				params: merge(params, { filters: { [valueKey]: value } }),
+			});
+			return res?.data?.list?.[0] || null;
+		} catch (err) {
+			// console.log(err);
+			return {};
+		}
 	};
 
 	return {
