@@ -2,6 +2,8 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
+import { imgURL } from '../../../../constants/image-urls';
+
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
@@ -86,6 +88,14 @@ function Charts({ GraphData = [], hideChart = false }) {
 				/>
 			) : (
 				<div className={styles.empty_state}>
+					<div className={styles.empty_image_container}>
+						<img
+							src={imgURL.empty_2}
+							alt="Empty State"
+							className={styles.empty_state_icon}
+							width="135px"
+						/>
+					</div>
 					<div className={styles.horizontal_line} />
 					<div className={styles.horizontal_line} />
 					<div className={styles.horizontal_line} />
