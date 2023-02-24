@@ -38,11 +38,28 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						);
 					}}
 				>
-					<object
-						data={media_url}
-						aria-label={message_type}
-						className={styles.object_styles}
-					/>
+					{message_type === 'image' && (
+						<img
+							data={media_url}
+							alt={message_type}
+							className={styles.object_styles}
+						/>
+					)}
+					{message_type === 'audio' && (
+						<audio
+							controls
+							data={media_url}
+							alt={message_type}
+							className={styles.object_styles}
+						/>
+					)}
+					{message_type === 'video' && (
+						<img
+							data={media_url}
+							alt={message_type}
+							className={styles.object_styles}
+						/>
+					)}
 				</div>
 				<ShowMessage />
 			</>

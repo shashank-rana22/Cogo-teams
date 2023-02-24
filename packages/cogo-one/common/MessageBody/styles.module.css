@@ -6,6 +6,7 @@
 .clickable_object {
 	display: block;
 	cursor: pointer;
+	pointer-events: none;
 }
 
 .contact_card {

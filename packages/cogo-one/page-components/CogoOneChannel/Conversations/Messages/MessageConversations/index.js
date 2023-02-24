@@ -50,7 +50,6 @@ function MessageConversations({
 	} = useGetEmojiList({ activeMessageCard });
 
 	const { fileName = '', finalUrl = '' } = draftUploadedFile;
-	console.log('draftUploadedFile:', draftUploadedFile);
 
 	const { uploadedFileName, fileIcon } = getFileAttributes({ fileName });
 
