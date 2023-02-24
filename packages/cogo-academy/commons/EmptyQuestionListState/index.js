@@ -6,18 +6,12 @@ import useCreateQuestionSet
 
 import styles from './styles.module.css';
 
-function EmptyQuestionListState({
-	searchquestion = '',
-	setSearchquestion = () => {},
-	searchState = '',
-}) {
+function EmptyQuestionListState({ searchState = '' }) {
+	const [searchquestion, setSearchquestion] = useState(searchState);
+
 	const [show, setShow] = useState(false);
 
 	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet();
-
-	useEffect(() => {
-		setSearchquestion(searchState);
-	}, [searchState, setSearchquestion]);
 
 	return (
 		<div className={styles.nullstate}>

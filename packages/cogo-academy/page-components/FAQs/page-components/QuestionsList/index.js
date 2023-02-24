@@ -9,8 +9,6 @@ import Questions from '../Questions';
 import styles from './styles.module.css';
 
 function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
-	const [searchquestion, setSearchquestion] = useState(searchState);
-
 	const {
 		refetchQuestions = () => {},
 		data,
@@ -35,13 +33,7 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 	}
 
 	if (isEmpty(data?.list)) {
-		return (
-			<EmptyQuestionListState
-				searchquestion={searchquestion}
-				setSearchquestion={setSearchquestion}
-				searchState={searchState}
-			/>
-		);
+		return <EmptyQuestionListState searchState={searchState} />;
 	}
 
 	return (
