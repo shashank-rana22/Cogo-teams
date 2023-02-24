@@ -39,50 +39,44 @@ function ServicePOC() {
 		<div className={styles.main}>
 			<span className={styles.heading}>Service POC </span>
 
-			{
-				(allServicesAndPocs || []).map((singleServicePoc) => (
-					<>
-						<div className={styles.head}>
-							{Object.keys(filedsToShow).map((item) => (
-								<div className={styles.fl}>
-									<span className={styles.top}>
-										{filedsToShow[item]}
-										:
-									</span>
-									<span className={styles.bottom}>
-										{item === 'cogoport_office_id'
-											? startCase(singleServicePoc?.cogoport_office?.display_name)
-											: startCase(singleServicePoc?.[item])}
-									</span>
-								</div>
-							)) }
-						</div>
+			{(allServicesAndPocs || []).map((singleServicePoc) => (
+				<>
+					<div className={styles.head}>
+						{Object.keys(filedsToShow).map((item) => (
+							<div className={styles.fl}>
+								<span className={styles.top}>
+									{filedsToShow[item]}
+									:
+								</span>
+								<span className={styles.bottom}>
+									{item === 'cogoport_office_id'
+										? startCase(singleServicePoc?.cogoport_office?.display_name)
+										: startCase(singleServicePoc?.[item])}
+								</span>
+							</div>
+						)) }
+					</div>
 
-						<div className={styles.cont}>
-							{(singleServicePoc?.poc_details || []).map((poc) => (
-								<>
-									{(Object.entries(poc) || []).map((item) => (
-										<div className={styles.box_info}>
-											<div>
-												<div className={styles.top}>
-													{pocsMapping[item[0]]}
-												</div>
-
-												<div className={styles.bottom}>
-													{item?.[0] === 'poc_role'
-														? getPocRole(item?.[1]) : item?.[1]}
-												</div>
-											</div>
+					<div className={styles.content}>
+						{(singleServicePoc?.poc_details || []).map((poc) => (
+							<>
+								{(Object.entries(poc) || []).map((item) => (
+									<div className={styles.label_value_container}>
+										<div className={styles.top}>
+											{pocsMapping[item[0]]}
 										</div>
-									))}
-								</>
-							)) }
-						</div>
 
-					</>
-				))
-			}
-
+										<div className={styles.bottom}>
+											{item?.[0] === 'poc_role'
+												? getPocRole(item?.[1]) : item?.[1]}
+										</div>
+									</div>
+								))}
+							</>
+						)) }
+					</div>
+				</>
+			))}
 		</div>
 	);
 }
