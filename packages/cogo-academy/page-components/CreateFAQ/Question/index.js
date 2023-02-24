@@ -95,7 +95,7 @@ function CreateFAQ() {
 
 					<div className={styles.select_topic_container}>
 						<div className={styles.input_label}>
-							Select Topcics
+							Select Topics
 						</div>
 
 						<MultiselectController

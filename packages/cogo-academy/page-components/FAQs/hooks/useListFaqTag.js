@@ -16,7 +16,8 @@ function useListFaqTag() {
 					filters: {
 						status: 'active',
 					},
-					pagination_data_required: false,
+					page_limit               : 15,
+					pagination_data_required : false,
 				},
 			});
 		} catch (error) {

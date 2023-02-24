@@ -162,7 +162,7 @@ function Questions({ questions }) {
 												control={control}
 												name="remark"
 												type="text"
-												placeholder="Email"
+												placeholder="Enter remark here"
 												rules={{ required: 'Remark is required' }}
 											/>
 											{errors.remark && (
