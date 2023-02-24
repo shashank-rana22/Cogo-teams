@@ -9,7 +9,6 @@ function useGetListCommunicationLog({ organizationId = null, userId = null }) {
 	}, { manual: true });
 
 	const fetchListLogApi = async () => {
-		setFirstLoading(true);
 		await trigger({
 			params: {
 				filters: {
@@ -22,6 +21,7 @@ function useGetListCommunicationLog({ organizationId = null, userId = null }) {
 	};
 	useEffect(() => {
 		if (organizationId) {
+			setFirstLoading(true);
 			fetchListLogApi();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,6 +32,7 @@ function useGetListCommunicationLog({ organizationId = null, userId = null }) {
 		listData    : data,
 		fetchListLogApi,
 		firstLoading,
+		setFirstLoading,
 	};
 }
 export default useGetListCommunicationLog;

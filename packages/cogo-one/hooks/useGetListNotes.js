@@ -14,7 +14,6 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	const { user_number } = activeVoiceCard || {};
 
 	const fetchListNotes = async () => {
-		setFirstLoading(true);
 		try {
 			await trigger({
 				params: {
@@ -31,6 +30,7 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	};
 
 	useEffect(() => {
+		setFirstLoading(true);
 		fetchListNotes();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active, id, user_number]);
