@@ -1,14 +1,22 @@
 import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 import useCreateFaqPayload from './useCreateFaqPayload';
 
 function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 	const router = useRouter();
+	const {
+		general,
+	} = useSelector((state) => state);
+
+	const { id: questionId } = general.query || {};
+
+	const apiName = questionId ? '/update_question_answer_set' : '/create_question_answer_set';
 
 	const [{ loading = false }, trigger] = useRequest({
-		url    : 'create_question_answer_set',
+		url    : apiName,
 		method : 'POST',
 	}, { manual: true });
 
@@ -23,11 +31,13 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 
 			if (res?.data) {
 				const id = res?.data?.id;
-				Toast.success('questions created sucessfully');
-				router.push(
-					`/learning/faq/create/question?mode=preview&id=${id}`,
-					`/learning/faq/create/question?mode=preview&id=${id}`,
-				);
+
+				Toast.success('question created sucessfully');
+
+				const href = `/learning/faq/create/question?mode=preview&id=${id}`;
+
+				router.push(href, href);
+
 				setQuestionPreview('preview');
 			}
 		} catch (err) {
@@ -35,7 +45,36 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 		}
 	};
 
-	return { onSubmit, loading };
+	const onClickPublish = async ({ data }) => {
+		const payload = {
+			id     : data?.id,
+			state  : 'published',
+			status : 'active',
+		};
+
+		try {
+			const res = await trigger({
+				data: payload,
+			});
+
+			if (res?.data) {
+				Toast.success('questions Published sucessfully');
+
+				const href = '/learning/faq/create';
+				router.push(href, href);
+
+				// setQuestionPreview('preview');
+			}
+		} catch (err) {
+			console.log('err', err);
+		}
+	};
+
+	return {
+		onSubmit,
+		loading,
+		onClickPublish,
+	};
 }
 
 export default useCreateFaqSet;

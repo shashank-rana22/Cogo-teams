@@ -8,7 +8,7 @@ function useCreateFaqPayload({ values, editorValue }) {
 
 	const audiences = [];
 
-	fieldArray.map((element) => {
+	(fieldArray || []).map((element) => {
 		const {
 			cogo_entity = '',
 			country_id = '',
@@ -27,6 +27,7 @@ function useCreateFaqPayload({ values, editorValue }) {
 			persona           : work_scopes,
 
 		};
+
 		audiences.push(audienceData);
 		return audiences;
 	});
@@ -44,7 +45,10 @@ function useCreateFaqPayload({ values, editorValue }) {
 			audiences,
 		}],
 	};
-	return { payload };
+
+	return {
+		payload,
+	};
 }
 
 export default useCreateFaqPayload;
