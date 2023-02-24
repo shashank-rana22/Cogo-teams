@@ -10,6 +10,18 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'partner',
+	},
+	{
+		api          : 'update_rfq',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+	{
 		api          : 'create_duplicate_rfq',
 		access_type  : 'private',
 		service_name : 'rfq',
