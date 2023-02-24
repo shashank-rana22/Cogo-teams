@@ -1,37 +1,47 @@
-.prime_container {
+.sub_container {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	margin-top: 12px;
 }
 
-.sub_container {
+/* first Row */
+.calenderchart_plus_escalations {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	margin-top: 10px;
+
+	/* margin: 5px 0; */
+	margin: 0;
 }
 
-.left_sub_container {
-	display: flex;
-	flex-direction: column;
-	width: 74%;
+.calender_chart {
+	flex-basis: 72%;
+
+	/* margin-right: 12px; */
 }
 
-.right_sub_container {
+/* second Row */
+.agentactivity_plus_performancetabs {
 	display: flex;
-	flex-direction: column;
-	width: 26%;
-	padding: 2px;
+	justify-content: space-between;
 }
 
-.statistics {
+/* third Row */
+.statistics_plus_characteristics {
 	display: flex;
-	justify-content: space-evenly;
-	width: 100%;
+}
+
+.two_statistics {
+	display: flex;
+	flex-basis: 75%;
 }
 
 .four_characterisctics_container {
+	/* flex-wrap: wrap; */
 	display: grid;
+
+	/* display: flex; */
+	flex-basis: 25%;
 	grid-template-rows: auto;
 	grid-template-columns: 1fr 1fr;
 	row-gap: 12px;

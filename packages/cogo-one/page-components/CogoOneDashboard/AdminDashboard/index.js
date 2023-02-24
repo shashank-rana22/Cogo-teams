@@ -24,6 +24,7 @@ function AdminDashboard({ calendarType, setCalendarType }) {
 	// console.log('user_data', user_data);
 
 	return (
+
 		<div className={styles.prime_container}>
 			<Header
 				activeTab={activeTab}
@@ -31,28 +32,33 @@ function AdminDashboard({ calendarType, setCalendarType }) {
 				calendarType={calendarType}
 				setCalendarType={setCalendarType}
 			/>
+
 			<div className={styles.sub_container}>
-				<div className={styles.left_sub_container}>
-					<Calender calendarType={calendarType} />
-					<LineChart />
-					<AgentActivity />
-					<div className={styles.statistics}>
-						<Statistics />
+				<div className={styles.calenderchart_plus_escalations}>
+					<div className={styles.calender_chart}>
+						<Calender calendarType={calendarType} />
+						<LineChart />
 					</div>
+					<RedFlags />
+				</div>
+				<div className={styles.agentactivity_plus_performancetabs}>
+					<AgentActivity />
+					<PerformanceTab />
 
 				</div>
-				<div className={styles.right_sub_container}>
-
-					<RedFlags />
-					<PerformanceTab />
+				<div className={styles.statistics_plus_characteristics}>
+					<div className={styles.two_statistics}>
+						<Statistics />
+					</div>
 
 					<div className={styles.four_characterisctics_container}>
 						<ChatStatistics isAdminView />
 					</div>
-
 				</div>
+
 			</div>
 		</div>
+
 	);
 }
 export default AdminDashboard;

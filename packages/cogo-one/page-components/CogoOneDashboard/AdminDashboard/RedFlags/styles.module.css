@@ -1,7 +1,10 @@
 .redflags_container {
 	display: flex;
+	flex-basis: 26%;
 	flex-direction: column;
-	height: 30%;
+
+	/* height: 30%; */
+	height: 350px;
 	padding: 10px;
 	margin-bottom: 12px;
 	background: #fff;
