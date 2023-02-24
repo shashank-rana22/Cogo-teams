@@ -32,7 +32,6 @@ function Questions({ questions }) {
 	const toggle = () => {
 		setOPen(!open);
 	};
-	console.log('answers', data);
 	const formatDate = data?.updated_at;
 
 	const onClickLikeButton = async () => {
