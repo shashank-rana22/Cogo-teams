@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 function GroundOps() {
 	const [generate, setGenerate] = useState(false);
 	const [item, setItem] = useState({});
+	const [viewDoc, setViewDoc] = useState(false);
+	const [edit, setEdit] = useState(false);
 
 	return (
 		<div className={styles.container}>
@@ -16,11 +18,19 @@ function GroundOps() {
 				<>
 					<Header />
 					<div style={{ marginTop: 20 }}>
-						<Air setGenerate={setGenerate} setItem={setItem} />
+						<Air setGenerate={setGenerate} setItem={setItem} setViewDoc={setViewDoc} setEdit={setEdit} />
 					</div>
 				</>
 			)}
-			{generate && <GenerateMAWB item={item} task={item} />}
+			{(generate || viewDoc) && (
+				<GenerateMAWB
+					viewDoc={viewDoc}
+					setViewDoc={setViewDoc}
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
+				/>
+			)}
 		</div>
 	);
 }

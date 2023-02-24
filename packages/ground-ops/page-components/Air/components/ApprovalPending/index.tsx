@@ -7,25 +7,37 @@ import { ApprovalPendingFields } from '../../configurations/approval_pending_fie
 
 import DownloadModal from './DownloadModal';
 
-function ApprovalPending({ data, loading }) {
+function ApprovalPending({ data, loading, setGenerate, setItem, setViewDoc, setEdit }) {
 	const { fields } = ApprovalPendingFields;
 	const [show, setShow] = useState(false);
+
+	const handleDownloadMAWB = (singleItem) => {
+		setViewDoc(true);
+		setItem(singleItem);
+	};
+
+	const handleEditMAWB = (singleItem) => {
+		setEdit(true);
+		setGenerate(true);
+		setItem(singleItem);
+	};
+
 	const functions = {
-		handleDownload: () => (
+		handleDownload: (singleItem:any) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { setShow(true); }}
+				onClick={() => { handleDownloadMAWB(singleItem); }}
 			>
 				<IcMDownload fill="#8B8B8B" />
 
 			</Button>
 		),
-		handleEdit: () => (
+		handleEdit: (singleItem:any) => (
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { setShow(true); }}
+				onClick={() => { handleEditMAWB(singleItem); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>

@@ -37,7 +37,7 @@ function ContainerDetails({
 							${styles.vol_weight_box}
 						`}
 						>
-							{formData.handling_information}
+							{formData.handlingInformation}
 						</div>
 					</div>
 					<div className={cl`
@@ -137,13 +137,13 @@ function ContainerDetails({
 									${styles.margin_remarks}
 								`}
 								>
-									<p style={{ fontSize: 10 }}>Remarks:</p>
+									<p style={{ fontSize: 10, marginRight: 4 }}>Remarks:</p>
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
 									`}
 									>
-										<p style={{ fontSize: 12 }} className="volume_box">
+										<p style={{ fontSize: 10 }} className="volume_box">
 											<div className="remark_box">{formData.remark}</div>
 										</p>
 									</div>
@@ -419,7 +419,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{formData.rate_per_kg}</p>
+								<p style={{ fontSize: 13 }}>{formData.ratePerKg}</p>
 							</div>
 						</div>
 					</div>
@@ -467,7 +467,7 @@ function ContainerDetails({
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{(chargeableWeight * formData.rate_per_kg).toFixed(2)}
+									{(chargeableWeight * formData.ratePerKg).toFixed(2)}
 								</p>
 							</div>
 						</div>
@@ -483,7 +483,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								{(chargeableWeight * formData.rate_per_kg).toFixed(2)}
+								{(chargeableWeight * formData.ratePerKg).toFixed(2)}
 							</div>
 						</div>
 					</div>

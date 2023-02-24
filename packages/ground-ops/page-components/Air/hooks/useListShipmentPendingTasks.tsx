@@ -2,16 +2,14 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useListShipmentPendingTasks = () => {
+const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = 	useRequest('http://localhost:7002/airbender/pending-tasks/list', { manual: true });
+	const [{ data = {}, loading }, trigger] = 		useRequest('http://localhost:7002/airbender/pending-tasks/list', { manual: true });
 
-	const listAPi = async (isDocDataRequired = undefined) => {
-		console.log('isDocDataRequired', isDocDataRequired);
-
+	const listAPi = async () => {
 		if (searchValue) {
 			setPage(1);
 		}
@@ -21,7 +19,8 @@ const useListShipmentPendingTasks = () => {
 					q       : (query || '').trim() || undefined,
 					filters : {
 					},
-					isDocDataRequired   : isDocDataRequired || undefined,
+					isDocDataRequired   : activeTab === 'approval_pending' ? true : undefined,
+					status              : activeTab === 'approval_pending' ? 'completed' : undefined,
 					assignedStakeholder : 'ground_ops',
 					page,
 					sort_type           : 'desc',
@@ -41,13 +40,6 @@ const useListShipmentPendingTasks = () => {
 		listAPi();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, query]);
-
-	// useEffect(() => {
-	// 	setFinalList([]);
-	// 	setPage(1);
-	// 	getLocationData();
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [searchValue]);
 
 	return {
 		data,

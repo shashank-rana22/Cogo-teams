@@ -53,10 +53,10 @@ function OtherChargeDetails({
 						>
 							<p style={{ fontSize: 13 }}>
 								<div style={{ height: '30%' }}>
-									{formData.agent_other_charges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
+									{formData.agentOtherCharges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
 								</div>
 								<br />
-								{formData.carrier_other_charges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
+								{formData.carrierOtherCharges.map((item) => `${item.code.toUpperCase()}:${item.price} `)}
 							</p>
 						</div>
 					</p>

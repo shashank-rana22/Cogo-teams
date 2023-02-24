@@ -35,7 +35,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 						>
 							<div style={{ paddingLeft: '2px' }}>
-								{formData.agent_name}
+								{formData.agentName}
 								<br />
 								{formData.city}
 							</div>
@@ -62,7 +62,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_font_bold} 
 					`}
 								>
-									{formData.iata_code}
+									{formData.iataCode}
 
 								</div>
 							</p>
@@ -99,7 +99,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_in_flex}
 					`}
 					>
-						{formData.accounting_information}
+						{formData.accountingInformation}
 					</div>
 				</div>
 			</div>
@@ -641,7 +641,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				`}
 						>
 							<p style={{ fontSize: 8.3 }}>Declared Value for Carriage</p>
-							{formData.declared_value_for_carriage}
+							{formData.declaredValueForCarriage}
 						</div>
 						<div className={cl`
 					${styles.flex} 

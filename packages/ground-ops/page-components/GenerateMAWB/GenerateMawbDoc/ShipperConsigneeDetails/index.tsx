@@ -88,9 +88,9 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						>
 							<div className={styles.styled_text_area}>
 
-								{formData.shipper_name}
+								{formData.shipperName}
 								<br />
-								{formData.shipper_address}
+								{formData.shipperAddress}
 							</div>
 						</div>
 					</div>

@@ -16,12 +16,14 @@ const items = [
 ];
 
 interface Props {
+	viewDoc?: boolean;
+	setViewDoc?: any;
 	item?: any;
 	edit?: boolean;
 	setEdit?: any;
 }
 
-function GenerateMAWB({ item = {}, edit = false, setEdit = () => {} }:Props) {
+function GenerateMAWB({ viewDoc = false, setViewDoc = () => {}, item = {}, edit = false, setEdit = () => {} }:Props) {
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
@@ -48,29 +50,45 @@ function GenerateMAWB({ item = {}, edit = false, setEdit = () => {} }:Props) {
 		...formValues,
 	};
 
+	const taskItem = { ...item, ...item.documentData };
+
+	const finalFields = [
+		...fields.basic,
+		...fields.package,
+		...fields.handling,
+	];
+
 	useEffect(() => {
-		fields[activeKey].forEach((c) => {
-			setValue(c.name, item[c.name]);
+		finalFields.forEach((c) => {
+			setValue(c.name, taskItem[c.name]);
 		});
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Add Export Details</div>
-			<Breadcrumb>
-				<Breadcrumb.Item label={<a href="ground-ops">Ground Ops Dashboard</a>} />
-				<Breadcrumb.Item label="Add Export Details" />
-			</Breadcrumb>
-			<div className={styles.form_container}>
+			{!viewDoc
+			&& (
+				<>
+					<div className={styles.heading}>Add Export Details</div>
+					<Breadcrumb>
+						<Breadcrumb.Item label={<a href="ground-ops">Ground Ops Dashboard</a>} />
+						<Breadcrumb.Item label="Add Export Details" />
+					</Breadcrumb>
+				</>
+			)}
+			{!viewDoc
+			&& (
+				<div className={styles.form_container}>
 
-				<Stepper
-					active={activeKey}
-					setActive={setActiveKey}
-					items={items}
-				/>
+					<Stepper
+						active={activeKey}
+						setActive={setActiveKey}
+						items={items}
+					/>
 
-				{activeKey === 'basic'
+					{activeKey === 'basic'
 				&& (
 					<>
 						<Layout fields={fields?.basic} control={control} errors={errors} />
@@ -91,7 +109,7 @@ function GenerateMAWB({ item = {}, edit = false, setEdit = () => {} }:Props) {
 					</>
 				)}
 
-				{activeKey === 'package'
+					{activeKey === 'package'
 				&& (
 					<>
 						<Layout fields={fields?.package} control={control} errors={errors} />
@@ -119,7 +137,7 @@ function GenerateMAWB({ item = {}, edit = false, setEdit = () => {} }:Props) {
 					</>
 				)}
 
-				{activeKey === 'handling'
+					{activeKey === 'handling'
 				&& (
 					<>
 						<Layout fields={fields?.handling} control={control} errors={errors} />
@@ -148,19 +166,27 @@ function GenerateMAWB({ item = {}, edit = false, setEdit = () => {} }:Props) {
 						</div>
 					</>
 				)}
-			</div>
+				</div>
+			)}
 
 			<div className={styles.file_container}>
-				{(back) && (
-					<Modal show={back} onClose={() => setBack(false)} size="lg" className={styles.modal_container}>
+				{(back || viewDoc) && (
+					<Modal
+						show={back || viewDoc}
+						onClose={() => { setBack(false); setViewDoc(false); }}
+						size="lg"
+						className={styles.modal_container}
+						style={{ width: '900px' }}
+					>
 						<Modal.Body style={{ minHeight: '720px' }}>
 							<GenerateMawbDoc
-								taskItem={item}
+								taskItem={taskItem}
 								formData={formData}
 								setBack={setBack}
 								back={back}
 								edit={edit}
 								setEdit={setEdit}
+								viewDoc={viewDoc}
 							/>
 						</Modal.Body>
 

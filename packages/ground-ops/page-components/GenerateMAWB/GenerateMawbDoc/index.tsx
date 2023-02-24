@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { saveAs } from 'file-saver';
 import React, { createRef, useState } from 'react';
 import { useScreenshot } from 'use-react-screenshot';
 
@@ -19,6 +20,12 @@ interface Props {
 	back?: boolean;
 	edit?: boolean;
 	setEdit?: any;
+	viewDoc?: boolean;
+}
+
+function camelToUnderscore(key) {
+	const result = key.replace(/([A-Z])/g, ' $1');
+	return result.split(' ').join('_').toLowerCase();
 }
 
 function GenerateMawb({
@@ -28,8 +35,15 @@ function GenerateMawb({
 	back = false,
 	edit = false,
 	setEdit = () => {},
+	viewDoc = false,
 }:Props) {
-	const filteredData = { ...formData };
+	const filteredFormData = { ...formData };
+
+	const filteredData = {};
+
+	Object.keys(filteredFormData).forEach((control) => {
+		filteredData[camelToUnderscore(control)] = filteredFormData[control];
+	});
 
 	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',
@@ -112,42 +126,76 @@ function GenerateMawb({
 		upload({ payload });
 		setSaveDocument(false);
 	};
+
+	const getImage = (item) => {
+		document.getElementById('footer').innerHTML = `${item}`;
+		return takeScreenShot(document.getElementById('mawb'));
+	};
+
+	const handleView = async () => {
+		const a = footerValues.map((item) => async () => {
+			const newImage = await getImage(item);
+			saveAs(newImage, item);
+		});
+		await a.map((i) => i());
+	};
+
 	const chargeableWeight:any = Math.max(
 		taskItem?.weight,
 		// eslint-disable-next-line no-unsafe-optional-chaining
 		taskItem?.volume * 166.67,
 	).toFixed(2);
 	let agentCharge = 0;
-	formData.agent_other_charges.forEach((item) => {
+	formData.agentOtherCharges.forEach((item) => {
 		agentCharge += Number(item.price);
 	});
 	let carrierCharge = 0;
-	formData.carrier_other_charges.forEach((item) => {
+	formData.carrierOtherCharges.forEach((item) => {
 		carrierCharge += Number(item.price);
 	});
 	const data = {
-		totalCharge: chargeableWeight * formData.rate_per_kg,
+		totalCharge: chargeableWeight * formData.ratePerKg,
 		agentCharge,
 		carrierCharge,
 		finalCharge:
-		chargeableWeight * formData.rate_per_kg + agentCharge + carrierCharge,
+		chargeableWeight * formData.ratePerKg + agentCharge + carrierCharge,
 	};
 
 	return (
 		<div className={styles.flex_col}>
+
+			{viewDoc
+			&& (
+				<div
+					className={styles.download_button_div}
+				>
+					<div style={{ marginRight: '36px' }}>
+						<Button
+							className="primary md"
+							onClick={() => {
+								setSaveDocument(true);
+								handleView();
+							}}
+							disabled={saveDocument}
+						>
+							{saveDocument ? 'Downloading...' : 'Download All 12 Copies'}
+						</Button>
+					</div>
+				</div>
+			)}
+
 			<div
 				className={styles.flex_col}
 				id="mawb"
 				ref={ref}
 				style={{
-					flex          : '1',
-					width         : '100%',
-					padding       : '12px',
-					paddingBottom : '40px',
-					opacity       : 1,
+					flex    : '1',
+					width   : '100%',
+					padding : '40px 12px',
+					opacity : 1,
 				}}
 			>
-				<Watermark text="draft" rotateAngle="315deg" />
+				{!viewDoc && <Watermark text="draft" rotateAngle="315deg" />}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={formData}
@@ -171,36 +219,40 @@ function GenerateMawb({
 				</div>
 			</div>
 
-			<div
-				className={styles.button_div}
-			>
-				{edit || back ? (
-					<div style={{ marginRight: '20px' }}>
+			{!viewDoc
+			&& (
+				<div
+					className={styles.button_div}
+				>
+					{edit || back ? (
+						<div style={{ marginRight: '20px' }}>
+							<Button
+								size="md"
+								onClick={() => {
+									handleClick();
+								}}
+								disabled={loading || saveDocument}
+							>
+								Edit
+							</Button>
+						</div>
+					) : null}
+					<div style={{ marginRight: '36px' }}>
 						<Button
 							size="md"
 							onClick={() => {
-								handleClick();
+								setSaveDocument(true);
+								handleSave();
 							}}
 							disabled={loading || saveDocument}
 						>
-							Edit
+							{loading || saveDocument ? 'Saving...' : 'Save'}
 						</Button>
 					</div>
-				) : null}
-				<div style={{ marginRight: '36px' }}>
-					<Button
-						size="md"
-						onClick={() => {
-							setSaveDocument(true);
-							handleSave();
-						}}
-						disabled={loading || saveDocument}
-					>
-						{loading || saveDocument ? 'Saving...' : 'Save'}
-					</Button>
 				</div>
-			</div>
+			)}
 		</div>
+
 	);
 }
 

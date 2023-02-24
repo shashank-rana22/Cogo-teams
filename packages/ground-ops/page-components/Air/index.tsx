@@ -31,7 +31,7 @@ const tabsComponentMapping = {
 	approved_awb     : GenerateFinalAirwayBill,
 };
 
-function Air({ setGenerate, setItem }) {
+function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const [activeTab, setActiveTab] = useState(tabs[0].key);
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
@@ -40,11 +40,11 @@ function Air({ setGenerate, setItem }) {
 		setActiveTab(view);
 	};
 
-	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks();
+	const { data, loading, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks({ activeTab });
 
 	useEffect(() => {
 		if (activeTab === 'new_awb') { listAPi(); }
-		if (activeTab === 'approval_pending') { listAPi(true); }
+		if (activeTab === 'approval_pending') { listAPi(); }
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
@@ -95,6 +95,8 @@ function Air({ setGenerate, setItem }) {
 					loading={loading}
 					setGenerate={setGenerate}
 					setItem={setItem}
+					setViewDoc={setViewDoc}
+					setEdit={setEdit}
 				/>
 			)}
 		</div>
