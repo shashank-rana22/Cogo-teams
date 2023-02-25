@@ -41,7 +41,9 @@ function ListVendors() {
 
 	const { list = [] } = data;
 
-	if (data.total_count === 0 && Object.keys(params?.filters).length === 1) {
+	const isFilterEmpty = Object.keys(params?.filters).length === 1;
+
+	if (data.total_count === 0 && isFilterEmpty) {
 		return <EmptyPage />;
 	}
 
@@ -86,6 +88,11 @@ function ListVendors() {
 							className={styles.filter_container}
 							onClick={() => setShowFilter(!showFilter)}
 						>
+							{
+								!isFilterEmpty ? (
+									<div className={styles.filter_in_use} />
+								) : null
+							}
 							<p className={styles.text}>Filter</p>
 							<IcMFilter style={{ margin: '2px 2px 2px 4px' }} />
 						</div>

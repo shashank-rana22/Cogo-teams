@@ -8,7 +8,11 @@ import { useEffect, useState } from 'react';
 import subCategoryOptions from '../../../../../../../../OnBoardVendor/VendorServices/utils/sub-category-options';
 import controls from '../utils/controls';
 
-const useAddServicePoc = ({ setShowForm = () => {}, getVendorData }) => {
+const useAddServicePoc = ({
+	setShowForm = () => {},
+	getVendorData,
+	refetchServicesPocs = () => {},
+}) => {
 	const [updatedControls, setUpdatedControls] = useState([]);
 	const {
 		control,
@@ -76,11 +80,12 @@ const useAddServicePoc = ({ setShowForm = () => {}, getVendorData }) => {
 				data: payload,
 			});
 
+			refetchServicesPocs();
+
 			Toast.success('service poc mapping added successfully');
 			setShowForm('');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to create service poc, please try again...');
-			setShowForm('');
 		}
 	};
 
