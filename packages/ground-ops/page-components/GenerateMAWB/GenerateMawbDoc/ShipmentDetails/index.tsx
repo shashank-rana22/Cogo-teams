@@ -34,7 +34,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.input_issuing_agent} 
 					`}
 						>
-							<div style={{ paddingLeft: '2px' }}>
+							<div className={styles.font_style} style={{ paddingLeft: '2px' }}>
 								{formData.agentName}
 								<br />
 								{formData.city}
@@ -57,10 +57,13 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							<p style={{ fontSize: 10 }}>
 								{' '}
 								Agent&apos;s IATA Code
-								<div className={cl`
-						${styles.flex} 
-						${styles.flex_font_bold} 
-					`}
+								<div
+									className={cl`
+									${styles.flex} 
+									${styles.flex_font_bold} 
+									${styles.font_style}
+								`}
+									style={{ fontSize: 14 }}
 								>
 									{formData.iataCode}
 
@@ -97,6 +100,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.flex_font_bold}
 						${styles.flex_justify_center}
 						${styles.flex_in_flex}
+						${styles.font_style}
 					`}
 					>
 						{formData.accountingInformation}
@@ -319,12 +323,11 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					`}
 								>
 									<div className={cl`
-						${styles.flex} 
-						${styles.flex_border_solid}
-						${styles.flex_border_right}
-					`}
+										${styles.flex} 
+										${styles.trapezium}
+									`}
 									>
-										<p style={{ fontSize: 9 }}>Routing and Destination</p>
+										<p style={{ fontSize: 9, padding: '0 4px' }}>Routing and Destination</p>
 									</div>
 								</div>
 							</div>
@@ -419,15 +422,14 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							>
 								<div className={cl`
 									${styles.flex} 
-									${styles.flex_border_right}
+				
 									${styles.requested_flight_date_top_left}
 								`}
 								/>
 								<div className={cl`
 									${styles.flex} 
-									${styles.flex_border_right}
 									${styles.flex_in_flex}
-									${styles.flex_border_solid}
+									${styles.trapezium}
 								`}
 								>
 									<div className={cl`
@@ -489,7 +491,6 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						>
 							<div className={cl`
 									${styles.flex} 
-									${styles.flex_border_right}
 									${styles.flex_in_flex}
 								`}
 							>
@@ -503,9 +504,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</div>
 							<div className={cl`
 					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.flex_in_flex}
-					${styles.flex_border_solid}
+					${styles.trapezium}
 				`}
 							>
 								<div className={cl`
@@ -513,7 +512,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.optional_shipping_text}
 				`}
 								/>
-								<p style={{ fontSize: 8 }}>Optional Shipping Information</p>
+								<p style={{ fontSize: 8, padding: '0 1px' }}>Optional Shipping Information</p>
 							</div>
 							<div className={cl`
 					${styles.flex} 

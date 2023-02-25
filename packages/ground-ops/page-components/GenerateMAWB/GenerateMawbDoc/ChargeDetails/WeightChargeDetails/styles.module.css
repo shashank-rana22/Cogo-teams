@@ -4,7 +4,25 @@
 	&.common_justify_center {
 		justify-content: center;
 	}
-
+	&.trapezium	{
+		width: auto;
+		height: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		perspective: 50px;
+	}
+	&.trapezium:after {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border: 1px solid #333;
+		border-bottom: none;
+		content: '';
+		left: 0;
+		top: 0;
+		transform: rotateX(160deg) rotateY(0deg);
+	}
 	&.prepaid_sub_block {
 		flex: 0.1;
 	}
@@ -126,6 +144,12 @@
 	&.charges_container_end {
 		flex: 0.7;
 	}
+}
+
+.font_style {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 900;
+	margin-bottom: 0;
 }
 
 .block_col {

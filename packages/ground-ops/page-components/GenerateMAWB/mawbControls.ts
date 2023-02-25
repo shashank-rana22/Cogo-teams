@@ -485,10 +485,22 @@ const mawbControls = () => ({
 			},
 		},
 		{
+			name        : 'agentName',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Agent Name',
+			span        : 5,
+			placeholder : 'Agent Name',
+			rules       : {
+				required: 'Agent Name is Required',
+			},
+		},
+		{
 			name        : 'place',
 			type        : 'text',
 			className   : 'primary lg',
 			label       : 'At Place',
+			span        : 5,
 			placeholder : 'Place',
 			rules       : {
 				required: 'Place is Required',

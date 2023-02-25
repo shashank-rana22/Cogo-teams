@@ -37,13 +37,13 @@ function GenerateMawb({
 	setEdit = () => {},
 	viewDoc = false,
 }:Props) {
-	const filteredFormData = { ...formData };
+	const filteredData = { ...formData };
 
-	const filteredData = {};
+	// const filteredData = {};
 
-	Object.keys(filteredFormData).forEach((control) => {
-		filteredData[camelToUnderscore(control)] = filteredFormData[control];
-	});
+	// Object.keys(filteredFormData).forEach((control) => {
+	// 	filteredData[camelToUnderscore(control)] = filteredFormData[control];
+	// });
 
 	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',

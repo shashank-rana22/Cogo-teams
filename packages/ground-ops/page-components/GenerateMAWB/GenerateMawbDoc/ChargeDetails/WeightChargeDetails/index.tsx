@@ -28,14 +28,12 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.prepaid_sub_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.prepaid_sub_devision}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Prepaid</p>
@@ -43,15 +41,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.collect_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.weight_charge_sub_block}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Weight Charge</p>
@@ -59,14 +55,12 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.collect_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.collect_sub_block}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Collect</p>
@@ -91,7 +85,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.common_border_right}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.totalCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.totalCharge?.toFixed(2)}</p>
 					</div>
 					<div style={{ flex: 1 }} />
 				</div>
@@ -110,15 +104,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.valuable_charge_sub_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.valuable_charge_text_block}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Valuation Charge</p>
@@ -162,15 +154,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.tax_sub_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.tax_text_block}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Tax</p>
@@ -214,15 +204,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.total_other_charge_sub_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.total_other_charge_text_block}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Total Other Charges Due Agent</p>
@@ -246,7 +234,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.common_border_right}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.agentCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.agentCharge?.toFixed(2)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -270,15 +258,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 					<div className={cl`
 						${styles.flex} 
 						${styles.carrier_sub_block}
-						${styles.common_border_right}
 					`}
 					/>
 					<div className={cl`
 						${styles.flex} 
 						${styles.common_justify_center}
 						${styles.carrier_text_block}
-						${styles.common_border_bottom}
-						${styles.common_border_right}
+						${styles.trapezium}
 					`}
 					>
 						<p style={{ fontSize: 9 }}>Total Other Charges Due Carrier</p>
@@ -303,7 +289,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.common_border_right}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.carrierCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.carrierCharge?.toFixed(2)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -348,15 +334,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 						<div className={cl`
 							${styles.flex} 
 							${styles.prepaid_sub_block}
-							${styles.common_border_right}
 						`}
 						/>
 						<div className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.prepaid_total_text_block}
-							${styles.common_border_bottom}
-							${styles.common_border_right}
+							${styles.trapezium}
 						`}
 						>
 							<p style={{ fontSize: 9 }}>Total Prepaid</p>
@@ -373,7 +357,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.prepaid_total_value}
 					`}
 					>
-						<p style={{ fontSize: 13 }}>{data?.finalCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.finalCharge?.toFixed(2)}</p>
 					</div>
 				</div>
 
@@ -390,15 +374,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 						<div className={cl`
 							${styles.flex} 
 							${styles.prepaid_sub_block}
-							${styles.common_border_right}
 						`}
 						/>
 						<div className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.prepaid_collect_text_block}
-							${styles.common_border_bottom}
-							${styles.common_border_right}
+							${styles.trapezium}
 						`}
 						>
 							<p style={{ fontSize: 9 }}>Total Collect</p>
@@ -437,15 +419,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 						<div className={cl`
 							${styles.flex} 
 							${styles.Conversion_outer_text_block}
-							${styles.common_border_right}
 						`}
 						/>
 						<div className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.conversion_text_block}
-							${styles.common_border_bottom}
-							${styles.common_border_right}
+							${styles.trapezium}
 						`}
 						>
 							<p style={{ fontSize: 9 }}>Currency Conversion Rates</p>
@@ -478,15 +458,13 @@ function WeightChargeDetails({ data = {} }:Props) {
 						<div className={cl`
 							${styles.flex} 
 							${styles.currency_outer_text_block}
-							${styles.common_border_right}
 						`}
 						/>
 						<div className={cl`
 							${styles.flex} 
 							${styles.common_justify_center}
 							${styles.currency_text_block}
-							${styles.common_border_bottom}
-							${styles.common_border_right}
+							${styles.trapezium}
 						`}
 						>
 							<p style={{ fontSize: 9 }}>CC Charges in Dest. Currency</p>
@@ -541,14 +519,12 @@ function WeightChargeDetails({ data = {} }:Props) {
 						<div className={cl`
 							${styles.flex} 
 							${styles.prepaid_sub_block}
-							${styles.common_border_right}
 						`}
 						/>
 						<div className={cl`
 							${styles.flex} 
 							${styles.charges_container_text}
-							${styles.common_border_bottom}
-							${styles.common_border_right}
+							${styles.trapezium}
 						`}
 						>
 							<p style={{ fontSize: 9 }}>Charges at Destination</p>

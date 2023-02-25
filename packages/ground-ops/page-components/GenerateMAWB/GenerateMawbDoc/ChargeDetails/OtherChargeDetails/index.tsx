@@ -88,7 +88,8 @@ function OtherChargeDetails({
 				</div>
 				<div className={cl`
 					${styles.flex} 
-					${styles.business_text} 
+					${styles.business_text}
+					${styles.font_style}
 				`}
 				>
 					<p style={{ fontSize: 14 }}>
@@ -129,7 +130,7 @@ function OtherChargeDetails({
 							${styles.place_container_text} 
 						`}
 						>
-							<p style={{ fontSize: 14 }}>
+							<p className={styles.font_style} style={{ fontSize: 14 }}>
 								{`${formatDate(new Date())}`}
 							</p>
 						</div>
@@ -137,6 +138,7 @@ function OtherChargeDetails({
 							className={cl`
 							${styles.flex} 
 							${styles.place_value} 
+							${styles.font_style}
 						`}
 							style={{ pointerEvents: 'none' }}
 						>
@@ -194,6 +196,7 @@ function OtherChargeDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.collecte_block_text} 
+								${styles.trapezium}
 							`}
 							>
 								<p style={{ fontSize: 9 }}>Total Collected</p>
@@ -215,7 +218,7 @@ function OtherChargeDetails({
 								${styles.end_final} 
 							`}
 					>
-						<p style={{ fontSize: 14 }}>
+						<p className={styles.font_style} style={{ fontSize: 18 }}>
 							{taskItem?.awbNumber}
 						</p>
 					</div>

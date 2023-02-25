@@ -35,6 +35,7 @@ function ContainerDetails({
 							${styles.flex} 
 							${styles.flex_font_weight}
 							${styles.vol_weight_box}
+							${styles.font_style}
 						`}
 						>
 							{formData.handlingInformation}
@@ -104,15 +105,16 @@ function ContainerDetails({
 								`}
 								>
 									{' '}
-									<p style={{ fontSize: 10 }}>
+									<p className={styles.font_style} style={{ fontSize: 11 }}>
 										<div style={{ width: '84px' }}>Volume Weight:</div>
 									</p>
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
+										${styles.font_style}
 									`}
 									>
-										<p style={{ fontSize: 10, width: '120px' }} className="volume_box">
+										<p style={{ fontSize: 11, width: '120px' }} className="volume_box">
 											{`${chargeableWeight} Kgs(Cms)`}
 										</p>
 									</div>
@@ -124,6 +126,7 @@ function ContainerDetails({
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
+										${styles.font_style}
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
@@ -137,13 +140,14 @@ function ContainerDetails({
 									${styles.margin_remarks}
 								`}
 								>
-									<p style={{ fontSize: 10, marginRight: 4 }}>Remarks:</p>
+									<p className={styles.font_style} style={{ fontSize: 11, marginRight: 4 }}>Remarks:</p>
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
+										${styles.font_style}
 									`}
 									>
-										<p style={{ fontSize: 10 }} className="volume_box">
+										<p style={{ fontSize: 11 }} className="volume_box">
 											<div className="remark_box">{formData.remark}</div>
 										</p>
 									</div>
@@ -158,7 +162,7 @@ function ContainerDetails({
 							${styles.block_a_container_bottom_package}
 						`}
 						>
-							<p style={{ fontSize: 13 }}>{taskItem?.packagesCount}</p>
+							<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.packagesCount}</p>
 						</div>
 					</div>
 
@@ -196,7 +200,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{taskItem?.weight}</p>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.weight}</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -211,7 +215,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{taskItem?.weight}</p>
+								<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.weight}</p>
 							</div>
 						</div>
 					</div>
@@ -236,7 +240,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_empty_bottom}
 							`}
 						>
-							<p style={{ fontSize: 13 }}>K</p>
+							<p className={styles.font_style} style={{ fontSize: 13 }}>K</p>
 						</div>
 					</div>
 					<div className={cl`
@@ -371,6 +375,7 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
+								${styles.font_style}
 							`}
 							>
 								<p style={{ fontSize: 13 }}>{chargeableWeight}</p>
@@ -417,6 +422,7 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
+								${styles.font_style}
 							`}
 							>
 								<p style={{ fontSize: 13 }}>{formData.ratePerKg}</p>
@@ -464,6 +470,7 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
+								${styles.font_style}
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
@@ -481,6 +488,7 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
+								${styles.font_style}
 							`}
 							>
 								{(chargeableWeight * formData.ratePerKg).toFixed(2)}
@@ -532,7 +540,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_empty_bottom}
 							`}
 						>
-							<div style={{ paddingLeft: '4px' }}>{formData.commodity}</div>
+							<div className={styles.font_style} style={{ paddingLeft: '4px' }}>{formData.commodity}</div>
 						</div>
 					</div>
 				</div>

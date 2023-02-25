@@ -6,6 +6,25 @@
 	&.flex_border_solid {
 		border-bottom: 1px solid;
 	}
+	&.trapezium	{
+		width: auto;
+		height: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		perspective: 50px;
+	}
+	&.trapezium:after {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border: 1px solid #333;
+		border-bottom: none;
+		content: '';
+		left: 0;
+		top: 0;
+		transform: rotateX(160deg) rotateY(0deg);
+	}
 	&.flex_font_bold {
 		font-weight: bold;
 	}
@@ -40,7 +59,6 @@
 	&.routing_and_destination {
 		flex: 0.615;
 		height: 12px;
-		border-left: 1px solid;
 	}
 	&.to_by {
 		flex: 0.5;
