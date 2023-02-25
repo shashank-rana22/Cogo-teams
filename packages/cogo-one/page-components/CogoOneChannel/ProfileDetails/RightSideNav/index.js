@@ -9,6 +9,7 @@ function RightSideNav({
 	setActiveSelect,
 	openNewTab,
 	loading,
+	disableQuickActions = false,
 }) {
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
@@ -20,7 +21,7 @@ function RightSideNav({
 		}
 	};
 
-	const disabledSpotSearch = loading;
+	const disabledSpotSearch = loading || disableQuickActions;
 
 	return (
 		<div className={styles.right_container}>
