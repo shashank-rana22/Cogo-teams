@@ -5995,7 +5995,7 @@ const partner = {
 			service_name : 'unified_dashboard',
 		},
 		{
-			api          : 'get_outstanding_invoices',
+			api          : 'outstanding_amount_bifurcation',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
