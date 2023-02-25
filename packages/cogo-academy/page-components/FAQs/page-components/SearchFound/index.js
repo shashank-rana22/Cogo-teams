@@ -21,7 +21,12 @@ function SearchFound({ searchState }) {
 		loading = false,
 		activeTab,
 		setActiveTab,
-	} = useListFaqQuestions(searchState);
+		topicId,
+	} = useListFaqQuestions({ searchState });
+
+	// useEffect(() => {
+	// 	refetchQuestions();
+	// }, [page, searchState, topicId]);
 
 	return (
 		<div>

@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMArrowRotateRight, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { IcMArrowRotateRight, IcMArrowDown, IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -22,10 +22,10 @@ function QuestionsCollapse({ collapse, questions }) {
 				/>
 			</div>
 
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
 				{/* <Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill> */}
 				<Pill
-					prefix={<IcMArrowRotateRight />}
+					prefix={<IcMEyeopen />}
 					size="sm"
 					color="white"
 				>

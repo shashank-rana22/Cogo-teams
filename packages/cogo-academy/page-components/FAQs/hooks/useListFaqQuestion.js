@@ -11,6 +11,8 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 		url    : 'list_faq_questions',
 	}, { manual: true });
 
+	console.log('searchState', searchState);
+
 	const fetchFaqQuestions = async () => {
 		try {
 			await trigger({
@@ -32,7 +34,12 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqQuestions(); }, [page, searchState, topicId]);
+
+	useEffect(() => {
+		fetchFaqQuestions();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [page, searchState, topicId]);
+
 	const { page_limit, total_count } = data || {};
 
 	const paginationData = { page_limit, total_count };
@@ -48,6 +55,7 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 		loading,
 		activeTab,
 		setActiveTab,
+		topicId,
 	};
 }
 

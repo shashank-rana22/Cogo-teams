@@ -10,17 +10,20 @@ import SearchFound from '../SearchFound';
 import styles from './styles.module.css';
 
 function TopicList({ tabTitle, searchState = '' }) {
+	const ALL_TOPICS = 'All Topics';
+
 	const {
 		refetchTopic = () => {},
 		data,
 		loading = false,
-		activeTab = 'All Topics',
+		activeTab = { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
 
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
+	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 32)}...` : input);
 
 	return (
 		<div>
@@ -42,11 +45,11 @@ function TopicList({ tabTitle, searchState = '' }) {
 								onChange={setActiveTab}
 							>
 								<TabPanel
-									name="All Topics"
+									name={ALL_TOPICS}
 									title={(
 										<div>
 											<div className={styles.title}>
-												{startCase('All Topics')}
+												{ALL_TOPICS}
 												:
 											</div>
 
@@ -62,7 +65,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 										title={(
 											<div>
 												<div className={styles.title}>
-													{startCase(singleOption?.name)}
+													{truncate(startCase(singleOption?.name))}
 													:
 												</div>
 

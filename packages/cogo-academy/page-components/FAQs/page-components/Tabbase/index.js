@@ -18,15 +18,15 @@ function Tabbase() {
 				themeType="primary"
 				onChange={setActiveTab}
 			>
-				<TabPanel name="All FAQs" title="All FAQs" badge={5}>
+				<TabPanel name="All FAQs" title="All FAQs">
 					<Dashboard tabTitle="All FAQs" />
 				</TabPanel>
-{/* 
+				{/*
 				<TabPanel name="Trending" title="Trending" badge={5}>
 					<TrendingFAQs />
 				</TabPanel> */}
 
-				<TabPanel name="Most Read" title="Most Read" badge={3}>
+				<TabPanel name="Most Read" title="Most Read">
 					<MostReadFAQs />
 				</TabPanel>
 			</Tabs>
