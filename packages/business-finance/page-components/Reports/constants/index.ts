@@ -12,6 +12,10 @@ export const REPORT_TYPE_OPTIONS = [
 	{ label: 'Ap Bills Auditor', value: 'ap-bills-auditor' },
 	{ label: 'Ar Invoices Auditor', value: 'ar-invoices-auditor' },
 	{ label: 'Finance Ap Dashboard on Finance Accepted', value: 'finance-ap-dashboard-on-finance-accepted' },
+	{ label: 'Payment Status Mismatch', value: 'bill-payment-status-mismatch' },
+	{ label: 'Bills Account Utilization Mismatch', value: 'bills-account-utilization-mismatch' },
+	{ label: 'Invoice Account Utilization Amount Mismatch', value: 'invoice-account-utilization-amount-mismatch' },
+	{ label: 'Invoice Payment Status Mismatch', value: 'invoice-payment-status-mismatch' },
 ];
 
 export const ACCOUNT_TYPE_OPTIONS = [
