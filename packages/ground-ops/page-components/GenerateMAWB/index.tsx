@@ -21,9 +21,17 @@ interface Props {
 	item?: any;
 	edit?: boolean;
 	setEdit?: any;
+	setGenerate?:any;
 }
 
-function GenerateMAWB({ viewDoc = false, setViewDoc = () => {}, item = {}, edit = false, setEdit = () => {} }:Props) {
+function GenerateMAWB({
+	viewDoc = false,
+	setViewDoc = () => {},
+	item = {},
+	edit = false,
+	setEdit = () => {},
+	setGenerate = () => {},
+}:Props) {
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
@@ -76,7 +84,16 @@ function GenerateMAWB({ viewDoc = false, setViewDoc = () => {}, item = {}, edit 
 				<>
 					<div className={styles.heading}>Add Export Details</div>
 					<Breadcrumb>
-						<Breadcrumb.Item label={<a href="ground-ops">Ground Ops Dashboard</a>} />
+						<Breadcrumb.Item label={(
+							<div
+								onClick={() => setGenerate(false)}
+								role="link"
+								tabIndex={0}
+							>
+								Ground Ops Dashboard
+							</div>
+						)}
+						/>
 						<Breadcrumb.Item label="Add Export Details" />
 					</Breadcrumb>
 				</>
