@@ -3,4 +3,4 @@ declare module '@cogoport/store';
 declare module '@cogoport/layout';
 declare module '@cogoport/components';
 declare module '@cogoport/next';
-declare module '@cogoport/business-finance/page-components/Translate';
+declare module '@cogoport/translate';

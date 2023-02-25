@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function Translate() {
 	const { query, push } = useRouter();
 	const { activeTab } = query;
-	const [receivables, setReceivables] = useState<string>(activeTab);
+	const [receivables, setReceivables] = useState<string>(activeTab || 'Requested');
 
 	return (
 		<>

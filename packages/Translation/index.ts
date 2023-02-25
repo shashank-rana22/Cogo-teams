@@ -1,1 +1,1 @@
-export { default } from './page-components/Translate/index';
+export { default } from './page-components/Translate';

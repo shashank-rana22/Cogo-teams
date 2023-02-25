@@ -9,7 +9,6 @@ function ToolTipWrapper({ text }: { text: string }) {
 		render ? (
 			<Tooltip
 				placement="right"
-				theme="light"
 				trigger="mouseenter"
 				interactive
 				content={text}
