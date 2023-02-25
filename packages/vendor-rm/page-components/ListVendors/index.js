@@ -7,6 +7,7 @@ import FilterContent from './FilterContent';
 import Header from './Header';
 import useVendorList from './hooks/useVendorList';
 import useVendorStats from './hooks/useVendorStats';
+import KycStatusTabs from './KycStatusTabs';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
 
@@ -29,16 +30,6 @@ function ListVendors() {
 	const { total_count, page_limit:pageLimit } = data || {};
 	const router = useRouter();
 
-	const tagClick = ({ status:tagStatus }) => {
-		setParams((prev) => ({
-			...prev,
-			filters: {
-				status     : 'active',
-				kyc_status : tagStatus,
-			},
-		}));
-	};
-
 	const { list = [] } = data;
 
 	const isFilterEmpty = Object.keys(params?.filters).length === 1;
@@ -50,20 +41,10 @@ function ListVendors() {
 	return (
 		<>
 			<Header />
-			<div className={styles.kyc}>
-				<div
-					role="presentation"
-					className={styles.box}
-					onClick={() => { tagClick({ status: 'pending' }); }}
-				>
-					<div className={styles.label}>Pending Vendors</div>
-					<div className={styles.value}>{dataStats?.kyc_pending_count}</div>
-				</div>
-				<div role="presentation" className={styles.box} onClick={() => { tagClick({ status: 'verified' }); }}>
-					<div className={styles.label}>Verified Vendors</div>
-					<div className={styles.value}>{dataStats?.kyc_verified_count}</div>
-				</div>
-			</div>
+			<KycStatusTabs
+				setParams={setParams}
+				dataStats={dataStats}
+			/>
 
 			<div className={styles.group}>
 				<div className={styles.heading}>
