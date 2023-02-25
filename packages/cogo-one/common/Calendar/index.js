@@ -69,6 +69,7 @@ function Calendar({ calendarType }) {
 
 	const calcMonth = (subtractMonths) => {
 		const d = new Date();
+		d.setDate(1);
 		d.setMonth(d.getMonth() - subtractMonths);
 		return d;
 	};
