@@ -1,4 +1,5 @@
 import { Button, Modal, Select } from '@cogoport/components';
+import { IcCStar } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -6,8 +7,6 @@ import styles from './styles.module.css';
 function ProfileBadgeCard() {
 	const [show, setShow] = useState(false);
 	const badgeUrl = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg';
-
-	const starUrl = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/star-icon.svg';
 
 	const onClose = () => setShow(false);
 
@@ -25,11 +24,19 @@ function ProfileBadgeCard() {
 			</div>
 			<div className={styles.badges_container}>
 				<div className={styles.container}>
-					<img className={styles.badge} src={badgeUrl} alt="badge-img" />
+					<img className={styles.badge} src={badgeUrl} alt="" />
 					<div className={styles.stars_container}>
-						<img className={styles.small_star} src={starUrl} alt="badge-img" />
-						<img className={styles.small_star} src={starUrl} alt="badge-img" />
-						<img className={styles.small_star} src={starUrl} alt="badge-img" />
+						<IcCStar width={24} stroke="#FFDF33" />
+						<IcCStar width={24} stroke="#FFDF33" />
+						<IcCStar width={24} stroke="#FFDF33" />
+					</div>
+				</div>
+				<div className={styles.container}>
+					<img className={styles.badge} src={badgeUrl} alt="" />
+					<div className={styles.stars_container}>
+						<IcCStar width={24} stroke="#FFDF33" />
+						<IcCStar width={24} stroke="#FFDF33" />
+						<IcCStar width={24} stroke="#FFDF33" />
 					</div>
 				</div>
 			</div>
@@ -40,7 +47,7 @@ function ProfileBadgeCard() {
 				size="sm"
 				show={show}
 				onClose={onClose}
-				placement="bottom"
+				placement="center"
 				closeOnOuterClick
 			>
 				<Modal.Header title="Preview Badges" />
@@ -49,7 +56,16 @@ function ProfileBadgeCard() {
 						Select the mastery badge to preview on your profile
 					</p>
 					Select Mastery Badge
+
 					<Select placeholder="Multimodal Mastery" />
+
+					Eu do culpa occaecat veniam aute incididunt
+					ipsum eiusmod do excepteur exercitation. Non minim esse ex amet amet
+					aliqua enim incididunt reprehenderit culpa commodo deserunt. Nisi minim
+					aute labore cillum exercitation amet. Esse Lorem adipisicing dolor sunt
+					culpa ipsum ut laborum incididunt nostrud. Ipsum fugiat duis cupidatat
+					ipsum et ex. Et aliquip nostrud ad in sit.
+
 				</Modal.Body>
 				<Modal.Footer>
 					<Button themeType="tertiary" onClick={onClose}>
