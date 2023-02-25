@@ -21,7 +21,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		title       : '',
 		description : '',
 	});
-	const [date, setDate] = useState('');
+	const [date, setDate] = useState(null);
 
 	const {
 		listData = {},
@@ -110,7 +110,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 							onChange={setDate}
 							value={date}
 							use12hourformat={false}
-							placement="left"
+
 						/>
 						<div className={styles.wrapper}>
 							<div className={styles.label}>Summary</div>

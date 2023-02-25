@@ -9,18 +9,8 @@ function ListNotes({
 	setActive,
 	listLoading,
 	list,
-	setEditNote,
-	setNoteValue,
-	setUpdateId,
 	updateNote,
 }) {
-	const handleClick = async (i) => {
-		const { notes_data, id } = i || {};
-		setEditNote(true);
-		setNoteValue(notes_data);
-		setUpdateId(id);
-	};
-
 	const handleDelete = async (val) => {
 		await updateNote({ val, type: 'delete' });
 	};
@@ -41,7 +31,6 @@ function ListNotes({
 			<div className={styles.wrap}>
 				<Notes
 					list={list}
-					handleClick={handleClick}
 					handleDelete={handleDelete}
 					listLoading={listLoading}
 				/>
