@@ -24,7 +24,7 @@
 .box {
 	overflow-y: auto;
 }
-.box ::-webkit-scrollbar { display: none; }
+.box::-webkit-scrollbar { display: none; }
 
 .improvement_text_box {
 	display: flex;
