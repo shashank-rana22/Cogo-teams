@@ -77,6 +77,7 @@ function ThisWeek() {
 				{
 					dummy_card_data.map((dummy_data) => (
 						<div
+							key={dummy_data.title}
 							role="presentation"
 							className={styles.card_container}
 							onClick={() => setCardData(dummy_data)}

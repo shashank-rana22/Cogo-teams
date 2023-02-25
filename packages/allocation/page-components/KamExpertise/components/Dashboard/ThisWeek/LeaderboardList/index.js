@@ -1,9 +1,11 @@
-import { Card } from '@cogoport/components';
+import { IcCStar } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function LeaderboardList() {
+	const router = useRouter();
 	const list_data = [
 		{
 			id            : 1,
@@ -27,7 +29,7 @@ function LeaderboardList() {
 		},
 		{
 			id            : 2,
-			user_name     : 'John Appleseed',
+			user_name     : 'Beatrice Needlespoon',
 			total         : 12000,
 			customer_exp  : 12000,
 			trade_exp     : 12000,
@@ -52,7 +54,7 @@ function LeaderboardList() {
 		},
 		{
 			id            : 4,
-			user_name     : 'John Appleseed',
+			user_name     : 'Beatrice Needlespoon',
 			total         : 12000,
 			customer_exp  : 12000,
 			trade_exp     : 12000,
@@ -77,24 +79,18 @@ function LeaderboardList() {
 		<div className={styles.container}>
 
 			{list_data.map((data, index) => (
-				<Card
-					themetype="primary"
-					disabled={false}
+				<div
+					key={data.id}
 					className={styles.card}
 				>
-					<Card.Description className={styles.card_description}>
+					<div className={styles.card_description}>
 						<div className={styles.card_description_left}>
 							<div className={styles.index}>
 								{index + 1}
 							</div>
 							<div>
 								<div
-									style={{
-										fontSize      : '16px',
-										fontWeight    : 'bold',
-										color         : '#ED3726',
-										paddingBottom : '8px',
-									}}
+									className={styles.user_name}
 								>
 									{data.user_name}
 								</div>
@@ -104,15 +100,34 @@ function LeaderboardList() {
 								</div>
 							</div>
 						</div>
-						<div className={styles.badges}>
-							{
+						<div className={styles.badge_container}>
+							<div className={styles.badges}>
+								{
                                 data.badges.length > 0 ? (data.badges.map((value) => (
-	<div>
+	<div key={data.badges.url} style={{ marginBottom: '4px' }}>
 		<img src={value.url} alt="badge" width={48} height={48} />
+		<div className={styles.star}>
+			<IcCStar width={10} stroke="#FFDF33" />
+			<IcCStar width={10} stroke="#FFDF33" />
+			<IcCStar width={10} stroke="#FFDF33" />
+		</div>
 	</div>
                                 ))) : ''
                             }
+							</div>
+							<span className={styles.link}>
+								{data.badges.length > 1
+									? (
+										<span
+											role="presentation"
+											onClick={() => router.push('/allocation/kam-expertise/view-badges')}
+										>
+											View More
+										</span>
+									) : ''}
+							</span>
 						</div>
+
 						<div className={styles.card_description_right}>
 							<div>
 								<div style={{ color: '#333333', paddingBottom: '8px' }}>Customer Exp.</div>
@@ -131,8 +146,8 @@ function LeaderboardList() {
 								<div><b>{data.misc_exp}</b></div>
 							</div>
 						</div>
-					</Card.Description>
-				</Card>
+					</div>
+				</div>
 			))}
 		</div>
 	);

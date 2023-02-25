@@ -1,51 +1,48 @@
 .main_container {
-	padding: 1em;
-	margin-top: 7em;
-	background-color: white;
-	border-radius: 7px;
+    padding: 16px;
+    margin-top: 100px; /* just for the time, when all badges things are together in a page*/
+    background-color: white;
+    border-radius: 8px;
 }
 
 .sub_container {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .lable {
-	font-family: Roboto;
-	font-size: 12px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 16px;
+    font-family: Roboto;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 .heading {
-	font-size: 16px;
-	font-weight: 500;
-	color: #6fa5ab;
+    font-size: 16px;
+    font-weight: 500;
+    color: #6fa5ab;
 }
 
 .badges_container {
-	display: flex;
-	gap: 1em;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .badge {
-	width: 3em;
+    width: 64px;
 }
 
 .container {
-	padding: 0.5em;
+    padding: 16px;
 }
 
 .stars_container {
-	display: flex;
-}
-
-.small_star {
-	width: 1em;
+    display: flex;
+    width: 50px;
+    margin: 0 8px;
+    align-items: center;
 }
 
 .view_more {
-	position: relative;
-	left: 85%;
+    position: relative;
+    left: 85%;
 }
