@@ -15,22 +15,29 @@ function MinimizeModal({
 	durationTime = () => { },
 	callLoading,
 }) {
+	const handleClick = (type) => {
+		dispatch(
+			setProfileState({
+				...profileData,
+				voice_call: {
+					...profileData?.voice_call,
+					[type]        : true,
+					minimizeModal : false,
+				},
+			}),
+		);
+	};
+
+	const handleEndClick = (e) => {
+		e.stopPropagation();
+		handleEnd();
+	};
+
 	return (
 		<div
 			className={styles.container}
 			role="presentation"
-			onClick={() => {
-				dispatch(
-					setProfileState({
-						...profileData,
-						voice_call: {
-							...profileData?.voice_call,
-							showCallModal : true,
-							minimizeModal : false,
-						},
-					}),
-				);
-			}}
+			onClick={() => handleClick('showCallModal')}
 		>
 			<div className={styles.avatar}>
 				<IcMProfile width={20} height={20} />
@@ -38,23 +45,12 @@ function MinimizeModal({
 			<div
 				className={styles.details}
 				role="presentation"
-				onClick={() => {
-					dispatch(
-						setProfileState({
-							...profileData,
-							voice_call: {
-								...profileData?.voice_call,
-								showActiveCallModal : true,
-								minimizeModal       : false,
-							},
-						}),
-					);
-				}}
+				onClick={() => handleClick('showActiveCallModal')}
 			>
 				<div className={styles.min_number}>{name || `${mobile_country_code} ${mobile_number}`}</div>
 				<div className={styles.status_container}>
 					<div className={styles.min_duration}>{status || 'Connecting...'}</div>
-					{ ' '}
+					{' '}
 					<div className={styles.min_duration}>
 						{durationTime()}
 					</div>
@@ -63,10 +59,7 @@ function MinimizeModal({
 
 			{!callLoading && (
 				<div
-					onClick={(e) => {
-						e.stopPropagation();
-						handleEnd();
-					}}
+					onClick={(e) => handleEndClick(e)}
 					role="presentation"
 				>
 					<img

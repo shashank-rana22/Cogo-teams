@@ -126,12 +126,12 @@ function Templates({
 									)}
 									style={{
 										cursor:
-                                            previewData
-                                            || whatsapp_approval_status
-                                                !== 'approved'
-                                            || openCreateReply
-                                            	? 'not-allowed'
-                                            	: 'pointer',
+											previewData
+											|| whatsapp_approval_status
+												!== 'approved'
+											|| openCreateReply
+												? 'not-allowed'
+												: 'pointer',
 									}}
 								>
 									<div className={styles.wrap}>
@@ -148,7 +148,7 @@ function Templates({
 										{messageContent}
 									</div>
 								</div>
-                        	),
+							),
 						)}
 						{loading && loader()}
 						{isEmpty(list) && !loading && (

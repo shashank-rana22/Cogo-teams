@@ -9,14 +9,16 @@ import styles from './styles.module.css';
 function FileUploader(props) {
 	const {
 		onChange,
+		showProgress = true,
 		defaultValues,
 		multiple,
 		docName,
 		uploadIcon = null,
+		handleProgress,
 		...rest
 	} = props;
-	const [fileName, setFileName] = useState(null); // remove
-	const [loading, setLoading] = useState(true); // remove
+	const [fileName, setFileName] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
 
@@ -46,7 +48,13 @@ function FileUploader(props) {
 		} else {
 			onChange(urlStore[0]);
 		}
-	}, [multiple, urlStore, onChange]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [urlStore]);
+
+	useEffect(() => {
+		handleProgress(loading);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({
@@ -140,7 +148,7 @@ function FileUploader(props) {
 				fileData={urlStore}
 			/>
 
-			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
+			{showProgress && loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
 				<div className={styles.progress_container}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}

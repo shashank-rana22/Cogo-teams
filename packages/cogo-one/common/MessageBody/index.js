@@ -23,6 +23,39 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		);
 	}
 
+	function LoadMedia(type) {
+		switch (type) {
+			case 'image':
+				return (
+					<img
+						src={media_url}
+						alt={message_type}
+						className={styles.object_styles}
+					/>
+				);
+			case 'audio':
+				return (
+					<audio
+						controls
+						className={styles.object_styles}
+					>
+						<source src={media_url} type={`audio/${fileExtension}`} />
+					</audio>
+				);
+			case 'video':
+				return (
+					<video
+						controls
+						className={styles.object_styles}
+					>
+						<source src={media_url} type={`video/${fileExtension}`} />
+					</video>
+				);
+			default:
+				return null;
+		}
+	}
+
 	if (MESSAGE_MAPPING.media.includes(message_type)) {
 		return (
 			<>
@@ -38,29 +71,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						);
 					}}
 				>
-					{message_type === 'image' && (
-						<img
-							src={media_url}
-							alt={message_type}
-							className={styles.object_styles}
-						/>
-					)}
-					{message_type === 'audio' && (
-						<audio
-							controls
-							className={styles.object_styles}
-						>
-							<source src={media_url} type={`audio/${fileExtension}`} />
-						</audio>
-					)}
-					{message_type === 'video' && (
-						<video
-							controls
-							className={styles.object_styles}
-						>
-							<source src={media_url} type={`video/${fileExtension}`} />
-						</video>
-					)}
+					{LoadMedia(message_type)}
 				</div>
 
 				<ShowMessage />
@@ -76,7 +87,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		);
 	}
 	if (message_type === 'contacts') {
-		const { name:{ formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
+		const { name: { formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
 
 		return (
 			<div className={styles.contact_card}>
