@@ -21,8 +21,7 @@
 }
 
 .box:hover {
-	background-color: #fef199;
-	transform: scale(1);
+	transform: scale(1.1);
 }
 
 .label {
