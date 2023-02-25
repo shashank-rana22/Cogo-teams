@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
 import getControls from '../utils/controls';
 import getFormattedServices from '../utils/getFormattedServices';
+import reFormatServices from '../utils/reFormatServices';
 
 function useVendorServices({
 	setActiveStepper = () => {},
@@ -72,12 +73,10 @@ function useVendorServices({
 	useEffect(() => {
 		const { services = [] } = vendorInformation || {};
 
-		const prefill_obj = {
-			services,
-		};
+		const { reformattedDataFromApi = {} } = reFormatServices({ services });
 
 		controls.forEach((item) => {
-			setValue(`${item.name}`, vendor_services?.[item.name] || prefill_obj[item.name]);
+			setValue(`${item.name}`, vendor_services?.[item.name] || reformattedDataFromApi[item.name]);
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [vendorInformation]);

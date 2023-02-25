@@ -31,7 +31,7 @@ const getControls = () => [
 			{
 				name        : 'cogoport_office_id',
 				label       : 'Select Cogoport Office',
-				type        : 'select',
+				type        : 'multiSelect',
 				placeholder : 'Select Location',
 				style       : { flexBasis: '30%' },
 				options     : officeLocations,
