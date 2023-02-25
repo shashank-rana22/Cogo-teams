@@ -1,12 +1,12 @@
 import CreateNewEvent from './CreateNewEvent';
-// import EventListItem from './EventList';
+import EventListItem from './EventList';
 
 function Events() {
 	return (
 		<>
 			<CreateNewEvent />
 
-			{/* <EventListItem /> */}
+			<EventListItem />
 		</>
 	);
 }

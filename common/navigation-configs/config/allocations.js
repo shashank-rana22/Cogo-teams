@@ -15,6 +15,14 @@ const allocations = {
 		navigation : 'allocations-kam_expertise',
 		isMainNav  : false,
 	},
+	'/[partner_id]/allocation/kam-expertise/view-badges': {
+		navigation : 'allocations-kam_expertise',
+		isMainNav  : false,
+	},
+	'/[partner_id]/allocation/kam-expertise/events': {
+		navigation : 'allocations-kam_expertise',
+		isMainNav  : false,
+	},
 };
 
 module.exports = allocations;

@@ -36,7 +36,7 @@ function Header() {
 
 				</Button>
 				<Button
-					// onClick={() => { router.push('/allocation/kam-expertise/'); }}
+					onClick={() => { router.push('/allocation/kam-expertise/events'); }}
 					size="lg"
 					themeType="secondary"
 					className={styles.button}
