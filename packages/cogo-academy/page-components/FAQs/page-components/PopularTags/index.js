@@ -1,11 +1,14 @@
-import { Pill } from '@cogoport/components';
-import React from 'react';
+import { Button, Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
+import TopicList from '../TopicList';
 
 import styles from './styles.module.css';
 
-function PopularTags() {
+function PopularTags({ tabTitle = '', searchState = '' }) {
+	const [tags, setTags] = useState('');
 	const {
 		refetchTag = () => {},
 		data,
@@ -16,19 +19,34 @@ function PopularTags() {
 
 	return (
 		<div style={{ marginBottom: 12 }}>
-			<br />
-			<h4>Popular tags in this section:</h4>
-			{data?.list.map((item) => (
+			<h4 style={{ marginTop: 12 }}>Popular tags in this section:</h4>
+			<div>
+				{
+
+			data?.list.map((item) => (
 				<Pill
 					className={styles.tag_decoration}
-					// onClick={<AllFAQ />}
 					key={item.name}
 					size="sm"
 					color="white"
 				>
-					{item.name}
+					<Button
+						themeType="tertiary"
+						onClick={() => setTags(item.id)}
+						size="sm"
+						color="white"
+					>
+						<div className={styles.font_decoration}>{startCase(item.name)}</div>
+					</Button>
+
 				</Pill>
-			))}
+
+			))
+			}
+
+			</div>
+
+			<TopicList tabTitle={tabTitle} searchState={searchState} tagId={tags} />
 		</div>
 	);
 }

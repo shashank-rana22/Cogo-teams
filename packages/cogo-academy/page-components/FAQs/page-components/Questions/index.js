@@ -14,12 +14,12 @@ function Questions({ questions = {} }) {
 
 	return (
 		<div className={styles.contentshow}>
-			<div role="presentation" onClick={toggle}>
+			<div role="presentation" onClick={toggle} className={styles.cursor}>
 				<QuestionsCollapse collapse={open} questions={questions} />
 			</div>
 
 			{open && (
-				<Answer questions={questions} />
+				<div className={styles.transition}><Answer questions={questions} /></div>
 			)}
 		</div>
 	);

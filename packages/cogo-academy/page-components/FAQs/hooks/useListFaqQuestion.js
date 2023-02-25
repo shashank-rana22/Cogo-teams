@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
+function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tagId = '' }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
@@ -11,7 +11,7 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 		url    : 'list_faq_questions',
 	}, { manual: true });
 
-	console.log('searchState', searchState);
+	console.log('tag', tagId);
 
 	const fetchFaqQuestions = async () => {
 		try {
@@ -22,6 +22,7 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false }) {
 						status       : 'active',
 						q            : searchState,
 						faq_topic_id : topicId,
+						faq_tag_id   : tagId,
 
 					},
 					sort_by: SORT_MODE,

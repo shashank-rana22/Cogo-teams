@@ -1,6 +1,7 @@
 .content {
 	border: 1px solid rgb(128 123 123);
 	border-radius: 5px;
+	
 }
 
 .contentparent {
@@ -29,6 +30,7 @@
 	font-weight: 1000;
 	color: #000;
 	opacity: 0.5;
+	
 }
 
 .subtitle {
@@ -37,6 +39,7 @@
 	margin-bottom: 2%;
 	font-size: 13px;
 	font-weight: 1000;
+	
 }
 
 .sidetext {
@@ -48,6 +51,7 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: 15px;
+	
 
 	/* identical to box height */
 
