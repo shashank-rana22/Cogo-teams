@@ -10,7 +10,9 @@ function TimeSpent({ loading = true }) {
 		<div className={styles.time_spent_container}>
 			<div className={styles.left_time_spent_container}>
 				<div className={styles.label}>Time spent online this month</div>
-				{loading ? <Placeholder height="30px" width="100px" /> : <div className={styles.time}>5h 30min</div>}
+				{loading
+					? <Placeholder height="30px" width="100px" className={styles.time_placeholder} />
+					: <div className={styles.time}>5h 30min</div>}
 			</div>
 			<div className={styles.right_time_spent_container}>
 				<img
