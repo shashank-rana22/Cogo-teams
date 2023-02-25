@@ -11,9 +11,20 @@
     transform: translateX(-33.3%);
 }
 
+.weekCalendar{
+    gap:15px;
+}
+.weekCalendar .dateContainer{
+    padding:5px 15px;
+}
+.weekCalendar .dayH1{
+    white-space: nowrap;
+    font-size: 14px;
+}
+
 .dateContainer{
     /* flex:1; */
-    padding: 0 25px;
+    padding: 0 22px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 6px;
     padding: auto;

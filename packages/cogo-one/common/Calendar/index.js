@@ -146,6 +146,7 @@ function Calendar({ calendarType }) {
 					resetDiv={resetDiv}
 					pagination={pagination}
 					setPagination={setPagination}
+					isWeek={calendarType === 'week'}
 				/>
 			</div>
 			<button
