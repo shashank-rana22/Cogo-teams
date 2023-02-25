@@ -42,6 +42,7 @@ function ListVendors() {
 		<>
 			<Header />
 			<KycStatusTabs
+				params={params}
 				setParams={setParams}
 				dataStats={dataStats}
 			/>
