@@ -50,7 +50,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
-
+		{
+			api          : 'bulk_create_question_answer_set',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
 	],
 	faq: [
 		{

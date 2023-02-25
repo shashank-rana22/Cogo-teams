@@ -3,6 +3,7 @@ import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
+import Spinner from '../../../../commons/Spinner';
 import useGetQuestion from '../hooks/useGetQuestion';
 
 import styles from './styles.module.css';
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const router = useRouter();
 
-	const { fetchQuestion, query, data } = useGetQuestion();
+	const { fetchQuestion, query, data, loading } = useGetQuestion();
 
 	const {
 		question_abstract = '',
@@ -46,6 +47,20 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		router.push(href, href);
 		setQuestionPreview('create');
 	};
+
+	if (loading) {
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					outerBorderColor="#FFF"
+					spinBorderColor="#000"
+					borderWidth="7px"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
