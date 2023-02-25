@@ -216,7 +216,7 @@ importers:
 
   packages/access-management:
     specifiers:
-      '@cogoport/components': ^1.0.340
+      '@cogoport/components': ^1.0.330
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/navigation-configs': workspace:0.1.0
@@ -3725,7 +3725,7 @@ packages:
       '@nivo/core': 0.80.0
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
+      '@nivo/core': 0.80.0_g5kln477lwx3caqucf3exzf3du
       d3-delaunay: 5.3.0
       d3-scale: 3.3.0
       react: 18.2.0
