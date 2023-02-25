@@ -22,7 +22,7 @@ function Header({ setCalendarType, calendarType }) {
 						alt="-"
 					/>
 				</div>
-				<div className={styles.heading_name}>CogoOne Dashboard</div>
+				<div className={styles.heading_name}>ogoOne Dashboard</div>
 			</div>
 
 			<div className={styles.header_right_section}>
