@@ -60,10 +60,9 @@
 	color: #221f20;
 }
 
-.user_div{
-	background: #FFFCE6;
-    border-radius: 10px;
-    padding:2px;
-	z-index:1;
+.user_div {
+	z-index: 1;
+	padding: 2px;
+	background: #fffce6;
+	border-radius: 10px;
 }
-

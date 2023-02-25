@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Loader, Button } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { Button } from '@cogoport/components';
+import { useState } from 'react';
 
 import DetailViewer from '../../../../common/DetailViewer';
-import EmptyState from '../../../../common/EmptyState';
 import useCreateOmniNote from '../../../../hooks/useCreateOmniNote';
 import useGetListNotes from '../../../../hooks/useGetListNotes';
 import useUpdateNote from '../../../../hooks/useUpdateNote';
