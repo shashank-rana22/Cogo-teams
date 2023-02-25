@@ -78,6 +78,10 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 						}));
 						setShowFilter(false);
 					}}
+					style={{
+						marginLeft: '8px',
+					}}
+					disabled={!filters?.category && !filters?.sub_category && !filters?.registration_number}
 				>
 					Apply
 				</Button>
