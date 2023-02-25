@@ -51,7 +51,7 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 
 	return (
 		<div className={styles.feed_div}>
-			<Modal show={showFeedbackModal} size="sm" className={styles.styled_ui_modal_dialog}>
+			<Modal show={showFeedbackModal} scroll={false} size="sm" className={styles.styled_ui_modal_dialog}>
 				<Modal.Body>
 					<div className={styles.feed_content}>
 						<div className={styles.feed_title}>Feedback</div>
