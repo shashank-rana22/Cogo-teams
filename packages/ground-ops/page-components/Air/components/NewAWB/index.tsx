@@ -5,7 +5,7 @@ import React from 'react';
 import List from '../../commons/List';
 import { NewAWBFields } from '../../configurations/new_awb_fields';
 
-function NewAWB({ data, loading, setGenerate, setItem }) {
+function NewAWB({ data, loading, setPage, setGenerate, setItem }) {
 	const { fields } = NewAWBFields;
 	const handleGenerateMAWB = (singleItem) => {
 		setGenerate(true);
@@ -32,6 +32,7 @@ function NewAWB({ data, loading, setGenerate, setItem }) {
 			data={data}
 			loading={loading}
 			functions={functions}
+			setPage={setPage}
 		/>
 
 	);

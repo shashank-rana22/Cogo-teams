@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
@@ -23,6 +23,15 @@ function FieldArray({
 	});
 
 	const childEmptyValues = { };
+
+	useEffect(() => {
+		console.log('dsd');
+
+		if (fields.length === 0) {
+			append(childEmptyValues);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className={styles.child}>

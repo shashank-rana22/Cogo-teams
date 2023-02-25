@@ -1,10 +1,8 @@
 import { Loader, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 
 import EmptyState from './EmptyState';
 import GetFinalList from './GetFinalList';
-import GetLocation from './GetFinalList/GetLocation';
 import { FunctionObjects, FieldType, DataType } from './Interfaces';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
@@ -28,7 +26,7 @@ function List({
 	functions,
 } :Props) {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
-	const { list = {}, total_count = 0 } = data;
+	const { list = {} }:any = data;
 	const { finalData } = GetFinalList({ list, data, loading });
 
 	const handleRender = () => (finalData || [1, 2, 3, 4, 5]).map((singleitem) => (
@@ -53,9 +51,10 @@ function List({
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}
-							totalItems={total_count}
+							totalItems={list?.totalRecords}
 							pageSize={10}
 							type="table"
+							onPageChange={(val) => { setPage(val); }}
 						/>
 					</div>
 				) : null}

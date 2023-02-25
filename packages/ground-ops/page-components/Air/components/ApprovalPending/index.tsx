@@ -7,7 +7,7 @@ import { ApprovalPendingFields } from '../../configurations/approval_pending_fie
 
 import DownloadModal from './DownloadModal';
 
-function ApprovalPending({ data, loading, setGenerate, setItem, setViewDoc, setEdit }) {
+function ApprovalPending({ data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit }) {
 	const { fields } = ApprovalPendingFields;
 	const [show, setShow] = useState(false);
 
@@ -45,7 +45,13 @@ function ApprovalPending({ data, loading, setGenerate, setItem, setViewDoc, setE
 	};
 	return (
 		<>
-			<List fields={fields} data={data} loading={loading} functions={functions} />
+			<List
+				fields={fields}
+				data={data}
+				loading={loading}
+				setPage={setPage}
+				functions={functions}
+			/>
 			{show && <DownloadModal show={show} setShow={setShow} />}
 		</>
 	);
