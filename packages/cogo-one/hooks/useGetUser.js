@@ -10,15 +10,11 @@ const useGetUser = ({ lead_user_id = null, userId = null, customerId }) => {
 	}, { manual: true });
 
 	const fetchUser = async () => {
-		try {
-			await trigger({
-				params: {
-					id: payload,
-				},
-			});
-		} catch (e) {
-			console.log('e:', e);
-		}
+		await trigger({
+			params: {
+				id: payload,
+			},
+		});
 	};
 	useEffect(() => {
 		if (userId || lead_user_id) {

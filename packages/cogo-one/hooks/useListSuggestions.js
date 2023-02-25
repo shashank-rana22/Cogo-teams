@@ -17,23 +17,19 @@ function useListSuggestions({ activeTab }) {
 	});
 
 	const fetchListLogApi = async () => {
-		try {
-			const res = await trigger({
-				params: {
-					page                     : pagination,
-					pagination_data_required : true,
-					filters                  : {
-						q               : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
-						suggestion_type : 'quick_reply',
-					},
+		const res = await trigger({
+			params: {
+				page                     : pagination,
+				pagination_data_required : true,
+				filters                  : {
+					q               : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
+					suggestion_type : 'quick_reply',
 				},
-			});
-			if (res?.data) {
-				const { list = [], ...paginationData } = res?.data || {};
-				setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
-			}
-		} catch (e) {
-			console.log('e', e);
+			},
+		});
+		if (res?.data) {
+			const { list = [], ...paginationData } = res?.data || {};
+			setInfiniteList((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 		}
 	};
 	const refetch = () => {
