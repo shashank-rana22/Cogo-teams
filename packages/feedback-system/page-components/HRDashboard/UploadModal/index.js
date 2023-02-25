@@ -1,7 +1,6 @@
 import { Tooltip, Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';

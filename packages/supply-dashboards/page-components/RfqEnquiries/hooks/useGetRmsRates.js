@@ -17,7 +17,6 @@ const useGetRmsRates = ({ service }) => {
 	}, { manual: true });
 
 	const fetchSystemData = async (params) => {
-		console.log(params);
 		try {
 			await triggerSystemData({
 				params,

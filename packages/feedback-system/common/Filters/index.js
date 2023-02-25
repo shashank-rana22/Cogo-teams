@@ -1,5 +1,5 @@
 import { Input, Select } from '@cogoport/components';
-import { useDebounceQuery, InputController, SelectController, useForm } from '@cogoport/forms';
+import { useDebounceQuery, SelectController, useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -39,6 +39,7 @@ function Filters({ params = {}, setParams = () => {} }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, department, designation]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => debounceQuery(managerName), [managerName]);
 
 	return (

@@ -1,5 +1,5 @@
-import { Placeholder, Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
-import { Controller, useDebounceQuery, useForm } from '@cogoport/forms';
+import { Placeholder, Pagination, Modal, Input, Button } from '@cogoport/components';
+import { useDebounceQuery, useForm } from '@cogoport/forms';
 import CreatableMultiSelectController from '@cogoport/forms/page-components/Controlled/CreatableMultiSelectController';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
