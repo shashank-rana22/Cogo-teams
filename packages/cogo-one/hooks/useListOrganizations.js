@@ -3,7 +3,9 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useListOrganizations = ({ orgId = null }) => {
+import { PARAMOUNT_ORG_ID } from '../constants/IDS_CONSTANTS';
+
+const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:activeConversationTab = '' }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const [{ data, loading }, trigger] = useRequest(
@@ -34,27 +36,26 @@ const useListOrganizations = ({ orgId = null }) => {
 	const { tags = [], partner_id:channelPartnerID = null } = list?.[0] || {};
 
 	const isChannelPartner = tags?.includes('partner') || false;
-
+	const ORGID = orgId || PARAMOUNT_ORG_ID;
 	let ORG_PAGE_URL = '';
 	const openNewTab = (activeTab) => {
-		if (orgId) {
-			const { crm = undefined, prm = undefined } = activeTab || {};
-			if (isChannelPartner) {
-				ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}?source=communication`;
-
-				const PRM_ROUTE_PAGE = prm
-					? `${ORG_PAGE_URL}&omniChannelActiveTab=${prm}`
-					: ORG_PAGE_URL;
+		const { crm = undefined, prm = undefined } = activeTab || {};
+		const linkSuffix = activeConversationTab === 'message'
+			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
+		if (isChannelPartner) {
+			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}?${linkSuffix}`;
+			const PRM_ROUTE_PAGE = prm
+				? `${ORG_PAGE_URL}&omniChannelActiveTab=${prm}`
+				: ORG_PAGE_URL;
 				// eslint-disable-next-line no-undef
-				window.open(PRM_ROUTE_PAGE, '_blank');
-			} else {
-				ORG_PAGE_URL = `/${partnerId}/details/demand/${orgId}`;
-				const CRM_ROUTE_PAGE = crm
-					? `${ORG_PAGE_URL}&omniChannelActiveTab=${crm}&source=communication`
-					: ORG_PAGE_URL;
+			window.open(PRM_ROUTE_PAGE, '_blank');
+		} else {
+			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}`;
+			const CRM_ROUTE_PAGE = crm
+				? `${ORG_PAGE_URL}&omniChannelActiveTab=${crm}`
+				: ORG_PAGE_URL;
 				// eslint-disable-next-line no-undef
-				window.open(CRM_ROUTE_PAGE, '_blank');
-			}
+			window.open(CRM_ROUTE_PAGE, '_blank');
 		}
 	};
 

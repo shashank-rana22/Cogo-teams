@@ -64,6 +64,8 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		setShowReminder(true);
 	};
 
+	const emptyCheck = !((inputValue?.title) && (inputValue?.description) && date);
+
 	if (isEmpty(list) && !showReminder && !listLoading && !firstLoading && !organizationId) {
 		return (
 			<EmptyState
@@ -74,8 +76,6 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 			/>
 		);
 	}
-
-	const emptyCheck = !((inputValue?.title) && (inputValue?.description) && date);
 
 	return (
 		(showReminder || organizationId)
@@ -110,7 +110,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 							onChange={setDate}
 							value={date}
 							use12hourformat={false}
-							placement="left"
+							// placement="left"
 						/>
 						<div className={styles.wrapper}>
 							<div className={styles.label}>Summary</div>

@@ -28,7 +28,7 @@ function useCreateCommunicationLog({
 	}, { manual: true });
 
 	const createLogApi = async ({ inputValue, date }) => {
-		let payload;
+		let payload = {};
 		if (activeTab === 'voice') {
 			payload = {
 				communication_type    : 'meeting',

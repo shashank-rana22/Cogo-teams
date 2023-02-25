@@ -69,6 +69,8 @@ function Messages({
 		);
 	}
 
+	const closeModal = () => setOpenModal({ type: null, data: {} });
+
 	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
 		firestore,
 		channel_type,
@@ -82,8 +84,6 @@ function Messages({
 		createCommunicationLoading,
 		formattedData,
 	});
-
-	const closeModal = () => setOpenModal({ type: null, data: {} });
 
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
 		messageFireBaseDoc,

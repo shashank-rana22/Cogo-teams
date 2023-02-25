@@ -5,7 +5,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import hasPermission from '../../constants/IDS_CONSTANTS';
+import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
 import useListChats from '../../hooks/useListChats';
@@ -100,6 +100,7 @@ function CogoOne() {
 						activeVoiceCard={activeVoiceCard}
 						firestore={firestore}
 						updateLeaduser={updateLeaduser}
+						activeCardId={activeCardId}
 
 					/>
 				</>

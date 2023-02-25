@@ -1,6 +1,6 @@
 {
   "name": "@cogoport/cogo-one",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Package for Cogo One",
   "private": true,
   "main": "./index.js",
@@ -8,6 +8,7 @@
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.335",
+    "@cogoport/constants": "workspace:^0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",
     "@cogoport/next": "workspace:0.1.0",

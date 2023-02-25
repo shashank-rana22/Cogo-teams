@@ -1,4 +1,4 @@
-import { Radio, Button } from '@cogoport/components';
+import { Radio, Button, cl } from '@cogoport/components';
 import {
 	useForm,
 	RadioGroupController,
@@ -58,7 +58,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<form className={styles.container} onSubmit={handleSubmit(createSubmit)}>
 			<div className={styles.controller_div}>
 				<Radio
 					name="assign_user"
@@ -74,6 +74,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 						{...assign_user}
 						{...listAgentsOptions}
 						isClearable
+						className={errors?.assign_user && styles.error_class}
 					/>
 					<div className={styles.error_text}>{errors?.assign_user && 'This is Required'}</div>
 				</div>
@@ -103,6 +104,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 								placeholder={
                                     PLACEHOLDER_MAPPING[watchCondtion] || ''
                                 }
+								className={styles.error_class}
 							/>
 							<div className={styles.error_text}>{errors?.condition_value && ' This is Required'}</div>
 						</div>
@@ -125,13 +127,13 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 					size="md"
 					themeType="accent"
 					loading={assignLoading}
-					onClick={handleSubmit(createSubmit)}
+					type="submit"
 				>
 					Assign
 				</Button>
 			</div>
 
-		</div>
+		</form>
 	);
 }
 export default AssignToForm;

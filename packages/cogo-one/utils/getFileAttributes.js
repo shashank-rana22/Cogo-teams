@@ -1,10 +1,8 @@
 import { IcMDocument, IcMImage } from '@cogoport/icons-react';
 
 const fileIconMapping = {
-	document: <IcMDocument height={22} width={22} />,
-
-	img: <IcMImage height={22} width={25} />,
-
+	document : <IcMDocument height={22} width={22} />,
+	img      : <IcMImage height={22} width={25} />,
 };
 
 function getFileAttributes({ fileName = '', finalUrl }) {

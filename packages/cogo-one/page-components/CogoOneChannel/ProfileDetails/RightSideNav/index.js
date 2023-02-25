@@ -9,11 +9,10 @@ function RightSideNav({
 	setActiveSelect,
 	openNewTab,
 	loading,
-	orgId,
 }) {
 	const handleClick = (val) => {
 		if (val === 'spot_search') {
-			if (!loading && orgId) {
+			if (!loading) {
 				openNewTab({ crm: 'searches', prm: 'searches' });
 			}
 		} else {
@@ -21,7 +20,7 @@ function RightSideNav({
 		}
 	};
 
-	const disabledSpotSearch = loading || !orgId;
+	const disabledSpotSearch = loading;
 
 	return (
 		<div className={styles.right_container}>

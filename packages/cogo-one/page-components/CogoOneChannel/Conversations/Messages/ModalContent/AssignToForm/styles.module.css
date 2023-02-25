@@ -58,3 +58,19 @@
 	font-weight: 600;
 	color: #d22b2b;
 }
+
+.error_class {
+	:global {
+		.ui_select_display_container {
+			border: 1px solid  #d22b2b;
+		}
+
+		.ui_select_display_container:hover {
+			border: 1px solid  #d22b2b !important;
+		}
+
+		.ui_select_display_container:focus-within {
+			box-shadow: 1px solid  #d22b2b !important;
+		}
+	}
+}

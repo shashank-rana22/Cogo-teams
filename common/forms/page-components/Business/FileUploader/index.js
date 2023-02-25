@@ -17,8 +17,8 @@ function FileUploader(props) {
 		handleProgress,
 		...rest
 	} = props;
-	const [fileName, setFileName] = useState(null); // remove
-	const [loading, setLoading] = useState(false); // remove
+	const [fileName, setFileName] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
 

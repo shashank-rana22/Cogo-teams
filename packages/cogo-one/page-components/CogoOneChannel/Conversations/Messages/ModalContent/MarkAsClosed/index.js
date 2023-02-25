@@ -3,6 +3,8 @@ import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { DEFAULT_PILLS_ITEMS } from '../../../../../../constants';
+
 import styles from './styles.module.css';
 
 function MarkAsClosed({ data = {}, loading = false }) {
@@ -10,28 +12,6 @@ function MarkAsClosed({ data = {}, loading = false }) {
 	const [selectPill, setSelectPill] = useState('');
 	const [inputValue, setInputValue] = useState('');
 
-	const DEFAULT_PILLS_ITEMS = [
-		{
-			label : 'Introductory',
-			value : 'introductory',
-		},
-		{
-			label : 'Sales',
-			value : 'sales',
-		},
-		{
-			label : 'Rate enquiry',
-			value : 'rate_enquiry',
-		},
-		{
-			label : 'Payment recovery',
-			value : 'payment_recovery',
-		},
-		{
-			label : 'Other',
-			value : 'other',
-		},
-	];
 	const handleSelect = (val) => {
 		setSelectPill((prev) => {
 			if (prev !== val) {

@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function MessageBody({ response = {}, message_type = 'text' }) {
 	const { message = '', media_url = '' } = response;
 	const URLRegex = new RegExp(URL_MATCH_REGEX);
-
+	const fileExtension = media_url.split('.').pop();
 	const renderText = (txt = '') => (
 		(txt.split(' ') || [])
 			.map((part) => (URLRegex.test(part) ? (
@@ -38,12 +38,31 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						);
 					}}
 				>
-					<object
-						data={media_url}
-						aria-label={message_type}
-						className={styles.object_styles}
-					/>
+					{message_type === 'image' && (
+						<img
+							src={media_url}
+							alt={message_type}
+							className={styles.object_styles}
+						/>
+					)}
+					{message_type === 'audio' && (
+						<audio
+							controls
+							className={styles.object_styles}
+						>
+							<source src={media_url} type={`audio/${fileExtension}`} />
+						</audio>
+					)}
+					{message_type === 'video' && (
+						<video
+							controls
+							className={styles.object_styles}
+						>
+							<source src={media_url} type={`video/${fileExtension}`} />
+						</video>
+					)}
 				</div>
+
 				<ShowMessage />
 			</>
 		);
@@ -58,9 +77,10 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 	}
 	if (message_type === 'contacts') {
 		const { name:{ formatted_name = '' } = {}, phones = [] } = JSON.parse(message || '') || {};
+
 		return (
 			<div className={styles.contact_card}>
-				<IcMUserAllocations height="30px" width="30px" fill="#7278AD" style={{ marginRight: '10px' }} />
+				<IcMUserAllocations height="30px" width="30px" fill="#7278AD" className={styles.user_allocation} />
 				<div>
 					<div className={styles.contact_name}>
 						{formatted_name}

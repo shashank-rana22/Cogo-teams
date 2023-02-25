@@ -9,7 +9,8 @@ function PreviousReminder({ listData = {}, listLoading }) {
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty}>
-				No Data Found...
+				<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/reminder-empty.svg" alt="" />
+				<div className={styles.text}>No Data Found</div>
 			</div>
 		);
 	}

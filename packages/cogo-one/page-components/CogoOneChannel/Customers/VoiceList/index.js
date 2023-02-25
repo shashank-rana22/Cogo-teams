@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import { IcMCall } from '@cogoport/icons-react';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 
@@ -93,10 +93,13 @@ function VoiceList({
 										alt=""
 									/>
 									<div className={styles.user_details}>
-										<div className={styles.user_name}>
-											{showUserData}
-											{isEmpty(user_number) && '-'}
-										</div>
+										<Tooltip content={showUserData} placement="top">
+											<div className={styles.user_name}>
+												{showUserData}
+												{isEmpty(user_number) && '-'}
+											</div>
+										</Tooltip>
+
 										<div className={styles.organisation}>
 
 											{isEmpty(organization_data) ? '-' : (

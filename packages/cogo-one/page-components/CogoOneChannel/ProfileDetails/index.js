@@ -7,7 +7,7 @@ import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 import RightSideNav from './RightSideNav';
 import styles from './styles.module.css';
 
-function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateLeaduser }) {
+function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateLeaduser, activeCardId }) {
 	const customerId = activeTab === 'message'
 		? activeMessageCard?.id
 		: activeVoiceCard?.id;
@@ -17,7 +17,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateL
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
 	const orgId = activeTab === 'message' ? formattedMessageData?.organization_id : activeVoiceCard?.organization_id;
 
-	const { openNewTab, loading, ORG_PAGE_URL = '' } = useListOrganizations({ orgId });
+	const { openNewTab, loading, ORG_PAGE_URL = '' } = useListOrganizations({ orgId, activeCardId, activeTab });
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>

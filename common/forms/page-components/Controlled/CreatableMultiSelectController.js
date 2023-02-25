@@ -1,7 +1,7 @@
-import { Textarea } from '@cogoport/components';
+import { CreatableMultiSelect } from '@cogoport/components';
 import { Controller } from 'react-hook-form';
 
-function TextAreaController(props) {
+function CreatableMultiSelectController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -12,7 +12,7 @@ function TextAreaController(props) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<Textarea
+				<CreatableMultiSelect
 					{...rest}
 					name={name}
 					onChange={onChange}
@@ -24,4 +24,4 @@ function TextAreaController(props) {
 	);
 }
 
-export default TextAreaController;
+export default CreatableMultiSelectController;
