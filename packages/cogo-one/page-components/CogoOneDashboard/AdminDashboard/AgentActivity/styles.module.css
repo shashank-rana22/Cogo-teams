@@ -54,11 +54,31 @@
 }
 
 .agents_nos {
+	position: relative;
+	display: inline-block;
 	padding-top: 11px;
 	padding-left: 5px;
 	font-size: 18px;
 	font-weight: 500;
 	color: #221f20;
+}
+
+.agents_nos::after {
+	position: absolute;
+	bottom: -2px;
+	left: 3px;
+	width: 90%;
+	height: 1px;
+	content: "";
+	background-color: #000;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+}
+
+.agents_nos:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .agents_status_text {

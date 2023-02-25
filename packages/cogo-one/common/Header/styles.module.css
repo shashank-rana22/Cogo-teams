@@ -36,10 +36,23 @@
 }
 
 .heading .heading_name {
-	padding-left: 5px;
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 150%;
 	color: #221f20;
+	background: #111 -webkit-linear-gradient(left, #111, #ff2431) no-repeat 0 0 / 40px;
+	background-clip: text;
+	-webkit-text-fill-color: rgb(0 0 0 / 20%);
+	animation: sweep 2.5s ease-in infinite;
+
+	@keyframes sweep {
+		0% {
+			background-position: 0 0;
+		}
+
+		100% {
+			background-position: 100% 100%;
+		}
+	}
 }
