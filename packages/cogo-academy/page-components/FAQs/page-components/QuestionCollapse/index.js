@@ -22,7 +22,7 @@ function QuestionsCollapse({ collapse, questions }) {
 				/>
 			</div>
 
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
 				{/* <Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill> */}
 				<Pill
 					prefix={<IcMArrowRotateRight />}

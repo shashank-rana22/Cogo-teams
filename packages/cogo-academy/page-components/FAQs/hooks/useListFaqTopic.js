@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 function useListFaqTopic() {
-	const [activeTab, setActiveTab] = useState('');
+	const [activeTab, setActiveTab] = useState('All Topics');
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
