@@ -6,13 +6,15 @@
 
 .container {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	align-items:center;
 	max-height: 70px;
 	padding: 15px;
 	margin: 6px 2px;
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+
 }
 
 .contacts_container {
@@ -26,13 +28,19 @@
 .icon_type {
 	display: flex;
 	align-items: center;
-	padding-top: 4px;
+	justify-content:center;
+	height:100%;
 }
 
 .details {
 	display: flex;
+	flex-direction:column;
 	align-items: center;
 	width: 100%;
+	height:100%;
+	margin-left:10px;
+
+
 }
 
 .header {
@@ -55,10 +63,10 @@
 }
 
 .organization {
-	padding-left: 30px;
-	margin-bottom: 8px;
+
 	font-size: 10px;
 	color: #828282;
+	width:100%;
 }
 
 .message {
