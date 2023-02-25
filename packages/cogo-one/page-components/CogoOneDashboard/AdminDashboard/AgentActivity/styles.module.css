@@ -74,7 +74,7 @@
 .main_container_lowerpart {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: 2px;
+	margin-top: 5px;
 	overflow-y: scroll;
 	background: #fbf7f1;
 }

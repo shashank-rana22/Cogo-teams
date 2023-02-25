@@ -6,3 +6,11 @@
 .left_loader {
 	display: flex;
 }
+
+.picture_placeholder {
+	border-radius: 100%;
+}
+
+.performance_placeholder {
+	border-radius: 4px;
+}

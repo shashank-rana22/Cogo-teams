@@ -1,5 +1,6 @@
-import { Placeholder } from '@cogoport/components';
 import React from 'react';
+
+import LoaderIntelligence from '../LoaderIntelligence';
 
 import styles from './styles.module.css';
 
@@ -19,10 +20,15 @@ function Intelligence({ loading = false }) {
 				{
 				apiData.map((item) => (
 					<div className={styles.improvement_text_box}>
-						<div><div className={styles.dot} /></div>
+
 						{loading
-							? <Placeholder height="40px" width="320px" />
-							: <div className={styles.improvement_text}>{[item]}</div>}
+							? <LoaderIntelligence />
+							: (
+								<>
+									<div className={styles.dot} />
+									<div className={styles.improvement_text}>{[item]}</div>
+								</>
+							)}
 
 					</div>
 				))

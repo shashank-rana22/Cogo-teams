@@ -19,7 +19,7 @@ function ChatStatistics({ isAdminView, loading = false }) {
 							<div className={styles.text}>{label}</div>
 
 							{loading
-								? <Placeholder height="15px" width="123px" />
+								? <Placeholder height="40px" width="123px" className={styles.placeholder} />
 								: (
 									<div className={styles.small_data_box}>
 										<div className={styles.numbers}>{number}</div>
