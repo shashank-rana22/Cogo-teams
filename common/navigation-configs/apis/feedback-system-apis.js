@@ -1,6 +1,6 @@
 const feedback_system = [
 	{
-		api          : 'get_user',
+		api          : 'get_user_info',
 		access_type  : 'private',
 		service_name : 'user_feedback',
 	},

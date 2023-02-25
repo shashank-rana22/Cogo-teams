@@ -1,18 +1,19 @@
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const months = ['January', 'February', 'March', 'April',
 	'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const useManagerListItem = ({ item }) => {
+const useManagerListItem = ({ item, searchValue = '', pageParams = {} }) => {
 	const d = new Date();
+	const { Month, Year } = pageParams;
 
 	const [params, setParams] = useState({
 		ManagerID : item.manager_id || undefined,
 		Page      : 1,
 		PageLimit : 10,
-		Month     : months[d.getMonth()],
-		Year      : d.getFullYear(),
+		Month     : Month || months[d.getMonth() - 1],
+		Year      : Year || d.getFullYear(),
 	});
 
 	const [{ data = {}, loading = false }] = useRequest({
@@ -22,6 +23,8 @@ const useManagerListItem = ({ item }) => {
 	}, { manual: false });
 
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
+
+	useEffect(() => setParams({ ...params, Q: searchValue || undefined }), [searchValue]);
 
 	return { data, loading, setParams, params, setPage };
 };

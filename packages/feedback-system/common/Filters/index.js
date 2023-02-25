@@ -1,7 +1,7 @@
-import { Select } from '@cogoport/components';
-import { SelectController, useForm } from '@cogoport/forms';
+import { Input, Select } from '@cogoport/components';
+import { useDebounceQuery, InputController, SelectController, useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import getDepartmentControls from '../../hooks/useGetDepartmentControls';
 import useGetControls from '../../utils/filterControls';
@@ -11,14 +11,16 @@ import styles from './styles.module.css';
 
 function Filters({ params = {}, setParams = () => {} }) {
 	const { Department = '', Designation = '' } = params;
+	const [managerName, setManagerName] = useState('');
+
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
 
-	const managerControls = useGetControls({ name: 'manager_id' });
+	const managerControls = useGetControls({ name: 'manager_name' });
 	const monthControls = getMonthControls(params.Year, params.Month);
 
 	const { watch, control } = useForm();
-	const manager = watch('manager_id');
 	const department = watch('department');
 	const designation = watch('designation');
 
@@ -29,13 +31,15 @@ function Filters({ params = {}, setParams = () => {} }) {
 	useEffect(() => {
 		setParams({
 			...params,
-			ManagerID   : manager || undefined,
+			Q           : query || undefined,
 			Department  : department || undefined,
 			Designation : designation || undefined,
 			Page        : 1,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [manager, department, designation]);
+	}, [query, department, designation]);
+
+	useEffect(() => debounceQuery(managerName), [managerName]);
 
 	return (
 
@@ -49,9 +53,9 @@ function Filters({ params = {}, setParams = () => {} }) {
 				/>
 			))}
 
-			<SelectController
+			<Input
 				{...managerControls}
-				control={control}
+				onChange={setManagerName}
 				style={{ marginRight: '8px' }}
 			/>
 

@@ -4,6 +4,7 @@ import UploadController from '@cogoport/forms/page-components/Controlled/UploadC
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -12,14 +13,14 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	const [files, setFiles] = useState({});
 
 	const [{ loading : uploadLoading = false }, trigger] = useRequest({
-		url    : 'approve-ratings',
+		url    : 'approve_ratings',
 		method : 'post',
 	}, { manual: true });
 
 	const { control, watch, formState:{ errors } } = useForm();
 
 	const onboardingCsvFile = watch('onboarding_url');
-	const normalizationCsvFile = watch('onboarding_url');
+	const normalizationCsvFile = watch('normalization_url');
 
 	useEffect(() => setFiles({
 		onboardingCSV    : onboardingCsvFile || undefined,
@@ -34,7 +35,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 			setFiles({});
 			setOpenUploadModal(false);
 		} catch (e) {
-			Toast.error(getApiErrorString(e.data));
+			Toast.error(e);
 		}
 	};
 
@@ -111,7 +112,13 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 			</div>
 
 			<div className={styles.submit}>
-				<Button onClick={() => uploadCSVs()} loading={uploadLoading}>Upload</Button>
+				<Button
+					onClick={() => uploadCSVs()}
+					loading={uploadLoading}
+					disabled={isEmpty(files?.normalizationCSV)}
+				>
+					Upload
+				</Button>
 			</div>
 		</div>
 	);

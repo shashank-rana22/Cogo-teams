@@ -11,14 +11,14 @@ import useDownloadCsvFeedbacks from '../../../../hooks/useDownloadCsvFeedbacks';
 import styles from './styles.module.css';
 import useManagerListItem from './useManagerListItem';
 
-function ListItem({ item }) {
+function ListItem({ item, params: pageParams = {} }) {
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
 		data: { list = [], pagination_data = {} } = {},
-		loading, params, setParams, setPage,
-	} = useManagerListItem({ item });
+		loading, params, setPage,
+	} = useManagerListItem({ item, searchValue: query, pageParams });
 
 	const { total_count = '' } = pagination_data;
 
@@ -30,9 +30,6 @@ function ListItem({ item }) {
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => debounceQuery(searchValue), [searchValue]);
-
-	useEffect(() => setParams({ ...params, Q: query || undefined }));
-
 	return (
 		<div className={styles.overall_baselist}>
 			<div className={styles.list_header}>

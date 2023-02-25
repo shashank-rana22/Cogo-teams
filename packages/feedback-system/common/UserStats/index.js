@@ -37,6 +37,7 @@ function UserStats({ source = '' }) {
 		setPage,
 	} = useListUserFeedbacks({
 		userId,
+		rating_required: 'yes',
 	});
 
 	const { list = [], pagination_data = {} } = feedbackData;

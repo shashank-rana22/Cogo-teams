@@ -26,7 +26,6 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 			defaultOptions : true,
 			isClearable    : !selectedMonth,
 			placeholder    : 'Year',
-			value          : `${year}`,
 			options        : [
 				{ label: `${year}`, value: year },
 				{ label: `${year - 1}`, value: year - 1 },

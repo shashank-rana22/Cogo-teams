@@ -99,6 +99,7 @@ function QuestionsItem({
 							onChange={(val) => setQuestionWeightage(val)}
 							type="number"
 							placeholder="Set Weightage.."
+							min={0}
 						/>
 					</div>
 					<div className={styles.icon_container} style={{ width: '10%' }}>

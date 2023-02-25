@@ -1,27 +1,26 @@
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+// import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 
 const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 
-	const partnerOptions = useGetAsyncOptions({
-		endpoint    : 'list_partner_users',
-		initialCall : false,
-		params      : {
-			filters: {
-			},
-		},
-		valueKey : 'user_id',
-		labelKey : 'name',
-	});
+	// const partnerOptions = useGetAsyncOptions({
+	// 	endpoint    : 'list_partner_users',
+	// 	initialCall : false,
+	// 	params      : {
+	// 		filters: {
+	// 		},
+	// 	},
+	// 	valueKey : 'user_id',
+	// 	labelKey : 'name',
+	// });
 
 	const control = [
 		{
-			...partnerOptions,
 			label          : 'Manager Name',
-			name           : 'manager_id',
-			placeholder    : 'Manager',
-			type           : 'select',
+			name           : 'manager_name',
+			placeholder    : 'Search Manager...',
+			type           : 'input',
 			defaultOptions : true,
 			isClearable    : true,
 			span           : 5.5,

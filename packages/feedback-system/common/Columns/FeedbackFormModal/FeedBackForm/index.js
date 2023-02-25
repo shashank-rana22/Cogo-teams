@@ -104,7 +104,7 @@ function FeedBackForm({
 			</div>
 
 			{(questionsToShow || []).map((key) => {
-				const { id, question, rating: pastRating, description = '', feedback = '' } = key || {};
+				const { id, question, rating: pastRating = '', description = '', feedback = '' } = key || {};
 
 				return (
 					<div
@@ -132,7 +132,7 @@ function FeedBackForm({
 							<div className={styles.radio_group}>
 								<RadioGroup
 									options={newOptions}
-									value={pastRating || rating[id]?.rating}
+									value={pastRating.toString() || rating[id]?.rating}
 									onChange={(val) => {
 										if (action !== 'show') {
 											setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });

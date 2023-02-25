@@ -70,6 +70,7 @@ function SubmitForm({
 					themeType="primary"
 					onClick={() => createForm()}
 					loading={createFormLoading}
+					disabled={false}
 				>
 					Submit
 				</Button>

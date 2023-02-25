@@ -10,13 +10,14 @@ import styles from './styles.module.css';
 
 function TeamMembersList({
 	list = [],
-	pagination,
-	page_limit,
+	params = {},
 	setPagination,
 	total_count,
 	loading = false,
 }) {
 	const router = useRouter();
+
+	const { PageLimit: page_limit = '', Page: pagination } = params;
 
 	if (isEmpty(list) && !loading) {
 		return (
@@ -83,8 +84,8 @@ function TeamMembersList({
 		<div className={styles.table_container}>
 
 			{!loading && list.map((item) => (
-				<Accordion id={item.cogo_id} title={titleSection(item)}>
-					<ListItem item={item} id={item.cogo_id} />
+				<Accordion key={item.cogo_id} title={titleSection(item)}>
+					<ListItem item={item} params={params} />
 				</Accordion>
 			))}
 

@@ -71,7 +71,7 @@ function FeedbackFormModal({
 			<div className={styles.add_button}>
 				{action === 'show' ? (
 					<Button
-						size="sm"
+						size="md"
 						themeType="link"
 						onClick={() => setAddFeedback(true)}
 					>
