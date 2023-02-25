@@ -2,14 +2,12 @@ import { Input, Modal, Button, Pagination } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import useListFaqQuestions from '../../hooks/useListFaqQuestion';
-import Questions from '../Questions';
-import useCreateQuestionSet from '../QuestionsList/hooks/useCreateQuestionRequest';
-import SearchInput from '../SearchInput';
+import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
+import Questions from '../../Questions';
 
 import styles from './styles.module.css';
 
-function SearchFound({ searchState = '' }) {
+function TagQuestions({ tagId = '' }) {
 	// const [show, setShow] = useState(false);
 	// const [searchState, setSearchState] = useState('');
 	const {
@@ -22,7 +20,7 @@ function SearchFound({ searchState = '' }) {
 		activeTab,
 		setActiveTab,
 		topicId,
-	} = useListFaqQuestions({ searchState });
+	} = useListFaqQuestions({ tagId });
 
 	// useEffect(() => {
 	// 	refetchQuestions();
@@ -47,4 +45,4 @@ function SearchFound({ searchState = '' }) {
 	);
 }
 
-export default SearchFound;
+export default TagQuestions;

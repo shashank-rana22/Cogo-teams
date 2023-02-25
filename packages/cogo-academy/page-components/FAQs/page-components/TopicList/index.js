@@ -1,15 +1,18 @@
+/* eslint-disable no-nested-ternary */
 import { Tabs, TabPanel } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
 import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
 import useListFaqTopic from '../../hooks/useListFaqTopic';
+// eslint-disable-next-line import/no-cycle
+import TagQuestions from '../PopularTags/TagQuestions';
 import QuestionsList from '../QuestionsList';
 import SearchFound from '../SearchFound';
 
 import styles from './styles.module.css';
 
-function TopicList({ tabTitle, searchState = '' }) {
+function TopicList({ tabTitle = '', searchState = '', tagId = '' }) {
 	const ALL_TOPICS = 'All Topics';
 
 	const {
@@ -24,10 +27,10 @@ function TopicList({ tabTitle, searchState = '' }) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
 	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 32)}...` : input);
-
 	return (
 		<div>
-			{!searchState
+			{' '}
+			{(!searchState && !tagId)
 				? (
 					<div className={styles.grid_container} style={{ display: 'flex' }}>
 						<div
@@ -92,14 +95,15 @@ function TopicList({ tabTitle, searchState = '' }) {
 									<QuestionsList
 										tabTitle={tabTitle}
 										searchState={searchState}
-										// topicId={}
 									/>
 								)}
 
 						</div>
 					</div>
-				) : <SearchFound searchState={searchState} />}
+				) : ((searchState)
+					? (<SearchFound searchState={searchState} />) : (<TagQuestions tagId={tagId} />))}
 		</div>
+
 	);
 }
 

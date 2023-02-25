@@ -9,7 +9,7 @@ import Questions from '../Questions';
 
 import styles from './styles.module.css';
 
-function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
+function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' }) {
 	const {
 		refetchQuestions = () => {},
 		page,
@@ -20,8 +20,8 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 		setActiveTab,
 		paginationData,
 	// eslint-disable-next-line react-hooks/rules-of-hooks
-	} = useListFaqQuestions({ topicId });
-
+	} = useListFaqQuestions({ topicId, tagId });
+	console.log(tagId);
 	if (loading) {
 		return (
 			<div className={styles.spinner}>
@@ -45,7 +45,7 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '' }) {
 			<h1 className={styles.title}>
 				{startCase(tabTitle)}
 			</h1>
-			<div style={{ margin: '5px 0', width: '100%', height: '462px' }} className={styles.scrollable}>
+			<div style={{ margin: '5px 0', width: '100%', height: '487px' }} className={styles.scrollable}>
 
 				{(data?.list || []).map((question) => (
 					<div className={styles.border}>

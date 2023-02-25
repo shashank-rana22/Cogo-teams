@@ -1,9 +1,12 @@
 .border {
   border-bottom: 0.1px solid #7e7a7a;
   margin-left: 40px;
+  transition: 0.35s;
+
 
   &:hover {
-    box-shadow: 2px 2px 4px #848282;
+    box-shadow: 0 0 11px rgba(33, 32, 32, 0.5); 
+   
   }
 }
 
@@ -13,6 +16,7 @@
   margin-left: 40px;
   font-size: 16px;
 
+ 
   @media (min-width: 768px) {
     font-size: 1.05rem;
   }
@@ -26,6 +30,7 @@
 .heading_container {
   display: flex;
   align-items: center;
+
 
   @media (max-width: 768px) {
     flex-flow: column wrap;
