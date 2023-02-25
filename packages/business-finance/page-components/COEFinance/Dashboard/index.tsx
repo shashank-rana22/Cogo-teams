@@ -1,10 +1,14 @@
-import { Button, Modal } from '@cogoport/components';
+import { Tooltip, Button, Modal } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import Filter from '../../commons/Filters';
+import StyledTable from '../../commons/StyledTable';
+import MyResponsivePie from '../Components/PieChart';
 import MyResponsiveBar from '../Components/ResponsiveBar';
 import data from '../Components/ResponsiveBar/data';
 
+import { columns } from './constants';
 import { filterControls, reportControls } from './controls';
 import styles from './styles.module.css';
 
@@ -30,6 +34,7 @@ function Dashboard() {
 					</div>
 				))}
 			</div>
+
 			<div className={styles.filter_flex}>
 				<Filter
 					controls={filterControls}
@@ -42,9 +47,9 @@ function Dashboard() {
 					onClick={() => { setReportModal(true); }}
 				>
 					Request Report
-
 				</div>
 			</div>
+
 			{reportModal && (
 				<Modal
 					size="md"
@@ -75,16 +80,47 @@ function Dashboard() {
 				</Modal>
 			) }
 
-			<div
-				style={{
-					height       : 368,
-					minWidth     : '35%',
-					background   : '#ffffff',
-					borderRadius : '8px',
-					margin       : '16px',
-				}}
-			>
+			<div className={styles.responsive}>
 				<MyResponsiveBar data={data} />
+			</div>
+
+			<div className={styles.space_between}>
+				<div className={styles.service_stats}>
+					<div className={styles.invoice}>
+						Service Ops 2 Statistics
+						<Tooltip content="Percentage of Invoices approved" placement="top">
+							<div className={styles.icon}>
+								<IcMInfo />
+							</div>
+						</Tooltip>
+					</div>
+
+					<div className={styles.border_main} />
+
+					<div>
+						<StyledTable
+							data={[{}]}
+							columns={columns}
+						/>
+					</div>
+
+				</div>
+				<div className={styles.responsive_pie}>
+					<MyResponsivePie />
+				</div>
+			</div>
+			<div className={styles.stats}>
+				<div className={styles.invoice}>
+					Job Statistics & Profitability
+					<Tooltip content="No. of Jobs/Shipment IDs and it’s profitability" placement="top">
+						<div className={styles.icon}>
+							<IcMInfo />
+						</div>
+					</Tooltip>
+				</div>
+
+				<div className={styles.border_main} />
+
 			</div>
 
 		</>

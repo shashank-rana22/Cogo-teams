@@ -1,6 +1,9 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
+import { Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
+import styles from './styles.module.css';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -9,12 +12,23 @@ import React from 'react';
 function MyResponsiveBar({ data }) {
 	return (
 		<>
-			<div>lkfnkl</div>
+			<div className={styles.invoice}>
+				Daily Invoices Trend
+				<Tooltip content="Daily approval and rejection statistics " placement="top">
+					<div className={styles.icon}>
+						<IcMInfo />
+					</div>
+				</Tooltip>
+			</div>
+
+			<div className={styles.border} />
+
 			<ResponsiveBar
 				data={data}
+				height={370}
 				keys={['Approved', 'Rejected']}
 				indexBy="day"
-				margin={{ top: 40, right: 30, bottom: 50, left: 60 }}
+				margin={{ top: 100, right: 30, bottom: 50, left: 60 }}
 				padding={0.62}
 				enableGridY
 				valueScale={{ type: 'linear' }}
@@ -56,20 +70,6 @@ function MyResponsiveBar({ data }) {
 						],
 					],
 				}}
-				fill={[
-					{
-						match: {
-							id: 'fries',
-						},
-						id: 'dots',
-					},
-					{
-						match: {
-							id: 'sandwich',
-						},
-						id: 'lines',
-					},
-				]}
 				legends={[
 					{
 						dataFrom      : 'keys',

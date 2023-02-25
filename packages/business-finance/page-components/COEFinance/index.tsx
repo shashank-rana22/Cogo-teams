@@ -47,7 +47,7 @@ function CoeFinance() {
 			<div className={styles.header}>
 				<div className={styles.header_style}>
 					COE Finance
-					<div className={styles.border} />
+
 				</div>
 			</div>
 			<div className={styles.tabs_container}>
