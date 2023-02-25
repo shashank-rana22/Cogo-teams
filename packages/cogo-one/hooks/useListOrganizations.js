@@ -38,6 +38,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	const isChannelPartner = tags?.includes('partner') || false;
 	const ORGID = orgId || PARAMOUNT_ORG_ID;
 	let ORG_PAGE_URL = '';
+
 	const openNewTab = (activeTab) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 		const linkSuffix = activeConversationTab === 'message'
@@ -60,7 +61,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	};
 
 	return {
-		openNewTab, loading, ORG_PAGE_URL,
+		openNewTab, loading,
 	};
 };
 export default useListOrganizations;

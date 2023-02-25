@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -26,7 +27,7 @@ function useCreateOmniNote({ editNote, fetchListNotes, activeMessageCard, active
 			fetchListNotes();
 			Toast.success('Successfully Created');
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

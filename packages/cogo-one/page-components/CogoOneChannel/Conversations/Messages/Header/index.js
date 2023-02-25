@@ -40,7 +40,8 @@ function Header({
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
-		return mobile_no ? HideDetails({ data: mobile_no, type: 'number' }) : business_name;
+		const mobileNo = HideDetails({ data: mobile_no, type: 'number' });
+		return mobile_no ? `+${mobileNo}` : business_name;
 	};
 	return (
 		<div className={styles.container}>

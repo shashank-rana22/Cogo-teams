@@ -42,8 +42,8 @@ const useSendMessage = ({ channel_type = '', sender = null }) => {
 					sender,
 				},
 			});
-		} catch (err) {
-			Toast.error(getApiErrorString(err));
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {
