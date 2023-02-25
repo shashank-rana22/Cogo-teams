@@ -8,11 +8,15 @@ const useGetOrganizationCogopoints = ({ organizationId = '' }) => {
 	}, { manual: true });
 
 	const fetchOrganizationCogopoint = async () => {
-		await trigger({
-			params: {
-				organization_id: organizationId,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					organization_id: organizationId,
+				},
+			});
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	useEffect(() => {

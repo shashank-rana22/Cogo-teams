@@ -3,7 +3,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function DetailViewer({ formComponent, listComponent, AddNote }) {
-	console.log('hideAddNote:', AddNote, (AddNote ? { checked: true } : {}));
 	return (
 		<div
 			className={styles.animated_container}

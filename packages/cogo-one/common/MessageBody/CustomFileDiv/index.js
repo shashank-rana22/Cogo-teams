@@ -1,3 +1,5 @@
+import { IcMDocument } from '@cogoport/icons-react';
+
 import styles from './styles.module.css';
 
 function CustomFileDiv({ mediaUrl = '' }) {
@@ -20,12 +22,8 @@ function CustomFileDiv({ mediaUrl = '' }) {
 				);
 			}}
 		>
-			<img
-				alt="logo"
-                // eslint-disable-next-line max-len
-				src="https://cogoport-production.sgp1.digitaloceanspaces.com/e2ae10b0c4ea7320fa4ce75f0ea12b4c/Vector%20%284%29.svg"
-				className={styles.img_styles}
-			/>
+
+			<IcMDocument width={22} height={22} className={styles.img_styles} />
 			<div className={styles.file_name}>{`${fileName}${extension ? `.${extension}` : ''}`}</div>
 		</div>
 	);

@@ -17,13 +17,17 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 		{ manual: true },
 	);
 	const getOrgDetails = async () => {
-		await trigger({
-			params: {
-				filters: {
-					id: orgId,
+		try {
+			await trigger({
+				params: {
+					filters: {
+						id: orgId,
+					},
 				},
-			},
-		});
+			});
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 	useEffect(() => {
 		if (orgId) {

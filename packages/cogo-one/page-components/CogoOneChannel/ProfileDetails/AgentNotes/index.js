@@ -22,18 +22,10 @@ function AgentNotes({
 	const [noteValue, setNoteValue] = useState('');
 	const [editNote, setEditNote] = useState(false);
 	const [active, setActive] = useState(false);
-
 	const [newNote, setNewNote] = useState(false);
 	const [updateId, setUpdateId] = useState();
-	const [showForm, setShowForm] = useState(false);
 
-	useEffect(() => {
-		if (showForm) {
-			setShowForm(false);
-		}
-	}, [customerId]);
-
-	const { noteData, fetchListNotes, listLoading, firstLoading } = useGetListNotes({
+	const { noteData, fetchListNotes, listLoading } = useGetListNotes({
 		active,
 		activeMessageCard,
 		activeTab,
@@ -74,28 +66,13 @@ function AgentNotes({
 			setNoteValue={setNoteValue}
 			setUpdateId={setUpdateId}
 			updateNote={updateNote}
+
 		/>
 	);
 
-	if (isEmpty(list) && !showForm && !listLoading && !firstLoading) {
-		return (
-			<EmptyState
-				type="notes"
-				setShowForm={setShowForm}
-			/>
-		);
-	}
-
 	return (
-		(showForm || customerId)
-		&& (firstLoading ? (
-			<div className={styles.loader_div}>
-				<Loader
-					themeType="primary"
-					className={styles.loader_container}
-				/>
-			</div>
-		) : (
+		customerId
+		&& (
 			<div className={styles.container}>
 				<div className={styles.title}>
 					<div>Notes</div>
@@ -104,7 +81,7 @@ function AgentNotes({
 						themeType="secondary"
 						onClick={() => setNewNote((p) => !p)}
 					>
-						{!newNote ? 'New Note' : 'Discard'}
+						{!newNote ? 'Add Notes' : 'Discard'}
 					</Button>
 				</div>
 				<DetailViewer
@@ -114,7 +91,7 @@ function AgentNotes({
 					setNewNote={setNewNote}
 				/>
 			</div>
-		))
+		)
 	);
 }
 

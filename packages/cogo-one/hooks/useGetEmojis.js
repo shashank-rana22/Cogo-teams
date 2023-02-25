@@ -11,7 +11,11 @@ const useGetEmojiList = () => {
 	}, { manual: true });
 
 	const emojiListFetch = async () => {
-		await trigger();
+		try {
+			await trigger();
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	return {

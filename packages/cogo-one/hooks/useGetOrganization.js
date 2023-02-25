@@ -8,12 +8,16 @@ const useGetOrganization = ({ organizationId = '' }) => {
 	}, { manual: true });
 
 	const fetchOrganization = async () => {
-		await trigger({
-			params: {
-				id                 : organizationId,
-				user_data_required : true,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					id                 : organizationId,
+					user_data_required : true,
+				},
+			});
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	useEffect(() => {
