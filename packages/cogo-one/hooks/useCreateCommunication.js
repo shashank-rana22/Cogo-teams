@@ -12,6 +12,7 @@ function useCreateCommunicationLog({
 	activeMessageCard,
 	activeTab,
 	activeVoiceCard,
+	resetList,
 }) {
 	const {
 		orgId = '',
@@ -60,6 +61,7 @@ function useCreateCommunicationLog({
 			await trigger({
 				data: payload,
 			});
+			resetList();
 			fetchListLogApi();
 			Toast.success('Successfully Saved');
 			setInputValue({

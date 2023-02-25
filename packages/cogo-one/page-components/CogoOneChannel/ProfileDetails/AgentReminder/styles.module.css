@@ -4,7 +4,7 @@
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	overflow-y: scroll;
+	overflow: hidden;
 
 	:global {
 		.react-datepicker-popper {
@@ -12,7 +12,7 @@
 		}
 
 		.react-datepicker__time-container {
-			right: -75px !important;
+			right: -175px !important;
 		}
 	}
 }

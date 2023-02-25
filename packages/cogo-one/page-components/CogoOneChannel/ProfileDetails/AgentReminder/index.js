@@ -28,7 +28,10 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		fetchListLogApi = () => {},
 		listLoading,
 		firstLoading,
+		handleScroll,
+		resetList,
 	} = useGetListCommunicationLog({ organizationId, userId });
+
 	const { createLogApi, loading } = useCreateCommunicationLog({
 		setInputValue,
 		setDate,
@@ -36,6 +39,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 		activeMessageCard,
 		activeTab,
 		activeVoiceCard,
+		resetList,
 	});
 
 	const { list = [] } = listData || {};
@@ -143,7 +147,7 @@ function AgentReminder({ activeMessageCard, activeTab, activeVoiceCard, formatte
 								</Button>
 							</div>
 						</div>
-						<PreviousReminder listData={listData} listLoading={listLoading} />
+						<PreviousReminder listData={listData} listLoading={listLoading} handleScroll={handleScroll} />
 					</div>
 				</div>
 			)
