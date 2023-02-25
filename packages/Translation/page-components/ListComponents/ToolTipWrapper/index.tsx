@@ -18,7 +18,7 @@ function ToolTipWrapper({ text }: { text: string }) {
 					.....
 				</div>
 			</Tooltip>
-		) : <>text</>
+		) : <div>{text}</div>
 	);
 }
 

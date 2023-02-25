@@ -1,3 +1,4 @@
+import { FormProvider } from '@cogoport/forms';
 import React from 'react';
 
 import { ControlItem, FormProps } from '../../../common/interfaces';
@@ -16,10 +17,11 @@ function CreateRequest({
 }: Props) {
 	return (
 		<section className={styles.section} id="rnp_role_list_create_role_container">
-			<Form
-				controls={controls}
-				formProps={formProps}
-			/>
+			<FormProvider {...formProps}>
+				<Form
+					controls={controls}
+				/>
+			</FormProvider>
 		</section>
 	);
 }

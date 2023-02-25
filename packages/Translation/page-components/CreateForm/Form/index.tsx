@@ -1,17 +1,17 @@
+import { useFormContext } from '@cogoport/forms';
 import React from 'react';
 
-import { ControlItem, FormProps } from '../../../common/interfaces';
+import { ControlItem } from '../../../common/interfaces';
 import { getElementController } from '../../../utils/typeMappings';
 
 import styles from './styles.module.css';
 
 interface Props {
 	controls: ControlItem[];
-	formProps: FormProps;
 }
 
-function Form({ controls = [], formProps }: Props) {
-	const { control, formState: { errors } } = formProps || {};
+function Form({ controls = [] }: Props) {
+	const { formState: { errors } } = useFormContext() || {};
 	return (
 		<section className={styles.flex}>
 			{controls.map((controlItem: ControlItem) => {
@@ -27,7 +27,6 @@ function Form({ controls = [], formProps }: Props) {
 									<Element
 										{...el}
 										key={el.name}
-										control={control}
 										id={`${el.name}_input`}
 									/>
 									<div className={styles.error_message}>
