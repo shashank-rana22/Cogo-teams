@@ -1,7 +1,8 @@
 import { Button } from '@cogoport/components';
 import { saveAs } from 'file-saver';
+import * as htmlToImage from 'html-to-image';
 import React, { createRef, useState } from 'react';
-import { useScreenshot } from 'use-react-screenshot';
+// import { useScreenshot } from 'use-react-screenshot';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -60,7 +61,7 @@ function GenerateMawb({
 		'ORIGINAL 1 (FOR ISSUING CARRIER)',
 	];
 
-	const [, takeScreenShot] = useScreenshot();
+	// const [, takeScreenShot] = useScreenshot();
 
 	const serialId = taskItem?.serialId || '';
 
@@ -82,8 +83,15 @@ function GenerateMawb({
 		}
 	};
 
+	const takeScreenShot = async (node) => {
+		const dataURI = await htmlToImage.toJpeg(node);
+		return dataURI;
+	};
+
+	const downloadScreenshot = () => takeScreenShot(document.getElementById('mawb'));
+
 	const handleSave = async () => {
-		const newImage = await takeScreenShot(document.getElementById('mawb'));
+		const newImage = await downloadScreenshot();
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('mawb.pdf', file);
 		const payload = {
@@ -189,10 +197,11 @@ function GenerateMawb({
 				id="mawb"
 				ref={ref}
 				style={{
-					flex    : '1',
-					width   : '100%',
-					padding : '40px 12px',
-					opacity : 1,
+					flex       : '1',
+					width      : '100%',
+					padding    : '40px 12px',
+					opacity    : 1,
+					background : '#fff',
 				}}
 			>
 				{!viewDoc && <Watermark text="draft" rotateAngle="315deg" />}
