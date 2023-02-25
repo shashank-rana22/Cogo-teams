@@ -1,93 +1,3 @@
-/* stylelint-disable selector-class-pattern */
-
-.main_container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-	background: #f9f5ec;
-}
-
-.date_range_container {
-	width: fit-content;
-	padding: 5px 16px 2px;
-
-	input {
-		height: 38px !important;
-		border: solid 1px #e0e0e0 !important;
-	}
-}
-
-.top_content {
-	display: flex;
-	justify-content: flex-end;
-	background: #f9f5ec;
-
-	:global {
-		.ui_select_display_container {
-			height: 37px !important;
-			border-radius: 6px;
-		}
-
-		.ui_select_options_container {
-			z-index: 1000;
-		}
-
-		.react-datepicker-popper {
-			z-index: 1000;
-		}
-
-		.react-datepicker__input-container {
-			input {
-				font-family: Poppins, sans-serif;
-			}
-		}
-
-		.ui_select_input_placeholder {
-			color: #828282;
-		}
-	}
-}
-
-.select_container {
-	width: 225px;
-	padding: 5px 0 2px 16px;
-}
-
-.vertical_line {
-	height: 18px;
-	margin: 0 8px;
-	border-right: 1px solid #e0e0e0;
-}
-
-.date_container {
-	display: flex;
-	align-items: center;
-}
-
-.date_filter_wrap {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 6px 8px;
-	margin-right: 12px;
-	font-size: 10px;
-	cursor: pointer;
-	background: #fff;
-	border: 1px solid #e0e0e0;
-	border-radius: 6px;
-
-	svg {
-		width: 14px;
-		height: 14px;
-		margin-left: 4px;
-	}
-
-	&:hover {
-		box-shadow: 2px 2px 4px rgb(56 59 68 / 10%);
-	}
-}
-
 .footer_stats {
 	display: flex;
 	flex-direction: row;
@@ -200,6 +110,8 @@
 .com_stat_value {
 	position: relative;
 	display: inline-block;
+
+	/* width:40px; */
 	margin-right: 10px;
 	font-size: 16px;
 	font-weight: 600;
