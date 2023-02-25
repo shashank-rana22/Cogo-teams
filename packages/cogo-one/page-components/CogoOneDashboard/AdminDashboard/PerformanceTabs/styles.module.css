@@ -27,12 +27,18 @@
 	display: flex;
 	align-items: center;
 	padding: 5px;
-	margin-top: 10px;
 	border-bottom: 1px solid #f8f2e7;
+	
+}
+
+.performance_tab_lists::-webkit-scrollbar {
+	display: none;
 }
 
 .picture_name_kam_box {
 	display: flex;
+	align-items: center;
+	margin: 6px 0px;
 }
 
 .picture {

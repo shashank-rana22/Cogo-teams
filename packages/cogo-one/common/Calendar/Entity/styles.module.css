@@ -23,15 +23,18 @@
 }
 
 .dateContainer{
-    /* flex:1; */
     padding: 0 22px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 6px;
     padding: auto;
     padding-top:5px;
     height: 50px;
-
     width:fit-content;
+
+	&:hover {
+		background: #FFFFFF;
+		box-shadow: inset 0 0 2px 2px #455fee;
+	}
 }
 
 .dayH1{

@@ -3,7 +3,6 @@
 	flex-basis: 26%;
 	flex-direction: column;
 
-	/* height: 30%; */
 	height: 350px;
 	padding: 10px;
 	margin-bottom: 12px;
@@ -22,9 +21,10 @@
 .redflags_lists {
 	display: flex;
 	flex-direction: column;
-
-	/* height: 43%; */
 	overflow-y: scroll;
+}
+.redflags_lists::-webkit-scrollbar {
+	display: none;
 }
 
 .escalations_list {
@@ -33,6 +33,9 @@
 	justify-content: space-between;
 	padding: 10px 0;
 	border-bottom: 1px solid #f8f2e7;
+}
+.escalations_lists::-webkit-scrollbar {
+	display: none;
 }
 
 .picture_name_kam_box {
