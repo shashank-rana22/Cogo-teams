@@ -24,7 +24,13 @@ function Statistics({ loading = false }) {
 								<div className={styles.time_durations}>
 									{loading
 										? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
-										: <div className={styles.time_durations_header}>{itm.duration}</div>}
+										: (
+											<div className={styles.time_durations_header}>
+												<span className={styles.time_durations_value}>{itm.duration >= 60 ? (itm.duration / 60).toFixed(2) : itm.duration}</span>
+												{' '}
+												<span>{itm.duration >= 60 ? 'hr' : 'min'}</span>
+											</div>
+										)}
 
 									<div className={styles.time_durations_text}>{itm.text}</div>
 								</div>
@@ -48,7 +54,13 @@ function Statistics({ loading = false }) {
 
 									{loading
 										? <Placeholder height="15px" width="100px" className={styles.customer_nos_placeholder} />
-										: <div className={styles.customer_nos}>{stat.customer_nos}</div>}
+										: (
+											<div className={styles.customer_nos}>
+												<span>{stat.customer_nos}</span>
+												{' '}
+												<span>{stat.static_data}</span>
+											</div>
+										)}
 
 								</div>
 							))

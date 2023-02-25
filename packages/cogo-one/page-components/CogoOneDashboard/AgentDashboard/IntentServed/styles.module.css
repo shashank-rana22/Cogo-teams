@@ -4,8 +4,10 @@
 	width: 52%;
 	height: 280px;
 	padding: 13px;
+	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .heading {
@@ -21,6 +23,29 @@
 	padding: 5px;
 	padding-top: 12px;
 	border-bottom: 1px solid #f8f2e7;
+}
+
+.numbers {
+	position: relative;
+	display: inline-block;
+}
+
+.numbers::after {
+	position: absolute;
+	bottom: 0;
+	left: 1px;
+	width: 22%;
+	height: 1px;
+	content: "";
+	background-color: #000;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+}
+
+.numbers:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .label {

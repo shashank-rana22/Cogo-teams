@@ -16,7 +16,7 @@ function PerformanceTab({ loading = false }) {
 	// eslint-disable-next-line react/jsx-no-useless-fragment
 
 		<div className={styles.main_box}>
-			<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab} className={styles.tab_custom_style}>
+			<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
 				<TabPanel name="best_performance" title="Best Performance" />
 				<TabPanel name="worst_performance" title="Worst Performance" />
 			</Tabs>

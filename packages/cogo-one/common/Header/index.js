@@ -21,7 +21,7 @@ function Header({ timeline, setTimeline }) {
 						alt="-"
 					/>
 				</div>
-				<div className={styles.heading_name}>CogoOne Dashboard</div>
+				<div className={styles.heading_name}>ogoOne Dashboard</div>
 			</div>
 
 			<div className={styles.header_right_section}>
@@ -50,6 +50,7 @@ function Header({ timeline, setTimeline }) {
 					activeTab={timeline}
 					themeType="tertiary"
 					onChange={setTimeline}
+					className={styles.tabs_style}
 				>
 					<TabPanel name="day" title="Day" />
 					<TabPanel name="week" title="Week" />

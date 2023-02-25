@@ -6,8 +6,10 @@
 
 	/* margin-top: 12px; */
 	margin-right: 12px;
+	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .heading {
@@ -39,18 +41,42 @@
 	font-weight: 500;
 	line-height: 20px;
 	color: #221f20;
+	
 }
+
+.time_durations_value {
+	position: relative;
+	display: inline-block;
+}
+.time_durations_value::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	content: "";
+	background-color: #000;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+}
+.time_durations_value:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
 
 .time_durations_text {
 	font-size: 10px;
 	line-height: 20px;
 	color: #828282;
+	
 }
-
 .socoal_icons_and_data_list {
 	display: flex;
 	flex-direction: column;
 	padding: 5px;
+	
 }
 
 .socoal_icons_and_data {
@@ -58,11 +84,24 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 22px;
+	/* color: #000; */
+	
+}
+.socoal_icons_and_data:hover .social_name{
+	color: black;
+	font-size: 16px;
+	transition: 0.4s;
+}
+.socoal_icons_and_data:hover .customer_nos{
+	color: black;
+	font-size: 16px;
+	transition: 0.4s;
 }
 
 .social_icons_and_its_name {
 	display: flex;
 	align-items: center;
+	
 }
 
 .social_name {
@@ -71,6 +110,8 @@
 	font-weight: 400;
 	line-height: 20px;
 	color: #475569;
+	transition: 0.4s;
+	
 }
 
 .customer_nos {
@@ -79,6 +120,8 @@
 	line-height: 20px;
 	color: #828282;
 	text-align: right;
+	transition: 0.4s;
+	
 }
 
 .duration_placeholder {

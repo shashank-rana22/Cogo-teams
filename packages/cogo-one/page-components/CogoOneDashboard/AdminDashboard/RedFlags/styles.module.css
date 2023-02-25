@@ -3,12 +3,13 @@
 	flex-basis: 26%;
 	flex-direction: column;
 
-	/* height: 30%; */
 	height: 350px;
 	padding: 10px;
 	margin-bottom: 12px;
+	cursor: default;
 	background: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .heading {
@@ -20,9 +21,10 @@
 .redflags_lists {
 	display: flex;
 	flex-direction: column;
-
-	/* height: 43%; */
 	overflow-y: scroll;
+}
+.redflags_lists::-webkit-scrollbar {
+	display: none;
 }
 
 .escalations_list {
@@ -31,6 +33,9 @@
 	justify-content: space-between;
 	padding: 10px 0;
 	border-bottom: 1px solid #f8f2e7;
+}
+.escalations_lists::-webkit-scrollbar {
+	display: none;
 }
 
 .picture_name_kam_box {

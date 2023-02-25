@@ -1,0 +1,12 @@
+.loader_box {
+	display: flex;
+}
+
+.dot_placeholder {
+	border-radius: 50%;
+}
+
+.left_loader_pair {
+	display: flex;
+	flex-direction: column;
+}
