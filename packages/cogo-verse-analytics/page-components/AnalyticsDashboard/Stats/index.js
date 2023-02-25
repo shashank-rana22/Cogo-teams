@@ -13,7 +13,7 @@ import PrimaryStats from './PrimaryStats';
 import styles from './styles.module.css';
 
 function Stats(props = {}) {
-	const { userStats = {}, getUserSats } = useGetUsersStats();
+	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
 
 	useEffect(() => {
 		getUserSats();
@@ -38,7 +38,7 @@ function Stats(props = {}) {
 				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics</div>
 			</div>
 
-			<PrimaryStats userStats={userStats} />
+			<PrimaryStats userStats={userStats} firebaseLoading={firebaseLoading} />
 
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>

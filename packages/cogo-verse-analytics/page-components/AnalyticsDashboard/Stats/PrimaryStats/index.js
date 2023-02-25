@@ -11,6 +11,7 @@ function PrimaryStats(props = {}) {
 		statsData = {},
 		statsLoading = false,
 		userStats = {},
+		firebaseLoading = false,
 	} = props || {};
 	return (
 		<div className={styles.primary_stats}>
@@ -80,7 +81,7 @@ function PrimaryStats(props = {}) {
 							CogoVerse AI
 						</div>
 						<div className={styles.right_stat_value}>
-							{!statsLoading
+							{!firebaseLoading
 								? handleValues(userStats?.ai_chats)
 								: (
 									<Placeholder
@@ -97,7 +98,7 @@ function PrimaryStats(props = {}) {
 							Customer Support
 						</div>
 						<div className={styles.right_stat_value}>
-							{!statsLoading ? handleValues(userStats?.kam_chats)
+							{!firebaseLoading ? handleValues(userStats?.kam_chats)
 								: (
 									<Placeholder
 										className={styles.placeholder_element}
