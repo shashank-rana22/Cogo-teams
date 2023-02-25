@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import React from 'react';
 
 import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function ServiceForm({
 	refetchServicesPocs = () => {},
+	showForm,
 	setShowForm = () => {},
 	getVendorData = {},
 }) {
@@ -19,6 +20,8 @@ function ServiceForm({
 		errors = {},
 		handleCancel = () => {},
 		createVendorServicePocLoading = false,
+		watch = () => {},
+		setValue,
 	} = useCreateVendorServicePOC({
 		setShowForm,
 		getVendorData,
@@ -26,37 +29,51 @@ function ServiceForm({
 	});
 
 	return (
-		<div className={styles.container}>
-			<FormLayout
-				fields={controls}
-				errors={errors}
-				control={control}
-			/>
+		<Modal
+			size="lg"
+			show={showForm}
+			onClose={() => setShowForm('')}
+			placement="center"
+		>
+			<Modal.Header title="Add Service" />
+			<Modal.Body>
+				<div className={styles.container}>
+					<FormLayout
+						fields={controls}
+						errors={errors}
+						control={control}
+						watch={watch}
+						setValue={setValue}
+						source="addServicePOC"
+					/>
 
-			<div className={styles.button_container}>
-				<Button
-					size="md"
-					role="presentation"
-					themeType="tertiary"
-					onClick={handleCancel}
-				>
-					Cancel
-				</Button>
-				<Button
-					size="md"
-					role="presentation"
-					themeType="accent"
-					onClick={handleSubmit(onSubmit)}
-					disabled={createVendorServicePocLoading}
-					style={{
-						marginLeft: '8px',
-					}}
-				>
-					Save
-				</Button>
-			</div>
-
-		</div>
+				</div>
+			</Modal.Body>
+			<Modal.Footer>
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						role="presentation"
+						themeType="tertiary"
+						onClick={handleCancel}
+					>
+						Cancel
+					</Button>
+					<Button
+						size="md"
+						role="presentation"
+						themeType="primary"
+						onClick={handleSubmit(onSubmit)}
+						disabled={createVendorServicePocLoading}
+						style={{
+							marginLeft: '8px',
+						}}
+					>
+						Add Service
+					</Button>
+				</div>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

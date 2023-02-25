@@ -1,3 +1,4 @@
+import subCategoryOptions from '../../../page-components/OnBoardVendor/VendorServices/utils/sub-category-options';
 import { getElementController } from '../../../utils/get-element-controller';
 
 import styles from './styles.module.css';
@@ -6,7 +7,19 @@ function FormLayout({
 	fields = [],
 	control = {},
 	errors = {},
+	watch,
+	setValue,
+	source,
 }) {
+	const setSubCategoryValue = () => {
+		if (!source) {
+			return null;
+		}
+
+		const selectedCategory = watch('category');
+		return setValue('sub_category', subCategoryOptions[selectedCategory]?.[0]?.value || '');
+	};
+
 	return (
 		<div className={styles.form_container}>
 			{fields.map((controlItem) => {
@@ -33,6 +46,8 @@ function FormLayout({
 					</div>
 				);
 			})}
+
+			{setSubCategoryValue()}
 		</div>
 	);
 }

@@ -161,6 +161,7 @@
 
 .underline {
 	text-decoration-line: underline;
+	margin-left: 8px;
 }
 
 .filter_in_use {
@@ -168,4 +169,18 @@
 	width: 8px;
 	border-radius: 50%;
 	background-color: blue;
+}
+
+.created_at_header {
+	display: flex;
+	align-items: center;
+}
+
+.filter_icon_container {
+	margin-left: 8px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
 }

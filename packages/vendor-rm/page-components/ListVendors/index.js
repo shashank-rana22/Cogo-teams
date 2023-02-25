@@ -105,7 +105,7 @@ function ListVendors() {
 								...pv,
 								filters: { ...pv.filters, q: value || undefined },
 							}))}
-							placeholder="Start type content name to search..."
+							placeholder="Search by PAN / GST / Business Name..."
 						/>
 					</div>
 
@@ -131,7 +131,7 @@ function ListVendors() {
 
 			<div className={styles.pagination_container}>
 				<Pagination
-					type="table"
+					type="number"
 					currentPage={params?.page}
 					totalItems={total_count}
 					pageSize={pageLimit}
@@ -139,7 +139,6 @@ function ListVendors() {
 						...pv,
 						page: value,
 					}))}
-
 				/>
 			</div>
 		</>

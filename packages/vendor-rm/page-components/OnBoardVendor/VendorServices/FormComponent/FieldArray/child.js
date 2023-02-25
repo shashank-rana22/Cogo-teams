@@ -25,7 +25,7 @@ function Child({
 
 	const setSubCategoryValue = () => {
 		const selectedCategory = watch('services')?.[index]?.category;
-		setValue(`services[${index}].sub_category`, subCategoryOptions[selectedCategory][0].value || '');
+		setValue(`services[${index}].sub_category`, subCategoryOptions[selectedCategory]?.[0]?.value || '');
 	};
 
 	return (
