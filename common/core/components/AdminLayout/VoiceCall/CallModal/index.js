@@ -3,7 +3,7 @@ import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React from 'react';
 
-import { NumberHide } from '../constant';
+import hideNumber from '../../../../helpers/hideNumber';
 
 import styles from './styles.module.css';
 
@@ -19,6 +19,19 @@ function CallModal({
 	durationTime = () => {},
 	callLoading,
 }) {
+	const handleClick = () => {
+		dispatch(
+			setProfileState({
+				...profileData,
+				voice_call: {
+					...profileData?.voice_call,
+					showCallModal : false,
+					minimizeModal : true,
+				},
+			}),
+		);
+	};
+
 	return (
 		<Modal
 			show={showCallModal}
@@ -30,18 +43,7 @@ function CallModal({
 					width={25}
 					height={25}
 					cursor="pointer"
-					onClick={() => {
-						dispatch(
-							setProfileState({
-								...profileData,
-								voice_call: {
-									...profileData?.voice_call,
-									showCallModal : false,
-									minimizeModal : true,
-								},
-							}),
-						);
-					}}
+					onClick={handleClick}
 				/>
 				<div className={styles.content}>
 					<div className={styles.avatar}>
@@ -53,7 +55,7 @@ function CallModal({
 					<div className={styles.number}>
 						{mobile_country_code}
 						{' '}
-						{NumberHide(mobile_number)}
+						{hideNumber(mobile_number)}
 					</div>
 					<div className={styles.status_div}>{status || 'Connecting...'}</div>
 					<div className={styles.timer}>{durationTime()}</div>

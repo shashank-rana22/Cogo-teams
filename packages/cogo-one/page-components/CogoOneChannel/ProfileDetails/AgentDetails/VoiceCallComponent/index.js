@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 
-import NumberHide from '../../../../../utils/NumberHide';
+import hideNumber from '../../../../../utils/hideNumber';
 
 import styles from './styles.module.css';
 
@@ -75,7 +75,7 @@ function VoiceCallComponent({
 								+
 								{code}
 								{' '}
-								{NumberHide(number)}
+								{hideNumber(number)}
 							</div>
 						</div>
 					) : (
