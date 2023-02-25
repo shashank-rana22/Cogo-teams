@@ -4,12 +4,17 @@ import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
+import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
 import DownloadModal from './DownloadModal';
 
-function ApprovalPending({ data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit }) {
+function ApprovalPending({
+	data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+}) {
 	const { fields } = ApprovalPendingFields;
 	const [show, setShow] = useState(false);
+
+	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 
 	const handleDownloadMAWB = (singleItem) => {
 		setViewDoc(true);
@@ -20,6 +25,10 @@ function ApprovalPending({ data, loading, setPage, setGenerate, setItem, setView
 		setEdit(true);
 		setGenerate(true);
 		setItem(singleItem);
+	};
+
+	const handleUpdate = (values) => {
+		updateDocument(values, listAPi);
 	};
 
 	const functions = {
@@ -41,6 +50,28 @@ function ApprovalPending({ data, loading, setPage, setGenerate, setItem, setView
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
+		),
+		handleStatus: (singleItem:any) => (
+			singleItem.documentState
+				? (
+					<Button
+						themeType="secondary"
+						style={{ border: '1px solid #333' }}
+						disabled={updateLoading}
+						onClick={() => { handleUpdate(singleItem); }}
+					>
+						Approve
+					</Button>
+				) : (
+					<Button
+						themeType="linkUi"
+						style={{ border: '1px solid #ED3726', color: '#ED3726' }}
+						disabled={updateLoading}
+						onClick={() => { handleEditMAWB(singleItem); }}
+					>
+						Amend
+					</Button>
+				)
 		),
 	};
 	return (

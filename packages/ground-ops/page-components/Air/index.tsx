@@ -99,6 +99,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 					setViewDoc={setViewDoc}
 					setEdit={setEdit}
 					setPage={setPage}
+					listAPi={listAPi}
 				/>
 			)}
 		</div>
