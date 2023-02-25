@@ -1,4 +1,5 @@
 import { RadioGroup, Textarea, Modal, Button } from '@cogoport/components';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -205,7 +206,10 @@ function BankDetails({
 							<div className={styles.document}>Document -</div>
 							{documentUrls?.map((url:any) => (url !== '' ? (
 								<a href={url} target="_blank" rel="noreferrer">
-									{url.split('/')[4] || '-'}
+									<div className={styles.view_flex}>
+										<div className={styles.view}>View Document</div>
+										<IcMEyeopen />
+									</div>
 								</a>
 							) : (
 								<div> No document available</div>

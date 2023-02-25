@@ -27,4 +27,5 @@ function TextAreaController(props) {
 		/>
 	);
 }
+
 export default TextAreaController;
