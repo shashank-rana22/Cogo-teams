@@ -11,6 +11,7 @@ export function CalendarEntity({
 	resetDiv,
 	pagination,
 	setPagination,
+	isWeek,
 }) {
 	const animationTime = 1;
 	const [position, setPosition] = useState(-33.3);
@@ -46,7 +47,7 @@ export function CalendarEntity({
 	}, [resetDiv]);
 
 	return (
-		<div ref={calendarRef} className={styles.calendar}>
+		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.weekCalendar : ''}`}>
 			{
 				calendarData?.map(({ label, subLabel, key }) => (
 					<div
