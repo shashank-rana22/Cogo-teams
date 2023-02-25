@@ -1,5 +1,7 @@
 .main_box {
 	flex-basis: 25%;
+	cursor: default;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .performance_tab_container {

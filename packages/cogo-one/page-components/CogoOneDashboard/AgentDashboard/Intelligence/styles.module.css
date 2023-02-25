@@ -8,8 +8,10 @@
 	padding-bottom: 20px;
 	padding-left: 16px;
 	margin-bottom: 12px;
+	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .improvement {

@@ -94,8 +94,9 @@
 .main_container_lowerpart {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: 5px;
+	margin-top: 16px;
 	overflow-y: scroll;
+	cursor: default;
 	background: #fbf7f1;
 }
 

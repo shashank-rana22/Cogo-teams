@@ -6,8 +6,10 @@
 
 	/* margin-top: 12px; */
 	margin-right: 12px;
+	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .heading {
@@ -35,10 +37,30 @@
 }
 
 .time_durations_header {
+	position: relative;
+	display: inline-block;
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 20px;
 	color: #221f20;
+}
+
+.time_durations_header::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 35%;
+	height: 1px;
+	content: "";
+	background-color: #000;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+}
+
+.time_durations_header:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .time_durations_text {
