@@ -80,6 +80,7 @@
 	}
 	&.insurance {
 		flex: 1.41;
+		border-right: 1px solid;
 	}
 	&.declared_carriage {
 		flex: 1.05;
@@ -162,7 +163,7 @@
 		flex: 1;
 		padding-left: 5px;
 		border: 0px;
-		border-bottom: 1px solid;
+		/* border-bottom: 1px solid; */
 	}
 }
 
@@ -202,8 +203,8 @@
 		flex: 0.8;
 	}
 	&.currency_declared_value_to_by_flight {
-		flex: 0.9;
-		border-bottom: 1px solid;
+		flex: 1;
+		/* border-bottom: 1px solid; */
 	}
 }
 
@@ -211,6 +212,9 @@
     display: flex;
 	flex-direction: column;
 	border: 1px #8B8B8B solid;
+	&.routing_block {
+		border-top: none;
+	}
 	&.blockcol_in_flex {
 		flex: 1;
 	}
@@ -228,8 +232,11 @@
 		border-left: 0px;
 	}
 	&.referrence_optional {
-		flex: 0.9;
-		border-bottom: 1px solid;
+		flex: 1;
+		/* border-bottom: 1px solid; */
+	}
+	&.referrence_block {
+		border-left: none;
 	}
 }
 

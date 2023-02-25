@@ -107,8 +107,8 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					</div>
 				</div>
 			</div>
-
-			{/* <div className={styles.flex}>
+			{/* ---- */}
+			<div className={styles.flex}>
 				<div className={cl`
 					${styles.block_col}
 					${styles.blockcol_in_flex}
@@ -141,6 +141,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 				<div className={cl`
 					${styles.block_col}
 					${styles.blockcol_in_flex}
+					${styles.referrence_block}
 				`}
 				>
 					<div className={cl`
@@ -156,7 +157,6 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						>
 							<div className={cl`
 									${styles.flex}
-									${styles.flex_border_right}
 									${styles.flex_in_flex}
 								`}
 							>
@@ -170,9 +170,8 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</div>
 							<div className={cl`
 					${styles.flex}
-					${styles.flex_border_right}
 					${styles.flex_in_flex}
-					${styles.flex_border_solid}
+					${styles.trapezium}
 				`}
 							>
 								<div className={cl`
@@ -221,39 +220,15 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 						</div>
 					</div>
 				</div>
-			</div> */}
-
+			</div>
+			{/* ---- */}
 			<div className={styles.flex}>
 				<div className={cl`
-					${styles.block_col} 
+					${styles.block_col}
 					${styles.blockcol_in_flex}
-					${styles.blockcol_minheight}
+					${styles.routing_block}
 				`}
 				>
-					<div className={cl`
-					${styles.block} 
-					${styles.departure_airport}
-				`}
-					>
-						<p style={{ fontSize: 10 }}>
-							Airport of Departure (Addr. of First Carrier) and Requested
-							Routing
-							<div className={cl`
-						${styles.flex} 
-						${styles.flex_font_bold}
-					`}
-							>
-								<p
-									className={styles.font_style}
-									style={{ fontSize: 14 }}
-								>
-									{formData?.origin}
-
-								</p>
-							</div>
-						</p>
-					</div>
-
 					<div className={cl`
 					${styles.block_row} 
 					${styles.blockrow_border}
@@ -375,461 +350,387 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 							</div>
 						</div>
 					</div>
-
-					<div className={cl`
-						${styles.block_row} 
-						${styles.blockrow_left_padding}
-						${styles.blockrow_border}
-						${styles.blockrow_in_flex}
-					`}
-					>
-						<div className={cl`
-						${styles.flex} 
-						${styles.flex_justify_center}
-						${styles.flex_border_right}
-						${styles.flex_in_flex}
-					`}
-						>
-							<p style={{ fontSize: 9 }}>
-								Airport of Destination
-								{' '}
-								<div className={cl`
-						${styles.flex} 
-						${styles.flex_font_bold}
-						${styles.flex_justify_center}
-					`}
-								>
-									<p
-										className={styles.font_style}
-										style={{ fontSize: 14 }}
-									>
-										{formData?.destination}
-
-									</p>
-								</div>
-							</p>
-						</div>
-						<div className={cl`
-							${styles.block_col} 
-							${styles.blockcol_in_flex}
-							${styles.blockcol_border}
-						`}
-						>
-							<div className={cl`
-								${styles.flex_row} 
-								${styles.referrence_optional_flight_date_top}
-							`}
-							>
-								<div className={cl`
-									${styles.flex} 
-				
-									${styles.requested_flight_date_top_left}
-								`}
-								/>
-								<div className={cl`
-									${styles.flex} 
-									${styles.flex_in_flex}
-									${styles.trapezium}
-								`}
-								>
-									<div className={cl`
-										${styles.flex} 
-										${styles.requested_flight_date_text}
-									`}
-									>
-										<p style={{ fontSize: 9 }}>Requested Flight/Date</p>
-									</div>
-								</div>
-								<div className={cl`
-									${styles.flex} 
-									${styles.requested_flight_date_top_right}
-								`}
-								/>
-							</div>
-							<div className={cl`
-									${styles.flex_row} 
-									${styles.requested_wtval_other}
-								`}
-							>
-								<div className={cl`
-										${styles.flex}
-										${styles.flex_border_right}
-										${styles.flex_in_flex}
-									`}
-								/>
-								<div className={cl`
-										${styles.flex} 
-										${styles.flex_in_flex}
-									`}
-								/>
-
-							</div>
-						</div>
-
-					</div>
 				</div>
-
-				<div className={cl`
-						${styles.block_col} 
-						${styles.blockcol_in_flex}
-						${styles.blockcol_minheight}
-						${styles.optional_shipping_information}
-
-					`}
-				>
-
-					<div className={cl`
-							${styles.block_col} 
-							${styles.blockcol_border}
-							${styles.referrence_optional}
-						`}
-					>
-						<div className={cl`
-								${styles.flex_row} 
-								${styles.referrence_optional_flight_date_top}
-							`}
-						>
-							<div className={cl`
-									${styles.flex} 
-									${styles.flex_in_flex}
-								`}
-							>
-								<div className={cl`
-					${styles.flex} 
-					${styles.flex_padding_left}
-				`}
-								>
-									<p style={{ fontSize: 9 }}>Reference Number</p>
-								</div>
-							</div>
-							<div className={cl`
-					${styles.flex} 
-					${styles.trapezium}
-				`}
-							>
-								<div className={cl`
-					${styles.flex} 
-					${styles.optional_shipping_text}
-				`}
-								/>
-								<p style={{ fontSize: 8, padding: '0 1px' }}>Optional Shipping Information</p>
-							</div>
-							<div className={cl`
-					${styles.flex} 
-					${styles.flex_in_flex}
-				`}
-							>
-								<p style={{ fontSize: 9 }} />
-							</div>
-						</div>
-						<div className={cl`
-					${styles.flex_row} 
-					${styles.referrence_optional_bottom}
-				`}
-						>
-							<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.flex_in_flex_c}
-				`}
-							>
-								<p style={{ fontSize: 9 }} />
-							</div>
-							<div className={cl`
-					${styles.flex} 
-					${styles.flex_border_right}
-					${styles.referrence_optional_bottom_middle}
-				`}
-							>
-								<p style={{ fontSize: 9 }} />
-							</div>
-							<div className={cl`
-					${styles.flex} 
-					${styles.flex_in_flex_c}
-				`}
-							>
-								<p style={{ fontSize: 9 }} />
-							</div>
-						</div>
-					</div>
-					<div className={cl`
+				<div
+					className={cl`
 							${styles.block_row} 
 							${styles.blockrow_border}
 							${styles.currency_declared_value_to_by_flight}
 						`}
-					>
-						<div className={cl`
+					style={{ borderBottom: '1px solid' }}
+				>
+					<div className={cl`
 					${styles.flex} 
 					${styles.flex_border_right}
 					${styles.flex_in_flex_c}
 					${styles.currency_section}
 				`}
-						>
-							<div className={cl`
+					>
+						<div className={cl`
 					${styles.flex} 
 					${styles.flex_border_right}
 					${styles.currency_top_chgs}
 				`}
-							>
-								<div className={cl`
+						>
+							<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_border_right}
 					${styles.currency}
 				`}
-								>
-									<div className={cl`
+							>
+								<div className={cl`
 					${styles.flex} 
 					${styles.currency_top_chgs}
 				`}
-									>
-										<p style={{ fontSize: 9 }}>Currency</p>
-									</div>
-									<div className={cl`
+								>
+									<p style={{ fontSize: 9 }}>Currency</p>
+								</div>
+								<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex_d}
 				`}
-									>
-										<p style={{ fontSize: 13 }}>{formData.currency}</p>
-									</div>
-								</div>
-								<div className={cl`
-					${styles.flex} 
-					${styles.chgs}
-				`}
 								>
-									<p style={{ fontSize: 8 }}>CHGS</p>
+									<p style={{ fontSize: 13 }}>{formData.currency}</p>
 								</div>
 							</div>
 							<div className={cl`
 					${styles.flex} 
-					${styles.flex_in_flex_d}
+					${styles.chgs}
 				`}
 							>
-								<div className={cl`
+								<p style={{ fontSize: 8 }}>CHGS</p>
+							</div>
+						</div>
+						<div className={cl`
+					${styles.flex} 
+					${styles.flex_in_flex_d}
+				`}
+						>
+							<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_border_right}
 					${styles.flexcol_in_flex}
 				`}
-								>
-									<div className={cl`
+							>
+								<div className={cl`
 					${styles.flex} 
 					${styles.flex_border_solid}
 					${styles.optional_shipping_text}
 					${styles.wtval_top}
 				`}
-									>
-										<p style={{ fontSize: 9 }}>WT/VAL</p>
-									</div>
-									<div className={cl`
+								>
+									<p style={{ fontSize: 9 }}>WT/VAL</p>
+								</div>
+								<div className={cl`
 					${styles.flex_row} 
 					${styles.requested_wtval_other}
 				`}
-									>
-										<div className={cl`
+								>
+									<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_border_right}
 					${styles.flexcol_in_flex}
 				`}
-										>
-											<div className={cl`
+									>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
-											>
-												<p style={{ margin: '2px 0px', fontSize: 7 }}>
-													PPD
-												</p>
-											</div>
-											<div className={cl`
+										>
+											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+												PPD
+											</p>
+										</div>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex_b}
 				`}
-											>
-												<p style={{ fontSize: 12 }}>P</p>
-											</div>
+										>
+											<p style={{ fontSize: 12 }}>P</p>
 										</div>
-										<div className={cl`
+									</div>
+									<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_in_flex}
 				`}
-										>
-											<div className={cl`
+									>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex}
 				`}
-											>
-												<p style={{ margin: '2px 0px', fontSize: 7 }}>
-													COLL
-												</p>
-											</div>
-											<div className={cl`
+										>
+											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+												COLL
+											</p>
+										</div>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex_b}
 				`}
-											>
-												<p style={{ fontSize: 8 }} />
-											</div>
+										>
+											<p style={{ fontSize: 8 }} />
 										</div>
 									</div>
 								</div>
-								<div className={cl`
+							</div>
+							<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_in_flex}
 				`}
-								>
-									<div className={cl`
+							>
+								<div className={cl`
 					${styles.flex} 
 					${styles.flex_border_solid}
 					${styles.optional_shipping_text}
 					${styles.other_top}
 				`}
-									>
-										<p style={{ fontSize: 9 }}>Other</p>
-									</div>
-									<div className={cl`
+								>
+									<p style={{ fontSize: 9 }}>Other</p>
+								</div>
+								<div className={cl`
 					${styles.flex_row} 
 					${styles.requested_wtval_other}
 				`}
-									>
+								>
 
-										<div className={cl`
+									<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_border_right}
 					${styles.flexcol_in_flex}
 				`}
-										>
+									>
 
-											<div className={cl`
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
-											>
-												<p style={{ margin: '2px 0px', fontSize: 7 }}>
-													PPD
-												</p>
-											</div>
-											<div className={cl`
+										>
+											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+												PPD
+											</p>
+										</div>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex_b}
 				`}
-											>
-												<p style={{ fontSize: 12 }}>P</p>
-											</div>
+										>
+											<p style={{ fontSize: 12 }}>P</p>
 										</div>
-										<div className={cl`
+									</div>
+									<div className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_in_flex}
 				`}
-										>
-											<div className={cl`
+									>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.wtval_other_bottom_left_ppd_coll}
 				`}
-											>
+										>
 
-												<p style={{ margin: '2px 0px', fontSize: 7 }}>
-													COLL
-												</p>
-											</div>
-											<div className={cl`
+											<p style={{ margin: '2px 0px', fontSize: 7 }}>
+												COLL
+											</p>
+										</div>
+										<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex_b}
 				`}
-											>
-												<p style={{ fontSize: 8 }} />
-											</div>
+										>
+											<p style={{ fontSize: 8 }} />
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className={cl`
+					</div>
+					<div className={cl`
 					${styles.flex} 
 					${styles.flex_border_right}
 					${styles.declared_carriage}
 					${styles.declared_carriage_box}
 				`}
-						>
-							<p style={{ fontSize: 8.3 }}>Declared Value for Carriage</p>
-							{formData.declaredValueForCarriage}
-						</div>
-						<div className={cl`
+					>
+						<p style={{ fontSize: 8.3 }}>Declared Value for Carriage</p>
+						{formData.declaredValueForCarriage}
+					</div>
+					<div className={cl`
 					${styles.flex} 
 					${styles.flex_padding_left}
 					${styles.flex_in_flex_c}
+					${styles.flex_border_right}
 				`}
-						>
-							<div className={styles.flex_col}>
-								<p style={{ fontSize: 8.3 }}>Declared Value for Customs</p>
-								{formData.valueForCustom}
-							</div>
+					>
+						<div className={styles.flex_col}>
+							<p style={{ fontSize: 8.3 }}>Declared Value for Customs</p>
+							{formData.valueForCustom}
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div className={styles.flex} style={{ borderBottom: '1px solid' }}>
+				<div
+					className={cl`
+						${styles.block_row} 
+						${styles.blockrow_border}
+						${styles.blockrow_in_flex}
+					`}
+					style={{ borderLeft: '1px solid' }}
+				>
+					<div
+						className={cl`
+						${styles.flex} 
+						${styles.flex_justify_center}
+						${styles.flex_border_right}
+						${styles.flex_in_flex}
+						
+					`}
+						style={{ paddingLeft: 5, paddingRight: 5 }}
+					>
+						<p style={{ fontSize: 9 }}>
+							Airport of Destination
+							{' '}
+							<div className={cl`
+						${styles.flex} 
+						${styles.flex_font_bold}
+						${styles.flex_justify_center}
+					`}
+							>
+								<p
+									className={styles.font_style}
+									style={{ fontSize: 14 }}
+								>
+									{formData?.destination}
+
+								</p>
+							</div>
+						</p>
+					</div>
 					<div className={cl`
+							${styles.block_col} 
+							${styles.blockcol_in_flex}
+							${styles.blockcol_border}
+						`}
+					>
+						<div className={cl`
+								${styles.flex_row} 
+								${styles.referrence_optional_flight_date_top}
+							`}
+						>
+							<div className={cl`
+									${styles.flex} 
+				
+									${styles.requested_flight_date_top_left}
+								`}
+							/>
+							<div className={cl`
+									${styles.flex} 
+									${styles.flex_in_flex}
+									${styles.trapezium}
+								`}
+							>
+								<div className={cl`
+										${styles.flex} 
+										${styles.requested_flight_date_text}
+									`}
+								>
+									<p style={{ fontSize: 9 }}>Requested Flight/Date</p>
+								</div>
+							</div>
+							<div className={cl`
+									${styles.flex} 
+									${styles.requested_flight_date_top_right}
+								`}
+							/>
+						</div>
+						<div className={cl`
+									${styles.flex_row} 
+									${styles.requested_wtval_other}
+								`}
+						>
+							<div className={cl`
+										${styles.flex}
+										${styles.flex_border_right}
+										${styles.flex_in_flex}
+									`}
+							/>
+							<div className={cl`
+										${styles.flex} 
+										${styles.flex_in_flex}
+									`}
+							/>
+
+						</div>
+					</div>
+
+				</div>
+				<div className={cl`
 							${styles.block_row} 
 							${styles.blockrow_border}
 							${styles.blockrow_in_flex}
 						`}
-					>
-						<div className={cl`
+				>
+					<div
+						className={cl`
 					${styles.flex_col} 
 					${styles.flexcol_border_right}
 					${styles.amount_of_insurance}
 				`}
-						>
-							<div className={cl`
+						style={{ borderLeft: '1px solid' }}
+					>
+						<div className={cl`
 					${styles.flex} 
 					${styles.flex_justify_center}
 					${styles.amount_of_insurance_top}
 				`}
-							>
-								<p style={{ fontSize: 9 }}>Amount of Insurance</p>
-							</div>
-							<div className={cl`
+						>
+							<p style={{ fontSize: 9 }}>Amount of Insurance</p>
+						</div>
+						<div className={cl`
 					${styles.flex} 
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.amount_of_insurance_bottom}
 				`}
-							>
-								<p style={{ fontSize: 15 }}>NIL</p>
-							</div>
+						>
+							<p style={{ fontSize: 15 }}>NIL</p>
 						</div>
-						<div className={cl`
+					</div>
+					<div className={cl`
 					${styles.flex} 
 					${styles.flex_padding_left}
 					${styles.insurance}
 				`}
-						>
-							<p style={{ fontSize: 8 }} className="text">
-								INSURANCE - If carrier offers insurance, and such insurance is
-								requested in accordance with the conditions thereof, indicate
-								amount to be insured in figures in box marked “Amount of
-								Insurance”.
-							</p>
-						</div>
+					>
+						<p style={{ fontSize: 8 }} className="text">
+							INSURANCE - If carrier offers insurance, and such insurance is
+							requested in accordance with the conditions thereof, indicate
+							amount to be insured in figures in box marked “Amount of
+							Insurance”.
+						</p>
 					</div>
 				</div>
-
 			</div>
+			{/* --- */}
 		</div>
 	);
 }
