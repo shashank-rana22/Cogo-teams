@@ -1,9 +1,12 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function index() {
+function Header() {
+	const router = useRouter();
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -23,13 +26,45 @@ function index() {
 				</div>
 			</div>
 			<div className={styles.button_container}>
-				<Button size="lg" themeType="secondary" className={styles.button}>View Badges</Button>
-				<Button size="lg" themeType="secondary" className={styles.button}>View Events</Button>
-				<Button size="lg" themeType="secondary" className={styles.button}>View All Configs</Button>
-				<Button size="lg" themeType="primary" className={styles.button}>Configure Now</Button>
+				<Button
+					onClick={() => { router.push('/allocation/kam-expertise/view-badges'); }}
+					size="lg"
+					themeType="secondary"
+					className={styles.button}
+				>
+					View Badges
+
+				</Button>
+				<Button
+					// onClick={() => { router.push('/allocation/kam-expertise/'); }}
+					size="lg"
+					themeType="secondary"
+					className={styles.button}
+				>
+					View Events
+
+				</Button>
+				<Button
+					// onClick={() => { router.push('/allocation/kam-expertise/'); }}
+					size="lg"
+					themeType="secondary"
+					className={styles.button}
+				>
+					View All Configs
+
+				</Button>
+				<Button
+					onClick={() => { router.push('/allocation/kam-expertise/configurations'); }}
+					size="lg"
+					themeType="primary"
+					className={styles.button}
+				>
+					Configure Now
+
+				</Button>
 			</div>
 		</div>
 	);
 }
 
-export default index;
+export default Header;

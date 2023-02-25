@@ -1,97 +1,96 @@
 .card {
-	max-width: 700px;
-	margin-top: 7em;
-	font-family: Poppins;
-	line-height: 150%;
-	background-color: white;
-	border-radius: 6px;
+    max-width: 650px;
+    background-color: white;
+    border-radius: 6px;
+    margin-top: 100px; /* just for the time being all badge list are together  in one page */
+    padding: 18px 20px;
 }
 
 .heading {
-	padding-top: 1em;
-	padding-left: 1em;
-	font-size: 16px;
-	font-weight: 500;
-	color: #6fa5ab;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6fa5ab;
 }
 
-.mainContainer {
-	display: flex;
-	gap: 3em;
+.main_container {
+    display: flex;
 }
 
-.mainBadge {
-	width: 15em;
-	padding: 1.5em;
-	padding-bottom: 0.5em;
+.main_badge {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 14px;
 }
 
-.starsContainer {
-	display: flex;
-	justify-content: center;
+.badge_container {
+    margin: 20px 40px 20px 0;
 }
 
-.matterContainer {
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
+.stars_container {
+    display: flex;
+    justify-content: center;
 }
 
-.smallBadge {
-	width: 3em;
+.matter_container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 40px 20px 0;
+    justify-content: space-between;
 }
 
-.lableValueContainer {
-	display: flex;
-	gap: 2em;
+.lable_value {
+    margin-right: 8px;
+    padding: 8px;
 }
 
-.nextBadge {
-	display: flex;
-	gap: 0.5em;
-	align-items: center;
+.small_badge {
+    width: 48px;
+    margin-right: 10px;
+}
+.lable_value_container {
+    display: flex;
+    justify-content: space-between;
+}
+.next_badge {
+    display: flex;
+    align-items: center;
 }
 
 .lable {
-	font-size: 12px;
-	font-style: normal;
-	font-weight: 400;
-	color: #4f4f4f;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    color: #4f4f4f;
 }
 
 .value {
-	margin: 0%;
-	font-weight: 500;
-	color: #221f20;
+    font-weight: bold;
+    color: #221f20;
 }
 
-.descriptionContainer {
-	padding-right: 1em;
+.description_container {
+    margin: 8px;
 }
 
-.progressBar {
-	padding: 2em 1em;
+.mastery_unlock {
+    margin: 16px 0;
 }
 
-.MasteryUnlock {
-	padding: 2em;
+.flex_container {
+    margin-top: 16px;
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
 }
 
-.flexContainer {
-	display: flex;
-	gap: 2em;
-	padding: 1em;
+.mastery_badge_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: middle;
+    align-items: center;
 }
 
-.MasterybadgeContainer {
-	justify-content: middle;
-	padding: 0 1em;
-}
-
-.Smallstar {
-	width: 1.8em;
-}
-
-.badge {
-	width: 2em;
+.smallstar {
+    width: 16px;
+    margin-top: 8px;
 }
