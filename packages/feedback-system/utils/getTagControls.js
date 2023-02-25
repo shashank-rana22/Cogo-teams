@@ -2,7 +2,7 @@ import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
 
 const useGetTagControls = () => {
 	const tagOptions = useGetCustomAsyncOptions({
-		endpoint    : 'list-tags',
+		endpoint    : 'list_tags',
 		initialCall : false,
 		valueKey    : 'tag',
 		labelKey    : 'tag',

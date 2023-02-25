@@ -1,5 +1,6 @@
 import { Placeholder, Pagination, Modal, Input, CreatableMultiSelect, Button } from '@cogoport/components';
 import { Controller, useDebounceQuery, useForm } from '@cogoport/forms';
+import CreatableMultiSelectController from '@cogoport/forms/page-components/Controlled/CreatableMultiSelectController';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -43,7 +44,7 @@ function AddQuestions({
 
 	const { total_count = '' } = pagination_data;
 
-	const { name, rules, ...rest } = getTagControls();
+	const tagControls = getTagControls();
 	const { control, watch } = useForm();
 
 	const tags = watch('tags');
@@ -130,19 +131,9 @@ function AddQuestions({
 
 							<div className={styles.filters_pagination}>
 								<div className={styles.filters}>
-									<Controller
+									<CreatableMultiSelectController
 										control={control}
-										name={name}
-										rules={rules}
-										render={({ field: { onChange, onBlur, value } }) => (
-											<CreatableMultiSelect
-												{...rest}
-												name={name}
-												onChange={onChange}
-												value={value}
-												onBlur={onBlur}
-											/>
-										)}
+										{...tagControls}
 									/>
 									<Input
 										value={searchValue}

@@ -1,7 +1,6 @@
 import { InputController, MultiselectController, SelectController } from '@cogoport/forms';
-
-import CreatableMultiSelectController from '../common/CreatableMultiselectController';
-import TextAreaController from '../common/TextAreaController';
+import CreatableMultiSelectController from '@cogoport/forms/page-components/Controlled/CreatableMultiSelectController';
+import TextAreaController from '@cogoport/forms/page-components/Controlled/TextAreaController';
 
 export const getElementController = (type = 'text') => {
 	switch (type) {
