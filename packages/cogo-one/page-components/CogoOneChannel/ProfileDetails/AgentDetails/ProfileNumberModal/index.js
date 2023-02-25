@@ -1,4 +1,4 @@
-import { Modal, Button, Input } from '@cogoport/components';
+import { Modal, Button, Input, cl } from '@cogoport/components';
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 import { isEmpty } from '@cogoport/utils';
 
@@ -21,7 +21,8 @@ function ProfileNumberModal({
 		setShowError(false);
 		setProfilevalue({});
 	};
-
+	const showNameError = showError && isEmpty(name);
+	const showNumberError = showError && isEmpty(number);
 	return (
 
 		<Modal
@@ -33,7 +34,7 @@ function ProfileNumberModal({
 		>
 			<Modal.Header title="Profile Details" />
 			<Modal.Body>
-				<div className={styles.wrapper}>
+				<div className={cl`${styles.wrapper} ${showNameError && styles.error_class}`}>
 					<div className={styles.styled_label}>Enter Name</div>
 					<Input
 						size="sm"
@@ -42,12 +43,12 @@ function ProfileNumberModal({
 						onChange={(a) => setProfilevalue((p) => ({ ...p, name: a }))}
 					/>
 					<div className={styles.error_div}>
-						{showError && isEmpty(name) && (
+						{showNameError && (
 							<div className={styles.error_text}>Name is Required</div>
 						)}
 					</div>
 				</div>
-				<div className={styles.wrapper}>
+				<div className={cl`${styles.wrapper} ${showNumberError && styles.error_class}`}>
 					<div className={styles.styled_label}>Enter Phone Number</div>
 					<SelectMobileNumber
 						value={profileValue}
@@ -55,8 +56,8 @@ function ProfileNumberModal({
 						inputType="number"
 						inputId="+91"
 					/>
-					<div className={styles.error_div}>
-						{showError && isEmpty(number) && (
+					<div className={styles.number_error_text}>
+						{showNumberError && (
 							<div className={styles.error_text}>Number is Required</div>
 						)}
 					</div>

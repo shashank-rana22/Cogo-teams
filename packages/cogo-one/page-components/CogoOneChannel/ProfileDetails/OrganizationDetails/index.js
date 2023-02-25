@@ -130,7 +130,7 @@ function OrganizationDetails({
 			{!isEmpty(agent) && (
 				<>
 					<div className={styles.agent_title}>Agent Details</div>
-					<div className={styles.agent_div}>
+					<div>
 						<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
 					</div>
 				</>

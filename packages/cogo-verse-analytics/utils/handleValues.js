@@ -1,4 +1,4 @@
-export const strToKMBT = (val) => {
+export const handleValues = (val) => {
 	let newVal = val;
 	let cnt = 0;
 	while (newVal > 999) {

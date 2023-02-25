@@ -31,7 +31,8 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 
 	const { handleSubmit, control, watch, reset, formState:{ errors } } = useForm({
 		defaultValues: {
-			allow_user: 'observe_and_chat',
+			allow_user       : 'observe_and_chat',
+			assign_condition : 'shipment',
 		},
 	});
 
@@ -97,16 +98,18 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 					</div>
 
 					{watchCondtion && (
-						<div className={styles.styled_controller}>
+						<div className={cl`${styles.styled_controller}
+						 ${errors?.condition_value && styles.error_class}`}
+						>
 							<InputController
 								control={control}
 								{...condition_value}
 								placeholder={
                                     PLACEHOLDER_MAPPING[watchCondtion] || ''
                                 }
-								className={styles.error_class}
+
 							/>
-							<div className={styles.error_text}>{errors?.condition_value && ' This is Required'}</div>
+							<div className={styles.error_text}>{errors?.condition_value && 'This is Required'}</div>
 						</div>
 					)}
 				</>
