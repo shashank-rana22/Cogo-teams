@@ -1313,7 +1313,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-document_desk',
