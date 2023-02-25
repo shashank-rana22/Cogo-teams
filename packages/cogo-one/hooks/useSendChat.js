@@ -81,26 +81,27 @@ const useSendChat = ({
 					lead_user_id = null,
 					sender = null,
 				} = formattedData || {};
-				let message_metadata;
+				let messageMetadata;
 				if (finalUrl) {
-					message_metadata = {
+					messageMetadata = {
 						message_type : fileType,
 						text         : newMessage,
 						media_url    : finalUrl,
+						filename     : fileName,
 					};
 				} else {
-					message_metadata = {
+					messageMetadata = {
 						message_type : 'text',
 						text         : newMessage,
 					};
 				}
 
 				sendMessage({
-					recipient : mobile_no || sender,
-					message   : newMessage,
+					recipient        : mobile_no || sender,
+					message          : newMessage,
 					user_id,
 					organization_id,
-					message_metadata,
+					message_metadata : messageMetadata,
 					lead_user_id,
 				});
 			}, 500);
