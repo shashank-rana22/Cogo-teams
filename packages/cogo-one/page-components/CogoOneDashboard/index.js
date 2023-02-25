@@ -1,4 +1,3 @@
-// import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import AdminDashboard from './AdminDashboard';
@@ -7,23 +6,28 @@ import useGetCogoOneDashboard from './hooks/useGetCogoOneDashboard';
 import styles from './styles.module.css';
 
 function CogoOneDashboard({ isAdminView = true }) {
-	// const [activeTab, setActiveTab] = useState('day');
-	// const { user } = useSelector(({ profile }) => profile);
-	// const {
-	// 	user_data,
-	// } = useSelector(({ profile }) => ({
-	// 	user_data: profile || {},
-	// }));
+	const [timeline, setTimeline] = useState('day');
+	const [calendarData, setCalendarData] = useState([]);
+	const [selectedItem, setSelectedItem] = useState('');
+	const selectedTimeline = (calendarData || []).filter((d) => d.key === selectedItem)?.[0];
 
-	const [calendarType, setCalendarType] = useState('day');
-	const { listData } = useGetCogoOneDashboard();
-	console.log(listData, 'listData');
+	const { listData } = useGetCogoOneDashboard({ timeline, selectedTimeline });
 
+	console.log(selectedTimeline, listData, 'calendarData');
+
+	const commomProps = {
+		timeline,
+		setTimeline,
+		calendarData,
+		setCalendarData,
+		selectedItem,
+		setSelectedItem,
+	};
 	return (
 		<div className={styles.prime_container}>
 			{isAdminView
-				? <AdminDashboard calendarType={calendarType} setCalendarType={setCalendarType} />
-				: <AgentDashboard calendarType={calendarType} setCalendarType={setCalendarType} />}
+				? <AdminDashboard {...commomProps} />
+				: <AgentDashboard {...commomProps} />}
 		</div>
 	);
 }

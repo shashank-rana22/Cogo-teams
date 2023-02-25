@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
@@ -45,20 +47,20 @@ export function CalendarEntity({
 		setPosition(-33.3);
 		console.log(position);
 	}, [resetDiv]);
-
+	console.log(calendarData, 'calendarData');
 	return (
-		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.weekCalendar : ''}`}>
+		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
 			{
-				calendarData?.map(({ label, subLabel, key }) => (
+				calendarData?.map(({ label, subLabel, key, date }) => (
 					<div
 						key={key}
-						onClick={() => setSelectedItem(key)}
-						className={`${styles.dateContainer} ${selectedItem === key ? styles.active : ''}`}
+						onClick={() => setSelectedItem(date)}
+						className={`${styles.date_container} ${selectedItem === date ? styles.active : ''}`}
 					>
-						<div className={styles.dayH1}>
+						<div className={styles.day_hours1}>
 							{label}
 						</div>
-						<div className={styles.dayH2}>
+						<div className={styles.day_hours2}>
 							{subLabel}
 						</div>
 					</div>

@@ -1,57 +1,53 @@
-.calendar{
-    cursor: pointer;
-    font-family: 'Poppins';
-    font-style: normal;
-    flex:1;
-    display: flex;
-    /* gap: 10px; */
-    justify-content: space-evenly;
-
-    width: 300%;
-    transform: translateX(-33.3%);
+.calendar {
+	display: flex;
+	flex: 1;
+	justify-content: space-evenly;
+	width: 300%;
+	font-style: normal;
+	cursor: pointer;
+	transform: translateX(-33.3%);
 }
 
-.weekCalendar{
-    gap:15px;
-}
-.weekCalendar .dateContainer{
-    padding:5px 15px;
-}
-.weekCalendar .dayH1{
-    white-space: nowrap;
-    font-size: 14px;
+.day_hours1 {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	color: #828282;
+	text-align: center;
 }
 
-.dateContainer{
-    /* flex:1; */
-    padding: 0 22px;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 6px;
-    padding: auto;
-    padding-top:5px;
-    height: 50px;
-
-    width:fit-content;
+.date_container {
+	width: fit-content;
+	height: 50px;
+	padding: 0 22px;
+	padding: auto;
+	padding-top: 5px;
+	background: rgb(255 255 255 / 40%);
+	border-radius: 6px;
 }
 
-.dayH1{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
-    text-align: center;
-    color: #828282;
+.week_calendar {
+	gap: 15px;
 }
 
-.dayH2{
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 22px;
-    text-align: center;
-    color: #828282;
-
-    white-space: nowrap;
+.week_calendar .date_container {
+	padding: 5px 15px;
 }
 
-.active{
-    background-color: #FFFFFF;
+.week_calendar .day_hours1 {
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.day_hours2 {
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 22px;
+	color: #828282;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.active {
+	background-color: #fff;
 }
