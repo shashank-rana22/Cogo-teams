@@ -40,6 +40,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 
 			return list ? (
 				<Tooltip
+					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
 						<div className={styles.trade_party_name}>
 							<div>{toTitleCase(item?.div || '-')}</div>
@@ -52,6 +53,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				<div>
 
 					<Tooltip
+						interactive
 						content={bankTradePartyName || tdsTradePartyName ? (
 							<div>
 								{(organization?.tradePartyType === 'SELF'
