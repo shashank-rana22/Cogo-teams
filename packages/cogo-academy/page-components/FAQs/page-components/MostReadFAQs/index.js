@@ -6,6 +6,7 @@ import Spinner from '../../../../commons/Spinner';
 import useListFaqQuestions from '../../hooks/useListFaqQuestion';
 import Questions from '../Questions';
 import useCreateQuestionSet from '../QuestionsList/hooks/useCreateQuestionRequest';
+import SearchFound from '../SearchFound';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
@@ -14,6 +15,7 @@ function MostReadFAQs() {
 	// const [show, setShow] = useState(false);
 
 	const [searchState, setSearchState] = useState('');
+	console.log(searchState);
 	const sort = true;
 	const {
 		page,
@@ -43,6 +45,7 @@ function MostReadFAQs() {
 	return (
 		<div>
 			<br />
+
 			<SearchInput
 				value={searchState}
 				onChange={(val) => setSearchState(val)}
@@ -54,18 +57,24 @@ function MostReadFAQs() {
 				{startCase('Most Read FAQS')}
 			</h1>
 
-			{data?.list.map((question) => (
-				<div className={styles.border}><Questions questions={question} /></div>
-			))}
-			<div className={styles.pagination}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={paginationData?.total_count}
-					pageSize={paginationData?.page_limit}
-					onPageChange={setPage}
-				/>
-			</div>
+			{!searchState
+				? (
+					<>
+						{data?.list.map((question) => (
+							<div className={styles.border}><Questions questions={question} /></div>
+						))}
+
+						<div className={styles.pagination}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={paginationData?.total_count}
+								pageSize={paginationData?.page_limit}
+								onPageChange={setPage}
+							/>
+						</div>
+					</>
+				) : <SearchFound searchState={searchState} />}
 		</div>
 	);
 }

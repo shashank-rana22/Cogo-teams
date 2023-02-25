@@ -23,6 +23,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
+	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 32)}...` : input);
 
 	return (
 		<div>
@@ -64,7 +65,7 @@ function TopicList({ tabTitle, searchState = '' }) {
 										title={(
 											<div>
 												<div className={styles.title}>
-													{startCase(singleOption?.name)}
+													{truncate(startCase(singleOption?.name))}
 													:
 												</div>
 
