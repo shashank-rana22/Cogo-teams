@@ -1,5 +1,5 @@
 import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
-import { useForm, TextareaController, InputController } from '@cogoport/forms';
+import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -185,7 +185,7 @@ function Templates({
 						)}
 						<div className={styles.text_area_container}>
 							<div className={styles.label}>Content</div>
-							<TextareaController
+							<TextAreaController
 								control={control}
 								{...content}
 								id="content"
