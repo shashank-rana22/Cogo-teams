@@ -12,16 +12,9 @@ import PerformanceTab from './PerformanceTabs';
 import RedFlags from './RedFlags';
 import styles from './styles.module.css';
 
-function AdminDashboard({ calendarType, setCalendarType }) {
+function AdminDashboard(props) {
+	const {timeline, setTimeline} = props || {};
 	const [activeTab, setActiveTab] = useState('day');
-	// const { user } = useSelector(({ profile }) => profile);
-	// const {
-	// 	user_data,
-	// } = useSelector(({ profile }) => ({
-	// 	user_data: profile || {},
-	// }));
-
-	// console.log('user_data', user_data);
 
 	return (
 
@@ -29,14 +22,16 @@ function AdminDashboard({ calendarType, setCalendarType }) {
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				calendarType={calendarType}
-				setCalendarType={setCalendarType}
+				timeline={timeline}
+				setTimeline={setTimeline}
 			/>
 
 			<div className={styles.sub_container}>
 				<div className={styles.calenderchart_plus_escalations}>
 					<div className={styles.calender_chart}>
-						<div className={styles.calender_container}><Calender calendarType={calendarType} /></div>
+						<div className={styles.calender_container}>
+							<Calender props={props} />
+						</div>
 						<LineChart />
 					</div>
 					<RedFlags />

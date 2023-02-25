@@ -1,14 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IcMArrowDoubleLeft, IcMArrowDoubleRight } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, addDays } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { CalendarEntity } from './Entity';
 import styles from './styles.module.css';
 
-function Calendar({ calendarType }) {
+function Calendar({ props }) {
+	const {
+		timeline,
+		calendarData,
+		setCalendarData = () => {},
+		selectedItem,
+		setSelectedItem,
+	} = props || {};
+
 	const [pagination, setPagination] = useState(-1);
-	const [calendarData, setCalendarData] = useState([]);
-	const [selectedItem, setSelectedItem] = useState('');
 	const [scroll, setScroll] = useState('');
 	const [resetDiv, setResetDiv] = useState(false);
 
@@ -82,9 +89,10 @@ function Calendar({ calendarType }) {
 		const data = [];
 		newData.reverse().forEach((item, iterator) => {
 			data.push({
-				key      : `cal-${calendarType}-${pagination}-${iterator}`,
-				label    : format(item, FORMAT_TYPE[calendarType].label),
-				subLabel : format(item, FORMAT_TYPE[calendarType].subLabel),
+				key      : `cal-${timeline}-${pagination}-${iterator}`,
+				label    : format(item, FORMAT_TYPE[timeline].label),
+				subLabel : format(item, FORMAT_TYPE[timeline].subLabel),
+				date     : new Date(item),
 			});
 		});
 		setCalendarData(data);
@@ -107,6 +115,8 @@ function Calendar({ calendarType }) {
 						key      : `cal-week-${pagination}-${index}`,
 						label    : `Week ${week.iterator}`,
 						subLabel : `${format(week.date, 'MMM')} ${week.start} to ${week.end}`,
+						from     : addDays(week.date, 1),
+						to       :	addDays(week.date, 7),
 					},
 				);
 			}
@@ -115,13 +125,12 @@ function Calendar({ calendarType }) {
 	};
 
 	useEffect(() => {
-		if (calendarType === 'day') processData(calcDate);
-		else if (calendarType === 'month') processData(calcMonth);
+		if (timeline === 'day') processData(calcDate);
+		else if (timeline === 'month') processData(calcMonth);
 		else loadWeeks();
-	}, [calendarType, pagination]);
+	}, [timeline]);
 
 	useEffect(() => {
-		console.log('calendarData: ', calendarData);
 		setResetDiv(true);
 		setTimeout(() => {
 			setResetDiv(false);
@@ -147,7 +156,7 @@ function Calendar({ calendarType }) {
 					resetDiv={resetDiv}
 					pagination={pagination}
 					setPagination={setPagination}
-					isWeek={calendarType === 'week'}
+					isWeek={timeline === 'week'}
 				/>
 			</div>
 			<button

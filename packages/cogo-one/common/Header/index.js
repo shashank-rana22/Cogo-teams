@@ -8,11 +8,10 @@ import Filter from '../Filter';
 
 import styles from './styles.module.css';
 
-function Header({ setCalendarType, calendarType }) {
+function Header({ timeline, setTimeline }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
 
-	console.log(filters, 'filters');
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -35,7 +34,6 @@ function Header({ setCalendarType, calendarType }) {
 						render={(
 							<Filter
 								setFilterVisible={setFilterVisible}
-								// activityTab={activityTab}
 								filters={filters}
 								setFilters={setFilters}
 							/>
@@ -49,9 +47,9 @@ function Header({ setCalendarType, calendarType }) {
 				</div>
 
 				<Tabs
-					activeTab={calendarType}
+					activeTab={timeline}
 					themeType="tertiary"
-					onChange={setCalendarType}
+					onChange={setTimeline}
 					className={styles.tabs_style}
 				>
 					<TabPanel name="day" title="Day" />
