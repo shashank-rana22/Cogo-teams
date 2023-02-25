@@ -4,7 +4,7 @@ import ACTION_ICON_MAPPING from '../../../../constants/ACTION_ICON_MAPPING';
 
 import styles from './styles.module.css';
 
-function QuickActions({ openNewTab = () => {}, orgId = '' }) {
+function QuickActions({ openNewTab = () => {}, disableQuickActions = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.bottom}>
@@ -13,7 +13,7 @@ function QuickActions({ openNewTab = () => {}, orgId = '' }) {
 					{(ACTION_ICON_MAPPING || []).map((item) => (
 						<div
 							key={item.name}
-							className={cl`${styles.recent_icon} ${!orgId ? styles.icon_disabled : ''}`}
+							className={cl`${styles.recent_icon} ${disableQuickActions ? styles.icon_disabled : ''}`}
 							role="presentation"
 							onClick={() => openNewTab(item?.redirecting)}
 						>

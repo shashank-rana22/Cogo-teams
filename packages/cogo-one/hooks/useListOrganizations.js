@@ -38,19 +38,19 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	const isChannelPartner = tags?.includes('partner') || false;
 	const ORGID = orgId || PARAMOUNT_ORG_ID;
 	let ORG_PAGE_URL = '';
-
+	const disableQuickActions = isChannelPartner && !channelPartnerID;
 	const openNewTab = (activeTab) => {
 		const { crm = undefined, prm = undefined } = activeTab || {};
 		const linkSuffix = activeConversationTab === 'message'
 			? `source=communication&active_chat=${activeCardId}` : 'source=communication';
-		if (isChannelPartner) {
+		if (isChannelPartner && channelPartnerID) {
 			ORG_PAGE_URL = `/${partnerId}/prm/${channelPartnerID}?${linkSuffix}`;
 			const PRM_ROUTE_PAGE = prm
 				? `${ORG_PAGE_URL}&omniChannelActiveTab=${prm}`
 				: ORG_PAGE_URL;
 				// eslint-disable-next-line no-undef
 			window.open(PRM_ROUTE_PAGE, '_blank');
-		} else {
+		} else if (!isChannelPartner) {
 			ORG_PAGE_URL = `/${partnerId}/details/demand/${ORGID}?${linkSuffix}`;
 			const CRM_ROUTE_PAGE = crm
 				? `${ORG_PAGE_URL}&omniChannelActiveTab=${crm}`
@@ -61,7 +61,7 @@ const useListOrganizations = ({ orgId = null, activeCardId = null, activeTab:act
 	};
 
 	return {
-		openNewTab, loading,
+		openNewTab, loading, disableQuickActions,
 	};
 };
 export default useListOrganizations;
