@@ -52,11 +52,12 @@ function CreateFAQ() {
 		queryValue,
 		handleCreateTag,
 		handleCreateTopic,
+		formErrors,
 	} = useCreateNewTagOrTopic();
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
 
-	const { question_abstract, faq_tags = [], faq_topics = [] } = data || {};
+	const { question_abstract, faq_tags = [], faq_topics = [], answers = [] } = data || {};
 
 	useEffect(() => {
 		fetchQuestion();
@@ -74,11 +75,14 @@ function CreateFAQ() {
 	});
 
 	useEffect(() => {
-		setQuestionValue('question_abstract', question_abstract);
-		setQuestionValue('tag_ids', filterTags);
-		setQuestionValue('topic_ids', filterTopics);
-		// setEditorValue()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		if (!loading) {
+			setQuestionValue('question_abstract', question_abstract);
+			setQuestionValue('tag_ids', filterTags);
+			setQuestionValue('topic_ids', filterTopics);
+			setEditorValue(answers?.[0]?.answer);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
 	const router = useRouter();
@@ -98,6 +102,7 @@ function CreateFAQ() {
 
 	return (
 		<div>
+
 			<div className={styles.back_div} onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
@@ -120,7 +125,6 @@ function CreateFAQ() {
 						placeholder="Create a question."
 						key={question_abstract}
 						rules={{ required: 'Question is required.' }}
-						// value={question_abstract || ''}
 					/>
 
 					{errors.create_faq && (
@@ -230,6 +234,7 @@ function CreateFAQ() {
 							style={style}
 							setShow={setShow}
 							displayBackButton="No"
+							errors={formErrors}
 						/>
 					</div>
 				</Modal.Body>

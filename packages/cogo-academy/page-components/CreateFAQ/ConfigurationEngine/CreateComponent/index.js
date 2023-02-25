@@ -21,6 +21,7 @@ function CreateForm({
 	style = {},
 	setShow = () => {},
 	displayBackButton,
+	errors,
 }) {
 	const router = useRouter();
 
@@ -89,6 +90,13 @@ function CreateForm({
 					rules={{ required: 'Name is required.' }}
 
 				/>
+
+				{errors?.name && (
+					<div className={styles.errors}>
+						{errors.name?.message}
+					</div>
+				)}
+
 			</div>
 
 			<div className={styles.user_tag}>
@@ -105,7 +113,7 @@ function CreateForm({
 					name="description"
 					type="text"
 					placeholder="Enter Description..."
-					rules={{ required: 'Email is required.' }}
+
 				/>
 			</div>
 

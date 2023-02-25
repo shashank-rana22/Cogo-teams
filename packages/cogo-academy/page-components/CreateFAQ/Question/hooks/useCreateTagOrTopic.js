@@ -76,7 +76,7 @@ function useCreateNewTagOrTopic() {
 		setConfigurationPage,
 		control,
 		handleSubmit,
-		errors,
+		formErrors: errors,
 		loading,
 		setValue,
 		reset,

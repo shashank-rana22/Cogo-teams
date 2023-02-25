@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 let RichTextEditor;
 
 if (typeof window !== 'undefined') {
-	// eslint-disable-next-line global-require
+	// eslint-disable-next-line global-require, import/no-unresolved
 	RichTextEditor = require('react-rte').default;
 }
 
 function BodyTextEditor({ editorValue, setEditorValue }) {
-	const [rteValue, setRteValue] = useState(RichTextEditor.createValueFromString(editorValue, 'markdown'));
+	const [rteValue, setRteValue] = useState(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
+
+	useEffect(() => {
+		setRteValue(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
+	}, [editorValue]);
+
 	const handleChange = (value) => {
 		setRteValue(value);
 		setEditorValue(value.toString('html'));
