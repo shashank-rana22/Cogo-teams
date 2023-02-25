@@ -7,12 +7,8 @@ import styles from './styles.module.css';
 function AssigneeAvatar({ name = '', type = '' }) {
 	const { background = '', shadowColor = '', color = '' } = ASSIGNE_COLORS[type] || {};
 	const getInitials = () => {
-		if (name) {
-			const avtarName = name.split(' ').map((n) => n[0]).join('');
-			return avtarName.slice(0, 2);
-		}
-
-		return '';
+		const avtarName = name?.split(' ').map((n) => n[0]).join('');
+		return name && avtarName.slice(0, 2);
 	};
 	return (
 		<Tooltip content={name} placement="bottom">

@@ -12,8 +12,8 @@ import styles from './styles.module.css';
 
 function OrganizationDetails({
 	activeTab = '',
-	 activeVoiceCard = {},
-	 formattedMessageData = {},
+	activeVoiceCard = {},
+	formattedMessageData = {},
 	openNewTab = () => {},
 }) {
 	const { organization_id:messageOrgId = '' } = formattedMessageData || {};

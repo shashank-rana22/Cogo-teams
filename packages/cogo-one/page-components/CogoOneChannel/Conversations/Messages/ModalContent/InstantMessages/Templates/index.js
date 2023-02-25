@@ -1,5 +1,5 @@
 import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
-import { useForm, TextareaController, InputController } from '@cogoport/forms';
+import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -126,12 +126,12 @@ function Templates({
 									)}
 									style={{
 										cursor:
-                                            previewData
-                                            || whatsapp_approval_status
-                                                !== 'approved'
-                                            || openCreateReply
-                                            	? 'not-allowed'
-                                            	: 'pointer',
+											previewData
+											|| whatsapp_approval_status
+												!== 'approved'
+											|| openCreateReply
+												? 'not-allowed'
+												: 'pointer',
 									}}
 								>
 									<div className={styles.wrap}>
@@ -148,7 +148,7 @@ function Templates({
 										{messageContent}
 									</div>
 								</div>
-                        	),
+							),
 						)}
 						{loading && loader()}
 						{isEmpty(list) && !loading && (
@@ -185,7 +185,7 @@ function Templates({
 						)}
 						<div className={styles.text_area_container}>
 							<div className={styles.label}>Content</div>
-							<TextareaController
+							<TextAreaController
 								control={control}
 								{...content}
 								id="content"

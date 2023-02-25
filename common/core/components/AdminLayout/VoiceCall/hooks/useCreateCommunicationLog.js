@@ -3,9 +3,9 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 function useCreateCommunicationLog({
-	selectPill,
+	callTitle,
 	setInputValue = () => {},
-	setSelectPill = () => {},
+	setCallTitle = () => {},
 	inputValue,
 }) {
 	const profileData = useSelector(({ profile }) => profile);
@@ -24,12 +24,13 @@ function useCreateCommunicationLog({
 			userId,
 			agentId,
 		} = voiceCall || {};
+
 		const payload = {
 			communication_type       : 'call',
 			is_reminder              : 'true',
 			agent_id                 : agentId,
 			user_id                  : userId,
-			title                    : selectPill,
+			title                    : callTitle,
 			communication_summary    : inputValue,
 			organization_id          : orgId,
 			partner_id               : profileData?.partner?.id,
@@ -43,14 +44,16 @@ function useCreateCommunicationLog({
 			});
 			Toast.success('Saved Successfully');
 			setInputValue('');
-			setSelectPill('');
+			setCallTitle('');
 		} catch (error) {
 			Toast.error(error);
 		}
 	};
+
 	return {
 		communicationLogApi,
 		loading,
 	};
 }
+
 export default useCreateCommunicationLog;
