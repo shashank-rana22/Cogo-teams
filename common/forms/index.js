@@ -15,7 +15,7 @@ export { default as TimepickerController } from './page-components/Controlled/Ti
 export { default as CheckboxGroupController } from './page-components/Controlled/CheckboxGroupController';
 export { default as DayFrequencyController } from './page-components/Controlled/DayFrequencyController';
 export { default as AsyncSelectController } from './page-components/Controlled/AsyncSelectController';
-export { default as TextareaController } from './page-components/Controlled/TextAreaController';
+export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';

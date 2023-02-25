@@ -1,5 +1,5 @@
 import { Input, Button, Placeholder } from '@cogoport/components';
-import { useForm, TextareaController, InputController } from '@cogoport/forms';
+import { useForm, TextAreaController, InputController } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -97,7 +97,7 @@ function InstantReplies({
 							<div className={styles.label}>
 								Content
 							</div>
-							<TextareaController
+							<TextAreaController
 								control={control}
 								{...content}
 								id="content"
