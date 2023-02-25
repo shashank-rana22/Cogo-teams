@@ -17,7 +17,11 @@ const requestedColumns = () => [
 	},
 	{
 		Header   : 'Original Text',
-		accessor : ({ text }) => (<ToolTipWrapper text={text} />),
+		accessor : ({ text }) => (
+			<div className={styles.name}>
+				<ToolTipWrapper text={text} />
+			</div>
+		),
 	},
 	{
 		Header   : 'Target Language',
