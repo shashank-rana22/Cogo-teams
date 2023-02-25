@@ -10,19 +10,19 @@ import useCreateCommunicationLog from '../hooks/useCreateCommunicationLog';
 import styles from './styles.module.css';
 
 function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
-	const [selectPill, setSelectPill] = useState('');
+	const [callTitle, setCallTitle] = useState('');
 	const [inputValue, setInputValue] = useState('');
 	const [showError, setShowError] = useState(false);
 
 	const { communicationLogApi, loading } = useCreateCommunicationLog({
-		selectPill,
+		callTitle,
 		setInputValue,
-		setSelectPill,
+		setCallTitle,
 		inputValue,
 	});
 
 	const handleSelect = (val) => {
-		setSelectPill((prev) => {
+		setCallTitle((prev) => {
 			if (prev !== val) {
 				return val;
 			}
@@ -31,7 +31,7 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 	};
 
 	const handleSubmit = async () => {
-		if (!isEmpty(selectPill) && !isEmpty(inputValue)) {
+		if (!isEmpty(callTitle) && !isEmpty(inputValue)) {
 			await communicationLogApi();
 			dispatch(
 				setProfileState({
@@ -51,7 +51,7 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 
 	return (
 		<div className={styles.feed_div}>
-			<Modal show={showFeedbackModal} size="sm" className={styles.styled_ui_modal_dialog}>
+			<Modal show={showFeedbackModal} scroll={false} size="sm" className={styles.styled_ui_modal_dialog}>
 				<Modal.Body>
 					<div className={styles.feed_content}>
 						<div className={styles.feed_title}>Feedback</div>
@@ -60,17 +60,17 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 							{DEFAULT_PILLS_ITEMS.map(({ label, value }) => (
 								<div
 									role="presentation"
-									className={cl`${styles.pills} ${(selectPill === value)
+									className={cl`${styles.pills} ${(callTitle === value)
 										? styles.active_pill : ''}`}
 									onClick={() => handleSelect(value)}
 								>
-									{(selectPill === value) && <IcMTick width={20} height={20} />}
+									{(callTitle === value) && <IcMTick width={20} height={20} />}
 									{label}
 								</div>
 
 							))}
 						</div>
-						{showError && !selectPill && (
+						{showError && !callTitle && (
 							<div className={styles.error_message}>Select an option</div>
 						)}
 						<div className={styles.feed_text_area}>

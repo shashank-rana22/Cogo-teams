@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import FormatData from '../utils/formatData';
+import formatData from '../utils/formatData';
 
 function useCreateCommunicationLog({
 	setInputValue,
@@ -17,7 +17,7 @@ function useCreateCommunicationLog({
 	const {
 		orgId = '',
 		userId = '',
-	} = FormatData({ activeMessageCard, activeVoiceCard });
+	} = formatData({ activeMessageCard, activeVoiceCard });
 
 	const { partnerId, agentID } = useSelector(({ profile }) => ({
 		partnerId : profile.partner?.id || {},

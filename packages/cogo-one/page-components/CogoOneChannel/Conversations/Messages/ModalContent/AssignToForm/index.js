@@ -11,6 +11,7 @@ import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import controls from '../../../../../../configurations/assign-form-controls';
+import { PLACEHOLDER_MAPPING } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -20,12 +21,6 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 	const listAgentsOptions = useGetAsyncOptions(
 		merge(asyncFieldsListAgents()),
 	);
-
-	const PLACEHOLDER_MAPPING = {
-		shipment_id    : 'Select SID',
-		invoice        : 'Enter Invoice No',
-		onboarding_kyc : 'Enter Pan No',
-	};
 
 	const [isAssignUser, setIsAssignUser] = useState(true);
 

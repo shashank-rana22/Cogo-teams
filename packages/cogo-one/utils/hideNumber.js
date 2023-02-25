@@ -1,4 +1,4 @@
-const NumberHide = (user_number = '') => {
+const hideNumber = (user_number = '') => {
 	const firstNum = user_number.split('');
 	const [firstNumber, secondNumber] = firstNum || [];
 	const [secondLastNum, lastNum] = firstNum.slice(-2) || [];
@@ -10,4 +10,4 @@ const NumberHide = (user_number = '') => {
 	return mobileNumber;
 };
 
-export default NumberHide;
+export default hideNumber;

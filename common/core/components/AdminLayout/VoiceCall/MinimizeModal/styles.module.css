@@ -49,9 +49,9 @@
 	color: #393f70;
 }
 
-.end_icon{
-	cursor: 'pointer';
-	width: '25px';
-	height: '25px';
-	margin-top: '5px'
+.end_icon {
+	width: 29px;
+	height: 29px;
+	margin-top: 5px;
+	cursor: pointer;
 }

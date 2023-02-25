@@ -99,10 +99,15 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin }) => {
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${id}`,
 		);
-		await updateDoc(roomCollection, {
-			updated_at: Date.now(),
-			...data,
-		});
+
+		try {
+			await updateDoc(roomCollection, {
+				updated_at: Date.now(),
+				...data,
+			});
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	return {
