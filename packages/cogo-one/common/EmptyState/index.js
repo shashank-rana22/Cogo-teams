@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function EmptyState({
 	type = '',
-	handleNotes = () => {},
+	setShowForm = () => {},
 	handleReminder = () => {},
 	user_type = '',
 	userId = '',
@@ -28,7 +28,7 @@ function EmptyState({
 			<div className={styles.empty_state}>
 				<RenderEmpty
 					type={type}
-					handleNotes={handleNotes}
+					setShowForm={setShowForm}
 					handleReminder={handleReminder}
 					user_type={user_type}
 					userId={userId}

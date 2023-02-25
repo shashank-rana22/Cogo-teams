@@ -6,7 +6,7 @@ import styles from '../styles.module.css';
 
 function RenderEmpty({
 	type = '',
-	handleNotes = () => {},
+	setShowForm = () => {},
 	handleReminder = () => {},
 	user_type = '',
 	userId = '',
@@ -103,7 +103,7 @@ function RenderEmpty({
 					<div className={styles.title}>No previous notes found</div>
 					<div
 						className={styles.button_div}
-						onClick={handleNotes}
+						onClick={() => setShowForm(true)}
 						role="presentation"
 					>
 						<div>Add Notes</div>
