@@ -11,57 +11,12 @@
 }
 
 .title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	font-size: 14px;
 	font-weight: 500;
 	color: #4f4f4f;
-}
-
-.note_editor {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 100%;
-	height: 158px;
-	margin-top: 16px;
-	background: #fff;
-	border-radius: 4px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
-
-	:global {
-		.ui_input_container {
-			height: 120px !important;
-			padding: 5px 0 0 10px;
-			border: none !important;
-		}
-
-		.ui_input_container.ui_ps_size_md .ui_input_control {
-			font-family: Poppins, sans-serif;
-			font-size: 12px !important;
-		}
-	}
-}
-
-.editor_header {
-	width: 100%;
-	height: 10px;
-	background: #cfbc93;
-	border-radius: 4px 4px 0 0;
-}
-
-.toggle_div {
-	display: flex;
-	width: 100%;
-	margin-top: 24px;
-}
-
-.note_footer {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	padding: 5px;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
 .submit_button {
@@ -82,19 +37,17 @@
 	cursor: not-allowed;
 }
 
-.wrap {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	max-height: 250px;
-	max-height: 400px;
-	overflow-y: scroll;
-}
-
 .loader_div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
 	height: 100%;
+}
+
+.loader_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
 }

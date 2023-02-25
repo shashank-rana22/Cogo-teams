@@ -11,9 +11,12 @@ function LeaderBoard(props = {}) {
 	const {
 		statsData = {},
 		statsLoading = false,
+		platFormChatData = {},
+		chatLoading = false,
 	} = props || {};
 
 	const intentLeaderboardStats = statsData?.intent_leaderboard_stats || {};
+	const { user_feedbacks = {} } = platFormChatData || {};
 	const getAmount = (value) => {
 		const amount = getFormattedPrice(value, 'INR');
 		return ((amount.substring(4)).split('.'))[0];
@@ -71,7 +74,7 @@ function LeaderBoard(props = {}) {
 
 			<div className={styles.user_status}>
 				{USER_STATUS.map((stat) => {
-					const { value, title, src } = stat;
+					const { valueKey, title, src } = stat;
 
 					return (
 						<div className={styles.user_status_content}>
@@ -79,8 +82,8 @@ function LeaderBoard(props = {}) {
 							<div className={styles.user_status_right}>
 								<div className={styles.user_status_num}>
 									{
-										!statsLoading
-											? handleValues(value)
+										!chatLoading
+											? handleValues(user_feedbacks?.[valueKey] || 0)
 											: (
 												<Placeholder
 													className={styles.placeholder_element}

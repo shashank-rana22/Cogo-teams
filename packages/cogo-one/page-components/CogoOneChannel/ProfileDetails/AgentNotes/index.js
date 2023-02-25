@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Toast, Toggle, Textarea, Loader, Button } from '@cogoport/components';
+import { Loader, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import DetailViewer from '../../../../common/DetailViewer';
 import EmptyState from '../../../../common/EmptyState';
 import useCreateOmniNote from '../../../../hooks/useCreateOmniNote';
 import useGetListNotes from '../../../../hooks/useGetListNotes';
 import useUpdateNote from '../../../../hooks/useUpdateNote';
 
-import NotesList from './NotesList';
+import AddNotes from './AddNotes';
+import ListNotes from './ListNotes';
 import styles from './styles.module.css';
 
 function AgentNotes({
@@ -20,6 +22,8 @@ function AgentNotes({
 	const [noteValue, setNoteValue] = useState('');
 	const [editNote, setEditNote] = useState(false);
 	const [active, setActive] = useState(false);
+
+	const [newNote, setNewNote] = useState(false);
 	const [updateId, setUpdateId] = useState();
 	const [showForm, setShowForm] = useState(false);
 
@@ -38,7 +42,7 @@ function AgentNotes({
 	});
 	const { list = [] } = noteData || {};
 
-	const { omniChannelNote = () => {}, createLoading } = useCreateOmniNote({
+	const { omniChannelNote = () => { }, createLoading } = useCreateOmniNote({
 		editNote,
 		fetchListNotes,
 		activeMessageCard,
@@ -47,98 +51,71 @@ function AgentNotes({
 	});
 	const { updateNote } = useUpdateNote({ fetchListNotes, setEditNote });
 
-	const handleSubmit = async () => {
-		if (!isEmpty(noteValue)) {
-			if (editNote) {
-				await updateNote({ noteValue, type: 'update', updateId });
-			} else {
-				await omniChannelNote({ noteValue });
-			}
-		} else {
-			Toast.error('Enter description');
-		}
-		setNoteValue('');
-	};
+	const formComponent = () => (
+		<AddNotes
+			noteValue={noteValue}
+			setNoteValue={setNoteValue}
+			createLoading={createLoading}
+			updateId={updateId}
+			editNote={editNote}
+			updateNote={updateNote}
+			omniChannelNote={omniChannelNote}
+			setNewNote={setNewNote}
+		/>
+	);
 
-	const handleClick = async (i) => {
-		const { notes_data, id } = i || {};
-		setEditNote(true);
-		setNoteValue(notes_data);
-		setUpdateId(id);
-	};
-
-	const handleDelete = async (val) => {
-		await updateNote({ val, type: 'delete' });
-	};
-
-	const handleNotes = () => {
-		setShowForm(true);
-	};
+	const listComponent = () => (
+		<ListNotes
+			active={active}
+			setActive={setActive}
+			listLoading={listLoading}
+			list={list}
+			setEditNote={setEditNote}
+			setNoteValue={setNoteValue}
+			setUpdateId={setUpdateId}
+			updateNote={updateNote}
+		/>
+	);
 
 	if (isEmpty(list) && !showForm && !listLoading && !firstLoading) {
-		return <EmptyState type="notes" handleNotes={handleNotes} />;
+		return (
+			<EmptyState
+				type="notes"
+				setShowForm={setShowForm}
+			/>
+		);
 	}
 
 	return (
 		(showForm || customerId)
-        && (firstLoading ? (
-	<div className={styles.loader_div}>
-		<Loader
-			themeType="primary"
-			style={{
-				width          : '50px',
-				display        : 'flex',
-				justifyContent : 'center',
-				alignItem      : 'center',
-			}}
-		/>
-	</div>
-        ) : (
-	<div className={styles.container}>
-		<div className={styles.title}>Notes</div>
-		<div className={styles.note_editor}>
-			<div>
-				<div className={styles.editor_header} />
-				<Textarea
-					name="a5"
-					size="md"
-					placeholder="Description"
-					value={noteValue}
-					onChange={(val) => setNoteValue(val)}
+		&& (firstLoading ? (
+			<div className={styles.loader_div}>
+				<Loader
+					themeType="primary"
+					className={styles.loader_container}
 				/>
 			</div>
-			<div className={styles.note_footer}>
-				<Button
-					size="md"
-					themeType="secondary"
-					loading={createLoading}
-					onClick={handleSubmit}
-				>
-					Save
-				</Button>
+		) : (
+			<div className={styles.container}>
+				<div className={styles.title}>
+					<div>Notes</div>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setNewNote((p) => !p)}
+					>
+						{!newNote ? 'New Note' : 'Discard'}
+					</Button>
+				</div>
+				<DetailViewer
+					formComponent={formComponent}
+					listComponent={listComponent}
+					AddNote={newNote}
+					setNewNote={setNewNote}
+				/>
 			</div>
-		</div>
-		<div className={styles.toggle_div}>
-			<Toggle
-				name="a5"
-				size="sm"
-				offLabel="All Notes"
-				onLabel="My Notes"
-				checked={active}
-				onChange={() => setActive((p) => !p)}
-				disabled={listLoading}
-			/>
-		</div>
-		<div className={styles.wrap}>
-			<NotesList
-				list={list}
-				handleClick={handleClick}
-				handleDelete={handleDelete}
-				listLoading={listLoading}
-			/>
-		</div>
-	</div>
-        ))
+		))
 	);
 }
+
 export default AgentNotes;

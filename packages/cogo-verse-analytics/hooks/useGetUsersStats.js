@@ -11,21 +11,23 @@ import { firebaseConfig } from '../configurations/firebase-configs';
 
 function useGetUsersStats() {
 	const [userStats, setUserStats] = useState({ ai_chats: 0, kam_chats: 0 });
+	const [firebaseLoading, setFirebaseLoading] = useState(false);
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
 	const getUserSats = async () => {
+		setFirebaseLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
 		const countKamChats = query(
 			omniChannelCollection,
 			where('session_type', '==', 'admin'),
-			orderBy('updated_at', 'desc'),
+			orderBy('new_message_sent_at', 'desc'),
 		);
 		const countBotChats = query(
 			omniChannelCollection,
 			where('session_type', '==', 'bot'),
-			orderBy('updated_at', 'desc'),
+			orderBy('new_message_sent_at', 'desc'),
 		);
 		const ActiveBotChats = await getCountFromServer(countBotChats);
 		const ActiveKamChats = await getCountFromServer(countKamChats);
@@ -33,11 +35,13 @@ function useGetUsersStats() {
 			ai_chats  : ActiveBotChats.data().count,
 			kam_chats : ActiveKamChats.data().count,
 		});
+		setFirebaseLoading(false);
 	};
 
 	return {
 		getUserSats,
 		userStats,
+		firebaseLoading,
 	};
 }
 

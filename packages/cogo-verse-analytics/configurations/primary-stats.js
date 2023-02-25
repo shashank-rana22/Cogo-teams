@@ -71,18 +71,18 @@ export const INTENT_LEADERBOARD = [
 
 export const USER_STATUS = [
 	{
-		value : 2084235234435,
-		title : 'Happy users',
-		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
+		valueKey : 'total_good',
+		title    : 'Happy users',
+		src      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/happy_user.svg',
 	},
 	{
-		value : 20,
-		title : 'Neutral users',
-		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg',
+		valueKey : 'total_average',
+		title    : 'Neutral users',
+		src      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/neutral_user.svg',
 	},
 	{
-		value : 20,
-		title : 'Angry users',
-		src   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg',
+		valueKey : 'total_bad',
+		title    : 'Angry users',
+		src      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/angry_user.svg',
 	},
 ];
