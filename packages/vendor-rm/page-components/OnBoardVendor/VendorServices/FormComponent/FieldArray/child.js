@@ -3,7 +3,7 @@ import React from 'react';
 
 import { getElementController } from '../../../../../utils/get-element-controller';
 import useGetModifiedControls from '../../hooks/useGetModifiedControls';
-import subCategoryOptions from '../../utils/sub-category-options';
+// import subCategoryOptions from '../../utils/sub-category-options';
 
 import styles from './styles.module.css';
 
@@ -18,15 +18,20 @@ function Child({
 	noDeleteButtonTill = 0,
 	disabled = false,
 	services = [],
-	watch,
-	setValue,
+	// watch,
+	// setValue,
 }) {
 	const { newControls } = useGetModifiedControls({ services, index, controls });
 
-	const setSubCategoryValue = () => {
-		const selectedCategory = watch('services')?.[index]?.category;
-		setValue(`services[${index}].sub_category`, subCategoryOptions[selectedCategory]?.[0]?.value || '');
-	};
+	// const setSubCategoryValue = () => {
+	// 	const selectedCategory = watch('services')?.[index]?.category;
+	// 	setValue(`services[${index}].sub_category`, subCategoryOptions[selectedCategory]?.[0]?.value || '');
+	// };
+
+	// const selectedCategory = watch('services')?.[index]?.category;
+	// useEffect(() => {
+	// 	setValue(`services[${index}].sub_category`, subCategoryOptions[selectedCategory]?.[0]?.value || '');
+	// }, [selectedCategory]);
 
 	return (
 		<div className={styles.content}>
@@ -64,7 +69,7 @@ function Child({
 				})}
 
 			</div>
-			{setSubCategoryValue()}
+			{/* {setSubCategoryValue()} */}
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<div className={styles.button}>
