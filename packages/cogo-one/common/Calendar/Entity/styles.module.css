@@ -33,8 +33,21 @@
 
 	&:hover {
 		background: #FFFFFF;
-		box-shadow: inset 0 0 2px 2px #455fee;
+		box-shadow: 0px 0px 10px #D4D4D4;
+		transition: 0.1s;
 	}
+}
+.dateContainer:hover .dayH1{
+	font-size: 18px;
+	font-weight: 500;
+	color: #444444;
+	transition: 0.3s;
+}
+.dateContainer:hover .dayH2{
+	font-size: 12px;
+	font-weight: 500;
+	color: #444444;
+	transition: 0.3s;
 }
 
 .dayH1{
@@ -43,6 +56,8 @@
     line-height: 22px;
     text-align: center;
     color: #828282;
+
+	
 }
 
 .dayH2{
@@ -53,6 +68,7 @@
     color: #828282;
 
     white-space: nowrap;
+	
 }
 
 .active{
