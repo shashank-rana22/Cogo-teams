@@ -24,7 +24,13 @@ function Statistics({ loading = false }) {
 								<div className={styles.time_durations}>
 									{loading
 										? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
-										: <div className={styles.time_durations_header}>{itm.duration}</div>}
+										: (
+											<div className={styles.time_durations_header}>
+												<span>{itm.duration >= 60 ? itm.duration / 60 : itm.duration}</span>
+												{' '}
+												<span>{itm.duration >= 60 ? 'hr' : 'min'}</span>
+											</div>
+										)}
 
 									<div className={styles.time_durations_text}>{itm.text}</div>
 								</div>

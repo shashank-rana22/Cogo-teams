@@ -10,13 +10,13 @@ export const messageAnalytics = {
 	},
 	data: [
 		{
-			duration : '25 min',
+			duration : 25,
 			text     : 'Longest Chat duration',
 		}, {
-			duration : '05 min',
+			duration : 5,
 			text     : 'Shortest Chat duration',
 		}, {
-			duration : '15 min',
+			duration : 15,
 			text     : 'Avg Chat duration',
 		}],
 };
