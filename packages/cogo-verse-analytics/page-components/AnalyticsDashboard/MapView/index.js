@@ -5,14 +5,16 @@ import {
 } from '@cogoport/components';
 import { useGetAsyncOptions } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { dynamic } from '@cogoport/next';
 import { isEmpty, merge } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 
-import CircleContent from './CircleContent';
 import GlobeStatsFooter from './GlobeStatsFooter';
 import styles from './styles.module.css';
+
+const CircleContent = dynamic(() => import('./CircleContent'), { ssr: false });
 
 function MapView(props = {}) {
 	const globeGL = useRef();
