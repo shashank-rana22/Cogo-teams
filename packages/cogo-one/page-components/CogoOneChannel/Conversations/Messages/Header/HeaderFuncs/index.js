@@ -54,10 +54,8 @@ function TagsPopOver({
 			</div>
 		</div>
 	);
-	if (isEmpty(filteredOptions) || !hasPermissionToEdit) {
-		return null;
-	}
-	return (
+
+	return !(isEmpty(filteredOptions) || !hasPermissionToEdit)(
 		<Popover
 			placement="bottom"
 			interactive
@@ -68,7 +66,7 @@ function TagsPopOver({
 			<div className={styles.flex}>
 				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
 			</div>
-		</Popover>
+		</Popover>,
 	);
 }
 
