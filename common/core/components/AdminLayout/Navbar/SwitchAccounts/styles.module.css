@@ -1,0 +1,22 @@
+.container {
+	position: absolute;
+	top: 27.1%;
+	left: 104%;
+	z-index: -1;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	transition: 0.5s;
+
+	@media (max-width: 576px) {
+		position: static;
+	}
+}
+
+.button_container {
+	margin: 10px;
+
+	@media (max-width: 576px) {
+		padding-bottom: 10px;
+	}
+}
