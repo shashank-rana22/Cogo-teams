@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useUpdateAssignedChat({ activeMessageCard = {}, onClose = () => {}, formattedData }) {
@@ -32,7 +33,7 @@ function useUpdateAssignedChat({ activeMessageCard = {}, onClose = () => {}, for
 			Toast.success('updated sucessfully');
 			onClose();
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formattedData = {} }) {
@@ -27,7 +28,7 @@ function useAssignChat({ closeModal = () => {}, activeMessageCard = {}, formatte
 			closeModal();
 			Toast.success('Successfully Assigned');
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

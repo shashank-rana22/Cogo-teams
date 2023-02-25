@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -67,7 +68,7 @@ function useCreateCommunicationLog({
 			});
 			setDate('');
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

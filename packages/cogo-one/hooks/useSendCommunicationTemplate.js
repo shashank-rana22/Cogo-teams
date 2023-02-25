@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -28,9 +29,9 @@ function useSendCommunicationTemplate({ formattedData = {}, setOpenModal = () =>
 				},
 			});
 			setOpenModal(false);
-			Toast.success('Send Successfully');
+			Toast.success('Template Sent Successfully');
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

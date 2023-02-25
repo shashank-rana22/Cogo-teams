@@ -65,7 +65,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Message" badge={unReadChatsCount !== 0 && unReadChatsCount} />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
 			</div>
