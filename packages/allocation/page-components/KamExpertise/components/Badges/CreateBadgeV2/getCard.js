@@ -35,10 +35,11 @@ function GetCard(props) {
 				className={styles.file_select_style}
 				value={value}
 				onChange={(val) => setValue(val)}
+				// ? ask format
+				// accept=".png,.pkg"
 			/>
 
 		</div>
 	);
 }
 export default GetCard;
-// class="ui_3hLO- ui_upload_droparea_container"
