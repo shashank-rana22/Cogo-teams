@@ -15,7 +15,7 @@ function useGetCogoOneDashboard({ timeline, selectedTimeline }) {
 			await trigger({
 				params: {
 					timeline : timeline || 'day',
-					date     : timeline !== 'week' ? date || new Date() : undefined,
+					date     : timeline !== 'week' ? date : undefined,
 					from     : timeline === 'week' ? from : undefined,
 					to       : timeline === 'week' ? to : undefined,
 				},
