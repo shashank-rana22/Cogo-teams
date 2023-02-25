@@ -143,3 +143,9 @@ export const statusColorMapping = {
 	null     : 'orange',
 
 };
+
+export const PLACEHOLDER_MAPPING = {
+	shipment_id    : 'Select SID',
+	invoice        : 'Enter Invoice No',
+	onboarding_kyc : 'Enter Pan No',
+};
