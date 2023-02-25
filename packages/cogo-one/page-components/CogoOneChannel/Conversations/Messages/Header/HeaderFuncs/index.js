@@ -54,22 +54,21 @@ function TagsPopOver({
 			</div>
 		</div>
 	);
-	if (isEmpty(filteredOptions) || !hasPermissionToEdit) {
-		return null;
+	if (!isEmpty(filteredOptions) && hasPermissionToEdit) {
+		return (
+			<Popover
+				placement="bottom"
+				interactive
+				render={popOverContent}
+				onClickOutside={resetFunc}
+				visible={isVisible}
+			>
+				<div className={styles.flex}>
+					<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
+				</div>
+			</Popover>
+		);
 	}
-	return (
-		<Popover
-			placement="bottom"
-			interactive
-			render={popOverContent}
-			onClickOutside={resetFunc}
-			visible={isVisible}
-		>
-			<div className={styles.flex}>
-				<IcMPlusInCircle onClick={() => setIsVisible((p) => !p)} width={18} height={18} />
-			</div>
-		</Popover>
-	);
 }
 
 export default TagsPopOver;
