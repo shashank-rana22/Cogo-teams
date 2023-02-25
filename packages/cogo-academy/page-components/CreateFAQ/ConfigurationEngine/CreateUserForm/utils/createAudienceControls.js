@@ -2,40 +2,33 @@
 import SUB_FUNCTION_MAPPING from './subFunctionMappings';
 import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
-const createQuestionControls = ({ watchFunctions, entity_options }) => [{
-	type        : 'fieldArray',
-	name        : 'fieldArray',
-	showButtons : true,
-	heading     : '',
-	value       : [
+const createQuestionControls = ({ watchFunctions, entity_options }) => {
+	const controls = [
 		{
-			cogo_entity   : '',
-			country_id    : '',
-			platform      : '',
-			work_scopes   : '',
-			functions     : '',
-			sub_functions : '',
+			name        : 'name',
+			type        : 'text',
+			span        : 2,
+			label       : 'Name of the user group',
+			placeholder : 'Enter anme of the user group',
 		},
-	],
-	buttonText         : 'Add More',
-	noDeleteButtonTill : 1,
-	controls           : [
 		{
-			name        : 'cogo_entity',
+			name        : 'cogo_entity_id',
 			type        : 'select',
 			span        : 2,
 			label       : 'Cogo Entity',
 			options     : entity_options,
 			placeholder : 'Select Cogo Entity',
 		},
+
 		{
 			name        : 'country_id',
-			label       : 'Country Id',
+			label       : 'Country',
 			type        : 'select',
 			span        : 2,
 			options     : [{ label: 'IN', value: '541d1232-58ce-4d64-83d6-556a42209eb7' }],
-			placeholder : 'Select unit',
+			placeholder : 'Select country',
 		},
+
 		{
 			name    : 'platform',
 			label   : 'Platform',
@@ -48,8 +41,9 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => [{
 			placeholder : 'Select Platform',
 			rules       : { required: 'This is required' },
 		},
+
 		{
-			name        : 'work_scopes',
+			name        : 'persona',
 			label       : 'Work Scopes',
 			type        : 'select',
 			span        : 2,
@@ -57,8 +51,9 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => [{
 			options     : WORK_SCOPES_OPTIONS,
 			rules       : { required: 'This is required' },
 		},
+
 		{
-			name    : 'functions',
+			name    : 'auth_function',
 			label   : 'Functions',
 			type    : 'select',
 			span    : 2,
@@ -69,15 +64,18 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => [{
 			placeholder : 'Select Functions',
 			rules       : { required: 'This is required' },
 		},
+
 		{
-			name        : 'sub_functions',
+			name        : 'auth_sub_function',
 			label       : 'Sub Functions',
 			type        : 'select',
 			span        : 1,
 				 options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
 		},
-	],
-}];
+	];
+
+	return { controls };
+};
 
 export default createQuestionControls;

@@ -1,7 +1,8 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
-import SUB_FUNCTION_MAPPING from '../../../page-components/CreateFAQ/utils/subFunctionMappings';
+// eslint-disable-next-line max-len
+import SUB_FUNCTION_MAPPING from '../../../page-components/CreateFAQ/ConfigurationEngine/CreateUserForm/utils/subFunctionMappings';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 

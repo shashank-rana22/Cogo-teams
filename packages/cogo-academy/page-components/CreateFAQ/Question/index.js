@@ -6,7 +6,6 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
-import Layout from '../../../commons/Layout';
 import Spinner from '../../../commons/Spinner';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
 
@@ -32,16 +31,12 @@ function CreateFAQ() {
 		errors,
 		control,
 		onSubmit,
-		controls,
 		topicOptions,
 		tagOptions,
-		watch,
-		getArray,
 		setValue:setQuestionValue,
 		questionPreview,
 		setQuestionPreview,
 		onClickPublish,
-		showElements = {},
 		showModalOnCancel,
 		setShowModalOnCancel,
 	} = useCreateQuestions();
@@ -224,15 +219,6 @@ function CreateFAQ() {
 					/>
 
 				</div>
-
-				<Layout
-					fields={controls}
-					getArray={getArray}
-					control={control}
-					errors={errors}
-					watch={watch}
-					showElements={showElements}
-				/>
 
 				<div className={styles.button_container}>
 

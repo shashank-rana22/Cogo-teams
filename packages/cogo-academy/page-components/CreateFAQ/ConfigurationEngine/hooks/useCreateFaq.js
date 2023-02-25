@@ -18,6 +18,7 @@ const MAPPING = {
 
 function useCreateFaq() {
 	const router = useRouter();
+
 	const { control, handleSubmit, formState: { errors }, setValue, reset } = useForm();
 
 	const { general } = useSelector((state) => state);

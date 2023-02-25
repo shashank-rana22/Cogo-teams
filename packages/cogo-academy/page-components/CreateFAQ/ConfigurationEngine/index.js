@@ -1,4 +1,6 @@
+import AudienceComponent from './AudienceComponent';
 import CreateForm from './CreateComponent';
+import CreateUserForm from './CreateUserForm';
 import Header from './Header.js';
 import useCreateFaq from './hooks/useCreateFaq';
 import styles from './styles.module.css';
@@ -17,35 +19,46 @@ function ConfigurationEngine() {
 		reset,
 	} = useCreateFaq();
 
+	if (configurationPage === 'audience') {
+		return (<CreateUserForm setConfigurationPage={setConfigurationPage} />);
+	}
+
+	if (['tag', 'topic'].includes(configurationPage)) {
+		return (
+			<CreateForm
+				viewType={configurationPage}
+				setConfigurationPage={setConfigurationPage}
+				control={control}
+				handleSubmit={handleSubmit}
+				errors={errors}
+				createFaqComponent={createFaqComponent}
+				setValue={setValue}
+				reset={reset}
+			/>
+		);
+	}
+
 	return (
+
 		<div className={styles.container}>
-			{configurationPage === 'dashboard'
-				? (
-					<div>
-						<Header />
-						<TagComponent
-							configurationPage={configurationPage}
-							setConfigurationPage={setConfigurationPage}
-							reset={reset}
-						/>
-						<TopicComponent
-							configurationPage={configurationPage}
-							setConfigurationPage={setConfigurationPage}
-							reset={reset}
-						/>
-					</div>
-				) : (
-					<CreateForm
-						viewType={configurationPage}
-						setConfigurationPage={setConfigurationPage}
-						control={control}
-						handleSubmit={handleSubmit}
-						errors={errors}
-						createFaqComponent={createFaqComponent}
-						setValue={setValue}
-						reset={reset}
-					/>
-				)}
+			<Header />
+
+			<AudienceComponent
+				configurationPage={configurationPage}
+				setConfigurationPage={setConfigurationPage}
+			/>
+
+			<TagComponent
+				configurationPage={configurationPage}
+				setConfigurationPage={setConfigurationPage}
+				reset={reset}
+			/>
+
+			<TopicComponent
+				configurationPage={configurationPage}
+				setConfigurationPage={setConfigurationPage}
+				reset={reset}
+			/>
 
 		</div>
 
