@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentDocument = () => {
@@ -26,6 +27,7 @@ const useUpdateShipmentDocument = () => {
 				data: payload,
 			});
 			listAPi({});
+			Toast.success('Document Approved Successfully');
 		} catch (err) {
 			console.log(err);
 		}
