@@ -52,8 +52,17 @@ function ApprovalPending({
 			</Button>
 		),
 		handleStatus: (singleItem:any) => (
-			singleItem.documentState
+			singleItem.documentState === 'document_amendment_requested'
 				? (
+					<Button
+						themeType="secondary"
+						style={{ border: '1px solid #ED3726', color: '#ED3726' }}
+						disabled={updateLoading}
+						onClick={() => { handleEditMAWB(singleItem); }}
+					>
+						Amend
+					</Button>
+				) : (
 					<Button
 						themeType="secondary"
 						style={{ border: '1px solid #333' }}
@@ -61,15 +70,6 @@ function ApprovalPending({
 						onClick={() => { handleUpdate(singleItem); }}
 					>
 						Approve
-					</Button>
-				) : (
-					<Button
-						themeType="linkUi"
-						style={{ border: '1px solid #ED3726', color: '#ED3726' }}
-						disabled={updateLoading}
-						onClick={() => { handleEditMAWB(singleItem); }}
-					>
-						Amend
 					</Button>
 				)
 		),
