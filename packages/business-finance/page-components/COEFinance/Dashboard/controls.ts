@@ -57,10 +57,11 @@ export const filterControls = [
 		],
 	},
 	{
-		name        : 'dateRange',
-		type        : 'singleDateRange',
-		placeholder : 'Date Range',
-		span        : 2,
+		name                  : 'dateRange',
+		type                  : 'singleDateRange',
+		placeholder           : 'Date Range',
+		isPreviousDaysAllowed : true,
+		span                  : 2,
 	},
 
 ];
@@ -68,13 +69,12 @@ export const reportControls = [
 	{
 
 		name           : 'type',
-		label          : 'Type',
 		type           : 'select',
 		isClearable    : true,
 		multiple       : true,
 		span           : 1,
 		defaultOptions : false,
-		placeholder    : ' Select Service',
+		placeholder    : 'Type',
 		options        : [
 			{ value: 'sales', label: 'Sales' },
 			{ value: 'purchase', label: 'Purchase' },
@@ -85,10 +85,11 @@ export const reportControls = [
 
 	},
 	{
-		name        : 'date',
-		type        : 'singleDateRange',
-		placeholder : 'Date',
-		span        : 2,
+		name                  : 'date',
+		type                  : 'singleDateRange',
+		isPreviousDaysAllowed : true,
+		placeholder           : 'Date',
+		span                  : 2,
 	},
 
 ];

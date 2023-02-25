@@ -1,31 +1,38 @@
 const data = [
 	{
 		day      : '12 Dec',
-		invoices : 59,
+		Approved : 59,
+		Rejected : 59,
 	},
 	{
 		day      : '13 Dec',
-		invoices : 61,
+		Approved : 61,
+		Rejected : 59,
 	},
 	{
 		day      : '14 Dec',
-		invoices : 55,
+		Approved : 55,
+		Rejected : 59,
 	},
 	{
 		day      : '15 Dec',
-		invoices : 78,
+		Approved : 78,
+		Rejected : 59,
 	},
 	{
 		day      : '16 Dec',
-		invoices : 71,
+		Approved : 71,
+		Rejected : 59,
 	},
 	{
 		day      : '17 Dec',
-		invoices : 56,
+		Approved : 56,
+		Rejected : 59,
 	},
 	{
 		day      : '18 Dec',
-		invoices : 67,
+		Approved : 67,
+		Rejected : 59,
 	},
 ];
 

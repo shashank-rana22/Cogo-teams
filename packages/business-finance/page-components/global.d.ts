@@ -13,3 +13,4 @@ declare module '*.svg' {
 declare module '@cogoport/utils';
 declare module '@cogoport/components'
 declare module '@cogoport/icons-react'
+declare module '@cogoport/charts'
