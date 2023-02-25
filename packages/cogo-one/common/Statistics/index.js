@@ -26,7 +26,7 @@ function Statistics({ loading = false }) {
 										? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
 										: (
 											<div className={styles.time_durations_header}>
-												<span>{itm.duration >= 60 ? itm.duration / 60 : itm.duration}</span>
+												<span>{itm.duration >= 60 ? (itm.duration / 60).toFixed(2) : itm.duration}</span>
 												{' '}
 												<span>{itm.duration >= 60 ? 'hr' : 'min'}</span>
 											</div>
@@ -54,7 +54,13 @@ function Statistics({ loading = false }) {
 
 									{loading
 										? <Placeholder height="15px" width="100px" className={styles.customer_nos_placeholder} />
-										: <div className={styles.customer_nos}>{stat.customer_nos}</div>}
+										: (
+											<div className={styles.customer_nos}>
+												<span>{stat.customer_nos}</span>
+												{' '}
+												<span>{stat.static_data}</span>
+											</div>
+										)}
 
 								</div>
 							))
