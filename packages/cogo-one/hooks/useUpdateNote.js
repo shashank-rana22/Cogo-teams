@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useUpdateNote({ fetchListNotes = () => {}, setEditNote = () => {} }) {
@@ -30,7 +31,7 @@ function useUpdateNote({ fetchListNotes = () => {}, setEditNote = () => {} }) {
 			fetchListNotes();
 			setEditNote(false);
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

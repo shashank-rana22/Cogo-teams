@@ -17,19 +17,15 @@ const useListUserVoiceCalls = (filters = {}) => {
 	}, { manual: true });
 
 	const voiceCallList = async () => {
-		try {
-			const res = await trigger({
-				params: {
-					page    : pagination,
-					filters : { ...filters },
-				},
-			});
-			if (res.data) {
-				const { list = [], ...paginationData } = res?.data || {};
-				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
-			}
-		} catch (e) {
-			console.log('e', e);
+		const res = await trigger({
+			params: {
+				page    : pagination,
+				filters : { ...filters },
+			},
+		});
+		if (res.data) {
+			const { list = [], ...paginationData } = res?.data || {};
+			setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
 		}
 	};
 

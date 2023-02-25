@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useCreateSuggestions({ reset = () => {}, refetch = () => {} }) {
@@ -19,7 +20,7 @@ function useCreateSuggestions({ reset = () => {}, refetch = () => {} }) {
 			refetch();
 			Toast.success('Successfully Created');
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {

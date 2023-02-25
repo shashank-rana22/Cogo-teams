@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => {}, sender = null }) {
@@ -29,7 +30,7 @@ function useCreateLeadProfile({ updateLeaduser = () => {}, setShowError = () => 
 			Toast.success('Successfully Created');
 			setShowError(false);
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {
