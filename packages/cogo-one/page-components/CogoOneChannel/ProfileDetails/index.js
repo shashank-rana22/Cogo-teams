@@ -18,6 +18,7 @@ function ProfileDetails({ activeMessageCard, activeTab, activeVoiceCard, updateL
 	const orgId = activeTab === 'message' ? formattedMessageData?.organization_id : activeVoiceCard?.organization_id;
 
 	const { openNewTab, loading, ORG_PAGE_URL = '' } = useListOrganizations({ orgId, activeCardId, activeTab });
+
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>
