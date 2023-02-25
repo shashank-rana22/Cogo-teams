@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
+import { IcMDownload } from '@cogoport/icons-react';
 
 import Filters from '../Filters';
 
@@ -15,20 +15,11 @@ function Header() {
 
 				<Button
 					size="lg"
-					themeType="secondary"
+					themeType="primary"
 					style={{ marginRight: '8px' }}
 				>
 					<IcMDownload width={16} height={16} style={{ marginRight: '10px' }} />
 					Download
-
-				</Button>
-				<Button
-					size="lg"
-					themeType="primary"
-				>
-
-					<IcMUpload width={16} height={16} style={{ marginRight: '10px' }} />
-					Upload
 
 				</Button>
 

@@ -4,7 +4,7 @@ const enrichment = {
 		isMainNav  : true,
 	},
 
-	'[partner_id]/enrichment/[organization_id]': {
+	'[partner_id]/enrichment/[id]': {
 		navigation : 'enrichment',
 		isMainNav  : false,
 		layoutType : 'no_header',

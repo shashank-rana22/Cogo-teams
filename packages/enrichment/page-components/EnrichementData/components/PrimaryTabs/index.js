@@ -1,8 +1,17 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 
-import CardDetails from '../../common/CardDetails';
+import Response from '../../common/Response';
 
-function PrimaryTabs({ activeTab = '', setActiveTab = () => {} }) {
+function PrimaryTabs({
+	activeTab = '',
+	setActiveTab = () => {},
+	responseData = [],
+	loading = false,
+	setResponseData = () => {},
+	showAddPoc = false,
+	setShowAddPoc = () => {},
+
+}) {
 	return (
 		<div style={{ marginTop: 30 }}>
 			<Tabs
@@ -12,12 +21,28 @@ function PrimaryTabs({ activeTab = '', setActiveTab = () => {} }) {
 			>
 				<TabPanel name="user" title="Point Of Contacts">
 
-					<CardDetails type="user" />
+					<Response
+						responseData={responseData}
+						setResponseData={setResponseData}
+						activeTab={activeTab}
+						loading={loading}
+						showAddPoc={showAddPoc}
+						setShowAddPoc={setShowAddPoc}
+					/>
+
 				</TabPanel>
 
 				<TabPanel name="address" title="Address">
 
-					<CardDetails type="address" />
+					<Response
+						responseData={responseData}
+						setResponseData={setResponseData}
+						activeTab={activeTab}
+						loading={loading}
+						showAddPoc={showAddPoc}
+						setShowAddPoc={setShowAddPoc}
+					/>
+
 				</TabPanel>
 			</Tabs>
 		</div>

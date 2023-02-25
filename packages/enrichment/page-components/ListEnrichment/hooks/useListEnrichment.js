@@ -1,23 +1,25 @@
-import { Button } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { format } from '@cogoport/utils/';
 import { useState } from 'react';
 
-// import { format } from '@cogoport/utils/';
+import Actions from '../components/EnrichmentTable/Actions';
 import styles from '../styles.module.css';
 
 const useListEnrichment = () => {
-	const [addressModal, setAddressModal] = useState({
-		showModal   : false,
-		addressData : '',
-	});
-
+	const [popoverId, setPopoverId] = useState(null);
 	const [params, setParams] = useState({
 		sort_type : 'desc',
 		sort_by   : 'created_at',
 		page      : 1,
-		filters   : {},
+		filters   : {
+			status: 'responded',
+		},
 	});
+
+	const [enrichmentItem, setEnrichmentItem] = useState();
 
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/feedback_requests',
@@ -28,25 +30,13 @@ const useListEnrichment = () => {
 
 	const router = useRouter();
 
-	const handleViewMoreClick = (e, address) => {
-		e.preventDefault();
-
-		setAddressModal((prev) => (
-			{
-				...prev,
-				showModal   : true,
-				addressData : address,
-			}
-		));
-	};
-
-	const handleUploadClick = (organization_id) => {
-		router.push('/enrichment/[organization_id]', `/enrichment/${organization_id}`);
+	const handleUploadClick = (feedback_request_id) => {
+		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
 	};
 	const columns = [
 		{
 			Header   : <div>ID</div>,
-			id       : 'a',
+			id       : 'id',
 			accessor : ({ id = '' }) => (
 				<section>
 					{id}
@@ -55,90 +45,134 @@ const useListEnrichment = () => {
 		},
 		{
 			Header   : <div>ORGANIZATION</div>,
-			id       : 'b',
-			accessor : ({ organization_name = '' }) => (
+			id       : 'business_name',
+			accessor : ({ organization = '' }) => (
 				<section>
-					{organization_name}
+					{organization.business_name || '-'}
 				</section>
 			),
 		},
 		{
 			Header   : <div>REQUEST DATE</div>,
-			id       : 'c',
-			accessor : ({ request_date }) => (
+			id       : 'created_at',
+			accessor : ({ created_at }) => (
 				<div>
-					{/* {request_date	 ? (
+					{created_at	 ? (
 						<div>
-							{format(request_date, 'dd MMM yyyy') || '___'}
+							{format(created_at, 'dd MMM yyyy') || '-'}
 
 						</div>
-					) : '___'} */}
-					{request_date}
+					) : '___'}
+
 				</div>
 
 			),
 		},
 		{
 			Header   : <div>PAN</div>,
-			id       : 'd',
-			accessor : ({ registration_number = '' }) => (
+			id       : 'registration_number',
+			accessor : ({ organization = {} }) => (
 				<section>
-					{registration_number}
+					{organization.registration_number || '-'}
 				</section>
 			),
 		},
 		{
 			Header   : <div>ADDRESS</div>,
-			id       : 'e',
-			accessor : ({ address = '' }) => (
+			id       : 'address',
+			accessor : ({ address = '', id = '' }, item = {}) => (
 
-				<section style={{ display: 'flex' }}>
-					<div className={styles.address}>
+				address ? (
+					<section style={{ display: 'flex' }}>
+						<div className={styles.address}>
+							{address}
+						</div>
 
-						{address}
+						<div
+							className={styles.link_text}
+							role="presentation"
+							onClick={() => {
+								setEnrichmentItem({
+									item,
+									type: 'address',
+									id,
 
-					</div>
+								});
+							}}
+						>
+							View More
 
-					<div
-						className={styles.link_text}
-						role="presentation"
-						onClick={(e) => {
-							handleViewMoreClick(e, address);
-						}}
-
-					>
-
-						View More
-
-					</div>
-
-				</section>
+						</div>
+					</section>
+				) : '-'
 
 			),
 		},
-		{
-			Header   : <div>SUBMIT ENRICHED DATE</div>,
-			id       : 'f',
-			accessor : ({ id }) => (
-				<section>
-					<Button themeType="secondary" size="sm" onClick={() => handleUploadClick(id)}>Upload</Button>
 
-				</section>
-			),
+		{
+			key      : 'action',
+			Header   : 'Action',
+			accessor : (item) => {
+				const { id } = item;
+
+				return (
+					<div className={styles.content_container}>
+						<Popover
+							visible={popoverId === id}
+							placement="left"
+							interactive
+							render={(
+								<Actions onClickCta={({ type }) => {
+									if (type === 'manual') {
+										handleUploadClick(id);
+									} else {
+										setEnrichmentItem({
+											item,
+											id,
+											type,
+										});
+									}
+									setPopoverId(null);
+								}}
+								/>
+							)}
+							onClickOutside={() => setPopoverId(null)}
+						>
+							<div
+								className={styles.svg_container}
+							>
+								<IcMOverflowDot
+									height={16}
+									width={16}
+									onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
+								/>
+							</div>
+						</Popover>
+					</div>
+				);
+			},
 		},
 	];
 
 	const { list = [], ...paginationData } = data || {};
 
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: newPage,
+		}));
+	};
+
 	return {
 		columns,
-		addressModal,
-		setAddressModal,
 		list,
 		paginationData,
 		refetch,
 		loading,
 		setParams,
+		getNextPage,
+		enrichmentItem,
+		setEnrichmentItem,
 
 	};
 };

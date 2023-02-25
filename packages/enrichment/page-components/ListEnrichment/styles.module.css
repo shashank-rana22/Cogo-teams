@@ -13,3 +13,26 @@
     text-decoration: underline;
     margin-left: 20px;
 }
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.svg_container {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.content_container {
+	display: flex;
+	margin-bottom: 4px;
+
+	@media (min-width: 768px) {
+		flex-direction: column;
+		justify-content: center;
+		margin-bottom: 0;
+		word-break: break-word;
+	}
+}

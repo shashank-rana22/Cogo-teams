@@ -5,3 +5,9 @@
     display: flex;
     align-items: center;
 }
+.control_container {
+	display: flex;
+	margin: 14px;
+    flex-direction: column;
+
+}

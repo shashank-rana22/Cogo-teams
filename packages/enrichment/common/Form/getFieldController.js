@@ -23,6 +23,7 @@ const controlTypeControllerMapping = {
 	datePicker         : DatepickerController,
 	dateRangePicker    : DateRangePickerController,
 	mobileNumber       : MobileNumberController,
+
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
