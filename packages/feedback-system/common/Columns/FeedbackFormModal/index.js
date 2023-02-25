@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useGetForm from '../../../hooks/useGetForm';
 
@@ -28,6 +28,8 @@ function FeedbackFormModal({
 	} = item;
 
 	const [addFeedback, setAddFeedback] = useState(false);
+	const [rating, setRating] = useState({});
+	const [comment, setComment] = useState(feedback);
 
 	const {
 		formData = {},
@@ -38,27 +40,12 @@ function FeedbackFormModal({
 
 	const { form_questions = [], form_id = '', form_responses = [] } = formData;
 
-	const [rating, setRating] = useState({});
-	const [comment, setComment] = useState(feedback);
-
 	const questionsToShow = action === 'show' ? form_responses : form_questions;
 
 	const onCloseFunction = () => {
 		setAddFeedback(false);
 		getTeamFeedbackList();
 	};
-
-	useEffect(() => {
-		if (!isEmpty(form_responses)) {
-			const oldResponses = {};
-
-			(form_responses || []).forEach((res) => { oldResponses[res.id] = res.rating; });
-			if (action === 'show') {
-				setRating(oldResponses);
-			}
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [form_responses]);
 
 	// const currentDate = new Date();
 

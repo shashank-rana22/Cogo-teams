@@ -1,75 +1,34 @@
-import { Tooltip, Toast, Button, Upload } from '@cogoport/components';
+import { Tooltip, Toast, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { IcMInfo, IcMUpload } from '@cogoport/icons-react';
-import { useRequest, request, publicRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { IcMInfo } from '@cogoport/icons-react';
+import { useRequest } from '@cogoport/request';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
 function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	const [files, setFiles] = useState({});
-	const [loading, setLoading] = useState(true);
-	const [urlStore, setUrlStore] = useState([]);
 
 	const [{ loading : uploadLoading = false }, trigger] = useRequest({
 		url    : 'approve-ratings',
 		method : 'post',
 	}, { manual: true });
 
-	const uploadFile = async (file) => {
-		const { data } = await request({
-			method : 'GET',
-			url    : '/get_media_upload_url',
-			params : {
-				file_name: file.name,
-			},
-		});
+	const { control, watch, formState:{ errors } } = useForm();
 
-		const { url, headers } = data;
+	const onboardingCsvFile = watch('onboarding_url');
+	const normalizationCsvFile = watch('onboarding_url');
 
-		await publicRequest({
-			url,
-			data    : file,
-			method  : 'PUT',
-			headers : {
-				...headers,
-				'Content-Type': file.type,
-			},
-		});
-
-		const finalUrl = url.split('?')[0];
-
-		return {
-			fileName: file.name,
-			finalUrl,
-		};
-	};
-
-	const handleChange = async (values, type) => {
-		try {
-			setLoading((pv) => ({ ...pv, [type]: true }));
-
-			if (values.length > 0) {
-				const promises = values.map((value) => uploadFile(value, type));
-
-				const allUrls = await Promise.all(promises);
-
-				setUrlStore(allUrls);
-				setFiles({ ...files, [type]: values });
-			}
-		} catch (error) {
-			Toast.error('File Upload failed.......');
-		} finally {
-			setLoading((pv) => ({ ...pv, [type]: false }));
-		}
-	};
+	useEffect(() => setFiles({
+		onboardingCSV    : onboardingCsvFile || undefined,
+		normalizationCSV : normalizationCsvFile || undefined,
+	}), [onboardingCsvFile, normalizationCsvFile]);
 
 	const uploadCSVs = async () => {
-		let fileUrl;
-		urlStore.forEach((file) => { fileUrl = file.finalUrl; });
-
 		try {
-			await trigger({ data: { Url: fileUrl } });
+			await trigger({ data: { Url: files.normalizationCSV } });
 
 			Toast.success('File sent for processing. Please check after some time...');
 			setFiles({});
@@ -113,14 +72,11 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 					</Tooltip>
 				</div>
 
-				<Upload
-					value={files.onboardingCSV}
-					onChange={(values) => handleChange(values, 'onboardingCSV')}
-					uploadIcon={<IcMUpload height={40} width={40} />}
-					fileData={urlStore}
-					loading={loading.onboardingCSV}
+				<UploadController
+					control={control}
+					errors={errors}
+					name="onboarding_url"
 					accept=".csv"
-					style={{ height: 'fit-content' }}
 					disabled={files.normalizationCSV}
 				/>
 			</div>
@@ -144,15 +100,13 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 					</Tooltip>
 				</div>
 
-				<Upload
-					value={files.normalizationCSV}
-					onChange={(values) => handleChange(values, 'normalizationCSV')}
-					uploadIcon={<IcMUpload height={40} width={40} />}
-					fileData={urlStore}
-					loading={loading.normalizationCSV}
+				<UploadController
+					control={control}
+					errors={errors}
+					name="normalization_url"
 					accept=".csv"
-					style={{ height: 'fit-content' }}
 					disabled={files.onboardingCSV}
+					uploadType="aws"
 				/>
 			</div>
 

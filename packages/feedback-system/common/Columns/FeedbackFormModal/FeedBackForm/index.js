@@ -47,7 +47,7 @@ function FeedBackForm({
 
 	const newOptions = Array(5).fill('').map((_, index) => ({
 		label : '',
-		value : (index + 1),
+		value : (index + 1).toString(),
 		...(action === 'show' ? { disabled: true } : {}),
 	}));
 
@@ -104,7 +104,7 @@ function FeedBackForm({
 			</div>
 
 			{(questionsToShow || []).map((key) => {
-				const { id, question, description = '', feedback = '' } = key || {};
+				const { id, question, rating: pastRating, description = '', feedback = '' } = key || {};
 
 				return (
 					<div
@@ -132,7 +132,7 @@ function FeedBackForm({
 							<div className={styles.radio_group}>
 								<RadioGroup
 									options={newOptions}
-									value={action === 'show' ? rating[id] : rating[id]?.rating}
+									value={pastRating || rating[id]?.rating}
 									onChange={(val) => {
 										if (action !== 'show') {
 											setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
