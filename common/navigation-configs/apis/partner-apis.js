@@ -9773,21 +9773,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'operator',
 		},
-		{
-			api          : 'create_air_india_awb_number',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'update_air_india_awb_status',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'get_awb_plugin_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
 	],
 	airline_booking_plugin: [
 		{
@@ -9817,6 +9802,11 @@ const partner = {
 		},
 		{
 			api          : 'get_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_air_india_lms_password',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
