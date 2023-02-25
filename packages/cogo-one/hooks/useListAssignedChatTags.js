@@ -12,7 +12,11 @@ const useListAssignedChatTags = () => {
 	);
 
 	const fetchList = async () => {
-		await trigger();
+		try {
+			await trigger();
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	useEffect(() => {

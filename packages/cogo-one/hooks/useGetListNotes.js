@@ -14,15 +14,19 @@ function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activ
 	const { user_number } = activeVoiceCard || {};
 
 	const fetchListNotes = async () => {
-		await trigger({
-			params: {
-				filters: {
-					channel_chat_id : activeTab === 'message' ? id : user_number,
-					agent_id        : active ? profile?.user?.id : undefined,
+		try {
+			await trigger({
+				params: {
+					filters: {
+						channel_chat_id : activeTab === 'message' ? id : user_number,
+						agent_id        : active ? profile?.user?.id : undefined,
+					},
 				},
-			},
-		});
-		setFirstLoading(false);
+			});
+			setFirstLoading(false);
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	useEffect(() => {

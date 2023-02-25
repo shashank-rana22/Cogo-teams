@@ -17,21 +17,25 @@ const useGetOmnichannelActivityLogs = ({
 	}, { manual: true });
 
 	const fetchActivityLogs = async (filters = []) => {
-		await trigger({
-			params: {
-				user_id       : user_id || undefined,
-				lead_user_id  : !user_id ? lead_user_id : undefined,
-				activity_type : activityTab,
-				page          : pagination,
-				c_filters:
-					!isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
+		try {
+			await trigger({
+				params: {
+					user_id       : user_id || undefined,
+					lead_user_id  : !user_id ? lead_user_id : undefined,
+					activity_type : activityTab,
+					page          : pagination,
+					c_filters:
+						!isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
 
-				t_filters: !isEmpty(filters) && activityTab === 'transactional' ? {
-					serial_id: filters.toString(),
-				} : undefined,
+					t_filters: !isEmpty(filters) && activityTab === 'transactional' ? {
+						serial_id: filters.toString(),
+					} : undefined,
 
-			},
-		});
+				},
+			});
+		} catch (error) {
+			// console.log(error);
+		}
 
 		setFilterVisible(false);
 	};
