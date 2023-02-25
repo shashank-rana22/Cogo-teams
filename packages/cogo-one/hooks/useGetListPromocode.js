@@ -8,19 +8,23 @@ const useGetListPromotions = ({ organizationId = '' }) => {
 	}, { manual: true });
 
 	const fetchListPromoCode = async () => {
-		await trigger({
-			params: {
-				promocodes_required : true,
-				discounts_required  : true,
-				filters             : {
-					status           : 'published',
-					consumption_mode : 'manual',
-					category         : 'marketing',
-					organization_id  : organizationId,
-				},
+		try {
+			await trigger({
+				params: {
+					promocodes_required : true,
+					discounts_required  : true,
+					filters             : {
+						status           : 'published',
+						consumption_mode : 'manual',
+						category         : 'marketing',
+						organization_id  : organizationId,
+					},
 
-			},
-		});
+				},
+			});
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	useEffect(() => {

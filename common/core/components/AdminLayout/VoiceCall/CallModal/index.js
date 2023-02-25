@@ -27,8 +27,8 @@ function CallModal({
 		>
 			<Modal.Body>
 				<IcMMinus
-					width={10}
-					height={10}
+					width={25}
+					height={25}
 					cursor="pointer"
 					onClick={() => {
 						dispatch(

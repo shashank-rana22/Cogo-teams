@@ -9,7 +9,11 @@ function useAgentWorkPrefernce() {
 	}, { manual: true });
 
 	const fetchworkPrefernce = async () => {
-		await trigger();
+		try {
+			await trigger();
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 
 	useEffect(() => {

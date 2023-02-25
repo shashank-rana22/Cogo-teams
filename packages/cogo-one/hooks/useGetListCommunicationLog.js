@@ -9,15 +9,19 @@ function useGetListCommunicationLog({ organizationId = null, userId = null }) {
 	}, { manual: true });
 
 	const fetchListLogApi = async () => {
-		await trigger({
-			params: {
-				filters: {
-					communication_type : 'meeting',
-					organization_id    : organizationId,
+		try {
+			await trigger({
+				params: {
+					filters: {
+						communication_type : 'meeting',
+						organization_id    : organizationId,
+					},
 				},
-			},
-		});
-		setFirstLoading(false);
+			});
+			setFirstLoading(false);
+		} catch (error) {
+			// console.log(error);
+		}
 	};
 	useEffect(() => {
 		if (organizationId) {
