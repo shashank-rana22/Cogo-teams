@@ -36,11 +36,12 @@ export const FILTERS : ControlProps[] = [
 		span    : 12,
 		groupBy : [
 			{
-				label       : 'Invoice Date',
-				name        : 'billDate',
-				type        : 'singleDateRange',
-				placeholder : 'Invoice Date',
-				span        : 3.5,
+				label                 : 'Invoice Date',
+				name                  : 'billDate',
+				type                  : 'singleDateRange',
+				placeholder           : 'Invoice Date',
+				isPreviousDaysAllowed : true,
+				span                  : 3.5,
 			},
 			{
 				label       : 'Payment Due Date',
@@ -50,11 +51,12 @@ export const FILTERS : ControlProps[] = [
 				span        : 3.5,
 			},
 			{
-				label       : 'Last Modified Date',
-				name        : 'updatedDate',
-				type        : 'singleDateRange',
-				placeholder : 'Last Modified Date',
-				span        : 3.5,
+				label                 : 'Last Modified Date',
+				name                  : 'updatedDate',
+				type                  : 'singleDateRange',
+				placeholder           : 'Last Modified Date',
+				isPreviousDaysAllowed : true,
+				span                  : 3.5,
 			},
 
 		],
