@@ -155,3 +155,7 @@
 	justify-content: center;
 	height: 100%;
 }
+
+.placeholder_element {
+	border-radius: 4px;
+}

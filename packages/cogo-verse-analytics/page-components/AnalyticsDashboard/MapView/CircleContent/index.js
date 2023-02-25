@@ -5,7 +5,7 @@ import React from 'react';
 
 import { circleStats } from '../../../../configurations/circle-stats';
 import { imgURL } from '../../../../constants/image-urls';
-import { strToKMBT } from '../../../../utils/strToKMBT';
+import { handleValues } from '../../../../utils/handleValues';
 
 import styles from './styles.module.css';
 
@@ -78,7 +78,7 @@ function CircleContent(props = {}) {
 								>
 									<div className={styles.stat_value}>
 										{!globeLoading
-											? strToKMBT(globeStats[valueKey] || 0) || 0
+											? handleValues(globeStats[valueKey] || 0) || 0
 											: 	(
 												<Placeholder
 													className={styles.placeholder_element}

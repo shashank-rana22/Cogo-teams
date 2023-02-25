@@ -4,7 +4,7 @@ import React from 'react';
 
 import { CONVERSATIONS } from '../../../../configurations/primary-stats';
 import { PIE_ICON } from '../../../../constants/monitoring';
-import { strToKMBT } from '../../../../utils/strToKMBT';
+import { handleValues } from '../../../../utils/handleValues';
 import CommunicationPieChart from '../PieChart';
 
 import styles from './styles.module.css';
@@ -71,7 +71,7 @@ function GlobeStatsFooter(props = {}) {
 									<div className={styles.stat_circle} style={{ background: icon_bg }} />
 									<div className={styles.com_stat_value}>
 										{!statsLoading
-											? strToKMBT(conversation_data[valueKey] || '0')
+											? handleValues(conversation_data[valueKey] || '0')
 											: (
 												<Placeholder
 													className={styles.placeholder_element}
