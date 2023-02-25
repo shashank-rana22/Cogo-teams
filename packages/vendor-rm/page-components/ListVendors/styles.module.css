@@ -162,3 +162,10 @@
 .underline {
 	text-decoration-line: underline;
 }
+
+.filter_in_use {
+	height: 8px;
+	width: 8px;
+	border-radius: 50%;
+	background-color: blue;
+}

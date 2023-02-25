@@ -1,15 +1,22 @@
 import { useState } from 'react';
 
 import CompanyPOC from './components/CompanyPOC';
+import Header from './components/Header';
+import COMPONENT_MAPPING from './components/Header/utils/component-mapping';
 import ServicePOC from './components/ServicePOC';
-import Top from './components/Top';
-import COMPONENT_MAPPING from './components/Top/utils/component-mapping';
+import useGetListVendorPocServices from './hooks/useGetListVendorPocServices';
 import styles from './styles.module.css';
 
 function ServicesUsers({
 	data = {},
 	refetchVendorInfo = () => {},
 }) {
+	const {
+		refetchServicesPocs,
+		allServicesAndPocs = [],
+		loading = false,
+	} = useGetListVendorPocServices();
+
 	const [showForm, setShowForm] = useState('');
 
 	const Component = COMPONENT_MAPPING[showForm];
@@ -18,15 +25,22 @@ function ServicesUsers({
 		<div className={styles.padd}>
 
 			<div className={styles.main}>
-				<Top showForm={showForm} setShowForm={setShowForm} />
+				<Header showForm={showForm} setShowForm={setShowForm} />
 
 				{Component && (
-					<Component setShowForm={setShowForm} getVendorData={data} />
+					<Component
+						setShowForm={setShowForm}
+						getVendorData={data}
+						refetchServicesPocs={refetchServicesPocs}
+					/>
 				)}
 
 				<CompanyPOC data={data} refetchVendorInfo={refetchVendorInfo} />
 
-				<ServicePOC />
+				<ServicePOC
+					allServicesAndPocs={allServicesAndPocs}
+					loading={loading}
+				/>
 			</div>
 		</div>
 	);

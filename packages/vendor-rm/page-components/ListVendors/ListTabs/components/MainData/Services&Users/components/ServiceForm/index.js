@@ -1,12 +1,13 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import FormLayout from '../../../../../../../../../commons/components/FormLayout/FormLayout';
+import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
 
 import useCreateVendorServicePOC from './hooks/useCreateVendorServicePOC';
 import styles from './styles.module.css';
 
 function ServiceForm({
+	refetchServicesPocs = () => {},
 	setShowForm = () => {},
 	getVendorData = {},
 }) {
@@ -21,6 +22,7 @@ function ServiceForm({
 	} = useCreateVendorServicePOC({
 		setShowForm,
 		getVendorData,
+		refetchServicesPocs,
 	});
 
 	return (

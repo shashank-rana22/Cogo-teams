@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Top({
+function Header({
 	setShowForm = () => {},
 	showForm,
 }) {
@@ -34,4 +34,4 @@ function Top({
 	);
 }
 
-export default Top;
+export default Header;

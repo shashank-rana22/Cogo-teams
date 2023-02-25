@@ -91,7 +91,7 @@ function CompanyPOC({
 				onClose={() => setShowEditPocModal(false)}
 				// className={styles.modal_container}
 			>
-				<Modal.Header title="Edit" />
+				<Modal.Header title="Edit POC Details" />
 				<Modal.Body>
 					<section
 						className={styles.bodyStyle}
