@@ -39,7 +39,6 @@ function Stats(props = {}) {
 			</div>
 
 			<PrimaryStats userStats={userStats} />
-			{/* Line Chart --------------------------------------------------------------------------- */}
 
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>

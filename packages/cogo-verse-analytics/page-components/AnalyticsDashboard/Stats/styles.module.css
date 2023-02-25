@@ -32,8 +32,6 @@
 	}
 }
 
-/* ----------------------------------------------------- */
-
 .primary_stats {
 	display: flex;
 	flex-direction: row;
@@ -41,8 +39,6 @@
 	height: 225px;
 	background: #f9f5ec;
 }
-
-/* Primary Left ----------------------------------------------------- */
 
 .primary_left {
 	flex-basis: 59%;
@@ -125,8 +121,6 @@
 .placeholder_element {
 	border-radius: 4px;
 }
-
-/* Primary Right ----------------------------------------------------- */
 
 .primary_right {
 	display: flex;
@@ -257,8 +251,6 @@
 	margin: 0 10px;
 	background: #e0e0e0;
 }
-
-/* Line Chart------------------------------------------- */
 
 .line_chart_container {
 	display: flex;
