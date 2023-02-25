@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Filters from '../Filters';
 
 import ApprovalPending from './components/ApprovalPending';
-import GenerateFinalAirwayBill from './components/GenerateFinalAirwayBill';
+import ApprovedAWB from './components/ApprovedAWB';
 import NewAWB from './components/NewAWB';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
@@ -28,7 +28,7 @@ const tabs = [
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
-	approved_awb     : GenerateFinalAirwayBill,
+	approved_awb     : ApprovedAWB,
 };
 
 function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
@@ -47,6 +47,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 		// if (activeTab === 'new_awb') { listAPi(); }
 		if (activeTab === 'new_awb') { listAPi({ filter: filters }); }
 		if (activeTab === 'approval_pending') { listAPi({ filter: filters }); }
+		if (activeTab === 'approved_awb') { listAPi({ filter: filters }); }
 	}, [activeTab, JSON.stringify(filters)]);
 
 	return (

@@ -12,6 +12,24 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 		{ manual: true },
 	);
 
+	const payload = {
+		new_awb: {
+			assignedStakeholder : 'ground_ops',
+			status              : 'pending',
+			task                : ['upload_mawb_freight_certificate'],
+		},
+		approval_pending: {
+			assignedStakeholder : 'ground_ops',
+			status              : 'pending',
+			task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
+			documentType        : 'draft_airway_bill',
+			isDocDataRequired   : true,
+		},
+		approved_awb: {
+			assignedStakeholder: 'ground_ops',
+		},
+	};
+
 	const listAPi = async ({ filter = {} }) => {
 		if (searchValue) {
 			setPage(1);
@@ -24,11 +42,9 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 					filters : {
 					},
 					...filter,
-					isDocDataRequired   : activeTab === 'approval_pending' ? true : undefined,
-					status              : activeTab === 'approval_pending' ? 'completed' : undefined,
-					assignedStakeholder : 'ground_ops',
+					...payload[activeTab],
 					page,
-					sort_type           : 'desc',
+					sort_type: 'desc',
 				},
 			});
 		} catch (err) {
