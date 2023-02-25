@@ -7,15 +7,17 @@ function LoaderPerformance() {
 	return (
 		<>
 			{
-                [...Array(6)].map(() => (
+                [...Array(5)].map(() => (
 	<div className={styles.loader_box}>
 		<div className={styles.left_loader}>
-			<Placeholder width="50px" height="35px" margin="5px 5px" />
-			<Placeholder width="80px" height="35px" margin="5px 5px" />
-			<Placeholder width="30px" height="35px" margin="5px 5px" />
+			<Placeholder width="35px" height="35px" margin="8px 5px" className={styles.picture_placeholder} />
+			<div className={styles.left_loader_pair}>
+				<Placeholder width="120px" height="10px" margin="8px 5px" className={styles.performance_placeholder} />
+				<Placeholder width="45px" height="10px" margin="2px 5px" className={styles.performance_placeholder} />
+			</div>
 		</div>
 		<div>
-			<Placeholder width="40px" height="35px" margin="5px 5px" />
+			<Placeholder width="40px" height="35px" margin="8px 5px" className={styles.performance_placeholder} />
 		</div>
 
 	</div>

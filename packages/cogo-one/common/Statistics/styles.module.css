@@ -80,3 +80,11 @@
 	color: #828282;
 	text-align: right;
 }
+
+.duration_placeholder {
+	border-radius: 5px;
+}
+
+.customer_nos_placeholder {
+	border-radius: 5px;
+}
