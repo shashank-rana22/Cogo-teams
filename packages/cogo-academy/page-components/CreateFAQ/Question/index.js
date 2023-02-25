@@ -7,6 +7,7 @@ import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import Layout from '../../../commons/Layout';
+import Spinner from '../../../commons/Spinner';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
 
 import BodyTextEditor from './BodyTextEditor';
@@ -22,6 +23,8 @@ const style = {
 };
 
 function CreateFAQ() {
+	const router = useRouter();
+
 	const {
 		editorValue,
 		setEditorValue,
@@ -39,6 +42,8 @@ function CreateFAQ() {
 		setQuestionPreview,
 		onClickPublish,
 		showElements = {},
+		showModalOnCancel,
+		setShowModalOnCancel,
 	} = useCreateQuestions();
 
 	const {
@@ -85,9 +90,12 @@ function CreateFAQ() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
-	const router = useRouter();
-
 	const onClickBackIcon = () => {
+		router.back();
+	};
+
+	const onClickYesButton = () => {
+		setShowModalOnCancel(false);
 		router.back();
 	};
 
@@ -100,6 +108,20 @@ function CreateFAQ() {
 		);
 	}
 
+	if (loading) {
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					outerBorderColor="#FFF"
+					spinBorderColor="#000"
+					borderWidth="7px"
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div>
 
@@ -109,7 +131,9 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.heading_text}>
-				Create A Question
+				{data ? 'Update' : 'Create'}
+				{' '}
+				A Question
 			</div>
 
 			<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
@@ -188,7 +212,10 @@ function CreateFAQ() {
 					<div className={styles.input_label}>
 						Answer
 					</div>
-					<BodyTextEditor editorValue={editorValue} setEditorValue={setEditorValue} />
+					<BodyTextEditor
+						editorValue={editorValue}
+						setEditorValue={setEditorValue}
+					/>
 
 				</div>
 
@@ -203,7 +230,11 @@ function CreateFAQ() {
 
 				<div className={styles.button_container}>
 
-					<Button themeType="tertiary" style={{ marginRight: '12px' }}>
+					<Button
+						themeType="tertiary"
+						style={{ marginRight: '12px' }}
+						onClick={() => setShowModalOnCancel(true)}
+					>
 						Cancel
 					</Button>
 
@@ -222,6 +253,7 @@ function CreateFAQ() {
 				showCloseIcon
 			>
 				<Modal.Header title="Request your question here" />
+
 				<Modal.Body>
 					<div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
 						<CreateForm
@@ -238,10 +270,44 @@ function CreateFAQ() {
 						/>
 					</div>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button onClick={handleCreate(createFaqComponent)}>
 						Submit
 					</Button>
+				</Modal.Footer>
+			</Modal>
+
+			<Modal
+				size="md"
+				show={showModalOnCancel}
+				onClose={() => setShowModalOnCancel(false)}
+				closeOnOuterClick={false}
+				showCloseIcon
+			>
+				<Modal.Header title="Request your question here" />
+
+				<Modal.Body>
+					<div className={styles.text_wrapper}>
+						Your current chnges will not be saved, Are you sure want to cancel ?
+					</div>
+				</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						themeType="tertiary"
+						style={{ marginRight: '8' }}
+						onClick={() => setShowModalOnCancel(false)}
+					>
+						No
+					</Button>
+
+					<Button
+						onClick={onClickYesButton}
+					>
+						Yes
+					</Button>
+
 				</Modal.Footer>
 			</Modal>
 

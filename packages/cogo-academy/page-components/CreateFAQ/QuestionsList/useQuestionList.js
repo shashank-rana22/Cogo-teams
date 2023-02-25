@@ -31,21 +31,23 @@ const addedQuestionsColumns = ({
 	},
 	{
 		Header   : 'TOPICS',
-		accessor : (items) => (items?.topics?.length > 0 ? (
+		accessor : (items) => (items?.faq_topics?.length > 0 ? (
 			<div className={styles.topics}>
-				{items.topics.map((topic) => (
-					<Pill size="sm" color="green">{startCase(topic)}</Pill>
-				))}
+				{items.faq_topics.map((topic) => {
+					const { display_name } = topic || {};
+					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+				})}
 			</div>
 		) : '-'),
 	},
 	{
 		Header   : 'TAGS',
-		accessor : (items) => (items?.tags?.length > 0 ? (
+		accessor : (items) => (items?.faq_tags?.length > 0 ? (
 			<div className={styles.tags}>
-				{items.tags.map((tag) => (
-					<Pill size="sm" color="green">{startCase(tag)}</Pill>
-				))}
+				{items.faq_tags.map((tag) => {
+					const { display_name } = tag || {};
+					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+				})}
 			</div>
 		) : '-'),
 	},

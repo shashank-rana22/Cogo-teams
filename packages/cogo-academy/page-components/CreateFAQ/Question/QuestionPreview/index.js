@@ -65,7 +65,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	return (
 		<div className={styles.container}>
 			<div>
-				<h1 className={styles.heading}>Create A Question</h1>
+				<h1 className={styles.heading}>Preview Question</h1>
 			</div>
 			<div>
 				<h5 className={styles.question_title}>Question</h5>
@@ -99,14 +99,6 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button
-					themeType="secondary"
-					size="md"
-					className={styles.save_button}
-				>
-					Save as Draft
-				</Button>
-
 				<Button
 					themeType="primary"
 					size="md"

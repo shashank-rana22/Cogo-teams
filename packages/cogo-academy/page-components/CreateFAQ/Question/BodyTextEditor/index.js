@@ -7,7 +7,10 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
-function BodyTextEditor({ editorValue, setEditorValue }) {
+function BodyTextEditor({
+	editorValue = '',
+	setEditorValue = () => {},
+}) {
 	const [rteValue, setRteValue] = useState(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
 
 	useEffect(() => {

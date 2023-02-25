@@ -12,9 +12,9 @@ import useUpdateFaqSet from './hooks/useUpdateFaqSets';
 function useCreateQuestions() {
 	const { general } = useSelector((state) => state);
 	const { mode = '', id :questionId = '' } = general.query || {};
-
 	const [editorValue, setEditorValue] = useState('');
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
+	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
 
 	const {
 		onSubmit:onSubmitCreateForm,
@@ -82,6 +82,8 @@ function useCreateQuestions() {
 		questionPreview,
 		setQuestionPreview,
 		onClickPublish,
+		showModalOnCancel,
+		setShowModalOnCancel,
 	};
 }
 
