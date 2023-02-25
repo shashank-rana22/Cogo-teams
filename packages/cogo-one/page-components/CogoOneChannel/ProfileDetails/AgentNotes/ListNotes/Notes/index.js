@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 function Notes({
 	list = [],
-	handleClick = () => { },
 	handleDelete = () => { },
 	listLoading,
 }) {
@@ -42,11 +41,11 @@ function Notes({
 				const { name = '' } = agent_data || {};
 
 				return (
-					<div className={styles.notes_container}>
+					<div
+						className={styles.notes_container}
+					>
 						<div
 							className={styles.content}
-							onClick={() => handleClick(item)}
-							role="presentation"
 						>
 							{(notes_data || []).map((i) => (i || 'NA'))}
 						</div>
