@@ -23,8 +23,8 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin }) => {
 	useEffect(() => {
 		if (assigned_chat) {
 			setActiveCardId(assigned_chat);
-			setFirstLoading(false);
 		}
+		setFirstLoading(false);
 	}, [assigned_chat]);
 
 	const [listData, setListData] = useState({

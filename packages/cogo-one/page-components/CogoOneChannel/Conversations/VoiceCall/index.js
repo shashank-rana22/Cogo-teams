@@ -46,12 +46,13 @@ function VoiceCall({ activeVoiceCard = {} }) {
 			<div className={styles.container}>
 				<Header activeVoiceCard={activeVoiceCard} />
 			</div>
-			{loading && loader}
+
 			<div
 				className={styles.message_container}
 				onScroll={(e) => handleScroll(e.target.scrollTop)}
 				ref={messageRef}
 			>
+				{loading && loader}
 				{([...list] || []).reverse().map((eachList) => (eachList?.call_type === 'incoming' ? (
 					<ReceiveDiv eachList={eachList} />
 				) : (
