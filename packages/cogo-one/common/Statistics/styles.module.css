@@ -43,7 +43,9 @@
 	color: #221f20;
 	
 }
-
+.time_duration_header_onclick {
+	
+}
 .time_durations_value {
 	position: relative;
 	display: inline-block;
