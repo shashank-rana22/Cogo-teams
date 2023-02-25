@@ -25,7 +25,9 @@ function Statistics({ loading = false }) {
 									{loading
 										? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
 										: (
-											<div className={`cl ${styles.time_durations_header} ${styles.time_duration_header_onclick}`}>
+											<div
+												className={styles.time_durations_header}
+											>
 												<span className={styles.time_durations_value}>{itm.duration >= 60 ? (itm.duration / 60).toFixed(2) : itm.duration}</span>
 												{' '}
 												<span>{itm.duration >= 60 ? 'hr' : 'min'}</span>

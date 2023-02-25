@@ -43,13 +43,8 @@
 	color: #221f20;
 	
 }
-.time_duration_header_onclick {
-	
-}
-.time_durations_value {
-	position: relative;
-	display: inline-block;
-}
+
+
 .time_durations_value::after {
 	position: absolute;
 	bottom: 0;
