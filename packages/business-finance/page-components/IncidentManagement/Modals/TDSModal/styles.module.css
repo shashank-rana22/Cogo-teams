@@ -1,0 +1,77 @@
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.org_name {
+	font-weight: 600;
+}
+
+.flex {
+	display: flex;
+}
+
+.name {
+	padding: 0 4px;
+}
+
+.view {
+	color: green;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.view_flex {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.rates_data {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.rates {
+	font-weight: 600;
+}
+
+.label {
+	font-weight: 500;
+}
+
+.value_data {
+	margin: 20px 40px 20px 0;
+}
+
+.label_value {
+	font-size: 12px;
+}
+
+.date_value {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.document {
+	margin: 4px 0;
+	font-weight: 600;
+}
+
+.document_flex {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	text-align: center;
+}
+
+.remarks {
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}

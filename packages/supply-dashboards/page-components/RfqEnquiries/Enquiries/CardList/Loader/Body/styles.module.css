@@ -1,0 +1,30 @@
+.upper_body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.body {
+	padding: 8px;
+}
+
+.code {
+	font-size: 13px;
+	font-weight: 400;
+	color: #f68b21;
+}
+
+.name {
+	display: flex;
+	font-size: 13px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.country {
+	width: 5px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
