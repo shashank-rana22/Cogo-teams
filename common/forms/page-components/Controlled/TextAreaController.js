@@ -1,22 +1,20 @@
 import { Textarea } from '@cogoport/components';
-import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function InputController(props) {
+function TextAreaController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
 
 	return (
 		<Controller
-			key={rest.id}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
 				<Textarea
 					{...rest}
-					key={rest.id}
+					name={name}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}
@@ -25,4 +23,5 @@ function InputController(props) {
 		/>
 	);
 }
-export default InputController;
+
+export default TextAreaController;
