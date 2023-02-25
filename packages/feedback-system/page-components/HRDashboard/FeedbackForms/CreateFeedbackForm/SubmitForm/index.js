@@ -35,6 +35,14 @@ function SubmitForm({
 		});
 	};
 
+	let isFormSubmittable = true;
+
+	questionActionList.checked.forEach((que) => {
+		if (que.weightage < 0 && isFormSubmittable) {
+			isFormSubmittable = false;
+		}
+	});
+
 	return (
 		<div className={styles.submit_form_container}>
 			<div className={styles.header}>
@@ -70,7 +78,7 @@ function SubmitForm({
 					themeType="primary"
 					onClick={() => createForm()}
 					loading={createFormLoading}
-					disabled={false}
+					disabled={!isFormSubmittable}
 				>
 					Submit
 				</Button>

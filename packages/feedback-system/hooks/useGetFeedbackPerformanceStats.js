@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useGetFeedbackPerformanceStats = ({ user_id = '', params = {} }) => {
+const useGetFeedbackPerformanceStats = ({ userId = '', params = {} }) => {
 	const { Month = '', Year = '', ManagerID = '' } = params;
 
 	const [{ data: performanceStatsList = [], loading = false }] = useRequest({
@@ -9,7 +9,7 @@ const useGetFeedbackPerformanceStats = ({ user_id = '', params = {} }) => {
 		params : {
 			Month         : Month || undefined,
 			Year          : Year || undefined,
-			UserID        : user_id || undefined,
+			UserID        : userId || undefined,
 			PerformedByID : ManagerID || undefined,
 		},
 	}, { manual: false });
