@@ -9818,6 +9818,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
+		{
+			api          : 'run_query',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
 	],
 };
 export default partner;
