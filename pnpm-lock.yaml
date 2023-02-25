@@ -222,13 +222,13 @@ importers:
       '@types/react': ^18.0.28
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.330_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.334_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.3
+      '@cogoport/utils': 1.2.4
       react: 18.2.0
     devDependencies:
       '@types/react': 18.0.28
