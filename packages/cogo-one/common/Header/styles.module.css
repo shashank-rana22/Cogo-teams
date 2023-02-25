@@ -33,6 +33,7 @@
 .heading {
 	display: flex;
 	flex-direction: row;
+	cursor: default;
 }
 
 .heading .heading_name {
@@ -55,4 +56,8 @@
 			background-position: 100% 100%;
 		}
 	}
+}
+
+.tabs_style {
+	box-shadow: 0 0 8px rgb(98 127 172 / 6%);
 }

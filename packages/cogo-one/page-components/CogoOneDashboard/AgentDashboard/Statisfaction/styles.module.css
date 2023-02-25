@@ -3,8 +3,10 @@
 	flex-direction: column;
 	width: 45%;
 	padding: 13px;
+	cursor: default;
 	background-color: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .heading {
@@ -27,12 +29,32 @@
 }
 
 .customers_numbers {
+	position: relative;
+	display: inline-block;
 	padding: 4px;
 	padding-left: 7px;
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 20px;
 	color: #221f20;
+}
+
+.customers_numbers::after {
+	position: absolute;
+	bottom: 10px;
+	left: 6px;
+	width: 80%;
+	height: 1px;
+	content: "";
+	background-color: #000;
+	transition: transform 0.25s ease-out;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+}
+
+.customers_numbers:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .label {

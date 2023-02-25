@@ -4,8 +4,10 @@
 	width: 100%;
 	padding-left: 4px;
 	margin-bottom: 12px;
+	cursor: default;
 	background: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .left_time_spent_container {

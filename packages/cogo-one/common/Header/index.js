@@ -52,6 +52,7 @@ function Header({ setCalendarType, calendarType }) {
 					activeTab={calendarType}
 					themeType="tertiary"
 					onChange={setCalendarType}
+					className={styles.tabs_style}
 				>
 					<TabPanel name="day" title="Day" />
 					<TabPanel name="week" title="Week" />
