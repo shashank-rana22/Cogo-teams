@@ -58,6 +58,7 @@ function CreateFAQ() {
 		handleCreateTag,
 		handleCreateTopic,
 		formErrors,
+		resetValue,
 	} = useCreateNewTagOrTopic();
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
@@ -97,6 +98,11 @@ function CreateFAQ() {
 	const onClickYesButton = () => {
 		setShowModalOnCancel(false);
 		router.back();
+	};
+
+	const onClickCancelButton = () => {
+		resetValue();
+		setShow(false);
 	};
 
 	if (questionPreview === 'preview') {
@@ -139,7 +145,7 @@ function CreateFAQ() {
 			<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.input_container}>
 					<div className={styles.input_label}>
-						Name of the Question
+						Question
 					</div>
 
 					<InputController
@@ -250,7 +256,7 @@ function CreateFAQ() {
 				show={show}
 				onClose={() => setShow(false)}
 				closeOnOuterClick={false}
-				showCloseIcon
+				showCloseIcon={false}
 			>
 				<Modal.Header title="Request your question here" />
 
@@ -272,6 +278,14 @@ function CreateFAQ() {
 				</Modal.Body>
 
 				<Modal.Footer>
+					<Button
+						themeType="tertiary"
+						style={{ marginRight: '8' }}
+						onClick={onClickCancelButton}
+					>
+						Cancel
+					</Button>
+
 					<Button onClick={handleCreate(createFaqComponent)}>
 						Submit
 					</Button>

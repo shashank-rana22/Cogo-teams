@@ -48,15 +48,6 @@
   margin-right: 5px;
 }
 
-.draft_button {
-  display: flex;
-  flex-direction: row;
-}
-
-.publish_button {
-  margin-left: 12px;
-}
-
 .goback_button {
   display: flex;
   align-items: center;

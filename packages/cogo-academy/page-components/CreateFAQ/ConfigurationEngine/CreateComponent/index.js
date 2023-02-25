@@ -22,6 +22,7 @@ function CreateForm({
 	setShow = () => {},
 	displayBackButton,
 	errors,
+	reset,
 }) {
 	const router = useRouter();
 
@@ -34,6 +35,7 @@ function CreateForm({
 			setShow(false);
 			return;
 		}
+		reset();
 		setConfigurationPage('dashboard');
 		router.back();
 	};

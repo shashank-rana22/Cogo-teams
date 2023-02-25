@@ -55,6 +55,22 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+		{
+			api          : 'create_faq_tag',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
+			api          : 'get_faq_tag',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
+			api          : 'update_faq_tag',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+
 	],
 	faq: [
 		{
