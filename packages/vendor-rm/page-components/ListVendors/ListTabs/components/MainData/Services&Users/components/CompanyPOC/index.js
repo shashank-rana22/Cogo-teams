@@ -84,9 +84,13 @@ function CompanyPOC({
 							</div>
 						</div>
 					))}
-					<Button size="md" themeType="secondary" onClick={() => setShowEditPocModal(!showEditPocModal)}>
+					<div
+						className={styles.edit_button}
+						role="presentation"
+						onClick={() => setShowEditPocModal(!showEditPocModal)}
+					>
 						<IcMEdit style={{ marginRight: 5 }} />
-					</Button>
+					</div>
 				</div>
 			</div>
 			<Modal
