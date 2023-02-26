@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
+import { useSelector } from '@cogoport/store';
 // import { useState } from 'react';
 
 function useCreateAudience({ setConfigurationPage }) {
@@ -10,10 +10,14 @@ function useCreateAudience({ setConfigurationPage }) {
 
 	const { control, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
 
-	// const { general } = useSelector((state) => state);
+	const { general } = useSelector((state) => state);
+	const { id:audienceId } = general.query || {};
+
+	const apiName = audienceId ? '/update_faq_audience' : '/create_faq_audience';
+	const toastText = audienceId ? 'updated' : 'created';
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_faq_audience',
+		url    : apiName,
 		method : 'POST',
 	}, { manual: true });
 
@@ -29,7 +33,8 @@ function useCreateAudience({ setConfigurationPage }) {
 		} = values || {};
 
 		const payload = {
-			audiences: [{
+			id        : audienceId || undefined,
+			audiences : [{
 				platform,
 				persona,
 				auth_function,
@@ -48,7 +53,7 @@ function useCreateAudience({ setConfigurationPage }) {
 			});
 
 			if (res?.data) {
-				Toast.success('Audience created sucessfully');
+				Toast.success(`Audience ${toastText} sucessfully`);
 				setConfigurationPage('dashboard');
 				router.back();
 			}

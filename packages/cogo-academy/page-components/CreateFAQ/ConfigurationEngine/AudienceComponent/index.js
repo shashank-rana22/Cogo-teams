@@ -6,14 +6,13 @@ import audienceListColumns from '../TableConfigurations/audienceListColumns';
 
 import AudianceTable from './AudianceTable';
 import Header from './Header';
-// import TagsTable from './TagsTable';
-// import useDeleteTag from './useDeleteTag';
+import useUpdateAudience from './useUpdateAudience';
 
 function AudienceComponent({ configurationPage, setConfigurationPage }) {
 	const [searchAudienceInput, setSearchAudienceInput] = useState('');
 
 	const {
-		// fetchFaqAudience,
+		fetchFaqAudience,
 		data,
 		loading,
 		activeAudience,
@@ -22,20 +21,19 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 		setAudienceCurrentPage,
 	} = useLIstFaqAudience({ searchAudienceInput });
 
-	// const { onClickDeleteIcon = () => {} } = useDeleteTag({ fetchFaqAudience });
+	const { onClickDeleteIcon = () => {} } = useUpdateAudience({ fetchFaqAudience });
 
-	// const router = useRouter();
+	const router = useRouter();
 
 	const onClickEdit = (item) => {
-		// setConfigurationPage('tag');
-		// router.push(
-		// 	`/learning/faq/create/configuration?update=tag&id=${item.id}`,
-		// 	`/learning/faq/create/configuration?update=tag&id=${item.id}`,
-		// );
-		console.log('item', item);
+		setConfigurationPage('audience');
+		router.push(
+			`/learning/faq/create/configuration?update=audience&id=${item.id}`,
+			`/learning/faq/create/configuration?update=audience&id=${item.id}`,
+		);
 	};
 
-	const { listColumns = [] } = audienceListColumns({ onClickEdit });
+	const { listColumns = [] } = audienceListColumns({ onClickEdit, onClickDeleteIcon });
 
 	return (
 		<div>

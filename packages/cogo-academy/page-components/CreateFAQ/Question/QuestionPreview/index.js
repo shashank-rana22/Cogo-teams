@@ -18,21 +18,30 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		answers = [],
 		faq_topics = [],
 		faq_tags = [],
+		faq_audiences = [],
 		id = '',
 	} = data || {};
 
 	const tags = [];
 	const topics = [];
+	const audiences = [];
 
 	(faq_topics || []).map((faq_topic) => {
 		const { name } = faq_topic || {};
 		topics.push(name);
 		return topics;
 	});
+
 	(faq_tags || []).map((faq_tag) => {
 		const { name } = faq_tag || {};
 		tags.push(name);
 		return tags;
+	});
+
+	(faq_audiences || []).map((faq_audience) => {
+		const { name } = faq_audience || {};
+		audiences.push(name);
+		return audiences;
 	});
 
 	const { answer } = answers[0] || {};
@@ -93,6 +102,15 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				<h5 className={styles.tags_title}>Topics</h5>
 				<div className={styles.tags_container}>
 					{topics.map((item) => (
+						<button className={styles.tags_button}>{item}</button>
+					))}
+				</div>
+			</div>
+
+			<div>
+				<h5 className={styles.tags_title}>Audiences</h5>
+				<div className={styles.tags_container}>
+					{audiences.map((item) => (
 						<button className={styles.tags_button}>{item}</button>
 					))}
 				</div>
