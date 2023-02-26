@@ -5,10 +5,10 @@ import SearchInput from '../SearchInput';
 
 function Dashboard({ tabTitle }) {
 	const [searchState, setSearchState] = useState('');
-	
+
 	return (
 		<div style={{ marginTop: 12 }}>
-			<SearchInput								// TODOs
+			<SearchInput
 				value={searchState}
 				onChange={(val) => setSearchState(val)}
 				size="md"

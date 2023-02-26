@@ -2,20 +2,27 @@
   :global {
     .ui_tabs_container {
       width: 100%;
+     
     }
 
     .ui_tab_list_container {
       width: 100% !important;
+     
     }
 
     .ui_tab_container {
       min-height: 65px;
       padding: 12px 6px;
       
+      &:hover {
+        background-color:#fdebe8;
+        transition: 0.35s} }
+        
+      
 
     }
   }
-}
+
 
 .title {
   font-size: 14px;
@@ -38,4 +45,11 @@
 
 .scrollable {
   overflow: auto;
+  &:hover {
+    box-shadow: 0 0 11px rgba(33, 32, 32, 0.5); 
+   
+  }
+}
+.topic{
+ 
 }

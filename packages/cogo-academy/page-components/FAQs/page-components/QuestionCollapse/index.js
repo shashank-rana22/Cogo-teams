@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMArrowRotateRight, IcMArrowDown, IcMEyeopen } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -11,9 +11,9 @@ function QuestionsCollapse({ collapse, questions }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
-				{startCase(
+				Q.  {startCase(
 					questions.question_abstract,
-				)}
+				)} ?
 
 				<IcMArrowDown
 					width={16}
