@@ -13,6 +13,21 @@ const partner = {
 	],
 	prm: [
 		{
+			api          : 'get_question',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
+			api          : 'list_faq_topics',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
+			api          : 'list_faq_questions',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
+		{
 			api          : 'get_tax_numbers_data',
 			access_type  : 'private',
 			service_name : 'credit',

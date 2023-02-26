@@ -173,6 +173,7 @@ const navigationMappingAdmin = {
 			...apis.feedback,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
+			...apis.faq,
 		],
 		main_apis: [
 			'list_organization_users',
@@ -1379,6 +1380,7 @@ const navigationMappingAdmin = {
 			...apis.cogopoints,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
+			...apis.faq,
 		],
 		module_type: 'crm',
 	},
