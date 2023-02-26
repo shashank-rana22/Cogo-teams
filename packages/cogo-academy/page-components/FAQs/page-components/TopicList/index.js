@@ -73,7 +73,8 @@ function TopicList({ tabTitle = '', searchState = '', tagId = '' }) {
 												</div>
 
 												<div className={styles.subtitle}>
-													{startCase(singleOption.description)}
+													{startCase(singleOption.description) 
+													|| startCase('No Description added')}
 												</div>
 											</div>
 										)}
