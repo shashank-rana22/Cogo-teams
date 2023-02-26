@@ -19,7 +19,10 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 
 	return (
 		<div style={{ marginBottom: 12 }}>
-			<h4 style={{ marginTop: 12 }}>Popular tags in this section:</h4>
+			<h4 style={{ marginTop: 12 }}>
+				{startCase('Popular tags in this section')}
+				:
+			</h4>
 			<div>
 				{
 

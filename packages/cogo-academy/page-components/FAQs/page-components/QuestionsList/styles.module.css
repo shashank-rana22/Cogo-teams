@@ -2,8 +2,6 @@
   border-bottom: 0.1px solid #7e7a7a;
   margin-left: 40px;
   transition: 0.35s;
-
-
   &:hover {
     box-shadow: 0 0 11px rgba(33, 32, 32, 0.5); 
    

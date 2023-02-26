@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMArrowRotateRight, IcMArrowDown, IcMEyeopen } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { React } from 'react';
 

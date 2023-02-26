@@ -44,10 +44,10 @@ background: white;
 }
 
 .caret_arrow {
-	transition: 0.3s;
+	transition: 0.5s;
 
 	&.caret_active {
-		transition: 0.3s;
+		transition: 0.5s;
 		transform: rotate(180deg);
 	}
 }
