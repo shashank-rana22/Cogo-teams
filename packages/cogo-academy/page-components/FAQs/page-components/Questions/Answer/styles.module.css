@@ -23,7 +23,6 @@
 
 .relatedquestion {
 	margin-top: 20%;
-	margin-bottom: 2%;
 	font-family: Poppins;
 	font-size: 15px;
 	font-style: normal;
@@ -41,10 +40,16 @@
 	font-weight: 1000;
 	
 }
+.subtitle_related_question {
+	margin-right: 1%;
+
+	font-size: 13px;
+	font-weight: 700;
+	
+}
 
 .sidetext {
 	padding-bottom: 5px;
-	margin-top: 5%;
 	margin-bottom: 5%;
 	font-family: Poppins;
 	font-size: 11px;
@@ -117,4 +122,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+.like_hover{
+	&:hover {
+		box-shadow: 0 0 11px rgba(33, 32, 32, 0.5); 
+		transition: 0.5s;
+	   
+	  }
 }

@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../../../../commons/Spinner';
 import useGetQuestions from '../../../hooks/useGetQuestions';
+import RelatedQuestion from '../../RelatedQuestion';
 
 import styles from './styles.module.css';
 
@@ -17,6 +18,7 @@ const FEEDBACK_MAPPING = {
 };
 
 function Answer({ questions = {} }) {
+	console.log(questions);
 	const [show, setShow] = useState(false);
 
 	const { data: answerData, loading } = useGetQuestions({ id: questions.id });
@@ -124,7 +126,9 @@ function Answer({ questions = {} }) {
 					}}
 				>
 					<Badge placement="left" color="green" size="md" text={answerData?.answers[0]?.upvote_count}>
-						<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
+						<div className={styles.like_hover}>
+							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
+						</div>
 					</Badge>
 
 				</div>
@@ -139,7 +143,9 @@ function Answer({ questions = {} }) {
 						);
 					}}
 				>
-					<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
+					<div className={styles.like_hover}>
+						<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
+					</div>
 
 				</div>
 
@@ -195,17 +201,10 @@ function Answer({ questions = {} }) {
 			<div>
 				<span className={styles.relatedquestion}>Related Questions</span>
 				<div
-					className={styles.subtitle}
-					style={{ opacity: '0.8', marginTop: '1%' }}
-				>
-					When should I use EXW?
-				</div>
-				<div
-					className={styles.subtitle}
-					style={{ opacity: '0.8', marginTop: '1%' }}
-				>
-					What are the documents I need to procure for Incoterms?
-				</div>
+					className={styles.subtitle_related_question}
+					style={{ opacity: '0.8' }}
+				/>
+				<RelatedQuestion tags={questions.faq_tags} />
 
 			</div>
 		</>
