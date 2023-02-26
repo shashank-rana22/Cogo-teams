@@ -5,10 +5,16 @@
     font-weight: 600;
  cursor: pointer;   
     &:hover {
-        box-shadow: 2px 2px 4px #848282;
+        box-shadow: 2px 2px 4px #767474;
         cursor: pointer;
+        transition: 0.25s
       }
 }
 .font_decoration {
     font-weight: 600;
+    &:hover {
+        box-shadow: 2px 2px 4px #767474;
+        cursor: pointer;
+        transition: 0.25s
+      }
 }
