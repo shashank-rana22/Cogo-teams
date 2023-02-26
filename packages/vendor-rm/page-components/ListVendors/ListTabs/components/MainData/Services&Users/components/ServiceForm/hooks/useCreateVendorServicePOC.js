@@ -23,6 +23,7 @@ function useCreateVendorServicePOC({
 		formState,
 		control,
 		watch,
+		setValue,
 	} = useForm();
 
 	const { errors } = formState;
@@ -75,6 +76,8 @@ function useCreateVendorServicePOC({
 		errors,
 		handleCancel,
 		createVendorServicePocLoading,
+		watch,
+		setValue,
 	};
 }
 

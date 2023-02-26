@@ -28,7 +28,7 @@ const useAddServicePoc = ({
 
 	const { partner_id = '' } = query;
 
-	const category = watch('category');
+	const watchCategory = watch('category');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_vendor_service_poc',
@@ -53,27 +53,39 @@ const useAddServicePoc = ({
 	};
 
 	useEffect(() => {
-		setSubCategory({ category, controls });
-	}, [category]);
+		setSubCategory({ category: watchCategory, controls });
+	}, [watchCategory]);
 
 	const onSubmit = async () => {
 		const data = getValues();
 
+		const {
+			name,
+			email,
+			mobile_number,
+			whatsapp_number,
+			contact_proof_url,
+			category,
+			sub_category,
+			cogoport_office_id,
+			poc_role,
+		} = data || {};
+
 		try {
 			const payload = {
-				name                  : data?.name,
-				email                 : data?.email,
-				mobile_country_code   : data?.mobile_number?.country_code,
-				mobile_number         : data?.mobile_number?.number,
-				whatsapp_country_code : data?.whatsapp_number?.country_code,
-				whatsapp_number       : data?.whatsapp_number?.number,
-				vendor_poc_proof      : data?.contact_proof_url?.finalUrl,
+				name,
+				email,
+				mobile_country_code   : mobile_number?.country_code,
+				mobile_number         : mobile_number?.number,
+				whatsapp_country_code : whatsapp_number?.country_code,
+				whatsapp_number       : whatsapp_number?.number,
+				vendor_poc_proof      : contact_proof_url?.finalUrl,
 				vendor_id             : getVendorData?.vendor_details?.id,
 				cogo_entity_id        : partner_id,
-				category              : data?.category,
-				sub_category          : data?.sub_category,
-				cogoport_office_id    : data?.cogoport_office_id,
-				poc_role              : data?.poc_role,
+				category,
+				sub_category,
+				cogoport_office_id,
+				poc_role,
 			};
 
 			await trigger({

@@ -29,6 +29,7 @@ function ServicesUsers({
 
 				{Component && (
 					<Component
+						showForm={showForm}
 						setShowForm={setShowForm}
 						getVendorData={data}
 						refetchServicesPocs={refetchServicesPocs}

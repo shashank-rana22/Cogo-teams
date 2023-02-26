@@ -60,6 +60,12 @@ const apis = [
 		service_name : 'vendor',
 	},
 	{
+		api          : 'create_vendor_service_poc',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
 		api          : 'list_vendors',
 		access_type  : 'private',
 		feature      : 'vendor',

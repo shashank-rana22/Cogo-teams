@@ -26,9 +26,9 @@
 
 .box_info {
 	display: flex;
-	align-items: center;
-    width: 100%;
+	align-items: flex-start;
 	justify-content: space-between;
+	width: 100%;
 }
 
 .top {
@@ -69,6 +69,6 @@
 }
 
 .label_value_container {
-    margin-right: 12px;
-    max-width: 200px;
+	max-width: 200px;
+	margin-right: 12px;
 }

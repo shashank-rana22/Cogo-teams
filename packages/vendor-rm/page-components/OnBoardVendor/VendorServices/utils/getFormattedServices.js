@@ -10,14 +10,15 @@ function getFormattedServices({ data, partner_id = '' }) {
 			cogoport_office_id = '',
 		} = item || {};
 
-		const obj = {
-			category,
-			sub_category,
-			cogo_entity_id: partner_id,
-			cogoport_office_id,
-		};
-
-		formattedServices.push(obj);
+		(cogoport_office_id || []).forEach((office_id) => {
+			const obj = {
+				category,
+				sub_category,
+				cogoport_office_id : office_id,
+				cogo_entity_id     : partner_id,
+			};
+			formattedServices.push(obj);
+		});
 	});
 
 	return {

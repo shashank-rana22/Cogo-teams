@@ -3,7 +3,6 @@
 	gap: 3%;
 	margin: 2rem 0;
 
-
 	:global {
 		.ui_tab_list_container {
 			height: fit-content;
@@ -20,4 +19,3 @@
 	float: right;
 	width: 100%;
 }
-

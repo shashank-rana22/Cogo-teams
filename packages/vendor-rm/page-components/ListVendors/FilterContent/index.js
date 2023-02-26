@@ -21,6 +21,7 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 						setFilters({ status: 'active' });
 						setShowFilter(false);
 					}}
+					themeType="secondary"
 				>
 					Clear All
 				</Button>
@@ -33,7 +34,7 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 					value={filters?.registration_number || ''}
 					onChange={(value) => setFilters((prev) => ({ ...prev, registration_number: value }))}
 					clearable
-					placeholder="Choose pan/gst ..."
+					placeholder="Choose PAN/GST ..."
 				/>
 			</div>
 
@@ -58,16 +59,6 @@ function FilterContent({ setParams = () => {}, setShowFilter = () => {} }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button
-					type="button"
-					themeType="secondary"
-					onClick={() => {
-						setShowFilter(false);
-					}}
-					className="secondary sm"
-				>
-					Close
-				</Button>
 
 				<Button
 					type="button"

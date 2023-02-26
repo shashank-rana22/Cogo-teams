@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
@@ -26,7 +27,7 @@ function CompanyPOC({
 			email         : poc?.email,
 			mobile_number : `${poc?.mobile_country_code} ${poc?.mobile_number}`,
 			poc_role      : poc?.poc_role,
-
+			is_primary    : poc?.is_primary,
 			document_proof:
 	<div className={styles.download}>
 		<a
@@ -47,7 +48,6 @@ function CompanyPOC({
 			/>
 		</div>
 	</div>,
-			is_primary: poc?.is_primary,
 		};
 		return obj;
 	}).find((poc_detail) => poc_detail.is_primary === true);
@@ -61,6 +61,10 @@ function CompanyPOC({
 		errors,
 		onSubmit,
 	} = useEditPoc({ data, setShowEditPocModal, refetchVendorInfo });
+
+	if (isEmpty(details)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.main}>

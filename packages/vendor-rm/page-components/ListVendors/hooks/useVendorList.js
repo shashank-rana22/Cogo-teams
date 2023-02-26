@@ -1,5 +1,5 @@
 import { Tooltip, Button } from '@cogoport/components';
-import { IcCFcrossInCircle, IcCFtick, IcMError } from '@cogoport/icons-react';
+import { IcCFcrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { format, isEmpty, startCase } from '@cogoport/utils';
@@ -42,7 +42,7 @@ const renderUniqueServices = ({ services, type }) => {
 	const length = unique_services?.length;
 
 	return (
-		<div>
+		<div style={{ display: 'flex' }}>
 			{startCase(unique_services?.[0])}
 			<Tooltip
 				content={renderToolTipContent(unique_services)}
@@ -50,10 +50,10 @@ const renderUniqueServices = ({ services, type }) => {
 			>
 				{length - 1 > 0 ? (
 					<div className={styles.underline}>
-						+
+						(+
 						{length - 1}
 						{' '}
-						more
+						more)
 					</div>
 				) : null}
 			</Tooltip>
@@ -101,6 +101,32 @@ const useVendorList = () => {
 		const as = `/vendors/${id}`;
 		router.push(href, as);
 	};
+
+	const getHeader = () => (
+		<div className={styles.created_at_header}>
+			<div>
+				CREATED AT
+			</div>
+			<div className={styles.filter_icon_container}>
+				<IcMArrowRotateUp
+					fill={`${params?.sort_type === 'asc' ? '#f68b21' : '#000'}`}
+					onClick={() => setParams((pv) => ({
+						...pv,
+						sort_type: 'asc',
+					}))}
+					style={{ paddingTop: '2px' }}
+				/>
+				<IcMArrowRotateDown
+					fill={`${params?.sort_type === 'desc' ? '#f68b21' : '#000'}`}
+					onClick={() => setParams((pv) => ({
+						...pv,
+						sort_type: 'desc',
+					}))}
+					style={{ paddingBottom: '2px' }}
+				/>
+			</div>
+		</div>
+	);
 
 	const columns = [
 		{
@@ -161,7 +187,7 @@ const useVendorList = () => {
 			),
 		},
 		{
-			Header : 'CREATED AT',
+			Header : getHeader(),
 			id     : 'g',
 
 			accessor: ({ created_at = '' }) => (
