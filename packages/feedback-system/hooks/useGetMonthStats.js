@@ -1,12 +1,9 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const useGetMonthStats = () => {
-	const { profile:{ user:{ id:manager_id = '' } } } = useSelector((state) => state);
-
+const useGetMonthStats = ({ manager_id = '' }) => {
 	const [params, setParams] = useState({
-		ManagerID : manager_id,
+		ManagerID : manager_id || undefined,
 		Page      : 1,
 		PageLimit : 20,
 	});

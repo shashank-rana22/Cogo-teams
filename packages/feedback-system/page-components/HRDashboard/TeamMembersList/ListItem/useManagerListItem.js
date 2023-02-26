@@ -12,7 +12,7 @@ const useManagerListItem = ({ item, searchValue = '', pageParams = {} }) => {
 		ManagerID : item.manager_id || undefined,
 		Page      : 1,
 		PageLimit : 10,
-		Month     : Month || months[d.getMonth() - 1],
+		Month     : Month || months[d.getMonth()],
 		Year      : Year || d.getFullYear(),
 	});
 

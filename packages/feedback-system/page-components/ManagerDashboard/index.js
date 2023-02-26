@@ -1,5 +1,6 @@
 import { Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import PerformanceChart from '../../common/PerformanceChart';
@@ -10,12 +11,14 @@ import styles from './styles.module.css';
 import TeamMembersList from './TeamMembersList';
 
 function ManagerDashboard() {
-	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats({ });
+	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
+
+	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats({ manager_id });
 
 	const { list = [], pagination_data = {} } = data;
 	const { total_count = '' } = pagination_data;
 
-	const monthControls = getMonthControls(params?.Year);
+	const monthControls = getMonthControls(params?.Year, params?.Month);
 
 	const router = useRouter();
 
@@ -66,7 +69,7 @@ function ManagerDashboard() {
 			</div>
 
 			<div className={styles.stats_section}>
-				<PerformanceChart />
+				<PerformanceChart params={params} />
 			</div>
 
 			<div className={styles.list_section}>

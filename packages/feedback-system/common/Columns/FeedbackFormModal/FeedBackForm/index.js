@@ -149,7 +149,8 @@ function FeedBackForm({
 								onChange={(val) => {
 									setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
 								}}
-								placeholder="Convey the reason for feedback..."
+								placeholder={action === 'show' && isEmpty(feedback)
+									? 'No Feedback Provided' : 'Convey the reason for feedback...'}
 								style={{ height: '60px' }}
 							/>
 						</div>

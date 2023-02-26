@@ -7,10 +7,10 @@ const useGetFeedbackPerformanceStats = ({ userId = '', params = {} }) => {
 		method : 'get',
 		url    : 'get_average_ratings',
 		params : {
-			Month         : Month || undefined,
-			Year          : Year || undefined,
-			UserID        : userId || undefined,
-			PerformedByID : ManagerID || undefined,
+			Month     : Month || undefined,
+			Year      : Year || undefined,
+			UserID    : userId || undefined,
+			ManagerID : ManagerID || undefined,
 		},
 	}, { manual: false });
 
