@@ -30,6 +30,8 @@ function Customers({
 	statusLoading = false,
 	activeCardId = '',
 	isomniChannelAdmin = false,
+	showBotMessages = false,
+	setShowBotMessages,
 }) {
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -47,15 +49,29 @@ function Customers({
 						CogoOne
 					</div>
 				</div>
-				{!isomniChannelAdmin && (
-					<Toggle
-						name="online"
-						size="md"
-						showOnOff
-						onChange={() => onChangeToggle()}
-						checked={toggleStatus}
-						loading={statusLoading}
-					/>
+				{!isomniChannelAdmin ? (
+					<div className={styles.styled_toggle}>
+						<Toggle
+							name="online"
+							size="md"
+							showOnOff
+							onChange={() => onChangeToggle()}
+							checked={toggleStatus}
+							loading={statusLoading}
+						/>
+
+					</div>
+				) : (
+					<div className={styles.bot_messages}>
+						<div>Only Bot Messages</div>
+						<Toggle
+							name="bot messages"
+							size="sm"
+							showOnOff
+							onChange={() => setShowBotMessages((p) => !p)}
+							checked={showBotMessages}
+						/>
+					</div>
 				)}
 			</div>
 			<div className={styles.tabs}>
@@ -83,6 +99,7 @@ function Customers({
 					messagesLoading={messagesLoading}
 					activeCardId={activeCardId}
 					setActiveCardId={setActiveCardId}
+					showBotMessages={showBotMessages}
 				/>
 			)}
 

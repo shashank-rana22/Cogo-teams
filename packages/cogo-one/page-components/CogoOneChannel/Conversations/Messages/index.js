@@ -23,6 +23,7 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
+	showBotMessages = false,
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -47,7 +48,7 @@ function Messages({
 		loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, setOpenModal });
 
-	const hasPermissionToEdit = userId === support_agent_id || isomniChannelAdmin;
+	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,

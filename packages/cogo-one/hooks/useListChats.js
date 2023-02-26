@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
 
-const useListChats = ({ firestore, userId, isomniChannelAdmin }) => {
+const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages = false }) => {
 	const {
 		query: { assigned_chat = '' },
 	} = useRouter();
@@ -68,6 +68,7 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin }) => {
 			isomniChannelAdmin,
 			userId,
 			appliedFilters,
+			showBotMessages,
 		});
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
@@ -79,7 +80,7 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin }) => {
 		});
 		setLoading(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [appliedFilters]);
+	}, [appliedFilters, showBotMessages]);
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};

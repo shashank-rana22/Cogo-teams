@@ -24,6 +24,7 @@ function MessageList({
 	activeCardId = '',
 	setActiveMessage,
 	setActiveCardId = () => {},
+	showBotMessages = false,
 }) {
 	function getShowChat({ user_name }) {
 		if (searchValue) {
@@ -50,10 +51,11 @@ function MessageList({
 						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
-				<div className={styles.filter_icon}>
-					<Popover
-						placement="right"
-						render={(
+				{!showBotMessages && (
+					<div className={styles.filter_icon}>
+						<Popover
+							placement="right"
+							render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
@@ -63,17 +65,18 @@ function MessageList({
 									setActiveCardId={setActiveCardId}
 								/>
 							)
-						)}
-						visible={filterVisible}
-						onClickOutside={() => setFilterVisible(false)}
-					>
-						<IcMFilter
-							onClick={() => setFilterVisible((prev) => !prev)}
-							className={styles.filter_icon}
-						/>
-					</Popover>
-					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
-				</div>
+							)}
+							visible={filterVisible}
+							onClickOutside={() => setFilterVisible(false)}
+						>
+							<IcMFilter
+								onClick={() => setFilterVisible((prev) => !prev)}
+								className={styles.filter_icon}
+							/>
+						</Popover>
+						{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
+					</div>
+				)}
 			</div>
 
 			{ isEmpty(messagesList) ? (

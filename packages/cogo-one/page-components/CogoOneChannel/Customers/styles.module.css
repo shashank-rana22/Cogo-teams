@@ -22,7 +22,13 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 15px;
+}
 
+.tabs {
+	margin: 0 -10px 15px;
+}
+
+.styled_toggle {
 	:global {
 		.ui_toggle_container.ui_ps_size_md .ui_switch {
 			right: 51px;
@@ -59,6 +65,9 @@
 	}
 }
 
-.tabs {
-	margin: 0 -10px 15px;
+.bot_messages {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	color: #000;
 }

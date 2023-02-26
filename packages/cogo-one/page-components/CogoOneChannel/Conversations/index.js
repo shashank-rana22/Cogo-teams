@@ -10,6 +10,7 @@ function Conversations({
 	suggestions = [],
 	userId,
 	isomniChannelAdmin = false,
+	showBotMessages = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -21,6 +22,7 @@ function Conversations({
 						suggestions={suggestions}
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
+						showBotMessages={showBotMessages}
 					/>
 				)
 				: <VoiceCall activeVoiceCard={activeVoiceCard} /> }

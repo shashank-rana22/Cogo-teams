@@ -29,6 +29,7 @@ function CogoOne() {
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
+	const [showBotMessages, setShowBotMessages] = useState(false);
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
@@ -64,6 +65,7 @@ function CogoOne() {
 		firestore,
 		userId,
 		isomniChannelAdmin,
+		showBotMessages,
 	});
 	const { messagesList = [], unReadChatsCount } = listData;
 
@@ -73,7 +75,7 @@ function CogoOne() {
 			setActiveCardId('');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
+	}, [activeTab, showBotMessages]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
@@ -93,6 +95,7 @@ function CogoOne() {
 						suggestions={suggestions}
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
+						showBotMessages={showBotMessages}
 					/>
 					<ProfileDetails
 						activeMessageCard={activeMessageCard}
@@ -141,6 +144,8 @@ function CogoOne() {
 				updateUserStatus={updateUserStatus}
 				statusLoading={statusLoading}
 				activeCardId={activeCardId}
+				setShowBotMessages={setShowBotMessages}
+				showBotMessages={showBotMessages}
 			/>
 
 			<div className={styles.chat_details_continer}>

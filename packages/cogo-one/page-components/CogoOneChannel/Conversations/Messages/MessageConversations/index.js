@@ -221,6 +221,9 @@ function MessageConversations({
 											);
 										}
 									}}
+									style={{
+										cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer',
+									}}
 								>
 									{eachSuggestion}
 								</div>
