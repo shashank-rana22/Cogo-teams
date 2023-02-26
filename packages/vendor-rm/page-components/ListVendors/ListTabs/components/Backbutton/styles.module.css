@@ -9,10 +9,8 @@
 
 .backer {
 	height: 21px;
-	font-family: Poppins;
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
 	line-height: 21px;
 	color: #221f20;
+	border-bottom: 1px solid #221f20;
 }
