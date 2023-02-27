@@ -19,19 +19,10 @@ const GetFinalList = ({ list, data, loading }) => {
 	useEffect(() => {
 		if (!loading) {
 			listAirport();
-		}
-	}, [data]);
-
-	useEffect(() => {
-		if (!loading) {
 			listOrganization();
-		}
-	}, [data]);
-
-	useEffect(() => {
-		if (!loading) {
 			listOperator();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
 	const originData = [];
