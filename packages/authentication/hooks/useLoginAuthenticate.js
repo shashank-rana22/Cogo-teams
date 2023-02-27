@@ -121,7 +121,7 @@ const useLoginAuthenticate = () => {
 					...values,
 					auth_scope   : 'partner',
 					platform     : 'admin',
-					parent_token : cogo_admin_auth_token,
+					parent_token : cogo_admin_auth_token || undefined,
 				},
 			});
 

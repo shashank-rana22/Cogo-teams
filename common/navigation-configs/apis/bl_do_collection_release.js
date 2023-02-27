@@ -35,6 +35,18 @@ const apis = [
 		feature      : 'bl_do_collection_release',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'generate_do_noc_certificate',
+		access_type  : 'private',
+		feature      : 'bl_do_collection_release',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'generate_do_certificate',
+		access_type  : 'private',
+		feature      : 'bl_do_collection_release',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
