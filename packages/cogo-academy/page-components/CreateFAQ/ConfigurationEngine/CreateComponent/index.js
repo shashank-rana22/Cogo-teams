@@ -79,7 +79,10 @@ function CreateForm({
 				</div>
 			) : null}
 
-			<div className={styles.add_name}>
+			<div
+				className={styles.add_name}
+				style={{ marginTop: source === 'create' ? 0 : undefined }}
+			>
 				{startCase(viewType)}
 				{' '}
 				Name

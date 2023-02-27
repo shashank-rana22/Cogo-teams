@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import createAudienceControls from './utils/createAudienceControls';
 
-function CreateUserForm({ setConfigurationPage, displayBackButton, customStyle }) {
+function CreateUserForm({ source = '', setConfigurationPage, displayBackButton, customStyle }) {
 	const router = useRouter();
 	const { general } = useSelector((state) => state);
 	const { id:audienceId, update } = general.query || {};
@@ -108,11 +108,13 @@ function CreateUserForm({ setConfigurationPage, displayBackButton, customStyle }
 				)
 			}
 
-			<div className={styles.header}>
-				{audienceId ? 'Update' : 'Add'}
-				{' '}
-				User Group
-			</div>
+			{source !== 'create' ? (
+				<div className={styles.header}>
+					{audienceId ? 'Update' : 'Add'}
+					{' '}
+					User Group
+				</div>
+			) : null}
 
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};

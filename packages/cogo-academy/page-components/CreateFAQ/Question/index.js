@@ -351,6 +351,7 @@ function CreateFAQ() {
 
 				<Modal.Body>
 					<CreateUserForm
+						source="create"
 						setConfigurationPage={setConfigurationPage}
 						displayBackButton="No"
 						customStyle={userFormStyle}
