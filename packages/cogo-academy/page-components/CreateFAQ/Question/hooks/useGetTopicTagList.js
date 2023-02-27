@@ -1,11 +1,12 @@
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateUserForm/utils/workScopeMappings';
 import useListCogoEntity from '../../ConfigurationEngine/hooks/useListCogoEntities';
 
 const useGetTopicTagList = () => {
-	const [{ data: topicsData }] = useRequest({
+	const [{ data: topicsData }, triggerTopics] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
 		params : {
@@ -14,7 +15,7 @@ const useGetTopicTagList = () => {
 		},
 	}, { manual: false });
 
-	const [{ data: tagsData }] = useRequest({
+	const [{ data: tagsData }, triggerTags] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
 		params : {
@@ -23,7 +24,7 @@ const useGetTopicTagList = () => {
 		},
 	}, { manual: false });
 
-	const [{ data: audienceData }] = useRequest({
+	const [{ data: audienceData }, triggerAudiences] = useRequest({
 		method : 'get',
 		url    : '/list_faq_audiences',
 		params : {
@@ -31,6 +32,52 @@ const useGetTopicTagList = () => {
 			pagination_data_required : false,
 		},
 	}, { manual: false });
+
+	const fetchTopics = async () => {
+		try {
+			await triggerTopics({
+				params: {
+					page_limit               : 100000,
+					pagination_data_required : false,
+				},
+			});
+		} catch (error) {
+			console.log('error :: ', error);
+		}
+	};
+
+	const fetchTags = async () => {
+		try {
+			await triggerTags({
+				params: {
+					page_limit               : 100000,
+					pagination_data_required : false,
+				},
+			});
+		} catch (error) {
+			console.log('error :: ', error);
+		}
+	};
+
+	const fetchAudiences = async () => {
+		try {
+			await triggerAudiences({
+				params: {
+					page_limit               : 100000,
+					pagination_data_required : false,
+				},
+			});
+		} catch (error) {
+			console.log('error :: ', error);
+		}
+	};
+
+	useEffect(() => {
+		fetchTopics();
+		fetchTags();
+		fetchAudiences();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
@@ -79,6 +126,9 @@ const useGetTopicTagList = () => {
 		topicOptions,
 		tagOptions,
 		audienceOptions,
+		fetchTopics,
+		fetchTags,
+		fetchAudiences,
 	};
 };
 

@@ -32,12 +32,10 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tag
 		}
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-
 	useEffect(() => {
 		fetchFaqQuestions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, searchState, topicId, tagId]);
+	}, [page, searchState, topicId, JSON.stringify(tagId)]);
 
 	const { page_limit, total_count } = data || {};
 

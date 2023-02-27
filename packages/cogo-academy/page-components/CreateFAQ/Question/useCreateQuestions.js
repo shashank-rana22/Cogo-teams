@@ -26,7 +26,10 @@ function useCreateQuestions() {
 		? onSubmitUpdatedForm
 		: onSubmitCreateForm;
 
-	const { topicOptions, tagOptions, audienceOptions } = useGetTopicTagList();
+	const {
+		topicOptions, tagOptions, audienceOptions,
+		fetchTopics, fetchTags, fetchAudiences,
+	} = useGetTopicTagList();
 
 	const {
 		handleSubmit,
@@ -51,6 +54,9 @@ function useCreateQuestions() {
 		showModalOnCancel,
 		setShowModalOnCancel,
 		audienceOptions,
+		fetchTopics,
+		fetchTags,
+		fetchAudiences,
 	};
 }
 

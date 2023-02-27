@@ -14,7 +14,7 @@ const MAPPING = {
 	},
 };
 
-function useCreateNewTagOrTopic() {
+function useCreateNewTagOrTopic({ fetchTopics, fetchTags }) {
 	const [queryValue, setQueryValue] = useState('');
 
 	const [show, setShow] = useState(false);
@@ -57,6 +57,9 @@ function useCreateNewTagOrTopic() {
 			const res = await trigger({
 				data: payload,
 			});
+
+			fetchTags();
+			fetchTopics();
 
 			if (res?.data) {
 				Toast.success(`${queryValue} ${queryName}d sucessfully`);

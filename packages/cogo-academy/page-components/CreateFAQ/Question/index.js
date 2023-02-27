@@ -43,13 +43,16 @@ function CreateFAQ() {
 		onSubmit,
 		topicOptions,
 		tagOptions,
-		setValue:setQuestionValue,
+		setValue: setQuestionValue,
 		questionPreview,
 		setQuestionPreview,
 		onClickPublish,
 		showModalOnCancel,
 		setShowModalOnCancel,
 		audienceOptions,
+		fetchTopics,
+		fetchTags,
+		fetchAudiences,
 	} = useCreateQuestions();
 
 	const {
@@ -68,16 +71,18 @@ function CreateFAQ() {
 		onClickCancelButton,
 		showCreateAudienceModal,
 		setShowCreateAudienceModal,
-	} = useCreateNewTagOrTopic();
+	} = useCreateNewTagOrTopic({ fetchTopics, fetchTags });
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
 
 	const { question_abstract, faq_tags = [], faq_topics = [], answers = [] } = data || {};
 
 	useEffect(() => {
-		fetchQuestion();
+		if (query?.id) {
+			fetchQuestion();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query.id]);
+	}, [query?.id]);
 
 	const filterTags = [];
 	(faq_tags || []).forEach((item) => {
@@ -352,9 +357,11 @@ function CreateFAQ() {
 				<Modal.Body>
 					<CreateUserForm
 						source="create"
+						setShowCreateAudienceModal={setShowCreateAudienceModal}
 						setConfigurationPage={setConfigurationPage}
 						displayBackButton="No"
 						customStyle={userFormStyle}
+						fetchAudiences={fetchAudiences}
 					/>
 				</Modal.Body>
 			</Modal>
