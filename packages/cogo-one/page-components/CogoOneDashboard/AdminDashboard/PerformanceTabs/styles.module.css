@@ -62,7 +62,11 @@
 }
 
 .kam {
+	width: 80px;
 	padding-left: 14px;
+	overflow: hidden;
 	font-size: 10px;
 	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

@@ -41,9 +41,15 @@
 	font-weight: 500;
 	line-height: 20px;
 	color: #221f20;
-	
 }
 
+.time_durations_value {
+	position: relative;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
 
 .time_durations_value::after {
 	position: absolute;
@@ -57,23 +63,23 @@
 	transform: scaleX(0);
 	transform-origin: bottom right;
 }
+
 .time_durations_value:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
 }
 
-
 .time_durations_text {
 	font-size: 10px;
 	line-height: 20px;
 	color: #828282;
-	
 }
+
+/* --------- */
 .socoal_icons_and_data_list {
 	display: flex;
 	flex-direction: column;
 	padding: 5px;
-	
 }
 
 .socoal_icons_and_data {
@@ -81,24 +87,13 @@
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 22px;
+
 	/* color: #000; */
-	
-}
-.socoal_icons_and_data:hover .social_name{
-	color: black;
-	font-size: 16px;
-	transition: 0.4s;
-}
-.socoal_icons_and_data:hover .customer_nos{
-	color: black;
-	font-size: 16px;
-	transition: 0.4s;
 }
 
 .social_icons_and_its_name {
 	display: flex;
 	align-items: center;
-	
 }
 
 .social_name {
@@ -108,7 +103,6 @@
 	line-height: 20px;
 	color: #475569;
 	transition: 0.4s;
-	
 }
 
 .customer_nos {
@@ -118,7 +112,6 @@
 	color: #828282;
 	text-align: right;
 	transition: 0.4s;
-	
 }
 
 .duration_placeholder {
@@ -127,4 +120,16 @@
 
 .customer_nos_placeholder {
 	border-radius: 5px;
+}
+
+.socoal_icons_and_data:hover .social_name {
+	font-size: 16px;
+	color: black;
+	transition: 0.4s;
+}
+
+.socoal_icons_and_data:hover .customer_nos {
+	font-size: 16px;
+	color: black;
+	transition: 0.4s;
 }

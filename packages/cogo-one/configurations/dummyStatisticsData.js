@@ -10,6 +10,7 @@ export const messageAnalytics = {
 	},
 	data: [
 		{
+			type     : 'key1',
 			duration : 25,
 			text     : 'Longest Chat duration',
 		}, {
