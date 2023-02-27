@@ -1,11 +1,12 @@
 import { startCase } from '@cogoport/utils';
 
+import { Refetch } from '../common/interfaces';
 import CreateRoleModal from '../page-components/CreateForm';
 import ToolTipWrapper from '../page-components/ListComponents/ToolTipWrapper';
 
 import styles from './styles.module.css';
 
-const completedColumn = (refetch) => [
+const completedColumn = (refetch: Refetch) => [
 	{
 		Header   : 'Service Name',
 		id       : 'name',
@@ -37,7 +38,7 @@ const completedColumn = (refetch) => [
 		),
 	},
 	{
-		Header   : 'Updated At',
+		Header   : 'Updated At (UTC)',
 		accessor : ({ updatedAt }) => (
 			<div className={styles.date}>
 				{updatedAt}

@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import { SingleData } from '../common/interfaces';
 import { controls } from '../configs/create-update-fields';
@@ -22,6 +23,8 @@ const useCreateRequest = ({
 		profile: profileData = {},
 	} = useSelector((state: object) => state);
 	const formProps = useForm();
+	const { watch } = formProps;
+	const translatedValue = watch('translatedText');
 	const toast = status === 'COMPLETED' ? 'Created' : 'Requested';
 
 	const [{ loading }, trigger] = useRequestBf({
@@ -50,7 +53,7 @@ const useCreateRequest = ({
 				id           : showEdit ? row.id : undefined,
 				createdBy    : profileData.user.id,
 				updatedBy    : profileData.user.id,
-				translatedBy : status === 'COMPLETED' ? profileData.user.id : undefined,
+				translatedBy : !isEmpty(translatedValue) ? profileData.user.id : undefined,
 			};
 
 			const response = await fetch({ data: payload });

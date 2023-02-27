@@ -1,10 +1,12 @@
 import { startCase } from '@cogoport/utils';
 
+import { Refetch } from '../common/interfaces';
+import CreateRoleModal from '../page-components/CreateForm';
 import ToolTipWrapper from '../page-components/ListComponents/ToolTipWrapper';
 
 import styles from './styles.module.css';
 
-const requestedColumns = () => [
+const requestedColumns = (refetch: Refetch) => [
 	{
 		Header   : 'Service Name',
 		id       : 'name',
@@ -28,11 +30,18 @@ const requestedColumns = () => [
 		accessor : ({ targetLanguage }) => (<div className={styles.name}>{targetLanguage}</div>),
 	},
 	{
-		Header   : 'Requested At',
+		Header   : 'Requested At (UTC)',
 		accessor : ({ createdAt }) => (
 			<div className={styles.date}>
 				{createdAt}
 			</div>
+		),
+	},
+	{
+		Header   : '',
+		id       : 'edit',
+		accessor : (row) => (
+			<CreateRoleModal row={row} status="COMPLETED" showEdit refetch={refetch} />
 		),
 	},
 ];

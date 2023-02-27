@@ -7,7 +7,7 @@ const getColumns = (status: string, refetch: Refetch) => {
 		return completedColumn(refetch);
 	}
 	return (
-		requestedColumns()
+		requestedColumns(refetch)
 	);
 };
 
