@@ -1,3 +1,5 @@
+import { Checkbox } from '@cogoport/components';
+
 // eslint-disable-next-line import/no-cycle
 import ButtonLayout from '../../../commons/components/ButtonLayout/ButtonLayout';
 
@@ -18,6 +20,8 @@ function VerificationDetails({
 		onSubmit = () => {},
 		showSuccessScreen = false,
 		loading = false,
+		isDeclarationAccepted,
+		setIsDeclarationAccepted,
 	} = useKyc({ getVendor });
 
 	return (
@@ -33,11 +37,31 @@ function VerificationDetails({
 							Submit the following details for verification?
 						</div>
 
+						<div className={styles.declaration}>
+							<Checkbox
+								onChange={() => setIsDeclarationAccepted(!isDeclarationAccepted)}
+								checked={isDeclarationAccepted}
+							/>
+
+							<div className={styles.text_declaration}>
+								I hereby declare that I have verified the identity and financial
+								information of
+								{' '}
+								<b>{vendorInformation.vendor_details.business_name}</b>
+								{' '}
+								for KYC purposes, and the information
+								provided by them is true and accurate to the best of my knowledge.
+								I confirm that all the necessary documents have been submitted and verified.
+								I understand that any false or misleading information provided may lead to
+								legal consequences.
+							</div>
+
+						</div>
 						<ButtonLayout
 							activeStepper={activeStepper}
 							setActiveStepper={setActiveStepper}
 							onSubmit={onSubmit}
-							loading={loading}
+							loading={loading || !isDeclarationAccepted}
 						/>
 					</div>
 

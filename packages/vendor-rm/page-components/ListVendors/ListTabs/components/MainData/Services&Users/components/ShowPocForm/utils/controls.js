@@ -40,7 +40,6 @@ const controls = [
 		type        : 'mobile-number-select',
 		style       : { flexBasis: '42%' },
 		placeholder : 'Type here',
-		rules       : { required: 'Whatsapp Number is required' },
 	},
 	{
 		name        : 'poc_role',

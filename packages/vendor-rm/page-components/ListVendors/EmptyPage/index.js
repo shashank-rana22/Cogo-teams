@@ -19,7 +19,7 @@ function EmptyPage() {
 					There is no active vendor right now,
 					please start with adding a new vendor.
 				</p>
-				<Button size="lg" themeType="accent" onClick={() => redirectHandler()}>Add New Vendor</Button>
+				<Button size="lg" themeType="primary" onClick={() => redirectHandler()}>Add New Vendor</Button>
 			</div>
 		</div>
 	);

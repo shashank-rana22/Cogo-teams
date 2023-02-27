@@ -29,7 +29,9 @@ function useVendorBankDetail({
 
 	const ifscCode = watch('ifsc_code');
 
-	const { payment_details } = vendorInformation;
+	const { payment_details, vendor_details = {} } = vendorInformation;
+
+	const { city_id } = vendor_details;
 
 	const isUpdateAction = !isEmpty(payment_details);
 
@@ -107,7 +109,7 @@ function useVendorBankDetail({
 	};
 
 	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		initialCall: false, params: { filters: { type: ['pincode'] } },
+		initialCall: true, params: { filters: { type: ['pincode'], city_id } },
 	}));
 
 	const newControls = (controls || []).map((controlItem) => {

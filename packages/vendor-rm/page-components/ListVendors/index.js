@@ -97,7 +97,7 @@ function ListVendors() {
 							size="lg"
 							role="presentation"
 							onClick={() => router.push('/onboard-vendor')}
-							themeType="accent"
+							themeType="primary"
 						>
 							Add New Vendor
 						</Button>

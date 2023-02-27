@@ -11,18 +11,20 @@ function useKyc({
 
 	const [showSuccessScreen, setShowSuccessScreen] = useState(false);
 
+	const [isDeclarationAccepted, setIsDeclarationAccepted] = useState(false);
+
 	useEffect(() => {
 		getVendor();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_vendor',
+		url    : '/submit_vendor_kyc',
 		method : 'POST',
 	}, { manual: true });
 
 	const onSubmit = async () => {
-		await trigger({ data: { id: vendor_id, kyc_status: 'pending' } });
+		await trigger({ data: { vendor_id, kyc_status: 'pending_verification', declaration_accepted_at: new Date() } });
 
 		setShowSuccessScreen(true);
 	};
@@ -30,6 +32,8 @@ function useKyc({
 	return {
 		loading,
 		onSubmit,
+		isDeclarationAccepted,
+		setIsDeclarationAccepted,
 		showSuccessScreen,
 	};
 }
