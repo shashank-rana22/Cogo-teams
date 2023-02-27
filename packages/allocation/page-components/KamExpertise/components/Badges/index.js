@@ -2,8 +2,8 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import CreateBadge from './BadgeList';
-import CreateBadgeV2 from './CreateBadge';
+import BadgeList from './BadgeList';
+import CreateBadge from './CreateBadge';
 import Header from './Header';
 import styles from './styles.module.css';
 import ViewBadges from './ViewBadges';
@@ -46,7 +46,7 @@ function Badges() {
 			{
 				createBadge && (
 					<div>
-						<CreateBadgeV2 setCreateBadge={setCreateBadge} />
+						<CreateBadge setCreateBadge={setCreateBadge} />
 					</div>
 				)
 			}
@@ -55,7 +55,7 @@ function Badges() {
 				badgeList
 			&& (
 				<section>
-					<CreateBadge />
+					<BadgeList />
 				</section>
 			)
 			}

@@ -6,9 +6,8 @@ import GetLabelInputPair from './getLabelInputPair';
 import Header from './header';
 import styles from './styles.module.css';
 
-function CreateBadgeV2({ setCreateBadge }) {
+function CreateBadge({ setCreateBadge }) {
 	const [value, setValue] = useState([]);
-	// const [show, setShow] = useState(false);
 
 	const params = {
 		name: {
@@ -127,4 +126,4 @@ function CreateBadgeV2({ setCreateBadge }) {
 	);
 }
 
-export default CreateBadgeV2;
+export default CreateBadge;
