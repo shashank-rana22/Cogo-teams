@@ -159,6 +159,21 @@ function asyncFieldsListOperators() {
 	};
 }
 
+function asyncFieldsListAgents() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'agent_id',
+		endpoint    : 'list_chat_agents',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+			sort_by    : 'active_assigned_chats',
+			sort_type  : 'asc',
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -172,4 +187,5 @@ export {
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
 	asyncFieldsListOperators,
+	asyncFieldsListAgents,
 };

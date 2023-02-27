@@ -1,0 +1,20 @@
+.container {
+	width: 100%;
+}
+
+.started {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #615f5f;
+	text-align: left;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.padding {
+	padding: 0 10px 0 20px;
+}

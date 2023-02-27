@@ -1,5 +1,7 @@
 import allocations from './config/allocations';
 import businessFinance from './config/business-finance';
+import cogoOne from './config/cogo-one';
+import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import groundOps from './config/ground-ops';
 import myIncident from './config/my-incident';
@@ -15,6 +17,9 @@ const routeConfig = {
 	...contracts,
 	...businessFinance,
 	...myIncident,
+	...myProfile,
+	...cogoVerseAnalytics,
+	...cogoOne,
 	...myProfile,
 };
 

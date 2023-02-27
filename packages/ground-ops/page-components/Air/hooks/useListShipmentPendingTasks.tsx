@@ -26,7 +26,12 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 			isDocDataRequired   : true,
 		},
 		approved_awb: {
-			assignedStakeholder: 'ground_ops',
+			assignedStakeholder : 'ground_ops',
+			status              : 'completed',
+			task                : ['approve_draft_airway_bill'],
+			documentType        : 'draft_airway_bill',
+			documentState       : 'document_accepted',
+			isDocDataRequired   : true,
 		},
 	};
 

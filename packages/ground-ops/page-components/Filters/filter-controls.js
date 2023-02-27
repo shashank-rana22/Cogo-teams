@@ -1,9 +1,13 @@
 const filterControls = [
 
 	{
-		name        : 'blCategory',
-		type        : 'select',
-		label       : 'BL Category',
+		name    : 'blCategory',
+		type    : 'select',
+		label   : 'BL Category',
+		options : [
+			{ value: 'hawb', label: 'HAWB' },
+			{ value: 'mawb', label: 'MAWB' },
+		],
 		placeholder : 'Select',
 		span        : 6,
 	},
