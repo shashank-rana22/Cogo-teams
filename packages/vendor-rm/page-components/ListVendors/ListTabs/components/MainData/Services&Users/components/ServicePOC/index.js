@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
 // import { IcMEdit } from '@cogoport/icons-react';
+import { IcMEdit } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -26,7 +27,15 @@ const pocsMapping = {
 function ServicePOC({
 	allServicesAndPocs = [],
 	loading = false,
+	setShowForm = () => {},
 }) {
+	const handleEditServicePOC = ({ selectedPOC }) => {
+		setShowForm({
+			title : 'editPOCForm',
+			data  : selectedPOC,
+		});
+	};
+
 	if (loading) {
 		return (
 			<LoadingState />
@@ -76,6 +85,14 @@ function ServicePOC({
 								))}
 							</>
 						)) }
+						<div
+							role="presentation"
+							className={styles.edit_icon_container}
+							style={{ cursor: 'pointer' }}
+							onClick={() => handleEditServicePOC({ selectedPOC: singleServicePoc?.poc_details })}
+						>
+							<IcMEdit height={16} width={16} />
+						</div>
 					</div>
 				</>
 			))}

@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 
 function Header({
 	setShowForm = () => {},
-	showForm,
 }) {
 	return (
 		<div className={styles.top}>
@@ -15,7 +14,7 @@ function Header({
 					size="md"
 					themeType="secondary"
 					role="presentation"
-					onClick={() => (showForm === 'serviceForm' ? setShowForm('') : setShowForm('serviceForm'))}
+					onClick={() => { setShowForm({ title: 'serviceForm' }); }}
 				>
 					Add Service
 				</Button>
@@ -25,7 +24,7 @@ function Header({
 					themeType="accent"
 					role="presentation"
 					style={{ marginLeft: '8px' }}
-					onClick={() => (showForm === 'pocForm' ? setShowForm('') : setShowForm('pocForm'))}
+					onClick={() => { setShowForm({ title: 'pocForm' }); }}
 				>
 					Add POC
 				</Button>

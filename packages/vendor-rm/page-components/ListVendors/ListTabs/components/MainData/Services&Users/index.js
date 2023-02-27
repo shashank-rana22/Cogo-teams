@@ -19,7 +19,7 @@ function ServicesUsers({
 
 	const [showForm, setShowForm] = useState('');
 
-	const Component = COMPONENT_MAPPING[showForm];
+	const ActiveComponent = COMPONENT_MAPPING[showForm?.title]?.Component;
 
 	return (
 		<div className={styles.padd}>
@@ -27,8 +27,8 @@ function ServicesUsers({
 			<div className={styles.main}>
 				<Header showForm={showForm} setShowForm={setShowForm} />
 
-				{Component && (
-					<Component
+				{ActiveComponent && (
+					<ActiveComponent
 						showForm={showForm}
 						setShowForm={setShowForm}
 						getVendorData={data}
@@ -41,6 +41,7 @@ function ServicesUsers({
 				<ServicePOC
 					allServicesAndPocs={allServicesAndPocs}
 					loading={loading}
+					setShowForm={setShowForm}
 				/>
 			</div>
 		</div>
