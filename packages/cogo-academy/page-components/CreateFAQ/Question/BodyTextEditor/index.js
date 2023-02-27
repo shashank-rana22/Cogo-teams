@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 let RichTextEditor;
 
@@ -13,9 +13,9 @@ function BodyTextEditor({
 }) {
 	const [rteValue, setRteValue] = useState(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
 
-	// useEffect(() => {
-	// 	setRteValue(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
-	// }, [editorValue]);
+	useEffect(() => {
+		setRteValue(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
+	}, [editorValue]);
 
 	const handleChange = (value) => {
 		setRteValue(value);

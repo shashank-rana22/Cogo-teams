@@ -25,9 +25,18 @@
 
 
 .title {
+  display: flex;
+  gap:0.1rem;
   font-size: 14px;
   font-weight: 900;
   text-align: left;
+  :global{
+    .ui_badge_container.ui_ps_size_md {
+      padding: 1px 5px;
+      font-size: 8px;
+      border-radius: 5px;
+  }
+  }
 }
 
 .subtitle {

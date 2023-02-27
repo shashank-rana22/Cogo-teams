@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { Tabs, TabPanel } from '@cogoport/components';
+import { Badge } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -14,7 +15,6 @@ import styles from './styles.module.css';
 
 function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 	const ALL_TOPICS = 'All Topics';
-	
 
 	const {
 		refetchTopic = () => {},
@@ -23,10 +23,12 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 		activeTab = { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
+
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
-	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 32)}...` : input);
+
+	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 29)}..` : input);
 	return (
 		<div>
 			{' '}
@@ -65,18 +67,28 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 									<TabPanel
 										name={singleOption}
 										title={(
+
 											<div>
 												<div className={styles.title}>
+
 													{truncate(startCase(singleOption?.name))}
+													{' '}
+													<Badge
+														color="#FA9E96"
+														size="md"
+														text={singleOption.question_count}
+													/>
+
 												</div>
 
 												<div className={styles.subtitle}>
-													{startCase(singleOption.description)
-													|| startCase('No Description added')}
+													{startCase(singleOption.description) || 'No Description'}
 												</div>
 											</div>
+
 										)}
 									/>
+
 								))}
 							</Tabs>
 						</div>

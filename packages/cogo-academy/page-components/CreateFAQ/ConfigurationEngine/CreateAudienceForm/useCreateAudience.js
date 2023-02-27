@@ -5,7 +5,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 // import { useState } from 'react';
 
-function useCreateAudience({ setConfigurationPage }) {
+function useCreateAudience({
+	setConfigurationPage,
+	fetchAudiences = () => {},
+	source = '',
+	setShowCreateAudienceModal = () => {},
+}) {
 	const router = useRouter();
 
 	const { control, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
@@ -52,10 +57,13 @@ function useCreateAudience({ setConfigurationPage }) {
 				data: payload,
 			});
 
+			fetchAudiences();
+			setShowCreateAudienceModal(false);
+
 			if (res?.data) {
 				Toast.success(`Audience ${toastText} sucessfully`);
 				setConfigurationPage('dashboard');
-				router.back();
+				if (source !== 'create') router.back();
 			}
 		} catch (err) {
 			Toast.error('Something went wrong');

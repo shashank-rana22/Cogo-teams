@@ -10,8 +10,6 @@ import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 
 function SearchFound({ searchState = '' }) {
-	// const [show, setShow] = useState(false);
-	// const [searchState, setSearchState] = useState('');
 	const {
 		page,
 		setPage = () => {},
@@ -23,10 +21,6 @@ function SearchFound({ searchState = '' }) {
 		setActiveTab,
 		topicId,
 	} = useListFaqQuestions({ searchState });
-
-	// useEffect(() => {
-	// 	refetchQuestions();
-	// }, [page, searchState, topicId]);
 
 	return (
 		<div>

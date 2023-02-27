@@ -65,7 +65,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMDashboard,
 		main_apis     : [],
-		possible_apis : [],
+		possible_apis : apis.faq,
 		module_type   : 'dashboards',
 	},
 	channel_partner_dashboard: {

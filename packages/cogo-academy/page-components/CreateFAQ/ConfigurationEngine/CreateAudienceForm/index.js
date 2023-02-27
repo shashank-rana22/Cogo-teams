@@ -23,7 +23,14 @@ const MAPPING = {
 
 };
 
-function CreateAudienceForm({ source = '', setConfigurationPage, displayBackButton, customStyle }) {
+function CreateAudienceForm({
+	source = '',
+	setShowCreateAudienceModal,
+	setConfigurationPage,
+	displayBackButton,
+	customStyle,
+	fetchAudiences = () => {},
+}) {
 	const router = useRouter();
 	const { general } = useSelector((state) => state);
 	const { id:audienceId, update } = general.query || {};
@@ -36,7 +43,12 @@ function CreateAudienceForm({ source = '', setConfigurationPage, displayBackButt
 		setValue,
 		reset,
 		watch,
-	} = useCreateAudience({ setConfigurationPage });
+	} = useCreateAudience({
+		setConfigurationPage,
+		fetchAudiences,
+		source,
+		setShowCreateAudienceModal,
+	});
 
 	const { fetchAudience = () => {}, data, loading } = useGetAudience();
 
@@ -84,9 +96,13 @@ function CreateAudienceForm({ source = '', setConfigurationPage, displayBackButt
 	}, [loading]);
 
 	const onClickBackIcon = () => {
-		reset();
-		setConfigurationPage('dashboard');
-		router.back();
+		if (source === 'create') {
+			setShowCreateAudienceModal(false);
+		} else {
+			reset();
+			setConfigurationPage('dashboard');
+			router.back();
+		}
 	};
 
 	const showElements = useMemo(() => controls.reduce((pv, cv) => {

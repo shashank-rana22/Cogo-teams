@@ -27,7 +27,10 @@ function useCreateQuestions({ data }) {
 		? onSubmitUpdatedForm
 		: onSubmitCreateForm;
 
-	const { topicOptions, tagOptions, audienceOptions: unfilteredAudienceOptions } = useGetTopicTagList();
+	const {
+		topicOptions, tagOptions, audienceOptions: unfilteredAudienceOptions,
+		fetchTopics, fetchTags, fetchAudiences,
+	} = useGetTopicTagList();
 
 	const handleAudienceSearch = (searchTerm) => {
 		setSearchAudience(searchTerm);
@@ -64,6 +67,9 @@ function useCreateQuestions({ data }) {
 		setShowModalOnCancel,
 		audienceOptions,
 		handleAudienceSearch,
+		fetchTopics,
+		fetchTags,
+		fetchAudiences,
 	};
 }
 
