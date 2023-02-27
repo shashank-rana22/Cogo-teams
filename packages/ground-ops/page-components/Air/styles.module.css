@@ -1,5 +1,5 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 	justify-content: space-between;
 	height: 59px;
 	margin-top: 15px;
@@ -20,7 +20,7 @@
 	font-weight: 600;
 	color: #ed3726;
 	cursor: pointer;
-	background: #FDEBE9;
+	background: #fdebe9;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 
@@ -80,7 +80,7 @@
 	}
 
 	:global(.ui_input_suffix) {
-		height: 80%;
 		width: 20px;
+		height: 80%;
 	}
 }

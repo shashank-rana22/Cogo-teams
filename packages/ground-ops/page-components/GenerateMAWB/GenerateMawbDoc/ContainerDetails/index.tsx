@@ -311,7 +311,7 @@ function ContainerDetails({
 								${styles.flex} 
 								${styles.flex_font_weight}
 								${styles.flex_in_flex_empty_top}
-								${styles.block_e_container_Q_section}
+								${styles.block_e_container_q_section}
 
 							`}
 							>
