@@ -3,6 +3,7 @@
    border: 1px solid #FFE4AF;
     border-radius: 16px; 
     font-weight: 600;
+    margin-bottom: 1%;
  cursor: pointer;   
     &:hover {
         box-shadow: 2px 2px 4px #767474;

@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tagId = [] }) {
+function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tagId = [], limit = undefined }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
@@ -23,8 +23,9 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tag
 						faq_tag_id   : tagId,
 
 					},
-					sort_by: SORT_MODE,
+					sort_by    : SORT_MODE,
 					page,
+					page_limit : limit || undefined,
 				},
 			});
 		} catch (error) {

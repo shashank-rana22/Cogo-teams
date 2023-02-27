@@ -125,12 +125,13 @@ function Answer({ questions = {} }) {
 						onClickLikeButton({ id: answerData?.answers[0]?.id });
 					}}
 				>
-					<Badge placement="left" color="green" size="md" text={answerData?.answers[0]?.upvote_count}>
-						<div className={styles.like_hover}>
+					{answerData?.answers[0]?.upvote_count > 0 ? (
+						<Badge placement="left" color="green" size="md" text={answerData?.answers[0]?.upvote_count}>
 							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
-						</div>
-					</Badge>
-
+						</Badge>
+					) : (
+						<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
+					) }
 				</div>
 
 				<div
@@ -143,9 +144,7 @@ function Answer({ questions = {} }) {
 						);
 					}}
 				>
-					<div className={styles.like_hover}>
-						<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
-					</div>
+					<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
 
 				</div>
 
@@ -199,7 +198,7 @@ function Answer({ questions = {} }) {
 				</div>
 			</div>
 
-			<RelatedQuestion tags={questions.faq_tags} />
+			<RelatedQuestion tags={questions.faq_tags} question_abstract={questions.question_abstract} />
 
 		</>
 	);

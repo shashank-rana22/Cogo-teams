@@ -32,6 +32,7 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 					key={item.name}
 					size="sm"
 					color="white"
+					onChange={() => setTags([...tags, item.id])}
 				>
 					<Button
 						themeType="tertiary"
