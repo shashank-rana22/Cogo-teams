@@ -697,7 +697,7 @@ const partner = {
 		{
 			api          : 'list_location_clusters',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_partner_user_settings',
@@ -3965,7 +3965,7 @@ const partner = {
 		{
 			api          : 'get_expertise_locations_for_rate',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 			feature      : 'rate_density',
 		},
 		{
@@ -4572,32 +4572,32 @@ const partner = {
 		{
 			api          : 'update_location',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_locations_mapping',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'create_location',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'create_location_mapping',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'create_location_cluster',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_location_clusters',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_operators',
@@ -4617,22 +4617,22 @@ const partner = {
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_partners',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'get_location_cluster',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'update_location_cluster',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 	],
 	ocean_port_pair: [
@@ -5293,7 +5293,7 @@ const partner = {
 		{
 			api          : 'list_locations',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'get_sage_product_taxes',
@@ -6294,7 +6294,7 @@ const partner = {
 		{
 			api          : 'list_locations',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'get_sage_job',
@@ -8938,7 +8938,7 @@ const partner = {
 		{
 			api          : 'list_locations',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_organization_users',
@@ -9422,7 +9422,7 @@ const partner = {
 		{
 			api          : 'list_location_clusters',
 			access_type  : 'private',
-			service_name : 'locations',
+			service_name : 'location',
 			feature      : 'fcl_freight_rate_extensions',
 		},
 		{
@@ -9440,7 +9440,7 @@ const partner = {
 			api          : 'get_location_cluster',
 			access_type  : 'private',
 			feature      : 'fcl_freight_rate_extensions',
-			service_name : 'locations',
+			service_name : 'location',
 		},
 		{
 			api          : 'list_fcl_freight_rate_free_days',

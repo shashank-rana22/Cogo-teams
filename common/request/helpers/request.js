@@ -32,11 +32,10 @@ const customPeeweeSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-const request = Axios.create();
+const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 request.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };
-	let baseURL = process.env.NEXT_PUBLIC_REST_BASE_API_URL;
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
@@ -49,12 +48,10 @@ request.interceptors.request.use((oldConfig) => {
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${apiPath}`;
-		if (serviceName === 'locations') {
-			baseURL = process.env.NEXT_PUBLIC_COGO_MAPS_URL;
+		if (serviceName === 'location') {
 			newConfig.paramsSerializer = customPeeweeSerializer;
 		}
 	}
-	newConfig.baseURL = baseURL;
 
 	return {
 		...newConfig,
