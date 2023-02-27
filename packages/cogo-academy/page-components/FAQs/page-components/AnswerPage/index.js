@@ -18,7 +18,6 @@ const FEEDBACK_MAPPING = {
 };
 
 function AnswerPage({ questions = {} }) {
-	console.log(questions);
 	const [show, setShow] = useState(false);
 
 	const { data: answerData, loading } = useGetQuestions({ id: questions.id });

@@ -102,7 +102,6 @@ const useGetTopicTagList = () => {
 			persona = '',
 			country_id = '',
 		} = item || {};
-		console.log('item', item);
 
 		const personaLabel = (WORK_SCOPES_OPTIONS || []).find((workScope) => workScope.value === persona);
 		const cogoEntityLabel = (entity_data || []).find((cogoEntity) => cogoEntity.id === cogo_entity_id);

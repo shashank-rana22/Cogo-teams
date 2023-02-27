@@ -23,10 +23,11 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 		activeTab = { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
-	console.log(data);
+
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
+
 	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 29)}..` : input);
 	return (
 		<div>
@@ -81,7 +82,7 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 												</div>
 
 												<div className={styles.subtitle}>
-													{startCase(singleOption.description)||'No Description'}
+													{startCase(singleOption.description) || 'No Description'}
 												</div>
 											</div>
 

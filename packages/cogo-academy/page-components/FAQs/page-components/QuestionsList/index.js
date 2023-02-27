@@ -21,7 +21,7 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' })
 		paginationData,
 	// eslint-disable-next-line react-hooks/rules-of-hooks
 	} = useListFaqQuestions({ topicId, tagId });
-	console.log(tagId);
+
 	if (loading) {
 		return (
 			<div className={styles.spinner}>
