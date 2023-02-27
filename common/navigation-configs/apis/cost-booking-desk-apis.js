@@ -221,56 +221,6 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
-	{
-		api          : 'get_shipment_invoice_preference',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_credit_notes',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'create_shipment_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'get_shipment_credit_note',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_invoice_currency',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_invoice_status',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'create_shipment_revoked_invoice',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'list_shipment_currency_conversions',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'update_shipment_invoice_combination',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
 ];
 
 export default apis;
