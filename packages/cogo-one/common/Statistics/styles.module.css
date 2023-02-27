@@ -44,6 +44,10 @@
 	
 }
 
+.time_durations_value {
+	position: relative;
+	display: inline-block;
+}
 
 .time_durations_value::after {
 	position: absolute;
@@ -57,6 +61,7 @@
 	transform: scaleX(0);
 	transform-origin: bottom right;
 }
+
 .time_durations_value:hover::after {
 	transform: scaleX(1);
 	transform-origin: bottom left;

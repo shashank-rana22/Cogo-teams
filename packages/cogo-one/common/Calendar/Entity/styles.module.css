@@ -16,7 +16,7 @@
 	text-align: center;
 }
 
-.dateContainer{
+.date_container{
     padding: 0 22px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 6px;
@@ -25,19 +25,19 @@
     height: 50px;
     width:fit-content;
 }
-.dateContainer:hover {
+.date_container:hover {
 	background: #FFFFFF;
 	box-shadow: 0px 0px 10px #D4D4D4;
 	transition: 0.1s;
 }
 
-.dateContainer:hover .dayH1{
+.date_container:hover .day_hours1{
 	font-size: 18px;
 	font-weight: 500;
 	color: #444444;
 	transition: 0.3s;
 }
-.dateContainer:hover .dayH2{
+.date_container:hover .day_hours2{
 	font-size: 12px;
 	font-weight: 500;
 	color: #444444;
@@ -77,13 +77,13 @@
 		transition: 0.1s;
 	}
 
-	.dayH1 {
+	.day_hours1 {
 		font-size: 18.5px;
 		font-weight: 500;
 		color: #444444;
 		transition: 0.3s;
 	}
-	.dayH2 {
+	.day_hours2 {
 		font-size: 12.5px;
 		font-weight: 500;
 		color: #444444;
