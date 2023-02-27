@@ -3,8 +3,6 @@
 	flex-basis: 74%;
 	flex-direction: column;
 	width: 100%;
-
-	/* height: 27%; */
 	height: 320px;
 	padding: 10px;
 	background: #fbf7f1;
@@ -48,9 +46,13 @@
 	background-color: #fdebe9;
 }
 
-.corner_icon {
+.agent_status {
 	position: relative;
 	top: 2px;
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 100%;
 }
 
 .agents_nos {
@@ -211,4 +213,16 @@
 	padding-left: 4px;
 	font-size: 10px;
 	color: #828282;
+}
+
+.busy_status {
+	background: red;
+}
+
+.online_status {
+	background: green;
+}
+
+.offline_status {
+	background: grey;
 }

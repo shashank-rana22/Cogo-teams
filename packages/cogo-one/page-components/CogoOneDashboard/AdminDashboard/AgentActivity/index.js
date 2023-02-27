@@ -9,7 +9,7 @@ import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
 
-function AgentActivity({ emptyState = true }) {
+function AgentActivity({ emptyState = false }) {
 	const [activeTab, setActiveTab] = useState('busy');
 
 	const tabMapping = {
@@ -23,15 +23,20 @@ function AgentActivity({ emptyState = true }) {
 		online  : 'online',
 		offline : 'offline',
 	};
+
 	return (
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
 			<div className={styles.main_container}>
 				<div className={styles.activity_name}>Your Agents</div>
 				<div className={styles.main_container_upperpart}>
-
 					{agentActivityStatus.map((item) => {
-						const { nos, text, icon, key } = item;
+						const { text, key } = item;
+						const countMapping = {
+							busy    : 30,
+							online  : 40,
+							offline : 100,
+						};
 						return (
 							<button
 								className={`${styles.agent_nos_box} 
@@ -39,15 +44,13 @@ function AgentActivity({ emptyState = true }) {
 								onClick={() => setActiveTab(key)}
 							>
 								<div className={styles.agent_nos_box_uppersection}>
-									<div className={styles.agents_nos}>{nos}</div>
-									<div className={styles.corner_icon}>{icon}</div>
+									<div className={styles.agents_nos}>{countMapping[key]}</div>
+									<div className={`${styles.agent_status} ${tabMapping[key]}`} />
 								</div>
-
 								<div className={styles.agents_status_text}>
 									{text}
 								</div>
 							</button>
-
 						);
 					})}
 

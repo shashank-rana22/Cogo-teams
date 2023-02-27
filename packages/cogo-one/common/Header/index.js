@@ -1,16 +1,15 @@
-import { Tabs, TabPanel, Popover } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 // import ScopeSelector from '@cogoport/forms/page-components/Business/ScopeSelect';
-import { IcMFilter } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+// import { IcMFilter } from '@cogoport/icons-react';
+import React from 'react';
 
 import { cogoOneLogo } from '../../page-components/CogoOneDashboard/constants';
-import Filter from '../Filter';
 
 import styles from './styles.module.css';
 
 function Header({ timeline, setTimeline }) {
-	const [filterVisible, setFilterVisible] = useState(false);
-	const [filters, setFilters] = useState('');
+	// const [filterVisible, setFilterVisible] = useState(false);
+	// const [filters, setFilters] = useState('');
 
 	return (
 		<div className={styles.container}>
@@ -28,7 +27,7 @@ function Header({ timeline, setTimeline }) {
 
 				{/* <ScopeSelector /> */}
 				<div className={styles.filter_dot} />
-				<div className={styles.filter_icon}>
+				{/* <div className={styles.filter_icon}>
 					<Popover
 						placement="left"
 						render={(
@@ -44,7 +43,7 @@ function Header({ timeline, setTimeline }) {
 
 						<IcMFilter width={25} height={25} onClick={() => setFilterVisible(!filterVisible)} />
 					</Popover>
-				</div>
+				</div> */}
 
 				<Tabs
 					activeTab={timeline}
