@@ -2,7 +2,7 @@ import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function CreateBadge() {
+function BadgeList() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
@@ -63,4 +63,4 @@ function CreateBadge() {
 	);
 }
 
-export default CreateBadge;
+export default BadgeList;

@@ -39,7 +39,7 @@
 }
 
 .lower_background {
-  padding: 30px;
+  padding: 20px;
   margin-top: 28px;
   background: #e2e2e2;
   border-radius: 10px;
@@ -55,20 +55,23 @@
 
 .card_container {
   flex: 1;
-  padding: 0 40px;
+  padding: 0 10px 0 30px;
   margin-top: 10px;
   border-right: 1px solid #000000;
 }
 
 .file_select_style{
-	margin-top: 20px;
-	width: 275px;
+	margin: 20px 10px 0 0;
+	width: "70%";
 	:global(.ui_upload_droparea_container) {
 		border-radius: 8px;
 	}
 	:global(.ui_3hLO-){
 		margin-bottom: 0px;
 	}
+  :global(.ui_lqy5Q){
+    margin:8px 0 0 0 ;
+  }
 }
 
 .lower_subheader2 {
