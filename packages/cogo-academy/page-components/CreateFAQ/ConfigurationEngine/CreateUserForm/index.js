@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import createAudienceControls from './utils/createAudienceControls';
 
-function CreateUserForm({ setConfigurationPage }) {
+function CreateUserForm({ setConfigurationPage, displayBackButton, customStyle }) {
 	const router = useRouter();
 	const { general } = useSelector((state) => state);
 	const { id:audienceId, update } = general.query || {};
@@ -97,11 +97,16 @@ function CreateUserForm({ setConfigurationPage }) {
 
 	return (
 		<div className={styles.container}>
-
-			<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
-				<IcMArrowBack width={20} height={20} />
-				<div className={styles.back}>Back to Dashboard</div>
-			</div>
+			{
+				displayBackButton ? (
+					null
+				) : (
+					<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
+						<IcMArrowBack width={20} height={20} />
+						<div className={styles.back}>Back to Dashboard</div>
+					</div>
+				)
+			}
 
 			<div className={styles.header}>
 				{audienceId ? 'Update' : 'Add'}
@@ -120,7 +125,7 @@ function CreateUserForm({ setConfigurationPage }) {
 							<div className={styles.label}>
 								{label}
 							</div>
-							<div className={styles.controller_wrapper}>
+							<div className={styles.controller_wrapper} style={customStyle?.controllerStyle || {}}>
 								<DynamicController
 									{...controls[controlItem]}
 									control={control}
@@ -134,21 +139,21 @@ function CreateUserForm({ setConfigurationPage }) {
 				return null;
 			})}
 
-			<div className={styles.button_container}>
+			<div className={styles.button_container} style={customStyle?.buttonContainerStyle || {}}>
 				<Button
 					themeType="tertiary"
 					className={styles.cancel_button}
 					onClick={onClickBackIcon}
 					size="md"
 				>
-					cancel
+					CANCEL
 				</Button>
 
 				<Button
 					size="md"
 					onClick={handleSubmit(createAudience)}
 				>
-					save
+					SAVE
 				</Button>
 			</div>
 

@@ -19,6 +19,8 @@ function useCreateNewTagOrTopic() {
 
 	const [show, setShow] = useState(false);
 
+	const [showCreateAudienceModal, setShowCreateAudienceModal] = useState(false);
+
 	const { control, handleSubmit, formState: { errors }, setValue, reset } = useForm();
 
 	const resetNameAndDescription = () => {
@@ -98,6 +100,8 @@ function useCreateNewTagOrTopic() {
 		show,
 		setShow,
 		onClickCancelButton,
+		showCreateAudienceModal,
+		setShowCreateAudienceModal,
 	};
 }
 
