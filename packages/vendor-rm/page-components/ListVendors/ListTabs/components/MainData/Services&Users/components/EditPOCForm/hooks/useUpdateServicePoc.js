@@ -50,9 +50,9 @@ const useAddServicePoc = ({
 
 			refetchServicesPocs();
 
-			Toast.success('Service Poc added Successfully');
+			Toast.success('Service Poc updated Successfully');
 
-			setShowForm('');
+			setShowForm({});
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to create service poc, please try again...');
 		}
