@@ -1,6 +1,6 @@
-import { Button, Pill } from '@cogoport/components';
+import { Chips, Button, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
 import TopicList from '../TopicList';
@@ -15,38 +15,32 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 		loading = false,
 		activeTab,
 		setActiveTab,
-	} = useListFaqTag();
-	console.log('efef', tags);
+		options,
+	} = useListFaqTag({ tagIds: tags });
+
+	console.log('tags123 :: ', tags);
+
+	const onItemChange = (e) => {
+		// setTags((prev) => [
+		// 	...prev,
+		// 	e,
+		// ]);
+	};
+
 	return (
-		<div style={{ marginBottom: 12 }}>
-			<h4 style={{ marginTop: 12 }}>
-				{startCase('Popular tags in this section')}
-				:
+		<div style={{ marginBottom: 10 }}>
+			<h4 style={{ margin: '12px 0' }}>
+				Popular tags in this section
 			</h4>
-			<div>
-				{
 
-			data?.list.map((item) => (
-				<Pill
-					className={styles.tag_decoration}
-					key={item.name}
+			<div className={styles.tag}>
+				<Chips
 					size="sm"
-					color="white"
-				>
-					<Button
-						themeType="tertiary"
-						onClick={() => setTags([...tags, item.id])}
-						size="sm"
-						color="white"
-					>
-						<div className={styles.font_decoration}>{startCase(item.name)}</div>
-					</Button>
-
-				</Pill>
-
-			))
-			}
-
+					items={options}
+					enableMultiSelect
+					selectedItems={tags}
+					onItemChange={setTags}
+				/>
 			</div>
 
 			<TopicList tabTitle={tabTitle} searchState={searchState} tagId={tags} />

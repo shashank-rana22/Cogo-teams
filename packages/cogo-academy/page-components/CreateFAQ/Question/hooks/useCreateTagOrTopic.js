@@ -19,7 +19,14 @@ function useCreateNewTagOrTopic() {
 
 	const [show, setShow] = useState(false);
 
+	const [showCreateAudienceModal, setShowCreateAudienceModal] = useState(false);
+
 	const { control, handleSubmit, formState: { errors }, setValue, reset } = useForm();
+
+	const resetNameAndDescription = () => {
+		setValue('name', '');
+		setValue('description', '');
+	};
 
 	const queryName = 'create';
 
@@ -53,6 +60,7 @@ function useCreateNewTagOrTopic() {
 
 			if (res?.data) {
 				Toast.success(`${queryValue} ${queryName}d sucessfully`);
+				resetNameAndDescription();
 				setShow(false);
 			}
 		} catch (err) {
@@ -68,6 +76,11 @@ function useCreateNewTagOrTopic() {
 	const handleCreateTopic = () => {
 		setShow(true);
 		setQueryValue('topic');
+	};
+
+	const onClickCancelButton = () => {
+		resetNameAndDescription();
+		setShow(false);
 	};
 
 	return {
@@ -86,6 +99,9 @@ function useCreateNewTagOrTopic() {
 		handleCreateTopic,
 		show,
 		setShow,
+		onClickCancelButton,
+		showCreateAudienceModal,
+		setShowCreateAudienceModal,
 	};
 }
 

@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 import Spinner from '../../../commons/Spinner';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
+import CreateUserForm from '../ConfigurationEngine/CreateUserForm';
 
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
@@ -18,7 +19,16 @@ import useCreateQuestions from './useCreateQuestions';
 
 const style = {
 	width   : '100%',
-	padding : '12px',
+	padding : 12,
+};
+
+const userFormStyle = {
+	controllerStyle: {
+		width: '100%',
+	},
+	buttonContainerStyle: {
+		justifyContent: 'flex-end',
+	},
 };
 
 function CreateFAQ() {
@@ -54,7 +64,10 @@ function CreateFAQ() {
 		handleCreateTag,
 		handleCreateTopic,
 		formErrors,
-		resetValue,
+		// resetValue,
+		onClickCancelButton,
+		showCreateAudienceModal,
+		setShowCreateAudienceModal,
 	} = useCreateNewTagOrTopic();
 
 	const { question_abstract, faq_tags = [], faq_topics = [], answers = [], faq_audiences = [] } = data || {};
@@ -100,11 +113,6 @@ function CreateFAQ() {
 		router.back();
 	};
 
-	const onClickCancelButton = () => {
-		resetValue();
-		setShow(false);
-	};
-
 	if (questionPreview === 'preview') {
 		return (
 			<PreviewQuestion
@@ -120,9 +128,9 @@ function CreateFAQ() {
 				<Spinner
 					height={60}
 					width={60}
-					outerBorderColor="#FFF"
-					spinBorderColor="#000"
 					borderWidth="7px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
 				/>
 			</div>
 		);
@@ -219,6 +227,7 @@ function CreateFAQ() {
 						</div>
 						<div
 							className={styles.create_tag_label}
+							onClick={() => setShowCreateAudienceModal(true)}
 						>
 							Create New Audience
 						</div>
@@ -267,11 +276,12 @@ function CreateFAQ() {
 				closeOnOuterClick={false}
 				showCloseIcon={false}
 			>
-				<Modal.Header title="Request your question here" />
+				<Modal.Header title={`Add new ${queryValue} here`} />
 
 				<Modal.Body>
 					<div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
 						<CreateForm
+							source="create"
 							viewType={queryValue}
 							setConfigurationPage={setConfigurationPage}
 							handleSubmit={handleCreate}
@@ -288,15 +298,15 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
-						themeType="tertiary"
-						style={{ marginRight: '8' }}
+						themeType="secondary"
+						style={{ marginRight: 8 }}
 						onClick={onClickCancelButton}
 					>
-						Cancel
+						CANCEL
 					</Button>
 
 					<Button onClick={handleCreate(createFaqComponent)}>
-						Submit
+						SUBMIT
 					</Button>
 				</Modal.Footer>
 			</Modal>
@@ -308,7 +318,7 @@ function CreateFAQ() {
 				closeOnOuterClick={false}
 				showCloseIcon
 			>
-				<Modal.Header title="Request your question here" />
+				<Modal.Header title="Confirm your action" />
 
 				<Modal.Body>
 					<div className={styles.text_wrapper}>
@@ -319,7 +329,7 @@ function CreateFAQ() {
 				<Modal.Footer>
 					<Button
 						themeType="tertiary"
-						style={{ marginRight: '8' }}
+						style={{ marginRight: 8 }}
 						onClick={() => setShowModalOnCancel(false)}
 					>
 						No
@@ -332,6 +342,25 @@ function CreateFAQ() {
 					</Button>
 
 				</Modal.Footer>
+			</Modal>
+
+			<Modal
+				size="md"
+				show={showCreateAudienceModal}
+				onClose={() => setShowCreateAudienceModal(false)}
+				closeOnOuterClick={false}
+				showCloseIcon
+			>
+				<Modal.Header title="Create audience" />
+
+				<Modal.Body>
+					<CreateUserForm
+						source="create"
+						setConfigurationPage={setConfigurationPage}
+						displayBackButton="No"
+						customStyle={userFormStyle}
+					/>
+				</Modal.Body>
 			</Modal>
 
 		</div>

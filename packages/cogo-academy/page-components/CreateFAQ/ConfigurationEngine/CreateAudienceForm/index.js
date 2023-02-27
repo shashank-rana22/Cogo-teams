@@ -23,7 +23,7 @@ const MAPPING = {
 
 };
 
-function CreateAudienceForm({ setConfigurationPage }) {
+function CreateAudienceForm({ source = '', setConfigurationPage, displayBackButton, customStyle }) {
 	const router = useRouter();
 	const { general } = useSelector((state) => state);
 	const { id:audienceId, update } = general.query || {};
@@ -108,17 +108,24 @@ function CreateAudienceForm({ setConfigurationPage }) {
 
 	return (
 		<div className={styles.container}>
+			{
+				displayBackButton ? (
+					null
+				) : (
+					<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
+						<IcMArrowBack width={20} height={20} />
+						<div className={styles.back}>Back to Dashboard</div>
+					</div>
+				)
+			}
 
-			<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
-				<IcMArrowBack width={20} height={20} />
-				<div className={styles.back}>Back to Dashboard</div>
-			</div>
-
-			<div className={styles.header}>
-				{audienceId ? 'Update' : 'Add'}
-				{' '}
-				Audience Group
-			</div>
+			{source !== 'create' ? (
+				<div className={styles.header}>
+					{audienceId ? 'Update' : 'Add'}
+					{' '}
+					User Group
+				</div>
+			) : null}
 
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};
@@ -131,7 +138,7 @@ function CreateAudienceForm({ setConfigurationPage }) {
 							<div className={styles.label}>
 								{label}
 							</div>
-							<div className={styles.controller_wrapper}>
+							<div className={styles.controller_wrapper} style={customStyle?.controllerStyle || {}}>
 								<DynamicController
 									{...controls[controlItem]}
 									control={control}
@@ -145,21 +152,21 @@ function CreateAudienceForm({ setConfigurationPage }) {
 				return null;
 			})}
 
-			<div className={styles.button_container}>
+			<div className={styles.button_container} style={customStyle?.buttonContainerStyle || {}}>
 				<Button
 					themeType="tertiary"
 					className={styles.cancel_button}
 					onClick={onClickBackIcon}
 					size="md"
 				>
-					cancel
+					CANCEL
 				</Button>
 
 				<Button
 					size="md"
 					onClick={handleSubmit(createAudience)}
 				>
-					save
+					SAVE
 				</Button>
 			</div>
 

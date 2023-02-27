@@ -18,8 +18,8 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			name        : 'name',
 			type        : 'text',
 			span        : 2,
-			label       : 'Name of the user group',
-			placeholder : 'Enter name of the audience group',
+			label       : 'Audience Name',
+			placeholder : 'Enter name of the user group',
 		},
 		{
 			name        : 'cogo_entity_id',

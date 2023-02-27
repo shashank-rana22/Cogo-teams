@@ -12,6 +12,7 @@ import useGetFaq from '../hooks/useGetFaq';
 import styles from './styles.module.css';
 
 function CreateForm({
+	source = '',
 	viewType = 'topic',
 	setConfigurationPage,
 	handleSubmit,
@@ -33,6 +34,8 @@ function CreateForm({
 	const onClickBackIcon = () => {
 		if (displayBackButton) {
 			setShow(false);
+			setValue('name', '');
+			setValue('description', '');
 			return;
 		}
 		reset();
@@ -58,25 +61,28 @@ function CreateForm({
 	return (
 		<div className={styles.container} style={style}>
 
-			{
-				!displayBackButton
-						&& (
-							<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
-								<IcMArrowBack width={20} height={20} />
-								<div className={styles.back}>Back to Dashboard</div>
-							</div>
-						)
-			}
+			{!displayBackButton
+				? (
+					<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
+						<IcMArrowBack width={20} height={20} />
+						<div className={styles.back}>Back to Dashboard</div>
+					</div>
+				) : null}
 
-			<div>
-				<div className={styles.add_topic}>
-					Add
-					{' '}
-					{startCase(viewType)}
+			{source !== 'create' ? (
+				<div>
+					<div className={styles.add_topic}>
+						Add
+						{' '}
+						{startCase(viewType)}
+					</div>
 				</div>
-			</div>
+			) : null}
 
-			<div className={styles.add_name}>
+			<div
+				className={styles.add_name}
+				style={{ marginTop: source === 'create' ? 0 : undefined }}
+			>
 				{startCase(viewType)}
 				{' '}
 				Name

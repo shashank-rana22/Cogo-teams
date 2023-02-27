@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 
 function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 	const ALL_TOPICS = 'All Topics';
+	
 
 	const {
 		refetchTopic = () => {},
@@ -22,7 +23,6 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 		activeTab = { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
-	console.log('tagger', tagId);
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
@@ -53,7 +53,6 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 										<div>
 											<div className={styles.title}>
 												{ALL_TOPICS}
-												:
 											</div>
 
 											<div className={styles.subtitle}>
@@ -69,7 +68,6 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 											<div>
 												<div className={styles.title}>
 													{truncate(startCase(singleOption?.name))}
-													:
 												</div>
 
 												<div className={styles.subtitle}>
