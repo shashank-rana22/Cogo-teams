@@ -48,3 +48,9 @@
 .popover_container {
 	width: 500px !important;
 }
+
+.filter_dot {
+	position: absolute;
+	top: 188px;
+    right: 42px;
+}

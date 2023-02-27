@@ -1,6 +1,7 @@
 import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMFilter } from '@cogoport/icons-react';
+import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Layout from '../Air/commons/Layout';
@@ -19,10 +20,11 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 
 	const onSubmit = (formValues: any) => {
 		setFilters((prev?:any) => ({ ...prev, ...formValues }));
+		setVisible(false);
 	};
 	const handleClear = () => {
 		Object.keys(filters).forEach((key) => {
-			setValue(key, undefined);
+			setValue('blCategory', 'hawb');
 		});
 		reset();
 		setFilters({});
@@ -41,6 +43,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 		<div className={styles.container}>
 			<Popover
 				placement="bottom"
+				trigger="click"
 				render={popoverContent()}
 				className={`${styles.filters_popover} ${styles.popover_container}`}
 				visible={visible}
@@ -54,6 +57,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 					Filters
 					{' '}
 					<IcMFilter />
+					{!isEmpty(filters) && <IcCRedCircle height={8} width={8} className={styles.filter_dot} /> }
 				</Button>
 			</Popover>
 

@@ -107,7 +107,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					</div>
 				</div>
 			</div>
-			{/* ---- */}
+
 			<div className={styles.flex}>
 				<div className={cl`
 					${styles.block_col}
@@ -221,7 +221,7 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					</div>
 				</div>
 			</div>
-			{/* ---- */}
+
 			<div className={styles.flex}>
 				<div className={cl`
 					${styles.block_col}
@@ -730,7 +730,6 @@ function ShipmentDetails({ formData = {}, taskItem = {} }:Props) {
 					</div>
 				</div>
 			</div>
-			{/* --- */}
 		</div>
 	);
 }

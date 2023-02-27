@@ -3,7 +3,7 @@ const filterControls = [
 	{
 		name    : 'blCategory',
 		type    : 'select',
-		label   : 'BL Category',
+		label   : 'AWB Category',
 		options : [
 			{ value: 'hawb', label: 'HAWB' },
 			{ value: 'mawb', label: 'MAWB' },

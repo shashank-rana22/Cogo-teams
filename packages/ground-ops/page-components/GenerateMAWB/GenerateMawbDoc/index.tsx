@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import { saveAs } from 'file-saver';
 import * as htmlToImage from 'html-to-image';
 import React, { createRef, useState } from 'react';
-// import { useScreenshot } from 'use-react-screenshot';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -24,11 +23,6 @@ interface Props {
 	viewDoc?: boolean;
 }
 
-function camelToUnderscore(key) {
-	const result = key.replace(/([A-Z])/g, ' $1');
-	return result.split(' ').join('_').toLowerCase();
-}
-
 function GenerateMawb({
 	taskItem = {},
 	formData = {},
@@ -39,12 +33,6 @@ function GenerateMawb({
 	viewDoc = false,
 }:Props) {
 	const filteredData = { ...formData };
-
-	// const filteredData = {};
-
-	// Object.keys(filteredFormData).forEach((control) => {
-	// 	filteredData[camelToUnderscore(control)] = filteredFormData[control];
-	// });
 
 	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',
@@ -60,8 +48,6 @@ function GenerateMawb({
 		'ORIGINAL 2 (FOR CONSIGNEE)',
 		'ORIGINAL 1 (FOR ISSUING CARRIER)',
 	];
-
-	// const [, takeScreenShot] = useScreenshot();
 
 	const serialId = taskItem?.serialId || '';
 
@@ -149,9 +135,8 @@ function GenerateMawb({
 	};
 
 	const chargeableWeight:any = Math.max(
-		taskItem?.weight,
-		// eslint-disable-next-line no-unsafe-optional-chaining
-		taskItem?.volume * 166.67,
+		taskItem.weight,
+		taskItem.volume * 166.67,
 	).toFixed(2);
 	let agentCharge = 0;
 	formData?.agentOtherCharges?.forEach((item) => {
