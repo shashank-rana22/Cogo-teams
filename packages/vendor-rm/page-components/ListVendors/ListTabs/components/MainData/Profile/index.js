@@ -12,8 +12,8 @@ function Profile({
 	return (
 		<div className={styles.padd}>
 			<div className={styles.main}>
-				<Heading vendor_details={data?.vendor_details} refetchVendorInfo={refetchVendorInfo} />
-				<Verified data={data} />
+				<Heading vendor_details={data.vendor_details} refetchVendorInfo={refetchVendorInfo} />
+				<Verified vendor_details={data.vendor_details} />
 				<VendorInfo data={data} refetchVendorInfo={refetchVendorInfo} />
 			</div>
 		</div>

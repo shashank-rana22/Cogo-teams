@@ -27,7 +27,8 @@ function ListVendors() {
 		data: dataStats,
 	} = useVendorStats();
 
-	const { total_count, page_limit:pageLimit } = data || {};
+	const { total_count, page_limit: pageLimit } = data || {};
+
 	const router = useRouter();
 
 	const { list = [] } = data;

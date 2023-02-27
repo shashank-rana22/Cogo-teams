@@ -1,6 +1,5 @@
 .main {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 	justify-content: center;
 	height: 90px;
@@ -11,6 +10,7 @@
 .icon {
 	display: flex;
 	justify-content: center;
+	margin-right: 4px;
 	text-align: center;
 }
 
@@ -23,4 +23,9 @@
 	text-align: center;
 	text-transform: capitalize;
 	letter-spacing: 0.04em;
+}
+
+.kyc_status_icon {
+	display: flex;
+	align-items: center;
 }
