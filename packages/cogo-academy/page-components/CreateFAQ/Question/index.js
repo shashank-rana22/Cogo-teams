@@ -33,7 +33,9 @@ const userFormStyle = {
 
 function CreateFAQ() {
 	const router = useRouter();
+
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
+
 	const {
 		editorValue,
 		setEditorValue,
@@ -56,6 +58,8 @@ function CreateFAQ() {
 		fetchAudiences,
 		RichTextEditor,
 	} = useCreateQuestions({ data });
+
+	console.log('errors', errors);
 
 	const {
 		setConfigurationPage,
@@ -105,7 +109,7 @@ function CreateFAQ() {
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
-			setEditorValue(RichTextEditor?.createValueFromString(answers?.[0]?.answer, 'markdown'));
+			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'markdown'));
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -172,9 +176,9 @@ function CreateFAQ() {
 						rules={{ required: 'Question is required.' }}
 					/>
 
-					{errors.create_faq && (
+					{errors.question_abstract && (
 						<span className={styles.errors}>
-							{errors.create_faq.message}
+							{errors.question_abstract.message}
 						</span>
 					)}
 
@@ -199,7 +203,13 @@ function CreateFAQ() {
 							control={control}
 							value={filterTags}
 							options={tagOptions}
+							rules={{ required: 'Tags are required.' }}
 						/>
+						{errors.tag_ids && (
+							<span className={styles.errors}>
+								{errors.tag_ids.message}
+							</span>
+						)}
 
 					</div>
 
@@ -221,11 +231,18 @@ function CreateFAQ() {
 							name="topic_ids"
 							control={control}
 							options={topicOptions}
+							rules={{ required: 'Topics are required.' }}
 						/>
+						{errors.topic_ids && (
+							<span className={styles.errors}>
+								{errors.topic_ids.message}
+							</span>
+						)}
 
 					</div>
 
 				</div>
+
 				<div className={styles.select_topic_container}>
 
 					<div className={styles.label_container}>
@@ -252,6 +269,7 @@ function CreateFAQ() {
 					<div className={styles.input_label}>
 						Answer
 					</div>
+
 					<BodyTextEditor
 						editorValue={editorValue}
 						setEditorValue={setEditorValue}

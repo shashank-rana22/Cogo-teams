@@ -26,7 +26,12 @@ function useCreateQuestions({ data }) {
 	const {
 		onSubmit:onSubmitCreateForm,
 		onClickPublish,
-	} = useCreateFaqSet({ setQuestionPreview, questionPreview, editorValue });
+	} = useCreateFaqSet({
+		setQuestionPreview,
+		questionPreview,
+		editorValue,
+		RichTextEditor,
+	});
 
 	const { onSubmitUpdatedForm } = useUpdateFaqSet({ setQuestionPreview, editorValue, data });
 

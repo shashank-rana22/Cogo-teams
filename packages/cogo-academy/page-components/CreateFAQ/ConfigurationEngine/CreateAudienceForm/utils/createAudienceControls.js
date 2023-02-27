@@ -20,6 +20,9 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			span        : 2,
 			label       : 'Audience Name',
 			placeholder : 'Enter name of the user group',
+			rules       : {
+				required: 'Audience name is required',
+			},
 		},
 		{
 			name        : 'cogo_entity_id',
@@ -45,7 +48,9 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			span        : 2,
 			options     : PLATFORM_OPTIONS,
 			placeholder : 'Select Platform',
-			rules       : { required: 'This is required' },
+			rules       : {
+				required: 'Platform is required',
+			},
 		},
 
 		{
@@ -55,7 +60,6 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			span        : 2,
 			placeholder : 'Select Work Scopes',
 			options     : WORK_SCOPES_OPTIONS,
-			rules       : { required: 'This is required' },
 		},
 
 		{
@@ -65,7 +69,9 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			span        : 2,
 			options     : AUTH_FUNCTION_OPTIONS,
 			placeholder : 'Select Functions',
-			rules       : { required: 'This is required' },
+			rules       : {
+				required: 'Function is required',
+			},
 		},
 
 		{
@@ -75,6 +81,9 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			span        : 1,
 			options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
+			rules       : {
+				required: 'Sub function is required',
+			},
 		},
 	];
 

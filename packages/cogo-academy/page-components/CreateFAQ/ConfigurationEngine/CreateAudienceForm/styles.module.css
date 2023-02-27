@@ -32,3 +32,7 @@
 .controller_wrapper {
     width: 70%;
 }
+
+.error_message{
+    color:#ee3425
+}

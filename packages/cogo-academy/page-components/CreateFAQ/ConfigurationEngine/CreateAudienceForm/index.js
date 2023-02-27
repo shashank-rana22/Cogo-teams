@@ -39,7 +39,7 @@ function CreateAudienceForm({
 		createAudience,
 		control,
 		handleSubmit,
-		// errors,
+		errors,
 		setValue,
 		reset,
 		watch,
@@ -139,7 +139,7 @@ function CreateAudienceForm({
 				<div className={styles.header}>
 					{audienceId ? 'Update' : 'Add'}
 					{' '}
-					User Group
+					Audience
 				</div>
 			) : null}
 
@@ -162,6 +162,14 @@ function CreateAudienceForm({
 								/>
 							</div>
 
+							{errors[name]
+							&& (
+								<div className={styles.error_message}>
+									{' '}
+									{errors[name]?.message}
+								</div>
+							)}
+
 						</div>
 					);
 				}
@@ -169,6 +177,7 @@ function CreateAudienceForm({
 			})}
 
 			<div className={styles.button_container} style={customStyle?.buttonContainerStyle || {}}>
+
 				<Button
 					themeType="tertiary"
 					className={styles.cancel_button}

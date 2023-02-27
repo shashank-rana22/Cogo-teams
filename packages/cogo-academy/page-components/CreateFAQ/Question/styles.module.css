@@ -46,8 +46,8 @@
 }
 
 .errors {
-  font-size: 12px;
-  color: var(--color-primary-error-red-1);
+  color: #ee3425;
+  padding-top: 6px;
 }
 
 .select_container,

@@ -24,6 +24,11 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create' });
 
+		// if 	(editorValue.toString('html') === '<p><br></p>') {
+		// 	console.log('success');
+		// 	Toast.error('Answer should be present');
+		// }
+
 		try {
 			const res = await trigger({
 				data: payload,

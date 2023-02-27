@@ -21,7 +21,7 @@ function useUpdateFaqSet({ setQuestionPreview, editorValue, data }) {
 
 	const onSubmitUpdatedForm = async (values) => {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'update', data });
+		const { payload } = useCreateFaqPayload({ values, editorValue, data });
 
 		try {
 			const res = await trigger({

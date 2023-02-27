@@ -58,8 +58,9 @@ function useCreateNewTagOrTopic({ fetchTopics, fetchTags }) {
 				data: payload,
 			});
 
-			fetchTags();
-			fetchTopics();
+			if (queryValue === 'tag') {
+				fetchTags();
+			} else { fetchTopics(); }
 
 			if (res?.data) {
 				Toast.success(`${queryValue} ${queryName}d sucessfully`);
