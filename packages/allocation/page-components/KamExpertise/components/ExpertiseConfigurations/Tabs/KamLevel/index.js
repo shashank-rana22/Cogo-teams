@@ -1,10 +1,10 @@
 import React from 'react';
-import KamLevelCard from './KamLevelCard';
+// import KamLevelCard from './KamLevelCard';
 
 function KamLevel() {
 	return (
 		<div>
-			<KamLevelCard />
+			{/* <KamLevelCard /> */}
 		</div>
 	);
 }
