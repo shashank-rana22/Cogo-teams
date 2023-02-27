@@ -80,9 +80,9 @@ const apis = [
 		service_name : 'sage',
 	},
 	{
-		api          : 'get_sales_invoice_list',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'get_sales_invoice_list',
+		access_type : 'private',
+
 	},
 	{
 		api          : 'list_organization_users',
@@ -150,9 +150,9 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_purchase_bills_list',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'get_purchase_bills_list',
+		access_type : 'private',
+
 	},
 	{
 		api          : 'get_sales_invoice_shipment_list',
