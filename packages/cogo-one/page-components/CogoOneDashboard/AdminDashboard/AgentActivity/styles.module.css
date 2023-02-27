@@ -176,9 +176,13 @@
 }
 
 .name {
+	width: 130px;
+	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
 	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .call_status {

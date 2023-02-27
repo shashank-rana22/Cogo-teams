@@ -4,21 +4,17 @@ import { intentServedData } from '../../../../configurations/dummyIntentservedDa
 
 import styles from './styles.module.css';
 
-function IntentServed() {
+function IntentServed({ intentsServed }) {
 	return (
-
 		<div className={styles.intent_served_box}>
 			<div className={styles.heading}>Intent Served</div>
-
 			{intentServedData.map((item) => {
-				const { label, numbers } = item;
+				const { label, key } = item;
 				return (
-
 					<div className={styles.sub_section}>
-						<div className={styles.numbers}>{numbers}</div>
+						<div className={styles.numbers}>{intentsServed[key] || 0}</div>
 						<div className={styles.label}>{label}</div>
 					</div>
-
 				);
 			})}
 		</div>

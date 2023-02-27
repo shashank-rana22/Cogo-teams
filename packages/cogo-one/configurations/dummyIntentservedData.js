@@ -1,21 +1,17 @@
 export const intentServedData = [
-
 	{
-		numbers : '1,345',
-		label   : 'Normal conversation',
+		key   : 'normal_conversation',
+		label : 'Normal conversation',
+	}, {
+		key   : 'shipment_booking',
+		label : 'Shipment Booking',
 
 	}, {
-		numbers : '1,345',
-		label   : 'Trade enquiry',
-
-	}, {
-		numbers : '1,345',
-		label   : 'Shipment booking',
-
+		key   : 'trade_enquiry',
+		label : 'Shipment booking',
 	},
 	{
-		numbers : '1,345',
-		label   : 'Invoice',
-
+		key   : 'invoice',
+		label : 'Invoice',
 	},
 ];

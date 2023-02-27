@@ -13,8 +13,10 @@ import Statisfaction from './Statisfaction';
 import styles from './styles.module.css';
 import TimeSpent from './TimeSpent';
 
-function AgentDashboard({ calendarType, setCalendarType }) {
+function AgentDashboard(props) {
+	const { timeline, setTimeline, listData } = props || {};
 	const [activeTab, setActiveTab] = useState('day');
+	const { customer_satisfaction = {}, intents_served = {} } = listData || {};
 	// const { user } = useSelector(({ profile }) => profile);
 	const {
 		user_data,
@@ -29,12 +31,12 @@ function AgentDashboard({ calendarType, setCalendarType }) {
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				calendarType={calendarType}
-				setCalendarType={setCalendarType}
+				timeline={timeline}
+				setTimeline={setTimeline}
 			/>
 			<div className={styles.sub_container}>
 				<div className={styles.left_sub_container}>
-					<Calender calendarType={calendarType} />
+					<Calender props={props} />
 					<LineChart />
 					<div className={styles.statistics}>
 						<Statistics />
@@ -46,8 +48,8 @@ function AgentDashboard({ calendarType, setCalendarType }) {
 					<Intelligence />
 
 					<div className={styles.satisfaction_intent_served_box}>
-						<Statisfaction />
-						<IntentServed />
+						<Statisfaction customer_satisfaction={customer_satisfaction} />
+						<IntentServed intentsServed={intents_served} />
 
 					</div>
 					<div className={styles.two_characterisctics_container}>
