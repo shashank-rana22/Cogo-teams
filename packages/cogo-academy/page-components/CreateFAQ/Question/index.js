@@ -18,7 +18,7 @@ import useCreateQuestions from './useCreateQuestions';
 
 const style = {
 	width   : '100%',
-	padding : '12px',
+	padding : 12,
 };
 
 function CreateFAQ() {
@@ -260,11 +260,12 @@ function CreateFAQ() {
 				closeOnOuterClick={false}
 				showCloseIcon={false}
 			>
-				<Modal.Header title="Request your question here" />
+				<Modal.Header title={`Add new ${queryValue} here`} />
 
 				<Modal.Body>
 					<div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
 						<CreateForm
+							source="create"
 							viewType={queryValue}
 							setConfigurationPage={setConfigurationPage}
 							handleSubmit={handleCreate}
@@ -281,8 +282,8 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
-						themeType="tertiary"
-						style={{ marginRight: '8' }}
+						themeType="secondary"
+						style={{ marginRight: 8 }}
 						onClick={onClickCancelButton}
 					>
 						Cancel
@@ -301,7 +302,7 @@ function CreateFAQ() {
 				closeOnOuterClick={false}
 				showCloseIcon
 			>
-				<Modal.Header title="Request your question here" />
+				<Modal.Header title="Confirm your action" />
 
 				<Modal.Body>
 					<div className={styles.text_wrapper}>
@@ -312,7 +313,7 @@ function CreateFAQ() {
 				<Modal.Footer>
 					<Button
 						themeType="tertiary"
-						style={{ marginRight: '8' }}
+						style={{ marginRight: 8 }}
 						onClick={() => setShowModalOnCancel(false)}
 					>
 						No
