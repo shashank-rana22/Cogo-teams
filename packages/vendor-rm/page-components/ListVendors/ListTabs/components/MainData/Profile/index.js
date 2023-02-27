@@ -12,11 +12,9 @@ function Profile({
 	return (
 		<div className={styles.padd}>
 			<div className={styles.main}>
-
 				<Heading
-					vendor_details={data.vendor_details}
-					refetchVendorInfo={refetchVendorInfo}
 					data={data}
+					refetchVendorInfo={refetchVendorInfo}
 				/>
 
 				<Verified

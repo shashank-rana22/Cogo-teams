@@ -1,4 +1,4 @@
-export const controls = [
+const controls = [
 	{
 		name        : 'account_holder_name',
 		label       : 'Account Holder Name',
@@ -90,3 +90,5 @@ export const controls = [
 		rules       : { required: 'Address is Required' },
 	},
 ];
+
+export default controls;
