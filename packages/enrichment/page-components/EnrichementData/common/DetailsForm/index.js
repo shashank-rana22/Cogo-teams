@@ -4,7 +4,7 @@ import { IcMLocation, IcMProfile } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../common/Form/getFieldController';
-import getUserControls from '../../configurations/get-controls';
+import getUserControls from '../../../../configurations/get-controls';
 
 import styles from './styles.module.css';
 

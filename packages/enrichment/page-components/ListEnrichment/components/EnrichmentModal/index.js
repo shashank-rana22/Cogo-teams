@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getFieldController } from '../../../../common/Form/getFieldController';
-import { uploadDocControls } from '../../configurations/get-upload-controls';
+import { uploadDocControls } from '../../../../configurations/get-upload-controls';
 import useUpdateStatus from '../../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';
