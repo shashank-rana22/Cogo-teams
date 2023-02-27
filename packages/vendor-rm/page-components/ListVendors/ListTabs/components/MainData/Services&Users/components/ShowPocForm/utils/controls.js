@@ -11,6 +11,7 @@ const controls = [
 		style       : { flexBasis: '42%' },
 		placeholder : 'Enter Name',
 		rules       : { required: 'Contact Name is required' },
+		showIn      : ['editPOC'],
 	},
 	{
 		name        : 'email',
@@ -25,6 +26,7 @@ const controls = [
 				message : 'Email is invalid',
 			},
 		},
+		showIn: ['editPOC'],
 	},
 	{
 		name        : 'mobile_number',
@@ -33,6 +35,7 @@ const controls = [
 		style       : { flexBasis: '42%' },
 		placeholder : 'Type here',
 		rules       : { required: 'Contact Number is required' },
+		showIn      : ['editPOC'],
 	},
 	{
 		name        : 'whatsapp_number',
@@ -49,6 +52,7 @@ const controls = [
 		style       : { flexBasis: '42%' },
 		rules       : { required: 'Company Type is required' },
 		options     : workScopes,
+		showIn      : ['editPOC'],
 	},
 	{
 		name            : 'contact_proof_url',
