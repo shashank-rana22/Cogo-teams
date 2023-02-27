@@ -31,17 +31,18 @@ function PerformanceChart({ params = {}, userId = '' }) {
 				</p>
 			</div>
 
-			{!loading && isEmpty(lineChartlist) ? (
-				<EmptyState
-					height={140}
-					width={220}
-					emptyText="Performance Stats Not Found"
-					textSize="12px"
-					flexDirection="column"
-				/>
-			) : (
-				<div className={styles.chart_section}>
-					<div className={styles.line_graph}>
+			<div className={styles.chart_section}>
+
+				<div className={styles.line_graph}>
+					{!loading && isEmpty(lineChartlist) ? (
+						<EmptyState
+							height={140}
+							width={220}
+							emptyText="Performance Stats Not Found"
+							textSize="12px"
+							flexDirection="column"
+						/>
+					) : (
 						<ResponsiveLine
 							data={lineChartData}
 							margin={{ top: 30, right: 40, bottom: 50, left: 60 }}
@@ -92,13 +93,14 @@ function PerformanceChart({ params = {}, userId = '' }) {
 							colors={['#F2E3C3', '#F9AE64', '#828282']}
 							colorBy="index"
 						/>
-					</div>
-
-					<div className={styles.pie_chart}>
-						<TeamPieChart userId={userId} params={params} />
-					</div>
+					)}
 				</div>
-			)}
+
+				<div className={styles.pie_chart}>
+					<TeamPieChart userId={userId} params={params} />
+				</div>
+			</div>
+
 		</div>
 	);
 }
