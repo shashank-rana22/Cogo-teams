@@ -3,6 +3,7 @@ import { format } from '@cogoport/utils';
 import React from 'react';
 
 import KamLevelCard from './KamLevelCard';
+import KamLevelDetails from './KamLevelDetails';
 import styles from './styles.module.css';
 
 function KamLevel() {
@@ -36,8 +37,7 @@ function KamLevel() {
 			</div>
 			<div>
 				<Accordion type="text" title={<KamLevelCard />} style={{ width: '100%' }} className={styles.accrodian}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-					condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
+					<KamLevelDetails />
 				</Accordion>
 			</div>
 		</div>
