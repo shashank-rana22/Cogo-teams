@@ -274,7 +274,6 @@ const apis = [
 	{
 		api         : 'get_sales_invoice_list',
 		access_type : 'private',
-
 	},
 	{
 		api          : 'list_organization_users',
@@ -314,7 +313,6 @@ const apis = [
 	{
 		api         : 'get_purchase_bills_list',
 		access_type : 'private',
-
 	},
 	{
 		api          : 'get_sales_invoice_shipment_list',
