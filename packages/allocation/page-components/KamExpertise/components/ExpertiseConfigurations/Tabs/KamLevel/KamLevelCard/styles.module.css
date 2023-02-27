@@ -1,0 +1,20 @@
+.level_card_container {
+    height: 960px;
+    border-radius: 8px;
+    background-color: #fff;
+    
+}
+.row_level {
+    margin: 0 16px;
+    padding: 44px 0;
+    border-bottom: 1px solid  #BDBDBD;
+}
+.row_level_end {
+    margin: 0 16px;
+    padding: 44px 0;
+}
+.row_level_end_options {
+    display: flex;
+    width: 100%;
+    margin: 28px 0 0 0 ;
+}
