@@ -47,6 +47,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 		if (['new_awb', 'approval_pending', 'approved_awb'].includes(activeTab)) {
 			listAPi({ filter: filters });
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab, JSON.stringify(filters)]);
 
 	return (

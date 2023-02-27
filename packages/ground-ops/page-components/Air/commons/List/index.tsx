@@ -1,4 +1,4 @@
-import { Loader, Pagination } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import EmptyState from './EmptyState';
