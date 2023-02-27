@@ -21,7 +21,17 @@
 	font-weight: 500;
 }
 
-.pending {
+.pending_verification {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.pending_from_user {
 	display: flex;
 	align-items: center;
 	color: #ed3726;

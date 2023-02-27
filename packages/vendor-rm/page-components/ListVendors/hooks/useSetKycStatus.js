@@ -5,6 +5,7 @@ function useSetKycStatus({
 		setParams((prev) => ({
 			...prev,
 			filters: {
+				...prev.filters,
 				status     : 'active',
 				kyc_status : kyc_status || undefined,
 			},

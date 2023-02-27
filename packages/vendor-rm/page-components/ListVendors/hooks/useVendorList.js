@@ -8,9 +8,10 @@ import { useState, useEffect } from 'react';
 import styles from '../styles.module.css';
 
 const ICON_MAPPING = {
-	pending  : <IcMError width={16} height={16} />,
-	verified : <IcCFtick width={16} height={16} />,
-	rejected : <IcCFcrossInCircle width={16} height={16} />,
+	pending_verification : <IcMError width={16} height={16} />,
+	pending_from_user    : <IcMError width={16} height={16} />,
+	verified             : <IcCFtick width={16} height={16} />,
+	rejected             : <IcCFcrossInCircle width={16} height={16} />,
 };
 
 const renderToolTipContent = (unique_services) => (
@@ -131,7 +132,7 @@ const useVendorList = () => {
 	const columns = [
 		{
 			Header   : 'VENDOR ID',
-			id       : 'a',
+			id       : 'vendor_id',
 			accessor : ({ serial_id = '' }) => (
 				<section className={styles.bold}>
 					#
@@ -141,7 +142,7 @@ const useVendorList = () => {
 		},
 		{
 			Header   : 'KYC STATUS',
-			id       : 'b',
+			id       : 'kyc_status',
 			accessor : ({ kyc_status = '' }) => (
 				<section className={styles[kyc_status]}>
 					{ICON_MAPPING[kyc_status]}
@@ -151,7 +152,7 @@ const useVendorList = () => {
 		},
 		{
 			Header   : 'NAME',
-			id       : 'c',
+			id       : 'name',
 			accessor : ({ business_name = '' }) => (
 				<section className={styles.bold}>
 					{startCase(business_name)}
@@ -160,7 +161,7 @@ const useVendorList = () => {
 		},
 		{
 			Header   : 'PAN/GST',
-			id       : 'd',
+			id       : 'registration_number',
 			accessor : ({ registration_number = '' }) => (
 				<section className={styles.bold}>
 					{registration_number}
@@ -169,7 +170,7 @@ const useVendorList = () => {
 		},
 		{
 			Header   : 'CATEGORY',
-			id       : 'e',
+			id       : 'category',
 			accessor : ({ services = [] }) => (
 				<section className={styles.bold}>
 					{renderUniqueServices({ services, type: 'category' })}
@@ -177,20 +178,18 @@ const useVendorList = () => {
 			),
 		},
 		{
-			Header : 'SUB-CATEGORY',
-			id     : 'f',
-
-			accessor: ({ services = [] }) => (
+			Header   : 'SUB-CATEGORY',
+			id       : 'sub_category',
+			accessor : ({ services = [] }) => (
 				<section className={styles.bold}>
 					{renderUniqueServices({ services, type: 'sub_category' })}
 				</section>
 			),
 		},
 		{
-			Header : getHeader(),
-			id     : 'g',
-
-			accessor: ({ created_at = '' }) => (
+			Header   : getHeader(),
+			id       : 'created_at',
+			accessor : ({ created_at = '' }) => (
 				<section className={styles.bold}>
 					{formatDate(created_at)}
 				</section>
@@ -198,7 +197,7 @@ const useVendorList = () => {
 		},
 		{
 			Header   : '',
-			id       : 'jh',
+			id       : 'view_more',
 			accessor : ({ id = '' }) => (
 				<section className={styles.bold}>
 					<Button
