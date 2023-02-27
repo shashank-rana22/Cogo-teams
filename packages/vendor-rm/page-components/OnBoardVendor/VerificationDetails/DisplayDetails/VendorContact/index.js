@@ -21,7 +21,7 @@ function VendorContact({
 
 		if (fieldName === 'mobile_number') {
 			// eslint-disable-next-line no-unsafe-optional-chaining
-			const { mobile_number = '', mobile_country_code = '' } = detail?.[0];
+			const { mobile_number = '', mobile_country_code = '' } = detail?.[0] || {};
 			return `${mobile_country_code} ${mobile_number}`;
 		}
 

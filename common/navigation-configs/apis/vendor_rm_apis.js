@@ -72,6 +72,12 @@ const apis = [
 		service_name : 'vendor',
 	},
 	{
+		api          : 'submit_vendor_kyc',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
+	{
 		api          : 'get_vendor_stats',
 		access_type  : 'private',
 		feature      : 'vendor',

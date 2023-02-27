@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react';
 
 function useKyc({
 	getVendor = () => {},
+	setShowSuccessScreen,
 }) {
 	const { general: { query } } = useSelector((state) => state);
 
 	const { vendor_id } = query;
-
-	const [showSuccessScreen, setShowSuccessScreen] = useState(false);
 
 	const [isDeclarationAccepted, setIsDeclarationAccepted] = useState(false);
 
@@ -34,7 +33,6 @@ function useKyc({
 		onSubmit,
 		isDeclarationAccepted,
 		setIsDeclarationAccepted,
-		showSuccessScreen,
 	};
 }
 

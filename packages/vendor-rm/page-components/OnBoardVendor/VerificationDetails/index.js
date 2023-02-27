@@ -11,6 +11,8 @@ import Success from './Success';
 
 function VerificationDetails({
 	vendorInformation = {},
+	showSuccessScreen,
+	setShowSuccessScreen,
 	activeStepper,
 	setActiveStepper = () => {},
 	getVendor = () => {},
@@ -18,11 +20,10 @@ function VerificationDetails({
 }) {
 	const {
 		onSubmit = () => {},
-		showSuccessScreen = false,
 		loading = false,
 		isDeclarationAccepted,
 		setIsDeclarationAccepted,
-	} = useKyc({ getVendor });
+	} = useKyc({ getVendor, setShowSuccessScreen });
 
 	return (
 		<div>
