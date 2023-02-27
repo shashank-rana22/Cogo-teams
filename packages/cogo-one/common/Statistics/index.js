@@ -26,8 +26,10 @@ function Statistics({ loading = false, callsAnalytics }) {
 									{loading
 										? <Placeholder height="15px" width="60px" className={styles.duration_placeholder} />
 										: (
-											<div className={styles.time_durations_header}>
-												<span className={styles.time_durations_value}>{average_call_duration >= 60 ? (average_call_duration / 60).toFixed(2) : average_call_duration}</span>
+											<div
+												className={styles.time_durations_header}
+											>
+												<span className={styles.time_durations_value}>{itm.duration >= 60 ? (itm.duration / 60).toFixed(2) : itm.duration}</span>
 												{' '}
 												<span>{average_call_duration >= 60 ? 'hr' : 'min'}</span>
 											</div>

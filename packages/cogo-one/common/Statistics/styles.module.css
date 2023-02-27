@@ -44,10 +44,7 @@
 	
 }
 
-.time_durations_value {
-	position: relative;
-	display: inline-block;
-}
+
 .time_durations_value::after {
 	position: absolute;
 	bottom: 0;
