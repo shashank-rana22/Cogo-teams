@@ -64,7 +64,7 @@ function Upload() {
 						control={control}
 						errors={errors}
 						name="upload_question"
-						accept=".png, .jpeg"
+						accept=".csv"
 						rules={{ required: 'File is required.' }}
 
 					/>
