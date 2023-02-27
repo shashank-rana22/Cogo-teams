@@ -49,7 +49,7 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' })
 
 				{(data?.list || []).map((question) => (
 					<div className={styles.border}>
-						<Questions questions={question} />
+						<Questions questions={question} topicId={topicId} topicName={tabTitle} />
 					</div>
 				))}
 			</div>

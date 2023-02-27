@@ -1,8 +1,10 @@
 /* eslint-disable react/no-danger */
-import { Modal, Button, Badge } from '@cogoport/components';
+import { Modal, Button, Badge, Pill } from '@cogoport/components';
 import { InputController, CheckboxController, useForm } from '@cogoport/forms';
-import { IcCLike, IcCDislike } from '@cogoport/icons-react';
+import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -17,11 +19,22 @@ const FEEDBACK_MAPPING = {
 	false : 'disliked',
 };
 
-function AnswerPage({ questions = {} }) {
+function AnswerPage() {
+	const {
+		general,
+	} = useSelector((state) => state);
+	const router = useRouter();
+
+	const { query } = general || {};
+
+	const { id = '', topicName = '', topicId = '' } = query || {};
+
 	const [show, setShow] = useState(false);
 
-	const { data: answerData, loading } = useGetQuestions({ id: questions.id });
+	const { data: answerData, loading } = useGetQuestions({ id });
+
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+
 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
 
 	useEffect(() => {
@@ -41,10 +54,10 @@ function AnswerPage({ questions = {} }) {
 		setShow(false);
 	};
 
-	const onClickLikeButton = async ({ id }) => {
+	const onClickLikeButton = async ({ _id }) => {
 		try {
 			const payload = {
-				faq_answer_id : id,
+				faq_answer_id : _id,
 				is_positive   : true,
 				status        : 'active',
 			};
@@ -83,6 +96,16 @@ function AnswerPage({ questions = {} }) {
 		}
 	};
 
+	// const toggle = () => {
+	// 	const href = `/learning/faq/answer?id=${questions?.id}&topicId=${topicId}&topicName=${topicName}`;
+	// 	router.push(href, href);
+	// };
+
+	const onClickBackIcon = () => {
+		const href = `/learning/faq?topicId=${topicId}&topicName=${topicName}`;
+		router.push(href, href);
+	};
+
 	if (loading) {
 		return (
 			<div className={styles.spinner}>
@@ -99,29 +122,55 @@ function AnswerPage({ questions = {} }) {
 
 	return (
 		<>
+			<div
+				style={{ display: 'flex', paddingBottom: '1%' }}
+				role="presentation"
+				className={styles.back}
+				onClick={onClickBackIcon}
+			>
+				<div className={styles.arrow}><IcMArrowBack /></div>
+				Go Back
+				{/* {' '}
+				{ topicName || 'All Topics'}
+				{' '}
+				{} */}
+			</div>
+
+			<div className={styles.questionheading}>Question</div>
+
+			<div className={styles.questionabstract}>
+				{answerData?.question_abstract}
+			</div>
+
+			<div className={styles.answer}>Answer:</div>
+
 			<div className={styles.heading_container}>
 				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[0]?.answer }} />
 			</div>
-			<div>
-				<span className={styles.sidetext}>
-					{answerData?.answers[0]?.upvote_count}
-					{' '}
-					people found it useful.
-				</span>
-				{'    '}
-				<span className={styles.sidetext}>
-					Last updated on:
-					{' '}
-					{format(answerData?.updated_at, 'dd MMM yyyy')}
-				</span>
+
+			<div className={styles.answer}>Tags</div>
+
+			<div className={styles.pills}>
+				{(answerData?.faq_tags || []).map((item) => (
+					<Pill
+						className={styles.questions_tag}
+						key={item.display_name}
+						size="sm"
+						color="white"
+					>
+						{item.display_name}
+					</Pill>
+				))}
+
 			</div>
+
 			<div className={styles.flex_items}>
 				<span className={styles.subtitle}>Did you find this information helpful?</span>
 				<div
 					role="presentation"
 					className={styles.like_container}
 					onClick={() => {
-						onClickLikeButton({ id: answerData?.answers[0]?.id });
+						onClickLikeButton({ _id: answerData?.answers[0]?.id });
 					}}
 				>
 					{answerData?.answers[0]?.upvote_count > 0 ? (
@@ -196,8 +245,21 @@ function AnswerPage({ questions = {} }) {
 					</Modal>
 				</div>
 			</div>
+			<div>
+				<span className={styles.sidetext}>
+					{answerData?.answers[0]?.upvote_count}
+					{' '}
+					people found it useful.
+				</span>
+				{'    '}
+				<span className={styles.sidetext}>
+					Last updated on:
+					{' '}
+					{format(answerData?.updated_at, 'dd MMM yyyy')}
+				</span>
+			</div>
 
-			<RelatedQuestion tags={questions.faq_tags} question_abstract={questions.question_abstract} />
+			<RelatedQuestion tags={answerData?.faq_tags[0]} question_abstract={answerData?.question_abstract} />
 
 		</>
 	);

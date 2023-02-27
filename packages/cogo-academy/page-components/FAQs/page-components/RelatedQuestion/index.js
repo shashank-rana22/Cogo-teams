@@ -20,7 +20,7 @@ function RelatedQuestion({ tags, question_abstract }) {
 	} = useListFaqQuestions({ tagId, limit: 3 });
 
 	return (
-		<div>
+		<div style={{ paddingTop: '1.2%' }}>
 			{(data?.list.length > 1) ? <span className={styles.relatedquestion}>Related Questions</span> : null}
 			{data?.list?.map((tags_question) => (
 				<div className={styles.title}>

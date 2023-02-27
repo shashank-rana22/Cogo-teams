@@ -18,7 +18,6 @@ const FEEDBACK_MAPPING_ISLIKED = {
 };
 
 function Answer({ questions = {} }) {
-	console.log(questions);
 	const [show, setShow] = useState(false);
 	const [load, setload] = useState(true);
 	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id: questions.id });
