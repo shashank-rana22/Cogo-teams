@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { SelectController, InputController } from '@cogoport/forms';
+import { SelectController, InputController, CountrySelectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -12,7 +12,18 @@ import styles from './styles.module.css';
 import useCreateAudience from './useCreateAudience';
 import createAudienceControls from './utils/createAudienceControls';
 
-function CreateUserForm({
+const MAPPING = {
+	name              : InputController,
+	cogo_entity_id    : SelectController,
+	country_id        : CountrySelectController,
+	platform          : SelectController,
+	persona           : SelectController,
+	auth_function     : SelectController,
+	auth_sub_function : SelectController,
+
+};
+
+function CreateAudienceForm({
 	source = '',
 	setShowCreateAudienceModal,
 	setConfigurationPage,
@@ -135,7 +146,7 @@ function CreateUserForm({
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};
 
-				const DynamicController = name === 'name' ? InputController : SelectController;
+				const DynamicController = MAPPING[name] || InputController;
 
 				if (showElements[name]) {
 					return (
@@ -180,4 +191,4 @@ function CreateUserForm({
 	);
 }
 
-export default CreateUserForm;
+export default CreateAudienceForm;

@@ -6,7 +6,7 @@ import useCreateFaqSet from './hooks/useCreateFaqSets';
 import useGetTopicTagList from './hooks/useGetTopicTagList';
 import useUpdateFaqSet from './hooks/useUpdateFaqSets';
 
-function useCreateQuestions() {
+function useCreateQuestions({ data }) {
 	const { general } = useSelector((state) => state);
 	const [editorValue, setEditorValue] = useState('');
 	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
@@ -20,7 +20,7 @@ function useCreateQuestions() {
 		onClickPublish,
 	} = useCreateFaqSet({ setQuestionPreview, questionPreview, editorValue });
 
-	const { onSubmitUpdatedForm } = useUpdateFaqSet({ setQuestionPreview, editorValue });
+	const { onSubmitUpdatedForm } = useUpdateFaqSet({ setQuestionPreview, editorValue, data });
 
 	const onSubmit = (mode === 'create' && questionId)
 		? onSubmitUpdatedForm

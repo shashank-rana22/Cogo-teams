@@ -7,8 +7,8 @@ import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import Spinner from '../../../commons/Spinner';
+import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
-import CreateUserForm from '../ConfigurationEngine/CreateUserForm';
 
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
@@ -33,7 +33,7 @@ const userFormStyle = {
 
 function CreateFAQ() {
 	const router = useRouter();
-
+	const { fetchQuestion, query, data, loading } = useGetQuestion();
 	const {
 		editorValue,
 		setEditorValue,
@@ -53,7 +53,7 @@ function CreateFAQ() {
 		fetchTopics,
 		fetchTags,
 		fetchAudiences,
-	} = useCreateQuestions();
+	} = useCreateQuestions({ data });
 
 	const {
 		setConfigurationPage,
@@ -73,9 +73,7 @@ function CreateFAQ() {
 		setShowCreateAudienceModal,
 	} = useCreateNewTagOrTopic({ fetchTopics, fetchTags });
 
-	const { fetchQuestion, query, data, loading } = useGetQuestion();
-
-	const { question_abstract, faq_tags = [], faq_topics = [], answers = [] } = data || {};
+	const { question_abstract, faq_tags = [], faq_topics = [], answers = [], faq_audiences = [] } = data || {};
 
 	useEffect(() => {
 		if (query?.id) {
@@ -94,11 +92,17 @@ function CreateFAQ() {
 		filterTopics.push(item?.id);
 	});
 
+	const filterAudiences = [];
+	(faq_audiences || []).forEach((item) => {
+		filterAudiences.push(item?.id);
+	});
+
 	useEffect(() => {
 		if (!loading) {
 			setQuestionValue('question_abstract', question_abstract);
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
+			setQuestionValue('audience_ids', filterAudiences);
 			setEditorValue(answers?.[0]?.answer);
 		}
 

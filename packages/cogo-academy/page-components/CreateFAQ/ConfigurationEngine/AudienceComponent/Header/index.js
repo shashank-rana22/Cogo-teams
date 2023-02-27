@@ -29,7 +29,7 @@ function Header(
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.tag}>User Groups</div>
+			<div className={styles.tag}>Audience Groups</div>
 
 			<div className={styles.header_container}>
 
@@ -63,7 +63,7 @@ function Header(
 				</div>
 
 				<div>
-					<Button onClick={onClickAddAudience}>Add New User Group</Button>
+					<Button onClick={onClickAddAudience}>Add New Audience Group</Button>
 				</div>
 			</div>
 

@@ -2,6 +2,16 @@
 import SUB_FUNCTION_MAPPING from './subFunctionMappings';
 import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
+const PLATFORM_OPTIONS = [{ label: 'Admin', value: 'admin' },
+	{ label: 'App', value: 'app' },
+	{ label: 'Partner', value: 'partner' },
+	{ label: 'All', value: 'all' }];
+
+const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
+	{ label: 'Supply', value: 'supply' },
+	{ label: 'Operations', value: 'operations' },
+	{ label: 'Finance', value: 'finance' }];
+
 const createQuestionControls = ({ watchFunctions, entity_options }) => {
 	const controls = [
 		{
@@ -25,19 +35,15 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			label       : 'Country',
 			type        : 'select',
 			span        : 2,
-			options     : [{ label: 'IN', value: '541d1232-58ce-4d64-83d6-556a42209eb7' }],
 			placeholder : 'Select country',
 		},
 
 		{
-			name    : 'platform',
-			label   : 'Platform',
-			type    : 'select',
-			span    : 2,
-			options : [{ label: 'Admin', value: 'admin' },
-				{ label: 'App', value: 'app' },
-				{ label: 'Partner', value: 'partner' },
-				{ label: 'All', value: 'all' }],
+			name        : 'platform',
+			label       : 'Platform',
+			type        : 'select',
+			span        : 2,
+			options     : PLATFORM_OPTIONS,
 			placeholder : 'Select Platform',
 			rules       : { required: 'This is required' },
 		},
@@ -53,14 +59,11 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 		},
 
 		{
-			name    : 'auth_function',
-			label   : 'Functions',
-			type    : 'select',
-			span    : 2,
-			options : [{ label: 'Sales', value: 'sales' },
-				{ label: 'Supply', value: 'supply' },
-				{ label: 'Operations', value: 'operations' },
-				{ label: 'Finance', value: 'finance' }],
+			name        : 'auth_function',
+			label       : 'Functions',
+			type        : 'select',
+			span        : 2,
+			options     : AUTH_FUNCTION_OPTIONS,
 			placeholder : 'Select Functions',
 			rules       : { required: 'This is required' },
 		},
@@ -70,7 +73,7 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			label       : 'Sub Functions',
 			type        : 'select',
 			span        : 1,
-				 options     : SUB_FUNCTION_MAPPING[watchFunctions],
+			options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
 		},
 	];

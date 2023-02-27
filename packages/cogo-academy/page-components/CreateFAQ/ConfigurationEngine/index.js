@@ -1,6 +1,6 @@
 import AudienceComponent from './AudienceComponent';
+import CreateAudienceForm from './CreateAudienceForm';
 import CreateForm from './CreateComponent';
-import CreateUserForm from './CreateUserForm';
 import Header from './Header.js';
 import useCreateFaq from './hooks/useCreateFaq';
 import styles from './styles.module.css';
@@ -20,7 +20,11 @@ function ConfigurationEngine() {
 	} = useCreateFaq();
 
 	if (configurationPage === 'audience') {
-		return (<CreateUserForm setConfigurationPage={setConfigurationPage} />);
+		return (
+			<CreateAudienceForm
+				setConfigurationPage={setConfigurationPage}
+			/>
+		);
 	}
 
 	if (['tag', 'topic'].includes(configurationPage)) {

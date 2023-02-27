@@ -18,15 +18,6 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 		options,
 	} = useListFaqTag({ tagIds: tags });
 
-	console.log('tags123 :: ', tags);
-
-	const onItemChange = (e) => {
-		// setTags((prev) => [
-		// 	...prev,
-		// 	e,
-		// ]);
-	};
-
 	return (
 		<div style={{ marginBottom: 10 }}>
 			<h4 style={{ margin: '12px 0' }}>
