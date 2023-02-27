@@ -1519,6 +1519,11 @@ const saas = {
 			module      : 'insurance',
 			feature     : 'insurance',
 		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_trade_partner: [
 		{
