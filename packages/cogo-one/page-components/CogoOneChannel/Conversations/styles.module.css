@@ -6,6 +6,6 @@
 	border-radius: 8px;
 
 	::-webkit-scrollbar {
-		display:none;
+		display: none;
 	}
 }
