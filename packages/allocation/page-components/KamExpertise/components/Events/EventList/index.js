@@ -8,6 +8,7 @@ function EventListItem() {
 	return (
 		<>
 			<Header />
+
 			<section className={styles.list_item_container}>
 				<div className={styles.top_div}>
 					<div className={styles.left_id}>
@@ -23,12 +24,12 @@ function EventListItem() {
 					<div className={styles.info_tag}>
 						Expertise :
 						{' '}
-						<h4>Customer Expertise</h4>
+						<h4 style={{ marginLeft: 4 }}>Customer Expertise</h4>
 					</div>
 					<div className={styles.info_tag}>
 						Event Name :
 						{' '}
-						<h4>Re-Activation</h4>
+						<h4 style={{ marginLeft: 4 }}>Re-Activation</h4>
 					</div>
 					<div className={styles.info_tag}>
 						Description : Converting a

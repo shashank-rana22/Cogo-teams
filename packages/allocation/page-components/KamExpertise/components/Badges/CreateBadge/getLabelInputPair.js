@@ -6,7 +6,6 @@ function GetLabelInputPair({ labelName, style, multiInput, multiSelectParams = {
 
 	return (
 		<div style={style}>
-			{/* <div className={styles.input_label}>{labelName}</div> */}
 			<p style={{ color: '#4f4f4f' }}>{labelName}</p>
 			{multiInput ? (
 				<MultiSelect
