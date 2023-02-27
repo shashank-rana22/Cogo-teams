@@ -1,30 +1,40 @@
+import { useRouter } from '@cogoport/next';
 import {
 	collectionGroup,
-	query,
 	onSnapshot,
-	orderBy,
-	where,
-	updateDoc, doc,
+	updateDoc,
+	doc,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
-import global from '../constants/IDS_CONSTANTS';
+import getFireStoreQuery from '../helpers/getFireStoreQuery';
 
-const useListChats = ({
-	firestore,
-	user_role_ids, userId,
-}) => {
-	const [activeMessageCard, setActiveMessageCard] = useState({});
+const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages = false }) => {
+	const {
+		query: { assigned_chat = '' },
+	} = useRouter();
+	const [firstLoading, setFirstLoading] = useState(true);
+	const [activeCardId, setActiveCardId] = useState('');
+
 	const [loading, setLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
+
+	useEffect(() => {
+		if (assigned_chat) {
+			setActiveCardId(assigned_chat);
+		}
+		setFirstLoading(false);
+	}, [assigned_chat]);
 
 	const [listData, setListData] = useState({
 		messagesList     : [],
 		newMessagesCount : 0,
 		unReadChatsCount : 0,
-
 	});
+
+	const activeMessageCard = (listData?.messagesList || []).find(({ id }) => id === activeCardId)
+        || {};
 
 	const dataFormatter = (list) => {
 		let chats = 0;
@@ -33,10 +43,8 @@ const useListChats = ({
 		list?.forEach((item) => {
 			const { created_at, updated_at, sent_updated_at, ...rest } = item.data() || {};
 			const userData = {
-				id              : item?.id,
-				created_at      : item.data().created_at || Date.now(),
-				updated_at      : item.data().updated_at || Date.now(),
-				sent_updated_at : item.data().sent_updated_at || Date.now(),
+				id         : item?.id,
+				created_at : item.data().created_at || Date.now(),
 				...rest,
 			};
 
@@ -46,50 +54,38 @@ const useListChats = ({
 		});
 
 		return {
-			chats, count, resultList,
+			chats,
+			count,
+			resultList,
 		};
 	};
 
 	useEffect(() => {
 		setLoading(true);
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
-		let omniChannelQuery;
-		if (
-			user_role_ids.includes(global.TECH_SUPERADMIN_ID)
-			|| user_role_ids.includes(global.ADMIN_ID)
-			|| user_role_ids.includes(global.SUPERADMIN_ID)
-			|| user_role_ids.includes(global.TRADE_EXPERT_TEAM_LEAD_LONG_TAIL_ID)
-		) {
-			omniChannelQuery = query(
-				omniChannelCollection,
-				// orderBy('session_type', 'desc'),
-				orderBy('updated_at', 'desc'),
-				// where('session_type', '==', 'admin'),
-
-			);
-		} else {
-			omniChannelQuery = query(
-				omniChannelCollection,
-				// orderBy('session_type', 'desc'),
-				orderBy('updated_at', 'desc'),
-				where('agent_id', '==', userId),
-				// where('session_type', '==', 'admin'),
-
-			);
-		}
-
+		const omniChannelQuery = getFireStoreQuery({
+			omniChannelCollection,
+			isomniChannelAdmin,
+			userId,
+			appliedFilters,
+			showBotMessages,
+		});
 		onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
-			setListData({ messagesList: resultList, newMessagesCount: count, unReadChatsCount: chats });
+			setListData({
+				messagesList     : resultList,
+				newMessagesCount : count,
+				unReadChatsCount : chats,
+			});
 		});
 		setLoading(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [appliedFilters, showBotMessages]);
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
-		setActiveMessageCard(val);
-		if (channel_type) {
+		setActiveCardId(id);
+		if (channel_type && id) {
 			const messageDoc = doc(
 				firestore,
 				`${FIRESTORE_PATH[channel_type]}/${id}`,
@@ -97,6 +93,24 @@ const useListChats = ({
 			await updateDoc(messageDoc, { new_message_count: 0 });
 		}
 	};
+
+	const updateLeaduser = async (data = {}) => {
+		const { channel_type, id } = activeMessageCard || {};
+		const roomCollection = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
+
+		try {
+			await updateDoc(roomCollection, {
+				updated_at: Date.now(),
+				...data,
+			});
+		} catch (error) {
+			// console.log(error);
+		}
+	};
+
 	return {
 		listData,
 		setActiveMessage,
@@ -104,6 +118,10 @@ const useListChats = ({
 		setAppliedFilters,
 		appliedFilters,
 		loading,
+		activeCardId,
+		setActiveCardId,
+		updateLeaduser,
+		firstLoading,
 	};
 };
 

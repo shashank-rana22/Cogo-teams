@@ -1,5 +1,5 @@
-import { Button, CheckboxGroup } from '@cogoport/components';
-import { IcMCross } from '@cogoport/icons-react';
+import { Button, CheckboxGroup, Input } from '@cogoport/components';
+import { IcMCross, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -13,9 +13,12 @@ function Filters({
 	filters,
 	setFilters,
 	handleFilters = () => {},
+	handleReset = () => {},
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
-	const emptyCheck = isEmpty();
+
+	const emptyCheck = isEmpty(filters);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -28,16 +31,35 @@ function Filters({
 				</div>
 			</div>
 
-			<CheckboxGroup
-				options={FILTERS_MAPPING[activityTab]}
-				onChange={setFilters}
-				value={filters}
-				className={styles.filters}
-			/>
+			{activityTab === 'transactional' ? (
+				<>
+					<div className={styles.label}>Enter Serial ID</div>
+					<Input
+						size="sm"
+						placeholder="Enter serial id"
+						options={FILTERS_MAPPING[activityTab]}
+						onChange={setFilters}
+						value={filters}
+					/>
+				</>
+			) : (
+				<CheckboxGroup
+					options={FILTERS_MAPPING[activityTab]}
+					onChange={setFilters}
+					value={filters}
+					className={styles.filters}
+				/>
+			)}
 
 			<div className={styles.actions}>
-				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
-				<Button size="md" themeType="accent" onClick={handleFilters()} disabled={emptyCheck}>Apply</Button>
+				<Button size="sm" themeType="tertiary" onClick={handleReset}>
+					<div className={styles.refresh_icon}>
+						<IcMRefresh width={10} height={10} />
+					</div>
+					Reset Status
+
+				</Button>
+				<Button size="sm" themeType="accent" onClick={handleFilters} disabled={emptyCheck}>Apply</Button>
 			</div>
 		</div>
 	);

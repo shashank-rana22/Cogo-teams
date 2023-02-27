@@ -1,32 +1,12 @@
 function filterOptions() {
 	const transactionalFilters = [
 		{
-			label : 'Booking',
-			value : 'booking',
-		},
-		{
-			label : 'Vessel',
-			value : 'vessel',
-		},
-		{
-			label : 'Booking note',
-			value : 'booking_note',
-		},
-	];
+			label : 'Enter Serial ID',
+			value : 'serial_id',
+			type  : 'input',
 
-	const platformFilters = [
-		{
-			label : 'Checkout',
-			value : 'checkout',
 		},
-		{
-			label : 'Login',
-			value : 'login',
-		},
-		{
-			label : 'Search',
-			value : 'search',
-		},
+
 	];
 
 	const communicationFilters = [
@@ -44,12 +24,11 @@ function filterOptions() {
 		},
 		{
 			label : 'Mail',
-			value : 'mail',
+			value : 'email',
 		},
 	];
 
 	const FILTERS_MAPPING = {
-		platform      : platformFilters,
 		communication : communicationFilters,
 		transactional : transactionalFilters,
 	};

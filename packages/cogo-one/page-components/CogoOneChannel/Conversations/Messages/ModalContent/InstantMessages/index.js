@@ -1,53 +1,63 @@
-import { Input, Modal, Button } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import useListSuggestions from '../../../../../../hooks/useListSuggestions';
-
+import InstantReplies from './InstantReplies';
 import styles from './styles.module.css';
+import Templates from './Templates';
 
-function InstantReplies() {
-	const messages = [{
-		title   : 'Thank you message',
-		content : 'Hi XYZ thank you for getting in touch. How can I help ...',
-	}];
-	const {
-		setQfilter,
-		handleScroll,
-		qfilter,
-		infiniteList,
-		loading,
-	} = useListSuggestions();
-	return (
-		<>
+function InstantRepliesModal({ data = {} }) {
+	const [activeTab, setActiveTab] = useState('quick_reply');
+	const [openCreateReply, setOpenCreateReply] = useState(false);
+
+	const { channel_type = '' } = data || {};
+
+	if (channel_type === 'platform_chat') {
+		return (
 			<div className={styles.container}>
-				<Input
-					value={qfilter}
-					onChange={(e) => setQfilter(e)}
-					placeholder="Search saved replies here..."
-					prefix={<IcMSearchlight />}
+				<InstantReplies
+					data={data}
+					activeTab={activeTab}
+					openCreateReply={openCreateReply}
+					setOpenCreateReply={setOpenCreateReply}
+					setActiveTab={setActiveTab}
 				/>
-				<div className={styles.message_container}>
-					{(messages || []).map(({ title = '', content = '' }) => (
-
-						<div className={styles.each_message}>
-							<div className={styles.title}>
-								{title}
-							</div>
-							<div className={styles.message}>
-								{content}
-							</div>
-						</div>
-
-					))}
-				</div>
 			</div>
-			<Modal.Footer>
-				<div className={styles.footer}>
-					<Button themeType="accent" size="md">+ Create Reply</Button>
-				</div>
-			</Modal.Footer>
-		</>
+
+		);
+	}
+
+	return (
+		<div className={styles.container}>
+			<Tabs
+				activeTab={activeTab}
+				themeType="primary"
+				onChange={(val) => {
+					setActiveTab(val);
+					setOpenCreateReply(false);
+				}}
+				size="sm"
+			>
+				<TabPanel name="quick_reply" title="Quick Reply">
+					<InstantReplies
+						data={data}
+						activeTab={activeTab}
+						openCreateReply={openCreateReply}
+						setOpenCreateReply={setOpenCreateReply}
+						setActiveTab={setActiveTab}
+					/>
+				</TabPanel>
+				<TabPanel name="template" title="Template">
+					<Templates
+						data={data}
+						activeTab={activeTab}
+						openCreateReply={openCreateReply}
+						setOpenCreateReply={setOpenCreateReply}
+						setActiveTab={setActiveTab}
+					/>
+				</TabPanel>
+
+			</Tabs>
+		</div>
 	);
 }
-export default InstantReplies;
+export default InstantRepliesModal;

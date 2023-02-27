@@ -14,10 +14,6 @@ const controls = [
 				label : 'All',
 				value : 'all',
 			},
-			{
-				label : 'Closed',
-				value : 'closed',
-			},
 		],
 	},
 	{
@@ -29,29 +25,7 @@ const controls = [
 		value     : [],
 		options   : [
 			{ label: 'Whatsapp', value: 'whatsapp' },
-			{ label: 'Facebook', value: 'facebook' },
-			{ label: 'Instagram', value: 'instagram' },
-			{ label: 'Mail', value: 'mail' }],
-	},
-	{
-		label     : 'Tags',
-		name      : 'tags',
-		type      : 'radio',
-		value     : '',
-		className : 'tags_field_controller',
-		options   : [
-			{
-				label : 'Preshipped',
-				value : 'preshipped',
-			},
-			{
-				label : 'Ongoing',
-				value : 'ongoing',
-			},
-			{
-				label : 'Postshipped',
-				value : 'postshipped',
-			},
+			{ label: 'Platform Chat', value: 'platform_chat' },
 		],
 	},
 	{

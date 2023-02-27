@@ -1,20 +1,42 @@
 import { Tooltip, Pill } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
+
 import LoginComponent from './LoginComponent';
+import OrganizationVerification from './OrganizationVerification';
 import styles from './styles.module.css';
 
 function PlatformActivity({ platform = {} }) {
-	console.log('platform', platform);
-	const { login = {}, spot_searches = {} } = platform || {};
+	const { login = {}, spot_searches = {}, organization = {} } = platform || {};
 	const { list = [] } = spot_searches || {};
+
 	return (
 		<div className={styles.container}>
 			<LoginComponent login={login} />
+
+			{!isEmpty(organization) && (
+				<OrganizationVerification organization={organization} />
+			)}
+
 			{(list || []).map((item) => {
+				const services = item?.service_type;
+
+				const {
+					origin = 'origin_location',
+					destination = 'destination_location',
+				} = TRANSACTIONAL_KEYS_MAPPING[services] || {};
+
+				const origin_port = item[origin] || {};
+
+				const destination_port = item[destination] || {};
+
 				const { created_at, serial_id } = item || {};
+
+				const countryName = (val) => val?.split(',').slice(-1)[0];
+
 				return (
 					<>
 						<div className={styles.activity_date}>
@@ -38,34 +60,52 @@ function PlatformActivity({ platform = {} }) {
 								<div className={styles.port_pair}>
 									<div className={styles.port}>
 										<div className={styles.port_details}>
-											<Tooltip content="Shanghai Shanghai" placement="bottom">
+
+											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
 												<div className={styles.port_name}>
-													Shanghai
+													{startCase(origin_port?.name)}
 												</div>
 											</Tooltip>
-											<div className={styles.port_code}>
-												(CNSHA)
+
+											<div className={styles.port_codes}>
+												{!isEmpty(origin_port?.port_code) && (
+													<>
+														(
+														{origin_port?.port_code}
+														)
+													</>
+												)}
+
 											</div>
 										</div>
 										<div className={styles.country}>
-											China
+											{startCase(countryName(origin_port?.display_name))}
 										</div>
 									</div>
 									<IcMPortArrow width={22} height={22} />
 									<div className={styles.port}>
 										<div className={styles.port_details}>
-											<div className={styles.port_name}>
-												Shanghai
-											</div>
-											<div className={styles.port_code}>
-												(CNSHA)
+											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
+												<div className={styles.port_name}>
+													{startCase(destination_port?.name)}
+												</div>
+											</Tooltip>
+											<div className={styles.port_codes}>
+												{!isEmpty(destination_port?.port_code) && (
+													<>
+														(
+														{destination_port?.port_code}
+														)
+													</>
+												)}
 											</div>
 										</div>
 										<div className={styles.country}>
-											China
+											{startCase(countryName(origin_port?.display_name))}
 										</div>
 									</div>
 								</div>
+
 							</div>
 
 						</div>
@@ -73,9 +113,7 @@ function PlatformActivity({ platform = {} }) {
 					</>
 				);
 			})}
-			<div className={styles.activity_date}>
-				<div className={styles.dot} />
-			</div>
+
 		</div>
 	);
 }

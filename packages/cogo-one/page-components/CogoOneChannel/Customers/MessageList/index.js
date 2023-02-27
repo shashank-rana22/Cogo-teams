@@ -1,10 +1,10 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import { cl, Input, Popover } from '@cogoport/components';
-import { IcMDoubleFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { cl, Input, Popover, Tooltip } from '@cogoport/components';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import UserAvatar from '../../../../common/UserAvatar';
+import { PLATFORM_MAPPING } from '../../../../constants';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -14,33 +14,35 @@ import styles from './styles.module.css';
 
 function MessageList({
 	messagesList,
-	setActiveMessage = () => { },
-	activeMessageCard,
 	setSearchValue = () => { },
 	filterVisible,
 	searchValue,
 	setFilterVisible = () => { },
 	setAppliedFilters = () => { },
 	appliedFilters,
+	messagesLoading = false,
+	activeCardId = '',
+	setActiveMessage,
+	setActiveCardId = () => {},
+	showBotMessages = false,
 }) {
-	console.log('messagesList', messagesList);
-	const loading = false;
+	function getShowChat({ user_name }) {
+		if (searchValue) {
+			const searchName = user_name?.toLowerCase();
+			return searchName?.includes(searchValue?.toLowerCase());
+		}
 
-	if (isEmpty(messagesList)) {
-		return (
-			<div className={styles.list_container}>
-				<div className={styles.empty_state}>
-					No Messages Yet..
-				</div>
-			</div>
-		);
+		return true;
+	}
+
+	if (messagesLoading) {
+		return <LoadingState />;
 	}
 
 	return (
 		<>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
-
 					<Input
 						size="sm"
 						prefix={<IcMSearchlight width={18} height={18} />}
@@ -48,111 +50,139 @@ function MessageList({
 						value={searchValue}
 						onChange={(val) => setSearchValue(val)}
 					/>
-
 				</div>
-
-				<div className={styles.filter_icon}>
-					<Popover
-						placement="right"
-						render={(
+				{!showBotMessages && (
+					<div className={styles.filter_icon}>
+						<Popover
+							placement="right"
+							render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
 									filterVisible={filterVisible}
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
+									setActiveCardId={setActiveCardId}
 								/>
 							)
-						)}
-						visible={filterVisible}
-						onClickOutside={() => setFilterVisible(false)}
-					>
-						<IcMDoubleFilter
-							onClick={() => setFilterVisible((prev) => !prev)}
-							className={styles.filter_icon}
-						/>
-					</Popover>
-					{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
-				</div>
+							)}
+							visible={filterVisible}
+							onClickOutside={() => setFilterVisible(false)}
+						>
+							<IcMFilter
+								onClick={() => setFilterVisible((prev) => !prev)}
+								className={styles.filter_icon}
+							/>
+						</Popover>
+						{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
+					</div>
+				)}
 			</div>
-			{loading ? <LoadingState /> : (
-				<div className={styles.list_container}>
 
+			{ isEmpty(messagesList) ? (
+				<div className={styles.list_container}>
+					<div className={styles.empty_state}>
+						No Messages Yet..
+					</div>
+				</div>
+			) : (
+				<div className={styles.list_container}>
 					{(messagesList || []).map((item) => {
+						const { chat_status = '' } = item || {};
 						const userData = getActiveCardDetails(item);
 						const {
 							user_name = '',
 							organization_name = '',
+							user_type = '',
 						} = userData || {};
 
-						const lastActive = new Date(item.sent_updated_at);
-						const checkActiveCard = activeMessageCard?.id === item?.id;
+						const lastActive = new Date(item.new_message_sent_at);
+						const checkActiveCard = activeCardId === item?.id;
+
+						const showOrganization = () => {
+							if (['public_website', 'public_cp'].includes(user_type)) {
+								return startCase(PLATFORM_MAPPING[user_type] || '');
+							}
+							return startCase(organization_name);
+						};
+
+						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
 
 						return (
-							<div
-								key={item?.id}
-								role="presentation"
-								className={cl`
-						                ${styles.card_container} 
-						                ${checkActiveCard ? styles.active_card : ''} 
-						                `}
-								onClick={() => setActiveMessage(item)}
-							>
-								<div className={styles.card}>
+							show && (
+								<div
+									key={item?.id}
+									role="presentation"
+									className={cl`
+												${styles.card_container} 
+												${checkActiveCard ? styles.active_card : ''} 
+												`}
+									onClick={() => setActiveMessage(item)}
+								>
+									<div className={styles.card}>
+										<div className={styles.user_information}>
+											<div className={styles.avatar_container}>
+												<UserAvatar
+													type={item.channel_type}
+													imageSource={item.image}
+												/>
+												<div className={styles.user_details}>
+													<Tooltip content={startCase(user_name)} placement="top">
+														<div className={styles.user_name}>
+															{startCase(user_name)}
+														</div>
+													</Tooltip>
 
-									<div className={styles.user_information}>
-										<div className={styles.avatar_Container}>
-											<UserAvatar
-												type={item.channel_type}
-												imageSource={item.image}
-											/>
-											<div className={styles.user_details}>
-												<div className={styles.user_name}>
-													{startCase(user_name)}
+													<div className={styles.organisation}>
+														{showOrganization()}
+													</div>
 												</div>
-												<div className={styles.organisation}>
-													{startCase(organization_name)}
+											</div>
+
+											<div className={styles.user_activity}>
+												<div className={styles.tags_conatiner}>
+													{!isEmpty(chat_status) && (
+														<div
+															className={cl`
+																${styles.tags}
+																${chat_status === 'warning' ? styles.warning : ''}
+																${chat_status === 'escalated' ? styles.escalated : ''}
+															`}
+														>
+															{startCase(chat_status)}
+														</div>
+													)}
+												</div>
+
+												<div className={styles.activity_duration}>
+													{dateTimeConverter(
+														Date.now() - Number(lastActive),
+														Number(lastActive),
+													)?.renderTime}
 												</div>
 											</div>
 										</div>
 
-										<div className={styles.user_activity}>
-											<div className={styles.tags_conatiner}>
-												{/* <div className={styles.pills_card}>Small</div> */}
+										<div className={styles.content_div}>
+											<div className={styles.content}>
+												{item.last_message}
 											</div>
-											<div className={styles.activity_duration}>
-												{dateTimeConverter(
-													Date.now() - Number(lastActive),
-													Number(lastActive),
-												)?.renderTime}
-											</div>
+
+											{item.new_message_count > 0 && (
+												<div className={styles.new_message_count}>
+													{item.new_message_count > 100 ? '99+' : (
+														item.new_message_count
+													)}
+												</div>
+											)}
 										</div>
-
 									</div>
-
-									<div className={styles.content_div}>
-										<div className={styles.content}>
-											{item.last_message}
-										</div>
-
-										{item.new_message_count > 0 && (
-											<div className={styles.new_message_count}>
-												{item.new_message_count > 100 ? '99+' : (
-													item.new_message_count
-												)}
-
-											</div>
-										)}
-
-									</div>
-
 								</div>
-							</div>
+							)
 						);
 					})}
 				</div>
 			)}
-
 		</>
 	);
 }

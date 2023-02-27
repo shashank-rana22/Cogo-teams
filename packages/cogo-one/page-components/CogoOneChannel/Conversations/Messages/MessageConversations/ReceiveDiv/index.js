@@ -1,35 +1,35 @@
 /* eslint-disable max-len */
+import { cl } from '@cogoport/components';
 import { format } from '@cogoport/utils';
+
+import MessageBody from '../../../../../../common/MessageBody';
 
 import styles from './styles.module.css';
 
 function ReceiveDiv({
 	eachMessage = {},
-	activeMessageCard = {},
 }) {
 	const {
 		message_type = 'text',
 		created_at = '',
-		response: { message = '' } = {},
+		response = {},
 	} = eachMessage;
-	const { name = 'Unknown User' } = activeMessageCard;
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.name}>
-				{name}
-				,
-				<span className={styles.time_stamp}>
+			<div>
+				<div className={styles.time_stamp}>
 					{date}
-				</span>
-			</div>
+				</div>
 
-			<div className={styles.receive_message_container}>
-				{['text', 'template'].includes(message_type)
-					? <div dangerouslySetInnerHTML={{ __html: message }} />
-					: 'Media' }
+				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>
+					<MessageBody
+						response={response}
+						message_type={message_type}
+					/>
+				</div>
 			</div>
 		</div>
 	);

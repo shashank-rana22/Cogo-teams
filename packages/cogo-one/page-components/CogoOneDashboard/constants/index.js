@@ -15,3 +15,4 @@ export const missedcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault
 export const incomingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png';
 export const outgoingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png';
 export const agentAvatar = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg';
+export const emptyAgentActivityicon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg';

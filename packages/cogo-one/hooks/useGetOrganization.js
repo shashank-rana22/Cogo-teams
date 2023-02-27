@@ -1,40 +1,35 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-const useGetOrganization = ({ activeMessageCard, activeVoiceCard, activeTab }) => {
-	const { organization_id } = activeVoiceCard || {};
-	const { organization_id: MessageOrgId } = activeMessageCard || {};
-	const [{ loading }, trigger] = useRequest({
+const useGetOrganization = ({ organizationId = '' }) => {
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_organization',
 		method : 'get',
 	}, { manual: true });
 
-	const [organizationData, setOrganizationData] = useState(null);
-
 	const fetchOrganization = async () => {
-		let id;
-		if (activeTab === 'voice') {
-			id = organization_id;
-		} else {
-			id = MessageOrgId;
+		try {
+			await trigger({
+				params: {
+					id                 : organizationId,
+					user_data_required : true,
+				},
+			});
+		} catch (error) {
+			// console.log(error);
 		}
-		const res = await trigger({
-			params: {
-				id,
-				user_data_required: true,
-			},
-		});
-		setOrganizationData(res?.data?.data || {});
 	};
 
 	useEffect(() => {
-		fetchOrganization();
+		if (organizationId) {
+			fetchOrganization();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activeVoiceCard]);
+	}, [organizationId]);
 
 	return {
-		organizationData,
-		orgLoading: loading,
+		organizationData : data?.data,
+		orgLoading       : loading,
 	};
 };
 export default useGetOrganization;

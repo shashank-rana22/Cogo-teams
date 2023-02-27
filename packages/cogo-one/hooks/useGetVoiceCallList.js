@@ -1,9 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useGetVoiceCallList = ({ activeTab }) => {
-	const checkActiveTab = activeTab === 'voice';
-
+const useGetVoiceCallList = () => {
 	const [listData, setListData] = useState({
 		list  : [],
 		total : 0,
@@ -17,12 +15,16 @@ const useGetVoiceCallList = ({ activeTab }) => {
 	}, { manual: true });
 
 	const voiceCallList = async () => {
-		const res = await trigger({
-			params: { page: pagination },
-		});
-		if (res.data) {
-			const { list = [], ...paginationData } = res?.data || {};
-			setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+		try {
+			const res = await trigger({
+				params: { page: pagination, source: 'omnichannel' },
+			});
+			if (res.data) {
+				const { list = [], ...paginationData } = res?.data || {};
+				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+			}
+		} catch (error) {
+			// console.log(error);
 		}
 	};
 
@@ -37,7 +39,7 @@ const useGetVoiceCallList = ({ activeTab }) => {
 	useEffect(() => {
 		voiceCallList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [checkActiveTab, pagination]);
+	}, [pagination]);
 
 	return {
 		loading,

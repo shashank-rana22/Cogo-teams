@@ -1,36 +1,31 @@
-// import { Toast } from '@cogoport/components';
-// import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-// import { isEmpty } from '@cogoport/utils';
-// import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-const useGetUser = ({ activeMessageCard, activeTab, activeVoiceCard }) => {
-	const { user_id } = activeVoiceCard || {};
-	const { user_id: MessageUserId } = activeMessageCard || {};
-	// const { userId } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
+const useGetUser = ({ lead_user_id = null, userId = null, customerId }) => {
+	const apiName =	 !userId ? 'get_lead_user' : 'get_user';
+	const payload = !userId ? lead_user_id : userId;
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/get_user',
+		url    : `${apiName}`,
 		method : 'get',
 	}, { manual: true });
 
 	const fetchUser = async () => {
-		let id;
-		if (activeTab === 'voice') {
-			id = user_id;
-		} else {
-			id = MessageUserId;
+		try {
+			await trigger({
+				params: {
+					id: payload,
+				},
+			});
+		} catch (error) {
+			// console.log(error);
 		}
-		await trigger({
-			params: {
-				id,
-			},
-		});
 	};
 	useEffect(() => {
-		fetchUser();
+		if (userId || lead_user_id) {
+			fetchUser();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activeVoiceCard]);
+	}, [lead_user_id, userId, customerId]);
 
 	return {
 		loading,

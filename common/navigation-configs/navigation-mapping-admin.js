@@ -1313,7 +1313,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1322,7 +1322,7 @@ const navigationMappingAdmin = {
 				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1331,7 +1331,7 @@ const navigationMappingAdmin = {
 				as            : '/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk],
+				possible_apis : [...apis.document_desk, ...apis.cogolens],
 			},
 		],
 	},
@@ -1808,6 +1808,17 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	cogo_verse_analytics: {
+		key           : 'cogo_verse_analytics',
+		title         : 'CogoVerse ',
+		// eslint-disable-next-line max-len, jsx-a11y/alt-text
+		href          : '/v2/cogo-verse-analytics',
+		as            : '/v2/cogo-verse-analytics',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.cogo_verse_analytics,
+		module_type   : 'dashboards',
+	},
 	roles_permissions: {
 		key           : 'roles_permissions',
 		title         : 'Roles and Permissions',
@@ -1820,41 +1831,29 @@ const navigationMappingAdmin = {
 		module_type   : 'crm',
 	},
 	cogo_one: {
-		key       : 'cogo_one',
-		title     : 'Cogo One',
-		// href      : '/v2/cogo-one',
-		isSubNavs : true,
-		icon      : () => (
-			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
-				alt="cogo-one-logo"
-				width={18}
-				height={18}
-			/>
-		),
-		// as            : '/v2/cogo-one',
-		// type          : 'link',
+		key           : 'cogo_one',
+		title         : 'Cogo One',
+		isSubNavs     : true,
 		main_apis     : [],
 		possible_apis : apis.cogo_one,
-		// module_type   : 'dashboards',
 		options       : [
 			{
-				key           : 'cogo_one-cogo_one_channel',
-				title         : 'Cogo-one Channel',
-				href          : '/v2/cogo-one/cogo-one-channel',
-				as            : '/v2/cogo-one/cogo-one-channel',
+				key           : 'cogo_one-omni_channel',
+				title         : 'Omni Channel',
+				href          : '/v2/cogo-one/omni-channel',
+				as            : '/v2/cogo-one/omni-channel',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_one,
 			},
 			{
-				key           : 'cogo_one-cogo_one_dashboard',
+				key           : 'cogo_one-dashboard',
 				title         : 'Dashboard',
-				href          : '/v2/cogo-one/cogo-one-dashboard',
-				as            : '/v2/cogo-one/cogo-one-dashboard',
+				href          : '/v2/cogo-one/dashboard',
+				as            : '/v2/cogo-one/dashboard',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.cogo_one,
+				possible_apis : apis.cogo_one_dashboard,
 			},
 		],
 		module_type: 'dashboards',

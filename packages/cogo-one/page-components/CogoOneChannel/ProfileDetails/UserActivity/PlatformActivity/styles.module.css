@@ -1,6 +1,5 @@
 .container {
 	height: 75vh;
-	margin-top: 20px;
 	overflow-y: auto;
 }
 
@@ -12,6 +11,10 @@
 	padding: 8px;
 	margin: -5px 0 -5px 5px;
 	border-left: 1px solid #bdbdbd;
+}
+
+.main_card:last-child {
+	border-left: none;
 }
 
 .activity_date {
@@ -96,7 +99,7 @@
 	white-space: nowrap;
 }
 
-.port_code {
+.port_codes {
 	margin-left: 2px;
 	font-size: 11px;
 	color: #bdbdbd;

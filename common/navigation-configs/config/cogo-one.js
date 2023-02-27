@@ -1,10 +1,10 @@
 const cogoOne = {
-	'/[partner_id]/cogo-one/cogo-one-channel': {
-		navigation : 'cogo_one-cogo_one_channel',
+	'/[partner_id]/cogo-one/omni-channel': {
+		navigation : 'cogo_one-omni_channel',
 		isMainNav  : true,
 	},
-	'/[partner_id]/cogo-one/cogo-one-dashboard': {
-		navigation : 'cogo_one-cogo_one_dashboard',
+	'/[partner_id]/cogo-one/dashboard': {
+		navigation : 'cogo_one-dashboard',
 		isMainNav  : true,
 	},
 

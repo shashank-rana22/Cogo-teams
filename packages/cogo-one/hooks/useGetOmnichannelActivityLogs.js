@@ -1,65 +1,59 @@
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import getActiveCardDetails from '../utils/getActiveCardDetails';
-
 const useGetOmnichannelActivityLogs = ({
-	activeMessageCard = {},
 	activityTab = '',
-	searchValue = '',
-	activeVoiceCard = {},
-	activeTab,
+	setFilterVisible,
+	customerId,
+	user_id = null,
+	lead_user_id = null,
 }) => {
-	const { user_id:userVoiceId = '' } = activeVoiceCard;
-	const userData = getActiveCardDetails(activeMessageCard);
-
-	const { user_id: userMessageId = '' } = userData || {};
-
-	const [listData, setListData] = useState({
-		list  : [],
-		total : 0,
-	});
 	const [pagination, setPagination] = useState(1);
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_activity_logs',
 		method : 'get',
 	}, { manual: true });
 
 	const fetchActivityLogs = async (filters = []) => {
-		const res = await trigger({
-			params: {
-				user_id : activeTab === 'message' ? userMessageId : userVoiceId,
-				// activity_type : activityTab,
-				page    : pagination,
-			},
-		});
+		try {
+			await trigger({
+				params: {
+					user_id       : user_id || undefined,
+					lead_user_id  : !user_id ? lead_user_id : undefined,
+					activity_type : activityTab,
+					page          : pagination,
+					c_filters:
+						!isEmpty(filters) && activityTab === 'communication' ? { type: filters } : undefined,
 
-		if (res.data) {
-			const { list = [], ...paginationData } = res?.data || {};
-			setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+					t_filters: !isEmpty(filters) && activityTab === 'transactional' ? {
+						serial_id: filters.toString(),
+					} : undefined,
+
+				},
+			});
+		} catch (error) {
+			// console.log(error);
 		}
-	};
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
-		const hasMoreData = pagination < listData?.total;
-
-		if (reachBottom && hasMoreData && !loading) {
-			setPagination((p) => p + 1);
-		}
+		setFilterVisible(false);
 	};
 
 	useEffect(() => {
-		fetchActivityLogs();
+		if (user_id || lead_user_id) {
+			fetchActivityLogs();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, activityTab, activeVoiceCard, searchValue, pagination]);
+	}, [activityTab, customerId, pagination]);
 
 	return {
-		data: listData,
-		handleScroll,
+		data,
 		loading,
 		fetchActivityLogs,
+		pagination,
+		setPagination,
 	};
 };
+
 export default useGetOmnichannelActivityLogs;

@@ -1,52 +1,58 @@
-.container{
-	width:160px;
-	:global{
-		.ui_checkbox_container{
+.container {
+	width: 160px;
+
+	:global {
+		.ui_checkbox_container {
 			padding: 5px !important;
 		}
 	}
 }
-.header{
-	display:flex;
+
+.header {
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.title{
+.title {
 	font-size: 16px;
 }
 
-.styled_icon{
+.styled_icon {
 	cursor: pointer;
 }
 
-.filter_container{
+.filter_container {
+	display: flex;
+	flex-direction: column;
 	margin-top: 18px;
-display: flex;
-flex-direction: column;
 }
 
-.label{
-	font-weight: 600;
+.label {
+	margin: 6px 0;
 	font-size: 14px;
-	color: #4F4F4F;
+	color: #4f4f4f;
 }
 
-.filters_types{
+.filters_types {
+	display: flex;
+	flex-direction: column;
 	margin-top: 8px;
-display: flex;
-flex-direction: column;
 }
 
-.actions{
-	margin-top: 20px;
+.actions {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	margin-top: 20px;
 }
 
-.filters{
+.filters {
 	display: flex;
 	flex-direction: column;
-	align-items: start;
+	align-items: flex;
+}
+
+.refresh_icon {
+	margin: 5px 10px 0 0;
 }

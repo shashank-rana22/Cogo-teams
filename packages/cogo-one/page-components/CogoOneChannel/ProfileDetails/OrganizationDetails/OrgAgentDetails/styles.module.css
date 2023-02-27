@@ -1,11 +1,12 @@
 .container {
-	box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
-	border-radius: 12px;
 	display: flex;
 	flex-direction: column;
-	margin-top: 12px;
-	padding: 9px 0 9px 22px;
 	width: 100%;
+	padding: 9px 0 9px 22px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .content {
@@ -15,20 +16,20 @@
 }
 
 .agent_type {
-	color: #221F20;
-	font-weight: 600;
 	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
 }
 
 .name {
-	color: #221F20;
-	font-weight: 500;
-	font-size: 12px;
 	padding-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
 }
 
 .type {
-	color: #221F20;
-	font-weight: 500;
 	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
 }

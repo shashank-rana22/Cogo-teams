@@ -1,6 +1,9 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
+
+import MessageBody from '../../../../../../common/MessageBody';
+import { LOGO_URL } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -10,10 +13,12 @@ function SentDiv({
 	const {
 		message_type = 'text',
 		created_at = '',
-		response: { message = '' } = {},
+		response,
 		send_by = 'kam',
 		session_type = 'bot',
 	} = eachMessage;
+
+	const { btns = [] } = response;
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 
@@ -27,15 +32,28 @@ function SentDiv({
 					,
 					<span className={styles.time_stamp}>{date}</span>
 				</div>
-				<div className={cl`${styles.receive_message_container} ${session_type === 'admin' ? styles.admin_message_container : ''}`}>
-					{['text', 'template'].includes(message_type)
-						? <div dangerouslySetInnerHTML={{ __html: message }} />
-						: 'Media' }
+
+				<div className={styles.styled_div}>
+					<div className={cl`${styles.receive_message_container} 
+						${session_type === 'admin' ? styles.admin_message_container : ''}`}
+					>
+						<MessageBody
+							response={response}
+							message_type={message_type}
+						/>
+					</div>
+
+					{!isEmpty(btns) && (
+						<div className={styles.btns_container}>
+							{(btns || []).map((eachbtn) => <div className={styles.btn}>{eachbtn}</div>)}
+						</div>
+					) }
 				</div>
 			</div>
 			<img
-				src="https://cogoport-testing.sgp1.digitaloceanspaces.com/10118f395f681ff8ce69dc191c28d45d/XMLID_816_.svg"
+				src={LOGO_URL[session_type || 'bot']}
 				alt="KAM"
+				className={styles.user_logo}
 			/>
 		</div>
 	);

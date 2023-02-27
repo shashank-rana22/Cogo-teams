@@ -1,29 +1,6 @@
 .container {
-  padding: 10px;
-  min-height: 300px;
-}
-.message_container {
-  height: 400px;
-  padding-top: 20px;
-  overflow-y: scroll;
-}
-.each_message {
-  word-break: break-word;
-  padding: 10px 10px;
-  border-bottom: 1px solid #e0e0e0;
-}
-.title {
-  font-size: 14px;
-  font-weight: 500;
-  color: #221f20;
-}
-.message {
-  font-size: 12px;
-  font-weight: 500;
-  color: #828282;
-}
-.footer{
-	box-shadow: 0px 0px 44px 0px #627FAC33;
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: column;
+	width: 100%;
+	padding-left: 8px;
 }

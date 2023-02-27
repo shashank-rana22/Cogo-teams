@@ -1,100 +1,82 @@
-import { Pill } from '@cogoport/components';
-import { IcMPort } from '@cogoport/icons-react';
+/* eslint-disable max-len */
+import { Select } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
-import BookingContent from './BookingContent';
+import SERVICE_TYPE_OPTIONS from '../../../../configurations/service-type-options';
+import useGetOmnichannelCustomerInsights from '../../../../hooks/useGetOmnichannelCustomerInsights';
+import FormatData from '../../../../utils/formatData';
+
+import InsightsList from './InsightsList';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function CustomerInsight() {
+function CustomerInsight({ activeTab, activeVoiceCard, activeMessageCard, customerId, formattedMessageData }) {
+	const { sender = null } = formattedMessageData;
+	const [serviceType, setServiceType] = useState('fcl_freight');
+
+	const { userId = '', userMobile = '' } = FormatData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+	});
+
+	const emptyCheck = !(isEmpty(userId)) || !(isEmpty(userMobile));
+
+	const {
+		data = {},
+		loading = false,
+	} = useGetOmnichannelCustomerInsights({ serviceType, activeTab, activeVoiceCard, activeMessageCard, customerId, sender });
+
+	const { shipment_and_spot_search_stats = {}, total_messages } = data || {};
+
+	const everyEmpty = () => {
+		let check = false;
+		Object.keys(shipment_and_spot_search_stats).forEach((item) => {
+			const {
+				last_shipment_data = {},
+				shipment_insights = {},
+			} = shipment_and_spot_search_stats[item];
+
+			if (!isEmpty(last_shipment_data) || !isEmpty(shipment_insights?.list)) {
+				check = true;
+			}
+		});
+		return !check;
+	};
+
+	const checkEmpty = isEmpty(shipment_and_spot_search_stats) || everyEmpty() || !(emptyCheck);
+
+	useEffect(() => {
+		setServiceType('fcl_freight');
+	}, [customerId]);
+
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} key={customerId}>
 			<div className={styles.wrap}>
 				<div className={styles.title}>Customer Insight</div>
-				<div>
-					<Pill
-						key="LongTail"
-						size="sm"
-						color="#FEF199"
-					>
-						LongTail
-					</Pill>
-				</div>
+
+				<Select
+					disabled={loading}
+					value={serviceType}
+					onChange={setServiceType}
+					options={SERVICE_TYPE_OPTIONS}
+				/>
 			</div>
-			<div className={styles.text}>
-				Usually replies in
-				<span>half a min</span>
-			</div>
-			<div className={styles.stats_div}>
-				<div className={styles.top}>
-					<div className={styles.content}>
-						<div className={styles.text}>Total Bookings</div>
-						<div className={styles.header}>23</div>
-					</div>
-					<div className={styles.content}>
-						<div className={styles.text}>Avg. no. of messages </div>
-						<div className={styles.header}>23,876</div>
-					</div>
-				</div>
-				<div className={styles.top}>
-					<div className={styles.content}>
-						<div className={styles.text}>No. of tickets</div>
-						<div className={styles.header}>2</div>
-					</div>
-					<div className={styles.content}>
-						<div className={styles.text}>Wallet share</div>
-						<div className={styles.header}> upto 20%</div>
-					</div>
-				</div>
-			</div>
-			<div className={styles.booking_div}>
-				<div className={styles.text}>
-					Last Booking: SID 13432
-				</div>
-				<BookingContent />
-			</div>
-			<div className={styles.comm_tex}>Commodity</div>
-			<div>
-				<Pill
-					key="Live animals"
-					size="sm"
-					color="#FBD1A6"
-				>
-					Live animals
-				</Pill>
-			</div>
-			<div className={styles.comm_tex}>Port pairs most booked on</div>
-			<div className={styles.port_div}>
-				<div className={styles.div_top}>
-					<div className={styles.origin}>
-						India,
-						<span>(INNSA)</span>
-						,
-						<div className={styles.name}>Jawaharlal Nehru</div>
-					</div>
-					<IcMPort width={15} height={15} fill="#ACDADF" />
-					<div className={styles.origin}>
-						China,
-						<span>(CNSHA)</span>
-						,
-						<div className={styles.name}>Shanghai</div>
-					</div>
-				</div>
-				<div className={styles.div_footer}>
-					<div className={styles.origin}>
-						India,
-						<span>(INNSA)</span>
-						,
-						<div className={styles.name}>Jawaharlal Nehru</div>
-					</div>
-					<IcMPort width={15} height={15} fill="#ACDADF" />
-					<div className={styles.origin}>
-						China,
-						<span>(CNSHA)</span>
-						,
-						<div className={styles.name}>Shanghai</div>
-					</div>
-				</div>
+
+			<div className={styles.organisation_container}>
+				{loading
+					? <LoadingState />
+					: (
+						<InsightsList
+							checkEmpty={checkEmpty}
+							total_messages={total_messages}
+							shipment_and_spot_search_stats={shipment_and_spot_search_stats}
+						/>
+					)}
 			</div>
 		</div>
 	);
 }
+
 export default CustomerInsight;

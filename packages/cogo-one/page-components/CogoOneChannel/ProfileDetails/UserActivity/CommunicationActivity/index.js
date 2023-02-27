@@ -1,31 +1,63 @@
-import { Avatar } from '@cogoport/components';
+/* eslint-disable max-len */
+import { Modal, Avatar } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
+import MessageBody from '../../../../../common/MessageBody';
 import { SOURCE_ICON_MAPPING } from '../../../../../constants';
 
+import HTMLPreview from './HtmlPreview';
 import styles from './styles.module.css';
 
 function CommunicationActivity({ communication = {} }) {
-	console.log('communication', communication);
+	const [showDetails, setShowDetails] = useState();
+	const [showModal, setShowModal] = useState(false);
+	const [title, setTitle] = useState('');
 	const { list = [] } = communication;
+
+	const handleContent = (val, sub) => {
+		setShowDetails(val);
+		setShowModal(true);
+		setTitle(sub);
+	};
+
+	let parseData;
+	if (showDetails !== undefined && title === null) {
+		parseData = JSON.parse(showDetails);
+	}
+
+	const { message_type = '', text = '', media_url = '', message = '' } = parseData || {};
+
+	const onCloseModal = () => {
+		setShowDetails();
+		setTitle('');
+		setShowModal(false);
+	};
 
 	return (
 		<div className={styles.container}>
 			{(list || []).map((item) => {
-				const { type = '', created_at = '', sender = '' } = item || {};
+				const { type = '', created_at = '', sender = '', content = {} } = item || {};
+				const { body = '', subject = '' } = content || {};
 				return (
 					<>
 						<div className={styles.activity_date}>
 							<div className={styles.dot} />
 							<div className={styles.durations}>
-								5:00pm, Sept 24
+								{format(created_at, 'HH:mm a dd MMM')}
 							</div>
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
-								<div className={styles.activity_type}>
-									Communication
+								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+									<div className={styles.activity_type}>Communication</div>
+									<div
+										role="presentation"
+										onClick={() => handleContent(body, subject)}
+										style={{ fontSize: '12px', textDecoration: 'underline', color: '#034AFD', cursor: 'pointer' }}
+									>
+										View more
+									</div>
 								</div>
 								<div className={styles.message_details}>
 									<div className={styles.title}>
@@ -45,11 +77,11 @@ function CommunicationActivity({ communication = {} }) {
 										{' '}
 										from
 										{' '}
-										{startCase(sender)}
+										{sender}
 									</div>
 									<div className={styles.user_avatar}>
 										<Avatar
-											src="https://www.w3schools.com/howto/img_avatar.png"
+											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg"
 											alt="img"
 											disabled={false}
 											size="35px"
@@ -61,9 +93,23 @@ function CommunicationActivity({ communication = {} }) {
 					</>
 				);
 			})}
-			<div className={styles.activity_date}>
-				<div className={styles.dot} />
-			</div>
+
+			{showModal && (
+				<Modal
+					show={showModal}
+					placement="top"
+					size="sm"
+					closeOnOuterClick
+					onClose={onCloseModal}
+					className={styles.styled_ui_modal_dialog}
+				>
+					<Modal.Header title={title || 'Message'} />
+					<Modal.Body>
+						{title === null ? <MessageBody message_type={message_type} response={{ message: message || text, media_url }} /> : <HTMLPreview html={showDetails} />}
+					</Modal.Body>
+				</Modal>
+
+			)}
 		</div>
 	);
 }

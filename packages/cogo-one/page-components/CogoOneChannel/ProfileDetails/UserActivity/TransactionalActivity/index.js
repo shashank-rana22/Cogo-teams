@@ -1,26 +1,39 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { SERVICE_MAPPING } from '../../../../../constants';
+import EmptyState from '../../../../../common/EmptyState';
+import { TRANSACTIONAL_KEYS_MAPPING } from '../../../../../constants/TRANSACTIONAL_KEYS_MAPPING';
 
 import styles from './styles.module.css';
 
 function TransactionalActivity({ transactional = {} }) {
 	const { list = [] } = transactional;
 
+	if (isEmpty(list)) {
+		return (
+			<EmptyState type="activities" />
+		);
+	}
+
 	return (
 		<div>
 			{(list || []).map((item) => {
+				const services = item?.shipment_type;
+				const { origin = '', destination = '' } = TRANSACTIONAL_KEYS_MAPPING[services];
+
 				const {
-					created_at = '', serial_id, milestone_activity = [], origin_port = {},
-					destination_port = {},
+					created_at = '', serial_id, milestone_activity = [],
 				} = item || {};
+
+				const origin_port = item[origin] || {};
+
+				const destination_port = item[destination] || {};
+
 				const bookingStatus = milestone_activity.pop();
 
 				return (
-
 					<>
 						<div className={styles.activity_date}>
 							<div className={styles.dot} />
@@ -54,11 +67,11 @@ function TransactionalActivity({ transactional = {} }) {
 													{startCase(origin_port?.name)}
 												</div>
 											</Tooltip>
-
 											<div className={styles.port_codes}>
-												(
-												{origin_port?.port_code}
-												)
+												{!isEmpty(origin_port?.port_code) && (
+													<div>{origin_port?.port_code}</div>
+
+												)}
 											</div>
 										</div>
 										<div className={styles.country}>
@@ -74,9 +87,9 @@ function TransactionalActivity({ transactional = {} }) {
 												</div>
 											</Tooltip>
 											<div className={styles.port_codes}>
-												(
-												{destination_port?.port_code}
-												)
+												{!isEmpty(destination_port?.port_code) && (
+													<div>{destination_port?.port_code}</div>
+												)}
 											</div>
 										</div>
 										<div className={styles.country}>
@@ -85,14 +98,11 @@ function TransactionalActivity({ transactional = {} }) {
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</>
 				);
 			})}
-			<div className={styles.activity_date}>
-				<div className={styles.dot} />
-			</div>
+
 		</div>
 	);
 }

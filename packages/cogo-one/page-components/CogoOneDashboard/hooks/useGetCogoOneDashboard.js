@@ -2,9 +2,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetCogoOneDashboard({ timeline, selectedTimeline }) {
+function useGetCogoOneDashboard({ timeline, selectedTimeline, selectedItem }) {
 	const { date = '', from = '', to = '' } = selectedTimeline || {};
-
+	console.log(selectedTimeline, 'selectedTimeline');
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogo_one_dashboard',
 		method : 'get',
@@ -14,10 +14,13 @@ function useGetCogoOneDashboard({ timeline, selectedTimeline }) {
 		try {
 			await trigger({
 				params: {
-					timeline : timeline || 'day',
-					date     : timeline !== 'week' ? date || new Date() : undefined,
-					from     : timeline === 'week' ? from : undefined,
-					to       : timeline === 'week' ? to : undefined,
+					timeline: timeline || 'day',
+					// date      : timeline !== 'week' ? date || new Date() : undefined,
+					// from_date : timeline === 'week' ? from : undefined,
+					// to_date   : timeline === 'week' ? to : undefined,
+
+					from_date : new Date(),
+					to_date   : new Date(),
 				},
 			});
 		} catch (error) {
@@ -27,7 +30,7 @@ function useGetCogoOneDashboard({ timeline, selectedTimeline }) {
 
 	useEffect(() => {
 		getCogoOneDashboard();
-	}, [timeline, selectedTimeline]);
+	}, [timeline, selectedTimeline, selectedItem]);
 
 	return {
 		loading,

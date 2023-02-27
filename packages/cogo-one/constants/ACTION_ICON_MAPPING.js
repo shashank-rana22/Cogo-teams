@@ -1,48 +1,43 @@
 import {
-	IcCCogoCoin,
 	IcADocumentTemplates,
-	IcACrossBorder,
 	IcALocation,
-	IcAFaqs,
-	IcADiscoverRates,
 	IcAWhitePapers,
 } from '@cogoport/icons-react';
 
 const ACTION_ICON_MAPPING = [
 	{
-		name  : 'spot_search',
-		icon  : <IcAFaqs width={28} height={28} />,
-		title : 'Spot Search',
+		name        : 'shipment_tracking',
+		icon        : <IcALocation width={28} height={28} />,
+		title       : 'Shipment Tracking',
+		href        : 'saas/tracking-job',
+		redirecting : { prm: 'shipments', crm: 'shipments' },
 	},
 	{
-		name  : 'shipment_tracking',
-		icon  : <IcALocation width={28} height={28} />,
-		title : 'Shipment Tracking',
+		name        : 'invoicing',
+		icon        : <IcAWhitePapers width={28} height={28} />,
+		title       : 'Invoicing',
+		href        : 'invoice-approvals',
+		redirecting : { prm: 'finance', crm: 'finance' },
 	},
 	{
-		name  : 'schedule_air_ocean',
-		icon  : <IcACrossBorder width={28} height={28} />,
-		title : 'Schedule Air/Ocean',
+		name        : 'quotation',
+		icon        : <IcADocumentTemplates width={28} height={28} />,
+		title       : 'Quotation',
+		href        : 'quotation-approval',
+		redirecting : { prm: 'quotations', crm: 'quotations' },
 	},
 	{
-		name  : 'outstanding_invoices',
-		icon  : <IcADiscoverRates width={28} height={28} />,
-		title : 'Outstanding Invoices',
-	},
-	{
-		name  : 'invoicing',
-		icon  : <IcAWhitePapers width={28} height={28} />,
-		title : 'Invoicing',
-	},
-	{
-		name  : 'quotation',
-		icon  : <IcADocumentTemplates width={28} height={28} />,
-		title : 'Quotation',
-	},
-	{
-		name  : 'cogopoints',
-		icon  : <IcCCogoCoin width={28} height={28} />,
-		title : 'Cogopoints',
+		name : 'cogopoints',
+		icon : <img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+			alt="icon"
+			width="28px"
+			height="28px"
+		/>,
+		title       : 'Cogopoints',
+		href        : 'marketing/cogo-points/cogopoint_creation',
+		redirecting : { prm: 'cogopoints', crm: undefined },
 	},
 ];
+
 export default ACTION_ICON_MAPPING;

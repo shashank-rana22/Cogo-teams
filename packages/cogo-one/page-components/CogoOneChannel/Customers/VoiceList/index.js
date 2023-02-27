@@ -1,23 +1,23 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import { cl } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import { IcMCall } from '@cogoport/icons-react';
-import { startCase, format, differenceInDays, isEmpty } from '@cogoport/utils';
+import { startCase, format, isEmpty } from '@cogoport/utils';
 
 import { VOICE_ICON_MAPPING } from '../../../../constants';
 import useGetVoiceCallList from '../../../../hooks/useGetVoiceCallList';
+import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import LoadingState from '../LoadingState';
 
 import styles from './styles.module.css';
 
 function VoiceList({
-	setActiveVoiceCard = () => {},
+	setActiveVoiceCard = () => { },
 	activeVoiceCard,
 	activeTab,
 }) {
 	const {
 		loading,
 		data = {},
-		handleScroll = () => {},
+		handleScroll = () => { },
 	} = useGetVoiceCallList({ activeTab });
 
 	const { list = [] } = data;
@@ -37,7 +37,7 @@ function VoiceList({
 		return status;
 	};
 
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !loading) {
 		return (
 			<div className={styles.list_container}>
 				<div className={styles.empty_container}>
@@ -54,97 +54,84 @@ function VoiceList({
 
 	return (
 
-		<>
-			<div
-				className={styles.list_container}
-				onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
-			>
+		<div
+			className={styles.list_container}
+			onScroll={(e) => handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight)}
+		>
 
-				{(list || []).map((item) => {
-					const { user_data = {}, user_number = '' } = item || {};
-					const checkActiveCard = activeVoiceCard?.id === item?.id;
-					const daysDifference = differenceInDays(new Date(), new Date(item.start_time_of_call));
-					const checkUserData = Object.keys(item || {}).includes('user_data');
+			{(list || []).map((item) => {
+				const {
+					user_data = null, user_number = '', organization_data = null,
+					start_time_of_call = '',
+				} = item || {};
+				const checkActiveCard = activeVoiceCard?.id === item?.id;
+				const checkUserData = !isEmpty(Object.keys(user_data || {}));
 
-					return (
-						<div
-							key={item?.id}
-							role="presentation"
-							className={cl`
-				${styles.card_Container}
-				${checkActiveCard ? styles.active_card : ''}
+				const showUserData = checkUserData ? (
+					startCase(user_data?.name)
+				) : (
+					user_number
+				);
+				const lastActive = new Date(start_time_of_call);
+
+				return (
+					<div
+						key={item?.id}
+						role="presentation"
+						className={cl`
+							${styles.card_container}
+							${checkActiveCard ? styles.active_card : ''}
 				 `}
-							onClick={() => setActiveVoiceCard(item)}
-						>
-							<div className={styles.card}>
-
-								<div className={styles.user_information}>
-									<div className={styles.avatar_Container}>
-										<img
-											src={VOICE_ICON_MAPPING[callStatus(item)]}
-											className={styles.avatar}
-											alt=""
-										/>
-										<div className={styles.user_details}>
+						onClick={() => setActiveVoiceCard(item)}
+					>
+						<div className={styles.card}>
+							<div className={styles.user_information}>
+								<div className={styles.avatar_container}>
+									<img
+										src={VOICE_ICON_MAPPING[callStatus(item)]}
+										className={styles.avatar}
+										alt=""
+									/>
+									<div className={styles.user_details}>
+										<Tooltip content={showUserData} placement="top">
 											<div className={styles.user_name}>
-												{checkUserData && !isEmpty(user_data) ? (
-													<>
-														{startCase(user_data?.name)}
-													</>
-												) : (
-													<>
-														{user_number}
-													</>
-												)}
-
+												{showUserData}
+												{isEmpty(user_number) && '-'}
 											</div>
-											<div className={styles.organisation}>
-												Organisation
-												{' '}
-												{item.organisation}
-											</div>
-										</div>
-									</div>
+										</Tooltip>
 
-									<div className={styles.user_activity}>
-										<div className={styles.activity_duration}>
-											{daysDifference > 7 ? (
-												<>
-													{format(item.start_time_of_call, 'dd/mm/yy')}
-												</>
-											) : (
-												<>
-													{format(item.start_time_of_call, 'EEE')}
-												</>
+										<div className={styles.organisation}>
+
+											{isEmpty(organization_data) ? '-' : (
+												startCase(organization_data?.short_name)
 											)}
-
-										</div>
-										<div className={styles.activity_duration}>
-											{format(item.start_time_of_call, 'HH:mm a')}
 										</div>
 									</div>
+								</div>
 
+								<div className={styles.user_activity}>
+									<div className={styles.activity_duration}>
+										{!isEmpty(start_time_of_call) && (
+											<div>
+												{dateTimeConverter(
+													Date.now() - Number(lastActive),
+													Number(lastActive),
+												)?.renderTime}
+											</div>
+										)}
+									</div>
+									<div className={styles.activity_duration}>
+										{format(start_time_of_call, 'HH:mm a')}
+									</div>
 								</div>
 							</div>
 						</div>
-					);
-				})}
-				{loading && <LoadingState />}
-			</div>
-
-			{/* {!isEmpty(list) && (
-				<div className={styles.list_container}>
-					<div className={styles.empty_container}>
-						<div className={styles.empty_state}>
-							<div className={styles.call_icon}>
-								<IcMCall width={20} height={20} fill="#BDBDBD" />
-							</div>
-							Empty Call Log..
-						</div>
 					</div>
-				</div>
-			)} */}
-		</>
+				);
+			})}
+
+			{loading && <LoadingState />}
+		</div>
 	);
 }
 

@@ -1,25 +1,65 @@
 import { Pill, Placeholder, Loader } from '@cogoport/components';
-import { IcCCogoCoin } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../common/EmptyState';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
 
-// import LoadingState from './LoaderState';
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
 
-function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) {
-	const { organizationData = {}, orgLoading } = useGetOrganization({ activeMessageCard, activeVoiceCard, activeTab });
-	// const orgLoading = true;
-	const { pointData, pointLoading } = useGetOrganizationCogopoints({ activeMessageCard, activeVoiceCard, activeTab });
-	const { promoData, promoLoading } = useGetListPromotions({ activeMessageCard, activeVoiceCard });
+function OrganizationDetails({
+	activeTab = '',
+	activeVoiceCard = {},
+	formattedMessageData = {},
+	openNewTab = () => {},
+}) {
+	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
+	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
-	const { agent, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
+	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
+
+	const { organizationData = {}, orgLoading } = useGetOrganization({ organizationId });
+
+	const {
+		pointData = {},
+		pointLoading,
+	} = useGetOrganizationCogopoints({ organizationId });
+
+	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
+	const { list = [] } = promoData || {};
+	const { agent = {}, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
+
+	if (isEmpty(organizationId)) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.title}>Organisation Details</div>
+				<EmptyState type="organization" />
+			</div>
+		);
+	}
+
+	function ListPromos() {
+		return isEmpty(list) ? (
+			<div className={styles.promotion_cards_empty_state}>
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/promocodes_not_found.svg"
+					alt="promocode"
+					width="200px"
+					height="200px"
+				/>
+			</div>
+		) : (
+			<div className={styles.promotion_cards}>
+				<PromocodeThumbnail list={list} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -28,16 +68,21 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 				<>
 					<div className={styles.content}>
 						<div className={styles.organization_details}>
-							<Placeholder width="220px" height="25px" />
-							<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
+							<Placeholder width="220px" height="20px" />
 						</div>
 						<div className={styles.status}>
 							<Placeholder width="60px" height="15px" />
 						</div>
 					</div>
 					<div className={styles.name}>
-						<Placeholder width="120px" height="15px" margin="10px 0 0 0 " />
-						<Placeholder width="80px" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="120px" height="30px" margin="10px 0 0 0 " />
+					</div>
+					<div className={styles.agent_title}>Agent Details</div>
+
+					<div className={styles.agent_loading_state}>
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
+						<Placeholder width="80%" height="15px" margin="10px 0 0 0 " />
 					</div>
 				</>
 			) : (
@@ -59,7 +104,13 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 							</Pill>
 						</div>
 					</div>
-					<div className={styles.name}>
+					<div
+						role="presentation"
+						className={styles.name}
+						style={{ cursor: 'pointer' }}
+						// eslint-disable-next-line no-undef
+						onClick={openNewTab}
+					>
 						ID:
 						{' '}
 						{serial_id}
@@ -70,27 +121,37 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 							size="sm"
 							color="#FFF7BF"
 						>
-							{account_type === 'importer_exporter' ? 'Importer/Exporter' : ''}
+							{account_type === 'importer_exporter' ? 'Importer/Exporter' : 'Service Provider'}
 						</Pill>
 					</div>
 				</>
 			)}
-			<div className={styles.agent_title}>Agent Details</div>
-			<div className={styles.agent_div}>
-				<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
-			</div>
+
+			{!isEmpty(agent) && (
+				<>
+					<div className={styles.agent_title}>Agent Details</div>
+					<div>
+						<OrgAgentDetails agent={agent} orgLoading={orgLoading} />
+					</div>
+				</>
+
+			)}
 
 			<div className={styles.agent_title}>Reedemable Cogopoints</div>
 			<div className={styles.points}>
 				<div className={styles.cogo_icon}>
-					<IcCCogoCoin width={20} height={20} />
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+						alt="coin"
+						className={styles.cogocoins_icon}
+					/>
 				</div>
 
 				<div className={styles.cogopoints}>Cogopoints : </div>
 				{pointLoading ? (
 					<Placeholder height="18px" width="35px" margin="0px 0px 0px 8px" />
 				) : (
-					<div className={styles.value}>{total_redeemable}</div>
+					<div className={styles.value}>{total_redeemable || '0'}</div>
 				)}
 			</div>
 			<div className={styles.agent_title}>Available Promocodes</div>
@@ -99,12 +160,9 @@ function OrganizationDetails({ activeMessageCard, activeTab, activeVoiceCard }) 
 					<Loader themeType="primary" />
 				</div>
 			) : (
-				<div className={styles.promotion_cards}>
-					<PromocodeThumbnail promoData={promoData} />
-				</div>
+				<ListPromos />
 			)}
 		</div>
-
 	);
 }
 export default OrganizationDetails;

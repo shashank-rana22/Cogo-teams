@@ -7,14 +7,27 @@ function Conversations({
 	activeMessageCard = {},
 	firestore,
 	activeVoiceCard,
-
+	suggestions = [],
+	userId,
+	isomniChannelAdmin = false,
+	showBotMessages = false,
 }) {
 	return (
 		<div className={styles.container}>
 			{activeTab === 'message'
-				? <Messages activeMessageCard={activeMessageCard} firestore={firestore} />
+				? (
+					<Messages
+						activeMessageCard={activeMessageCard}
+						firestore={firestore}
+						suggestions={suggestions}
+						userId={userId}
+						isomniChannelAdmin={isomniChannelAdmin}
+						showBotMessages={showBotMessages}
+					/>
+				)
 				: <VoiceCall activeVoiceCard={activeVoiceCard} /> }
 		</div>
 	);
 }
+
 export default Conversations;

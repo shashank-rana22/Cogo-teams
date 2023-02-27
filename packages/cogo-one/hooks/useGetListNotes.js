@@ -1,38 +1,43 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-function useGetListNotes({ activeMessageCard, active }) {
+function useGetListNotes({ active, activeMessageCard = {}, activeTab = '', activeVoiceCard = {} }) {
+	const { profile } = useSelector((state) => state);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_omnichannel_notes',
 		method : 'get',
 	}, { manual: true });
 
+	const { id } = activeMessageCard || {};
+	const { user_number } = activeVoiceCard || {};
+
 	const fetchListNotes = async () => {
-		let payload;
-		if (active) {
-			payload = {
-				channel_chat_id : '2T85TebJo8ohRBtEJXf0',
-				agent_id        : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-			};
-		} else {
-			payload = {
-				channel_chat_id: '2T85TebJo8ohRBtEJXf0',
-			};
+		try {
+			await trigger({
+				params: {
+					filters: {
+						channel_chat_id : activeTab === 'message' ? id : user_number,
+						agent_id        : active ? profile?.user?.id : undefined,
+					},
+				},
+			});
+		} catch (e) {
+			// console.log("e:", e)
+
 		}
-		await trigger({
-			params: payload,
-		});
 	};
 
 	useEffect(() => {
 		fetchListNotes();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeMessageCard, active]);
+	}, [active, id, user_number]);
 
 	return {
 		listLoading : loading,
 		noteData    : data,
 		fetchListNotes,
+
 	};
 }
 export default useGetListNotes;

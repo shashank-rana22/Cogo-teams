@@ -5,7 +5,7 @@ import LoaderRedFlags from '../LoaderRedFlags';
 
 import styles from './styles.module.css';
 
-function RedFlags({ loading = false, escalations = [] }) {
+function RedFlags({ loading = true, escalations = [] }) {
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>

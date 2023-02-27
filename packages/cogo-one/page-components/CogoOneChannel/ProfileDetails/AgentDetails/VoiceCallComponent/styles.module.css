@@ -18,88 +18,49 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	height: 35px;
-	padding: 8px 20px;
+	padding: 2px 3px;
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 6px;
 }
 
-.call_icon {
-	width: 18px;
-	height: 18px;
-	margin-right: 22px;
-	cursor: pointer;
-	fill: #abcd62;
-}
-
-.show_number {
+.dialer_icon_div {
 	display: flex;
 	align-items: center;
-	padding-left: 16px;
+	justify-content: center;
+	padding: 5px;
+	cursor: pointer;
+	background: #abcd62;
+	border-radius: 6px;
+}
+
+.call_icon {
+	width: 24px;
+	height: 24px;
+	padding: 1px;
+	fill: #fff;
+}
+
+.call_on_div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2px 16px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #221f20;
-	border-left: 2px solid #221f20;
 }
 
-.status_div {
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-	font-size: 14px;
-}
-
-.timer {
-	margin-top: 8px;
-	font-size: 14px;
-}
-
-.content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	padding: 16px;
-}
-
-.avatar {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 60px;
-	height: 60px;
-	background: #fdebe9;
-	border-radius: 12px;
-}
-
-.org_name {
-	display: flex;
-	justify-content: center;
-	margin-top: 12px;
-	font-size: 16px;
-	font-weight: 600;
-	text-align: center;
-}
-
-.number {
-	display: flex;
-	justify-content: center;
-	margin-top: 12px;
-	font-size: 14px;
-	font-weight: 500;
-	text-align: center;
-}
-
-.hang_up {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 52px;
-	cursor: pointer;
+.call_on {
+	font-size: 11px;
+	font-weight: 400;
+	color: #828282;
 }
 
 .disable {
-	cursor: "not-allowed";
+	width: 17px;
+	height: 17px;
+	margin-right: 22px;
+	cursor: not-allowed;
+	fill: #abcd62;
 }

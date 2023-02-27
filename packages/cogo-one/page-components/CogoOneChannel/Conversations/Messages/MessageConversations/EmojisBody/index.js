@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function PopBody({ emojisList }) {
+function PopBody({ emojisList, updateMessage, setOnClicked = () => {} }) {
 	return (
 		<div className={styles.container}>
 			{Object.entries(emojisList).map((group) => (
@@ -19,7 +19,10 @@ function PopBody({ emojisList }) {
 							<div
 								role="presentation"
 								className={styles.emoji_button}
-								onClick={() => { console.log(emoji); }}
+								onClick={() => {
+									updateMessage(emoji);
+									setOnClicked(false);
+								}}
 							>
 								{emoji}
 							</div>

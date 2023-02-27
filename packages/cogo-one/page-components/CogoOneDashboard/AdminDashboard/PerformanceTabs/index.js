@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/named
-import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
+// import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
 import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';
@@ -11,7 +12,7 @@ import styles from './styles.module.css';
 function PerformanceTab({ loading = false }) {
 	const [activeTab, setActiveTab] = useState('best_performance');
 	console.log('loading', loading);
-	const data = activeTab === 'best_performance' ? bestPerformanceTabsData : worstPerformanceTabsData;
+	const data = activeTab === 'best_performance' ? [] : [];
 	return (
 	// eslint-disable-next-line react/jsx-no-useless-fragment
 

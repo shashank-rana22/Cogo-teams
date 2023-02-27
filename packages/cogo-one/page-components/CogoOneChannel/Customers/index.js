@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
+	setActiveCardId = () => {},
 	setActiveMessage = () => {},
-	activeMessageCard,
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
 	setSearchValue = () => {},
@@ -17,15 +17,29 @@ function Customers({
 	filterVisible,
 	activeTab,
 	setActiveTab = () => {},
-	setToggleStatus = () => {},
 	toggleStatus,
 	messagesList = [],
 	unReadChatsCount,
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	status = '',
-	workPrefernce = () => {},
+	fetchworkPrefernce = () => {},
+	messagesLoading = false,
+	setOpenModal = () => {},
+	openModal = false,
+	updateUserStatus = () => {},
+	statusLoading = false,
+	activeCardId = '',
+	isomniChannelAdmin = false,
+	showBotMessages = false,
+	setShowBotMessages,
 }) {
+	const onChangeToggle = () => {
+		if (toggleStatus) {
+			setOpenModal(true);
+		} else {
+			updateUserStatus({ status: 'active' });
+		}
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -35,13 +49,30 @@ function Customers({
 						CogoOne
 					</div>
 				</div>
-				<Toggle
-					name="online"
-					size="md"
-					showOnOff
-					onChange={() => setToggleStatus((p) => !p)}
-					value={toggleStatus}
-				/>
+				{!isomniChannelAdmin ? (
+					<div className={styles.styled_toggle}>
+						<Toggle
+							name="online"
+							size="md"
+							showOnOff
+							onChange={() => onChangeToggle()}
+							checked={toggleStatus}
+							loading={statusLoading}
+						/>
+
+					</div>
+				) : (
+					<div className={styles.bot_messages}>
+						<div>Only Bot Messages</div>
+						<Toggle
+							name="bot messages"
+							size="sm"
+							showOnOff
+							onChange={() => setShowBotMessages((p) => !p)}
+							checked={showBotMessages}
+						/>
+					</div>
+				)}
 			</div>
 			<div className={styles.tabs}>
 				<Tabs
@@ -50,8 +81,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Message" badge={unReadChatsCount !== 0 && unReadChatsCount} />
-
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 					<TabPanel name="voice" title="Voice" />
 				</Tabs>
 			</div>
@@ -60,13 +90,16 @@ function Customers({
 				<MessageList
 					messagesList={messagesList}
 					setActiveMessage={setActiveMessage}
-					activeMessageCard={activeMessageCard}
 					setSearchValue={setSearchValue}
 					searchValue={searchValue}
 					filterVisible={filterVisible}
 					setFilterVisible={setFilterVisible}
 					setAppliedFilters={setAppliedFilters}
 					appliedFilters={appliedFilters}
+					messagesLoading={messagesLoading}
+					activeCardId={activeCardId}
+					setActiveCardId={setActiveCardId}
+					showBotMessages={showBotMessages}
 				/>
 			)}
 
@@ -78,11 +111,13 @@ function Customers({
 				/>
 			)}
 
-			{toggleStatus && (
+			{openModal && (
 				<InactiveModal
-					toggleStatus={toggleStatus}
-					setToggleStatus={setToggleStatus}
-					workPrefernce={workPrefernce}
+					fetchworkPrefernce={fetchworkPrefernce}
+					setOpenModal={setOpenModal}
+					loading={statusLoading}
+					updateUserStatus={updateUserStatus}
+
 				/>
 			)}
 		</div>

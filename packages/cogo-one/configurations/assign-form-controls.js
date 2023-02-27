@@ -2,8 +2,9 @@ const controls = {
 
 	assign_user: {
 		name        : 'assign_user',
-		type        : 'input',
+		type        : 'select',
 		placeholder : 'Enter name to assign',
+		rules       : { required: 'This is required' },
 	},
 	assign_condition: {
 		name        : 'assign_condition',
@@ -12,21 +13,22 @@ const controls = {
 		options     : [
 			{
 				label : 'Shipment ID',
-				value : 'shipment_id',
+				value : 'shipment',
 			},
 			{
 				label : 'Invoice',
 				value : 'invoice',
 			},
-			{
-				label : 'Onboarding KYC',
-				value : 'onboarding_kyc',
-			},
 		],
+		rules: { required: 'This is required' },
 	},
 	condition_value: {
-		name : 'condition_value',
-		type : 'input',
+		name  : 'condition_value',
+		type  : 'input',
+		rules : {
+			required : true,
+			validate : (val) => (val?.trim()?.length <= 0 ? 'This cannot be Empty' : true),
+		},
 	},
 	allow_user: {
 		name    : 'allow_user',

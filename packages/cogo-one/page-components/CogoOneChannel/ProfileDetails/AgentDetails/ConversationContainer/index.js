@@ -1,28 +1,48 @@
-import { snakeCase } from '@cogoport/utils';
+import { IcCWhatsapp, IcMEmail } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
-import ConservationControls from './conversationControls';
 import styles from './styles.module.css';
 
-function ConversationContainer() {
-	return (
-		<div className={styles.contacts_container}>
-			{ConservationControls.map((item, index) => {
-				const { icon, name, organization, duration } = item;
-				const itemKey = `${snakeCase(name)}_${index}`;
+function ConversationContainer({ userData }) {
+	const { email, name, whatsapp_number_eformat } = userData || {};
 
-				return (
-					<div className={styles.container} key={itemKey}>
+	if (isEmpty(userData)) {
+		return (
+			<div className={styles.empty}>No data Found...</div>
+		);
+	}
+	return (
+		<div className={styles.wrapper}>
+			{!isEmpty(whatsapp_number_eformat) && (
+				<div className={styles.contacts_container}>
+					<div className={styles.container}>
+						<div className={styles.icon_type}><IcCWhatsapp width={25} height={25} /></div>
 						<div className={styles.details}>
-							<div className={styles.icon_type}>{icon}</div>
 							<div className={styles.header}>
 								<div className={styles.name}>{name}</div>
-								<div className={styles.duration}>{duration}</div>
 							</div>
+							<div className={styles.organization}>{whatsapp_number_eformat}</div>
 						</div>
-						<div className={styles.organization}>{organization}</div>
+
 					</div>
-				);
-			})}
+				</div>
+			)}
+			{!isEmpty(email) && (
+				<div className={styles.contacts_container}>
+					<div className={styles.container}>
+						<div className={styles.icon_type}><IcMEmail width={25} height={25} fill="#E09B3D" /></div>
+						<div className={styles.details}>
+
+							<div className={styles.header}>
+								<div className={styles.name}>{name}</div>
+							</div>
+							<div className={styles.organization}>{email}</div>
+
+						</div>
+
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
