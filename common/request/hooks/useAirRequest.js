@@ -5,7 +5,8 @@ import { airRequest } from '../helpers/air-request';
 const commonConfig = {
 	cache          : false,
 	defaultOptions : {
-		ssr: false,
+		ssr    : false,
+		manual : true,
 	},
 };
 

@@ -24,7 +24,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 	};
 	const handleClear = () => {
 		Object.keys(filters).forEach((key) => {
-			setValue('blCategory', 'hawb');
+			setValue(key, null);
 		});
 		reset();
 		setFilters({});
