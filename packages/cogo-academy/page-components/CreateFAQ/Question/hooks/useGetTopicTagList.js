@@ -115,15 +115,12 @@ const useGetTopicTagList = () => {
 			startCase(platform),
 			selectedCountry?.name];
 
-		// const label = ` Persona - ${personaLabel?.label},
-		// Function - ${auth_function},  Sub-function - ${startCase(auth_sub_function)},
-		//  Cogo Entity - ${cogoEntityLabel?.business_name} Platform - ${startCase(platform)}`;
 
 		const label = (
 			<div>
-				<div style={{ fontWeight: 600 }}>{name}</div>
+				<div style={{ fontWeight: 600, paddingTop:'4px', paddingBottom:'6px' }}>{startCase(name)}</div>
 				{(pillsArray || []).map((ele) => (
-					ele && <Pill color="#ecd7a8">{ele}</Pill>
+					ele && <Pill color='blue'>{ele}</Pill>
 				))}
 			</div>
 		);
