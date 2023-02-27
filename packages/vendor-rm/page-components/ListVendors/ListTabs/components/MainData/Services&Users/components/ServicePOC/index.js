@@ -87,6 +87,7 @@ function ServicePOC({
 						)) }
 						<div
 							role="presentation"
+							className={styles.edit_icon_container}
 							style={{ cursor: 'pointer' }}
 							onClick={() => handleEditServicePOC({ selectedPOC: singleServicePoc?.poc_details })}
 						>
