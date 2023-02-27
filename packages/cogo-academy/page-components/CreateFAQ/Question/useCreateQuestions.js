@@ -6,9 +6,16 @@ import useCreateFaqSet from './hooks/useCreateFaqSets';
 import useGetTopicTagList from './hooks/useGetTopicTagList';
 import useUpdateFaqSet from './hooks/useUpdateFaqSets';
 
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require, import/no-unresolved
+	RichTextEditor = require('react-rte').default;
+}
+
 function useCreateQuestions({ data }) {
 	const { general } = useSelector((state) => state);
-	const [editorValue, setEditorValue] = useState('');
+	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
 
 	const { mode = '', id :questionId = '' } = general.query || {};
@@ -57,6 +64,7 @@ function useCreateQuestions({ data }) {
 		fetchTopics,
 		fetchTags,
 		fetchAudiences,
+		RichTextEditor,
 	};
 }
 

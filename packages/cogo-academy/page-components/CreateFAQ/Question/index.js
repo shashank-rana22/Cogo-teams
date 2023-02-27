@@ -53,6 +53,7 @@ function CreateFAQ() {
 		fetchTopics,
 		fetchTags,
 		fetchAudiences,
+		RichTextEditor,
 	} = useCreateQuestions({ data });
 
 	const {
@@ -103,7 +104,7 @@ function CreateFAQ() {
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
-			setEditorValue(answers?.[0]?.answer);
+			setEditorValue(RichTextEditor?.createValueFromString(answers?.[0]?.answer, 'markdown'));
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -243,7 +244,6 @@ function CreateFAQ() {
 						control={control}
 						options={audienceOptions}
 					/>
-
 				</div>
 
 				<div className={styles.faq_answer_container}>

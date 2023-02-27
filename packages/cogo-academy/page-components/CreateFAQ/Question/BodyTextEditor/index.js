@@ -11,20 +11,13 @@ function BodyTextEditor({
 	editorValue = '',
 	setEditorValue = () => {},
 }) {
-	const [rteValue, setRteValue] = useState(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
-
-	useEffect(() => {
-		setRteValue(RichTextEditor?.createValueFromString(editorValue, 'markdown'));
-	}, [editorValue]);
-
 	const handleChange = (value) => {
-		setRteValue(value);
-		setEditorValue(value.toString('html'));
+		setEditorValue(value);
 	};
 
 	return (
 		<RichTextEditor
-			value={rteValue}
+			value={editorValue}
 			onChange={handleChange}
 			required
 			id="body-text"

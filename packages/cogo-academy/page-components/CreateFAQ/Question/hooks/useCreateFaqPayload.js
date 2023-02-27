@@ -42,7 +42,7 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 		inactive_topic_ids : !isEmpty(inactive_topic_ids) ? inactive_topic_ids : undefined,
 		inactive_tag_ids   : !isEmpty(inactive_tag_ids) ? inactive_tag_ids : undefined,
 		answers            : [{
-			answer                : editorValue,
+			answer                : editorValue.toString('html'),
 			state                 : 'draft',
 			status                : 'active',
 			audience_ids,
