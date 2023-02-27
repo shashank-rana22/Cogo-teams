@@ -3,8 +3,8 @@ import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 function useGetCogoOneDashboard({ timeline, selectedTimeline, selectedItem }) {
-	const { date = '', from = '', to = '' } = selectedTimeline || {};
-	console.log(selectedTimeline, 'selectedTimeline');
+	const { date = '' } = selectedTimeline || {};
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogo_one_dashboard',
 		method : 'get',

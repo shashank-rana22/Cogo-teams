@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { format } from '@cogoport/utils';
 import { useState, useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
@@ -45,26 +46,31 @@ export function CalendarEntity({
 	useEffect(() => {
 		if (resetDiv)calendarRef.current.style = 'transform: translateX(-33.3%);';
 		setPosition(-33.3);
-		console.log(position);
 	}, [resetDiv]);
-	console.log(calendarData, 'calendarData');
+
 	return (
 		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
 			{
-				calendarData?.map(({ label, subLabel, key, date }) => (
-					<div
-						key={key}
-						onClick={() => setSelectedItem(date)}
-						className={`${styles.date_container} ${selectedItem === date ? styles.active : ''}`}
-					>
-						<div className={styles.day_hours1}>
-							{label}
+				calendarData?.map(({ label, subLabel, key, date }) => {
+					const isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
+					return (
+						<div
+							key={key}
+							onClick={() => setSelectedItem(format(
+								date,
+								'dd MMM YYYY',
+							))}
+							className={`${styles.date_container} ${isDateEqual ? styles.active : ''}`}
+						>
+							<div className={styles.day_hours1}>
+								{label}
+							</div>
+							<div className={styles.day_hours2}>
+								{subLabel}
+							</div>
 						</div>
-						<div className={styles.day_hours2}>
-							{subLabel}
-						</div>
-					</div>
-				))
+					);
+				})
 			}
 		</div>
 	);
