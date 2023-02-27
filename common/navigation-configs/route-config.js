@@ -1,5 +1,7 @@
 import allocations from './config/allocations';
 import businessFinance from './config/business-finance';
+import cogoOne from './config/cogo-one';
+import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import enrichment from './config/enrichment';
 import myIncident from './config/my-incident';
@@ -16,6 +18,9 @@ const routeConfig = {
 	...myIncident,
 	...myProfile,
 	...enrichment,
+	...cogoVerseAnalytics,
+	...cogoOne,
+	...myProfile,
 };
 
 export default routeConfig;
