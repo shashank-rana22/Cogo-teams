@@ -33,6 +33,8 @@ function CreateForm({
 	const onClickBackIcon = () => {
 		if (displayBackButton) {
 			setShow(false);
+			setValue('name', '');
+			setValue('description', '');
 			return;
 		}
 		reset();

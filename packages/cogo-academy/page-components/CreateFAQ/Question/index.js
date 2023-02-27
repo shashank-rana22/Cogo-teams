@@ -54,7 +54,8 @@ function CreateFAQ() {
 		handleCreateTag,
 		handleCreateTopic,
 		formErrors,
-		resetValue,
+		// resetValue,
+		onClickCancelButton,
 	} = useCreateNewTagOrTopic();
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
@@ -94,11 +95,6 @@ function CreateFAQ() {
 	const onClickYesButton = () => {
 		setShowModalOnCancel(false);
 		router.back();
-	};
-
-	const onClickCancelButton = () => {
-		resetValue();
-		setShow(false);
 	};
 
 	if (questionPreview === 'preview') {
