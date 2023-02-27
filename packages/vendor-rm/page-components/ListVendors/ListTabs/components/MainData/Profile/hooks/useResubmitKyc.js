@@ -133,6 +133,7 @@ const useResubmitKyc = ({
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
+	};
 
 	const Data = {};
 
