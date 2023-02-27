@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import BadgeList from './BadgeList';
 import CreateBadge from './CreateBadge';
+import CreateMastery from './CreateMastery';
 import Header from './Header';
 import styles from './styles.module.css';
 import ViewBadges from './ViewBadges';
@@ -20,6 +21,7 @@ function Badges() {
 
 	// const [createBadge, setCreateBadge] = useState(true);
 	const [createBadge, setCreateBadge] = useState(false);
+	const [createMastery, setCreateMastery] = useState(false);
 
 	return (
 		<section className={styles.main_container}>
@@ -39,7 +41,7 @@ function Badges() {
 				</div>
 
 				<div>
-					<Header badgeList={badgeList} setCreateBadge={setCreateBadge} />
+					<Header badgeList={badgeList} setCreateBadge={setCreateBadge} setCreateMastery={setCreateMastery} />
 				</div>
 			</section>
 
@@ -60,6 +62,13 @@ function Badges() {
 			)
 			}
 
+			{
+				createMastery && (
+					<div>
+						<CreateMastery setCreateMastery={setCreateMastery} />
+					</div>
+				)
+			}
 		</section>
 
 	// <div>
