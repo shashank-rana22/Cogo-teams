@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Filters({ setFilters = () => {}, filters = {} }) {
 	const [visible, setVisible] = useState(false);
-	const { control, handleSubmit, reset, watch, setValue, formState:{ errors } } = useForm();
+	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
 	const onSubmit = (formValues: any) => {
 		setFilters((prev) => ({ ...prev, ...formValues }));

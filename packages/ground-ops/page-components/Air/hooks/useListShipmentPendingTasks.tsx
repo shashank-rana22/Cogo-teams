@@ -8,7 +8,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [{ data = {}, loading }, trigger] = useRequest(
-		'http://192.168.1.178:8101/air-coe/pending-tasks/list',
+		'http://192.168.1.81:8101/air-coe/pending-tasks/list',
 		{ manual: true },
 	);
 
@@ -28,7 +28,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 		approved_awb: {
 			assignedStakeholder : 'ground_ops',
 			status              : 'completed',
-			task                : ['approve_draft_airway_bill'],
+			task                : ['upload_mawb_freight_certificate'],
 			documentType        : 'draft_airway_bill',
 			documentState       : 'document_accepted',
 			isDocDataRequired   : true,
