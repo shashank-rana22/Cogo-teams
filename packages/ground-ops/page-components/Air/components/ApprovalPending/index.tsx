@@ -94,10 +94,10 @@ function ApprovalPending({
 					onClose={() => setShowApprove(false)}
 					scroll={false}
 				>
-
+					<Modal.Header title={(<h4 style={{ textAlign: 'center' }}>Approval Remark</h4>)} />
 					<Modal.Body>
 						<div className={styles.sure_approve}>
-							Are you sure, you want to approve it ?
+							Did you get confirmation from your KAM to provide approval?
 						</div>
 					</Modal.Body>
 					<Modal.Footer>

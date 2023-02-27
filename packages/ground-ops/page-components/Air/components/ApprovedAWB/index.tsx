@@ -5,7 +5,7 @@ import React from 'react';
 import List from '../../commons/List';
 import { ApprovedAWBFields } from '../../configurations/approved_awb';
 
-function ApprovedAWB({ data, loading, setGenerate, setItem, setViewDoc, setEdit }) {
+function ApprovedAWB({ data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit }) {
 	const { fields } = ApprovedAWBFields;
 
 	const handleDownloadMAWB = (singleItem) => {
@@ -46,6 +46,7 @@ function ApprovedAWB({ data, loading, setGenerate, setItem, setViewDoc, setEdit 
 		<List
 			fields={fields}
 			data={data}
+			setPage={setPage}
 			loading={loading}
 			functions={functions}
 		/>

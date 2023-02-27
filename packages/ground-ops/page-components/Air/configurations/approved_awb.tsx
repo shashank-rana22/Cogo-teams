@@ -15,7 +15,6 @@ export const ApprovedAWBFields = {
 			key   : 'awbNumber',
 			label : 'AWB',
 			span  : 1.2,
-			func  : 'startCase',
 		},
 		{
 			key    : 'blCategory',

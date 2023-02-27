@@ -1,3 +1,5 @@
+import currencies from './Helpers/currencies';
+
 const mawbControls = () => ({
 	basic: [
 		{
@@ -415,14 +417,9 @@ const mawbControls = () => ({
 			type        : 'select',
 			span        : 5,
 			label       : 'Currency',
-			options     : [
-				{ value: 'USD', label: 'USD' },
-				{ value: 'INR', label: 'INR' },
-				{ value: 'EUR', label: 'EUR' },
-				{ value: 'GBP', label: 'GBP' },
-			],
-			className : 'primary lg',
-			rules     : {
+			options     : currencies,
+			className   : 'primary lg',
+			rules       : {
 				required: 'Currency is Required',
 			},
 		},
