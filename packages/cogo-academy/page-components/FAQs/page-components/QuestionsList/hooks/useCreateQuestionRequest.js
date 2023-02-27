@@ -7,7 +7,7 @@ const useCreateQuestionSet = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const createQuestionSet = async ({ searchState = '', setShow }) => {
+	const createQuestionSet = async ({ searchState = '', setShow, setQuestionCreated }) => {
 		if (!searchState) {
 			Toast('Question cannot be empty');
 			return;
@@ -22,7 +22,7 @@ const useCreateQuestionSet = () => {
 
 			await trigger({ data: payload });
 
-			Toast('Question Requested Successfully');
+			setQuestionCreated(true);
 			setShow(false);
 		} catch (error) {
 			console.log('error :: ', error);
