@@ -4,11 +4,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+
 function MyResponsiveBar({ data }) {
 	return (
 		<>
