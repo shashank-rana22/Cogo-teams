@@ -24,10 +24,10 @@ interface Props {
 	viewDoc?: boolean;
 }
 
-function camelToUnderscore(key) {
-	const result = key.replace(/([A-Z])/g, ' $1');
-	return result.split(' ').join('_').toLowerCase();
-}
+// function camelToUnderscore(key) {
+// 	const result = key.replace(/([A-Z])/g, ' $1');
+// 	return result.split(' ').join('_').toLowerCase();
+// }
 
 function GenerateMawb({
 	taskItem = {},
