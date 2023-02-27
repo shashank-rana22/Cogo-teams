@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Success() {
+function Success({ setVendorInformation }) {
 	const router = useRouter();
 
 	const goToDashboard = () => {
@@ -14,6 +14,8 @@ function Success() {
 
 	const addNewVendor = () => {
 		router.push('/onboard-vendor');
+
+		setVendorInformation({});
 	};
 
 	return (

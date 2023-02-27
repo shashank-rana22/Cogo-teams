@@ -26,7 +26,7 @@ function VendorContact({
 		}
 
 		if (fieldName === 'poc_role') {
-			const formattedValues = val.map((value) => workScopes.find((work_scope) => work_scope.value === value).label);
+			const formattedValues = (val || []).map((value) => workScopes.find((work_scope) => work_scope.value === value).label);
 
 			return formatArrayValues(formattedValues, false);
 		}

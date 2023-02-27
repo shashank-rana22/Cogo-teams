@@ -76,6 +76,7 @@
 }
 
 .filter_container {
+	position: relative;
 	display: flex;
 	align-items: center;
 	padding: 7px 12px;
@@ -83,7 +84,6 @@
 	background-color: #fff;
 	border: 1px solid #000;
 	border-radius: 4px;
-	position: relative;
 }
 
 .dot {

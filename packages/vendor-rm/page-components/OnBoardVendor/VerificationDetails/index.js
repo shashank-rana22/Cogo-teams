@@ -16,6 +16,7 @@ function VerificationDetails({
 	activeStepper,
 	setActiveStepper = () => {},
 	getVendor = () => {},
+	setVendorInformation,
 	getVendorLoading = false,
 }) {
 	const {
@@ -28,7 +29,7 @@ function VerificationDetails({
 	return (
 		<div>
 			{showSuccessScreen ? (
-				<Success />
+				<Success setVendorInformation={setVendorInformation} />
 			) : (
 				<>
 					<Header />
