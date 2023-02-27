@@ -7,7 +7,7 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, merge } from '@cogoport/utils';
+import { isEmpty, merge, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
@@ -48,7 +48,7 @@ function useOnBoardVendor({
 
 	const watchForm = watch();
 
-	const { country_id } = watchForm;
+	const { country_id, registration_number = {} } = watchForm;
 
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
@@ -161,6 +161,17 @@ function useOnBoardVendor({
 				newField = {
 					...newField,
 					maxLength: 14,
+				};
+			}
+		}
+
+		if (field.name === 'registration_proof_url') {
+			const { registrationType = '' } = registration_number;
+
+			if (registrationType) {
+				newField = {
+					...newField,
+					label: `Upload ${startCase(registrationType)} Certificate`,
 				};
 			}
 		}
