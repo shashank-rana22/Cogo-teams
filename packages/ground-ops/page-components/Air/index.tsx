@@ -44,9 +44,7 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const { data, loading, setPage, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks({ activeTab });
 
 	useEffect(() => {
-		if (['new_awb', 'approval_pending', 'approved_awb'].includes(activeTab)) {
-			listAPi({ filter: filters });
-		}
+		listAPi({ filter: filters });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab, JSON.stringify(filters)]);
 
