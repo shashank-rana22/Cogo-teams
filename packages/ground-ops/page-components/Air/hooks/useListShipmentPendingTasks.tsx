@@ -1,5 +1,5 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
-import { useRequest } from '@cogoport/request';
+import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
@@ -7,8 +7,8 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequest(
-		'http://192.168.1.81:8101/air-coe/pending-tasks/list',
+	const [{ data = {}, loading }, trigger] = useRequestAir(
+		'/air-coe/pending-tasks/list',
 		{ manual: true },
 	);
 
@@ -28,7 +28,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 		approved_awb: {
 			assignedStakeholder : 'ground_ops',
 			status              : 'completed',
-			task                : ['approve_draft_airway_bill'],
+			task                : ['upload_mawb_freight_certificate'],
 			documentType        : 'draft_airway_bill',
 			documentState       : 'document_accepted',
 			isDocDataRequired   : true,
