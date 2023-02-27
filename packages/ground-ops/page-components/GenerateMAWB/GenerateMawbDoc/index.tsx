@@ -21,6 +21,8 @@ interface Props {
 	edit?: boolean;
 	setEdit?: any;
 	viewDoc?: boolean;
+	chargeableWeight?:any;
+	setGenerate?:any;
 }
 
 function GenerateMawb({
@@ -31,6 +33,8 @@ function GenerateMawb({
 	edit = false,
 	setEdit = () => {},
 	viewDoc = false,
+	chargeableWeight,
+	setGenerate = () => {},
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -54,6 +58,7 @@ function GenerateMawb({
 	const { handleUpload } = useGetMediaUrl();
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
+		setGenerate,
 	});
 
 	const ref = createRef(null);
@@ -134,10 +139,6 @@ function GenerateMawb({
 		await a.map((i) => i());
 	};
 
-	const chargeableWeight:any = Math.max(
-		taskItem.weight,
-		taskItem.volume * 166.67,
-	).toFixed(2);
 	let agentCharge = 0;
 	formData?.agentOtherCharges?.forEach((item) => {
 		agentCharge += Number(item.price);

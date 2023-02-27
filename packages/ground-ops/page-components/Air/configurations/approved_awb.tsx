@@ -30,14 +30,14 @@ export const ApprovedAWBFields = {
 		{
 			key   : 'origin',
 			label : 'Origin',
-			span  : 2,
+			span  : 2.5,
 			func  : 'startCase',
 
 		},
 		{
 			key   : 'destination',
 			label : 'Destination',
-			span  : 2,
+			span  : 2.5,
 			func  : 'startCase',
 		},
 		{
@@ -45,22 +45,6 @@ export const ApprovedAWBFields = {
 			label : 'Carrier',
 			span  : 1.5,
 			func  : 'startCase',
-		},
-		{
-			key   : 'deadline',
-			label : 'Due On',
-			span  : 1.5,
-			func  : 'startCase',
-		},
-		{
-			key    : 'status',
-			label  : 'Status',
-			span   : 1,
-			render : (item) => (
-				<div style={{ textTransform: 'uppercase' }}>
-					{item.documentState ? 'Approve' : 'Amend'}
-				</div>
-			),
 		},
 		{
 			key   : 'download',

@@ -7,7 +7,6 @@ import Layout from '../Air/commons/Layout';
 import GenerateMawbDoc from './GenerateMawbDoc';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
-import useGenerateDocument from './useGenerateDocument';
 
 const items = [
 	{ title: 'Basic Details', key: 'basic' },
@@ -37,18 +36,9 @@ function GenerateMAWB({
 
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const shipmentId = item?.shipment_id;
-
-	const {
-		documentLoading,
-		generateCertificate,
-	} = useGenerateDocument({
-		shipmentId,
-	});
 	const fields = mawbControls();
 
 	const onSubmit = () => {
-		generateCertificate();
 		setBack(true);
 	};
 
@@ -66,6 +56,13 @@ function GenerateMAWB({
 		...fields.handling,
 	];
 
+	const chargeableWt:any = (Math.max(
+		formValues.weight,
+		taskItem.volume * 166.67,
+	).toFixed(2));
+
+	const chargeableWeight = chargeableWt * formValues.packageCount;
+
 	useEffect(() => {
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
@@ -74,8 +71,15 @@ function GenerateMAWB({
 		setValue('declaredValueForCarriage', 'NVD');
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
+		setValue('chargeableWeight', chargeableWeight);
+		setValue('class', 'q');
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		setValue('chargeableWeight', chargeableWeight);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [formValues.weight, formValues.packageCount]);
 
 	return (
 		<div className={styles.container}>
@@ -118,7 +122,6 @@ function GenerateMAWB({
 								<div className={styles.button_div}>
 									<Button
 										onClick={handleSubmit(() => setActiveKey('package'))}
-										disabled={documentLoading}
 										themeType="accent"
 									>
 										NEXT
@@ -138,7 +141,6 @@ function GenerateMAWB({
 								<div className={styles.button_div}>
 									<Button
 										onClick={() => setActiveKey('basic')}
-										disabled={documentLoading}
 										themeType="secondary"
 										style={{ border: '1px solid #333' }}
 									>
@@ -146,7 +148,6 @@ function GenerateMAWB({
 									</Button>
 									<Button
 										onClick={handleSubmit(() => setActiveKey('handling'))}
-										disabled={documentLoading}
 										themeType="accent"
 									>
 										Next
@@ -166,7 +167,6 @@ function GenerateMAWB({
 								<div className={styles.button_div}>
 									<Button
 										onClick={() => setActiveKey('package')}
-										disabled={documentLoading}
 										themeType="secondary"
 										style={{ border: '1px solid #333' }}
 									>
@@ -174,12 +174,9 @@ function GenerateMAWB({
 									</Button>
 									<Button
 										onClick={handleSubmit(onSubmit)}
-										disabled={documentLoading}
 										themeType="accent"
 									>
-										{documentLoading
-											? 'Generating'
-											: 'Generate Master Airway Bill'}
+										Generate Master Airway Bill
 									</Button>
 								</div>
 							) : null}
@@ -207,6 +204,8 @@ function GenerateMAWB({
 								edit={edit}
 								setEdit={setEdit}
 								viewDoc={viewDoc}
+								chargeableWeight={chargeableWeight}
+								setGenerate={setGenerate}
 							/>
 						</Modal.Body>
 

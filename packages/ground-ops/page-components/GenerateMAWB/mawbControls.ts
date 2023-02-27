@@ -105,87 +105,56 @@ const mawbControls = () => ({
 	],
 	package: [
 		{
-			name               : 'package',
-			type               : 'fieldArray',
-			className          : 'primary lg',
-			showButtons        : true,
-			noDeleteButtonTill : 1,
-			span               : 12,
-			value              : [
-				{
-					packageCount     : '',
-					gross            : '',
-					class            : 'q',
-					chargeableWeight : '',
-					rate             : '',
-				},
+			name        : 'packageCount',
+			placeholder : 'Package Count',
+			label       : 'Package Count',
+			type        : 'number',
+			className   : 'primary lg',
+			span        : 2,
+			rules       : {
+				required : true,
+				validate : (value) => (value <= 0 ? 'Should be greater than 0' : true),
+			},
+		},
+		{
+			name        : 'weight',
+			placeholder : 'Gross Weight',
+			label       : 'Gross Weight',
+			type        : 'number',
+			className   : 'primary lg',
+			span        : 2,
+			rules       : {
+				required : 'Gross Weight is Required',
+				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+			},
+		},
+		{
+			name        : 'class',
+			placeholder : 'Class',
+			label       : 'Class',
+			type        : 'select',
+			options     : [
+				{ value: 'q', label: 'Q' },
+				{ value: 'a', label: 'A' },
 			],
-			controls: [
-				{
-					name        : 'packageCount',
-					placeholder : 'Package Count',
-					label       : 'Package Count',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						required : 'Package Count is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'gross',
-					placeholder : 'Gross Weight',
-					label       : 'Gross Weight',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						required : 'Gross Weight is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'class',
-					placeholder : 'Class',
-					label       : 'Class',
-					type        : 'select',
-					options     : [
-						{ value: 'q', label: 'Q' },
-						{ value: 'a', label: 'A' },
-					],
-					className : 'primary lg',
-					span      : 2,
-					value     : 'q',
-					rules     : {
-						required: 'Class is Required',
-					},
-				},
-				{
-					name        : 'chargeableWeight',
-					placeholder : 'Chargeable Weight',
-					label       : 'Chargeable Weight',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						required : 'Chargable Weight is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'rate',
-					placeholder : 'Rate',
-					label       : 'Rate',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2,
-					rules       : {
-						required : 'Rate is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-			],
+			className : 'primary lg',
+			span      : 2,
+			rules     : {
+				required: 'Class is Required',
+			},
+		},
+		{
+			name        : 'chargeableWeight',
+			placeholder : 'Chargeable Weight',
+			label       : 'Chargeable Weight',
+			type        : 'number',
+			className   : 'primary lg',
+			span        : 2,
+			rules       : {
+				required : 'Chargable Weight is Required',
+				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+			},
+			disabled: true,
 		},
 		{
 			name      : 'amount',
@@ -194,7 +163,7 @@ const mawbControls = () => ({
 			label     : 'Amount',
 			span      : 5,
 			rules     : {
-				required: 'Amount is Required',
+				required: true,
 			},
 		},
 		{
@@ -458,19 +427,6 @@ const mawbControls = () => ({
 			},
 		},
 
-		{
-			name        : 'remark',
-			className   : 'primary lg',
-			label       : 'Remarks:',
-			type        : 'textarea',
-			span        : 5,
-			maxLength   : 150,
-			placeholder : 'Remarks',
-			rows        : 3,
-			rules       : {
-				required: 'Remarks is Required',
-			},
-		},
 		{
 			name        : 'commodity',
 			className   : 'primary lg',
