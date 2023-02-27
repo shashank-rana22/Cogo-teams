@@ -25,7 +25,6 @@ function List({
 	setPage,
 	functions,
 } :Props) {
-	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const { list = {} }:any = data;
 	const { finalData } = GetFinalList({ list, data, loading });
 

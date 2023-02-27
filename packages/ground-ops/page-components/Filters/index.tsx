@@ -25,7 +25,7 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 	};
 	const popoverContent = () => (
 		<>
-			<Layout fields={filterControls} control={control} errors={errors} register={undefined} />
+			<Layout fields={filterControls} control={control} errors={errors} />
 			<div className={styles.footer_button}>
 				<Button themeType="secondary" onClick={() => handleClear()}>Clear</Button>
 				<Button onClick={handleSubmit(onSubmit)}>Apply</Button>
@@ -43,8 +43,8 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 				visible={visible}
 			>
 				<Button
-					themeType="tertiary"
-					size="lg"
+					themeType="secondary"
+					size="md"
 					className={styles.filter_svg}
 					onClick={() => setVisible((prev: any) => !prev)}
 				>

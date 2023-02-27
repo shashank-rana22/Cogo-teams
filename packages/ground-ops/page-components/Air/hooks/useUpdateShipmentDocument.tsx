@@ -18,6 +18,7 @@ const useUpdateShipmentDocument = () => {
 			service_id          : values?.serviceId,
 			service_type        : 'air_freight_service',
 			pending_task_id     : values?.id,
+			state               : 'document_accepted',
 			file_name:
 			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
 			|| undefined,
