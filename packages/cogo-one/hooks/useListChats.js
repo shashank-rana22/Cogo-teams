@@ -72,6 +72,7 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(appliedFilters), showBotMessages]);
+
 	const snapshotCleaner = () => {
 		if (snapshotListener.current) {
 			snapshotListener.current();
