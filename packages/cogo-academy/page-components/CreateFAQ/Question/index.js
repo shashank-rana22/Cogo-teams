@@ -50,6 +50,7 @@ function CreateFAQ() {
 		showModalOnCancel,
 		setShowModalOnCancel,
 		audienceOptions,
+		handleAudienceSearch,
 		fetchTopics,
 		fetchTags,
 		fetchAudiences,
@@ -242,6 +243,7 @@ function CreateFAQ() {
 					<MultiselectController
 						name="audience_ids"
 						control={control}
+						onSearch={handleAudienceSearch}
 						options={audienceOptions}
 					/>
 				</div>

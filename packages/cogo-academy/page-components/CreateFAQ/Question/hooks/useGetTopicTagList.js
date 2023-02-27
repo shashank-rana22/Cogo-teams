@@ -92,7 +92,7 @@ const useGetTopicTagList = () => {
 
 	const { entity_data } = useListCogoEntity();
 
-	const audienceLabel = (item) => {
+	const getAudienceOption = (item) => {
 		const {
 			auth_function = '',
 			auth_sub_function = '',
@@ -115,18 +115,19 @@ const useGetTopicTagList = () => {
 			startCase(platform),
 			selectedCountry?.name];
 
-		// const label = ` Persona - ${personaLabel?.label},
-		// Function - ${auth_function},  Sub-function - ${startCase(auth_sub_function)},
-		//  Cogo Entity - ${cogoEntityLabel?.business_name} Platform - ${startCase(platform)}`;
 
-		return (
+		const label = (
 			<div>
-				<div style={{ fontWeight: 600 }}>{name}</div>
+				<div style={{ fontWeight: 600, paddingTop:'4px', paddingBottom:'6px' }}>{startCase(name)}</div>
 				{(pillsArray || []).map((ele) => (
-					ele && <Pill color="#ecd7a8">{ele}</Pill>
+					ele && <Pill color='blue'>{ele}</Pill>
 				))}
 			</div>
 		);
+		const q = `${item.name || ''}-${pillsArray.join('-')}`;
+		const value = item.id;
+
+		return {label, q, value}
 	};
 
 	(topicList || []).forEach((item) => {
@@ -138,7 +139,7 @@ const useGetTopicTagList = () => {
 	});
 
 	(audienceList || []).forEach((item) => {
-		audienceOptions.push({ label: audienceLabel(item), value: item?.id });
+		audienceOptions.push(getAudienceOption(item));
 	});
 
 	return {
