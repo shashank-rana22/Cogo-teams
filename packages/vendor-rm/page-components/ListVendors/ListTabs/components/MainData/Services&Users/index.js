@@ -25,7 +25,10 @@ function ServicesUsers({
 		<div className={styles.padd}>
 
 			<div className={styles.main}>
-				<Header showForm={showForm} setShowForm={setShowForm} />
+				<Header
+					showForm={showForm}
+					setShowForm={setShowForm}
+				/>
 
 				{ActiveComponent && (
 					<ActiveComponent
@@ -33,10 +36,14 @@ function ServicesUsers({
 						setShowForm={setShowForm}
 						getVendorData={data}
 						refetchServicesPocs={refetchServicesPocs}
+						refetchVendorInfo={refetchVendorInfo}
 					/>
 				)}
 
-				<CompanyPOC data={data} refetchVendorInfo={refetchVendorInfo} />
+				<CompanyPOC
+					data={data}
+					refetchVendorInfo={refetchVendorInfo}
+				/>
 
 				<ServicePOC
 					allServicesAndPocs={allServicesAndPocs}

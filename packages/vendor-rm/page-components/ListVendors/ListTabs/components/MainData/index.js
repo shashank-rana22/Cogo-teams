@@ -32,7 +32,10 @@ function MainData({
 							name={key}
 							title={title}
 						>
-							<ContainerComponent data={data} refetchVendorInfo={refetchVendorInfo} />
+							<ContainerComponent
+								data={data}
+								refetchVendorInfo={refetchVendorInfo}
+							/>
 						</TabPanel>
 					);
 				})}
