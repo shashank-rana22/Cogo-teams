@@ -8,12 +8,17 @@ import Layout from '../Air/commons/Layout';
 import filterControls from './filter-controls';
 import styles from './styles.module.css';
 
-function Filters({ setFilters = () => {}, filters = {} }) {
+interface Props {
+	setFilters: any;
+	filters: any;
+}
+
+function Filters({ setFilters = () => {}, filters = {} }:Props) {
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
 	const onSubmit = (formValues: any) => {
-		setFilters((prev) => ({ ...prev, ...formValues }));
+		setFilters((prev?:any) => ({ ...prev, ...formValues }));
 	};
 	const handleClear = () => {
 		Object.keys(filters).forEach((key) => {
@@ -37,8 +42,6 @@ function Filters({ setFilters = () => {}, filters = {} }) {
 			<Popover
 				placement="bottom"
 				render={popoverContent()}
-				onClickOutside={() => setVisible(false)}
-				interactive
 				className={`${styles.filters_popover} ${styles.popover_container}`}
 				visible={visible}
 			>

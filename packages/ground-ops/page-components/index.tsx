@@ -1,8 +1,6 @@
-import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Air from './Air';
-// import GenerateHAWB from './GenerateHAWB';
 import GenerateMAWB from './GenerateMAWB';
 import Header from './Header';
 import styles from './styles.module.css';
@@ -15,7 +13,6 @@ function GroundOps() {
 
 	return (
 		<div className={styles.container}>
-			<Button onClick={() => setGenerate(!generate)}>HAWB</Button>
 			{!generate
 			&& (
 				<>
@@ -36,17 +33,6 @@ function GroundOps() {
 					setGenerate={setGenerate}
 				/>
 			)}
-			{/* {(generate || viewDoc) && item.blCategory === 'hawb'
-			&& (
-				<GenerateHAWB
-					viewDoc={viewDoc}
-					setViewDoc={setViewDoc}
-					item={item}
-					edit={edit}
-					setEdit={setEdit}
-					setGenerate={setGenerate}
-				/>
-			)} */}
 		</div>
 	);
 }

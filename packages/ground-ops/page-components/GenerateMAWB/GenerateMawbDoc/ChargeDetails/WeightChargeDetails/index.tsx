@@ -418,7 +418,7 @@ function WeightChargeDetails({ data = {} }:Props) {
 					>
 						<div className={cl`
 							${styles.flex} 
-							${styles.Conversion_outer_text_block}
+							${styles.conversion_outer_text_block}
 						`}
 						/>
 						<div className={cl`

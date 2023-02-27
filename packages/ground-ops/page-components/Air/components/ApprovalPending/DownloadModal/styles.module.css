@@ -1,24 +1,26 @@
 .modal_container {
-    :global(.ui_checkbox_group_container) {
-		padding-top: 0px;
+	:global(.ui_checkbox_group_container) {
+		padding-top: 0;
 	}
-    :global(.ui_checkbox_container) {
+
+	:global(.ui_checkbox_container) {
 		padding: 8px;
-        font-size: 12px;
-        line-height: 18px;
-        color: #333333;
+		font-size: 12px;
+		line-height: 18px;
+		color: #333;
 	}
-    :global(.ui_checkbox_container:nth-child(even)) {
-		background: #FFFAEE;
-        border: 1px solid #FFEAD4;
+
+	:global(.ui_checkbox_container:nth-child(even)) {
+		background: #fffaee;
+		border: 1px solid #ffead4;
 	}
 }
 
 .select_checkbox {
-    background: #FFFAEE;
-    margin: 8px;
-    border: 1px solid #FFEAD5;
-    margin-bottom: 0px;
-    color: #F68B21 !important;
-    font-weight: 600;
+	margin: 8px;
+	margin-bottom: 0;
+	font-weight: 600;
+	color: #f68b21 !important;
+	background: #fffaee;
+	border: 1px solid #ffead5;
 }

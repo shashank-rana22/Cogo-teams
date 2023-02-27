@@ -154,11 +154,11 @@ function GenerateMawb({
 		taskItem?.volume * 166.67,
 	).toFixed(2);
 	let agentCharge = 0;
-	formData.agentOtherCharges.forEach((item) => {
+	formData?.agentOtherCharges?.forEach((item) => {
 		agentCharge += Number(item.price);
 	});
 	let carrierCharge = 0;
-	formData.carrierOtherCharges.forEach((item) => {
+	formData?.carrierOtherCharges?.forEach((item) => {
 		carrierCharge += Number(item.price);
 	});
 	const data = {
