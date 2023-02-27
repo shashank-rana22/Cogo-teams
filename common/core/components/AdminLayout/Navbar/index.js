@@ -22,6 +22,7 @@ function Navbar({
 	pinnedNavs = [],
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
+	inCall = false,
 }) {
 	const ref = useRef(null);
 
@@ -121,6 +122,7 @@ function Navbar({
 									partner_user_id={partner_user_id}
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
+									inCall={inCall}
 								/>
 							))}
 						</div>
@@ -134,6 +136,7 @@ function Navbar({
 									partner_user_id={partner_user_id}
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
+									inCall={inCall}
 								/>
 							))}
 						</div>
