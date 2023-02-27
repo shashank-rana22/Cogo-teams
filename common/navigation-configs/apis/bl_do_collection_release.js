@@ -47,6 +47,24 @@ const apis = [
 		feature      : 'bl_do_collection_release',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_organization_document_inventory',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
+	{
+		api          : 'list_bl_details_inventory',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
+	{
+		api          : 'create_organization_document_inventory',
+		access_type  : 'private',
+		service_name : 'organization',
+		feature      : 'inventory_management',
+	},
 ];
 
 export default apis;
