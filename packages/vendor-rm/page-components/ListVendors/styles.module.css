@@ -21,7 +21,17 @@
 	font-weight: 500;
 }
 
-.pending {
+.pending_verification {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.pending_from_user {
 	display: flex;
 	align-items: center;
 	color: #ed3726;
@@ -66,6 +76,7 @@
 }
 
 .filter_container {
+	position: relative;
 	display: flex;
 	align-items: center;
 	padding: 7px 12px;
@@ -73,7 +84,6 @@
 	background-color: #fff;
 	border: 1px solid #000;
 	border-radius: 4px;
-	position: relative;
 }
 
 .dot {

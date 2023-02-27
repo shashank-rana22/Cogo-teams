@@ -18,6 +18,7 @@ function useGetVendor() {
 
 	const [activeStepper, setActiveStepper] = useState('vendor_details');
 	const [vendorInformation, setVendorInformation] = useState({});
+	const [showSuccessScreen, setShowSuccessScreen] = useState(false);
 
 	const [{ loading: getVendorLoading = false }, trigger] = useRequest({
 		url    : 'get_vendor',
@@ -69,6 +70,8 @@ function useGetVendor() {
 		setVendorInformation,
 		getVendor,
 		getVendorLoading,
+		showSuccessScreen,
+		setShowSuccessScreen,
 		onBack,
 	};
 }

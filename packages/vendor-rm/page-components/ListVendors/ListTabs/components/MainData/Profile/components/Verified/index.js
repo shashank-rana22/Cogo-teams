@@ -33,6 +33,7 @@ function Verified({ vendor_details = {} }) {
 			</div>
 		);
 	}
+
 	if (kyc_status === 'rejected') {
 		return (
 			<div
