@@ -18,7 +18,7 @@ function audienceListColumns({ onClickEdit, onClickDeleteIcon }) {
 			Header   : 'AUTH ROLES',
 			accessor : (items) => (
 				<div className={styles.topics}>
-					{startCase(items?.description) || '--'}
+					{startCase(items?.auth_function) || '--'}
 				</div>
 			),
 		},

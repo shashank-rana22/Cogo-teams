@@ -39,6 +39,7 @@ function CreateFAQ() {
 		onClickPublish,
 		showModalOnCancel,
 		setShowModalOnCancel,
+		audienceOptions,
 	} = useCreateQuestions();
 
 	const {
@@ -206,8 +207,27 @@ function CreateFAQ() {
 					</div>
 
 				</div>
+				<div className={styles.select_topic_container}>
 
-				<div />
+					<div className={styles.label_container}>
+						<div className={styles.input_label}>
+							Select Audience or
+						</div>
+						<div
+							className={styles.create_tag_label}
+							// onClick={handleCreateTopic}
+						>
+							Create New Audience
+						</div>
+					</div>
+
+					<MultiselectController
+						name="audience_ids"
+						control={control}
+						options={audienceOptions}
+					/>
+
+				</div>
 
 				<div className={styles.faq_answer_container}>
 					<div className={styles.input_label}>

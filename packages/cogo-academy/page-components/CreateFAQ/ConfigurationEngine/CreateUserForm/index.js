@@ -2,8 +2,10 @@ import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useMemo } from 'react';
 
+import useGetAudience from '../hooks/useGetFaqAudience';
 import useListCogoEntity from '../hooks/useListCogoEntities';
 
 import styles from './styles.module.css';
@@ -12,16 +14,20 @@ import createAudienceControls from './utils/createAudienceControls';
 
 function CreateUserForm({ setConfigurationPage }) {
 	const router = useRouter();
+	const { general } = useSelector((state) => state);
+	const { id:audienceId, update } = general.query || {};
 
 	const {
 		createAudience,
 		control,
 		handleSubmit,
 		// errors,
-		// setValue,
+		setValue,
 		reset,
 		watch,
 	} = useCreateAudience({ setConfigurationPage });
+
+	const { fetchAudience = () => {}, data, loading } = useGetAudience();
 
 	const {
 		listCogoEntities,
@@ -32,6 +38,13 @@ function CreateUserForm({ setConfigurationPage }) {
 		listCogoEntities();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		if (update && audienceId) {
+			fetchAudience();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [audienceId]);
 
 	const entity_options = [];
 
@@ -49,6 +62,15 @@ function CreateUserForm({ setConfigurationPage }) {
 	const watchPlatform = watch('platform');
 
 	const { controls } = createAudienceControls({ entity_options, watchFunctions });
+
+	useEffect(() => {
+		(Object.keys(controls) || []).forEach((controll) => {
+			const { name:controlName } = controls[controll] || {};
+			setValue(controlName, data?.[controlName]);
+		});
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
 
 	const onClickBackIcon = () => {
 		reset();
@@ -81,7 +103,11 @@ function CreateUserForm({ setConfigurationPage }) {
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
 
-			<div className={styles.header}>Add User Group</div>
+			<div className={styles.header}>
+				{audienceId ? 'Update' : 'Add'}
+				{' '}
+				User Group
+			</div>
 
 			{(Object.keys(controls) || []).map((controlItem) => {
 				const { name = '', label = '' } = controls[controlItem] || {};
@@ -94,12 +120,14 @@ function CreateUserForm({ setConfigurationPage }) {
 							<div className={styles.label}>
 								{label}
 							</div>
+							<div className={styles.controller_wrapper}>
+								<DynamicController
+									{...controls[controlItem]}
+									control={control}
+									name={name}
+								/>
+							</div>
 
-							<DynamicController
-								{...controls[controlItem]}
-								control={control}
-								name={name}
-							/>
 						</div>
 					);
 				}

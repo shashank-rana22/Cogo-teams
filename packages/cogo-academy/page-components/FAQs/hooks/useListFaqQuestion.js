@@ -11,8 +11,6 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tag
 		url    : 'list_faq_questions',
 	}, { manual: true });
 
-	console.log('tag', tagId);
-
 	const fetchFaqQuestions = async () => {
 		try {
 			await trigger({

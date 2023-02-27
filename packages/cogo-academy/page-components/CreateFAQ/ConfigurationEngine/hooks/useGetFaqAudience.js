@@ -1,17 +1,16 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useGetFaq() {
+function useGetAudience() {
 	const { general } = useSelector((state) => state);
-	const { update = '', id } = general.query || {};
+	const { id } = general.query || {};
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : update && id ? `/get_faq_${update}` : null,
-
+		url    : '/get_faq_audience',
 	}, { manual: false });
 
-	const fetchFaq = async () => {
+	const fetchAudience = async () => {
 		try {
 			await trigger({
 				params: { id },
@@ -21,7 +20,7 @@ function useGetFaq() {
 		}
 	};
 
-	return { fetchFaq, data: data?.[`${update}_details`], loading };
+	return { fetchAudience, data: data?.data, loading };
 }
 
-export default useGetFaq;
+export default useGetAudience;
