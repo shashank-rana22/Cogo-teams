@@ -2,7 +2,6 @@
 	display: flex;
 	flex-basis: 26%;
 	flex-direction: column;
-
 	height: 350px;
 	padding: 10px;
 	margin-bottom: 12px;
@@ -23,6 +22,7 @@
 	flex-direction: column;
 	overflow-y: scroll;
 }
+
 .redflags_lists::-webkit-scrollbar {
 	display: none;
 }
@@ -34,6 +34,7 @@
 	padding: 10px 0;
 	border-bottom: 1px solid #f8f2e7;
 }
+
 .escalations_lists::-webkit-scrollbar {
 	display: none;
 }
@@ -63,10 +64,14 @@
 	color: #4f4f4f;
 }
 
-.kam {
+.job_role {
+	width: 80px;
 	padding-left: 14px;
+	overflow: hidden;
 	font-size: 10px;
 	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .notification_nos {

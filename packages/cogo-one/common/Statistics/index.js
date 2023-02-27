@@ -6,7 +6,8 @@ import { STATS } from '../../configurations/dummyStatisticsData';
 
 import styles from './styles.module.css';
 
-function Statistics({ loading = false }) {
+function Statistics({ loading = false, callsAnalytics }) {
+	const { average_call_duration } = callsAnalytics || {};
 	return (
 		<>
 			{STATS.map((item) => {
@@ -30,7 +31,7 @@ function Statistics({ loading = false }) {
 											>
 												<span className={styles.time_durations_value}>{itm.duration >= 60 ? (itm.duration / 60).toFixed(2) : itm.duration}</span>
 												{' '}
-												<span>{itm.duration >= 60 ? 'hr' : 'min'}</span>
+												<span>{average_call_duration >= 60 ? 'hr' : 'min'}</span>
 											</div>
 										)}
 
@@ -50,7 +51,7 @@ function Statistics({ loading = false }) {
 
 										{stat.icon}
 
-										<div className={styles.social_name}>{ stat.channel}</div>
+										<div className={styles.social_name}>{stat.channel}</div>
 
 									</div>
 
