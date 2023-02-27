@@ -61,7 +61,8 @@ function GenerateMAWB({
 		taskItem.volume * 166.67,
 	).toFixed(2));
 
-	const chargeableWeight = chargeableWt * formValues.packageCount;
+	const chargeableWeight = formValues ? chargeableWt * formValues.packagesCount
+		: chargeableWt * taskItem.packagesCount;
 
 	useEffect(() => {
 		finalFields.forEach((c:any) => {
@@ -79,7 +80,7 @@ function GenerateMAWB({
 	useEffect(() => {
 		setValue('chargeableWeight', chargeableWeight);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formValues.weight, formValues.packageCount]);
+	}, [formValues.weight, formValues.packagesCount]);
 
 	return (
 		<div className={styles.container}>

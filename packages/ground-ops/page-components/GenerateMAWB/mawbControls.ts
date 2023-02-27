@@ -88,7 +88,7 @@ const mawbControls = () => ({
 			},
 		},
 		{
-			name        : 'freight',
+			name        : 'paymentTerm',
 			type        : 'select',
 			className   : 'primary lg',
 			label       : 'Shipment Type',
@@ -105,7 +105,7 @@ const mawbControls = () => ({
 	],
 	package: [
 		{
-			name        : 'packageCount',
+			name        : 'packagesCount',
 			placeholder : 'Package Count',
 			label       : 'Package Count',
 			type        : 'number',
@@ -286,7 +286,7 @@ const mawbControls = () => ({
 			value              : [
 				{
 					length  : '',
-					breadth : '',
+					width   : '',
 					height  : '',
 					package : '',
 				},
