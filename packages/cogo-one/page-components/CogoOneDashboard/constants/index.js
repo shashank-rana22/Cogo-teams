@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {} from '@cogoport/icons-react';
 
 export const cogoOneLogo = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg';
@@ -15,4 +16,4 @@ export const missedcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault
 export const incomingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png';
 export const outgoingcallIcon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png';
 export const agentAvatar = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg';
-export const emptyAgentActivityicon = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg';
+export const emptyImage = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg';

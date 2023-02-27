@@ -24,6 +24,7 @@ function CogoOneDashboard({ isAdminView = true }) {
 		listData,
 		loading,
 	};
+
 	return (
 		<div className={styles.prime_container}>
 			{isAdminView

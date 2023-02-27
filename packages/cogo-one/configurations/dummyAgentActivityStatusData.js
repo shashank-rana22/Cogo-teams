@@ -15,7 +15,7 @@ export const agentActivityStatus = [
 	}, {
 		nos  : '20',
 		text : 'Offline Agents',
-		icon : <IcCRedCircle fill="#828282" />,
+		icon : <IcCRedCircle fill="grey" />,
 		key  : 'offline',
 	},
 ];
