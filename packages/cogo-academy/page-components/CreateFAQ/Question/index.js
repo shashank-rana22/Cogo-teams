@@ -7,8 +7,8 @@ import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import Spinner from '../../../commons/Spinner';
+import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
-import CreateUserForm from '../ConfigurationEngine/CreateUserForm';
 
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
@@ -50,6 +50,7 @@ function CreateFAQ() {
 		showModalOnCancel,
 		setShowModalOnCancel,
 		audienceOptions,
+		handleAudienceSearch,
 	} = useCreateQuestions({ data });
 
 	const {
@@ -236,6 +237,7 @@ function CreateFAQ() {
 					<MultiselectController
 						name="audience_ids"
 						control={control}
+						onSearch={handleAudienceSearch}
 						options={audienceOptions}
 					/>
 

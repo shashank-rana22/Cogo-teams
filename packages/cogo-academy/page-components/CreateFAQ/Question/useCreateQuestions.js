@@ -10,6 +10,7 @@ function useCreateQuestions({ data }) {
 	const { general } = useSelector((state) => state);
 	const [editorValue, setEditorValue] = useState('');
 	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
+	const [searchAudience, setSearchAudience] = useState(null);
 
 	const { mode = '', id :questionId = '' } = general.query || {};
 
@@ -26,7 +27,18 @@ function useCreateQuestions({ data }) {
 		? onSubmitUpdatedForm
 		: onSubmitCreateForm;
 
-	const { topicOptions, tagOptions, audienceOptions } = useGetTopicTagList();
+	const { topicOptions, tagOptions, audienceOptions: unfilteredAudienceOptions } = useGetTopicTagList();
+
+	const handleAudienceSearch = (searchTerm) => {
+		setSearchAudience(searchTerm);
+	};
+
+	const audienceOptions = (unfilteredAudienceOptions || []).filter((o) => {
+		if (typeof searchAudience === 'string') {
+			return o.q.toLowerCase().includes(searchAudience.toLowerCase());
+		}
+		return true;
+	});
 
 	const {
 		handleSubmit,
@@ -51,6 +63,7 @@ function useCreateQuestions({ data }) {
 		showModalOnCancel,
 		setShowModalOnCancel,
 		audienceOptions,
+		handleAudienceSearch,
 	};
 }
 
