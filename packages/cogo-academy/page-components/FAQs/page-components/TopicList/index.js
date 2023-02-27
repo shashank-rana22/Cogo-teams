@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 
 function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 	const ALL_TOPICS = 'All Topics';
+	
 
 	const {
 		refetchTopic = () => {},
@@ -22,7 +23,6 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 		activeTab = { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
-	console.log('tagger', tagId);
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}

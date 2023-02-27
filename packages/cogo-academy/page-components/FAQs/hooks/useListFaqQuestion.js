@@ -5,7 +5,6 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tag
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
-
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_faq_questions',
@@ -38,13 +37,11 @@ function useListFaqQuestions({ searchState = '', topicId = '', sort = false, tag
 	useEffect(() => {
 		fetchFaqQuestions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, searchState, topicId]);
+	}, [page, searchState, topicId, tagId]);
 
 	const { page_limit, total_count } = data || {};
 
 	const paginationData = { page_limit, total_count };
-
-	console.log('page_limit :: ', page_limit);
 
 	return {
 		refetchQuestions: fetchFaqQuestions,

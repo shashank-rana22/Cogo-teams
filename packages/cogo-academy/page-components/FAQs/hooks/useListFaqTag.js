@@ -1,3 +1,4 @@
+import { IcMCross } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -6,7 +7,7 @@ function useListFaqTag() {
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'faq/list_faq_tags',
+		url    : '/list_faq_tags',
 	}, { manual: true });
 
 	const fetchFaqTag = async () => {
@@ -28,12 +29,24 @@ function useListFaqTag() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqTag(); }, []);
 
+	const options = [];
+
+	(data?.list || []).forEach((item) => {
+		const option = {
+			key      : item.id,
+			children : item?.display_name,
+		};
+
+		options.push(option);
+	});
+
 	return {
 		refetchTag: fetchFaqTag,
 		data,
 		loading,
 		activeTab,
 		setActiveTab,
+		options,
 	};
 }
 
