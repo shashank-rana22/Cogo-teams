@@ -1,0 +1,34 @@
+
+.filter_dot{
+    height: 5px;
+	width: 5px;
+	background: #000;
+	border-radius: 50%;
+	position: absolute;
+	top: 3px;
+	right: 3px;
+}
+
+.flex_filter{
+    display: flex;
+    align-items: center;
+}
+
+.popover{
+	:global {
+		.ui_popover_container{
+			max-width: 500px !important;
+		}
+	}
+}
+
+
+.filter_dot{
+	height: 5px;
+	width: 5px;
+	background: #000;
+	border-radius: 50%;
+	position: relative;
+	top: -8px;
+	left: 9px;
+}

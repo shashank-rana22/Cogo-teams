@@ -1,0 +1,45 @@
+.container{
+ text-align: end;
+}
+
+.customer_card {
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 0.6rem;
+    display: flex;
+}
+
+.pt {
+    padding-top: 0.8rem;
+}
+
+.flex_div{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.title_tag{
+    font-weight: 500;
+    font-size: 10px;
+    color: #828282;
+}
+
+.count_tag{
+    font-weight: 600;
+}
+
+@media (min-width: 968px) and (max-width: 1024px) {
+  
+    .title_tag{
+        font-weight: 500;
+        font-size: 9px;
+        color: #828282;
+    }
+    
+    .count_tag{
+        font-weight: 600;
+        font-size: 10px;
+    }
+    
+  }

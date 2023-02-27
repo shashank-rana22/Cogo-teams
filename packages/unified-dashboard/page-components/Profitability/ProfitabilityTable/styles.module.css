@@ -1,0 +1,15 @@
+.container{
+    overflow: auto;
+}
+
+.table_container{
+    background-color: #ffffff;
+	overflow-x: auto;
+	border-radius: 5px;
+    width: fit-content;
+}
+
+.pagination_container{
+    display: flex;
+	justify-content: flex-end;
+}

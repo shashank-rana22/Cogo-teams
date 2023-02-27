@@ -1,0 +1,33 @@
+.card_wrapper{
+    background: #fff;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+	padding: 14px;
+	border-radius: 4px;
+	max-width: 100%;
+	margin-top: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.card_container{
+    border-top: 1px solid #e0e0e0;
+    padding-bottom: 14px;
+}
+
+.arrow_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.collapse_icon_active {
+    transform: rotate(180deg);
+    transition: transform 400ms;
+}
+.collapse_icon_inactive {
+    transform: rotate(0deg);
+    transition: transform 400ms;
+}

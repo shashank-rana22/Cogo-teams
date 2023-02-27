@@ -1,9 +1,17 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
+import React, { useState } from 'react';
+
+import BookingAnalysis from './BookingAnalysis';
+import Profitability from './Profitability';
 
 function UnifiedDashboard() {
+	const [headerFilters, setHeaderFilters] = useState({ currency: false });
 	return (
-		<div>UnifiedDashboard</div>
+		<>
+			<BookingAnalysis headerFilters={headerFilters} />
+			<Profitability headerFilters={headerFilters} />
+		</>
+
 	);
 }
 
