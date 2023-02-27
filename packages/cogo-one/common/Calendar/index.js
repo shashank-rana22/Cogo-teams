@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IcMArrowDoubleLeft, IcMArrowDoubleRight } from '@cogoport/icons-react';
-import { format, addDays } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { CalendarEntity } from './Entity';
@@ -115,8 +115,7 @@ function Calendar({ props }) {
 						key      : `cal-week-${pagination}-${index}`,
 						label    : `Week ${week.iterator}`,
 						subLabel : `${format(week.date, 'MMM')} ${week.start} to ${week.end}`,
-						from     : addDays(week.date, 1),
-						to       :	addDays(week.date, 7),
+						date     : new Date(week.date),
 					},
 				);
 			}

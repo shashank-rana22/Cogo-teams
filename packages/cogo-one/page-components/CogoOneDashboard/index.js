@@ -1,4 +1,6 @@
+/* eslint-disable max-len */
 import { useSelector } from '@cogoport/store';
+import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AdminDashboard from './AdminDashboard';
@@ -9,8 +11,9 @@ import styles from './styles.module.css';
 function CogoOneDashboard() {
 	const [timeline, setTimeline] = useState('day');
 	const [calendarData, setCalendarData] = useState([]);
-	const [selectedItem, setSelectedItem] = useState('');
-	const selectedTimeline = (calendarData || []).filter((d) => d.key === selectedItem)?.[0];
+	const [selectedItem, setSelectedItem] = useState(format(new Date(), 'dd MMM YYYY'));
+	const selectedTimeline = (calendarData || []).filter((d) => format(d.date, 'dd MMM YYYY') === format(selectedItem, 'dd MMM YYYY'))?.[0];
+
 	const { loading, listData = {} } = useGetCogoOneDashboard({ timeline, selectedTimeline, selectedItem });
 
 	const {
@@ -34,10 +37,14 @@ function CogoOneDashboard() {
 	};
 
 	return (
-		<div className={styles.prime_container}>
-			{isAgentView
-				? <AgentDashboard {...commomProps} />
-				: <AdminDashboard {...commomProps} />}
+		<div>
+			{selectedItem && (
+				<div className={styles.prime_container}>
+					{isAgentView
+						? <AgentDashboard {...commomProps} />
+						: <AdminDashboard {...commomProps} />}
+				</div>
+			)}
 		</div>
 	);
 }

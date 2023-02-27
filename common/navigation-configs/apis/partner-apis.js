@@ -10367,7 +10367,7 @@ const partner = {
 		{
 			api          : 'get_cogo_one_dashboard',
 			access_type  : 'private',
-			service_name : 'unified_dashboard',
+			service_name : 'communication',
 		},
 	],
 };

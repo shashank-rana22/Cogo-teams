@@ -2,7 +2,8 @@
 	display: flex;
 	flex: 1;
 	justify-content: space-evenly;
-	margin: 10px 0px;	width: 300%;
+	width: 300%;
+	margin: 10px 0;
 	font-style: normal;
 	cursor: pointer;
 	transform: translateX(-33.3%);
@@ -16,31 +17,33 @@
 	text-align: center;
 }
 
-.date_container{
-    padding: 0 22px;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 6px;
-    padding: auto;
-    padding-top:5px;
-    height: 50px;
-    width:fit-content;
+.date_container {
+	width: fit-content;
+	height: 50px;
+	padding: 0 22px;
+	padding: auto;
+	padding-top: 5px;
+	background: rgb(255 255 255 / 40%);
+	border-radius: 6px;
 }
+
 .date_container:hover {
-	background: #FFFFFF;
-	box-shadow: 0px 0px 10px #D4D4D4;
+	background: #fff;
+	box-shadow: 0 0 10px #d4d4d4;
 	transition: 0.1s;
 }
 
-.date_container:hover .day_hours1{
+.date_container:hover .day_hours1 {
 	font-size: 18px;
 	font-weight: 500;
-	color: #444444;
+	color: #444;
 	transition: 0.3s;
 }
-.date_container:hover .day_hours2{
+
+.date_container:hover .day_hours2 {
 	font-size: 12px;
 	font-weight: 500;
-	color: #444444;
+	color: #444;
 	transition: 0.3s;
 }
 
@@ -66,28 +69,28 @@
 	white-space: nowrap;
 }
 
-.active{
-    background-color: #FFFFFF;
-	box-shadow: 0px 0px 10px #ABABAB ;
+.active {
+	background-color: #fff;
+	box-shadow: 0 0 10px #ababab;
 	transition: 0.1s;
-	
+
 	&:hover {
-		background-color: #FFFFFF;
-		box-shadow: 0px 0px 10px #ABABAB ;
+		background-color: #fff;
+		box-shadow: 0 0 10px #ababab;
 		transition: 0.1s;
 	}
 
 	.day_hours1 {
 		font-size: 18.5px;
 		font-weight: 500;
-		color: #444444;
-		transition: 0.3s;
-	}
-	.day_hours2 {
-		font-size: 12.5px;
-		font-weight: 500;
-		color: #444444;
+		color: #444;
 		transition: 0.3s;
 	}
 
+	.day_hours2 {
+		font-size: 12.5px;
+		font-weight: 500;
+		color: #444;
+		transition: 0.3s;
+	}
 }
