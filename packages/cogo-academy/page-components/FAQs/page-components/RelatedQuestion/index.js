@@ -27,15 +27,20 @@ function RelatedQuestion({ tags }) {
 
 	return (
 		<div>
+			<span className={styles.relatedquestion}>Related Questions</span>
 			<div className={styles.title}>
 				Q.
 				{' '}
 				{data?.list[1]?.question_abstract}
+				{' '}
+				?
 			</div>
 			<div className={styles.title}>
 				Q.
 				{' '}
 				{data?.list[2]?.question_abstract}
+				{' '}
+				?
 			</div>
 		</div>
 	);

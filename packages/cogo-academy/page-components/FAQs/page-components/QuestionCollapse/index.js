@@ -11,9 +11,13 @@ function QuestionsCollapse({ collapse, questions }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
-				Q.  {startCase(
+				Q.
+				{' '}
+				{startCase(
 					questions.question_abstract,
-				)} ?
+				)}
+				{' '}
+				?
 
 				<IcMArrowDown
 					width={16}

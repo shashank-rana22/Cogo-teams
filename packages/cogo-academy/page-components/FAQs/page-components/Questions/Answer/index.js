@@ -198,15 +198,9 @@ function Answer({ questions = {} }) {
 					</Modal>
 				</div>
 			</div>
-			<div>
-				<span className={styles.relatedquestion}>Related Questions</span>
-				<div
-					className={styles.subtitle_related_question}
-					style={{ opacity: '0.8' }}
-				/>
-				<RelatedQuestion tags={questions.faq_tags} />
 
-			</div>
+			<RelatedQuestion tags={questions.faq_tags} />
+
 		</>
 	);
 }
