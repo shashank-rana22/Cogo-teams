@@ -39,7 +39,7 @@ const useSendMessage = ({ channel_type = '', sender = null }) => {
 					service_id : id,
 					source     : 'CogoOne:AdminPlatform',
 					lead_user_id,
-					sender,
+					sender     : id,
 				},
 			});
 		} catch (error) {
