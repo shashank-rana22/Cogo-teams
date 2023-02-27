@@ -12,7 +12,7 @@ import SearchFound from '../SearchFound';
 
 import styles from './styles.module.css';
 
-function TopicList({ tabTitle = '', searchState = '', tagId = '' }) {
+function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 	const ALL_TOPICS = 'All Topics';
 
 	const {
@@ -22,7 +22,7 @@ function TopicList({ tabTitle = '', searchState = '', tagId = '' }) {
 		activeTab = { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
-
+	console.log('tagger', tagId);
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
@@ -30,7 +30,7 @@ function TopicList({ tabTitle = '', searchState = '', tagId = '' }) {
 	return (
 		<div>
 			{' '}
-			{(!searchState && !tagId)
+			{(!searchState && (tagId.length === 0))
 				? (
 					<div className={styles.grid_container} style={{ display: 'flex' }}>
 						<div
@@ -73,7 +73,7 @@ function TopicList({ tabTitle = '', searchState = '', tagId = '' }) {
 												</div>
 
 												<div className={styles.subtitle}>
-													{startCase(singleOption.description) 
+													{startCase(singleOption.description)
 													|| startCase('No Description added')}
 												</div>
 											</div>

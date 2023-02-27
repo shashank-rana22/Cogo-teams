@@ -7,7 +7,7 @@ import Questions from '../../Questions';
 
 import styles from './styles.module.css';
 
-function TagQuestions({ tagId = '' }) {
+function TagQuestions({ tagId = [] }) {
 	// const [show, setShow] = useState(false);
 	// const [searchState, setSearchState] = useState('');
 	const {

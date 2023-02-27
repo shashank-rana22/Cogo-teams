@@ -8,7 +8,7 @@ import TopicList from '../TopicList';
 import styles from './styles.module.css';
 
 function PopularTags({ tabTitle = '', searchState = '' }) {
-	const [tags, setTags] = useState('');
+	const [tags, setTags] = useState([]);
 	const {
 		refetchTag = () => {},
 		data,
@@ -16,7 +16,7 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 		activeTab,
 		setActiveTab,
 	} = useListFaqTag();
-
+	console.log('efef', tags);
 	return (
 		<div style={{ marginBottom: 12 }}>
 			<h4 style={{ marginTop: 12 }}>
@@ -35,7 +35,7 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 				>
 					<Button
 						themeType="tertiary"
-						onClick={() => setTags(item.id)}
+						onClick={() => setTags([...tags, item.id])}
 						size="sm"
 						color="white"
 					>
