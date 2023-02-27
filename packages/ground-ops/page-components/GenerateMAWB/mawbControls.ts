@@ -105,6 +105,85 @@ const mawbControls = () => ({
 	],
 	package: [
 		{
+			name               : 'dimension',
+			label              : 'Dimensions (in cm)',
+			type               : 'fieldArray',
+			className          : 'primary lg',
+			span               : 12,
+			showButtons        : true,
+			noDeleteButtonTill : 1,
+			value              : [
+				{
+					length  : '',
+					width   : '',
+					height  : '',
+					package : '',
+				},
+			],
+			controls: [
+				{
+					name        : 'length',
+					placeholder : 'Length',
+					label       : 'Length',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						required : 'Length is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'width',
+					placeholder : 'Width',
+					label       : 'Width',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						required : 'Width is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'height',
+					placeholder : 'Height',
+					label       : 'Height',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						required : 'Height is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+				{
+					name        : 'packages',
+					placeholder : 'No of Packages',
+					label       : 'Number of Packages',
+					type        : 'number',
+					className   : 'primary lg',
+					span        : 2.5,
+					rules       : {
+						required : 'No of Packages is Required',
+						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+					},
+				},
+			],
+		},
+		{
+			name      : 'volumetricWeight',
+			type      : 'number',
+			className : 'primary lg',
+			label     : 'Volumetric Weight',
+			span      : 5,
+			rules     : {
+				required: 'Volumetric Weight is Required',
+			},
+		},
+		{
+		},
+		{
 			name        : 'packagesCount',
 			placeholder : 'Package Count',
 			label       : 'Package Count',
@@ -274,85 +353,6 @@ const mawbControls = () => ({
 			rules     : {
 				required: 'Accounting Information is Required',
 			},
-		},
-		{
-			name               : 'dimension',
-			label              : 'Dimensions (in cm)',
-			type               : 'fieldArray',
-			className          : 'primary lg',
-			span               : 12,
-			showButtons        : true,
-			noDeleteButtonTill : 1,
-			value              : [
-				{
-					length  : '',
-					width   : '',
-					height  : '',
-					package : '',
-				},
-			],
-			controls: [
-				{
-					name        : 'length',
-					placeholder : 'Length',
-					label       : 'Length',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2.5,
-					rules       : {
-						required : 'Length is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'width',
-					placeholder : 'Width',
-					label       : 'Width',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2.5,
-					rules       : {
-						required : 'Width is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'height',
-					placeholder : 'Height',
-					label       : 'Height',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2.5,
-					rules       : {
-						required : 'Height is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-				{
-					name        : 'packages',
-					placeholder : 'No of Packages',
-					label       : 'Number of Packages',
-					type        : 'number',
-					className   : 'primary lg',
-					span        : 2.5,
-					rules       : {
-						required : 'No of Packages is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
-					},
-				},
-			],
-		},
-		{
-			name      : 'volumetricWeight',
-			type      : 'text',
-			className : 'primary lg',
-			label     : 'Volumetric Weight',
-			span      : 5,
-			rules     : {
-				required: 'Volumetric Weight is Required',
-			},
-		},
-		{
 		},
 		{
 			name      : 'declaredValueForCarriage',

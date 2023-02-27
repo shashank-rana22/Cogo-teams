@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Modal, Stepper, Breadcrumb } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
@@ -56,13 +57,21 @@ function GenerateMAWB({
 		...fields.handling,
 	];
 
-	const chargeableWt:any = (Math.max(
+	let chargeableWt:any = (Math.max(
 		formValues.weight,
-		taskItem.volume * 166.67,
+		(taskItem.volume * 166.67),
 	).toFixed(2));
 
-	const chargeableWeight = formValues ? chargeableWt * formValues.packagesCount
-		: chargeableWt * taskItem.packagesCount;
+	let chargeableWeight = 	chargeableWt * taskItem.packagesCount;
+
+	useEffect(() => {
+		chargeableWt = (Math.max(
+			formValues.weight,
+			formValues.volumetricWeight,
+		).toFixed(2));
+		chargeableWeight = chargeableWt * formValues.packagesCount;
+		setValue('chargeableWeight', chargeableWeight.toFixed(2));
+	}, [formValues.volumetricWeight, formValues.packagesCount]);
 
 	useEffect(() => {
 		finalFields.forEach((c:any) => {
@@ -72,15 +81,20 @@ function GenerateMAWB({
 		setValue('declaredValueForCarriage', 'NVD');
 		setValue('city', 'NEW DELHI');
 		setValue('place', 'NEW DELHI');
-		setValue('chargeableWeight', chargeableWeight);
 		setValue('class', 'q');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
-		setValue('chargeableWeight', chargeableWeight);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formValues.weight, formValues.packagesCount]);
+		let totalVolume:any = 0;
+		(formValues.dimension || []).forEach((dimensionObj) => {
+			totalVolume
+				+= Number(dimensionObj.length)
+				* Number(dimensionObj.width)
+				* Number(dimensionObj.height)
+				* Number(dimensionObj.packages);
+		});
+		setValue('volumetricWeight', (totalVolume * 166.67).toFixed(2));
+	}, [JSON.stringify(formValues.dimension)]);
 
 	return (
 		<div className={styles.container}>
