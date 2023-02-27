@@ -18,6 +18,9 @@ const cogoAcademy = {
 		navigation : 'cogo_academy-faq',
 		isMainNav  : true,
 	},
+	'/[partner_id]/learning/faq/answer': {
+		navigation: 'cogo_academy-faq',
+	},
 };
 
 module.exports = cogoAcademy;

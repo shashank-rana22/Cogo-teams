@@ -1,6 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import { Tabs, TabPanel } from '@cogoport/components';
 import { Badge } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -15,12 +17,19 @@ import styles from './styles.module.css';
 
 function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 	const ALL_TOPICS = 'All Topics';
+	const {
+		general,
+	} = useSelector((state) => state);
+	const router = useRouter();
 
+	const { query } = general || {};
+
+	const { topicId = '', topicName = '' } = query || {};
 	const {
 		refetchTopic = () => {},
 		data,
 		loading = false,
-		activeTab = { ALL_TOPICS },
+		activeTab = topicId ? { topicName } : { ALL_TOPICS },
 		setActiveTab,
 	} = useListFaqTopic();
 
