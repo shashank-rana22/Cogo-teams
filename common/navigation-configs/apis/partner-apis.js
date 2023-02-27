@@ -9810,6 +9810,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'get_air_india_lms_password',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	whatsapp_communication: [
 		{
