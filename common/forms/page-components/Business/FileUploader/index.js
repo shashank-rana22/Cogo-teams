@@ -10,9 +10,9 @@ function FileUploader(props) {
 	const {
 		onChange,
 		defaultValues,
-		showProgress,
 		multiple,
 		docName,
+		uploadIcon = null,
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null); // remove
@@ -84,10 +84,7 @@ function FileUploader(props) {
 
 		const finalUrl = url.split('?')[0];
 
-		return {
-			fileName: file.name,
-			finalUrl,
-		};
+		return finalUrl;
 	};
 
 	const handleChange = async (values) => {
@@ -139,7 +136,7 @@ function FileUploader(props) {
 				onClick={handleDelete}
 				loading={loading}
 				uploadDesc="Upload files"
-				uploadIcon={<IcMUpload height={40} width={40} />}
+				uploadIcon={uploadIcon || <IcMUpload height={40} width={40} />}
 				fileData={urlStore}
 			/>
 

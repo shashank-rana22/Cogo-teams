@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
@@ -45,6 +45,14 @@ function MyProfile() {
 	const { name = '' } = detailsData || {};
 
 	const { password = '' } = getValues();
+
+	if (loading) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.main_container_wrapper}>
@@ -120,6 +128,7 @@ function MyProfile() {
 						disabled={apiLoading || !password}
 						onClick={handleSubmit(onCreate, onError)}
 						themeType="primary"
+
 					>
 						UPDATE
 					</Button>
