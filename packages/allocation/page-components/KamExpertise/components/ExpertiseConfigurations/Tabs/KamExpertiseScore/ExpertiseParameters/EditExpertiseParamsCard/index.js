@@ -236,7 +236,7 @@ const dummyData = [
 
 function EditExpertiseParamsCard({ expertiseData }) {
 	const req = dummyData.find((element) => 'customer_expertise' in element);
-	console.log('req :: ', req);
+	// console.log('req :: ', req);
 
 	return (
 		<div className={styles.card_container}>

@@ -47,6 +47,7 @@ function KamExpertiseScoreConfig() {
 				{
 					Object.entries(EXPERTISE_CARDS_MAPPING).map(([key, value]) => (
 						<Accordion id={key} title={titleSection(value)}>
+							{/* like re-activation */}
 							<ExpertiseParameters expertiseData={value} />
 						</Accordion>
 					))
