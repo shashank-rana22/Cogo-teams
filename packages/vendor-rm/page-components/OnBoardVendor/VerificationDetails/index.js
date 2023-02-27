@@ -34,7 +34,7 @@ function VerificationDetails({
 
 					<div className={styles.button_container}>
 						<div className={styles.text_container}>
-							Submit the following details for verification?
+							Submit for verification?
 						</div>
 
 						<div className={styles.declaration}>
