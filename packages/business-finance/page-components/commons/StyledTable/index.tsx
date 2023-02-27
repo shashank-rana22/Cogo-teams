@@ -3,6 +3,7 @@ import React from 'react';
 
 import { TableProps } from '../Interfaces/index';
 
+import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function StyledTable({ id, className, columns, data, ...rest }:TableProps) {
@@ -15,6 +16,8 @@ function StyledTable({ id, className, columns, data, ...rest }:TableProps) {
 				className={className}
 				{...rest}
 			/>
+
+			{data.length === 0 && <EmptyState />}
 		</div>
 	);
 }

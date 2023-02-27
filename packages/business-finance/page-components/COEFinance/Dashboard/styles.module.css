@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .stat {
 	font-size: 36px;
 	font-weight: 500;
@@ -64,14 +65,14 @@
 }
 
 .card_label {
-	padding-right: 100px;
+	padding-right: 60px;
 	padding-left: 36px;
 	font-size: 14px;
 	font-weight: 500;
 }
 
 .card_value {
-	padding-left: 20px;
+	padding-left: 14px;
 	font-size: 30px;
 	font-weight: 600;
 }
@@ -161,6 +162,23 @@
 	font-weight: 600;
 }
 
+.jobs {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 20px 0 0;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.job_border {
+	width: 96px;
+	height: 2px;
+	margin: 4px 0 0;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
 .border_main {
 	width: 96px;
 	height: 2px;
@@ -181,4 +199,9 @@
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 8px;
+}
+
+.table_data {
+	height: 45vh;
+	overflow: scroll;
 }
