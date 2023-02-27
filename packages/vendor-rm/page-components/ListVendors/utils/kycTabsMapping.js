@@ -7,7 +7,7 @@ const getKycTabsMapping = ({ dataStats }) => {
 		{
 			label     : 'Pending Vendors',
 			valueKey  : 'kyc_pending_count',
-			kycStatus : 'pending',
+			kycStatus : ['pending_from_user', 'pending_verification'],
 		},
 		{
 			label     : 'Verified Vendors',
