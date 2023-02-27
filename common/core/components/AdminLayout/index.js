@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import VoiceCall from './VoiceCall';
 
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
@@ -20,7 +21,13 @@ function AdminLayout({
 		user_data: profile || {},
 	}));
 
-	const { user: { id: user_id = '' }, partner: { id: partner_id = '', partner_user_id = '' } } = user_data;
+	const {
+		user: { id: user_id = '' },
+		partner: { id: partner_id = '', partner_user_id = '' },
+		voice_call = {},
+	} = user_data;
+
+	const { inCall = false } = voice_call || {};
 
 	const {
 		pinListLoading = false,
@@ -59,8 +66,10 @@ function AdminLayout({
 					partner_user_id={partner_user_id}
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
+					inCall={inCall}
 				/>
 			) : null}
+			<VoiceCall />
 		</div>
 	);
 }
