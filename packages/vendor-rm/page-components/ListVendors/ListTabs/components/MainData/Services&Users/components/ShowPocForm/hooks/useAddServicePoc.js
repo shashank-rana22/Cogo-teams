@@ -22,11 +22,13 @@ const useAddServicePoc = ({
 		watch,
 	} = useForm();
 
+	const isMainPOCPresent = getVendorData.pocs.length !== 0;
+
 	const {
 		general : { query = {} },
 	} = useSelector((state) => state);
 
-	const { partner_id = '' } = query;
+	const { partner_id = '', vendor_id } = query;
 
 	const watchCategory = watch('category');
 
@@ -60,32 +62,24 @@ const useAddServicePoc = ({
 		const data = getValues();
 
 		const {
-			name,
-			email,
 			mobile_number,
 			whatsapp_number,
 			contact_proof_url,
-			category,
-			sub_category,
 			cogoport_office_id,
-			poc_role,
 		} = data || {};
 
 		try {
 			const payload = {
-				name,
-				email,
+				...data,
 				mobile_country_code   : mobile_number?.country_code,
 				mobile_number         : mobile_number?.number,
 				whatsapp_country_code : whatsapp_number?.country_code,
 				whatsapp_number       : whatsapp_number?.number,
 				vendor_poc_proof      : contact_proof_url?.finalUrl,
-				vendor_id             : getVendorData?.vendor_details?.id,
+				vendor_id,
 				cogo_entity_id        : partner_id,
-				category,
-				sub_category,
+				is_primary            : !isMainPOCPresent,
 				cogoport_office_id,
-				poc_role,
 			};
 
 			await trigger({
@@ -94,7 +88,8 @@ const useAddServicePoc = ({
 
 			refetchServicesPocs();
 
-			Toast.success('service poc mapping added successfully');
+			Toast.success('Service Poc added Successfully');
+
 			setShowForm('');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Failed to create service poc, please try again...');
