@@ -1,4 +1,5 @@
 import {
+	Modal,
 	Button,
 	RadioGroup,
 	Placeholder,
@@ -8,6 +9,7 @@ import {
 } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
 import performanceIcons from '../../../../constants/performance-icon-mappings';
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
@@ -37,12 +39,14 @@ function FeedBackForm({
 		setRefetchReportees,
 	});
 
+	const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+
 	const onSubmit = () => {
 		if (Object.values(rating).includes(0) || isEmpty(comment)) {
-			Toast.error('Please provide rating for all the parameters');
+			Toast.error('Please provide rating for all the questions');
 			return;
 		}
-		onSubmitData();
+		setOpenConfirmationModal(true);
 	};
 
 	const newOptions = Array(5).fill('').map((_, index) => ({
@@ -189,12 +193,40 @@ function FeedBackForm({
 					size="md"
 					themeType="primary"
 					disabled={action === 'show'}
-					loading={loading}
 					onClick={onSubmit}
 				>
 					Submit
 				</Button>
 			</div>
+
+			{openConfirmationModal
+			&& (
+				<Modal show={openConfirmationModal} onClose={() => setOpenConfirmationModal(false)}>
+					<Modal.Header title="Are you sure?" />
+					<Modal.Body style={{ border: 'none' }}>
+						<div>
+							This is the one time action per month, per user.
+							Are you sure about the feedback you gave?
+						</div>
+					</Modal.Body>
+					<Modal.Footer style={{ boxShadow: 'none' }}>
+						<Button
+							themeType="tertiary"
+							onClick={() => setOpenConfirmationModal(false)}
+							style={{ marginRight: '8px' }}
+						>
+							No
+						</Button>
+
+						<Button
+							onClick={() => onSubmitData({ setOpenConfirmationModal })}
+							loading={loading}
+						>
+							Yes
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</div>
 	);
 }

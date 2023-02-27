@@ -14,10 +14,11 @@ function NotifyModal({ setNotifyModal = () => {} }) {
 				<Checkbox
 					checked={sendToAll}
 					onChange={(e) => setSendToAll(e.target.checked)}
+					style={{ paddingLeft: '0px' }}
 
 				/>
 				<div className={styles.checkbox_label}>
-					Send to All Cogoport Users
+					Send to All Cogoport Managers
 					{' '}
 					<span>(Including CEOs)</span>
 				</div>

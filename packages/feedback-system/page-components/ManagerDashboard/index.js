@@ -1,8 +1,9 @@
-import { Select, Button } from '@cogoport/components';
+import { Toast, Select, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
+import EmptyState from '../../common/EmptyState';
 import PerformanceChart from '../../common/PerformanceChart';
 import useGetMonthStats from '../../hooks/useGetMonthStats';
 import getMonthControls from '../../utils/monthControls';
@@ -15,7 +16,7 @@ function ManagerDashboard() {
 
 	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats({ manager_id });
 
-	const { list = [], pagination_data = {} } = data;
+	const { list = [], pagination_data = {}, is_manager = true } = data;
 	const { total_count = '' } = pagination_data;
 
 	const monthControls = getMonthControls(params?.Year, params?.Month);
@@ -29,6 +30,19 @@ function ManagerDashboard() {
 	const handleClick = () => {
 		router.push('/feedback-system/manager-dashboard/feedback-management');
 	};
+
+	if (!is_manager) {
+		Toast.error('No Account Found In Your Team, Kindly Visit User Dashboard for Info Relevant to your accounts');
+		return (
+			<div className={styles.no_manager}>
+				<EmptyState
+					height="60%"
+					width="50%"
+					emptyText="No Account Found In Your Team"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div>

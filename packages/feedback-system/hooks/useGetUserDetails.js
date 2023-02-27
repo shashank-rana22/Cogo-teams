@@ -7,12 +7,14 @@ const useGetUserDetails = ({ userId = '' }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const getUserDetails = async () => {
-		await trigger({ params: { UserID: userId } });
+	const getUserDetails = () => {
+		trigger({ params: { UserID: userId } });
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => getUserDetails, []);
+	useEffect(() => {
+		getUserDetails();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return {
 		loading,

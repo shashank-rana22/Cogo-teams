@@ -3,6 +3,11 @@
 	font-weight: 700;
 }
 
+.no_manager {
+	height: calc(100vh - 48px);
+	background: #ffffff;
+}
+
 .stats_section {
 	margin-top: 16px;
 }

@@ -18,7 +18,7 @@ const useCreateUserFeedback = ({
 		method : 'post',
 	}, { manual: true });
 
-	const onSubmitData = async () => {
+	const onSubmitData = async ({ setOpenConfirmationModal = () => {} }) => {
 		const form_responses = [];
 		Object.keys(rating).forEach((id) => {
 			const { feedback, rating: question_rating = '' } = rating[id];
@@ -42,6 +42,7 @@ const useCreateUserFeedback = ({
 
 			Toast.success('Feedback Created Successfully');
 			setRefetchReportees(true);
+			setOpenConfirmationModal(false);
 			return;
 		} catch (e) {
 			Toast.error(getApiErrorString(e.data));

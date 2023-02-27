@@ -7,12 +7,14 @@ const useListDepartments = () => {
 		method : 'get',
 	}, { manual: true });
 
-	const getListDepartments = async () => {
-		await trigger();
+	const getListDepartments = () => {
+		trigger();
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => getListDepartments, []);
+	useEffect(() => {
+		getListDepartments();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return { data, loading, getListDepartments };
 };
