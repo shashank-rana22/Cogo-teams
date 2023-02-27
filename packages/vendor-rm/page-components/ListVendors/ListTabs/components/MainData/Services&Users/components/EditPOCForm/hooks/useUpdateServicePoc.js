@@ -10,7 +10,8 @@ import controls from '../../ShowPocForm/utils/controls';
 const useAddServicePoc = ({
 	showForm,
 	setShowForm = () => {},
-	refetchServicesPocs = () => {},
+	// refetchServicesPocs = () => {},
+	refetchVendorInfo,
 }) => {
 	const {
 		control,
@@ -48,7 +49,7 @@ const useAddServicePoc = ({
 
 			await trigger({ data: payload });
 
-			refetchServicesPocs();
+			refetchVendorInfo();
 
 			Toast.success('Service Poc updated Successfully');
 

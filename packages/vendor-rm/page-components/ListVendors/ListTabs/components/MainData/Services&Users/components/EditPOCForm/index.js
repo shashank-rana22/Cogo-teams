@@ -10,6 +10,7 @@ function EditPOCForm({
 	showForm,
 	setShowForm,
 	refetchServicesPocs,
+	refetchVendorInfo,
 }) {
 	const {
 		loading,
@@ -18,7 +19,12 @@ function EditPOCForm({
 		control,
 		handleSubmit,
 		onSubmit,
-	} = useAddServicePoc({ showForm, setShowForm, refetchServicesPocs });
+	} = useAddServicePoc({
+		showForm,
+		setShowForm,
+		refetchServicesPocs,
+		refetchVendorInfo,
+	});
 
 	return (
 		<Modal
