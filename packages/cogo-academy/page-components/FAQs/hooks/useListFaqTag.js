@@ -17,6 +17,7 @@ function useListFaqTag() {
 					filters: {
 						status: 'active',
 					},
+					sort_by                  : 'view_count',
 					page_limit               : 15,
 					pagination_data_required : false,
 				},
@@ -25,7 +26,6 @@ function useListFaqTag() {
 			console.log('error :: ', error);
 		}
 	};
-
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqTag(); }, []);
 

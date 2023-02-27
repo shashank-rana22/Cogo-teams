@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMArrowDown, IcMEyeopen } from '@cogoport/icons-react';
+import { IcMArrowRight, IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -19,7 +19,7 @@ function QuestionsCollapse({ collapse, questions }) {
 				{' '}
 				?
 
-				<IcMArrowDown
+				<IcMArrowRight
 					width={16}
 					height={16}
 					className={` ${styles.caret_arrow} ${arrow && styles.caret_active}`}

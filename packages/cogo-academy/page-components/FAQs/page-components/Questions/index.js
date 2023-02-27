@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
+import AnswerPage from '../AnswerPage';
 import QuestionsCollapse from '../QuestionCollapse';
 
-import Answer from './Answer';
 import styles from './styles.module.css';
 
 function Questions({ questions = {} }) {
@@ -19,7 +19,7 @@ function Questions({ questions = {} }) {
 			</div>
 
 			{open && (
-				<div className={styles.transition}><Answer questions={questions} /></div>
+				<div className={styles.transition}><AnswerPage questions={questions} /></div>
 			)}
 		</div>
 	);
