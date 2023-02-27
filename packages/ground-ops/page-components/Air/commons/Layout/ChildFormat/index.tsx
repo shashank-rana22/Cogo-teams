@@ -25,8 +25,6 @@ function FieldArray({
 	const childEmptyValues = { };
 
 	useEffect(() => {
-		console.log('dsd');
-
 		if (fields.length === 0) {
 			append(childEmptyValues);
 		}
