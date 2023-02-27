@@ -1,4 +1,4 @@
-import { Loader, Pagination } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import React from 'react';
 
 import EmptyState from './EmptyState';
@@ -28,7 +28,7 @@ function List({
 	const { list = {} }:any = data;
 	const { finalData } = GetFinalList({ list, data, loading });
 
-	const handleRender = () => (finalData || [1, 2, 3, 4, 5]).map((singleitem) => (
+	const handleRender = () => ((finalData.length && finalData) || Array(6).fill(1)).map((singleitem) => (
 		<ListItem
 			singleitem={singleitem}
 			fields={fields}
@@ -41,11 +41,8 @@ function List({
 		<section>
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
-				{!loading && finalData.length <= 0 ? <EmptyState />
-					: <div className="card-list-data">{handleRender()}</div>}
-				{
-					loading && <div className={styles.loader}><Loader /></div>
-				}
+				{!loading && (finalData.length) <= 0 && <EmptyState />}
+				{!!(loading || finalData.length) && (<div className="card-list-data">{handleRender()}</div>)}
 				{!loading && finalData.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination
