@@ -13,6 +13,7 @@ const ButtonContainerStyle = {
 
 function FormComponent({
 	controls = [],
+	loading,
 	handleSubmit = () => {},
 	onSubmit = () => {},
 	control,
@@ -69,6 +70,7 @@ function FormComponent({
 				setActiveStepper={setActiveStepper}
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
+				loading={loading}
 				style={ButtonContainerStyle}
 			/>
 		</form>

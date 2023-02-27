@@ -7,13 +7,13 @@ import styles from './styles.module.css';
 function BackButton() {
 	const router = useRouter();
 
-	const redirectHandler = () => {
-		router.back();
+	const goToDashboard = () => {
+		router.push('/vendors');
 	};
 
 	return (
 		<div>
-			<button className={styles.btn} onClick={() => { redirectHandler(); }}>
+			<button className={styles.btn} onClick={() => goToDashboard()}>
 				<IcMArrowBack />
 				<div className={styles.backer}>
 					Back to Dashboard

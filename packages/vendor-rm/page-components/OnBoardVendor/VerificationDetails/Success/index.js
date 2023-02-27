@@ -5,17 +5,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Success({ setVendorInformation }) {
+function Success({ setVendorInformation, setActiveStepper }) {
 	const router = useRouter();
 
 	const goToDashboard = () => {
 		router.push('/vendors');
 	};
 
-	const addNewVendor = () => {
-		router.push('/onboard-vendor');
+	const addNewVendor = async () => {
+		await setVendorInformation({});
 
-		setVendorInformation({});
+		setActiveStepper('vendor_details');
+
+		router.push('/onboard-vendor');
 	};
 
 	return (

@@ -26,10 +26,12 @@ function VerificationDetails({
 		setIsDeclarationAccepted,
 	} = useKyc({ getVendor, setShowSuccessScreen });
 
+	const { vendor_details = {} } = vendorInformation;
+
 	return (
 		<div>
 			{showSuccessScreen ? (
-				<Success setVendorInformation={setVendorInformation} />
+				<Success setVendorInformation={setVendorInformation} setActiveStepper={setActiveStepper} />
 			) : (
 				<>
 					<Header />
@@ -49,7 +51,7 @@ function VerificationDetails({
 								I hereby declare that I have verified the identity and financial
 								information of
 								{' '}
-								<b>{vendorInformation.vendor_details.business_name}</b>
+								<b>{vendor_details.business_name}</b>
 								{' '}
 								for KYC purposes, and the information
 								provided by them is true and accurate to the best of my knowledge.
