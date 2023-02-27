@@ -10,7 +10,7 @@ const navigationMappingShipper = {
 		icon          : 'nav-tasks',
 		line          : true,
 		main_apis     : [],
-		possible_apis : [...app_apis.app_dashboard, ...app_apis.app_pay_later],
+		possible_apis : [...app_apis.app_dashboard, ...app_apis.app_pay_later, ...app_apis.export_factoting],
 		module_type   : 'dashboards',
 	},
 	app_discover_rates: {
