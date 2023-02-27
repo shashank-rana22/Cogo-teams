@@ -7,13 +7,17 @@ import GetOrganization from './GetOrganization';
 const GetFinalList = ({ list, data, loading }) => {
 	const { shipmentPendingTasks = [], airportIds = [], importerExporterIds = [], airlineIds = [] } = list;
 
-	const { data: airportData = {}, listAirport } = GetLocation({ airportIds });
+	const { data: airportData = {}, listAirport, loading: locLoading } = GetLocation({ airportIds });
 	const { list: airportList = [] } = airportData;
 
-	const { data: organizationData = {}, listOrganization } = GetOrganization({ importerExporterIds });
+	const {
+		data: organizationData = {},
+		listOrganization,
+		loading: orgLoading,
+	} = 	GetOrganization({ importerExporterIds });
 	const { list: organizationList = [] } = organizationData;
 
-	const { data: operatorData = {}, listOperator } = GetOperator({ airlineIds });
+	const { data: operatorData = {}, listOperator, loading: opLoading } = GetOperator({ airlineIds });
 	const { list: operatorList = [] } = operatorData;
 
 	useEffect(() => {
@@ -83,8 +87,9 @@ const GetFinalList = ({ list, data, loading }) => {
 			return airlineData;
 		});
 	});
+	const resourceLoading = locLoading || orgLoading || opLoading || loading;
 
-	return { finalData: airlineData };
+	return { finalData: airlineData, resourceLoading };
 };
 
 export default GetFinalList;

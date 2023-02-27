@@ -1,0 +1,6 @@
+.sure_approve{
+	display: flex;
+	align-items: end;
+	font-weight: 600;
+	min-height: 50px;
+}

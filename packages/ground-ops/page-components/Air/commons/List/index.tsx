@@ -26,23 +26,32 @@ function List({
 	functions,
 } :Props) {
 	const { list = {} }:any = data;
-	const { finalData } = GetFinalList({ list, data, loading });
+	const { finalData = [], resourceLoading } = GetFinalList({ list, data, loading });
 
-	const handleRender = () => ((finalData.length && finalData) || Array(6).fill(1)).map((singleitem) => (
-		<ListItem
-			singleitem={singleitem}
-			fields={fields}
-			functions={functions}
-			loading={loading}
-		/>
-	));
+	const render = () => {
+		let showlist = Array(6).fill(1);
+		if (finalData.length) showlist = finalData;
+
+		if (resourceLoading || finalData.length) {
+			return (showlist).map((singleitem) => (
+				<div className="card-list-data">
+					<ListItem
+						singleitem={singleitem}
+						fields={fields}
+						functions={functions}
+						loading={resourceLoading}
+					/>
+				</div>
+			));
+		}
+		return <EmptyState />;
+	};
 
 	return (
 		<section>
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
-				{!loading && (finalData.length) <= 0 && <EmptyState />}
-				{!!(loading || finalData.length) && (<div className="card-list-data">{handleRender()}</div>)}
+				{render()}
 				{!loading && finalData.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination

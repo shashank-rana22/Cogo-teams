@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -7,11 +7,13 @@ import { ApprovalPendingFields } from '../../configurations/approval_pending_fie
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
 import DownloadModal from './DownloadModal';
+import styles from './styles.module.css';
 
 function ApprovalPending({
 	data, loading, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
 }) {
 	const { fields } = ApprovalPendingFields;
+	const [showApprove, setShowApprove] = useState(null);
 	const [show, setShow] = useState(false);
 
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
@@ -27,8 +29,9 @@ function ApprovalPending({
 		setItem(singleItem);
 	};
 
-	const handleUpdate = (values) => {
-		updateDocument(values, listAPi);
+	const handleUpdate = async (values) => {
+		await updateDocument(values, listAPi);
+		setShowApprove(null);
 	};
 
 	const functions = {
@@ -67,7 +70,7 @@ function ApprovalPending({
 						themeType="secondary"
 						style={{ border: '1px solid #333' }}
 						disabled={updateLoading}
-						onClick={() => { handleUpdate(singleItem); }}
+						onClick={() => { setShowApprove(singleItem); }}
 					>
 						Approve
 					</Button>
@@ -84,6 +87,39 @@ function ApprovalPending({
 				functions={functions}
 			/>
 			{show && <DownloadModal show={show} setShow={setShow} />}
+			{showApprove && (
+				<Modal
+					size="md"
+					show={showApprove}
+					onClose={() => setShowApprove(false)}
+					scroll={false}
+				>
+
+					<Modal.Body>
+						<div className={styles.sure_approve}>
+							Are you sure, you want to approve it ?
+						</div>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							style={{ marginRight: '10px', border: '1px solid #333' }}
+							size="md"
+							onClick={() => setShowApprove(null)}
+							themeType="secondary"
+						>
+							Cancel
+						</Button>
+						<Button
+							size="md"
+							themeType="accent"
+							onClick={() => { handleUpdate(showApprove); }}
+						>
+							Approve
+
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</>
 	);
 }
