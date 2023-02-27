@@ -11,9 +11,9 @@ function CogoOneDashboard({ isAdminView = true }) {
 	const [selectedItem, setSelectedItem] = useState('');
 	const selectedTimeline = (calendarData || []).filter((d) => d.key === selectedItem)?.[0];
 
-	const { listData } = useGetCogoOneDashboard({ timeline, selectedTimeline });
+	const { listData = {} } = useGetCogoOneDashboard({ timeline, selectedTimeline });
 
-	console.log(selectedTimeline, listData, 'calendarData');
+	console.log(listData, 'listData');
 
 	const commomProps = {
 		timeline,
@@ -22,6 +22,7 @@ function CogoOneDashboard({ isAdminView = true }) {
 		setCalendarData,
 		selectedItem,
 		setSelectedItem,
+		listData,
 	};
 	return (
 		<div className={styles.prime_container}>

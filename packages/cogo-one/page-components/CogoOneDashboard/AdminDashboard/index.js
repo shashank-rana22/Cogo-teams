@@ -13,7 +13,8 @@ import RedFlags from './RedFlags';
 import styles from './styles.module.css';
 
 function AdminDashboard(props) {
-	const {timeline, setTimeline} = props || {};
+	const { timeline, setTimeline, listData } = props || {};
+	const { escalations = [], calls_analytics = {} } = listData || {};
 	const [activeTab, setActiveTab] = useState('day');
 
 	return (
@@ -34,7 +35,7 @@ function AdminDashboard(props) {
 						</div>
 						<LineChart />
 					</div>
-					<RedFlags />
+					<RedFlags escalations={escalations} />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
 					<AgentActivity />
@@ -43,7 +44,7 @@ function AdminDashboard(props) {
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
 					<div className={styles.two_statistics}>
-						<Statistics />
+						<Statistics callsAnalytics={calls_analytics} />
 					</div>
 
 					<div className={styles.four_characterisctics_container}>
