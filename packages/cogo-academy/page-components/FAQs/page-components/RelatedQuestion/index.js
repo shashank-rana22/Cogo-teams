@@ -6,7 +6,7 @@ import useListFaqQuestions from '../../hooks/useListFaqQuestion';
 import styles from './styles.module.css';
 
 function RelatedQuestion({ tags, question_abstract }) {
-	const tagId = tags[0].id;
+	const tagId = tags?.[0]?.id;
 	const {
 		page,
 		setPage = () => {},

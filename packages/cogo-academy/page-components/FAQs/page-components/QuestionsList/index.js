@@ -28,9 +28,9 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' })
 				<Spinner
 					height={60}
 					width={60}
-					outerBorderColor="#FFF"
-					spinBorderColor="#000"
 					borderWidth="7px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
 				/>
 			</div>
 		);

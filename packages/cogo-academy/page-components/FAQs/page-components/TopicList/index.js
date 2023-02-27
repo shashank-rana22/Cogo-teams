@@ -53,7 +53,6 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 										<div>
 											<div className={styles.title}>
 												{ALL_TOPICS}
-												:
 											</div>
 
 											<div className={styles.subtitle}>
@@ -69,7 +68,6 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 											<div>
 												<div className={styles.title}>
 													{truncate(startCase(singleOption?.name))}
-													:
 												</div>
 
 												<div className={styles.subtitle}>
