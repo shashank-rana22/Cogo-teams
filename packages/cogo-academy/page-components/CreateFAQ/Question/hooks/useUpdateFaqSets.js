@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 
 import useCreateFaqPayload from './useCreateFaqPayload';
 
-function useUpdateFaqSet({ setQuestionPreview, editorValue }) {
+function useUpdateFaqSet({ setQuestionPreview, editorValue, data }) {
 	const router = useRouter();
 
 	const {
@@ -21,7 +21,7 @@ function useUpdateFaqSet({ setQuestionPreview, editorValue }) {
 
 	const onSubmitUpdatedForm = async (values) => {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue });
+		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'update', data });
 
 		try {
 			const res = await trigger({

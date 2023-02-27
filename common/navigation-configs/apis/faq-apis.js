@@ -85,6 +85,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'faq',
 		},
+		{
+			api          : 'update_faq_audience',
+			access_type  : 'private',
+			service_name : 'faq',
+		},
 
 	],
 	faq: [

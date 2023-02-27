@@ -23,7 +23,7 @@ const style = {
 
 function CreateFAQ() {
 	const router = useRouter();
-
+	const { fetchQuestion, query, data, loading } = useGetQuestion();
 	const {
 		editorValue,
 		setEditorValue,
@@ -40,7 +40,7 @@ function CreateFAQ() {
 		showModalOnCancel,
 		setShowModalOnCancel,
 		audienceOptions,
-	} = useCreateQuestions();
+	} = useCreateQuestions({ data });
 
 	const {
 		setConfigurationPage,
@@ -57,9 +57,7 @@ function CreateFAQ() {
 		resetValue,
 	} = useCreateNewTagOrTopic();
 
-	const { fetchQuestion, query, data, loading } = useGetQuestion();
-
-	const { question_abstract, faq_tags = [], faq_topics = [], answers = [] } = data || {};
+	const { question_abstract, faq_tags = [], faq_topics = [], answers = [], faq_audiences = [] } = data || {};
 
 	useEffect(() => {
 		fetchQuestion();
@@ -76,11 +74,17 @@ function CreateFAQ() {
 		filterTopics.push(item?.id);
 	});
 
+	const filterAudiences = [];
+	(faq_audiences || []).forEach((item) => {
+		filterAudiences.push(item?.id);
+	});
+
 	useEffect(() => {
 		if (!loading) {
 			setQuestionValue('question_abstract', question_abstract);
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
+			setQuestionValue('audience_ids', filterAudiences);
 			setEditorValue(answers?.[0]?.answer);
 		}
 
@@ -215,7 +219,6 @@ function CreateFAQ() {
 						</div>
 						<div
 							className={styles.create_tag_label}
-							// onClick={handleCreateTopic}
 						>
 							Create New Audience
 						</div>

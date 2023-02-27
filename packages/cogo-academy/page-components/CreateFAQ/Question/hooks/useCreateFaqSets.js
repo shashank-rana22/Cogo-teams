@@ -22,7 +22,7 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 
 	const onSubmit = async (values) => {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue });
+		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create' });
 
 		try {
 			const res = await trigger({
@@ -46,9 +46,14 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 
 	const onClickPublish = async ({ data }) => {
 		const payload = {
-			id     : data?.id,
-			state  : 'published',
-			status : 'active',
+			id      : data?.id,
+			state   : 'published',
+			status  : 'active',
+			answers : [{
+				state  : 'published',
+				status : 'active',
+
+			}],
 		};
 
 		try {
