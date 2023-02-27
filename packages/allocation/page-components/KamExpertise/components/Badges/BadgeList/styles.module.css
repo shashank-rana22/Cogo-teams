@@ -1,0 +1,76 @@
+.container {
+	padding: 24px;
+	padding-bottom:0;
+	background-color: #fff;
+	
+	@media (max-width: 576px) {
+		padding-top: 50px;
+	}
+	border-radius:16px;
+}
+
+.number_tag {
+	display: flex;
+	justify-content: space-between;
+}
+
+.badge_name_tag {
+	display: flex;
+	justify-content: left;
+	font-weight: 500;
+	
+}
+
+.desc {
+	display: flex;
+	margin-bottom: 48px;
+	font-weight: 500;
+}
+
+.description {
+	padding-left: 4px;
+	font-weight: 400;
+	margin:32px 0;
+}
+
+.modified {
+	display: flex;
+	margin-top:64px;
+	font-weight: 500;
+	align-item:flex-end;
+	justify-content:space-between;
+}
+
+.card_description {
+	flex: 2;
+}
+
+.score_badge {
+	display: flex;
+	flex: 3;
+	justify-content: space-between;
+}
+
+.main_card {
+	display: flex;
+}
+
+
+.badge_card {
+	padding: 0 56px 0 0;
+	border-right: 1px solid #e0e0e0;
+}
+
+.badge_icon {
+	align-self: center;
+	padding:10px;
+}
+
+.score_container {
+	display: flex;
+	flex: 2.5;
+	flex-direction: column;
+	margin:0 64px 16px 16px;
+	font-weight: 700;
+	padding:0 0 0 48px ;
+}

@@ -1,76 +1,100 @@
 .container {
-	padding: 24px;
-	padding-bottom:0;
-	background-color: #fff;
-	
-	@media (max-width: 576px) {
-		padding-top: 50px;
+  padding: 25px;
+  margin-top: 16px;
+  background: #fff;
+}
+
+.fields_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.fields_container > p:last-child {
+  margin-left: 16px;
+}
+
+.text_styles {
+  font-size: 12px;
+  color: #333333;
+}
+
+.display_flex {
+  display: flex;
+}
+
+.text_styles2 {
+  font-size: 12px;
+  color: #221f20;
+  opacity: 0.6;
+}
+.content_container {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.top_border {
+  margin-top: 28px;
+}
+
+.lower_background {
+  padding: 20px;
+  margin-top: 28px;
+  background: #e2e2e2;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+.verticalLine{
+	width: 1px ;
+	height: "100%";
+	margin: 0px 28px;
+	background-color:  #000;
+}
+
+.card_container {
+  flex: 1;
+  padding: 0 10px 0 30px;
+  margin-top: 10px;
+  border-right: 1px solid #000000;
+}
+
+.file_select_style{
+	margin: 20px 10px 0 0;
+	width: "70%";
+	:global(.ui_upload_droparea_container) {
+		border-radius: 8px;
 	}
-	border-radius:16px;
+	:global(.ui_3hLO-){
+		margin-bottom: 0px;
+	}
+  :global(.ui_lqy5Q){
+    margin:8px 0 0 0 ;
+  }
 }
 
-.number_tag {
-	display: flex;
-	justify-content: space-between;
+.lower_subheader2 {
+  font-weight: 500;
+  color: #4f4f4f;
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+.icm_info {
+  height: 15px;
+  width: 15px;
+  color: black;
+  margin-left: 4px;
 }
 
-.badge_name_tag {
-	display: flex;
-	justify-content: left;
-	font-weight: 500;
-	
+.last_item {
+  border-right: none;
 }
 
-.desc {
-	display: flex;
-	margin-bottom: 48px;
-	font-weight: 500;
-}
-
-.description {
-	padding-left: 4px;
-	font-weight: 400;
-	margin:32px 0;
-}
-
-.modified {
-	display: flex;
-	margin-top:64px;
-	font-weight: 500;
-	align-item:flex-end;
-	justify-content:space-between;
-}
-
-.card_description {
-	flex: 2;
-}
-
-.score_badge {
-	display: flex;
-	flex: 3;
-	justify-content: space-between;
-}
-
-.main_card {
-	display: flex;
-}
-
-
-.badge_card {
-	padding: 0 56px 0 0;
-	border-right: 1px solid #e0e0e0;
-}
-
-.badge_icon {
-	align-self: center;
-	padding:10px;
-}
-
-.score_container {
-	display: flex;
-	flex: 2.5;
-	flex-direction: column;
-	margin:0 64px 16px 16px;
-	font-weight: 700;
-	padding:0 0 0 48px ;
+.btncls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 24px;
 }
