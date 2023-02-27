@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
 import GetCard from './getCard';
@@ -6,8 +6,9 @@ import GetLabelInputPair from './getLabelInputPair';
 import Header from './header';
 import styles from './styles.module.css';
 
-function CreateBadgeV2() {
+function CreateBadgeV2({ setCreateBadge }) {
 	const [value, setValue] = useState([]);
+	// const [show, setShow] = useState(false);
 
 	const params = {
 		name: {
@@ -75,11 +76,15 @@ function CreateBadgeV2() {
 			inputPlaceHolder : '9000',
 		},
 	];
+	const onClose = () => {
+		setCreateBadge((pv) => !pv);
+	};
 	return (
-		<section className={styles.container}>
-			<Header />
-			<div className={styles.content_container}>
-				{
+		<Modal size="xl" show onClose={onClose} placement="center">
+			<section className={styles.container}>
+				<Header />
+				<div className={styles.content_container}>
+					{
 					labelInputPairs && labelInputPairs.map((data) => (
 						<GetLabelInputPair
 							labelName={data.labelName}
@@ -90,11 +95,11 @@ function CreateBadgeV2() {
 						/>
 					))
 				}
-			</div>
-			<div className={styles.lower_background}>
-				<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
-				<div className={styles.display_flex}>
-					{
+				</div>
+				<div className={styles.lower_background}>
+					<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
+					<div className={styles.display_flex}>
+						{
 						medalType.map((data, index) => (
 							<GetCard
 								medalType={data.medalType}
@@ -103,13 +108,22 @@ function CreateBadgeV2() {
 							/>
 						))
 					}
+					</div>
 				</div>
-			</div>
-			<div className={styles.btncls}>
-				<Button size="md" themeType="secondary" style={{ marginRight: 10, borderWidth: 0 }}>Cancel</Button>
-				<Button size="md" themeType="primary">Save</Button>
-			</div>
-		</section>
+				<div className={styles.btncls}>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: 10, borderWidth: 0 }}
+						onClick={onClose}
+					>
+						Cancel
+
+					</Button>
+					<Button size="md" themeType="primary">Save</Button>
+				</div>
+			</section>
+		</Modal>
 	);
 }
 

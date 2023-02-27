@@ -46,7 +46,7 @@ function Badges() {
 			{
 				createBadge && (
 					<div>
-						<CreateBadgeV2 />
+						<CreateBadgeV2 setCreateBadge={setCreateBadge} />
 					</div>
 				)
 			}
