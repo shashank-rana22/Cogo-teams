@@ -44,10 +44,9 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	const { data, loading, setPage, listAPi, searchValue, setSearchValue } = useListShipmentPendingTasks({ activeTab });
 
 	useEffect(() => {
-		// if (activeTab === 'new_awb') { listAPi(); }
-		if (activeTab === 'new_awb') { listAPi({ filter: filters }); }
-		if (activeTab === 'approval_pending') { listAPi({ filter: filters }); }
-		if (activeTab === 'approved_awb') { listAPi({ filter: filters }); }
+		if (['new_awb', 'approval_pending', 'approved_awb'].includes(activeTab)) {
+			listAPi({ filter: filters });
+		}
 	}, [activeTab, JSON.stringify(filters)]);
 
 	return (
