@@ -16,6 +16,7 @@ function getFireStoreQuery({
 			orderBy('new_message_sent_at', 'desc'),
 		);
 	}
+
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'tags') {
 			queryFilters = [
@@ -53,7 +54,7 @@ function getFireStoreQuery({
 			omniChannelCollection,
 			...queryFilters,
 			where('session_type', '==', 'admin'),
-			where('spectators_ids', 'array_contains', userId),
+			where('spectators_ids', 'array-contains', userId),
 			orderBy('new_message_sent_at', 'desc'),
 		);
 	}
