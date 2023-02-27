@@ -1,4 +1,10 @@
-import { isEmpty } from '@cogoport/utils';
+import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { useRequest } from '@cogoport/request';
+import { merge } from '@cogoport/utils';
 
 import contactControls from '../../../../../../OnBoardVendor/ContactDetails/utils/controls';
 import paymentControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
@@ -11,10 +17,27 @@ const useResubmitKyc = ({
 }) => {
 	const controls = getControls({});
 
+	const {
+		control: Control,
+		formState: { errors: Errors },
+		handleSubmit: handleSubmitKyc,
+		getValues,
+		setValue,
+	} = useForm();
+
+	const [{ loading }, trigger] = useRequest({
+		url    : 'update_vendor',
+		method : 'post',
+	}, { manual: true });
+
 	const { documents = [] } = data;
 
+	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params: { filters: { type: ['country'] } },
+	}));
+
 	const { vendor_details = {} } = data;
-	// const { kyc_rejection_feedbacks = [] } = vendor_details;
+	const { kyc_rejection_feedbacks = [] } = vendor_details;
 
 	const VENDOR_FIELDS_MAPPING = [
 		{
@@ -34,12 +57,15 @@ const useResubmitKyc = ({
 			value : 'company_type',
 		},
 	];
-	const kyc_rejection_feedbacks = ['invalid_pan_or_gst', 'invalid_company_type', 'invalid_country'];
 
 	const newControls = (kyc_rejection_feedbacks || []).map((item) => {
 		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item);
 		const { value } = object;
 		const newcontrol = controls.find((getItem) => getItem.name === value);
+
+		if (object.value === 'country_id') {
+			return { ...newcontrol, ...countryOptions };
+		}
 
 		return newcontrol;
 	});
@@ -66,13 +92,56 @@ const useResubmitKyc = ({
 			newControls.push(paymentControl);
 		}
 	});
-	console.log('x', newControls);
+
+	const document_ids = rejected_documents.map((item) => item.id);
+
+	const getDocments = ({ rejected_documents: RejectedDocuments, values }) => {
+		const Documents = RejectedDocuments.map((item) => {
+			if (item.document_type === 'registration_proof') {
+				return { id: item.id, url: values.registration_proof_url?.finalUrl };
+			}
+			if (item.document_type === 'poc_proof') {
+				return { id: item.id, url: values.contact_proof_url?.finalUrl };
+			}
+			return { id: item.id, url: values.bank_document_url?.finalUrl };
+		});
+
+		return Documents;
+	};
+
+	const ResubmitKYC = async () => {
+		const values = getValues();
+
+		const filtered_documents = getDocments({ rejected_documents, values });
+		const payload = {
+			documents           : filtered_documents,
+			business_name       : values.business_name || undefined,
+			country_id          : values.country_id || undefined,
+			company_type        : values.company_type || undefined,
+			registration_number : values.registration_number || undefined,
+			kyc_status          : 'pending_verification',
+
+		};
+
+		try {
+			await trigger({
+				data: payload,
+			});
+			setshowKycModal(false);
+			refetchVendorInfo();
+			Toast.success('Updated successfully');
+		} catch (error) {
+			Toast.error(getApiErrorString(error));
+		}
 
 	const Data = {};
 
 	return {
-		Data,
 		newControls,
+		Control,
+		handleSubmitKyc,
+		Errors,
+		ResubmitKYC,
 	};
 };
 

@@ -24,7 +24,11 @@ function Heading1({
 	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal });
 
 	const {
-		Data,
+		newControls,
+		Control,
+		handleSubmitKyc,
+		Errors,
+		ResubmitKYC,
 	} = useResubmitKyc({ data, refetchVendorInfo, setshowKycModal });
 
 	const { kyc_status = '' } = vendor_details || {};
@@ -62,15 +66,15 @@ function Heading1({
 				onClose={() => setshowKycModal(false)}
 				className={styles.modal_container}
 			>
-				<Modal.Header title="Resubmit KYC Details" />
+				<Modal.Header title="Resubmit Rejected KYC Details" />
 				<Modal.Body>
 					<section
 						className={styles.bodyStyle}
 					>
 						<FormLayout
-							control={control}
-							fields={newFields}
-							errors={errors}
+							control={Control}
+							fields={newControls}
+							errors={Errors}
 						/>
 					</section>
 				</Modal.Body>
@@ -81,7 +85,7 @@ function Heading1({
 						style={{ marginRight: 10 }}
 						themeType="secondary"
 						onClick={() => {
-							setShowEditProfileModal(false);
+							setshowKycModal(false);
 						}}
 					>
 						Cancel
@@ -90,7 +94,7 @@ function Heading1({
 					<Button
 						size="md"
 						type="submit"
-						onClick={handleSubmit(onSubmit)}
+						onClick={handleSubmitKyc(ResubmitKYC)}
 					>
 						Submit
 					</Button>
