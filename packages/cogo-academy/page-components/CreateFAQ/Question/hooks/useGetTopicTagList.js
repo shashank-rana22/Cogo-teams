@@ -42,7 +42,7 @@ const useGetTopicTagList = () => {
 
 	const { entity_data } = useListCogoEntity();
 
-	const audienceLable = (item) => {
+	const audienceLabel = (item) => {
 		const {
 			auth_function = '',
 			auth_sub_function = '',
@@ -72,7 +72,7 @@ const useGetTopicTagList = () => {
 	});
 
 	(audienceList || []).forEach((item) => {
-		audienceOptions.push({ label: audienceLable(item), value: item?.id });
+		audienceOptions.push({ label: audienceLabel(item), value: item?.id });
 	});
 
 	return {
