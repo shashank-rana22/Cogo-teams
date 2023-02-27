@@ -46,6 +46,7 @@ function useCreateVendorContact({
 			mobile_number         : formattedValues?.mobile_number?.number,
 			whatsapp_country_code : formattedValues?.whatsapp_number?.country_code,
 			whatsapp_number       : formattedValues?.whatsapp_number?.number,
+			is_primary            : true,
 		};
 
 		try {
@@ -69,6 +70,22 @@ function useCreateVendorContact({
 		}
 	};
 
+	function getWhatsAppNumber() {
+		const whatsappNumber = contact_details.whatsapp_number;
+
+		if (typeof whatsappNumber === 'string') {
+			return {
+				number       : whatsappNumber,
+				country_code : contact_details.whatsapp_country_code,
+			};
+		}
+
+		return {
+			number       : contact_details.whatsappNumber?.number,
+			country_code : contact_details.whatsappNumber?.whatsapp_country_code,
+		};
+	}
+
 	useEffect(() => {
 		const mapping = {
 			mobile_number: {
@@ -77,13 +94,8 @@ function useCreateVendorContact({
 				country_code: contact_details?.mobile_number?.country_code
 								|| contact_details?.mobile_country_code,
 			},
-			whatsapp_number: {
-				number: contact_details?.whatsapp_number?.number
-								|| contact_details?.whatsapp_number,
-				country_code: contact_details?.whatsapp_number?.country_code
-								|| contact_details?.whatsapp_country_code,
-			},
-			contact_proof_url: contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
+			whatsapp_number   : getWhatsAppNumber(),
+			contact_proof_url : contact_details?.contact_proof_url?.finalUrl || contact_details?.contact_proof_url,
 		};
 
 		controls.forEach((field) => {

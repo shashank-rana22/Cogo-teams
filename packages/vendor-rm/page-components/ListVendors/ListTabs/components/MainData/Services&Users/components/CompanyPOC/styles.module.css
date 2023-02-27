@@ -27,7 +27,6 @@
 .box_info {
 	display: flex;
 	align-items: flex-start;
-    width: 100%;
 	justify-content: space-between;
 	width: 100%;
 }

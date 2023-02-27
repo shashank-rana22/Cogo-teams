@@ -73,6 +73,7 @@
 	background-color: #fff;
 	border: 1px solid #000;
 	border-radius: 4px;
+	position: relative;
 }
 
 .dot {
@@ -131,9 +132,12 @@
 }
 
 .filter_in_use {
+	position: absolute;
+	top: 8px;
+	right: 8px;
 	width: 8px;
 	height: 8px;
-	background-color: blue;
+	background-color: #ed3726;
 	border-radius: 50%;
 }
 

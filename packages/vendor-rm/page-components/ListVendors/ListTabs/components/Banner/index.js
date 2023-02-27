@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 const keysToDisplay = ['vendor_id', 'kyc_status', 'registration_number', 'service_category', 'service_sub_category', 'created_on'];
 
 function Banner({ data = {} }) {
-	const { vendor_details, services } = data;
+	const { vendor_details = {}, services = [] } = data;
 
 	const { kyc_status, serial_id, registration_number, created_at } = vendor_details || {};
 
