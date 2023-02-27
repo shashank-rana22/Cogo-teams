@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 import Spinner from '../../../commons/Spinner';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
+import CreateUserForm from '../ConfigurationEngine/CreateUserForm';
 
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
@@ -19,6 +20,15 @@ import useCreateQuestions from './useCreateQuestions';
 const style = {
 	width   : '100%',
 	padding : '12px',
+};
+
+const userFormStyle = {
+	controllerStyle: {
+		width: '100%',
+	},
+	buttonContainerStyle: {
+		justifyContent: 'flex-end',
+	},
 };
 
 function CreateFAQ() {
@@ -56,6 +66,8 @@ function CreateFAQ() {
 		formErrors,
 		// resetValue,
 		onClickCancelButton,
+		showCreateAudienceModal,
+		setShowCreateAudienceModal,
 	} = useCreateNewTagOrTopic();
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
@@ -211,7 +223,7 @@ function CreateFAQ() {
 						</div>
 						<div
 							className={styles.create_tag_label}
-							// onClick={handleCreateTopic}
+							onClick={() => setShowCreateAudienceModal(true)}
 						>
 							Create New Audience
 						</div>
@@ -282,14 +294,14 @@ function CreateFAQ() {
 				<Modal.Footer>
 					<Button
 						themeType="tertiary"
-						style={{ marginRight: '8' }}
+						style={{ marginRight: '16px' }}
 						onClick={onClickCancelButton}
 					>
-						Cancel
+						CANCEL
 					</Button>
 
 					<Button onClick={handleCreate(createFaqComponent)}>
-						Submit
+						SUBMIT
 					</Button>
 				</Modal.Footer>
 			</Modal>
@@ -325,6 +337,24 @@ function CreateFAQ() {
 					</Button>
 
 				</Modal.Footer>
+			</Modal>
+
+			<Modal
+				size="md"
+				show={showCreateAudienceModal}
+				onClose={() => setShowCreateAudienceModal(false)}
+				closeOnOuterClick={false}
+				showCloseIcon
+			>
+				<Modal.Header title="Create audience" />
+
+				<Modal.Body>
+					<CreateUserForm
+						setConfigurationPage={setConfigurationPage}
+						displayBackButton="No"
+						customStyle={userFormStyle}
+					/>
+				</Modal.Body>
 			</Modal>
 
 		</div>
