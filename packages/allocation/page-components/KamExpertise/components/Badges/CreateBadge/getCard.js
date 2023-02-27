@@ -1,4 +1,4 @@
-import { Input, FileSelect } from '@cogoport/components';
+import { Input, FileSelect, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -6,6 +6,21 @@ import styles from './styles.module.css';
 
 function GetCard(props) {
 	const { medalType, inputPlaceHolder, isLastItem } = props;
+
+	// const upload_props = {
+	// 	name            : 'flag_icon_url',
+	// 	showLabel       : false,
+	// 	label           : 'Flag Icon svg/image',
+	// 	span            : 12,
+	// 	type            : 'file',
+	// 	themeType       : 'secondary',
+	// 	drag            : true,
+	// 	multiple       	: true,
+	// 	uploadIcon      : 'ic-upload',
+	// 	onlyURLOnChange : true,
+	// 	accept          : 'image/*',
+	// 	uploadType      : 'aws',
+	// };
 
 	const [value, setValue] = useState();
 	return (
@@ -30,14 +45,20 @@ function GetCard(props) {
 				<IcMInfo className={styles.icm_info} />
 			</div>
 
-			<FileSelect
-				uploadDesc="Upload files here"
-				className={styles.file_select_style}
-				value={value}
-				onChange={(val) => setValue(val)}
-				// ? ask format
-				// accept=".png,.pkg"
-			/>
+			<div className={styles.display_flex} style={{ alignItems: 'flex-end' }}>
+				{/* <FileSelect {... upload_props} /> */}
+				<FileSelect
+					uploadDesc="Upload files here"
+					className={styles.file_select_style}
+					value={value}
+					onChange={(val) => setValue(val)}
+					// accept=".png,.pkg"
+				/>
+
+				<Button size="sm" themeType="primary">
+					Save
+				</Button>
+			</div>
 
 		</div>
 	);
