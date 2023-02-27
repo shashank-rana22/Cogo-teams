@@ -195,6 +195,11 @@ const apis = [
 		feature      : 'bl_do',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'raise_query',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
 ];
 
 export default apis;

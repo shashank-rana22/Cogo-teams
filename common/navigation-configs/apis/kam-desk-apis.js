@@ -603,6 +603,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'raise_query',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
 
 ];
 
