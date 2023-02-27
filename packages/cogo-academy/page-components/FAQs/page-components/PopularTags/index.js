@@ -18,7 +18,7 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 	} = useListFaqTag();
 	console.log('efef', tags);
 	return (
-		<div style={{ marginBottom: 12 }}>
+		<div style={{ marginBottom: 10 }}>
 			<h4 style={{ marginTop: 12 }}>
 				{startCase('Popular tags in this section')}
 				:
