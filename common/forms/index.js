@@ -11,6 +11,8 @@ export { default as UploadController } from './page-components/Controlled/Upload
 export { default as PillsController } from './page-components/Controlled/PillsController';
 export { default as RadioGroupController } from './page-components/Controlled/RadioGroupController';
 export { default as DateRangePickerController } from './page-components/Controlled/DateRangePickerController';
+export { default as TimepickerController } from './page-components/Controlled/TimepickerController';
+export { default as CheckboxGroupController } from './page-components/Controlled/CheckboxGroupController';
 export { default as DayFrequencyController } from './page-components/Controlled/DayFrequencyController';
 export { default as AsyncSelectController } from './page-components/Controlled/AsyncSelectController';
 export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
