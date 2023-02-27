@@ -28,7 +28,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.mawb_number_subdivision} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{awbNumber.substring(0, 3)}</p>
+						<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber.substring(0, 3)}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -36,7 +36,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.mawb_number_subdivision_portcode} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{taskItem?.originPortCode}</p>
+						<p className={styles.font_style} style={{ fontSize: 18 }}>{taskItem?.originPortCode}</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -44,7 +44,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 						${styles.mawb_number_subdivision_second} 
 					`}
 					>
-						<p style={{ fontSize: 14 }}>{awbNumber.substring(4, 13)}</p>
+						<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber.substring(4, 13)}</p>
 					</div>
 				</div>
 				<div className={cl`
@@ -53,7 +53,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {} }:Props) {
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p style={{ fontSize: 14 }}>{awbNumber}</p>
+					<p className={styles.font_style} style={{ fontSize: 18 }}>{awbNumber}</p>
 				</div>
 			</div>
 			<div className={styles.flex}>
