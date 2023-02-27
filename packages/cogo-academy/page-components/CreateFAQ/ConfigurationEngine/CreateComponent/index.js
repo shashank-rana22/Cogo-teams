@@ -50,7 +50,7 @@ function CreateForm({
 			fetchFaq();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [general.query]);
+	}, [general.query?.id]);
 
 	useEffect(() => {
 		setValue('name', data?.name);

@@ -49,7 +49,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	useEffect(() => {
 		fetchQuestion();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query]);
+	}, [query?.id]);
 
 	const onclickBack = () => {
 		const href = `/learning/faq/create/question?mode=create&id=${id}`;
