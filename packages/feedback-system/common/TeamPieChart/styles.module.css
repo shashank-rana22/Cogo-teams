@@ -1,6 +1,5 @@
 .pie_container {
 	height: 100%;
-	padding: 0 16px;
 }
 
 .empty_container {
@@ -13,4 +12,11 @@
 	margin-top: 8px;
 	background: #fff;
 	border-radius: 5px;
+}
+
+.pie_tooltip {
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
 }

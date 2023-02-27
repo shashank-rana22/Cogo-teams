@@ -40,7 +40,7 @@ function QuestionsItem({
 
 			pv.checked?.forEach((question) => {
 				if (question.id === item.id) {
-					newList.push({ ...question, weightage: weight });
+					newList.push({ ...question, weightage: Math.round(weight) });
 					return;
 				}
 				newList.push(question);
@@ -95,7 +95,7 @@ function QuestionsItem({
 					<div className={styles.weightage} style={{ width: '25%' }}>
 						<p className={styles.label}>Weightage</p>
 						<Input
-							value={item.weightage}
+							value={Math.round(item.weightage)}
 							onChange={(val) => setQuestionWeightage(val)}
 							type="number"
 							placeholder="Set Weightage.."

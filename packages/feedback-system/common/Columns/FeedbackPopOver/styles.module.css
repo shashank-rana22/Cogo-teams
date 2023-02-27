@@ -1,11 +1,3 @@
-.feedback {
-	p {
-		font-size: 18px;
-		font-weight: 500;
-		color: #221f20;
-	}
-}
-
 .text_content {
 	&.title {
 		width: 240px;
@@ -15,6 +7,15 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+}
+
+.feedback {
+	width: 100%;
+	font-size: 14px;
+	font-weight: 300;
+	color: #4f4f4f;
+	text-align: justify;
+	word-wrap: break-word;
 }
 
 .feedback_button {

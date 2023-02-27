@@ -79,7 +79,7 @@ function UserStats({ source = '' }) {
 			)}
 
 			<div className={styles.stats_container}>
-				<p className={styles.header}>User Dashboard</p>
+				<p className={styles.header}>{source !== 'user_dashboard' ? 'User Stats' : 'User Dashboard'}</p>
 
 				<div className={styles.user_profile}><UserProfile userId={userId} /></div>
 

@@ -13,7 +13,7 @@ const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 	const notify = async () => {
 		try {
 			await trigger({ data: { SendToAll: sendToAll } });
-			const { manager_count = '20' } = data;
+			const { manager_count } = data;
 
 			setNotifyModal(false);
 			Toast.success(`${manager_count} Managers Notified...`);

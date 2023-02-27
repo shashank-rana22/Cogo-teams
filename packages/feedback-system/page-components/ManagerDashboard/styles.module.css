@@ -5,7 +5,7 @@
 
 .no_manager {
 	height: calc(100vh - 48px);
-	background: #ffffff;
+	background: #fff;
 }
 
 .stats_section {
