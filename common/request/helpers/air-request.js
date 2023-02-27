@@ -9,7 +9,7 @@ import { getCookie } from './getCookieFromCtx';
 const decodedCustomSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
 		encode        : false,
-		arrayFormat   : 'repeat',
+		arrayFormat   : 'brackets',
 		serializeDate : (date) => format(date),
 	});
 
