@@ -32,6 +32,7 @@ function Customers({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 	setShowBotMessages,
+	setShowDialModal = () => {},
 }) {
 	const onChangeToggle = () => {
 		if (toggleStatus) {
@@ -108,6 +109,7 @@ function Customers({
 					setActiveVoiceCard={setActiveVoiceCard}
 					activeVoiceCard={activeVoiceCard}
 					activeTab={activeTab}
+					setShowDialModal={setShowDialModal}
 				/>
 			)}
 
