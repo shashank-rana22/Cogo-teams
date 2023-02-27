@@ -1,0 +1,43 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+}
+
+.title {
+	margin-bottom: 16px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_select_container {
+			margin-right: 8px;
+		}
+	}
+}
+
+.otp_container {
+	margin: 16px 0;
+}
+
+.button {
+	margin: 16px 0;
+}
+
+.loader {
+	width: 40px;
+	height: 40px;
+}
+
+.loader_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 190px;
+}
