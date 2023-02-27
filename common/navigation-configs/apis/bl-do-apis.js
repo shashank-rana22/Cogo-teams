@@ -195,6 +195,18 @@ const apis = [
 		feature      : 'bl_do',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'update_shipment_document',
+		access_type  : 'private',
+		feature      : 'bl_do',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_documents',
+		access_type  : 'private',
+		feature      : 'bl_do',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
