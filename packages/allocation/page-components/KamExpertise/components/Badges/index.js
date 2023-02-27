@@ -6,7 +6,6 @@ import CreateBadge from './BadgeList';
 import CreateBadgeV2 from './CreateBadge';
 import Header from './Header';
 import styles from './styles.module.css';
-import ViewBadges from './ViewBadges';
 
 function Badges() {
 	const router = useRouter();
@@ -61,12 +60,6 @@ function Badges() {
 			}
 
 		</section>
-
-	// <div>
-
-	// 	<ViewBadges />
-
-	// </div>
 	);
 }
 
