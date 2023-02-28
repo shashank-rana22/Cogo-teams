@@ -142,7 +142,6 @@
 
 	.input_issuing_agent {
 		flex-direction: column;
-		padding: 0;
 	}
 
 	.iata_code {

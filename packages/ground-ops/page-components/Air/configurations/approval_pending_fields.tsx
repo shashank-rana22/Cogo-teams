@@ -1,3 +1,18 @@
+function formatDate(date) {
+	if (date) {
+		return new Date(date).toLocaleDateString('en-GB', {
+			day   : 'numeric',
+			month : 'short',
+			year  : 'numeric',
+		});
+	}
+	return new Date().toLocaleDateString('en-GB', {
+		day   : 'numeric',
+		month : 'short',
+		year  : 'numeric',
+	});
+}
+
 export const ApprovalPendingFields = {
 	fields: [
 		{
@@ -15,7 +30,6 @@ export const ApprovalPendingFields = {
 			key   : 'awbNumber',
 			label : 'AWB',
 			span  : 1.2,
-			func  : 'startCase',
 		},
 		{
 			key    : 'blCategory',
@@ -47,10 +61,14 @@ export const ApprovalPendingFields = {
 			func  : 'startCase',
 		},
 		{
-			key   : 'deadline',
-			label : 'Due On',
-			span  : 1.5,
-			func  : 'startCase',
+			key    : 'deadline',
+			label  : 'Due On',
+			span   : 1.5,
+			render : (item) => (
+				<div style={{ textTransform: 'uppercase' }}>
+					{formatDate(item.deadline)}
+				</div>
+			),
 		},
 		{
 			key   : 'status',

@@ -25,6 +25,13 @@ interface Props {
 	setGenerate?:any;
 }
 
+const downloadButton = {
+	document_accepted            : 'Download 12 Copies',
+	document_uploaded            : 'Download',
+	document_rejected            : 'Download',
+	document_amendment_requested : 'Download',
+};
+
 function GenerateMawb({
 	taskItem = {},
 	formData = {},
@@ -37,6 +44,8 @@ function GenerateMawb({
 	setGenerate = () => {},
 }:Props) {
 	const filteredData = { ...formData };
+
+	console.log('taskItem.documentState', taskItem.documentState);
 
 	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',
@@ -132,11 +141,16 @@ function GenerateMawb({
 	};
 
 	const handleView = async () => {
-		const a = footerValues.map((item) => async () => {
-			const newImage = await getImage(item);
-			saveAs(newImage, item);
-		});
-		await a.map((i) => i());
+		if (taskItem.documentState === 'document_accepted') {
+			const a = footerValues.map((item) => async () => {
+				const newImage = await getImage(item);
+				saveAs(newImage, item);
+			});
+			await a.map((i) => i());
+		} else {
+			const newImage = await takeScreenShot(document.getElementById('mawb'));
+			saveAs(newImage, 'ORIGINAL 1 (FOR ISSUING CARRIER)');
+		}
 	};
 
 	let agentCharge = 0;
@@ -172,7 +186,7 @@ function GenerateMawb({
 							}}
 							disabled={saveDocument}
 						>
-							{saveDocument ? 'Downloading...' : 'Download All 12 Copies'}
+							{saveDocument ? 'Downloading...' : downloadButton[taskItem.documentState]}
 						</Button>
 					</div>
 				</div>
