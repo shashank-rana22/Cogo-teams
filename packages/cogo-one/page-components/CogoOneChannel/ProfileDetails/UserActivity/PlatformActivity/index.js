@@ -85,7 +85,7 @@ function PlatformActivity({ platform = {} }) {
 									<IcMPortArrow width={22} height={22} />
 									<div className={styles.port}>
 										<div className={styles.port_details}>
-											<Tooltip content={startCase(origin_port?.name)} placement="bottom">
+											<Tooltip content={startCase(destination_port?.name)} placement="bottom">
 												<div className={styles.port_name}>
 													{startCase(destination_port?.name)}
 												</div>

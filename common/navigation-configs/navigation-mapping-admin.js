@@ -1809,9 +1809,16 @@ const navigationMappingAdmin = {
 		module_type: 'dashboards',
 	},
 	cogo_verse_analytics: {
-		key           : 'cogo_verse_analytics',
-		title         : 'CogoVerse ',
-		// eslint-disable-next-line max-len, jsx-a11y/alt-text
+		key   : 'cogo_verse_analytics',
+		title : 'CogoVerse',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				alt="cogo-verse"
+				width="22px"
+				height="22px"
+			/>
+		),
 		href          : '/v2/cogo-verse-analytics',
 		as            : '/v2/cogo-verse-analytics',
 		type          : 'link',
@@ -1833,7 +1840,14 @@ const navigationMappingAdmin = {
 	cogo_one: {
 		key   : 'cogo_one',
 		title : 'Cogo One',
-
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				alt="cogo-one"
+				width="22px"
+				height="22px"
+			/>
+		),
 		isSubNavs     : true,
 		main_apis     : [],
 		possible_apis : apis.cogo_one,
