@@ -26,11 +26,9 @@ interface Props {
 	concorData: ConcorInterface,
 	id: string,
 	refetch:()=>void,
-	row: object,
-	isEditable: boolean,
 }
 
-function ConcorModal({ concorData, id, refetch, row, isEditable = true }:Props) {
+function ConcorModal({ concorData, id, refetch }:Props) {
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		utr           : null,
@@ -120,7 +118,6 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }:Props) 
 				>
 					<Modal.Header title="Concor PDA Approval" />
 					<Modal.Body>
-						{!isEditable && <ApproveAndReject row={row} />}
 						{concorDetails.map((detail) => (
 							<div className={styles.flex}>
 								<div className={styles.title}>
@@ -135,82 +132,78 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }:Props) 
 							</div>
 						))	}
 
-						{isEditable && (
-							<div>
-								<div className={styles.section}>
-									<div className={styles.input_titles}>Bank*</div>
-									<span className={styles.divider}>:</span>
-									<AsyncSelect
-										name="bank"
-										asyncKey="allot_bank"
-										valueKey="bankname"
-										labelKey="bankname"
-										value={inputValues.bankname}
-										initialCall={false}
-										placeholder="Select Bank"
-										onChange={(value:string, obj:ObjectInterface) => setInputValues({
-											...inputValues,
-											bankAccountNo : obj?.bankAccountNo,
-											bankId        : obj?.bankId,
-											bankname      : obj?.bankname,
-										})}
-									/>
-								</div>
-
-								<div className={styles.section}>
-									<div className={styles.input_titles}>UTR*</div>
-									<span className={styles.divider}>:</span>
-									<Input
-										name="utr"
-										size="xs"
-										placeholder="Enter UTR"
-										onChange={(value: string) => setInputValues({ ...inputValues, utr: value })}
-										style={{ width: '30%', height: '36px' }}
-									/>
-								</div>
-
-								<div className={styles.section}>
-									<div className={styles.input_titles}>Payment Proof*</div>
-									<span className={styles.divider}>:</span>
-									<FileUploader
-										value={inputValues.paymentProof}
-										onChange={(e:string) => handleUpload(e)}
-										showProgress
-										draggable
-									/>
-								</div>
-
-								<div style={{ display: 'flex' }}>
-									<div className={styles.input_titles}>Remarks*</div>
-									<span className={styles.divider}>:</span>
-									<Textarea
-										name="remark"
-										size="sm"
-										placeholder="Enter Remarks Here..."
-										onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
-										style={{ height: '100px', marginBottom: '12px' }}
-									/>
-								</div>
+						<div>
+							<div className={styles.section}>
+								<div className={styles.input_titles}>Bank*</div>
+								<span className={styles.divider}>:</span>
+								<AsyncSelect
+									name="bank"
+									asyncKey="allot_bank"
+									valueKey="bankname"
+									labelKey="bankname"
+									value={inputValues.bankname}
+									initialCall={false}
+									placeholder="Select Bank"
+									onChange={(value:string, obj:ObjectInterface) => setInputValues({
+										...inputValues,
+										bankAccountNo : obj?.bankAccountNo,
+										bankId        : obj?.bankId,
+										bankname      : obj?.bankname,
+									})}
+								/>
 							</div>
-						) }
+
+							<div className={styles.section}>
+								<div className={styles.input_titles}>UTR*</div>
+								<span className={styles.divider}>:</span>
+								<Input
+									name="utr"
+									size="xs"
+									placeholder="Enter UTR"
+									onChange={(value: string) => setInputValues({ ...inputValues, utr: value })}
+									style={{ width: '30%', height: '36px' }}
+								/>
+							</div>
+
+							<div className={styles.section}>
+								<div className={styles.input_titles}>Payment Proof*</div>
+								<span className={styles.divider}>:</span>
+								<FileUploader
+									value={inputValues.paymentProof}
+									onChange={(e:string) => handleUpload(e)}
+									showProgress
+									draggable
+								/>
+							</div>
+
+							<div style={{ display: 'flex' }}>
+								<div className={styles.input_titles}>Remarks*</div>
+								<span className={styles.divider}>:</span>
+								<Textarea
+									name="remark"
+									size="sm"
+									placeholder="Enter Remarks Here..."
+									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
+									style={{ height: '100px', marginBottom: '12px' }}
+								/>
+							</div>
+						</div>
 
 					</Modal.Body>
-					{isEditable && (
-						<Modal.Footer>
-							<div className={styles.button}>
-								<Button
-									size="md"
-									style={{ marginRight: '8px' }}
-									disabled={isDisabled}
-									onClick={() => {
-										OnAction(inputValues);
-									}}
-								>
-									Approve
-								</Button>
-							</div>
-						</Modal.Footer>
-					)}
+					<Modal.Footer>
+						<div className={styles.button}>
+							<Button
+								size="md"
+								style={{ marginRight: '8px' }}
+								disabled={isDisabled}
+								onClick={() => {
+									OnAction(inputValues);
+								}}
+							>
+								Approve
+							</Button>
+						</div>
+					</Modal.Footer>
 				</Modal>
 			)}
 		</div>

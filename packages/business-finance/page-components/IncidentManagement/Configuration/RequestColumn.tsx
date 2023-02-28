@@ -213,7 +213,6 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								concorData={concorPdaApprovalRequest}
 								id={id}
 								refetch={getIncidentData}
-								row={row}
 							/>
 						)
 					}
