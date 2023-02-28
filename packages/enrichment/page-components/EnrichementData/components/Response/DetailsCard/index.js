@@ -36,8 +36,6 @@ function DetailsCard({
 		);
 	}
 
-	// console.log('user', user);
-
 	return (
 
 		<div className={styles.card}>

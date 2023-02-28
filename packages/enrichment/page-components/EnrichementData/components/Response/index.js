@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Placeholder, Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -18,6 +18,14 @@ function Response({
 
 }) {
 	const { handleResponseSubmit = () => {} } = useSubmitResponses({ responseData, setResponseData });
+
+	if (loading) {
+		return (
+			<div className={styles.loading}>
+				<Placeholder height="320px" width="100%" />
+			</div>
+		);
+	}
 
 	if (isEmpty(responseData)) {
 		return (

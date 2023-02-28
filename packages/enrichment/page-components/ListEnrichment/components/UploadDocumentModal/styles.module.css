@@ -7,7 +7,7 @@
 }
 .control_container {
 	display: flex;
-	margin: 14px;
+    margin: 12px 0;
     flex-direction: column;
 
 }

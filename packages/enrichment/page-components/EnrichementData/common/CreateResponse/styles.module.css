@@ -35,3 +35,7 @@
     justify-content: flex-end;
 }
 
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}

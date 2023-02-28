@@ -1,16 +1,16 @@
 const enrichmentFilters = [
 
-	{
-		name           : 'organization_id',
-		type           : 'asyncSelect',
-		label          : 'Organization',
-		placeholder    : 'Select Organization',
-		defaultOptions : false,
-		asyncKey       : 'organizations',
-		initialCall    : false,
-		isClearable	   : true,
+	// {
+	// 	name           : 'organization_id',
+	// 	type           : 'asyncSelect',
+	// 	label          : 'Organization',
+	// 	placeholder    : 'Select Organization',
+	// 	defaultOptions : false,
+	// 	asyncKey       : 'organizations',
+	// 	initialCall    : false,
+	// 	isClearable	   : true,
 
-	},
+	// },
 	{
 		name        : 'created_at_greater_than',
 		placeholder : 'Select Start Date',
