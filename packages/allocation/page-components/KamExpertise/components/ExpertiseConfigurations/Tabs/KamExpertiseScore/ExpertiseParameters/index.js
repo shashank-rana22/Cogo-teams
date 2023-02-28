@@ -4,13 +4,19 @@ import React, { useState } from 'react';
 import EditExpertiseParamsCard from './EditExpertiseParamsCard';
 
 function ExpertiseParameters(props) {
-	const { expertiseData, onClickAddCondition } = props;
+	const { expertiseData, key, onClickAddCondition } = props;
 
 	const [editMode, setEditMode] = useState(true);
 
 	return (
 		<div>
-			{editMode && (<EditExpertiseParamsCard setEditMode={setEditMode} expertiseData={expertiseData} />)}
+			{editMode && (
+				<EditExpertiseParamsCard
+					setEditMode={setEditMode}
+					expertiseData={expertiseData}
+					key={key}
+				/>
+			)}
 
 			<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
 		</div>
