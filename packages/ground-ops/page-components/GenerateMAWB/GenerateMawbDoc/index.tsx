@@ -43,9 +43,20 @@ function GenerateMawb({
 	chargeableWeight,
 	setGenerate = () => {},
 }:Props) {
-	const filteredData = { ...formData };
-
-	console.log('taskItem.documentState', taskItem.documentState);
+	const { dimension = [], ...rest } = { ...formData };
+	const convertedDimension = dimension.map((dim) => {
+		const { length, width, height, unit, packages } = dim;
+		if (unit === 'inch') {
+			return {
+				length : 2.54 * length,
+				width  : 2.54 * width,
+				height : 2.54 * height,
+				packages,
+			};
+		}
+		return { length, width, height, packages };
+	});
+	const filteredData = { ...rest, dimension: convertedDimension };
 
 	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',
@@ -207,22 +218,22 @@ function GenerateMawb({
 				{!viewDoc && <Watermark text="draft" rotateAngle="315deg" />}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
-						formData={formData}
+						formData={filteredData}
 						taskItem={taskItem}
 					/>
 					<ShipmentDetails
-						formData={formData}
+						formData={filteredData}
 						taskItem={taskItem}
 					/>
 					<ContainerDetails
-						formData={formData}
+						formData={filteredData}
 						taskItem={taskItem}
 						chargeableWeight={chargeableWeight}
 					/>
 					<ChargeDetails
 						taskItem={taskItem}
 						footerValues={footerValues}
-						formData={formData}
+						formData={filteredData}
 						data={data}
 					/>
 				</div>

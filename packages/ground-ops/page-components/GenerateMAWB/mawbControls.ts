@@ -120,6 +120,7 @@ const mawbControls = () => ({
 					width   : '',
 					height  : '',
 					package : '',
+					unit    : 'cm',
 				},
 			],
 			controls: [
@@ -129,7 +130,7 @@ const mawbControls = () => ({
 					label       : 'Length',
 					type        : 'number',
 					className   : 'primary lg',
-					span        : 2.5,
+					span        : 1.25,
 					rules       : {
 						required : 'Length is Required',
 						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -141,7 +142,7 @@ const mawbControls = () => ({
 					label       : 'Width',
 					type        : 'number',
 					className   : 'primary lg',
-					span        : 2.5,
+					span        : 1.25,
 					rules       : {
 						required : 'Width is Required',
 						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -153,7 +154,7 @@ const mawbControls = () => ({
 					label       : 'Height',
 					type        : 'number',
 					className   : 'primary lg',
-					span        : 2.5,
+					span        : 1.5,
 					rules       : {
 						required : 'Height is Required',
 						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -161,16 +162,27 @@ const mawbControls = () => ({
 				},
 				{
 					name        : 'packages',
-					placeholder : 'No of Packages',
+					placeholder : 'Packages count',
 					label       : 'Number of Packages',
 					type        : 'number',
 					className   : 'primary lg',
-					span        : 2.5,
+					span        : 2,
 					rules       : {
 						required : 'No of Packages is Required',
 						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
+				}, {
+					name        : 'unit',
+					label       : 'Unit',
+					type        : 'select',
+					placeholder : 'select',
+					span        : 1.25,
+					options     : [
+						{ label: 'Cm', value: 'cm' },
+						{ label: 'Inch', value: 'inch' },
+					],
 				},
+
 			],
 		},
 		{
@@ -279,6 +291,7 @@ const mawbControls = () => ({
 					name        : 'code',
 					type        : 'async-select',
 					asyncKey    : 'list_rate_charge_codes',
+					labelKey    : 'code',
 					params      : { service_names: ['air_freight_charges', 'air_freight_local_charges'] },
 					className   : 'primary lg',
 					span        : 5,
@@ -317,6 +330,7 @@ const mawbControls = () => ({
 					name        : 'code',
 					type        : 'async-select',
 					asyncKey    : 'list_rate_charge_codes',
+					labelKey    : 'code',
 					params      : { service_names: ['air_freight_charges', 'air_freight_local_charges'] },
 					className   : 'primary lg',
 					span        : 5,
