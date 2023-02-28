@@ -10208,6 +10208,14 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	inventory_management:[
+		{
+			api          : 'list_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
+
+	],
 	cogo_one: [
 		{
 			api          : 'get_user',

@@ -3,6 +3,7 @@ import businessFinance from './config/business-finance';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
+import inventory_management from './config/inventory_management';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import rolesAndPermissions from './config/roles-n-permission';
@@ -19,6 +20,7 @@ const routeConfig = {
 	...cogoVerseAnalytics,
 	...cogoOne,
 	...myProfile,
+	...inventory_management,
 };
 
 export default routeConfig;
