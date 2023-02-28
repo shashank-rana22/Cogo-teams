@@ -12,7 +12,6 @@ const apis = [
 	{
 		api          : 'list_partner_users',
 		access_type  : 'private',
-		feature      : 'contract_rates',
 		service_name : 'partner',
 	},
 	{
