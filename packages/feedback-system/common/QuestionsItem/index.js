@@ -1,7 +1,8 @@
-import { Button, Pagination, Input, Tooltip, Checkbox } from '@cogoport/components';
+import { ButtonIcon, Button, Pagination, Input, Tooltip, Checkbox } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { cloneDeep } from '@cogoport/utils';
 
+import OrderComponent from './OrderComponent';
 import QuestionsBox from './QuestionsBox';
 import styles from './styles.module.css';
 
@@ -40,7 +41,7 @@ function QuestionsItem({
 
 			pv.checked?.forEach((question) => {
 				if (question.id === item.id) {
-					newList.push({ ...question, weightage: Math.round(weight) });
+					newList.push({ ...question, weightage: Math.round(weight, 2) });
 					return;
 				}
 				newList.push(question);
@@ -64,7 +65,7 @@ function QuestionsItem({
 		<div className={styles.container}>
 			{questionStatus === 'add_weightage' ? (
 				<div className={styles.order_container} style={{ width: '5%' }}>
-					<Pagination
+					<OrderComponent
 						type="compact"
 						currentPage={index + 1}
 						totalItems={totalCount}
@@ -110,14 +111,7 @@ function QuestionsItem({
 							animation="shift-away"
 							content="This will remove the question from this form.."
 						>
-							<Button themeType="tertiary" onClick={() => undoAdd(item)}>
-								<IcMDelete
-									width={20}
-									height={20}
-									fill="#393F70"
-									style={{ cursor: 'pointer' }}
-								/>
-							</Button>
+							<ButtonIcon themeType="primary" icon={<IcMDelete />} onClick={() => undoAdd(item)} />
 						</Tooltip>
 					</div>
 				</>

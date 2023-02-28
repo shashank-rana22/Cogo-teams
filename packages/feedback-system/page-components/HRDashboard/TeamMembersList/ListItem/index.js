@@ -48,7 +48,7 @@ function ListItem({ item, params: pageParams = {} }) {
 
 				<Button
 					size="md"
-					themeType="secondary"
+					themeType="tertiary"
 					onClick={() => getUserListCsv()}
 					disabled={isEmpty(list)}
 					loading={downloadLoading}

@@ -89,7 +89,7 @@ function FeedbackManagement() {
 		<div className={`${styles.container}`}>
 			<div className={styles.redirect_container}>
 				<div
-					className={styles.redirect_header}
+					style={{ cursor: 'pointer' }}
 					role="button"
 					tabIndex={0}
 					onClick={() => {
@@ -97,18 +97,14 @@ function FeedbackManagement() {
 					}}
 				>
 					<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
+				</div>
 
-					<p className={styles.redirect_text}>
-						Go Back
-					</p>
+				<div>
+					Feedback Management
 				</div>
 			</div>
 
 			<div className={styles.header}>
-				<p className={styles.header_text}>
-					Feedback Management
-				</p>
-
 				<div className={styles.header_filters}>
 					{departmentDesignationControls.map((cntrl) => (
 						<SelectController

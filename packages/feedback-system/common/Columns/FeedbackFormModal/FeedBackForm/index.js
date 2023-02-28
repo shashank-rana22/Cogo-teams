@@ -178,7 +178,7 @@ function FeedBackForm({
 			<div className={styles.button_container}>
 				<Button
 					size="md"
-					themeType="secondary"
+					themeType="tertiary"
 					disabled={loading || action === 'show'}
 					onClick={() => {
 						setRating({});

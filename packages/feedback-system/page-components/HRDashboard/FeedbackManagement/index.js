@@ -44,36 +44,35 @@ function FeedbackManagement() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.redirect_container}>
-				<div
-					className={styles.go_back_container}
-					role="button"
-					tabIndex={0}
-					onClick={() => {
-						handleClick();
-					}}
-				>
-					<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
-					<p>Go Back</p>
+				<div className={styles.go_back_container}>
+					<div
+						style={{ cursor: 'pointer' }}
+						role="button"
+						tabIndex={0}
+						onClick={() => {
+							handleClick();
+						}}
+					>
+						<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
+					</div>
+					<p>Feedback List</p>
 				</div>
-			</div>
-
-			<div className={styles.heading}>
-				<p className={styles.header_text}>
-					Feedback List
-				</p>
-				<Button size="lg" onClick={() => getUserListCsv()}>Download CSV</Button>
 			</div>
 
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
-
 					<div className={styles.department_select}>
 						<Filters setParams={setParams} params={params} />
 
-						<Input value={searchValue} onChange={setSearchValue} placeholder="Search User..." />
+						<Input
+							value={searchValue}
+							onChange={setSearchValue}
+							placeholder="Search User..."
+						/>
 					</div>
 				</div>
 
+				<Button size="lg" onClick={() => getUserListCsv()}>Download CSV</Button>
 			</div>
 
 			<UserTableData

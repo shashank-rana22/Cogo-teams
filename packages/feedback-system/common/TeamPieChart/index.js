@@ -38,7 +38,7 @@ function TeamPieChart({ userId = '', params = {} }) {
 				<EmptyState
 					height={140}
 					width={220}
-					emptyText="Pie Stats Not Found"
+					emptyText="Rating Stats Not Found"
 					textSize="12px"
 					flexDirection="column"
 				/>

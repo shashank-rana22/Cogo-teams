@@ -41,7 +41,7 @@ function HRDashboard() {
 				<div className={styles.question_button_container}>
 					<Button
 						size="lg"
-						themeType="secondary"
+						themeType="tertiary"
 						style={{ marginRight: '16px' }}
 						onClick={() => setNotifyModal(true)}
 					>
@@ -50,7 +50,7 @@ function HRDashboard() {
 					</Button>
 					<Button
 						size="lg"
-						themeType="secondary"
+						themeType="tertiary"
 						style={{ marginRight: '16px' }}
 						onClick={() => setOpenUploadModal(true)}
 					>
@@ -90,7 +90,7 @@ function HRDashboard() {
 
 						<Button
 							size="md"
-							themeType="secondary"
+							themeType="tertiary"
 							onClick={() => {
 								redirectToFeedbackManagement();
 							}}

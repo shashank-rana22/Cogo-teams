@@ -65,21 +65,24 @@ function UserStats({ source = '' }) {
 	return (
 		<div className={styles.container}>
 			{source !== 'user_dashboard' && (
-				<div
-					className={styles.redirect_container}
-					role="button"
-					tabIndex={0}
-					onClick={() => {
-						handleClick();
-					}}
-				>
-					<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
-					Go Back
+				<div className={styles.redirect_container}>
+					<div
+						style={{ cursor: 'pointer' }}
+						role="button"
+						tabIndex={0}
+						onClick={() => {
+							handleClick();
+						}}
+					>
+						<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
+					</div>
+
+					<div>User Stats</div>
 				</div>
 			)}
 
 			<div className={styles.stats_container}>
-				<p className={styles.header}>{source !== 'user_dashboard' ? 'User Stats' : 'User Dashboard'}</p>
+				{source === 'user_dashboard' && <p className={styles.header}>User Dashboard</p>}
 
 				<div className={styles.user_profile}><UserProfile userId={userId} /></div>
 

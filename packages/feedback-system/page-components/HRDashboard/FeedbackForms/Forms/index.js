@@ -94,7 +94,7 @@ function Forms({
 								</div>
 
 								<div className={styles.action}>
-									<Button themeType="secondary" onClick={() => openOldForm(id)}>Use</Button>
+									<Button themeType="tertiary" onClick={() => openOldForm(id)}>Use</Button>
 								</div>
 							</div>
 						);

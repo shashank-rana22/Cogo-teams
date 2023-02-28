@@ -37,21 +37,22 @@ function FeedbackForms() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.go_back_container}>
-				<div
-					className={styles.redirect_container}
-					role="button"
-					tabIndex={0}
-					onClick={() => {
-						routeToHRDashboard();
-					}}
-				>
-					<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
-					<p className={styles.text}>Go Back</p>
-				</div>
-			</div>
+				<div className={styles.redirect_container}>
+					<div
+						style={{ cursor: 'pointer' }}
+						role="button"
+						tabIndex={0}
+						onClick={() => {
+							routeToHRDashboard();
+						}}
+					>
+						<IcMArrowBack style={{ marginRight: '8px' }} width={16} height={16} />
+					</div>
 
-			<div className={styles.header}>
-				Forms
+					<div className={styles.header}>
+						Forms
+					</div>
+				</div>
 			</div>
 
 			<div className={styles.form_container}>

@@ -12,7 +12,7 @@ function FeedbackModal({ feedback = '' }) {
 			<div className={styles.feedback_button}>
 				<Button
 					size="sm"
-					themeType="secondary"
+					themeType="tertiary"
 					disabled={isEmpty(feedback)}
 					onClick={() => setShow(true)}
 				>

@@ -120,7 +120,7 @@ function AddQuestions({
 								</div>
 							</div>
 
-							<Button themeType="secondary" onClick={() => setOpenNewQuestionModal(true)}>
+							<Button themeType="tertiary" onClick={() => setOpenNewQuestionModal(true)}>
 								<IcMPlus />
 								New Question
 							</Button>

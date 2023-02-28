@@ -50,7 +50,7 @@ function CreateForm({
 				<Button
 					size="md"
 					style={{ marginRight: 10 }}
-					themeType="secondary"
+					themeType="tertiary"
 					onClick={() => {
 						reset();
 						onCancel();

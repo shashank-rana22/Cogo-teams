@@ -11,32 +11,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-}
-
-.redirect_header {
-	display: flex;
-	align-items: center;
-
-	.redirect_text {
-		margin: 0;
-		font-size: 16px;
-		font-weight: 500;
-		color: #393f70;
-		cursor: pointer;
-	}
+	font-size: 28px;
+	font-weight: 600;
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding: 8px 0;
-
-	.header_text {
-		margin: 0;
-		font-size: 28px;
-		font-weight: 600;
-	}
+	justify-content: flex-start;
+	margin-top: 16px;
 }
 
 .header_filters {

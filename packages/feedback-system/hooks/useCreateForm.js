@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useCreateForm = () => {
@@ -18,7 +17,7 @@ const useCreateForm = () => {
 			proceedForm('publish');
 			setRefetchedLists(true);
 		} catch (e) {
-			Toast.error(getApiErrorString(e.data));
+			Toast.error(e.response.data.error?.toString());
 		}
 	};
 

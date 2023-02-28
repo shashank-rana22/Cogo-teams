@@ -38,7 +38,7 @@ function PerformanceChart({ params = {}, userId = '' }) {
 						<EmptyState
 							height={140}
 							width={220}
-							emptyText="Performance Stats Not Found"
+							emptyText="Yearly Graph Stats Not Found"
 							textSize="12px"
 							flexDirection="column"
 						/>
