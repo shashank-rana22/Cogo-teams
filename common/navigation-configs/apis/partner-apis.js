@@ -7128,7 +7128,7 @@ const partner = {
 			feature     : 'Overseas',
 		},
 		{
-			api         : 'post_purchase_payrun_merged_pdf',
+			api         : 'post_purchase_payrun_merged_pdf_by_id',
 			access_type : 'private',
 			module      : 'Overseas',
 			feature     : 'Overseas',
