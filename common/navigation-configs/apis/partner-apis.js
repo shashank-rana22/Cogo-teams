@@ -7398,6 +7398,20 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	translate: [
+		{
+			api         : 'get_translation_translate_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_translation_translate',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_translation_translate',
+			access_type : 'private',
+		},
+	],
 	reports: [
 		{
 			api         : 'get_muneem_reports_profitability',
