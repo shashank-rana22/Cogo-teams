@@ -70,34 +70,31 @@ function DialCallModal({ showDialModal, setShowDialModal = () => {} }) {
 					placeholder="Enter number"
 				/>
 				<div className={styles.number_div}>
-					{mobileNumberPads().map((num) => {
-						const { label, lowerlabel, icon } = num;
-						return (
-							<>
-								{label !== '' && (
+					{mobileNumberPads.map(({ label, lowerlabel, icon }) => (
+						<>
+							{label !== '' && (
+								<div
+									role="presentation"
+									className={styles.number_pad}
+									onClick={() => handleChange(label)}
+								>
+									<div className={styles.number}>{label}</div>
+									<div className={styles.letter}>{lowerlabel}</div>
+								</div>
+							)}
+							<div className={styles.delete_div}>
+								{icon && (
 									<div
 										role="presentation"
-										className={styles.number_pad}
-										onClick={() => handleChange(label)}
+										className={styles.delete_icon}
+										onClick={handleDelete}
 									>
-										<div className={styles.number}>{label}</div>
-										<div className={styles.letter}>{lowerlabel}</div>
+										{icon}
 									</div>
 								)}
-								<div className={styles.delete_div}>
-									{icon && (
-										<div
-											role="presentation"
-											className={styles.delete_icon}
-											onClick={handleDelete}
-										>
-											{icon}
-										</div>
-									)}
-								</div>
-							</>
-						);
-					})}
+							</div>
+						</>
+					))}
 				</div>
 				<div
 					role="presentation"

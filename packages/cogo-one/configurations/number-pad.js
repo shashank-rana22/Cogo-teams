@@ -1,4 +1,4 @@
-const mobileNumberPads = () => [
+const mobileNumberPads = [
 	{
 		label: '1',
 	},
@@ -41,12 +41,10 @@ const mobileNumberPads = () => [
 	{
 		label : '',
 		icon  : (
-			<div role="presentation">
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/delete-icon.svg"
-					alt="delete"
-				/>
-			</div>
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/delete-icon.svg"
+				alt="delete"
+			/>
 		),
 	},
 ];

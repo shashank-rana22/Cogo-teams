@@ -46,7 +46,7 @@
 	cursor: pointer;
 	background: #fcfcfe;
 	border-radius: 5px;
-	box-shadow: rgb(0 0 0 / 10%) 0 0 5px 0, rgb(0 0 0 / 10%) 0 0 1px 0;
+	box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%), 0 0 1px 0 rgb(0 0 0 / 10%);
 
 	&:active {
 		box-shadow:
