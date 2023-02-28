@@ -1,4 +1,4 @@
-import { useRequest } from '@cogoport/request';
+import { useRequest, useRequestBf } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -10,11 +10,13 @@ function useGetAsyncOptions({
 	valueKey = '',
 	labelKey = '',
 	params = {},
+	microservice = false,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
+	const request = microservice ? useRequestBf : useRequest;
 
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }] = request({
 		url    : endpoint,
 		method : 'GET',
 		params : merge(params, { filters: { q: query } }),

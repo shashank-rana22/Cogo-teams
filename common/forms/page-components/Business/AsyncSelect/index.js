@@ -9,6 +9,7 @@ import {
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
+	asyncAllotBanks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -36,6 +37,7 @@ const keyAsyncFieldsParamsMapping = {
 	partner_users      : asyncFieldsPartnerUsers,
 	partner_roles      : asyncFieldsPartnerRoles,
 	segments           : asyncFieldsCampaignSegments,
+	allot_bank         : asyncAllotBanks,
 };
 
 function AsyncSelect(props) {

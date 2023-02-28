@@ -6395,6 +6395,10 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api         : '/purchase/treasury/live-status',
+			access_type : 'private',
+		},
 	],
 	business_finance_income: [
 		{
