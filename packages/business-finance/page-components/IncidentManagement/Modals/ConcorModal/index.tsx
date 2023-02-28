@@ -9,7 +9,28 @@ import ViewButton from '../../common/ViewButton';
 
 import styles from './styles.module.css';
 
-function ConcorModal({ concorData, id, refetch, row, isEditable = true }) {
+interface ObjectInterface {
+	bankAccountNo:string | number,
+	bankId: string,
+	bankname: string
+}
+
+interface ConcorInterface {
+	bookingProof: string[],
+	quotation: string[],
+	sid: string,
+	totalBuyPrice: number | string,
+}
+
+interface Props {
+	concorData: ConcorInterface,
+	id: string,
+	refetch:()=>void,
+	row: object,
+	isEditable: boolean,
+}
+
+function ConcorModal({ concorData, id, refetch, row, isEditable = true }:Props) {
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		utr           : null,
@@ -64,7 +85,7 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }) {
 		},
 	];
 
-	const handleUpload = (val) => {
+	const handleUpload = (val:string) => {
 		if (val) {
 			setInputValues({ ...inputValues, paymentProof: val });
 		}
@@ -129,7 +150,7 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }) {
 										value={inputValues.bankname}
 										initialCall={false}
 										placeholder="Select Bank"
-										onChange={(value, obj) => setInputValues({
+										onChange={(value:string, obj:ObjectInterface) => setInputValues({
 											...inputValues,
 											bankAccountNo : obj?.bankAccountNo,
 											bankId        : obj?.bankId,
