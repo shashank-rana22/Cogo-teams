@@ -50,7 +50,7 @@ const useAddServicePoc = ({
 
 		try {
 			const payload = {
-				id                  : pocId,
+				poc_id              : pocId,
 				name,
 				email,
 				mobile_country_code : mobile_number?.country_code,

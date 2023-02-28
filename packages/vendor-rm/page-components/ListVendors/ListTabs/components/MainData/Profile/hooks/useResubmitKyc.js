@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+// import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+// import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
-import { merge } from '@cogoport/utils';
+// import { merge } from '@cogoport/utils';
 
 import contactControls from '../../../../../../OnBoardVendor/ContactDetails/utils/controls';
 import paymentControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
@@ -22,27 +22,27 @@ const useResubmitKyc = ({
 		formState: { errors: Errors },
 		handleSubmit: handleSubmitKyc,
 		getValues,
-		setValue,
+		// setValue,
 	} = useForm();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : 'update_vendor',
+	const [{ loading: resubmitKycLoading }, trigger] = useRequest({
+		url    : 'resubmit_vendor_kyc',
 		method : 'post',
 	}, { manual: true });
 
 	const { documents = [], vendor_details = {} } = data;
 
-	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['country'] } },
-	}));
+	// const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+	// 	params: { filters: { type: ['country'] } },
+	// }));
 
 	const { kyc_rejection_feedbacks = [] } = vendor_details;
 
 	const VENDOR_FIELDS_MAPPING = [
-		{
-			key   : 'invalid_country',
-			value : 'country_id',
-		},
+		// {
+		// 	key   : 'invalid_country',
+		// 	value : 'country_id',
+		// },
 		{
 			key   : 'invalid_pan_or_gst',
 			value : 'registration_number',
@@ -58,13 +58,13 @@ const useResubmitKyc = ({
 	];
 
 	const newControls = (kyc_rejection_feedbacks || []).map((item) => {
-		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item);
-		const { value } = object;
+		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item) || {};
+		const { value = '' } = object;
 		const newcontrol = controls.find((getItem) => getItem.name === value);
 
-		if (object.value === 'country_id') {
-			return { ...newcontrol, ...countryOptions };
-		}
+		// if (object.value === 'country_id') {
+		// 	return { ...newcontrol, ...countryOptions };
+		// }
 
 		return newcontrol;
 	});
@@ -92,7 +92,7 @@ const useResubmitKyc = ({
 		}
 	});
 
-	const document_ids = rejected_documents.map((item) => item.id);
+	// const document_ids = rejected_documents.map((item) => item.id);
 
 	const getDocments = ({ rejected_documents: RejectedDocuments, values }) => {
 		const Documents = RejectedDocuments.map((item) => {
@@ -113,7 +113,7 @@ const useResubmitKyc = ({
 
 		const filtered_documents = getDocments({ rejected_documents, values });
 		const payload = {
-			id                  : vendor_details?.id,
+			vendor_id           : vendor_details?.id,
 			documents           : filtered_documents,
 			business_name       : values.business_name || undefined,
 			country_id          : values.country_id || undefined,
@@ -134,7 +134,7 @@ const useResubmitKyc = ({
 		}
 	};
 
-	const Data = {};
+	// const Data = {};
 
 	return {
 		newControls,
@@ -142,6 +142,7 @@ const useResubmitKyc = ({
 		handleSubmitKyc,
 		Errors,
 		ResubmitKYC,
+		resubmitKycLoading,
 	};
 };
 
