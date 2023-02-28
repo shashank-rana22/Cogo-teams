@@ -19,10 +19,6 @@ function TagQuestions({ tagId = [] }) {
 	} = useListFaqQuestions({ tagId });
 
 	if (loading) {
-		return 'loading...';
-	}
-
-	if (loading) {
 		return (
 			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
 				<div className={styles.spinner}>
