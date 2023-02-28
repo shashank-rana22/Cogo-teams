@@ -1,0 +1,39 @@
+
+    
+    .level_card_container{
+        height: 100%;
+        border-radius: 8px;
+        background-color: #fff;
+        padding: 20px;
+    }
+    .row_level{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #4F4F4F;
+    margin-bottom: 32px;
+    margin-left: 12px;
+    margin-top: 24px;
+
+       
+    }
+    .row_level_end{
+        margin: 0 16px;
+    padding: 44px 0;
+    }
+    .row_level_end_options{
+        display: flex;
+        width: 100%;
+         margin: 28px 0 0 0 ;
+
+    }
+    .score_value{
+        font-weight: 500;
+        font-size: 21px;
+        line-height: 32px;
+        color: #333333;
+
+   
+    }
