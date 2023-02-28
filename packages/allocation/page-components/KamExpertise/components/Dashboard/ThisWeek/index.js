@@ -1,5 +1,8 @@
 import { Card, Tooltip } from '@cogoport/components';
-import { IcMArrowNext, IcMInfo, IcMAgentManagement, IcAHelpingHand011 } from '@cogoport/icons-react';
+import {
+	IcMArrowNext,
+	IcMInfo, IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous,
+} from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import BadgeFilter from '../BadgeFilter';
@@ -45,25 +48,25 @@ function ThisWeek() {
 			title     : 'Customer Expertise',
 			avg_score : 2300,
 			points_in : 'Re-activation',
-			icon      : <IcMAgentManagement height={20} width={20} />,
+			icon      : <IcMAgentManagement height={24} width={24} />,
 		},
 		{
 			title     : 'Trade Expertise',
 			avg_score : 2300,
 			points_in : 'Re-activation',
-			icon      : <IcAHelpingHand011 height={24} width={24} />,
+			icon      : <IcMTradeparties height={24} width={24} />,
 		},
 		{
 			title     : 'Commodity Expertise',
 			avg_score : 2300,
 			points_in : 'Re-activation',
-			icon      : <IcMAgentManagement height={20} width={20} />,
+			icon      : <IcMBreakBulkCargoType height={24} width={24} />,
 		},
 		{
 			title     : 'Misc  Expertise',
 			avg_score : 2300,
 			points_in : 'Re-activation',
-			icon      : <IcAHelpingHand011 height={24} width={24} />,
+			icon      : <IcMMiscellaneous height={24} width={24} />,
 		},
 	];
 

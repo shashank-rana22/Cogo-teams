@@ -2,10 +2,16 @@ import { Input, FileSelect, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
+
 import styles from './styles.module.css';
 
 function GetCard(props) {
 	const { medalType, inputPlaceHolder, isLastItem } = props;
+
+	const {
+		onCheckPublish, loading,
+	} = useBadgeConfigurationAttributes();
 
 	// const upload_props = {
 	// 	name            : 'flag_icon_url',
@@ -55,7 +61,12 @@ function GetCard(props) {
 					// accept=".png,.pkg"
 				/>
 
-				<Button size="sm" themeType="primary">
+				<Button
+					size="sm"
+					themeType="primary"
+					disabled={loading}
+					onClick={onCheckPublish}
+				>
 					Save
 				</Button>
 			</div>

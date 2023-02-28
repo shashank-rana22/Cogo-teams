@@ -1,0 +1,58 @@
+.container {
+    padding: 24px;
+    padding-bottom: 20px;
+    background-color: #fff;
+
+    @media (max-width: 576px) {
+        padding-top: 50px;
+    }
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.details {
+    flex-basis: 40%;
+}
+.modified {
+    display: flex;
+    margin-top: 60px;
+    font-weight: 500;
+    justify-content: space-between;
+}
+
+.rules {
+    display: flex;
+    flex-basis: 25%;
+    margin-left: 10%;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.rule_heading {
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+
+.pill {
+    :global(.ui_QjoiV) {
+        margin: 0;
+    }
+}
+
+.badge {
+    display: flex;
+    flex-basis: 25%;
+    padding-left: 5%;
+    align-items: center;
+}

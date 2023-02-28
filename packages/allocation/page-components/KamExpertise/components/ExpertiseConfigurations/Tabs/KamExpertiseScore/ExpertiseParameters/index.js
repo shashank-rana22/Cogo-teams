@@ -1,8 +1,11 @@
+import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import EditExpertiseParamsCard from './EditExpertiseParamsCard';
 
-function ExpertiseParameters({ expertiseData, key }) {
+function ExpertiseParameters(props) {
+	const { expertiseData, key, onClickAddCondition } = props;
+
 	const [editMode, setEditMode] = useState(true);
 
 	return (
@@ -15,8 +18,8 @@ function ExpertiseParameters({ expertiseData, key }) {
 				/>
 			)}
 
+			<Button themeType="secondary" onClick={onClickAddCondition}>+ Condition</Button>
 		</div>
-
 	);
 }
 
