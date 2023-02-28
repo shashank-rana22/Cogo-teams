@@ -66,7 +66,6 @@ function CreateResponse({
 			]));
 		} else {
 			const data = responseData;
-
 			data[index] = formValues;
 
 			setResponseData(data);

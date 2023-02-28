@@ -1,5 +1,6 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { format } from '@cogoport/utils/';
 
 import useEnrichmentRequests from '../../hooks/useEnrichmentRequests';
 
@@ -25,46 +26,29 @@ function Header() {
 				<IcMArrowBack style={{ marginRight: '8px' }} />
 				<div>Back to Enrichment Dashboard</div>
 			</div>
+
 			<div className={styles.header}>
-
-				<div className={styles.profile}>
-
-					<div className={styles.circle}>
-						<div>RT</div>
+				<div className={styles.info}>
+					<div style={{ marginRight: '12px' }}>Organizatio Name -</div>
+					<div className={styles.value}>
+						{requestData.organization?.business_name}
 					</div>
 				</div>
-				<div className={styles.organization}>
 
-					<div>
-						<div className={styles.title}>
-							Organization Name :
-							{' '}
-							{requestData.organization?.business_name}
-							{' '}
-						</div>
-						<div className={styles.sub_title}>
-							{' '}
-							Enrichment Request Date:
-							{' '}
-							{requestData.created_at}
-						</div>
-						<div className={styles.pan}>
-							PAN:
-							{' '}
-							{requestData.organization?.registration_number}
-						</div>
+				<div className={styles.info}>
+
+					<div style={{ marginRight: '12px' }}>Registration Number -</div>
+					<div className={styles.value}>
+						{requestData.organization?.registration_number}
 					</div>
 
 				</div>
-				<div className={styles.address}>
-					<div style={{ marginRight: '20px' }}> Address: </div>
 
-					<div>
+				<div className={styles.info}>
 
-						Lörem ipsum kavis begon korsspråkande av renoren grindsamhälle
-						inaskad usm ifall on vupömubelt. Supragyn lunar. Ludål nixa renat panpatologi.
-						Ditäktig nätpoker lans ninyl
-
+					<div style={{ marginRight: '12px' }}>Enrichment Request Created At -</div>
+					<div className={styles.value}>
+						{format(requestData.created_at, 'dd MMM yyyy')}
 					</div>
 
 				</div>

@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import CreateResponse from '../../common/CreateResponse';
 import useSubmitResponses from '../../hooks/useSubmitResponses';
