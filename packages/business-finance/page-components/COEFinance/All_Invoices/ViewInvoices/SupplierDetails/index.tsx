@@ -11,7 +11,7 @@ import {
 	IcMDownload,
 	IcMInfo,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React, { useState } from 'react';
 
@@ -231,7 +231,7 @@ function SupplierDetails({
 						>
 							<Modal.Header title="SUPPLIER HISTORY" />
 							<Modal.Body>
-								{historyData ? (
+								{!isEmpty(historyData) ? (
 									<List
 										config={config}
 										itemData={{ list: historyData }}

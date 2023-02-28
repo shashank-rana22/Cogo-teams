@@ -20,10 +20,11 @@ function MyResponsivePie({ data }) {
 
 			<ResponsivePie
 				data={data}
-				margin={{ top: 50, right: 80, bottom: 80, left: 80 }}
+				margin={{ top: 40, right: 10, bottom: 80, left: 80 }}
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
 				borderWidth={1}
+				colors={['hsl(186, 26%, 55%)', 'hsl(186, 44%, 68%)', 'hsl(186, 44%, 77%)', 'hsl(186, 45%, 87%)']}
 				borderColor={{
 					from      : 'color',
 					modifiers : [
@@ -33,7 +34,7 @@ function MyResponsivePie({ data }) {
 						],
 					],
 				}}
-        // tooltip={function(e){}}
+				sortByValue
 				arcLinkLabelsSkipAngle={10}
 				arcLinkLabelsTextColor="#ffff"
 				arcLinkLabelsThickness={0}
@@ -73,7 +74,7 @@ function MyResponsivePie({ data }) {
 						anchor        : 'top-left',
 						direction     : 'column',
 						justify       : false,
-						translateX    : -50,
+						translateX    : -70,
 						translateY    : 50,
 						itemsSpacing  : 0,
 						itemWidth     : 100,

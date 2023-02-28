@@ -8,7 +8,7 @@ const useSupplierHistory = () => {
 
 	const [{ data:historyData, loading }, trigger] = useRequestBf(
 		{
-			url    : '/common/job/supplier-history',
+			url    : '/purchase/bills/supplier-history',
 			method : 'get',
 		},
 		{ autoCancel: false },

@@ -24,8 +24,18 @@ function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
 	const { shipmentId: shipmentid, jobNumber, orgId, IsJobClose } = query || {};
-	const [showButton, setShowButton] = useState(IsJobClose || false);
-	const [showFinal, setShowFinal] = useState(false);
+	const getStatus = () => {
+		if (IsJobClose === 'OPEN') {
+			return false;
+		}
+		if (IsJobClose === 'OPR_CLOSED') {
+			return true;
+		}
+		return false;
+	};
+
+	const [showButton, setShowButton] = useState(getStatus());
+	const [showFinal, setShowFinal] = useState(IsJobClose === 'CLOSED' || false);
 	const {
 		selldata,
 		buydata,
