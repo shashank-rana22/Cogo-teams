@@ -1,6 +1,8 @@
 /* eslint-disable react/no-danger */				// TODOs
 import { Button } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import Spinner from '../../../../commons/Spinner';
@@ -12,6 +14,8 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const router = useRouter();
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
+
+	const { source = '' } = query;
 
 	const {
 		question_abstract = '',
@@ -57,6 +61,11 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		setQuestionPreview('create');
 	};
 
+	const onClickBackButton = () => {
+		const href = '/learning/faq/create';
+		router.push(href, href);
+	};
+
 	if (loading) {
 		return (
 			<div className={styles.spinner}>
@@ -73,8 +82,15 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.header}>
+				<IcMArrowBack
+					width={20}
+					height={20}
+					className={styles.back_icon}
+					onClick={onClickBackButton}
+				/>
 				<h1 className={styles.heading}>Preview Question</h1>
+
 			</div>
 			<div>
 				<h5 className={styles.question_title}>Question</h5>
@@ -90,7 +106,9 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				</p>
 			</div>
 			<div>
-				<h5 className={styles.tags_title}>Tags</h5>
+				{!isEmpty(tags)
+					&& <h5 className={styles.tags_title}>Tags</h5>}
+
 				<div className={styles.tags_container}>
 					{tags.map((item) => (
 						<button className={styles.tags_button}>{item}</button>
@@ -99,7 +117,9 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div>
-				<h5 className={styles.tags_title}>Topics</h5>
+				{!isEmpty(topics)
+				&& <h5 className={styles.tags_title}>Topics</h5>}
+
 				<div className={styles.tags_container}>
 					{topics.map((item) => (
 						<button className={styles.tags_button}>{item}</button>
@@ -108,7 +128,9 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div>
-				<h5 className={styles.tags_title}>Audiences</h5>
+				{!isEmpty(audiences)
+				&& <h5 className={styles.tags_title}>Audiences</h5>}
+
 				<div className={styles.tags_container}>
 					{audiences.map((item) => (
 						<button className={styles.tags_button}>{item}</button>
@@ -117,15 +139,22 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<Button
-					themeType="primary"
-					size="md"
-					className={styles.publish_button}
-					onClick={() => onClickPublish({ data })}
+				{!(source === 'view')
+					&& (
+						<Button
+							themeType="primary"
+							size="md"
+							className={styles.publish_button}
+							onClick={() => onClickPublish({ data })}
+						>
+							Publish
+						</Button>
+					)}
+				<div
+					className={styles.goback_button}
+					role="presentation"
+					onClick={() => onclickBack(id)}
 				>
-					Publish
-				</Button>
-				<div className={styles.goback_button} role="presentation" onClick={() => onclickBack(id)}>
 					Go Back & Edit
 				</div>
 			</div>

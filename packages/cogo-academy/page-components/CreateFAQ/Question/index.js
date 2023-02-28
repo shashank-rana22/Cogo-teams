@@ -61,6 +61,7 @@ function CreateFAQ() {
 		listTopicsLoading,
 		listTagsLoading,
 		listAudienceLoading,
+		apiLoading,
 	} = useCreateQuestions({ data, setEditorError });
 
 	const {
@@ -120,7 +121,7 @@ function CreateFAQ() {
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [listTopicsLoading, listTagsLoading, listAudienceLoading]);
+	}, [listTopicsLoading, listTagsLoading, listAudienceLoading, JSON.stringify(data)]);
 
 	const onClickBackIcon = () => {
 		router.back();
@@ -297,11 +298,15 @@ function CreateFAQ() {
 						themeType="tertiary"
 						style={{ marginRight: '12px' }}
 						onClick={() => setShowModalOnCancel(true)}
+						disabled={apiLoading}
 					>
 						Cancel
 					</Button>
 
-					<Button type="submit">
+					<Button
+						type="submit"
+						loading={apiLoading}
+					>
 						Preview & Publish
 					</Button>
 				</div>

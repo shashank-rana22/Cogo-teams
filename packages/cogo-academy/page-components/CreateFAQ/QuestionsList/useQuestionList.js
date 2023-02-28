@@ -214,8 +214,8 @@ const useQuestionList = () => {
 
 	const onClickViewButton = (id) => {
 		router.push(
-			`/learning/faq/create/question?mode=preview&id=${id}`,
-			`/learning/faq/create/question?mode=preview&id=${id}`,
+			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
+			`/learning/faq/create/question?mode=preview&id=${id}&source=view`,
 		);
 	};
 
@@ -227,6 +227,7 @@ const useQuestionList = () => {
 			onClickViewButton,
 		})
 		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
+
 	const { list: data = [], ...paginationData } = questionList || {};
 
 	return {
