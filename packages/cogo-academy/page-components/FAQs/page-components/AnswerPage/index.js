@@ -14,7 +14,7 @@ import RelatedQuestion from '../RelatedQuestion';
 
 import styles from './styles.module.css';
 
-const FEEDBACK_MAPPING = {
+const FEEDBACK_MAPPING_ISLIKED = {
 	true  : 'liked',
 	false : 'disliked',
 };
@@ -30,67 +30,120 @@ function AnswerPage() {
 	const { id = '', topicId = '' } = query || {};
 
 	const [show, setShow] = useState(false);
+	const [load, setload] = useState(true);
+	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id });
 
-	const { data: answerData, loading } = useGetQuestions({ id });
+	// const { data: answerData, loading } = useGetQuestions({ id });
 
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+	// console.log(is_positive);
 
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
+	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
 	useEffect(() => {
-		setIsLiked(FEEDBACK_MAPPING[is_positive]);
+		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
 	const { handleSubmit, formState: { errors }, control } = useForm();
 
+	let apiName = '/create_faq_feedback';
+
+	if (isLiked) {
+		apiName = '/update_faq_feedback';
+	}
+
 	const [{ loading: feedbackLoading }, trigger] = useRequest({
-		url    : '/create_faq_feedback',
+		url    : apiName,
 		method : 'POST',
 	});
 
 	const onClose = () => {
-		setIsLiked('');
+		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		setShow(false);
 	};
 
 	const onClickLikeButton = async ({ _id }) => {
-		try {
-			const payload = {
-				faq_answer_id : _id,
-				is_positive   : true,
-				status        : 'active',
+		setload(false);
+		let payload = {
+			faq_answer_id : _id,
+			is_positive   : true,
+			status        : 'active',
+		};
+		if (isLiked === 'liked') {
+			payload = {
+				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				status : 'inactive',
 			};
-
+		} else if (isLiked === 'disliked') {
+			payload = {
+				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				is_positive : true,
+				status      : 'active',
+			};
+		}
+		try {
 			await trigger({
 				data: payload,
 			});
-
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
+			refetchQuestions();
+		} catch (error) {
+			console.log('error :: ', error);
+		}
+	};
+	const onClickRemoveDisLike = async () => {
+		setload(false);
+		try {
+			await trigger({
+				data: {
+					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					status : 'inactive',
+				},
+			});
+			setIsLiked('');
+			refetchQuestions();
 		} catch (error) {
 			console.log('error :: ', error);
 		}
 	};
 
 	const onSubmit = async (values) => {
-		try {
-			let remark = values?.remark;
-			if (values?.answer_checkbox) {
-				remark = `Answer not satisfactory. ${remark}`;
-			}
-			if (values?.question_checkbox) {
-				remark = `Question not satisfactory. ${remark}`;
-			}
-			await trigger({
-				data: {
-					faq_answer_id : answerData?.answers[0]?.id,
-					is_positive   : false,
-					remark,
-					status        : 'active',
-				},
-			});
+		setload(false);
+		let remark = values?.remark;
 
+		if (values?.answer_checkbox) {
+			remark = `Answer not satisfactory. ${remark}`;
+		}
+		if (values?.question_checkbox) {
+			remark = `Question not satisfactory. ${remark}`;
+		}
+
+		let payload = {
+
+			faq_answer_id : answerData?.answers[0]?.id,
+			is_positive   : false,
+			remark,
+			status        : 'active',
+
+		};
+		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
+			payload = {
+				id            : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				faq_answer_id : answerData?.answers[0]?.id,
+				is_positive   : false,
+				remark,
+				status        : 'active',
+			};
+		}
+
+		try {
+			await trigger({
+				data: payload,
+			});
+			setIsLiked('disliked');
 			setShow(false);
+			refetchQuestions();
 		} catch (error) {
 			console.log('error :: ', error);
 		}
@@ -101,7 +154,7 @@ function AnswerPage() {
 		router.push(href, href);
 	};
 
-	if (loading) {
+	if (loading && load) {
 		return (
 			<div className={styles.spinner}>
 				<Spinner
@@ -164,8 +217,14 @@ function AnswerPage() {
 						onClickLikeButton({ _id: answerData?.answers[0]?.id });
 					}}
 				>
-					{answerData?.answers[0]?.upvote_count > 0 ? (
-						<Badge placement="left" color="green" size="md" text={answerData?.answers[0]?.upvote_count}>
+					{answerData?.answers[0]?.upvote_count >= 0 ? (
+						<Badge
+							placement="left"
+							color="green"
+							size="md"
+							// eslint-disable-next-line no-unsafe-optional-chaining
+							text={answerData?.answers[0]?.upvote_count || 0}
+						>
 							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
 						</Badge>
 					) : (
@@ -177,10 +236,12 @@ function AnswerPage() {
 					role="presentation"
 					className={styles.dislike_container}
 					onClick={() => {
-						setShow(true);
-						setIsLiked(
-							isLiked === 'disliked' ? '' : 'disliked',
-						);
+						if (isLiked !== 'disliked') {
+							setShow(true);
+							setIsLiked('disliked');
+						} else {
+							onClickRemoveDisLike();
+						}
 					}}
 				>
 					<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />

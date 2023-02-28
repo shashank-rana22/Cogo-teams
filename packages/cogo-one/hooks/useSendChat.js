@@ -88,11 +88,13 @@ const useSendChat = ({
 						text         : newMessage,
 						media_url    : finalUrl,
 						filename     : fileName,
+						session_type : 'admin',
 					};
 				} else {
 					messageMetadata = {
 						message_type : 'text',
 						text         : newMessage,
+						session_type : 'admin',
 					};
 				}
 
@@ -103,6 +105,7 @@ const useSendChat = ({
 					organization_id,
 					message_metadata : messageMetadata,
 					lead_user_id,
+
 				});
 			}, 500);
 		}
@@ -144,6 +147,7 @@ const useSendChat = ({
 				message_metadata : {
 					message_type : 'text',
 					text         : val,
+					session_type : 'admin',
 				},
 			});
 		}, 500);
