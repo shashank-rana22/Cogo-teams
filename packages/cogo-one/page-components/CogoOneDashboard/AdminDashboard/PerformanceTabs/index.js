@@ -10,9 +10,9 @@ import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';
 
-function PerformanceTab({ loading = false, agents_performance = {} }) {
+function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 	const { agents_performance: configAgentPerformance } = configurationData;
-	const { best_performance, worst_performance } = agents_performance;
+	const { best_performance = [], worst_performance = [] } = agentsPerformance;
 
 	const [activeTab, setActiveTab] = useState('best_performance');
 	const data = activeTab === 'best_performance' ? best_performance : worst_performance;

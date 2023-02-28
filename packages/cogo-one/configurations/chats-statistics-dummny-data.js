@@ -1,35 +1,24 @@
-import { dArrow, aArrow } from '../page-components/CogoOneDashboard/constants';
-
 export const chatsStatsDummyData = [
 	{
 		label      : 'No. of chats closed',
-		value      : 'escalate',
-		image      : <img src={dArrow} alt="" />,
-		number     : '8',
-		percentage : -2.2,
+		percentage : 'chats_closed_percent',
+		key        : 'chats_closed',
 		isAgent    : false,
 	},
 	{
 		label      : 'No. of chats assigned further',
-		value      : 'assigned_chat',
-		image      : <img src={aArrow} alt="" />,
-		number     : '12',
-		percentage : +2.2,
+		percentage : 'chats_assigned_percent',
+		key        : 'chats_assigned',
 		isAgent    : true,
-
 	}, {
 		label      : 'No. of warning chats',
-		value      : 'assigned_chat',
-		image      : <img src={dArrow} alt="" />,
-		number     : '8',
-		percentage : -2.2,
+		percentage : 'warning_chats_percent',
+		key        : 'warning_chats',
 		isAgent    : false,
 	}, {
 		label      : 'No. of escalated chat',
-		value      : 'assigned_chat',
-		image      : <img src={aArrow} alt="" />,
-		number     : '12',
-		percentage : 2.2,
+		percentage : 'escalated_chats_percent',
+		key        : 'escalated_chats',
 		isAgent    : true,
 	},
 ];

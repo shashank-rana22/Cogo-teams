@@ -15,8 +15,11 @@ import RedFlags from './RedFlags';
 import styles from './styles.module.css';
 
 function AdminDashboard(props) {
-	const { timeline, setTimeline, listData, loading, emptyState } = props || {};
-	const { escalations = [], calls_analytics = {}, channels_message_analytics = {}, agents_details = {}, agents_performance = {} } = listData || {};
+	const { timeline, setTimeline, listData, loading } = props || {};
+	const {
+		escalations = [], calls_analytics = {}, channels_message_analytics = {},
+		agents_details = {}, agents_performance = {}, status_of_chats = {}, cogo_one_dashboard_graph = {},
+	} = listData || {};
 	const [activeTab, setActiveTab] = useState('day');
 
 	return (
@@ -35,26 +38,23 @@ function AdminDashboard(props) {
 						<div className={styles.calender_container}>
 							<Calender props={props} />
 						</div>
-						<LineChart />
+						<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} />
 					</div>
 					<RedFlags escalations={escalations} loading={loading} />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
-					<AgentActivity emptyState={emptyState} agents_details={agents_details} />
-					<PerformanceTab agents_performance={agents_performance} />
-
+					<AgentActivity agentsDetails={agents_details} />
+					<PerformanceTab agentsPerformance={agents_performance} />
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
 					<div className={styles.two_statistics}>
-						<ChannelMessageAnalytic channels_message_analytics={channels_message_analytics} loading={loading} />
+						<ChannelMessageAnalytic channelsMessageAnalytics={channels_message_analytics} loading={loading} />
 						<CallAnalytics callsAnalytics={calls_analytics} loading={loading} />
 					</div>
-
 					<div className={styles.four_characterisctics_container}>
-						<ChatStatistics isAdminView />
+						<ChatStatistics isAdminView statusOfChats={status_of_chats} loading={loading} />
 					</div>
 				</div>
-
 			</div>
 		</div>
 

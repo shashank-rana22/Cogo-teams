@@ -155,7 +155,7 @@ function Calendar({ props }) {
 					resetDiv={resetDiv}
 					pagination={pagination}
 					setPagination={setPagination}
-					isWeek={timeline === 'week'}
+					timeline={timeline}
 				/>
 			</div>
 			<button

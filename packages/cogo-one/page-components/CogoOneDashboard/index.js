@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
@@ -12,8 +11,10 @@ function CogoOneDashboard() {
 	const [timeline, setTimeline] = useState('day');
 	const [calendarData, setCalendarData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(format(new Date(), 'dd MMM YYYY'));
-	const selectedTimeline = (calendarData || []).filter((d) => format(d.date, 'dd MMM YYYY') === format(selectedItem, 'dd MMM YYYY'))?.[0];
 
+	const selectedTimeline = (calendarData || []).filter(
+		(d) => format(d.date, 'dd MMM YYYY') === format(selectedItem, 'dd MMM YYYY'),
+	)?.[0];
 	const { loading, listData = {} } = useGetCogoOneDashboard({ timeline, selectedTimeline, selectedItem });
 
 	const {
