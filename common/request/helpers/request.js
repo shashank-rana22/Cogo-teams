@@ -44,12 +44,13 @@ request.interceptors.request.use((oldConfig) => {
 
 	const serviceName = microServices[apiPath];
 
-	newConfig.paramsSerializer = customSerializer;
+	newConfig.paramsSerializer = { serialize: customSerializer };
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${apiPath}`;
 		if (serviceName === 'location') {
-			newConfig.paramsSerializer = customPeeweeSerializer;
+			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
+			newConfig.baseURL = process.env.NEXT_PUBLIC_COGO_MAPS_URL;
 		}
 	}
 
