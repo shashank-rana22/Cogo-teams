@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -36,10 +36,11 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 			{ openModal
 						&& (
 							<Modal
-								size="md"
+								size="sm"
 								show={openModal}
 								onClose={() => setOpenModal((pv) => !pv)}
 								placement="center"
+								className={styles.modal_class}
 							>
 								<Modal.Body>
 									<div style={{ padding: '10px' }}>
@@ -47,6 +48,7 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 											medalType={medalType}
 											inputPlaceHolder="score"
 											isLastItem
+											isBadgeEdit
 										/>
 									</div>
 								</Modal.Body>

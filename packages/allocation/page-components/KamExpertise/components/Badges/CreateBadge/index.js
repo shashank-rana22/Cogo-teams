@@ -111,20 +111,18 @@ function CreateBadge({ setCreateBadge }) {
 					}
 				</div>
 
-				{badgeInput && (
-					<div className={styles.lower_background}>
-						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
-						<div className={styles.display_flex}>
-							{medalType.map((data, index) => (
-								<GetCard
-									medalType={data.medalType}
-									inputPlaceHolder={data.inputPlaceHolder}
-									isLastItem={index === medalType.length - 1}
-								/>
-							))}
-						</div>
+				<div className={styles.lower_background}>
+					<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
+					<div className={styles.display_flex}>
+						{medalType.map((data, index) => (
+							<GetCard
+								medalType={data.medalType}
+								inputPlaceHolder={data.inputPlaceHolder}
+								isLastItem={index === medalType.length - 1}
+							/>
+						))}
 					</div>
-				)}
+				</div>
 
 				<div className={styles.btncls}>
 					<Button

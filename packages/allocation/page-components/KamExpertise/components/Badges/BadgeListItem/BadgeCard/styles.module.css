@@ -18,3 +18,8 @@
     align-self: center;
     padding: 10px;
 }
+.modal_class{
+    :global(.ui_wqLD8){
+        padding: 16px 0;
+    }
+}
