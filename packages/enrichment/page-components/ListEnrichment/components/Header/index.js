@@ -6,7 +6,7 @@ import Filters from '../Filters';
 import styles from './styles.module.css';
 
 // eslint-disable-next-line max-len
-const URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/842e7874b58a6b38fa1de94c77c753d1/feedback_response.csv';
+const URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/bd4627da374e4fe2c49784f166f7f29b/feedback_response_sample.csv';
 
 function Header(props) {
 	const {
