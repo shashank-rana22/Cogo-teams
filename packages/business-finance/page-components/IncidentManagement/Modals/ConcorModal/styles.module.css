@@ -4,8 +4,8 @@
 }
 
 .title {
-	font-weight: 600;
 	min-width: 200px;
+	font-weight: 600;
 }
 
 .flex {
@@ -22,18 +22,22 @@
 	font-size: 12px;
 	font-weight: 600;
 }
-.divider{
+
+.divider {
 	margin-right: 16px;
 }
-.section{
+
+.section {
 	display: flex;
 	margin-bottom: 8px;
 }
-.input_titles{
-	font-weight: 600;
+
+.input_titles {
 	min-width: 200px;
+	font-weight: 600;
 }
-.link{
+
+.link {
 	color: blue !important;
-    text-decoration: underline !important;
+	text-decoration: underline !important;
 }
