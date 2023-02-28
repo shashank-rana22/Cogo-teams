@@ -4,7 +4,6 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { useEffect, useState } from 'react';
 
 import useApproveConcor from '../../apisModal/useApproveConcor';
-import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
 import styles from './styles.module.css';
