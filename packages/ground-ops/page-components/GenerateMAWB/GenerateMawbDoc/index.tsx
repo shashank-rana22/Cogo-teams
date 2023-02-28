@@ -66,6 +66,7 @@ function GenerateMawb({
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
+		setEdit,
 	});
 
 	const ref = createRef(null);

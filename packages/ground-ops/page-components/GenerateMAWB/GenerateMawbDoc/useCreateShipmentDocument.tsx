@@ -4,11 +4,13 @@ import { useRequest } from '@cogoport/request';
 interface Props {
 	edit?: boolean;
 	setGenerate?:any;
+	setEdit?:any;
 }
 
 const useCreateShipmentDocument = ({
 	edit = false,
 	setGenerate = () => {},
+	setEdit,
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit) api = 'update_shipment_document';
@@ -25,6 +27,7 @@ const useCreateShipmentDocument = ({
 			}).then(() => {
 				Toast.success('Document saved successfully');
 				setGenerate(false);
+				setEdit(false);
 			});
 		} catch (error) {
 			Toast.error('Failed to save Document');
