@@ -51,7 +51,7 @@ function Filters({
 						search: value || undefined,
 					})}
 					size="md"
-					placeholder="Search by Original/Translated Text "
+					placeholder="Search by Original Text "
 				/>
 				<CreateRoleModal status={status} refetch={refetch} />
 			</div>

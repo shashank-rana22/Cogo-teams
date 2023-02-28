@@ -23,8 +23,8 @@ function Translate() {
 				<Toggle
 					name="myTransilates"
 					size="md"
-					offLabel="My Transilations"
-					onLabel="All Transilations"
+					offLabel="My Translations"
+					onLabel="All Translations"
 					value={myTranslates}
 					onChange={(e) => {
 						setMyTranslates(e?.target?.checked ? 'true' : 'false');
