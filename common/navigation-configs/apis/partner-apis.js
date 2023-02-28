@@ -584,6 +584,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1660,6 +1665,11 @@ const partner = {
 			api          : 'create_event',
 			access_type  : 'private',
 			service_name : 'event',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
 		},
 	],
 	supply_crm: [
@@ -7080,6 +7090,54 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api         : 'get_purchase_payable_bill_overseas_details',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'get_purchase_payable_bill_shipment_documents',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'get_purchase_payrun_download_overseas_utr',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'get_purchase_bills_list_overseas_trade_parties',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'post_purchase_payrun_download_zip',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'post_purchase_payrun_upload_documents',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'delete_purchase_payrun_documents',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
+		{
+			api         : 'post_purchase_payrun_merged_pdf',
+			access_type : 'private',
+			module      : 'Overseas',
+			feature     : 'Overseas',
+		},
 	],
 	my_incident: [
 		{
@@ -9794,21 +9852,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'operator',
 		},
-		{
-			api          : 'create_air_india_awb_number',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'update_air_india_awb_status',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
-		{
-			api          : 'get_awb_plugin_booking_information',
-			access_type  : 'private',
-			service_name : 'shipment',
-		},
 	],
 	airline_booking_plugin: [
 		{
@@ -9838,6 +9881,16 @@ const partner = {
 		},
 		{
 			api          : 'get_awb_plugin_booking_information',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_air_india_lms_password',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'get_air_india_lms_password',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
