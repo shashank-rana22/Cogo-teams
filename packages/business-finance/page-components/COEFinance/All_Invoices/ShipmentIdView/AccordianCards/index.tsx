@@ -46,6 +46,8 @@ function AccordianCards({
 	});
 	const router = useRouter();
 
+	const listLength = expenseCount === 0 && incomeCount === 0;
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -198,6 +200,7 @@ function AccordianCards({
 								</Button>
 							) : (
 								<Button
+									disabled={listLength}
 									themeType="secondary"
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
