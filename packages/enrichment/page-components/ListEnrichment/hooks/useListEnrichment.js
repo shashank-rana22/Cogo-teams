@@ -52,8 +52,6 @@ const useListEnrichment = () => {
 
 	});
 
-	// const { organization_id, created_at_greater_than, created_at_less_than } = globalFilters || {};
-
 	let listApiName = 'feedback_requests';
 
 	if (activeTab === 'requests_sent' && secondaryTab === 'uploaded_files') {
@@ -86,30 +84,36 @@ const useListEnrichment = () => {
 		}));
 	}, [searchQuery]);
 
+	// useEffect(() => {
+	// 	setParams((prevParams) => ({
+
+	// 		...prevParams,
+	// 		filters: {
+	// 			...prevParams.filters,
+	// 			status: activeTab === 'requests_sent' ? 'responded' : undefined,
+	// 		},
+	// 	}));
+
+	// 	setSecondaryTab('submitted_requests');
+	// }, [activeTab]);
+
 	useEffect(() => {
 		setParams((prevParams) => ({
-
 			...prevParams,
+
 			filters: {
 				...prevParams.filters,
-				status: activeTab === 'requests_sent' ? 'responded' : undefined,
-			},
-		}));
 
-		setSecondaryTab('submitted_requests');
-	}, [activeTab]);
-
-	useEffect(() => {
-		setParams((prevParams) => ({
-			...prevParams,
-			filters: {
-				...(secondaryTab === 'submitted_requests' && {
-					...prevParams.filters,
+				...(activeTab === 'requests_sent' && {
+					status: secondaryTab === 'submitted_requests'
+						? 'responded' : undefined,
 
 				}),
+
 			},
+
 		}));
-	}, [secondaryTab]);
+	}, [activeTab, secondaryTab]);
 
 	const router = useRouter();
 

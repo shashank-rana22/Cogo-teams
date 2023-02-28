@@ -44,7 +44,7 @@ function Enrichment(props) {
 
 				{loading && <LoadingState /> }
 
-				{!loading && isEmpty(list) && (
+				{!loading && isEmpty(list) ? (
 					<div className={styles.empty_container}>
 						<EmptyState
 							height={280}
@@ -54,9 +54,7 @@ function Enrichment(props) {
 							flexDirection="column"
 						/>
 					</div>
-				) }
-
-				{!loading && (
+				) : (
 					<div className={styles.table_container}>
 						<Table
 							className={styles.table}

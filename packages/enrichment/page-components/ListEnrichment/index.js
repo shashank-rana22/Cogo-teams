@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 
 const tabPanelMapping = {
 	submitted_requests: {
-		name  : 'enrichment_requests',
-		title : 'Enrichment Requests',
+		name  : 'submitted_requests',
+		title : 'Submitted Requests',
 
 	},
 	uploaded_files: {
