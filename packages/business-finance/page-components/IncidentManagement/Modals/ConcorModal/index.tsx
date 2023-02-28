@@ -59,7 +59,7 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 			value:
 	<div>
 		{bookingProof.map((url, index) => (
-			<div>
+			<div key={url}>
 				<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
 				{index !== bookingProof.length - 1 ? ('     ,') : null}
 			</div>
@@ -71,7 +71,7 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 			value:
 	<div>
 		{quotation.map((url, index) => (
-			<div>
+			<div key={url}>
 				<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
 				{index !== quotation.length - 1 ? ('     ,') : null}
 			</div>
@@ -118,7 +118,7 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 					<Modal.Header title="Concor PDA Approval" />
 					<Modal.Body>
 						{concorDetails.map((detail) => (
-							<div className={styles.flex}>
+							<div key={detail.title} className={styles.flex}>
 								<div className={styles.title}>
 									{detail.title}
 								</div>

@@ -2,7 +2,7 @@ import { MultiSelect, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
-import useGetAsyncOptionsBF from '../../../hooks/useGetAsyncOptionsBF';
+import useGetAsyncOptionsMicroservice from '../../../hooks/useGetAsyncOptionsMicroservice';
 import {
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganizations,
@@ -55,7 +55,7 @@ function AsyncSelect(props) {
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = microService ? useGetAsyncOptionsBF : useGetAsyncOptions;
+	const asyncOptionsHook = microService ? useGetAsyncOptionsMicroservice : useGetAsyncOptions;
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,

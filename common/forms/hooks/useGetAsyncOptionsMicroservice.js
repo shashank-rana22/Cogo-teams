@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
-function useGetAsyncOptionsBF({
+function useGetAsyncOptionsMicroservice({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
@@ -91,4 +91,4 @@ function useGetAsyncOptionsBF({
 	};
 }
 
-export default useGetAsyncOptionsBF;
+export default useGetAsyncOptionsMicroservice;
