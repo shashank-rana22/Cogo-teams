@@ -10214,6 +10214,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'inventory_management',
 		},
+		{
+			api          : 'get_rail_domestic_freight_inventories',
+			access_type  : 'private',
+			service_name : 'inventory_management',
+		},
 
 	],
 	cogo_one: [
