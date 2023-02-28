@@ -145,11 +145,13 @@ function MessageConversations({
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received' ? (
 						<ReceiveDiv
+							key={eachMessage?.created_at}
 							eachMessage={eachMessage}
 							activeMessageCard={activeMessageCard}
 						/>
 					) : (
 						<SentDiv
+							key={eachMessage?.created_at}
 							eachMessage={eachMessage}
 							activeMessageCard={activeMessageCard}
 						/>

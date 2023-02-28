@@ -5,7 +5,7 @@ import {
 	updateDoc,
 	doc,
 } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
@@ -14,6 +14,8 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 	const {
 		query: { assigned_chat = '' },
 	} = useRouter();
+	const snapshotListener = useRef(null);
+
 	const [firstLoading, setFirstLoading] = useState(true);
 	const [activeCardId, setActiveCardId] = useState('');
 
@@ -59,18 +61,28 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 			resultList,
 		};
 	};
-
-	useEffect(() => {
-		setLoading(true);
+	const omniChannelQuery = useMemo(() => {
 		const omniChannelCollection = collectionGroup(firestore, 'rooms');
-		const omniChannelQuery = getFireStoreQuery({
+		return getFireStoreQuery({
 			omniChannelCollection,
 			isomniChannelAdmin,
 			userId,
 			appliedFilters,
 			showBotMessages,
 		});
-		onSnapshot(omniChannelQuery, (querySnapshot) => {
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(appliedFilters), showBotMessages]);
+
+	const snapshotCleaner = () => {
+		if (snapshotListener.current) {
+			snapshotListener.current();
+			snapshotListener.current = null;
+		}
+	};
+	useEffect(() => {
+		setLoading(true);
+		snapshotCleaner();
+		snapshotListener.current = onSnapshot(omniChannelQuery, (querySnapshot) => {
 			const { chats, count, resultList } = dataFormatter(querySnapshot);
 			setListData({
 				messagesList     : resultList,
@@ -78,7 +90,11 @@ const useListChats = ({ firestore, userId, isomniChannelAdmin, showBotMessages =
 				unReadChatsCount : chats,
 			});
 		});
+
 		setLoading(false);
+		return () => {
+			snapshotCleaner();
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [appliedFilters, showBotMessages]);
 
