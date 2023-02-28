@@ -109,8 +109,8 @@ const navigationMappingSeller = {
 		possible_apis : app_apis.app_bookings,
 		module_type   : 'dashboards',
 	},
-	saas_insurance: {
-		key           : 'saas_insurance',
+	saas_cogo_insurance: {
+		key           : 'saas_cogo_insurance',
 		title         : 'Insurance',
 		href          : '/saas/insurance/list',
 		as            : '/saas/insurance/list',
