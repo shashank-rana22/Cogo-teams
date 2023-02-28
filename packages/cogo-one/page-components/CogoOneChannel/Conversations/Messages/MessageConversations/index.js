@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
-import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import {
 	IcMHappy,
 	IcMAttach,
@@ -10,6 +9,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
+import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
@@ -145,11 +145,13 @@ function MessageConversations({
 				{(messagesData || []).map((eachMessage) => (
 					eachMessage?.conversation_type !== 'received' ? (
 						<ReceiveDiv
+							key={eachMessage?.created_at}
 							eachMessage={eachMessage}
 							activeMessageCard={activeMessageCard}
 						/>
 					) : (
 						<SentDiv
+							key={eachMessage?.created_at}
 							eachMessage={eachMessage}
 							activeMessageCard={activeMessageCard}
 						/>
@@ -255,7 +257,7 @@ function MessageConversations({
 				<div className={styles.flex_space_between}>
 					<div className={styles.icon_tools}>
 						{hasPermissionToEdit && (
-							<FileUploader
+							<CustomFileUploader
 								disabled={uploading?.[id]}
 								handleProgress={handleProgress}
 								showProgress={false}
