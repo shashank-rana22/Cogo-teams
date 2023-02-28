@@ -95,7 +95,7 @@ const useListEnrichment = () => {
 	const router = useRouter();
 
 	const handleUploadClick = (feedback_request_id) => {
-		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
+		router.push('/v2/enrichment/[id]', `/v2/enrichment/${feedback_request_id}`);
 	};
 
 	const columns = [
