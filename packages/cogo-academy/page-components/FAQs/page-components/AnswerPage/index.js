@@ -111,7 +111,6 @@ function AnswerPage() {
 	const onSubmit = async (values) => {
 		setload(false);
 		let remark = values?.remark;
-		console.log('check1', answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive);
 
 		if (values?.answer_checkbox) {
 			remark = `Answer not satisfactory. ${remark}`;
