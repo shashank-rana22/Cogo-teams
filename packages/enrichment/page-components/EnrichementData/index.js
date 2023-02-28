@@ -1,9 +1,9 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-// import { useEffect } from 'react';
 
 import Header from './components/Header';
 import Response from './components/Response';
 import useEnrichmentData from './hooks/useEnrichmentData';
+import styles from './styles.module.css';
 
 const tabPanelMapping = {
 	user: {
@@ -31,9 +31,9 @@ function EnrichmentData() {
 	return (
 
 		<div>
-
 			<Header />
-			<div style={{ marginTop: 30 }}>
+
+			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="secondary"
@@ -57,7 +57,6 @@ function EnrichmentData() {
 
 				</Tabs>
 			</div>
-
 		</div>
 
 	);

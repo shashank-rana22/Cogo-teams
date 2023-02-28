@@ -1,8 +1,8 @@
-.filter{
-    display: flex;
-    flex-direction: flex-start;
-    justify-content: space-between;
-    width: 80%;
+.filter {
+	display: flex;
+	flex-direction: flex-start;
+	justify-content: space-between;
+	width: 80%;
 }
 
 .container {
@@ -15,7 +15,6 @@
 	}
 }
 
-
 .select_container {
 	display: flex;
 	flex-direction: row;
@@ -26,27 +25,26 @@
 	}
 }
 
- .select {
+.select {
 	min-width: 200px !important;
-    margin-left: 6px;
+	margin-left: 6px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
 		width: 250px;
 		margin-bottom: 16px;
 	}
- }
-
-.date_picker{
-    width: 140px;
-    margin: 2px 0 0 6px;
 }
- 
+
+.date_picker {
+	width: 140px;
+	margin: 2px 0 0 6px;
+}
 
 .search_container {
-    display: flex;
-	margin-left: 6px;
+	display: flex;
 	margin-right: 16px;
+	margin-left: 6px;
 
 	:global(.ui_input_container) {
 		width: 300px;

@@ -1,8 +1,8 @@
-.header{
-    display: flex;
-    justify-content: flex-end;
+.header {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.actions{
-    display: flex;
+.actions {
+	display: flex;
 }

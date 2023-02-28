@@ -1,9 +1,9 @@
-.footer{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+.footer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 
-.loading{
-    margin-top: 16px;
+.loading {
+	margin-top: 16px;
 }

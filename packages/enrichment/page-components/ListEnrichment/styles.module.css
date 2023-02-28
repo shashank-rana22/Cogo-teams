@@ -1,17 +1,18 @@
-.title{
-    color: #221F20;
-    font-size: 28px;
-    font-weight: 600;
+.title {
+	font-size: 28px;
+	font-weight: 600;
+	color: #221f20;
 }
-.address{
-   max-width: 200px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-	
+
+.address {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-.link_text{
-    text-decoration: underline;
-    margin-left: 20px;
+
+.link_text {
+	margin-left: 20px;
+	text-decoration: underline;
 }
 
 .svg_container {
@@ -23,9 +24,8 @@
 .content_container {
 	display: flex;
 	justify-content: center;
+
 	/* margin-bottom: 4px; */
-
-
 
 	/* @media (min-width: 768px) {
 		flex-direction: column;
@@ -35,8 +35,6 @@
 	} */
 }
 
-
-
-.secondary_tabs{
-    margin-top: 20px;
+.secondary_tabs {
+	margin-top: 20px;
 }

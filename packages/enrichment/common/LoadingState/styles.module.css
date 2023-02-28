@@ -1,8 +1,8 @@
-.loading_container{
+.loading_container {
 	display: flex;
 	justify-content: space-between;
-	background: #ffffff;
-	border-radius: 10px;
-	border-bottom: 1px solid #f2f2f2;
 	padding: 16px 24px;
+	background: #fff;
+	border-bottom: 1px solid #f2f2f2;
+	border-radius: 10px;
 }
