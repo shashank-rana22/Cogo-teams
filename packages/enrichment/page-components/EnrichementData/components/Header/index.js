@@ -1,6 +1,8 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
+import useEnrichmentRequests from '../../hooks/useEnrichmentRequests';
+
 import styles from './styles.module.css';
 
 function Header() {
@@ -8,6 +10,8 @@ function Header() {
 	const handleBack = () => {
 		router.push('/enrichment/');
 	};
+
+	const { requestData = {} } = useEnrichmentRequests();
 
 	return (
 
@@ -32,9 +36,23 @@ function Header() {
 				<div className={styles.organization}>
 
 					<div>
-						<div className={styles.title}>Organization Name :  Rishu Tiles</div>
-						<div className={styles.sub_title}> Enrichment Request Date: 23 Sept 2023</div>
-						<div className={styles.pan}>PAN: DESPR00322H</div>
+						<div className={styles.title}>
+							Organization Name :
+							{' '}
+							{requestData.organization?.business_name}
+							{' '}
+						</div>
+						<div className={styles.sub_title}>
+							{' '}
+							Enrichment Request Date:
+							{' '}
+							{requestData.created_at}
+						</div>
+						<div className={styles.pan}>
+							PAN:
+							{' '}
+							{requestData.organization?.registration_number}
+						</div>
 					</div>
 
 				</div>

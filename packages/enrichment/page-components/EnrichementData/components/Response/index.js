@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import CreateResponse from '../../common/CreateResponse';
 import useSubmitResponses from '../../hooks/useSubmitResponses';
@@ -18,6 +19,7 @@ function Response({
 
 }) {
 	const { handleResponseSubmit = () => {} } = useSubmitResponses({ responseData, setResponseData });
+
 	return (
 		<div>
 
@@ -29,18 +31,19 @@ function Response({
 					setResponseData={setResponseData}
 					type="create"
 				/>
-			) : (responseData || []).map((user, index) => (
+			) : (
+				(responseData || []).map((user, index) => (
 
-				<DetailsCard
-					key={user.id}
-					user={user}
-					index={index}
-					responseData={responseData}
-					setResponseData={setResponseData}
-					loading={loading}
-					activeTab={activeTab}
-				/>
-			))}
+					<DetailsCard
+						key={user.id}
+						user={user}
+						index={index}
+						responseData={responseData}
+						setResponseData={setResponseData}
+						loading={loading}
+						activeTab={activeTab}
+					/>
+				)))}
 
 			{showAddPoc && (
 				<CreateResponse
