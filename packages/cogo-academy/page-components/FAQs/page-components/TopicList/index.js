@@ -5,6 +5,8 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
 import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
+import EmptyState from '../../../../commons/EmpyState';
+import Spinner from '../../../../commons/Spinner';
 import useListFaqTopic from '../../hooks/useListFaqTopic';
 // eslint-disable-next-line import/no-cycle
 import TagQuestions from '../PopularTags/TagQuestions';
@@ -26,9 +28,33 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 		setActiveTab,
 	} = useListFaqTopic();
 
-	if (isEmpty(data?.list)) {
-		return <EmptyQuestionListState searchState={searchState} />;
+	// if (true) {
+	// 	return 'loading...';
+	// }
+
+	if (loading) {
+		return (
+			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
+				<div className={styles.spinner}>
+					<Spinner
+						height={60}
+						width={60}
+						borderWidth="7px"
+						outerBorderColor="#FBD69F"
+						spinBorderColor="red"
+					/>
+				</div>
+			</div>
+		);
 	}
+
+	if (isEmpty(data?.list)) {
+		return (<EmptyState text="Oops! No Topics availabe" />);
+	}
+
+	// if (isEmpty(data?.list)) {
+	// 	return <EmptyQuestionListState searchState={searchState} />;
+	// }
 
 	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 29)}..` : input);
 	return (
