@@ -1,5 +1,5 @@
-import { IcMCross } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 function useListFaqTag() {
@@ -29,16 +29,10 @@ function useListFaqTag() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => { fetchFaqTag(); }, []);
 
-	const options = [];
-
-	(data?.list || []).forEach((item) => {
-		const option = {
-			key      : item.id,
-			children : item?.display_name,
-		};
-
-		options.push(option);
-	});
+	const options = (data?.list || []).map((item) => ({
+		key      : item.id,
+		children : startCase(item?.display_name),
+	}));
 
 	return {
 		refetchTag: fetchFaqTag,

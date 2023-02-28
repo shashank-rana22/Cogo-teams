@@ -5,7 +5,7 @@ import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../../../commons/Spinner';
@@ -123,17 +123,13 @@ function AnswerPage() {
 	return (
 		<>
 			<div
-				style={{ display: 'flex', paddingBottom: '1%' }}
+				style={{ display: 'flex' }}
 				role="presentation"
 				className={styles.back}
 				onClick={onClickBackIcon}
 			>
 				<div className={styles.arrow}><IcMArrowBack /></div>
 				Go Back
-				{/* {' '}
-				{ topicName || 'All Topics'}
-				{' '}
-				{} */}
 			</div>
 
 			<div className={styles.questionheading}>Question</div>
@@ -158,7 +154,7 @@ function AnswerPage() {
 						size="sm"
 						color="white"
 					>
-						{item.display_name}
+						{startCase(item.display_name)}
 					</Pill>
 				))}
 

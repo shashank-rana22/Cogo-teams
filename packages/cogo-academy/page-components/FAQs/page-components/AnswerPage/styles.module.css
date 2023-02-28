@@ -10,23 +10,23 @@
 	transition: height ease 0.9s;
 }
 .questionheading {
-	line-height: 21px;
-color: #090808;
-font-weight: 1000;
-padding-bottom: 0.2%;
-
-}
-.questionabstract {
-	
+	color: #090808;
 	font-weight: 1000;
-font-size: 20px;
-color: #221F20;
-line-height: 30px;
-padding-bottom: 2%;
+	padding-bottom: 0.2%;
+	margin-top: 12px;
 }
+
+.questionabstract {
+	font-weight: 1000;
+	font-size: 20px;
+	color: #221F20;
+	padding-bottom: 2%;
+}
+
 .answer{
 	font-weight: 1000;
 }
+
 .title {
 	display: flex;
 	align-items: center;
@@ -37,9 +37,13 @@ padding-bottom: 2%;
 		font-size: 1.25rem;
 	}
 }
+
 .back{
-	cursor:pointer;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
 }
+
 .subtitle {
 	margin-top: 1.5%;
 	margin-right: 1%;
@@ -48,6 +52,7 @@ padding-bottom: 2%;
 	font-weight: 1000;
 	
 }
+
 .subtitle_related_question {
 	margin-right: 1%;
 
@@ -55,10 +60,13 @@ padding-bottom: 2%;
 	font-weight: 700;
 	
 }
+
 .arrow{
 	width: 28.33px;
-height: 24.67px;
-
+	height: 24.67px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 }
 
@@ -66,11 +74,6 @@ height: 24.67px;
 	font-size: 11px;
 	font-style: normal;
 	font-weight: 400;
-
-	
-
-	/* identical to box height */
-
 	color: #221f20;
 	opacity: 0.6;
 }
@@ -137,12 +140,12 @@ height: 24.67px;
     display: flex;
     justify-content: center;
 }
-.pills{
+
+.pills {
 	:global{
 		.ui_pill_container.ui_ps_size_sm {
 			padding: 3px 8px;
 			font-size: 10px;
-			line-height: 1.2;
 			background: white;
 			border: 1px solid #FFE4AF;
 			border-radius: 16px;
