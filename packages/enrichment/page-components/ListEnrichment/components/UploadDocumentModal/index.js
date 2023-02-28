@@ -1,8 +1,7 @@
-import { Toast, Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMUpload } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getFieldController } from '../../../../common/Form/getFieldController';
@@ -24,20 +23,12 @@ function UploadDocumentModal(props) {
 
 	const [uploadProof, setUploadProof] = useState();
 
-	const { uploadDoc, loading } = useUpdateStatus({
+	const { loading, handleManualUpload } = useUpdateStatus({
 		uploadProof,
 		setSelectedItem,
 		selectedItem,
 		refetch,
 	});
-
-	const handleManualUpload = (formValues) => {
-		if (!isEmpty(uploadProof)) {
-			uploadDoc(formValues);
-		} else {
-			Toast.error('Enrichment doc is required');
-		}
-	};
 
 	return (
 
@@ -48,7 +39,6 @@ function UploadDocumentModal(props) {
 
 				<Modal.Body>
 					<div>
-
 						{uploadDocControls.map((controlItem) => {
 							const el = { ...controlItem };
 
@@ -72,7 +62,6 @@ function UploadDocumentModal(props) {
 								</div>
 							);
 						})}
-
 					</div>
 
 					<div>

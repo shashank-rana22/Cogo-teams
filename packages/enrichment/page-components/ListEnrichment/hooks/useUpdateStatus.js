@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const useUpdateStatus = (props) => {
 	const {
@@ -41,9 +42,18 @@ const useUpdateStatus = (props) => {
 		}
 	};
 
+	const handleManualUpload = (formValues) => {
+		if (!isEmpty(uploadProof)) {
+			uploadDoc(formValues);
+		} else {
+			Toast.error('Enrichment doc is required');
+		}
+	};
+
 	return {
 		uploadDoc,
 		loading,
+		handleManualUpload,
 	};
 };
 

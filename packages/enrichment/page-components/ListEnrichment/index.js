@@ -1,22 +1,11 @@
 import { TabPanel, Tabs, Modal } from '@cogoport/components';
 
+import { tabPanelMapping } from '../../configurations/tab-panels-mapping';
+
 import Enrichment from './components/Enrichment';
 import UploadDocumentModal from './components/UploadDocumentModal';
 import useListEnrichment from './hooks/useListEnrichment';
 import styles from './styles.module.css';
-
-const tabPanelMapping = {
-	submitted_requests: {
-		name  : 'submitted_requests',
-		title : 'Submitted Requests',
-
-	},
-	uploaded_files: {
-		name  : 'uploaded_files',
-		title : 'Uploaded Files',
-	},
-
-};
 
 function ListEnrichment() {
 	const {
