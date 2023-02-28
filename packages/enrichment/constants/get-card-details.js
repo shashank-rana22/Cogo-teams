@@ -26,7 +26,7 @@ export const cardLabelsMapping = {
 		state      : 'State',
 		country    : 'Country',
 		pincode    : 'Pincode',
-		tax_number : 'Tax Number',
+		gst_number : 'Tax Number',
 
 	},
 };

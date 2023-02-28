@@ -277,7 +277,7 @@ const useListEnrichment = () => {
 							type="button"
 							onClick={() => handleUploadClick(id)}
 						>
-							View / Add Details
+							Action
 
 						</Button>
 					</section>

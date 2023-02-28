@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { getFieldController } from '../../../../common/Form/getFieldController';
 import getUserControls from '../../../../configurations/get-controls';
+import { cardLabelsMapping } from '../../../../constants/get-card-details';
 
 import styles from './styles.module.css';
 
@@ -38,10 +39,15 @@ function CreateResponse({
 	const { control, handleSubmit, setValue, formState: { errors } } = formProps;
 
 	useEffect(() => {
-		setValue('email', user.email);
-		setValue('name', user.name);
+		const items = cardLabelsMapping[activeTab];
+
+		Object.keys(items).map((item) => (
+
+			setValue(item, user[item])
+
+		));
+
 		setValue('work_scopes', user.work_scopes);
-		setValue('alternate_email', user.alternate_email);
 		setValue('mobile_number', {
 			country_code : user.mobile_country_code,
 			number       : user.mobile_number,

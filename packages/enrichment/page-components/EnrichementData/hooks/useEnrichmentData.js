@@ -31,13 +31,12 @@ const useEnrichmentData = () => {
 
 	const { list = [], ...paginationData } = data || {};
 
-	console.log('responseData ::', responseData);
-
 	useEffect(() => {
-		setResponseData([...list]);
+		setResponseData(list);
 	}, [list]);
 
 	useEffect(() => {
+		setResponseData([]);
 		setShowAddPoc(false);
 	}, [activeTab]);
 

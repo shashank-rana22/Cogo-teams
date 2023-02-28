@@ -41,14 +41,14 @@ function Statistics() {
 						enableArcLabels={false}
 						colors={chartData.colors}
 						colorBy="index"
-						margin={{ top: 20, right: 40, bottom: 80, left: 40 }}
+						margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
 						legends={[
 							{
-								anchor        : 'bottom-left',
+								anchor        : 'left',
 								direction     : 'column',
 								justify       : false,
 								translateX    : 0,
-								translateY    : 56,
+								translateY    : 0,
 								itemsSpacing  : 5,
 								itemWidth     : 100,
 								itemHeight    : 18,
