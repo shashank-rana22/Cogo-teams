@@ -10,6 +10,7 @@ import useDeleteTag from './useDeleteTag';
 
 function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 	const [searchTagsInput, setSearchTagsInput] = useState('');
+
 	const {
 		data,
 		loading = false,
@@ -20,7 +21,12 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 		fetchFaqTag,
 	} = useListFaqTags({ searchTagsInput });
 
-	const { onClickDeleteIcon = () => {} } = useDeleteTag({ fetchFaqTag });
+	const {
+		onClickDeleteIcon = () => {},
+		showPopOver,
+		setShowPopOver = () => {},
+		loading:updateApiLoading,
+	} = useDeleteTag({ fetchFaqTag });
 
 	const router = useRouter();
 
@@ -32,7 +38,14 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 		);
 	};
 
-	const { listColumns = [] } = tagListColumns({ onClickEdit, onClickDeleteIcon });
+	const { listColumns = [] } = tagListColumns({
+		onClickEdit,
+		onClickDeleteIcon,
+		showPopOver,
+		setShowPopOver,
+		updateApiLoading,
+		activeTag,
+	});
 
 	return (
 		<div>
@@ -45,6 +58,7 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 				setSearchTagsInput={setSearchTagsInput}
 				reset={reset}
 			/>
+
 			<TagsTable
 				columns={listColumns}
 				data={data}

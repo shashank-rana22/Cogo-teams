@@ -57,9 +57,10 @@ function CreateFAQ() {
 		fetchTags,
 		fetchAudiences,
 		RichTextEditor,
+		listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading,
 	} = useCreateQuestions({ data });
-
-	console.log('errors', errors);
 
 	const {
 		setConfigurationPage,
@@ -73,13 +74,18 @@ function CreateFAQ() {
 		handleCreateTag,
 		handleCreateTopic,
 		formErrors,
-		// resetValue,
 		onClickCancelButton,
 		showCreateAudienceModal,
 		setShowCreateAudienceModal,
 	} = useCreateNewTagOrTopic({ fetchTopics, fetchTags });
 
-	const { question_abstract, faq_tags = [], faq_topics = [], answers = [], faq_audiences = [] } = data || {};
+	const {
+		question_abstract,
+		faq_tags = [],
+		faq_topics = [],
+		answers = [],
+		faq_audiences = [],
+	} = data || {};
 
 	useEffect(() => {
 		if (query?.id) {
@@ -113,7 +119,7 @@ function CreateFAQ() {
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	}, [listTopicsLoading, listTagsLoading, listAudienceLoading]);
 
 	const onClickBackIcon = () => {
 		router.back();

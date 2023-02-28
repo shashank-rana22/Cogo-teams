@@ -15,12 +15,11 @@ if (typeof window !== 'undefined') {
 
 function useCreateQuestions({ data }) {
 	const { general } = useSelector((state) => state);
+	const { mode = '', id :questionId = '' } = general.query || {};
+
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
 	const [searchAudience, setSearchAudience] = useState(null);
-
-	const { mode = '', id :questionId = '' } = general.query || {};
-
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
 
 	const {
@@ -40,8 +39,15 @@ function useCreateQuestions({ data }) {
 		: onSubmitCreateForm;
 
 	const {
-		topicOptions, tagOptions, audienceOptions: unfilteredAudienceOptions,
-		fetchTopics, fetchTags, fetchAudiences,
+		topicOptions,
+		tagOptions,
+		audienceOptions: unfilteredAudienceOptions,
+		fetchTopics,
+		fetchTags,
+		fetchAudiences,
+		listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading,
 	} = useGetTopicTagList();
 
 	const handleAudienceSearch = (searchTerm) => {
@@ -83,6 +89,9 @@ function useCreateQuestions({ data }) {
 		fetchTags,
 		fetchAudiences,
 		RichTextEditor,
+		listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading,
 	};
 }
 

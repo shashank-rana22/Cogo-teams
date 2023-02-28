@@ -9,7 +9,7 @@ import useListCogoEntity from '../../ConfigurationEngine/hooks/useListCogoEntiti
 import countries from '../../../../../../.data-store/constants/countries.json';
 
 const useGetTopicTagList = () => {
-	const [{ data: topicsData }, triggerTopics] = useRequest({
+	const [{ data: topicsData , loading:listTopicsLoading }, triggerTopics] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
 		params : {
@@ -18,7 +18,7 @@ const useGetTopicTagList = () => {
 		},
 	}, { manual: false });
 
-	const [{ data: tagsData }, triggerTags] = useRequest({
+	const [{ data: tagsData ,loading:listTagsLoading}, triggerTags] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
 		params : {
@@ -27,7 +27,7 @@ const useGetTopicTagList = () => {
 		},
 	}, { manual: false });
 
-	const [{ data: audienceData }, triggerAudiences] = useRequest({
+	const [{ data: audienceData,loading:listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
 		url    : '/list_faq_audiences',
 		params : {
@@ -149,6 +149,9 @@ const useGetTopicTagList = () => {
 		fetchTopics,
 		fetchTags,
 		fetchAudiences,
+		listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading
 	};
 };
 

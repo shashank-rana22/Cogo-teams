@@ -1,7 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
 
-function useUpdateAudience({ fetchFaqTag }) {
+function useUpdateAudience({ fetchFaqAudience }) {
+	const [showPopOver, setShowPopOver] = useState(null);
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_faq_audience',
 		method : 'POST',
@@ -18,13 +21,19 @@ function useUpdateAudience({ fetchFaqTag }) {
 
 			if (res?.data) {
 				Toast.success('Audience deleted sucessfully');
-				fetchFaqTag();
+				setShowPopOver(null);
+				fetchFaqAudience();
 			}
 		} catch (err) {
 			console.log('err', err);
 		}
 	};
 
-	return { onClickDeleteIcon, loading };
+	return {
+		onClickDeleteIcon,
+		loading,
+		showPopOver,
+		setShowPopOver,
+	};
 }
 export default useUpdateAudience;

@@ -1,7 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 function useDeleteTopic({ fetchFaqTopic }) {
+	const [showPopOver, setShowPopOver] = useState(null);
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_faq_topic',
 		method : 'POST',
@@ -18,6 +21,7 @@ function useDeleteTopic({ fetchFaqTopic }) {
 
 			if (res?.data) {
 				Toast.success('Topic deleted sucessfully');
+				setShowPopOver(null);
 				fetchFaqTopic();
 			}
 		} catch (err) {
@@ -25,6 +29,11 @@ function useDeleteTopic({ fetchFaqTopic }) {
 		}
 	};
 
-	return { onClickDeleteIcon, loading };
+	return {
+		onClickDeleteIcon,
+		loading,
+		showPopOver,
+		setShowPopOver,
+	};
 }
 export default useDeleteTopic;

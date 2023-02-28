@@ -24,7 +24,12 @@ function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 		fetchFaqTopic,
 	} = useListFaqTopics({ searchTopicsInput });
 
-	const { onClickDeleteIcon = () => {} } = useDeleteTopic({ fetchFaqTopic });
+	const {
+		onClickDeleteIcon = () => {},
+		showPopOver,
+		setShowPopOver,
+		loading:updateApiLoading,
+	} = useDeleteTopic({ fetchFaqTopic });
 
 	const onClickEditTopic = (item) => {
 		setConfigurationPage('topic');
@@ -34,7 +39,14 @@ function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 		);
 	};
 
-	const { listColumns = [] } = topicListColumns({ onClickEditTopic, onClickDeleteIcon });
+	const { listColumns = [] } = topicListColumns({
+		onClickEditTopic,
+		onClickDeleteIcon,
+		showPopOver,
+		setShowPopOver,
+		updateApiLoading,
+		activeTopic,
+	});
 
 	return (
 		<div>

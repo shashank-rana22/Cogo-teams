@@ -1,6 +1,10 @@
 // import { Button } from '@cogoport/components';
+import { Popover } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+
+// eslint-disable-next-line import/order
+import PopOverContent from '../../../../commons/PopoverContent';
 
 /* eslint-disable */
 import countries from '../../../../../../.data-store/constants/countries.json';
@@ -8,7 +12,16 @@ import WORK_SCOPES_OPTIONS from '../CreateAudienceForm/utils/workScopeMappings';
 
 import styles from './styles.module.css';
 
-function audienceListColumns({ onClickEdit, onClickDeleteIcon }) {
+function audienceListColumns({ 
+	onClickDeleteIcon,
+	showPopOver,
+	setShowPopOver,
+	updateApiLoading
+ }) {
+
+	const onClickNoButton = (item)=>{
+		setShowPopOver(null)
+	}
 
 	const listColumns = [
 		{
@@ -73,24 +86,43 @@ function audienceListColumns({ onClickEdit, onClickDeleteIcon }) {
 		},
 		{
 			Header   : 'ACTIONS',
-			accessor : (item) => (
-				<div className={styles.button_container}>
-					<div className={styles.delete_button}>
-						<IcMDelete height={20} width={20} onClick={() => onClickDeleteIcon(item)} />
-					</div>
-					{/* <Button
-						themeType="secondary"
-						size="sm"
-						style={{ marginRight: 8 }}
-						onClick={() => onClickEdit(item)}
+			accessor : (item) => {
+				
+				return(
+					<Popover
+					    placement="top"
+						interactive
+						visible={showPopOver===item?.id}
+						styles={{marginRight:'20px'}}
+						render={(
+							<PopOverContent
+								source='audience'
+								onCLickYesButton ={()=>onClickDeleteIcon(item)}
+								onClickNoButton={()=>onClickNoButton(item)}
+								loading={updateApiLoading}
+							/>
+						)}
 					>
-						EDIT
+						<div className={styles.button_container}>
 
-					</Button> */}
-				</div>
-			),
+ 							<div className={styles.delete_button}>
+							<IcMDelete 
+							height={20} 
+							width={20}  
+							onClick = {
+								()=>{setShowPopOver(() => 
+								(showPopOver ===item?.id ? null : item?.id));}}
+								/>
+                            </div>
+
+   						</div>
+					</Popover>
+				)
+				
+			},
 		},
 	];
+	// onClick={() => onClickDeleteIcon(item)}
 	return { listColumns };
 }
 

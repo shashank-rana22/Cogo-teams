@@ -46,8 +46,9 @@ function useCreateFaq() {
 
 		let payload = {
 			name,
-			display_name: name,
+			display_name : name,
 			description,
+			status       : 'active',
 		};
 
 		if (queryName === 'update') {

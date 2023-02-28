@@ -1,4 +1,3 @@
-import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import useLIstFaqAudience from '../hooks/useLIstFaqAudience';
@@ -21,19 +20,20 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 		setAudienceCurrentPage,
 	} = useLIstFaqAudience({ searchAudienceInput });
 
-	const { onClickDeleteIcon = () => {} } = useUpdateAudience({ fetchFaqAudience });
+	const {
+		onClickDeleteIcon = () => {},
+		showPopOver,
+		setShowPopOver,
+		loading:updateApiLoading,
+	} = useUpdateAudience({ fetchFaqAudience });
 
-	const router = useRouter();
+	const { listColumns = [] } = audienceListColumns({
+		onClickDeleteIcon,
+		showPopOver,
+		setShowPopOver,
+		updateApiLoading,
 
-	const onClickEdit = (item) => {
-		setConfigurationPage('audience');
-		router.push(
-			`/learning/faq/create/configuration?update=audience&id=${item.id}`,
-			`/learning/faq/create/configuration?update=audience&id=${item.id}`,
-		);
-	};
-
-	const { listColumns = [] } = audienceListColumns({ onClickEdit, onClickDeleteIcon });
+	});
 
 	return (
 		<div>
@@ -44,7 +44,6 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 				setActiveAudience={setActiveAudience}
 				searchAudienceInput={searchAudienceInput}
 				setSearchAudienceInput={setSearchAudienceInput}
-				// reset={reset}
 			/>
 			<AudianceTable
 				columns={listColumns}
