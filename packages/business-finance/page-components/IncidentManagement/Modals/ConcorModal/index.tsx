@@ -26,6 +26,10 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }) {
 		refetch,
 		setShowModal,
 		id,
+		bookingProof,
+		quotation,
+		sid,
+		totalBuyPrice,
 	});
 
 	const concorDetails = [

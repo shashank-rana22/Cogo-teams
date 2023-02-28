@@ -1,9 +1,17 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useApproveConcor = ({
-	refetch, setShowModal, id,
+	refetch, setShowModal, id, bookingProof,
+	quotation,
+	sid,
+	totalBuyPrice,
 }) => {
+	const { user_id:userId } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
+	}));
+
 	const [
 		{ loading },
 		trigger,
@@ -21,12 +29,22 @@ const useApproveConcor = ({
 		try {
 			const apiResponse = await trigger({
 				data: {
-					transactionRefNo : utr,
-					paymentProof,
-					remarks,
-					bankId,
-					bankname,
-					cogAccountNo     : bankAccountNo,
+					status : 'APPROVED',
+					remark : remarks,
+					data   : {
+						concorPdaApprovalRequest: {
+							sid,
+							totalBuyPrice,
+							bookingProof,
+							quotation,
+							bankId,
+							bankName         : bankname,
+							cogoAccountNo    : bankAccountNo,
+							paymentProof,
+							transactionRefNo : utr,
+						},
+					},
+					updatedBy: userId,
 				},
 			});
 			const {
