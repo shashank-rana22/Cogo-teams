@@ -20,7 +20,7 @@ function SelectController(props) {
 					key={name}
 					id={name}
 					onChange={onChange}
-					value={newValue || value}
+					value={newValue}
 					onBlur={onBlur}
 					data-test-value={value}
 				/>
