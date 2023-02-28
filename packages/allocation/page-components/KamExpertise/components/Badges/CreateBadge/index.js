@@ -1,5 +1,7 @@
-import { Button, Modal } from '@cogoport/components';
+import { Toast, Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
+
+import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
 
 import GetCard from './getCard';
 import GetLabelInputPair from './getLabelInputPair';
@@ -9,6 +11,10 @@ import styles from './styles.module.css';
 function CreateBadge({ setCreateBadge }) {
 	const [value, setValue] = useState([]);
 	const [badgeInput, setBadgeInput] = useState(false);
+
+	const {
+		onCheckPublish, loading,
+	} = useBadgeConfiguration();
 
 	const params = {
 		name: {
@@ -80,7 +86,12 @@ function CreateBadge({ setCreateBadge }) {
 		setCreateBadge((pv) => !pv);
 	};
 	const handelNext = () => {
+		onCheckPublish();
 		setBadgeInput(true);
+	};
+	const handelSave = () => {
+		setCreateBadge((pv) => !pv);
+		Toast.success('Badge Successfully Created');
 	};
 	return (
 		<Modal size="xl" show onClose={onClose} placement="center">
@@ -124,9 +135,29 @@ function CreateBadge({ setCreateBadge }) {
 					>
 						Cancel
 					</Button>
-					<Button size="md" themeType="primary" onClick={handelNext}>
-						Next
-					</Button>
+
+					{
+						!badgeInput
+							? (
+								<Button
+									size="md"
+									themeType="primary"
+									disabled={loading}
+									onClick={handelNext}
+								>
+									Next
+								</Button>
+							)
+							:					(
+								<Button
+									size="md"
+									themeType="primary"
+									onClick={handelSave}
+								>
+									Save
+								</Button>
+							)
+					}
 				</div>
 			</section>
 		</Modal>

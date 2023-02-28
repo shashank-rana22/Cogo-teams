@@ -2,10 +2,11 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import BadgeList from './BadgeList';
+import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
 import Header from './Header';
+import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
@@ -56,7 +57,9 @@ function Badges() {
 				badgeList
 			&& (
 				<section>
-					<BadgeList />
+					<MasteryListItem />
+					<BadgeListItem />
+					<BadgeListItem />
 				</section>
 			)
 			}

@@ -12,9 +12,9 @@ function useBadgeConfiguration() {
 		try {
 			const payload = {
 				version_id                           : '1',
-				badge_name                           : 'nautical_ninja',
+				badge_name                           : 'nautical_na',
 				description                          : 'description for the 1st badge',
-				kam_expertise_event_configuration_id : '00245b2c-c754-400e-8dcf-bcbc18f33370',
+				kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9kk093870',
 				status                               : 'active',
 				// performed_by_id                      : '00245b2c-c754-400e-8dcf-bcbc18f33780',
 				// performed_by_type                    : 'sales_person',
@@ -35,7 +35,7 @@ function useBadgeConfiguration() {
 	};
 
 	return {
-		loadingCheckPublishability: loading,
+		loading,
 		onCheckPublish,
 	};
 }
