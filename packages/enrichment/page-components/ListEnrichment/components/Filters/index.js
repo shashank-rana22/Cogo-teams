@@ -1,28 +1,21 @@
-import { useForm } from '@cogoport/forms';
+// import { useForm } from '@cogoport/forms';
 
-import { getFieldController } from '../../../../common/Form/getFieldController';
+// import { getFieldController } from '../../../../common/Form/getFieldController';
 import SearchInput from '../../../../common/SearchInput';
-import enrichmentFilters from '../../../../configurations/get-enrichment-filter-controls';
+// import enrichmentFilters from '../../../../configurations/get-enrichment-filter-controls';
 
 import styles from './styles.module.css';
 
 function Filters(props) {
 	const {
-		filters,
-		onChangeFilters,
-		secondaryTab,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
 	} = props;
 
-	const formProps = useForm();
-
-	const { control } = formProps;
-
 	return (
 		<section className={styles.container} id="filters">
-			<div className={styles.select_container}>
+			{/* <div className={styles.select_container}>
 
 				{
 				enrichmentFilters.map((el) => {
@@ -49,7 +42,7 @@ function Filters(props) {
 					);
 				})
 			}
-			</div>
+			</div> */}
 
 			<div className={styles.search_container}>
 

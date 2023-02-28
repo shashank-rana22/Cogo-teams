@@ -29,7 +29,7 @@ function Header() {
 				onClick={() => handleBack()}
 			>
 				<IcMArrowBack style={{ marginRight: '8px' }} />
-				<div>Back to Enrichment Dashboard</div>
+				<div className={styles.heading}>Organization Details</div>
 			</div>
 
 			<div className={styles.header}>

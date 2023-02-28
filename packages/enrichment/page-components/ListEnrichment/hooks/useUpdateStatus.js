@@ -22,14 +22,12 @@ const useUpdateStatus = (props) => {
 
 	const [{ loading }, trigger] = api;
 
-	const { id = '' } = selectedItem;
-
 	const uploadDoc = async (formValues = {}) => {
 		try {
 			await trigger({
 				data: {
 					sheet_url           : uploadProof,
-					feedback_request_id : id,
+					feedback_request_id : selectedItem?.id,
 					file_name           : formValues.file_name,
 					performed_by_type   : 'agent',
 					performed_by_id     : profile.user?.id,

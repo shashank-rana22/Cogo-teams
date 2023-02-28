@@ -2,7 +2,6 @@ import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
-import LoadingState from '../../../../common/LoadingState';
 import Header from '../Header';
 import Statistics from '../Statistics';
 
@@ -41,8 +40,6 @@ function Enrichment(props) {
 			<div>
 
 				{secondaryTab !== 'uploaded_files' && <Statistics />}
-
-				{loading && <LoadingState /> }
 
 				{!loading && isEmpty(list) ? (
 					<div className={styles.empty_container}>

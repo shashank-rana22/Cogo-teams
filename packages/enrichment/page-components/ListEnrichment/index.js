@@ -47,7 +47,7 @@ function ListEnrichment() {
 			<div style={{ marginTop: 30 }}>
 				<Tabs
 					activeTab={activeTab}
-					themeType="secondary"
+					themeType="primary"
 					onChange={setActiveTab}
 				>
 					<TabPanel name="enrichment_requests" title="Enrichment Requests">
@@ -109,21 +109,18 @@ function ListEnrichment() {
 				</Tabs>
 			</div>
 
-			{selectedItem && (
-				<Modal
-					show={selectedItem}
-					size="sm"
-					onClose={() => setSelectedItem(null)}
-				>
-					<UploadDocumentModal
-						selectedItem={selectedItem}
-						setSelectedItem={setSelectedItem}
-						refetch={listRefetch}
-					/>
+			<Modal
+				show={selectedItem}
+				size="sm"
+				onClose={() => setSelectedItem(null)}
+			>
+				<UploadDocumentModal
+					selectedItem={selectedItem}
+					setSelectedItem={setSelectedItem}
+					refetch={listRefetch}
+				/>
 
-				</Modal>
-
-			)}
+			</Modal>
 
 		</>
 

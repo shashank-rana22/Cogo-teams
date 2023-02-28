@@ -1,24 +1,17 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, startCase } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
+import authKeyMapping from '../../../constants/get-auth-key-mapping';
 import {
 	LIST_PRIMARY_COLUMNS_MAPPING,
 	LIST_SECONDARY_COLUMNS_MAPPING,
 } from '../../../constants/get-table-columns';
-import Actions from '../components/Enrichment/Actions';
 import styles from '../styles.module.css';
-
-const authKeyMapping = {
-	feedback_requests        : 'get_allocation_feedback_requests',
-	feedback_response_sheets : 'get_allocation_feedback_response_sheets',
-
-};
 
 const useListEnrichment = () => {
 	const {
@@ -30,7 +23,6 @@ const useListEnrichment = () => {
 	const [activeTab, setActiveTab] = useState('enrichment_requests');
 	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
 	const [selectedItem, setSelectedItem] = useState();
-	const [popoverId, setPopoverId] = useState(null);
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
 		sort_type  : 'desc',
@@ -84,19 +76,6 @@ const useListEnrichment = () => {
 		}));
 	}, [searchQuery]);
 
-	// useEffect(() => {
-	// 	setParams((prevParams) => ({
-
-	// 		...prevParams,
-	// 		filters: {
-	// 			...prevParams.filters,
-	// 			status: activeTab === 'requests_sent' ? 'responded' : undefined,
-	// 		},
-	// 	}));
-
-	// 	setSecondaryTab('submitted_requests');
-	// }, [activeTab]);
-
 	useEffect(() => {
 		setParams((prevParams) => ({
 			...prevParams,
@@ -107,9 +86,7 @@ const useListEnrichment = () => {
 				...(activeTab === 'requests_sent' && {
 					status: secondaryTab === 'submitted_requests'
 						? 'responded' : undefined,
-
 				}),
-
 			},
 
 		}));
@@ -133,7 +110,7 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'business_name',
-			Header   : 'Organization',
+			Header   : 'ORGANIZATION',
 			accessor : ({ organization = '' }) => (
 				<section>
 					{organization.business_name || '-'}
@@ -142,7 +119,7 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'created_at',
-			Header   : 'Request Date',
+			Header   : 'REQUESTED AT',
 			accessor : ({ created_at }) => (
 				<div>
 					{created_at	 ? (
@@ -167,29 +144,28 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'submission_date',
-			Header   : 'Submission Date',
+			Header   : ' SUBMISSION DATE',
 			accessor : () => (
 
-				<section>
-					12-OCT-2022
-				</section>
+				<section>-</section>
 			),
 		},
 
 		{
 			id       : 'file_name',
-			Header   : 'File Name',
+			Header   : 'FILE NAME',
 			accessor : ({ file_name }) => (
-				<section>
 
+				<section>
 					{startCase(file_name) || '-'}
 				</section>
 			),
 		},
 		{
 			id       : 'upload_date',
-			Header   : 'Upload Date',
+			Header   : 'UPLOAD DATE',
 			accessor : ({ created_at }) => (
+
 				<section>
 					{format(created_at, 'dd MMM yyyy')}
 				</section>
@@ -197,8 +173,9 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'organizations',
-			Header   : 'Organizations',
+			Header   : 'ORGANIZATIONS',
 			accessor : ({ organizations }) => (
+
 				<section>
 					{organizations || '-'}
 				</section>
@@ -206,7 +183,7 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'num_pocs',
-			Header   : 'Number Of Pocs',
+			Header   : 'POCS COUNT',
 			accessor : ({ num_pocs }) => (
 				<section>
 					{num_pocs || '-'}
@@ -215,7 +192,7 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'download',
-			Header   : 'Download',
+			Header   : 'DOWNLOAD',
 			accessor : ({ sheet_url }) => (
 				<section>
 					<Button
@@ -233,7 +210,7 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'address',
-			Header   : 'Address',
+			Header   : 'ADDRESS',
 			accessor : ({ address = '', id = '' }, item = {}) => (
 
 				address ? (
@@ -264,7 +241,7 @@ const useListEnrichment = () => {
 		},
 		{
 			id       : 'edit',
-			Header   : 'View / Add Details',
+			Header   : 'Action',
 			accessor : (item) => {
 				const { id } = item;
 
@@ -277,7 +254,7 @@ const useListEnrichment = () => {
 							type="button"
 							onClick={() => handleUploadClick(id)}
 						>
-							Action
+							VIEW / EDIT DETAILS
 
 						</Button>
 					</section>
@@ -287,43 +264,32 @@ const useListEnrichment = () => {
 
 		{
 			id       : 'action',
-			Header   : 'Action',
+			Header   : <div style={{ textAlign: 'center' }}>Action</div>,
 			accessor : (item) => {
 				const { id } = item;
 
 				return (
 					<div className={styles.content_container}>
-						<Popover
-							visible={popoverId === id}
-							placement="left"
-							interactive
-							render={(
-								<Actions onClickCta={({ type }) => {
-									if (type === 'manual') {
-										handleUploadClick(id);
-									} else {
-										setSelectedItem({
-											item,
-											id,
-											type,
-										});
-									}
-									setPopoverId(null);
-								}}
-								/>
-							)}
-							onClickOutside={() => setPopoverId(null)}
+
+						<Button
+							themeType="secondary"
+							type="button"
+							size="sm"
+							style={{ marginRight: '12px' }}
+							onClick={() => handleUploadClick(id)}
 						>
-							<div
-								className={styles.svg_container}
-							>
-								<IcMOverflowDot
-									height={16}
-									width={16}
-									onClick={() => setPopoverId((pv) => (pv === id ? null : id))}
-								/>
-							</div>
-						</Popover>
+							Edit Details
+						</Button>
+
+						<Button
+							themeType="primary"
+							type="button"
+							size="sm"
+							onClick={() => setSelectedItem(item)}
+						>
+							Upload
+
+						</Button>
 					</div>
 				);
 			},

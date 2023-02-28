@@ -22,14 +22,17 @@
 
 .content_container {
 	display: flex;
-	margin-bottom: 4px;
+	justify-content: center;
+	/* margin-bottom: 4px; */
 
-	@media (min-width: 768px) {
+
+
+	/* @media (min-width: 768px) {
 		flex-direction: column;
 		justify-content: center;
 		margin-bottom: 0;
 		word-break: break-word;
-	}
+	} */
 }
 
 

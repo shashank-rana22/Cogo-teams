@@ -42,7 +42,6 @@ function UploadDocumentModal(props) {
 	return (
 
 		<>
-
 			<Modal.Header title="Upload POC Details" />
 
 			<form onSubmit={handleSubmit(handleManualUpload)}>
