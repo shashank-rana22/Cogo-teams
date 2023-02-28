@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function Header() {
 	const router = useRouter();
 	const handleBack = () => {
-		router.push('/v2/enrichment/');
+		router.push('/enrichment');
 	};
 
 	const { requestData, loading } = useEnrichmentRequests();

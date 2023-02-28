@@ -2,13 +2,15 @@ import { getFieldController } from './getFieldController';
 import styles from './styles.module.css';
 
 function Form(props) {
-	const { formProps, controls = [] } = props;
+	const { formProps, controls } = props;
+
 	const {
 		control, formState: { errors },
 	} = formProps;
 
 	return (
 		<section className={styles.form_container}>
+
 			{controls.map((controlItem) => {
 				const el = { ...controlItem };
 

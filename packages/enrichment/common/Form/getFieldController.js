@@ -1,7 +1,6 @@
 import {
 	AsyncSelectController,
 	DatepickerController,
-	DateRangePickerController,
 	InputController,
 	MultiselectController,
 	SelectController,
@@ -9,14 +8,13 @@ import {
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
-	text            : InputController,
-	number          : InputController,
-	select          : SelectController,
-	multiSelect     : MultiselectController,
-	asyncSelect     : AsyncSelectController,
-	datePicker      : DatepickerController,
-	dateRangePicker : DateRangePickerController,
-	mobileNumber    : MobileNumberController,
+	text         : InputController,
+	number       : InputController,
+	select       : SelectController,
+	multiSelect  : MultiselectController,
+	asyncSelect  : AsyncSelectController,
+	datePicker   : DatepickerController,
+	mobileNumber : MobileNumberController,
 
 };
 
