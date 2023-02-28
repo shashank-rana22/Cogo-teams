@@ -1257,6 +1257,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'bulk_update_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
