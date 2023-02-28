@@ -1747,6 +1747,14 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	kam_monitoring: {
+		key         : 'kam_monitoring',
+		title       : 'KAM Monitoring',
+		module_type : 'dashboards',
+		href        : '/kam-monitoring',
+		as          : '/kam-monitoring',
+		main_apis   : [],
+	},
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
