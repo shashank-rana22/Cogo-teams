@@ -54,7 +54,7 @@ function Badges() {
 			}
 
 			{
-				badgeList
+				badgeList && (!createBadge)
 			&& (
 				<section>
 					<MasteryListItem />

@@ -94,7 +94,7 @@ function CreateBadge({ setCreateBadge }) {
 		Toast.success('Badge Successfully Created');
 	};
 	return (
-		<Modal size="xl" show onClose={onClose} placement="center">
+		<div>
 			<section className={styles.container}>
 				<Header />
 				<div className={styles.content_container}>
@@ -160,7 +160,7 @@ function CreateBadge({ setCreateBadge }) {
 					}
 				</div>
 			</section>
-		</Modal>
+		</div>
 	);
 }
 
