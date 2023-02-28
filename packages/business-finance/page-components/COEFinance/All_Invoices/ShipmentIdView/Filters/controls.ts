@@ -30,10 +30,6 @@ const controls = [
 		defaultOptions : false,
 		options        : [
 			{
-				label : 'ALL',
-				value : 'ALL',
-			},
-			{
 				label : 'Open Jobs',
 				value : 'OPEN',
 			},
