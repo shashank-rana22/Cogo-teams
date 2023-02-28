@@ -1,10 +1,10 @@
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
-function useGetAsyncOptions({
+function useGetAsyncOptionsBF({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
@@ -14,7 +14,7 @@ function useGetAsyncOptions({
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
 
-	const [{ data, loading }] = useRequest({
+	const [{ data, loading }] = useRequestBf({
 		url    : endpoint,
 		method : 'GET',
 		params : merge(params, { filters: { q: query } }),
@@ -23,7 +23,7 @@ function useGetAsyncOptions({
 
 	const optionValues = options.map((item) => item[valueKey]);
 
-	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
+	const [{ loading: loadingSingle }, triggerSingle] = useRequestBf({
 		url    : endpoint,
 		method : 'GET',
 	}, { manual: true });
@@ -91,4 +91,4 @@ function useGetAsyncOptions({
 	};
 }
 
-export default useGetAsyncOptions;
+export default useGetAsyncOptionsBF;
