@@ -6,7 +6,7 @@ const useGetTdsData = ({
 	refetch, setShowTdsModal, row, id,
 	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
 	remark,
-	isConsolidated,
+	isConsolidated = false,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
