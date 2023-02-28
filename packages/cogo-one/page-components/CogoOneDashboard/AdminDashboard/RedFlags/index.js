@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { configurationData } from '../../../../configurations/configurationData';
 import { agentAvatar } from '../../constants';
 import LoaderRedFlags from '../LoaderRedFlags';
 
 import styles from './styles.module.css';
 
-function RedFlags({ loading = true, escalations = [] }) {
+function RedFlags({ loading = true }) {
+	const { escalations: configEscalations } = configurationData;
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>
@@ -14,7 +16,7 @@ function RedFlags({ loading = true, escalations = [] }) {
 					loading ? <LoaderRedFlags />
 						: (
 							<div className={styles.redflags_lists}>
-								{(escalations || []).map((item) => {
+								{(configEscalations || []).map((item) => {
 									const { agent_name, escalation_count } = item;
 									return (
 

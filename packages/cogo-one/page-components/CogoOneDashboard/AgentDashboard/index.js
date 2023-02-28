@@ -1,11 +1,14 @@
+/* eslint-disable max-len */
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import Calender from '../../../common/Calendar';
+import CallAnalytics from '../../../common/CallAnalytics';
+import ChannelMessageAnalytic from '../../../common/ChannelMessageAnalytics';
 import ChatStatistics from '../../../common/ChatStatistics';
 import Header from '../../../common/Header';
 import LineChart from '../../../common/LineChart';
-import Statistics from '../../../common/Statistics';
+// import Statistics from '../../../common/Statistics';
 
 import Intelligence from './Intelligence';
 import IntentServed from './IntentServed';
@@ -14,9 +17,9 @@ import styles from './styles.module.css';
 import TimeSpent from './TimeSpent';
 
 function AgentDashboard(props) {
-	const { timeline, setTimeline, listData } = props || {};
+	const { timeline, setTimeline, listData, loading } = props || {};
 	const [activeTab, setActiveTab] = useState('day');
-	const { customer_satisfaction = {}, intents_served = {} } = listData || {};
+	const { customer_satisfaction = {}, intents_served = {}, calls_analytics = {}, channels_message_analytics = {} } = listData || {};
 	// const { user } = useSelector(({ profile }) => profile);
 	const {
 		user_data,
@@ -39,12 +42,13 @@ function AgentDashboard(props) {
 					<Calender props={props} />
 					<LineChart />
 					<div className={styles.statistics}>
-						<Statistics />
+						<ChannelMessageAnalytic channels_message_analytics={channels_message_analytics} />
+						<CallAnalytics callsAnalytics={calls_analytics} />
 					</div>
 
 				</div>
 				<div className={styles.right_sub_container}>
-					<TimeSpent />
+					<TimeSpent loading={loading} />
 					<Intelligence />
 
 					<div className={styles.satisfaction_intent_served_box}>

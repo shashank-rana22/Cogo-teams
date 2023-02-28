@@ -1,26 +1,60 @@
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { Tabs, TabPanel } from '@cogoport/components';
+// import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import { configurationData } from '../../../../configurations/configurationData';
 // eslint-disable-next-line import/named
 // import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
 import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';
 
-function PerformanceTab({ loading = false }) {
+function PerformanceTab({ loading = false, agents_performance = {} }) {
+	const { agents_performance: configAgentPerformance } = configurationData;
+	const { best_performance, worst_performance } = agents_performance;
+
 	const [activeTab, setActiveTab] = useState('best_performance');
-	console.log('loading', loading);
-	const data = activeTab === 'best_performance' ? [] : [];
+	const data = activeTab === 'best_performance' ? best_performance : worst_performance;
+
+	const performanceBtnMapping = [
+		{
+			key   : 'best_performance',
+			label : 'Best Performance',
+		},
+		{
+			key   : 'worst_performance',
+			label : 'Worst Performance',
+		},
+
+	];
+
 	return (
 	// eslint-disable-next-line react/jsx-no-useless-fragment
 
 		<div className={styles.main_box}>
-			<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
+			{/* <Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
 				<TabPanel name="best_performance" title="Best Performance" />
 				<TabPanel name="worst_performance" title="Worst Performance" />
-			</Tabs>
+			</Tabs> */}
+
+			<div className={styles.performance_btn_box}>
+				{performanceBtnMapping.map((item) => (
+					<button
+						className={`${styles.performance_btn} 
+							${activeTab === item.key ? styles.active_box : ''}`}
+						onClick={() => setActiveTab(item.key)}
+					>
+						<div
+							className={`${styles.performance_label} 
+							${activeTab === item.key ? styles.active_label : ''}`}
+						>
+							{item.label}
+
+						</div>
+					</button>
+				))}
+			</div>
 
 			<div className={styles.performance_tab_container}>
 				{
@@ -29,9 +63,8 @@ function PerformanceTab({ loading = false }) {
 						<LoaderPerformance />
 					)
 					: (
-
 						<div className={styles.performance_tab_lists}>
-							{(data || []).map((item) => {
+							{Object.keys(configAgentPerformance || {}).map((item) => {
                 	            const { picture, name } = item;
 								return (
 									<div className={styles.performance_list}>
@@ -42,16 +75,13 @@ function PerformanceTab({ loading = false }) {
 										</div>
 										<div className={styles.notification_nos}>
 											{' '}
-
 										</div>
 									</div>
 								);
 	   				})}
 						</div>
-
 					)
 			}
-
 			</div>
 		</div>
 

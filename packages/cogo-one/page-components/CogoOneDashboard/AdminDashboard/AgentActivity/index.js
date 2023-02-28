@@ -3,25 +3,26 @@ import { cl } from '@cogoport/components';
 import { IcMProfile, IcMTimer } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { agentActivityStatus } from '../../../../configurations/dummyAgentActivityStatusData';
-import { busyAgentsData } from '../../../../configurations/dummyBusyAgentProfileData';
+import { configurationData } from '../../../../configurations/configurationData';
+// import { busyAgentsData } from '../../../../configurations/dummyBusyAgentProfileData';
 import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
 
-function AgentActivity({ emptyState = false }) {
-	const [activeTab, setActiveTab] = useState('busy');
+function AgentActivity({ emptyState = true, agents_details = {} }) {
+	const [activeTab, setActiveTab] = useState('busy_agents');
+	const { agents_details_config } = configurationData;
 
 	const tabMapping = {
-		busy    : styles.busy,
-		online  : styles.online,
-		offline : styles.offline,
+		busy_agents    : styles.busy,
+		online_agents  : styles.online,
+		offline_agents : styles.offline,
 	};
 
 	const callStatusMapping = {
-		busy    : 'on call',
-		online  : 'online',
-		offline : 'offline',
+		busy_agents    : 'on call',
+		online_agents  : 'online',
+		offline_agents : 'offline',
 	};
 
 	return (
@@ -30,25 +31,20 @@ function AgentActivity({ emptyState = false }) {
 			<div className={styles.main_container}>
 				<div className={styles.activity_name}>Your Agents</div>
 				<div className={styles.main_container_upperpart}>
-					{agentActivityStatus.map((item) => {
-						const { text, key } = item;
-						const countMapping = {
-							busy    : 30,
-							online  : 40,
-							offline : 100,
-						};
+					{Object.keys(agents_details_config).map((agentType) => {
+						const { agent_label } = agents_details_config[agentType];
 						return (
 							<button
 								className={`${styles.agent_nos_box} 
-								${activeTab === key ? styles.agent_active_box : ''}`}
-								onClick={() => setActiveTab(key)}
+								${activeTab === agentType ? styles.agent_active_box : ''}`}
+								onClick={() => setActiveTab(agentType)}
 							>
 								<div className={styles.agent_nos_box_uppersection}>
-									<div className={styles.agents_nos}>{countMapping[key]}</div>
-									<div className={`${styles.agent_status} ${tabMapping[key]}`} />
+									<div className={styles.agents_nos}>{agents_details?.[agentType]?.total_agent}</div>
+									<div className={`${styles.agent_status} ${tabMapping[agentType]}`} />
 								</div>
 								<div className={styles.agents_status_text}>
-									{text}
+									{agent_label}
 								</div>
 							</button>
 						);
@@ -60,7 +56,7 @@ function AgentActivity({ emptyState = false }) {
 								: (
 
 									<div className={styles.main_container_lowerpart}>
-										{busyAgentsData.map((item) => {
+										{agents_details?.[activeTab]?.agents?.map((item) => {
 											const { picture, name, contact_nos, duration } = item;
 
 											return (

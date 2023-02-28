@@ -1,11 +1,13 @@
+/* eslint-disable max-len */
 // import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import Calender from '../../../common/Calendar';
+import CallAnalytics from '../../../common/CallAnalytics';
+import ChannelMessageAnalytic from '../../../common/ChannelMessageAnalytics';
 import ChatStatistics from '../../../common/ChatStatistics';
 import Header from '../../../common/Header';
 import LineChart from '../../../common/LineChart';
-import Statistics from '../../../common/Statistics';
 
 import AgentActivity from './AgentActivity';
 import PerformanceTab from './PerformanceTabs';
@@ -14,7 +16,7 @@ import styles from './styles.module.css';
 
 function AdminDashboard(props) {
 	const { timeline, setTimeline, listData, loading, emptyState } = props || {};
-	const { escalations = [], calls_analytics = {} } = listData || {};
+	const { escalations = [], calls_analytics = {}, channels_message_analytics = {}, agents_details = {}, agents_performance = {} } = listData || {};
 	const [activeTab, setActiveTab] = useState('day');
 
 	return (
@@ -38,13 +40,14 @@ function AdminDashboard(props) {
 					<RedFlags escalations={escalations} loading={loading} />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
-					<AgentActivity emptyState={emptyState} />
-					<PerformanceTab />
+					<AgentActivity emptyState={emptyState} agents_details={agents_details} />
+					<PerformanceTab agents_performance={agents_performance} />
 
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
 					<div className={styles.two_statistics}>
-						<Statistics callsAnalytics={calls_analytics} />
+						<ChannelMessageAnalytic channels_message_analytics={channels_message_analytics} loading={loading} />
+						<CallAnalytics callsAnalytics={calls_analytics} loading={loading} />
 					</div>
 
 					<div className={styles.four_characterisctics_container}>
