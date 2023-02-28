@@ -8,13 +8,17 @@ import { RemarksValInterface } from '../../commons/Interfaces/index';
 interface ApproveRejectInterface {
 	collectionPartyId?:string
 	remarksVal?:RemarksValInterface
+	overAllRemark?:string
 	modalData?:string
 	setApprove: React.Dispatch<React.SetStateAction<boolean>>,
 	billId?:string,
 	lineItemsRemarks?:object
 }
 
-const ApproveReject = ({ remarksVal, lineItemsRemarks, modalData, setApprove, billId }:ApproveRejectInterface) => {
+const ApproveReject = ({
+	remarksVal, overAllRemark,
+	lineItemsRemarks, modalData, setApprove, billId,
+}:ApproveRejectInterface) => {
 	const router = useRouter();
 	const { user_data:userData } = useSelector(({ profile }:any) => ({
 		user_data: profile || {},
@@ -38,7 +42,7 @@ const ApproveReject = ({ remarksVal, lineItemsRemarks, modalData, setApprove, bi
 		trigger,
 	] = useRequestBf(
 		{
-			url    : '/purchase/bills/status-v2',
+			url    : '/purchase/bills/status',
 			method : 'put',
 		},
 		{ autoCancel: false },
@@ -53,6 +57,7 @@ const ApproveReject = ({ remarksVal, lineItemsRemarks, modalData, setApprove, bi
 					updatedBy           : userData?.user?.id,
 					performedByUserType : userData?.session_type,
 					remarksList         : modalData !== 'Approve' ? remarksVal : undefined,
+					remarks             : overAllRemark,
 					lineItemsRemarks    : modalData !== 'Approve' ? lineItemsRemarks : undefined,
 				},
 			});

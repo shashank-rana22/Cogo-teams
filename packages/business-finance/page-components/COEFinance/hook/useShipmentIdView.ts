@@ -1,12 +1,16 @@
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
 
-type DataType = {
+interface DataType {
 	currentPage: number;
-	restFilters: any;
-};
+	restFilters: FilterTypes;
+}
+interface FilterTypes {
+	serviceType?:string,
+	jobState?:string,
+}
 interface Profile {
 	authorizationparameters?: string;
 }
@@ -16,8 +20,8 @@ interface UseSelectorProps {
 }
 
 interface AllParams {
-	serial_id?:string;
-	pending_approval?: string;
+	shipmentId?:string;
+	pendingApproval?: string;
 }
 
 const useShipmentIdView = (allParams?: {}) => {
@@ -28,23 +32,18 @@ const useShipmentIdView = (allParams?: {}) => {
 		}),
 	);
 
-	const [{ loading: apiLoading }, trigger] = useRequest(
+	const [{ data:shipmentData, loading: apiLoading }, trigger] = useRequestBf(
 		{
-			url    : 'list_shipments',
-			method : 'get',
+			url     : 'common/job/shipment-id-view',
+			method  : 'get',
+			authkey : 'get_common_job_shipment_id_view',
 		},
 	);
 
-	const listAPi = (restFilters: DataType, currentPage: DataType) => {
+	const listAPi = (restFilters: FilterTypes, currentPage: DataType) => {
 		const allFilters = {
 			...(restFilters || {}),
 			...allParams,
-			state: [
-				'confirmed_by_importer_exporter',
-				'in_progress',
-				'completed',
-				'cancelled',
-			],
 		};
 
 		const finalFiletrs: any = {};
@@ -53,21 +52,22 @@ const useShipmentIdView = (allParams?: {}) => {
 				finalFiletrs[filter] = allFilters[filter];
 			}
 		});
+
 		return trigger({
 			params: {
-				filters                    : finalFiletrs,
-				summary_data_required      : true,
-				manifest_data_required     : true,
-				revenue_desk_data_required : true,
-				page_limit                 : 10,
-				page                       : currentPage,
+				...allFilters,
+				shipmentId  : params?.shipmentId === '' ? undefined : params?.shipmentId,
+				jobState    : restFilters?.jobState === '' ? undefined : restFilters?.jobState,
+				serviceType : restFilters?.serviceType === '' ? undefined : restFilters?.serviceType,
+				pageIndex   : currentPage,
+				pageSize    : 10,
 			},
 		});
 	};
 
 	const {
 		loading,
-		page,
+		page:pageNo,
 		filters,
 		list: { data, total, total_page:totalPage, fullResponse },
 		hookSetters,
@@ -83,14 +83,15 @@ const useShipmentIdView = (allParams?: {}) => {
 
 	return {
 		loading : loading || apiLoading,
-		page,
+		pageNo,
 		filters,
 		list    : {
 			data,
-			total,
+			totalRecords: total,
 			totalPage,
 			fullResponse,
 		},
+		shipmentData,
 		hookSetters,
 		refetchList : refetch,
 		refetch     : handleRefetch,

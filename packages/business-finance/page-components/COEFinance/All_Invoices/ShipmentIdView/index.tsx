@@ -10,28 +10,23 @@ import LoadingState from './LoadingState/index';
 import styles from './styles.module.css';
 
 export interface ItemDataProps {
-	organizationId?: string;
-	jobType?: string;
-	jobSource?: string;
-	jobNumber?: string;
-	expense_total_price?: number;
-	serial_id?: string;
-	pending_approvals?: number;
-	shipment_type?: string;
-	expense_count?: number;
-	expense_total_currency?: string;
-	urgency_expense_count?: number;
-	urgency_total_price?: number;
-	urgency_total_currency?: string;
-	income_count?: number;
-	credit_expense_count?: number;
-	credit_total_price?: number;
-	quotation_profit?: string;
-	tentative_profit?: string;
-	income_total_price?: number;
-	income_total_currency?: string;
-	id?: string;
-	is_job_closed?: boolean;
+	jobId: string,
+	jobNumber: string,
+	jobStatus: string,
+	quotationProfitability: number,
+	tentativeProfitability: number,
+	incomeCount: number,
+	incomeTotalAmount: number,
+	expenseCount: number,
+	expenseTotalAmount: number,
+	serviceType: string,
+	discountAppliedKam: number,
+	discountAppliedRevenueDesk: number,
+	pendingApprovalCount: number,
+	urgentCount: number,
+	urgentTotalAmount: number,
+	creditNoteCount: number,
+	creditNoteTotalAmount: number
 }
 
 function ShipmentIdView() {
@@ -40,11 +35,13 @@ function ShipmentIdView() {
 	const [serialId, setSerialId] = useState('');
 	const {
 		hookSetters,
-		page,
+		pageNo,
 		filters,
 		loading,
-		list: { total, data },
-	} = useShipmentIdView({ pendingApproval, serial_id: serialId });
+		shipmentData,
+		list: { data },
+	} = useShipmentIdView({ invoicesRequired: pendingApproval, shipmentId: serialId });
+	const { totalRecords } = shipmentData || {};
 
 	const handleShipmentView = () => {
 		if (loading) {
@@ -59,7 +56,7 @@ function ShipmentIdView() {
 				itemData={item}
 				currentOpenSID={currentOpenSID}
 				setCurrentOpenSID={setCurrentOpenSID}
-				key={item?.id}
+				key={item?.jobId}
 			/>
 		));
 	};
@@ -80,12 +77,12 @@ function ShipmentIdView() {
 				{data.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination
-							currentPage={page}
+							currentPage={pageNo}
 							onPageChange={(val: number) => hookSetters.setFilters({
 								...filters,
 								page: val,
 							})}
-							totalItems={total}
+							totalItems={totalRecords}
 							pageSize={10}
 							type="table"
 						/>

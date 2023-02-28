@@ -16,19 +16,21 @@ interface DataInterface {
 interface HeaderInterface {
 	data?: DataInterface;
 	remarksVal: RemarksValInterface;
+	overAllRemark:string;
+	setOverAllRemark:Function;
 	lineItem?: boolean;
 	lineItemsRemarks: object;
 	status: string;
-	setRemarksVal: any;
 }
 
 function Header({
 	data,
 	remarksVal,
+	overAllRemark,
+	setOverAllRemark,
 	lineItem,
 	lineItemsRemarks,
 	status,
-	setRemarksVal,
 }: HeaderInterface) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
@@ -40,6 +42,7 @@ function Header({
 	const { rejectApproveApi } = useApproveReject({
 		collectionPartyId,
 		remarksVal,
+		overAllRemark,
 		lineItemsRemarks,
 		modalData,
 		setApprove,
@@ -123,8 +126,8 @@ function Header({
 							name="remark"
 							size="md"
 							placeholder="Remarks Here ..."
-							value={remarksVal.overallRemark}
-							onChange={(value: string) => setRemarksVal({ ...remarksVal, overallRemark: value })}
+							value={overAllRemark}
+							onChange={(value: string) => setOverAllRemark(value)}
 							style={{ width: '700', height: '100px', marginBottom: '12px' }}
 						/>
 						<div className={styles.button}>
@@ -141,7 +144,7 @@ function Header({
 							<Button
 								size="md"
 								style={{ marginRight: '8px' }}
-								disabled={!(remarksVal.overallRemark.length > 0)}
+								disabled={!(overAllRemark?.length > 0)}
 								onClick={() => handleApproveAndReject()}
 							>
 								Yes

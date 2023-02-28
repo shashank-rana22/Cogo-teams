@@ -16,7 +16,7 @@ interface AllParams {
 	billId?: number;
 	billNumber?: number;
 	orgId?: number;
-	serialId?: number;
+	jobNumber?: string;
 	status?: string;
 	amountTab?: string;
 	setDataCard:Function
@@ -74,12 +74,11 @@ const useListBills = (allParams) => {
 		currentPage: DataType,
 	) => listExpenseInvoicesTrigger({
 		params: {
-			jobNumbers : params.serialId ? [params?.serialId] : undefined,
+			jobNumbers : params.jobNumber ? [params?.jobNumber] : undefined,
 			jobSource  : 'LOGISTICS',
 			jobType    : 'SHIPMENT',
 			q          : q || undefined,
 			...restFilters,
-			...params,
 			amountTab  : undefined,
 			pageIndex  : currentPage || restFilters?.pageIndex,
 			pageSize   : 10,
@@ -91,7 +90,7 @@ const useListBills = (allParams) => {
 		currentPage: DataType,
 	) => listSalesInvoicesTrigger({
 		params: {
-			jobNumber                 : params?.serialId,
+			jobNumber                 : params?.jobNumber,
 			jobSource                 : 'LOGISTICS',
 			jobType                   : 'SHIPMENT',
 			q                         : q || undefined,

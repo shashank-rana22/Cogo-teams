@@ -1,6 +1,6 @@
 const controls = [
 	{
-		name           : 'shipment_type',
+		name           : 'serviceType',
 		type           : 'select',
 		placeholder    : 'Service',
 		span           : 1,
@@ -21,7 +21,7 @@ const controls = [
 		],
 	},
 	{
-		name           : 'jobs',
+		name           : 'jobState',
 		type           : 'select',
 		placeholder    : 'Job Status',
 		span           : 3,
@@ -31,19 +31,19 @@ const controls = [
 		options        : [
 			{
 				label : 'ALL',
-				value : 'all',
+				value : 'ALL',
 			},
 			{
 				label : 'Open Jobs',
-				value : 'openJobs',
+				value : 'OPEN',
 			},
 			{
 				label : 'Operationally Closed',
-				value : 'operationallyClosed',
+				value : 'OPR_CLOSED',
 			},
 			{
 				label : 'Closed Jobs',
-				value : 'closedJobs',
+				value : 'CLOSED',
 			},
 		],
 

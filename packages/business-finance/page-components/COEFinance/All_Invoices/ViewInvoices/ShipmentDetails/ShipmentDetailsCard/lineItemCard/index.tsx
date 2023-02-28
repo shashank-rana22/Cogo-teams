@@ -84,7 +84,7 @@ function LineItemCard({
 		}
 	}, [ApproveCheck, RejectCheck, lineItems?.length, setLineItem]);
 
-	const handleApproveClick = (key = '', name = '') => {
+	const handleApproveClick = (key = '') => {
 		setApprovedItems((previousActions: any) => ({
 			...previousActions,
 			[key]: !previousActions[key],
@@ -96,13 +96,13 @@ function LineItemCard({
 		});
 		setLineItemsRemarks((prev) => {
 			// eslint-disable-next-line no-param-reassign
-			delete prev[name as keyof typeof prev];
+			delete prev[key as keyof typeof prev];
 			return { ...prev };
 		});
 	};
 
 	const openRejectModal = (item: any) => {
-		setActiveLineItem(item?.name);
+		setActiveLineItem(item?.id);
 		setShowRejectedModal(item);
 		setPopover((previousActions: any) => ({
 			...previousActions,
@@ -132,7 +132,7 @@ function LineItemCard({
 			<div
 				className={styles.circle_big}
 				onClick={() => {
-					handleApproveClick(item?.id, item?.name);
+					handleApproveClick(item?.id);
 				}}
 				role="presentation"
 			>
@@ -171,7 +171,7 @@ function LineItemCard({
 		),
 	};
 
-	const { id, name: lineItemName } = showRejectedModal;
+	const { id } = showRejectedModal;
 
 	const handleLineItemsRemarks = (val: string) => {
 		setLineItemsRemarks({ ...lineItemsRemarks, [activeLineItem]: val });
@@ -304,8 +304,8 @@ function LineItemCard({
 							<Button
 								onClick={() => handleRejectClick(id)}
 								disabled={
-                     !lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks
-                     ] || (lineItemsRemarks[lineItemName as keyof typeof lineItemsRemarks
+                     !lineItemsRemarks[id as keyof typeof lineItemsRemarks
+                     ] || (lineItemsRemarks[id as keyof typeof lineItemsRemarks
                      ] as Array<string>
                      ).length < 0
                 }

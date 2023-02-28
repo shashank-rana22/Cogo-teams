@@ -2,15 +2,14 @@ import React from 'react';
 
 import TabSelect from '../../../../../commons/TabSelect/index';
 import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
+import { toTitleCase } from '../../../../utils/getFormattedData';
 
 import styles from './styles.module.css';
 
 interface ItemProps {
-	discount_amount?:number;
-	discount_amount_currency?:string;
-	discount_amount_revenue?:number;
-	discount_amount_revenue_currency?:string;
-	status?:string;
+	discountAppliedKam?:number;
+	discountAppliedRevenueDesk?:number;
+	jobStatus?: string,
 }
 interface PropsType {
 	itemData: ItemProps;
@@ -20,9 +19,9 @@ interface PropsType {
 
 function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 	const {
-		discount_amount:DiscountAmount, discount_amount_currency:DicountAmountCurrency,
-		discount_amount_revenue:DiscountAmountRevenue,
-		discount_amount_revenue_currency:DiscountAmountRevenueCurrency, status:Status,
+		discountAppliedKam,
+		discountAppliedRevenueDesk,
+		jobStatus,
 	} = itemData || {};
 	const options = [
 		{ name: 'Expense', value: 'expense' },
@@ -40,31 +39,31 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 				</div>
 				<div className={styles.discount}>
 					<div className={styles.label_text}>
-						Discount Applied (KAM) -
+						Discount Applied (KAM) :
 					</div>
 					<div className={styles.value_text}>
 						{getFormattedPrice(
-							DiscountAmount,
-							DicountAmountCurrency,
+							discountAppliedKam,
+							'INR',
 						)}
 					</div>
 				</div>
 				<div className={styles.discount}>
 					<div className={styles.label_text}>
-						Discount Applied (Revenue Desk) -
+						Discount Applied (Revenue Desk) :
 					</div>
 					<div className={styles.value_text}>
 						{getFormattedPrice(
-							DiscountAmountRevenue,
-							DiscountAmountRevenueCurrency,
+							discountAppliedRevenueDesk,
+							'INR',
 						) || ' -'}
 					</div>
 				</div>
 			</div>
-			{Status && (
+			{jobStatus && (
 				<div className={styles.status}>
 					<div className={styles.status_label}>Status - </div>
-					<div className={styles.status_value}>{Status}</div>
+					<div className={styles.status_value}>{toTitleCase(jobStatus)}</div>
 				</div>
 			)}
 		</div>

@@ -5,28 +5,28 @@ export const APPROVAL = [
 	},
 	{
 		label : 'Pending Approval',
-		value : 'pendingApproval',
+		value : 'pending',
 	},
 	{
 		label : 'Not Pending Approval',
-		value : 'notPendingApproval',
+		value : 'not_pending',
 	},
 ];
 export const JOBS = [
 	{
 		label : 'ALL',
-		value : 'all',
+		value : 'ALL',
 	},
 	{
 		label : 'Open Jobs',
-		value : 'openJobs',
+		value : 'OPEN',
 	},
 	{
 		label : 'Operationally Closed',
-		value : 'operationallyClosed',
+		value : 'OPR_CLOSED',
 	},
 	{
 		label : 'Closed Jobs',
-		value : 'closedJobs',
+		value : 'CLOSED',
 	},
 ];

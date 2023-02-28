@@ -14,12 +14,10 @@ import ViewInvoice from './RenderData/ViewInvoice/index';
 import styles from './styles.module.css';
 
 interface ItemTypes {
-	serial_id?: string;
-	discount_amount?: number;
-	discount_amount_currency?: string;
-	discount_amount_revenue?: number;
-	discount_amount_revenue_currency?: string;
-	status?: string;
+	jobNumber?: string;
+	discountAppliedKam?:number;
+	discountAppliedRevenueDesk?:number;
+	jobStatus?: string,
 }
 interface PropsType {
 	cardData: ItemTypes;
@@ -44,13 +42,13 @@ function CardItem({
 	setDataCard,
 	setAmountTab,
 }: PropsType) {
-	const { serial_id: serialId } = cardData || {};
+	const { jobNumber } = cardData || {};
 	const {
 		loading,
 		list: { fullResponse },
 		config,
 	} = useListBills({
-		serialId,
+		jobNumber,
 		amountTab,
 		currentOpenSID,
 		setDataCard,

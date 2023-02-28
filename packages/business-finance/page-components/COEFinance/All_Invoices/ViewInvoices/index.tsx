@@ -15,8 +15,8 @@ function ViewInvoices() {
 		collectionPartyRemark : '',
 		billingPartyRemark    : '',
 		invoiceDetailsRemark  : '',
-		overallRemark         : '',
 	});
+	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
 	const [lineItem, setLineItem] = useState(false);
 	const {
@@ -31,10 +31,11 @@ function ViewInvoices() {
 			<Header
 				data={fullResponse}
 				remarksVal={remarksVal}
+				overAllRemark={overAllRemark}
+				setOverAllRemark={setOverAllRemark}
 				lineItemsRemarks={lineItemsRemarks}
 				lineItem={lineItem}
 				status={status}
-				setRemarksVal={setRemarksVal}
 			/>
 
 			<SupplierDetails

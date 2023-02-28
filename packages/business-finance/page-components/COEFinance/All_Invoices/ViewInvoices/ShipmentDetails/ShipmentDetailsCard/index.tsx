@@ -465,6 +465,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
+																disabled={status !== 'INITIATED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -474,6 +475,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
+																disabled={status !== 'INITIATED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -569,6 +571,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
+																disabled={status !== 'INITIATED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -578,6 +581,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
+																disabled={status !== 'INITIATED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -607,7 +611,7 @@ function ShipmentDetailsCard({
 													{organizationNameBuyer}
 												</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div style={{ marginBottom: '8px', overflow: 'scroll' }}>
 												Address -
 												{' '}
 												<span>{address}</span>
@@ -665,6 +669,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
+																disabled={status !== 'INITIATED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -674,6 +679,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
+																disabled={status !== 'INITIATED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
