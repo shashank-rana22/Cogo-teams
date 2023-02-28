@@ -1,15 +1,52 @@
-import { Tooltip, Toast, Button } from '@cogoport/components';
+import { Select, Tooltip, Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { getMonth, getYear, isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const allMonthOptions = [
+	{ label: 'January', value: 'January', index: 1 },
+	{ label: 'February', value: 'February', index: 2 },
+	{ label: 'March', value: 'March', index: 3 },
+	{ label: 'April', value: 'April', index: 4 },
+	{ label: 'May', value: 'May', index: 5 },
+	{ label: 'June', value: 'June', index: 6 },
+	{ label: 'July', value: 'July', index: 7 },
+	{ label: 'August', value: 'August', index: 8 },
+	{ label: 'September', value: 'September', index: 9 },
+	{ label: 'October', value: 'October', index: 10 },
+	{ label: 'November', value: 'November', index: 11 },
+	{ label: 'December', value: 'December', index: 12 },
+];
+
+const getMonthYearOptions = (year) => {
+	const currentDate = new Date();
+	const currentMonth = getMonth(currentDate);
+	const currentYear = getYear(currentDate);
+
+	const yearOptions = [
+		{ label: `${currentYear}`, value: currentYear },
+		{ label: `${currentYear - 1}`, value: currentYear - 1 },
+		{ label: `${currentYear - 2}`, value: currentYear - 2 },
+	];
+
+	let monthOptions = allMonthOptions;
+
+	if (year === currentYear) {
+		monthOptions = monthOptions.filter((m) => m.index < currentMonth + 1);
+	}
+
+	return { yearOptions, monthOptions };
+};
+
 function UploadModalBody({ setOpenUploadModal = () => {} }) {
 	const [files, setFiles] = useState({});
+	const [year, setYear] = useState('');
+	const [month, setMonth] = useState('');
 
 	const [{ loading : uploadLoading = false }, trigger] = useRequest({
 		url    : 'approve_ratings',
@@ -26,9 +63,13 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 		normalizationCSV : normalizationCsvFile || undefined,
 	}), [onboardingCsvFile, normalizationCsvFile]);
 
+	const { monthOptions, yearOptions } = getMonthYearOptions(year);
+
+	const isUploadPossible = files.onboardingCSV || month;
+
 	const uploadCSVs = async () => {
 		try {
-			await trigger({ data: { Url: files.normalizationCSV } });
+			await trigger({ data: { Url: files.normalizationCSV, Month: month, Year: year } });
 
 			Toast.success('File sent for processing. Please check after some time...');
 			setFiles({});
@@ -83,6 +124,26 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 			<div className={styles.upload_info} style={{ background: files.onboardingCSV ? '#e0e0e0' : '' }}>
 				<div className={styles.upload_header}>
 					<div className={styles.label}>Upload Normalization CSV</div>
+
+					<div className={styles.filters}>
+						<Select
+							value={year}
+							onChange={setYear}
+							placeholder="Year..."
+							isClearable={!month}
+							style={{ marginRight: '8px' }}
+							options={yearOptions}
+						/>
+						<Select
+							value={month}
+							onChange={setMonth}
+							placeholder="Month..."
+							disabled={!year}
+							isClearable
+							options={monthOptions}
+						/>
+					</div>
+
 					<Tooltip
 						theme="light"
 						placement="top-end"
@@ -115,6 +176,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 					onClick={() => uploadCSVs()}
 					loading={uploadLoading}
 					disabled={isEmpty(files?.normalizationCSV)}
+					disabled={!isUploadPossible}
 				>
 					Upload
 				</Button>

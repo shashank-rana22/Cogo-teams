@@ -115,7 +115,6 @@ function HRDashboard() {
 					<Modal
 						show={openUploadModal}
 						onClose={() => setOpenUploadModal(false)}
-						onClickOutside={() => setOpenUploadModal(false)}
 					>
 						<Modal.Header title="Upload CSV" />
 						<div className={styles.upload_modal}>

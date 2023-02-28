@@ -40,7 +40,7 @@ function ListItem({ item, params: pageParams = {} }) {
 				<Input
 					size="sm"
 					prefix={<IcMSearchlight />}
-					placeholder="Search"
+					placeholder="Search By Name, Email, Mob Number"
 					className={styles.search}
 					value={searchValue}
 					onChange={setSearchValue}

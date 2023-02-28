@@ -4,17 +4,6 @@ const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
 
-	// const partnerOptions = useGetAsyncOptions({
-	// 	endpoint    : 'list_partner_users',
-	// 	initialCall : false,
-	// 	params      : {
-	// 		filters: {
-	// 		},
-	// 	},
-	// 	valueKey : 'user_id',
-	// 	labelKey : 'name',
-	// });
-
 	const control = [
 		{
 			label          : 'Manager Name',
