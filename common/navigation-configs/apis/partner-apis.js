@@ -6406,7 +6406,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api         : '/purchase/treasury/live-status',
+			api         : 'get_purchase_treasury_live_status',
 			access_type : 'private',
 		},
 	],

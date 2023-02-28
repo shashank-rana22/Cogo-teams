@@ -164,6 +164,7 @@ function asyncAllotBanks() {
 		labelKey     : 'bankname',
 		valueKey     : 'bank_id',
 		endpoint     : '/purchase/treasury/live-status',
+		authkey      : 'get_purchase_treasury_live_status',
 		initialCall  : false,
 		microservice : true,
 		params       : {
