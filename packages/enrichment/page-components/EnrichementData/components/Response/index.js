@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import DetailsCard from '../../common/DetailsCard';
-import DetailsForm from '../../common/DetailsForm';
+import CreateResponse from '../../common/CreateResponse';
 import useSubmitResponses from '../../hooks/useSubmitResponses';
+import DetailsCard from '../DetailsCard';
 
 import styles from './styles.module.css';
 
@@ -22,7 +22,7 @@ function Response({
 		<div>
 
 			{responseData.length === 0 ? (
-				<DetailsForm
+				<CreateResponse
 					loading={loading}
 					activeTab={activeTab}
 					responseData={responseData}
@@ -43,7 +43,7 @@ function Response({
 			))}
 
 			{showAddPoc && (
-				<DetailsForm
+				<CreateResponse
 					loading={loading}
 					activeTab={activeTab}
 					responseData={responseData}

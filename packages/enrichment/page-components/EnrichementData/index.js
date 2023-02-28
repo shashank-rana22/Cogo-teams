@@ -1,5 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 import Header from './components/Header';
 import Response from './components/Response';
@@ -8,17 +8,13 @@ import useEnrichmentData from './hooks/useEnrichmentData';
 function EnrichmentData() {
 	const {
 		loading,
-		activeTab = '',
-		setActiveTab = () => {},
-		setResponseData = () => {},
-		responseData = [],
-		showAddPoc = false,
-		setShowAddPoc = () => {},
+		activeTab,
+		setActiveTab,
+		setResponseData,
+		responseData,
+		showAddPoc,
+		setShowAddPoc,
 	} = useEnrichmentData();
-
-	useEffect(() => {
-
-	}, [responseData]);
 
 	return (
 

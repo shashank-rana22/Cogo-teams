@@ -19,7 +19,7 @@ const cardHeader = {
 	},
 };
 
-function DetailsForm({
+function CreateResponse({
 	loading = false,
 	activeTab = '',
 	setResponseData = () => {},
@@ -141,4 +141,4 @@ function DetailsForm({
 	);
 }
 
-export default DetailsForm;
+export default CreateResponse;
