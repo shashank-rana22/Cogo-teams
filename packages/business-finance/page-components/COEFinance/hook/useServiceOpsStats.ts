@@ -24,7 +24,7 @@ const useServiceOpsStats = (filters :FilterInterface) => {
 		},
 		{ autoCancel: false },
 	);
-	const { zone = '', serviceType, dateRange, rest } = filters || {};
+	const { zone = '', serviceType = '', dateRange, rest } = filters || {};
 
 	const billDatesStart = (dateRange?.startDate === undefined
 		|| dateRange?.startDate === null)
@@ -53,7 +53,7 @@ const useServiceOpsStats = (filters :FilterInterface) => {
 		};
 		getData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger, filters]);
+	}, [trigger, zone, serviceType, billDatesEnd]);
 
 	return { So2statsData, loading };
 };

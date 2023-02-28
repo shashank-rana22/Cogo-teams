@@ -11,13 +11,13 @@ function StyledTable({ id, className, columns, data, ...rest }:TableProps) {
 		<div className={styles.table}>
 			<Table
 				columns={columns}
-				data={data}
+				data={data || [{}]}
 				id={id}
 				className={className}
 				{...rest}
 			/>
 
-			{data.length === 0 && <EmptyState />}
+			{data?.length === 0 && <EmptyState />}
 		</div>
 	);
 }

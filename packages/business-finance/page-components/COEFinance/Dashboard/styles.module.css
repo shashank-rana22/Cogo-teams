@@ -23,7 +23,7 @@
 .space_between {
 	display: flex;
 	gap: 16px;
-	margin-top: 16px;
+	margin-top: 30px;
 
 	@media (max-width: 1120px) {
 		flex-direction: column;

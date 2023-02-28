@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Filter from '../../commons/Filters';
 import StyledTable from '../../commons/StyledTable';
 import MyResponsivePie from '../Components/PieChart';
+import { PieChartData } from '../Components/PieChart/PieChartData';
 import MyResponsiveBar from '../Components/ResponsiveBar';
 import BarData from '../Components/ResponsiveBar/BarData';
 import usePurchaseViewStats from '../hook/getPurchaseViewStats';
@@ -20,9 +21,8 @@ function Dashboard() {
 	const [filters, setFilters] = useState({ zone: '', serviceType: '', days: '' });
 	const [reportModal, setReportModal] = useState(false);
 	const { statsData } = usePurchaseViewStats();
-	const { So2statsData = [{}] } = useServiceOpsStats(filters);
-	const { jobStatsData = [{}] } = useJobStats(filters);
-
+	const { So2statsData } = useServiceOpsStats(filters);
+	const { jobStatsData } = useJobStats(filters);
 	const { INITIATED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
 
 	const Status = [
@@ -59,6 +59,50 @@ function Dashboard() {
 				</div>
 			</div>
 
+			<div className={styles.responsive}>
+				<MyResponsiveBar data={BarData()} />
+			</div>
+
+			<div className={styles.space_between}>
+				<div className={styles.service_stats}>
+					<div className={styles.invoice}>
+						Service Ops 2 Statistics
+						<Tooltip content="Percentage of Invoices approved" placement="top">
+							<div className={styles.icon}>
+								<IcMInfo />
+							</div>
+						</Tooltip>
+					</div>
+
+					<div className={styles.border_main} />
+
+					<div className={styles.table_data}>
+						<StyledTable
+							data={So2statsData}
+							columns={columns}
+						/>
+					</div>
+
+				</div>
+
+				<div className={styles.responsive_pie}>
+					<MyResponsivePie data={PieChartData()} />
+				</div>
+			</div>
+			<div className={styles.stats}>
+				<div className={styles.jobs}>
+					Job Statistics & Profitability
+					<Tooltip content="No. of Jobs/Shipment IDs and it’s profitability" placement="top">
+						<div className={styles.icon}>
+							<IcMInfo />
+						</div>
+					</Tooltip>
+				</div>
+
+				<div className={styles.job_border} />
+				<JobStats jobData={jobStatsData} />
+			</div>
+
 			{reportModal && (
 				<Modal
 					size="md"
@@ -88,49 +132,6 @@ function Dashboard() {
 
 				</Modal>
 			) }
-
-			<div className={styles.responsive}>
-				<MyResponsiveBar data={BarData()} />
-			</div>
-
-			<div className={styles.space_between}>
-				<div className={styles.service_stats}>
-					<div className={styles.invoice}>
-						Service Ops 2 Statistics
-						<Tooltip content="Percentage of Invoices approved" placement="top">
-							<div className={styles.icon}>
-								<IcMInfo />
-							</div>
-						</Tooltip>
-					</div>
-
-					<div className={styles.border_main} />
-
-					<div className={styles.table_data}>
-						<StyledTable
-							data={So2statsData}
-							columns={columns}
-						/>
-					</div>
-
-				</div>
-				<div className={styles.responsive_pie}>
-					<MyResponsivePie />
-				</div>
-			</div>
-			<div className={styles.stats}>
-				<div className={styles.jobs}>
-					Job Statistics & Profitability
-					<Tooltip content="No. of Jobs/Shipment IDs and it’s profitability" placement="top">
-						<div className={styles.icon}>
-							<IcMInfo />
-						</div>
-					</Tooltip>
-				</div>
-
-				<div className={styles.job_border} />
-				<JobStats jobData={jobStatsData} />
-			</div>
 
 		</>
 	);

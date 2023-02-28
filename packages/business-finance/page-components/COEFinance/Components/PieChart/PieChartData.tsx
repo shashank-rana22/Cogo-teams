@@ -1,11 +1,12 @@
 import useGetPieChartData from '../../hook/useGetPieChartData';
 
 export const PieChartData = () => {
-	const { pieData = {} } = useGetPieChartData();
+	const { pieData } = useGetPieChartData();
 	const {
 		bankDetailsRejectedCount, billingPartyRejectCount,
 		invoiceDetailsRejectCount, wrongLineItems,
 	} = pieData || {};
+
 	return [
 		{
 			id    : 'Bank',

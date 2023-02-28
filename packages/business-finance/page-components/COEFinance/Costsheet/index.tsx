@@ -45,7 +45,10 @@ function CostSheet() {
 	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 	const { data: dataWallet } = useGetWallet(shipmentId);
-	const { agentData, agentRoleData, amount, amountCurrency } = dataWallet?.list?.[0] || {};
+	const {
+		agent_data:agentData, agent_role_data:agentRoleData,
+		amount, amount_currency:amountCurrency,
+	} = dataWallet?.list?.[0] || {};
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
 	const { getData, getFinalData, FinalLoading, loading } = useUpdateJob({

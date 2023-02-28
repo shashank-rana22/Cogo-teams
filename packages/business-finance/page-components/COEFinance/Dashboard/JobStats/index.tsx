@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function JobStats({ jobData }) {
 	return (
 		<div className={styles.flex}>
-			{jobData.map((item) => {
+			{(jobData || [{}]).map((item) => {
 				const { income, expense, count, state } = item || {};
 				const profit = ((income - expense) / income) * 100;
 				return (

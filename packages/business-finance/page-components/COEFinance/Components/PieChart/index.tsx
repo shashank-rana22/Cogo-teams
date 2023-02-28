@@ -2,10 +2,9 @@ import { ResponsivePie } from '@cogoport/charts/pie/index';
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 
-import { PieChartData } from './PieChartData';
 import styles from './styles.module.css';
 
-function MyResponsivePie() {
+function MyResponsivePie({ data }) {
 	return (
 		<>
 			<div className={styles.invoice}>
@@ -20,7 +19,7 @@ function MyResponsivePie() {
 			<div className={styles.border} />
 
 			<ResponsivePie
-				data={PieChartData()}
+				data={data}
 				margin={{ top: 50, right: 80, bottom: 80, left: 80 }}
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
