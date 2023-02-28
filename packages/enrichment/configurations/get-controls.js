@@ -24,17 +24,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				},
 
 			},
-			// {
-			// 	name        : 'alternate_email',
-			// 	label       : 'Alternate Email',
-			// 	placeholder : 'Type here...',
-			// 	type        : 'text',
-			// 	isClearable : true,
-			// 	rules       : {
-			// 		required: 'Alternate Email is required',
-			// 	},
-
-			// },
 			{
 				name        : 'mobile_number',
 				label       : 'Mobile Number',
@@ -114,7 +103,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				label       : 'Full Address',
 				placeholder : 'Type here...',
 				type        : 'text',
-				// style       : { flexBasis: '30%' },
 				isClearable : true,
 				rules       : {
 					required: 'Full Address is required',
@@ -126,7 +114,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				label       : 'City',
 				placeholder : 'Type here...',
 				type        : 'text',
-				// style       : { flexBasis: '30%' },
 				isClearable : true,
 				rules       : {
 					required: 'City is required',
@@ -138,7 +125,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				label       : 'State',
 				placeholder : 'Type here...',
 				type        : 'text',
-				// style       : { flexBasis: '30%' },
 				isClearable : true,
 				rules       : {
 					required: 'State is required',
@@ -150,7 +136,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				label       : 'Country',
 				placeholder : 'Type here...',
 				type        : 'text',
-				// style       : { flexBasis: '30%' },
 				isClearable : true,
 				rules       : {
 					required: 'Country is required',
@@ -162,7 +147,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				label       : 'Pincode',
 				placeholder : 'Type here...',
 				type        : 'text',
-				// style       : { flexBasis: '30%' },
 				isClearable : true,
 				rules       : {
 					required: 'PinCode is required',
@@ -173,7 +157,6 @@ const getUserControls = ({ activeTab = '' }) => {
 				name        : 'gst_number',
 				label       : 'GSTIN',
 				type        : 'text',
-				// style       : { flexBasis: '30%' },
 				placeholder : 'Type here...',
 				isClearable : true,
 				rules       : { required: 'GST Number is required' },

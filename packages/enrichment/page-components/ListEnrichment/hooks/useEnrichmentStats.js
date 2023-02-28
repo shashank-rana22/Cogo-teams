@@ -2,16 +2,17 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useEnrichmentStats = () => {
-	const profileData = useSelector(({ profile }) => profile);
+	const {
+		profile = {},
+	} = useSelector((state) => state);
 
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : '/feedback_request_stats',
 		method  : 'get',
 		authkey : 'get_allocation_feedback_request_stats',
 		params  : {
-
-			user_id    : profileData?.user?.id,
-			partner_id : profileData?.partner?.id,
+			user_id    : profile.user?.id,
+			partner_id : profile.partner?.id,
 		},
 	}, { manual: false });
 

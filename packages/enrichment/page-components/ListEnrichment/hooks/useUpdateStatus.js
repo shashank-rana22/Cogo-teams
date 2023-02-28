@@ -1,12 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useUpdateStatus = ({
-	uploadProof,
-	setEnrichmentItem = () => {},
-	enrichmentItem = {},
-	refetch = () => {},
-}) => {
+const useUpdateStatus = (props) => {
+	const {
+		selectedItem,
+		setSelectedItem,
+		uploadProof,
+		refetch,
+	} = props;
+
 	const api = useAllocationRequest({
 		url     : '/feedback_response_sheet',
 		method  : 'post',
@@ -15,7 +17,7 @@ const useUpdateStatus = ({
 
 	const [{ loading }, trigger] = api;
 
-	const { id = '' } = enrichmentItem;
+	const { id = '' } = selectedItem;
 
 	const uploadDoc = async (formValues = {}) => {
 		try {
@@ -28,7 +30,7 @@ const useUpdateStatus = ({
 			});
 			Toast.success('Uploaded successful');
 			refetch();
-			setEnrichmentItem(null);
+			setSelectedItem(null);
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');
 		}

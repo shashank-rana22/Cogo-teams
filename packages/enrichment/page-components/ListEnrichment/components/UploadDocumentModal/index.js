@@ -11,11 +11,11 @@ import useUpdateStatus from '../../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';
 
-function EnrichmentModal(props) {
+function UploadDocumentModal(props) {
 	const {
-		setEnrichmentItem = () => {},
-		refetch = () => {},
-		enrichmentItem = {},
+		selectedItem,
+		setSelectedItem,
+		refetch,
 	} = props;
 
 	const formProps = useForm();
@@ -26,8 +26,8 @@ function EnrichmentModal(props) {
 
 	const { uploadDoc, loading } = useUpdateStatus({
 		uploadProof,
-		setEnrichmentItem,
-		enrichmentItem,
+		setSelectedItem,
+		selectedItem,
 		refetch,
 	});
 
@@ -47,34 +47,36 @@ function EnrichmentModal(props) {
 
 			<form onSubmit={handleSubmit(handleManualUpload)}>
 
-				{uploadDocControls.map((controlItem) => {
-					const el = { ...controlItem };
-
-					const Element = getFieldController(el.type);
-
-					if (!Element) return null;
-					return (
-
-						<div style={el.style} className={styles.control_container}>
-
-							<span style={{ marginBottom: '12px' }}>{el.label}</span>
-
-							<Element
-								{...el}
-								size="md"
-								key={el.name}
-								control={control}
-								id={`${el.name}_input`}
-							/>
-
-						</div>
-					);
-				})}
-
 				<Modal.Body>
+					<div>
 
-					<section>
+						{uploadDocControls.map((controlItem) => {
+							const el = { ...controlItem };
 
+							const Element = getFieldController(el.type);
+
+							if (!Element) return null;
+							return (
+
+								<div style={el.style} className={styles.control_container}>
+
+									<span style={{ marginBottom: '12px' }}>{el.label}</span>
+
+									<Element
+										{...el}
+										size="md"
+										key={el.name}
+										control={control}
+										id={`${el.name}_input`}
+									/>
+
+								</div>
+							);
+						})}
+
+					</div>
+
+					<div>
 						<FileUploader
 							value={uploadProof}
 							onChange={setUploadProof}
@@ -84,15 +86,17 @@ function EnrichmentModal(props) {
 							uploadIcon={<IcMUpload height={40} width={40} />}
 							accept=".csv"
 						/>
-					</section>
+					</div>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button
 						size="md"
 						style={{ marginRight: 10 }}
 						themeType="secondary"
+						type="button"
 						onClick={() => {
-							setEnrichmentItem(null);
+							setSelectedItem(null);
 							setUploadProof(null);
 						}}
 					>
@@ -113,4 +117,4 @@ function EnrichmentModal(props) {
 	);
 }
 
-export default EnrichmentModal;
+export default UploadDocumentModal;

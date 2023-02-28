@@ -1,7 +1,7 @@
-import { Modal } from '@cogoport/components';
+import { TabPanel, Tabs, Modal } from '@cogoport/components';
 
-import EnrichmentModal from './components/EnrichmentModal';
-import PrimaryTabs from './components/PrimaryTabs';
+import Enrichment from './components/Enrichment';
+import UploadDocumentModal from './components/UploadDocumentModal';
 import useListEnrichment from './hooks/useListEnrichment';
 import styles from './styles.module.css';
 
@@ -13,8 +13,8 @@ function ListEnrichment() {
 		paginationData,
 		columns,
 		getNextPage,
-		enrichmentItem,
-		setEnrichmentItem,
+		selectedItem,
+		setSelectedItem,
 		activeTab,
 		setActiveTab,
 		secondaryTab,
@@ -31,43 +31,98 @@ function ListEnrichment() {
 		<>
 			<div className={styles.title}>Enrichment Data</div>
 
-			<PrimaryTabs
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				paginationData={paginationData}
-				loading={loading}
-				columns={columns}
-				list={list}
-				getNextPage={getNextPage}
-				secondaryTab={secondaryTab}
-				setSecondaryTab={setSecondaryTab}
-				filters={globalFilters}
-				onChangeFilters={setGlobalFilters}
-				debounceQuery={debounceQuery}
-				searchValue={searchValue}
-				setSearchValue={setSearchValue}
+			<div style={{ marginTop: 30 }}>
+				<Tabs
+					activeTab={activeTab}
+					themeType="secondary"
+					onChange={setActiveTab}
+				>
+					<TabPanel name="enrichment_requests" title="Enrichment Requests">
 
-			/>
+						<Enrichment
+							list={list}
+							loading={loading}
+							paginationData={paginationData}
+							columns={columns}
+							getNextPage={getNextPage}
+							activeTab={activeTab}
+							secondaryTab={secondaryTab}
+							globalFilters={globalFilters}
+							setGlobalFilters={setGlobalFilters}
+							debounceQuery={debounceQuery}
+							searchValue={searchValue}
+							setSearchValue={setSearchValue}
 
-			{
-				enrichmentItem && (
-
-					<Modal
-						show={enrichmentItem}
-						size="sm"
-						onClose={() => setEnrichmentItem(null)}
-					>
-
-						<EnrichmentModal
-							enrichmentItem={enrichmentItem}
-							setEnrichmentItem={setEnrichmentItem}
-							refetch={listRefetch}
 						/>
+					</TabPanel>
 
-					</Modal>
+					<TabPanel name="requests_sent" title="Requests Sent">
 
-				)
-			}
+						<div className={styles.secondary_tabs}>
+							<Tabs
+								activeTab={secondaryTab}
+								themeType="secondary"
+								onChange={setSecondaryTab}
+							>
+								<TabPanel name="submitted_requests" title="Submitted Requests">
+
+									<Enrichment
+										list={list}
+										loading={loading}
+										paginationData={paginationData}
+										columns={columns}
+										getNextPage={getNextPage}
+										activeTab={activeTab}
+										secondaryTab={secondaryTab}
+										globalFilters={globalFilters}
+										setGlobalFilters={setGlobalFilters}
+										debounceQuery={debounceQuery}
+										searchValue={searchValue}
+										setSearchValue={setSearchValue}
+									/>
+
+								</TabPanel>
+								<TabPanel name="uploaded_files" title="Uploaded Files">
+									<Enrichment
+										list={list}
+										loading={loading}
+										paginationData={paginationData}
+										columns={columns}
+										getNextPage={getNextPage}
+										activeTab={activeTab}
+										secondaryTab={secondaryTab}
+										globalFilters={globalFilters}
+										setGlobalFilters={setGlobalFilters}
+										debounceQuery={debounceQuery}
+										searchValue={searchValue}
+										setSearchValue={setSearchValue}
+									/>
+								</TabPanel>
+
+							</Tabs>
+
+						</div>
+
+					</TabPanel>
+
+				</Tabs>
+			</div>
+
+			{selectedItem && (
+				<Modal
+					show={selectedItem}
+					size="sm"
+					onClose={() => setSelectedItem(null)}
+				>
+					<UploadDocumentModal
+						selectedItem={selectedItem}
+						setSelectedItem={setSelectedItem}
+						refetch={listRefetch}
+					/>
+
+				</Modal>
+
+			)}
 
 		</>
 

@@ -7,18 +7,12 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
-import Actions from '../components/EnrichmentTable/Actions';
+import {
+	LIST_PRIMARY_COLUMNS_MAPPING,
+	LIST_SECONDARY_COLUMNS_MAPPING,
+} from '../../../constants/get-table-columns';
+import Actions from '../components/Enrichment/Actions';
 import styles from '../styles.module.css';
-
-const LIST_PRIMARY_COLUMNS_MAPPING = {
-	enrichment_requests: ['id', 'business_name', 'created_at', 'registration_number', 'address', 'action'],
-
-};
-
-const LIST_SECONDARY_COLUMNS_MAPPING = {
-	submitted_requests : ['id', 'business_name', 'created_at', 'registration_number', 'address', 'edit'],
-	uploaded_files     : ['file_name', 'upload_date', 'organizations', 'num_pocs', 'download'],
-};
 
 const authKeyMapping = {
 	feedback_requests        : 'get_allocation_feedback_requests',
@@ -27,21 +21,23 @@ const authKeyMapping = {
 };
 
 const useListEnrichment = () => {
-	const profileData = useSelector(({ profile }) => profile);
+	const {
+		profile = {},
+	} = useSelector((state) => state);
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 	const [searchValue, setSearchValue] = useState('');
 	const [activeTab, setActiveTab] = useState('enrichment_requests');
 	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
-	const [enrichmentItem, setEnrichmentItem] = useState();
+	const [selectedItem, setSelectedItem] = useState();
 	const [popoverId, setPopoverId] = useState(null);
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
 		sort_type  : 'desc',
 		page_limit : 10,
 		page       : 1,
-		user_id    : profileData?.user?.id,
-		partner_id : profileData?.partner?.id,
+		user_id    : profile.user?.id,
+		partner_id : profile.partner?.id,
 		filters    : {
 			q: searchQuery || undefined,
 
@@ -56,21 +52,7 @@ const useListEnrichment = () => {
 
 	});
 
-	const { organization_id, created_at_greater_than, created_at_less_than } = globalFilters || {};
-
-	// const clearFilters = () => {
-	// 	setGlobalFilters({
-	// 		search                  : '',
-	// 		created_at_greater_than : undefined,
-	// 		created_at_less_than    : undefined,
-
-	// 	});
-	// };
-
-	// useEffect(() => {
-	// 	clearFilters();
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [activeTab]);
+	// const { organization_id, created_at_greater_than, created_at_less_than } = globalFilters || {};
 
 	let listApiName = 'feedback_requests';
 
@@ -125,8 +107,8 @@ const useListEnrichment = () => {
 
 	const columns = [
 		{
-			Header   : <div>ID</div>,
 			id       : 'id',
+			Header   : 'ID',
 			accessor : ({ id = '' }) => (
 				<section>
 					{id}
@@ -134,8 +116,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>ORGANIZATION</div>,
 			id       : 'business_name',
+			Header   : 'Organization',
 			accessor : ({ organization = '' }) => (
 				<section>
 					{organization.business_name || '-'}
@@ -143,8 +125,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>REQUEST DATE</div>,
 			id       : 'created_at',
+			Header   : 'Request Date',
 			accessor : ({ created_at }) => (
 				<div>
 					{created_at	 ? (
@@ -159,8 +141,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>PAN</div>,
 			id       : 'registration_number',
+			Header   : 'PAN',
 			accessor : ({ organization = {} }) => (
 				<section>
 					{organization.registration_number || '-'}
@@ -168,8 +150,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>Submission Date</div>,
-			id       : 'submission_data',
+			id       : 'submission_date',
+			Header   : 'Submission Date',
 			accessor : () => (
 
 				<section>
@@ -179,8 +161,8 @@ const useListEnrichment = () => {
 		},
 
 		{
-			Header   : <div>File Name</div>,
 			id       : 'file_name',
+			Header   : 'File Name',
 			accessor : () => (
 				<section>
 
@@ -189,8 +171,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>Upload Date</div>,
 			id       : 'upload_date',
+			Header   : 'Upload Date',
 			accessor : () => (
 				<section>
 					12-OCT-2000
@@ -198,8 +180,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>Organizations</div>,
 			id       : 'organizations',
+			Header   : 'Organizations',
 			accessor : () => (
 				<section>
 					Organiation Date
@@ -207,8 +189,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>Number Of Pocs</div>,
 			id       : 'num_pocs',
+			Header   : 'Number Of Pocs',
 			accessor : () => (
 				<section>
 					Number Of Pocs
@@ -216,8 +198,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>Download</div>,
 			id       : 'download',
+			Header   : 'Download',
 			accessor : () => (
 				<section>
 					<Button
@@ -232,8 +214,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>ADDRESS</div>,
 			id       : 'address',
+			Header   : 'Address',
 			accessor : ({ address = '', id = '' }, item = {}) => (
 
 				address ? (
@@ -246,7 +228,7 @@ const useListEnrichment = () => {
 							className={styles.link_text}
 							role="presentation"
 							onClick={() => {
-								setEnrichmentItem({
+								setSelectedItem({
 									item,
 									type: 'address',
 									id,
@@ -263,8 +245,8 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			Header   : <div>View / Add Details</div>,
 			id       : 'edit',
+			Header   : 'View / Add Details',
 			accessor : (item) => {
 				const { id } = item;
 
@@ -302,7 +284,7 @@ const useListEnrichment = () => {
 									if (type === 'manual') {
 										handleUploadClick(id);
 									} else {
-										setEnrichmentItem({
+										setSelectedItem({
 											item,
 											id,
 											type,
@@ -345,8 +327,8 @@ const useListEnrichment = () => {
 		loading,
 		setParams,
 		getNextPage,
-		enrichmentItem,
-		setEnrichmentItem,
+		selectedItem,
+		setSelectedItem,
 		activeTab,
 		setActiveTab,
 		secondaryTab,

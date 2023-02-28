@@ -14,11 +14,6 @@
     margin-left: 20px;
 }
 
-.pagination_container {
-	display: flex;
-	justify-content: flex-end;
-}
-
 .svg_container {
 	display: flex;
 	align-items: center;
@@ -35,4 +30,10 @@
 		margin-bottom: 0;
 		word-break: break-word;
 	}
+}
+
+
+
+.secondary_tabs{
+    margin-top: 20px;
 }
