@@ -839,6 +839,16 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	translate: {
+		key           : 'translate',
+		title         : 'Translation',
+		href          : '/v2/translate/[activeTab]',
+		as            : '/v2/translate/Requested',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.translate,
+		module_type   : 'dashboards',
+	},
 	finance: {
 		key           : 'finance',
 		title         : 'Finance',
@@ -1737,6 +1747,14 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	kam_monitoring: {
+		key         : 'kam_monitoring',
+		title       : 'KAM Monitoring',
+		module_type : 'dashboards',
+		href        : '/kam-monitoring',
+		as          : '/kam-monitoring',
+		main_apis   : [],
+	},
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
@@ -1809,9 +1827,16 @@ const navigationMappingAdmin = {
 		module_type: 'dashboards',
 	},
 	cogo_verse_analytics: {
-		key           : 'cogo_verse_analytics',
-		title         : 'CogoVerse ',
-		// eslint-disable-next-line max-len, jsx-a11y/alt-text
+		key   : 'cogo_verse_analytics',
+		title : 'CogoVerse',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_verse_icon.svg"
+				alt="cogo-verse"
+				width="22px"
+				height="22px"
+			/>
+		),
 		href          : '/v2/cogo-verse-analytics',
 		as            : '/v2/cogo-verse-analytics',
 		type          : 'link',
@@ -1831,8 +1856,16 @@ const navigationMappingAdmin = {
 		module_type   : 'crm',
 	},
 	cogo_one: {
-		key           : 'cogo_one',
-		title         : 'Cogo One',
+		key   : 'cogo_one',
+		title : 'Cogo One',
+		icon  : () => (
+			<img
+				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg"
+				alt="cogo-one"
+				width="18px"
+				height="18px"
+			/>
+		),
 		isSubNavs     : true,
 		main_apis     : [],
 		possible_apis : apis.cogo_one,
