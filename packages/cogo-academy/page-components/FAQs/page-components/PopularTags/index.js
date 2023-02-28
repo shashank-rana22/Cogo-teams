@@ -1,6 +1,5 @@
-import { Chips, Button, Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { Chips } from '@cogoport/components';
+import React, { useState } from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
 import TopicList from '../TopicList';
