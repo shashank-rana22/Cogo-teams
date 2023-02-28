@@ -8,14 +8,8 @@ import styles from './styles.module.css';
 
 function PopularTags({ tabTitle = '', searchState = '' }) {
 	const [tags, setTags] = useState([]);
-	const {
-		refetchTag = () => {},
-		data,
-		loading = false,
-		activeTab,
-		setActiveTab,
-		options,
-	} = useListFaqTag({ tagIds: tags });
+
+	const { options } = useListFaqTag();
 
 	return (
 		<div style={{ marginBottom: 10 }}>

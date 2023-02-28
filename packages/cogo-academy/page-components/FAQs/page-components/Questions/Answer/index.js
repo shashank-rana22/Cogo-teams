@@ -148,8 +148,8 @@ function Answer({ questions = {} }) {
 	}
 
 	return (
-		<>
-			<div className={styles.heading_container}>
+		<div>
+			{/* <div className={styles.heading_container}>
 				<div dangerouslySetInnerHTML={{ __html: answerData?.answers[0]?.answer }} />
 			</div>
 			<div>
@@ -249,9 +249,9 @@ function Answer({ questions = {} }) {
 				</div>
 			</div>
 
-			<RelatedQuestion tags={questions.faq_tags} question_abstract={questions.question_abstract} />
+			<RelatedQuestion tags={questions.faq_tags} question_abstract={questions.question_abstract} /> */}
 
-		</>
+		</div>
 	);
 }
 

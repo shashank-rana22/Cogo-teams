@@ -4,7 +4,6 @@ import { React, useState } from 'react';
 
 import Dashboard from '../Dashboard';
 import MostReadFAQs from '../MostReadFAQs';
-import TrendingFAQs from '../TrendingFAQs';
 
 function Tabbase() {
 	const [activeTab, setActiveTab] = useState('All FAQs');
@@ -21,10 +20,6 @@ function Tabbase() {
 				<TabPanel name="All FAQs" title="All FAQs">
 					<Dashboard tabTitle="All FAQs" />
 				</TabPanel>
-				{/*
-				<TabPanel name="Trending" title="Trending" badge={5}>
-					<TrendingFAQs />
-				</TabPanel> */}
 
 				<TabPanel name="Most Read" title="Most Read">
 					<MostReadFAQs />

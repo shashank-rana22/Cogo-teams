@@ -5,9 +5,7 @@ import { React } from 'react';
 
 import styles from './styles.module.css';
 
-function QuestionsCollapse({ collapse, questions }) {
-	const arrow = collapse;
-
+function QuestionsCollapse({ questions }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>
@@ -16,15 +14,10 @@ function QuestionsCollapse({ collapse, questions }) {
 				{questions.question_abstract}
 				{' '}
 
-				<IcMArrowRight
-					width={16}
-					height={16}
-					className={` ${styles.caret_arrow} ${arrow && styles.caret_active}`}
-				/>
+				<IcMArrowRight width={16} height={16} />
 			</div>
 
 			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-				{/* <Pill prefix={<IcMImage />} size="sm" color="white"><b>2</b></Pill> */}
 				<Pill
 					prefix={<IcMEyeopen />}
 					size="sm"
@@ -32,6 +25,7 @@ function QuestionsCollapse({ collapse, questions }) {
 				>
 					<b>{questions.view_count}</b>
 				</Pill>
+
 				{(questions?.faq_tags || []).map((item) => (
 					<Pill
 						className={styles.questions_tag}

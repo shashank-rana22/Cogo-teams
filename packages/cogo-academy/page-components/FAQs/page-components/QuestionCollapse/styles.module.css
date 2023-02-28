@@ -48,12 +48,3 @@ background: white;
     border-radius: 16px; 
     font-weight: 600;
 }
-
-.caret_arrow {
-	transition: 0.5s;
-
-	&.caret_active {
-		transition: 0.5s;
-		transform: rotate(180deg);
-	}
-}

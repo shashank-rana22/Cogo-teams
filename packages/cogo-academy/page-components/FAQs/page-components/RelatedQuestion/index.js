@@ -7,29 +7,25 @@ import styles from './styles.module.css';
 
 function RelatedQuestion({ tags, question_abstract }) {
 	const tagId = tags?.[0]?.id;
-	const {
-		page,
-		setPage = () => {},
-		paginationData,
-		refetchQuestions = () => {},
-		data,
-		loading = false,
-		activeTab,
-		setActiveTab,
-		topicId,
-	} = useListFaqQuestions({ tagId, limit: 3 });
+
+	const { data } = useListFaqQuestions({ tagId, limit: 3 });
+
+	if ((data?.list || []).length === 0) {
+		return null;
+	}
 
 	return (
 		<div style={{ paddingTop: '1.2%' }}>
-			{(data?.list.length > 1) ? <span className={styles.relatedquestion}>Related Questions</span> : null}
-			{data?.list?.map((tags_question) => (
+			<span className={styles.relatedquestion}>Related Questions</span>
+
+			{(data?.list || []).map((question) => (
 				<div className={styles.title}>
 					{' '}
-					{(tags_question?.question_abstract !== question_abstract) ? (
+					{(question?.question_abstract !== question_abstract) ? (
 						<div>
 							Q.
 							{' '}
-							{tags_question?.question_abstract}
+							{question?.question_abstract}
 						</div>
 					) : null}
 				</div>

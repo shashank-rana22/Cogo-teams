@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import SearchInput from '../SearchInput';
+import SearchInput from '../../../../commons/SearchInput';
 
 import MostReadFaqResults from './MostReadResults';
 
@@ -10,6 +10,7 @@ function MostReadFAQs() {
 	return (
 		<div>
 			<br />
+
 			<SearchInput
 				value={searchState}
 				onChange={(val) => setSearchState(val)}
@@ -18,7 +19,6 @@ function MostReadFAQs() {
 			/>
 
 			<MostReadFaqResults searchState={searchState} />
-
 		</div>
 	);
 }

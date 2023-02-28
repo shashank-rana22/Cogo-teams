@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
+import SearchInput from '../../../../commons/SearchInput';
 import PopularTags from '../PopularTags';
-import SearchInput from '../SearchInput';
 
 function Dashboard({ tabTitle }) {
 	const [searchState, setSearchState] = useState('');

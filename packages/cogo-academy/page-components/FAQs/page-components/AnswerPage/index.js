@@ -33,10 +33,7 @@ function AnswerPage() {
 	const [load, setload] = useState(true);
 	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id });
 
-	// const { data: answerData, loading } = useGetQuestions({ id });
-
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
-	// console.log(is_positive);
 
 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
@@ -47,11 +44,9 @@ function AnswerPage() {
 
 	const { handleSubmit, formState: { errors }, control } = useForm();
 
-	let apiName = '/create_faq_feedback';
-
-	if (isLiked) {
-		apiName = '/update_faq_feedback';
-	}
+	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
+		? '/update_faq_feedback'
+		: '/create_faq_feedback';
 
 	const [{ loading: feedbackLoading }, trigger] = useRequest({
 		url    : apiName,
@@ -65,35 +60,40 @@ function AnswerPage() {
 
 	const onClickLikeButton = async ({ _id }) => {
 		setload(false);
-		let payload = {
-			faq_answer_id : _id,
-			is_positive   : true,
-			status        : 'active',
-		};
-		if (isLiked === 'liked') {
-			payload = {
-				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				status : 'inactive',
-			};
-		} else if (isLiked === 'disliked') {
-			payload = {
-				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				is_positive : true,
-				status      : 'active',
-			};
-		}
+
 		try {
+			let payload = {
+				faq_answer_id : _id,
+				is_positive   : true,
+				status        : 'active',
+			};
+			if (isLiked === 'liked') {
+				payload = {
+					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					status : 'inactive',
+				};
+			} else if (isLiked === 'disliked') {
+				payload = {
+					id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					is_positive : true,
+					status      : 'active',
+				};
+			}
+
 			await trigger({
 				data: payload,
 			});
+
 			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 			refetchQuestions();
 		} catch (error) {
 			console.log('error :: ', error);
 		}
 	};
+
 	const onClickRemoveDisLike = async () => {
 		setload(false);
+
 		try {
 			await trigger({
 				data: {
@@ -101,6 +101,7 @@ function AnswerPage() {
 					status : 'inactive',
 				},
 			});
+
 			setIsLiked('');
 			refetchQuestions();
 		} catch (error) {
@@ -120,12 +121,10 @@ function AnswerPage() {
 		}
 
 		let payload = {
-
 			faq_answer_id : answerData?.answers[0]?.id,
 			is_positive   : false,
 			remark,
 			status        : 'active',
-
 		};
 		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
 			payload = {
@@ -141,6 +140,7 @@ function AnswerPage() {
 			await trigger({
 				data: payload,
 			});
+
 			setIsLiked('disliked');
 			setShow(false);
 			refetchQuestions();
@@ -205,7 +205,6 @@ function AnswerPage() {
 						{startCase(item.display_name)}
 					</Pill>
 				))}
-
 			</div>
 
 			<div className={styles.flex_items}>
@@ -245,58 +244,56 @@ function AnswerPage() {
 					}}
 				>
 					<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
-
 				</div>
 
-				<div>
-					<Modal
-						size="md"
-						show={show}
-						onClose={onClose}
-						placement="right"
-					>
-						<Modal.Header title="Reason for dislike" />
-						<Modal.Body>
-							<form
-								className={styles.form_container}
-								onSubmit={handleSubmit(onSubmit)}
-							>
-								<div>
-									<CheckboxController
-										control={control}
-										name="question_checkbox"
-										type="checkbox"
-										label="Question not satisfactory"
-									/>
-									<CheckboxController
-										control={control}
-										name="answer_checkbox"
-										type="checkbox"
-										label="Answer not satisfactory"
-									/>
-								</div>
+				<Modal
+					size="md"
+					show={show}
+					onClose={onClose}
+					placement="right"
+				>
+					<Modal.Header title="Reason for dislike" />
+					<Modal.Body>
+						<form
+							className={styles.form_container}
+							onSubmit={handleSubmit(onSubmit)}
+						>
+							<div>
+								<CheckboxController
+									control={control}
+									name="question_checkbox"
+									type="checkbox"
+									label="Question not satisfactory"
+								/>
+								<CheckboxController
+									control={control}
+									name="answer_checkbox"
+									type="checkbox"
+									label="Answer not satisfactory"
+								/>
+							</div>
 
-								<div className={styles.remark}>
-									<div className={styles.aftercheckbox}>Remarks</div>
-									<InputController
-										control={control}
-										name="remark"
-										type="text"
-										placeholder="Enter remark here"
-										rules={{ required: 'Remark is required' }}
-									/>
-									{errors.remark && (
-										<span className={styles.errors}>
-											{errors.remark.message}
-										</span>
-									)}
-								</div>
-								<Button type="submit" loading={feedbackLoading}>Submit</Button>
-							</form>
-						</Modal.Body>
-					</Modal>
-				</div>
+							<div className={styles.remark}>
+								<div className={styles.aftercheckbox}>Remarks</div>
+								<InputController
+									control={control}
+									name="remark"
+									type="text"
+									placeholder="Enter remark here"
+									rules={{ required: 'Remark is required' }}
+								/>
+								{errors.remark && (
+									<span className={styles.errors}>
+										{errors.remark.message}
+									</span>
+								)}
+							</div>
+							<Button type="submit" loading={feedbackLoading}>Submit</Button>
+						</form>
+					</Modal.Body>
+				</Modal>
 			</div>
+
 			<div>
 				<span className={styles.sidetext}>
 					{answerData?.answers[0]?.upvote_count}
@@ -312,7 +309,6 @@ function AnswerPage() {
 			</div>
 
 			<RelatedQuestion tags={answerData?.faq_tags[0]} question_abstract={answerData?.question_abstract} />
-
 		</>
 	);
 }

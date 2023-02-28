@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../commons/Spinner';
@@ -11,13 +11,10 @@ import styles from './styles.module.css';
 
 function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' }) {
 	const {
-		refetchQuestions = () => {},
 		page,
 		setPage,
 		data,
 		loading = false,
-		activeTab,
-		setActiveTab,
 		paginationData,
 	// eslint-disable-next-line react-hooks/rules-of-hooks
 	} = useListFaqQuestions({ topicId, tagId });
