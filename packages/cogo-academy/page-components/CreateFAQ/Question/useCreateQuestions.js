@@ -25,6 +25,7 @@ function useCreateQuestions({ data, setEditorError }) {
 	const {
 		onSubmit:onSubmitCreateForm,
 		onClickPublish,
+		loading,
 	} = useCreateFaqSet({
 		setQuestionPreview,
 		questionPreview,
@@ -33,7 +34,7 @@ function useCreateQuestions({ data, setEditorError }) {
 		setEditorError,
 	});
 
-	const { onSubmitUpdatedForm } = useUpdateFaqSet({
+	const { onSubmitUpdatedForm, loading:updateApiLoading } = useUpdateFaqSet({
 		setQuestionPreview,
 		editorValue,
 		data,
@@ -44,6 +45,10 @@ function useCreateQuestions({ data, setEditorError }) {
 	const onSubmit = (mode === 'create' && questionId)
 		? onSubmitUpdatedForm
 		: onSubmitCreateForm;
+
+	const apiLoading = (mode === 'create' && questionId)
+		? updateApiLoading
+		: loading;
 
 	const {
 		topicOptions,
@@ -99,6 +104,7 @@ function useCreateQuestions({ data, setEditorError }) {
 		listTopicsLoading,
 		listTagsLoading,
 		listAudienceLoading,
+		apiLoading,
 	};
 }
 
