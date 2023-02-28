@@ -45,6 +45,7 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 				searchAudienceInput={searchAudienceInput}
 				setSearchAudienceInput={setSearchAudienceInput}
 			/>
+
 			<AudianceTable
 				columns={listColumns}
 				data={data}

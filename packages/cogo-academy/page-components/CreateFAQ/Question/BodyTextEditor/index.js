@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 let RichTextEditor;
 
@@ -10,9 +10,11 @@ if (typeof window !== 'undefined') {
 function BodyTextEditor({
 	editorValue = '',
 	setEditorValue = () => {},
+	setEditorError = () => {},
 }) {
 	const handleChange = (value) => {
 		setEditorValue(value);
+		setEditorError(false);
 	};
 
 	return (

@@ -5,7 +5,12 @@ import { useSelector } from '@cogoport/store';
 
 import useCreateFaqPayload from './useCreateFaqPayload';
 
-function useCreateFaqSet({ setQuestionPreview, editorValue }) {
+function useCreateFaqSet({
+	setQuestionPreview,
+	editorValue,
+	setEditorError,
+	RichTextEditor,
+}) {
 	const router = useRouter();
 	const {
 		general,
@@ -13,7 +18,9 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 
 	const { id: questionId } = general.query || {};
 
-	const apiName = questionId ? '/update_question_answer_set' : '/create_question_answer_set';
+	const apiName = questionId
+		? '/update_question_answer_set'
+		: '/create_question_answer_set';
 
 	const [{ loading = false }, trigger] = useRequest({
 		url    : apiName,
@@ -21,13 +28,15 @@ function useCreateFaqSet({ setQuestionPreview, editorValue }) {
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
+		const emptyEditorValue = editorValue.toString('html') === RichTextEditor.createEmptyValue().toString('html');
+
+		if (emptyEditorValue) {
+			setEditorError(true);
+			return;
+		}
+
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create' });
-
-		// if 	(editorValue.toString('html') === '<p><br></p>') {
-		// 	console.log('success');
-		// 	Toast.error('Answer should be present');
-		// }
 
 		try {
 			const res = await trigger({

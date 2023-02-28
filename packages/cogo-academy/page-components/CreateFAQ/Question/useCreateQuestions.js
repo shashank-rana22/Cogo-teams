@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
-function useCreateQuestions({ data }) {
+function useCreateQuestions({ data, setEditorError }) {
 	const { general } = useSelector((state) => state);
 	const { mode = '', id :questionId = '' } = general.query || {};
 
@@ -30,9 +30,16 @@ function useCreateQuestions({ data }) {
 		questionPreview,
 		editorValue,
 		RichTextEditor,
+		setEditorError,
 	});
 
-	const { onSubmitUpdatedForm } = useUpdateFaqSet({ setQuestionPreview, editorValue, data });
+	const { onSubmitUpdatedForm } = useUpdateFaqSet({
+		setQuestionPreview,
+		editorValue,
+		data,
+		RichTextEditor,
+		setEditorError,
+	});
 
 	const onSubmit = (mode === 'create' && questionId)
 		? onSubmitUpdatedForm

@@ -56,7 +56,7 @@ function Header(
 							value={searchAudienceInput}
 							onChange={setSearchAudienceInput}
 							size="md"
-							placeholder="Search a Tag"
+							placeholder="Search for Audience"
 						/>
 					</div>
 

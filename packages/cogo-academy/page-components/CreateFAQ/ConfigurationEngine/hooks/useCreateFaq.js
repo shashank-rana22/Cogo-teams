@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 const MAPPING = {
@@ -46,7 +47,7 @@ function useCreateFaq() {
 
 		let payload = {
 			name,
-			display_name : name,
+			display_name : startCase(name),
 			description,
 			status       : 'active',
 		};

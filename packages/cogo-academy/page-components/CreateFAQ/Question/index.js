@@ -4,7 +4,7 @@ import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Spinner from '../../../commons/Spinner';
 import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
@@ -33,6 +33,7 @@ const userFormStyle = {
 
 function CreateFAQ() {
 	const router = useRouter();
+	const [editorError, setEditorError] = useState(false);
 
 	const { fetchQuestion, query, data, loading } = useGetQuestion();
 
@@ -60,7 +61,7 @@ function CreateFAQ() {
 		listTopicsLoading,
 		listTagsLoading,
 		listAudienceLoading,
-	} = useCreateQuestions({ data });
+	} = useCreateQuestions({ data, setEditorError });
 
 	const {
 		setConfigurationPage,
@@ -279,7 +280,14 @@ function CreateFAQ() {
 					<BodyTextEditor
 						editorValue={editorValue}
 						setEditorValue={setEditorValue}
+						setEditorError={setEditorError}
 					/>
+
+					{editorError && (
+						<span className={styles.errors}>
+							Anwser is required
+						</span>
+					)}
 
 				</div>
 

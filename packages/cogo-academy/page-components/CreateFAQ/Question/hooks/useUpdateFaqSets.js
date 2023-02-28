@@ -5,7 +5,13 @@ import { useSelector } from '@cogoport/store';
 
 import useCreateFaqPayload from './useCreateFaqPayload';
 
-function useUpdateFaqSet({ setQuestionPreview, editorValue, data }) {
+function useUpdateFaqSet({
+	setQuestionPreview,
+	editorValue,
+	data,
+	RichTextEditor,
+	setEditorError,
+}) {
 	const router = useRouter();
 
 	const {
@@ -20,6 +26,12 @@ function useUpdateFaqSet({ setQuestionPreview, editorValue, data }) {
 	}, { manual: true });
 
 	const onSubmitUpdatedForm = async (values) => {
+		const emptyEditorValue = editorValue.toString('html') === RichTextEditor.createEmptyValue().toString('html');
+
+		if (emptyEditorValue) {
+			setEditorError(true);
+			return;
+		}
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const { payload } = useCreateFaqPayload({ values, editorValue, data });
 
