@@ -1,7 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useListFaqQuestions({ searchState = '', topicId = undefined, sort = false, tagId = [], limit = undefined }) {
+function useListFaqQuestions({
+	searchState = '',
+	topicId = undefined,
+	sort = false,
+	tagId = [],
+	limit = undefined,
+}) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');

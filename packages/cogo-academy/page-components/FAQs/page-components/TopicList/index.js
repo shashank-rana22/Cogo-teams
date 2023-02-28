@@ -1,8 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { Tabs, TabPanel } from '@cogoport/components';
-import { Badge } from '@cogoport/components';
+import { Tabs, TabPanel, Badge } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
@@ -15,21 +13,16 @@ import SearchFound from '../SearchFound';
 
 import styles from './styles.module.css';
 
+const ALL_TOPICS = 'All Topics';
+
 function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
-	const ALL_TOPICS = 'All Topics';
-	const {
-		general,
-	} = useSelector((state) => state);
 	const router = useRouter();
 
-	const { query } = general || {};
-
-	const { topicId = '', topicName = '' } = query || {};
 	const {
 		refetchTopic = () => {},
 		data,
 		loading = false,
-		activeTab = topicId ? { topicName } : { ALL_TOPICS },
+		activeTab,
 		setActiveTab,
 	} = useListFaqTopic();
 
@@ -72,9 +65,10 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 										</div>
 									)}
 								/>
+
 								{(data?.list || []).map((singleOption) => (
 									<TabPanel
-										name={singleOption}
+										name={singleOption.id}
 										title={(
 
 											<div>
@@ -87,17 +81,14 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 														size="md"
 														text={singleOption.question_count}
 													/>
-
 												</div>
 
 												<div className={styles.subtitle}>
 													{startCase(singleOption.description) || 'No Description'}
 												</div>
 											</div>
-
 										)}
 									/>
-
 								))}
 							</Tabs>
 						</div>
@@ -108,7 +99,7 @@ function TopicList({ tabTitle = '', searchState = '', tagId = [] }) {
 									<QuestionsList
 										tabTitle={activeTab.name}
 										searchState={searchState}
-										topicId={activeTab.id}
+										topicId={activeTab === 'All Topics' ? '' : activeTab}
 									/>
 								)
 								: (

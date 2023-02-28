@@ -27,7 +27,7 @@ function AnswerPage() {
 
 	const { query } = general || {};
 
-	const { id = '', topicName = '', topicId = '' } = query || {};
+	const { id = '', topicId = '' } = query || {};
 
 	const [show, setShow] = useState(false);
 
@@ -96,13 +96,8 @@ function AnswerPage() {
 		}
 	};
 
-	// const toggle = () => {
-	// 	const href = `/learning/faq/answer?id=${questions?.id}&topicId=${topicId}&topicName=${topicName}`;
-	// 	router.push(href, href);
-	// };
-
 	const onClickBackIcon = () => {
-		const href = `/learning/faq?topicId=${topicId}&topicName=${topicName}`;
+		const href = `/learning/faq?topicId=${topicId}`;
 		router.push(href, href);
 	};
 

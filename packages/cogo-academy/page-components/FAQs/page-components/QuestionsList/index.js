@@ -42,9 +42,6 @@ function QuestionsList({ tabTitle, searchState = '', topicId = '', tagId = '' })
 
 	return (
 		<div>
-			<h1 className={styles.title}>
-				{startCase(tabTitle)}
-			</h1>
 			<div style={{ margin: '5px 0', width: '100%', height: '487px' }} className={styles.scrollable}>
 
 				{(data?.list || []).map((question) => (
