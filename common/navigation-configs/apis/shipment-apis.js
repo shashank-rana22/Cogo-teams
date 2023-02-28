@@ -1006,12 +1006,12 @@ const apis = [
 	{
 		api          : 'list_saas_container_subscriptions',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'saas_traceability',
 	},
 	{
 		api          : 'get_saas_container_subscription',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'saas_traceability',
 	},
 	{
 		api          : 'send_invoice_email',
@@ -1257,6 +1257,17 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'raise_query',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_air_subscription',
+		access_type  : 'private',
+		service_name : 'air_tracking',
+	},
+
 ];
 
 export default apis;
