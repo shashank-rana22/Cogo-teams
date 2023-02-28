@@ -23,8 +23,8 @@ function ApprovalPending({
 		setItem(singleItem);
 	};
 
-	const handleEditMAWB = (singleItem) => {
-		setEdit(true);
+	const handleEditMAWB = (singleItem, action) => {
+		setEdit(action || true);
 		setGenerate(true);
 		setItem(singleItem);
 	};
@@ -49,7 +49,7 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={() => { handleEditMAWB(singleItem); }}
+				onClick={() => { handleEditMAWB(singleItem, 'edit'); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
@@ -61,7 +61,7 @@ function ApprovalPending({
 						themeType="secondary"
 						style={{ border: '1px solid #ED3726', color: '#ED3726' }}
 						disabled={updateLoading}
-						onClick={() => { handleEditMAWB(singleItem); }}
+						onClick={() => { handleEditMAWB(singleItem, ''); }}
 					>
 						Amend
 					</Button>

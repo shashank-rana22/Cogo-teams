@@ -18,7 +18,7 @@ interface Props {
 	formData?: any;
 	setBack?: any;
 	back?: boolean;
-	edit?: boolean;
+	edit?: any;
 	setEdit?: any;
 	viewDoc?: boolean;
 	chargeableWeight?:any;
@@ -37,26 +37,13 @@ function GenerateMawb({
 	formData = {},
 	setBack = () => {},
 	back = false,
-	edit = false,
+	edit,
 	setEdit = () => {},
 	viewDoc = false,
 	chargeableWeight,
 	setGenerate = () => {},
 }:Props) {
-	const { dimension = [], ...rest } = { ...formData };
-	const convertedDimension = dimension.map((dim) => {
-		const { length, width, height, unit, packages } = dim;
-		if (unit === 'inch') {
-			return {
-				length : 2.54 * length,
-				width  : 2.54 * width,
-				height : 2.54 * height,
-				packages,
-			};
-		}
-		return { length, width, height, packages };
-	});
-	const filteredData = { ...rest, dimension: convertedDimension };
+	const filteredData = { ...formData };
 
 	const footerValues = [
 		'COPY 12(FOR CUSTOMS)',
@@ -113,7 +100,7 @@ function GenerateMawb({
 			id                  : taskItem?.documentId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : taskItem?.id,
+			pending_task_id     : edit === 'edit' ? undefined : taskItem?.id,
 			data                : {
 				...filteredData,
 				status          : 'generated',

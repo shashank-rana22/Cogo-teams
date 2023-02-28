@@ -19,7 +19,7 @@ interface Props {
 	viewDoc?: boolean;
 	setViewDoc?: any;
 	item?: any;
-	edit?: boolean;
+	edit?: any;
 	setEdit?: any;
 	setGenerate?:any;
 }
@@ -28,7 +28,7 @@ function GenerateMAWB({
 	viewDoc = false,
 	setViewDoc = () => {},
 	item = {},
-	edit = false,
+	edit,
 	setEdit = () => {},
 	setGenerate = () => {},
 }:Props) {
@@ -57,21 +57,18 @@ function GenerateMAWB({
 		...fields.handling,
 	];
 
-	let chargeableWt:any = (Math.max(
-		formValues.weight,
-		(taskItem.volume * 166.67),
-	).toFixed(2));
-
-	let chargeableWeight = 	chargeableWt * taskItem.packagesCount;
+	let chargeableWeight:any = ((Math.max(
+		+formValues.weight * +taskItem.packagesCount,
+		(+taskItem.volume * 166.67),
+	) || 0.0).toFixed(2));
 
 	useEffect(() => {
-		chargeableWt = (Math.max(
-			formValues.weight,
-			formValues.volumetricWeight,
-		).toFixed(2));
-		chargeableWeight = chargeableWt * formValues.packagesCount;
-		setValue('chargeableWeight', chargeableWeight.toFixed(2));
-	}, [formValues.volumetricWeight, formValues.packagesCount]);
+		chargeableWeight = ((Math.max(
+			+formValues.weight * +formValues.packagesCount,
+			+formValues.volumetricWeight,
+		) || 0.0).toFixed(2));
+		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
+	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
 
 	useEffect(() => {
 		finalFields.forEach((c:any) => {
@@ -87,14 +84,22 @@ function GenerateMAWB({
 	useEffect(() => {
 		let totalVolume:any = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
-			totalVolume
+			if (dimensionObj.unit === 'inch') {
+				totalVolume
+				+= Number(dimensionObj.length) * 2.54
+				* Number(dimensionObj.width) * 2.54
+				* Number(dimensionObj.height) * 2.54
+				* Number(dimensionObj.packages);
+			} else if (dimensionObj.unit === 'cm') {
+				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)
 				* Number(dimensionObj.height)
 				* Number(dimensionObj.packages);
+			}
 		});
-		setValue('volumetricWeight', (totalVolume * 166.67).toFixed(2));
-	}, [JSON.stringify(formValues.dimension)]);
+		setValue('volumetricWeight', ((+totalVolume * 166.67) || 0.0).toFixed(2));
+	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	return (
 		<div className={styles.container}>

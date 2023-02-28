@@ -85,7 +85,10 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.common_border_right}
 					`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.totalCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>
+							{(data?.totalCharge || 0.0).toFixed(2)}
+
+						</p>
 					</div>
 					<div style={{ flex: 1 }} />
 				</div>
@@ -234,7 +237,10 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.common_border_right}
 					`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.agentCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>
+							{(data?.agentCharge || 0.0).toFixed(2)}
+
+						</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -289,7 +295,10 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.common_border_right}
 					`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.carrierCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>
+							{(data?.carrierCharge || 0.0).toFixed(2)}
+
+						</p>
 					</div>
 					<div className={cl`
 						${styles.flex} 
@@ -357,7 +366,10 @@ function WeightChargeDetails({ data = {} }:Props) {
 						${styles.prepaid_total_value}
 					`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 13 }}>{data?.finalCharge?.toFixed(2)}</p>
+						<p className={styles.font_style} style={{ fontSize: 13 }}>
+							{(data?.finalCharge || 0.0).toFixed(2)}
+
+						</p>
 					</div>
 				</div>
 
