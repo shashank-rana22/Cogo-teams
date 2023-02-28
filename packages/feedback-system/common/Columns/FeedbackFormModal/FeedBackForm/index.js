@@ -52,7 +52,7 @@ function FeedBackForm({
 	const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
 	const onSubmit = () => {
-		if (Object.values(rating).includes(0) || (showForm !== 'resigned' && isEmpty(comment))) {
+		if (Object.values(rating).includes(0) || (showForm !== 'resigned' || isEmpty(comment))) {
 			Toast.error('Please provide rating for all the questions');
 			return;
 		}
