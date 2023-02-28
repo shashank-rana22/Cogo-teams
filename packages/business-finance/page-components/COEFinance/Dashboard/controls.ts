@@ -40,7 +40,7 @@ export const filterControls = [
 	},
 	{
 		name           : 'days',
-		type           : 'multiSelect',
+		type           : 'select',
 		placeholder    : 'Days',
 		isClearable    : true,
 		span           : 1,

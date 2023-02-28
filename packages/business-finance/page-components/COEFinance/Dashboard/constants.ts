@@ -1,10 +1,21 @@
-export const OPTIONS = [
+export const columns = [
 	{
-		label : 'Open Jobs',
-		value : 'per_package',
+		Header   : 'Name',
+		accessor : 'name',
+		id       : 'name',
 	},
 	{
-		label : 'Closed Jobs',
-		value : 'total_gross',
+		Header   : 'Invoices',
+		accessor : 'totalCount',
+		id       : 'totalCount',
+	},
+	{
+		Header   : 'Success Rate',
+		id       : 'success_rate',
+		accessor : (row) => {
+			const { totalCount, approvedCount } = row;
+			const successRate = (approvedCount / totalCount) * 100;
+			return `${successRate.toFixed(2)} %`;
+		},
 	},
 ];

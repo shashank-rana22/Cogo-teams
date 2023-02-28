@@ -1,22 +1,35 @@
-import { Button, Modal } from '@cogoport/components';
+import { Tooltip, Button, Modal } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import Filter from '../../commons/Filters';
+import StyledTable from '../../commons/StyledTable';
+import MyResponsivePie from '../Components/PieChart';
+import { PieChartData } from '../Components/PieChart/PieChartData';
 import MyResponsiveBar from '../Components/ResponsiveBar';
-import data from '../Components/ResponsiveBar/data';
+import BarData from '../Components/ResponsiveBar/BarData';
+import usePurchaseViewStats from '../hook/getPurchaseViewStats';
+import useJobStats from '../hook/useJobStats';
+import useServiceOpsStats from '../hook/useServiceOpsStats';
 
+import { columns } from './constants';
 import { filterControls, reportControls } from './controls';
+import JobStats from './JobStats';
 import styles from './styles.module.css';
 
 function Dashboard() {
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({ zone: '', serviceType: '', days: '' });
 	const [reportModal, setReportModal] = useState(false);
+	const { statsData } = usePurchaseViewStats();
+	const { So2statsData } = useServiceOpsStats(filters);
+	const { jobStatsData } = useJobStats(filters);
+	const { INITIATED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
 
 	const Status = [
-		{ id: 1, label: 'Pending', value: '24' },
-		{ id: 2, label: 'Approved', value: '12' },
-		{ id: 3, label: 'Rejected', value: '20' },
-		{ id: 4, label: 'Finance Rejected', value: '28' },
+		{ id: 1, label: 'Pending', value: INITIATED || '-' },
+		{ id: 2, label: 'Approved', value: FINANCE_ACCEPTED || '-' },
+		{ id: 3, label: 'Rejected', value: COE_REJECTED || '-' },
+		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED || '-' },
 	];
 
 	return (
@@ -30,6 +43,7 @@ function Dashboard() {
 					</div>
 				))}
 			</div>
+
 			<div className={styles.filter_flex}>
 				<Filter
 					controls={filterControls}
@@ -42,9 +56,53 @@ function Dashboard() {
 					onClick={() => { setReportModal(true); }}
 				>
 					Request Report
-
 				</div>
 			</div>
+
+			<div className={styles.responsive}>
+				<MyResponsiveBar data={BarData()} />
+			</div>
+
+			<div className={styles.space_between}>
+				<div className={styles.service_stats}>
+					<div className={styles.invoice}>
+						Service Ops 2 Statistics
+						<Tooltip content="Percentage of Invoices approved" placement="top">
+							<div className={styles.icon}>
+								<IcMInfo />
+							</div>
+						</Tooltip>
+					</div>
+
+					<div className={styles.border_main} />
+
+					<div className={styles.table_data}>
+						<StyledTable
+							data={So2statsData}
+							columns={columns}
+						/>
+					</div>
+
+				</div>
+
+				<div className={styles.responsive_pie}>
+					<MyResponsivePie data={PieChartData()} />
+				</div>
+			</div>
+			<div className={styles.stats}>
+				<div className={styles.jobs}>
+					Job Statistics & Profitability
+					<Tooltip content="No. of Jobs/Shipment IDs and it’s profitability" placement="top">
+						<div className={styles.icon}>
+							<IcMInfo />
+						</div>
+					</Tooltip>
+				</div>
+
+				<div className={styles.job_border} />
+				<JobStats jobData={jobStatsData} />
+			</div>
+
 			{reportModal && (
 				<Modal
 					size="md"
@@ -74,18 +132,6 @@ function Dashboard() {
 
 				</Modal>
 			) }
-
-			<div
-				style={{
-					height       : 368,
-					minWidth     : '35%',
-					background   : '#ffffff',
-					borderRadius : '8px',
-					margin       : '16px',
-				}}
-			>
-				<MyResponsiveBar data={data} />
-			</div>
 
 		</>
 	);
