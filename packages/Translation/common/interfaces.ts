@@ -16,6 +16,11 @@ export interface StatusObject {
 	status: string
 }
 
+export interface Translates {
+	status: string
+	myTranslates: string
+}
+
 export interface Object {
 	itemData: object;
 }

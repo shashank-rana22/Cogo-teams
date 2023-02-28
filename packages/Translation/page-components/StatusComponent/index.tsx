@@ -3,18 +3,18 @@ import React from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import Filters from '../../common/Filters';
-import { StatusObject } from '../../common/interfaces';
+import { Translates } from '../../common/interfaces';
 import useGetList from '../../hooks/useGetList';
 import getColumns from '../../utils/getColumns';
 import StyledTable from '../Table';
 
 import styles from './styles.module.css';
 
-function StatusComponent({ status }: StatusObject) {
+function StatusComponent({ status, myTranslates }: Translates) {
 	const {
 		loading, data = [], setFilters,
 		filters, refetch,
-	} = useGetList({ status });
+	} = useGetList({ status, myTranslates });
 
 	const { list = [], pageIndex = 0, totalRecords = 0, pageLimit = 10 } = data || {};
 
@@ -22,7 +22,12 @@ function StatusComponent({ status }: StatusObject) {
 
 	return (
 		<>
-			<Filters onChangeFilters={setFilters} filters={filters} status={status} refetch={refetch} />
+			<Filters
+				onChangeFilters={setFilters}
+				filters={filters}
+				status={status}
+				refetch={refetch}
+			/>
 			<StyledTable data={list} columns={columns} loading={loading} />
 			{list.length === 0 && !loading && (
 				<EmptyState emptyText="No Translation

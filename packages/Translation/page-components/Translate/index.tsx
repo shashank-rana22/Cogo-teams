@@ -1,23 +1,38 @@
-import { TabPanel, Tabs } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+// import { TabPanel, Tabs } from '@cogoport/components';
+// import { useRouter } from '@cogoport/next';
+import { Toggle } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import TABS_MAPPING from '../../configs/index';
-import PropMapping from '../../constants/mappings';
-import { handleTabChange } from '../../utils/handleTabChange';
+// import TABS_MAPPING from '../../configs/index';
+// import PropMapping from '../../constants/mappings';
+import StatusComponent from '../StatusComponent';
+// import { handleTabChange } from '../../utils/handleTabChange';
 
 import styles from './styles.module.css';
 
 function Translate() {
-	const { query, push } = useRouter();
-	const { activeTab } = query;
-	const [receivables, setReceivables] = useState<string>(activeTab || 'Requested');
+	const [myTranslates, setMyTranslates] = useState<string>('true');
+	// const { query, push } = useRouter();
+	// const { activeTab } = query;
+	// const [receivables, setReceivables] = useState<string>(activeTab || 'Requested');
 
 	return (
 		<>
-			<div className={styles.heading}>Translation</div>
+			<div className={styles.flex}>
+				<div className={styles.heading}>Translation</div>
+				<Toggle
+					name="myTransilates"
+					size="md"
+					offLabel="My Transilations"
+					onLabel="All Transilations"
+					value={myTranslates}
+					onChange={(e) => {
+						setMyTranslates(e?.target?.checked ? 'true' : 'false');
+					}}
+				/>
+			</div>
 			<div className={styles.tabs}>
-				<Tabs
+				{/* <Tabs
 					activeTab={receivables}
 					onChange={(val:string) => handleTabChange(val, setReceivables, push)}
 					themeType="primary"
@@ -28,7 +43,8 @@ function Translate() {
 							<Component {...PropMapping[value as keyof typeof PropMapping]} />
 						</TabPanel>
 					))}
-				</Tabs>
+				</Tabs> */}
+				<StatusComponent status="COMPLETED" myTranslates={myTranslates} />
 			</div>
 		</>
 	);

@@ -11,3 +11,8 @@
 .tabs {
 	margin-top: 16px;
 }
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+}
