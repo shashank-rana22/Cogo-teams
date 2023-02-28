@@ -9,7 +9,7 @@ import getMonthControls from '../../utils/monthControls';
 
 import styles from './styles.module.css';
 
-function Filters({ params = {}, setParams = () => {} }) {
+function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const { Department = '', Designation = '' } = params;
 	const [managerName, setManagerName] = useState('');
 
@@ -54,11 +54,13 @@ function Filters({ params = {}, setParams = () => {} }) {
 				/>
 			))}
 
-			<Input
-				{...managerControls}
-				onChange={setManagerName}
-				style={{ marginRight: '8px' }}
-			/>
+			{source === 'hr_dashboard' && (
+				<Input
+					{...managerControls}
+					onChange={setManagerName}
+					style={{ marginRight: '8px' }}
+				/>
+			)}
 
 			{monthControls.map((cntrl) => {
 				const value = startCase(cntrl.name);

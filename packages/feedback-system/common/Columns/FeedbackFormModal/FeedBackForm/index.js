@@ -52,7 +52,7 @@ function FeedBackForm({
 	const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
 	const onSubmit = () => {
-		if (Object.values(rating).includes(0) || (showForm !== 'resigned' || isEmpty(comment))) {
+		if (Object.values(rating).includes(0) || (showForm === 'resigned' || isEmpty(comment))) {
 			Toast.error('Please provide rating for all the questions');
 			return;
 		}
@@ -66,11 +66,11 @@ function FeedBackForm({
 	}));
 
 	const resignedOptions = [{
-		label : 'yes',
+		label : 'Yes',
 		value : '1',
 		...(action === 'show' ? { disabled: true } : {}),
 	}, {
-		label : 'no',
+		label : 'No',
 		value : '0',
 		...(action === 'show' ? { disabled: true } : {}),
 	}];
@@ -142,18 +142,21 @@ function FeedBackForm({
 								<div className={styles.side_heading}>
 									<div className={styles.question_container}>{startCase(question)}</div>
 
-									<Tooltip
-										placement="top"
-										theme="light"
-										animation="shift-away"
-										content={<div>{description}</div>}
-									>
-										<IcMInfo
-											fill="#393f70"
-											width={16}
-											height={16}
-										/>
-									</Tooltip>
+									{description && (
+										<Tooltip
+											placement="top"
+											theme="light"
+											animation="shift-away"
+											content={<div>{description}</div>}
+										>
+											<IcMInfo
+												fill="#393f70"
+												width={16}
+												height={16}
+											/>
+										</Tooltip>
+									)}
+
 								</div>
 								<div className={styles.radio_group}>
 									<RadioGroup

@@ -62,7 +62,7 @@ function FeedbackManagement() {
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
 					<div className={styles.department_select}>
-						<Filters setParams={setParams} params={params} />
+						<Filters setParams={setParams} params={params} source="hr_feedback" />
 
 						<Input
 							value={searchValue}

@@ -71,7 +71,7 @@ function HRDashboard() {
 
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
-					<Filters setParams={setParams} params={params} />
+					<Filters setParams={setParams} params={params} source="hr_dashboard" />
 				</div>
 
 			</div>
