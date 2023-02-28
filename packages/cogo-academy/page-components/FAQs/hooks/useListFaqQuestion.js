@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -16,6 +17,13 @@ function useListFaqQuestions({
 		url    : 'list_faq_questions',
 	}, { manual: true });
 
+	const { query, debounceQuery } = useDebounceQuery();
+
+	useEffect(() => {
+		debounceQuery(searchState);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchState]);
+
 	const fetchFaqQuestions = async () => {
 		try {
 			await trigger({
@@ -23,7 +31,7 @@ function useListFaqQuestions({
 					filters: {
 						state        : 'published',
 						status       : 'active',
-						q            : searchState,
+						q            : query,
 						faq_topic_id : topicId,
 						faq_tag_id   : tagId,
 
@@ -34,14 +42,14 @@ function useListFaqQuestions({
 				},
 			});
 		} catch (error) {
-			// console.log('error :: ', error);
+			console.log(error);
 		}
 	};
 
 	useEffect(() => {
 		fetchFaqQuestions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, searchState, topicId, JSON.stringify(tagId)]);
+	}, [page, query, topicId, JSON.stringify(tagId)]);
 
 	const { page_limit, total_count } = data || {};
 
