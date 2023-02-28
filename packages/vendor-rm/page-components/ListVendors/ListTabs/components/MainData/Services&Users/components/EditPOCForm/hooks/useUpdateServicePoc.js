@@ -10,9 +10,13 @@ import controls from '../../ShowPocForm/utils/controls';
 const useAddServicePoc = ({
 	showForm,
 	setShowForm = () => {},
+	// getVendorData,
 	// refetchServicesPocs = () => {},
 	refetchVendorInfo,
 }) => {
+	const { data: pocData = [] } = showForm || {};
+	const { id: pocId = '' } = pocData[0];
+
 	const {
 		control,
 		formState: { errors },
@@ -37,13 +41,21 @@ const useAddServicePoc = ({
 	const onSubmit = async () => {
 		const values = getValues();
 
+		const {
+			name = '',
+			email = '',
+			mobile_number,
+			poc_role,
+		} = values || {};
+
 		try {
 			const payload = {
-				name                : values?.name,
-				email               : values?.email,
-				mobile_country_code : values?.mobile_number?.country_code,
-				mobile_number       : values?.mobile_number?.number,
-				poc_role            : values?.poc_role,
+				id                  : pocId,
+				name,
+				email,
+				mobile_country_code : mobile_number?.country_code,
+				mobile_number       : mobile_number?.number,
+				poc_role,
 				vendor_id,
 			};
 
@@ -60,14 +72,12 @@ const useAddServicePoc = ({
 	};
 
 	useEffect(() => {
-		const { data = [] } = showForm;
-
 		const {
 			name = '',
 			email = '',
 			mobile_number = '',
 			poc_role = [],
-		} = data?.[0] || {};
+		} = pocData?.[0] || {};
 
 		setValue('name', name);
 		setValue('email', email);
