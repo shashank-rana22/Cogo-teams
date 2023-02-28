@@ -46,7 +46,7 @@ const useGetList = ({ status, myTranslates }: Translates) => {
 					pageIndex   : filters.pageIndex,
 					status,
 					searchQuery : undefined,
-					createdBy   : !myTranslates ? profileData.user.id : undefined,
+					createdBy   : myTranslates === 'false' ? profileData.user.id : undefined,
 				},
 			});
 		} catch (e) {
