@@ -173,6 +173,20 @@ function asyncFieldsListAgents() {
 		},
 	};
 }
+function asyncFieldListRateChargeCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'code',
+		endpoint    : 'list_rate_charge_codes',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 20,
+			sort_by    : 'active_assigned_chats',
+			sort_type  : 'asc',
+		},
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -188,4 +202,5 @@ export {
 	asyncFieldsOperators,
 	asyncFieldsListOperators,
 	asyncFieldsListAgents,
+	asyncFieldListRateChargeCodes,
 };

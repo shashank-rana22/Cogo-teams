@@ -8,7 +8,10 @@ import {
 	asyncFieldsOrganizationUser,
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
-	asyncFieldsPartnerUsers, asyncFieldsLocations, asyncFieldsListOperators,
+	asyncFieldsPartnerUsers,
+	asyncFieldsLocations,
+	asyncFieldsListOperators,
+	asyncFieldListRateChargeCodes,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -30,14 +33,15 @@ import {
  * getModifiedOptions
  */
 const keyAsyncFieldsParamsMapping = {
-	organizations      : asyncFieldsOrganizations,
-	organization_users : asyncFieldsOrganizationUser,
-	partners           : asyncFieldsPartner,
-	partner_users      : asyncFieldsPartnerUsers,
-	partner_roles      : asyncFieldsPartnerRoles,
-	segments           : asyncFieldsCampaignSegments,
-	list_locations     : asyncFieldsLocations,
-	list_operators     : asyncFieldsListOperators,
+	organizations          : asyncFieldsOrganizations,
+	organization_users     : asyncFieldsOrganizationUser,
+	partners               : asyncFieldsPartner,
+	partner_users          : asyncFieldsPartnerUsers,
+	partner_roles          : asyncFieldsPartnerRoles,
+	segments               : asyncFieldsCampaignSegments,
+	list_locations         : asyncFieldsLocations,
+	list_operators         : asyncFieldsListOperators,
+	list_rate_charge_codes : asyncFieldListRateChargeCodes,
 };
 
 function AsyncSelect(props) {
