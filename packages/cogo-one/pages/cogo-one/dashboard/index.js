@@ -1,2 +1,2 @@
 /* eslint-disable import/no-unresolved */
-export { default } from '@cogoport/cogo-one/page-components/CogoOneDashboard';
+export { CogoOneDashboard } from '@cogoport/cogo-one/page-components/CogoOneDashboard';

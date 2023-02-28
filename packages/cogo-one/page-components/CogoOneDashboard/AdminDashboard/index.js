@@ -15,7 +15,7 @@ import RedFlags from './RedFlags';
 import styles from './styles.module.css';
 
 function AdminDashboard(props) {
-	const { timeline, setTimeline, listData, loading } = props || {};
+	const { timeline, setTimeline, listData, loading, getCogoOneDashboard = () => {} } = props || {};
 	const {
 		escalations = [], calls_analytics = {}, channels_message_analytics = {},
 		agents_details = {}, agents_performance = {}, status_of_chats = {}, cogo_one_dashboard_graph = {},
@@ -43,7 +43,7 @@ function AdminDashboard(props) {
 					<RedFlags escalations={escalations} loading={loading} />
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
-					<AgentActivity agentsDetails={agents_details} />
+					<AgentActivity agentsDetails={agents_details} getCogoOneDashboard={getCogoOneDashboard} />
 					<PerformanceTab agentsPerformance={agents_performance} />
 				</div>
 				<div className={styles.statistics_plus_characteristics}>

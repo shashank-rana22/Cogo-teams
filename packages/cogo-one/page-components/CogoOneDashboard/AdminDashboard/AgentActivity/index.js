@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMProfile, IcMTimer } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -8,7 +9,8 @@ import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
 
-function AgentActivity({ agentsDetails = {} }) {
+function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
+	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('busy_agents');
 	const { agents_details_config } = configurationData;
 
@@ -52,9 +54,20 @@ function AgentActivity({ agentsDetails = {} }) {
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
-							const { picture, name, contact_nos, duration } = item;
+							const { picture, name, contact_nos, duration, agent_id = '' } = item;
+
+							const redirectToAgentView = ((agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
+								if (!agentId) return;
+								router.push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
+								getCogoOneDashboard(agentId);
+							}, [router]);
+
 							return (
-								<div className={styles.profile_box}>
+								<div
+									className={styles.profile_box}
+									role="presentation"
+									onClick={() => redirectToAgentView(agent_id)}
+								>
 									<div className={styles.profile_box_left}>
 										<div className={cl`${styles.circle_icon} ${tabMapping[activeTab]}`} />
 										<div className={styles.profile_icon}>{picture}</div>

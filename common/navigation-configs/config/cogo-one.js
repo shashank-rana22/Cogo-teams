@@ -7,7 +7,10 @@ const cogoOne = {
 		navigation : 'cogo_one-dashboard',
 		isMainNav  : true,
 	},
-
+	'/[partner_id]/cogo-one/dashboard/[id]': {
+		navigation : 'cogo_one-dashboard',
+		isMainNav  : true,
+	},
 };
 
 export default cogoOne;

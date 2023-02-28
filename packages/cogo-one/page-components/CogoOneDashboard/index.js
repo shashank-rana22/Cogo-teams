@@ -15,16 +15,20 @@ function CogoOneDashboard() {
 	const selectedTimeline = (calendarData || []).filter(
 		(d) => format(d.date, 'dd MMM YYYY') === format(selectedItem, 'dd MMM YYYY'),
 	)?.[0];
-	const { loading, listData = {} } = useGetCogoOneDashboard({ timeline, selectedTimeline, selectedItem });
 
 	const {
 		userRoleId,
+		partnerUserId,
 	} = useSelector(({ profile }) => ({
 		userRoleId: profile.partner.user_role_ids[0]
 		|| {},
+		partnerUserId: profile.partner.partner_user_id,
 	}));
-	const kamAgentId = '0bc8c199-09ed-4a85-b3a3-a855f05a2716'; // KAM - SME Demand
-	const isAgentView = userRoleId.includes(kamAgentId);
+	const kamAgentRoleId = '0bc8c199-09ed-4a85-b3a3-a855f05a2716'; // KAM - SME Demand
+	const isAgentView = userRoleId.includes(kamAgentRoleId);
+	const { loading, listData = {}, getCogoOneDashboard = () => {} } = 	useGetCogoOneDashboard(
+		{ timeline, selectedTimeline, selectedItem, partnerUserId, isAgentView },
+	);
 
 	const commomProps = {
 		timeline,
@@ -43,7 +47,7 @@ function CogoOneDashboard() {
 				<div className={styles.prime_container}>
 					{isAgentView
 						? <AgentDashboard {...commomProps} />
-						: <AdminDashboard {...commomProps} />}
+						: <AdminDashboard {...commomProps} getCogoOneDashboard={getCogoOneDashboard} />}
 				</div>
 			)}
 		</div>
