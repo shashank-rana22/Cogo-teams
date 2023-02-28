@@ -41,8 +41,6 @@ function Heading1({
 		ResubmitKYC,
 	} = useResubmitKyc({ data, refetchVendorInfo, setshowKycModal });
 
-	console.log(newControls, kyc_control, Errors, 'newControls');
-
 	const { kyc_status = '' } = vendor_details || {};
 
 	return (
