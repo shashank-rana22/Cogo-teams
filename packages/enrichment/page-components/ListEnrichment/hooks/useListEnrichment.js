@@ -4,7 +4,7 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils/';
+import { format, startCase } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
 import {
@@ -99,6 +99,15 @@ const useListEnrichment = () => {
 		setSecondaryTab('submitted_requests');
 	}, [activeTab]);
 
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+
+			},
+		}));
+	}, [secondaryTab]);
+
 	const router = useRouter();
 
 	const handleUploadClick = (feedback_request_id) => {
@@ -109,9 +118,9 @@ const useListEnrichment = () => {
 		{
 			id       : 'id',
 			Header   : 'ID',
-			accessor : ({ id = '' }) => (
+			accessor : ({ serial_id = '' }) => (
 				<section>
-					{id}
+					{serial_id || '-'}
 				</section>
 			),
 		},
@@ -163,49 +172,51 @@ const useListEnrichment = () => {
 		{
 			id       : 'file_name',
 			Header   : 'File Name',
-			accessor : () => (
+			accessor : ({ file_name }) => (
 				<section>
 
-					Name
+					{startCase(file_name) || '-'}
 				</section>
 			),
 		},
 		{
 			id       : 'upload_date',
 			Header   : 'Upload Date',
-			accessor : () => (
+			accessor : ({ created_at }) => (
 				<section>
-					12-OCT-2000
+					{format(created_at, 'dd MMM yyyy')}
 				</section>
 			),
 		},
 		{
 			id       : 'organizations',
 			Header   : 'Organizations',
-			accessor : () => (
+			accessor : ({ organizations }) => (
 				<section>
-					Organiation Date
+					{organizations || '-'}
 				</section>
 			),
 		},
 		{
 			id       : 'num_pocs',
 			Header   : 'Number Of Pocs',
-			accessor : () => (
+			accessor : ({ num_pocs }) => (
 				<section>
-					Number Of Pocs
+					{num_pocs || '-'}
 				</section>
 			),
 		},
 		{
 			id       : 'download',
 			Header   : 'Download',
-			accessor : () => (
+			accessor : ({ sheet_url }) => (
 				<section>
 					<Button
 						themeType="secondary"
 						size="md"
 						type="button"
+						// eslint-disable-next-line no-undef
+						onClick={() => window.open(sheet_url, '_blank')}
 					>
 						Download
 
@@ -320,10 +331,10 @@ const useListEnrichment = () => {
 	});
 
 	return {
-		columns: filteredColumns,
+		columns     : filteredColumns,
 		list,
 		paginationData,
-		refetch,
+		listRefetch :	refetch,
 		loading,
 		setParams,
 		getNextPage,
