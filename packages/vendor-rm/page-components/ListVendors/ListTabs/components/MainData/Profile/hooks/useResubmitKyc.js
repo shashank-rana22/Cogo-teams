@@ -30,13 +30,12 @@ const useResubmitKyc = ({
 		method : 'post',
 	}, { manual: true });
 
-	const { documents = [] } = data;
+	const { documents = [], vendor_details = {} } = data;
 
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
 
-	const { vendor_details = {} } = data;
 	const { kyc_rejection_feedbacks = [] } = vendor_details;
 
 	const VENDOR_FIELDS_MAPPING = [
@@ -114,13 +113,13 @@ const useResubmitKyc = ({
 
 		const filtered_documents = getDocments({ rejected_documents, values });
 		const payload = {
+			id                  : vendor_details?.id,
 			documents           : filtered_documents,
 			business_name       : values.business_name || undefined,
 			country_id          : values.country_id || undefined,
 			company_type        : values.company_type || undefined,
-			registration_number : values.registration_number || undefined,
+			registration_number : values.registration_number?.registrationNumber || undefined,
 			kyc_status          : 'pending_verification',
-
 		};
 
 		try {
