@@ -14,6 +14,7 @@
 
 .sub_container_click {
 	display: flex;
+	gap: 4px;
 	align-items: center;
 	justify-content: center;
 	width: 93%;
@@ -38,6 +39,7 @@
 
 .sub_container {
 	display: flex;
+	gap: 4px;
 	align-items: center;
 	justify-content: center;
 	width: 93%;
@@ -57,4 +59,11 @@
 		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
 		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
 	}
+}
+
+.badge {
+	padding: 4px;
+	color: #fff;
+	background: #ed3726;
+	border-radius: 4px;
 }

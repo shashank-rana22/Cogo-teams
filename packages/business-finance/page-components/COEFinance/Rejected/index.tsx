@@ -1,6 +1,8 @@
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import usePurchaseViewStats from '../hook/getPurchaseViewStats';
+
 import CommonListData from './CommonListData';
 import styles from './styles.module.css';
 
@@ -46,6 +48,10 @@ function Rejected() {
 		);
 	};
 
+	const { statsData }: any = usePurchaseViewStats();
+
+	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
+
 	return (
 		<div>
 
@@ -65,6 +71,9 @@ function Rejected() {
 								? styles.sub_container_click : styles.sub_container}
 							>
 								{tab.label}
+								<div className={styles.badge}>
+									{tab.key === 'finance_rejected' ? FINANCE_REJECTED : COE_REJECTED }
+								</div>
 
 							</div>
 
