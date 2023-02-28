@@ -584,6 +584,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -1660,6 +1665,11 @@ const partner = {
 			api          : 'create_event',
 			access_type  : 'private',
 			service_name : 'event',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
 		},
 	],
 	supply_crm: [
