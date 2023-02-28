@@ -5,6 +5,19 @@ import UploadDocumentModal from './components/UploadDocumentModal';
 import useListEnrichment from './hooks/useListEnrichment';
 import styles from './styles.module.css';
 
+const tabPanelMapping = {
+	submitted_requests: {
+		name  : 'enrichment_requests',
+		title : 'Enrichment Requests',
+
+	},
+	uploaded_files: {
+		name  : 'uploaded_files',
+		title : 'Uploaded Files',
+	},
+
+};
+
 function ListEnrichment() {
 	const {
 		list,
@@ -64,40 +77,28 @@ function ListEnrichment() {
 								themeType="secondary"
 								onChange={setSecondaryTab}
 							>
-								<TabPanel name="submitted_requests" title="Submitted Requests">
 
-									<Enrichment
-										list={list}
-										loading={loading}
-										paginationData={paginationData}
-										columns={columns}
-										getNextPage={getNextPage}
-										activeTab={activeTab}
-										secondaryTab={secondaryTab}
-										globalFilters={globalFilters}
-										setGlobalFilters={setGlobalFilters}
-										debounceQuery={debounceQuery}
-										searchValue={searchValue}
-										setSearchValue={setSearchValue}
-									/>
+								{Object.values(tabPanelMapping).map((item) => (
 
-								</TabPanel>
-								<TabPanel name="uploaded_files" title="Uploaded Files">
-									<Enrichment
-										list={list}
-										loading={loading}
-										paginationData={paginationData}
-										columns={columns}
-										getNextPage={getNextPage}
-										activeTab={activeTab}
-										secondaryTab={secondaryTab}
-										globalFilters={globalFilters}
-										setGlobalFilters={setGlobalFilters}
-										debounceQuery={debounceQuery}
-										searchValue={searchValue}
-										setSearchValue={setSearchValue}
-									/>
-								</TabPanel>
+									<TabPanel name={item.name} title={item.title}>
+
+										<Enrichment
+											list={list}
+											loading={loading}
+											paginationData={paginationData}
+											columns={columns}
+											getNextPage={getNextPage}
+											activeTab={activeTab}
+											secondaryTab={secondaryTab}
+											globalFilters={globalFilters}
+											setGlobalFilters={setGlobalFilters}
+											debounceQuery={debounceQuery}
+											searchValue={searchValue}
+											setSearchValue={setSearchValue}
+										/>
+
+									</TabPanel>
+								))}
 
 							</Tabs>
 
