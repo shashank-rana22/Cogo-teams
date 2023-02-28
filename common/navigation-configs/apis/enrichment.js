@@ -14,6 +14,19 @@ const enrichment = [
 	},
 
 	{
+		api          : 'get_allocation_feedback_response_sheets',
+		access_type  : 'private',
+		feature      : 'allocation',
+		service_name : 'allocation',
+
+	},
+	{
+		api          : 'list_organizations',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+
+	{
 		api          : 'get_allocation_feedback_responses',
 		access_type  : 'private',
 		feature      : 'allocation',
@@ -24,6 +37,21 @@ const enrichment = [
 		access_type  : 'private',
 		feature      : 'allocation',
 		service_name : 'allocation',
+	},
+
+	{
+		api          : 'post_allocation_feedback_response',
+		access_type  : 'private',
+		feature      : 'allocation',
+		service_name : 'allocation',
+
+	},
+	{
+		api          : 'get_allocation_feedback_request_stats',
+		access_type  : 'private',
+		feature      : 'allocation',
+		service_name : 'allocation',
+
 	},
 
 	{

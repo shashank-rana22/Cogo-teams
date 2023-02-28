@@ -17,6 +17,7 @@ const useEnrichmentData = () => {
 		page      : 1,
 		filters   : {
 			feedback_request_id: query.id,
+
 		},
 		is_third_party: true,
 	});

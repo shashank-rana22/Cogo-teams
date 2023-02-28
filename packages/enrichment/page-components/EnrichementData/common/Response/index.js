@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import useSubmitResponses from '../../hooks/useSubmitResponses';
 import DetailsCard from '../DetailsCard';
 import DetailsForm from '../DetailsForm';
 
@@ -16,6 +17,7 @@ function Response({
 	setShowAddPoc = () => {},
 
 }) {
+	const { handleResponseSubmit = () => {} } = useSubmitResponses({ responseData, setResponseData });
 	return (
 		<div>
 
@@ -72,6 +74,7 @@ function Response({
 							themeType="primary"
 							size="md"
 							type="button"
+							onClick={(e) => handleResponseSubmit(e)}
 						>
 							Submit
 						</Button>

@@ -22,7 +22,7 @@ function SearchInput(props) {
 	return (
 		<div className={styles.container}>
 			<Input
-				suffix={<IcMSearchlight width={16} height={16} />}
+				prefix={<IcMSearchlight />}
 				value={value}
 				onChange={(val) => handleGlobalSearch(val)}
 				size={size}

@@ -1,64 +1,53 @@
-import { Modal, Pagination } from '@cogoport/components';
-import { useState } from 'react';
+import { Modal } from '@cogoport/components';
 
 import EnrichmentModal from './components/EnrichmentModal';
-import EnrichmentTable from './components/EnrichmentTable';
-import Header from './components/Header';
 import PrimaryTabs from './components/PrimaryTabs';
-// import Statistics from './components/Statistics';
 import useListEnrichment from './hooks/useListEnrichment';
 import styles from './styles.module.css';
 
 function ListEnrichment() {
-	const [activeTab, setActiveTab] = useState('enrichment_requests');
-
 	const {
-		list = [],
-		// params,
-		// setParams,
-		loading = false,
+		list,
+		loading,
 		listRefetch,
-		paginationData = {},
-		// getNextPage,
-		columns = [],
-		// listItem,
-		getNextPage = () => {},
+		paginationData,
+		columns,
+		getNextPage,
 		enrichmentItem,
 		setEnrichmentItem,
+		activeTab,
+		setActiveTab,
+		secondaryTab,
+		setSecondaryTab,
+		globalFilters,
+		setGlobalFilters,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 	} = useListEnrichment();
-
-	const { page = 1, total_count = 1, page_limit = 10 } = paginationData;
 
 	return (
 
 		<>
 			<div className={styles.title}>Enrichment Data</div>
 
-			<PrimaryTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-			<Header
+			<PrimaryTabs
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-			/>
-
-			{/* <Statistics /> */}
-
-			<EnrichmentTable
+				paginationData={paginationData}
+				loading={loading}
 				columns={columns}
 				list={list}
-				loading={loading}
-				paginationData={paginationData}
-			/>
+				getNextPage={getNextPage}
+				secondaryTab={secondaryTab}
+				setSecondaryTab={setSecondaryTab}
+				filters={globalFilters}
+				onChangeFilters={setGlobalFilters}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={getNextPage}
-				/>
-			</div>
+			/>
 
 			{
 				enrichmentItem && (

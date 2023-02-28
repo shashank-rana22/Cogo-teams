@@ -20,7 +20,7 @@ function ActionContent({ onClickCta }) {
 			</div>
 
 			<div
-				className={styles.workflow_cta}
+				className={styles.workflow_cta_last}
 				onClick={() => {
 					onClickCta({ type: 'upload' });
 				}}

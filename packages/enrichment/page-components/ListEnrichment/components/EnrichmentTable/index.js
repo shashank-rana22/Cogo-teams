@@ -2,6 +2,7 @@ import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import LoadingState from '../../../../common/LoadingState';
 
 import styles from './styles.module.css';
 
@@ -11,6 +12,10 @@ function EnrichmentTable({
 	loading = false,
 
 }) {
+	if (loading) {
+		return <LoadingState />;
+	}
+
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty_container}>

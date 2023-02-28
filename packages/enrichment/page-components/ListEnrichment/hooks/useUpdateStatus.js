@@ -7,17 +7,13 @@ const useUpdateStatus = ({
 	enrichmentItem = {},
 	refetch = () => {},
 }) => {
-	const [
-		{ loading },
-		trigger,
-	] = useAllocationRequest(
-		{
-			url     : '/feedback_response_sheet',
-			method  : 'post',
-			authKey : 'post_allocation_feedback_response_sheet',
-		},
-		{ manual: true },
-	);
+	const api = useAllocationRequest({
+		url     : '/feedback_response_sheet',
+		method  : 'post',
+		authKey : 'post_allocation_feedback_response_sheet',
+	}, { manual: true });
+
+	const [{ loading }, trigger] = api;
 
 	const { id = '' } = enrichmentItem;
 

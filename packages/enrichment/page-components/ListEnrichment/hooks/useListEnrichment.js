@@ -1,38 +1,128 @@
-import { Popover } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils/';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Actions from '../components/EnrichmentTable/Actions';
 import styles from '../styles.module.css';
 
+const LIST_PRIMARY_COLUMNS_MAPPING = {
+	enrichment_requests: ['id', 'business_name', 'created_at', 'registration_number', 'address', 'action'],
+
+};
+
+const LIST_SECONDARY_COLUMNS_MAPPING = {
+	submitted_requests : ['id', 'business_name', 'created_at', 'registration_number', 'address', 'edit'],
+	uploaded_files     : ['file_name', 'upload_date', 'organizations', 'num_pocs', 'download'],
+};
+
+const authKeyMapping = {
+	feedback_requests        : 'get_allocation_feedback_requests',
+	feedback_response_sheets : 'get_allocation_feedback_response_sheets',
+
+};
+
 const useListEnrichment = () => {
+	const profileData = useSelector(({ profile }) => profile);
+
+	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
+	const [searchValue, setSearchValue] = useState('');
+	const [activeTab, setActiveTab] = useState('enrichment_requests');
+	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
+	const [enrichmentItem, setEnrichmentItem] = useState();
 	const [popoverId, setPopoverId] = useState(null);
 	const [params, setParams] = useState({
-		sort_type : 'desc',
-		sort_by   : 'created_at',
-		page      : 1,
-		filters   : {
-			status: 'responded',
+		sort_by    : 'created_at',
+		sort_type  : 'desc',
+		page_limit : 10,
+		page       : 1,
+		user_id    : profileData?.user?.id,
+		partner_id : profileData?.partner?.id,
+		filters    : {
+			q: searchQuery || undefined,
+
 		},
+
 	});
 
-	const [enrichmentItem, setEnrichmentItem] = useState();
+	const [globalFilters, setGlobalFilters] = useState({
+		organization_id         : undefined,
+		created_at_greater_than : undefined,
+		created_at_less_than    : undefined,
+
+	});
+
+	const { organization_id, created_at_greater_than, created_at_less_than } = globalFilters || {};
+
+	// const clearFilters = () => {
+	// 	setGlobalFilters({
+	// 		search                  : '',
+	// 		created_at_greater_than : undefined,
+	// 		created_at_less_than    : undefined,
+
+	// 	});
+	// };
+
+	// useEffect(() => {
+	// 	clearFilters();
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [activeTab]);
+
+	let listApiName = 'feedback_requests';
+
+	if (activeTab === 'requests_sent' && secondaryTab === 'uploaded_files') {
+		listApiName = 'feedback_response_sheets';
+	}
 
 	const [{ loading, data }, refetch] = useAllocationRequest({
-		url     : '/feedback_requests',
+		url     : `/${listApiName}`,
 		method  : 'get',
-		authkey : 'get_allocation_feedback_requests',
+		authkey : authKeyMapping[listApiName],
 		params,
 	}, { manual: false });
+
+	const { list = [], ...paginationData } = data || {};
+
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => ({
+			...previousParams,
+			page: newPage,
+		}));
+	};
+
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...previousParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
+	useEffect(() => {
+		setParams((prevParams) => ({
+
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				status: activeTab === 'requests_sent' ? 'responded' : undefined,
+			},
+		}));
+
+		setSecondaryTab('submitted_requests');
+	}, [activeTab]);
 
 	const router = useRouter();
 
 	const handleUploadClick = (feedback_request_id) => {
 		router.push('/enrichment/[id]', `/enrichment/${feedback_request_id}`);
 	};
+
 	const columns = [
 		{
 			Header   : <div>ID</div>,
@@ -78,6 +168,70 @@ const useListEnrichment = () => {
 			),
 		},
 		{
+			Header   : <div>Submission Date</div>,
+			id       : 'submission_data',
+			accessor : () => (
+
+				<section>
+					12-OCT-2022
+				</section>
+			),
+		},
+
+		{
+			Header   : <div>File Name</div>,
+			id       : 'file_name',
+			accessor : () => (
+				<section>
+
+					Name
+				</section>
+			),
+		},
+		{
+			Header   : <div>Upload Date</div>,
+			id       : 'upload_date',
+			accessor : () => (
+				<section>
+					12-OCT-2000
+				</section>
+			),
+		},
+		{
+			Header   : <div>Organizations</div>,
+			id       : 'organizations',
+			accessor : () => (
+				<section>
+					Organiation Date
+				</section>
+			),
+		},
+		{
+			Header   : <div>Number Of Pocs</div>,
+			id       : 'num_pocs',
+			accessor : () => (
+				<section>
+					Number Of Pocs
+				</section>
+			),
+		},
+		{
+			Header   : <div>Download</div>,
+			id       : 'download',
+			accessor : () => (
+				<section>
+					<Button
+						themeType="secondary"
+						size="md"
+						type="button"
+					>
+						Download
+
+					</Button>
+				</section>
+			),
+		},
+		{
 			Header   : <div>ADDRESS</div>,
 			id       : 'address',
 			accessor : ({ address = '', id = '' }, item = {}) => (
@@ -108,9 +262,31 @@ const useListEnrichment = () => {
 
 			),
 		},
+		{
+			Header   : <div>View / Add Details</div>,
+			id       : 'edit',
+			accessor : (item) => {
+				const { id } = item;
+
+				return (
+					<section>
+
+						<Button
+							themeType="secondary"
+							size="sm"
+							type="button"
+							onClick={() => handleUploadClick(id)}
+						>
+							View / Add Details
+
+						</Button>
+					</section>
+				);
+			},
+		},
 
 		{
-			key      : 'action',
+			id       : 'action',
 			Header   : 'Action',
 			accessor : (item) => {
 				const { id } = item;
@@ -154,17 +330,15 @@ const useListEnrichment = () => {
 		},
 	];
 
-	const { list = [], ...paginationData } = data || {};
-
-	const getNextPage = (newPage) => {
-		setParams((previousParams) => ({
-			...previousParams,
-			page: newPage,
-		}));
-	};
+	const filteredColumns = columns.filter((listItem) => {
+		if (activeTab === 'requests_sent') {
+			return	LIST_SECONDARY_COLUMNS_MAPPING[secondaryTab]?.includes(listItem.id);
+		}
+		return LIST_PRIMARY_COLUMNS_MAPPING[activeTab]?.includes(listItem.id);
+	});
 
 	return {
-		columns,
+		columns: filteredColumns,
 		list,
 		paginationData,
 		refetch,
@@ -173,6 +347,15 @@ const useListEnrichment = () => {
 		getNextPage,
 		enrichmentItem,
 		setEnrichmentItem,
+		activeTab,
+		setActiveTab,
+		secondaryTab,
+		setSecondaryTab,
+		globalFilters,
+		setGlobalFilters,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 
 	};
 };

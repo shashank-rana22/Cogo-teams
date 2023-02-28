@@ -1,50 +1,69 @@
-import { DateRangepicker, Select } from '@cogoport/components';
-import { useState } from 'react';
+import { useForm } from '@cogoport/forms';
 
+import { getFieldController } from '../../../../common/Form/getFieldController';
 import SearchInput from '../../../../common/SearchInput';
+import enrichmentFilters from '../../../../configurations/get-enrichment-filter-controls';
 
 import styles from './styles.module.css';
 
-function Filters() {
-	const options = [{
-		label : 'Option 1',
-		value : 'option1',
-	},
-	{
-		label : 'Option 2',
-		value : 'option2',
-	},
-	];
+function Filters(props) {
+	const {
+		filters,
+		onChangeFilters,
+		secondaryTab,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
+	} = props;
 
-	const [filterValue, setFilterValue] = useState({
-		organization : null,
-		date_range   : null,
-	});
+	const formProps = useForm();
+
+	const { control } = formProps;
 
 	return (
-		<div className={styles.filter}>
-			<Select
-				placeholder="Organziation"
-				className={styles.select}
-				value={filterValue.organization}
-				onChange={(val) => setFilterValue({ ...filterValue, organization: val })}
-				options={options}
-			/>
+		<section className={styles.container} id="filters">
+			<div className={styles.select_container}>
 
-			<div className={styles.daterange_container}>
-				<DateRangepicker
-					name="date"
-					onChange={(val) => setFilterValue({ ...filterValue, organization: val })}
-					value={filterValue.date_range}
+				{
+				enrichmentFilters.map((el) => {
+					const Element = getFieldController(el.type);
+
+					if (!Element) return null;
+
+					if (secondaryTab === 'uploaded_files' && el.name === 'organization_id') return null;
+
+					const className = el.type === 'asyncSelect' ? styles.select : styles.date_picker;
+
+					return (
+						<Element
+							key={el.name}
+							className={className}
+							value={filters[el.name]}
+							onChange={(value) => onChangeFilters({
+								...filters,
+								[el.name]: value || undefined,
+							})}
+							{...el}
+							control={control}
+						/>
+					);
+				})
+			}
+			</div>
+
+			<div className={styles.search_container}>
+
+				<SearchInput
+					size="md"
+					placeholder="Search"
+					setGlobalSearch={setSearchValue}
+					debounceQuery={debounceQuery}
+					value={searchValue}
+					// disabled={disabled}
 				/>
 			</div>
 
-			<SearchInput
-				size="md"
-				placeholder="Search"
-			/>
-
-		</div>
+		</section>
 	);
 }
 
