@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import DetailsCard from '../../common/DetailsCard';
+import DetailsForm from '../../common/DetailsForm';
 import useSubmitResponses from '../../hooks/useSubmitResponses';
-import DetailsCard from '../DetailsCard';
-import DetailsForm from '../DetailsForm';
 
 import styles from './styles.module.css';
 
@@ -27,6 +27,7 @@ function Response({
 					activeTab={activeTab}
 					responseData={responseData}
 					setResponseData={setResponseData}
+					type="create"
 				/>
 			) : (responseData || []).map((user, index) => (
 
@@ -49,6 +50,7 @@ function Response({
 					setResponseData={setResponseData}
 					setShowAddPoc={setShowAddPoc}
 					showAddPoc={showAddPoc}
+					type="create"
 
 				/>
 

@@ -25,7 +25,7 @@ function DetailsForm({
 	setResponseData = () => {},
 	responseData = [],
 	user = {},
-	isMainForm = true,
+	type = '',
 	index,
 	setShowDetailsForm = () => {},
 	setShowAddPoc = () => {},
@@ -36,10 +36,6 @@ function DetailsForm({
 	const formProps = useForm();
 
 	const { control, handleSubmit, setValue } = formProps;
-
-	// Object.keys(user).forEach((key) => {
-	// 	setValue(key, user[key]);
-	// });
 
 	useEffect(() => {
 		setValue('email', user.email);
@@ -63,13 +59,14 @@ function DetailsForm({
 	const onSave = (formValues, e) => {
 		e.preventDefault();
 
-		if (isMainForm) {
+		if (type === 'create') {
 			setResponseData((prev) => ([
 				...prev,
 				formValues,
 			]));
 		} else {
 			const data = responseData;
+
 			data[index] = formValues;
 
 			setResponseData(data);

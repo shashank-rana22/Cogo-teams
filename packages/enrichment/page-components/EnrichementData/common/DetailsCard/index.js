@@ -50,6 +50,7 @@ function DetailsCard({
 	index = 1,
 	loading = false,
 	activeTab = '',
+	responseData = [],
 }) {
 	const [showDetailsForm, setShowDetailsForm] = useState(false);
 
@@ -94,9 +95,10 @@ function DetailsCard({
 				loading={loading}
 				activeTab={activeTab}
 				user={user}
-				isMainForm={false}
 				index={index}
 				setShowDetailsForm={setShowDetailsForm}
+				type="edit"
+				responseData={responseData}
 			/>
 		);
 	}

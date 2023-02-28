@@ -1,16 +1,13 @@
+import { TabPanel, Tabs } from '@cogoport/components';
 import { useEffect } from 'react';
 
 import Header from './components/Header';
-import PrimaryTabs from './components/PrimaryTabs';
+import Response from './components/Response';
 import useEnrichmentData from './hooks/useEnrichmentData';
 
 function EnrichmentData() {
 	const {
-
-		// paginationData,
-		// refetch,
 		loading,
-		// setParams,
 		activeTab = '',
 		setActiveTab = () => {},
 		setResponseData = () => {},
@@ -28,16 +25,39 @@ function EnrichmentData() {
 		<div>
 
 			<Header />
+			<div style={{ marginTop: 30 }}>
+				<Tabs
+					activeTab={activeTab}
+					themeType="secondary"
+					onChange={setActiveTab}
+				>
+					<TabPanel name="user" title="Point Of Contacts">
 
-			<PrimaryTabs
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				loading={loading}
-				responseData={responseData}
-				setResponseData={setResponseData}
-				showAddPoc={showAddPoc}
-				setShowAddPoc={setShowAddPoc}
-			/>
+						<Response
+							responseData={responseData}
+							setResponseData={setResponseData}
+							activeTab={activeTab}
+							loading={loading}
+							showAddPoc={showAddPoc}
+							setShowAddPoc={setShowAddPoc}
+						/>
+
+					</TabPanel>
+
+					<TabPanel name="address" title="Address">
+
+						<Response
+							responseData={responseData}
+							setResponseData={setResponseData}
+							activeTab={activeTab}
+							loading={loading}
+							showAddPoc={showAddPoc}
+							setShowAddPoc={setShowAddPoc}
+						/>
+
+					</TabPanel>
+				</Tabs>
+			</div>
 
 		</div>
 
