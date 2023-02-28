@@ -54,34 +54,32 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }:Props) 
 	});
 
 	const concorDetails = [
-		{ title: 'Organization Name', value: () => <div>CONCOR</div> },
-		{ title: 'SID', value: () => <div>{sid}</div> },
-		{ title: 'Total Buy Price', value: () => <div>{totalBuyPrice}</div> },
+		{ title: 'Organization Name', value: <div>CONCOR</div> },
+		{ title: 'SID', value: <div>{sid}</div> },
+		{ title: 'Total Buy Price', value: <div>{totalBuyPrice}</div> },
 		{
-			title : 'Booking Proof (Indent)',
-			value : () => (
-				<div>
-					{bookingProof.map((url, index) => (
-						<div>
-							<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
-							{index !== bookingProof.length - 1 ? ('     ,') : null}
-						</div>
-					))}
-				</div>
-			),
+			title: 'Booking Proof (Indent)',
+			value:
+	<div>
+		{bookingProof.map((url, index) => (
+			<div>
+				<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
+				{index !== bookingProof.length - 1 ? ('     ,') : null}
+			</div>
+		))}
+	</div>,
 		},
 		{
-			title : 'Quotation',
-			value : () => (
-				<div>
-					{quotation.map((url, index) => (
-						<div>
-							<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
-							{index !== quotation.length - 1 ? ('     ,') : null}
-						</div>
-					))}
-				</div>
-			),
+			title: 'Quotation',
+			value:
+	<div>
+		{quotation.map((url, index) => (
+			<div>
+				<a className={styles.link} href={url} target="_blank" rel="noreferrer">{url}</a>
+				{index !== quotation.length - 1 ? ('     ,') : null}
+			</div>
+		))}
+	</div>,
 		},
 	];
 
@@ -132,7 +130,7 @@ function ConcorModal({ concorData, id, refetch, row, isEditable = true }:Props) 
 									:
 								</div>
 								<div className={styles.name}>
-									<div>{detail.value()}</div>
+									<div>{detail.value}</div>
 								</div>
 							</div>
 						))	}

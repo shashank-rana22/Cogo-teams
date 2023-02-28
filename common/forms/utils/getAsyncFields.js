@@ -164,7 +164,7 @@ function asyncAllotBanks() {
 		labelKey     : 'bankname',
 		valueKey     : 'bank_id',
 		endpoint     : '/purchase/treasury/live-status',
-		initialCall  : true,
+		initialCall  : false,
 		microservice : true,
 		params       : {
 			entityCode : 301,
