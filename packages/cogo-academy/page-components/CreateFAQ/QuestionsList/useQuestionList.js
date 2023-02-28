@@ -1,4 +1,5 @@
 import { Pill, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -143,6 +144,7 @@ const requestedQuestionsColumns = ({ deactivateQuestion, onClickEditButton }) =>
 ];
 
 const useQuestionList = () => {
+	const { query, debounceQuery } = useDebounceQuery();
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
 	const [filters, setFilters] = useState({});
@@ -159,6 +161,11 @@ const useQuestionList = () => {
 		method : 'post',
 	}, { manual: true });
 
+	useEffect(() => {
+		debounceQuery(searchInput);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchInput]);
+
 	const getQuestionsList = async () => {
 		try {
 			await trigger({
@@ -166,7 +173,7 @@ const useQuestionList = () => {
 					filters: {
 						...filters,
 						...FILTER_MAPPING[activeList],
-						q: searchInput || undefined,
+						q: query || undefined,
 					},
 					page,
 				},
@@ -179,7 +186,7 @@ const useQuestionList = () => {
 	useEffect(() => {
 		getQuestionsList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, filters, searchInput, activeList]);
+	}, [page, filters, query, activeList]);
 
 	const deactivateQuestion = async (id) => {
 		try {

@@ -1,13 +1,19 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 function useListFaqTags({ searchTagsInput = '' }) {
 	const [tagCurrentPage, setTagCurrentPage] = useState(1);
 	const [activeTag, setActiveTag] = useState('active');
+	const { query, debounceQuery } = useDebounceQuery();
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
 	}, { manual: true });
+
+	useEffect(() => {
+		debounceQuery(searchTagsInput);
+	}, [searchTagsInput]);
 
 	const fetchFaqTag = async () => {
 		try {
@@ -15,16 +21,16 @@ function useListFaqTags({ searchTagsInput = '' }) {
 				params: {
 					page       : tagCurrentPage,
 					page_limit : 5,
-					filters    : { q: searchTagsInput, status: activeTag },
+					filters    : { q: query, status: activeTag },
 				},
 			});
 		} catch (err) {
-			// console.log(err);
+			console.log(err);
 		}
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTag(); }, [activeTag, tagCurrentPage, searchTagsInput]);
+	useEffect(() => { fetchFaqTag(); }, [activeTag, tagCurrentPage, query]);
 
 	return {
 		fetchFaqTag,
