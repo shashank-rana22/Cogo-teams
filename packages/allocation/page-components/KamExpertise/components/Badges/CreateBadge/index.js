@@ -6,9 +6,9 @@ import GetLabelInputPair from './getLabelInputPair';
 import Header from './header';
 import styles from './styles.module.css';
 
-function CreateBadgeV2({ setCreateBadge }) {
+function CreateBadge({ setCreateBadge }) {
 	const [value, setValue] = useState([]);
-	// const [show, setShow] = useState(false);
+	const [badgeInput, setBadgeInput] = useState(false);
 
 	const params = {
 		name: {
@@ -79,13 +79,16 @@ function CreateBadgeV2({ setCreateBadge }) {
 	const onClose = () => {
 		setCreateBadge((pv) => !pv);
 	};
+	const handelNext = () => {
+		setBadgeInput(true);
+	};
 	return (
 		<Modal size="xl" show onClose={onClose} placement="center">
 			<section className={styles.container}>
 				<Header />
 				<div className={styles.content_container}>
 					{
-					labelInputPairs && labelInputPairs.map((data) => (
+					labelInputPairs.map((data) => (
 						<GetLabelInputPair
 							labelName={data.labelName}
 							multiInput={data.multiInput}
@@ -94,22 +97,24 @@ function CreateBadgeV2({ setCreateBadge }) {
 							style={data.style}
 						/>
 					))
-				}
-				</div>
-				<div className={styles.lower_background}>
-					<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
-					<div className={styles.display_flex}>
-						{
-						medalType.map((data, index) => (
-							<GetCard
-								medalType={data.medalType}
-								inputPlaceHolder={data.inputPlaceHolder}
-								isLastItem={index === medalType.length - 1}
-							/>
-						))
 					}
-					</div>
 				</div>
+
+				{badgeInput && (
+					<div className={styles.lower_background}>
+						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
+						<div className={styles.display_flex}>
+							{medalType.map((data, index) => (
+								<GetCard
+									medalType={data.medalType}
+									inputPlaceHolder={data.inputPlaceHolder}
+									isLastItem={index === medalType.length - 1}
+								/>
+							))}
+						</div>
+					</div>
+				)}
+
 				<div className={styles.btncls}>
 					<Button
 						size="md"
@@ -118,13 +123,14 @@ function CreateBadgeV2({ setCreateBadge }) {
 						onClick={onClose}
 					>
 						Cancel
-
 					</Button>
-					<Button size="md" themeType="primary">Save</Button>
+					<Button size="md" themeType="primary" onClick={handelNext}>
+						Next
+					</Button>
 				</div>
 			</section>
 		</Modal>
 	);
 }
 
-export default CreateBadgeV2;
+export default CreateBadge;

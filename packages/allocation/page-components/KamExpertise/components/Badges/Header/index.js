@@ -20,17 +20,17 @@ function Header({ badgeList, setCreateBadge }) {
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
 				<Select
-					size="md"
+					size="sm"
 					isClearable
 					placeholder="Expertise"
 					value={expertise}
 					options={OPTIONS}
 					onChange={(value) => setExpertise(value)}
-					style={{ marginRight: 16 }}
+					className={styles.dropdown}
 				/>
 
 				<SearchInput
-					size="md"
+					size="sm"
 					placeholder="Search"
 					value={searchValue}
 					disabled={disabled}

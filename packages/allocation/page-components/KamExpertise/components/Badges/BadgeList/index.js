@@ -2,18 +2,22 @@ import { Button, Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useBadgeConfiguration from '../../../../CoreAllocationEngine/hooks/useBadgeConfiguration';
+import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
+import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
 import GetCard from '../CreateBadge/getCard';
 
 import styles from './styles.module.css';
 
-function CreateBadge() {
+function BadgeList() {
 	const [openModal, setOpenModal] = useState(false);
 	const [medalType, setMedalType] = useState('');
 
+	const [ruleType, setRuleType] = useState(1);
+
 	const {
 		onCheckPublish, loadingCheckPublishability,
-	} = useBadgeConfiguration();
+	// } = useBadgeConfiguration();
+	} = useBadgeConfigurationAttributes();
 
 	const handleClick = (e) => {
 		setOpenModal((pv) => !pv);
@@ -123,7 +127,7 @@ function CreateBadge() {
 								onClose={() => setOpenModal((pv) => !pv)}
 								placement="center"
 							>
-								{/* <Modal.Body>Do you want to check publishability of the configuration?</Modal.Body>
+								<Modal.Body>Do you want to check publishability of the configuration?</Modal.Body>
 								<Modal.Footer>
 									<Button
 										type="submit"
@@ -134,15 +138,16 @@ function CreateBadge() {
 									>
 										Check
 									</Button>
-								</Modal.Footer> */}
-								<Modal.Body>
+								</Modal.Footer>
+								{/* <Modal.Body>
 									<div style={{ padding: '10px' }}>
 										<GetCard
 											medalType={medalType}
 											inputPlaceHolder="score"
+											isLastItem
 										/>
 									</div>
-								</Modal.Body>
+								</Modal.Body> */}
 							</Modal>
 						)}
 				</div>
@@ -151,4 +156,4 @@ function CreateBadge() {
 	);
 }
 
-export default CreateBadge;
+export default BadgeList;
