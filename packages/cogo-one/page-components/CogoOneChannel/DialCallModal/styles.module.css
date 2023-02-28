@@ -8,7 +8,7 @@
 			border-bottom: none !important;
 		}
 
-		.styles_row_container__FNFTc {
+		.styles_row_container {
 			justify-content: space-between !important;
 		}
 
@@ -18,6 +18,10 @@
 
 		.ui_input_control {
 			font-size: 14px !important;
+		}
+
+		.ui_input_container {
+			margin-left: 4px;
 		}
 	}
 }
