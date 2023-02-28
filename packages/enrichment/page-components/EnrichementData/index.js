@@ -5,6 +5,18 @@ import Header from './components/Header';
 import Response from './components/Response';
 import useEnrichmentData from './hooks/useEnrichmentData';
 
+const tabPanelMapping = {
+	user: {
+		name  : 'user',
+		title : 'Point Of Contacts',
+	},
+	address: {
+		name  : 'address',
+		title : 'Address',
+	},
+
+};
+
 function EnrichmentData() {
 	const {
 		loading,
@@ -27,31 +39,22 @@ function EnrichmentData() {
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="user" title="Point Of Contacts">
 
-						<Response
-							responseData={responseData}
-							setResponseData={setResponseData}
-							activeTab={activeTab}
-							loading={loading}
-							showAddPoc={showAddPoc}
-							setShowAddPoc={setShowAddPoc}
-						/>
+					{Object.values(tabPanelMapping).map((item) => (
+						<TabPanel name={item.name} title={item.title}>
 
-					</TabPanel>
+							<Response
+								responseData={responseData}
+								setResponseData={setResponseData}
+								activeTab={activeTab}
+								loading={loading}
+								showAddPoc={showAddPoc}
+								setShowAddPoc={setShowAddPoc}
+							/>
 
-					<TabPanel name="address" title="Address">
+						</TabPanel>
+					))}
 
-						<Response
-							responseData={responseData}
-							setResponseData={setResponseData}
-							activeTab={activeTab}
-							loading={loading}
-							showAddPoc={showAddPoc}
-							setShowAddPoc={setShowAddPoc}
-						/>
-
-					</TabPanel>
 				</Tabs>
 			</div>
 

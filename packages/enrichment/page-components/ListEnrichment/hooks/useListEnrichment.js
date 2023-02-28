@@ -103,7 +103,10 @@ const useListEnrichment = () => {
 		setParams((prevParams) => ({
 			...prevParams,
 			filters: {
+				...(secondaryTab === 'submitted_requests' && {
+					...prevParams.filters,
 
+				}),
 			},
 		}));
 	}, [secondaryTab]);

@@ -35,7 +35,7 @@ function CreateResponse({
 
 	const formProps = useForm();
 
-	const { control, handleSubmit, setValue } = formProps;
+	const { control, handleSubmit, setValue, formState: { errors } } = formProps;
 
 	useEffect(() => {
 		setValue('email', user.email);
@@ -54,22 +54,35 @@ function CreateResponse({
 			country_code : user.alternate_country_code,
 			number       : user.alternate_mobile_number,
 		});
-	});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const onSave = (formValues, e) => {
 		e.preventDefault();
 
+		const newFormValues = {
+			...formValues,
+			mobile_country_code           : formValues?.mobile_number?.country_code,
+			mobile_number                 : formValues?.mobile_number?.number,
+			alternate_mobile_country_code : formValues?.alternate_mobile_number?.country_code,
+			alternate_mobile_number       : formValues?.alternate_mobile_number?.number,
+			whatsapp_country_code         : formValues?.whatsapp_number?.country_code,
+			whatsapp_number               : formValues?.whatsapp_number?.number,
+
+		};
+
 		if (type === 'create') {
 			setResponseData((prev) => ([
 				...prev,
-				formValues,
+				newFormValues,
 			]));
 		} else {
-			const data = responseData;
-			data[index] = formValues;
+			const data = [...responseData];
+			data[index] = { ...newFormValues };
 
 			setResponseData(data);
 		}
+
 		setShowDetailsForm(false);
 		setShowAddPoc(false);
 	};
@@ -94,6 +107,7 @@ function CreateResponse({
 						if (!Element) return null;
 
 						return (
+
 							<div style={el.style} className={styles.control_container}>
 								<span style={{ marginBottom: '12px' }}>{el.label}</span>
 								<Element
@@ -103,7 +117,11 @@ function CreateResponse({
 									control={control}
 									id={`${el.name}_input`}
 								/>
+								<div className={styles.error_message}>
+									{errors?.[el.name]?.message}
+								</div>
 							</div>
+
 						);
 					})}
 				</div>

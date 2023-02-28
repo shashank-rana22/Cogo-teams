@@ -31,6 +31,8 @@ const useEnrichmentData = () => {
 
 	const { list = [], ...paginationData } = data || {};
 
+	console.log('responseData ::', responseData);
+
 	useEffect(() => {
 		setResponseData([...list]);
 	}, [list]);

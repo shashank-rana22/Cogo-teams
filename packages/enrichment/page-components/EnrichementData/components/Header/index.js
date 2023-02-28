@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils/';
@@ -12,11 +13,15 @@ function Header() {
 		router.push('/enrichment/');
 	};
 
-	const { requestData = {} } = useEnrichmentRequests();
+	const { requestData, loading } = useEnrichmentRequests();
+
+	if (loading) {
+		return <Placeholder height="60px" width="100%" />;
+	}
 
 	return (
 
-		<>
+		<div>
 
 			<div
 				className={styles.back}
@@ -29,7 +34,7 @@ function Header() {
 
 			<div className={styles.header}>
 				<div className={styles.info}>
-					<div style={{ marginRight: '12px' }}>Organizatio Name -</div>
+					<div style={{ marginRight: '12px' }}>Organization Name -</div>
 					<div className={styles.value}>
 						{requestData.organization?.business_name}
 					</div>
@@ -54,7 +59,7 @@ function Header() {
 				</div>
 			</div>
 
-		</>
+		</div>
 
 	);
 }

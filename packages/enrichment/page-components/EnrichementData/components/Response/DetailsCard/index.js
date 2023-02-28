@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import { cardHeading, cardLabelsMapping, mobileNumberMapping } from '../../../../constants/get-card-details';
-import CreateResponse from '../../common/CreateResponse';
+import { cardHeading, cardLabelsMapping, mobileNumberMapping } from '../../../../../constants/get-card-details';
+import CreateResponse from '../../../common/CreateResponse';
 
 import styles from './styles.module.css';
 import RenderWorkscopes from './Workscopes';
@@ -32,10 +32,11 @@ function DetailsCard({
 				index={index}
 				setShowDetailsForm={setShowDetailsForm}
 				type="edit"
-
 			/>
 		);
 	}
+
+	// console.log('user', user);
 
 	return (
 
@@ -74,7 +75,7 @@ function DetailsCard({
 						<div className={styles.card_item}>
 							<div>{item[key]}</div>
 
-							{key === ('mobile_number' || 'whatsapp_number') ? (
+							{['mobile_number', 'whatsapp_number'].includes(key) ? (
 								<div className={styles.item_value}>
 
 									{user[mobileNumberMapping[key]]}
@@ -85,9 +86,8 @@ function DetailsCard({
 								</div>
 							) : (
 								<div className={styles.item_value}>
-
 									{user?.[key] || '-'}
-
+									{' '}
 								</div>
 							)}
 

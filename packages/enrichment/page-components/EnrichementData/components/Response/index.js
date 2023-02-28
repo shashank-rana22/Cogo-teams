@@ -4,8 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import CreateResponse from '../../common/CreateResponse';
 import useSubmitResponses from '../../hooks/useSubmitResponses';
-import DetailsCard from '../DetailsCard';
 
+import DetailsCard from './DetailsCard';
 import styles from './styles.module.css';
 
 function Response({
@@ -19,30 +19,32 @@ function Response({
 }) {
 	const { handleResponseSubmit = () => {} } = useSubmitResponses({ responseData, setResponseData });
 
-	return (
-		<div>
+	if (isEmpty(responseData)) {
+		return (
+			<CreateResponse
+				loading={loading}
+				activeTab={activeTab}
+				responseData={responseData}
+				setResponseData={setResponseData}
+				type="create"
+			/>
+		);
+	}
 
-			{responseData.length === 0 ? (
-				<CreateResponse
-					loading={loading}
-					activeTab={activeTab}
+	return (
+
+		<div>
+			{(responseData).map((user, index) => (
+				<DetailsCard
+					key={user.id}
+					user={user}
+					index={index}
 					responseData={responseData}
 					setResponseData={setResponseData}
-					type="create"
+					loading={loading}
+					activeTab={activeTab}
 				/>
-			) : (
-				(responseData || []).map((user, index) => (
-
-					<DetailsCard
-						key={user.id}
-						user={user}
-						index={index}
-						responseData={responseData}
-						setResponseData={setResponseData}
-						loading={loading}
-						activeTab={activeTab}
-					/>
-				)))}
+			))}
 
 			{showAddPoc && (
 				<CreateResponse

@@ -8,6 +8,7 @@
     margin-bottom: 16px;
     background: #FFFFFF;
     border-radius: 8px; 
+    height: 60px;
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 20px;
