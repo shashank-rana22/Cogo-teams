@@ -36,7 +36,7 @@ const useCreateRequest = ({
 	const [{ loading:updating }, update] = useRequestBf({
 		url     : '/translation/translate',
 		method  : 'PUT',
-		authKey : 'post_translation_translate',
+		authKey : 'put_translation_translate',
 	}, { manual: true });
 	const onCancel = () => {
 		const { reset } = formProps;

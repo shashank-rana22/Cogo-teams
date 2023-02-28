@@ -16,7 +16,7 @@ function CreateRequest({
 	controls = [],
 }: Props) {
 	return (
-		<section className={styles.section} id="rnp_role_list_create_role_container">
+		<section className={styles.section} id="create_form">
 			<FormProvider {...formProps}>
 				<Form
 					controls={controls}

@@ -24,7 +24,11 @@ function StatusComponent({ status }: StatusObject) {
 		<>
 			<Filters onChangeFilters={setFilters} filters={filters} status={status} refetch={refetch} />
 			<StyledTable data={list} columns={columns} loading={loading} />
-			{list.length === 0 && !loading && <EmptyState />}
+			{list.length === 0 && !loading && (
+				<EmptyState emptyText="No Translation
+			Record Found Please Create a Request For Translation"
+				/>
+			)}
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"

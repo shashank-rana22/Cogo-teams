@@ -8,7 +8,7 @@ interface Props {
 
 function Heading({ title = '' }: Props) {
 	return (
-		<div className="heading-container">
+		<div className="heading_container">
 			<h1 className={styles.title}>{title}</h1>
 		</div>
 	);
