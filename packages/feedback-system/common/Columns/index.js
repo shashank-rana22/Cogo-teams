@@ -165,7 +165,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head} />,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<Button onClick={() => { handleClick(item.user_id); }} themeType="link">View Details</Button>
+				<Button onClick={() => handleClick(item.user_id)} themeType="link">View Details</Button>
 			</div>
 		),
 		id  : 'user_details',

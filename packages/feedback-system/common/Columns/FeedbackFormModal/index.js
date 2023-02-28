@@ -1,11 +1,9 @@
-import { Button, Modal } from '@cogoport/components';
+import { Popover, Button, Modal } from '@cogoport/components';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetForm from '../../../hooks/useGetForm';
-
-import FeedBackForm from './FeedBackForm';
+import FeedBackForm from './FeedbackForm';
 import styles from './styles.module.css';
 
 // const getSaturday = (date) => {
@@ -16,6 +14,12 @@ import styles from './styles.module.css';
 // 	return date;
 // };
 
+const formTypes = [
+	{ label: 'Employed', value: 'employed' },
+	{ label: 'New', value: 'new' },
+	{ label: 'Resigned', value: 'resigned' },
+];
+
 function FeedbackFormModal({
 	action = '',
 	item = {},
@@ -23,29 +27,33 @@ function FeedbackFormModal({
 	setRefetchReportees = () => {},
 }) {
 	const {
-		user_id: userId = '', feedback = '',
+		user_id: userId = '',
 		feedback_id = '',
 	} = item;
 
-	const [addFeedback, setAddFeedback] = useState(false);
-	const [rating, setRating] = useState({});
-	const [comment, setComment] = useState(feedback);
-
-	const {
-		formData = {},
-		loading: questionsLoading = false,
-	} = useGetForm({
-		item, action, addFeedback,
-	});
-
-	const { form_questions = [], form_id = '', form_responses = [] } = formData;
-
-	const questionsToShow = action === 'show' ? form_responses : form_questions;
+	const [showModal, setShowModal] = useState(false);
+	const [showTypePopover, setShowTypePopover] = useState(false);
 
 	const onCloseFunction = () => {
-		setAddFeedback(false);
+		setShowModal(false);
 		getTeamFeedbackList();
 	};
+
+	const content = formTypes.map((type) => (
+		<div
+			className={styles.popover_item}
+			key={type.value}
+			role="button"
+			tabIndex={0}
+			onClick={(e) => {
+				e.stopPropagation();
+				setShowModal(type.value);
+				setShowTypePopover(false);
+			}}
+		>
+			{type.label}
+		</div>
+	));
 
 	// const currentDate = new Date();
 
@@ -73,39 +81,49 @@ function FeedbackFormModal({
 					<Button
 						size="md"
 						themeType="link"
-						onClick={() => setAddFeedback(true)}
+						onClick={() => setShowModal(true)}
 					>
 						View Form
 					</Button>
 				) : (
-					<Button
-						size="sm"
-						themeType="primary"
-						disabled={!isEmpty(feedback_id)}
-						onClick={() => 	setAddFeedback(true)}
+					<Popover
+						visible={showTypePopover}
+						placement="left"
+						render={content}
+						interactive
 					>
-						<>
-							<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
-							ADD
-						</>
-					</Button>
+						<Button
+							size="sm"
+							themeType="primary"
+							disabled={!isEmpty(feedback_id)}
+							onClick={() => 	setShowTypePopover(!showTypePopover)}
+						>
+							<>
+								<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
+								ADD
+							</>
+						</Button>
+					</Popover>
 				)}
 
 			</div>
 
-			{addFeedback && (
+			{showModal && (
 				<Modal
-					show={addFeedback}
+					show={showModal}
 					onClose={() => onCloseFunction()}
-					size="xl"
+					size={showModal !== 'resigned' ? 'xl' : 'md'}
 				>
 					<Modal.Header title={(
 						<div className={styles.modal_header}>
-							Feedback Form For :
+							Feedback Form For
+							{' '}
+							:
+							{' '}
 							<span>
-								{' '}
 								{startCase(item.name)}
 							</span>
+							{showModal !== 'employed' && ` (${startCase(showModal)})`}
 						</div>
 					)}
 					/>
@@ -114,15 +132,9 @@ function FeedbackFormModal({
 						<FeedBackForm
 							action={action}
 							userId={userId}
-							form_id={form_id}
-							questionsToShow={questionsToShow}
-							questionsLoading={questionsLoading}
-							rating={rating}
-							comment={comment}
-							setComment={setComment}
-							showForm={addFeedback}
-							setShowForm={setAddFeedback}
-							setRating={setRating}
+							item={item}
+							showForm={showModal}
+							setShowForm={setShowModal}
 							setRefetchReportees={setRefetchReportees}
 						/>
 					</Modal.Body>

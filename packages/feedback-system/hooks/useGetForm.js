@@ -1,28 +1,21 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { startCase } from '@cogoport/utils';
 
-const useGetForm = ({ item = {}, action = '', addFeedback = false }) => {
+const useGetForm = ({ item = {}, action = '', showForm = false }) => {
 	const { month = '', year = '', department = '', designation = '', user_id = '' } = item;
 
 	const url = action === 'show' ? 'get_form_responses' : 'get_form';
-	const params = action === 'show' ? { Month: month, Year: year, UserID: user_id }
-		: { Department: department, Designation: designation };
+	const newDepartment = showForm === 'employed' ? department : startCase(showForm);
+	const newDesignation = showForm === 'employed' ? designation : startCase(showForm);
 
-	const [{ data: formData = {}, loading = false }, trigger] = useRequest({
+	const params = action === 'show' ? { Month: month, Year: year, UserID: user_id }
+		: { Department: newDepartment, Designation: newDesignation };
+
+	const [{ data: formData = {}, loading = false }] = useRequest({
 		url,
 		method: 'get',
-	}, { manual: true });
-
-	const getForm = async () => {
-		trigger({ params });
-	};
-
-	useEffect(() => {
-		if (addFeedback) {
-			getForm();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [addFeedback]);
+		params,
+	}, { manual: false });
 
 	return { formData, loading };
 };

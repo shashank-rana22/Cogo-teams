@@ -32,3 +32,21 @@
 	background: #cddbff;
 	border-radius: 4px;
 }
+
+.popover_item {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.popover {
+    :global {
+        .ui_popover_container {
+            padding: 0px;
+        }
+    }
+}
+
+.popover_item:hover {
+    background: #f8f2e7;
+}

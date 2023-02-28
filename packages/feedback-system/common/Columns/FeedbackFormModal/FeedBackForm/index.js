@@ -13,23 +13,33 @@ import { useState } from 'react';
 
 import performanceIcons from '../../../../constants/performance-icon-mappings';
 import useCreateUserFeedback from '../../../../hooks/useCreateUserFeedback';
+import useGetForm from '../../../../hooks/useGetForm';
 import EmptyState from '../../../EmptyState';
 
 import styles from './styles.module.css';
 
 function FeedBackForm({
 	action = '',
+	item = {},
+	showForm = false,
 	setShowForm = () => {},
-	questionsToShow = [],
-	form_id = '',
-	rating,
-	comment,
-	setComment = () => {},
-	setRating = () => {},
-	questionsLoading = false,
 	userId = '',
 	setRefetchReportees = () => {},
 }) {
+	const {
+		formData = {},
+		loading: questionsLoading = false,
+	} = useGetForm({
+		item, action, showForm,
+	});
+
+	const { form_questions = [], form_id = '', form_responses = [], feedback_data = {} } = formData;
+
+	const questionsToShow = action === 'show' ? form_responses : form_questions;
+
+	const [rating, setRating] = useState({});
+	const [comment, setComment] = useState(feedback_data.feedback);
+
 	const { onSubmitData, loading = false } = useCreateUserFeedback({
 		rating,
 		comment,
@@ -42,7 +52,7 @@ function FeedBackForm({
 	const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
 	const onSubmit = () => {
-		if (Object.values(rating).includes(0) || isEmpty(comment)) {
+		if (Object.values(rating).includes(0) || (showForm !== 'resigned' && isEmpty(comment))) {
 			Toast.error('Please provide rating for all the questions');
 			return;
 		}
@@ -54,6 +64,16 @@ function FeedBackForm({
 		value : (index + 1).toString(),
 		...(action === 'show' ? { disabled: true } : {}),
 	}));
+
+	const resignedOptions = [{
+		label : 'yes',
+		value : '1',
+		...(action === 'show' ? { disabled: true } : {}),
+	}, {
+		label : 'no',
+		value : '0',
+		...(action === 'show' ? { disabled: true } : {}),
+	}];
 
 	const performanceClass = {};
 
@@ -98,17 +118,58 @@ function FeedBackForm({
 			<div className={styles.header}>
 				<div className={`${styles.side_heading} ${styles.column}`}>Questions</div>
 
-				<div className={styles.rating_classes}>
-					{Object.keys(performanceClass).map((key) => (
-						<div className={styles.class}>
-							{performanceClass[key]}
-						</div>
-					))}
-				</div>
+				{showForm !== 'resigned' && (
+					<div className={styles.rating_classes}>
+						{Object.keys(performanceClass).map((key) => (
+							<div className={styles.class}>
+								{performanceClass[key]}
+							</div>
+						))}
+					</div>
+				)}
+
 			</div>
 
 			{(questionsToShow || []).map((key) => {
 				const { id, question, rating: pastRating = '', description = '', feedback = '' } = key || {};
+				if (showForm === 'resigned') {
+					return (
+						<div
+							className={styles.controls}
+							key={id || question}
+						>
+							<div className={styles.question_rating}>
+								<div className={styles.side_heading}>
+									<div className={styles.question_container}>{startCase(question)}</div>
+
+									<Tooltip
+										placement="top"
+										theme="light"
+										animation="shift-away"
+										content={<div>{description}</div>}
+									>
+										<IcMInfo
+											fill="#393f70"
+											width={16}
+											height={16}
+										/>
+									</Tooltip>
+								</div>
+								<div className={styles.radio_group}>
+									<RadioGroup
+										options={resignedOptions}
+										value={pastRating.toString() || rating[id]?.rating}
+										onChange={(val) => {
+											if (action !== 'show') {
+												setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
+											}
+										}}
+									/>
+								</div>
+							</div>
+						</div>
+					);
+				}
 
 				return (
 					<div
@@ -162,18 +223,21 @@ function FeedBackForm({
 				);
 			})}
 
-			<div className={styles.feedback_comment}>
-				<div className={styles.comment}>Your Feedback</div>
+			{showForm !== 'resigned' && (
 
-				<Textarea
-					size="lg"
-					value={comment}
-					disabled={action === 'show'}
-					placeholder="Specify the overall feedback."
-					onChange={setComment}
-					style={{ height: '80px' }}
-				/>
-			</div>
+				<div className={styles.feedback_comment}>
+					<div className={styles.comment}>Your Feedback</div>
+
+					<Textarea
+						size="lg"
+						value={comment}
+						disabled={action === 'show'}
+						placeholder="Specify the overall feedback."
+						onChange={setComment}
+						style={{ height: '80px' }}
+					/>
+				</div>
+			)}
 
 			<div className={styles.button_container}>
 				<Button
