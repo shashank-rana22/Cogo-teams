@@ -6,10 +6,12 @@ import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
 import formatUserBasedNavView from '../../../helpers/formatUserBasedNavView';
 import { sortNavs } from '../../../helpers/sortItems';
+import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
+import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
 
 function Navbar({
@@ -20,6 +22,7 @@ function Navbar({
 	pinnedNavs = [],
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
+	inCall = false,
 }) {
 	const ref = useRef(null);
 
@@ -27,9 +30,18 @@ function Navbar({
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
+	const {
+		data,
+		refetch = () => {},
+		timeLeft,
+		loading,
+		checkIfSessionExpiring,
+	} = useGetUserSessionMappings();
+
 	const showPin = userBasedNavView === nav;
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
+	const [openPopover, setOpenPopover] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -51,6 +63,14 @@ function Navbar({
 		[],
 	);
 
+	const handleLeave = () => {
+		if (openPopover) {
+			setResetSubnavs(true);
+		} else {
+			setResetSubnavs(false);
+		}
+	};
+
 	return (
 		<div
 			style={style}
@@ -58,7 +78,7 @@ function Navbar({
 		>
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
-				onMouseLeave={() => setResetSubnavs(false)}
+				onMouseLeave={handleLeave}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
 				<div className={styles.inner_container}>
@@ -70,7 +90,15 @@ function Navbar({
 						/>
 					</div>
 
-					<ProfileManager resetSubnavs={resetSubnavs} />
+					<ProfileManager
+						resetSubnavs={resetSubnavs}
+						setOpenPopover={setOpenPopover}
+						checkIfSessionExpiring={checkIfSessionExpiring}
+						loading={loading}
+						openPopover={openPopover}
+						timeLeft={timeLeft}
+						refetch={refetch}
+					/>
 
 					<div className={styles.search_container}>
 						<Input
@@ -94,6 +122,7 @@ function Navbar({
 									partner_user_id={partner_user_id}
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
+									inCall={inCall}
 								/>
 							))}
 						</div>
@@ -107,6 +136,7 @@ function Navbar({
 									partner_user_id={partner_user_id}
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
+									inCall={inCall}
 								/>
 							))}
 						</div>
@@ -125,6 +155,23 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
+			<div
+				onMouseLeave={() => setResetSubnavs(false)}
+			>
+				{
+					openPopover
+						&& (
+							<SwitchAccounts
+								userMappings={data}
+								refetch={refetch}
+								setOpenPopover={setOpenPopover}
+								loading={loading}
+								checkIfSessionExpiring={checkIfSessionExpiring}
+								timeLeft={timeLeft}
+							/>
+						)
+				}
+			</div>
 		</div>
 
 	);

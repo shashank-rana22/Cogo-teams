@@ -1,0 +1,13 @@
+.heading {
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.leftpanel {
+	width: 393.68px;
+	height: 74vh;
+	padding: 16px;
+	padding-bottom: 10px;
+	overflow: scroll;
+}
