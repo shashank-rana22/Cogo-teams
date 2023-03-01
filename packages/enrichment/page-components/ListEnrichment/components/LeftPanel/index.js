@@ -1,4 +1,4 @@
-import { LIST_PRIMARY_COLUMNS_MAPPING } from '../../../../constants/get-table-columns';
+import { LIST_PRIMARY_COLUMNS_MAPPING } from '../../../../constants/table-columns-mapping';
 import Enrichment from '../../common/Enrichment';
 
 function LeftPanel(props) {
