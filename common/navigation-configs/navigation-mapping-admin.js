@@ -1939,16 +1939,16 @@ const navigationMappingAdmin = {
 		title     : 'Inventory Management',
 		icon      : IcMRateManagement,
 		isSubNavs : true,
-		options: [
+		options   : [
 			{
-				key   : 'inventory_management-rail',
-				title : 'Rail',
-				href  : '/inventory-management/rail',
-				as    : '/inventory-management/rail',
-				type  : 'link',
-				main_apis :[],
-				possible_apis: apis.inventory_management,
-			}
+				key           : 'inventory_management-rail',
+				title         : 'Rail',
+				href          : '/inventory-management/rail',
+				as            : '/inventory-management/rail',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.inventory_management,
+			},
 		],
 		module_type: 'dashboards',
 	},
