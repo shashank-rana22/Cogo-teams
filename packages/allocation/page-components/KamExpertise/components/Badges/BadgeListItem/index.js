@@ -1,6 +1,6 @@
 import { Button, Placeholder } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 // import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
 // import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
@@ -25,7 +25,10 @@ function BadgeListItem({ data, index }) {
 	// 	setMedalType(e);
 	// };
 
-	if (true) {
+	//
+	// !(loading) true/false
+	//
+	if (false) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.number_tag}>
