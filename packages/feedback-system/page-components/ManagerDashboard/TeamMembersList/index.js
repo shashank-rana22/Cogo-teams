@@ -1,8 +1,9 @@
-import { Accordion, Pagination } from '@cogoport/components';
+import { Placeholder, Accordion, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
 import columnsMapping from '../../../constants/columns-mapping-card';
+import LoadingState from '../../HRDashboard/TeamMembersList/LoadingState';
 
 import ListItem from './ListItem';
 import styles from './styles.module.css';
@@ -56,6 +57,10 @@ function TeamMembersList({
 		</div>
 	);
 
+	if (loading) {
+		return <LoadingState columns={columns} source="manager_dashboard" />;
+	}
+
 	return (
 		<div className={styles.table_container}>
 
@@ -65,7 +70,7 @@ function TeamMembersList({
 				</Accordion>
 			))}
 
-			{total_count > 2 && (
+			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="number"

@@ -1,4 +1,4 @@
-import { Button, Accordion, Pagination } from '@cogoport/components';
+import { Placeholder, Button, Accordion, Pagination } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -6,6 +6,7 @@ import EmptyState from '../../../common/EmptyState';
 import columnsMapping from '../../../constants/columns-mapping-card';
 
 import ListItem from './ListItem';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function TeamMembersList({
@@ -79,6 +80,10 @@ function TeamMembersList({
 
 		</div>
 	);
+
+	if (loading) {
+		return <LoadingState columns={columns} />;
+	}
 
 	return (
 		<div className={styles.table_container}>
