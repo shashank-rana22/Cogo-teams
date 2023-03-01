@@ -1262,6 +1262,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_rail_shipment_container_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_rail_shipment_container_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
