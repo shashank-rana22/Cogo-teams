@@ -10484,6 +10484,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
 	],
 };
 export default partner;
