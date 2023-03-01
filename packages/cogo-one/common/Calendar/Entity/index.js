@@ -80,7 +80,7 @@ export function CalendarEntity({
 		setOffset(29);
 		if (typeof window !== 'undefined') {
 			// console.log('window defined');
-			const leftObserver = new window?.IntersectionObserver(leftShift, intersectionOptions);
+			const leftObserver = new window.IntersectionObserver(leftShift, intersectionOptions);
 			setTimeout(() => {
 				leftObserver?.observe(leftEnd.current);
 				middle?.current?.scrollIntoView({
