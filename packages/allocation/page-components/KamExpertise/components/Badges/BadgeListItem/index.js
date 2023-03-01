@@ -1,6 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import { useState } from 'react';
-
 // import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
 // import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
 // import GetCard from '../CreateBadge/getCard';
@@ -23,6 +22,75 @@ function BadgeListItem() {
 	// 	setOpenModal((pv) => !pv);
 	// 	setMedalType(e);
 	// };
+
+	if (true) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.number_tag}>
+					<Placeholder width="100px" height="20px" />
+					<Placeholder width="80px" height="28px" />
+				</div>
+
+				<div className={styles.main_card}>
+
+					<div className={styles.card_description}>
+						<div>
+							<Placeholder width="180px" height="20px" />
+						</div>
+
+						<div style={{ marginTop: '12px' }}>
+							<Placeholder width="180px" height="20px" />
+						</div>
+
+						<div className={styles.modified}>
+							<Placeholder width="236px" height="20px" />
+							<Placeholder width="236px" height="20px" />
+						</div>
+					</div>
+
+					<div className={styles.score_container}>
+						<Placeholder width="120px" height="24px" />
+						<div className={styles.score_badge}>
+							{/* <BadgeCard
+								medalType="Bronze"
+								score="2000"
+								img_url="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/nautical_ninja_bronze.svg"
+								isLast={false}
+							/> */}
+							{/* <BadgeCard
+								medalType="Silver"
+								score="5000"
+								img_url="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/silver_badge.svg"
+								isLast={false}
+							/> */}
+							{/* <BadgeCard
+								medalType="Gold"
+								score="9000"
+								img_url="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/gold_ninja_badge.svg"
+							/> */}
+							<Placeholder
+								height="120px"
+								width="220px"
+								style={{ marginRight: '20px', marginTop: '20px' }}
+							/>
+							<Placeholder
+								height="120px"
+								width="220px"
+								style={{ marginRight: '20px', marginTop: '20px' }}
+							/>
+
+							<Placeholder
+								height="120px"
+								width="220px"
+								style={{ marginRight: '20px', marginTop: '20px' }}
+							/>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
