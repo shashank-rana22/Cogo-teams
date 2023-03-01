@@ -79,7 +79,6 @@ function CardItem(item) {
 	// const xyz = controls.map(({ name: controlName, ...rest }) => (
 	// 	EDIT_CONFIG_CONTROLS_MAPPING[controlName]?.map((single_control) => single_control) ?? []));
 
-	console.log('extrasList::', extrasList);
 	return (
 		<div className={styles.card_item}>
 			<div className={styles.name_container}>
@@ -92,9 +91,9 @@ function CardItem(item) {
 				</div>
 			</div>
 
-			{
+			{/* {
 				extrasList.map((singleRow) => <ExtrasItem rowData={singleRow} />)
-			}
+			} */}
 
 			{/* <div className={styles.controls_container}>
 

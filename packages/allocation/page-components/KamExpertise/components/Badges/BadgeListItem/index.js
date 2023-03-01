@@ -2,29 +2,10 @@ import { Button, Placeholder } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 // import { useState } from 'react';
 
-// import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
-// import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
-// import GetCard from '../CreateBadge/getCard';
-
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
 
 function BadgeListItem({ data, index }) {
-	// const [openModal, setOpenModal] = useState(false);
-	// const [medalType, setMedalType] = useState('');
-
-	// const [ruleType, setRuleType] = useState(1);
-
-	// const {
-	// 	onCheckPublish, loadingCheckPublishability,
-	// } = useBadgeConfiguration();
-	// // } = useBadgeConfigurationAttributes();
-
-	// const handleClick = (e) => {
-	// 	setOpenModal((pv) => !pv);
-	// 	setMedalType(e);
-	// };
-
 	//
 	// !(loading) true/false
 	//

@@ -31,12 +31,11 @@ function ViewAllConfigs() {
 
 	return (
 		<section className={styles.main_container}>
-			<div className={styles.back_container}>
+			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
 				</div>
-
-				<div className={styles.back_text} role="presentation" onClick={onClickBack}>
+				<div className={styles.back_text}>
 					Back to Dashboard
 				</div>
 			</div>
@@ -53,11 +52,11 @@ function ViewAllConfigs() {
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;
 
-							return (
+							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
-									{Component ? <Component /> : null}
+									<Component />
 								</TabPanel>
-							);
+							) : null;
 						})}
 					</Tabs>
 				</div>

@@ -82,19 +82,18 @@ function CreateBadge({ setWindow }) {
 			inputPlaceHolder : '9000',
 		},
 	];
+
 	const onClose = () => {
 		setWindow(1);
 	};
 
 	const payload_data = {
-		performed_by_id                      : '123',
-		performed_by_type                    : 'user',
-		version_id                           : '1',
-		badge_name                           : 'Expert',
-		description                          : 'hgsdah',
-		kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9kk094820',
-		status                               : 'active',
-		badge_details                        : [
+		version_id    : '1',
+		badge_name    : 'plat 1212',
+		description   : 'hgsdah',
+		// kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
+		status        : 'active',
+		badge_details : [
 			{
 				score     : '100',
 				image_url : 'bjb',
@@ -114,12 +113,14 @@ function CreateBadge({ setWindow }) {
 	};
 
 	const handelNext = () => {
-		// onCheckPublish({ payload_data });
-		onCheckPublish();
+		onCheckPublish(payload_data);
 		setBadgeInput(true);
+		// onClose();
+		// Toast.success('Badge Successfully Created');
 	};
 	const handelSave = () => {
-		setCreateBadge((pv) => !pv);
+		// setCreateBadge((pv) => !pv);
+		onClose();
 		Toast.success('Badge Successfully Created');
 	};
 	return (
@@ -169,7 +170,7 @@ function CreateBadge({ setWindow }) {
 								<Button
 									size="md"
 									themeType="primary"
-									disabled={loading}
+									// disabled={loading}
 									onClick={handelNext}
 								>
 									Next
@@ -185,6 +186,14 @@ function CreateBadge({ setWindow }) {
 								</Button>
 							)
 					}
+					{/* <Button
+						size="md"
+						themeType="primary"
+						disabled={loading}
+						onClick={handelNext}
+					>
+						Save
+					</Button> */}
 				</div>
 			</section>
 		</div>
