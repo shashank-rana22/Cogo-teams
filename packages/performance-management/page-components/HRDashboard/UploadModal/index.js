@@ -48,7 +48,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 
 	const downloadRatingSample = () => {
 		// eslint-disable-next-line max-len, no-undef
-		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/c45995c475807db7eb6aac8971f6a92d/Employee-kpi-2023%20Feb%2028.Version-733511505%20%281%29.csv');
+		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/bce4dad922edf49ee7d912895be81a0b/Employee-kpi-2023%20Mar%2001.Version-2576218058.csv');
 	};
 
 	const downloadOnboardingSample = () => {
