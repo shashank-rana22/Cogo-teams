@@ -12,7 +12,7 @@ function EmptyStateAgentActivity() {
 					src={emptyImage}
 					alt="Empty State"
 					className={styles.empty_state_icon}
-					width="135px"
+					width="105px"
 				/>
 			</div>
 			<div className={styles.horizontal_line} />

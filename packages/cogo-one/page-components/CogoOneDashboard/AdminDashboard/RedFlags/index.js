@@ -15,7 +15,15 @@ function RedFlags({ loading = false, escalations = [] }) {
 			<div className={styles.heading}>Escalations</div>
 			{loading && <LoaderRedFlags />}
 			{(isEmpty(escalations)) && !loading
-				? <img src={emptyEscalations} alt="" width="300px" height="300px" />
+				? (
+					<img
+						src={emptyEscalations}
+						alt=""
+						width="200px"
+						height="200px"
+						className={styles.empty_escalations_picture}
+					/>
+				)
 				: (
 					<div className={styles.redflags_lists}>
 						{(escalations || []).map((item) => {

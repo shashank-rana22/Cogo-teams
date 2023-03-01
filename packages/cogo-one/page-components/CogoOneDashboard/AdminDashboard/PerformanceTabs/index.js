@@ -60,7 +60,7 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 			<div className={styles.performance_tab_container}>
 				{loading && <LoaderPerformance />}
 				{(isEmpty(agentsPerformance?.[activeTab])) && !loading
-					? <img src={emptyPerformance} alt="" width="300px" height="180px" />
+					? <img src={emptyPerformance} alt="" width="150px" height="150px" className={styles.empty_performance_picture} />
 					: (
 						<div className={styles.performance_tab_lists}>
 							{(data || []).map((item) => {

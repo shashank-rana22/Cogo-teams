@@ -54,6 +54,12 @@
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
+.empty_performance_picture {
+	align-self: center;
+	justify-self: center;
+	margin: auto;
+}
+
 .performance_tab_lists {
 	display: flex;
 	flex-direction: column;
