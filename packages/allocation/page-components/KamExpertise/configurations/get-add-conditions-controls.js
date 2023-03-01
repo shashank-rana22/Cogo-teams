@@ -1,7 +1,7 @@
 const controls = [
 	{
 		name        : 'condition_type',
-		label       : 'Condition Type (event)',
+		label       : 'Condition Parameter (event)',
 		placeholder : '',
 		type        : 'select',
 		options     : [
@@ -9,9 +9,16 @@ const controls = [
 			{ value: 'enrichment', label: 'Enrichment' },
 			{ value: 'persona', label: 'Persona' },
 			{ value: 'conversion', label: 'Conversion' },
+			{ value: 'conversion_time', label: 'Conversion Time' },
+			{ value: 'retention', label: 'Retention' },
+			{ value: 'collection', label: 'Collection' },
+			{ value: 'wallet_share_increase', label: 'Wallet Share Increase' },
+			{ value: 'industry', label: 'Industry' },
+			{ value: 'country', label: 'Country' },
+			{ value: 'churn', label: 'Churn/Bad Customer Experience' },
 		],
 		rules: {
-			required: 'Condition Type is required',
+			required: 'Condition Parameter is required',
 		},
 		isClearable: true,
 	},
@@ -31,17 +38,11 @@ const controls = [
 		isClearable: true,
 	},
 	{
-		// Todo make a field Array
-		name    : 'milestones',
-		type    : 'fieldArray',
-		heading : 'Enter milestones (%) and score allocated at each milestone',
-		value   : [
-			{
-				milestone: '',
-			},
-		],
+		name               : 'milestones',
+		label              : 'Enter milestones (%) and score allocated at each milestone',
+		type               : 'fieldArray',
 		buttonText         : 'Add More',
-		noDeleteButtonTill : 0,
+		noDeleteButtonTill : 1,
 		controls           : [
 			{
 				name        : 'milestone',
@@ -58,6 +59,50 @@ const controls = [
 				rules       : { required: 'Score is required' },
 			},
 		],
+	},
+	{
+		name               : 'tat',
+		label              : 'Enter duration (days) and score allocated on completion',
+		type               : 'fieldArray',
+		buttonText         : 'Add More',
+		noDeleteButtonTill : 1,
+		controls           : [
+			{
+				name        : 'from',
+				type        : 'number',
+				label       : 'From',
+				placeholder : '0',
+				rules       : { required: 'From is required' },
+			},
+			{
+				name        : 'to',
+				type        : 'number',
+				label       : 'To',
+				placeholder : '0',
+				rules       : { required: 'To is required' },
+			},
+			{
+				name        : 'score',
+				type        : 'number',
+				label       : 'Score',
+				placeholder : '0',
+				rules       : { required: 'Score is required' },
+			},
+		],
+	},
+	{
+		name        : 'score_on_completion',
+		type        : 'number',
+		label       : 'Score on Completion',
+		placeholder : '0',
+		// rules       : { required: 'Score on Completion is required' },
+	},
+	{
+		name        : 'score_on_completion',
+		type        : 'number',
+		label       : 'Score on Repetition',
+		placeholder : '0',
+		// rules       : { required: 'Score on Repetition is required' },
 	},
 	{
 		name    : 'impact',

@@ -53,11 +53,11 @@ function ViewAllConfigs() {
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;
 
-							return (
+							return Component ? (
 								<TabPanel key={name} name={name} title={title}>
-									{Component ? <Component /> : null}
+									<Component />
 								</TabPanel>
-							);
+							) : null;
 						})}
 					</Tabs>
 				</div>
