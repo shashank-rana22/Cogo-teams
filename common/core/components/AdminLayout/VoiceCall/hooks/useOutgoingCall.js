@@ -24,9 +24,10 @@ function useOutgoingCall() {
 			agentId,
 			emptyState,
 			mobile_number,
+			dialCall,
 		} = voiceCall || {};
 		let payload = {};
-		if (emptyState) {
+		if (emptyState || dialCall) {
 			payload = {
 				destination_number: {
 					mobile_country_code,

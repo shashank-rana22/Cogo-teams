@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useSendMessage = ({ channel_type = '', sender = null }) => {
+const useSendMessage = ({ channel_type = '' }) => {
 	const API_MAPPING = {
 		whatsapp      : 'create_communication',
 		platform_chat : 'create_communication_platform_chat',
@@ -39,7 +39,7 @@ const useSendMessage = ({ channel_type = '', sender = null }) => {
 					service_id : id,
 					source     : 'CogoOne:AdminPlatform',
 					lead_user_id,
-					sender,
+					sender     : id,
 				},
 			});
 		} catch (error) {

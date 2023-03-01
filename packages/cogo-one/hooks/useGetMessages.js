@@ -5,22 +5,28 @@ import {
 	limit,
 	startAfter,
 } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const useGetMessages = ({ activeChatCollection, id }) => {
 	const [messagesState, setMessagesState] = useState({});
-
+	const firstMessages = useRef(null);
 	const [loadingMessages, setLoadingMessages] = useState(false);
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
-
+	const snapshotCleaner = () => {
+		if (firstMessages.current) {
+			firstMessages.current();
+			firstMessages.current = null;
+		}
+	};
 	const getFirebaseData = () => {
+		snapshotCleaner();
 		const chatCollectionQuery = query(
 			activeChatCollection,
 			orderBy('created_at', 'desc'),
 			limit(10),
 		);
 		setLoadingMessages(true);
-		onSnapshot(chatCollectionQuery, (querySnapshot) => {
+		firstMessages.current = onSnapshot(chatCollectionQuery, (querySnapshot) => {
 			const result = [];
 			const lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
 			const islastPage = querySnapshot.docs.length < 10;
@@ -55,6 +61,9 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	useEffect(() => {
 		getFirebaseData();
+		return () => {
+			snapshotCleaner();
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
