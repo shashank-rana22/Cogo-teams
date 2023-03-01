@@ -23,12 +23,11 @@ function Badges() {
 
 	return (
 		<section className={styles.main_container}>
-			<div className={styles.back_container}>
+			<div className={styles.back_container} role="presentation" onClick={onClickBack}>
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
 				</div>
-
-				<div className={styles.back_text} role="presentation" onClick={onClickBack}>
+				<div className={styles.back_text}>
 					Back to Dashboard
 				</div>
 			</div>
