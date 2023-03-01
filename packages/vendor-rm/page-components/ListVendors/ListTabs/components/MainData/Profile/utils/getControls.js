@@ -24,7 +24,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		style           : { flexBasis: '100%' },
 		type            : 'file',
 		themeType       : 'secondary',
-		drag            : true,
+		draggable       : true,
 		uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
 		accept          : 'image/*',

@@ -48,9 +48,9 @@ function FormComponent({
 				const Element = getElementController(rest.type);
 
 				return (
-					<div style={{ display: 'flex', flexDirection: 'column', flexBasis: span }}>
+					<div className={styles.label_value_container}>
 						<div className={styles.form_label}>{label}</div>
-						<div>
+						<div className={styles.form_controller}>
 							<Element
 								key={name}
 								{...controlItem}
