@@ -102,7 +102,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	const sortedMessageData = Object.keys(activeMessageData || {})
 		.sort((a, b) => Number(a) - Number(b))
-		.map((eachkey) => activeMessageData[eachkey]) || {};
+		.map((eachkey) => activeMessageData[eachkey]) || [];
 
 	return {
 		getNextData,
