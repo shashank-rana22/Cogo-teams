@@ -171,7 +171,7 @@ function useOnBoardVendor({
 			if (registrationType) {
 				newField = {
 					...newField,
-					label: `Upload ${startCase(registrationType)} Certificate`,
+					label: `Upload ${registrationType.toUpperCase()} Certificate`,
 				};
 			}
 		}

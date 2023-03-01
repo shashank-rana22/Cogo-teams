@@ -63,22 +63,17 @@ const useAddServicePoc = ({
 
 		const {
 			mobile_number,
-			whatsapp_number,
-			contact_proof_url,
 			cogoport_office_id,
 		} = data || {};
 
 		try {
 			const payload = {
 				...data,
-				mobile_country_code   : mobile_number?.country_code,
-				mobile_number         : mobile_number?.number,
-				whatsapp_country_code : whatsapp_number?.country_code,
-				whatsapp_number       : whatsapp_number?.number,
-				vendor_poc_proof      : contact_proof_url?.finalUrl,
+				mobile_country_code : mobile_number?.country_code,
+				mobile_number       : mobile_number?.number,
 				vendor_id,
-				cogo_entity_id        : partner_id,
-				is_primary            : !isMainPOCPresent,
+				cogo_entity_id      : partner_id,
+				is_primary          : !isMainPOCPresent,
 				cogoport_office_id,
 			};
 

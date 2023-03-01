@@ -38,13 +38,6 @@ const controls = [
 		showIn      : ['editPOC'],
 	},
 	{
-		name        : 'whatsapp_number',
-		label       : 'Whatsapp Number',
-		type        : 'mobile-number-select',
-		style       : { flexBasis: '42%' },
-		placeholder : 'Type here',
-	},
-	{
 		name        : 'poc_role',
 		label       : 'Role in Company',
 		type        : 'multiSelect',
@@ -53,19 +46,6 @@ const controls = [
 		rules       : { required: 'Company Type is required' },
 		options     : workScopes,
 		showIn      : ['editPOC'],
-	},
-	{
-		name            : 'contact_proof_url',
-		showLabel       : false,
-		label           : 'Upload Vendor Document Proof (Pan/Aadhar Card)',
-		style           : { flexBasis: '100%' },
-		type            : 'file',
-		themeType       : 'secondary',
-		draggable       : true,
-		uploadIcon      : 'ic-upload',
-		onlyURLOnChange : true,
-		uploadType      : 'aws',
-		rules           : { required: 'Tax Document is required' },
 	},
 	{
 		name        : 'category',
