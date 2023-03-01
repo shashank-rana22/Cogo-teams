@@ -27,9 +27,7 @@ interface SellerDetail {
 	organizationName?: string;
 }
 
-interface AdditionDetailInt {
-	kycStatus?: string;
-}
+
 interface DocumentData {
 	list: Array<object>;
 }
@@ -37,7 +35,6 @@ interface DocumentData {
 interface DataProps {
 	sellerDetail?: SellerDetail;
 	serviceProviderCategory?: string;
-	serviceProviderAdditionalDetail?: AdditionDetailInt;
 	serviceProviderDocuments: DocumentData;
 }
 
@@ -63,10 +60,8 @@ function SupplierDetails({
 	const {
 		sellerDetail,
 		serviceProviderCategory = '',
-		serviceProviderAdditionalDetail,
 		serviceProviderDocuments,
 	} = data || {};
-	const { kycStatus = '' } = serviceProviderAdditionalDetail || {};
 	const { payables, receivables, ledgerCurrency } = paymentsData || {};
 
 	const handleChange = () => {
@@ -133,7 +128,7 @@ function SupplierDetails({
 								{serviceProviderCategory}
 							</Pill>
 						)}
-						{kycStatus === 'verified' && (
+						{!isEmpty(serviceProviderDocuments?.list) && (
 							<div className={styles.kyc_verified}>
 								<IcCFtick />
 								<div>kyc verified</div>
@@ -268,8 +263,7 @@ function SupplierDetails({
 							>
 								<Modal.Header title="Documents" />
 								<Modal.Body>
-									{kycStatus === 'verified'
- && serviceProviderDocuments?.list ? (
+									{!isEmpty(serviceProviderDocuments?.list) ? (
 	<List
 		config={DOCUMENTS}
 		itemData={{ list: serviceProviderDocuments?.list }}
