@@ -1,15 +1,10 @@
-.pagination_container {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 12px;
-}
-
 .table_container {
 	overflow-x: scroll;
 	box-shadow: 0 0 16px rgb(44 62 80 / 5%);
 }
 
 .table {
+	margin-bottom: 0;
 	background-color: #fff;
 
 	tr {

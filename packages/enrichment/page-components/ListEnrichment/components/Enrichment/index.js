@@ -1,10 +1,9 @@
-import { Table, Pagination } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Pagination } from '@cogoport/components';
 
-import EmptyState from '../../../../common/EmptyState';
 import Header from '../Header';
 import Statistics from '../Statistics';
 
+import List from './List';
 import styles from './styles.module.css';
 
 function Enrichment(props) {
@@ -26,7 +25,6 @@ function Enrichment(props) {
 
 	return (
 		<div>
-
 			<Header
 				filters={globalFilters}
 				onChangeFilters={setGlobalFilters}
@@ -37,32 +35,9 @@ function Enrichment(props) {
 				setSearchValue={setSearchValue}
 			/>
 
-			<div>
+			{secondaryTab !== 'uploaded_files' && <Statistics />}
 
-				{secondaryTab !== 'uploaded_files' && <Statistics />}
-
-				{!loading && isEmpty(list) ? (
-					<div className={styles.empty_container}>
-						<EmptyState
-							height={280}
-							width={440}
-							emptyText="No records found"
-							textSize="24px"
-							flexDirection="column"
-						/>
-					</div>
-				) : (
-					<div className={styles.table_container}>
-						<Table
-							className={styles.table}
-							columns={columns}
-							data={list}
-							loading={loading}
-						/>
-					</div>
-				)}
-
-			</div>
+			<List columns={columns} list={list} loading={loading} />
 
 			<div className={styles.pagination_container}>
 				<Pagination
