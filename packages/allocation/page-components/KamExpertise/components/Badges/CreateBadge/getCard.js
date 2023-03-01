@@ -1,34 +1,18 @@
 import { Input, FileSelect, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
 
 import styles from './styles.module.css';
 
 function GetCard(props) {
-	const { medalType, inputPlaceHolder, isLastItem, isBadgeEdit } = props;
+	const { medalType, inputPlaceHolder, setScore, isLastItem, isBadgeEdit } = props;
 
-	// const {
-	// 	onCheckPublish, loading,
-	// } = useBadgeConfigurationAttributes();
-
-	// const upload_props = {
-	// 	name            : 'flag_icon_url',
-	// 	showLabel       : false,
-	// 	label           : 'Flag Icon svg/image',
-	// 	span            : 12,
-	// 	type            : 'file',
-	// 	themeType       : 'secondary',
-	// 	drag            : true,
-	// 	multiple       	: true,
-	// 	uploadIcon      : 'ic-upload',
-	// 	onlyURLOnChange : true,
-	// 	accept          : 'image/*',
-	// 	uploadType      : 'aws',
-	// };
+	
 
 	const [value, setValue] = useState();
+
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 
@@ -42,7 +26,7 @@ function GetCard(props) {
 
 				<div>
 					<p style={{ color: '#4f4f4f' }}>Score</p>
-					<Input size="sm" placeholder={inputPlaceHolder} />
+					<Input size="sm" placeholder={inputPlaceHolder} onChange={(val) => setScore(val)} />
 				</div>
 			</div>
 

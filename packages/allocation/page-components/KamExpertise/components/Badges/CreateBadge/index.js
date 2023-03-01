@@ -9,8 +9,13 @@ import Header from './header';
 import styles from './styles.module.css';
 
 function CreateBadge({ setWindow }) {
-	const [value, setValue] = useState([]);
 	const [badgeInput, setBadgeInput] = useState(false);
+	const [nameValue, setNameValue] = useState('');
+	const [descriptionValue, setDescriptionValue] = useState('');
+	const [eventValue, setEventValue] = useState('');
+	const [bronzeScore, setBronzeScore] = useState('');
+	const [silverScore, setSilverScore] = useState('');
+	const [goldScore, setGoldScore] = useState('');
 
 	const {
 		onCheckPublish, loading,
@@ -22,8 +27,6 @@ function CreateBadge({ setWindow }) {
 			placeholder_singleSelect : 'Enter Name',
 		},
 		events: {
-			value,
-			onChange    : (val) => setValue(val),
 			placeholder : 'Select Events',
 			options     : [
 				{
@@ -37,6 +40,7 @@ function CreateBadge({ setWindow }) {
 			],
 			isClearable : true,
 			style       : { width: '250px' },
+			eventValue,
 		},
 		description: {
 			size                     : 'md',
@@ -51,13 +55,15 @@ function CreateBadge({ setWindow }) {
 			singleSelectParams : params.name,
 			multiSelectParams  : {},
 			style              : { flexBasis: '20%' },
+			setValue           : setNameValue,
 		},
 		{
-			labelName          : 'Condition (events)',
+			labelName          : 'Condition',
 			multiInput         : true,
 			singleSelectParams : {},
 			multiSelectParams  : params.events,
 			style              : { flexBasis: '20%' },
+			setValue           : setEventValue,
 		},
 		{
 			labelName          : 'Description',
@@ -65,6 +71,7 @@ function CreateBadge({ setWindow }) {
 			singleSelectParams : params.description,
 			multiSelectParams  : {},
 			style              : { flexBasis: '50%' },
+			setValue           : setDescriptionValue,
 		},
 	];
 
@@ -72,14 +79,17 @@ function CreateBadge({ setWindow }) {
 		{
 			medalType        : 'Bronze',
 			inputPlaceHolder : '2000',
+			setScore         : setBronzeScore,
 		},
 		{
 			medalType        : 'Silver',
 			inputPlaceHolder : '5000',
+			setScore         : setSilverScore,
 		},
 		{
 			medalType        : 'Gold',
 			inputPlaceHolder : '9000',
+			setScore         : setGoldScore,
 		},
 	];
 
@@ -89,25 +99,25 @@ function CreateBadge({ setWindow }) {
 
 	const payload_data = {
 		version_id    : '1',
-		badge_name    : 'plat 1212',
-		description   : 'hgsdah',
+		badge_name    : nameValue,
+		description   : descriptionValue,
 		// kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
 		status        : 'active',
 		badge_details : [
 			{
-				score     : '100',
+				score     : bronzeScore,
 				image_url : 'bjb',
-				medal     : 'gold',
+				medal     : 'bronze',
 			},
 			{
-				score     : '75',
+				score     : silverScore,
 				image_url : 'bmbb',
 				medal     : 'silver',
 			},
 			{
-				score     : '50',
+				score     : goldScore,
 				image_url : 'hghjg',
-				medal     : 'bronze',
+				medal     : 'gold',
 			},
 		],
 	};
@@ -136,6 +146,7 @@ function CreateBadge({ setWindow }) {
 							singleSelectParams={data.singleSelectParams}
 							multiSelectParams={data.multiSelectParams}
 							style={data.style}
+							setValue={data.setValue}
 						/>
 					))
 					}
@@ -148,6 +159,7 @@ function CreateBadge({ setWindow }) {
 							<GetCard
 								medalType={data.medalType}
 								inputPlaceHolder={data.inputPlaceHolder}
+								setScore={data.setScore}
 								isLastItem={index === medalType.length - 1}
 							/>
 						))}
