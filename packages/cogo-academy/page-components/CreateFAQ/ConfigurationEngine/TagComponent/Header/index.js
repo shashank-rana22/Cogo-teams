@@ -63,7 +63,7 @@ function Header(
 				</div>
 
 				<div>
-					<Button onClick={onClickAddTag}>Add Tag</Button>
+					<Button onClick={onClickAddTag}>Add New Tag</Button>
 				</div>
 			</div>
 

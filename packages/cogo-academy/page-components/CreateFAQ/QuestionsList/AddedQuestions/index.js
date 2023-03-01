@@ -1,6 +1,9 @@
 import { Pagination } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../commons/EmpyState';
 import StyledTable from '../../../../commons/StyledTable';
 
 import Header from './Header';
@@ -22,6 +25,65 @@ function AddedQuestions(props) {
 		questionListLoading,
 	} = props;
 
+	const router = useRouter();
+
+	const renderTable = () => {
+		const onClick = () => {
+			router.push(
+				'/learning/faq/create/question',
+				'/learning/faq/create/question',
+			);
+		};
+
+		if (!questionListLoading && isEmpty(data)) {
+			if (activeList === 'published') {
+				return (
+					<EmptyState
+						text="There are no questions right now. Start with adding a question....."
+						btn_text="Add Question"
+						onClick={onClick}
+					/>
+				);
+			} if (activeList === 'draft') {
+				return (
+					<EmptyState
+						text="There are no drafts right now."
+						btn_text="Add Question"
+						onClick={onClick}
+					/>
+				);
+			} if (activeList === 'inactive') {
+				return (
+					<EmptyState
+						text="There are no inactive questions right now."
+					/>
+				);
+			}
+			return (
+				<EmptyState
+					text="There are no requested questions right now."
+				/>
+			);
+		}
+		return (
+			<>
+				<div className={styles.table}>
+					<StyledTable columns={columns} data={data} loading={questionListLoading} />
+				</div>
+
+				<div className={styles.pagination}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={paginationData?.total_count}
+						pageSize={paginationData?.page_limit}
+						onPageChange={setPage}
+					/>
+				</div>
+			</>
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<Header
@@ -33,20 +95,7 @@ function AddedQuestions(props) {
 				setActiveList={setActiveList}
 			/>
 
-			<div className={styles.table}>
-				<StyledTable columns={columns} data={data} loading={questionListLoading} />
-			</div>
-
-			<div className={styles.pagination}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={paginationData?.total_count}
-					pageSize={paginationData?.page_limit}
-					onPageChange={setPage}
-				/>
-			</div>
-
+			{renderTable()}
 		</div>
 	);
 }
