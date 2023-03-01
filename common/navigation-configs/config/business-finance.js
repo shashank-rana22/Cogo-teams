@@ -6,6 +6,9 @@ const businessFinance = {
 	'/[partner_id]/business-finance/coe-finance/[active_tab]/view-invoices': {
 		navigation: 'business_finance-coe_finance',
 	},
+	'/[partner_id]/business-finance/coe-finance/[active_tab]/[view]': {
+		navigation: 'business_finance-coe_finance',
+	},
 	'/[partner_id]/business-finance/coe-finance/cost-sheet': {
 		navigation: 'business_finance-coe_finance',
 	},
