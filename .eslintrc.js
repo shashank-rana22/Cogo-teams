@@ -6,10 +6,6 @@ module.exports = {
 		{
 			files   : ['**/*.{ts,tsx}'],
 			extends : ['@cogoport/eslint-config/react-typescript'],
-			rules   : {
-				'no-unused-expressions' : 'off',
-				curly                   : 2,
-			},
 		},
 	],
 };

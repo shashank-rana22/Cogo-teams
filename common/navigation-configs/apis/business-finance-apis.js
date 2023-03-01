@@ -6,11 +6,6 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'put_purchase_bills_by_id',
-			access_type : 'private',
-			feature     : 'coeFinance',
-		},
-		{
 			api          : 'update_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
