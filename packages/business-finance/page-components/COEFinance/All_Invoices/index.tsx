@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PurchaseInvoice from './PurchaseInvoiceView/index';
 import ShipmentIdView from './ShipmentIdView/index';
@@ -22,9 +22,9 @@ const tabsKeyComponentMapping = {
 };
 
 function AllInvoices() {
-	const { push, query } = useRouter();
+	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
-	const [subActiveTab, setSubActiveTab] = useState<string>(() => query.view || tabs[0].key);
+	const [subActiveTab, setSubActiveTab] = useState<string>('purchase-view');
 	const tabComponentProps = {
 		'purchase-view': {
 			filters,
@@ -35,13 +35,13 @@ function AllInvoices() {
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
-	const onChange = (view) => {
-		setSubActiveTab(view);
+	useEffect(() => {
 		push(
 			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/all_invoices/${view}` as never as null,
+			`/business-finance/coe-finance/all_invoices/${subActiveTab}`,
 		);
-	};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [subActiveTab]);
 
 	return (
 		<div>
@@ -54,7 +54,7 @@ function AllInvoices() {
 						<div
 							key={tab.key}
 							onClick={() => {
-								onChange(tab.key);
+								setSubActiveTab(tab.key);
 							}}
 							role="presentation"
 						>
