@@ -21,9 +21,10 @@
 	padding: none;
 	margin: 10px;
 	font-size: 18px;
-	cursor: pointer;
+	cursor: default;
 	border: none;
 	outline: none;
+	background:none;
 }
 
 .inactive {

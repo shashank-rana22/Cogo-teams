@@ -52,9 +52,9 @@ export function CalendarEntity({
 		}
 	}
 
-	const request = throttle(() => {
-		leftShift();
-	}, 3000);
+	// const request = throttle(() => {
+	// 	leftShift();
+	// }, 3000);
 
 	// useEffect(() => {
 	// 	if (scroll === 'right') {
@@ -82,7 +82,7 @@ export function CalendarEntity({
 			// console.log('window defined');
 			const leftObserver = new window.IntersectionObserver(leftShift, intersectionOptions);
 			setTimeout(() => {
-				leftObserver?.observe(leftEnd.current);
+				if (leftEnd.current)leftObserver.observe(leftEnd.current);
 				middle?.current?.scrollIntoView({
 					behavior : 'smooth',
 					block    : 'nearest',
