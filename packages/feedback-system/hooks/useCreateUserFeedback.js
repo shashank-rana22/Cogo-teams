@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
+
+import monthOptions from '../constants/month-options';
 
 const useCreateUserFeedback = ({
 	rating,
@@ -10,15 +12,19 @@ const useCreateUserFeedback = ({
 	formId,
 	setShowForm = () => {},
 	setRefetchReportees = () => {},
+	feedback_id = '',
+	feedbackMonth,
+	feedbackYear,
 }) => {
 	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
+	const url = isEmpty(feedback_id) ? 'create_form_responses' : 'update_form_responses';
 
 	const [{ data = {}, loading = false }, trigger] = useRequest({
-		url    : 'create_form_responses',
-		method : 'post',
+		url,
+		method: 'post',
 	}, { manual: true });
 
-	const onSubmitData = async ({ setOpenConfirmationModal = () => {} }) => {
+	const onSubmitData = async () => {
 		const form_responses = [];
 		Object.keys(rating).forEach((id) => {
 			const { feedback, rating: question_rating = '' } = rating[id];
@@ -35,6 +41,8 @@ const useCreateUserFeedback = ({
 					final_feedback    : comment,
 					performed_by_id   : manager_id,
 					performed_by_type : 'agent',
+					Year              : feedbackYear,
+					Month             : monthOptions[feedbackMonth].value,
 				},
 			});
 
@@ -42,10 +50,9 @@ const useCreateUserFeedback = ({
 
 			Toast.success('Feedback Created Successfully');
 			setRefetchReportees(true);
-			setOpenConfirmationModal(false);
 			return;
 		} catch (e) {
-			Toast.error(getApiErrorString(e.data));
+			Toast.error(e.response.data.error?.toString());
 		}
 	};
 

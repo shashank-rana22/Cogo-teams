@@ -1,17 +1,4 @@
-const monthOptions = [
-	{ label: 'January', value: 'January', index: 1 },
-	{ label: 'February', value: 'February', index: 2 },
-	{ label: 'March', value: 'March', index: 3 },
-	{ label: 'April', value: 'April', index: 4 },
-	{ label: 'May', value: 'May', index: 5 },
-	{ label: 'June', value: 'June', index: 6 },
-	{ label: 'July', value: 'July', index: 7 },
-	{ label: 'August', value: 'August', index: 8 },
-	{ label: 'September', value: 'September', index: 9 },
-	{ label: 'October', value: 'October', index: 10 },
-	{ label: 'November', value: 'November', index: 11 },
-	{ label: 'December', value: 'December', index: 12 },
-];
+import monthOptions from '../constants/month-options';
 
 const getMonthControls = (selectedYear, selectedMonth) => {
 	const currentDate = new Date();
@@ -67,7 +54,7 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 	controls.forEach((control) => {
 		const updatedControl = control;
 		if (control.name === 'month' && selectedYear === year) {
-			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month + 1);
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
 		}
 		newControls.push(updatedControl);
 	});

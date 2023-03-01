@@ -1,18 +1,10 @@
 import { Popover, Button, Modal } from '@cogoport/components';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
+import { addDays, getYear, getMonth, isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FeedbackForms from './FeedbackForms';
 import styles from './styles.module.css';
-
-// const getSaturday = (date) => {
-// 	date.setDate(1);
-// 	while (date.getDay() !== 6) {
-// 		date.setDate(date.getDate() + 1);
-// 	}
-// 	return date;
-// };
 
 const formTypes = [
 	{ label: 'Employed', value: 'employed' },
@@ -25,6 +17,8 @@ function FeedbackFormModal({
 	item = {},
 	getTeamFeedbackList = () => {},
 	setRefetchReportees = () => {},
+	feedbackMonth = '',
+	feedbackYear = '',
 }) {
 	const {
 		user_id: userId = '',
@@ -55,24 +49,12 @@ function FeedbackFormModal({
 		</div>
 	));
 
-	// const currentDate = new Date();
+	const currentDate = new Date();
+	const month = getMonth(currentDate);
+	const year = getYear(currentDate);
+	const formStartingDate = new Date(year, month, 1);
 
-	// const firstSaturday = getSaturday(currentDate);
-
-	// const timeAfterTwoDays = addDays(firstSaturday, 2);
-
-	// if (!(currentDate > firstSaturday && currentDate < timeAfterTwoDays)) {
-	// 	return (
-	// 		<div className={styles.feedback_button}>
-	// 			<Button className={styles.feedback_form_button} disabled>
-	// 				<IcMEdit style={{ marginRight: '4px' }} width={14} height={14} fill="#393f70" />
-	// 				<p className={styles.feedback_button_text}>
-	// 					EDIT
-	// 				</p>
-	// 			</Button>
-	// 		</div>
-	// 	);
-	// }
+	const formEndingDate = addDays(formStartingDate, 2);
 
 	function ButtonComponent() {
 		if (action === 'show') {
@@ -86,7 +68,7 @@ function FeedbackFormModal({
 				</Button>
 			);
 		}
-		// if (isEmpty(feedback_id)) {
+
 		return (
 			<Popover
 				visible={showTypePopover}
@@ -98,32 +80,24 @@ function FeedbackFormModal({
 				<Button
 					size="sm"
 					themeType="primary"
-					disabled={!isEmpty(feedback_id)}
 					onClick={() => 	setShowTypePopover(!showTypePopover)}
+					disabled={!(currentDate <= formEndingDate && currentDate >= formStartingDate)}
 				>
+					{isEmpty(feedback_id) ? (
+						<>
+							<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
+							ADD
+						</>
+					) : (
+						<>
+							<IcMEdit style={{ marginRight: '4px' }} width={16} height={16} />
+							EDIT
+						</>
+					)}
 
-					<>
-						<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
-						ADD
-					</>
 				</Button>
 			</Popover>
 		);
-		// }
-
-		// return (
-		// 	<Button
-		// 		size="sm"
-		// 		themeType="primary"
-		// 				// disabled={!isEmpty(feedback_id)}
-		// 		onClick={() => 	setShowTypePopover(!showTypePopover)}
-		// 	>
-		// 		<>
-		// 			<IcMEdit style={{ marginRight: '4px' }} width={16} height={16} />
-		// 			EDIT
-		// 		</>
-		// 	</Button>
-		// );
 	}
 
 	return (
@@ -152,14 +126,22 @@ function FeedbackFormModal({
 					)}
 					/>
 
-					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
+					<Modal.Body style={{
+						padding   : '0px',
+						maxHeight : '60vh',
+						...(showModal === 'resigned' && { border: 'none' }),
+					}}
+					>
 						<FeedbackForms
 							action={action}
 							userId={userId}
+							feedback_id={feedback_id}
 							item={item}
 							showForm={showModal}
 							setShowForm={setShowModal}
 							setRefetchReportees={setRefetchReportees}
+							feedbackYear={feedbackYear}
+							feedbackMonth={feedbackMonth}
 						/>
 					</Modal.Body>
 				</Modal>

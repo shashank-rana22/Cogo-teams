@@ -17,6 +17,7 @@ function LoadingState({ columns, source = 'hr_dashboard' }) {
 					<div className={styles.column_map}>
 						{columns.map((colDetails) => {
 							const { key, label, flex } = colDetails;
+
 							return (
 								<div key={key} style={{ flex }}>
 									{label ? <div className={styles.label}>{label}</div> : null}

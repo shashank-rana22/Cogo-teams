@@ -25,6 +25,11 @@ const feedback_system = [
 		service_name : 'user_feedback',
 	},
 	{
+		api          : 'update_form_responses',
+		access_type  : 'private',
+		service_name : 'user_feedback',
+	},
+	{
 		api          : 'create_question',
 		access_type  : 'private',
 		service_name : 'user_feedback',

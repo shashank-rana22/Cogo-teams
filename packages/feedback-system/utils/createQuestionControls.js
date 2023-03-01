@@ -2,15 +2,11 @@ import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
 
 export const useGetCreateQuestionsControls = () => {
 	const tagOptions = useGetCustomAsyncOptions({
-		endpoint    : 'list-tags',
+		endpoint    : 'list_tags',
 		initialCall : false,
-		params      : {
-			filters: {
-			},
-		},
-		valueKey  : 'tag',
-		labelKey  : 'tag',
-		filterKey : 'Q',
+		valueKey    : 'tag',
+		labelKey    : 'tag',
+		filterKey   : 'Q',
 	});
 
 	return [

@@ -1,6 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { format, startCase } from '@cogoport/utils';
+import { getYear, getMonth, format, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import redirectPathSourceMapping from '../../constants/redirect-source-mapping';
@@ -30,6 +30,13 @@ const useGetColumns = ({
 		if ([4, 5].includes(value)) { return 'good_performance'; }
 		return 'average';
 	};
+
+	const currentDate = new Date();
+	const currentMonth = getMonth(currentDate);
+	const currentYear = getYear(currentDate);
+
+	const feedbackMonth = currentMonth > 0 ? currentMonth - 1 : 11;
+	const feedbackYear = currentMonth > 0 ? currentYear : currentYear - 1;
 
 	const columns = [{
 		Header   : <div className={styles.head}>Reportee Name</div>,
@@ -115,9 +122,9 @@ const useGetColumns = ({
 	},
 	{
 		Header   : <div className={styles.head}>Month</div>,
-		accessor : (item) => (
+		accessor : () => (
 			<div className={styles.head_content}>
-				<div>{format(item?.created_at, 'MMM yyyy')}</div>
+				<div>{format(new Date(feedbackYear, feedbackMonth, 1), 'MMM yyyy')}</div>
 			</div>
 		),
 		id  : 'month',
@@ -131,6 +138,8 @@ const useGetColumns = ({
 					item={item}
 					getTeamFeedbackList={getTeamFeedbackList}
 					setRefetchReportees={setRefetchReportees}
+					feedbackYear={feedbackYear}
+					feedbackMonth={feedbackMonth}
 				/>
 			</div>
 		),

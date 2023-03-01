@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -18,7 +17,7 @@ const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 			setNotifyModal(false);
 			Toast.success(`${manager_count} Managers Notified...`);
 		} catch (e) {
-			Toast.error(getApiErrorString(e.data));
+			Toast.error(e.response.data.error?.toString());
 		}
 	};
 

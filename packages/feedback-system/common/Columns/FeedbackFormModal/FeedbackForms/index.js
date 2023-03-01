@@ -22,9 +22,12 @@ function FeedbackForms({
 	action = '',
 	item = {},
 	showForm = false,
+	feedback_id = '',
 	setShowForm = () => {},
 	userId = '',
 	setRefetchReportees = () => {},
+	feedbackMonth = '',
+	feedbackYear = '',
 }) {
 	const {
 		formData = {},
@@ -47,16 +50,25 @@ function FeedbackForms({
 		userId,
 		setShowForm,
 		setRefetchReportees,
+		feedback_id,
+		feedbackMonth,
+		feedbackYear,
 	});
 
-	const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
-
 	const onSubmit = () => {
-		if (Object.values(rating).includes(0) || (showForm === 'resigned' || isEmpty(comment))) {
+		const isRatingGiven = Object.keys(rating)?.length === questionsToShow.length;
+
+		if (!isRatingGiven) {
 			Toast.error('Please provide rating for all the questions');
 			return;
 		}
-		setOpenConfirmationModal(true);
+
+		if (isEmpty(comment) && showForm !== 'resigned') {
+			Toast.error('Please provide final feedback');
+			return;
+		}
+
+		onSubmitData();
 	};
 
 	const newOptions = Array(5).fill('').map((_, index) => ({
@@ -114,11 +126,10 @@ function FeedbackForms({
 
 	return (
 		<div className={styles.form_container}>
+			{showForm !== 'resigned' && (
+				<div className={styles.header}>
+					<div className={`${styles.side_heading} ${styles.column}`}>Questions</div>
 
-			<div className={styles.header}>
-				<div className={`${styles.side_heading} ${styles.column}`}>Questions</div>
-
-				{showForm !== 'resigned' && (
 					<div className={styles.rating_classes}>
 						{Object.keys(performanceClass).map((key) => (
 							<div className={styles.class}>
@@ -126,9 +137,9 @@ function FeedbackForms({
 							</div>
 						))}
 					</div>
-				)}
 
-			</div>
+				</div>
+			)}
 
 			{(questionsToShow || []).map((key) => {
 				const { id, question, rating: pastRating = '', description = '', feedback = '' } = key || {};
@@ -273,34 +284,6 @@ function FeedbackForms({
 				</Button>
 			</div>
 
-			{openConfirmationModal
-			&& (
-				<Modal show={openConfirmationModal} onClose={() => setOpenConfirmationModal(false)}>
-					<Modal.Header title="Are you sure?" />
-					<Modal.Body style={{ border: 'none' }}>
-						<div>
-							This is the one time action per month, per user.
-							Are you sure about the feedback you gave?
-						</div>
-					</Modal.Body>
-					<Modal.Footer style={{ boxShadow: 'none' }}>
-						<Button
-							themeType="tertiary"
-							onClick={() => setOpenConfirmationModal(false)}
-							style={{ marginRight: '8px' }}
-						>
-							No
-						</Button>
-
-						<Button
-							onClick={() => onSubmitData({ setOpenConfirmationModal })}
-							loading={loading}
-						>
-							Yes
-						</Button>
-					</Modal.Footer>
-				</Modal>
-			)}
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { Placeholder, Accordion, Pagination } from '@cogoport/components';
+import { Accordion, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
@@ -16,19 +16,6 @@ function TeamMembersList({
 	total_count,
 	loading = false,
 }) {
-	if (isEmpty(list) && !loading) {
-		return (
-			<div className={styles.empty_container}>
-				<EmptyState
-					height={280}
-					width={440}
-					emptyText="No Feedbacks Found"
-					textSize="24px"
-					flexDirection="column"
-				/>
-			</div>
-		);
-	}
 	const columns = columnsMapping({ columnsToShow: ['total_feedbacks', 'BelowAverage', 'Average', 'GoodPerforming'] });
 
 	const titleSection = (i) => (
@@ -59,6 +46,20 @@ function TeamMembersList({
 
 	if (loading) {
 		return <LoadingState columns={columns} source="manager_dashboard" />;
+	}
+
+	if (isEmpty(list) && !loading) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No Feedbacks Found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+			</div>
+		);
 	}
 
 	return (
