@@ -1,6 +1,9 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
+import Spinner from '../../../../commons/Spinner';
 import useListFaqQuestions from '../../hooks/useListFaqQuestion';
 import Questions from '../Questions';
 
@@ -12,7 +15,26 @@ function SearchFound({ searchState = '' }) {
 		setPage = () => {},
 		paginationData,
 		data,
+		loading,
 	} = useListFaqQuestions({ searchState });
+
+	if (loading) {
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					height={40}
+					width={40}
+					borderWidth="7px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+				/>
+			</div>
+		);
+	}
+
+	if (isEmpty(data?.list) && !loading) {
+		return <EmptyQuestionListState searchState={searchState} />;
+	}
 
 	return (
 		<div>

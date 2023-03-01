@@ -12,6 +12,7 @@ function useListFaqQuestions({
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
 	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : 'list_faq_questions',
@@ -42,7 +43,7 @@ function useListFaqQuestions({
 				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			console.log('error ::: ', error);
 		}
 	};
 
