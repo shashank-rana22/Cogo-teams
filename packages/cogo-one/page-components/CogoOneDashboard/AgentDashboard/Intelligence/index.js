@@ -4,12 +4,14 @@ import LoaderIntelligence from '../LoaderIntelligence';
 
 import styles from './styles.module.css';
 
-const apiData = [
+const Data = [
 	'Your chat reply time was 2min slower than your peers',
 	'Work on reaching out to more customers ',
 	'Your chat reply time was 10 min slower than your peers',
 	'Your chat reply time was 10 min slower than your peers',
-
+	'Your chat reply time was 10 min slower than your peers',
+	'Your chat reply time was 10 min slower than your peers',
+	'Your chat reply time was 10 min slower than your peers',
 ];
 
 function Intelligence({ loading = false }) {
@@ -18,7 +20,7 @@ function Intelligence({ loading = false }) {
 			<div className={styles.improvement}>Improvements:</div>
 			<div className={styles.box}>
 				{
-				apiData.map((item) => (
+				Data.map((item) => (
 					<div className={styles.improvement_text_box}>
 
 						{loading

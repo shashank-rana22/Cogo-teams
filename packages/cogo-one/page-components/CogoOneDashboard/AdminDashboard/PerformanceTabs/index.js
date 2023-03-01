@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { configurationData } from '../../../../configurations/configurationData';
 // eslint-disable-next-line import/named
 // import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
-import { emptyPerformance } from '../../constants';
+import { emptyPerformance, agentAvatar } from '../../constants';
 import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';
@@ -65,11 +65,11 @@ function PerformanceTab({ loading = false }) {
 					: (
 						<div className={styles.performance_tab_lists}>
 							{Object.keys(configAgentPerformance || {}).map((item) => {
-                	            const { picture, name } = item;
+                	            const { name } = item;
 								return (
 									<div className={styles.performance_list}>
 										<div className={styles.picture_name_kam_box}>
-											<div className={styles.picture}>{picture}</div>
+											<div className={styles.picture}><img src={agentAvatar} alt="AA" /></div>
 											<div className={styles.name}>{name}</div>
 											<div className={styles.kam}>kam</div>
 										</div>
