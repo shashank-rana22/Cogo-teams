@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	align-items: center;
+	height: 40px;
+	padding: 0 4px;
+	color: #ed3726;
+	cursor: pointer;
+	background: white;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.focused_tab {
+	padding: 4px;
+	margin: 0 8px;
+	font-weight: 500;
+	color: red;
+	background: #fff3cd;
+	border-radius: 4px;
+}
+
+.tab {
+	padding: 4px;
+	margin: 0 8px;
+	font-weight: 500;
+	color: black;
+	border-radius: 4px;
+}
