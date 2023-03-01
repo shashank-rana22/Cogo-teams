@@ -24,7 +24,7 @@ function ViewInvoice({ item }: PropsType) {
 		router.push(
 			`/business-finance/coe-finance/${router.query.active_tab}
 			/view-invoices?billId=${billId}&billNumber=${billNumber}
-			&orgId=${organizationId}&jobNumber=${jobNumber}`,
+			&orgId=${organizationId}&jobNumber=${jobNumber}&isShipment=${true}`,
 		);
 	};
 	return (

@@ -37,6 +37,8 @@ function Header({
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
 
+	const { isShipment } = Router?.query || {};
+
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
 	const { rejectApproveApi } = useApproveReject({
@@ -63,6 +65,17 @@ function Header({
     || remarksVal?.collectionPartyRemark?.length > 0
     || remarksVal?.invoiceDetailsRemark?.length > 0;
 
+	const getRoute = () => {
+		if (isShipment) {
+			return [
+				'/business-finance/coe-finance/[active_tab]/[view]',
+				'/business-finance/coe-finance/all_invoices/shipment-view',
+			];
+		}
+		return ['/business-finance/coe-finance/[active_tab]/[view]',
+			'/business-finance/coe-finance/all_invoices/purchase-view'];
+	};
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -70,8 +83,8 @@ function Header({
 					size="md"
 					themeType="secondary"
 					onClick={() => Router.push(
-						'/business-finance/coe-finance/[active_tab]',
-						'/business-finance/coe-finance/all_invoices',
+						getRoute()[0],
+						getRoute()[1],
 					)}
 				>
 					Go Back
