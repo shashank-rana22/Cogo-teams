@@ -1,4 +1,6 @@
 import { Chips } from '@cogoport/components';
+import { useDispatch, useSelector } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import React, { useState } from 'react';
 
 import useListFaqTag from '../../hooks/useListFaqTag';
@@ -7,7 +9,22 @@ import TopicList from '../TopicList';
 import styles from './styles.module.css';
 
 function PopularTags({ tabTitle = '', searchState = '' }) {
-	const [tags, setTags] = useState([]);
+	const { profile } = useSelector((state) => state);
+
+	const { ids = {} } = profile?.faq || {};
+
+	const [tags, setTags] = useState(ids || []);
+
+	const dispatch = useDispatch();
+
+	const handleOnChangeItem = (item) => {
+		setTags(item);
+
+		dispatch(setProfileState({
+			faq:
+			{ ids: item },
+		}));
+	};
 
 	const { options } = useListFaqTag();
 
@@ -23,7 +40,7 @@ function PopularTags({ tabTitle = '', searchState = '' }) {
 					items={options}
 					enableMultiSelect
 					selectedItems={tags}
-					onItemChange={setTags}
+					onItemChange={(item) => handleOnChangeItem(item)}
 				/>
 			</div>
 
