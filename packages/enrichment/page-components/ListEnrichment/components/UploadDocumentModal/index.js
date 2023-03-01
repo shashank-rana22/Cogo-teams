@@ -83,6 +83,7 @@ function UploadDocumentModal(props) {
 						className={styles.cancel_cta}
 						themeType="secondary"
 						type="button"
+						loading={loading}
 						onClick={() => {
 							setSelectedItem(null);
 							setUploadProof(null);

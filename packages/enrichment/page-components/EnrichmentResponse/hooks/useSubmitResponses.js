@@ -44,7 +44,7 @@ const useSubmitResponses = (props) => {
 
 	return {
 		handleResponseSubmit,
-		loading,
+		loadingSubmit: loading,
 	};
 };
 
