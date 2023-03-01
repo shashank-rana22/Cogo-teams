@@ -771,7 +771,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/business-finance/coe-finance/dashboard',
 				as            : '/v2/business-finance/coe-finance/dashboard',
 				icon          : IcMProductCodeMapping,
-				main_apis     : ['list_shipments'],
+				main_apis     : [],
 				possible_apis : [...business_finance.coeFinance],
 			},
 			{
