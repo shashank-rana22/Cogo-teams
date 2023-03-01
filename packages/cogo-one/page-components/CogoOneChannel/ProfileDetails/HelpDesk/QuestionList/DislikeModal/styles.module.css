@@ -1,0 +1,10 @@
+.title {
+	font-size: 16px;
+	font-weight: 500;
+
+	:global {
+		.ui_modal_header_title {
+			font-size: 15px;
+		}
+	}
+}

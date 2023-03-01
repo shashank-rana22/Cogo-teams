@@ -10,6 +10,8 @@ import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useAnswer from '../../../../../../hooks/useAnswer';
+import useUpdateFaqFeedback from '../../../../../../hooks/useUpdateFaqFeedback';
+import DislikeModal from '../DislikeModal';
 
 import styles from './styles.module.css';
 
@@ -35,6 +37,8 @@ function Answer({ topic = {}, question, setQuestion }) {
 
 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
 
+	const { onClickLikeDislikeButton = () => {} } = useUpdateFaqFeedback({ isLiked, setIsLiked, fetch, data });
+
 	useEffect(() => {
 		setIsLiked(FEEDBACK_MAPPING[is_positive] || '');
 	}, [loading]);
@@ -45,75 +49,76 @@ function Answer({ topic = {}, question, setQuestion }) {
 	// 	control,
 	// } = useForm();
 
-	const apiName = data?.answers?.[0]?.faq_feedbacks?.[0]?.id
-		? '/update_faq_feedback'
-		: '/create_faq_feedback';
+	// const apiName = data?.answers?.[0]?.faq_feedbacks?.[0]?.id
+	// 	? '/update_faq_feedback'
+	// 	: '/create_faq_feedback';
 
 	// const api = useRequest({
 	// 	url    : apiName,
 	// 	method : 'get',
 	// }, { manual: true });
 
-	const [trigger] = useRequest({
-		url    : apiName,
-		method : 'get',
-	}, { manual: true });
+	// const [trigger] = useRequest({
+	// 	url    : apiName,
+	// 	method : 'get',
+	// }, { manual: true });
 
-	const onClickLikeButton = async ({ id }) => {
-		let payload = {
-			faq_answer_id : id,
-			is_positive   : true,
-			status        : 'active',
-		};
+	// const onClickLikeButton = async ({ id }) => {
+	// 	let payload = {
+	// 		faq_answer_id : id,
+	// 		is_positive   : true,
+	// 		status        : 'active',
+	// 	};
 
-		if (isLiked === 'liked') {
-			payload = {
-				id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				status : 'inactive',
-			};
-		} else if (isLiked === 'disliked') {
-			payload = {
-				id          : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				is_positive : true,
-				status      : 'active',
-			};
-		}
+	// 	if (isLiked === 'liked') {
+	// 		payload = {
+	// 			id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 			status : 'inactive',
+	// 		};
+	// 	} else if (isLiked === 'disliked') {
+	// 		payload = {
+	// 			id          : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 			is_positive : true,
+	// 			status      : 'active',
+	// 		};
+	// 	}
 
-		try {
-			await trigger({
-				data: payload,
-			});
+	// 	try {
+	// 		await trigger({
+	// 			data: payload,
+	// 		});
 
-			setIsLiked(isLiked === 'liked' ? '' : 'liked');
+	// 		setIsLiked(isLiked === 'liked' ? '' : 'liked');
 
-			fetch();
-		} catch (error) {
-			console.log('error :: ', error);
-		}
-	};
-
-	const onClickRemoveDisLike = async () => {
-		// setload(false);
-		try {
-			trigger({
-				data: {
-					id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
-				},
-			});
-
-			setIsLiked('');
-			fetch();
-		} catch (error) {
-			console.log('error :: ', error);
-		}
-	};
-
-	// const GotoFAQ = () => {
-	// 	const router = useRouter();
-	// 	const href = '';
-	// 	router.push(href, href);
+	// 		fetch();
+	// 	} catch (error) {
+	// 		console.log('error :: ', error);
+	// 	}
 	// };
+
+	// const onClickRemoveDisLike = async () => {
+	// 	// setload(false);
+	// 	try {
+	// 		trigger({
+	// 			data: {
+	// 				id     : data?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+	// 				status : 'inactive',
+	// 			},
+	// 		});
+
+	// 		setIsLiked('');
+	// 		fetch();
+	// 	} catch (error) {
+	// 		console.log('error :: ', error);
+	// 	}
+	// };
+
+	const GotoFAQ = () => {
+		// const router = useRouter();
+		const href = '';
+		// router.push(href, href);
+		window.open(href, '_blank');
+	};
 
 	// const onSubmit = async (values) => {
 	// 	// setload(false);
@@ -220,9 +225,9 @@ function Answer({ topic = {}, question, setQuestion }) {
 								className={styles.emoji_like_yes}
 								role="presentation"
 								onClick={() => {
-									onClickLikeButton({ id: data?.answers?.[0]?.id });
+									onClickLikeDislikeButton({ id: data?.answers?.[0]?.id, type: 'like' });
 								}}
-								style={{ marginLeft: 8, cursor: 'pointer' }}
+
 							/>
 							<div
 								className={styles.emoji_dislike}
@@ -232,23 +237,24 @@ function Answer({ topic = {}, question, setQuestion }) {
 										setShow(true);
 										setIsLiked('disliked');
 									} else {
-										onClickRemoveDisLike();
+										onClickLikeDislikeButton({ type: 'dislike' });
 									}
 								}}
-								style={{ marginLeft: 8, cursor: 'pointer' }}
+
 							/>
 						</>
 					) : null}
+
 					{isLiked === 'disliked' ? (
 						<>
 							<div
 								className={styles.emoji_like}
 								role="presentation"
 								onClick={() => {
-									onClickLikeButton({ id: data?.answers?.[0]?.id });
+									onClickLikeDislikeButton({ id: data?.answers?.[0]?.id, type: 'like' });
 								}}
-								style={{ marginLeft: 8, cursor: 'pointer' }}
 							/>
+
 							<div
 								className={styles.emoji_dislike_yes}
 								role="presentation"
@@ -257,10 +263,9 @@ function Answer({ topic = {}, question, setQuestion }) {
 										setShow(true);
 										setIsLiked('disliked');
 									} else {
-										onClickRemoveDisLike();
+										onClickLikeDislikeButton({ type: 'dislike' });
 									}
 								}}
-								style={{ marginLeft: 8, cursor: 'pointer' }}
 							/>
 						</>
 					) : null}
@@ -271,9 +276,8 @@ function Answer({ topic = {}, question, setQuestion }) {
 								className={styles.emoji_like}
 								role="presentation"
 								onClick={() => {
-									onClickLikeButton({ id: data?.answers?.[0]?.id });
+									onClickLikeDislikeButton({ id: data?.answers?.[0]?.id, type: 'like' });
 								}}
-								style={{ marginLeft: 8, cursor: 'pointer' }}
 							/>
 
 							<div
@@ -284,22 +288,22 @@ function Answer({ topic = {}, question, setQuestion }) {
 										setShow(true);
 										setIsLiked('disliked');
 									} else {
-										onClickRemoveDisLike();
+										onClickLikeDislikeButton({ type: 'dislike' });
 									}
 								}}
-								style={{ marginLeft: 8, cursor: 'pointer' }}
 							/>
+
 						</>
 					) : null}
 				</div>
 
-				{/* <div
+				<div
 					className={styles.help_text}
 					onClick={() => GotoFAQ()}
 				>
 					<div>Open in help center</div>
 					<IcMRedo />
-				</div> */}
+				</div>
 			</div>
 
 			{/* <Modal show={show} onClose={onClose} onOuterClick={() => {}}>
@@ -343,6 +347,11 @@ function Answer({ topic = {}, question, setQuestion }) {
 					</Button>
 				</Form>
 			</Modal> */}
+
+			{show && (
+				<DislikeModal setShow={setShow} show={show} />
+			)}
+
 		</div>
 	);
 }
