@@ -90,6 +90,7 @@ function FeedbackFormModal({
 						visible={showTypePopover}
 						placement="left"
 						render={content}
+						onClickOutside={() => setShowTypePopover(false)}
 						interactive
 					>
 						<Button

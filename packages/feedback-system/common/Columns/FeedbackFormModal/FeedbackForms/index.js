@@ -132,6 +132,7 @@ function FeedbackForms({
 
 			{(questionsToShow || []).map((key) => {
 				const { id, question, rating: pastRating = '', description = '', feedback = '' } = key || {};
+
 				if (showForm === 'resigned') {
 					return (
 						<div
@@ -142,7 +143,7 @@ function FeedbackForms({
 								<div className={styles.side_heading}>
 									<div className={styles.question_container}>{startCase(question)}</div>
 
-									{description && (
+									{!!description && (
 										<Tooltip
 											placement="top"
 											theme="light"
@@ -183,18 +184,20 @@ function FeedbackForms({
 							<div className={styles.side_heading}>
 								<div className={styles.question_container}>{startCase(question)}</div>
 
-								<Tooltip
-									placement="top"
-									theme="light"
-									animation="shift-away"
-									content={<div>{description}</div>}
-								>
-									<IcMInfo
-										fill="#393f70"
-										width={16}
-										height={16}
-									/>
-								</Tooltip>
+								{!!description && (
+									<Tooltip
+										placement="top"
+										theme="light"
+										animation="shift-away"
+										content={<div>{description}</div>}
+									>
+										<IcMInfo
+											fill="#393f70"
+											width={16}
+											height={16}
+										/>
+									</Tooltip>
+								)}
 							</div>
 
 							<div className={styles.radio_group}>
@@ -229,7 +232,11 @@ function FeedbackForms({
 			{showForm !== 'resigned' && (
 
 				<div className={styles.feedback_comment}>
-					<div className={styles.comment}>Your Feedback</div>
+					<div className={styles.comment}>
+						Overall Feedback
+						{' '}
+						<span>(This will be shown to the reportee)</span>
+					</div>
 
 					<Textarea
 						size="lg"

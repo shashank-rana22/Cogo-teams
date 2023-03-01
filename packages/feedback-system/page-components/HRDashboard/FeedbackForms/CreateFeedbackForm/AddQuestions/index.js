@@ -20,12 +20,14 @@ function AddQuestions({
 	formsParams = {},
 	setFormsParams = () => {},
 }) {
-	const { department, designation } = formsParams;
+	const { department, designation, bulkDesignations:localBulkDesignations = [] } = formsParams;
+
 	const [addAnother, setAddAnother] = useState(false);
 	const [openNewQuestionModal, setOpenNewQuestionModal] = useState(false);
 	const [refetchList, setRefetchList] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
-	const [bulkDesignations, setBulkDesignations] = useState([designation]);
+	const [bulkDesignations, setBulkDesignations] = useState(!isEmpty(localBulkDesignations)
+		? localBulkDesignations : [designation]);
 	const [openBulkDesignation, setOpenBulkDesignation] = useState(false);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -88,7 +90,7 @@ function AddQuestions({
 	);
 
 	const areFiltersApplied = params.Tags || params.Q;
-	const currentDesignation = bulkDesignations.length > 1 ? '...' : bulkDesignations[0] || department;
+	const currentDesignation = bulkDesignations.length > 1 ? '...' : designation;
 
 	useEffect(() => {
 		setFormsParams((pv) => ({ ...pv, bulkDesignations }));

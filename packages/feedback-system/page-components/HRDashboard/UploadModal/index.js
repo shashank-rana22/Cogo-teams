@@ -37,7 +37,7 @@ const getMonthYearOptions = (year) => {
 	let monthOptions = allMonthOptions;
 
 	if (year === currentYear) {
-		monthOptions = monthOptions.filter((m) => m.index < currentMonth + 1);
+		monthOptions = monthOptions.filter((m) => m.index <= currentMonth + 1);
 	}
 
 	return { yearOptions, monthOptions };
@@ -69,7 +69,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 
 	const uploadCSVs = async () => {
 		try {
-			await trigger({ data: { Url: files.normalizationCSV, Month: month, Year: year } });
+			await trigger({ data: { Url: files.normalizationCSV, Month: month, Year: year.toString() } });
 
 			Toast.success('File sent for processing. Please check after some time...');
 			setFiles({});
@@ -175,7 +175,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 				<Button
 					onClick={() => uploadCSVs()}
 					loading={uploadLoading}
-					disabled={!isUploadPossible && isEmpty(files?.normalizationCSV)}
+					disabled={!isUploadPossible || isEmpty(files?.normalizationCSV)}
 				>
 					Upload
 				</Button>
