@@ -51,7 +51,6 @@ function TeamPieChart({ userId = '', params = {} }) {
 			<ResponsivePie
 				data={chart_data}
 				innerRadius={0}
-				padAngle={0.7}
 				activeOuterRadiusOffset={8}
 				enableArcLinkLabels={false}
 				enableArcLabels={false}
