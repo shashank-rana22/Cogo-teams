@@ -44,6 +44,7 @@ function GenerateMAWB({
 	};
 
 	const formValues = watch();
+
 	const formData = {
 		agent_name: null,
 		...formValues,
