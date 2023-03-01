@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -44,11 +43,14 @@ function AdminDashboard(props) {
 				</div>
 				<div className={styles.agentactivity_plus_performancetabs}>
 					<AgentActivity agentsDetails={agents_details} getCogoOneDashboard={getCogoOneDashboard} />
-					<PerformanceTab agentsPerformance={agents_performance} />
+					<PerformanceTab agentsPerformance={agents_performance} loading={loading} />
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
 					<div className={styles.two_statistics}>
-						<ChannelMessageAnalytic channelsMessageAnalytics={channels_message_analytics} loading={loading} />
+						<ChannelMessageAnalytic
+							channelsMessageAnalytics={channels_message_analytics}
+							loading={loading}
+						/>
 						<CallAnalytics callsAnalytics={calls_analytics} loading={loading} />
 					</div>
 					<div className={styles.four_characterisctics_container}>

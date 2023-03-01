@@ -54,15 +54,15 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
-							const { picture, name, contact_nos, duration, agent_id = '' } = item;
+							const { picture, name, active_assigned_chats, duration, agent_id = '' } = item;
 
-							const redirectToAgentView = ((agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
+							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
 								if (!agentId) return;
 								router.push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
 								if (agentId) {
 									getCogoOneDashboard(agentId);
 								}
-							}, [router]);
+							};
 
 							return (
 								<div
@@ -82,7 +82,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 										<div className={styles.profile_box_right_down}>
 											<div className={styles.icon_plus_nos}>
 												<div><IcMProfile fill="#BDBDBD" /></div>
-												<div className={styles.contact_nos}>{contact_nos}</div>
+												<div className={styles.contact_nos}>{active_assigned_chats}</div>
 											</div>
 											<div className={styles.icon_plus_time}>
 												<div><IcMTimer fill="#BDBDBD" /></div>

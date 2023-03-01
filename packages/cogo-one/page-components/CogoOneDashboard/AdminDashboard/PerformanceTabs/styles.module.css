@@ -1,12 +1,15 @@
 .main_box {
 	flex-basis: 26%;
 	cursor: default;
-	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .performance_btn_box {
 	width: 100%;
 	background: #fff;
+	border-radius: 6px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .performance_btn {
@@ -15,6 +18,10 @@
 	cursor: pointer;
 	background: #fff;
 	border: none;
+	border-bottom: 5px solid #fff;
+	border-radius: 6px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
 }
 
 .performance_label {
@@ -42,6 +49,7 @@
 	border-radius: 6px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .performance_tab_lists {

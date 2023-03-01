@@ -18,7 +18,7 @@ function AgentDashboard(props) {
 	const [activeTab, setActiveTab] = useState('day');
 	const {
 		customer_satisfaction = {}, intents_served = {}, calls_analytics = {},
-		channels_message_analytics = {}, cogo_one_dashboard_graph = {},
+		channels_message_analytics = {}, cogo_one_dashboard_graph = {}, status_of_chats = {},
 	} = listData || {};
 
 	return (
@@ -49,7 +49,10 @@ function AgentDashboard(props) {
 						<IntentServed intentsServed={intents_served} />
 					</div>
 					<div className={styles.two_characterisctics_container}>
-						<ChatStatistics isAdminView={false} />
+						<ChatStatistics
+							isAdminView={false}
+							statusOfChats={status_of_chats}
+						/>
 					</div>
 				</div>
 			</div>
