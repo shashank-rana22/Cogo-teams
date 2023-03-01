@@ -28,7 +28,6 @@ interface Props {
 const downloadButton = {
 	document_accepted            : 'Download 12 Copies',
 	document_uploaded            : 'Download',
-	document_rejected            : 'Download',
 	document_amendment_requested : 'Download',
 };
 

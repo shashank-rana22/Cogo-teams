@@ -56,7 +56,7 @@ function Upload({ showUpload, setShowUpload, listAPi }) {
 			document_url        : formValues.document || undefined,
 			data                : {
 
-				status          : 'generated',
+				status          : 'uploaded',
 				document_number : showUpload?.awbNumber,
 				service_id      : showUpload?.serviceId,
 				service_type    : 'air_freight_service',
@@ -65,7 +65,7 @@ function Upload({ showUpload, setShowUpload, listAPi }) {
 				{
 					data: {
 
-						status          : 'generated',
+						status          : 'uploaded',
 						document_number : showUpload?.awbNumber,
 						service_id      : showUpload?.serviceId,
 						service_type    : 'air_freight_service',
