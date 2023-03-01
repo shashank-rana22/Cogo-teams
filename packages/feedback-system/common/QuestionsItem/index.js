@@ -1,4 +1,4 @@
-import { ButtonIcon, Button, Pagination, Input, Tooltip, Checkbox } from '@cogoport/components';
+import { ButtonIcon, Input, Tooltip, Checkbox } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { cloneDeep } from '@cogoport/utils';
 

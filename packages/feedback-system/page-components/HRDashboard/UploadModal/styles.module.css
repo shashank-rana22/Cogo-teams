@@ -8,9 +8,10 @@
 	width: 100%;
 	padding: 8px;
 	margin-top: 8px;
-	border: 2px solid #cfeaed;
+
+	/* border: 1px solid #cfeaed; */
 	border-radius: 8px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .upload_header {
@@ -22,6 +23,7 @@
 
 .filters {
 	display: flex;
+
 	:global {
 		.ui_select_display_container {
 			width: 140px;

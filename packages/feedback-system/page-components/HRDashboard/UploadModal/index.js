@@ -81,7 +81,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 
 	const downloadRatingSample = () => {
 		// eslint-disable-next-line max-len, no-undef
-		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/d10cedfc002f5dca2be438cf0dc2b3f0/sample_ratings_sheet%20%287%29.csv');
+		window.open('https://cogoport-testing.sgp1.digitaloceanspaces.com/c45995c475807db7eb6aac8971f6a92d/Employee-kpi-2023%20Feb%2028.Version-733511505%20%281%29.csv');
 	};
 
 	const downloadOnboardingSample = () => {
@@ -175,8 +175,7 @@ function UploadModalBody({ setOpenUploadModal = () => {} }) {
 				<Button
 					onClick={() => uploadCSVs()}
 					loading={uploadLoading}
-					disabled={isEmpty(files?.normalizationCSV)}
-					disabled={!isUploadPossible}
+					disabled={!isUploadPossible && isEmpty(files?.normalizationCSV)}
 				>
 					Upload
 				</Button>

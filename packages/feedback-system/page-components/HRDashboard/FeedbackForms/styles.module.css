@@ -12,11 +12,9 @@
 .redirect_container {
 	display: flex;
 	align-items: center;
-	cursor: pointer;
-
 	font-size: 24px;
 	font-weight: 700;
-	
+	cursor: pointer;
 }
 
 .form_container {
