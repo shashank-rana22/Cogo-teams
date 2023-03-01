@@ -47,7 +47,6 @@ const useEnrichmentResponse = () => {
 	}, [list]);
 
 	useEffect(() => {
-		// setResponseData([]);
 		setShowAddPoc(false);
 	}, [activeTab]);
 
