@@ -2669,6 +2669,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'vendor',
 		},
+		{
+			api          : 'update_vendor_document',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
 	],
 	finance_crm: [
 		{
