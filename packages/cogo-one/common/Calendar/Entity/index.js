@@ -10,16 +10,10 @@ export function CalendarEntity({
 	selectedItem,
 	setSelectedItem,
 	calendarData,
-	scroll,
-	setScroll,
-	resetDiv,
-	pagination,
-	setPagination,
 	timeline,
 	addPagination,
 }) {
-	const animationTime = 1;
-	const [position, setPosition] = useState(-33.3);
+	const [offset, setOffset] = useState(29);
 	const intersectionOptions = {
 		root       : null,
 		rootMargin : '0px',
@@ -28,12 +22,10 @@ export function CalendarEntity({
 
 	const isWeek = timeline === 'week';
 	let leftCount = 0;
-	const offset = 14;
+	// const offset = 14;
 	const calendarRef = useRef();
 	const leftEnd = useRef();
-	const rightEnd = useRef();
 	const middle = useRef();
-	const rightMiddle = useRef();
 
 	// function GetNewData(shift) {
 	// 	setTimeout(() => {
@@ -43,19 +35,25 @@ export function CalendarEntity({
 	// }
 
 	function leftShift() {
-		console.log('leftShift: ');
 		leftCount += 1;
-		if (leftCount > 2) {
-			addPagination(leftCount);
+		console.log('leftShift: ', leftCount);
+		if (leftCount > 4 && leftCount % 2 === 0) {
+			addPagination(Math.floor((leftCount - 4) / 2));
+		} else if (leftCount > 4) {
 			setTimeout(() => {
-				middle.current.scrollIntoView({ behavior: 'smooth' });
-			}, 100);
+				console.log('scrolling::::::::::::');
+				middle.current.scrollIntoView({
+					behavior : 'instant',
+					block    : 'nearest',
+					inline   : 'start',
+				});
+			}, 500);
 		}
 	}
 
 	const request = throttle(() => {
 		leftShift();
-	}, 1000);
+	}, 3000);
 
 	// useEffect(() => {
 	// 	if (scroll === 'right') {
@@ -80,10 +78,17 @@ export function CalendarEntity({
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			console.log('window defined');
-			const leftObserver = new window.IntersectionObserver(() => request(), intersectionOptions);
+			const leftObserver = new window.IntersectionObserver(leftShift, intersectionOptions);
 			setTimeout(() => {
 				leftObserver.observe(leftEnd.current);
-				middle.current.scrollIntoView({ behavior: 'smooth' });
+				middle?.current?.scrollIntoView({
+					behavior : 'smooth',
+					block    : 'nearest',
+					inline   : 'end',
+				});
+			}, 500);
+			setTimeout(() => {
+				setOffset(59);
 			}, 1000);
 		}
 	}, []);

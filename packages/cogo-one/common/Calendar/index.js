@@ -16,12 +16,10 @@ function Calendar({ props }) {
 	} = props || {};
 
 	const [pagination, setPagination] = useState(0);
-	const [scroll, setScroll] = useState('');
-	const [resetDiv, setResetDiv] = useState(false);
 
 	const calendarRef = useRef();
-	const numberOfDays = 15;
-	const shiftDays = 15;
+	const numberOfDays = 30;
+	const shiftDays = 30;
 	const numberOfMonthsForWeeks = 2;
 
 	const FORMAT_TYPE = {
@@ -101,7 +99,7 @@ function Calendar({ props }) {
 
 	const addProcessData = (func) => {
 		const newData = [];
-		for (let i = numberOfDays; i < numberOfDays + (pagination * shiftDays); i += 1) {
+		for (let i = numberOfDays + (shiftDays * (pagination - 1)); i < numberOfDays + (pagination * shiftDays); i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
@@ -145,10 +143,8 @@ function Calendar({ props }) {
 	}, []);
 
 	function addPagination(x) {
-		console.log('x ', x);
-		console.log('__pagination__: ', pagination);
-		setPagination(x - 2);
-		// setPagination(pagination + 1);
+		console.log('___x___: ', x);
+		setPagination(x);
 	}
 
 	useEffect(() => {
@@ -166,9 +162,8 @@ function Calendar({ props }) {
 	return (
 		<div className={styles.calendar}>
 			<button
-				onClick={() => { setScroll('right'); }}
 				className={styles.navBtn}
-				disabled={scroll === 'right'}
+				disabled
 			>
 				<IcMArrowDoubleLeft />
 			</button>
@@ -177,9 +172,6 @@ function Calendar({ props }) {
 					calendarData={calendarData}
 					selectedItem={selectedItem}
 					setSelectedItem={setSelectedItem}
-					scroll={scroll}
-					setScroll={setScroll}
-					resetDiv={resetDiv}
 					pagination={pagination}
 					setPagination={setPagination}
 					timeline={timeline}
@@ -187,8 +179,7 @@ function Calendar({ props }) {
 				/>
 			</div>
 			<button
-				disabled={scroll === 'left' || pagination === -1}
-				onClick={() => { setScroll('left'); }}
+				disabled
 				className={`${styles.navBtn} 
 				`}
 			>
