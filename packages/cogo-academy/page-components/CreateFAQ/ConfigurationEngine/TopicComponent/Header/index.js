@@ -61,7 +61,7 @@ function Header({
 				</div>
 
 				<div>
-					<Button onClick={onClickAddTopic}>Add Topic</Button>
+					<Button onClick={onClickAddTopic}>Add New Topic</Button>
 				</div>
 			</div>
 

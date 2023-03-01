@@ -49,6 +49,7 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 			<AudianceTable
 				columns={listColumns}
 				data={data}
+				activeAudience={activeAudience}
 				audianceLoading={loading}
 				audienceCurrentPage={audienceCurrentPage}
 				setAudienceCurrentPage={setAudienceCurrentPage}

@@ -3,7 +3,7 @@ import { Tabs, TabPanel, Badge } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { React } from 'react';
 
-import EmptyState from '../../../../commons/EmpyState';
+import EmptyQuestionListState from '../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../commons/Spinner';
 import useListFaqTopic from '../../hooks/useListFaqTopic';
 import TagQuestions from '../PopularTags/TagQuestions';
@@ -39,7 +39,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 	}
 
 	if (isEmpty(data?.list)) {
-		return (<EmptyState text="Oops! No Topics availabe" />);
+		return (<EmptyQuestionListState />);
 	}
 
 	const truncate = (input) => (input?.length > 40 ? `${input.substring(0, 29)}..` : input);

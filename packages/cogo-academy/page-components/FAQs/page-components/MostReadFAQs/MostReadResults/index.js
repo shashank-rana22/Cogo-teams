@@ -1,6 +1,7 @@
 import { Pagination } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
+import EmptyQuestionListState from '../../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../../commons/Spinner';
 import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
 import Questions from '../../Questions';
@@ -31,6 +32,10 @@ function MostReadFaqResults({ searchState }) {
 				/>
 			</div>
 		);
+	}
+
+	if (isEmpty(data?.list)) {
+		return (<EmptyQuestionListState />);
 	}
 
 	return (

@@ -61,10 +61,13 @@ function TopicComponent({ configurationPage, setConfigurationPage, reset }) {
 			/>
 			<TopicTable
 				columns={listColumns}
+				activeTopic={activeTopic}
 				data={data}
 				topicsLoading={loading}
 				topicCurrentPage={topicCurrentPage}
 				setTopicCurrentPage={setTopicCurrentPage}
+				reset={reset}
+				setConfigurationPage={setConfigurationPage}
 			/>
 
 		</div>

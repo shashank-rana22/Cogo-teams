@@ -60,12 +60,15 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 			/>
 
 			<TagsTable
+				activeTag={activeTag}
 				columns={listColumns}
 				data={data}
 				tagsLoading={loading}
 				tagCurrentPage={tagCurrentPage}
 				setTagCurrentPage={setTagCurrentPage}
 				setConfigurationPage={setConfigurationPage}
+				reset={reset}
+
 			/>
 
 		</div>
