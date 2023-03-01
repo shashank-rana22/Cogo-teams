@@ -27,7 +27,7 @@ const useGetTopicTagList = () => {
 		},
 	}, { manual: false });
 
-	const [{ data: audienceData,loading:listAudienceLoading }, triggerAudiences] = useRequest({
+	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
 		url    : '/list_faq_audiences',
 		params : {
@@ -84,7 +84,7 @@ const useGetTopicTagList = () => {
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
-	const { list:audienceList = [] } = audienceData || {};
+	const { list: audienceList = [] } = audienceData || {};
 
 	const topicOptions = [];
 	const tagOptions = [];

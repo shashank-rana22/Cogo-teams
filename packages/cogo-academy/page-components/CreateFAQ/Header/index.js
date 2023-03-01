@@ -42,7 +42,7 @@ function Header() {
 				</Button>
 
 				<Button style={{ marginLeft: 8 }} onClick={onClickQuestion}>
-					Add Another Question
+					Add Question
 				</Button>
 			</div>
 		</div>

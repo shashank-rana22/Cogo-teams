@@ -1,4 +1,3 @@
-// function subFunctionMapping() {
 const SUB_FUNCTION_MAPPING = {
 	sales: [
 		{
@@ -24,6 +23,10 @@ const SUB_FUNCTION_MAPPING = {
 		{
 			label : 'CP Portfolio',
 			value : 'cp_portfolio',
+		},
+		{
+			label : 'All',
+			value : 'all',
 		},
 
 	],
@@ -61,6 +64,10 @@ const SUB_FUNCTION_MAPPING = {
 			label : 'IATA Agents',
 			value : 'iata_agents',
 		},
+		{
+			label : 'All',
+			value : 'all',
+		},
 
 	],
 
@@ -76,6 +83,10 @@ const SUB_FUNCTION_MAPPING = {
 		{
 			label : 'FinOps',
 			value : 'finops',
+		},
+		{
+			label : 'All',
+			value : 'all',
 		},
 
 	],
