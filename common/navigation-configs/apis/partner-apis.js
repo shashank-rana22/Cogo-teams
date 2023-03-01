@@ -6425,6 +6425,10 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api         : 'get_purchase_treasury_live_status',
+			access_type : 'private',
+		},
 	],
 	business_finance_income: [
 		{
@@ -7277,69 +7281,69 @@ const partner = {
 		{
 			api         : 'get_sales_outstanding',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_outstanding_invoice_list',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_invoice_by_id_irn_generate',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_invoice_post_to_sage',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_invoice_by_id_irn_cancel',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_invoice_generate_pdf',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_outstanding_ledger_summary',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'post_sales_outstanding_create_communication',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_outstanding_overall',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 
 		{
 			api         : 'get_sales_report_download_outstanding_list',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'get_sales_invoice_timeline_by_id',
 			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
+			module      : 'invoices',
+			feature     : 'invoices',
 		},
 		{
 			api         : 'list_organization_trade_party_details',
@@ -7391,6 +7395,20 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
+	translate: [
+		{
+			api         : 'get_translation_translate_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_translation_translate',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
 	],
@@ -8335,6 +8353,11 @@ const partner = {
 		},
 		{
 			api          : 'get_segment_tags',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
