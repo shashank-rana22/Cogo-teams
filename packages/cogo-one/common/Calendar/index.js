@@ -16,12 +16,11 @@ function Calendar({ props }) {
 	} = props || {};
 
 	const [pagination, setPagination] = useState(0);
-	const [scroll, setScroll] = useState('');
-	const [resetDiv, setResetDiv] = useState(false);
+	const [weekPagination, setWeekPagination] = useState(0);
 
 	const calendarRef = useRef();
-	const numberOfDays = 15;
-	const shiftDays = 15;
+	const numberOfDays = 30;
+	const shiftDays = 30;
 	const numberOfMonthsForWeeks = 2;
 
 	const FORMAT_TYPE = {
@@ -101,7 +100,7 @@ function Calendar({ props }) {
 
 	const addProcessData = (func) => {
 		const newData = [];
-		for (let i = numberOfDays; i < numberOfDays + (pagination * shiftDays); i += 1) {
+		for (let i = numberOfDays + (shiftDays * (pagination - 1)); i < numberOfDays + (pagination * shiftDays); i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
@@ -110,6 +109,7 @@ function Calendar({ props }) {
 				key      : `cal-${timeline}-${pagination}-${iterator}`,
 				label    : format(item, FORMAT_TYPE[timeline].label),
 				subLabel : format(item, FORMAT_TYPE[timeline].subLabel),
+				date     : new Date(item),
 			});
 		});
 		setCalendarData([...data, ...calendarData]);
@@ -117,8 +117,8 @@ function Calendar({ props }) {
 
 	const loadWeeks = () => {
 		let newWeeks = [];
-		for (let i = pagination * numberOfMonthsForWeeks;
-			i < (pagination * numberOfMonthsForWeeks + (3 * numberOfMonthsForWeeks));
+		for (let i = 0;
+			i < (weekPagination * numberOfMonthsForWeeks + (3 * numberOfMonthsForWeeks));
 			i += 1) {
 			const newDate = calcMonth(i);
 			newWeeks = [...newWeeks, ...getWeeksOfMonth(newDate.getMonth(), newDate.getFullYear(), newDate)];
@@ -141,23 +141,38 @@ function Calendar({ props }) {
 	};
 
 	useEffect(() => {
-		processData(calcDate);
-	}, []);
+		setCalendarData([]);
+		setPagination(0);
+		setWeekPagination(0);
+		if (timeline === 'day') processData(calcDate);
+		else if (timeline === 'month') processData(calcMonth);
+		else loadWeeks();
+	}, [timeline]);
 
 	function addPagination(x) {
-		console.log('x ', x);
-		console.log('__pagination__: ', pagination);
-		setPagination(x - 2);
-		// setPagination(pagination + 1);
+		console.log('___x___: ', x);
+		if (timeline === 'day' || timeline === 'month') {
+			setPagination(x);
+		} else {
+			// setWeekPagination(x);  Week Function Check!!!
+		}
 	}
 
 	useEffect(() => {
 		if (pagination !== 0) {
 			if (timeline === 'day') addProcessData(calcDate);
-			else if (timeline === 'month') processData(calcMonth);
+			else if (timeline === 'month') addProcessData(calcMonth);
 			else loadWeeks();
 		}
-	}, [pagination, timeline]);
+	}, [pagination]);
+
+	useEffect(() => {
+		if (weekPagination !== 0) {
+			if (timeline === 'day') addProcessData(calcDate);
+			else if (timeline === 'month') addProcessData(calcMonth);
+			else loadWeeks();
+		}
+	}, [weekPagination]);
 
 	useEffect(() => {
 		console.log('calendarData', calendarData);
@@ -166,9 +181,8 @@ function Calendar({ props }) {
 	return (
 		<div className={styles.calendar}>
 			<button
-				onClick={() => { setScroll('right'); }}
 				className={styles.navBtn}
-				disabled={scroll === 'right'}
+				disabled
 			>
 				<IcMArrowDoubleLeft />
 			</button>
@@ -177,9 +191,6 @@ function Calendar({ props }) {
 					calendarData={calendarData}
 					selectedItem={selectedItem}
 					setSelectedItem={setSelectedItem}
-					scroll={scroll}
-					setScroll={setScroll}
-					resetDiv={resetDiv}
 					pagination={pagination}
 					setPagination={setPagination}
 					timeline={timeline}
@@ -187,8 +198,7 @@ function Calendar({ props }) {
 				/>
 			</div>
 			<button
-				disabled={scroll === 'left' || pagination === -1}
-				onClick={() => { setScroll('left'); }}
+				disabled
 				className={`${styles.navBtn} 
 				`}
 			>

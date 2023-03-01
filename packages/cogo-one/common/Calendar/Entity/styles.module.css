@@ -5,6 +5,7 @@
 	width: fit-content;
 	margin: 10px 0;
 	font-style: normal;
+	scroll-snap-stop: always;
 	cursor: pointer;
 }
 
@@ -17,14 +18,13 @@
 }
 
 .date_container {
+	scroll-snap-stop: always;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 60px;
-	height: 50px;
-	padding: auto;
-	padding-top: 5px;
+	width: 65px;
+	height: 60px;
 	margin: 0 10px;
 	background: rgb(255 255 255 / 40%);
 	border-radius: 6px;
@@ -55,7 +55,14 @@
 }
 
 .week_calendar .date_container {
-	padding: 5px 15px;
+	scroll-snap-stop: always;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 90px;
+	height: 60px;
+	margin: 0 10px;
 }
 
 .week_calendar .day_hours1 {
@@ -84,7 +91,7 @@
 	}
 
 	.day_hours1 {
-		font-size: 18.5px;
+		font-size: 16px;
 		font-weight: 500;
 		color: #444;
 		transition: 0.3s;
