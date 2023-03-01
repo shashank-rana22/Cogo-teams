@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -10,8 +11,7 @@ import styles from './styles.module.css';
 function CoeFinance() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
-
-	const handleChange = (tab:string) => {
+	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
 			'/business-finance/coe-finance/[active_tab]',
@@ -30,7 +30,7 @@ function CoeFinance() {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={(tab:string) => handleChange(tab)}
+					onChange={(tab:string) => handleTabChange(tab)}
 					fullWidth
 					themeType="primary"
 				>

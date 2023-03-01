@@ -28,10 +28,10 @@ interface Props {
 
 function FormatedDate({ item, field }: Props) {
 	const { createdDate, billDate, dueDate, subTotal, billCurrency, grandTotal } = item || {};
-	const getCreatedDate = format(createdDate.toString().split('T'), 'dd MMM, yyyy', {}, false);
-	const getCreatedDateTime = format(createdDate.toString().split('T'), 'h:mm:aa', {}, false);
-	const getBillDate = format(billDate.toString().split('T'), 'dd MMM, yyyy', {}, false);
-	const getDueDate = format(dueDate.toString().split('T'), 'dd MMM, yyyy', {}, false);
+	const getCreatedDate = format(createdDate, 'dd MMM, yyyy', {}, false);
+	const getCreatedDateTime = format(createdDate, 'h:mm:aa', {}, false);
+	const getBillDate = format(billDate, 'dd MMM, yyyy', {}, false);
+	const getDueDate = format(dueDate, 'dd MMM, yyyy', {}, false);
 
 	const content = (
 		<>

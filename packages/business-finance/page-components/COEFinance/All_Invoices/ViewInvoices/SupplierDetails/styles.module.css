@@ -117,3 +117,7 @@
 	display: flex;
 	width: 100%;
 }
+
+.download {
+	cursor: pointer;
+}
