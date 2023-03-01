@@ -9,7 +9,6 @@ import useBadgeConfigurationList from '../../hooks/useBadgeConfigurationList';
 import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
-import listData from './dummyList';
 import Header from './Header';
 import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
@@ -18,21 +17,14 @@ function Badges() {
 	const emptyList = [];
 
 	const router = useRouter();
-	const { fetchBadgeList } = useBadgeConfigurationList();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const [badgeList, setBadgeList] = useState([]);
-	// const [badgeList, setBadgeList] = useState(false);
-
 	const [window, setWindow] = useState(1);
 
-	useEffect(() => {
-		fetchBadgeList(setBadgeList);
-		setBadgeList(listData);
-	}, []);
+	const { list:badgeList } = useBadgeConfigurationList();
 
 	return (
 		<section className={styles.main_container}>
@@ -52,7 +44,7 @@ function Badges() {
 
 				<div>
 					<Header
-						badgeList={badgeList}
+						badgeList={badgeList.length}
 						setWindow={setWindow}
 					/>
 				</div>

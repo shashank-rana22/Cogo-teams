@@ -78,7 +78,7 @@ function BadgeListItem({ data, index }) {
 			</div>
 		);
 	}
-	const { badge_details } = data;
+	const { badge_details = [] } = data;
 	return (
 		<div className={styles.container}>
 			<div className={styles.number_tag}>
