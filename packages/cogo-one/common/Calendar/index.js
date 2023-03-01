@@ -108,6 +108,7 @@ function Calendar({ props }) {
 				key      : `cal-${timeline}-${pagination}-${iterator}`,
 				label    : format(item, FORMAT_TYPE[timeline].label),
 				subLabel : format(item, FORMAT_TYPE[timeline].subLabel),
+				date     : new Date(item),
 			});
 		});
 		setCalendarData([...data, ...calendarData]);
@@ -139,8 +140,11 @@ function Calendar({ props }) {
 	};
 
 	useEffect(() => {
-		processData(calcDate);
-	}, []);
+		setCalendarData([]);
+		if (timeline === 'day') processData(calcDate);
+		else if (timeline === 'month') processData(calcMonth);
+		else loadWeeks();
+	}, [timeline]);
 
 	function addPagination(x) {
 		console.log('___x___: ', x);
@@ -150,10 +154,10 @@ function Calendar({ props }) {
 	useEffect(() => {
 		if (pagination !== 0) {
 			if (timeline === 'day') addProcessData(calcDate);
-			else if (timeline === 'month') processData(calcMonth);
+			else if (timeline === 'month') addProcessData(calcMonth);
 			else loadWeeks();
 		}
-	}, [pagination, timeline]);
+	}, [pagination]);
 
 	useEffect(() => {
 		console.log('calendarData', calendarData);

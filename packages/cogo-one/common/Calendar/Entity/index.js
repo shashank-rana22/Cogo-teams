@@ -13,6 +13,7 @@ export function CalendarEntity({
 	timeline,
 	addPagination,
 }) {
+	console.log('selectedItem', selectedItem);
 	const [offset, setOffset] = useState(29);
 	const intersectionOptions = {
 		root       : null,
@@ -36,12 +37,12 @@ export function CalendarEntity({
 
 	function leftShift() {
 		leftCount += 1;
-		console.log('leftShift: ', leftCount);
+		// console.log('leftShift: ', leftCount);
 		if (leftCount > 4 && leftCount % 2 === 0) {
 			addPagination(Math.floor((leftCount - 4) / 2));
 		} else if (leftCount > 4) {
 			setTimeout(() => {
-				console.log('scrolling::::::::::::');
+				// console.log('scrolling::::::::::::');
 				middle.current.scrollIntoView({
 					behavior : 'instant',
 					block    : 'nearest',
@@ -76,8 +77,9 @@ export function CalendarEntity({
 	// }, [resetDiv]);
 
 	useEffect(() => {
+		setOffset(29);
 		if (typeof window !== 'undefined') {
-			console.log('window defined');
+			// console.log('window defined');
 			const leftObserver = new window.IntersectionObserver(leftShift, intersectionOptions);
 			setTimeout(() => {
 				leftObserver.observe(leftEnd.current);
@@ -91,7 +93,7 @@ export function CalendarEntity({
 				setOffset(59);
 			}, 1000);
 		}
-	}, []);
+	}, [timeline]);
 
 	return (
 		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
@@ -103,7 +105,7 @@ export function CalendarEntity({
 					} else if (timeline === 'week') {
 						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
 					} else if (timeline === 'month') {
-						isDateEqual = format(selectedItem, 'MMM') === format(date, 'MMM');
+						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
 					}
 
 					return (
