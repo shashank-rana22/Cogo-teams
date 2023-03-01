@@ -61,7 +61,7 @@ const controls = [
 		style           : { flexBasis: '100%' },
 		type            : 'file',
 		themeType       : 'secondary',
-		drag            : true,
+		draggable       : true,
 		uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
 		uploadType      : 'aws',

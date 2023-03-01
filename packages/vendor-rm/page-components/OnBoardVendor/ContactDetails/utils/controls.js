@@ -55,7 +55,7 @@ const controls = [
 		style           : { flexBasis: '100%', marginRight: '0px' },
 		type            : 'file',
 		themeType       : 'secondary',
-		drag            : true,
+		draggable       : true,
 		uploadIcon      : 'ic-upload',
 		onlyURLOnChange : true,
 		uploadType      : 'aws',

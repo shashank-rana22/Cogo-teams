@@ -215,7 +215,6 @@ function useOnBoardVendor({
 					[key]: {
 						...data,
 						registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
-
 					},
 				};
 			});
