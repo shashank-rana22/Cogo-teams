@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { configurationData } from '../../../../configurations/configurationData';
+import { agentAvatar } from '../../constants';
 import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
@@ -54,7 +55,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
-							const { picture, name, active_assigned_chats, duration, agent_id = '' } = item;
+							const { name, active_assigned_chats, duration, agent_id = '' } = item;
 
 							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
 								if (!agentId) return;
@@ -72,7 +73,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 								>
 									<div className={styles.profile_box_left}>
 										<div className={cl`${styles.circle_icon} ${tabMapping[activeTab]}`} />
-										<div className={styles.profile_icon}>{picture}</div>
+										<div className={styles.profile_icon}><img src={agentAvatar} alt="AA" /></div>
 									</div>
 									<div className={styles.profile_box_right}>
 										<div className={styles.profile_box_right_up}>

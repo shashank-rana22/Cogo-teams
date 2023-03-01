@@ -38,7 +38,30 @@ export const configurationData = 	{
 		sad_customers     : 0,
 	},
 	agents_performance: {
+		best_performance:
+			[
+				{
+					agents_performance : 4,
+					agent_name         : 'Sanmit Vartak',
+				},
+				{
+					agents_performance : 4,
+					agent_name         : 'Sagar Bankar',
+				},
+			],
+		worst_performance:
+		[
+			{
+				agents_performance : 4,
+				agent_name         : 'Sagar Bankar',
+			},
+			{
+				agents_performance : 4,
+				agent_name         : 'Sanmit Vartak',
+			},
+		],
 	},
+
 	status_of_chats: {
 		chats_closed    : 0,
 		chats_assigned  : 0,

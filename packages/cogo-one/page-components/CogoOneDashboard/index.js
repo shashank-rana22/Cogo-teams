@@ -40,6 +40,7 @@ function CogoOneDashboard() {
 		listData,
 		loading,
 	};
+	console.log(isAgentView, 'isAgentView');
 
 	return (
 		<div>

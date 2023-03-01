@@ -1,12 +1,21 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { ResponsiveLine } from '@cogoport/charts/line';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import chartData from '../../configurations/dummyDateData';
 
 import styles from './styles.module.css';
 
-function LineChart({ cogoOneDashboardGraph }) {
+// const funcs = {
+// 	day: formatDay(),
+// 	week: formatWeek(),
+// 	month: formatMonth(),
+// };
+
+// funcs[key]
+
+function LineChart({ cogoOneDashboardGraph = {} }) {
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
 	const GraphData = chartData({ cogoOneDashboardGraph }) || [];
 
@@ -35,49 +44,52 @@ function LineChart({ cogoOneDashboardGraph }) {
 				</div>
 
 			</div>
-			<div className={styles.chart_container}>
-				{
-				GraphData?.data?.length > 0
-					? (
-						<ResponsiveLine
-							data={GraphData}
-							margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-							xScale={{ type: 'point' }}
-							yFormat=" >-.2f"
-							axisTop={null}
-							axisRight={null}
-							axisBottom={{
-								orient         : 'bottom',
-								tickSize       : 5,
-								tickPadding    : 5,
-								tickRotation   : 0,
-								// legend         : 'transportation',
-								legendOffset   : 36,
-								legendPosition : 'middle',
-							}}
-							axisLeft={{
-								orient         : 'left',
-								tickSize       : 5,
-								tickValues     : 5,
-								tickPadding    : 5,
-								tickRotation   : 0,
-								// legend         : 'count',
-								legendOffset   : -40,
-								legendPosition : 'middle',
-							}}
-							colors={['#C4C4C4', '#F98600']}
-							enableGridX={false}
-							pointSize={4}
-							pointColor={{ theme: 'background' }}
-							pointBorderWidth={4}
-							pointBorderColor={{ from: 'serieColor' }}
-							pointLabelYOffset={-12}
-							useMesh
-						/>
+
+			{
+				isEmpty(cogoOneDashboardGraph) ? <div>empty</div>
+					: (
+						<div className={styles.chart_container}>
+							{(
+								<ResponsiveLine
+									data={GraphData}
+									margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+									xScale={{ type: 'point' }}
+									yFormat=" >-.2f"
+									axisTop={null}
+									axisRight={null}
+									axisBottom={{
+										orient         : 'bottom',
+										tickSize       : 5,
+										tickPadding    : 5,
+										tickRotation   : 0,
+										// legend         : 'transportation',
+										legendOffset   : 36,
+										legendPosition : 'middle',
+									}}
+									axisLeft={{
+										orient         : 'left',
+										tickSize       : 5,
+										tickValues     : 5,
+										tickPadding    : 5,
+										tickRotation   : 0,
+										// legend         : 'count',
+										legendOffset   : -40,
+										legendPosition : 'middle',
+									}}
+									colors={['#C4C4C4', '#F98600']}
+									enableGridX={false}
+									pointSize={4}
+									pointColor={{ theme: 'background' }}
+									pointBorderWidth={4}
+									pointBorderColor={{ from: 'serieColor' }}
+									pointLabelYOffset={-12}
+									useMesh
+								/>
+					)}
+						</div>
 					)
-					:				'NO data found!'
+
 			}
-			</div>
 		</div>
 	);
 }

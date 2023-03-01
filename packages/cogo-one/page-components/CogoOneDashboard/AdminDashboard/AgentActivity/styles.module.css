@@ -113,6 +113,7 @@
 	padding: 5px;
 	margin-top: 10px;
 	margin-right: 10px;
+	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
