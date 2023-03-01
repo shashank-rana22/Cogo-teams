@@ -8,10 +8,10 @@ export const filterControls = [
 		span           : 1,
 		defaultOptions : false,
 		options        : [
-			{ value: 'north', label: 'North' },
-			{ value: 'south', label: 'South' },
-			{ value: 'east', label: 'East' },
-			{ value: 'west', label: 'West' },
+			{ value: 'NORTH', label: 'North' },
+			{ value: 'SOUTH', label: 'South' },
+			{ value: 'EAST', label: 'East' },
+			{ value: 'WEST', label: 'West' },
 		],
 	},
 	{
