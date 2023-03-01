@@ -35,7 +35,7 @@ function RedFlags({ loading = false, escalations = [] }) {
 											<img src={agentAvatar} alt="AA" />
 										</div>
 										<div className={styles.name}>{agent_name}</div>
-										<div className={styles.job_role}>{role}</div>
+										<div className={styles.job_role}>{role?.[0].name}</div>
 									</div>
 									<div className={styles.notification_nos}>{escalation_count}</div>
 								</div>

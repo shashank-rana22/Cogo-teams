@@ -15,9 +15,9 @@ import styles from './styles.module.css';
 
 // funcs[key]
 
-function LineChart({ cogoOneDashboardGraph = {} }) {
+function LineChart({ cogoOneDashboardGraph = {}, timeline }) {
 	const { graph_stats = {} } = cogoOneDashboardGraph || {};
-	const GraphData = chartData({ cogoOneDashboardGraph }) || [];
+	const GraphData = chartData({ cogoOneDashboardGraph }, timeline) || [];
 
 	return (
 		<div className={styles.main_container}>
@@ -68,11 +68,11 @@ function LineChart({ cogoOneDashboardGraph = {} }) {
 									}}
 									axisLeft={{
 										orient         : 'left',
-										tickSize       : 5,
+										tickSize       : 7,
 										tickValues     : 5,
 										tickPadding    : 5,
 										tickRotation   : 0,
-										// legend         : 'count',
+										legend         : 'Customers',
 										legendOffset   : -40,
 										legendPosition : 'middle',
 									}}

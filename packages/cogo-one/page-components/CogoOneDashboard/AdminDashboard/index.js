@@ -37,7 +37,7 @@ function AdminDashboard(props) {
 						<div className={styles.calender_container}>
 							<Calender props={props} />
 						</div>
-						<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} />
+						<LineChart cogoOneDashboardGraph={cogo_one_dashboard_graph} timeline={timeline} />
 					</div>
 					<RedFlags escalations={escalations} loading={loading} />
 				</div>

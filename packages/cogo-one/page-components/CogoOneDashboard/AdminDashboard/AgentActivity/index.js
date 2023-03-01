@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMProfile, IcMTimer } from '@cogoport/icons-react';
+import { IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -85,10 +85,10 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 												<div><IcMProfile fill="#BDBDBD" /></div>
 												<div className={styles.contact_nos}>{active_assigned_chats}</div>
 											</div>
-											<div className={styles.icon_plus_time}>
+											{/* <div className={styles.icon_plus_time}>
 												<div><IcMTimer fill="#BDBDBD" /></div>
 												<div className={styles.duration}>{duration}</div>
-											</div>
+											</div> */}
 										</div>
 									</div>
 								</div>

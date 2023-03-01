@@ -64,13 +64,13 @@ function PerformanceTab({ loading = false, agentsPerformance = {} }) {
 					: (
 						<div className={styles.performance_tab_lists}>
 							{(data || []).map((item) => {
-                	            const { agent_name = '', agents_performance = 0 } = item;
+                	            const { agent_name = '', agents_performance = 0, role } = item;
 								return (
 									<div className={styles.performance_list}>
 										<div className={styles.picture_name_kam_box}>
 											<div className={styles.picture}><img src={agentAvatar} alt="AA" /></div>
 											<div className={styles.name}>{agent_name}</div>
-											<div className={styles.job_role}>kam</div>
+											<div className={styles.job_role}>{role?.[0].name}</div>
 										</div>
 										<div className={styles.notification_nos}>
 											{agents_performance}

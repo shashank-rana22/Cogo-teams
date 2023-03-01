@@ -75,6 +75,8 @@
 .socoal_icons_and_data_list {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100%;
 	padding: 5px;
 }
 
