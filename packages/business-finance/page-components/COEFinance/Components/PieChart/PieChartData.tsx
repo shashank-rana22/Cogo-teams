@@ -1,7 +1,8 @@
 import useGetPieChartData from '../../hook/useGetPieChartData';
 
-export const PieChartData = () => {
-	const { pieData } = useGetPieChartData();
+export const PieChartData = (filters) => {
+	const { pieData } = useGetPieChartData(filters);
+
 	const {
 		bankDetailsRejectedCount, billingPartyRejectCount,
 		invoiceDetailsRejectCount, wrongLineItems,

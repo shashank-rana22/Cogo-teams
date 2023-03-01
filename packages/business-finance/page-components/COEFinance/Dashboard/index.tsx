@@ -86,7 +86,7 @@ function Dashboard() {
 				</div>
 
 				<div className={styles.responsive_pie}>
-					<MyResponsivePie data={PieChartData()} />
+					<MyResponsivePie data={PieChartData(filters)} />
 				</div>
 			</div>
 			<div className={styles.stats}>
