@@ -57,13 +57,9 @@ function Badges() {
 
 			{
 				(window === 1)
-			&& (
-				<section>
-					<MasteryListItem />
-					<BadgeListItem />
-					<BadgeListItem />
-				</section>
-			)
+			&& badgeList.map(((data, index) => (
+				<BadgeListItem data={data} index={index} />
+			)))
 			}
 
 			{
@@ -82,20 +78,6 @@ function Badges() {
 				)
 			}
 
-			{
-				(!createBadge) && badgeList.map(((data, index) => (
-					<BadgeListItem data={data} index={index} />
-				)))
-			// && (
-			// 	<section>
-			// 		<MasteryListItem />
-			// 		<BadgeListItem />
-			// 		{
-
-			// 		}
-			// 	</section>
-			// )
-			}
 		</section>
 	);
 }

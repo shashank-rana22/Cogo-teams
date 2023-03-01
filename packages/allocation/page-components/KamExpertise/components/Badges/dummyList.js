@@ -128,28 +128,3 @@ const listData = [
 ];
 
 export default listData;
-
-const funct = () => (
-	// useEffect(() => {
-	// 	fetchBadgeList(setBadgeList);
-	// 	setBadgeList(listData);
-	// }, []);
-	// const { fetchBadgeList } = useBadgeConfigurationList();
-	// import listData from './dummyList';
-	<div>
-		{/* {
-        (!createBadge) && badgeList.map(((data, index) => (
-	<BadgeListItem data={data} index={index} />
-        )))
-    && (
-	<section>
-		<MasteryListItem />
-		<BadgeListItem />
-		{
-
-    		}
-	</section>
-    )
-    } */}
-	</div>
-);
