@@ -19,6 +19,10 @@ export const requestControls = (isSettlementExecutive = false) => {
 				value : 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL',
 				label : 'Inter Company Journey Voucher Approval',
 			},
+			{
+				value : 'CONCOR_PDA_APPROVAL',
+				label : 'Concor PDA Approval',
+			},
 		];
 	}
 
@@ -73,6 +77,10 @@ export const remainControls = (isSettlementExecutive = false) => {
 			{
 				value : 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL',
 				label : 'Inter Company Journey Voucher Approval',
+			},
+			{
+				value : 'CONCOR_PDA_APPROVAL',
+				label : 'Concor PDA Approval',
 			},
 		];
 	}
