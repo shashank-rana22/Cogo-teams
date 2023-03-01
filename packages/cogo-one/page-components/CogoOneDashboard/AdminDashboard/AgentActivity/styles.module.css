@@ -1,8 +1,9 @@
 .main_container {
 	display: flex;
-	flex-basis: 75%;
+
+	/* flex-basis: 75%; */
 	flex-direction: column;
-	width: 100%;
+	width: 74%;
 	height: 320px;
 	padding: 10px;
 	background: #fbf7f1;

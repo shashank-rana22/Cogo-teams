@@ -1,5 +1,7 @@
 .main_box {
-	flex-basis: 26%;
+	width: 25%;
+
+	/* flex-basis: 26%; */
 	cursor: default;
 }
 

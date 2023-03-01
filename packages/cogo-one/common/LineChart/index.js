@@ -36,41 +36,47 @@ function LineChart({ cogoOneDashboardGraph }) {
 
 			</div>
 			<div className={styles.chart_container}>
-				<ResponsiveLine
-					data={GraphData}
-					margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-					xScale={{ type: 'point' }}
-					yFormat=" >-.2f"
-					axisTop={null}
-					axisRight={null}
-					axisBottom={{
-						orient         : 'bottom',
-						tickSize       : 5,
-						tickPadding    : 5,
-						tickRotation   : 0,
-						// legend         : 'transportation',
-						legendOffset   : 36,
-						legendPosition : 'middle',
-					}}
-					axisLeft={{
-						orient         : 'left',
-						tickSize       : 5,
-						tickValues     : 5,
-						tickPadding    : 5,
-						tickRotation   : 0,
-						// legend         : 'count',
-						legendOffset   : -40,
-						legendPosition : 'middle',
-					}}
-					colors={['#C4C4C4', '#F98600']}
-					enableGridX={false}
-					pointSize={4}
-					pointColor={{ theme: 'background' }}
-					pointBorderWidth={4}
-					pointBorderColor={{ from: 'serieColor' }}
-					pointLabelYOffset={-12}
-					useMesh
-				/>
+				{
+				GraphData?.data?.length > 0
+					? (
+						<ResponsiveLine
+							data={GraphData}
+							margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+							xScale={{ type: 'point' }}
+							yFormat=" >-.2f"
+							axisTop={null}
+							axisRight={null}
+							axisBottom={{
+								orient         : 'bottom',
+								tickSize       : 5,
+								tickPadding    : 5,
+								tickRotation   : 0,
+								// legend         : 'transportation',
+								legendOffset   : 36,
+								legendPosition : 'middle',
+							}}
+							axisLeft={{
+								orient         : 'left',
+								tickSize       : 5,
+								tickValues     : 5,
+								tickPadding    : 5,
+								tickRotation   : 0,
+								// legend         : 'count',
+								legendOffset   : -40,
+								legendPosition : 'middle',
+							}}
+							colors={['#C4C4C4', '#F98600']}
+							enableGridX={false}
+							pointSize={4}
+							pointColor={{ theme: 'background' }}
+							pointBorderWidth={4}
+							pointBorderColor={{ from: 'serieColor' }}
+							pointLabelYOffset={-12}
+							useMesh
+						/>
+					)
+					:				'NO data found!'
+			}
 			</div>
 		</div>
 	);
