@@ -1922,7 +1922,7 @@ const navigationMappingAdmin = {
 		href          : '/manage-rfq',
 		as            : '/manage-rfq',
 		type          : 'link',
-		main_apis     : [],
+		main_apis     : ['list_rfqs'],
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
