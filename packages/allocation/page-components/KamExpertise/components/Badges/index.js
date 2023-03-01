@@ -2,11 +2,12 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import BadgeList from './BadgeList';
+import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
+import CreateMastery from './CreateMastery';
 import Header from './Header';
+import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
-import ViewBadges from './ViewBadges';
 
 function Badges() {
 	const router = useRouter();
@@ -20,6 +21,7 @@ function Badges() {
 
 	// const [createBadge, setCreateBadge] = useState(true);
 	const [createBadge, setCreateBadge] = useState(false);
+	const [createMastery, setCreateMastery] = useState(false);
 
 	return (
 		<section className={styles.main_container}>
@@ -39,7 +41,7 @@ function Badges() {
 				</div>
 
 				<div>
-					<Header badgeList={badgeList} setCreateBadge={setCreateBadge} />
+					<Header badgeList={badgeList} setCreateBadge={setCreateBadge} setCreateMastery={setCreateMastery} />
 				</div>
 			</section>
 
@@ -52,21 +54,24 @@ function Badges() {
 			}
 
 			{
-				badgeList
+				badgeList && (!createBadge)
 			&& (
 				<section>
-					<BadgeList />
+					<MasteryListItem />
+					<BadgeListItem />
+					<BadgeListItem />
 				</section>
 			)
 			}
 
+			{
+				createMastery && (
+					<div>
+						<CreateMastery setCreateMastery={setCreateMastery} />
+					</div>
+				)
+			}
 		</section>
-
-	// <div>
-
-	// 	<ViewBadges />
-
-	// </div>
 	);
 }
 

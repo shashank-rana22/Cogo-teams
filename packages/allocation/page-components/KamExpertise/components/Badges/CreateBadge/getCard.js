@@ -2,10 +2,16 @@ import { Input, FileSelect, Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+// import useBadgeConfigurationAttributes from '../../../hooks/useBadgeConfigurationAttributes';
+
 import styles from './styles.module.css';
 
 function GetCard(props) {
-	const { medalType, inputPlaceHolder, isLastItem } = props;
+	const { medalType, inputPlaceHolder, isLastItem, isBadgeEdit } = props;
+
+	// const {
+	// 	onCheckPublish, loading,
+	// } = useBadgeConfigurationAttributes();
 
 	// const upload_props = {
 	// 	name            : 'flag_icon_url',
@@ -26,7 +32,7 @@ function GetCard(props) {
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
 
-			<div className={styles.display_flex}>
+			<div className={styles.display_flex} style={{ justifyContent: isBadgeEdit ? 'center' : 'flex-start' }}>
 				<div>
 					<p style={{ color: '#4f4f4f', marginBottom: 15 }}>Medal</p>
 					<p>{medalType}</p>
@@ -45,20 +51,39 @@ function GetCard(props) {
 				<IcMInfo className={styles.icm_info} />
 			</div>
 
-			<div className={styles.display_flex} style={{ alignItems: 'flex-end' }}>
-				{/* <FileSelect {... upload_props} /> */}
-				<FileSelect
-					uploadDesc="Upload files here"
-					className={styles.file_select_style}
-					value={value}
-					onChange={(val) => setValue(val)}
-					// accept=".png,.pkg"
-				/>
+			{/* <div className={styles.display_flex} style={{ alignItems: 'flex-end' }}> */}
+			{/* <FileSelect {... upload_props} /> */}
+			<FileSelect
+				uploadDesc="Upload files here"
+				className={styles.file_select_style}
+				value={value}
+				onChange={(val) => setValue(val)}
+				// accept=".png,.pkg"
+				style={{ width: isBadgeEdit ? '93%' : '80%' }}
+			/>
+			{ isBadgeEdit && (
+				<div className={styles.save_update}>
+					<Button
+						size="sm"
+						themeType="primary"
 
-				<Button size="sm" themeType="primary">
+					>
+						Save
+					</Button>
+				</div>
+
+			)}
+
+			{/*
+				<Button
+					size="sm"
+					themeType="primary"
+					disabled={loading}
+					onClick={onCheckPublish}
+				>
 					Save
-				</Button>
-			</div>
+				</Button> */}
+			{/* </div> */}
 
 		</div>
 	);

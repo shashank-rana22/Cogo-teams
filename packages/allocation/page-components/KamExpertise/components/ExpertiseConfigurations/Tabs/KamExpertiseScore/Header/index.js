@@ -24,9 +24,7 @@ function Header() {
 						{' '}
 						<b>Cogoparth</b>
 					</div>
-
 				</div>
-
 			</div>
 
 			<div className={styles.button_container}>
@@ -37,7 +35,6 @@ function Header() {
 				<Button themeType="primary" style={{ marginLeft: '8px' }}>
 					Publish
 				</Button>
-
 			</div>
 
 		</div>

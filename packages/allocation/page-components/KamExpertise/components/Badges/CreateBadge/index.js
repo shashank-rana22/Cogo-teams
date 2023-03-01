@@ -1,5 +1,7 @@
-import { Button, Modal } from '@cogoport/components';
+import { Toast, Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
+
+import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
 
 import GetCard from './getCard';
 import GetLabelInputPair from './getLabelInputPair';
@@ -9,6 +11,10 @@ import styles from './styles.module.css';
 function CreateBadge({ setCreateBadge }) {
 	const [value, setValue] = useState([]);
 	const [badgeInput, setBadgeInput] = useState(false);
+
+	const {
+		onCheckPublish, loading,
+	} = useBadgeConfiguration();
 
 	const params = {
 		name: {
@@ -80,10 +86,15 @@ function CreateBadge({ setCreateBadge }) {
 		setCreateBadge((pv) => !pv);
 	};
 	const handelNext = () => {
+		onCheckPublish();
 		setBadgeInput(true);
 	};
+	const handelSave = () => {
+		setCreateBadge((pv) => !pv);
+		Toast.success('Badge Successfully Created');
+	};
 	return (
-		<Modal size="xl" show onClose={onClose} placement="center">
+		<div>
 			<section className={styles.container}>
 				<Header />
 				<div className={styles.content_container}>
@@ -100,20 +111,18 @@ function CreateBadge({ setCreateBadge }) {
 					}
 				</div>
 
-				{badgeInput && (
-					<div className={styles.lower_background}>
-						<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
-						<div className={styles.display_flex}>
-							{medalType.map((data, index) => (
-								<GetCard
-									medalType={data.medalType}
-									inputPlaceHolder={data.inputPlaceHolder}
-									isLastItem={index === medalType.length - 1}
-								/>
-							))}
-						</div>
+				<div className={styles.lower_background}>
+					<h3 style={{ color: '#4f4f4f' }}>Score and Image</h3>
+					<div className={styles.display_flex}>
+						{medalType.map((data, index) => (
+							<GetCard
+								medalType={data.medalType}
+								inputPlaceHolder={data.inputPlaceHolder}
+								isLastItem={index === medalType.length - 1}
+							/>
+						))}
 					</div>
-				)}
+				</div>
 
 				<div className={styles.btncls}>
 					<Button
@@ -124,12 +133,32 @@ function CreateBadge({ setCreateBadge }) {
 					>
 						Cancel
 					</Button>
-					<Button size="md" themeType="primary" onClick={handelNext}>
-						Next
-					</Button>
+
+					{
+						!badgeInput
+							? (
+								<Button
+									size="md"
+									themeType="primary"
+									disabled={loading}
+									onClick={handelNext}
+								>
+									Next
+								</Button>
+							)
+							:					(
+								<Button
+									size="md"
+									themeType="primary"
+									onClick={handelSave}
+								>
+									Save
+								</Button>
+							)
+					}
 				</div>
 			</section>
-		</Modal>
+		</div>
 	);
 }
 

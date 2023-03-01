@@ -55,7 +55,7 @@ function ViewAllConfigs() {
 
 							return (
 								<TabPanel key={name} name={name} title={title}>
-									<Component />
+									{Component ? <Component /> : null}
 								</TabPanel>
 							);
 						})}
