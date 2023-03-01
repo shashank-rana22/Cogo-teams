@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 function ChatStatistics({ isAdminView, loading = false }) {
 	return (
 		<>
-
 			{chatsStatsDummyData.map((item) => {
 				const { label, number, percentage, isAgent } = item;
 				return (
@@ -39,9 +38,7 @@ function ChatStatistics({ isAdminView, loading = false }) {
 					)
 				);
 			})}
-
 		</>
-
 	);
 }
 

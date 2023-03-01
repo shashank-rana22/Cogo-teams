@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -19,7 +18,13 @@ import TimeSpent from './TimeSpent';
 function AgentDashboard(props) {
 	const { timeline, setTimeline, listData, loading } = props || {};
 	const [activeTab, setActiveTab] = useState('day');
-	const { customer_satisfaction = {}, intents_served = {}, calls_analytics = {}, channels_message_analytics = {} } = listData || {};
+	const {
+		customer_satisfaction = {},
+		intents_served = {},
+		calls_analytics = {},
+		channels_message_analytics = {},
+		status_of_chats = {},
+	} = listData || {};
 	// const { user } = useSelector(({ profile }) => profile);
 	const {
 		user_data,
@@ -42,8 +47,12 @@ function AgentDashboard(props) {
 					<Calender props={props} />
 					<LineChart />
 					<div className={styles.statistics}>
-						<ChannelMessageAnalytic channels_message_analytics={channels_message_analytics} />
-						<CallAnalytics callsAnalytics={calls_analytics} />
+						<ChannelMessageAnalytic
+							channels_message_analytics={channels_message_analytics}
+						/>
+						<CallAnalytics
+							callsAnalytics={calls_analytics}
+						/>
 					</div>
 
 				</div>
@@ -57,7 +66,10 @@ function AgentDashboard(props) {
 
 					</div>
 					<div className={styles.two_characterisctics_container}>
-						<ChatStatistics isAdminView={false} />
+						<ChatStatistics
+							isAdminView={false}
+							status_of_chats={status_of_chats}
+						/>
 					</div>
 
 				</div>

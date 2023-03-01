@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -16,7 +15,14 @@ import styles from './styles.module.css';
 
 function AdminDashboard(props) {
 	const { timeline, setTimeline, listData, loading, emptyState } = props || {};
-	const { escalations = [], calls_analytics = {}, channels_message_analytics = {}, agents_details = {}, agents_performance = {} } = listData || {};
+	const {
+		escalations = [],
+		calls_analytics = {},
+		channels_message_analytics = {},
+		agents_details = {},
+		agents_performance = {},
+		status_of_chats = {},
+	} = listData || {};
 	const [activeTab, setActiveTab] = useState('day');
 
 	return (
@@ -46,12 +52,21 @@ function AdminDashboard(props) {
 				</div>
 				<div className={styles.statistics_plus_characteristics}>
 					<div className={styles.two_statistics}>
-						<ChannelMessageAnalytic channels_message_analytics={channels_message_analytics} loading={loading} />
-						<CallAnalytics callsAnalytics={calls_analytics} loading={loading} />
+						<ChannelMessageAnalytic
+							channels_message_analytics={channels_message_analytics}
+							loading={loading}
+						/>
+						<CallAnalytics
+							callsAnalytics={calls_analytics}
+							loading={loading}
+						/>
 					</div>
 
 					<div className={styles.four_characterisctics_container}>
-						<ChatStatistics isAdminView />
+						<ChatStatistics
+							isAdminView
+							status_of_chats={status_of_chats}
+						/>
 					</div>
 				</div>
 

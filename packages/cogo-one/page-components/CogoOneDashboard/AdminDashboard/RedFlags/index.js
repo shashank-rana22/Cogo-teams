@@ -1,13 +1,23 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { configurationData } from '../../../../configurations/configurationData';
-import { agentAvatar } from '../../constants';
+import { agentAvatar, emptyEscalations } from '../../constants';
 import LoaderRedFlags from '../LoaderRedFlags';
 
 import styles from './styles.module.css';
 
 function RedFlags({ loading = true }) {
-	const { escalations: configEscalations } = configurationData;
+	const { escalations: configEscalations = [] } = configurationData;
+
+	if (isEmpty(configEscalations)) {
+		return (
+			<div className={styles.redflags_container}>
+				<div className={styles.heading}>Escalations</div>
+				<img src={emptyEscalations} alt="" width="300px" height="300px" />
+			</div>
+		);
+	}
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>

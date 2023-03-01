@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { configurationData } from '../../../../configurations/configurationData';
 // eslint-disable-next-line import/named
 // import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
+// import { emptyPerformance } from '../../constants';
 import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';

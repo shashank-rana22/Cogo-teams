@@ -27,6 +27,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 12%;
+	height: 60px;
 	padding-left: 8px;
 	margin-right: 6px;
 	cursor: pointer;

@@ -15,7 +15,8 @@ function useGetCogoOneDashboard({ timeline, selectedTimeline, selectedItem }) {
 			await trigger({
 				params: {
 					timeline      : timeline || 'day',
-					timeline_date : date || new Date(),
+					timeline_date : '23-2-28' || new Date(),
+					// timeline_date : date || new Date(),
 				},
 			});
 		} catch (error) {

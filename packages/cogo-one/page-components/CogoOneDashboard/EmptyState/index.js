@@ -4,7 +4,7 @@ import { emptyImage } from '../constants';
 
 import styles from './styles.module.css';
 
-function EmptyState() {
+function EmptyStateAgentActivity() {
 	return (
 		<div className={styles.empty_state}>
 			<div className={styles.empty_image_container}>
@@ -25,4 +25,4 @@ function EmptyState() {
 	);
 }
 
-export default EmptyState;
+export default EmptyStateAgentActivity;
