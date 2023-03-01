@@ -72,9 +72,14 @@ export const NewAWBFields = {
 		},
 		{
 			key   : 'generateDoc',
-			label : 'Generate Document',
+			label : 'Document',
 			span  : 1.5,
 			func  : 'handleGenerate',
+		},
+		{
+			key  : 'uploadDoc',
+			span : 1.5,
+			func : 'handleUpload',
 		},
 
 	],

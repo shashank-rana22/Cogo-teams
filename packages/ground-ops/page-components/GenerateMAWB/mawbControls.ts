@@ -120,7 +120,7 @@ const mawbControls = () => ({
 					width   : '',
 					height  : '',
 					package : '',
-					unit    : 'cm',
+					unit    : '',
 				},
 			],
 			controls: [
