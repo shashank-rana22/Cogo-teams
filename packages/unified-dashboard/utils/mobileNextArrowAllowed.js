@@ -1,4 +1,4 @@
-const mobileNextArrowAllowed = (selectedFilterTab, data, maxEtd) => {
+const mobileNextArrowAllowed = (selectedFilterTab = 'month', data, maxEtd) => {
 	switch (selectedFilterTab) {
 		case 'month': {
 			const etdMonth = new Date(

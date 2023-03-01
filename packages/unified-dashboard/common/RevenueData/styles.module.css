@@ -1,0 +1,153 @@
+.revenue_col{
+    position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.revenue_row{
+    display: flex;
+	align-items: center;
+	top: 0;
+    position: sticky;
+    background: #fff;
+    z-index: 1;
+    padding: 10px 0px;
+}
+
+.revenue_row_top{
+    position: sticky;
+    background: #fff;
+    z-index: 1;
+}
+
+.revenue_text{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #fff;
+}
+.text{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+}
+.shipment_text{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.revenue_row_data{
+    display: flex;
+	align-items: center;
+	top: 0;
+    margin: 20px 0;
+}
+
+
+
+.shipmentType_dot{
+    height: 20px;
+	width: 8px;
+    min-width: 8px;
+	border-radius: 10px;
+	margin-right: 10px;
+}
+.text_currency{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.text_bookings{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.pie_head{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.revenue_head{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.booking_head{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.customer_head{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.pie_data{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    justify-content: start;
+}
+
+.revenue_data{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    justify-content: center;
+}
+
+.booking_data{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+
+}
+
+.revenue_col_bookings{
+    position: relative;
+	display: flex;
+	flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    
+}
+
+.customer_data{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    border-right: none;
+}
+
+@media (max-width: 767px) {
+  
+    .revenue_text{
+     padding-left: 0px 2px;
+     font-size: 10px;
+     font-weight: 600;
+    }
+ 
+    .text{
+     padding-left: 2px;
+     font-size: 10px;
+     font-weight: 600;
+    }
+
+    .revenue_row{
+        display: flex;
+        align-items: center;
+        top: 0;
+        position: sticky;
+        background: #fff;
+        z-index: 1;
+        margin-top: 10px;
+    }
+
+   }

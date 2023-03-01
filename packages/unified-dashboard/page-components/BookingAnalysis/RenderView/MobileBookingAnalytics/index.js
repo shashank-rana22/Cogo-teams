@@ -14,12 +14,12 @@ function MobileBookingAnalysis({
 	selectedFilterTab,
 }) {
 	const isClickable = mobileNextArrowAllowed(selectedFilterTab, data, maxEtd);
-
+	const monthArr = data[data.length - 1];
 	return (
 		<div className={styles.row}>
 
 			<IcMArrowLeft
-				onClick={() => mobileGetPreviousData(data, filters, setFilters)}
+				onClick={() => mobileGetPreviousData(monthArr, filters, setFilters)}
 				className={styles.btn_pointer}
 			/>
 
@@ -35,7 +35,7 @@ function MobileBookingAnalysis({
 				onClick={
 					isClickable
 						? () => {}
-						: () => mobileGetNextData(data, filters, setFilters)
+						: () => mobileGetNextData(monthArr, filters, setFilters)
 				}
 			/>
 

@@ -1,8 +1,8 @@
 import { format } from '@cogoport/utils';
 
 const mobileGetPreviousData = (data, filters, setFilters) => {
-	const prevMonth = `${data[data.length - 1].month} ${
-		data[data.length - 1].year
+	const prevMonth = `${data.month} ${
+		data.year
 	}`;
 	const dateString = new Date(prevMonth);
 	dateString.setMonth(dateString.getMonth() - 1);

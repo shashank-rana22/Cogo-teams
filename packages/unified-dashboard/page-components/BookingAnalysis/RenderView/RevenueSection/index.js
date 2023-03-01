@@ -7,8 +7,7 @@ import DeclaredRevenue from '../../DeclaredRevenue';
 
 import styles from './styles.module.css';
 
-function RevenueSection({ data = {}, currency, selectedFilterTab }) {
-	const [showRevenue, setShowRevenue] = useState(false);
+function RevenueSection({ data = {}, currency, selectedFilterTab, showRevenue, setShowRevenue }) {
 	const {
 		declared_revenue = [],
 		total_booking = [],

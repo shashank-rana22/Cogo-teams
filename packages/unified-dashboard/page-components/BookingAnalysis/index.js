@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import Empty from '../../common/Empty';
 import LoadingPage from '../../common/LoadingPage';
 import useGetBookingAnalysis from '../../hooks/useListBookingAnalysis';
@@ -17,17 +19,17 @@ function BookingAnalysis({ headerFilters = {} }) {
 	} = useGetBookingAnalysis(headerFilters);
 
 	const { months_considered = [], max_etd = '' } = bookingAnalysis || {};
+	const [showRevenue, setShowRevenue] = useState(false);
+	const renderBookingData = () =>
+	// if (loading) {
+	// 	return <LoadingPage className={styles.loading} />;
+	// }
 
-	const renderBookingData = () => {
-		if (loading) {
-			return <LoadingPage className={styles.loading} />;
-		}
+	// if (!bookingAnalysis) {
+	// 	return <Empty />;
+	// }
 
-		if (!bookingAnalysis) {
-			return <Empty />;
-		}
-
-		return (
+		(
 			<RenderView
 				loading={loading}
 				selectedFilterTab={selectedFilterTab}
@@ -38,10 +40,10 @@ function BookingAnalysis({ headerFilters = {} }) {
 				data={months_considered}
 				headerFilters={headerFilters}
 				bookingAnalysis={bookingAnalysis}
+				showRevenue={showRevenue}
+				setShowRevenue={setShowRevenue}
 			/>
 		);
-	};
-
 	return (
 		<div className={styles.card_wrapper}>
 			<BookingAnalysisHeading

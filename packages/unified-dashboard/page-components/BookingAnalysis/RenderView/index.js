@@ -18,6 +18,9 @@ function RenderView({
 	data = [],
 	headerFilters,
 	bookingAnalysis,
+	showRevenue,
+	setShowRevenue,
+	
 }) {
 	// const isMobile = useSelector((state) => (state.general || {}).isMobile);
 
@@ -57,6 +60,8 @@ function RenderView({
 								selectedFilterTab={selectedFilterTab}
 								currency={selectedCurrency}
 								data={bookingAnalysis}
+								showRevenue={showRevenue}
+								setShowRevenue={setShowRevenue}
 							/>
 							{' '}
 						</>
@@ -85,6 +90,8 @@ function RenderView({
 								currency={selectedCurrency}
 								data={bookingAnalysis}
 								selectedFilterTab={selectedFilterTab}
+								showRevenue={showRevenue}
+								setShowRevenue={setShowRevenue}
 							/>
 						</>
 					)}

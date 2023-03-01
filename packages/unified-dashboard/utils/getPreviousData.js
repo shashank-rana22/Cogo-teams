@@ -10,7 +10,7 @@ const getPreviousData = (
 	switch (selectedFilterTab) {
 		case 'month':
 			{
-				const prevMonth =					analysisKey === 'revenue'
+				const prevMonth = analysisKey === 'revenue'
 					? new Date(`${data?.month}${data?.year}`)
 					: `${data[0].month} ${data[0].year}`;
 				const dateString = new Date(prevMonth);
