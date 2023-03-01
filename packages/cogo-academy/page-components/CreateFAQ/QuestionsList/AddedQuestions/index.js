@@ -6,20 +6,22 @@ import StyledTable from '../../../../commons/StyledTable';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function AddedQuestions({
-	page,
-	setPage,
-	paginationData,
-	data,
-	columns,
-	filters,
-	setFilters,
-	searchInput,
-	setSearchInput,
-	activeList,
-	setActiveList,
-	questionListLoading,
-}) {
+function AddedQuestions(props) {
+	const {
+		page,
+		setPage,
+		paginationData,
+		data,
+		columns,
+		filters,
+		setFilters,
+		searchInput,
+		setSearchInput,
+		activeList,
+		setActiveList,
+		questionListLoading,
+	} = props;
+
 	return (
 		<div className={styles.container}>
 			<Header

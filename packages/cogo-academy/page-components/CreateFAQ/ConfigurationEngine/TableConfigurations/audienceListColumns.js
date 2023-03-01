@@ -67,12 +67,12 @@ function audienceListColumns({
 			},
 		},
 		{
-			Header   : 'PERSONA',
+			Header   : 'WORK SCOPE',
 			accessor : (item) => {
-				const selectedPersona = WORK_SCOPES_OPTIONS.find((element)=> element?.value===item.persona)
+				const selectedWorkScope = WORK_SCOPES_OPTIONS.find((element)=> element?.value===item.work_scope)
 				return (
 				<div className={styles.tags}>
-					{selectedPersona?.label||'--'}
+					{selectedWorkScope?.label||'--'}
 				</div>)
 			},
 		},

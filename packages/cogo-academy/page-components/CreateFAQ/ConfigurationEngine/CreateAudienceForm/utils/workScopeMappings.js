@@ -69,6 +69,10 @@ const WORK_SCOPES_OPTIONS = [
 		label : 'Signing Authority',
 		value : 'i_am_signing_authority',
 	},
+	{
+		label : 'All',
+		value : 'all',
+	},
 
 ];
 

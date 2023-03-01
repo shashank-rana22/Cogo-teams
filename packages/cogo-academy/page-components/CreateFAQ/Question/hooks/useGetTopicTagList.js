@@ -99,16 +99,16 @@ const useGetTopicTagList = () => {
 			cogo_entity_id = '',
 			name = '',
 			platform = '',
-			persona = '',
+			work_scope = '',
 			country_id = '',
 		} = item || {};
 
-		const personaLabel = (WORK_SCOPES_OPTIONS || []).find((workScope) => workScope.value === persona);
+		const workScopeLabel = (WORK_SCOPES_OPTIONS || []).find((workScope) => workScope.value === work_scope);
 		const cogoEntityLabel = (entity_data || []).find((cogoEntity) => cogoEntity.id === cogo_entity_id);
-		const selectedCountry = countries.find((country)=> country.id===item.country_id)
+		const selectedCountry = countries.find((country)=> country.id===country_id)
 
 		const pillsArray = [
-			personaLabel?.label,
+			workScopeLabel?.label,
 			auth_function||'All',
 			startCase(auth_sub_function)||'All',
 			cogoEntityLabel?.business_name,

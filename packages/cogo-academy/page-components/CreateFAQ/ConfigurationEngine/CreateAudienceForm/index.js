@@ -17,9 +17,10 @@ const MAPPING = {
 	cogo_entity_id    : SelectController,
 	country_id        : CountrySelectController,
 	platform          : SelectController,
-	persona           : SelectController,
+	work_scope        : SelectController,
 	auth_function     : SelectController,
 	auth_sub_function : SelectController,
+	persona           : SelectController,
 
 };
 
@@ -109,7 +110,11 @@ function CreateAudienceForm({
 		const { name = '' } = cv;
 
 		let showElement = true;
-		if (name === 'persona' && watchPlatform === 'admin') {
+		if (['work_scope'].includes(name) && watchPlatform === 'admin') {
+			showElement = false;
+		}
+
+		if (['persona'].includes(name) && ['app', 'all', 'admin'].includes(watchPlatform)) {
 			showElement = false;
 		}
 

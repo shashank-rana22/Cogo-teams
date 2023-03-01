@@ -26,30 +26,30 @@ function useCreateAudience({
 		method : 'POST',
 	}, { manual: true });
 
+	const handlePersona = ({ platform = '', personaValue = '' }) => {
+		const PERSONA_MAPPING = {
+			admin   : 'admin_user',
+			app     : 'importer_exporter',
+			all     : 'all',
+			partner : personaValue,
+
+		};
+		return PERSONA_MAPPING[platform];
+	};
+
 	const createAudience = async (values) => {
 		const {
 			platform,
-			persona,
-			auth_function,
-			auth_sub_function,
-			cogo_entity_id,
-			country_id,
-			name,
+			persona :personaValue = '',
+			...rest
 		} = values || {};
 
 		const payload = {
-			id        : audienceId || undefined,
-			audiences : [{
-				platform,
-				persona,
-				auth_function,
-				auth_sub_function,
-				cogo_entity_id,
-				country_id,
-				name,
-			},
+			id      : audienceId || undefined,
+			platform,
+			...rest,
+			persona : handlePersona({ personaValue, platform }),
 
-			],
 		};
 
 		try {

@@ -10,14 +10,21 @@ const PLATFORM_OPTIONS = [{ label: 'Admin', value: 'admin' },
 const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
 	{ label: 'Supply', value: 'supply' },
 	{ label: 'Operations', value: 'operations' },
-	{ label: 'Finance', value: 'finance' }];
+	{ label: 'Finance', value: 'finance' },
+	{ label: 'All', value: 'all' },
+];
+
+const PERSONA_OPTIONS = [
+	{ label: 'Channel Partner', value: 'channel_partner' },
+	{ label: 'Service Provider', value: 'service_provider' },
+	{ label: 'All', value: 'all' },
+];
 
 const createQuestionControls = ({ watchFunctions, entity_options }) => {
 	const controls = [
 		{
 			name        : 'name',
 			type        : 'text',
-			span        : 2,
 			label       : 'Audience Name',
 			placeholder : 'Enter name of the user group',
 			rules       : {
@@ -27,7 +34,6 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 		{
 			name        : 'cogo_entity_id',
 			type        : 'select',
-			span        : 2,
 			label       : 'Cogo Entity',
 			options     : entity_options,
 			placeholder : 'Select Cogo Entity',
@@ -37,7 +43,6 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			name        : 'country_id',
 			label       : 'Country',
 			type        : 'select',
-			span        : 2,
 			placeholder : 'Select country',
 		},
 
@@ -45,7 +50,6 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			name        : 'platform',
 			label       : 'Platform',
 			type        : 'select',
-			span        : 2,
 			options     : PLATFORM_OPTIONS,
 			placeholder : 'Select Platform',
 			rules       : {
@@ -54,19 +58,25 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 		},
 
 		{
-			name        : 'persona',
+			name        : 'work_scope',
 			label       : 'Work Scopes',
 			type        : 'select',
-			span        : 2,
 			placeholder : 'Select Work Scopes',
 			options     : WORK_SCOPES_OPTIONS,
+		},
+
+		{
+			name        : 'persona',
+			label       : 'Persona',
+			type        : 'select',
+			placeholder : 'Select Persona',
+			options     : PERSONA_OPTIONS,
 		},
 
 		{
 			name        : 'auth_function',
 			label       : 'Functions',
 			type        : 'select',
-			span        : 2,
 			options     : AUTH_FUNCTION_OPTIONS,
 			placeholder : 'Select Functions',
 			rules       : {
@@ -78,7 +88,6 @@ const createQuestionControls = ({ watchFunctions, entity_options }) => {
 			name        : 'auth_sub_function',
 			label       : 'Sub Functions',
 			type        : 'select',
-			span        : 1,
 			options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
 			rules       : {

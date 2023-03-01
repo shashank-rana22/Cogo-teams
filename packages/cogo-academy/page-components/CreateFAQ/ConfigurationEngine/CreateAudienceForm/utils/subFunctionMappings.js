@@ -79,9 +79,19 @@ const SUB_FUNCTION_MAPPING = {
 		},
 
 	],
+	all: [
+		{
+			label : 'All',
+			value : 'all',
+		},
+
+	],
 
 	finance: [
-
+		{
+			label : 'All',
+			value : 'all',
+		},
 	],
 
 };

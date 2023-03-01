@@ -3,6 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -151,6 +152,13 @@ const useQuestionList = () => {
 	const [page, setPage] = useState(1);
 	const router = useRouter();
 
+	const { general = {}, profile = {} } = useSelector((state) => state);
+
+	const { auth_role_data = [] } = profile;
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
+
+	const { scope = '' } = general;
+
 	const [{ data: questionList, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_questions',
@@ -173,9 +181,13 @@ const useQuestionList = () => {
 					filters: {
 						...filters,
 						...FILTER_MAPPING[activeList],
-						q: query || undefined,
+						q                 : query || undefined,
+						auth_function     : scope === 'partner' ? role_functions : undefined,
+						auth_sub_function : scope === 'partner' ? role_sub_functions : undefined,
 					},
 					page,
+					is_admin_view: true,
+
 				},
 			});
 		} catch (err) {
