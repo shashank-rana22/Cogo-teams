@@ -49,7 +49,7 @@ function UploadDocumentModal(props) {
 
 								<div style={el.style} className={styles.control_container}>
 
-									<span style={{ marginBottom: '12px' }}>{el.label}</span>
+									<span className={styles.control_label}>{el.label}</span>
 
 									<Element
 										{...el}
@@ -80,7 +80,7 @@ function UploadDocumentModal(props) {
 				<Modal.Footer>
 					<Button
 						size="md"
-						style={{ marginRight: 10 }}
+						className={styles.cancel_cta}
 						themeType="secondary"
 						type="button"
 						onClick={() => {

@@ -2,7 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 
 import Header from './components/Header';
 import Response from './components/Response';
-import useEnrichmentData from './hooks/useEnrichmentData';
+import useEnrichmentResponse from './hooks/useEnrichmentResponse';
 import styles from './styles.module.css';
 
 const tabPanelMapping = {
@@ -17,7 +17,7 @@ const tabPanelMapping = {
 
 };
 
-function EnrichmentData() {
+function EnrichmentResponse() {
 	const {
 		loading,
 		activeTab,
@@ -26,12 +26,17 @@ function EnrichmentData() {
 		responseData,
 		showAddPoc,
 		setShowAddPoc,
-	} = useEnrichmentData();
+		locale,
+		partner_id,
+	} = useEnrichmentResponse();
 
 	return (
 
-		<div>
-			<Header />
+		<section>
+			<Header
+				locale={locale}
+				partner_id={partner_id}
+			/>
 
 			<div className={styles.tabs_container}>
 				<Tabs
@@ -57,9 +62,9 @@ function EnrichmentData() {
 
 				</Tabs>
 			</div>
-		</div>
+		</section>
 
 	);
 }
 
-export default EnrichmentData;
+export default EnrichmentResponse;

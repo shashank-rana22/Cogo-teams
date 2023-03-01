@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 const useEnrichmentRequests = () => {
 	const router = useRouter();
+
 	const { query = {} } = router;
 
 	const [params, setParams] = useState({
@@ -30,7 +31,6 @@ const useEnrichmentRequests = () => {
 		refetch,
 		loading,
 		setParams,
-
 	};
 };
 

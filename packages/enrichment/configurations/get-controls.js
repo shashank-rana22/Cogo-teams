@@ -91,7 +91,7 @@ const getUserControls = ({ activeTab = '' }) => {
 					},
 				],
 				rules: {
-					required: 'Specify reason',
+					required: 'Workscope is required',
 				},
 
 			},

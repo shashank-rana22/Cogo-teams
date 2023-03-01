@@ -1,14 +1,23 @@
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-const useEnrichmentData = () => {
+const useEnrichmentResponse = () => {
+	const { locale, partner_id } = useSelector(({ profile, general }) => ({
+		locale     : general?.locale,
+		partner_id : profile?.partner?.id,
+	}));
+
 	const router = useRouter();
+
 	const { query = {} } = router;
 
 	const [activeTab, setActiveTab] = useState('user');
 
 	const [responseData, setResponseData] = useState([]);
+
 	const [showAddPoc, setShowAddPoc] = useState(false);
 
 	const [params, setParams] = useState({
@@ -17,7 +26,6 @@ const useEnrichmentData = () => {
 		page      : 1,
 		filters   : {
 			feedback_request_id: query.id,
-
 		},
 		is_third_party: true,
 	});
@@ -32,6 +40,9 @@ const useEnrichmentData = () => {
 	const { list = [], ...paginationData } = data || {};
 
 	useEffect(() => {
+		if (isEmpty(list)) {
+			return;
+		}
 		setResponseData(list);
 	}, [list]);
 
@@ -52,8 +63,10 @@ const useEnrichmentData = () => {
 		responseData,
 		showAddPoc,
 		setShowAddPoc,
+		locale,
+		partner_id,
 
 	};
 };
 
-export default useEnrichmentData;
+export default useEnrichmentResponse;

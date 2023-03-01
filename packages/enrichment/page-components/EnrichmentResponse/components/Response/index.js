@@ -8,16 +8,18 @@ import useSubmitResponses from '../../hooks/useSubmitResponses';
 import DetailsCard from './DetailsCard';
 import styles from './styles.module.css';
 
-function Response({
-	responseData = [],
-	loading = false,
-	activeTab = '',
-	setResponseData = () => {},
-	showAddPoc = false,
-	setShowAddPoc = () => {},
+function Response(props) {
+	const {
+		responseData,
+		loading,
+		activeTab,
+		setResponseData,
+		showAddPoc,
+		setShowAddPoc,
 
-}) {
-	const { handleResponseSubmit = () => {} } = useSubmitResponses({ responseData, setResponseData });
+	} = props;
+
+	const { handleResponseSubmit } = useSubmitResponses({ responseData, setResponseData });
 
 	if (loading) {
 		return (
@@ -40,36 +42,38 @@ function Response({
 	}
 
 	return (
+		<section>
+			<section>
+				{(responseData).map((user, index) => (
+					<DetailsCard
+						key={user.id}
+						user={user}
+						index={index}
+						responseData={responseData}
+						setResponseData={setResponseData}
+						loading={loading}
+						activeTab={activeTab}
+					/>
+				))}
 
-		<div>
-			{(responseData).map((user, index) => (
-				<DetailsCard
-					key={user.id}
-					user={user}
-					index={index}
-					responseData={responseData}
-					setResponseData={setResponseData}
-					loading={loading}
-					activeTab={activeTab}
-				/>
-			))}
+			</section>
+			<section>
+				{showAddPoc && (
+					<CreateResponse
+						loading={loading}
+						activeTab={activeTab}
+						responseData={responseData}
+						setResponseData={setResponseData}
+						setShowAddPoc={setShowAddPoc}
+						showAddPoc={showAddPoc}
+						type="addPoc"
+					/>
 
-			{showAddPoc && (
-				<CreateResponse
-					loading={loading}
-					activeTab={activeTab}
-					responseData={responseData}
-					setResponseData={setResponseData}
-					setShowAddPoc={setShowAddPoc}
-					showAddPoc={showAddPoc}
-					type="create"
-
-				/>
-
-			)}
+				)}
+			</section>
 
 			{!isEmpty(responseData) && !showAddPoc && (
-				<div className={styles.footer}>
+				<section className={styles.footer}>
 
 					<div>
 						<Button
@@ -78,7 +82,7 @@ function Response({
 							type="button"
 							onClick={() => setShowAddPoc(true)}
 						>
-							<IcMPlus style={{ marginRight: '4px' }} />
+							<IcMPlus className={styles.add_more_icon} />
 							Add More
 						</Button>
 					</div>
@@ -93,9 +97,9 @@ function Response({
 							Submit
 						</Button>
 					</div>
-				</div>
+				</section>
 			)}
-		</div>
+		</section>
 	);
 }
 

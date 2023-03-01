@@ -37,11 +37,10 @@ function Header(props) {
 					<Button
 						size="lg"
 						themeType="primary"
-						style={{ marginRight: '8px' }}
                         // eslint-disable-next-line no-undef
 						onClick={() => window.open(URL, '_blank')}
 					>
-						<IcMDownload width={16} height={16} style={{ marginRight: '10px' }} />
+						<IcMDownload width={16} height={16} />
 						Download
 
 					</Button>

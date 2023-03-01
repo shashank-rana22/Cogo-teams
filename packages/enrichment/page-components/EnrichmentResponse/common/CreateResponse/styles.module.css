@@ -17,6 +17,9 @@
 	background: #fff;
 	border-radius: 8px;
 }
+.label{
+	margin-bottom: 12px;
+}
 
 .row_container {
 	display: flex;
@@ -38,4 +41,12 @@
 .error_message {
 	font-size: 10px;
 	color: #cb6464;
+}
+
+.control_label{
+	margin-bottom: 12px;
+}
+
+.cancel_cta{
+	margin-right: 12px;
 }

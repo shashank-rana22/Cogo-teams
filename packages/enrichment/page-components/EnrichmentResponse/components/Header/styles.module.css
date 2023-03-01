@@ -23,6 +23,10 @@
 	display: flex;
 }
 
+.info_label{
+	margin-right: 12px;
+}
+
 .value {
 	font-weight: 600;
 }

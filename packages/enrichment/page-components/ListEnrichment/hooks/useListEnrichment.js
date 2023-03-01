@@ -14,27 +14,30 @@ import {
 import styles from '../styles.module.css';
 
 const useListEnrichment = () => {
-	const {
-		profile = {},
-	} = useSelector((state) => state);
+	const { profile, general } = useSelector((state) => state || {});
+
+	const { partner_id, user_id } = profile;
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
+
 	const [searchValue, setSearchValue] = useState('');
+
 	const [activeTab, setActiveTab] = useState('enrichment_requests');
+
 	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
+
 	const [selectedItem, setSelectedItem] = useState();
+
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
 		sort_type  : 'desc',
 		page_limit : 10,
 		page       : 1,
-		user_id    : profile.user?.id,
-		partner_id : profile.partner?.id,
+		user_id,
+		partner_id,
 		filters    : {
 			q: searchQuery || undefined,
-
 		},
-
 	});
 
 	const [globalFilters, setGlobalFilters] = useState({
@@ -121,7 +124,7 @@ const useListEnrichment = () => {
 			id       : 'created_at',
 			Header   : 'REQUESTED AT',
 			accessor : ({ created_at }) => (
-				<div>
+				<section>
 					{created_at	 ? (
 						<div>
 							{format(created_at, 'dd MMM yyyy') || '-'}
@@ -129,7 +132,7 @@ const useListEnrichment = () => {
 						</div>
 					) : '___'}
 
-				</div>
+				</section>
 
 			),
 		},
@@ -214,8 +217,8 @@ const useListEnrichment = () => {
 			accessor : ({ address = '', id = '' }, item = {}) => (
 
 				address ? (
-					<section style={{ display: 'flex' }}>
-						<div className={styles.address}>
+					<section className={styles.address}>
+						<div className={styles.address_label}>
 							{address}
 						</div>
 
@@ -264,18 +267,18 @@ const useListEnrichment = () => {
 
 		{
 			id       : 'action',
-			Header   : <div style={{ textAlign: 'center' }}>Action</div>,
+			Header   : <div className={styles.action_header}>Action</div>,
 			accessor : (item) => {
 				const { id } = item;
 
 				return (
-					<div className={styles.content_container}>
+					<section className={styles.content_container}>
 
 						<Button
 							themeType="secondary"
 							type="button"
 							size="sm"
-							style={{ marginRight: '12px' }}
+							className={styles.edit_cta}
 							onClick={() => handleUploadClick(id)}
 						>
 							Edit Details
@@ -290,7 +293,7 @@ const useListEnrichment = () => {
 							Upload
 
 						</Button>
-					</div>
+					</section>
 				);
 			},
 		},
@@ -305,9 +308,10 @@ const useListEnrichment = () => {
 
 	return {
 		columns     : filteredColumns,
+		listRefetch :	refetch,
+		locale      : general?.locale,
 		list,
 		paginationData,
-		listRefetch :	refetch,
 		loading,
 		setParams,
 		getNextPage,
@@ -322,6 +326,7 @@ const useListEnrichment = () => {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		partner_id,
 
 	};
 };

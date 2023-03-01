@@ -1,11 +1,13 @@
 import { Button } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import { cardHeading, cardLabelsMapping, mobileNumberMapping } from '../../../../../constants/get-card-details';
+import { getCardHeaders, cardLabelsMapping, mobileNumberMapping } from '../../../../../constants/get-card-details';
 import CreateResponse from '../../../common/CreateResponse';
 
 import styles from './styles.module.css';
 import RenderWorkscopes from './Workscopes';
+
+const cardHeading = getCardHeaders('card');
 
 function DetailsCard({
 	user = {},
@@ -43,7 +45,7 @@ function DetailsCard({
 			<div className={styles.card_header}>
 				<div className={styles.left_header}>
 					{cardHeading[activeTab].icon}
-					<div style={{ marginLeft: '12px' }}>
+					<div className={styles.card_heading_label}>
 						{cardHeading[activeTab].label}
 						-
 						{' '}

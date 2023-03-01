@@ -2,12 +2,18 @@
 	font-size: 28px;
 	font-weight: 600;
 	color: #221f20;
+	margin-bottom: 20px;
 }
 
-.address {
+.address{
+	display: flex;
+}
+
+.address_label {
 	max-width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	
 }
 
 .link_text {
@@ -25,16 +31,14 @@
 	display: flex;
 	justify-content: center;
 
-	/* margin-bottom: 4px; */
-
-	/* @media (min-width: 768px) {
-		flex-direction: column;
-		justify-content: center;
-		margin-bottom: 0;
-		word-break: break-word;
-	} */
 }
 
+.action_header{
+	text-align: center;
+}
 .secondary_tabs {
 	margin-top: 20px;
+}
+.edit_cta{
+	margin-right: 12px;
 }

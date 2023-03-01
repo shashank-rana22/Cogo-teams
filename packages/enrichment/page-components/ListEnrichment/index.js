@@ -1,6 +1,6 @@
 import { TabPanel, Tabs, Modal } from '@cogoport/components';
 
-import { tabPanelMapping } from '../../configurations/tab-panels-mapping';
+import { tabPanelMapping } from '../../constants/tab-panels-mapping';
 
 import Enrichment from './components/Enrichment';
 import UploadDocumentModal from './components/UploadDocumentModal';
@@ -30,10 +30,11 @@ function ListEnrichment() {
 
 	return (
 
-		<>
+		<section>
+
 			<div className={styles.title}>Enrichment Data</div>
 
-			<div style={{ marginTop: 30 }}>
+			<div>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary"
@@ -111,7 +112,7 @@ function ListEnrichment() {
 
 			</Modal>
 
-		</>
+		</section>
 
 	);
 }

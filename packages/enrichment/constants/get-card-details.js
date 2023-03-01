@@ -1,15 +1,17 @@
 import { IcMLocation, IcMProfile } from '@cogoport/icons-react';
 
-export const cardHeading = {
+export const getCardHeaders = (type) => ({
+
 	user: {
 		icon  : <IcMProfile />,
-		label : 'POC',
+		label : type === 'form' ? 'Add POC Details' : 'POC',
 	},
+
 	address: {
 		icon  : <IcMLocation />,
-		label : 'Address',
+		label : type === 'form' ? 'Add Address Details' : 'Address',
 	},
-};
+});
 
 export const cardLabelsMapping = {
 	user: {
