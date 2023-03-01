@@ -1,4 +1,4 @@
-import { Card, Tooltip } from '@cogoport/components';
+import { Placeholder, Card, Tooltip } from '@cogoport/components';
 import {
 	IcMArrowNext,
 	IcMInfo, IcMAgentManagement, IcMTradeparties, IcMBreakBulkCargoType, IcMMiscellaneous,
@@ -79,30 +79,62 @@ function ThisWeek() {
 			<div className={styles.cards}>
 				{
 					dummy_card_data.map((dummy_data) => (
-						<div
-							key={dummy_data.title}
-							role="presentation"
-							className={styles.card_container}
-							onClick={() => setCardData(dummy_data)}
-						>
-							<Card
-								themetype="primary"
-								disabled={false}
-								className={styles.card_item}
+						// ! loading state logic below
+
+						false ? (
+							<div
+								key={dummy_data.title}
+								role="presentation"
+								className={styles.card_container}
+								onClick={() => setCardData(dummy_data)}
 							>
-								<Card.Title title={(
-									<div className={styles.card_title}>
-										<h3>{dummy_data.title}</h3>
-										<IcMArrowNext width={28} height={28} style={{ color: 'red' }} />
-									</div>
-								)}
-								/>
-								<Card.Description className={styles.card_content}>
-									<CardContent dummy_data={dummy_data} value="count" />
-									<CardContent dummy_data={dummy_data} value="avg_score" />
-								</Card.Description>
-							</Card>
-						</div>
+								<Card
+									themetype="primary"
+									disabled={false}
+									className={styles.card_item}
+								>
+									<Card.Title title={(
+										<div className={styles.card_title}>
+											{/* <h3>{dummy_data.title}</h3> */}
+											<Placeholder width="60px" height="20px" />
+											{/* <IcMArrowNext width={28} height={28} style={{ color: 'red' }} /> */}
+										</div>
+									)}
+									/>
+									<Card.Description className={styles.card_content}>
+										<Placeholder width="100px" height="60px" style={{ marginTop: '16px' }} />
+										<Placeholder width="100px" height="60px" style={{ marginTop: '16px' }} />
+
+									</Card.Description>
+								</Card>
+							</div>
+						) : (
+							<div
+								key={dummy_data.title}
+								role="presentation"
+								className={styles.card_container}
+								onClick={() => setCardData(dummy_data)}
+							>
+								<Card
+									themetype="primary"
+									disabled={false}
+									className={styles.card_item}
+								>
+									<Card.Title title={(
+										<div className={styles.card_title}>
+											<h3>{dummy_data.title}</h3>
+											<IcMArrowNext width={28} height={28} style={{ color: 'red' }} />
+										</div>
+									)}
+									/>
+									<Card.Description className={styles.card_content}>
+										<CardContent dummy_data={dummy_data} value="count" />
+										<CardContent dummy_data={dummy_data} value="avg_score" />
+									</Card.Description>
+								</Card>
+							</div>
+						)
+
 					))
 				}
 			</div>
@@ -116,61 +148,105 @@ function ThisWeek() {
 						<div className={styles.overview_cards}>
 							{
 							overview_data.map((data) => (
-								<div className={styles.card_container}>
-									<Card
-										key={data.title}
-										themetype="primary"
-										disabled={false}
-										className={styles.card_item}
-									>
-										<Card.Title title={(
-											<div className={styles.overview_card_title}>
-												<span>{data.icon}</span>
-												<span style={{ padding: '0 10px' }}><h3>{data.title}</h3></span>
-												<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
-													<Tooltip
+
+								// ! loading state logic
+								false ? (
+									<div className={styles.card_container}>
+										<Card
+											key={data.title}
+											themetype="primary"
+											disabled={false}
+											className={styles.card_item}
+										>
+											<Card.Title title={(
+												<div className={styles.overview_card_title}>
+
+													<Placeholder width="200px" height="24px" />
+
+												</div>
+											)}
+											/>
+											<Card.Description className={styles.overview_card_content}>
+												<div style={{
+													display       : 'flex',
+													flexDirection : 'column',
+													paddingTop    : '20px',
+												}}
+												>
+
+													<Placeholder width="60px" />
+
+													<Placeholder style={{ marginTop: '8px' }} width="60px" />
+												</div>
+												<div style={{
+													display       : 'flex',
+													flexDirection : 'column',
+													paddingTop    : '20px',
+												}}
+												>
+
+													<Placeholder width="60px" />
+													<Placeholder style={{ marginTop: '8px' }} width="60px" />
+												</div>
+											</Card.Description>
+										</Card>
+									</div>
+								) : (
+									<div className={styles.card_container}>
+										<Card
+											key={data.title}
+											themetype="primary"
+											disabled={false}
+											className={styles.card_item}
+										>
+											<Card.Title title={(
+												<div className={styles.overview_card_title}>
+													<span>{data.icon}</span>
+													<span style={{ padding: '0 10px' }}><h3>{data.title}</h3></span>
+													<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
+														<Tooltip
 														// visible={visible}
-														content={<div>hjhjjh</div>}
-														placement="right"
-														// caret
+															content={<div>hjhjjh</div>}
+															placement="right"
+														>
+															<IcMInfo
+																width={16}
+																height={16}
+															/>
+														</Tooltip>
+													</span>
+												</div>
+											)}
+											/>
+											<Card.Description className={styles.overview_card_content}>
+												<div style={{ display: 'flex', flexDirection: 'column' }}>
+													<span
+														style={{
+															fontSize: '12px',
+														}}
 													>
-														<IcMInfo
-															width={16}
-															height={16}
-														/>
-													</Tooltip>
-												</span>
-											</div>
-										)}
-										/>
-										<Card.Description className={styles.overview_card_content}>
-											<div style={{ display: 'flex', flexDirection: 'column' }}>
-												<span
-													style={{
-														fontSize: '12px',
-													}}
-												>
-													Avg Score
-												</span>
-												<span style={{ display: 'flex', fontWeight: 'bold' }}>
-													{data.avg_score}
-												</span>
-											</div>
-											<div style={{ display: 'flex', flexDirection: 'column' }}>
-												<span
-													style={{
-														fontSize: '12px',
-													}}
-												>
-													Most Points in
-												</span>
-												<span style={{ display: 'flex', fontWeight: 'bold' }}>
-													{data.points_in}
-												</span>
-											</div>
-										</Card.Description>
-									</Card>
-								</div>
+														Avg Score
+													</span>
+													<span style={{ display: 'flex', fontWeight: 'bold' }}>
+														{data.avg_score}
+													</span>
+												</div>
+												<div style={{ display: 'flex', flexDirection: 'column' }}>
+													<span
+														style={{
+															fontSize: '12px',
+														}}
+													>
+														Most Points in
+													</span>
+													<span style={{ display: 'flex', fontWeight: 'bold' }}>
+														{data.points_in}
+													</span>
+												</div>
+											</Card.Description>
+										</Card>
+									</div>
+								)
 							))
 						}
 						</div>

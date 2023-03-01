@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import { Placeholder, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
@@ -9,33 +9,15 @@ function useCreateBadgeConfiguration() {
 		authkey : 'post_allocation_kam_expertise_badge_configuration',
 	});
 
-	const onCheckPublish = async () => {
+	const onCheckPublish = async (payload_data) => {
 		try {
 			const payload = {
-				// performed_by_id                      : '123',
-				// performed_by_type                    : 'user',
-				version_id                           : '1',
-				badge_name                           : 'nauvaovkaok',
-				description                          : 'hgsdah',
-				kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9kk094820',
-				status                               : 'active',
-				badge_details                        : [
-					{
-						score     : '100',
-						image_url : 'bjb',
-						medal     : 'gold',
-					},
-					{
-						score     : '75',
-						image_url : 'bmbb',
-						medal     : 'silver',
-					},
-					{
-						score     : '50',
-						image_url : 'hghjg',
-						medal     : 'bronze',
-					},
-				],
+				version_id    : payload_data.version_id,
+				badge_name    : payload_data.badge_name,
+				description   : payload_data.description,
+				// kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9mkkwwvw930t45670',
+				status        : 'active',
+				badge_details : payload_data.badge_details,
 			};
 
 			await trigger({
