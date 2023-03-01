@@ -10,6 +10,7 @@ import {
 	Datepicker,
 	SingleDateRange,
 } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { CSSProperties, useState } from 'react';
@@ -73,7 +74,10 @@ function Element({
 				return (
 					<div className={styles.flex} style={style as CSSProperties}>
 						{rest?.options?.map((val) => (
-							<div style={{ margin: '5px' }} onClick={() => tagClick(val)}>
+							<div
+								style={{ margin: '5px' }}
+								onClick={() => tagClick(val)}
+							>
 								<div
 									className={
                     val.value === filters[name as keyof typeof filters]
@@ -252,6 +256,15 @@ function Element({
 						className={className}
 						style={style as CSSProperties}
 						value={value}
+						{...rest}
+					/>
+				);
+			case 'asyncSelect':
+				return (
+					<AsyncSelect
+						className={className}
+						value={value}
+						style={style as CSSProperties}
 						{...rest}
 					/>
 				);

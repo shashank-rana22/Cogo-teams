@@ -30,7 +30,7 @@ const VENDOR_CONFIG = {
 		},
 		{
 			label : 'Kyc Status',
-			key   : 'kycStatus',
+			key   : 'kyc_status',
 			span  : 0.7,
 			func  : 'renderKYCStatus',
 		},

@@ -52,3 +52,9 @@
 .dropdown {
 	border: 2px solid green;
 }
+.icmInfo{
+	rotate: 180deg;
+	 font-size: 12px;
+	 margin-right: 4px;
+	 padding-bottom: 4px;
+}

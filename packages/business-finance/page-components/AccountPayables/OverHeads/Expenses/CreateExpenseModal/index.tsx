@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import Timeline from '../Timeline';
 
-import RecurringForm from './RecurringForm';
+import CreateExpenseForm from './CreateExpenseForm';
 import styles from './styles.module.css';
 
 interface Props {
@@ -30,15 +30,20 @@ function CreateExpenseModal({
 		setActive(timeline[current - 1]);
 	};
 
+	const headerTitle = createExpenseType === 'recurring' ? 'Recurring' : 'Non Recurring';
+
 	return (
-		<Modal size="xl" show={showModal} onClose={() => setShowModal(false)} placement="top">
-			<Modal.Header title={`CREATE EXPENSE - ${createExpenseType}`} />
+		<Modal size="fullscreen" show={showModal} onClose={() => setShowModal(false)} placement="center">
+			<Modal.Header title={`CREATE EXPENSE - ${headerTitle}`} />
 			<Modal.Body className={styles.modalData}>
 				<div>
 					<Timeline active={active} timeline={timeline} />
 				</div>
 				<div style={{ marginTop: '20px' }}>
-					{createExpenseType === 'RECURRING' ? <RecurringForm active={active} /> : 'non recurring'}
+					<CreateExpenseForm
+						active={active}
+						createExpenseType={createExpenseType}
+					/>
 				</div>
 
 			</Modal.Body>

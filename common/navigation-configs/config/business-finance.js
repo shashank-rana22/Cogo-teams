@@ -12,6 +12,11 @@ const businessFinance = {
 		navigation : 'business_finance-reports',
 		isMainNav  : true,
 	},
+
+	'/[partner_id]/business-finance/account-payables/[active_tab]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
 };
 
 export default businessFinance;

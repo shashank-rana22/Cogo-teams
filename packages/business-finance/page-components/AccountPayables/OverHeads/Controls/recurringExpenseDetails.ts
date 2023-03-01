@@ -1,8 +1,12 @@
 interface Props {
-	repeatEvery?:string
+	filters: { repeatEvery?:string },
+	setFilters: (obj)=>void,
 }
 
-export const recurringExpenseDetails = (filters:Props, setFilters:Function) => [
+export const recurringExpenseDetails = ({
+	filters,
+	setFilters,
+}:Props) => [
 	{
 		span    : 12,
 		groupBy : [

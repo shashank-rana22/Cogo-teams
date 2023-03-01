@@ -15,7 +15,6 @@ import dummyData2 from './utils/dummyData2';
 function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
-	const [visible, setVisible] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [expenseFilters, setExpenseFilters] = useState({
 		expenseType : recurringState,
@@ -41,31 +40,6 @@ function ExpenseComponent() {
 			searchValue: e,
 		}));
 	};
-	const expenseType = () => (
-		<div>
-			<button
-				className={styles.recurringButtons}
-				onClick={() => {
-					setCreateExpenseType('RECURRING');
-					setShowModal(true);
-					setVisible(false);
-				}}
-			>
-				Recurring
-			</button>
-			<div className={styles.underline} />
-			<button
-				className={styles.recurringButtons}
-				onClick={() => {
-					setCreateExpenseType('NON RECURRING');
-					setShowModal(true);
-					setVisible(false);
-				}}
-			>
-				Non-Recurring
-			</button>
-		</div>
-	);
 
 	const renderHeaders = () => (
 		<div className={styles.headerContainer}>
@@ -90,16 +64,17 @@ function ExpenseComponent() {
 					onChange={(e) => handleChange(e)}
 					className={styles.search}
 				/>
-				<Popover visible={visible} render={expenseType()} placement="bottom">
-					<Button
-						size="lg"
-						themeType="secondary"
-						onClick={() => setVisible(!visible)}
-						style={{ border: '1px solid black', fontSize: '14px' }}
-					>
-						Create Expense
-					</Button>
-				</Popover>
+				<Button
+					size="lg"
+					themeType="secondary"
+					onClick={() => {
+						setCreateExpenseType(recurringState);
+						setShowModal(true);
+					}}
+					style={{ border: '1px solid black', fontSize: '14px' }}
+				>
+					{recurringState === 'recurring' ? 'Create Expense Record' : 'Create Expense'}
+				</Button>
 			</div>
 		</div>
 	);

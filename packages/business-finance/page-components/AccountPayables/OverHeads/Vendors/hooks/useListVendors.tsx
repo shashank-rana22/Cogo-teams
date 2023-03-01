@@ -1,7 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useListVendors = () => {
+const useListVendors = (filters) => {
+	const { page, pageLimit } = filters;
 	const [
 		{ data, loading },
 		trigger,
@@ -9,14 +10,19 @@ const useListVendors = () => {
 		{
 			url    : '/list_vendors',
 			method : 'get',
-			// authKey : 'get_list_vendors',
 		},
 		{ manual: true },
 	);
 
 	useEffect(() => {
-		trigger();
-	}, []);
+		trigger({
+			params: {
+				page_limit                 : pageLimit,
+				page,
+				verification_data_required : true,
+			},
+		});
+	}, [page]);
 
 	return {
 		listData: data,

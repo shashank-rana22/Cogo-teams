@@ -27,15 +27,15 @@ function VenderComponent() {
 		KYC_STATUS  : '',
 		CATEGORY    : '',
 		searchValue : '',
-		pageIndex   : 1,
+		page        : 1,
 		pageLimit   : 10,
 	});
 	const [sort, setSort] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [dropdownId, setDropdownId] = useState(null);
-	const { listData, loading } = useListVendors();
+	const { listData, loading } = useListVendors(filters);
 
-	console.log('listData->', listData);
+	const { list, page, total, total_count, page_limit } = listData || {};
 
 	const handleChange = (e, value) => {
 		setFilters((previousState) => ({
@@ -87,25 +87,47 @@ function VenderComponent() {
 
 	function RenderKYCStatus(item) {
 		const { item: itemData = {} } = item;
-		const { kycStatus = '' } = itemData;
+
+		const { kyc_status:kycStatus = '' } = itemData;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center' }}>
-				{ kycStatus === 'verified' ? (
+				{kycStatus === 'verified' && 	(
 					<div className={styles.verified}>
 						<div>
-							{' '}
 							<IcMFtick color="#67C676" />
-							{' '}
 						</div>
 						<div>&nbsp;Verified </div>
 					</div>
+				)}
+				{
+                kycStatus === 'rejected'
+				&& (
+					<div className={styles.pending}>
+						<div className={styles.icmInfo}>
+							<IcMInfo
+								color="#e10d1f"
+							/>
+
+						</div>
+						<div>
+							Rejected
+						</div>
+					</div>
 				)
-                	: (
-	<div className={styles.pending}>
-		<div><IcMInfo color="#e10d1f" style={{ rotate: '180deg', fontSize: '12px' }} /></div>
-		<div>&nbsp;Pending</div>
-	</div>
-					)}
+				}
+				{ kycStatus !== 'verified' && kycStatus !== 'rejected' && (
+					<div className={styles.pending}>
+						<div className={styles.icmInfo}>
+							<IcMInfo
+								color="#e10d1f"
+							/>
+
+						</div>
+						<div>
+							Pending
+						</div>
+					</div>
+				)}
 			</div>
 		);
 	}
@@ -177,20 +199,20 @@ function VenderComponent() {
 		<div>
 			{renderHeaders()}
 
-			{/* <List
+			<List
 				config={VENDOR_CONFIG}
-				itemData={dummyData}
+				itemData={listData}
 				loading={false}
 				sort={sort}
 				setSort={setSort}
 				functions={functions}
-				page={filters.pageIndex || 1}
+				page={page || 1}
 				handlePageChange={(pageValue:number) => {
-                	setFilters((p) => ({ ...p, pageIndex: pageValue }));
+					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
 				showPagination
 				renderDropdown={(id) => renderDropdown(id)}
-			/> */}
+			/>
 
 			{
                 showModal && <CreateVendorModal showModal={showModal} setShowModal={setShowModal} />

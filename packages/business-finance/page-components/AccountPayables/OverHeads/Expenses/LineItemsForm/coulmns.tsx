@@ -1,20 +1,15 @@
-import { Button } from '@cogoport/components';
 import { InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 
 const lineItemColumns = (remove, control, register) => {
 	const taxControl = [
 		{ label: 'demo', value: 'demo' },
+		{ label: 'demo', value: 'demo' },
+		{ label: 'demo', value: 'demo' },
+		{ label: 'demo', value: 'demo' },
 	];
-	const tdsControl = [
-		{ label: 'demo2', value: 'demo2' },
-	];
+
 	return [
-	// {
-	// 	Header   : 'Sr No.',
-	// 	id       : 'sr_no',
-	// 	accessor : (row, index) => index,
-	// },
 		{
 			Header   : 'Item',
 			id       : 'itemName',
@@ -30,46 +25,49 @@ const lineItemColumns = (remove, control, register) => {
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
 			accessor : (row, index) => (
-				<InputController
-					control={control}
-					name={`line_items.${index}.amount_before_tax`}
-					{...register(`line_items.${index}.amount_before_tax`)}
-				/>
+				<div style={{ width: '110px' }}>
+					<InputController
+						control={control}
+						name={`line_items.${index}.amount_before_tax`}
+						{...register(`line_items.${index}.amount_before_tax`)}
+					/>
+				</div>
 			),
 		},
 		{
 			Header   : 'Tax ',
 			id       : 'tax',
 			accessor : (row, index) => (
-				<SelectController
-					control={control}
-					options={taxControl}
-					name={`line_items.${index}.tax`}
-					{...register(`line_items.${index}.tax`)}
-				/>
+				<div style={{ width: '96px' }}>
+					<SelectController
+						control={control}
+						options={taxControl}
+						name={`line_items.${index}.tax`}
+						{...register(`line_items.${index}.tax`)}
+					/>
+				</div>
 			),
 		},
 		{
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
 			accessor : (row, index) => (
-				<InputController
-					control={control}
-					name={`line_items.${index}.amount_after_tax`}
-					{...register(`line_items.${index}.amount_after_tax`)}
-				/>
+				<div style={{ width: '110px' }}>
+					<InputController
+						control={control}
+						name={`line_items.${index}.amount_after_tax`}
+						{...register(`line_items.${index}.amount_after_tax`)}
+					/>
+				</div>
 			),
 		},
 		{
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row, index) => (
-				<SelectController
-					control={control}
-					options={tdsControl}
-					name={`line_items.${index}.tds`}
-					{...register(`line_items.${index}.tds`)}
-				/>
+				<div style={{ width: '96px' }}>
+					TDS here...
+				</div>
 			),
 		},
 		{

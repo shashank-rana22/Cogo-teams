@@ -2,23 +2,32 @@ import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Filter from '../../../../../commons/Filters';
-import { recurringUploadInvoice } from '../../../controls/recurringUploadInvoice';
+import { nonRecurringUploadInvoice } from '../../../Controls/nonRecurringUploadInvoice';
+import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
 import LineItemsForm from '../../LineItemsForm';
 
 import styles from './styles.module.css';
 
 interface FilterInterface {
-	uploadedInvoice?:{ finalUrl?:string }
+	uploadedInvoice?:string,
 	repeatEvery?:string
 }
 interface Props {
 	filters:FilterInterface,
 	setFilters:(p:object) => void,
+	createExpenseType:string
 }
 
-function UploadInvoiceForm({ filters, setFilters }:Props) {
+function UploadInvoiceForm({ filters, setFilters, createExpenseType }:Props) {
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
-	const uploadUrl = filters?.uploadedInvoice?.finalUrl;
+	const uploadUrl = filters?.uploadedInvoice;
+
+	let uploadControls;
+	if (createExpenseType === 'recurring') {
+		uploadControls = recurringUploadInvoice;
+	} else {
+		uploadControls = nonRecurringUploadInvoice;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +35,7 @@ function UploadInvoiceForm({ filters, setFilters }:Props) {
 				{!isUploadConfirm ? (
 					<>
 						<Filter
-							controls={recurringUploadInvoice()}
+							controls={uploadControls()}
 							filters={filters}
 							setFilters={setFilters}
 						/>
@@ -46,7 +55,7 @@ function UploadInvoiceForm({ filters, setFilters }:Props) {
 						<div>
 							<div style={{ margin: '64px 20px 0px 20px' }}>
 								<object
-									data={filters?.uploadedInvoice?.finalUrl}
+									data={filters?.uploadedInvoice}
 									type="application/pdf"
 									height="850px"
 									width="100%"
