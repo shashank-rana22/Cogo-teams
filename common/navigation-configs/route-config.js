@@ -4,6 +4,7 @@ import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import inventory_management from './config/inventory_management';
+import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import rolesAndPermissions from './config/roles-n-permission';
@@ -21,6 +22,7 @@ const routeConfig = {
 	...cogoOne,
 	...myProfile,
 	...inventory_management,
+	...kamMonitoring,
 };
 
 export default routeConfig;
