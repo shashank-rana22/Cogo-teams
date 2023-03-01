@@ -8,7 +8,11 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb' }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
-		'/air-coe/pending-tasks/list',
+		{
+			url     : '/air-coe/pending-tasks/list',
+			method  : 'get',
+			authKey : 'get_air_coe_pending_tasks_list',
+		},
 		{ manual: true },
 	);
 
