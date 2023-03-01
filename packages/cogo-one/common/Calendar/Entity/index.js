@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { throttle } from '@cogoport/utils';
 import { format } from '@cogoport/utils';
 import { useState, useEffect, useRef, useMemo } from 'react';
 
@@ -44,13 +45,17 @@ export function CalendarEntity({
 	function leftShift() {
 		console.log('leftShift: ');
 		leftCount += 1;
-		if (leftCount > 4) {
+		if (leftCount > 2) {
 			addPagination(leftCount);
+			setTimeout(() => {
+				middle.current.scrollIntoView({ behavior: 'smooth' });
+			}, 100);
 		}
-		// setTimeout(() => {
-		// 	middle.current.scrollIntoView({ behavior: 'smooth' });
-		// }, 100);
 	}
+
+	const request = throttle(() => {
+		leftShift();
+	}, 1000);
 
 	// useEffect(() => {
 	// 	if (scroll === 'right') {
@@ -75,7 +80,7 @@ export function CalendarEntity({
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			console.log('window defined');
-			const leftObserver = new window.IntersectionObserver(() => leftShift(), intersectionOptions);
+			const leftObserver = new window.IntersectionObserver(() => request(), intersectionOptions);
 			setTimeout(() => {
 				leftObserver.observe(leftEnd.current);
 				middle.current.scrollIntoView({ behavior: 'smooth' });
