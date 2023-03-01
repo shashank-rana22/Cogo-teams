@@ -446,6 +446,11 @@ const saas = {
 			access_type  : 'public',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_schedules: [
 		{
@@ -658,6 +663,11 @@ const saas = {
 			api          : 'list_saas_store_quota',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'delete_freight_trend_subscription',
+			access_type  : 'private',
+			service_name : 'freight_trend',
 		},
 	],
 	app_saas_cpq_products: [
@@ -1135,6 +1145,24 @@ const saas = {
 			module      : 'Quotation',
 			feature     : 'Quotation',
 		},
+		{
+			api         : 'put_saas_product_update_hscode',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
+		{
+			api         : 'put_saas_quote_update_duties',
+			access_type : 'private',
+			module      : 'Quotation',
+			feature     : 'Quotation',
+		},
 	],
 	app_saas_cogopoint: [
 		{
@@ -1384,6 +1412,26 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
 		},
+		{
+			api          : 'subscription_activate_now',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'update_saas_checkout',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_insurance: [
 		{
@@ -1421,7 +1469,7 @@ const saas = {
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_check_sanctioned',
+			api         : 'post_saas_insurance_checkout',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
@@ -1463,20 +1511,38 @@ const saas = {
 			feature     : 'insurance',
 		},
 		{
+			api         : 'get_saas_insurance_draft_details',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
 			api         : 'get_saas_insurance_list_countries',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_saas_insurance_list_commodities',
+			api          : 'list_locations',
+			access_type  : 'public',
+			service_name : 'location',
+		},
+		{
+			api         : 'get_saas_insurance_terms',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
 		},
 		{
-			api         : 'get_location_from_postal_code',
+			api         : 'get_saas_insurance_cancel',
 			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	app_saas_trade_partner: [
@@ -1519,6 +1585,12 @@ const saas = {
 		{
 			api         : 'put_saas_organization_archive',
 			access_type : 'private',
+			module      : 'trade-partner',
+			feature     : 'trade-partner',
+		},
+		{
+			api         : 'get_saas_organization_export',
+			access_type : 'public',
 			module      : 'trade-partner',
 			feature     : 'trade-partner',
 		},
@@ -1622,6 +1694,36 @@ const saas = {
 		},
 		{
 			api         : 'put_saas_product',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'post_saas_product_bulk_product_upload',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_product_export',
+			access_type : 'public',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_error_export',
+			access_type : 'public',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'post_saas_product_bulk_products_upload',
+			access_type : 'private',
+			module      : 'product',
+			feature     : 'product',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
 			access_type : 'private',
 			module      : 'product',
 			feature     : 'product',
@@ -1760,6 +1862,18 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
 	],
 	app_saas_trader_eligibilty_check: [
 		{
@@ -1807,6 +1921,13 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+
 	],
 	app_saas_order_history: [
 		{
