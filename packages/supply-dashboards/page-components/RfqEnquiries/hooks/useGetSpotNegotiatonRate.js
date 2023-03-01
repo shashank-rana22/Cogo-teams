@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 const allFieldsPresent = (value, controls) => {
 	const msg = [];
 	controls.forEach((item) => {
-		if(item.name === 'service_provider_id'){
-		}
 		if (
 			item.requirement
 			&& isEmpty(value?.[item.name])
@@ -48,7 +46,6 @@ const useGetSpotNegotiationRate = ({ values, controls, service }) => {
 			});
 			return handleData;
 		} catch (err) {
-			console.log(err);
 			return null;
 		}
 	};
