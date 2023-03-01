@@ -1,7 +1,9 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../../common/EmptyState';
 import useBadgeConfigurationList from '../../hooks/useBadgeConfigurationList';
 
 import BadgeListItem from './BadgeListItem';
@@ -13,6 +15,8 @@ import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
+	const emptyList = [];
+
 	const router = useRouter();
 	const { fetchBadgeList } = useBadgeConfigurationList();
 
@@ -55,26 +59,44 @@ function Badges() {
 			</section>
 
 			{
-				(window === 1)
-			&& badgeList.map(((data, index) => (
+				// Todo: add isEmpty and !loading condition for emptyState
+				!isEmpty(emptyList) ? (
+					<div style={{
+						padding         : '60px 0',
+						height          : '400px',
+						backgroundColor : 'white',
+						margin          : '20px 0',
+					}}
+					>
+						<EmptyState height={400} width={600} flexDirection="column" />
+					</div>
+				)
+
+					: 	(
+						<div>
+							{
+								(window === 1)
+			&&	badgeList?.map(((data, index) => (
 				<BadgeListItem data={data} index={index} />
 			)))
+							}
+							{
+			(window === 2) && (
+				<div>
+					<CreateMastery setWindow={setWindow} />
+				</div>
+			)
 			}
+							{
+			(window === 3) && (
+				<div>
+					<CreateBadge setWindow={setWindow} />
+				</div>
+			)
+}
+						</div>
+					)
 
-			{
-				(window === 2) && (
-					<div>
-						<CreateMastery setWindow={setWindow} />
-					</div>
-				)
-			}
-
-			{
-				(window === 3) && (
-					<div>
-						<CreateBadge setWindow={setWindow} />
-					</div>
-				)
 			}
 
 		</section>

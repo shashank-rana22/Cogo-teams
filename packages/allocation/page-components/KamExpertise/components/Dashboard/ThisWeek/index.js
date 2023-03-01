@@ -5,6 +5,7 @@ import {
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import EmptyState from '../../../../../common/EmptyState';
 import BadgeFilter from '../BadgeFilter';
 
 import CardContent from './Card';
@@ -260,9 +261,28 @@ function ThisWeek() {
 								<BadgeFilter />
 							</div>
 						</div>
-						<div className={styles.list}>
-							<LeaderboardList />
-						</div>
+						{
+
+							// Todo: add isEmpty and !loading condition for emptyState
+									true ? (
+										<div style={{
+											padding         : '60px 0',
+											height          : '400px',
+											backgroundColor : 'white',
+											margin          : '20px 0',
+											// display : 'flex',
+										}}
+										>
+											<EmptyState height={400} width={600} flexDirection="column" />
+										</div>
+									)
+										: (
+											<div className={styles.list}>
+												<LeaderboardList />
+											</div>
+										)
+						}
+
 					</div>
 				</>
 			)}

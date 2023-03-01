@@ -1,4 +1,3 @@
-import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
