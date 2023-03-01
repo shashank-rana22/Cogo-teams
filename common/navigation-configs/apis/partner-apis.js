@@ -357,6 +357,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'list_organization_billing_addresses',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1677,6 +1682,11 @@ const partner = {
 			service_name : 'user',
 		},
 		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api          : 'create_event',
 			access_type  : 'private',
 			service_name : 'event',
@@ -2401,6 +2411,11 @@ const partner = {
 			api          : 'create_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 		{
 			api          : 'list_channel_partner_stakeholders',
@@ -6029,6 +6044,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -6419,6 +6439,10 @@ const partner = {
 			api          : 'list_organization_users',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api         : 'get_purchase_treasury_live_status',
+			access_type : 'private',
 		},
 	],
 	business_finance_income: [
@@ -7101,6 +7125,11 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
 			api         : 'get_purchase_payable_bill_overseas_details',
 			access_type : 'private',
 			module      : 'Overseas',
@@ -7143,7 +7172,7 @@ const partner = {
 			feature     : 'Overseas',
 		},
 		{
-			api         : 'post_purchase_payrun_merged_pdf',
+			api         : 'post_purchase_payrun_merged_pdf_by_id',
 			access_type : 'private',
 			module      : 'Overseas',
 			feature     : 'Overseas',
@@ -7381,6 +7410,20 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
+	translate: [
+		{
+			api         : 'get_translation_translate_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_translation_translate',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_translation_translate',
 			access_type : 'private',
 		},
 	],
@@ -8325,6 +8368,11 @@ const partner = {
 		},
 		{
 			api          : 'get_segment_tags',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
@@ -9695,6 +9743,11 @@ const partner = {
 			api          : 'create_organization_communication_log',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_servetel_communication_log',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 	],
 	supply_tools: [

@@ -841,6 +841,16 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
+	translate: {
+		key           : 'translate',
+		title         : 'Translation',
+		href          : '/v2/translate/[activeTab]',
+		as            : '/v2/translate/Requested',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.translate,
+		module_type   : 'dashboards',
+	},
 	finance: {
 		key           : 'finance',
 		title         : 'Finance',
@@ -1739,6 +1749,14 @@ const navigationMappingAdmin = {
 				possible_apis : apis.allocation_engine,
 			},
 		],
+	},
+	kam_monitoring: {
+		key         : 'kam_monitoring',
+		title       : 'KAM Monitoring',
+		module_type : 'dashboards',
+		href        : '/kam-monitoring',
+		as          : '/kam-monitoring',
+		main_apis   : [],
 	},
 	awb_inventory: {
 		key           : 'awb_inventory',
