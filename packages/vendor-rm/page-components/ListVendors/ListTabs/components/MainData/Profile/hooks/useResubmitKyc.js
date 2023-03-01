@@ -18,15 +18,14 @@ const useResubmitKyc = ({
 	const controls = getControls({});
 
 	const {
-		control: Control,
-		formState: { errors: Errors },
+		control: control_kyc,
+		formState: { errors: errors_kyc },
 		handleSubmit: handleSubmitKyc,
 		getValues,
-		setValue,
 	} = useForm();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_vendor',
+		url    : 'resubmit_vendor_kyc',
 		method : 'post',
 	}, { manual: true });
 
@@ -53,14 +52,16 @@ const useResubmitKyc = ({
 			value : 'business_name',
 		},
 		{
-			key   : 'invalid_company_type',
+			key   : 'invalid_type_of_company',
 			value : 'company_type',
 		},
 	];
 
 	const newControls = (kyc_rejection_feedbacks || []).map((item) => {
 		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item);
-		const { value } = object;
+
+		const { value } = object || {};
+
 		const newcontrol = controls.find((getItem) => getItem.name === value);
 
 		if (object.value === 'country_id') {
@@ -92,8 +93,6 @@ const useResubmitKyc = ({
 			newControls.push(paymentControl);
 		}
 	});
-
-	const document_ids = rejected_documents.map((item) => item.id);
 
 	const getDocments = ({ rejected_documents: RejectedDocuments, values }) => {
 		const Documents = RejectedDocuments.map((item) => {
@@ -127,21 +126,23 @@ const useResubmitKyc = ({
 			await trigger({
 				data: payload,
 			});
+
 			setshowKycModal(false);
+
 			refetchVendorInfo();
-			Toast.success('Updated successfully');
+
+			Toast.success('KYC re-submitted successfully!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
 	};
 
-	const Data = {};
-
 	return {
 		newControls,
-		Control,
+		control_kyc,
+		loading,
 		handleSubmitKyc,
-		Errors,
+		errors_kyc,
 		ResubmitKYC,
 	};
 };

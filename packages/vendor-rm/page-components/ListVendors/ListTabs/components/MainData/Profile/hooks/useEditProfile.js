@@ -88,7 +88,7 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 		handleSubmit,
 		onSubmit,
 		errors,
-		loading,
+		editProfileLoading: loading,
 	};
 }
 
