@@ -19,9 +19,7 @@ function Badges() {
 	const [badgeList, setBadgeList] = useState(true);
 	// const [badgeList, setBadgeList] = useState(false);
 
-	// const [createBadge, setCreateBadge] = useState(true);
-	const [createBadge, setCreateBadge] = useState(false);
-	const [createMastery, setCreateMastery] = useState(false);
+	const [window, setWindow] = useState(1);
 
 	return (
 		<section className={styles.main_container}>
@@ -41,20 +39,15 @@ function Badges() {
 				</div>
 
 				<div>
-					<Header badgeList={badgeList} setCreateBadge={setCreateBadge} setCreateMastery={setCreateMastery} />
+					<Header
+						badgeList={badgeList}
+						setWindow={setWindow}
+					/>
 				</div>
 			</section>
 
 			{
-				createBadge && (
-					<div>
-						<CreateBadge setCreateBadge={setCreateBadge} />
-					</div>
-				)
-			}
-
-			{
-				badgeList && (!createBadge)
+				(window === 1)
 			&& (
 				<section>
 					<MasteryListItem />
@@ -65,9 +58,17 @@ function Badges() {
 			}
 
 			{
-				createMastery && (
+				(window === 2) && (
 					<div>
-						<CreateMastery setCreateMastery={setCreateMastery} />
+						<CreateMastery setWindow={setWindow} />
+					</div>
+				)
+			}
+
+			{
+				(window === 3) && (
+					<div>
+						<CreateBadge setWindow={setWindow} />
 					</div>
 				)
 			}

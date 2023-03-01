@@ -1,20 +1,20 @@
-import { Toast, Button, Modal } from '@cogoport/components';
+import { Toast, Button } from '@cogoport/components';
 import { useState } from 'react';
 
-import useBadgeConfiguration from '../../../hooks/useBadgeConfiguration';
+import useCreateBadgeConfiguration from '../../../hooks/useCreateBadgeConfiguration';
 
 import GetCard from './getCard';
 import GetLabelInputPair from './getLabelInputPair';
 import Header from './header';
 import styles from './styles.module.css';
 
-function CreateBadge({ setCreateBadge }) {
+function CreateBadge({ setWindow }) {
 	const [value, setValue] = useState([]);
 	const [badgeInput, setBadgeInput] = useState(false);
 
 	const {
 		onCheckPublish, loading,
-	} = useBadgeConfiguration();
+	} = useCreateBadgeConfiguration();
 
 	const params = {
 		name: {
@@ -83,9 +83,38 @@ function CreateBadge({ setCreateBadge }) {
 		},
 	];
 	const onClose = () => {
-		setCreateBadge((pv) => !pv);
+		setWindow(1);
 	};
+
+	const payload_data = {
+		performed_by_id                      : '123',
+		performed_by_type                    : 'user',
+		version_id                           : '1',
+		badge_name                           : 'Expert',
+		description                          : 'hgsdah',
+		kam_expertise_event_configuration_id : '00245b2c-m9k8-479e-8dcf-bhnc9kk094820',
+		status                               : 'active',
+		badge_details                        : [
+			{
+				score     : '100',
+				image_url : 'bjb',
+				medal     : 'gold',
+			},
+			{
+				score     : '75',
+				image_url : 'bmbb',
+				medal     : 'silver',
+			},
+			{
+				score     : '50',
+				image_url : 'hghjg',
+				medal     : 'bronze',
+			},
+		],
+	};
+
 	const handelNext = () => {
+		// onCheckPublish({ payload_data });
 		onCheckPublish();
 		setBadgeInput(true);
 	};
