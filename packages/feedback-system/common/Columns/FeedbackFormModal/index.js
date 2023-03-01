@@ -74,39 +74,62 @@ function FeedbackFormModal({
 	// 	);
 	// }
 
+	function ButtonComponent() {
+		if (action === 'show') {
+			return (
+				<Button
+					size="md"
+					themeType="link"
+					onClick={() => setShowModal(true)}
+				>
+					View Form
+				</Button>
+			);
+		}
+		// if (isEmpty(feedback_id)) {
+		return (
+			<Popover
+				visible={showTypePopover}
+				placement="left"
+				render={content}
+				onClickOutside={() => setShowTypePopover(false)}
+				interactive
+			>
+				<Button
+					size="sm"
+					themeType="primary"
+					disabled={!isEmpty(feedback_id)}
+					onClick={() => 	setShowTypePopover(!showTypePopover)}
+				>
+
+					<>
+						<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
+						ADD
+					</>
+				</Button>
+			</Popover>
+		);
+		// }
+
+		// return (
+		// 	<Button
+		// 		size="sm"
+		// 		themeType="primary"
+		// 				// disabled={!isEmpty(feedback_id)}
+		// 		onClick={() => 	setShowTypePopover(!showTypePopover)}
+		// 	>
+		// 		<>
+		// 			<IcMEdit style={{ marginRight: '4px' }} width={16} height={16} />
+		// 			EDIT
+		// 		</>
+		// 	</Button>
+		// );
+	}
+
 	return (
 		<div className={styles.feedback_button}>
 			<div className={styles.add_button}>
-				{action === 'show' ? (
-					<Button
-						size="md"
-						themeType="link"
-						onClick={() => setShowModal(true)}
-					>
-						View Form
-					</Button>
-				) : (
-					<Popover
-						visible={showTypePopover}
-						placement="left"
-						render={content}
-						onClickOutside={() => setShowTypePopover(false)}
-						interactive
-					>
-						<Button
-							size="sm"
-							themeType="primary"
-							disabled={!isEmpty(feedback_id)}
-							onClick={() => 	setShowTypePopover(!showTypePopover)}
-						>
-							<>
-								<IcMPlusInCircle style={{ marginRight: '4px' }} width={16} height={16} />
-								ADD
-							</>
-						</Button>
-					</Popover>
-				)}
-
+				<ButtonComponent />
 			</div>
 
 			{showModal && (
