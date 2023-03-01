@@ -4,7 +4,6 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { configurationData } from '../../../../configurations/configurationData';
 // eslint-disable-next-line import/named
 // import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
 import { emptyPerformance, agentAvatar } from '../../constants';
@@ -12,12 +11,12 @@ import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';
 
-function PerformanceTab({ loading = false }) {
-	const { agents_performance: configAgentPerformance } = configurationData;
-	// const { best_performance = [], worst_performance = [] } = agentsPerformance;
+function PerformanceTab({ loading = false, agentsPerformance = {} }) {
+	// const { agents_performance: configAgentPerformance } = configurationData;
+	const { best_performance = [], worst_performance = [] } = agentsPerformance;
 
 	const [activeTab, setActiveTab] = useState('best_performance');
-	// const data = activeTab === 'best_performance' ? best_performance : worst_performance;
+	const data = activeTab === 'best_performance' ? best_performance : worst_performance;
 
 	const performanceBtnMapping = [
 		{
@@ -60,21 +59,21 @@ function PerformanceTab({ loading = false }) {
 
 			<div className={styles.performance_tab_container}>
 				{loading && <LoaderPerformance />}
-				{(isEmpty(configAgentPerformance)) && !loading
-					? <img src={emptyPerformance} alt="" width="300px" height="250px" />
+				{(isEmpty(agentsPerformance?.[activeTab])) && !loading
+					? <img src={emptyPerformance} alt="" width="300px" height="180px" />
 					: (
 						<div className={styles.performance_tab_lists}>
-							{Object.keys(configAgentPerformance || {}).map((item) => {
-                	            const { name } = item;
+							{(data || []).map((item) => {
+                	            const { agent_name = '', agents_performance = 0 } = item;
 								return (
 									<div className={styles.performance_list}>
 										<div className={styles.picture_name_kam_box}>
 											<div className={styles.picture}><img src={agentAvatar} alt="AA" /></div>
-											<div className={styles.name}>{name}</div>
-											<div className={styles.kam}>kam</div>
+											<div className={styles.name}>{agent_name}</div>
+											<div className={styles.job_role}>kam</div>
 										</div>
 										<div className={styles.notification_nos}>
-											{' '}
+											{agents_performance}
 										</div>
 									</div>
 								);

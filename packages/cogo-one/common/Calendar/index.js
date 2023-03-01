@@ -90,8 +90,8 @@ function Calendar({ props }) {
 		newData.reverse().forEach((item, iterator) => {
 			data.push({
 				key      : `cal-${timeline}-${pagination}-${iterator}`,
-				label    : format(item, FORMAT_TYPE[timeline].label),
-				subLabel : format(item, FORMAT_TYPE[timeline].subLabel),
+				label    : format(item, FORMAT_TYPE[timeline]?.label),
+				subLabel : format(item, FORMAT_TYPE[timeline]?.subLabel),
 				date     : new Date(item),
 			});
 		});
