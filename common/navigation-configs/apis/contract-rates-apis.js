@@ -624,6 +624,90 @@ const apis = [
 		feature      : 'search',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'create_contract_rail_domestic_freight_service',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_rail_domestic_freight_services',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_rail_domestic_location_detail',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_rail_domestic_location_detail',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_rail_domestic_location_details',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_rail_domestic_freight_service_rate_detail',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_rail_domestic_freight_service_rate_detail',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_rail_domestic_freight_service_rate_details',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_rail_domestic_rail_freight_rate',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_rail_domestic_rail_freight_rate',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_rail_domestic_rail_freight_rates',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_rail_domestic_rail_freight_service_day_rate',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_rail_domestic_rail_freight_service_day_rate',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'list_contract_rail_domestic_rail_freight_service_day_rates',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;
