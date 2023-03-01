@@ -3,7 +3,7 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import FeedBackForm from './FeedbackForm';
+import FeedbackForm from './FeedbackForm';
 import styles from './styles.module.css';
 
 // const getSaturday = (date) => {
@@ -129,7 +129,7 @@ function FeedbackFormModal({
 					/>
 
 					<Modal.Body style={{ padding: '0px', maxHeight: '60vh' }}>
-						<FeedBackForm
+						<FeedbackForm
 							action={action}
 							userId={userId}
 							item={item}

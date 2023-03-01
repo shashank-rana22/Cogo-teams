@@ -18,7 +18,7 @@ import EmptyState from '../../../EmptyState';
 
 import styles from './styles.module.css';
 
-function FeedBackForm({
+function FeedbackForm({
 	action = '',
 	item = {},
 	showForm = false,
@@ -298,4 +298,4 @@ function FeedBackForm({
 	);
 }
 
-export default FeedBackForm;
+export default FeedbackForm;
