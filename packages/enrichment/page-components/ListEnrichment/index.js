@@ -31,7 +31,6 @@ function ListEnrichment() {
 	return (
 
 		<section>
-
 			<div className={styles.title}>Enrichment Data</div>
 
 			<div>
@@ -41,7 +40,6 @@ function ListEnrichment() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="enrichment_requests" title="Enrichment Requests">
-
 						<Enrichment
 							list={list}
 							loading={loading}
@@ -60,18 +58,14 @@ function ListEnrichment() {
 					</TabPanel>
 
 					<TabPanel name="requests_sent" title="Requests Sent">
-
 						<div className={styles.secondary_tabs}>
 							<Tabs
 								activeTab={secondaryTab}
 								themeType="secondary"
 								onChange={setSecondaryTab}
 							>
-
 								{Object.values(tabPanelMapping).map((item) => (
-
 									<TabPanel name={item.name} title={item.title}>
-
 										<Enrichment
 											list={list}
 											loading={loading}
@@ -86,16 +80,11 @@ function ListEnrichment() {
 											searchValue={searchValue}
 											setSearchValue={setSearchValue}
 										/>
-
 									</TabPanel>
 								))}
-
 							</Tabs>
-
 						</div>
-
 					</TabPanel>
-
 				</Tabs>
 			</div>
 

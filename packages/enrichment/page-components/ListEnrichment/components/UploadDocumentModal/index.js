@@ -4,8 +4,8 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { getFieldController } from '../../../../common/Form/getFieldController';
-import { uploadDocControls } from '../../../../configurations/get-upload-controls';
+// import { getFieldController } from '../../../../common/Form/getFieldController';
+// import { uploadDocControls } from '../../../../configurations/get-upload-controls';
 import useUpdateStatus from '../../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';
@@ -19,7 +19,7 @@ function UploadDocumentModal(props) {
 
 	const formProps = useForm();
 
-	const { control, handleSubmit } = formProps;
+	const { handleSubmit } = formProps;
 
 	const [uploadProof, setUploadProof] = useState();
 
@@ -36,41 +36,14 @@ function UploadDocumentModal(props) {
 			<Modal.Header title="Upload POC Details" />
 
 			<form onSubmit={handleSubmit(handleManualUpload)}>
-
 				<Modal.Body>
-					<div>
-						{uploadDocControls.map((controlItem) => {
-							const el = { ...controlItem };
-
-							const Element = getFieldController(el.type);
-
-							if (!Element) return null;
-							return (
-
-								<div style={el.style} className={styles.control_container}>
-
-									<span className={styles.control_label}>{el.label}</span>
-
-									<Element
-										{...el}
-										size="md"
-										key={el.name}
-										control={control}
-										id={`${el.name}_input`}
-									/>
-
-								</div>
-							);
-						})}
-					</div>
-
 					<div>
 						<FileUploader
 							value={uploadProof}
 							onChange={setUploadProof}
 							showProgress
 							draggable
-							multipleUploadDesc="Upload Document"
+							uploadDesc="Upload Document"
 							uploadIcon={<IcMUpload height={40} width={40} />}
 							accept=".csv"
 						/>
@@ -81,9 +54,9 @@ function UploadDocumentModal(props) {
 					<Button
 						size="md"
 						className={styles.cancel_cta}
-						themeType="secondary"
+						themeType="tertiary"
 						type="button"
-						loading={loading}
+						disabled={loading}
 						onClick={() => {
 							setSelectedItem(null);
 							setUploadProof(null);
