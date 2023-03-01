@@ -21,6 +21,7 @@ function ListEnrichment() {
 		searchValue,
 		setSearchValue,
 		setApiName,
+		setParams,
 	} = useListEnrichment();
 
 	return (
@@ -68,6 +69,7 @@ function ListEnrichment() {
 							searchValue={searchValue}
 							setSearchValue={setSearchValue}
 							setApiName={setApiName}
+							setParams={setParams}
 						/>
 
 					</TabPanel>

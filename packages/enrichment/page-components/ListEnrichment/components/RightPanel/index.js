@@ -20,6 +20,7 @@ function RightPanel(props) {
 		searchValue,
 		setSearchValue,
 		setApiName,
+		setParams = () => {},
 	} = props;
 
 	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
@@ -32,7 +33,20 @@ function RightPanel(props) {
 	}
 
 	useEffect(() => {
-		setApiName('feedback_response_sheets');
+		if (secondaryTab === 'uploaded_files') {
+			setApiName('feedback_response_sheets');
+		}
+
+		setParams((prev) => ({
+			...prev,
+			filters: {
+				...(secondaryTab === 'submitted_requests' && {
+					status: 'responded',
+
+				}),
+
+			},
+		}));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [secondaryTab]);
 

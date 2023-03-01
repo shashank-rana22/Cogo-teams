@@ -12,7 +12,8 @@ import styles from '../styles.module.css';
 const useListEnrichment = () => {
 	const { profile, general } = useSelector((state) => state || {});
 
-	const { partner_id, user_id } = profile;
+	const partner_id = profile?.partner?.id;
+	const user_id = profile?.user?.id;
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -30,8 +31,8 @@ const useListEnrichment = () => {
 		sort_type  : 'desc',
 		page_limit : 10,
 		page       : 1,
-		user_id,
 		partner_id,
+		user_id,
 		filters    : {
 			q: searchQuery || undefined,
 		},
@@ -70,31 +71,22 @@ const useListEnrichment = () => {
 		}));
 	}, [searchQuery]);
 
-	// useEffect(() => {
-	// setParams((prev) => ({
-	// 	...prev,
-	// 	filters: {
-	// 		...(activeTab === 'requests_sent' && {
-	// 			status: 'responded',
+	useEffect(() => {
+		if (activeTab === 'enrichment_requests') {
+			setApiName('feedback_requests');
+		}
 
-	// 		}),
+		setParams((prev) => ({
+			...prev,
+			filters: {
+				...(activeTab === 'requests_sent' && {
+					status: 'responded',
 
-	// 	},
-	// }));
-	// }, [activeTab]);
+				}),
 
-	// useEffect(() => {
-	// 	setParams((prev) => ({
-	// 		...prev,
-	// 		filters: {
-	// 			...(apiName === 'requests_sent' && {
-	// 				status: 'responded',
-
-	// 			}),
-
-	// 		},
-	// 	}));
-	// }, [apiName]);
+			},
+		}));
+	}, [activeTab]);
 
 	const router = useRouter();
 
@@ -251,6 +243,17 @@ const useListEnrichment = () => {
 				</section>
 			),
 
+		},
+
+		{
+			id       : 'status',
+			Header   : 'STATUS',
+			accessor : ({ status }) => (
+
+				<seaction>
+					{startCase(status) || '-'}
+				</seaction>
+			),
 		},
 	];
 
