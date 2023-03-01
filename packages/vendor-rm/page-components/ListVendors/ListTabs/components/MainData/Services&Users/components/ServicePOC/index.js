@@ -71,18 +71,25 @@ function ServicePOC({
 					<div className={styles.content}>
 						{(singleServicePoc?.poc_details || []).map((poc) => (
 							<>
-								{(Object.entries(poc) || []).map((item) => (
-									<div className={styles.label_value_container}>
-										<div className={styles.top}>
-											{pocsMapping[item[0]]}
-										</div>
+								{
+									(Object.entries(poc) || []).map((item) => {
+										if (item[0] === 'id') {
+											return null;
+										}
+										return (
+											<div className={styles.label_value_container}>
+												<div className={styles.top}>
+													{pocsMapping[item[0]]}
+												</div>
 
-										<div className={styles.bottom}>
-											{item?.[0] === 'poc_role'
-												? getPocRole(item?.[1]) : item?.[1]}
-										</div>
-									</div>
-								))}
+												<div className={styles.bottom}>
+													{item?.[0] === 'poc_role'
+														? getPocRole(item?.[1]) : item?.[1]}
+												</div>
+											</div>
+										);
+									})
+								}
 							</>
 						)) }
 						<div

@@ -10,6 +10,7 @@ function FormLayout({
 	watch,
 	setValue,
 	source,
+	customStyle,
 }) {
 	const setSubCategoryValue = () => {
 		if (!source) {
@@ -21,7 +22,7 @@ function FormLayout({
 	};
 
 	return (
-		<div className={styles.form_container}>
+		<div className={styles.form_container} style={customStyle?.formContainer || {}}>
 			{fields.map((controlItem) => {
 				const element = { ...controlItem };
 
@@ -30,7 +31,7 @@ function FormLayout({
 				if (!Element) return null;
 
 				return (
-					<div className={styles.form_group} style={element?.style}>
+					<div className={styles.form_group} style={customStyle || element?.style}>
 						<div className={styles.form_label}>{element.label}</div>
 						<div>
 							<Element

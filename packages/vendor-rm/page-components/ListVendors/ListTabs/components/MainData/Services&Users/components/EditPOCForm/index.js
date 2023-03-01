@@ -9,6 +9,7 @@ import useAddServicePoc from './hooks/useUpdateServicePoc';
 function EditPOCForm({
 	showForm,
 	setShowForm,
+	getVendorData,
 	refetchServicesPocs,
 	refetchVendorInfo,
 }) {
@@ -22,6 +23,7 @@ function EditPOCForm({
 	} = useAddServicePoc({
 		showForm,
 		setShowForm,
+		getVendorData,
 		refetchServicesPocs,
 		refetchVendorInfo,
 	});

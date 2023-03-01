@@ -6,9 +6,9 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 
-import contactControls from '../../../../../../OnBoardVendor/ContactDetails/utils/controls';
-import paymentControls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
 import { getControls } from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
+import DOCUMENT_TYPE_CONTROL_MAPPING from '../utils/documentTypeControlMapping';
+import VENDOR_FIELDS_MAPPING from '../utils/vendorFieldMapping';
 
 const useResubmitKyc = ({
 	data = {},
@@ -18,15 +18,15 @@ const useResubmitKyc = ({
 	const controls = getControls({});
 
 	const {
-		control: Control,
+		control: kyc_control,
 		formState: { errors: Errors },
 		handleSubmit: handleSubmitKyc,
 		getValues,
-		setValue,
+		// setValue,
 	} = useForm();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : 'update_vendor',
+	const [{ loading: resubmitKycLoading }, trigger] = useRequest({
+		url    : 'resubmit_vendor_kyc',
 		method : 'post',
 	}, { manual: true });
 
@@ -38,29 +38,10 @@ const useResubmitKyc = ({
 
 	const { kyc_rejection_feedbacks = [] } = vendor_details;
 
-	const VENDOR_FIELDS_MAPPING = [
-		{
-			key   : 'invalid_country',
-			value : 'country_id',
-		},
-		{
-			key   : 'invalid_pan_or_gst',
-			value : 'registration_number',
-		},
-		{
-			key   : 'invalid_business_name',
-			value : 'business_name',
-		},
-		{
-			key   : 'invalid_company_type',
-			value : 'company_type',
-		},
-	];
-
 	const newControls = (kyc_rejection_feedbacks || []).map((item) => {
-		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item);
-		const { value } = object;
-		const newcontrol = controls.find((getItem) => getItem.name === value);
+		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item) || {};
+		const { value = '' } = object;
+		const newcontrol = controls.find((getItem) => getItem.name === value) || {};
 
 		if (object.value === 'country_id') {
 			return { ...newcontrol, ...countryOptions };
@@ -70,55 +51,44 @@ const useResubmitKyc = ({
 	});
 
 	const rejected_documents = documents.filter((item) => {
-		if (item.verification_status === 'rejected') {
-			return item;
+		if (item.verification_status !== 'rejected') {
+			return null;
 		}
-		return null;
+		return item;
 	});
 
-	const registrationControl = controls.find((item) => item.name === 'registration_proof_url');
-
-	const contactControl = contactControls.find((item) => item.name === 'contact_proof_url');
-
-	const paymentControl = paymentControls.find((item) => item.name === 'bank_document_url');
-
-	rejected_documents.forEach((item) => {
-		if (item.document_type === 'registration_proof') {
-			newControls.push(registrationControl);
-		} else if (item.document_type === 'poc_proof') {
-			newControls.push(contactControl);
-		} else {
-			newControls.push(paymentControl);
-		}
+	(rejected_documents || []).forEach((item) => {
+		newControls.push(DOCUMENT_TYPE_CONTROL_MAPPING[item?.document_type]?.control);
 	});
 
-	const document_ids = rejected_documents.map((item) => item.id);
+	const getDocuments = ({ rejected_documents: rejectedDocuments, values }) => {
+		const documentsList = (rejectedDocuments || []).map((item) => ({
+			id  : item.id,
+			url : values[DOCUMENT_TYPE_CONTROL_MAPPING[item.document_type]?.name]?.finalUrl,
+		}));
 
-	const getDocments = ({ rejected_documents: RejectedDocuments, values }) => {
-		const Documents = RejectedDocuments.map((item) => {
-			if (item.document_type === 'registration_proof') {
-				return { id: item.id, url: values.registration_proof_url?.finalUrl };
-			}
-			if (item.document_type === 'poc_proof') {
-				return { id: item.id, url: values.contact_proof_url?.finalUrl };
-			}
-			return { id: item.id, url: values.bank_document_url?.finalUrl };
-		});
-
-		return Documents;
+		return { documentsList };
 	};
 
 	const ResubmitKYC = async () => {
 		const values = getValues();
 
-		const filtered_documents = getDocments({ rejected_documents, values });
+		const { documentsList } = getDocuments({ rejected_documents, values });
+
+		const {
+			business_name = '',
+			country_id = '',
+			company_type = '',
+			registration_number,
+		} = values || {};
+
 		const payload = {
-			id                  : vendor_details?.id,
-			documents           : filtered_documents,
-			business_name       : values.business_name || undefined,
-			country_id          : values.country_id || undefined,
-			company_type        : values.company_type || undefined,
-			registration_number : values.registration_number?.registrationNumber || undefined,
+			vendor_id           : vendor_details?.id,
+			documents           : documentsList,
+			business_name       : business_name || undefined,
+			country_id          : country_id || undefined,
+			company_type        : company_type || undefined,
+			registration_number : registration_number?.registrationNumber || undefined,
 			kyc_status          : 'pending_verification',
 		};
 
@@ -134,14 +104,13 @@ const useResubmitKyc = ({
 		}
 	};
 
-	const Data = {};
-
 	return {
 		newControls,
-		Control,
+		kyc_control,
 		handleSubmitKyc,
 		Errors,
 		ResubmitKYC,
+		resubmitKycLoading,
 	};
 };
 
