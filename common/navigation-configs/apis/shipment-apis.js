@@ -1263,6 +1263,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_container_sea_route',
+		access_type  : 'public',
+		service_name : 'saas_traceability',
+	},
+	{
 		api          : 'get_rail_shipment_container_detail',
 		access_type  : 'private',
 		service_name : 'shipment',
