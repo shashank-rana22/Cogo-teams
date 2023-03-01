@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 // import TABS_MAPPING from '../../../../constants/tabs';
 import COMPONENT_MAPPING from '../../../../utils/component-mapping';
-import { controls } from '../utils/controls';
+import controls from '../utils/controls';
 
 function useVendorBankDetail({
 	setActiveStepper = () => {},
