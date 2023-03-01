@@ -6,7 +6,11 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Verified({ vendor_details = {} }) {
-	const { kyc_rejection_reason, kyc_status } = vendor_details || {};
+	const {
+		kyc_rejection_reason,
+		kyc_status,
+		kyc_rejection_feedbacks = [],
+	} = vendor_details || {};
 
 	if (kyc_status === 'verified') {
 		return (
@@ -42,6 +46,7 @@ function Verified({ vendor_details = {} }) {
 					background    : '#fdcfcf',
 					border        : '1px solid #ED3726',
 					flexDirection : 'column',
+					color         : '#ED3726',
 				}}
 			>
 				<div className={styles.kyc_status_icon}>
@@ -63,7 +68,23 @@ function Verified({ vendor_details = {} }) {
 				>
 					Rejection reason -
 					{' '}
-					{kyc_rejection_reason}
+					<b>{kyc_rejection_reason}</b>
+				</div>
+				<div>
+					Feedbacks -
+					{'  '}
+					{
+						(kyc_rejection_feedbacks || []).map((reason, index) => (
+							<span>
+								<b>
+									{' '}
+									{startCase(reason)}
+								</b>
+								{index !== kyc_rejection_feedbacks.length - 1 ? ',' : null}
+								{'  '}
+							</span>
+						))
+					}
 				</div>
 			</div>
 		);
