@@ -50,7 +50,7 @@ import {
 	IcMDunning,
 	IcMDashboard,
 	IcMCreditRequest,
-	IcCCogoassured, IcMOverview,
+	IcCCogoassured, IcMOverview, IcACustomerExperience,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1934,33 +1934,34 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		possible_apis : apis.contracts,
 	},
-	feedback_system: {
-		key         : 'feedback_system',
-		title       : 'Feedback System',
+	performance_management: {
+		key         : 'performance_management',
+		title       : 'Performance Management',
 		isSubNavs   : true,
 		module_type : 'dashboards',
 		main_apis   : ['list_user_feedbacks'],
+		icon        : IcMPartnersCogoport,
 		options     : [
 			{
-				key           : 'feedback_system-user_dashboard',
+				key           : 'performance_management-user_dashboard',
 				title         : 'User Dashboard',
-				href          : '/v2/feedback-system/user-dashboard',
-				as            : '/v2/feedback-system/user-dashboard',
-				possible_apis : apis.feedback_system,
+				href          : '/v2/performance-management/user-dashboard',
+				as            : '/v2/performance-management/user-dashboard',
+				possible_apis : apis.performance_management,
 			},
 			{
-				key           : 'feedback_system-manager_dashboard',
+				key           : 'performance_management-manager_dashboard',
 				title         : 'Manager Dashboard',
-				href          : '/v2/feedback-system/manager-dashboard',
-				as            : '/v2/feedback-system/manager-dashboard',
-				possible_apis : apis.feedback_system,
+				href          : '/v2/performance-management/manager-dashboard',
+				as            : '/v2/performance-management/manager-dashboard',
+				possible_apis : apis.performance_management,
 			},
 			{
-				key           : 'feedback_system-hr_dashboard',
+				key           : 'performance_management-hr_dashboard',
 				title         : 'HR Dashboard',
-				href          : '/v2/feedback-system/hr-dashboard',
-				as            : '/v2/feedback-system/hr-dashboard',
-				possible_apis : apis.feedback_system,
+				href          : '/v2/performance-management/hr-dashboard',
+				as            : '/v2/performance-management/hr-dashboard',
+				possible_apis : apis.performance_management,
 			},
 		],
 	},
