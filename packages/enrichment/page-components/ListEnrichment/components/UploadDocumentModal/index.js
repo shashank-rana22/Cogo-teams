@@ -4,8 +4,6 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-// import { getFieldController } from '../../../../common/Form/getFieldController';
-// import { uploadDocControls } from '../../../../configurations/get-upload-controls';
 import useUpdateStatus from '../../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';

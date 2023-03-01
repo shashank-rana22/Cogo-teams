@@ -22,7 +22,7 @@ const useUpdateStatus = (props) => {
 
 	const [{ loading }, trigger] = api;
 
-	const uploadDoc = async (formValues = {}) => {
+	const uploadDoc = async (formValues) => {
 		try {
 			await trigger({
 				data: {

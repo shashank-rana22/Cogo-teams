@@ -7,10 +7,6 @@ import { format, startCase } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
 import authKeyMapping from '../../../constants/get-auth-key-mapping';
-import {
-	LIST_PRIMARY_COLUMNS_MAPPING,
-	LIST_SECONDARY_COLUMNS_MAPPING,
-} from '../../../constants/get-table-columns';
 import styles from '../styles.module.css';
 
 const useListEnrichment = () => {
@@ -23,8 +19,7 @@ const useListEnrichment = () => {
 	const [searchValue, setSearchValue] = useState('');
 
 	const [activeTab, setActiveTab] = useState('enrichment_requests');
-
-	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
+	const [apiName, setApiName] = useState('feedback_requests');
 
 	// const [selectedItem, setSelectedItem] = useState();
 
@@ -49,16 +44,10 @@ const useListEnrichment = () => {
 
 	});
 
-	let listApiName = 'feedback_requests';
-
-	if (activeTab === 'requests_sent' && secondaryTab === 'uploaded_files') {
-		listApiName = 'feedback_response_sheets';
-	}
-
 	const [{ loading, data }, refetch] = useAllocationRequest({
-		url     : `/${listApiName}`,
+		url     : `/${apiName}`,
 		method  : 'get',
-		authkey : authKeyMapping[listApiName],
+		authkey : authKeyMapping[apiName],
 		params,
 	}, { manual: false });
 
@@ -81,21 +70,31 @@ const useListEnrichment = () => {
 		}));
 	}, [searchQuery]);
 
-	useEffect(() => {
-		setParams((prevParams) => ({
-			...prevParams,
+	// useEffect(() => {
+	// setParams((prev) => ({
+	// 	...prev,
+	// 	filters: {
+	// 		...(activeTab === 'requests_sent' && {
+	// 			status: 'responded',
 
-			filters: {
-				...prevParams.filters,
+	// 		}),
 
-				...(activeTab === 'requests_sent' && {
-					status: secondaryTab === 'submitted_requests'
-						? 'responded' : undefined,
-				}),
-			},
+	// 	},
+	// }));
+	// }, [activeTab]);
 
-		}));
-	}, [activeTab, secondaryTab]);
+	// useEffect(() => {
+	// 	setParams((prev) => ({
+	// 		...prev,
+	// 		filters: {
+	// 			...(apiName === 'requests_sent' && {
+	// 				status: 'responded',
+
+	// 			}),
+
+	// 		},
+	// 	}));
+	// }, [apiName]);
 
 	const router = useRouter();
 
@@ -236,45 +235,27 @@ const useListEnrichment = () => {
 		{
 			id       : 'action',
 			Header   : <div className={styles.action_header}>Action</div>,
-			accessor : (item) => {
-				const { id } = item;
+			accessor : ({ id }) => (
+				<section className={styles.content_container}>
 
-				return (
-					<section className={styles.content_container}>
+					<Button
+						themeType="secondary"
+						type="button"
+						size="sm"
+						className={styles.edit_cta}
+						onClick={() => handleUploadClick(id)}
+					>
+						Edit Details
+					</Button>
 
-						<Button
-							themeType="secondary"
-							type="button"
-							size="sm"
-							className={styles.edit_cta}
-							onClick={() => handleUploadClick(id)}
-						>
-							Edit Details
-						</Button>
-						{/*
-						<Button
-							themeType="primary"
-							type="button"
-							size="sm"
-							onClick={() => setSelectedItem(item)}
-						>
-							Upload
-						</Button> */}
-					</section>
-				);
-			},
+				</section>
+			),
+
 		},
 	];
 
-	const filteredColumns = columns.filter((listItem) => {
-		if (activeTab === 'requests_sent') {
-			return	LIST_SECONDARY_COLUMNS_MAPPING[secondaryTab]?.includes(listItem.id);
-		}
-		return LIST_PRIMARY_COLUMNS_MAPPING[activeTab]?.includes(listItem.id);
-	});
-
 	return {
-		columns     : filteredColumns,
+		columns,
 		listRefetch :	refetch,
 		locale      : general?.locale,
 		list,
@@ -286,14 +267,13 @@ const useListEnrichment = () => {
 		setShowUpload,
 		activeTab,
 		setActiveTab,
-		secondaryTab,
-		setSecondaryTab,
 		globalFilters,
 		setGlobalFilters,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
 		partner_id,
+		setApiName,
 
 	};
 };

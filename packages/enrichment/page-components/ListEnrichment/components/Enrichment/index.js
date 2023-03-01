@@ -16,7 +16,7 @@ function Enrichment(props) {
 		columns,
 		getNextPage,
 		activeTab,
-		secondaryTab,
+		showStatistics,
 		globalFilters,
 		setGlobalFilters,
 		debounceQuery,
@@ -24,6 +24,7 @@ function Enrichment(props) {
 		setSearchValue,
 		listRefetch = () => {},
 	} = props;
+
 	const { page = 1, total_count = 1, page_limit = 10 } = paginationData;
 
 	const [showUpload, setShowUpload] = useState(false);
@@ -34,14 +35,13 @@ function Enrichment(props) {
 				filters={globalFilters}
 				onChangeFilters={setGlobalFilters}
 				activeTab={activeTab}
-				secondaryTab={secondaryTab}
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 				setShowUpload={setShowUpload}
 			/>
 
-			{secondaryTab !== 'uploaded_files' && <Statistics />}
+			{showStatistics && <Statistics />}
 
 			<List columns={columns} list={list} loading={loading} />
 

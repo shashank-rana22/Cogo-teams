@@ -12,7 +12,6 @@ function Header(props) {
 	const {
 		filters,
 		onChangeFilters,
-		secondaryTab,
 		activeTab,
 		debounceQuery,
 		searchValue,
@@ -26,7 +25,6 @@ function Header(props) {
 			<Filters
 				filters={filters}
 				onChangeFilters={onChangeFilters}
-				secondaryTab={secondaryTab}
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
