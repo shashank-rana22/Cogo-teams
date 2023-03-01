@@ -1,0 +1,11 @@
+.container {
+	width: 64%;
+	height: 100%;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 8px;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
