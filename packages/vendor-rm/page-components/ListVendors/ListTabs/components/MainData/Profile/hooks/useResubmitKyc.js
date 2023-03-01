@@ -4,7 +4,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
-import { merge } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 
 import { getControls } from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 import DOCUMENT_TYPE_CONTROL_MAPPING from '../utils/documentTypeControlMapping';
@@ -18,14 +18,13 @@ const useResubmitKyc = ({
 	const controls = getControls({});
 
 	const {
-		control: kyc_control,
-		formState: { errors: Errors },
+		control: controls_kyc,
+		formState: { errors: errors_kyc },
 		handleSubmit: handleSubmitKyc,
 		getValues,
-		// setValue,
 	} = useForm();
 
-	const [{ loading: resubmitKycLoading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : 'resubmit_vendor_kyc',
 		method : 'post',
 	}, { manual: true });
@@ -38,10 +37,16 @@ const useResubmitKyc = ({
 
 	const { kyc_rejection_feedbacks = [] } = vendor_details;
 
-	const newControls = (kyc_rejection_feedbacks || []).map((item) => {
+	let newControls = (kyc_rejection_feedbacks || []).map((item) => {
 		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item) || {};
+
+		if (isEmpty(object)) {
+			return null;
+		}
+
 		const { value = '' } = object;
-		const newcontrol = controls.find((getItem) => getItem.name === value) || {};
+
+		const newcontrol = controls.find((getItem) => getItem.name === value);
 
 		if (object.value === 'country_id') {
 			return { ...newcontrol, ...countryOptions };
@@ -49,6 +54,8 @@ const useResubmitKyc = ({
 
 		return newcontrol;
 	});
+
+	newControls = newControls.filter((item) => item !== null);
 
 	const rejected_documents = documents.filter((item) => {
 		if (item.verification_status !== 'rejected') {
@@ -96,9 +103,12 @@ const useResubmitKyc = ({
 			await trigger({
 				data: payload,
 			});
+
 			setshowKycModal(false);
+
 			refetchVendorInfo();
-			Toast.success('Updated successfully');
+
+			Toast.success('KYC re-submitted successfully!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
@@ -106,11 +116,11 @@ const useResubmitKyc = ({
 
 	return {
 		newControls,
-		kyc_control,
+		controls_kyc,
+		loading,
 		handleSubmitKyc,
-		Errors,
+		errors_kyc,
 		ResubmitKYC,
-		resubmitKycLoading,
 	};
 };
 

@@ -31,13 +31,15 @@ function Heading1({
 		handleSubmit,
 		errors,
 		onSubmit,
+		editProfileLoading,
 	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal });
 
 	const {
 		newControls,
-		kyc_control,
+		controls_kyc,
 		handleSubmitKyc,
-		Errors,
+		errors_kyc,
+		loading,
 		ResubmitKYC,
 	} = useResubmitKyc({ data, refetchVendorInfo, setshowKycModal });
 
@@ -85,9 +87,9 @@ function Heading1({
 						className={styles.bodyStyle}
 					>
 						<FormLayout
-							control={kyc_control}
+							control={controls_kyc}
 							fields={newControls}
-							errors={Errors}
+							errors={errors_kyc}
 							customStyle={customStyle}
 						/>
 					</section>
@@ -101,6 +103,7 @@ function Heading1({
 						onClick={() => {
 							setshowKycModal(false);
 						}}
+						disabled={loading}
 					>
 						Cancel
 					</Button>
@@ -109,6 +112,7 @@ function Heading1({
 						size="md"
 						type="submit"
 						onClick={handleSubmitKyc(ResubmitKYC)}
+						loading={loading}
 					>
 						Submit
 					</Button>
@@ -143,6 +147,7 @@ function Heading1({
 						onClick={() => {
 							setShowEditProfileModal(false);
 						}}
+						disabled={editProfileLoading}
 					>
 						Cancel
 					</Button>
@@ -151,7 +156,7 @@ function Heading1({
 						size="md"
 						type="submit"
 						onClick={handleSubmit(onSubmit)}
-						// loading={loading}
+						loading={editProfileLoading}
 					>
 						Submit
 					</Button>

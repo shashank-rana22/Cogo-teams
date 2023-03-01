@@ -12,7 +12,7 @@ const VENDOR_FIELDS_MAPPING = [
 		value : 'business_name',
 	},
 	{
-		key   : 'invalid_company_type',
+		key   : 'invalid_type_of_company',
 		value : 'company_type',
 	},
 ];

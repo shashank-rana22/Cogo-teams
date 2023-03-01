@@ -1,5 +1,6 @@
 import { Tooltip, Button } from '@cogoport/components';
-import { IcCFcrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
+import { useDebounceQuery } from '@cogoport/forms';
+import { IcMCrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { format, isEmpty, startCase } from '@cogoport/utils';
@@ -11,7 +12,7 @@ const ICON_MAPPING = {
 	pending_verification : <IcMError width={16} height={16} />,
 	pending_from_user    : <IcMError width={16} height={16} />,
 	verified             : <IcCFtick width={16} height={16} />,
-	rejected             : <IcCFcrossInCircle width={16} height={16} />,
+	rejected             : <IcMCrossInCircle width={16} height={16} />,
 };
 
 const renderToolTipContent = (unique_services) => (
@@ -63,9 +64,14 @@ const renderUniqueServices = ({ services, type }) => {
 };
 
 const useVendorList = () => {
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [searchValue, setSearchValue] = useState();
+
 	const [params, setParams] = useState({
 		filters: {
-			status: 'active',
+			status : 'active',
+			q      : searchQuery || undefined,
 		},
 		page                     : 1,
 		pagination_data_required : true,
@@ -95,12 +101,27 @@ const useVendorList = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
 
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
 	const formatDate = (date) => format(date, 'dd MMM yyyy');
 
 	const handleViewMore = (id) => {
 		const href = '/vendors/[vendor_id]';
 		const as = `/vendors/${id}`;
 		router.push(href, as);
+	};
+
+	const handleChangeQuery = (value) => {
+		setSearchValue(value);
+		debounceQuery(value);
 	};
 
 	const getHeader = () => (
@@ -220,6 +241,8 @@ const useVendorList = () => {
 		columns,
 		showFilter,
 		setShowFilter,
+		searchValue,
+		handleChangeQuery,
 	};
 };
 

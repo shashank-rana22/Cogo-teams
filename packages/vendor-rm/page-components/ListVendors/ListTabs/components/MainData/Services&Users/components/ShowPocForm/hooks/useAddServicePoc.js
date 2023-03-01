@@ -22,7 +22,7 @@ const useAddServicePoc = ({
 		watch,
 	} = useForm();
 
-	const isMainPOCPresent = getVendorData.pocs.length !== 0;
+	const isMainPOCPresent = getVendorData?.pocs?.length !== 0;
 
 	const {
 		general : { query = {} },

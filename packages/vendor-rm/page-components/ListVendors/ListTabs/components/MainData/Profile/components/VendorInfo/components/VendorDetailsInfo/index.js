@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { IcCFcrossInCircle, IcMDownload } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -46,7 +46,7 @@ function VendorDetailsInfo({
 		return (
 			<div className={styles.di}>
 				<span className={styles.txt} style={{ color: 'red' }}>{value}</span>
-				<IcCFcrossInCircle />
+				<IcMCrossInCircle />
 				<button className={styles.btn}><IcMDownload /></button>
 			</div>
 		);

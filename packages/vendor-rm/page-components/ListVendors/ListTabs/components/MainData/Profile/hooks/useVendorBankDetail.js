@@ -35,7 +35,7 @@ function useVendorBankDetail({
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
 		method : 'get',
-	}, { manual: false });
+	}, { manual: true });
 
 	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
 		url    : '/create_vendor_bank_detail',
