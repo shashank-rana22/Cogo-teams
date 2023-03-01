@@ -2,6 +2,7 @@ import { MultiSelect, Select } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetAsyncOptions from '../../../hooks/useGetAsyncOptions';
+import useGetAsyncOptionsMicroservice from '../../../hooks/useGetAsyncOptionsMicroservice';
 import {
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganizations,
@@ -9,6 +10,7 @@ import {
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
+	asyncAllotBanks,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -36,6 +38,7 @@ const keyAsyncFieldsParamsMapping = {
 	partner_users      : asyncFieldsPartnerUsers,
 	partner_roles      : asyncFieldsPartnerRoles,
 	segments           : asyncFieldsCampaignSegments,
+	allot_bank         : asyncAllotBanks,
 };
 
 function AsyncSelect(props) {
@@ -46,12 +49,15 @@ function AsyncSelect(props) {
 		initialCall,
 		getModifiedOptions,
 		getSelectedOption,
+		microService = false,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const getAsyncOptionsProps = useGetAsyncOptions({
+	const asyncOptionsHook = microService ? useGetAsyncOptionsMicroservice : useGetAsyncOptions;
+
+	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		initialCall,
 		params   : params || defaultParams.params,
