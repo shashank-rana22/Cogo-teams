@@ -141,6 +141,7 @@ function Calendar({ props }) {
 
 	useEffect(() => {
 		setCalendarData([]);
+		setPagination(0);
 		if (timeline === 'day') processData(calcDate);
 		else if (timeline === 'month') processData(calcMonth);
 		else loadWeeks();
