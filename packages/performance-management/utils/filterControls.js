@@ -1,5 +1,3 @@
-// import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-
 const useGetControls = ({ name = 'manager' }) => {
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();

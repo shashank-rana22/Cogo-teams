@@ -13,7 +13,7 @@ function OrderComponent({
 	currentPage = 1,
 	onPageChange,
 
-}) { // const pageInput = React.useRef<HTMLInputElement>(null);
+}) {
 	const totalPages = Math.ceil(totalItems / pageSize);
 
 	const handlePrevClick = () => {

@@ -21,7 +21,6 @@
 	min-width: 14px;
 	height: 18px;
 
-	/* padding: 0; */
 	margin: 0 6px 0 0;
 	background: none;
 	border: 0;
@@ -43,16 +42,6 @@
 	color: grey;
 	cursor: not-allowed;
 }
-
-/* input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-	appearance: none;
-	margin: 0;
-}
-
-input[type="number"] {
-	appearance: textfield;
-} */
 
 .arrowbutton {
 	display: flex;
