@@ -1,5 +1,5 @@
 import { Tooltip, Button } from '@cogoport/components';
-import { IcCFcrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { format, isEmpty, startCase } from '@cogoport/utils';
@@ -11,7 +11,7 @@ const ICON_MAPPING = {
 	pending_verification : <IcMError width={16} height={16} />,
 	pending_from_user    : <IcMError width={16} height={16} />,
 	verified             : <IcCFtick width={16} height={16} />,
-	rejected             : <IcCFcrossInCircle width={16} height={16} />,
+	rejected             : <IcMCrossInCircle width={16} height={16} />,
 };
 
 const renderToolTipContent = (unique_services) => (

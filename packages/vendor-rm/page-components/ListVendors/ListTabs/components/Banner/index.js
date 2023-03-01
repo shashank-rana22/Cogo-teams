@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
+import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -31,7 +31,7 @@ function Banner({ data = {} }) {
 		if (value === 'rejected') {
 			return (
 				<>
-					<IcCFcrossInCircle />
+					<IcMCrossInCircle fill="#ED3726" />
 					<span style={{ color: '#ED3726' }}>{startCase(value)}</span>
 				</>
 			);

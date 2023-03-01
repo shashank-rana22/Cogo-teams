@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
+import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -48,7 +48,7 @@ function Verified({ vendor_details = {} }) {
 					<div
 						className={styles.icon}
 					>
-						<IcCFcrossInCircle />
+						<IcMCrossInCircle />
 					</div>
 					<div
 						className={styles.dis}
