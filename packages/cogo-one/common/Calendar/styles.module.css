@@ -1,27 +1,31 @@
-.calendar{
-    display: flex;
-    align-items: center;
+.calendar {
+	display: flex;
+	align-items: center;
 }
 
-.calendarEntity{
-    width: calc(100% - 33px);
-    overflow: hidden;
+.calendarEntity {
+	width: calc(100% - 33px);
+	overflow: scroll;
 }
 
-.navBtn{
-    outline: none;
-    padding: none;
-    border:none;
-    cursor: pointer;
-    font-size: 18px;
-    height:40px;
-    width: 33px;
+.calendarEntity::-webkit-scrollbar {
+	display: none;
+}
+
+.navBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 33px;
+	height: 40px;
+	padding: none;
 	margin: 10px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
+	font-size: 18px;
+	cursor: pointer;
+	border: none;
+	outline: none;
 }
 
-.inactive{
-    cursor:not-allowed;
+.inactive {
+	cursor: not-allowed;
 }

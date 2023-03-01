@@ -50,7 +50,7 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 				})}
 
 			</div>
-			{isEmpty(agentsDetails) ? <EmptyState />
+			{isEmpty(agentsDetails?.[activeTab]?.agents) ? <EmptyState />
 				: (
 					<div className={styles.main_container_lowerpart}>
 						{agentsDetails?.[activeTab]?.agents?.map((item) => {
@@ -59,7 +59,9 @@ function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
 							const redirectToAgentView = ((agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
 								if (!agentId) return;
 								router.push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
-								getCogoOneDashboard(agentId);
+								if (agentId) {
+									getCogoOneDashboard(agentId);
+								}
 							}, [router]);
 
 							return (

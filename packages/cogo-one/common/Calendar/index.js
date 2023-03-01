@@ -15,12 +15,13 @@ function Calendar({ props }) {
 		setSelectedItem,
 	} = props || {};
 
-	const [pagination, setPagination] = useState(-1);
+	const [pagination, setPagination] = useState(0);
 	const [scroll, setScroll] = useState('');
 	const [resetDiv, setResetDiv] = useState(false);
 
 	const calendarRef = useRef();
-	const numberOfDays = 10;
+	const numberOfDays = 15;
+	const shiftDays = 15;
 	const numberOfMonthsForWeeks = 2;
 
 	const FORMAT_TYPE = {
@@ -83,7 +84,7 @@ function Calendar({ props }) {
 
 	const processData = (func) => {
 		const newData = [];
-		for (let i = pagination * numberOfDays; i < ((pagination * numberOfDays) + (3 * numberOfDays)); i += 1) {
+		for (let i = 0; i < numberOfDays; i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
@@ -96,6 +97,22 @@ function Calendar({ props }) {
 			});
 		});
 		setCalendarData(data);
+	};
+
+	const addProcessData = (func) => {
+		const newData = [];
+		for (let i = numberOfDays + (pagination * shiftDays); i < numberOfDays + ((pagination + 1) * shiftDays); i += 1) {
+			newData.push(func(i));
+		}
+		const data = [];
+		newData.reverse().forEach((item, iterator) => {
+			data.push({
+				key      : `cal-${timeline}-${pagination}-${iterator}`,
+				label    : format(item, FORMAT_TYPE[timeline].label),
+				subLabel : format(item, FORMAT_TYPE[timeline].subLabel),
+			});
+		});
+		setCalendarData([...data, ...calendarData]);
 	};
 
 	const loadWeeks = () => {
@@ -124,16 +141,26 @@ function Calendar({ props }) {
 	};
 
 	useEffect(() => {
-		if (timeline === 'day') processData(calcDate);
-		else if (timeline === 'month') processData(calcMonth);
-		else loadWeeks();
-	}, [timeline]);
+		processData(calcDate);
+	}, []);
+
+	function addPagination(x) {
+		console.log('x ', x);
+		console.log('__pagination__: ', pagination);
+		// setPagination(x - 3);
+		setPagination(pagination + 1);
+	}
 
 	useEffect(() => {
-		setResetDiv(true);
-		setTimeout(() => {
-			setResetDiv(false);
-		}, 100);
+		if (pagination !== 0) {
+			if (timeline === 'day') addProcessData(calcDate);
+			else if (timeline === 'month') processData(calcMonth);
+			else loadWeeks();
+		}
+	}, [pagination, timeline]);
+
+	useEffect(() => {
+		console.log('calendarData', calendarData);
 	}, [calendarData]);
 
 	return (
@@ -156,6 +183,7 @@ function Calendar({ props }) {
 					pagination={pagination}
 					setPagination={setPagination}
 					timeline={timeline}
+					addPagination={addPagination}
 				/>
 			</div>
 			<button

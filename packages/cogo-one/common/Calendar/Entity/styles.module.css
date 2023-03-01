@@ -2,11 +2,10 @@
 	display: flex;
 	flex: 1;
 	justify-content: space-evenly;
-	width: 300%;
+	width: fit-content;
 	margin: 10px 0;
 	font-style: normal;
 	cursor: pointer;
-	transform: translateX(-33.3%);
 }
 
 .day_hours1 {
@@ -18,11 +17,15 @@
 }
 
 .date_container {
-	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
 	height: 50px;
-	padding: 0 22px;
 	padding: auto;
 	padding-top: 5px;
+	margin: 0 10px;
 	background: rgb(255 255 255 / 40%);
 	border-radius: 6px;
 }
