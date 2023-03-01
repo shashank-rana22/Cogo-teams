@@ -101,7 +101,7 @@ function Calendar({ props }) {
 
 	const addProcessData = (func) => {
 		const newData = [];
-		for (let i = numberOfDays + (pagination * shiftDays); i < numberOfDays + ((pagination + 1) * shiftDays); i += 1) {
+		for (let i = numberOfDays; i < numberOfDays + (pagination * shiftDays); i += 1) {
 			newData.push(func(i));
 		}
 		const data = [];
@@ -147,8 +147,8 @@ function Calendar({ props }) {
 	function addPagination(x) {
 		console.log('x ', x);
 		console.log('__pagination__: ', pagination);
-		// setPagination(x - 3);
-		setPagination(pagination + 1);
+		setPagination(x - 2);
+		// setPagination(pagination + 1);
 	}
 
 	useEffect(() => {
