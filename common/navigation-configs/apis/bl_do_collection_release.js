@@ -54,19 +54,13 @@ const apis = [
 		feature      : 'inventory_management',
 	},
 	{
-		api          : 'list_bl_details_inventory',
-		access_type  : 'private',
-		service_name : 'organization',
-		feature      : 'inventory_management',
-	},
-	{
 		api          : 'create_organization_document_inventory',
 		access_type  : 'private',
 		service_name : 'organization',
 		feature      : 'inventory_management',
 	},
 	{
-		api          : 'list_shipment_bl_details_inventory',
+		api          : 'list_shipment_bl_inventory',
 		access_type  : 'private',
 		service_name : 'shipment',
 		feature      : 'inventory_management',
