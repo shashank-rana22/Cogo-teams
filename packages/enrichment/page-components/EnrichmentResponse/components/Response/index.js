@@ -19,7 +19,7 @@ function Response(props) {
 
 	} = props;
 
-	const { handleResponseSubmit } = useSubmitResponses({ responseData, setResponseData });
+	const { handleResponseSubmit, loadingSubmit } = useSubmitResponses({ responseData, setResponseData });
 
 	if (loading) {
 		return (
@@ -92,6 +92,7 @@ function Response(props) {
 							themeType="primary"
 							size="md"
 							type="button"
+							loading={loadingSubmit}
 							onClick={(e) => handleResponseSubmit(e)}
 						>
 							Submit
