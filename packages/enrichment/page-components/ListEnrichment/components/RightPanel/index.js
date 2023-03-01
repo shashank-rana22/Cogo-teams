@@ -1,6 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 
-import TAB_PANEL_MAPPING from '../../../../constants/tab-panel-mapping';
+import { ENRICHMENT_TABS_MAPPING } from '../../../../constants/tab-panel-mapping';
 import Enrichment from '../../common/Enrichment';
 import useRightPanel from '../../hooks/useRightPanel';
 
@@ -36,7 +36,7 @@ function RightPanel(props) {
 				onChange={setSecondaryTab}
 			>
 
-				{Object.values(TAB_PANEL_MAPPING).map((item) => (
+				{Object.values(ENRICHMENT_TABS_MAPPING).map((item) => (
 
 					<TabPanel name={item.name} title={item.title}>
 

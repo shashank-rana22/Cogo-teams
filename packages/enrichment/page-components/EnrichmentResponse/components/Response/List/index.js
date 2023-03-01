@@ -1,15 +1,18 @@
 import { Button } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import { getCardHeaders, CARD_LABELS_MAPPING, MOBILE_NUMBERS_MAPPING } from '../../../../../constants/get-card-details';
-import CreateResponse from '../../../common/CreateResponse';
+import {
+	getCardHeaders, CARD_LABELS_MAPPING,
+	MOBILE_NUMBERS_MAPPING,
+} from '../../../../../constants/get-card-details';
+import CreateResponse from '../CreateResponse';
 
 import styles from './styles.module.css';
-import RenderWorkscopes from './Workscopes';
+import Workscopes from './Workscopes';
 
 const cardHeading = getCardHeaders('card');
 
-function DetailsCard({
+function List({
 	user = {},
 	index = 1,
 	loading = false,
@@ -100,7 +103,7 @@ function DetailsCard({
 					<div className={styles.card_item}>
 						<div>Workscopes</div>
 
-						{user.work_scopes ? <RenderWorkscopes work_scopes={user.work_scopes} /> : '-'}
+						{user.work_scopes ? <Workscopes work_scopes={user.work_scopes} /> : '-'}
 
 					</div>
 				)}
@@ -112,4 +115,4 @@ function DetailsCard({
 	);
 }
 
-export default DetailsCard;
+export default List;

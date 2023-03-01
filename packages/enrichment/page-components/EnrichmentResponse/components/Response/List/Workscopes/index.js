@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
-function RenderWorkscopes({ work_scopes = [] }) {
+function Workscopes({ work_scopes = [] }) {
 	const totalWorkScopes = work_scopes.length;
 
 	if (totalWorkScopes === 0) {
@@ -34,4 +34,4 @@ function RenderWorkscopes({ work_scopes = [] }) {
 	);
 }
 
-export default RenderWorkscopes;
+export default Workscopes;

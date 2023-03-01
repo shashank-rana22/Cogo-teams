@@ -2,10 +2,10 @@ import { Placeholder, Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import CreateResponse from '../../common/CreateResponse';
 import useSubmitResponses from '../../hooks/useSubmitResponses';
 
-import DetailsCard from './DetailsCard';
+import CreateResponse from './CreateResponse';
+import List from './List';
 import styles from './styles.module.css';
 
 function Response(props) {
@@ -47,7 +47,7 @@ function Response(props) {
 
 			<section>
 				{(responseData).map((user, index) => (
-					<DetailsCard
+					<List
 						key={user.id}
 						user={user}
 						index={index}

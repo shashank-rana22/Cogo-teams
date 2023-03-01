@@ -5,7 +5,7 @@ import useEnrichmentRequests from '../../hooks/useEnrichmentRequests';
 
 import styles from './styles.module.css';
 
-const cardMapping = {
+const CARD_LABEL_MAPPING = {
 	business_name       : 'Organization Name',
 	registration_number : 'Registration Number',
 };
@@ -33,11 +33,11 @@ function Header(props) {
 
 			<div className={styles.header}>
 
-				{Object.keys(cardMapping).map((key) => (
+				{Object.keys(CARD_LABEL_MAPPING).map((key) => (
 					<div className={styles.info}>
 
 						<div className={styles.info_label}>
-							{cardMapping[key]}
+							{CARD_LABEL_MAPPING[key]}
 							{' '}
 							-
 						</div>

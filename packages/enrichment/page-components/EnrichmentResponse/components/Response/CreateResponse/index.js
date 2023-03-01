@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
 
-import { getFieldController } from '../../../../common/Form/getFieldController';
-import { getCardHeaders } from '../../../../constants/get-card-details';
-import useCreateResponse from '../../hooks/useCreateResponse';
+import { getFieldController } from '../../../../../common/Form/getFieldController';
+import { getCardHeaders } from '../../../../../constants/get-card-details';
+import useCreateResponse from '../../../hooks/useCreateResponse';
 
 import styles from './styles.module.css';
 
@@ -12,8 +12,6 @@ function CreateResponse(props) {
 	const {
 		loading,
 		activeTab,
-		setShowDetailsForm,
-		setShowAddPoc,
 		type,
 	} = props;
 
@@ -23,17 +21,8 @@ function CreateResponse(props) {
 		controls,
 		control,
 		errors,
+		handleCancel,
 	} = useCreateResponse(props);
-
-	const handleCancel = (e) => {
-		e.preventDefault();
-
-		if (type === 'edit') {
-			setShowDetailsForm(false);
-		} else if (type === 'addPoc') {
-			setShowAddPoc(false);
-		}
-	};
 
 	return (
 

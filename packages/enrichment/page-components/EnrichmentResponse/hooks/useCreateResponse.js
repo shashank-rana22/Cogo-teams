@@ -84,12 +84,23 @@ function useCreateResponse(props) {
 		}
 	};
 
+	const handleCancel = (e) => {
+		e.preventDefault();
+
+		if (type === 'edit') {
+			setShowDetailsForm(false);
+		} else if (type === 'addPoc') {
+			setShowAddPoc(false);
+		}
+	};
+
 	return {
 		controls,
 		control,
 		errors,
-		handleSubmit,
 		onSave,
+		handleSubmit,
+		handleCancel,
 
 	};
 }
