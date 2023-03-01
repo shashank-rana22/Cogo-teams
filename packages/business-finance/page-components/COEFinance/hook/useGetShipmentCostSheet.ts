@@ -14,33 +14,37 @@ const useGetShipmentCostSheet = ({ query }:Params) => {
 
 	const [{ data:postTaxData, loading:postTaxLoading }, postTaxFetch] = useRequestBf(
 		{
-			url    : '/common/job/post-tax/profit',
-			method : 'get',
-			params : { jobType, jobSource, jobNumber },
+			url     : '/common/job/post-tax/profit',
+			method  : 'get',
+			authKey : 'get_common_job_post_tax_profit',
+			params  : { jobType, jobSource, jobNumber },
 		},
 		{ manual: true },
 	);
 	const [{ data:preTaxData, loading:preTaxLoading }, preTaxFetch] = useRequestBf(
 		{
-			url    : '/common/job/pre-tax/profit',
-			method : 'get',
-			params : { jobType, jobSource, jobNumber },
+			url     : '/common/job/pre-tax/profit',
+			method  : 'get',
+			authKey : 'get_common_job_pre_tax_profit',
+			params  : { jobType, jobSource, jobNumber },
 		},
 		{ manual: true },
 	);
 	const [{ data:sellData, loading:sellLoading }, sellTrigger] = useRequestBf(
 		{
-			url    : '/common/job/list-service-charges',
-			method : 'get',
-			params : { jobType, jobSource, jobNumber, chargeType: 'sell' },
+			url     : '/common/job/list-service-charges',
+			method  : 'get',
+			authKey : 'get_common_job_list_service_charges',
+			params  : { jobType, jobSource, jobNumber, chargeType: 'sell' },
 		},
 		{ manual: true },
 	);
 	const [{ data:buyData, loading:buyLoading }, buyTrigger] = useRequestBf(
 		{
-			url    : '/common/job/list-service-charges',
-			method : 'get',
-			params : { jobType, jobSource, jobNumber, chargeType: 'buy' },
+			url     : '/common/job/list-service-charges',
+			method  : 'get',
+			authKey : 'get_common_job_list_service_charges',
+			params  : { jobType, jobSource, jobNumber, chargeType: 'buy' },
 		},
 		{ manual: true },
 	);

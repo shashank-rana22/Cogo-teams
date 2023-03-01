@@ -42,8 +42,9 @@ const ApproveReject = ({
 		trigger,
 	] = useRequestBf(
 		{
-			url    : '/purchase/bills/status',
-			method : 'put',
+			url     : '/purchase/bills/status',
+			method  : 'put',
+			authKey : 'put_purchase_bills_status',
 		},
 		{ autoCancel: false },
 	);

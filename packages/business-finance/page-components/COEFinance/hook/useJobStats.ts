@@ -18,9 +18,9 @@ interface DateInterface {
 const useJobStats = (filters :FilterInterface) => {
 	const [{ data:jobStatsData, loading }, trigger] = useRequestBf(
 		{
-			url    : '/common/job/shipment-stats',
-			method : 'get',
-			// authKey : 'get_payments_accounts_org_stats',
+			url     : '/common/job/shipment-stats',
+			method  : 'get',
+			authKey : 'get_common_job_shipment_stats',
 		},
 		{ autoCancel: false },
 	);

@@ -18,9 +18,9 @@ interface DateInterface {
 const useServiceOpsStats = (filters :FilterInterface) => {
 	const [{ data:So2statsData, loading }, trigger] = useRequestBf(
 		{
-			url    : '/purchase/bills/so2-success-rate',
-			method : 'get',
-			// authKey : 'get_payments_accounts_org_stats',
+			url     : '/purchase/bills/so2-success-rate',
+			method  : 'get',
+			authKey : 'get_purchase_bills_so2_success_rate',
 		},
 		{ autoCancel: false },
 	);

@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 const useGetPieChartData = () => {
 	const [{ data:pieData, loading }, trigger] = useRequestBf(
 		{
-			url    : '/purchase/bills/bill-rejection-stats',
-			method : 'get',
-			// authKey : 'get_payments_accounts_org_stats',
+			url     : '/purchase/bills/bill-rejection-stats',
+			method  : 'get',
+			authKey : 'get_purchase_bills_bill_rejection_stats',
 		},
 		{ autoCancel: false },
 	);

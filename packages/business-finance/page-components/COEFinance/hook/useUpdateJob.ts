@@ -28,8 +28,9 @@ const useUpdateJob = ({ query, setShowButton, showButton, setShowFinal, showFina
 
 	const [{ loading:FinalLoading }, FinalTrigger] = useRequestBf(
 		{
-			url    : '/common/job/close-financially',
-			method : 'post',
+			url     : '/common/job/close-financially',
+			method  : 'post',
+			authKey : 'post_common_job_close_financially',
 		},
 	);
 

@@ -7,7 +7,7 @@ const usePurchaseViewStats = () => {
 		{
 			url     : '/purchase/bills/stats',
 			method  : 'get',
-			authkey : 'get_purchase_bills_stats',
+			authKey : 'get_purchase_bills_stats',
 		},
 		{ autoCancel: false },
 	);
@@ -21,7 +21,7 @@ const usePurchaseViewStats = () => {
 					},
 				});
 			} catch (err) {
-				Toast.error('stats data not prasent');
+				Toast.error('stats data not present');
 			}
 		};
 		getStatsData();

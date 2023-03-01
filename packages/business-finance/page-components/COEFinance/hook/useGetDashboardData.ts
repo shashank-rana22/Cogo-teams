@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 const useGetDashboardData = () => {
 	const [{ data:dashboardData, loading }, trigger] = useRequestBf(
 		{
-			url    : '/purchase/bills/daily-invoices-trend',
-			method : 'get',
-			// authKey : 'get_payments_accounts_org_stats',
+			url     : '/purchase/bills/daily-invoices-trend',
+			method  : 'get',
+			authKey : 'get_purchase_bills_daily_invoices_trend',
 		},
 		{ autoCancel: false },
 	);
