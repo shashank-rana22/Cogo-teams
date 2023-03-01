@@ -1,27 +1,35 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import useBadgeConfigurationList from '../../hooks/useBadgeConfigurationList';
 
 import BadgeListItem from './BadgeListItem';
 import CreateBadge from './CreateBadge';
 import CreateMastery from './CreateMastery';
+import listData from './dummyList';
 import Header from './Header';
 import MasteryListItem from './MasteryListItem';
 import styles from './styles.module.css';
 
 function Badges() {
 	const router = useRouter();
+	const { fetchBadgeList } = useBadgeConfigurationList();
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise');
 	};
 
-	const [badgeList, setBadgeList] = useState(true);
+	const [badgeList, setBadgeList] = useState([]);
 	// const [badgeList, setBadgeList] = useState(false);
 
 	// const [createBadge, setCreateBadge] = useState(true);
 	const [createBadge, setCreateBadge] = useState(false);
 	const [createMastery, setCreateMastery] = useState(false);
+	useEffect(() => {
+		fetchBadgeList(setBadgeList);
+		setBadgeList(listData);
+	}, []);
 
 	return (
 		<section className={styles.main_container}>
@@ -52,24 +60,27 @@ function Badges() {
 					</div>
 				)
 			}
-
-			{
-				badgeList && (!createBadge)
-			&& (
-				<section>
-					<MasteryListItem />
-					<BadgeListItem />
-					<BadgeListItem />
-				</section>
-			)
-			}
-
 			{
 				createMastery && (
 					<div>
 						<CreateMastery setCreateMastery={setCreateMastery} />
 					</div>
 				)
+			}
+
+			{
+				(!createBadge) && badgeList.map(((data, index) => (
+					<BadgeListItem data={data} index={index} />
+				)))
+			// && (
+			// 	<section>
+			// 		<MasteryListItem />
+			// 		<BadgeListItem />
+			// 		{
+
+			// 		}
+			// 	</section>
+			// )
 			}
 		</section>
 	);
