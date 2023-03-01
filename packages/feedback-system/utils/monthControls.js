@@ -67,7 +67,7 @@ const getMonthControls = (selectedYear, selectedMonth) => {
 	controls.forEach((control) => {
 		const updatedControl = control;
 		if (control.name === 'month' && selectedYear === year) {
-			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month + 1);
 		}
 		newControls.push(updatedControl);
 	});

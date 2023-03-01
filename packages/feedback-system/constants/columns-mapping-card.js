@@ -1,7 +1,7 @@
 const columnsMapping = ({ columnsToShow = [] }) => {
 	const columns = [{
 		key   : 'total_feedbacks',
-		label : 'Feedbacks Given',
+		label : 'Feedbacks Approved',
 		flex  : 1.7,
 	},
 	{
