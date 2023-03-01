@@ -11,34 +11,11 @@ function CoeFinance() {
 	const { query, push } = useRouter();
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 
-	const getRoute = (tab:string) => {
-		if (tab === 'all_invoices') {
-			return [
-				'/business-finance/coe-finance/[active_tab]/purchase-view',
-				`/business-finance/coe-finance/${tab}/purchase-view`,
-			];
-		}
-		if (tab === 'rejected') {
-			return [
-				'/business-finance/coe-finance/[active_tab]/finance_rejected',
-				`/business-finance/coe-finance/${tab}/finance_rejected`,
-			];
-		}
-		if (tab === 'dashboard') {
-			return [
-				'/business-finance/coe-finance/[active_tab]',
-				`/business-finance/coe-finance/${tab}`,
-			];
-		}
-		return [
-		];
-	};
-
 	const handleChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
-			getRoute(tab)[0],
-			getRoute(tab)[1],
+			'/business-finance/coe-finance/[active_tab]',
+			`/business-finance/coe-finance/${tab}`,
 		);
 	};
 

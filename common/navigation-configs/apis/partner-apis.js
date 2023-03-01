@@ -6395,6 +6395,10 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api         : 'get_common_job_shipment_id_view',
+			access_type : 'private',
+		},
 	],
 	business_finance_income: [
 		{
