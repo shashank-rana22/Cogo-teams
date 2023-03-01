@@ -7,7 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { controls } from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
+import controls from '../../../../../../OnBoardVendor/PaymentDetails/utils/controls';
 
 function useVendorBankDetail({
 	refetchVendorInfo = () => {},
@@ -35,7 +35,7 @@ function useVendorBankDetail({
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
 		method : 'get',
-	}, { manual: true });
+	}, { manual: false });
 
 	const [{ loading: createVendorBankDetailLoading }, triggerCreateVendorBankDetail] = useRequest({
 		url    : '/create_vendor_bank_detail',
@@ -103,6 +103,7 @@ function useVendorBankDetail({
 		if (name === 'pincode_id') {
 			newControl = { ...newControl, ...pincodeOptions };
 		}
+
 		newControl = {
 			...newControl,
 			style: {

@@ -35,11 +35,21 @@ function useGetListVendorPocServices() {
 		const { vendor_pocs = [] } = servicePoc || {};
 
 		const details = (vendor_pocs || []).map((poc) => {
+			const {
+				id = '',
+				name = '',
+				email = '',
+				mobile_number,
+				mobile_country_code,
+				poc_role,
+			} = poc || {};
+
 			const obj = {
-				name          : poc?.name,
-				email         : poc?.email,
-				mobile_number : `${poc?.mobile_country_code} ${poc?.mobile_number}`,
-				poc_role      : poc?.poc_role,
+				id,
+				name,
+				email,
+				mobile_number: `${mobile_country_code} ${mobile_number}`,
+				poc_role,
 			};
 			return obj;
 		});

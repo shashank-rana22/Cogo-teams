@@ -7,6 +7,16 @@ import useResubmitKyc from '../../hooks/useResubmitKyc';
 
 import styles from './styles.module.css';
 
+const customStyle = {
+	width         : '47%',
+	marginRight   : '0px',
+	formContainer : {
+		display        : 'flex',
+		justifyContent : 'space-between',
+		flexWrap       : 'wrap',
+	},
+};
+
 function Heading1({
 	data = {},
 	refetchVendorInfo = () => {},
@@ -26,7 +36,7 @@ function Heading1({
 
 	const {
 		newControls,
-		control_kyc,
+		controls_kyc,
 		handleSubmitKyc,
 		errors_kyc,
 		loading,
@@ -38,29 +48,32 @@ function Heading1({
 	return (
 		<div className={styles.top1}>
 			Profile
-			{kyc_status === 'rejected' && (
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => {
-						setshowKycModal(!showEditProfileModal);
-					}}
-				>
-					Resubmit KYC
-				</Button>
-			)}
+			<div className={styles.kyc_button_container}>
+				{kyc_status === 'rejected' && (
+					<Button
+						className={styles.kyc_btn}
+						size="md"
+						themeType="secondary"
+						onClick={() => {
+							setshowKycModal(!showEditProfileModal);
+						}}
+					>
+						Resubmit KYC
+					</Button>
+				)}
 
-			{kyc_status !== 'verified' && (
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => {
-						setShowEditProfileModal(!showKycModal);
-					}}
-				>
-					Edit Profile
-				</Button>
-			)}
+				{kyc_status !== 'verified' && (
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => {
+							setShowEditProfileModal(!showKycModal);
+						}}
+					>
+						Edit Profile
+					</Button>
+				)}
+			</div>
 
 			<Modal
 				show={showKycModal}
@@ -74,9 +87,10 @@ function Heading1({
 						className={styles.bodyStyle}
 					>
 						<FormLayout
-							control={control_kyc}
+							control={controls_kyc}
 							fields={newControls}
 							errors={errors_kyc}
+							customStyle={customStyle}
 						/>
 					</section>
 				</Modal.Body>
