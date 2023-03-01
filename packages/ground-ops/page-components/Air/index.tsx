@@ -46,8 +46,13 @@ function Air({ setGenerate, setItem, setViewDoc, setEdit }) {
 	useEffect(() => {
 		listAPi({ filter: filters });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, JSON.stringify(filters)]);
+	}, [JSON.stringify(filters)]);
 
+	useEffect(() => {
+		if (searchValue === '') { listAPi({ filter: filters }); }
+		setSearchValue('');
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeTab]);
 	return (
 		<div>
 			<div className={styles.container}>
