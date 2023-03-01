@@ -26,7 +26,9 @@ const useListEnrichment = () => {
 
 	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
 
-	const [selectedItem, setSelectedItem] = useState();
+	// const [selectedItem, setSelectedItem] = useState();
+
+	const [showUpload, setShowUpload] = useState(false);
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
@@ -211,37 +213,6 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			id       : 'address',
-			Header   : 'ADDRESS',
-			accessor : ({ address = '', id = '' }, item = {}) => (
-
-				address ? (
-					<section className={styles.address}>
-						<div className={styles.address_label}>
-							{address}
-						</div>
-
-						<div
-							className={styles.link_text}
-							role="presentation"
-							onClick={() => {
-								setSelectedItem({
-									item,
-									type: 'address',
-									id,
-
-								});
-							}}
-						>
-							View More
-
-						</div>
-					</section>
-				) : '-'
-
-			),
-		},
-		{
 			id       : 'edit',
 			Header   : 'Action',
 			accessor : (item) => {
@@ -262,7 +233,6 @@ const useListEnrichment = () => {
 				);
 			},
 		},
-
 		{
 			id       : 'action',
 			Header   : <div className={styles.action_header}>Action</div>,
@@ -281,7 +251,7 @@ const useListEnrichment = () => {
 						>
 							Edit Details
 						</Button>
-
+						{/*
 						<Button
 							themeType="primary"
 							type="button"
@@ -289,8 +259,7 @@ const useListEnrichment = () => {
 							onClick={() => setSelectedItem(item)}
 						>
 							Upload
-
-						</Button>
+						</Button> */}
 					</section>
 				);
 			},
@@ -313,8 +282,8 @@ const useListEnrichment = () => {
 		loading,
 		setParams,
 		getNextPage,
-		selectedItem,
-		setSelectedItem,
+		showUpload,
+		setShowUpload,
 		activeTab,
 		setActiveTab,
 		secondaryTab,

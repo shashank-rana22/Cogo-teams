@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 
 import Filters from '../Filters';
 
@@ -17,6 +17,7 @@ function Header(props) {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		setShowUpload,
 	} = props;
 
 	return (
@@ -37,12 +38,21 @@ function Header(props) {
 					<Button
 						size="lg"
 						themeType="primary"
+						style={{ marginRight: '12px' }}
+						onClick={() => setShowUpload(true)}
+					>
+						<IcMCloudUpload width={16} height={16} style={{ marginRight: '4px' }} />
+						Upload
+					</Button>
+
+					<Button
+						size="lg"
+						themeType="primary"
                         // eslint-disable-next-line no-undef
 						onClick={() => window.open(URL, '_blank')}
 					>
-						<IcMDownload width={16} height={16} />
+						<IcMDownload width={16} height={16} style={{ marginRight: '4px' }} />
 						Download
-
 					</Button>
 
 				</div>

@@ -9,8 +9,7 @@ const useUpdateStatus = (props) => {
 	} = useSelector((state) => state);
 
 	const {
-		selectedItem,
-		setSelectedItem,
+		setShowUpload,
 		uploadProof,
 		refetch,
 	} = props;
@@ -27,15 +26,15 @@ const useUpdateStatus = (props) => {
 		try {
 			await trigger({
 				data: {
-					sheet_url           : uploadProof,
-					feedback_request_id : selectedItem?.id,
-					file_name           : formValues.file_name,
-					performed_by_type   : 'agent',
-					performed_by_id     : profile.user?.id,
+					sheet_url         : uploadProof,
+					// feedback_request_id : selectedItem?.id,
+					file_name         : formValues.file_name,
+					performed_by_type : 'agent',
+					performed_by_id   : profile.user?.id,
 				},
 			});
 			Toast.success('Uploaded successful');
-			setSelectedItem(null);
+			setShowUpload(false);
 			refetch();
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');

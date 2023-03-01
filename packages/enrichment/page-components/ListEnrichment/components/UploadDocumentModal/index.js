@@ -12,8 +12,7 @@ import styles from './styles.module.css';
 
 function UploadDocumentModal(props) {
 	const {
-		selectedItem,
-		setSelectedItem,
+		setShowUpload,
 		refetch,
 	} = props;
 
@@ -25,8 +24,8 @@ function UploadDocumentModal(props) {
 
 	const { loading, handleManualUpload } = useUpdateStatus({
 		uploadProof,
-		setSelectedItem,
-		selectedItem,
+		setShowUpload,
+		// selectedItem,
 		refetch,
 	});
 
@@ -58,7 +57,7 @@ function UploadDocumentModal(props) {
 						type="button"
 						disabled={loading}
 						onClick={() => {
-							setSelectedItem(null);
+							setShowUpload(false);
 							setUploadProof(null);
 						}}
 					>
@@ -72,9 +71,7 @@ function UploadDocumentModal(props) {
 						Upload
 					</Button>
 				</Modal.Footer>
-
 			</form>
-
 		</>
 	);
 }

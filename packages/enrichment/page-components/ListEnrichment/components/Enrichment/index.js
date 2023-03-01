@@ -1,7 +1,9 @@
-import { Pagination } from '@cogoport/components';
+import { Modal, Pagination } from '@cogoport/components';
+import { useState } from 'react';
 
 import Header from '../Header';
 import Statistics from '../Statistics';
+import UploadDocumentModal from '../UploadDocumentModal';
 
 import List from './List';
 import styles from './styles.module.css';
@@ -20,8 +22,11 @@ function Enrichment(props) {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		listRefetch = () => {},
 	} = props;
 	const { page = 1, total_count = 1, page_limit = 10 } = paginationData;
+
+	const [showUpload, setShowUpload] = useState(false);
 
 	return (
 		<div>
@@ -33,6 +38,7 @@ function Enrichment(props) {
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				setShowUpload={setShowUpload}
 			/>
 
 			{secondaryTab !== 'uploaded_files' && <Statistics />}
@@ -48,6 +54,20 @@ function Enrichment(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
+
+			{showUpload && (
+				<Modal
+					size="sm"
+					show={showUpload}
+					onClose={() => setShowUpload(false)}
+				>
+					<UploadDocumentModal
+						setShowUpload={setShowUpload}
+						refetch={listRefetch}
+					/>
+				</Modal>
+			)}
+
 		</div>
 	);
 }

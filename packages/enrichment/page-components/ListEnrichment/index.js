@@ -1,9 +1,8 @@
-import { TabPanel, Tabs, Modal } from '@cogoport/components';
+import { TabPanel, Tabs } from '@cogoport/components';
 
 import { tabPanelMapping } from '../../constants/tab-panels-mapping';
 
 import Enrichment from './components/Enrichment';
-import UploadDocumentModal from './components/UploadDocumentModal';
 import useListEnrichment from './hooks/useListEnrichment';
 import styles from './styles.module.css';
 
@@ -15,8 +14,6 @@ function ListEnrichment() {
 		paginationData,
 		columns,
 		getNextPage,
-		selectedItem,
-		setSelectedItem,
 		activeTab,
 		setActiveTab,
 		secondaryTab,
@@ -53,7 +50,7 @@ function ListEnrichment() {
 							debounceQuery={debounceQuery}
 							searchValue={searchValue}
 							setSearchValue={setSearchValue}
-
+							listRefetch={listRefetch}
 						/>
 					</TabPanel>
 
@@ -87,21 +84,6 @@ function ListEnrichment() {
 					</TabPanel>
 				</Tabs>
 			</div>
-
-			{selectedItem && (
-				<Modal
-					show={selectedItem}
-					size="sm"
-					onClose={() => setSelectedItem(null)}
-				>
-					<UploadDocumentModal
-						selectedItem={selectedItem}
-						setSelectedItem={setSelectedItem}
-						refetch={listRefetch}
-					/>
-				</Modal>
-			)}
-
 		</section>
 
 	);
