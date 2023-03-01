@@ -99,18 +99,19 @@ function ListEnrichment() {
 				</Tabs>
 			</div>
 
-			<Modal
-				show={selectedItem}
-				size="sm"
-				onClose={() => setSelectedItem(null)}
-			>
-				<UploadDocumentModal
-					selectedItem={selectedItem}
-					setSelectedItem={setSelectedItem}
-					refetch={listRefetch}
-				/>
-
-			</Modal>
+			{selectedItem && (
+				<Modal
+					show={selectedItem}
+					size="sm"
+					onClose={() => setSelectedItem(null)}
+				>
+					<UploadDocumentModal
+						selectedItem={selectedItem}
+						setSelectedItem={setSelectedItem}
+						refetch={listRefetch}
+					/>
+				</Modal>
+			)}
 
 		</section>
 

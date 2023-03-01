@@ -206,7 +206,6 @@ const useListEnrichment = () => {
 						onClick={() => window.open(sheet_url, '_blank')}
 					>
 						Download
-
 					</Button>
 				</section>
 			),
@@ -258,7 +257,6 @@ const useListEnrichment = () => {
 							onClick={() => handleUploadClick(id)}
 						>
 							VIEW / EDIT DETAILS
-
 						</Button>
 					</section>
 				);
