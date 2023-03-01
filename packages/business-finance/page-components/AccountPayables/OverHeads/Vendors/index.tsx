@@ -1,6 +1,6 @@
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import List from '../../commons/List';
 
@@ -33,7 +33,9 @@ function VenderComponent() {
 	const [sort, setSort] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [dropdownId, setDropdownId] = useState(null);
-	const { loading = false, data, listApi = () => {} } = useListVendors();
+	const { listData, loading } = useListVendors();
+
+	console.log('listData->', listData);
 
 	const handleChange = (e, value) => {
 		setFilters((previousState) => ({
@@ -41,10 +43,6 @@ function VenderComponent() {
 			...{ [value]: e },
 		}));
 	};
-
-	useEffect(() => {
-		listApi(filters);
-	}, [filters]);
 
 	const renderHeaders = () => (
 		<div className={styles.headerContainer}>
@@ -179,7 +177,7 @@ function VenderComponent() {
 		<div>
 			{renderHeaders()}
 
-			<List
+			{/* <List
 				config={VENDOR_CONFIG}
 				itemData={dummyData}
 				loading={false}
@@ -192,7 +190,7 @@ function VenderComponent() {
 				}}
 				showPagination
 				renderDropdown={(id) => renderDropdown(id)}
-			/>
+			/> */}
 
 			{
                 showModal && <CreateVendorModal showModal={showModal} setShowModal={setShowModal} />

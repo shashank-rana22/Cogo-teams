@@ -7162,6 +7162,13 @@ const partner = {
 			module      : 'Overseas',
 			feature     : 'Overseas',
 		},
+		{
+			api          : 'list_vendors',
+			access_type  : 'private',
+			module       : 'vendor',
+			feature      : 'vendor',
+			service_name : 'vendor',
+		},
 	],
 	my_incident: [
 		{

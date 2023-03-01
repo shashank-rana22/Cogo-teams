@@ -1,35 +1,26 @@
-import { useRequestBf } from '@cogoport/request';
-
-import OVERHEAD_APIS from '../../api';
+import { useRequest } from '@cogoport/request';
+import { useEffect } from 'react';
 
 const useListVendors = () => {
-	const { apiMethod = '', apiUrl = '', apiAuthKey = '' } = OVERHEAD_APIS.LIST_VENDORS;
-
-	const [{ data, loading = false, error }, trigger] = useRequestBf(
+	const [
+		{ data, loading },
+		trigger,
+	] = useRequest(
 		{
-			url     : apiUrl,
-			method  : apiMethod,
-			authKey : apiAuthKey,
+			url    : '/list_vendors',
+			method : 'get',
+			// authKey : 'get_list_vendors',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
-	const listApi = async (filters) => {
-		try {
-			return await trigger({
-				params: {
-					filters,
-				},
-			});
-		} catch (err) {
-			// Toast.error(err);
-		}
-	};
+	useEffect(() => {
+		trigger();
+	}, []);
 
 	return {
-		listApi,
+		listData: data,
 		loading,
-		data,
 	};
 };
 
