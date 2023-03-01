@@ -1,27 +1,27 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentDocument = () => {
+const useCreateShipmentDocument = () => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment_document',
+		url    : 'create_shipment_document',
 		method : 'POST',
 	});
 
-	const updateDocument = async (payload, listAPi) => {
+	const createDocument = async (payload, listAPi) => {
 		try {
 			await trigger({
 				data: payload,
 			});
 			listAPi({});
-			Toast.success('Document Approved Successfully');
+			Toast.success('Document Created Successfully');
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
 	return {
-		updateDocument,
+		createDocument,
 		loading,
 	};
 };
-export default useUpdateShipmentDocument;
+export default useCreateShipmentDocument;

@@ -7,7 +7,7 @@ import { NewAWBFields } from '../../configurations/new_awb_fields';
 
 import Upload from './Upload';
 
-function NewAWB({ data, loading, setPage, setGenerate, setItem }) {
+function NewAWB({ data, loading, setPage, setGenerate, setItem, listAPi }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = NewAWBFields;
 	const handleGenerateMAWB = (singleItem) => {
@@ -28,9 +28,7 @@ function NewAWB({ data, loading, setPage, setGenerate, setItem }) {
 			</Button>
 		),
 		handleUpload: (singleItem) => (
-			<Button onClick={() => { setShowUpload(singleItem); }}>
-				<Upload setShowUpload={setShowUpload} />
-			</Button>
+			<Button onClick={() => { setShowUpload(singleItem); }}>Upload</Button>
 		),
 	};
 
@@ -46,12 +44,12 @@ function NewAWB({ data, loading, setPage, setGenerate, setItem }) {
 			<Modal
 				show={showUpload}
 				onClose={() => { setShowUpload(null); }}
-				size="lg"
-				// className={styles.modal_container}
-				style={{ width: '900px' }}
+				size="md"
+				style={{ height: '80%' }}
 			>
+				<Modal.Header title={(<h5>Upload Airway Bill</h5>)} />
 				<Modal.Body style={{ minHeight: '720px' }}>
-					hii switch
+					<Upload showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
 				</Modal.Body>
 
 			</Modal>

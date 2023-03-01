@@ -30,7 +30,22 @@ function ApprovalPending({
 	};
 
 	const handleUpdate = async (values) => {
-		await updateDocument(values, listAPi);
+		const serialId = values?.serialId || '';
+		const payload = {
+			shipment_id         : values?.shipmentId,
+			uploaded_by_org_id  : values?.serviceProviderId,
+			performed_by_org_id : values?.serviceProviderId,
+			document_type       : 'draft_airway_bill',
+			id                  : values?.documentId,
+			service_id          : values?.serviceId,
+			service_type        : 'air_freight_service',
+			pending_task_id     : values?.id,
+			state               : 'document_accepted',
+			file_name:
+			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
+			|| undefined,
+		};
+		await updateDocument(payload, listAPi);
 		setShowApprove(null);
 	};
 
