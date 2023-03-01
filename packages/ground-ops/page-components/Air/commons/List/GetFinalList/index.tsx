@@ -4,8 +4,8 @@ import GetLocation from './GetLocation';
 import GetOperator from './GetOperator';
 import GetOrganization from './GetOrganization';
 
-const GetFinalList = ({ list, data, loading }) => {
-	const { shipmentPendingTasks = [], airportIds = [], importerExporterIds = [], airlineIds = [] } = list;
+const GetFinalList = ({ data, listData, loading }) => {
+	const { shipmentPendingTasks = [], airportIds = [], importerExporterIds = [], airlineIds = [] } = data;
 
 	const { data: airportData = {}, listAirport, loading: locLoading } = GetLocation({ airportIds });
 	const { list: airportList = [] } = airportData;
@@ -27,7 +27,7 @@ const GetFinalList = ({ list, data, loading }) => {
 			listOperator();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [listData]);
 
 	const originData = [];
 	(airportList || []).forEach((item) => {

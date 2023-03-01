@@ -19,14 +19,14 @@ interface Props {
 
 function List({
 	fields = [],
-	data = {},
+	data:listData = {},
 	loading = false,
 	page,
 	setPage,
 	functions,
 } :Props) {
-	const { list = {} }:any = data;
-	const { finalData = [], resourceLoading } = GetFinalList({ list, data, loading });
+	const { data = {} }:any = listData;
+	const { finalData = [], resourceLoading } = GetFinalList({ data, listData, loading });
 
 	const render = () => {
 		let showlist = Array(6).fill(1);
@@ -56,7 +56,7 @@ function List({
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}
-							totalItems={list?.totalRecords}
+							totalItems={data?.totalRecords}
 							pageSize={10}
 							type="table"
 							onPageChange={(val) => { setPage(val); }}

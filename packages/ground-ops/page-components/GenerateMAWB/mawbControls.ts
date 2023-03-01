@@ -289,10 +289,9 @@ const mawbControls = () => ({
 			controls: [
 				{
 					name        : 'code',
-					type        : 'async-select',
-					asyncKey    : 'list_rate_charge_codes',
+					type        : 'select',
 					labelKey    : 'code',
-					params      : { service_names: ['air_freight_charges', 'air_freight_local_charges'] },
+					valueKey    : 'code',
 					className   : 'primary lg',
 					span        : 5,
 					placeholder : 'Enter Code',
@@ -328,10 +327,9 @@ const mawbControls = () => ({
 			controls: [
 				{
 					name        : 'code',
-					type        : 'async-select',
-					asyncKey    : 'list_rate_charge_codes',
+					type        : 'select',
 					labelKey    : 'code',
-					params      : { service_names: ['air_freight_charges', 'air_freight_local_charges'] },
+					valueKey    : 'code',
 					className   : 'primary lg',
 					span        : 5,
 					placeholder : 'Enter Code',

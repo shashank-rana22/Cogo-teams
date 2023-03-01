@@ -8,6 +8,7 @@ import Layout from '../Air/commons/Layout';
 import GenerateMawbDoc from './GenerateMawbDoc';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
+import useListChargeCodes from './useListChargeCodes';
 
 const items = [
 	{ title: 'Basic Details', key: 'basic' },
@@ -57,6 +58,23 @@ function GenerateMAWB({
 		...fields.handling,
 	];
 
+	const { chargeCodeData, listChargeCode } = useListChargeCodes();
+
+	(finalFields || []).forEach((key:any) => {
+		if (key.name === 'carrierOtherCharges' || key.name === 'agentOtherCharges') {
+			// eslint-disable-next-line no-param-reassign
+			key.controls = key.controls.map((ctrl) => {
+				if (ctrl.name === 'code') {
+					return {
+						...ctrl,
+						options: chargeCodeData.list,
+					};
+				}
+				return ctrl;
+			});
+		}
+	});
+
 	let chargeableWeight:any = ((Math.max(
 		+formValues.weight * +taskItem.packagesCount,
 		(+taskItem.volume * 166.67),
@@ -71,6 +89,7 @@ function GenerateMAWB({
 	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
 
 	useEffect(() => {
+		listChargeCode();
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
