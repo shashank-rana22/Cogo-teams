@@ -30,7 +30,7 @@ function KycStatusTabs({
 		<div className={styles.kyc}>
 			{
                 kycTabsMapping.map((kycTab) => {
-                	const { label = '', valueKey = '', kycStatus = '', value } = kycTab;
+                	const { label = '', valueKey = '', kycStatus, value } = kycTab;
                 	return (
 	                    <div
                             role="presentation"

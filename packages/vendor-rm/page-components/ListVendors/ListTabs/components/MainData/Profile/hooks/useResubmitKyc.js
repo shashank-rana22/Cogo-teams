@@ -4,7 +4,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
-import { merge } from '@cogoport/utils';
+import { isEmpty, merge } from '@cogoport/utils';
 
 import { getControls } from '../../../../../../OnBoardVendor/VendorDetails/utils/getControls';
 import DOCUMENT_TYPE_CONTROL_MAPPING from '../utils/documentTypeControlMapping';
@@ -37,10 +37,14 @@ const useResubmitKyc = ({
 
 	const { kyc_rejection_feedbacks = [] } = vendor_details;
 
-	const newControls = (kyc_rejection_feedbacks || []).map((item) => {
-		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item);
+	let newControls = (kyc_rejection_feedbacks || []).map((item) => {
+		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item) || {};
 
-		const { value } = object || {};
+		if (isEmpty(object)) {
+			return null;
+		}
+
+		const { value = '' } = object;
 
 		const newcontrol = controls.find((getItem) => getItem.name === value);
 
@@ -50,6 +54,8 @@ const useResubmitKyc = ({
 
 		return newcontrol;
 	});
+
+	newControls = newControls.filter((item) => item !== null);
 
 	const rejected_documents = documents.filter((item) => {
 		if (item.verification_status !== 'rejected') {
