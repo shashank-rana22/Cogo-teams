@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
