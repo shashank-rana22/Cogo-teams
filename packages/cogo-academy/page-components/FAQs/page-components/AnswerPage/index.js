@@ -169,7 +169,7 @@ function AnswerPage() {
 	}
 
 	return (
-		<>
+		<div>
 			<div
 				style={{ display: 'flex' }}
 				role="presentation"
@@ -309,7 +309,7 @@ function AnswerPage() {
 			</div>
 
 			<RelatedQuestion tags={answerData?.faq_tags[0]} question_abstract={answerData?.question_abstract} />
-		</>
+		</div>
 	);
 }
 
