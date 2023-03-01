@@ -35,24 +35,6 @@ function FieldArray({
 		fields.push(childEmptyValues);
 	}
 
-	// const alreadySelectedCategories = (watch().services || []).map((item) => getByKey(item, 'category'));
-	// const newControls = controls.map((item) => {
-	// 	if (item.name !== 'category') {
-	// 		return item;
-	// 	}
-
-	// 	const options = categoryOptions.filter((category) => !alreadySelectedCategories.includes(category.value));
-	// 	const obj = {
-	// 		...item,
-	// 		options,
-	// 	};
-
-	// 	return obj;
-	// });
-
-	// console.log('alreadySelectedCategories:: ', alreadySelectedCategories);
-	// console.log('newControls:: ', newControls);
-
 	return (
 		<div className={styles.container}>
 			{fields.map((field, index) => (
