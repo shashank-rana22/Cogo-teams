@@ -50,7 +50,7 @@ import {
 	IcMDunning,
 	IcMDashboard,
 	IcMCreditRequest,
-	IcCCogoassured, IcMOverview, IcACustomerExperience,
+	IcCCogoassured, IcMOverview,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
