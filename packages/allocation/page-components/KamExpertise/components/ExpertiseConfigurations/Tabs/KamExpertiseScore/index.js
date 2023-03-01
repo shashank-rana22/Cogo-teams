@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-// import Form from '../../../../../../common/Form';
+import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
 import controls from '../../../../configurations/get-add-conditions-controls';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
@@ -46,7 +46,19 @@ function KamExpertiseScoreConfig() {
 
 	const showModal = !isEmpty(addConditionModal);
 
-	const { control, formState:{ errors = {} } } = useForm();
+	const { control, formState:{ errors = {} } } = useForm({
+		defaultValues: {
+			milestones: [{
+				milestone : '',
+				score     : '',
+			}],
+			tat: [{
+				from  : '',
+				to    : '',
+				score : '',
+			}],
+		},
+	});
 
 	return (
 		<>
@@ -71,8 +83,7 @@ function KamExpertiseScoreConfig() {
 				<Modal
 					size="md"
 					show={showModal}
-					onClose={() => setAddConditionModal(false)}
-					closeOnOuterClick={false}
+					onClose={() => setAddConditionModal({})}
 					placement="center"
 				>
 					<Modal.Header title="Add Condition" />
@@ -83,6 +94,16 @@ function KamExpertiseScoreConfig() {
 							<section>
 								{controls.map((controlItem) => {
 									const el = { ...controlItem };
+
+									if (el.type === 'fieldArray') {
+										return (
+											<div className={styles.field_array_container}>
+												<span className={styles.label}>{el.label}</span>
+
+												<FieldArray {...el} control={control} />
+											</div>
+										);
+									}
 
 									const Element = getFieldController(el.type);
 
@@ -109,25 +130,25 @@ function KamExpertiseScoreConfig() {
 								})}
 							</section>
 						</div>
-						{/* <Form formProps={formProps} controls={controls} /> */}
+
 					</Modal.Body>
 
 					<Modal.Footer>
-						<Button
+						{/* <Button
 							size="md"
 							type="button"
 							themeType="tertiary"
 							style={{ marginRight: '10px' }}
 						>
 							Cancel
-						</Button>
+						</Button> */}
 
 						<Button
 							size="md"
 							type="submit"
 							themeType="primary"
 							// loading={loadingOnSave}
-							id="add_score_btn"
+							id="add_condition_btn"
 						>
 							Add
 						</Button>

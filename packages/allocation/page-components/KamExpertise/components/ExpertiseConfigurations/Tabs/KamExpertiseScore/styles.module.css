@@ -83,3 +83,10 @@
 .input_group{
     width: 250px;
 }
+
+.field_array_container{
+	/* :global(.styles_list__TYei0){
+		flex: unset;
+		width: 150px;
+	} */
+}
