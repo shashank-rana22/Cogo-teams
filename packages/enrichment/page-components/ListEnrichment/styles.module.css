@@ -1,11 +1,11 @@
 .title {
+	margin-bottom: 20px;
 	font-size: 28px;
 	font-weight: 600;
 	color: #221f20;
-	margin-bottom: 20px;
 }
 
-.address{
+.address {
 	display: flex;
 }
 
@@ -13,7 +13,6 @@
 	max-width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	
 }
 
 .link_text {
@@ -30,15 +29,16 @@
 .content_container {
 	display: flex;
 	justify-content: center;
-
 }
 
-.action_header{
+.action_header {
 	text-align: center;
 }
+
 .secondary_tabs {
 	margin-top: 20px;
 }
-.edit_cta{
+
+.edit_cta {
 	margin-right: 12px;
 }

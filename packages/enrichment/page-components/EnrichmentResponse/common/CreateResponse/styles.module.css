@@ -17,7 +17,8 @@
 	background: #fff;
 	border-radius: 8px;
 }
-.label{
+
+.label {
 	margin-bottom: 12px;
 }
 
@@ -43,10 +44,10 @@
 	color: #cb6464;
 }
 
-.control_label{
+.control_label {
 	margin-bottom: 12px;
 }
 
-.cancel_cta{
+.cancel_cta {
 	margin-right: 12px;
 }
