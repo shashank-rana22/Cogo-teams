@@ -1,57 +1,61 @@
 .error {
-	font-weight: 500;
-	color: #cb6464;
+    font-weight: 500;
+    color: #cb6464;
 }
 
 .form {
-	padding: 10px;
-	overflow: scroll;
+    padding: 10px;
+    overflow: scroll;
 }
 
 .form::-webkit-scrollbar {
-	display: none;
+    display: none;
 }
 
 .content {
-	display: flex;
-	align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
 
-	/* margin: 10px 20px; */
+    /* margin: 10px 20px; */
 }
 
 .list {
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	margin: 10px 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 10px 0;
 }
 
 .form_label {
-	flex-basis: 30%;
-	margin-bottom: 4px;
-	text-align: start;
+    flex-basis: 30%;
+    margin-bottom: 4px;
+    text-align: start;
 }
 
 .form_element {
-	flex-basis: 30%;
-	margin-right: 20px;
+    flex-basis: 30%;
+    margin-right: 20px;
 }
 
 .form_error_message {
-	flex-basis: 30%;
-	font-size: 0.75rem;
-	font-weight: 400;
-	color: #cb6464;
+    flex-basis: 30%;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #cb6464;
 }
 
 .element_container {
-	display: flex;
-	flex-direction: row;
-	width: 90.5%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 90.5%;
 }
 
 .button {
-	/* display: flex;
+    /* display: flex;
 	justify-content: baseline; */
-	margin: 42px 0 0;
+    margin: 42px 0 0;
+}
+
+@media (max-width: 800px) {
 }
