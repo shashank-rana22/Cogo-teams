@@ -18,7 +18,7 @@ import Documents from './Documents/index';
 import PdfDisplay from './PdfDisplay/index';
 // eslint-disable-next-line import/no-cycle
 import POC from './POC/index';
-// eslint-disable-next-line import/no-cycle
+// eslint-disable-next-line import/no-cycle, import/no-named-as-default
 import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import styles from './styles.module.css';
 import TimeLineItemCheck from './TimelineItemCheck/index';

@@ -98,11 +98,12 @@
 	color: red;
 }
 
-.margin_bottom{
+.margin_bottom {
 	margin-bottom: 8px;
 	overflow: scroll;
 }
-.flex_center{
+
+.flex_center {
 	display: flex;
 	align-items: center;
 	overflow: scroll;

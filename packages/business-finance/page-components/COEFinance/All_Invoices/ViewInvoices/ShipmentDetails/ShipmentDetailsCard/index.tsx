@@ -181,7 +181,6 @@ function ShipmentDetailsCard({
 						{!isInvoiceApproved && (
 							<div className={styles.completed}>
 								Completed
-								{' '}
 								{showValue.length + rejected.length || 0}
 								/3
 							</div>
@@ -212,7 +211,7 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div className={styles.flex_center} >
+													<div className={styles.flex_center}>
 														<Checkbox />
 														<div className={styles.margin_bottom}>
 															{' '}
@@ -222,7 +221,7 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div className={styles.flex_center}>												>
+													<div className={styles.flex_center}>
 														<Checkbox />
 														<div className={styles.margin_bottom}>
 															{' '}
@@ -246,7 +245,7 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div className={styles.flex_center} >
+													<div className={styles.flex_center}>
 														<Checkbox />
 														<div className={styles.margin_bottom}>
 															PAN Number -

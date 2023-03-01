@@ -27,7 +27,6 @@ interface SellerDetail {
 	organizationName?: string;
 }
 
-
 interface DocumentData {
 	list: Array<object>;
 }
@@ -264,15 +263,15 @@ function SupplierDetails({
 								<Modal.Header title="Documents" />
 								<Modal.Body>
 									{!isEmpty(serviceProviderDocuments?.list) ? (
-	<List
-		config={DOCUMENTS}
-		itemData={{ list: serviceProviderDocuments?.list }}
-		loading={loading}
-		functions={functions}
-	/>
-										) : (
-											<div className={styles.supply_card}>NO Documents</div>
-										)}
+										<List
+											config={DOCUMENTS}
+											itemData={{ list: serviceProviderDocuments?.list }}
+											loading={loading}
+											functions={functions}
+										/>
+									) : (
+										<div className={styles.supply_card}>NO Documents</div>
+									)}
 								</Modal.Body>
 							</Modal>
 						)}
