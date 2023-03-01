@@ -51,7 +51,7 @@ function KamLevelDetailsEdit() {
 						if (!Element) return null;
 
 						return (
-							<div className={styles.row_level} style={{ width: '35%' }}>
+							<div className={styles.row_level} style={{ width: '30%' }}>
 								{' '}
 								{singleField.label}
 

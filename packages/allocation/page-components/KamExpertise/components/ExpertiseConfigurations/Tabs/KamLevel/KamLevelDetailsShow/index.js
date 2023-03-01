@@ -14,7 +14,7 @@ function KamLevelDetailsShow({ data }) {
 			{Column_mapping.map((item) => (
 				<div>
 					<div className={styles.row_level}>{startCase(item.label)}</div>
-					<div style={{ marginLeft: '12px', opacity: '0.7' }}>Score</div>
+					<div style={{ marginLeft: '8px', opacity: '0.7' }}>Score</div>
 					<div className={styles.score_value}>
 						{getByKey(data, item.label, '___')}
 					</div>
@@ -22,7 +22,7 @@ function KamLevelDetailsShow({ data }) {
 						border     : '1px solid #BDBDBD',
 						opacity    : '0.4',
 						width      : '98%',
-						marginLeft : '12px',
+						marginLeft : '8px',
 
 					}}
 					/>

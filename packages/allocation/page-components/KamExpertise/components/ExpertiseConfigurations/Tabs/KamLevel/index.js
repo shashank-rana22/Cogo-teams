@@ -11,15 +11,6 @@ import styles from './styles.module.css';
 function KamLevel() {
 	const [titleVisibile, setTitleVisible] = useState(true);
 	const [editItem, setEditItem] = useState(true);
-
-	// const handleState = () => {
-	// 	setEditItem((pv) => !pv);
-	// };
-
-	// useEffect(() => {
-	//   console.log('edit changed');
-	// }, [editItem]);
-
 	return (
 		<div>
 			<HeaderCard />
