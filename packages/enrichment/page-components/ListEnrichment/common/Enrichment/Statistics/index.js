@@ -1,9 +1,8 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { startCase } from '@cogoport/utils';
 
-import EmptyState from '../../../../common/EmptyState';
-import getPieChartData from '../../../../configurations/get-pie-chart-data';
-import useEnrichmentStats from '../../hooks/useEnrichmentStats';
+import getPieChartData from '../../../../../configurations/get-pie-chart-data';
+import useEnrichmentStats from '../../../hooks/useEnrichmentStats';
 
 import styles from './styles.module.css';
 
@@ -16,23 +15,21 @@ function Statistics() {
 
 	if (isEmpty && !loading) {
 		return (
-			<div className={styles.empty_container}>
-				<EmptyState
-					height={140}
-					width={220}
-					emptyText="Pie Stats Not Found"
-					textSize="12px"
-					flexDirection="column"
-				/>
-			</div>
+			<section className={styles.empty_container}>
+				<div className={styles.empty_text}>Pie Statistics Not Found !!!</div>
+			</section>
 		);
 	}
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
 
-			{
-				Object.values(pieChartData).map((chartData) => (
+			{Object.values(pieChartData).map((chartData) => (
+
+				<div className={styles.chart_container}>
+
+					<div className={styles.chart_title}>{chartData.title}</div>
+
 					<ResponsivePie
 						data={chartData.data}
 						innerRadius={0}
@@ -41,7 +38,7 @@ function Statistics() {
 						enableArcLabels={false}
 						colors={chartData.colors}
 						colorBy="index"
-						margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+						margin={{ top: 0, right: 40, bottom: 72, left: 40 }}
 						legends={[
 							{
 								anchor        : 'left',
@@ -80,10 +77,12 @@ function Statistics() {
 							</div>
 						)}
 					/>
-				))
-			}
 
-		</div>
+				</div>
+
+			))}
+
+		</section>
 	);
 }
 

@@ -1,8 +1,9 @@
 // import { useForm } from '@cogoport/forms';
 
 // import { getFieldController } from '../../../../common/Form/getFieldController';
-import SearchInput from '../../../../common/SearchInput';
 // import enrichmentFilters from '../../../../configurations/get-enrichment-filter-controls';
+
+import SearchInput from '../../../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 

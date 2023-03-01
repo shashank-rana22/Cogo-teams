@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import { getCardHeaders, cardLabelsMapping, mobileNumberMapping } from '../../../../../constants/get-card-details';
+import { getCardHeaders, CARD_LABELS_MAPPING, MOBILE_NUMBERS_MAPPING } from '../../../../../constants/get-card-details';
 import CreateResponse from '../../../common/CreateResponse';
 
 import styles from './styles.module.css';
@@ -68,17 +68,17 @@ function DetailsCard({
 
 			<div className={styles.card_body}>
 
-				{Object.keys(cardLabelsMapping[activeTab]).map((key) => {
-					const item = cardLabelsMapping[activeTab];
+				{Object.keys(CARD_LABELS_MAPPING[activeTab]).map((key) => {
+					const item = CARD_LABELS_MAPPING[activeTab];
 
 					return (
 						<div className={styles.card_item}>
 							<div>{item[key]}</div>
 
-							{['mobile_number', 'whatsapp_number'].includes(key) ? (
+							{['mobile_number', 'whatsapp_number', 'alternate_mobile_number'].includes(key) ? (
 								<div className={styles.item_value}>
 
-									{user[mobileNumberMapping[key]]}
+									{user[MOBILE_NUMBERS_MAPPING[key]]}
 									{' '}
 									-
 									{' '}

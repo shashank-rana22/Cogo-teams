@@ -1,9 +1,8 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-import { useState, useEffect } from 'react';
 
-import { LIST_SECONDARY_COLUMNS_MAPPING } from '../../../../constants/get-table-columns';
-import { tabPanelMapping } from '../../../../constants/tab-panels-mapping';
-import Enrichment from '../Enrichment';
+import TAB_PANEL_MAPPING from '../../../../constants/tab-panel-mapping';
+import Enrichment from '../../common/Enrichment';
+import useRightPanel from '../../hooks/useRightPanel';
 
 import styles from './styles.module.css';
 
@@ -23,32 +22,9 @@ function RightPanel(props) {
 		setParams = () => {},
 	} = props;
 
-	const [secondaryTab, setSecondaryTab] = useState('submitted_requests');
-
-	let filteredColumns = [];
-
-	if (activeTab === 'requests_sent') {
-		// eslint-disable-next-line max-len
-		filteredColumns = columns.filter((listItem) => LIST_SECONDARY_COLUMNS_MAPPING[secondaryTab]?.includes(listItem.id));
-	}
-
-	useEffect(() => {
-		if (secondaryTab === 'uploaded_files') {
-			setApiName('feedback_response_sheets');
-		}
-
-		setParams((prev) => ({
-			...prev,
-			filters: {
-				...(secondaryTab === 'submitted_requests' && {
-					status: 'responded',
-
-				}),
-
-			},
-		}));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [secondaryTab]);
+	const {
+		secondaryTab, setSecondaryTab, filteredColumns,
+	} =	 useRightPanel({ activeTab, columns, setParams, setApiName });
 
 	return (
 
@@ -60,7 +36,7 @@ function RightPanel(props) {
 				onChange={setSecondaryTab}
 			>
 
-				{Object.values(tabPanelMapping).map((item) => (
+				{Object.values(TAB_PANEL_MAPPING).map((item) => (
 
 					<TabPanel name={item.name} title={item.title}>
 
@@ -76,7 +52,7 @@ function RightPanel(props) {
 							debounceQuery={debounceQuery}
 							searchValue={searchValue}
 							setSearchValue={setSearchValue}
-							showStatistics
+							showStatistics={secondaryTab === 'submitted_requests'}
 						/>
 					</TabPanel>
 				))}

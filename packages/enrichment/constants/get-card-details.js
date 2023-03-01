@@ -13,7 +13,8 @@ export const getCardHeaders = (type) => ({
 	},
 });
 
-export const cardLabelsMapping = {
+export const CARD_LABELS_MAPPING = {
+
 	user: {
 		name                    : 'Point Of Contact',
 		email                   : 'Email',
@@ -22,6 +23,7 @@ export const cardLabelsMapping = {
 		whatsapp_number         : 'Whatsapp Number',
 
 	},
+
 	address: {
 		address    : 'Address',
 		city       : 'City',
@@ -33,7 +35,8 @@ export const cardLabelsMapping = {
 	},
 };
 
-export const mobileNumberMapping = {
-	mobile_number   : 'mobile_country_code',
-	whatsapp_number : 'whatsapp_country_code',
+export const MOBILE_NUMBERS_MAPPING = {
+	mobile_number           : 'mobile_country_code',
+	whatsapp_number         : 'whatsapp_country_code',
+	alternate_mobile_number : 'alternate_mobile_country_code',
 };

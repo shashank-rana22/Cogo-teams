@@ -4,7 +4,7 @@ import FileUploader from '@cogoport/forms/page-components/Business/FileUploader'
 import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useUpdateStatus from '../../hooks/useUpdateStatus';
+import useUpdateStatus from '../../../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,6 @@ function UploadDocumentModal(props) {
 	const { loading, handleManualUpload } = useUpdateStatus({
 		uploadProof,
 		setShowUpload,
-		// selectedItem,
 		refetch,
 	});
 

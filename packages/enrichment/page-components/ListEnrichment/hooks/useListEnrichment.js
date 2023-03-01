@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
@@ -6,7 +6,8 @@ import { useSelector } from '@cogoport/store';
 import { format, startCase } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
-import authKeyMapping from '../../../constants/get-auth-key-mapping';
+import AUTH_KEY_MAPPING from '../../../constants/auth-key-mapping';
+import UPLOAD_DOCUMENT_STATUS_MAPPING from '../../../constants/upload-document-status-mapping';
 import styles from '../styles.module.css';
 
 const useListEnrichment = () => {
@@ -48,7 +49,7 @@ const useListEnrichment = () => {
 	const [{ loading, data }, refetch] = useAllocationRequest({
 		url     : `/${apiName}`,
 		method  : 'get',
-		authkey : authKeyMapping[apiName],
+		authkey : AUTH_KEY_MAPPING[apiName],
 		params,
 	}, { manual: false });
 
@@ -80,6 +81,7 @@ const useListEnrichment = () => {
 			...prev,
 
 			filters: {
+				...prev.filters,
 				status: activeTab === 'requests_sent' ? 'responded' : 'requested',
 			},
 		}));
@@ -94,10 +96,13 @@ const useListEnrichment = () => {
 	const columns = [
 		{
 			id       : 'id',
-			Header   : 'ID',
+			Header   : 'SERIAL ID',
 			accessor : ({ serial_id = '' }) => (
 				<section>
-					{serial_id || '-'}
+					<Pill>
+						#
+						{serial_id || '-'}
+					</Pill>
 				</section>
 			),
 		},
@@ -184,14 +189,34 @@ const useListEnrichment = () => {
 			),
 		},
 		{
-			id       : 'download',
-			Header   : 'DOWNLOAD',
+			id       : 'error_sheet_url',
+			Header   : 'ERROR SHEET URL',
+			accessor : ({ error_sheet_url }) => (
+				<section>
+					<Button
+						themeType="secondary"
+						size="md"
+						type="button"
+						disabled={error_sheet_url === null}
+						// eslint-disable-next-line no-undef
+						onClick={() => window.open(error_sheet_url, '_blank')}
+					>
+						Download
+					</Button>
+				</section>
+			),
+		},
+
+		{
+			id       : 'sheet_url',
+			Header   : 'SHEET URL',
 			accessor : ({ sheet_url }) => (
 				<section>
 					<Button
 						themeType="secondary"
 						size="md"
 						type="button"
+						disabled={sheet_url === null}
 						// eslint-disable-next-line no-undef
 						onClick={() => window.open(sheet_url, '_blank')}
 					>
@@ -200,14 +225,15 @@ const useListEnrichment = () => {
 				</section>
 			),
 		},
+
 		{
 			id       : 'edit',
-			Header   : 'Action',
+			Header   : <div className={styles.action_header}>Action</div>,
 			accessor : (item) => {
 				const { id } = item;
 
 				return (
-					<section>
+					<section className={styles.content_container}>
 
 						<Button
 							themeType="secondary"
@@ -234,7 +260,7 @@ const useListEnrichment = () => {
 						className={styles.edit_cta}
 						onClick={() => handleUploadClick(id)}
 					>
-						Edit Details
+						Add Details
 					</Button>
 
 				</section>
@@ -248,7 +274,8 @@ const useListEnrichment = () => {
 			accessor : ({ status }) => (
 
 				<seaction>
-					{startCase(status) || '-'}
+					<Pill size="md" color={UPLOAD_DOCUMENT_STATUS_MAPPING[status]}>{startCase(status) || '-'}</Pill>
+
 				</seaction>
 			),
 		},

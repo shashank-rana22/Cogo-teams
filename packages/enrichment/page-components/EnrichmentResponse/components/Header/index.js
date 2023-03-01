@@ -13,7 +13,7 @@ const cardMapping = {
 function Header(props) {
 	const { locale, partner_id } = props;
 
-	const { requestData, loading } = useEnrichmentRequests();
+	const { requestData = {}, loading } = useEnrichmentRequests();
 
 	if (loading) {
 		return <Placeholder height="60px" width="100%" />;

@@ -8,13 +8,17 @@ import styles from './styles.module.css';
 function List({ columns, list, loading }) {
 	if (isEmpty(list) && !loading) {
 		return (
-			<EmptyState
-				height={280}
-				width={440}
-				emptyText="No records found"
-				textSize="24px"
-				flexDirection="column"
-			/>
+			<div className={styles.table_container}>
+				<EmptyState
+					height={280}
+					width={440}
+					emptyText="No records found"
+					textSize="24px"
+					flexDirection="column"
+				/>
+
+			</div>
+
 		);
 	}
 

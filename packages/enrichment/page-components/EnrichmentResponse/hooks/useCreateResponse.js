@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getUserControls from '../../../configurations/get-controls';
-import { cardLabelsMapping } from '../../../constants/get-card-details';
+import { CARD_LABELS_MAPPING } from '../../../constants/get-card-details';
 
 function useCreateResponse(props) {
 	const {
@@ -23,7 +23,7 @@ function useCreateResponse(props) {
 	const { control, handleSubmit, setValue, formState: { errors } } = formProps;
 
 	useEffect(() => {
-		const items = cardLabelsMapping[activeTab];
+		const items = CARD_LABELS_MAPPING[activeTab];
 
 		Object.keys(items).map((item) => (
 
@@ -44,7 +44,7 @@ function useCreateResponse(props) {
 		});
 
 		setValue('alternate_mobile_number', {
-			country_code : user.alternate_country_code,
+			country_code : user.alternate_mobile_country_code,
 			number       : user.alternate_mobile_number,
 		});
 
@@ -67,17 +67,16 @@ function useCreateResponse(props) {
 
 		if (type === 'edit') {
 			const data = [...responseData];
-			data[index] = { ...newFormValues };
+
+			const existingData = data[index];
+
+			data[index] = { ...existingData, ...newFormValues };
 
 			setResponseData(data);
 
 			setShowDetailsForm(false);
 		} else {
-			setResponseData((prev) => ([
-
-				...prev,
-				newFormValues,
-			]));
+			setResponseData([{ ...newFormValues }]);
 
 			if (type === 'addPoc') {
 				setShowAddPoc(false);

@@ -1,8 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 
-import Filters from '../Filters';
-
+import Filters from './Filters';
 import styles from './styles.module.css';
 
 // eslint-disable-next-line max-len
@@ -24,10 +23,10 @@ function Header(props) {
 
 			<Filters
 				filters={filters}
-				onChangeFilters={onChangeFilters}
-				debounceQuery={debounceQuery}
 				searchValue={searchValue}
+				debounceQuery={debounceQuery}
 				setSearchValue={setSearchValue}
+				onChangeFilters={onChangeFilters}
 			/>
 
 			{activeTab === 'enrichment_requests' && (
@@ -35,22 +34,22 @@ function Header(props) {
 
 					<Button
 						size="lg"
-						themeType="primary"
+						themeType="secondary"
 						style={{ marginRight: '12px' }}
-						onClick={() => setShowUpload(true)}
+						// eslint-disable-next-line no-undef
+						onClick={() => window.open(URL, '_blank')}
 					>
-						<IcMCloudUpload width={16} height={16} style={{ marginRight: '4px' }} />
-						Upload
+						<IcMDownload width={16} height={16} style={{ marginRight: '4px' }} />
+						Download
 					</Button>
 
 					<Button
 						size="lg"
 						themeType="primary"
-                        // eslint-disable-next-line no-undef
-						onClick={() => window.open(URL, '_blank')}
+						onClick={() => setShowUpload(true)}
 					>
-						<IcMDownload width={16} height={16} style={{ marginRight: '4px' }} />
-						Download
+						<IcMCloudUpload width={16} height={16} style={{ marginRight: '4px' }} />
+						Upload
 					</Button>
 
 				</div>

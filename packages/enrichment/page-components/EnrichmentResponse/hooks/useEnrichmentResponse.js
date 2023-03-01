@@ -47,7 +47,7 @@ const useEnrichmentResponse = () => {
 	}, [list]);
 
 	useEffect(() => {
-		setResponseData([]);
+		// setResponseData([]);
 		setShowAddPoc(false);
 	}, [activeTab]);
 
@@ -70,3 +70,7 @@ const useEnrichmentResponse = () => {
 };
 
 export default useEnrichmentResponse;
+
+// if list has data =>  show data
+// dont change data when tabs are changed
+// if list does not have data => show form

@@ -25,31 +25,30 @@ function ListEnrichment() {
 	} = useListEnrichment();
 
 	return (
-
 		<section>
 			<div className={styles.title}>Enrichment Data</div>
 
 			<div>
 				<Tabs
-					activeTab={activeTab}
 					themeType="primary"
+					activeTab={activeTab}
 					onChange={setActiveTab}
 				>
 					<TabPanel name="enrichment_requests" title="Enrichment Requests">
 
 						<LeftPanel
 							list={list}
-							loading={loading}
-							paginationData={paginationData}
 							columns={columns}
-							getNextPage={getNextPage}
+							loading={loading}
 							activeTab={activeTab}
-							globalFilters={globalFilters}
-							setGlobalFilters={setGlobalFilters}
-							debounceQuery={debounceQuery}
 							searchValue={searchValue}
-							setSearchValue={setSearchValue}
 							listRefetch={listRefetch}
+							getNextPage={getNextPage}
+							globalFilters={globalFilters}
+							debounceQuery={debounceQuery}
+							setSearchValue={setSearchValue}
+							paginationData={paginationData}
+							setGlobalFilters={setGlobalFilters}
 						/>
 
 					</TabPanel>
@@ -58,18 +57,19 @@ function ListEnrichment() {
 
 						<RightPanel
 							list={list}
-							loading={loading}
-							paginationData={paginationData}
 							columns={columns}
-							getNextPage={getNextPage}
+							loading={loading}
 							activeTab={activeTab}
-							globalFilters={globalFilters}
-							setGlobalFilters={setGlobalFilters}
-							debounceQuery={debounceQuery}
-							searchValue={searchValue}
-							setSearchValue={setSearchValue}
-							setApiName={setApiName}
 							setParams={setParams}
+							setApiName={setApiName}
+							searchValue={searchValue}
+							listRefetch={listRefetch}
+							getNextPage={getNextPage}
+							globalFilters={globalFilters}
+							debounceQuery={debounceQuery}
+							setSearchValue={setSearchValue}
+							paginationData={paginationData}
+							setGlobalFilters={setGlobalFilters}
 						/>
 
 					</TabPanel>

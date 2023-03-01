@@ -16,10 +16,11 @@ function Response(props) {
 		setResponseData,
 		showAddPoc,
 		setShowAddPoc,
+		refetch,
 
 	} = props;
 
-	const { handleResponseSubmit, loadingSubmit } = useSubmitResponses({ responseData, setResponseData });
+	const { handleResponseSubmit, loadingSubmit } = useSubmitResponses({ responseData, setResponseData, refetch });
 
 	if (loading) {
 		return (
@@ -43,6 +44,7 @@ function Response(props) {
 
 	return (
 		<section>
+
 			<section>
 				{(responseData).map((user, index) => (
 					<DetailsCard

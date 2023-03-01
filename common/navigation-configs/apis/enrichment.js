@@ -46,6 +46,15 @@ const enrichment = [
 		service_name : 'allocation',
 
 	},
+
+	{
+		api          : 'post_allocation_feedback_response_bulk_create',
+		access_type  : 'private',
+		feature      : 'enrichment',
+		service_name : 'allocation',
+
+	},
+
 	{
 		api          : 'get_allocation_feedback_request_stats',
 		access_type  : 'private',

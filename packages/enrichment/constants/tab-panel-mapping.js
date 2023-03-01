@@ -1,4 +1,4 @@
-export const tabPanelMapping = {
+const TAB_PANEL_MAPPING = {
 	submitted_requests: {
 		name  : 'submitted_requests',
 		title : 'Submitted Requests',
@@ -10,3 +10,5 @@ export const tabPanelMapping = {
 	},
 
 };
+
+export default TAB_PANEL_MAPPING;

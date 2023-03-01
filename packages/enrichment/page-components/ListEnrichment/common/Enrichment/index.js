@@ -1,12 +1,11 @@
 import { Modal, Pagination } from '@cogoport/components';
 import { useState } from 'react';
 
-import Header from '../Header';
-import Statistics from '../Statistics';
-import UploadDocumentModal from '../UploadDocumentModal';
-
+import Header from './Header';
 import List from './List';
+import Statistics from './Statistics';
 import styles from './styles.module.css';
+import UploadDocumentModal from './UploadDocumentModal';
 
 function Enrichment(props) {
 	const {

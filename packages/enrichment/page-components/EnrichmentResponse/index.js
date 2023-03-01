@@ -19,15 +19,18 @@ const tabPanelMapping = {
 
 function EnrichmentResponse() {
 	const {
+		locale,
+		refetch,
 		loading,
 		activeTab,
+		partner_id,
 		setActiveTab,
 		setResponseData,
+		paginationData,
 		responseData,
 		showAddPoc,
 		setShowAddPoc,
-		locale,
-		partner_id,
+
 	} = useEnrichmentResponse();
 
 	return (
@@ -55,6 +58,8 @@ function EnrichmentResponse() {
 								loading={loading}
 								showAddPoc={showAddPoc}
 								setShowAddPoc={setShowAddPoc}
+								refetch={refetch}
+								paginationData={paginationData}
 							/>
 
 						</TabPanel>

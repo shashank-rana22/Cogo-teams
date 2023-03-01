@@ -1,5 +1,5 @@
 import { LIST_PRIMARY_COLUMNS_MAPPING } from '../../../../constants/get-table-columns';
-import Enrichment from '../Enrichment';
+import Enrichment from '../../common/Enrichment';
 
 function LeftPanel(props) {
 	const {
