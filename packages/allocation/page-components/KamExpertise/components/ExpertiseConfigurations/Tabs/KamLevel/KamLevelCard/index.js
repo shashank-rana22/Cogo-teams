@@ -30,7 +30,7 @@ function KamLevelCard({
 	data,
 
 }) {
-	const { level } = data;
+	const { level, transition_level } = data;
 	return (
 
 		<div className={styles.whole}>
@@ -47,7 +47,7 @@ function KamLevelCard({
 						{level}
 					</b>
 					<IcMArrowNext className={styles.arrow} />
-					<b>1</b>
+					<b>{transition_level}</b>
 				</div>
 
 				<div className={styles.button_container}>

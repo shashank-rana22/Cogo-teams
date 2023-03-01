@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     color: #4F4F4F;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     margin-left: 12px;
     margin-top: 24px;
 
@@ -34,6 +34,8 @@
         font-size: 21px;
         line-height: 32px;
         color: #333333;
-
-   
+        margin-left: 12px;
+        margin-top:6px;
+        margin-bottom: 16px;
+       
     }

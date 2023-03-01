@@ -1,7 +1,8 @@
 export const dummyData = {
 
 	kam_level_1: {
-		level                         : '1',
+		level                         : 1,
+		transition_level              : 2,
 		customer_expertise_score      : 1111,
 		trade_expertise_score         : 2222,
 		commodity_expertise_score     : 3333,
@@ -12,7 +13,8 @@ export const dummyData = {
 
 	},
 	kam_level_2: {
-		level                         : '2',
+		level                         : 2,
+		transition_level              : 3,
 		customer_expertise_score      : 5555,
 		trade_expertise_score         : 6666,
 		commodity_expertise_score     : 7777,
@@ -22,7 +24,8 @@ export const dummyData = {
 		retained_account_min_duration : 12,
 	},
 	kam_level_3: {
-		level                         : '3',
+		level                         : 3,
+		transition_level              : 4,
 		customer_expertise_score      : 9999,
 		trade_expertise_score         : 12000,
 		commodity_expertise_score     : 25000,
