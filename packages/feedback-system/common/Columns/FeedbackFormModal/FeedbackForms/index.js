@@ -67,11 +67,11 @@ function FeedbackForms({
 
 	const resignedOptions = [{
 		label : 'Yes',
-		value : '1',
+		value : '2',
 		...(action === 'show' ? { disabled: true } : {}),
 	}, {
 		label : 'No',
-		value : '0',
+		value : '1',
 		...(action === 'show' ? { disabled: true } : {}),
 	}];
 
