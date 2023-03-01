@@ -78,12 +78,9 @@ const useListEnrichment = () => {
 
 		setParams((prev) => ({
 			...prev,
+
 			filters: {
-				...(activeTab === 'requests_sent' && {
-					status: 'responded',
-
-				}),
-
+				status: activeTab === 'requests_sent' ? 'responded' : 'requested',
 			},
 		}));
 	}, [activeTab]);
