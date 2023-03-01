@@ -2,6 +2,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react';
 
+import compareArrays from '../../../utils/arrayComparison';
 import useSetKycStatus from '../hooks/useSetKycStatus';
 import getKycTabsMapping from '../utils/kycTabsMapping';
 
@@ -17,10 +18,16 @@ function KycStatusTabs({
 	const { kycTabsMapping } = getKycTabsMapping({ dataStats });
 
 	const color = (kycStatus) => {
-		if (!kycStatus && !params?.filters?.kyc_status) {
+		const { kyc_status } = params?.filters || {};
+
+		if (!kycStatus && !kyc_status) {
 			return { background: '#f9f199' };
 		}
-		if (kycStatus && params?.filters?.kyc_status === kycStatus) {
+		if (typeof kyc_status === 'object') {
+			if (kycStatus && compareArrays(kyc_status, kycStatus)) {
+				return { background: '#f9f199' };
+			}
+		} else if (kyc_status === kycStatus) {
 			return { background: '#f9f199' };
 		}
 		return {};

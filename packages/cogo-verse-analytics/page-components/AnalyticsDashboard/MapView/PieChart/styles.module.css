@@ -1,0 +1,6 @@
+.no_data_found {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}

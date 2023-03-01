@@ -13,12 +13,6 @@ tests_output
 .vs
 
 ############################
-# data store
-############################
-
-.data-store
-
-############################
 # npm/yarn
 ############################
 
@@ -165,8 +159,4 @@ out/
 !/cogo-control/pages/v2/
 !/cogo-control/pages/v2/index.js
 
-<<<<<<< HEAD
-#get country json file
-=======
->>>>>>> 7173806d33e335ee06d7da132d05cde480890f16
 .data-store

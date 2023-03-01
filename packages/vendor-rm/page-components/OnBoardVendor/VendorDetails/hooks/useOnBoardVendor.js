@@ -171,7 +171,7 @@ function useOnBoardVendor({
 			if (registrationType) {
 				newField = {
 					...newField,
-					label: `Upload ${startCase(registrationType)} Certificate`,
+					label: `Upload ${registrationType.toUpperCase()} Certificate`,
 				};
 			}
 		}
@@ -215,7 +215,6 @@ function useOnBoardVendor({
 					[key]: {
 						...data,
 						registration_proof_url: formattedValues?.registration_proof_url?.finalUrl,
-
 					},
 				};
 			});

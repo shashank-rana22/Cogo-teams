@@ -20,6 +20,8 @@ function ListVendors() {
 		columns,
 		showFilter,
 		setShowFilter,
+		searchValue,
+		handleChangeQuery,
 	} = useVendorList();
 
 	const {
@@ -83,11 +85,8 @@ function ListVendors() {
 					<div className={styles.input_wrapper}>
 						<Input
 							size="md"
-							value={params.filters?.q}
-							onChange={(value) => setParams((pv) => ({
-								...pv,
-								filters: { ...pv.filters, q: value || undefined },
-							}))}
+							value={searchValue}
+							onChange={(value) => handleChangeQuery(value)}
 							placeholder="Search by PAN / GST / Business Name..."
 						/>
 					</div>

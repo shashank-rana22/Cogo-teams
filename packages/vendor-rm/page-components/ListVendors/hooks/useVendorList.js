@@ -1,4 +1,5 @@
 import { Tooltip, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMCrossInCircle, IcCFtick, IcMArrowRotateDown, IcMArrowRotateUp, IcMError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -63,9 +64,14 @@ const renderUniqueServices = ({ services, type }) => {
 };
 
 const useVendorList = () => {
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
+
+	const [searchValue, setSearchValue] = useState();
+
 	const [params, setParams] = useState({
 		filters: {
-			status: 'active',
+			status : 'active',
+			q      : searchQuery || undefined,
 		},
 		page                     : 1,
 		pagination_data_required : true,
@@ -95,12 +101,27 @@ const useVendorList = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params]);
 
+	useEffect(() => {
+		setParams((prevParams) => ({
+			...prevParams,
+			filters: {
+				...prevParams.filters,
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
 	const formatDate = (date) => format(date, 'dd MMM yyyy');
 
 	const handleViewMore = (id) => {
 		const href = '/vendors/[vendor_id]';
 		const as = `/vendors/${id}`;
 		router.push(href, as);
+	};
+
+	const handleChangeQuery = (value) => {
+		setSearchValue(value);
+		debounceQuery(value);
 	};
 
 	const getHeader = () => (
@@ -220,6 +241,8 @@ const useVendorList = () => {
 		columns,
 		showFilter,
 		setShowFilter,
+		searchValue,
+		handleChangeQuery,
 	};
 };
 

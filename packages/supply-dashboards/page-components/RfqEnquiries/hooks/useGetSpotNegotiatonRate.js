@@ -7,7 +7,7 @@ const allFieldsPresent = (value, controls) => {
 	controls.forEach((item) => {
 		if (
 			item.requirement
-			&& isEmpty(value[item.name])
+			&& isEmpty(value?.[item.name])
 		) {
 			msg.push(item);
 		}
@@ -34,9 +34,9 @@ const useGetSpotNegotiationRate = ({ values, controls, service }) => {
 			const handleData = await trigger({
 				params: {
 					spot_negotiation_id : spot_negotiation_id || val?.spot_negotiation_id,
-					service_provider_id : service_provider_id || val.service_provider_id,
+					service_provider_id : service_provider_id || val?.service_provider_id,
 					[service]           : {
-						shipping_line_id         : shipping_line_id || val.shipping_line_id || undefined,
+						shipping_line_id         : shipping_line_id || val?.shipping_line_id || undefined,
 						origin_main_port_id      : origin_main_port_id || undefined,
 						destination_main_port_id : destination_main_port_id || undefined,
 						airline_id               : airline_id || undefined,
@@ -46,7 +46,6 @@ const useGetSpotNegotiationRate = ({ values, controls, service }) => {
 			});
 			return handleData;
 		} catch (err) {
-			// console.log(err);
 			return null;
 		}
 	};

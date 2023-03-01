@@ -19,7 +19,8 @@ function Filters({
 		params      : {
 			filters: {
 				status       : 'active',
-				entity_types : stakeHolderType === 'channel_partner' ? [stakeHolderType] : undefined,
+				entity_types : ['channel_partner', 'cogoport'].includes(stakeHolderType)
+					? [stakeHolderType] : undefined,
 			},
 		},
 	});
@@ -48,7 +49,7 @@ function Filters({
 			<div className={styles.select_container} id="rnp_role_list_filters_select_container">
 				{modifiedControls?.map((control) => {
 					const Element = getElements(control.type);
-					if (control.name === 'stakeholder_id' && ['cogoport', 'customer'].includes(stakeHolderType)) {
+					if (control.name === 'stakeholder_id' && ['customer'].includes(stakeHolderType)) {
 						return null;
 					}
 					if (control.name === 'navigation' && stakeHolderType === 'customer') {
