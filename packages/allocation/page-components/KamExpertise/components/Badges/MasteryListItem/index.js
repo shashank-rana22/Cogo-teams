@@ -28,7 +28,7 @@ function MasteryListItem() {
 
 	// const {
 	// 	onCheckPublish, loadingCheckPublishability,
-	// } = useBadgeConfiguration();
+	// } = useCreateBadgeConfiguration();
 	// // } = useBadgeConfigurationAttributes();
 
 	const handleSubmit = () => {

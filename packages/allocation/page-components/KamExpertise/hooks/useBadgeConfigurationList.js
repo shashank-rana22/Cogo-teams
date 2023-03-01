@@ -1,14 +1,14 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useAllocationRequest } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 
-function useBadgeConfiguration() {
-	const [{ loading }, trigger] = useAllocationRequest({
-		url     : '/kam_expertise_badge_configuration',
-		method  : 'POST',
-		authkey : 'post_allocation_kam_expertise_badge_configuration',
-	});
-	const onCheckPublish = async () => {
+function useBadgeConfigurationList() {
+	const [{ loading }, trigger] = useRequest({
+		url     : '/get_allocation_kam_expertise_badge_configuration_list',
+		method  : 'GET',
+		authkey : 'get_allocation_kam_expertise_badge_configuration_list',
+	}, { manual: false });
+	const fetchBadgeList = async () => {
 		try {
 			const payload = {
 				version_id                           : '1',
@@ -20,14 +20,13 @@ function useBadgeConfiguration() {
 				// performed_by_type                    : 'sales_person',
 			};
 
-			await trigger({
-				data: payload,
-			});
+			// const response = await trigger({ params: { filters: { user_id, partner_id } } });
+			const response = await trigger();
 
 			// listRefetch();
 
 			// setShow(false);
-
+			console.log(response);
 			Toast.success('Checking for Publishability. Please check after some time.');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
@@ -36,8 +35,8 @@ function useBadgeConfiguration() {
 
 	return {
 		loading,
-		onCheckPublish,
+		fetchBadgeList,
 	};
 }
 
-export default useBadgeConfiguration;
+export default useBadgeConfigurationList;

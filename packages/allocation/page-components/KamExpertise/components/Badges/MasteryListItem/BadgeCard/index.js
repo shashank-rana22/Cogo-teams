@@ -2,6 +2,7 @@ import { Modal } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useCreateBadgeConfiguration from '../../../../hooks/useCreateBadgeConfiguration';
 import GetCard from '../../CreateBadge/getCard';
 
 import styles from './styles.module.css';
@@ -36,11 +37,10 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 			{ openModal
 						&& (
 							<Modal
-								size="sm"
+								size="md"
 								show={openModal}
 								onClose={() => setOpenModal((pv) => !pv)}
 								placement="center"
-								className={styles.modal_class}
 							>
 								<Modal.Body>
 									<div style={{ padding: '10px' }}>
@@ -48,7 +48,6 @@ function BadgeCard({ medalType = '', score = '', img_url = '', isLast = {} }) {
 											medalType={medalType}
 											inputPlaceHolder="score"
 											isLastItem
-											isBadgeEdit
 										/>
 									</div>
 								</Modal.Body>
