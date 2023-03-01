@@ -61,3 +61,11 @@
 .tabs_style {
 	box-shadow: 0 0 8px rgb(98 127 172 / 6%);
 }
+
+.back_icon {
+	width: 25px;
+	height: 25px;
+	margin: 5px 10px 10px 0;
+	cursor: pointer;
+	fill: #ff2431;
+}

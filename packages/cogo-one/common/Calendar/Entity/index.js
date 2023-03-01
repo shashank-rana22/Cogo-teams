@@ -14,12 +14,13 @@ export function CalendarEntity({
 	resetDiv,
 	pagination,
 	setPagination,
-	isWeek,
+	timeline,
 }) {
 	const animationTime = 1;
 	const [position, setPosition] = useState(-33.3);
 
 	const calendarRef = useRef();
+	const isWeek = timeline === 'week';
 
 	function GetNewData(shift) {
 		setTimeout(() => {
@@ -52,7 +53,15 @@ export function CalendarEntity({
 		<div ref={calendarRef} className={`${styles.calendar} ${isWeek ? styles.week_calendar : ''}`}>
 			{
 				calendarData?.map(({ label, subLabel, key, date }) => {
-					const isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
+					let isDateEqual;
+					if (timeline === 'day') {
+						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
+					} else if (timeline === 'week') {
+						isDateEqual = format(selectedItem, 'dd MMM YYYY') === format(date, 'dd MMM YYYY');
+					} else if (timeline === 'month') {
+						isDateEqual = format(selectedItem, 'MMM') === format(date, 'MMM');
+					}
+
 					return (
 						<div
 							key={key}

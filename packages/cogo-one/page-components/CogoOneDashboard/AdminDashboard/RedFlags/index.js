@@ -7,45 +7,34 @@ import LoaderRedFlags from '../LoaderRedFlags';
 
 import styles from './styles.module.css';
 
-function RedFlags({ loading = true }) {
+function RedFlags({ loading = false }) {
 	const { escalations: configEscalations = [] } = configurationData;
 
-	if (isEmpty(configEscalations)) {
-		return (
-			<div className={styles.redflags_container}>
-				<div className={styles.heading}>Escalations</div>
-				<img src={emptyEscalations} alt="" width="300px" height="300px" />
-			</div>
-		);
-	}
 	return (
 		<div className={styles.redflags_container}>
 			<div className={styles.heading}>Escalations</div>
-
-			{
-					loading ? <LoaderRedFlags />
-						: (
-							<div className={styles.redflags_lists}>
-								{(configEscalations || []).map((item) => {
-									const { agent_name, escalation_count } = item;
-									return (
-
-										<div className={styles.escalations_list}>
-											<div className={styles.picture_name_kam_box}>
-												<div className={styles.picture}>
-													<img src={agentAvatar} alt="AA" />
-												</div>
-
-												<div className={styles.name}>{agent_name}</div>
-												<div className={styles.job_role}>kam</div>
-											</div>
-											<div className={styles.notification_nos}>{escalation_count}</div>
+			{loading && <LoaderRedFlags />}
+			{(isEmpty(configEscalations)) && !loading
+				? <img src={emptyEscalations} alt="" width="300px" height="300px" />
+				: (
+					<div className={styles.redflags_lists}>
+						{(configEscalations || []).map((item) => {
+							const { agent_name, escalation_count, role } = item;
+							return (
+								<div className={styles.escalations_list}>
+									<div className={styles.picture_name_kam_box}>
+										<div className={styles.picture}>
+											<img src={agentAvatar} alt="AA" />
 										</div>
-									);
-								})}
-							</div>
-						)
-				}
+										<div className={styles.name}>{agent_name}</div>
+										<div className={styles.job_role}>{role}</div>
+									</div>
+									<div className={styles.notification_nos}>{escalation_count}</div>
+								</div>
+							);
+						})}
+					</div>
+				)}
 		</div>
 	);
 }

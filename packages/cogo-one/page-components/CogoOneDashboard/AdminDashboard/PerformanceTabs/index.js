@@ -1,22 +1,23 @@
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 // import { Tabs, TabPanel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { configurationData } from '../../../../configurations/configurationData';
 // eslint-disable-next-line import/named
 // import { bestPerformanceTabsData, worstPerformanceTabsData } from '../../../../configurations/dummyPerformanceTabsData';
-// import { emptyPerformance } from '../../constants';
+import { emptyPerformance } from '../../constants';
 import LoaderPerformance from '../LoaderPerformance';
 
 import styles from './styles.module.css';
 
-function PerformanceTab({ loading = false, agents_performance = {} }) {
+function PerformanceTab({ loading = false }) {
 	const { agents_performance: configAgentPerformance } = configurationData;
-	const { best_performance, worst_performance } = agents_performance;
+	// const { best_performance = [], worst_performance = [] } = agentsPerformance;
 
 	const [activeTab, setActiveTab] = useState('best_performance');
-	const data = activeTab === 'best_performance' ? best_performance : worst_performance;
+	// const data = activeTab === 'best_performance' ? best_performance : worst_performance;
 
 	const performanceBtnMapping = [
 		{
@@ -58,11 +59,9 @@ function PerformanceTab({ loading = false, agents_performance = {} }) {
 			</div>
 
 			<div className={styles.performance_tab_container}>
-				{
-				loading
-					? (
-						<LoaderPerformance />
-					)
+				{loading && <LoaderPerformance />}
+				{(isEmpty(configAgentPerformance)) && !loading
+					? <img src={emptyPerformance} alt="" width="300px" height="250px" />
 					: (
 						<div className={styles.performance_tab_lists}>
 							{Object.keys(configAgentPerformance || {}).map((item) => {
@@ -81,8 +80,7 @@ function PerformanceTab({ loading = false, agents_performance = {} }) {
 								);
 	   				})}
 						</div>
-					)
-			}
+					)}
 			</div>
 		</div>
 

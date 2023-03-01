@@ -1,13 +1,11 @@
 import React from 'react';
 
-// import { happyIcon, neutralIcon, angryIcon } from '../../constants';
 import { satisfactionData } from '../../../../configurations/dummyStatisfactionData';
 
 import styles from './styles.module.css';
 
-function Statisfaction({ customer_satisfaction }) {
+function Statisfaction({ customerSatisfaction = {} }) {
 	return (
-
 		<div className={styles.statisfaction_box}>
 			<div className={styles.heading}>User Satisfaction</div>
 			{satisfactionData.map((item) => {
@@ -16,14 +14,13 @@ function Statisfaction({ customer_satisfaction }) {
 					<div className={styles.sub_section}>
 						<div className={styles.icon_plus_number}>
 							<div>{icon}</div>
-							<div className={styles.customers_numbers}>{customer_satisfaction[key] || 0}</div>
+							<div className={styles.customers_numbers}>{customerSatisfaction[key] || 0}</div>
 						</div>
 						<div className={styles.label}>{label}</div>
 					</div>
 				);
 			})}
 		</div>
-
 	);
 }
 

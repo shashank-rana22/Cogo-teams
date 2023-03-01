@@ -1,15 +1,16 @@
-/* eslint-disable max-len */
 import { cl } from '@cogoport/components';
 import { IcMProfile, IcMTimer } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { configurationData } from '../../../../configurations/configurationData';
-// import { busyAgentsData } from '../../../../configurations/dummyBusyAgentProfileData';
 import EmptyState from '../../EmptyState';
 
 import styles from './styles.module.css';
 
-function AgentActivity({ emptyState = true, agents_details = {} }) {
+function AgentActivity({ agentsDetails = {}, getCogoOneDashboard = () => {} }) {
+	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('busy_agents');
 	const { agents_details_config } = configurationData;
 
@@ -26,72 +27,75 @@ function AgentActivity({ emptyState = true, agents_details = {} }) {
 	};
 
 	return (
-		// eslint-disable-next-line react/jsx-no-useless-fragment
-		<>
-			<div className={styles.main_container}>
-				<div className={styles.activity_name}>Your Agents</div>
-				<div className={styles.main_container_upperpart}>
-					{Object.keys(agents_details_config).map((agentType) => {
-						const { agent_label } = agents_details_config[agentType];
-						return (
-							<button
-								className={`${styles.agent_nos_box} 
+		<div className={styles.main_container}>
+			<div className={styles.activity_name}>Your Agents</div>
+			<div className={styles.main_container_upperpart}>
+				{Object.keys(agents_details_config).map((agentType) => {
+					const { agent_label } = agents_details_config[agentType];
+					return (
+						<button
+							className={`${styles.agent_nos_box} 
 								${activeTab === agentType ? styles.agent_active_box : ''}`}
-								onClick={() => setActiveTab(agentType)}
-							>
-								<div className={styles.agent_nos_box_uppersection}>
-									<div className={styles.agents_nos}>{agents_details?.[agentType]?.total_agent}</div>
-									<div className={`${styles.agent_status} ${tabMapping[agentType]}`} />
-								</div>
-								<div className={styles.agents_status_text}>
-									{agent_label}
-								</div>
-							</button>
-						);
-					})}
+							onClick={() => setActiveTab(agentType)}
+						>
+							<div className={styles.agent_nos_box_uppersection}>
+								<div className={styles.agents_nos}>{agentsDetails?.[agentType]?.total_agent || 0}</div>
+								<div className={`${styles.agent_status} ${tabMapping[agentType]}`} />
+							</div>
+							<div className={styles.agents_status_text}>
+								{agent_label}
+							</div>
+						</button>
+					);
+				})}
 
-				</div>
-				{
-							emptyState ? <EmptyState />
-								: (
-
-									<div className={styles.main_container_lowerpart}>
-										{agents_details?.[activeTab]?.agents?.map((item) => {
-											const { picture, name, contact_nos, duration } = item;
-
-											return (
-												<div className={styles.profile_box}>
-													<div className={styles.profile_box_left}>
-														<div className={cl`${styles.circle_icon} ${tabMapping[activeTab]}`} />
-														<div className={styles.profile_icon}>{picture}</div>
-													</div>
-													<div className={styles.profile_box_right}>
-														<div className={styles.profile_box_right_up}>
-															<div className={styles.name}>{name}</div>
-															<div className={styles.call_status}>{callStatusMapping[activeTab]}</div>
-														</div>
-														<div className={styles.profile_box_right_down}>
-															<div className={styles.icon_plus_nos}>
-																<div><IcMProfile fill="#BDBDBD" /></div>
-																<div className={styles.contact_nos}>{contact_nos}</div>
-															</div>
-															<div className={styles.icon_plus_time}>
-																<div><IcMTimer fill="#BDBDBD" /></div>
-																<div className={styles.duration}>{duration}</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											);
-										})}
-									</div>
-								)
-
-					}
 			</div>
+			{isEmpty(agentsDetails?.[activeTab]?.agents) ? <EmptyState />
+				: (
+					<div className={styles.main_container_lowerpart}>
+						{agentsDetails?.[activeTab]?.agents?.map((item) => {
+							const { picture, name, active_assigned_chats, duration, agent_id = '' } = item;
 
-		</>
+							const redirectToAgentView = (agentId = '42270ace-f97e-41e2-90bc-a336d90d791f') => {
+								if (!agentId) return;
+								router.push('/cogo-one/dashboard/[id]', `/cogo-one/dashboard/${agentId}`);
+								if (agentId) {
+									getCogoOneDashboard(agentId);
+								}
+							};
 
+							return (
+								<div
+									className={styles.profile_box}
+									role="presentation"
+									onClick={() => redirectToAgentView(agent_id)}
+								>
+									<div className={styles.profile_box_left}>
+										<div className={cl`${styles.circle_icon} ${tabMapping[activeTab]}`} />
+										<div className={styles.profile_icon}>{picture}</div>
+									</div>
+									<div className={styles.profile_box_right}>
+										<div className={styles.profile_box_right_up}>
+											<div className={styles.name}>{name}</div>
+											<div className={styles.call_status}>{callStatusMapping[activeTab]}</div>
+										</div>
+										<div className={styles.profile_box_right_down}>
+											<div className={styles.icon_plus_nos}>
+												<div><IcMProfile fill="#BDBDBD" /></div>
+												<div className={styles.contact_nos}>{active_assigned_chats}</div>
+											</div>
+											<div className={styles.icon_plus_time}>
+												<div><IcMTimer fill="#BDBDBD" /></div>
+												<div className={styles.duration}>{duration}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				)}
+		</div>
 	);
 }
 

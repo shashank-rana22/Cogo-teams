@@ -19,20 +19,17 @@ export const configurationData = 	{
 		busy_agents: {
 			agent_label : 'Busy Agents',
 			total_agent : 0,
-			agents      : [
-			],
+			agents      : [],
 		},
 		online_agents: {
 			agent_label : 'Online Agents',
 			total_agent : 0,
-			agents      : [
-			],
+			agents      : [],
 		},
 		offline_agents: {
 			agent_label : 'Offline Agents',
 			total_agent : 0,
-			agents      : [
-			],
+			agents      : [],
 		},
 	},
 	customer_satisfaction: {
