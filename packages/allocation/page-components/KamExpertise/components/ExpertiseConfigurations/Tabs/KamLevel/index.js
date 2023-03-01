@@ -1,45 +1,42 @@
-import { Button, Accordion } from '@cogoport/components';
-import { format } from '@cogoport/utils';
-import React from 'react';
+import { Accordion } from '@cogoport/components';
+import React, { useState } from 'react';
 
+import { dummyData } from './DummyData';
+import HeaderCard from './HeaderCard';
 import KamLevelCard from './KamLevelCard';
-import KamLevelDetails from './KamLevelDetails';
+import KamLevelDetailsEdit from './KamLevelDetailsEdit';
+import KamLevelDetailsShow from './KamLevelDetailsShow';
 import styles from './styles.module.css';
 
 function KamLevel() {
+	const [titleVisibile, setTitleVisible] = useState(true);
+	const [editItem, setEditItem] = useState(true);
 	return (
 		<div>
-			<div className={styles.container}>
-				<div>
-					<div className={styles.heading}>
-						Currently Editing&nbsp;:&nbsp;
-						<strong>Saved Draft</strong>
-					</div>
-
-					<div className={styles.sub_container}>
-						<div className={styles.left_text}>
-							Published On&nbsp;:&nbsp;
-							<strong>{format(new Date(), 'dd MMM yyyy')}</strong>
-						</div>
-
-						<div>
-							Published by&nbsp;:&nbsp;
-							<strong>Cogoparth</strong>
-						</div>
-					</div>
-				</div>
-				<div className={styles.button_container}>
-					<Button>Create Kam Level</Button>
-					<Button themeType="secondary">Save as Draft</Button>
-					<Button>Publish</Button>
-
-				</div>
-			</div>
+			<HeaderCard />
 			<div>
-				<Accordion type="text" title={<KamLevelCard />} style={{ width: '100%' }} className={styles.accrodian}>
-					<KamLevelDetails />
-				</Accordion>
+
+				{Object.entries(dummyData).map(([key, value]) => (
+					<Accordion
+						id={key}
+						title={(
+							<KamLevelCard
+								title={titleVisibile}
+								setEditItem={setEditItem}
+								editItem={editItem}
+								data={value}
+							/>
+						)}
+						className={styles.accrodian}
+					>
+						{editItem ? <KamLevelDetailsShow data={value} /> : <KamLevelDetailsEdit />}
+
+					</Accordion>
+
+				))}
+
 			</div>
+
 		</div>
 
 	);

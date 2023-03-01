@@ -23,9 +23,8 @@ function Badges() {
 	const [badgeList, setBadgeList] = useState([]);
 	// const [badgeList, setBadgeList] = useState(false);
 
-	// const [createBadge, setCreateBadge] = useState(true);
-	const [createBadge, setCreateBadge] = useState(false);
-	const [createMastery, setCreateMastery] = useState(false);
+	const [window, setWindow] = useState(1);
+
 	useEffect(() => {
 		fetchBadgeList(setBadgeList);
 		setBadgeList(listData);
@@ -49,21 +48,36 @@ function Badges() {
 				</div>
 
 				<div>
-					<Header badgeList={badgeList} setCreateBadge={setCreateBadge} setCreateMastery={setCreateMastery} />
+					<Header
+						badgeList={badgeList}
+						setWindow={setWindow}
+					/>
 				</div>
 			</section>
 
 			{
-				createBadge && (
+				(window === 1)
+			&& (
+				<section>
+					<MasteryListItem />
+					<BadgeListItem />
+					<BadgeListItem />
+				</section>
+			)
+			}
+
+			{
+				(window === 2) && (
 					<div>
-						<CreateBadge setCreateBadge={setCreateBadge} />
+						<CreateMastery setWindow={setWindow} />
 					</div>
 				)
 			}
+
 			{
-				createMastery && (
+				(window === 3) && (
 					<div>
-						<CreateMastery setCreateMastery={setCreateMastery} />
+						<CreateBadge setWindow={setWindow} />
 					</div>
 				)
 			}
