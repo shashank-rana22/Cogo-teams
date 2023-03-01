@@ -1,0 +1,57 @@
+.notes_container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 8px 12px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 6px;
+
+	:global {
+		.ui_buttonicon_container {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.note_time {
+	font-size: 10px;
+	color: #4f4f4f;
+}
+
+.created_by {
+	margin-left: 4px;
+	font-size: 10px;
+	color: #4f4f4f;
+}
+
+.content {
+	display: flex;
+	width: 95%;
+	height: fit-content;
+	font-size: 12px;
+	word-break: break-word;
+}
+
+.empty_div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 400px;
+}
+
+.title {
+	margin-top: 6px;
+}
