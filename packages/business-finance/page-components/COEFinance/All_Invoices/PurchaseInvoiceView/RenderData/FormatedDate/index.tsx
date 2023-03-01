@@ -27,29 +27,29 @@ interface Props {
 }
 
 function FormatedDate({ item, field }: Props) {
-	const { topKey = {}, bottomKey = {} } = field;
-	const getCreatedDate = format(item?.createdDate, 'dd MMM, yyyy', {}, false);
-	const getCreatedDateTime = format(item?.createdDate, 'h:mm:aa', {}, false);
-	const getBillDate = format(item?.billDate, 'dd MMM, yyyy', {}, false);
-	const getDueDate = format(item?.dueDate, 'dd MMM, yyyy', {}, false);
+	const { createdDate, billDate, dueDate, subTotal, billCurrency, grandTotal } = item || {};
+	const getCreatedDate = format(createdDate, 'dd MMM, yyyy', {}, false);
+	const getCreatedDateTime = format(createdDate, 'h:mm:aa', {}, false);
+	const getBillDate = format(billDate, 'dd MMM, yyyy', {}, false);
+	const getDueDate = format(dueDate, 'dd MMM, yyyy', {}, false);
 
 	const content = (
 		<>
 			<div className={styled.pre_tax}>
 				Pre Tax :
 				<text className={styled.pre_tax_amount}>
-					{getFormattedPrice(item.subTotal!, item.billCurrency!)}
+					{getFormattedPrice(subTotal, billCurrency!)}
 				</text>
 			</div>
 			<div className={styled.post_tax}>
 				Post Tax:
 				<text className={styled.post_tax_amount}>
-					{getFormattedPrice(item.grandTotal!, item.billCurrency!)}
+					{getFormattedPrice(grandTotal, billCurrency!)}
 				</text>
 			</div>
 		</>
 	);
-	const formatAmount = getFormattedPrice(item.grandTotal!, item.billCurrency!) || '-';
+	const formatAmount = getFormattedPrice(grandTotal, billCurrency) || '-';
 	return (
 		<div>
 
@@ -68,10 +68,8 @@ function FormatedDate({ item, field }: Props) {
 			)}
 			{field?.label === 'Last Modified Date' && (
 				<div>
-					{topKey && <text className={styled.sid}>{getCreatedDate}</text>}
-					{bottomKey && (
-						<div className={styled.service_type}>{getCreatedDateTime}</div>
-					)}
+					<text className={styled.sid}>{getCreatedDate}</text>
+					<div className={styled.service_type}>{getCreatedDateTime}</div>
 				</div>
 			)}
 		</div>

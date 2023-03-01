@@ -97,3 +97,13 @@
 	font-weight: 600;
 	color: red;
 }
+
+.margin_bottom{
+	margin-bottom: 8px;
+	overflow: scroll;
+}
+.flex_center{
+	display: flex;
+	align-items: center;
+	overflow: scroll;
+}

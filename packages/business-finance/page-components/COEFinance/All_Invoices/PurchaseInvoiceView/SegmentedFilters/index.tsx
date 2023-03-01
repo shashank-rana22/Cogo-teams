@@ -34,7 +34,7 @@ function SegmentedFilters({
 	filters,
 	setFilters,
 }: SegmentFilterProps) {
-	const { statsData }: any = usePurchaseViewStats();
+	const { statsData } = usePurchaseViewStats();
 
 	return (
 		<div className={styled.main}>

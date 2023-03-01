@@ -36,15 +36,16 @@ interface Props {
 }
 function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const [remark, setRemark] = useState('');
-	const { bill, remarks = [] } = data || {};
-	const { grandTotal, billCurrency } = bill || {};
+	const { bill, remarks = [], serviceType, billAdditionalObject } = data || {};
+	const { urgencyTag, urgencyRemarks } = billAdditionalObject || {};
+	const { grandTotal, billCurrency, id } = bill || {};
 	const [removeTag, setRemoveTag] = useState(false);
 	const [showAddTag, setShowAddTag] = useState(false);
 	const [tagValue, setTagValue] = useState('');
 	const { query } = useRouter();
 	const { billType, isProforma } = query;
 
-	if (data?.serviceType === 'air_freight') {
+	if (serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
 	}
 	let invoiceType = startCase(billType);
@@ -59,7 +60,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 
 	let displayTag = '';
 	urgencyOptions.forEach((option) => {
-		if (option.value === data?.billAdditionalObject?.urgencyTag) {
+		if (option.value === urgencyTag) {
 			displayTag = option.label;
 		}
 	});
@@ -67,7 +68,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 	const remarkRender = () => (
 		<div>
 			Urgent Remarks -
-			{data?.billAdditionalObject?.urgencyRemarks}
+			{urgencyRemarks}
 		</div>
 	);
 
@@ -79,8 +80,8 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					<div>{remark}</div>
 				</div>
 
-				{!isEmpty(data?.billAdditionalObject?.urgencyRemarks)
-        && data?.billAdditionalObject?.urgencyTag === 'urgent' ? (
+				{!isEmpty(urgencyRemarks)
+        && urgencyTag === 'urgent' ? (
 	<Tooltip placement="bottom" interactive content={remarkRender()}>
 		<IcMInfo />
 	</Tooltip>
@@ -131,7 +132,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 				<AddUrgencyTag
 					remark={remark}
 					setRemark={setRemark}
-					billId={data?.bill?.id}
+					billId={id}
 					serviceType={data?.serviceType}
 					showAddTag={showAddTag}
 					tagValue={tagValue}
@@ -154,7 +155,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					Tag - &nbsp;
 					{' '}
 					<span className={styles.tag}>
-						{data?.billAdditionalObject?.urgencyTag
+						{urgencyTag
 							? renderEditTag
 							: !isEmpty(data) && renderEmpty}
 					</span>
@@ -178,7 +179,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					<RemoveTagConfirmation
 						setRemoveTag={setRemoveTag}
 						getBillRefetch={getBillRefetch}
-						billId={data?.bill?.id}
+						billId={id}
 					/>
 				</Modal>
 			) : null}

@@ -40,8 +40,8 @@ function ShipmentDetailsCard({
 	setLineItem,
 	invoiceStatus,
 }: ShipmentDetailsCardInterface) {
-	const [showValue, setShowValue] = useState([] as any);
-	const [rejected, setRejected] = useState([] as any);
+	const [showValue, setShowValue] = useState([]);
+	const [rejected, setRejected] = useState([]);
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
 	const { lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill } = data || {};
@@ -109,7 +109,6 @@ function ShipmentDetailsCard({
 		const undoRejectedData = rejected.filter((item: any) => item !== id);
 		setRejected(undoRejectedData);
 
-		//    Removing remarks of selected card on Undo here
 		if (id === 1) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
 		} else if (id === 2) {
@@ -204,22 +203,18 @@ function ShipmentDetailsCard({
 										<Modal.Body>
 											{Object.keys(showRejected).includes('1') && (
 												<div>
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Name -
 															{' '}
 															<span>{organizationName}</span>
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center} >
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															{' '}
 															Bank Name -
 															{' '}
@@ -227,11 +222,9 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>												>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															{' '}
 															Account Number -
 															{' '}
@@ -241,11 +234,9 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															{' '}
 															IFSC -
 															{' '}
@@ -255,22 +246,18 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center} >
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
 															<span>{(taxNumber || '').slice(2, 12)}</span>
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															GST Number -
 															{' '}
 															<span>{taxNumber}</span>
@@ -293,11 +280,9 @@ function ShipmentDetailsCard({
 
 											{Object.keys(showRejected).includes('2') && (
 												<div>
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Entity -
 															{' '}
 															<span style={{ fontWeight: '600' }}>
@@ -312,33 +297,27 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Address -
 															{' '}
 															<span>{address}</span>
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
 															<span>{registrationNumberBuyer}</span>
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															GST Number -
 															{' '}
 															<span>{taxNumberBuyer}</span>
@@ -360,22 +339,18 @@ function ShipmentDetailsCard({
 											)}
 											{Object.keys(showRejected).includes('3') && (
 												<div>
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Invoice Number -
 															{' '}
 															<span>{billNumber}</span>
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Invoice Date -
 															{' '}
 															<span>
@@ -384,22 +359,18 @@ function ShipmentDetailsCard({
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Status -
 															{' '}
 															<span>{status}</span>
 														</div>
 													</div>
 
-													<div
-														style={{ display: 'flex', alignItems: 'center' }}
-													>
+													<div className={styles.flex_center}>
 														<Checkbox />
-														<div style={{ marginBottom: '8px' }}>
+														<div className={styles.margin_bottom}>
 															Place Of Supply -
 															{' '}
 															<span>{placeOfSupply}</span>
@@ -493,18 +464,18 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												Name -
 												{' '}
 												<span>{organizationName}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												{' '}
 												Bank Name -
 												{' '}
 												<span>{bankName}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												{' '}
 												Account Number -
 												{' '}
@@ -512,18 +483,18 @@ function ShipmentDetailsCard({
 													{accountNumber}
 												</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												{' '}
 												IFSC -
 												{' '}
 												<span style={{ color: '#ed3726' }}>{ifscCode}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
 												<span>{(taxNumber || '').slice(2, 12)}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												GST Number -
 												{' '}
 												<span>{taxNumber}</span>
@@ -600,7 +571,7 @@ function ShipmentDetailsCard({
 										<div className={styles.hr} />
 
 										<div className={styles.billing_party_container}>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												Entity -
 												{' '}
 												<span style={{ fontWeight: '600' }}>{entityCode}</span>
@@ -611,17 +582,17 @@ function ShipmentDetailsCard({
 													{organizationNameBuyer}
 												</span>
 											</div>
-											<div style={{ marginBottom: '8px', overflow: 'scroll' }}>
+											<div className={styles.margin_bottom}>
 												Address -
 												{' '}
 												<span>{address}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
 												<span>{registrationNumberBuyer}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												GST Number -
 												{' '}
 												<span>{taxNumberBuyer}</span>
@@ -697,24 +668,24 @@ function ShipmentDetailsCard({
 
 										<div className={styles.hr} />
 										<div className={styles.billing_party_container}>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												Invoice Number -
 												{' '}
 												<span>{billNumber}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												Invoice Date -
 												{' '}
 												<span>
 													{format(billDate, 'dd/MMM/yyyy', {}, false)}
 												</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												Status -
 												{' '}
 												<span>{startCase(status)}</span>
 											</div>
-											<div style={{ marginBottom: '8px' }}>
+											<div className={styles.margin_bottom}>
 												Place Of Supply -
 												{' '}
 												<span>{placeOfSupply}</span>

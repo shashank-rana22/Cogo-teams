@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
@@ -16,7 +15,7 @@ const renderCustomer = ({ itemData, field }:Props) => {
 	const {	organizationName = '' } = itemData || {};
 
 	return (
-		<>
+		<div>
 			{field?.key === 'organizationName' && (
 				<div>
 					{organizationName.length > 18 ? (
@@ -32,7 +31,7 @@ const renderCustomer = ({ itemData, field }:Props) => {
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

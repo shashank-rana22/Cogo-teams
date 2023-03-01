@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styled from './styles.module.css';
-// import { IcCRedCircle } from '@cogoport/icons-react';
 
 interface ItemProps {
 	status: string;
@@ -12,10 +11,20 @@ interface ItemProps {
 interface Props {
 	itemData: ItemProps;
 }
+
+interface ItemTypes {
+	billNumber?:string;
+	billId?:string;
+	organizationId?:string;
+	status?:string;
+	billType?:string;
+	jobNumber?:string;
+	isProforma?:string;
+}
 function RenderViewMoreButton({ itemData }: Props) {
 	const router = useRouter();
 
-	const handleChange = (item: any) => {
+	const handleChange = (item: ItemTypes) => {
 		router.push(
 			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${item?.billId}
 			&billNumber=${item?.billNumber}&orgId=${item?.organizationId}&jobNumber=${item?.jobNumber}
@@ -25,12 +34,6 @@ function RenderViewMoreButton({ itemData }: Props) {
 
 	return (
 		<div className={styled.buttonss}>
-			{/* {itemData?.urgencyTag && (
-        <div className={styled.Ribbons}>
-          <div className={styled.ribbon}>Urgent</div>
-        </div>
-      )}  */}
-
 			<div>
 				<Button
 					style={{ height: '30px', fontSize: '12px' }}

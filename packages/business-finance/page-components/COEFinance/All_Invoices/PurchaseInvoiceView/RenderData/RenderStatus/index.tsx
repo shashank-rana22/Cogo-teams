@@ -14,14 +14,9 @@ function RenderStatus({ item }:Props) {
 
 	return (
 		<div className={styled.container}>
-
 			<div className={styled[item?.status]}>
 				{startCase(StatusItem)}
 			</div>
-			{/* <div className={styled.Ribbons}>
-				<div className={styled.ribbon}>Urgent</div>
-			</div> */}
-
 		</div>
 	);
 }

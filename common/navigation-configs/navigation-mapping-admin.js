@@ -1324,7 +1324,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
+				possible_apis : [...apis.kam_desk, ...apis.search],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1333,7 +1333,7 @@ const navigationMappingAdmin = {
 				as            : '/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk],
 			},
 			{
 				key           : 'coe-last_mile',
@@ -1342,7 +1342,7 @@ const navigationMappingAdmin = {
 				as            : '/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk],
 			},
 		],
 	},
@@ -1819,17 +1819,6 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'dashboards',
 	},
-	cogo_verse_analytics: {
-		key           : 'cogo_verse_analytics',
-		title         : 'CogoVerse ',
-		// eslint-disable-next-line max-len, jsx-a11y/alt-text
-		href          : '/v2/cogo-verse-analytics',
-		as            : '/v2/cogo-verse-analytics',
-		type          : 'link',
-		main_apis     : [],
-		possible_apis : apis.cogo_verse_analytics,
-		module_type   : 'dashboards',
-	},
 	roles_permissions: {
 		key           : 'roles_permissions',
 		title         : 'Roles and Permissions',
@@ -1839,27 +1828,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
-		module_typ    : 'crm',
-	},
-	cogo_one: {
-		key   : 'cogo_one',
-		title : 'Cogo One',
-
-		isSubNavs     : true,
-		main_apis     : [],
-		possible_apis : apis.cogo_one,
-		options       : [
-			{
-				key           : 'cogo_one-omni_channel',
-				title         : 'Omni Channel',
-				href          : '/v2/cogo-one/omni-channel',
-				as            : '/v2/cogo-one/omni-channel',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.cogo_one,
-			},
-		],
-		module_type: 'dashboards',
+		module_type   : 'crm',
 	},
 	home: {
 		key   : 'home',

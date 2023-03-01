@@ -57,7 +57,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		setCurrentTab,
 	} = useGetPurchaseViewList({ filters, setFilters, sort });
 
-	const functions: any = {
+	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
 		renderFieldPair : (itemData: ItemProps, field: FieldProps) => (
 			<FieldPair itemData={itemData} field={field} />

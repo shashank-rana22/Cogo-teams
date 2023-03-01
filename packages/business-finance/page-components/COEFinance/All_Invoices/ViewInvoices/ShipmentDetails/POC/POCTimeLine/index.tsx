@@ -1,4 +1,5 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -28,6 +29,8 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 	const [complete, setComplete] = useState(false);
 
 	const timeLine = data;
+
+	console.log(data, 'data');
 
 	const gettimeLineData = () => {
 		if (timeLine[0]?.eventName === 'POSTED') {
@@ -96,7 +99,7 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 			)}
 
 			{(gettimeLineData() || []).map((item: any) => {
-				const { id, eventName, occurredAt, performedByUser, userEmail } = item || {};
+				const { id, eventName, occurredAt, performedByUser, userEmail, payingAmount } = item || {};
 
 				const dateWithTime = occurredAt?.split(' ') || '';
 
@@ -170,7 +173,7 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
                   || eventName === 'PARTIAL' ? (
 	<div className={styles.amount_container}>
 		Amount :-
-		{/* {getFormattedPrice(numLocale, payingAmount, 'INR')} */}
+		{getFormattedPrice(payingAmount, 'INR')}
 	</div>
 										) : null}
 								</div>

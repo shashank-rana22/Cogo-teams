@@ -5,16 +5,21 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-interface itemProps {
-	remarksTimeline?:Array<{ billStatus:string, remark:string, createdAt:Date }>
+interface RemarksData {
+	billStatus:string,
+	remark:string,
+	createdAt:Date
+}
+interface ItemProps {
+	remarksTimeline?:Array<RemarksData>
 }
 interface Props {
-	item:itemProps;
+	item:ItemProps;
 }
 
 function RenderRemarks({ item }:Props) {
-	const remarkData = item?.remarksTimeline;
+	const { remarksTimeline } = item || {};
+	const remarkData = remarksTimeline;
 
 	const remarkTimeline = () => (remarkData || []).map((items, idx) => {
 		const StatusItem = items?.billStatus?.toLowerCase();

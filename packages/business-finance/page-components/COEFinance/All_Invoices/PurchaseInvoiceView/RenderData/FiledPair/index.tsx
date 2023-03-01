@@ -2,6 +2,8 @@ import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { handleBillType } from '../../../../utils/getHandleBillType';
+
 import styled from './styles.module.css';
 
 interface ItemProps {
@@ -22,69 +24,42 @@ interface Props {
 }
 
 function FieldPair({ itemData, field }:Props) {
-	const { topKey = {}, bottomKey = {} } = field;
 	const {	billType = '', billNumber = '', isProforma = '', billDocumentUrl, jobNumber = '', serviceType } = itemData;
-
-	const handleBillType = () => {
-		let invoiceType;
-		if (billType === 'BILL') {
-			if (isProforma) {
-				invoiceType = 'Proforma Invoice';
-			} else {
-				invoiceType = 'Purchase Invoice';
-			}
-		} else if (billType === 'REIMBURSEMENT') {
-			invoiceType = 'reimbursement';
-		} else if (billType === 'EXPENSE') {
-			invoiceType = 'Expense';
-		} else if (billType === 'CREDIT_NOTE') {
-			invoiceType = 'Credit Notes';
-		}
-		return invoiceType;
-	};
 
 	return (
 		<div>
 			{field?.label === 'Invoice No.' && (
 				<div>
-					{topKey && (
-						<div className={styled.billnumbers}>
-							{billNumber.length > 11 ? (
-								<Tooltip
-									interactive
-									placement="top"
-									content={billNumber}
-								>
-									<text onClick={() => window.open(billDocumentUrl, '_blank')}>
-										{`${billNumber.substring(0, 11)}...`}
-									</text>
-								</Tooltip>
-							) : (
+					<div className={styled.billnumbers}>
+						{billNumber.length > 11 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={billNumber}
+							>
 								<text onClick={() => window.open(billDocumentUrl, '_blank')}>
-									{billNumber}
+									{`${billNumber.substring(0, 11)}...`}
 								</text>
-							)}
-						</div>
-					)}
+							</Tooltip>
+						) : (
+							<text onClick={() => window.open(billDocumentUrl, '_blank')}>
+								{billNumber}
+							</text>
+						)}
+					</div>
 
-					{bottomKey && (
-						<div className={styled.lower_keys}>{handleBillType()}</div>
-					)}
+					<div className={styled.lower_keys}>{handleBillType(billType, isProforma)}</div>
 				</div>
 			)}
 			{field?.label === 'SID' && (
 				<div>
-					{topKey && (
-						<text className={styled.sid}>
-							{jobNumber}
-						</text>
-					)}
-					{bottomKey && (
-						<div className={styled.service_type}>{startCase(serviceType)}</div>
-					)}
+					<text className={styled.sid}>
+						{jobNumber}
+					</text>
+
+					<div className={styled.service_type}>{startCase(serviceType)}</div>
 				</div>
 			)}
-
 		</div>
 	);
 }

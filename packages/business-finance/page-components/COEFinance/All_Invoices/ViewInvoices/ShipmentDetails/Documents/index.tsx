@@ -19,26 +19,26 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 	const { data: documentData, loading } = useShipmentDocument(shipmentId);
 
 	const functions = {
-		DocumentTypeFunc: (item: any) => {
+		DocumentTypeFunc: (item) => {
 			const { document_type: DocumentType } = item || {};
 			return <p>{startCase(DocumentType)}</p>;
 		},
-		ServiceTypeFunc: (item: any) => {
+		ServiceTypeFunc: (item) => {
 			const { service_type: serviceType } = item || {};
 			return <p>{startCase(serviceType)}</p>;
 		},
-		DocumentStatus: (item: any) => {
+		DocumentStatus: (item) => {
 			const { state } = item || {};
 			return <p>{startCase(state)}</p>;
 		},
-		UploadedTypeFunc: (item: any) => {
+		UploadedTypeFunc: (item) => {
 			const {
 				uploaded_by_user: UploadedByUser,
 				uploaded_by_org: uploadedByOrg,
 			} = item || {};
 			return <p>{UploadedByUser?.name || uploadedByOrg?.business_name}</p>;
 		},
-		UploadedOnFunc: (item: any) => {
+		UploadedOnFunc: (item) => {
 			const { uploaded_at: uploadedAt } = item || {};
 			return (
 				<p>
@@ -48,7 +48,7 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 				</p>
 			);
 		},
-		viewFunc: (item: any) => {
+		viewFunc: (item) => {
 			const { document_url: DocumentUrl } = item || {};
 			return (
 				<>
@@ -65,7 +65,7 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 				</>
 			);
 		},
-		downloadFunc: (item: any) => {
+		downloadFunc: (item) => {
 			const { document_url: DocumentUrl } = item || {};
 			return DocumentUrl ? (
 				<div

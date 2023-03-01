@@ -97,11 +97,6 @@ const PURCHASE_VIEW_CONFIG = {
 			span : 1.4,
 			func : 'renderViewMore',
 		},
-		// {
-		//     key:'ribbon',
-		//     span:0.01,
-		//     func:'renderRibbon',
-		// }
 	],
 };
 
