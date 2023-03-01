@@ -70,6 +70,20 @@ function RenderEmpty({
 					</div>
 				</div>
 			);
+		case 'helpdesk':
+			return (
+				<div className={styles.content}>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/activities-empty.svg"
+						alt=""
+						width="100px"
+						height="100px"
+					/>
+					<div className={styles.title}>
+						No Result Found
+					</div>
+				</div>
+			);
 		case 'reminder':
 			return (
 				<div className={styles.content}>

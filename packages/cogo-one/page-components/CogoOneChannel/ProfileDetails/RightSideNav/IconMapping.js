@@ -1,4 +1,4 @@
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchdark, IcMFaq } from '@cogoport/icons-react';
 
 const IconMapping = [
 	{
@@ -63,6 +63,11 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/customer Insights.svg"
 			alt="insights"
 		/>,
+	},
+	{
+		name    : 'help_desk',
+		content : 'Help Desk',
+		icon    : <IcMFaq width={18} height={18} />,
 	},
 ];
 export default IconMapping;

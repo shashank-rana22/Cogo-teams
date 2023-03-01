@@ -1,0 +1,67 @@
+.container {
+	min-height: 57vh;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	margin: 8px 0 12px 4px;
+}
+
+.back {
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.module {
+	margin-bottom: 16px;
+	font-weight: 600;
+}
+
+.spinner_container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin: 100px 0 8px;
+}
+
+.question {
+	padding: 6px 0;
+	font-size: 13px;
+	cursor: pointer;
+
+	&:hover {
+		color: #06ba76;
+		background: #e9faf3;
+		transition: 0.3s;
+	}
+}
+
+.pagination_container {
+	position: absolute;
+	right: 25px;
+	bottom: 10px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.list {
+	height: 68vh;
+	overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+	display: none;
+}
+
+.list_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 15px 0 20px;
+}
+
+.right_icon {
+	margin-left: 10px;
+	color: green;
+}

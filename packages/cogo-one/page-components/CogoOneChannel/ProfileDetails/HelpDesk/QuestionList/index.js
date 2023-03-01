@@ -1,0 +1,105 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import { Loader, Pagination } from '@cogoport/components';
+import { IcMArrowBack, IcMArrowRight } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
+import React from 'react';
+
+import EmptyState from '../../../../../common/EmptyState';
+import useQuestionList from '../../../../../hooks/useQuestionList';
+
+import Answer from './Answer';
+import styles from './styles.module.css';
+
+function QuestionList({ search = '', topic = {}, setTopic = () => {} }) {
+	const { loading, list, page, setPage, pageData, question, setQuestion } =	useQuestionList({ topic, search });
+
+	if (question) {
+		return (
+			<Answer topic={topic} question={question} setQuestion={setQuestion} />
+		);
+	}
+
+	if (loading) {
+		return (
+			<div className={styles.spinner_container}>
+				<Loader themeType="primary" />
+			</div>
+		);
+	}
+
+	return (
+		<div className={styles.container}>
+
+			{!search ? (
+				<div className={styles.header}>
+					<IcMArrowBack
+						width={16}
+						height={16}
+						className={styles.back}
+						onClick={() => setTopic(null)}
+					/>
+					{' '}
+					Go Back to Search Result
+				</div>
+			) : null}
+
+			{list?.length > 0 ? (
+				<>
+					<div className={styles.module}>
+						Module:
+						{' '}
+						{startCase(topic.display_name) || 'Search Result'}
+					</div>
+
+					<div className={styles.list}>
+						{(list || []).map((item) => (
+							<div
+								className={styles.question}
+								onClick={() => setQuestion(item)}
+							>
+								<div
+									className={styles.list_card}
+								>
+
+									<div>
+										{item?.question_abstract}
+										?
+									</div>
+
+									<div>
+										<IcMArrowRight
+											height={16}
+											width={16}
+											className={styles.right_icon}
+										/>
+
+									</div>
+								</div>
+							</div>
+
+						))}
+					</div>
+
+					{(pageData?.total_count || 0) > 10 ? (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="page"
+								currentPage={page || 1}
+								totalItems={pageData?.total_count || 0}
+								pageSize={10}
+								onPageChange={(val) => setPage(val)}
+							/>
+						</div>
+					) : null}
+				</>
+			) : (
+				<div className={styles.empty}>
+					<EmptyState type="helpdesk" />
+				</div>
+			)}
+
+		</div>
+	);
+}
+
+export default QuestionList;
