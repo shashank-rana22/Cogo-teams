@@ -11,8 +11,6 @@ import styles from './styles.module.css';
 function PopularTags({ tabTitle = '', searchState = '' }) {
 	const { profile } = useSelector((state) => state);
 
-	console.log('shivam');
-
 	const { ids = [] } = profile?.faq || {};
 
 	const [tags, setTags] = useState(ids || []);

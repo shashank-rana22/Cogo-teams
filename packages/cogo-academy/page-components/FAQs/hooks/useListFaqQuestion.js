@@ -6,13 +6,11 @@ import { useEffect, useState } from 'react';
 function useListFaqQuestions({
 	searchState = '',
 	topicId = undefined,
-	sort = false,
 	tagId = [],
 	limit = undefined,
 }) {
 	const [activeTab, setActiveTab] = useState('');
 	const [page, setPage] = useState(1);
-	const SORT_MODE = ((sort) ? 'view_count' : 'created_at');
 
 	const { general = {}, profile = {} } = useSelector((state) => state);
 
@@ -51,7 +49,7 @@ function useListFaqQuestions({
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 
 					},
-					sort_by    : SORT_MODE,
+					sort_by    : 'view_count',
 					page,
 					page_limit : limit || undefined,
 				},
